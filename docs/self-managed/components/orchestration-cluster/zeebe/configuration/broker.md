@@ -580,6 +580,17 @@ This section contains properties required to configure Raft.
 | heartbeat-interval        | The leader sends a heartbeat to a follower every heartbeat interval. Note: This is an advanced setting. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_HEARTBEATINTERVAL`.                                                                                                                                                                                                                                                                                                                        | 250ms         |
 | election-timeout          | If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election. `election-timeout` should be greater than `heartbeat-interval`. Larger values delay leader-failure detection; smaller values can increase false positives and unnecessary leader changes. If network latency between nodes is high, use a higher election timeout. Note: This is an advanced setting. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_ELECTIONTIMEOUT`. | 2500ms        |
 
+#### camunda.cluster.raft.rebalance
+
+Coordinated leadership transfer (rebalancing) options. Operators can override these defaults per rebalance request; see [rebalancing](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md).
+
+| Field                     | Description                                                                                                                                                                                                                                                                                     | Example Value |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| replication-lag-threshold | The maximum replication lag, in bytes, a desired leader may have for the current leader to attempt a transfer. Above this threshold the partition is skipped with `LAG_TOO_HIGH`. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_REBALANCE_REPLICATIONLAGTHRESHOLD`. | 8MB           |
+| replication-timeout       | How long the current leader waits (paused, declining writes) for the desired leader to finish replicating before the transfer is cancelled with `REPLICATION_TIMED_OUT`. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_REBALANCE_REPLICATIONTIMEOUT`. | 10s           |
+| max-transfer-attempts     | The maximum number of `TimeoutNow` requests the current leader sends (including the initial request) before reporting `TIMEOUT_NOW_EXHAUSTED`. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_REBALANCE_MAXTRANSFERATTEMPTS`.                          | 3             |
+| leader-wait-timeout       | How long the coordinator waits for a partition with no contactable leader to get one before giving up with `NO_LEADER`. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_REBALANCE_LEADERWAITTIMEOUT`.                                                   | 1m            |
+
 #### YAML snippet
 
 ```yaml
@@ -591,6 +602,11 @@ camunda:
       flush-delay: 0s
       heartbeat-interval: 250ms
       election-timeout: 2500ms
+      rebalance:
+        replication-lag-threshold: 8MB
+        replication-timeout: 10s
+        max-transfer-attempts: 3
+        leader-wait-timeout: 1m
 ```
 
 ### camunda.cluster.membership

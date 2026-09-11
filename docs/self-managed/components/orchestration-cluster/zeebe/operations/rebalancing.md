@@ -48,17 +48,12 @@ curl -X POST https://{cluster-host}/cluster/v2/rebalance \
   -d '{ "replicationLagThreshold": 8388608, "replicationTimeout": "PT10S", "maxTransferAttempts": 3, "leaderWaitTimeout": "PT1M" }'
 ```
 
-- `replicationLagThreshold`: maximum replication lag, in bytes, a desired leader may have for its transfer to be accepted.
-- `replicationTimeout`: an ISO-8601 duration for how long a partition may stay frozen waiting for its desired leader to catch up before the transfer is abandoned.
-- `maxTransferAttempts`: how many times the current leader prompts the desired leader to take over before giving up.
-- `leaderWaitTimeout`: an ISO-8601 duration for how long the coordinator waits for a leaderless partition to elect a leader before reporting `NO_LEADER` and moving on.
+- `replicationLagThreshold`: maximum replication lag, in bytes, a desired leader may have for its transfer to be accepted. Defaults to `8388608` (8 MB).
+- `replicationTimeout`: an ISO-8601 duration for how long a partition may stay frozen waiting for its desired leader to catch up before the transfer is abandoned. Defaults to `PT10S` (10 seconds)
+- `maxTransferAttempts`: how many times the current leader prompts the desired leader to take over before giving up. Defaults to `3`.
+- `leaderWaitTimeout`: an ISO-8601 duration for how long the coordinator waits for a leaderless partition to elect a leader before reporting `NO_LEADER` and moving on. Defaults to `PT1M` (1 minute)
 
-The default values for these parameters are configurable as broker options:
-
-- `zeebe.broker.cluster.raft.rebalanceReplicationLagThreshold`: defaults to `8388608` (8 MB).
-- `zeebe.broker.cluster.raft.rebalanceReplicationTimeout`: defaults to `PT10S` (10 seconds).
-- `zeebe.broker.cluster.raft.rebalanceMaxTransferAttempts`: defaults to `3`.
-- `zeebe.broker.cluster.raft.rebalanceLeaderWaitTimeout`: defaults to `PT1M` (1 minute).
+The default values for these parameters are configurable as broker options (see the [`camunda.cluster.raft.rebalance` properties reference](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camundaclusterraftrebalance)).
 
 :::note
 
