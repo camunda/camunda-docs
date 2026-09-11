@@ -448,6 +448,21 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### SAP BTP Plugin retired
+
+The SAP BTP Plugin is retired as of Camunda 8.10. It will continue receiving maintenance for 18 months after the Camunda 8.10 release, then be fully discontinued. No new features are planned.
+
+<p className="link-arrow">[SAP BTP Plugin documentation](/components/camunda-integrations/sap/btp-plugin.md)</p>
+
+</div>
+</div>
+
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
