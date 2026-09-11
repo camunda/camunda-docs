@@ -303,7 +303,7 @@ The Zeebe Process Test library is removed and replaced by [Camunda Process Test]
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
 
-### Camunda 8 Run no longer requires Java
+### Camunda 8 Run Java runtime
 
 Camunda 8 Run now includes a bundled Java runtime. This means you no longer need to install OpenJDK or set `JAVA_HOME` before starting Camunda 8 Run.
 
