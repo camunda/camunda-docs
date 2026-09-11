@@ -245,7 +245,7 @@ The [connector runtime](/components/connectors/custom-built-connectors/connector
 
 ### Connector secrets
 
-The secret values a connector resolves through a [legacy secret reference](#secret-reference-legacy). How these values are stored and supplied depends on the environment: in SaaS, they are [SaaS-managed secrets](#saas-managed-secret) created in Console; in Self-Managed, a secret provider supplies them, for example from prefixed environment variables, a Kubernetes Secret, or a custom provider.
+The secret values a connector resolves through a [legacy secret reference](#secret-reference-legacy). How these values are stored and supplied depends on the environment: in SaaS, they are [SaaS-managed secrets](#saas-managed-secret) created in Camunda Hub, in the left navigation under **Clusters**; in Self-Managed, a secret provider supplies them, for example from prefixed environment variables, a Kubernetes Secret, or a custom provider.
 
 - [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
 - [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets)
@@ -798,7 +798,7 @@ See also: [Parent process instance](#parent-process-instance), [Child process in
 
 A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in Camunda Hub, in the left navigation under **Clusters**, currently under the **Cluster secrets** tab of a cluster.
 
-A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components, not to a running process.
+A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components.
 
 - [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
 
