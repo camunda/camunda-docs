@@ -5,78 +5,114 @@ const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 
-const HTTP_METHODS = ["get", "post", "put", "patch", "delete"];
+function isHTTPMethod(metadata) {
+  const HTTP_METHODS = ["get", "post", "put", "patch", "delete"];
+  return HTTP_METHODS.includes(metadata[0]);
+}
 
-function filterPaths(paths, availability) {
-  if (!paths) return {};
+function isAvailableInEnvironment(metadata, environment) {
+  const available =
+    !Object.hasOwn(metadata, "x-availability") ||
+    metadata["x-availability"].toLowerCase() === environment.toLowerCase();
+  return available;
+}
 
-  return Object.fromEntries(
-    Object.entries(paths)
-      .map(([route, methods]) => {
-        // A path item that's just `{ $ref: ... }` points at a whole path item
-        // defined elsewhere; there's no per-method metadata here to filter on.
-        // Leave it as-is — pruneDanglingRefs() drops it later if its target
-        // ends up empty.
-        if (Object.hasOwn(methods, "$ref")) return [route, methods];
+function hasData(path) {
+  for (const prop in path) {
+    if (Object.hasOwn(path, prop)) {
+      return true;
+    }
+  }
+  return false;
+}
 
-        const filteredMethods = Object.fromEntries(
-          Object.entries(methods).filter(
-            ([, metadata]) =>
-              !Object.hasOwn(metadata, "x-availability") ||
-              metadata["x-availability"].toLowerCase() === availability
-          )
-        );
-        return [route, filteredMethods];
-      })
-      .filter(
-        ([, methods]) =>
-          Object.hasOwn(methods, "$ref") ||
-          Object.keys(methods).filter((key) => HTTP_METHODS.includes(key))
-            .length > 0
-      )
+function filterPathDataForEnvironment(pathData, environment) {
+  const methods = Object.entries(pathData).filter(isHTTPMethod);
+  const methodsForEnvironment = methods.filter(([_, metadata]) =>
+    isAvailableInEnvironment(metadata, environment)
   );
+  const methodsChanged = methods.length != methodsForEnvironment.length;
+
+  if (methodsForEnvironment.length == 0) {
+    // when there are no available methods, drop all other metadata except $ref,
+    // which will be cleaned up later
+    const otherMetadata = Object.entries(pathData).filter(
+      (d) => !isHTTPMethod(d)
+    );
+    const refsOnly = otherMetadata.filter((m) => m[0] === "$ref");
+    const otherMetadataChanged = otherMetadata.length != refsOnly.length;
+
+    return [
+      Object.fromEntries(refsOnly),
+      methodsChanged || otherMetadataChanged,
+    ];
+  }
+
+  // when there are available methods, return all other metadata
+  const otherMetadata = Object.fromEntries(
+    Object.entries(pathData).filter((d) => !isHTTPMethod(d))
+  );
+
+  return [
+    { ...Object.fromEntries(methodsForEnvironment), ...otherMetadata },
+    methodsChanged,
+  ];
 }
 
-// A path item that is just `{ $ref: "otherfile.yaml#/paths/~1foo" }` points at a
-// whole path item defined in another spec file. If filterPaths() removed that
-// path entirely from the target file (all its methods didn't match), the ref
-// here now points at nothing, so drop it too.
-function resolveRef(ref) {
-  const [file, pointer] = ref.split("#");
-  return { file, pointer };
+// we need to escape routes to match spec refs
+// https://swagger.io/docs/specification/v3_0/using-ref/#escape-characters
+function escapeRoute(route) {
+  return route.replace(/\~/g, "~0").replace(/\//g, "~1");
 }
 
-function pointerToSegments(pointer) {
-  return pointer
-    .split("/")
-    .slice(1)
-    .map((segment) => segment.replace(/~1/g, "/").replace(/~0/g, "~"));
-}
+function filterPaths(paths, environment) {
+  const filtered = {};
+  let pathsChanged = false;
+  const removedRoutes = [];
 
-function pruneDanglingRefs(paths, specDir, specs) {
-  if (!paths) return {};
-
-  return Object.fromEntries(
-    Object.entries(paths).filter(([, methods]) => {
-      if (!methods || !Object.hasOwn(methods, "$ref")) return true;
-
-      const { file, pointer } = resolveRef(methods["$ref"]);
-      if (!file || !pointer) return true;
-
-      const targetSpec = specs.get(path.join(specDir, file));
-      if (!targetSpec) return true; // target outside this dir, can't verify
-
-      const target = pointerToSegments(pointer).reduce(
-        (acc, segment) => (acc == null ? undefined : acc[segment]),
-        targetSpec
+  if (paths) {
+    for (const [route, metadata] of Object.entries(paths)) {
+      const [filteredPathData, changed] = filterPathDataForEnvironment(
+        metadata,
+        environment
       );
-      return target !== undefined;
-    })
-  );
+      pathsChanged = pathsChanged || changed;
+
+      if (hasData(filteredPathData)) {
+        filtered[route] = filteredPathData;
+      } else {
+        removedRoutes.push(escapeRoute(route));
+      }
+    }
+  }
+
+  return [filtered, pathsChanged, removedRoutes];
 }
 
-// js-yaml drops comments on load/dump, so the leading comment block (e.g. the
-// license header) has to be captured separately and re-prepended after dumping.
+function pruneRefs(spec, allRemovedRoutes) {
+  const pruned = {};
+
+  if (spec.paths) {
+    for (const [route, pathData] of Object.entries(spec.paths)) {
+      if (
+        Object.hasOwn(pathData, "$ref") &&
+        allRemovedRoutes.has(pathData["$ref"])
+      ) {
+        // Drop refs to removed routes
+        continue;
+      } else {
+        pruned[route] = pathData;
+      }
+    }
+  } else {
+    return spec;
+  }
+
+  return pruned;
+}
+
+// js-yaml drops comments on load/dump, so we should capture the leading
+// comment block separately and re-prepend.
 function extractHeaderComments(content) {
   const lines = content.split("\n");
   let end = 0;
@@ -89,34 +125,79 @@ function extractHeaderComments(content) {
   return end === 0 ? "" : lines.slice(0, end).join("\n") + "\n";
 }
 
-function filterByAvailability(specDir, availability) {
-  const yamlFiles = fs
+function loadSpecFile(filePath) {
+  const content = fs.readFileSync(filePath, "utf8");
+
+  return {
+    path: filePath,
+    header: extractHeaderComments(content),
+    spec: yaml.load(content),
+  };
+}
+
+function getYamlFiles(specDir) {
+  return fs
     .readdirSync(specDir)
     .filter((file) => file.endsWith(".yaml") || file.endsWith(".yml"))
     .map((file) => path.join(specDir, file));
+}
 
-  const specs = new Map();
-  const headers = new Map();
-  const originalPaths = new Map();
-  for (const filePath of yamlFiles) {
-    const content = fs.readFileSync(filePath, "utf8");
-    headers.set(filePath, extractHeaderComments(content));
-    const spec = yaml.load(content);
-    originalPaths.set(filePath, JSON.stringify(spec.paths ?? {}));
-    spec.paths = filterPaths(spec.paths, availability);
-    specs.set(filePath, spec);
-  }
-
-  for (const spec of specs.values()) {
-    spec.paths = pruneDanglingRefs(spec.paths, specDir, specs);
-  }
-
-  for (const [filePath, spec] of specs) {
-    if (JSON.stringify(spec.paths ?? {}) === originalPaths.get(filePath)) {
-      continue; // no endpoints were filtered out, leave file untouched
-    }
-    fs.writeFileSync(filePath, headers.get(filePath) + yaml.dump(spec));
+function writeFile(filePath, fileData) {
+  if (fileData.shouldWrite) {
+    fs.writeFileSync(filePath, fileData.header + yaml.dump(fileData.spec));
   }
 }
 
-exports.filterByAvailability = filterByAvailability;
+function filterByAvailability(specDir, environment) {
+  const files = getYamlFiles(specDir).map((filePath) =>
+    loadSpecFile(filePath, environment)
+  );
+
+  const mapping = {};
+  const allRemovedRoutes = new Set();
+  for (const file of files) {
+    // filter methods by x-availability
+    const [filteredPaths, shouldWrite, removedRoutes] = filterPaths(
+      file.spec.paths,
+      environment
+    );
+    file.spec.paths = filteredPaths;
+
+    // store removed routes for pruning refs later
+    const fileName = file.path.split("/").at(-1);
+    removedRoutes.forEach((e) =>
+      allRemovedRoutes.add(`${fileName}#/paths/${e}`)
+    );
+
+    // store file, data mapping for tracking/writing file changes later later
+    mapping[file.path] = {
+      spec: file.spec,
+      header: file.header,
+      shouldWrite,
+    };
+  }
+
+  // prune dangling refs
+  for (const [filePath, fileData] of Object.entries(mapping)) {
+    const prunedPaths = pruneRefs(fileData.spec, allRemovedRoutes);
+
+    if (prunedPaths) {
+      mapping[filePath].spec.paths = prunedPaths;
+    }
+  }
+
+  // write files with updates
+  Object.entries(mapping).forEach(([filePath, fileData]) =>
+    writeFile(filePath, fileData)
+  );
+}
+
+module.exports = {
+  isAvailableInEnvironment,
+  filterByAvailability,
+  filterPaths,
+  filterPathDataForEnvironment,
+  extractHeaderComments,
+  escapeRoute,
+  pruneRefs,
+};
