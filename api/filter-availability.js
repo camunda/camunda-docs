@@ -18,9 +18,6 @@ function isAvailableInEnvironment(metadata, environment) {
   return available;
 }
 
-// a path is worth keeping only if it still has an operation or a $ref to one -
-// other metadata (summary/description/parameters) shouldn't keep an
-// operation-less path alive
 function hasOperationOrRef(pathData) {
   return Object.keys(pathData).some(
     (key) => HTTP_METHODS.includes(key) || key === "$ref"
@@ -82,6 +79,9 @@ function filterPaths(paths, environment) {
         environment
       );
 
+      // a path is worth keeping only if it still has an operation or a $ref to one.
+      // other metadata (summary/description/parameters) shouldn't keep an
+      // operation-less path alive
       if (hasOperationOrRef(filteredPathData)) {
         filtered[route] = filteredPathData;
       } else {
