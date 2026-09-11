@@ -101,7 +101,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
 - Assert semantic similarity with embedding-based comparison for responses that vary in phrasing.
 - Configure remote or local models through code and properties for both local development and CI/CD pipelines.
 
-**Judge assertions in Camunda Process Test JSON test cases**: Define judge assertions using JSON test case instructions. Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
+**Judge assertions in JSON test cases**: Define judge assertions using JSON test case instructions. Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
 
 **Standalone evaluation assertions for judge and semantic similarity**: Camunda Process Test now exposes _judge-based evaluation_ and _semantic similarity evaluation_ as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
 
@@ -587,6 +587,14 @@ You can now view and choose which cluster you are connected to in Web Modeler.
 This is disabled by default and behind feature flag `runtimeConnectionEnabled` (cluster selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
 :::
 
+### Task testing supports call activities
+
+<!-- https://github.com/camunda/product-hub/issues/3486 -->
+
+Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
+
+<p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
+
 ### BPMN element menu improvements
 
 <!-- https://github.com/camunda/product-hub/issues/3480 -->
@@ -605,6 +613,14 @@ The create, append, and change menus now group BPMN elements by category, such a
 Element templates support the `steps` and `presets` keys to offer several predefined configurations within a single template. Use `steps` to define the menu users navigate when they apply the template, and `presets` to define the property values each operation applies. Operation names, descriptions, and keywords are matched by search, so your operations are as discoverable as the templates themselves.
 
 <p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
+
+### FEEL context variables for the process instance
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+The process instance properties are now accessible in FEEL expressions via the `camunda.processInstance` context, resolvable anywhere in the process. `camunda.processInstance.key` returns the process instance's system-generated key, and `camunda.processInstance.businessId` returns its business ID (or `null` if none is set).
+
+<p class="link-arrow">[FEEL context variables](/components/concepts/process-instance-creation.md#feel-context-variables)</p>
 
 ### Hide the Add user button
 
@@ -733,7 +749,7 @@ Filter by variable name, value, and comparison operators, such as `equals`, `con
 
 ### Wait states
 
-<!-- https://github.com/camunda/camunda/issues/45040 -->
+<!-- https://github.com/camunda/camunda/issues/45040, https://github.com/camunda/product-hub/issues/3455 -->
 
 Operate now shows what an active process instance is waiting for.
 
@@ -827,19 +843,7 @@ With this, you can configure setups such as:
 
 ## Orchestration Cluster
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Admin">Admin</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
-
-### Docker images
-
-<!-- https://github.com/camunda/camunda/issues/50159 -->
-
-Camunda no longer produces the following Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
-
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
-- [camunda/operate](https://hub.docker.com/r/camunda/operate)
-- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
-
-Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 ### Centralized Secret Resolution via Zeebe
 
@@ -859,11 +863,43 @@ Centralized secret resolution through Zeebe is introduced with this alpha. Proce
 **Limitations:**
 This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 seconds by default.
 
-### New rebalance API for coordinated leadership transfer
+### Docker images
+
+<!-- https://github.com/camunda/camunda/issues/50159 -->
+
+Camunda no longer produces the following Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
+
+### Job and process prioritization
+
+<!-- https://github.com/camunda/product-hub/issues/3573 -->
+
+Camunda 8.10 introduces support for job and process instance prioritization for pull-based job activation via gRPC and REST (including long polling).
+
+- Users can assign an integer priority (for example, 0–99) to process instances and jobs via BPMN model attributes.
+- Job workers can now opt into priority-aware activation, so that ActivateJobs (gRPC) and REST-based long-polling endpoints consider priority when selecting which jobs to return.
+
+<p class="link-arrow">[Job prioritization](/components/concepts/job-workers.md#job-prioritization)</p>
+
+### OIDC Diagnostic Logging
+
+<!-- https://github.com/camunda/product-hub/issues/3758 -->
+
+OIDC authentication failures now surface actionable diagnostics in application logs.
+
+- Enable `camunda.security.authentication.oidc.diagnostics.enabled` to log the redirect URI Camunda expects against the one your identity provider returned, and to flag a callback that arrives without a valid session, the two most common causes of a login redirect loop.
+- If you use Microsoft Entra as your identity provider, an app registration issuing v1 tokens now fails authentication with an explicit error naming the fix (`api.requestedAccessTokenVersion = 2`) instead of looping silently.
+
+### Rebalance API for coordinated leadership transfer
 
 <!-- https://github.com/camunda/product-hub/issues/3630 -->
 
-Coordinated leadership transfer for Orchestration Clusters is introduced with this alpha.
+Coordinated leadership transfer for Orchestration Clusters is introduced in 8.10.
 
 The existing rebalance endpoint asks every leader to step down at once and returns immediately, without guarantee that the intended broker wins the resulting election. The new rebalance API transfers leadership deterministically, ensuring transfer in most cases in a way that is both minimally disruptive and observable.
 
@@ -881,22 +917,6 @@ The existing rebalance endpoint asks every leader to step down at once and retur
 - There are some cases where rebalancing is still not guaranteed, notably where the desired leader is simply not available or becomes unavailable during the operation. Such cases require manual retries once the desired leader of a given partition is back online.
 
 :::
-
-### Task testing supports call activities
-
-<!-- https://github.com/camunda/product-hub/issues/3486 -->
-
-Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
-
-<p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
-
-### FEEL context variables for the process instance
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-The process instance properties are now accessible in FEEL expressions via the `camunda.processInstance` context, resolvable anywhere in the process. `camunda.processInstance.key` returns the process instance's system-generated key, and `camunda.processInstance.businessId` returns its business ID (or `null` if none is set).
-
-<p class="link-arrow">[FEEL context variables](/components/concepts/process-instance-creation.md#feel-context-variables)</p>
 
 ### Late Business ID assignment
 
@@ -1077,6 +1097,28 @@ What's included:
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
 
+### Archive by ID for Elasticsearch and OpenSearch
+
+<!-- https://github.com/camunda/camunda-docs/pull/9172 -->
+
+Archiving of finished process instance data in Elasticsearch and OpenSearch secondary storage now uses a targeted, incremental approach by default.
+
+- Documents are moved in small, targeted batches rather than in a single operation, improving stability and reducing resource pressure during archiving.
+- The `rolloverBatchSize` and `reindexBatchSize` properties control how many process instances and individual documents are processed per batch.
+
+<p class="link-arrow">[Data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)</p>
+
+### Async replication support for RDBMS secondary storage
+
+<!-- https://github.com/camunda/product-hub/issues/3585 -->
+
+Camunda 8.10 adds first-class support for asynchronously replicated relational databases as secondary storage, including AWS Aurora and PostgreSQL.
+
+- The exporter layer detects when the active RDBMS endpoint is unreachable, including during a standby promotion or cross-region failover, and pauses export operations automatically rather than entering an error state. Export position is preserved in the Zeebe log and replayed on reconnection.
+- After failover, a reconciliation path replays missing events from the Zeebe log to close any replication lag gap, restoring a consistent secondary storage state without manual data repair. A single-exporter configuration is now supported for deployments where the RDBMS handles cross-region replication natively.
+
+<p class="link-arrow">[RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md)</p>
+
 ### Elasticsearch index sizing and replication
 
 <!-- https://github.com/camunda/camunda-docs/pull/9809 -->
@@ -1103,6 +1145,16 @@ Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, 
 
 <p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
+### New RDBMS version support
+
+<!-- https://github.com/camunda/product-hub/issues/3589 -->
+
+Camunda 8.10 adds support for new relational database versions. Operators running Self-Managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
+
+New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
+
+<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
 ### Physical Tenant support
 
 <!-- https://github.com/camunda/product-hub/issues/3639 -->
@@ -1114,36 +1166,6 @@ Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isola
 - Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
-
-### New RDBMS version support
-
-<!-- https://github.com/camunda/product-hub/issues/3589 -->
-
-Camunda 8.10 adds support for new relational database versions. Operators running Self-Managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
-
-New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
-
-<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
-
-### Async replication support for RDBMS secondary storage
-
-<!-- https://github.com/camunda/product-hub/issues/3585 -->
-
-Camunda 8.10 adds first-class support for asynchronously replicated relational databases as secondary storage, including AWS Aurora and PostgreSQL.
-
-The exporter layer detects when the active RDBMS endpoint is unreachable, including during a standby promotion or cross-region failover, and pauses export operations automatically rather than entering an error state. Export position is preserved in the Zeebe log and replayed on reconnection.
-
-After failover, a reconciliation path replays missing events from the Zeebe log to close any replication lag gap, restoring a consistent secondary storage state without manual data repair. A single-exporter configuration is now supported for deployments where the RDBMS handles cross-region replication natively.
-
-### Archive by ID for Elasticsearch and OpenSearch
-
-<!-- https://github.com/camunda/camunda-docs/pull/9172 -->
-
-Archiving of finished process instance data in Elasticsearch and OpenSearch secondary storage now uses a targeted, incremental approach by default.
-
-Documents are moved in small, targeted batches rather than in a single operation, improving stability and reducing resource pressure during archiving. The `rolloverBatchSize` and `reindexBatchSize` properties control how many process instances and individual documents are processed per batch.
-
-<p class="link-arrow">[Data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)</p>
 
 ### Rolling upgrades
 
@@ -1422,6 +1444,18 @@ This is disabled by default and behind feature flag `runtimeConnectionEnabled` (
 
 ### Optimize
 
+#### Delete a process definition's data via API
+
+<!-- https://github.com/camunda/product-hub/issues/3716 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Optimize now exposes a public API endpoint to delete all analytics data for a given process definition, so you can remove data for retired processes or respond to data removal requests without manually touching Elasticsearch or OpenSearch.
+
+The deletion runs asynchronously: the API accepts and queues the request, then processes it in the background.
+
+<p class="link-arrow">[Delete process definition data](/apis-tools/optimize-api/delete-process-definition-data.md)</p>
+
 #### Object variables no longer flattened by default in Self-Managed
 
 <!-- https://github.com/camunda/product-hub/issues/3785 -->
@@ -1441,18 +1475,6 @@ Object variables are not flattened into per-property fields, and their raw value
 **Recovery:** The Optimize importer is idempotent. As long as the object variables still exist in the `zeebe-record-variable\*` indices (within your Zeebe retention window), you can enable the flag and reset the importer to reimport/flatten historical variables.
 
 <p class="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
-
-#### Delete a process definition's data via API
-
-<!-- https://github.com/camunda/product-hub/issues/3716 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
-
-Optimize now exposes a public API endpoint to delete all analytics data for a given process definition, so you can remove data for retired processes or respond to data removal requests without manually touching Elasticsearch or OpenSearch.
-
-The deletion runs asynchronously: the API accepts and queues the request, then processes it in the background.
-
-<p class="link-arrow">[Delete process definition data](/apis-tools/optimize-api/delete-process-definition-data.md)</p>
 
 ### Orchestration Cluster
 
@@ -2245,8 +2267,6 @@ The Zeebe Client is removed and replaced by the [Camunda Java Client](/apis-tool
 
 The Zeebe Process Test library is removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
 
-<p class="link-arrow">[Migrate to Camunda Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
-
 ### Modeler
 
 #### Support for start forms in Desktop Modeler
@@ -2400,7 +2420,7 @@ Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extractio
 
 ### Modeler
 
-#### Support for configurable headers for execution listeners
+#### Execution listener configurable header support
 
 <!-- https://github.com/camunda/product-hub/issues/3450 -->
 
