@@ -36,7 +36,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## Agentic orchestration
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Hub">Hub</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
 
 ### Agent tool configuration
 
@@ -57,7 +57,7 @@ New features help you more easily configure your agent tools when modeling.
 
 :::
 
-<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
 
 ### Agentic control plane
 
@@ -67,7 +67,9 @@ Use the Optimize agentic control plane dashboard to monitor AI agent adoption, t
 
 <p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
 
-### AI Agent connector: Conversation storage SPI redesign
+### AI Agent connector
+
+#### Conversation storage SPI redesign
 
 <!-- https://github.com/camunda/connectors/pull/6784 -->
 
@@ -75,7 +77,7 @@ The conversation storage SPI used by [custom AI Agent storage backends](/compone
 
 <p class="link-arrow">[Conversation storage SPI redesign](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign)</p>
 
-### AI Agent connector: new native (v2) element templates
+#### Native (v2) element templates
 
 <!-- https://github.com/camunda/connectors/issues/7211
 https://github.com/camunda/connectors/issues/7225 -->
@@ -88,47 +90,43 @@ Provider and backend selection are now decoupled: for example, the Anthropic pro
 The legacy connector is deprecated in 8.10 but not removed, and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
 :::
 
-### AI agent testing assertions in Camunda Process Test
+### AI agent testing with Camunda Process Test
 
-<!-- https://github.com/camunda/product-hub/issues/3315 -->
+<!-- https://github.com/camunda/product-hub/issues/3315, https://github.com/camunda/camunda/issues/46462, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/49548 -->
 
-You can now test non-deterministic AI agent behavior in Camunda Process Test (CPT) with conditional behavior controls and evaluation-based assertions. With this, you can validate agent behavior and output quality with clearer, more reliable test outcomes.
+You can now test non-deterministic AI agent behavior in Camunda Process Test with conditional behavior controls and evaluation-based assertions. This helps teams validate agent behavior and output quality with clearer, more reliable test outcomes.
 
 - Define conditional behavior in tests with a `when(condition).then(action)` API for activation-based flow control.
 - Assert output quality with LLM-as-a-judge expectations when exact matching is not enough.
 - Assert semantic similarity with embedding-based comparison for responses that vary in phrasing.
 - Configure remote or local models through code and properties for both local development and CI/CD pipelines.
 
-<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
+**Judge assertions in Camunda Process Test JSON test cases**: Define judge assertions using JSON test case instructions. Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
+
+**Standalone evaluation assertions for judge and semantic similarity**: Camunda Process Test now exposes _judge-based evaluation_ and _semantic similarity evaluation_ as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
+
+<ul>
+  <li><span class="link-arrow">[Test your AI agents with Camunda Process Test](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</span></li>
+  <li><span class="link-arrow">[JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions)</span></li>
+</ul>
 
 ### Camunda-provided LLM for SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/2883 -->
 
-You can now run any AI Agent on Camunda 8 SaaS in minutes using the Camunda-provided LLM, without wiring your own LLM credentials.
+You can now run AI Agents on Camunda 8 SaaS in minutes using the Camunda-provided LLM, without your own LLM credentials.
 
 - Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
 - The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
-- This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup on day one.
+- This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup.
 
 <p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
-
-### Judge assertions in CPT JSON Test Cases
-
-<!-- https://github.com/camunda/camunda/issues/46462 -->
-
-Camunda Process Test (CPT) now supports **judge assertions** in JSON test cases.
-
-- Define judge assertions using JSON test case instructions.
-- Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
-
-<p class="link-arrow">[JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions)</p>
 
 ### MCP start event element template
 
 <!-- https://github.com/camunda/connectors/pull/6742 -->
 
-The **MCP start event** element template is now available in Web Modeler and Desktop Modeler. Apply it to a BPMN message start event to configure the process as an MCP tool with name, purpose, inputs, and usage guidance for LLMs.
+The **MCP start event** element template is now available in Modeler. Apply it to a BPMN message start event to configure the process as an MCP tool with name, purpose, inputs, and usage guidance for LLMs.
 
 <p class="link-arrow">[MCP start event](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md)</p>
 
@@ -173,17 +171,19 @@ The Camunda Skills repository toolset enables AI coding agents to build, validat
 - Run BPMN lint rules against generated diagrams.
 - Scaffold and wire Camunda Process Test (CPT) integration tests.
 
-### Standalone evaluation assertions for judge and semantic similarity
-
-<!-- https://github.com/camunda/camunda/issues/46130
-https://github.com/camunda/camunda/issues/46130
-https://github.com/camunda/camunda/issues/49548 -->
-
-Camunda Process Test now exposes **judge-based evaluation** and **semantic similarity evaluation** as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
-
 ## APIs & tools
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--medium" title="This feature affects the Java client">Java client</span><span class="badge badge--medium" title="This feature affects the Spring SDK">Spring SDK</span></div>
+
+### C# SDK
+
+<!-- https://github.com/camunda/product-hub/issues/3044 -->
+
+Camunda now offers an officially supported C# Client for the Camunda 8 Orchestration Cluster REST API v2.
+
+You can authenticate with your cluster (No Auth for local, Basic Auth, or OIDC access tokens) and use C# methods to deploy resources, start and manage process instances, work with user tasks, and query processes and decisions—complete with pagination helpers and typed responses via generated models.
+
+<p class="link-arrow">[C# SDK](/apis-tools/csharp-sdk.md)</p>
 
 ### Camunda Hub API
 
@@ -214,6 +214,19 @@ The endpoint:
 
 Behavior remains free from side effects and uses the same timeout and guardrails as the existing cluster-scope evaluation.
 
+### Go SDK (Technical preview)
+
+<!-- https://github.com/camunda/issues/issues/835 -->
+
+Go developers can use the supported SDK to integrate with the Camunda Orchestration Cluster API from native Go projects.
+
+- Use Orchestration Cluster APIs from Go without building custom client wrappers.
+- Regenerate the SDK from source API definitions as APIs evolve.
+- Reduce upgrade effort when cluster APIs change.
+- Provide a consistent integration path for Go-based services and AI applications.
+
+<p class="link-arrow">[Go SDK](/apis-tools/go-sdk.md)</p>
+
 ### Invite collaborators via the Hub API who haven't previously logged in
 
 <!-- https://github.com/camunda/camunda-hub/pull/26666 -->
@@ -230,9 +243,11 @@ Adding a project collaborator via the public API no longer requires the invitee 
 
 <!-- https://github.com/camunda/camunda/issues/13124 -->
 
-The Camunda Java client now caches OAuth credentials **in memory by default**. The file-based cache at `$HOME/.camunda/credentials` is no longer enabled out of the box and is available as an explicit opt-in.
+The Camunda Java client now caches OAuth credentials in memory by default.
 
-- The previous default tried to create `$HOME/.camunda/credentials` on first use. In hardened container environments — non-root users (Kubernetes `securityContext.runAsUser`, OpenShift), read-only root filesystems, immutable images — this raised `AccessDeniedException`/`IOException` at first cache write. Affected users had to apply a non-obvious workaround (mount a writable volume and point an environment variable at it) just to get a client to start.
+The file-based cache at `$HOME/.camunda/credentials` is no longer enabled by default and is available as an explicit opt-in.
+
+- The previous default tried to create `$HOME/.camunda/credentials` on first use. In hardened container environments such as non-root users (Kubernetes `securityContext.runAsUser`, OpenShift), read-only root filesystems, and immutable images, this raised `AccessDeniedException`/`IOException` at first cache write. Affected users had to apply a non-obvious workaround (mount a writable volume and point an environment variable at it) just to get a client to start.
 - Memory-only caching removes that footgun: clients work out of the box in any deployment topology, and the in-process token cache plus proactive refresh still avoid unnecessary token endpoint calls during a JVM's lifetime.
 - The file cache had also been a source of latent corruption when multiple JVMs shared the same `$HOME`; making it opt-in restricts its use to deployments where persistence across restarts is genuinely needed.
 
@@ -248,15 +263,23 @@ If you previously set `CAMUNDA_CLIENT_CONFIG_PATH` / `ZEEBE_CLIENT_CONFIG_PATH` 
 
 <p class="link-arrow">[Spring Boot starter configuration](/apis-tools/camunda-spring-boot-starter/configuration.md#credentials-cache-path)</p>
 
-### Removal of deprecated APIs, Zeebe Client, and Zeebe Process Test
+### Operate and Tasklist APIs removed
 
 The deprecated Operate and Tasklist APIs are removed. Process data, task management, and operational queries are now served through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 <p class="link-arrow">[Migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
 
+### Rust SDK (Technical preview)
+
+Release notes required.
+
+### Zeebe Client replaced by Camunda Java Client
+
 The Zeebe Client is removed and replaced by the [Camunda Java Client](/apis-tools/java-client/getting-started.md). This covers process deployment, message correlation, and job handling.
 
 <p class="link-arrow">[Migrate to the Camunda Java Client](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)</p>
+
+### Zeebe Process Test replaced by Camunda Process Test
 
 The Zeebe Process Test library is removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
 
@@ -313,15 +336,33 @@ Filtered records are permanently excluded from Optimize and cannot be recovered 
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
+### App Integrations connector
+
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+Use the new App Integrations connector to send and receive messages in Microsoft Teams and Slack.
+
+#### Send Microsoft Teams and Slack messages without managing credentials
+
+The App Integrations connector sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
+
+<p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
+
+#### Receive Microsoft Teams and Slack messages in a process
+
+The App Integrations connector receives messages as well as sending them. A process can start from a message someone writes to the Camunda app in Microsoft Teams or Slack, and a process that is already holding a conversation receives the reply, so an approval, a choice, or a correction can be collected in the chat people are already in rather than in a separate form.
+
+<p class="link-arrow">[Receive a chat message](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message)</p>
+
 ### AWS Connectors updated to AWS SDK for Java v2
 
 <!-- https://github.com/camunda/product-hub/issues/3581 -->
 
 All AWS connectors are updated to use AWS SDK for Java v2.
 
-This ensures Camunda AWS connector implementations are using supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
+This ensures Camunda AWS connector implementations use supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
 
-### Connector Management observability improvements
+### Connector Management observability
 
 <!-- https://github.com/camunda/product-hub/issues/3019 -->
 
@@ -332,6 +373,18 @@ Connector Management now provides a unified view of inbound and outbound connect
 
 <p class="link-arrow">[Manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md)</p>
 
+### Connector search improvements
+
+<!-- https://github.com/camunda/product-hub/issues/3403 -->
+
+You can now find a connector by the operation you want to perform. Built-in connector templates now describe their operations, so you can model by the action you want to take instead of the product that provides it.
+
+- Searching in the create, append, or change element menu for `upload object` or `send email` returns the matching operations of every connector as their own entries, and selecting one applies the connector with that operation preselected.
+- Connectors with several operations show their operations as a nested menu, and the operation selection is now the first group in the properties panel.
+- Connectors that provide a single operation are also renamed to describe their action. For example, the **REST Outbound Connector** is renamed to **Send REST Request**. Existing process models are unaffected.
+
+<p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
+
 ### Storage connector improvements
 
 <!-- https://github.com/camunda/product-hub/issues/3224 -->
@@ -340,34 +393,6 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 
 - These connectors now support direct object creation from variables and better content extraction for document references.
 - You can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store. Documents with incorrect content-types can be read using conversion options (for example, "read as text", "read as JSON").
-
-### Find a connector by the operation you want to perform
-
-<!-- https://github.com/camunda/product-hub/issues/3403 -->
-
-Built-in connector templates now describe their operations, so you can model by the action you want to take instead of the product that provides it. Searching in the create, append, or change element menu for `upload object` or `send email` returns the matching operations of every connector as their own entries, and selecting one applies the connector with that operation preselected. Connectors with several operations show their operations as a nested menu, and the operation selection is now the first group in the properties panel.
-
-Connectors that provide a single operation are also renamed to describe their action — for example, **REST Outbound Connector** is now **Send REST Request**. Existing process models are unaffected.
-
-<p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
-
-### Send Microsoft Teams and Slack messages without managing credentials
-
-The new **App Integrations connector** sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
-
-Messages can address a Microsoft Teams channel, user, or conversation, a Slack channel or user, or a Camunda recipient — an assignee, candidate users, or candidate groups — which the connector resolves to whichever platforms those people have connected. Alongside plain text you can send an Adaptive Card, a Block Kit payload, or a Camunda form. The result reports every destination reached and every one that failed, so a process can react to a partial delivery.
-
-<p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
-
-### Receive Microsoft Teams and Slack messages in a process
-
-<!-- https://github.com/camunda/product-hub/issues/3542 -->
-
-The **App Integrations connector** now receives messages as well as sending them. A process can start from a message someone writes to the Camunda app in Microsoft Teams or Slack, and a process that is already holding a conversation receives the reply, so an approval, a choice, or a correction can be collected in the chat people are already in rather than in a separate form.
-
-Receiving needs no connector task and no job worker. Element templates for a chat start event, an intermediate catch event, a receive task, and a boundary event set up the correlation, so a start event and a catch event are enough for a working conversation loop. A **Chat key** on the start event decides which chats it answers: configure a Microsoft Teams channel or chat in the Camunda app's **Settings** tab, or a Slack channel or direct message with `/camunda chat`, and give the process the same key. A reply always reaches the cluster whose process asked the question. In a personal chat or direct message every message reaches the process; in a channel on either platform, @mention the Camunda app.
-
-<p class="link-arrow">[Receive a chat message](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message)</p>
 
 ## Console
 
