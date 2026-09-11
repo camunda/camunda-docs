@@ -549,17 +549,28 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
 
-#### Ingress annotation defaults removed from the Helm chart {#ingress-annotation-defaults-removed}
+#### Ingress-nginx annotation defaults deprecated in the Helm chart {#ingress-annotation-defaults-deprecated}
 
-`global.ingress.annotations` and `orchestration.ingress.grpc.annotations` no longer ship ingress-nginx-specific defaults. Both now default to `{}`, so the chart renders no controller-specific configuration unless you ask for it.
+The Helm chart used to ship ingress-nginx-specific defaults in `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Helm deep-merges maps, so setting a single annotation of your own still inherited all of them, and they were written onto the `Ingress` whatever `ingressClassName` you configured. On Contour, Traefik, or any other controller they are dead configuration, and removing them meant setting each key to `null`.
 
-Previously these maps carried `nginx.ingress.kubernetes.io/*` values. Helm deep-merges maps, so setting a single annotation of your own still inherited all of them, and they were written onto the `Ingress` whatever `ingressClassName` you configured. Deployments on Contour, Traefik, or any other controller therefore carried dead nginx configuration, and there was no way to remove it short of setting each key to `null`.
+From Camunda 8.10 (chart 15.x) those annotations come from a compatibility shim controlled by `global.ingress.nginxCompatAnnotations`, which defaults to `true`. **Nothing changes on upgrade:** the same annotations render, so ingress-nginx deployments are unaffected. The shim is removed in the next major, after which the annotations are opt-in.
 
-**Action:** If you run [ingress-nginx](https://github.com/kubernetes/ingress-nginx), set the annotations explicitly. Two of them carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
+**Action:** If you run an Ingress controller other than ingress-nginx, set `global.ingress.nginxCompatAnnotations: false` to render controller-neutral `Ingress` objects, and configure whatever your controller needs through `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Keys you set there always win over the shim.
+
+```yaml
+global:
+  ingress:
+    nginxCompatAnnotations: false
+    annotations:
+      # for example, with Contour
+      kubernetes.io/tls-acme: "true"
+```
+
+If you stay on ingress-nginx, no action is required before the next major. When the shim is removed you will need to set the annotations yourself:
 
 ```yaml
 global:
@@ -578,7 +589,11 @@ orchestration:
         nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
 ```
 
-If you run another Ingress controller, set that controller's equivalents instead. With [Contour](https://projectcontour.io/), the gRPC upstream is declared with `projectcontour.io/upstream-protocol.h2c` on the Orchestration Cluster **Service**, listing the gRPC port, rather than on the Ingress.
+Two of those carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
+
+With [Contour](https://projectcontour.io/), the gRPC upstream is declared with `projectcontour.io/upstream-protocol.h2c` on the Orchestration Cluster **Service**, listing the gRPC port, rather than on the Ingress.
+
+While the shim is active the chart emits a deprecation warning naming the flag and the removal.
 
 <p className="link-arrow">[Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)</p>
 
