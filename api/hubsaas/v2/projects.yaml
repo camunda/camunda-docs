@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Project resource paths and schemas
 paths:
@@ -106,6 +107,14 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           $ref: "common-responses.yaml#/components/responses/NotFound"
+        "409":
+          description: >-
+            The project is the workspace's migration-created catch-all and cannot be
+            moved to another workspace.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -214,6 +223,99 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/recently-deleted/search:
+    post:
+      operationId: searchRecentlyDeletedProjects
+      summary: Search recently deleted projects
+      description: >
+        Returns soft-deleted projects scoped to the caller's organization. Only
+        projects that are the root of their own deletion are listed; a
+        project soft-deleted as part of an ancestor workspace's deletion event
+        is represented by that workspace instead, and a project deleted
+        independently before its workspace stays listed in its own right; use
+        the respective recently-deleted search endpoint to access that
+        workspace entity. Projects remain listed until the
+        retention period expires and the scheduled cleanup job runs; they can
+        also be restored with `POST /projects/{projectKey}/restoration` or
+        permanently removed with `DELETE /projects/{projectKey}/permanent`.
+      x-added-in-version: "0.4.0"
+      tags:
+        - Project
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecentlyDeletedProjectSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecentlyDeletedProjectSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}/restoration:
+    post:
+      operationId: restoreProject
+      summary: Restore a recently deleted project
+      description: >
+        Restores a soft-deleted project back to the live workspace, together
+        with everything that was soft-deleted as part of the same deletion
+        event. The project cannot be restored while its workspace is still
+        deleted. Only a project that is the root of its own deletion can be
+        restored via this endpoint; a project that was soft-deleted as part
+        of its workspace's deletion event must be restored through the
+        workspace restoration endpoint instead.
+      x-added-in-version: "0.4.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "200":
+          description: The project was restored successfully. Returns the restored project.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: >-
+            The recently deleted project was not found, or is not the root of
+            its own deletion.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: >-
+            The project cannot be restored because its workspace is itself
+            deleted. Restore the workspace first.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -481,3 +583,107 @@ components:
           description: Pagination metadata for the search results.
           allOf:
             - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    # --- Recently deleted schemas ---
+
+    RecentlyDeletedProjectSearchQuery:
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentlyDeletedProjectSearchQuerySortRequest"
+        filter:
+          description: The recently deleted project search filters.
+          allOf:
+            - $ref: "#/components/schemas/RecentlyDeletedProjectFilter"
+
+    RecentlyDeletedProjectFilter:
+      type: object
+      description: Filter criteria for searching recently deleted projects.
+      properties:
+        projectKey:
+          description: Filter by the key of the deleted project.
+          x-semantic-type: ProjectKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        name:
+          description: Filter by project name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        workspaceKey:
+          description: Filter by the key of the workspace the project belonged to.
+          x-semantic-type: WorkspaceKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        deleted:
+          description: Filter by deletion date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+
+    RecentlyDeletedProjectSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - deleted
+        order:
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    RecentlyDeletedProjectSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The recently deleted projects.
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentlyDeletedProjectResult"
+        page:
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    RecentlyDeletedProjectResult:
+      type: object
+      required:
+        - projectKey
+        - name
+        - workspaceKey
+        - deleted
+        - deletedBy
+      properties:
+        projectKey:
+          description: The unique key identifying the deleted project.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        name:
+          description: The name of the deleted project.
+          type: string
+        workspaceKey:
+          description: The key of the workspace the project belonged to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+        deleted:
+          description: The timestamp when the project was deleted.
+          type: string
+          format: date-time
+        deletedBy:
+          description: The user who deleted the project.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+          nullable: true

@@ -29,7 +29,7 @@ Organization admins can configure the deployment policy for projects in the Camu
 
 <TabItem value='saas'>
 
-By default, only [organization administrators](/components/hub/organization/manage-users/manage-users.md) can deploy projects to clusters marked as
+By default, only [organization administrators](/components/hub/organization/manage-users/index.md) can deploy projects to clusters marked as
 [production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Camunda Hub.
 
 You can change this in the **Project deployment** settings:

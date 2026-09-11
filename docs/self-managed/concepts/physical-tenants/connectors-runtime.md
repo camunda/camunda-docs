@@ -143,7 +143,7 @@ With this enabled, the runtime resolves each secret against a name scoped to the
 With `physicaltenantaware` left at its default of `false`, all configured clients resolve secrets from a single flat namespace. A reference to `{{secrets.MY_SECRET}}` resolves the same `SECRET_MY_SECRET` value regardless of which Physical Tenant the job belongs to. Enable `physicaltenantaware` in any deployment where tenants must not share secret values.
 :::
 
-Reference secrets in connector properties using `{{secrets.MY_SECRET}}`. The runtime replaces references when it binds the job's variables, and does not write resolved values back to the variable store, Operate, Tasklist, or logs.
+Reference secrets in connector properties using a [legacy secret reference](/reference/glossary.md#secret-reference-legacy), `{{secrets.MY_SECRET}}`. The runtime replaces references when it binds the job's variables, and does not write resolved values back to the variable store, Operate, Tasklist, or logs.
 
 Independently of tenant scoping, `camunda.connector.secret-resolver.secret-filter.mode` controls whether a connector element may reference secret keys it has not declared. It defaults to `DISABLED`, meaning no key-level restriction is enforced. Set it to `LAX` or `STRICT` to restrict each element to the secret keys declared in its process definition.
 

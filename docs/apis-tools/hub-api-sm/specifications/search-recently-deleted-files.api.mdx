@@ -1,11 +1,11 @@
 ---
 id: search-recently-deleted-files
 title: "Search recently deleted files"
-description: "Returns soft-deleted files scoped to the caller's organization. Files remain listed until the retention period expires and the scheduled cleanup job runs; they can also be restored with `POST /files/{fileKey}/restoration` or permanently removed with `DELETE /files/{fileKey}/permanent`."
+description: "Returns soft-deleted files scoped to the caller's organization. Only files that are the root of their own deletion are listed; a file soft-deleted as part of an ancestor folder, project, or workspace's deletion event is represented by that ancestor instead, and a file deleted independently before its ancestor stays listed in its own right; use the respective recently-deleted search endpoint to access that ancestor entity. Files remain listed until the retention period expires and the scheduled cleanup job runs; they can also be restored with `POST /files/{fileKey}/restoration` or permanently removed with `DELETE /files/{fileKey}/permanent`."
 sidebar_label: "Search recently deleted files"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Returns soft-deleted files scoped to the caller's organization. Files remain listed until the retention period expires and the scheduled cleanup job runs; they can also be restored with `POST /files/{fileKey}/restoration` or permanently removed with `DELETE /files/{fileKey}/permanent`.
+Returns soft-deleted files scoped to the caller's organization. Only files that are the root of their own deletion are listed; a file soft-deleted as part of an ancestor folder, project, or workspace's deletion event is represented by that ancestor instead, and a file deleted independently before its ancestor stays listed in its own right; use the respective recently-deleted search endpoint to access that ancestor entity. Files remain listed until the retention period expires and the scheduled cleanup job runs; they can also be restored with `POST /files/{fileKey}/restoration` or permanently removed with `DELETE /files/{fileKey}/permanent`.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -90,6 +90,7 @@ Returns soft-deleted files scoped to the caller's organization. Files remain lis
                           format: "int32",
                           default: 100,
                           minimum: 1,
+                          maximum: 10000,
                         },
                       },
                     },
@@ -121,6 +122,327 @@ Returns soft-deleted files scoped to the caller's organization. Files remain lis
                 },
                 title: "RecentlyDeletedFileSearchQuerySortRequest",
               },
+            },
+            filter: {
+              description: "The recently deleted file search filters.",
+              allOf: [
+                {
+                  type: "object",
+                  description:
+                    "Filter criteria for searching recently deleted files.",
+                  properties: {
+                    fileKey: {
+                      description: "Filter by the key of the deleted file.",
+                      "x-semantic-type": "FileKey",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    name: {
+                      description: "Filter by file name.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    projectKey: {
+                      description:
+                        "Filter by the key of the project the file belonged to.",
+                      "x-semantic-type": "ProjectKey",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    type: {
+                      description: "Filter by file type.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    deleted: {
+                      description: "Filter by deletion date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "RecentlyDeletedFileFilter",
+                },
+              ],
             },
           },
           title: "RecentlyDeletedFileSearchQuery",
@@ -159,7 +481,16 @@ Returns soft-deleted files scoped to the caller's organization. Files remain lis
                     fileKey: {
                       description:
                         "The unique key identifying the deleted file.",
-                      type: "string",
+                      allOf: [
+                        {
+                          description: "System-generated key for a file.",
+                          type: "string",
+                          format: "FileKey",
+                          "x-semantic-type": "FileKey",
+                          example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
+                          title: "FileKey",
+                        },
+                      ],
                     },
                     name: {
                       description: "The name of the deleted file.",
@@ -181,7 +512,16 @@ Returns soft-deleted files scoped to the caller's organization. Files remain lis
                     projectKey: {
                       description:
                         "The key of the project the file belonged to.",
-                      type: "string",
+                      allOf: [
+                        {
+                          description: "System-generated key for a project.",
+                          type: "string",
+                          format: "ProjectKey",
+                          "x-semantic-type": "ProjectKey",
+                          example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                          title: "ProjectKey",
+                        },
+                      ],
                     },
                     deleted: {
                       description: "The timestamp when the file was deleted.",

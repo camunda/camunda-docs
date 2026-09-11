@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 openapi: 3.0.3
 info:
@@ -55,8 +56,7 @@ info:
     name: Camunda
     url: https://docs.camunda.io
   license:
-    name: Camunda License 1.0
-    url: https://legal.camunda.com/licensing-and-other-legal-terms#702a69c4-3932-47b3-ac74-3b557feeda58
+    name: Proprietary
 
 servers:
   - url: "{schema}://{host}:{port}/api/v2"
@@ -105,6 +105,8 @@ paths:
     $ref: "catalog.yaml#/paths/~1catalog~1assets~1ingestion"
   /catalog/assets/{assetKey}:
     $ref: "catalog.yaml#/paths/~1catalog~1assets~1{assetKey}"
+  /catalog/assets/search:
+    $ref: "catalog.yaml#/paths/~1catalog~1assets~1search"
   /files:
     $ref: "files.yaml#/paths/~1files"
   /files/{fileKey}:
@@ -125,6 +127,10 @@ paths:
     $ref: "folders.yaml#/paths/~1folders~1{folderKey}"
   /folders/{folderKey}/permanent:
     $ref: "folders.yaml#/paths/~1folders~1{folderKey}~1permanent"
+  /folders/recently-deleted/search:
+    $ref: "folders.yaml#/paths/~1folders~1recently-deleted~1search"
+  /folders/{folderKey}/restoration:
+    $ref: "folders.yaml#/paths/~1folders~1{folderKey}~1restoration"
   /info:
     $ref: "info.yaml#/paths/~1info"
   /projects:
@@ -135,6 +141,10 @@ paths:
     $ref: "projects.yaml#/paths/~1projects~1{projectKey}~1permanent"
   /projects/search:
     $ref: "projects.yaml#/paths/~1projects~1search"
+  /projects/recently-deleted/search:
+    $ref: "projects.yaml#/paths/~1projects~1recently-deleted~1search"
+  /projects/{projectKey}/restoration:
+    $ref: "projects.yaml#/paths/~1projects~1{projectKey}~1restoration"
   /versions:
     $ref: "versions.yaml#/paths/~1versions"
   /versions/{versionKey}:
@@ -151,6 +161,10 @@ paths:
     $ref: "workspaces.yaml#/paths/~1workspaces~1{workspaceKey}~1permanent"
   /workspaces/search:
     $ref: "workspaces.yaml#/paths/~1workspaces~1search"
+  /workspaces/recently-deleted/search:
+    $ref: "workspaces.yaml#/paths/~1workspaces~1recently-deleted~1search"
+  /workspaces/{workspaceKey}/restoration:
+    $ref: "workspaces.yaml#/paths/~1workspaces~1{workspaceKey}~1restoration"
   /workspaces/{workspaceKey}/members:
     $ref: "members.yaml#/paths/~1workspaces~1{workspaceKey}~1members"
   /workspaces/{workspaceKey}/members/{email}:

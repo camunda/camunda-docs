@@ -1,6 +1,6 @@
 ---
 id: settings
-title: Settings
+title: Manage cluster settings
 description: "Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
 ---
 
@@ -8,13 +8,14 @@ Manage your cluster settings using authorizations, automatic cluster updates, an
 
 ## Manage cluster settings
 
-To manage your cluster settings:
+To manage your cluster settings in Camunda Hub SaaS:
 
-1. Navigate to **Camunda Hub**, and select the **Clusters** tab.
-2. Select the cluster you want to manage, and select the **Settings** tab.
-3. Enable/disable cluster settings as required, or delete the cluster.
+1. In the left navigation under **Clusters**, select a cluster.
+1. On the **Settings** tab, enable/disable cluster settings as required, or delete the cluster.
 
-![Cluster settings](./img/cluster-settings.png)
+:::tip
+In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
+:::
 
 ## Authorizations
 
@@ -45,6 +46,22 @@ For details on creating tenants and managing assignments, see [tenant management
 :::warning
 Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
 :::
+
+## Secret filter mode
+
+You can change the connector secret filter mode on a per-cluster basis to control which secrets outbound and inbound connectors are allowed to resolve.
+
+:::note
+This setting applies to Camunda 8 SaaS. In Self-Managed, configure the mode using [configuration properties](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
+:::
+
+- **STRICT** (default): a connector can only resolve secrets that are present for a given field in the actually deployed BPMN XML.
+- **LAX**: for outbound connectors, falls back to `DISABLED` behavior (resolving all secrets) if the BPMN XML cannot be fetched. Inbound connectors behave the same as under `STRICT`, since their allow-list doesn't require a lookup.
+- **DISABLED**: all secrets resolve freely, matching the behavior before this feature was introduced.
+
+This setting is available for clusters running a version where `STRICT` is the shipped default: 8.6.28+, 8.7.25+, 8.8.19+, 8.9.10+, and 8.10.0-alpha5+. Only organization admins can change it.
+
+For details on each mode, see [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
 
 ## Enable app integrations extensions
 
@@ -105,8 +122,8 @@ Use [authorization-based access control](../../../concepts/access-control/author
 
 ## Delete this cluster
 
-You can _permanently_ delete the selected cluster. See [delete your cluster](/components/hub/organization/manage-clusters/manage-cluster.md#delete-a-cluster).
+You can _permanently_ delete the selected cluster.
 
-:::caution
+:::warning
 Deleting a cluster is permanent. You cannot reuse a cluster after it has been deleted.
 :::

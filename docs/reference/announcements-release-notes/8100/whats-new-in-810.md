@@ -173,6 +173,8 @@ In addition to the Web Modeler data migration, Camunda is introducing an improve
 
 Before the new model, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit. With the new model, you have more granular control.
 
+### Working with process applications
+
 If you're not familiar with process applications, the following sections explain how to:
 
 - [Define deployment stages](#define-deployment-stages)

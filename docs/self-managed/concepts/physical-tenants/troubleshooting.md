@@ -49,7 +49,7 @@ If `/cluster/v2/status` is healthy but one tenant is failing, the problem is sco
 
 ## Degraded tenants
 
-A Physical Tenant becomes **degraded** when its secondary storage is unusable, most often because its schema could not be initialized or its database is unreachable.
+A Physical Tenant most often becomes **degraded** because its secondary storage is unusable, for example because its schema could not be initialized or its database is unreachable. Secondary storage is not the only cause of a degraded tenant, but it's the one this section covers.
 
 ### What you observe
 

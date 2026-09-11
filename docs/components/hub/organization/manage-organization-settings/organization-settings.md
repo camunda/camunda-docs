@@ -4,13 +4,11 @@ title: Organization management
 description: "Follow these instructions to manage your organization."
 ---
 
-Organization management can be accessed via the **Open Organizations** icon in the navigation bar.
+Manage your organization settings.
 
-![Open Organizations icon in navigation bar](./img/avatar-menue.png)
+### Access organization settings
 
-Using the context menu of each organization, you can manage or leave an organization.
-
-### Overview
+In the left navigation under **Console**, click **Organization**.
 
 The overview provides a summary of the organization, including:
 
@@ -26,5 +24,5 @@ If you are the owner of the organization, you can change the name of your organi
 
 ## Next steps
 
-- [Manage users in your organization](../manage-users/manage-users.md)
+- [Manage users in your organization](../manage-users/index.md)
 - [View organization activity](./view-organization-activity.md)

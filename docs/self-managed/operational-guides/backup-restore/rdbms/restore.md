@@ -382,8 +382,8 @@ If you previously backed up Optimize data, restore it independently using the st
 
 See [back up and restore Optimize independently](../optimize-backup-and-restore.md#restore-a-backup) for the complete procedure.
 
-## (Optional) Restore Web Modeler data
+## (Optional) Restore Camunda Hub data
 
-If you previously backed up Web Modeler data, restore it using the same RDBMS restore tools.
+If you previously backed up Camunda Hub data, restore it using the same RDBMS restore tools.
 
-See [backup and restore Web Modeler data](../modeler-backup-and-restore.md) for more details.
+See [backup and restore Camunda Hub data](../modeler-backup-and-restore.md) for more details.

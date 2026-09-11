@@ -148,7 +148,7 @@ Then, require individual members of that group to explicitly claim tasks before 
 
 Often, task applications support the collaborative work on tasks, generally done using **comments**. **Document management** is a common use case of task applications, allowing users to upload, manage, and review **attachments**. Task applications are also the right place to browse, reference, and manage **case management data**.
 
-Task applications are not limited to web applications to be worked on desktops. Camunda has been used successfully for the the development of omnichannel customer-facing applications, such as **mobile banking apps**, often via a **backend-for-frontend** implementation.
+Task applications are not limited to web applications to be worked on desktops. Camunda has been used successfully for the development of omnichannel customer-facing applications, such as **mobile banking apps**, often via a **backend-for-frontend** implementation.
 
 ## Next steps
 

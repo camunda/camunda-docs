@@ -48,5 +48,6 @@ See the [Bitnami GitHub announcement](https://github.com/bitnami/containers/issu
 
 ## Related resources
 
+- [Migrate and validate Helm overrides with the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)
 - [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)
 - [Component upgrade from 8.7 to 8.8](/self-managed/upgrade/components/870-to-880.md)
