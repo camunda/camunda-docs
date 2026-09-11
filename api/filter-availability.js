@@ -5,8 +5,9 @@ const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 
+const HTTP_METHODS = ["get", "post", "put", "patch", "delete"];
+
 function isHTTPMethod(metadata) {
-  const HTTP_METHODS = ["get", "post", "put", "patch", "delete"];
   return HTTP_METHODS.includes(metadata[0]);
 }
 
@@ -17,8 +18,13 @@ function isAvailableInEnvironment(metadata, environment) {
   return available;
 }
 
-function hasData(pathData) {
-  return Object.keys(pathData).length > 0;
+// a path is worth keeping only if it still has an operation or a $ref to one -
+// other metadata (summary/description/parameters) shouldn't keep an
+// operation-less path alive
+function hasOperationOrRef(pathData) {
+  return Object.keys(pathData).some(
+    (key) => HTTP_METHODS.includes(key) || key === "$ref"
+  );
 }
 
 function filterMethodsForEnvironment(pathData, environment) {
@@ -76,7 +82,7 @@ function filterPaths(paths, environment) {
         environment
       );
 
-      if (hasData(filteredPathData)) {
+      if (hasOperationOrRef(filteredPathData)) {
         filtered[route] = filteredPathData;
       } else {
         removedRoutes.push(escapeRoute(route));
