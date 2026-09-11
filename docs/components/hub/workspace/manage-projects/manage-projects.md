@@ -8,7 +8,7 @@ import DocsIcon from "@site/docs/components/assets/icon-docs.png";
 import AoGrid from '../../../react-components/\_ao-card';
 import FileListImg from './img/file-list.png'
 
-In Camunda Hub, a [project](/components/concepts/process-applications.md) contains a set of related files you work on as a single bundle.
+In Camunda Hub, a [project](/components/concepts/process-applications.md) contains a set of files. You can consider a project as a bundle of related files you can version and deploy together. You can also consider a project as a container of individual files meant to be versioned and deployed independently.
 
 ## About
 
