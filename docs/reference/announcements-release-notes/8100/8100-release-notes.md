@@ -551,7 +551,7 @@ When you create, append, or change an element, the menu groups insertion options
 
 ### New organizational structure for projects and process applications
 
-A new organizational structure for projects and process applications is introduced with this alpha.
+A new organizational structure for projects and process applications is introduced in 8.10.
 
 With this new file resource hierarchy:
 
@@ -567,15 +567,11 @@ SaaS Web Modeler data was updated during the 29 August 2026 maintenance window t
 
 ### Project versioning model
 
-A new versioning model for projects, process applications and file resources is introduced with this alpha. Projects now only contain process applications and IDP applications on the root level. Folders and files are stored inside process applications.
+A new versioning model for projects, process applications and file resources is introduced in 8.10. Projects now only contain process applications and IDP applications on the root level. Folders and files are stored inside process applications.
 
 **Process applications**: The new process application versioning model uses snapshots to save the current state of all the process application files, in a single action. This helps you track a process application throughout its development lifecycle and ensures the correct state is referenced.
 
 **File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
-
-:::note
-This new versioning model will be introduced for Self-Managed deployments with the 8.10 minor release.
-:::
 
 ### Runtime connection in Web Modeler
 
@@ -614,7 +610,7 @@ Element templates support the `steps` and `presets` keys to offer several predef
 
 <!-- https://github.com/camunda/camunda-hub/issues/25824 -->
 
-In Self-Managed, you can now hide the **Add user** button on the Web Modeler **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
+In Self-Managed, you can now hide the **Add user** button on the **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
 
 <p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
 
@@ -716,16 +712,14 @@ Business ID is now visible in Operate for process instances. The `businessId` fi
 
 <!-- https://github.com/camunda/product-hub/issues/3464 -->
 
-Camunda 8.10 introduces an update to the JSON display functionality in Operate for SaaS.
-
-You can now:
+The JSON display functionality in Operate for SaaS is updated. You can now:
 
 - Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
 - View JSON values with consistent, easier to understand formatting.
 - Copy full JSON variable values to the clipboard.
 - Use the improved in-line variables display.
 
-This change helps navigate more complex data during operations and troubleshooting.
+This update helps navigate more complex data during operations and troubleshooting.
 
 ### Multi-variable filtering
 
@@ -741,38 +735,16 @@ Filter by variable name, value, and comparison operators, such as `equals`, `con
 
 <!-- https://github.com/camunda/camunda/issues/45040 -->
 
-Operate now shows what an active process instance is waiting for. When you inspect an active element, you can see the wait state and its details, for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
+Operate now shows what an active process instance is waiting for.
 
-Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
+- When you inspect an active element, you can see the wait state and its details, for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
+- Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
 
 ## Optimize
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
-
-### Optimize data filters in Console
-
-<!-- https://github.com/camunda/product-hub/issues/3679 -->
-
-You can now configure Optimize data filters directly in cluster settings, without editing Helm values or configuration files.
-
-The **Data filters** section in cluster settings lets you:
-
-- Enable or disable Optimize export filtering per cluster.
-- Include or exclude process definitions by exact `bpmnProcessId`.
-- Include or exclude variable names by prefix — for example, `business_` includes all variables whose names start with `business_`.
-- Exclusion takes precedence over inclusion when both are configured.
-
-New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables starting with `business_` to reduce Elasticsearch storage and shard usage. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
-
-Saving filter changes triggers a rolling restart of the Orchestration Cluster; the cluster is briefly unavailable while it restarts.
-
-:::warning
-Filtered records are permanently excluded from Optimize and cannot be recovered even if you relax the filters later.
-:::
-
-<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
 ### Object variables no longer flattened by default in Self-Managed
 
@@ -801,6 +773,29 @@ Optimize now authenticates through the [Camunda Security Library](/reference/glo
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-authentication-moves-to-the-camunda-security-library) for the upgrade action required, and [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+### Optimize data filters
+
+<!-- https://github.com/camunda/product-hub/issues/3679 -->
+
+You can now configure Optimize data filters directly in cluster settings, without editing Helm values or configuration files.
+
+The **Data filters** section in cluster settings lets you:
+
+- Enable or disable Optimize export filtering per cluster.
+- Include or exclude process definitions by exact `bpmnProcessId`.
+- Include or exclude variable names by prefix — for example, `business_` includes all variables whose names start with `business_`.
+- Exclusion takes precedence over inclusion when both are configured.
+
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables starting with `business_` to reduce Elasticsearch storage and shard usage. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+
+Saving filter changes triggers a rolling restart of the Orchestration Cluster; the cluster is briefly unavailable while it restarts.
+
+:::warning
+Filtered records are permanently excluded from Optimize and cannot be recovered even if you relax the filters later.
+:::
+
+<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
 ### Optimize disabled by default on new trial clusters
 
@@ -969,16 +964,6 @@ Use metadata to discover and filter variables by semantic attributes without ins
 
 <p class="link-arrow">[Cluster variable metadata](/components/modeler/feel/cluster-variable/metadata.md)</p>
 
-### Dual-region ECS reference architecture
-
-<!-- https://github.com/camunda/product-hub/issues/3552 -->
-
-Camunda 8.10 adds a dual-region reference architecture for running the Orchestration Cluster and Connectors on AWS ECS with an RDBMS secondary storage such as Aurora Global Database.
-
-The documentation covers the recommended topology, exporter configuration, and RDBMS replication setup, and includes step-by-step failover and failback procedures for active-active and active-passive two-region ECS environments.
-
-<p class="link-arrow">[Dual-region ECS reference architecture](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
-
 ### Multi-tenancy support in SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/3244 -->
@@ -1057,7 +1042,7 @@ For details, see [`cancel` listeners](/components/concepts/execution-listeners.m
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Deployment references">Deployment references</span></div>
 
-### Reference architecture for Amazon ECS
+### Amazon ECS reference architecture
 
 <!-- https://github.com/camunda/product-hub/issues/3432 -->
 
@@ -1075,7 +1060,7 @@ This helps support Amazon ECS as a first‑class, documented deployment option f
 
 <p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
 
-### Reference architecture for dual-region ECS RDBMS
+### Dual-region Amazon ECS reference architecture
 
 <!-- https://github.com/camunda/product-hub/issues/3552 -->
 
@@ -1086,7 +1071,7 @@ What's included:
 - Recommended topology, exporter configuration, and RDBMS replication setup.
 - Step‑by‑step failover and failback procedures so your platform team can design, deploy, and operate an active‑active (or active‑passive) two‑region ECS environment that meets enterprise HA/DR requirements without bespoke architecture work.
 
-<p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
+<p class="link-arrow">[Dual-region ECS reference architecture](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
 ## Secondary storage
 
