@@ -91,6 +91,7 @@ function filterPaths(paths, environment) {
 
 function pruneRefs(spec, allRemovedRoutes) {
   const pruned = {};
+  let changed = false;
 
   if (spec.paths) {
     for (const [route, pathData] of Object.entries(spec.paths)) {
@@ -102,13 +103,14 @@ function pruneRefs(spec, allRemovedRoutes) {
         continue;
       } else {
         pruned[route] = pathData;
+        changed = true;
       }
     }
   } else {
     return spec;
   }
 
-  return pruned;
+  return [pruned, changed];
 }
 
 // js-yaml drops comments on load/dump, so we should capture the leading
@@ -179,10 +181,11 @@ function filterByAvailability(specDir, environment) {
 
   // prune dangling refs
   for (const [filePath, fileData] of Object.entries(mapping)) {
-    const prunedPaths = pruneRefs(fileData.spec, allRemovedRoutes);
+    const [prunedPaths, changed] = pruneRefs(fileData.spec, allRemovedRoutes);
 
-    if (prunedPaths) {
+    if (changed) {
       mapping[filePath].spec.paths = prunedPaths;
+      fileData.shouldWrite = true;
     }
   }
 
