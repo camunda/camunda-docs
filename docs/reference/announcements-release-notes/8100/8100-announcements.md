@@ -557,16 +557,18 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 
 The Helm chart used to ship ingress-nginx-specific defaults in `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Helm deep-merges maps, so setting a single annotation of your own still inherited all of them, and they were written onto the `Ingress` whatever `ingressClassName` you configured. On Contour, Traefik, or any other controller they are dead configuration, and removing them meant setting each key to `null`.
 
-From Camunda 8.10 (chart 15.x) those annotations come from a compatibility shim controlled by `global.ingress.nginxCompatAnnotations`, which defaults to `true`. **Nothing changes on upgrade:** the same annotations render, so ingress-nginx deployments are unaffected. The shim is removed in the next major, after which the annotations are opt-in.
+From Camunda 8.10 (chart 15.x) those annotations come from a compatibility shim controlled by `global.compatibility.nginx.renderAnnotations`, which defaults to `true`. **Nothing changes on upgrade:** the same annotations render, so ingress-nginx deployments are unaffected. The shim is removed in the next major, after which the annotations are opt-in.
 
-**Action:** If you run an Ingress controller other than ingress-nginx, set `global.ingress.nginxCompatAnnotations: false` and configure whatever your controller needs through `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Keys you set there always win over the shim.
+**Action:** If you run an Ingress controller other than ingress-nginx, set `global.compatibility.nginx.renderAnnotations: false` and configure whatever your controller needs through `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Keys you set there always win over the shim.
 
 That removes the shim's annotations only. The chart still adds `nginx.ingress.kubernetes.io/backend-protocol` to the dedicated Ingress objects it renders when an upstream TLS mode is enabled through `global.tls.orchestration`, `global.tls.connectors` or `global.tls.optimize`, and only ingress-nginx reads that annotation.
 
 ```yaml
 global:
+  compatibility:
+    nginx:
+      renderAnnotations: false
   ingress:
-    nginxCompatAnnotations: false
     annotations:
       # for example, with Contour
       kubernetes.io/tls-acme: "true"
