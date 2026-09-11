@@ -559,7 +559,9 @@ The Helm chart used to ship ingress-nginx-specific defaults in `global.ingress.a
 
 From Camunda 8.10 (chart 15.x) those annotations come from a compatibility shim controlled by `global.ingress.nginxCompatAnnotations`, which defaults to `true`. **Nothing changes on upgrade:** the same annotations render, so ingress-nginx deployments are unaffected. The shim is removed in the next major, after which the annotations are opt-in.
 
-**Action:** If you run an Ingress controller other than ingress-nginx, set `global.ingress.nginxCompatAnnotations: false` to render controller-neutral `Ingress` objects, and configure whatever your controller needs through `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Keys you set there always win over the shim.
+**Action:** If you run an Ingress controller other than ingress-nginx, set `global.ingress.nginxCompatAnnotations: false` and configure whatever your controller needs through `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Keys you set there always win over the shim.
+
+That removes the shim's annotations only. The chart still adds `nginx.ingress.kubernetes.io/backend-protocol` to the dedicated Ingress objects it renders when an upstream TLS mode is enabled through `global.tls.orchestration`, `global.tls.connectors` or `global.tls.optimize`, and only ingress-nginx reads that annotation.
 
 ```yaml
 global:
@@ -586,8 +588,12 @@ orchestration:
   ingress:
     grpc:
       annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
         nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
 ```
+
+The gRPC Ingress reads `orchestration.ingress.grpc.annotations` only; it inherits nothing from `global.ingress.annotations`, so set all three keys there.
 
 Two of those carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
 
