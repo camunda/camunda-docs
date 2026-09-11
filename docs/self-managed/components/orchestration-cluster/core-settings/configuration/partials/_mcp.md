@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 | Property              | Description                                                                                                                                                                                                                | Default value | Overridable per Physical Tenant                                                   |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ | :-------------------------------------------------------------------------------- |
-| `camunda.mcp.enabled` | <p>Enable the MCP server. When enabled, the Orchestration Cluster exposes a [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) MCP server at `/mcp/cluster`.</p> | `false`       | Needs verification ([#9795](https://github.com/camunda/camunda-docs/issues/9795)) |
+| `camunda.mcp.enabled` | <p>Enable the MCP server. When enabled, the Orchestration Cluster exposes a [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) MCP server at `/mcp/cluster`.</p> | `false`       | No |
 
   </TabItem>
   <TabItem value="env" label="Environment variables">
@@ -19,7 +19,7 @@ import TabItem from '@theme/TabItem';
 
 | Property              | Description                                                                                                                                                                                                                | Default value | Overridable per Physical Tenant                                                   |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ | :-------------------------------------------------------------------------------- |
-| `CAMUNDA_MCP_ENABLED` | <p>Enable the MCP server. When enabled, the Orchestration Cluster exposes a [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) MCP server at `/mcp/cluster`.</p> | `false`       | Needs verification ([#9795](https://github.com/camunda/camunda-docs/issues/9795)) |
+| `CAMUNDA_MCP_ENABLED` | <p>Enable the MCP server. When enabled, the Orchestration Cluster exposes a [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) MCP server at `/mcp/cluster`.</p> | `false`       | No |
 
   </TabItem>
 </Tabs>

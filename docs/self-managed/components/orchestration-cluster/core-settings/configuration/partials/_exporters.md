@@ -12,6 +12,8 @@ For detailed requirements, configuration examples, and common mistakes, see
 [index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
 :::
 
+To assign a custom exporter defined here to specific Physical Tenants, or to declare an exporter private to one tenant, see [custom exporters for Physical Tenants](/self-managed/concepts/physical-tenants/custom-exporters.md).
+
 <Tabs>
   <TabItem value="application.yaml" label="Application properties">
 
