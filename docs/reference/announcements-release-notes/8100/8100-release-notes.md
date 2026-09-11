@@ -448,7 +448,23 @@ You can now create new SaaS Orchestration Clusters on specific supported Camunda
 
 ## Helm chart deployment
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
+
+### Camunda Helm Toolkit
+
+<!-- https://github.com/camunda/product-hub/issues/3563 -->
+
+The new Helm migration and validation toolkit can help you upgrade from Camunda 8.9 to 8.10 on Kubernetes with Helm.
+
+Use the toolkit to:
+
+- Read your existing 8.9 Helm values (for example, values.yaml).
+- Generate a sample 8.10 values file reflecting Helm 4-only support, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
+- Produce a migration report that lists the keys that were migrated automatically, flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options), suggests where to find more information in the documentation, and can validate an existing 8.10 values file (for example, one drafted by hand or AI tool) against Camunda’s migration rules.
+
+The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
+
+<p class="link-arrow">[Use the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
 
 ### Helm chart version matrix improvements
 
@@ -464,81 +480,6 @@ You can now:
 - Jump directly to change logs and related references via links in the matrix.
 
 <p class="link-arrow">[Camunda 8 Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)</p>
-
-### Elasticsearch index sizing and replication
-
-<!-- https://github.com/camunda/camunda-docs/pull/9809 -->
-
-New comprehensive Elasticsearch configuration documentation explains how to:
-
-- Size your Elasticsearch cluster for Camunda 8 workloads.
-- Configure index replicas to achieve fault‑tolerant indices in multi‑node clusters.
-- Adjust retention and rollover intervals to avoid oversharding while meeting your data‑retention requirements.
-
-This documentation helps Self‑Managed customers:
-
-- Avoid oversharding (too many shards per node).
-- Prevent index unavailability and related Operate/Tasklist errors.
-- Reduce Elasticsearch‑related incidents in production.
-
-<p class="link-arrow">[Install Camunda for production with Helm](/self-managed/deployment/helm/install/production/index.md)</p>
-
-### Helm migration and validation tool
-
-<!-- https://github.com/camunda/product-hub/issues/3563 -->
-
-The new Helm migration and validation tool can help you upgrade from Camunda 8.9 to 8.10 on Kubernetes with Helm.
-
-Use the tool to:
-
-- Read your existing 8.9 Helm values (for example, values.yaml).
-- Generate a sample 8.10 values file reflecting:
-  - Helm 4-only support.
-  - Bitnami sub‑charts removal.
-  - Hub‑aware deployment patterns.
-  - Simplified application configuration.
-- Produce a migration report that:
-  - Lists the keys that were migrated automatically.
-  - Flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options).
-  - Suggests where to find more information in the documentation.
-  - Can validate an existing 8.10 values file (for example, one drafted by hand or by an AI tool) against Camunda’s migration rules.
-
-The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
-
-### IRSA Document store support
-
-<!-- https://github.com/camunda/product-hub/issues/3388 -->
-
-Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA) with the AWS S3 document store:
-
-- You can deploy Camunda 8 on Amazon EKS with the document store configured for S3 without providing static AWS credentials.
-- The Helm chart no longer requires AWS access keys when IRSA is in use and allows pods to rely solely on their IAM role for S3 access.
-- Existing deployments using static AWS keys can migrate to IRSA following documented steps.
-
-Refer to the updated Helm configuration and secret management documentation for:
-
-- Enabling IRSA for new EKS deployments using the AWS document store.
-- Safely migrating existing deployments from static AWS keys to IRSA.
-
-<p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
-
-### REST API, RDBMS, and Document Store support for physical tenants
-
-<!-- https://github.com/camunda/product-hub/issues/3639 -->
-
-Support for physical tenant isolation in 8.10 is added for the Camunda 8 REST API, RDBMS storage, and Document Store.
-
-### Docker images
-
-<!-- https://github.com/camunda/camunda/issues/50159 -->
-
-Camunda no longer produces the following Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
-
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
-- [camunda/operate](https://hub.docker.com/r/camunda/operate)
-- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
-
-Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
 
 ### Helm v4 required
 
@@ -564,7 +505,24 @@ orchestration:
   hostNetwork: true
 ```
 
-For details, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
+<p class="link-arrow">[Configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md)</p>
+
+### IRSA Document store support
+
+<!-- https://github.com/camunda/product-hub/issues/3388 -->
+
+Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA) with the AWS S3 document store:
+
+- You can deploy Camunda 8 on Amazon EKS with the document store configured for S3 without providing static AWS credentials.
+- The Helm chart no longer requires AWS access keys when IRSA is in use and allows pods to rely solely on their IAM role for S3 access.
+- Existing deployments using static AWS keys can migrate to IRSA following documented steps.
+
+Refer to the updated Helm configuration and secret management documentation for:
+
+- Enabling IRSA for new EKS deployments using the AWS document store.
+- Safely migrating existing deployments from static AWS keys to IRSA.
+
+<p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
 
 ## Integrations
 
@@ -876,6 +834,18 @@ With this, you can configure setups such as:
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Admin">Admin</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
 
+### Docker images
+
+<!-- https://github.com/camunda/camunda/issues/50159 -->
+
+Camunda no longer produces the following Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
+
 ### Centralized Secret Resolution via Zeebe
 
 <!-- https://github.com/camunda/product-hub/issues/3040 -->
@@ -1121,6 +1091,24 @@ What's included:
 ## Secondary storage
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
+
+### Elasticsearch index sizing and replication
+
+<!-- https://github.com/camunda/camunda-docs/pull/9809 -->
+
+New comprehensive Elasticsearch configuration documentation explains how to:
+
+- Size your Elasticsearch cluster for Camunda 8 workloads.
+- Configure index replicas to achieve fault‑tolerant indices in multi‑node clusters.
+- Adjust retention and rollover intervals to avoid oversharding while meeting your data‑retention requirements.
+
+This documentation helps Self‑Managed customers:
+
+- Avoid oversharding (too many shards per node).
+- Prevent index unavailability and related Operate/Tasklist errors.
+- Reduce Elasticsearch‑related incidents in production.
+
+<p class="link-arrow">[Install Camunda for production with Helm](/self-managed/deployment/helm/install/production/index.md)</p>
 
 ### Elasticsearch 9.x and OpenSearch 3.x support
 
