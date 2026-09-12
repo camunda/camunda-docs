@@ -1,7 +1,7 @@
 ---
 id: index
 title: "Amazon ECS"
-description: "Run the Camunda 8 Orchestration Cluster and Connectors in Amazon Elastic Container Service."
+description: "Run the Camunda 8 Orchestration Cluster, Connectors, Management Identity, and Camunda Hub in Amazon Elastic Container Service."
 ---
 
 import AoGrid from "@site/docs/components/react-components/\_ao-card.js";
@@ -18,7 +18,7 @@ Get started with Amazon ECS and Fargate:
 
 ## Learn the fundamentals
 
-This deployment targets a single AWS Region with multiple Availability Zones, running the Orchestration Cluster and Connectors on Amazon ECS with Fargate.
+This deployment targets a single AWS Region with multiple Availability Zones, running the Orchestration Cluster and Connectors on Amazon ECS with Fargate. You can additionally deploy Management Identity and Camunda Hub by switching the deployment to OIDC authentication.
 
 Other dependencies include:
 
