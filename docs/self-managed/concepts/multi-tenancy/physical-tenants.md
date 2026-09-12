@@ -7,9 +7,11 @@ description: "Physical Tenants enable strong data isolation and independent mana
 
 A Physical Tenant is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each with fully isolated data, its own partition group, and independent lifecycle management.
 
-Isolation covers data and management, not compute. Physical Tenants share the cluster's brokers and gateways, so runtime interference between tenants is reduced but not eliminated. See [what is not isolated](/self-managed/concepts/physical-tenants/index.md#what-is-not-isolated-in-810).
+Isolation covers data and management, not compute. Physical Tenants share the cluster's brokers and gateways, so runtime interference between tenants is reduced but not eliminated. See [what is not isolated](/self-managed/concepts/physical-tenants/index.md#what-is-not-isolated).
 
 Physical Tenants provide a balanced approach to multi-tenancy. They offer strong isolation without the operational complexity and cost of running separate clusters. See [multi-tenancy overview](index.md) to compare isolation models.
+
+![Two Physical Tenants, payments and lending, each with its own database, identity provider, backup and restore, and web apps, running inside one Orchestration Cluster. Logical Tenants remain available inside each Physical Tenant.](./img/physical-tenant-summary.png)
 
 ## Why Physical Tenants
 
@@ -70,6 +72,8 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 ## Learn more
 
 For detailed technical information about isolation model, architecture, and storage configuration, see [physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
+
+To set up a second isolated Physical Tenant end to end, see [set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md).
 
 For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
 
