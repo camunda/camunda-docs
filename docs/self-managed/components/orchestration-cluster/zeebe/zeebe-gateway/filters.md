@@ -203,42 +203,43 @@ depends on a different version of a class than the one provided by Zeebe, you ca
 
 ## Troubleshooting
 
-Here we describe a few common errors to help you recognize
-these situations and provide a solution. Generally, the gateway will not be
-able to start up with a misconfigured filter.
+The gateway won't start with a misconfigured filter. The following errors identify what went wrong and how to fix it.
 
 :::note
-Environment variables can overwrite your gateway configuration file.
-The gateway logs the configuration it uses during start-up; use this to
-verify your configuration.
+Environment variables can overwrite your gateway configuration file. The gateway logs the configuration it uses during startup, use this to verify your configuration.
 :::
 
-### java.lang.ClassNotFoundException
+### `java.lang.ClassNotFoundException`
 
-Your `Filter` implementation could
-not be found. Ensure you've configured the `className` correctly in the
-[gateway configuration](#loading-a-filter-into-a-gateway) and your
-[JAR contains your class](#packaging-a-filter).
+**Observed behavior:** The gateway fails to start and logs `java.lang.ClassNotFoundException` for your filter class.
 
-### io.camunda.zeebe.gateway.rest.impl.filters.FilterLoadException
+**Why this happens:** Your `Filter` implementation couldn't be found on the classpath.
 
-Something went wrong trying to load your filter. Ensure your [JAR is packaged](#packaging-a-filter) correctly. For example, ensure it contains all runtime
-dependencies and specifies them in the manifest file's classpath. The exception
-should provide a clear description, but generally we distinguish the following
-common cases:
+**How to fix:** Confirm the `className` is configured correctly in the [gateway configuration](#loading-a-filter-into-a-gateway), and that your [JAR contains your class](#packaging-a-filter).
 
-**\*Unable to instantiate your class**
+### `io.camunda.zeebe.gateway.rest.impl.filters.FilterLoadException`
 
-Ensure your class adheres to the [requirements described above](#implementing-a-filter).
+**Observed behavior:** The gateway fails to start and logs `FilterLoadException`.
 
-**The JAR could not be loaded**
+**Why this happens:** Something went wrong loading your filter. The exception message describes the specific cause, but the two common ones are:
 
-Ensure you've configured your filter correctly in the [gateway configuration](#loading-a-filter-into-a-gateway).
+- **Unable to instantiate your class**: your class doesn't meet the [filter requirements](#implementing-a-filter).
+- **The JAR could not be loaded**: the filter isn't configured correctly in the [gateway configuration](#loading-a-filter-into-a-gateway), or the [JAR isn't packaged correctly](#packaging-a-filter) (for example, missing runtime dependencies in the manifest's classpath).
 
-### io.camunda.zeebe.util.jar.ExternalJarLoadException
+**How to fix:** Match the specific cause in the exception message to the list above, then apply the corresponding fix.
 
-The JAR could not be loaded. Ensure you've configured your filter correctly in the [gateway configuration](#loading-a-filter-into-a-gateway).
+### `io.camunda.zeebe.util.jar.ExternalJarLoadException`
 
-### java.lang.UnsupportedClassVersionError
+**Observed behavior:** The gateway fails to start and logs `ExternalJarLoadException`.
 
-Your filter has been compiled by a more recent version of the Java Runtime. Ensure your [class is compiled](#packaging-a-filter) with JDK 21.
+**Why this happens:** The JAR itself couldn't be loaded.
+
+**How to fix:** Confirm your filter is configured correctly in the [gateway configuration](#loading-a-filter-into-a-gateway).
+
+### `java.lang.UnsupportedClassVersionError`
+
+**Observed behavior:** The gateway fails to start and logs `UnsupportedClassVersionError`.
+
+**Why this happens:** Your filter was compiled with a more recent Java Runtime version than the gateway supports.
+
+**How to fix:** Recompile your [class](#packaging-a-filter) with JDK 21.

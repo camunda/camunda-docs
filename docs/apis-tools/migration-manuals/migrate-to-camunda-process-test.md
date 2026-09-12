@@ -597,4 +597,4 @@ When you’re ready, take the next steps to continue your journey:
 
 ## Troubleshooting
 
-If you encounter issues with the migration or notice missing features, please report them in the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).
+If you encounter issues with the migration or notice missing features, report them in the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).
