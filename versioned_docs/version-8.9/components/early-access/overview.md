@@ -39,3 +39,21 @@ These features may be unstable, and subject to significant changes or removal.
 | <b>Available on</b>                | SaaS/Self-Managed                                                                                |
 | <b>Release cycle</b>               | Outside the standard [release policy](/reference/announcements-release-notes/release-policy.md). |
 | <b>Admin/owner access required</b> | Yes                                                                                              |
+
+
+## Early access release
+An Early access release is the release of a new product. By testing this release, you have the opportunity to participate in their development by sharing feedback before they reach [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
+
+## What to expect
+
+|                                    |                                                                                    |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------ |
+| <b>Purpose</b>                     | Test maturity of a new product before GA                                                         |
+| <b>Suitable for production use</b> | No                                                                                               |
+| <b>Stability</b>                   | APIs, dependencies, and configuration are likely to change.                                      |
+| <b>Feature complete</b>            | No                                                                                               |
+| <b>Documentation</b>               | May have some documentation.                                                                     |
+| <b>Updates</b>                     | No guaranteed updates to newer releases, but likely to continue development.                     |
+| <b>Support</b>                     | Support on best efforts.                                                                         |
+| <b>Maintenance service</b>         | No                                                                                               |
+| <b>Release cycle</b>               | Outside the standard [release policy](/reference/announcements-release-notes/release-policy.md). |
