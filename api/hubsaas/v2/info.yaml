@@ -14,7 +14,7 @@ paths:
       description: >
         Returns metadata about the V2 API, including the API version and the
         organization authorized by the caller's credentials.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Info
       responses:

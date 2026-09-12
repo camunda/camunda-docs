@@ -12,7 +12,7 @@ paths:
       operationId: createProject
       summary: Create a project
       description: Creates a new empty project in the specified workspace.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-provider:
         - projectKey
       tags:
@@ -44,7 +44,7 @@ paths:
       operationId: getProject
       summary: Get a project
       description: Returns the project metadata and its content (child folders and files).
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Project
         bind:
@@ -75,7 +75,7 @@ paths:
       operationId: updateProject
       summary: Update a project
       description: Updates the name and/or workspace of an existing project.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Project
         bind:
@@ -127,7 +127,7 @@ paths:
         recently deleted state and can be recovered during the retention
         window. To permanently and irreversibly remove a project, use
         `DELETE /projects/{projectKey}/permanent` instead.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Project
         bind:
@@ -168,7 +168,7 @@ paths:
         its ancestor workspace was soft-deleted), then the operation
         fails with 409. Instead, delete the original target of the
         soft-delete operation.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Project
       parameters:
@@ -201,7 +201,7 @@ paths:
       operationId: searchProjects
       summary: Search projects
       description: Returns projects matching the given search criteria across all workspaces in the caller's organization.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Project
       requestBody:
@@ -241,7 +241,7 @@ paths:
         retention period expires and the scheduled cleanup job runs; they can
         also be restored with `POST /projects/{projectKey}/restoration` or
         permanently removed with `DELETE /projects/{projectKey}/permanent`.
-      x-added-in-version: "0.4.0"
+      x-added-in-version: "8.10"
       tags:
         - Project
       requestBody:
@@ -278,7 +278,7 @@ paths:
         restored via this endpoint; a project that was soft-deleted as part
         of its workspace's deletion event must be restored through the
         workspace restoration endpoint instead.
-      x-added-in-version: "0.4.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Project
         bind:

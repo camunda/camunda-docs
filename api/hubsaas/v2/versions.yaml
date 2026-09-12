@@ -14,7 +14,7 @@ paths:
       description: >
         Creates a new version by taking a snapshot of the current content of the
         specified file.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-provider:
         - versionKey
       tags:
@@ -49,7 +49,7 @@ paths:
       summary: Get a version
       description: >
         Returns the version metadata and the file content at that version.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Version
         bind:
@@ -80,7 +80,7 @@ paths:
       operationId: updateVersion
       summary: Update a version
       description: Updates the name of an existing version.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Version
         bind:
@@ -121,7 +121,7 @@ paths:
       operationId: deleteVersion
       summary: Delete a version
       description: Deletes the specified version.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Version
         bind:
@@ -150,7 +150,7 @@ paths:
       summary: Search versions
       description: >
         Returns versions matching the given search criteria.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Version
       requestBody:
@@ -181,9 +181,12 @@ paths:
       summary: Restore a version
       description: >
         Restores the file content to the state captured in this version. A new
-        version is created representing the restored state. For element template
-        files, the request body must include the target version number.
-      x-added-in-version: "0.1.0"
+        version is created representing the restored state, unless both the
+        file's live content and its most recent version already match that
+        exact content, in which case that version is returned and nothing is
+        created. For element template files, the request body must include the
+        target version number and a new version is always created.
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Version
         bind:
@@ -202,7 +205,10 @@ paths:
               $ref: "#/components/schemas/VersionRestorationRequest"
       responses:
         "200":
-          description: The version was restored successfully. Returns the newly created version.
+          description: >
+            The version was restored successfully. Returns the newly created version, or the file's
+            most recent version when both that version and the file's live content already matched
+            this content.
           content:
             application/json:
               schema:
