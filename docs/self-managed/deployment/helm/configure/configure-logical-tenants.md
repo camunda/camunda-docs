@@ -88,3 +88,20 @@ orchestration:
 :::warning
 Disabling multi-tenancy after it has been enabled can cause unexpected behavior if active tenants exist.
 :::
+
+## End-to-end example: assign users to a tenant via mapping rules
+
+Enabling tenant checks controls whether tenant membership is enforced, but doesn't assign anyone to a tenant. To assign users automatically as they log in (rather than one by one), combine a tenant with a mapping rule.
+
+**Scenario:** Users whose access token contains the `groups` claim with value `finance-team` should automatically get access to a `finance` tenant.
+
+1. Enable multi-tenancy checks in the Orchestration Cluster Admin, as shown above.
+2. [Create the `finance` tenant](/components/admin/tenant.md#create-a-tenant).
+3. [Create a mapping rule](/components/admin/mapping-rules.md#create-a-mapping-rule) matching the claim:
+   - **Claim name**: `groups`
+   - **Claim value**: `finance-team`
+4. [Assign the mapping rule to the `finance` tenant](/components/admin/tenant.md#assign-mapping-rules-to-a-tenant).
+
+Once assigned, any user or client presenting a token with `groups` containing `finance-team` is automatically treated as a member of the `finance` tenant, without a manual per-user assignment step.
+
+This uses mapping rules in the Orchestration Cluster Admin, which are distinct from [mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md) (which instead control access to Console, Optimize, and Web Modeler). See [mapping rules](/components/concepts/access-control/mapping-rules.md) for how the two relate.

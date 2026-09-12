@@ -91,6 +91,18 @@ Some providers, such as Keycloak, may not include the appropriate audience by de
 
 For a complete list of common claim patterns by provider, see [JWT token claims reference](./jwt-token-claims.md#common-claim-patterns-by-provider).
 
+## TLS handshake failure connecting to the IdP
+
+**Observed behavior:** Identity or another component fails to reach the OIDC provider, and logs show an error similar to:
+
+```text
+javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+```
+
+**Why this happens:** Your OIDC provider's certificate (or the internal Keycloak instance's certificate) is signed by a private or internal certificate authority that isn't in the JVM truststore Camunda components use by default.
+
+**How to fix:** Add your CA to the trust bundle Camunda components use to validate the connection. See [configure TLS](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) for the Helm chart's `global.tls.caBundle` overlay, which covers this exact scenario.
+
 ## Pods not starting
 
 **Observed behavior:** Pods remain in `Pending`, `CrashLoopBackOff`, or `Error` states.
