@@ -17,7 +17,7 @@ paths:
         user has not logged in yet, a workspace invitation is created and an
         email is sent instead, and the person becomes an actual member once
         they log in for the first time.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-establishes:
         kind: WorkspaceMemberMembership
         shape: edge
@@ -62,7 +62,7 @@ paths:
       operationId: removeMember
       summary: Remove a member
       description: Removes a member from the workspace.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: WorkspaceMemberMembership
         bind:
@@ -96,7 +96,7 @@ paths:
       description: >
         Returns members matching the given search criteria. A workspace key
         filter is required — members cannot be searched across workspaces.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Workspace
         bind:

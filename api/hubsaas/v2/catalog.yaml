@@ -43,7 +43,7 @@ paths:
         catalog. Unpublished assets are only accessible to administrators; regular modeling users cannot use them for
         new diagram elements anymore. Existing diagrams using assets that get unpublished will continue to work as
         before.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Catalog
       requestBody:
@@ -69,7 +69,7 @@ paths:
       operationId: deleteCatalogAsset
       summary: Delete a catalog asset
       description: Deletes the catalog asset with the given asset key.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Catalog
       parameters:
@@ -91,7 +91,7 @@ paths:
       operationId: searchCatalogAssets
       summary: Search catalog assets
       description: Returns catalog assets matching the given search criteria.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Catalog
       requestBody:
@@ -113,6 +113,41 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /catalog/assets/{assetKey}/project-usages/search:
+    post:
+      operationId: searchCatalogAssetProjectUsages
+      summary: Search the projects using a catalog asset
+      description: |
+        Returns the projects that use the catalog asset with the given asset key, matching the given search criteria.
+      x-added-in-version: "8.10"
+      tags:
+        - Catalog
+      parameters:
+        - $ref: "#/components/parameters/AssetKeyPathParam"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CatalogAssetProjectUsageSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatalogAssetProjectUsageSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -335,5 +370,115 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/CatalogAssetResult"
+        page:
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    CatalogAssetProjectUsageSearchQuery:
+      type: object
+      properties:
+        page:
+          description: Pagination criteria. Supports offset-based pagination (from/limit) or a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/CatalogAssetProjectUsageSearchQuerySortRequest"
+        filter:
+          description: The project usage search filters.
+          allOf:
+            - $ref: "#/components/schemas/CatalogAssetProjectUsageFilter"
+
+    CatalogAssetProjectUsageSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+        order:
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    CatalogAssetProjectUsageFilter:
+      type: object
+      description: Filter criteria for searching the projects using a catalog asset.
+      properties:
+        projectKey:
+          description: Filter by project key.
+          x-semantic-type: ProjectKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        name:
+          description: Filter by project name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        workspaceKey:
+          description: Filter by workspace key.
+          x-semantic-type: WorkspaceKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        status:
+          description: >
+            Filter by per-project usage status. Supported values: `UP_TO_DATE`, `UPDATE_AVAILABLE`, `DEPRECATED`
+            (see the description of the `status` response field for their meaning).
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+
+    CatalogAssetProjectUsageResult:
+      type: object
+      required:
+        - projectKey
+        - name
+        - workspaceKey
+        - status
+        - usedVersions
+      properties:
+        projectKey:
+          description: The unique key identifying this project.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        name:
+          description: The name of the project.
+          type: string
+        workspaceKey:
+          description: The key of the workspace this project belongs to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+        status:
+          description: |
+            The project's usage status for the asset:
+
+            * `UP_TO_DATE`: The asset is active (= neither unpublished nor deprecated), and only its current latest version is used in the project.
+            * `UPDATE_AVAILABLE`: The asset is active, but at least one usage in the project is on an older version.
+            * `DEPRECATED`: The asset is unpublished, or its latest version is deprecated, but it is still used in the project. Takes priority over `UPDATE_AVAILABLE` (if an older, non-deprecated version is used).
+          type: string
+          enum:
+            - UP_TO_DATE
+            - UPDATE_AVAILABLE
+            - DEPRECATED
+        usedVersions:
+          description: The distinct version numbers of the asset that are in use within the project, in ascending order.
+          type: array
+          items:
+            type: integer
+            format: int64
+
+    CatalogAssetProjectUsageSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching projects using the asset.
+          type: array
+          items:
+            $ref: "#/components/schemas/CatalogAssetProjectUsageResult"
         page:
           $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

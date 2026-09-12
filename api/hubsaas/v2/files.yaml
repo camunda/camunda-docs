@@ -12,7 +12,7 @@ paths:
       operationId: createFile
       summary: Create a file
       description: Creates a new file in the specified project and folder.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-provider:
         - fileKey
         - revision
@@ -45,7 +45,7 @@ paths:
       operationId: getFile
       summary: Get a file
       description: Returns the file metadata and content for the given file key.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: File
         bind:
@@ -76,7 +76,7 @@ paths:
       operationId: updateFile
       summary: Update a file
       description: Updates the metadata and/or content of an existing file.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: File
         bind:
@@ -122,7 +122,7 @@ paths:
         and the scheduled cleanup job runs.
         To permanently and irreversibly remove a file, use
         `DELETE /files/{fileKey}/permanent` instead.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: File
         bind:
@@ -155,7 +155,7 @@ paths:
         snapshot data is preserved. The file cannot be recovered afterwards.
         This works in one step and does not require the file to be
         soft-deleted first.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - File
       parameters:
@@ -181,7 +181,7 @@ paths:
       operationId: searchFiles
       summary: Search files
       description: Returns files matching the given search criteria.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - File
       requestBody:
@@ -222,7 +222,7 @@ paths:
         job runs; they can also be restored with
         `POST /files/{fileKey}/restoration` or permanently removed with
         `DELETE /files/{fileKey}/permanent`.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - File
       requestBody:
@@ -260,7 +260,7 @@ paths:
         soft-deleted as part of an ancestor folder, project, or workspace's
         deletion event must be restored through the corresponding ancestor
         restoration endpoint instead.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: File
         bind:
@@ -310,7 +310,7 @@ paths:
         purge still removes any orphaned process application snapshot milestone
         references that point to the file by ID. Idempotent for files that never
         existed or have already been fully purged within the caller's organization.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - File
       parameters:
