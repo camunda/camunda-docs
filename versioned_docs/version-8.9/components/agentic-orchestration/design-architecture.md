@@ -108,3 +108,24 @@ For a how-to guide on adding tools, see [add tools to an AI agent](./add-tool-to
     <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions. This agent-to-agent pattern runs inside Camunda's [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), as one of the tools available to an agent. It is not the same as agentic orchestration itself, which is Camunda's overall model for orchestrating agents, people, and systems. With the [A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client.md) implements this pattern, an agent can call a remote agent using the Agent-to-Agent (A2A) protocol.</td>
 </tr>
 </table>
+
+#### Example: an agent that delegates to specialized agents
+
+Consider a support process where one agent receives an incoming request and delegates parts of it to other, more specialized agents rather than handling everything itself:
+
+- A **billing agent** with tools scoped to invoices, payments, and refunds.
+- A **technical agent** with tools scoped to diagnostics and troubleshooting.
+
+The receiving agent uses the [A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client.md) as a tool to call each specialized agent over the Agent-to-Agent (A2A) protocol, then combines their responses into a single result.
+
+```mermaid
+flowchart TB
+    Request([Support request]) --> Coordinator{{Coordinating agent}}
+    Coordinator -->|A2A Client connector| Billing[Billing agent]
+    Coordinator -->|A2A Client connector| Technical[Technical agent]
+    Billing --> Coordinator
+    Technical --> Coordinator
+    Coordinator --> Response([Combined response])
+```
+
+Splitting agents this way keeps each agent's tool set small and scoped to one domain, and lets specialized agents be reused across multiple processes.
