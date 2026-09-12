@@ -16,7 +16,7 @@ type SearchOwnAuthorizationsResponses = object;
 ### 200
 
 ```ts
-200: AuthorizationSearchResult;
+200: OwnAuthorizationSearchResult;
 ```
 
 The authorization search result.

@@ -243,6 +243,50 @@ async function getClusterStatusExample() {
 }
 //#endregion GetClusterStatus
 
+//#region TriggerClusterRebalance
+async function triggerClusterRebalanceExample() {
+  const camunda = createCamundaClient();
+
+  const balance = await camunda.triggerClusterRebalance({
+    replicationLagThreshold: 10_000_000,
+    maxTransferAttempts: 3,
+  });
+
+  console.log(`Cluster balance state: ${balance.state}`);
+  if (balance.runningRebalance) {
+    console.log(`Rebalance started: id=${balance.runningRebalance.rebalanceId}`);
+  }
+}
+//#endregion TriggerClusterRebalance
+
+//#region GetClusterRebalance
+async function getClusterRebalanceExample() {
+  const camunda = createCamundaClient();
+
+  const balance = await camunda.getClusterRebalance();
+
+  console.log(`Cluster balance state: ${balance.state}`);
+  for (const partition of balance.partitions) {
+    console.log(
+      `  Partition ${partition.partitionId}: state=${partition.state}, currentLeader=${partition.currentLeader}, desiredLeader=${partition.desiredLeader}`
+    );
+  }
+  if (balance.runningRebalance) {
+    console.log(`Running rebalance id=${balance.runningRebalance.rebalanceId}`);
+  }
+}
+//#endregion GetClusterRebalance
+
+//#region CancelClusterRebalance
+async function cancelClusterRebalanceExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.cancelClusterRebalance();
+
+  console.log(`Cancel requested; was a rebalance running? ${result.wasRunning}`);
+}
+//#endregion CancelClusterRebalance
+
 //#region PinClock
 async function pinClockExample() {
   const camunda = createCamundaClient();
@@ -590,6 +634,9 @@ void getSystemConfigurationExample;
 void getAuthenticationExample;
 void getStatusExample;
 void getClusterStatusExample;
+void triggerClusterRebalanceExample;
+void getClusterRebalanceExample;
+void cancelClusterRebalanceExample;
 void pinClockExample;
 void resetClockExample;
 void evaluateConditionalsExample;

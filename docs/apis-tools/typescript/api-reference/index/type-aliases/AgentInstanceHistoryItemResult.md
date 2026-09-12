@@ -58,11 +58,14 @@ The key of the AI Agent Task or ad-hoc sub-process element instance under which 
 ### historyItemId
 
 ```ts
-historyItemId: string;
+historyItemId: HistoryItemId;
 ```
 
 The client-supplied identifier this item was created with. Empty for items that don't
-carry one.
+carry one. Not unique: a job can be re-activated under a superseded lease any number
+of times before it completes, so one historyItemId can have zero or more DISCARDED
+records and at most one COMMITTED record, since only historyItemKey is guaranteed
+unique. Filter by commitStatus rather than assuming one record per historyItemId.
 
 ---
 
@@ -89,7 +92,7 @@ The key of the job activation during which this item was produced.
 ### jobLease
 
 ```ts
-jobLease: string;
+jobLease: JobLeaseToken;
 ```
 
 The lease token of the activation that produced this item.
