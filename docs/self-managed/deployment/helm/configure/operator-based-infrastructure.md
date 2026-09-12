@@ -365,7 +365,7 @@ The Keycloak deployment provides:
 
 - **Database integration**: Connects to CloudNativePG-managed PostgreSQL cluster
 - **Authentication path**: Configured to serve under `/auth` path prefix
-- **Flexible domain support**: Options for local development, [ingress-nginx](https://kubernetes.github.io/ingress-nginx/), or [OpenShift routes](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes)
+- **Flexible domain support**: Options for local development, [Contour](https://projectcontour.io/), or [OpenShift routes](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes)
 - **Resource optimization**: Sized appropriately for typical Camunda authentication loads
 - **Custom Ingress management**: Uses dedicated Ingress manifests integrated within the operator configuration for subpath management constraints
 
@@ -415,17 +415,17 @@ In certain setups, Keycloak is configured to use its service name as the hostnam
 :::
 
 </TabItem>
-  <TabItem value="domain-nginx" label="nginx-ingress">
+  <TabItem value="domain-contour" label="Contour">
 
-Production Keycloak instance with nginx-ingress.
+Production Keycloak instance with Contour.
 
-**Save as** `keycloak-instance-domain-nginx.yml`:
+**Save as** `keycloak-instance-domain-contour.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-contour.yml
 ```
 
-**Use case**: Production deployment with external domain using [nginx-ingress controller](https://kubernetes.github.io/ingress-nginx/).
+**Use case**: Production deployment with external domain using the [Contour Ingress controller](https://projectcontour.io/).
 
 </TabItem>
   <TabItem value="domain-openshift" label="OpenShift Route">
@@ -450,7 +450,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 3. **Review instance configuration**: `cat keycloak-instance-no-domain.yml` to verify Keycloak instance settings
 4. **Adapt configuration if needed**: Choose appropriate instance configuration for your setup:
    - `keycloak-instance-no-domain.yml` for local development
-   - `keycloak-instance-domain-nginx.yml` for nginx-ingress
+   - `keycloak-instance-domain-contour.yml` for Contour
    - `keycloak-instance-domain-openshift.yml` for OpenShift Routes
 5. **Execute deployment**: `./deploy.sh`
 
