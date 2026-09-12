@@ -292,6 +292,65 @@ To use the LSN replication monitoring with MSSQL, the database user must have th
   GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
   ```
 
+- Oracle with Data Guard
+- MySQL (does not support LSN monitoring at all)
+- Azure SQL Database (does not support LSN monitoring at all)
+
+### Time based replication monitoring
+
+The exporter monitors the replication lag to the secondary databases based on the reported replication lag from the
+primary replica. The exporter will only acknowledge records which have been exported before this lag time to a minimum
+quorum of secondary databases. The exporting will come to a stop when the lag time is exceeded and will only continue
+when the lag time is back within the configured limit.
+
+Note, that this strategy is not as precise as LSN replication monitoring and may lead to less frequent acknowledgements.
+It is recommended to use LSN replication monitoring whenever possible.
+
+```yaml
+camunda.data.secondary-storage.rdbms.async-replication.enabled: true
+camunda.data.secondary-storage.rdbms.async-replication.type: TIME_LAG
+camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
+```
+
+| Property name                                 | Description                                                                   | Default |
+| --------------------------------------------- | ----------------------------------------------------------------------------- | ------- |
+| `async-replication.enabled`                   | If the async replication monitoring should be enabled                         | false   |
+| `async-replication.min-sync-replicas`         | The minimum number of replicas in sync                                        | 1       |
+| `async-replication.polling-interval`          | The interval in which to check the replicas                                   | PT15S   |
+| `async-replication.max-lag`                   | The max tolerated lag of a replication (ISO-8601 duration)                    | PT15M   |
+| `async-replication.pause-on-max-lag-exceeded` | If the exporter should pause exporting when the maximum lag limit is exceeded | false   |
+
+#### Vendor support
+
+The following databases are supported for time lag replication monitoring:
+
+- Aurora Global Database with PostgreSQL
+- Aurora Global Database with MySQL
+- MSSQL
+- PostgreSQL
+
+To use the time lag replication monitoring with PostgreSQL, the database user must have the following additional privileges:
+
+- `PG_MONITOR` role
+
+```sql
+GRANT PG_MONITOR TO <user>;
+```
+
+To use the time lag replication monitoring with MSSQL, the database user must have the following additional privileges:
+
+- `VIEW SERVER STATE` role on SQL Server 2019 and earlier versions
+
+  ```sql
+  GRANT VIEW SERVER STATE TO <user>;
+  ```
+
+- `VIEW SERVER PERFORMANCE STATE` role on SQL Server 2022 and newer versions
+
+  ```sql
+  GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
+  ```
+
 ### Delay backoff replication monitoring
 
 The exporter always waits for a configured amount of time until an exported record is acknowledged to the broker as exported. This is supported for all databases.
@@ -318,13 +377,13 @@ camunda.data.secondary-storage.rdbms.async-replication.type: DELAY
 | `async-replication.queue-capacity`      | Size of the internal queue of record positions to acknowledge                     | 8192    |
 | `async-replication.queue-debounce-time` | A debounce time to not add every record to the queue but only one every X seconds | PT5S    |
 
-## Usage with AWS Aurora PostgreSQL
+## Usage with AWS Aurora PostgreSQL / MySQL
 
-Camunda supports **PostgreSQL** as a secondary storage backend. AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and works when configured like a standard PostgreSQL database.
+Camunda supports **PostgreSQL** and **MySQL** as secondary storage backends. AWS Aurora PostgreSQL and AWS Aurora MySQL are compatible managed services and work when you configure them like standard PostgreSQL or MySQL databases.
 
-In addition to the standard PostgreSQL JDBC driver, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
+In addition to the standard PostgreSQL and MySQL JDBC drivers, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
 
-To use the AWS JDBC wrapper, configure the JDBC URL as follows:
+To use the AWS JDBC wrapper with an Aurora PostgreSQL database, configure the JDBC URL for your Aurora engine:
 
 ```yaml
 camunda:
@@ -332,7 +391,20 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda
+        url: jdbc:aws-wrapper:postgresql://aurora-postgresql-host:5432/camunda
+        username: camunda
+        password: camunda
+```
+
+To use the AWS JDBC wrapper with an Aurora MySQL database, configure the JDBC URL for your Aurora engine:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:mysql://aurora-mysql-host:3306/camunda
         username: camunda
         password: camunda
 ```
@@ -350,6 +422,22 @@ camunda:
         url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam
         username: camunda
 ```
+
+The AWS JDBC wrapper supports automatic failover detection when using Aurora GlobalDB.
+
+To use automatic failover detection, enable the corresponding wrapper plugin and optionally configure a failover timeout:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover
+```
+
+In addition, you can override the default failoverTimeoutMs (60 seconds) by adding the `failoverTimeoutMs` parameter to
+the JDBC URL: `jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover&failoverTimeoutMs=30000`.
 
 The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.
 
