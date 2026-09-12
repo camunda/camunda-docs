@@ -146,6 +146,40 @@ async fn escape_hatch() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+async fn handler_wait() -> Result<(), Box<dyn std::error::Error>> {
+    // region HandlerWait
+    use camunda_orchestration_sdk::{CamundaClient, JobAction, JobWorkerConfig};
+    use std::time::Duration;
+
+    let client = CamundaClient::from_env()?;
+    client
+        .create_job_worker(JobWorkerConfig::new("payment"))
+        .run(|job| async move {
+            // Short coordination only -- a business wait belongs in the process
+            // as a BPMN timer event.
+            job.clock().sleep(Duration::from_millis(500)).await;
+            JobAction::complete()
+        })
+        .await?;
+    // endregion HandlerWait
+    Ok(())
+}
+
+async fn engine_clock() -> Result<(), Box<dyn std::error::Error>> {
+    // region EngineClockSetup
+    use camunda_orchestration_sdk::{CamundaClient, CamundaOptions, Clock, EngineClock};
+    use std::sync::Arc;
+
+    // The control client issues the pin requests, and keeps real time itself.
+    let control = CamundaClient::from_env()?;
+    let clock: Arc<dyn Clock> = Arc::new(EngineClock::new(Arc::new(control)));
+
+    // Anything this client waits on now advances the engine instead of real time.
+    let client = CamundaClient::new(CamundaOptions::new().with_clock(clock))?;
+    // endregion EngineClockSetup
+    let _ = client;
+    Ok(())
+}
 fn main() {
     // The examples above are compiled but not executed; they document the README.
 }
