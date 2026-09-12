@@ -35,5 +35,6 @@ front channel single sign out is not supported. This means that when a user logs
 - [External IdP via Internal Keycloak guide](./external-idp-via-internal-keycloak.md)
 - [External Keycloak guide](./external-keycloak.md)
 - [Microsoft Entra guide](./microsoft-entra.md)
+- [Ping Identity guide](./ping-identity.md)
 - [Generic OIDC provider](./generic-oidc-provider.md)
 - Management Identity: [Configure an external IdP using Keycloak](/self-managed/components/management-identity/configuration/configure-external-identity-provider.md)

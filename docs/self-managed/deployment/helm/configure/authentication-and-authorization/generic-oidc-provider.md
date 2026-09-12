@@ -136,6 +136,30 @@ If `offline_access` is not available or not granted, users will be redirected to
 For more information, see [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
 :::
 
+## Handle separate access token and ID token signing keys
+
+Most OIDC providers sign access tokens and ID tokens with the same key, published at the single `jwks_uri` in the discovery document. Some enterprise identity provider deployments use a separate signing key for access tokens (validated by Camunda on every API request) than for ID tokens (validated only during the login callback). If your provider does this and you configure only the discovery document's `jwksUrl`, access token validation fails even though login succeeds.
+
+Check your provider's admin console for a distinct access token signing key or certificate, separate from the one used for OpenID Connect / ID tokens. If your provider exposes a separate JWKS endpoint for access tokens, configure both:
+
+- Set `global.identity.auth.jwksUrl` to the **access token** JWKS endpoint. Management Identity validates access tokens using this single URL only — it does not call the userinfo endpoint or fall back to any other source.
+- Add the same URL as an additional JWKS source for the Orchestration Cluster, which otherwise only fetches the primary JWKS from the discovery document:
+
+  ```yaml
+  orchestration:
+    env:
+      - name: CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ADDITIONALJWKSETURIS_0_
+        value: "<access-token-jwks-url>"
+  ```
+
+  There is no dedicated Helm value for this setting — it maps directly to the Spring Boot property `camunda.security.authentication.oidc.additionalJwkSetUris` (a list), set via `orchestration.env` using Spring's relaxed-binding convention for list properties: one environment variable per index, with the index surrounded by underscores (`..._0_`, `..._1_`, and so on).
+
+The Orchestration Cluster merges keys from the primary JWKS endpoint and all additional endpoints, and selects whichever key matches the `kid` in the incoming token — so both ID tokens and access tokens validate correctly regardless of which key set signed them.
+
+:::tip
+If you're not sure whether your provider uses separate keys, compare the `jwks_uri` in the discovery document against the JWKS endpoint listed for access tokens (or API/runtime tokens) in your provider's admin console. If they're the same URL, you can skip this section.
+:::
+
 ## Create secrets
 
 Create two secrets in your Kubernetes namespace.
