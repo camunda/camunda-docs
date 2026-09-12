@@ -1,0 +1,721 @@
+---
+id: restore-as-cluster-admin
+title: "Restore one or every physical tenant from a backup"
+sidebar_label: "Restore one or every physical tenant from a backup"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Restore one or every physical tenant from a backup"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/cluster/v2/restore"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Restores physical tenants from backups. The restore is described either by a list of backup IDs or by a time range (`from`/`to`) that selects the backups to restore. Restores are only accepted while the targeted physical tenants are in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.
+
+If the `physicalTenantId` parameter is provided, only that physical tenant is restored and `overrides` must be omitted.
+
+If it is not provided, every physical tenant of the cluster is restored: those named in `overrides` with their own backup selection, all others with the selection at the top level of the request body.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "physicalTenantId",
+      in: "query",
+      required: false,
+      description:
+        "The physical tenant to apply the change to. When omitted, the change is applied to every physical tenant of the cluster.",
+      schema: { type: "string", example: "default" },
+    },
+    {
+      name: "dryRun",
+      in: "query",
+      required: false,
+      description:
+        "If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.",
+      schema: { type: "boolean", default: false },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "Describes a restore request issued by a cluster admin. The backup selection at the top level applies to every targeted physical tenant, except for the ones listed in `overrides`.",
+          type: "object",
+          allOf: [
+            {
+              description:
+                "Describes a restore request. Provide either a list of backup IDs or a time range (`from`/`to`) that selects the backups to restore; the two are mutually exclusive.",
+              type: "object",
+              properties: {
+                from: {
+                  description:
+                    "The start of the time range to restore from, as an ISO 8601 timestamp.",
+                  type: "string",
+                  format: "date-time",
+                  nullable: true,
+                  example: "2024-01-01T10:00:00Z",
+                },
+                to: {
+                  description:
+                    "The end of the time range to restore from, as an ISO 8601 timestamp.",
+                  type: "string",
+                  format: "date-time",
+                  nullable: true,
+                  example: "2024-01-01T12:00:00Z",
+                },
+                backupIds: {
+                  description:
+                    "The IDs of the backups to restore from, one per partition.",
+                  type: "array",
+                  nullable: true,
+                  items: { type: "integer", format: "int64" },
+                  example: [100, 101],
+                },
+              },
+              title: "RestoreRequest",
+            },
+          ],
+          properties: {
+            overrides: {
+              description:
+                "The backup selection to apply to individual physical tenants, keyed by physical tenant id. Only allowed for a cluster-wide restore, that is when no `physicalTenantId` parameter is given.",
+              type: "object",
+              nullable: true,
+              additionalProperties: {
+                description:
+                  "Describes a restore request. Provide either a list of backup IDs or a time range (`from`/`to`) that selects the backups to restore; the two are mutually exclusive.",
+                type: "object",
+                properties: {
+                  from: {
+                    description:
+                      "The start of the time range to restore from, as an ISO 8601 timestamp.",
+                    type: "string",
+                    format: "date-time",
+                    nullable: true,
+                    example: "2024-01-01T10:00:00Z",
+                  },
+                  to: {
+                    description:
+                      "The end of the time range to restore from, as an ISO 8601 timestamp.",
+                    type: "string",
+                    format: "date-time",
+                    nullable: true,
+                    example: "2024-01-01T12:00:00Z",
+                  },
+                  backupIds: {
+                    description:
+                      "The IDs of the backups to restore from, one per partition.",
+                    type: "array",
+                    nullable: true,
+                    items: { type: "integer", format: "int64" },
+                    example: [100, 101],
+                  },
+                },
+                title: "RestoreRequest",
+              },
+              example: { "tenant-a": { backupIds: [55] } },
+            },
+          },
+          title: "ClusterRestoreRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description:
+        "The restore request was accepted; returns the planned cluster change covering every requested physical tenant.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The planned changes resulting from a restore request.",
+            type: "object",
+            required: ["changeId", "plannedChanges"],
+            properties: {
+              changeId: {
+                description:
+                  "The ID of the cluster change that was triggered by the request.",
+                type: "string",
+                example: "7",
+              },
+              plannedChanges: {
+                description:
+                  "The operations that will be applied to complete the restore, grouped by the physical tenant they belong to. Groups are restored in parallel; the operations within a group are applied in the given order.",
+                type: "array",
+                items: {
+                  description:
+                    "The operations of a restore that apply to one physical tenant.",
+                  type: "object",
+                  required: ["physicalTenantId", "operations"],
+                  properties: {
+                    physicalTenantId: {
+                      description:
+                        "The physical tenant the operations apply to; null for operations that are not scoped to a single physical tenant, such as broker lifecycle operations.",
+                      type: "string",
+                      nullable: true,
+                      example: "default",
+                    },
+                    operations: {
+                      description:
+                        "The ordered list of operations that will be applied to the physical tenant.",
+                      type: "array",
+                      items: {
+                        description:
+                          "A single operation that is part of a restore. Every operation names the broker that applies it; the rest of its properties depend on what the operation does, so it is reported as one of the variants below, distinguished by `operation`. A property a variant does not declare is absent from the response rather than reported as null.",
+                        discriminator: {
+                          propertyName: "operation",
+                          mapping: {
+                            PartitionPreRestoreOperation: {
+                              description:
+                                "A restore operation that targets a single partition without restoring it, such as the one that prepares the partition for its restore.",
+                              type: "object",
+                              required: [
+                                "operation",
+                                "brokerId",
+                                "partitionId",
+                              ],
+                              properties: {
+                                operation: {
+                                  description: "The type of the operation.",
+                                  type: "string",
+                                  example: "PartitionPreRestoreOperation",
+                                },
+                                brokerId: {
+                                  description:
+                                    "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                  type: "string",
+                                  example: "1",
+                                },
+                                partitionId: {
+                                  description:
+                                    "The partition the operation applies to.",
+                                  type: "integer",
+                                  format: "int32",
+                                  example: 1,
+                                },
+                              },
+                              title: "ClusterRestorePartitionOperation",
+                            },
+                            PartitionRestoreOperation: {
+                              description:
+                                "The operation that restores a single partition from the backups resolved for it.",
+                              type: "object",
+                              required: [
+                                "operation",
+                                "brokerId",
+                                "partitionId",
+                                "backupIds",
+                              ],
+                              properties: {
+                                operation: {
+                                  description: "The type of the operation.",
+                                  type: "string",
+                                  example: "PartitionRestoreOperation",
+                                },
+                                brokerId: {
+                                  description:
+                                    "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                  type: "string",
+                                  example: "1",
+                                },
+                                partitionId: {
+                                  description:
+                                    "The partition the operation restores.",
+                                  type: "integer",
+                                  format: "int32",
+                                  example: 1,
+                                },
+                                backupIds: {
+                                  description:
+                                    "The IDs of the backups the partition is restored from.",
+                                  type: "array",
+                                  items: { type: "integer", format: "int64" },
+                                  example: [100, 101],
+                                },
+                              },
+                              title: "ClusterRestorePartitionRestoreOperation",
+                            },
+                            ModeChangeOperation: {
+                              description:
+                                "The operation that transitions a broker to a mode once its partitions are restored.",
+                              type: "object",
+                              required: ["operation", "brokerId", "mode"],
+                              properties: {
+                                operation: {
+                                  description: "The type of the operation.",
+                                  type: "string",
+                                  example: "ModeChangeOperation",
+                                },
+                                brokerId: {
+                                  description:
+                                    "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                  type: "string",
+                                  example: "1",
+                                },
+                                mode: {
+                                  description:
+                                    "The mode the broker is transitioned to.",
+                                  type: "string",
+                                  example: "PROCESSING",
+                                },
+                              },
+                              title: "ClusterRestoreModeChangeOperation",
+                            },
+                            AwaitModeChangeOperation: {
+                              description:
+                                "The operation that awaits the transition of a broker to a mode.",
+                              type: "object",
+                              required: ["operation", "brokerId", "mode"],
+                              properties: {
+                                operation: {
+                                  description: "The type of the operation.",
+                                  type: "string",
+                                  example: "AwaitModeChangeOperation",
+                                },
+                                brokerId: {
+                                  description:
+                                    "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                  type: "string",
+                                  example: "1",
+                                },
+                                mode: {
+                                  description:
+                                    "The mode the broker is awaited to have transitioned to.",
+                                  type: "string",
+                                  example: "PROCESSING",
+                                },
+                              },
+                              title: "ClusterRestoreAwaitModeChangeOperation",
+                            },
+                            UpdateIncarnationNumberOperation: {
+                              description:
+                                "A restore operation that applies to a broker as a whole, such as the one that updates its incarnation number.",
+                              type: "object",
+                              required: ["operation", "brokerId"],
+                              properties: {
+                                operation: {
+                                  description: "The type of the operation.",
+                                  type: "string",
+                                  example: "UpdateIncarnationNumberOperation",
+                                },
+                                brokerId: {
+                                  description:
+                                    "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                  type: "string",
+                                  example: "1",
+                                },
+                              },
+                              title: "ClusterRestoreBrokerOperation",
+                            },
+                          },
+                        },
+                        oneOf: [
+                          {
+                            description:
+                              "A restore operation that applies to a broker as a whole, such as the one that updates its incarnation number.",
+                            type: "object",
+                            required: ["operation", "brokerId"],
+                            properties: {
+                              operation: {
+                                description: "The type of the operation.",
+                                type: "string",
+                                example: "UpdateIncarnationNumberOperation",
+                              },
+                              brokerId: {
+                                description:
+                                  "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                type: "string",
+                                example: "1",
+                              },
+                            },
+                            title: "ClusterRestoreBrokerOperation",
+                          },
+                          {
+                            description:
+                              "A restore operation that targets a single partition without restoring it, such as the one that prepares the partition for its restore.",
+                            type: "object",
+                            required: ["operation", "brokerId", "partitionId"],
+                            properties: {
+                              operation: {
+                                description: "The type of the operation.",
+                                type: "string",
+                                example: "PartitionPreRestoreOperation",
+                              },
+                              brokerId: {
+                                description:
+                                  "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                type: "string",
+                                example: "1",
+                              },
+                              partitionId: {
+                                description:
+                                  "The partition the operation applies to.",
+                                type: "integer",
+                                format: "int32",
+                                example: 1,
+                              },
+                            },
+                            title: "ClusterRestorePartitionOperation",
+                          },
+                          {
+                            description:
+                              "The operation that restores a single partition from the backups resolved for it.",
+                            type: "object",
+                            required: [
+                              "operation",
+                              "brokerId",
+                              "partitionId",
+                              "backupIds",
+                            ],
+                            properties: {
+                              operation: {
+                                description: "The type of the operation.",
+                                type: "string",
+                                example: "PartitionRestoreOperation",
+                              },
+                              brokerId: {
+                                description:
+                                  "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                type: "string",
+                                example: "1",
+                              },
+                              partitionId: {
+                                description:
+                                  "The partition the operation restores.",
+                                type: "integer",
+                                format: "int32",
+                                example: 1,
+                              },
+                              backupIds: {
+                                description:
+                                  "The IDs of the backups the partition is restored from.",
+                                type: "array",
+                                items: { type: "integer", format: "int64" },
+                                example: [100, 101],
+                              },
+                            },
+                            title: "ClusterRestorePartitionRestoreOperation",
+                          },
+                          {
+                            description:
+                              "The operation that transitions a broker to a mode once its partitions are restored.",
+                            type: "object",
+                            required: ["operation", "brokerId", "mode"],
+                            properties: {
+                              operation: {
+                                description: "The type of the operation.",
+                                type: "string",
+                                example: "ModeChangeOperation",
+                              },
+                              brokerId: {
+                                description:
+                                  "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                type: "string",
+                                example: "1",
+                              },
+                              mode: {
+                                description:
+                                  "The mode the broker is transitioned to.",
+                                type: "string",
+                                example: "PROCESSING",
+                              },
+                            },
+                            title: "ClusterRestoreModeChangeOperation",
+                          },
+                          {
+                            description:
+                              "The operation that awaits the transition of a broker to a mode.",
+                            type: "object",
+                            required: ["operation", "brokerId", "mode"],
+                            properties: {
+                              operation: {
+                                description: "The type of the operation.",
+                                type: "string",
+                                example: "AwaitModeChangeOperation",
+                              },
+                              brokerId: {
+                                description:
+                                  "The ID of the broker that applies the operation, including its zone if it belongs to one.",
+                                type: "string",
+                                example: "1",
+                              },
+                              mode: {
+                                description:
+                                  "The mode the broker is awaited to have transitioned to.",
+                                type: "string",
+                                example: "PROCESSING",
+                              },
+                            },
+                            title: "ClusterRestoreAwaitModeChangeOperation",
+                          },
+                        ],
+                        title: "ClusterRestoreOperation",
+                      },
+                    },
+                  },
+                  title: "ClusterRestorePlannedChange",
+                },
+              },
+            },
+            title: "ClusterRestoreResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The requested `physicalTenantId`, or a physical tenant named in `overrides`, does not exist in this cluster.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "A targeted physical tenant is not in recovery mode, so the restore cannot be accepted.",
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

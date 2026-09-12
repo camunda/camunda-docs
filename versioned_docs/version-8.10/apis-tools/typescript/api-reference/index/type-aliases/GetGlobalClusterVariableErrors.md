@@ -1,0 +1,62 @@
+---
+title: "Type Alias: GetGlobalClusterVariableErrors"
+sidebar_label: "GetGlobalClusterVariableErrors"
+mdx:
+  format: md
+---
+
+# Type Alias: GetGlobalClusterVariableErrors
+
+```ts
+type GetGlobalClusterVariableErrors = object;
+```
+
+## Properties
+
+### 400
+
+```ts
+400: ProblemDetail;
+```
+
+The provided data is not valid.
+
+---
+
+### 401
+
+```ts
+401: ProblemDetail;
+```
+
+The request lacks valid authentication credentials.
+
+---
+
+### 403
+
+```ts
+403: ProblemDetail;
+```
+
+Forbidden. The request is not allowed.
+
+---
+
+### 404
+
+```ts
+404: ProblemDetail;
+```
+
+Cluster variable not found
+
+---
+
+### 500
+
+```ts
+500: ProblemDetail;
+```
+
+An internal error occurred while processing the request.

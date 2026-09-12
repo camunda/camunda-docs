@@ -1,0 +1,370 @@
+---
+id: change-cluster-mode-as-cluster-admin
+title: "Change the cluster mode of one or every physical tenant"
+sidebar_label: "Change the cluster mode of one or every physical tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "patch api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Change the cluster mode of one or every physical tenant"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/cluster/v2/mode"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Transitions physical tenants between processing and recovery mode.
+
+If the `physicalTenantId` parameter is not provided, all available physical tenants are transitioned individually.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "mode",
+      in: "query",
+      required: true,
+      description: "The target cluster mode.",
+      schema: {
+        description: "The operating mode of a cluster's partitions.",
+        type: "string",
+        enum: ["PROCESSING", "RECOVERING"],
+        title: "Mode",
+      },
+    },
+    {
+      name: "physicalTenantId",
+      in: "query",
+      required: false,
+      description:
+        "The physical tenant to apply the change to. When omitted, the change is applied to every physical tenant of the cluster.",
+      schema: { type: "string", example: "default" },
+    },
+    {
+      name: "dryRun",
+      in: "query",
+      required: false,
+      description:
+        "If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.",
+      schema: { type: "boolean", default: false },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The mode change request was accepted; returns the planned cluster change covering every requested physical tenant.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The planned changes resulting from a cluster mode transition request.",
+            type: "object",
+            required: ["changeId", "plannedChanges"],
+            properties: {
+              changeId: {
+                description:
+                  "The ID of the cluster change that was triggered by the request.",
+                type: "string",
+                example: "7",
+              },
+              plannedChanges: {
+                description:
+                  "The operations that will be applied to complete the change, grouped by the physical tenant they belong to. Groups are transitioned in parallel; the operations within a group are applied in the given order.",
+                type: "array",
+                items: {
+                  description:
+                    "The operations of a cluster mode change that apply to one physical tenant.",
+                  type: "object",
+                  required: ["physicalTenantId", "operations"],
+                  properties: {
+                    physicalTenantId: {
+                      description:
+                        "The physical tenant the operations apply to; null for operations that are not scoped to a single physical tenant, such as broker lifecycle operations.",
+                      type: "string",
+                      nullable: true,
+                      example: "default",
+                    },
+                    operations: {
+                      description:
+                        "The ordered list of operations that will be applied to the physical tenant.",
+                      type: "array",
+                      items: {
+                        description:
+                          "A single operation that is part of a cluster mode change.",
+                        type: "object",
+                        required: ["operation", "mode"],
+                        properties: {
+                          operation: {
+                            description: "The type of the operation.",
+                            type: "string",
+                            example: "ModeChangeOperation",
+                          },
+                          mode: {
+                            description:
+                              "The target mode of the operation, if applicable.",
+                            type: "string",
+                            nullable: true,
+                            example: "RECOVERING",
+                          },
+                        },
+                        title: "ClusterModeChangeOperation",
+                      },
+                    },
+                  },
+                  title: "ClusterModeChangePlannedChange",
+                },
+              },
+            },
+            title: "ClusterModeChangeResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The requested `physicalTenantId` does not exist in this cluster.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The mode change conflicts with the cluster state, for example because another configuration change is in progress.",
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

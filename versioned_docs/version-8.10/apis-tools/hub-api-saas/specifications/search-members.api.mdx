@@ -1,0 +1,738 @@
+---
+id: search-members
+title: "Search members"
+description: "Returns members matching the given search criteria. A workspace key filter is required — members cannot be searched across workspaces."
+sidebar_label: "Search members"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search members"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/members/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns members matching the given search criteria. A workspace key filter is required — members cannot be searched across workspaces.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          required: ["filter"],
+          properties: {
+            page: {
+              description:
+                "Pagination criteria. Supports offset-based pagination (from/limit) or a simple limit.\n",
+              allOf: [
+                {
+                  oneOf: [
+                    {
+                      type: "object",
+                      title: "Limit-based pagination",
+                      properties: {
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Offset-based pagination",
+                      required: ["from"],
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 0,
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                        },
+                      },
+                    },
+                  ],
+                  title: "SearchQueryPage",
+                },
+              ],
+            },
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                required: ["field"],
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["email", "name", "role"],
+                  },
+                  order: {
+                    description: "The sort direction. Defaults to ASC.",
+                    allOf: [
+                      {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    ],
+                  },
+                },
+                title: "MemberSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description:
+                "The member search filters. The workspaceKey filter is required.\n",
+              allOf: [
+                {
+                  type: "object",
+                  description: "Filter criteria for searching members.",
+                  required: ["workspaceKey"],
+                  properties: {
+                    workspaceKey: {
+                      description:
+                        "Filter by workspace key. Only the `$eq` operator is supported — members cannot be searched across workspaces.\n",
+                      "x-semantic-type": "WorkspaceKey",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    email: {
+                      description: "Filter by member email address.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    name: {
+                      description: "Filter by member display name.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    role: {
+                      description: "Filter by member role.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "MemberFilter",
+                },
+              ],
+            },
+          },
+          title: "MemberSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search completed successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items", "page"],
+            properties: {
+              items: {
+                description: "The matching members.",
+                type: "array",
+                items: {
+                  type: "object",
+                  example: {
+                    workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+                    email: "alice@example.com",
+                    name: "Alice Smith",
+                    role: "editor",
+                  },
+                  required: ["workspaceKey", "email", "name", "role"],
+                  properties: {
+                    workspaceKey: {
+                      description:
+                        "The unique key of the workspace the member belongs to.",
+                      allOf: [
+                        {
+                          description: "System-generated key for a workspace.",
+                          type: "string",
+                          format: "WorkspaceKey",
+                          "x-semantic-type": "WorkspaceKey",
+                          example: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+                          title: "WorkspaceKey",
+                        },
+                      ],
+                    },
+                    email: {
+                      description: "The email address of the member.",
+                      allOf: [
+                        {
+                          description:
+                            "The email address identifying a member.",
+                          type: "string",
+                          format: "email",
+                          "x-semantic-type": "MemberEmail",
+                          "x-semantic-client-minted": true,
+                          example: "alice@example.com",
+                          title: "MemberEmail",
+                        },
+                      ],
+                    },
+                    name: {
+                      description:
+                        "The display name of the member, if known. Null when the member has been invited by email but has not logged in yet.\n",
+                      type: "string",
+                      nullable: true,
+                    },
+                    role: {
+                      description: "The role of the member in the workspace.",
+                      allOf: [
+                        {
+                          type: "string",
+                          description:
+                            "The role a member can have in a workspace.",
+                          enum: [
+                            "workspace_admin",
+                            "editor",
+                            "commenter",
+                            "viewer",
+                          ],
+                          title: "MemberRole",
+                        },
+                      ],
+                    },
+                  },
+                  title: "MemberResult",
+                },
+              },
+              page: {
+                description: "Pagination metadata for the search results.",
+                allOf: [
+                  {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: ["totalItems", "hasMoreTotalItems"],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits.\nWhen true, `totalItems` is a lower bound and the actual number of matching\nitems is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                ],
+              },
+            },
+            title: "MemberSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
