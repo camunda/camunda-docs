@@ -379,7 +379,7 @@ The response is a JSON object with the same shape as the [partition distribution
 
 #### Add back a previously force-removed zone
 
-Re-adds the operator-supplied brokers and re-includes the given zone in the persisted partition distribution configuration, with the supplied replica count and priority, in one atomic change.
+Re-adds the zone's brokers and re-includes the given zone in the persisted partition distribution configuration, with the supplied replica count and priority, in one atomic change.
 
 ##### Request
 
@@ -388,12 +388,39 @@ POST actuator/cluster/zones/{zoneId}
 {
   "numberOfReplicas": <integer>,
   "priority": <integer>,
+  "numberOfBrokers": <integer>,
   "brokers": [<brokerId1>, <brokerId2>, ...]
 }
 ```
 
+Name the zone's brokers either by count with `numberOfBrokers`, or one by one with
+`brokers`. Exactly one of the two must be set; setting both, or neither, is rejected with HTTP
+`400`.
+
+`numberOfBrokers` is the number of brokers deployed in the zone, from which the broker IDs
+`<zoneId>_0` through `<zoneId>_<numberOfBrokers - 1>` are derived. These are the IDs the
+brokers of a zone-aware cluster assign themselves, so a zone whose brokers are numbered
+from zero without gaps needs nothing else.
+
+Use `brokers` when the IDs are not contiguous, which is what a zone coming back with only
+some of its brokers looks like: only the explicit list can express that.
+
 <details>
-  <summary>Example request</summary>
+  <summary>Example requests</summary>
+
+```
+curl -X 'POST' \
+   'http://localhost:9600/actuator/cluster/zones/zone-b' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "numberOfReplicas": 2,
+        "priority": 500,
+        "numberOfBrokers": 3
+      }'
+```
+
+The same request naming the brokers explicitly:
 
 ```
 curl -X 'POST' \
