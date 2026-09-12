@@ -2452,6 +2452,7 @@ module.exports = {
           items: [
             "self-managed/components/hub/usage-metrics",
             "self-managed/components/hub/monitoring",
+            "self-managed/components/hub/version-upgrade",
             {
               Configuration: [
                 "self-managed/components/hub/configuration/properties",
