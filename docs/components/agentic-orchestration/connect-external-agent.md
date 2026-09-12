@@ -308,6 +308,15 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 
 Whenever you send `history`, also send the `jobKey` and `jobLease` from the job activation. Camunda records each item with a `PENDING` commit status and promotes it to `COMMITTED` when the job completes successfully. If the job fails and a later activation supersedes the lease, the items are marked `DISCARDED` instead.
 
+:::caution Unreported usage metrics can be lost
+If a competing activation completes the job before your runtime reports a call's `metrics`, those metrics are discarded with the rest of that activation's history and can't be recovered. This can happen when:
+
+- Your runtime crashes after a model call but before reporting its `metrics`.
+- Your runtime loses its connection, and the job is reactivated and completed by a competing worker before the runtime reconnects.
+
+You can still report those metrics under the new activation’s lease if you reconnect before the job is completed.
+:::
+
 The response echoes one entry per submitted item, in request order, with the `historyItemKey` Camunda assigned and an `isDuplicate` flag showing whether the item had already been recorded.
 
 ## Step 6: Complete the job
