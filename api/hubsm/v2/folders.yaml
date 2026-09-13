@@ -12,7 +12,7 @@ paths:
       operationId: createFolder
       summary: Create a folder
       description: Creates a new folder in the specified project and/or parent folder.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-provider:
         - folderKey
       tags:
@@ -44,7 +44,7 @@ paths:
       operationId: getFolder
       summary: Get a folder
       description: Returns the folder metadata and its content (child folders and files).
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Folder
         bind:
@@ -75,7 +75,7 @@ paths:
       operationId: updateFolder
       summary: Update a folder
       description: Updates the name and/or location of an existing folder.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Folder
         bind:
@@ -119,7 +119,7 @@ paths:
         recently deleted state and can be recovered during the retention
         window. To permanently and irreversibly remove a folder, use
         `DELETE /folders/{folderKey}/permanent` instead.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Folder
         bind:
@@ -158,7 +158,7 @@ paths:
         folders/project/workspace was soft-deleted), then the operation
         fails with 409. Instead, delete the original target of the
         soft-delete operation.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Folder
       parameters:
@@ -202,7 +202,7 @@ paths:
         runs; they can also be restored with
         `POST /folders/{folderKey}/restoration` or permanently removed with
         `DELETE /folders/{folderKey}/permanent`.
-      x-added-in-version: "0.4.0"
+      x-added-in-version: "8.10"
       tags:
         - Folder
       requestBody:
@@ -242,7 +242,7 @@ paths:
         this endpoint; a folder that was soft-deleted as part of an ancestor
         folder, project, or workspace's deletion event must be restored
         through the corresponding ancestor restoration endpoint instead.
-      x-added-in-version: "0.4.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Folder
         bind:

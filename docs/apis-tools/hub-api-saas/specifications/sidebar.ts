@@ -28,35 +28,11 @@ const sidebar: SidebarsConfig = {
           label: "Search catalog assets",
           className: "api-method post",
         },
-      ],
-    },
-    {
-      type: "category",
-      label: "Cluster",
-      items: [
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/get-cluster-registrations",
-          label: "Get all cluster registrations",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/create-cluster-registration",
-          label: "Create or update a cluster registration",
+          id: "apis-tools/hub-api-saas/specifications/search-catalog-asset-project-usages",
+          label: "Search the projects using a catalog asset",
           className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/get-cluster-usage-metrics",
-          label: "Get cluster usage metrics",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/remove-cluster-registration",
-          label: "Remove a cluster registration",
-          className: "api-method delete",
         },
       ],
     },
