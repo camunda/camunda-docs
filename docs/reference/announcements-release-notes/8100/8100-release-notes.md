@@ -213,6 +213,16 @@ A new public Camunda Hub API is provided under `/v2/` for programmatic access to
 
 <p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
 
+### Console API supports external encryption for cluster creation
+
+<!-- https://github.com/camunda/product-hub/issues/3691 -->
+
+The Camunda Console API now accepts encryption configuration parameters when creating clusters.
+
+Organizations using Terraform, custom scripts, or CI/CD pipelines can specify the encryption type (including external customer-managed keys) directly in the cluster creation request, removing the need for a separate manual step in the web console.
+
+- Clusters that do not meet the required encryption policy can be blocked at the API level before provisioning begins.
+
 ### FEEL evaluation with process instance key
 
 <!-- https://github.com/camunda/product-hub/issues/3606 -->
@@ -478,6 +488,29 @@ Camunda for Microsoft Teams now supports routing incident and task collaboration
 ## Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Hub Modeler">Hub Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+### Low-Code Assertions
+
+<!-- https://github.com/camunda/product-hub/issues/3496 -->
+
+Turn process instance runs into repeatable tests. Run a process instance, observe the output, then save the input data and assertions as a low-code integration test. That test now catches regressions on every change.
+
+- Add variable assertions to saved test cases using CPT-compatible names and values for interoperability.
+- Add path assertions that require specific elements or end events.
+- View pass/fail results based on assertions, not just "process completed without incidents".
+- Manage test metadata and assertions in one place in the **Test** tab.
+
+### Low-Code Test Repair
+
+<!-- https://github.com/camunda/product-hub/issues/3676 -->
+
+Saved test cases survive diagram changes. When a BPMN element is deleted, renamed, or changed type, Test Studio now tells you which steps broke and lets you fix them in place instead of re-recording the run.
+
+- See a broken-step indicator on the test case in the list, and a per-step warning explaining exactly which reference no longer resolves.
+- Repair a step inline: re-map it to another element, pick a valid value, or delete the step.
+- Repair covers execution instructions and assertions, including variable, element-instance, user-task, process-instance, message-subscription, and decision assertions.
+- Open the test file editor from a broken test case for advanced edits that the graphical flow does not cover.
+- Rerun immediately after repair to confirm the fix.
 
 ### Modeling menu improvements
 
@@ -753,7 +786,7 @@ The resolved value is set once at child creation and is immutable.
 
 Execution listeners now support a `cancel` event type on the process element. Cancel listeners run when a process instance is terminated — useful for cleanup, audit logging, or notifying external systems.
 
-For details, see [`cancel` listeners](/components/concepts/execution-listeners.md#cancel-listeners).
+<p class="link-arrow">[`cancel` listeners](/components/concepts/execution-listeners.md#cancel-listeners)</p>
 
 ### Centralized Secret Resolution via Zeebe
 
@@ -870,6 +903,12 @@ OIDC authentication failures now surface actionable diagnostics in application l
 - Enable `camunda.security.authentication.oidc.diagnostics.enabled` to log the redirect URI Camunda expects against the one your identity provider returned, and to flag a callback that arrives without a valid session, the two most common causes of a login redirect loop.
 - If you use Microsoft Entra as your identity provider, an app registration issuing v1 tokens now fails authentication with an explicit error naming the fix (`api.requestedAccessTokenVersion = 2`) instead of looping silently.
 
+### Operate batch delete completed process and decision instances
+
+<!-- https://github.com/camunda/product-hub/issues/3597 -->
+
+Operate now supports deleting completed process instances and evaluated decision instances as a batch operation. When selecting finished instances from the list, you can use the new **Delete** batch action in the toolbar to remove multiple instances at once. A confirmation modal prevents accidental mass deletion.
+
 ### Operate Business ID visibility and filtering
 
 <!-- https://github.com/camunda/product-hub/issues/3436 -->
@@ -898,6 +937,14 @@ Business ID is now visible in Operate for decision instances, in both the decisi
 Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
 
 <p class="link-arrow">[Business ID for process instances](/components/concepts/process-instance-creation.md#business-id)</p>
+
+#### Visibility for reference Documents
+
+<!-- https://github.com/camunda/product-hub/issues/3465 -->
+
+View documents attached to process instances directly in the Operate process instance detail view.
+
+Documents display metadata (name, type, size, creation date) and support in-product preview for formats such as PDF, JSON, plain text, PNG, and JPG. Operators can now inspect agent memory, large payloads, connector attachments, and IDP source documents without leaving Operate or making API calls.
 
 ### Operate JSON display improvements
 
@@ -1265,6 +1312,18 @@ The new Camunda visual design system is introduced with this alpha for Self-Mana
 :::note
 The new design system will be introduced for SaaS deployments with the 8.10 minor release.
 :::
+
+### Connectivity
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects networking">Networking</span></div>
+
+### Secure connectivity with AWS inbound PrivateLink for Camunda 8.7
+
+<!-- https://github.com/camunda/product-hub/issues/3651 -->
+
+Inbound AWS inbound PrivateLink with cluster authentication is now supported for Camunda 8.7 SaaS on AWS. Follow the Secure Connectivity (AWS PrivateLink) guide to configure your VPC endpoint.
+
+<p class="link-arrow">[Secure connectivity (AWS PrivateLink)](/components/saas/secure-connectivity/index.md)</p>
 
 ### Connectors
 
