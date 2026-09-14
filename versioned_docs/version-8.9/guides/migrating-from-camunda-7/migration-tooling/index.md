@@ -5,6 +5,9 @@ sidebar_label: Migration tools
 description: "Learn about the available migration tools."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools. You can use them in two ways:
 
 - **[Agentic migration](#agentic-migration)** (recommended): An AI coding agent orchestrates diagram conversion, form migration, and code refactoring automatically, so you can focus on reviewing changes and rearchitecting your solution.
@@ -16,31 +19,48 @@ All tools are available as **ready-to-use builds** from the [GitHub releases pag
 
 The **Camunda migration agent skill** is an AI-driven orchestrator that runs the migration tools on your behalf. It converts BPMN, DMN, and static Camunda 7 form definitions, then guides you through findings and required code changes.
 
-### Install
+You can run the skill with an AI coding agent such as Claude Code or GitHub Copilot CLI, or publish it to your organization as an [AWS Transform](https://docs.aws.amazon.com/transform/latest/userguide/custom.html) custom transformation. The setup and run command differ by agent, but the migration flow is the same.
 
-Choose the installation instructions for your AI coding agent.
+### Set up and run
 
-#### Claude Code
+Set up your agent, then run the skill from your Camunda 7 project directory. Every agent runs the same [agent workflow](#agent-workflow).
 
-Install the skill with Claude Code:
+<Tabs groupId="agentic-migration-agent">
+<TabItem value="claude-code" label="Claude Code">
+
+Install the skill:
 
 ```bash
 claude plugin marketplace add camunda/camunda-7-to-8-migration-tooling
 claude plugin install camunda-migration
 ```
 
-#### GitHub Copilot CLI
+Run it:
 
-Install the skill with GitHub Copilot CLI:
+```text
+/camunda-migration:migrate-c7-to-c8-code
+```
+
+</TabItem>
+<TabItem value="copilot-cli" label="GitHub Copilot CLI">
+
+Install the skill:
 
 ```bash
 copilot plugin marketplace add camunda/camunda-7-to-8-migration-tooling
 copilot plugin install camunda-migration@camunda
 ```
 
-#### Other compatible agents
+Run it:
 
-Use GitHub CLI 2.90 or later to install the skill for another compatible agent:
+```text
+/camunda-migration:migrate-c7-to-c8-code
+```
+
+</TabItem>
+<TabItem value="other-agents" label="Other compatible agents">
+
+Use GitHub CLI 2.90 or later to install the skill:
 
 ```bash
 gh skill install camunda/camunda-7-to-8-migration-tooling migrate-c7-to-c8-code --agent <tool-name>
@@ -48,13 +68,37 @@ gh skill install camunda/camunda-7-to-8-migration-tooling migrate-c7-to-c8-code 
 
 Replace `<tool-name>` with the name of your agent. See the [agent-specific installation commands](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#install-commands-for-other-agents) for supported values. For manual installation paths, see the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#manual-installation).
 
-### Run
+Then run the `migrate-c7-to-c8-code` skill from your project directory using your agent's command.
 
-From your Camunda 7 project directory, run the migration skill:
+</TabItem>
+<TabItem value="aws-transform" label="AWS Transform">
 
-```text
-/camunda-migration:migrate-c7-to-c8-code
+[AWS Transform](https://docs.aws.amazon.com/transform/latest/userguide/custom.html), Amazon's agentic modernization service, runs the same skill as a custom transformation. Instead of installing the skill per developer, you publish it once to your organization's registry and run it with the [`atx` CLI](https://docs.aws.amazon.com/transform/latest/userguide/custom-get-started.html) (Node.js 22 or later, with configured AWS credentials).
+
+Check out the tooling and create the transformation from the skill:
+
+```bash
+git clone https://github.com/camunda/camunda-7-to-8-migration-tooling.git
+cd camunda-7-to-8-migration-tooling/agentic-migration-skills
+
+# Save a private draft to validate first (drafts expire after 30 days)
+atx custom def save-draft -n "camunda-7-to-camunda-8-migration" \
+  --description "Migrate your Camunda 7 project to Camunda 8" \
+  --sd skills/migrate-c7-to-c8-code/
+
+# Publish to your organization for anyone with the required IAM permissions
+atx custom def publish -n "camunda-7-to-camunda-8-migration" \
+  --sd skills/migrate-c7-to-c8-code/
 ```
+
+Run the published transformation. Running by name uses the latest published version, so you don't pass a version ID:
+
+```bash
+atx custom def exec -n "camunda-7-to-camunda-8-migration" -p . -c "mvn verify"
+```
+
+</TabItem>
+</Tabs>
 
 The skill asks for your migration scope:
 

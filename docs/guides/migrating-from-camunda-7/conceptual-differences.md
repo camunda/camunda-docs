@@ -16,6 +16,8 @@ description: Understand conceptual differences with Camunda 7 and Camunda 8 befo
 
 When thinking about migration it is important to understand conceptual differences between Camunda 7 and Camunda 8.
 
+The [Camunda migration agent skill](./migration-tooling/index.md#agentic-migration) can automate much of the work these differences create, converting BPMN and DMN models and Camunda 7 forms and refactoring code, while flagging what needs your review.
+
 ## Architectural differences
 
 There are a number of key architectural differences between Camunda 7 and Camunda 8.
