@@ -93,10 +93,10 @@ atx custom def exec -n "camunda-7-to-camunda-8-migration" \
   -p . \
   -c "<build-command>"
 
-# Publish to your organization for anyone with the required IAM permissions
+# Publish the tested draft to your organization for anyone with the required IAM permissions
 cd /path/to/camunda-7-to-8-migration-tooling/agentic-migration-skills
 atx custom def publish -n "camunda-7-to-camunda-8-migration" \
-  --sd skills/migrate-c7-to-c8-code/
+  --tv <draft-version-id>
 ```
 
 Replace `<build-command>` with the command for your project, such as `mvn verify` for Maven or `./gradlew build` for Gradle. After you validate the draft, run the published transformation from the project directory. Running by name uses the latest published version, so you don't pass a version ID:
