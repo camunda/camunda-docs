@@ -15,3 +15,5 @@ Currently supported markers:
 - [Multi-instance](multi-instance/multi-instance.md)
 - [Compensation](compensation-handler/compensation-handler.md)
 - [Ad-hoc](ad-hoc-subprocesses/ad-hoc-subprocesses.md)
+
+<!-- TODO: user feedback (2026-06-19) said this page has no info on how to actually place/toggle a marker in the Modeler UI. This page and its three child pages only describe what each marker means and its runtime behavior, not the context-pad/properties-panel steps to add one. Confirm the exact UI mechanism for each marker type with the Modeler team before adding steps here; it could not be verified from this repo or public sources. -->
