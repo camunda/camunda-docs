@@ -829,6 +829,12 @@ You can now create new SaaS clusters on specific supported Camunda 8 minor and p
 - The latest recommended versions (latest patch of each active minor)
 - Other still-supported versions that you already run on existing clusters in the same organization.
 
+### Dark and light mode persists across Admin, Operate, and Tasklist
+
+<!-- https://github.com/camunda/product-hub/issues/3447 -->
+
+Dark mode and light mode preferences now persist across Admin, Operate, and Tasklist. Set your preference once and it applies across all Orchestration Cluster applications.
+
 ### Default RocksDB memory allocation strategy changed to `FRACTION`
 
 The default RocksDB memory allocation strategy changes from `PARTITION` to `FRACTION`. RocksDB memory is now allocated as a fraction of total available memory (default `0.1`, or 10%) instead of scaling with the number of partitions per broker. This may result in a different amount of memory being allocated to RocksDB.
@@ -1145,6 +1151,24 @@ What's included:
 - Step‑by‑step failover and failback procedures so your platform team can design, deploy, and operate an active‑active (or active‑passive) two‑region ECS environment that meets enterprise HA/DR requirements without bespoke architecture work.
 
 <p class="link-arrow">[Dual-region ECS reference architecture](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
+
+#### Multi-region RDBMS reference architecture
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3553 -->
+
+A new multi-region reference architecture details how you can design, deploy, and operate one Orchestration Cluster stretched across three or more Kubernetes regions, where the Zeebe data plane is active-active across every region and the relational secondary storage is active-standby, with a single global writer and replication owned by the database.
+
+What's included:
+
+- A zone-aware topology for primary storage that keeps its Raft quorum when a region is lost, so processing continues without an operator step.
+- A multi-region RDBMS as secondary storage, with the asynchronous replication monitoring that lets Zeebe replay exported records after a writer failover.
+- Cross-region networking, zone activation, region loss, and failback procedures, published as a tested reference implementation on Amazon EKS.
+
+This architecture removes the recovery procedure rather than the recovery window: no operator step restores Zeebe processing after a region loss, while re-election, client rerouting, and database writer promotion still take time.
+
+<!-- <p class="link-arrow">[Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md)</p> -->
 
 ## Secondary storage
 
