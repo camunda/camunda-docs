@@ -30,7 +30,7 @@ path: object;
 #### formKey
 
 ```ts
-formKey: FormKey;
+formKey: FormKeyWritable;
 ```
 
 The form key.

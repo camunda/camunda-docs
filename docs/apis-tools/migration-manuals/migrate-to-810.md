@@ -37,6 +37,24 @@ Complete the following steps in this guide:
 1. Re-run compilation/type checks and address any errors.
 1. Review and apply fixes for the breaking changes, deprecations, and supported environment changes below.
 
+### API and SDK changes to migrate before Camunda 8.10
+
+If you did not already migrate to the following APIs and SDKs during your 8.8 or 8.9 upgrade, Camunda recommends you perform these migrations before you upgrade to 8.10.
+
+If you already performed these migrations, proceed to [Camunda 8.10 breaking changes, deprecations, and supported environment changes](#camunda-810-breaking-changes-deprecations-and-supported-environment-changes).
+
+| 8.9 status                                                 | Component/Use                                                                       | Migrate to                  | Migrate by          |
+| :--------------------------------------------------------- | :---------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
+| <span className="label-highlight yellow">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                 | Orchestration Cluster API   | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [ZeebeClient](../migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Spring Zeebe SDK](../migration-manuals/migrate-to-camunda-spring-boot-starter.md)  | Camunda Spring Boot Starter | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Zeebe Process Test (ZPT)](../migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Job-based user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
+
+:::tip
+Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
+:::
+
 ### Camunda 8.10 breaking changes, deprecations, and supported environment changes
 
 Review the actions required for the following 8.10 changes:

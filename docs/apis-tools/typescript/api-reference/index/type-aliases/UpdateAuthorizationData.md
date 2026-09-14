@@ -30,7 +30,7 @@ path: object;
 #### authorizationKey
 
 ```ts
-authorizationKey: AuthorizationKey;
+authorizationKey: AuthorizationKeyWritable;
 ```
 
 The key of the authorization to delete.

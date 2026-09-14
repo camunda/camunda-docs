@@ -29,5 +29,22 @@ async function resolveSecretsExample() {
 function useSecret(_value: string) {}
 //#endregion ResolveSecrets
 
+//#region ListSecrets
+async function listSecretsExample() {
+  const camunda = createCamundaClient();
+
+  // The request body is reserved for future filtering options and currently
+  // takes no properties.
+  const result = await camunda.listSecrets({});
+
+  // Only the references are returned — never the secret values. Use
+  // `resolveSecrets` to fetch a value when one is actually needed.
+  for (const reference of result.references) {
+    console.log(`Secret available: ${reference}`);
+  }
+}
+//#endregion ListSecrets
+
 // Suppress "declared but never read"
 void resolveSecretsExample;
+void listSecretsExample;

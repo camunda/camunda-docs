@@ -1487,6 +1487,18 @@ export const configs = [
     area: ["Data"],
   },
   {
+    name: "camunda.data.primary-storage.backup.read-timeout",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.primary-storage.backup.write-timeout",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
     name: "camunda.data.primary-storage.backup.s3.bucket-name",
     legacy: [
       "zeebe.broker.data.backup.s3.bucketName",

@@ -27,3 +27,5 @@ To take an action on a batch operation:
 1. On the **Processes** page, above the process diagram, click **View batch operations**.
 2. From the **Batch Operations** page, click the operation you want to manage.
 3. On the batch operation details page, on the right side of the page header, click an action, if available.
+
+![A batch operation details page for an Active batch operation, with a Suspend button and an overflow menu available in the page header.](./img/manage-batch-operation.png)

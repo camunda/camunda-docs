@@ -13,6 +13,7 @@ Incidents are created in different situations, including the following:
 - A timer expression doesn't return the expected type.
 - A decision can't be evaluated.
 - A BPMN error is thrown and not caught by an error boundary event or error event subprocess.
+- A job's secret references cannot be resolved, or their resolved values cannot be injected into the job.
 
 :::note
 Not all errors necessarily lead to incidents. For example, unexpected errors in Zeebe do not always result in incidents.
@@ -59,6 +60,15 @@ client.newResolveIncidentCommand(incident.getKey())
 ```
 
 When the incident is resolved, the job can be activated by a worker again.
+
+### Resolving secret resolution incidents
+
+A job that references secrets can raise one of the following incidents:
+
+- `SECRET_RESOLUTION_ERROR` when the secret store cannot return a value or Camunda cannot inject the resolved value into the job.
+- `MESSAGE_SIZE_EXCEEDED` when the resolved values make the job too large to activate.
+
+For diagnosis steps and details about how each incident affects the job, see [Troubleshoot secret resolution failures](secret-resolution-incidents.md).
 
 ### Resolving a process instance-related incident
 

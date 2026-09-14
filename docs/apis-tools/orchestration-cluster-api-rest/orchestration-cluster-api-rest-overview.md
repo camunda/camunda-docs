@@ -40,6 +40,7 @@ Key features include:
 
 - This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). You can rely on backward compatibility for production use.
 - To learn more about the Orchestration Cluster, see [Orchestration Cluster](/components/orchestration-cluster.md).
+- In Self-Managed clusters running [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), most endpoints below are addressed per tenant by prefixing the path with `/physical-tenants/{physicalTenantId}`, while cluster-wide operations use the `/cluster/v2/...` prefix instead. See [API routing for Physical Tenants](/self-managed/concepts/physical-tenants/api-routing.md).
 
 :::
 

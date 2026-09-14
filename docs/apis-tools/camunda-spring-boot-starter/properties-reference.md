@@ -215,7 +215,7 @@ Type: <code>string</code>
 
 <td>
 
-The physical tenant ID applied to every outgoing call: sent as the `camunda-physical-tenant` gRPC header, and used to prefix the REST base path for the per-tenant API (see `camunda.client.prefix-physical-tenant-path`) unless disabled — the cluster-scoped REST API (`/cluster/v2/...`) is never prefixed. Leave this unset (`null`) rather than an empty string to target the default physical tenant; the header is then omitted and REST calls target the default physical tenant.
+The physical tenant ID sent as the `camunda-physical-tenant` gRPC header on every outgoing call. When `null` the header is omitted.
 
 Type: <code>string</code>
 
@@ -935,45 +935,13 @@ Properties for setting cluster variables at startup.
 
 <td>
 
-Indicates if cluster variable processing is enabled. When `true`, variables configured via `@ClusterVariables` annotations and via the `global`/`tenant` properties are applied at startup. When `false`, all cluster variable processing is skipped.
+Indicates if cluster variable processing is enabled. When `true`, variables configured via `@ClusterVariables` annotations and via the `variables` property are applied at startup. When `false`, all cluster variable processing is skipped.
 
 Type: <code>boolean</code>
 
 </td>
 <td>
   <code>true</code>
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.global" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_GLOBAL"/><a href="#camundaclientclustervariablesglobal" id="camundaclientclustervariablesglobal" class="hash-link"/>
-</td>
-
-<td>
-
-Globally-scoped cluster variables to set at startup as key-value pairs.
-
-Type: <code>map[string,object]</code>
-
-</td>
-<td>
-  <code>null</code>
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.tenant" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_TENANT"/><a href="#camundaclientclustervariablestenant" id="camundaclientclustervariablestenant" class="hash-link"/>
-</td>
-
-<td>
-
-Tenant-scoped cluster variables to set at startup, keyed by tenant ID.
-
-Type: <code>map[string,map[string,object]]</code>
-
-</td>
-<td>
-  <code>null</code>
 </td>
 </tr>
 </tbody>
@@ -1312,6 +1280,24 @@ Type: <code>string</code>
   <code>null</code>
 </td>
 </tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.with-lease" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_WITHLEASE"/><a href="#camundaclientworkerdefaultswithlease" id="camundaclientworkerdefaultswithlease" class="hash-link"/>
+</td>
+
+<td>
+
+Activate the jobs polled by this worker with a lease. When enabled, each activated job is assigned a distinct lease token, fencing the complete, fail, and throw-error commands against a superseded activation of the same job.
+
+Only applies to the polling path. If not set, jobs are activated without a lease.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -1358,6 +1344,102 @@ Type: <code>duration</code>
 </td>
 <td>
   <code>&quot;0ms&quot;</code>
+</td>
+</tr>
+</tbody>
+</table>
+
+### `camunda.client.cluster-variables.variables`
+
+Cluster variables to set at startup. Each entry carries a name, a value and optionally metadata, a kind and a tenant ID. Entries without a tenant ID are globally scoped.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].name" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_NAME"/><a href="#camundaclientclustervariablesvariables[*]name" id="camundaclientclustervariablesvariables[*]name" class="hash-link"/>
+</td>
+
+<td>
+
+The name of the cluster variable.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].value" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_VALUE"/><a href="#camundaclientclustervariablesvariables[*]value" id="camundaclientclustervariablesvariables[*]value" class="hash-link"/>
+</td>
+
+<td>
+
+The value of the cluster variable.
+
+Type: <code>object</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].metadata" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_METADATA"/><a href="#camundaclientclustervariablesvariables[*]metadata" id="camundaclientclustervariablesvariables[*]metadata" class="hash-link"/>
+</td>
+
+<td>
+
+The metadata of the cluster variable.
+
+Type: <code>map[string,object]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].kind" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_KIND"/><a href="#camundaclientclustervariablesvariables[*]kind" id="camundaclientclustervariablesvariables[*]kind" class="hash-link"/>
+</td>
+
+<td>
+
+The kind of the cluster variable.
+
+Type: <code>enum[json, secretReference]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].tenant-id" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_TENANTID"/><a href="#camundaclientclustervariablesvariables[*]tenantid" id="camundaclientclustervariablesvariables[*]tenantid" class="hash-link"/>
+</td>
+
+<td>
+
+The tenant ID of the cluster variable.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
 </td>
 </tr>
 </tbody>
@@ -1642,6 +1724,24 @@ Type: <code>duration</code>
 The type of jobs to work on.
 
 Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type|worker-name&gt;.with-lease" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE|WORKERNAME&gt;_WITHLEASE"/><a href="#camundaclientworkeroverridejobtypeworkernamewithlease" id="camundaclientworkeroverridejobtypeworkernamewithlease" class="hash-link"/>
+</td>
+
+<td>
+
+Activate the jobs polled by this worker with a lease. When enabled, each activated job is assigned a distinct lease token, fencing the complete, fail, and throw-error commands against a superseded activation of the same job.
+
+Only applies to the polling path. If not set, jobs are activated without a lease.
+
+Type: <code>boolean</code>
 
 </td>
 <td>

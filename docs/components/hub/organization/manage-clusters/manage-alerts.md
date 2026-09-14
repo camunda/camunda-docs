@@ -1,33 +1,31 @@
 ---
 id: manage-alerts
-title: Alerts
+title: Create an alert
 description: "Camunda 8 can notify you when process instances stop with an error."
 ---
 
 Camunda 8 can notify you when process instances stop with an error.
+
+## About alerts
 
 There are two forms of notification:
 
 - By email to the email address of your user account
 - By webhook
 
+:::note
+This feature is only available in SaaS.
+:::
+
 ## Create an alert
 
-To create a new alert, take the following steps:
+Create a new alert in Camunda Hub SaaS:
 
-1. Click on your cluster and select the **Alerts** tab.
-
-![cluster-details](./img/cluster-detail-alerts.png)
-
-2. Click **Create an alert**.
-
-![create-alert](./img/cluster-detail-create-alert.png)
-
-3. Choose between **Email** and **Webhook**.
-
-4. If you select **Email**, click **Create**. No further information is needed. For **Webhook**, complete the additional steps below.
-
-5. To create a webhook alert, provide a valid webhook URL that accepts `POST` requests.
+1. In the left navigation under **Clusters**, select a cluster.
+1. On the **Alerts** tab, click **Create an alert**.
+1. Choose between **Email** and **Webhook**:
+   - **Email**: Click **Create**. No further information is needed.
+   - **Webhook**: Provide a valid webhook URL that accepts `POST` requests.
 
 If your webhook requires [HMAC authentication](https://www.okta.com/identity-101/hmac/), you can specify an HMAC secret. The SHA-256 hash of the request body will then be generated using your HMAC secret, and it is included it in the HTTP header `X-Camunda-Signature-256` each time we send out a webhook alert to your endpoint.
 
@@ -60,6 +58,6 @@ Webhook alerts contain a JSON body with following structure:
 }
 ```
 
-:::caution breaking change
+:::warning breaking change
 The JSON format was changed in 8.8.9. See [release announcements](/reference/announcements-release-notes/880/880-announcements.md#apis--tools#webhook-alerts-json-format) for more information and required actions.
 :::

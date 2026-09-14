@@ -1,3 +1,41 @@
 {
-  "properties": []
+  "properties": [
+    {
+      "name": "camunda.client.cluster-variables.variables",
+      "sourceType": "io.camunda.client.spring.properties.ClusterVariableEntry",
+      "placeholderName": "[*]",
+      "properties": [
+        {
+          "name": "camunda.client.cluster-variables.variables[*].name",
+          "type": "java.lang.String",
+          "description": "The name of the cluster variable.",
+          "sourceType": "io.camunda.client.spring.properties.ClusterVariableEntry"
+        },
+        {
+          "name": "camunda.client.cluster-variables.variables[*].value",
+          "type": "java.lang.Object",
+          "description": "The value of the cluster variable.",
+          "sourceType": "io.camunda.client.spring.properties.ClusterVariableEntry"
+        },
+        {
+          "name": "camunda.client.cluster-variables.variables[*].metadata",
+          "type": "java.util.Map<java.lang.String,java.lang.Object>",
+          "description": "The metadata of the cluster variable.",
+          "sourceType": "io.camunda.client.spring.properties.ClusterVariableEntry"
+        },
+        {
+          "name": "camunda.client.cluster-variables.variables[*].kind",
+          "type": "io.camunda.client.api.search.enums.ClusterVariableKind",
+          "description": "The kind of the cluster variable.",
+          "sourceType": "io.camunda.client.spring.properties.ClusterVariableEntry"
+        },
+        {
+          "name": "camunda.client.cluster-variables.variables[*].tenant-id",
+          "type": "java.lang.String",
+          "description": "The tenant ID of the cluster variable.",
+          "sourceType": "io.camunda.client.spring.properties.ClusterVariableEntry"
+        }
+      ]
+    }
+  ]
 }

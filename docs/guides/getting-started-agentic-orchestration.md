@@ -12,6 +12,7 @@ import TabItem from "@theme/TabItem";
 import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
 import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
+import AgentPanelImg from '../components/agentic-orchestration/img/agent-panel.png';
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
@@ -43,7 +44,7 @@ To build your first AI agent, see the prerequisites below depending on:
 To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:
 
 - [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).
-- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, follow [Run your first local project](../getting-started-example).
+- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, follow [run your first local project](../getting-started-example).
 
 ### Supported models
 
@@ -59,10 +60,10 @@ In this guide, you can try the following use cases:
 | :----------------------- | :-------------------------------------------------------------------------------- | :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | SaaS                     | [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) | Camunda-managed model (for example, Claude Sonnet 4.6) | <p><ul><li> Camunda 8 SaaS trial or enterprise organization.</li><li><p> Camunda-provided LLM available in your organization. No additional LLM provider credentials are required to run this guide.</p></li></ul></p>                                                                                                                                                     |
 | Cloud (customer-managed) | AWS Bedrock                                                                       | Claude Sonnet 4                                        | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.</p></li></ul></p> |
-| Local                    | Ollama                                                                            | GPT-OSS:20b                                            | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                      |
+| Local                    | Ollama                                                                            | GPT-OSS:20b (any Ollama-supported model works)         | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and a model installed. See [set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                          |
 
-:::important
-Running LLMs locally requires substantial disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
+:::tip Choose a lighter model if needed
+This guide uses GPT-OSS:20b as an example, but any model supported by Ollama works with the AI Agent connector. GPT-OSS:20b requires more than 20GB of RAM and 14GB of free disk space, which may be more than needed for this guide. Consider a smaller model (for example, `llama3.2` or `qwen2.5`) if your machine has limited resources.
 :::
 
 ## Step 1: Install the model blueprint
@@ -80,7 +81,7 @@ Depending on your working environment, follow the corresponding steps below.
 
 <TabItem value="saas">
 1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SAAS** and select or create a project to save the blueprint.
-1. The blueprint BPMN diagram opens in Web Modeler.
+1. The blueprint BPMN diagram opens in Camunda Hub.
 </TabItem>
 
 <TabItem value="self-managed">
@@ -91,7 +92,7 @@ Depending on your working environment, follow the corresponding steps below.
 If you’re using Camunda 8 Run and installed it using the [starter package](./getting-started-example.md#download-the-camunda-8-starter-package), the blueprint was already downloaded as part of it.
 :::
 
-2. Open the blueprint BPMN diagram in Desktop Modeler.
+2. Open the blueprint BPMN diagram in Desktop Modeler or [upload them to Camunda Hub](/components/hub/workspace/modeler/modeling/import-diagram.md).
 
 </TabItem>
 </Tabs>
@@ -204,7 +205,7 @@ Configure your local LLM with Ollama.
 1. **Download and install**: Follow [Ollama's documentation](https://docs.ollama.com/quickstart) for details.
 1. **Confirm installation**: Check the installed version in a terminal or command prompt by running `ollama --version`.
 1. **Start the local server**: Start it using the application, or run `ollama serve` in a terminal or command prompt.
-1. **Pull the GPT-OSS:20b model**: If it isn't installed by default, run `ollama pull gpt-oss:20b` in a terminal or command prompt to download the model.
+1. **Pull a model**: This guide uses GPT-OSS:20b as an example. Run `ollama pull gpt-oss:20b` in a terminal or command prompt to download it. Any [model supported by Ollama](https://ollama.com/search) works with the AI Agent connector; substitute a smaller model (for example, `ollama pull llama3.2`) if you prefer a lighter download.
 1. **Test**: Ollama serves an API at `http://localhost:11434` by default. To test it, open that URL in a browser or run this command in your terminal:
 
 ```
@@ -225,7 +226,7 @@ The example blueprint downloaded in step one is preconfigured to use AWS Bedrock
 
 **Model**
 
-1. Enter `gpt-oss:20b` in the **Model** field. This field is case-sensitive, so be sure to enter it in all lowercase.
+1. Enter `gpt-oss:20b` in the **Model** field, or the name of whichever model you pulled instead. This field is case-sensitive, so be sure to enter it in all lowercase.
 
 </TabItem>
 </Tabs>
@@ -235,7 +236,7 @@ The example blueprint downloaded in step one is preconfigured to use AWS Bedrock
 Deploy and run your AI agent in your Camunda cluster.
 
 :::important
-Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, make sure you’re running a cluster with version 8.8 or higher.
+Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, [connect a cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) with version 8.8 or higher to your project before reading further.
 :::
 
 Depending on your working environment, test your agent by following the corresponding steps below.
@@ -248,34 +249,48 @@ Depending on your working environment, test your agent by following the correspo
 
 <TabItem value="saas">
 
-1. Open [Web Modeler](/components/hub/workspace/modeler/index.md) and select the **Implement** tab.
-1. Click **Deploy and run**, and select a cluster running version 8.8 or higher.
-1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Deploy and run**.
-1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
-1. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md) and select the **Tasks** tab. When the AI agent finishes processing, you should see a `User Feedback` task waiting for you to complete.
-1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
+1. In [Camunda Hub](/components/hub/workspace/modeler/index.md), open the BPMN diagram.
+1. Select the [**Test**](/components/hub/workspace/modeler/validation/test-your-process.md) tab.
+1. Select the cluster you want to deploy and test the process on.
+1. Click **Deploy**.
+1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
+1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
+1. You can [monitor the process execution](#monitor-the-process-execution) in Operate.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
-:::important Play not supported
-Because the AI agent in this example is an ad-hoc sub-process, you can't use Play to run it (doing so fails with `Ad-hoc subprocesses are not supported in Play`). Instead, deploy the process and test it with Tasklist, as described above.
+:::important Test mode not supported
+Because the AI agent in this example is an ad-hoc sub-process, you can't use **Test mode** to run it (ad-hoc sub-processes are a known [limitation](/components/hub/workspace/modeler/validation/test-your-process.md#test-cases-limitations)). Instead, deploy the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
 :::
 </TabItem>
 
 <TabItem value="self-managed">
 
-1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
+1. If using **Desktop Modeler**:
+   1. [Deploy the process model](/components/modeler/desktop-modeler/deploy-diagram.md) to your local Camunda 8 environment.
+   1. Open each form, and click **Deploy**. [Linked forms are not deployed automatically with the process](/components/modeler/forms/utilizing-forms.md#deploy-a-linked-form). Skipping this step causes Tasklist to fail with "We were not able to load the form" when you try to start the process.
+1. If using **Camunda Hub**, choose one of the following options:
+   - [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md) as a bundle.
+   - [Deploy **All resources**](/components/hub/workspace/modeler/run-or-publish-your-process.md) from the diagram or a form.
 1. Open Tasklist in your browser at http://localhost:8080/tasklist.
 1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
 1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
 1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see a `User Feedback` task waiting for you to complete.
-1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md). Open it in your browser at http://localhost:8080/operate.
+1. You can [monitor the process execution](#monitor-the-process-execution) in Operate.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
 
 </TabItem>
 </Tabs>
 
-### What to expect during execution
+### Monitor the process execution
+
+Open [Operate](/components/operate/operate-introduction.md) at http://localhost:8080/operate, and locate your process instance to watch the agent at work.
+
+Select the AI agent element to view usage metrics, its full conversation history, available tools, and other details:
+
+<img src={AgentPanelImg} alt="Agent panel overview" width="80%"/>
+
+For a hands-on walkthrough of the agent instance details available in Operate, see [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md).
 
 When you run the AI agent process:
 
@@ -285,8 +300,6 @@ When you run the AI agent process:
 1. Tasks can execute in parallel or sequentially, depending on the agent's decisions and process state.
 1. Process variables are updated as each tool completes its execution.
 1. The agent may iterate through multiple tool calls to handle complex requests.
-
-You can observe this dynamic behavior in real-time through Operate, where you'll see which tasks were activated and in what order.
 
 ## Step 4: Add your first tool
 
@@ -367,18 +380,9 @@ The LLM will recognize these as weather requests, select the **Get current weath
 
 ### Add your own tools
 
-To add more tools to your agent, follow the same pattern:
+To add more tools to your agent, follow the same pattern used above.
 
-1. Add a task inside the ad-hoc sub-process and apply a [connector](/components/connectors/introduction.md) or configure a [job worker](/components/concepts/job-workers.md).
-1. Write a clear tool name and **Documentation** description so the LLM knows when to use it.
-1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
-1. Return `toolCallResult` in the result expression or output mapping.
-
-At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
-
-:::tip
-For more examples, review the tasks already available in this blueprint and the [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) documentation.
-:::
+For more details on adding tools beyond this example, see [add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 
 ## Next steps
 

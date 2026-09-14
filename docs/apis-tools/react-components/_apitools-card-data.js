@@ -12,6 +12,8 @@ import IconPythonImg from "../img/icon-python.png";
 import IconCsharpImg from "../img/icon-csharp.png";
 // TODO: replace with a dedicated icon-rust.png once the asset is available.
 import IconRustImg from "../img/icon-earlyaccess.png";
+// TODO: replace with a dedicated icon-go.png once the asset is available.
+import IconGoImg from "../img/icon-earlyaccess.png";
 
 export const apiCards = [
   {
@@ -128,6 +130,14 @@ export const clientCards = [
     image: IconRustImg,
     description:
       "Technical preview of the Rust client SDK for the Camunda 8 Orchestration Cluster REST API.",
+    type: "",
+  },
+  {
+    link: "../go-sdk/",
+    title: "Go SDK",
+    image: IconGoImg,
+    description:
+      "Technical preview of the Go client SDK for the Camunda 8 Orchestration Cluster REST API.",
     type: "",
   },
 ];

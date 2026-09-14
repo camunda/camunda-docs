@@ -199,3 +199,45 @@ curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/health
 
 </summary>
 </details>
+
+## Back up a cluster with multiple Physical Tenants
+
+<span class="badge badge--platform">Self-Managed only</span>
+
+In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), backup and exporting control are available at two scopes. The backup procedure itself is unchanged; only the endpoint you call and the identity you call it with differ.
+
+| Scope        | Path prefix                                 | Authorization                                       | Use it to                                                      |
+| ------------ | ------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------- |
+| Tenant       | `/physical-tenants/{physicalTenantId}/v2/…` | Tenant-local `BACKUP` and `EXPORTER` permissions    | Back up or inspect one Physical Tenant                         |
+| Cluster-wide | `/cluster/v2/…`                             | [Cluster admin](/components/admin/cluster-admin.md) | Back up every Physical Tenant in one call, or inspect them all |
+
+Both scopes serve the same operations:
+
+| Operation         | Tenant-scoped                                                   | Cluster-wide                        |
+| ----------------- | --------------------------------------------------------------- | ----------------------------------- |
+| Runtime backup    | `/physical-tenants/{physicalTenantId}/v2/backups/runtime`       | `/cluster/v2/backups/runtime`       |
+| Runtime state     | `/physical-tenants/{physicalTenantId}/v2/backups/runtime/state` | `/cluster/v2/backups/runtime/state` |
+| History backup    | `/physical-tenants/{physicalTenantId}/v2/backups/history`       | `/cluster/v2/backups/history`       |
+| Exporting control | `/physical-tenants/{physicalTenantId}/v2/exporting`             | `/cluster/v2/exporting`             |
+
+Each cluster-wide endpoint also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin call to one tenant. Omit it to target every Physical Tenant.
+
+A cluster-wide request fans out to each tenant and reports the outcome per tenant, so a partial result is visible rather than hidden. Because each tenant reaches its terminal state independently, a cluster-wide backup is a set of per-tenant backups rather than a single coordinated snapshot.
+
+### Backup IDs across Physical Tenants
+
+A backup ID is unique within a Physical Tenant. Reusing an existing ID for the same tenant is rejected with `409`, while the same ID can be used by a different tenant, because each tenant has its own backup namespace.
+
+When a tenant has scheduled or continuous backups enabled, backup IDs are generated and an explicit ID is rejected. Because backup configuration is per tenant, tenants in the same cluster can be in different modes. A cluster-wide request with an explicit ID fails if any tenant generates its own IDs, and a request without an explicit ID fails if any tenant requires one. Use the tenant-scoped endpoints for mixed configurations.
+
+### Storage backends and Physical Tenants
+
+- **Elasticsearch and OpenSearch**: history backup endpoints are available. Each Physical Tenant requires its own snapshot repository, so tenants never share a snapshot namespace.
+- **Relational databases (RDBMS)**: history backup endpoints are not served. Back up each tenant's schema, database, or table prefix with the database's own tooling.
+- **Document stores**: back up each tenant's bucket, container, or path with the storage system's own tooling. The Orchestration Cluster exposes no backup API for document stores.
+
+Configure non-overlapping backup locations before starting the cluster. Camunda validates the resolved location per tenant at startup and fails to start if two tenants resolve to the same one. For the isolation rules and configuration examples, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).
+
+<!-- TODO(physical-tenants-day-2): Add concrete per-tenant backup-store configuration properties and artifact examples for runtime and history backups. Owner/reviewer: Houssain Barouni. -->
+
+To restore, see [in-process restore](./in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants).

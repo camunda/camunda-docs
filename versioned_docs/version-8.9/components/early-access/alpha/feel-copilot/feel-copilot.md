@@ -29,7 +29,9 @@ To use the FEEL Copilot in Web Modeler, take the following steps:
 
 1. If you have not already done so, [opt in](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
 1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
-1. Click **New project > Create new > BPMN diagram**.
+1. Click **New project**.
+1. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+1. In the process application, click **Create new > BPMN diagram**.
 1. Open any FEEL Popup.
 
    :::note
