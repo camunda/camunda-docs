@@ -456,7 +456,7 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 
 #### SAP BTP Plugin retired
 
-The SAP BTP Plugin is retired as of Camunda 8.10. It will continue receiving maintenance for 18 months after the Camunda 8.10 release, then be fully discontinued. No new features are planned.
+The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration.
 
 <p className="link-arrow">[SAP BTP Plugin documentation](/components/camunda-integrations/sap/btp-plugin.md)</p>
 
