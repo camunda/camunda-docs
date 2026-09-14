@@ -11,7 +11,7 @@ Helm offers external cloud file bucket storage options (recommended for producti
 - By using **external cloud file bucket storage options**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/)
-  - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
+  - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs) (Camunda 8.9.18+)
 
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost. In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 
@@ -22,7 +22,7 @@ To change the storage to **Google Cloud Platform**, **AWS S3**, or **Azure Blob 
 Below is an example of storage configuration. While this example mixes GCP, AWS, and in-memory, this example represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml). This example demonstrates the current default values and what they would need to change to enable the storage type of their preference.
 
 :::note
-Azure Blob Storage configuration differs from AWS and GCP. Only the connection string secret is managed in `values.yaml` under `global.documentStore.type.azure`. All other Azure configuration (container name, class, endpoint, etc.) must be provided via [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md). See the [Azure Blob Storage configuration](#azure-blob-storage-configuration) section below for details.
+Azure Blob Storage uses `orchestration.env` for provider settings in Camunda 8.9. See [Azure Blob Storage configuration](#azure-blob-storage-configuration) for the required values.
 :::
 
 ```
@@ -93,9 +93,22 @@ global:
 
 ## Azure Blob Storage configuration
 
-Azure Blob Storage uses a different configuration pattern than AWS and GCP. Only the connection string secret is managed via `values.yaml` under `global.documentStore.type.azure`. All other configuration (container name, class, endpoint, etc.) must be provided by the user via `orchestration.extraConfiguration` and `connectors.extraConfiguration`.
+Configure Azure Blob Storage on Camunda 8.9.18+ through environment variables on Orchestration.
 
-This follows the same [`extraConfiguration` pattern](/self-managed/deployment/helm/configure/application-configs.md) used by other application-level settings in the 8.9+ chart.
+Set the Azure provider class and container name in `orchestration.env`. For connection string authentication, supply the secret through `global.documentStore.type.azure.connectionString.secret`.
+
+Configure this document store on Orchestration only. The Connectors runtime uses the Orchestration document API rather than connecting directly to the document store.
+
+The examples use the store ID `azure`. For a custom ID, use letters and digits, set `global.documentStore.activeStoreId` to that ID, and replace `AZURE` in the environment-variable names with its uppercase form. Don't use underscores in the ID: the 8.9 loader uses underscores to separate the ID from the property name.
+
+| Environment variable                     | Configuration                                                                                                                         |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_DEFAULT_STORE_ID`              | The chart sets this from `global.documentStore.activeStoreId`.                                                                        |
+| `DOCUMENT_STORE_AZURE_CLASS`             | Required. Set to `io.camunda.document.store.azure.AzureBlobDocumentStoreProvider`.                                                    |
+| `DOCUMENT_STORE_AZURE_CONTAINER`         | Required. The name of an existing Blob container.                                                                                     |
+| `DOCUMENT_STORE_AZURE_CONNECTION_STRING` | Required for connection string authentication. The chart injects this from `global.documentStore.type.azure.connectionString.secret`. |
+| `DOCUMENT_STORE_AZURE_ENDPOINT`          | Required when you don't provide a connection string. The storage account's Blob endpoint for `DefaultAzureCredential` authentication. |
+| `DOCUMENT_STORE_AZURE_CONTAINER_PATH`    | Optional. A prefix for document blob names within the container.                                                                      |
 
 ### Prerequisites
 
@@ -107,8 +120,8 @@ This follows the same [`extraConfiguration` pattern](/self-managed/deployment/he
 
 Azure Blob Storage supports two authentication methods:
 
-1. **Connection string** — simplest setup. The connection string is injected as a secret via `global.documentStore.type.azure.connectionString.secret`.
-2. **DefaultAzureCredential** (recommended for AKS): Uses Workload Identity or Managed Identity. Set the `endpoint` in `extraConfiguration` instead of providing a connection string. Requires the `Storage Blob Data Contributor` RBAC role on the storage account.
+1. Connection string: Configure `global.documentStore.type.azure.connectionString.secret` to inject the connection string from a Kubernetes Secret.
+2. `DefaultAzureCredential` (recommended for AKS): Configure Workload Identity or Managed Identity, then set `DOCUMENT_STORE_AZURE_ENDPOINT` instead of providing a connection string. Assign the `Storage Blob Data Contributor` RBAC role on the storage account.
 
 ### Connection string authentication
 
@@ -126,59 +139,28 @@ global:
             existingSecretKey: "connection-string"
 
 orchestration:
-  extraConfiguration:
-    - file: azure-documentstore.yaml
-      content: |
-        camunda:
-          document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
-
-connectors:
-  extraConfiguration:
-    - file: azure-documentstore.yaml
-      content: |
-        camunda:
-          document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+  env:
+    - name: DOCUMENT_STORE_AZURE_CLASS
+      value: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
+    - name: DOCUMENT_STORE_AZURE_CONTAINER
+      value: my-container
 ```
 
 ### Managed Identity/DefaultAzureCredential
 
-When using AKS Workload Identity or Managed Identity, omit the connection string secret and set the `endpoint` instead:
+When using AKS Workload Identity or Managed Identity, omit the connection string secret and set `DOCUMENT_STORE_AZURE_ENDPOINT` instead:
 
 ```yaml
 global:
   documentStore:
     activeStoreId: "azure"
-    # No connectionString secret needed — DefaultAzureCredential handles auth
 
 orchestration:
-  extraConfiguration:
-    - file: azure-documentstore.yaml
-      content: |
-        camunda:
-          document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
-                endpoint: https://myaccount.blob.core.windows.net
-
-connectors:
-  extraConfiguration:
-    - file: azure-documentstore.yaml
-      content: |
-        camunda:
-          document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
-                endpoint: https://myaccount.blob.core.windows.net
+  env:
+    - name: DOCUMENT_STORE_AZURE_CLASS
+      value: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
+    - name: DOCUMENT_STORE_AZURE_CONTAINER
+      value: my-container
+    - name: DOCUMENT_STORE_AZURE_ENDPOINT
+      value: https://myaccount.blob.core.windows.net
 ```
