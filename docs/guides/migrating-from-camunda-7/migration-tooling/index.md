@@ -86,15 +86,23 @@ atx custom def save-draft -n "camunda-7-to-camunda-8-migration" \
   --description "Migrate your Camunda 7 project to Camunda 8" \
   --sd skills/migrate-c7-to-c8-code/
 
+# Run the draft against a test project using the version ID returned above.
+cd /path/to/test-camunda-7-project
+atx custom def exec -n "camunda-7-to-camunda-8-migration" \
+  --tv <draft-version-id> \
+  -p . \
+  -c "<build-command>"
+
 # Publish to your organization for anyone with the required IAM permissions
+cd /path/to/camunda-7-to-8-migration-tooling/agentic-migration-skills
 atx custom def publish -n "camunda-7-to-camunda-8-migration" \
   --sd skills/migrate-c7-to-c8-code/
 ```
 
-Run the published transformation. Running by name uses the latest published version, so you don't pass a version ID:
+Replace `<build-command>` with the command for your project, such as `mvn verify` for Maven or `./gradlew build` for Gradle. After you validate the draft, run the published transformation from the project directory. Running by name uses the latest published version, so you don't pass a version ID:
 
 ```bash
-atx custom def exec -n "camunda-7-to-camunda-8-migration" -p . -c "mvn verify"
+atx custom def exec -n "camunda-7-to-camunda-8-migration" -p . -c "<build-command>"
 ```
 
 </TabItem>
