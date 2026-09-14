@@ -6,6 +6,10 @@ description: "Learn about the Camunda SAP Business Technology Platform (BTP) plu
 
 The [Camunda SAP Business Technology Platform (BTP) plugin](/reference/glossary.md#btp) is an artifact run on BTP. It consists of a [UI5 app](https://ui5.sap.com/), a [CAP service layer and backend](https://cap.cloud.sap/) (using PostgreSQL), and an [approuter](https://www.npmjs.com/package/@sap/approuter) for traffic dispatching.
 
+:::note
+The SAP BTP plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration. For details, see the [Camunda 8.10 announcements](/reference/announcements-release-notes/8100/8100-announcements.md).
+:::
+
 The BTP plugin connects to Camunda 8 SaaS to provide:
 
 - A generic Fiori app for starting BPMN processes and displaying [Camunda Forms](/components/modeler/forms/camunda-forms-reference.md) in the Fiori design language.
