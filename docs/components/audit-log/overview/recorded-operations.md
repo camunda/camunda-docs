@@ -39,6 +39,26 @@ These operations belong to the category `USER_TASKS`. The following operations a
 | Unassign       | User task | INVALID_STATE      |
 | Complete       | User task | INVALID_STATE      |
 
+#### Variables set by user task completion
+
+In Camunda 8.10 Self-Managed, you can opt in to auditing variable changes caused by completing a Camunda user task.
+
+This behavior is disabled by default. Enable it with `camunda.data.audit-log.user-task-completion-variable-audit-enabled`, as described in [Configure the audit log](/self-managed/concepts/audit-log/configure.md#record-variables-set-by-user-task-completion).
+
+When enabled, the following successful operations belong to `USER_TASKS`, with entity type `VARIABLE`. They are separate from the user task's `COMPLETE` entry.
+
+| Operation type | Entity   | Tracked rejections |
+| :------------- | :------- | :----------------- |
+| Create         | Variable | None               |
+| Update         | Variable | None               |
+
+- Without output mappings, the audit log records variables created or updated when completion variables propagate to their target scope.
+- With output mappings, the audit log records the propagated mapping results, not temporary local variables used to evaluate the mappings.
+- A completion that produces no variable create or update event produces no variable audit entry.
+- This setting doesn't enable auditing of job worker completion or other internal variable writes.
+
+Direct variable changes through the API remain in `DEPLOYED_RESOURCES`. Variable audit entries contain metadata, not variable values. See [Variable completion metadata](operation-structure.md#variable-completion-metadata) for details.
+
 ### `ADMIN` operations
 
 You can track all changes to identity resources, like authorizations, users, and tenants. With this, you can detect misconfigurations and investigate potential unauthorized access to sensitive process data.

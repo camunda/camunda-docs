@@ -83,3 +83,24 @@ In Operate, when the inbound channel is `MCP`, it is shown separately in the **A
 ## REST API
 
 With the API, you can access more operation data than you can in the applications. See the [API response schema](../../../apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx#responses) for more information.
+
+### Variable completion metadata
+
+Variable entries recorded during user task completion describe the variable change, separately from the task completion entry.
+
+| Property                                      | Description                                                                                                             |
+| :-------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| `category`                                    | `USER_TASKS`.                                                                                                           |
+| `entityType`                                  | `VARIABLE`.                                                                                                             |
+| `operationType`                               | `CREATE` or `UPDATE`.                                                                                                   |
+| `entityKey`                                   | The variable key, not the user task key.                                                                                |
+| `entityDescription`                           | The variable name.                                                                                                      |
+| `elementInstanceKey`                          | The scope containing the variable. This can be the process instance scope rather than the user task's element instance. |
+| `processInstanceKey`                          | The process instance containing the variable.                                                                           |
+| `processDefinitionKey`, `processDefinitionId` | The associated process definition.                                                                                      |
+| `tenantId`                                    | The tenant containing the variable.                                                                                     |
+| `timestamp`                                   | The time of the variable event.                                                                                         |
+
+Variable audit entries don't include previous or new variable values. They also don't include a `userTaskKey` linking the variable change to the originating task. Use the process instance and variable scope metadata to investigate these changes, rather than filtering by a user task key.
+
+The actor comes from the authorization metadata available when the variable is written, not from the task assignee. Don't assume the original completing actor is preserved across asynchronous processing or incident recovery.
