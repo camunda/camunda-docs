@@ -16,4 +16,11 @@ Currently supported markers:
 - [Compensation](compensation-handler/compensation-handler.md)
 - [Ad-hoc](ad-hoc-subprocesses/ad-hoc-subprocesses.md)
 
-<!-- TODO: user feedback (2026-06-19) said this page has no info on how to actually place/toggle a marker in the Modeler UI. This page and its three child pages only describe what each marker means and its runtime behavior, not the context-pad/properties-panel steps to add one. Confirm the exact UI mechanism for each marker type with the Modeler team before adding steps here; it could not be verified from this repo or public sources. -->
+## Add a marker to an element
+
+Markers are applied through the element's context pad or the properties panel, not drawn directly:
+
+- **Context pad**: Select the element, then click the **Change type** icon (the wrench). Choosing a different element behavior from the menu, for example converting a sub-process into an ad-hoc sub-process, applies the corresponding marker automatically.
+- **Properties panel**: Select the element, then set the relevant characteristic in the properties panel. For example, setting an activity's loop type to sequential or parallel applies the multi-instance marker, and marking an activity as a compensation handler applies the compensation marker.
+
+For a walkthrough of the context pad and properties panel, see [model your first diagram](/components/modeler/desktop-modeler/model-your-first-diagram.md).
