@@ -24,7 +24,7 @@ Back up and restore Optimize independently of the Orchestration Cluster.
 
 Optimize always stores its data in Elasticsearch or OpenSearch, regardless of what the Orchestration Cluster uses as secondary storage. Which backup procedure to follow depends on what secondary storage the Orchestration Cluster uses:
 
-- **Elasticsearch / OpenSearch**: Optimize shares the same ES/OS instance with the Orchestration Cluster. Backup must be **coordinated**: all components use a single shared backup ID within the same backup window. Optimize cannot be backed up independently in this configuration. Use the [Elasticsearch / OpenSearch backup guide](./elasticsearch/backup.md).
+- **Elasticsearch / OpenSearch**: Optimize shares the same ES/OS instance with the Orchestration Cluster. Backup must be **coordinated**: all components use a single shared backup ID within the same backup window. Optimize cannot be backed up independently in this configuration. Use the [Elasticsearch / OpenSearch backup guide](./backup/elasticsearch/backup.md).
 - **RDBMS**: Optimize stores its data in Elasticsearch or OpenSearch independently of the Orchestration Cluster's RDBMS storage. There is no shared backup boundary to keep consistent. Optimize can be backed up on its own schedule with its own backup IDs. Use this guide.
 
 :::warning

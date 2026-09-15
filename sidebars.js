@@ -2208,18 +2208,53 @@ module.exports = {
           },
           items: [
             {
-              Elasticsearch: [
-                "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
-                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
-              ],
-              "Relational databases": [
-                "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
-                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+              type: "category",
+              label: "Creating backups",
+              items: [
+                {
+                  type: "doc",
+                  id: "self-managed/operational-guides/backup-restore/backup/elasticsearch/es-backup",
+                  label: "ES/OS",
+                },
+                {
+                  type: "doc",
+                  id: "self-managed/operational-guides/backup-restore/backup/rdbms/rdbms-backup",
+                  label: "RDBMS",
+                },
               ],
             },
-            "self-managed/operational-guides/backup-restore/in-process-restore",
             {
-              "Backup Management API": [
+              type: "category",
+              label: "Restoring backups",
+              items: [
+                "self-managed/operational-guides/backup-restore/restore/in-process-restore",
+                {
+                  type: "doc",
+                  id: "self-managed/operational-guides/backup-restore/restore/elasticsearch/es-os-restore",
+                  label: "ES/OS backup restore",
+                },
+                {
+                  type: "category",
+                  label: "(Legacy) Restoring a backup",
+                  items: [
+                    {
+                      type: "doc",
+                      id: "self-managed/operational-guides/backup-restore/restore/elasticsearch/es-restore",
+                      label: "ES/OS",
+                    },
+                    {
+                      type: "doc",
+                      id: "self-managed/operational-guides/backup-restore/restore/rdbms/rdbms-restore",
+                      label: "RDBMS",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "category",
+              label: "Backup Management API",
+              items: [
                 "self-managed/operational-guides/backup-restore/optimize-backup",
                 "self-managed/operational-guides/backup-restore/webapps-backup",
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",

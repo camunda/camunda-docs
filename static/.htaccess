@@ -1047,6 +1047,11 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/agentic-ai-aia
 RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess/ [R=301,L]
 
 # Restructure Backup and restore guide
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/elasticsearch/backup/?$ /docs/self-managed/operational-guides/backup-restore/backup/elasticsearch/backup/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/rdbms/backup/?$ /docs/self-managed/operational-guides/backup-restore/backup/rdbms/backup/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/elasticsearch/restore/?$ /docs/self-managed/operational-guides/backup-restore/restore/elasticsearch/es-os-restore/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/rdbms/restore/?$ /docs/self-managed/operational-guides/backup-restore/restore/rdbms/restore/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/in-process-restore/?$ /docs/self-managed/operational-guides/backup-restore/restore/in-process-restore/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 

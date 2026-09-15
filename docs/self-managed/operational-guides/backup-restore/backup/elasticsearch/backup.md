@@ -39,7 +39,7 @@ To learn more about how to configure these settings, refer to the prerequisites 
 ### Why you should use backup and restore
 
 :::note
-The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](../webapps-backup.md).
+The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](../../webapps-backup.md).
 :::
 
 :::note
@@ -117,7 +117,7 @@ You can also optionally [back up your Camunda Hub data](#back-up-hub-data).
 
 In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), the actuator calls in this procedure apply cluster-wide, so following the steps as written backs up every Physical Tenant. Add `?physicalTenant={physicalTenantId}` to an actuator request to scope it to one tenant instead.
 
-The Orchestration Cluster REST API serves the same operations, with the authorization model and per-tenant outcome reporting described in [back up a cluster with multiple Physical Tenants](../backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants). Use the REST API when you need per-tenant results, tenant-local authorization, or [cluster admin](/components/admin/cluster-admin.md) separation from the management port.
+The Orchestration Cluster REST API serves the same operations, with the authorization model and per-tenant outcome reporting described in [back up a cluster with multiple Physical Tenants](../../backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants). Use the REST API when you need per-tenant results, tenant-local authorization, or [cluster admin](/components/admin/cluster-admin.md) separation from the management port.
 
 ## Back up process
 
@@ -125,9 +125,9 @@ The Orchestration Cluster REST API serves the same operations, with the authoriz
 
 :::note
 
-This depends heavily on your setup. The following examples are based on those given in the [Management API](../backup-and-restore.md#management-api) section for Kubernetes using either active port-forwarding or an override of the local `curl` command.
+This depends heavily on your setup. The following examples are based on those given in the [Management API](../../backup-and-restore.md#management-api) section for Kubernetes using either active port-forwarding or an override of the local `curl` command.
 
-As noted in the [Management API](../backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
+As noted in the [Management API](../../backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
 
 :::
 
@@ -174,7 +174,7 @@ As noted in the [Management API](../backup-and-restore.md#management-api) sectio
 
 This step uses the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md?exporting=softPause#exporting-api).
 
-This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](../backup-and-restore.md#why-you-should-use-backup-and-restore).
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as described in the [backup process](../../backup-and-restore.md#backup-process).
 
 ```bash
 curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/pause?soft=true"
@@ -756,7 +756,7 @@ Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a d
 :::
 
 :::info
-You can [restore a Camunda Hub data backup](restore.md#optional-restore-a-camunda-hub-data-backup).
+You can [restore a Camunda Hub data backup](../../modeler-backup-and-restore.md).
 :::
 
 ## Cleaning up backups
@@ -777,4 +777,4 @@ For Zeebe, you would also have to remove the separately backed up `zeebe-record`
 This only affects the primary storage and does not interfere with Elasticsearch/OpenSearch backups.
 :::
 
-With Camunda 8.9 you now have the option to enable a retention mechanism over primary storage (Zeebe's) backups. This will periodically delete backups from the configured blob storage based on the preconfigured retention window. Learn more about configuring backup retention [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackupretention).
+With Camunda 8.9 you now have the option to enable a retention mechanism over primary storage (Zeebe's) backups. This will periodically delete backups from the configured blob storage based on the preconfigured retention window. Learn more about configuring backup retention [here](../../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackupretention).
