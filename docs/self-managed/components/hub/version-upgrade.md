@@ -72,7 +72,7 @@ If the migration fails, the application exits before the probes become reachable
 
 If you employ automated liveness checks that can trigger application restarts, take into account that database migrations can run for a time that exceeds your liveness probe's timeout.
 This depends on the concrete version gap as well as the size and resources of your database.
-Camunda recommends performing a migration on a test system of similar specification if you believe an upgrade will be time-sensitive.
+Camunda recommends performing the migration on a test system of similar specification first, so you can measure the actual migration duration and adjust your liveness probe timeout if needed.
 
 ### Database lock
 
