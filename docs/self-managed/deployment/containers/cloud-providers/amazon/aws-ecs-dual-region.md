@@ -209,12 +209,13 @@ The full validation contract — including the plan-time checks that fail with a
 
 Aurora Global Database replicates asynchronously, so a writer promotion can leave the new writer missing whatever had not reached it yet. What closes that gap is Camunda, not Aurora: with asynchronous replication monitoring enabled, the RDBMS exporter acknowledges a record to the broker only once the database reports it replicated, which holds back Zeebe log compaction so the missing records are replayed from the log.
 
-The reference architecture enables it and pins the three settings that decide what it delivers:
+The reference architecture enables it and pins the four settings that decide what it delivers:
 
 | Setting                                       | Value     | Why                                                                                                                                               |
 | --------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `async-replication.enabled`                   | `true`    | Off by default. Without it the exporter acknowledges records the standby has not received, and a failover loses them.                             |
 | `async-replication.type`                      | `LOG_SEQ` | Reads Aurora's own replication position. It is the engine default, but only some vendors support it, so it is pinned where the vendor is known.   |
+| `async-replication.max-lag`                   | `PT15M`   | The lag budget. Beyond it the exporter is considered out of sync, which is what the next setting reacts to.                                       |
 | `async-replication.pause-on-max-lag-exceeded` | `true`    | Decides the failure mode once `max-lag` is exceeded. It is not a data-loss control: acknowledgement is gated on confirmed replication either way. |
 
 That last one is worth understanding before you change it. It is not a data-loss control, and it is not a disk control either. Records are only ever acknowledged once Aurora confirms them, so no data is lost either way, and the Zeebe log grows either way: the exporter position cannot advance past unconfirmed records, so compaction stays blocked for as long as replication is behind, paused or not.
