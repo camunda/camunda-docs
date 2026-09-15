@@ -441,7 +441,7 @@ The Orchestration Cluster continues its 8.9 consolidation work with completed un
 Orchestration Cluster enhancements in 8.9 include scheduled backups, Elasticsearch 9 support, Amazon Aurora as secondary storage, per-broker RocksDB memory sizing, and the unified RocksDB cache model introduced in the first alpha. Together, these changes improve backup automation, storage flexibility, and operational tuning for Self-Managed deployments.
 
 <ul>
-  <li><span class="link-arrow">[Scheduled backup](/self-managed/operational-guides/backup-restore/rdbms/backup.md#scheduled-backup)</span></li>
+  <li><span class="link-arrow">[Scheduled backup](/self-managed/operational-guides/backup-restore/backup/rdbms/backup.md#scheduled-backup)</span></li>
   <li><span class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</span></li>
 </ul>
 
@@ -937,7 +937,7 @@ You can now configure scheduled backup intervals and retention directly in the O
 - Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs.
 - Backwards compatible with existing backup commands.
 
-<p class="link-arrow">[Scheduled backup (RDBMS)](/self-managed/operational-guides/backup-restore/rdbms/backup.md#scheduled-backup)</p>
+<p class="link-arrow">[Scheduled backup (RDBMS)](/self-managed/operational-guides/backup-restore/backup/rdbms/backup.md#scheduled-backup)</p>
 
 #### Update cluster variables
 

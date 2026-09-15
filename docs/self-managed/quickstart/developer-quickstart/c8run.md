@@ -86,5 +86,5 @@ For local shutdown commands, see [shut down Camunda 8 Run](./c8run/install-start
 
 ## Next steps
 
-- Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/rdbms/backup.md).
+- Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/backup/rdbms/backup.md).
 - Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).

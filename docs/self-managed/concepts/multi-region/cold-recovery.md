@@ -47,7 +47,7 @@ You must back up **both** Primary and Secondary storage layers for a complete Co
 | **Secondary storage** (Elasticsearch/OpenSearch) | Elasticsearch/OpenSearch index snapshots | Orchestration cluster backup API                                         |
 | **Secondary storage** (RDBMS)                    | Database dump or continuous backup       | Database-native tools (`pg_dump`, Oracle RMAN, AWS RDS automated backup) |
 
-The RDBMS backup path is the **first phase** of new backup capabilities and currently covers a narrower set of components than the Elasticsearch/OpenSearch path. See [relational database backup](/self-managed/operational-guides/backup-restore/rdbms/backup.md) for the components it includes.
+The RDBMS backup path is the **first phase** of new backup capabilities and currently covers a narrower set of components than the Elasticsearch/OpenSearch path. See [relational database backup](/self-managed/operational-guides/backup-restore/backup/rdbms/backup.md) for the components it includes.
 
 ### Component coverage
 
@@ -134,7 +134,7 @@ Document and rehearse the specific mechanism you will use as part of your DR dri
 - [Dual-Region](./dual-region.md)
 - [Backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 - [Zeebe backup management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
-- [Elasticsearch backup](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md)
-- [Elasticsearch restore](/self-managed/operational-guides/backup-restore/elasticsearch/restore.md)
-- [RDBMS backup](/self-managed/operational-guides/backup-restore/rdbms/backup.md)
-- [RDBMS restore](/self-managed/operational-guides/backup-restore/rdbms/restore.md)
+- [Elasticsearch backup](/self-managed/operational-guides/backup-restore/backup/elasticsearch/backup.md)
+- [Elasticsearch restore](/self-managed/operational-guides/backup-restore/restore/elasticsearch/es-os-restore.md)
+- [RDBMS backup](/self-managed/operational-guides/backup-restore/backup/rdbms/backup.md)
+- [RDBMS restore](/self-managed/operational-guides/backup-restore/restore/rdbms/restore.md)

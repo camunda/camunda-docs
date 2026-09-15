@@ -1,7 +1,7 @@
 ---
 id: rdbms-restore
-title: "Restore a backup (RDBMS)"
-sidebar_label: "Restore a backup"
+title: "Restore a backup"
+sidebar_label: "Relational Database restore"
 keywords:
   [
     "backup",
@@ -26,12 +26,12 @@ import TabItem from '@theme/TabItem';
 Restore a previous backup of your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, Tasklist, and Admin) when using a relational database management system (RDBMS) as secondary storage.
 
 :::tip
-This procedure is the recovery step of [Cold Recovery](../../../concepts/multi-region/cold-recovery.md) when restoring into a secondary region after primary-region loss.
+This procedure is the recovery step of [Cold Recovery](../../../../concepts/multi-region/cold-recovery.md) when restoring into a secondary region after primary-region loss.
 :::
 
 ## How RDBMS restore works
 
-As described in the [architecture overview](./backup.md#architecture-overview), backups involve two independent systems: **primary storage backups** (Zeebe's log stream and snapshots in a blob store) and the **secondary storage backup** (the RDBMS).
+As described in the [architecture overview](../../backup/rdbms/backup.md#architecture-overview), backups involve two independent systems: **primary storage backups** (Zeebe's log stream and snapshots in a blob store) and the **secondary storage backup** (the RDBMS).
 
 During restore, Zeebe reads the **exporter position** from the restored RDBMS — the last log stream position that was successfully exported — and uses it to determine which primary storage backup, or backups, to restore from. This ensures that Zeebe's state is at least as advanced as what the RDBMS contains. After restart, Zeebe re-exports any events between the RDBMS position and its restored checkpoint position, bringing the secondary storage up to date.
 
@@ -50,8 +50,8 @@ The following prerequisites are required before you can restore a backup:
 | :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Camunda version    | Backups can be restored using the same Camunda version they were created with, or up to one minor version newer. For example, a backup taken with 8.9.x can be restored with 8.9.x or 8.10.x. |
 | RDBMS restored     | You have already restored the RDBMS from its backup using your database vendor's native tools. The restored database must contain the entire Camunda schema.                                  |
-| Backup available   | At least one Zeebe primary storage backup is available in the configured blob store. See [Create a backup](./backup.md).                                                                      |
-| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](./backup.md#prerequisites).                                                                               |
+| Backup available   | At least one Zeebe primary storage backup is available in the configured blob store. See [Create a backup](../../backup/rdbms/backup.md).                                                     |
+| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](../../backup/rdbms/backup.md#prerequisites).                                                              |
 | Components stopped | All Camunda components (Zeebe, Operate, Tasklist, Optimize, Connectors) must be stopped before starting the restore process.                                                                  |
 
 :::warning
@@ -62,6 +62,10 @@ It is critical that no Camunda components are running during the restore. Runnin
 
 In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
 
+:::note Deprecated restore procedure
+The [in-process restore](../in-process-restore.md) guide is the recommended way to restore Zeebe partitions. The standalone restore procedure on this page is deprecated.
+:::
+
 Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::warning
@@ -71,7 +75,7 @@ Persistent volumes or disks must not contain any pre-existing data before restor
 :::warning
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running on this node. The partition count **must be the same** as in the backup.
 
-The number of partitions backed up is also visible via the [backup management API](../zeebe-backup-and-restore.md#list-backups-api).
+The number of partitions backed up is also visible via the [backup management API](../../zeebe-backup-and-restore.md#list-backups-api).
 If brokers were dynamically scaled between backup and restore, this is not an issue — as long as the partition count remains unchanged.
 :::
 
@@ -115,7 +119,6 @@ orchestration:
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
       value: "rdbms"
     # Rest of the RDBMS configuration (URL, username, password)
-
 connectors:
   enabled: false
 optimize:
@@ -147,9 +150,9 @@ tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
 
 ### Point-in-time restore
 
-Restore Zeebe to a specific point in time using `--to`. The restore app finds the closest backup to the provided timestamp. The configured [checkpoint interval](./backup.md#checkpoint-interval) determines how fine-grained the restore points are.
+Restore Zeebe to a specific point in time using `--to`. The restore app finds the closest backup to the provided timestamp. The configured [checkpoint interval](../../backup/rdbms/backup.md#checkpoint-interval) determines how fine-grained the restore points are.
 
-Use the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-state) to inspect available backup ranges.
+Use the [backup state actuator](../../zeebe-backup-and-restore.md#request-runtime-state) to inspect available backup ranges.
 
 <Tabs>
   <TabItem value="env" label="Environment variables" default>
@@ -380,10 +383,10 @@ After starting the components, monitor the logs for any errors or warnings. Comp
 
 If you previously backed up Optimize data, restore it independently using the standalone Optimize restore procedure. Optimize can be restored while the Orchestration Cluster restore is in progress or after it completes; the restore procedures are independent.
 
-See [back up and restore Optimize independently](../optimize-backup-and-restore.md#restore-a-backup) for the complete procedure.
+See [back up and restore Optimize independently](../../optimize-backup-and-restore.md#restore-a-backup) for the complete procedure.
 
 ## (Optional) Restore Camunda Hub data
 
 If you previously backed up Camunda Hub data, restore it using the same RDBMS restore tools.
 
-See [backup and restore Camunda Hub data](../modeler-backup-and-restore.md) for more details.
+See [backup and restore Camunda Hub data](../../modeler-backup-and-restore.md) for more details.

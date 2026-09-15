@@ -1,7 +1,7 @@
 ---
 id: in-process-restore
-title: "Restore a cluster in place"
-sidebar_label: "In-process restore"
+title: "Restoring a cluster"
+sidebar_label: "Restoring a backup"
 keywords:
   [
     "backup",
@@ -14,7 +14,7 @@ keywords:
 description: "Restore Zeebe partition data in-process without requiring the restart of the brokers themselves."
 ---
 
-With Camunda 8.10 and later, you can restore Zeebe partition data in-process without requiring the restart of the brokers themselves. In-process restore is a downtime operation that runs while the cluster is in recovery mode, but it does not require any deployment changes or broker restarts, in contrast to the old [standalone restore application](./elasticsearch/restore.md#restore-zeebe-cluster). The brokers keep running, so you don't override the broker start command, set restore-only environment variables, or clear broker data directories yourself.
+With Camunda 8.10 and later, you can restore Zeebe partition data in-process without requiring the restart of the brokers themselves. In-process restore is a downtime operation that runs while the cluster is in recovery mode, but it does not require any deployment changes or broker restarts, in contrast to the old [standalone restore application](./elasticsearch/es-restore.md). The brokers keep running, so you don't override the broker start command, set restore-only environment variables, or clear broker data directories yourself.
 
 ## How in-process restore works
 
@@ -29,14 +29,14 @@ Both requests are non-blocking. Each is acknowledged as soon as the cluster acce
 
 ## Prerequisites
 
-| Prerequisite     | Description                                                                                                                                                                                                                                |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version  | Camunda 8.10 or later, restored with the exact version the backup was created with.                                                                                                                                                        |
-| Backup store     | Every broker is configured with the same backup store that holds the backup, as described in the [Elasticsearch and OpenSearch](./elasticsearch/backup.md#prerequisites) or [RDBMS](./rdbms/backup.md#prerequisites) backup prerequisites. |
-| Completed backup | A completed backup exists for every partition. List the available backups with the [Zeebe backup management API](./zeebe-backup-and-restore.md#list-backups-api).                                                                          |
-| Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged.                                                                |
-| API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                                                             |
-| Authorizations   | If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                                                                                |
+| Prerequisite     | Description                                                                                                                                                                                                                                                |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda version  | Camunda 8.10 or later, restored with the exact version the backup was created with.                                                                                                                                                                        |
+| Backup store     | Every broker is configured with the same backup store that holds the backup, as described in the [Elasticsearch and OpenSearch](../backup/elasticsearch/backup.md#prerequisites) or [RDBMS](../backup/rdbms/backup.md#prerequisites) backup prerequisites. |
+| Completed backup | A completed backup exists for every partition. List the available backups with the [Zeebe backup management API](../zeebe-backup-and-restore.md#list-backups-api).                                                                                         |
+| Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged.                                                                                |
+| API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                                                                             |
+| Authorizations   | If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                                                                                                |
 
 ## Restoring a cluster
 
@@ -83,10 +83,10 @@ With the cluster in recovery mode, nothing is exported to secondary storage, so 
 
 In-process restore only restores Zeebe's primary storage. Restore secondary storage to the point in time you intend to restore the primary storage to, using the procedure for your deployment:
 
-- [Elasticsearch and OpenSearch](./elasticsearch/restore.md#restore-elasticsearch-opensearch): restore the snapshots of all components using the same backup ID you pass to the Zeebe restore in [step 3](#3-trigger-the-restore). A mismatched backup ID produces an inconsistent restore point.
+- [Elasticsearch and OpenSearch](./elasticsearch/es-os-restore.md#restore-elasticsearch-opensearch): restore the snapshots of all components using the same backup ID you pass to the Zeebe restore in [step 3](#3-trigger-the-restore). A mismatched backup ID produces an inconsistent restore point.
 - [Relational databases (RDBMS)](./rdbms/restore.md): restore the database with its native tooling. Camunda aligns the Zeebe and RDBMS restore points automatically.
 
-For the components and coordination rules of each path, see [Camunda back up and restore](./backup-and-restore.md).
+For the components and coordination rules of each path, see [Camunda back up and restore](../backup-and-restore.md).
 
 Complete this step before you trigger the Zeebe restore. The restore switches the brokers back to `PROCESSING` as soon as the last partition is restored, and processing then resumes against whatever secondary storage is in place.
 
@@ -106,11 +106,11 @@ The response returns the `changeId` of the restore, along with the planned opera
 {
   "changeId": "8",
   "plannedChanges": [
-    { "operation": "PartitionPreRestoreOperation", "mode": null },
-    { "operation": "PartitionRestoreOperation", "mode": null },
+    { "operation": "PartitionPreRestoreOperation" },
+    { "operation": "PartitionRestoreOperation" },
     { "operation": "ModeChangeOperation", "mode": "PROCESSING" },
     { "operation": "AwaitModeChangeOperation", "mode": "PROCESSING" },
-    { "operation": "UpdateIncarnationNumberOperation", "mode": null }
+    { "operation": "UpdateIncarnationNumberOperation" }
   ]
 }
 ```
@@ -119,10 +119,10 @@ The partition operations repeat once per broker and partition, and the plan does
 
 How you select the data to restore depends on your secondary storage:
 
-| Secondary storage            | Selection                                                               | Notes                                                                                                                                                                                                                                                     |
-| :--------------------------- | :---------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Elasticsearch and OpenSearch | A single backup ID in `backupIds`.                                      | Restoring from a time range or from multiple backups is not supported.                                                                                                                                                                                    |
-| RDBMS                        | `backupIds`, the time range `from` and `to`, or no request body at all. | Omitting both resolves the best available restore point automatically, the same default behavior as the [standalone restore app](./rdbms/restore.md#default-restore). The time range requires [continuous backups](./rdbms/backup.md#continuous-backups). |
+| Secondary storage            | Selection                                                               | Notes                                                                                                                                                                                                                                                             |
+| :--------------------------- | :---------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch and OpenSearch | A single backup ID in `backupIds`.                                      | Restoring from a time range or from multiple backups is not supported.                                                                                                                                                                                            |
+| RDBMS                        | `backupIds`, the time range `from` and `to`, or no request body at all. | Omitting both resolves the best available restore point automatically, the same default behavior as the [standalone restore app](./rdbms/restore.md#default-restore). The time range requires [continuous backups](../backup/rdbms/backup.md#continuous-backups). |
 
 With an RDBMS as secondary storage and continuous backups enabled, restore to a point in time by passing an ISO 8601 range instead of backup IDs:
 
@@ -257,7 +257,7 @@ curl -X POST "${ORCHESTRATION_CLUSTER_API}/restore?dryRun=true" \
 
 A dry run of a restore covers the same validation as the real request. It rejects invalid parameter combinations, checks that a completed backup exists for every partition, and, for an RDBMS time range or an empty request body, resolves the restore point from the backup metadata. A request that passes the dry run is accepted as a real request as long as the cluster and the backup store do not change in between.
 
-The dry run does not report which backups it resolved. The response only contains the `changeId` and the planned operations, in the same shape as a real request, so the concrete backup ID per partition is not part of it. To confirm the selection, list the available backups with the [Zeebe backup management API](./zeebe-backup-and-restore.md#list-backups-api) before the restore, or pass explicit `backupIds` instead of relying on automatic resolution.
+The dry run does not report which backups it resolved. The response only contains the `changeId` and the planned operations, in the same shape as a real request, so the concrete backup ID per partition is not part of it. To confirm the selection, list the available backups with the [Zeebe backup management API](../zeebe-backup-and-restore.md#list-backups-api) before the restore, or pass explicit `backupIds` instead of relying on automatic resolution.
 
 ## Handle a failed restore
 
