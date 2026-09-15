@@ -21,7 +21,7 @@ description: "Track active job types, job outcomes, and job worker activity.",
 link: "./business-value-dashboard",
 title: "Monitor the business value dashboard",
 image: DocsIcon,
-description: "Track process outcomes using cycle time, automation rate, volume, and agentic adoption metrics.",
+description: "Track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics.",
 },
 {
 link: "../../../optimize/userguide/agentic-control-plane/",

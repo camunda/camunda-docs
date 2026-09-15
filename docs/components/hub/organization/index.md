@@ -97,6 +97,6 @@ description: "Use the job dashboard to see which job types are active, how many 
 link: "./analyze-operations/business-value-dashboard",
 title: "Monitor the business value dashboard",
 image: DocsIcon,
-description: "Track process outcomes using cycle time, automation rate, volume, and agentic adoption metrics, and set targets for cycle time and automation rate.",
+description: "Track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and set targets for cycle time and automation rate.",
 },
 ]} columns={2}/>
