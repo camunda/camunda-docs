@@ -15,3 +15,11 @@ Currently supported markers:
 - [Multi-instance](multi-instance/multi-instance.md)
 - [Compensation](compensation-handler/compensation-handler.md)
 - [Ad-hoc](ad-hoc-subprocesses/ad-hoc-subprocesses.md)
+
+## Add a marker to an element
+
+Markers are applied through the element's context pad, not drawn directly.
+
+Select the element, then click the **Change type** icon (the wrench). Choosing a different element behavior from the menu, for example converting a sub-process into an ad-hoc sub-process, applies the corresponding marker automatically.
+
+For a walkthrough of the context pad, see [model your first diagram](/components/modeler/desktop-modeler/model-your-first-diagram.md).
