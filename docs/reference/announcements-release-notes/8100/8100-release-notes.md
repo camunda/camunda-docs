@@ -221,6 +221,24 @@ Refer to the updated Helm configuration and secret management documentation for:
 
 Support for physical tenant isolation in 8.10 is added for the Camunda 8 REST API, RDBMS storage, and Document Store.
 
+### Integrations
+
+#### Camunda for Slack
+
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
+
+Camunda for Slack brings tasks, processes, and notifications into Slack through the same App Integrations backend as Microsoft Teams. Everything runs through the `/camunda` slash command, the Camunda direct message, and channel mentions; there is no tab app.
+
+From Slack, you can list and filter tasks, claim and release them, complete a task from a Block Kit modal, start a process, switch organization and cluster, and subscribe a channel or direct message to user task notifications. Slack also works with the App Integrations connector in both directions: a process can send a Slack message, and a Slack message can reach a process.
+
+Microsoft Teams and Slack are independent. You can run either on its own, or both against the same backend.
+
+This feature is released as an early access alpha feature.
+
+<p class="link-arrow">[Camunda for Slack](/components/camunda-integrations/app-integrations/slack.md)</p>
+
 ### Modeler
 
 #### Modeling menu improvements

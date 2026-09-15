@@ -338,14 +338,14 @@ Camunda 8.9 adds Azure Blob Storage as a supported document store for Self-Manag
 
 The Camunda for Microsoft Teams app is now available for Self-Managed environments as well as SaaS. This lets teams claim and complete Camunda tasks directly in Microsoft Teams across more deployment models.
 
-<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
+<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/app-integrations/microsoft-teams.md)</p>
 
 ### Live task updates and assignment notifications in Microsoft Teams
 
 Camunda for Microsoft Teams now updates a notification card as its task is assigned, completed, or canceled, and notifies you when an existing task is later assigned to you. On SaaS, these capabilities require a cluster running generation `8.9 gen13` or later with **Enable app integrations extensions** turned on in the cluster settings.
 
 <ul>
-  <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/ms-teams/ms-teams-notifications.md#enable-notification-delivery-for-your-cluster)</span></li>
+  <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/app-integrations/notification-rules.md#enable-notification-delivery-for-your-cluster)</span></li>
   <li><span class="link-arrow">[Enable app integrations extensions](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions)</span></li>
 </ul>
 
@@ -762,7 +762,7 @@ The Camunda for Microsoft Teams app is now available in Self-Managed environment
 
 You can use this app to view, claim, and complete Camunda tasks directly in Microsoft Teams.
 
-<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
+<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/app-integrations/microsoft-teams.md)</p>
 
 ### Modeler
 
