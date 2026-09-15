@@ -210,6 +210,10 @@ Users interacting with AI-driven processes should know they are doing so. Make s
 - Users know how to escalate or get help.
 - There is a plan for communicating disruptions or incidents, both internally and, where required, externally.
 
+The same applies to any interface you build on top of Camunda's AI features. When you surface AI interactions or AI-generated output to your own users, they should be able to tell that AI is involved. [Article 50 of the EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) is a helpful reference here, covering transparency for systems that interact with people or generate content. Camunda marks the AI-generated content it produces to cover its own role as a provider, so it's worth adding a notice of your own wherever users meet your agent or its output.
+
+In practice, this can be as simple as noting that a chat assistant is AI-powered, or labeling AI-generated text, decisions, or documents before you present them to end users.
+
 ### Bias and fairness
 
 Where an AI agent makes or influences decisions in sensitive areas, such as HR, financial access, or similar, build in a periodic fairness review.
