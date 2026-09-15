@@ -29,7 +29,7 @@ camunda:
       oidc:
         issuer-uri: https://keycloak.example.com/auth/realms/camunda-platform
         client-id: web-modeler
-        username-claim: preferred_username # optional, default: sub
+        username-claim: oid # optional, default: sub
         audiences: web-modeler-api,web-modeler-public-api # optional
 ```
 
@@ -40,7 +40,7 @@ camunda:
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- | ------------- |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`     | URL of the token issuer, used for JWT validation. Individual endpoints are fetched from the provider's [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig).         | `https://keycloak.example.com/auth/realms/camunda-platform` | -             |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`      | Client ID of the Camunda Hub application configured in your identity provider.                                                                                                                                                 | `web-modeler`                                               | -             |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM` | [optional]<br/>Token claim used to assign usernames.                                                                                                                                                                           | `preferred_username`                                        | `sub`         |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM` | [optional]<br/>The JWT claim that identifies a user.                                                                                                                                                                           | `oid`                                                       | `sub`         |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`     | [optional]<br/>Comma-separated list of accepted audience claim values, used for JWT validation. Includes the audiences for both user access tokens and the [public Camunda Hub API](/apis-tools/hub-api-sm/authentication.md). | `web-modeler-api,web-modeler-public-api`                    | -             |
 
 </TabItem>
