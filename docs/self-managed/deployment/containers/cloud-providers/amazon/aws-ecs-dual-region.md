@@ -205,6 +205,31 @@ BYO-VPC is the preferred path for customers integrating with an existing AWS lan
 
 The full validation contract — including the plan-time checks that fail with a descriptive error when a constraint is missing — lives in [`terraform/vpc/README.md`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/vpc/README.md) in the reference repository.
 
+### Secondary storage replication lag
+
+Aurora Global Database replicates asynchronously, so a writer promotion can leave the new writer missing whatever had not reached it yet. What closes that gap is Camunda, not Aurora: with asynchronous replication monitoring enabled, the RDBMS exporter acknowledges a record to the broker only once the database reports it replicated, which holds back Zeebe log compaction so the missing records are replayed from the log.
+
+The reference architecture enables it and pins the four settings that decide what it delivers. All four sit under the `camunda.data.secondary-storage.rdbms.` prefix, shortened in the table below:
+
+| Setting                                       | Value     | Why                                                                                                                                                                        |
+| --------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async-replication.enabled`                   | `true`    | Off by default. Without it the exporter acknowledges records the standby has not received, and a failover loses them.                                                      |
+| `async-replication.type`                      | `LOG_SEQ` | Reads Aurora's own replication position. It is the engine default, but only some vendors support it, so it is pinned where the vendor is known.                            |
+| `async-replication.max-lag`                   | `PT1H`    | Threshold on the age of the oldest unconfirmed exporter position, which is what the next setting reacts to. Not an acknowledgement delay. Raised from the `PT15M` default. |
+| `async-replication.pause-on-max-lag-exceeded` | `true`    | Decides the failure mode once `max-lag` is exceeded. It is not a data-loss control: acknowledgement is gated on confirmed replication either way.                          |
+
+`max-lag` is not compared against a lag figure Aurora reports, and it doesn't delay acknowledgement: confirmed positions are acknowledged as soon as Aurora reports them. Under `LOG_SEQ`, the engine measures how long the oldest exporter position has been waiting for its log sequence number to be confirmed, so the value is really the longest replication interruption you want the deployment to ride out. A cross-region writer promotion under sustained load can run past the `PT15M` engine default, which would pause the exporter during the exact event this architecture treats as routine.
+
+Raising it doesn't blind you to a lost secondary, but the timing depends on what is in flight. While nothing is queued, the number of in-sync replicas falling below `min-sync-replicas` is reported as worst-case lag, which pauses the exporter at the next poll whatever the budget is. Once positions are queued, the queue-head age governs instead, so that case waits out `max-lag` like any other.
+
+`pause-on-max-lag-exceeded` is worth understanding before you change it. It is not a data-loss control, and it is not a disk control either. Records are only ever acknowledged once Aurora confirms them, so no data is lost either way, and the Zeebe log grows either way: the exporter position cannot advance past unconfirmed records, so compaction stays blocked for as long as replication is behind, paused or not.
+
+What it decides is whether the exporter keeps writing to a database that is already lagging, or stops and says so. Paused, the exporter raises an error that reaches the exporter metrics and the broker log rather than degrading quietly, and it stops adding load to the database that needs to catch up. Zeebe keeps processing throughout, and the APIs and web applications that read secondary storage serve stale data until Aurora recovers.
+
+EFS is elastic, so a prolonged outage doesn't hit a capacity wall the way a fixed volume would. It grows stored bytes and burns throughput for as long as it lasts, which shows up as cost rather than a full disk. Monitor EFS storage growth and throughput, and alert on replication lag, regardless of this setting.
+
+For the full property reference, including the `LOG_SEQ` vendor support list and the delay-backoff fallback, see [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support).
+
 ## Deployment walkthrough
 
 ### Step 1 — Configure
