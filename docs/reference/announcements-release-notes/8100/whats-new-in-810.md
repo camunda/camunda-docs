@@ -17,6 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
+import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-region-overview.png';
 
 <PageDescription />
 
@@ -26,15 +27,13 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 <div className="list-tick">
 
-- **Agentic orchestration**: AI agent visibility and explainability with live agent state, tool calls, and conversation history, providing production-grade agentic trust via testing, visibility, auditability, and control-plane monitoring.
+- **Agentic orchestration**: Real-time agent visibility and explainability with live agent state, tool calls, and conversation history, providing production-grade agentic trust with testing, visibility, auditability, and control-plane monitoring.
 
-- **Camunda Hub**: Camunda Hub is now the single place where you and your teams build, govern, and run process solutions in Camunda. Hub is where you design, model, manage, and oversee your processes, replacing Web Modeler and Console.
+- **Camunda Hub**: Camunda Hub becomes the single place where teams build, govern, and run process solutions in Camunda. Hub replaces Web Modeler and Console and is now where you design, model, manage, and oversee your processes.
 
-- **Strong isolation with physical tenants**: Enterprise-grade physical isolation with per-tenant APIs, web apps, roles and identity provider selection, while logical multi-tenancy becomes officially supported on SaaS.
+- **Multi-region resilience**: Asynchronous RDBMS replication and failure-domain-aware partition placement provides configurable recovery behavior and stronger disaster recovery.
 
-- **Multi-region resilience**: Asynchronous RDBMS replication and failure-domain-aware partition placement provide configurable recovery behavior and stronger disaster recovery.
-
-- **Unified authentication**: The Orchestration Cluster, Camunda Hub, and Optimize all authenticate through the Camunda Security Library and accept the same `camunda.security.*` configuration, with legacy properties deprecated and removed in 8.11.
+- **Strong tenant isolation via physical tenants**: Enterprise-grade physical isolation with per-tenant APIs, web apps, roles and identity provider selection. Logical multi-tenancy becomes officially supported on SaaS.
 
 </div>
 
@@ -51,6 +50,32 @@ Important changes in Camunda 8.10 are summarized in the following sections.
 :::
 
 ## Agentic orchestration
+
+8.10 provides real-time agent visibility and monitoring...
+
+## Multi-region resilience
+
+Camunda 8.10 provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments.
+
+<img src={OverviewImg} alt="High-level diagram showing Cold Recovery and Dual-Region strategies" title="Cold Recovery and Dual-Region strategies" class="img-noborder img-900"/>
+
+- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable.
+
+- **[Dual-Region](/self-managed/concepts/multi-region/dual-region.md)**: Dual-region deployment with continuous replication. A full Camunda Orchestration Cluster runs continuously in both a primary and secondary region.
+
+- **Three-region active-active (RDBMS)**: A three-region Kubernetes deployment with the Orchestration Cluster running active-active across all three regions, backed by a relational database (RDBMS) with cross-region replication as secondary storage. Losing one region requires no operator intervention, because the cluster never loses quorum.
+
+<p class="link-arrow">[Multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md)</p>
+
+## Strong tenant isolation via Physical tenants
+
+Camunda 8.10 introduces Physical Tenants for strong physical data isolation within a single cluster with separate data storage and independent operations per tenant. Physical Tenants still share cluster compute resources such as CPU and memory, so runtime interference is reduced but not fully eliminated.
+
+- Physical Tenant isolation is best for multiple teams or organizations needing strong isolation without the cost and complexity of separate clusters.
+
+- Physical Tenants and Logical Tenants can be used together. Each Physical Tenant can contain its own set of Logical Tenants, providing two independent layers of isolation: physical separation between top-level tenant groups, and logical separation within each group.
+
+<p class="link-arrow">[Multi-tenancy](/self-managed/concepts/multi-tenancy/index.md)</p>
 
 ## Camunda Hub
 
