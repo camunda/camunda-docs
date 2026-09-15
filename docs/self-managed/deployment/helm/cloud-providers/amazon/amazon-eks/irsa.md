@@ -268,8 +268,7 @@ The role's **trust policy** must allow the relevant Kubernetes service accounts 
       "Condition": {
         "StringEquals": {
           "oidc.eks.<region>.amazonaws.com/id/<oidc-id>:sub": [
-            "system:serviceaccount:<namespace>:<release-name>-orchestration",
-            "system:serviceaccount:<namespace>:<release-name>-connectors"
+            "system:serviceaccount:<namespace>:<release-name>-orchestration"
           ]
         }
       }
@@ -298,16 +297,27 @@ orchestration:
   serviceAccount:
     annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
-
-connectors:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
 ```
 
+Annotate the `orchestration` service account shown above. If Web Modeler REST API uses the same document store, annotate its service account separately.
+
 :::note
-With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token. Annotate the service account of every component you have enabled to use the document store; otherwise that component cannot reach S3.
+With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token.
 :::
+
+### Configure connector task credentials separately
+
+Connectors accesses documents through the Orchestration REST API, not the document store directly. Don't grant the document-store IAM role to the Connectors service account.
+
+Camunda no longer propagates document-store credentials to the Connectors pod. If a connector task uses cloud credentials from the pod environment, configure those credentials under `connectors`:
+
+| Connector task credential source     | Configuration                                                                                                                                                            |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| AWS default credentials chain on EKS | Annotate `connectors.serviceAccount.annotations` with a connector-specific IAM role.                                                                                     |
+| Static AWS credentials               | Supply the credentials through `connectors.env` or `connectors.envFrom`.                                                                                                 |
+| GCP service account file             | Set `GOOGLE_APPLICATION_CREDENTIALS` through `connectors.env`, mount the Secret through `connectors.extraVolumes`, and attach it through `connectors.extraVolumeMounts`. |
+
+Use a role or Secret scoped to the connector tasks. Don't reuse the document-store role or credentials.
 
 ### Verify
 
