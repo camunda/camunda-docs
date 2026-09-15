@@ -32,6 +32,29 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0
+
+| Release date    | Changelog(s)                                                                                 | Blog |
+| :-------------- | :------------------------------------------------------------------------------------------- | :--- |
+| 13 October 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0)</li></ul> | -    |
+
+### Camunda Hub
+
+#### Business value dashboard
+
+<!-- https://github.com/camunda/product-hub/issues/3543 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Use the new **Business Value** page in Camunda Hub to track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and to set targets for cycle time and automation rate.
+
+- A portfolio view compares every process in the selected Orchestration Cluster on target coverage, target attainment, activity, automation rate, cycle time, and agentic adoption, and ranks off-target processes by how many targets are missed and by how far.
+- A process view shows the metrics and targets for a single process, including per-metric target status and a cycle time distribution with P50, average, and P95.
+- Set optional targets for cycle time and automation rate against the current baseline. Activity is shown as a metric, but you can't set a target for it in 8.10.
+- Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
+
+<p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
+
 ## 8.10.0-alpha5
 
 | Release date     | Changelog(s)                                                                                        | Blog |
@@ -113,23 +136,6 @@ The new Camunda visual design system is introduced with this alpha for Self-Mana
 :::note
 The new design system will be introduced for SaaS deployments with the 8.10 minor release.
 :::
-
-### Camunda Hub
-
-#### Business value dashboard
-
-<!-- https://github.com/camunda/product-hub/issues/3543 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
-
-Use the new **Business Value** page in Camunda Hub to track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and to set targets for cycle time and automation rate.
-
-- A portfolio view compares every process in the selected Orchestration Cluster on target coverage, target attainment, activity, automation rate, cycle time, and agentic adoption, and ranks off-target processes by how many targets are missed and by how far.
-- A process view shows the metrics and targets for a single process, including per-metric target status and a cycle time distribution with P50, average, and P95.
-- Set optional targets for cycle time and automation rate against the current baseline. Activity is shown as a metric, but you can't set a target for it in 8.10.
-- Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
-
-<p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
 
 ### Connectors
 

@@ -57,15 +57,14 @@ Cycle time is the elapsed duration of a completed process instance, from start t
 
 The portfolio view summarizes all processes in the selected cluster. Use it to see where targets are met and which processes need attention.
 
-| Metric               | What it shows                                                                                             | How to interpret it                                                                        |
-| :------------------- | :-------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
-| Target coverage      | How many active processes have at least one target set.                                                   | Low coverage means the summary reflects only part of your processes.                       |
-| Target attainment    | How many configured targets are currently met.                                                            | The headline result for the cluster.                                                       |
-| Activity             | Completed work handled and how it changes over time.                                                      | Read it as context. Activity isn't compared against a target.                              |
-| Automation rate      | The aggregated automation rate for the cluster, plus a per-process comparison.                            | Use it to find processes that still rely heavily on manual work.                           |
-| Cycle time           | A process-by-process comparison and the longest-running processes.                                        | Use it to find where processes take longest to complete.                                   |
-| Agentic adoption     | Which processes use [agentic](/components/agentic-orchestration/agentic-orchestration-overview.md) steps. | Use it to see where AI agents already handle part of the work.                             |
-| Off-target processes | Processes with missed targets, ranked by how many targets are off first, then by how far off.             | Start with the top entry. See [investigate a missed target](#investigate-a-missed-target). |
+| Metric                         | What it shows                                                                                              | How to interpret it                                                                        |
+| :----------------------------- | :--------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
+| Target coverage and attainment | How many active processes have at least one target set, and how many configured targets are currently met. | Low coverage means the summary reflects only part of your processes.                       |
+| Activity                       | Completed work handled and how it changes over time.                                                       | Read it as context. Activity isn't compared against a target.                              |
+| Automation rate                | The aggregated automation rate for the cluster, plus a per-process comparison.                             | Use it to find processes that still rely heavily on manual work.                           |
+| Cycle time                     | A process-by-process comparison and the longest-running processes.                                         | Use it to find where processes take longest to complete.                                   |
+| Agentic adoption               | Which processes use [agentic](/components/agentic-orchestration/agentic-orchestration-overview.md) steps.  | Use it to see where AI agents already handle part of the work.                             |
+| Off-target processes           | Processes with missed targets, ranked by how many targets are off first, then by how far off.              | Start with the top entry. See [investigate a missed target](#investigate-a-missed-target). |
 
 ## Review the process view
 
