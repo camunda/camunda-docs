@@ -823,6 +823,7 @@ module.exports = {
                 id: "components/hub/organization/analyze-operations/analyze-operations",
               },
               items: [
+                "components/hub/organization/analyze-operations/hub-dashboard",
                 "components/hub/organization/analyze-operations/job-dashboard",
               ],
             },
@@ -2277,6 +2278,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
                 "self-managed/concepts/physical-tenants/app-integrations",
+                "self-managed/concepts/physical-tenants/troubleshooting",
               ],
             },
           ],
