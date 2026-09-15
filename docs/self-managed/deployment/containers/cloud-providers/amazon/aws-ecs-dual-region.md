@@ -211,14 +211,16 @@ Aurora Global Database replicates asynchronously, so a writer promotion can leav
 
 The reference architecture enables it and pins the four settings that decide what it delivers:
 
-| Setting                                       | Value     | Why                                                                                                                                               |
-| --------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `async-replication.enabled`                   | `true`    | Off by default. Without it the exporter acknowledges records the standby has not received, and a failover loses them.                             |
-| `async-replication.type`                      | `LOG_SEQ` | Reads Aurora's own replication position. It is the engine default, but only some vendors support it, so it is pinned where the vendor is known.   |
-| `async-replication.max-lag`                   | `PT15M`   | The lag budget. Beyond it the exporter is considered out of sync, which is what the next setting reacts to.                                       |
-| `async-replication.pause-on-max-lag-exceeded` | `true`    | Decides the failure mode once `max-lag` is exceeded. It is not a data-loss control: acknowledgement is gated on confirmed replication either way. |
+| Setting                                       | Value     | Why                                                                                                                                                        |
+| --------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async-replication.enabled`                   | `true`    | Off by default. Without it the exporter acknowledges records the standby has not received, and a failover loses them.                                      |
+| `async-replication.type`                      | `LOG_SEQ` | Reads Aurora's own replication position. It is the engine default, but only some vendors support it, so it is pinned where the vendor is known.            |
+| `async-replication.max-lag`                   | `PT1H`    | How long the exporter waits for a confirmation before it counts as out of sync, which is what the next setting reacts to. Raised from the `PT15M` default. |
+| `async-replication.pause-on-max-lag-exceeded` | `true`    | Decides the failure mode once `max-lag` is exceeded. It is not a data-loss control: acknowledgement is gated on confirmed replication either way.          |
 
-That last one is worth understanding before you change it. It is not a data-loss control, and it is not a disk control either. Records are only ever acknowledged once Aurora confirms them, so no data is lost either way, and the Zeebe log grows either way: the exporter position cannot advance past unconfirmed records, so compaction stays blocked for as long as replication is behind, paused or not.
+`max-lag` is not compared against a lag figure Aurora reports. Under `LOG_SEQ`, the engine measures how long the oldest exporter position has been waiting for its log sequence number to be confirmed, so the value is really the longest replication interruption you want the deployment to ride out. A cross-region writer promotion under sustained load can run past the `PT15M` engine default, which would pause the exporter during the exact event this architecture treats as routine. Raising it doesn't hide a lost replica: a missing secondary is reported as worst-case lag, which trips the pause immediately past any finite budget.
+
+`pause-on-max-lag-exceeded` is worth understanding before you change it. It is not a data-loss control, and it is not a disk control either. Records are only ever acknowledged once Aurora confirms them, so no data is lost either way, and the Zeebe log grows either way: the exporter position cannot advance past unconfirmed records, so compaction stays blocked for as long as replication is behind, paused or not.
 
 What it decides is whether the exporter keeps writing to a database that is already lagging, or stops and says so. Paused, the exporter raises an error that reaches the exporter metrics and the broker log rather than degrading quietly, and it stops adding load to the database that needs to catch up. Zeebe keeps processing throughout, and the APIs and web applications that read secondary storage serve stale data until Aurora recovers. Size the EFS volume and alert on replication lag regardless of this setting.
 
