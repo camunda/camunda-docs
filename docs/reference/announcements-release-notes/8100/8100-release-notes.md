@@ -321,17 +321,26 @@ Camunda 8 Run now includes a bundled Java runtime. This means you no longer need
 
 ## Camunda Hub
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-Release notes required.
+Camunda Hub is now the single place where you and your teams build, govern, and run process solutions in Camunda.
+
+- Hub is now where you design, model, manage, and oversee your processes. Hub replaces Web Modeler and Console, keeping their existing features while adding new features within a single unified platform.
+
+- Hub is deployed only once, and serves as the single point of entry for all your environments, connecting to all your dev, staging, and production Orchestration Clusters.
+
+**Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your clusters. You design once, and manage everything from one place.
+
+<ul>
+  <li><span class="link-arrow">[What's new in 8.10: Introducing Camunda Hub](/reference/announcements-release-notes/8100/whats-new-in-810.md)</span></li>
+  <li><span class="link-arrow">[Camunda Hub](/components/hub/index.md)</span></li>
+</ul>
 
 ### Camunda design system
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+A new visual Camunda design system is introduced with Hub in the 8.10 release.
 
-The new Camunda visual design system is introduced for Hub with the 8.10 release.
-
-- A new, streamlined design system offers a cleaner, more consistent look across components.
+- The new, streamlined design system offers a cleaner, more consistent look across components.
 - Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
 - The new design system is enabled by default for Camunda Hub in both Self-Managed and SaaS.
 
