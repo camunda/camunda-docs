@@ -28,6 +28,8 @@ This API currently supports the following operations:
 - [Update partition distribution](#partition-distribution-api)
 - [Force-remove, re-add, and migrate a zone](#zones-api)
 
+See also: [Add or remove a zone](/self-managed/components/orchestration-cluster/zeebe/operations/add-remove-zone.md) for a step-by-step guide.
+
 ## Exporting API
 
 Use the Exporting API for the followings:
