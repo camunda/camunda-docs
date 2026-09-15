@@ -29,6 +29,35 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 63
+
+### Publication date
+
+September 10, 2026
+
+### Products affected
+
+- Camunda Optimize
+
+### Impact
+
+The application was vulnerable to the following vulnerabilities in the embedded Eclipse Jetty web server:
+
+- [CVE-2026-19203](https://nvd.nist.gov/vuln/detail/CVE-2026-19203), where a flaw in HTTP/1.1 chunked request parsing accepts a lone line feed (`LF`) character as a terminator in parts of chunked requests. When deployed behind an intermediary reverse proxy that requires strict `CRLF` delimiters, this discrepancy in request boundary interpretation can lead to HTTP request smuggling.
+- [CVE-2026-12611](https://nvd.nist.gov/vuln/detail/CVE-2026-12611), where a race condition in the HTTP/2 server implementation when handling concurrent `RST_STREAM` and `GOAWAY` frames from a client can cause write-blocked threads to never be unblocked, potentially leading to thread exhaustion and a Denial of Service. The default Camunda Optimize configuration is not exploitable; this vulnerability only applies when HTTP/2 support is explicitly enabled (`container.http2Enabled: true`).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Optimize ≤ 8.7.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Optimize 8.7.28
+
 ## Notice 62
 
 ### Publication date
