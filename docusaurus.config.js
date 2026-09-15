@@ -5,6 +5,17 @@ const { currentVersion } = require("./src/versions");
 const [_currentMajor, _currentMinor] = currentVersion.split(".").map(Number);
 const nextVersion = `${_currentMajor}.${_currentMinor + 1}`;
 
+// Build only selected doc versions to cut build time and memory.
+//   DOCS_ONLY_VERSIONS=current           -> only the unreleased docs (the `docs/` folder)
+//   DOCS_ONLY_VERSIONS=8.9               -> only the 8.9 versioned docs
+//   DOCS_ONLY_VERSIONS=current,8.9       -> both
+// The first selected version becomes `lastVersion`, so it is served at the site
+// root instead of its usual path (for example, `current` is served at `/` rather
+// than `/next`).
+const onlyIncludeVersions = process.env.DOCS_ONLY_VERSIONS
+  ? process.env.DOCS_ONLY_VERSIONS.split(",").map((v) => v.trim())
+  : undefined;
+
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
@@ -29,8 +40,10 @@ module.exports = {
     currentVersion,
     nextVersion,
   },
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  // Partial-version builds can't resolve links into the versions they skip,
+  // so downgrade link errors to warnings when DOCS_ONLY_VERSIONS is set.
+  onBrokenLinks: onlyIncludeVersions ? "warn" : "throw",
+  onBrokenMarkdownLinks: onlyIncludeVersions ? "warn" : "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
   projectName: "camunda-docs", // Usually your repo name.
@@ -759,19 +772,28 @@ module.exports = {
           remarkPlugins: [
             require("./static/plugins/terminology/remark-glossary-terms"),
           ],
-          lastVersion: currentVersion,
+          ...(onlyIncludeVersions ? { onlyIncludeVersions } : {}),
+          lastVersion:
+            onlyIncludeVersions && !onlyIncludeVersions.includes(currentVersion)
+              ? onlyIncludeVersions[0]
+              : currentVersion,
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
-          versions: {
-            current: {
-              label: "8.10 (unreleased)",
-            },
-            8.8: {
-              banner: "none",
-            },
-            8.7: {
-              banner: "none",
-            },
-          },
+          versions: Object.fromEntries(
+            Object.entries({
+              current: {
+                label: "8.10 (unreleased)",
+              },
+              8.8: {
+                banner: "none",
+              },
+              8.7: {
+                banner: "none",
+              },
+            }).filter(
+              ([version]) =>
+                !onlyIncludeVersions || onlyIncludeVersions.includes(version)
+            )
+          ),
           docItemComponent: "@theme/ApiItem",
         },
         blog: false,
