@@ -142,7 +142,7 @@ Requests that combine `backupIds` with `from` or `to`, that specify a time range
 
 ### 4. Track the restore
 
-While a restore is in flight, the restore status reports progress per broker and per partition:
+While a restore is in flight, [the restore status](/apis-tools/orchestration-cluster-api-rest/specifications/get-restore-status.api.mdx) reports progress per broker and per partition:
 
 ```bash
 curl "${ORCHESTRATION_CLUSTER_API}/restore"
@@ -198,7 +198,7 @@ At most one restore is in flight at any time. Once the restore has finished, thi
 
 ### 5. Confirm the cluster state after restore
 
-Check that every partition is active and healthy again:
+Check that every partition is active and healthy again using [the topology](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx):
 
 ```bash
 curl "${ORCHESTRATION_CLUSTER_API}/topology"
@@ -210,22 +210,22 @@ The cluster leaves recovery mode as part of the restore, so no further action is
 
 <span class="badge badge--platform">Self-Managed only</span>
 
-In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), the `/v2/mode` and `/v2/restore` endpoints used above target a single tenant. An unprefixed request targets the default Physical Tenant; prefix the path with `/physical-tenants/{physicalTenantId}` to target another one.
+In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), the `/v2/mode` and `/v2/restore` endpoints used above are scoped to whichever Physical Tenant your credentials belong to. There is no way to target a different tenant from these self-service endpoints, because the tenant is resolved from the caller's identity, not from the request path.
 
-The cluster-wide counterparts under `/cluster/v2/...` apply the same two-request flow to every Physical Tenant at once and require [cluster admin](/components/admin/cluster-admin.md) access:
+To restore a specific tenant other than your own, or every tenant at once, use the cluster-wide endpoints under `/cluster/v2/...`. These require [cluster admin](/components/admin/cluster-admin.md) access instead of an Orchestration Cluster user's credentials:
 
-| Step          | Tenant-scoped                                          | Cluster-wide               |
-| ------------- | ------------------------------------------------------ | -------------------------- |
-| Recovery mode | `PATCH /physical-tenants/{physicalTenantId}/v2/mode`   | `PATCH /cluster/v2/mode`   |
-| Trigger       | `POST /physical-tenants/{physicalTenantId}/v2/restore` | `POST /cluster/v2/restore` |
-| Track         | `GET /physical-tenants/{physicalTenantId}/v2/restore`  | `GET /cluster/v2/restore`  |
-| Confirm       | `GET /physical-tenants/{physicalTenantId}/v2/topology` | `GET /cluster/v2/topology` |
+| Step          | Tenant-scoped (your own tenant)                                                                           | Cluster-wide (cluster admin)                                                                                                             |
+| ------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Recovery mode | [`PATCH /v2/mode`](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode.api.mdx) | [`PATCH /cluster/v2/mode`](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode-as-cluster-admin.api.mdx)       |
+| Trigger       | [`POST /v2/restore`](/apis-tools/orchestration-cluster-api-rest/specifications/restore.api.mdx)           | [`POST /cluster/v2/restore`](/apis-tools/orchestration-cluster-api-rest/specifications/restore-as-cluster-admin.api.mdx)                 |
+| Track         | [`GET /v2/restore`](/apis-tools/orchestration-cluster-api-rest/specifications/get-restore-status.api.mdx) | No cluster-wide status endpoint exists. Check each tenant's own restore status, or confirm recovery through cluster-wide topology below. |
+| Confirm       | [`GET /v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx)      | [`GET /cluster/v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-topology.api.mdx)                     |
 
 ### Choose the restore scope
 
 Use a tenant-scoped restore when one Physical Tenant has corrupted or missing data and the other tenants should keep processing. Use a cluster-wide restore when several tenants need recovery, or when the whole cluster must be returned to a coordinated state.
 
-Both cluster-wide endpoints accept an optional `physicalTenantId` query parameter. Naming a tenant restores only that tenant; omitting the parameter restores every configured tenant.
+The cluster-wide endpoints accept an optional `physicalTenantId` query parameter. Naming a tenant restores only that tenant; omitting the parameter restores every configured tenant.
 
 ```bash
 export CLUSTER_ADMIN_API=http://localhost:8080/cluster/v2
