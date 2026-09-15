@@ -18,9 +18,8 @@ Currently supported markers:
 
 ## Add a marker to an element
 
-Markers are applied through the element's context pad or the properties panel, not drawn directly:
+Markers are applied through the element's context pad, not drawn directly.
 
-- **Context pad**: Select the element, then click the **Change type** icon (the wrench). Choosing a different element behavior from the menu, for example converting a sub-process into an ad-hoc sub-process, applies the corresponding marker automatically.
-- **Properties panel**: Select the element, then set the relevant characteristic in the properties panel. For example, setting an activity's loop type to sequential or parallel applies the multi-instance marker, and marking an activity as a compensation handler applies the compensation marker.
+Select the element, then click the **Change type** icon (the wrench). Choosing a different element behavior from the menu, for example converting a sub-process into an ad-hoc sub-process, applies the corresponding marker automatically.
 
-For a walkthrough of the context pad and properties panel, see [model your first diagram](/components/modeler/desktop-modeler/model-your-first-diagram.md).
+For a walkthrough of the context pad, see [model your first diagram](/components/modeler/desktop-modeler/model-your-first-diagram.md).
