@@ -1,0 +1,5 @@
+<svg height="40" version="1.1" width="40" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="20" cy="20" r="15" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" id="svg_1" style="stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;"></circle>
+  <circle cx="20" cy="20" r="12" fill="none" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" style="stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;"></circle>
+  <path fill="#ffffff" stroke="#333333" d="M19.834856,21.874369L9.762008,21.873529L6.650126,12.293421000000002L14.799725,6.373429600000001L22.948336,12.294781L19.834856,21.874369Z" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" transform="matrix(0.9375,0,0,0.9375,5.925,5.8827)" style="stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;"></path>
+</svg>
