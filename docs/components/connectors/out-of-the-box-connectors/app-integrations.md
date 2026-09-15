@@ -31,7 +31,7 @@ If you do not use app integrations, and you would rather register your own app a
 
 <OutboundConnectorBasics />
 
-App integrations must be set up before this connector can be used. This is an administrator task, and it is done once per environment, there is nothing to configure on the task itself.
+App integrations must be set up before this connector can be used. This is an administrator task, done once per environment. There is nothing to configure on the task itself.
 
 <Tabs groupId="environment" defaultValue="saas" values={[
 { label: 'SaaS', value: 'saas' },
@@ -63,7 +63,7 @@ When the runtime authenticates with OAuth 2.0, it also needs the cluster's ID. T
 
 ## Send message
 
-Send a message to one or more destinations. Choose the **Recipient source** first, it determines which targets and which content formats are available.
+Send a message to one or more destinations. Choose the **Recipient source** first. It determines which targets and which content formats are available.
 
 ### Recipient
 
@@ -122,7 +122,7 @@ There is no workspace field on send message. The destination is the workspace th
 
 ### Message content
 
-**Message** is plain text and always available. It is optional, leave it empty to send only the additional content, or fill both to send text and a card in one message.
+**Message** is plain text and always available. It is optional. Leave it empty to send only the additional content, or fill both to send text and a card in one message.
 
 **Additional content** offers different formats depending on the recipient, because each platform accepts different payloads:
 
@@ -132,7 +132,7 @@ There is no workspace field on send message. The destination is the workspace th
 | Microsoft Teams | None · Adaptive card · Form |
 | Slack           | None · Block Kit · Form     |
 
-You can select at most one, so a card and a form are mutually exclusive. You must provide a message, additional content, or both, an empty message with **None** is rejected before any call is made.
+You can select at most one, so a card and a form are mutually exclusive. You must provide a message, additional content, or both. An empty message with **None** is rejected before any call is made.
 
 | Additional content | Property         | Type | Required | Description                             |
 | :----------------- | :--------------- | :--- | :------- | :-------------------------------------- |
@@ -143,7 +143,7 @@ Both fields accept pasted JSON as well as a FEEL expression referencing a card b
 
 When **Block Kit blocks** is combined with a **Message**, the message text is posted as a leading section block above the supplied blocks.
 
-When additional content is **Form**, the connector renders a linked Camunda form, as an Adaptive Card on Microsoft Teams, as Block Kit on Slack. Select the form and its binding in the properties panel:
+When additional content is **Form**, the connector renders a linked Camunda form: an Adaptive Card on Microsoft Teams, or Block Kit on Slack. Select the form and its binding in the properties panel:
 
 | Property     | Type     | Required | Description                                                     |
 | :----------- | :------- | :------- | :-------------------------------------------------------------- |
@@ -211,7 +211,7 @@ Create a channel in Microsoft Teams or Slack. Select the platform first.
 | Property     | Type     | Required | Description                                                                                         | Example                |
 | :----------- | :------- | :------- | :-------------------------------------------------------------------------------------------------- | :--------------------- |
 | Channel name | String   | Yes      | Display name for the new channel. Maximum 50 characters.                                            | `Releases`             |
-| Team ID      | String   | Yes      | The team's group ID, or a full Teams URL, the `groupId` query parameter is extracted automatically. | `<groupId>`            |
+| Team ID      | String   | Yes      | The team's group ID, or a full Teams URL. The `groupId` query parameter is extracted automatically. | `<groupId>`            |
 | Channel type | Dropdown | Yes      | Membership type. Only **Standard** is available.                                                    | `Standard`             |
 | Description  | String   | No       | Channel description.                                                                                | `Release coordination` |
 
@@ -223,15 +223,15 @@ Only standard channels are supported. Private and shared channels are not yet av
 
 <TabItem value="slack">
 
-| Property        | Type    | Required | Description                                                                                        | Example                |
-| :-------------- | :------ | :------- | :------------------------------------------------------------------------------------------------- | :--------------------- |
-| Channel name    | String  | Yes      | Lowercase letters, digits, hyphens, and underscores only. Maximum 80 characters.                   | `releases`             |
-| Workspace ID    | String  | No       | Slack workspace (team) ID. Leave empty for the normal case.                                        | `T0123`                |
-| Private channel | Boolean | No       | Create the channel as private rather than public. Slack supports private channels, Teams does not. | `false`                |
-| Description     | String  | No       | Applied after creation. A failure here is logged and does not fail the operation.                  | `Release coordination` |
+| Property        | Type    | Required | Description                                                                                                                  | Example                |
+| :-------------- | :------ | :------- | :--------------------------------------------------------------------------------------------------------------------------- | :--------------------- |
+| Channel name    | String  | Yes      | Lowercase letters, digits, hyphens, and underscores only. Maximum 80 characters.                                             | `releases`             |
+| Workspace ID    | String  | No       | Slack workspace (team) ID. Leave empty for the normal case.                                                                  | `T0123`                |
+| Private channel | Boolean | No       | Create the channel as private rather than public. The connector's Microsoft Teams operation supports only standard channels. | `false`                |
+| Description     | String  | No       | Applied after creation. A failure here is logged and does not fail the operation.                                            | `Release coordination` |
 
 :::note
-The backend holds one bot token and no installation store, so a channel can only be created in that token's workspace. A supplied **Workspace ID** is checked against it and rejected with HTTP `400` when it differs, it can never route the creation to a different workspace. Leave it empty in the normal case.
+The backend holds one bot token and no installation store, so a channel can only be created in that token's workspace. A supplied **Workspace ID** is checked against it and rejected with HTTP `400` when it differs. It can never route the creation to a different workspace. Leave it empty in the normal case.
 :::
 
 </TabItem>
@@ -410,7 +410,7 @@ Tell people which words your conversation shouldn't use. Words the Camunda app a
 
 When app integrations are not set up for the environment, every job fails immediately with the error code `APP_INTEGRATIONS_NOT_CONFIGURED` and raises an incident.
 
-This failure is **not retried**. The **Retries** and **Retry backoff** settings on the task do not apply, because no amount of retrying can supply missing configuration. Only processes using this connector are affected, the connector runtime keeps serving every other connector.
+This failure is **not retried**. The **Retries** and **Retry backoff** settings on the task do not apply, because no amount of retrying can supply missing configuration. Only processes using this connector are affected. The connector runtime keeps serving every other connector.
 
 Resolving it is an administrator task. See [prerequisites](#prerequisites).
 

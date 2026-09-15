@@ -183,6 +183,7 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #---------------------------------------------------------------------------------
 
 # Microsoft Teams docs became App Integrations, which covers Slack as well (8.10)
+RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
 RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-installation/?$ /docs/next/components/camunda-integrations/app-integrations/installation/ [R=301,L]
 RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-troubleshoot/?$ /docs/next/components/camunda-integrations/app-integrations/troubleshoot/ [R=301,L]
 RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-chatbot/?$ /docs/next/components/camunda-integrations/app-integrations/microsoft-teams/ [R=301,L]

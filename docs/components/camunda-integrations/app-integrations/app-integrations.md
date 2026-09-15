@@ -2,6 +2,7 @@
 id: app-integrations
 title: Camunda app integrations
 sidebar_label: App Integrations
+slug: /components/camunda-integrations/app-integrations/
 description: "Bring Camunda process management into Microsoft Teams and Slack with one shared backend."
 ---
 

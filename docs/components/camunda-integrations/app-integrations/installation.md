@@ -93,7 +93,7 @@ You must ensure the SPA App Registration has the `offline_access` permission gra
 
 Complete only the tabs for the platforms you are registering. Registering Microsoft Teams does not require Slack, and registering Slack does not require Microsoft Teams.
 
-Both platforms are set up with `@camunda/app-integration-cli`, version 2, which provides two binaries: `c8-teams` and `c8-slack`. You run only the binary for the platform you are registering, and both expose the same four commands: `create`, `build`, `deploy`, and `show-config`.
+Both platforms are set up with `@camunda/app-integration-cli`, version 2, which provides two binaries: `c8-teams` and `c8-slack`. You run only the binary for the platform you are registering. Both share the same core commands: `create`, `build`, `deploy`, and `show-config`. The Slack binary also provides `migrate`, described below.
 
 :::note
 The superseded v1 package, `@camunda/teams-app-integration-cli`, still exists as a deprecated alias with the `c8teams` binary. A project created with v1 migrates automatically on first load with the v2 CLI, and `c8-slack migrate` runs the migration explicitly.
@@ -235,7 +235,7 @@ And these bot events: `app_home_opened`, `app_mention`, `app_uninstalled`, `chan
 The slash command, event subscriptions, interactivity, and options load all point at the same request URL: `<backend>/api/slack/events`. There is no OAuth redirect URL and no Slack OAuth callback in the backend.
 
 :::warning
-Slack does not grant a new permission to an already installed app. If a release adds a scope, an event, or a request URL, every workspace must reinstall the app before the new behaviour works. The app does not fail, it silently does less.
+Slack does not grant a new permission to an already installed app. If a release adds a scope, an event, or a request URL, every workspace must reinstall the app before the new behavior works. The app does not fail. It silently does less.
 :::
 
 </TabItem>
