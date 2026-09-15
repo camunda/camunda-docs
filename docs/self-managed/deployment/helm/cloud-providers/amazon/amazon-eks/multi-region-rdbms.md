@@ -87,19 +87,19 @@ Following this guide gives you:
 
 The default topology uses three regions and three zones:
 
-| Setting                          | Default                                  | Meaning                                                                 |
-| :------------------------------- | :--------------------------------------- | :---------------------------------------------------------------------- |
-| Regions                          | `eu-west-2`, `eu-west-3`, `eu-central-2` | London, Paris, Zurich                                                   |
-| Zone names                       | `london`, `paris`, `zurich`              | One zone per region                                                     |
-| `orchestration.multiregion.mode` | `zoned`                                  | Zone-aware partitioning                                                 |
-| `numberOfBrokers` per zone       | `2`                                      | Brokers deployed in that zone                                           |
-| `numberOfReplicas` per zone      | `2`, `2`, `1`                            | Two in each database region, one in the tie-breaker                     |
-| `orchestration.clusterSize`      | `6`                                      | Sum of `numberOfBrokers` across zones; the zone list is what derives it |
-| Replication factor               | `5`                                      | Sum of `numberOfReplicas` across zones                                  |
-| `orchestration.partitionCount`   | `6`                                      | One partition per broker                                                |
-| Database regions                 | Slots `0` and `1`                        | Aurora members, writer first                                            |
+| Setting                              | Default                                  | Meaning                                                                 |
+| :----------------------------------- | :--------------------------------------- | :---------------------------------------------------------------------- |
+| Regions                              | `eu-west-2`, `eu-west-3`, `eu-central-2` | London, Paris, Zurich                                                   |
+| Zone names                           | `london`, `paris`, `zurich`              | One zone per region                                                     |
+| `orchestration.clusterTopology.mode` | `zoned`                                  | Zone-aware partitioning                                                 |
+| `numberOfBrokers` per zone           | `2`                                      | Brokers deployed in that zone                                           |
+| `numberOfReplicas` per zone          | `2`, `2`, `1`                            | Two in each database region, one in the tie-breaker                     |
+| `orchestration.clusterSize`          | `6`                                      | Sum of `numberOfBrokers` across zones; the zone list is what derives it |
+| Replication factor                   | `5`                                      | Sum of `numberOfReplicas` across zones                                  |
+| `orchestration.partitionCount`       | `6`                                      | One partition per broker                                                |
+| Database regions                     | Slots `0` and `1`                        | Aurora members, writer first                                            |
 
-Brokers are identified as `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region; only `orchestration.multiregion.zone` and the advertised host differ.
+Brokers are identified as `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region; only `orchestration.clusterTopology.zone` and the advertised host differ.
 
 ### CIDR allocation
 
@@ -398,7 +398,7 @@ The generated contact points end with a trailing dot, which marks them as fully 
 
 ### Review the Helm values
 
-The values file is the same in every region. Only `orchestration.multiregion.zone` and the advertised host differ, which is what makes the topology a single description rather than one per region.
+The values file is the same in every region. Only `orchestration.clusterTopology.zone` and the advertised host differ, which is what makes the topology a single description rather than one per region.
 
 <details>
 <summary>See the full camunda-values.yml</summary>
@@ -409,8 +409,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 The parts worth reading before you install:
 
-- `orchestration.multiregion.mode: zoned` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the `regions` and `regionId` keys in this mode, and derives the cluster size, replication factor, and broker node IDs from the zone list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
-- `orchestration.multiregion.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
+- `orchestration.clusterTopology.mode: zoned` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the `regions` and `regionId` keys in this mode, and derives the cluster size, replication factor, and broker node IDs from the zone list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
+- `orchestration.clusterTopology.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - The AWS Advanced JDBC Wrapper uses `initialConnection,failover`: `initialConnection` discovers the current writer when a broker starts after a switchover, and `failover` follows a writer change on an established connection.
 - `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_ENABLED: "true"` is required. Without it the exporter acknowledges records the standby has not received, and a writer failover loses exported data.

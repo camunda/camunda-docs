@@ -5,15 +5,15 @@ title: Configure zone-aware multi-region deployments
 description: Configure the Camunda Helm chart to deploy an Orchestration Cluster across named zones, and understand what the chart derives from the zone list.
 ---
 
-The Camunda Helm chart deploys an Orchestration Cluster across named zones through `orchestration.multiregion`. Each zone runs its own release of the chart, and every release describes the same cluster-wide topology, so the zone list is identical everywhere and only the local zone name changes.
+The Camunda Helm chart deploys an Orchestration Cluster across named zones through `orchestration.clusterTopology`. Each zone runs its own release of the chart, and every release describes the same cluster-wide topology, so the zone list is identical everywhere and only the local zone name changes.
 
 For what zones are and how the application places partition replicas across them, see [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md).
 
 ## Move from global.multiregion
 
-`global.multiregion` is deprecated since chart v15 (Camunda 8.10). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.multiregion`. The deprecated keys still work and still render; move them when convenient.
+`global.multiregion` is deprecated since chart v15 (Camunda 8.10). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.clusterTopology`. The deprecated keys still work and still render; move them when convenient.
 
-Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the broker numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Move them and change nothing else:
+Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the broker numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Move them under the new block; the field names and their values are unchanged:
 
 ```yaml
 # Before
@@ -24,18 +24,18 @@ global:
 
 # After
 orchestration:
-  multiregion:
+  clusterTopology:
     regions: 2
     regionId: 1
 ```
 
 Both key paths produce the same broker numbering. The deprecated one renders identically and adds a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
 
-Zone awareness is configured only under `orchestration.multiregion`. The `mode`, `zone`, and `zones` keys have never existed under `global.multiregion`, so there is nothing to migrate for a zoned cluster.
+Zone awareness is configured only under `orchestration.clusterTopology`. The `mode`, `zone`, and `zones` keys have never existed under `global.multiregion`, so there is nothing to migrate for a zoned cluster.
 
 ## Choose a multi-region mode
 
-`orchestration.multiregion.mode` selects how the chart numbers brokers and describes the topology.
+`orchestration.clusterTopology.mode` selects how the chart numbers brokers and describes the topology.
 
 | Mode       | Behavior                                                                                           |
 | :--------- | :------------------------------------------------------------------------------------------------- |
@@ -54,7 +54,7 @@ In `zoned` mode, set the local zone and list every zone in the cluster:
 
 ```yaml
 orchestration:
-  multiregion:
+  clusterTopology:
     mode: zoned
     zone: region-a
     zones:
@@ -88,7 +88,7 @@ You describe the topology once, and the chart computes the rest. Knowing what it
 | `camunda.cluster.size`               | Sum of `numberOfBrokers` across all zones                        |
 | `camunda.cluster.replication-factor` | Sum of `numberOfReplicas` across all zones                       |
 | StatefulSet replica count            | `numberOfBrokers` of the local zone                              |
-| `CAMUNDA_CLUSTER_ZONE` in the pod    | `orchestration.multiregion.zone`                                 |
+| `CAMUNDA_CLUSTER_ZONE` in the pod    | `orchestration.clusterTopology.zone`                             |
 | `camunda.cluster.node-id`            | The pod ordinal, which is the broker's index inside its own zone |
 
 Because a zone-aware broker is addressed by the composite ID `<zone>_<index>`, the zone name is what keeps each broker unique across the cluster. The index restarts at `0` in every zone, and no cluster-wide offset applies.
