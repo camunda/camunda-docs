@@ -2491,3 +2491,134 @@ h3 + .release-announcement-row {
   border: 1px solid var(--ifm-color-info);
   box-shadow: 0 4px 20px rgba(84, 199, 236, 0.2);
 }
+
+/* ---- Expandable table ---- */
+.expandable-table-frame {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  overflow: hidden;
+  /* padding: 15px; */
+}
+
+.expandable-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.expandable-table-header-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-900);
+}
+
+.expandable-table-container table {
+  margin: 0px;
+  padding: 15px;
+}
+
+/* .expandable-table-body table { */
+/* 	margin: 0; */
+/* 	border: none; */
+/* 	border-radius: 0; */
+/* } */
+/**/
+/* .expandable-table-body table tr > *:first-child { */
+/* 	border-left: none; */
+/* } */
+/**/
+/* .expandable-table-body table tr > *:last-child { */
+/* 	border-right: none; */
+/* } */
+/**/
+/* .expandable-table-body table thead th { */
+/* 	border-top: none; */
+/* } */
+/**/
+/* .expandable-table-body table tr:last-child > * { */
+/* 	border-bottom: none; */
+/* } */
+
+.expand-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 0.4em;
+  align-items: center;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-color-emphasis-900);
+  padding: 0.25rem 0.7rem;
+  width: fit-content;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.expand-button:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-400);
+  color: var(--ifm-color-emphasis-900);
+}
+
+.expanded-table-modal {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 9999;
+}
+
+.expanded-table-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: var(--docsearch-container-background);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.expanded-table-modal-contents {
+  position: relative;
+  z-index: 1;
+  width: 90vw;
+  height: 90vh;
+  margin: 5vh auto;
+  overflow: auto;
+  background: var(--ifm-background-surface-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  padding-top: 3rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ifm-color-emphasis-900);
+  font-size: 1.5rem;
+}
+
+.expanded-table-title {
+  position: absolute;
+  top: 0.75rem;
+  left: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-900);
+}
+
+.expanded-table-modal-contents table {
+  margin-top: 10px;
+  width: 100%;
+  display: table;
+}
