@@ -2561,6 +2561,10 @@ h3 + .release-announcement-row {
   -webkit-backdrop-filter: blur(4px);
 }
 
+[data-theme="dark"] .expanded-table-modal-backdrop {
+  background-color: rgba(22, 22, 22, 0.5);
+}
+
 .expanded-table-modal-contents {
   position: relative;
   z-index: 1;
