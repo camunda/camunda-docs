@@ -43,7 +43,7 @@ Operations are executed in a multi-threaded manner.
 ```yaml
 camunda.operate:
   operationExecutor:
-  	threadsCount: 3
+    threadsCount: 3
 ```
 
 ## Monitoring Operate
