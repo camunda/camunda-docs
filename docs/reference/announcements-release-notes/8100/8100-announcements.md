@@ -448,38 +448,6 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-
-#### SAP BTP Plugin retired
-
-The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration.
-
-<p className="link-arrow">[SAP BTP Plugin documentation](/components/camunda-integrations/sap/btp-plugin.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-
-#### CSAP CLI replaced by a c8ctl plugin
-
-The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools/c8ctl/getting-started.md), which becomes the single tool for configuring and deploying the SAP integration modules.
-
-<!-- TODO: replace the placeholder link below with the dedicated c8ctl SAP plugin page once it is published. -->
-
-<p className="link-arrow">[CSAP CLI documentation](/components/camunda-integrations/sap/csap-cli.md)</p>
-
-</div>
-</div>
-
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
@@ -750,6 +718,40 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 <p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+## Integrations
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### SAP BTP Plugin retired
+
+The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration.
+
+<p className="link-arrow">[SAP BTP Plugin documentation](/components/camunda-integrations/sap/btp-plugin.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### CSAP CLI replaced by a c8ctl plugin
+
+The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools/c8ctl/getting-started.md), which becomes the single tool for configuring and deploying the SAP integration modules.
+
+<!-- TODO: replace the placeholder link below with the dedicated c8ctl SAP plugin page once it is published. -->
+
+<p className="link-arrow">[CSAP CLI documentation](/components/camunda-integrations/sap/csap-cli.md)</p>
 
 </div>
 </div>
