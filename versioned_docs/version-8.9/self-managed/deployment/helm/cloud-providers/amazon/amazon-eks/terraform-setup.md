@@ -507,7 +507,7 @@ Terraform lets you define outputs, which make it easier to retrieve important va
 
 Each module definition set up in the reference contains an output definition at the end of the file. You can adjust them as needed.
 
-Outputs let you easily referenc values such as the **cert-manager** ARN, **external-dns** ARN, and the endpoints for **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
+Outputs let you easily reference values such as the **cert-manager** ARN, **external-dns** ARN, and the endpoints for **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
 
 ### VPN module setup
 

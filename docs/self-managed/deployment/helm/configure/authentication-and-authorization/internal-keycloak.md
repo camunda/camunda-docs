@@ -50,7 +50,7 @@ This secret includes the following keys:
 
 - `identity-keycloak-postgresql-admin-password`: Password for the administrative account of the PostgreSQL instance used by Management Identity (`postgres`).
 - `identity-keycloak-postgresql-user-password`: Password for the non-privileged PostgreSQL account used by Management Identity (`bn_keycloak`).
-- `identity-keycloak-admin-password`: Password for the adminstrative account for the internal Keycloak instance (`admin`).
+- `identity-keycloak-admin-password`: Password for the administrative account for the internal Keycloak instance (`admin`).
 - `identity-firstuser-password`: Password for the initial user account in Keycloak (default username `demo`), used to log in to the Camunda web apps.
 - `identity-connectors-client-token`: Client secret for the Keycloak OIDC client `connectors `used by Connectors.
 - `identity-optimize-client-token`: Client secret for the Keycloak OIDC client `optimize` used by Optimize.
