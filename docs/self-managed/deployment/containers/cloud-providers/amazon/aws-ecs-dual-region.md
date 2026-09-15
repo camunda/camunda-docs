@@ -205,6 +205,22 @@ BYO-VPC is the preferred path for customers integrating with an existing AWS lan
 
 The full validation contract — including the plan-time checks that fail with a descriptive error when a constraint is missing — lives in [`terraform/vpc/README.md`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/vpc/README.md) in the reference repository.
 
+### Secondary storage replication lag
+
+Aurora Global Database replicates asynchronously, so a writer promotion can leave the new writer missing whatever had not reached it yet. What closes that gap is Camunda, not Aurora: with asynchronous replication monitoring enabled, the RDBMS exporter acknowledges a record to the broker only once the database reports it replicated, which holds back Zeebe log compaction so the missing records are replayed from the log.
+
+The reference architecture enables it and pins the three settings that decide what it delivers:
+
+| Setting                                       | Value     | Why                                                                                                                                               |
+| --------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async-replication.enabled`                   | `true`    | Off by default. Without it the exporter acknowledges records the standby has not received, and a failover loses them.                             |
+| `async-replication.type`                      | `LOG_SEQ` | Reads Aurora's own replication position. It is the engine default, but only some vendors support it, so it is pinned where the vendor is known.   |
+| `async-replication.pause-on-max-lag-exceeded` | `true`    | Decides the failure mode once `max-lag` is exceeded. It is not a data-loss control: acknowledgement is gated on confirmed replication either way. |
+
+That last one is worth understanding before you change it. Leaving it off does not lose data, because records are still only acknowledged once Aurora confirms them. What it changes is what happens when replication falls far behind: with the pause off, the Zeebe log keeps growing on the EFS data volume for as long as the lag persists, which costs storage and EFS throughput without bound. With it on, exporting stops, Zeebe keeps processing, and the APIs and web applications that read secondary storage serve stale data until Aurora catches up.
+
+For the full property reference, including the `LOG_SEQ` vendor support list and the delay-backoff fallback, see [multi-region support](/self-managed/concepts/databases/relational-db/database-configuration.md#multi-region-support).
+
 ## Deployment walkthrough
 
 ### Step 1 — Configure
