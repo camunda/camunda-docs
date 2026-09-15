@@ -29,6 +29,42 @@ with the reverse link updated on the supplied element instance.
 
 ---
 
+### history?
+
+```ts
+optional history?: AgentInstanceHistoryItem[] | null;
+```
+
+A batch of history items to append to the agent instance's conversation
+history, in request order. Each created item is echoed back in the
+response's createdHistory, positionally correlated.
+
+---
+
+### jobKey?
+
+```ts
+optional jobKey?: JobKey | null;
+```
+
+The key of the job activation during which this update is being made.
+Required whenever history is provided.
+
+---
+
+### jobLease?
+
+```ts
+optional jobLease?: string | null;
+```
+
+Opaque lease token received from the job activation response. Disambiguates
+this activation from any other activation of the same job: if the job is
+later retried, history items submitted under a superseded lease are discarded
+rather than committed.
+
+---
+
 ### metrics?
 
 ```ts

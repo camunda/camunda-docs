@@ -89,11 +89,32 @@ kind: JobKindEnum;
 
 ---
 
+### leaseToken
+
+```ts
+leaseToken: string | null;
+```
+
+The lease token identifying this activation. This is `null` when the job was activated without a lease.
+
+---
+
 ### listenerEventType
 
 ```ts
 listenerEventType: JobListenerEventTypeEnum;
 ```
+
+---
+
+### physicalTenantId
+
+```ts
+physicalTenantId: string;
+```
+
+The ID of the physical tenant that the job-activation request was routed to;
+the default physical tenant when the request did not specify one.
 
 ---
 

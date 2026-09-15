@@ -1,0 +1,42 @@
+---
+title: "Type Alias: SearchOwnAuthorizationsErrors"
+sidebar_label: "SearchOwnAuthorizationsErrors"
+mdx:
+  format: md
+---
+
+# Type Alias: SearchOwnAuthorizationsErrors
+
+```ts
+type SearchOwnAuthorizationsErrors = object;
+```
+
+## Properties
+
+### 400
+
+```ts
+400: ProblemDetail;
+```
+
+The provided data is not valid.
+
+---
+
+### 401
+
+```ts
+401: ProblemDetail;
+```
+
+The request lacks valid authentication credentials.
+
+---
+
+### 500
+
+```ts
+500: ProblemDetail;
+```
+
+An internal error occurred while processing the request.

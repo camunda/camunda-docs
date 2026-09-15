@@ -13,7 +13,10 @@ type AgentInstanceObjectContent = object;
 
 Object content
 
-An arbitrary structured content block.
+An arbitrary structured content block. Accepts any valid JSON value:
+objects, arrays, numbers, booleans, or strings.
+Use TEXT content for human-readable natural language;
+use OBJECT content for machine-readable structured data.
 
 ## Properties
 
@@ -30,13 +33,7 @@ The content type discriminator.
 ### object
 
 ```ts
-object: object;
+object: unknown;
 ```
 
-Arbitrary structured content.
-
-#### Index Signature
-
-```ts
-[key: string]: unknown
-```
+Arbitrary structured content — any valid JSON value (object, array, number, boolean, or string).

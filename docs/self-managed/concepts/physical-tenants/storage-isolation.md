@@ -65,32 +65,173 @@ tenanta:
 
 ### Validation and operations
 
-- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message. For Oracle, schema isolation uses distinct authenticated users rather than URL differences; a known false positive startup conflict may be reported for identical Oracle URLs in the current alpha release.
+- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message. For Oracle, schema isolation uses distinct authenticated users rather than URL differences, so set `database-vendor-id: oracle` on each tenant to avoid a false conflict on identical URLs.
 - **Pre-startup**: Ensure each tenant's schema exists, is empty, and has valid credentials
 - **Manual DDL**: If running Liquibase scripts separately, apply to every tenant's schema before each upgrade
 - **Resource scaling**: Each tenant gets its own JDBC datasource per cluster node; add memory/CPU for many tenants
 
-:::caution Table prefix must be uppercase
-RDBMS table prefixes must use uppercase characters. A lowercase prefix causes Liquibase migration to fail at startup. For example, use `TENANTA_` not `tenanta_`. See [camunda/camunda#56093](https://github.com/camunda/camunda/issues/56093).
+:::note RDBMS table prefixes are normalized to uppercase
+Camunda converts RDBMS table prefixes to uppercase before applying them, so `tenanta_` and `TENANTA_` produce the same schema objects. Two consequences follow:
+
+- Prefixes that differ only in case resolve to the same storage location. Configuring `ta_` for one tenant and `TA_` for another fails the startup uniqueness check.
+- Prefixes that are invalid SQL identifiers for other reasons, such as hyphens, spaces, or a leading digit, are still accepted at configuration time and fail later during schema migration.
+
+Earlier 8.10 alpha releases carried the prefix through verbatim, which failed the Liquibase migration at startup for a lowercase prefix. See [camunda/camunda#56093](https://github.com/camunda/camunda/issues/56093).
 :::
 
-:::note Oracle limitation in 8.10 alpha
-In the 8.10 alpha release, Oracle supports isolation by table prefix only. Using separate schemas from the same Oracle instance for multiple Physical Tenants is not supported in alpha and will be fixed in a later release.
+:::note Isolate Oracle tenants by schema-per-user
+Oracle isolates Physical Tenants by distinct authenticated database users rather than by differing JDBC URLs, so two Oracle tenants can share one URL and still be isolated. Because the URLs are identical, startup validation reports a storage-location conflict unless you tell Camunda the vendor explicitly.
+
+Set `data.secondary-storage.rdbms.database-vendor-id: oracle` on each tenant. The startup error includes this hint.
 :::
 
-## Elasticsearch/OpenSearch storage
+## Elasticsearch and OpenSearch storage
 
-:::note
-Elasticsearch/OpenSearch storage isolation is not yet available in the current alpha release. This section documents the planned configuration.
-:::
-
-Use separate clusters or a shared cluster with per-tenant index prefixes.
+Each Physical Tenant can use a shared Elasticsearch or OpenSearch cluster with isolated index prefixes, or a dedicated cluster per tenant.
 
 ### Naming and collision prevention
 
-- **Prefix format**: `{tenantId}` (dash automatically appended by the application)
-- **Collision prevention**: Use the full tenant ID and avoid prefixes that are identical to another tenant's prefix. Overlapping prefixes (for example, `eu` and `eu-west`) are not caught by startup validation. Only exact duplicates fail at startup.
-- **Validation**: Cluster fails at startup if two tenants have identical index prefixes
+Startup validation fails only when two tenants resolve to an identical index prefix. Overlapping prefixes are not detected, so `eu` and `eu-west` both pass validation even though `eu*` matches both tenants' indices.
+
+Use the full tenant ID as the prefix, and make sure no tenant's prefix is the leading substring of another tenant's prefix.
+
+### Configuration models
+
+**Shared cluster with index prefix isolation** (recommended for cost-efficiency):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch # or opensearch
+      elasticsearch:
+        url: https://es.example.com:9200
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          elasticsearch:
+            index-prefix: tenanta # must be unique per tenant
+    tenantb:
+      data:
+        secondary-storage:
+          elasticsearch:
+            index-prefix: tenantb
+```
+
+**Separate cluster per tenant** (maximum isolation):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch
+      elasticsearch:
+        url: https://es-default.example.com:9200
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          elasticsearch:
+            url: https://es-tenanta.example.com:9200
+            index-prefix: tenanta
+```
+
+For AWS-hosted OpenSearch Service, including authentication with AWS credentials, see [Amazon OpenSearch Service storage](#amazon-opensearch-service-storage) below.
+
+## Amazon OpenSearch Service storage
+
+When secondary storage runs on Amazon OpenSearch Service, each physical tenant can authenticate with its own credentials. The connection settings `url`, `username`, `password`, and `index-prefix` are all overridable per physical tenant, supporting either a shared OpenSearch instance or a dedicated OpenSearch instance per tenant.
+
+### Basic authentication with fine-grained access control
+
+Enable [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) (FGAC) with the internal user database on the domain, then create one internal user per tenant and map it to an OpenSearch security role whose index permissions are restricted to that tenant's index pattern. All permission administration happens on the AWS side; Camunda only supplies the per-tenant credentials:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: opensearch
+      opensearch:
+        url: https://my-domain.eu-central-1.es.amazonaws.com
+        username: camunda-default
+        password: default-secret
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          opensearch:
+            username: tenant-a-user
+            password: tenant-a-secret
+            index-prefix: tenant-a
+```
+
+A tenant can also point at a dedicated OpenSearch instance (including one in a different AWS account) by overriding `url` as well:
+
+```yaml
+camunda:
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          opensearch:
+            url: https://tenant-a-domain.eu-central-1.es.amazonaws.com
+            username: tenant-a-user
+            password: tenant-a-secret
+            index-prefix: tenant-a
+```
+
+### IAM authentication (request signing)
+
+Alternatively, set `aws-enabled: true` to sign requests with AWS Signature Version 4 instead of Basic authentication. Credentials are resolved from the AWS SDK default provider chain. On EKS this is the pod's IAM role via IRSA, and the region is taken from the environment (for example, `AWS_REGION`):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: opensearch
+      opensearch:
+        url: https://my-domain.eu-central-1.es.amazonaws.com
+        aws-enabled: true
+```
+
+With request signing, the AWS identity is also the principal that OpenSearch authorizes: all physical tenants share the pod's single IAM role, and tenant separation is provided by per-tenant index prefixes together with the instance's access policy or FGAC role mapping for that role. Per-tenant IAM identities are not supported; if tenants require authentication isolation from each other, use fine-grained access control with per-tenant internal users as described above.
+
+IAM authentication also works with a dedicated OpenSearch instance per tenant. Camunda creates a separate client per tenant, each signing requests against its own endpoint with the same pod identity. `aws-enabled` is inherited from the root configuration, so tenants only override their `url`:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: opensearch
+      opensearch:
+        url: https://default-instance.eu-central-1.es.amazonaws.com
+        aws-enabled: true
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          opensearch:
+            url: https://tenant-a-instance.eu-central-1.es.amazonaws.com
+            index-prefix: tenant-a
+    tenantb:
+      data:
+        secondary-storage:
+          opensearch:
+            url: https://tenant-b-instance.eu-central-1.es.amazonaws.com
+            index-prefix: tenant-b
+```
+
+For this to authenticate correctly, two conditions must hold:
+
+- **Every instance must authorize the pod's IAM role**: attach an IAM policy to the role allowing `es:ESHttp*` on each instance's ARN, and allow the role in each instance's access policy (or map the role ARN in its fine-grained access control configuration). This also works for an instance in a different AWS account, granted through that instance's resource-based access policy. The signing identity is still the single pod role.
+  :::warning
+  **All instances must be in the same AWS region as the pod.** The request signature is scoped to the region resolved from the pod's environment (for example `AWS_REGION`), not derived from each endpoint. An instance in a different region rejects the signature with an authentication error.
+  :::
 
 ## Document Store storage
 
@@ -490,9 +631,11 @@ keyPrefix='tenant-a/']
 
 ## Operational considerations
 
+For the backup, restore, and scaling procedures that use these storage locations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
+
 ### Backup and restore
 
-- **Per-tenant**: Back up one tenant's RDBMS schema or document bucket individually. A per-tenant Elasticsearch/OpenSearch backup is not yet available (see the note below).
+- **Per-tenant**: Trigger runtime and history backups through the tenant-scoped endpoints. Back up RDBMS schemas and document stores with the storage system's tools.
 - **Full cluster**: Back up all schemas, all index prefixes, all buckets simultaneously
 - **Restore options**: Individual tenant or full cluster from backup
 
@@ -506,9 +649,7 @@ pg_dump -h db.example.com -U user tenant_a_schema > backup.sql
 aws s3 sync s3://camunda-documents/tenant-a/ ./backup/
 ```
 
-:::note
-Elasticsearch and OpenSearch backups are created through the [web applications backup endpoint](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md#2-start-the-web-applications-backup-operate--tasklist), which operates at the cluster level. A per-tenant Elasticsearch/OpenSearch backup endpoint is not yet available and is planned as part of the management API.
-:::
+For tenant-scoped and cluster-wide backup and restore endpoints, see [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants).
 
 ### Cross-tenant isolation
 
@@ -524,6 +665,50 @@ Risks to avoid:
 - Don't overlap index prefixes
 - Don't point two tenants to the same bucket or container without distinct sibling subpaths. Don't nest one tenant's subpath inside another's, and don't leave one tenant on the bucket or container root
 
+### Secondary storage failures during startup and runtime
+
+Camunda initializes the secondary-storage schema for each Physical Tenant independently. A tenant becomes ready only after its schema initialization succeeds. If one tenant cannot initialize, Camunda marks only that tenant as degraded and keeps other tenants independent.
+
+#### Startup behavior
+
+For multi-tenant initialization, Camunda starts one schema-initialization task per tenant. Retryable failures, such as temporary connectivity problems, are retried according to the schema manager retry settings. With the default settings, schema initialization continues retrying until it succeeds.
+
+On a node with multiple Physical Tenants, startup uses the following rules:
+
+| Node and storage type                               | Startup behavior                                                                                                                                                                                |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch or OpenSearch with an HTTP gateway    | Startup waits until every tenant has produced an initial result. If at least one tenant is serviceable, the node starts serving traffic. A tenant that failed keeps retrying in the background. |
+| Elasticsearch or OpenSearch without an HTTP gateway | The node does not wait for schema initialization. It starts while each tenant retries in the background.                                                                                        |
+| RDBMS, with or without an HTTP gateway              | Every node waits until at least one tenant is serviceable or no tenant can make further progress. One tenant's failure does not abort the node when another tenant is serviceable.              |
+
+On nodes that wait at startup, Camunda retries temporary failures before allowing traffic. If every tenant has a failure that retrying cannot fix, startup aborts and the node exits with a non-zero status.
+
+An RDBMS node with exactly one Physical Tenant keeps the existing synchronous, fail-fast behavior. An unreachable database or an unrepairable schema failure aborts startup instead of being retried in the background.
+
+If you configure a finite retry limit and all attempts stop before any tenant becomes ready, startup can complete but the affected tenant remains degraded. On nodes whose readiness probe includes secondary storage, the node remains not ready. The application logs identify the tenant and report that its retry limit was exhausted.
+
+#### Readiness and health
+
+Readiness and health answer different questions:
+
+| Endpoint or signal                                | Meaning                                                                                                                                                                                                               |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/actuator/health/readiness`                      | Node-level readiness where the secondary-storage readiness check is enabled. It is `UP` when at least one Physical Tenant is ready and `DOWN` when no tenant is ready. It does not mean that every tenant is healthy. |
+| `/actuator/health`                                | Full node health, including live secondary-storage checks. On multi-tenant nodes, inspect the per-tenant `rdbmsStatus` or `searchEngineStatus` contributors.                                                          |
+| `camunda_physical_tenant_secondary_storage_ready` | Prometheus gauge with `physicalTenant` labels. A value of `1` means that the tenant's schema is initialized; `0` means that the tenant is degraded.                                                                   |
+
+The readiness signal is based on schema initialization and does not continuously probe storage connectivity. As a result, a storage outage after startup does not automatically make a ready node fail its readiness probe. The full health endpoint, logs, and operation-specific errors provide the live storage status. The full `/actuator/health` result can be `DOWN` for one failed tenant even when `/actuator/health/readiness` remains `UP` because another tenant is serviceable.
+
+When a tenant is degraded because its schema has not initialized, REST query API requests, that require secondary storage for that tenant, return `HTTP 503 Service Unavailable` and a `Retry-After: 5` header. Other tenants continue to be served. After the storage problem is fixed, a retryable failure recovers in the background without restarting the node.
+
+#### Troubleshoot startup and readiness failures
+
+- **The node stays at startup.** Check the application logs for the Physical Tenant named in the schema-initialization messages. Verify the tenant's storage endpoint, credentials, network access, and schema permissions. For Elasticsearch or OpenSearch, also verify that the cluster is at least yellow when the startup health check is enabled.
+- **Readiness is `DOWN`.** Inspect the `camunda_physical_tenant_secondary_storage_ready` gauge for each tenant. If every tenant reports `0`, no tenant can currently serve secondary-storage-dependent requests.
+- **One tenant returns `503` while another works.** This is expected partial degradation. Fix the affected tenant's storage problem and wait for its background initialization retry. No restart is required for a retryable failure.
+- **An RDBMS tenant fails before schema initialization starts.** If the JDBC URL uses a wrapper or a non-standard format, Camunda might not be able to determine the database vendor without connecting to the database. Set `database-vendor-id` in the tenant's RDBMS configuration. See [RDBMS database configuration](../databases/relational-db/configuration.md).
+- **The logs report a terminal schema failure.** Fix the reported schema or configuration problem, then restart the node. Terminal failures are not retried because retrying cannot repair them.
+
 ### Scaling and capacity planning
 
 - **RDBMS**: Monitor schema size per tenant; high-traffic tenants may need dedicated instances
@@ -538,10 +723,10 @@ Risks to avoid:
 | **Consolidate**  | Backup source → Create new backend → Update config → Restore → Verify         |
 | **Split tenant** | Plan data distribution → Backup → Create stores → Restore to each → Restart   |
 
-## Known limitations in 8.10
+## Known limitations
 
 :::note
-**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported in 8.10. This constraint exists in the Query API stack, not the exporter layer.
+**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported. This constraint exists in the Query API stack, not the exporter layer.
 :::
 
 :::caution Custom exporter configuration merge (alpha3)
@@ -552,10 +737,10 @@ In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not
 
 ## Storage configuration matrix
 
-| Aspect                   | RDBMS                    | Elasticsearch/OpenSearch         | Document Store                     |
-| ------------------------ | ------------------------ | -------------------------------- | ---------------------------------- |
-| **Isolation**            | Separate schema/database | Separate cluster OR index prefix | Separate bucket OR sibling subpath |
-| **Per-tenant config**    | JDBC URL                 | `url` + `index-prefix`           | Bucket + prefix                    |
-| **Collision detection**  | Startup error            | Startup error                    | Startup error                      |
-| **Unavailable behavior** | Startup failure          | Startup failure                  | Runtime error (no fallback)        |
-| **Mixed vendors**        | Yes                      | Yes (ES or OpenSearch)           | Yes (different cloud providers)    |
+| Aspect                   | RDBMS                                                                               | Elasticsearch/OpenSearch                                                            | Document Store                     |
+| ------------------------ | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---------------------------------- |
+| **Isolation**            | Separate schema/database OR table prefix                                            | Separate cluster OR index prefix                                                    | Separate bucket OR sibling subpath |
+| **Per-tenant config**    | JDBC URL                                                                            | `url` + `index-prefix`                                                              | Bucket + prefix                    |
+| **Collision detection**  | Startup error                                                                       | Startup error                                                                       | Startup error                      |
+| **Unavailable behavior** | Tenant degraded ([details](#secondary-storage-failures-during-startup-and-runtime)) | Tenant degraded ([details](#secondary-storage-failures-during-startup-and-runtime)) | Runtime error (no fallback)        |
+| **Mixed vendors**        | Yes                                                                                 | Yes (ES or OpenSearch)                                                              | Yes (different cloud providers)    |

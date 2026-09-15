@@ -83,6 +83,10 @@ security:
 
 These values control mechanisms of Optimize related security, e.g. security headers and authentication.
 
+:::note
+In Camunda 8.10, set `camunda.security.http-headers.hsts.max-age-in-seconds` instead of `security.responseHeaders.HSTS.max-age`. The `security.auth.token.secret` and `security.responseHeaders.X-XSS-Protection` settings are no longer used, and you can remove them. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
+:::
+
 | YAML path                                        | Environment variable                                    | Default value   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ------------------------------------------------ | ------------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |                                                  |
@@ -112,6 +116,10 @@ This section focuses on common properties related to the External REST API of Op
 mandatory to configure one of the values below if the External REST API is to be used. If neither is
 configured an error will be thrown and all requests to the External API will get rejected. If both are configured then
 the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
+
+:::note
+In Camunda 8.10, set `camunda.security.authentication.oidc.jwk-set-uri` and `camunda.security.authentication.oidc.audiences` instead of `api.jwtSetUri` and `api.audience`. The `api.accessToken` setting is no longer used, and you can remove it. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
+:::
 
 | YAML path       | Environment variable                                  | Default value | Description                                                                                                                                    |
 | --------------- | ----------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -293,6 +301,26 @@ Two types of history cleanup are available for Camunda 8 users at this time - pr
 | historyCleanup.processDataCleanup.perProcessDefinitionConfig                      |                                                                    |                                                                                       | A list of process definition specific configuration parameters that will overwrite the global cleanup settings for the specific process definition identified by its $\{key}.                                                                                                                                                                                                                                                                                                                                                                                            |
 | historyCleanup.processDataCleanup .perProcessDefinitionConfig.$\{key}.ttl         |                                                                    |                                                                                       | TTL to use for process instances of the process definition with the $\{key}.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | historyCleanup.processDataCleanup .perProcessDefinitionConfig.$\{key}.cleanupMode |                                                                    | Cleanup mode to use for process instances of the process definition with the $\{key}. |
+
+### Job registry dispatcher
+
+Settings for the background dispatcher that processes queued asynchronous jobs. See [Process definition data deletion](./process-definition-deletion.md) for details.
+
+| YAML path                              | Environment variable                                      | Default value | Description                                                                                                |
+| -------------------------------------- | --------------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------- |
+| jobRegistry.dispatcher.enabled         | CAMUNDA_OPTIMIZE_JOB_REGISTRY_DISPATCHER_ENABLED          | false         | Toggles whether this Optimize instance dispatches queued job registry entries to be processed by handlers. |
+| jobRegistry.dispatcher.intervalSeconds | CAMUNDA_OPTIMIZE_JOB_REGISTRY_DISPATCHER_INTERVAL_SECONDS | 30            | The delay, in seconds, between the end of one poll for queued jobs and the start of the next.              |
+| jobRegistry.dispatcher.batchSize       | CAMUNDA_OPTIMIZE_JOB_REGISTRY_DISPATCHER_BATCH_SIZE       | 4             | The maximum number of queued job registry entries dispatched per poll cycle.                               |
+| jobRegistry.dispatcher.threadCount     | CAMUNDA_OPTIMIZE_JOB_REGISTRY_DISPATCHER_THREAD_COUNT     | 2             | The number of threads used to dispatch queued jobs concurrently.                                           |
+
+### Deleted process definition cache
+
+Settings for the cache that suppresses reimporting data for a process definitions with deletion job record. See [Process definition data deletion](./process-definition-deletion.md) for details.
+
+| YAML path                                         | Environment variable                                                 | Default value | Description                                                                                                  |
+| ------------------------------------------------- | -------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
+| caches.deletedProcessDefinitions.maxSize          | CAMUNDA_OPTIMIZE_DELETED_PROCESS_DEFINITION_CACHE_MAX_SIZE           | 10000         | The maximum number of deleted process definition IDs kept in the import-suppression cache.                   |
+| caches.deletedProcessDefinitions.defaultTtlMillis | CAMUNDA_OPTIMIZE_DELETED_PROCESS_DEFINITION_CACHE_DEFAULT_TTL_MILLIS | 300000        | The time, in milliseconds, the import-suppression cache is kept before it's refreshed from the job registry. |
 
 ### Localization
 

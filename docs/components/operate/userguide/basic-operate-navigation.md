@@ -28,6 +28,8 @@ The process instance page has three parts:
 - A process diagram showing the instance's current progress.
 - A bottom panel with tabs, including **Details**, **Incidents** (shown only when the instance has an incident), and **Variables**.
 
+![A process instance detail page, showing the header with the process instance's key, version, and state, the process diagram, and the bottom panel with Variables, Listeners, and Operations Log tabs.](./img/basic-operate-navigation.png)
+
 Click an element in the diagram to select it, then use the tabs in the bottom panel to inspect its details, incidents, and variables. In earlier versions, an element's details and incidents appeared in a metadata popover when you clicked it; the popover is now replaced by the **Details** and **Incidents** tabs. To visualize process instance performance, use [Optimize](/components/optimize/what-is-optimize.md).
 
 ## Navigate to a called process instance

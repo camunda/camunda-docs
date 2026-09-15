@@ -5,30 +5,13 @@ sidebar_label: "Authentication and authorization"
 description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-import AoGrid from "../../../components/react-components/_ao-card";
-import IconConfigImg from "../../../components/assets/icon-config.png";
-import IconReferenceApiImg from "../../../components/assets/icon-reference-api.png";
+Learn how identity providers connect to Physical Tenants and how tokens are routed to the correct tenant. For the resource and permission model and cluster-wide versus tenant-local authorization, see [authorization model](./authorization-model.md).
 
-Learn how Camunda 8.10 authenticates users and authorizes access to Physical Tenants in Self-Managed deployments.
-
-<AoGrid columns={2} ao={[
-{
-link: "../configuration-reference/",
-title: "Configuration reference",
-image: IconConfigImg,
-description: "Assign identity providers and define root defaults and per-tenant overrides.",
-},
-{
-link: "../authorization-model/",
-title: "Authorization model",
-image: IconReferenceApiImg,
-description: "Understand tenant-local permissions and cluster-wide management access.",
-},
-]} />
+For configuration properties used to assign identity providers to tenants, see [configuration reference](./configuration-reference.md).
 
 ## Centralized identity model
 
-In Camunda 8.10, identity is **centralized at the cluster boundary**. This means:
+Identity is **centralized at the cluster boundary**. This means:
 
 - Identity providers (IdPs) are defined once at the cluster level.
 - Each Physical Tenant selects which cluster-defined providers it accepts using `providers.assigned`.
@@ -38,7 +21,7 @@ This design keeps identity management simple and avoids per-engine IdP fragmenta
 
 ## Identity deployment models
 
-Camunda 8.10 supports two recommended identity deployment models for Physical Tenants. A third model for advanced or managed-service scenarios is available but not recommended as a baseline.
+Physical Tenants support two recommended identity deployment models. A third model for advanced or managed-service scenarios is available but not recommended as a baseline.
 
 ### Model A: Single IdP, single client
 
@@ -60,13 +43,13 @@ Use Model B when:
 - Different teams or departments require separate client configurations.
 - You want role-level client separation within one IdP.
 
-Model B is the recommended baseline for most customers deploying Physical Tenants in 8.10.
+Model B is the recommended baseline for most customers deploying Physical Tenants.
 
 ### Model C: Multiple IdPs (advanced)
 
 Each Physical Tenant uses a separate identity provider. This model is intended for managed services or advanced deployments where tenants are fully autonomous organizations with their own IdPs.
 
-Model C is not a recommended baseline for 8.10. Use it only when:
+Model C is not a recommended baseline. Use it only when:
 
 - Tenants are separate organizations that each manage their own IdP.
 - You are operating a managed service where per-tenant IdP autonomy is required.
@@ -208,14 +191,9 @@ For example:
 
 ## Cluster-admin role
 
-Cluster-wide endpoints under `/cluster/v2/...` require the cluster-admin role. Broker startup does not fail if the role is not configured, but cluster-wide operations are unavailable to callers until you configure it.
+Cluster-wide management endpoints use the cluster-admin role. Broker startup does not fail if the role is not configured. Configure the role to restrict cluster-wide operations, such as backup, restore, and topology management, to authorized operators.
 
-| Authentication method | Configure cluster-admin access with                                                 |
-| --------------------- | ----------------------------------------------------------------------------------- |
-| OIDC                  | A matching client ID, group, or claim under `camunda.security.cluster-admin.oidc.*` |
-| Basic authentication  | An explicit user under `camunda.security.cluster-admin.basic.users`                 |
-
-The cluster-admin role is resolved at request time. No persisted cluster-level role bindings or separate cluster identity service is required.
+The cluster-admin role is resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service is required. Multiple mechanisms are supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for Basic authentication.
 
 ## gRPC authentication
 

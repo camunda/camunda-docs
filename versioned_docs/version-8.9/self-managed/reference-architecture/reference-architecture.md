@@ -92,6 +92,8 @@ The following table outlines the key differences between Admin and Management Id
 
 For production environments, use an external [identity provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) to connect both environments.
 
+For a decision tree covering which one to configure for your deployment, see [how identity works in Camunda](/self-managed/components/identity/how-identity-works.md).
+
 ### Databases
 
 Databases can be deployed as part of the Camunda clusters, but using external databases or managed services offers several advantages:

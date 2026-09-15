@@ -70,11 +70,12 @@ This deployment approach separates infrastructure management from application de
 ## Infrastructure components
 
 This approach uses three operator-managed infrastructure components, each maintained by their respective project teams:
-| Component | Purpose | Official Documentation |
+
+| Component                                                   | Purpose                                                                                           | Official Documentation                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/) |
-| **[Elasticsearch with ECK](#elasticsearch-deployment)** | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) |
-| **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
+| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/)               |
+| **[Elasticsearch with ECK](#elasticsearch-deployment)**     | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)      |
+| **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity                                    | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
 ## Quick start
 
@@ -719,7 +720,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 ### Security
 
-- **Network policies**: Implement network policies to restrict traffic between components
+- **Network policies**: Implement network policies to restrict traffic between components. See [required network traffic](/self-managed/deployment/helm/install/production/index.md#required-network-traffic).
 - **TLS encryption**: Enable TLS for all inter-component communication
 - **Secret management**: Use external secret management systems in production
 - **RBAC**: Configure proper role-based access control for infrastructure and applications

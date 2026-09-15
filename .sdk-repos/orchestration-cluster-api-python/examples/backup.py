@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from camunda_orchestration_sdk import (
     CamundaClient,
+    TakeHistoryBackupRequest,
     TakeRuntimeBackupRequest,
 )
 
@@ -98,3 +99,53 @@ def delete_runtime_backup_state_example() -> None:
     # ranges of every partition. Used when switching backup stores.
     client.delete_runtime_backup_state()
 # endregion DeleteRuntimeBackupState
+
+
+# region TakeHistoryBackup
+def take_history_backup_example(backup_id: int) -> None:
+    client = CamundaClient()
+
+    # Backups are logically ordered by id, so each successive backup must use a
+    # higher id than the previous one.
+    result = client.take_history_backup(
+        data=TakeHistoryBackupRequest(
+            backup_id=backup_id,
+        )
+    )
+
+    print(f"Scheduled history backup {result.backup_id}")
+
+    for snapshot in result.scheduled_snapshots:
+        print(f"  {snapshot}")
+# endregion TakeHistoryBackup
+
+
+# region ListHistoryBackups
+def list_history_backups_example() -> None:
+    client = CamundaClient()
+
+    # `prefix` is a backup id prefix followed by a single `*` wildcard.
+    result = client.list_history_backups(prefix="17567*")
+
+    for backup in result:
+        print(f"History backup: {backup}")
+# endregion ListHistoryBackups
+
+
+# region GetHistoryBackup
+def get_history_backup_example(backup_id: int) -> None:
+    client = CamundaClient()
+
+    result = client.get_history_backup(backup_id=backup_id)
+
+    # The aggregated state is derived from the state of every expected snapshot.
+    print(f"History backup {result.backup_id} is {result.state.value}")
+# endregion GetHistoryBackup
+
+
+# region DeleteHistoryBackup
+def delete_history_backup_example(backup_id: int) -> None:
+    client = CamundaClient()
+
+    client.delete_history_backup(backup_id=backup_id)
+# endregion DeleteHistoryBackup

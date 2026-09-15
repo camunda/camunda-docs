@@ -75,17 +75,18 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 The following key changes were also released as part of an 8.8.x patch release.
 
-| Patch release                                                    | Type       | Key change                                                                                                                                            |
-| :--------------------------------------------------------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34) | Regression | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                                        |
-| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34) | Regression | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                                       |
-| [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29) | Regression | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
-| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
-| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
-| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Regression | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
-| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Change     | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                                         |
-| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Regression | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
-| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change     | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+| Patch release                                                       | Artifact   | Type            | Key change                                                                                                                                            |
+| :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                                       |
+| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                                        |
+| [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29)    | Core       | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23)    | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23)    | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
+| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22)    | Core       | Regression      | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
+| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22)    | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                                         |
+| [8.8.19](https://github.com/camunda/connectors/releases/tag/8.8.19) | Connectors | Breaking change | [Connector secret filter](#connector-secret-filter)                                                                                                   |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)      | Core       | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)      | Core       | Regression      | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
 
 ### APIs & tools
 
@@ -544,6 +545,29 @@ To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md
 </div>
 
 ### Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector secret filter {#connector-secret-filter}
+
+Starting with Connectors 8.8.19, the connector runtime introduces the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter), defaulting to `STRICT`.
+
+In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+
+**Action:** Before upgrading, confirm all connector fields that resolve a secret already reference that secret in the deployed BPMN.
+
+- If a field relies on resolving a secret it doesn't reference, add the reference.
+- To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but note that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
+- Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

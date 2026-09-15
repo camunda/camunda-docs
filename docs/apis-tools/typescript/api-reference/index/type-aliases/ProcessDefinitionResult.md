@@ -63,6 +63,18 @@ Resource name for this process definition.
 
 ---
 
+### state
+
+```ts
+state: "ACTIVE" | "DRAINING" | "DELETED";
+```
+
+The state of this process definition.
+`DRAINING` indicates the definition is being deleted but still has active process
+instances draining before it is removed.
+
+---
+
 ### tenantId
 
 ```ts

@@ -35,16 +35,6 @@ The key of the currently-active element instance.
 
 ---
 
-### iteration?
-
-```ts
-optional iteration?: IterationId | null;
-```
-
-Sequential iteration number this item belongs to. Omit if not grouping items into iterations.
-
----
-
 ### jobKey
 
 ```ts
@@ -62,6 +52,17 @@ jobLease: string;
 ```
 
 Opaque lease token received from the job activation response.
+
+---
+
+### loopIteration?
+
+```ts
+optional loopIteration?: LoopIterationId | null;
+```
+
+The loop iteration this item belongs to. Omit if not grouping items by
+loopIteration.
 
 ---
 
@@ -83,7 +84,7 @@ Per-call token and latency metrics. Present on ASSISTANT items only.
 producedAt: string;
 ```
 
-The connector-side timestamp of when this message was produced.
+The agent-side timestamp of when this message was produced.
 
 ---
 
@@ -104,6 +105,6 @@ optional toolCalls?: AgentInstanceToolCall[] | null;
 ```
 
 Tool calls associated with this history item.
-For ASSISTANT items: tool calls dispatched by this LLM response, with arguments populated.
-For TOOL_RESULT items: single-entry array referencing the originating tool call, with arguments null.
+For ASSISTANT items: tool calls dispatched by this LLM response.
+For TOOL_RESULT items: single-entry array referencing the originating tool call.
 Omit for USER items.
