@@ -768,7 +768,7 @@ If the restore fails, you can re-run the application after fixing the root cause
 If the data directory is not empty, the restore will fail with an error message:
 
 ```
-Brokers's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+Brokers's data directory /usr/local/camunda/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
 ```
 
 On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted.
