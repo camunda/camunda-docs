@@ -325,7 +325,7 @@ Camunda 8 Run now includes a bundled Java runtime. This means you no longer need
 
 Camunda Hub is now the single place where you and your teams build, govern, and run process solutions in Camunda.
 
-- Hub is now where you design, model, manage, and oversee your processes. Hub replaces Web Modeler and Console, keeping their existing features while adding new features within a single unified platform.
+- Hub is where you design, model, manage, and oversee your processes. Hub replaces Web Modeler and Console, keeping their existing features while adding new features within a single unified platform.
 
 - Hub is deployed only once, and serves as the single point of entry for all your environments, connecting to all your dev, staging, and production Orchestration Clusters.
 
