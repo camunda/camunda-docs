@@ -19,7 +19,7 @@ If no storage configuration is provided, the default document storage is in-memo
 
 To change the storage to **Google Cloud Platform**, **AWS S3**, or **Azure Blob Storage**, update the `values.yaml` file with the storage configuration parameters.
 
-Below is an example of storage configuration. While this example mixes GCP, AWS, and in-memory, this example represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml). This example demonstrates the current default values and what they would need to change to enable the storage type of their preference.
+Below is an example of storage configuration. While this example mixes GCP, AWS, and in-memory, this example represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.9/values.yaml). This example demonstrates the current default values and what they would need to change to enable the storage type of their preference.
 
 :::note
 Azure Blob Storage uses `orchestration.env` for provider settings in Camunda 8.9. See [Azure Blob Storage configuration](#azure-blob-storage-configuration) for the required values.
@@ -112,6 +112,7 @@ The examples use the store ID `azure`. For a custom ID, use letters and digits, 
 
 ### Prerequisites
 
+- For chart-managed connection string authentication, use a Camunda 8.9 Helm chart release containing the [Azure secret-injection fix](https://github.com/camunda/camunda-platform-helm/pull/7175). Upgrading only the application image to Camunda 8.9.18+ does not fix secret injection in older charts.
 - An Azure Storage account with a Blob container.
 - For connection string authentication: The connection string from the Azure portal (**Settings > Access keys**).
 - For Managed Identity/DefaultAzureCredential authentication: The `Storage Blob Data Contributor` RBAC role assigned on the storage account.
