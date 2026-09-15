@@ -24,6 +24,20 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Upgrading to Camunda 8.10 delivers significant benefits and keeps your installation aligned and ready for future releases.
 
+<div className="list-tick">
+
+- **Agentic orchestration**: AI agent visibility and explainability with live agent state, tool calls, and conversation history, providing production-grade agentic trust via testing, visibility, auditability, and control-plane monitoring.
+
+- **Camunda Hub**: Camunda Hub is now the single place where you and your teams build, govern, and run process solutions in Camunda. Hub is where you design, model, manage, and oversee your processes, replacing Web Modeler and Console.
+
+- **Strong isolation with physical tenants**: Enterprise-grade physical isolation with per-tenant APIs, web apps, roles and identity provider selection, while logical multi-tenancy becomes officially supported on SaaS.
+
+- **Multi-region resilience**: Asynchronous RDBMS replication and failure-domain-aware partition placement provide configurable recovery behavior and stronger disaster recovery.
+
+- **Unified authentication**: The Orchestration Cluster, Camunda Hub, and Optimize all authenticate through the Camunda Security Library and accept the same `camunda.security.*` configuration, with legacy properties deprecated and removed in 8.11.
+
+</div>
+
 ## Summary of important changes
 
 Important changes in Camunda 8.10 are summarized in the following sections.
@@ -36,7 +50,9 @@ Important changes in Camunda 8.10 are summarized in the following sections.
 
 :::
 
-## Introducing Camunda Hub
+## Agentic orchestration
+
+## Camunda Hub
 
 [Camunda Hub](/components/hub/index.md) is a new product that replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
 
