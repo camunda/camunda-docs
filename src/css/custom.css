@@ -2493,11 +2493,15 @@ h3 + .release-announcement-row {
 }
 
 /* ---- Expandable table ---- */
-.expandable-table-frame {
+.expandable-table-container {
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 8px;
   overflow: hidden;
-  /* padding: 15px; */
+}
+
+.expandable-table-container table {
+  margin: 0;
+  padding: 15px;
 }
 
 .expandable-table-header {
@@ -2515,33 +2519,6 @@ h3 + .release-announcement-row {
   font-size: 0.95rem;
   color: var(--ifm-color-emphasis-900);
 }
-
-.expandable-table-container table {
-  margin: 0px;
-  padding: 15px;
-}
-
-/* .expandable-table-body table { */
-/* 	margin: 0; */
-/* 	border: none; */
-/* 	border-radius: 0; */
-/* } */
-/**/
-/* .expandable-table-body table tr > *:first-child { */
-/* 	border-left: none; */
-/* } */
-/**/
-/* .expandable-table-body table tr > *:last-child { */
-/* 	border-right: none; */
-/* } */
-/**/
-/* .expandable-table-body table thead th { */
-/* 	border-top: none; */
-/* } */
-/**/
-/* .expandable-table-body table tr:last-child > * { */
-/* 	border-bottom: none; */
-/* } */
 
 .expand-button {
   display: inline-flex;
@@ -2588,7 +2565,8 @@ h3 + .release-announcement-row {
   position: relative;
   z-index: 1;
   width: 90vw;
-  height: 90vh;
+  height: auto;
+  max-height: 90vh;
   margin: 5vh auto;
   overflow: auto;
   background: var(--ifm-background-surface-color);
@@ -2619,6 +2597,7 @@ h3 + .release-announcement-row {
 
 .expanded-table-modal-contents table {
   margin-top: 10px;
+  margin-bottom: 0px;
   width: 100%;
   display: table;
 }

@@ -7,13 +7,13 @@ export default function ExpandableTable({ title, children }) {
 	const handleShowFullscreen = () => setShowFullscreen(true);
 	const handleClose = () => setShowFullscreen(false);
 
-	return (<div className="expandable-table-container">
-		<div className="expandable-table-frame">
+	return (<>
+		<div className="expandable-table-container">
 			<div className="expandable-table-header">
 				<span className="expandable-table-header-title">{title}</span>
 				<button className="expand-button" onClick={handleShowFullscreen}><Icon icon="bx:expand"/>Show full table</button>
 			</div>
-			<div className="expandable-table-body">{children}</div>
+			{children}
 		</div>
 
 		{showFullscreen ? (
@@ -28,6 +28,6 @@ export default function ExpandableTable({ title, children }) {
 				</div>
 			</div>
 		) : null}
-	</div>);
+	</>);
 }
 
