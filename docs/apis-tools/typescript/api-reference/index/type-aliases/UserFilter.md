@@ -8,37 +8,31 @@ mdx:
 # Type Alias: UserFilter
 
 ```ts
-type UserFilter = object;
+type UserFilter = UserFilterFields & object;
 ```
 
 User search filter.
 
-## Properties
+## Type Declaration
 
-### email?
-
-```ts
-optional email?: StringFilterProperty;
-```
-
-The email of the user.
-
----
-
-### name?
+### $or?
 
 ```ts
-optional name?: StringFilterProperty;
+optional $or?: UserFilterFields[];
 ```
 
-The name of the user.
+Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
 
----
+Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
 
-### username?
+_Example:_
 
-```ts
-optional username?: StringFilterProperty;
+```json
+{
+  "$or": [{ "username": "user-1" }, { "username": "user-2" }]
+}
 ```
 
-The username of the user.
+This matches users whose `username` is _user-1_ or _user-2_.
+
+Note: Using complex `$or` conditions may impact performance, use with caution in high-volume environments.

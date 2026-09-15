@@ -5,7 +5,9 @@ import {
   type AgentInstanceKey,
   createCamundaClient,
   type ElementInstanceKey,
+  HistoryItemId,
   type JobKey,
+  type JobLeaseToken,
 } from '@camunda8/orchestration-cluster-api';
 
 //#region GetAgentInstance
@@ -43,16 +45,31 @@ async function searchAgentInstancesExample() {
 //#endregion SearchAgentInstances
 
 //#region CreateAgentInstance
-async function createAgentInstanceExample(elementInstanceKey: ElementInstanceKey) {
+async function createAgentInstanceExample(
+  elementInstanceKey: ElementInstanceKey,
+  jobKey: JobKey,
+  jobLease: JobLeaseToken
+) {
   const camunda = createCamundaClient();
 
+  // The batch must open with a CONFIGURATION item; it establishes the model,
+  // provider and system prompt for the instance.
   const result = await camunda.createAgentInstance({
     elementInstanceKey,
-    definition: {
-      model: 'gpt-4o',
-      provider: 'openai',
-      systemPrompt: 'You are a helpful assistant.',
-    },
+    jobKey,
+    jobLease,
+    history: [
+      {
+        historyItemId: HistoryItemId.assumeExists('configuration-1'),
+        loopIteration: 1,
+        role: 'CONFIGURATION',
+        content: [],
+        producedAt: new Date().toISOString(),
+        model: 'gpt-4o',
+        provider: 'openai',
+        systemPrompt: [{ contentType: 'TEXT', text: 'You are a helpful assistant.' }],
+      },
+    ],
   });
 
   console.log(`Created agent instance: ${result.agentInstanceKey}`);
@@ -62,47 +79,33 @@ async function createAgentInstanceExample(elementInstanceKey: ElementInstanceKey
 //#region UpdateAgentInstance
 async function updateAgentInstanceExample(
   agentInstanceKey: AgentInstanceKey,
-  elementInstanceKey: ElementInstanceKey
+  elementInstanceKey: ElementInstanceKey,
+  jobKey: JobKey,
+  jobLease: JobLeaseToken
 ) {
   const camunda = createCamundaClient();
 
   await camunda.updateAgentInstance({
     agentInstanceKey,
     elementInstanceKey,
+    jobKey,
+    jobLease,
     status: 'THINKING',
-    metrics: {
-      inputTokens: 150,
-      outputTokens: 50,
-      modelCalls: 1,
-    },
+    history: [
+      {
+        historyItemId: HistoryItemId.assumeExists('assistant-1'),
+        loopIteration: 1,
+        role: 'ASSISTANT',
+        content: [{ contentType: 'TEXT', text: 'How can I help you?' }],
+        producedAt: new Date().toISOString(),
+        metrics: { inputTokens: 150, outputTokens: 50, durationMs: 820 },
+      },
+    ],
   });
 
   console.log(`Updated agent instance: ${agentInstanceKey}`);
 }
 //#endregion UpdateAgentInstance
-
-//#region CreateAgentInstanceHistoryItem
-async function createAgentInstanceHistoryItemExample(
-  agentInstanceKey: AgentInstanceKey,
-  elementInstanceKey: ElementInstanceKey,
-  jobKey: JobKey,
-  jobLease: string
-) {
-  const camunda = createCamundaClient();
-
-  const result = await camunda.createAgentInstanceHistoryItem({
-    agentInstanceKey,
-    elementInstanceKey,
-    jobKey,
-    jobLease,
-    role: 'ASSISTANT',
-    content: [{ contentType: 'TEXT', text: 'How can I help you today?' }],
-    producedAt: new Date().toISOString(),
-  });
-
-  console.log(`Created history item: ${result.historyItemKey}`);
-}
-//#endregion CreateAgentInstanceHistoryItem
 
 //#region SearchAgentInstanceHistory
 async function searchAgentInstanceHistoryExample(agentInstanceKey: AgentInstanceKey) {
@@ -130,5 +133,4 @@ void getAgentInstanceExample;
 void searchAgentInstancesExample;
 void createAgentInstanceExample;
 void updateAgentInstanceExample;
-void createAgentInstanceHistoryItemExample;
 void searchAgentInstanceHistoryExample;

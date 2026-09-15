@@ -8,47 +8,31 @@ mdx:
 # Type Alias: MappingRuleFilter
 
 ```ts
-type MappingRuleFilter = object;
+type MappingRuleFilter = MappingRuleFilterFields & object;
 ```
 
 Mapping rule search filter.
 
-## Properties
+## Type Declaration
 
-### claimName?
-
-```ts
-optional claimName?: string;
-```
-
-The claim name to match against a token.
-
----
-
-### claimValue?
+### $or?
 
 ```ts
-optional claimValue?: string;
+optional $or?: MappingRuleFilterFields[];
 ```
 
-The value of the claim to match.
+Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
 
----
+Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
 
-### mappingRuleId?
+_Example:_
 
-```ts
-optional mappingRuleId?: MappingRuleId;
+```json
+{
+  "$or": [{ "mappingRuleId": "rule-1" }, { "mappingRuleId": "rule-2" }]
+}
 ```
 
-The ID of the mapping rule.
+This matches mapping rules whose `mappingRuleId` is _rule-1_ or _rule-2_.
 
----
-
-### name?
-
-```ts
-optional name?: string;
-```
-
-The name of the mapping rule.
+Note: Using complex `$or` conditions may impact performance, use with caution in high-volume environments.
