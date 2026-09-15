@@ -34,7 +34,7 @@ Cluster admin protects the operations served under the `/cluster/v2/...` path pr
 | Recovery            | `POST /cluster/v2/restore`, `PATCH /cluster/v2/mode`                                                 |
 | Partition placement | `POST /cluster/v2/rebalance`                                                                         |
 
-Each cluster-wide endpoint also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin operation to a single Physical Tenant without switching to the tenant-scoped API. Omitting the parameter targets every Physical Tenant.
+Each cluster-wide endpoint (other than `POST /cluster/v2/rebalance`) also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin operation to a single Physical Tenant without switching to the tenant-scoped API. Omitting the parameter targets every Physical Tenant.
 
 For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
 
@@ -102,4 +102,5 @@ Under Basic authentication, an empty or absent user list is accepted silently an
 - [Physical Tenants API routing](/self-managed/concepts/physical-tenants/api-routing.md)
 - [Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 - [Cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md)
+- [Rebalancing partitions](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md)
 - [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md)
