@@ -219,7 +219,7 @@ The reference architecture enables it and pins the three settings that decide wh
 
 That last one is worth understanding before you change it. Leaving it off does not lose data, because records are still only acknowledged once Aurora confirms them. What it changes is what happens when replication falls far behind: with the pause off, the Zeebe log keeps growing on the EFS data volume for as long as the lag persists, which costs storage and EFS throughput without bound. With it on, exporting stops, Zeebe keeps processing, and the APIs and web applications that read secondary storage serve stale data until Aurora catches up.
 
-For the full property reference, including the `LOG_SEQ` vendor support list and the delay-backoff fallback, see [multi-region support](/self-managed/concepts/databases/relational-db/database-configuration.md#multi-region-support).
+For the full property reference, including the `LOG_SEQ` vendor support list and the delay-backoff fallback, see [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support).
 
 ## Deployment walkthrough
 
