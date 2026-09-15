@@ -29,5 +29,3 @@ The missing/orphaned projects and all contained files remain in the Camunda Hub 
 ## Resolution
 
 To restore workspace access for the affected users, users with the **Hub Admin** role already have the [access](/components/hub/organization/manage-users/index.md#elevated-workspace-access) needed to reassign members to projects that have no members.
-
-<!-- TODO: user feedback (2026-09-02) on the #cause anchor said "This Migration Plan is not an option." No "Migration Plan" text exists anywhere in this page's current or historical content. Confirm with the reporter or product team whether this refers to a UI element outside this doc, or whether the Hub Admin role requirement above is the actual blocker for users who lack it (in which case this Resolution needs a fallback path). -->
