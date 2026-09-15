@@ -393,19 +393,21 @@ module.exports = {
           items: [
             {
               type: "category",
-              label: "Microsoft Teams",
+              label: "App Integrations",
               link: {
                 type: "doc",
-                id: "components/camunda-integrations/ms-teams/ms-teams",
+                id: "components/camunda-integrations/app-integrations/app-integrations",
               },
               items: [
-                "components/camunda-integrations/ms-teams/ms-teams-installation",
-                "components/camunda-integrations/ms-teams/ms-teams-troubleshoot",
-                "components/camunda-integrations/ms-teams/ms-teams-chatbot",
-                "components/camunda-integrations/ms-teams/ms-teams-tabs",
-                "components/camunda-integrations/ms-teams/ms-teams-notifications",
+                "components/camunda-integrations/app-integrations/microsoft-teams",
+                "components/camunda-integrations/app-integrations/slack",
+                "components/camunda-integrations/app-integrations/notification-rules",
+                "components/camunda-integrations/app-integrations/installation",
+                "components/camunda-integrations/app-integrations/troubleshoot",
               ],
             },
+            "components/camunda-integrations/ms-teams",
+            "components/camunda-integrations/slack",
             {
               type: "category",
               label: "SAP",
