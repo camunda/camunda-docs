@@ -209,7 +209,7 @@ The full validation contract — including the plan-time checks that fail with a
 
 Aurora Global Database replicates asynchronously, so a writer promotion can leave the new writer missing whatever had not reached it yet. What closes that gap is Camunda, not Aurora: with asynchronous replication monitoring enabled, the RDBMS exporter acknowledges a record to the broker only once the database reports it replicated, which holds back Zeebe log compaction so the missing records are replayed from the log.
 
-The reference architecture enables it and pins the four settings that decide what it delivers:
+The reference architecture enables it and pins the four settings that decide what it delivers. All four sit under the `camunda.data.secondary-storage.rdbms.` prefix, shortened in the table below:
 
 | Setting                                       | Value     | Why                                                                                                                                                                        |
 | --------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -220,7 +220,7 @@ The reference architecture enables it and pins the four settings that decide wha
 
 `max-lag` is not compared against a lag figure Aurora reports, and it doesn't delay acknowledgement: confirmed positions are acknowledged as soon as Aurora reports them. Under `LOG_SEQ`, the engine measures how long the oldest exporter position has been waiting for its log sequence number to be confirmed, so the value is really the longest replication interruption you want the deployment to ride out. A cross-region writer promotion under sustained load can run past the `PT15M` engine default, which would pause the exporter during the exact event this architecture treats as routine.
 
-Raising it doesn't blind you to a lost secondary, but the timing depends on what is in flight. While nothing is queued, a secondary that drops below `min-sync-replicas` is reported as worst-case lag, which pauses the exporter at the next poll whatever the budget is. Once positions are queued, the queue-head age governs instead, so that case waits out `max-lag` like any other.
+Raising it doesn't blind you to a lost secondary, but the timing depends on what is in flight. While nothing is queued, the number of in-sync replicas falling below `min-sync-replicas` is reported as worst-case lag, which pauses the exporter at the next poll whatever the budget is. Once positions are queued, the queue-head age governs instead, so that case waits out `max-lag` like any other.
 
 `pause-on-max-lag-exceeded` is worth understanding before you change it. It is not a data-loss control, and it is not a disk control either. Records are only ever acknowledged once Aurora confirms them, so no data is lost either way, and the Zeebe log grows either way: the exporter position cannot advance past unconfirmed records, so compaction stays blocked for as long as replication is behind, paused or not.
 
