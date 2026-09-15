@@ -12,7 +12,7 @@ paths:
       operationId: createWorkspace
       summary: Create a workspace
       description: Creates a new workspace in the caller's organization.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-provider:
         - workspaceKey
       tags:
@@ -44,7 +44,7 @@ paths:
       operationId: getWorkspace
       summary: Get a workspace
       description: Returns the workspace metadata and its contained projects.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Workspace
         bind:
@@ -75,7 +75,7 @@ paths:
       operationId: updateWorkspace
       summary: Update a workspace
       description: Updates an existing workspace.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Workspace
         bind:
@@ -119,7 +119,7 @@ paths:
         to the recently deleted state and can be recovered during the retention
         window. To permanently and irreversibly remove a workspace, use
         `DELETE /workspaces/{workspaceKey}/permanent` instead.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Workspace
         bind:
@@ -155,7 +155,7 @@ paths:
         applications, or IDP applications, and any soft-deleted items in its
         subtree are removed as part of the deletion. This works in one step
         and does not require the workspace to be soft-deleted first.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Workspace
       parameters:
@@ -179,7 +179,7 @@ paths:
       operationId: searchWorkspaces
       summary: Search workspaces
       description: Returns workspaces matching the given search criteria. Results are scoped to the caller's organization.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Workspace
       requestBody:
@@ -214,7 +214,7 @@ paths:
         scheduled cleanup job runs; they can also be restored with
         `POST /workspaces/{workspaceKey}/restoration` or permanently removed
         with `DELETE /workspaces/{workspaceKey}/permanent`.
-      x-added-in-version: "0.4.0"
+      x-added-in-version: "8.10"
       tags:
         - Workspace
       requestBody:
@@ -246,7 +246,7 @@ paths:
       description: >
         Restores a soft-deleted workspace, together with everything that was
         soft-deleted as part of the same deletion event.
-      x-added-in-version: "0.4.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Workspace
         bind:
