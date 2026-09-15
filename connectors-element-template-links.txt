@@ -4,6 +4,8 @@
 https://docs.camunda.io/docs
 https://docs.camunda.io/docs/8.10/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess
 https://docs.camunda.io/docs/8.10/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task
+https://docs.camunda.io/docs/8.10/components/connectors/out-of-the-box-connectors/app-integrations
+https://docs.camunda.io/docs/8.10/reference/announcements-release-notes/8100/8100-announcements/#agentic-orchestration
 https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-sagemaker
 https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-textract
 https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/sql
@@ -64,6 +66,7 @@ https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connecto
 https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connectors/outbound-connector
 https://docs.camunda.io/docs/components/concepts/messages/#message-correlation-overview
 https://docs.camunda.io/docs/components/concepts/messages/#message-subscriptions
+https://docs.camunda.io/docs/components/connectors/connectors/protocol/http-webhook/#use-the-correlation-object
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/#authentication
