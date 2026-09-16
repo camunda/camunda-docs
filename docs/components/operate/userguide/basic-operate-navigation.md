@@ -22,11 +22,12 @@ To view a deployed process, take the following steps:
 
 Running process instances appear in the **Process Instances** table below the process model. To inspect a specific instance, click the **Process Instance Key**.
 
-The process instance page has three parts:
+The process instance page has four parts:
 
 - A header showing the process instance's key, version, and state.
 - A process diagram showing the instance's current progress.
-- A bottom panel with tabs, including **Details**, **Incidents** (shown only when the instance has an incident), and **Variables**.
+- An **Instance History** panel listing the instance's elements, with search and status filter controls.
+- A bottom panel with tabs: **Variables**, **Listeners**, and **Operations Log** are always available. **Incidents** appears when the instance has one. **Details**, **Input Mappings**, and **Output Mappings** appear once you select a specific element in the diagram.
 
 ![A process instance detail page, showing the header with the process instance's key, version, and state, the process diagram, and the bottom panel with Variables, Listeners, and Operations Log tabs.](./img/basic-operate-navigation.png)
 

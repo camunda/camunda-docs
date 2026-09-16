@@ -379,48 +379,48 @@ function OSTabs({ activeOS, onSelect }) {
 /* ─── Download data ─── */
 
 const GETTING_STARTED = {
-  version: "8.10.0-alpha3",
-  date: "Jul 17, 2026",
+  version: "8.10.0-alpha5",
+  date: "Sep 11, 2026",
   links: {
     mac: [
       {
         label: "Apple Silicon",
-        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-darwin-aarch64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha5/camunda8-getting-started-bundle-8.10.0-alpha5-darwin-aarch64.zip",
       },
       {
         label: "Intel",
-        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-darwin-x86_64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha5/camunda8-getting-started-bundle-8.10.0-alpha5-darwin-x86_64.zip",
       },
     ],
     windows: [
       {
         label: "Windows (x64)",
-        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-windows-x86_64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha5/camunda8-getting-started-bundle-8.10.0-alpha5-windows-x86_64.zip",
       },
     ],
     linux: [
       {
         label: "Linux (x64)",
-        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-linux-x86_64.tar.gz",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha5/camunda8-getting-started-bundle-8.10.0-alpha5-linux-x86_64.tar.gz",
       },
     ],
   },
 };
 
 const DESKTOP_MODELER = {
-  version: "5.51.0",
-  date: "Sep 8, 2026",
+  version: "5.51.1",
+  date: "Sep 14, 2026",
   nightlyLabel: "Nightly",
   links: {
     mac: {
       stable: [
         {
           label: "Apple Silicon (.dmg)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.51.0/camunda-modeler-5.51.0-mac-arm64.dmg",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.51.1/camunda-modeler-5.51.1-mac-arm64.dmg",
         },
         {
           label: "Intel (.dmg)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.51.0/camunda-modeler-5.51.0-mac-x64.dmg",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.51.1/camunda-modeler-5.51.1-mac-x64.dmg",
         },
       ],
       experimental: [
@@ -438,7 +438,7 @@ const DESKTOP_MODELER = {
       stable: [
         {
           label: "Windows (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.51.0/camunda-modeler-5.51.0-win-x64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.51.1/camunda-modeler-5.51.1-win-x64.zip",
         },
       ],
       experimental: [
@@ -452,7 +452,7 @@ const DESKTOP_MODELER = {
       stable: [
         {
           label: "Linux (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.51.0/camunda-modeler-5.51.0-linux-x64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.51.1/camunda-modeler-5.51.1-linux-x64.tar.gz",
         },
       ],
       experimental: [
