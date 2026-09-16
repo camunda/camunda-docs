@@ -2501,7 +2501,6 @@ h3 + .release-announcement-row {
 
 .expandable-table-container table {
   margin: 0;
-  padding: 15px;
 }
 
 .expandable-table-header {
@@ -2557,8 +2556,8 @@ h3 + .release-announcement-row {
   position: absolute;
   inset: 0;
   background-color: var(--docsearch-container-background);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 [data-theme="dark"] .expanded-table-modal-backdrop {
@@ -2576,26 +2575,35 @@ h3 + .release-announcement-row {
   background: var(--ifm-background-surface-color);
   border-radius: 8px;
   padding: 1.5rem;
-  padding-top: 3rem;
 }
 
 .close-button {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ifm-color-emphasis-200);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
   border: none;
   cursor: pointer;
   color: var(--ifm-color-emphasis-900);
   font-size: 1.5rem;
 }
 
-.expanded-table-title {
-  position: absolute;
-  top: 0.75rem;
-  left: 1.5rem;
-  font-size: 1.25rem;
-  font-weight: 600;
+.close-button:hover {
+  background-color: var(--ifm-color-emphasis-300);
+}
+
+.expanded-table-modal-header {
+  display: flex;
+  align-items: center;
+}
+
+.expanded-table-modal-title {
+  margin-right: auto;
+  border: none;
+  margin-bottom: 0;
   color: var(--ifm-color-emphasis-900);
 }
 
