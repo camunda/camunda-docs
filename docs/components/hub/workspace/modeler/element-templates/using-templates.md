@@ -6,24 +6,19 @@ description: "Learn how to apply, remove, update, and replace templates."
 
 ## Applying templates
 
-If an [element template](/components/modeler/element-templates/about-templates.md) matches a selected diagram element, the blue template catalog button, **Select**, is shown in the properties panel on the right side of the screen.
+If you have already published an [element template](/components/modeler/element-templates/about-templates.md) to your workspace:
 
-![Template Chooser](./img/chooser.png)
-
-Clicking **Select** opens a popup menu, allowing you to browse and search available templates for the
-selected element.
-
-![Popup Menu](./img/modal.png)
-
-You can also click the **blue shop icon** in the upper right of the popup to open the [Camunda Marketplace](/components/hub/workspace/modeler/modeling/camunda-marketplace.md).
-
-![Marketplace Menu](./img/marketplace.png)
+1. Open a BPMN diagram.
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+3. Select an element in the diagram that matches the element template's type. For example, if you've published a **Task** template, select a **Task** element in your diagram.
+4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Select**. This opens the **Choose element template** modal.
+5. Select the element template
+6. **(Optional)** Instead of selecting a template published to your workspace, you can click the blue shop icon in the top right of the modal to open the [Camunda Marketplace](/components/hub/workspace/modeler/modeling/camunda-marketplace.md).
 
 Applying a template stores it via the `modelerTemplate` property and the optional `modelerTemplateVersion` property
 on the selected element:
 
 ```xml
-
 <bpmn:serviceTask id="MailTask"
                   zeebe:modelerTemplate="com.mycompany.MailTask"
                   zeebe:modelerTemplateVersion="1"/>
@@ -42,16 +37,22 @@ Operations are also matched by search, so you can search for the action you want
 
 To remove an applied template from an element, either the _Unlink_ or _Remove_ function can be used:
 
-- **Unlink**: Remove the element template from the `modelerTemplate` property but keep the properties which were set.
-- **Remove**: Remove the element template from the `modelerTemplate` property and reset all properties of the respective element.
-
-![Unlink or Remove](./img/unlink-remove.png)
+1. Open a BPMN diagram.
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+3. Select an element in the diagram that is linked to an element template.
+4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Applied**.
+5. Select either:
+   - **Unlink**: Remove the element template from the `modelerTemplate` property but keep the properties which were set.
+   - **Remove**: Remove the element template from the `modelerTemplate` property and reset all properties of the respective element.
 
 ## Updating templates
 
-If a template is applied and a new version of the template is found you can _update_ the template.
+If a template is applied and a new version of the template is found, you can _update_ the template:
 
-![Update Template](./img/update-template.png)
+1. Open a BPMN diagram.
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+3. Select an element in the diagram that is linked to an element template.
+4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Update available**.
 
 Templates are updated according to the following rules:
 
@@ -65,22 +66,26 @@ Templates are updated according to the following rules:
 If a template is deprecated with a new element template and you want to keep the same input values as in the
 deprecated template, you can:
 
-1. **Unlink**: Remove the current template that is deprecated from the `modelerTemplate` property, but keep the properties
-   which
-   were set.
-2. **Select** and apply the new element template.
+1. [**Unlink**](#removing-templates): Remove the current template that is deprecated from the `modelerTemplate` property, but keep the properties which were set.
+2. Click **Select** and apply the new element template.
 
 ## Missing templates
 
-If a template was applied to an element but cannot be found, editing of the element is disabled. To re-enable editing, either _unlink_ or _remove_ the template, or make it available by publishing a template with the same ID or creating a new one.
-
-![Template not Found](./img/template-not-found.png)
+If a template was applied to an element but cannot be found, editing of the element is disabled. To re-enable editing, either [_unlink_ or _remove_ the template](#removing-templates), or make it available by publishing a template with the same ID or creating a new one.
 
 ## Creating templates from existing elements
 
-If a diagram element supports being used as a template, a _Save as_ link will be displayed next to the header. Once clicked, you will be able to select a name and description for the template. This allows you to easily reuse pre-configured elements.
+To save a diagram element as a template:
 
-![Template Save as](./img/save-as.png)
+1. Open a BPMN diagram.
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+3. Select an element in the diagram that supports being used as a template.
+4. On the right side of the modeling interface, in the top right of the **Details** pane, click **Save as**.
+5. Provide a **Name** and **Description**.
+
+:::tip
+If **Save as** is disabled, hover over it to read instructions on how to make the element support being used as a template.
+:::
 
 The template can be further customized by [editing it](/components/connectors/manage-connector-templates.md).
 

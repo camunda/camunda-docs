@@ -23,7 +23,7 @@ To learn more about security at Camunda, including our security policy, security
 
 ## Understand affected and fixed versions
 
-Each security notice lists affected and fixed versions by Camunda component (for example, Zeebe, Operate, Tasklist, Identity, Optimize, and Web Modeler), not by Helm chart version. The Helm chart has its own version, tracked separately from the component versions it deploys.
+Each security notice lists affected and fixed versions by Camunda component (for example, Zeebe, Operate, Tasklist, Identity, Optimize, and Hub), not by Helm chart version. The Helm chart has its own version, tracked separately from the component versions it deploys.
 
 For Camunda 8.8 and later, the Orchestration Cluster unifies Zeebe, Operate, and Tasklist, so these components share the same version number.
 
@@ -32,6 +32,117 @@ To check whether your Helm deployment is affected:
 1. Identify the Helm chart version you are running.
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
+
+## Notice 62
+
+### Publication date
+
+September 8, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-75140](https://nvd.nist.gov/vuln/detail/CVE-2026-75140) in `jsoup`'s
+`XmlTreeBuilder` which could allow an attacker to exhaust JVM heap memory by supplying a deeply nested XML document (in
+this case a BPMN or DMN diagram) with uniquely-namespaced elements.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.7, ≤ 8.8.18, or ≤ 8.7.25
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.9.8, 8.8.19, 8.7.26
+
+The fix was deployed to Web Modeler SaaS on August 29, 2026, 10:35 CET.
+
+## Notice 61
+
+### Publication date
+
+September 8, 2026
+
+### Products affected
+
+- Camunda Connectors
+
+### Impact
+
+The connector runtime resolves a secret reference (for example, `{{secrets.MY_API_KEY}}`) wherever that literal text appears in a connector's input, without restricting resolution to the field where the reference was declared. Under the following conditions, an attacker may be able to cause a connector to resolve and disclose a secret outside its intended scope:
+
+- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+- Untrusted input reaches a process variable — for example, through a user task, an inbound connector such as a webhook or email, or an API call.
+- That process variable is passed, unsanitized, into a connector field (for example, an email body or an HTTP request field).
+- The attacker can guess or know the name of a secret that exists in that context. This does not require knowing the secret's value, only its name.
+- The connector's destination is one the attacker controls or can observe, or the attacker can also influence the destination itself (for example, a recipient address or URL supplied through another process variable).
+
+Severity: High (CVSS 7.5).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Connectors 8.1.x through 8.9.x, on Self-Managed or SaaS, with connectors and secrets configured as described above.
+
+### Solution
+
+Camunda has released a secret filter for the connector runtime, defaulting to `STRICT` mode. In `STRICT` mode, a connector only resolves a secret that's present for that specific field in the deployed BPMN XML, which structurally closes this vulnerability for both outbound and inbound connectors. This is a breaking change: after upgrading, a connector field that relied on resolving an undeclared secret stops resolving it. See [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) for configuration details, including how to change the mode.
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Connectors 8.9.10, 8.8.19, 8.7.25, 8.6.28
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/hub/organization/manage-clusters/settings.md#secret-filter-mode).
+
+**Interim mitigation**:
+
+- Review your process deployments against the preconditions above.
+- If a process may be affected, search its process instance variables for a secret-reference literal — for example, using the [Search process instances API](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) with a `$like` filter on 8.8 and later. This check is not conclusive: it only reflects the variable's current value, within your retention period.
+- Adjust the affected process so the preconditions above no longer hold, or sanitize the process variable to remove secret-reference syntax before it reaches a connector field.
+  - Sanitize the respective process variable for example by replacing `secrets` keyword: `= replace(emailBody, "secrets?\.", "secretx_", "i")`
+- Rotate any secret that may have been exposed, following your organization's secret-management procedures.
+
+## Notice 60
+
+### Publication date
+
+September 2, 2026
+
+### Products affected
+
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
+
+### Impact
+
+The application was vulnerable to [CVE-2026-71290](https://nvd.nist.gov/vuln/detail/CVE-2026-71290), where the embedded `httpclient5` library's asynchronous transport, used to connect to the Elasticsearch/OpenSearch secondary storage, skipped hostname verification during the TLS handshake. An attacker positioned to intercept network traffic between the affected component and its Elasticsearch/OpenSearch backend (for example, via DNS spoofing, BGP hijacking, or a compromised host on a shared network segment) could impersonate the backend, intercept the Basic authentication credentials sent to it, read or tamper with process data (including variables and process instance data) in transit, and inject forged responses back to the application. Exploitation requires this man-in-the-middle network position; it does not require bypassing authentication on the application's own API. Camunda is not aware of any known exploitation of this vulnerability.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Zeebe ≤ 8.7.37
+- Camunda Tasklist ≤ 8.7.37
+- Camunda Operate ≤ 8.7.37
+- Camunda Optimize ≤ 8.7.26
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Zeebe 8.7.38
+- Camunda Tasklist 8.7.38
+- Camunda Operate 8.7.38
+- Camunda Optimize 8.7.27
 
 ## Notice 59
 

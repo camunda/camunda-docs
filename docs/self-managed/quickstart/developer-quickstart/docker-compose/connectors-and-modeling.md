@@ -101,13 +101,13 @@ Non-production installations of Camunda Hub are limited to five members per work
 To start Camunda Hub, its WebSockets service, Management Identity, Keycloak, PostgreSQL, and Mailpit independently, run:
 
 ```shell
-docker compose -f docker-compose-web-modeler.yaml up -d
+docker compose -f docker-compose-hub.yaml up -d
 ```
 
 To stop Camunda Hub and remove all data and volumes, run:
 
 ```shell
-docker compose -f docker-compose-web-modeler.yaml down -v
+docker compose -f docker-compose-hub.yaml down -v
 ```
 
 #### Deploy or execute a process
@@ -127,7 +127,7 @@ Camunda Hub uses the `BEARER_TOKEN` authentication method to communicate with th
 :::note
 Camunda Hub is not included in the lightweight configuration. To use Camunda Hub with the lightweight configuration:
 
-1. Run Camunda Hub separately with `docker-compose-web-modeler.yaml`.
+1. Run Camunda Hub separately with `docker-compose-hub.yaml`.
 1. Manually configure the cluster connection in Camunda Hub.
 1. Use `NONE` or `BASIC` authentication for the lightweight Orchestration Cluster.
 

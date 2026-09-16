@@ -61,7 +61,7 @@ To assign a role to a user, take the following steps:
 
 1. Navigate to the **Users** tab.
 
-2. Click on the user you want to assign a role to to view their details.
+2. Click on the user you want to assign a role to view their details.
 
 3. Click on **Assigned roles** to view the roles currently assigned to the user.
 

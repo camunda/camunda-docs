@@ -343,9 +343,9 @@ Git sync supports parallel feature development by allowing multiple projects to 
 
 To use Git sync for parallel feature development:
 
-1. Create a new [project](create-a-project.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [project](create-a-project.md) in Camunda Hub for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
-3. Work on your feature in Modeler, using **Sync with _GitProvider_** to pull and push changes as needed.
+3. Work on your feature in Hub, using **Sync with _GitProvider_** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the project associated with the feature branch.
 
 To perform hotfixes or patches of production or production-bound processes, sync a copy of the project to the `main` branch.

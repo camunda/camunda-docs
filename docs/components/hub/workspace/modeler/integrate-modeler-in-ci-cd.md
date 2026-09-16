@@ -76,7 +76,7 @@ Users without **Organization Owner** or **Organization Admin** roles in Camunda 
 Only users with **Organization Owner** or **Organization Admin** roles can deploy from Camunda Hub to `prod` clusters.
 :::
 
-Read more in the [user roles documentation](/components/hub/organization/manage-users/manage-users.md).
+Read more in the [user roles documentation](/components/hub/organization/manage-users/index.md).
 
 </TabItem>
 </Tabs>
@@ -321,7 +321,7 @@ While blue-green deployments are more straightforward with Self-Managed setups, 
 
 #### How can I prevent manual deployments from Camunda Hub?
 
-To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed setups, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. In Camunda 8 SaaS, manage deployment permissions via [user roles](/components/hub/organization/manage-users/manage-users.md).
+To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed setups, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. In Camunda 8 SaaS, manage deployment permissions via [user roles](/components/hub/organization/manage-users/index.md).
 
 #### How can I sync files between Camunda Hub and version control?
 
