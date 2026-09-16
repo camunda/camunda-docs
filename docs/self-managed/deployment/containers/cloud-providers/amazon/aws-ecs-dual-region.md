@@ -228,7 +228,7 @@ What it decides is whether the exporter keeps writing to a database that is alre
 
 EFS is elastic, so a prolonged outage doesn't hit a capacity wall the way a fixed volume would. It grows stored bytes and burns throughput for as long as it lasts, which shows up as cost rather than a full disk. Monitor EFS storage growth and throughput, and alert on replication lag, regardless of this setting.
 
-For the full property reference, including the `LOG_SEQ` vendor support list and the delay-backoff fallback, see [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support).
+`LOG_SEQ` is not supported by every vendor, and nothing downgrades silently: on an unsupported database the exporter throws at startup and names the reason, so the deployment fails rather than quietly losing the replication signal. For the full property reference, including the vendor support list and the delay-backoff alternative, see [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support).
 
 ## Deployment walkthrough
 
