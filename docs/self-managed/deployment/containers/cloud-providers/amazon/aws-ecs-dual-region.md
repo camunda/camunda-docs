@@ -209,9 +209,9 @@ The full validation contract — including the plan-time checks that fail with a
 
 Aurora Global Database replicates asynchronously, so promoting a new writer can leave it missing whatever had not reached it yet. Camunda closes that gap, not Aurora.
 
-Exporting and acknowledging are separate steps. The RDBMS exporter writes a record to the Aurora writer, then tells the broker the record is safe only once the required replicas report it. Zeebe frees disk on the acknowledgement rather than on the write, so a record sitting in the writer but not yet in every replica still occupies the Zeebe log.
+Exporting and acknowledging are separate steps. The RDBMS exporter writes a record to the Aurora writer, then tells the broker the record is safe only once `min-sync-replicas` replicas confirm it, which this architecture leaves at one. Zeebe frees disk on the acknowledgement rather than on the write, so a record sitting in the writer but not yet confirmed by that quorum still occupies the Zeebe log.
 
-A replica that falls behind is what holds the acknowledgement back, so it is what makes the log grow. It is not what the log is kept for. A replica catches up from the writer, never from Zeebe. The retained records matter when the writer itself is lost: the promoted one resumes from its own position, and Zeebe replays the gap.
+A replica counted towards that quorum falling behind is what holds the acknowledgement back, so it is what makes the log grow. It is not what the log is kept for. A replica catches up from the writer, never from Zeebe. The retained records matter when the writer itself is lost: the promoted one resumes from its own position, and Zeebe replays the gap.
 
 The reference architecture pins four properties under `camunda.data.secondary-storage.rdbms.`, shortened in the table below. [Multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) documents what each one does, including which vendors support `LOG_SEQ` and how the `DELAY` alternative behaves. The table records only which values this architecture picks and why.
 
@@ -226,7 +226,7 @@ Under `LOG_SEQ`, `max-lag` bounds the age of the oldest exporter position still 
 
 Whether to pause is left to you. Turning it on stops the exporter writing to Aurora once that budget is exceeded, or immediately if the required replica quorum is unavailable while nothing is queued. Ordinary lag below the budget changes nothing. It protects nothing that acknowledgement does not already protect, because records are reported safe to the broker only after confirmed replication either way, so no data is lost either way and the Zeebe log is held by the unacknowledged position either way.
 
-First, what pausing does not change. A replication stall holds the acknowledged position back whether or not you pause, so the export backlog grows either way, and a large enough backlog triggers [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md): the engine lowers its record write rate and can reject client commands. Pausing neither causes that nor prevents it.
+First, what pausing does not change. A replication stall holds the acknowledged position back whether or not you pause, so the export backlog grows either way. Self-Managed ships with write rate limits disabled, so that backlog does not slow the engine on its own; enable [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) and throttling will start trading write rate against backlog. Pausing neither causes that nor prevents it.
 
 What you gain is a visible failure. The exporter records the paused state in its replication metrics and logs a warning, and every later export attempt raises an `ExporterException`, so the condition is hard to miss. What you give up is that writes to Aurora stop on their own, so secondary storage falls further behind the engine than the stall alone would leave it. Turn it on once you have alerting on replication lag and have accepted that trade.
 
