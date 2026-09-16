@@ -56,10 +56,8 @@ Compatibility is confirmed for [Camunda Helm chart releases version 11 and above
 
 You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks/). Below is a quick reference for common usage options:
 
-<!-- REVIEW(8.10): the c8-sm-checks default PostgreSQL component list and the example output below reference `identityKeycloak`, which is removed in chart 15.x. This is the external c8-sm-checks script's concern (not chart config) — a human should confirm the current script defaults and update these examples if the script changed for 8.10. -->
-
-:::note Pending review for 8.10
-The `c8-sm-checks` default PostgreSQL component list (`identityKeycloak,identity,webModeler`) and the example output below reference `identityKeycloak`, which is **removed in Camunda 8.10** (chart `15.x`). These come from the external [c8-sm-checks](https://github.com/camunda/c8-sm-checks/) script, not the chart — verify the current script defaults and update these examples for 8.10.
+:::note `identityKeycloak` in the default component list
+The default PostgreSQL component list below still contains `identityKeycloak`, the Bitnami subchart removed in Camunda 8.10. The script detects `global.identity.keycloak.internal=false` and skips those checks automatically, verifying your operator-managed or external Keycloak instead. Pass `-p "identity,webModeler"` to drop it from the list explicitly.
 :::
 
 ```bash
@@ -345,7 +343,7 @@ When implementing [backup and restore procedures](/self-managed/operational-guid
 ### Elasticsearch backup configuration
 
 :::note
-The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10. For 8.10, deploy Elasticsearch with the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed service and configure S3 snapshot access per their documentation. The steps below apply to **Camunda 8.9 and earlier** — see the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa/).
+The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10. For 8.10, deploy Elasticsearch with the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed service and configure S3 snapshot access per their documentation. The steps below apply to **Camunda 8.9 and earlier**. See the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa/).
 :::
 
 To enable S3 snapshots with IRSA, create an IAM role mapped to the Elasticsearch service account with the required S3 permissions, following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html) and the [Elasticsearch S3 repository documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#repository-s3-permissions).

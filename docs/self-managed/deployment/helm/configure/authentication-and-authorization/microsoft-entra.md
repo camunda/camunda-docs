@@ -128,7 +128,7 @@ In Camunda configuration, this value is referred to as a _client secret_ to alig
 The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-The PostgreSQL credentials for Management Identity and Web Modeler are no longer created here. They are provided by the operator (or managed database) that hosts each database — for example the `pg-identity-secret` and `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
+The PostgreSQL credentials for Management Identity and Web Modeler are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
 
@@ -327,7 +327,6 @@ webModeler:
     mail:
       fromAddress: noreply@example.com
     externalDatabase:
-      enabled: true
       host: pg-webmodeler-rw
       port: 5432
       database: webmodeler

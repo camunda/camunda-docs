@@ -90,7 +90,7 @@ This secret includes the following keys:
 - `identity-optimize-client-token`: Client secret of the Keycloak OIDC client `optimize` used by Optimize.
 - `identity-orchestration-client-token`: Client secret of the Keycloak OIDC client `orchestration` used by the Orchestration Cluster.
 
-The PostgreSQL credentials for Web Modeler are no longer part of this secret. They are provided by the operator (or managed database) that hosts the Web Modeler database — for example, the `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
+The PostgreSQL credentials for Web Modeler are no longer part of this secret. They are provided by the operator (or managed database) that hosts the Web Modeler database, such as the `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
 
@@ -244,7 +244,6 @@ webModeler:
       fromAddress: noreply@example.com
     # Connect Web Modeler to the operator-managed PostgreSQL cluster (pg-webmodeler)
     externalDatabase:
-      enabled: true
       host: pg-webmodeler-rw
       port: 5432
       database: webmodeler

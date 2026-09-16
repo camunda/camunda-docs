@@ -155,7 +155,6 @@ webModeler:
     mail:
       fromAddress: noreply@example.com
     externalDatabase:
-      enabled: true
       host: pg-webmodeler-rw
       port: 5432
       database: webmodeler

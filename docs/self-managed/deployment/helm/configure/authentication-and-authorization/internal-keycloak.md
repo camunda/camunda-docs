@@ -52,7 +52,7 @@ This secret includes the following keys:
 - `identity-optimize-client-token`: Client secret for the Keycloak OIDC client `optimize` used by Optimize.
 - `identity-orchestration-client-token`: Client secret for the Keycloak OIDC client `orchestration` used by the Orchestration Cluster.
 
-The Keycloak administrator credentials and the PostgreSQL credentials for Keycloak, Identity, and Web Modeler are no longer part of this secret. They are provided by the operators that deploy those services — for example, the operator-generated `keycloak-initial-admin` secret and the `pg-*-secret` database secrets. See [Operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for how these are created.
+The Keycloak administrator credentials and the PostgreSQL credentials for Keycloak, Identity, and Web Modeler are no longer part of this secret. They are provided by the operators that deploy those services, such as the operator-generated `keycloak-initial-admin` secret and the `pg-*-secret` database secrets. See [Operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for how these are created.
 
 ### Deploy Keycloak and connect Camunda
 
@@ -197,7 +197,6 @@ webModeler:
       fromAddress: noreply@example.com
     # Connect Web Modeler to the operator-managed PostgreSQL cluster (pg-webmodeler)
     externalDatabase:
-      enabled: true
       host: pg-webmodeler-rw
       port: 5432
       database: webmodeler
@@ -293,7 +292,6 @@ webModeler:
     mail:
       fromAddress: noreply@example.com
     externalDatabase:
-      enabled: true
       host: pg-webmodeler-rw
       port: 5432
       database: webmodeler
