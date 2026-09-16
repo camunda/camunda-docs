@@ -207,7 +207,7 @@ The full validation contract — including the plan-time checks that fail with a
 
 ### Secondary storage replication lag
 
-Aurora Global Database replicates asynchronously, so a writer promotion can leave the new writer missing whatever had not reached it yet. What closes that gap is Camunda, not Aurora: with asynchronous replication monitoring enabled, the RDBMS exporter acknowledges a record to the broker only once the database reports it replicated, which holds back Zeebe log compaction so the missing records are replayed from the log.
+Aurora Global Database replicates asynchronously, so a writer promotion can leave the new writer missing whatever had not reached it yet. What closes that gap is Camunda, not Aurora: under the `LOG_SEQ` strategy this architecture pins, the RDBMS exporter acknowledges a record to the broker only once the database reports it replicated, which holds back Zeebe log compaction so the missing records are replayed from the log. The `DELAY` strategy is weaker here, because it waits a fixed interval instead of a reported position.
 
 The reference architecture enables it and pins the four settings that decide what it delivers. All four sit under the `camunda.data.secondary-storage.rdbms.` prefix, shortened in the table below:
 
@@ -222,9 +222,9 @@ The reference architecture enables it and pins the four settings that decide wha
 
 Raising it doesn't blind you to a lost secondary, but the timing depends on what is in flight. While nothing is queued, the number of in-sync replicas falling below `min-sync-replicas` is reported as worst-case lag, which pauses the exporter at the next poll whatever the budget is. Once positions are queued, the queue-head age governs instead, so that case waits out `max-lag` like any other.
 
-`pause-on-max-lag-exceeded` is worth understanding before you change it. It is not a data-loss control, and it is not a disk control either. Records are only ever acknowledged once Aurora confirms them, so no data is lost either way, and the Zeebe log grows either way: the exporter position cannot advance past unconfirmed records, so compaction stays blocked for as long as replication is behind, paused or not.
+`pause-on-max-lag-exceeded` is worth understanding before you change it. It is not a data-loss control, and it is not a disk control either. Records are only ever acknowledged once Aurora confirms them, so no data is lost either way, and the Zeebe log grows either way: the exporter position cannot advance past unconfirmed records, so compaction is held back for as long as records stay unconfirmed, paused or not. Once the queue drains, compaction resumes up to the last acknowledged position.
 
-What it decides is whether the exporter keeps writing to a database that is already lagging, or stops and says so. Paused, the exporter raises an error that reaches the exporter metrics and the broker log rather than degrading quietly, and it stops adding load to the database that needs to catch up. Zeebe keeps processing throughout, and the APIs and web applications that read secondary storage serve stale data until Aurora recovers.
+What it decides is whether the exporter keeps writing to a database that is already lagging, or stops and says so. Paused, the exporter raises an error that reaches the exporter metrics and the broker log rather than degrading quietly, and it stops adding load to the database that needs to catch up. Zeebe keeps processing throughout. Reads are not served by the lagging secondary, because Camunda connects through Aurora's global writer endpoint, but while export is paused nothing new reaches that writer, so the APIs and web applications that read secondary storage fall behind the engine until exporting resumes.
 
 EFS is elastic, so a prolonged outage doesn't hit a capacity wall the way a fixed volume would. It grows stored bytes and burns throughput for as long as it lasts, which shows up as cost rather than a full disk. Monitor EFS storage growth and throughput, and alert on replication lag, regardless of this setting.
 
