@@ -400,7 +400,8 @@ Name the zone's brokers either by count with `numberOfBrokers`, or one by one wi
 `numberOfBrokers` is the number of brokers deployed in the zone, from which the broker IDs
 `<zoneId>_0` through `<zoneId>_<numberOfBrokers - 1>` are derived. These are the IDs the
 brokers of a zone-aware cluster assign themselves, so a zone whose brokers are numbered
-from zero without gaps needs nothing else.
+from zero without gaps needs nothing else. `numberOfBrokers` must be at least `1`; a lower
+value is rejected with HTTP `400`.
 
 Use `brokers` when the IDs are not contiguous, which is what a zone coming back with only
 some of its brokers looks like: only the explicit list can express that.
