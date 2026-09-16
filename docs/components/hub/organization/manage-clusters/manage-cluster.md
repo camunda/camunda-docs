@@ -9,6 +9,10 @@ import TabItem from "@theme/TabItem";
 
 Learn how to rename, resume, update, resize, or delete your cluster.
 
+## View clusters
+
+To view your clusters in Camunda Hub, under **Console** in the left navigation, click **Clusters**.
+
 ## Rename a cluster
 
 You can safely rename a cluster at any time.
