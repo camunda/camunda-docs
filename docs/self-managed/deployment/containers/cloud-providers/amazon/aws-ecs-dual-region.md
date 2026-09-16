@@ -209,7 +209,7 @@ The full validation contract — including the plan-time checks that fail with a
 
 Aurora Global Database replicates asynchronously, so promoting a new writer can leave it missing whatever had not reached it yet. Camunda closes that gap, not Aurora.
 
-Exporting and acknowledging are separate steps. The RDBMS exporter writes a record to the Aurora writer, then tells the broker the record is safe only once `min-sync-replicas` replicas confirm it, which this architecture leaves at one. Zeebe compacts its log up to the lowest position acknowledged across every exporter and the stream processor, so a record sitting in the writer but not yet confirmed by that quorum still occupies the log. Holding this exporter's position back is enough to keep segments on disk; it is not enough on its own to release them, because another lagging exporter would still pin the lower bound.
+Exporting and acknowledging are separate steps. The RDBMS exporter writes a record to the Aurora writer, then tells the broker the record is safe only once `min-sync-replicas` replicas confirm it, which this architecture leaves at one. A record sitting in the writer but not yet confirmed by that quorum still occupies the Zeebe log, because the exporter has not acknowledged its position. Holding that position back is enough to keep segments on disk; releasing them is not this exporter's decision alone, since [compaction](/self-managed/concepts/exporters.md) tracks the slowest consumer on the partition.
 
 A replica counted towards that quorum falling behind is what holds the acknowledgement back, so it is what makes the log grow. It is not what the log is kept for. A replica catches up from the writer, never from Zeebe. The retained records matter when the writer itself is lost: the promoted one resumes from its own position, and Zeebe replays the gap.
 
@@ -232,7 +232,7 @@ What you gain is a visible failure. The exporter records the paused state in its
 
 EFS is elastic, so a long outage never hits a capacity wall the way a fixed volume would. It grows stored bytes and burns throughput for as long as it lasts, which shows up as cost rather than a full disk. Monitor EFS storage growth and throughput, and alert on replication lag.
 
-An unsupported vendor or a non-global Aurora instance fails while the exporter is starting, and the message names the reason, so the deployment never comes up quietly without the replication signal. Anything that surfaces later, including a failing replication status read, is caught and retried at the next poll instead. On the Aurora path the database privileges are exercised by those reads rather than checked at startup.
+An unsupported vendor or a non-global Aurora instance fails while the exporter is starting, and the message names the reason, so the deployment never comes up quietly without the replication signal. Later failures differ by where they happen. A replication status read that fails is logged and retried at the next poll. A failure to capture the replication marker while flushing pauses exporting instead, until the periodic checks recover. On the Aurora path the database privileges are exercised by those reads rather than checked at startup.
 
 ## Deployment walkthrough
 
