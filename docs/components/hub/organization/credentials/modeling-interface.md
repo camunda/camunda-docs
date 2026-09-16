@@ -42,7 +42,7 @@ To create a credential from the properties panel:
 4. Fill in the fields for this credential type. For a sensitive field, enter a reference to a secret that already exists on the cluster, using `camunda.secrets.` followed by the secret key, such as `camunda.secrets.AWS_SECRET_KEY`.
 5. Save the credential. Camunda Hub creates it on the cluster and selects it on the connector task.
 
-Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. Saving is still allowed, so replace the value with a reference to keep the sensitive value in the secrets vault. For the reference syntax, see [Reference a secret from a credential field](./index.md#reference-a-secret-from-a-credential-field).
+Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. Saving is still allowed, so replace the value with a reference to keep the sensitive value in the secrets vault. For the reference syntax, see [reference a secret from a credential field](./index.md#reference-a-secret-from-a-credential-field).
 
 Camunda Hub checks whether the secret you referenced exists on the cluster, without revealing its value. If the secret is missing, you see a warning, but you can still save the credential. The connector fails at runtime until the secret exists.
 
