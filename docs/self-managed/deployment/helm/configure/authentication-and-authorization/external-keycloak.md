@@ -145,8 +145,9 @@ global:
       realm: /realms/<realm>
       auth:
         adminUser: <keycloak_admin>
-        existingSecret: "camunda-credentials"
-        existingSecretKey: "identity-keycloak-admin-password"
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-keycloak-admin-password"
     auth:
       identity:
         clientId: <identity_client_id>
@@ -204,8 +205,9 @@ global:
       realm: /realms/<realm>
       auth:
         adminUser: <keycloak_admin>
-        existingSecret: "camunda-credentials"
-        existingSecretKey: "identity-keycloak-admin-password"
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-keycloak-admin-password"
   security:
     authentication:
       method: oidc
