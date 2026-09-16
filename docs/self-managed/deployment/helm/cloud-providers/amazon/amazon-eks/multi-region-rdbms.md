@@ -414,6 +414,7 @@ The parts worth reading before you install:
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - The AWS Advanced JDBC Wrapper uses `initialConnection,failover`: `initialConnection` discovers the current writer when a broker starts after a switchover, and `failover` follows a writer change on an established connection.
 - `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_ENABLED: "true"` is required. Without it the exporter acknowledges records the standby has not received, and a writer failover loses exported data.
+- The reference architecture also pins `ASYNCREPLICATION_TYPE: LOG_SEQ`, `ASYNCREPLICATION_MAXLAG: PT1H`, and `ASYNCREPLICATION_PAUSEONMAXLAGEXCEEDED: "false"`. The first two are a strategy and a budget; the third keeps the engine default, because pausing stops exporting on its own and is a decision to make knowingly. `max-lag` has no effect until you enable pausing, since the engine compares it only inside the pause check.
 - Cross-region SWIM membership timeouts are relaxed. The defaults are tuned for intra-region latency, and on a cold start brokers otherwise see remote peers as unreachable, eject them, and never converge.
 - `identity`, `console`, and `optimize` are disabled. See [limitations](/self-managed/concepts/multi-region/multi-region-rdbms.md#limitations).
 
