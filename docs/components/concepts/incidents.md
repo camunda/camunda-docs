@@ -27,6 +27,8 @@ To resolve an incident, complete the following steps:
 2. Mark the incident as resolved, triggering retry process execution.
 3. If the problem still exists, a new incident is created.
 
+For a job incident, marking the incident as resolved re-checks the problem only when the job is next activated by a worker. If no worker is connected for the job's type, the job is not activated, so a new incident is not raised even when the problem still exists, and the instance appears healthy in Operate. Keep a worker connected so a retry re-raises the incident promptly if the cause is not yet fixed.
+
 ### Resolving a job-related incident
 
 If a job fails and has no retries remaining, an incident is created. There are many different reasons why the job may have failed. For example, the variables may not be in the expected format, or a service is not available (e.g. a database).

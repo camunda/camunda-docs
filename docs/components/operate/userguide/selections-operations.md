@@ -25,6 +25,10 @@ To create a selection and apply an operation, take the following steps:
 
 ![Three process instances selected in the Process Instances table, with the batch action toolbar visible above the table.](./img/selections-operations.png)
 
+:::note
+A batch retry reports each item as completed once its incident is marked resolved and the retry is triggered. It does not re-verify that you fixed the underlying cause, so a result such as "12 of 12 completed" confirms the retries ran, not that the problems are gone. For [job incidents](/components/concepts/incidents.md#resolving), the cause is only re-checked when a worker next activates each job. Keep a worker connected for the affected job types so any unresolved incidents re-raise promptly.
+:::
+
 ## Next steps
 
 - [Monitor the batch operation](./monitor-batch-operations.md).

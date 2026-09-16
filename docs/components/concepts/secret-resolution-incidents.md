@@ -51,6 +51,8 @@ Resolve the incident only after fixing the underlying cause. Resolving the incid
 
 You don't need to redeploy or make client-side changes. Once the reference resolves successfully, the process instance continues from where it stopped.
 
+Resolution is only re-attempted when the job is next activated. If no worker is connected for the job's type, the broker does not activate the job, so it does not request resolution again and the incident does not reappear even when the secret is still missing. Absence of incidents does not imply absence of secret problems when no worker is connected. Keep a worker connected so the incident re-raises promptly if the cause is not yet fixed.
+
 ## Resolve secret injection failures
 
 A secret injection failure also raises a `SECRET_RESOLUTION_ERROR` incident, but for a different reason. In this case, the secret value was available, but Camunda could not inject it into the job variables.
