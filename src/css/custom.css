@@ -2497,11 +2497,13 @@ h3 + .release-announcement-row {
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 8px;
   overflow: hidden;
+  padding: 15px;
 }
 
 .expandable-table-container table {
-  margin: 0;
-  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  padding: 0px;
 }
 
 .expandable-table-header {
@@ -2509,7 +2511,6 @@ h3 + .release-announcement-row {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.5rem 0.75rem;
   background: var(--ifm-background-surface-color);
 }
 
