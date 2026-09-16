@@ -34,7 +34,7 @@ Every user holds one organization-level role. Organization Owner, Organization A
 
 Catalog access has two levels: **Read-only** (browse and use catalog items) for Member and DevOps, and **Manage** (also see usage statistics and adoption data) for Analyst, Organization Admin, and Organization Owner.
 
-Business value access covers both viewing the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md) and setting targets on it. It's granted by the same roles as Optimize.
+Business value access includes viewing the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md) and setting targets. The same roles that grant access to Optimize also grant access to business value.
 
 Starting with version 8.8, user access to clusters' Operate, Tasklist, and Zeebe applications is managed independently of the organization role. To control what a user can access there, define their authorizations in the cluster's [Admin](/components/admin/authorization.md).
 
