@@ -374,6 +374,7 @@ Refer to [Configuration of the restapi component](../../../../self-managed/compo
 
 ### Synchronization
 
+- In SaaS, the Git sync payload size must not exceed 4MB. In Self-Managed, you can [configure the `max-in-memory-size`](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync). If your sync fails because you've exceeded this limit, contact [Camunda success](https://camunda.com/services/support/) for assistance.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
 - Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler configuration part for your [git host](#connect-to-a-remote-repository) and available [environment variables](#self-managed-environment-variables) for more details.
