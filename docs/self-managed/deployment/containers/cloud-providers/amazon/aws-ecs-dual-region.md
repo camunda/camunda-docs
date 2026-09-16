@@ -222,9 +222,9 @@ The reference architecture pins four properties under `camunda.data.secondary-st
 | `async-replication.max-lag`                   | `PT1H`    | Sized for a cross-region promotion under load, which runs past the `PT15M` default.                                                           |
 | `async-replication.pause-on-max-lag-exceeded` | `false`   | The engine default, kept deliberately.                                                                                                        |
 
-`max-lag` does nothing while `pause-on-max-lag-exceeded` is `false`, because the engine compares it only inside the pause check. It is pinned anyway so the budget is already sized if you turn pausing on, which is then a one-line change.
+Under `LOG_SEQ`, `max-lag` bounds the age of the oldest exporter position still waiting for its log sequence number to be confirmed, not a lag figure Aurora reports. It does nothing while `pause-on-max-lag-exceeded` is `false`, because the engine compares it only inside the pause check. It is pinned anyway so the budget is already sized if you turn pausing on, which is then a one-line change.
 
-Whether to pause is left to you. Turning it on stops the exporter writing to Aurora while the replicas are behind. It protects nothing that acknowledgement does not already protect, because records are reported safe to the broker only after confirmed replication either way, so no data is lost either way and the Zeebe log is held by the unacknowledged position either way.
+Whether to pause is left to you. Turning it on stops the exporter writing to Aurora once that budget is exceeded, or immediately if the required replica quorum is unavailable while nothing is queued. Ordinary lag below the budget changes nothing. It protects nothing that acknowledgement does not already protect, because records are reported safe to the broker only after confirmed replication either way, so no data is lost either way and the Zeebe log is held by the unacknowledged position either way.
 
 First, what pausing does not change. A replication stall holds the acknowledged position back whether or not you pause, so the export backlog grows either way, and a large enough backlog triggers [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md): the engine lowers its record write rate and can reject client commands. Pausing neither causes that nor prevents it.
 
@@ -232,7 +232,7 @@ What you gain is a visible failure. The exporter records the paused state in its
 
 EFS is elastic, so a long outage never hits a capacity wall the way a fixed volume would. It grows stored bytes and burns throughput for as long as it lasts, which shows up as cost rather than a full disk. Monitor EFS storage growth and throughput, and alert on replication lag.
 
-An unsupported vendor, a non-global Aurora instance, or a database user without the required privileges fails while the exporter is starting, and the message names the reason, so the deployment never comes up quietly without the replication signal. A read of the replication status that fails later is caught and retried at the next poll instead.
+An unsupported vendor or a non-global Aurora instance fails while the exporter is starting, and the message names the reason, so the deployment never comes up quietly without the replication signal. Anything that surfaces later, including a failing replication status read, is caught and retried at the next poll instead. On the Aurora path the database privileges are exercised by those reads rather than checked at startup.
 
 ## Deployment walkthrough
 
