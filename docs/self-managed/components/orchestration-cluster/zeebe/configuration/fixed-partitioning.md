@@ -15,7 +15,7 @@ more specifically `zeebe.broker.experimental.partitioning.scheme`. This option c
 To use the `FIXED` partitioning scheme, _you must provide an exhaustive map of all partitions to a set of brokers_. This is achieved via the `zeebe.broker.experimental.partitioning.fixed` configuration option. The example below outlines a cluster of `5` brokers, `3` partitions, and a replication factor of `3`.
 
 ```yaml
-partitionDistribution:
+partitioning:
   scheme: FIXED
   fixed:
     - partitionId: 1
@@ -62,7 +62,7 @@ If you're using the priority election feature, you must also specify the priorit
 Here is the same example configuration as above, but this time with priorities configured:
 
 ```yaml
-partitionDistribution:
+partitioning:
   scheme: FIXED
   fixed:
     - partitionId: 1

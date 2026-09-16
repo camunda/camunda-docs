@@ -67,7 +67,7 @@ camunda:
     replication-factor: 5
     # set per broker; env: CAMUNDA_CLUSTER_ZONE
     zone: us-east1
-    partitionDistribution:
+    partitioning:
       scheme: ZONE_AWARE
       zone-aware:
         zones:
