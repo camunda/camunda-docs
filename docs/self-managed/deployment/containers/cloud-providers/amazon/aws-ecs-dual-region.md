@@ -211,7 +211,7 @@ Aurora Global Database replicates asynchronously, so promoting a new writer can 
 
 Exporting and acknowledging are separate steps. The RDBMS exporter writes a record to the Aurora writer, then tells the broker the record is safe only once the required replicas report it. Zeebe frees disk on the acknowledgement rather than on the write, so a record sitting in the writer but not yet in every replica still occupies the Zeebe log.
 
-That retention covers losing the writer, not a slow replica. A replica that falls behind catches up from the writer. If the writer itself is lost, the promoted one resumes from its own position and Zeebe replays the gap.
+A replica that falls behind is what holds the acknowledgement back, so it is what makes the log grow. It is not what the log is kept for. A replica catches up from the writer, never from Zeebe. The retained records matter when the writer itself is lost: the promoted one resumes from its own position, and Zeebe replays the gap.
 
 The reference architecture pins four properties under `camunda.data.secondary-storage.rdbms.`, shortened in the table below. [Multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) documents what each one does, including which vendors support `LOG_SEQ` and how the `DELAY` alternative behaves. The table records only which values this architecture picks and why.
 
@@ -226,11 +226,13 @@ The reference architecture pins four properties under `camunda.data.secondary-st
 
 Whether to pause is left to you. Turning it on stops the exporter writing to Aurora while the replicas are behind. It protects nothing that acknowledgement does not already protect, because records are reported safe to the broker only after confirmed replication either way, so no data is lost either way and the Zeebe log is held by the unacknowledged position either way.
 
-What you gain is back-pressure and a loud failure, since the exporter raises an error that reaches its metrics and the broker log instead of the condition passing unnoticed. What you give up is that secondary storage stops moving on its own, so the APIs and web applications reading it fall behind the engine until replication recovers. Zeebe keeps processing throughout. Turn it on once you have alerting on replication lag and have accepted that trade.
+First, what pausing does not change. A replication stall holds the acknowledged position back whether or not you pause, so the export backlog grows either way, and a large enough backlog triggers [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md): the engine lowers its record write rate and can reject client commands. Pausing neither causes that nor prevents it.
+
+What you gain is a visible failure. The exporter records the paused state in its replication metrics and logs a warning, and every later export attempt raises an `ExporterException`, so the condition is hard to miss. What you give up is that writes to Aurora stop on their own, so secondary storage falls further behind the engine than the stall alone would leave it. Turn it on once you have alerting on replication lag and have accepted that trade.
 
 EFS is elastic, so a long outage never hits a capacity wall the way a fixed volume would. It grows stored bytes and burns throughput for as long as it lasts, which shows up as cost rather than a full disk. Monitor EFS storage growth and throughput, and alert on replication lag.
 
-If the database cannot serve a log sequence number, nothing downgrades quietly. The exporter throws at startup and names the reason, so the deployment fails instead of running on without the replication signal.
+An unsupported vendor, a non-global Aurora instance, or a database user without the required privileges fails while the exporter is starting, and the message names the reason, so the deployment never comes up quietly without the replication signal. A read of the replication status that fails later is caught and retried at the next poll instead.
 
 ## Deployment walkthrough
 
