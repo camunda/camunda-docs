@@ -7,7 +7,7 @@ description: "Learn about the supported multi-tenancy scenarios."
 <span class="badge badge--platform">Camunda 8 Self-Managed only</span>
 
 :::note
-This page describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md).
+This page describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
 :::
 
 Multi-tenancy is the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/components/management-identity/manage-tenants.md) or
@@ -29,22 +29,22 @@ If multi-tenancy is enabled in Optimize, but disabled in Identity or Identity is
 
 In a Self-Managed Camunda 8 environment, the following two configurations settings are required for multi-tenancy:
 
-| YAML path                  | Environment variable                  | Default value | Description                                              |
-| -------------------------- | ------------------------------------- | ------------- | -------------------------------------------------------- |
-| multitenancy.enabled       | CAMUNDA_OPTIMIZE_MULTITENANCY_ENABLED | false         | Enables the Camunda 8 multi-tenancy feature in Optimize. |
-| security.auth.ccsm.baseUrl | CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL    | null          | The base URL of Identity.                                |
+| YAML path                    | Environment variable                    | Default value | Description                                                                                                        |
+| ---------------------------- | --------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `multitenancy.enabled`       | `CAMUNDA_OPTIMIZE_MULTITENANCY_ENABLED` | false         | Enables the Camunda 8 multi-tenancy feature in Optimize.                                                           |
+| `security.auth.ccsm.baseUrl` | `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL`    | null          | The internal URL of the Management Identity service, reachable by Optimize from within the deployment environment. |
 
 The `CAMUNDA_OPTIMIZE_MULTITENANCY_ENABLED` environment variable enables the feature in Optimize. The multi-tenancy feature must be enabled in all other components as well using their respective multi-tenancy feature flags.
 
-The `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` environment variable has to be set to enable Optimize to retrieve tenant authorizations from Identity. If this base URL is not configured, Optimize will not be able to retrieve tenant authorizations and users will not be able to access any tenant's data in Optimize.
+Set `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` to the Management Identity service URL. Optimize uses this to retrieve tenant authorizations. The URL must be the internal cluster URL reachable by Optimize from within the deployment environment; external-facing URLs may not be accessible from inside the cluster. If this base URL is not configured, Optimize cannot retrieve tenant authorizations and users cannot access any tenant's data in Optimize.
 
 If required, the tenant authorization cache in Optimize can also be configured via these optional settings:
 
-| YAML path                                         | Environment variable                                                           | Default value | Description                                                        |
-| ------------------------------------------------- | ------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------ |
-| caches.cloudTenantAuthorizations.maxSize          | CAMUNDA_OPTIMIZE_CACHES_CLOUD_TENANT_AUTHORIZATIONS_MAX_SIZE                   | 10000         | The maximum size of the Camunda 8 tenant authorizations cache.     |
-| caches.cloudTenantAuthorizations.defaultTtlMillis | CAMUNDA_OPTIMIZE_CACHES_CLOUD_TENANT_AUTHORIZATIONS_MIN_FETCH_INTERVAL_SECONDS | 300000        | The time in milliseconds the tenant authorizations will be cached. |
+| YAML path                                           | Environment variable                                                             | Default value | Description                                                        |
+| --------------------------------------------------- | -------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------ |
+| `caches.cloudTenantAuthorizations.maxSize`          | `CAMUNDA_OPTIMIZE_CACHES_CLOUD_TENANT_AUTHORIZATIONS_MAX_SIZE`                   | 10000         | The maximum size of the Camunda 8 tenant authorizations cache.     |
+| `caches.cloudTenantAuthorizations.defaultTtlMillis` | `CAMUNDA_OPTIMIZE_CACHES_CLOUD_TENANT_AUTHORIZATIONS_MIN_FETCH_INTERVAL_SECONDS` | 300000        | The time in milliseconds the tenant authorizations will be cached. |
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/deployment/helm/configure/configure-logical-tenants.md) so users can view any data from tenants for which they have authorizations configured in Identity.

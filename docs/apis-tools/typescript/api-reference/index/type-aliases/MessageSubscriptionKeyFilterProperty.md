@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type MessageSubscriptionKeyFilterProperty =
-  | MessageSubscriptionKeyExactMatch
-  | AdvancedMessageSubscriptionKeyFilter;
+  MessageSubscriptionKeyExactMatch | AdvancedMessageSubscriptionKeyFilter;
 ```
 
 MessageSubscriptionKey property with full advanced search capabilities.

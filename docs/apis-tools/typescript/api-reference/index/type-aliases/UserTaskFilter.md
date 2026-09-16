@@ -25,6 +25,16 @@ The assignee of the user task.
 
 ---
 
+### businessId?
+
+```ts
+optional businessId?: StringFilterProperty;
+```
+
+The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don't contain this data and cannot be found.
+
+---
+
 ### candidateGroup?
 
 ```ts

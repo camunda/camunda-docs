@@ -1,13 +1,5 @@
 ---
 title: Reporting about processes
-tags:
-  - Reporting
-  - History
-  - DWH
-  - BI
-  - KPI
-  - SQL
-  - MIS (Management Information System)
 description: "The Camunda engine automatically collects audit information about historical process or instances for users to leverage and generate relevant reports."
 ---
 

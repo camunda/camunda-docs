@@ -5,6 +5,8 @@ sidebar_label: Overview
 description: Learn how relational databases work in Camunda 8 Self-Managed as a core Orchestration Cluster capability and navigate to setup, support, and configuration guides.
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 Relational database (RDBMS) support is a core capability of the Orchestration Cluster in Camunda 8 Self-Managed.
 
 RDBMS is a standard secondary storage option for Orchestration Cluster installations, alongside Elasticsearch and OpenSearch.
@@ -30,16 +32,12 @@ graph LR
     style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
 ```
 
-## Start here
-
-- New to RDBMS in Camunda: [End-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)
-- Need supported versions and compatibility details: [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
-- Need application-level settings and behavior: [RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md)
+<DocCardList />
 
 ## Deployment guides
 
-- Helm deployments: [Configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
-- Manual deployments: [Configure RDBMS for manual installation](/self-managed/deployment/manual/rdbms/configuration.md)
+- Helm: [Configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
+- Manual: [Configure RDBMS for manual installation](/self-managed/deployment/manual/rdbms/configuration.md)
 
 ## Related concepts
 

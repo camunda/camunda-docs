@@ -1,7 +1,5 @@
 ---
 title: Choosing the DMN hit policy
-tags:
-  - DMN
 description: "Hit policies describe different ways (standardized by DMN) to evaluate the rules contained in a decision table."
 ---
 

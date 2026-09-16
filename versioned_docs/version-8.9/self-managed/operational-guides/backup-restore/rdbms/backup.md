@@ -22,7 +22,11 @@ description: "Learn how to back up your Camunda 8 Self-Managed components when a
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
+Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, Tasklist, and Admin) when using a relational database management system (RDBMS) as secondary storage.
+
+:::tip
+For cross-region recovery using these RDBMS backups, see [Cold Recovery](../../../concepts/multi-region/cold-recovery.md).
+:::
 
 ## Prerequisites
 
@@ -40,7 +44,7 @@ The following prerequisites are required before you can create a backup.
 When Camunda uses an RDBMS as **secondary storage**, backups involve **two independent systems**:
 
 - **Zeebe (primary storage)**: Backs up its internal state (log stream, snapshots) to an external blob store (S3, GCS, Azure, or filesystem). These are called **primary storage backups**.
-- **The external RDBMS**: Backed up using your database vendor's native tools (pg_dump, mysqldump, RMAN, etc.). This is the **secondary storage backup**.
+- **The external RDBMS**: Backed up using your database vendor's native tools (pg_dump, mysqldump, RMAN, and similar). This is the **secondary storage backup**.
 
 During restore, Zeebe uses the exporter position stored in the RDBMS to find the correct primary storage backup, or backups, that match the RDBMS state. This ensures consistency between the two systems without requiring synchronized backup timing.
 

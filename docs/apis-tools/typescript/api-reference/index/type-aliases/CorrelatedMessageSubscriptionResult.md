@@ -13,6 +13,21 @@ type CorrelatedMessageSubscriptionResult = object;
 
 ## Properties
 
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+The business id associated with this correlated message subscription. For a message
+start event correlation, it is the business id carried by the correlating message that
+was stamped on the started process instance to enforce its uniqueness. For a catch,
+boundary, or intermediate event correlation, it is the business id of the subscribing
+process instance, captured when the subscription was opened. It is `null` when the
+relevant process instance has no business id.
+
+---
+
 ### correlationKey
 
 ```ts

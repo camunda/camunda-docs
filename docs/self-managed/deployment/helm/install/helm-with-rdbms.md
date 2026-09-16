@@ -81,10 +81,10 @@ createuser camunda
 Then set permissions:
 
 ```sql
-ALTER USER camunda WITH ENCRYPTED PASSWORD 'your-secure-password';
+ALTER USER camunda WITH PASSWORD 'your-secure-password';
 GRANT CONNECT ON DATABASE camunda TO camunda;
 GRANT USAGE ON SCHEMA public TO camunda;
-GRANT CREATE ON DATABASE camunda TO camunda;
+GRANT CREATE ON SCHEMA public TO camunda;
 ```
 
 :::note

@@ -2,6 +2,7 @@
 id: concepts-overview
 title: "Introduction to Camunda 8"
 description: "Learn how Camunda 8 components work together to orchestrate and automate business processes, including the platform architecture and storage roles."
+toc_max_heading_level: 2
 ---
 
 import ArchDiagramImg from '../assets/c8-architecture-diagram.png';
@@ -21,27 +22,25 @@ Camunda 8 separates runtime execution data from analytical and operational data 
 
 <img src={ArchDiagramImg} alt="Camunda 8 architecture diagram" class="img-noborder"/>
 
-:::note Storage architecture
+### Storage architecture
 
 In the diagram above, storage systems appear in two distinct roles:
 
-- **Primary storage** — The authoritative store for runtime execution state used by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
-- **Secondary storage** — Systems used for indexing, search, analytics, operational views, and long-term retention. Data is populated from primary storage and optimized for querying rather than execution. See [secondary storage](/reference/glossary.md#secondary-storage).
+- **Primary storage**: The authoritative store for runtime execution state used by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
+- **Secondary storage**: Systems used for indexing, search, analytics, operational views, and long-term retention. Data is populated from primary storage and optimized for querying rather than execution. See [secondary storage](/reference/glossary.md#secondary-storage).
 
-### Secondary storage implementations
+#### Secondary storage implementations
 
 Camunda 8 supports multiple secondary storage backends, depending on the deployment model and configuration:
 
-- **Embedded H2** — A bundled secondary storage option for local development and lightweight setups. See [H2](/reference/glossary.md#h2).
-- **External RDBMS** — A user-managed relational database used as secondary storage in Self-Managed deployments. See [RDBMS](/reference/glossary.md#rdbms).
-- **Elasticsearch / OpenSearch** — Search-optimized backends commonly used for analytics and operational visibility. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+- **Embedded H2**: A bundled secondary storage option for local development and lightweight setups. See [H2](/reference/glossary.md#h2).
+- **External RDBMS**: A user-managed relational database used as secondary storage in Self-Managed deployments. See [RDBMS](/reference/glossary.md#rdbms).
+- **Elasticsearch / OpenSearch**: Search-optimized backends commonly used for analytics and operational visibility. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
 For deployment and configuration guidance, see the Self-Managed documentation:
 
 - [About Self-Managed](/self-managed/about-self-managed.md)
 - [Helm quick install](/self-managed/deployment/helm/install/quick-install.md)
-
-:::
 
 :::info
 
@@ -52,25 +51,54 @@ For deployment and configuration guidance, see the Self-Managed documentation:
 
 ## Camunda 8 use cases
 
-With Camunda 8, you can model, execute, and operate complex business processes from end to end.
+With Camunda 8, you can model, execute, and operate complex business processes from end to end, combining systems, human work, and AI agents.
 
-Most real-world automation is distributed. A single business outcome (for example, customer onboarding, claims handling, or order fulfillment) often requires many independently deployed services and external systems. That makes it hard to keep the overall process visible, understand where work is waiting, and recover cleanly when something fails.
+Most real-world automation is distributed. A single business outcome (for example, customer onboarding, claims handling, or order fulfillment) often requires many independently deployed services and external systems. That makes it hard to keep the overall process visible, understand where work is waiting, and recover cleanly when something fails. Camunda provides a process orchestration layer that coordinates these endpoints without forcing you into a tightly-coupled architecture.
 
-Camunda provides a process orchestration layer that coordinates these endpoints without forcing you into a tightly-coupled architecture. You define process and decision logic using BPMN and DMN, then run it on a stateful, event-driven workflow engine designed for long-running, high-volume execution. This gives teams a consistent way to trigger work, correlate events, handle retries and compensation, and troubleshoot incidents across the full business process, not just within a single service.
+### Orchestrate distributed systems
 
-Many processes also require human input, either as a normal step (for example, review or approval) or as a fallback when automation can't proceed. With Camunda, you can model human tasks alongside automated steps, then assign, track, and escalate work so the process keeps moving. For example, if customer onboarding is blocked waiting for a verification task, the process can route to the right person, enforce due dates, and make the delay visible in operations tooling.
+Define process and decision logic using BPMN and DMN, then run it on a stateful, event-driven workflow engine designed for long-running, high-volume execution. This gives teams a consistent way to:
 
-Camunda also supports agentic orchestration. You can treat AI agents as process endpoints, just like a microservice or API call, and orchestrate them together with deterministic steps and human checkpoints. You can also build agents in Camunda by modeling agent behavior such as planning loops, tool use, and reflection, including short-term and long-term memory and retrieval-augmented generation (RAG). This makes agent actions observable and auditable, and it helps you combine dynamic agent decisions with the guardrails and policies your process requires, such as role-based access control, compliance boundaries, incident recovery capabilities, and audit trails.
+- Trigger work and correlate events across services.
+- Handle retries and compensation when a step fails.
+- Troubleshoot incidents across the full business process, not just within a single service.
 
-Common use cases include orchestrating microservices across complex integrations, modernizing long-running processes that cross legacy systems, coordinating human work with automation, and running AI-assisted steps (for example, document interpretation or decision support) inside governed, end-to-end processes.
+<p class="link-arrow">[Learn about processes](/components/concepts/processes.md)</p>
+
+### Coordinate human work
+
+Many processes also require human input, either as a normal step (for example, review or approval) or as a fallback when automation can't proceed. With Camunda, you can model human tasks alongside automated steps, then assign, track, and escalate work so the process keeps moving.
+
+For example, if customer onboarding is blocked waiting for a verification task, the process can route to the right person, enforce due dates, and make the delay visible in operations tooling.
+
+<p class="link-arrow">[Learn about Tasklist](/components/tasklist/introduction-to-tasklist.md)</p>
+
+### Orchestrate AI agents
+
+Not every step in a process can be fully predetermined. When the right action depends on judgment, such as interpreting a document, deciding which check to run next, or triaging an exception, you can hand that step to an AI agent, then return to the fixed steps that follow. With Camunda, you can:
+
+- Treat agents as process endpoints, just like a microservice or API call, and orchestrate them alongside deterministic steps and human checkpoints.
+- Build agents directly in Camunda by modeling agent behavior such as planning loops, tool use, and reflection, including short-term and long-term memory and retrieval-augmented generation (RAG).
+- Apply the same guardrails your process requires, such as role-based access control, compliance boundaries, incident recovery, and audit trails, to agent-driven steps.
+
+Because agents run inside the same governed process, their actions are observable and auditable by default.
+
+<p class="link-arrow">[Learn about agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)</p>
+
+### Common use cases
+
+- Orchestrating microservices across complex integrations.
+- Modernizing long-running processes that cross legacy systems.
+- Coordinating human work with automation.
+- Running AI-assisted steps, such as document interpretation or decision support, inside governed, end-to-end processes.
 
 ## What are the core quality attributes of Camunda 8?
 
 Camunda 8 is designed to operate on a very large scale. To achieve this, it provides:
 
 - **Horizontal scalability** and no dependence on an external database; [Zeebe](/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda 8) writes data directly to the file system on the same servers where it is deployed. Zeebe enables distribution processing across a cluster of machines to deliver high throughput.
-- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action, which is particularly critical for AI-assisted processes, where every agent decision and action must be traceable end-to-end.
-- **Audit trail** as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
+- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda 8 can recover from machine or software failure with no data loss and minimal downtime, including AI agents, which resume with their conversation state and progress intact. This ensures the system as a whole remains available without requiring manual action.
+- **Audit trail** as all process-relevant events, including every AI agent decision and tool call, are written to an append-only log, providing an audit trail and a history of the state of a process.
 - **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda 8 resilient, scalable, and reactive.
 - **Visual processes modeled in ISO-standard BPMN 2.0** so technical and business stakeholders can collaborate on process design in a widely-used modeling language.
 - **Language-agnostic client model** makes it possible to build a client in nearly any programming language an organization uses to automate work.
@@ -88,7 +116,7 @@ Connectors communicate with any system or technology, reducing the time it takes
 
 #### AI agents
 
-Build [enterprise-grade AI agents](/components/agentic-orchestration/ai-agents.md) with guardrails so they can solve complex problems with autonomy. Camunda implements agentic BPMN that enables teams to model deterministic process logic and dynamic agentic behavior, such as reasoning loops, memory, prompts, RAG, and human‑in‑the‑loop boundaries, in one unified, executable model.
+Build governed [AI agents](/reference/glossary.md#ai-agent) with guardrails so they can solve complex problems with autonomy. Camunda's [agentic BPMN](/components/agentic-orchestration/ai-agents.md) lets teams model deterministic process logic and dynamic agentic behavior, such as reasoning loops, memory, prompts, RAG, and human‑in‑the‑loop boundaries, in one unified, executable model.
 
 #### Forms
 
@@ -134,7 +162,7 @@ Event streaming avoids database bottlenecks and can scale process throughput in 
 
 ### Intelligence
 
-Camunda enables teams to embed AI agents into governed business processes, combining autonomous agent reasoning with the auditability and compliance controls that enterprise operations require.
+Rather than relying on prompt instructions alone to keep agents in bounds, Camunda enforces guardrails structurally, as explicit steps in the process, so agent behavior stays governed as autonomy increases. Camunda is model- and framework-agnostic: bring your own LLM, and orchestrate agents built with other frameworks alongside agents modeled natively in BPMN, all within the same auditable process.
 
 ## Next steps
 

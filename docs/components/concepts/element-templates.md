@@ -17,7 +17,7 @@ The example below shows how a generic service task can be transformed into a cus
 | <img src={propertiesNoTemplate} alt="Properties panel without an element template" />              | <img src={propertiesWithTemplate} alt="Properties panel with an element template" />              |
 
 :::tip
-[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific type of element template.
+[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific type of element template. For example, the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) template configures an AI agent's ad-hoc sub-process using this same mechanism.
 :::
 
 ## Next steps
@@ -25,5 +25,5 @@ The example below shows how a generic service task can be transformed into a cus
 Read more about element templates and how to use them:
 
 - [Element templates in Modeler](/components/modeler/element-templates/about-templates.md)
-- [Using element templates in Web Modeler](/components/hub/workspace/modeler/element-templates/using-templates.md)
+- [Using element templates in Camunda Hub](/components/hub/workspace/modeler/element-templates/using-templates.md)
 - [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)

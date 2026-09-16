@@ -1,13 +1,5 @@
 ---
 title: Reporting about processes
-tags:
-  - Reporting
-  - History
-  - DWH
-  - BI
-  - KPI
-  - SQL
-  - MIS (Management Information System)
 description: "The Camunda engine automatically collects audit information about historical process or instances for users to leverage and generate relevant reports."
 ---
 
@@ -73,7 +65,7 @@ Camunda saves historical data not just when a process instance finishes, but on 
 
 Historical data can be leveraged via three possible mechanisms:
 
-- **Camunda tools**: Leverage Camunda Operate or Camunda Optimize. This is a very simple approach that works out-of-the-box and should satisfy many requirements already. Camunda Operate focuses on operational use cases ("Where is my process? Why did this fail?") whereas Camunda Optimize provides business intelligence about your processes. Optimize allows you to build reports and dashboards including setting alerts for thresholds.
+- **Camunda tools**: Leverage Camunda Operate or Camunda Optimize. This is a very simple approach that works out-of-the-box and should satisfy many requirements already. Camunda Operate focuses on operational use cases ("Where is my process? Why did this fail?") whereas Camunda Optimize provides business intelligence about your processes. Optimize allows you to build reports and dashboards including setting alerts for thresholds. For processes containing AI agents, the [agentic control plane](/components/optimize/userguide/agentic-control-plane.md) in Optimize adds agent-specific metrics such as token usage, reliability, and tool calls without additional setup.
 
 - **Query API**: Using the public API (currently under development), this has the advantage that you can make use of the history data within your own applications.
 

@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -29,6 +31,43 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
       x-added-in-version: "8.8"
+  /authentication/me/authorizations/search:
+    post:
+      tags:
+        - Authentication
+      operationId: searchOwnAuthorizations
+      summary: Search own authorizations
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for the current authenticated principal's own authorization records — including authorizations granted directly to the user or client, as well as those granted via a group, role, or mapping rule the principal belongs to.
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "authorizations.yaml#/components/schemas/AuthorizationSearchQuery"
+      responses:
+        "200":
+          description: The authorization search result.
+          content:
+            application/json:
+              schema:
+                $ref: "authorizations.yaml#/components/schemas/AuthorizationSearchResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
 components:
   schemas:
     CamundaUserResult:

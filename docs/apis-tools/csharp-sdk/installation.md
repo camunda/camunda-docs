@@ -9,10 +9,6 @@ mdx:
 
 # Installation
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 ```bash
 dotnet add package Camunda.Orchestration.Sdk
 ```
@@ -30,6 +26,8 @@ Using a later SDK version, for example: SDK version 10.y.z with Camunda 8.9, mea
 Using an earlier SDK version, for example: SDK version 9.y.z with Camunda 8.10, results in slightly degraded compiler reasoning: exhaustiveness checks cannot be guaranteed by the compiler for any extended surfaces (principally, enums with added members).
 
 In the vast majority of use-cases, this will not be an issue; but you should be aware that using the matching SDK major version for the server minor version provides the strongest compiler guarantees about runtime reliability.
+
+**Release lines** map to branches. Stable releases for a given server minor come from the `stable/<major>` branch — `stable/9` publishes the `9.x` line for Camunda 8.9. The `main` branch publishes alpha prereleases for the **next** server minor — currently the `10.0.0-alpha.N` line for Camunda 8.10. Pick the line that matches your server: the latest `9.x` for 8.9, or opt into `10.x-alpha` to preview 8.10.
 
 **Recommended approach**:
 

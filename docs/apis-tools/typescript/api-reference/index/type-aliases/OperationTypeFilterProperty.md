@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type OperationTypeFilterProperty =
-  | OperationTypeExactMatch
-  | AdvancedOperationTypeFilter;
+  OperationTypeExactMatch | AdvancedOperationTypeFilter;
 ```
 
 AuditLogOperationTypeEnum property with full advanced search capabilities.

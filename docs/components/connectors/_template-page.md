@@ -4,9 +4,9 @@ title: Template connector
 description: "Description of this connector for SEO, search etc"
 ---
 
-import InboundConnectorBasics from '../../../components/react-components/\_connector-inbound-basics.md'
-import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
-import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
+import InboundConnectorBasics from '../react-components/\_connector-inbound-basics.md'
+import OutboundConnectorBasics from '../react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../react-components/\_connector-error-handling.md'
 
 <!-- Start with a single-sentence that concisely sums up what the connector does, beginning with a verb typically (use, integrate, connect etc). For example, "Integrate an AI agent using an ad-hoc sub-process with an applied AI Agent connector template."  -->
 

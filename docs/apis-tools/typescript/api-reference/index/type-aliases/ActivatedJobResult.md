@@ -13,6 +13,18 @@ type ActivatedJobResult = object;
 
 ## Properties
 
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+The business ID of the owning process instance, inherited when the job was created.
+This is `null` for jobs created before version 8.10 and for jobs whose owning process
+instance has no business ID.
+
+---
+
 ### customHeaders
 
 ```ts
@@ -77,11 +89,32 @@ kind: JobKindEnum;
 
 ---
 
+### leaseToken
+
+```ts
+leaseToken: string | null;
+```
+
+The lease token identifying this activation. This is `null` when the job was activated without a lease.
+
+---
+
 ### listenerEventType
 
 ```ts
 listenerEventType: JobListenerEventTypeEnum;
 ```
+
+---
+
+### physicalTenantId
+
+```ts
+physicalTenantId: string;
+```
+
+The ID of the physical tenant that the job-activation request was routed to;
+the default physical tenant when the request did not specify one.
 
 ---
 

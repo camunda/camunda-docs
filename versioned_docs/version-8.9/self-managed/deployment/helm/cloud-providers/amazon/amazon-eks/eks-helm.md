@@ -17,19 +17,17 @@ import NoDomainInfo from '../../\_partials/\_no-domain-info.md'
 import HelmUpgradeNote from '../../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
+import DeploymentReadinessCheck from '../../\_partials/\_deployment-readiness-check.md'
+import ZeebeGatewayNetworkPolicies from '../../\_partials/\_zeebe-gateway-network-policies.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing AWS Kubernetes EKS cluster. It also includes instructions for setting up optional DNS configurations and other optional AWS-managed services, such as OpenSearch and PostgreSQL.
 
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
-<!-- TODO(camunda/team-infrastructure-experience#1063): Reword this Aurora PostgreSQL routing guidance when the broader InfraEx guidance is finalized. -->
-
 :::note Using Amazon Aurora PostgreSQL as secondary storage
-Use this page for the EKS cluster, networking, Ingress, and AWS-managed services.
+This page covers both backends. Follow it end to end and pick the **RDBMS** tabs wherever a step offers them, which configures Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster. Keep the default tabs to use Amazon OpenSearch Service instead.
 
-Then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
-
-If you use Amazon OpenSearch Service for secondary storage, continue with the default path in this guide.
+For the chart-level reference behind those tabs, see [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 :::
 
 ## Requirements
@@ -69,9 +67,24 @@ To demonstrate how to deploy with a custom domain, the following stack is also i
 
 - **cert-manager**: Automates TLS certificate management with [Let's Encrypt](https://letsencrypt.org/)
 - **external-dns**: Manages DNS record in Route53 for domain ownership confirmation
-- **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
+- **Contour**: Ingress controller backed by the Envoy proxy, providing HTTP/HTTPS load balancing and routing to Kubernetes services
 
 <SingleNamespaceDeployment />
+
+### Secondary storage
+
+This guide supports two [secondary storage](/self-managed/concepts/secondary-storage/index.md) backends. Select a variant using the authentication and values tabs throughout this guide.
+
+| Backend                              | Setup                                                                                                              | Optimize      | Reference architecture                                  |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------- |
+| **Elasticsearch/OpenSearch**         | [Managed Amazon OpenSearch Service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) | Supported     | `eks-single-region` (`eks-single-region-irsa` for IRSA) |
+| **RDBMS (Amazon Aurora PostgreSQL)** | [Configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)                               | Not available | `eks-single-region-rdbms`                               |
+
+Optimize requires Elasticsearch or OpenSearch and is not available with the RDBMS backend. For the RDBMS workflow, see the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md).
+
+:::note
+Select your backend using the authentication and values tabs throughout this guide. The **RDBMS** tabs configure Amazon Aurora PostgreSQL as secondary storage.
+:::
 
 ## Export environment variables
 
@@ -102,6 +115,7 @@ Verify the configuration of your environment variables by running the following 
 [
 {label: 'Standard authentication', value: 'standard' },
 {label: 'IRSA authentication', value: 'irsa' },
+{label: 'RDBMS', value: 'rdbms' },
 ]}>
 
 <TabItem value="standard">
@@ -116,6 +130,16 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-irsa/procedure/check-env-variables.sh
+```
+
+</TabItem>
+
+<TabItem value="rdbms" label="RDBMS">
+
+The RDBMS variant configures Amazon Aurora PostgreSQL as the secondary storage and requires additional orchestration database variables on top of the base configuration:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -135,7 +159,7 @@ Throughout the rest of this installation guide, we will refer to configurations 
 
 In this section, we provide an optional setup guide for configuring an Ingress with TLS and DNS management, allowing you to access your application through a specified domain. If you haven't set up an Ingress, refer to the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) for more details. In Kubernetes, an Ingress is an API object that manages external access to services in a cluster, typically over HTTP, and can also handle TLS encryption for secure connections.
 
-To monitor your Ingress setup using Amazon CloudWatch, you may also find the official AWS guide on [monitoring nginx workloads with CloudWatch Container Insights and Prometheus](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-Sample-Workloads-nginx.html) helpful. Additionally, for detailed steps on exposing Kubernetes applications with the nginx ingress controller, refer to the [official AWS tutorial](https://aws.amazon.com/fr/blogs/containers/exposing-kubernetes-applications-part-3-nginx-ingress-controller/).
+For more details on the Ingress controller used here and its configuration options, refer to the [Contour documentation](https://projectcontour.io/docs/). Contour uses the [Envoy proxy](https://www.envoyproxy.io/) as its data plane to route and load balance Ingress traffic.
 
 ### Export Values
 
@@ -151,14 +175,14 @@ Additionally, obtain these values by following the guide for either [eksctl](./e
 - `CERT_MANAGER_IRSA_ARN`
 - `REGION`
 
-### ingress-nginx
+### Contour
 
-[Ingress-nginx](https://github.com/kubernetes/ingress-nginx) is an open-source Kubernetes Ingress controller that provides a way to manage external access to services within a Kubernetes cluster. It acts as a reverse proxy and load balancer, routing incoming traffic to the appropriate services based on rules defined in the Ingress resource.
+[Contour](https://projectcontour.io/) is a CNCF Incubating, open-source Kubernetes Ingress controller that uses the [Envoy proxy](https://www.envoyproxy.io/) as its data plane. It manages external access to services within a Kubernetes cluster, acting as a reverse proxy and load balancer that routes incoming traffic to the appropriate services based on rules defined in the Ingress resource.
 
-The following installs `ingress-nginx` in the `ingress-nginx` namespace via Helm. For more configuration options, consult the [Helm chart](https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx).
+The following installs `contour` in the `projectcontour` namespace via Helm. For more configuration options, consult the [Contour Helm chart](https://projectcontour.github.io/helm-charts/).
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region/procedure/install-ingress-nginx.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region/procedure/install-contour.sh
 ```
 
 ### external-dns
@@ -252,9 +276,9 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
 ```
 
 :::danger Exposure of the Zeebe Gateway Service
-For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
+For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures process and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+<ZeebeGatewayNetworkPolicies />
 
 :::
 
@@ -303,9 +327,9 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
 ```
 
 :::danger Exposure of the Zeebe Gateway Service
-For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
+For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures process and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+<ZeebeGatewayNetworkPolicies />
 
 :::
 
@@ -321,6 +345,61 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
 
   </TabItem>
 
+  <TabItem value="with-domain-rdbms" label="RDBMS with domain">
+
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+
+:::info Cert-manager annotation for domain installation
+The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
+:::
+
+The RDBMS values file configures Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster and disables Optimize.
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/helm-values/values-domain.yml
+```
+
+:::danger Exposure of the Zeebe Gateway Service
+For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures process and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
+
+Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+
+:::
+
+#### Reference the credentials in secrets
+
+Before installing the Helm chart, create Kubernetes secrets to store the database authentication credentials.
+
+To create the secrets, run the following commands:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
+```
+
+  </TabItem>
+
+  <TabItem value="without-domain-rdbms" label="RDBMS without domain">
+
+The RDBMS values file configures Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster and disables Optimize.
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/helm-values/values-no-domain.yml
+```
+
+<NoDomainInfo />
+
+#### Reference the credentials in secrets
+
+Before installing the Helm chart, create Kubernetes secrets to store the database authentication credentials.
+
+To create the secrets, run the following commands:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
+```
+
+  </TabItem>
+
 </Tabs>
 
 ### 2. Configure your deployment
@@ -333,12 +412,7 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 
 #### Secondary storage options
 
-This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
-
-- **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
-- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster. Follow this EKS guide for the cluster, networking, Ingress, and optional AWS services, then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) for the Helm workflow and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for the values reference.
-
-RDBMS as secondary storage disables Optimize unless you also deploy Elasticsearch or OpenSearch alongside it.
+This guide supports a managed Amazon OpenSearch domain (provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup) or Amazon Aurora PostgreSQL as secondary storage. For a comparison of both backends and their reference architectures, see [Secondary storage](#secondary-storage), then select your backend using the authentication and values tabs shown earlier in this guide.
 
 #### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
 
@@ -435,11 +509,9 @@ This command:
 
 <HelmUpgradeNote />
 
-You can track the progress of the installation using the following command:
+You can track the progress of the installation with the deployment readiness check script, which requires [jq](https://jqlang.github.io/jq/) to be installed.
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck download />
 
 <details>
 <summary>Understand how each component interacts with IRSA</summary>

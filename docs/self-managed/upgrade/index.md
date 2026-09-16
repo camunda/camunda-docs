@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 import ZeebeGrid from '../../components/zeebe/react-components/\_zeebe-card';
 import { overviewCards } from './react-components/\_card-data';
 
-import OverviewImg from '../assets/hero-upgrade-89.png';
+import OverviewImg from '../assets/hero-upgrade-810.png';
 
 <h3 class="subheading">Upgrade your Camunda 8 Self-Managed deployment from version 8.9 to 8.10.</h3>
 
@@ -36,11 +36,17 @@ Upgrade a Camunda 8 Self-Managed deployment from version 8.9 to 8.10. This guide
 Camunda 8 upgrades must be performed sequentially. If your deployment is running a version **earlier than 8.9**, you must complete the required version-specific upgrades listed in [upgrading from an earlier version](#upgrading-from-an-earlier-version) before you can upgrade to 8.10.
 :::
 
-## Prepare for upgrade
+## Upgrade sequence
 
-Review required preparation steps and important changes before upgrading to Camunda 8.10.
+The 8.9 to 8.10 upgrade spans several guides. Work through them in this order, rather than treating them as separate destinations.
 
-<p class="link-arrow">[Prepare for upgrade](prepare-for-upgrade.md)</p>
+| Step | What you do                                                                                            | Guide                                                                                      |
+| ---- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| 1    | Confirm upgrade eligibility, review platform changes in 8.10, and verify infrastructure compatibility. | [Prepare for upgrade](prepare-for-upgrade.md)                                              |
+| 2    | Switch to the Helm v4 CLI, then create and update your 8.10 values file and run the upgrade.           | [Upgrade Camunda 8.9 to 8.10 using Helm](./helm/890-to-8100.md)                            |
+| 3    | Monitor and validate the upgrade before returning the deployment to normal use.                        | [Monitor and validate the upgrade](./helm/890-to-8100.md#monitor-and-validate-the-upgrade) |
+
+Review [component changes from 8.9 to 8.10](./components/890-to-8100.md) alongside these steps for behavior changes affecting the components you run.
 
 <!-- TODO: Update this when we have content
 
@@ -62,12 +68,6 @@ For production environments, use Kubernetes with the official Camunda Helm chart
 
 -->
 
-## Upgrade components
-
-Some upgrades require additional component-level steps depending on which components you use or how your environment is configured. Follow the upgrade guide for your deployment method, and refer to this guide for any component-specific changes or migrations required for your setup.
-
-<p class="link-arrow">[Upgrade components](components/890-to-8100.md)</p>
-
 ## 8.10 release information
 
 Learn about new features, breaking changes, and deprecations in Camunda 8.10:
@@ -81,8 +81,8 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.10:
 **Camunda 8 upgrades must be performed sequentially.**
 
 - You must upgrade sequentially, one minor version at a time. For example, you must upgrade from 8.8 to 8.9 before you can upgrade to 8.10.
-- For best stability and fix coverage, use the latest available patch in each minor before and after each minor upgrade.
-- **Do not skip releases**.
+- Upgrading to the latest available patch of each minor is strongly recommended for fix coverage.
+- **Do not skip releases.** Skipping a minor version fails the schema compatibility check and blocks startup.
 
 Use the following version-specific upgrade guides to upgrade sequentially until you reach Camunda 8.9 before you proceed with the 8.10 upgrade.
 

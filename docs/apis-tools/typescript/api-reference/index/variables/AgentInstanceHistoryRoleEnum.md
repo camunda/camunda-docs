@@ -21,7 +21,13 @@ The role of a history item in the agent conversation.
 readonly ASSISTANT: "ASSISTANT" = 'ASSISTANT';
 ```
 
-### TOOL_RESULT
+### CONFIGURATION
+
+```ts
+readonly CONFIGURATION: "CONFIGURATION" = 'CONFIGURATION';
+```
+
+### TOOL\_RESULT
 
 ```ts
 readonly TOOL_RESULT: "TOOL_RESULT" = 'TOOL_RESULT';

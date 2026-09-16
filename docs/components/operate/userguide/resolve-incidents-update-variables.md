@@ -131,6 +131,8 @@ We’ll publish a message that will be correlated with the instance, so we can a
 
 In the Operate interface, you should now observe the process instance has an [incident](/components/concepts/incidents.md), which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
+![A process instance with one incident shown in the header, the Order Value? gateway marked with an incident indicator in the diagram, and the Incidents tab open in the bottom panel listing the extract value error.](./img/resolve-incidents-update-variables.png)
+
 ## Diagnosing and resolving incidents
 
 Operate provides tools for diagnosing and resolving incidents. Let’s go through incident diagnosis and resolution step by step.

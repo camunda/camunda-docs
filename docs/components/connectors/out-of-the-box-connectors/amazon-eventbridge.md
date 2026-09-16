@@ -25,7 +25,7 @@ For more information, refer to the [Amazon EventBridge documentation](https://do
 Before using the **Amazon EventBridge connector**, ensure you have the necessary permissions in your AWS account to send events to EventBridge. You will need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
 
 :::note
-Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon EventBridge connector task
@@ -256,7 +256,7 @@ When you click on the event with the Amazon EventBridge Webhook connector applie
 This tab displays the URL of the Amazon EventBridge Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use the Amazon EventBridge Webhook connector in Desktop Modeler or with Camunda 8 Self-Managed.
 In that case, Amazon EventBridge Webhook connector deployments and URLs will not be displayed in Modeler.
 :::

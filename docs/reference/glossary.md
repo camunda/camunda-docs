@@ -61,25 +61,72 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 - [Admin overview](/components/admin/admin-introduction.md)
 
+### Agent definition
+
+A first-class, queryable resource that describes an [AI agent](#ai-agent) deployed to Camunda. Camunda creates one agent definition per agent element (AI Agent sub-process, AI Agent Task, or external agent) when a process containing agents is deployed, analogous to how a [DRD](#drd-decision-requirements-diagram) deployment creates decision definitions.
+
+An agent definition is a structural descriptor (type, name, the element and process definition version it belongs to, and tenant), not a store of runtime configuration.
+
+- [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
+
+### Agent instance
+
+A specific runtime execution of an [agent definition](#agent-definition) that can be created for an active agent element. It is identified by an agent instance key, which the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) uses to represent the agent's state, including conversation, tool calls, and reasoning, for visibility and explainability in tools like Operate.
+
+An agent instance can be reused across several element instances within the same process instance, which is what allows an agent to continue a multi-turn conversation when the process returns to the agent element.
+
+- [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
+
+### Agent loop
+
+The feedback loop an [AI agent](#ai-agent) runs to reach its goal: the model reasons over the current context, decides whether to call tools, receives the tool results, and repeats until it returns a final response or reaches a configured limit. The loop is what makes an agent an agent, and it consists of one or more [loop iterations](#loop-iteration).
+
+A [Camunda AI agent](#camunda-ai-agent) runs its loop in Camunda's engine, which activates each tool call as a BPMN activity. An [external agent](#external-agent) runs its loop in an external runtime.
+
+### Agent orchestration
+
+Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
+
+Agent orchestration can run inside a Camunda agentic process as one of its agents.
+
+:::note
+This is different from [agentic orchestration](#agentic-orchestration), which describes how Camunda orchestrates agents, tools, systems, and people as part of an end-to-end process.
+:::
+
 ### Agentic orchestration
 
-The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
+A hybrid orchestration model combining the power of deterministic logic with LLM-driven flexibility, allowing AI to evaluate the prompt, decide on what tools to execute, and decide when the goal is achieved, all with governance and auditability.
 
 For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
 
+:::note
+This is different from [agent orchestration](#agent-orchestration), which describes LLM-to-LLM coordination between agents.
+:::
+
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
+
+### AI agent
+
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs an [agent loop](#agent-loop) where the model decides what to do next, which tools to invoke, and when to stop.
+
+The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
+
+Camunda supports two types of agents: a [Camunda AI agent](#camunda-ai-agent) (native) and an [external agent](#external-agent) (non-native).
+
+For example, you can build an invoice-processing AI agent in Camunda with BPMN, using the AI Agent Sub-process template to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
+
+- [AI agents](/components/agentic-orchestration/ai-agents.md)
+- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
+
+### AI agent function
+
+The category of built-in [FEEL](#feel-expression) functions used to declare LLM-provided tool parameters for an [AI agent](#ai-agent). The primary function is [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue), which marks a value as supplied by the LLM at runtime, with an optional description, type, and JSON schema to guide the model.
+
+- [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
 
 ### Artificial intelligence (AI)
 
 A broad field of computer science focused on creating machines that can perform tasks requiring human-like intelligence. In practice, AI involves programming computers to learn, reason, and self-correct when solving problems. For example, AI applications include language understanding, image recognition, decision-making, and automation of complex tasks.
-
-### AI agent
-
-An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
-For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad-hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
-
-- [AI agents](/components/agentic-orchestration/ai-agents.md)
-- [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
 
 ### Audit log
 
@@ -112,11 +159,49 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 ## C
 
+### Camunda 8
+
+Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
+
+| Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                       |
+| :--------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                 |
+| [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                 |
+| [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                      |
+| [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                 |
+| Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeler](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
+| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, these components authenticate through the [Camunda Security Library](#camunda-security-library-csl).                                                                                                                                         |
+
+### Camunda AI agent
+
+The native [AI agent](#ai-agent) type. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
+
+It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md), which offers two implementations: the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) and the [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
+
+:::note
+This is different from an [external agent](#external-agent), which is the non-native AI agent type.
+:::
+
+### Camunda Security Library (CSL)
+
+The shared authentication and authorization implementation used across [Camunda 8](#camunda-8). As of 8.10, the [Orchestration Cluster](#orchestration-cluster), [Camunda Hub](/components/hub/index.md), and [Optimize](/components/optimize/what-is-optimize.md) all authenticate through it, so they accept the same `camunda.security.*` configuration.
+
+- [Authentication to the Orchestration Cluster](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md)
+- [Authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md)
+- [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)
+- [Camunda Security Library on GitHub](https://github.com/camunda/camunda-security-library/blob/main/README.md)
+
 ### Catalog
 
-A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization-level in Camunda Hub, and used by delivery teams across workspaces and projects.
+A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization level in Camunda Hub, and used by delivery teams across workspaces and projects.
 
 - [Catalog](/components/hub/organization/manage-catalog/index.md)
+
+### Child process instance
+
+A [process instance](#process-instance) created by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) in another process instance, the [parent process instance](#parent-process-instance).
+
+See also: [Parent process instance](#parent-process-instance), [Root process instance](#root-process-instance)
 
 ### Client
 
@@ -130,24 +215,13 @@ See [Zeebe cluster](#zeebe-cluster).
 
 A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
 
+A cluster variable's value can also be an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) instead of a literal value.
+
 ### Cluster-wide operation
 
 An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
-
-### Camunda 8
-
-Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
-
-| Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                                |
-| :--------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                          |
-| [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                          |
-| [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                               |
-| [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                          |
-| Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeler](/components/hub/workspace/modeler/launch-modeler.md) in the browser.</p></li></ul></p> |
-| [Management Identity](#management-identity)          | Authentication and authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub).                                                                                                                                                                                                                                                |
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
 ### Command
 
@@ -167,7 +241,14 @@ Connector types:
 
 ### Connector runtime
 
-The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, handling secrets, and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, resolving [secret references](#secret-reference), and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+
+### Connector secrets
+
+The secret values a connector resolves through a [legacy secret reference](#secret-reference-legacy). How these values are stored and supplied depends on the environment: in SaaS, they are [SaaS-managed secrets](#saas-managed-secret) created in Camunda Hub, in the left navigation under **Clusters**; in Self-Managed, a secret provider supplies them, for example from prefixed environment variables, a Kubernetes Secret, or a custom provider.
+
+- [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
+- [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets)
 
 ### Connector template
 
@@ -189,9 +270,21 @@ A correlation is an attribute within a [message](#message) that is used to match
 
 - [Message correlation](/components/concepts/messages.md)
 
+### Credential
+
+A reusable set of authentication and connection settings for a job worker, connector, or other element template, so you don't repeat the same settings on every task that asks for them. A credential is selected as a whole on an element template field; the engine resolves the reference at runtime and passes the credential's values, including any secrets, to the job worker or connector.
+
+- [Manage credentials](/components/hub/organization/credentials/index.md)
+
+### Credential type
+
+The shape of a [credential](#credential), such as AWS Credential, REST Authentication, or JDBC Connection. A credential type defines which fields a credential of that type has, and is defined alongside an element template.
+
+- [Credential types](/components/hub/organization/credentials/index.md#credential-types)
+
 ### CSAP CLI
 
-CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules—like the RFC connector, OData connector, and BTP plugin—for deployment.
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
 
 Camunda uses `csap` to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
 
@@ -204,6 +297,12 @@ Camunda uses `csap` to automate setup steps: it interactively or via scripted fl
 A process cannot execute unless it is known by the [broker](#zeebe-broker). Deployment is the process of pushing or deploying processes to the [broker](#zeebe-broker).
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
+
+### DRD (Decision Requirements Diagram)
+
+The visual representation of a decision requirements graph (DRG), which models a domain of decision-making, showing the decisions involved and the dependencies between them, such as required decisions, input data, and knowledge sources. Deploying a DRD creates one decision definition per decision it contains.
+
+- [Decision requirements graph](/components/modeler/dmn/decision-requirements-graph.md)
 
 ## E
 
@@ -239,9 +338,9 @@ An event represents a state change associated with an aspect of an executing [pr
 
 ### Execution platform version
 
-In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
+In Desktop Modeler and Camunda Hub, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
 
-The execution platform version is not a deployed process definition version, a Web Modeler version, or a SaaS cluster generation.
+The execution platform version is not a deployed process definition version, a [file version](#version-file) or [project snapshot](#snapshot-project), or a SaaS cluster generation.
 
 - [Desktop Modeler flags](/components/modeler/desktop-modeler/flags/flags.md#default-execution-platform-version)
 
@@ -255,7 +354,29 @@ An execution listener is a mechanism that allows users to execute custom logic a
 
 See [Zeebe Exporter](#zeebe-exporter).
 
+### External agent
+
+The non-native [AI agent](#ai-agent) type. Tool orchestration runs in an external runtime, such as LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine, where the loop itself lives outside Camunda.
+
+Camunda orchestrates when and how the agent acts within the broader process, and observes its execution through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), even though it does not execute the agent's reasoning loop itself. The process record, governance, and audit trail for that participation live in Camunda.
+
+:::note
+This is different from a [Camunda AI agent](#camunda-ai-agent), which is Camunda's native AI agent type.
+:::
+
 ## F
+
+### FEEL expression
+
+FEEL (Friendly Enough Expression Language) expressions are the unit of computation written in [FEEL](/components/modeler/feel/what-is-feel.md), Camunda's expression language. Camunda evaluates FEEL expressions in BPMN diagrams, DMN tables, and Camunda Forms, for example, in gateway conditions, input/output mappings, and [process variable](#process-variable) references.
+
+- [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
+
+### File version {#version-file}
+
+A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Versions](/components/hub/workspace/modeler/modeling/versions.md)
 
 ### Fine-tuning
 
@@ -289,7 +410,7 @@ Any AI system that can produce new content, such as text, images, or audio, in r
 
 In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Console uses generations instead of a single engine version because the underlying component versions can change independently.
 
-A generation is not a process definition version, a version tag, or a Web Modeler version.
+A generation is not a process definition version, a version tag, or a [file version](#version-file) or [project snapshot](#snapshot-project).
 
 - [Generation names](/reference/announcements-release-notes/release-policy.md#generation-names)
 
@@ -344,7 +465,7 @@ For example, this is useful when working with services that must be isolated wit
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
-Inbound connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and polling.
+Inbound connectors include three subtypes: [webhooks](#webhook-connector), [subscriptions](#subscription-inbound-connector), and polling.
 
 Unlike [outbound connectors](#outbound-connector), inbound connectors are **stateful**. The Java code of the inbound connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
 Each element referencing an inbound connector will lead to the creation of one inbound connector instance. A process definition with one webhook start event and two additional webhooks as intermediate catch events would therefore lead to the creation of three inbound connector instances.
@@ -391,6 +512,14 @@ A technically and organizationally secured mechanism that can be triggered at an
 
 - [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
 
+### Kubernetes Secret
+
+A Kubernetes object that stores small amounts of sensitive data, such as passwords or tokens, separately from Pod specifications and container images. The Camunda Helm chart uses Kubernetes Secrets to supply credentials to Camunda's own components at deployment time.
+
+A Kubernetes Secret can also store and deliver the value behind a [secret reference](#secret-reference): mounted as an environment variable for a [legacy secret reference](#secret-reference-legacy), or as a file in a file-based secret store for an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster). Either way, the Kubernetes Secret only supplies the value; the [connector runtime](#connector-runtime) or the [Orchestration Cluster](#orchestration-cluster) still resolves the placeholder in the process. A Kubernetes Secret is unrelated to a [SaaS-managed secret](#saas-managed-secret), which supplies values to a SaaS [Orchestration Cluster](#orchestration-cluster) rather than to a Self-Managed component's configuration.
+
+- [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
+
 ## L
 
 ### Large language model (LLM)
@@ -414,13 +543,21 @@ The log is comprised of an ordered sequence of records written to persistent sto
 A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single [Physical Tenant](#physical-tenant).
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+
+### Loop iteration
+
+A loop iteration is one pass through an [AI agent](#ai-agent)’s [agent loop](#agent-loop), during which the model reasons, selects tools, evaluates the result, and decides whether to continue. An AI agent run consists of one loop with one or more loop iterations.
+
+Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution. Operate's UI labels each entry simply as `iteration` as shorthand for loop iteration.
+
+- [Conversation history and loop iterations](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations)
 
 ## M
 
 ### Management Identity
 
-The Management Identity component provides authentication and authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize.
+The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, these components authenticate through the [Camunda Security Library](#camunda-security-library-csl), and Management Identity remains responsible for managing users, groups, roles, and permissions.
 
 ### Manual task
 
@@ -453,7 +590,7 @@ The Orchestration Cluster is the core component of [Camunda 8](#camunda-8), powe
 - [Zeebe](#zeebe) as the [workflow engine](#workflow-engine)
 - Operate for monitoring and troubleshooting [process instances](#process-instance) running in [Zeebe](#zeebe)
 - Tasklist for interacting with [user tasks](#user-task) (assigning, completing, and so on)
-- [Identity](#identity) for managing the integrated authentication and authorization
+- [Admin](#admin) for managing the integrated authentication and authorization
 - APIs for interacting with the Orchestration Cluster programmatically
 
 ### Outbound connector
@@ -484,7 +621,7 @@ See also: [Orchestration Cluster](#orchestration-cluster), [Log](#log), [Partiti
 
 ### Process
 
-The general business construct — what you want to automate.  
+The general business construct: what you want to automate.  
 In Camunda, a process is [modeled using BPMN](#process-model), then [deployed as a process definition](#process-definition), and finally [executed as a process instance](#process-instance).
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
@@ -504,7 +641,7 @@ The engine uses process definitions to start [process instances](#process-instan
 
 A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
 
-Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a Web Modeler version, which is a saved file or project snapshot.
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project) in Camunda Hub.
 
 - [Process definition](#process-definition)
 - [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
@@ -517,6 +654,16 @@ Each instance represents one run of the process and carries metadata from its or
 A process instance can be active (currently running), completed, or terminated.
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
+
+A process can call another process via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), creating a hierarchy of related process instances: a [parent process instance](#parent-process-instance) that contains the call activity, the [child process instance](#child-process-instance) it creates, and the [root process instance](#root-process-instance) at the top of the hierarchy.
+
+### Parent process instance
+
+The process instance that contains the [call activity](/components/modeler/bpmn/call-activities/call-activities.md) that created a [child process instance](#child-process-instance).
+
+A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
+
+See also: [Child process instance](#child-process-instance), [Root process instance](#root-process-instance)
 
 ### Process instance tag
 
@@ -544,7 +691,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 - [Logical Tenant](#logical-tenant)
 - [Multi-tenancy](#multi-tenancy)
 
@@ -553,6 +700,12 @@ An isolated execution unit within an [Orchestration Cluster](#orchestration-clus
 A collection of related files in a Camunda Hub workspace you can work on and deploy as a single bundle. A workspace may contain multiple projects.
 
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
+
+### Project snapshot {#snapshot-project}
+
+A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
 
 ### Prompt
 
@@ -585,6 +738,14 @@ See also: [Secondary storage](#secondary-storage)
 A record represents a command or an event. For example, a command to create a new [process instance](#process-instance), or a state transition of an executing [process instance](#process-instance) representing an [event](#event) at a given point in time would result to generation of a record. During the execution lifecycle of a process instance, numerous records are generated to capture various commands and events generated. Records are stored in the log.
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
+
+### Recovery Point Objective (RPO)
+
+Multi-region resilience: Maximum tolerable amount of data loss, measured as the time between the last persisted consistent backup and the moment of failure.
+
+### Recovery Time Objective (RTO)
+
+Multi-region resilience: Maximum tolerable time from failure detection to service restoration in a functional state.
 
 ### Reference architecture
 
@@ -619,13 +780,27 @@ RFC stands for Remote Function Call, a protocol used by SAP to enable communicat
 
 Camunda can use RFC to call SAP functions directly as part of a business process. This allows Camunda to trigger SAP transactions, retrieve data, or update records within an SAP system, integrating SAP functionality seamlessly into broader automated workflows.
 
-- [RFC](/components/camunda-integrations/sap/csap-cli.md)
+- [RFC](/components/camunda-integrations/sap/rfc-connector.md)
 
 ### Robotic process automation (RPA)
 
 The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, enhancing speed and accuracy.
 
+### Root process instance
+
+The [process instance](#process-instance) at the top of a hierarchy of related process instances. It was started directly, not created by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md).
+
+See also: [Parent process instance](#parent-process-instance), [Child process instance](#child-process-instance)
+
 ## S
+
+### SaaS-managed secret
+
+A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in Camunda Hub, in the left navigation under **Clusters**, currently under the **Cluster secrets** tab of a cluster.
+
+A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components.
+
+- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
 
 ### SAP
 
@@ -645,17 +820,55 @@ Examples of secondary storage backends include:
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
 - [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
 
+### Secret reference
+
+A placeholder written into a [process](#process) model that stands in for a secret value, used in a [connector](#connector) field, an input mapping, or a [cluster variable](#cluster-variable). Camunda resolves a secret reference to its value at runtime instead of storing the value in the process itself.
+
+Camunda 8 supports two secret reference syntaxes, which are resolved by different components and are not interchangeable:
+
+- The [legacy secret reference](#secret-reference-legacy) syntax, `{{secrets.<name>}}`
+- The [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) syntax, `camunda.secrets.<name>`
+
+A [Kubernetes Secret](#kubernetes-secret) can back either secret reference syntax as the underlying storage and delivery mechanism. What differs between the two syntaxes is which component resolves the placeholder, not whether a Kubernetes Secret is involved.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+
+### Secret reference (legacy)
+
+The `{{secrets.<name>}}` syntax used in a [connector](#connector) field to reference a secret. The [connector runtime](#connector-runtime) resolves the placeholder at execution time, replacing it with the referenced secret's value.
+
+:::note
+"Legacy" describes this syntax's age relative to the [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster), not its support status. Both syntaxes remain supported.
+:::
+
+- [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
+
+### Secret reference (Orchestration Cluster)
+
+The `camunda.secrets.<name>` syntax used to reference a secret, written directly in an input mapping or embedded in the value of a [cluster variable](#cluster-variable) that an input mapping reads. Unlike a [legacy secret reference](#secret-reference-legacy), the [Orchestration Cluster](#orchestration-cluster) itself resolves this reference through [secret resolution](#secret-resolution), rather than the connector runtime resolving it at execution time.
+
+Resolution only happens in an input mapping defined on an element that creates a job for a job worker, such as a service task or an ad hoc sub-process. In any other FEEL expression (gateway conditions, script tasks, output mappings, call activity input, and so on), the placeholder is not resolved and reaches your process unchanged.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+
+### Secret resolution
+
+The runtime process by which the [Orchestration Cluster](#orchestration-cluster) retrieves the value behind an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) from a configured secret store and makes it available for injection into a job. Secret resolution runs on a background scheduler ahead of job activation, not on the processing path.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+- [Troubleshoot secret resolution failures](/components/concepts/secret-resolution-incidents.md)
+
 ### Segment
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#event-log)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#event-log)
 
 ### Snapshot
 
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#snapshots)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
 ### Soft pause exporting
 
@@ -685,7 +898,7 @@ A [Logical Tenant](#logical-tenant) is a logically isolated space within a share
 
 An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
 ### Temperature
 
@@ -730,26 +943,17 @@ A variable stores data for a [process instance](#process-instance) or a local sc
 
 ### Version
 
-In Camunda 8, version is an overloaded term. Depending on context, it can refer to a [process definition version](#process-definition-version), a [version tag](#version-tag), a [Web Modeler version](#web-modeler-version), an [execution platform version](#execution-platform-version), or a SaaS [generation](#generation).
+In Camunda 8, version is an overloaded term. Depending on context, it can refer to a [process definition version](#process-definition-version), a [version tag](#version-tag), a [file version](#version-file) or [project snapshot](#snapshot-project), an [execution platform version](#execution-platform-version), or a SaaS [generation](#generation).
 
 ### Version tag
 
 A version tag is a user-defined string label for a specific resource or snapshot.
 
-For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Web Modeler project versioning, a version tag labels a saved project snapshot.
+For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Camunda Hub project snapshots, a version tag labels a saved project snapshot.
 
 A version tag is not generated automatically and does not replace the numeric process definition version.
 
 - [Resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md#versiontag)
-- [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
-
-### Web Modeler version
-
-A Web Modeler version is a saved snapshot of a BPMN or DMN file, or of an entire project. Diagram versions were previously called milestones.
-
-Web Modeler versions help you compare, restore, review, and deploy snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
-
-- [Versions](/components/hub/workspace/modeler/modeling/versions.md)
 - [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
 
 ## W

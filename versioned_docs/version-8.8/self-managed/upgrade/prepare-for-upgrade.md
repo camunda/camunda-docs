@@ -11,19 +11,19 @@ Prepare your Self-Managed environment for upgrade to Camunda 8.8.
 
 Use this guide to confirm upgrade eligibility, understand platform-level changes, and identify actions you may need to take before running an upgrade.
 
-All Camunda upgrades must follow the required upgrade procedure: upgrade one minor version at a time and never skip minors. For best stability and fix coverage, use the latest available patch in each minor before and after the minor upgrade.
+All Camunda upgrades must follow the required upgrade procedure: upgrade to the latest patch of your current minor first, then upgrade one minor version at a time without skipping minors. Skipping a minor version fails the schema compatibility check and blocks startup. Upgrading to the latest patch of each minor is strongly recommended for fix coverage, but the check itself compares minor versions.
 
-See [version compatibility checks](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#required-upgrade-procedure).
+See [version compatibility checks](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#required-upgrade-procedure) and [supported upgrade paths](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#supported-upgrade-paths).
 
 ## Evaluate your current environment
 
 Before upgrading, verify that your current installation meets the minimum requirements.
 
-| Area                | What to check                                                                                                                                                                                                                                                                                                                 |
-| :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version     | Direct upgrades to 8.8 are supported from 8.7.x. If you are running an earlier version, you must first upgrade to 8.7. For best stability and fix coverage, use the latest available 8.7.x patch before upgrading. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
-| Environment support | Ensure your platform and dependencies are supported in 8.8. See [supported environments](/reference/supported-environments.md).                                                                                                                                                                                               |
-| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                                                                                                     |
+| Area                | What to check                                                                                                                                                                                                                                                                                                                   |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Camunda version     | Direct upgrades to 8.8 are supported from 8.7.x. If you are running an earlier version, you must first upgrade to 8.7. Upgrading to the latest available 8.7.x patch first is strongly recommended for fix coverage. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
+| Environment support | Ensure your platform and dependencies are supported in 8.8. See [supported environments](/reference/supported-environments.md).                                                                                                                                                                                                 |
+| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and Elasticsearch/OpenSearch setup.                                                                                                                                                                                       |
 
 ## Review platform changes in Camunda 8.8
 
@@ -155,11 +155,12 @@ For more information about Identity 8.8 changes, see [Identity, authentication, 
 
 Review your infrastructure to confirm compatibility with Camunda 8.8.
 
-| Area                     | 8.8 requirement                               | Action                                                                                                                                                  |
-| :----------------------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Elasticsearch/OpenSearch | Elasticsearch 8.16+, OpenSearch 2.17+.        | Upgrade the cluster to the new version. Check the [supported environments](/reference/supported-environments.md) matrix to confirm the minimum version. |
-| CPU/Memory               | Consolidated Zeebe StatefulSet shares limits. | Measure current usage. Test with a load generator.                                                                                                      |
-| Storage                  | Same or higher IOPS as 8.7.                   | Check there is required space for temporary migration file.                                                                                             |
+| Area                     | 8.8 requirement                               | Action                                                                                                                                                                                                                   |
+| :----------------------- | :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch | Elasticsearch 8.16+, OpenSearch 2.17+.        | Upgrade the cluster to the new version. Check the [supported environments](/reference/supported-environments.md) matrix to confirm the minimum version.                                                                  |
+| CPU/Memory               | Consolidated Zeebe StatefulSet shares limits. | Measure current usage. Test with a load generator.                                                                                                                                                                       |
+| Storage                  | Same or higher IOPS as 8.7.                   | Check there is required space for temporary migration file.                                                                                                                                                              |
+| Bitnami subcharts        | Deprecated in 8.9, removed in 8.10.           | Begin planning migration to externally managed services or Kubernetes operators. See [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md). |
 
 :::caution Plan a performance test
 Component consolidation in 8.8 changes resource consumption patterns. Before upgrading production, run a load test that simulates real traffic and validate CPU, memory, and storage behavior.

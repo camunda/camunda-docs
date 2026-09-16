@@ -1,0 +1,13 @@
+.doc-breadcrumbs-row {
+  --ifm-breadcrumb-size-multiplier: 0.8;
+  margin-bottom: 1rem;
+}
+
+.doc-breadcrumbs-row > nav {
+  margin-bottom: 0;
+}
+
+.doc-breadcrumbs-row > nav .breadcrumbs {
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+}

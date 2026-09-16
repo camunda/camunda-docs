@@ -361,12 +361,10 @@ Console is deployed by Camunda Hub, which you enabled in the [Configure Web Mode
 
 ### Full configuration example
 
-The following example shows a full configuration to enable Microsoft Entra:
+The following example shows a full configuration to enable Microsoft Entra with an externally managed Elasticsearch cluster. Replace `<elasticsearch-host>` with the hostname of your cluster.
 
 ```yaml
 global:
-  elasticsearch:
-    enabled: true
   identity:
     auth:
       enabled: true
@@ -405,6 +403,11 @@ global:
       method: oidc
 
 orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        url: "https://<elasticsearch-host>:9200"
   security:
     authentication:
       oidc:
@@ -455,6 +458,14 @@ identity:
 
 optimize:
   enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: "<elasticsearch-host>"
+        port: 9200
 
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
@@ -464,7 +475,6 @@ webModeler:
     mail:
       fromAddress: noreply@example.com
     externalDatabase:
-      enabled: true
       host: pg-webmodeler-rw
       port: 5432
       database: webmodeler
@@ -472,9 +482,6 @@ webModeler:
       secret:
         existingSecret: pg-webmodeler-secret
         existingSecretKey: password
-
-elasticsearch:
-  enabled: true
 ```
 
 ### Connect to the cluster

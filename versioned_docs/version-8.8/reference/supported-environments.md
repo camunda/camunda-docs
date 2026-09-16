@@ -45,7 +45,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
-- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x
+- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x, 4.0.x, 4.1.x
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
@@ -54,7 +54,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
+With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises), and is not tied to a specific Kubernetes version. The Helm chart supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 

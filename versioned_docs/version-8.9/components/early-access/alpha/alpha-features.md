@@ -56,12 +56,6 @@ href: '/docs/next/components/early-access/alpha/a2a-client/',
 label: 'A2A Client',
 docId: 'components/early-access/alpha/a2a-client/a2a-client',
 },
-{
-type: 'link',
-href: '/docs/next/apis-tools/c8ctl/getting-started/',
-label: 'c8ctl CLI',
-docId: 'apis-tools/c8ctl/getting-started',
-},
 ]}
 />
 

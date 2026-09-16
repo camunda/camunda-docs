@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type AuthorizationRequest =
-  | AuthorizationIdBasedRequest
-  | AuthorizationPropertyBasedRequest;
+  AuthorizationIdBasedRequest | AuthorizationPropertyBasedRequest;
 ```
 
 Defines an authorization request.

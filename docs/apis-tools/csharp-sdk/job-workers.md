@@ -9,10 +9,6 @@ mdx:
 
 # Job Workers
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 Job workers subscribe to a specific job type and process jobs as they become available. The worker handles polling, concurrent dispatch, auto-completion, and error handling.
 
 ## Basic Worker

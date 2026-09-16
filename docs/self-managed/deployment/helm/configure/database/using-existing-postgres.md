@@ -5,9 +5,9 @@ sidebar_label: External PostgreSQL
 description: "Learn how to use an external PostgresQL instance in Camunda 8 Self-Managed deployment."
 ---
 
-The Camunda Helm chart does not bundle an internal PostgreSQL; provide one through a managed service or a Kubernetes operator. For production environments, we advise deploying PostgreSQL separately from the Camunda Helm charts. This guide steps through using an external PostgreSQL instance.
+The Camunda Helm chart requires externally managed PostgreSQL for Camunda Hub and Management Identity. This guide steps through connecting these components to an external PostgreSQL instance. Provide PostgreSQL through a managed service or a Kubernetes operator, such as the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
-This page applies to Management Identity and Web Modeler. As of Camunda 8.10 (Helm chart `15.x`), Keycloak is no longer deployed by the Helm chart, so its database is configured where Keycloak runs — see [Operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or your [external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md). This page does not apply to the Orchestration Cluster or Optimize.
+This page applies to Management Identity and Camunda Hub. Configure the database for an external Keycloak deployment separately. It does not apply to the Orchestration Cluster or Optimize.
 
 ## Prerequisites
 
@@ -37,18 +37,17 @@ kubectl create secret generic camunda-psql-db --from-literal=password=examplePas
 
 ## Configuration
 
-In Camunda 8.10, the Helm chart connects two components to external PostgreSQL: Management Identity and Web Modeler.
-Each of these components must be configured to connect to the external PostgreSQL instance. Keycloak's database is configured where Keycloak is deployed (operator or external), not through the Helm chart.
+Management Identity and Camunda Hub require PostgreSQL. Configure each component to connect to the external PostgreSQL instance. Keycloak's database is configured where Keycloak is deployed (operator or external), not through the Helm chart.
 
 ### Parameters
 
 | values.yaml option                                             | type    | default | description                                                              |
 | -------------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------ |
-| `webModeler.restapi.externalDatabase.url`                      | string  | `""`    | JDBC url of the database                                                 |
-| `webModeler.restapi.externalDatabase.user`                     | string  | `""`    | Username of the database                                                 |
-| `webModeler.restapi.externalDatabase.secret.existingSecret`    | string  | `""`    | Kubernetes Secret name containing a database password                    |
-| `webModeler.restapi.externalDatabase.secret.existingSecretKey` | string  | `""`    | Key within the Kubernetes Secret that has the database password          |
-| `webModeler.restapi.externalDatabase.secret.inlineSecret`      | string  | `""`    | string literal of the database password if not using a Kubernetes Secret |
+| `camundaHub.restapi.externalDatabase.url`                      | string  | `""`    | JDBC URL of the database                                                 |
+| `camundaHub.restapi.externalDatabase.username`                 | string  | `""`    | Username of the database                                                 |
+| `camundaHub.restapi.externalDatabase.secret.existingSecret`    | string  | `""`    | Kubernetes Secret name containing a database password                    |
+| `camundaHub.restapi.externalDatabase.secret.existingSecretKey` | string  | `""`    | Key within the Kubernetes Secret that has the database password          |
+| `camundaHub.restapi.externalDatabase.secret.inlineSecret`      | string  | `""`    | String literal of the database password if not using a Kubernetes Secret |
 | `identity.externalDatabase.enabled`                            | boolean | `false` | Enable the externalDatabase options                                      |
 | `identity.externalDatabase.host`                               | string  | `""`    | Hostname of the database                                                 |
 | `identity.externalDatabase.port`                               | integer | `5432`  | Port of the database                                                     |
@@ -60,14 +59,12 @@ Each of these components must be configured to connect to the external PostgreSQ
 ### Example usage
 
 ```yaml
-webModeler:
+camundaHub:
+  enabled: true
   restapi:
-    mail:
-      fromAddress: noreply@camunda.mycompany.com
-      fromName: Camunda 8 WebModeler
     externalDatabase:
       url: "jdbc:postgresql://db.example.com:5432/web-modeler"
-      user: "postgres"
+      username: "postgres"
       secret:
         existingSecret: "camunda-psql-db"
         existingSecretKey: "password"

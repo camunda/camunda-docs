@@ -63,7 +63,7 @@ Drop scripts are not provided.
 ## Usage guidance
 
 - **Version matching:** Always use scripts corresponding to your Camunda 8 version.
-- **Database selection:** Use the folder for your target database flavor (PostgreSQL, Oracle, MariaDB, etc.).
+- **Database selection:** Use the folder for your target database (PostgreSQL, Oracle, MariaDB, MySQL, SQL Server, or H2).
 - **Automatic schema management:** Camunda will manage the schema by default. Manual management requires disabling auto-DDL:
 
 ```yaml
@@ -74,13 +74,16 @@ camunda:
         auto-ddl: false
 ```
 
-- **SQL vs. Liquibase**
-  - Do not mix SQL upgrade scripts with Liquibase-managed schema.
-  - Liquibase changelogs are **forward-only**. Rollbacks are not supported.
+- **SQL vs. Liquibase:** Liquibase changelogs are **forward-only**. Rollbacks are not supported.
+
+:::warning
+Do not mix SQL upgrade scripts with Liquibase-managed schema. Applying SQL scripts to a Liquibase-managed schema causes checksum mismatches and schema inconsistencies.
+:::
+
 - **Liquibase lock recovery:** If a pod is interrupted during Liquibase execution, Camunda waits for stale DDL locks using `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`). Increase this timeout for long-running migrations and only release `databasechangeloglock` manually after confirming no migration is running. See [RDBMS troubleshooting](rdbms-troubleshooting.md#liquibase-lock-after-pod-crash-or-restart).
 - **Backup first:** Always [back up](/self-managed/operational-guides/backup-restore/backup-and-restore.md) your database before applying scripts manually.
 
-## Optional
+## Additional resources
 
 - **Checksums:** SHA1 or SHA256 checksums are provided in GitHub release assets.
 - **Liquibase CLI example:** See [Liquibase getting started](https://www.liquibase.org/get-started/running-your-first-update).

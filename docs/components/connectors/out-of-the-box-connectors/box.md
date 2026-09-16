@@ -93,30 +93,40 @@ Moves a file item into a folder.
 
 ### Download File
 
-Downloads a file item by creating a document in the process engine, and returning a reference
-to the document in the response.
+Downloads a file item and returns its content in the [return format](/components/document-handling/send-document-to-external-system.md#return-formats) you choose.
 
-| Property  | Type   | Required | Example        |
-| --------- | ------ | -------- | -------------- |
-| File path | String | Yes      | "/my-file.png" |
+| Property      | Type   | Required | Example                                |
+| ------------- | ------ | -------- | -------------------------------------- |
+| File path     | String | Yes      | "/my-file.png"                         |
+| Return format | Enum   | Yes      | Document reference / As text / As JSON |
 
-For example, you can reference the document representing the downloaded file using the example response expression:
+Select a return format for the downloaded content:
+
+- **Document reference**: a reference to a document created in the Camunda document store is returned in `document`.
+- **As text**: the content is decoded to a string (with an optional encoding, default UTF-8) and returned in `content`.
+- **As JSON**: the content is parsed as JSON and returned in `content`.
+
+:::note
+**As text** and **As JSON** return the content directly in a process variable and are subject to a size guard (approximately 1.5 MiB); use **Document reference** for large files. **As JSON** fails the job when the content is not valid JSON.
+:::
+
+For example, with **Document reference** you can reference the downloaded file using the example response expression:
 
 ```json
-{"download": document}
+{ "download": document }
 ```
 
 ### Upload File
 
-Upload a file using an existing document reference.
+Upload a file to your Box store.
 
-The Box connector resolves the document reference and creates a new file item in your Box store.
+| Property    | Type            | Required | Example          |
+| ----------- | --------------- | -------- | ---------------- |
+| File path   | String          | Yes      | "/my-file.png"   |
+| Folder path | String          | Yes      | "/upload/folder" |
+| Document    | Document source | Yes      | `{...}`          |
 
-| Property           | Type                      | Required | Example          |
-| ------------------ | ------------------------- | -------- | ---------------- |
-| File path          | String                    | Yes      | "/my-file.png"   |
-| Folder path        | String                    | Yes      | "/upload/folder" |
-| Document reference | Document reference object | Yes      | `{...}`          |
+Select a [document source](/components/document-handling/send-document-to-external-system.md#document-sources) for the file to upload: a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. The Box connector resolves the source and creates a new file item in your Box store.
 
 The result of the upload can be accessed via the `item` property of the result.
 

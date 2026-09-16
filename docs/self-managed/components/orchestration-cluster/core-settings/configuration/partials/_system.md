@@ -17,24 +17,24 @@ import TabItem from '@theme/TabItem';
 
 #### `camunda.webapps.operate`
 
-| Property                             | Description                                                                                                                                       | Default value |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.webapps.operate.enabled`    | <p>Controls whether Operate is enabled in the Orchestration Cluster. This also affects the Operate API v1.</p>                                    | `true`        |
-| `camunda.webapps.operate.ui-enabled` | <p>Controls whether the Operate UI is enabled. If `false`, the Operate API v1 is still available, but you cannot access Operate in a browser.</p> | `true`        |
+| Property                             | Description                                                              | Default value |
+| :----------------------------------- | :----------------------------------------------------------------------- | :------------ |
+| `camunda.webapps.operate.enabled`    | <p>Controls whether Operate is enabled in the Orchestration Cluster.</p> | `true`        |
+| `camunda.webapps.operate.ui-enabled` | <p>Controls whether the Operate UI is enabled.</p>                       | `true`        |
 
 #### `camunda.webapps.tasklist`
 
-| Property                              | Description                                                                                                                                          | Default value |
-| :------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.webapps.tasklist.enabled`    | <p>Controls whether Tasklist is enabled in the Orchestration Cluster. This also affects the Tasklist API v1.</p>                                     | `true`        |
-| `camunda.webapps.tasklist.ui-enabled` | <p>Controls whether the Tasklist UI is enabled. If `false`, the Tasklist API v1 is still available, but you cannot access Tasklist in a browser.</p> | `true`        |
+| Property                              | Description                                                               | Default value |
+| :------------------------------------ | :------------------------------------------------------------------------ | :------------ |
+| `camunda.webapps.tasklist.enabled`    | <p>Controls whether Tasklist is enabled in the Orchestration Cluster.</p> | `true`        |
+| `camunda.webapps.tasklist.ui-enabled` | <p>Controls whether the Tasklist UI is enabled.</p>                       | `true`        |
 
 #### `camunda.webapps.identity`
 
-| Property                              | Description                                                                                                                                          | Default value |
-| :------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.webapps.identity.enabled`    | <p>Controls whether Identity is enabled in the Orchestration Cluster. This also affects the Identity API v1.</p>                                     | `true`        |
-| `camunda.webapps.identity.ui-enabled` | <p>Controls whether the Identity UI is enabled. If `false`, the Identity API v1 is still available, but you cannot access Identity in a browser.</p> | `true`        |
+| Property                              | Description                                                               | Default value |
+| :------------------------------------ | :------------------------------------------------------------------------ | :------------ |
+| `camunda.webapps.identity.enabled`    | <p>Controls whether Identity is enabled in the Orchestration Cluster.</p> | `true`        |
+| `camunda.webapps.identity.ui-enabled` | <p>Controls whether the Identity UI is enabled.</p>                       | `true`        |
 
 ### `camunda.system`
 

@@ -5,10 +5,6 @@ sidebar_label: "Plugins"
 description: "Scaffold, install, and manage c8ctl plugins to add custom commands to the Camunda 8 CLI."
 ---
 
-:::warning Alpha feature
-`c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
-:::
-
 `c8ctl` supports a global plugin system that lets you add custom commands. Plugins are installed globally to a user-specific directory and tracked in a registry file (`plugins.json`).
 
 ## Plugin storage locations

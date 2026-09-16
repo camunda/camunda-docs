@@ -9,11 +9,11 @@ import TabItem from "@theme/TabItem";
 
 You can write your process tests in JSON format instead of coding the test logic in Java. The JSON file describes test cases with instructions that align with CPT's assertions and utilities.
 
-CPT's JSON test cases use the same schema as [test scenario files in Play](/components/hub/workspace/modeler/validation/test-scenario-files.md), so you can edit the same files in Play and execute them with CPT.
+CPT's JSON test cases use the same schema as [test files in Test mode](/components/hub/workspace/modeler/validation/test-files.md), so you can edit the same files in Test mode and execute them with CPT.
 
 ## Write a JSON test case
 
-The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json). It defines the following structure:
+The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json). It defines the following structure:
 
 - `testCases`: An array of test cases to be executed.
   - `name`: The name of the test case.
@@ -25,7 +25,7 @@ The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/
 How to start:
 
 1. Create a new JSON file in your test resources folder (for example, `src/test/resources/test-cases/invoice-approval.json`)
-2. Refer to the JSON schema `https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json` in the `$schema` property.
+2. Refer to the JSON schema `https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json` in the `$schema` property.
    Use the same schema version as the CPT version you are using to ensure compatibility.
 3. Add your test cases and use the [available instructions](#reference-instructions) to define the behavior of your process test.
 
@@ -33,7 +33,7 @@ The basic structure of the JSON file looks like this:
 
 ```JSON
 {
-  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json",
+  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json",
   "testCases": [
     {
       "name": "My first test case",
@@ -197,7 +197,7 @@ public class MyProcessTest {
 You can find some example process tests using JSON test cases on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example), like the following one:
 
 ```json reference referenceLinkText="Source" title="Invoice Approval JSON test case"
-https://github.com/camunda/camunda/blob/stable/8.9/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
+https://github.com/camunda/camunda/blob/stable/8.10/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
 ```
 
 ## Reference: Instructions
@@ -232,7 +232,7 @@ An instruction to assert the evaluation of a decision. See the [assertions docum
   </tr>
   <tr>
     <td>output</td>
-    <td>Expected output of the decision (any JSON type)</td>
+    <td>Expected output of the decision. Can be any JSON type.</td>
     <td>any</td>
     <td>No</td>
     <td></td>
@@ -702,6 +702,12 @@ An LLM-as-judge assertion that evaluates a variable against a semantic expectati
     <td>customPrompt</td>
     <td>A custom prompt for the judge evaluation. Overrides the configured custom prompt.</td>
     <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>attachDocuments</td>
+    <td>When true, resolves Camunda document references in the variable value and attaches their content to the judge. Overrides the configured <code>judge.attach-documents</code> setting. To evaluate attached content, use a multimodal-capable model; otherwise, CPT evaluates only the raw variable JSON.</td>
+    <td>boolean</td>
     <td>No</td>
   </tr>
 </tbody></table>
@@ -1605,6 +1611,13 @@ An instruction to mock a child process. See the [utilities documentation](utilit
     <td>No</td>
     <td></td>
   </tr>
+  <tr>
+    <td>versionTag</td>
+    <td>The version tag for the deployed stub process. Required when the call activity uses <code>bindingType="versionTag"</code>.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
 </tbody></table>
 
 Example:
@@ -1648,8 +1661,15 @@ An instruction to mock a DMN decision. See the [utilities documentation](utiliti
   </tr>
   <tr>
     <td>variables</td>
-    <td>The variables to set as the decision output.</td>
+    <td>The variables to set as the decision output. Deprecated, use <code>decisionOutput</code>.</td>
     <td>object</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>decisionOutput</td>
+    <td>The decision output to mock. Can be any JSON type.</td>
+    <td>any</td>
     <td>No</td>
     <td></td>
   </tr>
@@ -1661,9 +1681,7 @@ Example:
 {
   "type": "MOCK_DMN_DECISION",
   "decisionDefinitionId": "ChooseRocket",
-  "variables": {
-    "rocket": "Falcon Heavy"
-  }
+  "decisionOutput": "Falcon Heavy"
 }
 ```
 
@@ -2029,6 +2047,13 @@ An instruction to create or update process instance variables. See the [utilitie
     <td><a href="#element-selector">ElementSelector</a></td>
     <td>No</td>
     <td></td>
+  </tr>
+  <tr>
+    <td>createLocalVariables</td>
+    <td>Whether to create variables locally in the scope of the element (requires <code>elementSelector</code>). When <code>true</code>, variables are created in the element's local scope and are not propagated to parent scopes.</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>false</td>
   </tr>
 </tbody></table>
 

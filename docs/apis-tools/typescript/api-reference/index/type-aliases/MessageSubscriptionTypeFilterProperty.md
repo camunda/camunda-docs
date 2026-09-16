@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type MessageSubscriptionTypeFilterProperty =
-  | MessageSubscriptionTypeExactMatch
-  | AdvancedMessageSubscriptionTypeFilter;
+  MessageSubscriptionTypeExactMatch | AdvancedMessageSubscriptionTypeFilter;
 ```
 
 MessageSubscriptionTypeEnum with full advanced search capabilities.

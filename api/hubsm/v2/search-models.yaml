@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Common search-related schemas
 components:
@@ -23,13 +24,10 @@ components:
     SearchQueryPageRequest:
       x-polymorphic-schema: true
       description: >
-        Pagination criteria. Can use offset-based pagination (from/limit)
-        OR cursor-based pagination (after/before + limit), but not both.
+        Pagination criteria. Uses offset-based pagination (from/limit).
       oneOf:
         - $ref: "#/components/schemas/LimitPagination"
         - $ref: "#/components/schemas/OffsetPagination"
-        - $ref: "#/components/schemas/CursorForwardPagination"
-        - $ref: "#/components/schemas/CursorBackwardPagination"
 
     LimitPagination:
       type: object
@@ -60,45 +58,6 @@ components:
           format: int32
           default: 100
           minimum: 1
-
-    CursorForwardPagination:
-      type: object
-      title: Cursor-based forward pagination
-      required:
-        - after
-      properties:
-        after:
-          description: >
-            Use the `endCursor` value from the previous response
-            to fetch the next page of results.
-          allOf:
-            - $ref: "cursors.yaml#/components/schemas/EndCursor"
-        limit:
-          description: The maximum number of items to return in one request.
-          type: integer
-          format: int32
-          default: 100
-          minimum: 1
-          maximum: 10000
-
-    CursorBackwardPagination:
-      type: object
-      title: Cursor-based backward pagination
-      required:
-        - before
-      properties:
-        before:
-          description: >
-            Use the `startCursor` value from the previous response
-            to fetch the previous page of results.
-          allOf:
-            - $ref: "cursors.yaml#/components/schemas/StartCursor"
-        limit:
-          description: The maximum number of items to return in one request.
-          type: integer
-          format: int32
-          default: 100
-          minimum: 1
           maximum: 10000
 
     SearchQueryResponse:
@@ -107,7 +66,9 @@ components:
         - page
       properties:
         page:
-          $ref: "#/components/schemas/SearchQueryPageResponse"
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "#/components/schemas/SearchQueryPageResponse"
 
     SortOrderEnum:
       description: The order in which to sort the related field.
@@ -123,11 +84,6 @@ components:
       required:
         - totalItems
         - hasMoreTotalItems
-        - startCursor
-        - endCursor
-      x-semantic-provider:
-        - startCursor
-        - endCursor
       properties:
         totalItems:
           description: Total items matching the criteria.
@@ -139,17 +95,3 @@ components:
             When true, `totalItems` is a lower bound and the actual number of matching
             items is greater than the reported value.
           type: boolean
-        startCursor:
-          description: >
-            The cursor value for getting the previous page of results.
-            Use this in the `before` field of an ensuing request.
-          nullable: true
-          allOf:
-            - $ref: "cursors.yaml#/components/schemas/StartCursor"
-        endCursor:
-          description: >
-            The cursor value for getting the next page of results.
-            Use this in the `after` field of an ensuing request.
-          nullable: true
-          allOf:
-            - $ref: "cursors.yaml#/components/schemas/EndCursor"

@@ -239,6 +239,36 @@
     },
     {
       "type": "category",
+      "label": "Camunda 8 SaaS",
+      "link": {
+        "type": "doc",
+        "id": "components/saas/saas"
+      },
+      "items": [
+        "components/concepts/clusters",
+        "reference/regions",
+        "reference/data-locations",
+        "components/concepts/encryption-at-rest",
+        {
+          "type": "category",
+          "label": "Backup and restore",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/backup-restore-overview"
+          },
+          "items": [
+            "components/concepts/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting"
+          ]
+        },
+        "components/concepts/data-retention",
+        "reference/saas-ip-addresses"
+      ]
+    },
+    {
+      "type": "category",
       "label": "Document handling",
       "link": {
         "type": "doc",
@@ -1913,6 +1943,7 @@
             "id": "self-managed/setup/guides/guides"
           },
           "items": [
+            "self-managed/setup/guides/camunda-helm-toolkit",
             "self-managed/setup/guides/accessing-components-without-ingress",
             "self-managed/setup/guides/ingress-setup",
             "self-managed/setup/guides/gateway-api-setup",

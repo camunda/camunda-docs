@@ -70,11 +70,12 @@ This deployment approach separates infrastructure management from application de
 ## Infrastructure components
 
 This approach uses three operator-managed infrastructure components, each maintained by their respective project teams:
-| Component | Purpose | Official Documentation |
+
+| Component                                                   | Purpose                                                                                           | Official Documentation                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/) |
-| **[Elasticsearch with ECK](#elasticsearch-deployment)** | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) |
-| **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
+| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/)               |
+| **[Elasticsearch with ECK](#elasticsearch-deployment)**     | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)      |
+| **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity                                    | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
 ## Quick start
 
@@ -691,11 +692,35 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 **Reference:** [Keycloak Operator Documentation](https://www.keycloak.org/operator/basic-deployment)
 
+#### Keycloak pod crashes on HTTP/2 cleartext (h2c) requests
+
+**Symptoms:** The Keycloak pod exits or enters `CrashLoopBackOff` when it receives an HTTP/2 cleartext (h2c) request, such as a client sending an `Upgrade: h2c` header over a plain-HTTP port-forward. Clients receive an empty reply, and the Keycloak logs show a `java.lang.NoSuchMethodError` originating from Vert.x and Netty.
+
+**Cause:** `camunda/keycloak:quay-optimized-*` image tags older than `quay-optimized-26.6.4` bundle a conflicting Netty HTTP/2 codec under `/opt/keycloak/providers`, pulled in transitively by the AWS Advanced JDBC Wrapper. It shadows the Netty version shipped with Keycloak and breaks h2c handling.
+
+**Solutions:**
+
+- Upgrade the Keycloak image to `camunda/keycloak:quay-optimized-26.6.4` or later, where the conflicting Netty libraries are removed. Update the `image` field in your Keycloak custom resource (`keycloak-instance-*.yml`). This is the recommended fix.
+- If you cannot upgrade, disable HTTP/2 so Keycloak falls back to HTTP/1.1. Set the `QUARKUS_HTTP_HTTP2` environment variable to `false` in the Keycloak custom resource:
+
+  ```yaml
+  spec:
+    unsupported:
+      podTemplate:
+        spec:
+          containers:
+            - env:
+                - name: QUARKUS_HTTP_HTTP2
+                  value: "false"
+  ```
+
+**Reference:** [camunda/keycloak HTTP/2 cleartext crash issue](https://github.com/camunda/camunda-deployment-references/issues/2809)
+
 ## Production considerations
 
 ### Security
 
-- **Network policies**: Implement network policies to restrict traffic between components
+- **Network policies**: Implement network policies to restrict traffic between components. See [required network traffic](/self-managed/deployment/helm/install/production/index.md#required-network-traffic).
 - **TLS encryption**: Enable TLS for all inter-component communication
 - **Secret management**: Use external secret management systems in production
 - **RBAC**: Configure proper role-based access control for infrastructure and applications
@@ -741,5 +766,5 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 - [Configure Ingress and TLS](/self-managed/deployment/helm/configure/ingress/index.md)
 - [Set up monitoring and observability](/self-managed/deployment/helm/configure/application-configs.md)
-- [Configure multi-tenancy](/self-managed/deployment/helm/configure/configure-multi-tenancy.md)
+- [Configure Logical Tenants](/self-managed/deployment/helm/configure/configure-logical-tenants.md)
 - [Production deployment guide](/self-managed/deployment/helm/install/production/index.md)

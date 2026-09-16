@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type ProcessInstanceStateFilterProperty =
-  | ProcessInstanceStateExactMatch
-  | AdvancedProcessInstanceStateFilter;
+  ProcessInstanceStateExactMatch | AdvancedProcessInstanceStateFilter;
 ```
 
 ProcessInstanceStateEnum property with full advanced search capabilities.

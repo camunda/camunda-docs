@@ -242,6 +242,22 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.prefix-physical-tenant-path" env="CAMUNDA_CLIENT_PREFIXPHYSICALTENANTPATH"/><a href="#camundaclientprefixphysicaltenantpath" id="camundaclientprefixphysicaltenantpath" class="hash-link"/>
+</td>
+
+<td>
+
+If true, prefixes the REST base path with the physical tenant path when a physical tenant ID is set. Set to false to use the configured REST address as is, for example behind a reverse proxy that already routes to the physical tenant.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>true</code>
+</td>
+</tr>
+<tr>
+<td>
   <Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/><a href="#camundaclientrequesttimeout" id="camundaclientrequesttimeout" class="hash-link"/>
 </td>
 
@@ -919,45 +935,13 @@ Properties for setting cluster variables at startup.
 
 <td>
 
-Indicates if cluster variable processing is enabled. When `true`, variables configured via `@ClusterVariables` annotations and via the `global`/`tenant` properties are applied at startup. When `false`, all cluster variable processing is skipped.
+Indicates if cluster variable processing is enabled. When `true`, variables configured via `@ClusterVariables` annotations and via the `variables` property are applied at startup. When `false`, all cluster variable processing is skipped.
 
 Type: <code>boolean</code>
 
 </td>
 <td>
   <code>true</code>
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.global" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_GLOBAL"/><a href="#camundaclientclustervariablesglobal" id="camundaclientclustervariablesglobal" class="hash-link"/>
-</td>
-
-<td>
-
-Globally-scoped cluster variables to set at startup as key-value pairs.
-
-Type: <code>map[string,object]</code>
-
-</td>
-<td>
-  <code>null</code>
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.tenant" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_TENANT"/><a href="#camundaclientclustervariablestenant" id="camundaclientclustervariablestenant" class="hash-link"/>
-</td>
-
-<td>
-
-Tenant-scoped cluster variables to set at startup, keyed by tenant ID.
-
-Type: <code>map[string,map[string,object]]</code>
-
-</td>
-<td>
-  <code>null</code>
 </td>
 </tr>
 </tbody>
@@ -1296,6 +1280,24 @@ Type: <code>string</code>
   <code>null</code>
 </td>
 </tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.with-lease" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_WITHLEASE"/><a href="#camundaclientworkerdefaultswithlease" id="camundaclientworkerdefaultswithlease" class="hash-link"/>
+</td>
+
+<td>
+
+Activate the jobs polled by this worker with a lease. When enabled, each activated job is assigned a distinct lease token, fencing the complete, fail, and throw-error commands against a superseded activation of the same job.
+
+Only applies to the polling path. If not set, jobs are activated without a lease.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -1342,6 +1344,102 @@ Type: <code>duration</code>
 </td>
 <td>
   <code>&quot;0ms&quot;</code>
+</td>
+</tr>
+</tbody>
+</table>
+
+### `camunda.client.cluster-variables.variables`
+
+Cluster variables to set at startup. Each entry carries a name, a value and optionally metadata, a kind and a tenant ID. Entries without a tenant ID are globally scoped.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].name" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_NAME"/><a href="#camundaclientclustervariablesvariables[*]name" id="camundaclientclustervariablesvariables[*]name" class="hash-link"/>
+</td>
+
+<td>
+
+The name of the cluster variable.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].value" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_VALUE"/><a href="#camundaclientclustervariablesvariables[*]value" id="camundaclientclustervariablesvariables[*]value" class="hash-link"/>
+</td>
+
+<td>
+
+The value of the cluster variable.
+
+Type: <code>object</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].metadata" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_METADATA"/><a href="#camundaclientclustervariablesvariables[*]metadata" id="camundaclientclustervariablesvariables[*]metadata" class="hash-link"/>
+</td>
+
+<td>
+
+The metadata of the cluster variable.
+
+Type: <code>map[string,object]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].kind" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_KIND"/><a href="#camundaclientclustervariablesvariables[*]kind" id="camundaclientclustervariablesvariables[*]kind" class="hash-link"/>
+</td>
+
+<td>
+
+The kind of the cluster variable.
+
+Type: <code>enum[json, secretReference]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables[*].tenant-id" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES[*]_TENANTID"/><a href="#camundaclientclustervariablesvariables[*]tenantid" id="camundaclientclustervariablesvariables[*]tenantid" class="hash-link"/>
+</td>
+
+<td>
+
+The tenant ID of the cluster variable.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
 </td>
 </tr>
 </tbody>
@@ -1632,6 +1730,24 @@ Type: <code>string</code>
   <code>null</code>
 </td>
 </tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type|worker-name&gt;.with-lease" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE|WORKERNAME&gt;_WITHLEASE"/><a href="#camundaclientworkeroverridejobtypeworkernamewithlease" id="camundaclientworkeroverridejobtypeworkernamewithlease" class="hash-link"/>
+</td>
+
+<td>
+
+Activate the jobs polled by this worker with a lease. When enabled, each activated job is assigned a distinct lease token, fencing the complete, fail, and throw-error commands against a superseded activation of the same job.
+
+Only applies to the polling path. If not set, jobs are activated without a lease.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -1775,7 +1891,7 @@ Identity is now part of Camunda.
   <Property defaultValue="property" groupId="property-format" property="camunda.client.identity.base-url" env="CAMUNDA_CLIENT_IDENTITY_BASEURL"/><a href="#camundaclientidentitybaseurl" id="camundaclientidentitybaseurl" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 Identity is now part of Camunda.
@@ -2310,7 +2426,7 @@ Deprecated Keycloak-specific properties.
   <Property defaultValue="property" groupId="property-format" property="common.keycloak.realm" env="COMMON_KEYCLOAK_REALM"/><a href="#commonkeycloakrealm" id="commonkeycloakrealm" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
@@ -2359,7 +2475,7 @@ Deprecated Zeebe client properties.
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.apply-environment-variable-overrides" env="ZEEBE_CLIENT_APPLYENVIRONMENTVARIABLEOVERRIDES"/><a href="#zeebeclientapplyenvironmentvariableoverrides" id="zeebeclientapplyenvironmentvariableoverrides" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 Only the environment variables belonging to the Spring SDK are applied.
@@ -2578,7 +2694,7 @@ N/A
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.port" env="ZEEBE_CLIENT_CLOUD_PORT"/><a href="#zeebeclientcloudport" id="zeebeclientcloudport" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
@@ -2725,7 +2841,7 @@ N/A
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.security.plaintext" env="ZEEBE_CLIENT_SECURITY_PLAINTEXT"/><a href="#zeebeclientsecurityplaintext" id="zeebeclientsecurityplaintext" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 plaintext is now determined by the URL protocol (HTTP or HTTPS).

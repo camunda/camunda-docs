@@ -23,7 +23,11 @@ description: "Learn how to restore a Camunda 8 Self-Managed backup using a relat
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Restore a previous backup of your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
+Restore a previous backup of your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, Tasklist, and Admin) when using a relational database management system (RDBMS) as secondary storage.
+
+:::tip
+This procedure is the recovery step of [Cold Recovery](../../../concepts/multi-region/cold-recovery.md) when restoring into a secondary region after primary-region loss.
+:::
 
 ## How RDBMS restore works
 
@@ -55,6 +59,8 @@ It is critical that no Camunda components are running during the restore. Runnin
 :::
 
 ## Step 1: Restore Zeebe from its primary storage backup
+
+In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
 
 Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
@@ -357,7 +363,7 @@ If the restore fails, you can re-run the application after fixing the root cause
 If the data directory is not empty, the restore will fail with an error message:
 
 ```
-Broker's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+Broker's data directory /usr/local/camunda/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
 ```
 
 On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted. In such cases, the restore application can be configured to ignore the presence of these files and folders. The configuration option `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder names to ignore. By default, it ignores the `lost+found` folder found on ext4 filesystems. To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.
@@ -376,8 +382,8 @@ If you previously backed up Optimize data, restore it independently using the st
 
 See [back up and restore Optimize independently](../optimize-backup-and-restore.md#restore-a-backup) for the complete procedure.
 
-## (Optional) Restore Web Modeler data
+## (Optional) Restore Camunda Hub data
 
-If you previously backed up Web Modeler data, restore it using the same RDBMS restore tools.
+If you previously backed up Camunda Hub data, restore it using the same RDBMS restore tools.
 
-See [backup and restore Web Modeler data](../modeler-backup-and-restore.md) for more details.
+See [backup and restore Camunda Hub data](../modeler-backup-and-restore.md) for more details.

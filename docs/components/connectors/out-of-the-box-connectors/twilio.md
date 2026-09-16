@@ -23,7 +23,7 @@ The **Twilio connector** allows you to integrate your BPMN service with Twilio's
 Before you can use the Twilio connector, create a Twilio account and obtain an account SID and auth token from the [Twilio Console](https://www.twilio.com/console). You will also need to have a phone number to use as the sender for your SMS messages.
 
 :::note
-Use Camunda secrets to store your account SID and auth token so you don't expose sensitive information directly from the process. See [managing secrets](https://docs.camunda.org/manual/latest/user-guide/process-engine/secrets/) to learn more.
+Use secrets to store your account SID and auth token so you don't expose sensitive information directly from the process. See [managing secrets](https://docs.camunda.org/manual/latest/user-guide/process-engine/secrets/) to learn more.
 :::
 
 ## Create a Twilio connector task
@@ -198,7 +198,7 @@ The **Twilio Webhook connector** is an inbound connector that enables you to sta
 3. Select **Enabled** in **HMAC authentication** if you want to use HMAC authentication. After that, set the [Twilio Auth Token](https://support.twilio.com/hc/en-us/articles/223136027-Auth-Tokens-and-How-to-Change-Them) as the shared secret key in the **HMAC secret key** field property.
 
 :::note
-Use Camunda secrets to store your credentials securely. Refer to the [Camunda secrets documentation](/components/hub/organization/manage-clusters/manage-secrets.md) for more details.
+Use secrets to store your credentials securely. Refer to the [secrets documentation](/components/hub/organization/manage-clusters/manage-secrets.md) for more details.
 :::
 
 ### Fill in the properties in the **Activation** and **Correlation** sections
@@ -291,7 +291,7 @@ When you click on the event with the Twilio Webhook connector applied to it, a n
 This tab displays the URL of the Twilio Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use the Twilio Webhook connector in the Desktop Modeler or with Camunda 8 Self-Managed.
 In that case, Twilio Webhook connector deployments and URLs will not be displayed in the Modeler.
 :::

@@ -7,7 +7,7 @@ keywords: ["agentic orchestration"]
 ---
 
 import AoGrid from '../../react-components/\_ao-card';
-import { fundamentalCards_monitoring, recommendationCards } from '../../react-components/\_ao-card-data';
+import { fundamentalCards_monitoring } from '../../react-components/\_ao-card-data';
 
 Evaluate your AI agents by monitoring them in real time with Operate and improving performance over time with Optimize.
 

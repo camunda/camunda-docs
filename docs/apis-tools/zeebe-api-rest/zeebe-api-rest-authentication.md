@@ -19,10 +19,8 @@ When making requests to Zeebe, replace the base URL used in examples with your Z
 Example:
 
 ```bash
-curl -X POST "$ZEEBE_BASE_URL/v1/process-instances" \
-  -H "Authorization: Bearer $ACCESS_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"bpmnProcessId": "order-process", "variables": {"orderId": "12345"}}'
+curl "$ZEEBE_BASE_URL/v2/topology" \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
 #### Token expiration

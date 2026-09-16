@@ -15,7 +15,7 @@ or the registered application in the [Azure Active Directory](https://aad.portal
 the relevant [Microsoft Graph API permissions](https://learn.microsoft.com/en-us/graph/permissions-reference).
 
 :::note
-Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a Microsoft Teams connector task
@@ -138,6 +138,10 @@ The **members** property must contain a list of members:
 |      With replies       |                                                                                 List channel messages                                                                                  |   Yes    |      boolean      |        Choose **FALSE** for get messages without replies<br/>Choose **FALSE** for get messages without replies         |
 |       Message ID        |                                                                                  List message replies                                                                                  |   Yes    |      string       |                                           Microsoft Teams channel message ID                                           |
 |        Documents        |                                                                        List of documents to attach to a message                                                                        |    No    | List of documents |                                           Microsoft Teams channel message ID                                           |
+
+:::note
+Each document in the **Documents** field uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
+:::
 
 #### Channel methods
 

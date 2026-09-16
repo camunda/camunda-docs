@@ -1,11 +1,5 @@
 ---
 title: Modeling beyond the happy path
-tags:
-  - BPMN
-  - BPMN Error Event
-  - BPMN Message Event
-  - BPMN Timer Event
-  - Happy Path
 description: "Model the happy path before collecting problems and exceptions, prioritizing them, and introducing them incrementally."
 ---
 

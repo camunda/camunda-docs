@@ -17,6 +17,7 @@ type CorrelatedMessageSubscriptionSearchQuerySortRequest = object;
 
 ```ts
 field:
+  | "businessId"
   | "correlationKey"
   | "correlationTime"
   | "elementId"

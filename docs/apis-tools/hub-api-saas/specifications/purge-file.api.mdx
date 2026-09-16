@@ -1,0 +1,298 @@
+---
+id: purge-file
+title: "Purge a file from all version history"
+description: "Permanently and irrecoverably removes the file and all references to it across every process application version snapshot. Works on live and soft-deleted files. If the file row has already been permanently deleted, purge still removes any orphaned process application snapshot milestone references that point to the file by ID. Idempotent for files that never existed or have already been fully purged within the caller's organization."
+sidebar_label: "Purge a file from all version history"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Purge a file from all version history"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/files/{fileKey}/purge"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Permanently and irrecoverably removes the file and all references to it across every process application version snapshot. Works on live and soft-deleted files. If the file row has already been permanently deleted, purge still removes any orphaned process application snapshot milestone references that point to the file by ID. Idempotent for files that never existed or have already been fully purged within the caller's organization.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "fileKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the file.",
+      schema: {
+        description: "System-generated key for a file.",
+        type: "string",
+        format: "FileKey",
+        "x-semantic-type": "FileKey",
+        example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
+        title: "FileKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description:
+        "The file was purged, or was already absent. Once a file has been purged its ID is removed from all storage, so callers cannot distinguish between a file that was just purged, one that was purged in a previous call, and one that never existed — all three cases return 204.\n",
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The file belongs to a different organization and cannot be accessed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

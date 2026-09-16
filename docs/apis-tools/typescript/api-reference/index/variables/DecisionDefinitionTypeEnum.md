@@ -15,13 +15,13 @@ The type of the decision. UNSPECIFIED is deprecated and should not be used anymo
 
 ## Type Declaration
 
-### DECISION_TABLE
+### DECISION\_TABLE
 
 ```ts
 readonly DECISION_TABLE: "DECISION_TABLE" = 'DECISION_TABLE';
 ```
 
-### LITERAL_EXPRESSION
+### LITERAL\_EXPRESSION
 
 ```ts
 readonly LITERAL_EXPRESSION: "LITERAL_EXPRESSION" = 'LITERAL_EXPRESSION';

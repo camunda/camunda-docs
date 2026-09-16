@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -72,6 +74,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -110,6 +114,8 @@ paths:
       summary: Get group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -153,6 +159,8 @@ paths:
       summary: Update group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -205,6 +213,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IkRFTEVURSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -244,6 +254,8 @@ paths:
       summary: Assign a user to a group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -299,6 +311,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -347,6 +361,8 @@ paths:
       summary: Search group users
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -399,6 +415,8 @@ paths:
       summary: Assign a client to a group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -454,6 +472,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -502,6 +522,8 @@ paths:
       summary: Search group clients
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -554,6 +576,8 @@ paths:
       summary: Assign a mapping rule to a group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -608,6 +632,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -655,6 +681,8 @@ paths:
       summary: Search group mapping rules
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -707,6 +735,8 @@ paths:
       summary: Search group roles
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 

@@ -1,12 +1,5 @@
 ---
 title: Deciding about your stack
-tags:
-  - Architecture
-  - Stack
-  - Database
-  - Application Server
-  - Spring Boot
-  - Maven
 ---
 
 :::caution Camunda 8

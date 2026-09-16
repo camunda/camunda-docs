@@ -10,6 +10,9 @@ from camunda_orchestration_sdk import (
     DecisionInstanceDeletionBatchOperationRequest,
     DecisionInstanceDeletionBatchOperationRequestFilter,
     ElementId,
+    JobBatchUpdateRequest,
+    JobBatchUpdateRequestChangeset,
+    JobBatchUpdateRequestFilter,
     MigrateProcessInstanceMappingInstruction,
     ProcessDefinitionKey,
     ProcessInstanceCancellationBatchOperationRequest,
@@ -20,6 +23,8 @@ from camunda_orchestration_sdk import (
     ProcessInstanceMigrationBatchOperationRequestMigrationPlan,
     ProcessInstanceModificationBatchOperationRequest,
     ProcessInstanceModificationMoveBatchOperationInstruction,
+    ProcessInstanceResumptionBatchOperationRequest,
+    ProcessInstanceSuspensionBatchOperationRequest,
     Unset,
 )
 
@@ -192,3 +197,50 @@ def delete_decision_instances_batch_operation_example() -> None:
 
     print(f"Batch operation key: {result.batch_operation_key}")
 # endregion DeleteDecisionInstancesBatchOperation
+
+
+# region UpdateJobsBatchOperation
+def update_jobs_batch_operation_example() -> None:
+    client = CamundaClient()
+
+    result = client.update_jobs_batch_operation(
+        data=JobBatchUpdateRequest(
+            filter_=JobBatchUpdateRequestFilter(
+                type_="my-job-type",
+            ),
+            changeset=JobBatchUpdateRequestChangeset(
+                retries=3,
+            ),
+        ),
+    )
+
+    print(f"Batch operation key: {result.batch_operation_key}")
+# endregion UpdateJobsBatchOperation
+
+
+# region SuspendProcessInstancesBatchOperation
+def suspend_process_instances_batch_operation_example() -> None:
+    client = CamundaClient()
+
+    result = client.suspend_process_instances_batch_operation(
+        data=ProcessInstanceSuspensionBatchOperationRequest(
+            filter_=ProcessInstanceCancellationBatchOperationRequestFilter(),
+        ),
+    )
+
+    print(f"Batch operation key: {result.batch_operation_key}")
+# endregion SuspendProcessInstancesBatchOperation
+
+
+# region ResumeProcessInstancesBatchOperation
+def resume_process_instances_batch_operation_example() -> None:
+    client = CamundaClient()
+
+    result = client.resume_process_instances_batch_operation(
+        data=ProcessInstanceResumptionBatchOperationRequest(
+            filter_=ProcessInstanceCancellationBatchOperationRequestFilter(),
+        ),
+    )
+
+    print(f"Batch operation key: {result.batch_operation_key}")
+# endregion ResumeProcessInstancesBatchOperation

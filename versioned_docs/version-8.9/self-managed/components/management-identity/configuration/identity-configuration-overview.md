@@ -13,7 +13,7 @@ If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authenticati
 
 ## Configure Management Identity IdP
 
-The default Camunda 8 Self-Managed deployment uses built-in Keycloak as an identity provider (IdP).
+When a deployment includes Management Identity, it uses the packaged Keycloak as its identity provider (IdP) by default.
 
 You can configure your Management Identity IdP using the following options:
 
@@ -26,6 +26,6 @@ You can configure your Management Identity IdP using the following options:
 :::note
 
 - Management Identity relies on a PostgreSQL. When running Management Identity with an external OIDC provider, you can [connect to an alternative Database](./alternative-db.md) if your internal policies or compliance requirements prevent the use of PostgreSQL.
-- Keycloak is started as a component in a [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/deployment/helm/install/quick-install.md) Camunda 8 self-managed deployment.
+- Keycloak starts in the full and standalone Web Modeler [Docker Compose configurations](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration) and in the default [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md). The lightweight Docker Compose configuration does not start Management Identity or Keycloak.
 
 :::

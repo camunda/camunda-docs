@@ -22,7 +22,8 @@ field:
   | "followUpDate"
   | "dueDate"
   | "priority"
-  | "name";
+  | "name"
+  | "businessId";
 ```
 
 The field to sort by.

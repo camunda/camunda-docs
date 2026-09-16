@@ -11,7 +11,7 @@ Build and integrate AI agents into your end-to-end processes.
 
 ## About AI agents
 
-An AI agent is a software program that autonomously gathers data and carries out tasks using this information, independently or on behalf of another system or person.
+An AI agent is an addressable execution of an LLM-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop. The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
 
 AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
 

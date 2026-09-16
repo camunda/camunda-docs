@@ -1,13 +1,13 @@
 ---
 id: restore-version
 title: "Restore a version"
-description: "Restores the file content to the state captured in this version. A new version is created representing the restored state. For element template files, the request body must include the target version number."
+description: "Restores the file content to the state captured in this version. A new version is created representing the restored state, unless both the file's live content and its most recent version already match that exact content, in which case that version is returned and nothing is created. For element template files, the request body must include the target version number and a new version is always created."
 sidebar_label: "Restore a version"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
-info_path: docs/apis-tools/hub-api-saas/specifications/hub-public-api-v-2
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Restores the file content to the state captured in this version. A new version is created representing the restored state. For element template files, the request body must include the target version number.
+Restores the file content to the state captured in this version. A new version is created representing the restored state, unless both the file's live content and its most recent version already match that exact content, in which case that version is returned and nothing is created. For element template files, the request body must include the target version number and a new version is always created.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -46,7 +46,14 @@ Restores the file content to the state captured in this version. A new version i
       in: "path",
       required: true,
       description: "The unique key of the version.",
-      schema: { type: "string" },
+      schema: {
+        description: "System-generated key for a version.",
+        type: "string",
+        format: "VersionKey",
+        "x-semantic-type": "VersionKey",
+        example: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7",
+        title: "VersionKey",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -81,11 +88,23 @@ Restores the file content to the state captured in this version. A new version i
   responses={{
     "200": {
       description:
-        "The version was restored successfully. Returns the newly created version.",
+        "The version was restored successfully. Returns the newly created version, or the file's most recent version when both that version and the file's live content already matched this content.\n",
       content: {
         "application/json": {
           schema: {
             type: "object",
+            example: {
+              versionKey: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7",
+              name: "Release 1.0",
+              description: "First stable release of the order process.",
+              fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
+              organizationPublic: false,
+              linkedToProcessApplication: false,
+              created: "2025-03-15T10:30:00.000Z",
+              createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+              updated: "2025-03-15T10:30:00.000Z",
+              updatedBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+            },
             required: [
               "versionKey",
               "name",
@@ -96,11 +115,21 @@ Restores the file content to the state captured in this version. A new version i
               "updated",
               "updatedBy",
               "organizationPublic",
+              "linkedToProcessApplication",
             ],
             properties: {
               versionKey: {
                 description: "The unique key of the version.",
-                type: "string",
+                allOf: [
+                  {
+                    description: "System-generated key for a version.",
+                    type: "string",
+                    format: "VersionKey",
+                    "x-semantic-type": "VersionKey",
+                    example: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7",
+                    title: "VersionKey",
+                  },
+                ],
               },
               name: { description: "The name of the version.", type: "string" },
               description: {
@@ -110,11 +139,25 @@ Restores the file content to the state captured in this version. A new version i
               },
               fileKey: {
                 description: "The key of the file this version belongs to.",
-                type: "string",
+                allOf: [
+                  {
+                    description: "System-generated key for a file.",
+                    type: "string",
+                    format: "FileKey",
+                    "x-semantic-type": "FileKey",
+                    example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
+                    title: "FileKey",
+                  },
+                ],
               },
               organizationPublic: {
                 description:
                   "Whether the version is published to shared resources.",
+                type: "boolean",
+              },
+              linkedToProcessApplication: {
+                description:
+                  "Whether this version is linked to one or more process application versions.",
                 type: "boolean",
               },
               created: {
@@ -228,6 +271,14 @@ Restores the file content to the state captured in this version. A new version i
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -279,6 +330,14 @@ Restores the file content to the state captured in this version. A new version i
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -329,11 +388,19 @@ Restores the file content to the state captured in this version. A new version i
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
         },
       },
     },
     "404": {
-      description: "The version was not found.",
+      description: "The requested resource was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -379,12 +446,18 @@ Restores the file content to the state captured in this version. A new version i
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
         },
       },
     },
     "409": {
-      description:
-        "A conflict occurred (e.g. connector template version conflict).",
+      description: "A conflict occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -429,6 +502,14 @@ Restores the file content to the state captured in this version. A new version i
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Conflict",
+            status: 409,
+            detail:
+              "The request conflicts with the current state of the resource.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
           },
         },
       },
@@ -479,6 +560,14 @@ Restores the file content to the state captured in this version. A new version i
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },

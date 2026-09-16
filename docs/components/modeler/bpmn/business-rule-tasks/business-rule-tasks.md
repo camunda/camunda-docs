@@ -4,7 +4,7 @@ title: "Business rule tasks"
 description: "A business rule task is used to model the evaluation of a business rule."
 ---
 
-A business rule task is used to model the evaluation of a business rule; for example, a decision
+A business rule task is used to model the evaluation of a business rule. For example, a decision
 modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 
 ![task](assets/business-rule-task.png)
@@ -26,6 +26,8 @@ internal DMN decision engine. Once the decision is made, the process instance co
 
 If the decision evaluation is unsuccessful, an [incident](/components/concepts/incidents.md) is
 raised at the business rule task. When the incident is resolved, the decision is evaluated again.
+
+Used as a tool inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md), a business rule task lets an [AI agent](/reference/glossary.md#ai-agent) delegate part of its decision to a governed DMN decision instead of LLM reasoning, keeping that step deterministic. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for how tools are declared.
 
 ## Defining a called decision {#defining-a-task}
 

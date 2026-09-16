@@ -15,7 +15,7 @@ Create a custom REST connector based on and using the [Camunda REST connector](/
 
 ## Create a custom connector based on the Camunda REST connector
 
-1. In Web Modeler, add a [task](/components/modeler/bpmn/tasks.md) element to a new or existing BPMN diagram.
+1. In your Camunda Hub project, add a [task](/components/modeler/bpmn/tasks.md) element to a new or existing BPMN diagram.
 1. Change the task type to [REST connector](/components/connectors/protocol/rest.md).
 1. In the Properties panel, configure the connector as required. For example, define the Authentication URL, HTTP method, and any headers or payload needed for the API request.
 1. Click **Save as Template**.
@@ -83,7 +83,7 @@ The following example shows how you can create a custom connector based on the C
 
 In this first step, create a new connector template, using the REST connector as a starting point.
 
-1. Create a REST Outbound connector task.
+1. Create a task and change its type to **Send REST Request**.
 1. Define the URL as a FEEL (Friendly Enough Expression Language) expression, using the `resource` and `index` variables.
 
    <img src={CustomRestURLImg} alt="Create a REST connector task" style={{marginTop: '0', width: '800px'}} />

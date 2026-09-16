@@ -55,6 +55,17 @@ The key of the AI Agent Task or ad-hoc sub-process element instance under which 
 
 ---
 
+### historyItemId
+
+```ts
+historyItemId: string;
+```
+
+The client-supplied identifier this item was created with. Empty for items that don't
+carry one.
+
+---
+
 ### historyItemKey
 
 ```ts
@@ -62,16 +73,6 @@ historyItemKey: AgentHistoryItemKey;
 ```
 
 The unique key for this history item. Stable and sortable by creation order.
-
----
-
-### iteration
-
-```ts
-iteration: IterationId | null;
-```
-
-The sequential iteration number this item belongs to. Null if not provided by the connector.
 
 ---
 
@@ -95,6 +96,27 @@ The lease token of the activation that produced this item.
 
 ---
 
+### limits
+
+```ts
+limits: AgentInstanceLimits;
+```
+
+The operational limits as of this entry. CONFIGURATION items only; -1 on any field
+means "no limit configured" for other roles.
+
+---
+
+### loopIteration
+
+```ts
+loopIteration: LoopIterationId;
+```
+
+The loop iteration this item belongs to.
+
+---
+
 ### metrics
 
 ```ts
@@ -103,7 +125,18 @@ metrics:
   | null;
 ```
 
-Per-call token and latency metrics. Present on ASSISTANT items only.
+Per-call token and latency metrics. Null when metrics were not provided at creation time.
+
+---
+
+### model
+
+```ts
+model: string | null;
+```
+
+The LLM model identifier as of this entry. CONFIGURATION items only; null for other
+roles.
 
 ---
 
@@ -113,7 +146,17 @@ Per-call token and latency metrics. Present on ASSISTANT items only.
 producedAt: string;
 ```
 
-The connector-side timestamp of when this message was produced.
+The agent-side timestamp of when this message was produced.
+
+---
+
+### provider
+
+```ts
+provider: string | null;
+```
+
+The LLM provider as of this entry. CONFIGURATION items only; null for other roles.
 
 ---
 
@@ -127,6 +170,17 @@ The role of this history item in the conversation.
 
 ---
 
+### systemPrompt
+
+```ts
+systemPrompt: AgentInstanceMessageContent[];
+```
+
+The system prompt, as content blocks, as of this entry. CONFIGURATION items only;
+empty for other roles.
+
+---
+
 ### toolCalls
 
 ```ts
@@ -134,5 +188,16 @@ toolCalls: AgentInstanceToolCall[];
 ```
 
 Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches.
-ASSISTANT items: dispatched tool calls with arguments populated.
-TOOL_RESULT items: single-entry array referencing the originating tool call (arguments null).
+ASSISTANT items: dispatched tool calls.
+TOOL_RESULT items: single-entry array referencing the originating tool call.
+
+---
+
+### tools
+
+```ts
+tools: AgentTool[];
+```
+
+The complete list of tools available to the agent as of this entry. CONFIGURATION
+items only; empty for other roles.

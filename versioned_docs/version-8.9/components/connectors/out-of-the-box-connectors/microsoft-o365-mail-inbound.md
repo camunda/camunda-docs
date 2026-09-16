@@ -100,6 +100,9 @@ Choose an authentication type in the **Authentication** section of the connector
 
 To make your **Microsoft 365 Email Inbound connector** executable, fill in the required properties.
 
+<!-- Legacy anchor: already-distributed element templates link to #configuration. Do not remove. -->
+<span id="configuration" />
+
 ### Mailbox configuration
 
 In the **Mailbox** section, configure which mailbox and folder to monitor:

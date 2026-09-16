@@ -1,0 +1,296 @@
+---
+id: remove-cluster-registration
+title: "Remove a cluster registration"
+description: "Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic cluster management to be enabled."
+sidebar_label: "Remove a cluster registration"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Remove a cluster registration"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/clusters/{clusterId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic cluster management to be enabled.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "clusterId",
+      in: "path",
+      required: true,
+      description: "The unique ID identifying the cluster.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The cluster registration was removed successfully.",
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -58,9 +58,9 @@ docId: 'components/early-access/alpha/a2a-client/a2a-client',
 },
 {
 type: 'link',
-href: '/docs/next/apis-tools/c8ctl/getting-started/',
-label: 'c8ctl CLI',
-docId: 'apis-tools/c8ctl/getting-started',
+href: '/docs/next/components/concepts/secret-resolution/',
+label: 'Secret resolution',
+docId: 'components/concepts/secret-resolution',
 },
 ]}
 />

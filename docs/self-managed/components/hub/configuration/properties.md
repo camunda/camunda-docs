@@ -20,10 +20,10 @@ For the `restapi` component, environment variables can be used as an alternative
 For example, the property `camunda.modeler.clusters[0].name` is represented by the environment variable `CAMUNDA_MODELER_CLUSTERS_0_NAME`.
 
 If you are using the Camunda 8 Helm chart, read more about the different configuration options in the chart's [Helm chart values documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
-You can pass environment variables to each component via `webModeler.restapi.env` and `webModeler.websocket.env` in your `values.yaml`.
+You can pass environment variables to each component via `camundaHub.restapi.env` and `camundaHub.websocket.env` in your `values.yaml`.
 :::
 
-For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/quickstart/developer-quickstart/docker-compose.md).
+For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Camunda Hub](/self-managed/quickstart/developer-quickstart/docker-compose.md).
 
 ## Licensing
 
@@ -76,7 +76,7 @@ server:
 To show your Orchestration Clusters in Camunda Hub, use the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-8100.md#camunda-hub).
 
 :::note
-Only Web Modeler admins (users with the [`admin:*` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) can access the cluster pages in Camunda Hub.
+Access to the cluster pages in Camunda Hub depends on the user's role: `Console` and `DevOps` role holders (users with the [`admin:clusters` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) get management access to the cluster pages, Hub admins (users with the [`admin:*` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) get full access, and other Hub members get read-only access.
 :::
 
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
@@ -117,7 +117,7 @@ Clusters must be configured using the following options to access the cluster fr
 | Method         | Description                                                                                                                             | When to use?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `BEARER_TOKEN` | Camunda Hub sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Camunda Hub.<br/>_Note_: You need to ensure that the cluster [accepts Camunda Hub's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).<br/><br/>**Cluster version < 8.8**<br/>The cluster uses [Camunda Identity-based authentication](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization) and the external identity provider supports access tokens with multiple audiences (example provider: Keycloak).<br/>_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience. |
-| `BASIC`        | Camunda Hub sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Cluster version < 8.8**<br/>not supported<br/><br/>**Console limitation**<br/>Console pages in Camunda Hub don't support clusters configured with Basic authentication. Console requests to the Orchestration Cluster are made automatically in the background, so there is no UI to collect credentials. Clusters using Basic authentication _will not work correctly_ with Console functionality.<br/>                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `BASIC`        | Camunda Hub sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Cluster version < 8.8**<br/>not supported<br/><br/>**Console limitation**<br/>Console pages in Camunda Hub don't support clusters configured with Basic authentication. Console requests to the Orchestration Cluster are made automatically in the background, so there is no UI to collect credentials. Clusters using Basic authentication _will not work correctly_ with Camunda Hub's Console functionality.<br/>                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `NONE`         | Camunda Hub does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.<br/><br/>**Cluster version < 8.8**<br/>The authentication / token validation in the Zeebe Gateway is [disabled](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 #### Custom properties
@@ -208,18 +208,22 @@ Use `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
 Available component types and requirements:
 
-| Configuration value     | Component             | Requirements                                   |
-| :---------------------- | :-------------------- | :--------------------------------------------- |
-| `connectors`            | Connectors            | REST URL                                       |
-| `identity`              | Management Identity   | -                                              |
-| `webModelerWebApp`      | Camunda Hub           | -                                              |
-| `operate`               | Operate               | -                                              |
-| `optimize`              | Optimize              | -                                              |
-| `orchestration`         | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
-| `orchestrationIdentity` | Admin                 | -                                              |
-| `tasklist`              | Tasklist              | -                                              |
-| `zeebe`                 | Zeebe Broker          | Cluster version < 8.8, gRPC URL, and REST URL  |
-| `zeebeGateway`          | Zeebe Gateway         | Cluster version < 8.8                          |
+| Configuration value | Component             | Requirements                                   |
+| :------------------ | :-------------------- | :--------------------------------------------- |
+| `connectors`        | Connectors            | REST URL                                       |
+| `identity`          | Management Identity   | -                                              |
+| `hub`               | Camunda Hub           | -                                              |
+| `operate`           | Operate               | -                                              |
+| `optimize`          | Optimize              | -                                              |
+| `orchestration`     | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
+| `admin`             | Admin                 | -                                              |
+| `tasklist`          | Tasklist              | -                                              |
+| `zeebe`             | Zeebe Broker          | Cluster version < 8.8, gRPC URL, and REST URL  |
+| `zeebeGateway`      | Zeebe Gateway         | Cluster version < 8.8                          |
+
+:::note Backward compatibility
+The old values `webModelerWebApp` (replaced by `hub`) and `orchestrationIdentity` (replaced by `admin`) are still accepted for backward compatibility.
+:::
 
 Example configuration:
 
@@ -241,7 +245,7 @@ camunda:
               rest: "https://camunda.example.com"
               readiness: "https://camunda.example.com:9600/core/actuator/health/readiness"
           - name: "Orchestration Admin"
-            type: "orchestrationIdentity"
+            type: "admin"
             version: "8.10-SNAPSHOT"
             urls:
               webapp: "https://camunda.example.com"
@@ -260,7 +264,7 @@ CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST=https://camunda.example.com
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS=https://camunda.example.com:9600/core/actuator/health/readiness
 
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_NAME='Orchestration Admin'
-CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_TYPE=orchestrationIdentity
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_TYPE=admin
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_VERSION=8.10-SNAPSHOT
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_URLS_WEBAPP=https://camunda.example.com
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_URLS_READINESS=https://camunda.example.com:9600/core/actuator/health/readiness
@@ -393,6 +397,12 @@ camunda.modeler:
 
 Camunda Hub uses Keycloak as the default authentication provider (using OAuth 2.0 + OpenID Connect) and integrates with [Management Identity](/self-managed/components/management-identity/overview.md) for user management and authorization (see [Manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md)).
 
+:::note
+In 8.10, Camunda Hub authentication is configured under `camunda.security.authentication.oidc.*`, using the same settings as the Orchestration Cluster. The properties listed in the mapping below continue to work and are translated to their 8.10 equivalents at startup, but they are deprecated and are removed in 8.11.
+
+See [authentication](./identity.md) for the current settings, and [upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration) for the mapping between them.
+:::
+
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
@@ -425,6 +435,7 @@ spring:
           issuer-uri: https://keycloak.example.com/auth/realms/camunda-platform
           jwk-set-uri: https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs # optional
           jws-algorithms: ES256 # optional
+          audiences: web-modeler-api,web-modeler-public-api # optional
 ```
 
 </TabItem>
@@ -435,11 +446,12 @@ spring:
 | `CAMUNDA_IDENTITY_BASEURL`                                 | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                                               | `http://identity:8080`                                                                    | -                        |
 | `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM`               | ID token claim used to assign usernames.                                                                                                                                                                                                                                                | `preferred_username`                                                                      | `name`                   |
 | `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API`       | Expected value of the audience claim in user access tokens (used for JWT validation).                                                                                                                                                                                                   | `web-modeler-api`                                                                         | `web-modeler-api`        |
-| `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API`         | Expected value of the audience claim in M2M access tokens required for [Web Modeler's API](/apis-tools/web-modeler-api/authentication.md?environment=self-managed) (used for JWT validation).                                                                                           | `web-modeler-public-api`                                                                  | `web-modeler-public-api` |
+| `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API`         | Expected value of the audience claim in M2M access tokens required for [Camunda Hub's API](/apis-tools/hub-api-sm/authentication.md) (used for JWT validation).                                                                                                                         | `web-modeler-public-api`                                                                  | `web-modeler-public-api` |
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`                  | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:18080/auth/realms/camunda-platform`                                      | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI`     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform`                               | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI`    | [optional] URL of the JWK Set endpoint (used for JWT validation). Only necessary if URL cannot be derived from the OIDC configuration endpoint.                                                                                                                                         | `https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs` | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWS_ALGORITHMS` | [optional] List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK Set response.                                                                                                                                        | `ES256`                                                                                   | -                        |
+| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_AUDIENCES`      | [optional]<br/>Comma-separated list of accepted audience claim values, validated in addition to `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API` and `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API`.                                                                            | `web-modeler-api`                                                                         | -                        |
 | `OAUTH2_CLIENT_ID`                                         | Client ID of the Camunda Hub application configured in Identity.                                                                                                                                                                                                                        | `web-modeler`                                                                             | -                        |
 | `OAUTH2_CLIENT_SCOPE`                                      | [optional]<br/>OIDC scopes requested during authentication, determining what user information is included in the token.                                                                                                                                                                 | `full`                                                                                    | `openid email profile`   |
 | `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS`                  | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies.                     | `include`                                                                                 | -                        |
@@ -452,7 +464,7 @@ The `restapi` component default for `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM`
 In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Camunda Hub `restapi` environment.
 :::
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [authentication guide](./identity.md) for additional details on how Camunda Hub authenticates users, and on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### Camunda client
 
@@ -667,7 +679,7 @@ Camunda Hub supports syncing files via [Git Sync](/components/hub/workspace/mana
 ```yaml
 camunda.modeler:
   gitsync:
-    max-files: 50 # default
+    max-files: 100 # default
     max-in-memory-size: 4MB # default
     github:
       base-url: https://api.github.com # default
@@ -687,7 +699,7 @@ camunda.modeler:
 
 | Provider      | Environment variable                                | Description                                                                                                                   | Default value                                 |
 | ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                          |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `100`                                         |
 | All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                         |
 | GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                      |
 | GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                   |
@@ -705,23 +717,25 @@ camunda.modeler:
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-| Property                                                     | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `camunda.modeler.feature.play-enabled`                       | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
-| `camunda.modeler.feature.bpmn-deployment-enabled`            | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
-| `camunda.modeler.feature.dmn-deployment-enabled`             | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `camunda.modeler.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
-| `camunda.marketplace.enabled`                                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
+| Property                                                     | Description                                                                                                                                                                                                                                                                                          | Example value | Default value |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `camunda.modeler.feature.play-enabled`                       | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                           | `true`        | `true`        |
+| `camunda.modeler.feature.bpmn-deployment-enabled`            | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                                     | `false`       | `true`        |
+| `camunda.modeler.feature.dmn-deployment-enabled`             | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                                             | `false`       | `true`        |
+| `camunda.modeler.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                        | `true`        | `false`       |
+| `camunda.modeler.feature.ui-user-invite-enabled`             | [optional]<br/>Enables the **Add members** button on the workspace **Members** page for users who aren't **Organization admins**. **Organization admins** always see the button, regardless of this setting. Adding members through the [Hub API](/apis-tools/hub-api-sm/overview.md) is unaffected. | `false`       | `true`        |
+| `camunda.marketplace.enabled`                                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.               | `false`       | `true`        |
 
 Example configuration:
 
 ```yaml
 camunda:
   modeler.feature:
-    play-enabled: true
+    test-mode-enabled: true
     bpmn-deployment-enabled: true
     dmn-deployment-enabled: true
     dynamic-cluster-management-enabled: false
+    ui-user-invite-enabled: true
 
   marketplace:
     enabled: true
@@ -730,45 +744,66 @@ camunda:
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Environment variable                 | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                       | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED`      | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`       | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
-| `MARKETPLACE_ENABLED`                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
+| Environment variable                             | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `TEST_MODE_ENABLED`                              | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED`                  | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`                   | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
+| `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED`             | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
+| `CAMUNDA_MODELER_FEATURE_UI_USER_INVITE_ENABLED` | [optional]<br/>[Enables the button](#hide-add-members-button) for inviting members to a workspace.                                                                                                                                                                                     | `false`       | `true`        |
+| `MARKETPLACE_ENABLED`                            | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
 
 </TabItem>
 </Tabs>
 
 #### Dynamic cluster management
 
-Use dynamic cluster management to automatically create records for your clusters within Camunda Hub.
+Use dynamic cluster management to automatically register your clusters with Camunda Hub.
 
-By default, clusters shown in Camunda Hub are strictly managed by your [configuration](#clusters). Cluster records are created, updated, and deleted when you change your cluster configuration values.
+By default, clusters shown in Camunda Hub are strictly managed by your [configuration](#clusters). Cluster registrations are created, updated, and deleted when you change your cluster configuration values.
 
-Dynamic cluster management changes this behavior to a hybrid model that makes use of both your cluster configuration—if provided—and the following cluster management API endpoints that are only exposed when dynamic cluster management is enabled:
+Dynamic cluster management changes this to a hybrid model. Camunda Hub uses your cluster configuration—if you provide one—alongside the following API endpoints, which are only exposed when dynamic cluster management is enabled:
 
-| Name                           | Path                                  |
-| :----------------------------- | :------------------------------------ |
-| **Create cluster (discovery)** | `POST /api/v1/clusters`               |
-| **Delete cluster**             | `DELETE /api/v1/clusters/{clusterId}` |
+| Name                                                                                                                       | Path                                  |
+| :------------------------------------------------------------------------------------------------------------------------- | :------------------------------------ |
+| [**Create or update a cluster registration**](/apis-tools/hub-api-saas/specifications/create-cluster-registration.api.mdx) | `POST /api/v2/clusters`               |
+| [**Remove a cluster registration**](/apis-tools/hub-api-saas/specifications/remove-cluster-registration.api.mdx)           | `DELETE /api/v2/clusters/{clusterId}` |
 
 In this mode, you:
 
-1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the create cluster endpoint. If you didn't define the clusters in your configuration, new cluster records with minimal information and no management functionality in the user interface will be created by a request to this endpoint.
-2. Delete stale cluster records from Camunda Hub with the delete cluster endpoint.
+1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the [create or update a cluster registration](/apis-tools/hub-api-saas/specifications/create-cluster-registration.api.mdx) endpoint. If you didn't define the clusters in your configuration, this call registers them with minimal information and no management functionality in the Camunda Hub interface.
+2. Remove stale cluster registrations from Camunda Hub using the [remove a cluster registration](/apis-tools/hub-api-saas/specifications/remove-cluster-registration.api.mdx) endpoint.
 
-While not required, you can still define new clusters in your configuration. Newly defined clusters are automatically registered in Camunda Hub with all [available settings](#clusters) and management functionality in the Camunda Hub interface.
-
-If you remove a cluster configuration, you need to manually delete the cluster record with the delete cluster endpoint. With dynamic cluster management, you can't update cluster records. Instead, delete the record and either:
-
-- Allow the cluster to ping Camunda Hub with new information.
-- Update your configuration, and let the cluster record be recreated.
+You can still define new clusters in your configuration, though it's not required. When you do, Camunda Hub automatically registers them with all [available settings](#clusters) and full management functionality in the interface.
 
 :::note
-If you use dynamic cluster management, do not manually call the create cluster endpoint—only configure your clusters to do so. This endpoint doesn't currently support creating clusters with all configurable settings.
+With dynamic cluster management enabled, don't call the create or update cluster registration endpoint manually—only let your cluster configuration do it. The endpoint doesn't yet support creating clusters with all configurable settings.
 :::
+
+#### Hide add members button
+
+Hide the **Add members** button on the workspace **Members** page (which is displayed by default):
+
+<Tabs groupId="configType" defaultValue="application.yaml" queryString>
+<TabItem value="application.yaml" label="Application properties">
+
+```yaml
+camunda:
+  modeler.feature:
+    ui-user-invite-enabled: false
+```
+
+</TabItem>
+<TabItem value="env" label="Environment variables">
+
+```shell
+CAMUNDA_MODELER_FEATURE_UI_USER_INVITE_ENABLED=false
+```
+
+</TabItem>
+</Tabs>
+
+Organization admins always see the button, regardless of this setting. Other users will not see the button. Instead, they must add members with the [Camunda Hub API](/apis-tools/hub-api-sm/overview.md).
 
 ### Unstable configuration options
 
@@ -796,7 +831,7 @@ camunda.modeler.resource-import.allow-private-ip-address: true # default: false;
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Camunda Hub Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
 The `websocket` component is configured via environment variables.
-When using the Camunda Helm chart, you can pass these variables via `webModeler.websocket.env` in your `values.yaml`.
+When using the Camunda Helm chart, you can pass these variables via `camundaHub.websocket.env` in your `values.yaml`.
 See the [Helm chart values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters) for all available configuration options.
 
 | Environment variable | Description                                                                                                                                                              | Example value | Default value |

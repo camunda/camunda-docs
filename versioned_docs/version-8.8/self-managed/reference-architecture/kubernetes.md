@@ -108,7 +108,7 @@ Depending on your specific use case, you may need to scale **horizontally** (mor
 
 By default, node affinity rules prevent all Orchestration Cluster pods from being scheduled on the same node. This requires at least three nodes for proper operation. For details, see the [Kubernetes node affinity documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
 
-To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. Use affinity and anti-affinity rules to ensure workloads remain available even if a zone fails.
+To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. The default anti-affinity rules ensure Orchestration Cluster pods run on distinct nodes, but do not ensure those nodes are in different zones — use the `orchestration.topologySpreadConstraints` Helm value to spread them across zones. For configuration details and caveats, see [topology spread constraints](/self-managed/deployment/helm/install/production/index.md#topology-spread-constraints).
 
 ### Components
 
@@ -169,11 +169,11 @@ For details on multi-region configurations, especially dual-region setups, refer
 
 We recommend using a [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
 
-Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deployment/helm/install/quick-install.md) that supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
+Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deployment/helm/install/quick-install.md). For supported Kubernetes versions, see [supported environments](/reference/supported-environments.md#deployment-options).
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
+The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md#disk-space), and conduct benchmarking to determine your exact needs.
 
 - **4 Kubernetes nodes**
   - CPU: 4 modern cores
@@ -189,6 +189,8 @@ The following are suggested minimum requirements to get started. There is no one
 The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. On providers where disk performance scales with capacity (for example, GKE `pd-ssd`), reaching the IOPS and throughput baseline can require a disk larger than the 32 GiB minimum capacity. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
 
 Storage type, however, is a strict requirement: HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency, and are not supported.
+
+The same SSD requirement applies to secondary storage (Elasticsearch/OpenSearch) — see the [Database](#database) section for details.
 :::
 
 #### Networking
@@ -258,6 +260,10 @@ The following databases are required:
 For more information, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmarking to determine the appropriate sizing for your specific environment and workload.
+
+:::note Secondary storage disk requirements
+Secondary storage (Elasticsearch/OpenSearch) is customer-managed. Provision it with sufficient resources and use performant disks — disk latency directly impacts export throughput and overall cluster performance. See [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
+:::
 
 Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
 

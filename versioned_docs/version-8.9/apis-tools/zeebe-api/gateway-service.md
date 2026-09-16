@@ -382,6 +382,16 @@ message CreateProcessInstanceRequest {
   // instance during its execution
   // if empty (default), the process instance will be executed normally
   repeated ProcessInstanceCreationRuntimeInstruction runtimeInstructions = 8;
+
+  // a list of tags that can be attached as meta-data to process instances
+  repeated string tags = 9;
+
+  // an optional, user-defined string identifier that identifies the process instance
+  // within the scope of the process definition (scoped by tenant). If provided and uniqueness
+  // enforcement is enabled, the engine will reject creation if another root process instance
+  // with the same business id is already active for the same process definition.
+  // Note that any active child process instances with the same business id are not taken into account.
+  optional string businessId = 10;
 }
 
 message ProcessInstanceCreationStartInstruction {
@@ -426,6 +436,10 @@ message CreateProcessInstanceResponse {
   int64 processInstanceKey = 4;
   // the tenant identifier of the created process instance
   string tenantId = 5;
+  // tags attached to a process instance
+  repeated string tags = 6;
+  // the business id of the created process instance
+  optional string businessId = 7;
 }
 ```
 
@@ -476,6 +490,10 @@ message CreateProcessInstanceWithResultResponse {
   string variables = 5;
   // the tenant identifier of the process definition
   string tenantId = 6;
+  // tags attached to a process instance
+  repeated string tags = 7;
+  // the business id of the created process instance
+  optional string businessId = 8;
 }
 ```
 

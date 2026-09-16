@@ -1,11 +1,6 @@
 ---
 id: sizing-benchmarks
 title: Run benchmarks
-tags:
-  - Performance
-  - Hardware
-  - Sizing
-  - Benchmarks
 description: "Run your own benchmarks to validate Camunda 8 sizing for your specific workload."
 ---
 

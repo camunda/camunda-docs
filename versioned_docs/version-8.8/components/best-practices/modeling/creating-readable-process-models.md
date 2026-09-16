@@ -1,7 +1,5 @@
 ---
 title: Creating readable process models
-tags:
-  - BPMN
 description: "Create visual process models to better understand, discuss, and remember processes so models are easy to read and understand."
 ---
 

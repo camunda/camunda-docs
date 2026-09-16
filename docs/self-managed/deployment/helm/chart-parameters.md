@@ -12,7 +12,7 @@ Helm chart parameters let you configure the components and behavior of your Camu
 In Helm charts, the `values.yaml` file defines configuration for your deployment. To tailor your installation to your needs, you can override parameters in this file or provide your own values file. It's best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
 
 :::tip Templating support
-Some values in `values.yaml` support Go template expressions (for example, `{{ .Release.Name }}`). Values that support templating are marked with "Supports templating" in their description in `values.yaml`. This includes `podLabels`, `podAnnotations`, and `global.ingress.host`, among others.
+Some values in `values.yaml` support Go template expressions (for example, `{{ .Release.Name }}`). Values that support templating are marked with "Supports templating" in their description in `values.yaml`. This includes `podLabels`, `podAnnotations`, and `global.host`, among others.
 :::
 
 The following tables show the **top-level configuration sections** in `values.yaml`. Each section controls a specific area of the chart.
@@ -26,22 +26,23 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestration.hostNetwork`, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
 
+For service-level options such as the `appProtocol` hint per port, see [configure Kubernetes Service ports](/self-managed/deployment/helm/configure/service-configuration.md).
+
 ### Other Camunda applications
 
-| Section      | Purpose                                             |
-| ------------ | --------------------------------------------------- |
-| `console`    | Configures the Camunda Self-Managed Console service |
-| `connectors` | Configures the Connector runtime                    |
-| `identity`   | Configures the Management Identity service          |
-| `optimize`   | Configures the Optimize web application             |
-| `webModeler` | Configures the Web Modeler service                  |
+| Section      | Purpose                                    |
+| ------------ | ------------------------------------------ |
+| `camundaHub` | Configures Camunda Hub                     |
+| `connectors` | Configures the Connector runtime           |
+| `identity`   | Configures the Management Identity service |
+| `optimize`   | Configures the Optimize web application    |
 
-### Infrastructure dependencies
+### External infrastructure
 
-Camunda 8.10 no longer bundles infrastructure subcharts. Deploy PostgreSQL, Elasticsearch, and Keycloak with Kubernetes operators or managed services, and configure Camunda to connect to them. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+Camunda 8.10 no longer bundles infrastructure subcharts. Deploy PostgreSQL, Elasticsearch or OpenSearch, and Keycloak separately from the Camunda Helm chart. This lets you use your preferred deployment methods, leverage managed services, and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 :::note
-For production, configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
+Configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
 
 See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
 :::
@@ -77,6 +78,8 @@ You can use these files individually or combine them with your own overrides.
 
 To customize parameters, create an override file (for example, `my-overrides.yaml`) with custom settings.  
 This approach is recommended over editing `values.yaml` directly.
+
+You can [validate the keys in your overrides with the Camunda Helm Toolkit](operational-tasks/camunda-helm-toolkit.md#validate-override-files). This checks the supplied configuration, not the completeness or deployment readiness of all merged Helm values.
 
 ### Combining multiple values files
 

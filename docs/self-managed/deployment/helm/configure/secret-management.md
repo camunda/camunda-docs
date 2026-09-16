@@ -135,6 +135,12 @@ Document Store secrets use the structured `secret:` pattern with separate secret
 For Azure Blob Storage with DefaultAzureCredential (managed identities and Workload Identity), the connection string secret is not required.
 :::
 
+### Credential precedence with IRSA
+
+The AWS SDK resolves credentials through its [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which reads the static `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables before the IRSA web identity token. Because the chart injects these variables from the access key secrets above whenever the AWS document store is enabled, their presence takes precedence and prevents [IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#document-store-s3) from being used, even when the service account is annotated with an IAM role.
+
+To authenticate with IRSA instead, set `global.documentStore.type.aws.irsa.enabled` to `true`. The chart then skips injecting the static credentials, and the AWS access key secrets above are not required.
+
 ## TLS certificates
 
 TLS certificate secrets for Camunda components and external services.
@@ -145,11 +151,11 @@ The structured `secret:` pattern for TLS certificates was introduced in Camunda 
 
 ### TLS certificate secrets
 
-| **Secret**                          | **Chart values key**              | **Purpose**                                         |
-| ----------------------------------- | --------------------------------- | --------------------------------------------------- |
-| **Console TLS Certificate**         | `console.tls.secret`              | TLS certificate for Console web application         |
-| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.secret` | TLS certificate for external Elasticsearch over SSL |
-| **External OpenSearch TLS Cert**    | `global.opensearch.tls.secret`    | TLS certificate for external OpenSearch over SSL    |
+| **Secret**                          | **Chart values key**                                                                                          | **Purpose**                                         |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| **Console TLS Certificate**         | `console.tls.secret`                                                                                          | TLS certificate for Console web application         |
+| **External Elasticsearch TLS Cert** | `orchestration.data.secondaryStorage.elasticsearch.tls.secret` / `optimize.database.elasticsearch.tls.secret` | TLS certificate for external Elasticsearch over SSL |
+| **External OpenSearch TLS Cert**    | `orchestration.data.secondaryStorage.opensearch.tls.secret` / `optimize.database.opensearch.tls.secret`       | TLS certificate for external OpenSearch over SSL    |
 
 **TLS Certificate Configuration**: Unlike password-based secrets, TLS certificates do not support `inlineSecret` (certificates are binary files unsuitable for inline configuration).
 
@@ -167,13 +173,15 @@ Reference them in your values:
 
 ```yaml
 # Elasticsearch/OpenSearch
-global:
-  elasticsearch:
-    tls:
-      enabled: true
-      secret:
-        existingSecret: elasticsearch-tls-secret
-        existingSecretKey: externaldb.jks
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        tls:
+          secret:
+            existingSecret: elasticsearch-tls-secret
+            existingSecretKey: externaldb.jks
 
 # Console
 console:

@@ -91,12 +91,15 @@ components:
       format: BusinessId
       type: string
       example: order-12345
-    IterationId:
+    LoopIterationId:
       description: |
-        A client-provided sequential integer identifying a logical iteration: one LLM
-        call, its tool dispatches, and their results. Must be a positive integer,
-        increasing with each iteration. Established by the
-        connector when appending the first history item of an iteration.
+        A client-provided sequential integer identifying a loop iteration: one pass
+        through an AI agent's loop, during which the model reasons, selects tools,
+        evaluates the result, and decides whether to continue. One iteration covers
+        the input for the LLM call, the call itself, and the tools it dispatches;
+        the results of those tool calls are input to the next iteration. Must be a
+        positive integer, increasing with each loopIteration. Established by the
+        connector when appending the first history item of a loopIteration.
       type: integer
       format: int32
       minimum: 1

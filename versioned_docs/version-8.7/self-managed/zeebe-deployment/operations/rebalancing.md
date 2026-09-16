@@ -32,7 +32,6 @@ Rebalancing is only supported under specific configurations, and even when suppo
 There are two configurations where manual rebalancing is supported:
 
 - **Priority election** with **round-robin distribution**
-
   - Priority election and round-robin distribution are enabled by default.
   - As long as you have not manually disabled priority election or set a fixed distribution, rebalancing is supported.
   - Brokers are automatically assigned as primary partition leaders during startup, based on cluster size and replication factor.

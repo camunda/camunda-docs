@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1VTQUdFX01FVFJJQyJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -96,6 +98,8 @@ paths:
       summary: System configuration (alpha)
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[ADDED_IN_VERSION:8.9]]
 

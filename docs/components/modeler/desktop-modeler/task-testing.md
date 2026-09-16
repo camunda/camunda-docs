@@ -63,6 +63,6 @@ If the task execution fails due to an error, the response message is displayed.
 
 ## Related
 
-- [Test a task in Web Modeler](../../hub/workspace/modeler/validation/task-testing.md)
+- [Test a task in Camunda Hub](../../hub/workspace/modeler/validation/task-testing.md)
 - [Learn about task testing concepts](../task-testing.md)
 - [Working with variables](../../concepts/variables.md)

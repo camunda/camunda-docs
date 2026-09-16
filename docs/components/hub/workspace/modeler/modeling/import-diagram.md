@@ -1,38 +1,24 @@
 ---
 id: import-diagram
 title: Upload files
-description: "Upload a BPMN diagram, DMN diagram, or any other supported file at any time with Web Modeler."
+description: "Upload a BPMN diagram, DMN diagram, or any other supported file at any time to a modeling project in Camunda Hub."
 ---
 
-<span class="badge badge--cloud">Camunda 8 only</span>
+Upload a BPMN diagram, DMN diagram, or any other supported file to a modeling project in Camunda Hub:
 
-Upload a BPMN diagram, DMN diagram, or any other supported file into Web Modeler using one of the following methods:
+1. Open a workspace.
+2. Open a project.
+3. Choose one of the following import methods:
+   - Click **Create new > Upload files**, and select the files from your computer.
+   - Drag one file from your computer and drop it onto the files table.
 
-- In a project, click **New > Upload files** and select the files from your computer.
+:::tip
+Alternatively, you can replace the content of an existing file with the content in your uploaded file:
 
-  ![import diagram](../img/import-diagram/web-modeler-upload-file-menu-item.png)
+    - Open an existing file. In the top navigation next to the filename, open the vertical ellipsis menu, and choose **Replace via upload**. Then, select a file from your computer.
+    - Open an existing file. Then, drag one file from your computer and drop it onto the canvas.
 
-  ![import diagram](../img/import-diagram/web-modeler-upload-file-choose.png)
-
-  ![import diagram](../img/import-diagram/web-modeler-upload-file-completed.png)
-
-- In a project, drag one file from your computer and drop it.
-
-  ![import diagram](../img/import-diagram/web-modeler-project-drag-and-drop.png)
-
-:::note
-For the two options below, the content of the Web Modeler resource is replaced with the content of the file.
 :::
-
-- In a Web Modeler resource editor, open the breadcrumb menu and choose **Replace via upload**. Then, select a file from your computer.
-
-  ![import diagram](../img/import-diagram/web-modeler-replace-via-upload-menu-item.png)
-
-  ![import diagram](../img/import-diagram/web-modeler-replace-via-upload-choose.png)
-
-- In a Web Modeler resource editor, drag one file from your computer and drop it onto the canvas.
-
-  ![import diagram](../img/import-diagram/web-modeler-diagram-replace-via-drag-and-drop.png)
 
 ### Undo/redo management limitations
 

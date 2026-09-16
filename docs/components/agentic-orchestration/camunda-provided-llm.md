@@ -29,7 +29,7 @@ Key benefits:
 Camunda-provided LLM is available in Camunda SaaS for:
 
 - **SaaS trial organizations**: Includes Camunda-managed credentials and a free budget. AI features are enabled by default.
-- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly enable AI features in Camunda Console. When you enable them, Camunda-provided LLM is enabled automatically. If Camunda-provided LLM is unavailable, disable AI features and then re-enable them.
+- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly enable AI features in Camunda Hub. When you enable them, Camunda-provided LLM is enabled automatically. If Camunda-provided LLM is unavailable, disable AI features and then re-enable them.
 
 :::note
 Availability, budgets, and UI may vary by environment and rollout stage.
@@ -39,7 +39,7 @@ See [Trial vs. enterprise budgets](#trial-vs-enterprise-budgets) for more detail
 
 ## Set up Camunda-provided LLM
 
-Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as cluster secrets.
+Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret).
 
 - If you are using an AI agent blueprint, no additional configuration is needed in most cases. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
 - If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) with the following parameters:
@@ -52,16 +52,17 @@ Once Camunda-provided LLM is available in your organization, its credentials are
 
 Camunda-provided LLM uses a managed LLM gateway that supports multiple models from different providers. You can switch between models to compare how your agent performs with each one. When using the AI Agent connector, set the **Model** field to one of the following values:
 
-| Model                       | Value to set in **Model**     | What it's good for                                                                                                    |
-| :-------------------------- | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| Amazon Nova Pro v1          | `amazon.nova-pro-v1`          | Best for balanced quality and cost across general-purpose AI agent scenarios.                                         |
-| Anthropic Claude Haiku 4.5  | `anthropic.claude-haiku-4-5`  | Best for lightweight assistants, short interactions, and lower-cost tasks that still need good instruction following. |
-| Anthropic Claude Opus 4.5   | `anthropic.claude-opus-4-5`   | Best for advanced analysis and challenging multi-step tasks where maximum quality is the priority.                    |
-| Anthropic Claude Sonnet 4.6 | `anthropic.claude-sonnet-4-6` | Best for complex, high-stakes agent tasks where strong reasoning and reliable tool use matter most.                   |
-| DeepSeek v3.2               | `deepseek.v3.2`               | Best for technical and coding-heavy workflows that need strong reasoning at moderate cost.                            |
-| OpenAI GPT-OSS 120B         | `openai.gpt-oss-120b`         | Best for higher-quality results than small open models while still controlling cost.                                  |
-| OpenAI GPT-OSS 20B          | `openai.gpt-oss-20b`          | Best for budget-conscious experimentation and simpler automations with lower complexity.                              |
-| Qwen Qwen3 235B             | `qwen.qwen3-235b`             | Best for advanced reasoning and coding use cases where you want strong performance with good cost efficiency.         |
+| Model                       | Value to set in **Model**     | What it's good for                                                                                                                |
+| :-------------------------- | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| Amazon Nova Pro v1          | `amazon.nova-pro-v1`          | Best for balanced quality and cost across general-purpose AI agent scenarios.                                                     |
+| Anthropic Claude Haiku 4.5  | `anthropic.claude-haiku-4-5`  | Best for lightweight assistants, short interactions, and lower-cost tasks that still need good instruction following.             |
+| Anthropic Claude Opus 4.5   | `anthropic.claude-opus-4-5`   | Best for advanced analysis and challenging multi-step tasks where maximum quality is the priority.                                |
+| Anthropic Claude Sonnet 4.6 | `anthropic.claude-sonnet-4-6` | Best as the default for complex agent tasks, balancing strong reasoning, reliable tool use, speed, and budget consumption.        |
+| Anthropic Claude Sonnet 5   | `anthropic.claude-sonnet-5`   | Best for demanding agent tasks when you want stronger reasoning and tool use than the default and can trade off speed and budget. |
+| DeepSeek v3.2               | `deepseek.v3.2`               | Best for technical and coding-heavy workflows that need strong reasoning at moderate cost.                                        |
+| OpenAI GPT-OSS 120B         | `openai.gpt-oss-120b`         | Best for higher-quality results than small open models while still controlling cost.                                              |
+| OpenAI GPT-OSS 20B          | `openai.gpt-oss-20b`          | Best for budget-conscious experimentation and simpler automations with lower complexity.                                          |
+| Qwen Qwen3 235B             | `qwen.qwen3-235b`             | Best for advanced reasoning and coding use cases where you want strong performance with good cost efficiency.                     |
 
 :::note
 When selecting a model, consider your process requirements, expected usage volume, and token budget. For model selection guidelines, see how to [choose the right LLM](./choose-right-model-agentic.md).
@@ -104,7 +105,7 @@ If your process model doesn’t handle LLM failures, an exhausted budget may res
 
 ## Monitor usage
 
-The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Console shows usage statistics for Camunda-provided LLM, including:
+The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Hub shows usage statistics for Camunda-provided LLM, including:
 
 - How much of your budget has been used.
 - How much budget remains.

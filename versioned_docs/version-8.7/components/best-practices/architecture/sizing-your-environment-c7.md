@@ -1,11 +1,6 @@
 ---
 id: sizing-your-environment-c7
 title: Sizing your Camunda 7 environment
-tags:
-  - Database
-  - Performance
-  - Hardware
-  - Sizing
 description: "Size your environment for Camunda 7, including sufficient hardware and database space. This best practice targets Camunda 7.x only."
 ---
 

@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type ClusterVariableScopeFilterProperty =
-  | ClusterVariableScopeExactMatch
-  | AdvancedClusterVariableScopeFilter;
+  ClusterVariableScopeExactMatch | AdvancedClusterVariableScopeFilter;
 ```
 
 ClusterVariableScopeEnum property with full advanced search capabilities.

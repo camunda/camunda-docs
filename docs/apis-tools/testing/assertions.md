@@ -434,6 +434,8 @@ assertThat(processInstance)
 Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The assertion
 fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
 
+When [document attachment](configuration.md#document-attachment) is enabled, Camunda document references found in the variable value are resolved and their content is passed to the judge.
+
 ```java
 assertThat(processInstance)
     .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
@@ -527,6 +529,8 @@ assertThat(processInstance)
 Assert that a local variable in the scope of a given element satisfies a natural language expectation using a configured LLM judge. Use the BPMN
 element ID or an [element selector](utilities.md#element-selector) to identify the element. The expectation is evaluated only once. The assertion
 fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
+
+When [document attachment](configuration.md#document-attachment) is enabled, Camunda document references found in the variable value are resolved and their content is passed to the judge.
 
 ```java
 assertThat(processInstance)
@@ -842,6 +846,8 @@ same LLM judge and embedding-based similarity checks used for process variables.
 
 Assert that the given value satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The
 assertion fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
+
+[Document attachment](configuration.md#document-attachment) is not supported for value assertions. To evaluate document content, use [hasVariableSatisfiesJudge](#hasvariablesatisfiesjudge) or [hasLocalVariableSatisfiesJudge](#haslocalvariablesatisfiesjudge) instead.
 
 ```java
 assertThatValue("The order has been shipped and will arrive tomorrow.")

@@ -7,7 +7,7 @@ description: "Manage configuration values centrally across your Camunda cluster 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import AoGrid from '/docs/components/react-components/\_ao-card';
-import { fundamentalCards, resourcesCards } from '/docs/components/react-components/\_modeler-card-data';
+import { fundamentalCards, resourcesCards } from '../../../react-components/\_modeler-card-data';
 
 Manage configuration values centrally across your Camunda cluster with cluster variables.
 

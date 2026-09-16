@@ -72,7 +72,7 @@ $ kubectl get services -l app.kubernetes.io/component=zeebe-gateway
 NAME                             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                       AGE
 camunda-platform-zeebe-gateway   ClusterIP   10.96.227.153   <none>        9600/TCP,26500/TCP,8080/TCP   21m
 $ kubectl port-forward services/camunda-platform-zeebe-gateway -p 8080:8080 &
-$ curl localhost:8080/api/v1/topology | jq .brokers[].version && kill %1
+$ curl localhost:8080/v2/topology | jq .brokers[].version && kill %1
 8.5.0
 8.5.0
 8.5.0
@@ -103,7 +103,7 @@ We can verify this by running the command to check versions again:
 
 ```shell
 $ kubectl port-forward services/camunda-platform-zeebe-gateway -p 8080:8080 &
-$ curl localhost:8080/api/v1/topology | jq .brokers[].version && kill %1
+$ curl localhost:8080/v2/topology | jq .brokers[].version && kill %1
 8.5.2
 8.5.2
 8.5.2

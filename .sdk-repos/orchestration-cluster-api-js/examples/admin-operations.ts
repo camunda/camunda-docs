@@ -233,6 +233,16 @@ async function getStatusExample() {
 }
 //#endregion GetStatus
 
+//#region GetClusterStatus
+async function getClusterStatusExample() {
+  const camunda = createCamundaClient();
+
+  const status = await camunda.getClusterStatus();
+
+  console.log(`Cluster status: ${status.status}`);
+}
+//#endregion GetClusterStatus
+
 //#region PinClock
 async function pinClockExample() {
   const camunda = createCamundaClient();
@@ -579,6 +589,7 @@ void getLicenseExample;
 void getSystemConfigurationExample;
 void getAuthenticationExample;
 void getStatusExample;
+void getClusterStatusExample;
 void pinClockExample;
 void resetClockExample;
 void evaluateConditionalsExample;

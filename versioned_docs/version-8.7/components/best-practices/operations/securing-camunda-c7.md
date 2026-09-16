@@ -1,10 +1,5 @@
 ---
 title: "Securing Camunda 7"
-tags:
-  - Security
-  - SSO
-  - Authentication
-  - Authorization
 description: "Disallow unauthorized access by securing the Camunda 7.x before going live with your process applications."
 ---
 

@@ -48,6 +48,41 @@
       "label": "Get cluster topology"
     }
   ],
+  "getClusterTopology": [
+    {
+      "file": "client.ts",
+      "region": "GetClusterTopology",
+      "label": "Get cluster topology (v2)"
+    }
+  ],
+  "changeClusterMode": [
+    {
+      "file": "client.ts",
+      "region": "ChangeClusterMode",
+      "label": "Change cluster mode"
+    }
+  ],
+  "changeClusterModeAsClusterAdmin": [
+    {
+      "file": "client.ts",
+      "region": "ChangeClusterModeAsClusterAdmin",
+      "label": "Change cluster mode as cluster admin"
+    }
+  ],
+  "restore": [
+    {
+      "file": "client.ts",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
+  "restoreAsClusterAdmin": [
+    {
+      "file": "client.ts",
+      "region": "RestoreAsClusterAdmin",
+      "label": "Restore from a backup as cluster admin"
+    }
+  ],
   "createProcessInstance": [
     {
       "file": "process-instance.ts",
@@ -79,6 +114,27 @@
       "file": "process-instance.ts",
       "region": "SearchProcessInstances",
       "label": "Search process instances"
+    }
+  ],
+  "suspendProcessInstance": [
+    {
+      "file": "process-instance.ts",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend a process instance"
+    }
+  ],
+  "resumeProcessInstance": [
+    {
+      "file": "process-instance.ts",
+      "region": "ResumeProcessInstance",
+      "label": "Resume a process instance"
+    }
+  ],
+  "assignProcessInstanceBusinessId": [
+    {
+      "file": "process-instance.ts",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign a business ID to a process instance"
     }
   ],
   "createDeployment": [
@@ -772,6 +828,27 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "batch-operation.ts",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
+  "suspendProcessInstancesBatchOperation": [
+    {
+      "file": "batch-operation.ts",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances in batch"
+    }
+  ],
+  "resumeProcessInstancesBatchOperation": [
+    {
+      "file": "batch-operation.ts",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances in batch"
+    }
+  ],
   "deleteProcessInstance": [
     {
       "file": "extended-operations.ts",
@@ -798,6 +875,13 @@
       "file": "extended-operations.ts",
       "region": "GetProcessInstanceStatistics",
       "label": "Get process instance statistics"
+    }
+  ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "extended-operations.ts",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
     }
   ],
   "getProcessInstanceSequenceFlows": [
@@ -847,6 +931,13 @@
       "file": "extended-operations.ts",
       "region": "SearchProcessDefinitions",
       "label": "Search process definitions"
+    }
+  ],
+  "searchProcessDefinitionVariableNames": [
+    {
+      "file": "extended-operations.ts",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
     }
   ],
   "getProcessDefinitionStatistics": [
@@ -1358,6 +1449,202 @@
       "file": "additional-operations.ts",
       "region": "SearchUserTaskEffectiveVariables",
       "label": "Search user task effective variables"
+    }
+  ],
+  "resolveSecrets": [
+    {
+      "file": "secret.ts",
+      "region": "ResolveSecrets",
+      "label": "Resolve secrets"
+    }
+  ],
+  "listSecrets": [
+    {
+      "file": "secret.ts",
+      "region": "ListSecrets",
+      "label": "List secret references"
+    }
+  ],
+  "takeRuntimeBackup": [
+    {
+      "file": "backup.ts",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
+    }
+  ],
+  "listRuntimeBackups": [
+    {
+      "file": "backup.ts",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "getRuntimeBackup": [
+    {
+      "file": "backup.ts",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "deleteRuntimeBackup": [
+    {
+      "file": "backup.ts",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "takeHistoryBackup": [
+    {
+      "file": "backup.ts",
+      "region": "TakeHistoryBackup",
+      "label": "Take a history backup"
+    }
+  ],
+  "listHistoryBackups": [
+    {
+      "file": "backup.ts",
+      "region": "ListHistoryBackups",
+      "label": "List history backups"
+    }
+  ],
+  "getHistoryBackup": [
+    {
+      "file": "backup.ts",
+      "region": "GetHistoryBackup",
+      "label": "Get a history backup"
+    }
+  ],
+  "deleteHistoryBackup": [
+    {
+      "file": "backup.ts",
+      "region": "DeleteHistoryBackup",
+      "label": "Delete a history backup"
+    }
+  ],
+  "getRuntimeBackupState": [
+    {
+      "file": "backup.ts",
+      "region": "GetRuntimeBackupState",
+      "label": "Get the runtime backup state"
+    }
+  ],
+  "syncRuntimeBackupState": [
+    {
+      "file": "backup.ts",
+      "region": "SyncRuntimeBackupState",
+      "label": "Force-write the runtime backup state"
+    }
+  ],
+  "deleteRuntimeBackupState": [
+    {
+      "file": "backup.ts",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete the runtime backup state"
+    }
+  ],
+  "pauseExporting": [
+    {
+      "file": "exporting.ts",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
+    }
+  ],
+  "resumeExporting": [
+    {
+      "file": "exporting.ts",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
+  ],
+  "getExportingStatus": [
+    {
+      "file": "exporting.ts",
+      "region": "GetExportingStatus",
+      "label": "Get exporting status"
+    }
+  ],
+  "getClusterStatus": [
+    {
+      "file": "admin-operations.ts",
+      "region": "GetClusterStatus",
+      "label": "Get cluster status"
+    }
+  ],
+  "getRestoreStatus": [
+    {
+      "file": "client.ts",
+      "region": "GetRestoreStatus",
+      "label": "Get restore status"
+    }
+  ],
+  "searchOwnAuthorizations": [
+    {
+      "file": "authorization.ts",
+      "region": "SearchOwnAuthorizations",
+      "label": "Search own authorizations"
+    }
+  ],
+  "getAgentDefinition": [
+    {
+      "file": "agent-definition.ts",
+      "region": "GetAgentDefinition",
+      "label": "Get an agent definition"
+    }
+  ],
+  "searchAgentDefinitions": [
+    {
+      "file": "agent-definition.ts",
+      "region": "SearchAgentDefinitions",
+      "label": "Search agent definitions"
+    }
+  ],
+  "takeHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "TakeHistoryBackupAsClusterAdmin",
+      "label": "Take a history backup (cluster admin)"
+    }
+  ],
+  "listHistoryBackupsAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "ListHistoryBackupsAsClusterAdmin",
+      "label": "List history backups (cluster admin)"
+    }
+  ],
+  "getHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "GetHistoryBackupAsClusterAdmin",
+      "label": "Get a history backup (cluster admin)"
+    }
+  ],
+  "deleteHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "DeleteHistoryBackupAsClusterAdmin",
+      "label": "Delete a history backup (cluster admin)"
+    }
+  ],
+  "pauseClusterExporting": [
+    {
+      "file": "exporting.ts",
+      "region": "PauseClusterExporting",
+      "label": "Pause cluster exporting"
+    }
+  ],
+  "resumeClusterExporting": [
+    {
+      "file": "exporting.ts",
+      "region": "ResumeClusterExporting",
+      "label": "Resume cluster exporting"
+    }
+  ],
+  "getClusterExportingStatus": [
+    {
+      "file": "exporting.ts",
+      "region": "GetClusterExportingStatus",
+      "label": "Get cluster exporting status"
     }
   ]
 }

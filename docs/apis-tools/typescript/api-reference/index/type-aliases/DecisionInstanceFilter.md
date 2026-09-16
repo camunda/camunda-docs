@@ -15,6 +15,16 @@ Decision instance search filter.
 
 ## Properties
 
+### businessId?
+
+```ts
+optional businessId?: StringFilterProperty;
+```
+
+The business ID of the owning process instance the decision instance belongs to. This only works for decision instances created with 8.10 and onwards. Decision instances from prior versions and standalone evaluations don't contain this data and cannot be found.
+
+---
+
 ### decisionDefinitionId?
 
 ```ts

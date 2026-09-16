@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Project resource paths and schemas
 paths:
@@ -11,7 +12,9 @@ paths:
       operationId: createProject
       summary: Create a project
       description: Creates a new empty project in the specified workspace.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
+      x-semantic-provider:
+        - projectKey
       tags:
         - Project
       requestBody:
@@ -41,7 +44,13 @@ paths:
       operationId: getProject
       summary: Get a project
       description: Returns the project metadata and its content (child folders and files).
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -58,11 +67,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The project was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -70,7 +75,13 @@ paths:
       operationId: updateProject
       summary: Update a project
       description: Updates the name and/or workspace of an existing project.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -95,7 +106,11 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The project was not found.
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "409":
+          description: >-
+            The project is the workspace's migration-created catch-all and cannot be
+            moved to another workspace.
           content:
             application/problem+json:
               schema:
@@ -107,10 +122,18 @@ paths:
       operationId: deleteProject
       summary: Delete a project
       description: >
-        Deletes the project with the given project key. The project must have no
-        files in the project or any of its descendants. Empty folders and version
-        history are removed as part of the deletion.
-      x-added-in-version: "0.1.0"
+        Soft-deletes the project with the given project key, cascading to all
+        of its descendant folders and files. The project is moved to the
+        recently deleted state and can be recovered during the retention
+        window. To permanently and irreversibly remove a project, use
+        `DELETE /projects/{projectKey}/permanent` instead.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -118,6 +141,41 @@ paths:
       responses:
         "204":
           description: The project was deleted successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}/permanent:
+    delete:
+      operationId: permanentlyDeleteProject
+      summary: Permanently delete a project
+      description: >
+        Permanently and irreversibly removes the project with the given
+        project key. The project cannot be recovered afterwards. Empty
+        folders and version history are removed as part of the deletion.
+        If the project is live (not soft-deleted), then it must not
+        contain any live files anywhere in its subtree. Empty live folders
+        are removed as part of the deletion as well as any soft-deleted
+        items in its subtree. If the project is soft-deleted
+        and has been the target of the operation, then it is deleted with
+        any soft-deleted folders or files it contains. If the project is
+        soft-deleted but has not been the target of the operation (i.e.
+        its ancestor workspace was soft-deleted), then the operation
+        fails with 409. Instead, delete the original target of the
+        soft-delete operation.
+      x-added-in-version: "8.10"
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "204":
+          description: The project was permanently deleted successfully.
         "400":
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
@@ -125,7 +183,12 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The project was not found.
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "409":
+          description: >-
+            The project is soft-deleted but was not itself the target of the
+            soft-delete operation (it was soft-deleted as a descendant of an
+            ancestor workspace).
           content:
             application/problem+json:
               schema:
@@ -138,7 +201,7 @@ paths:
       operationId: searchProjects
       summary: Search projects
       description: Returns projects matching the given search criteria across all workspaces in the caller's organization.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       tags:
         - Project
       requestBody:
@@ -163,6 +226,99 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
+  /projects/recently-deleted/search:
+    post:
+      operationId: searchRecentlyDeletedProjects
+      summary: Search recently deleted projects
+      description: >
+        Returns soft-deleted projects scoped to the caller's organization. Only
+        projects that are the root of their own deletion are listed; a
+        project soft-deleted as part of an ancestor workspace's deletion event
+        is represented by that workspace instead, and a project deleted
+        independently before its workspace stays listed in its own right; use
+        the respective recently-deleted search endpoint to access that
+        workspace entity. Projects remain listed until the
+        retention period expires and the scheduled cleanup job runs; they can
+        also be restored with `POST /projects/{projectKey}/restoration` or
+        permanently removed with `DELETE /projects/{projectKey}/permanent`.
+      x-added-in-version: "8.10"
+      tags:
+        - Project
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecentlyDeletedProjectSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecentlyDeletedProjectSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}/restoration:
+    post:
+      operationId: restoreProject
+      summary: Restore a recently deleted project
+      description: >
+        Restores a soft-deleted project back to the live workspace, together
+        with everything that was soft-deleted as part of the same deletion
+        event. The project cannot be restored while its workspace is still
+        deleted. Only a project that is the root of its own deletion can be
+        restored via this endpoint; a project that was soft-deleted as part
+        of its workspace's deletion event must be restored through the
+        workspace restoration endpoint instead.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "200":
+          description: The project was restored successfully. Returns the restored project.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: >-
+            The recently deleted project was not found, or is not the root of
+            its own deletion.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: >-
+            The project cannot be restored because its workspace is itself
+            deleted. Restore the workspace first.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
 components:
   parameters:
     ProjectKeyPathParam:
@@ -171,7 +327,7 @@ components:
       required: true
       description: The unique key identifying the project.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/ProjectKey"
 
   schemas:
     # --- Request schemas ---
@@ -182,6 +338,9 @@ components:
       required:
         - name
         - workspaceKey
+      example:
+        name: "Payment Flow"
+        workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
       properties:
         name:
           description: The name of the project.
@@ -190,11 +349,14 @@ components:
           maxLength: 255
         workspaceKey:
           description: The key of the workspace this project belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
     ProjectUpdateRequest:
       type: object
       additionalProperties: false
+      example:
+        name: "Payment Flow v2"
       properties:
         name:
           description: The updated name of the project.
@@ -203,13 +365,59 @@ components:
           maxLength: 255
         workspaceKey:
           description: The key of the workspace to move the project to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
     # --- Response schemas ---
 
     ProjectDetailResult:
       type: object
       description: A project with its metadata and content (child folders and files).
+      example:
+        project:
+          projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+          name: "Payment Flow"
+          workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
+          created: "2025-02-01T08:00:00.000Z"
+          createdBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+          updated: "2025-06-10T14:22:00.000Z"
+          updatedBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+        content:
+          folders:
+            - folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
+              name: "processes"
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+              parentFolderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee"
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-03-15T10:30:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+          files:
+            - fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
+              name: "order-process"
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+              folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
+              simplePath: "orders/processes/order-process.bpmn"
+              canonicalPath: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee/bccb5014-10a7-48df-bb56-81cb286594cc"
+              revision: 1
+              type: "bpmn"
+              content: "<?xml version='1.0' encoding='UTF-8'?>..."
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-06-10T14:22:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
       required:
         - project
         - content
@@ -243,6 +451,18 @@ components:
 
     ProjectResult:
       type: object
+      example:
+        projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+        name: "Payment Flow"
+        workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
+        created: "2025-02-01T08:00:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-06-10T14:22:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
       required:
         - projectKey
         - name
@@ -254,13 +474,15 @@ components:
       properties:
         projectKey:
           description: The unique key identifying this project.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         name:
           description: The name of the project.
           type: string
         workspaceKey:
           description: The key of the workspace this project belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
         created:
           description: The timestamp when the project was created.
           type: string
@@ -312,7 +534,9 @@ components:
             - created
             - updated
         order:
-          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     ProjectFilter:
       type: object
@@ -320,6 +544,7 @@ components:
       properties:
         workspaceKey:
           description: Filter by workspace key.
+          x-semantic-type: WorkspaceKey
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:
@@ -355,4 +580,110 @@ components:
           items:
             $ref: "#/components/schemas/ProjectResult"
         page:
-          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    # --- Recently deleted schemas ---
+
+    RecentlyDeletedProjectSearchQuery:
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentlyDeletedProjectSearchQuerySortRequest"
+        filter:
+          description: The recently deleted project search filters.
+          allOf:
+            - $ref: "#/components/schemas/RecentlyDeletedProjectFilter"
+
+    RecentlyDeletedProjectFilter:
+      type: object
+      description: Filter criteria for searching recently deleted projects.
+      properties:
+        projectKey:
+          description: Filter by the key of the deleted project.
+          x-semantic-type: ProjectKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        name:
+          description: Filter by project name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        workspaceKey:
+          description: Filter by the key of the workspace the project belonged to.
+          x-semantic-type: WorkspaceKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        deleted:
+          description: Filter by deletion date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+
+    RecentlyDeletedProjectSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - deleted
+        order:
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    RecentlyDeletedProjectSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The recently deleted projects.
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentlyDeletedProjectResult"
+        page:
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    RecentlyDeletedProjectResult:
+      type: object
+      required:
+        - projectKey
+        - name
+        - workspaceKey
+        - deleted
+        - deletedBy
+      properties:
+        projectKey:
+          description: The unique key identifying the deleted project.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        name:
+          description: The name of the deleted project.
+          type: string
+        workspaceKey:
+          description: The key of the workspace the project belonged to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+        deleted:
+          description: The timestamp when the project was deleted.
+          type: string
+          format: date-time
+        deletedBy:
+          description: The user who deleted the project.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+          nullable: true

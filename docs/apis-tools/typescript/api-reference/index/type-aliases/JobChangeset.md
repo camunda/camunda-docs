@@ -15,6 +15,16 @@ JSON object with changed job attribute values. The job cannot be completed or fa
 
 ## Properties
 
+### priority?
+
+```ts
+optional priority?: number | null;
+```
+
+The new priority for the job. Higher values indicate higher priority.
+
+---
+
 ### retries?
 
 ```ts

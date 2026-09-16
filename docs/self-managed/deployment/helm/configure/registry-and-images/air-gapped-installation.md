@@ -33,22 +33,22 @@ The following images must be available in your air-gapped environment:
 
 **Camunda images:**
 
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/camunda](https://hub.docker.com/r/camunda/camunda)
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
 
 **Optional components:**
 
-- [Web Modeler images](/self-managed/deployment/docker/docker.md#component-images):
-  - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
-  - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
-- [Console images](/self-managed/deployment/docker/docker.md#component-images):
-  - `console/console-sm`
+- [Camunda Hub images](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references):
+  - [camunda/hub](https://hub.docker.com/r/camunda/hub)
+  - [camunda/hub-websockets](https://hub.docker.com/r/camunda/hub-websockets)
 
 **Infrastructure images:**
 
 In Camunda 8.10, the Helm chart no longer bundles infrastructure: the Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak are removed. Provide these through managed services or Kubernetes operators, and mirror the images each one requires into your private registry, following the operator or managed-service documentation. See [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+
+Skip this step if your managed infrastructure services don't require images in your private registry.
 
 :::note
 For the air-gapped procedure based on the bundled Bitnami subcharts (Camunda 8.9 and earlier), see the [8.9 air-gapped guide](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation/).
@@ -62,11 +62,11 @@ All required Camunda images published on Docker Hub are also available in the Ca
 
 - `registry.camunda.cloud/camunda/<image>`
 
-For example, you can pull the Zeebe image from Docker Hub or the Camunda registry:
+For example, you can pull the Camunda image from Docker Hub or the Camunda registry:
 
 ```shell
-docker pull camunda/zeebe:latest
-docker pull registry.camunda.cloud/camunda/zeebe:latest
+docker pull camunda/camunda:latest
+docker pull registry.camunda.cloud/camunda/camunda:latest
 ```
 
 ### Required Helm charts
@@ -129,32 +129,27 @@ global:
     registry: example.jfrog.io
 orchestration:
   image:
-    repository: camunda/zeebe
-    # e.g. work with the latest versions in development
+    repository: camunda/camunda
     tag: latest
 identity:
   image:
     repository: camunda/identity
-    ...
 optimize:
   image:
     repository: camunda/optimize
-    ...
 connectors:
   image:
     repository: camunda/connectors-bundle
-    ...
-webModeler:
+camundaHub:
   image:
-    # registry and tag will be used for both Web Modeler images
+    # registry and tag will be used for both Camunda Hub images
     tag: latest
   restapi:
     image:
-      repository: camunda/web-modeler-restapi
+      repository: camunda/hub
   websockets:
     image:
-      repository: camunda/web-modeler-websockets
-  ...
+      repository: camunda/hub-websockets
 ```
 
 #### Deploy Camunda with custom values

@@ -23,7 +23,7 @@ The **Amazon Simple Notification Service (SNS)** connector is an outbound connec
 To use the **Amazon SNS connector**, you need to have an SNS Topic, IAM key, and secret pair with the `sns:Publish` policy relative to your SNS.
 
 :::note
-Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sns-connector) and the [SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html#sns-policy-keys) to learn more.
+Use secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sns-connector) and the [SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html#sns-policy-keys) to learn more.
 :::
 
 ## Create an Amazon SNS connector task
@@ -84,7 +84,7 @@ Example of a valid message attribute as a FEEL value:
 
 ### How do I store AWS IAM secrets for my SNS connector?
 
-Use Camunda secrets to avoid exposing your AWS IAM credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to avoid exposing your AWS IAM credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### AWS authentication types
 
@@ -174,7 +174,7 @@ When you click on the event with **Amazon SNS inbound connector** applied to it,
 This tab displays the URL of the **Amazon SNS inbound connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use Amazon SNS inbound connectors in Desktop Modeler, or with Camunda 8 Self-Managed.
 In that case, Amazon SNS inbound connector deployments and URLs will not be displayed in Modeler.
 :::

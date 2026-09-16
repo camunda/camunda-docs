@@ -1,7 +1,5 @@
 ---
 title: Building flexibility into BPMN models
-tags:
-  - BPMN
 description: "Sometimes we need ways to build flexibility into process models to deal with operational problems or to allow for humans to intervene."
 ---
 
@@ -82,6 +80,13 @@ As soon as one of our two activities achieves the result, we can cancel the othe
 <span className="callout">2</span>
 
 ...and successfully complete the subprocess and normally continue with our follow-up work.
+
+### Ad-hoc sub-processes
+
+The techniques above keep the sequence of activities fixed and use events to deviate from it. An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) instead leaves the sequence open: its activities carry no sequence flow between them, and which of them run, in which order, and how often is decided at runtime instead of at design time.
+The decision can be made either by the engine, based on an expression in the model, or by a job worker. For example, if the subprocess hosts an AI agent, the AI Agent connector can make the decision.
+
+The symbols above still apply around and within an ad-hoc subprocess. You can use boundary events and [event subprocesses](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#event-sub-processes) to interrupt or redirect it while it is running. Therefore, leaving the sequence open-ended does not mean giving up control over it.
 
 ## Examples
 

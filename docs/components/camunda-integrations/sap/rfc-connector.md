@@ -92,7 +92,7 @@ Application "sap-rfc-connector" started and available at "some.url.hana.ondemand
 
 ### Deployment in Camunda 8 SaaS
 
-- If using Web Modeler, [import the SAP RFC connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) contained in the repository in `element-templates/sap-rfc-connector.json` for use in your process design.
+- If using Camunda Hub, [import the SAP RFC connector's element template](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#importing-an-existing-element-template) contained in the repository in `element-templates/sap-rfc-connector.json` for use in your process design.
 
 ![sap-rfc-connector-task-in-model](./img/sap-rfc-connector-task-in-model.png)
 
