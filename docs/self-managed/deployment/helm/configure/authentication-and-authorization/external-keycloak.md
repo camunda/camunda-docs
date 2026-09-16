@@ -92,7 +92,7 @@ This secret includes the following keys:
 
 The PostgreSQL credentials for Web Modeler are no longer part of this secret. They are provided by the operator (or managed database) that hosts the Web Modeler database, such as the `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
-For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
+For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended).
 
 ### Prepare global configuration
 
