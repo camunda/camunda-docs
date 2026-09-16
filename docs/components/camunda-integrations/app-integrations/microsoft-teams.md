@@ -110,7 +110,7 @@ A channel receives notifications for user tasks that match its configured rules.
 
 To configure notifications, see [notification rules](./notification-rules.md).
 
-### Notification behavior
+#### Notification behavior
 
 Notification cards are interactive. You can assign, complete, or manage tasks directly from the card.
 
