@@ -172,6 +172,8 @@ For additional Keycloak-specific variables you can define under `identity.env`, 
 
 To configure Orchestration Cluster and management components with OIDC, follow the steps in the [Configure components using OIDC section of the internal Keycloak setup guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md#configure-components-using-oidc).
 
+Assign each component its own audience. Keycloak does not enforce this for you, and a shared value lets a token issued for one component be accepted by another. See [Assign a unique audience to each component](./generic-oidc-provider.md#assign-a-unique-audience-to-each-component).
+
 ### Full configuration example
 
 The following example shows a complete configuration for connecting to an external Keycloak instance:

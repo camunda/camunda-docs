@@ -57,12 +57,24 @@ Use `http://localhost:8080` in Helm values when users access via `https://camund
      cut -d'.' -f2 | base64 -d | jq '.aud'
    ```
 
-2. Update the `audience` parameter in Helm values to match this value.
+2. Confirm the `aud` value matches the audience you assigned to that component in [Assign a unique audience to each component](./generic-oidc-provider.md#assign-a-unique-audience-to-each-component). Update either the Helm value or your provider's client configuration so the two agree.
 3. Redeploy Camunda.
 
 :::note
 Some providers, such as Keycloak, may not include the appropriate audience by default. Consult your provider's documentation on configuring token audiences. For Keycloak, see [External Keycloak](./external-keycloak.md).
 :::
+
+## Shared audience between components
+
+**Observed behavior:** A token issued for one Camunda component is also accepted by another component that should not recognize it.
+
+**Why this happens:** Both components are configured with the same audience. A component accepts any token carrying its configured audience, whichever client the token was issued to, so a shared value removes the boundary between them.
+
+**How to fix:**
+
+1. Compare the audience configured for each component against [Assign a unique audience to each component](./generic-oidc-provider.md#assign-a-unique-audience-to-each-component).
+2. Give each component a distinct audience, and configure your provider to issue it.
+3. Redeploy Camunda.
 
 ## Insufficient permissions
 

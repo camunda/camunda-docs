@@ -65,6 +65,8 @@ Application type **Single-page application**:
 - Console (`<console-app>`)
 - Web Modeler UI (`<web-modeler-ui-app>`)
 
+Register these as six separate applications. Camunda uses each application's client ID as that component's audience, so two components sharing a registration also share an audience, and a token issued for one is accepted by the other. Entra issues the same tenant-scoped `iss` claim for every application in your tenant, which makes the audience the only value that distinguishes one component from another.
+
 For **each** of the components above:
 
 1. In the Entra ID admin center, [register the application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
