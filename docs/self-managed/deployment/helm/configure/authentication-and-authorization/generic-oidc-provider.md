@@ -51,6 +51,33 @@ For each client, record:
 - Client secret (for confidential clients only)
   :::
 
+## Assign a unique audience to each component
+
+Each Camunda component validates the `aud` claim of an incoming token against its own configured audience, and accepts any token that carries it.
+
+Components share a single Management Identity instance, so users, roles, and permissions are managed in one place. The audience is what separates the components from each other.
+
+Decide a distinct audience for each component before you configure Helm, then configure your provider to issue it.
+
+| Component              | Helm value                                            | Chart default                      |
+| ---------------------- | ----------------------------------------------------- | ---------------------------------- |
+| Management Identity    | `global.identity.auth.identity.audience`              | `camunda-identity-resource-server` |
+| Orchestration Cluster  | `orchestration.security.authentication.oidc.audience` | `orchestration-api`                |
+| Optimize               | `global.identity.auth.optimize.audience`              | `optimize-api`                     |
+| Web Modeler client API | `global.identity.auth.webModeler.clientApiAudience`   | `web-modeler-api`                  |
+| Web Modeler public API | `global.identity.auth.webModeler.publicApiAudience`   | `web-modeler-public-api`           |
+| Connectors             | Inherits the Orchestration Cluster audience           | `orchestration-api`                |
+
+:::warning
+If two components share an audience, a token issued for one is accepted by the other. Keep every value in this table distinct.
+:::
+
+Do not derive these values by inspecting whatever token your provider returns by default. If several components are registered against one client or API identifier, inspection returns the same `aud` for all of them, so configuring what you find reproduces the collision instead of revealing it. Decide the values first, then use [token inspection](./jwt-token-claims.md) to confirm your provider issues them.
+
+Connectors is the one intended exception: it calls the Orchestration Cluster as a client and therefore uses the Orchestration Cluster's audience. See [Configure Connectors](#configure-connectors).
+
+If you set `global.identity.auth.camundaHub.clientApiAudience` or `global.identity.auth.camundaHub.publicApiAudience`, those values override the corresponding Web Modeler values.
+
 ## Configure redirect URIs
 
 For each OIDC client you have created, configure the redirect URIs that correspond to where Camunda components will be accessible from users' browsers.
@@ -251,12 +278,12 @@ identityPostgresql:
 
 #### Identity-specific parameters
 
-| Parameter           | Description                                  | How to Determine                                                                                |
-| ------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `clientId`          | Client ID from your OIDC provider            | From your Identity client configuration                                                         |
-| `audience`          | Expected audience in access tokens           | From token inspection (see [Discover provider configuration](#discover-provider-configuration)) |
-| `initialClaimName`  | Claim that identifies the initial admin user | `email`, `sub`, or another user claim from token inspection                                     |
-| `initialClaimValue` | Value granting initial admin access          | Your admin user's value for the specified claim (e.g., `admin@example.com`)                     |
+| Parameter           | Description                                  | How to Determine                                                                                                           |
+| ------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`          | Client ID from your OIDC provider            | From your Identity client configuration                                                                                    |
+| `audience`          | Expected audience in access tokens           | The unique value you assigned in [Assign a unique audience to each component](#assign-a-unique-audience-to-each-component) |
+| `initialClaimName`  | Claim that identifies the initial admin user | `email`, `sub`, or another user claim from token inspection                                                                |
+| `initialClaimValue` | Value granting initial admin access          | Your admin user's value for the specified claim (e.g., `admin@example.com`)                                                |
 
 :::warning Initial claim cannot be changed
 The `initialClaimName` and `initialClaimValue` parameters are used only during the first startup to grant initial admin access. Once Management Identity has started, these values are stored in the database and cannot be changed via Helm values.
@@ -299,13 +326,13 @@ orchestration:
 
 #### Orchestration-specific parameters
 
-| Parameter       | Description                        | Value                                                                                          |
-| --------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `clientId`      | Orchestration client ID            | From your provider                                                                             |
-| `audience`      | Expected audience in tokens        | From token inspection                                                                          |
-| `redirectUrl`   | Full URL for Orchestration Cluster | `http://localhost:8080` (local) or `https://your-domain.com/orchestration` (Ingress)           |
-| `usernameClaim` | Claim identifying users            | Default: `preferred_username`. Override if your provider uses `email`, `sub`, or another claim |
-| `clientIdClaim` | Claim identifying clients          | Default: `client_id`. Override if your provider uses `azp` or another claim                    |
+| Parameter       | Description                        | Value                                                                                                                      |
+| --------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`      | Orchestration client ID            | From your provider                                                                                                         |
+| `audience`      | Expected audience in tokens        | The unique value you assigned in [Assign a unique audience to each component](#assign-a-unique-audience-to-each-component) |
+| `redirectUrl`   | Full URL for Orchestration Cluster | `http://localhost:8080` (local) or `https://your-domain.com/orchestration` (Ingress)                                       |
+| `usernameClaim` | Claim identifying users            | Default: `preferred_username`. Override if your provider uses `email`, `sub`, or another claim                             |
+| `clientIdClaim` | Claim identifying clients          | Default: `client_id`. Override if your provider uses `azp` or another claim                                                |
 
 :::note Username display in Web Modeler (Helm)
 In Helm deployments, the default OIDC username claim is `preferred_username`, which often maps to an email address.
@@ -343,7 +370,7 @@ connectors:
 ```
 
 :::info Connectors shares credentials
-Connectors typically uses the same OIDC client as the Orchestration Cluster. This allows the Orchestration Cluster to accept the Connectors client's audience by default, since they share the same client configuration. If you prefer to use a separate OIDC client for Connectors, you'll need to configure the Orchestration Cluster to accept that client's audience.
+Connectors calls the Orchestration Cluster as a client, so it deliberately reuses the Orchestration Cluster's OIDC client and audience. This is a scoped exception to the [unique audience rule](#assign-a-unique-audience-to-each-component), not a general pattern. No other pair of components should share an audience. If you prefer a separate OIDC client for Connectors, you must also configure the Orchestration Cluster to accept that client's audience.
 :::
 
 ### Configure Optimize
@@ -368,11 +395,11 @@ optimize:
 
 #### Optimize parameters
 
-| Parameter     | Value                                                                           |
-| ------------- | ------------------------------------------------------------------------------- |
-| `clientId`    | Optimize client ID from your provider                                           |
-| `audience`    | Expected audience (from token inspection)                                       |
-| `redirectUrl` | `http://localhost:8083` (local) or `https://your-domain.com/optimize` (Ingress) |
+| Parameter     | Value                                                                                                                      |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`    | Optimize client ID from your provider                                                                                      |
+| `audience`    | The unique value you assigned in [Assign a unique audience to each component](#assign-a-unique-audience-to-each-component) |
+| `redirectUrl` | `http://localhost:8083` (local) or `https://your-domain.com/optimize` (Ingress)                                            |
 
 ### Configure Web Modeler
 
@@ -411,12 +438,12 @@ webModelerPostgresql:
 
 #### Web Modeler parameters
 
-| Parameter           | Description                              | Value                                                                          |
-| ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------ |
-| `clientId`          | Web Modeler UI client ID (public client) | From your provider                                                             |
-| `redirectUrl`       | Full URL for Web Modeler                 | `http://localhost:8070` (local) or `https://your-domain.com/modeler` (Ingress) |
-| `clientApiAudience` | Audience for UI-to-API communication     | Usually the UI client ID                                                       |
-| `publicApiAudience` | Audience for external API access         | The API client ID or custom audience                                           |
+| Parameter           | Description                              | Value                                                                                             |
+| ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `clientId`          | Web Modeler UI client ID (public client) | From your provider                                                                                |
+| `redirectUrl`       | Full URL for Web Modeler                 | `http://localhost:8070` (local) or `https://your-domain.com/modeler` (Ingress)                    |
+| `clientApiAudience` | Audience for UI-to-API communication     | A unique value for the Web Modeler client API. Must differ from every other component's audience. |
+| `publicApiAudience` | Audience for external API access         | The API client ID or custom audience                                                              |
 
 #### Email configuration
 
@@ -581,12 +608,12 @@ console:
 
 **Placeholders to replace:**
 
-| Placeholder                                               | Replace with                                 |
-| --------------------------------------------------------- | -------------------------------------------- |
-| `https://your-provider.example.com`                       | Your OIDC provider's issuer URL              |
-| `identity`, `orchestration`, `optimize`, etc.             | Your actual client IDs                       |
-| `identity`, `orchestration`, `optimize` (audience values) | Actual audience values from token inspection |
-| `admin@example.com`                                       | Your admin user's claim value                |
+| Placeholder                                               | Replace with                                       |
+| --------------------------------------------------------- | -------------------------------------------------- |
+| `https://your-provider.example.com`                       | Your OIDC provider's issuer URL                    |
+| `identity`, `orchestration`, `optimize`, etc.             | Your actual client IDs                             |
+| `identity`, `orchestration`, `optimize` (audience values) | The unique audience you assigned to each component |
+| `admin@example.com`                                       | Your admin user's claim value                      |
 
 ### Verify before deploying
 
@@ -594,7 +621,7 @@ console:
 - All client secrets stored in the `oidc-credentials` secret.
 - Database passwords stored in the `camunda-credentials` secret.
 - Redirect URIs in OIDC provider match `redirectUrl` values.
-- Token inspection confirms audience values.
+- Each component has a distinct audience, and token inspection confirms your provider issues it.
 - Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names.
 
 ## Connect to the cluster

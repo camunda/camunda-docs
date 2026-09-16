@@ -64,7 +64,7 @@ Specifies the intended audience of the token.
 
 - **Helm configuration:** `audience`
 - **Claim name:** `aud`
-- **Typical value:** Client ID or a custom value configured in the provider
+- **Typical value:** Client ID or a custom value configured in the provider. Use a distinct value for each component.
 
 ## Common claim patterns by provider
 
@@ -77,9 +77,11 @@ Specifies the intended audience of the token.
 
 ## Verify audience configuration
 
-1. Decode a test token.
-2. Inspect the value of the `aud` claim.
-3. Use that value for the `audience` setting in your Camunda Helm configuration.
+Each component must have its own audience value. For the per-component Helm values, see [Assign a unique audience to each component](./generic-oidc-provider.md#assign-a-unique-audience-to-each-component).
+
+1. Decide the audience for the component, and configure your provider to issue it.
+2. Decode a test token issued for that component.
+3. Confirm the `aud` claim contains the value you configured, and that no other component uses the same value.
 
 :::warning
 The audience claim is required for token validation.  
