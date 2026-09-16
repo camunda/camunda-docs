@@ -7,7 +7,7 @@ description: Run SQL statements, control warehouses, trigger jobs, invoke Model 
 
 The **Databricks connector** allows you to call the [Databricks REST API](https://docs.databricks.com/api/workspace/introduction) from your BPMN process — SQL Statement Execution, SQL Warehouses, Jobs, Model Serving, and Vector Search.
 
-This connector reuses the base implementation of the [REST connector](../protocol/rest.md) by providing a compatible element template. There is no additional runtime to deploy.
+This connector reuses the base implementation of the [REST connector](../../protocol/rest.md) by providing a compatible element template. There is no additional runtime to deploy.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Use secrets to store credentials so you don't expose sensitive information direc
 
 ## Create a Databricks connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task.md';
+import ConnectorTask from '../../../../components/react-components/connector-task.md';
 
 <ConnectorTask/>
 
