@@ -636,6 +636,8 @@ orchestration:
 
 Leaving `content-security-policy` out, as above, keeps the shipped policy in place — see **Default Content Security Policy** in the **Application properties** tab. Setting `content-security-policy.policy-directives` replaces that policy wholesale rather than adding to it, so a minimal value such as `default-src 'self'` drops the sources the web applications need and breaks the UIs. Start from the default policy and adjust it.
 
+<!-- No link to "Default Content Security Policy" in the Application properties tab: the Tabs component on this page has no groupId or lazy prop, so inactive tab panels stay hidden in the DOM and an anchor into one resolves at build time but doesn't navigate for the reader. -->
+
 For how the file is mounted and imported, see [application configuration with `extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#how-extraconfiguration-works-per-component).
 
 ### `orchestration.security.initialization`
