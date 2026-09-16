@@ -5,13 +5,13 @@ title: Configure zone-aware multi-region deployments
 description: Configure the Camunda Helm chart to deploy an Orchestration Cluster across named zones, and understand what the chart derives from the zone list.
 ---
 
-The Camunda Helm chart deploys an Orchestration Cluster across named zones through `orchestration.clusterTopology`. Each zone runs its own release of the chart, and every release describes the same cluster-wide topology, so the zone list is identical everywhere and only the local zone name changes.
+The Camunda Helm chart deploys an Orchestration Cluster across named zones through `orchestration.partitioning`. Each zone runs its own release of the chart, and every release describes the same cluster-wide topology, so the zone list is identical everywhere and only the local zone name changes.
 
 For what zones are and how the application places partition replicas across them, see [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md).
 
 ## Move from global.multiregion
 
-`global.multiregion` is deprecated since chart v15 (Camunda 8.10). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.clusterTopology`. The deprecated keys still work and still render; move them when convenient.
+`global.multiregion` is deprecated since chart v15 (Camunda 8.10). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.partitioning`. The deprecated keys still work and still render; move them when convenient.
 
 Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the broker numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Move them under the new block; the field names and their values are unchanged:
 
@@ -24,38 +24,38 @@ global:
 
 # After
 orchestration:
-  clusterTopology:
+  partitioning:
     regions: 2
     regionId: 1
 ```
 
 Both key paths produce the same broker numbering. The deprecated one renders identically and adds a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
 
-Zone awareness is configured only under `orchestration.clusterTopology`. The `mode`, `zone`, and `zones` keys have never existed under `global.multiregion`, so there is nothing to migrate for a zoned cluster.
+Zone awareness is configured only under `orchestration.partitioning`. The `scheme`, `zone`, and `zones` keys have never existed under `global.multiregion`, so there is nothing to migrate for a zone-aware cluster.
 
-## Choose a multi-region mode
+## Choose a partitioning scheme
 
-`orchestration.clusterTopology.mode` selects how the chart numbers brokers and describes the topology.
+`orchestration.partitioning.scheme` selects how partitions are distributed and how brokers are identified. It mirrors the engine property `camunda.cluster.partitioning.scheme`, so the values are the engine's own enum, lower-cased and hyphenated.
 
-| Mode       | Behavior                                                                                           |
-| :--------- | :------------------------------------------------------------------------------------------------- |
-| `numbered` | Default. Brokers get numeric node IDs and the region is inferred from parity. Two regions at most. |
-| `zoned`    | Brokers belong to named zones and are identified as `<zone>_<index>`. Any number of zones.         |
+| Scheme        | Behavior                                                                                           |
+| :------------ | :------------------------------------------------------------------------------------------------- |
+| `round-robin` | Default. Brokers get numeric node IDs and the region is inferred from parity. Two regions at most. |
+| `zone-aware`  | Brokers belong to named zones and are identified as `<zone>_<index>`. Any number of zones.         |
 
-Existing deployments keep their behavior: when you don't set `mode`, the chart renders exactly as it did before zone awareness existed.
+Existing deployments keep their behavior: when you don't set `scheme`, the chart renders exactly as it did before zone awareness existed.
 
 ## The mode is fixed for the life of the cluster
 
-Zoned brokers are identified by the composite `<zone>_<index>` and numbered brokers by a plain node ID, so switching `mode` on a running release re-identifies every broker against Raft state written under the old identifiers, and the members stop recognizing each other. Choose the mode when you create the cluster. There is no in-place switch today, so moving an existing cluster onto zone awareness means deploying a new one; a migration procedure is planned.
+Zone-aware brokers are identified by the composite `<zone>_<index>` and round-robin brokers by a plain node ID, so switching `scheme` on a running release re-identifies every broker against Raft state written under the old identifiers, and the members stop recognizing each other. Choose the scheme when you create the cluster. There is no in-place switch today, so moving an existing cluster onto zone awareness means deploying a new one; a migration procedure is planned.
 
 ## Describe the topology
 
-In `zoned` mode, set the local zone and list every zone in the cluster:
+With the `zone-aware` scheme, set the local zone and list every zone in the cluster:
 
 ```yaml
 orchestration:
-  clusterTopology:
-    mode: zoned
+  partitioning:
+    scheme: zone-aware
     zone: region-a
     zones:
       - name: region-a
@@ -88,7 +88,7 @@ You describe the topology once, and the chart computes the rest. Knowing what it
 | `camunda.cluster.size`               | Sum of `numberOfBrokers` across all zones                        |
 | `camunda.cluster.replication-factor` | Sum of `numberOfReplicas` across all zones                       |
 | StatefulSet replica count            | `numberOfBrokers` of the local zone                              |
-| `CAMUNDA_CLUSTER_ZONE` in the pod    | `orchestration.clusterTopology.zone`                             |
+| `CAMUNDA_CLUSTER_ZONE` in the pod    | `orchestration.partitioning.zone`                                |
 | `camunda.cluster.node-id`            | The pod ordinal, which is the broker's index inside its own zone |
 
 Because a zone-aware broker is addressed by the composite ID `<zone>_<index>`, the zone name is what keeps each broker unique across the cluster. The index restarts at `0` in every zone, and no cluster-wide offset applies.
@@ -109,7 +109,7 @@ Adding a zone that was not part of the original zone list is not a Helm-only cha
 
 ## Custom application configuration is not merged
 
-`orchestration.configuration` replaces the generated application configuration rather than merging with it. In `zoned` mode the chart therefore does not inject `camunda.cluster.partitioning` into your custom content: if you supply `orchestration.configuration`, describe the zone-aware settings there yourself.
+`orchestration.configuration` replaces the generated application configuration rather than merging with it. With the `zone-aware` scheme the chart therefore does not inject `camunda.cluster.partitioning` into your custom content: if you supply `orchestration.configuration`, describe the zone-aware settings there yourself.
 
 The chart still injects `CAMUNDA_CLUSTER_ZONE` into the pod environment, because that value is per-deployment rather than part of the shared configuration.
 
@@ -119,7 +119,7 @@ The chart rejects the inputs that would otherwise render a cluster that cannot f
 
 | Rejected                                                                                        | Why                                                                                                                                        |
 | :---------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| `zone` or `zones` set while `mode` is not `zoned`                                               | The topology would be ignored and the cluster would come up single-region with no bootstrap peers.                                         |
+| `zone` or `zones` set while `scheme` is not `zone-aware`                                        | The topology would be ignored and the cluster would come up single-region with no bootstrap peers.                                         |
 | `zone` unset, or naming a zone absent from `zones`                                              | The release would take the broker IDs of the first zone and collide with it.                                                               |
 | A zone name that repeats                                                                        | Zone names are member ID prefixes, so a duplicate collapses two zones into one identity space.                                             |
 | A zone with more `numberOfReplicas` than `numberOfBrokers`                                      | A zone cannot hold more replicas of a partition than it has brokers to hold them.                                                          |
@@ -128,7 +128,7 @@ The chart rejects the inputs that would otherwise render a cluster that cannot f
 
 The schema also requires each `zones` entry to declare `name`, `numberOfBrokers`, `numberOfReplicas`, and `priority`, with each numeric value at least `1`.
 
-The last two are rejected only when they carry a non-default value. Helm gives no reliable way to tell a value you supplied from the chart default, so a key that happens to equal its default stays inert rather than failing the render. None of them is removed or renamed, and all keep working in `numbered` mode.
+The last two are rejected only when they carry a non-default value. Helm gives no reliable way to tell a value you supplied from the chart default, so a key that happens to equal its default stays inert rather than failing the render. None of them is removed or renamed, and all keep working with the `round-robin` scheme.
 
 The application owns the checks the chart cannot make from values alone, including replica counts against the resulting partition distribution and the remaining zone constraints.
 
