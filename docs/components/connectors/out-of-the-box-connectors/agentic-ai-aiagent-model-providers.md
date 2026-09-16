@@ -32,6 +32,45 @@ These two choices are independent, so the same model family may be available thr
 
 The most capable option within your organization's approved boundary is the correct choice; the native wire format alone doesn't determine it.
 
+## Configure reusable credentials
+
+Version 2 of the native AI Agent element templates requires a reusable credential for each built-in model backend in Camunda 8.10 or later.
+
+This applies to AI Agent Task and AI Agent Sub-process, including their hybrid templates. Authentication and shared connection settings belong in the credential, not inline on the task. Custom provider implementations and conversation-memory connections are unchanged.
+
+1. Select the **Provider**, **Backend**, and, for OpenAI, **API** on the task. New templates default to **OpenAI**, **Custom / compatible endpoint**, and **Responses**.
+2. [Create or select a credential](/components/hub/organization/credentials/modeling-interface.md) of the type required by that backend. The chooser lists only matching credential types.
+3. Configure the **Model** and its parameters on the task. Review any endpoint or region overrides before deploying.
+
+| Provider and backend                                                                 | Credential type                   | Settings stored in the credential                                                                                |
+| :----------------------------------------------------------------------------------- | :-------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| Anthropic > Anthropic API                                                            | Anthropic API Credential          | API key.                                                                                                         |
+| OpenAI > OpenAI API                                                                  | OpenAI API Credential             | API key, optional organization ID, and optional project ID.                                                      |
+| OpenAI > Microsoft Foundry (Azure)                                                   | Microsoft Foundry Credential      | Resource endpoint and authentication.                                                                            |
+| Anthropic or OpenAI > Custom / compatible endpoint                                   | AI Gateway Credential             | Gateway endpoint and API key.                                                                                    |
+| Anthropic > AWS Bedrock Mantle, or AWS Bedrock Converse, with AWS IAM authentication | AWS Credential                    | AWS authentication and optional default region. This is the shared credential type used by other AWS connectors. |
+| Anthropic > AWS Bedrock Mantle, or AWS Bedrock Converse, with API key authentication | Amazon Bedrock API Key Credential | Bedrock API key and AWS region.                                                                                  |
+| Google Gemini > Google Gemini API                                                    | Google Gemini API Credential      | API key.                                                                                                         |
+| Google Gemini > Enterprise Agent Platform (Vertex AI)                                | Vertex AI Credential              | Project ID, region, and authentication.                                                                          |
+
+Use [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) for sensitive values. In credential fields, reference a secret as `camunda.secrets.MY_API_KEY`, without braces. This differs from the `{{secrets.MY_API_KEY}}` syntax used in connector fields.
+
+### Connection overrides and compatibility
+
+The selected credential supplies authentication and shared connection settings, with these task-level exceptions:
+
+| Task field                                                  | Behavior                                                                                                               |
+| :---------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| **API endpoint override** for a custom / compatible backend | A non-blank value overrides the gateway endpoint from the credential. Leave it empty to use the credential's endpoint. |
+| **AWS region override** for Bedrock Mantle or Converse      | A non-blank value overrides the credential's region. Required if the AWS credential has no default region.             |
+| **Custom endpoint** for Bedrock Mantle or Converse          | Overrides the default service endpoint for the effective AWS region.                                                   |
+
+Other credential connection values take precedence over corresponding inline values, including OpenAI organization/project IDs, the Microsoft Foundry resource endpoint and authentication, and Vertex AI project/region settings. Provider, backend, API, model, and model parameters remain task-specific.
+
+Older templates and deployed jobs with inline authentication remain supported. Applying version 2 requires selecting a credential; the template no longer offers inline authentication fields. See [upgrade AI Agent element templates](./agentic-ai-aiagent-upgrade.md) before updating an existing process.
+
+AI Gateway credentials support API-key authentication. Existing inline jobs can continue using OAuth 2.0, or no authentication for Anthropic-compatible endpoints, but the new credential-only templates don't expose those authentication options.
+
 ## Supported providers
 
 Select and configure the model **Provider** you want to use from the following supported providers. Each section below covers that provider's available backends, authentication, model settings, and provider-specific parameters:
@@ -41,10 +80,6 @@ Select and configure the model **Provider** you want to use from the following s
 - [OpenAI](#openai) (directly, via Microsoft Foundry/Azure, or via a custom OpenAI-compatible endpoint).
 - [Google Gemini](#google-gemini) (directly, or via Google Enterprise Agent Platform).
 - [Custom implementation](#custom-implementation) (Self-Managed/Hybrid only).
-
-:::tip
-Use [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly in the process.
-:::
 
 ### Anthropic
 
@@ -59,20 +94,22 @@ Select this provider to use an Anthropic Claude LLM model. Choose a **Backend** 
 
 The native, hosted Anthropic API.
 
-| Field                 | Required | Description                                                                                                                   |
-| :-------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| **Anthropic API key** | Yes      | Your Anthropic account API key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
+| Field                        | Required | Description                                                                   |
+| :--------------------------- | :------- | :---------------------------------------------------------------------------- |
+| **Anthropic API credential** | Yes      | Select an Anthropic API Credential containing your Anthropic account API key. |
 
 </TabItem>
 <TabItem value="bedrock-mantle">
 
 Run Anthropic Claude models hosted on Amazon Bedrock while keeping access to Anthropic-specific configuration (reasoning/extended thinking, prompt caching) that the generic [AWS Bedrock Converse](#aws-bedrock-converse) provider doesn't expose.
 
-| Field               | Required | Description                                                                                                                                                                                                                                                                                                          |
-| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **AWS region**      | Yes      | The AWS region. For example, `eu-west-1`.                                                                                                                                                                                                                                                                            |
-| **Custom endpoint** | No       | Custom API endpoint for VPC/PrivateLink configurations or other non-standard deployments. Must be the full Bedrock Mantle base URL, including the `/anthropic` path segment (for example, `https://your-vpce-host/anthropic`). It replaces the default `https://bedrock-mantle.<region>.api.aws/anthropic` verbatim. |
-| **Authentication**  | Yes      | Select the authentication method used to authenticate with AWS: **Credentials** (access key/secret key), **API key**, or **Default Credentials Chain** (Hybrid/Self-Managed only). See [Amazon Bedrock connector authentication](./amazon-bedrock.md#authentication) for details on each method.                     |
+| Field                                 | Required    | Description                                                                                                                                                                                                                                                                                                          |
+| :------------------------------------ | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Authentication family**             | Yes         | Select **AWS IAM** or **Amazon Bedrock API key**, then select the matching reusable credential.                                                                                                                                                                                                                      |
+| **AWS credential**                    | For AWS IAM | Select an AWS Credential containing your AWS authentication settings. The default credentials chain is available in hybrid/Self-Managed deployments only.                                                                                                                                                            |
+| **Amazon Bedrock API key credential** | For API key | Select an Amazon Bedrock API Key Credential containing your API key and region.                                                                                                                                                                                                                                      |
+| **AWS region override**               | Depends     | Overrides the credential's region. Required if the AWS credential has no default region. For example, `eu-west-1`.                                                                                                                                                                                                   |
+| **Custom endpoint**                   | No          | Custom API endpoint for VPC/PrivateLink configurations or other non-standard deployments. Must be the full Bedrock Mantle base URL, including the `/anthropic` path segment (for example, `https://your-vpce-host/anthropic`). It replaces the default `https://bedrock-mantle.<region>.api.aws/anthropic` verbatim. |
 
 Bedrock Mantle supports a different set of models than Bedrock Runtime, and model availability also varies by AWS Region. Before selecting a model, check [Amazon Bedrock endpoint availability](https://docs.aws.amazon.com/bedrock/latest/userguide/models-endpoint-availability.html) and the linked model details for current endpoint and regional support.
 
@@ -81,10 +118,10 @@ Bedrock Mantle supports a different set of models than Bedrock Runtime, and mode
 
 Any endpoint implementing the Anthropic Messages API, such as a proxy or gateway in front of Anthropic.
 
-| Field              | Required | Description                                                                         |
-| :----------------- | :------- | :---------------------------------------------------------------------------------- |
-| **API endpoint**   | Yes      | Base URL of the Anthropic-compatible API. `/v1/messages` is appended automatically. |
-| **Authentication** | No       | **None**, or **API key** to send an API key with the request.                       |
+| Field                     | Required | Description                                                                                   |
+| :------------------------ | :------- | :-------------------------------------------------------------------------------------------- |
+| **AI Gateway credential** | Yes      | Select an AI Gateway Credential for the Anthropic-compatible endpoint.                        |
+| **API endpoint override** | No       | Overrides the gateway endpoint from the credential. `/v1/messages` is appended automatically. |
 
 </TabItem>
 </Tabs>
@@ -113,11 +150,13 @@ Select this provider to use a model provided by the [Amazon Bedrock](https://doc
 This is the right choice for non-Anthropic model families available on Bedrock. For example, Amazon Nova, Meta Llama, or Mistral models. If you're running **Anthropic Claude** models on Bedrock, use the [Anthropic provider](#anthropic)'s AWS Bedrock Mantle backend to access Anthropic-specific configuration.
 :::
 
-| Field               | Required | Description                                                                                                                                                                                                                                                                                      |
-| :------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **AWS region**      | Yes      | The AWS region. For example, `eu-west-1`.                                                                                                                                                                                                                                                        |
-| **Custom endpoint** | No       | Custom API endpoint for VPC/PrivateLink configurations or other non-standard deployments. Overrides the default Bedrock Runtime endpoint for the region.                                                                                                                                         |
-| **Authentication**  | Yes      | Select the authentication method used to authenticate with AWS: **Credentials** (access key/secret key), **API key**, or **Default Credentials Chain** (Hybrid/Self-Managed only). See [Amazon Bedrock connector authentication](./amazon-bedrock.md#authentication) for details on each method. |
+| Field                                 | Required    | Description                                                                                                                                               |
+| :------------------------------------ | :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Authentication family**             | Yes         | Select **AWS IAM** or **Amazon Bedrock API key**, then select the matching reusable credential.                                                           |
+| **AWS credential**                    | For AWS IAM | Select an AWS Credential containing your AWS authentication settings. The default credentials chain is available in hybrid/Self-Managed deployments only. |
+| **Amazon Bedrock API key credential** | For API key | Select an Amazon Bedrock API Key Credential containing your API key and region.                                                                           |
+| **AWS region override**               | Depends     | Overrides the credential's region. Required if the AWS credential has no default region. For example, `eu-west-1`.                                        |
+| **Custom endpoint**                   | No          | Custom API endpoint for VPC/PrivateLink configurations or other non-standard deployments. Overrides the default Bedrock Runtime endpoint for the region.  |
 
 Model availability depends on the region and model. See [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) and [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
 
@@ -154,23 +193,20 @@ Use **Responses** by default. It's OpenAI's current API and designed for newer r
 
 The native, hosted OpenAI API.
 
-| Field               | Required | Description                                                                                                                                                                                |
-| :------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **OpenAI API key**  | Yes      | Your OpenAI account API key for authorization.                                                                                                                                             |
-| **Organization ID** | No       | For members of multiple organizations, the organization ID to use for API requests. See the [authentication documentation](https://platform.openai.com/docs/api-reference/authentication). |
-| **Project ID**      | No       | For accounts with multiple projects, the project ID to use for API requests. See the [authentication documentation](https://platform.openai.com/docs/api-reference/authentication).        |
+| Field                     | Required | Description                                                                                                                                                                                                      |
+| :------------------------ | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **OpenAI API credential** | Yes      | Select an OpenAI API Credential containing your API key and optional organization and project IDs. See the [OpenAI authentication documentation](https://platform.openai.com/docs/api-reference/authentication). |
 
 </TabItem>
 <TabItem value="foundry">
 
 OpenAI models deployed through [Microsoft Foundry](https://ai.azure.com/) or Azure OpenAI.
 
-| Field              | Required | Description                                                                                                                                                   |
-| :----------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **API endpoint**   | Yes      | The full resource endpoint, for example `https://your-resource.openai.azure.com` or a Foundry endpoint such as `https://your-resource.services.ai.azure.com`. |
-| **Authentication** | Yes      | **API key**, **Entra ID: Client credentials**, or **Entra ID: Managed identity** (Hybrid/Self-Managed only).                                                  |
+| Field                            | Required | Description                                                                                |
+| :------------------------------- | :------- | :----------------------------------------------------------------------------------------- |
+| **Microsoft Foundry credential** | Yes      | Select a Microsoft Foundry Credential containing the resource endpoint and authentication. |
 
-Authentication fields per method:
+In the credential, set **Resource endpoint** to the full resource endpoint, for example `https://your-resource.openai.azure.com` or `https://your-resource.services.ai.azure.com`. Configure authentication in the credential using one of these methods:
 
 - **API key**: an API key for the resource, available in the [Azure AI Foundry portal](https://ai.azure.com/).
 - **Entra ID: Client credentials**: registers an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908) and authenticates with it.
@@ -192,10 +228,10 @@ A multi-replica connectors runtime setup means each replica also acquires and ca
 
 Connect to any LLM that exposes an OpenAI-compatible API, including open-weight models such as Qwen, Llama, and Mistral, hosted through Ollama or any compatible inference platform.
 
-| Field            | Required | Description                                                                                                                              |
-| :--------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| **API endpoint** | Yes      | Base URL of the OpenAI-compatible API. `/chat/completions` or `/responses` is appended automatically, depending on the selected **API**. |
-| **API key**      | Yes      | The API key for authentication.                                                                                                          |
+| Field                     | Required | Description                                                                                                                                           |
+| :------------------------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AI Gateway credential** | Yes      | Select an AI Gateway Credential for the OpenAI-compatible endpoint.                                                                                   |
+| **API endpoint override** | No       | Overrides the gateway endpoint from the credential. `/chat/completions` or `/responses` is appended automatically, depending on the selected **API**. |
 
 </TabItem>
 </Tabs>
@@ -225,20 +261,20 @@ Select this provider to use Google's Gemini models. Choose a **Backend** to spec
 
 The direct, hosted Gemini API.
 
-| Field              | Required | Description                    |
-| :----------------- | :------- | :----------------------------- |
-| **Gemini API key** | Yes      | Your Google AI Studio API key. |
+| Field                            | Required | Description                                                                     |
+| :------------------------------- | :------- | :------------------------------------------------------------------------------ |
+| **Google Gemini API credential** | Yes      | Select a Google Gemini API Credential containing your Google AI Studio API key. |
 
 </TabItem>
 <TabItem value="eap">
 
 Gemini models through Google Cloud's Enterprise Agent Platform (formerly Vertex AI).
 
-| Field              | Required | Description                                                                                                                                                                                                                                                                                                                                                                      |
-| :----------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Project ID**     | Yes      | The Google Cloud project ID.                                                                                                                                                                                                                                                                                                                                                     |
-| **Region**         | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place.                                                                                                                                                                                                                                               |
-| **Authentication** | Yes      | **Service account credentials** (a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format), or **Application default credentials** (Hybrid/Self-Managed only; uses the default credentials available in the environment; see [setting up ADC locally](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment)). |
+| Field                    | Required | Description                                                                                        |
+| :----------------------- | :------- | :------------------------------------------------------------------------------------------------- |
+| **Vertex AI credential** | Yes      | Select a Vertex AI Credential containing your Google Cloud project ID, region, and authentication. |
+
+Set the inference [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) in the credential. For authentication, configure **Service account credentials** with a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format, or **Application default credentials** in hybrid/Self-Managed deployments. Application default credentials use the credentials available in the runtime environment; see [setting up ADC locally](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
 
 </TabItem>
 </Tabs>
