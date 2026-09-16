@@ -34,7 +34,7 @@ The most capable option within your organization's approved boundary is the corr
 
 ## Configure reusable credentials
 
-Version 2 of the native AI Agent element templates requires a reusable credential for each built-in model backend in Camunda 8.10 or later.
+The new native AI Agent element templates require a reusable credential for each built-in model backend in Camunda 8.10 or later.
 
 This applies to AI Agent Task and AI Agent Sub-process, including their hybrid templates. Authentication and shared connection settings belong in the credential, not inline on the task. Custom provider implementations and conversation-memory connections are unchanged.
 
@@ -47,7 +47,7 @@ This applies to AI Agent Task and AI Agent Sub-process, including their hybrid t
 | Anthropic > Anthropic API                                                            | Anthropic API Credential          | API key.                                                                                                         |
 | OpenAI > OpenAI API                                                                  | OpenAI API Credential             | API key, optional organization ID, and optional project ID.                                                      |
 | OpenAI > Microsoft Foundry (Azure)                                                   | Microsoft Foundry Credential      | Resource endpoint and authentication.                                                                            |
-| Anthropic or OpenAI > Custom / compatible endpoint                                   | AI Gateway Credential             | Gateway endpoint and API key.                                                                                    |
+| Anthropic or OpenAI > Custom / compatible endpoint                                   | AI Gateway Credential             | Gateway endpoint and API key or OAuth 2.0 client credentials.                                                    |
 | Anthropic > AWS Bedrock Mantle, or AWS Bedrock Converse, with AWS IAM authentication | AWS Credential                    | AWS authentication and optional default region. This is the shared credential type used by other AWS connectors. |
 | Anthropic > AWS Bedrock Mantle, or AWS Bedrock Converse, with API key authentication | Amazon Bedrock API Key Credential | Bedrock API key and AWS region.                                                                                  |
 | Google Gemini > Google Gemini API                                                    | Google Gemini API Credential      | API key.                                                                                                         |
@@ -55,7 +55,20 @@ This applies to AI Agent Task and AI Agent Sub-process, including their hybrid t
 
 Use [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) for sensitive values. In credential fields, reference a secret as `camunda.secrets.MY_API_KEY`, without braces. This differs from the `{{secrets.MY_API_KEY}}` syntax used in connector fields.
 
-### Connection overrides and compatibility
+### AI Gateway authentication
+
+The AI Gateway Credential supports both Anthropic- and OpenAI-compatible endpoints. Choose the authentication method inside the credential.
+
+| Authentication | Required settings                                                                     | Optional settings    |
+| :------------- | :------------------------------------------------------------------------------------ | :------------------- |
+| **API key**    | API key.                                                                              | None.                |
+| **OAuth 2.0**  | OAuth 2.0 token endpoint, client ID, client secret, and client authentication method. | Audience and scopes. |
+
+OAuth 2.0 uses the client credentials grant. **Client authentication** defaults to **Send as Basic Auth header**; select **Send client credentials in body** if your authorization server requires it. The connector obtains and caches access tokens and sends them as bearer tokens to the gateway.
+
+Authentication fields appear only for the selected method. The task exposes only the credential chooser, not inline API-key or OAuth fields. The credential doesn't offer a no-authentication option.
+
+### Connection overrides
 
 The selected credential supplies authentication and shared connection settings, with these task-level exceptions:
 
@@ -65,11 +78,7 @@ The selected credential supplies authentication and shared connection settings, 
 | **AWS region override** for Bedrock Mantle or Converse      | A non-blank value overrides the credential's region. Required if the AWS credential has no default region.             |
 | **Custom endpoint** for Bedrock Mantle or Converse          | Overrides the default service endpoint for the effective AWS region.                                                   |
 
-Other credential connection values take precedence over corresponding inline values, including OpenAI organization/project IDs, the Microsoft Foundry resource endpoint and authentication, and Vertex AI project/region settings. Provider, backend, API, model, and model parameters remain task-specific.
-
-Older templates and deployed jobs with inline authentication remain supported. Applying version 2 requires selecting a credential; the template no longer offers inline authentication fields. See [upgrade AI Agent element templates](./agentic-ai-aiagent-upgrade.md) before updating an existing process.
-
-AI Gateway credentials support API-key authentication. Existing inline jobs can continue using OAuth 2.0, or no authentication for Anthropic-compatible endpoints, but the new credential-only templates don't expose those authentication options.
+All other authentication and shared connection settings come from the credential. Provider, backend, API, model, and model parameters remain task-specific.
 
 ## Supported providers
 

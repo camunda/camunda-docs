@@ -15,7 +15,7 @@ Starting with Camunda 8.10, new element templates are available for the [AI Agen
 - Prompt caching configuration (Anthropic, AWS Bedrock Converse).
 - New backend options: [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#anthropic) for Anthropic Claude models and [Google Gemini API](./agentic-ai-aiagent-model-providers.md#google-gemini) for direct Gemini access. Microsoft Foundry was already available as **Azure OpenAI** in the legacy templates. It is now a backend of the general-purpose OpenAI provider, rather than its own top-level provider.
 - A [custom chat model provider](./agentic-ai-aiagent-model-providers.md#custom-implementation) option, for Self-Managed/hybrid deployments.
-- Reusable credentials for built-in model backends, starting with version 2 of the native templates. Authentication and shared connection settings are managed in a credential instead of repeated on each task.
+- Reusable credentials for built-in model backends. Authentication and shared connection settings are managed in a credential instead of repeated on each task.
 
 The legacy element templates keep working, and existing implementations don't need to migrate immediately. However, they don't expose the new provider and backend choices or provider-specific configuration described above. Apply a new element template to use these capabilities.
 
@@ -41,15 +41,7 @@ Swapping the element template affects only the process definition you redeploy. 
 ## Model provider configuration mapping
 
 Model provider configuration changed the most in this redesign, since providers and backends are now decoupled (see [choose a provider and backend](./agentic-ai-aiagent-model-providers.md#choose-a-provider-and-backend)).
-The sections below compare legacy fields with version 2 of the native templates. Authentication and shared connection settings move to credentials; model settings stay on the task. Any fields not mentioned carry over unchanged under the same field label.
-
-### Upgrade an earlier native template
-
-If you already use version 1 of a native AI Agent template, upgrade that template to version 2 and select the matching reusable credential.
-
-Older templates and deployed jobs with inline authentication remain supported. Selecting a credential makes its authentication and shared connection values authoritative; inline values aren't a fallback for missing credential fields. Only the documented [endpoint and region overrides](./agentic-ai-aiagent-model-providers.md#connection-overrides-and-compatibility) take precedence over credential settings.
-
-Review the provider, backend, API, model, and overrides after upgrading, then test in a non-production environment before deploying. Custom provider implementations and conversation-memory connections don't require credential migration.
+The sections below compare legacy fields with the new native templates. Authentication and shared connection settings move to credentials; model settings stay on the task. Any fields not mentioned carry over unchanged under the same field label.
 
 ### Anthropic
 
@@ -138,20 +130,20 @@ The legacy template always used the Chat Completions API. The new template defau
 
 **Legacy template Provider**: OpenAI-compatible → **New template Provider**: [OpenAI](./agentic-ai-aiagent-model-providers.md#openai), **Backend**: Custom / compatible endpoint.
 
-Create an AI Gateway Credential with the gateway endpoint and API key, then select it on the task. Use **API endpoint override** only for a task-specific endpoint. **Headers**, **Query parameters**, **Timeout**, **Model**, **Temperature**, and **top P** remain task settings.
+Create an AI Gateway Credential with the gateway endpoint and API-key or OAuth 2.0 authentication, then select it on the task. Use **API endpoint override** only for a task-specific endpoint. **Headers**, **Query parameters**, **Timeout**, **Model**, **Temperature**, and **top P** remain task settings.
 
 | Legacy field              | New template field                                                        |
 | :------------------------ | :------------------------------------------------------------------------ |
 | Maximum completion tokens | Max completion tokens (Chat Completions) or Max output tokens (Responses) |
 | Custom parameters         | Body properties                                                           |
 
-The credential requires a non-blank **API key**, even if your legacy template made it optional. If your legacy **Headers** contained an `Authorization` header, it took precedence over the API key:
+For **API key** authentication, the credential requires a non-blank **API key**, even if your legacy template made it optional. If your legacy **Headers** contained an `Authorization` header, it took precedence over the API key:
 
 - For `Bearer <token>`, move the token value without the `Bearer` prefix into the credential's **API key** field. Remove the `Authorization` header from **Headers**.
 - For any other scheme, such as `Basic ...`, keep the header in **Headers**. Enter a non-blank placeholder in the credential's **API key** field; the custom header remains the effective authentication.
 - Without an `Authorization` header, carry over your API key. If the endpoint requires no authentication, use a non-blank placeholder and verify that the endpoint accepts the resulting request.
 
-Existing inline jobs using OAuth 2.0 remain supported, but AI Gateway credentials don't provide OAuth 2.0 authentication. Keep those jobs on their existing template until an appropriate credential option is available.
+For gateways using OAuth 2.0 client credentials, select **OAuth 2.0** inside the AI Gateway Credential and enter the token endpoint, client ID, client secret, and client authentication method. Configure audience and scopes if required. Remove any static `Authorization` header so it doesn't override the acquired token. See [AI Gateway authentication](./agentic-ai-aiagent-model-providers.md#ai-gateway-authentication).
 
 Also check the resulting request path. The new template appends `/chat/completions` or `/responses` to the effective gateway endpoint for the selected **API**. This may differ from your legacy endpoint.
 
