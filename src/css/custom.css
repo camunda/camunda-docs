@@ -2503,6 +2503,26 @@ h3 + .release-announcement-row {
   margin: 0;
 }
 
+/* Table's own outer border duplicates the container border; drop it so only
+   the container border shows. */
+.expandable-table-container table th:first-child,
+.expandable-table-container table td:first-child {
+  border-left: none;
+}
+
+.expandable-table-container table th:last-child,
+.expandable-table-container table td:last-child {
+  border-right: none;
+}
+
+.expandable-table-container table thead tr:first-child th {
+  border-top: none;
+}
+
+.expandable-table-container table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .expandable-table-header {
   display: flex;
   align-items: center;
@@ -2510,7 +2530,6 @@ h3 + .release-announcement-row {
   gap: 0.75rem;
   padding: 0.5rem 0.75rem;
   background: var(--ifm-background-surface-color);
-  border-bottom: 1px solid var(--ifm-color-emphasis-300);
 }
 
 .expandable-table-header-title {
@@ -2605,6 +2624,10 @@ h3 + .release-announcement-row {
   border: none;
   margin-bottom: 0;
   color: var(--ifm-color-emphasis-900);
+}
+
+[data-theme="dark"] .expanded-table-modal-title {
+  border: none;
 }
 
 .expanded-table-modal-contents table {
