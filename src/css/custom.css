@@ -2501,26 +2501,7 @@ h3 + .release-announcement-row {
 
 .expandable-table-container table {
   margin: 0;
-}
-
-/* Table's own outer border duplicates the container border; drop it so only
-   the container border shows. */
-.expandable-table-container table th:first-child,
-.expandable-table-container table td:first-child {
-  border-left: none;
-}
-
-.expandable-table-container table th:last-child,
-.expandable-table-container table td:last-child {
-  border-right: none;
-}
-
-.expandable-table-container table thead tr:first-child th {
-  border-top: none;
-}
-
-.expandable-table-container table tbody tr:last-child td {
-  border-bottom: none;
+  padding: 15px;
 }
 
 .expandable-table-header {
@@ -2534,7 +2515,7 @@ h3 + .release-announcement-row {
 
 .expandable-table-header-title {
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--ifm-color-emphasis-900);
 }
 
