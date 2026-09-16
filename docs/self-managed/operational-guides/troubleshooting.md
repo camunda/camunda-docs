@@ -13,7 +13,7 @@ to be external and therefore require SSL.
 
 As the [Camunda Helm Charts](https://artifacthub.io/packages/helm/camunda/camunda-platform) currently do
 not provide support for the distribution of the Keycloak TLS key to the other containers, we recommend viewing the solution available in the
-[Identity documentation](/self-managed/components/management-identity/miscellaneous/troubleshoot-identity.md#solution-2-identity-making-requests-from-an-external-ip-address).
+[Identity documentation](/self-managed/components/management-identity/miscellaneous/troubleshoot-identity.md#solution-2-management-identity-making-requests-from-an-external-ip-address).
 
 ## Identity redirect URL
 
@@ -118,7 +118,7 @@ Therefore, if you are not using the [ingress-nginx controller](https://github.co
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -274,7 +274,7 @@ as queued requests can time out before they are processed.
 Development and testing scenarios that are performance-sensitive may
 [disable authentication entirely](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development),
 or use
-[OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials).
+[OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt).
 
 ## Find available container image versions
 

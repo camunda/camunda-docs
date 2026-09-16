@@ -40,7 +40,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
-- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed), and have evaluated sufficient CPU, memory, and storage necessary for the deployment.
+- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md), and have evaluated sufficient CPU, memory, and storage necessary for the deployment.
 
 Ensure all prerequisites are in place to avoid issues during installation or when upgrading in a production environment.
 
@@ -74,7 +74,7 @@ kubectl create namespace orchestration
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
 :::note
-For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
+For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-camunda-hub).
 :::
 
 ### Install the Helm chart
@@ -247,7 +247,7 @@ For more information on connecting to external databases, the following guides a
 - Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
 - [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
 - Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
-- Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/hub/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
+- Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/hub/configuration/database.md#running-camunda-hub-on-amazon-aurora-postgresql)
 
 ## Orchestration Cluster configuration
 

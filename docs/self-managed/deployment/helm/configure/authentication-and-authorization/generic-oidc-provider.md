@@ -304,7 +304,7 @@ In Helm deployments, the default OIDC username claim is `preferred_username`, wh
 
 If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
-For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
+For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak).
 :::
 
 #### Default roles

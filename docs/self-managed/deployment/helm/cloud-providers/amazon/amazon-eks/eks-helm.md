@@ -265,7 +265,7 @@ Without this step, Management Identity and Web Modeler will fail to connect to t
 <Tabs groupId="values">
   <TabItem value="with-domain-std" label="Standard with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -316,7 +316,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
   <TabItem value="with-domain-irsa" label="IRSA with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -347,7 +347,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
   <TabItem value="with-domain-rdbms" label="RDBMS with domain">
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -465,7 +465,7 @@ You can track the progress of the installation with the deployment readiness che
 
 #### Web Modeler
 
-As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/hub/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/hub/configuration/database.md#running-camunda-hub-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Identity
