@@ -371,6 +371,21 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### `key` sort field on the Tenant search endpoint deprecated
+
+The `key` sort field on the [Search tenants](/apis-tools/orchestration-cluster-api-rest/specifications/search-tenants.api.mdx) endpoint (`POST /v2/tenants/search`) is now deprecated. Sorting by this internal numeric identifier is inconsistent with other Identity entities (User, Group, and Mapping Rule), which do not expose key-based sorting, and tenants can no longer be filtered by `key` either.
+
+**Action:** Sort by `name` or `tenantId` instead.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -448,20 +463,32 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 </div>
 </div>
 
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Connectors change 1
+#### Webhook `responseBodyExpression` rejected at deployment {#webhook-response-body-expression}
 
-Connectors change 1 description.
+Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
 
-**Action:** Description.
+The connector runtime reports the connector as **DOWN**, and the validation error is included in the connector's status message.
+
+**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. Unlike `responseBodyExpression`, which set only the response body, `responseExpression` returns a full HTTP response:
+
+```json
+={
+  "body": {"myCustomKey": request.body.myDataKey1},
+  "statusCode": 201,
+  "headers": {"Content-Type": "application/json"}
+}
+```
+
+<p className="link-arrow">[Response expression](/components/connectors/protocol/http-webhook.md#response-expression)</p>
 
 </div>
-</div> -->
+</div>
 
 ## Data
 

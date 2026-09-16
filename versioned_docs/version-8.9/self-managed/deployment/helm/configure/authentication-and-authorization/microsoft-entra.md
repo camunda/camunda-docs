@@ -146,7 +146,7 @@ This secret includes the following keys:
 - `literal=webmodeler-postgresql-admin-password`: Password for the administrative PostgreSQL account used by Web Modeler (`postgres`).
 - `webmodeler-postgresql-user-password` Password for the non-privileged PostgreSQL account used by Web Modeler (`web-modeler`).
 
-For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
+For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended).
 
 ### Configure components using OIDC
 
