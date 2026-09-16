@@ -104,7 +104,7 @@ As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/ac
 
 To create a backup, complete the following [backup process](#back-up-process).
 
-Steps that changed with Camunda 8.10 show both APIs: the Orchestration Cluster REST API is the default tab and the recommended path for new deployments, and the management (actuator) API is available as a backward-compatible alternative for existing automation. See [REST API](../backup-and-restore.md#rest-api) for the full endpoint list and how it maps to the management API.
+Steps that changed with Camunda 8.10 show both APIs: the Orchestration Cluster REST API is the default tab and the recommended path for new deployments, and the management (actuator) API is available as a backward-compatible alternative for existing automation. See [REST API](../backup-and-restore.md#rest-api) for the concepts shared across steps, including how each management API call maps to its REST equivalent.
 
 You can also optionally [back up your Camunda Hub data](#back-up-hub-data).
 
@@ -241,7 +241,7 @@ The runtime backup step below then creates a consistent backup of each partition
 
 ### 2. Start the web applications backup (Operate / Tasklist)
 
-This is a history backup: it covers the exported data Operate and Tasklist read from secondary storage, and is only available when secondary storage is Elasticsearch or OpenSearch.
+This step initiates a coordinated snapshot on Elasticsearch or OpenSearch, where Operate and Tasklist historic data are present. It is available only when secondary storage is Elasticsearch or OpenSearch.
 
    <Tabs groupId="backup-api">
       <TabItem value="rest" label="REST API" default>
@@ -729,7 +729,7 @@ This remains relevant if you run Optimize, which still relies on the former expo
 
 ### 8. Create the Zeebe broker backup
 
-This is a runtime backup: it covers Zeebe's own primary storage, independent of secondary storage.
+This step creates a runtime backup, covering Zeebe's own primary storage independently of secondary storage.
 
    <Tabs groupId="backup-api">
       <TabItem value="rest" label="REST API" default>

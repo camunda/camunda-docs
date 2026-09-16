@@ -95,21 +95,7 @@ The steps outlined on this page are generally applicable for any kind of deploym
 
 ### REST API
 
-With Camunda 8.10, the Orchestration Cluster (Zeebe and the web applications) exposes backup, exporting control, and restore as [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) endpoints under `/v2/...`. Use the REST API for new deployments: it's authenticated and authorized like the rest of the Orchestration Cluster API, works the same way whether you run one Physical Tenant or several, and is the surface Camunda expects to keep building on.
-
-| Operation               | Endpoint                                                                                                                        |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Take a runtime backup   | [`POST /backups/runtime`](/apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup.api.mdx)                |
-| Check a runtime backup  | [`GET /backups/runtime/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup.api.mdx)       |
-| List runtime backups    | [`GET /backups/runtime`](/apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups.api.mdx)                |
-| Delete a runtime backup | [`DELETE /backups/runtime/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/delete-runtime-backup.api.mdx) |
-| Take a history backup   | [`POST /backups/history`](/apis-tools/orchestration-cluster-api-rest/specifications/take-history-backup.api.mdx)                |
-| Check a history backup  | [`GET /backups/history/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/get-history-backup.api.mdx)       |
-| List history backups    | [`GET /backups/history`](/apis-tools/orchestration-cluster-api-rest/specifications/list-history-backups.api.mdx)                |
-| Delete a history backup | [`DELETE /backups/history/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/delete-history-backup.api.mdx) |
-| Pause exporting         | [`POST /exporting/pause`](/apis-tools/orchestration-cluster-api-rest/specifications/pause-exporting.api.mdx)                    |
-| Resume exporting        | [`POST /exporting/resume`](/apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting.api.mdx)                  |
-| Check exporting status  | [`GET /exporting`](/apis-tools/orchestration-cluster-api-rest/specifications/get-exporting-status.api.mdx)                      |
+With Camunda 8.10, the Orchestration Cluster (Zeebe and the web applications) exposes backup, exporting control, and restore as [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) endpoints under `/v2/...`. Use the REST API for new deployments: it's authenticated and authorized like the rest of the Orchestration Cluster API, works the same way whether you run one Physical Tenant or several, and is the surface Camunda expects to keep building on. Each step of the [back up process](./elasticsearch/backup.md#back-up-process) links to the specific REST endpoint it uses.
 
 A runtime backup requires the `BACKUP:CREATE` permission; a history backup requires `BACKUP:CREATE` as well and is only available when secondary storage is Elasticsearch or OpenSearch. Pausing and resuming exporting each require their own `EXPORTER:PAUSE` permission, separate from `BACKUP:CREATE`. Pausing exporting before a backup is a recommended practice, not something the API enforces together with the backup call: a soft pause (`?soft=true`) keeps exporting running but stops it from committing its position, which avoids log compaction removing data your backup still needs. See [back up process](./elasticsearch/backup.md#back-up-process) for how the two calls fit together in a procedure.
 
