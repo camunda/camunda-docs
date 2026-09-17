@@ -120,4 +120,17 @@ camunda:
             keyPassword: <YOUR_PRIVATE_KEY_PASSWORD>
 ```
 
+## Start the cluster when an identity provider is unreachable
+
+The Orchestration Cluster starts even if it cannot reach a configured OIDC provider. It requests the provider's discovery document at the first request that needs the provider, and not during startup. A provider that is still starting, or that is temporarily down, therefore no longer keeps the cluster from coming up.
+
+While a provider is unreachable:
+
+- Requests that cannot be authenticated without that provider fail with a server error. This includes a browser login through the provider and an API request with a token the provider issued.
+- Every other request succeeds, including requests authenticated by a provider that answers.
+- Each following request makes a new attempt, so the cluster serves the affected traffic again as soon as the provider answers. You do not need to restart the cluster.
+- The cluster logs one warning per minute for each resolution step that fails: a client registration, a token decoder, or a UserInfo mapping. The warning names the provider, its issuer, and the affected scope.
+
+Watch for that warning in your log pipeline. Because an unreachable provider no longer stops the cluster, the warning is how you learn that part of your authentication traffic is failing.
+
 A comprehensive list of available configuration properties can be found in [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
