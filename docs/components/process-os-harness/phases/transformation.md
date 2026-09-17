@@ -9,7 +9,7 @@ keywords:
 
 Transformation turns the signed-off as-is process into a to-be design. ProcessOS Harness elicits your criteria, analyzes each phase of the process, and then challenges every system, data flow, and manual step it found.
 
-How far the challenge goes is up to you. The phase offers tiers that range from a safe optimization pass to an agent-first redesign, so you can compare options before committing to one.
+You choose how far the challenge goes. The phase offers tiers that range from a safe optimization pass to an agent-first redesign, so you can compare options before committing to one.
 
 ## Run a transformation
 

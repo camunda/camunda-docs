@@ -23,13 +23,12 @@ Because the interaction model is iterative, plan for more than one cycle per pha
 
 ProcessOS Harness stores review questions in structured YAML files, such as `transformation/review-questions.yaml`. SMEs rarely want to edit YAML, so you can export the questions into a more familiar format and import the answers afterwards.
 
-| Command                                 | What it produces                                                  |
-| --------------------------------------- | ----------------------------------------------------------------- |
-| `/process-os-questions-md-export`       | A Markdown copy of the questions, for answering in a text editor. |
-| `/process-os-questions-xlsx-export`     | A spreadsheet copy, for answering in Excel.                       |
-| `/process-os-review-answer-application` | Applies answered questions back into the discovery documents.     |
-
-SMEs can also answer questions in Camunda Tasklist, because the governance process presents them as Camunda Forms.
+| Type             | Command                                 | What it produces                                                                                                   |
+| ---------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Skill            | `/process-os-questions-md-export`       | A Markdown copy of the questions, for answering in a text editor.                                                  |
+| Skill            | `/process-os-questions-xlsx-export`     | A spreadsheet copy, for answering in Excel.                                                                        |
+| Camunda Tasklist | Camunda Tasklist                        | SMEs can also answer questions in Camunda Tasklist, because the governance process presents them as Camunda Forms. |
+| Skill            | `/process-os-review-answer-application` | Applies answered questions back into the discovery documents.                                                      |
 
 ## Review artifacts directly
 

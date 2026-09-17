@@ -10,14 +10,6 @@ The governance process is the Camunda Solution Methodology implemented as an exe
 
 Because the process runs on Camunda, your engagement is auditable by construction. Project state is tracked in Camunda, and every artifact is committed to Git.
 
-## Start and attach to a governance run
-
-Start a run with `/process-os-governance-start`. The skill configures the connection to your Camunda cluster, which can be local, SaaS, or Self-Managed, and then either attaches to an active process instance or creates one.
-
-Use `/process-os-governance-start --reconnect` to attach again after a break, rather than starting a second instance for the same project.
-
-The governance process needs a Camunda cluster that's reachable across your organization, because it coordinates SME feedback as well as your own work.
-
 ## Phases and milestones
 
 The engagement runs through four phases in order, and each one is backed by a skill. The output of one phase is the input to the next.
@@ -31,30 +23,21 @@ The engagement runs through four phases in order, and each one is backed by a sk
 
 Milestones matter more than the route between them. ProcessOS Harness gives you the flexibility to do whatever a project needs between two milestones, and the milestones keep the project moving in a direction everyone can verify.
 
-## Work is done in governance jobs
+## How work is done
 
-Every step the governance process delegates is a service task backed by a job worker, and all of these tasks share the same shape.
+The governance process assigns each step of work to one of two task types, so a builder and their SMEs always know where to act.
 
-| Field             | Purpose                                                                                                           |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Skill name        | The ProcessOS Harness skill to run for this step.                                                                 |
-| Skill mode        | The mode the skill runs in.                                                                                       |
-| Skill input       | A FEEL context passed into the skill, for example `={discoveryQuestions: discoveryQuestions}`.                    |
-| Run configuration | Run configuration keys merged into `run.config.yaml` before the skill runs, for example `={"max-iterations": 3}`. |
+| Task type    | Where you complete it                                     | Typical use                                                                                     |
+| ------------ | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Human task   | Camunda Tasklist, using a form.                           | Structured input from a person: process scope, SME answers to discovery gaps, review decisions. |
+| Builder task | The AI coding agent, driven by a ProcessOS Harness skill. | Anything an agent can generate, transform, or check: discovery specialists, BPMN, forms, tests. |
 
-The job type isn't edited per task. It's derived from the project name, because the activation skill reconstructs the same value from `.camunda/governance.json`. A per-task change would make the task impossible to activate.
+Both task types share the same auditability. Human task outcomes land as process variables and form submissions in Camunda; builder task outcomes land as committed artifacts in Git and job completions in Camunda.
 
-Apply the ProcessOS Harness Governance Job element template to a task, and the Modeler properties panel asks for these fields instead of raw Zeebe extension elements. Desktop Modeler finds the template automatically by walking up from the diagram directory. For Web Modeler, upload and publish the template to the project first.
+For the steps a single job goes through, see [how a builder task works](builder-task.md).
 
-## Drive jobs manually
+## Next steps
 
-You aren't limited to what the process hands you. The governance skills let you drive the run directly, which is useful when you're recovering from an error or want to repeat a step.
-
-| Command                                             | What it does                                                                                                          |
-| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `/process-os-governance-job-activation [<jobType>]` | Activate one pending job, and output its key, instance key, and custom headers.                                       |
-| `/process-os-governance-job-completion [<jobKey>]`  | Complete or fail the active job, forwarding any outbound variables. Use `--fail` and `--message` to report a failure. |
-| `/process-os-governance-job-update <jobKey>`        | Extend a job's lock timeout. Use `--timeout 1` to release a stuck job.                                                |
-| `/process-os-lifecycle-status`                      | Show the current lifecycle status of the project.                                                                     |
-
-For the loop a single job goes through, see [how a builder task works](../other-features/builder-task.md).
+- Learn how [review cycles](review-cycle.md) bring SMEs into each phase.
+- Understand [how a builder task works](builder-task.md).
+- Start the first phase, described in [discover the as-is process](../phases/discovery.md).

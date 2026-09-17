@@ -7,31 +7,21 @@ keywords:
   ["ProcessOS Harness", "builder task", "auditability", "governance job"]
 ---
 
-A builder task is the smallest unit of work in a ProcessOS Harness engagement. Every step the governance process delegates runs through the same five-step loop, which is what makes the engagement predictable even though the agent's output isn't.
+A builder task is a unit of work that is executed in the AI Coding Agent. Each task runs as a (Camunda) job, with a skill doing the main work and the builder overseeing, judging, and revising it. This shape gives every task three properties at once: guidance from the governance process for what to do, auditability through Camunda and Git, and full flexibility for the builder to do whatever else the job needs.
 
-## The loop
+![alt text](../img/builder-task-in-modeler.png)
+
+## The five steps
 
 1. **Activate the job.** The agent pulls the next pending job from the governance process running on Camunda, along with its skill name, skill mode, and run configuration.
 1. **Execute the skill.** The agent runs the ProcessOS Harness skill named in the job, producing or updating files in your project.
-1. **Take your builder action.** You review what the skill produced, correct it, rerun it, or do whatever else the situation needs. This is the open part of the loop.
+1. **Take your builder action.** You review what the skill produced, correct it, rerun it, or do whatever else the situation needs. This is the open part of the task.
 1. **Commit to version control.** The result is committed to Git, which makes the change part of the permanent project record.
 1. **Complete the job.** The agent pushes the outcome back to the governance process, which then decides the next step.
 
-Steps 1 and 5 are handled by the agent against Camunda. Step 3 is yours.
+Steps 1 and 5 are handled by the agent against Camunda. You handle step 3.
 
-## Why the loop has this shape
-
-The five steps exist to deliver three properties at once, which is difficult when the work itself is done by a non-deterministic agent.
-
-| Property     | How the loop provides it                                                                                                               |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Guidance     | The governance process holds the state, so it always knows which job comes next. You never have to reconstruct where a project stands. |
-| Auditability | Every job is tracked in Camunda and every artifact is committed to Git, so each change has a decision and an author behind it.         |
-| Flexibility  | Inside a job you can act freely, and you can call any skill directly at any time without waiting for the process to offer it.          |
-
-Flexibility is the part that's easy to miss. The governance process suggests a route, but it doesn't restrict you to it. When a job's output isn't good enough, rerun the skill, edit the files by hand, or ask the agent to fix a specific problem before you complete the job.
-
-## Drive the loop manually
+## Drive the steps manually
 
 The governance skills expose each step, which is useful when you're recovering from a failure or repeating work.
 

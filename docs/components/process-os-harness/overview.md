@@ -39,17 +39,15 @@ ProcessOS Harness runs your engagement as a governed process with defined phases
 | Transform | Transform the as-is process into an agentic to-be process.                      |
 | Implement | Generate and implement the executable Camunda solution.                         |
 
-Each phase ends at a milestone: process scope defined, as-is model finalized, to-be models finalized, and solution ready for production. SME review gates sit on the path between them.
+Each phase ends at a milestone: process scope defined, as-is model finalized, to-be models finalized, and solution ready for production. Between milestones, [SME review cycles](get-started/review-cycle.md) act as gates that validate progress before the project moves on.
 
 The governance process itself runs on Camunda. Project state lives in Camunda and every artifact is committed to Git, so the whole engagement is auditable. For details, see [how the governance process works](get-started/governance-process.md).
-
-Improving a running solution and re-engineering it again are part of the wider lifecycle, but they're outside the scope of this release.
 
 ### Progress comes from iterations and your judgment
 
 AI isn't deterministic, so ProcessOS Harness doesn't produce a finished solution in a single pass. Project maturity rises through iterations across discovery, transformation, and implementation, and thinking in iterations is the skill that matters most.
 
-Your expert judgment is what turns agent output into a working system. ProcessOS Harness generates artifacts and runs tests, but you decide when a result is good enough to carry into the next phase. Plan for review, correction, and another iteration rather than for a single hand-off.
+Your expert judgment is what turns agent output into a working system. ProcessOS Harness generates artifacts and runs tests, but you assess each result and confirm when it is ready to carry into the next phase. Plan for review, correction, and another iteration rather than for a single hand-off.
 
 The AI coding agent supports you throughout. You can ask it to fix problems at any point, including working around defects you hit along the way.
 
@@ -57,22 +55,24 @@ The AI coding agent supports you throughout. You can ask it to fix problems at a
 
 ProcessOS Harness runs all phases for both use cases, but uses different modes within them.
 
-| Use case          | What it does                                                                                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Legacy migration  | Transforms processes running on a legacy system to Camunda 8, as a first step before AI transformation. There's no optimization for specific source systems. |
-| AI transformation | Transforms any process into an automated, AI-native process executable on Camunda 8.                                                                         |
+| Use case          | What it does                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------- |
+| Legacy migration  | Transforms processes running on a legacy system to Camunda 8, as a first step before AI transformation. |
+| AI transformation | Transforms any process into an automated, AI-native process executable on Camunda 8.                    |
 
-## What ProcessOS Harness doesn't do
+Legacy migration transformations can be optimized for specific source systems. Get in contact with Camunda to learn more.
 
-ProcessOS Harness stops at a generated, tested solution. It doesn't:
+## Current scope
 
-- Deploy to production, or manage the full application lifecycle.
-- Set up the Camunda platform, or implement CI/CD.
-- Build applications or custom user interfaces. It generates Camunda Forms only.
-- Measure process performance, or analyze quantitative data such as process mining.
-- Build organizational memory across projects.
+Today, ProcessOS Harness focuses on taking you from discovery to a generated, tested Camunda solution. The following areas sit outside this release and are on the roadmap for future iterations:
 
-In this release, each project is isolated with private memory and is built on a local machine. There's no shared memory across projects and no multi-project management.
+- Production deployment and full application lifecycle management.
+- Camunda platform setup and CI/CD integration.
+- Custom application and user interface generation beyond Camunda Forms.
+- Process performance measurement and quantitative analysis such as process mining.
+- Shared organizational memory across projects.
+
+In this release, each project runs locally with its own private memory. Cross-project memory and multi-project management are planned for future releases.
 
 ## Get started
 

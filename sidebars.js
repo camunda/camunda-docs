@@ -93,6 +93,53 @@ module.exports = {
     "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
+      label: "ProcessOS Harness",
+      link: {
+        type: "doc",
+        id: "components/process-os-harness/overview",
+      },
+      items: [
+        "components/process-os-harness/overview",
+        "components/process-os-harness/project-setup",
+        {
+          type: "category",
+          label: "Get started",
+          link: {
+            type: "doc",
+            id: "components/process-os-harness/get-started",
+          },
+          items: [
+            "components/process-os-harness/get-started/governance-process",
+            "components/process-os-harness/get-started/review-cycle",
+            "components/process-os-harness/get-started/builder-task",
+          ],
+        },
+        {
+          type: "category",
+          label: "Phases",
+          items: [
+            "components/process-os-harness/phases/discovery",
+            "components/process-os-harness/phases/transformation",
+            "components/process-os-harness/phases/implementation",
+          ],
+        },
+        {
+          type: "category",
+          label: "Other features",
+          items: [
+            "components/process-os-harness/other-features/artifact-generation",
+          ],
+        },
+        {
+          type: "category",
+          label: "Best practices",
+          items: ["components/process-os-harness/best-practices/data-handling"],
+        },
+        "components/process-os-harness/system-requirements",
+      ],
+    },
+    {
+      type: "category",
       label: "Agentic orchestration",
       link: {
         type: "doc",
@@ -161,52 +208,6 @@ module.exports = {
         },
         "components/hub/workspace/modeler/idp/idp-key-concepts",
         "components/hub/workspace/modeler/idp/idp-reference",
-      ],
-    },
-    {
-      type: "category",
-      label: "ProcessOS Harness",
-      link: {
-        type: "doc",
-        id: "components/process-os-harness/overview",
-      },
-      items: [
-        "components/process-os-harness/project-setup",
-        {
-          type: "category",
-          label: "Get started",
-          link: {
-            type: "doc",
-            id: "components/process-os-harness/get-started",
-          },
-          items: [
-            "components/process-os-harness/get-started/governance-process",
-            "components/process-os-harness/get-started/review-cycle",
-          ],
-        },
-        {
-          type: "category",
-          label: "Phases",
-          items: [
-            "components/process-os-harness/phases/discovery",
-            "components/process-os-harness/phases/transformation",
-            "components/process-os-harness/phases/implementation",
-          ],
-        },
-        {
-          type: "category",
-          label: "Other features",
-          items: [
-            "components/process-os-harness/other-features/builder-task",
-            "components/process-os-harness/other-features/artifact-generation",
-          ],
-        },
-        {
-          type: "category",
-          label: "Best practices",
-          items: ["components/process-os-harness/best-practices/data-handling"],
-        },
-        "components/process-os-harness/system-requirements",
       ],
     },
     "reference/mcp-docs/docs-mcp",
