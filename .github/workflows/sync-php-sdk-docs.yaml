@@ -51,6 +51,10 @@ jobs:
         with:
           repository: camunda/camunda-docs
           path: docs
+          # The PR is created with a dedicated app token (see "Generate token"),
+          # so the checkout token is not needed downstream. Do not persist it,
+          # to keep it out of reach of the SDK code executed below.
+          persist-credentials: false
 
       - name: Checkout PHP SDK
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -58,6 +62,9 @@ jobs:
           repository: camunda/orchestration-cluster-api-php
           ref: ${{ steps.resolve.outputs.sdk_ref }}
           path: php-sdk
+          # sdk_ref is user-selectable and its code runs via `make docs-docusaurus`;
+          # never leave a token in this checkout's Git config for it to read.
+          persist-credentials: false
 
       - name: Set up PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2.37.2
@@ -130,8 +137,11 @@ jobs:
             npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
           fi
 
-          # Discard generated MDX — this step only validates, not commits
+          # Discard generated MDX — this step only validates, not commits.
+          # Restore tracked files and drop any newly generated untracked pages so
+          # an unrelated REST spec change never leaks into the PHP SDK sync PR.
           git checkout -- "$DOCS_ROOT/apis-tools/orchestration-cluster-api-rest/specifications/" || true
+          git clean -fd "$DOCS_ROOT/apis-tools/orchestration-cluster-api-rest/specifications/" || true
 
       - name: Check for SDK example changes
         working-directory: docs
