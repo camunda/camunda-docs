@@ -92,6 +92,8 @@ While the incident is active, the job is not activatable, so the broker does not
 
 Resolve the incident only after correcting the variable value or the input mapping that produced it. Resolving the incident makes the job activatable again, and Camunda retries injection against the current job variables.
 
+Injection is only retried when the job is next activated. If no worker is connected for the job's type, the broker does not activate the job, so injection is not retried and the incident does not reappear even when the cause is still present. Keep a worker connected so the incident re-raises promptly if the cause is not yet fixed.
+
 If you cannot restore the placeholder, use [process instance modification](process-instance-modification.md) to reactivate the element. This creates a new job and detects its secret references again.
 
 ## Reduce oversized secret values
@@ -109,6 +111,8 @@ Camunda raises this incident only when the oversized job is first in the activat
 ### Retry after reducing the size
 
 Resolve the incident only after reducing the size of the secret value or the job variables. Otherwise, the next activation attempt fails in the same way.
+
+The size check only runs when the job is next activated. If no worker is connected for the job's type, the broker does not activate the job, so the check does not run and the incident does not reappear even when the values are still too large. Keep a worker connected so the incident re-raises promptly if the size is not yet reduced.
 
 To reduce the job variables included in activation, adjust the worker's `fetchVariables` list. Variables the worker does not fetch are excluded from the activation and do not count toward the message-size limit.
 
