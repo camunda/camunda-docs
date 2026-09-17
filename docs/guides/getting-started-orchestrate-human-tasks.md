@@ -143,7 +143,7 @@ Don't worry about saving your process diagram. Every change you make is automati
    - **Field label**: `Options`
    - **Key**: `meal`. The key maps to a process variable. The value of the component will be stored in this variable, and it can be read by the process that uses this form. You use `meal` here because you already used this key for the conditions you set up in the process.
      <img src={FormValuesTop} style={{width: 250}} alt="Defining a radio group's name and key" />
-1. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value.
+1. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value. The `meal = "<OPTION>"` conditions you configured earlier are case-sensitive. Make sure the values you set here match those exactly.
    <img src={FormValuesBottom} style={{width: 250}} alt="Defining a radio group's static option values" />
 
 </TabItem>
