@@ -31,7 +31,7 @@ To create a new document classification template:
 1. In your [IDP project](./idp-projects.md), click **Create new** and select **Classification template**.
 2. **Name**: Enter a descriptive name for the classification template, such as "Incoming document classifier".
 3. **Description**: Enter a description to provide more information about what types of documents this template classifies.
-4. **Provider**: Select the cloud provider you want to use for classification. The available providers depend on the [connector secrets](./idp-configuration.md) configured for your environment.
+4. **Provider**: Select the cloud provider you want to use for classification. The available providers depend on the [connector secrets](./idp-configuration.md) configured for your environment's cluster.
 
 5. Click **Create** to create and open the new classification template.
 
