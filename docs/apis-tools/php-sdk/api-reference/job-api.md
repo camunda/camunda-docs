@@ -1,13 +1,13 @@
 ---
 id: job-api
-title: "Job Api"
-sidebar_label: "Job Api"
+title: "Job API"
+sidebar_label: "Job API"
 sidebar_position: 24
 mdx:
   format: md
 ---
 
-# Job Api
+# Job API
 
 `JobApi` — 12 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\JobApi::class)`.
 

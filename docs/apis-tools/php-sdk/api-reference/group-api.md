@@ -1,13 +1,13 @@
 ---
 id: group-api
-title: "Group Api"
-sidebar_label: "Group Api"
+title: "Group API"
+sidebar_label: "Group API"
 sidebar_position: 22
 mdx:
   format: md
 ---
 
-# Group Api
+# Group API
 
 `GroupApi` — 15 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\GroupApi::class)`.
 

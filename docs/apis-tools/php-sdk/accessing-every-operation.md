@@ -24,7 +24,9 @@ $result   = $client->createProcessInstance($instruction);
 
 // The async client exposes the same surface, returning promises:
 $async = CamundaAsyncClient::fromEnvironment();
-$async->getTopology()->then(fn ($topology) => /* ... */);
+$async->getTopology()->then(function ($topology) {
+    // Handle the resolved topology.
+});
 ```
 
 Beyond the ergonomic helpers and the flat facade, every API group is also reachable
@@ -37,4 +39,4 @@ $processInstances = $client->api(ProcessInstanceApi::class);
 $result = $processInstances->createProcessInstance($instruction);
 ```
 
-See the [`examples/`](https://github.com/camunda/orchestration-cluster-api-php/blob/main/examples/) directory for compilable, static-analysed usage of the most common operations.
+See the [`examples/`](https://github.com/camunda/orchestration-cluster-api-php/blob/main/examples/) directory for compilable, static-analyzed usage of the most common operations.

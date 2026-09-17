@@ -1,13 +1,13 @@
 ---
 id: batch-operation-api
-title: "Batch Operation Api"
-sidebar_label: "Batch Operation Api"
+title: "Batch Operation API"
+sidebar_label: "Batch Operation API"
 sidebar_position: 8
 mdx:
   format: md
 ---
 
-# Batch Operation Api
+# Batch Operation API
 
 `BatchOperationApi` — 6 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\BatchOperationApi::class)`.
 

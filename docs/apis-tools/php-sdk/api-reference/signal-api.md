@@ -1,14 +1,14 @@
 ---
 id: signal-api
-title: "Signal Api"
-sidebar_label: "Signal Api"
+title: "Signal API"
+sidebar_label: "Signal API"
 sidebar_position: 36
 mdx:
   format: md
 ---
 
-# Signal Api
+# Signal API
 
-`SignalApi` — 1 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\SignalApi::class)`.
+`SignalApi` — 1 operation. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\SignalApi::class)`.
 
 - `broadcastSignal()`

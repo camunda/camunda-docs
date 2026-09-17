@@ -1,13 +1,13 @@
 ---
 id: exporting-api
-title: "Exporting Api"
-sidebar_label: "Exporting Api"
+title: "Exporting API"
+sidebar_label: "Exporting API"
 sidebar_position: 18
 mdx:
   format: md
 ---
 
-# Exporting Api
+# Exporting API
 
 `ExportingApi` — 6 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ExportingApi::class)`.
 

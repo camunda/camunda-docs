@@ -1,13 +1,13 @@
 ---
 id: recovery-api
-title: "Recovery Api"
-sidebar_label: "Recovery Api"
+title: "Recovery API"
+sidebar_label: "Recovery API"
 sidebar_position: 31
 mdx:
   format: md
 ---
 
-# Recovery Api
+# Recovery API
 
 `RecoveryApi` — 5 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\RecoveryApi::class)`.
 

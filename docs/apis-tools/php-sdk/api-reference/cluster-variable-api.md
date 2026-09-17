@@ -1,13 +1,13 @@
 ---
 id: cluster-variable-api
-title: "Cluster Variable Api"
-sidebar_label: "Cluster Variable Api"
+title: "Cluster Variable API"
+sidebar_label: "Cluster Variable API"
 sidebar_position: 11
 mdx:
   format: md
 ---
 
-# Cluster Variable Api
+# Cluster Variable API
 
 `ClusterVariableApi` — 9 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ClusterVariableApi::class)`.
 

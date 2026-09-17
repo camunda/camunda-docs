@@ -1,13 +1,13 @@
 ---
 id: process-instance-api
-title: "Process instance Api"
-sidebar_label: "Process instance Api"
+title: "Process instance API"
+sidebar_label: "Process instance API"
 sidebar_position: 30
 mdx:
   format: md
 ---
 
-# Process instance Api
+# Process instance API
 
 `ProcessInstanceApi` — 23 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ProcessInstanceApi::class)`.
 

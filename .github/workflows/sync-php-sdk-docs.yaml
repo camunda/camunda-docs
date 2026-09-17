@@ -24,11 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCS_VERSION: ${{ github.event.inputs.docs_version || '' }}
+      SDK_REF: ${{ github.event.inputs.sdk_ref || 'main' }}
     steps:
       - name: Resolve refs and paths
         id: resolve
         run: |
-          VERSION="${{ github.event.inputs.docs_version }}"
+          VERSION="$DOCS_VERSION"
           if [ -n "$VERSION" ]; then
             if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+$'; then
               echo "::error::docs_version must be in X.Y format (e.g. '8.10'), got: '$VERSION'"
@@ -39,27 +40,27 @@ jobs:
             echo "pr_branch=update-php-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
           else
-            echo "sdk_ref=${{ github.event.inputs.sdk_ref || 'main' }}" >> "$GITHUB_OUTPUT"
+            echo "sdk_ref=${SDK_REF}" >> "$GITHUB_OUTPUT"
             echo "docs_root=docs" >> "$GITHUB_OUTPUT"
             echo "pr_branch=update-php-sdk-docs" >> "$GITHUB_OUTPUT"
             echo "version_label=next" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout PHP SDK
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/orchestration-cluster-api-php
           ref: ${{ steps.resolve.outputs.sdk_ref }}
           path: php-sdk
 
       - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2.37.2
         with:
           php-version: "8.3"
           extensions: json, mbstring
@@ -67,7 +68,7 @@ jobs:
 
       - name: Copy SDK examples for code samples
         run: |
-          VERSION="${{ github.event.inputs.docs_version }}"
+          VERSION="$DOCS_VERSION"
           if [ -n "$VERSION" ]; then
             EXAMPLES_TARGET="docs/.sdk-repos/version-${VERSION}/orchestration-cluster-api-php/examples"
           else
@@ -104,7 +105,7 @@ jobs:
           echo "Copied landing page + ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
 
@@ -143,7 +144,7 @@ jobs:
         id: check_changes
         working-directory: docs
         run: |
-          if git diff-index --quiet HEAD; then
+          if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           else
@@ -174,7 +175,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs

@@ -1,13 +1,13 @@
 ---
 id: tenant-api
-title: "Tenant Api"
-sidebar_label: "Tenant Api"
+title: "Tenant API"
+sidebar_label: "Tenant API"
 sidebar_position: 38
 mdx:
   format: md
 ---
 
-# Tenant Api
+# Tenant API
 
 `TenantApi` — 20 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\TenantApi::class)`.
 

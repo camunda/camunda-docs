@@ -1,13 +1,13 @@
 ---
 id: variable-api
-title: "Variable Api"
-sidebar_label: "Variable Api"
+title: "Variable API"
+sidebar_label: "Variable API"
 sidebar_position: 41
 mdx:
   format: md
 ---
 
-# Variable Api
+# Variable API
 
 `VariableApi` — 2 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\VariableApi::class)`.
 
