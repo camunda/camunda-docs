@@ -18,6 +18,7 @@ Sources:
 - **Location: versioned docs.** ProcessOS pages live in the versioned part of the docs (not `docs/next` unversioned), starting at 8.10.
 - **Entry point: Build with AI.** Link ProcessOS from the "Build with AI" landing page — sidebar entry plus a CTA next to "Set up your AI development environment" (see screenshot in tracking issue).
 - **Diagrams: one house style, authored in Excalidraw.** Every ProcessOS diagram follows the [multi-region overview](https://docs.camunda.io/assets/images/multi-region-overview-52529b8c624e375acb611e2c994a69d3.png) reference format and ships as `.excalidraw.svg`. See [Diagram standards](#diagram-standards).
+- **Voice: second person, active, but not colloquial.** Follow the Camunda style guide ("Press the power button to turn on the computer."). Address the reader with explicit verbs — "You review X", "You handle X", "You complete the job". Do not use colloquial shorthand such as "X is yours", "up to you", "on you", or "your turn". These read as casual asides and are not used elsewhere in the Camunda docs.
 
 ## Diagram standards
 
@@ -141,7 +142,7 @@ Also cover the maintenance operations (`c8 os update`, `c8 os install claudecode
 
 Note the V1 boundary here: **isolated projects with private memory, built locally.** No shared memory, no multi-project management.
 
-**Cost and time expectation.** Carry the budget note from the README, at the point where a builder is about to commit to a project: **plan for roughly $300–600 in tokens and 6–8 hours for one discover-to-implement journey.** Frame it as a planning input alongside the `mode` choice and iteration limits that directly influence it.
+**Cost and time expectation.** Carry the budget note from the README on `project-setup.md`, where the organization commits to a first project: **plan for roughly $300–600 in tokens and 6–8 hours for one discover-to-implement journey.** Frame it as an organizational planning input; run-time knobs (`mode`, iteration limits) that influence the figure stay in `get-started.md`.
 
 ### `project-setup.md`
 

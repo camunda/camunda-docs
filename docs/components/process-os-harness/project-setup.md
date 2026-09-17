@@ -28,6 +28,13 @@ Treat the learning path as a prerequisite for your first project.
 
 ## Plan the effort
 
-Agree on the budget and the time commitment before you start, and see [cost and time expectations](get-started.md#plan-cost-and-time) for the current figures.
+ProcessOS Harness runs many agent iterations, so a journey has a real token cost. Plan for roughly $300 to $600 in tokens and six to eight hours for one journey from discovery through implementation.
+
+Treat this as a planning input rather than a fixed price. Run configuration and a process complexity impacts token usage heavily.
 
 Involve your SMEs early. ProcessOS Harness changes their role from main contributor to reviewer, which reduces their total effort, but they still need to be available at the review gates in each phase. A project stalls when a review cycle has no reviewer.
+
+## Next steps
+
+1. Check the [system requirements](system-requirements.md).
+2. Install ProcessOS Harness and configure your first project, described in [install ProcessOS Harness and configure a project](get-started.md).
