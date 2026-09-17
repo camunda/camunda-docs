@@ -82,7 +82,7 @@ Important changes in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Camunda design system](#camunda-design-system)</td>
-    <td>The new design system launches with Hub, Tasklist, and Admin.</td>
+    <td>The new visual design system is introduced for Admin, Camunda Hub, and Tasklist.</td>
 </tr>
 <tr>
     <td>[Centralized secret resolution via Zeebe](#centralized-secret-resolution-via-zeebe)</td>
