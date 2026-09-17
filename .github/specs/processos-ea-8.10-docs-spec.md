@@ -12,20 +12,50 @@ Sources:
 
 ## Authoring rules
 
+- **Naming: always "ProcessOS Harness", never bare "ProcessOS".** Use the full product name in all prose, titles, descriptions, and keywords. Lowercase `process-os` stays untouched in commands (`/process-os-*`), repository names, file paths, and URLs. Note the drift: the product README calls the governance backbone the "Camunda Solution Harness" and reserves "ProcessOS" for the intelligence layer. Docs use "ProcessOS Harness" for both; flag this to product so the naming converges.
 - **Validate every description against [`camunda/process-os`](https://github.com/camunda/process-os).** Product source of truth. Cross-check terminology, commands, component names, and behavior before writing. Flag drift.
 - **Follow the user flow.** Page order and sidebar sequence mirror the builder journey — overview, organizational setup, get-started, phases, other features, best practices, system requirements. Do not sort alphabetically or by component taxonomy; a builder reads top-to-bottom.
 - **Location: versioned docs.** ProcessOS pages live in the versioned part of the docs (not `docs/next` unversioned), starting at 8.10.
 - **Entry point: Build with AI.** Link ProcessOS from the "Build with AI" landing page — sidebar entry plus a CTA next to "Set up your AI development environment" (see screenshot in tracking issue).
+- **Diagrams: one house style, authored in Excalidraw.** Every ProcessOS diagram follows the [multi-region overview](https://docs.camunda.io/assets/images/multi-region-overview-52529b8c624e375acb611e2c994a69d3.png) reference format and ships as `.excalidraw.svg`. See [Diagram standards](#diagram-standards).
+
+## Diagram standards
+
+Applies to ProcessOS pages only, not to `camunda-docs` generally.
+
+Reference format: the [multi-region overview diagram](https://docs.camunda.io/assets/images/multi-region-overview-52529b8c624e375acb611e2c994a69d3.png) (source in-repo at `docs/self-managed/concepts/multi-region/img/multi-region-overview.png`).
+
+**Format: `.excalidraw.svg`, not PNG.** An `.excalidraw.svg` is a valid SVG that also embeds the editable Excalidraw scene as a payload, so the same file renders in the docs and reopens for editing. This keeps diagrams adjustable as ProcessOS changes during EA, which matters because several components are still unvalidated and will move. This is how [`camunda/process-os`](https://github.com/camunda/process-os/blob/main/docs/assets/process-os-overview.excalidraw.svg) already ships its diagrams, so product and docs can share sources instead of forking them.
+
+Visual rules, taken from the reference:
+
+| Element                        | Rule                                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| Line style                     | Clean straight vector lines. Set Excalidraw sloppiness to **Architect**, never the hand-drawn default.       |
+| Font                           | Normal (Helvetica/Nunito), never the sketchy Virgil default.                                                 |
+| Camunda components             | Orange border, white fill.                                                                                   |
+| Grouping containers            | Green border. Solid for standard, dotted for a repeated or optional unit.                                    |
+| Inactive or secondary elements | Grey border.                                                                                                 |
+| Relationships                  | Solid blue arrow for active data flow; dashed grey/black arrow for conditional, scheduled, or indirect flow. |
+| Labels                         | Bold title line, optional lighter descriptive line beneath it. Sentence case.                                |
+| Background                     | White, flat. No gradients, drop shadows, or 3D effects.                                                      |
+
+Two practical constraints:
+
+- **Never encode a value only in a diagram.** Per the content style guide, any field name, command, or value the reader must act on appears in the surrounding text as well. Diagrams illustrate; they don't carry unique information.
+- **Every diagram needs descriptive alt text.**
+
+**Scope: this plan only.** These rules apply to ProcessOS pages. They are not a repo-wide convention and propose no change to how other docs handle diagrams, which stay PNG. Since `camunda-docs` has no `.excalidraw.svg` files today, verify Docusaurus serves the embedded-payload SVG correctly with the first diagram, before producing the rest.
 
 ## Docs Framing
 
 ProcessOS is an AI-agent-based product, not classical deterministic software. The docs job is therefore **expectation management + validation literacy**, not exhaustive feature reference.
 
-| Surface | Job | Timing |
-| --- | --- | --- |
-| Academy | Become capable — the mindset shift. The hard part, because the interaction model is unfamiliar. | Front-load |
-| Docs | Stay unblocked — the reference the capable user returns to. | On demand |
-| In-agent | Unblock right now. | In the moment |
+| Surface  | Job                                                                                             | Timing        |
+| -------- | ----------------------------------------------------------------------------------------------- | ------------- |
+| Academy  | Become capable — the mindset shift. The hard part, because the interaction model is unfamiliar. | Front-load    |
+| Docs     | Stay unblocked — the reference the capable user returns to.                                     | On demand     |
+| In-agent | Unblock right now.                                                                              | In the moment |
 
 **This plan covers public docs only.** Academy and in-agent copy are tracked separately, and docs should not try to do their job.
 
@@ -75,7 +105,7 @@ The parent path is **Build with AI** (see **Home** above).
 
 Three principles, in this order:
 
-1. **Governance process.** The phase model from the [overview diagram](https://github.com/camunda/process-os/blob/main/docs/assets/process-os-overview.excalidraw.svg): **Discover → Transform → Implement**, with **Improve** and the **Re-engineer** loop shown as the wider lifecycle but explicitly outside V1 scope. Name the milestones as the units of progress — *process scope defined → AS-IS model finalized → TO-BE models finalized → solution ready for production* — and the review gates on the path (Business SME feedback, Business SME review, Technical SME review). The governance process itself runs on Camunda: state in Camunda, files in Git, fully auditable.
+1. **Governance process.** The phase model from the [overview diagram](https://github.com/camunda/process-os/blob/main/docs/assets/process-os-overview.excalidraw.svg): **Discover → Transform → Implement**, with **Improve** and the **Re-engineer** loop shown as the wider lifecycle but explicitly outside V1 scope. Name the milestones as the units of progress — _process scope defined → AS-IS model finalized → TO-BE models finalized → solution ready for production_ — and the review gates on the path (Business SME feedback, Business SME review, Technical SME review). The governance process itself runs on Camunda: state in Camunda, files in Git, fully auditable.
 2. **Iterations and expert judgment.** From the scoping deck: project maturity rises through **iterations** across Discovery → Transform → Implement, not through one deterministic pass. AI is not deterministic, so thinking iteratively is the core builder skill. The builder's expert judgment is what converts agent output into a working system — pair this with the rest of the builder skillset (technical depth in Camunda and software development, practical AI/agentic experience, enterprise production experience, stakeholder communication, comfort with ambiguity). This is also where we set the honest expectation: a working demo is not a working system.
 3. **Use cases.** The two supported paths: **Legacy migration** (any legacy system → Camunda 8, no vendor-specific optimization) and **AI Transformation** (any process → automated AI-native process on Camunda 8). Both run all phases, but use different modes within them.
 
@@ -133,7 +163,7 @@ Mirrors [`process-os-8-10-component-overview.excalidraw.svg`](https://github.com
 **Overarching components** apply across the whole journey:
 
 - **Camunda Solution Methodology** — the phases and jobs, each with defined inputs, outputs, and owning role.
-- **Governance Process** — the methodology, implemented and automated in Camunda. Covers the phase model in depth plus the **Builder task**, the atomic unit of the process: activate job *(pulled by the agent)* → execute skill → **builder action** → VCS commit → complete job *(pushed by the agent)*. This loop delivers the three promises: **guidance** (the process tells you what's next), **auditability** (jobs tracked in Camunda, artifacts committed to Git), **full flexibility** (act freely inside a job, or call any skill manually at any time).
+- **Governance Process** — the methodology, implemented and automated in Camunda. Covers the phase model in depth plus the **Builder task**, the atomic unit of the process: activate job _(pulled by the agent)_ → execute skill → **builder action** → VCS commit → complete job _(pushed by the agent)_. This loop delivers the three promises: **guidance** (the process tells you what's next), **auditability** (jobs tracked in Camunda, artifacts committed to Git), **full flexibility** (act freely inside a job, or call any skill manually at any time).
 - **Review Cycle** — the human-in-the-loop. SMEs answer open questions and review artifacts, iterating until sign-off. Review questions as YAML, transformable to Markdown, Excel, or Camunda Forms; artifacts commented in place.
 - **Process Viewer** — reviewing and comparing generated Camunda artifacts, commenting per element.
 - **Plugin Mechanism** — extending phases with custom or third-party plugins; today, custom discovery specialists.
@@ -154,7 +184,7 @@ Straight from the scope doc: builder client (Windows/macOS/Unix, an AI Coding Ag
 ## Deliberate non-goals
 
 - **No builder-mindset training in docs.** Capability-building is Academy's job.
-- **No Business Analyst enablement.** The scope doc puts BA / Process Owner in the *future* column; V1's primary user is the Builder. Do not document a persona the product does not yet serve.
+- **No Business Analyst enablement.** The scope doc puts BA / Process Owner in the _future_ column; V1's primary user is the Builder. Do not document a persona the product does not yet serve.
 
 ## Open questions
 
@@ -163,6 +193,9 @@ Straight from the scope doc: builder client (Windows/macOS/Unix, an AI Coding Ag
   Resolved: **Build with AI** (versioned, from 8.10).
 
 - How to align ensure visuales meet defined standards
+
+  Resolved: follow the [Diagram standards](#diagram-standards) — multi-region overview reference format, authored and shipped as `.excalidraw.svg`.
+
 - Who does QA (Typo, language, ...)?
 
   Resolved: assign the docs reviewer group on the GitHub PR — docs team picks it up.
