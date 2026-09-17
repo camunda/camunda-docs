@@ -98,7 +98,7 @@ The following models are available when you use the AWS provider with Amazon Bed
 
 Amazon Bedrock LLM extraction models are only available in specific regions.
 
-- You must ensure your selected environment region supports the LLM extraction model you want to use. For example, if you are using the `eu-central-1` region, you cannot use Claude 3 Haiku as it is only available in US regions.
+- You must ensure your selected environment's cluster region supports the LLM extraction model you want to use. For example, if you are using the `eu-central-1` region, you cannot use Claude 3 Haiku as it is only available in US regions.
 - If you have chosen a model not supported in your region, you will receive a 403 "You don't have access to the model with the specified model ID" exception error.
 - Some newer models (including Claude Sonnet 4) require cross-region inference profiles and are automatically handled by IDP. When you select these models, IDP infers the appropriate regional prefix (`us.`, `eu.`, `apac.`, or `us-gov.`) from your configured AWS region and adds it to enable access across supported regions within your geographic area.
 

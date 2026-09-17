@@ -20,7 +20,7 @@ To create an IDP project:
 1. Click **Create IDP project**.
 1. In the modal provide the following information:
    - **Name**: Enter a name for the IDP project.
-   - **Deployment environment**: Select the environment you want to use for modeling and testing your document extraction and classification. Each environment is listed with its tenant tag and health status (for example, **Paused** or **Healthy**).
+   - **Deployment environment**: Select the environment you want to use for modeling and testing your document extraction and classification. Each environment is listed with its tag and health status (for example, **Paused** or **Healthy**).
 1. Click **Create** to create the IDP project.
 1. You can now create templates inside your IDP project folder:
    - [Extraction Template](idp-document-extraction.md): Extract data from structured or unstructured documents.
