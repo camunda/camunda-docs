@@ -35,7 +35,7 @@ Click **Test task** to execute the selected activity.
 Your BPMN diagram will be saved, deployed, and a process instance will start automatically.
 
 :::note
-If you're working in a [Camunda project](./process-applications.md), all its resources will be deployed along with the process.
+If you're working in a [project](./process-applications.md), all its resources will be deployed along with the process.
 :::
 
 Once the process instance starts, a link to view it in Operate is provided.  
