@@ -27,7 +27,7 @@ The business id can only be assigned to a root process instance: if the job belo
 ### leaseToken?
 
 ```ts
-optional leaseToken?: string | null;
+optional leaseToken?: JobLeaseToken | null;
 ```
 
 The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.

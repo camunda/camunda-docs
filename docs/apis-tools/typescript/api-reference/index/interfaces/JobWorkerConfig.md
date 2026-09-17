@@ -46,7 +46,7 @@ Zod schema for custom headers in the activated job
 ### fetchVariables?
 
 ```ts
-optional fetchVariables?: In extends ZodType<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
+optional fetchVariables?: In extends ZodTypeAny<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
 ```
 
 Optional list of variable names to fetch during activation
@@ -200,6 +200,31 @@ optional validateSchemas?: boolean;
 
 Validate any provided input, output, customheader schema
 default: false
+
+---
+
+### withLease?
+
+```ts
+optional withLease?: boolean;
+```
+
+Activate jobs with a lease — default `false`.
+
+When `true`, each activated job is assigned a distinct, opaque lease token
+(`ActivatedJobResult.leaseToken`) that is automatically threaded back into the
+fenced `complete` / `fail` / `error` commands. The lease fences those commands
+against a superseded activation of the same job (e.g. after a timeout and
+re-activation by another worker): a command carrying a stale token is rejected
+rather than racing the newer activation. Once a job type is leased, it is served
+only to leasing workers of that type, so a homogeneous fleet per job type is
+recommended.
+
+Note: the marker-derived non-null `leaseToken` projection applies to the
+direct `activateJobs` client call; a worker `jobHandler` intentionally keeps
+the base `Job<...>` shape (`leaseToken` remains optional/nullable) because the
+token is threaded back into fenced commands automatically — handlers do not
+need to read it.
 
 ---
 

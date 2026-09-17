@@ -9,9 +9,21 @@ mdx:
 
 Enriched job type with convenience methods.
 
+A back-compatible **interface** so downstream consumers can declaration-merge
+or `extends` it exactly as they could before the dependent-presence typing
+work landed (restoring the pre-#513 public surface — turning it into a generic
+type alias was a breaking change for those consumers). It resolves to the base
+`ActivatedJobResult` shape plus the action methods.
+
+The marker-driven dependent-presence projections (see
+`hooks/post/710-derive-present-when.ts`) narrow individual response properties
+via the generic [EnrichedActivatedJobOf](../type-aliases/EnrichedActivatedJobOf.md) companion instead of
+re-parameterising this interface — an interface cannot intersect an arbitrary
+type parameter, and keeping this name non-generic preserves back-compat.
+
 ## Extends
 
-- `ActivatedJobResult`
+- `EnrichedActivatedJobActions`.`ActivatedJobResult`
 
 ## Properties
 
@@ -22,6 +34,12 @@ optional acknowledged?: boolean;
 ```
 
 Set true once any acknowledgement method is invoked.
+
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.acknowledged;
+```
 
 ---
 
@@ -35,10 +53,21 @@ The business ID of the owning process instance, inherited when the job was creat
 This is `null` for jobs created before version 8.10 and for jobs whose owning process
 instance has no business ID.
 
+---
+
+### clock
+
+```ts
+clock: HandlerClock;
+```
+
+The clock this worker's client resolves time through. Reading and waiting through it
+means a test that pins the client's clock also drives the handler.
+
 #### Inherited from
 
 ```ts
-ActivatedJobResult.businessId;
+EnrichedActivatedJobActions.clock;
 ```
 
 ---
@@ -57,12 +86,6 @@ A set of custom headers defined during modelling; returned as a serialized JSON 
 [key: string]: unknown
 ```
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.customHeaders;
-```
-
 ---
 
 ### deadline
@@ -72,12 +95,6 @@ deadline: number;
 ```
 
 When the job can be activated again, sent as a UNIX epoch timestamp.
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.deadline;
-```
 
 ---
 
@@ -89,12 +106,6 @@ elementId: ElementId;
 
 The associated task element ID.
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.elementId;
-```
-
 ---
 
 ### elementInstanceKey
@@ -104,12 +115,6 @@ elementInstanceKey: ElementInstanceKey;
 ```
 
 The element instance key of the task.
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.elementInstanceKey;
-```
 
 ---
 
@@ -121,12 +126,6 @@ jobKey: JobKey;
 
 The key, a unique identifier for the job.
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.jobKey;
-```
-
 ---
 
 ### kind
@@ -135,27 +134,15 @@ ActivatedJobResult.jobKey;
 kind: JobKindEnum;
 ```
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.kind;
-```
-
 ---
 
 ### leaseToken
 
 ```ts
-leaseToken: string | null;
+leaseToken: JobLeaseToken | null;
 ```
 
 The lease token identifying this activation. This is `null` when the job was activated without a lease.
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.leaseToken;
-```
 
 ---
 
@@ -165,18 +152,18 @@ ActivatedJobResult.leaseToken;
 listenerEventType: JobListenerEventTypeEnum;
 ```
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.listenerEventType;
-```
-
 ---
 
 ### log
 
 ```ts
 log: Logger;
+```
+
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.log;
 ```
 
 ---
@@ -201,6 +188,12 @@ Extend the timeout for the job by setting a new timeout
 
 `Promise`\<`void`\>
 
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.modifyJobTimeout;
+```
+
 ---
 
 ### modifyRetries
@@ -221,6 +214,12 @@ modifyRetries: (__namedParameters) => Promise<void>;
 
 `Promise`\<`void`\>
 
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.modifyRetries;
+```
+
 ---
 
 ### physicalTenantId
@@ -232,12 +231,6 @@ physicalTenantId: string;
 The ID of the physical tenant that the job-activation request was routed to;
 the default physical tenant when the request did not specify one.
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.physicalTenantId;
-```
-
 ---
 
 ### priority
@@ -247,12 +240,6 @@ priority: number;
 ```
 
 The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.priority;
-```
 
 ---
 
@@ -264,12 +251,6 @@ processDefinitionId: ProcessDefinitionId;
 
 The bpmn process ID of the job's process definition.
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.processDefinitionId;
-```
-
 ---
 
 ### processDefinitionKey
@@ -279,12 +260,6 @@ processDefinitionKey: ProcessDefinitionKey;
 ```
 
 The key of the job's process definition.
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.processDefinitionKey;
-```
 
 ---
 
@@ -296,12 +271,6 @@ processDefinitionVersion: number;
 
 The version of the job's process definition.
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.processDefinitionVersion;
-```
-
 ---
 
 ### processInstanceKey
@@ -312,12 +281,6 @@ processInstanceKey: ProcessInstanceKey;
 
 The job's process instance key.
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.processInstanceKey;
-```
-
 ---
 
 ### retries
@@ -327,12 +290,6 @@ retries: number;
 ```
 
 The amount of retries left to this job (should always be positive).
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.retries;
-```
 
 ---
 
@@ -346,24 +303,12 @@ The key of the root process instance. The root process instance is the top-level
 ancestor in the process instance hierarchy. This field is only present for data
 belonging to process instance hierarchies created in version 8.9 or later.
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.rootProcessInstanceKey;
-```
-
 ---
 
 ### tags
 
 ```ts
 tags: TagSet;
-```
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.tags;
 ```
 
 ---
@@ -376,12 +321,6 @@ tenantId: TenantId;
 
 The ID of the tenant that owns the job.
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.tenantId;
-```
-
 ---
 
 ### type
@@ -391,12 +330,6 @@ type: string;
 ```
 
 The type of the job (should match what was requested).
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.type;
-```
 
 ---
 
@@ -408,12 +341,6 @@ userTask: UserTaskProperties | null;
 
 User task properties, if the job is a user task.
 This is `null` if the job is not a user task.
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.userTask;
-```
 
 ---
 
@@ -431,12 +358,6 @@ All variables visible to the task scope, computed at activation time.
 [key: string]: unknown
 ```
 
-#### Inherited from
-
-```ts
-ActivatedJobResult.variables;
-```
-
 ---
 
 ### worker
@@ -446,12 +367,6 @@ worker: string;
 ```
 
 The name of the worker which activated this job.
-
-#### Inherited from
-
-```ts
-ActivatedJobResult.worker;
-```
 
 ## Methods
 
@@ -464,6 +379,12 @@ cancelWorkflow(): Promise<"JOB_ACTION_RECEIPT">;
 #### Returns
 
 `Promise`\<`"JOB_ACTION_RECEIPT"`\>
+
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.cancelWorkflow;
+```
 
 ---
 
@@ -485,6 +406,12 @@ complete(variables?, result?): Promise<"JOB_ACTION_RECEIPT">;
 
 `Promise`\<`"JOB_ACTION_RECEIPT"`\>
 
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.complete;
+```
+
 ---
 
 ### error()
@@ -502,6 +429,12 @@ error(error): Promise<"JOB_ACTION_RECEIPT">;
 #### Returns
 
 `Promise`\<`"JOB_ACTION_RECEIPT"`\>
+
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.error;
+```
 
 ---
 
@@ -521,6 +454,12 @@ fail(body): Promise<"JOB_ACTION_RECEIPT">;
 
 `Promise`\<`"JOB_ACTION_RECEIPT"`\>
 
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.fail;
+```
+
 ---
 
 ### ignore()
@@ -532,3 +471,9 @@ ignore(): Promise<"JOB_ACTION_RECEIPT">;
 #### Returns
 
 `Promise`\<`"JOB_ACTION_RECEIPT"`\>
+
+#### Inherited from
+
+```ts
+EnrichedActivatedJobActions.ignore;
+```
