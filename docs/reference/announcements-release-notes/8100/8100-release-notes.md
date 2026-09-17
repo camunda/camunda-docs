@@ -319,6 +319,14 @@ Camunda 8 Run now includes a bundled Java runtime. This means you no longer need
 
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
+## Camunda design system
+
+The new visual Camunda design system is introduced for Admin, Camunda Hub, and Tasklist with the 8.10 release.
+
+- The new, streamlined design system offers a cleaner, more consistent look across components.
+- Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
+- The new design system is enabled by default in both Self-Managed and SaaS.
+
 ## Camunda Hub
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
@@ -335,14 +343,6 @@ Camunda Hub is now the single place where you and your teams build, govern, and 
   <li><span class="link-arrow">[What's new in 8.10: Introducing Camunda Hub](/reference/announcements-release-notes/8100/whats-new-in-810.md)</span></li>
   <li><span class="link-arrow">[Camunda Hub](/components/hub/index.md)</span></li>
 </ul>
-
-### Camunda design system
-
-A new visual Camunda design system is introduced with Hub in the 8.10 release.
-
-- The new, streamlined design system offers a cleaner, more consistent look across components.
-- Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
-- The new design system is enabled by default for Camunda Hub in both Self-Managed and SaaS.
 
 ## Connectors
 
