@@ -317,6 +317,7 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 The resource tables above assume Elasticsearch as the secondary storage backend. If you are using a different backend:
 
 - **OpenSearch:** Similar resource profile to Elasticsearch. The tables above generally apply.
+- **Elasticsearch/OpenSearch index sharding:** All partitions export into the same indices. Write throughput for an index scales with primary shard count, not with the number of Elasticsearch/OpenSearch nodes. Scaling Zeebe partitions does not automatically reshard secondary storage; reassess shard count for your indices when you scale partitions. See [Shards](/self-managed/concepts/secondary-storage-management.md#shards).
 - **RDBMS (PostgreSQL, available from 8.9):** Replace the Elasticsearch resource block with appropriately sized PostgreSQL resources. Adjust throughput expectations **downward by approximately 30%** compared to the Elasticsearch-based tables. Unlike Elasticsearch, RDBMS scales primarily **vertically** (a larger instance) rather than horizontally, so plan your initial sizing with more headroom, as adding capacity later is more disruptive.
 
 :::note
