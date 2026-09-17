@@ -82,7 +82,7 @@ The AI Gateway Credential supports both Anthropic- and OpenAI-compatible endpoin
 | **API key**    | API key.                                                                              | None.                |
 | **OAuth 2.0**  | OAuth 2.0 token endpoint, client ID, client secret, and client authentication method. | Audience and scopes. |
 
-OAuth 2.0 uses the client credentials grant. **Client authentication** defaults to **Send as Basic Auth header**; select **Send client credentials in body** if your authorization server requires it. The connector obtains and caches access tokens and sends them as bearer tokens to the gateway.
+OAuth 2.0 uses the client credentials grant. **Client authentication** defaults to sending credentials using Basic authentication; select **Send client credentials in body** if your authorization server requires it. The connector obtains and caches access tokens and sends them as bearer tokens to the gateway.
 
 Authentication fields appear only for the selected method. Anthropic-compatible endpoints additionally offer **None** when configuring inline authentication. The shared AI Gateway Credential and OpenAI-compatible endpoints don't offer a no-authentication option.
 
