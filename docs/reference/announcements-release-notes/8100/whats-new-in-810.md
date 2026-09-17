@@ -24,6 +24,7 @@ import HubOverview from '../../img/whats-new-hub.png';
 import HubCatalog from '../../img/whats-new-hub-catalog.png';
 import HubWorkspace from '../../img/whats-new-hub-workspace.png';
 import HubSnapshot from '../../img/whats-new-hub-snapshot.png';
+import DesignSystem from '../../img/whats-new-design.png';
 
 <PageDescription />
 
@@ -78,6 +79,10 @@ Important changes in Camunda 8.9 are summarized as follows:
 <tr>
     <td>[Business ID](#business-id)</td>
     <td>Business ID is now a first-class, searchable attribute across the Orchestration Cluster.</td>
+</tr>
+<tr>
+    <td>[Camunda design system](#camunda-design-system)</td>
+    <td>The new design system launches with Hub, Tasklist, and Admin.</td>
 </tr>
 <tr>
     <td>[Centralized secret resolution via Zeebe](#centralized-secret-resolution-via-zeebe)</td>
@@ -635,6 +640,16 @@ Introduced in 8.9 as an immutable domain-specific identifier, Business ID in 8.1
 - **Late assignment**: Assign a Business ID to a running instance that has none, when uniqueness is disabled. Assignment is forward-only: only artifacts created after the assignment carry it.
 
 <p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
+## Camunda design system
+
+The new visual Camunda design system is introduced for Admin, Camunda Hub, and Tasklist with the 8.10 release.
+
+<img src={DesignSystem} alt="Camunda design system" class="img-noborder img-transparent img-900"/>
+
+- The new, streamlined design system offers a cleaner, more consistent look across components.
+- Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
+- The new design system is enabled by default in both Self-Managed and SaaS.
 
 ## Centralized secret resolution via Zeebe
 
