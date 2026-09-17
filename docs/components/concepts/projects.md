@@ -10,7 +10,7 @@ import ProjectImg from './assets/projects/diagram-project.png'
 
 Solutions built with Camunda typically consist of multiple resources that represent the end-to-end use case, such as an entry point process, called supporting processes, DMN decisions, or forms.
 
-Bundled together, versioned together, and deployed together, these resources constitute a _project_.
+Stored together, these resources constitute a _project_:
 
 <p><img src={ProjectImg} alt="Project" /></p>
 
@@ -20,8 +20,15 @@ For instance, a consumer loan approval project might bundle:
 - DMN decision tables (for example, interest-rate-calculation.dmn, credit-score-calculation.dmn) for business rules.
 - Forms (for example, loan-application-review.form) for user interactions.
 
-:::tip
-We recommend you use a project for all your non-trivial automation solutions.
+You can treat files in a project as a single bundle or as independent resources. For example, you can:
+
+- [Take a snapshot](../hub/workspace/manage-projects/project-versioning.md) of the current state of all project files with.
+- Manage individual [file versions](../hub/workspace/modeler/modeling/versions.md).
+- [Deploy an entire project](../hub/workspace/manage-projects/deploy-project.md).
+- [Deploy individual project resources](../hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process).
+
+:::note
+When using Desktop Modeler, Camunda recommends you use a project for all your non-trivial automation solutions. When using Camunda Hub, all files must be stored in a project.
 :::
 
 Our [Modeler](../modeler/about-modeler.md) applications support you as you develop a project by different means:
