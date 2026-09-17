@@ -1,6 +1,6 @@
 ---
 id: process-applications
-title: Camunda projects
+title: Projects
 description: In Desktop Modeler, a Camunda project is a folder that contains a camunda-project.json file and a set of related files you can work on and deploy as a single bundle.
 ---
 
