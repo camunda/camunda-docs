@@ -19,9 +19,9 @@ The PHP SDK is a **technical preview**. Its API surface may still evolve and cha
 - [Composer](https://getcomposer.org/)
 - `ext-json`; `ext-pcntl` is optional (enables forked job workers)
 
-## Stable release (recommended for evaluation and integration testing)
+## Stable release (recommended for production)
 
-While the SDK is a Technical Preview, use the stable release to evaluate it or in integration testing rather than in production. The stable version tracks the latest supported Camunda server release.
+The stable version tracks the latest supported Camunda server release.
 
 ```bash
 composer require camunda/orchestration-cluster-api
