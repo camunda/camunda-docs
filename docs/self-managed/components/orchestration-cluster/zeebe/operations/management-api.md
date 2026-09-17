@@ -18,7 +18,7 @@ The API is a custom endpoint available via [Spring Boot Actuator](https://docs.s
 For additional configurations such as security, refer to the official [Spring Boot documentation](https://spring.io/guides).
 :::
 
-The management port is typically not publicly exposed. If the gateway is not reachable from the machine where you run these commands, use a private connection such as `kubectl port-forward svc/camunda-zeebe-gateway 9600:9600`, then use `localhost` as the gateway host. The examples use `http://` for a management endpoint without TLS. If your endpoint uses TLS, use `https://` and the appropriate `curl` TLS options.
+The management port is typically not publicly exposed. If the machine where you run these commands cannot reach the gateway, create a private connection such as `kubectl port-forward svc/camunda-zeebe-gateway 9600:9600`, then use `localhost` as the gateway host. The examples use `http://` for a management endpoint without TLS. If your endpoint uses TLS, use `https://` and the appropriate `curl` TLS options.
 
 ### Operations
 
@@ -397,7 +397,7 @@ Use the Zones API to add, remove, or migrate zones in a [zone-aware](/self-manag
 To add a zone, first deploy its brokers and connect them to the existing cluster. Configure the brokers to use the zone you want to add.
 The new brokers join cluster membership, but they do not host partitions until you add the zone through the Zones API.
 
-To re-add a previously removed zone, start the operator-supplied brokers before sending the request. The request adds the brokers to the persisted partition distribution and schedules the partition-join operations needed to assign their partitions.
+To re-add a previously removed zone, start the operator-supplied brokers before sending the request. If you re-add only some of the zone's brokers, list their broker IDs explicitly in the `brokers` array. The request adds the supplied brokers to the persisted partition distribution and schedules the partition-join operations needed to assign their partitions.
 
 ##### Request
 
@@ -419,7 +419,7 @@ brokers of a zone-aware cluster assign themselves, so a zone whose brokers are n
 from zero without gaps needs nothing else. `numberOfBrokers` must be at least `1`; a lower
 value is rejected with HTTP `400`.
 
-Use `brokers` when the broker IDs are not contiguous, such as when a zone is re-added with only some of its brokers. List each broker ID explicitly in this array. Setting both `numberOfBrokers` and `brokers`, or omitting both, is rejected with HTTP `400`.
+Use `brokers` when the broker IDs are not contiguous. List each broker ID explicitly in this array. Setting both `numberOfBrokers` and `brokers`, or omitting both, is rejected with HTTP `400`.
 
 <details>
   <summary>Example requests</summary>
@@ -460,11 +460,15 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 The response is a JSON object with the same shape as the [cluster configuration response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
 
-After the operation completes, verify that the zone appears in `partitioning` and that its brokers host their assigned partitions in the `brokers` array. You can also query the [Orchestration Cluster REST API specification for `GET /v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx) to verify the broker and partition assignments.
+After the operation completes, verify that the zone is present under `partitioning` and that its brokers host their assigned partitions in the `brokers` array. You can also query the [Orchestration Cluster REST API specification for `GET /v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx) to verify the broker and partition assignments.
 
 #### Remove a zone
 
-By default, this operation gracefully drains the zone's partitions to the remaining zones before removing its brokers from cluster membership. Set `force=true` only if the zone is down or its brokers are unreachable. Forced removal evicts the zone's brokers without handing off leadership gracefully.
+By default, this operation gracefully drains the zone's partitions to the remaining zones before removing its brokers from cluster membership. Set `force=true` only if the zone is down or its brokers are unreachable.
+
+:::warning
+Forced removal of nodes that are running/reachable may cause data loss in extreme circumstances
+:::
 
 ##### Request
 
@@ -493,7 +497,7 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 The response is a JSON object with the same shape as the [cluster configuration response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
 
-After the operation completes, verify that the removed zone no longer appears in `partitioning` and that its brokers no longer host partitions. Only then shut down the removed zone's brokers or scale down its StatefulSet.
+After the operation completes, verify that the removed zone is no longer present under `partitioning` and that its brokers no longer host partitions. Only then shut down the removed zone's brokers or scale down its StatefulSet.
 
 #### Migrate a zone to a zone-aware topology
 
