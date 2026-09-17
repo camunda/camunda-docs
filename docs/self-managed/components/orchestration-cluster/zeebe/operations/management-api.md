@@ -394,7 +394,8 @@ Use the Zones API to add, remove, or migrate zones in a [zone-aware](/self-manag
 
 #### Add or re-add a zone
 
-To add a zone, first deploy its brokers and connect them to the existing cluster. Use zone-aware broker IDs in the form `{zone}_{n}` (see the [broker ID naming scheme](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#broker-id-naming-scheme)), and set `cluster.size` to the total number of brokers across all zones. The new brokers join cluster membership, but they do not host partitions until you add the zone through the Zones API.
+To add a zone, first deploy its brokers and connect them to the existing cluster. Configure the brokers to use the zone you want to add.
+The new brokers join cluster membership, but they do not host partitions until you add the zone through the Zones API.
 
 To re-add a previously removed zone, start the operator-supplied brokers before sending the request. The request adds the brokers to the persisted partition distribution and schedules the partition-join operations needed to assign their partitions.
 
@@ -405,23 +406,19 @@ POST actuator/cluster/zones/{zoneId}
 {
   "numberOfReplicas": <integer>,
   "priority": <integer>,
-  "numberOfBrokers": <integer>,
-  "brokers": [<brokerId1>, <brokerId2>, ...]
+  "numberOfBrokers": <integer>
 }
 ```
 
-Name the zone's brokers either by count with `numberOfBrokers`, or one by one with
-`brokers`. Exactly one of the two must be set; setting both, or neither, is rejected with HTTP
-`400`.
+The request body must include `numberOfReplicas`, `priority`, and exactly one of `numberOfBrokers` or `brokers`.
 
-`numberOfBrokers` is the number of brokers deployed in the zone, from which the broker IDs
+Use `numberOfBrokers` when the zone's broker IDs are contiguous. The value is the number of brokers deployed in the zone, from which the broker IDs
 `<zoneId>_0` through `<zoneId>_<numberOfBrokers - 1>` are derived. These are the IDs the
 brokers of a zone-aware cluster assign themselves, so a zone whose brokers are numbered
 from zero without gaps needs nothing else. `numberOfBrokers` must be at least `1`; a lower
 value is rejected with HTTP `400`.
 
-Use `brokers` when the IDs are not contiguous, which is what a zone coming back with only
-some of its brokers looks like: only the explicit list can express that.
+Use `brokers` when the broker IDs are not contiguous, such as when a zone is re-added with only some of its brokers. List each broker ID explicitly in this array. Setting both `numberOfBrokers` and `brokers`, or omitting both, is rejected with HTTP `400`.
 
 <details>
   <summary>Example requests</summary>
@@ -460,17 +457,13 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 ##### Response
 
-The response is a JSON object with the same shape as the [partition distribution response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
+The response is a JSON object with the same shape as the [cluster configuration response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
 
-After the operation completes, verify that the zone appears in `partitioning` and that its brokers host their assigned partitions in the `brokers` array. You can also query `/v2/topology` to verify the broker and partition assignments.
+After the operation completes, verify that the zone appears in `partitioning` and that its brokers host their assigned partitions in the `brokers` array. You can also query the [Orchestration Cluster REST API specification for `GET /v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx) to verify the broker and partition assignments.
 
 #### Remove a zone
 
-By default, this operation gracefully drains the zone's partitions to the remaining zones before removing its brokers from cluster membership. Set `force=true` only if the zone is down, its brokers are unreachable, or the zone contains the coordinator. Forced removal evicts the zone's brokers without draining partitions or handing off leadership.
-
-:::caution
-Forced removal is a dangerous operation and must be used with caution. A graceful removal request is rejected if the coordinator is in the zone being removed.
-:::
+By default, this operation gracefully drains the zone's partitions to the remaining zones before removing its brokers from cluster membership. Set `force=true` only if the zone is down or its brokers are unreachable. Forced removal evicts the zone's brokers without handing off leadership gracefully.
 
 ##### Request
 
@@ -497,7 +490,7 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 ##### Response
 
-The response is a JSON object with the same shape as the [partition distribution response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
+The response is a JSON object with the same shape as the [cluster configuration response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
 
 After the operation completes, verify that the removed zone no longer appears in `partitioning` and that its brokers no longer host partitions. Only then shut down the removed zone's brokers or scale down its StatefulSet.
 
