@@ -17,9 +17,7 @@ Example response:
 
 ```json
 {
-  "items": [
-    /* 100 items */
-  ],
+  "items": ["...100 items..."],
   "totalResults": 10000,
   "hasMoreTotalItems": true
 }

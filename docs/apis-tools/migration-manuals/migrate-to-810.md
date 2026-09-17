@@ -273,6 +273,7 @@ The [Get resource content] endpoint is deprecated. Use [Get resource content bin
 Once you have completed the [upgrade steps](#upgrade-steps) in this guide, you should:
 
 1. Re-compile and run your test suite against the 8.10 API.
+
 <!--- 1. Review [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) for additional context on each change. --->
 
 [Get resource]: ../orchestration-cluster-api-rest/specifications/get-resource.api.mdx
