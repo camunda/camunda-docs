@@ -1,14 +1,14 @@
 ---
 id: rebalancing
 title: "Rebalancing"
-description: "Step through manual rebalancing, limitations, priority election with round-robin distribution, priority election with fixed distribution, and more."
+description: "Step through manual rebalancing, limitations, priority election with round-robin, fixed, and zone-aware distribution, and more."
 ---
 
-Rebalancing is re-electing partition leaders so they are evenly distributed across all brokers. An even leader distribution is beneficial as all brokers share the work of being partition leaders.
+Rebalancing re-elects partition leaders according to the configured partitioning and priority settings. In a round-robin cluster, rebalancing can distribute leadership more evenly across brokers. In a zone-aware cluster, rebalancing can move leadership toward the zone with the highest priority.
 
-Zeebe will, by default, prefer an even leader distribution when electing new leaders, but will not trigger a re-election unless a leader becomes unavailable.
+Zeebe prefers an even leader distribution in round-robin clusters when electing new leaders, but it doesn't trigger a re-election unless a leader becomes unavailable or you request a rebalance.
 
-When a Zeebe cluster uses an uneven leader distribution, caused by losing a leader and thus electing a suboptimal broker as new leader for example, manually requesting rebalancing can restore the cluster to an even leader distribution.
+When a Zeebe cluster uses an uneven leader distribution, for example because it lost a leader and elected a suboptimal broker, manually requesting a rebalance can restore a more suitable distribution.
 
 ## Manual rebalancing
 
@@ -29,7 +29,7 @@ Manual rebalancing is not guaranteed to succeed in all cases.
 
 Rebalancing is only supported under specific configurations, and even when supported, the resulting distribution cannot be guaranteed due to the nature of distributed systems.
 
-There are two configurations where manual rebalancing is supported:
+Manual rebalancing is supported with priority election under the following configurations:
 
 - **Priority election** with **round-robin distribution**
   - Priority election and round-robin distribution are enabled by default.
@@ -40,6 +40,10 @@ There are two configurations where manual rebalancing is supported:
   - Fixed distribution is an experimental configuration that is disabled by default.
   - Brokers are assigned as primary partition leaders based on the configuration.
   - Only configurations where a partition designates a single broker as primary partition leader are supported.
+
+- **Priority election** with **zone-aware distribution**
+  - Zone priorities determine the preferred leader zone for each partition.
+  - Rebalancing can move partition leadership toward the highest-priority zone when its replicas are caught up.
 
 **Priority election** is controlled by the `zeebe.broker.cluster.raft.enablePriorityElection` config and is enabled by default.
 
