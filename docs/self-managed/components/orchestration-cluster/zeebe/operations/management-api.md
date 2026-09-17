@@ -406,7 +406,8 @@ POST actuator/cluster/zones/{zoneId}
 {
   "numberOfReplicas": <integer>,
   "priority": <integer>,
-  "numberOfBrokers": <integer>
+  "numberOfBrokers": <integer>,
+  "brokers": [<brokerId1>, <brokerId2>, ...]
 }
 ```
 
