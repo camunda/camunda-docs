@@ -10,6 +10,13 @@ Sources:
 - [ProcessOS V1.0 scoping deck](https://docs.google.com/presentation/d/12DWyIO1S43HKYMRRw9H_tGuC8WZbwXfDFLwHi9RgYn4/edit)
 - [`camunda/process-os` README](https://github.com/camunda/process-os/tree/main#install-processos-for-claude-code-camunda-internal)
 
+## Authoring rules
+
+- **Validate every description against [`camunda/process-os`](https://github.com/camunda/process-os).** Product source of truth. Cross-check terminology, commands, component names, and behavior before writing. Flag drift.
+- **Follow the user flow.** Page order and sidebar sequence mirror the builder journey — overview, organizational setup, get-started, phases, other features, best practices, system requirements. Do not sort alphabetically or by component taxonomy; a builder reads top-to-bottom.
+- **Location: versioned docs.** ProcessOS pages live in the versioned part of the docs (not `docs/next` unversioned), starting at 8.10.
+- **Entry point: Build with AI.** Link ProcessOS from the "Build with AI" landing page — sidebar entry plus a CTA next to "Set up your AI development environment" (see screenshot in tracking issue).
+
 ## Docs Framing
 
 ProcessOS is an AI-agent-based product, not classical deterministic software. The docs job is therefore **expectation management + validation literacy**, not exhaustive feature reference.
@@ -30,41 +37,39 @@ Two things guide the user along the journey and are first-class doc subjects:
 ## Scope for EA 8.10
 
 - **Audience:** the **Builder** (per scope doc: primary user in V1, well trained in ProcessOS, developer/implementer skillset). **SME** is the secondary persona — reviewer and approver.
-- **Folder:** `docs/` (Next) only — unreleased.
+- **Folder:** versioned docs, starting at 8.10 (not `docs/next` unversioned).
 - **Visibility:** public, clearly marked Early Access (trained customers and enabled partners).
-- **Home:** ???? TBD ????
-- **Unit of doc:** hybrid — journey-shaped pages (overview, get-started), with `concepts/` structured strictly along the ProcessOS component overview as the reference layer.
+- **Home:** under **Build with AI** — new sidebar entry "ProcessOS" and a CTA on the Build with AI landing page next to "Set up your AI development environment".
+- **Unit of doc:** journey-shaped — pages ordered along the builder flow (overview → project-setup → get-started → phases → other-features → best-practices → system-requirements). Phase and feature pages are the reference layer inside that flow, not a separate component taxonomy.
 
 ## Page-level content
 
 ```
 processos/
-├── overview.md                          Key principles: governance process, iterations and expert judgment, use cases
-├── get-started.md                       Builder workspace, ProcessOS install, project configuration
-├── project-setup.md                     Organizational setup: partner/FDE support, Academy enablement
-├── concepts/
-│   ├── overview.md                      Component map: overarching vs. phase-specific
-│   ├── overarching/
-│   │   ├── camunda-solution-methodology.md
-│   │   ├── governance-process.md
-│   │   ├── review-cycle.md
-│   │   ├── process-viewer.md
-│   │   └── plugin-mechanism.md
-│   └── phase-specific/
-│       ├── discovery-specialists.md
-│       ├── process-transformation.md
-│       ├── solution-implementation.md
-│       └── artifact-generation/
-│           ├── bpmn-generation.md
-│           ├── dmn-generation.md
-│           ├── forms-generation.md
-│           └── worker-generation.md
+├── overview.md                           Key principles: governance process, iterations and expert judgment, use cases
+├── project-setup.md                      Organizational setup: partner/FDE support, Academy enablement
+├── get-started.md                        Builder workspace, ProcessOS install, project configuration
+│   ├── governance-process.md             Governance BPMN
+│   └── review-cycle.md                   Phases
+├── phases/
+│   ├── discovery-specialists.md
+│   │   ├── Phase overview
+│   │   └── Skills
+│   ├── process-transformation.md
+│   │   ├── Phase overview
+│   │   └── Skills
+│   └── solution-implementation.md
+│       ├── Phase overview
+│       └── Skills
+├── other-features/
+│   ├── builder-task.md
+│   └── artifact-generation.md
 ├── best-practices/
 │   └── data-handling.md
-└── system-requirements.md               Builder client, AI platform, generated solution
+└── system-requirements.md                Builder client, AI platform, generated solution
 ```
 
-The parent path for these pages is still TBD (see **Home** above).
+The parent path is **Build with AI** (see **Home** above).
 
 ### `overview.md` — key principles
 
@@ -154,5 +159,10 @@ Straight from the scope doc: builder client (Windows/macOS/Unix, an AI Coding Ag
 ## Open questions
 
 - Where is the home for this content?
+
+  Resolved: **Build with AI** (versioned, from 8.10).
+
 - How to align ensure visuales meet defined standards
 - Who does QA (Typo, language, ...)?
+
+  Resolved: assign the docs reviewer group on the GitHub PR — docs team picks it up.
