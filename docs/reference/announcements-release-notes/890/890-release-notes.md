@@ -774,7 +774,7 @@ You can use this app to view, claim, and complete Camunda tasks directly in Micr
 
 You can now add subfolders to your process applications, giving you more flexibility when organizing your files and allowing you to sync to your existing version control system without reorganizing the filesystem.
 
-<p class="link-arrow">[Process applications](/components/concepts/process-applications.md)</p>
+<p class="link-arrow">[Process applications](/components/concepts/projects.md)</p>
 
 #### Web Modeler: Improved Self-Managed installation
 
