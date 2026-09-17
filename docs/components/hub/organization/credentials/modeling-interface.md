@@ -13,11 +13,11 @@ This page covers credentials that authenticate connector tasks, such as an AWS C
 
 ## Select a credential
 
-Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials in the connected environment that match the credential type the connector needs.
+Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials deployed to the connected cluster that match the credential type the connector needs. On a Self-Managed cluster with several environments, the chooser also lists credentials deployed only to another environment on that cluster; those do not resolve at runtime in the environment you are connected to.
 
-Selecting a credential stores only a reference to it in your diagram. The credential's values stay in the environment.
+Selecting a credential stores only a reference to it in your diagram. The credential's values stay in the environment they were deployed to.
 
-If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist in the connected environment, or it was created for a different credential type.
+If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist on the connected cluster, or it was created for a different credential type.
 
 ## What you can do in the chooser
 
