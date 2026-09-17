@@ -27,7 +27,7 @@ To resolve an incident, complete the following steps:
 2. Mark the incident as resolved, triggering retry process execution.
 3. If the problem still exists, a new incident is created.
 
-For a job incident, marking the incident as resolved re-checks the problem only when the job is next activated by a worker. If no worker is connected for the job's type, the job is not activated, so a new incident is not raised even when the problem still exists, and the instance appears healthy in Operate. Keep a worker connected so a retry re-raises the incident promptly if the cause is not yet fixed.
+For a job incident, marking the incident as resolved does not immediately re-check the underlying problem. Camunda checks it again only when a worker next activates the job. If no worker is connected for the job type, the job is not activated. As a result, Camunda does not raise a new incident even if the problem still exists, and the process instance can appear healthy in Operate. Keep a worker connected for the affected job type so Camunda can raise the incident again promptly if the cause is not fixed.
 
 ### Resolving a job-related incident
 
