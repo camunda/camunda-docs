@@ -80,14 +80,44 @@ In Camunda 8.10, variable changes caused by completing a Camunda user task are a
 
 This applies to new variable writes, not past completions. The audit log records successful variable creates and updates in the `USER_TASKS` category, separately from the task completion entry. With output mappings, only the propagated mapping results are recorded, not temporary mapping inputs. Variable values aren't included.
 
-No dedicated feature flag is required. Use the existing audit log settings to control export:
+There is no dedicated setting or environment variable for completion-variable auditing. You can still supply the existing audit log settings through application YAML, environment variables, or Helm configuration. In Kubernetes, application YAML loaded from a ConfigMap uses the same properties.
+
+Use the existing audit log settings to control which entries are recorded:
 
 - Keep `camunda.data.audit-log.enabled` set to `true` (the default) to record audit entries.
 - Include `USER_TASKS` in the applicable actor's categories. User categories include it by default; client categories don't.
 - To record client-initiated completions, add `USER_TASKS` to `camunda.data.audit-log.client.categories` alongside any categories you already record.
 - Don't exclude `VARIABLE` in the applicable actor's `excludes` list. Excluding `VARIABLE` suppresses both completion-driven entries in `USER_TASKS` and direct API variable entries in `DEPLOYED_RESOURCES`. Excluding `USER_TASK` alone doesn't exclude variable entries.
 
-These settings control audit export, not completion-variable source tagging.
+For example, this application configuration retains the default user categories and opts clients into `USER_TASKS`:
+
+```yaml
+camunda:
+  data:
+    audit-log:
+      enabled: true
+      user:
+        categories: [ADMIN, DEPLOYED_RESOURCES, USER_TASKS]
+        excludes: []
+      client:
+        categories: [USER_TASKS]
+```
+
+Merge these settings into your existing configuration. Preserve any additional client categories and entity exclusions you still need.
+
+To suppress all variable audit entries for users, configure the existing entity exclusion:
+
+```yaml
+camunda:
+  data:
+    audit-log:
+      user:
+        excludes: [VARIABLE]
+```
+
+This exclusion affects user-initiated variable entries from both task completion and direct API changes. It doesn't change client exclusions. There is no independent completion-variable-only switch.
+
+These settings control audit recording, not variable propagation or output-mapping execution. Completing a task still applies its variables and output mappings even when the corresponding audit entries are excluded.
 
 ## Configure secondary storage retention
 
