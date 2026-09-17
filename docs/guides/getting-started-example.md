@@ -126,18 +126,16 @@ The service tasks in the process are executed by [job workers](/reference/glossa
   </li>
 
   <li>
-    In Camunda Modeler, use:
-    <pre><code>File &gt; Open File...</code></pre>
-    to open the file:
-    <pre><code>camunda-8-get-started/2-order-process-with-service-workers/bpmn/order-process.bpmn</code></pre>
+    In Camunda Modeler, click <b>File > Open File</b>
+  </li>
+
+  <li>
+  Select `camunda-8-get-started/2-order-process-with-service-workers/bpmn/order-process.bpmn`
   </li>
 
   <li>
     Click the "Rocket" icon to connect to your Camunda 8 Run instance and deploy the model.
     You can use the pre-configured `c8run (local)` connection.
-
-    ![Connect to Cluster and deploy model](./img/get-started-example-deploy.png)
-
   </li>
 
   <li>
@@ -157,9 +155,10 @@ The service tasks in the process are executed by [job workers](/reference/glossa
 
 A [process instance](/reference/glossary.md#process-instance) is now running in the engine.
 
-You can view the process instance in **Operate**, the visual operations tool, by navigating to:  
-[http://localhost:8080/operate](http://localhost:8080/operate)  
-Login with the credentials: `demo` / `demo`.
+You can view the process instance in **Operate**, the visual operations tool:
+
+1. Navigate to: [http://localhost:8080/operate](http://localhost:8080/operate)
+2. Login with the credentials: `demo` / `demo`.
 
 There you will see an active process instance.
 
