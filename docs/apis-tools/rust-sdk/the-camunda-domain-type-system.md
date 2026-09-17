@@ -2,7 +2,7 @@
 id: the-camunda-domain-type-system
 title: "The Camunda Domain Type System"
 sidebar_label: "The Camunda Domain Type System"
-sidebar_position: 11
+sidebar_position: 12
 mdx:
   format: md
 ---
