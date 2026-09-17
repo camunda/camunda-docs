@@ -20,6 +20,10 @@ import PageDescription from '@site/src/components/PageDescription';
 import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-region-overview.png';
 import AgentPanel from '../../img/whats-new-agent-monitoring.png';
 import overviewImg from '../../../components/optimize/assets/agentic-control-plane-overview.png';
+import HubOverview from '../../img/whats-new-hub.png';
+import HubCatalog from '../../img/whats-new-hub-catalog.png';
+import HubWorkspace from '../../img/whats-new-hub-workspace.png';
+import HubSnapshot from '../../img/whats-new-hub-snapshot.png';
 
 <PageDescription />
 
@@ -46,9 +50,72 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 :::
 
+## Summary of important changes
+
+Important changes in Camunda 8.9 are summarized as follows:
+
+<table className="table-callout">
+<tr>
+    <td width="30%">**What's new/changed**</td>
+    <td>**Summary**</td>
+</tr>
+<tr>
+    <td>[Agentic orchestration](#agentic-orchestration)</td>
+    <td>Real-time agent visibility and explainability, production-grade agentic trust with testing, visibility, auditability, and control-plane monitoring.</td>
+</tr>
+<tr>
+    <td>[Camunda Hub](#camunda-hub)</td>
+    <td>Camunda Hub is now the single place where teams build, govern, and run process solutions in Camunda. Hub replaces Web Modeler and Console.</td>
+</tr>
+<tr>
+    <td>[Multi-region resilience](#multi-region-resilience)</td>
+    <td>Multi-region resilience framework for Self-Managed Orchestration Cluster deployments.</td>
+</tr>
+<tr>
+    <td>[Strong tenant isolation](#strong-tenant-isolation-via-physical-tenants)</td>
+    <td>Physical Tenants provide strong physical data isolation within a single cluster.</td>
+</tr>
+<tr>
+    <td>[Business ID](#business-id)</td>
+    <td>Business ID is now a first-class, searchable attribute across the Orchestration Cluster.</td>
+</tr>
+<tr>
+    <td>[Centralized secret resolution via Zeebe](#centralized-secret-resolution-via-zeebe)</td>
+    <td>Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.</td>
+</tr>
+<tr>
+    <td>[Connector operations](#connector-operations)</td>
+    <td>Connectors are now discoverable by the operation you want to perform.</td>
+</tr>
+<tr>
+    <td>[Helm chart deployment](#helm-chart-deployment)</td>
+    <td>A new Camunda Helm Toolkit helps migrate and validate 8.9-to-8.10 Helm values.</td>
+</tr>
+<tr>
+    <td>[Optimize](#optimize)</td>
+    <td>Optimize moves to the Camunda Security Library for authentication and session handling.</td>
+</tr>
+<tr>
+    <td>[Unified authentication](#unified-authentication-for-orchestration-cluster-camunda-hub-and-optimize)</td>
+    <td>The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through the Camunda Security Library.</td>
+</tr>
+<tr>
+    <td>[Wait states](#wait-states)</td>
+    <td>Operate now shows what an active process instance is waiting for.</td>
+</tr>
+<tr>
+    <td>[APIs & Tools](#apis--tools)</td>
+    <td>Legacy component APIs, Tasklist V1-dependent features, and Zeebe Process Test are removed.</td>
+</tr>
+<tr>
+    <td>[Supported environments](#supported-environments)</td>
+    <td>Camunda 8.10 updates platform and environment baselines.</td>
+</tr>
+</table>
+
 ## Agentic orchestration
 
-Important changes and new features for agentic orchestration in 8.10 are as follows:
+Important changes and new features for agentic orchestration are available in 8.10:
 
 ### Real-time agent visibility and monitoring
 
@@ -144,7 +211,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
 
 [Camunda Hub](/components/hub/index.md) is now the single place where teams build, govern, and run process solutions in Camunda.
 
-<!-- Screenshot -->
+<img src={HubOverview} alt="Camunda Hub" class="img-900"/>
 
 - Hub replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
 - Hub is deployed only once, and serves as the single point of entry for all your environments, connecting to all your dev, staging, and production Orchestration Clusters.
@@ -160,63 +227,19 @@ In Hub, there is a clear separation of responsibilities:
 
 Organization-level resource governance and workspace-level project delivery now happen in one product.
 
-:::note Feature highlight: Hub Catalog
-8.10 also introduces the new [Hub catalog](/components/hub/organization/manage-catalog/getting-started.md). With the catalog, center of excellence teams manage reusable automation assets in a Git repository, and publish them to Camunda Hub. In Hub, delivery teams discover and apply approved catalog assets when modeling.
-:::
-
 ### Terminology
 
-With the introduction of Camunda Hub, many terms and concepts from Web Modeler and Console have changed:
+Camunda Hub introduces changes to many terms and concepts from Web Modeler and Console:
 
-| Before 8.10 (Web Modeler) | 8.10 (Camunda Hub)                                                                                            | Description                                                                                                                                                                              |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project                   | [Workspace](/reference/glossary.md#workspace)                                                                 | When upgrading to Hub, your projects automatically migrate to workspaces. Workspaces in Hub are isolated team collaboration spaces. Members can only view workspaces they're invited to. |
-| Process application       | [Project](/reference/glossary.md#project)                                                                     | When upgrading to Hub, your process applications automatically migrate to projects. Projects in Hub can be versioned as a bundle of files or used as a folder for loose files.           |
-| Project Admin             | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) | This aligns with the project-to-workspace terminology change.                                                                                                                            |
-
-### SaaS roles and permissions
-
-SaaS organization-level roles and permissions have changed.
-
-Before 8.10, users in an organization were assigned one of the following roles in Console:
-
-| Role    | Description                                                                                                                                       |
-| :------ | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Modeler | Has access to Web Modeler for creating and collaborating on projects except permissions to deploy and run processes. Read-only access to Console. |
-| Analyst | Includes Modeler permissions and has full access to Optimize to build process dashboards and reports.                                             |
-| Admin   | Full access to the platform, process resources, and clusters. Cannot manage other admins.                                                         |
-
-In 8.10, users in an organization are assigned one of the following roles in Camunda Hub:
-
-| Role               | Description                                                                                                                                                                                                                                                                     |
-| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Member             | Full access to create and collaborate on projects in workspaces they're invited to, plus read-only visibility into the organization and its clusters.                                                                                                                           |
-| Analyst            | Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md). |
-| Organization Admin | Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. Organization Admins can also assign environments to workspaces.                                                                                          |
-| DevOps             | Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.           |
-
-<p class="link-arrow">[Roles and permissions](/components/hub/organization/manage-users/index.md#roles-and-permissions)</p>
-
-### Self-Managed roles and permissions
-
-Self-Managed roles and permissions have changed:
-
-| 8.9 role          | 8.10 equivalent | Changes                                                                                                                                                                                    |
-| :---------------- | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Console           | DevOps          | Gains management access to Hub's cluster pages.                                                                                                                                            |
-| Web Modeler Admin | Hub Admin       | Gains full access to Hub's cluster pages.                                                                                                                                                  |
-| Web Modeler       | Hub             | No change in access.                                                                                                                                                                       |
-| -                 | Analyst         | **(New role)** Grants Hub modeling access, management access to the catalog's usage and adoption data, and full access to Optimize, without modeler-admin or people/org management access. |
-
-The 8.9 roles are not removed in 8.10. They remain for backward compatibility.
-
-<p class="link-arrow">[Default roles in Self-Managed](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles)</p>
+| Web Modeler         | Camunda Hub                                                                                                   | Description                                                                                                                                                                              |
+| :------------------ | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project             | [Workspace](/reference/glossary.md#workspace)                                                                 | When upgrading to Hub, your projects automatically migrate to workspaces. Workspaces in Hub are isolated team collaboration spaces. Members can only view workspaces they're invited to. |
+| Process application | [Project](/reference/glossary.md#project)                                                                     | When upgrading to Hub, your process applications automatically migrate to projects. Projects in Hub can be versioned as a bundle of files or used as a folder for loose files.           |
+| Project Admin       | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) | This aligns with the project-to-workspace terminology change.                                                                                                                            |
 
 ### Mapping Web Modeler and Console features to Hub
 
-Starting with 8.10, Camunda Hub replaces Web Modeler and Console, meaning these products are no longer included in your Camunda deployment in SaaS or Self-Managed.
-
-Here's a list of Web Modeler and Console features and how to access their equivalents in Hub:
+The following table shows how you can access the Hub equivalents for key Web Modeler and Console features.
 
 | Product (8.9) | Feature                      | Hub documentation                                                                                                  |
 | :------------ | :--------------------------- | :----------------------------------------------------------------------------------------------------------------- |
@@ -232,41 +255,41 @@ Here's a list of Web Modeler and Console features and how to access their equiva
 
 ### Key features
 
-In addition to providing a unified interface for existing Web Modeler and Console functionality, Camunda Hub introduces many new features. In this section, you'll learn about some of the highlights.
+Camunda Hub introduces many new features, including the following highlights:
 
 #### Catalog
 
-In Web Modeler before 8.10, you can publish shared resources to the organization. These shared resources can be used in projects across the organization. However, governance over these shared resources is decentralized, usage can't be audited, and standards can't be enforced.
+Hub introduces the [Hub catalog](/components/hub/organization/manage-catalog/getting-started.md). Center of excellence teams can manage reusable automation assets in a Git repository and publish them to Hub. You can see where assets are being used and which processes are using outdated or deprecated assets.
 
-From 8.10, center of excellence teams can manage reusable automation assets in a Git repository and publish them to Hub. In Hub, they have visibility into where assets are being used and which processes are using outdated or deprecated assets.
-
-<!-- Screenshot -->
-
-<p class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</p>
+<img src={HubCatalog} alt="Camunda Hub catalog" class="img-900"/>
 
 Delivery teams can trust that catalog assets have been vetted and approved by the center of excellence. They can discover assets in the catalog, read asset documentation, and apply them when modeling.
 
-<p class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</p><br />
+<ul>
+  <li><span class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</span></li>
+  <li><span class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</span></li>
+</ul>
 
 #### Workspaces and projects
 
 Hub introduces workspaces and projects.
 
-<!-- Screenshot -->
+<img src={HubWorkspace} alt="Camunda Hub workspaces" class="img-900"/>
 
-A workspace is a collaboration environment within an organization, representing a team or business domain. A workspace is assigned members and projects so all related work happens in one shared space. When you migrate to 8.10, all your Web Modeler projects become workspaces.
+**Workspace**: A workspace is a collaboration environment within an organization, representing a team or business domain. A workspace is assigned members and projects so all related work happens in one shared space. When you migrate to 8.10, all your Web Modeler projects become workspaces.
 
-<p class="link-arrow">[Manage workspaces](/components/hub/organization/manage-workspaces/index.md)</p><br />
+**Project**: A project contains a set of files. You can consider a project as a bundle of related files you can version and deploy together. You can also consider a project as a container of individual files meant to be versioned and deployed independently. When you migrate to 8.10, all your Web Modeler process applications become projects.
 
-A project contains a set of files. You can consider a project as a bundle of related files you can version and deploy together. You can also consider a project as a container of individual files meant to be versioned and deployed independently. When you migration to 8.10, all your Web Modeler process applications become projects.
-
-<p class="link-arrow">[Manage projects](/components/hub/workspace/manage-projects/manage-projects.md)</p><br />
+<ul>
+  <li><span class="link-arrow">[Manage workspaces](/components/hub/organization/manage-workspaces/index.md)</span></li>
+  <li><span class="link-arrow">[Manage projects](/components/hub/workspace/manage-projects/manage-projects.md)</span></li>
+</ul>
 
 #### Project snapshots and file versioning
 
 In Web Modeler, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit.
 
-<!-- Screenshot -->
+<img src={HubSnapshot} alt="Camunda Hub snapshots" class="img-900"/>
 
 Camunda Hub introduces an improved model with more granular control over project and file versions:
 
@@ -337,10 +360,6 @@ Payments (Workspace)
 
 This strict new **Workspace > Project > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
 
-:::note SaaS Web Modeler data
-On 29 August 2026, your SaaS Web Modeler data received three updates. See [Web Modeler data](#web-modeler-data).
-:::
-
 #### Credentials manager
 
 Before 8.10, you configure a connector's authentication and connection settings directly on each connector task. This doesn't scale well and is hard to maintain. For example, if ten tasks call the same REST API, you configure the same authentication ten times, and you update all ten when something changes.
@@ -360,9 +379,43 @@ When you deleted a resource, such as a file or process application, in Camunda 8
 
 Deleted resources could not be recovered.
 
-In Camunda Hub, when you delete a resource, it's moved to **Recently deleted**. There, you have 30 days to restore it before its permanently deleted.
+In Camunda Hub, when you delete a resource, it is moved to **Recently deleted**. You then have 30 days to restore it before it is permanently deleted.
 
 <p class="link-arrow">[Recover deleted resources](/components/hub/workspace/manage-projects/recently-deleted.md)</p>
+
+### Roles and permissions
+
+Camunda Hub includes a number of changes to roles and permissions.
+
+#### SaaS roles and permissions
+
+SaaS organization-level roles and permissions have changed. Prior to 8.10, users in an organization were assigned either a Modeler, Analyst, or Admin role in Console. In 8.10, users in an organization are assigned one of the following roles in Camunda Hub:
+
+| Role               | Description                                                                                                                                                                                                                                                                     |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Member             | Full access to create and collaborate on projects in workspaces they're invited to, plus read-only visibility into the organization and its clusters.                                                                                                                           |
+| Analyst            | Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md). |
+| Organization Admin | Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. Organization Admins can also assign environments to workspaces.                                                                                          |
+| DevOps             | Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.           |
+
+<p class="link-arrow">[Roles and permissions](/components/hub/organization/manage-users/index.md#roles-and-permissions)</p>
+
+#### Self-Managed roles and permissions
+
+Self-Managed roles and permissions have changed as follows:
+
+| 8.9 role          | 8.10 equivalent | Changes                                                                                                                                                                                    |
+| :---------------- | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Console           | DevOps          | Gains management access to Hub's cluster pages.                                                                                                                                            |
+| Web Modeler Admin | Hub Admin       | Gains full access to Hub's cluster pages.                                                                                                                                                  |
+| Web Modeler       | Hub             | No change in access.                                                                                                                                                                       |
+| -                 | Analyst         | **(New role)** Grants Hub modeling access, management access to the catalog's usage and adoption data, and full access to Optimize, without modeler-admin or people/org management access. |
+
+:::note
+The 8.9 roles are not removed in 8.10, and remain for backward compatibility.
+:::
+
+<p class="link-arrow">[Default roles in Self-Managed](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles)</p>
 
 ### Camunda Hub API
 
@@ -377,7 +430,7 @@ In Camunda 8.10, with Camunda Hub replacing Web Modeler and Console, the new Cam
 
 <p class="link-arrow">[Migrate from Web Modeler to the Camunda Hub API](/apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api.md)</p>
 
-### Self-Managed
+### Self-Managed Hub configuration
 
 In 8.10, Console and Web Modeler configurations have been merged to form [Camunda Hub properties](/self-managed/components/hub/configuration/properties.md). Configuration keys have been updated to support feature changes.
 
@@ -411,11 +464,10 @@ Additionally, when you upgrade, your data is [migrated](/self-managed/upgrade/co
 
 ### Web Modeler data
 
-On 29 August 2026, your SaaS Web Modeler data received three updates:
+On 29 August 2026, your SaaS Web Modeler data received three updates to prepare for Hub in 8.10, around [Organizational structure](#new-file-structure-and-requirements), data migration, and the process application versioning model.
 
-- **[Organizational structure](#new-file-structure-and-requirements):** Enforces a stricter, more scalable file resource hierarchy.
-- **[Data migration](#data-migration):** Aligns your existing data with the new structure.
-- **[Process application versioning model](#process-application-versioning-model):** Provides more granular control.
+<details>
+<summary>Web Modeler data migration details</summary>
 
 ### Data migration
 
@@ -543,6 +595,8 @@ In addition to process application snapshots, you can create versions for indivi
 3. Click **Create version**.
 4. Enter a **Version name** in the version creation modal.
 5. Click **Create**.
+
+</details>
 
 ## Multi-region resilience
 
@@ -696,15 +750,52 @@ Operate now shows what an active process instance is waiting for, so you can tel
 
 ## APIs & Tools
 
-- For removed legacy APIs, Tasklist V1-dependent features, and Zeebe Process Test, see the [8.10 release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test).
+Important changes for APIs & Tools in 8.10 are as follows:
+
+### Removal of legacy APIs, Tasklist V1-dependent features, and Zeebe Process Test
+
+In 8.10, Camunda removes the legacy component APIs and related features that were deprecated in 8.8, such as legacy APIs, Tasklist V1-dependent features, and Zeebe Process Test.
+
+<p class="link-arrow">[Release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test)</p>
+
+### C# SDK
+
+<!-- https://github.com/camunda/product-hub/issues/3044 -->
+
+Camunda now offers an officially supported C# Client for the Camunda 8 Orchestration Cluster REST API v2.
+
+You can authenticate with your cluster (No Auth for local, Basic authentication, or OIDC access tokens) and use C# methods to deploy resources, start and manage process instances, work with user tasks, and query processes and decisions, complete with pagination helpers and typed responses via generated models.
+
+<p class="link-arrow">[C# SDK](/apis-tools/csharp-sdk.md)</p>
+
+### Go and Rust SDKs
+
+<!-- https://github.com/camunda/issues/issues/835 -->
+
+8.10 introduces Technical Previews for Go and Rust language SDKs for the Orchestration Cluster API.
+
+The Go SDK additionally contains support for gRPC job streaming. During 8.10 these SDKs will be stabilized, but there may be changes to their API surface based on user feedback. These SDKs will be fully supported and guaranteed to be stable in a later release.
+
+<ul>
+  <li><span class="link-arrow">[Go SDK](/apis-tools/go-sdk.md)</span></li>
+  <li><span class="link-arrow">[Rust SDK](/apis-tools/rust-sdk.md)</span></li>
+</ul>
 
 ## Supported environments
 
 Camunda 8.10 updates several platform and environment baselines. Highlights include:
 
-| Environment | Description |
-| :---------- | :---------- |
-| -           | -           |
+| Environment                                                                                                                                | Description                                                                             |
+| :----------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| [Amazon Aurora PostgreSQL](/reference/announcements-release-notes/8100/8100-announcements.md#amazon-aurora-postgresql-14-removed-18-added) | Version 14 removed, version 18 added. Supported versions are now 15, 16, 17, and 18.    |
+| [Elasticsearch](/reference/announcements-release-notes/8100/8100-announcements.md#elasticsearch-92-and-93-no-longer-supported)             | Minimum supported 9.x version raised to 9.4. Supported versions are now 8.19+ and 9.4+. |
+| [H2](/reference/announcements-release-notes/8100/8100-announcements.md#h2-23-no-longer-supported)                                          | Version 2.3 no longer supported. Only 2.4 is now supported (dev/test/evaluation only).  |
+| [MariaDB](/reference/announcements-release-notes/8100/8100-announcements.md#mariadb-123-now-supported)                                     | Version 12.3 LTS now supported. Supported versions are now 10.11, 11.4, 11.8, and 12.3. |
+| [Microsoft SQL Server](/reference/announcements-release-notes/8100/8100-announcements.md#microsoft-sql-server-2019-no-longer-supported)    | Version 2019 no longer supported. Supported versions are now 2022 and 2025.             |
+| [MySQL](/reference/announcements-release-notes/8100/8100-announcements.md#mysql-97-now-supported)                                          | Version 9.7 LTS now supported. Supported versions are now 8.4 and 9.7.                  |
+| [OpenSearch](/reference/announcements-release-notes/8100/8100-announcements.md#opensearch-34-and-35-no-longer-supported)                   | Minimum supported 3.x version raised to 3.6. Supported versions are now 2.19+ and 3.6+. |
+| [Oracle](/reference/announcements-release-notes/8100/8100-announcements.md#oracle-23ai-rebranded-as-oracle-26ai)                           | Oracle 23ai rebranded as Oracle AI Database 26ai. Supported versions are 19c and 26ai.  |
+| [PostgreSQL](/reference/announcements-release-notes/8100/8100-announcements.md#postgresql-14-no-longer-supported)                          | Version 14 no longer supported. Supported versions are now 15, 16, 17, and 18.          |
 
 :::info
 For complete details, including breaking changes and deprecations, see [release announcements](./8100-announcements.md) and [supported environments](/reference/supported-environments.md).
