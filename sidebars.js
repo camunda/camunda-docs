@@ -825,6 +825,7 @@ module.exports = {
               items: [
                 "components/hub/organization/analyze-operations/hub-dashboard",
                 "components/hub/organization/analyze-operations/job-dashboard",
+                "components/hub/organization/analyze-operations/business-value-dashboard",
               ],
             },
           ],

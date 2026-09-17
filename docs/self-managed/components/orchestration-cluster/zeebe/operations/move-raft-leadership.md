@@ -77,17 +77,7 @@ curl -X PUT \
   }'
 ```
 
-The priority change is asynchronous. Use the `changeId` from the response to poll that change every five seconds:
-
-```bash
-while true; do
-  curl -s 'http://{zeebe-gateway}:9600/actuator/cluster/changes/{changeId}'
-  echo
-  sleep 5
-done
-```
-
-Wait until `status` is `COMPLETED` before rebalancing. `GET /actuator/cluster` can also report a pending change for a cluster with only the default Physical Tenant, but use `GET /actuator/cluster/changes/{changeId}` for clusters with multiple Physical Tenants.
+The priority change is asynchronous. Use the [configuration change monitoring API](management-api.md#monitor-a-configuration-change) with the `changeId` from the response to monitor the change until it reaches a terminal status. Wait until the change completes before rebalancing.
 
 ## Rebalance the cluster
 
