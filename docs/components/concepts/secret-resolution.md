@@ -10,6 +10,10 @@ This is a separate mechanism from the connector runtime's `{{secrets.<name>}}` s
 
 The legacy form was the subject of [security notice 61](/reference/notices.md#notice-61), where an unscoped reference could resolve outside the field it was written in. The secret filter that notice introduces applies only to the legacy form. `camunda.secrets.<name>` resolution isn't affected: the broker records each reference's position in the job variables and replaces only that position, so a reference can't resolve at a field where it wasn't written.
 
+:::tip
+Desktop Modeler and Web Modeler flag legacy secret usage when the diagram's selected engine supports `camunda.secrets.<name>`. Use that hint to guide your migration to the new syntax.
+:::
+
 This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
 
 Secret resolution is available in both SaaS and Self-Managed. See [Availability](/components/concepts/secret-resolution-and-job-activation.md#availability) for what each offering provides and what you configure.
