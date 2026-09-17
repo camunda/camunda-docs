@@ -13,11 +13,11 @@ This page covers credentials that authenticate connector tasks, such as an AWS C
 
 ## Select a credential
 
-Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials on the cluster that match the credential type the connector needs.
+Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials in the connected environment that match the credential type the connector needs.
 
-Selecting a credential stores only a reference to it in your diagram. The credential's values stay on the cluster.
+Selecting a credential stores only a reference to it in your diagram. The credential's values stay in the environment.
 
-If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist on the cluster, or it was created for a different credential type.
+If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist in the connected environment, or it was created for a different credential type.
 
 ## What you can do in the chooser
 
@@ -40,7 +40,7 @@ To create a credential from the properties panel:
 2. Enter a **Credential name**. Camunda Hub suggests a **Credential ID** based on the name.
 3. Change the **Credential ID** if you want a different one. You cannot change it after the credential is created.
 4. Fill in the fields for this credential type. For a sensitive field, enter a reference to a secret that already exists on the cluster, using `camunda.secrets.` followed by the secret key, such as `camunda.secrets.AWS_SECRET_KEY`.
-5. Save the credential. Camunda Hub creates it on the cluster and selects it on the connector task.
+5. Save the credential. Camunda Hub creates it in the connected environment and selects it on the connector task.
 
 Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. Saving is still allowed, so replace the value with a reference to keep the sensitive value in the secrets vault. For the reference syntax, see [reference a secret from a credential field](./index.md#reference-a-secret-from-a-credential-field).
 
@@ -56,7 +56,7 @@ A credential you create here is managed in Camunda Hub immediately. It appears o
 
 ## Edit or upgrade a credential
 
-Editing a credential opens the same form, pre-filled with its current values. Saving replaces the credential's values on the cluster, which takes effect immediately for every process that references it.
+Editing a credential opens the same form, pre-filled with its current values. Saving replaces the credential's values in the environment, which takes effect immediately for every process that references it.
 
 Upgrading a credential opens the same form and shows the fields that the newer credential version adds. Fill them in and save to make the credential usable with the connector version you are modeling against.
 
