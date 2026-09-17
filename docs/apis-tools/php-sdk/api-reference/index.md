@@ -56,7 +56,7 @@ $jobs = $client->api(\Camunda\Orchestration\Api\Api\JobApi::class);
 | [Message Api](message-api.md)                             | 2          |
 | [Message Subscription Api](message-subscription-api.md)   | 2          |
 | [Process Definition Api](process-definition-api.md)       | 9          |
-| [Process Instance Api](process-instance-api.md)           | 23         |
+| [Process instance Api](process-instance-api.md)           | 23         |
 | [Recovery Api](recovery-api.md)                           | 5          |
 | [Resource Api](resource-api.md)                           | 6          |
 | [Role Api](role-api.md)                                   | 17         |

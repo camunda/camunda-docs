@@ -42,7 +42,7 @@ function readme_programmatic_config(): void
 }
 ```
 
-## Basic auth
+## Basic authentication
 
 ```php
 function readme_basic_auth(): void
