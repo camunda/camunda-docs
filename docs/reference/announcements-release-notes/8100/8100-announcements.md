@@ -178,6 +178,21 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### AI Agent connectors: redesigned templates, legacy templates deprecated {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
+
+Camunda 8.10 introduces redesigned element templates for the AI Agent Task and AI Agent Sub-process connectors. The new templates broaden support for AI providers and backends, helping you use LLM routes that meet your organization's requirements. Provider-specific capabilities, such as thinking and prompt caching, can support cheaper, faster, and more transparent agent behavior. The legacy element templates are deprecated as of Camunda 8.10, but keep working; existing implementations aren't required to migrate immediately.
+
+**Action:** Use the new element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing legacy implementation to the new templates.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -356,6 +371,21 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### `key` sort field on the Tenant search endpoint deprecated
+
+The `key` sort field on the [Search tenants](/apis-tools/orchestration-cluster-api-rest/specifications/search-tenants.api.mdx) endpoint (`POST /v2/tenants/search`) is now deprecated. Sorting by this internal numeric identifier is inconsistent with other Identity entities (User, Group, and Mapping Rule), which do not expose key-based sorting, and tenants can no longer be filtered by `key` either.
+
+**Action:** Sort by `name` or `tenantId` instead.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -433,20 +463,32 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 </div>
 </div>
 
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Connectors change 1
+#### Webhook `responseBodyExpression` rejected at deployment {#webhook-response-body-expression}
 
-Connectors change 1 description.
+Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
 
-**Action:** Description.
+The connector runtime reports the connector as **DOWN**, and the validation error is included in the connector's status message.
+
+**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. Unlike `responseBodyExpression`, which set only the response body, `responseExpression` returns a full HTTP response:
+
+```json
+={
+  "body": {"myCustomKey": request.body.myDataKey1},
+  "statusCode": 201,
+  "headers": {"Content-Type": "application/json"}
+}
+```
+
+<p className="link-arrow">[Response expression](/components/connectors/protocol/http-webhook.md#response-expression)</p>
 
 </div>
-</div> -->
+</div>
 
 ## Data
 
@@ -675,9 +717,9 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 - `Operations Engineer` → `DevOps`, with no permission change.
 - Catalog access is now split into **Read** (Member, DevOps) and **Manage** (Analyst, Organization Admin, Organization Owner, who additionally see usage statistics and adoption data).
 
-`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions) for their status.
+`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/manage-users/index.md#roles-and-permissions) for their status.
 
-<p className="link-arrow">[Manage users in your organization](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions)</p>
+<p className="link-arrow">[Manage users in your organization](/components/hub/organization/manage-users/index.md#roles-and-permissions)</p>
 
 </div>
 </div>

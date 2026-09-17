@@ -144,10 +144,10 @@ The following matrix shows which component versions work together. Components wi
 
 For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
 
-| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                      |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x                                               | Web Modeler 8.9.x<br/>Desktop Modeler 5.46+ |
+| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                       |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x                                                                              | Camunda Hub 8.10.x<br/>Desktop Modeler 5.46+ |
 
 :::note
-You can use newer versions of Desktop and Web Modeler with older versions of the Orchestration Cluster.
+You can use newer versions of Desktop and Camunda Hub with older versions of the Orchestration Cluster.
 :::

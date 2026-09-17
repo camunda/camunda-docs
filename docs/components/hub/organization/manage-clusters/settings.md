@@ -1,6 +1,6 @@
 ---
 id: settings
-title: Settings
+title: Manage cluster settings
 description: "Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
 ---
 
@@ -8,13 +8,14 @@ Manage your cluster settings using authorizations, automatic cluster updates, an
 
 ## Manage cluster settings
 
-To manage your cluster settings:
+To manage your cluster settings in Camunda Hub SaaS:
 
-1. Navigate to **Camunda Hub**, and select the **Clusters** tab.
-2. Select the cluster you want to manage, and select the **Settings** tab.
-3. Enable/disable cluster settings as required, or delete the cluster.
+1. In the left navigation under **Clusters**, select a cluster.
+1. On the **Settings** tab, enable/disable cluster settings as required, or delete the cluster.
 
-![Cluster settings](./img/cluster-settings.png)
+:::tip
+In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
+:::
 
 ## Authorizations
 
@@ -121,8 +122,8 @@ Use [authorization-based access control](../../../concepts/access-control/author
 
 ## Delete this cluster
 
-You can _permanently_ delete the selected cluster. See [delete your cluster](/components/hub/organization/manage-clusters/manage-cluster.md#delete-a-cluster).
+You can _permanently_ delete the selected cluster.
 
-:::caution
+:::warning
 Deleting a cluster is permanent. You cannot reuse a cluster after it has been deleted.
 :::

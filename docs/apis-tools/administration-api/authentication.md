@@ -10,9 +10,11 @@ All Administration API requests require authentication. To authenticate, generat
 
 ## Generate a token
 
-1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
-2. Add permissions to this client for [the needed scopes](#client-credentials-and-scopes).
-3. Once you have created the client, capture the following values required to generate a token:
+1. In Camunda Hub, in the left navigation under **Console**, click **Organization**.
+2. In the **Administration API** tab, click **Create new credentials**.
+3. Name the client, and add permissions to this client for [the needed scopes](#client-credentials-and-scopes).
+4. Click **Create**.
+5. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |
@@ -24,7 +26,7 @@ All Administration API requests require authentication. To authenticate, generat
    :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
-4. Execute an authentication request to the token issuer:
+6. Execute an authentication request to the token issuer:
    ```bash
    curl --request POST ${CAMUNDA_OAUTH_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -43,7 +45,7 @@ All Administration API requests require authentication. To authenticate, generat
      "not-before-policy": 0
    }
    ```
-5. Capture the value of the `access_token` property and store it as your token.
+7. Capture the value of the `access_token` property and store it as your token.
 
 ## Use a token
 
@@ -75,22 +77,18 @@ Access tokens expire according to the `expires_in` property of a successful auth
 
 ## Client credentials and scopes
 
-To interact with Camunda 8 programmatically without using the Camunda 8 Console, create client credentials in the organization settings under the **Administration API** tab.
+To interact with Camunda 8 programmatically, [create client credentials](#generate-a-token) in the organization settings.
 
-Client credentials are created for an organization, and therefore can access all Camunda 8 clusters of this organization.
-
-Scopes define the access for client credentials. A client can have one or multiple of the following permissions:
-
-![createConsoleApiClient](../../components/hub/organization/manage-organization-settings/img/create-console-api-client.png)
+Client credentials are created for an organization, and therefore can access all Camunda 8 clusters of this organization. Scopes define the access for client credentials. A client can have one or multiple of the following permissions:
 
 A client can have one or multiple permissions from the following groups:
 
 - **Cluster**: [Manage your clusters](/components/hub/organization/manage-clusters/create-cluster.md).
 - **Zeebe Client**: [Manage API clients](/components/hub/organization/manage-clusters/manage-api-clients.md) for your cluster.
-- **Web Modeler API**: Interact with the [Web Modeler API](/apis-tools/web-modeler-api/index.md).
+- **Hub API**: Interact with the [Camunda Hub API](../hub-api-saas/overview.md).
 - **IP allowlist**: Configure [IP allowlist](/components/hub/organization/manage-clusters/manage-ip-allowlists.md) rules.
 - **Connector Secrets**: [Manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md) of your clusters.
-- **Members**: [Manage users](/components/hub/organization/manage-users/manage-users.md) in your organization.
+- **Members**: [Manage users](/components/hub/organization/manage-users/index.md) in your organization.
 - **Backups**: Manage [backups](/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).

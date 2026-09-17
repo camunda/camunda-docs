@@ -339,7 +339,7 @@ An element template embeds the configuration template definitions referenced by 
   - `id : String` is a required key that uniquely identifies the configuration template. It is referenced by a property's `configurationTemplate`.
   - `name : String` is a required key that defines the configuration template's display name.
   - `version : Integer` is a required key that defines the configuration template's version.
-  - `kind : String` is a required key that identifies the kind of configuration, for example `CREDENTIAL`. It determines how the configuration is interpreted and where it can be used.
+  - `kind : String` is a required key that identifies the kind of configuration, for example `CREDENTIAL`. It determines how the configuration is interpreted and where it can be used. For a worked example of a `CREDENTIAL` template, see [create a credential template](/components/connectors/custom-built-connectors/credential-templates.md).
   - `properties : Array<Object>` is a required key that defines the [properties](./template-properties.md) making up a configuration. Each property defines one field of the configuration's stored value; its `binding` names that field.
 
 ```json
