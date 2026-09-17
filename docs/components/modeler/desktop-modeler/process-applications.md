@@ -14,7 +14,7 @@ Desktop Modeler recognizes the [projects](../../concepts/process-applications.md
 
 For backward compatibility, Desktop Modeler also recognizes the legacy `.process-application` marker file, but does not create it for new Camunda projects.
 
-In professional software development, a typical Camunda project contains resources such as BPMN, DMN, and Form files. These live alongside [job workers](/components/concepts/job-workers.md), implementing process logic, additional application code, and tests. How exactly your project is structured may vary depending on the implementation language, libraries, and frameworks you use.
+A typical Camunda project contains resources such as BPMN, DMN, and Form files. These live alongside [job workers](/components/concepts/job-workers.md), implementing process logic, additional application code, and tests. How exactly your project is structured will vary depending on the implementation language, libraries, and frameworks you use.
 
 ## Example: Consumer loan application
 
