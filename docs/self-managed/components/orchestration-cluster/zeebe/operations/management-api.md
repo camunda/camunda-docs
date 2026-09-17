@@ -535,4 +535,4 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 ##### Response
 
-The response is a JSON object with the same shape as the [partition distribution response](#response).
+The response is a JSON object with the same shape as the [cluster configuration response](#response).
