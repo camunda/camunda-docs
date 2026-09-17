@@ -34,5 +34,5 @@ Our [Modeler](../modeler/about-modeler.md) applications support you as you devel
 
 Read more about how to use projects in Desktop Modeler:
 
-- [Projects in Camunda Hub](/docs/components/hub/workspace/manage-projects/manage-projects.md)
+- [Projects in Camunda Hub](/components/hub/workspace/manage-projects/manage-projects.md)
 - [Projects in Desktop Modeler](/components/modeler/desktop-modeler/process-applications.md)
