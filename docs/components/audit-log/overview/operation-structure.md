@@ -88,6 +88,8 @@ With the API, you can access more operation data than you can in the application
 
 Variable entries recorded during user task completion describe the variable change, separately from the task completion entry.
 
+Completion-variable source tagging is always on; the existing audit log enabled, category, and entity exclusion settings control whether these entries are exported.
+
 | Property                                      | Description                                                                                                             |
 | :-------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
 | `category`                                    | `USER_TASKS`.                                                                                                           |

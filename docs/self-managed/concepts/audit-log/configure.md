@@ -76,56 +76,18 @@ If you disable the audit log, new operations are no longer recorded. Changing th
 
 ## Record variables set by user task completion
 
-In Camunda 8.10, you can opt in to recording variable changes caused by completing a Camunda user task.
+In Camunda 8.10, variable changes caused by completing a Camunda user task are always tagged with their completion source.
 
-The setting is disabled by default and applies to new variable writes, not past completions. The audit log records successful variable creates and updates in the `USER_TASKS` category, separately from the task completion entry. With output mappings, only the propagated mapping results are recorded, not temporary mapping inputs. Variable values aren't included.
+This applies to new variable writes, not past completions. The audit log records successful variable creates and updates in the `USER_TASKS` category, separately from the task completion entry. With output mappings, only the propagated mapping results are recorded, not temporary mapping inputs. Variable values aren't included.
 
-Enable the setting in your deployment configuration:
+No dedicated feature flag is required. Use the existing audit log settings to control export:
 
-<Tabs groupId="configType" defaultValue="application.yaml">
-<TabItem value="application.yaml" label="Application properties">
-
-```yaml
-camunda:
-  data:
-    audit-log:
-      enabled: true
-      user-task-completion-variable-audit-enabled: true
-```
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-```bash
-CAMUNDA_DATA_AUDITLOG_ENABLED=true
-CAMUNDA_DATA_AUDITLOG_USERTASKCOMPLETIONVARIABLEAUDITENABLED=true
-```
-
-</TabItem>
-<TabItem value="helm" label="Helm">
-
-```yaml
-orchestration:
-  extraConfiguration:
-    - file: additional-spring-properties.yaml
-      content: |
-        camunda:
-          data:
-            audit-log:
-              enabled: true
-              user-task-completion-variable-audit-enabled: true
-```
-
-</TabItem>
-</Tabs>
-
-The existing actor and entity filters still apply:
-
+- Keep `camunda.data.audit-log.enabled` set to `true` (the default) to record audit entries.
 - Include `USER_TASKS` in the applicable actor's categories. User categories include it by default; client categories don't.
 - To record client-initiated completions, add `USER_TASKS` to `camunda.data.audit-log.client.categories` alongside any categories you already record.
-- Don't exclude `VARIABLE` in the applicable actor's `excludes` list. Excluding `USER_TASK` alone doesn't exclude variable entries.
+- Don't exclude `VARIABLE` in the applicable actor's `excludes` list. Excluding `VARIABLE` suppresses both completion-driven entries in `USER_TASKS` and direct API variable entries in `DEPLOYED_RESOURCES`. Excluding `USER_TASK` alone doesn't exclude variable entries.
 
-During an upgrade, keep this setting disabled until all brokers and record consumers support the new `USER_TASK_COMPLETION` variable source. Then enable it consistently across brokers. Disabling the setting later doesn't remove source values already written to the log.
+These settings control audit export, not completion-variable source tagging.
 
 ## Configure secondary storage retention
 

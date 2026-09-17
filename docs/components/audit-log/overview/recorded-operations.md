@@ -41,11 +41,11 @@ These operations belong to the category `USER_TASKS`. The following operations a
 
 #### Variables set by user task completion
 
-In Camunda 8.10 Self-Managed, you can opt in to auditing variable changes caused by completing a Camunda user task.
+In Camunda 8.10, variable changes caused by completing a Camunda user task are always tagged with their completion source.
 
-This behavior is disabled by default. Enable it with `camunda.data.audit-log.user-task-completion-variable-audit-enabled`, as described in [Configure the audit log](/self-managed/concepts/audit-log/configure.md#record-variables-set-by-user-task-completion).
+Audit export uses the existing audit log settings. These changes are recorded for users by default; clients require opting in to `USER_TASKS`. See [Configure the audit log](/self-managed/concepts/audit-log/configure.md#record-variables-set-by-user-task-completion) for the enabled, category, and entity exclusion settings.
 
-When enabled, the following successful operations belong to `USER_TASKS`, with entity type `VARIABLE`. They are separate from the user task's `COMPLETE` entry.
+The following successful operations belong to `USER_TASKS`, with entity type `VARIABLE`. They are separate from the user task's `COMPLETE` entry.
 
 | Operation type | Entity   | Tracked rejections |
 | :------------- | :------- | :----------------- |
@@ -55,9 +55,9 @@ When enabled, the following successful operations belong to `USER_TASKS`, with e
 - Without output mappings, the audit log records variables created or updated when completion variables propagate to their target scope.
 - With output mappings, the audit log records the propagated mapping results, not temporary local variables used to evaluate the mappings.
 - A completion that produces no variable create or update event produces no variable audit entry.
-- This setting doesn't enable auditing of job worker completion or other internal variable writes.
+- This behavior doesn't include auditing of job worker completion or other internal variable writes.
 
-Direct variable changes through the API remain in `DEPLOYED_RESOURCES`. Variable audit entries contain metadata, not variable values. See [Variable completion metadata](operation-structure.md#variable-completion-metadata) for details.
+Direct variable changes through the API remain in `DEPLOYED_RESOURCES`. Excluding `VARIABLE` for an actor excludes both completion-driven and direct API variable audit entries. Variable audit entries contain metadata, not variable values. See [Variable completion metadata](operation-structure.md#variable-completion-metadata) for details.
 
 ### `ADMIN` operations
 
