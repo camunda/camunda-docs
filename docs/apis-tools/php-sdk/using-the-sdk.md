@@ -33,7 +33,7 @@ function readme_async_client(): void
 {
     $client = CamundaAsyncClient::fromEnvironment();
 
-    $client->deployResourcesFromFilesAsync('order-process.bpmn')
+    $client->deployResourcesFromFiles('order-process.bpmn')
         ->then(static function ($result): void {
             // handle the DeploymentResult once the request resolves
         })
