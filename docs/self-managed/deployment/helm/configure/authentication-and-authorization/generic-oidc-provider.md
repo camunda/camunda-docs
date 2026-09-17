@@ -53,9 +53,9 @@ For each client, record:
 
 ## Assign a unique audience to each component
 
-Each Camunda component validates the `aud` claim of an incoming token against its own configured audience, and accepts any token that carries it.
+Camunda components can trust tokens from the same OIDC issuer while using the `aud` claim to identify the intended resource. Each component validates this claim against its configured audience and accepts any token that carries it.
 
-Components share a single Management Identity instance, so users, roles, and permissions are managed in one place. The audience is what separates the components from each other.
+Management Identity controls access to Camunda Hub and Optimize. The Orchestration Cluster manages its own roles and authorizations through Admin. Both subsystems can use the same OIDC provider, but their authorization checks remain independent.
 
 Decide a distinct audience for each component before you configure Helm, then configure your provider to issue it.
 
@@ -69,12 +69,15 @@ Decide a distinct audience for each component before you configure Helm, then co
 | Connectors             | Inherits the Orchestration Cluster audience           | `orchestration-api`                |
 
 :::warning
-If two components share an audience, a token issued for one is accepted by the other. Keep every value in this table distinct.
+If two components accept the same audience, a token intended for one can also pass the other's audience validation. Keep the resource audiences in this table distinct unless a supported integration requires one component to accept another's token.
 :::
 
 Do not derive these values by inspecting whatever token your provider returns by default. If several components are registered against one client or API identifier, inspection returns the same `aud` for all of them, so configuring what you find reproduces the collision instead of revealing it. Decide the values first, then use [token inspection](./jwt-token-claims.md) to confirm your provider issues them.
 
-Connectors is the one intended exception: it calls the Orchestration Cluster as a client and therefore uses the Orchestration Cluster's audience. See [Configure Connectors](#configure-connectors).
+The following integrations intentionally cross this audience boundary:
+
+- Connectors calls the Orchestration Cluster as a client and uses the Orchestration Cluster's audience. See [Configure Connectors](#configure-connectors).
+- Camunda Hub deployments that use `BEARER_TOKEN` authentication forward the user's Hub token to the Orchestration Cluster. Configure the cluster to accept the Camunda Hub UI audience in addition to its own audience. See [connect Admin to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 
 If you set `global.identity.auth.camundaHub.clientApiAudience` or `global.identity.auth.camundaHub.publicApiAudience`, those values override the corresponding Web Modeler values.
 
@@ -370,7 +373,7 @@ connectors:
 ```
 
 :::info Connectors shares credentials
-Connectors calls the Orchestration Cluster as a client, so it deliberately reuses the Orchestration Cluster's OIDC client and audience. This is a scoped exception to the [unique audience rule](#assign-a-unique-audience-to-each-component), not a general pattern. No other pair of components should share an audience. If you prefer a separate OIDC client for Connectors, you must also configure the Orchestration Cluster to accept that client's audience.
+Connectors calls the Orchestration Cluster as a client, so it deliberately reuses the Orchestration Cluster's OIDC client and audience. This is a scoped exception to the [unique audience guidance](#assign-a-unique-audience-to-each-component). If you prefer a separate OIDC client for Connectors, you must also configure the Orchestration Cluster to accept that client's audience.
 :::
 
 ### Configure Optimize
@@ -621,7 +624,7 @@ console:
 - All client secrets stored in the `oidc-credentials` secret.
 - Database passwords stored in the `camunda-credentials` secret.
 - Redirect URIs in OIDC provider match `redirectUrl` values.
-- Each component has a distinct audience, and token inspection confirms your provider issues it.
+- Each component has a distinct resource audience by default. Any cross-component audience acceptance supports a documented integration.
 - Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names.
 
 ## Connect to the cluster
