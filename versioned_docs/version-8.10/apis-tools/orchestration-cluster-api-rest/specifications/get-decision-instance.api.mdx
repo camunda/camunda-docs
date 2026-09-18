@@ -1,0 +1,723 @@
+---
+id: get-decision-instance
+title: "Get decision instance"
+sidebar_label: "Get decision instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get decision instance"} <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/decision-instances/{decisionEvaluationInstanceKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Returns a decision instance.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "DECISION_DEFINITION",
+      permissionType: "READ_DECISION_INSTANCE",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "decisionEvaluationInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the decision instance, which acts as a unique identifier for this decision instance.",
+      schema: {
+        description:
+          "System-generated identifier for a decision evaluation instance. It is composed of the\nparent decision evaluation key and the 1-based index of the evaluated decision within\nthat evaluation, joined by a hyphen (format: `<decisionEvaluationKey>-<index>`).\n",
+        format: "DecisionEvaluationInstanceKey",
+        type: "string",
+        example: "2251799813684367-1",
+        title: "DecisionEvaluationInstanceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision instance is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            allOf: [
+              {
+                type: "object",
+                required: [
+                  "businessId",
+                  "decisionDefinitionId",
+                  "decisionDefinitionKey",
+                  "decisionDefinitionName",
+                  "decisionDefinitionType",
+                  "decisionDefinitionVersion",
+                  "decisionEvaluationInstanceKey",
+                  "decisionEvaluationKey",
+                  "elementInstanceKey",
+                  "evaluationDate",
+                  "evaluationFailure",
+                  "processDefinitionKey",
+                  "processInstanceKey",
+                  "result",
+                  "rootDecisionDefinitionKey",
+                  "rootProcessInstanceKey",
+                  "state",
+                  "tenantId",
+                ],
+                properties: {
+                  businessId: {
+                    description:
+                      "The business ID of the owning process instance, inherited when the decision instance was\nevaluated. This is `null` for decision instances created before version 8.10, for\nstandalone decision evaluations, and for decision instances whose owning process instance\nhas no business ID.\n",
+                    nullable: true,
+                    allOf: [
+                      {
+                        description:
+                          "An optional, user-defined string identifier that identifies the process instance\nwithin the scope of a process definition (scoped by tenant). If provided and uniqueness\nenforcement is enabled, the engine will reject creation if another root process instance\nwith the same business id is already active for the same process definition.\nNote that any active child process instances with the same business id are not taken into account.\n",
+                        format: "BusinessId",
+                        type: "string",
+                        example: "order-12345",
+                        title: "BusinessId",
+                      },
+                    ],
+                    "x-added-in-version": "8.10",
+                  },
+                  decisionDefinitionId: {
+                    allOf: [
+                      {
+                        description:
+                          "Id of a decision definition, from the model. Only ids of decision definitions that are deployed are useful.",
+                        format: "DecisionDefinitionId",
+                        type: "string",
+                        example: "new-hire-onboarding-workflow",
+                        title: "DecisionDefinitionId",
+                      },
+                    ],
+                    description: "The ID of the DMN decision.",
+                  },
+                  decisionDefinitionKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a decision definition.",
+                        format: "DecisionDefinitionKey",
+                        example: "2251799813326547",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "DecisionDefinitionKey",
+                      },
+                    ],
+                    description: "The key of the decision.",
+                  },
+                  decisionDefinitionName: {
+                    type: "string",
+                    description: "The name of the DMN decision.",
+                  },
+                  decisionDefinitionType: {
+                    description:
+                      "The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10",
+                    type: "string",
+                    enum: [
+                      "DECISION_TABLE",
+                      "LITERAL_EXPRESSION",
+                      "UNSPECIFIED",
+                      "UNKNOWN",
+                    ],
+                    title: "DecisionDefinitionTypeEnum",
+                  },
+                  decisionDefinitionVersion: {
+                    type: "integer",
+                    format: "int32",
+                    description: "The version of the decision.",
+                  },
+                  decisionEvaluationInstanceKey: {
+                    description:
+                      "System-generated identifier for a decision evaluation instance. It is composed of the\nparent decision evaluation key and the 1-based index of the evaluated decision within\nthat evaluation, joined by a hyphen (format: `<decisionEvaluationKey>-<index>`).\n",
+                    format: "DecisionEvaluationInstanceKey",
+                    type: "string",
+                    example: "2251799813684367-1",
+                    title: "DecisionEvaluationInstanceKey",
+                  },
+                  decisionEvaluationKey: {
+                    allOf: [
+                      {
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        description:
+                          "System-generated key for a decision evaluation.",
+                        format: "DecisionEvaluationKey",
+                        example: "2251792362345323",
+                        type: "string",
+                        title: "DecisionEvaluationKey",
+                      },
+                    ],
+                    description:
+                      "The key of the decision evaluation where this instance was created.",
+                  },
+                  elementInstanceKey: {
+                    description:
+                      "The key of the element instance this decision instance is linked to.",
+                    nullable: true,
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a element instance.",
+                        format: "ElementInstanceKey",
+                        example: "2251799813686789",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ElementInstanceKey",
+                      },
+                    ],
+                  },
+                  evaluationDate: {
+                    type: "string",
+                    format: "date-time",
+                    description:
+                      "The evaluation date of the decision instance.",
+                  },
+                  evaluationFailure: {
+                    type: "string",
+                    nullable: true,
+                    description:
+                      "The evaluation failure of the decision instance.",
+                  },
+                  processDefinitionKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a deployed process definition.",
+                        format: "ProcessDefinitionKey",
+                        example: "2251799813686749",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessDefinitionKey",
+                      },
+                    ],
+                    nullable: true,
+                    description: "The key of the process definition.",
+                  },
+                  processInstanceKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a process instance.",
+                        format: "ProcessInstanceKey",
+                        example: "2251799813690746",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessInstanceKey",
+                      },
+                    ],
+                    nullable: true,
+                    description: "The key of the process instance.",
+                  },
+                  result: {
+                    type: "string",
+                    description: "The result of the decision instance.",
+                  },
+                  rootDecisionDefinitionKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a decision definition.",
+                        format: "DecisionDefinitionKey",
+                        example: "2251799813326547",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "DecisionDefinitionKey",
+                      },
+                    ],
+                    description: "The key of the root decision definition.",
+                    "x-added-in-version": "8.9",
+                  },
+                  rootProcessInstanceKey: {
+                    description:
+                      "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
+                    nullable: true,
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a process instance.",
+                        format: "ProcessInstanceKey",
+                        example: "2251799813690746",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessInstanceKey",
+                      },
+                    ],
+                    "x-added-in-version": "8.9",
+                  },
+                  state: {
+                    description:
+                      "The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10",
+                    type: "string",
+                    enum: ["EVALUATED", "FAILED", "UNSPECIFIED", "UNKNOWN"],
+                    title: "DecisionInstanceStateEnum",
+                  },
+                  tenantId: {
+                    description: "The tenant ID of the decision instance.",
+                    allOf: [
+                      {
+                        example: "customer-service",
+                        description: "The unique identifier of the tenant.",
+                        format: "TenantId",
+                        type: "string",
+                        title: "TenantId",
+                      },
+                    ],
+                  },
+                },
+                title: "DecisionInstanceResult",
+              },
+              {
+                type: "object",
+                required: ["evaluatedInputs", "matchedRules"],
+                properties: {
+                  evaluatedInputs: {
+                    type: "array",
+                    items: {
+                      required: ["inputId", "inputName", "inputValue"],
+                      type: "object",
+                      description:
+                        "A decision input that was evaluated within this decision evaluation.",
+                      properties: {
+                        inputId: {
+                          type: "string",
+                          description: "The identifier of the decision input.",
+                        },
+                        inputName: {
+                          type: "string",
+                          description: "The name of the decision input.",
+                        },
+                        inputValue: {
+                          description: "The value of the decision input.",
+                          type: "string",
+                        },
+                      },
+                      title: "EvaluatedDecisionInputItem",
+                    },
+                    description:
+                      "The evaluated inputs of the decision instance.\n",
+                  },
+                  matchedRules: {
+                    type: "array",
+                    items: {
+                      required: ["evaluatedOutputs", "ruleId", "ruleIndex"],
+                      type: "object",
+                      description:
+                        "A decision rule that matched within this decision evaluation.",
+                      properties: {
+                        ruleId: {
+                          description: "The ID of the matched rule.",
+                          type: "string",
+                        },
+                        ruleIndex: {
+                          description: "The index of the matched rule.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        evaluatedOutputs: {
+                          description: "The evaluated decision outputs.",
+                          type: "array",
+                          items: {
+                            required: [
+                              "ruleId",
+                              "ruleIndex",
+                              "outputId",
+                              "outputName",
+                              "outputValue",
+                            ],
+                            type: "object",
+                            description: "The evaluated decision outputs.",
+                            properties: {
+                              outputId: {
+                                description:
+                                  "The ID of the evaluated decison output item.",
+                                type: "string",
+                              },
+                              outputName: {
+                                description:
+                                  "The name of the of the evaluated decison output item.",
+                                type: "string",
+                              },
+                              outputValue: {
+                                description:
+                                  "The value of the evaluated decison output item.",
+                                type: "string",
+                              },
+                              ruleId: {
+                                description: "The ID of the matched rule.",
+                                nullable: true,
+                                type: "string",
+                                "x-added-in-version": "8.9",
+                              },
+                              ruleIndex: {
+                                description: "The index of the matched rule.",
+                                nullable: true,
+                                type: "integer",
+                                format: "int32",
+                                "x-added-in-version": "8.9",
+                              },
+                            },
+                            title: "EvaluatedDecisionOutputItem",
+                          },
+                        },
+                      },
+                      title: "MatchedDecisionRuleItem",
+                    },
+                    description:
+                      "The matched rules of the decision instance.\n",
+                  },
+                },
+              },
+            ],
+            title: "DecisionInstanceGetQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The decision instance with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
