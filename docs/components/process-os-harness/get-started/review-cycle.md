@@ -8,14 +8,12 @@ keywords: ["ProcessOS Harness", "review cycle", "SME", "sign-off"]
 
 A review cycle is how ProcessOS Harness keeps a human in the loop. In each cycle, SMEs answer open questions and review generated artifacts, and the cycle repeats until they sign off on the result.
 
-Every phase contains one or more review cycles. The sign-off at the end of a cycle is what allows the project to move to the next phase, which makes review the main quality gate in a ProcessOS Harness engagement.
-
 ## How a cycle runs
 
 1. ProcessOS Harness generates artifacts and collects the questions it can't answer from the sources it has.
 1. SMEs answer the open questions and comment on the generated artifacts.
 1. You feed the answers and comments back into the project, and ProcessOS Harness regenerates the affected results.
-1. SMEs either request another cycle or sign off.
+1. You either request another cycle or sign off.
 
 Because the interaction model is iterative, plan for more than one cycle per phase. A first-pass result that needs correction is the expected outcome, not a failure.
 
