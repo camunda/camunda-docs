@@ -1,13 +1,13 @@
 ---
 id: document-api
-title: "Document API"
-sidebar_label: "Document API"
+title: "Document Api"
+sidebar_label: "Document Api"
 sidebar_position: 16
 mdx:
   format: md
 ---
 
-# Document API
+# Document Api
 
 `DocumentApi` — 5 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\DocumentApi::class)`.
 
