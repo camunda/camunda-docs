@@ -205,7 +205,7 @@ module.exports = {
             require("./docs/components/modeler/reference/sidebar-schema"),
           ],
         },
-        "components/concepts/process-applications",
+        "components/concepts/projects",
         "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {

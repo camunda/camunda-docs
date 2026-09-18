@@ -239,6 +239,7 @@ RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/component
 RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
 
 # Process applications - specific renamed files
+RewriteRule ^/docs/next/components/concepts/process-applications/?$ /docs/next/components/concepts/projects [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/?$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/next/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/process-application-versioning/?$ /docs/next/components/hub/workspace/manage-projects/project-versioning/ [R=301,L]
