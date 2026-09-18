@@ -505,25 +505,37 @@ To enable OIDC, set the following in your `terraform.tfvars` or pass it with `-v
 authentication_mode = "oidc"
 ```
 
+Use `admin_claim_value` to choose which principal becomes the platform administrator. It defaults to `admin`, the user the bundled provider creates. With your own provider, set it to a principal that exists in your directory, otherwise nobody is granted the administrator role.
+
 ### Choose an OIDC provider
 
 The reference architecture ships a bundled OIDC provider so the stack runs end-to-end without an external dependency. Every Camunda component reads a single provider-agnostic OIDC interface, so the bundled provider and your own provider are wired the same way.
 
 To use your own provider, such as Microsoft Entra ID or Okta, set the `external_oidc` object. The bundled provider is then skipped entirely.
 
-| Field                             | Description                                                                |
-| --------------------------------- | -------------------------------------------------------------------------- |
-| `issuer_uri`                      | Issuer URI of your OIDC provider, used for discovery and token validation. |
-| `token_uri`                       | Token endpoint used for machine-to-machine authentication.                 |
-| `audience`                        | Audience expected in issued access tokens.                                 |
-| `identity_client_id`              | Client ID registered for Management Identity.                              |
-| `identity_client_secret_arn`      | Secrets Manager ARN holding the Management Identity client secret.         |
-| `orchestration_client_id`         | Client ID registered for the Orchestration Cluster.                        |
-| `orchestration_client_secret_arn` | Secrets Manager ARN holding the Orchestration Cluster client secret.       |
-| `connectors_client_id`            | Client ID registered for Connectors.                                       |
-| `connectors_client_secret_arn`    | Secrets Manager ARN holding the Connectors client secret.                  |
+| Field                             | Required | Description                                                                                                                       |
+| --------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `issuer_uri`                      | Yes      | Issuer URI of your OIDC provider, used for discovery and token validation.                                                        |
+| `token_uri`                       | Yes      | Token endpoint used for machine-to-machine authentication.                                                                        |
+| `orchestration_audience`          | Yes      | Audience the Orchestration Cluster validates on incoming tokens.                                                                  |
+| `identity_audience`               | Yes      | Audience for Management Identity's own resource server. Keep it separate from the Orchestration Cluster audience.                 |
+| `identity_client_id`              | Yes      | Client ID registered for Management Identity.                                                                                     |
+| `identity_client_secret_arn`      | Yes      | Secrets Manager ARN holding the Management Identity client secret.                                                                |
+| `orchestration_client_id`         | Yes      | Client ID registered for the Orchestration Cluster.                                                                               |
+| `orchestration_client_secret_arn` | Yes      | Secrets Manager ARN holding the Orchestration Cluster client secret.                                                              |
+| `connectors_client_id`            | Yes      | Client ID registered for Connectors.                                                                                              |
+| `connectors_client_secret_arn`    | Yes      | Secrets Manager ARN holding the Connectors client secret.                                                                         |
+| `username_claim`                  | No       | Claim that carries the user name. Defaults to `preferred_username`.                                                               |
+| `client_id_claim`                 | No       | Claim that identifies the calling application. Defaults to `client_id`. Microsoft Entra ID uses `azp` (v2) or `appid` (v1).       |
+| `connectors_token_scope`          | No       | Scope Connectors requests on the client credentials call. Empty by default. Microsoft Entra ID v2 requires `<resource>/.default`. |
 
-Register one client per component in your provider, store each client secret in AWS Secrets Manager, and reference the secrets by ARN. Terraform never accepts raw secret values here. All fields are required once `external_oidc` is set, and `external_oidc` is only valid together with `authentication_mode = "oidc"`. Both rules are enforced by plan-time preconditions.
+Register one client per component in your provider, store each client secret in AWS Secrets Manager, and reference the secrets by ARN. Terraform never accepts raw secret values here. Every required field must be non-empty once `external_oidc` is set, and `external_oidc` is only valid together with `authentication_mode = "oidc"`. Both rules are enforced by plan-time preconditions.
+
+The Orchestration Cluster and Management Identity are separate resource servers, so they need separate audiences. Pointing both at one value aims Management Identity's permissions at the Orchestration Cluster API.
+
+:::note
+Encrypt the client secrets either with the AWS-managed Secrets Manager key or with the same customer-managed key this stack uses through `secrets_kms_key_arn`. The ECS task role can decrypt only one key, so a secret under any other customer-managed key fails at task start with `ResourceInitializationError`.
+:::
 
 ```hcl
 authentication_mode = "oidc"
@@ -531,7 +543,8 @@ authentication_mode = "oidc"
 external_oidc = {
   issuer_uri                      = "https://login.example.com/realms/camunda"
   token_uri                       = "https://login.example.com/realms/camunda/protocol/openid-connect/token"
-  audience                        = "camunda-api"
+  orchestration_audience          = "camunda-api"
+  identity_audience               = "camunda-identity-resource-server"
   identity_client_id              = "camunda-identity"
   identity_client_secret_arn      = "arn:aws:secretsmanager:eu-central-1:123456789012:secret:identity-client-secret"
   orchestration_client_id         = "orchestration"
@@ -542,7 +555,7 @@ external_oidc = {
 ```
 
 :::warning
-Browser-based OIDC login does not complete over plain HTTP. Set `alb_certificate_arn` to an AWS Certificate Manager (ACM) certificate ARN before enabling OIDC. The Application Load Balancer then serves an HTTPS listener on port 443, redirects port 80 to it, and forwards the `X-Forwarded-Proto` header so the login redirect succeeds. Use `alb_ssl_policy` to change the negotiated SSL policy.
+Browser-based OIDC login does not complete over plain HTTP. Set `alb_certificate_arn` to an AWS Certificate Manager (ACM) certificate ARN before enabling OIDC, and set `alb_public_hostname` to the DNS name clients use to reach the load balancer, such as `camunda.example.com`. Both are needed together: every OIDC URL is built from the public host name, and ACM cannot issue a certificate for the load balancer's own `*.elb.amazonaws.com` name. Terraform fails at plan time if you set the certificate without the host name. The Application Load Balancer then serves an HTTPS listener on port 443 and redirects port 80 to it. Use `alb_ssl_policy` to change the negotiated SSL policy.
 :::
 
 ### Resources created for Management Identity
@@ -551,10 +564,10 @@ Browser-based OIDC login does not complete over plain HTTP. Set `alb_certificate
 
 - ECS Service and task definition, running Management Identity in generic OIDC mode.
 - Task-specific IAM role, isolated to this component.
-- Load balancer configuration to add a listener rule to the shared Application Load Balancer. Exposure is opt-in and disabled by default through `enable_alb_http_webapp_listener_rule`.
+- Load balancer configuration to add a listener rule to the shared Application Load Balancer, serving Management Identity under the `/identity` context path.
 - Networking configuration that registers Management Identity with ECS Service Connect, reachable inside the VPC as `identity` on port `8084`, with the management endpoint on port `8082`.
 
-Management Identity uses a dedicated `identity` database on the shared Aurora PostgreSQL cluster with **password authentication**, rather than the IAM database authentication the Orchestration Cluster uses. The database name and role are configurable through `identity_db_name` and `identity_db_username`, and the generated password is stored in AWS Secrets Manager.
+Management Identity uses a dedicated `identity` database on the shared Aurora PostgreSQL cluster with IAM database authentication, the same mechanism the Orchestration Cluster uses. The image ships the AWS Advanced JDBC wrapper, and the reference architecture points the Spring datasource at it, so the task authenticates with short-lived IAM tokens and never receives a static database password. The database name and role are configurable through `identity_db_name` and `identity_db_username`. A password for the role still exists in AWS Secrets Manager, used only by the database seed task to bootstrap the role.
 
 In generic OIDC mode, Management Identity validates tokens and handles login. The identity provider owns clients and users, and role-to-principal mapping is done on the Camunda side.
 
@@ -590,21 +603,27 @@ When you use the bundled provider, the identity provider password is generated a
 
 [Camunda Hub](/self-managed/components/hub/index.md) bundles Web Modeler and Console, and is deployed as one additional ECS task running two containers: the REST API with the web interface, and a websockets relay used for real-time collaboration.
 
-Camunda Hub is optional and disabled by default. It authenticates through OIDC and cannot use Basic authentication, so it requires `authentication_mode = "oidc"`. If you enable Camunda Hub without OIDC, Terraform fails during `terraform plan` with a precondition error.
+Camunda Hub is optional and disabled by default. It authenticates through OIDC and cannot use Basic authentication, so it requires `authentication_mode = "oidc"`. It also requires `enable_camunda_hub_authorization`, which seeds Management Identity with the roles and permissions Camunda Hub checks against. Terraform fails during `terraform plan` with a precondition error if either is missing.
 
 ```hcl
-authentication_mode = "oidc"
-enable_camunda_hub  = true
+authentication_mode              = "oidc"
+enable_camunda_hub               = true
+enable_camunda_hub_authorization = true
 ```
 
 The following inputs control the deployment:
 
-| Input                          | Description                                                                                                                                            | Default                                          |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
-| `enable_camunda_hub`           | Deploy the Camunda Hub ECS task. Requires `authentication_mode = "oidc"`.                                                                              | `false`                                          |
-| `camunda_hub_restapi_image`    | Container image for the Camunda Hub REST API and web interface.                                                                                        | The matching `camunda/hub` 8.10 image            |
-| `camunda_hub_websockets_image` | Container image for the Camunda Hub websockets relay.                                                                                                  | The matching `camunda/hub-websockets` 8.10 image |
-| `camunda_license_key`          | Camunda license key. Leave empty to run Camunda Hub in trial mode. When set, it's stored in AWS Secrets Manager and injected as `CAMUNDA_LICENSE_KEY`. | `""`                                             |
+| Input                              | Description                                                                                                                                            | Default                                          |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| `enable_camunda_hub`               | Deploy the Camunda Hub ECS task. Requires `authentication_mode = "oidc"` and `enable_camunda_hub_authorization`.                                       | `false`                                          |
+| `enable_camunda_hub_authorization` | Seed Management Identity with the resource servers, permissions, and roles Camunda Hub needs, and grant them to the administrator principal.           | `false`                                          |
+| `camunda_hub_restapi_image`        | Container image for the Camunda Hub REST API and web interface.                                                                                        | The matching `camunda/hub` 8.10 image            |
+| `camunda_hub_websockets_image`     | Container image for the Camunda Hub websockets relay.                                                                                                  | The matching `camunda/hub-websockets` 8.10 image |
+| `camunda_hub_db_name`              | Name of the dedicated Camunda Hub database on the shared Aurora cluster.                                                                               | `camunda-hub`                                    |
+| `camunda_hub_db_username`          | Database role for Camunda Hub. It authenticates with an IAM token, so it carries no password.                                                          | `camunda-hub`                                    |
+| `camunda_license_key`              | Camunda license key. Leave empty to run Camunda Hub in trial mode. When set, it's stored in AWS Secrets Manager and injected as `CAMUNDA_LICENSE_KEY`. | `""`                                             |
+
+Without the authorization seed, Camunda Hub still signs users in, so the deployment looks healthy while every project call is denied. Management Identity declares no roles by default, so the roles Camunda Hub asks about do not exist.
 
 ### Resources created for Camunda Hub
 
@@ -716,7 +735,7 @@ The ALB exposes both the Orchestration and Connectors through the same port and 
   - `/*` routes to the Orchestration Cluster UI/REST API
   - `/connectors*` routes to the Connectors
   - `/hub*` routes to Camunda Hub and `/hub-ws*` to its websockets relay, when `enable_camunda_hub = true`
-  - `/identity*` routes to Management Identity, when OIDC is enabled and you turn on its ALB exposure
+  - `/identity*` routes to Management Identity, when OIDC is enabled
 - ALB:9600 (optional - not recommended to be exposed publicly)
   - `/*` routes to the Orchestration Cluster
   - Connectors has the management port with the web server combined by default
@@ -748,7 +767,7 @@ The ALB exposes both the Orchestration and Connectors through the same port and 
      --output text
    ```
 
-   When you bring your own provider through `external_oidc`, this secret is not created. Sign in with an account from your provider instead, and make sure its `preferred_username` claim matches the administrator identifier configured for the Orchestration Cluster.
+   When you bring your own provider through `external_oidc`, this secret is not created. Sign in with an account from your provider instead, and make sure the claim named by `username_claim` matches the value of `admin_claim_value`.
 
    </TabItem>
    </Tabs>
