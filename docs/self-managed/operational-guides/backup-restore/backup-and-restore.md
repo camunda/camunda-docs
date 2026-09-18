@@ -220,7 +220,7 @@ Both scopes serve the same operations:
 | History backup    | `/physical-tenants/{physicalTenantId}/v2/backups/history`       | `/cluster/v2/backups/history`       |
 | Exporting control | `/physical-tenants/{physicalTenantId}/v2/exporting`             | `/cluster/v2/exporting`             |
 
-Each cluster-wide endpoint also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin call to one tenant. Omit it to target every Physical Tenant.
+These backup and exporting endpoints don't accept a `physicalTenantId` query parameter to narrow the call to one tenant; only the Recovery endpoints (`POST /cluster/v2/restore` and `PATCH /cluster/v2/mode`) do. A cluster-wide backup or exporting call always fans out to every configured tenant.
 
 A cluster-wide request fans out to each tenant and reports the outcome per tenant, so a partial result is visible rather than hidden. Because each tenant reaches its terminal state independently, a cluster-wide backup is a set of per-tenant backups rather than a single coordinated snapshot.
 
