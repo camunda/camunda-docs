@@ -384,10 +384,10 @@ The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanin
 | `org.camunda.bpm.engine.delegate.*`                                       | `io.camunda.client.api.worker.JobHandler`                        |
 | `org.camunda.bpm.engine.variable.*`                                       | (plain Java collections)                                         |
 | `org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*`            | `io.camunda.process.test.api.CamundaAssert.*`                    |
-| —                                                                         | `io.camunda.process.test.api.assertions.ElementSelectors.byName` |
-| —                                                                         | `io.camunda.process.test.api.assertions.UserTaskSelectors`       |
-| —                                                                         | `io.camunda.process.test.api.CamundaProcessTestContext`          |
-| —                                                                         | `io.camunda.process.test.api.CamundaSpringProcessTest`           |
+| N/A                                                                       | `io.camunda.process.test.api.assertions.ElementSelectors.byName` |
+| N/A                                                                       | `io.camunda.process.test.api.assertions.UserTaskSelectors`       |
+| N/A                                                                       | `io.camunda.process.test.api.CamundaProcessTestContext`          |
+| N/A                                                                       | `io.camunda.process.test.api.CamundaSpringProcessTest`           |
 | `org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication` | `io.camunda.client.annotation.Deployment`                        |
 
 ## Example: Adjust a Spring Boot application
