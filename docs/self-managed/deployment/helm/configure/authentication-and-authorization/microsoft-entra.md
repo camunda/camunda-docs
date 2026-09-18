@@ -535,7 +535,9 @@ For example:
 
 ## Configure machine-to-machine (M2M) API access
 
-Job workers, Connectors, and other applications that call the Orchestration Cluster REST or gRPC API without a user present authenticate with the OAuth **client credentials** grant instead of the interactive login covered above. This section registers a dedicated Entra application for M2M access and configures a Camunda client to use it.
+Job workers, Connectors, and other applications that call the Orchestration Cluster REST or gRPC API without a user present use the OAuth client credentials grant instead of interactive login.
+
+In this section, you register a dedicated Entra application for M2M access and configure a Camunda client to use it.
 
 For the general, provider-agnostic explanation of this flow, see [machine-to-machine (M2M) API access](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#machine-to-machine-m2m-api-access).
 
@@ -575,7 +577,7 @@ camunda:
 Replace `<oc-app-id>` with the Orchestration Cluster application's client ID from [Create applications in Entra](#create-applications-in-entra), and `<tenant id>` with your Microsoft Entra tenant ID.
 
 :::note
-Unlike other Entra OAuth scopes, the M2M scope must end in `/.default` instead of being requested individually. This tells Entra to issue a token for all statically configured application permissions on the API, instead of the delegated permissions used during interactive login.
+For the client credentials flow, request the `<oc-app-id>/.default` scope. This tells Entra to issue a token for the statically configured application permissions on the API rather than the delegated permissions used during interactive login.
 :::
 
 The Orchestration Cluster identifies this client using the `azp` claim, configured as `clientIdClaim: azp` in [Configure Orchestration Cluster](#configure-orchestration-cluster). By default, requests from this client can only retrieve the cluster topology. To grant it access to other APIs, [configure authorizations](/components/concepts/access-control/authorizations.md) for its client ID.
