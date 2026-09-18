@@ -43,7 +43,7 @@ Choose a Java migration path after you inventory your codebase. Before you use a
 | **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review its output.                                             | The agent reads source code and migration patterns directly. Model quality materially affects the output, so review source-to-output mappings and behavior. |
 | **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. | Run OpenRewrite, then use AI or manual work to finish the migration. Expect scaffolding, generated names, TODOs, and cleanup.                               |
 
-A user comparison across four migration runs found that the AI-first path produced cleaner, more idiomatic Java code with fewer workflow passes. Treat this as selection guidance, not a guarantee. Neither path guarantees lower token use, cost, or migration time.
+Neither path guarantees lower token use, cost, or migration time.
 
 ## API mapping guide
 
