@@ -17,7 +17,16 @@ Select any environment configured for your project as your test target. In SaaS,
 Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
 :::
 
-Opening the **Test** tab no longer deploys your process automatically. Click **Deploy** to deploy the current version of the active process and all its dependencies, like called processes or DMN files, to the selected cluster. Once deployed, you can run or create test cases.
+Opening the **Test** tab no longer deploys your process automatically. Click **Deploy** to deploy the current version of your process to the selected cluster. Once deployed, you can run or create test cases.
+
+If the open BPMN file is part of a process application, choose a deploy scope before deploying:
+
+- **This resource** — deploys only the open file. An info alert reminds you that referenced resources, such as called processes, DMN files, or forms, must be deployed separately, or test runs fail with a `not found` incident.
+- **All resources** — deploys the whole process application, including dependencies like called processes or DMN files.
+
+Files outside a process application deploy as **All resources** only; no scope choice is shown.
+
+The tile matching what is already deployed on the cluster is marked **Deployed**, and its **Deploy** button is disabled until you switch to the other tile. In read-only mode, **This resource** is disabled.
 
 The selected cluster name is shown in the Test action bar. Click it to switch clusters without leaving Test mode; the newly selected cluster becomes the deployment and execution target.
 
@@ -46,7 +55,9 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 ![Test mode process definition view showing the Configure test case overlay](../img/test-definition.png)
 
-When you open the **Test** tab for the first time in a process a **Setup environment** overlay prompts you to select a cluster and deploy your process. Once deployed you can **Configure a test case**.
+When you open the **Test** tab for the first time in a process, a panel guides you through three collapsible steps: **Choose where to run**, **Deploy process**, and **Configure test case**. Completing a step expands the next one.
+
+Once **Deploy process** succeeds, it shows a **Successfully deployed** badge, or a failure badge if the deploy fails, and the panel automatically collapses the setup steps and scrolls to **Configure test case**.
 
 ![Configure test case panel](../img/test-configure-test-case.png)
 
