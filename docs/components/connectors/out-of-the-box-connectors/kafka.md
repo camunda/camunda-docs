@@ -309,6 +309,15 @@ Additionally, to learn more about supported consumer configurations, see the [of
 
 :::
 
+### Modify an existing inbound Kafka connector
+
+Editing the **Consumer Group ID** or **Offsets** properties on an already deployed inbound Kafka connector element can cause unexpected behavior. Delete the element and create a new one instead of editing these properties in place.
+
+- **Consumer Group ID**: If you clear this field on an existing element, the connector generates a new ID from its internal deduplication key instead of reusing the previous one. Kafka then treats the connector as a new consumer group, which can cause it to replay already processed messages.
+- **Offsets**: If the number of offsets you provide does not match the topic's actual partition count, activation fails with an error.
+
+This is one example of a general pattern for inbound connectors. See [modify an existing inbound connector element](../advanced-topics/inbound-lifecycle.md#modify-an-existing-inbound-connector-element) for more details.
+
 ### Schema strategy
 
 #### No schema
@@ -406,6 +415,14 @@ To ignore messages that do not meet the activation condition and commit the offs
 | Unchecked                             | Matched              | connector is triggered, offsets are commited         |
 | Checked                               | Unmatched            | connector is not triggered, offsets are commited     |
 | Unchecked                             | Unmatched            | connector is not triggered, offsets are not commited |
+
+#### Upgrade from a version without the Consume unmatched events checkbox
+
+If your inbound Kafka connector element was deployed before the **Consume unmatched events** checkbox existed, the underlying property is absent from that element and defaults to unchecked. Upgrading the runtime does not change this default, so the element keeps its original behavior: it does not commit the offset when a message does not match the activation condition.
+
+To adopt the checked behavior on an existing element, update its element template and redeploy it. Creating a new element with a current template also picks up the new default of checked.
+
+This is one example of a general pattern for inbound connectors. See [modify an existing inbound connector element](../advanced-topics/inbound-lifecycle.md#modify-an-existing-inbound-connector-element) for more details.
 
 ### Correlation
 

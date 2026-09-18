@@ -631,9 +631,12 @@ You can start the runtime including your Connector jar by running:
 docker run --rm -i \
   -v $PWD/your-connector.jar:/opt/app/connector.jar \         # Add a connector jar to the classpath
   --network=camunda \                                         # Optional: Attach to the orchestration cluster Docker network
-  -e CAMUNDA_CLIENT_GRPC_ADDRESS=http://orchestration:26500 \ # Specify cluster GRPC API address
-  -e CAMUNDA_CLIENT_REST_ADDRESS=http://orchestration:8080 \  # Specify cluster REST API address
+  -e CAMUNDA_CLIENT_MODE=self-managed \                       # Connect to a Self-Managed cluster
+  -e CAMUNDA_CLIENT_GRPCADDRESS=http://orchestration:26500 \  # Specify cluster gRPC API address
+  -e CAMUNDA_CLIENT_RESTADDRESS=http://orchestration:8080 \   # Specify cluster REST API address
   camunda/connectors:X.Y.Z                                    # Connector docker image version
 ```
 
 If you would like to disable inbound connectors, you can do so by setting `CAMUNDA_CONNECTOR_POLLING_ENABLED=false`.
+
+These environment variables map to the same Camunda client properties used across all Camunda 8 components. For the full list of properties, their env var equivalents, and authentication method examples, see [Connectors configuration](/self-managed/components/connectors/connectors-configuration.md).
