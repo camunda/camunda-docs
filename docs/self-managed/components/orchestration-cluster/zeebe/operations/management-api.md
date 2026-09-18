@@ -370,7 +370,7 @@ curl -X 'PUT' \
 
 You can do a dry run without executing the change by setting the `dryRun` request parameter to `true`. By default, `dryRun` is set to `false`.
 
-#### Response
+#### Response {#partitioning-response}
 
 The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml) for details:
 
@@ -458,7 +458,7 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 ##### Response
 
-The response is a JSON object with the same shape as the [cluster configuration response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
+The response is a JSON object with the same shape as the [partitioning response](#partitioning-response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
 
 After the operation completes, verify that the zone is present under `partitioning` and that its brokers host their assigned partitions in the `brokers` array. You can also query the [Orchestration Cluster REST API specification for `GET /v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx) to verify the broker and partition assignments.
 
@@ -495,7 +495,7 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 ##### Response
 
-The response is a JSON object with the same shape as the [cluster configuration response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
+The response is a JSON object with the same shape as the [partitioning response](#partitioning-response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
 
 After the operation completes, verify that the removed zone is no longer present under `partitioning` and that its brokers no longer host partitions. Only then shut down the removed zone's brokers or scale down its StatefulSet.
 
@@ -539,4 +539,4 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 ##### Response
 
-The response is a JSON object with the same shape as the [cluster configuration response](#response).
+The response is a JSON object with the same shape as the [partitioning response](#partitioning-response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before taking further action.
