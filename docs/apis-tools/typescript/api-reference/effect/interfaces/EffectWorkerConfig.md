@@ -162,6 +162,29 @@ The job type to activate.
 
 ---
 
+### withLease?
+
+```ts
+readonly optional withLease?: boolean;
+```
+
+Activate jobs with a lease — default `false`.
+
+When `true`, each activated job is assigned a distinct, opaque lease token
+(`ActivatedJobResult.leaseToken`) that is threaded back into the fenced
+`completeJob` / `failJob` / `throwJobError` commands, fencing them against a
+superseded activation of the same job.
+
+Note: the Effect `handler` intentionally keeps the base job shape
+(`leaseToken` remains optional/nullable); the token is threaded back into
+fenced commands automatically, so handlers do not read it directly.
+
+#### Inherited from
+
+[`ActivateJobsStreamOptions`](ActivateJobsStreamOptions.md).[`withLease`](ActivateJobsStreamOptions.md#withlease)
+
+---
+
 ### workerName?
 
 ```ts

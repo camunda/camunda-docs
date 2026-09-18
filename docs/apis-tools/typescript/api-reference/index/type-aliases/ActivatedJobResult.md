@@ -92,7 +92,7 @@ kind: JobKindEnum;
 ### leaseToken
 
 ```ts
-leaseToken: string | null;
+leaseToken: JobLeaseToken | null;
 ```
 
 The lease token identifying this activation. This is `null` when the job was activated without a lease.
