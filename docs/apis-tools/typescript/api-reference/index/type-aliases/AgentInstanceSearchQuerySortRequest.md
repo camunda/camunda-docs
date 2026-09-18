@@ -18,6 +18,7 @@ type AgentInstanceSearchQuerySortRequest = object;
 ```ts
 field:
   | "agentInstanceKey"
+  | "agentDefinitionKey"
   | "status"
   | "elementId"
   | "processInstanceKey"

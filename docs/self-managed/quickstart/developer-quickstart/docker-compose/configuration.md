@@ -10,11 +10,11 @@ Use this page to choose the Docker Compose file that matches your local setup, f
 
 Camunda provides three Docker Compose configurations in the [Camunda Distributions releases](https://github.com/camunda/camunda-distributions/releases):
 
-| Configuration file                | Description                                                                                                                                                                                                                                             |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster and Connectors, and uses H2 secondary storage by default. Use this for most local development scenarios.                                                                          |
-| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Camunda Hub, Management Identity, Keycloak, PostgreSQL, and Elasticsearch. Use this when you need management components, process optimization, or browser-based modeling. |
-| `docker-compose-web-modeler.yaml` | Standalone Camunda Hub configuration. Runs Camunda Hub and its dependencies without an Orchestration Cluster. For deployment details, see [deploy with Camunda Hub](./connectors-and-modeling.md#deploy-with-camunda-hub).                              |
+| Configuration file         | Description                                                                                                                                                                                                                                             |
+| :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `docker-compose.yaml`      | Default lightweight configuration. Includes the Orchestration Cluster and Connectors, and uses H2 secondary storage by default. Use this for most local development scenarios.                                                                          |
+| `docker-compose-full.yaml` | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Camunda Hub, Management Identity, Keycloak, PostgreSQL, and Elasticsearch. Use this when you need management components, process optimization, or browser-based modeling. |
+| `docker-compose-hub.yaml`  | Standalone Camunda Hub configuration. Runs Camunda Hub and its dependencies without an Orchestration Cluster. For deployment details, see [deploy with Camunda Hub](./connectors-and-modeling.md#deploy-with-camunda-hub).                              |
 
 To start a specific configuration, run one of the following commands:
 
@@ -33,7 +33,7 @@ To start a specific configuration, run one of the following commands:
 - Standalone Camunda Hub:
 
   ```shell
-  docker compose -f docker-compose-web-modeler.yaml up -d
+  docker compose -f docker-compose-hub.yaml up -d
   ```
 
 :::note
@@ -46,15 +46,15 @@ To select another Orchestration Cluster backend, see [configure secondary storag
 
 The extracted distribution mounts component-owned application YAML into the Camunda containers. Use the file that belongs to your Compose setup and component.
 
-| Setup and component                     | Application configuration source                                                                                                                                                  |
-| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lightweight Orchestration Cluster       | `configuration/${ORCHESTRATION_CONFIG_FILE}`; defaults to `configuration/application-h2.yaml`                                                                                     |
-| Lightweight Connectors                  | Inline `connectors-config` under `configs` in `docker-compose.yaml`                                                                                                               |
-| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                                                                                 |
-| Full Connectors                         | `.connectors/application.yaml`                                                                                                                                                    |
-| Full Optimize                           | `.optimize/environment-config.yaml` and `.optimize/application-ccsm.yaml`                                                                                                         |
-| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-web-modeler.yaml`                                                              |
-| Full and standalone Camunda Hub         | `.web-modeler/application.yaml`; the full setup mounts `.web-modeler/application-full.yaml` as the primary file, which adds the cluster registrations and imports the shared file |
+| Setup and component                     | Application configuration source                                                                                                                                  |
+| :-------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lightweight Orchestration Cluster       | `configuration/${ORCHESTRATION_CONFIG_FILE}`; defaults to `configuration/application-h2.yaml`                                                                     |
+| Lightweight Connectors                  | Inline `connectors-config` under `configs` in `docker-compose.yaml`                                                                                               |
+| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                                                                 |
+| Full Connectors                         | `.connectors/application.yaml`                                                                                                                                    |
+| Full Optimize                           | `.optimize/environment-config.yaml` and `.optimize/application-ccsm.yaml`                                                                                         |
+| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-hub.yaml`                                                      |
+| Full and standalone Camunda Hub         | `.hub/application.yaml`; the full setup mounts `.hub/application-full.yaml` as the primary file, which adds the cluster registrations and imports the shared file |
 
 Choose the configuration mechanism based on the value you need to change:
 

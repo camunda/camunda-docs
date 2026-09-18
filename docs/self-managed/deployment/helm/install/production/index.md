@@ -27,7 +27,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **DNS Configuration**: You must have access to configure DNS for your domain in order to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
-  - **PostgreSQL-compatible database**: Required for Web Modeler persistence. This guide uses Amazon Aurora PostgreSQL as an example. For AWS-specific steps, see [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup).
+  - **PostgreSQL-compatible database**: Required for Camunda Hub persistence. This guide uses Amazon Aurora PostgreSQL as an example. For AWS-specific steps, see [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup).
   - **Secondary storage backend for the Orchestration Cluster**: Choose one option:
     - **Non-SQL**: Elasticsearch/OpenSearch (this guide uses Amazon OpenSearch as the example). For AWS-specific steps, see [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain).
     - **RDBMS**: See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) and the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md).
@@ -63,23 +63,23 @@ After following the [prerequisites](#prerequisites), you should have a Kubernete
 To get started, create two namespaces:
 
 ```bash
-kubectl create namespace management-and-modeling
+kubectl create namespace hub
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), Console, and the Web Modeler components.
+- **Namespace `hub`:** We will install [Camunda Hub](/components/hub/index.md) and [Management Identity](/self-managed/components/management-identity/overview.md).
 
 - **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), [Connectors](/self-managed/components/connectors/overview.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
 :::note
-For more information on the difference between the Orchestration Cluster and the Web Modeler and Console cluster, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
+For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
 :::
 
 ### Install the Helm chart
 
-As there will be a Helm deployment in each namespace, create your own `management-and-modeling-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
+As there will be a Helm deployment in each namespace, create your own `hub-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
 
 The Camunda Helm chart can be installed in each namespace using the following command:
 
@@ -88,9 +88,9 @@ The Camunda Helm chart can be installed in each namespace using the following co
 helm repo add camunda https://helm.camunda.io
 # This will update the chart repository. Please make sure to run this command before every install or upgrade
 helm repo update
-# This will install the latest Camunda Helm chart in the management-and-modeling namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n management-and-modeling \
-    --values management-and-modeling-values.yaml
+# This will install the latest Camunda Helm chart in the Hub namespace with the latest applications/dependencies.
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n hub \
+    --values hub-values.yaml
 # This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n orchestration \
     --values orchestration-values.yaml
@@ -156,7 +156,7 @@ You must create Kubernetes secrets for all client secrets required by your ident
 ### Connect external databases
 
 :::note
-To allow for easier testing, the Camunda Helm chart provides databases as an external dependency, such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead.
+To allow for easier testing, the Camunda Helm chart provides some databases as an external dependency, such as the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead. The chart no longer bundles an Elasticsearch subchart, so you must provide an externally managed cluster if you use Elasticsearch or OpenSearch as secondary storage.
 :::
 
 This guide keeps database configuration in one flow and provides two options:
@@ -170,26 +170,35 @@ You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL 
 
 #### Connecting to Amazon OpenSearch
 
-The following example `values.yaml` enables OpenSearch with the required configuration. This example also globally disables all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false`, and disables internal Elasticsearch through `elasticsearch.enabled: false`:
+The following example `values.yaml` configures OpenSearch as the secondary storage for the Orchestration Cluster, and points Optimize at the same cluster:
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    auth:
-      username: user
-      secret:
-        existingSecret: opensearch-credentials
-        existingSecretKey: password
-    url:
-      protocol: https
-      host: opensearch.example.com
-      port: 443
+orchestration:
+  data:
+    secondaryStorage:
+      type: opensearch
+      opensearch:
+        url: https://opensearch.example.com:443
+        auth:
+          username: user
+          secret:
+            existingSecret: opensearch-credentials
+            existingSecretKey: password
 
-elasticsearch:
-  enabled: false
+optimize:
+  enabled: true
+  database:
+    opensearch:
+      enabled: true
+      url:
+        protocol: https
+        host: opensearch.example.com
+        port: 443
+      auth:
+        username: user
+        secret:
+          existingSecret: opensearch-credentials
+          existingSecretKey: password
 ```
 
 #### Connect to an external database for Management Identity
@@ -246,23 +255,33 @@ For more information on connecting to external databases, the following guides a
 At this point, you should be able to connect to your platform through HTTPS, correctly authenticate users using your configured identity provider, and have connected to external databases such as Amazon OpenSearch and Amazon Aurora PostgreSQL.
 :::
 
-The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `management-and-modeling-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
+The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `hub-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
 
 ### Elasticsearch/OpenSearch index retention
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-The following example configures an ILM policy for the Orchestration Cluster, and can be added to your `orchestration-values.yaml`:
+The Helm value **`orchestration.history.retention`** configures retention for archived Operate, Tasklist, and Camunda indices stored in secondary storage (for example, `operate-process-*`, `tasklist-task-*`).
+
+The following example configures an ILM policy for the Orchestration Cluster's archived history indices and can be added to the Helm values file `orchestration-values.yaml`:
 
 ```yaml
 orchestration:
-  retention:
-    enabled: true
-    minimumAge: 30d
-    policyName: zeebe-record-retention-policy
+  history:
+    rolloverInterval: 7d
+    retention:
+      enabled: true
+      minimumAge: 30d
+      policyName: camunda-history-retention-policy
 ```
 
-For more information on configuring ILM policy, refer to the configuration guide on the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration).
+:::warning
+The `orchestration.history.rolloverInterval` value significantly affects Elasticsearch/OpenSearch performance. Review the [data retention performance](/self-managed/deployment/helm/configure/data-retention.md#performance) section to ensure the value fits your use case.
+:::
+
+:::note
+For more information on configuring both retention policy types, refer to the [data retention configuration guide](/self-managed/deployment/helm/configure/data-retention.md).
+:::
 
 ### Configure backups
 
@@ -488,9 +507,9 @@ The following resources and configuration options are important to keep in mind 
   You should only enable the auto-mounting of a service account token when the application explicitly needs access to the Kubernetes API server, or you have created a service account with the exact permissions required for the application and bound it to the pod.
   :::
 
-- [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) can be enabled with Camunda Helm charts if needed by your infrastructure requirements.
+- Restrict pod-to-pod traffic with [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/). See [required network traffic](#required-network-traffic) for the flows a Camunda installation depends on.
 
-<!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
+- Several in-cluster connections, including Connectors to the Orchestration Cluster gateway and Spring Boot management endpoints, are plaintext by default. `global.tls.caBundle` does not cover them. To encrypt them, run a service mesh such as Linkerd, Istio, or Cilium. See [in-cluster transport](/self-managed/deployment/helm/configure/tls.md#in-cluster-transport-service-mesh-required) for the affected connections.
 
 - It is possible to have a pod security standard that is suited to your security constraints. This is enabled by modifying the Pod Security Admission. See the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation for more information.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
@@ -522,6 +541,30 @@ The following resources and configuration options are important to keep in mind 
 
 - Open Policy Agent can also be used to [allowlist Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
 
+#### Required network traffic
+
+If you enforce network policies, a default-deny posture blocks traffic Camunda depends on. Allow the following flows for a single-namespace installation. For a deployment split across namespaces, see [multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace.md#allow-required-network-traffic).
+
+| Direction | Source                          | Destination           | Ports                    | Purpose                                              |
+| :-------- | :------------------------------ | :-------------------- | :----------------------- | :--------------------------------------------------- |
+| Ingress   | Ingress controller              | Orchestration Cluster | `8080/TCP`, `26500/TCP`  | REST API, web applications, and gRPC clients         |
+| Internal  | Orchestration Cluster           | Orchestration Cluster | `26501/TCP`, `26502/TCP` | Gateway-to-broker and inter-broker communication     |
+| Internal  | Connectors                      | Orchestration Cluster | `8080/TCP`, `26500/TCP`  | Activate jobs and call the Orchestration Cluster API |
+| Internal  | Camunda Hub                     | Orchestration Cluster | `8080/TCP`, `26500/TCP`  | Deploy processes and call the API                    |
+| Internal  | Orchestration Cluster           | Management Identity   | `80/TCP`                 | Resolve users, groups, and authorizations            |
+| Egress    | All Camunda pods                | Cluster DNS           | `53/TCP`, `53/UDP`       | Resolve service names                                |
+| Egress    | Orchestration Cluster, Optimize | Secondary storage     | `9200/TCP` or `5432/TCP` | Elasticsearch/OpenSearch, or the RDBMS vendor port   |
+| Egress    | All Camunda pods                | Identity provider     | Provider HTTPS port      | Authenticate users and clients                       |
+| Egress    | Orchestration Cluster           | Document store        | Provider HTTPS port      | Store and retrieve documents                         |
+| Probes    | Kubelet, Prometheus             | Orchestration Cluster | `9600/TCP`               | Readiness, liveness, and metrics                     |
+| Probes    | Kubelet, Prometheus             | Camunda Hub, Optimize | `8091/TCP`, `8092/TCP`   | Readiness, liveness, and metrics                     |
+
+Restrict each rule to the specific workloads involved rather than allowing unrestricted namespace traffic.
+
+:::note
+Service ports can differ from the internal component ports listed above, depending on your release name and values. Confirm the ports your installation actually exposes against the rendered chart with `helm template`.
+:::
+
 ### Observability and monitoring
 
 The following resources and configuration options are important to keep in mind regarding observability and monitoring:
@@ -537,215 +580,14 @@ The following resources and configuration options are important to keep in mind 
 
 ## Create a production `values.yaml`
 
-The following is a complete configuration example, taking all the above sections into consideration.
+Use separate Helm values files and releases when you deploy Camunda components across namespaces. The Hub release contains Camunda Hub and Management Identity, while the orchestration release contains the Orchestration Cluster, Connectors, and Optimize.
 
-### Example management-and-modeling configuration
+The [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace.md) provides complete 8.10 examples for both releases. It also explains how to:
 
-The following example `management-and-modeling-values.yaml` is provided to the `management-and-modeling` [namespace](#namespace-setup):
-
-```yaml
-global:
-  ingress:
-    enabled: true
-    className: nginx
-    host: management-and-modeling-host.com
-    tls:
-      enabled: true
-      secretName: camunda-platform
-  identity:
-    auth:
-      # Configure authentication based on your identity provider.
-      # Set type to: "KEYCLOAK" (default), "MICROSOFT", or "GENERIC"
-      # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
-      type: "<KEYCLOAK|MICROSOFT|GENERIC>"
-      # ... additional provider-specific configuration
-      # Refer to the authentication guide for your chosen provider.
-identity:
-  enabled: true
-  contextPath: /identity
-  firstUser:
-    secret:
-      existingSecret: camunda-credentials
-      existingSecretKey: identity-user-password
-  externalDatabase:
-    enabled: true
-    host: external-postgres-host
-    port: 5432
-    username: identity_user
-    database: identity_db
-    secret:
-      existingSecret: identity-db-secret
-      existingSecretKey: database-password
-
-webModeler:
-  enabled: true
-  contextPath: /modeler
-  restapi:
-    mail:
-      # This value is required, otherwise the restapi pod wouldn't start.
-      fromAddress: noreply@example.com
-    externalDatabase:
-      url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-      user: camunda_user
-      secret:
-        existingSecret: camunda-db-secret
-        existingSecretKey: database-password
-
-prometheusServiceMonitor:
-  enabled: true
-  labels:
-    release: kube-prometheus-stack
-orchestration:
-  enabled: false
-optimize:
-  enabled: false
-connectors:
-  enabled: false
-elasticsearch:
-  enabled: false
-console:
-  # Multi-namespace deployments require manual console.configuration to define
-  # components across namespaces. The oAuth section must match your global.identity.auth settings.
-  # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
-  configuration: |
-    camunda:
-      console:
-        oAuth:
-          audience: "<console-audience>"
-          clientId: "<console-client-id>"
-          issuer: "<idp-issuer-url>"
-          jwksUri: "<idp-jwks-url>"
-          type: "<KEYCLOAK|MICROSOFT|GENERIC>"
-          wellKnown: "<idp-well-known-url>"
-        managed:
-          method: plain
-          releases:
-            - name: camunda
-              namespace: management-and-modeling
-              version: 14.x.x
-              components:
-                - name: Console
-                  id: console
-                  version: 8.9.x
-                  url: https://management-and-modeling-host.com/
-                  readiness: http://camunda-console.oidc:9100/health/readiness
-                  metrics: http://camunda-console.oidc:9100/prometheus
-                - name: Identity
-                  id: identity
-                  version: 8.9.x
-                  url: https://management-and-modeling-host.com/identity
-                  readiness: http://camunda-identity.oidc:82/actuator/health
-                  metrics: http://camunda-identity.oidc:82/actuator/prometheus
-                - name: WebModeler
-                  id: webModelerWebApp
-                  version: 8.9.x
-                  url: https://management-and-modeling-host.com/modeler
-                  readiness: http://camunda-web-modeler-restapi.oidc:8091/health/readiness
-                  metrics: http://camunda-web-modeler-restapi.oidc:8091/metrics
-            - name: camunda
-              namespace: orchestration
-              version: 14.x
-              components:
-                - name: Operate
-                  id: operate
-                  version: 8.9.x
-                  url: https://orchestration-host.com/orchestration/operate
-                  readiness: http://camunda-zeebe.orchestration:9600/operate/actuator/health/readiness
-                  metrics: http://camunda-zeebe.orchestration:9600/operate/actuator/prometheus
-                - name: Optimize
-                  id: optimize
-                  version: 8.9.x
-                  url: https://orchestration-host.com/optimize
-                  readiness: http://camunda-optimize.orchestration:80/optimize/api/readyz
-                  metrics: http://camunda-optimize.orchestration:8092/actuator/prometheus
-                - name: Tasklist
-                  id: tasklist
-                  version: 8.9.x
-                  url: https://orchestration-host.com/orchestration/tasklist
-                  readiness: http://camunda-zeebe.orchestration:9600/tasklist/actuator/health/readiness
-                  metrics: http://camunda-zeebe.orchestration:9600/tasklist/actuator/prometheus
-                - name: Orchestration Cluster
-                  id: orchestration
-                  version: 8.9.x
-                  urls:
-                    grpc: https://zeebe-orchestration-host.com
-                    http: https://orchestration-host.com/orchestration
-                  readiness: http://camunda-zeebe.orchestration:9600/actuator/health/readiness
-                  metrics: http://camunda-zeebe.orchestration:9600/actuator/prometheus
-```
-
-### Example orchestration configuration
-
-The following example `orchestration-values.yaml` is provided to the `orchestration` [namespace](#namespace-setup):
-
-```yaml
-global:
-  host: orchestration-host.com
-  ingress:
-    enabled: true
-    className: nginx
-    tls:
-      enabled: true
-      secretName: camunda-platform
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    auth:
-      username: user
-      secret:
-        existingSecret: opensearch-credentials
-        existingSecretKey: password
-    url:
-      protocol: https
-      host: opensearch.example.com
-      port: 443
-  identity:
-    service:
-      url: "http://management-identity.management-and-modeling.svc.cluster.local:80/identity"
-    auth:
-      # Configure authentication based on your identity provider.
-      # Set type to: "KEYCLOAK" (default), "MICROSOFT", or "GENERIC"
-      # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
-      type: "<KEYCLOAK|MICROSOFT|GENERIC>"
-      # ... additional provider-specific configuration
-      # Refer to the authentication guide for your chosen provider.
-orchestration:
-  contextPath: /orchestration
-  ingress:
-    grpc:
-      enabled: true
-      className: nginx
-      host: grpc-{{ .Values.global.host }}
-      tls:
-        enabled: true
-        secretName: camunda-platform-zeebe-grpc
-  retention:
-    enabled: true
-    minimumAge: 30d
-    policyName: zeebe-record-retention-policy
-  orchestration:
-    security:
-      authentication:
-        method: oidc
-
-connectors:
-  contextPath: /connectors
-
-optimize:
-  enabled: true
-  contextPath: /optimize
-identity:
-  enabled: false
-identityKeycloak:
-  enabled: false
-webModeler:
-  enabled: false
-webModelerPostgresql:
-  enabled: false
-elasticsearch:
-  enabled: false
-```
+- Register remote Orchestration Cluster, Optimize, and Connectors clients with central Management Identity.
+- Configure Camunda Hub to connect to an Orchestration Cluster in another namespace.
+- Share matching client-secret values across namespace-scoped Kubernetes Secrets.
+- Use the correct cross-namespace Management Identity service URL.
 
 ## Next steps
 
@@ -758,7 +600,7 @@ elasticsearch:
 
 Camunda 8 supports running multiple orchestration clusters in separate namespaces. This setup allows you to isolate environments such as development, staging, and production, while sharing infrastructure resources.
 
-To add another orchestration cluster, install the Helm chart again in a different namespace with unique release names and configuration values.
+To add another orchestration cluster, follow the [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace.md#add-another-orchestration-cluster).
 
 ### Running benchmarks
 

@@ -4,7 +4,6 @@ title: "Introduction to forms"
 description: "Forms play a key role in guiding work processes, gathering necessary information, and aiding in decision-making for human task orchestration."
 ---
 
-import FormEditorImg from './img/form-editor.png';
 import GHIcon from "@site/src/mdx/GitHubInlineIcon";
 
 Forms play a key role in giving work instructions, collecting information and making decisions within human task orchestration. Forms are lightweight user interfaces, tailored for focused data input in specific steps of a process, rendering the orchestration of human tasks more efficient than simply routing users to the applications that are orchestrated.
@@ -13,9 +12,7 @@ Forms are commonly used in [user tasks](/components/modeler/bpmn/user-tasks/user
 
 ## Camunda Forms
 
-In Camunda 8, you can design forms using a drag'n'drop editor. The form editor is available in both Desktop and Web Modeler. Learn more about Camunda Forms and available components in the [Camunda Forms reference documentation](/components/modeler/forms/camunda-forms-reference.md), and learn how to design a human workflow with forms in the [getting started guide](/guides/getting-started-orchestrate-human-tasks.md).
-
-<img src={FormEditorImg} alt="Camunda Forms editor" />
+In Camunda 8, you can design forms using a drag'n'drop editor. The form editor is available in both Desktop and Camunda Hub. Learn more about Camunda Forms and available components in the [Camunda Forms reference documentation](/components/modeler/forms/camunda-forms-reference.md), and learn how to design a human workflow with forms in the [getting started guide](/guides/getting-started-orchestrate-human-tasks.md).
 
 ## form-js
 

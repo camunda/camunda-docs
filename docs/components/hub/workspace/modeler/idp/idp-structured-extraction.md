@@ -5,8 +5,6 @@ description: "Structured data extraction allows you to extract data from structu
 ---
 
 import IdpPublishProjectModalImg from './img/idp-publish-structured.png';
-import IdpVersionsImg from './img/idp-versions.png';
-import IdpMenuImg from './img/idp-edit-template-button.png';
 
 Use this extraction method to extract data from [structured documents](idp-key-concepts.md#structured-documents).
 
@@ -44,37 +42,21 @@ In the IDP application, click **Create new**, select **Extraction template**, th
 After publishing, the template name and description is shown in the element selector when used in a process diagram. Use a clear name and concise description to help other users find and understand when to use the template.
 :::
 
-![Create form extraction template](img/idp-create-extraction-project.png)
+You can edit the description and provider later via the vertical ellipses menu button next to the template name, but changes to the template are only applied after republishing.
 
-You can edit the description and provider later via the menu button, but changes to the template are only applied after republishing.
-
-<img src={IdpMenuImg} alt="Unstructured data extraction screen" class="img-600" />
-
-After creating the template, the new template screen opens. You can upload a sample document that represents the type of document you want to extract data from.
-
-![Upload a sample document](img/idp-structured-instructions-upload.png)
-
-To upload your sample document:
+After creating the template, the new template screen opens. You can upload a sample document that represents the type of document you want to extract data from:
 
 1. Drag your sample document into the box or click **Drag and drop a PDF file here or click to upload a file** to browse and upload your sample document.
-
 2. Once you have finished uploading your sample document, the extraction process starts automatically.
    - The extraction process retrieves the fields and tables from the document.
    - The extracted fields and tables are displayed in the **Fields** and **Tables** tabs.
-
-![Extracted fields and tables](img/extracted-fields-and-tables.png)
 
 ## Step 2: Configure template {#configure}
 
 After the extraction process of the sample document is complete, you can configure the template to include only the fields and tables you want to be part of your template.
 
 1. Select the fields you want to include in your template by clicking the checkbox next to each field.
-
-   ![Extracted fields and tables - select fields](img/extracted-fields-and-tables-configure.png)
-
 2. Select the tables you want to include in your template by clicking the checkbox next to each table.
-
-   ![Extracted fields and tables - select table](img/extracted-fields-and-tables-configure-tables.png)
 
 ### Extracted Fields
 
@@ -95,17 +77,13 @@ Once you are satisfied with your template configuration, you can test it to vali
 
 Testing is optional but recommended, as you can evaluate the performance of the extraction template before publishing.
 
-testing allows you to see how accurately the template extracts data from other documents of the same type. This ensures better results when using the template in your processes.
-
-![Upload document for testing](img/idp-upload-test-template-empty.png)
+Testing allows you to see how accurately the template extracts data from other documents of the same type. This ensures better results when using the template in your processes.
 
 To test the data extraction:
 
 1. Drag your test document in the box or click **Drag and drop a PDF file here or click to upload a file** to browse and upload your test document.
 2. Once you have finished uploading your test document, click **Test extraction template**.
 3. The extraction process starts looking for the fields and tables you have selected in your template.
-
-![Extracted fields and tables - test](img/idp-upload-test-template.png)
 
 ### Test summary results
 
@@ -125,7 +103,6 @@ The detailed results section provides a comprehensive view of each tested docume
 - **Extracted tables**: Number of successfully extracted tables out of the total.
 - **Actions**:
   - **View Extraction**: Click to see the detailed extraction results for each field and table.
-    ![View Extraction test template](img/idp-test-template-view-extraction.png)
   - **Remove**: Delete the test document from the results.
 
 You can test multiple documents by:
@@ -133,14 +110,12 @@ You can test multiple documents by:
 - Clicking **Upload documents** to add more test files.
 - Clicking **Rerun tests** to test additional documents.
 
-![Extracted test templates](img/idp-extracted-test-template.png)\*\*\*\*
-
 ## Step 4: Publish {#publish}
 
 Publish the document extraction template to make it available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
 
 1. Click **Publish** and select either:
-   - **Publish to project**: Only users in the Web Modeler project can access the document extraction template.
+   - **Publish to project**: Only members in the Camunda Hub workspace can access the document extraction template.
    - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
@@ -161,8 +136,6 @@ You can compare the change history between two template versions as JSON code in
 
 1. Ensure that the sidebar **Show changes** toggle is turned on.
 1. Select the version that you want to compare. The previous version is automatically selected for comparison.
-
-<img src={IdpVersionsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
 
 The JSON for the previous version is shown on the left, with the currently selected version shown on the right.
 

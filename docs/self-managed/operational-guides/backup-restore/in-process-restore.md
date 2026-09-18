@@ -206,6 +206,45 @@ curl "${ORCHESTRATION_CLUSTER_API}/topology"
 
 The cluster leaves recovery mode as part of the restore, so no further action is required.
 
+## Restore a cluster with multiple Physical Tenants
+
+<span class="badge badge--platform">Self-Managed only</span>
+
+In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), the `/v2/mode` and `/v2/restore` endpoints used above target a single tenant. An unprefixed request targets the default Physical Tenant; prefix the path with `/physical-tenants/{physicalTenantId}` to target another one.
+
+The cluster-wide counterparts under `/cluster/v2/...` apply the same two-request flow to every Physical Tenant at once and require [cluster admin](/components/admin/cluster-admin.md) access:
+
+| Step          | Tenant-scoped                                          | Cluster-wide               |
+| ------------- | ------------------------------------------------------ | -------------------------- |
+| Recovery mode | `PATCH /physical-tenants/{physicalTenantId}/v2/mode`   | `PATCH /cluster/v2/mode`   |
+| Trigger       | `POST /physical-tenants/{physicalTenantId}/v2/restore` | `POST /cluster/v2/restore` |
+| Track         | `GET /physical-tenants/{physicalTenantId}/v2/restore`  | `GET /cluster/v2/restore`  |
+| Confirm       | `GET /physical-tenants/{physicalTenantId}/v2/topology` | `GET /cluster/v2/topology` |
+
+### Choose the restore scope
+
+Use a tenant-scoped restore when one Physical Tenant has corrupted or missing data and the other tenants should keep processing. Use a cluster-wide restore when several tenants need recovery, or when the whole cluster must be returned to a coordinated state.
+
+Both cluster-wide endpoints accept an optional `physicalTenantId` query parameter. Naming a tenant restores only that tenant; omitting the parameter restores every configured tenant.
+
+```bash
+export CLUSTER_ADMIN_API=http://localhost:8080/cluster/v2
+
+curl -X POST "${CLUSTER_ADMIN_API}/restore" \
+  -H 'Content-Type: application/json' \
+  -d '{ "backupIds": [1748937221] }'
+```
+
+To restore tenants from different backups in a single request, supply per-tenant restore arguments in the `overrides` field of the request body. A request that both names a single tenant and supplies overrides is rejected, because the two express conflicting targets.
+
+### Cross-tenant safety
+
+A backup created for one Physical Tenant is not reachable from another tenant's restore. This is enforced by configuration rather than by a runtime check: every Physical Tenant must resolve to a distinct backup store location, and Camunda fails startup if two tenants resolve to the same one. See [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).
+
+Before returning a restored tenant to normal traffic, confirm through tenant-scoped topology that its partitions are healthy, that the expected process definitions, instances, variables, and history are present, and that exporting has resumed.
+
+<!-- TODO(physical-tenants-day-2): Add backend-specific restore fallback steps for primary-storage loss, including the supported RDBMS, Elasticsearch/OpenSearch, and document-store boundaries. Owner/reviewer: Houssain Barouni. -->
+
 ## Validate a restore without applying it
 
 Both endpoints accept the `dryRun` query parameter. With `dryRun=true`, the request is validated and the resulting plan is returned, but nothing is applied to the cluster. Use this to check a backup selection before the downtime window starts:

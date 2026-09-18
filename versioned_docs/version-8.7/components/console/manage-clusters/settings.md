@@ -27,6 +27,22 @@ You can enable resource-based authorization on a per-cluster basis to control th
 For more information on resource-based authorization, see [resource authorizations](/components/concepts/resource-authorizations.md) and [resource-based authorization](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
 :::
 
+## Secret filter mode
+
+You can change the connector secret filter mode on a per-cluster basis to control which secrets outbound and inbound connectors are allowed to resolve.
+
+:::note
+This setting applies to Camunda 8 SaaS. In Self-Managed, configure the mode using [configuration properties](/self-managed/connectors-deployment/connectors-configuration.md#secret-filter).
+:::
+
+- **STRICT** (default): a connector can only resolve secrets that are present for a given field in the actually deployed BPMN XML.
+- **LAX**: for outbound connectors, falls back to `DISABLED` behavior (resolving all secrets) if the BPMN XML cannot be fetched. Inbound connectors behave the same as under `STRICT`, since their allow-list doesn't require a lookup.
+- **DISABLED**: all secrets resolve freely, matching the behavior before this feature was introduced.
+
+This setting is available for clusters running a version where `STRICT` is the shipped default, starting with 8.7.25. Only organization admins can change it.
+
+For details on each mode, see [secret filter](/self-managed/connectors-deployment/connectors-configuration.md#secret-filter).
+
 ## Automatic cluster updates
 
 You can set the cluster to automatically update to newer versions of Camunda 8 when they are released.

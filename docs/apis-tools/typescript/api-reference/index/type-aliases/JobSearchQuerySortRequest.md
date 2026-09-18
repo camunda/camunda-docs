@@ -17,6 +17,7 @@ type JobSearchQuerySortRequest = object;
 
 ```ts
 field:
+  | "creationTime"
   | "deadline"
   | "deniedReason"
   | "elementId"

@@ -1294,70 +1294,180 @@ Notes:
 - Cancellation classification runs first so aborted fetches are never downgraded to generic network errors.
 - Abort is immediate and idempotent; underlying fetch is signalled.
 
-## Functional (fp-ts style) Surface (Opt-In Subpath)
+## Effect Surface (Opt-In Subpath)
 
-@experimental - this feature is not guaranteed to be tested or stable.
+The main entry stays Promise-based and pulls in **zero** Effect at runtime. Opt in to a
+first-class [Effect](https://effect.website) surface — a client whose every method returns an
+`Effect`, tagged domain errors, and Effect-native combinators — by importing the dedicated
+`./effect` subpath.
 
-> **Peer dependency:** `fp-ts` is an optional peer dependency. If you use real `fp-ts` functions
-> (e.g. `pipe`, `TE.match`) alongside this subpath, install it separately:
+> **Peer dependency:** `effect` is an **optional peer dependency** (Effect **v4**). The `./effect`
+> subpath requires it; install it alongside the SDK:
 >
 > ```sh
-> npm install fp-ts
+> npm install effect
 > ```
 >
-> The `/fp` subpath works without `fp-ts` installed — it exposes structurally-compatible
-> `Either`/`TaskEither` shapes that interoperate with `fp-ts` but do not require it at runtime.
+> The main `.` entry never imports `effect`, so Promise-first users are never forced to adopt it.
+>
+> **Module resolution:** Effect v4 ships as an `exports`-map-only package (no legacy
+> `main`/`types`), so consuming the `./effect` types requires a modern TypeScript module
+> resolution — set `"moduleResolution": "bundler"` (or `"node16"`/`"nodenext"`) in your
+> `tsconfig.json`. The Promise-first `.` entry is unaffected.
 
-The main entry stays minimal. To opt in to a TaskEither-style facade & helper combinators import from the dedicated subpath:
-
-<!-- snippet-exempt: uses SDK /fp subpath not available in examples project -->
+<!-- snippet-exempt: uses SDK /effect subpath + optional effect peer not available in examples project -->
 
 ```ts
+import { Effect } from "effect";
 import {
-  createCamundaFpClient,
-  retryTE,
-  withTimeoutTE,
-  eventuallyTE,
-  isLeft,
-} from "@camunda8/orchestration-cluster-api/fp";
+  createCamundaEffectClient,
+  eventually,
+  EventualConsistencyTimeout,
+} from "@camunda8/orchestration-cluster-api/effect";
 
-const fp = createCamundaFpClient();
-const deployTE = fp.deployResourcesFromFiles(["./bpmn/process.bpmn"]);
-const deployed = await deployTE();
-if (isLeft(deployed)) throw deployed.left; // DomainError union
+const camunda = createCamundaEffectClient();
 
-// Chain with fp-ts (optional) – the returned thunks are structurally compatible with TaskEither
-// import { pipe } from 'fp-ts/function'; import * as TE from 'fp-ts/TaskEither';
+const program = Effect.gen(function* () {
+  const deployment = yield* camunda.deployResourcesFromFiles([
+    "./bpmn/process.bpmn",
+  ]);
+  const { processInstanceKey } = yield* camunda.createProcessInstance({
+    processDefinitionKey: deployment.processes[0].processDefinitionKey,
+  });
+  // Poll on the Effect Clock until the instance is searchable, timing out deterministically.
+  // waitUpToMs: 0 asks the SDK for the latest available state without its own wall-clock
+  // wait, so the Effect `eventually` combinator owns the predicate + timeout horizon —
+  // making the eventual-consistency wait deterministic under TestClock.
+  const search = yield* eventually(
+    camunda.searchProcessInstances(
+      { filter: { processInstanceKey } },
+      { consistency: { waitUpToMs: 0 } }
+    ),
+    (s) => s.items.some((i) => i.processInstanceKey === processInstanceKey),
+    { waitUpTo: "30 seconds", interval: "750 millis" }
+  );
+  return { processInstanceKey, search };
+}).pipe(
+  // Tagged errors → discriminate with catchTag / catchTags instead of a manual switch.
+  Effect.catchTag(
+    "EventualConsistencyTimeout",
+    (e: EventualConsistencyTimeout) =>
+      Effect.logError(`Timed out: ${e.message}`).pipe(
+        Effect.andThen(Effect.fail(e))
+      )
+  )
+);
+
+const result = await Effect.runPromise(program);
 ```
 
 Why a subpath?
 
-- Keeps base bundle lean for the 80% use case.
-- No hard dependency on `fp-ts` at runtime; only structural types.
-- Advanced users can compose with real `fp-ts` without pulling the effect model into the default import path.
+- Keeps the base bundle lean for the Promise-first 80% use case.
+- No dependency on `effect` at runtime unless you opt in; it is an **optional** peer.
+- Unlocks the Effect ecosystem (typed errors, `Schedule`, `Layer`/`Context`, `TestClock`).
 
-Exports available from `.../fp`:
+Exports available from `.../effect`:
 
-- `createCamundaFpClient` – typed facade (methods return `() => Promise<Either<DomainError,T>>`).
-- Type guards: `isLeft`, `isRight`.
-- Error / type aliases: `DomainError`, `TaskEither`, `Either`, `Left`, `Right`, `Fpify`.
-- Combinators: `retryTE`, `withTimeoutTE`, `eventuallyTE`.
+- `createCamundaEffectClient(options?)` – a `Proxy` client where every method returns
+  `Effect.Effect<Awaited<R>, DomainError, never>`; the throwing client is reachable via `.inner`.
+- Tagged errors (`Data.TaggedError`): `CamundaValidationError`, `EventualConsistencyTimeout`,
+  `HttpError`, `CamundaGenericError` — together the `DomainError` union. Discriminate with
+  `Effect.catchTag` / `Effect.catchTags`.
+- Combinators: `retryWithBackoff` (`Effect.retry` + `Schedule.exponential` + jitter), `withTimeout`
+  (`Effect.timeoutOrElse` with real interruption), `eventually` (a recursive `Effect.sleep` poll on
+  the Effect `Clock`, timing out to `EventualConsistencyTimeout`).
+- Dependency injection: `CamundaEffect` (`Context.Service`) + `layer(options?)` (`Layer`) so worker /
+  orchestration code composes via `Layer` and swaps a test double trivially.
 
-DomainError union currently includes:
+**Clock-class win:** `eventually` / `withTimeout` run on the Effect `Clock`, so `TestClock.adjust`
+advances eventual/timeout deterministically in tests — no real-clock burn.
 
-- `CamundaValidationError`
-- `EventualConsistencyTimeoutError`
-- HTTP-like error objects (status/body/message) produced by transport
-- Generic `Error`
+### Effect Job Workers
 
-You can refine left-channel typing later by mapping HTTP status codes or discriminator fields.
+The same subpath also exposes an **Effect-native job worker** — the long-running
+`activateJobs` → handle → `completeJob`/`failJob` loop, modelled as Effect. A handler is
+`(job) => Effect.Effect<CompleteVars, JobError, R>` with a **typed failure channel**: a
+`RetryableJobError` becomes `failJob` with `retries - 1` (plus an optional server-side backoff),
+and a `TerminalJobError` becomes `throwJobError` (caught by a BPMN error boundary, or an incident if
+uncaught). Success completes the job with the returned variables. It composes over the same
+activation/backpressure runtime the Promise worker uses — it does not reimplement activation.
+
+<!-- snippet-exempt: uses SDK /effect subpath + optional effect peer not available in examples project -->
+
+```ts
+import { Effect, Schedule } from "effect";
+import {
+  createCamundaEffectWorker,
+  layer,
+  RetryableJobError,
+  TerminalJobError,
+} from "@camunda8/orchestration-cluster-api/effect";
+
+const program = Effect.gen(function* () {
+  // Forked into the current Scope: interrupted (with a best-effort lease release) when
+  // the scope closes.
+  yield* createCamundaEffectWorker<{ ok: boolean }>({
+    type: "payment-processing",
+    maxJobsToActivate: 10, // activation batch size
+    concurrency: 10, // max jobs handled in parallel (backpressure)
+    pollInterval: "1 second", // between empty polls, on the Effect Clock
+    // Optional: retry the handler in-process on a RetryableJobError before failing the job.
+    handlerRetrySchedule: Schedule.spaced("2 seconds"),
+    handler: (job) =>
+      Effect.gen(function* () {
+        if (!job.variables.amount) {
+          // Terminal → raise a BPMN error / incident.
+          return yield* Effect.fail(
+            new TerminalJobError({
+              code: "INVALID_INPUT",
+              message: "amount is required",
+            })
+          );
+        }
+        if (yield* isServiceDown()) {
+          // Retryable → failJob(retries - 1) with a re-activation backoff.
+          return yield* Effect.fail(
+            new RetryableJobError({
+              message: "downstream unavailable",
+              retryBackoff: "5 seconds",
+            })
+          );
+        }
+        return { ok: true }; // success → completeJob(variables)
+      }),
+  });
+
+  // ... the worker runs for the lifetime of this scope.
+  yield* Effect.never;
+}).pipe(
+  Effect.scoped,
+  Effect.provide(layer()) // provides the `/effect` client the worker depends on
+);
+
+void program;
+```
+
+Worker exports from `.../effect`:
+
+- `createCamundaEffectWorker(config)` – forks the worker into the current `Scope` and returns a
+  handle (`{ type, join, interrupt }`); provide the client `layer()` as its dependency.
+- `activateJobsStream(type, options)` – the lower-level `Stream.Stream<Job, DomainError, …>` of
+  activated jobs, polling on the Effect `Clock`.
+- `workerLayer(config)` – a `Layer` that runs a worker for the layer's lifetime.
+- Tagged job failures: `RetryableJobError` (→ `failJob`), `TerminalJobError` (→ `throwJobError`),
+  together the `JobError` channel.
+
+**Clock-class win:** the activation poll interval and the handler-retry `Schedule` run on the Effect
+`Clock`, so `TestClock.adjust` bounds activation/retry timing in virtual time — the whole loop is
+deterministic in tests, with no real-clock burn.
 
 ## Eventual Consistency Polling
 
 Some endpoints accept consistency management options. Pass a `consistency` block (where supported) with `waitUpToMs` and optional `pollIntervalMs` (default 500). If the condition is not met within timeout an `EventualConsistencyTimeoutError` is thrown.
 
 To consume eventual polling in a non‑throwing fashion set the client error mode before invoking an eventually consistent method:
-At present the canonical client operates in throwing mode. Non‑throwing adaptation (Result / fp-ts) is achieved via the functional wrappers rather than mutating the base client.
+At present the canonical client operates in throwing mode. Non‑throwing adaptation (Result / Effect) is achieved via the functional wrappers rather than mutating the base client.
 
 ### Options
 
@@ -1651,44 +1761,33 @@ When to use:
 - Avoiding try/catch nesting in larger orchestration flows.
 - Converting to libraries expecting an Either/Result pattern.
 
-### fp-ts Adapter (TaskEither / Either) - EXPERIMENTAL
+### Effect Adapter
 
-_Note that this feature is experimental and subject to change._
+For Effect-based projects, wrap the throwing client in an Effect-flavoured facade whose every method
+returns an `Effect` with a typed `DomainError` channel:
 
-For projects using `fp-ts`, wrap the throwing client in a lazy `TaskEither` facade:
-
-<!-- snippet-exempt: requires external fp-ts dependency -->
+<!-- snippet-exempt: requires optional effect peer dependency -->
 
 ```ts
-import { createCamundaFpClient } from "@camunda8/orchestration-cluster-api/fp";
-import { pipe } from "fp-ts/function";
-import * as TE from "fp-ts/TaskEither";
+import { Effect } from "effect";
+import { createCamundaEffectClient } from "@camunda8/orchestration-cluster-api/effect";
 
-const fp = createCamundaFpClient();
+const camunda = createCamundaEffectClient();
 
-const deployTE = fp.createDeployment({ resources: [file] }); // TaskEither<unknown, ExtendedDeploymentResult>
-
-pipe(
-  deployTE(), // invoke the task (returns Promise<Either>)
-  (then) => then // typical usage would use TE.match / TE.fold; shown expanded for clarity
+const deployment = await Effect.runPromise(
+  camunda.createDeployment({ resources: [file] })
 );
-
-// With helpers
-const task = fp.createDeployment({ resources: [file] });
-const either = await task();
-if (either._tag === "Right") {
-  console.log(either.right.deployments.length);
-} else {
-  console.error("Error", either.left);
-}
+console.log(deployment.deployments.length);
 ```
+
+See [Effect Surface (Opt-In Subpath)](#effect-surface-opt-in-subpath) above for the full surface —
+tagged errors, `retryWithBackoff` / `withTimeout` / `eventually`, and `Layer`/`Context` DI.
 
 Notes:
 
-- No runtime dependency on `fp-ts`; adapter implements a minimal `Either` shape. Structural typing lets you lift into real `fp-ts` functions (`fromEither`, etc.).
-- Each method becomes a function returning `() => Promise<Either<E,A>>` (a `TaskEither` shape). Invoke it later to execute.
-- Cancellation: calling `.cancel()` on the original promise isn’t surfaced; if you need cancellation use the base client directly.
-- For richer interop, you can map the returned factory to `TE.tryCatch` in userland.
+- `effect` is an **optional peer dependency**; only the `./effect` subpath imports it.
+- Each method returns `Effect.Effect<Awaited<R>, DomainError, never>`; the throwing client is reachable via `.inner`.
+- Failures are narrowed into tagged errors so you discriminate with `Effect.catchTag` / `catchTags`.
 
 ## Pagination
 
@@ -1825,7 +1924,7 @@ Generate an HTML API reference site with TypeDoc (public entry points only):
 npm run docs:api
 ```
 
-Output: static site in `docs/api` (open `docs/api/index.html` in a browser or serve the folder, e.g. `npx http-server docs/api`). Entry points: `src/index.ts`, `src/logger.ts`, `src/fp/index.ts`. Internal generated code, scripts, tests are excluded and private / protected members are filtered. Regenerate after changing public exports.
+Output: static site in `docs/api` (open `docs/api/index.html` in a browser or serve the folder, e.g. `npx http-server docs/api`). Entry points: `src/index.ts`, `src/logger.ts`, `src/effect/index.ts`. Internal generated code, scripts, tests are excluded and private / protected members are filtered. Regenerate after changing public exports.
 
 ## Contributing
 

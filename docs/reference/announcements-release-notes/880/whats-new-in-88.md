@@ -129,7 +129,7 @@ In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are integrated into the O
 - [Zeebe](/reference/glossary.md#zeebe) is the [workflow engine](/reference/glossary.md#workflow-engine).
 - Operate is used for monitoring and troubleshooting [process instances](/reference/glossary.md#process-instance) running in Zeebe.
 - Tasklist is used for interacting with [user tasks](/reference/glossary.md#user-task) (assigning, completing, and so on).
-- [Identity](/reference/glossary.md#identity) is used for managing the integrated Orchestration Cluster authentication and authorization.
+- [Identity](/reference/glossary.md#admin) is used for managing the integrated Orchestration Cluster authentication and authorization.
 
 In Camunda 8.7 and earlier, each component (Zeebe, Operate, Tasklist, and Identity) was deployed independently.
 
