@@ -12,7 +12,7 @@ A credential is reusable configuration for a job worker, connector, or other ele
 - A credential lets you define and manage reusable configuration for job workers, connectors, and other element templates, instead of entering the same settings every time one asks for them.
 - Credentials are generally usable infrastructure, available in any Camunda 8 distribution, including standalone ones that run without Hub. Camunda Hub adds an organization-wide, federated view and central management across your clusters, which is what the rest of this page covers.
 - A credential type is defined alongside an element template, through an embedded [configuration template](/components/modeler/element-templates/template-metadata.md#embedding-configurations-configurationtemplates). If you build custom connectors or job workers and want to define your own credential type, see [Create a credential template](/components/connectors/custom-built-connectors/credential-templates.md).
-- A credential is stored as a cluster variable, which makes it available by name to any job worker or connector that references it.
+- A credential is stored as a cluster variable in each environment you deploy it to, which makes it available by name to any job worker or connector that references it there.
 
 A credential is selected as a whole: an element template never renders or edits a credential's fields. It writes a reference to the chosen credential into the diagram, and the engine resolves that reference at runtime, passing the credential's values, including any secrets, to the job worker or connector.
 
@@ -22,12 +22,22 @@ Learn more:
 - [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type): how an element template declares the `Configuration` property that renders the credential chooser.
 - [Configure credentials in the modeling interface](./modeling-interface.md): how to choose, create, edit, or upgrade a credential from the properties panel.
 
+## Credentials and environments
+
+A credential is deployed to environments, not to clusters. An environment is the unit Camunda Hub tracks a credential's targets, values, and health against.
+
+- On Camunda 8 SaaS, on Self-Managed before 8.10, and on Self-Managed 8.10 without physical tenants, a cluster holds a single environment named after the cluster.
+- On Self-Managed 8.10 and later, a cluster holds one environment per [physical tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+- Camunda Hub shows an environment by its own name, and adds the cluster name in parentheses whenever the two names differ. Where a cluster holds a single environment named after it, no cluster name appears.
+- On a Self-Managed 8.10 cluster with physical tenants, each environment is an independent target, with its own copy of the credential, its own values, and its own state. A credential deployed to one environment is not readable from the other environments on that cluster.
+
 ## Terminology
 
 | Term            | Meaning                                                                                                                                                                                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Credential      | The reusable object you create and then select on an element template field, such as a connector task or a job worker's configuration.                                                                                                                     |
 | Credential type | The shape of a credential, such as **AWS Credential**, **REST Authentication**, or **JDBC Connection**. A credential type defines which fields a credential of that type has.                                                                              |
+| Environment     | The target a credential is deployed to. On Camunda 8 SaaS an environment is the cluster; on Self-Managed 8.10 and later, a cluster can hold one environment per physical tenant.                                                                           |
 | Configuration   | The element template property type that renders the credential chooser. A credential is a configuration whose kind is `CREDENTIAL`. See [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type). |
 
 ## Credentials and connector secrets
@@ -37,7 +47,7 @@ Credentials and [connector secrets](/components/hub/organization/manage-clusters
 |         | Connector secret                             | Credential                                                      |
 | ------- | -------------------------------------------- | --------------------------------------------------------------- |
 | Stores  | A single sensitive value, such as an API key | A complete, typed set of authentication and connection settings |
-| Scope   | One cluster                                  | One or more clusters, managed from your organization            |
+| Scope   | One cluster                                  | One or more environments, managed from your organization        |
 | Used by | Any connector field that supports secrets    | A connector's credential field                                  |
 
 A credential's sensitive fields reference secrets, so the secret is still where the sensitive value lives. Create the secret first, then reference it from the credential.
@@ -72,7 +82,7 @@ Store every sensitive value, such as a password or API key, as a [secret](/compo
 
 To guide you to a secret, Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. Saving is still allowed, so the value stays exposed until you replace it with a reference. The warning clears as soon as the field references a secret.
 
-If the clusters you selected hold no secrets yet, the field says so instead of showing an empty suggestion list.
+If the clusters that host the environments you selected hold no secrets yet, the field says so instead of showing an empty suggestion list. Secret suggestions are cluster-scoped, so every environment on a cluster offers that cluster's secret names.
 
 In Camunda 8 SaaS, both messages carry an **Open Clusters** link that opens in a new tab, so your part-finished credential survives the detour. Self-Managed shows no link, because secrets come from the connector runtime configuration.
 
@@ -103,7 +113,7 @@ Before you create your first credential, the **Managed** tab shows an empty stat
 
 ![Managed tab of the Credentials page in Camunda Hub, showing the message "Your organization has no credentials yet" and a Create credential button](./img/credentials-managed-empty.png)
 
-Once credentials exist, this tab lists them with their name, credential type, state, and when they were last modified.
+Once credentials exist, this tab lists them with their name, credential type, state, the environments they cover, and when they were last modified.
 
 ### Create a credential
 
@@ -113,17 +123,17 @@ To create a credential, select **Create credential**, and complete the three ste
 
    ![Step 1 of the Create a credential wizard, showing cards for AWS Credential, REST Authentication, and JDBC Connection, each listing the connectors that use it](./img/credentials-choose-credential.png)
 
-2. **Configure**: name the credential, choose which clusters it applies to, and fill in the fields for the credential type you selected.
+2. **Configure**: name the credential, choose which environments it applies to, and fill in the fields for the credential type you selected.
 
-   Camunda suggests an ID for the credential based on the name you enter. You can change the ID while you are creating the credential, but not afterwards. For a sensitive field, enter a reference to an existing secret, such as `camunda.secrets.AWS_SECRET_KEY`, rather than the value itself. Select the field to pick from the secrets that exist on the clusters you selected.
+   Camunda suggests an ID for the credential based on the name you enter. You can change the ID while you are creating the credential, but not afterwards. For a sensitive field, enter a reference to an existing secret, such as `camunda.secrets.AWS_SECRET_KEY`, rather than the value itself. Select the field to pick from the secrets that exist on the clusters that host the environments you selected.
 
    Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. **Continue** stays enabled, so replace the value with a reference before you save. See [store sensitive values as secrets, not plain text](#store-sensitive-values-as-secrets-not-plain-text).
 
-   If you select more than one cluster, keep **Use same credentials for all clusters** enabled to apply one set of values everywhere, or disable it to configure each cluster separately.
+   If you select more than one environment, keep **Use same credentials for all environments** enabled to apply one set of values everywhere, or disable it to configure each environment separately.
 
-3. **Review**: check the summary, then select **Create** to save the credential and deploy it to the clusters you selected.
+3. **Review**: check the summary, then select **Create** to save the credential and deploy it to the environments you selected.
 
-You can also save the credential as a draft at any step. A draft is saved in Hub but is not deployed to any cluster.
+You can also save the credential as a draft at any step. A draft is saved in Hub but is not deployed to any environment.
 
 :::note
 You cannot create a secret while creating a credential. Add the secret to the cluster first in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md), then reference it here. A credential's ID also cannot be changed after you create it, so to rename a credential, delete it and create a new one.
@@ -133,21 +143,25 @@ You cannot create a secret while creating a credential. Add the secret to the cl
 
 The **Managed** tab shows a state for each credential. Hub checks the state in the background after the list loads, so a state can take a moment to appear. Refresh the list to check again.
 
-| State        | Meaning                                                                                                                               |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Active       | The credential is deployed to every cluster you selected, and every secret it references exists on those clusters.                    |
-| Warning      | The credential is deployed to at least one cluster, but it is missing from another cluster, or a secret it references does not exist. |
-| Not deployed | The credential is not present on any cluster. Drafts always have this state.                                                          |
+| State        | Meaning                                                                                                                                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Active       | The credential is deployed to every environment you selected, and every secret it references exists on the clusters that host them.           |
+| Warning      | The credential is deployed to at least one environment, but it is missing from another environment, or a secret it references does not exist. |
+| Not deployed | The credential is not present in any environment. Drafts always have this state.                                                              |
 
-A credential in the **Warning** state is still deployed. Processes that use it can fail at runtime if the missing secret or cluster is the one they rely on.
+A credential in the **Warning** state is still deployed. Processes that use it can fail at runtime if the missing secret or environment is the one they rely on.
+
+The secret check behind these states is cluster-wide, so a credential can read **Active** while a secret it references does not resolve in one of its environments. On a cluster with physical tenants, each tenant needs its own secret store. See [secret resolution](/components/concepts/secret-resolution.md).
 
 ### Edit a credential
 
-Select a credential from the **Managed** tab to open it, then edit its values. The credential's ID is shown but cannot be changed. Saving your changes redeploys the credential to its clusters.
+Select a credential from the **Managed** tab to open it, then edit its values. The credential's ID is shown but cannot be changed. Saving your changes redeploys the credential to its environments.
+
+If an environment is deleted, the credential's detail page marks that target **Missing**. Saving from the edit wizard drops the missing target, so select another environment to deploy there instead.
 
 ### Delete a credential
 
-Deleting a credential removes it from Hub and from every cluster it is deployed to. Hub asks you to confirm, and lists the clusters that are affected.
+Deleting a credential removes it from Hub and from every environment it is deployed to. Hub asks you to confirm, and lists the environments that are affected.
 
 :::warning
 Editing or deleting a credential takes effect immediately for every process that references it. Running process instances can fail if the credential no longer works or no longer exists.
@@ -155,7 +169,7 @@ Editing or deleting a credential takes effect immediately for every process that
 
 ### Clusters only credentials
 
-A credential created outside Hub, such as one created in Desktop Modeler or directly through the cluster API, exists on its cluster but is not tracked in Hub. The **Clusters only** tab finds these credentials so you can bring them under Hub management.
+A credential created outside Hub, such as one created in Desktop Modeler or directly through the cluster API, exists on its cluster but is not tracked in Hub. The **Clusters only** tab finds these credentials so you can bring them under Hub management. Scanning and adding to Hub work per cluster rather than per environment: Hub links a discovered credential without redeploying it, and records one environment on that cluster as its target, chosen for you rather than by you. Only the extra clusters you add in the same dialog are deployed to. Check the target on the credential's detail page afterwards.
 
 1. Under **Clusters**, select the clusters you want to scan. You can select up to 10 clusters.
 2. Select **Scan clusters**. Hub scans each selected cluster for global variables that are tagged as credentials and that match a known credential type.
@@ -171,7 +185,7 @@ If the scan returns no results, no cluster you selected has a credential-tagged 
 
 Anyone with read access to your organization in Hub can see the **Credentials** page and the credentials it lists, including their configuration.
 
-Creating, editing, and deleting a credential requires the same permission as deploying a diagram to a cluster. There is no separate credential permission.
+Any member with access to your organization can create, edit, deploy, and delete a credential. Camunda Hub applies no separate credential permission, and no cluster, project, or environment check.
 
 ## Known limitations
 
@@ -184,6 +198,9 @@ In this release:
 - Credentials are visible to everyone with read access to your organization. You cannot restrict a credential to a project or a subset of users.
 - A credential's ID cannot be changed after creation.
 - Credentials are edited in place, with no history of previous values.
+- Secret suggestions are cluster-scoped, so a credential field offers every secret name on the cluster that hosts the environment you selected, including names that other environments on that cluster use.
+- Filtering the **Managed** tab by environment matches every environment on that environment's cluster.
+- Credential permissions are evaluated per organization, not per environment, so they do not follow the isolation between environments on a cluster.
 
 :::
 
