@@ -166,6 +166,40 @@ Our setup provisions three separate PostgreSQL clusters for different Camunda co
 If you don't plan to use certain components (for example, Web Modeler), you can simply remove the corresponding cluster definition from the configuration before deployment. This allows you to deploy only the PostgreSQL clusters you actually need, reducing resource consumption.
 :::
 
+#### High availability and node maintenance
+
+Each PostgreSQL cluster runs two instances and stores its write-ahead log (WAL) on a dedicated volume. Both defaults exist for operational reasons rather than for throughput.
+
+Two instances are what keep your Kubernetes nodes drainable. CloudNativePG protects a running database from a node drain: when the node hosting the primary is drained, the operator performs a switchover first and then lets the eviction proceed. A single-instance cluster has nowhere to switch over to, so the operator refuses the eviction and `kubectl drain` retries until it times out:
+
+```text
+error when evicting pods/"pg-identity-1" -n "camunda": Cannot evict pod as it would violate the pod's disruption budget.
+```
+
+A Kubernetes version upgrade drains one node at a time, so a single-instance cluster stalls that upgrade on the node holding the database. CloudNativePG describes this behavior in [Kubernetes upgrade and maintenance](https://cloudnative-pg.io/docs/1.30/kubernetes_upgrade/) and recommends always running more than one instance.
+
+A dedicated WAL volume keeps replication from filling the data directory. A standby holds a replication slot on the primary, so a standby that is down or lagging makes the primary retain WAL segments. When `pg_wal` shares a volume with `PGDATA`, that retention grows into the same space as your data. On its own volume, it cannot. The 5Gi default covers the 1GB `max_wal_size` checkpoint target plus the 512MB CloudNativePG keeps in `wal_keep_size`, leaving headroom for a standby that is away for a while. See [Volume for WAL](https://cloudnative-pg.io/docs/1.30/storage/#volume-for-wal).
+
+Both settings are one-way. The CloudNativePG validating webhook rejects removing `walStorage` from an existing cluster, and rejects lowering `storage.size`. Decide on the WAL volume and the data volume size before you deploy. Growing `storage.size` later is supported when your storage class sets `allowVolumeExpansion: true`.
+
+:::note
+`kubectl get pdb` reports `ALLOWED DISRUPTIONS: 0` for the primary whether you run one instance or two, because that budget only ever covers the primary. What a second instance changes is not the budget, it is that the operator gains a switchover target. Verify the behavior with a drain rather than with the budget.
+:::
+
+If you already run the single-instance shape from an earlier release, follow [Migrate an existing single-instance deployment](#migrate-an-existing-single-instance-deployment).
+
+#### Run a single instance on constrained environments
+
+Two instances only help when your cluster has two schedulable nodes. CloudNativePG spreads instances with a [preferred anti-affinity rule](https://cloudnative-pg.io/docs/1.30/scheduling/), so on a single-node cluster both instances land on the same node and a drain remains impossible.
+
+For local development (Kind, minikube) or any environment where a second instance is not affordable, pass `PG_INSTANCES=1` to `deploy.sh`:
+
+```bash
+PG_INSTANCES=1 ./deploy.sh
+```
+
+This applies `instances: 1` and `enablePDB: false` to every cluster it deploys. Disabling the PodDisruptionBudget is what keeps the node drainable with a single instance, and it is the configuration CloudNativePG documents for development clusters. The trade-off is explicit: the database is unavailable while its pod is rescheduled.
+
 ### Installation
 
 **Prerequisites**: Ensure environment variables are sourced (see [Environment setup](#step-2-environment-setup))
@@ -743,6 +777,100 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 - **CPU and memory**: Size clusters based on expected workload
 - **Storage**: Plan for data growth and I/O requirements
 - **Network**: Consider bandwidth requirements between components
+
+## Migrate an existing single-instance deployment
+
+Deployments created before the high availability defaults run one instance per PostgreSQL cluster, with `pg_wal` inside the data volume. Moving them to the current defaults is an in-place change: CloudNativePG clones a second instance from the running primary and relocates `pg_wal` onto its new volume by itself. You do not dump, restore, or recreate anything.
+
+Plan for one short interruption. CloudNativePG applies the new pod specification as a [rolling update](https://cloudnative-pg.io/docs/1.30/rolling_update/): replicas first, the primary last. With the default `primaryUpdateMethod: restart`, the primary restarts in place, which interrupts open connections for a few seconds.
+
+### Before you start
+
+| Check                 | Why it matters                                                                                                                         |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Two schedulable nodes | The second instance is only useful on another node, and the drain you are enabling needs somewhere to move the primary.                |
+| Free storage          | The existing instance gains a WAL volume and a second instance is created with both. With the defaults, that is 25Gi more per cluster. |
+| A current backup      | The migration is in place and keeps your volume, so an unrelated failure during it has no second copy to fall back on.                 |
+| Cluster is healthy    | Run `kubectl get cluster -n camunda` and confirm the phase is `Cluster in healthy state` before changing anything.                     |
+
+### Run the migration
+
+1. Update your copy of `postgresql-clusters.yml` (and `postgresql-orchestration-cluster.yml` if you deploy the orchestration database) to the current reference manifests, or add the two fields to each cluster you already have:
+
+   ```yaml
+   spec:
+     instances: 2
+     walStorage:
+       size: 5Gi
+   ```
+
+1. Apply the change, either with `deploy.sh` or directly:
+
+   ```bash
+   kubectl apply --server-side -f postgresql-clusters.yml -n camunda
+   ```
+
+1. Watch the operator converge. It clones the new instance, then restarts the primary to attach its WAL volume:
+
+   ```bash
+   kubectl get cluster -n camunda -w
+   ```
+
+   The phase moves through `Creating a new replica`, `Waiting for the instances to become active`, and `Primary instance is being restarted without a switchover` before returning to `Cluster in healthy state`.
+
+1. Confirm both instances are ready and sitting on different nodes:
+
+   ```bash
+   kubectl get pods -n camunda -l cnpg.io/cluster=pg-identity -o wide
+   ```
+
+1. Confirm `pg_wal` moved onto the dedicated volume on every instance. It becomes a symbolic link, and the original directory content is moved for you:
+
+   ```bash
+   kubectl exec -n camunda pg-identity-1 -c postgres -- ls -ld /var/lib/postgresql/data/pgdata/pg_wal
+   ```
+
+   ```text
+   lrwxrwxrwx 1 postgres tape 30 ... /var/lib/postgresql/data/pgdata/pg_wal -> /var/lib/postgresql/wal/pg_wal
+   ```
+
+1. Confirm the standby is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
+
+   ```bash
+   kubectl exec -n camunda pg-identity-1 -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
+   ```
+
+   ```text
+   streaming
+   ```
+
+   Until this reports `streaming`, the standby is not a switchover candidate, and a drain started early stalls with `Current primary is running on unschedulable node, but there are no valid candidates` in the operator log.
+
+1. Verify the result by draining the node that hosts the primary, which is the operation that failed before the migration:
+
+   ```bash
+   kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+   ```
+
+   The first eviction attempt is still refused while the pod is the primary. CloudNativePG then switches over and the retry succeeds:
+
+   ```text
+   evicting pod camunda/pg-identity-1
+   error when evicting pods/"pg-identity-1" -n "camunda" (will retry after 5s): Cannot evict pod as it would violate the pod's disruption budget.
+   evicting pod camunda/pg-identity-1
+   pod/pg-identity-1 evicted
+   node/<node> drained
+   ```
+
+   Run `kubectl uncordon <node>` afterwards, and the cluster returns to two ready instances.
+
+### Keep a single instance instead
+
+If a second instance is not affordable in your environment, do not leave the cluster at `instances: 1` with its PodDisruptionBudget enabled, because that is the combination that blocks node drains. Set `enablePDB: false` alongside it, as described in [Run a single instance on constrained environments](#run-a-single-instance-on-constrained-environments).
+
+### Reclaim the space later
+
+The migration leaves `storage.size` untouched, so your data volumes keep their existing size. If 15Gi is more than your databases need, note that CloudNativePG rejects lowering `storage.size` on a live cluster. Reducing it is a supervised procedure that recreates each instance on a smaller volume, described in [Volume reduction](https://cloudnative-pg.io/docs/1.30/storage/#volume-reduction).
 
 ## Migration from subcharts
 
