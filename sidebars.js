@@ -226,12 +226,13 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         {
           type: "category",
-          label: "Secret resolution",
+          label: "Secret management",
           link: {
             type: "doc",
-            id: "components/concepts/secret-resolution",
+            id: "components/concepts/secret-management",
           },
           items: [
+            "components/concepts/secret-resolution",
             "components/concepts/secret-resolution-and-job-activation",
             "components/concepts/secret-resolution-incidents",
           ],
