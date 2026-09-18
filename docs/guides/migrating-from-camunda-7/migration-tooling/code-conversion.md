@@ -7,8 +7,8 @@ description: "Understand patterns to convert your code written for Camunda 7 to 
 
 As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN), Camunda 7 forms (`.form`), and some of your code to work with the Orchestration Cluster REST API.
 
-:::tip Easiest path: agentic migration
-The [Camunda migration agent skill](./index.md#agentic-migration) orchestrates the Diagram Converter CLI and OpenRewrite recipes for you, then uses AI to resolve what the tools flag, covering code, BPMN/DMN diagrams, and Camunda 7 forms in a single session. You focus on reviewing changes and rearchitecting your solution.
+:::tip Agentic migration
+The [Camunda migration agent skill](./index.md#agentic-migration) uses the Diagram Converter CLI as the default for BPMN, DMN, and Camunda 7 form conversion. After it inventories Java code, select either the AI-first, pattern-guided path or the optional recipe-assisted path. Review every conversion and rearchitect your solution where needed.
 :::
 
 ## Overview
@@ -25,9 +25,9 @@ You must especially rewrite code that does the following:
 This guide covers tools and approaches to help with code conversion:
 
 1. [API Mapping Guide](#api-mapping-guide): Understand how Camunda 7 REST API endpoints map to Camunda 8
-2. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Automatically refactor Java code with configurable recipes
-3. [Code Conversion Patterns](#code-conversion-patterns): Detailed technical reference for manual migration
-4. [AI-assisted migration](#leverage-ai-for-migration): Use AI coding agents to apply patterns interactively, or use the [Camunda migration agent skill](./index.md#agentic-migration) as an orchestrator that runs the tools for you
+2. [Code Conversion Patterns](#code-conversion-patterns): Apply documented patterns in manual or AI-assisted migration
+3. [AI-assisted migration](#leverage-ai-for-migration): Start with a capable coding model that reads your source and migration patterns directly
+4. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Optionally create a deterministic first diff for repeated, supported, primarily syntactic transformations
 
 Additionally, you will find information about:
 
@@ -36,13 +36,14 @@ Additionally, you will find information about:
 
 ### Choose your migration approach
 
-You can combine these tools depending on your codebase complexity:
+Choose a Java migration path after you inventory your codebase. Before you use a path across a broad migration, run both paths on representative Java code and compare the results. Review is mandatory for both paths.
 
-| Approach                   | Best for                                                    | How it works                                                                                                      |
-| -------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| **OpenRewrite only**       | Standard patterns, large codebases with many similar files  | Run batch recipes, review diffs, manually fix remaining TODOs                                                     |
-| **AI agent only**          | Small codebases, complex custom code, exploratory migration | Give an AI agent your code and migration patterns, iterate on results                                             |
-| **Combined (recommended)** | Most real-world projects                                    | Run OpenRewrite first for deterministic bulk changes, then use AI for TODOs, edge cases, tests, and configuration |
+| Approach                                                | Use when                                                                                               | What to expect                                                                                                                                              |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review its output.                                             | The agent reads source code and migration patterns directly. Model quality materially affects the output, so review source-to-output mappings and behavior. |
+| **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. | Run OpenRewrite, then use AI or manual work to finish the migration. Expect scaffolding, generated names, TODOs, and cleanup.                               |
+
+A user comparison across four migration runs found that the AI-first path produced cleaner, more idiomatic Java code with fewer workflow passes. Treat this as selection guidance, not a guarantee. Neither path guarantees lower token use, cost, or migration time.
 
 ## API mapping guide
 
@@ -102,7 +103,9 @@ Code conversion patterns are detailed, technical examples showing how specific C
 
 Use the code conversion patterns when:
 
-- Manual migration is needed: The OpenRewrite recipes cannot handle your specific code structure
+- Starting an AI-first migration: Provide the relevant patterns and source context to the coding model
+- Reviewing a recipe-assisted migration: Check that the generated diff implements the relevant patterns
+- Manual migration is needed: The recipes cannot handle your specific code structure
 - Understanding changes: You want to understand what the recipes are doing under the hood
 - Extending recipes: You're developing custom recipes for your organization's specific patterns
 - Complex scenarios: Your code uses advanced features that require careful manual conversion
@@ -168,6 +171,10 @@ The patterns inform the OpenRewrite recipe development. If you find a pattern th
 
 [OpenRewrite](https://docs.openrewrite.org/) is an open-source framework that can automate refactorings by so-called recipes. It is provided with an Apache License, making it easy to adopt in any context.
 
+Use OpenRewrite as an optional recipe-assisted path for repeated, supported, primarily syntactic Java transformations. It creates a deterministic first diff, but it does not complete a migration.
+
+For semantic, cross-cutting, or mixed delegate/client transformations, recipes can be neutral or add rework by constraining downstream AI or manual work.
+
 The Camunda 7 to 8 OpenRewrite recipes help you automatically refactor:
 
 - Client code using the Camunda 7 Java API
@@ -181,7 +188,7 @@ The recipes are still under development. Expect recipes to work out-of-the-box o
 
 ### How the recipes work
 
-The code transformation is performed in three phases to ensure your code remains compilable throughout the migration:
+When you select the recipe-assisted path, the code transformation is performed in three phases:
 
 1. **Prepare**: Prepares the Camunda 7 code with minimal changes (e.g., converting TypedValue API to Java Object API, adding Maven dependencies).
 2. **Migrate**: Replaces Camunda 7 methods with Camunda 8 equivalents. Comments are added where parameters were modified or removed.
@@ -264,14 +271,14 @@ mvn rewrite:run
 
 #### Step 3: Review the changes
 
-Carefully examine all changes using your version control system's diff tool. The recipes add comments where manual review is needed:
+Carefully examine all changes using your version control system's diff tool. Recipes can add scaffolding, generated names, and TODO comments that need AI or manual cleanup. The recipes add comments where manual review is needed:
 
 - Parameters that were removed or have different semantics in Camunda 8
 - Methods with no direct one-to-one replacement (for example, executionId-based operations)
 - Dummy literal strings that need to be replaced with actual values
 
 :::warning Important
-Always review the transformed code. Some concepts from Camunda 7 (like executionId) don't exist in Camunda 8, and recipes cannot automatically determine the correct replacement in all cases.
+A successful recipe run, including a successful compile, does not demonstrate a complete migration. Review source-to-output mappings and behavior. Some concepts from Camunda 7 (like executionId) don't exist in Camunda 8, and recipes cannot automatically determine the correct replacement in all cases.
 :::
 
 ### Recipe completeness and limitations
@@ -287,6 +294,8 @@ However, they are incomplete in two aspects:
 - Some Camunda 7 methods could be transformed but are not yet included
 - Some Camunda 7 methods have no equivalent in Camunda 8
 
+Recipes do not resolve migration design decisions such as business behavior, eventual consistency, transaction boundaries, or architectural separation.
+
 If Camunda 7 code remains after applying recipes:
 
 1. Refer to the [code conversion patterns](#code-conversion-patterns) for manual migration guidance
@@ -299,29 +308,29 @@ If Camunda 7 code remains after applying recipes:
 - [OpenRewrite documentation](https://docs.openrewrite.org/)
 - [Complete migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example)
 
-## Diagram converter
+## Diagram Converter
 
 Your BPMN and DMN models need to be adjusted to work with Camunda 8.
 
-The [Diagram Converter](./diagram-converter.md) handles most common changes automatically. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize it to suit your needs.
+Use the [Diagram Converter](./diagram-converter.md) as the default for BPMN, DMN, and Camunda 7 form conversion. AI-generated model conversion depends materially on model capability and can silently change model semantics, so do not use AI-only model conversion as the default. Review converted models and findings before deployment.
 
 :::tip
-The [Camunda migration agent skill](./index.md#agentic-migration) runs the Diagram Converter CLI for you as part of an end-to-end workflow, and resolves conversion findings using AI.
+The [Camunda migration agent skill](./index.md#agentic-migration) runs the Diagram Converter CLI as the default and can use AI to help investigate findings.
 :::
 
 For full documentation, see the [Diagram Converter guide](./diagram-converter.md).
 
 ## Leverage AI for migration
 
-You can use AI to apply [code conversion patterns](#code-conversion-patterns) interactively. This is especially useful for code that OpenRewrite recipes cannot handle automatically, such as custom superclasses, complex test cases, or configuration files.
+When you have a capable coding model and can review its output, start Java migration with AI that applies [code conversion patterns](#code-conversion-patterns) directly to your source code. This path is especially useful for semantic, cross-cutting, or mixed delegate/client transformations.
 
 :::tip
-The [Camunda migration agent skill](./index.md#agentic-migration) orchestrates the Diagram Converter CLI and OpenRewrite recipes for you, and uses AI to resolve remaining issues. Use the manual prompts below if you prefer to drive the process yourself.
+The [Camunda migration agent skill](./index.md#agentic-migration) inventories your source code, then lets you select the AI-first, pattern-guided path or the optional recipe-assisted path. It uses the Diagram Converter CLI as the default for models and forms. Use the manual prompts below if you prefer to drive the process yourself.
 :::
 
 ### Set up an AI agent for migration
 
-When using an AI coding agent, provide it with the migration patterns as context so the agent can apply these patterns across your entire codebase.
+When using an AI coding agent, provide it with the migration patterns as context so the agent can apply these patterns across your entire codebase. Model quality materially affects AI-first output, so select a capable model and review every conversion.
 
 :::tip Provide context to AI agents
 Point the agent to the pattern catalog for best results:
@@ -621,7 +630,7 @@ Validate the Camunda 7 to 8 migration:
 
 1. Compile: mvn compile — fix any errors
 2. Find remaining Camunda 7 references: search for org.camunda.bpm.* imports
-3. Find TODO comments left by OpenRewrite or manual migration
+3. Find TODO comments left by recipe-assisted or manual migration
 4. Check for common issues:
    - String process instance IDs that should now be Long keys
    - VariableMap usage that should be Map<String, Object>
@@ -634,6 +643,8 @@ Validate the Camunda 7 to 8 migration:
 ### Full agentic migration prompt
 
 For AI agents that can browse files and execute commands, you can use a single comprehensive prompt to migrate an entire project:
+
+This prompt describes the AI-first, pattern-guided path. Before using it across a broad migration, compare its results with the recipe-assisted path on representative Java code.
 
 :::tip
 The full agentic prompt works best with AI coding agents that have terminal access and can read/write files directly (for example, Claude Code, Copilot Agent Mode, Cursor). For chat-based tools, use the individual prompts from Steps 2–7 above, and provide the relevant code in each prompt.
