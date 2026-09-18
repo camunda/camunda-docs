@@ -31,6 +31,7 @@ Some audit log entries contain extra details about the entity in the **entity ke
 | Create         | Process instance | Process name  |
 | Delete         | Process instance | Process name  |
 | Create         | Variable         | Variable name |
+| Update         | Variable         | Variable name |
 | Create         | Resource         | Resource name |
 | Delete         | Resource         | Resource name |
 | Create         | Decision         | Decision name |
@@ -83,3 +84,5 @@ In Operate, when the inbound channel is `MCP`, it is shown separately in the **A
 ## REST API
 
 With the API, you can access more operation data than you can in the applications. See the [API response schema](../../../apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx#responses) for more information.
+
+Variable audit entries contain the variable key and name, but not previous or new values. For entries caused by user task completion, use the process instance and variable scope to investigate changes: `elementInstanceKey` identifies the variable's scope, and no `userTaskKey` links the entry to the originating task.
