@@ -14,114 +14,54 @@ Forms can be easily styled by combining defining own CSS rules and overriding a 
 
 ## Styling via CSS
 
-### CSS variables
+Form styling is built on two layers of CSS variables:
 
-The variables are defined at the root of the form-js container:
+| Layer                   | Variables                                | Purpose                                                                                                                         |
+| ----------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **Semantic tokens**     | `--bio-*`                                | Name a role rather than a component — surface, text, border, accent, radius. Rebinding one restyles every element in that role. |
+| **Component variables** | `--color-*`, `--font-*`, `--border-*`, … | What the form actually reads. Each color variable derives from a token; fonts, sizes, and geometry stand on their own.          |
+
+Rebinding the tokens restyles the whole form, including the properties panel embedded in the form editor. Reach for a component variable only where you want to deviate from the shared semantics.
+
+### Theming with semantic tokens
+
+form-js declares the tokens on the `bio-theme-parent` class, which it adds to every root it renders — the form container and any popup it attaches to `document.body`.
+
+Override them from an ancestor, and apply your theme class at the **application root** rather than around the form. Popups and tooltips are appended to the end of `<body>`, outside the element that opened them, and a theme only reaches what it contains.
+
+```css
+.my-theme .bio-theme-parent,
+.my-theme.bio-theme-parent {
+  --bio-primary: #0f62fe;
+  --bio-surface: #ffffff;
+  --bio-border: #8d8d8d;
+  --bio-text: #161616;
+}
+```
+
+Both selectors are required. A custom property declared on an element always beats one inherited from an ancestor, so a theme has to match the element form-js declared its tokens on — sitting above it is not enough.
+
+The complete, always-current list of tokens and the component variables derived from them lives in the stylesheets themselves:
+
+- [`form-js-base.css`](https://github.com/bpmn-io/form-js/blob/develop/packages/form-js-viewer/assets/form-js-base.css) <GHIcon /> — viewer
+- [`form-js-editor-base.css`](https://github.com/bpmn-io/form-js/blob/develop/packages/form-js-editor/assets/form-js-editor-base.css) <GHIcon /> — editor
+
+In both files the `.bio-theme-parent` block declares the tokens, and the `.fjs-container` block below it maps them onto component variables.
+
+### Component variables
+
+Where a token does not express what you need, override the component variable directly on the form container:
 
 ```css
 .fjs-container {
-  /**
-   * Color settings. Specify color variables in the following schema:
-   * 1 - use specified layer
-   * 2 - use layer one
-   * 3 - use fallback 
-   */
-  --color-background: var(--cds-field, var(--cds-field-01, var(--color-white)));
-  --color-background-disabled: var(
-    --cds-background,
-    var(--color-grey-225-10-95)
-  );
-  --color-background-readonly: var(
-    --cds-background,
-    var(--color-grey-225-10-95)
-  );
-  --color-background-adornment: var(
-    --cds-field,
-    var(--cds-field-01, var(--color-grey-225-10-95))
-  );
-  --color-background-inverted: var(
-    --cds-background-inverse,
-    var(--color-grey-225-10-90)
-  );
-  --color-background-inverted-hover: var(
-    --cds-background-inverse-hover,
-    var(--color-grey-225-10-93)
-  );
-  --color-background-active: var(
-    --cds-background-active,
-    var(--color-grey-225-10-75)
-  );
-  --color-layer: var(--cds-layer, var(--cds-layer-01, var(--color-white)));
-  --color-layer-accent: var(--cds-layer-accent, var(--color-grey-0-0-88));
-  --color-icon-base: var(--cds-icon-primary, var(--color-black));
-  --color-icon-inverted: var(--cds-icon-inverse, var(--color-black));
-  --color-text: var(--cds-text-primary, var(--color-grey-225-10-15));
-  --color-text-light: var(--cds-text-secondary, var(--color-grey-225-10-35));
-  --color-text-lighter: var(--cds-text-secondary, var(--color-grey-225-10-45));
-  --color-text-lightest: var(
-    --cds-text-placeholder,
-    var(--color-grey-225-10-55)
-  );
-  --color-text-inverted: var(--cds-text-inverse, var(--color-text));
-  --color-text-disabled: var(--cds-text-disabled, var(--color-text-light));
-  --color-borders: var(
-    --cds-border-strong,
-    var(--cds-border-strong-01, var(--color-grey-225-10-55))
-  );
-  --color-borders-group: var(--cds-border-subtle, var(--color-grey-225-10-85));
-  --color-borders-table: var(--color-borders-group);
-  --color-borders-disabled: var(
-    --cds-border-disabled,
-    var(--color-grey-225-10-75)
-  );
-  --color-borders-adornment: var(
-    --cds-border-subtle,
-    var(--cds-border-subtle-01, var(--color-grey-225-10-85))
-  );
-  --color-borders-readonly: var(
-    --cds-border-subtle,
-    var(--color-grey-225-10-75)
-  );
-  --color-borders-inverted: var(
-    --cds-border-inverse,
-    var(--color-grey-225-10-90)
-  );
-  --color-warning: var(--cds-text-error, var(--color-red-360-100-45));
-  --color-warning-light: var(--cds-text-error, var(--color-red-360-100-92));
-  --color-accent: var(--cds-link-primary, var(--color-blue-205-100-40));
-  --color-accent-readonly: var(
-    --cds-border-strong,
-    var(--cds-border-strong-01, var(--color-grey-225-10-55))
-  );
-  --color-datepicker-focused-day: var(
-    --cds-button-primary,
-    var(--color-grey-225-10-55)
-  );
-  --color-shadow: var(--cds-shadow, var(--color-grey-225-10-85));
-
-  /* font + text settings */
+  --color-background-disabled: #f4f4f4;
   --font-family: "IBM Plex Sans", sans-serif;
-  --font-size-group: 15px;
   --font-size-base: 14px;
-  --font-size-input: 14px;
-  --font-size-label: 12px;
-  --line-height-base: 20px;
-  --line-height-input: 18px;
-  --line-height-label: 16px;
-  --letter-spacing-base: 0.16px;
-  --letter-spacing-input: 0.16px;
-  --letter-spacing-label: 0.32px;
-
-  /* field settings */
   --form-field-height: 36px;
-  --border-definition: 1px solid var(--color-borders);
-  --border-definition-adornment: 1px solid var(--color-borders-adornment);
-  --outline-definition: 1px solid var(--cds-focus, var(--color-borders));
-  --button-warning-outline-definition: 2px solid var(--color-warning);
-  --border-definition-disabled: 1px solid var(--color-borders-disabled);
-  --border-definition-readonly: 1px solid var(--color-borders-readonly);
 }
 ```
+
+Fonts, sizes, spacing, and field geometry are only available as component variables — they have no token equivalent.
 
 ### Styleable classes
 
@@ -137,7 +77,36 @@ For example, to override field borders for single-line fields:
 
 ### Example
 
-Camunda 8 web applications are built using the IBM Carbon design system. Forms rendered in Tasklist appear in this design system by default. Visit the [Carbon form-js styles repository](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-carbon-styles) <GHIcon /> to learn how to create your own form styles.
+To theme a form after another design system, bind the tokens to its palette. This is how the **Custom style (Material-like)** preview below is built:
+
+```css
+.materialized .bio-theme-parent,
+.materialized.bio-theme-parent {
+  --bio-surface: rgba(0, 0, 0, 0.06);
+  --bio-text: rgba(0, 0, 0, 0.87);
+  --bio-text-subtle: rgba(0, 0, 0, 0.6);
+  --bio-border: rgba(0, 0, 0, 0.42);
+  --bio-border-subtle: rgba(0, 0, 0, 0.12);
+  --bio-primary: #5453d3;
+  --bio-focus: #5453d3;
+  --bio-danger: #d32f2f;
+}
+```
+
+That covers color. Anything the tokens do not express — typography, and Material's underlined field, which is a border shape rather than a color — is a component variable or a plain rule:
+
+```css
+.materialized .fjs-container {
+  --font-family: Roboto, Helvetica, Arial, sans-serif;
+  --line-height-input: 24px;
+}
+
+.materialized .fjs-container .fjs-input-group {
+  border: none;
+  border-bottom: 1px solid var(--bio-border);
+  border-radius: 4px 4px 0 0;
+}
+```
 
 <div style={ { display: 'flex', gap: '8px', flexWrap: 'wrap' } }>
 
