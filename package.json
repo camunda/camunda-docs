@@ -13,6 +13,8 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
+    "build:current": "DOCS_ONLY_VERSIONS=current docusaurus build",
+    "start:current": "DOCS_ONLY_VERSIONS=current docusaurus start",
     "build:docker": "docker build -f Dockerfile.build --output ./build --target=outputs . ",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
