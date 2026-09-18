@@ -205,6 +205,37 @@ BYO-VPC is the preferred path for customers integrating with an existing AWS lan
 
 The full validation contract — including the plan-time checks that fail with a descriptive error when a constraint is missing — lives in [`terraform/vpc/README.md`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/vpc/README.md) in the reference repository.
 
+### Secondary storage replication lag
+
+Aurora Global Database replicates asynchronously, so promoting a new writer can leave it missing whatever had not reached it yet. Camunda closes that gap, not Aurora.
+
+Exporting and acknowledging are separate steps. The RDBMS exporter writes a record to the Aurora writer, then tells the broker the record is safe only once `min-sync-replicas` replicas confirm it, which this architecture leaves at one. A record sitting in the writer but not yet confirmed by that quorum still occupies the Zeebe log, because the exporter has not acknowledged its position. Holding that position back is enough to keep segments on disk; releasing them is not this exporter's decision alone, since [compaction](/self-managed/concepts/exporters.md) tracks the slowest consumer on the partition.
+
+A replica counted towards that quorum falling behind is what holds the acknowledgement back, so it is what makes the log grow. It is not what the log is kept for. A replica catches up from the writer, never from Zeebe. The retained records matter when the writer itself is lost: the promoted one resumes from its own position, and Zeebe replays the gap.
+
+The reference architecture pins four properties under `camunda.data.secondary-storage.rdbms.`, shortened in the table below. [Multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) documents what each one does, including which vendors support `LOG_SEQ` and how the `DELAY` alternative behaves. The table records only which values this architecture picks and why.
+
+| Setting                                       | Value     | Why this value here                                                                                                                           |
+| --------------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async-replication.enabled`                   | `true`    | Off by default. This architecture delegates replication to Aurora and treats a writer failover as routine, so the monitoring is not optional. |
+| `async-replication.type`                      | `LOG_SEQ` | Already the engine default, pinned because the vendor is known and fixed here.                                                                |
+| `async-replication.max-lag`                   | `PT1H`    | Sized for a cross-region promotion under load, which runs past the `PT15M` default.                                                           |
+| `async-replication.pause-on-max-lag-exceeded` | `false`   | The engine default, kept deliberately.                                                                                                        |
+
+Under `LOG_SEQ`, `max-lag` bounds the age of the oldest exporter position still waiting for its log sequence number to be confirmed, not a lag figure Aurora reports. It does nothing while `pause-on-max-lag-exceeded` is `false`, because the engine compares it only inside the pause check. It is pinned anyway so the budget is already sized if you turn pausing on, which is then a one-line change.
+
+Whether to pause is left to you. Turning it on stops the exporter writing to Aurora once that budget is exceeded, or at the next replication poll if the required quorum is unavailable while nothing is queued. Ordinary lag below the budget changes nothing.
+
+It protects nothing that acknowledgement does not already protect. Records are reported safe to the broker only after confirmed replication either way, so pausing changes nothing about what a promotion can lose. The Zeebe log is held by the unacknowledged position either way. That is narrower than promising no loss: an unplanned promotion can still leave unacknowledged records absent from the promoted Aurora until they are replayed from the retained log.
+
+What pausing does not change: a replication stall leaves the position unacknowledged whether or not you pause, so the export backlog grows either way. Self-Managed ships with both the static write limit and backlog throttling disabled, so that backlog does not slow the engine on its own. They are separate switches in [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md). The static limit caps the rate of all new records, which bounds how fast the backlog can grow but never reacts to how large it already is; `throttling` is the one that adapts to the backlog. Neither keys on this flag, so pausing neither turns them on nor exempts you from them.
+
+What you gain is a visible failure. The exporter records the paused state in its replication metrics and logs a warning, and every later export attempt raises an `ExporterException`, so the condition is hard to miss. What you give up is that writes to Aurora stop, so secondary storage receives nothing new and stays stale until replication recovers. A paused exporter also stops consuming records, and an exporter that falls behind holds up the other exporters on its partition. Turn it on once you have alerting on replication lag and have accepted that trade.
+
+EFS is elastic, so a long outage never hits a capacity wall the way a fixed volume would. It grows stored bytes and burns throughput for as long as it lasts, which shows up as cost rather than a full disk. Monitor EFS storage growth and throughput, and alert on replication lag.
+
+An unsupported vendor or a non-global Aurora instance fails while the exporter is starting, and the message names the reason, so the deployment never comes up quietly without the replication signal. Later failures differ by where they happen. A replication status read that fails is logged and retried at the next poll. A failure to capture the replication marker while flushing pauses exporting instead, until the periodic checks recover. On the Aurora path the database privileges are exercised by those reads rather than checked at startup.
+
 ## Deployment walkthrough
 
 ### Step 1 — Configure
