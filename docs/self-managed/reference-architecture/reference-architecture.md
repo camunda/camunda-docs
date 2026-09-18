@@ -37,6 +37,8 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 When designing a reference architecture, it's essential to understand the differences between Orchestration Cluster and Camunda Hub Self-Managed. These components serve different purposes and include distinct elements.
 
+In Camunda 8.10, they're also deployed separately. Each Helm release declares its role through `global.topology.mode`, so one `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, with one `optimize` release per [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md). For the release roles, their requirements, and how to choose between them, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
+
 #### Orchestration Cluster
 
 ![Orchestration Cluster](./img/orchestration-cluster.jpg)
@@ -56,6 +58,8 @@ Tightly integrated with the Orchestration Cluster:
 - [Connectors](/components/connectors/introduction.md): Reusable building blocks for easily connecting processes to external systems, applications, and data.
 
 This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
+
+Connectors deploy with the Orchestration Cluster release. Optimize is deployed as its own release, one per Physical Tenant, because each Optimize instance reads exported records from a single index prefix. See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
 
 #### Camunda Hub
 
