@@ -35,13 +35,16 @@ Because the Orchestration Cluster resolves `camunda.secrets.<name>` centrally, i
 
 ## Store and create secrets
 
-A reference only resolves to a value once that value is available to the resolving component. How you create and store a secret depends on the offering:
+A reference only resolves to a value once that value is available to the resolving component. How you create and store a secret depends on how you run Camunda 8:
 
 - **SaaS**: the secret store is provisioned and managed for you. Create and update secret values on a cluster's **Cluster secrets** tab, then reference them as `camunda.secrets.<name>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) and the [SaaS-managed secret](/reference/glossary.md#saas-managed-secret) glossary entry.
 - **Self-Managed**: an operator supplies secret values.
   - For `camunda.secrets.<name>` (recommended), configure a secret store (File, AWS Secrets Manager, or GCP Secret Manager). See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
   - For `{{secrets.<name>}}` (legacy), a connector secret provider supplies values, for example from prefixed environment variables or a custom provider. See [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets).
   - When deploying with the Helm chart, a [Kubernetes Secret](/reference/glossary.md#kubernetes-secret) can back either syntax's underlying storage. See [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).
+- **Local development**: no store configuration needed; you manage secrets via `c8ctl` or `c8run` and reference them via `camunda.secrets.<name>`:
+  - Manage secrets via `c8ctl` through the `c8ctl cluster secrets` CLI, forwarding to the local development cluster — see [Manage secrets with `c8ctl`](/apis-tools/c8ctl/getting-started.md#manage-secrets).
+  - Manage secrets via `c8run` directly through the `c8run secrets` CLI. See [Manage secrets via `c8run`](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#manage-local-secrets).
 
 ## Resolve, list, and troubleshoot
 
