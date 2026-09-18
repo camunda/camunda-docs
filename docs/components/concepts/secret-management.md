@@ -55,7 +55,7 @@ Compared to `camunda.secrets.<name>`, the legacy syntax has these limitations:
 - **No resource-based authorization**: legacy secrets have no `SECRET` resource permissions and rely on the secret filter instead. See [Control access to secrets](#control-access-to-secrets).
 - **No external secret store integration**: values come from connector secret providers, not from a File, AWS Secrets Manager, or GCP Secret Manager store. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) for the stores `camunda.secrets.<name>` supports.
 
-To move from `{{secrets.<name>}}` to `camunda.secrets.<name>`, including the connector runtime's fallback mode that enables incremental migration, see [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md).
+To move from `{{secrets.<name>}}` to `camunda.secrets.<name>`, including the connector runtime's fallback mode that enables incremental migration, see [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md). In Self-Managed, migrating also moves secret values to a new location: they must live in the Orchestration Cluster's configured secret store, which you set up first.
 
 ## Related resources
 
