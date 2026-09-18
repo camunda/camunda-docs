@@ -21,6 +21,10 @@ Choose the model that best fits your isolation requirements and operational cons
 | **Operational complexity** | Low                              | Medium                                  | High                                      |
 | **Use case**               | Small teams, low-risk separation | Multiple teams, strong isolation needed | Separate organizations, maximum isolation |
 
+All three models run on the same platform and the same tooling. They differ in how much they isolate, from a shared database separated by a tenant ID, to a fully separate cluster per tenant:
+
+![Three tenancy models compared: Logical Tenant with lightweight isolation and one shared data store per cluster, Physical Tenant with strong isolation and multiple isolated data stores in one cluster, and Multi-Cluster with maximum isolation across separate clusters.](./img/tenancy-models-comparison.png)
+
 ## Logical Tenants
 
 **Lightweight tenant-ID based multi-tenancy** for cost-efficient subdivision within a single cluster. Logical Tenants share infrastructure but have logically isolated data, configurations, and access controls.
@@ -38,6 +42,7 @@ Best for: Multiple teams or organizations needing strong isolation without the c
 Physical Tenants and Logical Tenants can be used together. Each Physical Tenant can contain its own set of Logical Tenants, providing two independent layers of isolation: physical separation between top-level tenant groups, and logical separation within each group.
 
 - [Learn more about Physical Tenants](physical-tenants.md).
+- [Set up two isolated Physical Tenants](../physical-tenants/getting-started.md) for a hands-on walkthrough.
 
 ## Multi-Cluster
 
@@ -46,6 +51,10 @@ Full isolation through dedicated infrastructure with separate clusters per tenan
 Best for: Separate organizations with maximum isolation requirements or strict data residency needs.
 
 On SaaS, this means provisioning a separate cluster per tenant rather than configuring a distinct mode. See [Clusters](/components/concepts/clusters.md).
+
+For example, a retail bank and an investment bank under the same parent company might each run their own dedicated cluster, with no shared processes, storage, or networking between them:
+
+![A retail bank and an investment bank, each running its own dedicated Orchestration Cluster with its own identity provider, connector runtime, and data store, with no shared infrastructure between the two.](./img/multi-cluster-banking-example.png)
 
 ## Next steps
 
