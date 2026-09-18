@@ -38,6 +38,19 @@ import PageDescription from '@site/src/components/PageDescription';
 | :-------------- | :------------------------------------------------------------------------------------------- | :--- |
 | 13 October 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0)</li></ul> | -    |
 
+### Agentic orchestration
+
+#### Readable model reasoning in Operate
+
+<!-- https://github.com/camunda/product-hub/issues/3462
+https://github.com/camunda/camunda/issues/62266 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+Operate now displays readable model reasoning as an inline **Thinking** entry in the conversation history. To configure reasoning, use an AI Agent element template introduced in 8.10, or [upgrade a legacy template](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md).
+
+<p class="link-arrow">[Monitor AI agent reasoning in Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md#step-4-review-the-conversation-history)</p>
+
 ### Camunda Hub
 
 #### Business value dashboard

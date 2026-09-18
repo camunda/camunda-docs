@@ -99,6 +99,8 @@ For this example, the first iteration shows:
 Hover over a message's token count or duration badge to see a breakdown of its usage metrics.
 :::
 
+Operate shows **Thinking** and the formatted text only when the model returns reasoning content. If you use a legacy AI Agent element template, [upgrade to the 8.10 template](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) to configure reasoning.
+
 ### Dive deeper into messages and tool calls
 
 Every entry in the conversation history can be expanded for a closer look. Select the expand icon on a user or assistant message, or on a tool call, to open a larger view:
