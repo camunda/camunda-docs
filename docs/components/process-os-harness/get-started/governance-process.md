@@ -23,6 +23,10 @@ The engagement runs through four phases in order, and each one is backed by a sk
 
 Milestones matter more than the route between them. ProcessOS Harness gives you the flexibility to do whatever a project needs between two milestones, and the milestones keep the project moving in a direction everyone can verify.
 
+## Next - how to navigate through
+
+TDB
+
 ## How work is done
 
 The governance process assigns each step of work to one of two task types, so a builder and their SMEs always know where to act.
@@ -31,6 +35,7 @@ The governance process assigns each step of work to one of two task types, so a 
 | ------------ | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | Human task   | Camunda Tasklist, using a form.                           | Structured input from a person: process scope, SME answers to discovery gaps, review decisions. |
 | Builder task | The AI coding agent, driven by a ProcessOS Harness skill. | Anything an agent can generate, transform, or check: discovery specialists, BPMN, forms, tests. |
+| Human gates  | The AI coding agent, driven by a ProcessOS Harness skill. | Anything an agent can generate, transform, or check: discovery specialists, BPMN, forms, tests. |
 
 Both task types share the same auditability. Human task outcomes land as process variables and form submissions in Camunda; builder task outcomes land as committed artifacts in Git and job completions in Camunda.
 

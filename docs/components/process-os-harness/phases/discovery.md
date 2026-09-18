@@ -6,17 +6,7 @@ description: "The discovery phase runs parallel specialists across internal and 
 keywords: ["ProcessOS Harness", "discovery", "discovery specialists", "as-is"]
 ---
 
-Discovery builds a faithful picture of how a process runs today. ProcessOS Harness researches your organizational knowledge with parallel specialists, generates as-is process descriptions and BPMN diagrams, and closes the remaining gaps with SMEs.
-
-Discovery quality sets the ceiling for everything that follows. A transformation can only be as good as the as-is process it starts from, so treat this phase as the one worth extra iterations.
-
-## Run discovery
-
-```text
-/process-os-process-discovery
-```
-
-The skill runs iteratively. Specialists fan out in parallel, results are assessed for coverage, and the run repeats until coverage is good enough or the iteration limit in `run.config.yaml` is reached.
+Discovery builds a faithful picture of how a process runs today. ProcessOS Harness can researches your organizational knowledge with parallel specialists, generates as-is process descriptions and BPMN diagrams, and closes the remaining gaps with SMEs.
 
 ## Discovery specialists
 
