@@ -69,7 +69,7 @@ Use tenant-scoped routes for tenant-specific requests:
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to the default Physical Tenant. See [cluster admin](/components/admin/cluster-admin.md) for the operations served under this prefix.
+Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role, except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers can use it as a health check. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to the default Physical Tenant. See [cluster admin](/components/admin/cluster-admin.md) for the operations served under this prefix.
 
 ## Day-2 operations
 
@@ -96,15 +96,17 @@ Physical Tenants expose three distinct endpoints for health and status:
 | `/cluster/v2/status`                 | Cluster | Determining whether the cluster as a whole is operational.                                                                                                                                                                                                    |
 | `/physical-tenants/{id}/v2/topology` | Tenant  | Checking whether a specific Physical Tenant can accept work and which of its partitions are available.                                                                                                                                                        |
 
-The legacy `/v2/status` endpoint is deprecated. It remains available for the default Physical Tenant only to preserve backward compatibility. Switch to `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
+`/physical-tenants/{id}/v2/topology` is the tenant-prefixed form of `/v2/topology`: the same endpoint, reached through the tenant prefix. An unprefixed `/v2/topology` request returns the `default` tenant's topology, not a cluster-wide view. For the cluster-wide aggregate, use `/cluster/v2/topology`.
+
+The `/v2/status` endpoint is scoped to the default Physical Tenant. Use `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
 
 ## Readiness
 
 When configuring Kubernetes readiness probes, point the probe at `/actuator/health/readiness` for node-level readiness. To check whether a specific Physical Tenant can accept work independently of the node probe, poll `/physical-tenants/{id}/v2/topology` from your own health-check logic.
 
-A node reports ready while at least one of its Physical Tenants is serviceable. If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
+On a node where the secondary-storage readiness check is enabled (Elasticsearch or OpenSearch only; the check is not registered when RDBMS is the secondary storage), the node reports ready while at least one of its Physical Tenants is serviceable, unless the degraded tenant is the `default` tenant. A degraded `default` tenant still holds node readiness down; per-tenant readiness isolation is observable only for non-default tenants. This gap is tracked as [camunda/camunda#51861](https://github.com/camunda/camunda/issues/51861). If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other serviceable tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
 
-Per-tenant isolation of this kind applies to nodes serving two or more Physical Tenants. A node configured with a single tenant keeps the original fail-fast startup behavior. For diagnosis steps, see [troubleshooting](./troubleshooting.md).
+Per-tenant isolation of this kind applies to nodes with RDBMS-disabled secondary storage serving two or more Physical Tenants. An RDBMS node configured with a single tenant keeps the original fail-fast startup behavior; an Elasticsearch or OpenSearch node with a single tenant does not fail fast; it uses the same per-tenant, retrying, degradable startup path described above. For diagnosis steps, see [troubleshooting](./troubleshooting.md).
 
 ## Document store details
 

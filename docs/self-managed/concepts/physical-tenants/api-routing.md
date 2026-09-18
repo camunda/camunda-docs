@@ -44,7 +44,7 @@ GET /physical-tenants/default/v2/process-definitions/search
 
 A cluster-wide endpoint applies to the whole cluster rather than a single Physical Tenant. Cluster-wide operations are exposed under a dedicated `/cluster/v2/...` path prefix. See [cluster admin](/components/admin/cluster-admin.md) for the operations this prefix serves, their authentication requirements, and how to configure access.
 
-The legacy `/v2/status` endpoint is deprecated. It continues to serve the default Physical Tenant only for backward compatibility. Use `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
+The `/v2/status` endpoint is scoped to the default Physical Tenant. Use `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
 
 Most other endpoints are scoped to a Physical Tenant, even when they are not tenant-specific in nature. A plain `/v2/...` request targets the `default` tenant. For example:
 
@@ -53,9 +53,7 @@ Most other endpoints are scoped to a Physical Tenant, even when they are not ten
 
 ### Exception: /v2/status
 
-The `/v2/status` endpoint is a deliberate exception to the general routing rule. It remains cluster-wide and unauthenticated for backward compatibility, so operators and load balancers can check overall cluster health without credentials. It is **not** exposed under the Physical Tenant prefix (`/physical-tenants/{id}/v2/status` is not a valid path).
-
-For per-tenant health information, use the `/v2/topology` endpoint, which includes partition health state per tenant.
+`/v2/status` is scoped to the default Physical Tenant. It is available unprefixed and at `/physical-tenants/default/v2/status`, and returns `404` for any other tenant id. It is unauthenticated, so load balancers can probe it without credentials. For cluster-wide status use `/cluster/v2/status`; for one tenant's partition health use `/physical-tenants/{id}/v2/topology`.
 
 ## HTTP status codes
 
