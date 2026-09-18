@@ -554,6 +554,109 @@ If a secret that previously resolved now comes back unresolved, or the connector
 
 If you need to keep jobs processing while you investigate, switch to `LAX` temporarily. It falls back to allowing all secrets when the process definition lookup fails.
 
+## Enable credential validation
+
+Credential validation checks the values of a [credential](/components/hub/organization/credentials/index.md) against the system that credential authenticates against, through the `POST /configurations/validate` endpoint of the connector runtime. Camunda Hub calls this endpoint when it validates a credential.
+
+Validation resolves stored secrets to run a validator, so the endpoint is closed by default. Until you configure one of the two modes below, the connector runtime answers `404` to every request. Camunda Hub reads that `404` as a runtime without credential validation support, and hides the feature instead of reporting an error.
+
+Configure credential validation with the following properties:
+
+| Property                                               | Environment variable                                   | Description                                                                                                                                                                                                                          |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `camunda.connector.auth.self-managed.issuer`           | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_ISSUER`           | The OIDC issuer URL of the identity provider that authenticates your Camunda Hub users. Its discovery endpoint must be reachable from the runtime at startup, and its JWKS endpoint must be reachable whenever a token is validated. |
+| `camunda.connector.auth.self-managed.audience`         | `CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_AUDIENCE`         | The `aud` claim carried by the tokens Camunda Hub forwards to this connector runtime. Required whenever `issuer` is set.                                                                                                             |
+| `camunda.connector.configuration.validation.unsecured` | `CAMUNDA_CONNECTOR_CONFIGURATION_VALIDATION_UNSECURED` | Set to `true` to open the endpoint without authentication. Defaults to `false`. Cannot be combined with `issuer` or `audience`.                                                                                                      |
+
+The two modes are mutually exclusive:
+
+- **Authenticated**: set `issuer` and `audience`. The runtime then accepts only requests that carry a valid token from that identity provider. Use this mode whenever the cluster is registered in Camunda Hub with bearer token authentication.
+- **Unauthenticated**: set `unsecured` to `true`. The runtime then accepts any request that reaches the endpoint, so only use this mode when network controls keep the runtime unreachable from untrusted networks. This is the only mode available to a cluster registered with `NONE` or `BASIC` authentication, because such a cluster has no token to forward.
+
+The runtime fails to start if `unsecured` is `true` and either `issuer` or `audience` is also set.
+
+### Enable authenticated credential validation
+
+To accept authenticated requests, point the connector runtime at the identity provider whose tokens Camunda Hub forwards, and set both properties together:
+
+- An `issuer` without an `audience` fails startup, because the runtime would otherwise accept every token that identity provider signs for any of its clients.
+- An `audience` without an `issuer` leaves credential validation off, so the endpoint keeps answering `404`.
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_ISSUER=https://keycloak.example.com/auth/realms/camunda
+CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_AUDIENCE=connectors
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    auth:
+      self-managed:
+        issuer: https://keycloak.example.com/auth/realms/camunda
+        audience: connectors
+```
+
+</TabItem>
+</Tabs>
+
+The connector runtime then accepts a request to `POST /configurations/validate` only if the request carries an `Authorization: Bearer <token>` header with a token that verifies against the configured issuer's keys, is unexpired, and carries the configured audience. The runtime performs no role or claim check beyond that, so still keep the endpoint off untrusted networks.
+
+Only a cluster registered in Camunda Hub with bearer token authentication can supply such a token. For a cluster registered with `NONE` or `BASIC` authentication, use the unauthenticated mode instead.
+
+### Enable credential validation without authentication
+
+To open the endpoint without authentication, for example for a cluster registered with `NONE` or `BASIC` authentication, set `unsecured` to `true` and leave `issuer` and `audience` unset:
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_CONFIGURATION_VALIDATION_UNSECURED=true
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    configuration:
+      validation:
+        unsecured: true
+```
+
+</TabItem>
+</Tabs>
+
+In this mode the runtime verifies nothing about the caller, so anyone who can reach the connector runtime can trigger a validation that resolves stored secrets. Only use it when network controls, such as a private network, a service mesh policy, or an ingress restriction, prevent untrusted clients from reaching the runtime.
+
+### Configure credential validation in the Helm chart
+
+Set the properties through the generic `connectors.env` value. For the authenticated mode:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_ISSUER
+      value: https://keycloak.example.com/auth/realms/camunda
+    - name: CAMUNDA_CONNECTOR_AUTH_SELF_MANAGED_AUDIENCE
+      value: connectors
+```
+
+For the unauthenticated mode, set `CAMUNDA_CONNECTOR_CONFIGURATION_VALIDATION_UNSECURED` to `true` the same way, and leave the two authentication variables unset.
+
 ## HTTP proxy configuration
 
 You can configure connectors to route HTTP requests through a proxy server. See [HTTP proxy configuration](./http-proxy-configuration.md) for details.
