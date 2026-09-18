@@ -28,7 +28,7 @@ To get started, ensure you’ve [created a Camunda 8 account](/components/hub/or
 Once logged in to your Camunda 8 account, take the following steps:
 
 1. Within Camunda Hub, navigate to **Workspaces**, and open your workspace.
-2. In the workspace, click **New project**.
+2. In the workspace, click **Create project**.
 3. In the project, click **Create new > BPMN diagram**.
 4. In the top navigation, open the menu next to **New BPMN Diagram**, and click **Rename**.
 5. Name the diagram "Bake a Cake".

@@ -16,7 +16,8 @@ import FormId from './img/form-id.png';
 import ModelerGlobalNavImg from './img/modeler-global-nav.png';
 import ModelerFormMenuImg from './img/modeler-form-menu.png';
 import RunProcessImg from './img/run-process.png';
-import OperateHumanTasks from './img/operate-human-tasks.png';
+import OperateHumanTasksSM from './img/operate-human-tasks-sm.png';
+import OperateHumanTasksSaaS from './img/operate-human-tasks-saas.png';
 import FormEditorImg from './img/form-editor.png';
 
 import clsx from "clsx";
@@ -29,9 +30,13 @@ This guide is designed for users who prefer a low-code approach to process autom
 
 Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing [user tasks](/reference/glossary.md#user-task), you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 
+<!--
+TODO: When we have one, link to an equivalent course that uses Camunda Hub instead of Web Modeler and Console.
+
 :::note
 If you prefer a video-based learning experience or a more complex example, visit [this Camunda Academy course](https://bit.ly/3PJJocB).
 :::
+-->
 
 This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on dinner, and drive the process flow according to that decision.
 
@@ -67,9 +72,9 @@ In this step, you will design a process that demonstrates how to route the proce
 <TabItem value="saas">
 
 1. In Camunda Hub, navigate to your workspace.
-2. In the workspace, click **New project**, and name your project.
+2. In the workspace, click **Create project**, and name your project.
 3. In your project, select **Create new > BPMN diagram**.
-4. In the top navigation, next to **New BPMN diagram**, click the vertical ellipsis menu, and rename the file `Decide for Dinner`.
+4. In the top navigation, next to **New BPMN diagram**, click the vertical ellipsis menu, and rename the file `Decide on Dinner`.
 5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen. This specifies how the process will appear in other tools of Camunda 8.
 
 </TabItem>
@@ -100,17 +105,25 @@ To run this guide, make sure to be in [**Implement** mode](../components/hub/wor
 
 1. A **start event** is automatically added to the canvas. Click it to display configuration and append options.
 2. Click the rectangular **Append Task** icon to append a task.
-3. Enter a descriptive name for the task, such as `Decide what's for dinner`.
+3. In the right properties panel, enter a descriptive name for the task, such as `Decide what's for dinner`. If the properties panel for your task doesn't open automatically, navigate to **Window > Toggle Properties Panel** to open it manually.
 4. Change the task type by clicking on the element and selecting the **Change element** menu icon. Select **User Task**.
 5. Select the user task and click on the diamond-shaped icon to append an exclusive gateway. The gateway allows you to route the process flow differently, depending on conditions.
 6. Select the gateway and append a task by clicking the task icon. Repeat it to create a second process flow. Name the tasks based on what the user decides to eat: in this case, we've named ours `Prepare chicken` and `Prepare salad`.
 7. To route the user to the right task, add [expressions](/components/concepts/expressions.md) to the **sequence flows**. Sequence flows are represented by arrows connecting the gateway to the tasks. To add an expression, click on a sequence flow to view the **properties panel**, and open the **Condition** section.
-8. Verify the sequence flows have the following expressions: `meal = "Salad"` on one side, and `meal = "Chicken"` on the other. You will define the variable `meal` later when designing a form for the user task.
+8. Verify the sequence flows have the following expressions: `meal="Chicken"` on one side, and `meal="Salad"` on the other. You will define the variable `meal` later when designing a form for the user task.
    <img src={ExpressionInputImg} style={{width: 400}} alt="Example of a conditional expression" />
 
 9. Connect the split process flows again. Append another exclusive gateway to one of the tasks. Select the other task and drag the arrow-shaped sequence flow tool to connect it to the gateway.
 10. Select the gateway and add an **end event** to your process, denoted by the circle with the thick outline.
+
+<Tabs groupId="install" className="tabs-hidden">
+<TabItem value="saas">
+Don't worry about saving your process diagram. Every change you make is automatically saved.
+</TabItem>
+<TabItem value="sm">
 11. Save the process file.
+</TabItem>
+</Tabs>
 
 :::note
 New to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
@@ -130,20 +143,17 @@ You have now designed the process. To allow the user to make the decision, you w
 1. In the floating menu, click the link icon. A menu expands that allows you to create a new form.
    <img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" />
 1. Click **Create new form**. A form will be created and opened in the form editor. The form is automatically named.
-
-:::note
-Don't worry about saving your process diagram. Every change you make is automatically saved.
-:::
-
 1. In the left **Components** pane, under **Presentation**, click and drag the **Text view** component to the empty form.
    <img src={FormEditorImg} alt="Dragging a component to a form" />
 
 1. On the right side of the modeling interface, in the properties panel, open the **General** section, and enter a **Text** value, such as `What's for dinner?`.
 1. In the left **Components** pane, under **Selection**, click and drag the **Radio group** component to the form. In the properties panel, enter the following:
-   - **Field label**: `Options`
+   - **Field label**: `Meal*`
    - **Key**: `meal`. The key maps to a process variable. The value of the component will be stored in this variable, and it can be read by the process that uses this form. You use `meal` here because you already used this key for the conditions you set up in the process.
-     <img src={FormValuesTop} style={{width: 250}} alt="Defining a radio group's name and key" />
-1. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value. The `meal = "<OPTION>"` conditions you configured earlier are case-sensitive. Make sure the values you set here match those exactly.
+
+   <img src={FormValuesTop} style={{width: 250}} alt="Defining a radio group's name and key" />
+
+1. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value. The `meal="<OPTION>"` conditions you configured earlier are case-sensitive. Make sure the values you set here match those exactly.
    <img src={FormValuesBottom} style={{width: 250}} alt="Defining a radio group's static option values" />
 
 </TabItem>
@@ -156,12 +166,12 @@ Don't worry about saving your process diagram. Every change you make is automati
 
 1. On the right side of the modeling interface, in the properties panel, open the **General** section, and enter a **Text** value, such as `What's for dinner?`.
 1. In the left **Components** pane, under **Selection**, click and drag the **Radio group** component to the form. In the properties panel, enter the following:
-   - **Field label**: `Options`
+   - **Field label**: `Meal*`
    - **Key**: `meal`. The key maps to a process variable. The value of the component will be stored in this variable, and it can be read by the process that uses this form. You use `meal` here because you already used this key for the conditions you set up in the process.
 
    <img src={FormValuesTop} style={{width: 250}} alt="Defining a radio group's name and key" />
 
-1. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value. The `meal = "<OPTION>"` conditions you configured earlier are case-sensitive. Make sure the values you set here match those exactly.
+1. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value. The `meal="<OPTION>"` conditions you configured earlier are case-sensitive. Make sure the values you set here match those exactly.
 
    <img src={FormValuesBottom} style={{width: 250}} alt="Defining a radio group's static option values" />
 
@@ -176,13 +186,13 @@ Don't worry about saving your process diagram. Every change you make is automati
 
 ## Step 3: Link the form to your process
 
-Once the form is designed, verify it's linked properly in your process.
+Once the form is designed, verify it's linked properly in your process:
 
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
 1. Navigate to the process you created in [Step 1](#step-1-create-a-new-process).
-2. Select the user task. Click the blue **form link icon** to open the form menu.
+2. Select the user task. Click the **form link icon** to open the form menu.
 3. Verify the task is linked to your new form.
 
 </TabItem>
@@ -190,11 +200,6 @@ Once the form is designed, verify it's linked properly in your process.
 
 1. Open the process you created in **[Step 1](#step-1-create-a-new-process)** by clicking on the process file's name in the top bar.
 2. Select the user task, and open the **Form** section in the properties panel.
-
-:::note
-If the properties panel for your task doesn't open automatically, navigate to **Window > Toggle Properties Panel** to open it manually.
-:::
-
 3. In the form section, select **Camunda Form**, and enter the **Form ID** for the form you created in **[Step 2](#step-2-design-a-form)**.
 
 </TabItem>
@@ -213,7 +218,7 @@ Human-centric processes involving user tasks seamlessly unfold within Tasklist, 
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-If you have not yet configured a cluster to deploy to, you'll see a notification. You must [configure at least one cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) before moving on.
+If you have not yet configured a cluster to deploy to, you'll see a notification. You must [configure at least one cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) before moving on:
 
 1. At the top right of the modeling interface, click **Deploy & run** to deploy the process to your cluster.
 2. Select a target cluster.
@@ -262,7 +267,7 @@ With both resources deployed, you can run a process instance. Click the play ico
    <img src={RunProcessImg} style={{width: 300}} alt="Run action in Modeler" />
 
 2. In Operate, you will see a visualization of the running process instance. Notice that a green **token** is waiting at the user task. This means that a task is waiting to be worked on in Tasklist.
-   <img src={OperateHumanTasks} alt="Process instance monitoring in Operate" />
+   <img src={OperateHumanTasksSaaS} alt="Process instance monitoring in Operate" />
 
 :::tip
 In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md).
@@ -275,7 +280,7 @@ In production, Operate is used to monitor both long-running and straight-through
 2. In the **Process** panel, use the **Name** drop-down to select your process.
 3. A visualization of your running process instance now displays in Operate, and your user task is marked with a green **token** icon. This means that a task is waiting to be worked on in Tasklist.
 
-   <img src={OperateHumanTasks} alt="Process instance monitoring in Operate" />
+   <img src={OperateHumanTasksSM} alt="Process instance monitoring in Operate" />
 
 </TabItem>
 </Tabs>
