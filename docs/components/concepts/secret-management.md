@@ -10,45 +10,29 @@ This page is the entry point for how secrets work across Camunda 8. It explains 
 
 ## Reference a secret
 
-You reference a secret with a [secret reference](/reference/glossary.md#secret-reference): a placeholder written into a model that stands in for a secret value. Camunda 8 supports two reference syntaxes, resolved by different components: the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) resolves `camunda.secrets.<name>` (**recommended**), and the [connector runtime](/reference/glossary.md#connector-runtime) resolves `{{secrets.<name>}}` (**legacy**). By default, each reads only its own configured store or providers; a migration path from legacy to recommended is available. See [Using `camunda.secrets.*` references](/components/connectors/use-connectors/index.md#using-camundasecrets-references), and [Store and create secrets](#store-and-create-secrets) for how that store is configured in each offering.
+You reference a secret with a [secret reference](/reference/glossary.md#secret-reference): a placeholder written into a model that stands in for a secret value. The recommended syntax is `camunda.secrets.<name>`, resolved centrally by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster). See [Using `camunda.secrets.*` references](/components/connectors/use-connectors/index.md#using-camundasecrets-references), and [Store and create secrets](#store-and-create-secrets) for how the backing store is configured in each offering.
 
-| Syntax                   | Status          | Resolved by                                                               | Where you use it                                                                                                   | Learn more                                                                                                                                                 |
-| :----------------------- | :-------------- | :------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `camunda.secrets.<name>` | **Recommended** | The [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) | Input mapping FEEL expressions, and connector or credential fields backed by a `SECRET_REFERENCE` cluster variable | [Secret resolution](secret-resolution.md), [Secret reference (Orchestration Cluster)](/reference/glossary.md#secret-reference-orchestration-cluster)       |
-| `{{secrets.<name>}}`     | Legacy          | The [connector runtime](/reference/glossary.md#connector-runtime)         | Any connector field in the properties panel                                                                        | [Using secrets](/components/connectors/use-connectors/index.md#using-secrets), [Secret reference (legacy)](/reference/glossary.md#secret-reference-legacy) |
+| Syntax                   | Resolved by                                                               | Where you use it                                                                                                   | Learn more                                                                                                                                           |
+| :----------------------- | :------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.secrets.<name>` | The [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) | Input mapping FEEL expressions, and connector or credential fields backed by a `SECRET_REFERENCE` cluster variable | [Secret resolution](secret-resolution.md), [Secret reference (Orchestration Cluster)](/reference/glossary.md#secret-reference-orchestration-cluster) |
 
-Camunda recommends the `camunda.secrets.<name>` syntax for all models. This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may change in future releases. The `{{secrets.<name>}}` syntax remains supported for backward compatibility; "legacy" describes its age relative to `camunda.secrets.<name>`, not its support status.
+An older `{{secrets.<name>}}` syntax, resolved by the connector runtime, remains supported for existing connector models. See [Legacy connector secrets](#legacy-connector-secrets).
+
+`camunda.secrets.<name>` is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may change in future releases.
 
 For a worked example of referencing `camunda.secrets.<name>` in a model, including the FEEL expression rules, see [Secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings).
-
-:::tip Recommended: `camunda.secrets.<name>`
-
-Because the Orchestration Cluster resolves `camunda.secrets.<name>` centrally, it is more secure and more capable than the legacy connector syntax:
-
-- **Field-scoped resolution**: a reference only resolves at the field where it was written. The legacy form doesn't have this property; see [security notice 61](/reference/notices.md#notice-61) and [secret resolution](secret-resolution.md#reference-syntax).
-- **Broader reach**: usable in input mappings and cluster variables, not only connector fields; see [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) and [resolve secret references in a cluster variable](/components/modeler/feel/cluster-variable/usage-guide.md#resolve-secret-references-in-a-cluster-variable), compared to [using secrets](/components/connectors/use-connectors/index.md#using-secrets) for the legacy form.
-- **External secret stores**: backed by a File, AWS Secrets Manager, or GCP Secret Manager store in Self-Managed, rather than the environment-variable-based [connector secret providers](/self-managed/components/connectors/connectors-configuration.md#secrets); see [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
-- **Resource-based access control**: governed by the `SECRET` resource's `READ` and `REVEAL` authorizations; see [Control access to secrets](#control-access-to-secrets).
-- **Kept off the processing path**: resolved ahead of job activation, so the value never lands in a record, runtime state, or log; see [Secret resolution and job activation](secret-resolution-and-job-activation.md).
-
-:::
 
 ## Store and create secrets
 
 A reference only resolves to a value once that value is available to the resolving component. How you create and store a secret depends on how you run Camunda 8:
 
 - **SaaS**: the secret store is provisioned and managed for you. Create and update secret values on a cluster's **Cluster secrets** tab, then reference them as `camunda.secrets.<name>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) and the [SaaS-managed secret](/reference/glossary.md#saas-managed-secret) glossary entry.
-- **Self-Managed**: an operator supplies secret values.
-  - For `camunda.secrets.<name>` (recommended), configure a secret store (File, AWS Secrets Manager, or GCP Secret Manager). See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
-  - For `{{secrets.<name>}}` (legacy), a connector secret provider supplies values, for example from prefixed environment variables or a custom provider. See [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets).
-  - When deploying with the Helm chart, a [Kubernetes Secret](/reference/glossary.md#kubernetes-secret) can back either syntax's underlying storage. See [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).
+- **Self-Managed**: an operator supplies secret values by configuring a secret store (File, AWS Secrets Manager, or GCP Secret Manager). See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). When deploying with the Helm chart, a [Kubernetes Secret](/reference/glossary.md#kubernetes-secret) can back the configured store, for example as mounted files for a File store. See [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).
 - **Local development**: no store configuration needed; you manage secrets via `c8ctl` or `c8run` and reference them via `camunda.secrets.<name>`:
   - Manage secrets via `c8ctl` through the `c8ctl cluster secrets` CLI, forwarding to the local development cluster — see [Manage secrets with `c8ctl`](/apis-tools/c8ctl/getting-started.md#manage-secrets).
   - Manage secrets via `c8run` directly through the `c8run secrets` CLI. See [Manage secrets via `c8run`](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#manage-local-secrets).
 
 ## Resolve, list, and troubleshoot
-
-This section applies to `camunda.secrets.<name>` only; the legacy `{{secrets.<name>}}` syntax is resolved by the connector runtime itself, as described in [Using secrets](/components/connectors/use-connectors/index.md#using-secrets).
 
 - [Secret resolution](secret-resolution.md) covers the reference syntax, the two resolution paths, tenant scope, and caching.
 - [Secret resolution and job activation](secret-resolution-and-job-activation.md) covers the broker path: the scheduler, caching, and delivery to job workers.
@@ -57,9 +41,21 @@ This section applies to `camunda.secrets.<name>` only; the legacy `{{secrets.<na
 
 ## Control access to secrets
 
-This section applies to `camunda.secrets.<name>` only; the legacy `{{secrets.<name>}}` syntax has no equivalent resource-based authorization, and relies instead on the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
-
 The `SECRET` resource's `READ` and `REVEAL` permissions govern who can list and reveal a secret through the `/v2/secrets` API; they don't govern the broker resolving a reference for job activation. See [Authorizations](access-control/authorizations.md#reveal-permission-for-the-secret) and [Secret authorizations don't cover broker-side resolution](access-control/authorizations.md#secret-authorizations-dont-cover-broker-side-resolution).
+
+## Legacy connector secrets
+
+The legacy secret reference syntax, `{{secrets.<name>}}`, is resolved by the [connector runtime](/reference/glossary.md#connector-runtime) itself, at execution time, and can be used in any connector field in the properties panel. The syntax remains fully supported for existing connector models: "legacy" describes its age relative to `camunda.secrets.<name>`, not its support status. See [Using secrets](/components/connectors/use-connectors/index.md#using-secrets) for how to reference a legacy secret in a model, and the [Secret reference (legacy)](/reference/glossary.md#secret-reference-legacy) glossary entry.
+
+In Self-Managed, a connector secret provider supplies the values behind legacy references, for example from prefixed environment variables or a custom provider. When deploying with the Helm chart, a [Kubernetes Secret](/reference/glossary.md#kubernetes-secret) can deliver these values as mounted environment variables. See [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets) and [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).
+
+Compared to `camunda.secrets.<name>`, the legacy syntax has these limitations:
+
+- **No field-scoped resolution**: a legacy reference can resolve outside the field it was written in. The [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) introduced with [security notice 61](/reference/notices.md#notice-61) mitigates this; `camunda.secrets.<name>` scopes resolution to the field instead. See [secret resolution](secret-resolution.md#reference-syntax).
+- **No resource-based authorization**: legacy secrets have no `SECRET` resource permissions and rely on the secret filter instead. See [Control access to secrets](#control-access-to-secrets).
+- **No external secret store integration**: values come from connector secret providers, not from a File, AWS Secrets Manager, or GCP Secret Manager store. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) for the stores `camunda.secrets.<name>` supports.
+
+To move from `{{secrets.<name>}}` to `camunda.secrets.<name>`, including the connector runtime's fallback mode that enables incremental migration, see [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md).
 
 ## Related resources
 
@@ -70,6 +66,7 @@ The `SECRET` resource's `READ` and `REVEAL` permissions govern who can list and 
 - [Secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) covers referencing `camunda.secrets.<name>` in a model, with examples.
 - [Cluster secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) covers referencing SaaS-managed secrets as `camunda.secrets.<name>`.
 - [Secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) covers configuring the secret store in Self-Managed.
+- [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md) covers moving from the legacy syntax, including the connector runtime's fallback mode.
 
 **`{{secrets.<name>}}` (legacy):**
 
