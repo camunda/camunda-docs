@@ -238,7 +238,7 @@ Add the following to your `pom.xml`:
                     <dependency>
                         <groupId>io.camunda</groupId>
                         <artifactId>camunda-7-to-8-code-conversion-recipes</artifactId>
-                        <version>0.2.0</version>
+                        <version>0.2.8</version>
                     </dependency>
                 </dependencies>
             </plugin>
