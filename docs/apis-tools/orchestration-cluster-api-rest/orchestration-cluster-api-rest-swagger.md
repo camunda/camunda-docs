@@ -73,8 +73,8 @@ Click the **Authorize** button in Swagger UI to manually configure authenticatio
 
 **To obtain a Bearer token:**
 
-- **SaaS**: Follow the [OIDC-based Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for SaaS
-- **Self-Managed**: Follow the [OIDC-based Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for Self-Managed
+- **SaaS**: Follow the [OIDC-based Authentication guide](./orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt) for SaaS
+- **Self-Managed**: Follow the [OIDC-based Authentication guide](./orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt) for Self-Managed
 
 #### Basic Authentication
 

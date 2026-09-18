@@ -168,7 +168,7 @@ Unlike the OIDC client secrets, these passwords initialize the component databas
 You can choose any values.
 
 :::tip Alternative secret management
-For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions) for more options.
+For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended) for more options.
 :::
 
 ## Configure Camunda components

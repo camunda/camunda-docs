@@ -12,7 +12,8 @@ paths:
       operationId: getClusterRegistrations
       summary: Get all cluster registrations
       description: Returns all cluster registrations.
-      x-added-in-version: "0.4.0"
+      x-availability: "sm"
+      x-added-in-version: "8.10"
       tags:
         - Cluster
       responses:
@@ -36,7 +37,8 @@ paths:
         provision infrastructure — it only creates or updates the cluster registration in Hub. This endpoint requires
         dynamic cluster management to be enabled. If a cluster with the resolved ID already exists, its
         registration will be updated.
-      x-added-in-version: "0.4.0"
+      x-availability: "sm"
+      x-added-in-version: "8.10"
       tags:
         - Cluster
       requestBody:
@@ -65,7 +67,8 @@ paths:
         Returns the usage metrics for a cluster. The provided token is forwarded to the Orchestration
         Cluster API of the target cluster, so it must additionally include the read:* permission for the
         orchestration-api audience.
-      x-added-in-version: "0.4.0"
+      x-availability: "sm"
+      x-added-in-version: "8.10"
       tags:
         - Cluster
       parameters:
@@ -113,7 +116,8 @@ paths:
         Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual
         cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic
         cluster management to be enabled.
-      x-added-in-version: "0.4.0"
+      x-availability: "sm"
+      x-added-in-version: "8.10"
       tags:
         - Cluster
       parameters:
