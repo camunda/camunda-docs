@@ -22,4 +22,4 @@ You cannot undo or redo any actions taken before an upload as the undo/redo hist
 
 ### Troubleshoot a failed upload
 
-If a file doesn't appear after uploading, or you see an error, see [why resources might fail to import](./importing-resources.md#why-your-resources-might-fail-to-import). Common causes include an unrecognized file type and a file that exceeds the per-file size limit.
+If a file doesn't appear after uploading, or you see an error, see [why resources might fail to import](./importing-resources.md#why-your-resources-might-fail-to-import). Common causes include an unrecognized file type or exceeding the per-file size limit.
