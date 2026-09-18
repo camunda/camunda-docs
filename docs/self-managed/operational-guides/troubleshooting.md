@@ -4,54 +4,6 @@ title: Camunda components troubleshooting
 description: "Troubleshooting considerations in Platform deployment."
 ---
 
-## Helm chart security warning
-
-Due to [recent changes](https://github.com/bitnami/charts/issues/30850) in Bitnami's Helm charts (a third-party dependency), you may see a security warning when installing the Camunda Helm chart. This warning appears when a Bitnami subchart detects that an image has been replaced or modified.
-
-### Why the warning appears
-
-Camunda repackages the standard Bitnami Keycloak distribution with [Camunda-specific Keycloak](https://github.com/camunda/keycloak) for Identity integration. This customization adds Camunda identity themes.
-
-The Bitnami Helm chart detects this image replacement and emits a security warning as a precautionary measure.
-
-### Not a security vulnerability
-
-The security warning does not indicate a security vulnerability. This warning can appear in two scenarios:
-
-- **Camunda-built images** (such as Keycloak): These are built on official Bitnami images with only Camunda-specific additions (Identity theme, AWS wrapper). They undergo the same security review process as other Camunda components.
-
-- **Standard Bitnami images** (such as PostgreSQL or Elasticsearch): These images are secure but may show CVE warnings because of the comprehensive OS layer.
-
-In both cases, the security warning is a precautionary measure from Bitnami's detection system and does not indicate a genuine security risk.
-
-For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
-
-### Suppress the warning
-
-To accommodate this image replacement, the Camunda Helm chart enables `allowInsecureImages` by default for Keycloak:
-
-```yaml
-identityKeycloak:
-  global:
-    security:
-      allowInsecureImages: true
-```
-
-If you're using your own Docker registry to host application images, you should also enable this option for any Bitnami-based third-party dependencies, such as PostgreSQL or Elasticsearch sub-charts:
-
-```yaml
-identityKeycloak:
-  postgresql:
-    global:
-      security:
-        allowInsecureImages: true
-[...]
-elasticsearch:
-  global:
-    security:
-      allowInsecureImages: true
-```
-
 ## Keycloak requires SSL for requests from external sources
 
 When deploying Camunda to a provider, it is important to confirm the IP ranges used
@@ -61,7 +13,7 @@ to be external and therefore require SSL.
 
 As the [Camunda Helm Charts](https://artifacthub.io/packages/helm/camunda/camunda-platform) currently do
 not provide support for the distribution of the Keycloak TLS key to the other containers, we recommend viewing the solution available in the
-[Identity documentation](/self-managed/components/management-identity/miscellaneous/troubleshoot-identity.md#solution-2-identity-making-requests-from-an-external-ip-address).
+[Identity documentation](/self-managed/components/management-identity/miscellaneous/troubleshoot-identity.md#solution-2-management-identity-making-requests-from-an-external-ip-address).
 
 ## Identity redirect URL
 
@@ -166,7 +118,7 @@ Therefore, if you are not using the [ingress-nginx controller](https://github.co
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -322,7 +274,7 @@ as queued requests can time out before they are processed.
 Development and testing scenarios that are performance-sensitive may
 [disable authentication entirely](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development),
 or use
-[OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials).
+[OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt).
 
 ## Find available container image versions
 
@@ -334,12 +286,6 @@ For Camunda's own images, use [skopeo](https://github.com/containers/skopeo) to 
 # Open source images (no authentication required)
 skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe | jq '.RepoTags'
 ```
-
-:::note Bitnami Premium (`vendor-ee/*`) images
-Since the November 30, 2025 vendor migration, `skopeo` and the Harbor UI return only the `vendor-ee/*` tags cached since the migration, so registry tag listing is incomplete. Do not rely on it.
-
-Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
-:::
 
 ## Incorrect authorizations when deploying resources from Modeler
 

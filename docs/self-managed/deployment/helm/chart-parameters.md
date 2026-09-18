@@ -39,7 +39,7 @@ For service-level options such as the `appProtocol` hint per port, see [configur
 
 ### External infrastructure
 
-Deploy PostgreSQL, Elasticsearch or OpenSearch, and Keycloak separately from the Camunda Helm chart. This lets you use your preferred deployment methods, leverage managed services, and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+Camunda 8.10 no longer bundles infrastructure subcharts. Deploy PostgreSQL, Elasticsearch or OpenSearch, and Keycloak separately from the Camunda Helm chart. This lets you use your preferred deployment methods, leverage managed services, and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 :::note
 Configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
@@ -48,19 +48,6 @@ See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configu
 :::
 
 <MigrationTip />
-
-#### Bitnami subcharts guidance
-
-**Development and testing environments**: Bitnami subcharts provide ready-to-use infrastructure components that you can deploy with Camunda applications using minimal configuration.
-
-**Production environments**: Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you:
-
-- Use your preferred deployment method and operational tooling
-- Leverage managed services such as AWS RDS, Azure Database, or Google Cloud SQL
-- Manage infrastructure lifecycle independently of Camunda applications
-- Implement your organization's security, backup, and monitoring standards
-
-If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
 
 ### Observability
 
@@ -79,14 +66,13 @@ Check this page when installing or upgrading to ensure you use the latest option
 In addition to the default `values.yaml`, the Helm chart repository includes several additional values files for special use cases.  
 You can use these files individually or combine them with your own overrides.
 
-| File                         | Purpose                                                                                                                                                                                                                                 |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `values.yaml`                | The default configuration. Includes all chart parameters with baseline values.                                                                                                                                                          |
-| `values-local.yaml`          | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments.                                                                                                         |
-| `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. For Camunda Enterprise customers only.                                                                                                                                         |
-| `values-bitnami-legacy.yaml` | Uses the archived Bitnami open-source images for subcharts instead of the default ones. Deprecated; see [bitnami/containers#83267](https://github.com/bitnami/containers/issues/83267). Provided only as a temporary transition option. |
-| `values-latest.yaml`         | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.                                                                                                          |
-| `values-digest.yaml`         | Uses the latest snapshot images referenced by digest (for internal development only).                                                                                                                                                   |
+| File                     | Purpose                                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `values.yaml`            | The default configuration. Includes all chart parameters with baseline values.                                                  |
+| `values-local.yaml`      | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments. |
+| `values-enterprise.yaml` | Configures Camunda Enterprise images. For Camunda Enterprise customers only.                                                    |
+| `values-latest.yaml`     | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.  |
+| `values-digest.yaml`     | Uses the latest snapshot images referenced by digest (for internal development only).                                           |
 
 ### Creating your own values files
 

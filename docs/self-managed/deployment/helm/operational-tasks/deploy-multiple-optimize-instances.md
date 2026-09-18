@@ -43,7 +43,7 @@ Before you install the releases, prepare the following:
 - An external Keycloak or supported OIDC provider and a Management Identity configuration. The reference files use the [external Keycloak setup](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
 - An `ingress-nginx` controller, one DNS host, and a TLS Secret for the host. The example relies on `ingress-nginx` merging paths from two Ingress objects with the same host and Ingress class.
 - A production values file for the full platform, including external PostgreSQL, datastore authentication and TLS, image pull credentials, and component resources. Follow the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
-- Existing Kubernetes Secrets for every credential referenced by the values files. Follow the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
+- Existing Kubernetes Secrets for every credential referenced by the values files. Follow the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended).
 
 The examples use Elasticsearch service `elasticsearch-master` and Keycloak service `keycloak` in the Camunda namespace. Use fully qualified service names when a dependency runs in another namespace.
 
