@@ -5,9 +5,9 @@ sidebar_label: "Helm values toolkit"
 description: "Migrate and validate Camunda Helm override files with the local Web UI or Docker CLI, then review findings before upgrading."
 ---
 
-Use the Camunda Helm Toolkit to migrate Helm override files between Camunda versions and check their configuration.
+Use the Camunda Helm Toolkit to migrate Helm override files between Camunda versions and check their configuration. Run it as the recommended first step of a [Helm upgrade](/self-managed/upgrade/helm/index.md), before making manual configuration changes.
 
-The toolkit rewrites supported configuration keys and reports changes that need your attention. It doesn't upgrade your deployment, migrate stored data, or replace the [Helm upgrade procedure](/self-managed/upgrade/helm/890-to-8100.md).
+The toolkit rewrites supported configuration keys and reports changes that need your attention. A clean result is not proof your deployment is ready to upgrade: the toolkit doesn't upgrade your deployment, migrate stored data, validate a live cluster, or replace the [Helm upgrade procedure](/self-managed/upgrade/helm/890-to-8100.md).
 
 ## Check version compatibility
 
