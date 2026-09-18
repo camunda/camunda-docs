@@ -71,7 +71,7 @@ The following prerequisites apply regardless of your cloud provider:
 
 ## Cluster requirements {#cluster-requirements}
 
-The following requirements apply for IDP project clusters:
+When you create an IDP project, you select a deployment environment. Each environment maps to an underlying cluster, and the following requirements apply to that cluster:
 
 | Requirement                                                           | Description                                                                                                                                                                                                                            |
 | :-------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

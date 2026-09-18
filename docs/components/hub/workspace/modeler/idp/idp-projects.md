@@ -34,7 +34,7 @@ Classification templates require an environment on version 8.9 or later. If the 
 
 Open the **IDP project settings** modal to change the deployment environment used by an IDP project:
 
-1. In Camunda Hub workspace, open your IDP project.
+1. In your Camunda Hub workspace, open your IDP project.
 1. Click **Settings** to open the IDP project settings.
 1. Under **Deployment environment**, select the environment you want to use for the IDP project.
 1. Click **Save** to save and apply your changes.

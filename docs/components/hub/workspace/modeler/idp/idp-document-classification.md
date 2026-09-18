@@ -21,7 +21,7 @@ Document classification templates use [LLM foundation models](./idp-key-concepts
 - Choose and test different LLM models to find the model that best suits your budget and accuracy requirements.
 
 :::important
-Document classification templates require environment version 8.9 or later.
+Document classification templates require an environment on version 8.9 or later.
 :::
 
 ## Create a classification template
