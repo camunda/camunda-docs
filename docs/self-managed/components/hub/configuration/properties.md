@@ -21,6 +21,8 @@ For example, the property `camunda.modeler.clusters[0].name` is represented by t
 
 If you are using the Camunda 8 Helm chart, read more about the different configuration options in the chart's [Helm chart values documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 You can pass environment variables to each component via `camundaHub.restapi.env` and `camundaHub.websocket.env` in your `values.yaml`.
+
+For which settings belong in the chart and which belong here, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md). The recommended path for the properties on this page is `camundaHub.restapi.extraConfiguration`.
 :::
 
 For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Camunda Hub](/self-managed/quickstart/developer-quickstart/docker-compose.md).

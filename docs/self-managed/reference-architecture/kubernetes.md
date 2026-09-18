@@ -112,19 +112,21 @@ To further improve fault tolerance, distribute the Orchestration Cluster and oth
 
 ### Components
 
-Camunda 8 deployments typically separate workloads into two logical groups:
+Camunda 8 deployments separate workloads into three logical groups, each installed as its own Helm release with a `global.topology.mode` role:
 
-- **Orchestration Cluster**
-- **Camunda Hub and Management Identity**
+- **Camunda Hub and Management Identity** (`hub`)
+- **Orchestration Cluster and Connectors** (`orchestration`)
+- **Optimize**, one release per Physical Tenant (`optimize`)
 
-We recommend deploying these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). This separation supports multi-tenancy, improves isolation, and allows flexible scaling. However, deploying all components in a single namespace is also possible for smaller environments.
+Deploy these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). This separation gives each group an independent lifecycle, improves isolation, and allows flexible scaling. Deploying all components in a single `combined` release remains supported, and suits evaluation and smaller environments.
 
-A **multi-namespace setup** enables:
+Separate releases enable:
 
-- Independent scaling of orchestration clusters based on workload
-- Shared access to centralized components (e.g., Management Identity)
+- Independent scaling, upgrade, and removal of each Orchestration Cluster
+- Shared access to centralized components such as Management Identity
+- A separate Optimize instance per Physical Tenant, each reading its own index prefix
 
-To implement this topology with the Helm chart, see [configure a multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace.md).
+For the release roles and the reasoning behind the split, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md). To implement it with the Helm chart, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
 #### Orchestration Cluster namespace
 
@@ -135,10 +137,11 @@ As shown in the [architecture diagram](#orchestration-cluster), the Orchestratio
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) — UI for human tasks
 - [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) — authentication and access control
 
-Also included in this namespace are components that are tightly integrated with the cluster:
+Also included in this namespace is the component that deploys with the cluster release:
 
-- [Optimize](/components/optimize/what-is-optimize.md) — reporting and analytics
 - [Connectors](/components/connectors/introduction.md) — external system integrations
+
+[Optimize](/components/optimize/what-is-optimize.md) serves this cluster but is deployed as its own release, one per Physical Tenant. See [Optimize releases](#optimize-releases).
 
 The Orchestration Cluster also depends on a **secondary storage** backend for Operate, Tasklist, and the v2 Orchestration Cluster REST API. This backend is a document store (Elasticsearch or OpenSearch) or a supported relational database management system (RDBMS). It is provisioned outside the `StatefulSet`, as a managed service or an operator-managed database. Optimize requires Elasticsearch or OpenSearch and cannot use an RDBMS. For the trade-offs and how to choose a backend, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
 
@@ -165,6 +168,18 @@ For configuration details, see:
 - [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
 
 The Orchestration Cluster can be configured to authenticate with OIDC by connecting to the Management Identity service deployed in this namespace.
+
+#### Optimize releases
+
+Each Physical Tenant in an Orchestration Cluster is served by one Optimize release, deployed with `global.topology.mode: optimize`. That release deploys Optimize and nothing else.
+
+One Optimize instance reads exported records from a single Elasticsearch or OpenSearch index prefix, so it can serve exactly one tenant. This applies to the default Physical Tenant too: a cluster with no additional tenants still needs one Optimize release if you want analytics.
+
+Each Optimize release requires its own OIDC client, audience, redirect URL, and context path, and it connects to the same secondary storage the Orchestration Cluster exports to. Its reader prefix must exactly match that tenant's exporter writer prefix. Optimize requires Elasticsearch or OpenSearch and can't use an RDBMS.
+
+Place Optimize releases in the Orchestration Cluster namespace or in their own namespace. Ingress resources are namespace-scoped, so a separate namespace needs its own Ingress and subdomain.
+
+For configuration details, see [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md) and [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md).
 
 ## Requirements
 

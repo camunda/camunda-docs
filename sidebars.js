@@ -1776,6 +1776,7 @@ module.exports = {
         id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
+        "self-managed/reference-architecture/deployment-topology",
         "self-managed/reference-architecture/kubernetes",
         "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
@@ -1807,6 +1808,20 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
+                {
+                  type: "category",
+                  label: "Deployment topology",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/install/topology/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/install/topology/hub-release",
+                    "self-managed/deployment/helm/install/topology/orchestration-release",
+                    "self-managed/deployment/helm/install/topology/optimize-release",
+                    "self-managed/deployment/helm/install/topology/topology-physical-tenants",
+                  ],
+                },
                 "self-managed/deployment/helm/install/production/index",
               ],
             },
@@ -1833,6 +1848,7 @@ module.exports = {
                 //     "self-managed/deployment/helm/configure/authentication/basic",
                 //   ],
                 // },
+                "self-managed/deployment/helm/configure/configuration-responsibilities",
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/orchestration-tls-modes",
                 "self-managed/deployment/helm/configure/pod-networking",
@@ -1840,7 +1856,6 @@ module.exports = {
                 "self-managed/deployment/helm/configure/service-configuration",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
-                "self-managed/deployment/helm/configure/multi-namespace",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
                   type: "category",
@@ -2624,7 +2639,10 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: ["self-managed/upgrade/helm/890-to-8100"],
+          items: [
+            "self-managed/upgrade/helm/890-to-8100",
+            "self-managed/upgrade/helm/combined-to-split-topology",
+          ],
         },
         {
           type: "category",
