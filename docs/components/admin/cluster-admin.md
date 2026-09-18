@@ -34,7 +34,7 @@ Cluster admin protects the operations served under the `/cluster/v2/...` path pr
 | Recovery            | `POST /cluster/v2/restore`, `PATCH /cluster/v2/mode`                                                 |
 | Partition placement | `POST /cluster/v2/rebalance`                                                                         |
 
-Each cluster-wide endpoint also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin operation to a single Physical Tenant without switching to the tenant-scoped API. Omitting the parameter targets every Physical Tenant.
+The Recovery endpoints (`POST /cluster/v2/restore` and `PATCH /cluster/v2/mode`) also accept an optional `physicalTenantId` query parameter, which narrows the same cluster-admin operation to a single Physical Tenant without switching to the tenant-scoped API. Omitting the parameter targets every Physical Tenant. The other cluster-wide endpoints don't take this parameter; Status and topology already report per-tenant detail in the response body.
 
 For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
 
