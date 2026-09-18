@@ -18,6 +18,19 @@ Tasklist has two main pages:
 - [Tasks page](#tasks-overview) to manage tasks.
 - [Processes page](./starting-processes.md) to start processes.
 
+## Open Tasklist
+
+From Camunda Hub, you can access all your clusters and navigate to any running instance of Tasklist:
+
+1. Log in to Camunda Hub.
+1. In the left navigation under **Console**, click **Clusters**.
+1. Select a cluster. Each cluster contains its own instance of Tasklist.
+1. On the **Tasklist** card, click **Launch**. This opens the cluster's Tasklist instance.
+
+:::tip
+If the cluster is paused, you won't see a **Launch** button. You need to [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) before you can access its components.
+:::
+
 ## Tasks queue
 
 The **Tasks** page lists all tasks available to a user or user group and allows users to assign themselves a task from the list to work on.

@@ -44,7 +44,7 @@ On every valid change, the template is saved automatically. If there are errors 
 
 ## Publish an element template
 
-After finalizing your element template, click **Publish > Publish to project** to activate it within the project context. In the modal that opens:
+After finalizing your element template, click **Publish > Publish to workspace** to activate it within the workspace context. In the modal that opens:
 
 - Update the version number if necessary. You don't need to change it for the initial version or if you have updated it already in the template editor.
   The value entered here is saved to the `version` property in the JSON.

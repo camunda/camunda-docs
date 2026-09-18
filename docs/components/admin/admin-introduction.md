@@ -27,6 +27,19 @@ Admin includes the following features:
 For details about authorization concepts, resources, and configuration, see
 [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md).
 
+## Open Admin
+
+From Camunda Hub, you can access all your clusters and navigate to any running instance of Admin:
+
+1. Log in to Camunda Hub.
+1. In the left navigation under **Console**, click **Clusters**.
+1. Select a cluster. Each cluster contains its own instance of Admin.
+1. On the **Admin** card, click **Launch**. This opens the cluster's Admin instance.
+
+:::tip
+If the cluster is paused, you won't see a **Launch** button. You need to [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) before you can access its components.
+:::
+
 ## Manage access
 
 Depending on your setup, Admin allows you to manage Orchestration Cluster access as follows:
