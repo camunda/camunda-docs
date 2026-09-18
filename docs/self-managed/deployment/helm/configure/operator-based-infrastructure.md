@@ -834,6 +834,18 @@ Plan for one short interruption. CloudNativePG applies the new pod specification
    lrwxrwxrwx 1 postgres tape 30 ... /var/lib/postgresql/data/pgdata/pg_wal -> /var/lib/postgresql/wal/pg_wal
    ```
 
+1. Confirm the standby is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
+
+   ```bash
+   kubectl exec -n camunda pg-identity-1 -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
+   ```
+
+   ```text
+   streaming
+   ```
+
+   Until this reports `streaming`, the standby is not a switchover candidate, and a drain started early stalls with `Current primary is running on unschedulable node, but there are no valid candidates` in the operator log.
+
 1. Verify the result by draining the node that hosts the primary, which is the operation that failed before the migration:
 
    ```bash
