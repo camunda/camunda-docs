@@ -18,8 +18,8 @@ Currently supported markers:
 
 ## Add a marker to an element
 
-Markers are applied through the element's context pad, not drawn directly.
+Add markers from the element's Context pad rather than drawing them directly.
 
-Select the element, then click the **Change type** icon (the wrench). Choosing a different element behavior from the menu, for example converting a sub-process into an ad-hoc sub-process, applies the corresponding marker automatically.
+Select the element, then click the **Change type** icon (the wrench). Select a different element behavior, such as converting a sub-process to an ad-hoc sub-process, to apply the corresponding marker automatically.
 
 For a walkthrough of the context pad, see [model your first diagram](/components/modeler/desktop-modeler/model-your-first-diagram.md).
