@@ -46,7 +46,7 @@ Confirm each of these before you start. Every item here has caused a real setup 
 <summary>Two behaviors that are easy to miss on a first rollout</summary>
 
 - **Table and index prefixes are compared case-insensitively.** Configuring `riskprod_` for one tenant and `RISKPROD_` for another is treated as the same storage location and fails startup, not two distinct ones. Pick prefixes that are unique regardless of case.
-- **Custom exporters need explicit per-tenant assignment.** The built-in Camunda, RDBMS, Elasticsearch, and OpenSearch exporters merge their configuration from the root automatically. A custom exporter loaded from a JAR does not, unless it implements its own merge logic, so it needs a full configuration block per tenant, and that tenant must list it under its own exporter assignment configuration rather than inheriting it from the root. If you don't use custom exporters, skip this.
+- **Elasticsearch, OpenSearch, and custom exporters need explicit per-tenant assignment.** Only the built-in Camunda exporter and the RDBMS exporter merge their configuration from the root automatically, based on the tenant's configured secondary storage type. The Elasticsearch and OpenSearch exporters are treated as custom exporters: like any custom exporter loaded from a JAR, they need a full configuration block per tenant, and that tenant must list them under its own exporter assignment configuration rather than inheriting from the root. If your secondary storage is RDBMS and you don't use any custom exporters, skip this.
 
 </details>
 
@@ -71,6 +71,9 @@ For this walkthrough, the new tenant is named `riskprod`, reusing the existing K
 
 Add the following to your Helm values, either inline under `orchestration.configuration` or as a separate file under `orchestration.extraConfiguration`. Both approaches, and the full property list, are covered in [configure Physical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-physical-tenants.md). This example, adapted from Camunda's own two-tenant benchmark configuration, assumes the base `camunda.security.authentication` and `camunda.document` blocks for `default` are already in your values file. The minimum needed is storage and an assigned identity provider:
 
+<Tabs groupId="storage-backend" queryString>
+<TabItem value="rdbms" label="RDBMS" default>
+
 ```yaml
 orchestration:
   extraConfiguration:
@@ -91,6 +94,35 @@ orchestration:
                     assigned:
                       - oidc # reuse the cluster-level OIDC provider
 ```
+
+</TabItem>
+<TabItem value="es-os" label="Elasticsearch/OpenSearch">
+
+This example uses `elasticsearch`; substitute `opensearch` if that's your secondary storage type. Use the same type `default` already uses, since a cluster can't mix secondary storage types across Physical Tenants.
+
+```yaml
+orchestration:
+  extraConfiguration:
+    - file: physical-tenants.yaml
+      content: |
+        camunda:
+          physical-tenants:
+            riskprod:
+              # Shared Elasticsearch/OpenSearch cluster, isolated by index prefix.
+              data:
+                secondary-storage:
+                  elasticsearch:
+                    index-prefix: riskprod # must be unique across tenants
+
+              security:
+                authentication:
+                  providers:
+                    assigned:
+                      - oidc # reuse the cluster-level OIDC provider
+```
+
+</TabItem>
+</Tabs>
 
 Add an authorization block so `riskprod` has an admin role of its own. Every explicitly configured tenant needs one; authorization isn't inherited from the cluster:
 
@@ -131,7 +163,7 @@ Add this block alongside `security.authentication` above, under the same `riskpr
 
 </details>
 
-Before applying this, create the `riskprod_schema` schema on your PostgreSQL instance. Camunda validates that the schema exists at startup; it does not create it for you. See [validation and operations](./storage-isolation.md#validation-and-operations).
+If you're using RDBMS, create the `riskprod_schema` schema on your PostgreSQL instance before applying this. Camunda validates that the schema exists at startup; it does not create it for you. If you're using Elasticsearch/OpenSearch, no manual step is needed: Camunda creates indices under the `riskprod` prefix automatically at startup. See [validation and operations](./storage-isolation.md#validation-and-operations).
 
 Now register `riskprod`'s redirect URI in your IdP. In Keycloak, add `/physical-tenants/riskprod/sso-callback` to the client's allowed redirect URIs. See [IdP redirect URI registration](./authentication-authorization.md#idp-redirect-uri-registration). Skip this and the first browser login to `riskprod` fails at the IdP, not at Camunda.
 
@@ -145,7 +177,7 @@ helm upgrade camunda camunda/camunda-platform -f values.yaml
 
 Adding a Physical Tenant always requires a rolling restart. There's no dynamic, restart-free way to add one in this release. `default` keeps serving requests throughout the rollout. See [rolling restart expectations](./provisioning-and-lifecycle.md#rolling-restart-expectations).
 
-Confirm `riskprod` is up before deploying a process to it:
+Confirm `riskprod` is up before deploying a process to it. This and every other request in this guide requires an access token from the identity provider you assigned to `riskprod`; the examples omit the auth header for brevity. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) for how to obtain one:
 
 ```bash
 curl https://your-cluster/physical-tenants/riskprod/v2/topology
