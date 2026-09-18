@@ -142,7 +142,7 @@ Requests that combine `backupIds` with `from` or `to`, that specify a time range
 
 ### 4. Track the restore
 
-While a restore is in flight, [the restore status](/apis-tools/orchestration-cluster-api-rest/specifications/get-restore-status.api.mdx) reports progress per broker and per partition:
+While a restore is in flight, query [the restore status](/apis-tools/orchestration-cluster-api-rest/specifications/get-restore-status.api.mdx) to track progress per broker and per partition:
 
 ```bash
 curl "${ORCHESTRATION_CLUSTER_API}/restore"

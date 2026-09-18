@@ -104,7 +104,9 @@ As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/ac
 
 To create a backup, complete the following [backup process](#back-up-process).
 
-Steps that changed with Camunda 8.10 show both APIs: the Orchestration Cluster REST API is the default tab and the recommended path for new deployments, and the management (actuator) API is available as a backward-compatible alternative for existing automation. See [REST API](../backup-and-restore.md#rest-api) for the concepts shared across steps, including how each management API call maps to its REST equivalent.
+:::note
+Steps that changed with Camunda 8.10 show both APIs. Use the REST API by default. The management (actuator) API remains available as a backward-compatible alternative for existing automation. See [REST API](../backup-and-restore.md#rest-api) for the concepts shared across steps, including how each management API call maps to its REST equivalent.
+:::
 
 You can also optionally [back up your Camunda Hub data](#back-up-hub-data).
 
@@ -176,12 +178,12 @@ The REST API (`ORCHESTRATION_CLUSTER_API`) is the same authenticated Orchestrati
 
 ### 1. Soft pause exporting in Zeebe
 
-This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](../backup-and-restore.md#why-you-should-use-backup-and-restore). Pausing exporting is recommended before a backup to avoid log compaction removing data the backup still needs; it is not enforced by either API as a precondition of the backup call itself.
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](../backup-and-restore.md#why-you-should-use-backup-and-restore). Pausing exporting is required before a backup for state consistency, to avoid log compaction removing data the backup still needs; neither API enforces this as a precondition of the backup call itself.
 
    <Tabs groupId="backup-api">
       <TabItem value="rest" label="REST API" default>
 
-      This step uses [pause exporting](/apis-tools/orchestration-cluster-api-rest/specifications/pause-exporting.api.mdx), which requires the `EXPORTER:PAUSE` permission.
+      [Pause exporting](/apis-tools/orchestration-cluster-api-rest/specifications/pause-exporting.api.mdx). This requires the `EXPORTER:PAUSE` permission.
 
       ```bash
       curl -XPOST "$ORCHESTRATION_CLUSTER_API/exporting/pause?soft=true"
@@ -207,10 +209,6 @@ This will continue exporting records, but not delete those records (log compacti
          <details>
             <summary>Example output</summary>
             <summary>
-
-            :::note
-            Yes, 204 is the expected result and indicates a successful soft pause.
-            :::
 
             ```json
             {
@@ -246,7 +244,7 @@ This step initiates a coordinated snapshot on Elasticsearch or OpenSearch, where
    <Tabs groupId="backup-api">
       <TabItem value="rest" label="REST API" default>
 
-      This step uses [take a history backup](/apis-tools/orchestration-cluster-api-rest/specifications/take-history-backup.api.mdx), which requires the `BACKUP:CREATE` permission.
+      [Take a history backup](/apis-tools/orchestration-cluster-api-rest/specifications/take-history-backup.api.mdx). This requires the `BACKUP:CREATE` permission.
 
       ```bash
       curl -XPOST "$ORCHESTRATION_CLUSTER_API/backups/history" \
@@ -313,7 +311,7 @@ This step initiates a coordinated snapshot on Elasticsearch or OpenSearch, where
 
 ### 3. Start the Optimize backup
 
-Optimize is not covered by the Orchestration Cluster REST API. This step always uses the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md), regardless of which API you use for the other steps.
+Optimize is not covered by the Orchestration Cluster backup REST API. The [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md) must be used, regardless of which API you use for the other steps.
 
 ```bash
 curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
@@ -340,7 +338,7 @@ curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
    <Tabs groupId="backup-api">
       <TabItem value="rest" label="REST API" default>
 
-      This step uses [check a history backup](/apis-tools/orchestration-cluster-api-rest/specifications/get-history-backup.api.mdx), which requires the `BACKUP:READ` permission.
+      [Query the historic backup](/apis-tools/orchestration-cluster-api-rest/specifications/get-history-backup.api.mdx). This requires the `BACKUP:READ` permission.
 
       ```bash
       curl -s "$ORCHESTRATION_CLUSTER_API/backups/history/$BACKUP_ID"
@@ -729,12 +727,12 @@ This remains relevant if you run Optimize, which still relies on the former expo
 
 ### 8. Create the Zeebe broker backup
 
-This step creates a runtime backup, covering Zeebe's own primary storage independently of secondary storage.
+This step creates a runtime backup, covering Zeebe's own primary storage alone.
 
    <Tabs groupId="backup-api">
       <TabItem value="rest" label="REST API" default>
 
-      This step uses [take a runtime backup](/apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup.api.mdx), which requires the `BACKUP:CREATE` permission.
+      [Take a runtime backup](/apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup.api.mdx). This requires the `BACKUP:CREATE` permission.
 
       ```bash
       curl -XPOST "$ORCHESTRATION_CLUSTER_API/backups/runtime" \
@@ -788,7 +786,7 @@ This step creates a runtime backup, covering Zeebe's own primary storage indepen
    <Tabs groupId="backup-api">
       <TabItem value="rest" label="REST API" default>
 
-      This step uses [check a runtime backup](/apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup.api.mdx), which requires the `BACKUP:READ` permission.
+      [Query the runtime backup](/apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup.api.mdx). This requires the `BACKUP:READ` permission.
 
       ```bash
       curl "$ORCHESTRATION_CLUSTER_API/backups/runtime/$BACKUP_ID"
@@ -848,7 +846,7 @@ This step creates a runtime backup, covering Zeebe's own primary storage indepen
    <Tabs groupId="backup-api">
       <TabItem value="rest" label="REST API" default>
 
-      This step uses [resume exporting](/apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting.api.mdx), which requires the `EXPORTER:PAUSE` permission.
+      [Resume exporting](/apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting.api.mdx). This requires the `EXPORTER:PAUSE` permission.
 
       ```bash
       curl -XPOST "$ORCHESTRATION_CLUSTER_API/exporting/resume"
@@ -874,10 +872,6 @@ This step creates a runtime backup, covering Zeebe's own primary storage indepen
          <details>
             <summary>Example output</summary>
             <summary>
-
-            :::note
-            Yes, 204 is the expected result and indicates a successful resume.
-            :::
 
             ```json
             {
