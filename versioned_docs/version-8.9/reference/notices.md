@@ -6,12 +6,15 @@ toc_max_heading_level: 2
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import RssTip from '@site/src/components/ReleaseVersions/RssTip';
 
 <PageDescription />
 
-:::tip Subscribe to security notices
-Subscribe to the [RSS feed](pathname:///rss/security/notices.xml) for security updates and get automatic notifications when new security notices are published.
-:::
+<RssTip
+  feedUrl="pathname:///rss/security/notices.xml"
+  title="Subscribe to security notices"
+  description="security updates and get automatic notifications when new security notices are published"
+/>
 
 ## Report a security issue or vulnerability
 
