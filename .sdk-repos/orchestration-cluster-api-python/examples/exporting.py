@@ -35,3 +35,37 @@ def get_exporting_status_example() -> None:
     # Only `PAUSED` and `SOFT_PAUSED` confirm that exporting has stopped.
     print(f"Status: {result.status}")
 # endregion GetExportingStatus
+
+
+# region GetClusterExportingStatus
+def get_cluster_exporting_status_example() -> None:
+    client = CamundaClient()
+
+    # Requires the cluster-admin security chain — not the Orchestration Cluster
+    # user credentials. Only `PAUSED` and `SOFT_PAUSED` confirm a cluster-wide
+    # pause; any other value means at least one physical tenant is still active.
+    result = client.get_cluster_exporting_status()
+
+    print(f"Cluster exporting status: {result.status}")
+# endregion GetClusterExportingStatus
+
+
+# region PauseClusterExporting
+def pause_cluster_exporting_example() -> None:
+    client = CamundaClient()
+
+    # Pauses exporting on every physical tenant in one call.
+    # With `soft=True` the position is not committed, so the log is not compacted,
+    # which is the right mode for taking a consistent backup without stopping
+    # real processing work.
+    client.pause_cluster_exporting(soft=True)
+# endregion PauseClusterExporting
+
+
+# region ResumeClusterExporting
+def resume_cluster_exporting_example() -> None:
+    client = CamundaClient()
+
+    # Resumes exporting on every physical tenant after a pause or soft pause.
+    client.resume_cluster_exporting()
+# endregion ResumeClusterExporting
