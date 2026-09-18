@@ -1,7 +1,7 @@
 ---
 id: process-applications
-title: Process applications
-description: In Desktop Modeler a process application is a folder that contains a .process-application file and a set of related files you can work on and deploy as a single bundle.
+title: Projects
+description: In Desktop Modeler, a project is a folder that contains a camunda-project.json file and a set of related files you can work on and deploy as a single bundle.
 ---
 
 import GroupingImg from './img/process-applications/grouping.png'
@@ -10,9 +10,11 @@ import OverlayImg from './img/process-applications/overlay.png'
 import DeployImg from './img/process-applications/deploy.png'
 import StartInstanceImg from './img/process-applications/start-instance.png'
 
-Desktop Modeler recognizes [process applications](../../concepts/process-applications.md) you build and offers you advanced editor intelligence, deployment, and execution features within the context of such an application. To identify the boundaries of a process application, Desktop Modeler searches for a `.process-application` file in the root of your project.
+Desktop Modeler recognizes the [projects](../../concepts/process-applications.md) you build and offers you advanced editor intelligence, deployment, and execution features within their context. To identify the boundaries of a project, Desktop Modeler searches for a `camunda-project.json` file in the project root.
 
-In professional software development, a typical process application contains resources such as BPMN, DMN, and Form files. These live alongside [job workers](/components/concepts/job-workers.md), implementing process logic, additional application code, and tests. How exactly your project is structured may vary depending on the implementation language, libraries, and frameworks you use.
+For backward compatibility, Desktop Modeler also recognizes the legacy `.process-application` marker file, but does not create it for new projects.
+
+A typical project contains resources such as BPMN, DMN, and Form files. These live alongside [job workers](/components/concepts/job-workers.md), implementing process logic, additional application code, and tests. How exactly your project is structured will vary depending on the implementation language, libraries, and frameworks you use.
 
 ## Example: Consumer loan application
 
@@ -45,38 +47,38 @@ consumer-loan-application/
 │   └── test/
 │       └── java/
 │           └── ...
-├── .process-application
+├── camunda-project.json
 ├── pom.xml
 └── README.md
 ```
 
-## Editor support for process applications
+## Editor support for projects
 
-When you open a file in Modeler, the system implicitly determines whether it belongs to a process application. It does so by checking for the presence of a `.process-application` file in the same folder or a parent folder. Within a process application, Modeler offers improved navigation and assistance.
+When you open a file in Modeler, the system implicitly determines whether it belongs to a project. It does so by checking for the presence of a `camunda-project.json` file in the same folder or a parent folder. Within a project, Modeler offers improved navigation and assistance.
 
 ### Indicating context
 
-Process applications are opened and closed "implicitly": A blue item in the status bar indicates whether a diagram belongs to a process application and makes all related diagrams available for navigation.
+Projects are opened and closed "implicitly": A blue item in the status bar indicates whether a diagram belongs to a project and makes all related diagrams available for navigation.
 
-<p><img src={OverlayImg} alt="Process application" /></p>
+<p><img src={OverlayImg} alt="Project" /></p>
 
-When files from more than one process application are open, they are grouped visually.
+When files from more than one project are open, they are grouped visually.
 
-<p><img src={GroupingImg} alt="Process application file grouping" /></p>
+<p><img src={GroupingImg} alt="Project file grouping" /></p>
 
-### Creating a process application
+### Create a project
 
-Create a process application by creating a `.process-application` file in the root of your project. Alternatively, create it via Modeler UI by taking the following steps:
+Create a project using the Modeler UI:
 
-1. Click **File > New Process Application...**.
+1. Click **File > New Camunda Project...**.
 2. Choose a folder.
 3. Click **Select folder**.
 
-A `.process-application` file will be created in the selected folder, and the folder will now be recognized by Modeler as the applications project root. Any file within the folder or its subfolders will be treated as part of the process application.
+An empty `camunda-project.json` file is created in the selected folder, and the folder is recognized by Modeler as the project root. Any file within the folder or its subfolders is treated as part of the project.
 
 ### Linking resources
 
-Any file within a process application can be linked as a resource. Linking a resource can be achieved in several ways:
+Any file within a project can be linked as a resource. Linking a resource can be achieved in several ways:
 
 - Using the append feature
 - Using the replace feature
@@ -85,18 +87,18 @@ Any file within a process application can be linked as a resource. Linking a res
 
 <p><img src={LinkResourcesImg} alt="Linking resources by using the replace feature" /></p>
 
-### Deploying a process application
+### Deploy a project
 
-Process applications can be deployed using the [deploy feature](./deploy-diagram.md). When deploying a process application, all files that are part of the process application will be deployed.
+Projects can be deployed using the [deploy feature](./deploy-diagram.md). When deploying a project, all files that are part of the project are deployed.
 
-<p><img src={DeployImg} alt="Deploying a process application" /></p>
+<p><img src={DeployImg} alt="Deploying a project" /></p>
 
 ### Starting a process instance
 
 :::note
-Before starting a process instance, all process application files will be deployed to reflect the state of the process application.
+Before starting a process instance, all project files are deployed to reflect the state of the project.
 :::
 
-You can start an instance for any process in a process application using the [start instance feature](./start-instance.md).
+You can start an instance for any process in a project using the [start instance feature](./start-instance.md).
 
 <p><img src={StartInstanceImg} alt="Starting an instance of a process" /></p>
