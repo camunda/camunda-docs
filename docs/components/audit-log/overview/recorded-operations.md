@@ -38,14 +38,6 @@ These operations belong to the category `USER_TASKS`. The following operations a
 | Assign         | User task | INVALID_STATE      |
 | Unassign       | User task | INVALID_STATE      |
 | Complete       | User task | INVALID_STATE      |
-| Create         | Variable  | –                  |
-| Update         | Variable  | –                  |
-
-You can audit variables created or updated when a Camunda user task is completed. This applies to SaaS and Self-Managed.
-
-For tasks with output mappings, the audit log shows changes made by those mappings. Unchanged variables aren't included.
-
-Direct API variable changes belong to `DEPLOYED_RESOURCES`. Variable audit entries don't include variable values.
 
 ### `ADMIN` operations
 
@@ -104,6 +96,10 @@ These operations belong to the category `DEPLOYED_RESOURCES`. The following oper
 | Create         | Decision         | –                               |
 | Delete         | Decision         | –                               |
 | Evaluate       | Decision         | –                               |
+
+Variable changes from direct API calls and Camunda user task completion belong to `DEPLOYED_RESOURCES`. This applies to SaaS and Self-Managed. Task completion itself remains in `USER_TASKS`.
+
+For tasks with output mappings, the audit log shows changes made by those mappings. Unchanged variables aren't included. Variable audit entries don't include variable values.
 
 #### Batch operations
 

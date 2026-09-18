@@ -74,7 +74,9 @@ See [all configuration options](../../components/orchestration-cluster/core-sett
 
 If you disable the audit log, new operations are no longer recorded. Changing this setting doesn't cause the existing audit log data to be immediately purged. Instead, it will be cleaned up according to the secondary storage retention settings. Until the data is cleaned up, you can continue to access the data in [Operate](../../../components/operate/userguide/audit-operations.md), [Tasklist](../../../components/tasklist/userguide/audit-task-history.md), [Admin](../../../components/admin/audit-operations.md), and the [Search API](/apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx).
 
-Variable changes caused by user task completion use the existing `USER_TASKS` category: users are included by default, and clients require category opt-in. No dedicated setting or environment variable is needed. The existing properties can also be supplied through application YAML loaded from a Kubernetes ConfigMap.
+Variable changes use `DEPLOYED_RESOURCES`, including changes made when completing a user task. User operations are included by default. To audit client variable changes, include `DEPLOYED_RESOURCES` in the client categories. Use `USER_TASKS` to audit task completion itself.
+
+No dedicated setting or environment variable is needed. The existing properties can also be supplied through application YAML loaded from a Kubernetes ConfigMap.
 
 To exclude variable audit entries, add `VARIABLE` to the applicable actor's `excludes` list. This excludes both completion-driven and direct API variable entries; excluding `USER_TASK` alone doesn't exclude variable entries. These filters affect audit recording, not variable propagation or output-mapping execution.
 
