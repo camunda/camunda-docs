@@ -34,6 +34,12 @@ const sidebar: SidebarsConfig = {
           label: "Search the projects using a catalog asset",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/search-catalog-asset-file-usages",
+          label: "Search the files using a catalog asset",
+          className: "api-method post",
+        },
       ],
     },
     {
