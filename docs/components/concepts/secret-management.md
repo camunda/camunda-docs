@@ -4,7 +4,7 @@ title: "Secret management"
 description: "Camunda's approach to keeping secrets out of process models, variables, and configuration, and where to reference, store, resolve, and secure them in SaaS and Self-Managed."
 ---
 
-With secret management, you can keep sensitive values, such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Instead of writing a value into a model, you reference a secret by name, and Camunda resolves that reference to its value at runtime. The value is supplied only where it is needed, so it is never stored in the process itself.
+With secret management, you can keep sensitive values, such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Instead of writing a value into a model, you reference a secret by name, and Camunda resolves that reference to its value at runtime. The value is supplied only where it is needed, so it is never stored in a process or cluster variable.
 
 This page is the entry point for how secrets work across Camunda 8. It explains how to reference a secret, where secret values are stored in each offering, how references are resolved, and how access to secrets is controlled. For precise definitions of every term used here, see the [secret reference](/reference/glossary.md#secret-reference) glossary entries.
 
