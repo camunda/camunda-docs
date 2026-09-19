@@ -2237,6 +2237,7 @@ module.exports = {
               Elasticsearch: [
                 "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
                 "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore-snapshot",
               ],
               "Relational databases": [
                 "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",

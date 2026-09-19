@@ -83,8 +83,8 @@ With the cluster in recovery mode, nothing is exported to secondary storage, so 
 
 In-process restore only restores Zeebe's primary storage. Restore secondary storage to the point in time you intend to restore the primary storage to, using the procedure for your deployment:
 
-- [Elasticsearch and OpenSearch](./elasticsearch/restore.md#restore-elasticsearch-opensearch): restore the snapshots of all components using the same backup ID you pass to the Zeebe restore in [step 3](#3-trigger-the-restore). A mismatched backup ID produces an inconsistent restore point.
-- [Relational databases (RDBMS)](./rdbms/restore.md): restore the database with its native tooling. Camunda aligns the Zeebe and RDBMS restore points automatically.
+- [Elasticsearch and OpenSearch](./elasticsearch/restore-snapshot.md#restore-elasticsearch-opensearch): restore the snapshots of all components using the same backup ID you pass to the Zeebe restore in [step 3](#3-trigger-the-restore). A mismatched backup ID produces an inconsistent restore point.
+- [Relational databases (RDBMS)](./rdbms/restore.md#restore-api): restore the database with its native tooling. Camunda aligns the Zeebe and RDBMS restore points automatically.
 
 For the components and coordination rules of each path, see [Camunda back up and restore](./backup-and-restore.md).
 
