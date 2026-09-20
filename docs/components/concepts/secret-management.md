@@ -8,6 +8,12 @@ With secret management, you can keep sensitive values, such as API keys, passwor
 
 This page is the entry point for how secrets work across Camunda 8. It explains how to reference a secret, where secret values are stored in each offering, how references are resolved, and how access to secrets is controlled. For precise definitions of every term used here, see the [secret reference](/reference/glossary.md#secret-reference) glossary entries.
 
+:::tip
+
+This page explains Camunda's recommended approach to centrally managed and served secrets, using the `camunda.secrets.<name>` syntax resolved by the Orchestration Cluster. The older `{{secrets.<name>}}` connector syntax remains supported; for how it differs and how to migrate, see [Relation to legacy connector secrets](#relation-to-legacy-connector-secrets).
+
+:::
+
 ## Reference a secret
 
 You reference a secret with a [secret reference](/reference/glossary.md#secret-reference): a placeholder written into a model that stands in for a secret value. Camunda 8 supports two reference syntaxes, resolved by different components: the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) resolves `camunda.secrets.<name>` (**recommended**), and the [connector runtime](/reference/glossary.md#connector-runtime) resolves `{{secrets.<name>}}` (**legacy**). By default, each reads only its own configured store or providers; a migration path from legacy to recommended is available. See [Using `camunda.secrets.*` references](/components/connectors/use-connectors/index.md#using-camundasecrets-references), and [Store and create secrets](#store-and-create-secrets) for how that store is configured in each offering.
@@ -48,8 +54,6 @@ A reference only resolves to a value once that value is available to the resolvi
 
 ## Resolve, list, and troubleshoot
 
-This section applies to `camunda.secrets.<name>` only; the legacy `{{secrets.<name>}}` syntax is resolved by the connector runtime itself, as described in [Using secrets](/components/connectors/use-connectors/index.md#using-secrets).
-
 - [Secret resolution](secret-resolution.md) covers the reference syntax, the two resolution paths, tenant scope, and caching.
 - [Secret resolution and job activation](secret-resolution-and-job-activation.md) covers the broker path: the scheduler, caching, and delivery to job workers.
 - [Troubleshoot secret resolution failures](secret-resolution-incidents.md) covers the incidents raised when a reference or its injection fails.
@@ -57,9 +61,17 @@ This section applies to `camunda.secrets.<name>` only; the legacy `{{secrets.<na
 
 ## Control access to secrets
 
-This section applies to `camunda.secrets.<name>` only; the legacy `{{secrets.<name>}}` syntax has no equivalent resource-based authorization, and relies instead on the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
-
 The `SECRET` resource's `READ` and `REVEAL` permissions govern who can list and reveal a secret through the `/v2/secrets` API; they don't govern the broker resolving a reference for job activation. See [Authorizations](access-control/authorizations.md#reveal-permission-for-the-secret) and [Secret authorizations don't cover broker-side resolution](access-control/authorizations.md#secret-authorizations-dont-cover-broker-side-resolution).
+
+## Relation to legacy connector secrets
+
+The recommended sections above describe the `camunda.secrets.<name>` syntax. The `{{secrets.<name>}}` syntax is instead resolved by the [connector runtime](/reference/glossary.md#connector-runtime) itself, independent of the Orchestration Cluster:
+
+- **Resolution**: the connector runtime resolves references directly, as described in [Using secrets](/components/connectors/use-connectors/index.md#using-secrets).
+- **Storage**: values come from a connector secret provider, for example prefixed environment variables or a custom provider. See [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets).
+- **Access control**: there is no equivalent resource-based authorization; access relies instead on the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
+
+To move from the legacy syntax to the recommended one, see [Using `camunda.secrets.*` references](/components/connectors/use-connectors/index.md#using-camundasecrets-references).
 
 ## Related resources
 
