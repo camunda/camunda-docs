@@ -73,6 +73,20 @@ Deployments already running the single-instance shape migrate in place: CloudNat
 
 <p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
 
+### Orchestration Cluster
+
+#### Startup no longer depends on a reachable identity provider
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not during startup. An identity provider that is still starting, or that is temporarily down, no longer keeps the cluster from coming up.
+
+- Only the requests that depend on the unreachable provider fail. Requests authenticated by a provider that answers, and requests that need no provider, are served as usual.
+- Each following request makes a new attempt, so the affected traffic recovers as soon as the provider answers. No restart is required.
+- While a provider cannot be reached, the cluster logs one warning per minute for each failing resolution step, naming the provider, its issuer, and the affected scope.
+
+<p class="link-arrow">[Requests failing while an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-failing-while-an-identity-provider-is-unreachable)</p>
+
 ## 8.10.0-alpha5
 
 | Release date     | Changelog(s)                                                                                        | Blog |

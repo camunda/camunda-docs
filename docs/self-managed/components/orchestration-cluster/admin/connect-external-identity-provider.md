@@ -186,6 +186,8 @@ camunda.security.authentication.oidc.scope: ["openid", "profile", "email"]
 
 After updating your configuration, (re)start the Orchestration Cluster for the configuration changes to be applied.
 
+A successful start does not confirm that your IdP is reachable: the Orchestration Cluster contacts a provider at the first request that needs it, and not during startup. If the cluster is up but authentication fails, see [requests failing while an identity provider is unreachable](debugging-authentication.md#requests-failing-while-an-identity-provider-is-unreachable).
+
 ### Step 6: Test user authentication
 
 At this point, you should be able to log in to the Orchestration Cluster using any user account from your IdP that is assigned to this client (application).

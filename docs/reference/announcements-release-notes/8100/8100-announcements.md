@@ -768,6 +768,22 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster starts when an identity provider is unreachable
+
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not during startup. A provider that is still starting, or that is temporarily down, no longer keeps the cluster from coming up: the cluster starts, serves every request it can authenticate without that provider, and fails only the requests that depend on it. Each following request retries, so the affected traffic recovers as soon as the provider answers, without a restart. While a provider cannot be reached, the cluster logs one warning per minute per failing resolution step, naming the provider, its issuer, and the affected scope.
+
+**Action:** If you relied on a failed startup to detect an unreachable identity provider, alert on that warning instead.
+
+<p className="link-arrow">[Requests failing while an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-failing-while-an-identity-provider-is-unreachable)</p>
+</div>
+</div>
+
 ## Integrations
 
 <div className="release-announcement-row">
