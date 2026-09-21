@@ -230,7 +230,7 @@ The [architecture of Submariner](https://submariner.io/getting-started/architect
 The following diagram illustrates the interaction between the two clusters:
 
 _Infrastructure diagram of Submariner setup_
-![Infrastructure diagram of Submariner setup](./assets/submariner-hld.jpg)
+![Infrastructure diagram of Submariner setup](./assets/submariner-hld.svg)
 
 - Traffic sent from one broker to another cluster can be encrypted by the [Gateway Engine](https://submariner.io/getting-started/architecture/gateway-engine/). In OpenShift, the IPSec protocol is used on port `4500/UDP`, utilizing the [Libreswan](https://libreswan.org/) implementation.
 - A dedicated node in each cluster assumes the [Broker Role](https://submariner.io/getting-started/architecture/broker/), facilitating the exchange of metadata between Gateway Engines in participating clusters. This component is **not responsible for transmitting data**, unlike the Gateway Engine, which handles data transmission between internal networks of different clusters. High availability can be achieved by adding a second dedicated node.
