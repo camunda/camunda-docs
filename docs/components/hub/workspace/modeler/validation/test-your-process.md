@@ -88,7 +88,7 @@ The end boundary is optional and defaults to the first end event. Click **Start*
 
 1. In the **Configure test case** step, click the end row.
 2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with an **End** label on the diagram.
-3. To clear the end boundary, click the selected element again on the canvas, or select it again from the search results to deselect selection.
+3. To clear the end boundary, click the **x** icon on the **End** label on the canvas, or search for the same element again and deselect it from the results.
 
 When an end boundary is set, the process instance terminates after that element completes. Elements after it are not activated and do not appear in the instance history.
 
