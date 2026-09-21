@@ -3053,6 +3053,7 @@
                 "id": "self-managed/deployment/helm/operational-tasks/index"
               },
               "items": [
+                "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure"
               ]

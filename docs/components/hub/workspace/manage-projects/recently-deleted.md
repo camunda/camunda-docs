@@ -28,7 +28,7 @@ Soft deletion only applies to resources deleted using the Camunda Hub user inter
 Permanent deletion occurs 30 days after a resource is deleted. This removes all associated data, including resource content, version history, metadata, and Git links.
 
 :::note
-Using the public API, a client with `delete` permissions can permanently delete a resource before the 30-day window has expired:
+Using the [public API](/apis-tools/hub-api-saas/specifications/permanently-delete-file.api.mdx), a client with `delete` permissions can permanently delete a resource before the 30-day window has expired:
 
 ```bash
 DELETE /api/v2/files/{fileKey}/permanent
@@ -38,7 +38,7 @@ DELETE /api/v2/files/{fileKey}/permanent
 
 ## Purge a file from versions
 
-If you delete a file within a project, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from the file's entire history, a client with `delete` permissions can call the public purge endpoint:
+If you delete a file within a project, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from the file's entire history, a client with `delete` permissions can call the [public purge endpoint](/apis-tools/hub-api-saas/specifications/purge-file.api.mdx):
 
 ```bash
 DELETE /api/v2/files/{fileKey}/purge

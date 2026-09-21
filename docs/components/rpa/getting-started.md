@@ -11,7 +11,7 @@ import RpaTaskConfig from './img/rpa-task-configuration.png';
 import RpaEditorWebInitial from './img/rpa-editor-web-initial.png';
 import RpaEditorWebResults from './img/rpa-editor-web-results.png';
 
-Use the RPA worker and Camunda Modeler to create, test, and automate RPA scripts.
+Use the RPA worker and either Camunda Hub or Desktop Modeler to create, test, and automate RPA scripts.
 
 ## About the RPA worker
 
@@ -19,13 +19,13 @@ The RPA worker is available on all major platforms (Windows, Linux, and macOS). 
 
 ## Create your first script
 
-Get started with RPA by creating your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts.
+Get started with RPA by creating your first RPA script. With Camunda Hub and Desktop Modeler, you can edit and test your scripts.
 
-You can get started developing and testing your scripts locally without a Camunda connection using [Modeler](/components/modeler/about-modeler.md) if you already have a Camunda instance available.
+You can get started developing and testing your scripts locally without a Camunda connection using [Desktop Modeler](/components/modeler/desktop-modeler/index.md) if you already have a Camunda instance available.
 
 ### Using Desktop Modeler
 
-1. **Download Camunda Modeler**: [Download the latest version of Camunda Modeler](https://camunda.com/download/modeler/).
+1. **Download Desktop Modeler**: [Download the latest version of Desktop Modeler](https://camunda.com/download/modeler/).
 2. **Open the RPA script editor**: Open Desktop Modeler and navigate to the RPA script editor under **Testing**.
    <img src={RpaEditorInitial} alt="RPA editor interface showing the initial script view in Desktop Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
@@ -71,7 +71,7 @@ Once you have written your script, you can test it on a local RPA worker.
    1. Select the **Test** tab in the **Details** pane. Add any variables required by the process in JSON format. Once you start the execution, the **Results** section shows the execution output and variables.
    2. Review the execution log and the variables created during the script execution within Modeler.
 
-      <img src={RpaEditorWebResults} alt="RPA testing panel in Web Modeler showing execution results" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
+      <img src={RpaEditorWebResults} alt="RPA testing panel in Camunda Hub showing execution results" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
 ## Automate execution
 
@@ -80,15 +80,15 @@ Once you are happy with your script and have tested it locally, you can start au
 ### Link RPA task to BPMN
 
 1. **Deploy the RPA file**:
-   1. If you have not already, [set up client connection credentials](../../hub/organization/manage-clusters/manage-api-clients/#create-a-client) for your Modeler.
+   1. If you have not already, [set up client connection credentials](../../hub/organization/manage-clusters/manage-api-clients/#create-a-client) in Camunda Hub.
    2. Assign the **RPA role** to the client in the [Orchestration Cluster Admin (formerly Orchestration Cluster Identity)](../../admin/role/#assign-client-to-a-role).
-   3. Deploy your RPA script file by clicking on the rocket (🚀) icon in Desktop Modeler or the **Deploy** button in Web Modeler.
+   3. Deploy your RPA script file by clicking on the rocket (🚀) icon in Desktop Modeler or the **Deploy** button in Camunda Hub
    4. For Desktop Modeler, note the ID of your RPA script. You will need this in the next step.
 
 2. **Add RPA to your process**:
    1. Open an existing BPMN file or create a new one.
    2. Add the RPA script to your process:
-      - **Web Modeler**: Search for the RPA script by name directly in the **Append element** menu. No script ID is required.
+      - **Camunda Hub**: Search for the RPA script by name directly in the **Append element** menu. No script ID is required.
       - **Desktop Modeler**: Add a new task and change the type to **Run RPA Script**.
         <img src={RpaTaskAppend} alt="Appending an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
@@ -96,17 +96,17 @@ Once you are happy with your script and have tested it locally, you can start au
       <img src={RpaTaskConfig} alt="Configuring an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
 3. **Deploy and run the process**:
-   1. Deploy the BPMN model with the configured RPA task by clicking on the rocket (🚀) icon in Desktop Modeler, or use the **Deploy** button in Web Modeler.
+   1. Deploy the BPMN model with the configured RPA task by clicking on the rocket (🚀) icon in Desktop Modeler, or use the **Deploy** button in Camunda Hub.
    2. Start an instance of your process.
 
-Once your RPA script and model are deployed, you can also use the **Play** functionality in Web Modeler.
+Once your RPA script and model are deployed, you can also use the **Test** functionality in Camunda Hub.
 
 ### Connect worker to Zeebe
 
 The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
 1. **Create credentials for the worker**:
-   1. Create the necessary worker credentials in Camunda Hub. You can follow the same steps as for the Modeler credentials. Give your new client the `Zeebe` and `Secrets` scopes.
+   1. Create the necessary worker [credentials](../../hub/organization/manage-clusters/manage-api-clients/#create-a-client) in Camunda Hub. Give your new client the `Zeebe` and `Secrets` scopes.
    2. Add the generated credentials to your `application.properties` in the same directory as your RPA worker executable.
 
 2. **Restart the worker**: If your worker is still running, restart it to apply the new credentials. The RPA worker should now be connected and ready to execute scripts from Zeebe.

@@ -57,6 +57,8 @@ An activity can have one or more message boundary events. Each of the message ev
 
 When the activity is entered, it creates a corresponding message subscription for each boundary message event. If a non-interrupting boundary event is triggered, the activity is not terminated and multiple messages can be correlated.
 
+The `correlationKey` expression of a message boundary event is evaluated in the flow scope (the activity's parent scope), not the activity's own scope. This differs from the timer duration, message name, and signal name expressions of boundary events, which are evaluated in the activity's own scope. As a result, the `correlationKey` expression cannot access variables introduced by input mappings on the activity the boundary event is attached to, and if the expression fails to evaluate, the resulting incident is raised on the parent scope rather than on the activity.
+
 ## Message throw events
 
 A process can contain intermediate message throw events or message end events to model the

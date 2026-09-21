@@ -29,7 +29,7 @@ Key benefits:
 Camunda-provided LLM is available in Camunda SaaS for:
 
 - **SaaS trial organizations**: Includes Camunda-managed credentials and a free budget. AI features are enabled by default.
-- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly enable AI features in Camunda Console. When you enable them, Camunda-provided LLM is enabled automatically. If Camunda-provided LLM is unavailable, disable AI features and then re-enable them.
+- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly enable AI features in Camunda Hub. When you enable them, Camunda-provided LLM is enabled automatically. If Camunda-provided LLM is unavailable, disable AI features and then re-enable them.
 
 :::note
 Availability, budgets, and UI may vary by environment and rollout stage.
@@ -39,7 +39,7 @@ See [Trial vs. enterprise budgets](#trial-vs-enterprise-budgets) for more detail
 
 ## Set up Camunda-provided LLM
 
-Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as cluster secrets.
+Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret).
 
 - If you are using an AI agent blueprint, no additional configuration is needed in most cases. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
 - If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) with the following parameters:
@@ -105,7 +105,7 @@ If your process model doesn’t handle LLM failures, an exhausted budget may res
 
 ## Monitor usage
 
-The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Console shows usage statistics for Camunda-provided LLM, including:
+The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Hub shows usage statistics for Camunda-provided LLM, including:
 
 - How much of your budget has been used.
 - How much budget remains.
