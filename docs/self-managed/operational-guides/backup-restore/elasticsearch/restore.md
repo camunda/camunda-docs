@@ -13,15 +13,7 @@ import { esRestoreCards } from '../react-components/\_card-data';
 
 Restore a previous backup of your Camunda 8 Self-Managed components and cluster.
 
-<ZeebeGrid zeebe={esRestoreCards} />
-
 ## About restoring a backup
-
-To restore a backup you must complete the following main steps:
-
-1. [Restore Elasticsearch/OpenSearch snapshot](./restore-snapshot.md)
-2. [Restore Zeebe Cluster](#restore-zeebe-cluster)
-3. [Start all Camunda 8 components](#start-all-camunda-8-components)
 
 :::note
 When restoring Camunda 8 from a backup, all components must be restored from their backup that corresponds to the same backup ID.
@@ -63,6 +55,301 @@ Based on this, we can look in the [matrix versioning of 8.8](https://helm.camund
    </summary>
 </details>
 
+We recommend using the new Restore API approach, however, the legacy Restore Application is still available.
+
+<Tabs groupId="elasticsearch-restore-approach">
+<TabItem value="restore-api" label="Restore API" default>
+
+## Restore API
+
+With Camunda 8.10 and later, you can restore Zeebe partition data through the Orchestration Cluster Restore API without restarting the brokers. Restore API recovery runs during a downtime window while the cluster is in recovery mode.
+
+A Restore API recovery runs in four phases, driven by two API requests:
+
+1. **Entering recovery mode**: every broker deactivates its partitions and switches to a restricted partition manager. While the cluster is in recovery mode it processes no work, and only read-only operations and restore remain available.
+2. **Restoring secondary storage**: while the cluster is in recovery mode, restore the Elasticsearch/OpenSearch snapshots for the intended backup ID.
+3. **Restoring the partitions**: the cluster plans a single change that, for every broker and partition, first drops the local partition data and then restores that partition from the selected backup. The steps of that plan run one at a time across the cluster.
+4. **Returning to processing**: once every partition is restored, the same change switches all brokers back to `PROCESSING` and the partitions become active again.
+
+Both requests are non-blocking. Each is acknowledged as soon as the cluster accepts the change and returns the `changeId` of the cluster configuration change that carries it out.
+
+### Restore API prerequisites
+
+| Prerequisite     | Description                                                                                                                                                                    |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda version  | Camunda 8.10 or later, restored with the exact version the backup was created with.                                                                                            |
+| Backup store     | Every broker is configured with the same backup store that holds the Zeebe backup, as described in the [backup prerequisites](./backup.md#prerequisites).                      |
+| Completed backup | A completed backup exists for every partition. List the available backups with the [Zeebe backup management API](../zeebe-backup-and-restore.md#list-backups-api).             |
+| Snapshot backup  | Elasticsearch/OpenSearch snapshots for all components exist under the same backup ID. See [Restore Elasticsearch/OpenSearch snapshot](./restore-snapshot.md).                  |
+| Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged.    |
+| API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md). |
+| Authorizations   | If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                    |
+
+## Restore an Elasticsearch/OpenSearch-backed cluster
+
+The examples below use the following variables:
+
+```bash
+export ORCHESTRATION_CLUSTER_API=http://localhost:8080/v2
+export ORCHESTRATION_CLUSTER_MANAGEMENT_API=http://localhost:9600
+```
+
+Before you start, be aware of the following. Entering recovery mode stops all processing in the cluster, so plan the restore as a downtime window. The Restore API then deletes the local partition data on every broker before it writes the data from the backup, and this cannot be undone. Run the Restore API only against a cluster whose current primary storage data you intend to replace.
+
+### 1. Switch the cluster into recovery mode
+
+[Change the cluster mode](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode.api.mdx) to `RECOVERING`:
+
+```bash
+curl -X PATCH "${ORCHESTRATION_CLUSTER_API}/mode?mode=RECOVERING"
+```
+
+Wait until the mode change has completed. Query the [cluster monitoring API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#monitoring-api) and check that `lastChange.id` matches the returned `changeId` and that no `pendingChange` is reported:
+
+```bash
+curl "${ORCHESTRATION_CLUSTER_MANAGEMENT_API}/actuator/cluster"
+```
+
+A Restore API request is only accepted while every broker of the cluster is in recovery mode. Requests sent earlier are rejected with `409`.
+
+### 2. Find available backup IDs
+
+With the cluster in recovery mode, use the Orchestration Cluster REST API to list the available runtime and history backups for the current Physical Tenant. Both endpoints require the `BACKUP:READ` permission. Use the returned backup ID to select the matching Elasticsearch/OpenSearch snapshots and Zeebe primary storage backup.
+
+<Tabs groupId="elasticsearch-restore-api-backup-listing">
+  <TabItem value="runtime" label="Runtime backups" default>
+
+Use [list runtime backups](/apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups.api.mdx) to list available Zeebe primary storage backups. Omit `prefix` to list all backups, or use a numeric prefix followed by `*` to narrow the results.
+
+```bash
+curl "${ORCHESTRATION_CLUSTER_API}/backups/runtime"
+```
+
+To list backups matching a prefix:
+
+```bash
+curl "${ORCHESTRATION_CLUSTER_API}/backups/runtime?prefix=1748937*"
+```
+
+  </TabItem>
+  <TabItem value="history" label="History backups">
+
+Use [list history backups](/apis-tools/orchestration-cluster-api-rest/specifications/list-history-backups.api.mdx) to list available Operate, Tasklist, and Optimize history backups. This endpoint is available because Elasticsearch/OpenSearch is the secondary storage. Use `verbose=false` when snapshot-level details are not needed.
+
+```bash
+curl "${ORCHESTRATION_CLUSTER_API}/backups/history"
+```
+
+To list backups matching a prefix without snapshot-level details:
+
+```bash
+curl "${ORCHESTRATION_CLUSTER_API}/backups/history?prefix=1748937*&verbose=false"
+```
+
+  </TabItem>
+</Tabs>
+
+The runtime and history listings are scoped to the Physical Tenant associated with the caller's credentials. For other tenants or all tenants, use the cluster-admin endpoints described in [Restore a cluster with multiple Physical Tenants](#restore-a-cluster-with-multiple-physical-tenants). Ensure that the runtime and history backups you select use the same backup ID before continuing.
+
+### 3. Restore Elasticsearch/OpenSearch snapshots
+
+With the cluster in recovery mode, restore the Elasticsearch/OpenSearch snapshots to the intended point in time. Use the [Restore Elasticsearch/OpenSearch snapshot](./restore-snapshot.md) procedure, but restore the snapshots for the same backup ID that you pass to the Restore API. A mismatched backup ID produces an inconsistent restore point.
+
+Complete this step before you trigger the Zeebe restore. The Restore API switches the brokers back to `PROCESSING` as soon as the last partition is restored, and processing then resumes against whatever secondary storage is in place.
+
+### 4. Trigger the restore
+
+[Provide the restore parameters](/apis-tools/orchestration-cluster-api-rest/specifications/restore.api.mdx). Camunda validates the request, resolves the backups for every partition, and acknowledges the request with `202` before the restore itself runs:
+
+```bash
+curl -X POST "${ORCHESTRATION_CLUSTER_API}/restore" \
+  -H 'Content-Type: application/json' \
+  -d '{ "backupIds": [1748937221] }'
+```
+
+The response returns the `changeId` of the restore, along with the planned operations. The plan drops and restores every partition of every broker, switches all brokers back to `PROCESSING`, and ends with an incarnation number update:
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+  "changeId": "8",
+  "plannedChanges": [
+    {
+      "physicalTenantId": "default",
+      "operations": [
+        {
+          "operation": "PartitionPreRestoreOperation",
+          "brokerId": "0",
+          "partitionId": 1
+        },
+        {
+          "operation": "PartitionRestoreOperation",
+          "brokerId": "0",
+          "partitionId": 1,
+          "backupIds": [1748937221]
+        },
+        {
+          "operation": "ModeChangeOperation",
+          "brokerId": "0",
+          "mode": "PROCESSING"
+        },
+        {
+          "operation": "AwaitModeChangeOperation",
+          "brokerId": "0",
+          "mode": "PROCESSING"
+        },
+        { "operation": "UpdateIncarnationNumberOperation", "brokerId": "0" }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+### 5. Track the Restore API operation
+
+While a restore is in flight, query [the restore status](/apis-tools/orchestration-cluster-api-rest/specifications/get-restore-status.api.mdx) to track progress per broker and per partition:
+
+```bash
+curl "${ORCHESTRATION_CLUSTER_API}/restore"
+```
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+  "status": "IN_PROGRESS",
+  "changeId": "8",
+  "startedAt": "2026-01-01T10:00:00Z",
+  "brokers": [
+    {
+      "brokerId": "1",
+      "partitionsRestored": 1,
+      "partitionsToRestore": 3,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "state": "RESTORED",
+          "backupIds": [1748937221],
+          "completedAt": "2026-01-01T10:02:00Z"
+        },
+        {
+          "partitionId": 2,
+          "state": "RESTORING",
+          "backupIds": [1748937221],
+          "completedAt": null
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+The overall `status` reports the state of the cluster change that performs the restore:
+
+| Status        | Meaning                                                              |
+| :------------ | :------------------------------------------------------------------- |
+| `IN_PROGRESS` | The restore is running.                                              |
+| `COMPLETED`   | Every partition was restored and the brokers returned to processing. |
+| `FAILED`      | The restore change failed and did not complete.                      |
+| `CANCELLED`   | The restore change was canceled.                                     |
+
+Each partition entry reports the progress of a single broker's copy of that partition:
+
+| State       | Meaning                                                             |
+| :---------- | :------------------------------------------------------------------ |
+| `PENDING`   | The partition is queued and its restore has not started yet.        |
+| `RESTORING` | The partition is being restored from its backups.                   |
+| `RESTORED`  | The partition was restored and validated, and `completedAt` is set. |
+
+At most one restore is in flight at any time. Once the restore has finished, this endpoint returns `404` and the per-partition detail is no longer retained, so use the [cluster monitoring API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#monitoring-api) to confirm that the restore's `changeId` completed.
+
+### 6. Confirm the cluster state after Restore API recovery
+
+Check that every partition is active and healthy again using [the topology](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx):
+
+```bash
+curl "${ORCHESTRATION_CLUSTER_API}/topology"
+```
+
+The cluster leaves recovery mode as part of the restore, so no further action is required.
+
+## Validate a Restore API request without applying it
+
+The Restore API accepts the `dryRun` query parameter. With `dryRun=true`, the request is validated and the resulting plan is returned, but nothing is applied to the cluster. Use this to check a backup selection before the downtime window starts:
+
+```bash
+curl -X POST "${ORCHESTRATION_CLUSTER_API}/restore?dryRun=true" \
+  -H 'Content-Type: application/json' \
+  -d '{ "backupIds": [1748937221] }'
+```
+
+A dry run rejects requests without a backup ID, with multiple backup IDs, or with a time range. It also checks that a completed backup exists for every partition. A request that passes the dry run is accepted as a real request as long as the cluster and the backup store do not change in between.
+
+## Handle a failed Restore API operation
+
+If a single partition fails to restore, for example because its backup is corrupted or the backup store is temporarily unreachable, the partial data of that partition is dropped and the failed step is retried automatically with a backoff. The restore change stays pending, and the restore status keeps reporting the partition as `RESTORING`.
+
+Because the retry is automatic, first try to fix the root cause instead of sending a new restore request. Once the cause is resolved, the pending change continues on its own and completes.
+
+### Retry a Restore API operation externally
+
+Automatic retries can't help if the problem is the backup itself, for example if the selected backup is corrupted or turns out to be the wrong restore point. In that case, retry from the outside:
+
+1. Cancel the pending restore change on the management API, using the `changeId` the restore returned:
+
+   ```bash
+   curl -X DELETE "${ORCHESTRATION_CLUSTER_MANAGEMENT_API}/actuator/cluster/changes/8"
+   ```
+
+   The restore status reports the change as `CANCELLED`, and the cluster stays in recovery mode.
+
+2. Send a new [Restore API request](#3-trigger-the-restore). Because each restore drops the local partition data before it writes the backup data, the new attempt does not build on the partial result of the canceled one, and you can select a different backup target.
+
+:::warning
+Don't leave a partially failed restore unfinished. Between canceling a restore and completing a new one, Zeebe's internal data is a mix of restored and pre-restore state and cannot be trusted. Keep the cluster in recovery mode and retry until every partition reaches `RESTORED`. If you switch the cluster back to `PROCESSING` in that state, treat it as unrecoverable and restore again from a clean state.
+:::
+
+## Restore a cluster with multiple Physical Tenants
+
+<span class="badge badge--platform">Self-Managed only</span>
+
+For multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), tenant-scoped Restore API calls target the Physical Tenant associated with the caller's credentials. To restore another tenant or all tenants, use the cluster-wide endpoints with [cluster admin](/components/admin/cluster-admin.md) access.
+
+| Step          | Tenant-scoped (your own tenant)                                                                           | Cluster-wide (cluster admin)                                                                                                             |
+| :------------ | :-------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| Recovery mode | [`PATCH /v2/mode`](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode.api.mdx) | [`PATCH /cluster/v2/mode`](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode-as-cluster-admin.api.mdx)       |
+| Trigger       | [`POST /v2/restore`](/apis-tools/orchestration-cluster-api-rest/specifications/restore.api.mdx)           | [`POST /cluster/v2/restore`](/apis-tools/orchestration-cluster-api-rest/specifications/restore-as-cluster-admin.api.mdx)                 |
+| Track         | [`GET /v2/restore`](/apis-tools/orchestration-cluster-api-rest/specifications/get-restore-status.api.mdx) | No cluster-wide status endpoint exists. Check each tenant's own restore status, or confirm recovery through cluster-wide topology below. |
+| Confirm       | [`GET /v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx)      | [`GET /cluster/v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-topology.api.mdx)                     |
+
+Use a tenant-scoped restore when one Physical Tenant has corrupted or missing data and the other tenants should keep processing. Use a cluster-wide restore when several tenants need recovery, or when the whole cluster must be returned to a coordinated state.
+
+The cluster-wide endpoints accept an optional `physicalTenantId` query parameter. Naming a tenant restores only that tenant; omitting the parameter restores every configured tenant. Each tenant must have its own non-overlapping backup location, and the same backup ID must refer to compatible snapshots for every tenant included in the restore.
+
+```bash
+export CLUSTER_ADMIN_API=http://localhost:8080/cluster/v2
+
+curl -X POST "${CLUSTER_ADMIN_API}/restore" \
+  -H 'Content-Type: application/json' \
+  -d '{ "backupIds": [1748937221] }'
+```
+
+Before returning a restored tenant to normal traffic, confirm through tenant-scoped topology that its partitions are healthy, that the expected data is present, and that exporting has resumed.
+
+</TabItem>
+<TabItem value="legacy-approach" label="Legacy approach">
+
+## Restore Application (Legacy)
+
+Restore the Elasticsearch/OpenSearch snapshots using the [Restore Elasticsearch/OpenSearch snapshot](./restore-snapshot.md) procedure, then restore the Zeebe cluster and start the components as described below.
+
 ## Step 2: Restore Zeebe Cluster {#restore-zeebe-cluster}
 
 ### Prerequisites
@@ -77,7 +364,7 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 
 ### Restore Zeebe Cluster
 
-In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
+In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. This page's [Restore API](#restore-api) tab contains the recovery-mode procedure.
 
 :::note
 During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe Broker in case of a manual deployment.
@@ -261,3 +548,6 @@ Otherwise, users may not be able to access their projects after the restore (see
 :::tip
 Some vendors provide tools that help with database backups and restores, such as [AWS Backup](https://aws.amazon.com/getting-started/hands-on/amazon-rds-backup-restore-using-aws-backup/) or [Cloud SQL backups](https://cloud.google.com/sql/docs/postgres/backup-recovery/backups).
 :::
+
+</TabItem>
+</Tabs>

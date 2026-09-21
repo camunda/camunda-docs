@@ -36,8 +36,6 @@ We recommend using the new Restore API approach, however, the legacy Restore App
 <Tabs groupId="rdbms-restore-approach">
 <TabItem value="restore-api" label="Restore API" default>
 
-## Restore API
-
 With Camunda 8.10 and later, you can restore Zeebe partition data through the Orchestration Cluster Restore API without restarting the brokers. Restore API recovery runs during a downtime window with the cluster being in recovery mode.
 
 A Restore API recovery runs in four phases, driven by two API requests:
@@ -81,6 +79,9 @@ curl -X PATCH "${ORCHESTRATION_CLUSTER_API}/mode?mode=RECOVERING"
 
 The response returns the ID of the cluster change and the operations it will apply. The plan contains one `ModeChangeOperation` and one `AwaitModeChangeOperation` per broker:
 
+<details>
+<summary>Example response</summary>
+
 ```json
 {
   "changeId": "7",
@@ -90,6 +91,8 @@ The response returns the ID of the cluster change and the operations it will app
   ]
 }
 ```
+
+</details>
 
 Wait until this change has completed before you trigger the restore. A restore request is only accepted while every broker of the cluster is in recovery mode. Requests sent earlier are rejected with `409`. verifying that all brokers are in recovery mode using either the Cluster API or the Management API.
 
@@ -103,6 +106,9 @@ curl "${ORCHESTRATION_CLUSTER_API}/v2/topology"
 ```
 
 The response shows the current state of all brokers and partitions. In recovery mode, every partition should have the state `recovering`.
+
+<details>
+<summary>Example response</summary>
 
 ```json
 {
@@ -130,6 +136,8 @@ The response shows the current state of all brokers and partitions. In recovery 
   ]
 }
 ```
+
+</details>
 
 </TabItem>
 <TabItem value="management-api" label="Management API">
@@ -203,6 +211,9 @@ curl -X POST "${ORCHESTRATION_CLUSTER_API}/restore" \
 
 The response returns the `changeId` of the restore, along with the planned operations. The plan drops and restores every partition of every broker, switches all brokers back to `PROCESSING`, and ends with an incarnation number update:
 
+<details>
+<summary>Example response</summary>
+
 ```json
 {
   "changeId": "8",
@@ -238,6 +249,8 @@ The response returns the `changeId` of the restore, along with the planned opera
 }
 ```
 
+</details>
+
 ### 4. Track the Restore API operation
 
 While a restore is in flight, query [the restore status](/apis-tools/orchestration-cluster-api-rest/specifications/get-restore-status.api.mdx) to track progress per broker and per partition:
@@ -245,6 +258,9 @@ While a restore is in flight, query [the restore status](/apis-tools/orchestrati
 ```bash
 curl "${ORCHESTRATION_CLUSTER_API}/restore"
 ```
+
+<details>
+<summary>Example response</summary>
 
 ```json
 {
@@ -274,6 +290,8 @@ curl "${ORCHESTRATION_CLUSTER_API}/restore"
   ]
 }
 ```
+
+</details>
 
 The overall `status` reports the state of the cluster change that performs the restore:
 
@@ -393,15 +411,7 @@ Don't leave a partially failed restore unfinished. Between canceling a restore a
 </TabItem>
 <TabItem value="legacy-approach" label="Restore Application (Legacy)">
 
-## Restore Application (Legacy)
-
-## How RDBMS restore works
-
-As described in the [architecture overview](./backup.md#architecture-overview), backups involve two independent systems: **primary storage backups** (Zeebe's log stream and snapshots in a blob store) and the **secondary storage backup** (the RDBMS).
-
-During restore, Zeebe reads the **exporter position** from the restored RDBMS — the last log stream position that was successfully exported — and uses it to determine which primary storage backup, or backups, to restore from. This ensures that Zeebe's state is at least as advanced as what the RDBMS contains. After restart, Zeebe re-exports any events between the RDBMS position and its restored checkpoint position, bringing the secondary storage up to date.
-
-## Restore process overview
+## Overview
 
 1. **Ensure all [prerequisites](#prerequisites) are met** — all Camunda components are stopped.
 2. RDBMS has been restored.
@@ -412,13 +422,15 @@ During restore, Zeebe reads the **exporter position** from the restored RDBMS �
 
 The following prerequisites are required before you can restore a backup:
 
-| Prerequisite       | Description                                                                                                                                                                                   |
-| :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version    | Backups can be restored using the same Camunda version they were created with, or up to one minor version newer. For example, a backup taken with 8.9.x can be restored with 8.9.x or 8.10.x. |
-| RDBMS restored     | You have already restored the RDBMS from its backup using your database vendor's native tools. The restored database must contain the entire Camunda schema.                                  |
-| Backup available   | At least one Zeebe primary storage backup is available in the configured blob store. See [Create a backup](./backup.md).                                                                      |
-| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](./backup.md#prerequisites).                                                                               |
-| Components stopped | All Camunda components (Zeebe, Operate, Tasklist, Optimize, Connectors) must be stopped before starting the restore process.                                                                  |
+| Prerequisite       | Description                                                                                                                                                                                                               |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Camunda version    | Backups can be restored using the same Camunda version they were created with, or up to one minor version newer. For example, a backup taken with 8.9.x can be restored with 8.9.x or 8.10.x.                             |
+| RDBMS restored     | You have already restored the RDBMS from its backup using your database vendor's native tools. The restored database must contain the entire Camunda schema.                                                              |
+| Backup available   | At least one Zeebe primary storage backup is available in the configured blob store. See [Create a backup](./backup.md).                                                                                                  |
+| Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](./backup.md#prerequisites).                                                                                                           |
+| Components stopped | All Camunda components (Zeebe, Operate, Tasklist, Optimize, Connectors) must be stopped before starting the restore process.                                                                                              |
+| API access         | For the Restore API procedure, authenticated access to the Orchestration Cluster REST API is required. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md). |
+| Authorizations     | For the Restore API procedure, if [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                                |
 
 :::warning
 It is critical that no Camunda components are running during the restore. Running components may propagate an incorrect cluster configuration, potentially disrupting cluster communication and data consistency.
@@ -426,7 +438,7 @@ It is critical that no Camunda components are running during the restore. Runnin
 
 ## Step 1: Restore Zeebe from its primary storage backup
 
-In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
+In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See the [Elasticsearch/OpenSearch Restore API](../elasticsearch/restore.md#restore-api) for the Restore API procedure and its recovery-mode details.
 
 Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
@@ -445,20 +457,12 @@ If brokers were dynamically scaled between backup and restore, this is not an is
 
 There are four restore options. In all cases, the restore app reads the exporter position from the restored RDBMS to ensure consistency between primary and secondary storage.
 
-| Restore option                                    | Parameters             | Use case                                                                                       |
-| :------------------------------------------------ | :--------------------- | :--------------------------------------------------------------------------------------------- |
-| [Default restore](#default-restore) (recommended) | No parameters required | Restores as much data as possible from the latest available backup range.                      |
-| [Point-in-time restore](#point-in-time-restore)   | `--to`                 | Restores to a specific point in time.                                                          |
-| [Time range restore](#time-range-restore)         | `--from` and `--to`    | Constrains the search to a specific backup range. Useful when automatic matching doesn't work. |
-| [Backup ID restore](#backup-id-restore)           | `--backupId=<id>`      | Escape hatch to restore from a specific backup ID. Use at your own risk.                       |
-
 :::note
 `--backupId` is mutually exclusive with `--from`/`--to`. Specifying both will result in error.
 :::
 
----
-
-### Default restore
+<Tabs groupId="rdbms-legacy-restore-options">
+<TabItem value="default" label="Default" default>
 
 **This is the recommended restore option.** No additional parameters are required — the restore application automatically determines the best backup to use.
 
@@ -509,9 +513,8 @@ tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
   </TabItem>
 </Tabs>
 
----
-
-### Point-in-time restore
+</TabItem>
+<TabItem value="point-in-time" label="Point-in-time">
 
 Restore Zeebe to a specific point in time using `--to`. The restore app finds the closest backup to the provided timestamp. The configured [checkpoint interval](./backup.md#checkpoint-interval) determines how fine-grained the restore points are.
 
@@ -561,9 +564,8 @@ tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
 The `--to` timestamp must not be before the restored state of the RDBMS. If it is, the secondary storage would be ahead of the primary storage and the restore will fail.
 :::
 
----
-
-### Time range restore
+</TabItem>
+<TabItem value="time-range" label="Time range">
 
 Constrain the restore to a specific backup range by specifying both `--from` and `--to`. This is useful if automatic matching did not work.
 
@@ -616,9 +618,8 @@ tar -xzf camunda-zeebe-X.Y.Z.tar.gz --strip-components=1 -C camunda/
 The `--to` timestamp must not be before the restored state of the RDBMS. If it is, the secondary storage would be ahead of the primary storage and the restore will fail.
 :::
 
----
-
-### Backup ID restore
+</TabItem>
+<TabItem value="backup-id" label="Backup ID">
 
 Restore from one or more specific backup IDs directly. Multiple IDs can be provided as a comma-separated list. This is an escape hatch for situations where the automatic matching does not work. Use at your own risk — you are responsible for ensuring that the backups are compatible with the restored RDBMS state.
 
@@ -672,6 +673,9 @@ When using backup ID restore, the RDBMS exporter position is not consulted. You 
 :::
 
 ---
+
+</TabItem>
+</Tabs>
 
 ### Kubernetes-specific behavior
 
@@ -756,3 +760,9 @@ See [back up and restore Optimize independently](../optimize-backup-and-restore.
 If you previously backed up Camunda Hub data, restore it using the same RDBMS restore tools.
 
 See [backup and restore Camunda Hub data](../modeler-backup-and-restore.md) for more details.
+
+## How RDBMS restore works
+
+As described in the [architecture overview](./backup.md#architecture-overview), backups involve two independent systems: **primary storage backups** (Zeebe's log stream and snapshots in a blob store) and the **secondary storage backup** (the RDBMS).
+
+During restore, Zeebe reads the **exporter position** from the restored RDBMS — the last log stream position that was successfully exported — and uses it to determine which primary storage backup, or backups, to restore from. This ensures that Zeebe's state is at least as advanced as what the RDBMS contains. After restart, Zeebe re-exports any events between the RDBMS position and its restored checkpoint position, bringing the secondary storage up to date.
