@@ -57,7 +57,7 @@ A Physical Tenant most often becomes **degraded** because its secondary storage 
 
 - Storage-dependent `/v2/...` REST endpoints for that tenant return `503 Service Unavailable` with a `Retry-After` header and a problem-detail body.
 - Other Physical Tenants continue serving requests normally.
-- On a node with the secondary-storage readiness check enabled (Elasticsearch or OpenSearch only; not registered when RDBMS is the secondary storage), the node stays in the load balancer as long as at least one tenant is serviceable, unless the degraded tenant is the `default` tenant. A degraded `default` tenant still holds node readiness down. Tracked as [camunda/camunda#51861](https://github.com/camunda/camunda/issues/51861).
+- On a node with the secondary-storage readiness check enabled, the node stays in the load balancer as long as at least one tenant is serviceable. The check uses schema-initialization state for Elasticsearch, OpenSearch, and RDBMS.
 - The per-tenant readiness gauge `camunda.physical.tenant.secondary.storage.ready` reports `0` for the affected tenant.
 - Per-tenant transition logs name the tenant and state whether an operator needs to act.
 
@@ -72,13 +72,6 @@ If you have capped the retry count in your retry configuration, a tenant that ex
 :::note
 Request rejection for degraded tenants applies to REST endpoints. gRPC and MCP requests are not rejected on this basis.
 :::
-
-### When a degraded tenant still takes the node down
-
-Two cases fall outside per-tenant isolation:
-
-- **RDBMS nodes with a single Physical Tenant.** An RDBMS node configured with only one tenant keeps the original synchronous fail-fast startup behavior. Per-tenant isolation applies to RDBMS nodes serving two or more tenants. An Elasticsearch or OpenSearch node always uses the per-tenant, retrying, degradable startup path, even with a single tenant, so it does not fail fast.
-- **A database vendor that cannot be resolved from configuration.** Camunda resolves each tenant's database vendor from an explicit `database-vendor-id`, or from the JDBC URL prefix. If neither resolves, startup fails for the whole node. This is a static configuration error rather than a statement about tenant health.
 
 If a tenant's JDBC URL uses a prefix Camunda does not recognize, such as jTDS or a driver proxy, Camunda falls back to opening one connection at startup to identify the vendor. That tenant is no longer isolated from an unreachable database, and the startup log warns and names the property that removes the fallback. Set `database-vendor-id` explicitly for these tenants.
 

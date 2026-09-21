@@ -104,9 +104,9 @@ The `/v2/status` endpoint is scoped to the default Physical Tenant. Use `/cluste
 
 When configuring Kubernetes readiness probes, point the probe at `/actuator/health/readiness` for node-level readiness. To check whether a specific Physical Tenant can accept work independently of the node probe, poll `/physical-tenants/{id}/v2/topology` from your own health-check logic.
 
-On a node where the secondary-storage readiness check is enabled (Elasticsearch or OpenSearch only; the check is not registered when RDBMS is the secondary storage), the node reports ready while at least one of its Physical Tenants is serviceable, unless the degraded tenant is the `default` tenant. A degraded `default` tenant still holds node readiness down; per-tenant readiness isolation is observable only for non-default tenants. This gap is tracked as [camunda/camunda#51861](https://github.com/camunda/camunda/issues/51861). If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other serviceable tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
+The secondary-storage readiness check uses schema-initialization state for Elasticsearch, OpenSearch, and RDBMS. The node reports ready while at least one of its Physical Tenants is serviceable. If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other serviceable tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
 
-Per-tenant isolation of this kind applies to nodes with RDBMS-disabled secondary storage serving two or more Physical Tenants. An RDBMS node configured with a single tenant keeps the original fail-fast startup behavior; an Elasticsearch or OpenSearch node with a single tenant does not fail fast; it uses the same per-tenant, retrying, degradable startup path described above. For diagnosis steps, see [troubleshooting](./troubleshooting.md).
+For diagnosis steps, see [troubleshooting](./troubleshooting.md).
 
 ## Document store details
 
