@@ -160,7 +160,7 @@ Our setup provisions three separate PostgreSQL clusters for different Camunda co
 
 - **pg-identity**: Database for Camunda Identity component
 - **pg-keycloak**: Database for Keycloak identity service
-- **pg-webmodeler**: Database for Web Modeler component
+- **pg-hub**: Database for Camunda Hub
 
 :::note Component flexibility
 If you don't plan to use certain components (for example, Web Modeler), you can simply remove the corresponding cluster definition from the configuration before deployment. This allows you to deploy only the PostgreSQL clusters you actually need, reducing resource consumption.
@@ -237,7 +237,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 - `pg-keycloak`: Database for Keycloak authentication
 - `pg-identity`: Database for Management Identity component
-- `pg-webmodeler`: Database for Web Modeler component
+- `pg-hub`: Database for Camunda Hub
 
 </TabItem>
 </Tabs>
@@ -835,10 +835,10 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```
 
    ```text
-   NAME            AGE   INSTANCES   READY   STATUS                     PRIMARY
-   pg-identity     10m   2           2       Cluster in healthy state   pg-identity-1
-   pg-keycloak     10m   2           2       Cluster in healthy state   pg-keycloak-1
-   pg-webmodeler   10m   2           2       Cluster in healthy state   pg-webmodeler-1
+   NAME          AGE   INSTANCES   READY   STATUS                     PRIMARY
+   pg-identity   10m   2           2       Cluster in healthy state   pg-identity-1
+   pg-keycloak   10m   2           2       Cluster in healthy state   pg-keycloak-1
+   pg-hub        10m   2           2       Cluster in healthy state   pg-hub-1
    ```
 
    A cluster stuck at `1` ready usually has its second pod `Pending`, because the required anti-affinity found no second schedulable node.
@@ -865,7 +865,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 1. Confirm the standby of each cluster is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
 
    ```bash
-   for cluster in pg-identity pg-keycloak pg-webmodeler; do
+   for cluster in pg-identity pg-keycloak pg-hub; do
      primary=$(kubectl get pod -n camunda -l "cnpg.io/cluster=$cluster,cnpg.io/instanceRole=primary" -o jsonpath='{.items[0].metadata.name}')
      echo -n "$cluster: "
      kubectl exec -n camunda "$primary" -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
@@ -875,7 +875,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```text
    pg-identity: streaming
    pg-keycloak: streaming
-   pg-webmodeler: streaming
+   pg-hub: streaming
    ```
 
    Until a cluster reports `streaming`, its standby is not a switchover candidate, and a drain started early stalls with `Current primary is running on unschedulable node, but there are no valid candidates` in the operator log.
