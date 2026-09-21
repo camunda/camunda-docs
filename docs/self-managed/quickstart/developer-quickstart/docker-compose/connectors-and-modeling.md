@@ -23,7 +23,7 @@ When you run Camunda locally with Docker Compose, some [connectors](/components/
 
 In Camunda 8.10, you can use centralized secrets from local files in both the lightweight and full Docker Compose setups.
 
-1. In the extracted distribution, open the included `secrets/` directory and create a file named `OPENAI_API_KEY` in your editor.
+1. In the extracted distribution, open the included `secrets/` directory and create a file named `OPENAI_API_KEY`.
 1. Enter only the secret value, not `KEY=value`, and save the file as UTF-8 without a byte-order mark.
 1. Start the lightweight setup with `docker compose up -d`, or the full setup with `docker compose -f docker-compose-full.yaml up -d`.
 1. Reference the secret in a service-task or connector input mapping:
@@ -44,7 +44,7 @@ You can add files while the stack is running. Changes and deletions can take up 
 
 If a missing secret causes a `SECRET_RESOLUTION_ERROR` incident, create the file and resolve the incident in Operate. Creating the file alone doesn't resolve an existing incident.
 
-The files are plaintext and intended only for local development. The included `.gitignore` excludes secret files from ordinary commits. Don't force-add secret files, include them in shared archives, or copy their values into BPMN. For production, configure a supported managed secret store such as AWS Secrets Manager or Google Secret Manager.
+In this Docker Compose setup, the files are plaintext and intended only for local development. The included `.gitignore` excludes secret files from ordinary commits. Don't force-add secret files, include them in shared archives, or copy their values into BPMN. For production, use a secret store and deployment mechanism that meets your security requirements, such as AWS Secrets Manager or Google Secret Manager.
 
 On native Linux, make sure the container user (UID 1001) can traverse the directory and read the files. Host-user-only permissions can prevent access.
 
