@@ -12,8 +12,6 @@ The broker resolves secret references in the background rather than while proces
 
 A cluster whose process models contain no `camunda.secrets.<name>` reference is unaffected by any of this. A model that does use a reference behaves differently depending on whether a secret store is configured: on a cluster with no store configured, every reference fails permanently as not found, and the job gets a [secret resolution error incident](secret-resolution-incidents.md#resolve-secret-lookup-failures) rather than a delay.
 
-This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
-
 ## Availability
 
 Secret resolution is available in both SaaS and Self-Managed.
