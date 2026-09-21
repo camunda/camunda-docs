@@ -6,11 +6,11 @@ description: "Cold recovery uses scheduled cross-region backups and a manual res
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
-import ColdRecoveryImg from './img/multi-region-cold-recovery.png';
+import ColdRecoveryImg from './img/multi-region-cold-recovery.svg';
 
 <PageDescription />
 
-<!-- Image source: https://miro.com/app/board/uXjVL-6SrPc=/ -->
+<!-- Diagram source: img/multi-region-cold-recovery.excalidraw. Open and edit at https://excalidraw.com -->
 
 Cold Recovery is Camunda's lowest-cost multi-region resilience configuration. It provides a documented, repeatable recovery path from complete primary-region loss using scheduled backups exported to cross-region object storage and a manual restore procedure into a secondary region.
 
@@ -31,7 +31,7 @@ Cold Recovery [RTO](/reference/glossary.md#recovery-time-objective-rto) and [RPO
 
 In Cold Recovery, a single active region runs the Camunda Orchestration Cluster.
 
-<img src={ColdRecoveryImg} alt="Camunda Cold Recovery from Backup architecture" title="Camunda Cold Recovery from Backup architecture" class="img-noborder img-800"/>
+<ColdRecoveryImg role="img" title="Camunda Cold Recovery from Backup architecture" width="800" />
 
 - Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch, OpenSearch) to an S3-compatible object storage bucket replicated to a separate region. RDBMS secondary storage relies on database backup tools and must ensure durability across multiple regions.
 - There is no warm standby. For example, a second cluster does not run during normal operations.
