@@ -47,7 +47,7 @@
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "16.0.2",
     "@auth0/auth0-react": "^2.3.0",
-    "@bpmn-io/form-js": "^1.15.2",
+    "@bpmn-io/form-js": "^2.0.0",
     "@camunda8/docusaurus-plugin-openapi-docs": "4.6.9",
     "@camunda8/docusaurus-theme-openapi-docs": "4.6.9",
     "@docusaurus/core": "^3.8.0",
