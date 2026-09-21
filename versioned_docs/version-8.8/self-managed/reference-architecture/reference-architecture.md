@@ -39,7 +39,7 @@ When designing a reference architecture, it's essential to understand the differ
 
 #### Orchestration Cluster
 
-![Orchestration Cluster](./img/orchestration-cluster.jpg)
+![Orchestration Cluster](./img/orchestration-cluster.svg)
 
 The Orchestration Cluster is the core of Camunda.
 
