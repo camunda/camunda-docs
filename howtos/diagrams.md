@@ -110,6 +110,18 @@ The inline SVG then works as a map of the shape of the thing, and the PDF is whe
 
 Set **Sloppiness** to architect, the leftmost option, and **Fill** to solid. Use dashed strokes for logical groupings such as a stretch cluster, and dotted strokes for network paths.
 
+### Never let a line run through a label
+
+A connector drawn straight through its own caption is the fastest way to make a diagram unreadable, and it happens constantly because the caption belongs near the line it describes.
+
+Give the label an opaque patch so the line reads as passing behind it: draw a rectangle the size of the text plus a few pixels, fill it with whatever is behind the label, set its stroke to transparent, then send it just behind the text and bring both to the front. This is what every diagramming tool does with edge labels.
+
+Fill the patch with the color actually behind the label, not white by reflex. A white label sitting on a filled banner needs a patch in the banner's color, or it disappears.
+
+### Land arrows on what they point at
+
+An arrow that stops in open space, or that drifts past its target onto whatever happens to sit nearby, makes a reader guess. Anchor the head on the shape you mean, even when that costs a dogleg. A bend that arrives in the right place reads better than a straight line that arrives in the wrong one.
+
 ## Build failures to expect
 
 ### An SVG imported into Markdown is a component, not a URL
