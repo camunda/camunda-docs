@@ -6,8 +6,8 @@
     {
       "status": "published",
       "name": "Region shell",
-      "id": "f8eb8026-52d6-470f-9f30-02d677fab3de",
-      "created": 1790012720739,
+      "id": "7004e0d7-cda4-40c9-a0f3-53818d03a84f",
+      "created": 1790014570221,
       "elements": [
         {
           "id": "a",
@@ -107,8 +107,8 @@
     {
       "status": "published",
       "name": "VPC / private network shell",
-      "id": "c4d13199-480d-4437-8ff2-32caa4eba284",
-      "created": 1790012720739,
+      "id": "6b684cc9-46fb-479a-a24d-97037a5be189",
+      "created": 1790014570221,
       "elements": [
         {
           "id": "a",
@@ -245,8 +245,8 @@
     {
       "status": "published",
       "name": "Availability zone column",
-      "id": "5fb5aa4a-f85b-46ef-ae57-69e106bbf863",
-      "created": 1790012720739,
+      "id": "5872dbdb-8e06-4fd4-95ff-f354b0044052",
+      "created": 1790014570221,
       "elements": [
         {
           "id": "a",
@@ -284,7 +284,7 @@
           "width": 188.10000000000002,
           "height": 22.5,
           "angle": 0,
-          "strokeColor": "#00a19b",
+          "strokeColor": "#00847f",
           "backgroundColor": "transparent",
           "fillStyle": "solid",
           "strokeWidth": 1,
@@ -318,8 +318,8 @@
     {
       "status": "published",
       "name": "Public subnet",
-      "id": "fa226dee-0d54-49f9-8eb7-7ff6cf69f336",
-      "created": 1790012720739,
+      "id": "820da72e-cb01-449b-bb53-116a33e04359",
+      "created": 1790014570221,
       "elements": [
         {
           "id": "a",
@@ -456,8 +456,8 @@
     {
       "status": "published",
       "name": "Private subnet",
-      "id": "6a160508-ce24-4ae8-a10f-ee57b22d8fa7",
-      "created": 1790012720739,
+      "id": "159c9db2-525a-41a1-be5e-ffe20164a526",
+      "created": 1790014570221,
       "elements": [
         {
           "id": "a",
@@ -594,8 +594,8 @@
     {
       "status": "published",
       "name": "Orchestration Cluster card",
-      "id": "813187d2-dcae-4758-ac83-d8f3ed50b691",
-      "created": 1790012720739,
+      "id": "629565e7-c230-4984-8812-3017b95c9f41",
+      "created": 1790014570221,
       "elements": [
         {
           "id": "sh0",
@@ -605,8 +605,8 @@
           "width": 290,
           "height": 160,
           "angle": 0,
-          "strokeColor": "#f4511e",
-          "backgroundColor": "#f4511e",
+          "strokeColor": "#fc5d0d",
+          "backgroundColor": "#fc5d0d",
           "fillStyle": "solid",
           "strokeWidth": 2,
           "strokeStyle": "solid",
@@ -661,7 +661,7 @@
           "width": 290,
           "height": 160,
           "angle": 0,
-          "strokeColor": "#f4511e",
+          "strokeColor": "#fc5d0d",
           "backgroundColor": "#ffffff",
           "fillStyle": "solid",
           "strokeWidth": 4,
@@ -726,7 +726,7 @@
           "width": 246,
           "height": 26,
           "angle": 0,
-          "strokeColor": "#f4511e",
+          "strokeColor": "#fc5d0d",
           "backgroundColor": "#ffffff",
           "fillStyle": "solid",
           "strokeWidth": 2,
@@ -791,7 +791,7 @@
           "width": 54,
           "height": 24,
           "angle": 0,
-          "strokeColor": "#22c55e",
+          "strokeColor": "#1d9e4b",
           "backgroundColor": "#ffffff",
           "fillStyle": "solid",
           "strokeWidth": 2,
@@ -856,7 +856,7 @@
           "width": 54,
           "height": 24,
           "angle": 0,
-          "strokeColor": "#22c55e",
+          "strokeColor": "#1d9e4b",
           "backgroundColor": "#ffffff",
           "fillStyle": "solid",
           "strokeWidth": 2,
@@ -921,7 +921,7 @@
           "width": 54,
           "height": 24,
           "angle": 0,
-          "strokeColor": "#22c55e",
+          "strokeColor": "#1d9e4b",
           "backgroundColor": "#ffffff",
           "fillStyle": "solid",
           "strokeWidth": 2,
@@ -986,7 +986,7 @@
           "width": 54,
           "height": 24,
           "angle": 0,
-          "strokeColor": "#22c55e",
+          "strokeColor": "#1d9e4b",
           "backgroundColor": "#ffffff",
           "fillStyle": "solid",
           "strokeWidth": 2,
@@ -1051,7 +1051,7 @@
           "width": 246,
           "height": 26,
           "angle": 0,
-          "strokeColor": "#f4511e",
+          "strokeColor": "#fc5d0d",
           "backgroundColor": "#ffffff",
           "fillStyle": "solid",
           "strokeWidth": 2,
@@ -1113,8 +1113,8 @@
     {
       "status": "published",
       "name": "Component chip",
-      "id": "fc123234-d7f0-407c-944a-79a8070383e1",
-      "created": 1790012720739,
+      "id": "2b49b5c4-be39-486a-acbe-a09309258c44",
+      "created": 1790014570221,
       "elements": [
         {
           "id": "a",
@@ -1124,7 +1124,7 @@
           "width": 54,
           "height": 24,
           "angle": 0,
-          "strokeColor": "#22c55e",
+          "strokeColor": "#1d9e4b",
           "backgroundColor": "#ffffff",
           "fillStyle": "solid",
           "strokeWidth": 2,
@@ -1186,8 +1186,8 @@
     {
       "status": "published",
       "name": "Database (Elasticsearch)",
-      "id": "b8bcbe36-2a19-4ee8-a066-d9b10803097d",
-      "created": 1790012720739,
+      "id": "c14110a8-d915-4220-b796-55916b633f9b",
+      "created": 1790014570222,
       "elements": [
         {
           "id": "a",
@@ -1296,8 +1296,8 @@
     {
       "status": "published",
       "name": "Worker nodes band",
-      "id": "54a704fb-49d7-41e1-bba0-04eaaa890271",
-      "created": 1790012720739,
+      "id": "99377e81-7642-4559-a5f7-f15caf22a596",
+      "created": 1790014570222,
       "elements": [
         {
           "id": "a",
@@ -1307,7 +1307,7 @@
           "width": 420,
           "height": 122,
           "angle": 0,
-          "strokeColor": "#e8761a",
+          "strokeColor": "#e57419",
           "backgroundColor": "transparent",
           "fillStyle": "solid",
           "strokeWidth": 2,
@@ -1397,8 +1397,8 @@
     {
       "status": "published",
       "name": "Failure marker",
-      "id": "d8e61769-c058-40a6-b061-6a15b5908afc",
-      "created": 1790012720739,
+      "id": "d0389229-ea94-4e6e-9c4f-8f703ad62db2",
+      "created": 1790014570222,
       "elements": [
         {
           "id": "a",
@@ -1493,8 +1493,8 @@
     {
       "status": "published",
       "name": "Security group shield",
-      "id": "d345aa83-d780-486f-924c-f3b600fdaea2",
-      "created": 1790012720739,
+      "id": "ef038f84-b210-4816-8ad6-b419d9b254a3",
+      "created": 1790014570222,
       "elements": [
         {
           "id": "aa",
@@ -1613,8 +1613,8 @@
     {
       "status": "published",
       "name": "User actor",
-      "id": "44c5e53a-70ee-45ca-9284-291a42ce2f2a",
-      "created": 1790012720740,
+      "id": "1de95262-1f25-4898-a97c-db8c6111be7d",
+      "created": 1790014570222,
       "elements": [
         {
           "id": "h",
@@ -1862,8 +1862,8 @@
     {
       "status": "published",
       "name": "Client / Worker",
-      "id": "eb782f73-ec90-4444-bbe1-6111e7533146",
-      "created": 1790012720740,
+      "id": "4459ef29-61ae-493b-9398-a7f4a4cc0359",
+      "created": 1790014570222,
       "elements": [
         {
           "id": "ab",
