@@ -63,9 +63,9 @@ Before proceeding with this guide, ensure you have:
 
 This deployment approach separates infrastructure management from application deployment:
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764643761312188&cot=14 -->
+<!-- Diagram source: assets/vendor-components-arch.excalidraw. Open and edit at https://excalidraw.com -->
 
-![Operator-based infrastructure architecture](assets/vendor-components-arch.jpg)
+![Operator-based infrastructure architecture](assets/vendor-components-arch.svg)
 
 ## Infrastructure components
 
