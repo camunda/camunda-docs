@@ -71,7 +71,7 @@ However, **Camunda 8 deployment does not require cluster-admin access**. For the
 
 ## Setup Advanced Cluster Management and Submariner
 
-In order to achieve cross-cluster communication, we use the recommanded [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner) solution that is designed to securely connect workloads across multiple Kubernetes clusters.
+In order to achieve cross-cluster communication, we use the recommended [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner) solution that is designed to securely connect workloads across multiple Kubernetes clusters.
 
 The installation of Submariner on OpenShift differs from the standard installation as it requires the usage of [Red Hat Advanced Cluster Management for Kubernetes](https://www.redhat.com/en/technologies/management/advanced-cluster-management).
 
@@ -320,7 +320,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    - Connection's status: `connected   10.406614ms (RTT)`
 
     <details>
-      <summary>Example Submariner check successfull output</summary>
+      <summary>Example Submariner check successful output</summary>
 
    ```text reference
    https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/submariner/output.txt

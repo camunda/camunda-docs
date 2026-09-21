@@ -1264,6 +1264,29 @@ You can now perform rolling upgrades of self-managed Camunda 8 between patch and
 
 <p class="link-arrow">[Rolling upgrades](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#rolling-upgrades)</p>
 
+## 8.10.0
+
+| Release date    | Changelog(s)                                                                                 | Blog |
+| :-------------- | :------------------------------------------------------------------------------------------- | :--- |
+| 13 October 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0)</li></ul> | -    |
+
+### Camunda Hub
+
+#### Business value dashboard
+
+<!-- https://github.com/camunda/product-hub/issues/3543 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Use the new **Business Value** page in Camunda Hub to track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and to set targets for cycle time and automation rate.
+
+- A portfolio view compares every process in the selected Orchestration Cluster on target coverage, target attainment, activity, automation rate, cycle time, and agentic adoption, and ranks off-target processes by how many targets are missed and by how far.
+- A process view shows the metrics and targets for a single process, including per-metric target status and a cycle time distribution with P50, average, and P95.
+- Set optional targets for cycle time and automation rate against the current baseline. Activity is shown as a metric, but you can't set a target for it in 8.10.
+- Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
+
+<p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
+
 ## 8.10.0-alpha5
 
 | Release date     | Changelog(s)                                                                                        | Blog |
@@ -1464,6 +1487,24 @@ Refer to the updated Helm configuration and secret management documentation for:
 <!-- https://github.com/camunda/product-hub/issues/3639 -->
 
 Support for physical tenant isolation in 8.10 is added for the Camunda 8 REST API, RDBMS storage, and Document Store.
+
+### Integrations
+
+#### Camunda for Slack
+
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
+
+Camunda for Slack brings tasks, processes, and notifications into Slack through the same App Integrations backend as Microsoft Teams. Everything runs through the `/camunda` slash command, the Camunda direct message, and channel mentions; there is no tab app.
+
+From Slack, you can list and filter tasks, claim and release them, complete a task from a Block Kit modal, start a process, switch organization and cluster, and subscribe a channel or direct message to user task notifications. Slack also works with the App Integrations connector in both directions: a process can send a Slack message, and a Slack message can reach a process.
+
+Microsoft Teams and Slack are independent. You can run either on its own, or both against the same backend.
+
+This feature is released as an early access alpha feature.
+
+<p class="link-arrow">[Camunda for Slack](/components/camunda-integrations/app-integrations/slack.md)</p>
 
 ### Modeler
 

@@ -42,15 +42,41 @@ Credentials and [connector secrets](/components/hub/organization/manage-clusters
 
 A credential's sensitive fields reference secrets, so the secret is still where the sensitive value lives. Create the secret first, then reference it from the credential.
 
-To reference a secret from a credential field, use `camunda.secrets.` followed by the secret key. For example, reference a secret with the key `AWS_SECRET_KEY` as follows:
+### Reference a secret from a credential field
+
+To reference a secret from a credential field, enter `camunda.secrets.` followed by the secret key as the whole value of the field. For example, reference a secret with the key `AWS_SECRET_KEY` as follows:
 
 ```
 camunda.secrets.AWS_SECRET_KEY
 ```
 
+A secret key can contain letters, digits, underscores, and hyphens. The key ends at the first character outside that set, so a key cannot contain a period.
+
+A reference is recognized at the start of a value, or directly after a character that is not a letter, digit, underscore, or period. Anywhere else, `camunda.secrets.` is part of a longer word:
+
+| Field value                                      | How it is read                                                                                                                                                                                      |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.secrets.AWS_SECRET_KEY`                 | A reference to the secret `AWS_SECRET_KEY`.                                                                                                                                                         |
+| `(camunda.secrets.AWS_SECRET_KEY)`               | A reference to the secret `AWS_SECRET_KEY`. The reference is recognized after the opening parenthesis, and the key ends at the closing parenthesis, because neither character can be part of a key. |
+| `foo.camunda.secrets.AWS_SECRET_KEY`             | Not a reference, because `camunda.secrets.` is in the middle of a word. The value is stored and sent as plain text.                                                                                 |
+| `camunda.secrets.camunda.secrets.AWS_SECRET_KEY` | A reference to a secret with the key `camunda`, because the key ends at the next period.                                                                                                            |
+| `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`       | Plain text. Camunda Hub warns you, and stores the value as you entered it.                                                                                                                          |
+
 :::note
 Credential fields use `camunda.secrets.MY_API_KEY`, without braces. This is not the same as the `{{secrets.MY_API_KEY}}` syntax you use in a [connector field](/components/connectors/use-connectors/index.md#using-secrets). Use `camunda.secrets.` inside a credential, and `{{secrets.}}` in connector fields that support secrets.
 :::
+
+### Store sensitive values as secrets, not plain text
+
+Store every sensitive value, such as a password or API key, as a [secret](/components/hub/organization/manage-clusters/manage-secrets.md) on the cluster, and reference it from the credential field. A credential field accepts any text you type, so a value entered directly is stored as you typed it, outside the secrets vault.
+
+To guide you to a secret, Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. Saving is still allowed, so the value stays exposed until you replace it with a reference. The warning clears as soon as the field references a secret.
+
+If the clusters you selected hold no secrets yet, the field says so instead of showing an empty suggestion list.
+
+In Camunda 8 SaaS, both messages carry an **Open Clusters** link that opens in a new tab, so your part-finished credential survives the detour. Self-Managed shows no link, because secrets come from the connector runtime configuration.
+
+The same warning appears in the [modeling interface](./modeling-interface.md#create-a-credential).
 
 ## Credential types
 
@@ -89,7 +115,9 @@ To create a credential, select **Create credential**, and complete the three ste
 
 2. **Configure**: name the credential, choose which clusters it applies to, and fill in the fields for the credential type you selected.
 
-   Camunda suggests an ID for the credential based on the name you enter. You can change the ID while you are creating the credential, but not afterwards. For a sensitive field, enter a reference to an existing secret, such as `camunda.secrets.AWS_SECRET_KEY`, rather than the value itself.
+   Camunda suggests an ID for the credential based on the name you enter. You can change the ID while you are creating the credential, but not afterwards. For a sensitive field, enter a reference to an existing secret, such as `camunda.secrets.AWS_SECRET_KEY`, rather than the value itself. Select the field to pick from the secrets that exist on the clusters you selected.
+
+   Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. **Continue** stays enabled, so replace the value with a reference before you save. See [store sensitive values as secrets, not plain text](#store-sensitive-values-as-secrets-not-plain-text).
 
    If you select more than one cluster, keep **Use same credentials for all clusters** enabled to apply one set of values everywhere, or disable it to configure each cluster separately.
 
@@ -151,6 +179,7 @@ Creating, editing, and deleting a credential requires the same permission as dep
 In this release:
 
 - You cannot create a secret from a credential. Create secrets in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) first.
+- The plain-text warning checks the whole field value, so a value that combines literal text with a reference, such as `Bearer camunda.secrets.TOKEN`, is flagged even though the reference resolves.
 - Hub does not show which processes use a given credential, so check the impact yourself before you edit or delete one.
 - Credentials are visible to everyone with read access to your organization. You cannot restrict a credential to a project or a subset of users.
 - A credential's ID cannot be changed after creation.
