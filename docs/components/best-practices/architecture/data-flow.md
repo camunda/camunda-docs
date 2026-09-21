@@ -2,19 +2,20 @@
 id: data-flow
 title: "Data flow"
 sidebar_label: "Data flow"
-description: "Understand how data moves through Camunda 8.8+ and why it matters when sizing your environment."
+description: "Understand how data moves through Camunda 8.10+ and why it matters when sizing your environment."
 ---
 
-Understand how data moves through Camunda 8.8+ and why it matters when sizing your environment.
+Understand how data moves through Camunda 8.10+ and why it matters when sizing your environment.
 
 ## About
 
-Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orchestration-cluster.md).
-This is an overview of Camunda 8.8+ architecture:
+Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orchestration-cluster.md). Camunda 8.10 introduced a consolidated design-time management and modeling component: [Camunda Hub](/components/hub/index.md).
 
-![Camunda 8.8+ architecture overview](assets/architecture-8.8plus.jpg)
+This is an overview of Camunda 8.10+ architecture:
 
-<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/ -->
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684414633986&cot=14 -->
+
+![Camunda 8.10+ architecture overview](assets/architecture-8.10plus.jpg)
 
 See the [reference architecture](/self-managed/reference-architecture/reference-architecture.md) for a component-topology overview.
 
@@ -34,7 +35,9 @@ Its processing path (command lifecycle) follows this pattern:
 
 See it in green in the diagram below:
 
-![Camunda 8.8+ architecture overview - Data Flow Command processing path](assets/architecture-8.8plus-data-flow-command.jpg)
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415105456&cot=14 -->
+
+![Camunda 8.10+ architecture overview - Data Flow Command processing path](assets/architecture-8.10plus-data-flow-command.jpg)
 
 Client responses are not sent until the command is fully processed by the engine. The engine can only process a command once it has been committed to the log (as part of the Raft consensus protocol). Commands are read sequentially per partition, only one command per partition is processed at a time, and only the Raft partition leader runs the engine.
 
@@ -48,7 +51,9 @@ See [internal processing](../../zeebe/technical-concepts/internal-processing.md)
 
 After the engine processes a command, it confirms its state change with an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in _batches_. See it in blue in the diagram below:
 
-![Camunda 8.8+ architecture overview - Data Flow Export pipeline](assets/architecture-8.8plus-data-flow-export-path.jpg)
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415254414&cot=14 -->
+
+![Camunda 8.10+ architecture overview - Data Flow Export pipeline](assets/architecture-8.10plus-data-flow-export-path.jpg)
 
 **The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count. There are three built-in exporters in play:
 
@@ -75,7 +80,9 @@ Exporter behavior and performance is important for the system, because:
 Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from the configured secondary storage. They never read directly from the engine.
 See it in red in the diagram below:
 
-![Camunda 8.8+ architecture overview - Data Flow Query path](assets/architecture-8.8plus-data-flow-query.jpg)
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415254807&cot=14 -->
+
+![Camunda 8.10+ architecture overview - Data Flow Query path](assets/architecture-8.10plus-data-flow-query.jpg)
 
 Query results depend on the performance of both the primary (processing path) and secondary storage (exporting pipeline). They are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI. This is measured as the **data availability latency**.
 
@@ -85,7 +92,9 @@ Data availability latency is bounded below by export pipeline lag; if the export
 
 Optimize sits on top of the export pipeline as a second-tier consumer. See it in violet in the diagram below:
 
-![Camunda 8.8+ architecture overview - Data Flow Optimize](assets/architecture-8.8plus-data-flow-optimize.jpg)
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415429374&cot=14 -->
+
+![Camunda 8.10+ architecture overview - Data Flow Optimize](assets/architecture-8.10plus-data-flow-optimize.jpg)
 
 1. The Elasticsearch/OpenSearch exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
 2. Optimize's **importer** reads from those indices and transforms the data into its own analytics indices.

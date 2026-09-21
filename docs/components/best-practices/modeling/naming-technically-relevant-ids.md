@@ -37,9 +37,9 @@ The following table provides you with a guideline that we would use in a context
 |       |                   | error/@errorCode     | Err\_            | Err_TweetDuplicated           |
 | **7** | Tweet published   | EndEvent\_/@id       | EndEvent\_       | EndEvent_TweetPublished       |
 
-### Editing IDs with Camunda Modeler
+### Editing IDs
 
-We recommend using Camunda Modeler's properties panel on the right side of the screen to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process ID:
+Camunda recommends using the properties panel on the right side of the modeling interface ([Camunda Hub](/components/hub/index.md) or Desktop Modeler) to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process ID:
 
 ![Properties Panel](naming-technically-relevant-ids-assets/camunda-modeler-properties-panel.png)
 
@@ -76,13 +76,13 @@ However, we include an XML example of all those identifiers mentioned for illust
 
 <span className="callout">8</span>
 
-Elements in the diagram interchange section (DI) reference identifiers from above; you have to adjust them accordingly! Camunda Modeler takes care of this automatically.
+Elements in the diagram interchange section (DI) reference identifiers from above; you have to adjust them accordingly! Camunda Hub and Desktop Modeler take care of this automatically.
 
 Changing IDs can potentially break your tests or even process logic if done at a late stage of development. Therefore, consider using meaningful IDs right from the beginning and perform the renaming as part of the modeling.
 
 ### Aligning the BPMN file name with the process ID
 
-It is a good practice to _align_ the _file name_ of your BPMN models with the _process id_ of the executable process that is inside the file.
+It is a good practice to _align_ the _file name_ of your BPMN models with the process ID of the executable process that is inside the file.
 
 ![BPMN file name](naming-technically-relevant-ids-assets/aligning-the-bpmn-file-names.png)
 
@@ -90,6 +90,6 @@ It is a good practice to _align_ the _file name_ of your BPMN models with the _p
 
 If you have lots of process, case, and decision definitions with lots of IDs, consider generating constant classes (e.g. via XSLT) directly from your BPMN or DMN XML files. For example, this can be used for testing.
 
-## Using a Camunda Modeler plugin to generate meaningful ids
+## Using a modeler plugin to generate meaningful ids
 
 You can use [this modeler plugin community extension](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) to automatically convert your IDs to comply with our best practices. Of course, you could also use this as a basis to create your own modeler plugin to generate IDs that follow your custom naming conventions. Or, you could implement a similar plugin to implement checks if all relavant IDs follow your naming conventions.
