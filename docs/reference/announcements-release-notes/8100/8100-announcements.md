@@ -599,16 +599,24 @@ The gRPC Ingress reads `orchestration.ingress.grpc.annotations` only; it inherit
 
 Two of those carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
 
-With [Contour](https://projectcontour.io/), the gRPC upstream is declared with `projectcontour.io/upstream-protocol.h2c` on the Orchestration Cluster **Service**, listing the gRPC port. Set it through `orchestration.service.annotations`, not `orchestration.ingress.grpc.annotations`, which renders on the Ingress:
+With [Contour](https://projectcontour.io/), the gRPC upstream is declared on the Orchestration Cluster **Service**, not on the Ingress, so set it through `orchestration.service.annotations` and not `orchestration.ingress.grpc.annotations`. The annotation value lists the gRPC port, and the key depends on whether that upstream uses TLS:
+
+| gRPC upstream                                           | Contour annotation                        | Envoy behavior   |
+| ------------------------------------------------------- | ----------------------------------------- | ---------------- |
+| Plaintext, the chart default                            | `projectcontour.io/upstream-protocol.h2c` | Cleartext HTTP/2 |
+| TLS, with `global.tls.orchestration.grpc.enabled: true` | `projectcontour.io/upstream-protocol.h2`  | HTTP/2 over TLS  |
 
 ```yaml
 orchestration:
   service:
     annotations:
+      # plaintext upstream; use upstream-protocol.h2 if the gRPC upstream has TLS
       projectcontour.io/upstream-protocol.h2c: "26500"
 ```
 
-While the shim is active the chart emits a deprecation warning naming the flag and the removal.
+Contour reads `h2c` as cleartext HTTP/2, so leaving it on a TLS-enabled upstream breaks gRPC routing. The chart draws the same distinction on ingress-nginx, where it swaps `nginx.ingress.kubernetes.io/backend-protocol` from `GRPC` to `GRPCS` for a TLS-enabled gRPC upstream.
+
+The chart emits a deprecation warning naming the flag and the removal only when the shim actually injects an annotation: the flag is on, the Ingress it applies to renders, and you have not set that key yourself. Setting every shim key silences the warning even with the flag still on.
 
 <p className="link-arrow">[Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)</p>
 
