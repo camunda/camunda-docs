@@ -62,7 +62,7 @@ You are using:
 - Camunda Connectors ≤ 8.9.10, ≤ 8.8.19, or ≤ 8.7.25
 - Web Modeler ≤ 8.9.8, or ≤ 8.8.19
 
-Any component that bundles `org.camunda.feel:feel-engine` up to and including 1.22.0 is affected. Versions older than the ones listed above, including versions that have reached end of maintenance, are also affected.
+Any component that bundles `org.camunda.feel:feel-engine` up to and including 1.22.0 is affected. Versions older than the ones listed above, including versions that have reached end of maintenance, are also affected, with the exception of Web Modeler, where versions below 8.8.0 are not affected.
 
 Exploitation requires one of the following:
 
