@@ -27,12 +27,14 @@ To use the BPMN Copilot in Web Modeler, take the following steps:
 
 1. If you have not already done so, [opt in](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
 2. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
-3. Click **New project > Create new > BPMN diagram** to open the Camunda Copilot chat window.
+3. Click **New project**.
+4. In the project, create a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+5. In the process application, click **Create new > BPMN diagram** to open the Camunda Copilot chat window.
 
 <img src={CopilotImg} alt="bpmn copilot chat window" width="500px" />
 
-4. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. For example, "Generate a mortgage loan process diagram" or "Explain this process". Note that more complex requests may take longer to process.
-5. Wait for the BPMN Copilot to respond. This typically takes between 20-50 seconds, depending on the prompt.
+6. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. For example, "Generate a mortgage loan process diagram" or "Explain this process". Note that more complex requests may take longer to process.
+7. Wait for the BPMN Copilot to respond. This typically takes 20–50 seconds, depending on the prompt.
 
 :::note
 Timeouts can occur during this step if your query is too complex.

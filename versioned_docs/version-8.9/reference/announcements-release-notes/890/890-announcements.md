@@ -11,9 +11,9 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2027              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
+| ------------------ | --------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 12 October 2027             | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -131,16 +131,20 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 ### 8.9.x patch releases
 
-The following key changes were also released as part of an 8.9.x patch release.
+The following key changes were also released as part of an 8.9.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Type            | Key change                                                                                                       |
-| :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                     |
-| [8.9.12](https://github.com/camunda/camunda/releases/tag/8.9.12) | Breaking change | [Individual component Docker images no longer produced](#individual-component-docker-images-no-longer-produced)  |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                    |
+| Patch release                                                       | Artifact   | Type            | Key change                                                                                                                    |
+| :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)               |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                |
+| `8.9 gen13`                                                         | SaaS       | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
+| [8.9.12](https://github.com/camunda/camunda/releases/tag/8.9.12)    | Core       | Breaking change | [Individual component Docker images no longer produced](#individual-component-docker-images-no-longer-produced)               |
+| [8.9.10](https://github.com/camunda/connectors/releases/tag/8.9.10) | Connectors | Breaking change | [Connector secret filter now defaults to STRICT](#connector-secret-filter-strict-default)                                     |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10)    | Core       | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                  |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                       |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                 |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)              |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                        |
 
 ## Agentic orchestration
 
@@ -597,6 +601,30 @@ In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2
 </div>
 
 ## Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
+
+Starting with Connectors 8.9.10, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`.
+
+In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+
+**Action:** Before upgrading, confirm that all connector fields that resolve a secret already reference that secret in the deployed BPMN.
+
+- If a field relies on resolving a secret it doesn't reference, add the reference.
+- To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but note that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
+- Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
+- On Camunda 8 SaaS, you can also change this per cluster in [cluster settings](/components/console/manage-clusters/settings.md#secret-filter-mode) once your cluster is on 8.9.10 or later.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -1493,6 +1521,61 @@ Replace is the intended long-term behavior. The merge behavior in the affected p
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Nested input mappings can silently drop sibling fields {#nested-input-mapping-sibling-fields}
+
+**Affected versions:** 8.9.15. Reverted in 8.9.16.
+
+Camunda 8.9.15 introduced a regression affecting elements with two or more input mappings that write to different nested fields of the same parent variable. Only one of the mapped fields retains its expected value, with the other field silently set to `null` without warning or raised incident.
+
+**Example:** You have a parent-scope variable `foo: {bar: 1, baz: 2}` and an element with these two input mappings that both write into a local `foo` variable:
+
+1. Target `foo.bar` ← (maps from) source `=foo.bar`
+2. Target `foo.baz` ← (maps from) source `=foo.baz`
+
+In this scenario, the local `foo` becomes `{bar: 1, baz: null}`, with `baz` (mapped by the later declaration) no longer able to resolve against the parent scope.
+
+**Action:**
+
+- **Running 8.9.15:** Combine the mappings into a single mapping that rebuilds the whole object at once. For example, target `foo` with source `={bar: foo.bar, baz: foo.baz}` instead of mapping `foo.bar` and `foo.baz` separately.
+
+- **Upgrading to 8.9.16+:** The regression is reverted. Mapping individual fields of the same variable works correctly again. The workaround above is no longer required, but is harmless to keep.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Chained input mappings can silently drop FEEL temporal value types {#chained-input-mapping-temporal-type-loss}
+
+**Affected versions:** 8.9.15. Reverted in 8.9.16.
+
+Camunda 8.9.15 introduced a regression affecting elements with two or more input mappings where one mapping produces a FEEL temporal value (`duration`, `date`, `time`, `date-time`, or their local variants) and a later mapping on the same element reads a property from it. The temporal value loses its type, becoming a plain string due to serialization between mapping evaluations before the later mapping runs, so the property access silently evaluates to `null` instead of the expected value. Only temporal types are affected — other FEEL types (strings, numbers, booleans, lists, and contexts) work correctly.
+
+**Example:** An element with these two input mappings:
+
+1. Target `age` ← (maps from) source `=@"P1D"` (a duration)
+2. Target `ageDays` ← (maps from) source `=age.days`
+
+In this scenario, the mapping results in `ageDays` as `null`, as `age`'s duration type is not preserved between the two mappings.
+
+**Action:**
+
+- **Running 8.9.15:** Combine the mappings into a single mapping, so the duration is created and read in the same expression instead of being written to a variable and read back later. For example, target `ageDays` with source `=@"P1D".days` instead of separate `age` and `ageDays` mappings.
+- **Upgrading to 8.9.16+:** The regression is reverted. Chained mappings on temporal values work correctly again.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -1528,6 +1611,27 @@ Admin is the cluster-level admin UI hosting identity management and other admini
 - Documentation paths are updated: `/components/identity/` is now `/components/admin/`.
 
 <p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
+
+</div>
+</div>
+
+## Integrations
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Microsoft Teams notifications require app integrations extensions {#teams-notifications-require-app-integrations-extensions}
+
+Camunda 8 SaaS clusters running generation `8.9 gen13` or later deliver user task notifications to Microsoft Teams only when **Enable app integrations extensions** is turned on in the cluster settings. The setting is disabled by default, and only organization admins can change it.
+
+Clusters running earlier generations are unaffected and continue to deliver notifications without additional configuration.
+
+**Action:** After a cluster updates to generation `8.9 gen13` or later, an organization admin must turn on **Enable app integrations extensions** for existing [notification rules](/components/camunda-integrations/ms-teams/ms-teams-notifications.md) to keep delivering. Enabling the setting also delivers notifications when an existing task is later assigned to you, and updates notification cards as a task is assigned, completed, or canceled.
+
+<p className="link-arrow">[Enable app integrations extensions](/components/console/manage-clusters/settings.md#enable-app-integrations-extensions)</p>
 
 </div>
 </div>

@@ -30,7 +30,7 @@ path: object;
 #### incidentKey
 
 ```ts
-incidentKey: IncidentKey;
+incidentKey: IncidentKeyWritable;
 ```
 
 Key of the incident to resolve.

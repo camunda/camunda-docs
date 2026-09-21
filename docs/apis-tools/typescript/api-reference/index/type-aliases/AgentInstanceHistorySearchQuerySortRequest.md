@@ -16,7 +16,7 @@ type AgentInstanceHistorySearchQuerySortRequest = object;
 ### field
 
 ```ts
-field: "producedAt" | "historyItemKey" | "iteration";
+field: "producedAt" | "historyItemKey" | "loopIteration";
 ```
 
 The field to sort by.

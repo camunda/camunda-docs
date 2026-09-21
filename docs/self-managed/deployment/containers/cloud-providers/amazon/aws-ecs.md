@@ -4,6 +4,8 @@ title: "Deploy to Amazon ECS"
 description: "Learn how to install Camunda 8 on AWS ECS."
 ---
 
+import CostManagement from "../../../_partials/_cost-management.md";
+
 This guide walks you through deploying the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) and Connectors on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL, and verifying that all components are working.
 
 :::tip New to AWS ECS?
@@ -21,11 +23,9 @@ For the exact tool versions used during testing, refer to the repository's [.too
 
 ### Considerations
 
-:::warning
-Running this guide incurs costs on your AWS account, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
-:::
-
 If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.camunda.io/signup).
+
+<CostManagement />
 
 - Unlike our other guides, which usually separate infrastructure setup from the deployment of Camunda 8, this is not the case with ECS. Since the infrastructure is largely managed by AWS, deploying Camunda 8 and provisioning the required AWS resources happens in a single step.
 - This guide focuses on AWS ECS with Fargate but can work with managed instances for more predictable performance. You can find more information about how to migrate from Fargate to managed instances from the [AWS migration guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/migrate-fargate-to-managed-instances.html).

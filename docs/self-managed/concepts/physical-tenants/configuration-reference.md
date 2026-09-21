@@ -5,9 +5,9 @@ sidebar_label: "Configuration reference"
 description: "Configure Physical Tenants with root defaults, per-tenant overrides, and startup validation rules."
 ---
 
-This page explains how to configure Physical Tenants in Camunda 8.10 for Self-Managed deployments.
+Learn how to configure Physical Tenants in Camunda 8.10 Self-Managed deployments.
 
-In 8.10, configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
+Configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
 
 ## Configuration model
 
@@ -92,7 +92,7 @@ Some properties are cluster-scoped and cannot be overridden per tenant. Per-tena
 
 ## Default tenant behavior and compatibility
 
-The `default` Physical Tenant is always present in 8.10 and is immutable.
+The `default` Physical Tenant is always present and immutable.
 
 For backward compatibility:
 
@@ -102,9 +102,9 @@ For backward compatibility:
 
 ## Validation and constraints
 
-At startup, configuration validation enforces tenant-level constraints. All validation failures throw a `UnifiedConfigurationException` and prevent the cluster from starting — there is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
+At startup, configuration validation enforces tenant-level constraints. Any validation failure prevents the cluster from starting. Most validation failures throw a `UnifiedConfigurationException`. Secret store and cache validation is an exception and throws an `IllegalStateException` or `IllegalArgumentException` directly. These validation failures don't have a separate error code. Camunda reports the message at startup instead of logging it as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
-Known constraints and behavior for 8.10:
+Known constraints and behavior:
 
 - Tenant keys in `camunda.physical-tenants.<tenant-key>` must be lowercase alphanumeric (`[a-z0-9]+`) with a maximum length of 64 characters.
 - Validation rejects unsupported or colliding storage configurations across tenants.
@@ -117,6 +117,7 @@ Known constraints and behavior for 8.10:
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
 - **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
+- **Secrets**: each physical tenant supports at most one secret store, and its ID must be `default`; any other ID is rejected. Camunda validates the cache settings per tenant. `ttl` must be at least `1m` and use whole minutes, and `max-size` must be at least `1`. To override the root-level `camunda.secrets.*` defaults for a physical tenant, use `camunda.physical-tenants.<tenant-key>.secrets.*`.
 
 ### Startup error message formats
 
@@ -136,12 +137,47 @@ For Oracle, a colliding RDBMS location additionally appends a hint to isolate by
 ```text
 Physical tenants must not share a document store location, or they would read and write into the
 same backing storage. Use a distinct bucket, container, or path per tenant, and never nest one
-tenant's path inside another's — a nested path is reachable through a caller-supplied document id,
+tenant's path inside another's. A nested path is reachable through a caller-supplied document id,
 which no object store bounds at '/'. Conflicts: tenants [tenanta, tenantb] share the same document
 store location [provider=aws, namespace=[company-docs-bucket], keyPrefix='tenant-a']
 ```
 
 If one tenant's path is nested inside another's rather than identical, the message instead reads: `tenant <enclosing> 's document store location [...] encloses tenant <enclosed> 's [...]`.
+
+**Secret store or cache misconfiguration:**
+
+```text
+Physical tenant 'riskprod' has 2 secret stores configured, but only one is supported at this time
+```
+
+```text
+Physical tenant 'riskprod' configures secret store 'primary', but the only supported store id is
+'default'; rename camunda.physical-tenants.riskprod.secrets.stores.file.primary to
+camunda.physical-tenants.riskprod.secrets.stores.file.default
+```
+
+```text
+Physical tenant 'riskprod' has an invalid secret cache configuration: camunda.secrets.cache.ttl must
+be at least 1 minute, but was PT30S
+```
+
+```text
+Physical tenant 'riskprod' has an invalid secret cache configuration: camunda.secrets.cache.ttl must
+be a whole number of minutes, but was PT1M30S
+```
+
+```text
+Physical tenant 'riskprod' has an invalid secret cache configuration: camunda.secrets.cache.max-size
+must be at least 1, but was 0
+```
+
+```text
+File store 'default' for physical tenant 'riskprod' has no path configured
+```
+
+The cache messages always report the canonical `camunda.secrets.cache.*` property path, even when the
+value came from a `camunda.physical-tenants.<tenant-key>.secrets.cache.*` override; the tenant name in
+the surrounding sentence is what identifies which tenant's override is at fault.
 
 ## Configuration examples
 
@@ -206,7 +242,7 @@ camunda:
           - shared-s3
         aws:
           shared-s3:
-            bucket-path: riskprod/ # distinct path — no collision with default
+            bucket-path: riskprod/ # distinct path, no collision with default
       security:
         authentication:
           providers:
@@ -225,8 +261,11 @@ CAMUNDA_PHYSICALTENANTS_RISKPROD_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:postgresql
 
 If YAML and environment variables are used together, use the same normalized tenant key in both forms.
 
-## Related pages
+:::note Related pages
 
 - [Physical Tenant isolation model](./index.md)
 - [Provisioning and lifecycle](./provisioning-and-lifecycle.md)
 - [Multi-tenancy overview](../multi-tenancy/index.md)
+- [Cluster admin](/components/admin/cluster-admin.md) for configuring access to cluster-wide operations
+
+:::

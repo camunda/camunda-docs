@@ -1,0 +1,1591 @@
+{
+  "getAgentDefinition": [
+    {
+      "file": "agent_definition.go",
+      "region": "GetAgentDefinition",
+      "label": "Get agent definition"
+    }
+  ],
+  "searchAgentDefinitions": [
+    {
+      "file": "agent_definition.go",
+      "region": "SearchAgentDefinitions",
+      "label": "Search agent definitions"
+    }
+  ],
+  "createAgentInstance": [
+    {
+      "file": "agent_instance.go",
+      "region": "CreateAgentInstance",
+      "label": "Create agent instance"
+    }
+  ],
+  "getAgentInstance": [
+    {
+      "file": "agent_instance.go",
+      "region": "GetAgentInstance",
+      "label": "Get agent instance"
+    }
+  ],
+  "updateAgentInstance": [
+    {
+      "file": "agent_instance.go",
+      "region": "UpdateAgentInstance",
+      "label": "Update agent instance"
+    }
+  ],
+  "searchAgentInstances": [
+    {
+      "file": "agent_instance.go",
+      "region": "SearchAgentInstances",
+      "label": "Search agent instances"
+    }
+  ],
+  "createAgentInstanceHistoryItem": [
+    {
+      "file": "agent_instance.go",
+      "region": "CreateAgentInstanceHistoryItem",
+      "label": "Create agent instance history item"
+    }
+  ],
+  "searchAgentInstanceHistory": [
+    {
+      "file": "agent_instance.go",
+      "region": "SearchAgentInstanceHistory",
+      "label": "Search agent instance history"
+    }
+  ],
+  "searchAuditLogs": [
+    {
+      "file": "audit_log.go",
+      "region": "SearchAuditLogs",
+      "label": "Search audit logs"
+    }
+  ],
+  "getAuditLog": [
+    {
+      "file": "audit_log.go",
+      "region": "GetAuditLog",
+      "label": "Get audit log"
+    }
+  ],
+  "getAuthentication": [
+    {
+      "file": "admin.go",
+      "region": "GetAuthentication",
+      "label": "Get current user"
+    }
+  ],
+  "createAuthorization": [
+    {
+      "file": "authorization.go",
+      "region": "CreateAuthorization",
+      "label": "Create authorization"
+    }
+  ],
+  "searchAuthorizations": [
+    {
+      "file": "authorization.go",
+      "region": "SearchAuthorizations",
+      "label": "Search authorizations"
+    }
+  ],
+  "searchOwnAuthorizations": [
+    {
+      "file": "authorization.go",
+      "region": "SearchOwnAuthorizations",
+      "label": "Search own authorizations"
+    }
+  ],
+  "getAuthorization": [
+    {
+      "file": "authorization.go",
+      "region": "GetAuthorization",
+      "label": "Get authorization"
+    }
+  ],
+  "updateAuthorization": [
+    {
+      "file": "authorization.go",
+      "region": "UpdateAuthorization",
+      "label": "Update authorization"
+    }
+  ],
+  "deleteAuthorization": [
+    {
+      "file": "authorization.go",
+      "region": "DeleteAuthorization",
+      "label": "Delete authorization"
+    }
+  ],
+  "searchBatchOperationItems": [
+    {
+      "file": "batch_operation.go",
+      "region": "SearchBatchOperationItems",
+      "label": "Search batch operation items"
+    }
+  ],
+  "searchBatchOperations": [
+    {
+      "file": "batch_operation.go",
+      "region": "SearchBatchOperations",
+      "label": "Search batch operations"
+    }
+  ],
+  "getBatchOperation": [
+    {
+      "file": "batch_operation.go",
+      "region": "GetBatchOperation",
+      "label": "Get batch operation"
+    }
+  ],
+  "cancelBatchOperation": [
+    {
+      "file": "batch_operation.go",
+      "region": "CancelBatchOperation",
+      "label": "Cancel Batch operation"
+    }
+  ],
+  "resumeBatchOperation": [
+    {
+      "file": "batch_operation.go",
+      "region": "ResumeBatchOperation",
+      "label": "Resume Batch operation"
+    }
+  ],
+  "suspendBatchOperation": [
+    {
+      "file": "batch_operation.go",
+      "region": "SuspendBatchOperation",
+      "label": "Suspend Batch operation"
+    }
+  ],
+  "pinClock": [
+    {
+      "file": "clock.go",
+      "region": "PinClock",
+      "label": "Pin internal clock (alpha)"
+    }
+  ],
+  "resetClock": [
+    {
+      "file": "clock.go",
+      "region": "ResetClock",
+      "label": "Reset internal clock (alpha)"
+    }
+  ],
+  "createGlobalClusterVariable": [
+    {
+      "file": "cluster_variable.go",
+      "region": "CreateGlobalClusterVariable",
+      "label": "Create a global-scoped cluster variable"
+    }
+  ],
+  "getGlobalClusterVariable": [
+    {
+      "file": "cluster_variable.go",
+      "region": "GetGlobalClusterVariable",
+      "label": "Get a global-scoped cluster variable"
+    }
+  ],
+  "updateGlobalClusterVariable": [
+    {
+      "file": "cluster_variable.go",
+      "region": "UpdateGlobalClusterVariable",
+      "label": "Update a global-scoped cluster variable"
+    }
+  ],
+  "deleteGlobalClusterVariable": [
+    {
+      "file": "cluster_variable.go",
+      "region": "DeleteGlobalClusterVariable",
+      "label": "Delete a global-scoped cluster variable"
+    }
+  ],
+  "searchClusterVariables": [
+    {
+      "file": "cluster_variable.go",
+      "region": "SearchClusterVariables",
+      "label": "searchClusterVariables"
+    }
+  ],
+  "createTenantClusterVariable": [
+    {
+      "file": "cluster_variable.go",
+      "region": "CreateTenantClusterVariable",
+      "label": "Create a tenant-scoped cluster variable"
+    }
+  ],
+  "getTenantClusterVariable": [
+    {
+      "file": "cluster_variable.go",
+      "region": "GetTenantClusterVariable",
+      "label": "Get a tenant-scoped cluster variable"
+    }
+  ],
+  "updateTenantClusterVariable": [
+    {
+      "file": "cluster_variable.go",
+      "region": "UpdateTenantClusterVariable",
+      "label": "Update a tenant-scoped cluster variable"
+    }
+  ],
+  "deleteTenantClusterVariable": [
+    {
+      "file": "cluster_variable.go",
+      "region": "DeleteTenantClusterVariable",
+      "label": "Delete a tenant-scoped cluster variable"
+    }
+  ],
+  "evaluateConditionals": [
+    {
+      "file": "evaluation.go",
+      "region": "EvaluateConditionals",
+      "label": "Evaluate root level conditional start events"
+    }
+  ],
+  "searchCorrelatedMessageSubscriptions": [
+    {
+      "file": "message_signal.go",
+      "region": "SearchCorrelatedMessageSubscriptions",
+      "label": "Search correlated message subscriptions"
+    }
+  ],
+  "evaluateDecision": [
+    {
+      "file": "decision.go",
+      "region": "EvaluateDecision",
+      "label": "Evaluate decision"
+    }
+  ],
+  "searchDecisionDefinitions": [
+    {
+      "file": "decision.go",
+      "region": "SearchDecisionDefinitions",
+      "label": "Search decision definitions"
+    }
+  ],
+  "getDecisionDefinition": [
+    {
+      "file": "decision.go",
+      "region": "GetDecisionDefinition",
+      "label": "Get decision definition"
+    }
+  ],
+  "getDecisionDefinitionXML": [
+    {
+      "file": "decision.go",
+      "region": "GetDecisionDefinitionXML",
+      "label": "Get decision definition XML"
+    }
+  ],
+  "searchDecisionInstances": [
+    {
+      "file": "decision.go",
+      "region": "SearchDecisionInstances",
+      "label": "Search decision instances"
+    }
+  ],
+  "getDecisionInstance": [
+    {
+      "file": "decision.go",
+      "region": "GetDecisionInstance",
+      "label": "Get decision instance"
+    }
+  ],
+  "deleteDecisionInstance": [
+    {
+      "file": "decision.go",
+      "region": "DeleteDecisionInstance",
+      "label": "Delete decision instance"
+    }
+  ],
+  "deleteDecisionInstancesBatchOperation": [
+    {
+      "file": "decision.go",
+      "region": "DeleteDecisionInstancesBatchOperation",
+      "label": "Delete decision instances (batch)"
+    }
+  ],
+  "searchDecisionRequirements": [
+    {
+      "file": "decision.go",
+      "region": "SearchDecisionRequirements",
+      "label": "Search decision requirements"
+    }
+  ],
+  "getDecisionRequirements": [
+    {
+      "file": "decision.go",
+      "region": "GetDecisionRequirements",
+      "label": "Get decision requirements"
+    }
+  ],
+  "getDecisionRequirementsXML": [
+    {
+      "file": "decision.go",
+      "region": "GetDecisionRequirementsXML",
+      "label": "Get decision requirements XML"
+    }
+  ],
+  "createDeployment": [
+    {
+      "file": "resource.go",
+      "region": "CreateDeployment",
+      "label": "Deploy resources"
+    }
+  ],
+  "createDocument": [
+    {
+      "file": "document.go",
+      "region": "CreateDocument",
+      "label": "Upload document"
+    }
+  ],
+  "createDocuments": [
+    {
+      "file": "document.go",
+      "region": "CreateDocuments",
+      "label": "Upload multiple documents"
+    }
+  ],
+  "getDocument": [
+    {
+      "file": "document.go",
+      "region": "GetDocument",
+      "label": "Download document"
+    }
+  ],
+  "deleteDocument": [
+    {
+      "file": "document.go",
+      "region": "DeleteDocument",
+      "label": "Delete document"
+    }
+  ],
+  "createDocumentLink": [
+    {
+      "file": "document.go",
+      "region": "CreateDocumentLink",
+      "label": "Create document link"
+    }
+  ],
+  "activateAdHocSubProcessActivities": [
+    {
+      "file": "adhoc.go",
+      "region": "ActivateAdHocSubProcessActivities",
+      "label": "Activate activities within an ad-hoc sub-process"
+    }
+  ],
+  "searchElementInstanceWaitStates": [
+    {
+      "file": "element_instance.go",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
+    }
+  ],
+  "searchElementInstances": [
+    {
+      "file": "element_instance.go",
+      "region": "SearchElementInstances",
+      "label": "Search element instances"
+    }
+  ],
+  "getElementInstance": [
+    {
+      "file": "element_instance.go",
+      "region": "GetElementInstance",
+      "label": "Get element instance"
+    }
+  ],
+  "searchElementInstanceIncidents": [
+    {
+      "file": "element_instance.go",
+      "region": "SearchElementInstanceIncidents",
+      "label": "Search for incidents of a specific element instance"
+    }
+  ],
+  "createElementInstanceVariables": [
+    {
+      "file": "element_instance.go",
+      "region": "CreateElementInstanceVariables",
+      "label": "Update element instance variables"
+    }
+  ],
+  "evaluateExpression": [
+    {
+      "file": "evaluation.go",
+      "region": "EvaluateExpression",
+      "label": "Evaluate an expression"
+    }
+  ],
+  "getFormByKey": [
+    {
+      "file": "audit_log.go",
+      "region": "GetFormByKey",
+      "label": "Get form by key"
+    }
+  ],
+  "createGlobalTaskListener": [
+    {
+      "file": "global_listener.go",
+      "region": "CreateGlobalTaskListener",
+      "label": "Create global user task listener"
+    }
+  ],
+  "getGlobalTaskListener": [
+    {
+      "file": "global_listener.go",
+      "region": "GetGlobalTaskListener",
+      "label": "Get global user task listener"
+    }
+  ],
+  "updateGlobalTaskListener": [
+    {
+      "file": "global_listener.go",
+      "region": "UpdateGlobalTaskListener",
+      "label": "Update global user task listener"
+    }
+  ],
+  "deleteGlobalTaskListener": [
+    {
+      "file": "global_listener.go",
+      "region": "DeleteGlobalTaskListener",
+      "label": "Delete global user task listener"
+    }
+  ],
+  "searchGlobalTaskListeners": [
+    {
+      "file": "global_listener.go",
+      "region": "SearchGlobalTaskListeners",
+      "label": "Search global user task listeners"
+    }
+  ],
+  "createGroup": [
+    {
+      "file": "group.go",
+      "region": "CreateGroup",
+      "label": "Create group"
+    }
+  ],
+  "searchGroups": [
+    {
+      "file": "group.go",
+      "region": "SearchGroups",
+      "label": "Search groups"
+    }
+  ],
+  "getGroup": [
+    {
+      "file": "group.go",
+      "region": "GetGroup",
+      "label": "Get group"
+    }
+  ],
+  "updateGroup": [
+    {
+      "file": "group.go",
+      "region": "UpdateGroup",
+      "label": "Update group"
+    }
+  ],
+  "deleteGroup": [
+    {
+      "file": "group.go",
+      "region": "DeleteGroup",
+      "label": "Delete group"
+    }
+  ],
+  "searchClientsForGroup": [
+    {
+      "file": "group.go",
+      "region": "SearchClientsForGroup",
+      "label": "Search group clients"
+    }
+  ],
+  "assignClientToGroup": [
+    {
+      "file": "group.go",
+      "region": "AssignClientToGroup",
+      "label": "Assign a client to a group"
+    }
+  ],
+  "unassignClientFromGroup": [
+    {
+      "file": "group.go",
+      "region": "UnassignClientFromGroup",
+      "label": "Unassign a client from a group"
+    }
+  ],
+  "searchMappingRulesForGroup": [
+    {
+      "file": "group.go",
+      "region": "SearchMappingRulesForGroup",
+      "label": "Search group mapping rules"
+    }
+  ],
+  "assignMappingRuleToGroup": [
+    {
+      "file": "group.go",
+      "region": "AssignMappingRuleToGroup",
+      "label": "Assign a mapping rule to a group"
+    }
+  ],
+  "unassignMappingRuleFromGroup": [
+    {
+      "file": "group.go",
+      "region": "UnassignMappingRuleFromGroup",
+      "label": "Unassign a mapping rule from a group"
+    }
+  ],
+  "searchRolesForGroup": [
+    {
+      "file": "group.go",
+      "region": "SearchRolesForGroup",
+      "label": "Search group roles"
+    }
+  ],
+  "searchUsersForGroup": [
+    {
+      "file": "group.go",
+      "region": "SearchUsersForGroup",
+      "label": "Search group users"
+    }
+  ],
+  "assignUserToGroup": [
+    {
+      "file": "group.go",
+      "region": "AssignUserToGroup",
+      "label": "Assign a user to a group"
+    }
+  ],
+  "unassignUserFromGroup": [
+    {
+      "file": "group.go",
+      "region": "UnassignUserFromGroup",
+      "label": "Unassign a user from a group"
+    }
+  ],
+  "searchIncidents": [
+    {
+      "file": "incident.go",
+      "region": "SearchIncidents",
+      "label": "Search incidents"
+    }
+  ],
+  "getIncident": [
+    {
+      "file": "incident.go",
+      "region": "GetIncident",
+      "label": "Get incident"
+    }
+  ],
+  "resolveIncident": [
+    {
+      "file": "incident.go",
+      "region": "ResolveIncident",
+      "label": "Resolve incident"
+    }
+  ],
+  "getProcessInstanceStatisticsByDefinition": [
+    {
+      "file": "incident.go",
+      "region": "GetProcessInstanceStatisticsByDefinition",
+      "label": "Get process instance statistics by definition"
+    }
+  ],
+  "getProcessInstanceStatisticsByError": [
+    {
+      "file": "incident.go",
+      "region": "GetProcessInstanceStatisticsByError",
+      "label": "Get process instance statistics by error"
+    }
+  ],
+  "activateJobs": [
+    {
+      "file": "job.go",
+      "region": "ActivateJobs",
+      "label": "Activate jobs"
+    }
+  ],
+  "searchJobs": [
+    {
+      "file": "job.go",
+      "region": "SearchJobs",
+      "label": "Search jobs"
+    }
+  ],
+  "updateJob": [
+    {
+      "file": "job.go",
+      "region": "UpdateJob",
+      "label": "Update job"
+    }
+  ],
+  "completeJob": [
+    {
+      "file": "job.go",
+      "region": "CompleteJob",
+      "label": "Complete job"
+    }
+  ],
+  "throwJobError": [
+    {
+      "file": "job.go",
+      "region": "ThrowJobError",
+      "label": "Throw error for job"
+    }
+  ],
+  "failJob": [
+    {
+      "file": "job.go",
+      "region": "FailJob",
+      "label": "Fail job"
+    }
+  ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "job.go",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs (batch)"
+    }
+  ],
+  "getGlobalJobStatistics": [
+    {
+      "file": "job.go",
+      "region": "GetGlobalJobStatistics",
+      "label": "Global job statistics"
+    }
+  ],
+  "getJobTypeStatistics": [
+    {
+      "file": "job.go",
+      "region": "GetJobTypeStatistics",
+      "label": "Get job statistics by type"
+    }
+  ],
+  "getJobWorkerStatistics": [
+    {
+      "file": "job.go",
+      "region": "GetJobWorkerStatistics",
+      "label": "Get job statistics by worker"
+    }
+  ],
+  "getJobTimeSeriesStatistics": [
+    {
+      "file": "job.go",
+      "region": "GetJobTimeSeriesStatistics",
+      "label": "Get time-series metrics for a job type"
+    }
+  ],
+  "getJobErrorStatistics": [
+    {
+      "file": "job.go",
+      "region": "GetJobErrorStatistics",
+      "label": "Get error metrics for a job type"
+    }
+  ],
+  "getLicense": [
+    {
+      "file": "admin.go",
+      "region": "GetLicense",
+      "label": "Get license status"
+    }
+  ],
+  "createMappingRule": [
+    {
+      "file": "mapping_rule.go",
+      "region": "CreateMappingRule",
+      "label": "Create mapping rule"
+    }
+  ],
+  "searchMappingRule": [
+    {
+      "file": "mapping_rule.go",
+      "region": "SearchMappingRule",
+      "label": "Search mapping rules"
+    }
+  ],
+  "getMappingRule": [
+    {
+      "file": "mapping_rule.go",
+      "region": "GetMappingRule",
+      "label": "Get a mapping rule"
+    }
+  ],
+  "updateMappingRule": [
+    {
+      "file": "mapping_rule.go",
+      "region": "UpdateMappingRule",
+      "label": "Update mapping rule"
+    }
+  ],
+  "deleteMappingRule": [
+    {
+      "file": "mapping_rule.go",
+      "region": "DeleteMappingRule",
+      "label": "Delete a mapping rule"
+    }
+  ],
+  "searchMessageSubscriptions": [
+    {
+      "file": "message_signal.go",
+      "region": "SearchMessageSubscriptions",
+      "label": "Search message subscriptions"
+    }
+  ],
+  "correlateMessage": [
+    {
+      "file": "message_signal.go",
+      "region": "CorrelateMessage",
+      "label": "Correlate message"
+    }
+  ],
+  "publishMessage": [
+    {
+      "file": "message_signal.go",
+      "region": "PublishMessage",
+      "label": "Publish message"
+    }
+  ],
+  "searchProcessDefinitions": [
+    {
+      "file": "process_definition.go",
+      "region": "SearchProcessDefinitions",
+      "label": "Search process definitions"
+    }
+  ],
+  "getProcessDefinitionMessageSubscriptionStatistics": [
+    {
+      "file": "process_definition.go",
+      "region": "GetProcessDefinitionMessageSubscriptionStatistics",
+      "label": "Get message subscription statistics"
+    }
+  ],
+  "getProcessDefinitionInstanceStatistics": [
+    {
+      "file": "process_definition.go",
+      "region": "GetProcessDefinitionInstanceStatistics",
+      "label": "Get process instance statistics"
+    }
+  ],
+  "getProcessDefinition": [
+    {
+      "file": "process_definition.go",
+      "region": "GetProcessDefinition",
+      "label": "Get process definition"
+    }
+  ],
+  "getStartProcessForm": [
+    {
+      "file": "process_definition.go",
+      "region": "GetStartProcessForm",
+      "label": "Get process start form"
+    }
+  ],
+  "getProcessDefinitionStatistics": [
+    {
+      "file": "process_definition.go",
+      "region": "GetProcessDefinitionStatistics",
+      "label": "Get process definition statistics"
+    }
+  ],
+  "searchProcessDefinitionVariableNames": [
+    {
+      "file": "process_definition.go",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
+    }
+  ],
+  "getProcessDefinitionXML": [
+    {
+      "file": "process_definition.go",
+      "region": "GetProcessDefinitionXML",
+      "label": "Get process definition XML"
+    }
+  ],
+  "getProcessDefinitionInstanceVersionStatistics": [
+    {
+      "file": "process_definition.go",
+      "region": "GetProcessDefinitionInstanceVersionStatistics",
+      "label": "Get process instance statistics by version"
+    }
+  ],
+  "createProcessInstance": [
+    {
+      "file": "process_instance.go",
+      "region": "CreateProcessInstanceById",
+      "label": "Create process instance"
+    }
+  ],
+  "cancelProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.go",
+      "region": "CancelProcessInstancesBatchOperation",
+      "label": "Cancel process instances (batch)"
+    }
+  ],
+  "deleteProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.go",
+      "region": "DeleteProcessInstancesBatchOperation",
+      "label": "Delete process instances (batch)"
+    }
+  ],
+  "resolveIncidentsBatchOperation": [
+    {
+      "file": "process_instance.go",
+      "region": "ResolveIncidentsBatchOperation",
+      "label": "Resolve related incidents (batch)"
+    }
+  ],
+  "migrateProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.go",
+      "region": "MigrateProcessInstancesBatchOperation",
+      "label": "Migrate process instances (batch)"
+    }
+  ],
+  "modifyProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.go",
+      "region": "ModifyProcessInstancesBatchOperation",
+      "label": "Modify process instances (batch)"
+    }
+  ],
+  "suspendProcessInstance": [
+    {
+      "file": "process_instance.go",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend process instance"
+    }
+  ],
+  "resumeProcessInstance": [
+    {
+      "file": "process_instance.go",
+      "region": "ResumeProcessInstance",
+      "label": "Resume process instance"
+    }
+  ],
+  "assignProcessInstanceBusinessId": [
+    {
+      "file": "process_instance.go",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign business ID"
+    }
+  ],
+  "suspendProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.go",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances (batch)"
+    }
+  ],
+  "resumeProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.go",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances (batch)"
+    }
+  ],
+  "resolveSecrets": [
+    {
+      "file": "secret.go",
+      "region": "ResolveSecrets",
+      "label": "Resolve secrets"
+    }
+  ],
+  "listSecrets": [
+    {
+      "file": "secret.go",
+      "region": "ListSecrets",
+      "label": "List secret references"
+    }
+  ],
+  "searchProcessInstances": [
+    {
+      "file": "process_instance.go",
+      "region": "SearchProcessInstances",
+      "label": "Search process instances"
+    }
+  ],
+  "getProcessInstance": [
+    {
+      "file": "process_instance.go",
+      "region": "GetProcessInstance",
+      "label": "Get process instance"
+    }
+  ],
+  "getProcessInstanceCallHierarchy": [
+    {
+      "file": "process_instance.go",
+      "region": "GetProcessInstanceCallHierarchy",
+      "label": "Get call hierarchy"
+    }
+  ],
+  "cancelProcessInstance": [
+    {
+      "file": "process_instance.go",
+      "region": "CancelProcessInstance",
+      "label": "Cancel process instance"
+    }
+  ],
+  "deleteProcessInstance": [
+    {
+      "file": "process_instance.go",
+      "region": "DeleteProcessInstance",
+      "label": "Delete process instance"
+    }
+  ],
+  "resolveProcessInstanceIncidents": [
+    {
+      "file": "process_instance.go",
+      "region": "ResolveProcessInstanceIncidents",
+      "label": "Resolve related incidents"
+    }
+  ],
+  "searchProcessInstanceIncidents": [
+    {
+      "file": "process_instance.go",
+      "region": "SearchProcessInstanceIncidents",
+      "label": "Search related incidents"
+    }
+  ],
+  "migrateProcessInstance": [
+    {
+      "file": "process_instance.go",
+      "region": "MigrateProcessInstance",
+      "label": "Migrate process instance"
+    }
+  ],
+  "modifyProcessInstance": [
+    {
+      "file": "process_instance.go",
+      "region": "ModifyProcessInstance",
+      "label": "Modify process instance"
+    }
+  ],
+  "getProcessInstanceSequenceFlows": [
+    {
+      "file": "process_instance.go",
+      "region": "GetProcessInstanceSequenceFlows",
+      "label": "Get sequence flows"
+    }
+  ],
+  "getProcessInstanceStatistics": [
+    {
+      "file": "process_instance.go",
+      "region": "GetProcessInstanceStatistics",
+      "label": "Get element instance statistics"
+    }
+  ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "process_instance.go",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get wait state statistics"
+    }
+  ],
+  "searchResources": [
+    {
+      "file": "resource.go",
+      "region": "SearchResources",
+      "label": "Search resources"
+    }
+  ],
+  "getResource": [
+    {
+      "file": "resource.go",
+      "region": "GetResource",
+      "label": "Get resource"
+    }
+  ],
+  "getResourceContent": [
+    {
+      "file": "resource.go",
+      "region": "GetResourceContent",
+      "label": "Get RPA resource content (deprecated)"
+    }
+  ],
+  "getResourceContentBinary": [
+    {
+      "file": "resource.go",
+      "region": "GetResourceContentBinary",
+      "label": "Get resource content as binary"
+    }
+  ],
+  "deleteResource": [
+    {
+      "file": "resource.go",
+      "region": "DeleteResource",
+      "label": "Delete resource"
+    }
+  ],
+  "createRole": [
+    {
+      "file": "role.go",
+      "region": "CreateRole",
+      "label": "Create role"
+    }
+  ],
+  "searchRoles": [
+    {
+      "file": "role.go",
+      "region": "SearchRoles",
+      "label": "Search roles"
+    }
+  ],
+  "getRole": [
+    {
+      "file": "role.go",
+      "region": "GetRole",
+      "label": "Get role"
+    }
+  ],
+  "updateRole": [
+    {
+      "file": "role.go",
+      "region": "UpdateRole",
+      "label": "Update role"
+    }
+  ],
+  "deleteRole": [
+    {
+      "file": "role.go",
+      "region": "DeleteRole",
+      "label": "Delete role"
+    }
+  ],
+  "searchClientsForRole": [
+    {
+      "file": "role.go",
+      "region": "SearchClientsForRole",
+      "label": "Search role clients"
+    }
+  ],
+  "assignRoleToClient": [
+    {
+      "file": "role.go",
+      "region": "AssignRoleToClient",
+      "label": "Assign a role to a client"
+    }
+  ],
+  "unassignRoleFromClient": [
+    {
+      "file": "role.go",
+      "region": "UnassignRoleFromClient",
+      "label": "Unassign a role from a client"
+    }
+  ],
+  "searchGroupsForRole": [
+    {
+      "file": "role.go",
+      "region": "SearchGroupsForRole",
+      "label": "Search role groups"
+    }
+  ],
+  "assignRoleToGroup": [
+    {
+      "file": "role.go",
+      "region": "AssignRoleToGroup",
+      "label": "Assign a role to a group"
+    }
+  ],
+  "unassignRoleFromGroup": [
+    {
+      "file": "role.go",
+      "region": "UnassignRoleFromGroup",
+      "label": "Unassign a role from a group"
+    }
+  ],
+  "searchMappingRulesForRole": [
+    {
+      "file": "role.go",
+      "region": "SearchMappingRulesForRole",
+      "label": "Search role mapping rules"
+    }
+  ],
+  "assignRoleToMappingRule": [
+    {
+      "file": "role.go",
+      "region": "AssignRoleToMappingRule",
+      "label": "Assign a role to a mapping rule"
+    }
+  ],
+  "unassignRoleFromMappingRule": [
+    {
+      "file": "role.go",
+      "region": "UnassignRoleFromMappingRule",
+      "label": "Unassign a role from a mapping rule"
+    }
+  ],
+  "searchUsersForRole": [
+    {
+      "file": "role.go",
+      "region": "SearchUsersForRole",
+      "label": "Search role users"
+    }
+  ],
+  "assignRoleToUser": [
+    {
+      "file": "role.go",
+      "region": "AssignRoleToUser",
+      "label": "Assign a role to a user"
+    }
+  ],
+  "unassignRoleFromUser": [
+    {
+      "file": "role.go",
+      "region": "UnassignRoleFromUser",
+      "label": "Unassign a role from a user"
+    }
+  ],
+  "createAdminUser": [
+    {
+      "file": "system.go",
+      "region": "CreateAdminUser",
+      "label": "Create admin user"
+    }
+  ],
+  "broadcastSignal": [
+    {
+      "file": "message_signal.go",
+      "region": "BroadcastSignal",
+      "label": "Broadcast signal"
+    }
+  ],
+  "getStatus": [
+    {
+      "file": "cluster.go",
+      "region": "GetStatus",
+      "label": "Get cluster status"
+    }
+  ],
+  "getUsageMetrics": [
+    {
+      "file": "system.go",
+      "region": "GetUsageMetrics",
+      "label": "Get usage metrics"
+    }
+  ],
+  "getSystemConfiguration": [
+    {
+      "file": "system.go",
+      "region": "GetSystemConfiguration",
+      "label": "System configuration (alpha)"
+    }
+  ],
+  "createTenant": [
+    {
+      "file": "tenant.go",
+      "region": "CreateTenant",
+      "label": "Create tenant"
+    }
+  ],
+  "searchTenants": [
+    {
+      "file": "tenant.go",
+      "region": "SearchTenants",
+      "label": "Search tenants"
+    }
+  ],
+  "getTenant": [
+    {
+      "file": "tenant.go",
+      "region": "GetTenant",
+      "label": "Get tenant"
+    }
+  ],
+  "updateTenant": [
+    {
+      "file": "tenant.go",
+      "region": "UpdateTenant",
+      "label": "Update tenant"
+    }
+  ],
+  "deleteTenant": [
+    {
+      "file": "tenant.go",
+      "region": "DeleteTenant",
+      "label": "Delete tenant"
+    }
+  ],
+  "searchClientsForTenant": [
+    {
+      "file": "tenant.go",
+      "region": "SearchClientsForTenant",
+      "label": "Search clients for tenant"
+    }
+  ],
+  "assignClientToTenant": [
+    {
+      "file": "tenant.go",
+      "region": "AssignClientToTenant",
+      "label": "Assign a client to a tenant"
+    }
+  ],
+  "unassignClientFromTenant": [
+    {
+      "file": "tenant.go",
+      "region": "UnassignClientFromTenant",
+      "label": "Unassign a client from a tenant"
+    }
+  ],
+  "searchGroupIdsForTenant": [
+    {
+      "file": "tenant.go",
+      "region": "SearchGroupIdsForTenant",
+      "label": "Search groups for tenant"
+    }
+  ],
+  "assignGroupToTenant": [
+    {
+      "file": "tenant.go",
+      "region": "AssignGroupToTenant",
+      "label": "Assign a group to a tenant"
+    }
+  ],
+  "unassignGroupFromTenant": [
+    {
+      "file": "tenant.go",
+      "region": "UnassignGroupFromTenant",
+      "label": "Unassign a group from a tenant"
+    }
+  ],
+  "searchMappingRulesForTenant": [
+    {
+      "file": "tenant.go",
+      "region": "SearchMappingRulesForTenant",
+      "label": "Search mapping rules for tenant"
+    }
+  ],
+  "assignMappingRuleToTenant": [
+    {
+      "file": "tenant.go",
+      "region": "AssignMappingRuleToTenant",
+      "label": "Assign a mapping rule to a tenant"
+    }
+  ],
+  "unassignMappingRuleFromTenant": [
+    {
+      "file": "tenant.go",
+      "region": "UnassignMappingRuleFromTenant",
+      "label": "Unassign a mapping rule from a tenant"
+    }
+  ],
+  "searchRolesForTenant": [
+    {
+      "file": "tenant.go",
+      "region": "SearchRolesForTenant",
+      "label": "Search roles for tenant"
+    }
+  ],
+  "assignRoleToTenant": [
+    {
+      "file": "tenant.go",
+      "region": "AssignRoleToTenant",
+      "label": "Assign a role to a tenant"
+    }
+  ],
+  "unassignRoleFromTenant": [
+    {
+      "file": "tenant.go",
+      "region": "UnassignRoleFromTenant",
+      "label": "Unassign a role from a tenant"
+    }
+  ],
+  "searchUsersForTenant": [
+    {
+      "file": "tenant.go",
+      "region": "SearchUsersForTenant",
+      "label": "Search users for tenant"
+    }
+  ],
+  "assignUserToTenant": [
+    {
+      "file": "tenant.go",
+      "region": "AssignUserToTenant",
+      "label": "Assign a user to a tenant"
+    }
+  ],
+  "unassignUserFromTenant": [
+    {
+      "file": "tenant.go",
+      "region": "UnassignUserFromTenant",
+      "label": "Unassign a user from a tenant"
+    }
+  ],
+  "getTopology": [
+    {
+      "file": "cluster.go",
+      "region": "GetTopology",
+      "label": "Get cluster topology"
+    }
+  ],
+  "getClusterStatus": [
+    {
+      "file": "cluster.go",
+      "region": "GetClusterStatus",
+      "label": "Get the status of the whole cluster"
+    }
+  ],
+  "changeClusterMode": [
+    {
+      "file": "recovery.go",
+      "region": "ChangeClusterMode",
+      "label": "Change cluster mode"
+    }
+  ],
+  "restore": [
+    {
+      "file": "recovery.go",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
+  "getRestoreStatus": [
+    {
+      "file": "recovery.go",
+      "region": "GetRestoreStatus",
+      "label": "Get the status of the in-progress restore"
+    }
+  ],
+  "createUser": [
+    {
+      "file": "user.go",
+      "region": "CreateUser",
+      "label": "Create user"
+    }
+  ],
+  "searchUsers": [
+    {
+      "file": "user.go",
+      "region": "SearchUsers",
+      "label": "Search users"
+    }
+  ],
+  "getUser": [
+    {
+      "file": "user.go",
+      "region": "GetUser",
+      "label": "Get user"
+    }
+  ],
+  "updateUser": [
+    {
+      "file": "user.go",
+      "region": "UpdateUser",
+      "label": "Update user"
+    }
+  ],
+  "deleteUser": [
+    {
+      "file": "user.go",
+      "region": "DeleteUser",
+      "label": "Delete user"
+    }
+  ],
+  "searchUserTasks": [
+    {
+      "file": "user_task.go",
+      "region": "SearchUserTasks",
+      "label": "Search user tasks"
+    }
+  ],
+  "getUserTask": [
+    {
+      "file": "user_task.go",
+      "region": "GetUserTask",
+      "label": "Get user task"
+    }
+  ],
+  "updateUserTask": [
+    {
+      "file": "user_task.go",
+      "region": "UpdateUserTask",
+      "label": "Update user task"
+    }
+  ],
+  "unassignUserTask": [
+    {
+      "file": "user_task.go",
+      "region": "UnassignUserTask",
+      "label": "Unassign user task"
+    }
+  ],
+  "assignUserTask": [
+    {
+      "file": "user_task.go",
+      "region": "AssignUserTask",
+      "label": "Assign user task"
+    }
+  ],
+  "searchUserTaskAuditLogs": [
+    {
+      "file": "user_task.go",
+      "region": "SearchUserTaskAuditLogs",
+      "label": "Search user task audit logs"
+    }
+  ],
+  "completeUserTask": [
+    {
+      "file": "user_task.go",
+      "region": "CompleteUserTask",
+      "label": "Complete user task"
+    }
+  ],
+  "searchUserTaskEffectiveVariables": [
+    {
+      "file": "user_task.go",
+      "region": "SearchUserTaskEffectiveVariables",
+      "label": "Search user task effective variables"
+    }
+  ],
+  "getUserTaskForm": [
+    {
+      "file": "user_task.go",
+      "region": "GetUserTaskForm",
+      "label": "Get user task form"
+    }
+  ],
+  "searchUserTaskVariables": [
+    {
+      "file": "user_task.go",
+      "region": "SearchUserTaskVariables",
+      "label": "Search user task variables"
+    }
+  ],
+  "searchVariables": [
+    {
+      "file": "variable.go",
+      "region": "SearchVariables",
+      "label": "Search variables"
+    }
+  ],
+  "getVariable": [
+    {
+      "file": "variable.go",
+      "region": "GetVariable",
+      "label": "Get variable"
+    }
+  ],
+  "takeRuntimeBackup": [
+    {
+      "file": "backup.go",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
+    }
+  ],
+  "listRuntimeBackups": [
+    {
+      "file": "backup.go",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "getRuntimeBackup": [
+    {
+      "file": "backup.go",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "deleteRuntimeBackup": [
+    {
+      "file": "backup.go",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "getRuntimeBackupState": [
+    {
+      "file": "backup.go",
+      "region": "GetRuntimeBackupState",
+      "label": "Get runtime backup state"
+    }
+  ],
+  "syncRuntimeBackupState": [
+    {
+      "file": "backup.go",
+      "region": "SyncRuntimeBackupState",
+      "label": "Sync runtime backup state"
+    }
+  ],
+  "deleteRuntimeBackupState": [
+    {
+      "file": "backup.go",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete runtime backup state"
+    }
+  ],
+  "pauseExporting": [
+    {
+      "file": "exporting.go",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
+    }
+  ],
+  "resumeExporting": [
+    {
+      "file": "exporting.go",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
+  ],
+  "getExportingStatus": [
+    {
+      "file": "exporting.go",
+      "region": "GetExportingStatus",
+      "label": "Get exporting status"
+    }
+  ],
+  "takeHistoryBackup": [
+    {
+      "file": "backup.go",
+      "region": "TakeHistoryBackup",
+      "label": "Take a history backup"
+    }
+  ],
+  "listHistoryBackups": [
+    {
+      "file": "backup.go",
+      "region": "ListHistoryBackups",
+      "label": "List history backups"
+    }
+  ],
+  "getHistoryBackup": [
+    {
+      "file": "backup.go",
+      "region": "GetHistoryBackup",
+      "label": "Get a history backup"
+    }
+  ],
+  "deleteHistoryBackup": [
+    {
+      "file": "backup.go",
+      "region": "DeleteHistoryBackup",
+      "label": "Delete a history backup"
+    }
+  ],
+  "changeClusterModeAsClusterAdmin": [
+    {
+      "file": "recovery.go",
+      "region": "ChangeClusterModeAsClusterAdmin",
+      "label": "Change cluster mode as cluster admin"
+    }
+  ],
+  "getClusterTopology": [
+    {
+      "file": "cluster.go",
+      "region": "GetClusterTopology",
+      "label": "Get the topology of the whole cluster"
+    }
+  ],
+  "restoreAsClusterAdmin": [
+    {
+      "file": "recovery.go",
+      "region": "RestoreAsClusterAdmin",
+      "label": "Restore as cluster admin"
+    }
+  ]
+}

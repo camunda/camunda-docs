@@ -9,10 +9,6 @@ mdx:
 
 # Migration Guide: v9 → v10
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 This section covers breaking changes and new features when upgrading from `Camunda.Orchestration.Sdk` v9 (Camunda 8.9) to v10 (Camunda 8.10).
 
 > **Note:** v10 is currently in alpha (`10.0.0-alpha.N` on NuGet). The changes listed here may evolve before the stable v10.0.0 release.

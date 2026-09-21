@@ -37,7 +37,7 @@ The following components are not supported for manual installation:
 
 - Management Identity
 - Optimize
-- Web Modeler
+- Camunda Hub
 
 To install these components, use one of the supported methods:
 
@@ -290,7 +290,7 @@ Once you've downloaded the Orchestration Cluster distribution, extract it into a
 6. Open [http://localhost:8080](http://localhost:8080). On first access, you'll be asked to create an admin user unless [Admin](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
 
 :::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Camunda Hub is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
 ### Run the Orchestration Cluster as a service
@@ -425,16 +425,16 @@ curl localhost:9600/actuator/health
     "brokerStatus": {
       "status": "UP"
     },
-    "indicesCheck": {
-      "status": "UP"
-    },
     "livenessState": {
       "status": "UP"
     },
     "readinessState": {
       "status": "UP"
     },
-    "searchEngineCheck": {
+    "schemaReadinessCheck": {
+      "status": "UP"
+    },
+    "searchEngineStatus": {
       "status": "UP"
     }
   }

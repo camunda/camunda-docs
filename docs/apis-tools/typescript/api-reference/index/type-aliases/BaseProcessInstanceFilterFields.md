@@ -178,6 +178,17 @@ The process instance state.
 
 ---
 
+### suspendedDate?
+
+```ts
+optional suspendedDate?: DateTimeFilterProperty;
+```
+
+The time this process instance most recently entered the SUSPENDED state.
+This is cleared (null) again once the process instance is resumed.
+
+---
+
 ### tags?
 
 ```ts

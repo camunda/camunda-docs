@@ -7,10 +7,6 @@ mdx:
 
 # Key Types
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 Strongly-typed domain key types provide compile-time safety for entity identifiers. Each key wraps a string value and ensures type-safe API calls.
 
 ## Overview

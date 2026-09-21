@@ -26,10 +26,6 @@ import TabItem from "@theme/TabItem";
 
 This guide is tailored for developers who want to implement process automation solutions using Java (Spring), JavaScript (Node.js), Python, or C#. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10.
-:::
-
 ## Get started with an example project
 
 You will:
@@ -40,7 +36,7 @@ You will:
   - The **Spring (Java) SDK**,
   - The **Node.js (JavaScript) SDK**,
   - The **Python SDK**, or
-  - The **C# SDK** (technical preview)  
+  - The **C# SDK**  
     to handle tasks in the process.
 
 ## Prerequisites
@@ -50,7 +46,7 @@ You will:
 { label: 'Java + Spring', value: 'javaspring', },
 { label: 'Node.js', value: 'nodejs', },
 { label: 'Python', value: 'python', },
-{ label: 'C# (Technical Preview)', value: 'csharp', },
+{ label: 'C#', value: 'csharp', },
 ] }>
 <TabItem value="javaspring">
 
@@ -86,7 +82,7 @@ The starter package includes the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
-- [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C# (technical preview).
+- [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C#.
 
 All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
 
@@ -130,18 +126,16 @@ The service tasks in the process are executed by [job workers](/reference/glossa
   </li>
 
   <li>
-    In Camunda Modeler, use:
-    <pre><code>File &gt; Open File...</code></pre>
-    to open the file:
-    <pre><code>camunda-8-get-started/2-order-process-with-service-workers/bpmn/order-process.bpmn</code></pre>
+    In Camunda Modeler, click <b>File > Open File</b>
+  </li>
+
+  <li>
+  Select `camunda-8-get-started/2-order-process-with-service-workers/bpmn/order-process.bpmn`
   </li>
 
   <li>
     Click the "Rocket" icon to connect to your Camunda 8 Run instance and deploy the model.
     You can use the pre-configured `c8run (local)` connection.
-
-    ![Connect to Cluster and deploy model](./img/get-started-example-deploy.png)
-
   </li>
 
   <li>
@@ -161,9 +155,10 @@ The service tasks in the process are executed by [job workers](/reference/glossa
 
 A [process instance](/reference/glossary.md#process-instance) is now running in the engine.
 
-You can view the process instance in **Operate**, the visual operations tool, by navigating to:  
-[http://localhost:8080/operate](http://localhost:8080/operate)  
-Login with the credentials: `demo` / `demo`.
+You can view the process instance in **Operate**, the visual operations tool:
+
+1. Navigate to: [http://localhost:8080/operate](http://localhost:8080/operate)
+2. Login with the credentials: `demo` / `demo`.
 
 There you will see an active process instance.
 
@@ -182,7 +177,7 @@ Next, start the job workers to allow them to perform the work for the service ta
 { label: 'Java + Spring', value: 'javaspring', },
 { label: 'Node.js', value: 'nodejs', },
 { label: 'Python', value: 'python', },
-{ label: 'C# (Technical Preview)', value: 'csharp', },
+{ label: 'C#', value: 'csharp', },
 ] }>
 <TabItem value="javaspring">
 

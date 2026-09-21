@@ -61,7 +61,7 @@ The following table shows backup component coverage:
 | **Admin**                   | Yes (via Elasticsearch/OpenSearch or RDBMS backup) | Authentication and authorization configuration |
 | **Optimize**                | Elasticsearch/OpenSearch path only                 | Standalone component; back up independently    |
 | **Management Identity**     | Not included                                       | Standalone component; back up independently    |
-| **Web Modeler**             | Not included                                       | Standalone component; back up independently    |
+| **Camunda Hub**             | Not included                                       | Standalone component; back up independently    |
 | **Connectors**              | Not included                                       | Stateless; redeploy from source                |
 
 ## Cross-region backup replication

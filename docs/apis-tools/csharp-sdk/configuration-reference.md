@@ -9,10 +9,6 @@ mdx:
 
 # Configuration Reference
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 The SDK uses environment variables for configuration, matching the [JS SDK](https://github.com/camunda/orchestration-cluster-api-js) conventions:
 
 | Variable                               | Description                                                     | Default              |

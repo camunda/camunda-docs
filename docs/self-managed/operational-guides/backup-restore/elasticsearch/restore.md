@@ -630,6 +630,8 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 
 ### Restore Zeebe Cluster
 
+In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
+
 :::note
 During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe Broker in case of a manual deployment.
 
@@ -756,7 +758,7 @@ If the restore fails, you can re-run the application after fixing the root cause
 If the data directory is not empty, the restore will fail with an error message:
 
 ```
-Brokers's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+Brokers's data directory /usr/local/camunda/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
 ```
 
 On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted.
@@ -790,23 +792,23 @@ Ensure restore-only settings are not present in this final configuration (for ex
 
 - For a manual setup, execute the broker and all other components in their normal way.
 
-## (Optional) Restore a Web Modeler data backup
+## (Optional) Restore a Camunda Hub data backup
 
-If you have previously backed up your Web Modeler data, you can restore this backup.
+If you have previously backed up your Camunda Hub data, you can restore this backup.
 
 Backups can only be restored with downtime.
-To restore the database dump, first ensure that Web Modeler is stopped.
+To restore the database dump, first ensure that Camunda Hub is stopped.
 Then, to restore the database use the following command:
 
 ```bash
 psql -U <DATABASE_USER> -h <DATABASE_HOST> -p <DATABASE_PORT> -f dump.psql <DATABASE_NAME>
 ```
 
-After the database has been restored, you can start Web Modeler again.
+After the database has been restored, you can start Camunda Hub again.
 
 :::danger
-When restoring Web Modeler data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
-Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](/self-managed/components/hub/troubleshooting/troubleshoot-missing-data.md)).
+When restoring Camunda Hub data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
+Otherwise, users may not be able to access their projects after the restore (see [Camunda Hub's troubleshooting guide](/self-managed/components/hub/troubleshooting/troubleshoot-missing-data.md)).
 :::
 
 :::tip

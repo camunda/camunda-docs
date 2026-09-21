@@ -31,32 +31,36 @@ New to connectors? Review our [introduction to connectors](/components/connector
 
 The concept of a [connector](/reference/glossary.md#connector) consists of two parts: the business logic is implemented as a [job worker](/reference/glossary.md#job-worker), and the user interface during modeling is provided using an element template. In this guide, you will create a REST connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/components/hub/workspace/modeler/collaboration/design-your-process.md).
 
-## Step 1: Create a REST connector task
+## Create a REST connector task
 
-To use a **REST connector** in your process, follow the steps below:
+To use a REST connector in your process, follow the steps below:
 
-1. Create a BPMN diagram. To do this, click **New project** within Modeler.
-2. Name your project and select **Create new > BPMN diagram**.
-3. Give your model a descriptive name and ID. On the right side of the page, expand the **General** section of the properties panel to find the name and ID fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the ID.
-4. Use Web Modeler to design a BPMN flow with a connector. Create a connector by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
-5. Change the task type by clicking on the element and selecting the **Change element** menu icon. Select **Send REST Request** in the **Connectors** section. Alternatively, you can directly choose **Send REST Request** by using the context pad.
+1. In Camunda Hub, open a [workspace](../components/hub/workspace/index.md).
+2. Create a new project.
+3. In the project, click **Create new > BPMN diagram**.
+4. With your new diagram open, make sure you're in [**Implement** mode](/components/hub/workspace/modeler/collaboration/implement-your-process.md).
+5. With no diagram elements selected, open the **Details** panel on the right side of the modeling interface.
+6. Under **Properties > General**, configure the following properties:
+   - **Name:** `API Orchestration Tutorial`
+   - **ID:** `api-orchestration-tutorial`
+7. Click the existing start event, then select the **Append task** icon.
+8. Click the new task, then select the **Change element** icon.
+9. Search for and select the **REST Outbound Connector**.
+10. With the **REST Outbound Connector** selected, under **Properties > General**, name the task `Make a request`.
 
-   ![Blank task on Web Modeler canvas with properties panel open](img/connectors-blank-task.png)
+## Make your REST connector executable
 
-6. Add a descriptive name using the **General** section in the properties panel. For this guide, we'll use `Make a request`.
+Set up your REST connector to get a random cat fact from the [Cat Fact API](https://catfact.ninja/):
 
-## Step 2: Make your REST connector executable
+1. Select the **REST Outbound Connector**.
+2. Under **Properties > HTTP endpoint**, set the **URL** to `https://catfact.ninja/fact`.
 
-![Connector on Web Modeler canvas with properties panel open](img/connectors-rest-red-properties.png)
-
-To make the **REST connector** executable, fill out the mandatory **URL** field in the HTTP Endpoint section (highlighted in red) in the properties panel with `https://catfact.ninja/fact` so we can get a random cat fact from the [Cat Fact API](https://catfact.ninja/) for this example.
-
-## Step 3: Handle your response
+## Handle your response
 
 The HTTP response will be available in a temporary local response variable. This variable can be mapped to the process by specifying **Result Variable**.
 In the **Response Mapping** section use `={"body" : body}` as the **Result Expression** so you can see the entire JSON object returned if it's successful.
 
-## Step 4: Deploy your process
+## Deploy your process
 
 To deploy your process, take the following steps:
 

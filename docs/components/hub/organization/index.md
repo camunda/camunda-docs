@@ -44,19 +44,19 @@ Establish a Git repository with catalog assets, upload the assets in a CI/CD pip
 
 <span class="link-arrow">[Get started](./manage-catalog/index.md)</span>
 
-## Manage members
+## Manage users
 
 Manage the users, user groups, and roles in your organization:
 
 <AoGrid ao={[
 {
-link: "./manage-members/manage-users",
+link: "./manage-users",
 title: "Manage users",
 image: DocsIcon,
 description: "Manage users in your organization.",
 },
 {
-link: "./manage-members/manage-user-groups",
+link: "./manage-users/manage-user-groups",
 title: "Manage user groups",
 image: DocsIcon,
 description: "Organize users into groups within your organization.",
@@ -93,4 +93,10 @@ title: "Monitor the job dashboard",
 image: DocsIcon,
 description: "Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.",
 },
-]} columns={1}/>
+{
+link: "./analyze-operations/business-value-dashboard",
+title: "Monitor the business value dashboard",
+image: DocsIcon,
+description: "Track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and set targets for cycle time and automation rate.",
+},
+]} columns={2}/>

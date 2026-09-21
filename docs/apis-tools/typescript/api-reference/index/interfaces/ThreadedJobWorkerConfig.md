@@ -117,6 +117,30 @@ Zod schema for variables in the complete command
 
 ---
 
+### pollBackoffMaxMs?
+
+```ts
+optional pollBackoffMaxMs?: number;
+```
+
+Ceiling (ms) of the between-failed-poll exponential backoff. Default `30000`.
+
+---
+
+### pollBackoffMinMs?
+
+```ts
+optional pollBackoffMinMs?: number;
+```
+
+Floor (ms) of the exponential backoff applied between _failed_ activation
+requests (connection refused, connect timeout, broker restart, LAN blip …).
+The first retry waits ≈ this/2–this ms; subsequent consecutive failures
+double the window up to [pollBackoffMaxMs](#pollbackoffmaxms), with jitter, and reset to
+zero on the first successful poll. Default `1000`. Set to `0` to disable backoff (failed polls then fall back to [pollIntervalMs](#pollintervalms) rather than retrying immediately).
+
+---
+
 ### pollIntervalMs?
 
 ```ts

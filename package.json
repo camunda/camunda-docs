@@ -40,14 +40,16 @@
     "config-reference:generate:camunda-spring-boot-starter": "npm run config-reference:generate camunda-spring-boot-starter",
     "config-reference:generate:camunda-spring-boot-starter:8.8": "npm run config-reference:generate:camunda-spring-boot-starter 8.8",
     "config-reference:generate:camunda-spring-boot-starter:8.9": "npm run config-reference:generate:camunda-spring-boot-starter 8.9",
-    "update-release-links": "node hacks/update-release-links.js"
+    "update-release-links": "node hacks/update-release-links.js",
+    "update-downloads": "node hacks/update-downloads.js",
+    "check-downloads": "node hacks/update-downloads.js --check"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "15.5.1",
+    "@apidevtools/json-schema-ref-parser": "16.0.3",
     "@auth0/auth0-react": "^2.3.0",
     "@bpmn-io/form-js": "^1.15.2",
-    "@camunda8/docusaurus-plugin-openapi-docs": "4.6.7",
-    "@camunda8/docusaurus-theme-openapi-docs": "4.6.7",
+    "@camunda8/docusaurus-plugin-openapi-docs": "4.6.9",
+    "@camunda8/docusaurus-theme-openapi-docs": "4.6.9",
     "@docusaurus/core": "^3.8.0",
     "@docusaurus/faster": "^3.8.0",
     "@docusaurus/preset-classic": "^3.8.0",
@@ -59,7 +61,7 @@
     "clsx": "^2.1.1",
     "mixpanel-browser": "^2.64.0",
     "mustache": "^4.2.0",
-    "openapi-to-postmanv2": "6.3.2",
+    "openapi-to-postmanv2": "6.3.3",
     "pushfeedback-react": "^0.1.63",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -87,7 +89,7 @@
     "jest": "^30.0.0",
     "lint-staged": "^17.0.0",
     "playwright": "^1.52.0",
-    "prettier": "3.9.6"
+    "prettier": "3.9.8"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"
