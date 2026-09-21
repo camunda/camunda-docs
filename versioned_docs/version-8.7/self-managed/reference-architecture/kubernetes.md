@@ -66,7 +66,7 @@ Zeebe Brokers also have a service but are not directly exposed externally; all r
 
 #### Web Modeler and Console
 
-![Web Modeler and Console](./img/k8s-cluster-view-managing.jpg)
+![Web Modeler and Console](./img/k8s-cluster-view-managing.svg)
 
 Web Modeler, Console, and Identity are deployed as **Deployments** since they are stateless, with data stored externally in a SQL database. This allows them to be easily scaled as needed.
 

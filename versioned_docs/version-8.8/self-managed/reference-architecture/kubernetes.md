@@ -81,7 +81,7 @@ The Orchestration Cluster exposes two services:
 
 #### Web Modeler and Console
 
-![Web Modeler and Console](./img/k8s-cluster-view-managing.jpg)
+![Web Modeler and Console](./img/k8s-cluster-view-managing.svg)
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
