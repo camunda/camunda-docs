@@ -65,38 +65,3 @@ export const rdbmsCards = [
       "Perform a restore of all components while using an RDBMS as secondary storage.",
   },
 ];
-
-// Restore mode cards
-export const esRestoreCards = [
-  {
-    link: "../in-process-restore.md",
-    title: "In-process restore",
-    image: IconRepeat,
-    description:
-      "Restore Elasticsearch/OpenSearch secondary storage while the Zeebe brokers remain running in recovery mode.",
-  },
-  {
-    link: "#restore-zeebe-cluster",
-    title: "Legacy restore with broker restart",
-    image: IconGear,
-    description:
-      "Restore Elasticsearch/OpenSearch secondary storage with the legacy standalone restore application.",
-  },
-];
-
-export const rdbmsRestoreCards = [
-  {
-    link: "#restore-api",
-    title: "Restore API",
-    image: IconRepeat,
-    description:
-      "Restore RDBMS-backed clusters through the Orchestration Cluster Restore API without restarting brokers.",
-  },
-  {
-    link: "#legacy-approach",
-    title: "Legacy approach",
-    image: IconGear,
-    description:
-      "Restore the RDBMS and Zeebe primary storage with the standalone restore application and broker restart.",
-  },
-];
