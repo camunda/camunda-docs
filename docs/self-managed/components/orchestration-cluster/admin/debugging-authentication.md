@@ -41,6 +41,7 @@ Typical failure points:
 To isolate the issue, use:
 
 - [Review logs](#review-logs)
+- [Requests failing while an identity provider is unreachable](#requests-failing-while-an-identity-provider-is-unreachable)
 - [Review data](#review-data)
 - [Review configuration](#review-configuration)
 - [Inspect the JWT](#inspect-the-jwt)
@@ -76,6 +77,21 @@ LOGGING_LEVEL_IO_CAMUNDA_SECURITY=DEBUG
 </Tabs>
 
 With these settings, you can trace request handling and how Spring Security filter chains determine authentication outcomes.
+
+## Requests failing while an identity provider is unreachable
+
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not during startup. A cluster therefore starts and serves traffic while a configured provider is unreachable, and only the requests that depend on that provider fail.
+
+While a provider is unreachable:
+
+- Requests that cannot be authenticated without that provider fail with a server error, rather than with an authentication error. This includes a browser login through the provider and an API request carrying a token the provider issued.
+- Every other request succeeds, including requests authenticated by a provider that answers.
+- Each following request makes a new attempt, so the cluster serves the affected traffic again as soon as the provider answers. You do not need to restart the cluster.
+- The cluster logs one warning per minute for each resolution step that fails: a client registration, a token decoder, or a UserInfo mapping. The warning names the provider, its issuer, and the affected scope.
+
+Because an unreachable provider no longer stops the cluster from starting, that warning—and not a failed startup—is how you learn that part of your authentication traffic is failing. Watch for it in your log pipeline.
+
+If you see the warning, confirm that the provider's discovery endpoint `<issuer-uri>/.well-known/openid-configuration` is reachable from the cluster. See [Test the IdP directly](#test-the-idp-directly).
 
 ## Review data
 
