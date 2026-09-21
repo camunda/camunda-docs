@@ -67,7 +67,7 @@ The following visuals provide a simplified view of the deployed namespaces using
 
 #### Orchestration Cluster
 
-![Orchestration Cluster](./img/k8s-cluster-view-orchestration.jpg)
+![Orchestration Cluster](./img/k8s-cluster-view-orchestration.svg)
 
 The Helm chart uses a single Ingress by default, enabling a unified domain with each application accessible via a dedicated path.
 

@@ -56,7 +56,7 @@ The following depictions provide a simplified view of the deployed namespaces us
 
 #### Orchestration Cluster
 
-![Orchestration Cluster](./img/k8s-cluster-view-orchestration.jpg)
+![Orchestration Cluster](./img/k8s-cluster-view-orchestration.svg)
 
 By default, the Helm chart suggests using a single Ingress for Camunda resources, enabling a unified domain with each application accessible via a different path.
 
