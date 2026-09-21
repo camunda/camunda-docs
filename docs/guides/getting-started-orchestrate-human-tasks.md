@@ -243,7 +243,7 @@ You need to deploy both the form and process before running a process instance.
 Deploy your form:
 
 1. Open your form.
-2. Using the **c8run (local)** connection, click the rocket-shaped **Deploy** icon to begin deploying your process.
+2. Using the **c8run (local)** connection, click the rocket-shaped **Deploy** icon to begin deploying your form.
 3. Click **Deploy Form**.
 
 Deploy your process:
@@ -358,7 +358,7 @@ Don't want to build the process yourself? Click this button to create it from a 
 ## Additional resources and next steps
 
 - Learn how to use [BPMN user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) to route tasks to the right users.
-- Learn how to [build more complex forms](/components/modeler/forms/utilizing-forms.md) using the form editor.
+- Learn how to [build more complex forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) using the form editor.
 - Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
 - Get an [introduction to Operate](/components/operate/operate-introduction.md).
 - Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.

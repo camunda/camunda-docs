@@ -30,7 +30,7 @@ The components of the editor interface are as follows:
   Starting with 8.8, you can freely edit the following properties:
   - `name`: Human-friendly name shown when selecting a template and in the properties panel after the template has been applied. The value can be different from the file name.
   - `id`: Identifier of the template. Changing this value creates a new template. We recommend setting a meaningful value (for example, "PaymentConnector", "CreateUserTemplate").
-  - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-a-connector-template) a new version, you need to update the version number manually.
+  - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-an-element-template) a new version, you will be prompted to update the version number if you haven't already.
 
   The value of the `$schema` property is still fixed; manual changes will not be saved.
   :::

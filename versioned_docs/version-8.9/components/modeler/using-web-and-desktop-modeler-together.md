@@ -72,7 +72,7 @@ Camunda recommends storing shared templates in a separate repository:
 
 :::warning
 
-- Desktop Modeler can have multiple templates defined in a single file, which is good practice when defining multiple versions of the same template.
+- Deskto Modeler can have multiple templates defined in a single file, which is good practice when defining multiple versions of the same template.
 - Web Modeler only supports defining one template per file, as storing template versions in a file is not needed (Web Modeler automatically tracks version history).
 
 :::

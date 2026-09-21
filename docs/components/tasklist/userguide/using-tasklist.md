@@ -8,7 +8,7 @@ import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications
 import TaskTileSpecification from '../img/task-tile-specification.png';
 import styles from "./styles.module.css";
 
-The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](/components/modeler/forms/utilizing-forms.md), or simply reviewing and completing the task.
+The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](/components/hub/workspace/modeler/modeling/utilize-forms.md), or simply reviewing and completing the task.
 
 User tasks can be automatically assigned to users and groups in the BPMN process, or they must be self-assigned from Tasklist.
 Once assigned to a user, the task can be completed. The user can unassign the task if they do not intend to work on it.

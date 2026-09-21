@@ -1,7 +1,6 @@
 ---
-id: utilizing-forms
-title: Build forms with Modeler
-description: "Let's learn about Camunda Forms, how to use them, how to model them with a diagram, and deploying."
+title: Utilize forms
+description: "Let's learn about Camunda Forms, how to use, model, and deploy them."
 ---
 
 <span class="badge badge--beginner">Beginner</span>
@@ -23,10 +22,6 @@ To start building a form, log in to your [Camunda 8](https://camunda.io) account
 2. In the workspace, create or open a project.
 3. In the project, click **Create new > Form**.
 
-:::tip
-If using [Desktop Modeler](/components/modeler/about-modeler.md), under **Create a new file**, click **Form**.
-:::
-
 ### Rename your form
 
 Now you can start to build your form by dragging elements from the palette to the canvas, or by using the AI Form Generator at the bottom of the palette. For the purpose of this guide, we'll build a form from scratch.
@@ -44,7 +39,7 @@ In this example, we'll build a form to help with a task in obtaining an email me
 
 Within Forms, can add text fields, numerical values, checkboxes, radio elements, selection menus, text components, and buttons.
 
-1. From the **Components** palette on the left, drag and drop a **Text area** under **Form definition**.
+1. From the **Components** palette on the left, drag and drop a **Text area** to the **Form definition** editor.
 2. Select the **Text area**.
 3. In the properties panel on the right, open the **General** section.
 4. Provide the following data:

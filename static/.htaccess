@@ -221,6 +221,8 @@ RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/us
 RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/?$ /docs/next/components/tasklist/userguide/starting-processes/ [R=301,L]
 
 # Redirects associated with Camunda Hub
+RewriteRule ^docs/next/components/modeler/forms/utilizing-forms$ docs/components/hub/workspace/modeler/modeling/utilize-forms.md [R=301,L]
+RewriteRule ^docs/components/modeler/using-web-and-desktop-modeler-together$ docs/components/modeler/using-hub-and-desktop-modeler-together [R=301,L]
 RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-users/manage-user-groups [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-users/ [R=301,L]

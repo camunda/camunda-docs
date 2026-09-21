@@ -118,7 +118,7 @@ Build governed [AI agents](/reference/glossary.md#ai-agent) with guardrails so t
 
 ### Forms
 
-Some automated processes require human contribution and interaction. [Create and implement custom forms](/components/modeler/forms/utilizing-forms.md) that give work instructions, collect information, and help people make decisions about the tasks they need to complete.
+Some automated processes require human contribution and interaction. [Create and implement custom forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) that give work instructions, collect information, and help people make decisions about the tasks they need to complete.
 
 ### Tasklist
 
@@ -141,13 +141,13 @@ With [Operate](/components/operate/operate-introduction.md), teams can monitor r
 [Camunda Hub](/components/hub/index.md) is a unified platform for managing organizational resources and delivering business processes. It's organized into two levels: organization and workspace.
 
 - **Organization level**: This is the management and governance layer. Center of excellence teams govern the infrastructure and tooling delivery teams need, including managing users, runtime environments, a catalog of shared reusable resources, and workspaces.
-- **Workspace level**: This is the process modeling and delivery layer. Delivery teams design business process and decision models, discover and use approved catalog assets, and deploy projects to development, staging, and production environments.
+- **Workspace level**: This is the process modeling and delivery layer. Delivery teams design business process and decision models, discover and use approved catalog assets, and deploy projects to development, testing, staging, and production environments.
 
-This separation lets center of excellence teams govern infrastructure and standards at the organization level, while delivery teams work within organizational guardrails to design, test, and deploy business solutions at the workspace level.
+With this separation, center of excellence teams govern infrastructure and standards at the organization level, while delivery teams work within organizational guardrails to design, test, and deploy business solutions at the workspace level.
 
 ### Desktop Modeler
 
-[Desktop Modeler](/components/modeler/desktop-modeler/index.md) is a standalone desktop application for modeling business processes. Like the modeling interface in Camunda Hub, it gives business users and developers an intuitive way to design fully-executable process and decision models so their intent is clear, structured, and directly usable by developers. At the same time, Desktop Modeler integrates into your preferred IDE and local filesystem for a professional software development setup.
+[Desktop Modeler](/components/modeler/desktop-modeler/index.md) is a standalone desktop application for modeling business processes. Desktop Modeler gives business users and developers an intuitive way to design fully-executable process and decision models so their intent is clear, structured, and directly usable by developers. At the same time, Desktop Modeler integrates into your preferred IDE and local filesystem for a professional software development setup.
 
 ## How does Camunda 8 compare to other solutions?
 

@@ -16,7 +16,7 @@ A project can contain:
 
 - [BPMN diagrams](/components/modeler/bpmn/bpmn.md)
 - [DMN diagrams](/components/modeler/dmn/dmn.md)
-- [Forms](/components/modeler/forms/utilizing-forms.md)
+- [Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md)
 - [RPA scripts](/components/rpa/overview.md)
 - [Element templates](../modeler/element-templates/manage-element-templates.md)
 - [READMEs](../modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md)
