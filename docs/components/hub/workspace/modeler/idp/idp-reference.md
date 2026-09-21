@@ -10,7 +10,7 @@ import IdpIconPassImg from './img/idp-validation-icon-pass.png';
 import IdpIconCautionImg from './img/idp-validation-icon-caution.png';
 import IdpIconFailImg from './img/idp-validation-icon-fail.png';
 import IdpValidationExampleImg from './img/idp-validation-example.png';
-import IdpDocumentStorageImg from './img/idp-document-storage.png';
+import IdpDocumentStorageImg from './img/idp-document-storage.jpg';
 import IdpTableDataImg from './img/idp-table-data.png';
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
@@ -38,7 +38,7 @@ The document extraction template integrates with Camunda document handling conne
 
 :::note
 
-- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/hub/organization/manage-clusters/manage-secrets.md) to your cluster. See [configuring IDP](idp-configuration.md).
+- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/hub/organization/manage-clusters/manage-secrets.md) to your environment's cluster. See [configuring IDP](idp-configuration.md).
 
 :::
 
@@ -46,10 +46,12 @@ The document extraction template integrates with Camunda document handling conne
 
 IDP stores documents as follows during the different extraction stages:
 
+<!-- image source: https://miro.com/app/board/uXjVIfhgnNg=/?moveToWidget=3458764620329398964&cot=14  -->
+
 <img src={IdpDocumentStorageImg} alt="IDP document storage diagram" class="img-noborder img-800"/>
 
-1. Web Modeler: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Web Modeler itself (SaaS) or the database (Self-Managed).
-1. Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is stored in the cluster using the [document handling](/components/document-handling/getting-started.md) API.
+1. Camunda Hub: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Camunda Hub itself (SaaS) or the database (Self-Managed).
+1. Environment: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is stored in the environment's cluster using the [document handling](/components/document-handling/getting-started.md) API.
 1. Extraction: Finally, when you extract content using a document extraction template, it is stored in an [Amazon AWS S3 bucket](idp-configuration.md#prerequisites), where it can be accessed by AWS Textract.
 
 :::info
@@ -96,7 +98,7 @@ The following models are available when you use the AWS provider with Amazon Bed
 
 Amazon Bedrock LLM extraction models are only available in specific regions.
 
-- You must ensure your selected cluster region supports the LLM extraction model you want to use. For example, if you are using the `eu-central-1` region, you cannot use Claude 3 Haiku as it is only available in US regions.
+- You must ensure your selected environment's cluster region supports the LLM extraction model you want to use. For example, if you are using the `eu-central-1` region, you cannot use Claude 3 Haiku as it is only available in US regions.
 - If you have chosen a model not supported in your region, you will receive a 403 "You don't have access to the model with the specified model ID" exception error.
 - Some newer models (including Claude Sonnet 4) require cross-region inference profiles and are automatically handled by IDP. When you select these models, IDP infers the appropriate regional prefix (`us.`, `eu.`, `apac.`, or `us-gov.`) from your configured AWS region and adds it to enable access across supported regions within your geographic area.
 
@@ -116,17 +118,17 @@ When using Azure, GCP, or an OpenAI Compatible provider, the available extractio
 
 Text extraction engines determine how text is extracted from your documents before the LLM processes the content. You can [select an extraction engine](idp-unstructured-extraction.md#extract-data) per unstructured extraction template to optimize for accuracy, performance, and cost based on your document type.
 
-| Extraction engine           | Provider            | Best for                                        | Description                                                                                                                                                                                                            |
-| :-------------------------- | :------------------ | :---------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Fast Extract                | Built-in            | Digitally generated PDFs                        | A lightweight, built-in PDF text parser. Faster and lower cost than OCR-based engines, but does not support scanned or image-based documents.                                                                          |
-| Multimodal                  | Provider LLM        | Documents where the LLM has vision capabilities | Sends the document directly to the LLM for native interpretation, bypassing a separate text extraction step. Useful when the LLM supports multimodal (text and image) input.                                           |
-| AWS Textract                | AWS                 | Scanned or image-based documents                | Uses [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) OCR for high-accuracy text extraction. Requires AWS provider configuration.                                                |
-| Azure Document Intelligence | Azure               | Scanned or image-based documents                | Uses [Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/) for OCR-based text extraction. Requires Azure provider configuration.                                |
-| GCP Document AI             | GCP                 | Scanned or image-based documents                | Uses [Google Cloud Document AI](https://cloud.google.com/document-ai/docs) for OCR-based text extraction. Requires GCP provider configuration.                                                                         |
-| ABBYY Vantage               | ABBYY (third-party) | Scanned or image-based documents                | Uses [ABBYY Vantage](https://www.abbyy.com/vantage/) OCR for text extraction. Available across all cloud providers when [ABBYY connector secrets](idp-configuration.md#abbyy-secrets) are configured for your cluster. |
+| Extraction engine           | Provider            | Best for                                        | Description                                                                                                                                                                                                                          |
+| :-------------------------- | :------------------ | :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fast Extract                | Built-in            | Digitally generated PDFs                        | A lightweight, built-in PDF text parser. Faster and lower cost than OCR-based engines, but does not support scanned or image-based documents.                                                                                        |
+| Multimodal                  | Provider LLM        | Documents where the LLM has vision capabilities | Sends the document directly to the LLM for native interpretation, bypassing a separate text extraction step. Useful when the LLM supports multimodal (text and image) input.                                                         |
+| AWS Textract                | AWS                 | Scanned or image-based documents                | Uses [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) OCR for high-accuracy text extraction. Requires AWS provider configuration.                                                              |
+| Azure Document Intelligence | Azure               | Scanned or image-based documents                | Uses [Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/) for OCR-based text extraction. Requires Azure provider configuration.                                              |
+| GCP Document AI             | GCP                 | Scanned or image-based documents                | Uses [Google Cloud Document AI](https://cloud.google.com/document-ai/docs) for OCR-based text extraction. Requires GCP provider configuration.                                                                                       |
+| ABBYY Vantage               | ABBYY (third-party) | Scanned or image-based documents                | Uses [ABBYY Vantage](https://www.abbyy.com/vantage/) OCR for text extraction. Available across all cloud providers when [ABBYY connector secrets](idp-configuration.md#abbyy-secrets) are configured for your environment's cluster. |
 
 :::note
-The available extraction engines depend on the configuration of your cluster and the cloud provider selected for your document extraction template. For example, AWS Textract is only available when using the AWS provider, while ABBYY Vantage is available across all providers once its connector secrets are configured. See [configuring IDP](idp-configuration.md) for setup details.
+The available extraction engines depend on the configuration of your environment's cluster and the cloud provider selected for your document extraction template. For example, AWS Textract is only available when using the AWS provider, while ABBYY Vantage is available across all providers once its connector secrets are configured. See [configuring IDP](idp-configuration.md) for setup details.
 :::
 
 ## Optical Character Recognition (OCR) {#ocr}
@@ -138,7 +140,7 @@ You can use the following OCR-based extraction engines:
 - **AWS Textract**: Used for both structured and unstructured extraction with the AWS provider.
 - **Azure Document Intelligence**: Used for unstructured extraction with the Azure provider.
 - **GCP Document AI**: Used for both structured and unstructured extraction with the GCP provider.
-- **ABBYY Vantage**: A third-party OCR engine available for unstructured extraction and document classification across all cloud providers. Requires the [ABBYY connector secrets](idp-configuration.md#abbyy-secrets) to be configured for your cluster.
+- **ABBYY Vantage**: A third-party OCR engine available for unstructured extraction and document classification across all cloud providers. Requires the [ABBYY connector secrets](idp-configuration.md#abbyy-secrets) to be configured for your environment's cluster.
 
 ### AWS Textract OCR capabilities
 
@@ -213,7 +215,7 @@ You can further refine table extraction by:
 
 ## Access rights and permissions
 
-Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles).
+Access to IDP features is determined by your Camunda Hub user role and associated [access rights and permissions](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles).
 
 For example, users with a Viewer or Commenter role only have read-only access to IDP features, and cannot upload documents, manage extraction fields, or publish templates.
 

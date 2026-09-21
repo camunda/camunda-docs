@@ -44,7 +44,7 @@ To build your first AI agent, see the prerequisites below depending on:
 To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:
 
 - [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).
-- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, follow [Run your first local project](../getting-started-example).
+- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, follow [run your first local project](../getting-started-example).
 
 ### Supported models
 
@@ -92,7 +92,7 @@ Depending on your working environment, follow the corresponding steps below.
 If you’re using Camunda 8 Run and installed it using the [starter package](./getting-started-example.md#download-the-camunda-8-starter-package), the blueprint was already downloaded as part of it.
 :::
 
-2. Open the blueprint BPMN diagram in Desktop Modeler.
+2. Open the blueprint BPMN diagram in Desktop Modeler or [upload them to Camunda Hub](/components/hub/workspace/modeler/modeling/import-diagram.md).
 
 </TabItem>
 </Tabs>
@@ -236,7 +236,7 @@ The example blueprint downloaded in step one is preconfigured to use AWS Bedrock
 Deploy and run your AI agent in your Camunda cluster.
 
 :::important
-Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, make sure you’re running a cluster with version 8.8 or higher.
+Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, [connect a cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) with version 8.8 or higher to your project before reading further.
 :::
 
 Depending on your working environment, test your agent by following the corresponding steps below.
@@ -249,10 +249,10 @@ Depending on your working environment, test your agent by following the correspo
 
 <TabItem value="saas">
 
-1. In [Camunda Hub](/components/hub/workspace/modeler/index.md), navigate to your workspace.
-1. In your workspace, open a project. Then, open a BPMN file.
+1. In [Camunda Hub](/components/hub/workspace/modeler/index.md), open the BPMN diagram.
 1. Select the [**Test**](/components/hub/workspace/modeler/validation/test-your-process.md) tab.
 1. Select the cluster you want to deploy and test the process on.
+1. Click **Deploy**.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
 1. You can [monitor the process execution](#monitor-the-process-execution) in Operate.
@@ -265,8 +265,12 @@ Because the AI agent in this example is an ad-hoc sub-process, you can't use **T
 
 <TabItem value="self-managed">
 
-1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-1. Deploy the start event's linked form. Open the form in Desktop Modeler and click **Deploy**. [Linked forms are not deployed automatically with the process](/components/modeler/forms/utilizing-forms.md#deploy-a-linked-form). Skipping this step causes Tasklist to fail with "We were not able to load the form" when you try to start the process.
+1. If using **Desktop Modeler**:
+   1. [Deploy the process model](/components/modeler/desktop-modeler/deploy-diagram.md) to your local Camunda 8 environment.
+   1. Open each form, and click **Deploy**. [Linked forms are not deployed automatically with the process](/components/modeler/forms/utilizing-forms.md#deploy-a-linked-form). Skipping this step causes Tasklist to fail with "We were not able to load the form" when you try to start the process.
+1. If using **Camunda Hub**, choose one of the following options:
+   - [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md) as a bundle.
+   - [Deploy **All resources**](/components/hub/workspace/modeler/run-or-publish-your-process.md) from the diagram or a form.
 1. Open Tasklist in your browser at http://localhost:8080/tasklist.
 1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
 1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.

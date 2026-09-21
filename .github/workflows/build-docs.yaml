@@ -90,7 +90,7 @@ jobs:
           echo "container_ip=${container_ip}" >> $GITHUB_ENV
           echo "domain_to_test=http://${container_ip}:8080" >> $GITHUB_ENV
       - name: Wait for running docs web server
-        uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1 # v1.0.1
+        uses: nev7n/wait_for_response@8bfc0523300e46e24e1b42d6783680aa921ee6cc # v1.2.0
         with:
           url: ${{ env.domain_to_test }}
       - name: Download sitemap from production

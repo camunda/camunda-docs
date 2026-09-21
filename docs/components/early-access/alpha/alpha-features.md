@@ -56,6 +56,12 @@ href: '/docs/next/components/early-access/alpha/a2a-client/',
 label: 'A2A Client',
 docId: 'components/early-access/alpha/a2a-client/a2a-client',
 },
+{
+type: 'link',
+href: '/docs/next/components/concepts/secret-resolution/',
+label: 'Secret resolution',
+docId: 'components/concepts/secret-resolution',
+},
 ]}
 />
 
