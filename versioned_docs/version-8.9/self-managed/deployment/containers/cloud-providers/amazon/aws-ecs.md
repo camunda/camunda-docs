@@ -53,12 +53,12 @@ The result is a fully functioning Camunda Orchestration Cluster deployed in a hi
 
 The architecture outlined below describes a standard Zeebe three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ -->
+<!-- Diagram source: architecture.excalidraw. Open and edit at https://excalidraw.com -->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
 
 _Infrastructure diagram for the Orchestration Cluster ECS architecture (click the image to view the PDF version)_
 
-[![AWS ECS Architecture](./assets/architecture.jpg)](./assets/architecture.pdf)
+[![AWS ECS Architecture](./assets/architecture.svg)](./assets/architecture.pdf)
 
 After completing this guide, you will have:
 
