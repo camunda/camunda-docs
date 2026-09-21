@@ -112,7 +112,7 @@ Element templates configure properties through bindings. If a `zeebe:agentDefini
 
 ## Step 2: Activate the job with a lease
 
-Activate the job for the agent element with `withLease` set to `true`. The activation response returns a `leaseToken` alongside the `jobKey` and `elementInstanceKey` you need for every later call.
+Activate the job for the agent element with `withLease` set to `true`. The activation response returns a `jobLeaseToken` alongside the `jobKey` and `elementInstanceKey` you need for every later call.
 
 ```bash
 curl -L 'http://localhost:8080/v2/jobs/activation' \
@@ -133,7 +133,7 @@ See [activate jobs](/apis-tools/orchestration-cluster-api-rest/specifications/ac
 
 ## Step 3: Create the agent instance
 
-Create the agent instance as the first step of handling the job, before your agent makes its first model call. Establish the agent's initial configuration through a `CONFIGURATION` history item included in the same request, and pass the `jobKey` and `jobLease` from the job activation so Camunda can associate the item with this run. The response returns the `agentInstanceKey` that identifies the agent for every later call.
+Create the agent instance as the first step of handling the job, before your agent makes its first model call. Establish the agent's initial configuration through a `CONFIGURATION` history item included in the same request, and pass the `jobKey` and `jobLeaseToken` from the job activation so Camunda can associate the item with this run. The response returns the `agentInstanceKey` that identifies the agent for every later call.
 
 ```bash
 curl -L 'http://localhost:8080/v2/agent-instances' \
@@ -142,7 +142,7 @@ curl -L 'http://localhost:8080/v2/agent-instances' \
 -d '{
   "elementInstanceKey": "2251799813685254",
   "jobKey": "2251799813685260",
-  "jobLease": "eyJhY3RpdmF0aW9uIjoxfQ",
+  "jobLeaseToken": "eyJhY3RpdmF0aW9uIjoxfQ",
   "history": [
     {
       "historyItemId": "run-7f3a-config",
@@ -172,7 +172,7 @@ curl -L 'http://localhost:8080/v2/agent-instances' \
 | :------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `elementInstanceKey` | Yes      | The key of the agent element instance, taken from the job activation response. Camunda derives the process instance, element ID, process definition, and tenant from it.                                                                               |
 | `jobKey`             | Yes      | The key of the job activation from [step 2](#step-2-activate-the-job-with-a-lease). Required whenever `history` is provided.                                                                                                                           |
-| `jobLease`           | Yes      | The lease token from the job activation, the same one used in [step 5](#step-5-report-the-conversation-history).                                                                                                                                       |
+| `jobLeaseToken`      | Yes      | The lease token from the job activation, the same one used in [step 5](#step-5-report-the-conversation-history).                                                                                                                                       |
 | `history`            | Yes      | A batch containing at least one `CONFIGURATION` item that reports `model`, `provider`, and `systemPrompt`; `limits` and `tools` on that item are optional. See [step 5](#step-5-report-the-conversation-history) for the full shape of a history item. |
 
 Report the limits your runtime enforces even though Camunda doesn't enforce them for an external agent. Operate shows model calls against the configured limit, which is what makes limit proximity visible when you [detect off-rail agents](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md).
@@ -210,7 +210,7 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 -d '{
   "elementInstanceKey": "2251799813685254",
   "jobKey": "2251799813685260",
-  "jobLease": "eyJhY3RpdmF0aW9uIjoxfQ",
+  "jobLeaseToken": "eyJhY3RpdmF0aW9uIjoxfQ",
   "status": "THINKING",
   "history": [
     {
@@ -251,7 +251,7 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 -d '{
   "elementInstanceKey": "2251799813685254",
   "jobKey": "2251799813685260",
-  "jobLease": "eyJhY3RpdmF0aW9uIjoxfQ",
+  "jobLeaseToken": "eyJhY3RpdmF0aW9uIjoxfQ",
   "status": "TOOL_CALLING",
   "history": [
     {
@@ -306,7 +306,7 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 | `tools`         | No       | The complete list of tools available to the agent, replacing any previously reported list. `CONFIGURATION` items only; omit to leave the list unchanged, or send an empty array to clear it.                                                                                                       |
 | `producedAt`    | Yes      | The timestamp from your runtime for when the message was produced.                                                                                                                                                                                                                                 |
 
-Whenever you send `history`, also send the `jobKey` and `jobLease` from the job activation. Camunda records each item with a `PENDING` commit status and promotes it to `COMMITTED` when the job completes successfully. If the job fails and a later activation supersedes the lease, the items are marked `DISCARDED` instead.
+Whenever you send `history`, also send the `jobKey` and `jobLeaseToken` from the job activation. Camunda records each item with a `PENDING` commit status and promotes it to `COMMITTED` when the job completes successfully. If the job fails and a later activation supersedes the lease, the items are marked `DISCARDED` instead.
 
 The response echoes one entry per submitted item, in request order, with the `historyItemKey` Camunda assigned and an `isDuplicate` flag showing whether the item had already been recorded.
 
@@ -319,7 +319,7 @@ curl -L 'http://localhost:8080/v2/jobs/2251799813685260/completion' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -d '{
-  "leaseToken": "eyJhY3RpdmF0aW9uIjoxfQ",
+  "jobLeaseToken": "eyJhY3RpdmF0aW9uIjoxfQ",
   "variables": {
     "response": "Retrieval-augmented generation research since 2024 focuses on..."
   }

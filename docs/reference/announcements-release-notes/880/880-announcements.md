@@ -77,6 +77,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 
 | Patch release                                                       | Artifact   | Type            | Key change                                                                                                                                            |
 | :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.38](https://github.com/camunda/camunda/releases/tag/8.8.38)    | Core       | Known issue     | [Process definition draining deletion requires an 8.9.19+ upgrade target](#draining-deletion-upgrade-constraint)                                      |
 | [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                                        |
 | [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                                       |
 | [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29)    | Core       | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
@@ -1024,6 +1025,29 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 </div>
 
 ### Engine
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Process definition draining deletion requires an 8.9.19+ upgrade target {#draining-deletion-upgrade-constraint}
+
+Before 8.8.38, deleting a process definition that still had running instances stalled the cluster-wide deployment distribution queue. No further process deployments or deletions were distributed until those instances finished running.
+
+From 8.8.38, the definition drains asynchronously so deployments are no longer held up, as it is marked for deletion immediately and removed once its
+instances finish. As a result, this draining introduces new records that older 8.9 patches cannot replay.
+
+**Safe upgrade targets:** 8.9.19 or later.
+
+- This constraint primarily affects Self-Managed operators, who choose their own target patch.
+- Camunda 8 SaaS is not affected as its upgrade path is gated to safe targets.
+
+**Action:** When upgrading a Self-Managed cluster from 8.8 to 8.9, you must target **8.9.19 or later**. See the [Self-Managed upgrade guide](/self-managed/upgrade/index.md).
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

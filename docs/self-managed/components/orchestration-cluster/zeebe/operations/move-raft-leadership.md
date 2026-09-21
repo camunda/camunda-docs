@@ -40,16 +40,16 @@ Use the Management API to retrieve the current cluster topology and partition di
 curl \
   'http://{zeebe-gateway}:9600/actuator/cluster' \
   -H 'accept: application/json' \
-  | jq '.partitionDistribution.zones[] | {name, priority}'
+  | jq '.partitioning.zones[] | {name, priority}'
 ```
 
-The command returns each configured zone's name and priority. If `partitionDistribution.zones` is missing or empty, the cluster isn't zone-aware and can't use this procedure. If `jq` isn't installed, omit the pipe to `jq` and manually inspect `partitionDistribution.zones` in the JSON response. You can also inspect `brokers[].partitions[]` in the full response to see the priority assigned to each partition replica.
+The command returns each configured zone's name and priority. If `partitioning.zones` is missing or empty, the cluster isn't zone-aware and can't use this procedure. If `jq` isn't installed, omit the pipe to `jq` and manually inspect `partitioning.zones` in the JSON response. You can also inspect `brokers[].partitions[]` in the full response to see the priority assigned to each partition replica.
 
 A higher priority makes a replica the preferred leader during an election. The zone with the highest configured priority is therefore the preferred zone for Raft partition leaders. Recording the current order also ensures that you preserve the relative priorities of any zones you aren't swapping.
 
 ## Reorder the zone priorities
 
-The [Partition distribution API](management-api.md#partition-distribution-api) accepts a `zonePriorities` list. The first zone in the list receives the highest existing priority, the second zone receives the next highest priority, and so on.
+The [Partitioning API](management-api.md#partitioning-api) accepts a `zonePriorities` list. The first zone in the list receives the highest existing priority, the second zone receives the next highest priority, and so on.
 
 The request must list exactly the currently configured zones. If the list doesn't exactly match the currently configured zones, the request is rejected. The operation is idempotent. To exchange the priorities of two zones, reverse their positions and leave the other zones in their current order.
 
@@ -57,7 +57,7 @@ For example, if `zone-a` currently has the highest priority and `zone-b` has the
 
 ```bash
 curl -X PUT \
-  'http://{zeebe-gateway}:9600/actuator/cluster/partition-distribution?dryRun=true' \
+  'http://{zeebe-gateway}:9600/actuator/cluster/partitioning?dryRun=true' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -69,7 +69,7 @@ Review the `plannedChanges` and `expectedTopology` fields in the dry-run respons
 
 ```bash
 curl -X PUT \
-  'http://{zeebe-gateway}:9600/actuator/cluster/partition-distribution' \
+  'http://{zeebe-gateway}:9600/actuator/cluster/partitioning' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
