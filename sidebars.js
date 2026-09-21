@@ -227,12 +227,13 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         {
           type: "category",
-          label: "Secret resolution",
+          label: "Secret management",
           link: {
             type: "doc",
-            id: "components/concepts/secret-resolution",
+            id: "components/concepts/secret-management",
           },
           items: [
+            "components/concepts/secret-resolution",
             "components/concepts/secret-resolution-and-job-activation",
             "components/concepts/secret-resolution-incidents",
           ],
@@ -394,19 +395,21 @@ module.exports = {
           items: [
             {
               type: "category",
-              label: "Microsoft Teams",
+              label: "App Integrations",
               link: {
                 type: "doc",
-                id: "components/camunda-integrations/ms-teams/ms-teams",
+                id: "components/camunda-integrations/app-integrations/app-integrations",
               },
               items: [
-                "components/camunda-integrations/ms-teams/ms-teams-installation",
-                "components/camunda-integrations/ms-teams/ms-teams-troubleshoot",
-                "components/camunda-integrations/ms-teams/ms-teams-chatbot",
-                "components/camunda-integrations/ms-teams/ms-teams-tabs",
-                "components/camunda-integrations/ms-teams/ms-teams-notifications",
+                "components/camunda-integrations/app-integrations/microsoft-teams",
+                "components/camunda-integrations/app-integrations/slack",
+                "components/camunda-integrations/app-integrations/notification-rules",
+                "components/camunda-integrations/app-integrations/installation",
+                "components/camunda-integrations/app-integrations/troubleshoot",
               ],
             },
+            "components/camunda-integrations/ms-teams",
+            "components/camunda-integrations/slack",
             {
               type: "category",
               label: "SAP",
@@ -998,6 +1001,7 @@ module.exports = {
             id: "components/connectors/use-connectors/index",
           },
           items: [
+            "components/connectors/use-connectors/migrate-secrets",
             "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",

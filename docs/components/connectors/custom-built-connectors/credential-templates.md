@@ -177,7 +177,7 @@ Mark a credential template field as holding a secret reference with `secret: tru
 }
 ```
 
-This is a rendering hint for the credential editor in Hub and Desktop Modeler. It doesn't restrict what the field can hold, but it tells the editor to treat entered values as secret references rather than literals. A user enters an existing secret's key, and the editor stores it as `camunda.secrets.<KEY>`. The engine resolves this reference when the job worker or connector task activates; your connector never sees the marker itself, only the resolved value.
+This is a rendering hint for the credential editor in Hub and Desktop Modeler. It doesn't restrict what the field can hold, but it tells the editor to treat entered values as secret references rather than literals. A user enters an existing secret's key, and the editor stores it as `camunda.secrets.<KEY>`. The engine resolves this reference when the job worker or connector task activates; your connector never sees the marker itself, only the resolved value. See [Secret resolution](/components/concepts/secret-resolution.md) for how `camunda.secrets.<name>` references are resolved.
 
 Your connector cannot create the secret itself from a credential field. The secret must already exist on the cluster. Don't design a credential template that requires a secret your users have no way to create ahead of time.
 

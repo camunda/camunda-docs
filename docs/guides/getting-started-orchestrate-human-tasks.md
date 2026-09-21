@@ -200,6 +200,11 @@ Once the form is designed, verify it's linked properly in your process:
 
 1. Open the process you created in **[Step 1](#step-1-create-a-new-process)** by clicking on the process file's name in the top bar.
 2. Select the user task, and open the **Form** section in the properties panel.
+
+:::note
+If the properties panel for your task doesn't open automatically, navigate to **Window > Toggle Properties Panel** to open it manually.
+:::
+
 3. In the form section, select **Camunda Form**, and enter the **Form ID** for the form you created in **[Step 2](#step-2-design-a-form)**.
 
 </TabItem>
@@ -218,7 +223,7 @@ Human-centric processes involving user tasks seamlessly unfold within Tasklist, 
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-If you have not yet configured a cluster to deploy to, you'll see a notification. You must [configure at least one cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) before moving on:
+If you have not yet configured a cluster to deploy to, you'll see a notification. You must [configure at least one cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) before moving on.
 
 1. At the top right of the modeling interface, click **Deploy & run** to deploy the process to your cluster.
 2. Select a target cluster.
