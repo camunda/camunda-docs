@@ -845,10 +845,10 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```
 
    ```text
-   NAME            AGE   INSTANCES   READY   STATUS                     PRIMARY
-   pg-identity     10m   2           2       Cluster in healthy state   pg-identity-1
-   pg-keycloak     10m   2           2       Cluster in healthy state   pg-keycloak-1
-   pg-webmodeler  10m   2           2       Cluster in healthy state   pg-webmodeler-1
+   NAME          AGE   INSTANCES   READY   STATUS                     PRIMARY
+   pg-identity   10m   2           2       Cluster in healthy state   pg-identity-1
+   pg-keycloak   10m   2           2       Cluster in healthy state   pg-keycloak-1
+   pg-hub        10m   2           2       Cluster in healthy state   pg-hub-1
    ```
 
    A cluster stuck at `1` ready usually has its second pod `Pending`, because the required anti-affinity found no second schedulable node.
