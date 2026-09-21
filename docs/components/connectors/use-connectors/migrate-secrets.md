@@ -7,7 +7,7 @@ description: "Move connector models from the legacy {{secrets.<name>}} syntax to
 `camunda.secrets.<name>` is the recommended secret reference syntax, resolved centrally by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) rather than by the [connector runtime](/reference/glossary.md#connector-runtime). This page explains how to move existing connector models from the legacy `{{secrets.<name>}}` syntax to `camunda.secrets.<name>`, including a fallback mode that lets you migrate incrementally without updating every model at once.
 
 :::note
-`camunda.secrets.<name>` is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may change in future releases. The legacy `{{secrets.<name>}}` syntax remains fully supported, so you can migrate at your own pace.
+The legacy `{{secrets.<name>}}` syntax remains fully supported, so you can migrate at your own pace.
 :::
 
 ## Why migrate

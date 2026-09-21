@@ -14,8 +14,6 @@ The legacy form was the subject of [security notice 61](/reference/notices.md#no
 Desktop Modeler and Web Modeler flag legacy secret usage when the diagram's selected engine supports `camunda.secrets.<name>`. Use that hint to guide your migration to the new syntax.
 :::
 
-This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
-
 Secret resolution is available in both SaaS and Self-Managed. See [Availability](/components/concepts/secret-resolution-and-job-activation.md#availability) for what each offering provides and what you configure. For a broader overview of how secrets work across Camunda 8, including where secret values are stored and created, see [Secret management](secret-management.md).
 
 ## Reference syntax
@@ -74,7 +72,6 @@ Listing is different by design. What a store's cache holds is the values it has 
 - More than one secret store per physical tenant. A reference always addresses the `default` store.
 - Pinning an AWS Secrets Manager secret to a version stage other than `AWSCURRENT`, or a GCP Secret Manager secret to a version other than `latest`.
 - Filtering or paginating a `POST /v2/secrets/list` response, see [Secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md#list-secrets).
-- The general limitations that apply to every alpha feature, see [alpha features](/components/early-access/alpha/alpha-features.md).
 
 ## Related resources
 

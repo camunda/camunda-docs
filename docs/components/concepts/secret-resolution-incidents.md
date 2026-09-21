@@ -6,8 +6,6 @@ description: "Diagnose the incidents raised when a job's secret references canno
 
 When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the cluster responds in one of three ways: it raises a `SECRET_RESOLUTION_ERROR` incident, raises a `MESSAGE_SIZE_EXCEEDED` incident, or defers the job and retries it without raising an incident.
 
-This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
-
 Only the two incident cases require operator action.
 
 Use this page to diagnose an existing secret resolution or activation problem. To understand how secret resolution and job activation work, see [Secret resolution and job activation](secret-resolution-and-job-activation.md).
