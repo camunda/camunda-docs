@@ -79,8 +79,6 @@ The following integrations intentionally cross this audience boundary:
 - Connectors calls the Orchestration Cluster as a client and uses the Orchestration Cluster's audience. See [Configure Connectors](#configure-connectors).
 - Camunda Hub deployments that use `BEARER_TOKEN` authentication forward the user's Hub token to the Orchestration Cluster. Configure the cluster to accept the Camunda Hub UI audience in addition to its own audience. See [connect Admin to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 
-If you set `global.identity.auth.camundaHub.clientApiAudience` or `global.identity.auth.camundaHub.publicApiAudience`, those values override the corresponding Web Modeler values.
-
 ## Configure redirect URIs
 
 For each OIDC client you have created, configure the redirect URIs that correspond to where Camunda components will be accessible from users' browsers.
