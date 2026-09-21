@@ -5,6 +5,12 @@ sidebar_label: Cross-region cold recovery
 description: Recover an Orchestration Cluster in a secondary region from replicated backups.
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 Cross-region cold recovery creates a new Orchestration Cluster in a secondary region and restores selected backup data after a primary-region outage. A warm standby cluster is not running before the outage.
 
 Cross-region cold recovery is generally available starting in Camunda 8.10. It is supported for AWS and GCP clusters, including AWS clusters that use a customer-managed [Bring Your Own Key (BYOK)](/components/saas/byok/index.md) configuration.
@@ -24,6 +30,8 @@ Before you can use cross-region cold recovery, ensure the following prerequisite
 - After failover, re-establish private connectivity to the recovered cluster by creating or switching the regional VPC endpoint. This is the customer's responsibility.
 
 ## Fail over
+
+Follow these steps to fail over to your recovery region, restore a cluster from an available backup, and redirect client traffic to it:
 
 1. Confirm that the primary region is unavailable and start failover in Console or API.
 2. Select one or more backups available in the recovery region, and select the backup to restore.
