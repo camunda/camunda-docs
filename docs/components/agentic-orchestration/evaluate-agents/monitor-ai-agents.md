@@ -119,7 +119,7 @@ Use the copy icon in any of these expanded views to copy its content.
 
 ## Step 5: Understand how agent memory is stored
 
-In [Camunda Hub](/docs/components/hub/workspace/modeler/index.md) or Desktop Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
 
 By default, agent memory uses the **In Process** type, which stores it as part of the agent context, the same underlying data the conversation history in [step 4](#step-4-review-the-conversation-history) is built from.
 
@@ -135,7 +135,7 @@ Go back to Operate. In the **User Feedback** element, you will see the execution
 
 In this case, the required action is to provide feedback on the agent results. To do so:
 
-1. [Open Tasklist](/docs/components/tasklist/userguide/using-tasklist.md#open-tasklist).
+1. [Open Tasklist](/components/tasklist/userguide/using-tasklist.md#open-tasklist).
 2. Locate the user feedback task and assign it to yourself by clicking **Assign to me**.
 3. Analyze the result. You will see a joke, as requested in the prompt.
 4. You can follow up with more prompts to continue testing your AI agent.
