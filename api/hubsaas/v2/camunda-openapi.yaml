@@ -125,6 +125,8 @@ paths:
     $ref: catalog.yaml#/paths/~1catalog~1assets~1search
   /catalog/assets/{assetKey}/project-usages/search:
     $ref: catalog.yaml#/paths/~1catalog~1assets~1{assetKey}~1project-usages~1search
+  /catalog/assets/{assetKey}/file-usages/search:
+    $ref: catalog.yaml#/paths/~1catalog~1assets~1{assetKey}~1file-usages~1search
   /files:
     $ref: files.yaml#/paths/~1files
   /files/{fileKey}:
