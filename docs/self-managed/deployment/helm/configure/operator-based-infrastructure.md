@@ -784,7 +784,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 Deployments created before the high availability defaults run one instance per PostgreSQL cluster, with `pg_wal` inside the data volume. Moving them to the current defaults is an in-place change: CloudNativePG clones a second instance from the running primary and relocates `pg_wal` onto its new volume by itself. You do not dump, restore, or recreate anything.
 
-Plan for one short interruption. CloudNativePG applies the new pod specification as a [rolling update](https://cloudnative-pg.io/docs/1.30/rolling_update/): replicas first, the primary last. With the default `primaryUpdateMethod: restart`, the primary restarts in place, which interrupts open connections for a few seconds.
+Plan for one short interruption per cluster. CloudNativePG applies the new pod specification as a [rolling update](https://cloudnative-pg.io/docs/1.30/rolling_update/): replicas first, the primary last. With the default `primaryUpdateMethod: restart`, the primary restarts in place, which interrupts open connections to that cluster for a few seconds. The clusters migrate independently, so the interruptions do not have to happen at the same time.
 
 ### Before you start
 
@@ -806,10 +806,18 @@ Plan for one short interruption. CloudNativePG applies the new pod specification
        size: 5Gi
    ```
 
-1. Apply the change, either with `deploy.sh` or directly:
+1. Apply the change. `deploy.sh` covers both manifests and waits for each cluster to be fully ready:
+
+   ```bash
+   ./deploy.sh
+   ```
+
+   To apply them directly instead, remember the orchestration cluster lives in its own file. Applying only the first manifest leaves `pg-camunda` on the single-instance shape:
 
    ```bash
    kubectl apply --server-side -f postgresql-clusters.yml -n camunda
+   # only if you deploy the orchestration database (RDBMS secondary storage)
+   kubectl apply --server-side -f postgresql-orchestration-cluster.yml -n camunda
    ```
 
 1. Watch the operator converge. It clones the new instance, then restarts the primary to attach its WAL volume:
@@ -820,33 +828,57 @@ Plan for one short interruption. CloudNativePG applies the new pod specification
 
    The phase moves through `Creating a new replica`, `Waiting for the instances to become active`, and `Primary instance is being restarted without a switchover` before returning to `Cluster in healthy state`.
 
-1. Confirm both instances are ready and sitting on different nodes:
+1. Confirm every cluster reports both instances ready:
 
    ```bash
-   kubectl get pods -n camunda -l cnpg.io/cluster=pg-identity -o wide
+   kubectl get cluster -n camunda
    ```
 
-1. Confirm `pg_wal` moved onto the dedicated volume on every instance. It becomes a symbolic link, and the original directory content is moved for you:
+   ```text
+   NAME            AGE   INSTANCES   READY   STATUS                     PRIMARY
+   pg-identity     10m   2           2       Cluster in healthy state   pg-identity-1
+   pg-keycloak     10m   2           2       Cluster in healthy state   pg-keycloak-1
+   pg-webmodeler   10m   2           2       Cluster in healthy state   pg-webmodeler-1
+   ```
+
+   A cluster stuck at `1` ready usually has its second pod `Pending`, because the required anti-affinity found no second schedulable node.
+
+1. Confirm the instances of each cluster sit on different nodes:
 
    ```bash
-   kubectl exec -n camunda pg-identity-1 -c postgres -- ls -ld /var/lib/postgresql/data/pgdata/pg_wal
+   kubectl get pods -n camunda -l cnpg.io/podRole=instance -o wide
+   ```
+
+1. Confirm `pg_wal` moved onto the dedicated volume on every instance of every cluster. It becomes a symbolic link, and the original directory content is moved for you:
+
+   ```bash
+   for pod in $(kubectl get pods -n camunda -l cnpg.io/podRole=instance -o name); do
+     echo "$pod"
+     kubectl exec -n camunda "${pod#pod/}" -c postgres -- ls -ld /var/lib/postgresql/data/pgdata/pg_wal
+   done
    ```
 
    ```text
    lrwxrwxrwx 1 postgres tape 30 ... /var/lib/postgresql/data/pgdata/pg_wal -> /var/lib/postgresql/wal/pg_wal
    ```
 
-1. Confirm the standby is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
+1. Confirm the standby of each cluster is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
 
    ```bash
-   kubectl exec -n camunda pg-identity-1 -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
+   for cluster in pg-identity pg-keycloak pg-webmodeler; do
+     primary=$(kubectl get pod -n camunda -l "cnpg.io/cluster=$cluster,cnpg.io/instanceRole=primary" -o jsonpath='{.items[0].metadata.name}')
+     echo -n "$cluster: "
+     kubectl exec -n camunda "$primary" -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
+   done
    ```
 
    ```text
-   streaming
+   pg-identity: streaming
+   pg-keycloak: streaming
+   pg-webmodeler: streaming
    ```
 
-   Until this reports `streaming`, the standby is not a switchover candidate, and a drain started early stalls with `Current primary is running on unschedulable node, but there are no valid candidates` in the operator log.
+   Until a cluster reports `streaming`, its standby is not a switchover candidate, and a drain started early stalls with `Current primary is running on unschedulable node, but there are no valid candidates` in the operator log.
 
 1. Verify the result by draining the node that hosts the primary, which is the operation that failed before the migration:
 
