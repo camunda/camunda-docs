@@ -133,4 +133,26 @@ While a provider is unreachable:
 
 Watch for that warning in your log pipeline. Because an unreachable provider no longer stops the cluster, the warning is how you learn that part of your authentication traffic is failing.
 
+## Give the redirect URI a callback path
+
+The cluster checks `camunda.security.authentication.oidc.redirect-uri` while it starts, and refuses to start when the value is not a complete callback URL. Set a value that:
+
+- starts with `{baseUrl}`, or carries an explicit `http` or `https` scheme and a host,
+- names a port between 1 and 65535 if it names a port at all,
+- ends in the callback path your provider redirects to, such as `/sso-callback`,
+- carries no fragment (`#`).
+
+The default value `{baseUrl}/sso-callback` meets all of these.
+
+| Value                                      | Accepted                            |
+| ------------------------------------------ | ----------------------------------- |
+| `{baseUrl}/sso-callback`                   | Yes                                 |
+| `https://camunda.example.com/sso-callback` | Yes                                 |
+| `https://camunda.example.com`              | No, the callback path is missing    |
+| `/sso-callback`                            | No, the scheme and host are missing |
+
+:::caution Upgrade note
+A cluster that only serves API clients never uses its redirect URI, so a value without a callback path may have gone unnoticed there. Such a cluster fails to start after the upgrade. Correct the value before you upgrade.
+:::
+
 A comprehensive list of available configuration properties can be found in [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
