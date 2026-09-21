@@ -81,7 +81,7 @@ The Orchestration Cluster exposes two services:
 
 #### Camunda Hub
 
-![Camunda Hub and Management Identity](./img/management-cluster.jpg)
+![Camunda Hub and Management Identity](./img/management-cluster.svg)
 
 Camunda Hub and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
