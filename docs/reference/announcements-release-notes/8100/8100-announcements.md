@@ -770,6 +770,25 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OIDC redirect URI must include a callback path
+
+The Orchestration Cluster validates the configured OIDC redirect URI while it starts, and refuses to start when the value is not a complete callback URL — for example, when it names only a host and no callback path such as `/sso-callback`. A cluster that only serves API clients never follows its redirect URI, so an incomplete value can go unnoticed on 8.9 and surfaces as a cluster that does not start on 8.10. The default value `{baseUrl}/sso-callback`, and Helm deployments configured through `orchestration.security.authentication.oidc.redirectUrl`, are unaffected.
+
+**Action:** Check `camunda.security.authentication.oidc.redirect-uri`, and the same property of each configured provider, before upgrading.
+
+<p className="link-arrow">[OIDC redirect URI in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#oidc-redirect-uri-must-include-a-callback-path)</p>
+
+<p className="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
