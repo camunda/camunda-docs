@@ -10,7 +10,7 @@ Discovery builds a faithful picture of how a process runs today. ProcessOS Harne
 
 ## Choose the right data sources
 
-Discovery succeeds or fails on what you point it at - This is not our experience. Do not waste too much time curating data sources for the first iteration. Start with what you have on hand and add more sources where required.
+"Discovery results depend on the input" - This right, but frequently judging the input is a challange in it self. Do not waste too much time curating data sources for the first iteration. Start with what you have on hand and add more sources where required.
 
 - Prefer primary artifacts, such as exported legacy process definitions, production configuration, and real forms, over summary slide decks.
 - Include the systems the process touches, not just the process description, so integration points surface early.
@@ -21,37 +21,30 @@ Check what you're allowed to share before you point a specialist at a source, de
 
 ## Discovery specialists
 
-Discovery specialists extract insights from specific source types. Choose specialists deliberately. The `specialists` setting determines which sources ProcessOS Harness reads. Removing the `web` specialist keeps a run entirely on internal material.
+Discovery specialists extract insights from specific source types. The specialists setting determines which sources ProcessOS Harness reads.
 
-The Camunda FDE Team can support you with client-specific specialists.
+ProcessOS Harness comes with for specalists. Future versions will have a plugin meachinsm to easly add specalists. For now, the Camunda Team can support you with client-specific specialists.
 
 ### Web
 
-The web specialist searches public websites, API documentation, and product documentation.
+The web specialist searches public websites, API documentation, and product documentation. Removing the `web` specialist keeps a run entirely on internal material.
 
 ### Filesystem
 
-The filesystem specialist searches local Markdown, PDF, BPMN, CSV, and spreadsheet files. The `source-mode` setting controls how the filesystem specialist treats the files you list: `hint` reads them first and then searches more broadly, while `allowlist` reads only those files.
+The filesystem specialist searches local Markdown, PDF, BPMN, CSV, and spreadsheet files.
+
+The `source-mode` setting controls how the filesystem specialist treats the files you list: `hint` reads them first and then searches more broadly, while `allowlist` reads only those files.
 
 ### GitHub
 
 The GitHub specialist searches issues, pull requests, and commit history. This specialist requires the `gh` CLI.
 
-## Actions
+## WIP - Discovery actions
 
-• Define process scope •
-
-- Define high level phases •
+- Define process scope
+- Define high level phases
 - Define detailed processes
 - Sytem diagramms??? - map the external systems and manual artifacts the process integrates `/process-os-system-context`
-
-## Map the system context
-
-After discovery has produced output, map the external systems and manual artifacts the process integrates with:
-
-```bash
-/process-os-system-context
-```
 
 ## Next step
 
