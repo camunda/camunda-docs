@@ -69,4 +69,4 @@ ProcessOS Harness is distributed through repositories available to early access 
 
 - Learn how the [governance process](get-started/governance-process.md) guides you between milestones.
 - Learn how [review cycles](get-started/review-cycle.md) bring SMEs into each phase.
-- Start the first phase, described in [discover the as-is process](phases/discovery.md).
+- Start the first phase, described in [discover the as-is process](phases/1-discovery.md).

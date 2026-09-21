@@ -21,7 +21,9 @@ Check what you're allowed to share before you point a specialist at a source, de
 
 ## Discovery specialists
 
-Discovery specialists extract insights from specific source types.
+Discovery specialists extract insights from specific source types. Choose specialists deliberately. The `specialists` setting determines which sources ProcessOS Harness reads. Removing the `web` specialist keeps a run entirely on internal material.
+
+The Camunda FDE Team can support you with client-specific specialists.
 
 ### Web
 
@@ -34,14 +36,6 @@ The filesystem specialist searches local Markdown, PDF, BPMN, CSV, and spreadshe
 ### GitHub
 
 The GitHub specialist searches issues, pull requests, and commit history. This specialist requires the `gh` CLI.
-
-Scope discovery to the files you intend to share. Adjust [source mode](../phases/discovery.md#source-mode) to fit your requirements.
-
-Choose specialists deliberately. The `specialists` setting determines which sources ProcessOS Harness reads. Removing the `web` specialist keeps a run entirely on internal material.
-
-### Web
-
-The Camunda FDE Team can support you with client-specific specialists.
 
 ## Actions
 
@@ -61,4 +55,4 @@ After discovery has produced output, map the external systems and manual artifac
 
 ## Next step
 
-Continue with [transform the process to a to-be design](transformation.md).
+Continue with [transform the process to a to-be design](2-transformation.md).

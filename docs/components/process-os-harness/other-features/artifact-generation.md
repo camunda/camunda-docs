@@ -13,7 +13,7 @@ Artifact generation produces the Camunda files that make a solution executable. 
 /process-os-artifact-generation
 ```
 
-Generated artifacts land in `artifacts/`. For how tiers are resolved and how generation fits the implementation phase, see [implement the Camunda solution](../phases/implementation.md).
+Generated artifacts land in `artifacts/`. For how tiers are resolved and how generation fits the implementation phase, see [implement the Camunda solution](../phases/3-implementation.md).
 
 ## What gets generated
 

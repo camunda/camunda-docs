@@ -45,4 +45,4 @@ The governance process needs human input to ensure the right outcomes.
 
 - Learn how [review cycles](review-cycle.md) bring SMEs into each phase.
 - Understand [how a builder task works](builder-task.md).
-- Start the first phase, described in [discover the as-is process](../phases/discovery.md).
+- Start the first phase, described in [discover the as-is process](../phases/1-discovery.md).

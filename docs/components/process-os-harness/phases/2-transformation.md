@@ -75,4 +75,4 @@ The phase ends when SMEs sign off on the to-be models, described in [review gene
 
 ## Next step
 
-Continue with [implement the Camunda solution](implementation.md).
+Continue with [implement the Camunda solution](3-implementation.md).
