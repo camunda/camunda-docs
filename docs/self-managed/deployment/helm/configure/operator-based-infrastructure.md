@@ -190,7 +190,9 @@ If you already run the single-instance shape from an earlier release, follow [Mi
 
 #### Run a single instance on constrained environments
 
-Two instances only help when your cluster has two schedulable nodes. CloudNativePG spreads instances with a [preferred anti-affinity rule](https://cloudnative-pg.io/docs/1.30/scheduling/), so on a single-node cluster both instances land on the same node and a drain remains impossible.
+Two instances only help when your cluster has two schedulable nodes. The reference manifests set [`podAntiAffinityType: required`](https://cloudnative-pg.io/docs/1.30/scheduling/), so the two instances of a cluster never share a node. CloudNativePG defaults to `preferred`, which silently co-locates them under scheduler pressure and leaves the drain with no switchover target, so the stricter setting is what makes the guarantee real.
+
+The trade-off is that a cluster with fewer schedulable nodes than instances leaves the extra pod `Pending` instead of quietly giving up high availability. On such a cluster, reduce the instance count rather than relaxing the affinity.
 
 For local development (Kind, minikube) or any environment where a second instance is not affordable, pass `PG_INSTANCES=1` to `deploy.sh`:
 
