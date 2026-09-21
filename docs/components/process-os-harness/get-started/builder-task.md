@@ -7,11 +7,11 @@ keywords:
   ["ProcessOS Harness", "builder task", "auditability", "governance job"]
 ---
 
-A builder task is a unit of work that is executed in the AI Coding Agent. Each task runs as a (Camunda) job, with a skill doing the main work and the builder overseeing, judging, and revising it. This shape gives every task three properties at once: guidance from the governance process for what to do, auditability through Camunda and Git, and full flexibility for the builder to do whatever else the job needs.
-
-![alt text](../img/builder-task-in-modeler.png)
+A builder task is a unit of work that is executed in the AI Coding Agent. Each builder task runs as a job, with a skill doing the main work and the builder overseeing, judging, and revising it. This shape gives every task three properties at once: guidance from the governance process for what to do, auditability through Camunda and Git, and full flexibility for the builder to do whatever else the job needs.
 
 ## The five steps
+
+The following steps are executed if the governance process is at a builder task:
 
 1. **Activate the job.** The agent pulls the next pending job from the governance process running on Camunda, along with its skill name, skill mode, and run configuration.
 1. **Execute the skill.** The agent runs the ProcessOS Harness skill named in the job, producing or updating files in your project.
@@ -20,3 +20,8 @@ A builder task is a unit of work that is executed in the AI Coding Agent. Each t
 1. **Complete the job.** The agent pushes the outcome back to the governance process, which then decides the next step.
 
 Steps 1 and 5 are handled by the agent against Camunda. You handle step 3.
+
+## Builder tasks in Camunda
+
+Builder tasks are service tasks within Camunda. They are handled as a job similar to any other service task. The ProcessOS Harness contains skills to manage Camunda jobs.
+![alt text](../img/builder-task-in-modeler.png)

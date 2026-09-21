@@ -30,8 +30,6 @@ Your AI coding agent determines which AI platform is used and what it sends, so 
 
 Practical controls:
 
-- **Scope discovery to the files you intend to share.** Set `source-mode: allowlist` in `run.config.yaml`, then list the files in `process-scope.md`. The filesystem specialist reads only those files and skips its general scan.
-- **Choose specialists deliberately.** The `specialists` setting decides which sources are read at all. Removing the `web` specialist keeps a run entirely on internal material.
 - **Keep secrets out of the project directory.** Credentials, tokens, and keys shouldn't be in files the agent can read. Generated workers reference configuration rather than embedding it.
 - **Review the diff before you commit.** Skills stage changes in your working tree, which is your checkpoint for catching anything that shouldn't enter the repository.
 
@@ -58,4 +56,4 @@ Process documentation often carries personal data by accident, in the form of sa
 
 Review cycles move project material to people outside the builder workspace, so apply the same care there.
 
-Review packages produced by `/process-os-sme-review-package` are static files you can inspect before sending. When you sync with Web Modeler using `/process-os-web-modeler-sync`, diagrams move into a governed Web Modeler project, so confirm its access rules match the sensitivity of the process.
+Review packages produced by `/process-os-sme-review-package` are static files you can inspect before sending.

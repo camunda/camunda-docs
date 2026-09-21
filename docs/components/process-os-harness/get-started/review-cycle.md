@@ -6,48 +6,53 @@ description: "Review cycles bring subject matter experts into each ProcessOS Har
 keywords: ["ProcessOS Harness", "review cycle", "SME", "sign-off"]
 ---
 
-A review cycle is how ProcessOS Harness keeps a human in the loop. In each cycle, SMEs answer open questions and review generated artifacts, and the cycle repeats until they sign off on the result.
+A review cycle is how ProcessOS Harness keeps a human in the loop. In each cycle, SMEs answer open questions and review generated artifacts. The cycle repeats until the sign off on the result.
 
 ## How a cycle runs
 
-1. ProcessOS Harness generates artifacts and collects the questions it can't answer from the sources it has.
-1. SMEs answer the open questions and comment on the generated artifacts.
-1. You feed the answers and comments back into the project, and ProcessOS Harness regenerates the affected results.
+1. ProcessOS Harness generates artifacts and collects the questions it can't answer itself from the sources it has.
+1. SMEs [answer review question](#answer-review-questions) and comment on the generated artifacts.
+1. You [feed the answers back](#feed-answers-back) into the project, and ProcessOS Harness regenerates the affected results.
 1. You either request another cycle or sign off.
 
 Because the interaction model is iterative, plan for more than one cycle per phase. A first-pass result that needs correction is the expected outcome, not a failure.
 
-## Answer review questions
+### Answer review questions
 
 ProcessOS Harness stores review questions in structured YAML files, such as `transformation/review-questions.yaml`. SMEs rarely want to edit YAML, so you can export the questions into a more familiar format and import the answers afterwards.
 
-| Type             | Command                                 | What it produces                                                                                                   |
-| ---------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Skill            | `/process-os-questions-md-export`       | A Markdown copy of the questions, for answering in a text editor.                                                  |
-| Skill            | `/process-os-questions-xlsx-export`     | A spreadsheet copy, for answering in Excel.                                                                        |
-| Camunda Tasklist | Camunda Tasklist                        | SMEs can also answer questions in Camunda Tasklist, because the governance process presents them as Camunda Forms. |
-| Skill            | `/process-os-review-answer-application` | Applies answered questions back into the discovery documents.                                                      |
+| Type                                   | Command                                 | What it produces                                                                                                   |
+| -------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Camunda Tasklist Questionair (Default) | Camunda Tasklist                        | SMEs can also answer questions in Camunda Tasklist, because the governance process presents them as Camunda Forms. |
+| Skill                                  | `/process-os-questions-md-export`       | A Markdown copy of the questions, for answering in a text editor.                                                  |
+| Skill                                  | `/process-os-questions-xlsx-export`     | A spreadsheet copy, for answering in Excel.                                                                        |
+| Skill                                  | `/process-os-review-answer-application` | Applies answered questions back into the discovery documents.                                                      |
 
-## Review artifacts directly
+You can also modify the review cycles to your needs by adjusting the `Review XX Result` Subprocesses in the governance process before the execution. The Camunda Platform is perfectly suited to optimize and automate gathering SME feedback.
 
-Diagrams are often easier to review than prose. Open generated BPMN, DMN, and form files, then annotate them in place.
+### Review artifacts directly
 
-| Command                          | What it does                                                                                         |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `/process-os-file-viewer [file]` | Open BPMN, DMN, or form files in a browser-based viewer.                                             |
-| `/process-os-sme-review-package` | Create a static review package from a selected BPMN comparison, for sharing with reviewers.          |
-| `/process-os-web-modeler-sync`   | Sync diagrams with a governed Web Modeler project to create, upload, version, compare, and download. |
+Diagrams are often easier to review than prose. ProcessOS Harness provides different tooling for reviews:
+
+| Command                          | What it does                                                                                    |
+| -------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Camunda Modeling tools           | View and edit BPMN files.                                                                       |
+| `/process-os-file-viewer [file]` | Comment BPMN files in a browser-based viewer.                                                   |
+| `/process-os-sme-review-package` | Bundles all BPMN files to hand to an SME. The bundle content can be opend locally in a browser. |
 
 Reviewers can add annotations, rename steps, and restructure flows directly in Camunda Modeler. ProcessOS Harness reconciles those hand edits when you run the feedback cycle for the phase.
 
-## Feed answers back
+### Feed answers back
 
-Each phase has a feedback mode that collects reviewer input, reconciles it with the generated artifacts, and regenerates what changed.
-
-| Command                                       | Phase                                                                                                         |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `/process-os-sme-feedback`                    | Collect SME feedback on a discovery result into the workspace as uncommitted changes.                         |
-| `/process-os-process-discovery --feedback`    | Collect and integrate feedback into the discovery documents and BPMN.                                         |
-| `/process-os-process-transformation feedback` | Integrate feedback across transformation tiers. Add a tier name to scope it, for example `feedback moonshot`. |
+Each phase has per default a feedback mode that collects reviewer input, reconciles it with the generated artifacts, and regenerates what changed.
 
 Feedback lands in your working tree as uncommitted changes. Review the diff before you commit, because this is the point where you decide which agent changes become part of the project record.
+
+## Manage files during the review cycle
+
+ProcessOS generates iteration folders to keep generated artifacts and reviewer feedback organized throughout each review cycle. Each iteration works as follows:
+
+- Discovery and Transformation create a new folder for each iteration.
+- Each iteration folder contains `artifacts` and `feedback` subfolders.
+- The `artifacts` folder contains all files generated by ProcessOS Harness.
+- Store all feedback—whether collected by ProcessOS Harness or added manually—in the `feedback` folder.
