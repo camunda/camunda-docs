@@ -168,9 +168,9 @@ If you don't plan to use certain components (for example, Web Modeler), you can 
 
 #### High availability and node maintenance
 
-Each PostgreSQL cluster runs two instances and stores its write-ahead log (WAL) on a dedicated volume. Both defaults exist for operational reasons rather than for throughput.
+Each PostgreSQL cluster runs two instances and stores its write-ahead log (WAL) on a dedicated volume. Both defaults exist for operational reasons, not for performance.
 
-Two instances are what keep your Kubernetes nodes drainable. CloudNativePG protects a running database from a node drain: when the node hosting the primary is drained, the operator performs a switchover first and then lets the eviction proceed. A single-instance cluster has nowhere to switch over to, so the operator refuses the eviction and `kubectl drain` retries until it times out:
+Two instances keep your Kubernetes nodes drainable. CloudNativePG protects a running database from a node drain: when the node hosting the primary is drained, the operator performs a switchover first and then lets the eviction proceed. A single-instance cluster has nowhere to switch over to, so the operator refuses the eviction and `kubectl drain` retries until it times out:
 
 ```text
 error when evicting pods/"pg-identity-1" -n "camunda": Cannot evict pod as it would violate the pod's disruption budget.
@@ -178,21 +178,21 @@ error when evicting pods/"pg-identity-1" -n "camunda": Cannot evict pod as it wo
 
 A Kubernetes version upgrade drains one node at a time, so a single-instance cluster stalls that upgrade on the node holding the database. CloudNativePG describes this behavior in [Kubernetes upgrade and maintenance](https://cloudnative-pg.io/docs/1.30/kubernetes_upgrade/) and recommends always running more than one instance.
 
-A dedicated WAL volume keeps replication from filling the data directory. A standby holds a replication slot on the primary, so a standby that is down or lagging makes the primary retain WAL segments. When `pg_wal` shares a volume with `PGDATA`, that retention grows into the same space as your data. On its own volume, it cannot. The 5Gi default covers the 1GB `max_wal_size` checkpoint target plus the 512MB CloudNativePG keeps in `wal_keep_size`, leaving headroom for a standby that is away for a while. See [Volume for WAL](https://cloudnative-pg.io/docs/1.30/storage/#volume-for-wal).
+A dedicated WAL volume keeps replication from filling the data directory. A standby holds a replication slot on the primary, so a standby that is down or lagging makes the primary retain WAL segments. When `pg_wal` shares a volume with `PGDATA`, that retention grows into the same space as your data. A dedicated volume confines it to its own disk. The 5Gi default covers the 1GB `max_wal_size` checkpoint target plus the 512MB CloudNativePG keeps in `wal_keep_size`, with room for a standby that stays down for a while. See [Volume for WAL](https://cloudnative-pg.io/docs/1.30/storage/#volume-for-wal).
 
 Both settings are one-way. The CloudNativePG validating webhook rejects removing `walStorage` from an existing cluster, and rejects lowering `storage.size`. Decide on the WAL volume and the data volume size before you deploy. Growing `storage.size` later is supported when your storage class sets `allowVolumeExpansion: true`.
 
 :::note
-`kubectl get pdb` reports `ALLOWED DISRUPTIONS: 0` for the primary whether you run one instance or two, because that budget only ever covers the primary. What a second instance changes is not the budget, it is that the operator gains a switchover target. Verify the behavior with a drain rather than with the budget.
+`kubectl get pdb` reports `ALLOWED DISRUPTIONS: 0` for the primary whether you run one instance or two, because that budget only ever covers the primary. A second instance does not change the budget. It gives the operator a switchover target, so the drain can proceed. Verify the behavior with a drain rather than with the budget.
 :::
 
 If you already run the single-instance shape from an earlier release, follow [Migrate an existing single-instance deployment](#migrate-an-existing-single-instance-deployment).
 
 #### Run a single instance on constrained environments
 
-Two instances only help when your cluster has two schedulable nodes. The reference manifests set [`podAntiAffinityType: required`](https://cloudnative-pg.io/docs/1.30/scheduling/), so the two instances of a cluster never share a node. CloudNativePG defaults to `preferred`, which silently co-locates them under scheduler pressure and leaves the drain with no switchover target, so the stricter setting is what makes the guarantee real.
+Two instances only help when your cluster has two schedulable nodes. The reference manifests set [`podAntiAffinityType: required`](https://cloudnative-pg.io/docs/1.30/scheduling/), so the two instances of a cluster never share a node. CloudNativePG defaults to `preferred`, which lets the scheduler put both instances on one node when resources are tight, and a drain then has no switchover target.
 
-The trade-off is that a cluster with fewer schedulable nodes than instances leaves the extra pod `Pending` instead of quietly giving up high availability. On such a cluster, reduce the instance count rather than relaxing the affinity.
+The trade-off is that a cluster with fewer schedulable nodes than instances leaves the extra pod `Pending` rather than dropping to a single node. On such a cluster, reduce the instance count rather than relaxing the affinity.
 
 For local development (Kind, minikube) or any environment where a second instance is not affordable, pass `PG_INSTANCES=1` to `deploy.sh`:
 
@@ -200,7 +200,7 @@ For local development (Kind, minikube) or any environment where a second instanc
 PG_INSTANCES=1 ./deploy.sh
 ```
 
-This applies `instances: 1` and `enablePDB: false` to every cluster it deploys. Disabling the PodDisruptionBudget is what keeps the node drainable with a single instance, and it is the configuration CloudNativePG documents for development clusters. The trade-off is explicit: the database is unavailable while its pod is rescheduled.
+This applies `instances: 1` and `enablePDB: false` to every cluster it deploys. Disabling the PodDisruptionBudget keeps the node drainable with a single instance, and CloudNativePG documents this configuration for development clusters. The database is unavailable while its pod is rescheduled.
 
 ### Installation
 
