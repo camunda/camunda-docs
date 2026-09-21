@@ -5,14 +5,9 @@ sidebar_label: Cross-region cold recovery
 description: Recover an Orchestration Cluster in a secondary region from replicated backups.
 ---
 
-:::warning Experimental feature
-This recovery flow is currently:
+Cross-region cold recovery creates a new Orchestration Cluster in a secondary region and restores selected backup data after a primary-region outage. A warm standby cluster is not running before the outage.
 
-- Not generally available and not part of any alpha release
-- Subject to change before becoming generally available
-  :::
-
-Cross-region cold recovery creates a new Orchestration Cluster in a secondary AWS region and restores selected backup data after a primary-region outage. A warm standby cluster is not running before the outage.
+Cross-region cold recovery is generally available starting in Camunda 8.10. It is supported for AWS and GCP clusters.
 
 ## Restored data
 
@@ -25,7 +20,7 @@ Before you can use cross-region cold recovery, ensure the following prerequisite
 - Dual-region backup is enabled when you create the cluster.
 - The backup schedule is running and healthy. Backup interval will determine your expected RPO.
 - Before starting failback, wait until Console indicates that backup synchronization is complete and failback is ready.
-- Prepare the VPC infrastructure required to connect to a cluster in the recovery AWS region. Pre-provisioning the required endpoints and security groups can reduce recovery time.
+- Prepare the VPC infrastructure required to connect to a cluster in the recovery region. Pre-provisioning the required endpoints and security groups can reduce recovery time.
 - After failover, re-establish private connectivity to the recovered cluster by creating or switching the regional VPC endpoint. This is the customer's responsibility.
 
 ## Fail over
@@ -59,7 +54,7 @@ You are responsible for establishing private connectivity to the recovered clust
 To minimize your recovery time objective (RTO), pre-provision VPC infrastructure in the secondary region:
 
 - VPC and security groups
-- Private DNS configuration, if you're using Amazon Route 53 failover
+- Private DNS configuration for your DNS failover mechanism (for example, Amazon Route 53 for AWS clusters or Cloud DNS for GCP clusters)
 - Any firewall rules or network policies
 
 ### Reconnect after failover
@@ -67,7 +62,7 @@ To minimize your recovery time objective (RTO), pre-provision VPC infrastructure
 After failover:
 
 1. Create or configure the VPC endpoint to use the recovered cluster's new endpoint service name.
-2. Update DNS records or Amazon Route 53 failover rules to point to the new endpoint.
+2. Update DNS records or DNS failover rules (for example, Amazon Route 53 or Cloud DNS) to point to the new endpoint.
 3. Test client connectivity before resuming application traffic.
 
 Camunda does not create, manage, or modify customer VPC infrastructure.
