@@ -119,7 +119,7 @@ A user task typically includes a form. A form contains work instructions for the
 
 However, user tasks are not limited to forms. User tasks can also be used to refer users to other applications or redirect them to a website.
 
-You can use [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
+You can use [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) that offer visual editing of forms directly in Camunda Hub or Desktop Modeler. Or you can use your own forms.
 Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), or handled by a custom application.
 
 To use a form, a user task requires a form reference.
@@ -317,7 +317,7 @@ A user task with user task listeners configured:
 ### References
 
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Form linking in Modeler](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md)
+- [Form linking in Camunda Hub](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 - [User task listeners](/components/concepts/user-task-listeners.md)

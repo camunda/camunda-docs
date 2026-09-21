@@ -20,7 +20,7 @@ BPMN offers control and visibility over your critical business processes in a wa
 
 ## Set up
 
-Begin by building your BPMN diagrams with [Modeler](/components/modeler/about-modeler.md).
+Begin by building your BPMN diagrams with Camunda Hub.
 To get started, ensure you’ve [created a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md).
 
 ## Getting started with BPMN
@@ -56,11 +56,11 @@ Take the following steps:
 
 1. On our diagram, we've already been given an element as a start event in the shape of a circle. Click on the element and select the **Change element** menu icon. For now, keep it as a start event. Double click on the circle to add text.
 2. Drag and drop an arrow to the first task (the rectangle shape), or click the start event, and then click the task element to automatically attach it.
-3. Click on the element and select the **Change element** menu icon to change the type to a user task, which will be named "Purchase Ingredients." Note that each element added has adjustable attributes. Use the properties panel on the right side of the page to adjust these attributes.
-4. Click on the user task to connect a gateway to it. By clicking on the element and selecting the **Change element** menu icon and declaring it a parallel gateway, you can connect it to two tasks that can happen at the same time: mixing the ingredients, and preheating the oven.
+3. Click on the element and select the **Change element** menu icon to change the type to a manual task, which will be named "Purchase Ingredients." Note that each element added has adjustable attributes. Use the properties panel on the right side of the page to adjust these attributes.
+4. Click on the manual task to connect a gateway to it. By clicking on the element and selecting the **Change element** menu icon and declaring it a parallel gateway, you can connect it to two tasks that can happen at the same time: mixing the ingredients, and preheating the oven.
    ![baking a cake bpmn sample](./img/bake-cake-bpmn.png)
 5. Attach the next gateway once these two tasks have completed to move forward.
-6. Add a user task to bake the cake, and finally a user task to ice the cake.
+6. Add a manual task to bake the cake, and finally a manual task to ice the cake.
 7. Add an end event, represented by a bold circle.
 8. No need to save. Camunda Hub will autosave every change you make.
 
@@ -78,13 +78,15 @@ If you change a diagram and it is auto-saved, this has no effect on your cluster
 When you deploy the diagram, it becomes available on the selected cluster and new instances can start.
 :::
 
-To execute your completed process diagram, click the blue **Deploy** button.
+To execute your completed process diagram:
 
-You can now start a new process instance to initiate your process diagram. Click the blue **Run** button.
+1. Make sure you have [connected at least one cluster to your project](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters).
+1. Reopen the BPMN diagram.
+1. At the top right of the modeling interface, click **Deploy & run**.
+1. Select a target **Stage**.
+1. Click **Deploy & run**.
 
-You can now monitor your instances in [Operate](/components/operate/operate-introduction.md). Click the square-shaped **Camunda components** button to move between apps, and view process instances once in Operate.
-
-You can also visit an ongoing list of user tasks required in your BPMN diagram. Navigate to [Tasklist](/components/tasklist/introduction-to-tasklist.md) for a closer look.
+You can now monitor your instances in [Operate](/components/operate/userguide/basic-operate-navigation.md#open-operate).
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](/components/concepts/variables.md).
@@ -98,4 +100,3 @@ Variables are part of a process instance and represent the data of the instance.
 - [BPMN reference](/components/modeler/bpmn/bpmn.md)
 - [Camunda Academy: BPMN Overview](https://academy.camunda.com/bpmn-overview)
 - [Operate](/components/operate/operate-introduction.md)
-- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
