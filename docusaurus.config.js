@@ -15,7 +15,7 @@ module.exports = {
     v4: {
       removeLegacyPostBuildHeadAttribute: true,
     },
-    experimental_faster: true,
+    faster: true,
   },
   title: "Camunda 8 Docs",
   tagline:
