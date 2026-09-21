@@ -66,7 +66,7 @@ Using this in other areas can lead to unexpected results and incidents.
 
 You can also reference a secret directly in a Connector input mapping by using `camunda.secrets.<name>` in a FEEL expression.
 
-In SaaS, use the [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster. No secret store configuration is required. In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
+In SaaS, use the [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster. No secret store configuration is required. In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
 
 These forms coexist and are handled differently:
 
@@ -76,7 +76,7 @@ These forms coexist and are handled differently:
 
 `{{secrets.*}}` values are not scoped per [physical tenant](/self-managed/concepts/physical-tenants/connectors-runtime.md#per-tenant-secret-access) unless you opt in to `physicaltenantaware` in the connector runtime's own configuration. Physical tenant scoping of `camunda.secrets.<name>` is separate from that setting: each physical tenant resolves its own configured secret store.
 
-`{{secrets.*}}` and `camunda.secrets.<name>` can be migrated independently of where the value is stored. If you move a secret value into the store that `camunda.secrets.<name>` uses but keep existing process models on the legacy `{{secrets.NAME}}` syntax, set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime: a legacy-style reference whose name isn't found in a configured secret provider is then looked up in that same store. The default, `ON`, only resolves legacy references from the configured providers.
+`{{secrets.*}}` and `camunda.secrets.<name>` can be migrated independently of where the value is stored. If you move a secret value into the store that `camunda.secrets.<name>` uses but keep existing process models on the legacy `{{secrets.NAME}}` syntax, set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime: a legacy-style reference whose name isn't found in a configured secret provider is then looked up in that same store. The default, `ON`, only resolves legacy references from the configured providers. See [Migrate to `camunda.secrets.<name>`](migrate-secrets.md) for step-by-step migration guidance.
 
 ## Variable and response mapping
 
