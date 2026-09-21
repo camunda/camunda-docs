@@ -12,6 +12,11 @@ package-lock.json
 .docusaurus
 build
 
+# Ignore Excalidraw diagram sources and libraries. Prettier cannot infer a
+# parser for these extensions, and the files are written by Excalidraw itself.
+*.excalidraw
+*.excalidrawlib
+
 # -------- To be removed -------- #
 # Ignore while prettier is being  #
 # enabled to assist gradual       #
