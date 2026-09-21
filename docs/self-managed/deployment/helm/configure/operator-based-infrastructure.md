@@ -797,22 +797,32 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 
 ### Run the migration
 
-1. Update your copy of `postgresql-clusters.yml` (and `postgresql-orchestration-cluster.yml` if you deploy the orchestration database) to the current reference manifests, or add the two fields to each cluster you already have:
+1. Update your copy of `postgresql-clusters.yml` (and `postgresql-orchestration-cluster.yml` if you deploy the orchestration database) to the current reference manifests, or add the following settings to each cluster you already have:
 
    ```yaml
    spec:
      instances: 2
+     affinity:
+       enablePodAntiAffinity: true
+       topologyKey: kubernetes.io/hostname
+       podAntiAffinityType: required
      walStorage:
        size: 5Gi
    ```
 
-1. Apply the change. `deploy.sh` covers both manifests and waits for each cluster to be fully ready:
+1. Apply the change. `deploy.sh` applies the standard clusters and waits for each cluster to be fully ready:
 
    ```bash
    ./deploy.sh
    ```
 
-   To apply them directly instead, remember the orchestration cluster lives in its own file. Applying only the first manifest leaves `pg-camunda` on the single-instance shape:
+   If you deploy the orchestration database, run the script for `pg-camunda` as well:
+
+   ```bash
+   CLUSTER_FILTER=pg-camunda ./deploy.sh
+   ```
+
+   To apply the manifests directly instead, remember the orchestration cluster lives in its own file. Applying only the first manifest leaves `pg-camunda` on the single-instance shape:
 
    ```bash
    kubectl apply --server-side -f postgresql-clusters.yml -n camunda
@@ -835,10 +845,10 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```
 
    ```text
-   NAME          AGE   INSTANCES   READY   STATUS                     PRIMARY
-   pg-identity   10m   2           2       Cluster in healthy state   pg-identity-1
-   pg-keycloak   10m   2           2       Cluster in healthy state   pg-keycloak-1
-   pg-hub        10m   2           2       Cluster in healthy state   pg-hub-1
+   NAME            AGE   INSTANCES   READY   STATUS                     PRIMARY
+   pg-identity     10m   2           2       Cluster in healthy state   pg-identity-1
+   pg-keycloak     10m   2           2       Cluster in healthy state   pg-keycloak-1
+   pg-webmodeler  10m   2           2       Cluster in healthy state   pg-webmodeler-1
    ```
 
    A cluster stuck at `1` ready usually has its second pod `Pending`, because the required anti-affinity found no second schedulable node.
