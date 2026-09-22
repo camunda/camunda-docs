@@ -79,13 +79,13 @@ Deployments already running the single-instance shape migrate in place: CloudNat
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not during startup. An identity provider that is still starting, or that is temporarily down, no longer keeps the cluster from coming up.
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is still starting, or that is down, no longer stops the cluster from starting.
 
-- Only the requests that depend on the unreachable provider fail. Requests authenticated by a provider that answers, and requests that need no provider, are served as usual.
-- Each following request makes a new attempt, so the affected traffic recovers as soon as the provider answers. No restart is required.
-- While a provider cannot be reached, the cluster logs one warning per minute for each failing resolution step, naming the provider, its issuer, and the affected scope.
+- Only the requests that need the unreachable provider fail. All other requests succeed.
+- Each new request tries again. The traffic recovers when the provider answers, and you do not need a restart.
+- While a provider is unreachable, the cluster logs one warning each minute for each step that fails. The warning gives the provider, its issuer, and the scope.
 
-<p class="link-arrow">[Requests failing while an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-failing-while-an-identity-provider-is-unreachable)</p>
+<p class="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
 
 ## 8.10.0-alpha5
 

@@ -776,7 +776,7 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 
 #### OIDC redirect URI must include a callback path
 
-The Orchestration Cluster validates the configured OIDC redirect URI while it starts, and refuses to start when the value is not a complete callback URL — for example, when it names only a host and no callback path such as `/sso-callback`. A cluster that only serves API clients never follows its redirect URI, so an incomplete value can go unnoticed on 8.9 and surfaces as a cluster that does not start on 8.10. The default value `{baseUrl}/sso-callback`, and Helm deployments configured through `orchestration.security.authentication.oidc.redirectUrl`, are unaffected.
+The Orchestration Cluster validates the OIDC redirect URI at startup. It does not start if the value has no `/sso-callback` path. This rule is not new: such a value also could not complete a browser login on 8.9. 8.10 reports the value at startup, and not at the next login. A cluster that only serves API clients never uses its redirect URI, so an incorrect value can stay unknown until the upgrade. The default value `{baseUrl}/sso-callback` is correct, and so are Helm deployments that set `orchestration.security.authentication.oidc.redirectUrl`.
 
 **Action:** Check `camunda.security.authentication.oidc.redirect-uri`, and the same property of each configured provider, before upgrading.
 
@@ -795,11 +795,11 @@ The Orchestration Cluster validates the configured OIDC redirect URI while it st
 
 #### Orchestration Cluster starts when an identity provider is unreachable
 
-The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not during startup. A provider that is still starting, or that is temporarily down, no longer keeps the cluster from coming up: the cluster starts, serves every request it can authenticate without that provider, and fails only the requests that depend on it. Each following request retries, so the affected traffic recovers as soon as the provider answers, without a restart. While a provider cannot be reached, the cluster logs one warning per minute per failing resolution step, naming the provider, its issuer, and the affected scope.
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is down no longer stops the cluster from starting. The cluster serves all requests that it can authenticate without that provider, and fails only the requests that need it. Each new request tries again, thus the traffic recovers when the provider answers, and you do not need a restart. While a provider is unreachable, the cluster logs one warning each minute for each step that fails. The warning gives the provider, its issuer, and the scope.
 
-**Action:** If you relied on a failed startup to detect an unreachable identity provider, alert on that warning instead.
+**Action:** If you used a failed startup to detect an unreachable identity provider, alert on that warning instead.
 
-<p className="link-arrow">[Requests failing while an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-failing-while-an-identity-provider-is-unreachable)</p>
+<p className="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
 </div>
 </div>
 
