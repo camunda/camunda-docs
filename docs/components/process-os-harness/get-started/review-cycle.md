@@ -28,7 +28,7 @@ ProcessOS Harness stores review questions in structured YAML files, such as `tra
 | Skill                                  | `/process-os-questions-xlsx-export`     | A spreadsheet copy, for answering in Excel.                                                                        |
 | Skill                                  | `/process-os-review-answer-application` | Applies answered questions back into the discovery documents.                                                      |
 
-You can also modify the review cycles to your needs by adjusting the `Review XX Result` Subprocesses in the governance process before the execution. The Camunda Platform is perfectly suited to optimize and automate gathering SME feedback.
+You can also modify the review cycles to your needs by adjusting the `Review XX results` subprocesses in the governance process before the execution. The Camunda Platform is perfectly suited to optimize and automate gathering SME feedback.
 
 ### Review artifacts directly
 
