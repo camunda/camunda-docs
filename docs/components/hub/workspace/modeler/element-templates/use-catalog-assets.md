@@ -34,20 +34,22 @@ If the CoE unpublishes an asset you already use, the template is deprecated. Ele
 
 ## Find reusable assets in the modeling menus
 
-When you create, append, or change an element, the menu separates what you can insert into two tabs:
+When you create, append, or change an element, the compact menu separates what you can insert into two tabs:
 
-- **BPMN** — the standard BPMN elements, in their usual categories.
-- **Reusable assets** — catalog assets, connectors, and templates from your project, together with resources the project already contains: forms, called processes, decisions, and RPA scripts.
+- **BPMN**: The standard BPMN elements, in their usual categories.
+- **Reusable assets**: Catalog assets, connectors, and templates from your project, together with resources the project already contains, such as forms, called processes, decisions, and RPA scripts.
 
-To insert a catalog asset, open the **Reusable assets** tab and select it. This creates a new element with the template already applied. To apply a template to an element that already exists, use **Change element** from the context pad, or follow [Apply assets while modeling](#apply-assets-while-modeling).
+For the preferred cross-source view, select **Browse all** at the top of the menu. With [Browse all](../modeling/browse-all-resources.md), you can search and filter catalog, shared, and project assets alongside standard elements and Marketplace connectors.
 
-If your project has no templates and no linked resources, no tabs appear and the menu behaves as before.
+To insert a catalog asset, select **Browse all > Catalog assets**, then select the asset. If **Browse all** isn't offered, open the **Reusable assets** tab and select the asset. This creates a new element with the template already applied.
 
-### Find an asset quickly
+To apply a template to an element that already exists, use **Change element** from the context pad or follow [apply assets while modeling](#apply-assets-while-modeling).
 
-Type in the search field to search both tabs at once. Search matches asset names and descriptions, and also template IDs. While you search, the tabs are hidden and matches appear as a single ranked list.
+### Search the compact menu
 
-Within **Reusable assets**, entries are grouped: resources already in your project first, then named categories, then remaining templates, with connectors last.
+The compact menu's search field searches both tabs. Search matches asset names, descriptions, and template IDs. While you search, the tabs are hidden and matches appear as a single ranked list.
+
+Within **Reusable assets**, entries are grouped with resources already in your project first, followed by named categories, remaining templates, and connectors.
 
 ## Find outdated assets in a diagram
 
@@ -79,5 +81,6 @@ The tile is visible to any project member with read access, so you don't need ca
 
 ## Next steps
 
+- [Find resources with Browse all](../modeling/browse-all-resources.md).
 - Learn more about [element templates](/components/hub/workspace/modeler/element-templates/using-templates.md).
 - For CoE members: Learn how to [manage the catalog](/components/hub/organization/manage-catalog/index.md) and [track catalog asset usage](/components/hub/organization/manage-catalog/track-asset-usage.md) across your organization.
