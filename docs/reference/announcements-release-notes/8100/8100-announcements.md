@@ -850,9 +850,9 @@ Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security
 
 In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its API. The static token from `api.accessToken` (environment variable `OPTIMIZE_API_ACCESS_TOKEN`) is not accepted. Requests with this token get a `401` response. This applies to the [Optimize API](/apis-tools/optimize-api/overview.md) and to the [external variable ingestion](/apis-tools/optimize-api/external-variable-ingestion.md) endpoint.
 
-**Action:** Change these API clients to OIDC bearer tokens. Then remove `api.accessToken` from your configuration.
+**Action:** Change these API clients to OIDC bearer tokens before you upgrade to 8.10. Then remove `api.accessToken` from your configuration.
 
-**Alternative:** To keep the 8.9 behavior for the duration of 8.10, set `optimize.security.csl.enabled=false` and keep `api.accessToken`. Camunda 8.11 removes this fallback. Change the API clients before you upgrade to 8.11.
+**Alternative:** To keep the static token while you move the clients to OIDC bearer tokens, set `optimize.security.csl.enabled=false` and keep `api.accessToken`. This fallback is available for the duration of 8.10. Camunda 8.11 removes the fallback and the static token, so complete the move before you upgrade to 8.11.
 
 <p className="link-arrow">[Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md)</p>
 

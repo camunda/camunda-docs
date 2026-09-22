@@ -39,7 +39,7 @@ If you deploy with the Camunda Helm chart, you don't need to set these directly.
 
 The Optimize API accepts OIDC bearer tokens. A client gets a token from your IdP with the client credentials flow, then sends the token in the `Authorization` header. Add the audience that your IdP issues for the client to `camunda.security.authentication.oidc.audiences`.
 
-Starting with Camunda 8.10, the static token `api.accessToken` is not supported. Only the temporary [8.9 fallback](#fall-back-to-the-89-security-stack) still accepts it. For the token steps, see [Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md).
+Camunda 8.10 no longer accepts the static token `api.accessToken` on this API. To keep the static token while you move the clients to OIDC bearer tokens, use the [8.9 fallback](#fall-back-to-the-89-security-stack). Camunda 8.11 removes the fallback and the static token. For the token steps, see [Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md).
 
 ## Legacy configuration keys are deprecated
 
