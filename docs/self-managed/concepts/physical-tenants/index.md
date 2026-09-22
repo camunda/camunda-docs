@@ -71,7 +71,7 @@ To configure tenant defaults, per-tenant overrides, validation expectations, and
 
 To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
-Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
+Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing). For how to deploy Optimize per Physical Tenant and share one Management Identity across them, see [Optimize and Physical Tenants](./optimize.md).
 
 For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 

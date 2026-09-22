@@ -109,6 +109,8 @@ Setting a dedicated `roleName` in the Hub cluster record avoids adding this tena
 You can point several tenants at one shared audience. Those instances are then separated by client identity only, not by authorization. Neither separate credentials nor separate index prefixes make this arrangement authorization isolation.
 :::
 
+Distinct `roleName` values keep the Optimize role isolated per tenant, but Optimize's logical tenants are a separate mechanism with their own cross-tenant caveat. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants) if you reuse the same logical tenant ID across Physical Tenants.
+
 ## Install the release
 
 ```sh
@@ -127,4 +129,5 @@ Optimize can run multiple replicas, but its importer and archiver must be active
 ## Next steps
 
 - [Configure Physical Tenants across releases](./physical-tenants.md)
+- [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md)
 - [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md)

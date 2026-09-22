@@ -80,6 +80,8 @@ Give every Optimize release its own OIDC client ID, audience, role name, redirec
 
 A tenant record that's mapped in Hub but has no Optimize release deployed shows an unreachable Optimize in Hub.
 
+A distinct `roleName` isolates the Optimize role per tenant, but it doesn't isolate Optimize's logical tenants, which are a separate mechanism. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants) if you reuse the same logical tenant ID across Physical Tenants behind one shared Management Identity.
+
 ## Isolate every index prefix family
 
 Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Assign unique prefixes for every cluster and tenant.
@@ -138,4 +140,5 @@ Helm uninstall also leaves Elasticsearch and OpenSearch indices intact. This per
 
 - [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)
 - [Physical Tenant configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md)
+- [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md)
 - [Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
