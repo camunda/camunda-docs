@@ -39,11 +39,11 @@ The following table provides you with a guideline that we would use in a context
 
 ### Editing IDs
 
-Camunda recommends using the properties panel on the right side of the modeling interface ([Camunda Hub](/components/hub/index.md) or Desktop Modeler) to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process ID:
+Camunda recommends using the properties panel on the right side of the modeling interface in [Camunda Hub](/components/hub/index.md) or Desktop Modeler to edit technical identifiers and change them according to your naming conventions. For example, this is shown here for the process ID:
 
 ![Properties Panel](naming-technically-relevant-ids-assets/camunda-modeler-properties-panel.png)
 
-We especially do not recommend editing identifiers in the XML directly, as it might accidentally corrupt your BPMN file. You have to keep the identifiers in the section about the graphical layout (so called "DI" for diagram interchange) further down in sync with the execution semantics at the top of the XML.
+We strongly recommend you **do not edit existing identifiers directly in the XML**, as it might accidentally corrupt your BPMN file. You must keep the identifiers in the section about the graphical layout (so called "DI" for diagram interchange) further down in sync with the execution semantics at the top of the XML.
 
 However, we include an XML example of all those identifiers mentioned for illustration:
 
@@ -76,7 +76,7 @@ However, we include an XML example of all those identifiers mentioned for illust
 
 <span className="callout">8</span>
 
-Elements in the diagram interchange section (DI) reference identifiers from above; you have to adjust them accordingly! Camunda Hub and Desktop Modeler take care of this automatically.
+Elements in the diagram interchange section (DI) reference identifiers from above; you have to adjust them accordingly. This happens automatically in Camunda Hub and Desktop Modeler.
 
 Changing IDs can potentially break your tests or even process logic if done at a late stage of development. Therefore, consider using meaningful IDs right from the beginning and perform the renaming as part of the modeling.
 

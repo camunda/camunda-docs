@@ -24,6 +24,7 @@ See the [reference architecture](/self-managed/reference-architecture/reference-
 Every record in Camunda passes through two distinct storage layers. Understanding the difference between them is the key to understanding sizing.
 
 - **[Primary storage](/reference/glossary.md#primary-storage)** is the multi-Raft cluster in Camunda, with partitions as the scaling unit. Each partition has a Raft append-only log, RocksDB to store internal state, and snapshots for compaction. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader responsible for both processing commands and exporting records.
+
 - **[Secondary storage](/reference/glossary.md#secondary-storage)** is an external data storage where events are written, such as Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent and populated asynchronously by the export pipeline. Everything Operate, Tasklist, Identity, and the REST Query API reads comes exclusively from secondary storage.
 
 ## Command processing path
@@ -33,7 +34,7 @@ Its processing path (command lifecycle) follows this pattern:
 
 **Client (REST or gRPC) → Camunda API (Gateway) → Broker (Command API) → Raft partition (log) → Raft replication → Processing Engine → event on log → RocksDB state update → Client response**
 
-See it in green in the diagram below:
+This path is highlighted green in the following diagram:
 
 <!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415105456&cot=14 -->
 
@@ -49,19 +50,26 @@ See [internal processing](../../zeebe/technical-concepts/internal-processing.md)
 
 ## Export pipeline
 
-After the engine processes a command, it confirms its state change with an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in _batches_. See it in blue in the diagram below:
+After the engine processes a command, it confirms its state change with an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in _batches_.
+
+This pipeline is highlighted blue in the following diagram:
 
 <!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415254414&cot=14 -->
 
 ![Camunda 8.10+ architecture overview - Data Flow Export pipeline](assets/architecture-8.10plus-data-flow-export-path.jpg)
 
-**The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count. There are three built-in exporters in play:
+**The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count.
 
-- **[Camunda Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API
-- **[RDBMS Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter.md)**: aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API.
-- **[Elasticsearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) / [OpenSearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
+There are three built-in exporters involved:
 
-The Camunda Exporter and RDBMS Exporter are mutually exclusive, only one can be enabled at a time. The Elasticsearch/OpenSearch exporter is independent and can be enabled alongside either of the other two.
+| Exporter                                                                                                                                                                                                                                          | Storage and purpose                                                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------- |
+| [Camunda Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)                                                                                                                                    | Aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API. |
+| [RDBMS Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter.md)                                                                                                                                        | Aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API. |
+| [Elasticsearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) / [OpenSearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) | Writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.                  |
+
+- The Camunda Exporter and RDBMS Exporter are mutually exclusive, only one can be enabled at a time.
+- The Elasticsearch/OpenSearch exporter is independent and can be enabled alongside either of the other two.
 
 :::note
 Read events are applied to the registered exporters one by one, in the same order as they appear on the log. Each event is applied to ALL exporters before the next event is processed.
@@ -78,7 +86,8 @@ Exporter behavior and performance is important for the system, because:
 ## Query path
 
 Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from the configured secondary storage. They never read directly from the engine.
-See it in red in the diagram below:
+
+This path is highlighted red in the following diagram:
 
 <!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415254807&cot=14 -->
 
@@ -90,7 +99,9 @@ Data availability latency is bounded below by export pipeline lag; if the export
 
 ## Optimize data flow
 
-Optimize sits on top of the export pipeline as a second-tier consumer. See it in violet in the diagram below:
+Optimize sits on top of the export pipeline as a second-tier consumer.
+
+This is highlighted purple in the following diagram:
 
 <!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415429374&cot=14 -->
 
@@ -132,7 +143,9 @@ Optimize is not supported with RDBMS backends. If Optimize is required, a separa
 The paths above map directly to the factors to consider when [sizing your environment](sizing-your-environment.md):
 
 - **Partition count** bounds both command path throughput and export pipeline parallelism. More partitions means more parallel processing and exporting, up to the available hardware.
+
 - **Elasticsearch/OpenSearch resources** is the most common cause of operational delay and degradation. Monitor and scale storage before hitting performance bottlenecks.
+
 - **Optimize** significantly increases secondary storage write load. Size Elasticsearch/OpenSearch accordingly, or use a dedicated Elasticsearch/OpenSearch instance, if Optimize is enabled.
 
-For hardware recommendations based on these factors, see how to [size your environment](sizing-your-environment.md).
+For hardware recommendations based on these factors, see [size your environment](sizing-your-environment.md).

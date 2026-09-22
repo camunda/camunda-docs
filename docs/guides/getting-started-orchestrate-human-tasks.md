@@ -111,6 +111,7 @@ To run this guide, make sure to be in [**Implement** mode](../components/hub/wor
 6. Select the gateway and append a task by clicking the task icon. Repeat it to create a second process flow. Name the tasks based on what the user decides to eat: in this case, we've named ours `Prepare chicken` and `Prepare salad`.
 7. To route the user to the right task, add [expressions](/components/concepts/expressions.md) to the **sequence flows**. Sequence flows are represented by arrows connecting the gateway to the tasks. To add an expression, click on a sequence flow to view the **properties panel**, and open the **Condition** section.
 8. Verify the sequence flows have the following expressions: `meal="Chicken"` on one side, and `meal="Salad"` on the other. You will define the variable `meal` later when designing a form for the user task.
+
    <img src={ExpressionInputImg} style={{width: 400}} alt="Example of a conditional expression" />
 
 9. Connect the split process flows again. Append another exclusive gateway to one of the tasks. Select the other task and drag the arrow-shaped sequence flow tool to connect it to the gateway.
@@ -141,7 +142,7 @@ You have now designed the process. To allow the user to make the decision, you w
 
 1. Select the user task you created in **[Step 1](#step-1-create-a-new-process)**.
 1. In the floating menu, click the link icon. A menu expands that allows you to create a new form.
-   <img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" />
+   <img src={ModelerFormMenuImg} style={{width: 700}} alt="Annotation to open the form menu" />
 1. Click **Create new form**. A form will be created and opened in the form editor. The form is automatically named.
 1. In the left **Components** pane, under **Presentation**, click and drag the **Text view** component to the empty form.
    <img src={FormEditorImg} alt="Dragging a component to a form" />

@@ -1,12 +1,12 @@
 ---
 title: Utilize forms
-description: "Let's learn about Camunda Forms, how to use, model, and deploy them."
+description: "Learn how to use, model, and deploy Camunda Forms."
 ---
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
-## Overview
+## About
 
 The Camunda Forms feature allows you to easily design and configure forms. Once configured, they can be connected to a user task or start event to implement a task form in your application.
 

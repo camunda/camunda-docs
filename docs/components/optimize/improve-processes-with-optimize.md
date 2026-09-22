@@ -32,7 +32,7 @@ From Camunda Hub, you can access all your clusters and navigate to any running i
 1. On the **Optimize** card, click **Launch**. This opens the cluster's Optimize instance.
 
 :::tip
-If the cluster is paused, you won't see a **Launch** button. You need to [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) before you can access its components.
+If the cluster is paused, you won't see a **Launch** button. You must [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) to access its components.
 :::
 
 ## Set up
