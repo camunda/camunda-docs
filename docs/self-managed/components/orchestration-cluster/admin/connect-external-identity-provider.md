@@ -127,14 +127,14 @@ You may need to customize the redirect URI in advanced scenarios, such as:
 
 Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
 
-The Orchestration Cluster validates the redirect URI while it starts, and refuses to start when the value is not a complete callback URL. Set a value that:
+The Orchestration Cluster validates the redirect URI at startup. It does not start if the value is not a complete callback URL. Set a value that:
 
-- starts with `{baseUrl}`, or carries an explicit `http` or `https` scheme and a host,
-- names a port between 1 and 65535 if it names a port at all,
-- ends in the callback path your provider redirects to, such as `/sso-callback`,
-- carries no fragment (`#`).
+- starts with `{baseUrl}`, or has an `http` or `https` scheme and a host,
+- has a port between 1 and 65535, if it has a port,
+- ends with `/sso-callback`,
+- has no fragment (`#`).
 
-The default value `{baseUrl}/sso-callback` meets all of these. A deployment that only serves API clients never follows its redirect URI, but the value is validated there too.
+The default value `{baseUrl}/sso-callback` is correct. The cluster also validates the value if you only use API clients.
 
 Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
 
@@ -195,7 +195,7 @@ camunda.security.authentication.oidc.scope: ["openid", "profile", "email"]
 
 After updating your configuration, (re)start the Orchestration Cluster for the configuration changes to be applied.
 
-A successful start does not confirm that your IdP is reachable: the Orchestration Cluster contacts a provider at the first request that needs it, and not during startup. If the cluster is up but authentication fails, see [requests failing while an identity provider is unreachable](debugging-authentication.md#requests-failing-while-an-identity-provider-is-unreachable).
+A successful start does not confirm that your IdP is reachable. The cluster contacts a provider at the first request that needs it. If the cluster is up but authentication fails, see [requests fail when an identity provider is unreachable](debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable).
 
 ### Step 6: Test user authentication
 

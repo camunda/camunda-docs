@@ -41,7 +41,7 @@ Typical failure points:
 To isolate the issue, use:
 
 - [Review logs](#review-logs)
-- [Requests failing while an identity provider is unreachable](#requests-failing-while-an-identity-provider-is-unreachable)
+- [Requests fail when an identity provider is unreachable](#requests-fail-when-an-identity-provider-is-unreachable)
 - [Review data](#review-data)
 - [Review configuration](#review-configuration)
 - [Inspect the JWT](#inspect-the-jwt)
@@ -78,20 +78,20 @@ LOGGING_LEVEL_IO_CAMUNDA_SECURITY=DEBUG
 
 With these settings, you can trace request handling and how Spring Security filter chains determine authentication outcomes.
 
-## Requests failing while an identity provider is unreachable
+## Requests fail when an identity provider is unreachable
 
-The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not during startup. A cluster therefore starts and serves traffic while a configured provider is unreachable, and only the requests that depend on that provider fail.
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. The cluster starts and serves traffic while a provider is unreachable. Only the requests that need that provider fail.
 
 While a provider is unreachable:
 
-- Requests that cannot be authenticated without that provider fail with a server error, rather than with an authentication error. This includes a browser login through the provider and an API request carrying a token the provider issued.
-- Every other request succeeds, including requests authenticated by a provider that answers.
-- Each following request makes a new attempt, so the cluster serves the affected traffic again as soon as the provider answers. You do not need to restart the cluster.
-- The cluster logs one warning per minute for each resolution step that fails: a client registration, a token decoder, or a UserInfo mapping. The warning names the provider, its issuer, and the affected scope.
+- Those requests fail with a server error, and not with an authentication error. This includes a browser login and an API request with a token from that provider.
+- All other requests succeed.
+- Each new request tries again. The cluster serves the failed traffic again when the provider answers. You do not need to restart the cluster.
+- The cluster logs one warning each minute for each step that fails: a client registration, a token decoder, or a UserInfo mapping. The warning gives the provider, its issuer, and the scope.
 
-Because an unreachable provider no longer stops the cluster from starting, that warning—and not a failed startup—is how you learn that part of your authentication traffic is failing. Watch for it in your log pipeline.
+An unreachable provider no longer stops the cluster from starting. This warning is your only signal that part of the authentication traffic fails. Monitor it in your log pipeline.
 
-If you see the warning, confirm that the provider's discovery endpoint `<issuer-uri>/.well-known/openid-configuration` is reachable from the cluster. See [Test the IdP directly](#test-the-idp-directly).
+If you see the warning, make sure that the discovery endpoint `<issuer-uri>/.well-known/openid-configuration` is reachable from the cluster. See [Test the IdP directly](#test-the-idp-directly).
 
 ## Review data
 
