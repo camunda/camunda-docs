@@ -91,7 +91,7 @@ While a provider is unreachable:
 
 An unreachable provider no longer stops the cluster from starting. This warning is your only signal that part of the authentication traffic fails. Monitor it in your log pipeline.
 
-If you see the warning, make sure that the discovery endpoint `<issuer-uri>/.well-known/openid-configuration` is reachable from the cluster. See [Test the IdP directly](#test-the-idp-directly).
+The warning names the endpoint that did not answer. Make sure that this endpoint is reachable from the cluster. This is the discovery endpoint `<issuer-uri>/.well-known/openid-configuration` for a provider that is configured with an issuer URI. It is the configured `jwk-set-uri` or `user-info-uri` for a provider that sets these endpoints. See [Test the IdP directly](#test-the-idp-directly).
 
 ## Review data
 

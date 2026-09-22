@@ -776,7 +776,7 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 
 #### OIDC redirect URI must include a callback path
 
-The Orchestration Cluster validates the OIDC redirect URI at startup. It does not start if the value has no `/sso-callback` path. This rule is not new: such a value also could not complete a browser login on 8.9. 8.10 reports the value at startup, and not at the next login. A cluster that only serves API clients never uses its redirect URI, so an incorrect value can stay unknown until the upgrade. The default value `{baseUrl}/sso-callback` is correct, and so are Helm deployments that set `orchestration.security.authentication.oidc.redirectUrl`.
+The Orchestration Cluster validates the OIDC redirect URI at startup. It does not start if the value has no callback path. The cluster serves the callback at `/sso-callback`. This rule is not new: such a value also could not complete a browser login on 8.9. 8.10 reports the value at startup, and not at the next login. A cluster that only serves API clients never uses its redirect URI, so an incorrect value can stay unknown until the upgrade. The default value `{baseUrl}/sso-callback` is correct, and so are Helm deployments that set `orchestration.security.authentication.oidc.redirectUrl`.
 
 **Action:** Check `camunda.security.authentication.oidc.redirect-uri`, and the same property of each configured provider, before upgrading.
 
