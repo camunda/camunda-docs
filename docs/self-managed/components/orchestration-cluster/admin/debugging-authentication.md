@@ -87,11 +87,11 @@ While a provider is unreachable:
 - Those requests fail with a server error, and not with an authentication error. This includes a browser login and an API request with a token from that provider.
 - All other requests succeed.
 - Each new request tries again. The cluster serves the failed traffic again when the provider answers. You do not need to restart the cluster.
-- The cluster logs one warning each minute for each step that fails: a client registration, a token decoder, or a UserInfo mapping. The warning gives the provider, its issuer, and the scope.
+- The cluster logs one warning each minute for each step that fails: a client registration, a token decoder, or a UserInfo mapping.
 
-An unreachable provider no longer stops the cluster from starting. This warning is your only signal that part of the authentication traffic fails. Monitor it in your log pipeline.
+An unreachable provider no longer stops the cluster from starting. This warning is your only signal that part of the authentication traffic fails. Monitor your log pipeline for `WARN` entries of the logger `io.camunda.security.spring.oidc.DeferredOidcResolution`. Each entry starts with `Failed to resolve`.
 
-The warning names the endpoint that did not answer. Make sure that this endpoint is reachable from the cluster. This is the discovery endpoint `<issuer-uri>/.well-known/openid-configuration` for a provider that is configured with an issuer URI. It is the configured `jwk-set-uri` or `user-info-uri` for a provider that sets these endpoints. See [Test the IdP directly](#test-the-idp-directly).
+The warning gives the provider, its issuer, and the scope. It does not give the endpoint that did not answer. Read the exception that the warning attaches to find that endpoint. It is the discovery endpoint `<issuer-uri>/.well-known/openid-configuration` for a provider that is configured with an issuer URI. It is the configured `jwk-set-uri` or `user-info-uri` for a provider that sets these endpoints. Then make sure that the cluster can reach that endpoint. See [Test the IdP directly](#test-the-idp-directly).
 
 ## Review data
 
