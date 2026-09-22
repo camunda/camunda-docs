@@ -47,7 +47,7 @@ A remote code execution vulnerability was identified in Camunda's FEEL expressio
 
 Severity: Critical 9.9 (CVSS v3.1: AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H).
 
-This vulnerability was identified by Camunda's Application Security Team, with no known report or exploit beyond our own security investigation. A CVE identifier has been requested and this notice will be updated once it is assigned.
+This vulnerability was identified by Camunda's Security Team, with no known report or exploit beyond our own security investigation. A CVE identifier has been requested and this notice will be updated once it is assigned.
 
 ### How to determine if the installation is affected
 
