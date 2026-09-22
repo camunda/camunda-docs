@@ -16,11 +16,11 @@ The following resource types can be deleted:
 1. [Process definitions](./processes.md)
 2. [Decision Requirements Graphs (DRG)](../modeler/dmn/decision-requirements-graph.md)
 
-Delete a resource using [Operate](../../components/operate/userguide/delete-resources.md) or by sending the [delete resource command](/apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) to the Zeebe API.
+Delete a resource using [Operate](../../components/operate/userguide/delete-resources.md) or by sending the [delete resource command](../../apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) to the Zeebe API.
 
 ## Deleting a process definition
 
-Delete a process definition by sending a [delete resource command](/apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) and providing the `process definition key` as the `resource key`.
+Delete a process definition by sending a [delete resource command](../../apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) and providing the `process definition key` as the `resource key`.
 
 You can delete any version of a process definition. After deletion, new process instances cannot be created for it: its start events are deactivated immediately, and attempts to create an instance result in a `NOT_FOUND` exception. If the definition has no running instances, it is removed from Zeebe's state right away. If it still has running instances, its record is retained until they finish (see [Draining](#draining)).
 
@@ -88,7 +88,7 @@ If the definition is [draining](#draining), history deletion is deferred: the `d
 
 ## Deleting a decision requirements graph
 
-Delete a decision requirements graph (DRG) by sending a [delete resource command](/apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) and providing the `decision requirements key` as the `resource key`.
+Delete a decision requirements graph (DRG) by sending a [delete resource command](../../apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) and providing the `decision requirements key` as the `resource key`.
 
 Deleting a DRG also deletes the decisions it contains. Attempts to evaluate a deleted decision result in a `NOT_FOUND` exception. Deleting a DRG also deletes historical data.
 

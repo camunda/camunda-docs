@@ -21,11 +21,11 @@ be deleted:
 2. [Decision Requirements Graphs (DRG)](../modeler/dmn/decision-requirements-graph.md)
 
 You can delete a resource using [Operate](../../components/operate/userguide/delete-resources.md), or by sending
-the [delete resource command](/apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) to the Zeebe API.
+the [delete resource command](../../apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) to the Zeebe API.
 
 ## Deleting a process definition
 
-You can delete a process definition by sending a [delete resource command](/apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc)
+You can delete a process definition by sending a [delete resource command](../../apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc)
 and
 providing the `process definition key` as the `resource key`.
 
@@ -80,7 +80,7 @@ The Orchestration Cluster API process definition `state` field exposes `ACTIVE`,
 ## Deleting a decision requirements graph
 
 You can delete a decision requirements graph (DRG) by sending
-a [delete resource command](/apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) and providing the `decision requirements key`
+a [delete resource command](../../apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc) and providing the `decision requirements key`
 as the `resource key`.
 
 Upon deleting a DRG, Zeebe also deletes decisions contained within. Trying to evaluate such a decision will result in
