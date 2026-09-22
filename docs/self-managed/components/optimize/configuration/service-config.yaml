@@ -91,9 +91,10 @@ m2mClient:
 # Authentication for the public APIs of Optimize
 api:
   # In Camunda 8.10, the public APIs accept only OIDC bearer tokens. Configure the OIDC settings
-  # under camunda.security.authentication.oidc. accessToken is not supported in 8.10. It works
-  # only with the 8.9 fallback (optimize.security.csl.enabled=false), which 8.11 removes.
-  # jwtSetUri and audience still work through 8.10 as legacy keys, but are deprecated.
+  # under camunda.security.authentication.oidc. accessToken is not supported. jwtSetUri and
+  # audience are deprecated, and 8.10 maps them to the OIDC settings.
+  # All keys in this block still apply with the 8.9 fallback (optimize.security.csl.enabled=false),
+  # which 8.11 removes.
   accessToken: ${OPTIMIZE_API_ACCESS_TOKEN:null}
   jwtSetUri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI:null}
   audience: ${CAMUNDA_OPTIMIZE_API_AUDIENCE:optimize}
