@@ -78,11 +78,11 @@ This method returns no content.
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                            |
-| ---- | ------------------------------------------------------------------------------------------------------ |
-| 204  | Request successful.                                                                                    |
-| 400  | Returned if some properties in the request body are invalid or missing.                                |
-| 401  | Secret incorrect or missing. See [authentication](../optimize-api-authentication) on how to authorize. |
+| Code | Description                                                                                           |
+| ---- | ----------------------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                                   |
+| 400  | Returned if some properties in the request body are invalid or missing.                               |
+| 401  | Token incorrect or missing. See [authentication](../optimize-api-authentication) on how to authorize. |
 
 ## Example
 

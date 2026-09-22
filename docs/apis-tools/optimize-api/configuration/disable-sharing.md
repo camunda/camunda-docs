@@ -32,11 +32,11 @@ An empty request body should be sent.
 
 Possible HTTP Response Status codes:
 
-| Code | Description                                                                                                                 |
-| ---- | --------------------------------------------------------------------------------------------------------------------------- |
-| 204  | Request successful.                                                                                                         |
-| 401  | Secret incorrect or missing in HTTP Header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
-| 500  | Some error occurred while processing the request, best check the Optimize log.                                              |
+| Code | Description                                                                                                                |
+| ---- | -------------------------------------------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                                                        |
+| 401  | Token incorrect or missing in HTTP header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                             |
 
 ## Example
 
@@ -46,7 +46,7 @@ POST `api/public/share/disable`
 
 #### Request header
 
-`Authorization: Bearer mySecret`
+`Authorization: Bearer <TOKEN>`
 
 #### Response
 

@@ -57,19 +57,19 @@ No request body is required.
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                                                 |
-| ---- | --------------------------------------------------------------------------------------------------------------------------- |
-| 200  | Request successful.                                                                                                         |
-| 400  | Returned if some of the properties from the request are invalid or missing.                                                 |
-| 401  | Secret incorrect or missing in HTTP Header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
-| 404  | The requested report was not found, please check the provided report-ID.                                                    |
-| 500  | Some error occurred while processing the export request, best check the Optimize log.                                       |
+| Code | Description                                                                                                                |
+| ---- | -------------------------------------------------------------------------------------------------------------------------- |
+| 200  | Request successful.                                                                                                        |
+| 400  | Returned if some of the properties from the request are invalid or missing.                                                |
+| 401  | Token incorrect or missing in HTTP header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
+| 404  | The requested report was not found, please check the provided report-ID.                                                   |
+| 500  | Some error occurred while processing the export request, best check the Optimize log.                                      |
 
 ## Example
 
 ### Export a raw data report
 
-Let's assume you want to export a report with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, with a maximum of two records per page, an access token `mySecret` and a pagination timeout of 60s, this is what it would look like
+To export the report with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, send the following request. It uses a maximum of two records per page and a pagination timeout of 60s.
 
 #### Initial API call
 
@@ -77,7 +77,7 @@ GET `/api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?
 
 ##### Request header
 
-`Authorization: Bearer mySecret`
+`Authorization: Bearer <TOKEN>`
 
 ##### Response content
 
@@ -128,7 +128,7 @@ Note here the use of the query parameter `searchRequestId` to retrieve further p
 
 ##### Request header
 
-`Authorization: Bearer mySecret`
+`Authorization: Bearer <TOKEN>`
 
 ##### Response content
 

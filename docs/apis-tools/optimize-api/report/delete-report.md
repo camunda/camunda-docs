@@ -40,24 +40,24 @@ No response body.
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                                                 |
-| ---- | --------------------------------------------------------------------------------------------------------------------------- |
-| 204  | Request successful.                                                                                                         |
-| 401  | Secret incorrect or missing in HTTP Header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
-| 404  | The requested report was not found, please check the provided report-ID.                                                    |
-| 500  | Some error occurred while processing the request, best check the Optimize log.                                              |
+| Code | Description                                                                                                                |
+| ---- | -------------------------------------------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                                                        |
+| 401  | Token incorrect or missing in HTTP header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
+| 404  | The requested report was not found, please check the provided report-ID.                                                   |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                             |
 
 ## Example
 
 ### Delete a report
 
-Let's assume you want to delete a report with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, this is what it would look like:
+To delete the report with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, send the following request:
 
 DELETE `/api/public/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62`
 
 #### Request header
 
-`Authorization: Bearer mySecret`
+`Authorization: Bearer <TOKEN>`
 
 #### Response
 

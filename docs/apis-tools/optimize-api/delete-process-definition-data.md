@@ -77,7 +77,7 @@ DELETE `/api/public/process-definition/2251799813685247`
 
 #### Request header
 
-`Authorization: Bearer mySecret`
+`Authorization: Bearer <TOKEN>`
 
 #### Response
 
