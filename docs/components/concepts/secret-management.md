@@ -18,8 +18,6 @@ You reference a secret with a [secret reference](/reference/glossary.md#secret-r
 
 An older `{{secrets.<name>}}` syntax, resolved by the connector runtime, remains supported for existing connector models. See [Legacy connector secrets](#legacy-connector-secrets).
 
-`camunda.secrets.<name>` is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may change in future releases.
-
 For a working example of referencing `camunda.secrets.<name>` in a model, including the FEEL expression rules, see [Secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings).
 
 ## Store and create secrets
