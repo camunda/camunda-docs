@@ -86,6 +86,16 @@ If no scope contains this variable, it's created as a new variable in the root s
 
 The job of **Task B** is completed with the variables `b`, `c`, and `d`. The variables `b` and `c` are already defined in higher scopes and are updated with the new values. Variable `d` doesn't exist before and is created in the root scope.
 
+:::warning A local variable blocks later writes of the same name
+If a later operation writes a variable with the same name from inside the scope, variable propagation finds the local variable first. For example, this can happen when another job completes or an input mapping writes the variable.
+
+The later write updates the local variable instead of the process instance. When the scope exits, Camunda discards the local variable and its updated value. The write succeeds without indicating that the new value remained local to the scope.
+
+For example, an input mapping creates a local variable `x`. The element's job later completes with a new value for `x` without an output mapping. The new value updates the local `x`, not the process instance. The next element in the process still sees the previous value of `x`.
+
+To make a variable visible outside the scope where it was created, propagate it explicitly with an [output mapping](#inputoutput-variable-mappings).
+:::
+
 ### Variable propagation by BPMN element
 
 What an element propagates to its parent scope when it completes depends on its type:
