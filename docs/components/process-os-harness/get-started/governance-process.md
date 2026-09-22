@@ -25,6 +25,8 @@ The engagement runs through four phases in order. The output of one phase is the
 | Transform | Transform the as-is process into a to-be process.                           | To-be models finalized        |
 | Implement | Generate and implement the executable Camunda solution.                     | Executable solution generated |
 
+WIP!
+
 - Each phase starts with you defining the run configuration for the upcoming iteration
 - The configuration can be adjusted after each run.
 -
@@ -33,13 +35,12 @@ The engagement runs through four phases in order. The output of one phase is the
 
 The governance process needs human input to ensure the right outcomes.
 
-| Type                            | Where you complete it                                                                               | Typical use                                                                                     |
-| ------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Process Scope                   | Camunda Tasklist, using a form.                                                                     | The project and process scope are entered in the first phase.                                   |
-| Phase configuration             | Camunda Tasklist, using a form.                                                                     | Each phase has configuration paramters.                                                         |
-| [Review cycle](review-cycle.md) | Camunda Tasklist, using a form.                                                                     | Structured input from a person: SME answers to discovery gaps, review decisions.                |
-| [Builder task](builder-task.md) | The AI coding agent, driven by a ProcessOS Harness skill.                                           | Anything an agent can generate, transform, or check: discovery specialists, BPMN, forms, tests. |
-| Human gates                     | Skills define human gates. These are directly raised in the AI Coding Agent session inthe terminal. | Skill specific questions the agents needs input for.                                            |
+| Project / Process scope         | Camunda Tasklist, using a form.                                                                      | The project and process scope are entered in the first phase.                                   |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Process Scope                   | Camunda Tasklist, using a form.                                                                      | The project and process scope are entered in the first phase.                                   |
+| Phase configuration             | Camunda Tasklist, using a form.                                                                      | Each phase has configuration paramters.                                                         |
+| Human gates                     | Skills define human gates. These are directly raised in the AI Coding Agent session in the terminal. | Skill specific questions the agents needs input for.                                            |
+| [Builder task](builder-task.md) | The AI coding agent, driven by a ProcessOS Harness skill.                                            | Anything an agent can generate, transform, or check: discovery specialists, BPMN, forms, tests. |
 
 ## Next steps
 

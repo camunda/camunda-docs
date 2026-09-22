@@ -16,11 +16,9 @@ This page covers the practical choices you make as a builder. It doesn't replace
 | Location            | What's stored there                                                                  |
 | ------------------- | ------------------------------------------------------------------------------------ |
 | Your local machine  | The whole project, including sources, generated artifacts, and configuration.        |
-| Your Git repository | Every committed artifact, including the project state in `.camunda/state.md`.        |
+| Your Git repository | Every committed artifact.                                                            |
 | Camunda cluster     | Governance process state, including which phase you're in and pending SME questions. |
 | AI platform         | The context your coding agent sends while running a skill.                           |
-
-In this release, projects are isolated and keep their memory private. Nothing is shared between projects, and there's no central ProcessOS Harness service holding your data.
 
 The AI platform is the boundary worth thinking about. Everything else stays inside infrastructure you already control, so your main decision is what the agent gets to read.
 
