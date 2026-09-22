@@ -34,7 +34,7 @@ A connector consists of the Java backend and an element template that defines th
 
 - The user interface allows you to configure and use the connector in Camunda Hub and Desktop Modeler. This is defined in a [Connector template](../manage-connector-templates.md) that controls how the BPMN element is shown in the modeling interface and which configuration options are available for the connector.
 
-This separation enables a layered approach to building connectors. You can customize the user interface and configuration options in Modeler using connector templates, without modifying the underlying Java code.
+This separation enables a layered approach to building connectors. You can customize the user interface and configuration options in Hub or Desktop Modeler using connector templates, without modifying the underlying Java code.
 
 ## Choose your approach
 
