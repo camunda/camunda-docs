@@ -45,6 +45,12 @@ An agent instance follows a predictable path through these states. The following
 
 Track usage metrics for each agent instance to monitor cost and activity.
 
+:::note Usage metrics can be lost
+Camunda can only record usage metrics when it's informed about them by the worker or connector that made the call. If that worker or connector fails before it can report the usage, for example, if it crashes or loses connectivity, those metrics are lost, even though the LLM provider already processed and billed for the call.
+
+This can happen regardless of which agent implementation you use, including the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) and [external agents](/components/agentic-orchestration/connect-external-agent.md). For the authoritative token counts and costs, always refer to your LLM provider's own usage reporting rather than relying solely on Camunda's metrics.
+:::
+
 ### Token consumption
 
 Camunda tracks the number of tokens consumed by the agent's model calls. Token consumption accumulates as the conversation grows: every loop iteration adds the previous tool results and the model's reasoning to the context that's sent with the next model call, so token usage tends to climb with each additional loop iteration.
