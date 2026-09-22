@@ -14,19 +14,19 @@ When a Zeebe cluster uses an uneven leader distribution, caused by losing a lead
 
 Request rebalancing through the coordinated rebalancing API under `/cluster/v2/rebalance` using [cluster admin](/components/admin/cluster-admin.md) credentials. Unlike an open election, this API transfers leadership for each partition directly to its highest-priority replica, one partition at a time, so at most one partition is affected at any moment.
 
-Start a rebalance ([`POST /cluster/v2/rebalance`](/apis-tools/orchestration-cluster-api-rest/specifications/trigger-cluster-rebalance.api.mdx)):
+Start a rebalance with `POST /cluster/v2/rebalance`:
 
 ```bash
 curl -X POST https://{cluster-host}/cluster/v2/rebalance
 ```
 
-Check the cluster's balance state and the progress of each partition ([`GET /cluster/v2/rebalance`](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-rebalance.api.mdx)):
+Check the cluster's balance state and the progress of each partition with `GET /cluster/v2/rebalance`:
 
 ```bash
 curl -X GET https://{cluster-host}/cluster/v2/rebalance
 ```
 
-Stop a running rebalance once the transfer in flight has finished ([`DELETE /cluster/v2/rebalance`](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-cluster-rebalance.api.mdx)):
+Stop a running rebalance once the transfer in flight has finished with `DELETE /cluster/v2/rebalance`:
 
 ```bash
 curl -X DELETE https://{cluster-host}/cluster/v2/rebalance
@@ -40,7 +40,7 @@ curl -X POST "https://{cluster-host}/cluster/v2/rebalance?dryRun=true"
 
 Each partition reports how its transfer ended or why it was skipped (already led by the desired leader, replication lag too high, replication timed out, and so on).
 
-A `POST /cluster/v2/rebalance` request accepts an optional JSON body to override the rebalancing parameters for the request - any omitted parameters will use the configured defaults:
+A `POST /cluster/v2/rebalance` request accepts an optional JSON body to override the rebalancing parameters for the request. Any omitted parameters use the configured defaults:
 
 ```bash
 curl -X POST https://{cluster-host}/cluster/v2/rebalance \
@@ -49,15 +49,15 @@ curl -X POST https://{cluster-host}/cluster/v2/rebalance \
 ```
 
 - `replicationLagThreshold`: maximum replication lag, in bytes, a desired leader may have for its transfer to be accepted. Defaults to `8388608` (8 MB).
-- `replicationTimeout`: an ISO-8601 duration for how long a partition may stay frozen waiting for its desired leader to catch up before the transfer is abandoned. Defaults to `PT10S` (10 seconds)
+- `replicationTimeout`: an ISO-8601 duration for how long a partition may stay frozen waiting for its desired leader to catch up before the transfer is abandoned. Defaults to `PT10S` (10 seconds).
 - `maxTransferAttempts`: how many times the current leader prompts the desired leader to take over before giving up. Defaults to `3`.
-- `leaderWaitTimeout`: an ISO-8601 duration for how long the coordinator waits for a leaderless partition to elect a leader before reporting `NO_LEADER` and moving on. Defaults to `PT1M` (1 minute)
+- `leaderWaitTimeout`: an ISO-8601 duration for how long the coordinator waits for a leaderless partition to elect a leader before reporting `NO_LEADER` and moving on. Defaults to `PT1M` (1 minute).
 
 The default values for these parameters are configurable as broker options (see the [`camunda.cluster.raft.rebalance` properties reference](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camundaclusterraftrebalance)).
 
 :::note
 
-The previous `/actuator/rebalance` endpoint is deprecated but still available. It implements a simpler and more disruptive rebalancing mechanism (triggering simultaneous elections on all unbalanced partitions). This document otherwise describes exclusively the behaviour of the new rebalancing endpoint.
+The previous `/actuator/rebalance` endpoint is deprecated but still available. It implements a simpler and more disruptive rebalancing mechanism by triggering simultaneous elections on all unbalanced partitions. This document otherwise describes only the behavior of the new rebalancing endpoint.
 
 :::
 
@@ -72,7 +72,7 @@ Before transferring leadership for a partition, the coordinator checks the desir
 If the lag is within tolerance, the partition is paused and the desired leader is given up to `replicationTimeout` to catch up:
 
 - If it catches up in time, leadership transfers to it and the pause is lifted.
-- If it doesn't, the transfer ends with `REPLICATION_TIMED_OUT` and the partition resumes under its current leader.
+- If it does not catch up in time, the transfer ends with `REPLICATION_TIMED_OUT` and the partition resumes under its current leader.
 
 Once caught up, the coordinator prompts the desired leader to take over, retrying up to `maxTransferAttempts` times. If leadership still hasn't moved, the transfer ends with `TIMEOUT_NOW_EXHAUSTED` and the partition again resumes under its current leader.
 
@@ -98,9 +98,9 @@ This is typically observed externally as:
 
 The `GET /cluster/v2/rebalance` endpoint exposes a live balance status for the cluster, indicating which (if any) partitions are not currently led by the desired leader. If you are using the Zeebe Grafana dashboard, this information is also visible in the `Rebalancing` section.
 
-:::warn
+:::warning
 
-Generally, you should rebalance when your cluster is under low load to avoid disruptions to throughput and latency (as well as maximising the effectiveness of the rebalance, i.e. what percentage of unbalanced partitions are successfully transferred).
+Generally, you should rebalance when your cluster is under low load to avoid disruptions to throughput and latency, and to maximize the percentage of unbalanced partitions that are successfully transferred.
 
 :::
 
