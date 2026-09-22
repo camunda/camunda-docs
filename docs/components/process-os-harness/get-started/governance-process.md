@@ -21,7 +21,7 @@ The engagement runs through four phases in order. The output of one phase is the
 | Phase     | Goal                                                                        | Milestone reached             |
 | --------- | --------------------------------------------------------------------------- | ----------------------------- |
 | Scope     | Define the scope of the process to re-engineer.                             | Process scope defined         |
-| Discover  | Discover the as-is process from provided sources, and close gaps with SMEs. | As-is model finalized         |
+| Discover  | Discover the as-is process from provided sources, and close gaps with SMEs. | As-is models finalized        |
 | Transform | Transform the as-is process into a to-be process.                           | To-be models finalized        |
 | Implement | Generate and implement the executable Camunda solution.                     | Executable solution generated |
 
