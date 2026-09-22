@@ -524,7 +524,7 @@ Before deploying Camunda, ensure you have saved all required configuration files
 | PostgreSQL           | `postgresql-clusters.yml`                | PostgreSQL cluster definitions   | Infrastructure deployment |
 | Elasticsearch        | `elasticsearch-cluster.yml`              | Elasticsearch cluster definition | Infrastructure deployment |
 | Keycloak (Local)     | `keycloak-instance-no-domain.yml`        | Local Keycloak instance          | Infrastructure deployment |
-| Keycloak (NGINX)     | `keycloak-instance-domain-nginx.yml`     | Production Keycloak with NGINX   | Infrastructure deployment |
+| Keycloak (Contour)   | `keycloak-instance-domain-contour.yml`   | Production Keycloak with Contour | Infrastructure deployment |
 | Keycloak (OpenShift) | `keycloak-instance-domain-openshift.yml` | OpenShift Keycloak instance      | Infrastructure deployment |
 
 #### Camunda integration files (Helm values)

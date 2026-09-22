@@ -166,7 +166,7 @@ Therefore, pay attention to the TLS configuration of the Ingress controller of y
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -300,7 +300,7 @@ For example:
 [FAIL] None of the ingresses contain the annotation nginx.ingress.kubernetes.io/backend-protocol: GRPC, which is required for Zeebe ingress.
 ```
 
-The error message suggests adjusting the Ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
+For ingress-nginx, the error message suggests adjusting the Ingress configuration to include the required annotation. For Contour, verify the `projectcontour.io/upstream-protocol.h2c` annotation on the Orchestration Cluster service instead. You can also explore the source of the script to have a better understanding of the reason for the failure.
 
 :::note
 Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the Ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
