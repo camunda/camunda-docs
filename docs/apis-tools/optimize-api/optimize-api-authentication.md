@@ -81,7 +81,7 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
    ```
 6. Capture the value of the `access_token` property and store it as your token.
 
-Through Camunda 8.9, Self-Managed also accepted a single shared access token on this API. Camunda 8.10 removes this option. See [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
+Through Camunda 8.9, Self-Managed also accepted a single shared access token on this API. Camunda 8.10 no longer accepts it. Only the temporary 8.9 fallback still accepts it. See [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
 
 </TabItem>
 
@@ -102,7 +102,7 @@ For example, to send a request to the Optimize API's ["Get dashboard IDs"](./das
 <TabItem value='saas'>
 
 :::tip
-The `${CAMUNDA_TASKLIST_BASE_URL}` variable below represents the URL of the Optimize API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.optimize.camunda.io/${CLUSTER_ID}`.
+The `${CAMUNDA_OPTIMIZE_BASE_URL}` variable below represents the URL of the Optimize API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.optimize.camunda.io/${CLUSTER_ID}`.
 :::
 
 </TabItem>
