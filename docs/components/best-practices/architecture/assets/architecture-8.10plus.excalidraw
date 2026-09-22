@@ -3032,31 +3032,39 @@
    "link": null,
    "locked": false,
    "type": "arrow",
-   "id": "a_search_frontends",
-   "x": 970,
-   "y": 520,
-   "width": 40,
-   "height": 0,
+   "id": "a_api_search",
+   "x": 920,
+   "y": 670,
+   "width": 80,
+   "height": 110,
    "points": [
     [
      0,
      0
     ],
     [
-     -40,
+     30,
      0
+    ],
+    [
+     30,
+     -110
+    ],
+    [
+     80,
+     -110
     ]
    ],
    "startArrowhead": null,
    "endArrowhead": "arrow",
    "roundness": null,
    "startBinding": {
-    "elementId": "search_box",
+    "elementId": "query_api",
     "focus": 0,
     "gap": 4
    },
    "endBinding": {
-    "elementId": "frontends_orch_box",
+    "elementId": "search_box",
     "focus": 0,
     "gap": 4
    }
@@ -3073,6 +3081,53 @@
    "seed": 2449,
    "version": 1,
    "versionNonce": 2456,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "type": "arrow",
+   "id": "a_search_secondary",
+   "x": 1490,
+   "y": 520,
+   "width": 110,
+   "height": 0,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     110,
+     0
+    ]
+   ],
+   "startArrowhead": null,
+   "endArrowhead": "arrow",
+   "roundness": null,
+   "startBinding": {
+    "elementId": "search_box",
+    "focus": 0,
+    "gap": 4
+   },
+   "endBinding": {
+    "elementId": "secondary_storage_box",
+    "focus": 0,
+    "gap": 4
+   }
+  },
+  {
+   "strokeColor": "#64748b",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 2,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 2463,
+   "version": 1,
+   "versionNonce": 2470,
    "isDeleted": false,
    "groupIds": [],
    "boundElements": null,
@@ -3117,9 +3172,9 @@
    "roughness": 0,
    "opacity": 100,
    "angle": 0,
-   "seed": 2463,
+   "seed": 2477,
    "version": 1,
-   "versionNonce": 2470,
+   "versionNonce": 2484,
    "isDeleted": false,
    "groupIds": [],
    "boundElements": null,
@@ -3168,9 +3223,9 @@
    "roughness": 0,
    "opacity": 100,
    "angle": 0,
-   "seed": 2477,
+   "seed": 2491,
    "version": 1,
-   "versionNonce": 2484,
+   "versionNonce": 2498,
    "isDeleted": false,
    "groupIds": [],
    "boundElements": null,
@@ -3215,9 +3270,9 @@
    "roughness": 0,
    "opacity": 100,
    "angle": 0,
-   "seed": 2491,
+   "seed": 2505,
    "version": 1,
-   "versionNonce": 2498,
+   "versionNonce": 2512,
    "isDeleted": false,
    "groupIds": [],
    "boundElements": null,
@@ -3262,9 +3317,9 @@
    "roughness": 0,
    "opacity": 100,
    "angle": 0,
-   "seed": 2505,
+   "seed": 2519,
    "version": 1,
-   "versionNonce": 2512,
+   "versionNonce": 2526,
    "isDeleted": false,
    "groupIds": [],
    "boundElements": null,
@@ -3313,9 +3368,9 @@
    "roughness": 0,
    "opacity": 100,
    "angle": 0,
-   "seed": 2519,
+   "seed": 2533,
    "version": 1,
-   "versionNonce": 2526,
+   "versionNonce": 2540,
    "isDeleted": false,
    "groupIds": [],
    "boundElements": null,
@@ -3368,9 +3423,9 @@
    "roughness": 0,
    "opacity": 100,
    "angle": 0,
-   "seed": 2533,
+   "seed": 2547,
    "version": 1,
-   "versionNonce": 2540,
+   "versionNonce": 2554,
    "isDeleted": false,
    "groupIds": [],
    "boundElements": null,
@@ -3415,9 +3470,9 @@
    "roughness": 0,
    "opacity": 100,
    "angle": 0,
-   "seed": 2547,
+   "seed": 2561,
    "version": 1,
-   "versionNonce": 2554,
+   "versionNonce": 2568,
    "isDeleted": false,
    "groupIds": [],
    "boundElements": null,
@@ -3449,6 +3504,312 @@
    },
    "endBinding": {
     "elementId": "object_storage_box",
+    "focus": 0,
+    "gap": 4
+   }
+  },
+  {
+   "strokeColor": "#64748b",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 2,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 2575,
+   "version": 1,
+   "versionNonce": 2582,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "type": "arrow",
+   "id": "a_api_mgmtid",
+   "x": 650,
+   "y": 650,
+   "width": 355,
+   "height": 468,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     -55,
+     0
+    ],
+    [
+     -55,
+     -468
+    ],
+    [
+     300,
+     -468
+    ]
+   ],
+   "startArrowhead": null,
+   "endArrowhead": "arrow",
+   "roundness": null,
+   "startBinding": {
+    "elementId": "camunda_api_box",
+    "focus": 0,
+    "gap": 4
+   },
+   "endBinding": {
+    "elementId": "mgmtid_backend",
+    "focus": 0,
+    "gap": 4
+   }
+  },
+  {
+   "strokeColor": "#64748b",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 2,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 2589,
+   "version": 1,
+   "versionNonce": 2596,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "type": "arrow",
+   "id": "a_mgmtid_postgres",
+   "x": 1160,
+   "y": 182,
+   "width": 440,
+   "height": 0,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     440,
+     0
+    ]
+   ],
+   "startArrowhead": null,
+   "endArrowhead": "arrow",
+   "roundness": null,
+   "startBinding": {
+    "elementId": "mgmtid_backend",
+    "focus": 0,
+    "gap": 4
+   },
+   "endBinding": {
+    "elementId": "postgres",
+    "focus": 0,
+    "gap": 4
+   }
+  },
+  {
+   "strokeColor": "#64748b",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 2,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 2603,
+   "version": 1,
+   "versionNonce": 2610,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "type": "arrow",
+   "id": "a_user_hub",
+   "x": 100,
+   "y": 630,
+   "width": 565,
+   "height": 478,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     -478
+    ],
+    [
+     565,
+     -478
+    ]
+   ],
+   "startArrowhead": null,
+   "endArrowhead": "arrow",
+   "roundness": null,
+   "startBinding": {
+    "elementId": "user",
+    "focus": 0,
+    "gap": 4
+   },
+   "endBinding": {
+    "elementId": "hub",
+    "focus": 0,
+    "gap": 4
+   }
+  },
+  {
+   "strokeColor": "#64748b",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 2,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 2617,
+   "version": 1,
+   "versionNonce": 2624,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "type": "arrow",
+   "id": "a_user_optimize",
+   "x": 110,
+   "y": 650,
+   "width": 540,
+   "height": 305,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     -305
+    ],
+    [
+     540,
+     -305
+    ]
+   ],
+   "startArrowhead": null,
+   "endArrowhead": "arrow",
+   "roundness": null,
+   "startBinding": {
+    "elementId": "user",
+    "focus": 0,
+    "gap": 4
+   },
+   "endBinding": {
+    "elementId": "opt_frontend",
+    "focus": 0,
+    "gap": 4
+   }
+  },
+  {
+   "strokeColor": "#64748b",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 2,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 2631,
+   "version": 1,
+   "versionNonce": 2638,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "type": "arrow",
+   "id": "a_user_operate",
+   "x": 120,
+   "y": 670,
+   "width": 540,
+   "height": 150,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     -150
+    ],
+    [
+     540,
+     -150
+    ]
+   ],
+   "startArrowhead": null,
+   "endArrowhead": "arrow",
+   "roundness": null,
+   "startBinding": {
+    "elementId": "user",
+    "focus": 0,
+    "gap": 4
+   },
+   "endBinding": {
+    "elementId": "operate",
+    "focus": 0,
+    "gap": 4
+   }
+  },
+  {
+   "strokeColor": "#64748b",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 2,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 2645,
+   "version": 1,
+   "versionNonce": 2652,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "type": "arrow",
+   "id": "a_user_rebalance",
+   "x": 60,
+   "y": 730,
+   "width": 590,
+   "height": 295,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     295
+    ],
+    [
+     590,
+     295
+    ]
+   ],
+   "startArrowhead": null,
+   "endArrowhead": "arrow",
+   "roundness": null,
+   "startBinding": {
+    "elementId": "user",
+    "focus": 0,
+    "gap": 4
+   },
+   "endBinding": {
+    "elementId": "rebalance",
     "focus": 0,
     "gap": 4
    }
