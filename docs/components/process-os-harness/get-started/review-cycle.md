@@ -23,7 +23,7 @@ ProcessOS Harness stores review questions in structured YAML files, such as `tra
 
 | Type                                   | Command                                 | What it produces                                                                                                   |
 | -------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Camunda Tasklist Questionair (Default) | Camunda Tasklist                        | SMEs can also answer questions in Camunda Tasklist, because the governance process presents them as Camunda Forms. |
+| Camunda Tasklist Questionnaire (Default) | Camunda Tasklist                        | SMEs can also answer questions in Camunda Tasklist, because the governance process presents them as Camunda Forms. |
 | Skill                                  | `/process-os-questions-md-export`       | A Markdown copy of the questions, for answering in a text editor.                                                  |
 | Skill                                  | `/process-os-questions-xlsx-export`     | A spreadsheet copy, for answering in Excel.                                                                        |
 | Skill                                  | `/process-os-review-answer-application` | Applies answered questions back into the discovery documents.                                                      |
