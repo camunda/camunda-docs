@@ -88,17 +88,21 @@ m2mClient:
   m2mClientId: ${CAMUNDA_OPTIMIZE_M2M_ACCOUNTS_AUTH0_CLIENTID:}
   m2mClientSecret: ${CAMUNDA_OPTIMIZE_M2M_ACCOUNTS_AUTH0_CLIENTSECRET:}
 
-# Authentication for the public APIs of Optimize
+# A global access token used by all public APIs of Optimize
 api:
-  # The public APIs accept OIDC bearer tokens. Configure the tokens with
-  # camunda.security.authentication.oidc.issuer-uri and camunda.security.authentication.oidc.audiences.
-  # This reference no longer lists the legacy keys accessToken, jwtSetUri, and audience.
-  # Camunda 8.10 does not support accessToken, and maps jwtSetUri and audience to the OIDC settings.
-  # The 8.9 fallback (optimize.security.csl.enabled=false) still uses all three keys.
+  # Authentication information to be provided for the public APIs of Optimize.
+  # Provide either
+  # 1. A static access token OR
+  # 2. a URL for a resource server AND an audience to validate against.
+  # If both are provided, the static access token will be ignored and the resource server will be used for validation
+  # instead
+  accessToken: ${OPTIMIZE_API_ACCESS_TOKEN:null}
+  jwtSetUri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI:null}
+  audience: ${CAMUNDA_OPTIMIZE_API_AUDIENCE:optimize}
   # Self-managed (CCSM) only. When true, non-public /api/** endpoints also accept an
   # 'Authorization: Bearer <jwt>' header in addition to the existing Identity session cookie.
-  # The bearer token is validated with the configured JWK set URI and audience.
-  # Requires a JWK set URI to be configured. Defaults to false.
+  # The bearer token is validated with the same jwtSetUri / audience configured above.
+  # Requires jwtSetUri to be set. Defaults to false.
   jwtAuthForApiEnabled: ${CAMUNDA_OPTIMIZE_API_JWT_AUTH_ENABLED:false}
 
 container:
