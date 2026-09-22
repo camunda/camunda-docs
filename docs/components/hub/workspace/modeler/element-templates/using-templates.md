@@ -6,7 +6,7 @@ description: "Learn how to apply, remove, update, and replace templates."
 
 ## Applying templates
 
-To create, append, or change an element with a reusable asset, use [Browse all](../modeling/browse-all-resources.md). The following steps apply a template to an existing element through the properties panel:
+To create, append, or change an element with a reusable asset, use **Browse all**. See the [resource discovery guide](../modeling/browse-all-resources.md) for the complete flow. The following steps apply a template to an existing element through the properties panel:
 
 If you have already published an [element template](/components/modeler/element-templates/about-templates.md) to your project or organization:
 

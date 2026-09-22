@@ -31,9 +31,10 @@ These are the supported methods you can use to add files to Camunda Hub:
 
 :::note
 
-- **Import** and **Browse blueprints**: If the imported resources include at least **one BPMN**, Camunda Hub treats them as a **project** and groups them accordingly.
-- **Upload files** and **Browse all**: Always treat files as **independent files**, regardless of whether BPMN files are present.
-  :::
+- **Import** and **Browse blueprints**: If the imported resources include at least one BPMN file, Camunda Hub treats them as a project and groups them accordingly.
+- **Upload files** and **Browse all**: Always treat files as independent files, regardless of whether BPMN files are present.
+
+:::
 
 ## Template conflicts
 

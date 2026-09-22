@@ -39,7 +39,7 @@ When you create, append, or change an element, the compact menu separates what y
 - **BPMN**: The standard BPMN elements, in their usual categories.
 - **Reusable assets**: Catalog assets, connectors, and templates from your project, together with resources the project already contains, such as forms, called processes, decisions, and RPA scripts.
 
-For the preferred cross-source view, select **Browse all** at the top of the menu. With [Browse all](../modeling/browse-all-resources.md), you can search and filter catalog, shared, and project assets alongside standard elements and Marketplace connectors.
+For the preferred cross-source view, select **Browse all** at the top of the menu. The [resource discovery guide](../modeling/browse-all-resources.md) explains how to search and filter catalog, shared, and project assets alongside standard elements and Marketplace connectors.
 
 To insert a catalog asset, select **Browse all > Catalog assets**, then select the asset. If **Browse all** isn't offered, open the **Reusable assets** tab and select the asset. This creates a new element with the template already applied.
 
