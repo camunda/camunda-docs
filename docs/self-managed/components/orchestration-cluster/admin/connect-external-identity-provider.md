@@ -127,7 +127,7 @@ You may need to customize the redirect URI in advanced scenarios, such as:
 
 Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
 
-The Orchestration Cluster validates the redirect URI at startup. It does not start if the value is not a complete callback URL. Set a value that:
+The Orchestration Cluster validates the redirect URI at startup. It does not start if the value is not a complete callback URL. The check accepts a value that:
 
 - starts with `{baseUrl}`, or has an `http` or `https` scheme and a host,
 - has a port between 1 and 65535, if it has a port,
