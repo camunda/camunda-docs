@@ -44,7 +44,7 @@ ProcessOS Harness is distributed through repositories available to early access 
    c8 os install claudecode
    ```
 
-   This command downloads the release bundle, extracts it into the current directory, and records every installed file in `.process-os.yaml`. Installed files are added to `.gitignore` automatically, so they're never committed.
+   This command downloads the release bundle and extracts it into the current directory.
 
 1. Create a version-controlled project folder:
 
