@@ -852,7 +852,7 @@ In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its AP
 
 **Action:** Change these API clients to OIDC bearer tokens before you upgrade to 8.10. Then remove `api.accessToken` from your configuration.
 
-**Alternative:** To keep the static token while you move the clients to OIDC bearer tokens, set `optimize.security.csl.enabled=false` and keep `api.accessToken`. This fallback is available for the duration of 8.10. Camunda 8.11 removes the fallback and the static token, so complete the move before you upgrade to 8.11.
+**Alternative:** The static token works only if you opt into the 8.9 security fallback with `optimize.security.csl.enabled=false`. Camunda 8.11 will remove this fallback and the legacy configuration keys. Migrate these API clients during 8.10.
 
 <p className="link-arrow">[Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md)</p>
 

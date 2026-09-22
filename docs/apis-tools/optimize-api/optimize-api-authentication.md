@@ -81,7 +81,7 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
    ```
 6. Capture the value of the `access_token` property and store it as your token.
 
-Through Camunda 8.9, Self-Managed also accepted a single shared access token on this API. Camunda 8.10 no longer accepts it, unless you use the temporary 8.9 fallback. Camunda 8.11 removes both. See [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
+Through Camunda 8.9, Self-Managed also accepted a single shared access token on this API. Camunda 8.10 no longer accepts it. The token works only if you opt into the 8.9 security fallback, which Camunda 8.11 will remove. See [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
 
 </TabItem>
 
