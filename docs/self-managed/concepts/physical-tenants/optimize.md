@@ -5,7 +5,7 @@ sidebar_label: "Optimize"
 description: "Learn how to deploy Optimize per Physical Tenant, how one Management Identity isolates multiple Optimize deployments, and the limitation with logical tenants that reuse the same ID across tenants."
 ---
 
-Deploy a separate Optimize instance for each Physical Tenant, and share one Management Identity across all of them, without one tenant's Optimize data being reachable from another tenant's Optimize instance.
+Deploy a separate Optimize instance for each Physical Tenant, and share one Management Identity across all of them. With distinct Optimize audiences and roles, each Optimize instance authorizes access to its own data. If you also use logical tenants inside those instances, avoid the logical-tenant-ID collision described below.
 
 :::note
 This page assumes familiarity with the [Physical Tenant isolation model](./index.md) and the identity deployment models in [authentication and authorization](./authentication-authorization.md).
@@ -41,10 +41,10 @@ global:
 
 You do not need a separate Management Identity per Physical Tenant's Optimize instance. A single Management Identity instance can serve every Optimize deployment, provided each one is configured with its own `audience` and its own `roleName`, as shown above.
 
-Isolation between Optimize instances is enforced by the **role grant**, not by the audience alone:
+Isolation between Optimize instances is enforced by the role grant, not by the audience alone:
 
-- Every Optimize instance also accepts a cluster-wide shared audience (the Hub or Web Modeler client audience), so a user's Hub session token can authenticate against any Optimize instance in the deployment. This is intentional — it's what lets Hub's business value dashboard call Optimize's API on the user's behalf. Authentication alone does not grant access to Optimize data.
-- Management Identity stores permissions per audience. When an Optimize instance checks whether the current user may access it, it asks Management Identity for the permissions granted against **its own configured audience**, not the audience the token happened to authenticate with.
+- Every Optimize instance also accepts a cluster-wide shared audience (the Hub or Web Modeler client audience), so a user's Hub session token can authenticate against any Optimize instance in the deployment. This is intentional. It lets Hub's business value dashboard call Optimize's API on the user's behalf. Authentication alone does not grant access to Optimize data.
+- Management Identity stores permissions per audience. When an Optimize instance checks whether the current user may access it, it asks Management Identity for the permissions granted against its own configured audience, not the audience the token happened to authenticate with.
 - A user only sees data from an Optimize instance if they hold a role that grants `write:*` on that instance's specific audience. Holding the shared Hub audience in a token is not sufficient on its own.
 
 :::warning
@@ -59,10 +59,10 @@ Management Identity's tenant-authorization lookup has no concept of Physical Ten
 
 If the same logical tenant ID exists in two different Physical Tenants (for example, both tenant A and tenant B define a logical tenant called `b`), and a user:
 
-1. is assigned that logical tenant ID in Management Identity, **and**
+1. is assigned that logical tenant ID in Management Identity, and
 2. holds the Optimize role for both Physical Tenants' Optimize instances (see the role grant above),
 
-that user sees the logical tenant's data in **both** Optimize instances, even though the underlying data belongs to two different, and otherwise isolated, Physical Tenants. Neither Optimize instance can tell that the two identically-named logical tenants are unrelated.
+that user sees the logical tenant's data in both Optimize instances, even though the underlying data belongs to two different, and otherwise isolated, Physical Tenants. Neither Optimize instance can tell that the two identically-named logical tenants are unrelated.
 
 This only applies to a user who is already independently granted the Optimize role on both Physical Tenants' Optimize instances. A user granted the Optimize role for only one Physical Tenant's Optimize instance never reaches the other one, regardless of logical tenant assignment.
 
@@ -70,9 +70,9 @@ This only applies to a user who is already independently granted the Optimize ro
 
 Choose one of the following when running several Physical Tenants' Optimize instances behind one shared Management Identity:
 
-- **Use unique logical tenant IDs across every Physical Tenant.** This is the simplest option and removes the collision entirely. Camunda does not validate logical tenant ID uniqueness across Physical Tenants, so this is a naming convention you enforce yourself.
-- **Avoid granting the Optimize role for more than one Physical Tenant's Optimize instance to the same user**, if you do reuse logical tenant IDs across tenants and need to keep them isolated.
-- **Run a separate Management Identity per Physical Tenant** if you need both identical logical tenant IDs across tenants and independent enforcement of them. This trades the simpler single-Identity setup described above for full per-tenant identity isolation.
+- Use unique logical tenant IDs across every Physical Tenant. This is the simplest option and removes the collision entirely. Camunda does not validate logical tenant ID uniqueness across Physical Tenants, so this is a naming convention you enforce yourself.
+- Avoid granting the Optimize role for more than one Physical Tenant's Optimize instance to the same user, if you do reuse logical tenant IDs across tenants and need to keep them isolated.
+- Run a separate Management Identity per Physical Tenant if you need both identical logical tenant IDs across tenants and independent enforcement of them. This trades the simpler single-Identity setup described above for full per-tenant identity isolation.
 
 ## Related pages
 
