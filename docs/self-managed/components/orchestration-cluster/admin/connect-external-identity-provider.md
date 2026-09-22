@@ -131,10 +131,10 @@ The Orchestration Cluster validates the redirect URI at startup. It does not sta
 
 - starts with `{baseUrl}`, or has an `http` or `https` scheme and a host,
 - has a port between 1 and 65535, if it has a port,
-- ends with `/sso-callback`,
+- has a callback path,
 - has no fragment (`#`).
 
-The default value `{baseUrl}/sso-callback` is correct. The cluster also validates the value if you only use API clients.
+The default value `{baseUrl}/sso-callback` is correct. The cluster also validates the value if you only use API clients. A callback path other than `/sso-callback` passes this check, but the cluster does not serve it, and the login does not complete.
 
 Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
 
