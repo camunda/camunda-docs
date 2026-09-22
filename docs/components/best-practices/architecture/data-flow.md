@@ -15,7 +15,7 @@ This is an overview of Camunda 8.10+ architecture:
 
 <!-- Source: assets/architecture-8.10plus.excalidraw (open at excalidraw.com to edit) -->
 
-![Camunda 8.10+ architecture overview](assets/architecture-8.10plus.svg)
+![Component map of Camunda 8.10+ showing clients, the Orchestration Cluster, Management Cluster, Optimize, and how they connect to primary and secondary storage](assets/architecture-8.10plus.svg)
 
 See the [reference architecture](/self-managed/reference-architecture/reference-architecture.md) for a component-topology overview.
 
@@ -38,7 +38,7 @@ This path is highlighted green in the following diagram:
 
 <!-- Source: assets/architecture-8.10plus-data-flow-command.excalidraw (open at excalidraw.com to edit) -->
 
-![Camunda 8.10+ architecture overview - Data Flow Command processing path](assets/architecture-8.10plus-data-flow-command.svg)
+![Camunda 8.10+ command processing path highlighted in green: client through the Command API to the Raft log and processing engine, with the response returned after commit](assets/architecture-8.10plus-data-flow-command.svg)
 
 Client responses are not sent until the command is fully processed by the engine. The engine can only process a command once it has been committed to the log (as part of the Raft consensus protocol). Commands are read sequentially per partition, only one command per partition is processed at a time, and only the Raft partition leader runs the engine.
 
@@ -56,7 +56,7 @@ This pipeline is highlighted blue in the following diagram:
 
 <!-- Source: assets/architecture-8.10plus-data-flow-export-path.excalidraw (open at excalidraw.com to edit) -->
 
-![Camunda 8.10+ architecture overview - Data Flow Export pipeline](assets/architecture-8.10plus-data-flow-export-path.svg)
+![Camunda 8.10+ export pipeline highlighted in blue: the processing engine's exporter writing from primary storage into secondary storage (Elasticsearch, OpenSearch, or RDBMS)](assets/architecture-8.10plus-data-flow-export-path.svg)
 
 **The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count.
 
@@ -91,7 +91,7 @@ This path is highlighted red in the following diagram:
 
 <!-- Source: assets/architecture-8.10plus-data-flow-query.excalidraw (open at excalidraw.com to edit) -->
 
-![Camunda 8.10+ architecture overview - Data Flow Query path](assets/architecture-8.10plus-data-flow-query.svg)
+![Camunda 8.10+ query path highlighted in red: Operate, Tasklist, and the REST Query API reading directly from secondary storage, bypassing the engine](assets/architecture-8.10plus-data-flow-query.svg)
 
 Query results depend on the performance of both the primary (processing path) and secondary storage (exporting pipeline). They are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI. This is measured as the **data availability latency**.
 
@@ -105,7 +105,7 @@ This is highlighted purple in the following diagram:
 
 <!-- Source: assets/architecture-8.10plus-data-flow-optimize.excalidraw (open at excalidraw.com to edit) -->
 
-![Camunda 8.10+ architecture overview - Data Flow Optimize](assets/architecture-8.10plus-data-flow-optimize.svg)
+![Camunda 8.10+ Optimize data flow highlighted in purple: the importer reading raw events from Elasticsearch/OpenSearch and the backend writing analytics indices back into the same or another cluster](assets/architecture-8.10plus-data-flow-optimize.svg)
 
 1. The Elasticsearch/OpenSearch exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
 2. Optimize's **importer** reads from those indices and transforms the data into its own analytics indices.
