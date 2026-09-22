@@ -35,7 +35,7 @@ ProcessOS Harness is distributed through repositories available to early access 
 1. Load the ProcessOS Harness plugin:
 
    ```bash
-   c8 load plugin --from https://github.com/camunda/c8ctl-plugin-process-os
+   c8 load plugin @camunda8/c8ctl-plugin-process-os
    ```
 
 1. Install ProcessOS Harness for your AI coding agent:
@@ -52,7 +52,7 @@ ProcessOS Harness is distributed through repositories available to early access 
    git init && git add . && git commit -m "ProcessOS Harness setup"
    ```
 
-1. Start the journey. Launch your AI coding agent, select at least the Opus model with `/model`, then run:
+1. Start the journey. Launch your AI coding agent, select a model at least as capable as Opus, then run:
 
    ```text
    /process-os-governance-start

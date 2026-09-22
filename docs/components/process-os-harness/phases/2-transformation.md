@@ -22,8 +22,6 @@ A full run always includes the incremental tier, then asks whether to also run t
 | `radical`     | A redesign that challenges organizational boundaries.                                               |
 | `moonshot`    | An agent-first design with almost no user tasks.                                                    |
 
-The migration tier is exclusive. A run is either a migration or a to-be exploration, never both, because the analysis phases exist to propose exactly the changes migration forbids.
-
 ## Next step
 
 Continue with [implement the Camunda solution](3-implementation.md).

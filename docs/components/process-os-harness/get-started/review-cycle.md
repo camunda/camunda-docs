@@ -21,12 +21,12 @@ Because the interaction model is iterative, plan for more than one cycle per pha
 
 ProcessOS Harness stores review questions in structured YAML files, such as `transformation/review-questions.yaml`. SMEs rarely want to edit YAML, so you can export the questions into a more familiar format and import the answers afterwards.
 
-| Type                                   | Command                                 | What it produces                                                                                                   |
-| -------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Type                                     | Command                                 | What it produces                                                                                                   |
+| ---------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | Camunda Tasklist Questionnaire (Default) | Camunda Tasklist                        | SMEs can also answer questions in Camunda Tasklist, because the governance process presents them as Camunda Forms. |
-| Skill                                  | `/process-os-questions-md-export`       | A Markdown copy of the questions, for answering in a text editor.                                                  |
-| Skill                                  | `/process-os-questions-xlsx-export`     | A spreadsheet copy, for answering in Excel.                                                                        |
-| Skill                                  | `/process-os-review-answer-application` | Applies answered questions back into the discovery documents.                                                      |
+| Skill                                    | `/process-os-questions-md-export`       | A Markdown copy of the questions, for answering in a text editor.                                                  |
+| Skill                                    | `/process-os-questions-xlsx-export`     | A spreadsheet copy, for answering in Excel.                                                                        |
+| Skill                                    | `/process-os-review-answer-application` | Applies answered questions back into the discovery documents.                                                      |
 
 You can also modify the review cycles to your needs by adjusting the `Review XX results` subprocesses in the governance process before the execution. The Camunda Platform is perfectly suited to optimize and automate gathering SME feedback.
 
@@ -46,7 +46,7 @@ Reviewers can add annotations, rename steps, and restructure flows directly in C
 
 Each phase has per default a feedback mode that collects reviewer input, reconciles it with the generated artifacts, and regenerates what changed.
 
-Feedback lands in your working tree as uncommitted changes. Review the diff before you commit, because this is the point where you decide which agent changes become part of the project record.
+Collected feedback lands in the iteration's `feedback` folder, described in [manage files during the review cycle](#manage-files-during-the-review-cycle).
 
 ## Manage files during the review cycle
 

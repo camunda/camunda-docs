@@ -29,17 +29,16 @@ WIP!
 
 - Each phase starts with you defining the run configuration for the upcoming iteration
 - The configuration can be adjusted after each run.
--
 
 ## Gates and tasks
 
 The governance process needs human input to ensure the right outcomes.
 
-| Project / Process scope         | Camunda Tasklist, using a form.                                                                      | The project and process scope are entered in the first phase.                                   |
+| Type                            | Where you complete it                                                                                | Typical use                                                                                     |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Process Scope                   | Camunda Tasklist, using a form.                                                                      | The project and process scope are entered in the first phase.                                   |
-| Phase configuration             | Camunda Tasklist, using a form.                                                                      | Each phase has configuration paramters.                                                         |
-| Human gates                     | Skills define human gates. These are directly raised in the AI Coding Agent session in the terminal. | Skill specific questions the agents needs input for.                                            |
+| Project / Process scope         | Camunda Tasklist, using a form.                                                                      | The project and process scope are entered in the first phase.                                   |
+| Phase configuration             | Camunda Tasklist, using a form.                                                                      | Each phase has configuration parameters.                                                        |
+| Human gates                     | Skills define human gates. These are directly raised in the AI Coding Agent session in the terminal. | Skill specific questions the agent needs input for.                                             |
 | [Builder task](builder-task.md) | The AI coding agent, driven by a ProcessOS Harness skill.                                            | Anything an agent can generate, transform, or check: discovery specialists, BPMN, forms, tests. |
 
 ## Next steps

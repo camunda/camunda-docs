@@ -38,7 +38,6 @@ Source quality drives the accuracy of the as-is process, and a confident but wro
 - Prefer primary artifacts, such as exported legacy process definitions, production configuration, and real forms, over summary presentations.
 - Include the systems the process integrates with, so integration points surface during discovery rather than during implementation.
 - Provide current material. Documentation for a version of the process no longer in use produces a model that looks right and isn't.
-- Name known gaps in `process-scope.md`. Telling ProcessOS Harness what's missing is more reliable than hoping it infers the gap.
 - Prefer anonymized samples to production records. Discovery needs the shape of the data, rarely the data itself.
 
 ## Handle personal and regulated data
