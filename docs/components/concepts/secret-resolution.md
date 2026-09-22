@@ -6,7 +6,7 @@ description: "Understand camunda.secrets.<name> references, the two paths that r
 
 Secret resolution replaces a `camunda.secrets.<name>` reference, known as a Secret reference (Orchestration Cluster), with the value a configured secret store holds for it, without that value being written into a process model, a job variable literal, or a configuration file.
 
-This is a separate mechanism from the connector runtime's `{{secrets.<name>}}` syntax, now called Secret reference (legacy). The two forms are resolved independently and are never mixed: a reference written in one form is never satisfied by a store or provider configured for the other.
+This is a separate mechanism from the connector runtime's `{{secrets.<name>}}` syntax, now called Secret reference (legacy). By default, the two forms are resolved independently by different components, and each reads only its own store or providers. Optionally, if the connector runtime is configured for it (`camunda.connector.secret-resolver.legacy.mode` set to `FALLBACK`), a legacy reference the runtime cannot find in its providers falls back to the `camunda.secrets.<name>` store. See [Using `camunda.secrets.*` references](/components/connectors/use-connectors/index.md#using-camundasecrets-references).
 
 The legacy form was the subject of [security notice 61](/reference/notices.md#notice-61), where an unscoped reference could resolve outside the field it was written in. The secret filter that notice introduces applies only to the legacy form. `camunda.secrets.<name>` resolution isn't affected: the broker records each reference's position in the job variables and replaces only that position, so a reference can't resolve at a field where it wasn't written.
 
@@ -14,9 +14,7 @@ The legacy form was the subject of [security notice 61](/reference/notices.md#no
 Desktop Modeler and Web Modeler flag legacy secret usage when the diagram's selected engine supports `camunda.secrets.<name>`. Use that hint to guide your migration to the new syntax.
 :::
 
-This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
-
-Secret resolution is available in both SaaS and Self-Managed. See [Availability](/components/concepts/secret-resolution-and-job-activation.md#availability) for what each offering provides and what you configure.
+Secret resolution is available in both SaaS and Self-Managed. See [Availability](/components/concepts/secret-resolution-and-job-activation.md#availability) for what each offering provides and what you configure. For a broader overview of how secrets work across Camunda 8, including where secret values are stored and created, see [Secret management](secret-management.md).
 
 ## Reference syntax
 
@@ -74,7 +72,6 @@ Listing is different by design. What a store's cache holds is the values it has 
 - More than one secret store per physical tenant. A reference always addresses the `default` store.
 - Pinning an AWS Secrets Manager secret to a version stage other than `AWSCURRENT`, or a GCP Secret Manager secret to a version other than `latest`.
 - Filtering or paginating a `POST /v2/secrets/list` response, see [Secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md#list-secrets).
-- The general limitations that apply to every alpha feature, see [alpha features](/components/early-access/alpha/alpha-features.md).
 
 ## Related resources
 

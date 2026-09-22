@@ -87,19 +87,19 @@
     "previousVersions": "https://downloads.camunda.cloud/release/camunda-modeler/"
   },
   "camundaRun": {
-    "version": "8.9.19",
-    "date": "Sep 7, 2026",
+    "version": "8.9.21",
+    "date": "Sep 18, 2026",
     "alphaVersion": "8.10.0-alpha5",
     "links": {
       "mac": {
         "stable": [
           {
             "label": "Apple Silicon",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.19/camunda8-run-8.9.19-darwin-aarch64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.21/camunda8-run-8.9.21-darwin-aarch64.zip"
           },
           {
             "label": "Intel",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.19/camunda8-run-8.9.19-darwin-x86_64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.21/camunda8-run-8.9.21-darwin-x86_64.zip"
           }
         ],
         "experimental": [
@@ -117,7 +117,7 @@
         "stable": [
           {
             "label": "Windows (x64)",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.19/camunda8-run-8.9.19-windows-x86_64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.21/camunda8-run-8.9.21-windows-x86_64.zip"
           }
         ],
         "experimental": [
@@ -131,7 +131,7 @@
         "stable": [
           {
             "label": "Linux (x64)",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.19/camunda8-run-8.9.19-linux-x86_64.tar.gz"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.21/camunda8-run-8.9.21-linux-x86_64.tar.gz"
           }
         ],
         "experimental": [
@@ -177,20 +177,20 @@
   },
   "additionalReleases": {
     "orchestrationCluster": {
-      "version": "8.9.19",
-      "date": "Sep 4, 2026",
+      "version": "8.9.21",
+      "date": "Sep 17, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/camunda/releases/tag/8.9.19"
+        "url": "https://github.com/camunda/camunda/releases/tag/8.9.21"
       },
       "previousVersions": "https://github.com/camunda/camunda/releases"
     },
     "connectors": {
-      "version": "8.9.10",
-      "date": "Sep 4, 2026",
+      "version": "8.9.12",
+      "date": "Sep 18, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/connectors/releases/tag/8.9.10"
+        "url": "https://github.com/camunda/connectors/releases/tag/8.9.12"
       },
       "previousVersions": "https://github.com/camunda/connectors/releases"
     },
