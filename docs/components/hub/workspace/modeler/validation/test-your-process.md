@@ -17,7 +17,7 @@ Select any environment configured for your project as your test target. In SaaS,
 Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
 :::
 
-Opening the **Test** tab no longer deploys your process automatically. Use the **Setup test run** panel to connect a cluster, deploy, and configure a test case — see [Get started with Test mode](#get-started-with-test-mode) for the full flow.
+Opening the **Test** tab no longer deploys your process automatically. Use the **Setup test run** panel to connect a cluster, deploy, and configure a test case — see [get started with Test mode](#get-started-with-test-mode) for the full flow.
 
 The selected cluster name is shown in the Test action bar. Click it to switch clusters without leaving Test mode; the newly selected cluster becomes the deployment and execution target.
 
@@ -44,22 +44,26 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 ## Get started with Test mode
 
-When you open the **Test** tab for the first time in a process, the **Setup test run** panel guides you through three steps: **Choose where to run**, **Choose resources to deploy**, and **Configure test case**.
+When you open the **Test** tab for the first time in a process, the **Setup test run** panel guides you through three steps:
+
+1. **Choose where to run**
+2. **Choose resources to deploy**
+3. **Configure test case**
 
 ### 1. Choose where to run
 
 ![Setup test run panel showing the Choose where to run step with a Connect cluster button](../img/test-choose-where-to-run.png)
 
-Click **Connect cluster** and select a target cluster. Once the cluster is healthy, it advances to the next step.
+Click **Connect cluster**, and select a target cluster. Once the cluster is healthy, it advances to the next step.
 
 ### 2. Choose resources to deploy
 
 ![Setup test run panel showing the Choose resources to deploy step with All resources and Only this resource options](../img/test-choose-resources-to-deploy.png)
 
-- **All resources** — deploys the whole process application, including dependencies like called processes or DMN files.
-- **Only this resource** — deploys only the open file. An info alert reminds you that referenced resources, such as called processes, DMN files, or forms, must be deployed separately, or test runs fail with a not found incident.
+- **All resources**: Deploys the whole project, including dependencies like called processes or DMN files.
+- **Only this resource**: Deploys only the open file. An info alert reminds you that referenced resources, such as called processes, DMN files, or forms, must be deployed separately, or test runs fail with a not found incident.
 
-Files outside a process application deploy as **All resources** only; no scope choice is shown. In read-only mode, **Only this resource** is disabled.
+Files outside a project deploy as **All resources** only; no scope choice is shown. In read-only mode, **Only this resource** is disabled.
 
 Click **Deploy**. Once the deploy succeeds, the step shows a **Successfully deployed** badge, or a failure badge if the deploy fails, and the panel automatically progresses to the next step.
 
