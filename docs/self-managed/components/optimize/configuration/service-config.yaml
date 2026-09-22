@@ -90,18 +90,14 @@ m2mClient:
 
 # Authentication for the public APIs of Optimize
 api:
-  # In Camunda 8.10, the public APIs accept only OIDC bearer tokens. Configure the OIDC settings
-  # under camunda.security.authentication.oidc. accessToken is not supported. jwtSetUri and
-  # audience are deprecated, and 8.10 maps them to the OIDC settings.
-  # All keys in this block still apply with the 8.9 fallback (optimize.security.csl.enabled=false),
-  # which 8.11 removes.
-  accessToken: ${OPTIMIZE_API_ACCESS_TOKEN:null}
-  jwtSetUri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI:null}
-  audience: ${CAMUNDA_OPTIMIZE_API_AUDIENCE:optimize}
+  # The public APIs accept OIDC bearer tokens. Configure the tokens with
+  # camunda.security.authentication.oidc.issuer-uri and camunda.security.authentication.oidc.audiences.
+  # This reference no longer lists the legacy keys accessToken, jwtSetUri, and audience.
+  # Camunda 8.10 does not support accessToken, and maps jwtSetUri and audience to the OIDC settings.
+  # The 8.9 fallback (optimize.security.csl.enabled=false) still uses all three keys.
   # Self-managed (CCSM) only. When true, non-public /api/** endpoints also accept an
   # 'Authorization: Bearer <jwt>' header in addition to the existing Identity session cookie.
-  # The bearer token is validated with the configured JWK set URI and audience
-  # (camunda.security.authentication.oidc.* in 8.10, or the legacy keys above).
+  # The bearer token is validated with the configured JWK set URI and audience.
   # Requires a JWK set URI to be configured. Defaults to false.
   jwtAuthForApiEnabled: ${CAMUNDA_OPTIMIZE_API_JWT_AUTH_ENABLED:false}
 
