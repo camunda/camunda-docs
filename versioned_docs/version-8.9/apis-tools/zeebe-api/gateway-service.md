@@ -536,7 +536,7 @@ Returned if:
 
 Deletes a resource (a process definition, decision requirements definition, or form) identified by its key.
 
-Deleting a process definition that still has running instances no longer fails. The definition starts draining: new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically once its last instance finishes. See [resource deletion](/components/concepts/resource-deletion.md#draining).
+Deleting a process definition that still has running instances no longer fails. The definition starts draining: new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically once its last instance finishes. See [resource deletion](../../components/concepts/resource-deletion.md#draining).
 
 ### Input `DeleteResourceRequest`
 

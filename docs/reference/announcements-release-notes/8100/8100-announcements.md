@@ -299,7 +299,7 @@ The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifica
 
 #### Deleting a process definition with running instances defers history deletion
 
-The delete resource endpoint behaves the same, with one difference for a process definition that still has running instances. Instead of being deleted synchronously, the definition [drains](/components/concepts/resource-deletion.md#draining): new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically afterwards.
+The delete resource endpoint now accepts process definition deletion when the definition still has running instances. Instead of rejecting the request or waiting for physical removal, the definition [drains](/components/concepts/resource-deletion.md#draining): new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically afterwards.
 
 As a result, when `deleteHistory` is `true`, the `batchOperation` field in the response is `null` for such a definition. Its history is removed as part of the draining lifecycle rather than through an immediately-returned batch operation. The field is still populated for decision requirements definitions and for process definitions that are already fully deleted.
 
