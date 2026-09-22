@@ -36,24 +36,24 @@ The response contains a list of exported dashboard definitions as well as all re
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                                                 |
-| ---- | --------------------------------------------------------------------------------------------------------------------------- |
-| 204  | Request successful.                                                                                                         |
-| 401  | Secret incorrect or missing in HTTP Header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
-| 404  | At least one of the given dashboard IDs does not exist.                                                                     |
-| 500  | Some error occurred while processing the request, best check the Optimize log.                                              |
+| Code | Description                                                                                                                |
+| ---- | -------------------------------------------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                                                        |
+| 401  | Token incorrect or missing in HTTP header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
+| 404  | At least one of the given dashboard IDs does not exist.                                                                    |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                             |
 
 ## Example
 
 ### Export two dashboards
 
-Assuming you want to export the two dashboards with IDs `123` and `456` and have configured the accessToken `mySecret`, this is what it would look like:
+To export the two dashboards with IDs `123` and `456`, send the following request:
 
 POST `/api/public/export/dashboard/definition/json`
 
 #### Request header
 
-`Authorization: Bearer mySecret`
+`Authorization: Bearer <TOKEN>`
 
 #### Request body
 
