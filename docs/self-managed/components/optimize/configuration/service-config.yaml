@@ -88,14 +88,11 @@ m2mClient:
   m2mClientId: ${CAMUNDA_OPTIMIZE_M2M_ACCOUNTS_AUTH0_CLIENTID:}
   m2mClientSecret: ${CAMUNDA_OPTIMIZE_M2M_ACCOUNTS_AUTH0_CLIENTSECRET:}
 
-# A global access token used by all public APIs of Optimize
+# Authentication for the public APIs of Optimize
 api:
-  # Authentication information to be provided for the public APIs of Optimize.
-  # Provide either
-  # 1. A static access token OR
-  # 2. a URL for a resource server AND an audience to validate against.
-  # If both are provided, the static access token will be ignored and the resource server will be used for validation
-  # instead
+  # In Camunda 8.10, the public APIs accept only OIDC bearer tokens. Configure the OIDC settings
+  # under camunda.security.authentication.oidc instead of the keys below.
+  # accessToken is not supported in 8.10. It applies only to the 8.9 security stack.
   accessToken: ${OPTIMIZE_API_ACCESS_TOKEN:null}
   jwtSetUri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI:null}
   audience: ${CAMUNDA_OPTIMIZE_API_AUDIENCE:optimize}

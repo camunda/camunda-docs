@@ -112,7 +112,7 @@ These values relate to Optimize data import.
 
 These values control how Optimize validates tokens on its External REST API.
 
-In Camunda 8.10, the External REST API accepts only OIDC bearer tokens. Configure `camunda.security.authentication.oidc.jwk-set-uri` and `camunda.security.authentication.oidc.audiences`. If you configure no key set, Optimize rejects all requests to the External REST API. For the upgrade steps, see [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
+In Camunda 8.10, the External REST API accepts only OIDC bearer tokens. Configure `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences`. Optimize gets the JWK set URI from the OIDC discovery document of the issuer. To use a different URI, set `camunda.security.authentication.oidc.jwk-set-uri`. For the upgrade steps, see [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
 
 | YAML path       | Environment variable                                  | Default value | Description                                                                                                                            |
 | --------------- | ----------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
