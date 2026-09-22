@@ -309,7 +309,7 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 Whenever you send `history`, also send the `jobKey` and `jobLeaseToken` from the job activation. Camunda records each item with a `PENDING` commit status and promotes it to `COMMITTED` when the job completes successfully. If the job fails and a later activation supersedes the lease, the items are marked `DISCARDED` instead.
 
 :::note Usage metrics can be lost
-Camunda records a model call's usage metrics only once the activation that made the call completes its job. If that activation is superseded before then, for example, when a worker crashes, loses connectivity, or a job times out and a competing activation completes the job first, those metrics are discarded along with the rest of that activation's uncommitted work and can't be recovered, even though the LLM provider already processed and billed for the call.
+Camunda can only record usage metrics when your runtime reports them. If your runtime fails after interacting with the LLM but before it reports the usage, for example, if it crashes or loses connectivity, those metrics are lost, even though the LLM provider already processed and billed for the call.
 
 For the authoritative token counts and costs, always refer to your LLM provider's own usage reporting rather than relying solely on Camunda's metrics.
 
