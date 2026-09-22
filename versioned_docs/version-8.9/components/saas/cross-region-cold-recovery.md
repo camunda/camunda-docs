@@ -34,14 +34,12 @@ Before you can use cross-region cold recovery, ensure the following prerequisite
 Follow these steps to fail over to your recovery region, restore a cluster from an available backup, and redirect client traffic to it:
 
 1. Confirm that the primary region is unavailable and start failover in Console or API.
-2. Select one or more backups available in the recovery region, and select the backup to restore.
-3. Select one of those backups to restore.
-4. Camunda creates a replacement cluster in the recovery region and prepares it to restore the selected backup.
-5. Camunda copies and verifies the selected backup data before restore proceeds.
-6. You don't need to manually suspend or resume the target cluster during the restore process.
-7. Re-establish private connectivity to the recovered cluster. Use the endpoint service name shown in Console to create or switch your VPC endpoint.
-8. Update your customer-managed DNS or routing configuration to direct client traffic to the recovered cluster.
-9. Verify that your applications can connect to the recovered cluster and that requests are reaching it.
+2. Select the backup to restore from those available in the recovery region.
+3. Camunda creates a replacement cluster in the recovery region and prepares it to restore the selected backup.
+4. Camunda copies and verifies the selected backup data before restore proceeds. You don't need to manually suspend or resume the target cluster during the restore process.
+5. Re-establish private connectivity to the recovered cluster. Use the endpoint service name shown in Console to create or switch your VPC endpoint.
+6. Update your customer-managed DNS or routing configuration to direct client traffic to the recovered cluster.
+7. Verify that your applications can connect to the recovered cluster and that requests are reaching it.
 
 ## Handle the original region after failover
 

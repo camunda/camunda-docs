@@ -1201,11 +1201,7 @@
           ]
         },
         "components/saas/backups",
-        {
-          "type": "doc",
-          "id": "components/saas/cross-region-cold-recovery",
-          "className": "sidebar-cta-experimental"
-        },
+        "components/saas/cross-region-cold-recovery",
         {
           "type": "category",
           "label": "Backup and restore",
