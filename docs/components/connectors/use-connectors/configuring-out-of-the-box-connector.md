@@ -41,7 +41,7 @@ import CreateCluster from '../../../components/react-components/create-cluster.m
    - <a href="/bpmn/connectors/upload-receipt.form" download>`upload-receipt.form`</a>: A form for uploading receipts.
    - <a href="/bpmn/connectors/approve-receipt.form" download>`approve-receipt.form`</a>: A form for approving receipts.
 2. Log in to your Camunda 8 account.
-3. In your Camunda Hub workspace, click **New project**, and name your project `Expense process`.
+3. In your Camunda Hub workspace, click **Create project**, and name your project `Expense process`.
 4. In your project, delete the default diagram, and click **Create new > Upload files**.
 5. Upload `submit-expense.bpmn`, `upload-receipt.form`, and `approve-receipt.form`.
 
