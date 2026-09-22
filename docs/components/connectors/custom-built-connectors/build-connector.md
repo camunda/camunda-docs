@@ -26,13 +26,13 @@ This guide provides an overview of both methods to help you get started.
 
 ## Understand the connector architecture
 
-A connector consists of the Java backend and an element template that defines the Modeler user interface.
+A connector consists of the Java backend and an element template that defines the user interface used in [Camunda Hub](/components/hub/workspace/modeler/index.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 
 <img src={ConnectorArchitectureImg} alt="Diagram showing the architecture of a connector" />
 
 - The Java code defines the connector’s functionality and how it interacts with an external system. For example, the [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) used for outbound connectors.
 
-- The user interface allows you to configure and use the connector in Modeler. This is defined in a [Connector template](../manage-connector-templates.md) that controls how the BPMN element is shown in Modeler and which configuration options are available for the connector.
+- The user interface allows you to configure and use the connector in Camunda Hub and Desktop Modeler. This is defined in a [Connector template](../manage-connector-templates.md) that controls how the BPMN element is shown in the modeling interface and which configuration options are available for the connector.
 
 This separation enables a layered approach to building connectors. You can customize the user interface and configuration options in Modeler using connector templates, without modifying the underlying Java code.
 
