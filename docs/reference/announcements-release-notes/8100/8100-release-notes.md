@@ -486,10 +486,11 @@ Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA
 - The Helm chart no longer requires AWS access keys when IRSA is in use and allows pods to rely solely on their IAM role for S3 access.
 - Existing deployments using static AWS keys can migrate to IRSA following documented steps.
 
-Refer to the updated Helm configuration and secret management documentation for:
+Refer to the following updated Helm configuration and secret management documentation for more details:
 
-- Enabling IRSA for new EKS deployments using the AWS document store.
-- Safely migrating existing deployments from static AWS keys to IRSA.
+- See [IAM Roles for Service Accounts (IRSA)](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#document-store-s3) for the IAM role and trust policy, Helm chart configuration, service account annotations, and verification steps for the AWS S3 document store.
+- See [document handling configuration in Helm](/self-managed/concepts/document-handling/configuration/helm.md) for AWS S3 document store options.
+- See [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md#credential-precedence-with-irsa) to learn how static AWS credentials take precedence over IRSA.
 
 <p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
 
@@ -1467,10 +1468,11 @@ Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA
 - The Helm chart no longer requires AWS access keys when IRSA is in use and allows pods to rely solely on their IAM role for S3 access.
 - Existing deployments using static AWS keys can migrate to IRSA following documented steps.
 
-Refer to the updated Helm configuration and secret management documentation for:
+Refer to the following updated Helm configuration and secret management documentation for more details:
 
-- Enabling IRSA for new EKS deployments using the AWS document store.
-- Safely migrating existing deployments from static AWS keys to IRSA.
+- See [IAM Roles for Service Accounts (IRSA)](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#document-store-s3) for the IAM role and trust policy, Helm chart configuration, service account annotations, and verification steps for the AWS S3 document store.
+- See [document handling configuration in Helm](/self-managed/concepts/document-handling/configuration/helm.md) for the `global.documentStore.type.aws.irsa.enabled` setting and other AWS S3 document store options.
+- See [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md#credential-precedence-with-irsa) to learn how static AWS credentials take precedence over IRSA.
 
 <p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
 
