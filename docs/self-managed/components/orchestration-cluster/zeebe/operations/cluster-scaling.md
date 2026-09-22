@@ -184,7 +184,7 @@ curl -X 'PATCH' \
 For [zone-aware cluster](#broker-id-naming-scheme) you need to change the broker ids accordingly as outlined in [section 2.a](#2a-scale-brokers-only)
 
 :::warning Changing replication factor in a zone-aware cluster
-You cannot change replication factor in a zone-aware cluster with this API. You need to use `PUT /actuator/cluster/partition-distribution/` instead.
+You cannot change replication factor in a zone-aware cluster with this API. You need to use `PUT /actuator/cluster/partitioning/` instead.
 :::
 
 #### 2.c Scaling only partitions

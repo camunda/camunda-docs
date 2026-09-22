@@ -5,19 +5,156 @@ sidebar_label: Migration tools
 description: "Learn about the available migration tools."
 ---
 
-Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-All migration tools are available as **ready-to-use builds** from the [GitHub releases page](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases). You can download different versions as needed for your migration.
+Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools. You can use them in two ways:
 
-## Migration tools
+- **[Agentic migration](#agentic-migration)** (recommended): An AI coding agent uses the Diagram Converter for models and forms, then lets you select an AI-first or recipe-assisted Java migration path.
+- **[Manual migration](#manual-migration)**: Run the individual tools yourself for full control or to handle specific migration tasks independently.
 
-Camunda provides the following migration tools:
+All tools are available as **ready-to-use builds** from the [GitHub releases page](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
 
-| Migration tool                                        | Description                                                                                                                                                                     | GitHub link                                                                                                                      |
-| :---------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| **[Diagram Converter](./diagram-converter.md)**       | Gain an initial understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://diagram-converter.camunda.io/). | [Migration Tooling – Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter) |
-| **[Data Migrator](./data-migrator/)**                 | Copies active Camunda 7 runtime instances to Camunda 8. History (audit) migration is available as experimental.                                                                 | [Migration Tooling – Data Migrator](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/data-migrator)         |
-| **[Code Conversion Utilities](./code-conversion.md)** | Mixture of code mapping tables, code conversion patterns, and automatable refactoring recipes.                                                                                  | [Migration Tooling – Code Conversion](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion)     |
+## Agentic migration
+
+The **Camunda migration agent skill** is an AI-driven orchestrator that uses the Diagram Converter CLI as the default for BPMN, DMN, and static Camunda 7 form conversion. After it inventories your Java code, you select either an AI-first, pattern-guided path or an optional recipe-assisted path.
+
+You can run the skill with an AI coding agent such as Claude Code or GitHub Copilot CLI, or publish it to your organization as an [AWS Transform](https://docs.aws.amazon.com/transform/latest/userguide/custom.html) custom transformation. The setup and run command differ by agent, but the migration flow is the same.
+
+### Set up and run
+
+Set up your agent, then run the skill from your Camunda 7 project directory. Every agent runs the same [agent workflow](#agent-workflow).
+
+<Tabs groupId="agentic-migration-agent">
+<TabItem value="claude-code" label="Claude Code">
+
+Install the skill:
+
+```bash
+claude plugin marketplace add camunda/camunda-7-to-8-migration-tooling
+claude plugin install camunda-migration
+```
+
+Run it:
+
+```text
+/camunda-migration:migrate-c7-to-c8-code
+```
+
+</TabItem>
+<TabItem value="copilot-cli" label="GitHub Copilot CLI">
+
+Install the skill:
+
+```bash
+copilot plugin marketplace add camunda/camunda-7-to-8-migration-tooling
+copilot plugin install camunda-migration@camunda
+```
+
+Run it:
+
+```text
+/camunda-migration:migrate-c7-to-c8-code
+```
+
+</TabItem>
+<TabItem value="other-agents" label="Other compatible agents">
+
+Use GitHub CLI 2.90 or later to install the skill:
+
+```bash
+gh skill install camunda/camunda-7-to-8-migration-tooling migrate-c7-to-c8-code --agent <tool-name>
+```
+
+Replace `<tool-name>` with the name of your agent. See the [agent-specific installation commands](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#install-commands-for-other-agents) for supported values. For manual installation paths, see the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#manual-installation).
+
+Then run the `migrate-c7-to-c8-code` skill from your project directory using your agent's command.
+
+</TabItem>
+<TabItem value="aws-transform" label="AWS Transform">
+
+[AWS Transform](https://docs.aws.amazon.com/transform/latest/userguide/custom.html), Amazon's agentic modernization service, runs the same skill as a custom transformation. Instead of installing the skill per developer, you publish it once to your organization's registry and run it with the [`atx` CLI](https://docs.aws.amazon.com/transform/latest/userguide/custom-get-started.html) (Node.js 22 or later, with configured AWS credentials). The source and test projects must be Git repositories with at least one commit.
+
+Check out the tooling and create the transformation from the skill:
+
+```bash
+git clone https://github.com/camunda/camunda-7-to-8-migration-tooling.git
+cd camunda-7-to-8-migration-tooling/agentic-migration-skills
+
+# Save a private draft to validate first (drafts expire after 30 days)
+atx custom def save-draft -n "camunda-7-to-camunda-8-migration" \
+  --description "Migrate your Camunda 7 project to Camunda 8" \
+  --sd skills/migrate-c7-to-c8-code/
+
+# Run the draft against a test project using the version ID returned above.
+cd /path/to/test-camunda-7-project
+atx custom def exec -n "camunda-7-to-camunda-8-migration" \
+  --tv <draft-version-id> \
+  -p . \
+  -c "<build-command>"
+
+# Publish the tested draft to your organization for anyone with the required IAM permissions
+cd /path/to/camunda-7-to-8-migration-tooling/agentic-migration-skills
+atx custom def publish -n "camunda-7-to-camunda-8-migration" \
+  --tv <draft-version-id>
+```
+
+Replace `<build-command>` with the command for your project, such as `mvn verify` for Maven or `./gradlew build` for Gradle. After you validate the draft, run the published transformation from the project directory. Running by name uses the latest published version, so you don't pass a version ID:
+
+```bash
+atx custom def exec -n "camunda-7-to-camunda-8-migration" -p . -c "<build-command>"
+```
+
+</TabItem>
+</Tabs>
+
+The skill asks for your migration scope:
+
+| Scope                                      | What the agent does                                                                                                                           |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Code + models** _(recommended, default)_ | Uses the Diagram Converter CLI as the default for BPMN, DMN, and Camunda 7 forms, then lets you select a Java migration path after inventory. |
+| **Code only**                              | Inventories Java code, then lets you select an AI-first or recipe-assisted path.                                                              |
+| **Models only**                            | Uses the Diagram Converter CLI as the default for BPMN, DMN, and Camunda 7 forms.                                                             |
+| **Assessment only**                        | Inventories files and estimates effort without changes.                                                                                       |
+
+### Select a Java migration path
+
+After the inventory, select the path that fits your codebase and review capacity:
+
+| Path                                                    | Use when                                                                                               |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review source-to-output mappings and behavior.                 |
+| **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. |
+
+Run both paths on representative Java code before you use one across a broad migration. A recipe-assisted path can add scaffolding, generated names, TODOs, and cleanup. Neither path guarantees lower token use, cost, or migration time. See [Code Conversion](./code-conversion.md#choose-your-migration-approach) for detailed selection guidance.
+
+### Agent workflow
+
+1. **Assess migration scope**: Inventories BPMN/DMN diagrams, Camunda 7 `.form` files, and Java code files, and estimates effort.
+2. **Convert models and forms**: Runs the Diagram Converter CLI as the default. Review converted models and `REVIEW`, `WARNING`, and `TASK` findings. Do not use AI-only model conversion as the default because model capability can materially affect output and silently change model semantics.
+3. **Select and migrate code**: After inventory, select an AI-first, pattern-guided path or an optional recipe-assisted path. AI-first migration reads source code and patterns directly. Recipe-assisted migration produces a deterministic first diff for repeated, supported, primarily syntactic transformations, then needs AI or manual cleanup.
+4. **Validate migration results**: Compiles, runs tests, searches for remaining C7 references, verifies converted forms and model findings, and reviews source-to-output mappings and behavior.
+5. **Fix remaining issues**: Offers to fix remaining issues, and waits for your review before each change.
+
+The agent also handles static and generated Camunda 7 forms by creating or adapting standard Camunda 8 forms and linking them from the converted BPMN models. Unsupported validation rules and ambiguous behavior are flagged for review.
+
+The agent can use the flat `analysis-results.json` report generated by the CLI's `--json` option or the web interface's **Download JSON** action. It groups findings by category, checks the target platform version, and cross-references model findings with migrated code before suggesting fixes. See [Download JSON analysis results](./diagram-converter.md#download-json-analysis-results).
+
+Before it uses AI for Java changes or model findings, the agent checks whether the active model is suitable for complex reasoning. Select a capable model, but review remains mandatory because model quality materially affects the output.
+
+If it finds no local BPMN or DMN models, the agent can use the Diagram Converter's engine mode to retrieve the latest definitions from an accessible Camunda 7 REST endpoint. It asks for the endpoint and authentication details and does not request engine access when local models are available.
+
+The agent preserves the original model files, avoids using stale reports or overwriting existing output, and records findings and decisions in `MIGRATION_REPORT.md`. It asks for confirmation before adding deployment configuration for the converted resources.
+
+## Manual migration
+
+Camunda provides the following tools for manual migration:
+
+| Migration tool                                        | Description                                                                                                                                                                            | GitHub link                                                                                                                     |
+| :---------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **[Diagram Converter](./diagram-converter.md)**       | Analyze and convert BPMN, DMN, and Camunda 7 form files. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://diagram-converter.camunda.io/). | [Migration Tooling: Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter) |
+| **[Data Migrator](./data-migrator/)**                 | Copies Camunda 7 runtime instances and history (audit log) to Camunda 8.                                                                                                               | [Migration Tooling: Data Migrator](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/data-migrator)         |
+| **[Code Conversion Utilities](./code-conversion.md)** | Mixture of code mapping tables, code conversion patterns, and automatable refactoring recipes.                                                                                         | [Migration Tooling: Code Conversion](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion)     |
 
 ## Examples
 

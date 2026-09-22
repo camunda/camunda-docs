@@ -104,6 +104,10 @@ As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/ac
 
 To create a backup, complete the following [backup process](#back-up-process).
 
+:::note
+Steps that changed with Camunda 8.10 show both APIs. Use the REST API by default. The management (actuator) API remains available as a backward-compatible alternative for existing automation. See [REST API](../backup-and-restore.md#rest-api) for the concepts shared across steps, including how each management API call maps to its REST equivalent.
+:::
+
 You can also optionally [back up your Camunda Hub data](#back-up-hub-data).
 
 :::caution before you begin
@@ -115,9 +119,9 @@ You can also optionally [back up your Camunda Hub data](#back-up-hub-data).
 
 ### Physical Tenants
 
-In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), the actuator calls in this procedure apply cluster-wide, so following the steps as written backs up every Physical Tenant. Add `?physicalTenant={physicalTenantId}` to an actuator request to scope it to one tenant instead.
+The REST steps below are scoped to whichever Physical Tenant your credentials belong to. The actuator calls apply cluster-wide instead, so following the actuator alternative as written backs up every Physical Tenant at once.
 
-The Orchestration Cluster REST API serves the same operations, with the authorization model and per-tenant outcome reporting described in [back up a cluster with multiple Physical Tenants](../backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants). Use the REST API when you need per-tenant results, tenant-local authorization, or [cluster admin](/components/admin/cluster-admin.md) separation from the management port.
+To back up a specific tenant other than your own, or every tenant in one call with per-tenant outcome reporting, use the cluster-wide REST endpoints described in [back up a cluster with multiple Physical Tenants](../backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants). There is no actuator equivalent for targeting a specific Physical Tenant.
 
 ## Back up process
 
@@ -125,9 +129,9 @@ The Orchestration Cluster REST API serves the same operations, with the authoriz
 
 :::note
 
-This depends heavily on your setup. The following examples are based on those given in the [Management API](../backup-and-restore.md#management-api) section for Kubernetes using either active port-forwarding or an override of the local `curl` command.
+This depends heavily on your setup. The following examples are based on those given in the [REST API](../backup-and-restore.md#rest-api) and [Management API](../backup-and-restore.md#management-api) sections for Kubernetes using either active port-forwarding or an override of the local `curl` command.
 
-As noted in the [Management API](../backup-and-restore.md#management-api) section, this API is typically not publicly exposed. Therefore, you will need to access it directly using any means available within your environment.
+The REST API (`ORCHESTRATION_CLUSTER_API`) is the same authenticated Orchestration Cluster API you use for everything else; the management API (`ORCHESTRATION_CLUSTER_MANAGEMENT_API`) is typically not publicly exposed and needs direct access within your environment. Optimize has no REST equivalent, so `OPTIMIZE_MANAGEMENT_API` is always required.
 
 :::
 
@@ -144,6 +148,7 @@ As noted in the [Management API](../backup-and-restore.md#management-api) sectio
       export OPENSEARCH_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export OPENSEARCH_ENDPOINT="" # highly dependent on your environment
 
+      export ORCHESTRATION_CLUSTER_API="http://localhost:8080/v2"
       export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://localhost:9600"
       export OPTIMIZE_MANAGEMENT_API="http://localhost:9620"
       ```
@@ -162,6 +167,7 @@ As noted in the [Management API](../backup-and-restore.md#management-api) sectio
       export OPENSEARCH_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export OPENSEARCH_ENDPOINT="" # highly dependent on your environment
 
+      export ORCHESTRATION_CLUSTER_API="http://$CAMUNDA_RELEASE_NAME-zeebe-gateway:8080/v2"
       export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-zeebe-gateway:9600"
       export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092"
       ```
@@ -172,39 +178,53 @@ As noted in the [Management API](../backup-and-restore.md#management-api) sectio
 
 ### 1. Soft pause exporting in Zeebe
 
-This step uses the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md?exporting=softPause#exporting-api).
+This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](../backup-and-restore.md#why-you-should-use-backup-and-restore). Pausing exporting is required before a backup for state consistency, to avoid log compaction removing data the backup still needs; neither API enforces this as a precondition of the backup call itself.
 
-This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](../backup-and-restore.md#why-you-should-use-backup-and-restore).
+   <Tabs groupId="backup-api">
+      <TabItem value="rest" label="REST API" default>
 
-```bash
-curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/pause?soft=true"
-```
+      [Pause exporting](/apis-tools/orchestration-cluster-api-rest/specifications/pause-exporting.api.mdx). This requires the `EXPORTER:PAUSE` permission.
 
-:::warning
-This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
-
-If the request fails, verify that all brokers are running and retry.
-:::
-
-   <details>
-      <summary>Example output</summary>
-      <summary>
-
-      :::note
-      Yes, 204 is the expected result and indicates a successful soft pause.
-      :::
-
-      ```json
-      {
-         "body":null,
-         "status":204,
-         "contentType":null
-      }
+      ```bash
+      curl -XPOST "$ORCHESTRATION_CLUSTER_API/exporting/pause?soft=true"
       ```
 
-      </summary>
+      A `204` response indicates the pause was accepted.
 
-   </details>
+      </TabItem>
+      <TabItem value="management" label="Management API">
+
+      This step uses the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md?exporting=softPause#exporting-api).
+
+      ```bash
+      curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/pause?soft=true"
+      ```
+
+      :::warning
+      This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
+
+      If the request fails, verify that all brokers are running and retry.
+      :::
+
+         <details>
+            <summary>Example output</summary>
+            <summary>
+
+            ```json
+            {
+               "body":null,
+               "status":204,
+               "contentType":null
+            }
+            ```
+
+            </summary>
+
+         </details>
+
+      </TabItem>
+
+   </Tabs>
 
 #### Behavior during a Zeebe hot backup
 
@@ -215,42 +235,83 @@ During a hot backup, the Zeebe cluster remains fully operational:
 - Exporters continue to export records. While soft pause is active, Zeebe temporarily does not advance the exporter position, which prevents log compaction and increases broker disk usage for the duration of the backup window. Ensure broker disks have enough free space. Keep the backup window as short as possible and resume exporting promptly once the backup completes.
 - If a broker restarts while soft pause is active, some already-exported records may be exported again after the restart. This is expected, because exporting always resumes from the last acknowledged exporter position. The same behavior applies after a restore: exporters start from the last persisted position and re-export all records processed during the soft-pause window. This is the intended mechanism that bridges the Zeebe backup and the secondary storage (Elasticsearch/OpenSearch) backup.
 
-The `/actuator/backupRuntime` API then creates a consistent backup of each partition while processing continues. The “wait for backup to complete” steps in this guide only poll backup status and do not introduce any additional pause in processing beyond the initial soft export pause.
+The runtime backup step below then creates a consistent backup of each partition while processing continues. The “wait for backup to complete” steps in this guide only poll backup status and do not introduce any additional pause in processing beyond the initial soft export pause.
 
 ### 2. Start the web applications backup (Operate / Tasklist)
 
-This step uses the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+This step initiates a coordinated snapshot on Elasticsearch or OpenSearch, where Operate and Tasklist historic data are present. It is available only when secondary storage is Elasticsearch or OpenSearch.
 
-```bash
-curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory" \
-   -H "Content-Type: application/json" \
-   -d "{\"backupId\": $BACKUP_ID}"
-```
+   <Tabs groupId="backup-api">
+      <TabItem value="rest" label="REST API" default>
 
-   <details>
-      <summary>Example output</summary>
-      <summary>
+      [Take a history backup](/apis-tools/orchestration-cluster-api-rest/specifications/take-history-backup.api.mdx). This requires the `BACKUP:CREATE` permission.
 
-      ```json
-
-      {
-         "scheduledSnapshots":[
-            "camunda_webapps_1748937221_8.8.0_part_1_of_5",
-            "camunda_webapps_1748937221_8.8.0_part_2_of_5",
-            "camunda_webapps_1748937221_8.8.0_part_3_of_5",
-            "camunda_webapps_1748937221_8.8.0_part_4_of_5",
-            "camunda_webapps_1748937221_8.8.0_part_5_of_5"
-         ]
-      }
+      ```bash
+      curl -XPOST "$ORCHESTRATION_CLUSTER_API/backups/history" \
+         -H "Content-Type: application/json" \
+         -d "{\"backupId\": $BACKUP_ID}"
       ```
 
-      </summary>
+         <details>
+            <summary>Example output</summary>
+            <summary>
 
-   </details>
+            ```json
+            {
+               "backupId": 1748937221,
+               "scheduledSnapshots":[
+                  "camunda_webapps_1_8.10.0_part_1_of_5",
+                  "camunda_webapps_1_8.10.0_part_2_of_5",
+                  "camunda_webapps_1_8.10.0_part_3_of_5",
+                  "camunda_webapps_1_8.10.0_part_4_of_5",
+                  "camunda_webapps_1_8.10.0_part_5_of_5"
+               ]
+            }
+            ```
+
+            </summary>
+
+         </details>
+
+      </TabItem>
+      <TabItem value="management" label="Management API">
+
+      This step uses the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+
+      ```bash
+      curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory" \
+         -H "Content-Type: application/json" \
+         -d "{\"backupId\": $BACKUP_ID}"
+      ```
+
+         <details>
+            <summary>Example output</summary>
+            <summary>
+
+            ```json
+
+            {
+               "scheduledSnapshots":[
+                  "camunda_webapps_1748937221_8.8.0_part_1_of_5",
+                  "camunda_webapps_1748937221_8.8.0_part_2_of_5",
+                  "camunda_webapps_1748937221_8.8.0_part_3_of_5",
+                  "camunda_webapps_1748937221_8.8.0_part_4_of_5",
+                  "camunda_webapps_1748937221_8.8.0_part_5_of_5"
+               ]
+            }
+            ```
+
+            </summary>
+
+         </details>
+
+      </TabItem>
+
+   </Tabs>
 
 ### 3. Start the Optimize backup
 
-This step uses the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).
+Optimize is not covered by the Orchestration Cluster backup REST API. The [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md) must be used, regardless of which API you use for the other steps.
 
 ```bash
 curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
@@ -274,75 +335,97 @@ curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
 
 ### 4. Wait for the web applications backup to complete
 
-This step uses the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+   <Tabs groupId="backup-api">
+      <TabItem value="rest" label="REST API" default>
 
-```bash
-curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID"
-```
+      [Query the historic backup](/apis-tools/orchestration-cluster-api-rest/specifications/get-history-backup.api.mdx). This requires the `BACKUP:READ` permission.
 
-   <details>
-      <summary>Example output</summary>
-      <summary>
-
-      ```json
-      {
-         "backupId":1748937221,
-         "state":"COMPLETED",
-         "failureReason":null,
-         "details":[
-            {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_1_of_5",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:15.685+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_2_of_5",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:16.288+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_3_of_5",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:17.092+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_4_of_5",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:17.293+0000",
-               "failures":[
-
-               ]
-            },
-            {
-               "snapshotName":"camunda_webapps_1748937221_8.8.0_part_5_of_5",
-               "state":"SUCCESS",
-               "startTime":"2025-06-03T07:55:18.298+0000",
-               "failures":[
-
-               ]
-            }
-         ]
-      }
+      ```bash
+      curl -s "$ORCHESTRATION_CLUSTER_API/backups/history/$BACKUP_ID"
       ```
 
-      </summary>
+      Wait until `state` is `COMPLETED`:
 
-   </details>
+      ```bash
+      while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_API/backups/history/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+      ```
 
-Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
+      </TabItem>
+      <TabItem value="management" label="Management API">
 
-```bash
-while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
-```
+      This step uses the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+
+      ```bash
+      curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID"
+      ```
+
+         <details>
+            <summary>Example output</summary>
+            <summary>
+
+            ```json
+            {
+               "backupId":1748937221,
+               "state":"COMPLETED",
+               "failureReason":null,
+               "details":[
+                  {
+                     "snapshotName":"camunda_webapps_1748937221_8.8.0_part_1_of_5",
+                     "state":"SUCCESS",
+                     "startTime":"2025-06-03T07:55:15.685+0000",
+                     "failures":[
+
+                     ]
+                  },
+                  {
+                     "snapshotName":"camunda_webapps_1748937221_8.8.0_part_2_of_5",
+                     "state":"SUCCESS",
+                     "startTime":"2025-06-03T07:55:16.288+0000",
+                     "failures":[
+
+                     ]
+                  },
+                  {
+                     "snapshotName":"camunda_webapps_1748937221_8.8.0_part_3_of_5",
+                     "state":"SUCCESS",
+                     "startTime":"2025-06-03T07:55:17.092+0000",
+                     "failures":[
+
+                     ]
+                  },
+                  {
+                     "snapshotName":"camunda_webapps_1748937221_8.8.0_part_4_of_5",
+                     "state":"SUCCESS",
+                     "startTime":"2025-06-03T07:55:17.293+0000",
+                     "failures":[
+
+                     ]
+                  },
+                  {
+                     "snapshotName":"camunda_webapps_1748937221_8.8.0_part_5_of_5",
+                     "state":"SUCCESS",
+                     "startTime":"2025-06-03T07:55:18.298+0000",
+                     "failures":[
+
+                     ]
+                  }
+               ]
+            }
+            ```
+
+            </summary>
+
+         </details>
+
+      Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
+
+      ```bash
+      while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+      ```
+
+      </TabItem>
+
+   </Tabs>
 
 ### 5. Wait for the Optimize backup to complete
 
@@ -644,7 +727,36 @@ This remains relevant if you run Optimize, which still relies on the former expo
 
 ### 8. Create the Zeebe broker backup
 
-This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+This step creates a runtime backup, covering Zeebe's own primary storage alone.
+
+   <Tabs groupId="backup-api">
+      <TabItem value="rest" label="REST API" default>
+
+      [Take a runtime backup](/apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup.api.mdx). This requires the `BACKUP:CREATE` permission.
+
+      ```bash
+      curl -XPOST "$ORCHESTRATION_CLUSTER_API/backups/runtime" \
+         -H "Content-Type: application/json" \
+         -d "{\"backupId\": $BACKUP_ID}"
+      ```
+
+         <details>
+            <summary>Example output</summary>
+            <summary>
+
+            ```json
+            {
+               "backupId": 1748937221
+            }
+            ```
+
+            </summary>
+         </details>
+
+      </TabItem>
+      <TabItem value="management" label="Management API">
+
+      This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
       ```bash
       curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime" \
@@ -652,50 +764,72 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
          -d "{\"backupId\": $BACKUP_ID}"
       ```
 
-      <details>
-         <summary>Example output</summary>
-         <summary>
+         <details>
+            <summary>Example output</summary>
+            <summary>
 
-         ```json
-         {
-            "message":"A backup with id 1748937221 has been scheduled. Use GET actuator/backups/1748937221 to monitor the status."
-         }
-         ```
+            ```json
+            {
+               "message":"A backup with id 1748937221 has been scheduled. Use GET actuator/backupRuntime/1748937221 to monitor the status."
+            }
+            ```
 
-         </summary>
-      </details>
+            </summary>
+         </details>
+
+      </TabItem>
+
+   </Tabs>
 
 ### 9. Wait for the Zeebe backup to complete before proceeding
 
-This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+   <Tabs groupId="backup-api">
+      <TabItem value="rest" label="REST API" default>
+
+      [Query the runtime backup](/apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup.api.mdx). This requires the `BACKUP:READ` permission.
+
+      ```bash
+      curl "$ORCHESTRATION_CLUSTER_API/backups/runtime/$BACKUP_ID"
+      ```
+
+      Wait until `state` is `COMPLETED`:
+
+      ```bash
+      while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_API/backups/runtime/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
+      ```
+
+      </TabItem>
+      <TabItem value="management" label="Management API">
+
+      This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
       ```bash
       curl "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime/$BACKUP_ID"
       ```
 
-      <details>
-         <summary>Example output</summary>
-         <summary>
+         <details>
+            <summary>Example output</summary>
+            <summary>
 
-         ```json
-         {
-            "backupId":1748937221,
-            "state":"COMPLETED",
-            "details":[
-               {
-                  "partitionId":1,
-                  "state":"COMPLETED",
-                  "createdAt":"2025-06-03T08:06:06.246997293Z",
-                  "lastUpdatedAt":"2025-06-03T08:06:10.408893628Z",
-                  "checkpointPosition":1,
-                  "brokerVersion":"8.8.0"
-               }
-            ]
-         }
-         ```
+            ```json
+            {
+               "backupId":1748937221,
+               "state":"COMPLETED",
+               "details":[
+                  {
+                     "partitionId":1,
+                     "state":"COMPLETED",
+                     "createdAt":"2025-06-03T08:06:06.246997293Z",
+                     "lastUpdatedAt":"2025-06-03T08:06:10.408893628Z",
+                     "checkpointPosition":1,
+                     "brokerVersion":"8.8.0"
+                  }
+               ]
+            }
+            ```
 
-         </summary>
-      </details>
+            </summary>
+         </details>
 
       Alternatively as a one-line to wait until the state is `COMPLETED` using a while loop and jq to parse the response JSON.
 
@@ -703,36 +837,56 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
       while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
       ```
 
-### 10. Resume exporting in Zeebe using the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md)
+      </TabItem>
+
+   </Tabs>
+
+### 10. Resume exporting in Zeebe
+
+   <Tabs groupId="backup-api">
+      <TabItem value="rest" label="REST API" default>
+
+      [Resume exporting](/apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting.api.mdx). This requires the `EXPORTER:PAUSE` permission.
+
+      ```bash
+      curl -XPOST "$ORCHESTRATION_CLUSTER_API/exporting/resume"
+      ```
+
+      A `204` response indicates the resume was accepted.
+
+      </TabItem>
+      <TabItem value="management" label="Management API">
+
+      This step uses the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
 
       ```bash
       curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/resume"
       ```
 
-:::warning
-This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
+      :::warning
+      This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
 
-If the request fails, verify that all brokers are running and retry.
-:::
+      If the request fails, verify that all brokers are running and retry.
+      :::
 
-      <details>
-         <summary>Example output</summary>
-         <summary>
+         <details>
+            <summary>Example output</summary>
+            <summary>
 
-         :::note
-         Yes, 204 is the expected result and indicates a successful resume.
-         :::
+            ```json
+            {
+               "body":null,
+               "status":204,
+               "contentType":null
+            }
+            ```
 
-         ```json
-         {
-            "body":null,
-            "status":204,
-            "contentType":null
-         }
-         ```
+            </summary>
+         </details>
 
-         </summary>
-      </details>
+      </TabItem>
+
+   </Tabs>
 
 :::warning
 If any of the steps above fail, you might have to restart with a new backup ID. Ensure Zeebe exporting is resumed if the backup process force quits in the middle of the process.
@@ -765,9 +919,11 @@ Depending on your company’s backup policies (for example, retention periods an
 
 You can use the **delete backup APIs** for each component to remove the associated resources from the configured backup storage. You will have to provide the same backup ID for all calls to remove it from all backup stores.
 
-- [Web Applications](/self-managed/operational-guides/backup-restore/webapps-backup.md#delete-backup-api)
-- [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md#delete-backup-api)
-- [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#delete-backup-api)
+- Web Applications (history backup): [`DELETE /backups/history/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/delete-history-backup.api.mdx) (REST API), or the [management API](/self-managed/operational-guides/backup-restore/webapps-backup.md#delete-backup-api)
+- Zeebe (runtime backup): [`DELETE /backups/runtime/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/delete-runtime-backup.api.mdx) (REST API), or the [management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#delete-backup-api)
+- [Optimize](/self-managed/operational-guides/backup-restore/optimize-backup.md#delete-backup-api) (management API only, no REST equivalent)
+
+The REST API also lists backups: [`GET /backups/history`](/apis-tools/orchestration-cluster-api-rest/specifications/list-history-backups.api.mdx) and [`GET /backups/runtime`](/apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups.api.mdx), each with an optional `prefix` filter.
 
 For Zeebe, you would also have to remove the separately backed up `zeebe-record` index snapshot using the [Elasticsearch](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-delete) / [OpenSearch](https://docs.opensearch.org/docs/latest/api-reference/snapshots/delete-snapshot/) API directly.
 

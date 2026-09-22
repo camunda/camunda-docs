@@ -5,6 +5,7 @@ description: "Deploy an Amazon Kubernetes cluster (EKS) with eksctl with step-by
 ---
 
 import SecondaryStorageOptionsNote from '../../\_partials/\_secondary-storage-options-note.md'
+import CostManagement from "../../../../_partials/_cost-management.md";
 
 This guide explores the streamlined process of deploying Camunda 8 Self-Managed on Amazon Elastic Kubernetes Service (EKS) using the `eksctl` command-line tool.
 
@@ -35,11 +36,7 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 While the guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
-:::danger Cost management
-
-Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
-
-:::
+<CostManagement />
 
 ### Outcome
 

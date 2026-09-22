@@ -87,11 +87,11 @@ You've now defined a **creating** task listener for this user task. When a proce
 
 Now, we'll explore what happened to the user task. We'll see that the listener blocks the creation.
 
-1. Navigate to **Tasklist** and notice that there is no task in Tasklist yet.
+1. [Navigate to **Tasklist**](/components/tasklist/userguide/using-tasklist.md#open-tasklist) and notice that there is no task in Tasklist yet.
 
    ![No tasks found in Tasklist](./assets/user-task-listeners-guide/6.2-no-tasks-found.png)
 
-2. Navigate to **Operate** to see your process instance with a token waiting at the user task by clicking on the active process instance in the **Dashboard**.
+2. [Navigate to **Operate**](/components/operate/userguide/basic-operate-navigation.md#open-operate) to see your process instance with a token waiting at the user task by clicking on the active process instance in the **Dashboard**.
 
    ![Active process instances in Operate Dashboard](./assets/user-task-listeners-guide/6.3-active-process-instances.png)
 
