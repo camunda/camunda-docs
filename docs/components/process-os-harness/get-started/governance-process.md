@@ -25,10 +25,7 @@ The engagement runs through four phases in order. The output of one phase is the
 | Transform | Transform the as-is process into a to-be process.                           | To-be models finalized        |
 | Implement | Generate and implement the executable Camunda solution.                     | Executable solution generated |
 
-WIP!
-
-- Each phase starts with you defining the run configuration for the upcoming iteration
-- The configuration can be adjusted after each run.
+Each phase starts with you defining the run configuration for the upcoming iteration. The configuration can be adjusted after each run.
 
 ## Gates and tasks
 

@@ -52,5 +52,3 @@ Process documentation often carries personal data by accident, in the form of sa
 ## Share with SMEs and reviewers
 
 Review cycles move project material to people outside the builder workspace, so apply the same care there.
-
-Review packages produced by `/process-os-sme-review-package` are static files you can inspect before sending.
