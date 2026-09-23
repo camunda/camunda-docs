@@ -56,10 +56,11 @@ AI coding agents are read-only by default and ask for explicit approval otherwis
 
 ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. Install the bundle that matches your agent, because an agent only discovers skills in its own directory.
 
-| AI coding agent    | Bundle       | Install command            | Skills directory  |
-| ------------------ | ------------ | -------------------------- | ----------------- |
-| Claude Code        | `claudecode` | `c8 os install claudecode` | `.claude/skills/` |
-| GitHub Copilot CLI | `copilotcli` | `c8 os install copilotcli` | `.github/skills/` |
+| AI coding agent       | Bundle       | Install command            | Skills directory  |
+| --------------------- | ------------ | -------------------------- | ----------------- |
+| Claude Code (via CLI) | `claudecode` | `c8 os install claudecode` | `.claude/skills/` |
+| Claude Desktop        | `claudecode` | `c8 os install claudecode` | `.claude/skills/` |
+| GitHub Copilot CLI    | `copilotcli` | `c8 os install copilotcli` | `.github/skills/` |
 
 Only one bundle can be installed at a time. To move to a different agent, run `c8 os switch <bundle>`, which removes the current bundle before installing the new one.
 
