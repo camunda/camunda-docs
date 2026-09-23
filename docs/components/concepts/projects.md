@@ -65,7 +65,7 @@ Desktop Modeler
     └─ Form
 ```
 
-A project is recognized by the existence of a `camunda-project.json` file. If you're using both [Camunda Hub and Desktop Modeler](/components/modeler/using-web-and-desktop-modeler-together.md), your project must contain this manifest file, even though it's ignored by Camunda Hub.
+A project is recognized by the existence of a `camunda-project.json` file. If you're using both [Camunda Hub and Desktop Modeler](/components/modeler/using-hub-and-desktop-modeler-together.md), your project must contain this manifest file, even though it's ignored by Camunda Hub.
 
 Unlike in Camunda Hub, all project resources are always deployed together in Desktop Modeler.
 

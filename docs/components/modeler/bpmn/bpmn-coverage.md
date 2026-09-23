@@ -1,7 +1,7 @@
 ---
 id: bpmn-coverage
 title: "BPMN coverage"
-description: "List of BPMN symbols supported in Modelers"
+description: "List of BPMN symbols supported in Camunda Hub and Desktop Modeler"
 ---
 
 export const Highlight = ({children, color}) => (

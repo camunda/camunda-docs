@@ -129,7 +129,7 @@ This is possible with **local variables**. Use local variables to create or upda
 
 ### Define local variables
 
-To define a local variable in Modeler, add an input mapping on the activity, subprocess, or call activity where you want the variable to exist. For details on input mapping concepts (`source` and `target`) see [input/output variable mappings](#inputoutput-variable-mappings).
+To define a local variable in [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, add an input mapping on the activity, subprocess, or call activity where you want the variable to exist. For details on input mapping concepts (`source` and `target`) see [input/output variable mappings](#inputoutput-variable-mappings).
 
 The `target` of the input mapping becomes a local variable in that element's scope. For example, an input mapping with `source: =customer.name` and `target: reviewerName` creates the local variable `reviewerName` in that scope.
 
@@ -190,7 +190,7 @@ Input mappings can be used to create new variables. They can be defined on [serv
 
 When an input mapping is applied, it creates a new [**local variable**](#local-variables) in the scope where the mapping is defined.
 
-In Modeler, define these mappings in the element properties.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, define these mappings in the element properties.
 
 You can use [expressions](./expressions.md) or static values for input mappings. You can leave the `source` empty to map the `target` variable to `null`.
 

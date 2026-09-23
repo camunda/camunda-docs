@@ -344,7 +344,7 @@ The following items are removed:
 
 - Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) instead of the removed Operate API and Tasklist API.
 - Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) instead of user task access restrictions.
-- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
+- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) and the Orchestration Cluster REST API instead of public start forms.
 - Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
 
 <p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
