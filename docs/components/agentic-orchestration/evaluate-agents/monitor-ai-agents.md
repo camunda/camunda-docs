@@ -34,7 +34,7 @@ After completing this guide, you will be able to monitor, debug, and troubleshoo
 ## Prerequisites
 
 - You have access to [Operate](/components/operate/operate-introduction.md) on Camunda 8.10 or later.
-- You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint deployed in [Modeler](/components/modeler/about-modeler.md).
+- You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint installed in a [Camunda Hub project](/components/hub/workspace/modeler/modeling/camunda-marketplace.md#browse-marketplace-blueprints) or open in Desktop Modeler.
 
 :::important
 This guide is a follow-up to [build your first AI agent](/guides/getting-started-agentic-orchestration.md), where you use the same example AI agent process. We recommend completing that guide first. However, you can also apply this guide to other AI agent process implementations.
@@ -50,7 +50,7 @@ For example:
 
 ## Step 2: Open the process instance in Operate
 
-1. Open [Operate](/components/operate/operate-introduction.md).
+1. [Open Operate](/components/operate/userguide/basic-operate-navigation.md#open-operate).
 2. Locate the process instance created by your prompt. See [view a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
 3. Open your process instance view by clicking on its process instance key.
 
@@ -119,7 +119,7 @@ Use the copy icon in any of these expanded views to copy its content.
 
 ## Step 5: Understand how agent memory is stored
 
-In Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
 
 By default, agent memory uses the **In Process** type, which stores it as part of the agent context, the same underlying data the conversation history in [step 4](#step-4-review-the-conversation-history) is built from.
 
@@ -135,7 +135,7 @@ Go back to Operate. In the **User Feedback** element, you will see the execution
 
 In this case, the required action is to provide feedback on the agent results. To do so:
 
-1. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md).
+1. [Open Tasklist](/components/tasklist/userguide/using-tasklist.md#open-tasklist).
 2. Locate the user feedback task and assign it to yourself by clicking **Assign to me**.
 3. Analyze the result. You will see a joke, as requested in the prompt.
 4. You can follow up with more prompts to continue testing your AI agent.
