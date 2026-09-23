@@ -3,7 +3,15 @@ id: system-requirements
 title: System requirements
 sidebar_label: System requirements
 description: "Systems required to run ProcessOS Harness: a Camunda cluster for the governance process, a Git-compatible VCS, a supported AI coding agent, and a builder client with local tooling."
-keywords: ["ProcessOS Harness", "system requirements", "Claude Code", "c8ctl"]
+keywords:
+  [
+    "ProcessOS Harness",
+    "system requirements",
+    "Claude Code",
+    "Copilot CLI",
+    "bundle",
+    "c8ctl",
+  ]
 ---
 
 ProcessOS Harness needs four things: a Camunda cluster to run the governance process, a Git-compatible version control system, an AI coding agent, and a builder client with local tooling.
@@ -32,7 +40,7 @@ ProcessOS Harness drives an AI coding agent to do the work of re-engineering.
 
 | Aspect          | Supported                                                                                                                                     |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| AI coding agent | Claude Code and Microsoft Copilot. Other agents may be supported in future releases, but aren't yet tested exhaustively.                      |
+| AI coding agent | Claude Code and GitHub Copilot CLI. Other agents may be supported in future releases, but aren't yet tested exhaustively.                     |
 | AI platform     | Platforms such as Amazon Bedrock, Azure OpenAI, and Ollama, where the coding agent supports them.                                             |
 | Models          | Models natively used by a supported coding agent. Anthropic Claude models are tested the most, with Opus or smarter alternatives recommended. |
 
@@ -43,6 +51,30 @@ The agent needs these permissions in your environment:
 - Permission to execute bash commands and scripts.
 
 AI coding agents are read-only by default and ask for explicit approval otherwise. Teams typically allowlist frequently used safe commands, or enable an accept-edits mode, to reduce the number of prompts during a run.
+
+### Bundle mapping
+
+ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. Install the bundle that matches your agent, because an agent only discovers skills in its own directory.
+
+| AI coding agent    | Bundle       | Install command            | Skills directory  |
+| ------------------ | ------------ | -------------------------- | ----------------- |
+| Claude Code        | `claudecode` | `c8 os install claudecode` | `.claude/skills/` |
+| GitHub Copilot CLI | `copilotcli` | `c8 os install copilotcli` | `.github/skills/` |
+
+Installing a bundle writes the following paths into your project directory.
+
+| Path                                                                                     | Owner                                                                                |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `<skills directory>/process-os-*`                                                        | ProcessOS Harness. Created, replaced, and removed by c8ctl.                          |
+| `.camunda/`                                                                              | ProcessOS Harness. Holds project state, dependencies, and backups.                   |
+| Agent configuration files, such as `CLAUDE.md`, `.mcp.json`, and `.claude/settings.json` | Shared. Replaced on install, and the originals are backed up to `.camunda/backups/`. |
+| Everything else, including skills and workflows of your own                              | Yours. Never modified or deleted.                                                    |
+
+The `process-os-` prefix inside the skills directory is reserved. A skill of your own using that prefix is overwritten on install.
+
+c8ctl records every installed path in `.process-os.yaml` and gitignores those paths, so bundle files are never committed.
+
+Only one bundle can be installed at a time. To move to a different agent, run `c8 os switch <bundle>`, which removes the current bundle before installing the new one.
 
 ## Builder client
 
