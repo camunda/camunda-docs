@@ -697,7 +697,7 @@ An isolated execution unit within an [Orchestration Cluster](#orchestration-clus
 
 ### Project
 
-A collection of related files in a Camunda Hub workspace you can work on and deploy as a single bundle. A workspace may contain multiple projects.
+A collection of related files in a Camunda Hub workspace you can work on, version, and deploy as a single bundle or as individual files. A workspace may contain multiple projects.
 
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
 
