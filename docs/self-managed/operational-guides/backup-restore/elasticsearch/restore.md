@@ -2,6 +2,7 @@
 id: es-restore
 title: "Restore a backup"
 sidebar_label: "Restore a backup"
+hide_table_of_contents: true
 keywords: ["backup", "backups", "restore", "elasticsearch", "opensearch"]
 description: "Learn how to restore a Camunda 8 Self-Managed backup using Elasticsearch or OpenSearch."
 ---

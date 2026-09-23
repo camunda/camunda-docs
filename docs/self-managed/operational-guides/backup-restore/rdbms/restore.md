@@ -2,6 +2,7 @@
 id: rdbms-restore
 title: "Restore a backup (RDBMS)"
 sidebar_label: "Restore a backup"
+hide_table_of_contents: true
 keywords:
   [
     "backup",
