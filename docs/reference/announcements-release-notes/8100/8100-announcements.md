@@ -469,6 +469,25 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 </div>
 <div className="release-announcement-content">
 
+#### JWT-authorized inbound webhooks require issuer, audience, and expiration claims
+
+Starting with Camunda 8.10, inbound webhooks configured with JWT authorization validate the token's `iss` and `aud` claims and reject tokens without an `exp` claim. The **Issuer** and **Audience** fields are now required in the element templates for the Webhook connector, Amazon EventBridge inbound connector, and A2A Client webhook.
+
+Existing JWT-authorized inbound webhooks modeled with earlier template versions don't contain these fields and can't activate after the upgrade. The connector runtime reports the affected connector as **DOWN**.
+
+**Action:** Update each affected element to the latest template version, set **Issuer** and **Audience** to the expected claim values, and redeploy the process. Ensure callers provide JWTs with matching `iss` and `aud` claims and a valid `exp` claim.
+
+<p className="link-arrow">[Webhook connector authorization](/components/connectors/protocol/http-webhook.md#make-your-http-webhook-connector-executable)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Webhook `responseBodyExpression` rejected at deployment {#webhook-response-body-expression}
 
 Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
