@@ -349,9 +349,11 @@ Before returning a restored tenant to normal traffic, confirm through tenant-sco
 
 ## Restore Application (Legacy)
 
+### Step 1: Restore Elasticsearch/OpenSearch Snapshots
+
 Restore the Elasticsearch/OpenSearch snapshots using the [Restore Elasticsearch/OpenSearch snapshot](./restore-snapshot.md) procedure, then restore the Zeebe cluster and start the components as described below.
 
-## Step 2: Restore Zeebe Cluster {#restore-zeebe-cluster}
+### Step 2: Restore Zeebe Cluster {#restore-zeebe-cluster}
 
 ### Prerequisites
 
@@ -502,7 +504,7 @@ The config `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder n
 By default, it ignores `lost+found` folder found on ext4 filesystems.
 To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.
 
-## Step 3: Start all Camunda 8 components {#start-all-camunda-8-components}
+### Step 3: Start all Camunda 8 components {#start-all-camunda-8-components}
 
 Now that you have actively restored Elasticsearch/OpenSearch and the Zeebe cluster partitions, you can start all components again and use Camunda 8 as normal.
 

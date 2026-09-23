@@ -23,7 +23,7 @@ The following specific prerequisites are required when restoring Elasticsearch/O
 ### 1. Restore [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
 
 :::note
-This step is only required for restoring an Elasticsearch/OpenSearch snapshot on a fresh installation. Index and component templates are not required to be deleted for restoring a snapshot.
+This step is only required for restoring an Elasticsearch/OpenSearch snapshot on a fresh cluster.
 :::
 
 This step includes restoring index and component templates crucial for Camunda 8 to function properly on continuous use.
