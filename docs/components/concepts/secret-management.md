@@ -12,7 +12,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 You can use and manage secrets to keep keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files.
 
-- Instead of writing a value into a model, you reference a secret by name. Camunda resolves that reference to its value at runtime.
+- Instead of writing a value into a model, you reference a secret stored in a secret store by name. Camunda resolves that reference to its value at runtime.
 - The value is supplied only where it is needed, so it is never stored in the process itself.
 
 The following sections cover how to reference a secret, where secret values are stored in each offering, how references are resolved, and how access to secrets is controlled.
