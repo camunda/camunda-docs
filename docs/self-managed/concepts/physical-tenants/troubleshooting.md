@@ -57,7 +57,7 @@ A Physical Tenant most often becomes **degraded** because its secondary storage 
 
 - Storage-dependent `/v2/...` REST endpoints for that tenant return `503 Service Unavailable` with a `Retry-After` header and a problem-detail body.
 - Other Physical Tenants continue serving requests normally.
-- On a node with the secondary-storage readiness check enabled, the node stays in the load balancer as long as at least one tenant is serviceable. The check uses schema-initialization state for Elasticsearch, OpenSearch, and RDBMS.
+- On Elasticsearch and OpenSearch deployments where the secondary-storage readiness check is enabled, the check is `UP` as long as at least one tenant is serviceable. The overall readiness group can still be `DOWN` because of other readiness contributors. In the current implementation, a degraded `default` tenant can also keep node readiness `DOWN` even when another tenant is ready; this known limitation is tracked in [camunda/camunda#63674](https://github.com/camunda/camunda/issues/63674).
 - The per-tenant readiness gauge `camunda.physical.tenant.secondary.storage.ready` reports `0` for the affected tenant.
 - Per-tenant transition logs name the tenant and state whether an operator needs to act.
 
