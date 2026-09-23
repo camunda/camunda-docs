@@ -73,7 +73,7 @@ This approach uses three operator-managed infrastructure components, each mainta
 
 | Component                                                   | Purpose                                                                                           | Official Documentation                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/)               |
+| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.30/)               |
 | **[Elasticsearch with ECK](#elasticsearch-deployment)**     | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)      |
 | **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity                                    | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
@@ -152,7 +152,7 @@ While this guide demonstrates manual deployment using command-line tools, these 
 
 [CloudNativePG](https://cloudnative-pg.io/) is a CNCF project that provides the official Kubernetes deployment method for PostgreSQL. It's designed specifically for cloud-native environments with enterprise-grade features including automated backups, point-in-time recovery, and rolling updates.
 
-**Official documentation**: [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/)
+**Official documentation**: [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.30/)
 
 ### Architecture
 
@@ -160,7 +160,7 @@ Our setup provisions three separate PostgreSQL clusters for different Camunda co
 
 - **pg-identity**: Database for Camunda Identity component
 - **pg-keycloak**: Database for Keycloak identity service
-- **pg-hub**: Database for Camunda Hub
+- **pg-webmodeler**: Database for Web Modeler component
 
 :::note Component flexibility
 If you don't plan to use certain components (for example, Web Modeler), you can simply remove the corresponding cluster definition from the configuration before deployment. This allows you to deploy only the PostgreSQL clusters you actually need, reducing resource consumption.
@@ -178,7 +178,7 @@ error when evicting pods/"pg-identity-1" -n "camunda": Cannot evict pod as it wo
 
 A Kubernetes version upgrade drains one node at a time, so a single-instance cluster stalls that upgrade on the node holding the database. CloudNativePG describes this behavior in [Kubernetes upgrade and maintenance](https://cloudnative-pg.io/docs/1.30/kubernetes_upgrade/) and recommends always running more than one instance.
 
-A dedicated WAL volume keeps replication from filling the data directory. A standby holds a replication slot on the primary, so a standby that is down or lagging makes the primary retain WAL segments. When `pg_wal` shares a volume with `PGDATA`, that retention grows into the same space as your data. A dedicated volume confines it to its own disk. The 5Gi default covers the 1GB `max_wal_size` checkpoint target plus the 512MB CloudNativePG keeps in `wal_keep_size`, with room for a standby that stays down for a while. See [Volume for WAL](https://cloudnative-pg.io/docs/1.30/storage/#volume-for-wal).
+A dedicated WAL volume keeps replication from filling the data directory. A standby holds a replication slot on the primary, so a standby that is down or lagging makes the primary retain WAL segments. When `pg_wal` shares a volume with `PGDATA`, that retention grows into the same space as your data. A dedicated volume confines it to its own disk. The 5Gi default covers the 1 GB `max_wal_size` checkpoint target plus the 512 MB CloudNativePG keeps in `wal_keep_size`, with room for a standby that stays down for a while. See [Volume for WAL](https://cloudnative-pg.io/docs/1.30/storage/#volume-for-wal).
 
 Both settings are one-way. The CloudNativePG validating webhook rejects removing `walStorage` from an existing cluster, and rejects lowering `storage.size`. Decide on the WAL volume and the data volume size before you deploy. Growing `storage.size` later is supported when your storage class sets `allowVolumeExpansion: true`.
 
@@ -237,7 +237,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 - `pg-keycloak`: Database for Keycloak authentication
 - `pg-identity`: Database for Management Identity component
-- `pg-hub`: Database for Camunda Hub
+- `pg-webmodeler`: Database for Web Modeler
 
 </TabItem>
 </Tabs>
@@ -697,7 +697,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 - Check node resources and storage availability
 - Review CloudNativePG operator logs: `kubectl logs -n cnpg-system deployment/cnpg-controller-manager`
 
-**Reference:** [CloudNativePG Troubleshooting](https://cloudnative-pg.io/docs/1.28/troubleshooting)
+**Reference:** [CloudNativePG Troubleshooting](https://cloudnative-pg.io/docs/1.30/troubleshooting)
 
 #### Elasticsearch cluster yellow/red status
 
@@ -764,7 +764,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 ### Backup and disaster recovery
 
 - **Elasticsearch**: Perform backups using Camunda for Elastic (see [Camunda backup guide](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md)).
-- **PostgreSQL**: Configure automated backups using [CloudNativePG's backup capabilities](https://cloudnative-pg.io/docs/1.28/recovery)
+- **PostgreSQL**: Configure automated backups using [CloudNativePG's backup capabilities](https://cloudnative-pg.io/docs/1.30/recovery)
 - **Keycloak**: Configure regular [exports of realm and user data](https://www.keycloak.org/server/importExport)
 - **Configuration**: Store all configuration files in version control
 
@@ -788,12 +788,12 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 
 ### Before you start
 
-| Check                 | Why it matters                                                                                                                         |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Two schedulable nodes | The second instance is only useful on another node, and the drain you are enabling needs somewhere to move the primary.                |
-| Free storage          | The existing instance gains a WAL volume and a second instance is created with both. With the defaults, that is 25Gi more per cluster. |
-| A current backup      | The migration is in place and keeps your volume, so an unrelated failure during it has no second copy to fall back on.                 |
-| Cluster is healthy    | Run `kubectl get cluster -n camunda` and confirm the phase is `Cluster in healthy state` before changing anything.                     |
+| Check                 | Why it matters                                                                                                                          |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Two schedulable nodes | The second instance is only useful on another node, and the drain you are enabling needs somewhere to move the primary.                 |
+| Free storage          | The existing instance gains a WAL volume and a second instance is created with both. With the defaults, that is 25 Gi more per cluster. |
+| A current backup      | The migration is in place and keeps your volume, so an unrelated failure during it has no second copy to fall back on.                  |
+| Cluster is healthy    | Run `kubectl get cluster -n camunda` and confirm the phase is `Cluster in healthy state` before changing anything.                      |
 
 ### Run the migration
 
@@ -845,10 +845,10 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```
 
    ```text
-   NAME          AGE   INSTANCES   READY   STATUS                     PRIMARY
-   pg-identity   10m   2           2       Cluster in healthy state   pg-identity-1
-   pg-keycloak   10m   2           2       Cluster in healthy state   pg-keycloak-1
-   pg-hub        10m   2           2       Cluster in healthy state   pg-hub-1
+   NAME           AGE   INSTANCES   READY   STATUS                     PRIMARY
+   pg-identity    10m   2           2       Cluster in healthy state   pg-identity-1
+   pg-keycloak    10m   2           2       Cluster in healthy state   pg-keycloak-1
+   pg-webmodeler  10m   2           2       Cluster in healthy state   pg-webmodeler-1
    ```
 
    A cluster stuck at `1` ready usually has its second pod `Pending`, because the required anti-affinity found no second schedulable node.
@@ -875,7 +875,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 1. Confirm the standby of each cluster is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
 
    ```bash
-   for cluster in pg-identity pg-keycloak pg-hub; do
+   for cluster in pg-identity pg-keycloak pg-webmodeler; do
      primary=$(kubectl get pod -n camunda -l "cnpg.io/cluster=$cluster,cnpg.io/instanceRole=primary" -o jsonpath='{.items[0].metadata.name}')
      echo -n "$cluster: "
      kubectl exec -n camunda "$primary" -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
@@ -885,7 +885,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```text
    pg-identity: streaming
    pg-keycloak: streaming
-   pg-hub: streaming
+   pg-webmodeler: streaming
    ```
 
    Until a cluster reports `streaming`, its standby is not a switchover candidate, and a drain started early stalls with `Current primary is running on unschedulable node, but there are no valid candidates` in the operator log.
@@ -906,7 +906,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    node/<node> drained
    ```
 
-   Run `kubectl uncordon <node>` afterwards, and the cluster returns to two ready instances.
+   Run `kubectl uncordon <node>` afterward, and the cluster returns to two ready instances.
 
 ### Keep a single instance instead
 
@@ -928,7 +928,7 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 ## Additional resources
 
-- [CloudNativePG documentation](https://cloudnative-pg.io/docs/1.28/)
+- [CloudNativePG documentation](https://cloudnative-pg.io/docs/1.30/)
 - [Elastic Cloud on Kubernetes guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - [Keycloak Operator documentation](https://www.keycloak.org/operator/installation)
 - [Camunda 8 Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters)
