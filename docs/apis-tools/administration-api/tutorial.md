@@ -11,7 +11,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/components/react-components/create-cluster.md).
-- Upon cluster creation, create your first client by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client. Ensure you check all the boxes for Zeebe client scopes.
+- Upon cluster creation, create your first client in [Camunda Hub](/components/hub/workspace/modeler/index.md) by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client. Ensure you check all the boxes for Zeebe client scopes.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -34,8 +34,14 @@ To set up your credentials, create an `.env` file which will be protected by the
 These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
 
 :::tip Can't find your environment variables?
-When you create new client credentials as a [prerequisite](#prerequisites), your environment variables appear in a pop-up window. Your environment variables may appear as `CAMUNDA_CONSOLE_CLIENT_ID`, `CAMUNDA_CONSOLE_CLIENT_SECRET`, `CAMUNDA_CONSOLE_OAUTH_AUDIENCE`, and `CAMUNDA_CONSOLE_BASE_URL`. Locate your `CLUSTER_ID` in Console by navigating to **Clusters**. Scroll down and copy your **Cluster Id** under **Cluster Details**.
-:::
+When you create new client credentials as a [prerequisite](#prerequisites), your environment variables appear in a pop-up window. Your environment variables may appear as `CAMUNDA_CONSOLE_CLIENT_ID`, `CAMUNDA_CONSOLE_CLIENT_SECRET`, `CAMUNDA_CONSOLE_OAUTH_AUDIENCE`, and `CAMUNDA_CONSOLE_BASE_URL`.
+
+Locate your `CLUSTER_ID` in Camunda Hub:
+
+1. In Camunda Hub, in the left navigation under **Console**, click **Clusters**.
+1. Select a cluster.
+1. Under **Cluster Details**, copy your **Cluster Id**.
+   :::
 
 Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 

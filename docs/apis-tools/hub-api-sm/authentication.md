@@ -51,7 +51,7 @@ With this `access_token`, you're ready to [authenticate with the Camunda Hub API
 
 Once you have [generated a token](#generate-a-token), use it in the authorization header in every Camunda Hub API request: `Authorization: Bearer <TOKEN>`.
 
-For example, send a request to the Camunda Hub API's `/info` endpoint:
+For example, send a request to Camunda Hub API's `/info` endpoint:
 
 ```shell
 curl --header "Authorization: Bearer ${TOKEN}" \
