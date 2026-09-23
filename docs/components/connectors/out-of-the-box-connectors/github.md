@@ -393,7 +393,7 @@ This tab displays the URL of the GitHub Webhook connector for every cluster wher
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use GitHub Webhook connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, GitHub Webhook connector deployments and URLs will not be displayed in Modeler.
+In that case, GitHub Webhook connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 ## Configure GitHub

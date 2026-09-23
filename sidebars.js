@@ -1304,7 +1304,7 @@ module.exports = {
             id: "components/saas/secure-connectivity/secure-connectivity-AWS",
           },
           items: [
-            "components/saas/secure-connectivity/secure-connectivity-console-setup",
+            "components/saas/secure-connectivity/enable-secure-connectivity",
           ],
         },
 
