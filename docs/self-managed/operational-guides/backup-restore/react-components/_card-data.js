@@ -1,6 +1,5 @@
 // this makes use of the Zeebe react grid component
 
-import IconGear from "../assets/icon-prereqs.png";
 import IconConsiderations from "../assets/icon-considerations.png";
 import IconCloud from "../assets/icon-backup.png";
 import IconRepeat from "../assets/icon-restore.png";
@@ -55,7 +54,7 @@ export const rdbmsCards = [
     title: "Create a backup",
     image: IconCloud,
     description:
-      "Create a backup of all components while using an RDBMS as secondary storage.",
+      "Create a backup of Zeebe, Operate, Tasklist, and Admin while using an RDBMS as secondary storage. Optimize and Management Identity are not included.",
   },
   {
     link: "../rdbms/rdbms-restore",
