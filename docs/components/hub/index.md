@@ -13,6 +13,8 @@ import OptimizeIcon from "@site/docs/components/assets/icon-optimize.png";
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import ConnectorsIcon from "@site/docs/components/assets/icon-connectors.png";
 import WorkspacesEnvironmentsImg from "./img/workspaces-environments.png";
+import HubStructureImg from "./img/centralized-org-management.png";
+import HubWorkspacesImg from "./img/workspaces-environments.png";
 import AoGrid from '../react-components/\_ao-card';
 
 Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
@@ -26,34 +28,44 @@ Camunda Hub is the unified platform where:
 
 With Hub, teams within your organization can build, deploy, and operate your processes faster with a clear organizational structure and dedicated deployment environments.
 
-<div class="double-column-container" style={{ paddingTop: '50px' }}>
-<div class="double-column-left" style={{ flex: '2', paddingRight: '10px' }}>
+<hr style={{ margin: '2.5rem 0', backgroundColor: '#dedede' }} />
 
-![Camunda Hub high-level structure diagram](./img/centralized-org-management.png)
+<div class="double-column-container" style={{ paddingTop: '20px' }}>
+<div class="double-column-left" style={{ flex: '1.4', paddingRight: '40px' }}>
+
+<img src={HubStructureImg} alt="Camunda Hub high-level structure diagram" title="Camunda Hub high-level structure" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
-<div class="double-column-right" style={{ flex: '2' }}>
+<div class="double-column-right" style={{ flex: '2', marginTop: '-2.2rem' }}>
 
-### Clear structure
+### Organization structure
 
 Camunda Hub's organization view shows the workspaces you belong to, organized in a clear hierarchy:
 
-**Organization → [Workspace](/reference/glossary.md#workspace) → [Project](/reference/glossary.md#project) → Files and folders**
+**Organization → Workspace → Project → Files and folders**
+
+You can manage organizational resources, including clusters and workspaces, and govern the use of reusable assets.
+
+<p class="link-arrow">[Manage organizational resources](/components/hub/organization/index.md)</p>
 
 </div>
 </div>
 
 <div class="double-column-container" style={{ paddingTop: '50px' }}>
-<div class="double-column-left" style={{ flex: '2', paddingRight: '20px' }}>
+<div class="double-column-left" style={{ flex: '2', paddingRight: '40px', marginTop: '-2.2rem' }}>
 
-### Deployment environments
+### Workspaces and environments
 
-Each workspace includes dedicated deployment environments for development, staging, and production. Organization admins define which clusters back each environment, so you can deploy and promote your work through approved stages with clear access controls.
+Each workspace includes dedicated deployment environments for development, staging, and production.
+
+Organization admins define which clusters back each environment, so you can deploy and promote your work through approved stages with clear access controls.
+
+<p class="link-arrow">[Build within a workspace](/components/hub/workspace/index.md)</p>
 
 </div>
-<div class="double-column-right" style={{ flex: '2' }}>
+<div class="double-column-right" style={{ flex: '1.8' }}>
 
-![Deployment environments diagram](./img/workspaces-environments.png)
+<img src={HubWorkspacesImg} alt="Deployment environments diagram" title="Deployment environments" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
@@ -79,13 +91,13 @@ description: "Create, monitor, and assign clusters for seamless execution across
 link: "./organization/credentials",
 title: "Manage credentials",
 image: IntegrationIcon,
-description: "Create a reusable credential, then select it wherever an element template needs authentication or connection configuration, instead of repeating the settings in every diagram.",
+description: "Create a reusable credential for use with element template authentication or connection configuration.",
 },
 {
 link: "./organization/manage-catalog",
 title: "Manage the catalog",
 image: ConnectorsIcon,
-description: "Manage reusable automation assets in a Git repository, and publish them to Camunda Hub so your delivery teams can discover and apply them when modeling.",
+description: "Manage reusable automation assets in a Git repository, and publish them to Camunda Hub.",
 },
 {
 link: "./organization/manage-users",
@@ -103,7 +115,7 @@ description: "Manage organizational settings, and view usage alerts and history.
 link: "./organization/analyze-operations/",
 title: "Analyze operations",
 image: OptimizeIcon,
-description: "Monitor cluster health, track job and process execution, and measure business value across your Camunda organization.",
+description: "Monitor cluster health, track job and process execution, and measure organization business value.",
 },
 ]} columns={3}/>
 
