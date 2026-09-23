@@ -899,6 +899,17 @@ You can now assign a business ID to a running process instance that has none, us
 
 <p class="link-arrow">[Late Business ID assignment](/components/concepts/process-instance-creation.md#late-business-id-assignment)</p>
 
+### Multi-instance activity execution listeners
+
+<!-- https://github.com/camunda/product-hub/issues/3458 -->
+
+Execution listeners can now be configured on the enclosing body of multi-instance activities. `beforeAll` listeners run once per multi-instance body activation, before the `inputCollection` is evaluated and inner instances are created, making listener-produced variables available to the body's `inputCollection` expression.
+
+- Replicate Camunda 7 multi-instance and execution listener patterns without redesigning your process.
+- Dynamically calculate collections using custom logic or external data before instance creation.
+
+<p class="link-arrow">[`beforeAll` listeners](/components/concepts/execution-listeners.md#beforeall-listeners)</p>
+
 ### Multi-tenancy support in SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/3244 -->
@@ -2434,6 +2445,19 @@ The default RocksDB memory allocation strategy changes from `PARTITION` to `FRAC
 To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#rocksdb-memory-allocation-strategy) for more details.
 
 <p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
+
+#### Multi-Instance activity execution listeners
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3458 -->
+
+Execution listeners can now be configured on the enclosing body of multi-instance activities. `beforeAll` listeners run once per multi-instance body activation, before the `inputCollection` is evaluated and inner instances are created, making listener-produced variables available to the body's `inputCollection` expression.
+
+- Replicate Camunda 7 multi-instance and execution listener patterns without redesigning your process.
+- Dynamically calculate collections using custom logic or external data before instance creation.
+
+<p class="link-arrow">[`beforeAll` listeners](/components/concepts/execution-listeners.md#beforeall-listeners)</p>
 
 ### Operate
 
