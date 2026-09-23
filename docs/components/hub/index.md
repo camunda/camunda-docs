@@ -53,7 +53,7 @@ Each workspace includes dedicated deployment environments for development, stagi
 </div>
 <div class="double-column-right" style={{ flex: '2' }}>
 
-![Deployment environments diagram](./img/centralized-org-management.png)
+![Deployment environments diagram](./img/workspaces-environments.png)
 
 </div>
 </div>
