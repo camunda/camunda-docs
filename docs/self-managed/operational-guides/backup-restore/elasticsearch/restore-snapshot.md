@@ -10,6 +10,10 @@ description: "Learn how to restore Elasticsearch or OpenSearch snapshots from a 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+## Restore Elasticsearch/OpenSearch snapshots
+
+This page is part of the overall Elasticsearch/OpenSearch [restore procedure](./restore.md). Return to the parent procedure after restoring the snapshots to continue with the remaining restore steps.
+
 ### Prerequisites
 
 The following specific prerequisites are required when restoring Elasticsearch/OpenSearch:
