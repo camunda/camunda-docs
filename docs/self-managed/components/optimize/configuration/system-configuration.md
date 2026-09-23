@@ -327,19 +327,6 @@ Customize the Optimize UI e.g. by adjusting the logo, head background color etc.
 | externalVariable.import.enabled     | false         | Controls whether external ingested variable data is processed and imported to process instance data. |
 | externalVariable.import.maxPageSize | 10000         | Determines the page size for the import of ingested external variable data to process instance data. |
 
-### Troubleshooting
-
-#### Optimize reports `nested_limit_exceeded`
-
-**Observed behavior:** Optimize's [error metrics](/self-managed/operational-guides/monitoring/metrics.md#optimize-error-metrics) show `optimize_error_total{ERROR_TYPE="nested_limit_exceeded"}` increasing, or data stops appearing for very large process instances.
-
-**Why this happens:** A process instance's nested documents (activities, variables, or incidents) exceeded the configured [`nested_documents_limit`](#elasticsearch-index-settings) (default `10000`). Elasticsearch and OpenSearch cap nested documents per parent document to prevent out-of-memory errors.
-
-**How to fix:**
-
-- Raise `es.settings.index.nested_documents_limit` (or the [OpenSearch equivalent](#opensearch-index-settings)) if your process instances legitimately need more than the default.
-- Alternatively, enable [`import.skipDataAfterNestedDocLimitReached`](#import) to skip further data for that instance once the limit is reached, instead of the import failing.
-
 ### Other
 
 Settings of Sharing, Optimize entities, and CSV Export.
@@ -353,3 +340,16 @@ Settings of Sharing, Optimize entities, and CSV Export.
 | export.csv.limit           |                                         | 1000          | Maximum number of records returned by CSV export.<br /><br /> Note: Increasing this value comes at a memory cost for the Optimize application that varies based on the actual data. As a rough guideline, an export of a 50000 raw data report records containing 8 variables on each instance can cause temporary heap memory peaks of up to ~200MB with the actual CSV file having a size of ~20MB. Please adjust the heap memory accordingly, see [Adjust Optimize heap size](../overview.md#adjust-optimize-heap-size) on how to do that. |
 | export.csv.delimiter       |                                         | ,             | The delimiter used for the CSV export. The value defaults to a comma, however other common CSV delimiters such as semicolons (";") and tabs ("\\t") can also be used.                                                                                                                                                                                                                                                                                                                                                                         |
 | sharing.enabled            | CAMUNDA_OPTIMIZE_SHARING_ENABLED        | true          | Enable/disable the possibility to share reports and dashboards.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
+### Troubleshooting
+
+#### Optimize reports `nested_limit_exceeded`
+
+**Observed behavior:** Optimize's [error metrics](/self-managed/operational-guides/monitoring/metrics.md#optimize-error-metrics) show `optimize_error_total{ERROR_TYPE="nested_limit_exceeded"}` increasing, or data stops appearing for very large process instances.
+
+**Why this happens:** A process instance's nested documents (activities, variables, or incidents) exceeded the configured [`nested_documents_limit`](#elasticsearch-index-settings) (default `10000`). Elasticsearch and OpenSearch cap nested documents per parent document to prevent out-of-memory errors.
+
+**How to fix:**
+
+- Raise `es.settings.index.nested_documents_limit` (or the [OpenSearch equivalent](#opensearch-index-settings)) if your process instances legitimately need more than the default.
+- Alternatively, enable [`import.skipDataAfterNestedDocLimitReached`](#import) to skip further data for that instance once the limit is reached, instead of the import failing.

@@ -461,7 +461,7 @@ The dashboard provides insights into key data layer components for Camunda versi
 
 **Observed behavior:** `/actuator/prometheus` returns an empty response or `404`, or Prometheus shows the Camunda target as down in its **Targets** page.
 
-**Why this happens:** The Prometheus endpoint is disabled and restricted by default. Both `management.endpoint.prometheus.access: unrestricted` and `management.prometheus.metrics.export.enabled: true` must be set before the endpoint exports anything. A mismatch between the scraping job's `scheme` and the management context's actual protocol (HTTP vs. HTTPS) also causes the target to show as down.
+**Why this happens:** The Prometheus endpoint is available when the default Prometheus export settings are in place. If those defaults were changed, `management.endpoint.prometheus.access` or `management.prometheus.metrics.export.enabled` can prevent the endpoint from exporting metrics. A mismatch between the scraping job's `scheme` and the management context's actual protocol (HTTP vs. HTTPS) also causes the target to show as down.
 
 **How to fix:**
 
@@ -485,9 +485,9 @@ The dashboard provides insights into key data layer components for Camunda versi
 
 **Observed behavior:** The `physicalTenant` variable or label isn't available on a specific Grafana panel, even though it works elsewhere in the same dashboard.
 
-**Why this happens:** Only partition-scoped Zeebe metrics carry the `physicalTenant` label today. Node-level metrics that aren't partition-scoped don't carry it, and other dashboards (API panels, gateway panels) are still being updated to add it, tracked in [camunda/camunda#56250](https://github.com/camunda/camunda/issues/56250).
+**Why this happens:** See [Physical Tenant filtering](#physical-tenant-filtering) for which metrics and dashboards expose the `physicalTenant` label.
 
-**How to fix:** Confirm the panel's underlying metric is partition-scoped. If it is and still lacks the label, check the linked issue for status before assuming a misconfiguration.
+**How to fix:** Confirm the panel's underlying metric is partition-scoped. If it is and still lacks the label, check the linked issue in [Physical Tenant filtering](#physical-tenant-filtering) for status before assuming a misconfiguration.
 
 ### OTLP export fails or backend rejects the data
 

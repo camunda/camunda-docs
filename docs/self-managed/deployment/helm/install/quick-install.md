@@ -195,7 +195,7 @@ To deploy the full Camunda 8 platform with all components (Optimize, Web Modeler
    ```
 2. If the pod is restarting, check the log from the previous crashed instance:
    ```shell
-   kubectl logs -f <POD_NAME> --previous
+   kubectl logs <POD_NAME> --previous
    ```
 3. Cross-reference the error against your values file for the affected component.
 
