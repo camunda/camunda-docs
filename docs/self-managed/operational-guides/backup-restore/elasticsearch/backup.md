@@ -121,7 +121,7 @@ You can also optionally [back up your Camunda Hub data](#back-up-hub-data).
 
 The REST steps below are scoped to whichever Physical Tenant your credentials belong to. The actuator calls apply cluster-wide instead, so following the actuator alternative as written backs up every Physical Tenant at once.
 
-To back up a specific tenant other than your own, or every tenant in one call with per-tenant outcome reporting, use the cluster-wide REST endpoints described in [back up a cluster with multiple Physical Tenants](../backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants). There is no actuator equivalent for targeting a specific Physical Tenant.
+To back up a specific tenant other than your own, or every tenant in one call with per-tenant outcome reporting, use the cluster-wide REST endpoints described in [back up a cluster with multiple Physical Tenants](../backup-and-restore.md#multiple-physical-tenants). There is no actuator equivalent for targeting a specific Physical Tenant.
 
 ## Back up process
 
