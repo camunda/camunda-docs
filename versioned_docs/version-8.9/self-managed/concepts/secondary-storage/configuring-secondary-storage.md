@@ -18,6 +18,8 @@ You can configure secondary storage using Helm charts, Docker Compose, or manual
 
 Camunda uses the `data.secondary-storage` configuration to define which secondary storage backend supports Orchestration Cluster web applications and APIs (for example, Operate, Tasklist, Identity, and search endpoints).
 
+Once a selection is made and the cluster is deployed, the secondary storage backend is fixed. Switching between backend families (document-store and RDBMS) or migrating between backends within the same family is not supported.
+
 :::note
 For the latest list of supported relational databases and versions, see the  
 [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
@@ -188,9 +190,7 @@ Starting in 8.9, H2 is the default secondary storage for lightweight Camunda 8 R
 For production use, Orchestration Cluster applications and APIs (including Operate, Tasklist, Identity, and search endpoints) should run against a persistent secondary storage backend such as a supported RDBMS or a document-store backend (Elasticsearch/OpenSearch). Both are valid production choices when supported for your deployment. Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database, and [supported environments](/reference/supported-environments.md) for Elasticsearch/OpenSearch versions.
 :::
 
-:::note
-Switching between secondary storage backend families (document-store and RDBMS) is not a supported in-place migration path. Plan migration as a fresh secondary-store setup, and validate the procedure in a non-production environment before rollout. For upgrade planning, see [prepare for upgrade](/self-managed/upgrade/prepare-for-upgrade.md).
-:::
+Once a selection is made and the cluster is deployed, the secondary storage backend is fixed. Switching between backend families (document-store and RDBMS) or migrating between backends within the same family is not supported. Plan migration as a fresh secondary-store setup, and validate the procedure in a non-production environment before rollout. For upgrade planning, see [prepare for upgrade](/self-managed/upgrade/prepare-for-upgrade.md).
 
 ## Run without secondary storage
 
