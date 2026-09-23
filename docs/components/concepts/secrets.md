@@ -39,7 +39,7 @@ You can reference a secret in Camunda using a [secret reference](/reference/glos
 | :----------------------- | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `camunda.secrets.<name>` | [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) | <p>Input mapping FEEL expressions, and connector or credential fields backed by a `SECRET_REFERENCE` cluster variable.</p><p><ul><li>[Secret resolution](secret-resolution.md)</li><li>[Secret reference (Orchestration Cluster)](/reference/glossary.md#secret-reference-orchestration-cluster).</li></ul></p> |
 
-:::note
+:::note Legacy connector secrets
 An older `{{secrets.<name>}}` syntax, resolved by the connector runtime, remains supported for existing connector models. See [Legacy connector secrets](#legacy-connector-secrets).
 :::
 
