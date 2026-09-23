@@ -160,6 +160,14 @@ Lastly, initiate a "retry" of the process instance by selecting **Retry** in the
 
 You should now see the incident has been resolved, and the process instance has progressed to the next step.
 
+:::note
+Selecting **Retry** marks the incident as resolved and triggers a retry. It does not verify that the underlying cause has been fixed.
+
+For a [job incident](/components/concepts/incidents.md#resolving), Camunda checks the problem again only when a worker next activates the job. If no worker is connected for the job type, the incident does not reappear even if the cause is still present. As a result, the process instance can appear healthy in Operate even though the problem remains unresolved.
+
+Keep a worker connected for the affected job type so Camunda can raise a new incident promptly if the cause remains unresolved.
+:::
+
 ## Complete a process instance
 
 If you’d like to complete the process instance, create a worker for the `Ship Without Insurance` task:

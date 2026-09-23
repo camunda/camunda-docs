@@ -107,6 +107,12 @@ The following table lists all resources that support authorization in the Orches
 | `USER_TASK`                        | `assignee` (example)                                                                              | Task property name used with `PROPERTY` matcher (for example, `assignee`, `candidateUsers`, `candidateGroups`) | `READ`, `UPDATE`, `CLAIM`, `COMPLETE`                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `USER`                             | `*`, `jane.doe`                                                                                   | All users / Username                                                                                           | `CREATE`, `DELETE`, `READ`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 
+### Secret authorizations don't cover broker-side resolution
+
+`SECRET:READ` and `SECRET:REVEAL` gate only the `/v2/secrets` API endpoints (`POST /v2/secrets/list` and `POST /v2/secrets/resolve`, respectively). They don't gate the broker resolving `camunda.secrets.<name>` references for job activation. Any process model may reference any configured secret, and any worker that receives a job with a resolved reference sees the value in plaintext, with no `SECRET` grant involved anywhere in that path. See [secret resolution and job activation](../secret-resolution-and-job-activation.md).
+
+The resource key for `SECRET` is the full reference, including the `camunda.secrets.` prefix (for example, `camunda.secrets.MY_KEY`). Only an exact match or `*` is supported, so a prefix such as `camunda.secrets.*` matches nothing.
+
 ### User task authorizations
 
 User task access in the Orchestration Cluster is controlled using a combination of process-level and task-level permissions.

@@ -22,7 +22,7 @@ See [prerequisites](../prerequisites.md) for installation requirements.
 
 ## Configure the connector
 
-In Camunda Modeler, select **ServiceNow Flow Starter** from the connector templates or download it from the [Camunda Marketplace](https://marketplace.camunda.com/).
+In Camunda Hub or Desktop Modeler, select **ServiceNow Flow Starter** from the connector templates or download it from the [Camunda Marketplace](https://marketplace.camunda.com/).
 
 ### Required fields
 
@@ -40,8 +40,8 @@ In Camunda Modeler, select **ServiceNow Flow Starter** from the connector templa
 Store ServiceNow credentials securely as [secrets](/components/hub/organization/manage-clusters/manage-secrets.md) and reference them in the connector configuration (e.g., `{{secrets.snUser}}`).
 :::
 
-![Configuration of the Flow Starter connector in Camunda Modeler.](../img/flow-starter.png)
-_Configuration of the Flow Starter connector in Camunda Modeler._
+![Configuration of the Flow Starter connector in Camunda Hub.](../img/flow-starter.png)
+_Configuration of the Flow Starter connector in Camunda Hub._
 
 ## Example configuration
 

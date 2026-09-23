@@ -6,8 +6,6 @@ description: "Diagnose the incidents raised when a job's secret references canno
 
 When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the cluster responds in one of three ways: it raises a `SECRET_RESOLUTION_ERROR` incident, raises a `MESSAGE_SIZE_EXCEEDED` incident, or defers the job and retries it without raising an incident.
 
-This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
-
 Only the two incident cases require operator action.
 
 Use this page to diagnose an existing secret resolution or activation problem. To understand how secret resolution and job activation work, see [Secret resolution and job activation](secret-resolution-and-job-activation.md).
@@ -51,6 +49,10 @@ Resolve the incident only after fixing the underlying cause. Resolving the incid
 
 You don't need to redeploy or make client-side changes. Once the reference resolves successfully, the process instance continues from where it stopped.
 
+Camunda retries secret resolution only when a worker next activates the job. If no worker is connected for the job type, the broker does not activate the job or request secret resolution again. As a result, the incident does not reappear even if the secret is still missing.
+
+The absence of an incident does not mean the secret problem is resolved. Keep a worker connected for the affected job type so Camunda can raise a new incident promptly if the cause remains unresolved.
+
 ## Resolve secret injection failures
 
 A secret injection failure also raises a `SECRET_RESOLUTION_ERROR` incident, but for a different reason. In this case, the secret value was available, but Camunda could not inject it into the job variables.
@@ -88,6 +90,10 @@ While the incident is active, the job is not activatable, so the broker does not
 
 Resolve the incident only after correcting the variable value or the input mapping that produced it. Resolving the incident makes the job activatable again, and Camunda retries injection against the current job variables.
 
+Camunda retries injection only when a worker next activates the job. If no worker is connected for the job type, the broker does not activate the job or retry injection. As a result, the incident does not reappear even if the underlying cause is still present.
+
+Keep a worker connected for the affected job type so Camunda can raise a new incident promptly if injection still fails.
+
 If you cannot restore the placeholder, use [process instance modification](process-instance-modification.md) to reactivate the element. This creates a new job and detects its secret references again.
 
 ## Reduce oversized secret values
@@ -105,6 +111,10 @@ Camunda raises this incident only when the oversized job is first in the activat
 ### Retry after reducing the size
 
 Resolve the incident only after reducing the size of the secret value or the job variables. Otherwise, the next activation attempt fails in the same way.
+
+Camunda checks the job size again only when a worker next activates the job. If no worker is connected for the job type, the broker does not activate the job or run the size check. As a result, the incident does not reappear even if the values are still too large.
+
+Keep a worker connected for the affected job type so Camunda can raise a new incident promptly if the job still exceeds the message-size limit.
 
 To reduce the job variables included in activation, adjust the worker's `fetchVariables` list. Variables the worker does not fetch are excluded from the activation and do not count toward the message-size limit.
 
@@ -139,7 +149,7 @@ Job push does not bypass the transport message-size limit. If the pushed job exc
 
 ## Resume a suspended job after secret resolution
 
-A job waiting for an uncached secret enters `WAITING_FOR_SECRET_RESOLUTION`. If you suspend its process instance, the job enters `SUSPENDED` instead.
+A job waiting for an uncached secret is parked, as described in [activate a job that references secrets](secret-resolution-and-job-activation.md#activate-a-job-that-references-secrets). If you suspend its process instance, the job enters `SUSPENDED` instead.
 
 If the secret resolves while the process instance is suspended, the job remains suspended and does not become activatable automatically.
 
@@ -155,15 +165,15 @@ Start with the incident error type and message, then confirm the underlying caus
 2. For incidents whose message starts with `Failed to resolve secret`, search the broker log for the affected partition and reference name. Match the log entry to the table below.
 3. For injection failures, inspect the job variables at the reported path in Operate or through the element instance variables.
 
-| Broker log line                                                                                | Cause                                                                                                | Fix                                                                                                     |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `Secret store '<id>' is not configured — failing <n> pending secret refs`                      | No secret store is configured, so all pending references fail.                                       | Configure a secret store.                                                                               |
-| `Secret '<ref>' in secret store '<id>' failed permanently: NOT_FOUND — <message>`              | The store does not contain a secret with that name.                                                  | Create the secret or correct the reference name in the process.                                         |
-| `Secret '<ref>' in secret store '<id>' failed permanently: ACCESS_DENIED — <message>`          | The credentials used by the broker don't have permission to read the secret.                         | Grant read access in the secret store. This is store-level access control, not a Camunda authorization. |
-| `Secret '<ref>' in secret store '<id>' failed permanently: INVALID_REF — <message>`            | The store rejects the reference name as invalid.                                                     | Rename the secret so the store and Camunda reference syntax both accept it.                             |
-| `Secret '<ref>' in secret store '<id>' failed permanently: UNREADABLE — <message>`             | The store contains the secret, but its value cannot be read or decoded.                              | Repair the stored value.                                                                                |
-| `Secret store '<id>' unavailable (attempt <n>/<m>), retrying in <backoff>: <message>`          | The failure is transient. The broker is retrying the store with backoff, and no incident exists yet. | If the failure persists, restore the store's availability.                                              |
-| `Secret store '<id>' unavailable after <n>/<m> attempts — failing <n> pending refs: <message>` | The store remained unavailable through `retry-max-attempts`, so its pending references failed.       | Restore the store's availability, then resolve the incidents.                                           |
+| Broker log line                                                                                    | Cause                                                                                                | Fix                                                                                                     |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `Secret '<ref>' in secret store '<id>' failed permanently: NOT_FOUND — No secret store configured` | No secret store is configured for this physical tenant, so every reference fails as not found.       | Configure a secret store.                                                                               |
+| `Secret '<ref>' in secret store '<id>' failed permanently: NOT_FOUND — <message>`                  | The store does not contain a secret with that name.                                                  | Create the secret or correct the reference name in the process.                                         |
+| `Secret '<ref>' in secret store '<id>' failed permanently: ACCESS_DENIED — <message>`              | The credentials used by the broker don't have permission to read the secret.                         | Grant read access in the secret store. This is store-level access control, not a Camunda authorization. |
+| `Secret '<ref>' in secret store '<id>' failed permanently: INVALID_REF — <message>`                | The store rejects the reference name as invalid.                                                     | Rename the secret so the store and Camunda reference syntax both accept it.                             |
+| `Secret '<ref>' in secret store '<id>' failed permanently: UNREADABLE — <message>`                 | The store contains the secret, but its value cannot be read or decoded.                              | Repair the stored value.                                                                                |
+| `Secret store '<id>' unavailable (attempt <n>/<m>), retrying in <backoff>: <message>`              | The failure is transient. The broker is retrying the store with backoff, and no incident exists yet. | If the failure persists, restore the store's availability.                                              |
+| `Secret store '<id>' unavailable after <n>/<m> attempts — failing <n> pending refs: <message>`     | The store remained unavailable through `retry-max-attempts`, so its pending references failed.       | Restore the store's availability, then resolve the incidents.                                           |
 
 The separator in these log lines is an em dash, and `<message>` contains the store's own error text. Search for a distinctive fragment such as `failed permanently` rather than the entire line.
 
