@@ -768,3 +768,58 @@ See [backup and restore Camunda Hub data](../modeler-backup-and-restore.md) for 
 As described in the [architecture overview](./backup.md#architecture-overview), backups involve two independent systems: **primary storage backups** (Zeebe's log stream and snapshots in a blob store) and the **secondary storage backup** (the RDBMS).
 
 During restore, Zeebe reads the **exporter position** from the restored RDBMS — the last log stream position that was successfully exported — and uses it to determine which primary storage backup, or backups, to restore from. This ensures that Zeebe's state is at least as advanced as what the RDBMS contains. After restart, Zeebe re-exports any events between the RDBMS position and its restored checkpoint position, bringing the secondary storage up to date.
+
+## Multiple physical tenant restore
+
+The Restore application supports multiple physical tenant restores, allowing you to restore one or more tenants without affecting the others on the node. It still requires to be run on all brokers while the cluster is offline. By default, the `default` tenant is always selected as a restore target unless explicitly overridden.
+
+To specify a single tenant to restore, use the `ZEEBE_RESTORE_TENANT_ID` environment variable or the corresponding CLI argument, `--tenantId`. Provide the rest of the restore options as you would for a normal restore.
+
+To perform a cluster-wide restore among all physical tenants simultaneously, use the `ZEEBE_RESTORE_ALL_TENANTS` environment variable or the corresponding CLI argument, `--allTenants`. Provide the rest of the restore options as you would for a normal restore.
+
+During a cluster-wide restore, argument overrides can be provided for individual tenants through the `extraConfiguration` as such:
+
+<Tabs>
+<TabItem value="yaml" label="HELM Values">
+
+It is required to include the overrides file in the Spring additional locations by setting the `spring.config.additional-location` property to point to the `restore-overrides.yaml` file.
+
+```yaml
+orchestration:
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "restore"
+    - name: ZEEBE_RESTORE
+      value: "true"
+    - name: ZEEBE_RESTORE_ALL_TENANTS
+      value: "true"
+    - name: ZEEBE_RESTORE_FROM_TIMESTAMP
+      value: "<TIMESTAMP>"
+    - name: ZEEBE_RESTORE_TO_TIMESTAMP
+      value: "<TIMESTAMP>"
+
+  extraConfiguration:
+    - file: restore-overrides.yaml
+      content: |
+        override:
+          tenanta:
+            from: "<TIMESTAMP>"
+            to: "<TIMESTAMP>"
+          tenantb:
+            backupId: [32]
+```
+
+</TabItem>
+
+<TabItem value="cli" label="CLI Arguments">
+
+```bash
+./camunda/bin/restore \
+  --allTenants \
+  --backupId=1748937221 \
+  --override.tenanta.from=<TIMESTAMP> --override.tenanta.to=<TIMESTAMP> \
+  --override.tenantb.backupId=32
+```
+
+</TabItem>
+</Tabs>

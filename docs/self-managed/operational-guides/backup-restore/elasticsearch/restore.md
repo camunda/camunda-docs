@@ -351,7 +351,7 @@ Before returning a restored tenant to normal traffic, confirm through tenant-sco
 
 Restore the Elasticsearch/OpenSearch snapshots using the [Restore Elasticsearch/OpenSearch snapshot](./restore-snapshot.md) procedure, then restore the Zeebe cluster and start the components as described below.
 
-### Step 2: Restore Zeebe Cluster {#restore-zeebe-cluster}
+## Restore Zeebe Cluster {#restore-zeebe-cluster}
 
 ### Prerequisites
 
@@ -425,7 +425,7 @@ optimize:
   enabled: false
 ```
 
-:::note Alternative overwrite
+:::note Alternative command overwrite
 
 Use this alternative approach to restore Zeebe partitions:
 
@@ -545,6 +545,58 @@ Otherwise, users may not be able to access their projects after the restore (see
 :::tip
 Some vendors provide tools that help with database backups and restores, such as [AWS Backup](https://aws.amazon.com/getting-started/hands-on/amazon-rds-backup-restore-using-aws-backup/) or [Cloud SQL backups](https://cloud.google.com/sql/docs/postgres/backup-recovery/backups).
 :::
+
+## Multiple physical tenant restore
+
+The Restore application supports multiple physical tenant restores, allowing you to restore one or more tenants without affecting the others on the node. It still requires to be run on all brokers while the cluster is offline. By default, the `default` tenant is always selected as a restore target unless explicitly overridden.
+
+To specify a single tenant to restore, use the `ZEEBE_RESTORE_TENANT_ID` environment variable or the corresponding CLI argument, `--tenantId`. Provide the rest of the restore options as you would for a normal restore.
+
+To perform a cluster-wide restore among all physical tenants simultaneously, use the `ZEEBE_RESTORE_ALL_TENANTS` environment variable or the corresponding CLI argument, `--allTenants`. Provide the rest of the restore options as you would for a normal restore.
+
+During a cluster-wide restore, argument overrides can be provided for individual tenants through the `extraConfiguration` as such:
+
+<Tabs>
+<TabItem value="yaml" label="HELM Values">
+
+It is required to include the overrides file in the Spring additional locations by setting the `spring.config.additional-location` property to point to the `restore-overrides.yaml` file.
+
+```yaml
+orchestration:
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "restore"
+    - name: ZEEBE_RESTORE
+      value: "true"
+    - name: ZEEBE_RESTORE_ALL_TENANTS
+      value: "true"
+    - name: ZEEBE_RESTORE_FROM_BACKUP_ID
+      value: "27"
+
+  extraConfiguration:
+    - file: restore-overrides.yaml
+      content: |
+        override:
+          tenanta:
+            backupId: [31]
+          tenantb:
+            backupId: [32]
+```
+
+</TabItem>
+
+<TabItem value="cli" label="CLI Arguments">
+
+```bash
+./camunda/bin/restore \
+  --allTenants \
+  --backupId=1748937221 \
+  --override.tenanta.backupId=31 \
+  --override.tenantb.backupId=32
+```
+
+</TabItem>
+</Tabs>
 
 </TabItem>
 </Tabs>
