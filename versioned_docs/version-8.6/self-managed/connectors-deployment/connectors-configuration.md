@@ -118,6 +118,24 @@ CONNECTOR_HTTPJSON_FUNCTION=io.camunda.connector.http.rest.HttpJsonFunction
 CONNECTOR_HTTPJSON_TYPE=non-default-httpjson-task-type
 ```
 
+## Configure inbound webhook request limits
+
+Use the following Spring properties or equivalent environment variables to configure HTTP Webhook request limits:
+
+| Spring property                                           | Environment variable                                      | Default            | Description                                                                                                                                            |
+| --------------------------------------------------------- | --------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `camunda.connector.webhook.max-request-body-bytes`        | `CAMUNDA_CONNECTOR_WEBHOOK_MAX_REQUEST_BODY_BYTES`        | `10485760` (10 MB) | Maximum non-multipart request body size in bytes. The value must be a non-negative integer.                                                            |
+| `camunda.connector.webhook.rate-limit.enabled`            | `CAMUNDA_CONNECTOR_WEBHOOK_RATE_LIMIT_ENABLED`            | `true`             | Enables the per-registered-webhook request rate limit.                                                                                                 |
+| `camunda.connector.webhook.rate-limit.permits-per-second` | `CAMUNDA_CONNECTOR_WEBHOOK_RATE_LIMIT_PERMITS_PER_SECOND` | `1000`             | Maximum sustained requests per second for each registered webhook. The value must be positive and finite, and must allow at least one permit per hour. |
+| `spring.servlet.multipart.max-file-size`                  | `SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE`                  | `1MB`              | Maximum size of each file in a `multipart/form-data` request.                                                                                          |
+| `spring.servlet.multipart.max-request-size`               | `SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE`               | `10MB`             | Maximum total size of a `multipart/form-data` request.                                                                                                 |
+
+Requests that exceed a body or multipart limit receive an HTTP `413` response. Requests that exceed the available rate-limit permits receive an HTTP `429` response. These responses have an empty body.
+
+Spring parses `multipart/form-data` requests before the Connector Runtime applies `camunda.connector.webhook.max-request-body-bytes`, so configure multipart limits separately. The per-webhook rate limit also applies to multipart requests after multipart parsing. Rate limiting controls sustained throughput for each webhook; it does not limit the number of concurrent requests.
+
+The Connector Runtime fails to start if the request-body limit is negative or an enabled rate limit has an invalid permits-per-second value.
+
 ## Secrets
 
 Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
