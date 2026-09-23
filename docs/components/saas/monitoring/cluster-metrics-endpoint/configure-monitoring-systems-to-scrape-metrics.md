@@ -84,7 +84,7 @@ If metrics do not appear, review authentication, network access, and scrape conf
 
 ## Example dashboards
 
-Camunda provides example Grafana dashboards in a public [GitHub repository](https://github.com/camunda/camunda/tree/main/monitor/grafana) that you can use to explore and visualize Cluster Metrics.
+Camunda provides example Grafana dashboards in a public [GitHub repository](https://github.com/camunda/camunda-observability) that you can use to explore and visualize Cluster Metrics.
 
 These dashboards serve as reference examples and may rely on additional metric sources, such as [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) or [node-exporter](https://github.com/prometheus/node_exporter). You can adapt them to match your monitoring conventions, alerting rules, and operational requirements. Available metrics can vary depending on the Camunda version running in your cluster.
 

@@ -768,6 +768,25 @@ Web Modeler change 1 description.
 </div>
 </div> -->
 
+## Monitoring
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Public Grafana dashboards move to camunda-observability
+
+Camunda's public Grafana dashboards move from [camunda/camunda](https://github.com/camunda/camunda/tree/main/monitor/grafana) to the new [camunda-observability](https://github.com/camunda/camunda-observability) repository.
+
+**Action:** Update any bookmarks, scripts, or Grafana provisioning configuration that reference `camunda/camunda/monitor/grafana` to use the new repository instead.
+
+<p className="link-arrow">[Grafana dashboards](/self-managed/operational-guides/monitoring/metrics.md#grafana)</p>
+
+</div>
+</div>
+
 ## Optimize
 
 <div className="release-announcement-row">
