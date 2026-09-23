@@ -48,7 +48,7 @@ https://github.com/camunda/connectors/issues/8062 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
-The Anthropic provider of the new AI Agent element templates can now run Claude models on Microsoft Foundry (Azure), keeping Anthropic-specific configuration such as extended thinking and prompt caching. Authenticate with an API key, Microsoft Entra ID client credentials, or a managed identity (Hybrid and Self-Managed only).
+Your AI agents can now use Claude models hosted by Microsoft Foundry (Azure), through the Anthropic provider of the new AI Agent element templates. The provider keeps Anthropic-specific configuration such as extended thinking and prompt caching. Authenticate with an API key, Microsoft Entra ID client credentials, or a managed identity (Hybrid and Self-Managed only).
 
 The custom / compatible endpoint backends of both the Anthropic and the OpenAI provider now also support OAuth 2.0 client credentials, for an internal gateway that issues bearer tokens instead of accepting a static API key.
 

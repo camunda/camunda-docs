@@ -80,7 +80,7 @@ Bedrock Mantle supports a different set of models than Bedrock Runtime, and mode
 </TabItem>
 <TabItem value="foundry">
 
-Anthropic Claude models deployed through [Microsoft Foundry](https://ai.azure.com/) (Azure AI Foundry).
+Use a Claude model deployed in [Microsoft Foundry](https://ai.azure.com/) (Azure AI Foundry) as the LLM for your Camunda AI agents.
 
 | Field              | Required | Description                                                                                                  |
 | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------- |
@@ -123,7 +123,7 @@ Authentication fields per method:
   - **Client ID**: the client ID of the OAuth client.
   - **Client secret**: the client secret of the OAuth client.
   - **Audience**: (optional) the unique identifier of the target API. Required by some authorization servers only.
-  - **Client authentication**: whether to send the client credentials as a Basic Auth header (default) or in the request body.
+  - **Client authentication**: whether to send the client credentials as a Basic authentication header (default) or in the request body.
   - **Scopes**: (optional) a comma-separated list of scopes to request, for example `read:models`.
 
 </TabItem>
@@ -246,7 +246,7 @@ Authentication fields per method:
   - **Client ID**: the client ID of the OAuth client.
   - **Client secret**: the client secret of the OAuth client.
   - **Audience**: (optional) the unique identifier of the target API. Required by some authorization servers only.
-  - **Client authentication**: whether to send the client credentials as a Basic Auth header (default) or in the request body.
+  - **Client authentication**: whether to send the client credentials as a Basic authentication header (default) or in the request body.
   - **Scopes**: (optional) a comma-separated list of scopes to request, for example `read:models`.
 
 </TabItem>
