@@ -462,7 +462,7 @@ All commands in this guide assume you are at the **repository root** (the direct
 Deploy PostgreSQL clusters using the CloudNativePG operator:
 
 ```bash
-(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-identity,pg-webmodeler" ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-identity,pg-hub" ./deploy.sh)
 ```
 
 This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys the specified PostgreSQL clusters, and waits for readiness.
@@ -470,7 +470,7 @@ This script installs the CNPG operator (auto-detecting OpenShift to apply SCC pa
 The following PostgreSQL clusters are created:
 
 - **pg-identity**: Database for Camunda Identity component
-- **pg-webmodeler**: Database for Web Modeler component (remove from configuration if not needed)
+- **pg-hub**: Database for Camunda Hub (remove from configuration if not needed)
 
 If you use **RDBMS as the secondary storage** for the Orchestration Cluster instead of Elasticsearch, add `pg-camunda` to the filter:
 
@@ -479,7 +479,7 @@ If you use **RDBMS as the secondary storage** for the Orchestration Cluster inst
      Until then this command deploys the two application clusters only. -->
 
 ```bash
-(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-identity,pg-webmodeler,pg-camunda" ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-identity,pg-hub,pg-camunda" ./deploy.sh)
 ```
 
 - **pg-camunda**: Secondary storage for the Orchestration Cluster, defined in `postgresql-orchestration-cluster.yml`
@@ -624,17 +624,17 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
-If **Web Modeler** is enabled, also merge the **Web Modeler PostgreSQL** overlay:
+If **Camunda Hub** is enabled, also merge the **Camunda Hub PostgreSQL** overlay:
 
 ```bash
-yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-hub-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
 ```
 
 <details>
-<summary>Review the Web Modeler PostgreSQL Helm overlay</summary>
+<summary>Review the Camunda Hub PostgreSQL Helm overlay</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-hub-values.yml
 ```
 
 </details>

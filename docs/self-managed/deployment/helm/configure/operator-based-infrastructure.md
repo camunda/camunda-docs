@@ -73,7 +73,7 @@ This approach uses three operator-managed infrastructure components, each mainta
 
 | Component                                                   | Purpose                                                                                           | Official Documentation                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.30/)               |
+| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Camunda Hub databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.30/)               |
 | **[Elasticsearch with ECK](#elasticsearch-deployment)**     | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)      |
 | **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity                                    | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
@@ -137,7 +137,7 @@ Each infrastructure component should be deployed individually in the following o
 
 | Order | Component                                      | Dependencies | Purpose                                                              |
 | ----- | ---------------------------------------------- | ------------ | -------------------------------------------------------------------- |
-| 1     | **[PostgreSQL](#postgresql-deployment)**       | None         | Database clusters for Keycloak, Management Identity, and Web Modeler |
+| 1     | **[PostgreSQL](#postgresql-deployment)**       | None         | Database clusters for Keycloak, Management Identity, and Camunda Hub |
 | 2     | **[Elasticsearch](#elasticsearch-deployment)** | None         | Secondary storage for orchestration cluster components               |
 | 3     | **[Keycloak](#keycloak-deployment)**           | PostgreSQL   | Authentication and identity management                               |
 | 4     | **[Camunda](#camunda-deployment)**             | All above    | Deploy using Helm with operator-managed infrastructure               |
@@ -160,10 +160,10 @@ Our setup provisions three separate PostgreSQL clusters for different Camunda co
 
 - **pg-identity**: Database for Camunda Identity component
 - **pg-keycloak**: Database for Keycloak identity service
-- **pg-webmodeler**: Database for Web Modeler component
+- **pg-hub**: Database for Camunda Hub
 
 :::note Component flexibility
-If you don't plan to use certain components (for example, Web Modeler), you can simply remove the corresponding cluster definition from the configuration before deployment. This allows you to deploy only the PostgreSQL clusters you actually need, reducing resource consumption.
+If you don't plan to use certain components (for example, Camunda Hub), you can simply remove the corresponding cluster definition from the configuration before deployment. This allows you to deploy only the PostgreSQL clusters you actually need, reducing resource consumption.
 :::
 
 #### High availability and node maintenance
@@ -237,7 +237,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 - `pg-keycloak`: Database for Keycloak authentication
 - `pg-identity`: Database for Management Identity component
-- `pg-webmodeler`: Database for Web Modeler
+- `pg-hub`: Database for Camunda Hub
 
 </TabItem>
 </Tabs>
@@ -274,17 +274,17 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 **Installation**: Add `-f camunda-identity-values.yml` to your Helm install command.
 
 </TabItem>
-  <TabItem value="webmodeler" label="Web Modeler">
+  <TabItem value="hub" label="Camunda Hub">
 
-Configure Web Modeler to use the PostgreSQL cluster.
+Configure Camunda Hub to use the PostgreSQL cluster.
 
-**Save as** `camunda-webmodeler-values.yml`:
+**Save as** `camunda-hub-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-hub-values.yml
 ```
 
-**Installation**: Add `-f camunda-webmodeler-values.yml` to your Helm install command.
+**Installation**: Add `-f camunda-hub-values.yml` to your Helm install command.
 
 </TabItem>
 </Tabs>
@@ -569,7 +569,7 @@ Before deploying Camunda, ensure you have saved all required configuration files
 | ------------------------ | --------------------------------------- | ------------------------------------------ | ------------------ |
 | Elasticsearch            | `camunda-elastic-values.yml`            | Connects to ECK-managed Elasticsearch      | Camunda deployment |
 | PostgreSQL (Identity)    | `camunda-identity-values.yml`           | Connects Identity to PostgreSQL cluster    | Camunda deployment |
-| PostgreSQL (Web Modeler) | `camunda-webmodeler-values.yml`         | Connects Web Modeler to PostgreSQL cluster | Camunda deployment |
+| PostgreSQL (Camunda Hub) | `camunda-hub-values.yml`                | Connects Camunda Hub to PostgreSQL cluster | Camunda deployment |
 | Keycloak (Local)         | `camunda-keycloak-no-domain-values.yml` | Local development OIDC configuration       | Camunda deployment |
 | Keycloak (Production)    | `camunda-keycloak-domain-values.yml`    | Production OIDC configuration              | Camunda deployment |
 
@@ -603,7 +603,7 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   --version $HELM_CHART_VERSION \
   -f camunda-elastic-values.yml \
   -f camunda-identity-values.yml \
-  -f camunda-webmodeler-values.yml \
+  -f camunda-hub-values.yml \
   -f camunda-keycloak-domain-values.yml \
   -n "$CAMUNDA_NAMESPACE"
 ```
@@ -618,7 +618,7 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   --version $HELM_CHART_VERSION \
   -f camunda-elastic-values.yml \
   -f camunda-identity-values.yml \
-  -f camunda-webmodeler-values.yml \
+  -f camunda-hub-values.yml \
   -f camunda-keycloak-no-domain-values.yml \
   -n "$CAMUNDA_NAMESPACE"
 ```
@@ -631,7 +631,7 @@ Order & precedence: The order of `-f` flags matters—later files override earli
 
 File origin: Every `-f` file corresponds to a configuration you saved in previous sections (Elasticsearch integration, PostgreSQL clusters, Keycloak, Identity secrets). Make sure they're present locally and reflect any custom adjustments before running the command.
 
-Component flexibility: Drop files for components you don't deploy (for example, remove `camunda-webmodeler-values.yml` if you're not using Web Modeler) to reduce footprint.
+Component flexibility: Drop files for components you don't deploy (for example, remove `camunda-hub-values.yml` if you're not using Camunda Hub) to reduce footprint.
 :::
 
 ## Verification and troubleshooting
@@ -845,10 +845,10 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```
 
    ```text
-   NAME           AGE   INSTANCES   READY   STATUS                     PRIMARY
-   pg-identity    10m   2           2       Cluster in healthy state   pg-identity-1
-   pg-keycloak    10m   2           2       Cluster in healthy state   pg-keycloak-1
-   pg-webmodeler  10m   2           2       Cluster in healthy state   pg-webmodeler-1
+   NAME          AGE   INSTANCES   READY   STATUS                     PRIMARY
+   pg-identity   10m   2           2       Cluster in healthy state   pg-identity-1
+   pg-keycloak   10m   2           2       Cluster in healthy state   pg-keycloak-1
+   pg-hub        10m   2           2       Cluster in healthy state   pg-hub-1
    ```
 
    A cluster stuck at `1` ready usually has its second pod `Pending`, because the required anti-affinity found no second schedulable node.
@@ -875,7 +875,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 1. Confirm the standby of each cluster is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
 
    ```bash
-   for cluster in pg-identity pg-keycloak pg-webmodeler; do
+   for cluster in pg-identity pg-keycloak pg-hub; do
      primary=$(kubectl get pod -n camunda -l "cnpg.io/cluster=$cluster,cnpg.io/instanceRole=primary" -o jsonpath='{.items[0].metadata.name}')
      echo -n "$cluster: "
      kubectl exec -n camunda "$primary" -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
@@ -885,7 +885,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```text
    pg-identity: streaming
    pg-keycloak: streaming
-   pg-webmodeler: streaming
+   pg-hub: streaming
    ```
 
    Until a cluster reports `streaming`, its standby is not a switchover candidate, and a drain started early stalls with `Current primary is running on unschedulable node, but there are no valid candidates` in the operator log.
