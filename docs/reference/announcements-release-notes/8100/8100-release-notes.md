@@ -55,6 +55,24 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 
 <p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
 
+### Helm chart deployment
+
+#### PostgreSQL databases are highly available by default
+
+<!-- https://github.com/camunda/camunda-deployment-references/pull/3463 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+The operator-based infrastructure reference architecture now deploys each CloudNativePG cluster with two instances instead of one, on a dedicated write-ahead log (WAL) volume, and requires the two instances of a cluster to sit on different nodes.
+
+A single-instance cluster gives CloudNativePG no switchover target, so the operator refuses to evict it and `kubectl drain` never completes. Because a Kubernetes upgrade drains one node at a time, that stalls the upgrade on whichever node holds a database. A second instance gives the operator somewhere to switch over to. The dedicated WAL volume keeps the write-ahead log that a standby's replication slot retains from growing into the data directory.
+
+Deployments already running the single-instance shape migrate in place: CloudNativePG clones the standby from the running primary and relocates `pg_wal` onto the new volume, with no dump or restore. Environments that cannot host a second instance, such as local Kind clusters, can pass `PG_INSTANCES=1` to `deploy.sh`.
+
+<p class="link-arrow">[High availability and node maintenance](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#high-availability-and-node-maintenance)</p>
+
+<p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
+
 ## 8.10.0-alpha5
 
 | Release date     | Changelog(s)                                                                                        | Blog |
