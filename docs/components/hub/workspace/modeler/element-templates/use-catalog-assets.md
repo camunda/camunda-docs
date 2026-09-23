@@ -41,7 +41,7 @@ When you create, append, or change an element, the compact menu separates what y
 
 For the preferred cross-source view, select **Browse all** at the top of the menu. The [resource discovery guide](../modeling/browse-all-resources.md) explains how to search and filter catalog, shared, and project assets alongside standard elements and Marketplace connectors.
 
-To insert a catalog asset, select **Browse all > Catalog assets**, then select the asset. If **Browse all** isn't offered, open the **Reusable assets** tab and select the asset. This creates a new element with the template already applied.
+To insert a catalog asset, select **Browse all > Catalog**, then select the asset. If **Browse all** isn't offered, open the **Reusable assets** tab and select the asset. This creates a new element with the template already applied.
 
 To apply a template to an element that already exists, use **Change element** from the context pad or follow [apply assets while modeling](#apply-assets-while-modeling).
 

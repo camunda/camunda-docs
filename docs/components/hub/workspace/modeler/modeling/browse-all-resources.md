@@ -22,8 +22,6 @@ The dialog title identifies the action and target. Each card uses the correspond
 
 **Browse all** appears when the contextual menu offers a broad set of choices. If it isn't offered, use the choices in the compact menu. The compact menu can also provide a direct Marketplace action.
 
-![Browse all showing the search field, source choices with counts, and resource cards](./img/browse-all-resources.png)
-
 ## Search and filter resources
 
 The search field and **Show** control narrow the cards available for the current modeling action.
@@ -37,16 +35,18 @@ The **Show** control contains **All** and the sources available in your environm
 
 | Source                | Contents                                                                                                                                                                                    | Availability                                                                                                                                                                          |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Catalog assets**    | Governed assets published through the [Camunda catalog](/components/hub/organization/manage-catalog/getting-started.md).                                                                    | Appears when the catalog is enabled and matching assets are available.                                                                                                                |
-| **Shared assets**     | Element templates published directly to your organization's shared resources. This source is separate from the catalog.                                                                     | Appears when matching shared templates are available.                                                                                                                                 |
+| **Catalog**           | Governed assets published through the [Camunda catalog](/components/hub/organization/manage-catalog/getting-started.md).                                                                    | Appears when the catalog is enabled and matching assets are available.                                                                                                                |
+| **Shared**            | Element templates published directly to your organization's shared resources. This source is separate from the catalog.                                                                     | Appears when matching shared templates are available.                                                                                                                                 |
 | **Project assets**    | Templates and connectors published or added to the current project, plus linked project resources such as forms, called processes, decisions, and robotic process automation (RPA) scripts. | Appears when matching project resources are available.                                                                                                                                |
 | **Built-in**          | Camunda's built-in connectors.                                                                                                                                                              | Appears when built-in connectors are available. This source isn't available in Self-Managed.                                                                                          |
 | **Standard elements** | The untemplated BPMN vocabulary valid for the current action, including tasks, gateways, events, and other native modeling choices.                                                         | Appears when matching standard BPMN elements are available.                                                                                                                           |
 | **Marketplace**       | Connectors from Camunda Marketplace.                                                                                                                                                        | Appears when Marketplace supports the current action. A Self-Managed administrator can [disable Marketplace](/self-managed/components/hub/configuration/properties.md#feature-flags). |
 
+Resource cards identify catalog and shared provenance with the **Catalog assets** and **Shared assets** badges.
+
 A source with no matches is hidden. If a search reduces the active source to zero matches, the source remains selected with a count of zero so your filter doesn't change unexpectedly.
 
-![Browse all filtered to Project assets, with Processes and Project services groups](./img/browse-all-project-assets.png)
+![Browse all results grouped into processes, shared services, and project services](./img/browse-all-resources.png)
 
 ## Use a resource
 
@@ -62,7 +62,7 @@ Marketplace is the final section and contains the complete collection that match
 
 Browsing, filtering, searching, or scrolling Marketplace cards doesn't check which connectors are already in your project. Select **View details** on a connector to check only that connector and review its project availability.
 
-For create and append actions, Marketplace results aren't filtered by BPMN type. For a supported change-element action, results are filtered by the selected element's BPMN type only. Configuration requirements and runtime compatibility can still vary.
+For create and append actions, Marketplace results aren't filtered by BPMN type. For a supported change-element action, results are filtered by Marketplace's supported BPMN type only. Task variants, such as user and service tasks, are grouped as task connectors. Configuration requirements and runtime compatibility can still vary.
 
 A self-hosted connector card opens **View setup instructions** instead of connector details. Follow the linked setup guide to make the connector available in your environment.
 

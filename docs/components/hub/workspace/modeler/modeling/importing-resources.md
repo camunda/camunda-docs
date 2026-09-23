@@ -32,7 +32,8 @@ These are the supported methods you can use to add files to Camunda Hub:
 :::note
 
 - **Import** and **Browse blueprints**: If the imported resources include at least one BPMN file, Camunda Hub treats them as a project and groups them accordingly.
-- **Upload files** and **Browse all**: Always treat files as independent files, regardless of whether BPMN files are present.
+- **Upload files**: Adds uploaded resources as independent files, regardless of whether BPMN files are present.
+- **Browse all**: Adds selected connector element templates to the current project.
 
 :::
 
