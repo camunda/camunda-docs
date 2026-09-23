@@ -382,6 +382,10 @@ Using the [Zeebe Management Backup API](/self-managed/operational-guides/backup-
 
 ### 3. Stop all components apart from Elasticsearch/OpenSearch
 
+:::note
+It is only required to stop all components if opted for the legacy restore approach. For the Restore API approach, the only component that requires stopping is Optimize.
+:::
+
 If you are using an external Elasticsearch/OpenSearch and Kubernetes, you could temporarily [uninstall](https://helm.sh/docs/helm/helm_uninstall/) the Camunda Helm chart or [scale](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) all components to 0, so that nothing is running and potentially interacting with the datastore.
 
 In a manual setup, you can simply stop all components.
