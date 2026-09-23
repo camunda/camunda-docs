@@ -344,7 +344,7 @@ The following items are removed:
 
 - Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) instead of the removed Operate API and Tasklist API.
 - Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) instead of user task access restrictions.
-- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
+- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) and the Orchestration Cluster REST API instead of public start forms.
 - Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
 
 <p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
@@ -365,6 +365,21 @@ The following items are removed:
 With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Camunda Hub API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-camunda-hub-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
 
 **Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public Camunda Hub API before 8.12.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### `key` sort field on the Tenant search endpoint deprecated
+
+The `key` sort field on the [Search tenants](/apis-tools/orchestration-cluster-api-rest/specifications/search-tenants.api.mdx) endpoint (`POST /v2/tenants/search`) is now deprecated. Sorting by this internal numeric identifier is inconsistent with other Identity entities (User, Group, and Mapping Rule), which do not expose key-based sorting, and tenants can no longer be filtered by `key` either.
+
+**Action:** Sort by `name` or `tenantId` instead.
 
 </div>
 </div>
@@ -448,20 +463,51 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 </div>
 </div>
 
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Connectors change 1
+#### JWT-authorized inbound webhooks require issuer, audience, and expiration claims
 
-Connectors change 1 description.
+Starting with Camunda 8.10, inbound webhooks configured with JWT authorization validate the token's `iss` and `aud` claims and reject tokens without an `exp` claim. The **Issuer** and **Audience** fields are now required in the element templates for the Webhook connector, Amazon EventBridge inbound connector, and A2A Client webhook.
 
-**Action:** Description.
+Existing JWT-authorized inbound webhooks modeled with earlier template versions don't contain these fields and can't activate after the upgrade. The connector runtime reports the affected connector as **DOWN**.
+
+**Action:** Update each affected element to the latest template version, set **Issuer** and **Audience** to the expected claim values, and redeploy the process. Ensure callers provide JWTs with matching `iss` and `aud` claims and a valid `exp` claim.
+
+<p className="link-arrow">[Webhook connector authorization](/components/connectors/protocol/http-webhook.md#make-your-http-webhook-connector-executable)</p>
 
 </div>
-</div> -->
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Webhook `responseBodyExpression` rejected at deployment {#webhook-response-body-expression}
+
+Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
+
+The connector runtime reports the connector as **DOWN**, and the validation error is included in the connector's status message.
+
+**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. Unlike `responseBodyExpression`, which set only the response body, `responseExpression` returns a full HTTP response:
+
+```json
+={
+  "body": {"myCustomKey": request.body.myDataKey1},
+  "statusCode": 201,
+  "headers": {"Content-Type": "application/json"}
+}
+```
+
+<p className="link-arrow">[Response expression](/components/connectors/protocol/http-webhook.md#response-expression)</p>
+
+</div>
+</div>
 
 ## Data
 
@@ -718,6 +764,40 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 <p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+## Integrations
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### SAP BTP Plugin retired
+
+The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration.
+
+<p className="link-arrow">[SAP BTP Plugin documentation](/components/camunda-integrations/sap/btp-plugin.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### CSAP CLI replaced by a c8ctl plugin
+
+The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools/c8ctl/getting-started.md), which becomes the single tool for configuring and deploying the SAP integration modules.
+
+<!-- TODO: replace the placeholder link below with the dedicated c8ctl SAP plugin page once it is published. -->
+
+<p className="link-arrow">[CSAP CLI documentation](/components/camunda-integrations/sap/csap-cli.md)</p>
 
 </div>
 </div>

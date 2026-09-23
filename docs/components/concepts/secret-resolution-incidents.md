@@ -6,8 +6,6 @@ description: "Diagnose the incidents raised when a job's secret references canno
 
 When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the cluster responds in one of three ways: it raises a `SECRET_RESOLUTION_ERROR` incident, raises a `MESSAGE_SIZE_EXCEEDED` incident, or defers the job and retries it without raising an incident.
 
-This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
-
 Only the two incident cases require operator action.
 
 Use this page to diagnose an existing secret resolution or activation problem. To understand how secret resolution and job activation work, see [Secret resolution and job activation](secret-resolution-and-job-activation.md).
@@ -51,6 +49,10 @@ Resolve the incident only after fixing the underlying cause. Resolving the incid
 
 You don't need to redeploy or make client-side changes. Once the reference resolves successfully, the process instance continues from where it stopped.
 
+Camunda retries secret resolution only when a worker next activates the job. If no worker is connected for the job type, the broker does not activate the job or request secret resolution again. As a result, the incident does not reappear even if the secret is still missing.
+
+The absence of an incident does not mean the secret problem is resolved. Keep a worker connected for the affected job type so Camunda can raise a new incident promptly if the cause remains unresolved.
+
 ## Resolve secret injection failures
 
 A secret injection failure also raises a `SECRET_RESOLUTION_ERROR` incident, but for a different reason. In this case, the secret value was available, but Camunda could not inject it into the job variables.
@@ -88,6 +90,10 @@ While the incident is active, the job is not activatable, so the broker does not
 
 Resolve the incident only after correcting the variable value or the input mapping that produced it. Resolving the incident makes the job activatable again, and Camunda retries injection against the current job variables.
 
+Camunda retries injection only when a worker next activates the job. If no worker is connected for the job type, the broker does not activate the job or retry injection. As a result, the incident does not reappear even if the underlying cause is still present.
+
+Keep a worker connected for the affected job type so Camunda can raise a new incident promptly if injection still fails.
+
 If you cannot restore the placeholder, use [process instance modification](process-instance-modification.md) to reactivate the element. This creates a new job and detects its secret references again.
 
 ## Reduce oversized secret values
@@ -105,6 +111,10 @@ Camunda raises this incident only when the oversized job is first in the activat
 ### Retry after reducing the size
 
 Resolve the incident only after reducing the size of the secret value or the job variables. Otherwise, the next activation attempt fails in the same way.
+
+Camunda checks the job size again only when a worker next activates the job. If no worker is connected for the job type, the broker does not activate the job or run the size check. As a result, the incident does not reappear even if the values are still too large.
+
+Keep a worker connected for the affected job type so Camunda can raise a new incident promptly if the job still exceeds the message-size limit.
 
 To reduce the job variables included in activation, adjust the worker's `fetchVariables` list. Variables the worker does not fetch are excluded from the activation and do not count toward the message-size limit.
 
