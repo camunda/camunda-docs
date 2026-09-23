@@ -646,7 +646,7 @@ module.exports = {
             },
             {
               label: "Camunda Hub",
-              href: "https://camunda.io",
+              href: "https://hub.camunda.io",
             },
             {
               label: "Status",
