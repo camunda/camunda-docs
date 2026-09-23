@@ -100,7 +100,7 @@ Map the response to a variable with a result expression:
 
 Add a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) after the OpenAI task, named `Review Flagged Transaction`. This gives a fraud analyst a chance to validate the AI's assessment and edit the drafted email before it reaches the customer.
 
-Link a [Camunda Form](/components/modeler/forms/utilizing-forms.md) to the task with a **Text area** field:
+Link a [Camunda Form](/components/hub/workspace/modeler/modeling/utilize-forms.md) to the task with a **Text area** field:
 
 | Setting     | Value         |
 | :---------- | :------------ |
