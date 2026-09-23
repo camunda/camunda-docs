@@ -52,7 +52,7 @@ The agent needs these permissions in your environment:
 
 AI coding agents are read-only by default and ask for explicit approval otherwise. Teams typically allowlist frequently used safe commands, or enable an accept-edits mode, to reduce the number of prompts during a run.
 
-### Bundle mapping
+### ProcessOS Bundle mapping
 
 ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. Install the bundle that matches your agent, because an agent only discovers skills in its own directory.
 
@@ -60,19 +60,6 @@ ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the
 | ------------------ | ------------ | -------------------------- | ----------------- |
 | Claude Code        | `claudecode` | `c8 os install claudecode` | `.claude/skills/` |
 | GitHub Copilot CLI | `copilotcli` | `c8 os install copilotcli` | `.github/skills/` |
-
-Installing a bundle writes the following paths into your project directory.
-
-| Path                                                                                     | Owner                                                                                |
-| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `<skills directory>/process-os-*`                                                        | ProcessOS Harness. Created, replaced, and removed by c8ctl.                          |
-| `.camunda/`                                                                              | ProcessOS Harness. Holds project state, dependencies, and backups.                   |
-| Agent configuration files, such as `CLAUDE.md`, `.mcp.json`, and `.claude/settings.json` | Shared. Replaced on install, and the originals are backed up to `.camunda/backups/`. |
-| Everything else, including skills and workflows of your own                              | Yours. Never modified or deleted.                                                    |
-
-The `process-os-` prefix inside the skills directory is reserved. A skill of your own using that prefix is overwritten on install.
-
-c8ctl records every installed path in `.process-os.yaml` and gitignores those paths, so bundle files are never committed.
 
 Only one bundle can be installed at a time. To move to a different agent, run `c8 os switch <bundle>`, which removes the current bundle before installing the new one.
 

@@ -21,6 +21,11 @@ The following steps are executed if the governance process is at a builder task:
 
 Steps 1 and 5 are handled by the agent against Camunda. You handle step 3.
 
+## How to work on a builder task?
+
+1. Clear agent context - Each builder task should be executed in a new coding session.
+1. Execute next step - Ask the AI Coding Agent `next` to trigger builder work.
+
 ## Builder tasks in Camunda
 
 Builder tasks are service tasks within Camunda. They are handled as a job similar to any other service task. The ProcessOS Harness contains skills to manage Camunda jobs.
