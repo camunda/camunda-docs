@@ -38,6 +38,22 @@ import PageDescription from '@site/src/components/PageDescription';
 | :-------------- | :------------------------------------------------------------------------------------------- | :--- |
 | 13 October 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0)</li></ul> | -    |
 
+### Agentic orchestration
+
+#### AI Agent connector: Claude on Microsoft Foundry and OAuth 2.0 for compatible endpoints
+
+<!-- https://github.com/camunda/connectors/issues/8060
+https://github.com/camunda/connectors/issues/8056
+https://github.com/camunda/connectors/issues/8062 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The Anthropic provider of the new AI Agent element templates can now run Claude models on Microsoft Foundry (Azure), keeping Anthropic-specific configuration such as extended thinking and prompt caching. Authenticate with an API key, Microsoft Entra ID client credentials, or a managed identity (Hybrid and Self-Managed only).
+
+The custom / compatible endpoint backends of both the Anthropic and the OpenAI provider now also support OAuth 2.0 client credentials, for an internal gateway that issues bearer tokens instead of accepting a static API key.
+
+<p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#anthropic)</p>
+
 ### Camunda Hub
 
 #### Business value dashboard
