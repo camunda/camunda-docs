@@ -17,6 +17,7 @@ A Camunda 8.10 deployment is one or more Helm releases, and each release declare
 | New production deployment, one cluster          | One `hub` release, one `orchestration` release             | [Install the deployment topology](./topology/index.md)                          |
 | New production deployment, tenants or analytics | The same, plus one `optimize` release per Physical Tenant  | [Configure Physical Tenants across releases](./topology/physical-tenants.md)    |
 | Several Orchestration Clusters, one Hub         | One `hub` release, one `orchestration` release per cluster | [Install an Orchestration Cluster release](./topology/orchestration-release.md) |
+| Analytics for a tenant of the split topology    | One `optimize` release per Physical Tenant                 | [Install an Optimize release](./topology/optimize-release.md)                   |
 | Existing single-release production deployment   | One `combined` release                                     | [Install for production](./production/index.md)                                 |
 
 For a new production deployment, the split topology is the baseline. A `combined` release remains supported, remains the chart default, and is the right choice for evaluation, proofs of concept, and 8.9 compatibility.
@@ -32,7 +33,7 @@ This decision is independent of your topology. Both apply to every release that 
 | Embedded H2                 | [Quick install](./quick-install.md)                                                                                            | Evaluation only. Single broker, not for production     |
 
 :::warning
-Optimize requires Elasticsearch or OpenSearch and can't read from a relational database. An Orchestration Cluster on RDBMS secondary storage can't be analyzed with Optimize.
+Optimize requires Elasticsearch or OpenSearch and can't read from a relational database. An Orchestration Cluster on RDBMS secondary storage can be analyzed with Optimize only if it also exports its records to a separate Elasticsearch or OpenSearch instance, and Optimize is deployed against that instance.
 :::
 
 For the trade-offs between backends, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).

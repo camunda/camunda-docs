@@ -28,6 +28,10 @@ The component client IDs, audiences, redirect URLs, and secrets must match the c
 
 ## Requirements by chart version
 
+:::caution Mixed-version support depends on the chart release
+Managing Orchestration Cluster releases on the 8.7, 8.8, or 8.9 chart from an 8.10 Hub depends on Helm chart changes that aren't in a released chart yet. The current 8.10 pre-release chart (`15.0.0-alpha5`) rejects the `architecture`, `operateServiceName`, and `tasklistServiceName` cluster record fields. Don't rely on this guidance until the chart release that includes it is published. The minimum chart versions will be listed on this page when it is.
+:::
+
 An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same; the values it requires differ, because the older charts predate the unified Orchestration Cluster and still bundle Hub-plane dependencies.
 
 Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
@@ -127,6 +131,42 @@ This example uses Elasticsearch as secondary storage, and the `secondary-storage
 
 Optimize isn't part of this release. It's deployed separately, one release per Physical Tenant. See [install an Optimize release](./optimize-release.md).
 
+## Export records for Optimize
+
+Optimize reads the records written by the legacy Elasticsearch or OpenSearch exporter, not the Orchestration Cluster's own indices. The chart enables that exporter automatically only when Optimize runs in the same release, and `orchestration.exporters.zeebe.enabled` doesn't enable it on its own. Because Optimize isn't in this release, the example above writes no records Optimize can read, and installing a separate Optimize release doesn't change that.
+
+If you plan to run Optimize for this cluster, configure the exporter explicitly as broker configuration, with its destination, credentials, and index prefix:
+
+```yaml
+orchestration:
+  env:
+    - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_AUTHENTICATION_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: secondary-storage
+          key: password
+  extraConfiguration:
+    - file: optimize-exporter.yaml
+      content: |
+        zeebe:
+          broker:
+            exporters:
+              elasticsearch:
+                className: io.camunda.zeebe.exporter.ElasticsearchExporter
+                args:
+                  url: https://elasticsearch.example.com:9200
+                  authentication:
+                    username: camunda
+                  index:
+                    # Must exactly equal optimize.database.elasticsearch.prefix
+                    # in this cluster's default-tenant Optimize release.
+                    prefix: production-a-default-records
+```
+
+For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The prefix must be unique per cluster and tenant. See [isolate every index prefix family](./physical-tenants.md#isolate-every-index-prefix-family).
+
+This also applies to a cluster on RDBMS secondary storage. The Orchestration Cluster keeps using RDBMS, and the exporter writes the separate record stream Optimize reads.
+
 ## Choose which applications run
 
 `orchestration.profiles` selects which parts of the Orchestration Cluster are active in the single StatefulSet:
@@ -187,13 +227,14 @@ orchestration:
       content: |
         camunda:
           physical-tenants:
+            # Optional. Without a default entry, the default tenant is
+            # synthesized from the root configuration and keeps its root exporters.
             default:
-              # An explicit default entry is required once any tenant is declared.
             riskprod:
               # Tenant configuration.
 ```
 
-Declaring any tenant changes the behavior of the default tenant, and each tenant needs its own Optimize release and index prefixes. Read [configure Physical Tenants across releases](./physical-tenants.md) before you add your first tenant.
+Declaring the `default` tenant explicitly changes how it gets its exporters, and each tenant needs its own Optimize release and index prefixes. Read [configure Physical Tenants across releases](./physical-tenants.md) before you add your first tenant.
 
 ## Next steps
 

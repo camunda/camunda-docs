@@ -36,7 +36,9 @@ This applies to a cluster with no additional tenants too. Its default Physical T
 
 Elasticsearch takes precedence when both backends are enabled.
 
-Optimize requires Elasticsearch or OpenSearch and can't use a relational database, even when the Orchestration Cluster uses one for its own secondary storage.
+Optimize requires Elasticsearch or OpenSearch and can't use a relational database. An Orchestration Cluster on RDBMS secondary storage can still feed Optimize if it also exports its records to Elasticsearch or OpenSearch.
+
+The Orchestration Cluster release must export those records. Because Optimize isn't in that release, the chart doesn't enable the exporter for you. See [export records for Optimize](./orchestration-release.md#export-records-for-optimize).
 
 ## Create `optimize-values.yaml`
 
@@ -109,6 +111,12 @@ Setting a dedicated `roleName` in the Hub cluster record avoids adding this tena
 You can point several tenants at one shared audience. Those instances are then separated by client identity only, not by authorization. Neither separate credentials nor separate index prefixes make this arrangement authorization isolation.
 :::
 
+## Route traffic to Optimize
+
+The example above renders an Optimize Service and Deployment, but no Ingress or HTTPRoute. Sharing a namespace with the Orchestration Cluster release doesn't help: that release's Ingress routes only to its own services.
+
+Before users sign in, route the host and path of `redirectUrl`, here `https://production-a.example.com/optimize-tenanta`, to this release's Optimize Service. Either enable routing in this release with `global.ingress` and a host that matches `redirectUrl`, or manage the Ingress, HTTPRoute, or load balancer rule outside the chart. The path must match `optimize.contextPath`.
+
 ## Install the release
 
 ```sh
@@ -118,7 +126,7 @@ helm install camunda-optimize-tenanta camunda/camunda-platform \
   --values optimize-values.yaml
 ```
 
-Use a distinct release name per tenant. Place Optimize releases in the Orchestration Cluster namespace, or in their own namespace. Ingress resources are namespace-scoped, so a separate namespace needs its own Ingress and subdomain.
+Use a distinct release name per tenant. Place Optimize releases in the Orchestration Cluster namespace, or in their own namespace. Either way, the release needs its own routing. See [route traffic to Optimize](#route-traffic-to-optimize).
 
 ## High availability
 

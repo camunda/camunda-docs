@@ -52,6 +52,10 @@ The default Physical Tenant counts. Every Orchestration Cluster has one, created
 
 ## Mix Orchestration Cluster versions under one Hub
 
+:::caution Mixed-version support depends on the chart release
+Managing Orchestration Cluster releases on the 8.7, 8.8, or 8.9 chart from an 8.10 Hub depends on Helm chart changes that aren't in a released chart yet. The current 8.10 pre-release chart (`15.0.0-alpha5`) rejects the `architecture`, `operateServiceName`, and `tasklistServiceName` cluster record fields. Don't rely on this guidance until the chart release that includes it is published. The minimum chart versions will be listed here when it is.
+:::
+
 An 8.10 Hub release manages Orchestration Cluster releases on the 8.7, 8.8, 8.9, and 8.10 charts. Each cluster deploys from its own chart and its own values, so clusters upgrade independently of the Hub and of each other.
 
 | Orchestration chart | Role to set     | Cluster record needs                                |
@@ -64,8 +68,6 @@ An 8.10 Hub release manages Orchestration Cluster releases on the 8.7, 8.8, 8.9,
 Chart 8.7 predates the unified Orchestration Cluster, so it runs Zeebe, Zeebe Gateway, Operate, and Tasklist as separate workloads. Its Hub cluster record must set `architecture: legacy`, which makes the Hub inventory address those split services and omit the Orchestration Admin component. See [describe a chart 8.7 cluster](/self-managed/deployment/helm/install/topology/hub-release.md#describe-a-chart-87-cluster).
 
 The Hub release always owns registration, clients, permissions, and inventory, whatever chart version a cluster runs. The older charts can't own any of that, because Camunda Hub doesn't exist in them.
-
-Camunda tests one 8.10 Hub release against 8.10, 8.9, 8.8, and 8.7 orchestration releases in a single deployment.
 
 ## Why the topology is split
 
@@ -106,6 +108,7 @@ Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts. Provis
 | Evaluating Camunda, or developing locally                 | A `combined` release. See [quick developer install](/self-managed/deployment/helm/install/quick-install.md)                                                                     |
 | A new production deployment, one cluster                  | A `hub` release plus one `orchestration` release. See [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md)                                |
 | A new production deployment, several clusters or tenants  | The same, plus one `optimize` release per Physical Tenant. See [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md) |
+| Analytics for a Physical Tenant in the split topology     | One `optimize` release per Physical Tenant. See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md)                               |
 | Upgrading an existing 8.9 deployment                      | Upgrade in place first, staying on `combined`. See [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md)                                          |
 | Moving an existing combined release to the split topology | See [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md)                                                              |
 

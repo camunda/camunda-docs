@@ -164,6 +164,10 @@ Adapt the Keycloak endpoints and client configuration for your environment. See 
 
 ## Describe a chart 8.7 cluster
 
+:::caution Mixed-version support depends on the chart release
+Managing Orchestration Cluster releases on the 8.7, 8.8, or 8.9 chart from an 8.10 Hub depends on Helm chart changes that aren't in a released chart yet. The current 8.10 pre-release chart (`15.0.0-alpha5`) rejects the `architecture`, `operateServiceName`, and `tasklistServiceName` cluster record fields. Don't rely on this guidance until the chart release that includes it is published. The minimum chart versions will be listed on this page when it is.
+:::
+
 An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, 8.9, and 8.10 charts. Records for 8.8, 8.9, and 8.10 clusters all take the standard shape shown above.
 
 Chart 8.7 predates the unified Orchestration Cluster, so it runs Zeebe, Zeebe Gateway, Operate, and Tasklist as separate workloads on separate services. Its record needs `architecture: legacy` and the names of those services:

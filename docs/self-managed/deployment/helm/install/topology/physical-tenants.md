@@ -14,7 +14,7 @@ This procedure applies to fresh Camunda 8.10 topology deployments. It doesn't de
 ## Prerequisites
 
 - A [Hub release](./hub-release.md) and at least one [Orchestration Cluster release](./orchestration-release.md).
-- OIDC authentication. Physical Tenants don't support basic authentication.
+- OIDC authentication. Physical Tenants don't support Basic authentication.
 - A pinned issuer on the orchestration release, set in `global.identity.auth.issuer` or `orchestration.security.authentication.oidc.issuer`. `publicIssuerUrl` and `issuerBackendUrl` don't satisfy this, because they're network routes rather than the `iss` claim. The Orchestration Cluster rejects a provider without `issuerUri` once tenants exist, and the chart fails the render rather than deploying a cluster that can't validate tokens. See [pin the issuer](./orchestration-release.md#pin-the-issuer).
 - Elasticsearch or OpenSearch, if you want Optimize per tenant.
 
@@ -37,8 +37,14 @@ The chart exposes no `orchestration.physicalTenants` values schema. A tenant's o
 
 Add a `camunda.physical-tenants` block through `orchestration.extraConfiguration`. For the delivery options, including a single `orchestration.configuration` block or environment variables, see [configure Physical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-physical-tenants.md).
 
-:::warning
-Declaring any Physical Tenant stops the `default` tenant inheriting the release's root exporters. Define an exporter for `default` explicitly, as well as one for every other tenant. Omitting it stops the default tenant exporting, with no error: Operate, Tasklist, and Optimize simply show no new data for that tenant.
+:::warning Declaring tenants and the `default` tenant's exporters
+How the `default` tenant exports depends on whether you declare it:
+
+- **`default` not declared.** The runtime synthesizes the `default` tenant from the root configuration. It keeps the release's root broker configuration, including its root exporters.
+- **`default` declared explicitly.** Its entry under `camunda.physical-tenants.default` is used instead. Configure its exporter assignments in that entry, and don't assume it inherits root exporters you didn't assign to it.
+- **A required exporter assignment is missing.** The Orchestration Cluster can fail at startup instead of running without the exporter. Check the broker logs if the StatefulSet doesn't become ready after you add a tenant.
+
+Every non-default tenant needs its own exporter assignments. See the [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
 :::
 
 ## Map tenants in the Hub release
@@ -78,18 +84,16 @@ global:
 
 Give every Optimize release its own OIDC client ID, audience, role name, redirect URL, and secret. Set the same client ID, audience, redirect URL, and secret on that tenant's Optimize release under `optimize.security.authentication.oidc`. Setting a dedicated `roleName` avoids adding the audience to the shared `Optimize` role.
 
-A tenant record that's mapped in Hub but has no Optimize release deployed shows an unreachable Optimize in Hub.
-
 ## Isolate every index prefix family
 
 Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Assign unique prefixes for every cluster and tenant.
 
-| Prefix family                     | Configuration                                                                                                                                                             | Requirement                                                         |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Orchestration application indices | Default: `orchestration.index.prefix`. Physical Tenant: `camunda.physical-tenants.<id>.data.secondary-storage.<backend>.index-prefix`                                     | Unique per cluster and tenant                                       |
-| Legacy exporter writer            | Default: `orchestration.exporters.zeebe.index.prefix` and an explicit `default` exporter in `camunda.physical-tenants`. Physical Tenant: its exporter `args.index.prefix` | Unique per cluster and tenant                                       |
-| Optimize reader                   | `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`                                                                                         | Must exactly equal that tenant's Legacy exporter writer prefix      |
-| Optimize application indices      | `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX` in `optimize.env`                                           | Unique per Optimize release, and different from every writer prefix |
+| Prefix family                     | Configuration                                                                                                                                                | Requirement                                                         |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| Orchestration application indices | Default: `orchestration.index.prefix`. Physical Tenant: `camunda.physical-tenants.<id>.data.secondary-storage.<backend>.index-prefix`                        | Unique per cluster and tenant                                       |
+| Legacy exporter writer            | Default: the root exporter's `args.index.prefix`, or the exporter assigned to an explicit `default` entry. Physical Tenant: its exporter `args.index.prefix` | Unique per cluster and tenant                                       |
+| Optimize reader                   | `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`                                                                            | Must exactly equal that tenant's Legacy exporter writer prefix      |
+| Optimize application indices      | `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX` in `optimize.env`                              | Unique per Optimize release, and different from every writer prefix |
 
 Two failure modes follow from getting this wrong, and neither announces itself:
 

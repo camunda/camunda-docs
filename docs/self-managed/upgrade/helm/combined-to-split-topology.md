@@ -86,7 +86,7 @@ Update the existing release's values:
 - Set `identity.enabled: false`.
 - Set `global.identity.service.url` to the Management Identity service in the Hub namespace.
 - Set `camundaHub.enabled: false`.
-- Remove `optimize` from this release if you intend to run Optimize as its own release.
+- Remove `optimize` from this release if you intend to run Optimize as its own release. The chart then stops rendering the legacy exporter Optimize reads, so configure it explicitly with the same writer prefix in the same `helm upgrade`. See [export records for Optimize](/self-managed/deployment/helm/install/topology/orchestration-release.md#export-records-for-optimize).
 - Keep the release name, namespace, `orchestration.*` values, secondary storage configuration, and every index prefix unchanged.
 
 Run `helm upgrade` on the existing release, without changing its name or namespace. The Orchestration Cluster StatefulSet is preserved, so the brokers keep their volumes and their identity.
@@ -97,7 +97,12 @@ Verify with `helm template` or `helm diff` before you apply this step. Confirm t
 
 ### Step 5: move Optimize to its own release
 
-If the combined release ran Optimize, install it as a separate release per Physical Tenant. Its reader prefix must exactly equal the exporter writer prefix already in use, or it starts against an empty record set.
+If the combined release ran Optimize, install it as a separate release per Physical Tenant, and keep both of its existing prefixes:
+
+- The reader prefix, `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`, must exactly equal the exporter writer prefix already in use, or Optimize starts against an empty record set.
+- The application index prefix, `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX`, must equal the value the combined release used. Optimize stores its reports, dashboards, and configuration there. A new value starts Optimize with none of them.
+
+Route the Optimize host and path to the new release before users return. See [route traffic to Optimize](/self-managed/deployment/helm/install/topology/optimize-release.md#route-traffic-to-optimize).
 
 See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
 
@@ -122,13 +127,13 @@ This costs a process-state cutover. Any instance still running in the old cluste
 
 ## Roll back
 
-| After step                 | To roll back                                                                                                                                                  |
-| :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Step 2, Hub installed      | Uninstall the Hub release. The combined release is untouched                                                                                                  |
-| Step 3, Hub verified       | Same. Nothing in the execution plane has changed                                                                                                              |
-| Step 4, release converted  | `helm rollback` the orchestration release to its previous revision. Broker volumes are unchanged, so the combined release's Hub and Identity workloads return |
-| Step 5, Optimize separated | Uninstall the Optimize release and re-enable `optimize` in the orchestration release, with the same prefixes                                                  |
-| Step 6, cleanup done       | Identity object deletion isn't reversible. Re-create any client, resource server, permission, or role you removed in error                                    |
+| After step                 | To roll back                                                                                                                                                      |
+| :------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Step 2, Hub installed      | Uninstall the Hub release. The combined release is untouched                                                                                                      |
+| Step 3, Hub verified       | Same. Nothing in the execution plane has changed                                                                                                                  |
+| Step 4, release converted  | `helm rollback` the orchestration release to its previous revision. Broker volumes are unchanged, so the combined release's Hub and Identity workloads return     |
+| Step 5, Optimize separated | Uninstall the Optimize release, remove the explicit exporter, and re-enable `optimize` in the orchestration release with the same reader and application prefixes |
+| Step 6, cleanup done       | Identity object deletion isn't reversible. Re-create any client, resource server, permission, or role you removed in error                                        |
 
 Roll back before step 6. Once you've deleted Identity objects, recovery is manual.
 
