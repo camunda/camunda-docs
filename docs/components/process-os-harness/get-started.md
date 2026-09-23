@@ -44,7 +44,7 @@ ProcessOS Harness is distributed through repositories available to early access 
    c8 os install claudecode
    ```
 
-   This command downloads the release bundle and extracts it into the current directory. Each AI coding agent has its own bundle, listed in the [bundle mapping](system-requirements.md#bundle-mapping).
+   This command downloads the release bundle and extracts it into the current directory. Each AI coding agent has its own bundle, listed in the [bundle mapping](system-requirements.md#processos-bundle-mapping).
 
 1. Create a version-controlled project folder:
 
