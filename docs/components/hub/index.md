@@ -53,7 +53,7 @@ Each workspace includes dedicated deployment environments for development, stagi
 </div>
 <div class="double-column-right" style={{ flex: '2' }}>
 
-<img src={WorkspacesEnvironmentsImg} title="Build with AI" style={{ marginTop: '0', marginBottom: '0', maxWidth: '400px', width: '100%' }}/>
+![Deployment environments diagram](./img/centralized-org-management.png)
 
 </div>
 </div>
