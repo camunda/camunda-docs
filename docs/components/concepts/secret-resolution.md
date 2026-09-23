@@ -1,20 +1,35 @@
 ---
 id: secret-resolution
 title: "Secret resolution"
-description: "Understand camunda.secrets.<name> references, the two paths that resolve them, and where resolution is scoped and cached."
+description: "Learn about secret resolution references, resolution paths, and where resolution is scoped and cached."
 ---
 
-Secret resolution replaces a `camunda.secrets.<name>` reference, known as a Secret reference (Orchestration Cluster), with the value a configured secret store holds for it, without that value being written into a process model, a job variable literal, or a configuration file.
+import PageDescription from '@site/src/components/PageDescription';
 
-This is a separate mechanism from the connector runtime's `{{secrets.<name>}}` syntax, now called Secret reference (legacy). By default, the two forms are resolved independently by different components, and each reads only its own store or providers. Optionally, if the connector runtime is configured for it (`camunda.connector.secret-resolver.legacy.mode` set to `FALLBACK`), a legacy reference the runtime cannot find in its providers falls back to the `camunda.secrets.<name>` store. See [Using `camunda.secrets.*` references](/components/connectors/use-connectors/index.md#using-camundasecrets-references).
+<PageDescription />
 
+## About
+
+Secret resolution replaces a `camunda.secrets.<name>` reference, known as a [secret reference (Orchestration Cluster)](/reference/glossary.md#secret-reference-orchestration-cluster), with the value a configured secret store holds for it, without that value being written into a process model, a job variable literal, or a configuration file.
+
+- This is a separate mechanism from the connector runtime's `{{secrets.<name>}}` syntax, now named "Secret reference (legacy)".
+- By default, the two forms are resolved independently by different components, and each reads only its own store or providers.
+- Optionally, if the connector runtime is configured for it (`camunda.connector.secret-resolver.legacy.mode` set to `FALLBACK`), a legacy reference the runtime cannot find in its providers falls back to the `camunda.secrets.<name>` store. See [Using `camunda.secrets.*` references](/components/connectors/use-connectors/index.md#using-camundasecrets-references).
+
+:::note
 The legacy form was the subject of [security notice 61](/reference/notices.md#notice-61), where an unscoped reference could resolve outside the field it was written in. The secret filter that notice introduces applies only to the legacy form. `camunda.secrets.<name>` resolution isn't affected: the broker records each reference's position in the job variables and replaces only that position, so a reference can't resolve at a field where it wasn't written.
-
-:::tip
-Desktop Modeler and Web Modeler flag legacy secret usage when the diagram's selected engine supports `camunda.secrets.<name>`. Use that hint to guide your migration to the new syntax.
 :::
 
-Secret resolution is available in both SaaS and Self-Managed. See [Availability](/components/concepts/secret-resolution-and-job-activation.md#availability) for what each offering provides and what you configure. For a broader overview of how secrets work across Camunda 8, including where secret values are stored and created, see [Secret management](secret-management.md).
+:::tip
+Desktop Modeler and Camunda Hub flag legacy secret usage when the diagram's selected engine supports `camunda.secrets.<name>`. Use that hint to guide your migration to the new syntax.
+:::
+
+### Availability
+
+Secret resolution is available in both SaaS and Self-Managed.
+
+- See [availability](/components/concepts/secret-resolution-and-job-activation.md#availability) for what each offering provides and what you configure.
+- For an overview of how secrets work in Camunda, including where values are stored and created, see [secrets](secrets.md).
 
 ## Reference syntax
 
@@ -43,23 +58,36 @@ The gateway API is stricter. `POST /v2/secrets/resolve` and `POST /v2/secrets/li
 
 A name a model can reference is not guaranteed to be creatable or manageable through the API. Use the API's charset for any name you intend to create, list, or grant permissions on through `/v2/secrets/*`.
 
-## Two resolution paths
+## Resolution paths
 
-|          | Broker path                             | Gateway API path                                                                           |
-| :------- | :-------------------------------------- | :----------------------------------------------------------------------------------------- |
-| Used by  | Job workers, outbound connectors        | Inbound connectors (`POST /v2/secrets/resolve`), the Web Modeler (`POST /v2/secrets/list`) |
-| When     | Asynchronously, ahead of job activation | On demand, per request                                                                     |
-| Delivery | Long polling and job push               | The HTTP response                                                                          |
+There are two resolution paths:
 
-The broker path resolves references in a job's variables in the background and injects the resolved values only when the job is activated. See [Secret resolution and job activation](secret-resolution-and-job-activation.md) for the scheduler, caching, and delivery mechanics, including why no resolved value reaches a record, runtime state, or log on this path.
+|          | Broker path                             | Gateway API path                                                                       |
+| :------- | :-------------------------------------- | :------------------------------------------------------------------------------------- |
+| Used by  | Job workers, outbound connectors        | Inbound connectors (`POST /v2/secrets/resolve`), Camunda Hub (`POST /v2/secrets/list`) |
+| When     | Asynchronously, ahead of job activation | On demand, per request                                                                 |
+| Delivery | Long polling and job push               | The HTTP response                                                                      |
 
-The gateway API path serves callers that have no job to wait on. An inbound connector resolves the references an expression evaluation used, in batches, through `POST /v2/secrets/resolve`. The Web Modeler calls `POST /v2/secrets/list` to offer known reference names while you author a model. Both endpoints share a request and response contract described in [Secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md); for the full request and response schema of each, see [Resolve secrets](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets.api.mdx) and [List secrets](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx).
+### Broker path
 
-## Physical-tenant scope
+The broker path resolves references in a job's variables in the background and injects the resolved values only when the job is activated. See [secret resolution and job activation](secret-resolution-and-job-activation.md) for the scheduler, caching, and delivery mechanics, including why no resolved value reaches a record, runtime state, or log on this path.
 
-A reference names no store, so it always addresses the physical tenant's `default` secret store: `camunda.secrets.X` means `camunda.secrets.default.X`. Each physical tenant supports exactly one secret store, counted across every store type combined, and that store's ID must be `default`. Configuring a second store under a different ID is rejected at startup.
+### Gateway API path
 
-Resolving and listing both read the secret stores of the caller's physical tenant only, never another tenant's stores. See [Validation and constraints](/self-managed/concepts/physical-tenants/configuration-reference.md#validation-and-constraints) for how the one-store-per-tenant rule is validated, and [Secrets](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) for store configuration.
+The gateway API path serves callers that have no job to wait on.
+
+- An inbound connector resolves the references an expression evaluation used, in batches, through `POST /v2/secrets/resolve`.
+- Camunda Hub calls `POST /v2/secrets/list` to offer known reference names while you author a model.
+
+Both endpoints share a request and response contract described in [secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md). For the full request and response schema of each, see [resolve secrets](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets.api.mdx) and [list secrets](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx).
+
+## Physical tenant scope
+
+A reference names no store, so it always addresses the physical tenant's `default` secret store: `camunda.secrets.X` means `camunda.secrets.default.X`.
+
+Each physical tenant supports exactly one secret store, counted across every store type combined, and that store's ID must be `default`. Configuring a second store under a different ID is rejected at startup.
+
+Resolving and listing both read the secret stores of the caller's physical tenant only, never another tenant's stores. See [validation and constraints](/self-managed/concepts/physical-tenants/configuration-reference.md#validation-and-constraints) for how the one-store-per-tenant rule is validated, and [secrets](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) for store configuration.
 
 ## Cache behavior
 
@@ -67,11 +95,15 @@ Resolving is cache-first on both paths: the broker's background scheduler and th
 
 Listing is different by design. What a store's cache holds is the values it has resolved so far, not the tenant's full set of secrets. `/v2/secrets/list` always reads the configured stores directly rather than serving from the cache.
 
-## Not currently supported
+## Unsupported features
 
-- More than one secret store per physical tenant. A reference always addresses the `default` store.
-- Pinning an AWS Secrets Manager secret to a version stage other than `AWSCURRENT`, or a GCP Secret Manager secret to a version other than `latest`.
-- Filtering or paginating a `POST /v2/secrets/list` response, see [Secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md#list-secrets).
+The following features are not currently supported:
+
+| Unsupported feature                                        | Details                                                                                                                                                                    |
+| :--------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| More than one secret store per physical tenant             | A reference always addresses the `default` store.                                                                                                                          |
+| Pinning a secret to a non-current version                  | AWS Secrets Manager secrets cannot be pinned to a version stage other than `AWSCURRENT`, and GCP Secret Manager secrets cannot be pinned to a version other than `latest`. |
+| Filtering or paginating a `POST /v2/secrets/list` response | See [secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md#list-secrets).                                                          |
 
 ## Related resources
 

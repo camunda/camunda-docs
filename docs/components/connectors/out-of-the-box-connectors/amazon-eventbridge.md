@@ -258,7 +258,7 @@ This tab displays the URL of the Amazon EventBridge Webhook connector for every 
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use the Amazon EventBridge Webhook connector in Desktop Modeler or with Camunda 8 Self-Managed.
-In that case, Amazon EventBridge Webhook connector deployments and URLs will not be displayed in Modeler.
+In that case, Amazon EventBridge Webhook connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 ## Output mapping

@@ -4,6 +4,12 @@ title: "Secret resolution and job activation"
 description: "Learn how the broker resolves secret references before job activation and injects resolved values when it hands a job to a worker."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 Secret resolution lets job workers use secret values at runtime without storing those values in job variables or configuration.
 
 A job whose variables contain an [Orchestration Cluster secret reference](/reference/glossary.md#secret-reference-orchestration-cluster) is handed to a worker only after every reference has been resolved. The resolved values reach the worker without being written to any record, runtime state, or log.
@@ -16,12 +22,14 @@ A cluster whose process models contain no `camunda.secrets.<name>` reference is 
 
 Secret resolution is available in both SaaS and Self-Managed.
 
-| Offering     | Secret store            | What you configure                                                                                                                                                                                                                                                                            |
-| :----------- | :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SaaS         | Provisioned and managed | No secret store configuration. Manage secret values on the cluster's **Cluster secrets** tab and reference them as `camunda.secrets.<key>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). |
-| Self-Managed | File, AWS, or GCP       | The store type, path, and credentials. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).                                                                                                                         |
+| Deployment   | Secret store            | What you configure                                                                                                                                                                                                                                                                                                                      |
+| :----------- | :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SaaS         | Provisioned and managed | <p>No secret store configuration.</p><p><ul><li>Manage secret values on the cluster's **Cluster secrets** tab.</li><li>Reference them as `camunda.secrets.<key>`.</li></ul></p><p>See [manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).</p> |
+| Self-Managed | File, AWS, or GCP       | The store type, path, and credentials. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).                                                                                                                                                                   |
 
-You can configure AWS Secrets Manager and GCP Secret Manager stores only in Self-Managed.
+:::note
+In Self-Managed deployments, you can only configure AWS Secrets Manager and GCP Secret Manager stores.
+:::
 
 ## Resolve references before activation
 
@@ -127,15 +135,18 @@ The activation response has to stay within `camunda.cluster.network.max-message-
 
 The broker replaces the placeholder at its recorded position in the job variables. If a later variable merge overwrites the expected placeholder, or if the broker cannot read the variables, the broker does not activate the job and raises an incident. The incident also takes the job out of activation until the incident is resolved, so the same failing injection is not retried on every activation.
 
-For how to inspect and resolve either incident, see [troubleshoot secret resolution failures](secret-resolution-incidents.md).
+To learn how to inspect and resolve either incident, see [troubleshoot secret resolution failures](secret-resolution-incidents.md).
 
 ## Tune the resolution scheduler
 
-Configure the scheduler under `camunda.processing.engine.secrets`. The defaults are intended for stores that respond in less than a second. The separate `camunda.secrets.cache.ttl` setting controls how long a resolved value remains cached before the reference must be resolved again.
+Configure the scheduler under `camunda.processing.engine.secrets`.
+
+- The defaults are intended for stores that respond in less than a second.
+- The separate `camunda.secrets.cache.ttl` setting controls how long a resolved value remains cached before the reference must be resolved again.
 
 Under a steady stream of pending references, cycles run close to `wake-delay` apart, not `interval`: `interval` only bounds how long a scheduler with nothing to resolve waits before checking again, growing there from `wake-delay` in geometric steps rather than jumping straight to it.
 
-| Property                 | Default | Change it when                                                                                                                                                                                        |
+| Property                 | Default | Change it when the following applies:                                                                                                                                                                 |
 | :----------------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `wake-delay`             | `50ms`  | Jobs that reference secrets take too long to activate under a steady stream of requests. A shorter delay reduces that latency at the cost of polling the stores more often.                           |
 | `interval`               | `5s`    | A scheduler that is genuinely idle takes too long to notice a newly pending reference, or you want its idle ceiling to be different. Under load this value is rarely reached; see `wake-delay` above. |
@@ -151,13 +162,17 @@ See the [property reference](/self-managed/components/orchestration-cluster/core
 
 ## Secret resolution across physical tenants
 
-The secret store, its cache, and the resolution scheduler's retry state are all scoped per [physical tenant](/self-managed/concepts/physical-tenants/configuration-reference.md). A multi-tenant cluster resolves each tenant's `camunda.secrets.<name>` references against that tenant's own store: two tenants never share a cache entry, and one tenant's store outage does not affect another tenant's resolution.
+The secret store, its cache, and the resolution scheduler's retry state are all scoped per [physical tenant](/self-managed/concepts/physical-tenants/configuration-reference.md).
+
+A multi-tenant cluster resolves each tenant's `camunda.secrets.<name>` references against that tenant's own store: two tenants never share a cache entry, and one tenant's store outage does not affect another tenant's resolution.
 
 `camunda.secrets.*` configures the store and cache defaults every physical tenant inherits. Override them for one tenant under `camunda.physical-tenants.<tenant-key>.secrets.*`. The tenant still supports only one store, under the same `default` id.
 
 ## Monitor secret resolution
 
-A store that is slow or unavailable shows up as jobs that do not activate, and the job worker does not indicate the cause. The cluster emits meters for secret resolution and secret caches. Use these meters to distinguish a cold cache from a store that is not responding. To scrape and interpret cluster meters, see the [metrics reference](/self-managed/operational-guides/monitoring/metrics.md#secret-resolution-and-cache-metrics).
+A store that is slow or unavailable shows up as jobs that do not activate, and the job worker does not indicate the cause.
+
+The cluster emits meters for secret resolution and secret caches. Use these meters to distinguish a cold cache from a store that is not responding. To scrape and interpret cluster meters, see the [metrics reference](/self-managed/operational-guides/monitoring/metrics.md#secret-resolution-and-cache-metrics).
 
 ## Related resources
 
