@@ -129,7 +129,7 @@ This is possible with **local variables**. Use local variables to create or upda
 
 ### Define local variables
 
-To define a local variable in Modeler, add an input mapping on the activity, subprocess, or call activity where you want the variable to exist. For details on input mapping concepts (`source` and `target`) see [input/output variable mappings](#inputoutput-variable-mappings).
+To define a local variable in [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, add an input mapping on the activity, subprocess, or call activity where you want the variable to exist. For details on input mapping concepts (`source` and `target`) see [input/output variable mappings](#inputoutput-variable-mappings).
 
 The `target` of the input mapping becomes a local variable in that element's scope. For example, an input mapping with `source: =customer.name` and `target: reviewerName` creates the local variable `reviewerName` in that scope.
 
@@ -190,7 +190,7 @@ Input mappings can be used to create new variables. They can be defined on [serv
 
 When an input mapping is applied, it creates a new [**local variable**](#local-variables) in the scope where the mapping is defined.
 
-In Modeler, define these mappings in the element properties.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, define these mappings in the element properties.
 
 You can use [expressions](./expressions.md) or static values for input mappings. You can leave the `source` empty to map the `target` variable to `null`.
 
@@ -209,8 +209,6 @@ Examples:
 ### Secret references in input mappings
 
 An input mapping's `source` can reference a secret directly, without first storing it in a process variable. Write the reference as `camunda.secrets.<name>` in a FEEL expression.
-
-This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases.
 
 Using secret references requires a secret store that holds the secret. In SaaS, the store is provisioned for you. You can reference values from the cluster's **Cluster secrets** tab as `camunda.secrets.<name>` without additional setup. See [manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). In Self-Managed, an operator must [configure a secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). Without an available store, Camunda cannot resolve the reference.
 

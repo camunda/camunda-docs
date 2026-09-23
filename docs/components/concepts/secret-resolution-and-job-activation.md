@@ -12,15 +12,13 @@ The broker resolves secret references in the background rather than while proces
 
 A cluster whose process models contain no `camunda.secrets.<name>` reference is unaffected by any of this. A model that does use a reference behaves differently depending on whether a secret store is configured: on a cluster with no store configured, every reference fails permanently as not found, and the job gets a [secret resolution error incident](secret-resolution-incidents.md#resolve-secret-lookup-failures) rather than a delay.
 
-This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
-
 ## Availability
 
 Secret resolution is available in both SaaS and Self-Managed.
 
 | Offering     | Secret store            | What you configure                                                                                                                                                                                                                                                                            |
 | :----------- | :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SaaS         | Provisioned and managed | No secret store configuration. Manage secret values on the cluster's **Cluster secrets** tab and reference them as `camunda.secrets.<key>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). |
+| SaaS         | Provisioned and managed | No secret store configuration. Manage secret values on the cluster's **Cluster secrets** tab and reference them as `camunda.secrets.<key>`. See [manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). |
 | Self-Managed | File, AWS, or GCP       | The store type, path, and credentials. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).                                                                                                                         |
 
 You can configure AWS Secrets Manager and GCP Secret Manager stores only in Self-Managed.

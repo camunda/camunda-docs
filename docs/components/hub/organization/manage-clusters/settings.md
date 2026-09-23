@@ -63,6 +63,10 @@ This setting is available for clusters running a version where `STRICT` is the s
 
 For details on each mode, see [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
 
+## Enable business ID uniqueness
+
+When enabled, the cluster enforces uniqueness constraints on business identifiers to prevent duplicate process instances.
+
 ## Enable app integrations extensions
 
 You can allow a cluster to exchange events with App Integrations, such as Camunda for Microsoft Teams or Slack, so App Integrations can deliver task notifications to your chat tool.
