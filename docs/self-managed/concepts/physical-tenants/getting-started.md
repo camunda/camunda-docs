@@ -14,7 +14,7 @@ Set up a second, strongly isolated Physical Tenant on an existing Camunda 8 Self
 A bank runs its day-to-day operations on one Camunda 8 cluster today, the always-present `default` Physical Tenant. Its Risk team is now onboarding, and compliance requires Risk's process data, identity provider, and backups to be fully separate from Operations, without a second cluster to operate. This is the internal-domain pattern from [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md): strong isolation for teams that must not blur, on one platform.
 :::
 
-This guide assumes Kubernetes with the Camunda Helm chart and a shared Keycloak or external OIDC provider, the setup used in Camunda's own Physical Tenant benchmarking.
+This guide assumes Kubernetes with the Camunda Helm chart and a shared Keycloak or external OIDC provider.
 
 <Tabs groupId="storage-backend" queryString>
 <TabItem value="rdbms" label="RDBMS" default>
@@ -39,8 +39,8 @@ Confirm each of these before you start. Every item here has caused a real setup 
 | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Running Camunda 8.10 Self-Managed Helm deployment                                           | Physical Tenants are a Self-Managed feature only, not available on SaaS in this release.                                                                                           |
 | RDBMS (or Elasticsearch/OpenSearch) reachable for a second, distinct schema or index prefix | Startup fails if the new tenant's storage location collides with an existing one.                                                                                                  |
-| Permission to register a new redirect URI in your IdP                                       | The new tenant needs its own callback URI registered before its first browser login.                                                                                               |
-| Decide whether the new tenant uses the same IdP as `default`                                | Both tenants can share one OIDC provider and still authorize independently. See [choose an Identity Provider setup](./authentication-authorization.md#identity-deployment-models). |
+| Permission to register a new redirect URI in your identity provider                         | The new tenant needs its own callback URI registered before its first browser login.                                                                                               |
+| Decide whether the new tenant uses the same identity provider as `default`                  | Both tenants can share one OIDC provider and still authorize independently. See [choose an identity provider setup](./authentication-authorization.md#identity-deployment-models). |
 
 <details>
 <summary>Two behaviors that are easy to miss on a first rollout</summary>
@@ -51,7 +51,7 @@ Confirm each of these before you start. Every item here has caused a real setup 
 </details>
 
 <details>
-<summary>Deploying from Web Modeler or Desktop Modeler?</summary>
+<summary>Deploying from Desktop Modeler?</summary>
 
 To target a Physical Tenant from Desktop Modeler, change the cluster URL from `.../v2` to `.../physical-tenants/<physicalTenantId>/v2` and leave the client's tenant ID field unset. That field is for Logical Tenants, not Physical Tenants.
 
@@ -62,14 +62,14 @@ To target a Physical Tenant from Desktop Modeler, change the cluster URL from `.
 Before touching configuration, decide three things for the new tenant:
 
 1. **Storage**: a distinct RDBMS schema, database, or index prefix. This guide uses a separate schema on the same PostgreSQL instance `default` already uses, the lowest-effort option. See [RDBMS storage](./storage-isolation.md#rdbms-storage) for the tradeoffs against a dedicated database instance.
-2. **Identity**: whether Risk reuses the platform's existing Keycloak/OIDC provider (recommended to start, since it's one less moving part) or connects its own IdP.
+2. **Identity**: whether Risk reuses the platform's existing Keycloak/OIDC provider (recommended to start, since it's one less moving part) or connects its own identity provider.
 3. **Authorization**: who administers Risk's tenant, and what roles their process applications need. Physical Tenants don't inherit authorization from the cluster or from other tenants. Each tenant's `security.initialization` block is independent. See [per-tenant role and permission definitions](./authentication-authorization.md#per-tenant-role-and-permission-definitions).
 
 For this walkthrough, the new tenant is named `riskprod`, reusing the existing Keycloak provider, with its own schema and its own authorization block.
 
 ## Configure
 
-Add the following to your Helm values, either inline under `orchestration.configuration` or as a separate file under `orchestration.extraConfiguration`. Both approaches, and the full property list, are covered in [configure Physical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-physical-tenants.md). This example, adapted from Camunda's own two-tenant benchmark configuration, assumes the base `camunda.security.authentication` and `camunda.document` blocks for `default` are already in your values file. The minimum needed is storage and an assigned identity provider:
+Add the following to your Helm values, either inline under `orchestration.configuration` or as a separate file under `orchestration.extraConfiguration`. Both approaches, and the full property list, are covered in [configure Physical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-physical-tenants.md). This example assumes the base `camunda.security.authentication` block for `default` is already in your values file. The minimum needed is storage and an assigned identity provider:
 
 <Tabs groupId="storage-backend" queryString>
 <TabItem value="rdbms" label="RDBMS" default>
@@ -165,7 +165,7 @@ Add this block alongside `security.authentication` above, under the same `riskpr
 
 If you're using RDBMS, create the `riskprod_schema` schema on your PostgreSQL instance before applying this. Camunda validates that the schema exists at startup; it does not create it for you. If you're using Elasticsearch/OpenSearch, no manual step is needed: Camunda creates indices under the `riskprod` prefix automatically at startup. See [validation and operations](./storage-isolation.md#validation-and-operations).
 
-Now register `riskprod`'s redirect URI in your IdP. In Keycloak, add `/physical-tenants/riskprod/sso-callback` to the client's allowed redirect URIs. See [IdP redirect URI registration](./authentication-authorization.md#idp-redirect-uri-registration). Skip this and the first browser login to `riskprod` fails at the IdP, not at Camunda.
+Now register `riskprod`'s redirect URI in your identity provider. In Keycloak, add `/physical-tenants/riskprod/sso-callback` to the client's allowed redirect URIs. See [identity provider redirect URI registration](./authentication-authorization.md#idp-redirect-uri-registration).
 
 ## Deploy
 
@@ -175,7 +175,7 @@ Apply the updated values with a rolling restart:
 helm upgrade camunda camunda/camunda-platform -f values.yaml
 ```
 
-Adding a Physical Tenant always requires a rolling restart. There's no dynamic, restart-free way to add one in this release. `default` keeps serving requests throughout the rollout. See [rolling restart expectations](./provisioning-and-lifecycle.md#rolling-restart-expectations).
+Adding a Physical Tenant always requires a rolling restart. `default` keeps serving requests throughout the rollout. See [rolling restart expectations](./provisioning-and-lifecycle.md#rolling-restart-expectations).
 
 Confirm `riskprod` is up before deploying a process to it. This and every other request in this guide requires an access token from the identity provider you assigned to `riskprod`; the examples omit the auth header for brevity. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) for how to obtain one:
 
@@ -183,7 +183,7 @@ Confirm `riskprod` is up before deploying a process to it. This and every other 
 curl https://your-cluster/physical-tenants/riskprod/v2/topology
 ```
 
-Deploy your process to `riskprod` from Web Modeler or Desktop Modeler by targeting its tenant URL (see the pre-flight checklist), or from the CLI/Java client by connecting a client scoped to `riskprod` (see [API walkthrough](#api-walkthrough) below) and calling the deploy operation as usual.
+Deploy your process to `riskprod` from Desktop Modeler by targeting its tenant URL (see the pre-flight checklist), or from the CLI/Java client by connecting a client scoped to `riskprod` (see [API walkthrough](#api-walkthrough) below) and calling the deploy operation as usual.
 
 ## Run and verify
 
@@ -263,20 +263,20 @@ Once you're validating a third tenant's rollout, check its topology alongside th
 
 For issues beyond this specific setup flow, see [troubleshoot Physical Tenants](./troubleshooting.md). These are the failures most likely to hit you during this walkthrough:
 
-| Symptom                                                                       | Likely cause                                                                                                      | Fix                                                                                                                                                                                                         |
-| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Startup fails naming `riskprod` and another tenant sharing a storage location | Two tenants resolved to the same schema, database, or index prefix, including two prefixes differing only by case | Pick a schema or prefix unique regardless of case. See [validation and operations](./storage-isolation.md#validation-and-operations).                                                                       |
-| Startup fails: `riskprod` must declare `providers.assigned`                   | A non-default tenant was configured without assigning an identity provider                                        | Add `security.authentication.providers.assigned` under `riskprod`, even if it reuses the cluster's only provider. See [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment). |
-| First login to `riskprod` fails at the IdP, before reaching Camunda           | The tenant's redirect URI was never registered                                                                    | Register `/physical-tenants/riskprod/sso-callback` in your IdP. See [IdP redirect URI registration](./authentication-authorization.md#idp-redirect-uri-registration).                                       |
-| A user with a role in `riskprod` gets `403` in `default`, or vice versa       | Expected behavior, not a bug                                                                                      | Authorization is per tenant by design. Grant the role in each tenant where the user needs access.                                                                                                           |
-| A custom exporter's per-tenant settings seem to be ignored                    | Custom exporters don't inherit root-level config unless they implement their own merge logic                      | Declare the exporter's full configuration under each tenant, and assign it explicitly to that tenant rather than relying on inheritance from the root.                                                      |
-| `riskprod` stays disabled after being re-added to configuration               | Configuration wasn't applied with a rolling restart                                                               | Re-adding a tenant to configuration takes effect on the next rolling restart, not immediately.                                                                                                              |
+| Symptom                                                                           | Likely cause                                                                                                      | Fix                                                                                                                                                                                                              |
+| :-------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Startup fails naming `riskprod` and another tenant sharing a storage location     | Two tenants resolved to the same schema, database, or index prefix, including two prefixes differing only by case | Pick a schema or prefix unique regardless of case. See [validation and operations](./storage-isolation.md#validation-and-operations).                                                                            |
+| Startup fails: `riskprod` must declare `providers.assigned`                       | A non-default tenant was configured without assigning an identity provider                                        | Add `security.authentication.providers.assigned` under `riskprod`, even if it reuses the cluster's only provider. See [identity provider assignment](./authentication-authorization.md#idp-provider-assignment). |
+| First login to `riskprod` fails at the identity provider, before reaching Camunda | The tenant's redirect URI was never registered                                                                    | Register `/physical-tenants/riskprod/sso-callback` in your identity provider. See [identity provider redirect URI registration](./authentication-authorization.md#idp-redirect-uri-registration).                |
+| A user with a role in `riskprod` gets `403` in `default`, or vice versa           | Expected behavior, not a bug                                                                                      | Authorization is per tenant by design. Grant the role in each tenant where the user needs access.                                                                                                                |
+| A custom exporter's per-tenant settings seem to be ignored                        | Custom exporters don't inherit root-level config unless they implement their own merge logic                      | Declare the exporter's full configuration under each tenant, and assign it explicitly to that tenant rather than relying on inheritance from the root.                                                           |
+| `riskprod` stays disabled after being re-added to configuration                   | Configuration wasn't applied with a rolling restart                                                               | Re-adding a tenant to configuration takes effect on the next rolling restart, not immediately.                                                                                                                   |
 
 **Finding logs**: broker and gateway logs aren't split per tenant. A single broker pod can host partitions for both `default` and `riskprod`. Get logs the normal Kubernetes way (`kubectl logs <pod-name>`), then filter for the tenant ID. Transition and validation log lines name the affected tenant directly, so grepping for `riskprod` isolates its entries from a shared pod's log.
 
 ## Lessons learned
 
-- **Start with one shared IdP.** Connecting a second tenant to its own separate identity provider is supported, but it's a second thing to get wrong on your first rollout. Prove the pattern with a shared provider first, then split identity later if compliance requires it.
+- **Start with one shared identity provider.** Connecting a second tenant to its own separate identity provider is supported, but it's a second thing to get wrong on your first rollout. Prove the pattern with a shared provider first, then split identity later if compliance requires it.
 - **Storage isolation errors happen at startup, not at runtime.** Getting the schema, database, or prefix wrong fails the rollout immediately and names both conflicting tenants. It doesn't silently share data. Treat a failed rollout here as the isolation check working, not a bug.
 - **Authorization doesn't compose across tenants, budget for it.** Every explicitly configured tenant needs its own complete `security.initialization` block. For two tenants this is a few extra lines; for ten, template it rather than hand-writing each one.
 - **Add tenants for isolation boundaries, not for scale.** If Risk just needs more throughput on the same data and identity as Operations, that's a partition-count or broker-count change within one tenant, not a new tenant. Reach for a new Physical Tenant when a team needs its own storage, identity, or backup, not just more capacity.
