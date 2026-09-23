@@ -1,7 +1,7 @@
 ---
 id: secret-management
 title: "Secrets"
-description: "Learn about using secrets to keep sensitive values out of process models, variables, and configuration, and where to reference, store, resolve, and secure secrets in SaaS and Self-Managed."
+description: "Use and manage secrets to keep sensitive values out of process models, variables, and configuration, and where to reference, store, resolve, and secure secrets in SaaS and Self-Managed."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
