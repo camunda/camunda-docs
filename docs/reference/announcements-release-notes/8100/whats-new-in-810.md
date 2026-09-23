@@ -25,6 +25,7 @@ import HubCatalog from '../../img/whats-new-hub-catalog.png';
 import HubWorkspace from '../../img/whats-new-hub-workspace.png';
 import HubSnapshot from '../../img/whats-new-hub-snapshot.png';
 import DesignSystem from '../../img/whats-new-design.png';
+import SecretsOverviewImg from '../../../components/concepts/assets/secrets-overview.png';
 
 <PageDescription />
 
@@ -655,7 +656,9 @@ The new visual Camunda design system is introduced for Admin, Camunda Hub, and T
 
 Centralized secret resolution through Zeebe is introduced in 8.10.
 
-Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
+You can use and manage secrets to keep keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
+
+<img src={SecretsOverviewImg} alt="Secrets overview" title="Secrets overview" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
 - Reference secrets as `camunda.secrets.NAME` in input mappings, expressions, and output mappings. The legacy `{{secrets.NAME}}` syntax continues to work.
 - Secrets are resolved automatically for activated jobs and can also be requested through the Gateway APIs `/v2/secrets/resolve` and `/v2/secrets/list`.
@@ -669,7 +672,7 @@ Processes can reference credentials from customer-managed secret stores without 
 **Limitations:**
 This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 seconds by default.
 
-<p class="link-arrow">[Secret resolution](/components/concepts/secret-resolution.md)</p>
+<p class="link-arrow">[Secrets](/components/concepts/secrets.md)</p>
 
 ## Connector operations
 
