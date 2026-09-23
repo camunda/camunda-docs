@@ -52,24 +52,18 @@ When you open the **Test** tab for the first time in a process, the **Setup test
 
 ### 1. Choose where to run
 
-![Setup test run panel showing the Choose where to run step with a Connect cluster button](../img/test-choose-where-to-run.png)
-
 Click **Connect cluster**, and select a target cluster. Once the cluster is healthy, it advances to the next step.
 
 ### 2. Choose resources to deploy
-
-![Setup test run panel showing the Choose resources to deploy step with All resources and Only this resource options](../img/test-choose-resources-to-deploy.png)
 
 - **All resources**: Deploys the whole project, including dependencies like called processes or DMN files.
 - **Only this resource**: Deploys only the open file. An info alert reminds you that referenced resources, such as called processes, DMN files, or forms, must be deployed separately, or test runs fail with a not found incident.
 
 Files outside a project deploy as **All resources** only; no scope choice is shown. In read-only mode, **Only this resource** is disabled.
 
-Click **Deploy**. Once the deploy succeeds, the step shows a **Successfully deployed** badge, or a failure badge if the deploy fails, and the panel automatically progresses to the next step.
+Click **Deploy**. Once the deploy succeeds, the step shows a **Successfully deployed** badge, or a failure badge if the deploy fails. On successful deployment it automatically progresses to the next step.
 
 ### 3. Configure test case
-
-![Setup test run panel showing the Configure test case step with Start and End elements and an input data editor](../img/test-configure-test-case.png)
 
 The process's start element, and an end element if the process supports one, are auto-selected to define the segment you want to test. Click the edit icon to pick a different element:
 
