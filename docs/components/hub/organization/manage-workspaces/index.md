@@ -20,6 +20,12 @@ You can create and manage workspaces at the organization level.
 You can only manage workspaces at the organization level if you're an **Organization admin** or **Organization owner**.
 :::
 
+## View existing workspaces
+
+To view existing workspaces, click **Workspaces** in the left navigation.
+
+## Manage a workspace
+
 <AoGrid ao={[
 {
 link: "./manage",

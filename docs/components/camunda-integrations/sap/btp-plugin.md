@@ -175,7 +175,7 @@ When modeling a process for the BTP plugin, choose one of the following variants
 User task listeners are available from **Camunda 8.8** onwards. They were briefly included in 8.7.0-alpha2 but were not available in the 8.7.0 GA release. Use Camunda 8.8 or higher for this variant.
 :::
 
-In Camunda Modeler, model each user interaction step as a separate Camunda user task and link it to a Camunda Form. The BTP plugin detects these tasks and renders the linked forms in the Fiori UI.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, model each user interaction step as a separate Camunda user task and link it to a Camunda Form. The BTP plugin detects these tasks and renders the linked forms in the Fiori UI.
 
 For each form step:
 
@@ -204,7 +204,7 @@ This setup is deprecated and kept for backward compatibility only. Use the Camun
 
 Model the process to be advanced by a job worker that polls for work and drives the flow. This means the BTP plugin is not responsible for task progression in the process model.
 
-In Camunda Modeler, configure each form step as a job worker task.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, configure each form step as a job worker task.
 
 For each form step:
 

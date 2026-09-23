@@ -9,6 +9,14 @@ import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 import AwsSvgIcon from "../components/CamundaSelfManaged/icons/aws.svg";
 import GcpSvgIcon from "../components/CamundaSelfManaged/icons/gcp.svg";
 import IconAgenticImg from "../../docs/components/assets/icon-agentic.png";
+import downloads from "../data/downloads.json";
+
+const GETTING_STARTED = downloads.gettingStarted;
+const CAMUNDA_RUN = downloads.camundaRun;
+const CAMUNDA_RUN_STABLE_MINOR = CAMUNDA_RUN.version
+  .split(".")
+  .slice(0, 2)
+  .join(".");
 
 /* ─── Icon components ─── */
 
@@ -547,7 +555,7 @@ function ArrowDown() {
 
 /* ─── Reusable components ─── */
 
-function VersionBadge({ version = "Camunda 8.9+" }) {
+function VersionBadge({ version }) {
   return <span className={styles.versionBadge}>{version}</span>;
 }
 
@@ -700,7 +708,7 @@ function BuildWithCamunda() {
                 </span>
                 <h2 className={styles.heroCardTitle}>Run Camunda locally</h2>
                 <p className={styles.heroCardMeta}>
-                  Camunda 8.9+ · macOS, Linux, Windows
+                  Camunda {CAMUNDA_RUN_STABLE_MINOR}+ · macOS, Linux, Windows
                 </p>
                 <p className={styles.heroCardDesc}>
                   Install and start Camunda locally, deploy your first process,
@@ -774,7 +782,8 @@ function BuildWithCamunda() {
         >
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Run Camunda locally <VersionBadge />
+              Run Camunda locally{" "}
+              <VersionBadge version={`Camunda ${CAMUNDA_RUN_STABLE_MINOR}+`} />
             </h2>
             <p className={styles.sectionSub}>
               Install the Camunda CLI via npm and start a local Camunda
@@ -810,7 +819,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start 8.10.0-alpha3`}
+              {`$ c8ctl cluster start ${CAMUNDA_RUN.alphaVersion}`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
@@ -917,25 +926,25 @@ function BuildWithCamunda() {
               <div className={styles.downloadButtons}>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-darwin-aarch64.zip"
+                  href={GETTING_STARTED.links.mac[0].url}
                 >
                   <DownloadBtnIcon /> macOS (Apple Silicon)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-darwin-x86_64.zip"
+                  href={GETTING_STARTED.links.mac[1].url}
                 >
                   <DownloadBtnIcon /> macOS (Intel)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-windows-x86_64.zip"
+                  href={GETTING_STARTED.links.windows[0].url}
                 >
                   <DownloadBtnIcon /> Windows
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-linux-x86_64.tar.gz"
+                  href={GETTING_STARTED.links.linux[0].url}
                 >
                   <DownloadBtnIcon /> Linux
                 </a>
@@ -1073,7 +1082,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl cluster start 8.9
+                {`$ c8ctl cluster start ${CAMUNDA_RUN_STABLE_MINOR}
 $ c8ctl cluster stop`}
               </TerminalWindow>
             </div>

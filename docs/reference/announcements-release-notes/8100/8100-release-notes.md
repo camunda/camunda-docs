@@ -32,6 +32,47 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0
+
+| Release date    | Changelog(s)                                                                                 | Blog |
+| :-------------- | :------------------------------------------------------------------------------------------- | :--- |
+| 13 October 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0)</li></ul> | -    |
+
+### Camunda Hub
+
+#### Business value dashboard
+
+<!-- https://github.com/camunda/product-hub/issues/3543 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Use the new **Business Value** page in Camunda Hub to track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and to set targets for cycle time and automation rate.
+
+- A portfolio view compares every process in the selected Orchestration Cluster on target coverage, target attainment, activity, automation rate, cycle time, and agentic adoption, and ranks off-target processes by how many targets are missed and by how far.
+- A process view shows the metrics and targets for a single process, including per-metric target status and a cycle time distribution with P50, average, and P95.
+- Set optional targets for cycle time and automation rate against the current baseline. Activity is shown as a metric, but you can't set a target for it in 8.10.
+- Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
+
+<p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
+
+### Helm chart deployment
+
+#### PostgreSQL databases are highly available by default
+
+<!-- https://github.com/camunda/camunda-deployment-references/pull/3463 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+The operator-based infrastructure reference architecture now deploys each CloudNativePG cluster with two instances instead of one, on a dedicated write-ahead log (WAL) volume, and requires the two instances of a cluster to sit on different nodes.
+
+A single-instance cluster gives CloudNativePG no switchover target, so the operator refuses to evict it and `kubectl drain` never completes. Because a Kubernetes upgrade drains one node at a time, that stalls the upgrade on whichever node holds a database. A second instance gives the operator somewhere to switch over to. The dedicated WAL volume keeps the write-ahead log that a standby's replication slot retains from growing into the data directory.
+
+Deployments already running the single-instance shape migrate in place: CloudNativePG clones the standby from the running primary and relocates `pg_wal` onto the new volume, with no dump or restore. Environments that cannot host a second instance, such as local Kind clusters, can pass `PG_INSTANCES=1` to `deploy.sh`.
+
+<p class="link-arrow">[High availability and node maintenance](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#high-availability-and-node-maintenance)</p>
+
+<p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
+
 ## 8.10.0-alpha5
 
 | Release date     | Changelog(s)                                                                                        | Blog |
@@ -40,16 +81,20 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ### Agentic orchestration
 
-#### AI Agent connector: new native (v2) element templates
+#### AI Agent connector: new native element templates
 
 <!-- https://github.com/camunda/connectors/issues/7211
 https://github.com/camunda/connectors/issues/7225 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
-The AI Agent Task and AI Agent Sub-process connectors are now available as new, native (`v2`) element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
+The AI Agent Task and AI Agent Sub-process connectors are now available as new, native element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
 
-Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The original (`v1`) element templates are deprecated as of Camunda 8.10.
+Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The legacy element templates are deprecated as of Camunda 8.10.
+
+- This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manually [migrating](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) each element from the still-functioning legacy connector.
+
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) for more details.
 
 :::note
 The legacy connector is deprecated in 8.10 but not removed, and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
@@ -217,6 +262,24 @@ Refer to the updated Helm configuration and secret management documentation for:
 
 Support for physical tenant isolation in 8.10 is added for the Camunda 8 REST API, RDBMS storage, and Document Store.
 
+### Integrations
+
+#### Camunda for Slack
+
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
+
+Camunda for Slack brings tasks, processes, and notifications into Slack through the same App Integrations backend as Microsoft Teams. Everything runs through the `/camunda` slash command, the Camunda direct message, and channel mentions; there is no tab app.
+
+From Slack, you can list and filter tasks, claim and release them, complete a task from a Block Kit modal, start a process, switch organization and cluster, and subscribe a channel or direct message to user task notifications. Slack also works with the App Integrations connector in both directions: a process can send a Slack message, and a Slack message can reach a process.
+
+Microsoft Teams and Slack are independent. You can run either on its own, or both against the same backend.
+
+This feature is released as an early access alpha feature.
+
+<p class="link-arrow">[Camunda for Slack](/components/camunda-integrations/app-integrations/slack.md)</p>
+
 ### Modeler
 
 #### Modeling menu improvements
@@ -302,6 +365,18 @@ Object variables are not flattened into per-property fields, and their raw value
 
 <p class="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
 
+#### Delete a process definition's data via API
+
+<!-- https://github.com/camunda/product-hub/issues/3716 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Optimize now exposes a public API endpoint to delete all analytics data for a given process definition, so you can remove data for retired processes or respond to data removal requests without manually touching Elasticsearch or OpenSearch.
+
+The deletion runs asynchronously: the API accepts and queues the request, then processes it in the background.
+
+<p class="link-arrow">[Delete process definition data](/apis-tools/optimize-api/delete-process-definition-data.md)</p>
+
 ### Orchestration Cluster
 
 #### Centralized Secret Resolution via Zeebe
@@ -312,17 +387,17 @@ Object variables are not flattened into per-property fields, and their raw value
 
 Centralized secret resolution through Zeebe is introduced with this alpha. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
 
-- Reference secrets as `camunda.secrets.NAME` in input mappings, expressions, and output mappings. The legacy `{{secrets.NAME}}` syntax continues to work.
+- Reference secrets as `camunda.secrets.NAME` in input mappings and expressions. The legacy `{{secrets.NAME}}` syntax continues to work.
 - Secrets are resolved automatically for activated jobs and can also be requested through the Gateway APIs `/v2/secrets/resolve` and `/v2/secrets/list`.
 - Resolved values are not written to engine state, exports, backups, Operate, Tasklist, or application logs.
-- Self-Managed deployments support AWS Secrets Manager and GCP Secret Manager with workload identity authentication. A file-based provider is available for development and testing.
+- Self-Managed deployments support AWS Secrets Manager and GCP Secret Manager with workload identity authentication. A file-based provider, backed by a mounted Kubernetes secret or a local directory, is also available and can be used in production as well as for local development.
 - SaaS requires no configuration and uses Camunda’s managed secret backend.
 - Camunda 8 Run uses the file-based provider: create one file per secret (filename = secret name, contents = value), and set `camunda.secrets.stores.file.default.path` to that directory in the Camunda 8 Run application configuration.
 
 **Migration:** Existing processes continue to work without changes. For new processes, use `camunda.secrets.NAME`. To migrate hardcoded or connector-specific credentials, store the value in a supported secret store and replace it with a centralized secret reference.
 
 **Limitations:**
-This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 seconds by default.
+This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 minutes by default.
 
 #### New rebalance API for coordinated leadership transfer
 

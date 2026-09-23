@@ -40,12 +40,6 @@ export const featuresCards = [
 
 export const usingCamundaCards = [
   {
-    link: "./modeler/about-modeler/",
-    title: "Modeler",
-    image: IconModelerImg,
-    description: "Model your BPMN diagrams.",
-  },
-  {
     link: "./concepts/bpmn-dmn-feel/",
     title: "BPMN, DMN, and FEEL",
     image: IconBpmnImg,
@@ -57,6 +51,19 @@ export const usingCamundaCards = [
     title: "Orchestration Cluster",
     image: IconOrchClusterImg,
     description: "Get started with Zeebe, Operate, Tasklist, and Identity.",
+  },
+  {
+    link: "./hub/",
+    title: "Camunda Hub",
+    image: IconConsoleImg,
+    description:
+      "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.",
+  },
+  {
+    link: "./modeler/desktop-modeler/",
+    title: "Desktop Modeler",
+    image: IconModelerImg,
+    description: "Model your BPMN diagrams locally.",
   },
   {
     link: "./connectors/introduction-to-connectors/",
@@ -71,13 +78,6 @@ export const usingCamundaCards = [
     image: IconOptimizeImg,
     description:
       "Business intelligence and analytics for enterprise customers.",
-  },
-  {
-    link: "./hub/",
-    title: "Camunda Hub",
-    image: IconConsoleImg,
-    description:
-      "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.",
   },
 ];
 

@@ -77,7 +77,7 @@ For post-deployment operations, see [back up and restore](/self-managed/operatio
 
 To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
 
-## What is not isolated in 8.10
+## What is not isolated
 
 - Gateways are shared between tenants, so a saturated gateway can still affect multiple tenants.
 - Brokers are co-located and shared infrastructure remains part of the deployment.
@@ -104,12 +104,16 @@ The legacy `/v2/status` endpoint is deprecated. It remains available for the def
 
 When configuring Kubernetes readiness probes, point the probe at `/actuator/health/readiness` for node-level readiness. To check whether a specific Physical Tenant can accept work independently of the node probe, poll `/physical-tenants/{id}/v2/topology` from your own health-check logic.
 
+A node reports ready while at least one of its Physical Tenants is serviceable. If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
+
+Per-tenant isolation of this kind applies to nodes serving two or more Physical Tenants. A node configured with a single tenant keeps the original fail-fast startup behavior. For diagnosis steps, see [troubleshooting](./troubleshooting.md).
+
 ## Document store details
 
 Document stores are declared once in the root `camunda.document.*` catalog. Each Physical Tenant inherits the catalog and overrides only the fields it needs, typically the bucket path or prefix, to ensure its data is written to a distinct location.
 
 Isolation is enforced by validating the resolved `provider, bucket/container, path` tuple at startup. If two tenants resolve to the same tuple, Camunda fails startup and names the conflicting tenants in the error.
 
-For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store storage](./storage-isolation.md#document-store-storage) in storage isolation.
+For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store storage](./storage-isolation.md#document-store-storage).
 
 For the storage backends used by tenant-scoped data, see [secondary storage](../secondary-storage/index.md) and [document handling configuration](../document-handling/configuration/index.md).

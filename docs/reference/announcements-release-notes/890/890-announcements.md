@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Minor release date | End of standard maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
 | ------------------ | --------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2027             | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| 14 April 2026      | 12 October 2027             | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -1610,7 +1610,7 @@ Camunda 8 SaaS clusters running generation `8.9 gen13` or later deliver user tas
 
 Clusters running earlier generations are unaffected and continue to deliver notifications without additional configuration.
 
-**Action:** After a cluster updates to generation `8.9 gen13` or later, an organization admin must turn on **Enable app integrations extensions** for existing [notification rules](/components/camunda-integrations/ms-teams/ms-teams-notifications.md) to keep delivering. Enabling the setting also delivers notifications when an existing task is later assigned to you, and updates notification cards as a task is assigned, completed, or canceled.
+**Action:** After a cluster updates to generation `8.9 gen13` or later, an organization admin must turn on **Enable app integrations extensions** for existing [notification rules](/components/camunda-integrations/app-integrations/notification-rules.md) to keep delivering. Enabling the setting also delivers notifications when an existing task is later assigned to you, and updates notification cards as a task is assigned, completed, or canceled.
 
 <p className="link-arrow">[Enable app integrations extensions](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions)</p>
 

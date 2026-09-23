@@ -83,10 +83,10 @@ With the **Extraction engine** dropdown, you can choose how text is extracted fr
 - **AWS Textract**: Uses Amazon Textract OCR for high-accuracy text extraction from scanned or image-based documents.
 - **Azure Document Intelligence**: Uses Azure AI Document Intelligence for OCR-based text extraction from scanned or image-based documents.
 - **GCP Document AI**: Uses Google Cloud Document AI for OCR-based text extraction from scanned or image-based documents.
-- **ABBYY Vantage**: Uses [ABBYY Vantage](https://www.abbyy.com/vantage/) OCR for text extraction. Unlike provider-specific engines, ABBYY Vantage is available across all cloud providers once its [connector secrets](idp-configuration.md#abbyy-secrets) are configured for your cluster.
+- **ABBYY Vantage**: Uses [ABBYY Vantage](https://www.abbyy.com/vantage/) OCR for text extraction. Unlike provider-specific engines, ABBYY Vantage is available across all cloud providers once its [connector secrets](idp-configuration.md#abbyy-secrets) are configured for your environment's cluster.
 
 :::note
-The available extraction engines depend on your cluster configuration and the cloud provider you select for your document extraction template. AWS Textract, Azure Document Intelligence, and GCP Document AI are only available when using their respective provider, while ABBYY Vantage is available across all providers when its connector secrets are configured.
+The available extraction engines depend on your environment's cluster configuration and the cloud provider you select for your document extraction template. AWS Textract, Azure Document Intelligence, and GCP Document AI are only available when using their respective provider, while ABBYY Vantage is available across all providers when its connector secrets are configured.
 :::
 
 #### Model selection
@@ -152,8 +152,8 @@ To validate the data extraction:
 Publish the document extraction template to make it available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
 
 1. Click **Publish** and select either:
-   - **Publish to project**: Only users in the Camunda Hub project can access the document extraction template.
-   - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
+   - **Publish to workspace**: The document extraction template is made available to all projects within the workspace.
+   - **Publish to organization**: The document extraction template is made available to all workspaces within the organization. This option is only available for Organization Owners or Organization Admins.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
    - **Extraction engine**: Select the text extraction engine to use for the published document extraction template.

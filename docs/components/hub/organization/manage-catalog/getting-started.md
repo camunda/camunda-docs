@@ -33,7 +33,12 @@ This guide assumes you store your catalog assets in a single repository. If you 
 
 ## Use the example repository
 
-To get started, clone the [example catalog repository](https://github.com/camunda/catalog-template). It contains:
+To get started, create your own repository from the [example catalog repository](https://github.com/camunda/catalog-template):
+
+1. On the [example repository page](https://github.com/camunda/catalog-template), click **Use this template > Create a new repository**, and create the repository in your own account or organization. Don't fork the example repository. Use a template so your repository is an independent copy.
+1. (Optional) Clone your new repository to your local machine. This isn't required for the sync, which runs in CI. You only need a local clone to work on assets locally or run the sync script by hand.
+
+The example repository contains:
 
 - Placeholder element templates.
 - A ready-to-use [sync script](https://github.com/camunda/catalog-template/blob/main/scripts/sync-catalog.sh).
@@ -181,7 +186,7 @@ Create and store client credentials securely—for example, as CI/CD secrets—a
 <TabItem value='saas'>
 
 1. [Create new client credentials](/apis-tools/hub-api-saas/authentication.md#create-new-client-credentials) with the Hub API `create` and `update` permissions.
-2. Securely store the `Client ID` and `Client Secret`.
+2. Securely store the `Client ID` and `Client Secret`. The client secret is only shown once. In a pipeline, store them as CI/CD secrets, such as [GitHub Actions secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions), and reference them from your workflow instead of hardcoding them.
 3. Expose the following environment variables in your pipeline:
 
 ```bash
@@ -189,8 +194,9 @@ export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
 export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
 export CAMUNDA_OAUTH_URL="https://login.cloud.camunda.io/oauth/token"
 export CAMUNDA_CONSOLE_OAUTH_AUDIENCE="api.cloud.camunda.io"
-export CAMUNDA_HUB_BASE_URL="https://hub.cloud.camunda.io"
 ```
+
+The sync script defaults `CAMUNDA_HUB_BASE_URL` to the SaaS URL (`https://hub.camunda.io`), so you don't need to set it for SaaS.
 
 </TabItem>
 
@@ -209,7 +215,7 @@ export CAMUNDA_OAUTH_URL="http://localhost:18080/auth/realms/camunda-platform/pr
 export CAMUNDA_HUB_BASE_URL="http://localhost:8088"
 ```
 
-The URLs used in this example are local defaults, for example, `http://localhost:8088` for the API. In a Helm/Kubernetes deployment, use the service or Ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation.
+The URLs used in this example are local defaults, for example, `http://localhost:8088` for the API. In a Helm/Kubernetes deployment, use the service or Ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation. You must set `CAMUNDA_HUB_BASE_URL`, as the sync script defaults it to the SaaS URL.
 
 :::note
 This authorization also adds the required `web-modeler-public-api` audience to tokens issued for this application, so no `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` is needed to request a token during the sync.
