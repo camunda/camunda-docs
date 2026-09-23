@@ -9,8 +9,6 @@ description: "Learn how to restore a Camunda 8 Self-Managed backup using Elastic
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ZeebeGrid from '../../../../components/zeebe/react-components/\_zeebe-card';
-import { esRestoreCards } from '../react-components/\_card-data';
 
 Restore a previous backup of your Camunda 8 Self-Managed components and cluster.
 
@@ -311,7 +309,7 @@ Automatic retries can't help if the problem is the backup itself, for example if
 
    The restore status reports the change as `CANCELLED`, and the cluster stays in recovery mode.
 
-2. Send a new [Restore API request](#3-trigger-the-restore). Because each restore drops the local partition data before it writes the backup data, the new attempt does not build on the partial result of the canceled one, and you can select a different backup target.
+2. Send a new [Restore request](#4-trigger-the-restore). Because each restore drops the local partition data before it writes the backup data, the new attempt does not build on the partial result of the canceled one, and you can select a different backup target.
 
 :::warning
 Don't leave a partially failed restore unfinished. Between canceling a restore and completing a new one, Zeebe's internal data is a mix of restored and pre-restore state and cannot be trusted. Keep the cluster in recovery mode and retry until every partition reaches `RESTORED`. If you switch the cluster back to `PROCESSING` in that state, treat it as unrecoverable and restore again from a clean state.
@@ -349,7 +347,7 @@ Before returning a restored tenant to normal traffic, confirm through tenant-sco
 
 ## Restore Application (Legacy)
 
-### Step 1: Restore Elasticsearch/OpenSearch Snapshots
+### Step 1: Restore Elasticsearch/OpenSearch snapshots
 
 Restore the Elasticsearch/OpenSearch snapshots using the [Restore Elasticsearch/OpenSearch snapshot](./restore-snapshot.md) procedure, then restore the Zeebe cluster and start the components as described below.
 
@@ -364,10 +362,6 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 | Pre-existing data  | Persistent volumes or disks must not contain any pre-existing data.                                                                                                                              |
 | Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](./backup.md#prerequisites).                                                                                  |
 | Components stopped | It’s critical that no Camunda components are running during a Zeebe restore. Restored components may propagate an incorrect cluster configuration, potentially disrupting cluster communication. |
-
-### Restore Zeebe Cluster
-
-In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. This page's [Restore API](#restore-api) tab contains the recovery-mode procedure.
 
 :::note
 During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe Broker in case of a manual deployment.
