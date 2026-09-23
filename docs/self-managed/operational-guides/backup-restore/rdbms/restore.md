@@ -23,8 +23,6 @@ description: "Learn how to restore a Camunda 8 Self-Managed backup using a relat
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ZeebeGrid from '../../../../components/zeebe/react-components/\_zeebe-card';
-import { rdbmsRestoreCards } from '../react-components/\_card-data';
 
 Restore a previous backup of your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, Tasklist, and Admin) when using a relational database management system (RDBMS) as secondary storage.
 
@@ -87,15 +85,20 @@ The response returns the ID of the cluster change and the operations it will app
 {
   "changeId": "7",
   "plannedChanges": [
-    { "operation": "ModeChangeOperation", "mode": "RECOVERING" },
-    { "operation": "AwaitModeChangeOperation", "mode": "RECOVERING" }
+    {
+      "physicalTenantId": "default",
+      "operations": [
+        { "operation": "ModeChangeOperation", "mode": "RECOVERING" },
+        { "operation": "AwaitModeChangeOperation", "mode": "RECOVERING" }
+      ]
+    }
   ]
 }
 ```
 
 </details>
 
-Wait until this change has completed before you trigger the restore. A restore request is only accepted while every broker of the cluster is in recovery mode. Requests sent earlier are rejected with `409`. verifying that all brokers are in recovery mode using either the Cluster API or the Management API.
+Wait until this change has completed before you trigger the restore. A restore request is only accepted while every broker of the cluster is in recovery mode. Requests sent earlier are rejected with `409`. Verify that all brokers are in recovery mode using either the Cluster API or the Management API.
 
 <Tabs groupId="recovery-mode-verification">
 <TabItem value="cluster-api" label="Cluster API" default>
@@ -103,7 +106,7 @@ Wait until this change has completed before you trigger the restore. A restore r
 You can use the [topology API](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx) to verify the state for all partitions and brokers:
 
 ```bash
-curl "${ORCHESTRATION_CLUSTER_API}/v2/topology"
+curl "${ORCHESTRATION_CLUSTER_API}/topology"
 ```
 
 The response shows the current state of all brokers and partitions. In recovery mode, every partition should have the state `recovering`.
@@ -437,9 +440,7 @@ The following prerequisites are required before you can restore a backup:
 It is critical that no Camunda components are running during the restore. Running components may propagate an incorrect cluster configuration, potentially disrupting cluster communication and data consistency.
 :::
 
-## Step 1: Restore Zeebe from its primary storage backup
-
-In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See the [Elasticsearch/OpenSearch Restore API](../elasticsearch/restore.md#restore-api) for the Restore API procedure and its recovery-mode details.
+## Restore Zeebe from its primary storage backup
 
 Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
@@ -739,7 +740,7 @@ Broker's data directory /usr/local/camunda/data is not empty. Aborting restore t
 
 On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted. In such cases, the restore application can be configured to ignore the presence of these files and folders. The configuration option `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder names to ignore. By default, it ignores the `lost+found` folder found on ext4 filesystems. To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.
 
-## Step 2: Start all Camunda 8 components {#start-all-camunda-8-components}
+## Start all Camunda 8 components {#start-all-camunda-8-components}
 
 After both primary and secondary storage are restored, start all Camunda components. Ensure all components are configured to use the restored database instance and that the configuration matches the original deployment.
 
