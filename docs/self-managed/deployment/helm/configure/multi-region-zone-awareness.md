@@ -13,7 +13,7 @@ For what zones are and how the application places partition replicas across them
 
 `global.multiregion` is deprecated since chart v15 (Camunda 8.10). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.partitioning`. The deprecated keys still work and still render; move them when convenient.
 
-Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the broker numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Move them under the new block; the field names and their values are unchanged:
+Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the broker numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Both were renamed when they moved, so the move is not a copy: `regions` became `numberOfZones` and `regionId` became `zoneIndex`. Their values are unchanged.
 
 ```yaml
 # Before
@@ -25,9 +25,11 @@ global:
 # After
 orchestration:
   partitioning:
-    regions: 2
-    regionId: 1
+    numberOfZones: 2
+    zoneIndex: 1
 ```
+
+Keeping the old names under the new block fails the render: `orchestration.partitioning` accepts only `numberOfZones`, `scheme`, `zone`, `zoneIndex` and `zones`, and rejects anything else with `additional properties 'regionId', 'regions' not allowed`.
 
 Both key paths produce the same broker numbering. The deprecated one renders identically and adds a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
 
@@ -124,7 +126,7 @@ The chart rejects the inputs that would otherwise render a cluster that cannot f
 | A zone name that repeats                                                                        | Zone names are member ID prefixes, so a duplicate collapses two zones into one identity space.                                             |
 | A zone with more `numberOfReplicas` than `numberOfBrokers`                                      | A zone cannot hold more replicas of a partition than it has brokers to hold them.                                                          |
 | `orchestration.clusterSize` or `orchestration.replicationFactor` that contradicts the zone list | Both are derived from the zone list in zoned mode, so a stale value would be discarded in silence. Restating the derived total is allowed. |
-| `regions` or `regionId`                                                                         | They belong to the broker numbering that zone awareness replaces.                                                                          |
+| `numberOfZones` or `zoneIndex`                                                                  | They belong to the broker numbering that zone awareness replaces.                                                                          |
 
 The schema also requires each `zones` entry to declare `name`, `numberOfBrokers`, `numberOfReplicas`, and `priority`, with each numeric value at least `1`.
 

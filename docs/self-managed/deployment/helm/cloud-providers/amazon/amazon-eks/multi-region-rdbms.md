@@ -409,7 +409,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 The parts worth reading before you install:
 
-- `orchestration.partitioning.scheme: zone-aware` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the `regions` and `regionId` keys with this scheme, and derives the cluster size, replication factor, and broker node IDs from the zone list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
+- `orchestration.partitioning.scheme: zone-aware` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the `numberOfZones` and `zoneIndex` keys with this scheme, and derives the cluster size, replication factor, and broker node IDs from the zone list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
 - `orchestration.partitioning.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - The AWS Advanced JDBC Wrapper uses `initialConnection,failover`: `initialConnection` discovers the current writer when a broker starts after a switchover, and `failover` follows a writer change on an established connection.
