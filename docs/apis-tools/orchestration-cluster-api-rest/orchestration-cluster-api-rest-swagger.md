@@ -15,7 +15,9 @@ The Orchestration Cluster REST API is documented using the [OpenAPI specificatio
 
 Swagger UI is particularly useful for API discovery, development, and testing workflows before integrating the API into your applications.
 
-## Prerequisites Before using Swagger UI, ensure you have:
+## Prerequisites
+
+Before using Swagger UI, ensure you have:
 
 - **A running Camunda 8 Orchestration Cluster:** SaaS or Self-Managed
 - **Appropriate [access permissions](../../components/concepts/access-control/authorizations.md)** to the resources you want to manage via the API (if authorizations are enabled).
