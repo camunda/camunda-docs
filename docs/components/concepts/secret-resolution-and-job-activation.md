@@ -28,7 +28,7 @@ Secret resolution is available in both SaaS and Self-Managed.
 | Self-Managed | File, AWS, or GCP       | The store type, path, and credentials. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).                                                                                                                                                                   |
 
 :::note
-You can only configure AWS Secrets Manager and GCP Secret Manager stores in Self-Managed deployments.
+In Self-Managed deployments, you can only configure AWS Secrets Manager and GCP Secret Manager stores.
 :::
 
 ## Resolve references before activation
