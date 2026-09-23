@@ -146,9 +146,9 @@ Operate labels each entry in the conversation history simply as `iteration` (for
 
 #### Model reasoning in conversation history
 
-Operate displays readable model reasoning as a static **Thinking** entry before the assistant response. It recognizes assistant history content marked `camunda.agenticai.content.type: reasoning` and displays its non-empty text.
+Operate displays readable model reasoning as a static **Thinking** entry before the assistant’s response. It recognizes non-empty text in the assistant history marked with `camunda.agenticai.content.type: reasoning`.
 
-To configure reasoning, use the new AI Agent element templates introduced in Camunda 8.10. Legacy templates keep working, but don't expose reasoning settings. If you don't see **Thinking**, [upgrade the AI Agent element template](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) and confirm your [model provider](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) returns readable reasoning. Opaque or redacted reasoning isn't displayed.
+To configure reasoning, use the new AI Agent element templates introduced in Camunda 8.10. Legacy templates continue to work but do not expose reasoning settings. If you do not see **Thinking**, [upgrade the AI Agent element template](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) and confirm that your [model provider](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) returns readable reasoning. Opaque or redacted reasoning is not displayed.
 
 #### Visibility for external agents
 
