@@ -47,7 +47,7 @@ https://github.com/camunda/camunda/issues/62266 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-Operate now displays readable model reasoning as an inline **Thinking** entry in the conversation history. AI Agent element templates introduced in 8.10 enable prompt caching where supported. To enable this behavior for a legacy template, [upgrade the template](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md).
+Operate now displays readable model reasoning as an inline **Thinking** entry in the conversation history. Reasoning is enabled by default and does not require a migration.
 
 <p class="link-arrow">[Monitor AI agent reasoning in Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md#step-4-review-the-conversation-history)</p>
 
