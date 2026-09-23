@@ -197,7 +197,7 @@ The Connector Runtime applies the following limits to HTTP Webhook requests:
 | -------------------------- | ------------------------------------------------ | ---------------------- |
 | Non-multipart request body | 10 MB                                            | HTTP `413`             |
 | Multipart request body     | 10 MB total                                      | HTTP `413`             |
-| Multipart file             | 1 MB per file                                    | HTTP `413`             |
+| Multipart file             | 10 MB per file                                   | HTTP `413`             |
 | Request rate               | 1,000 requests per second per registered webhook | HTTP `429`             |
 
 The runtime resolves the endpoint, applies its per-webhook rate limit, and then reads a non-multipart body. Multipart requests are subject to the multipart size limits before they consume a rate-limit permit. Requests to unregistered webhook paths return HTTP `404` without reading the request body. HTTP `404`, `413`, and `429` responses have an empty body.
