@@ -27,7 +27,7 @@ These two choices are independent, so the same model family may be available thr
 | :------------------------------------- | :------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------- |
 | Traffic routed through Amazon Bedrock  | [AWS Bedrock Converse](#aws-bedrock-converse)                       | Running **Claude** models: use [Anthropic](#anthropic)'s AWS Bedrock Mantle backend instead, to keep Anthropic-specific configuration.        |
 | Traffic routed through Microsoft Azure | [OpenAI](#openai)'s Microsoft Foundry (Azure) backend               | Running **Claude** models: use [Anthropic](#anthropic)'s Microsoft Foundry (Azure) backend instead, to keep Anthropic-specific configuration. |
-| Traffic routed through Google Cloud    | [Google Gemini](#google-gemini)'s Enterprise Agent Platform backend | No exception for Gemini models; use the direct Gemini API only if Google Cloud isn't mandated.                                                |
+| Traffic routed through Google Cloud    | [Google Gemini](#google-gemini)'s Enterprise Agent Platform backend | No exception for Gemini models. Use the direct Gemini API only if Google Cloud isn't mandated.                                                |
 | No specific cloud mandate              | The provider matching the model's native wire format                | N/A                                                                                                                                           |
 
 The most capable option within your organization's approved boundary is the correct choice; the native wire format alone doesn't determine it.
@@ -109,10 +109,10 @@ A multi-replica connectors runtime setup means each replica also acquires and ca
 
 Any endpoint implementing the Anthropic Messages API, such as a proxy or gateway in front of Anthropic.
 
-| Field              | Required | Description                                                                         |
-| :----------------- | :------- | :---------------------------------------------------------------------------------- |
-| **API endpoint**   | Yes      | Base URL of the Anthropic-compatible API. `/v1/messages` is appended automatically. |
-| **Authentication** | Yes      | **None** (default), **API key**, or **OAuth 2.0** client credentials.               |
+| Field              | Required | Description                                                                     |
+| :----------------- | :------- | :------------------------------------------------------------------------------ |
+| **API endpoint**   | Yes      | Base URL of the Anthropic-compatible API. The connector appends `/v1/messages`. |
+| **Authentication** | Yes      | **None** (default), **API key**, or **OAuth 2.0** client credentials.           |
 
 Authentication fields per method:
 
@@ -232,10 +232,10 @@ A multi-replica connectors runtime setup means each replica also acquires and ca
 
 Connect to any LLM that exposes an OpenAI-compatible API, including open-weight models such as Qwen, Llama, and Mistral, hosted through Ollama or any compatible inference platform.
 
-| Field              | Required | Description                                                                                                                              |
-| :----------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| **API endpoint**   | Yes      | Base URL of the OpenAI-compatible API. `/chat/completions` or `/responses` is appended automatically, depending on the selected **API**. |
-| **Authentication** | Yes      | **None** (default), **API key**, or **OAuth 2.0** client credentials.                                                                    |
+| Field              | Required | Description                                                                                                                          |
+| :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| **API endpoint**   | Yes      | Base URL of the OpenAI-compatible API. The connector appends `/chat/completions` or `/responses`, depending on the selected **API**. |
+| **Authentication** | Yes      | **None** (default), **API key**, or **OAuth 2.0** client credentials.                                                                |
 
 Authentication fields per method:
 
