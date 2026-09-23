@@ -1,7 +1,7 @@
 ---
 id: secret-management
-title: "Secret management"
-description: "Learn about Camunda's approach to keeping secrets out of process models, variables, and configuration, and where to reference, store, resolve, and secure them in SaaS and Self-Managed."
+title: "Secrets"
+description: "Learn about using secrets to keep sensitive values out of process models, variables, and configuration, and where to reference, store, resolve, and secure secrets in SaaS and Self-Managed."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
@@ -10,7 +10,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## About
 
-With secret management, you can keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files.
+You can use and manage secrets to keep keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files.
 
 - Instead of writing a value into a model, you reference a secret by name. Camunda resolves that reference to its value at runtime.
 - The value is supplied only where it is needed, so it is never stored in the process itself.
@@ -23,7 +23,7 @@ For precise definitions of secret-related terms, see the [secret reference](/ref
 
 ## Reference a secret
 
-You reference a secret with a [secret reference](/reference/glossary.md#secret-reference).
+You can reference a secret in Camunda using a [secret reference](/reference/glossary.md#secret-reference).
 
 - This is a placeholder written into a model that stands in for a secret value.
 - The recommended syntax is `camunda.secrets.<name>`. This is resolved centrally by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster).
@@ -34,11 +34,10 @@ You reference a secret with a [secret reference](/reference/glossary.md#secret-r
 | `camunda.secrets.<name>` | [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) | <p>Input mapping FEEL expressions, and connector or credential fields backed by a `SECRET_REFERENCE` cluster variable.</p><p><ul><li>[Secret resolution](secret-resolution.md)</li><li>[Secret reference (Orchestration Cluster)](/reference/glossary.md#secret-reference-orchestration-cluster).</li></ul></p> |
 
 :::note
-
-- An older `{{secrets.<name>}}` syntax, resolved by the connector runtime, remains supported for existing connector models. See [Legacy connector secrets](#legacy-connector-secrets).
-- For a working example of referencing `camunda.secrets.<name>` in a model, including the FEEL expression rules, see [Secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings).
-
+An older `{{secrets.<name>}}` syntax, resolved by the connector runtime, remains supported for existing connector models. See [Legacy connector secrets](#legacy-connector-secrets).
 :::
+
+For a working example of referencing `camunda.secrets.<name>` in a model, including the FEEL expression rules, see [Secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings).
 
 ## Store and create secrets
 
@@ -75,15 +74,11 @@ In Self-Managed, a connector secret provider supplies the values behind legacy r
 
 Compared to `camunda.secrets.<name>`, the legacy syntax has the following limitations:
 
-| Limitation                               | Description                                                                                                                                                                                                                                                                                                                                                                                                |
-| :--------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **No field-scoped resolution**           | <p>A legacy reference can resolve outside the field it was written in.</p><p>The [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) introduced with [security notice 61](/reference/notices.md#notice-61) mitigates this; `camunda.secrets.<name>` scopes resolution to the field instead. See [secret resolution](secret-resolution.md#reference-syntax).</p> |
-| **No resource-based authorization**      | Legacy secrets have no `SECRET` resource permissions and rely on the secret filter instead. See [control access to secrets](#control-access-to-secrets).                                                                                                                                                                                                                                                   |
-| **No external secret store integration** | Values come from connector secret providers, not from a File, AWS Secrets Manager, or GCP Secret Manager store. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) for the stores `camunda.secrets.<name>` supports.                                                                                                            |
-
-:::note
-`camunda.secrets.<name>` values live in the Orchestration Cluster's configured secret store, not in a connector-attached provider.
-:::
+| Limitation                           | Description                                                                                                                                                                                                                                                                                                                                                                                                |
+| :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No field-scoped resolution           | <p>A legacy reference can resolve outside the field it was written in.</p><p>The [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) introduced with [security notice 61](/reference/notices.md#notice-61) mitigates this; `camunda.secrets.<name>` scopes resolution to the field instead. See [secret resolution](secret-resolution.md#reference-syntax).</p> |
+| No resource-based authorization      | Legacy secrets have no `SECRET` resource permissions and rely on the secret filter instead. See [control access to secrets](#control-access-to-secrets).                                                                                                                                                                                                                                                   |
+| No external secret store integration | Values come from connector secret providers, not from a File, AWS Secrets Manager, or GCP Secret Manager store. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) for the stores `camunda.secrets.<name>` supports.                                                                                                            |
 
 :::tip Migrating from the legacy syntax?
 In Self-Managed, [set up the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) and move your values there first. Then follow [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md), which covers the step-by-step process, including the connector runtime's fallback mode for incremental migration.

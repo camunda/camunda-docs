@@ -60,6 +60,6 @@ Before `camunda.secrets.<name>` can resolve, its store must hold the secret valu
 
 ## Related resources
 
-- [Secret management](/components/concepts/secret-management.md) gives an overview of secret references, stores, and access control across Camunda 8.
+- [Secrets](/components/concepts/secret-management.md) provides an overview of secret references, stores, and access control across Camunda.
 - [Using `camunda.secrets.*` references](index.md#using-camundasecrets-references) covers how the two syntaxes coexist on the connector runtime.
 - [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets) covers the legacy secret provider configuration.

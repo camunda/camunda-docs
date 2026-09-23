@@ -227,7 +227,7 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         {
           type: "category",
-          label: "Secret management",
+          label: "Secrets",
           link: {
             type: "doc",
             id: "components/concepts/secret-management",
