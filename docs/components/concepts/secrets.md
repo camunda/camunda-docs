@@ -1,10 +1,11 @@
 ---
 id: secrets
 title: "Secrets"
-description: "Use and manage secrets to keep sensitive values out of process models, variables, and configuration, and where to reference, store, resolve, and secure secrets in SaaS and Self-Managed."
+description: "Use secrets to keep sensitive values out of process models, variables, and configuration. Learn how to reference a secret, where values are stored, how references resolve, and how access is controlled."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import SecretsOverviewImg from './assets/secrets-overview.png';
 
 <PageDescription />
 
@@ -12,10 +13,15 @@ import PageDescription from '@site/src/components/PageDescription';
 
 You can use and manage secrets to keep keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files.
 
-- Instead of writing a value into a model, you reference a secret stored in a secret store by name. Camunda resolves that reference to its value at runtime.
-- The value is supplied only where it is needed, so it is never stored in the process itself.
+Instead of writing a value into a model, you reference a secret stored in a secret store by name. Camunda resolves that reference to its value at runtime. The value is supplied only where it is needed, so it is never stored in the process itself.
 
-The following sections cover how to reference a secret, where secret values are stored in each offering, how references are resolved, and how access to secrets is controlled.
+<!-- Source diagram: https://miro.com/app/board/uXjVHjBNPcc=/?share_link_id=404465590432 -->
+
+<img src={SecretsOverviewImg} alt="Secrets overview" title="Secrets overview" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
+
+1. Use a stored secret (for example, `MY_SECRET`) in a model as a secret reference (`camunda.secrets.MY_SECRET`).
+1. Once deployed and when the process instance starts, the Orchestration Cluster logs, stores, and exports the secret reference.
+1. Once the job is activated, the secret reference is resolved and replaced with the actual secret value from the secret store.
 
 :::tip Terminology
 For precise definitions of secret-related terms, see the [secret reference](/reference/glossary.md#secret-reference) glossary entries.
