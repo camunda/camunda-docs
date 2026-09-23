@@ -16,7 +16,6 @@ import { storageCards, esCards, rdbmsCards } from './react-components/\_card-dat
 This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. Automate backup and restore procedures with tools that meet your organization's requirements. The procedure is influenced depending on the selection of the cluster's secondary storage.
 
 <ZeebeGrid zeebe={storageCards} />
-
 :::tip Disaster recovery context
 If you are using backups as the foundation of a cross-region recovery strategy, see [Cold Recovery](../../concepts/multi-region/cold-recovery.md) for the architecture, RTO/RPO targets, and recovery flow. Cold Recovery builds on the procedures in this guide.
 :::
@@ -85,7 +84,7 @@ Optimize is not covered by these REST endpoints. Back it up with its own [manage
 
 The management API is an extension of the [Spring Boot Actuator](https://docs.spring.io/spring-boot/reference/actuator/index.html), typically used for monitoring and other operational purposes. This is not a public API and not exposed. You will need direct access to your Camunda cluster to be able to interact with these management APIs. This is why you'll often see the reference to `localhost`.
 
-For the Orchestration Cluster, the management API's backup and exporting-control endpoints are a backward-compatible alternative to the REST API above. Existing automation built against them continues to work; new automation should use the REST API instead. Deprecation of the management API's backup and exporting endpoints is not currently planned, but new capabilities such as [Physical Tenants](#back-up-a-cluster-with-multiple-physical-tenants) are only available through the REST API.
+For the Orchestration Cluster, the management API's backup and exporting-control endpoints are a backward-compatible alternative to the REST API above. Existing automation built against them continues to work; new automation should use the REST API instead. Deprecation of the management API's backup and exporting endpoints is not currently planned, but new capabilities such as [Physical Tenants](#multiple-physical-tenants) are only available through the REST API.
 
 | Management API call                        | REST API equivalent                                                                                                       |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
@@ -204,6 +203,10 @@ When a tenant has scheduled or continuous backups enabled, backup IDs are genera
 Configure non-overlapping backup locations before starting the cluster. Camunda validates the resolved location per tenant at startup and fails to start if two tenants resolve to the same one. For the isolation rules and configuration examples, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).
 
 <!-- TODO(physical-tenants-day-2): Add concrete per-tenant backup-store configuration properties and artifact examples for runtime and history backups. Owner/reviewer: Houssain Barouni. -->
+
+### Choose a restore approach
+
+With Camunda 8.10 and the introduction of the Restore API, there are now two ways to restore Zeebe partitions, the Restore API and the legacy Restore Application. Using the Restore API means that the brokers do not need to undergo a restart and can continue service other physical tenants while the restore is in progress. The legacy Restore Application, on the other hand, requires stopping all brokers to perform the restore.
 
 ### ContextPath
 
