@@ -18,9 +18,24 @@ With Optimize, review heatmap displays for instances which took longer than aver
 
 For an in-depth overview of Optimize’s capabilities, visit our [Optimize documentation](/components/optimize/what-is-optimize.md).
 
-## Set up
+## Before you begin
 
-Within Camunda 8, you can launch Optimize from Camunda Hub — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md) before getting started with Optimize for SaaS users.
+Ensure you’ve [created a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md) before getting started with Optimize for SaaS users.
+
+## Open Optimize
+
+From Camunda Hub, you can access all your clusters and navigate to any running instance of Optimize:
+
+1. Log in to Camunda Hub.
+1. In the left navigation under **Console**, click **Clusters**.
+1. Select a cluster. Each cluster contains its own instance of Optimize.
+1. On the **Optimize** card, click **Launch**. This opens the cluster's Optimize instance.
+
+:::tip
+If the cluster is paused, you won't see a **Launch** button. You must [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) to access its components.
+:::
+
+## Set up
 
 :::note
 So long as you are operating with [Camunda 8 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.

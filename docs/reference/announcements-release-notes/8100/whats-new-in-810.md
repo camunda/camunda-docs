@@ -684,6 +684,12 @@ Two changes come with this:
 
 <p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
 
+## Camunda for Slack
+
+Camunda for Slack joins Camunda for Microsoft Teams as a second chat platform served by the same App Integrations backend. From Slack, you can browse and complete tasks, start a process, switch organization and cluster, and subscribe a channel or direct message to notifications, all through the `/camunda` slash command and the Camunda direct message. Microsoft Teams and Slack are independent, so you can run either on its own, or both.
+
+<p class="link-arrow">[Camunda for Slack](/components/camunda-integrations/app-integrations/slack.md)</p>
+
 ## Helm chart deployment
 
 Important changes to Helm chart deployment in 8.10 are as follows:

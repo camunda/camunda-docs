@@ -11,7 +11,7 @@ For the release-level summary of this removal, see the [8.10 release announcemen
 ## Current alternatives
 
 - For authenticated users inside your organization, link a Camunda Form to a start event and start the process directly [in Tasklist](/components/tasklist/userguide/starting-processes.md).
-- For public-facing use cases, build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+- For public-facing use cases, build your own application with [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 ## If you are migrating from an older version
 
