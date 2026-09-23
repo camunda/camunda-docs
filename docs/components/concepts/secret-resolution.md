@@ -29,7 +29,7 @@ Desktop Modeler and Camunda Hub flag legacy secret usage when the diagram's sele
 Secret resolution is available in both SaaS and Self-Managed.
 
 - See [availability](/components/concepts/secret-resolution-and-job-activation.md#availability) for what each offering provides and what you configure.
-- For an overview of how secrets work in Camunda, including where values are stored and created, see [secret management](secret-management.md).
+- For an overview of how secrets work in Camunda, including where values are stored and created, see [secrets](secrets.md).
 
 ## Reference syntax
 

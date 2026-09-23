@@ -1,5 +1,5 @@
 ---
-id: secret-management
+id: secrets
 title: "Secrets"
 description: "Use and manage secrets to keep sensitive values out of process models, variables, and configuration, and where to reference, store, resolve, and secure secrets in SaaS and Self-Managed."
 ---
