@@ -124,7 +124,7 @@ Authentication fields per method:
   - **Client secret**: the client secret of the OAuth client.
   - **Audience**: (optional) the unique identifier of the target API. Required by some authorization servers only.
   - **Client authentication**: whether to send the client credentials as a Basic authentication header (default) or in the request body.
-  - **Scopes**: (optional) a comma-separated list of scopes to request, for example `read:models`.
+  - **Scopes**: (optional) a space-separated list of scopes to request, for example `read:models read:deployments`.
 
 </TabItem>
 </Tabs>
@@ -239,7 +239,7 @@ Connect to any LLM that exposes an OpenAI-compatible API, including open-weight 
 
 Authentication fields per method:
 
-- **None**: sends no credentials, for an endpoint that doesn't require them.
+- **None**: sends no credentials of your own. The connector still sends a placeholder `Authorization: Bearer not-required` header, which self-hosted no-auth servers such as Ollama or LM Studio ignore.
 - **API key**: sends the configured API key with each request.
 - **OAuth 2.0**: requests a bearer token through the [OAuth 2.0 client credentials flow](https://www.rfc-editor.org/rfc/rfc6749#section-4.4) and sends it with each request.
   - **OAuth 2.0 token endpoint**: the token endpoint of the authorization server.
@@ -247,7 +247,7 @@ Authentication fields per method:
   - **Client secret**: the client secret of the OAuth client.
   - **Audience**: (optional) the unique identifier of the target API. Required by some authorization servers only.
   - **Client authentication**: whether to send the client credentials as a Basic authentication header (default) or in the request body.
-  - **Scopes**: (optional) a comma-separated list of scopes to request, for example `read:models`.
+  - **Scopes**: (optional) a space-separated list of scopes to request, for example `read:models read:deployments`.
 
 </TabItem>
 </Tabs>
