@@ -22,7 +22,7 @@ In this example, you'll build a form to help with a task in obtaining an email m
 
 ### Build your form
 
-Within Forms, can add text fields, numerical values, checkboxes, radio elements, selection menus, text components, and buttons.
+Within Forms, you can add text fields, numerical values, checkboxes, radio elements, selection menus, text components, and buttons.
 
 1. From the **Components** palette on the left, drag and drop a **Text area** to the **Form definition** editor.
 1. Select the **Text area**.
