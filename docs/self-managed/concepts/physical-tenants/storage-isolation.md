@@ -631,7 +631,7 @@ keyPrefix='tenant-a/']
 
 ## Operational considerations
 
-For the backup, restore, and scaling procedures that use these storage locations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
+For the backup, restore, and scaling procedures that use these storage locations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 ### Backup and restore
 
@@ -649,7 +649,7 @@ pg_dump -h db.example.com -U user tenant_a_schema > backup.sql
 aws s3 sync s3://camunda-documents/tenant-a/ ./backup/
 ```
 
-For tenant-scoped and cluster-wide backup and restore endpoints, see [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants).
+For tenant-scoped and cluster-wide backup and restore endpoints, see [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants).
 
 ### Cross-tenant isolation
 

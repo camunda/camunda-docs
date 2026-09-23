@@ -36,7 +36,7 @@ Cluster admin protects the operations served under the `/cluster/v2/...` path pr
 
 Each cluster-wide endpoint also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin operation to a single Physical Tenant without switching to the tenant-scoped API. Omitting the parameter targets every Physical Tenant.
 
-For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
+For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
 
 For request and response schemas, see the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) reference.
 
