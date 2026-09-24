@@ -326,7 +326,7 @@ When you click on the event with **Slack inbound connector** applied to it, a ne
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use Slack inbound connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, Slack inbound connector deployments and URLs will not be displayed in Modeler.
+In that case, Slack inbound connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 ## Wiring with Slack

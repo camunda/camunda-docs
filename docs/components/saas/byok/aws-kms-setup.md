@@ -25,13 +25,14 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
 ## Step 1: Create a Camunda 8 SaaS Orchestration cluster
 
 1. Sign in to the [Camunda Hub](https://console.camunda.io/).
-2. Navigate to the **Cluster** section and click **Create new cluster**.
-3. Select an AWS Region for your cluster.
-4. Choose **Single region** or **Dual region backup**.
+1. In the left navigation under **Console**, click **Clusters**.
+1. Click **Create cluster**.
+1. Select an AWS Region for your cluster.
+1. Choose **Single region** or **Dual region backup**.
    - Dual region requires one key per region; keys can be separate.
-5. Under **Encryption at rest**, choose **External**.  
+1. Under **Encryption at rest**, choose **External**.  
    ![external option encryption at rest](./img/external-encryption.png)
-6. Click **Create cluster**.
+1. Click **Create cluster**.
 
 After creation, note the **AWS Role ARN** displayed in Camunda Hub for your cluster. The ARN uses the following format:
 
@@ -208,8 +209,7 @@ Once a key is applied, it cannot be edited or replaced. To change keys, you must
 
 ## Step 4: Verify encryption and logging
 
-- In **Camunda Hub**, check the cluster details **Encryption at rest** tab to confirm the **AWS KMS key ARN** is applied correctly.  
-  ![cluster details page](./img/cluster-details-page.png)
+- In **Camunda Hub**, check the cluster details **Encryption at rest** tab to confirm the **AWS KMS key ARN** is applied correctly.
 - In AWS, verify key usage:
   1. Navigate to **Customer managed keys**.
   2. Select your key and view **Key policy** and **Key usage** tabs.
