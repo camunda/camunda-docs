@@ -72,9 +72,9 @@ flowchart TD
 
 For most full deployments, configure both Management Identity and Admin.
 
-:::tip Private or internal CA
-If you deploy with the Helm chart and your IdP presents a certificate signed by a private or internal certificate authority, Camunda components won't trust it by default, causing `PKIX path building failed` errors. Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) before connecting either subsystem to your IdP.
-:::
+If you deploy with the Helm chart and your IdP presents a certificate signed by a private or internal certificate authority, Camunda components don't trust certificates signed by that CA by default. This can cause `PKIX path building failed` errors.
+
+Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) before connecting either subsystem to your IdP.
 
 ## Key terms
 
