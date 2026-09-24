@@ -11,7 +11,7 @@ mdx:
 
 v10 tracks Camunda 8.10. Identifier arguments moved from plain `str` to **semantic types**, `get_resource_content` now returns an object instead of a `str`, and 26 model classes were renamed (the old names still work, with a deprecation warning). No client method or model class was removed.
 
-**→ See [MIGRATION.md](MIGRATION.md) for the full guide**, including the complete list of affected methods.
+**→ See [MIGRATION.md](https://github.com/camunda/orchestration-cluster-api-python/blob/main/MIGRATION.md) for the full guide**, including the complete list of affected methods.
 
 The common case is wrapping an identifier at the boundary:
 
