@@ -1,10 +1,10 @@
 ---
 id: connect-to-camunda-8
 title: Connect to Camunda 8
-description: "Set up a connection from Desktop Modeler to Camunda 8 Orchestration Clusters."
+description: "Set up a connection from Desktop Modeler to Camunda."
 ---
 
-To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to a Camunda 8 Orchestration Cluster. Follow the steps below to connect to **Camunda 8 SaaS**. To connect to a local installation, visit the [Camunda 8 Self-Managed guide](../../../self-managed/components/modeler/desktop-modeler/connect-to-self-managed.md).
+To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to Camunda. Follow the steps below to connect to **Camunda 8 SaaS**. To connect to a local installation, visit the [Camunda 8 Self-Managed guide](../../../self-managed/components/modeler/desktop-modeler/connect-to-self-managed.md).
 
 1. Click the connection selector. For new installations, this will show **No connection**. If you have previously selected a connection, it will show the name of that connection.
 
@@ -20,7 +20,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    ![Connection manager showing add button](./img/connection-manager-add.png)
 
-4. Enter a name, the cluster URL, and the credentials (client ID and client secret) for your [API client](../../console/manage-clusters/manage-api-clients.md). Optionally enter the tenant ID.
+4. Enter a name, the connection URL, and the credentials (client ID and client secret) for your [API client](../../console/manage-clusters/manage-api-clients.md). Optionally enter the tenant ID.
 
    ![Connection manager with new connection information filled in](./img/connection-manager-new-connection-loading.png)
 
@@ -29,7 +29,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
    :::
 
    Desktop Modeler automatically validates the connection.
-   If you have issues connecting to the cluster, see the [troubleshooting page](./troubleshooting.md#debug-zeebe-connection-issues).
+   If you have issues connecting, see the [troubleshooting page](./troubleshooting.md#debug-zeebe-connection-issues).
 
    ![Connection manager showing connection error](./img/connection-manager-new-connection-error.png)
 
