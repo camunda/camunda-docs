@@ -770,17 +770,15 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### OIDC redirect URI must include a callback path
+#### Orchestration Cluster warns about an incorrect OIDC configuration at startup
 
-The Orchestration Cluster validates the OIDC redirect URI at startup. It does not start if the value has no callback path. The cluster serves the callback at `/sso-callback`. This rule is not new: such a value also could not complete a browser login on 8.9. 8.10 reports the value at startup, and not at the next login. A cluster that only serves API clients never uses its redirect URI, so an incorrect value can stay unknown until the upgrade. The default value `{baseUrl}/sso-callback` is correct, and so are Helm deployments that set `orchestration.security.authentication.oidc.redirectUrl`.
+The Orchestration Cluster checks its OIDC configuration at startup and writes a warning for each problem it finds, such as a missing client ID, an incomplete set of endpoints, or a redirect URI that cannot expand to a usable callback URL. The cluster still starts. A redirect URI with no callback path falls back to `{baseUrl}/sso-callback`, which is the only callback path the cluster serves. Any other unusable value stays as configured, and the login fails later.
 
-**Action:** Check `camunda.security.authentication.oidc.redirect-uri`, and the same property of each configured provider, before upgrading.
-
-<p className="link-arrow">[OIDC redirect URI in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#oidc-redirect-uri-must-include-a-callback-path)</p>
+**Action:** Review your startup logs after the upgrade. The warnings come from the logger `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory`.
 
 <p className="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
 

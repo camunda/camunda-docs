@@ -87,6 +87,18 @@ The Orchestration Cluster contacts an OIDC provider at the first request that ne
 
 <p class="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
 
+#### Startup warns about an incorrect OIDC configuration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+The Orchestration Cluster checks its OIDC configuration at startup, without contacting the provider, and writes a warning for each problem it finds. The cluster still starts.
+
+- The checks cover the client ID, the set of endpoints, the scope, and the shape of the redirect URI.
+- A redirect URI with no callback path falls back to `{baseUrl}/sso-callback`, which is the only callback path the cluster serves. Any other unusable value stays as configured, and the login fails later.
+- The warnings come from the logger `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory`.
+
+<p class="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
+
 ## 8.10.0-alpha5
 
 | Release date     | Changelog(s)                                                                                        | Blog |
