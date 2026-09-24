@@ -34,7 +34,9 @@ Camunda licensing does not depend on the provisioned hardware resources, making 
 
 ## Baseline performance
 
-Considering this [baseline resource configuration](#baseline-resource-configuration), you can expect the following **sustained** performance: a reliability target this configuration is continuously proven to hold, not the hardware's absolute ceiling. For the maximum throughput this configuration can reach under stress (using a much simpler process), see the `max`/stress variant in [How we test](#how-we-test).
+With this [baseline resource configuration](#baseline-resource-configuration), you can expect the following **sustained** performance. This is a reliability target that the configuration has consistently demonstrated it can maintain, not the hardware’s absolute limit.
+
+For the maximum throughput this configuration can achieve under stress using a much simpler process, see the `max`/stress variant in [How we test](#how-we-test).
 
 | Metric                                          | Value                                          |
 | ----------------------------------------------- | ---------------------------------------------- |
@@ -51,7 +53,9 @@ The realistic reference process starts one root process instance, which spawns 5
 
 ## How we test
 
-Camunda runs these load tests as part of its **reliability testing** practice: the goal is to catch performance regressions, memory leaks, and configuration issues before customers see them, and to confirm the system performs within its bounds over long periods of continuous operation, not to produce a one-off benchmark number for this page. The numbers here describe a configuration Camunda has repeatedly proven can sustain this load reliably.
+Camunda runs these load tests as part of its **reliability testing** practices. The goal is to detect performance regressions, memory leaks, and configuration issues before they affect customers, and to confirm that the system performs within its expected bounds over extended periods of continuous operation—not to produce a one-off benchmark for this page.
+
+The numbers presented here reflect a configuration that Camunda has repeatedly demonstrated can sustain this load reliably.
 
 These tests run on a dedicated Kubernetes cluster, using the same [load-tester](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) application and [Helm-based setup](https://github.com/camunda/camunda/blob/main/load-tests/README.md) used to validate every release before it ships. Reliability testing focuses on two test types, run against `main` and every supported `stable/*` branch:
 
@@ -62,7 +66,11 @@ These tests run on a dedicated Kubernetes cluster, using the same [load-tester](
 
 <sup>\*</sup> One root process instance per second fans out into 50 sub-process instances via call activities, so completed PI/s includes both.
 
-The endurance run is what backs the numbers on this page: a new instance is created every Monday and runs for four weeks per variant, so a configuration only counts as validated once it has held up under continuous, production-like load rather than a short burst. The stress run answers a different question: how far the system can be pushed. Its 300 PI/s ceiling is not a number to provision for.
+The endurance run supports the numbers on this page:
+
+- A new instance is created every Monday for each variant and runs for four weeks.
+- A configuration is considered validated only after sustaining a continuous, production-like load—not merely a short burst.
+- The stress run answers a different question: how far can the system be pushed? Its ceiling of 300 PI/s is not a target for capacity planning.
 
 See [reliability testing](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md) for the full test-type taxonomy and [load test metrics](https://github.com/camunda/camunda/blob/main/load-tests/docs/metrics.md) for how a run is judged healthy.
 
@@ -106,9 +114,9 @@ The following configuration is the exact Helm values Camunda runs in its continu
 |                           | Disk request \[GB\] |         |   256 |
 
 :::note
-Elasticsearch is deliberately over-provisioned here: our test harness runs the same Elasticsearch sizing whether or not Optimize is enabled, so it never becomes the bottleneck during stress testing. If you're not running Optimize, you can generally start smaller (see [Elasticsearch scaling](#elasticsearch-scaling)) and scale up as your data volume grows.
+Elasticsearch is deliberately overprovisioned in this configuration. Our test harness uses the same Elasticsearch sizing regardless of whether Optimize is enabled, ensuring that Elasticsearch does not become a bottleneck during stress testing. If you do not use Optimize, you can generally start with fewer resources (see [Elasticsearch scaling](#elasticsearch-scaling)) and scale up as your data volume grows.
 
-Identity and Keycloak (with its bundled PostgreSQL, not itemized here) are included because our test harness always authenticates via OIDC, matching a production-like setup. If you plan to use your own external identity provider instead of the bundled Keycloak, you can drop this row entirely.
+Identity and Keycloak, including Keycloak’s bundled PostgreSQL database, which is not itemized here, are included because our test harness always authenticates through OIDC, reflecting a production-like setup. If you plan to use an external identity provider instead of the bundled Keycloak, you can omit this row entirely.
 :::
 
 </TabItem>
@@ -151,8 +159,12 @@ The following configuration is the exact Helm values Camunda runs in its continu
 |                           | Disk request \[GB\] |         |   256 |
 
 :::note
-The Elasticsearch sizing above is identical to the without-Optimize configuration: our test harness runs the same Elasticsearch sizing whether or not Optimize is enabled, so it never becomes the bottleneck during stress testing. The same applies to Identity and Keycloak: drop that row if you plan to use your own external identity provider. The Orchestration Cluster, Connectors, and Optimize rows reflect the exact Helm values used in our continuous realistic-load tests; retention is configured at 1 day for the Camunda Exporter (3 days for the legacy Elasticsearch exporter, where still applicable) to give Optimize's importer time to catch up before data is cleaned up. See [Elasticsearch scaling](#elasticsearch-scaling) for how retention affects disk sizing. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+The Elasticsearch sizing above is identical to that in the configuration without Optimize. Our test harness uses the same Elasticsearch sizing regardless of whether Optimize is enabled, ensuring that Elasticsearch does not become a bottleneck during stress testing.
+
+The same applies to Identity and Keycloak. You can omit these components if you plan to use an external identity provider.
 :::
+
+The Orchestration Cluster, Connectors, and Optimize values match the exact Helm values used in our continuous, realistic-load tests. Retention is set to one day for the Camunda Exporter and three days for the legacy Elasticsearch exporter, where still applicable. This gives the Optimize importer time to catch up before the data is removed. See [Elasticsearch scaling](#elasticsearch-scaling) for information about how retention affects disk sizing. Day-based metrics assume that the load is distributed evenly over 24 hours.
 
 </TabItem>
 
@@ -345,7 +357,7 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 
 - **Memory:** Increase Elasticsearch memory to store more historical data without performance degradation.
 - **Nodes:** Add Elasticsearch statefulset replicas for more IOPS and query throughput.
-- **Disk size:** Increase disk size based on your data retention requirements. Our own tests use short retention (1 day for the Camunda Exporter) specifically to keep test clusters from filling up; with Optimize enabled and a realistic payload (~11 KB), a much smaller 128 Gi disk can still fill in under 12 hours at 1 PI/s if you configure a longer retention (for example, 30 days) than our own tests use.
+- **Disk size:** Increase disk size based on your data retention requirements. Our tests use a short retention period—one day for the Camunda Exporter—to prevent test clusters from filling up. With Optimize enabled and a realistic payload of approximately 11 KB, even a 128 GiB disk can fill up in under 12 hours at 1 PI/s if you configure a longer retention period, such as 30 days.
 - **Disk type:** Use SSDs for Elasticsearch storage. Disk latency, not throughput, is the critical factor. HDD-backed Elasticsearch has been observed to cause 8-10s flush durations, a growing export backlog, increased broker memory from in-flight records, and up to ~70% throughput degradation versus an equivalent SSD setup. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for details, and [Export pipeline](data-flow.md#export-pipeline) for background on how slow secondary storage affects overall throughput.
 - **Index replicas:** The disk estimates in the baseline tables above do not account for index-level replicas. In multi-node clusters, configure at least one replica per index for fault tolerance: each replica stores a full copy of the primary shard data, approximately doubling total disk usage. See [managing replicas](/self-managed/concepts/secondary-storage-management.md#replicas).
 
