@@ -415,7 +415,7 @@ If the change started by `PUT /actuator/cluster/zones` stays `IN_PROGRESS`, a pa
 
 Only one configuration change can run at a time, so don't send another zone migration request while the change is `IN_PROGRESS`.
 
-You can cancel a change with `DELETE /actuator/cluster/changes/<changeId>`, but cancelling doesn't revert the operations already applied and leaves the cluster in an intermediate state that needs manual intervention. Only cancel a change that can't make progress, and contact Camunda support before you do.
+You can cancel a change with `DELETE /actuator/cluster/changes/<changeId>`, but canceling doesn't revert the operations already applied and leaves the cluster in an intermediate state that needs manual intervention. Only cancel a change that can't make progress, and contact Camunda support before you do.
 
 ### Numbered brokers were removed too early
 
