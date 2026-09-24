@@ -415,13 +415,13 @@ Refer to your identity provider documentation for configuring mutual TLS authent
 ### Step 2b: Configure the Orchestration Cluster connection for SaaS
 
 **Use for:** Camunda 8 SaaS environments.
-Get the values below from your [Camunda Console client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client).
+Get the values below from your [Camunda Hub client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client).
 
 ```java
-private static final String CAMUNDA_CLUSTER_ID = "[Cluster ID from Console]";
-private static final String CAMUNDA_CLIENT_ID = "[Client ID from Console]";
-private static final String CAMUNDA_CLIENT_SECRET = "[Client Secret from Console]";
-private static final String CAMUNDA_CLUSTER_REGION = "[Cluster Region from Console]";
+private static final String CAMUNDA_CLUSTER_ID = "[Cluster ID from Hub]";
+private static final String CAMUNDA_CLIENT_ID = "[Client ID from Hub]";
+private static final String CAMUNDA_CLIENT_SECRET = "[Client Secret from Hub]";
+private static final String CAMUNDA_CLUSTER_REGION = "[Cluster Region from Hub]";
 
 public static void main(String[] args) {
 
@@ -450,12 +450,12 @@ public static void main(String[] args) {
 You can also set connection details via environment variables to create the client more simply:
 
 ```bash
-export CAMUNDA_GRPC_ADDRESS='[Orchestration Cluster gRPC Address from Console]'
-export CAMUNDA_REST_ADDRESS='[Orchestration Cluster REST Address from Console]'
-export CAMUNDA_OAUTH_URL='[OAuth URL from Console]'
-export CAMUNDA_TOKEN_AUDIENCE='[Audience from Console - default: zeebe.camunda.io]'
-export CAMUNDA_CLIENT_ID='[Client ID from Console]'
-export CAMUNDA_CLIENT_SECRET='[Client Secret from Console]'
+export CAMUNDA_GRPC_ADDRESS='[Orchestration Cluster gRPC Address from Hub]'
+export CAMUNDA_REST_ADDRESS='[Orchestration Cluster REST Address from Hub]'
+export CAMUNDA_OAUTH_URL='[OAuth URL from Hub]'
+export CAMUNDA_TOKEN_AUDIENCE='[Audience from Hub - default: zeebe.camunda.io]'
+export CAMUNDA_CLIENT_ID='[Client ID from Hub]'
+export CAMUNDA_CLIENT_SECRET='[Client Secret from Hub]'
 ```
 
 ```java
@@ -511,7 +511,7 @@ For a comprehensive example demonstrating these steps, see the [DeployAndComplet
 
 - [Job worker implementation](job-worker.md) – Build workers to handle automated tasks
 - [Process testing](../testing/getting-started.md) – Test your processes with Camunda Process Test
-- [Getting Started Tutorial](../../guides/getting-started-example.md) – Complete walkthrough with Modeler, Operate, and Spring SDK
+- [Getting Started Tutorial](../../guides/getting-started-example.md) – Complete walkthrough with Desktop Modeler, Operate, and Spring SDK
 
 **Advanced topics**
 
