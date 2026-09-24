@@ -793,7 +793,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 | Two schedulable nodes | The second instance is only useful on another node, and the drain you are enabling needs somewhere to move the primary.                 |
 | Free storage          | The existing instance gains a WAL volume and a second instance is created with both. With the defaults, that is 25 Gi more per cluster. |
 | A current backup      | The migration is in place and keeps your volume, so an unrelated failure during it has no second copy to fall back on.                  |
-| Cluster is healthy    | Run `kubectl get cluster -n camunda` and confirm the phase is `Cluster in healthy state` before changing anything.                      |
+| Cluster is healthy    | Run `kubectl get cluster -n $CAMUNDA_NAMESPACE` and confirm the phase is `Cluster in healthy state` before changing anything.           |
 
 ### Run the migration
 
@@ -829,15 +829,15 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    To apply the manifests directly instead, remember the orchestration cluster lives in its own file. Applying only the first manifest leaves `pg-camunda` on the single-instance shape:
 
    ```bash
-   kubectl apply --server-side -f postgresql-clusters.yml -n camunda
+   kubectl apply --server-side -f postgresql-clusters.yml -n "$CAMUNDA_NAMESPACE"
    # only if you deploy the orchestration database (RDBMS secondary storage)
-   kubectl apply --server-side -f postgresql-orchestration-cluster.yml -n camunda
+   kubectl apply --server-side -f postgresql-orchestration-cluster.yml -n "$CAMUNDA_NAMESPACE"
    ```
 
 1. Watch the operator converge. It clones the new instance, then restarts the primary to attach its WAL volume:
 
    ```bash
-   kubectl get cluster -n camunda -w
+   kubectl get cluster -n "$CAMUNDA_NAMESPACE" -w
    ```
 
    The phase moves through `Creating a new replica`, `Waiting for the instances to become active`, and `Primary instance is being restarted without a switchover` before returning to `Cluster in healthy state`.
@@ -845,7 +845,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 1. Confirm every cluster reports both instances ready:
 
    ```bash
-   kubectl get cluster -n camunda
+   kubectl get cluster -n "$CAMUNDA_NAMESPACE"
    ```
 
    ```text
@@ -860,15 +860,15 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 1. Confirm the instances of each cluster sit on different nodes:
 
    ```bash
-   kubectl get pods -n camunda -l cnpg.io/podRole=instance -o wide
+   kubectl get pods -n "$CAMUNDA_NAMESPACE" -l cnpg.io/podRole=instance -o wide
    ```
 
 1. Confirm `pg_wal` moved onto the dedicated volume on every instance of every cluster. It becomes a symbolic link, and the original directory content is moved for you:
 
    ```bash
-   for pod in $(kubectl get pods -n camunda -l cnpg.io/podRole=instance -o name); do
+   for pod in $(kubectl get pods -n "$CAMUNDA_NAMESPACE" -l cnpg.io/podRole=instance -o name); do
      echo "$pod"
-     kubectl exec -n camunda "${pod#pod/}" -c postgres -- ls -ld /var/lib/postgresql/data/pgdata/pg_wal
+     kubectl exec -n "$CAMUNDA_NAMESPACE" "${pod#pod/}" -c postgres -- ls -ld /var/lib/postgresql/data/pgdata/pg_wal
    done
    ```
 
@@ -879,10 +879,10 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 1. Confirm the standby of each cluster is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
 
    ```bash
-   for cluster in $(kubectl get cluster -n camunda -o jsonpath='{.items[*].metadata.name}'); do
-     primary=$(kubectl get pod -n camunda -l "cnpg.io/cluster=$cluster,cnpg.io/instanceRole=primary" -o jsonpath='{.items[0].metadata.name}')
+   for cluster in $(kubectl get cluster -n "$CAMUNDA_NAMESPACE" -o jsonpath='{.items[*].metadata.name}'); do
+     primary=$(kubectl get pod -n "$CAMUNDA_NAMESPACE" -l "cnpg.io/cluster=$cluster,cnpg.io/instanceRole=primary" -o jsonpath='{.items[0].metadata.name}')
      echo -n "$cluster: "
-     kubectl exec -n camunda "$primary" -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
+     kubectl exec -n "$CAMUNDA_NAMESPACE" "$primary" -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
    done
    ```
 
