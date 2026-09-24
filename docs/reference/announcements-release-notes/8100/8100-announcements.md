@@ -610,6 +610,82 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Ingress-nginx annotation defaults deprecated in the Helm chart {#ingress-annotation-defaults-deprecated}
+
+The Helm chart used to ship Ingress-nginx-specific defaults in `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Helm deep-merges maps, so setting a single annotation of your own still inherited all of them, and they were written onto the `Ingress` whatever `ingressClassName` you configured. On Contour, Traefik, or any other controller they are dead configuration, and removing them meant setting each key to `null`.
+
+Starting with Camunda 8.10 (chart 15.x), those annotations come from a compatibility shim controlled by `global.compatibility.nginx.renderAnnotations`, which defaults to `true`. **Nothing changes on upgrade:** the same annotations render, so Ingress-nginx deployments are unaffected. The shim is removed in the next major, after which the annotations are opt-in.
+
+**Action:** If you run an Ingress controller other than Ingress-nginx, set `global.compatibility.nginx.renderAnnotations: false` and configure whatever your controller needs through `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Keys you set there always win over the shim.
+
+That removes the shim's annotations only. The chart still adds `nginx.ingress.kubernetes.io/backend-protocol` to the dedicated Ingress objects it renders when an upstream TLS mode is enabled through `global.tls.orchestration`, `global.tls.connectors`, or `global.tls.optimize`, and only Ingress-nginx reads that annotation.
+
+```yaml
+global:
+  compatibility:
+    nginx:
+      renderAnnotations: false
+  ingress:
+    annotations:
+      # for example, with Contour
+      kubernetes.io/tls-acme: "true"
+```
+
+If you stay on Ingress-nginx, no action is required before the next major. When the shim is removed you will need to set the annotations yourself:
+
+```yaml
+global:
+  ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/proxy-buffering: "on"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+      # keep in sync with global.config.requestBodySize
+      nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+
+orchestration:
+  ingress:
+    grpc:
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+```
+
+The gRPC Ingress reads `orchestration.ingress.grpc.annotations` only; it inherits nothing from `global.ingress.annotations`, so set all three keys there.
+
+Two of those carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes Ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
+
+With [Contour](https://projectcontour.io/), the gRPC upstream is declared on the Orchestration Cluster **Service**, not on the Ingress, so set it through `orchestration.service.annotations` and not `orchestration.ingress.grpc.annotations`. The annotation value lists the gRPC port, and the key depends on whether that upstream uses TLS:
+
+| gRPC upstream                                           | Contour annotation                        | Envoy behavior   |
+| ------------------------------------------------------- | ----------------------------------------- | ---------------- |
+| Plaintext, the chart default                            | `projectcontour.io/upstream-protocol.h2c` | Cleartext HTTP/2 |
+| TLS, with `global.tls.orchestration.grpc.enabled: true` | `projectcontour.io/upstream-protocol.h2`  | HTTP/2 over TLS  |
+
+```yaml
+orchestration:
+  service:
+    annotations:
+      # plaintext upstream; use upstream-protocol.h2 if the gRPC upstream has TLS
+      projectcontour.io/upstream-protocol.h2c: "26500"
+```
+
+Contour reads `h2c` as cleartext HTTP/2, so leaving it on a TLS-enabled upstream breaks gRPC routing. The chart draws the same distinction on Ingress-nginx, where it swaps `nginx.ingress.kubernetes.io/backend-protocol` from `GRPC` to `GRPCS` for a TLS-enabled gRPC upstream.
+
+The chart emits a deprecation warning naming the flag and the removal only when the shim actually injects an annotation: the flag is on, the Ingress it applies to renders, and you have not set that key yourself. Setting every shim key silences the warning even with the flag still on.
+
+<p className="link-arrow">[Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
