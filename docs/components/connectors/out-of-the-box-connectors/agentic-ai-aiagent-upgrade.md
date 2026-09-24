@@ -24,6 +24,10 @@ Camunda deprecates the legacy element templates in 8.10. They will not receive n
 
 ## How to upgrade
 
+:::important
+The new templates require Desktop Modeler 5.51.0 or later. Earlier versions show them as **Not found**.
+:::
+
 The legacy and new element templates are separate templates, not two versions of the same template. This means upgrading is a manual, per-element operation:
 
 1. Open the AI Agent Task or AI Agent Sub-process element in [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md). Set the process' modeler/execution version to Camunda 8.10 or later. This makes the new element template available to select.
