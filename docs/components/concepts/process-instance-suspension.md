@@ -96,7 +96,7 @@ You can resume a suspended process instance.
 
 ## In-flight batch operations
 
-Note that batch operations already queued against process instances that are subsequently suspended may fail on individual items if the instance state is incompatible with the queued operation. An individual item failure does not stop the rest of the batch.
+Batch operations already queued against process instances that are subsequently suspended may fail on individual items if the instance state is incompatible with the queued operation. An individual item failure does not stop the rest of the batch.
 
 ## Technical implications
 
@@ -132,7 +132,7 @@ The following known limitations apply to process instance suspension.
 
 ### Instance size limit
 
-Under the default 4 MB `maxMessageSize` [configuration](../../components/concepts/secret-resolution-and-job-activation/#resolved-values-exceed-the-message-size), suspension may fail if a single process instance has:
+Under the default 4 MB `maxMessageSize` [configuration](./secret-resolution-and-job-activation.md#resolved-values-exceed-the-message-size), suspension may fail if a single process instance has:
 
 - More than 4,000 active jobs
 - More than 7,000 active message subscriptions
