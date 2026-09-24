@@ -30,7 +30,7 @@ The procedure consists of these steps:
 ## Before you begin
 
 - [Back up the Orchestration Cluster](/self-managed/operational-guides/backup-restore/backup-and-restore.md) before you start this procedure.
-- Confirm that the existing Helm releases and their numbered brokers are healthy.
+- Confirm that the existing Helm releases and their numbered brokers are healthy. See [Check broker health](#check-broker-health).
 - Confirm that each Kubernetes cluster has enough capacity (nodes) for both broker generations and their persistent volume claims (PVCs).
 - Back up the values used by each Helm release.
 - Suspend planned node drains, autoscaler scale-down, and other maintenance that could evict broker pods until the migration is complete.
@@ -54,7 +54,32 @@ Replace the example values with values from your installation. Set `CHART_VERSIO
 
 Use the [Orchestration management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) to change the cluster topology. To reach it, and for its port, security, and TLS options, see [About this API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#about-this-api). Set `MANAGEMENT_URL` to the resulting address. For a dual-region cluster, you need access to the management API in each region.
 
+For example, forward the management port of the release's gateway Service to your machine:
+
+```bash
+kubectl port-forward "svc/$RELEASE-zeebe-gateway" 9600:9600 --namespace "$NAMESPACE"
+```
+
+During the migration, this Service selects both the numbered and the zone-aware brokers. You can send the requests through any of them, because each broker forwards cluster configuration requests to the broker that coordinates the change.
+
 Several requests in this procedure start an asynchronous configuration change and return a `changeId`. Track each change as described in [Monitor a configuration change](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#monitor-a-configuration-change), and continue only after it reaches the `COMPLETED` status.
+
+### Check broker health
+
+Check broker health with the [health check endpoint](/self-managed/components/orchestration-cluster/zeebe/operations/health.md#health-check) of each broker pod. A finished rollout and an `ACTIVE` state in `GET /actuator/cluster` don't prove that the brokers can process: a broker passes its readiness probe and stays `ACTIVE` in the topology even if its partitions fail to start.
+
+Query each broker pod directly, not through a Service, for example after `kubectl port-forward pod/<broker-pod> 9600:9600 --namespace "$NAMESPACE"`:
+
+```bash
+curl --fail "$MANAGEMENT_URL/actuator/health/status"
+```
+
+A healthy broker returns HTTP `200`. If a broker returns `503`, check its logs and resolve the problem before you continue.
+
+Only brokers that belong to the logical cluster report healthy. During the migration, these brokers are expected to report unhealthy:
+
+- Zone-aware brokers of a zone that you haven't migrated yet.
+- Numbered brokers of a zone that you have migrated but not yet removed from the release.
 
 ## Upgrade to the migration chart
 
@@ -70,6 +95,8 @@ helm upgrade "$RELEASE" "$CHART" \
   --wait \
   --timeout 15m
 ```
+
+After each rollout, [check that every broker is healthy](#check-broker-health) before you upgrade the next release or enable the migration flag.
 
 ## Configure the zone-aware values
 
@@ -181,6 +208,8 @@ helm upgrade "$RELEASE" "$CHART" \
 
 Each release now contains both the existing numbered StatefulSet and a new zone-specific StatefulSet. Wait for the zone-specific brokers to become ready before you continue. Don't remove the numbered brokers yet. The new brokers haven't joined the logical cluster, so the numbered brokers are still the only active members.
 
+[Check that the numbered brokers are still healthy](#check-broker-health). The new zone-aware brokers report unhealthy until you migrate their zone.
+
 ## Update the partitioning configuration
 
 Use the [partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api) once to update the persisted partitioning configuration. For a dual-region cluster, send this request only once, through either region.
@@ -243,7 +272,9 @@ Migrate one zone at a time. For each zone, add its zone-aware brokers to the clu
 
 ### Add the zone's brokers to the cluster
 
-Use the [zone migration endpoint](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#migrate-a-zone-to-a-zone-aware-topology) to add the zone's zone-aware brokers to the cluster. The new brokers take over the partitions of the zone's numbered brokers, and the numbered brokers leave the cluster. Send the request through the management API of a broker in the region that owns the zone. Set `LOCAL_ZONE` and `MANAGEMENT_URL` for that region:
+Use the [zone migration endpoint](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#migrate-a-zone-to-a-zone-aware-topology) to add the zone's zone-aware brokers to the cluster. The new brokers take over the partitions of the zone's numbered brokers, and the numbered brokers leave the cluster. Before you send the request, [check that every broker in the logical cluster is healthy](#check-broker-health). A partition that can't start blocks the migration, and the change stays `IN_PROGRESS`.
+
+Send the request through the management API of a broker in the region that owns the zone. Set `LOCAL_ZONE` and `MANAGEMENT_URL` for that region:
 
 ```bash
 curl --fail --request PUT \
@@ -264,6 +295,7 @@ In the response, confirm that:
 
 - The zone-aware brokers of the migrated zone, with IDs such as `zone-a_0`, are listed with `"state": "ACTIVE"` and host the expected partitions.
 - The numbered brokers of the migrated zone, with numeric IDs such as `0`, are no longer listed.
+- The zone-aware brokers of the migrated zone [report healthy](#check-broker-health).
 
 Leave `keepUnzonedBrokers: true` if the zone migration is incomplete. Don't remove the numbered Kubernetes resources while a numbered broker of the zone still owns a partition or remains in cluster membership.
 
@@ -333,6 +365,7 @@ Confirm that:
 - The `partitioning` object in the response reports `"scheme": "ZONE_AWARE"` and lists every zone.
 - Every zone-aware broker, such as `zone-a_0` and `zone-b_0`, is `ACTIVE` and hosts the expected partitions.
 - No numbered broker is listed.
+- Every zone-aware broker [reports healthy](#check-broker-health).
 - No numbered StatefulSet or pod remains in any release, for example with `kubectl get statefulsets,pods --namespace "$NAMESPACE"`.
 
 Don't delete the numbered PVCs until you have confirmed these checks. Then delete them explicitly according to your storage-retention policy.
