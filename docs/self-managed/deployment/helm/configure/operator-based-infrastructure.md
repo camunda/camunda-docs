@@ -797,7 +797,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 
 ### Run the migration
 
-1. Update your copy of `postgresql-clusters.yml` (and `postgresql-orchestration-cluster.yml` if you deploy the orchestration database) to the current reference manifests, or add the following settings to each cluster you already have:
+1. Add the following settings to each cluster you already have:
 
    ```yaml
    spec:
@@ -809,6 +809,10 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
      walStorage:
        size: 5Gi
    ```
+
+   :::warning Keep your existing cluster names
+   Do not replace your manifests with the current reference ones to perform this migration. The 8.10 reference manifests also rename the Web Modeler cluster to `pg-hub`, and applying that rename creates a new empty cluster next to your existing `pg-webmodeler` rather than migrating it. Edit the clusters you already have, keeping their names, databases, owners, and secrets.
+   :::
 
 1. Apply the change. `deploy.sh` applies the standard clusters and waits for each cluster to be fully ready:
 
@@ -845,10 +849,10 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```
 
    ```text
-   NAME          AGE   INSTANCES   READY   STATUS                     PRIMARY
-   pg-identity   10m   2           2       Cluster in healthy state   pg-identity-1
-   pg-keycloak   10m   2           2       Cluster in healthy state   pg-keycloak-1
-   pg-hub        10m   2           2       Cluster in healthy state   pg-hub-1
+   NAME            AGE   INSTANCES   READY   STATUS                     PRIMARY
+   pg-identity     10m   2           2       Cluster in healthy state   pg-identity-1
+   pg-keycloak     10m   2           2       Cluster in healthy state   pg-keycloak-1
+   pg-webmodeler   10m   2           2       Cluster in healthy state   pg-webmodeler-1
    ```
 
    A cluster stuck at `1` ready usually has its second pod `Pending`, because the required anti-affinity found no second schedulable node.
@@ -875,7 +879,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 1. Confirm the standby of each cluster is streaming before you rely on the new instance. The cluster reports a healthy state as soon as both pods are ready, which happens slightly before the standby re-establishes replication after the primary restart:
 
    ```bash
-   for cluster in pg-identity pg-keycloak pg-hub; do
+   for cluster in $(kubectl get cluster -n camunda -o jsonpath='{.items[*].metadata.name}'); do
      primary=$(kubectl get pod -n camunda -l "cnpg.io/cluster=$cluster,cnpg.io/instanceRole=primary" -o jsonpath='{.items[0].metadata.name}')
      echo -n "$cluster: "
      kubectl exec -n camunda "$primary" -c postgres -- psql -U postgres -tAc "SELECT state FROM pg_stat_replication;"
@@ -885,7 +889,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
    ```text
    pg-identity: streaming
    pg-keycloak: streaming
-   pg-hub: streaming
+   pg-webmodeler: streaming
    ```
 
    Until a cluster reports `streaming`, its standby is not a switchover candidate, and a drain started early stalls with `Current primary is running on unschedulable node, but there are no valid candidates` in the operator log.
