@@ -53,12 +53,12 @@ Deleting a process definition that still has running instances is supported and 
 
 A process definition moves through the following lifecycle states:
 
-| State      | Meaning                                                                                                                                 |
-| :--------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| `ACTIVE`   | Deployed and able to create new instances.                                                                                              |
-| `DRAINING` | Deleted for new use (new instances are blocked) while running instances drain. The record is retained until the last instance finishes. |
-| `DELETING` | The last instance has drained and the definition is being physically removed on the partition. This is a brief internal transition.     |
-| `DELETED`  | Fully removed.                                                                                                                          |
+| State      | Meaning                                                                                                                               |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `ACTIVE`   | Deployed and able to create new instances.                                                                                            |
+| `DRAINING` | Marked as deleted (new instances are blocked) while running instances drain. The record is retained until the last instance finishes. |
+| `DELETING` | The last instance has drained and the definition is being physically removed on the partition. This is a brief internal transition.   |
+| `DELETED`  | Fully removed.                                                                                                                        |
 
 The Orchestration Cluster API [process definition `state` field](/apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition.api.mdx) exposes `ACTIVE`, `DRAINING`, and `DELETED`. You can also track draining definitions with the draining indicator in [Operate](../operate/userguide/delete-resources.md#delete-process-definition).
 
