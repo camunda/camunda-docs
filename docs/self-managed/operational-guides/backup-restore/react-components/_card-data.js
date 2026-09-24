@@ -64,3 +64,39 @@ export const rdbmsCards = [
       "Restore Zeebe, Operate, Tasklist, and Admin while using an RDBMS as secondary storage. Optimize and Management Identity are not included.",
   },
 ];
+
+// Restore approach cards for the Elasticsearch / OpenSearch restore chooser page
+export const esRestoreApproachCards = [
+  {
+    link: "../es-restore-api",
+    title: "Restore API",
+    image: IconRepeat,
+    description:
+      "**Recommended**, Camunda 8.10+. Restore through the REST API; brokers stay up in recovery mode.",
+  },
+  {
+    link: "../es-restore-application",
+    title: "Restore Application (legacy)",
+    image: IconRepeat,
+    description:
+      "**Legacy**, all versions. Stop all components and run the standalone restore app.",
+  },
+];
+
+// Restore approach cards for the RDBMS restore chooser page
+export const rdbmsRestoreApproachCards = [
+  {
+    link: "../rdbms-restore-api",
+    title: "Restore API",
+    image: IconRepeat,
+    description:
+      "**Recommended**, Camunda 8.10+. Restore through the REST API; brokers stay up in recovery mode.",
+  },
+  {
+    link: "../rdbms-restore-application",
+    title: "Restore Application (legacy)",
+    image: IconRepeat,
+    description:
+      "**Legacy**, all versions. Stop all components and run the standalone restore app.",
+  },
+];

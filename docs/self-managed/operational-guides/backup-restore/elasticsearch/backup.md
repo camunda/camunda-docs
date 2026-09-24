@@ -910,7 +910,7 @@ Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a d
 :::
 
 :::info
-You can [restore a Camunda Hub data backup](restore.md#optional-restore-a-camunda-hub-data-backup).
+You can [restore a Camunda Hub data backup](../modeler-backup-and-restore.md#restore).
 :::
 
 ## Cleaning up backups
