@@ -277,7 +277,7 @@ Select this provider to use a custom chat model provider implementation that you
 
 Implementing a custom provider requires building and registering a chat model provider with your Self-Managed or hybrid connector runtime, similar to how [custom conversation storage backends](./agentic-ai-aiagent-customization.md#custom-conversation-storage) are registered.
 
-## Missing a field?
+### Customize AI backend requests
 
 Most backends also provide advanced, low-level customization fields: **HTTP headers**, **query parameters**, and **body properties**. With these fields, you can add or override values in the outgoing HTTP request.
 
