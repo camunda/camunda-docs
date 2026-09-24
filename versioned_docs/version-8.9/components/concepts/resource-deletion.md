@@ -49,6 +49,8 @@ You cannot delete a process definition that has one or more running process inst
 
 ### Historic data
 
+By default, deleting a process definition removes it from Zeebe's runtime state only; new instances can no longer be created from it. Its historic data remains in secondary storage until explicitly deleted, so the definition may continue to appear in Operate and Tasklist history views until then.
+
 Optionally enable historic data deletion to permanently remove all data related to the process definition from secondary storage.
 
 :::warning
@@ -76,6 +78,8 @@ Deleting a DRG also deletes the decisions it contains. Attempts to evaluate a de
 A [business rule task](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md) references a decision by ID. If all versions of that decision are deleted, Zeebe creates an incident on the business rule task indicating that no decision with the given ID can be found.
 
 ### Historic data
+
+By default, deleting a decision requirements graph removes it from Zeebe's runtime state only. Its historic data remains in secondary storage until explicitly deleted, so it may continue to appear in Operate and Tasklist history views until then.
 
 Optionally enable historic data deletion to permanently remove all data related to the decision definition from secondary storage.
 
