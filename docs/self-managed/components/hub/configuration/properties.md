@@ -90,7 +90,7 @@ An orchestration release must disable its local Management Identity and set `glo
 
 #### Management Identity cluster
 
-When `identity.enabled` is `true` for a Hub release, the Helm chart automatically adds a `management-cluster` entry named **Management Identity** to `camunda.modeler.clusters`, containing only the Hub's own Management Identity component. This entry appears in the Clusters pages alongside your Orchestration Cluster registrations so Console and DevOps role holders can manage the Hub's Management Identity instance. You don't need to configure this entry manually, and it isn't affected by [dynamic cluster management](#dynamic-cluster-management).
+If `identity.enabled` is `true` for a Hub release, the Helm chart automatically adds a `management-cluster` entry named **Management Identity** to `camunda.modeler.clusters`, containing only the Hub's own Management Identity component. This entry appears in the Clusters pages alongside your Orchestration Cluster registrations so Console and DevOps role holders can manage the Hub's Management Identity instance. You don't need to configure this entry manually, and it isn't affected by [dynamic cluster management](#dynamic-cluster-management).
 
 :::note
 Access to the cluster pages in Camunda Hub depends on the user's role: `Console` and `DevOps` role holders (users with the [`admin:clusters` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) get management access to the cluster pages, Hub admins (users with the [`admin:*` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) get full access, and other Hub members get read-only access.
