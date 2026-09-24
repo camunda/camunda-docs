@@ -65,7 +65,7 @@ Click **Deploy**. Once the deploy succeeds, it automatically progresses to the n
 
 ### 3. Configure test case
 
-The process's start element, and an end element if the process supports one, are auto-selected to define the segment you want to test. Click the edit icon to pick a different element:
+Start and end elements for the segment are auto-selected. Some processes have no selectable end element — for example, when the process starts with a message or signal event, or has no end event — in which case the test run completes naturally. Click the edit icon to pick a different element.
 
 #### Start boundary
 
@@ -97,9 +97,8 @@ Once both boundaries are set, clicking the canvas resets the start boundary and 
 Click the selected start event to configure how the process should start — the panel shows various options depending on its Start event type:
 
 - **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
-- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. 
+- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID.
 - **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
-
 
 To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
 
