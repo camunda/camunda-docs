@@ -848,11 +848,11 @@ Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security
 
 #### Optimize static API access token is no longer supported
 
-In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its API. The static token from `api.accessToken` (environment variable `OPTIMIZE_API_ACCESS_TOKEN`) is not accepted. Requests with this token get a `401` response. This applies to the [Optimize API](/apis-tools/optimize-api/overview.md) and to the [external variable ingestion](/apis-tools/optimize-api/external-variable-ingestion.md) endpoint. The Camunda Helm chart and SaaS configure OIDC for this API, so this change affects you only if you set the token yourself.
+In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its API. A request that carries the static token from `api.accessToken` (environment variable `OPTIMIZE_API_ACCESS_TOKEN`) gets a `401` response. This applies to the [Optimize API](/apis-tools/optimize-api/overview.md) and to the [external variable ingestion](/apis-tools/optimize-api/external-variable-ingestion.md) endpoint. The Camunda Helm chart and SaaS configure OIDC for this API, so this change affects you only if you set the token yourself.
 
-**Action:** Change these API clients to OIDC bearer tokens before you upgrade to 8.10. Then remove `api.accessToken` from your configuration.
+**Action:** Change the API clients that send the static token to OIDC bearer tokens before you upgrade to 8.10. Then remove `api.accessToken` from your configuration.
 
-**Alternative:** If you need more time, set `optimize.security.csl.enabled=false`. This opts into the 8.9 component-specific configuration fallback, and the static token works again. Camunda plans to remove this fallback and the component-specific configuration keys in a future release. Migrate these API clients as soon as you can.
+**Alternative:** If you need more time, set `optimize.security.csl.enabled=false`. This opts into the 8.9 component-specific configuration fallback, and the static token works again. Camunda plans to remove this fallback and the component-specific configuration keys in a future release. Migrate the affected API clients as soon as you can.
 
 <p className="link-arrow">[Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md)</p>
 
