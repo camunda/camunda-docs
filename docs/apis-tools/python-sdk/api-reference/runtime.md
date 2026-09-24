@@ -561,7 +561,7 @@ alias of [`ConnectedJobContext`](#connectedjobcontext)
 ## ConnectedJobContext
 
 ```python
-class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING, , client, clock)
+class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING, , client, clock)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -602,7 +602,7 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 | `client`                     | [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient)                   |             |
 | `clock`                      | `Clock`                                                                                              |             |
@@ -651,7 +651,7 @@ clock: Clock
 ## JobContext
 
 ```python
-class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING)
+class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING)
 ```
 
 Bases: `ActivatedJobResult`
@@ -690,7 +690,7 @@ one; see [`ConnectedJobContext`](#connectedjobcontext) and [`SyncJobContext`](#s
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 
 ### log
@@ -845,7 +845,7 @@ def stop()
 ## SyncJobContext
 
 ```python
-class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING, , client, clock)
+class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING, , client, clock)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -886,7 +886,7 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 | `client`                     | [CamundaClient](client.md#camunda_orchestration_sdk.CamundaClient)                                   |             |
 | `clock`                      | `Clock`                                                                                              |             |
