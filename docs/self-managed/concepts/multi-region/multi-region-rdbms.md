@@ -223,7 +223,9 @@ Skewing partition leadership to the writer's zone makes the first of these worse
 
 ### Removing a lost zone
 
-With two zones, a zone loss leaves no majority, and processing only resumes once the lost zone is removed from the partition distribution. With three or more, the majority holds and removing the zone is optional. It is usually not worth it for a zone you expect back, because brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
+Whether the lost zone has to be removed depends on the replicas it held, not on how many zones there are. It is the same rule that governs the layout in the first place: a partition keeps its quorum as long as the lost zone held fewer than half its replicas. Under a layout that satisfies it, such as the default `2-2-1` across three zones, the majority holds and removing the zone is optional. With two zones, or under a layout where one zone holds half the replicas or more such as `4-1-1`, losing that zone costs the quorum, and processing only resumes once the zone is removed from the partition distribution.
+
+Removing an optional zone is usually not worth it for a zone you expect back, because brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
 
 The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-decide-whether-to-remove-the-zone) has the decision table and the command.
 

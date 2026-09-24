@@ -120,12 +120,16 @@ Zeebe keeps processing, but the gateway in the lost region is unreachable. Updat
 
 ### 4. Decide whether to remove the zone
 
-Removing the lost zone from the partition distribution is **optional** with three or more zones, and usually not worth it for a zone you expect back.
+Removing the lost zone from the partition distribution is **optional** whenever the surviving zones still hold a majority of each partition's replicas, and usually not worth it for a zone you expect back.
 
-| Zones | After losing one                                                                         | Removing the zone                                                               |
-| :---- | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| 2     | The surviving zone holds half the replicas, which is not a majority, so processing stops | **Required**. Removing the zone restores a quorum the survivor can reach alone. |
-| 3+    | A majority of the replicas survives, so processing continues                             | **Optional**, and cheaper to skip.                                              |
+What decides it is the replica count of the zone you lost, not the number of zones:
+
+| Replicas held by the lost zone | After losing it                                              | Removing the zone                                                                |
+| :----------------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| Fewer than half the total      | A majority of the replicas survives, so processing continues | **Optional**, and cheaper to skip.                                               |
+| Half the total or more         | The survivors are not a majority, so processing stops        | **Required**. Removing the zone restores a quorum the survivors can reach alone. |
+
+The default `2-2-1` across three zones always lands in the first row, whichever zone is lost. An asymmetric layout such as `4-1-1` lands in the second when its four-replica zone is the one lost. An evenly split two-zone cluster lands in the second whichever zone it loses, which is why [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) has a failover runbook and this architecture does not.
 
 The reason to leave a zone in place is failback cost. Brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
 
