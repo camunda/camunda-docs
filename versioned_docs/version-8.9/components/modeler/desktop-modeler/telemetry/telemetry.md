@@ -229,8 +229,8 @@ These events do not include any additional payload data.
 
 The `Connection Event` is sent in the following situations:
 
-- Desktop Modeler fails to connect to [a configured cluster](../connect-to-camunda-8.md).
-- Desktop Modeler connects to a configured cluster.
+- Desktop Modeler fails to connect to [a configured connection](../connect-to-camunda-8.md).
+- Desktop Modeler connects to a configured connection.
 
 The `Connection Event` includes the following properties:
 
