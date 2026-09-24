@@ -59,9 +59,9 @@ Click **Connect cluster**, and select a target cluster. Once the cluster is heal
 - **All resources**: Deploys the whole project, including dependencies like called processes or DMN files.
 - **Only this resource**: Deploys only the open file. An info alert reminds you that referenced resources, such as called processes, DMN files, or forms, must be deployed separately, or test runs fail with a not found incident.
 
-Files outside a project deploy as **All resources** only; no scope choice is shown. In read-only mode, **Only this resource** is disabled.
+When testing a snapshot version, **Only this resource** is not allowed.
 
-Click **Deploy**. Once the deploy succeeds, the step shows a **Successfully deployed** badge, or a failure badge if the deploy fails. On successful deployment it automatically progresses to the next step.
+Click **Deploy**. Once the deploy succeeds, it automatically progresses to the next step.
 
 ### 3. Configure test case
 
@@ -97,10 +97,9 @@ Once both boundaries are set, clicking the canvas resets the start boundary and 
 Click the selected start event to configure how the process should start — the panel shows various options depending on its Start event type:
 
 - **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
-- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. The **Start** button is disabled when the message name is empty.
+- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. 
 - **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
 
-**Start** is also disabled when the variables field contains invalid JSON.
 
 To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
 
