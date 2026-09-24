@@ -106,11 +106,11 @@ Each variant can be set up with or without a **Domain** ([Ingress](https://kuber
 
 ### Outcome
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- Diagram source: eks-single-region.excalidraw. Open and edit at https://excalidraw.com -->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
 
 _Infrastructure diagram for a single region EKS setup (click on the image to open the PDF version)_
-[![Infrastructure Diagram EKS Single-Region](./assets/eks-single-region.jpg)](./assets/eks-single-region.pdf)
+[![Infrastructure Diagram EKS Single-Region](./assets/eks-single-region.svg)](./assets/eks-single-region.pdf)
 
 After completing this guide, you will have:
 
@@ -513,11 +513,11 @@ This step is only required if you configured a private cluster.
 
 Using a VPN offers a flexible and secure way to connect to the private subnets within your VPC. It can be used either by a user to access cluster resources or to enable cross-site communications via [PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html). This module focuses on user access.
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- Diagram source: eks-single-region.excalidraw. Open and edit at https://excalidraw.com -->
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
 
 _Infrastructure diagram for a single region EKS setup with VPN (click on the image to open the PDF version)_
-[![Infrastructure Diagram EKS Single-Region VPN](./assets/eks-single-region-vpn.jpg)](./assets/eks-single-region-vpn.pdf)
+[![Infrastructure Diagram EKS Single-Region VPN](./assets/eks-single-region-vpn.svg)](./assets/eks-single-region-vpn.pdf)
 
 AWS VPN technology is compatible with OpenVPN clients. It uses [x509 certificates](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/mutual.html) for mutual authentication and source verification.
 The encryption provided by these certificates ensures that traffic can securely transit over the internet to the AWS VPN endpoint, which performs NAT and routes the traffic directly into the private subnets. This VPN endpoint then becomes the sole access point to the private cluster.

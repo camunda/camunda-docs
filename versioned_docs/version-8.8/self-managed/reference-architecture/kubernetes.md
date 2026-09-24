@@ -49,7 +49,7 @@ See the reference architecture for details on how these components communicate.
 
 _Infrastructure diagram for a single-region setup (click the image to open the PDF version)_
 
-[![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)
+[![Architecture Overview](./img/k8s-single.svg)](./img/k8s-single.pdf)
 
 This Kubernetes architecture illustrates a high-availability setup across multiple availability zones (A, B, and C), with key networking components to ensure scalability, security, and reliability. We recommend using multiple availability zones to improve fault tolerance and eliminate single points of failure.
 
@@ -67,7 +67,7 @@ The following visuals provide a simplified view of the deployed namespaces using
 
 #### Orchestration Cluster
 
-![Orchestration Cluster](./img/k8s-cluster-view-orchestration.jpg)
+![Orchestration Cluster](./img/k8s-cluster-view-orchestration.svg)
 
 The Helm chart uses a single Ingress by default, enabling a unified domain with each application accessible via a dedicated path.
 
@@ -81,7 +81,7 @@ The Orchestration Cluster exposes two services:
 
 #### Web Modeler and Console
 
-![Web Modeler and Console](./img/k8s-cluster-view-managing.jpg)
+![Web Modeler and Console](./img/k8s-cluster-view-managing.svg)
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 

@@ -39,7 +39,7 @@ When designing a reference architecture, it's essential to understand the differ
 
 #### Orchestration Cluster
 
-![Orchestration Cluster](./img/orchestration-cluster.jpg)
+![Orchestration Cluster](./img/orchestration-cluster.svg)
 
 The Orchestration Cluster is the core of Camunda.
 
@@ -59,9 +59,9 @@ This unified architecture ensures seamless communication, consistent state manag
 
 #### Camunda Hub
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
+<!-- Diagram source: img/management-cluster.excalidraw. Open and edit at https://excalidraw.com -->
 
-![Camunda Hub](./img/management-cluster.jpg)
+![Camunda Hub](./img/management-cluster.svg)
 
 Camunda Hub is designed to interact with multiple orchestration clusters:
 

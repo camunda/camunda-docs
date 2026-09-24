@@ -39,7 +39,7 @@ When designing a reference architecture, it's essential to understand the differ
 
 #### Orchestration Cluster
 
-![Orchestration Cluster](./img/orchestration-cluster.jpg)
+![Orchestration Cluster](./img/orchestration-cluster.svg)
 
 The Orchestration Cluster is the core of Camunda.
 
@@ -59,7 +59,7 @@ This unified architecture ensures seamless communication, consistent state manag
 
 #### Web Modeler and Console
 
-![Web Modeler and Console](./img/management-cluster.jpg)
+![Web Modeler and Console](./img/management-cluster.svg)
 
 Web Modeler and Console are designed to interact with multiple orchestration clusters:
 
