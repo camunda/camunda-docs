@@ -11,7 +11,7 @@ Zone awareness controls where the application places partition replicas among br
 
 Zone awareness is required for topologies with three or more zones. It also simplifies managing zones: brokers are named after the zone they belong to, so you describe the topology in terms of zones rather than individual numeric node IDs.
 
-Because zones are named explicitly, zone awareness supports topologies the parity-based broker numbering cannot express at all, such as one zone, three zones, or more. Growing from one zone to two, or two to three, is a change to the zone list rather than a renumbering of every broker, but it is still a migration: see [the number of zones is fixed for the life of the cluster](#comparison-to-dual-region-broker-numbering).
+Because zones are named explicitly, zone awareness supports topologies the round-robin numbering strategy cannot express at all, such as one zone, three zones, or more. Growing from one zone to two, or two to three, is a change to the zone list rather than a renumbering of every broker.
 
 Zone awareness is also useful in a single-region setup. By mapping zones to availability zones (AZs) and giving one AZ a higher priority, you can skew partition leaders to stay in that AZ. Keeping leaders in one AZ reduces cross-AZ traffic to the single writer instance of a relational database (RDBMS), which lowers the associated cost. This optimization matters less for Elasticsearch, which distributes load across all three zones.
 
@@ -54,7 +54,7 @@ The `ZONE_AWARE` partitioning scheme drives partition distribution and leadershi
 
 ### Comparison to dual-region broker numbering
 
-In the [dual-region](../../../../concepts/multi-region/dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering. Zone awareness replaces it with explicit zone names, which works for any number of zones. The number of zones is fixed for the life of the cluster: it can be chosen freely up front, but not changed dynamically afterwards.
+In the [dual-region](../../../../concepts/multi-region/dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering. Zone awareness replaces it with explicit zone names, which works for any number of zones. Changing the zone list afterwards is possible, but it is not a configuration-only change: existing partitions have to be told about the new zone through the [cluster management API](../operations/management-api.md#partition-distribution-api).
 
 ## Example configuration
 
