@@ -48,7 +48,7 @@ Follow these steps to fail over to your recovery region, restore a cluster from 
 1. Start failover in Console or API.
 2. Select the backup to restore from those available in the recovery region.
 3. Camunda creates a replacement cluster in the recovery region and prepares it to restore the selected backup.
-4. If your AWS cluster uses BYOK, configure the KMS key policies for the failover region as shown on the failover cluster's **Encryption at rest** tab. The failover cluster remains in a waiting state until this configuration is complete.
+4. (Optional) If your AWS cluster uses BYOK, configure the KMS key policies for the failover region. See [Restore external encryption](#restore-external-encryption).
 5. Camunda copies and verifies the selected backup data before restore proceeds. You don't need to manually suspend or resume the target cluster during the restore process.
 6. (Optional) If you use private connectivity on an AWS cluster, re-establish it to the recovered cluster. Use the endpoint service name shown in Console to create or switch your VPC endpoint.
 7. Update your customer-managed DNS or routing configuration to direct client traffic to the recovered cluster.
@@ -88,6 +88,25 @@ After failover:
 
 Camunda does not create, manage, or modify customer VPC infrastructure.
 
+## Restore external encryption
+
+This section applies only to AWS clusters that use a customer-managed [Bring Your Own Key (BYOK)](/components/saas/byok/index.md) configuration. If you don't use BYOK, or your cluster is on GCP, skip this section.
+
+You are responsible for configuring the KMS key policies for the recovered cluster.
+
+### Configure the failover cluster's key
+
+1. Open the failover cluster's **Encryption at rest** tab in Console.
+2. Follow the instructions shown there to update the AWS KMS key policy for the failover region.
+
+The failover cluster remains in a waiting state until this configuration is complete.
+
+### Restore replication to the original region
+
+If the original region is still unavailable, Console shows a warning that backup replication to that region isn't working. Update the KMS key policy for the original region once it's reachable to restore replication.
+
+Camunda does not create, manage, or modify your AWS KMS keys or policies.
+
 ## Recovery objectives
 
 You can configure a 15-minute backup schedule for the organization, but this schedule doesn't guarantee a 15-minute recovery point objective (RPO). The actual RPO depends on successful backup creation, completed replication, and the consistent restore point you select.
@@ -98,7 +117,6 @@ You can configure a 15-minute backup schedule for the organization, but this sch
 - Treat the recovered cluster's primary backup bucket as the source for new backups while it is active.
 - Before starting failback, wait for the backup bucket in the original region to be created and fully synchronized with the active cluster's primary backup bucket.
 - Start failback only after the system reports that backup storage is ready.
-- If your AWS cluster uses BYOK and the original region is still unavailable, Console shows a warning that backup replication to that region isn't working until you update the KMS key policy there.
 
 ## Limitations
 
