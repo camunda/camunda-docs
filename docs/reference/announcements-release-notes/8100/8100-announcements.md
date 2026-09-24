@@ -770,7 +770,7 @@ Camunda 8.10 adds `global.topology.mode` to the Helm chart, so a release declare
 
 `combined` remains the default and preserves existing single-release behavior, so no existing deployment changes on upgrade. For a new production deployment, the split topology is the baseline.
 
-The `orchestration` role is also available in the 8.7, 8.8, and 8.9 charts, so one 8.10 Hub release can manage Orchestration Cluster releases on any supported chart version. `hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts.
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. Support for the `orchestration` role in the 8.7, 8.8, and 8.9 charts, which lets one 8.10 Hub manage clusters on older chart versions, requires patch releases of those charts that haven't been published yet. The currently published 8.7, 8.8, and 8.9 charts ignore `global.topology.mode` and deploy a combined release. The minimum versions will be listed here once they ship.
 
 **Action:** None required for an existing deployment. For a new production deployment, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
 
@@ -787,7 +787,7 @@ The `orchestration` role is also available in the 8.7, 8.8, and 8.9 charts, so o
 
 The 8.9 to 8.10 Camunda Hub database migration is controlled by `camundaHub.upgrade.phase`. Use `quiesce` to stop all Hub workloads so you can take a verified database backup, `migrate` to run the startup schema migration on a single pod without serving traffic, and `normal` to restore serving capacity. Fresh installs stay on `normal`.
 
-**Action:** Run the phases in order as part of your 8.9 to 8.10 upgrade, and plan a maintenance window: Hub serves no traffic in `quiesce` or `migrate`. The migration isn't backward compatible, so take a verified database backup first. See [migrate Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#migrate-camunda-hub).
+**Action:** Run the phases in order as part of your 8.9 to 8.10 upgrade, and plan a maintenance window: Hub serves no traffic in `quiesce` or `migrate`. The migration isn't backward compatible, so take a verified database backup first. See [migrate Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#migrate-web-modeler-and-console-to-camunda-hub).
 
 </div>
 </div>

@@ -7,6 +7,10 @@ description: "Install Optimize as its own Helm release with global.topology.mode
 
 An Optimize release deploys Optimize and no other Camunda component. Install one per Physical Tenant, including the default tenant.
 
+:::caution Chart availability
+The `optimize` role, `physicalTenants` cluster records, and the `orchestration` role on the 8.7, 8.8, and 8.9 charts aren't in any published chart yet. The published 8.10 pre-release chart `15.0.0-alpha5` accepts only `combined`, `hub`, and `orchestration`, and the latest published 8.7, 8.8, and 8.9 charts (12.13.8, 13.13.2, and 14.10.1) have no `global.topology` key, so they silently ignore `global.topology.mode` and deploy a combined release. Minimum chart versions will be listed on this page once the charts that carry these features are published.
+:::
+
 The `optimize` role requires the 8.10 chart. The 8.7, 8.8, and 8.9 charts support `combined` and `orchestration` only, so an older Orchestration Cluster runs Optimize inside its own release.
 
 Install these releases after their [Orchestration Cluster release](./orchestration-release.md) is healthy.
@@ -32,7 +36,9 @@ This applies to a cluster with no additional tenants too. Its default Physical T
 | `optimize.security.authentication.method: oidc` or `global.identity.auth.enabled: true` | Optimize requires authentication                                                                                                                                                |
 | `optimize.identity.service.url` or `global.identity.service.url`                        | This release runs no Identity of its own, so the in-release default can't apply                                                                                                 |
 | `optimize.contextPath`, when the chart renders this release's routing                   | The shared Ingress emits an Optimize rule only when the context path is set, and an HTTPRoute would match an empty path prefix                                                  |
-| An OIDC issuer, when Optimize uses OIDC                                                 | Optimize validates the `iss` claim on every token. Set `optimize.security.authentication.oidc.issuer`, `global.identity.auth.issuer`, or `global.identity.auth.publicIssuerUrl` |
+| An OIDC issuer, when Optimize uses OIDC*                                                | Optimize validates the `iss` claim on every token. Set `optimize.security.authentication.oidc.issuer`, `global.identity.auth.issuer`, or `global.identity.auth.publicIssuerUrl` |
+
+\* Unlike the orchestration release, Optimize accepts `publicIssuerUrl` as its issuer fallback. That works only when your provider mints that exact URL as the `iss` claim, which a pinned issuer guarantees. Setting `issuer` explicitly avoids the ambiguity. See [pin the issuer](./orchestration-release.md#pin-the-issuer).
 
 Elasticsearch takes precedence when both backends are enabled.
 
@@ -121,7 +127,7 @@ Before users sign in, route the host and path of `redirectUrl`, here `https://pr
 
 ```sh
 helm install camunda-optimize-tenanta camunda/camunda-platform \
-  --version "$HELM_CHART_VERSION" \
+  --version "$HUB_CHART_VERSION" \
   --namespace orchestration \
   --values optimize-values.yaml
 ```

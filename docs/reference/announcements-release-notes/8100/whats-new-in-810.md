@@ -732,7 +732,7 @@ The new `optimize` role deploys Optimize alone. Because one Optimize instance re
 
 `combined` remains the default, so existing deployments are unchanged by the upgrade. For a new production deployment, the split topology is the baseline.
 
-The `orchestration` role is available in the 8.7, 8.8, and 8.9 charts too, so one 8.10 Hub can manage Orchestration Clusters across supported chart versions, and each cluster upgrades on its own schedule.
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. Support for the `orchestration` role in the 8.7, 8.8, and 8.9 charts, which lets one 8.10 Hub manage clusters on older chart versions, requires patch releases of those charts that haven't been published yet. The currently published 8.7, 8.8, and 8.9 charts ignore `global.topology.mode` and deploy a combined release. The minimum versions will be listed here once they ship.
 
 <ul>
   <li><span class="link-arrow">[Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md)</span></li>

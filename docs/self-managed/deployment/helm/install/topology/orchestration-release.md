@@ -11,7 +11,7 @@ Install it after the [Hub release](./hub-release.md) is healthy. You can install
 
 ## What an orchestration release deploys
 
-`global.topology.mode: orchestration` deploys the Orchestration Cluster and Connectors, and suppresses the local Management Identity workload.
+`global.topology.mode: orchestration` deploys the Orchestration Cluster and Connectors, and gates off every other component: Management Identity, Camunda Hub, and Optimize. Even if a converted values file still sets `camundaHub.enabled: true` or `optimize.enabled: true`, they aren't rendered, so you don't need to disable them by hand.
 
 An orchestration release is self-contained. Its existing component values remain authoritative for its enabled state, authentication, storage, scaling, and Kubernetes configuration. `global.topology.mode` selects the release role; it doesn't duplicate component configuration, and the release never declares sibling clusters.
 
@@ -28,8 +28,8 @@ The component client IDs, audiences, redirect URLs, and secrets must match the c
 
 ## Requirements by chart version
 
-:::caution Mixed-version support depends on the chart release
-Managing Orchestration Cluster releases on the 8.7, 8.8, or 8.9 chart from an 8.10 Hub depends on Helm chart changes that aren't in a released chart yet. The current 8.10 pre-release chart (`15.0.0-alpha5`) rejects the `architecture`, `operateServiceName`, and `tasklistServiceName` cluster record fields. Don't rely on this guidance until the chart release that includes it is published. The minimum chart versions will be listed on this page when it is.
+:::caution Chart availability
+The `optimize` role, `physicalTenants` cluster records, and the `orchestration` role on the 8.7, 8.8, and 8.9 charts aren't in any published chart yet. The published 8.10 pre-release chart `15.0.0-alpha5` accepts only `combined`, `hub`, and `orchestration`, and the latest published 8.7, 8.8, and 8.9 charts (12.13.8, 13.13.2, and 14.10.1) have no `global.topology` key, so they silently ignore `global.topology.mode` and deploy a combined release. Minimum chart versions will be listed on this page once the charts that carry these features are published.
 :::
 
 An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same; the values it requires differ, because the older charts predate the unified Orchestration Cluster and still bundle Hub-plane dependencies.
@@ -127,6 +127,8 @@ connectors:
           existingSecretKey: client-secret
 ```
 
+`orchestration.security.authentication.oidc.redirectUrl` is deprecated and emits a deprecation warning. It's kept here because the chart still derives the Hub-matching redirect from it in this release. Plan to move it to `orchestration.extraConfiguration` before chart v16.
+
 This example uses Elasticsearch as secondary storage, and the `secondary-storage` Secret must exist in the orchestration namespace. For OpenSearch, relational database, and TLS configuration, see [database configuration](/self-managed/deployment/helm/configure/database/index.md).
 
 Optimize isn't part of this release. It's deployed separately, one release per Physical Tenant. See [install an Optimize release](./optimize-release.md).
@@ -196,7 +198,7 @@ A pinned issuer is optional for a single-tenant cluster but required as soon as 
 
 ```sh
 helm install camunda camunda/camunda-platform \
-  --version "$HELM_CHART_VERSION" \
+  --version "$ORCHESTRATION_CHART_VERSION" \
   --namespace orchestration \
   --create-namespace \
   --values orchestration-values.yaml

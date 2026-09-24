@@ -70,7 +70,7 @@ Follow [install the Hub release](/self-managed/deployment/helm/install/topology/
 
 Project the workload client secrets into the Hub namespace as well. Kubernetes Secrets are namespace-scoped.
 
-At this point Hub and Management Identity are running twice: once in the combined release, once in the new Hub release. Both read the same external databases, so confirm your Hub database supports the concurrent connections before you continue.
+At this point Hub and Management Identity are running twice: once in the combined release, once in the new Hub release. Both read the same external databases. Each Management Identity instance runs schema initialization and additive client, resource server, permission, and role provisioning at startup, against the same database and topology identifiers. Running two instances this way hasn't been validated. Don't perform this step in production until you've rehearsed it against a copy of your databases.
 
 ### Step 3: verify the new Hub release
 
@@ -83,9 +83,8 @@ Stop here and roll back if the cluster doesn't appear. Nothing has changed in th
 Update the existing release's values:
 
 - Set `global.topology.mode: orchestration`.
-- Set `identity.enabled: false`.
+- Set `identity.enabled: false`. The `orchestration` role also stops rendering Camunda Hub and Optimize, whatever their `enabled` values.
 - Set `global.identity.service.url` to the Management Identity service in the Hub namespace.
-- Set `camundaHub.enabled: false`.
 - Remove `optimize` from this release if you intend to run Optimize as its own release. The chart then stops rendering the legacy exporter Optimize reads, so configure it explicitly with the same writer prefix in the same `helm upgrade`. See [export records for Optimize](/self-managed/deployment/helm/install/topology/orchestration-release.md#export-records-for-optimize).
 - Keep the release name, namespace, `orchestration.*` values, secondary storage configuration, and every index prefix unchanged.
 

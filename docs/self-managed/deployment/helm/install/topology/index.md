@@ -7,6 +7,10 @@ description: "Install Camunda 8.10 Self-Managed as separate Hub, Orchestration C
 
 import HelmV4Required from '../../_partials/_helm-v4-required.md'
 
+:::caution Chart availability
+The `optimize` role, `physicalTenants` cluster records, and the `orchestration` role on the 8.7, 8.8, and 8.9 charts aren't in any published chart yet. The published 8.10 pre-release chart `15.0.0-alpha5` accepts only `combined`, `hub`, and `orchestration`, and the latest published 8.7, 8.8, and 8.9 charts (12.13.8, 13.13.2, and 14.10.1) have no `global.topology` key, so they silently ignore `global.topology.mode` and deploy a combined release. Minimum chart versions will be listed on this page once the charts that carry these features are published.
+:::
+
 Install Camunda 8.10 Self-Managed as separate Helm releases: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
 
 This is the baseline topology for a new 8.10 production deployment. Each release declares its role through `global.topology.mode`, so the Hub plane and each execution plane have independent lifecycles. For the reasoning, the release-role reference, and the limits of this model, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
@@ -42,10 +46,11 @@ Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts, so the
 
 The examples use `camunda` as the release name in every namespace, `hub` as the Hub namespace, and `orchestration` as the orchestration namespace. If you change a release name or namespace, update every Kubernetes service name that references it.
 
-Select a supported chart version from the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), then set it before installation:
+Select supported chart versions from the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), then set them before installation. The Hub and Optimize releases always use the 8.10 (15.x) chart. Each Orchestration Cluster release uses the chart for its own Camunda version:
 
 ```sh
-export HELM_CHART_VERSION=<15.x-chart-version>
+export HUB_CHART_VERSION=<15.x-chart-version>
+export ORCHESTRATION_CHART_VERSION=<chart-version-for-this-cluster>
 ```
 
 ## Allow required network traffic
