@@ -76,6 +76,39 @@ identityKeycloak:
         userPasswordKey: "identity-keycloak-postgresql-user-password"
 ```
 
+### Configure the internal Keycloak context path
+
+When using bundled Keycloak, configure its server path and Identity's connection path together.
+
+`identityKeycloak.httpRelativePath` controls the path served by Keycloak. `global.identity.keycloak.contextPath` controls the path Identity uses to reach Keycloak. These settings are independent: changing one does not update the other.
+
+Keep the existing defaults unless you need a different path. No configuration changes are required when keeping `/auth`.
+
+| Path           | `global.identity.keycloak.contextPath` | `identityKeycloak.httpRelativePath` |
+| -------------- | -------------------------------------- | ----------------------------------- |
+| Default        | `"/auth"`                              | `"/auth/"`                          |
+| Root           | `""`                                   | `"/"`                               |
+| Custom example | `"/sso"`                               | `"/sso/"`                           |
+
+For example, add both settings to your values file to use `/sso`:
+
+```yaml
+global:
+  identity:
+    keycloak:
+      contextPath: "/sso"
+
+identityKeycloak:
+  enabled: true
+  httpRelativePath: "/sso/"
+```
+
+If you explicitly configure issuer URLs, such as `global.identity.auth.publicIssuerUrl`, update them to match the exposed Keycloak endpoint. Also check your Ingress routing. This is especially important for a root-path Keycloak deployment when other components share the same host.
+
+With mismatched paths, Keycloak can be ready while Identity logs `Unable to connect to Keycloak.` and requests to the configured path return HTTP 404. Set both values to a matching pair and apply the updated values to your deployment.
+
+This pairing applies only when `identityKeycloak.enabled` is `true`. For external Keycloak, set `global.identity.keycloak.contextPath` to the path served by that instance; `identityKeycloak.httpRelativePath` does not configure the external server.
+
 ### Configure Management Identity and global defaults
 
 Management Identity configures the internal Keycloak instance during startup. For example, it creates the Camunda realm and other required Keycloak entities. If the Camunda realm doesn’t appear in Keycloak after deployment, the setup process did not complete successfully.
