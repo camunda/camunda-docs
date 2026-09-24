@@ -229,28 +229,28 @@ c8 list pi --profile=staging
 # Deploy to production without switching context
 c8 deploy ./release/ --profile=prod
 
-# Use a Camunda Modeler profile for one command
+# Use a Desktop Modeler profile for one command
 c8 search ut --state=CREATED --profile=modeler:Cloud Cluster
 ```
 
 This is useful when you are working against a local development cluster but need to quickly check or interact with another environment.
 
-### Camunda Modeler integration
+### Desktop Modeler integration
 
-`c8ctl` automatically discovers and imports profiles from Camunda Modeler. These profiles are read-only, always prefixed with `modeler:`, and loaded dynamically on each command execution.
+`c8ctl` automatically discovers and imports profiles from Desktop Modeler. These profiles are read-only, always prefixed with `modeler:`, and loaded dynamically on each command execution.
 
 ```bash
-# Set a Modeler profile as the active session profile
+# Set a modeler profile as the active session profile
 c8 use profile "modeler:Local Dev"
 
-# Use a Modeler profile for one command
+# Use a modeler profile for one command
 c8 list pi --profile=modeler:Cloud Cluster
 
-# Deploy using a Modeler profile
+# Deploy using a modeler profile
 c8 deploy ./process.bpmn --profile=modeler:Local Dev
 ```
 
-For Modeler profile file locations per platform, see [Getting started — Camunda Modeler integration](getting-started.md#camunda-modeler-integration).
+For Desktop Modeler profile file locations per platform, see [Getting started — Desktop Modeler integration](getting-started.md#desktop-modeler-integration).
 
 ## Session management
 
@@ -312,7 +312,7 @@ Add the following to your `.vscode/mcp.json`:
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                            |
 
 :::tip
-When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are shown on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet from the MCP tab.
+When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in Camunda Hub, all required connection details are shown on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet from the MCP tab.
 :::
 
 ### Use a profile with MCP proxy
@@ -331,7 +331,7 @@ Instead of passing environment variables, use a `c8ctl` profile to supply creden
 }
 ```
 
-This reads credentials from the named profile, including Modeler profiles (for example, `--profile=modeler:Cloud Cluster`).
+This reads credentials from the named profile, including modeler profiles (for example, `--profile=modeler:Cloud Cluster`).
 
 ### Local development without authentication
 
