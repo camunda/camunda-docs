@@ -388,6 +388,8 @@ paths:
     $ref: "signals.yaml#/paths/~1signals~1broadcast"
   /status:
     $ref: "cluster.yaml#/paths/~1status"
+  /status/upgrade:
+    $ref: "cluster.yaml#/paths/~1status~1upgrade"
   /system/usage-metrics:
     $ref: "system.yaml#/paths/~1system~1usage-metrics"
   /system/configuration:

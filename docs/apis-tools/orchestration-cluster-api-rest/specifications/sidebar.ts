@@ -294,6 +294,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-upgrade-status",
+          label: "Get the upgrade-readiness status of the whole cluster",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-topology",
           label: "Get cluster topology",
           className: "api-method get",
