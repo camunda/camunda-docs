@@ -34,6 +34,12 @@ const sidebar: SidebarsConfig = {
           label: "Search the projects using a catalog asset",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/search-catalog-asset-file-usages",
+          label: "Search the files using a catalog asset",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -237,6 +243,73 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/hub-api-sm/specifications/restore-project",
           label: "Restore a recently deleted project",
           className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Project Snapshot",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/create-project-snapshot",
+          label: "Create a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-project-snapshot",
+          label: "Get a project snapshot",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/update-project-snapshot",
+          label: "Update a project snapshot",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/delete-project-snapshot",
+          label: "Delete a project snapshot",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/search-project-snapshots",
+          label: "Search project snapshots",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/restore-project-snapshot",
+          label: "Restore a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/request-project-snapshot-review",
+          label: "Request a review of a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/submit-project-snapshot-review",
+          label: "Submit a review decision for a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/duplicate-project-snapshot",
+          label: "Duplicate a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-project-snapshot-external-resources",
+          label:
+            "Check whether a project snapshot references external resources",
+          className: "api-method get",
         },
       ],
     },

@@ -144,6 +144,12 @@ Grouping the history by loop iteration makes it easier to reference a specific p
 
 Operate labels each entry in the conversation history simply as `iteration` (for example, `5. iteration`) as shorthand for loop iteration.
 
+#### Model reasoning in conversation history
+
+Operate displays readable model reasoning as a static **Thinking** entry before the assistant’s response. It recognizes non-empty text in the assistant history marked with `camunda.agenticai.content.type: reasoning`.
+
+To display readable model reasoning where supported, [migrate to the AI Agent element templates introduced in Camunda 8.10](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md). If you do not see **Thinking**, confirm that your [model provider](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) returns readable reasoning. Opaque or redacted reasoning is not displayed.
+
 #### Visibility for external agents
 
 Agents built with external frameworks get the same visibility in Operate as Camunda AI agents. An external agent reports its system prompt, available tools, tool calls, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), and Operate displays that data alongside the process instance.

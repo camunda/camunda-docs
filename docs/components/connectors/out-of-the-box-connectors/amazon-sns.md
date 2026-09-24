@@ -176,7 +176,7 @@ This tab displays the URL of the **Amazon SNS inbound connector** for every clus
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use Amazon SNS inbound connectors in Desktop Modeler, or with Camunda 8 Self-Managed.
-In that case, Amazon SNS inbound connector deployments and URLs will not be displayed in Modeler.
+In that case, Amazon SNS inbound connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 ## Wiring with Amazon SNS

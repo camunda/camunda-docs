@@ -25,6 +25,12 @@ To create a selection and apply an operation, take the following steps:
 
 ![Three process instances selected in the Process Instances table, with the batch action toolbar visible above the table.](./img/selections-operations.png)
 
+:::note
+A batch retry reports an item as completed once Camunda marks its incident as resolved and triggers the retry. This confirms that the retry operation ran, not that the underlying problem was fixed. For example, `12 of 12 completed` means all 12 retries were triggered successfully.
+
+For [job incidents](/components/concepts/incidents.md#resolving), Camunda checks the underlying cause again only when a worker next activates each job. Keep a worker connected for the affected job types so Camunda can raise new incidents promptly if the problems remain unresolved.
+:::
+
 ## Next steps
 
 - [Monitor the batch operation](./monitor-batch-operations.md).

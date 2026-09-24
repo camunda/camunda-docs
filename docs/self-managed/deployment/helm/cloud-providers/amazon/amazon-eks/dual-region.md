@@ -12,6 +12,8 @@ import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import CostManagement from "../../../../_partials/_cost-management.md";
+
 :::caution
 Review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
 :::
@@ -56,11 +58,7 @@ You are responsible for operating and maintaining the infrastructure. Camunda up
 
 :::
 
-:::danger Cost management
-
-This guide will incur costs on your cloud provider account, specifically for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), traffic between regions, and S3. For more details, see [AWS EKS pricing](https://aws.amazon.com/eks/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/). Costs vary by region.
-
-:::
+<CostManagement />
 
 ### Outcome
 

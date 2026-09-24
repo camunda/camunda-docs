@@ -7,6 +7,10 @@ description: Work with Microsoft Teams from your BPMN process using the Microsof
 
 The **Microsoft Teams connector** is an outbound connector that allows you to connect your BPMN process with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) to manage interactions.
 
+:::note
+If your organization uses [Camunda app integrations](/components/camunda-integrations/app-integrations/app-integrations.md), the [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md) sends through the app your users already have connected, and carries no credentials in the process model.
+:::
+
 ## Prerequisites
 
 To use the **Microsoft Teams connector**, you need to have a [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) account and
