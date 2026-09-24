@@ -219,9 +219,9 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administr
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 
-# TEMPORARY REDIRECT - This file didn't belong in 8.9. However, it was in production, so removing it broke builds (issue #10044).
+# TEMPORARY REDIRECT - This file didn't belong in 8.9. However, it was in production, so removing it broke builds (pr #10044).
 # We should be able to remove this redirect after we publish the docs to production, removing it from the sitemap.
-RewriteRule ^docs/self-managed/upgrade/helm/890-to-8100/?$ docs/next/self-managed/upgrade/helm/890-to-8100/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/helm/890-to-8100/?$ /docs/next/self-managed/upgrade/helm/890-to-8100/ [R=301,L]
 
 # 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)
 RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-89/?$ /docs/next/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
