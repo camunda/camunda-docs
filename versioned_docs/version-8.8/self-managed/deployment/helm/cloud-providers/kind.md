@@ -7,6 +7,7 @@ description: "Deploy Camunda 8 Self-Managed on a local Kubernetes cluster using 
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import DeploymentReadinessCheck from './\_partials/\_deployment-readiness-check.md'
 
 With this guide, you'll deploy Camunda 8 Self-Managed to a local Kubernetes cluster using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/). The setup is optimized for learning, development, and testing, with reduced resource requirements suitable for a personal machine.
 
@@ -299,15 +300,14 @@ kubectl get pods -n camunda -w
 
 Wait until all pods show `Running` status. This may take 5–10 minutes depending on your internet connection and system resources.
 
-You can also use the deployment readiness check script from the root directory of the `camunda-deployment-references` repository. This script requires [jq](https://jqlang.github.io/jq/) to be installed:
+You can also use the deployment readiness check script, run from the reference architecture directory `get-your-copy.sh` left you in. This script requires [jq](https://jqlang.github.io/jq/) to be installed:
 
 ```bash
 export CAMUNDA_NAMESPACE=camunda
+../../../generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck />
 
 Finally, verify the Helm release:
 

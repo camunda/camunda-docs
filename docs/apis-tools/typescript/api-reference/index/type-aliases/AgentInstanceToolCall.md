@@ -12,7 +12,6 @@ type AgentInstanceToolCall = object;
 ```
 
 A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.
-ASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.
 
 ## Properties
 
@@ -26,7 +25,8 @@ arguments:
   | null;
 ```
 
-The tool call arguments as provided by the LLM. Null on TOOL_RESULT items.
+The tool call arguments as provided by the LLM. May be null or populated on
+any item, including TOOL_RESULT.
 
 ---
 

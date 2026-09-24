@@ -54,7 +54,7 @@ An output mapping targets `toolCallResult` or one of its fields, such as `toolCa
 
 <DeclaringAgenticSubprocess />
 
-## References
+## See also
 
 - [AI Agent tool definitions](../../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md)
 - [Rule source](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/agent-tool-output-key.js)

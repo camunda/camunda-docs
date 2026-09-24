@@ -33,7 +33,6 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
 
 - Equip the last user task with a custom header `final-user-task` and the value:
-
   - `success` to display the last user task on the "happy path".
   - `fail` to use that user task to communicate a failed process to the user.
 

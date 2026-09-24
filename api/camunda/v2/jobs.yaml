@@ -568,6 +568,8 @@ components:
           nullable: true
           type: string
       x-properties-added-in-version:
+        - propertyName: jobKey
+          addedInVersionOverride: "8.6"
         - propertyName: kind
           addedInVersion: "8.8"
         - propertyName: listenerEventType
@@ -670,6 +672,7 @@ components:
           description: The field to sort by.
           type: string
           enum:
+            - creationTime
             - deadline
             - deniedReason
             - elementId

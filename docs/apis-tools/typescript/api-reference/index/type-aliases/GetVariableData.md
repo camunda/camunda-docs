@@ -30,7 +30,7 @@ path: object;
 #### variableKey
 
 ```ts
-variableKey: VariableKey;
+variableKey: VariableKeyWritable;
 ```
 
 The variable key.

@@ -110,7 +110,7 @@ Depending on your specific use case, you may need to scale **horizontally** (mor
 
 By default, node affinity rules prevent all Orchestration Cluster pods from being scheduled on the same node. This requires at least three nodes for proper operation. For details, see the [Kubernetes node affinity documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
 
-To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. Use affinity and anti-affinity rules to ensure workloads remain available even if a zone fails.
+To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. The default anti-affinity rules ensure Orchestration Cluster pods run on distinct nodes, but do not ensure those nodes are in different zones — use the `orchestration.topologySpreadConstraints` Helm value to spread them across zones. For configuration details and caveats, see [topology spread constraints](/self-managed/deployment/helm/install/production/index.md#topology-spread-constraints).
 
 ### Components
 
@@ -139,6 +139,8 @@ Also included in this namespace are components that are tightly integrated with 
 
 - [Optimize](/components/optimize/what-is-optimize.md) — reporting and analytics
 - [Connectors](/components/connectors/introduction.md) — external system integrations
+
+The Orchestration Cluster also depends on a **secondary storage** backend for Operate, Tasklist, and the v2 Orchestration Cluster REST API. This backend is a document store (Elasticsearch or OpenSearch) or a supported relational database management system (RDBMS). It is provisioned outside the `StatefulSet`, as a managed service or an operator-managed database. Optimize requires Elasticsearch or OpenSearch and cannot use an RDBMS. For the trade-offs and how to choose a backend, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
 
 #### Web Modeler and Console namespace
 
@@ -179,7 +181,7 @@ Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, 
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
+The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md#disk-space), and conduct benchmarking to determine your exact needs.
 
 - **4 Kubernetes nodes**
   - CPU: 4 modern cores
@@ -196,7 +198,7 @@ The storage performance figures in this section and in the platform-specific sec
 
 Storage type, however, is a strict requirement: HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency, and are not supported.
 
-The same SSD requirement applies to secondary storage (Elasticsearch/OpenSearch) — see the [Database](#database) section for details.
+The same SSD requirement applies to secondary storage, whether you run Elasticsearch/OpenSearch or an RDBMS. See the [Database](#database) section for details.
 :::
 
 #### Networking
@@ -225,9 +227,10 @@ Database ports are not included here, as databases should be maintained outside 
 
 Typical defaults include:
 
-- `5432`: PostgreSQL
+- `5432`: PostgreSQL (Management Identity, Web Modeler, and PostgreSQL secondary storage when used)
 - `9200`, `9300`, `9600`: Document-store secondary storage (Elasticsearch/OpenSearch)
-  :::
+
+:::
 
 ##### Load balancer
 
@@ -237,16 +240,38 @@ The Zeebe Gateway as part of the Orchestration Cluster requires gRPC, which itse
 If you do not rely on the gRPC capabilities of Camunda 8, you can safely disregard this and use the Orchestration Cluster REST API instead.
 :::
 
-By default, the Camunda 8 Helm chart is compatible with the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
+Camunda 8 supports both Kubernetes traffic APIs, and you can use either:
 
-`Ingress-nginx` deploys a Network Load Balancer (layer 4).
+| API                                                                             | Support                                        | Setup guide                                                                                                       |
+| ------------------------------------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)     | Supported, used by the reference architectures | [Configure the Helm chart with Ingress](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)         |
+| [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) | Supported                                      | [Configure the Helm chart with Gateway API](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md) |
 
-The following annotation is added by the Helm chart to enable gRPC:
+The reference architectures use the Ingress API with [Contour](https://projectcontour.io/), a CNCF Ingress controller backed by the [Envoy proxy](https://www.envoyproxy.io/), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
+
+Contour is exposed through a `LoadBalancer` Service, so the load balancer your cloud provider creates for it operates at layer 4 (on AWS, a Network Load Balancer).
+
+Contour is a choice, not a requirement. Camunda tests the reference architectures with Contour, so that is what the procedures install, but any Ingress controller supporting gRPC and HTTP/2 works, for example [Traefik](https://traefik.io/traefik/), [HAProxy](https://haproxy-ingress.github.io/), or [Envoy Gateway](https://gateway.envoyproxy.io/). Select your own controller through `global.ingress.className`.
+
+Each controller declares the gRPC upstream differently, and not on the same object:
+
+| Ingress controller | Annotation                                           | Object                                    |
+| ------------------ | ---------------------------------------------------- | ----------------------------------------- |
+| Contour            | `projectcontour.io/upstream-protocol.h2c: "26500"`   | Orchestration Cluster `Service`           |
+| Ingress-nginx      | `nginx.ingress.kubernetes.io/backend-protocol: GRPC` | Zeebe `Ingress` (added by the Helm chart) |
+
+Check your controller's documentation for its own equivalent. With Contour, set the annotation on the Orchestration Cluster service, and use `projectcontour.io/upstream-protocol.h2` instead when the upstream itself uses TLS:
 
 ```yaml
-annotations:
-  nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+orchestration:
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: "26500"
 ```
+
+:::note
+[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures moved to Contour in 8.9.
+:::
 
 ### Application
 
@@ -258,10 +283,10 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-| Database                         | Requirement                                                                                        |
-| :------------------------------- | :------------------------------------------------------------------------------------------------- |
-| Document-store secondary storage | Required by Orchestration Cluster and Optimize in this topology (Elasticsearch/OpenSearch).        |
-| PostgreSQL                       | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
+| Database                                  | Requirement                                                                                                                                           |
+| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Secondary storage (Orchestration Cluster) | Elasticsearch or OpenSearch (document store) in this topology, or a supported RDBMS as an alternative. Optimize requires Elasticsearch or OpenSearch. |
+| PostgreSQL                                | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster.                                                    |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
@@ -272,7 +297,11 @@ For backend trade-offs and production guidance, see [secondary storage architect
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmarking to determine the appropriate sizing for your specific environment and workload.
 
 :::note Secondary storage disk requirements
-Secondary storage (Elasticsearch/OpenSearch) is customer-managed. Provision it with sufficient resources and use performant disks — disk latency directly impacts export throughput and overall cluster performance. See [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
+Secondary storage is customer-managed, and the same disk expectations apply to both backend families. Provision it with sufficient resources and use performant SSD-backed disks, because disk latency directly impacts export throughput and overall cluster performance.
+
+- Elasticsearch/OpenSearch: see [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
+- RDBMS: see [secondary storage considerations](/components/best-practices/architecture/sizing-self-managed.md#secondary-storage-considerations) for sizing guidance. An RDBMS scales vertically rather than horizontally, so size the instance and its storage with more initial headroom.
+
 :::
 
 Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
@@ -365,7 +394,7 @@ If you need more than 128 streams per client, see [Network Load Balancer](#netwo
 
 ##### Network load balancer (NLB)
 
-Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingress-nginx), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
+Camunda 8 is compatible with [Contour](https://projectcontour.io/), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
 
 ### Microsoft AKS
 

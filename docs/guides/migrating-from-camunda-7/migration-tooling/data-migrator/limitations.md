@@ -7,6 +7,10 @@ description: "Data Migrator limitations."
 
 An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to variables and BPMN elements.
 
+:::note
+These limitations apply to moving data from Camunda 7 to Camunda 8. To migrate a running Camunda 8 process instance to a different Camunda 8 process definition, see [process instance migration](/components/concepts/process-instance-migration.md), which has a different set of limitations. Multi-instance elements in particular are treated differently by the two features.
+:::
+
 ## Identity
 
 The following requirements and limitations apply:

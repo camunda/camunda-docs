@@ -1,11 +1,11 @@
 ---
 id: restore-version
 title: "Restore a version"
-description: "Restores the file content to the state captured in this version. A new version is created representing the restored state. For element template files, the request body must include the target version number."
+description: "Restores the file content to the state captured in this version. A new version is created representing the restored state, unless both the file's live content and its most recent version already match that exact content, in which case that version is returned and nothing is created. For element template files, the request body must include the target version number and a new version is always created."
 sidebar_label: "Restore a version"
 hide_title: true
 hide_table_of_contents: true
-api: eJztW+tuG7kVfhVi9scmW81IluzYFoqizg3rbLcxbCcBGhkQZ+aMxJhDzpIcy1pBQB+iT9gnKQ7JuUmy4w12UbRQgADWDOfwXL7z8fC2CmQBihomxXkajAMF2kgFH0FpJkXQC1LQiWIFNgjGwaV7rYmZA8kYB5JIYUAYYqR9pg01QBJamFJBSpggZs40uXPyInJGBCyqn4RpkiigBlKioFCgQRgmZlaS1yR1IiPyVioCHHLbGeQFx45QBd3z7X8pQRsSy3RJ8lIbwkTCyxTsW0PVDEzdsSjzGFQ0QQvvQ5qmkIZMhP51MA4G0UE0sC815FQYloTYAVOgg/EquGUCvdW4KbYPVoGX8BMs8VemZB6Mg4KaedALBM0hGLebrNfrXmDoTAfjz7Wwm15QUEVzMKDwxWrHh72AiUaw1ywNxkaVsBmz6zmQUrBfSiC3sCQysw6pIhL0Ap3MIaeob/fDq6U2kIczEIgQSO3nmVSEtr82ywKV00YxMQt6QSZVTk3jHKduy4/+g85ruKd5wfHxIc2S0QkkIcBwFB6exnF4SkcvwtNhksZ0BMdHcIy9MsM3pKzXN84VoM1LmdoANJ7JKNfQCzxc8R0tCs4SC/3+F40Wr1qu8FrK+AskJugFNE0ZNqX8QmHKGIZI8FKL1qMaA9sOvX4IiJg9GoxLlxb02xkWkUtvDFnMQfhGmC1U7E6MiJzPhJMjFZFmDspJRNu0A783kwkDM1Dt8DFhXhwGFqBdXzsOsH67dN5GHK/R97qQQjsnDAeD3Q6oLF9Q3crxMklA66zkfImGmlIJRzICFnxZs0QLd98cyRpr3Wx9KvJ8Ml4CB6qBOJromvmWKW2Qt2KOwXQNfd5JlYIihZJoL9qBEXEKHABN4+Ojo/DFi2EWHo7iNDw5SA/CJBu9yEandEAHo6AXSDWjgv1qzb0oY86SBt3OTcE4GA6GR+FgFB4cXR8MxqPBeDCIBoPBP4K60UubIN6ad1QAeS0B3ZNTxoNx8IUKiFIJf/X+ihKZB+teUBbp1/vwjb6tj3Wb0T53ac/K6vq7cWHjgLaVjcptvXb68eaBVPZ0/ht5lXL+PrME/r/NqzfrCvW7XIBvdhjfVX+9kSK7BLWefFVeLxAl55hfbsxbt/Jol+xWgBwDtooSEgOXYqaJkd8YNUu2j4XsbQ3Q7Xg175pgPZEJqmBVImykdtHDpi2f5mBHg5aPsRYrsLmeQ2rHozlVti7TslQJ6JaBsZQcqMCo1oyzc6xjOWhD88KNWGaD/f23j3oO0zVEOa3OXj6UjBoUWcxlPVq0IUR+pksSA0Hc2LBxmNFkSaQi2kV2Y4yxBndR1gbH5qjSVeeMKMhAgUgAfUmtblHQJTbPZY4Mt6jn4YxLmS44XXYyr5K/lXaeanfJsa8ITVMFWj8uqBURJ7BdF3zQoC4rcx0I60HiG2DBqTbEC3g6NjojziPYaEvfA+S/BJCdRWXJq0Ly8KHasVDyjqWQkpQaiowlpCF3lLP0kYqwUDLmkP9puzLcDMmFa0lSMGi4Cx2h2g9NsZvQfr58+4qcHh4d3zybG1Pocb+/WCwilSUhpMxIFUk166sswf/Y7nlErueggOQOYc1UgjQRJbqAhGUsqWbSXm1brHdq9RpRbajYd5VXewHOmUttUYem2PmiNhTdv4UjJ3b1cEBLxXbg98PlOWEpTtizZTVn7+hsv8kohnUc0FiWZhxzKm47I13lwVQmOkpoXoqURkz2acH6d8NoUEXPjpa6H9M0VNWkowbRtu6byuoyz6mqa4BNPRt9XtKUXDYdeD82PeyeKI2GW30iXH+8vr4gTgRJZAqWVmzp4RXo9H04GPSCnAmWl3n1i967Xy8Gg3UdzK/bKwjcF5wK2i6mKqOZILlU4FHeNd+bXuFyST7n9P6djPW1PEsMu6MG9A1JqMDEi4EUVGlI0VM1vr6CpLDmvQcwhWsaW8CSis3YpiVd1ft3w/4XGes+dYqizDbR+OR+7Xy47swDvcJdkFYftiHRIMLGpwpI8BE5yHk7o4z7KXd7SWpMvkc6/t4tTXn32a6idnaOAw/9vl3aqgnxYDchVj1wmtxqx4SElmaO3nP0h8WQdSbldsCaA03tutIq+PTpU3jWNIad0+ZqoEA19gS7J9g9we4J9ncm2A8CKUsq9qtdo2kY9qDFsBhuXSLrwBbF+UKwkWJLarui6NBQTWKfRLWjbeZ6K1XM0hSEJZqadat+OZcL2Jege4bcM+SeIf8Ihqz5p0OPoxY9vq92cTuMRN4IXSogS1kqcnZx3i4GyZzeQb1zaveVClA50/XaxkNM2X/S8mRFp4ePVq6tFUa7+IPaZ7IUezbds+meTfds+kew6d+lIW+RYzpserhRbD6FoH4fhjzdRV2JFBlniSEySUrldv1x58rvHDenZKyWe7bcs+WeLfds+Qew5StPRB2yPN1NljVrabJgZm61tewljD8Z6E14yoT8t5Do0a4dozNBEK8KmQaUwjNQey7dc+meS/dc+l/i0vOKjq5A3YEib5CVWsR61NlUOhOkFHBfQIJV6NcYzM7xKwojF+7QoVFLQmeUCYKnQtVX1z+tLQaEXQOwxxhu7dHEHWeke8Ed5SXUZ6XXvabx9pnpuvXveXYaD/zmYOYS5RXS7s/Z9hhCf0ijv2q+WfdVc3YV3W6j4OwsFbp85Rh9Pe73V3OpzXq8KqQya+8pa4ZieODDZjI2cexfkROXCeVzp8p2FuOL9qGMH8vYLss4RSKEEnbXFXkyODnZKQ2bPiKpPThVspAjd8pyjR+UZl2tISkVM0vrrxioAoXbh8H480379RWKcv5pN6pTw+tge7SnyWwjxIH9422V4e8+Xe/I63efruulfXkLgsjYUCZwx1XJ3GWBS3mzrM6LKHd74IrSqx6eX7E2vke1yDAakIQzECZsr41lXC5aJYxtQM5fEypSoiFRYOpDZkyQV26wIa+k0JL7uwpXwLPwZyroDNJee8cCyB2jTlEsl9jM3pR4f/76Va0veQbRLOqRn2CZcElve+SNMIqS89fPcfzGNMUS5LI57P5m61BzMB5YLs2k9b1nIB/Z3WOMjzoHo1E/klvtyUKqW13QBG9aFEpiyaB71dWLTHLcT+5NRJVxPeulHPBgu267B+UXSs4UzXOKrsDD3hMxEd99R846Ozr48IxzAiItJBNGV2uUeETWbnIjDBxeHAwi8t7igFAPixoNE7EFhzHKD8kPPyAifviB/Puf//LhdIukLtxtPPiD+RuBRkMnghC4T+ZUzCyucn8m1GmBkX4S2CKvUAs0XrEOciyXa/M4elClZ9vQ6eFRNircPYD3BYjz12iIgMSEicwLahieVz9PL57bqJy3r89Ya5ggcAdqWQ0z44mYTqcTceY33mzsxuSli8ufUcnQfvkX39CG2g56Gn/Yv0h9baBOzaoqrqtoN9ISN/jbvJyI6StXo4fXywLG5KEyfRqRK3Bip51xe+o5byJcKWXvLomUKrx2ATzVFTQv6IyJGpZXQFUybyETyagwhJJpQWcwrUp9Sx5TROGUPJNZpsE8t4kx5SxnZjoRRtqrHUpydEHJ8RuRygUTM7wCUTmlusW0q4OJmBppKD83kOtppfAlIsX2Yr3cTu1UglvC8rMyviSA9ieAi/+hR75qBETklX2mJ0LPZclTwpBn7GUTBVRLYS85xDS5DWWWWQsVYNmhDYqZ4XzESDKnIuUwQSgKbTux9Ywmz2xlezg8RXQeDUbPKys+HpAU74Q1jICGfDywdjybuhH5oD99jtuwVUvcG7YnFU+ig4FVZsE4x/JSQS7vLF1PxEl0MIzIz2xmDTWSfBwS6pMKqOLMT2XvQDB7QhPzUDsUTcTn3H6I5fCsZCk0c7fNmQf+7gu4N6isDo2UXPfrr8OcipLWTyBEsIQLiMNcpsABcyecl3GIlj53MHW1ob+709xWG0YDew0F8UQT07p04RkLrz7YAucBVbFe4CwBoWH7Y/I398bfdekKwlOyvJaUyLzv5DAxC6lIQ0s3oW0VGlC5/u54MKQvTpPDcHQ6GoaHx/EopMnxYTiKj46OM4CUHp3YIQ4rupyKlkL++mFzUWJzHFs1M/f/y7uKvoQyiKmCU2bP4NuArHzlW9+XwZp73Lk70y5+b3q+eP0crFYx1fBB8fUaH/9SgsIS76apdd1tCKbx7+Yq3YOOf1ZdVHtOvnpHZqdB1RxKLFuzjKDnpxd3G1dT3Im21mSlPTC0BGzdEmtmLGeWwx9t255qXLy/wtI09pcMMV3x6ixdoJPpwikrrWdsGWyfrQJOxaykM2zrZOK//wANK5ek
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Restores the file content to the state captured in this version. A new version is created representing the restored state. For element template files, the request body must include the target version number.
+Restores the file content to the state captured in this version. A new version is created representing the restored state, unless both the file's live content and its most recent version already match that exact content, in which case that version is returned and nothing is created. For element template files, the request body must include the target version number and a new version is always created.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -88,7 +88,7 @@ Restores the file content to the state captured in this version. A new version i
   responses={{
     "200": {
       description:
-        "The version was restored successfully. Returns the newly created version.",
+        "The version was restored successfully. Returns the newly created version, or the file's most recent version when both that version and the file's live content already matched this content.\n",
       content: {
         "application/json": {
           schema: {
@@ -99,6 +99,7 @@ Restores the file content to the state captured in this version. A new version i
               description: "First stable release of the order process.",
               fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
               organizationPublic: false,
+              linkedToProcessApplication: false,
               created: "2025-03-15T10:30:00.000Z",
               createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
               updated: "2025-03-15T10:30:00.000Z",
@@ -114,6 +115,7 @@ Restores the file content to the state captured in this version. A new version i
               "updated",
               "updatedBy",
               "organizationPublic",
+              "linkedToProcessApplication",
             ],
             properties: {
               versionKey: {
@@ -153,6 +155,11 @@ Restores the file content to the state captured in this version. A new version i
                   "Whether the version is published to shared resources.",
                 type: "boolean",
               },
+              linkedToProcessApplication: {
+                description:
+                  "Whether this version is captured by one or more project snapshots. Use `POST /project-snapshots/search` with a `fileVersionKey` filter to find out which ones.",
+                type: "boolean",
+              },
               created: {
                 description: "The timestamp when the version was created.",
                 type: "string",
@@ -173,9 +180,11 @@ Restores the file content to the state captured in this version. A new version i
                         type: "string",
                       },
                       email: {
-                        description: "The email address of the user.",
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
                         type: "string",
                         format: "email",
+                        nullable: true,
                       },
                     },
                     title: "UserReference",
@@ -202,9 +211,11 @@ Restores the file content to the state captured in this version. A new version i
                         type: "string",
                       },
                       email: {
-                        description: "The email address of the user.",
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
                         type: "string",
                         format: "email",
+                        nullable: true,
                       },
                     },
                     title: "UserReference",

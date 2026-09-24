@@ -15,6 +15,8 @@ Focus on process, activity, message, and error IDs, but also consider events as 
 
 Define developer-friendly and business-relevant IDs for the process itself, as well as all activities, messages, and errors. Also consider events, gateways, and the sequence flows that carry conditional expressions. Even though IDs are just identifiers, keep in mind that they will show up regularly on the technical level. Meaningful IDs will help a lot.
 
+One case where an ID is more than an identifier is an element inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) that an [AI agent](/reference/glossary.md#ai-agent) uses as a tool. There, the ID is the tool name passed to the model, and it directly affects which tool the model selects, so describe what the tool does rather than applying the type prefixes below. See [write a tool name and description](/components/agentic-orchestration/add-tool-to-ai-agent.md#write-a-tool-name-and-description) for more details.
+
 Examine the IDs shown in the following example:
 
 <div bpmn="best-practices/naming-technically-relevant-ids-assets/TweetApprovalProcess.bpmn" callouts="Participant_TweetApproval,StartEvent_NewTweetWritten,Task_ReviewTweet,Gateway_TweetApproved,SequenceFlow_ApprovedNo,BoundaryEvent_TweetDuplicated,EndEvent_TweetPublished" />

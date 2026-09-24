@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 The Orchestration Cluster MCP Server is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP).
 
-- It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
+- It enables [AI agents](/reference/glossary.md#ai-agent) and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
 - Similar to the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP server is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
 
 :::important Camunda 8 public API
@@ -44,7 +44,7 @@ The MCP server uses the same authentication model as the [Orchestration Cluster 
 
 For SaaS environments:
 
-1. [Create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console. Ensure the **Orchestration Cluster API** scope is enabled.
+1. [Create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in Camunda Hub. Ensure the **Orchestration Cluster API** scope is enabled.
 2. Use the generated **Client ID**, **Client secret**, **OAuth token endpoint**, and **audience** to obtain an access token via the [OAuth 2.0 client credentials flow](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt).
 3. Pass the token in the `Authorization: Bearer <token>` header, or use [`c8ctl mcp-proxy`](./orchestration-cluster-api-mcp-setup.md#using-c8ctl-mcp-proxy) to handle this automatically.
 

@@ -327,7 +327,7 @@ In this case, it is recommended to create a new custom trust store based on the 
 
     Set any password, so long as it's at least 6 characters.
 
-2.  Add your custom certificate to to the new trust store. For example, if your custom certificate is located at `/tmp/myCustomCertificate.pem`:
+2.  Add your custom certificate to the new trust store. For example, if your custom certificate is located at `/tmp/myCustomCertificate.pem`:
 
     ```sh
     keytool -import -alias MyCustomCertificate -keystore zeebeTrustStore.jks -file /tmp/myCustomCertificate.pem

@@ -39,4 +39,25 @@ public static class SecretExamples
     private static void UseSecret(string value) { }
     // </ResolveSecrets>
     #endregion ResolveSecrets
+
+    #region ListSecrets
+
+    // <ListSecrets>
+    public static async Task ListSecretsExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // The request body is reserved for future filtering options and currently
+        // takes no properties.
+        var result = await client.ListSecretsAsync(new SecretListRequest());
+
+        // Only the references are returned — never the secret values. Use
+        // ResolveSecretsAsync to fetch a value when one is actually needed.
+        foreach (var reference in result.References)
+        {
+            Console.WriteLine($"Secret available: {reference}");
+        }
+    }
+    // </ListSecrets>
+    #endregion ListSecrets
 }

@@ -8,6 +8,19 @@ mdx:
 
 # Semantic Types
 
+## AgentDefinitionKey
+
+```python
+class AgentDefinitionKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AgentDefinitionKey](#agentdefinitionkey)
+
 ## AgentHistoryItemKey
 
 ```python
@@ -332,6 +345,19 @@ Bases: `str`
   **value** (_str_)
 - **Return type:**
   [GroupId](#groupid)
+
+## HistoryItemId
+
+```python
+class HistoryItemId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [HistoryItemId](#historyitemid)
 
 ## IncidentKey
 

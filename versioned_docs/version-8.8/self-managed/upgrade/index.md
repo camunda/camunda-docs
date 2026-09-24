@@ -37,11 +37,18 @@ This guide applies to Camunda 8 Self-Managed installations only and does not app
 Camunda 8 upgrades must be performed sequentially. If your deployment is running a version **earlier than 8.7**, you must complete the required version-specific upgrades listed in [upgrading from an earlier version](#upgrading-from-an-earlier-version) before you can upgrade to 8.8.
 :::
 
-## Prepare for upgrade
+## Upgrade sequence
 
-Review required preparation steps and important changes before upgrading to Camunda 8.8.
+The 8.7 to 8.8 upgrade spans several guides. Work through them in this order, rather than treating them as separate destinations.
 
-<p class="link-arrow">[Prepare for upgrade](prepare-for-upgrade.md)</p>
+| Step | What you do                                                                                                                                                                   | Guide                                                                                                                          |
+| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| 1    | Confirm upgrade eligibility, review platform changes in 8.8, and verify infrastructure compatibility.                                                                         | [Prepare for upgrade](prepare-for-upgrade.md)                                                                                  |
+| 2    | Review component changes. Some require action **before** you upgrade, such as consolidating to a single Elasticsearch/OpenSearch instance and updating custom index prefixes. | [Component upgrade from 8.7 to 8.8](./components/870-to-880.md)                                                                |
+| 3    | Create and update your 8.8 values file, then run the upgrade and any required data migration.                                                                                 | [Upgrade Camunda 8.7 to 8.8 using Helm](./helm/870-to-880.md), or [manual upgrade](./manual/index.md) for non-Helm deployments |
+| 4    | Monitor and validate the upgrade before returning the deployment to normal use.                                                                                               | [Validate the upgrade](./helm/870-to-880.md#validate-the-upgrade)                                                              |
+
+Complete Step 2 before Step 3. The component guide contains prerequisites that affect what you add to your values file in Step 3.
 
 ## Upgrade guides
 
@@ -67,12 +74,6 @@ With Camunda 8.8, the default `docker-compose.yaml` deploys the Orchestration Cl
 
 For production environments, use Kubernetes with the official Camunda Helm chart or create a custom deployment process using Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
-## Upgrade components
-
-Some upgrades require additional component-level steps depending on which components you use or how your environment is configured. Follow the upgrade guide for your deployment method and for any required component-specific changes or migrations.
-
-<p class="link-arrow">[Component upgrade from 8.7 to 8.8](./components/870-to-880.md)</p>
-
 ## 8.8 release information
 
 Learn about new features, breaking changes, and deprecations in Camunda 8.8:
@@ -86,10 +87,9 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.8:
 
 **Camunda 8 upgrades must be performed sequentially.**
 
-- You must upgrade sequentially, one minor version at a time (for example, 8.6 → 8.7 → 8.8).
-- For best stability and fix coverage, use the latest available patch in each minor before and after each minor upgrade.
-- For example, you must upgrade from 8.6 to 8.7 before you can upgrade to 8.8.
-- **Do not skip releases**.
+- You must upgrade sequentially, one minor version at a time. For example, you must upgrade from 8.6 to 8.7 before you can upgrade to 8.8.
+- Upgrading to the latest available patch of each minor is strongly recommended for fix coverage.
+- **Do not skip releases.** Skipping a minor version fails the schema compatibility check and blocks startup.
 
 Use the following version-specific upgrade guides to upgrade to Camunda 8.7 **before** you can proceed with the 8.8 upgrade.
 

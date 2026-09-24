@@ -1,7 +1,7 @@
 ---
 title: Use connectors and deploy processes with Docker Compose
 sidebar_label: Connectors and modeling
-description: Configure connector secrets, add custom connectors, and deploy processes with Desktop Modeler or Web Modeler in Docker Compose.
+description: Configure centralized and legacy secrets, add custom connectors, and deploy processes locally with Docker Compose.
 ---
 
 Use this page to work with connectors and local modeling tools in the Docker Compose quickstart.
@@ -18,6 +18,39 @@ For connector overviews and installation details, see:
 ### Connector secrets
 
 When you run Camunda locally with Docker Compose, some [connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) require credentials or API keys to connect with external services such as Slack, SendGrid, or AWS. Store those values as secrets instead of hardcoding them in your process models.
+
+#### Use centralized secrets
+
+In Camunda 8.10, you can use centralized secrets from local files in both the lightweight and full Docker Compose setups.
+
+1. In the extracted distribution, open the included `secrets/` directory and create a file named `OPENAI_API_KEY`.
+1. Enter only the secret value, not `KEY=value`, and save the file as UTF-8 without a byte-order mark.
+1. Start the lightweight setup with `docker compose up -d`, or the full setup with `docker compose -f docker-compose-full.yaml up -d`.
+1. Reference the secret in a service-task or connector input mapping:
+
+   ```feel
+   =camunda.secrets.OPENAI_API_KEY
+   ```
+
+You don't need to edit Compose or application YAML. Both setups mount `secrets/` read-only into Orchestration at `/etc/camunda/secrets` and configure `camunda.secrets.stores.file.default.path` through `CAMUNDA_SECRETS_STORES_FILE_DEFAULT_PATH`. The directory isn't mounted into Connectors.
+
+Each filename is a secret name, and the file contents are its value. Use letters, numbers, underscores, or dashes in names. One trailing newline is ignored; other whitespace is part of the value. For names containing dashes, use FEEL backticks:
+
+```feel
+=camunda.secrets.`openai-api-key`
+```
+
+You can add files while the stack is running. Changes and deletions can take up to 20 minutes to affect resolved values because Orchestration caches secrets. To clear the cache immediately, run `docker compose restart orchestration`, or `docker compose -f docker-compose-full.yaml restart orchestration` for the full setup.
+
+If a missing secret causes a `SECRET_RESOLUTION_ERROR` incident, create the file and resolve the incident in Operate. Creating the file alone doesn't resolve an existing incident.
+
+In this Docker Compose setup, the files are plaintext and intended only for local development. The included `.gitignore` excludes secret files from ordinary commits. Don't force-add secret files, include them in shared archives, or copy their values into BPMN. For production, use a secret store and deployment mechanism that meets your security requirements, such as AWS Secrets Manager or Google Secret Manager.
+
+On native Linux, make sure the container user (UID 1001) can traverse the directory and read the files. Host-user-only permissions can prevent access.
+
+#### Use legacy connector secrets
+
+The existing `connector-secrets.txt` file supplies only the Connectors runtime environment for `{{secrets.NAME}}` references. The file isn't imported into the centralized store, so the two workflows remain independent.
 
 You can add secrets to the connector runtime with the included `connector-secrets.txt` file:
 
@@ -50,7 +83,7 @@ Each connector JAR must include all required dependencies inside the JAR.
 
 ## Deploy and execute processes
 
-You can deploy and execute processes with either Desktop Modeler or Web Modeler.
+You can deploy and execute processes with either Desktop Modeler or Camunda Hub.
 
 ### Deploy with Desktop Modeler
 
@@ -91,50 +124,52 @@ The full configuration uses Keycloak for OIDC authentication. The client credent
 ### Deploy with Camunda Hub
 
 :::note
-Non-production installations of Web Modeler are limited to five collaborators per project. See [Licensing](/reference/licenses.md).
+Non-production installations of Camunda Hub are limited to five members per workspace. See [Licensing](/reference/licenses.md).
 :::
 
-[Camunda Hub](/components/hub/index.md) includes a browser-based Web Modeler for creating and deploying BPMN, DMN, and form diagrams. Camunda Hub is included in the full configuration and can also run as a standalone setup.
+[Camunda Hub](/components/hub/index.md) includes a browser-based modeler for creating and deploying BPMN, DMN, and form diagrams. Camunda Hub is included in the full configuration and can also run as a standalone setup.
 
 #### Standalone setup
 
 To start Camunda Hub, its WebSockets service, Management Identity, Keycloak, PostgreSQL, and Mailpit independently, run:
 
 ```shell
-docker compose -f docker-compose-web-modeler.yaml up -d
+docker compose -f docker-compose-hub.yaml up -d
 ```
 
-To stop the standalone setup and remove all data and volumes, run:
+To stop Camunda Hub and remove all data and volumes, run:
 
 ```shell
-docker compose -f docker-compose-web-modeler.yaml down -v
+docker compose -f docker-compose-hub.yaml down -v
 ```
 
 #### Deploy or execute a process
 
-When you use the full configuration, Web Modeler in Camunda Hub connects automatically to the local Orchestration Cluster started by `docker-compose-full.yaml`. You can deploy and run processes directly from Camunda Hub.
+When you use the full configuration, Camunda Hub connects automatically to the local Orchestration Cluster started by `docker-compose-full.yaml`. You can deploy and run processes directly from the Camunda Hub interface.
 
 1. Log in to Camunda Hub at [http://localhost:8070](http://localhost:8070) with `demo` / `demo`.
-1. [Create a new project](/components/hub/workspace/modeler/launch-modeler.md) or open an existing BPMN diagram.
+1. [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace).
+1. In your workspace, create a new project.
+1. In your project, [create a new BPMN diagram](/components/hub/workspace/modeler/index.md).
 1. Use the visual modeler to [design your BPMN process](/components/modeler/bpmn/bpmn.md).
 1. Click **Deploy** to deploy the diagram to the preconfigured Orchestration Cluster.
 1. After deployment, you can [create process instances](/components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8080/operate).
 
-Web Modeler uses the `BEARER_TOKEN` authentication method to communicate with the Orchestration Cluster. The user's authentication token from Management Identity is used automatically for deployment.
+Camunda Hub uses the `BEARER_TOKEN` authentication method to communicate with the Orchestration Cluster. The user's authentication token from Management Identity is used automatically for deployment.
 
 :::note
-Camunda Hub is not included in the lightweight configuration. To use Web Modeler in Camunda Hub with the lightweight configuration:
+Camunda Hub is not included in the lightweight configuration. To use Camunda Hub with the lightweight configuration:
 
-1. Run Camunda Hub separately with `docker-compose-web-modeler.yaml`.
+1. Run Camunda Hub separately with `docker-compose-hub.yaml`.
 1. Manually configure the cluster connection in Camunda Hub.
 1. Use `NONE` or `BASIC` authentication for the lightweight Orchestration Cluster.
 
-For details, see [configure Web Modeler clusters](/self-managed/components/hub/configuration/properties.md#clusters).
+For details, see [configure Camunda Hub clusters](/self-managed/components/hub/configuration/properties.md#clusters).
 :::
 
 #### Emails
 
-The Docker Compose setup includes [Mailpit](https://github.com/axllent/mailpit) as a test SMTP server. Mailpit captures all emails sent by Web Modeler, but does not forward them to actual recipients.
+The Docker Compose setup includes [Mailpit](https://github.com/axllent/mailpit) as a test SMTP server. Mailpit captures all emails sent by Camunda Hub, but does not forward them to actual recipients.
 
 You can access emails in Mailpit at [http://localhost:8075](http://localhost:8075).
 

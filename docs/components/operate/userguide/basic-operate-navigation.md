@@ -8,7 +8,20 @@ Learn how to navigate Camunda 8 Operate.
 
 ## Before you begin
 
-This section and the next section, [Resolve incidents and update variables](./resolve-incidents-update-variables.md), assume you’ve deployed a process to Zeebe and created at least one process instance, using the [`order-process.bpmn`](/bpmn/operate/order-process.bpmn) process model. If you’re not sure how to deploy processes or create instances, visit our [guides section](/guides/introduction-to-camunda-8.md) to get started with Camunda.
+This guide and [resolve incidents and update variables](./resolve-incidents-update-variables.md) assume you’ve deployed a process to Zeebe and created at least one process instance, using the [`order-process.bpmn`](/bpmn/operate/order-process.bpmn) process model. If you’re not sure how to deploy processes or create instances, visit our [guides section](/guides/introduction-to-camunda-8.md) to get started with Camunda.
+
+## Open Operate
+
+From Camunda Hub, you can access all your clusters and navigate to any running instance of Operate:
+
+1. Log in to Camunda Hub.
+1. In the left navigation under **Console**, click **Clusters**.
+1. Select a cluster. Each cluster contains its own instance of Operate.
+1. On the **Operate** card, click **Launch**. This opens the cluster's Operate instance.
+
+:::tip
+If the cluster is paused, you won't see a **Launch** button. You must [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) to access its components.
+:::
 
 ## View a deployed process
 
@@ -22,11 +35,14 @@ To view a deployed process, take the following steps:
 
 Running process instances appear in the **Process Instances** table below the process model. To inspect a specific instance, click the **Process Instance Key**.
 
-The process instance page has three parts:
+The process instance page has four parts:
 
 - A header showing the process instance's key, version, and state.
 - A process diagram showing the instance's current progress.
-- A bottom panel with tabs, including **Details**, **Incidents** (shown only when the instance has an incident), and **Variables**.
+- An **Instance History** panel listing the instance's elements, with search and status filter controls.
+- A bottom panel with tabs: **Variables**, **Listeners**, and **Operations Log** are always available. **Incidents** appears when the instance has one. **Details**, **Input Mappings**, and **Output Mappings** appear once you select a specific element in the diagram.
+
+![A process instance detail page, showing the header with the process instance's key, version, and state, the process diagram, and the bottom panel with Variables, Listeners, and Operations Log tabs.](./img/basic-operate-navigation.png)
 
 Click an element in the diagram to select it, then use the tabs in the bottom panel to inspect its details, incidents, and variables. In earlier versions, an element's details and incidents appeared in a metadata popover when you clicked it; the popover is now replaced by the **Details** and **Incidents** tabs. To visualize process instance performance, use [Optimize](/components/optimize/what-is-optimize.md).
 
@@ -43,3 +59,9 @@ For a reliable way to find a called process instance, take the following steps:
 3. In the row labeled **Called Process Instance**, click the link — shown as the called process's name and instance key — to navigate to that instance.
 
 If the call activity has called more than one process instance, the **Details** tab shows a **View all** link instead of a single link. This link filters the **Processes** page by the whole process instance, so it shows every instance it has called, including from other call activities — not only the one you selected.
+
+## Business ID for decision instances
+
+Starting in 8.10, a [business ID](/components/concepts/process-instance-creation.md#business-id) is shown for decision instances in Operate: as an optional filter field in the **Decisions** list, and in the header of a decision instance's details page, if one is defined for that instance. Filter decision instances by business ID the same way as [process instances](./filter-process-instances.md#business-id-filter) — using **Equals**, **Contains**, and **Is one of** in the filter UI, or the `$eq`/`$neq`/`$exists`/`$like`/`$in`/`$notIn` operators via the [search decision instances API](/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx).
+
+Decision instances evaluated before 8.10 do not carry a business ID, since the value is snapshotted from the owning process instance at the decision instance's own creation time. Standalone decision evaluations, which are not tied to a process instance, never carry a business ID.
