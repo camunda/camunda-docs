@@ -36,9 +36,9 @@ This applies to a cluster with no additional tenants too. Its default Physical T
 | `optimize.security.authentication.method: oidc` or `global.identity.auth.enabled: true` | Optimize requires authentication                                                                                                                                                |
 | `optimize.identity.service.url` or `global.identity.service.url`                        | This release runs no Identity of its own, so the in-release default can't apply                                                                                                 |
 | `optimize.contextPath`, when the chart renders this release's routing                   | The shared Ingress emits an Optimize rule only when the context path is set, and an HTTPRoute would match an empty path prefix                                                  |
-| An OIDC issuer, when Optimize uses OIDC*                                                | Optimize validates the `iss` claim on every token. Set `optimize.security.authentication.oidc.issuer`, `global.identity.auth.issuer`, or `global.identity.auth.publicIssuerUrl` |
+| An OIDC issuer, when Optimize uses OIDC                                                 | Optimize validates the `iss` claim on every token. Set `optimize.security.authentication.oidc.issuer`, `global.identity.auth.issuer`, or `global.identity.auth.publicIssuerUrl` |
 
-\* Unlike the orchestration release, Optimize accepts `publicIssuerUrl` as its issuer fallback. That works only when your provider mints that exact URL as the `iss` claim, which a pinned issuer guarantees. Setting `issuer` explicitly avoids the ambiguity. See [pin the issuer](./orchestration-release.md#pin-the-issuer).
+Unlike the orchestration release, Optimize accepts `publicIssuerUrl` as its issuer fallback. That works only when your provider mints that exact URL as the `iss` claim, which a pinned issuer guarantees. Setting `issuer` explicitly avoids the ambiguity. See [pin the issuer](./orchestration-release.md#pin-the-issuer).
 
 Elasticsearch takes precedence when both backends are enabled.
 
@@ -99,6 +99,8 @@ optimize:
 
 ## Match the prefixes exactly
 
+`optimize.database.elasticsearch.prefix` logs a deprecation warning in chart 15.x. Its replacement is Optimize's own `zeebe.name` property in `optimize.extraConfiguration`. The example uses the chart key because it's the documented way to set the reader prefix across releases.
+
 `optimize.database.elasticsearch.prefix` is a reader prefix. It must exactly equal the writer prefix of the exporter for this tenant in the Orchestration Cluster.
 
 A mismatch doesn't fail. Optimize starts successfully against the wrong or an empty record set, and displays no process data. Similar-looking prefixes are not sufficient.
@@ -121,7 +123,20 @@ You can point several tenants at one shared audience. Those instances are then s
 
 The example above renders an Optimize Service and Deployment, but no Ingress or HTTPRoute. Sharing a namespace with the Orchestration Cluster release doesn't help: that release's Ingress routes only to its own services.
 
-Before users sign in, route the host and path of `redirectUrl`, here `https://production-a.example.com/optimize-tenanta`, to this release's Optimize Service. Either enable routing in this release with `global.ingress` and a host that matches `redirectUrl`, or manage the Ingress, HTTPRoute, or load balancer rule outside the chart. The path must match `optimize.contextPath`.
+Before users sign in, route the host and path of `redirectUrl`, here `https://production-a.example.com/optimize-tenanta`, to this release's Optimize Service. Either manage the Ingress, HTTPRoute, or load balancer rule outside the chart, or let this release render its own Ingress:
+
+```yaml
+global:
+  host: production-a.example.com
+  ingress:
+    enabled: true
+    className: nginx
+    tls:
+      enabled: true
+      secretName: production-a-tls
+```
+
+The chart then renders an Ingress rule for `optimize.contextPath` on `global.host`. The host must match `redirectUrl`, and the TLS Secret must exist in this release's namespace. If another Ingress already serves that host, confirm your ingress controller merges rules from several Ingress resources for one host.
 
 ## Install the release
 

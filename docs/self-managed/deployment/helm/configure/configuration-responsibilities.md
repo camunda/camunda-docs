@@ -40,14 +40,14 @@ Helm merges maps deeply but replaces arrays wholesale. `extraConfiguration` is a
 
 ## Example: configure Orchestration Cluster authorizations
 
-`orchestration.security.authorizations.enabled` is an application setting. In chart 15.x it still works and logs a deprecation warning. Set the application property instead.
+`orchestration.security.authorizations.enabled` is an application setting. In chart 15.x it still works, and setting it to a non-default value (`false`) logs a deprecation warning. Set the application property instead.
 
 ```yaml
 # Deprecated in chart 15.x
 orchestration:
   security:
     authorizations:
-      enabled: true
+      enabled: false
 ```
 
 ```yaml
@@ -59,7 +59,7 @@ orchestration:
         camunda:
           security:
             authorizations:
-              enabled: true
+              enabled: false
 ```
 
 The same release still sets its connectivity and infrastructure in `values.yaml`, because those aren't application concerns:

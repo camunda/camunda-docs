@@ -11,7 +11,9 @@ Install it after the [Hub release](./hub-release.md) is healthy. You can install
 
 ## What an orchestration release deploys
 
-`global.topology.mode: orchestration` deploys the Orchestration Cluster and Connectors, and gates off every other component: Management Identity, Camunda Hub, and Optimize. Even if a converted values file still sets `camundaHub.enabled: true` or `optimize.enabled: true`, they aren't rendered, so you don't need to disable them by hand.
+`global.topology.mode: orchestration` deploys the Orchestration Cluster and Connectors, and never renders Management Identity or Camunda Hub, even if a converted values file still enables them.
+
+Optimize is different. If `optimize.enabled: true` is set, the release still runs Optimize, and the chart then also renders the exporter Optimize reads. In the split topology, set `optimize.enabled: false` here and run Optimize as its [own release](./optimize-release.md).
 
 An orchestration release is self-contained. Its existing component values remain authoritative for its enabled state, authentication, storage, scaling, and Kubernetes configuration. `global.topology.mode` selects the release role; it doesn't duplicate component configuration, and the release never declares sibling clusters.
 
@@ -127,7 +129,7 @@ connectors:
           existingSecretKey: client-secret
 ```
 
-`orchestration.security.authentication.oidc.redirectUrl` is deprecated and emits a deprecation warning. It's kept here because the chart still derives the Hub-matching redirect from it in this release. Plan to move it to `orchestration.extraConfiguration` before chart v16.
+`orchestration.security.authentication.oidc.redirectUrl` is deprecated and logs a deprecation warning, but it's used here because one value sets three properties: the OIDC callback (`<redirectUrl>/sso-callback`) and the Operate and Tasklist redirect roots. To remove the warning, set `camunda.security.authentication.oidc.redirect-uri`, `camunda.operate.identity.redirectRootUrl`, and `camunda.tasklist.identity.redirectRootUrl` in `orchestration.extraConfiguration` instead. The key is removed in chart v16 (Camunda 8.11).
 
 This example uses Elasticsearch as secondary storage, and the `secondary-storage` Secret must exist in the orchestration namespace. For OpenSearch, relational database, and TLS configuration, see [database configuration](/self-managed/deployment/helm/configure/database/index.md).
 
@@ -135,9 +137,29 @@ Optimize isn't part of this release. It's deployed separately, one release per P
 
 ## Export records for Optimize
 
-Optimize reads the records written by the legacy Elasticsearch or OpenSearch exporter, not the Orchestration Cluster's own indices. The chart enables that exporter automatically only when Optimize runs in the same release, and `orchestration.exporters.zeebe.enabled` doesn't enable it on its own. Because Optimize isn't in this release, the example above writes no records Optimize can read, and installing a separate Optimize release doesn't change that.
+Optimize reads the records written by the legacy Elasticsearch or OpenSearch exporter, not the Orchestration Cluster's own indices. The chart renders that exporter automatically only when Optimize runs in the same release. With Optimize in its own release, the example above writes no records Optimize can read until you enable the exporter here.
 
-If you plan to run Optimize for this cluster, configure the exporter explicitly as broker configuration, with its destination, credentials, and index prefix:
+If the cluster uses Elasticsearch or OpenSearch secondary storage, enable the exporter with chart values. It writes to the secondary storage endpoint:
+
+```yaml
+orchestration:
+  exporters:
+    zeebe:
+      enabled: true
+      index:
+        # Must exactly equal optimize.database.elasticsearch.prefix
+        # in this cluster's default-tenant Optimize release.
+        prefix: production-a-default-records
+
+optimize:
+  enabled: false
+  database:
+    elasticsearch:
+      # Required for the exporter to send the secondary storage credentials.
+      external: true
+```
+
+If the cluster uses RDBMS secondary storage, or the records must go to a different Elasticsearch or OpenSearch instance, configure the exporter directly as broker configuration:
 
 ```yaml
 orchestration:
@@ -145,7 +167,7 @@ orchestration:
     - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_AUTHENTICATION_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: secondary-storage
+          name: optimize-records-store
           key: password
   extraConfiguration:
     - file: optimize-exporter.yaml
@@ -160,14 +182,10 @@ orchestration:
                   authentication:
                     username: camunda
                   index:
-                    # Must exactly equal optimize.database.elasticsearch.prefix
-                    # in this cluster's default-tenant Optimize release.
                     prefix: production-a-default-records
 ```
 
-For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The prefix must be unique per cluster and tenant. See [isolate every index prefix family](./physical-tenants.md#isolate-every-index-prefix-family).
-
-This also applies to a cluster on RDBMS secondary storage. The Orchestration Cluster keeps using RDBMS, and the exporter writes the separate record stream Optimize reads.
+For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The Orchestration Cluster keeps using its own secondary storage; the exporter writes the separate record stream Optimize reads. Every prefix must be unique per cluster and tenant. See [isolate every index prefix family](./physical-tenants.md#isolate-every-index-prefix-family).
 
 ## Choose which applications run
 
