@@ -204,10 +204,6 @@ Configure non-overlapping backup locations before starting the cluster. Camunda 
 
 <!-- TODO(physical-tenants-day-2): Add concrete per-tenant backup-store configuration properties and artifact examples for runtime and history backups. Owner/reviewer: Houssain Barouni. -->
 
-### Choose a restore approach
-
-With Camunda 8.10 and the introduction of the Restore API, there are now two ways to restore Zeebe partitions, the Restore API and the legacy Restore Application. With the Restore API, the brokers do not need to restart. Instead, the cluster switches into recovery mode, where it processes no work until the restore completes. The legacy Restore Application, on the other hand, requires stopping all brokers to perform the restore.
-
 ### ContextPath
 
 If you are defining the `contextPath` in the Camunda Helm chart or the `management.server.servlet.context-path` in a standalone setup, your API requests must prepend the value specific to the `contextPath` for the individual component. If the `management.server.port` is defined this also applies to `management.endpoints.web.base-path`. You can learn more about this behavior in the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path).
