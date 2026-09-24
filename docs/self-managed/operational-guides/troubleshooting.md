@@ -155,18 +155,18 @@ troubleshoot issues with the Azure SDK. To do this, go through the following ste
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose Zeebe Gateway externally, you need the following:
 
-1. An Ingress controller that supports `gRPC` ([ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) supports it out of the box).
+1. An Ingress controller that supports `gRPC`. The reference architectures deploy [Contour](https://projectcontour.io/), which supports it through the `projectcontour.io/upstream-protocol.h2c` annotation on the Orchestration Cluster service. [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) supports it through the `nginx.ingress.kubernetes.io/backend-protocol: GRPC` annotation on the Ingress.
 2. TLS (HTTPS) via [Application-Layer Protocol Negotiation (ALPN)](https://www.rfc-editor.org/rfc/rfc7301.html) enabled in the Zeebe Gateway Ingress object.
 
 However, according to the official Kubernetes documentation about [Ingress TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls):
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deployment/helm/install/quick-install.md).
+Therefore, pay attention to the TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deployment/helm/install/quick-install.md).
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -180,7 +180,7 @@ The Camunda Hub `restapi` component requires a [database connection](/self-manag
 
 ## Gateway timeout on redirect
 
-A gateway timeout can occur if the headers of a response are too big (for example, if a JWT is returned as `Set-Cookie` header). To avoid this, you can increase the `proxy-buffer-size` of your Ingress controller or Ingress. The setting for **ingress-nginx** can be found [here](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#proxy-buffer-size).
+A gateway timeout can occur if the headers of a response are too big (for example, if a JWT is returned as `Set-Cookie` header). To avoid this, you can increase the header buffer of your Ingress controller. For **ingress-nginx**, set the [`proxy-buffer-size` annotation](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#proxy-buffer-size). For **Contour**, the limit is enforced by Envoy rather than by an Ingress annotation, so it is raised on the Contour installation itself. See the [Contour configuration reference](https://projectcontour.io/docs/1.33/configuration/).
 
 ## Helm CLI version and installation failures
 
@@ -304,10 +304,12 @@ If a check fails, it indicates a deviation from the expected configuration on a 
 For example:
 
 ```
-[FAIL] None of the ingresses contain the annotation nginx.ingress.kubernetes.io/backend-protocol: GRPC, which is required for Zeebe ingress.
+[FAIL] None of the ingresses declare a gRPC upstream, which is required for the zeebe ingress.
+With ingress-nginx, the zeebe ingress must carry nginx.ingress.kubernetes.io/backend-protocol: GRPC (GRPCS for a TLS upstream).
+With Contour, the service behind it must carry projectcontour.io/upstream-protocol.h2c (.h2 for a TLS upstream) listing the gRPC port.
 ```
 
-The error message suggests adjusting the Ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
+The message names the annotation each controller needs. For ingress-nginx, adjust the Ingress to include it. For Contour, set `projectcontour.io/upstream-protocol.h2c` on the Orchestration Cluster Service instead, or `projectcontour.io/upstream-protocol.h2` when the gRPC upstream uses TLS. You can also explore the source of the script to have a better understanding of the reason for the failure.
 
 :::note
 Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the Ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
