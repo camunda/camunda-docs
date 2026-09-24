@@ -798,6 +798,7 @@ The Orchestration Cluster contacts an OIDC provider at the first request that ne
 **Action:** If you used a failed startup to detect an unreachable identity provider, alert on the `DeferredOidcResolution` warning instead. The warning follows the traffic, so add a synthetic request if you must detect an outage that no user request reaches.
 
 <p className="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
+
 </div>
 </div>
 
