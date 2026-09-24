@@ -58,7 +58,7 @@ To produce logging output, you can also run Desktop Modeler from the command lin
 
 ## I cannot connect to an orchestration cluster {#i-cannot-connect-to-zeebe}
 
-You try to connect (i.e., to deploy) to a remote orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
+You try to connect (i.e., to deploy) to a remote orchestration cluster, and Desktop Modeler tells you it "Cannot connect to Camunda 8."
 
 :::tip
 If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
@@ -70,13 +70,13 @@ Additionally, if authorizations are enabled, ensure that your [client](/componen
 
 ## I cannot connect to a local orchestration cluster {#i-cannot-connect-to-local-zeebe}
 
-You try to connect (for example, to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster".
+You try to connect (for example, to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to Camunda 8".
 
 Ensure your local orchestration cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a lightweight all-in-one distribution.
 
 ## Cannot connect to an orchestration cluster in a local network
 
-Use this guidance when Desktop Modeler cannot connect to an orchestration cluster running in your local network and shows a "Cannot connect to orchestration cluster" error.
+Use this guidance when Desktop Modeler cannot connect to an orchestration cluster running in your local network and shows a "Cannot connect to Camunda 8" error.
 
 Verify that your operating system allows Desktop Modeler to access the local network.
 
@@ -103,9 +103,9 @@ See [control access to your local network](https://support.apple.com/en-gb/guide
 
 ## How to configure a REST connection
 
-You try out [task testing](./task-testing.md) and Desktop Modeler tells you "Configure a REST connection to Camunda."
+You try out [task testing](./task-testing.md) and Desktop Modeler tells you "Configure a REST connection to Camunda 8."
 
-Some features of Desktop Modeler, such as task testing, require a REST connection to Camunda. Orchestration clusters from version 8.6 support connections with gRPC or the newer [Orchestration Cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). Depending on the provided URL, the corresponding client will be used. Ensure you use the REST URL in your deployment configuration:
+Some features of Desktop Modeler, such as task testing, require a REST connection to Camunda 8. Orchestration clusters from version 8.6 support connections with gRPC or the newer [Orchestration Cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). Depending on the provided URL, the corresponding client will be used. Ensure you use the REST URL in your deployment configuration:
 
 - If you are using Camunda 8 SaaS clusters, create an [API client](../../console/manage-clusters/manage-api-clients.md) and use the value of `Camunda REST API`.
 - If you are using [Camunda 8 Run](../../../self-managed/quickstart/developer-quickstart/c8run.md), you should use the value of `Orchestration Cluster API`.

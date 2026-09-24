@@ -1,13 +1,13 @@
 ---
 id: connect-to-self-managed
 title: Set up a connection
-description: "Desktop Modeler can directly connect to Camunda 8 Self-Managed clusters."
+description: "Desktop Modeler can directly connect to Camunda 8 Self-Managed."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to a Camunda 8 Orchestration Cluster. Follow the steps below to set up a connection. To connect to **Camunda 8 SaaS**, visit the [Camunda 8 SaaS guide](../../../components/modeler/desktop-modeler/connect-to-camunda-8.md).
+To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to Camunda. Follow the steps below to set up a connection. To connect to **Camunda 8 SaaS**, visit the [Camunda 8 SaaS guide](../../../components/modeler/desktop-modeler/connect-to-camunda-8.md).
 
 1. Click the **Connection manager**. For new installations, this will show **No connection**. If you have previously selected a connection, it will show the name of that connection.
 
@@ -26,7 +26,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    ![empty self-managed connection](./img/connection-with-sm.png)
 
-5. Enter the cluster URL, and optionally the tenant ID and Operate URL.
+5. Enter the connection URL, and optionally the tenant ID and Operate URL.
 
    :::caution
    You can connect to Camunda 8 both securely and insecurely through the `https` and `http` protocols. Secured connections to a remote endpoint are established only if the remote server certificate is trusted by the app. Ensure that root and intermediate certificates you trust are [known to the app](/components/modeler/desktop-modeler/flags/flags.md#zeebe-ssl-certificate).

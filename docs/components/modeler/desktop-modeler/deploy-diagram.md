@@ -8,7 +8,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 1. Set up and select a connection by following [Connect to Camunda 8](./connect-to-camunda-8.md) guide.
 
-   ![Dev connection connected](./img/connection-selector-dev-connection.png)
+   ![Connection selector showing the Dev connection selected](./img/connection-selector-dev-connection.png)
 
 2. Click the **Deploy** icon:
 
