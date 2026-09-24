@@ -5,6 +5,9 @@ sidebar_label: Migrate to zone-aware brokers
 description: Migrate an existing single-region or dual-region Orchestration Cluster from numbered brokers to zone-aware brokers with Helm.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This procedure migrates an existing Orchestration Cluster from numbered broker identities to zone-aware broker identities with the Camunda 8.10 Helm chart. You can migrate both single-region and dual-region clusters.
 
 The migration creates replacement brokers instead of changing the persisted identity of existing brokers. The numbered and zone-aware broker generations run together until the cluster has moved its partitions and membership to the new brokers.
@@ -24,12 +27,18 @@ In a dual-region cluster, the primary zone is the region with `zoneIndex: 0`, wh
 Zone migration must proceed from the highest remaining zone index to the lowest. Expected next zoneIndex 1 but got 0.
 ```
 
+In a dual-region cluster, run every Helm step once per release, one release at a time, and wait for each release to be healthy before you continue with the next one. Send each management API request only once, through either region. The rest of this guide describes each step once for both topologies.
+
 The procedure consists of these steps:
 
 1. Upgrade every release to the chart version that supports zone-aware migration.
 1. Upgrade every release with zone-aware values that keep the numbered brokers.
 1. Update the persisted partitioning configuration once.
-1. For each zone, add the zone's zone-aware brokers to the cluster with the management API, then remove the numbered brokers of that zone's release. In a dual-region cluster, start with the zone of `zoneIndex: 1`.
+1. For each zone, add the zone's zone-aware brokers to the cluster with the management API, then remove the numbered brokers of that zone's release.
+
+:::warning
+The migration is not reversible. After you update the persisted partitioning configuration, you can't return the cluster to numbered brokers. If a later step fails, complete the migration instead of reverting it. See [Recover from an incomplete migration](#recover-from-an-incomplete-migration).
+:::
 
 ## Before you begin
 
@@ -38,9 +47,8 @@ The procedure consists of these steps:
 - Confirm that each Kubernetes cluster has enough capacity (nodes) for both broker generations and their persistent volume claims (PVCs).
 - Back up the values used by each Helm release.
 - Suspend planned node drains, autoscaler scale-down, and other maintenance that could evict broker pods until the migration is complete.
-- For a dual-region cluster, use the same complete zone topology in every Helm release. Each release selects only the zone that belongs to its Kubernetes cluster.
 
-The examples in this procedure use these variables. For a dual-region cluster, set them separately for each Kubernetes cluster and release.
+The examples in this procedure use these variables. Set them separately for each release.
 
 ```bash
 export RELEASE="camunda-platform"
@@ -56,7 +64,7 @@ Replace the example values with values from your installation. Set `CHART_VERSIO
 
 ### Access the management API
 
-Use the [Orchestration management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) to change the cluster topology. To reach it, and for its port, security, and TLS options, see [About this API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#about-this-api). Set `MANAGEMENT_URL` to the resulting address. For a dual-region cluster, you can send the management API requests through either region, but you need access to the brokers in each region to check their health.
+Use the [Orchestration management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) to change the cluster topology. To reach it, and for its port, security, and TLS options, see [About this API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#about-this-api). Set `MANAGEMENT_URL` to the resulting address. To check broker health, you also need access to the brokers of every release.
 
 For example, forward the management port of the release's gateway Service to your machine:
 
@@ -87,7 +95,7 @@ Only brokers that belong to the logical cluster report healthy. During the migra
 
 ## Upgrade to the migration chart
 
-Upgrade each existing release to the chart version that supports zone-aware migration, with its existing values unchanged. For a dual-region cluster, upgrade one release at a time.
+Upgrade each existing release to the chart version that supports zone-aware migration, with its existing values unchanged.
 
 Keep `orchestration.partitioning.keepUnzonedBrokers` disabled during this chart upgrade. Wait for the rollout to finish before you enable the migration flag. If you enable the flag in the same command as the chart upgrade, numbered brokers can restart during migration.
 
@@ -100,11 +108,13 @@ helm upgrade "$RELEASE" "$CHART" \
   --timeout 15m
 ```
 
+The `--timeout` value is an example. Increase it if broker rollouts in your cluster take longer.
+
 After each rollout, [check that every broker is healthy](#check-broker-health) before you upgrade the next release or enable the migration flag.
 
 ## Configure the zone-aware values
 
-Add the zone-aware configuration to the values of each release. The `zones` list describes the complete target topology, and `zone` selects the zone owned by this release.
+Add the zone-aware configuration to the values of each release. The `zones` list describes the complete target topology and must be identical in every release. The `zone` value selects the zone owned by this release.
 
 Keep these values unchanged while `keepUnzonedBrokers` is `true`, because they still describe the retained numbered brokers:
 
@@ -121,7 +131,13 @@ If the existing values use the deprecated `global.multiregion` block, remove it 
 
 The sum of the zones' `numberOfReplicas` values must equal the cluster's current replication factor. If the target topology needs a higher factor, see [Update the partitioning configuration](#update-the-partitioning-configuration).
 
-### Single-region example
+### Values examples
+
+<Tabs groupId="topology" defaultValue="single-region" queryString values={[
+{label: 'Single-region', value: 'single-region'},
+{label: 'Dual-region', value: 'dual-region'},
+]}>
+<TabItem value="single-region">
 
 This example migrates a single-region cluster with `clusterSize: 3` and `replicationFactor: 3`:
 
@@ -142,7 +158,8 @@ orchestration:
     keepUnzonedBrokers: true
 ```
 
-### Dual-region example
+</TabItem>
+<TabItem value="dual-region">
 
 This example migrates a dual-region cluster with `clusterSize: 8` and `replicationFactor: 4`. The values below belong to the primary region. In the secondary region's release, set `zone: zone-b` and `zoneIndex: 1`, and keep everything else identical.
 
@@ -176,6 +193,9 @@ orchestration:
     zoneIndex: 0
 ```
 
+</TabItem>
+</Tabs>
+
 ### Check the dual-region networking
 
 A dual-region cluster already has cross-cluster networking in place, as described in [dual-region setup](/self-managed/concepts/multi-region/dual-region.md). The zone-aware brokers reuse the existing `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` value and DNS setup, so you don't need to configure new networking. Single-region clusters can skip this section.
@@ -199,7 +219,7 @@ orchestration:
 
 ## Start the migration
 
-Upgrade each release with the zone-aware values. For a dual-region cluster, upgrade one release at a time, and confirm that its brokers are ready before you upgrade the next release.
+Upgrade each release with the zone-aware values.
 
 ```bash
 helm upgrade "$RELEASE" "$CHART" \
@@ -216,7 +236,7 @@ Each release now contains both the existing numbered StatefulSet and a new zone-
 
 ## Update the partitioning configuration
 
-Use the [partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api) once to update the persisted partitioning configuration. For a dual-region cluster, send this request only once, through either region.
+Use the [partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api) once to update the persisted partitioning configuration. This is the point after which you can't revert the migration.
 
 The order of the zones is significant during this one-time migration. The first zone must be the zone of the numbered brokers with `zoneIndex: 0`, the second zone the one with `zoneIndex: 1`.
 
@@ -228,7 +248,30 @@ Sum of zone replicas [2] must equal the current replication factor [1] before zo
 
 If the target topology needs a higher factor, first increase the numbered cluster's replication factor with the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#2c-scaling-only-partitions), and [monitor the change](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#monitor-a-configuration-change) until it completes. Then set `orchestration.replicationFactor` in the values of every release to the new factor and upgrade the releases, so the retained numbered brokers use the updated configuration.
 
-For a dual-region cluster, send:
+<Tabs groupId="topology" defaultValue="single-region" queryString values={[
+{label: 'Single-region', value: 'single-region'},
+{label: 'Dual-region', value: 'dual-region'},
+]}>
+<TabItem value="single-region">
+
+```bash
+curl --fail --request PUT \
+  "$MANAGEMENT_URL/actuator/cluster/partitioning" \
+  --header 'Content-Type: application/json' \
+  --data @- <<'JSON'
+{
+  "config": {
+    "scheme": "ZONE_AWARE",
+    "zones": [
+      {"name": "zone-a", "numberOfReplicas": 3, "priority": 100}
+    ]
+  }
+}
+JSON
+```
+
+</TabItem>
+<TabItem value="dual-region">
 
 ```bash
 curl --fail --request PUT \
@@ -247,23 +290,8 @@ curl --fail --request PUT \
 JSON
 ```
 
-For a single-region cluster, send a single zone:
-
-```bash
-curl --fail --request PUT \
-  "$MANAGEMENT_URL/actuator/cluster/partitioning" \
-  --header 'Content-Type: application/json' \
-  --data @- <<'JSON'
-{
-  "config": {
-    "scheme": "ZONE_AWARE",
-    "zones": [
-      {"name": "zone-a", "numberOfReplicas": 3, "priority": 100}
-    ]
-  }
-}
-JSON
-```
+</TabItem>
+</Tabs>
 
 The response includes a `changeId`. [Monitor the change](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#monitor-a-configuration-change) until it completes.
 
@@ -271,14 +299,13 @@ The response includes a `changeId`. [Monitor the change](/self-managed/component
 
 Migrate one zone at a time. For each zone, add its zone-aware brokers to the cluster with the management API, then remove the numbered brokers of that zone's release. Removing the numbered brokers right after each zone frees their CPU and memory before you migrate the next zone, which helps when cluster capacity is tight.
 
-- For a single-region cluster, migrate the single zone.
-- For a dual-region cluster, migrate the secondary zone (`zoneIndex: 1`) first, then the primary zone (`zoneIndex: 0`). Don't start with the primary zone, and don't migrate both zones concurrently.
+In a dual-region cluster, migrate the secondary zone (`zoneIndex: 1`) first, then the primary zone (`zoneIndex: 0`), as described in the [migration overview](#migration-overview). Don't migrate both zones concurrently.
 
 ### Add the zone's brokers to the cluster
 
 Use the [zone migration endpoint](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#migrate-a-zone-to-a-zone-aware-topology) to add the zone's zone-aware brokers to the cluster. The new brokers take over the partitions of the zone's numbered brokers, and the numbered brokers leave the cluster. Before you send the request, [check that every broker in the logical cluster is healthy](#check-broker-health). A partition that can't start blocks the migration, and the change stays `IN_PROGRESS`.
 
-For a dual-region cluster, you can send the request through either region. Set `LOCAL_ZONE` to the zone to migrate:
+Set `LOCAL_ZONE` to the zone to migrate:
 
 ```bash
 curl --fail --request PUT \
@@ -305,7 +332,7 @@ Leave `keepUnzonedBrokers: true` if the zone migration is incomplete. Don't remo
 
 ### Remove the numbered brokers of the migrated zone
 
-After the zone migration completes and the zone's numbered brokers no longer own partitions or belong to the logical cluster, remove them from the release that owns the zone. In a dual-region cluster, the other release keeps `keepUnzonedBrokers: true` and its migration values until you migrate its zone.
+After the zone migration completes and the zone's numbered brokers no longer own partitions or belong to the logical cluster, remove them from the release that owns the zone. Releases whose zone you haven't migrated yet keep `keepUnzonedBrokers: true` and their migration values.
 
 Update the values of the release as follows:
 
@@ -317,9 +344,9 @@ Update the values of the release as follows:
 With the zone-aware scheme and without numbered brokers, the chart derives the cluster size and replication factor from the `zones` list. If the values still contain conflicting settings, the upgrade fails with errors similar to these:
 
 ```text
-orchestration.partitioning.numberOfZones and orchestration.partitioning.zoneIndex cannot be used with the zone-aware scheme; the zone list describes the topology instead.
-orchestration.clusterSize is <size> but orchestration.partitioning.zones sums to <total> brokers.
-orchestration.replicationFactor is <factor> but orchestration.partitioning.zones sums to <total> replicas.
+[camunda][error] orchestration.partitioning.numberOfZones and orchestration.partitioning.zoneIndex cannot be used with the zone-aware scheme; the zone list describes the topology instead.
+[camunda][error] orchestration.clusterSize is <size> but orchestration.partitioning.zones sums to <total> brokers. With the zone-aware scheme the zone list is authoritative; remove the key or make it agree.
+[camunda][error] orchestration.replicationFactor is <factor> but orchestration.partitioning.zones sums to <total> replicas. With the zone-aware scheme the zone list is authoritative; remove the key or make it agree.
 ```
 
 For example, the secondary region (`zoneIndex: 1`) of the dual-region cluster uses these values:
@@ -354,7 +381,7 @@ helm upgrade "$RELEASE" "$CHART" \
 
 The upgrade removes the numbered StatefulSet and pods. The zone-aware StatefulSet and shared Services remain managed by Helm. Helm doesn't delete the numbered PVCs, so they remain bound.
 
-For a dual-region cluster, repeat the steps in [Migrate each zone](#migrate-each-zone) for the primary zone (`zoneIndex: 0`).
+Repeat the steps in [Migrate each zone](#migrate-each-zone) for each remaining zone.
 
 ## Verify the migration
 
@@ -374,8 +401,28 @@ Confirm that:
 
 Don't delete the numbered PVCs until you have confirmed these checks. Then delete them explicitly according to your storage-retention policy.
 
-## Roll back an incomplete migration
+## Recover from an incomplete migration
 
-If the management API migration is incomplete, keep `keepUnzonedBrokers: true`. Leave both broker generations running while you correct or reverse the management API changes.
+You can't revert the migration after you update the persisted partitioning configuration. If a step fails, keep `keepUnzonedBrokers: true` and both broker generations running, fix the cause, and complete the migration. Don't delete the numbered PVCs until you have [verified the migration](#verify-the-migration).
 
-Don't delete the numbered PVCs as part of a rollback. If the numbered resources were removed before the migration completed, stop and follow your deployment's recovery procedure to restore them from the retained PVCs.
+### A zone migration stays in progress
+
+If the change started by `PUT /actuator/cluster/zones` stays `IN_PROGRESS`, a partition usually can't start on one of the brokers involved:
+
+1. [Monitor the change](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#monitor-a-configuration-change) and note the operations in `pending`, and the brokers they target.
+1. [Check the health](#check-broker-health) of those brokers and of every other broker in the logical cluster, and inspect the logs of the brokers that report unhealthy.
+1. Fix the cause, for example missing CPU, memory, or storage, a pod that can't be scheduled, or a networking problem. The change continues after the brokers can apply the pending operations.
+
+Only one configuration change can run at a time, so don't send another zone migration request while the change is `IN_PROGRESS`.
+
+You can cancel a change with `DELETE /actuator/cluster/changes/<changeId>`, but cancelling doesn't revert the operations already applied and leaves the cluster in an intermediate state that needs manual intervention. Only cancel a change that can't make progress, and contact Camunda support before you do.
+
+### Numbered brokers were removed too early
+
+If you removed the numbered brokers of a zone while they still owned partitions or belonged to the logical cluster, restore them before you continue:
+
+1. In the values of the release, restore the migration values: `keepUnzonedBrokers: true`, `numberOfZones`, `zoneIndex`, `orchestration.clusterSize`, and `orchestration.replicationFactor`.
+1. Upgrade the release. The chart recreates the numbered StatefulSet with the same name, so its pods reattach to the retained numbered PVCs and rejoin the cluster with their data.
+1. [Check that the numbered brokers are healthy](#check-broker-health), then continue with [Add the zone's brokers to the cluster](#add-the-zones-brokers-to-the-cluster).
+
+If the numbered PVCs were deleted, you can't restore these brokers. Try to complete the migration without them first: if every partition still has a quorum of replicas on the remaining brokers, the zone migration can finish, and the zone-aware brokers replicate the data from the other replicas. [Monitor the change](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#monitor-a-configuration-change), or start it with [Add the zone's brokers to the cluster](#add-the-zones-brokers-to-the-cluster) if you haven't sent the request yet. Restore the cluster from the [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) you took before the migration only if the migration can't complete.
