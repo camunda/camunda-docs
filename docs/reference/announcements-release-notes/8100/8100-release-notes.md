@@ -437,6 +437,16 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
 
+### Bitnami subcharts removed from the Helm chart
+
+<!-- https://github.com/camunda/product-hub/issues/3554 -->
+
+Starting in 8.10, the Camunda Helm chart no longer includes the bundled Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak. Helm installations must connect to external infrastructure, such as managed databases and search services, Kubernetes operators, or customer-owned images.
+
+If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10. The 8.10 Helm chart has no Bitnami-based fallback. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#bitnami-subcharts-removed-from-the-helm-chart) for details.
+
+<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
+
 ### Camunda Helm Toolkit
 
 <!-- https://github.com/camunda/product-hub/issues/3563 -->
@@ -2448,6 +2458,20 @@ The Zeebe Client is removed and replaced by the [Camunda Java Client](/apis-tool
 <p class="link-arrow">[Migrate to the Camunda Java Client](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)</p>
 
 The Zeebe Process Test library is removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
+
+### Helm chart deployment
+
+#### Bitnami subcharts removed from the Helm chart
+
+<!-- https://github.com/camunda/product-hub/issues/3554 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+The Camunda Helm chart no longer includes the bundled Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak. Helm installations must connect to external infrastructure, such as managed databases and search services, Kubernetes operators, or customer-owned images.
+
+If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10; the 8.10 Helm chart has no Bitnami-based fallback. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#bitnami-subcharts-removed-from-the-helm-chart) for details.
+
+<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
 
 ### Modeler
 

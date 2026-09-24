@@ -595,6 +595,21 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 </div>
 <div className="release-announcement-content">
 
+#### Bitnami subcharts removed from the Helm chart
+
+Camunda 8.10 (chart 15.x) no longer bundles the Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak. Camunda 8.9 is the last minor that ships them. Helm installations must connect to external infrastructure instead, such as managed databases and search services, Kubernetes operators, or customer-owned images.
+
+**Action:** If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10; the 8.10 Helm chart has no Bitnami-based fallback. See [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Individual component Docker images no longer produced
 
 Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
