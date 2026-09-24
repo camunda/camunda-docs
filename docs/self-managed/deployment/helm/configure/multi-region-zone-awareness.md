@@ -36,9 +36,9 @@ orchestration:
     zoneIndex: 1
 ```
 
-Both key paths produce the same broker numbering. The deprecated one renders identically and adds a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
+Keeping the old names under the new block fails the render. The schema declares `orchestration.partitioning` with `additionalProperties: false` and allows only `scheme`, `zone`, `zones`, `numberOfZones`, `zoneIndex`, and `keepUnzonedBrokers`, so the old pair is rejected with `additional properties 'regionId', 'regions' not allowed` rather than being silently ignored.
 
-The old names are not accepted under the new block: the schema declares `orchestration.partitioning` with `additionalProperties: false` and allows only `scheme`, `zone`, `zones`, `numberOfZones`, `zoneIndex`, and `keepUnzonedBrokers`, so `regions` or `regionId` there fails validation rather than being silently ignored.
+Both key paths produce the same broker numbering. The deprecated one renders identically and adds a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
 
 Zone awareness is configured only under `orchestration.partitioning`. The `scheme`, `zone`, and `zones` keys have never existed under `global.multiregion`, so there is nothing to migrate for a zone-aware cluster.
 
