@@ -29,7 +29,7 @@ This scenario fits a webhook integration well because Databricks controls when t
 2. Click **Create new > BPMN diagram**.
 3. In the top navigation, open the menu next to **New BPMN diagram**, click **Rename**, and name it `Fraud Detection`.
 
-Web Modeler opens a blank diagram with a default start event.
+Hub Modeler opens a blank diagram with a default start event.
 
 ## Convert the start event to a webhook
 
