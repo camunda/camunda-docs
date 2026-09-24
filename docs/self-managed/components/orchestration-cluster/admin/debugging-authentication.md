@@ -41,6 +41,7 @@ Typical failure points:
 To isolate the issue, use:
 
 - [Review logs](#review-logs)
+- [Review the startup warnings](#review-the-startup-warnings)
 - [Requests fail when an identity provider is unreachable](#requests-fail-when-an-identity-provider-is-unreachable)
 - [Review data](#review-data)
 - [Review configuration](#review-configuration)
@@ -77,6 +78,15 @@ LOGGING_LEVEL_IO_CAMUNDA_SECURITY=DEBUG
 </Tabs>
 
 With these settings, you can trace request handling and how Spring Security filter chains determine authentication outcomes.
+
+## Review the startup warnings
+
+The Orchestration Cluster checks its OIDC configuration at startup, without contacting the provider, and writes a warning for each problem it finds. It still starts, thus a login can fail later for a problem that was already reported at startup. Read these warnings first.
+
+- The logger `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` reports a missing client ID, an incomplete set of endpoints, an unusable scope, and a redirect URI that cannot expand to a usable callback URL. Each entry names the provider.
+- The logger `io.camunda.security.spring.oidc.OidcRedirectionEndpoint` reports a redirect URI with no callback path. The cluster then uses `{baseUrl}/sso-callback`, and the login completes.
+
+A redirect URI that is unusable in any other way stays as configured. See [redirect URI](connect-external-identity-provider.md#redirect-uri).
 
 ## Requests fail when an identity provider is unreachable
 

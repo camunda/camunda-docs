@@ -127,14 +127,16 @@ You may need to customize the redirect URI in advanced scenarios, such as:
 
 Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
 
-The Orchestration Cluster validates the redirect URI at startup. It does not start if the value is not a complete callback URL. The check accepts a value that:
+The Orchestration Cluster checks the redirect URI at startup and writes a warning if the value cannot expand to a usable callback URL. It still starts. A usable value:
 
 - starts with `{baseUrl}`, or has an `http` or `https` scheme and a host,
 - has a port between 1 and 65535, if it has a port,
 - has a callback path,
 - has no fragment (`#`).
 
-The default value `{baseUrl}/sso-callback` is correct. The cluster also validates the value if you only use API clients. A callback path other than `/sso-callback` passes this check, but the cluster does not serve it, and the login does not complete.
+A value with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`, and the login completes. Any other unusable value stays as configured, so the login fails when the browser returns from the IdP. A callback path other than `/sso-callback` also leaves the login incomplete, because the cluster does not serve that path.
+
+The default value `{baseUrl}/sso-callback` is correct. The cluster also checks the value if you only use API clients, which never use it.
 
 Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
 
