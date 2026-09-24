@@ -33,13 +33,13 @@ An error message that provides additional context.
 
 ---
 
-### leaseToken?
+### jobLeaseToken?
 
 ```ts
-optional leaseToken?: string | null;
+optional jobLeaseToken?: JobLeaseToken | null;
 ```
 
-The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.
+The token identifying a leased job's activation, obtained from `ActivatedJobResult.jobLeaseToken`.
 For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
 A job that was activated without a lease requires no token.
 

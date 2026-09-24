@@ -51,7 +51,7 @@ The time when the message was correlated.
 ### elementId
 
 ```ts
-elementId: string;
+elementId: ElementId;
 ```
 
 The element ID that received the message.
