@@ -2,7 +2,7 @@
 id: multi-region-rdbms
 title: "Multi-Region RDBMS"
 sidebar_label: "Multi-Region RDBMS"
-description: "Multi-Region RDBMS spreads an Orchestration Cluster across three or more regions so a region loss never costs the Raft quorum, and delegates secondary storage replication to the database."
+description: "Multi-Region RDBMS spreads an Orchestration Cluster across three or more regions so that a region loss leaves the Raft quorum intact, and delegates secondary storage replication to the database."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
@@ -12,12 +12,14 @@ import ZoneActivationImg from './img/multi-region-rdbms-zone-activation.svg';
 
 <PageDescription />
 
-Multi-Region RDBMS spreads a single Orchestration Cluster across three or more regions and uses a relational database as its secondary storage, leaving replication to that database. Because every partition keeps a majority of its replicas when one region disappears, the engine keeps processing through a region loss instead of stopping for an operator.
+Multi-Region RDBMS spreads a single Orchestration Cluster across three or more regions and uses a relational database as its secondary storage, leaving replication to that database. As long as no region holds half the replicas of a partition or more, every partition keeps a majority when one region disappears, so the engine keeps processing through a region loss instead of stopping for an operator.
 
 :::caution Before you begin
 Running a multi-region setup requires you to develop, test, and execute [operational procedures](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) specific to your environment. Review the [limitations](#limitations) and [requirements](#requirements) before you commit to this configuration.
 
 To have your multi-region setup covered by Camunda enterprise support, get your configuration and runbooks reviewed by Camunda before going to production. Contact your Customer Success Manager as soon as you start planning.
+
+That review covers the architecture you build. It does not make the [reference implementation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md) a supported product: that repository is explicitly experimental, meant for learning, evaluation, and design review, and is not production-ready as published.
 :::
 
 ## How Multi-Region RDBMS differs from Dual-Region
@@ -130,6 +132,7 @@ Skewing partition leadership to the writer's zone through zone priority reduces 
 | Zones                         | One zone per region, three or more.                                                                                                          |
 | `number-of-replicas` per zone | Declared per zone, and free to differ between them. No zone may hold half the replication factor or more.                                    |
 | `number-of-brokers` per zone  | Declared per zone. Keep zones balanced so a zone loss removes an equal share of capacity.                                                    |
+| Surviving capacity            | Size the cluster so the regions left after a loss carry the full workload. Quorum surviving is not the same as the cluster keeping up.       |
 | `priority` per zone           | Highest for the zone hosting the database writer, to keep partition leaders next to it.                                                      |
 | `partitionCount`              | Unrestricted. Size it from your workload. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md). |
 
