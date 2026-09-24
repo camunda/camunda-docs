@@ -1,21 +1,35 @@
 ---
 id: secret-resolution-incidents
 title: "Troubleshoot secret resolution failures"
-description: "Diagnose the incidents raised when a job's secret references cannot be resolved or their values cannot be injected, fix the cause, and know what happens next."
+description: "Diagnose the incidents raised when a job's secret references cannot be resolved or their values cannot be injected, fix the cause, and understand what happens next."
 ---
 
-When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the cluster responds in one of three ways: it raises a `SECRET_RESOLUTION_ERROR` incident, raises a `MESSAGE_SIZE_EXCEEDED` incident, or defers the job and retries it without raising an incident.
+import PageDescription from '@site/src/components/PageDescription';
 
-This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
+<PageDescription />
+
+## About
+
+When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the cluster responds in one of three ways:
+
+- Raises a `SECRET_RESOLUTION_ERROR` incident,
+- Raises a `MESSAGE_SIZE_EXCEEDED` incident,
+- Defers the job and retries it without raising an incident.
 
 Only the two incident cases require operator action.
 
-Use this page to diagnose an existing secret resolution or activation problem. To understand how secret resolution and job activation work, see [Secret resolution and job activation](secret-resolution-and-job-activation.md).
+Use this troubleshooting guide to diagnose an existing secret resolution or activation problem.
+
+:::tip
+To understand how secret resolution and job activation work, see [Secret resolution and job activation](secret-resolution-and-job-activation.md).
+:::
 
 ## Find your symptom
 
+Start by identifying the symptom, and then refer to the relevant troubleshooting section:
+
 | Symptom                                                                          | What happened                                                                                                | Section                                                                                           |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| :------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ |
 | An incident message starts with `Failed to resolve secret`                       | The secret store could not return the value, either permanently or after exhausting all retries.             | [Resolve secret lookup failures](#resolve-secret-lookup-failures)                                 |
 | An incident message names a job key and variable path                            | The secret value was available, but Camunda could not inject it into the job variables.                      | [Resolve secret injection failures](#resolve-secret-injection-failures)                           |
 | An incident message reports growth in bytes and the configured message size      | The resolved values are too large to fit in an activation batch.                                             | [Reduce oversized secret values](#reduce-oversized-secret-values)                                 |
@@ -197,8 +211,8 @@ The `SECRET` resource type in [authorizations](access-control/authorizations.md)
 
 Resolve the incident after correcting the underlying problem. Resolving the incident retries the failed operation and makes the job activatable again.
 
-| You fixed                                     | After you resolve the incident                                                        |
-| --------------------------------------------- | ------------------------------------------------------------------------------------- |
+| You fixed:                                    | After you resolve the incident:                                                       |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------ |
 | The secret in the store or store access       | The broker requests resolution again, and the job activates once the value is cached. |
 | The variable or input mapping                 | Camunda retries injection against the current job variables.                          |
 | The size of the secret value or job variables | The job activates once the resolved values fit within the message-size limit.         |

@@ -28,17 +28,14 @@ Before using Swagger UI, ensure you have:
 
 For SaaS clusters, Swagger UI is accessible through your cluster's dedicated endpoint.
 
-1. In the Camunda Console, go to your cluster
-2. In **Cluster Details**, find your **Region ID** and **Cluster ID**
-3. Use this URL format: `https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/swagger`
+1. Open Camunda Hub.
+1. In the left navigation under **Clusters**, select a cluster.
+1. If the cluster is paused, you must [resume](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) it before accessing the Swagger UI.
+1. Under **Cluster Details**, click **Open Swagger UI**.
 
 :::note
-Swagger UI is protected with CSRF. If you are logged into the Camunda Console, you can access Swagger UI directly. If not, you may need to log in first.
+Swagger UI is protected with CSRF. If you are logged into Camunda Hub, you can access Swagger UI directly. If not, you may need to log in first.
 :::
-
-**Example:**
-If your Region ID is `bru-2` and Cluster ID is `abc123-def456-ghi789`, your Swagger UI URL would be:
-`https://bru-2.api.camunda.io/abc123-def456-ghi789/swagger`
 
 ### Self-Managed
 
@@ -115,12 +112,13 @@ Use Swagger UI to test complete workflows:
 
 ### SaaS
 
-Control Swagger UI access through the Camunda Console:
+Control Swagger UI access in [Camunda Hub](/components/hub/organization/manage-clusters/settings.md):
 
-1. Navigate to your cluster in the Camunda Console
-2. Go to **Cluster Settings**
-3. Toggle **Enable Swagger** on or off
-4. Changes apply automatically to your orchestration cluster
+1. Open Camunda Hub.
+1. In the left navigation under **Clusters**, select a cluster.
+1. Click the **Settings** tab.
+1. Toggle **Enable Swagger** on or off.
+1. Changes apply automatically to your orchestration cluster.
 
 ### Self-Managed
 

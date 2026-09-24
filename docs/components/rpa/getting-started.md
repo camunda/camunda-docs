@@ -26,7 +26,7 @@ You can get started developing and testing your scripts locally without a Camund
 ### Using Desktop Modeler
 
 1. **Download Desktop Modeler**: [Download the latest version of Desktop Modeler](https://camunda.com/download/modeler/).
-2. **Open the RPA script editor**: Open Desktop Modeler and navigate to the RPA script editor under **Testing**.
+2. **Open the RPA script editor**: Open Desktop Modeler and navigate to the RPA script editor under **Testing**. If you don't see the bottom panel, click **Window > Toggle Bottom Panel**.
    <img src={RpaEditorInitial} alt="RPA editor interface showing the initial script view in Desktop Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
 3. **Write your RPA script using Robot Framework**: Use the editor to create your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.

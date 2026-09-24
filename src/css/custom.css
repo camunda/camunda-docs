@@ -1940,10 +1940,11 @@ ul ul .table-of-contents__link--active {
 }
 
 .glossary-term__tooltip {
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 0.5rem);
-  z-index: 40;
+  --glossary-term-accent: var(--ifm-color-primary);
+  --glossary-term-arrow-size: 0.75rem;
+  --glossary-term-arrow-overlap: 0.375rem;
+  position: fixed;
+  z-index: 2000;
   width: min(22rem, calc(100vw - 2rem));
   padding: 0.75rem 0.875rem;
   border: 1px solid var(--glossary-term-accent);
@@ -1953,24 +1954,34 @@ ul ul .table-of-contents__link--active {
   color: var(--ifm-font-color-base);
   font-size: 0.875rem;
   line-height: 1.45;
-  opacity: 0;
   pointer-events: none;
-  transform: translateX(-50%) translateY(0.25rem);
-  transition:
-    opacity 140ms ease,
-    transform 140ms ease;
+  transform: translateX(-50%);
+}
+
+[data-theme="dark"] .glossary-term__tooltip {
+  --glossary-term-accent: #f3f3f3;
 }
 
 .glossary-term__tooltip::after {
   content: "";
   position: absolute;
-  top: calc(100% - var(--glossary-term-arrow-overlap));
-  left: 50%;
+  left: var(--glossary-term-arrow-x, 50%);
   width: var(--glossary-term-arrow-size);
   height: var(--glossary-term-arrow-size);
+  background: var(--ifm-background-surface-color);
+}
+
+.glossary-term__tooltip--top::after {
+  top: calc(100% - var(--glossary-term-arrow-overlap));
   border-right: 1px solid var(--glossary-term-accent);
   border-bottom: 1px solid var(--glossary-term-accent);
-  background: var(--ifm-background-surface-color);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.glossary-term__tooltip--bottom::after {
+  bottom: calc(100% - var(--glossary-term-arrow-overlap));
+  border-left: 1px solid var(--glossary-term-accent);
+  border-top: 1px solid var(--glossary-term-accent);
   transform: translateX(-50%) rotate(45deg);
 }
 
@@ -1990,40 +2001,6 @@ ul ul .table-of-contents__link--active {
   text-decoration: underline dotted currentColor;
   text-decoration-thickness: 0.07em;
   text-underline-offset: 0.12em;
-}
-
-.glossary-term:focus-within .glossary-term__tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .glossary-term:hover .glossary-term__tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .glossary-term__tooltip {
-    left: max(-0.5rem, calc(50% - 10rem));
-    transform: translateY(0.25rem);
-  }
-
-  .glossary-term__tooltip::after {
-    left: clamp(1.5rem, 50%, 10rem);
-    transform: rotate(45deg);
-  }
-
-  .glossary-term:focus-within .glossary-term__tooltip {
-    transform: translateY(0);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .glossary-term:hover .glossary-term__tooltip {
-      transform: translateY(0);
-    }
-  }
 }
 /* Style for custom Detail collapsbiles - for example used in /docs/reference/announcements-release-notes/860/860-release-notes.md */
 .changelog-dropdown {

@@ -308,7 +308,7 @@ If you are having issues with the **Amazon DynamoDB connector**, try the followi
 - Ensure your DynamoDB table exists and is located in the specified region.
 - Ensure your configuration properties are set correctly.
 - Check the logs for any error messages.
-- Contact (Camunda support)[https://camunda.com/services/support/] if you need further assistance.
+- Contact [Camunda support](https://camunda.com/services/support/) if you need further assistance.
 
 For more information on Amazon DynamoDB, visit the [official documentation](https://docs.aws.amazon.com/dynamodb/).
 

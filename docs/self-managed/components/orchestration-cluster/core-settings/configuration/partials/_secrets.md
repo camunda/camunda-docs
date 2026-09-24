@@ -5,7 +5,7 @@ import TabItem from '@theme/TabItem';
 
 Configure the secret stores and cache used to resolve `camunda.secrets.<name>` references in process variables.
 
-This configuration is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases. See [Secret resolution](/components/concepts/secret-resolution.md) for the reference syntax and how references are resolved.
+See [Secret resolution](/components/concepts/secret-resolution.md) for the reference syntax and how references are resolved.
 
 :::note
 This secret store configuration applies only to Self-Managed. In SaaS, the secret store is provisioned and managed for you, so you don't configure a store type, path, or credentials. Manage secret values on the cluster's **Cluster secrets** tab and reference them as `camunda.secrets.<key>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
