@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:zeebe="http://camunda.org/schema/zeebe/1.0"
+                  id="php-sdk-forked-worker-definitions"
+                  targetNamespace="https://camunda.com/examples/php-sdk">
+  <bpmn:process id="__PROCESS_ID__" name="Forked PHP worker" isExecutable="true">
+    <bpmn:startEvent id="start">
+      <bpmn:outgoing>to-work</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="to-work" sourceRef="start" targetRef="work" />
+    <bpmn:serviceTask id="work" name="Forked work">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="__JOB_TYPE__" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>to-work</bpmn:incoming>
+      <bpmn:outgoing>to-end</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="to-end" sourceRef="work" targetRef="end" />
+    <bpmn:endEvent id="end">
+      <bpmn:incoming>to-end</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="php-sdk-forked-worker-diagram">
+    <bpmndi:BPMNPlane id="php-sdk-forked-worker-plane" bpmnElement="__PROCESS_ID__">
+      <bpmndi:BPMNShape id="start-shape" bpmnElement="start">
+        <dc:Bounds x="180" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="work-shape" bpmnElement="work">
+        <dc:Bounds x="270" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="end-shape" bpmnElement="end">
+        <dc:Bounds x="430" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
