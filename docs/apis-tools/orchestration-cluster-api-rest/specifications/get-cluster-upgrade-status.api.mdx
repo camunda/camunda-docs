@@ -1,0 +1,77 @@
+---
+id: get-cluster-upgrade-status
+title: "Get the upgrade-readiness status of the whole cluster"
+sidebar_label: "Get the upgrade-readiness status of the whole cluster"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV81u20YQfpXB5tDUoH6cQ+EwJ8FWDCWN7EpynNYyohU5EjchZ5ndpWRWENCH6BP2SYpZkrJsK2iDHnqJLtL+ze8334w2wsmlFeGNOE0L69CI20DoHI10StMgFqFYoqvPrvKlkTGOnXSFFYGwGBVGuVKEN7eBiNFGRuX8ToRiSlO6uRn1f7kajPpnHy/7o3eD8XhwMRyHWL5Z//bhjZMfhr/L65dFVA5+uj4+fnl7Wz3qnZ31zz4Ohh/f90f8IjxpH3ebw9OL4XgwnvSHp7+G48noYnhenYww18ZZ0ISgV2hkmkJR2dsyKGNFaC1YbzostAGXIKwTnSJElXcBLHQaY+yfA67QlJAnpVWRTMEhSXIgKYZIU6zYyzbM3g3OR71J/2wGmtISNEVYv/xMek33dyGRFjK1NNJh7PXvX3uk5lUjeHAx5Dhcji7OR/3xeAbrBAmkgxSldd5XZVnJQpkMYyDtoES3U/QKZlfDt8OL6+EMtEvQrJVFeK4oSotY0RLmuNAGQVLpEl6zlXNEAuPDiTGL+7ENQw05mlYdBW386t65GJ1UKduye5egwVdgEX2gZ3UqRk0mZiAjV0jHgaA414pcnRXp2iIQBm2uyaIV4Ua86Hb56yHAJskucz/Yr6aaZUWaHJJjETLPUxV5bHc+WZazETZKMJOHFXwVQXrxFECsy5U5ilDo+SeMnPfjS6EMxlxh1VMusNxwiTlVuVfvPzHgAboeAeupYffZUBYydP8vyPZiYZ1RtBSBwDuZ5SlvNY7xJhUZB2dv66BZIhC1FnG73QbCKedFHaKmUQ0eseVPIO5aMo4xbilqrdDYKrpMKt4oh8RbTIIb8RlLER56EIiVTAtsHm5vA5GhS3TNkCIQuXSJCEWnRkNn9aJTZbZTJ8szpmGBXlVhUhGKTQW/bdjpbBJt3TbccAVtvUKj5DytQMJnFUQWskidCEWqI5n67cfcy8jlA5IZNki9MFGC1lW8DnXUYNQfT+BcOlzLsi22gWDdD9WcdE+6BzXw1X8hvXc5gMptr2C/2hoViXP5QRXV5W9VsuXkNL1pzCKqEM5RGjS9gtO0adBZ6/aaeF1dEkH947U2mWQb31xP2Py5tCr6JxF8RzDwFC20v1iD9bAHvcsBZ3uHzG77uGYtGflkcB4Z6jIrKJbQp6UixLqqKhixDTbsdJbKJcW8HemsE1XXd9/K2gItO/Ew0Bw75opIZ1lBnh1pCWvlEpDQ6DzZkRw322fP4FTTColF2GrnGfSpyMBXCUTSKlrywdhnpWVVjAFwsbc4ajEwMaJ1sFCYxhZkFGHO/bWs33LS5ZRiHRUZEneUSvJzT2sVk8CsdzoZvO/PApjJyKkVzgLfome9agXS4JR4FKjkc3MnUJQX3NQamrAg07UsLRS26laRJE2eKhs/bMIMqghcoizYHCO1qPuID8iEt3M0mbJWrXDn3RwTuVLaMIPKGqE+FsynKySFTOyS4ikpC0dHpN3REeRyr7JyJM4Qh44fOSMjB3/98SeMz95aWCJhPVMYnU3pqX0wL4EpOHLNZW0sZLIEg9ykgDS1dh5PqQk/VaFIFZIDNrkNr7nxa+PkXKXKlSAjo631hgR1DKdkkeKDUYSHQWwy254yuaYqQmbsp2j/uTqB91V9wHG7+y2on6d63smkok6twnZOe++uhme91s+D0/5w3G8dt7ttd+d8xebaukzSnh3n6Lw73zQKPGazzf0Q8n0y/j4Z/5fJuG46Du9cJ0+lImZ0Xw6begS5EfcoXL3gztT8YWsGkdugniduxGYzlxavTLrd8vaXAk39f64ZP3i1DUSCMkazNyT1PKXuDUZPhusHQ9J5fyK2278BMkMULg==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get the upgrade-readiness status of the whole cluster"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/cluster/v2/status/upgrade"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Reports one overall upgrade-readiness status for the whole cluster, folded over every physical tenant and condition. `MIGRATED` only once every known condition has migrated for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise (including before anything has been reported yet). No per-tenant or per-condition detail is reported here; see the `upgradeReadiness` actuator endpoint for that.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The cluster's upgrade-readiness status.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The upgrade-readiness status of the whole cluster.",
+            type: "object",
+            required: ["status"],
+            properties: {
+              status: {
+                description:
+                  "`MIGRATED` once every known upgrade-readiness condition is met for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise.",
+                type: "string",
+                example: "MIGRATED",
+                enum: ["MIGRATED", "MIGRATION_IN_PROGRESS", "UNKNOWN"],
+              },
+            },
+            title: "ClusterUpgradeStatusResponse",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
