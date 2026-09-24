@@ -50,28 +50,33 @@ Environment Variables
 
 The broker needs to receive communication from the gateway and from other brokers. It also exposes a port for monitoring.
 
-- `zeebe.broker.network.commandApi.port: 26501`: Gateway-to-broker communication, using an internal SBE (Simple Binary Encoding) protocol. This is the Command API port. This should be exposed to the gateway.
-- `zeebe.broker.network.internalApi.port: 26502`: Inter-broker clustering using the Gossip and Raft protocols for partition replication, broker elections, topology sharing, and message subscriptions. This should be exposed to other brokers and the gateway.
+- `camunda.cluster.network.command-api.port: 26501`: Gateway-to-broker communication, using an internal SBE (Simple Binary Encoding) protocol. This is the Command API port. This should be exposed to the gateway.
+- `camunda.cluster.network.internal-api.port: 26502`: Inter-broker clustering using the Gossip and Raft protocols for partition replication, broker elections, topology sharing, and message subscriptions. This should be exposed to other brokers and the gateway.
 - `zeebe.broker.network.monitoringApi.port: 9600`: Metrics and Readiness Probe. Prometheus metrics are exported on the route `/metrics`. There is a readiness probe on `/ready`.
+
+The monitoring port is the one setting here that keeps its original name. The other two were renamed when the broker moved to unified configuration, and the broker logs a deprecation warning at startup if you still set `zeebe.broker.network.commandApi.port` or `zeebe.broker.network.internalApi.port`. No such rename exists for the monitoring port, so `zeebe.broker.network.monitoringApi.port` remains correct.
 
 The relevant [configuration](../configuration/configuration.md) settings are:
 
 ```
 Config file
+    camunda:
+      cluster:
+        network:
+          command-api:
+            port: 26501
+          internal-api:
+            port: 26502
     zeebe:
       broker:
         network:
-          commandAPI:
-            port: 26501
-          internalAPI:
-            port: 26502
-          monitoringApi
+          monitoringApi:
             port: 9600
 
 Environment Variables
-  ZEEBE_BROKER_NETWORK_COMMANDAPI_PORT = 26501
-  ZEEBE_BROKER_NETWORK_INTERNALAPI_PORT = 26501
-  ZEEBE_BROKER_NETWORK_MONITORINGAPI_PORT = 26501
+  CAMUNDA_CLUSTER_NETWORK_COMMANDAPI_PORT = 26501
+  CAMUNDA_CLUSTER_NETWORK_INTERNALAPI_PORT = 26502
+  ZEEBE_BROKER_NETWORK_MONITORINGAPI_PORT = 9600
 ```
 
 </TabItem>
