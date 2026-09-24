@@ -75,8 +75,7 @@ kubectl create secret generic camunda-credentials \
   --from-literal=identity-connectors-client-token=CHANGE_ME \
   --from-literal=identity-optimize-client-token=CHANGE_ME \
   --from-literal=identity-orchestration-client-token=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-admin-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-user-password=CHANGE_ME
+  --from-literal=webmodeler-postgresql-password=CHANGE_ME
 ```
 
 This secret includes the following keys:
@@ -86,8 +85,9 @@ This secret includes the following keys:
 - `identity-connectors-client-token`: Client secret of the Keycloak OIDC client `connectors `used by Connectors.
 - `identity-optimize-client-token`: Client secret of the Keycloak OIDC client `optimize` used by Optimize.
 - `identity-orchestration-client-token`: Client secret of the Keycloak OIDC client `orchestration` used by the Orchestration Cluster.
-- `literal=webmodeler-postgresql-admin-password`: Password for the administrative account of the PostgreSQL instance used by Web Modeler (username `postgres`).
-- `webmodeler-postgresql-user-password` Password non-privileged user account of the PostgreSQL instance used by Web Modeler (username `web-modeler`).
+- `webmodeler-postgresql-password`: Password for the PostgreSQL user that Web Modeler connects as.
+
+Web Modeler requires an externally managed PostgreSQL database. Create the `web-modeler` database and its user before you deploy. See [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
 
@@ -165,7 +165,7 @@ identity:
 Add the section under `global.identity` to the `global` configuration you created in the previous step.
 
 :::note
-Older chart versions used a flat `global.identity.keycloak.auth.existingSecret` / `auth.existingSecretKey` form instead of the nested `auth.secret.*` shown above. The flat form still works but logs a deprecation warning — use the nested form for new deployments.
+Chart 15.x (Camunda 8.10) rejects the flat `global.identity.keycloak.auth.existingSecret` and `auth.existingSecretKey` form used by earlier charts. Use the nested `auth.secret.*` form shown above. In charts 14.x (Camunda 8.8 and 8.9) the flat form still works but logs a deprecation warning. For the full list of values removed in 8.10, see [Remove keys rejected by chart 15.x](/self-managed/upgrade/helm/890-to-8100.md#remove-keys-rejected-by-chart-15x).
 :::
 
 The `identity.firstUser` field defines the initial user that Management Identity creates in Keycloak with full access to all Camunda components.
@@ -242,13 +242,14 @@ webModeler:
     mail:
       fromAddress: noreply@example.com
 
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "webmodeler-postgresql-admin-password"
-      userPasswordKey: "webmodeler-postgresql-user-password"
+camundaHub:
+  restapi:
+    externalDatabase:
+      url: "jdbc:postgresql://<postgres-host>:5432/web-modeler"
+      username: "<postgres-username>"
+      secret:
+        existingSecret: "camunda-credentials"
+        existingSecretKey: "webmodeler-postgresql-password"
 
 orchestration:
   security:
@@ -307,10 +308,10 @@ Log in with the username `demo` and the password stored in the secret key `ident
 For issues common to any OIDC provider, see [Troubleshoot OIDC authentication](./troubleshooting-oidc.md). The following are specific to external Keycloak:
 
 **Management Identity pod restarts once during first startup**
-A single restart during the very first deployment is expected: Management Identity can briefly hit `403 Forbidden` while disabling Keycloak's default system clients, immediately after creating the realm — a timing issue between realm creation and Keycloak's own permission propagation, not a misconfiguration. Kubernetes' automatic pod restart resolves it. Only investigate further if the pod keeps crash-looping past the first retry.
+A single restart during the very first deployment is expected. Immediately after creating the realm, Management Identity can briefly hit `403 Forbidden` while disabling Keycloak's default system clients. This is a timing issue between realm creation and Keycloak's permission propagation, not a misconfiguration, and the automatic pod restart resolves it. Investigate further only if the pod keeps crash-looping past the first retry.
 
 **Management Identity fails to connect to the Keycloak admin API**
-The `global.identity.keycloak.*` settings configure the admin API connection used for provisioning — a separate concern from the OIDC login flow. Verify `url.protocol`, `url.host`, `url.port`, and `contextPath` together form a URL reachable from inside the cluster:
+The `global.identity.keycloak.*` settings configure the admin API connection used for provisioning, which is separate from the OIDC login flow. Verify `url.protocol`, `url.host`, `url.port`, and `contextPath` together form a URL reachable from inside the cluster:
 
 ```bash
 kubectl run -it --rm curl --image=curlimages/curl --restart=Never -- \
@@ -320,7 +321,7 @@ kubectl run -it --rm curl --image=curlimages/curl --restart=Never -- \
 A valid response confirms the realm is reachable at that URL. If this fails, double check `issuerBackendUrl` from the global configuration step, since it should resolve to the same host.
 
 **Realm already exists, but clients aren't created**
-If the realm already existed when Management Identity started, it won't re-create it — but it still attempts to create any missing clients. If clients are still missing after startup, check the Management Identity logs for provisioning errors. The most common cause is that the admin credentials don't have sufficient permission to create clients in the existing realm.
+If the realm already existed when Management Identity started, Management Identity doesn't re-create it, but it does still attempt to create any missing clients. If clients are still missing after startup, check the Management Identity logs for provisioning errors. The most common cause is that the admin credentials lack permission to create clients in the existing realm.
 
 **Demo user can't log in**
 The `identity-firstuser-password` secret value is only applied when the demo user is first created. If this user already exists from a previous deployment with a different password, changing the secret has no effect on it. Reset the user's password directly in the Keycloak admin console.

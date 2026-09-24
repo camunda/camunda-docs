@@ -138,12 +138,14 @@ For more information, see [OpenID Connect Core specification](https://openid.net
 
 ## Handle separate access token and ID token signing keys
 
-Most OIDC providers sign access tokens and ID tokens with the same key, published at the single `jwks_uri` in the discovery document. Some enterprise identity provider deployments use a separate signing key for access tokens (validated by Camunda on every API request) than for ID tokens (validated only during the login callback). If your provider does this and you configure only the discovery document's `jwksUrl`, access token validation fails even though login succeeds.
+Most OIDC providers sign access tokens and ID tokens with the same key, published at the single `jwks_uri` in the discovery document. Some enterprise identity provider deployments sign access tokens with a different key than ID tokens. Camunda validates access tokens on every API request and ID tokens only during the login callback, so if you configure only the discovery document's `jwksUrl`, access token validation fails even though login succeeds.
 
-Check your provider's admin console for a distinct access token signing key or certificate, separate from the one used for OpenID Connect / ID tokens. If your provider exposes a separate JWKS endpoint for access tokens, configure both:
+To check whether this applies to your provider, compare the `jwks_uri` in the discovery document against the JWKS endpoint listed for access tokens (or API and runtime tokens) in your provider's admin console. If both are the same URL, skip this section.
 
-- Set `global.identity.auth.jwksUrl` to the **access token** JWKS endpoint. Management Identity validates access tokens using this single URL only — it does not call the userinfo endpoint or fall back to any other source.
-- Add the same URL as an additional JWKS source for the Orchestration Cluster, which otherwise only fetches the primary JWKS from the discovery document:
+If the URLs differ, configure both endpoints:
+
+- Set `global.identity.auth.jwksUrl` to the **access token** JWKS endpoint. Management Identity validates access tokens using this single URL only, and doesn't call the userinfo endpoint or fall back to any other source.
+- Add the same URL as an additional JWKS source for the Orchestration Cluster, which otherwise fetches only the primary JWKS from the discovery document:
 
   ```yaml
   orchestration:
@@ -152,13 +154,9 @@ Check your provider's admin console for a distinct access token signing key or c
         value: "<access-token-jwks-url>"
   ```
 
-  There is no dedicated Helm value for this setting — it maps directly to the Spring Boot property `camunda.security.authentication.oidc.additionalJwkSetUris` (a list), set via `orchestration.env` using Spring's relaxed-binding convention for list properties: one environment variable per index, with the index surrounded by underscores (`..._0_`, `..._1_`, and so on).
+  This setting has no dedicated Helm value. It maps to the Spring Boot list property `camunda.security.authentication.oidc.additionalJwkSetUris`, set through `orchestration.env` using Spring's relaxed-binding convention for list properties: one environment variable per index, with the index surrounded by underscores (`..._0_`, `..._1_`, and so on).
 
-The Orchestration Cluster merges keys from the primary JWKS endpoint and all additional endpoints, and selects whichever key matches the `kid` in the incoming token — so both ID tokens and access tokens validate correctly regardless of which key set signed them.
-
-:::tip
-If you're not sure whether your provider uses separate keys, compare the `jwks_uri` in the discovery document against the JWKS endpoint listed for access tokens (or API/runtime tokens) in your provider's admin console. If they're the same URL, you can skip this section.
-:::
+The Orchestration Cluster merges keys from the primary JWKS endpoint and all additional endpoints, then selects whichever key matches the `kid` in the incoming token. Both ID tokens and access tokens then validate correctly, regardless of which key set signed them.
 
 ## Create secrets
 
@@ -182,14 +180,13 @@ Next, create a secret with the remaining credentials for the Camunda Helm chart:
 
 ```bash
 kubectl create secret generic camunda-credentials \
-  --from-literal=identity-postgresql-admin-password=CHANGE_ME \
-  --from-literal=identity-postgresql-user-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-admin-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-user-password=CHANGE_ME
+  --from-literal=identity-postgresql-password=CHANGE_ME \
+  --from-literal=webmodeler-postgresql-password=CHANGE_ME
 ```
 
-Unlike the OIDC client secrets, these passwords initialize the component databases.
-You can choose any values.
+Unlike the OIDC client secrets, these passwords authenticate each component against its external PostgreSQL database, so each value must match the password of the database user you created.
+
+Management Identity and Web Modeler each require an externally managed PostgreSQL database. Create the `management-identity` and `web-modeler` databases, along with their users, before you deploy. See [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 :::tip Alternative secret management
 For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions) for more options.
@@ -260,15 +257,18 @@ global:
 identity:
   fullURL: <identity-base-url>
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
+  externalDatabase:
+    enabled: true
+    host: <postgres-host>
+    port: 5432
+    database: management-identity
+    username: <postgres-username>
+    secret:
+      existingSecret: camunda-credentials
+      existingSecretKey: identity-postgresql-password
 ```
+
+Management Identity requires an externally managed PostgreSQL database. Create the `management-identity` database and its user before you deploy. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 #### Identity-specific parameters
 
@@ -421,13 +421,14 @@ webModeler:
       fromAddress: noreply@example.com # Update with your email address
       # Additional SMTP configuration may be required - see Web Modeler docs
 
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: webmodeler-postgresql-admin-password
-      userPasswordKey: webmodeler-postgresql-user-password
+camundaHub:
+  restapi:
+    externalDatabase:
+      url: jdbc:postgresql://<postgres-host>:5432/web-modeler
+      username: <postgres-username>
+      secret:
+        existingSecret: camunda-credentials
+        existingSecretKey: webmodeler-postgresql-password
 ```
 
 #### Web Modeler parameters
@@ -563,18 +564,15 @@ connectors:
 identity:
   fullURL: <identity-base-url>
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
-
-# Disable internal Keycloak
-identityKeycloak:
-  enabled: false
+  externalDatabase:
+    enabled: true
+    host: <postgres-host>
+    port: 5432
+    database: management-identity
+    username: <postgres-username>
+    secret:
+      existingSecret: camunda-credentials
+      existingSecretKey: identity-postgresql-password
 
 # Optimize
 optimize:
@@ -587,13 +585,14 @@ webModeler:
     mail:
       fromAddress: <your-email-address>
 
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: webmodeler-postgresql-admin-password
-      userPasswordKey: webmodeler-postgresql-user-password
+camundaHub:
+  restapi:
+    externalDatabase:
+      url: jdbc:postgresql://<postgres-host>:5432/web-modeler
+      username: <postgres-username>
+      secret:
+        existingSecret: camunda-credentials
+        existingSecretKey: webmodeler-postgresql-password
 
 # Console
 console:

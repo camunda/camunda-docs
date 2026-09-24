@@ -87,13 +87,11 @@ For **each** of the components above:
      ...
    }
    ```
-1. In **Token configuration**, [add the optional claim](https://learn.microsoft.com/en-us/entra/identity-platform/optional-claims?tabs=appui) `preferred_username` to **both** the access token and the ID token.
+1. In **Token configuration**, [add the optional claim](https://learn.microsoft.com/en-us/entra/identity-platform/optional-claims?tabs=appui) `preferred_username` to **both** the access token and the ID token. Entra labels this claim optional, but Camunda requires it.
 
-   :::danger Required, not optional
-   Management Identity reads user claims directly from the access token, not from a userinfo call. If `preferred_username` is missing from the access token, Management Identity finds no matching claim and grants no roles — the user authenticates successfully but immediately sees a "403 unauthorized" error, and users appear in Operate and Tasklist with an opaque identifier instead of their name.
+   Management Identity reads user claims directly from the access token rather than from a userinfo call. If `preferred_username` is missing from the access token, Management Identity finds no matching claim and grants no roles. The user authenticates successfully, then immediately sees a `403 unauthorized` error, and users appear in Operate and Tasklist with an opaque identifier instead of their name.
 
-   If you don't want to use `preferred_username`, you can use a different claim that uniquely identifies your users instead (see [the note on `initialClaimName` below](#configure-management-identity)) — but whichever claim you choose, it must be added as an optional claim on both token types, since Entra doesn't include it by default.
-   :::
+   To use a different claim that uniquely identifies your users, see [Configure Management Identity](#configure-management-identity). Whichever claim you choose, add it as an optional claim on both token types, since Entra doesn't include it by default.
 
 #### Redirect URIs per Camunda component
 
@@ -135,21 +133,18 @@ Next, create a secret with the remaining credentials for the Camunda Helm chart:
 
 ```
 kubectl create secret generic camunda-credentials \
-  --from-literal=identity-postgresql-admin-password=CHANGE_ME \
-  --from-literal=identity-postgresql-user-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-admin-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-user-password=CHANGE_ME
+  --from-literal=identity-postgresql-password=CHANGE_ME \
+  --from-literal=webmodeler-postgresql-password=CHANGE_ME
 ```
 
-Unlike the OIDC client secrets, these passwords initialize the component databases.
-You can choose any values.
+Unlike the OIDC client secrets, these passwords authenticate each component against its external PostgreSQL database, so each value must match the password of the database user you created.
 
 This secret includes the following keys:
 
-- `identity-postgresql-admin-password`: Password for the administrative PostgreSQL account used by Management Identity (`postgres`).
-- `identity-postgresql-user-password`: Password for the non-privileged PostgreSQL account used by Management Identity (`bn_keycloak`).
-- `literal=webmodeler-postgresql-admin-password`: Password for the administrative PostgreSQL account used by Web Modeler (`postgres`).
-- `webmodeler-postgresql-user-password` Password for the non-privileged PostgreSQL account used by Web Modeler (`web-modeler`).
+- `identity-postgresql-password`: Password for the PostgreSQL user that Management Identity connects as.
+- `webmodeler-postgresql-password`: Password for the PostgreSQL user that Web Modeler connects as.
+
+Management Identity and Web Modeler each require an externally managed PostgreSQL database. Create the `management-identity` and `web-modeler` databases, along with their users, before you deploy. See [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
 
@@ -221,11 +216,11 @@ orchestration:
 Replace `<OC_URL>` with the base URL of the Orchestration Cluster as it will be reachable from your users’ browsers.
 For local deployment, this is `http://localhost:8080`.
 
-:::caution Two Entra-specific settings required
-By default, the Orchestration Cluster calls the OIDC userinfo endpoint after authentication to augment token claims. Entra's userinfo endpoint is hosted on Microsoft Graph (`graph.microsoft.com/oidc/userinfo`), not on the authorization server, and requires a Graph API access token rather than the OIDC access token Camunda holds — the call fails. Setting `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USER_INFO_ENABLED` to `false` tells the Orchestration Cluster to rely on claims already present in the token instead, which is also Microsoft's own recommendation since the ID token is a superset of what userinfo returns. Neither setting has a dedicated Helm value — both map to Spring Boot properties (`camunda.security.authentication.oidc.user-info-enabled` and `server.max-http-request-header-size`) passed through `orchestration.env`.
+The two environment variables above are both required with Entra. Neither has a dedicated Helm value, so both are passed through `orchestration.env` as Spring Boot properties (`camunda.security.authentication.oidc.user-info-enabled` and `server.max-http-request-header-size`).
 
-Microsoft's authorization codes are longer than those issued by most other providers. Combined with session cookies from an existing session, the total HTTP header size can exceed Tomcat's 8 KB default, causing a raw HTTP 400 (a plain Tomcat error page, not a Camunda error) before Spring Security ever processes the request. `SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` raises this to 64 KB. See [Request header is too large](./troubleshooting-oidc.md#request-header-is-too-large) if you hit this after deploying.
-:::
+`CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USER_INFO_ENABLED` must be `false`. By default, the Orchestration Cluster calls the OIDC userinfo endpoint after authentication to augment token claims. Entra hosts its userinfo endpoint on Microsoft Graph (`graph.microsoft.com/oidc/userinfo`) rather than on the authorization server, and it requires a Graph API access token instead of the OIDC access token Camunda holds, so the call fails. Setting this variable to `false` tells the Orchestration Cluster to rely on the claims already present in the token. This is also Microsoft's recommendation, since the ID token is a superset of what userinfo returns.
+
+`SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` raises the maximum header size to 64 KB. Microsoft's authorization codes are longer than those issued by most other providers. Combined with session cookies from an existing session, the total HTTP header size can exceed Tomcat's 8 KB default, which causes a plain Tomcat HTTP 400 error page before Spring Security processes the request. See [Request header is too large](./troubleshooting-oidc.md#request-header-is-too-large) if you hit this after deploying.
 
 `usernameClaim` defines which claim in the access token identifies the user.
 `clientIdClaim` defines which claim identifies the calling client.
@@ -279,22 +274,32 @@ global:
 
 identity:
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "identity-postgresql-admin-password"
-      userPasswordKey: "identity-postgresql-user-password"
+  externalDatabase:
+    enabled: true
+    host: "<postgres-host>"
+    port: 5432
+    database: "management-identity"
+    username: "<postgres-username>"
+    secret:
+      existingSecret: "camunda-credentials"
+      existingSecretKey: "identity-postgresql-password"
 ```
 
 Replace `<IDENTITY_URL>` with the base URL of Management Identity as it will be reachable from your users' browser. For local deployment, use `http://localhost:8084`.
 
+Management Identity requires an externally managed PostgreSQL database. Create the `management-identity` database before deploying, and store its password in the `camunda-credentials` secret. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
+
 - `initialClaimName` defines which claim in the access token identifies the initial administrative user.
 - `initialClaimValue` defines the value of that claim that grants administrative access to Management Identity.
 
-`preferred_username` (the user's UPN) is readable and self-documenting, which makes it easy to work with during initial setup. The alternative, `oid` (the user's Entra Object ID), is always present in tokens without any optional claim configuration and doesn't change if the user's email address changes — which makes it the more stable choice for production, since `initialClaimValue` is set only on first startup and can't be updated via Helm afterward.
+Choose the claim based on whether you value readability or stability:
+
+| Claim                | Trade-off                                                                                                                                      |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `preferred_username` | The user's UPN. Readable and self-documenting, which makes it easy to work with during initial setup. Requires the optional claim to be added. |
+| `oid`                | The user's Entra Object ID. Always present without optional claim configuration, and unchanged if the user's email address changes.            |
+
+Because `initialClaimValue` is applied only on first startup and can't be updated through Helm afterward, `oid` is the more stable choice for production.
 
 :::danger
 Once configured, the initial claim name and value cannot be changed using environment variables or Helm values.
@@ -359,16 +364,19 @@ webModeler:
     mail:
       fromAddress: noreply@example.com
 
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "webmodeler-postgresql-admin-password"
-      userPasswordKey: "webmodeler-postgresql-user-password"
+camundaHub:
+  restapi:
+    externalDatabase:
+      url: "jdbc:postgresql://<postgres-host>:5432/web-modeler"
+      username: "<postgres-username>"
+      secret:
+        existingSecret: "camunda-credentials"
+        existingSecretKey: "webmodeler-postgresql-password"
 ```
 
 Replace `<WEB_MODELER_URL>` with the base URL of Web Modeler as it will be reachable from your users' browser. For local deployment, use `http://localhost:8070`.
+
+Web Modeler requires an externally managed PostgreSQL database, configured under `camundaHub.restapi.externalDatabase`. Create the `web-modeler` database before deploying. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 You can update `webModeler.restapi.mail.fromAddress` with an address suitable for your environment.
 This address appears as the sender in emails sent by Web Modeler.
@@ -481,14 +489,15 @@ connectors:
 
 identity:
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "identity-postgresql-admin-password"
-      userPasswordKey: "identity-postgresql-user-password"
+  externalDatabase:
+    enabled: true
+    host: "<postgres-host>"
+    port: 5432
+    database: "management-identity"
+    username: "<postgres-username>"
+    secret:
+      existingSecret: "camunda-credentials"
+      existingSecretKey: "identity-postgresql-password"
 
 optimize:
   enabled: true
@@ -499,13 +508,14 @@ webModeler:
     mail:
       fromAddress: noreply@example.com
 
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "webmodeler-postgresql-admin-password"
-      userPasswordKey: "webmodeler-postgresql-user-password"
+camundaHub:
+  restapi:
+    externalDatabase:
+      url: "jdbc:postgresql://<postgres-host>:5432/web-modeler"
+      username: "<postgres-username>"
+      secret:
+        existingSecret: "camunda-credentials"
+        existingSecretKey: "webmodeler-postgresql-password"
 
 console:
   enabled: true
@@ -555,7 +565,7 @@ For issues common to any OIDC provider (invalid redirect URI, audience mismatch,
 The `clientId` in your Helm values doesn't match a registered application in your tenant. Verify each `clientId` exactly matches the **Application (client) ID** on the app registration's **Overview** page, and that the app is registered in the tenant identified by your `<tenant id>`.
 
 **`AADSTS50011: Redirect URI mismatch`**
-The redirect URI Camunda sent doesn't match any URI registered for that app. Verify `redirectUrl` in your Helm config exactly matches the redirect URI configured in Entra, including the path suffix (`/auth/login-callback`, `/sso-callback`, and so on).
+The redirect URI Camunda sent doesn't match any URI registered for that app. Verify `redirectUrl` in your Helm configuration exactly matches the redirect URI configured in Entra, including the path suffix, for example `/auth/login-callback` or `/sso-callback`.
 
 **`401` with `jwt issuer invalid` or `"The iss claim is not valid"`**
 The app registration is issuing v1.0 tokens (issuer `https://sts.windows.net/...`) instead of v2.0 tokens (issuer `https://login.microsoftonline.com/.../v2.0`). Confirm `api.requestedAccessTokenVersion` is set to `2` in the app's manifest (see [Create applications in Entra](#create-applications-in-entra)). This applies to all app registrations, including single-page applications.

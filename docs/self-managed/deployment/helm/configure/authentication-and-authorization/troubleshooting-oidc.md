@@ -136,8 +136,6 @@ Increase the maximum allowed HTTP request header size for the Identity service.
          value: "40KB"
    ```
 
-:::note
-This same issue can also affect the Orchestration Cluster if its session cookies and authorization code grow large enough (for example, with Microsoft Entra ID). If Operate or Tasklist login fails with the same symptom, set `SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` under `orchestration.env` instead.
-:::
-
 3. Upgrade or redeploy the release so the new environment variable takes effect.
+
+The Orchestration Cluster can hit the same limit when its session cookies and authorization code grow large enough, for example with Microsoft Entra. If Operate or Tasklist login fails with the same symptom, set `SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` under `orchestration.env` instead.
