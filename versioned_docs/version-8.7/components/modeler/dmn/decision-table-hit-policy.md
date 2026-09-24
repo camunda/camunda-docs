@@ -65,14 +65,30 @@ The hit policies [Rule Order](#rule-order) and [Collect](#collect) can return mu
 Only a single rule can be satisfied or no rule at all. The decision table result contains the output entries of the
 satisfied rule.
 
-If more than one rule is satisfied, the Unique hit policy is violated.
+If more than one rule is satisfied, the Unique hit policy is violated. The decision table is considered invalid,
+evaluation fails, and — in the context of a process instance — an incident is raised. Unique does **not** select
+the first matching rule; you must design the rules so that at most one can match for any given input.
 
-Refer to the following decision table.
+For example, the following table is valid under Unique because the seasons are mutually exclusive, so at most one
+rule can match:
 
-![Hit Policy Unique](assets/decision-table/hit-policy-unique.png)
+| Season | Dish        |
+| ------ | ----------- |
+| Spring | Steak       |
+| Summer | Light salad |
+| Autumn | Stew        |
+| Winter | Roast beef  |
 
-Depending on the current season the dish should be chosen. Only one dish can be chosen, since only one season can exist
-at the same time.
+In contrast, a table with overlapping conditions such as:
+
+| Season | Temperature | Dish        |
+| ------ | ----------- | ----------- |
+| Summer | > 20        | Light salad |
+| Summer | < 22        | Cold soup   |
+
+is **not** safe under Unique. An input of `Summer` and `21` satisfies both rules, which violates the Unique hit
+policy and causes evaluation to fail. If you want the first matching rule to be selected instead, use the
+[First](#first) hit policy.
 
 ## Any
 
