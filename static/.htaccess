@@ -184,6 +184,9 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 
 # Databricks connector doc moved into its own subfolder alongside the new fraud detection use case doc.
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/databricks/?$ /docs/next/components/connectors/out-of-the-box-connectors/databricks/databricks/ [R=301,L]
+# Adjust enable secure connectivity path to drop the "console" reference
+RewriteRule ^docs/next/components/saas/secure-connectivity/secure-connectivity-console-setup/?$ docs/next/components/saas/secure-connectivity/enable-secure-connectivity/ [R=301,L]
+
 # Microsoft Teams docs became App Integrations, which covers Slack as well (8.10)
 RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
 RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-installation/?$ /docs/next/components/camunda-integrations/app-integrations/installation/ [R=301,L]
