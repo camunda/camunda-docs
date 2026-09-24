@@ -17,7 +17,7 @@ Select any environment configured for your project as your test target. In SaaS,
 Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
 :::
 
-Opening the **Test** tab no longer deploys your process automatically. Use the **Setup test run** panel to connect a cluster, deploy, and configure a test case — see [get started with Test mode](#get-started-with-test-mode) for the full flow.
+Opening the **Test** tab no longer deploys your process automatically. Use the **Set up test run** panel to connect a cluster, deploy, and configure a test case — see [get started with Test mode](#get-started-with-test-mode) for the full flow.
 
 The selected cluster name is shown in the Test action bar. Click it to switch clusters without leaving Test mode; the newly selected cluster becomes the deployment and execution target.
 
@@ -44,7 +44,7 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 ## Get started with Test mode
 
-When you open the **Test** tab for the first time in a process, the **Setup test run** panel guides you through three steps:
+When you open the **Test** tab for the first time in a process, the **Set up test run** panel guides you through three steps:
 
 1. **Choose where to run**
 2. **Choose resources to deploy**
