@@ -18,7 +18,11 @@ The migration follows the same steps for single-region and dual-region clusters.
 | Single-region | One release in one Kubernetes cluster | One zone                     | The single zone                           |
 | Dual-region   | One release per Kubernetes cluster    | One zone per region, 2 total | `zoneIndex: 1` first, then `zoneIndex: 0` |
 
-In a dual-region cluster, the primary zone is the region with `zoneIndex: 0`, whose numbered brokers have even node IDs. The secondary zone is the region with `zoneIndex: 1`, whose numbered brokers have odd node IDs. You must start a dual-region migration with the secondary zone (`zoneIndex: 1`).
+In a dual-region cluster, the primary zone is the region with `zoneIndex: 0`, whose numbered brokers have even node IDs. The secondary zone is the region with `zoneIndex: 1`, whose numbered brokers have odd node IDs. You must start a dual-region migration with the secondary zone (`zoneIndex: 1`). The numbered broker with node ID `0` belongs to the primary zone and coordinates cluster configuration changes. Migrating the secondary zone first keeps this coordinator in place while the other zone migrates. If you start with the primary zone, the management API rejects the request with an error similar to:
+
+```text
+Zone migration must proceed from the highest remaining zone index to the lowest. Expected next zoneIndex 1 but got 0.
+```
 
 The procedure consists of these steps:
 
@@ -52,7 +56,7 @@ Replace the example values with values from your installation. Set `CHART_VERSIO
 
 ### Access the management API
 
-Use the [Orchestration management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) to change the cluster topology. To reach it, and for its port, security, and TLS options, see [About this API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#about-this-api). Set `MANAGEMENT_URL` to the resulting address. For a dual-region cluster, you need access to the management API in each region.
+Use the [Orchestration management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) to change the cluster topology. To reach it, and for its port, security, and TLS options, see [About this API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#about-this-api). Set `MANAGEMENT_URL` to the resulting address. For a dual-region cluster, you can send the management API requests through either region, but you need access to the brokers in each region to check their health.
 
 For example, forward the management port of the release's gateway Service to your machine:
 
@@ -274,7 +278,7 @@ Migrate one zone at a time. For each zone, add its zone-aware brokers to the clu
 
 Use the [zone migration endpoint](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#migrate-a-zone-to-a-zone-aware-topology) to add the zone's zone-aware brokers to the cluster. The new brokers take over the partitions of the zone's numbered brokers, and the numbered brokers leave the cluster. Before you send the request, [check that every broker in the logical cluster is healthy](#check-broker-health). A partition that can't start blocks the migration, and the change stays `IN_PROGRESS`.
 
-Send the request through the management API of a broker in the region that owns the zone. Set `LOCAL_ZONE` and `MANAGEMENT_URL` for that region:
+For a dual-region cluster, you can send the request through either region. Set `LOCAL_ZONE` to the zone to migrate:
 
 ```bash
 curl --fail --request PUT \
