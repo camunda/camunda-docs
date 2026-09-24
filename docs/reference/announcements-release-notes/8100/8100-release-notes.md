@@ -297,6 +297,14 @@ The deprecated Operate and Tasklist APIs are removed. Process data, task managem
 
 <p class="link-arrow">[Migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
 
+### Scheduled cluster backups via the Administration API
+
+<!-- https://github.com/camunda/product-hub/issues/3775 -->
+
+With the Camunda 8 SaaS Administration API, you can now schedule and manage recurring cluster backups programmatically, helping you automate disaster-recovery routines instead of relying only on manual, on-demand backups.
+
+<p class="link-arrow">[Administration API](/apis-tools/administration-api/administration-api-reference.md)</p>
+
 ### Zeebe Client replaced by Camunda Java Client
 
 The Zeebe Client is removed and replaced by the [Camunda Java Client](/apis-tools/java-client/getting-started.md). This covers process deployment, message correlation, and job handling.
@@ -358,6 +366,16 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 - Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
 
 <p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
+
+### Duplicate a cluster in Console
+
+<!-- https://github.com/camunda/product-hub/issues/3824 -->
+
+With Camunda 8.10, you can now duplicate a cluster in Console without manually re-entering its settings. Selecting **Duplicate** opens the create-cluster form pre-filled with the source cluster’s configuration, ready for you to review and submit.
+
+Process data is not copied to the new cluster, and each API client receives a new client ID and secret.
+
+<p class="link-arrow">[Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md)</p>
 
 ## Connectors
 
@@ -604,6 +622,20 @@ The create, append, and change menus now group BPMN elements by category, such a
 - When appending, elements that continue a flow subtly indicate where the flow continues next. Select this to open the append pad with a prominent **Append** action.
 
 <p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
+
+### Decoupled element template lifecycle
+
+<!-- https://github.com/camunda/product-hub/issues/3567 -->
+
+Element templates now have a lifecycle independent of process application versioning in Web Modeler.
+
+- Publish and version element templates on their own, without creating a process application version.
+- A clear separation between template publishing and process app versioning removes unexpected coupling and side effects between template changes and business-logic versioning.
+- Architects managing reusable templates across teams and environments get a more predictable mental model.
+
+Existing templates are automatically migrated to the new lifecycle model; no manual action is required.
+
+<p class="link-arrow">[Publish an element template](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template)</p>
 
 ### Define operations in your own element templates
 
