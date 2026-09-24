@@ -797,7 +797,7 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
 
 ### Run the migration
 
-1. Add the following settings to each cluster you already have:
+1. Add the following settings to each cluster you already have, keeping their existing names, databases, owners, and secrets. Do not replace your manifests with the current reference ones to perform this migration: the 8.10 reference manifests also rename the Web Modeler cluster to `pg-hub`, and applying that rename creates a new empty cluster next to your existing `pg-webmodeler` rather than migrating it.
 
    ```yaml
    spec:
@@ -809,10 +809,6 @@ Plan for one short interruption per cluster. CloudNativePG applies the new pod s
      walStorage:
        size: 5Gi
    ```
-
-   :::warning Keep your existing cluster names
-   Do not replace your manifests with the current reference ones to perform this migration. The 8.10 reference manifests also rename the Web Modeler cluster to `pg-hub`, and applying that rename creates a new empty cluster next to your existing `pg-webmodeler` rather than migrating it. Edit the clusters you already have, keeping their names, databases, owners, and secrets.
-   :::
 
 1. Apply the change. `deploy.sh` applies the standard clusters and waits for each cluster to be fully ready:
 
