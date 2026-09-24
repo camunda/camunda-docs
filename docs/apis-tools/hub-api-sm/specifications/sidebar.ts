@@ -74,6 +74,36 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Environment",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-environments",
+          label: "Get all environments",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-workspace-environments",
+          label: "Get a workspace's assigned environments",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/replace-workspace-environments",
+          label: "Replace a workspace's assigned environments",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-project-environments",
+          label: "Get a project's available environments",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "File",
       items: [
         {
