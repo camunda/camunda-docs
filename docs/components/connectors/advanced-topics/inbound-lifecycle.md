@@ -63,7 +63,7 @@ The connector runtime can derive internal state, such as a consumer or subscript
 
 [Element templates](/components/modeler/element-templates/about-templates.md) are also versioned, and each BPMN element references the specific template version it was created with. When a newer template version adds a new property, an already-deployed element keeps using its original template version, so the property is simply absent from that element, and the element keeps its prior default behavior. Upgrading the Camunda runtime alone does not change this. To adopt a new template version's property or behavior on an existing element, [update the element to the new template version](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) in Camunda Modeler, and redeploy the diagram.
 
-The Kafka Consumer connector illustrates both behaviors:
+The Kafka consumer connector illustrates both behaviors:
 
 - [Modify an existing inbound Kafka connector](../out-of-the-box-connectors/kafka.md#modify-an-existing-inbound-kafka-connector) shows how editing the **Consumer Group ID** or **Offsets** properties in place can cause message replay or activation failure.
 - [Upgrade from a version without the Consume unmatched events checkbox](../out-of-the-box-connectors/kafka.md#upgrade-from-a-version-without-the-consume-unmatched-events-checkbox) shows how an existing element keeps its prior default for a checkbox added in a later template version until you update its template.
