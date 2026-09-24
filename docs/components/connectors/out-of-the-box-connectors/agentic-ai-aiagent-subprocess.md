@@ -28,6 +28,7 @@ This connector implementation creates an implicit feedback loop for tool calls a
 
 - For more information and usage examples, see [AI Agent Sub-process](./agentic-ai-aiagent.md#ai-agent-sub-process).
 - The [example integration](agentic-ai-aiagent-subprocess-example.md) outlines how to model an agentic AI process using the AI Agent Sub-process implementation.
+- Desktop Modeler 5.51.0 or later is required to use this element template. Earlier versions can't parse the `zeebe:agentDefinition` extension element that the template uses, and show the template status **Not found** instead. See the [Desktop Modeler changelog](https://github.com/camunda/camunda-modeler/blob/master/CHANGELOG.md#5510).
 
 :::
 
