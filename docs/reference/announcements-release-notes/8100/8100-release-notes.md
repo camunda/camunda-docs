@@ -82,7 +82,8 @@ Deployments already running the single-instance shape migrate in place: CloudNat
 The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is still starting, or that is down, no longer stops the cluster from starting.
 
 - Only the requests that need the unreachable provider fail, such as browser login requests and token-validation requests for that provider. All other requests succeed.
-- Each new request tries again. The traffic recovers when the provider answers, and you do not need a restart.
+- A session that the cluster authenticated before the outage keeps its access token until the token expires. The refresh that follows fails, and the session ends.
+- Each new request tries again. The traffic recovers when the provider answers, and you do not need a restart. The cluster holds no queue of failed requests, and it makes no attempt in the background.
 - A failed request writes a warning that gives the provider, its issuer, and the scope, at most once each minute for each of these. The warning follows the traffic, and it is not a health check of the provider.
 
 <p class="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
