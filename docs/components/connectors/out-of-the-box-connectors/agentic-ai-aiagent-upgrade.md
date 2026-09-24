@@ -13,7 +13,7 @@ Starting with Camunda 8.10, new element templates are available for the [AI Agen
 
 - Reasoning and extended thinking configuration (Anthropic's **Effort**/**Thinking mode**, OpenAI's **Effort**, and Google Gemini's **Thinking budget**/**Thinking level**).
 - Prompt caching configuration (Anthropic, AWS Bedrock Converse).
-- New backend options: [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#anthropic) for Anthropic Claude models and [Google Gemini API](./agentic-ai-aiagent-model-providers.md#google-gemini) for direct Gemini access. Microsoft Foundry was already available as **Azure OpenAI** in the legacy templates. It is now a backend of the general-purpose OpenAI provider, rather than its own top-level provider.
+- New backend options: [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#anthropic) for Anthropic Claude models and [Google Gemini API](./agentic-ai-aiagent-model-providers.md#google-gemini) for direct Gemini access. Microsoft Foundry was already available as **Azure OpenAI** in the legacy templates. It is now a backend of both the OpenAI and Anthropic providers, rather than its own top-level provider. Your AI agents can therefore also use Claude models served by Foundry.
 - A [custom chat model provider](./agentic-ai-aiagent-model-providers.md#custom-implementation) option, for Self-Managed/hybrid deployments.
 
 The legacy element templates keep working, and existing implementations don't need to migrate immediately. However, they don't expose the new provider and backend choices or provider-specific configuration described above. Apply a new element template to use these capabilities.
@@ -57,6 +57,8 @@ If you had a custom **Endpoint** configured in the legacy template:
 | Legacy field | New template guidance                                                                                                                                |
 | :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Endpoint     | Select **Backend**: [Anthropic](./agentic-ai-aiagent-model-providers.md#anthropic) > Custom / compatible endpoint, and enter it as **API endpoint**. |
+
+The custom or compatible backend also supports **OAuth 2.0 client credentials** for gateways in front of Anthropic that require a bearer token.
 
 The new template additionally exposes **Effort**, **Thinking mode**, and **Enable prompt caching**. None of these have a legacy equivalent.
 
@@ -132,7 +134,7 @@ The legacy template always used the Chat Completions API. The new template defau
 
 **Legacy template Provider**: OpenAI-compatible → **New template Provider**: [OpenAI](./agentic-ai-aiagent-model-providers.md#openai), **Backend**: Custom / compatible endpoint.
 
-**API endpoint**, **API key**, **Headers**, **Query parameters**, **Timeout**, **Model**, **Temperature**, and **top P** carry over unchanged, subject to the notes below.
+**API endpoint**, **Headers**, **Query parameters**, **Timeout**, **Model**, **Temperature**, and **top P** carry over unchanged. The legacy **API key** field now sits behind the **Authentication** selector, as described in the notes below.
 
 | Legacy field              | New template field                                                        |
 | :------------------------ | :------------------------------------------------------------------------ |
@@ -140,13 +142,14 @@ The legacy template always used the Chat Completions API. The new template defau
 | Custom parameters         | Body properties                                                           |
 
 :::important
-You must enter an **API key** in the new template. The legacy template made the **API key** optional. Resolve your effective credential as follows before you enter it:
+The new template replaces the legacy **API key** field with an **Authentication** selector. Resolve your effective credential as follows before you configure it:
 
 - If your legacy template's **Headers** contained an `Authorization` header, it took precedence over the **API key** field. Carry this behavior forward manually:
-  - If the header used `Bearer <token>`, move the token value without the `Bearer` prefix into the new template's **API key** field. Remove the `Authorization` header from **Headers**.
-  - For any other scheme, such as `Basic ...`, keep the header in **Headers**. Enter any non-blank placeholder value in **API key**. The connector does not use it for authentication.
-- Otherwise, carry your legacy **API key** value over directly. If you did not configure an `Authorization` header or an API key, enter any non-blank placeholder value.
+  - If the header used `Bearer <token>`, select **API key** and move the token value without the `Bearer` prefix into the **API key** field. Remove the `Authorization` header from **Headers**.
+  - For any other scheme, such as `Basic ...`, keep the header in **Headers** and select **None**.
+- Otherwise, select **API key** and carry your legacy **API key** value over directly. If you did not configure an `Authorization` header or an API key, select **None**.
 
+The new template additionally supports **OAuth 2.0** client credentials, for a gateway that issues bearer tokens through the client-credentials flow.
 :::
 
 Also check the resulting request path. The new template appends `/chat/completions` or `/responses` to **API endpoint** for the selected **API**. This may differ from your legacy endpoint.

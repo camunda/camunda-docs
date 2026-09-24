@@ -23,12 +23,12 @@ Start from where your organization already permits LLM traffic to be routed, not
 
 These two choices are independent, so the same model family may be available through multiple backends. Within your approved backend, select the provider that matches the model's native wire format (for example, Anthropic for Claude models, even when hosted on Bedrock) rather than a generic hyperscaler provider: it gives you that provider's own configuration surface, such as reasoning/extended thinking and prompt caching, regardless of where the model is actually hosted.
 
-| If your organization requires...       | Start with...                                                       | Prefer instead when...                                                                                                                 |
-| :------------------------------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------- |
-| Traffic routed through Amazon Bedrock  | [AWS Bedrock Converse](#aws-bedrock-converse)                       | Running **Claude** models: use [Anthropic](#anthropic)'s AWS Bedrock Mantle backend instead, to keep Anthropic-specific configuration. |
-| Traffic routed through Microsoft Azure | [OpenAI](#openai)'s Microsoft Foundry (Azure) backend               | No exception; Foundry is the only approved route for OpenAI models on Azure.                                                           |
-| Traffic routed through Google Cloud    | [Google Gemini](#google-gemini)'s Enterprise Agent Platform backend | No exception for Gemini models; use the direct Gemini API only if Google Cloud isn't mandated.                                         |
-| No specific cloud mandate              | The provider matching the model's native wire format                | N/A                                                                                                                                    |
+| If your organization requires...       | Start with...                                                       | Prefer instead when...                                                                                                                        |
+| :------------------------------------- | :------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| Traffic routed through Amazon Bedrock  | [AWS Bedrock Converse](#aws-bedrock-converse)                       | Running **Claude** models: use [Anthropic](#anthropic)'s AWS Bedrock Mantle backend instead, to keep Anthropic-specific configuration.        |
+| Traffic routed through Microsoft Azure | [OpenAI](#openai)'s Microsoft Foundry (Azure) backend               | Running **Claude** models: use [Anthropic](#anthropic)'s Microsoft Foundry (Azure) backend instead, to keep Anthropic-specific configuration. |
+| Traffic routed through Google Cloud    | [Google Gemini](#google-gemini)'s Enterprise Agent Platform backend | No exception for Gemini models. Use the direct Gemini API only if Google Cloud isn't mandated.                                                |
+| No specific cloud mandate              | The provider matching the model's native wire format                | N/A                                                                                                                                           |
 
 The most capable option within your organization's approved boundary is the correct choice; the native wire format alone doesn't determine it.
 
@@ -36,7 +36,7 @@ The most capable option within your organization's approved boundary is the corr
 
 Select and configure the model **Provider** you want to use from the following supported providers. Each section below covers that provider's available backends, authentication, model settings, and provider-specific parameters:
 
-- [Anthropic](#anthropic) (Claude models, directly or via AWS Bedrock Mantle).
+- [Anthropic](#anthropic) (Claude models, directly, via AWS Bedrock Mantle, or via Microsoft Foundry/Azure).
 - [AWS Bedrock Converse](#aws-bedrock-converse).
 - [OpenAI](#openai) (directly, via Microsoft Foundry/Azure, or via a custom OpenAI-compatible endpoint).
 - [Google Gemini](#google-gemini) (directly, or via Google Enterprise Agent Platform).
@@ -53,6 +53,7 @@ Select this provider to use an Anthropic Claude LLM model. Choose a **Backend** 
 <Tabs groupId="anthropic-backend" defaultValue="api" values={[
 {label: 'Anthropic API', value: 'api'},
 {label: 'AWS Bedrock Mantle', value: 'bedrock-mantle'},
+{label: 'Microsoft Foundry (Azure)', value: 'foundry'},
 {label: 'Custom / compatible endpoint', value: 'custom'},
 ]}>
 <TabItem value="api">
@@ -77,14 +78,53 @@ Run Anthropic Claude models hosted on Amazon Bedrock while keeping access to Ant
 Bedrock Mantle supports a different set of models than Bedrock Runtime, and model availability also varies by AWS Region. Before selecting a model, check [Amazon Bedrock endpoint availability](https://docs.aws.amazon.com/bedrock/latest/userguide/models-endpoint-availability.html) and the linked model details for current endpoint and regional support.
 
 </TabItem>
+<TabItem value="foundry">
+
+Use a Claude model deployed in [Microsoft Foundry](https://ai.azure.com/) (Azure AI Foundry) as the LLM for your Camunda AI agents.
+
+| Field              | Required | Description                                                                                                  |
+| :----------------- | :------- | :----------------------------------------------------------------------------------------------------------- |
+| **API endpoint**   | Yes      | Base URL of the Microsoft Foundry resource, for example `https://your-resource.services.ai.azure.com`.       |
+| **Authentication** | Yes      | **API key**, **Entra ID: Client credentials**, or **Entra ID: Managed identity** (Hybrid/Self-Managed only). |
+
+Authentication fields per method:
+
+- **API key**: an API key for the resource, available in the [Azure AI Foundry portal](https://ai.azure.com/).
+- **Entra ID: Client credentials**: registers an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908) and authenticates with it.
+  - **Client ID**: the Microsoft Entra application (client) ID.
+  - **Client secret**: the application's client secret.
+  - **Tenant ID**: the Microsoft Entra tenant (directory) ID.
+  - **Authority host**: (optional) overrides the Microsoft Entra authority host, for example for sovereign clouds. Leave unset for the public cloud authority.
+- **Entra ID: Managed identity** (Hybrid/Self-Managed only): authenticates using the environment's managed identity.
+  - **Client ID**: (optional) the client ID of a user-assigned managed identity. Leave unset to use the system-assigned managed identity.
+
+:::note
+To use a Claude model through Foundry, deploy it first from the [Foundry model catalog](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure), and enter the deployment name in the **Model** field below.
+
+A multi-replica connectors runtime setup means each replica also acquires and caches its own Entra ID token independently. Expect multiple, parallel credential/token requests against Entra ID under load, rather than a single shared token, and size any Entra ID application throttling limits accordingly.
+:::
+
+</TabItem>
 <TabItem value="custom">
 
 Any endpoint implementing the Anthropic Messages API, such as a proxy or gateway in front of Anthropic.
 
-| Field              | Required | Description                                                                         |
-| :----------------- | :------- | :---------------------------------------------------------------------------------- |
-| **API endpoint**   | Yes      | Base URL of the Anthropic-compatible API. `/v1/messages` is appended automatically. |
-| **Authentication** | No       | **None**, or **API key** to send an API key with the request.                       |
+| Field              | Required | Description                                                                     |
+| :----------------- | :------- | :------------------------------------------------------------------------------ |
+| **API endpoint**   | Yes      | Base URL of the Anthropic-compatible API. The connector appends `/v1/messages`. |
+| **Authentication** | Yes      | **None** (default), **API key**, or **OAuth 2.0** client credentials.           |
+
+Authentication fields per method:
+
+- **None**: sends no credentials, for an endpoint that doesn't require them.
+- **API key**: sends the configured API key with each request.
+- **OAuth 2.0**: requests a bearer token through the [OAuth 2.0 client credentials flow](https://www.rfc-editor.org/rfc/rfc6749#section-4.4) and sends it with each request.
+  - **OAuth 2.0 token endpoint**: the token endpoint of the authorization server.
+  - **Client ID**: the client ID of the OAuth client.
+  - **Client secret**: the client secret of the OAuth client.
+  - **Audience**: (optional) the unique identifier of the target API. Required by some authorization servers only.
+  - **Client authentication**: whether to send the client credentials as a Basic authentication header (default) or in the request body.
+  - **Scopes**: (optional) a space-separated list of scopes to request, for example `read:models read:deployments`.
 
 </TabItem>
 </Tabs>
@@ -93,7 +133,7 @@ Any endpoint implementing the Anthropic Messages API, such as a proxy or gateway
 
 | Field                      | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Model**                  | Yes      | The model ID to use. See the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).                                                                                                                                                                                                                                                                                                                                 |
+| **Model**                  | Yes      | The model ID to use. See the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models). On the Microsoft Foundry backend, enter the deployment name instead.                                                                                                                                                                                                                                                            |
 | **Effort**                 | No       | Controls how many tokens the model spends when responding, trading thoroughness against speed and cost. Not supported on all models. See the [effort documentation](https://platform.claude.com/docs/en/build-with-claude/effort).                                                                                                                                                                                                                        |
 | **Thinking mode**          | No       | Extended thinking mechanism: `enabled` uses a manual token budget (older models), `adaptive` lets the model manage it (newer models), `disabled` turns it off. Support varies by model.                                                                                                                                                                                                                                                                   |
 | **Thinking budget tokens** | Depends  | Maximum number of tokens the model may spend on extended thinking (minimum 1024). Shown only when **Thinking mode** is `enabled`.                                                                                                                                                                                                                                                                                                                         |
@@ -192,10 +232,22 @@ A multi-replica connectors runtime setup means each replica also acquires and ca
 
 Connect to any LLM that exposes an OpenAI-compatible API, including open-weight models such as Qwen, Llama, and Mistral, hosted through Ollama or any compatible inference platform.
 
-| Field            | Required | Description                                                                                                                              |
-| :--------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| **API endpoint** | Yes      | Base URL of the OpenAI-compatible API. `/chat/completions` or `/responses` is appended automatically, depending on the selected **API**. |
-| **API key**      | Yes      | The API key for authentication.                                                                                                          |
+| Field              | Required | Description                                                                                                                          |
+| :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| **API endpoint**   | Yes      | Base URL of the OpenAI-compatible API. The connector appends `/chat/completions` or `/responses`, depending on the selected **API**. |
+| **Authentication** | Yes      | **None** (default), **API key**, or **OAuth 2.0** client credentials.                                                                |
+
+Authentication fields per method:
+
+- **None**: sends no credentials of your own. The connector still sends a placeholder `Authorization: Bearer not-required` header, which self-hosted no-auth servers such as Ollama or LM Studio ignore.
+- **API key**: sends the configured API key with each request.
+- **OAuth 2.0**: requests a bearer token through the [OAuth 2.0 client credentials flow](https://www.rfc-editor.org/rfc/rfc6749#section-4.4) and sends it with each request.
+  - **OAuth 2.0 token endpoint**: the token endpoint of the authorization server.
+  - **Client ID**: the client ID of the OAuth client.
+  - **Client secret**: the client secret of the OAuth client.
+  - **Audience**: (optional) the unique identifier of the target API. Required by some authorization servers only.
+  - **Client authentication**: whether to send the client credentials as a Basic authentication header (default) or in the request body.
+  - **Scopes**: (optional) a space-separated list of scopes to request, for example `read:models read:deployments`.
 
 </TabItem>
 </Tabs>
@@ -204,7 +256,7 @@ Connect to any LLM that exposes an OpenAI-compatible API, including open-weight 
 
 | Field                                                                            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :------------------------------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Model**                                                                        | Yes      | The model ID to use. See the [OpenAI models documentation](https://platform.openai.com/docs/models).                                                                                                                                                                                                                                                                                                                                                      |
+| **Model**                                                                        | Yes      | The model ID to use. See the [OpenAI models documentation](https://platform.openai.com/docs/models). On the Microsoft Foundry backend, enter the deployment name instead.                                                                                                                                                                                                                                                                                 |
 | **Effort**                                                                       | No       | Controls how many tokens the model spends when responding, trading thoroughness against speed and cost. Not supported on all models. See the [Responses](https://developers.openai.com/api/reference/resources/responses/methods/create) or [Chat Completions](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create) API reference.                                                                         |
 | **Max output tokens** (Responses) / **Max completion tokens** (Chat Completions) | No       | The maximum number of tokens per request to generate before stopping. The field name depends on the selected **API**.                                                                                                                                                                                                                                                                                                                                     |
 | **Temperature**                                                                  | No       | Primary response-variation control from 0 to 2. Lower values favor likely tokens more strongly; higher values increase variation.                                                                                                                                                                                                                                                                                                                         |
