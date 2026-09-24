@@ -163,14 +163,14 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
 
-| Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                       |
-| :--------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                 |
-| [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                 |
-| [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                      |
-| [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                 |
-| Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeler](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
-| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, these components authenticate through the [Camunda Security Library](#camunda-security-library-csl).                                                                                                                                         |
+| Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                                  |
+| :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                            |
+| [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                            |
+| [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                 |
+| [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                            |
+| Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeling interface](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
+| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, these components authenticate through the [Camunda Security Library](#camunda-security-library-csl).                                                                                                                                                    |
 
 ### Camunda AI agent
 
@@ -215,6 +215,8 @@ See [Zeebe cluster](#zeebe-cluster).
 
 A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
 
+A cluster variable's value can also be an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) instead of a literal value.
+
 ### Cluster-wide operation
 
 An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
@@ -239,11 +241,18 @@ Connector types:
 
 ### Connector runtime
 
-The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, handling secrets, and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, resolving [secret references](#secret-reference), and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+
+### Connector secrets
+
+The secret values a connector resolves through a [legacy secret reference](#secret-reference-legacy). How these values are stored and supplied depends on the environment: in SaaS, they are [SaaS-managed secrets](#saas-managed-secret) created in Camunda Hub, in the left navigation under **Clusters**; in Self-Managed, a secret provider supplies them, for example from prefixed environment variables, a Kubernetes Secret, or a custom provider.
+
+- [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
+- [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets)
 
 ### Connector template
 
-A [connector template](/components/connectors/custom-built-connectors/connector-templates.md) is a type of element template used to configure connectors in Modeler. Templates define UI fields, metadata, and bindings required for connector operations. Modeler internally labels all templates as element templates, but connector templates are the subset specifically used to configure connectors.
+A [connector template](/components/connectors/custom-built-connectors/connector-templates.md) is a type of element template used to configure connectors in [Camunda Hub](/components/hub/workspace/modeler/index.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md). Templates define UI fields, metadata, and bindings required for connector operations. Camunda Hub and Desktop Modeler internally label all templates as element templates, but connector templates are the subset specifically used to configure connectors.
 
 ### Context window
 
@@ -260,6 +269,18 @@ Correlation refers to the act of matching a [message](#message) with an inflight
 A correlation is an attribute within a [message](#message) that is used to match the message against a certain [variable](#process-variable) within an inflight message. If the value of the correlation key matches the value of the variable within the [process instance](#process-instance), the message is matched.
 
 - [Message correlation](/components/concepts/messages.md)
+
+### Credential
+
+A reusable set of authentication and connection settings for a job worker, connector, or other element template, so you don't repeat the same settings on every task that asks for them. A credential is selected as a whole on an element template field; the engine resolves the reference at runtime and passes the credential's values, including any secrets, to the job worker or connector.
+
+- [Manage credentials](/components/hub/organization/credentials/index.md)
+
+### Credential type
+
+The shape of a [credential](#credential), such as AWS Credential, REST Authentication, or JDBC Connection. A credential type defines which fields a credential of that type has, and is defined alongside an element template.
+
+- [Credential types](/components/hub/organization/credentials/index.md#credential-types)
 
 ### CSAP CLI
 
@@ -387,7 +408,7 @@ Any AI system that can produce new content, such as text, images, or audio, in r
 
 ### Generation
 
-In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Console uses generations instead of a single engine version because the underlying component versions can change independently.
+In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Camunda Hub uses generations instead of a single engine version because the underlying component versions can change independently.
 
 A generation is not a process definition version, a version tag, or a [file version](#version-file) or [project snapshot](#snapshot-project).
 
@@ -490,6 +511,14 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
 
 - [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
+
+### Kubernetes Secret
+
+A Kubernetes object that stores small amounts of sensitive data, such as passwords or tokens, separately from Pod specifications and container images. The Camunda Helm chart uses Kubernetes Secrets to supply credentials to Camunda's own components at deployment time.
+
+A Kubernetes Secret can also store and deliver the value behind a [secret reference](#secret-reference): mounted as an environment variable for a [legacy secret reference](#secret-reference-legacy), or as a file in a file-based secret store for an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster). Either way, the Kubernetes Secret only supplies the value; the [connector runtime](#connector-runtime) or the [Orchestration Cluster](#orchestration-cluster) still resolves the placeholder in the process. A Kubernetes Secret is unrelated to a [SaaS-managed secret](#saas-managed-secret), which supplies values to a SaaS [Orchestration Cluster](#orchestration-cluster) rather than to a Self-Managed component's configuration.
+
+- [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
 
 ## L
 
@@ -645,7 +674,7 @@ An optional, immutable, lightweight label attached when a process instance is cr
 
 ### Process model
 
-The BPMN representation of a [process](/components/concepts/processes.md), created in a BPMN file (for example, in Modeler).
+The BPMN representation of a [process](/components/concepts/processes.md), created in a BPMN file (for example, in [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md)).
 
 Identified by its **process ID** (`bpmn:process id` attribute).
 
@@ -668,7 +697,7 @@ An isolated execution unit within an [Orchestration Cluster](#orchestration-clus
 
 ### Project
 
-A collection of related files in a Camunda Hub workspace you can work on and deploy as a single bundle. A workspace may contain multiple projects.
+A collection of related files in a Camunda Hub workspace you can work on, version, and deploy as a single bundle or as individual files. A workspace may contain multiple projects.
 
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
 
@@ -765,6 +794,14 @@ See also: [Parent process instance](#parent-process-instance), [Child process in
 
 ## S
 
+### SaaS-managed secret
+
+A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in Camunda Hub, in the left navigation under **Clusters**, currently under the **Cluster secrets** tab of a cluster.
+
+A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components.
+
+- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
+
 ### SAP
 
 SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
@@ -782,6 +819,44 @@ Examples of secondary storage backends include:
 
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
 - [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
+
+### Secret reference
+
+A placeholder written into a [process](#process) model that stands in for a secret value, used in a [connector](#connector) field, an input mapping, or a [cluster variable](#cluster-variable). Camunda resolves a secret reference to its value at runtime instead of storing the value in the process itself.
+
+Camunda 8 supports two secret reference syntaxes, which are resolved by different components and are not interchangeable:
+
+- The [legacy secret reference](#secret-reference-legacy) syntax, `{{secrets.<name>}}`
+- The [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) syntax, `camunda.secrets.<name>`
+
+A [Kubernetes Secret](#kubernetes-secret) can back either secret reference syntax as the underlying storage and delivery mechanism. What differs between the two syntaxes is which component resolves the placeholder, not whether a Kubernetes Secret is involved.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+
+### Secret reference (legacy)
+
+The `{{secrets.<name>}}` syntax used in a [connector](#connector) field to reference a secret. The [connector runtime](#connector-runtime) resolves the placeholder at execution time, replacing it with the referenced secret's value.
+
+:::note
+"Legacy" describes this syntax's age relative to the [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster), not its support status. Both syntaxes remain supported.
+:::
+
+- [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
+
+### Secret reference (Orchestration Cluster)
+
+The `camunda.secrets.<name>` syntax used to reference a secret, written directly in an input mapping or embedded in the value of a [cluster variable](#cluster-variable) that an input mapping reads. Unlike a [legacy secret reference](#secret-reference-legacy), the [Orchestration Cluster](#orchestration-cluster) itself resolves this reference through [secret resolution](#secret-resolution), rather than the connector runtime resolving it at execution time.
+
+Resolution only happens in an input mapping defined on an element that creates a job for a job worker, such as a service task or an ad hoc sub-process. In any other FEEL expression (gateway conditions, script tasks, output mappings, call activity input, and so on), the placeholder is not resolved and reaches your process unchanged.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+
+### Secret resolution
+
+The runtime process by which the [Orchestration Cluster](#orchestration-cluster) retrieves the value behind an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) from a configured secret store and makes it available for injection into a job. Secret resolution runs on a background scheduler ahead of job activation, not on the processing path.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+- [Troubleshoot secret resolution failures](/components/concepts/secret-resolution-incidents.md)
 
 ### Segment
 
@@ -847,7 +922,7 @@ A user task is used to model work that needs to be done by a human and is assist
 
 With 8.7, Camunda offers job worker-based user tasks managed by Camunda, also known as Camunda user tasks (and formerly known as Zeebe user tasks). Note that you may still see references of **Zeebe user tasks** in your XML, but this is the same thing as Camunda user tasks.
 
-Camunda recommends using Camunda user tasks in your process definitions. With 8.7, **job-worker** user tasks are available for querying, but Camunda Modeler automatically applies the **Camunda user task** and shows a warning message for each job worker user task.
+Camunda recommends using Camunda user tasks in your process definitions. From 8.7, **job-worker** user tasks are available for querying, but Web Modeler (pre-8.10), Camunda Hub (8.10+), and Desktop Modeler automatically apply the **Camunda user task** and show a warning message for each job worker user task.
 
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)

@@ -169,7 +169,7 @@ A configuration is stored on the cluster as a cluster variable that is created w
 A configuration's field values can be plain literals or secret references (`camunda.secrets.*`) that the engine resolves at runtime, so secrets are never stored in the model.
 
 :::note
-Configurations are the mechanism that powers Camunda credentials: a credential is a configuration whose template `kind` is `CREDENTIAL`. Selecting one requires cluster access from the modeler at design time, consistent with existing connector templates.
+Configurations are the mechanism that powers [Camunda credentials](/components/hub/organization/credentials/index.md): a credential is a configuration whose template `kind` is `CREDENTIAL`. Selecting one requires cluster access from the modeler at design time, consistent with existing connector templates. To define a credential type of your own, see [create a credential template](/components/connectors/custom-built-connectors/credential-templates.md).
 :::
 
 It supports the following config-specific keys:
@@ -1352,7 +1352,7 @@ Together with the `pattern` constraint, you can define a custom error message:
 When a template exposes a property to a user, the template is responsible for showing all validation errors in the properties panel.
 That includes non-compliance with BPMN and Zeebe schema constraints. You should therefore use `notEmpty` where necessary.
 
-The Modeler's problems panel shows errors for invalid properties, whether or not a template is applied.
+The problems panel shows errors for invalid properties, whether or not a template is applied.
 :::
 
 ## Showing properties conditionally: `condition`

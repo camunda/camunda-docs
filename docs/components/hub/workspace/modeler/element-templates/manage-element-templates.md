@@ -30,7 +30,7 @@ The components of the editor interface are as follows:
   Starting with 8.8, you can freely edit the following properties:
   - `name`: Human-friendly name shown when selecting a template and in the properties panel after the template has been applied. The value can be different from the file name.
   - `id`: Identifier of the template. Changing this value creates a new template. We recommend setting a meaningful value (for example, "PaymentConnector", "CreateUserTemplate").
-  - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-a-connector-template) a new version, you need to update the version number manually.
+  - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-an-element-template) a new version, you are prompted to update the version number if you haven't already done so.
 
   The value of the `$schema` property is still fixed; manual changes will not be saved.
   :::
@@ -44,7 +44,7 @@ On every valid change, the template is saved automatically. If there are errors 
 
 ## Publish an element template
 
-After finalizing your element template, click **Publish > Publish to project** to activate it within the project context. In the modal that opens:
+After finalizing your element template, click **Publish > Publish to workspace** to activate it within the workspace context. In the modal that opens:
 
 - Update the version number if necessary. You don't need to change it for the initial version or if you have updated it already in the template editor.
   The value entered here is saved to the `version` property in the JSON.
@@ -76,7 +76,7 @@ At the organization level in Camunda Hub, in the left navigation, click **Shared
 [Users with elevated access](/components/hub/workspace/modeler/collaboration/collaboration.md#elevated-access) can:
 
 - View additional details about the published version.
-- Open the resource's versions list (if they are a [Organization Admin or Organization Owner](/components/hub/organization/manage-users/manage-users.md#elevated-workspace-access) or are a [Workspace Admin or Editor](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) of the resource's workspace).
+- Open the resource's versions list (if they are a [Organization Admin or Organization Owner](/components/hub/organization/manage-users/index.md#elevated-workspace-access) or are a [Workspace Admin or Editor](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) of the resource's workspace).
 - Unpublish an element template directly from this view.
 
 Organization users without special organization permissions can:

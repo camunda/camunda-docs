@@ -1,5 +1,7 @@
 # This workflow runs tests on pull requests to ensure that the code changes do not break existing functionality.
 # Currently, it runs basic regressions testing of the docusaurus site.
+# The hub API filtering tests are excluded here and run only when relevant
+# files change, via test-hub-generation.yaml.
 name: test
 
 on: pull_request
@@ -24,4 +26,4 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm test -- --testPathIgnorePatterns="api/tests/filter-availability.spec.js"

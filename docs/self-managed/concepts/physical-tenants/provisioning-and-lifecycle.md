@@ -7,7 +7,7 @@ description: "Provision and manage Physical Tenants in 8.10, including restart b
 
 Learn how to provision and operate Physical Tenants in Camunda 8.10.
 
-## Provisioning model in 8.10
+## Provisioning model
 
 Physical Tenants are provisioned through static application configuration.
 
@@ -15,7 +15,7 @@ Physical Tenants are provisioned through static application configuration.
 - Apply the change with a rolling restart.
 - Validate startup status for every affected component.
 
-Dynamic runtime tenant creation and runtime tenant updates are not available in 8.10.
+Dynamic runtime tenant creation and runtime tenant updates are not available.
 
 ## Add a new Physical Tenant
 
@@ -40,7 +40,7 @@ During a rolling restart for tenant provisioning:
 
 ## Default tenant lifecycle
 
-In 8.10, the default Physical Tenant is always present and immutable:
+The default Physical Tenant is always present and immutable:
 
 - You cannot delete the default tenant.
 - You cannot rename the default tenant.
@@ -50,11 +50,9 @@ If tenant scope is omitted in compatibility paths, requests resolve to the defau
 
 ## Disable, rename, and delete
 
-For 8.10:
-
 - Disabling and re-enabling a Physical Tenant is supported through configuration. There is no dedicated API for this operation.
 - Renaming a Physical Tenant is not supported.
-- Deleting a Physical Tenant is not supported.
+- Deleting a Physical Tenant is not supported. No API deletes a tenant's data.
 
 A Physical Tenant's enabled state follows its configuration directly:
 
@@ -64,9 +62,17 @@ A Physical Tenant's enabled state follows its configuration directly:
 
 Each of these transitions takes effect through the same rolling restart used for any other configuration change.
 
-## Out of scope for 8.10
+### Logically remove a disabled tenant
 
-The following capabilities are out of scope for 8.10:
+A disabled tenant still appears in the persisted cluster topology, which blocks operations that require every tenant to be accounted for, such as multi-region failover.
+
+An actuator endpoint logically removes a tenant that you have already removed from configuration. It drops the tenant from the cluster topology and **deletes no data**. This is not a delete API, and it is not a way to reclaim storage. To remove a tenant's data, act on its schema, indices, or document store directly in the backend.
+
+<!-- TODO: Add the exact actuator path and required permission for logical removal. Lena Schoenburg confirmed the behavior in Slack on (no delete API; endpoint deletes no data; exists so a disabled tenant does not block multi-region failover) but did not name the endpoint. -->
+
+## Out of scope
+
+The following capabilities are out of scope:
 
 - Dynamic tenant creation without restart
 - Tenant deletion

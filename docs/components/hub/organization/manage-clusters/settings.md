@@ -1,6 +1,6 @@
 ---
 id: settings
-title: Settings
+title: Manage cluster settings
 description: "Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
 ---
 
@@ -8,13 +8,14 @@ Manage your cluster settings using authorizations, automatic cluster updates, an
 
 ## Manage cluster settings
 
-To manage your cluster settings:
+To manage your cluster settings in Camunda Hub SaaS:
 
-1. Navigate to **Camunda Hub**, and select the **Clusters** tab.
-2. Select the cluster you want to manage, and select the **Settings** tab.
-3. Enable/disable cluster settings as required, or delete the cluster.
+1. In the left navigation under **Clusters**, select a cluster.
+1. On the **Settings** tab, enable/disable cluster settings as required, or delete the cluster.
 
-![Cluster settings](./img/cluster-settings.png)
+:::tip
+In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
+:::
 
 ## Authorizations
 
@@ -62,12 +63,16 @@ This setting is available for clusters running a version where `STRICT` is the s
 
 For details on each mode, see [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
 
+## Enable business ID uniqueness
+
+When enabled, the cluster enforces uniqueness constraints on business identifiers to prevent duplicate process instances.
+
 ## Enable app integrations extensions
 
-You can allow a cluster to exchange events with App Integrations, such as Camunda for Microsoft Teams, so App Integrations can deliver task notifications to your collaboration tool.
+You can allow a cluster to exchange events with App Integrations, such as Camunda for Microsoft Teams or Slack, so App Integrations can deliver task notifications to your chat tool.
 
-- Enable this setting to deliver user task notifications to Microsoft Teams based on your [notification rules](/components/camunda-integrations/ms-teams/ms-teams-notifications.md). Notification cards also update as the task is assigned, completed, or canceled.
-- Disable this setting if you do not want the cluster to exchange events. App Integrations then work with reduced functionality: the cluster delivers no notifications, but you can still use Camunda for Microsoft Teams to browse tasks, start processes, and act on tasks.
+- Enable this setting to deliver user task notifications to Microsoft Teams or Slack based on your [notification rules](/components/camunda-integrations/app-integrations/notification-rules.md). Notification cards also update as the task is assigned, completed, or canceled.
+- Disable this setting if you do not want the cluster to exchange events. App Integrations then work with reduced functionality: the cluster delivers no notifications, but you can still use Camunda for Microsoft Teams or Slack to browse tasks, start processes, and act on tasks.
 
 This setting is disabled by default. It is available for clusters running generation `8.9 gen13` or later, and organization admins can change it.
 
@@ -121,8 +126,8 @@ Use [authorization-based access control](../../../concepts/access-control/author
 
 ## Delete this cluster
 
-You can _permanently_ delete the selected cluster. See [delete your cluster](/components/hub/organization/manage-clusters/manage-cluster.md#delete-a-cluster).
+You can _permanently_ delete the selected cluster.
 
-:::caution
+:::warning
 Deleting a cluster is permanent. You cannot reuse a cluster after it has been deleted.
 :::

@@ -23,7 +23,7 @@ The **GitHub connector** is an outbound connector that allows you to connect you
 To use the **GitHub connector**, you must have a GitHub instance and an [access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) of a user or a service account on whose behalf a BPMN process will be executed.
 
 :::note
-Use Camunda secrets to avoid exposing your GitHub access token credentials as plain text.
+Use secrets to avoid exposing your GitHub access token credentials as plain text.
 Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
@@ -393,7 +393,7 @@ This tab displays the URL of the GitHub Webhook connector for every cluster wher
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use GitHub Webhook connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, GitHub Webhook connector deployments and URLs will not be displayed in Modeler.
+In that case, GitHub Webhook connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 ## Configure GitHub

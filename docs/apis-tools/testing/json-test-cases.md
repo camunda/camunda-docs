@@ -13,7 +13,7 @@ CPT's JSON test cases use the same schema as [test files in Test mode](/componen
 
 ## Write a JSON test case
 
-The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json). It defines the following structure:
+The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json). It defines the following structure:
 
 - `testCases`: An array of test cases to be executed.
   - `name`: The name of the test case.
@@ -25,7 +25,7 @@ The JSON format is defined in the [JSON schema](https://camunda.com/json-schema/
 How to start:
 
 1. Create a new JSON file in your test resources folder (for example, `src/test/resources/test-cases/invoice-approval.json`)
-2. Refer to the JSON schema `https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json` in the `$schema` property.
+2. Refer to the JSON schema `https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json` in the `$schema` property.
    Use the same schema version as the CPT version you are using to ensure compatibility.
 3. Add your test cases and use the [available instructions](#reference-instructions) to define the behavior of your process test.
 
@@ -33,7 +33,7 @@ The basic structure of the JSON file looks like this:
 
 ```JSON
 {
-  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json",
+  "$schema": "https://camunda.com/json-schema/cpt-test-cases/8.10/schema.json",
   "testCases": [
     {
       "name": "My first test case",
@@ -197,7 +197,7 @@ public class MyProcessTest {
 You can find some example process tests using JSON test cases on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example), like the following one:
 
 ```json reference referenceLinkText="Source" title="Invoice Approval JSON test case"
-https://github.com/camunda/camunda/blob/stable/8.9/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
+https://github.com/camunda/camunda/blob/stable/8.10/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
 ```
 
 ## Reference: Instructions

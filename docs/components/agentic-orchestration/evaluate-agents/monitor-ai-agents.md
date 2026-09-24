@@ -34,7 +34,7 @@ After completing this guide, you will be able to monitor, debug, and troubleshoo
 ## Prerequisites
 
 - You have access to [Operate](/components/operate/operate-introduction.md) on Camunda 8.10 or later.
-- You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint deployed in [Modeler](/components/modeler/about-modeler.md).
+- You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint installed in a [Camunda Hub project](/components/hub/workspace/modeler/modeling/camunda-marketplace.md#browse-marketplace-blueprints) or open in Desktop Modeler.
 
 :::important
 This guide is a follow-up to [build your first AI agent](/guides/getting-started-agentic-orchestration.md), where you use the same example AI agent process. We recommend completing that guide first. However, you can also apply this guide to other AI agent process implementations.
@@ -50,7 +50,7 @@ For example:
 
 ## Step 2: Open the process instance in Operate
 
-1. Open [Operate](/components/operate/operate-introduction.md).
+1. [Open Operate](/components/operate/userguide/basic-operate-navigation.md#open-operate).
 2. Locate the process instance created by your prompt. See [view a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
 3. Open your process instance view by clicking on its process instance key.
 
@@ -71,7 +71,6 @@ Select the agent element on the diagram. Operate shows the [data available](/com
 - The tools resolved for it.
 - Its usage metrics: token consumption, tool call count, and model call count against the configured limit.
 
-
 <img src={AgentPanel} alt="Agent panel overview" width="90%"/>
 
 :::note
@@ -84,10 +83,10 @@ For guidance on reading these signals to catch a stuck or looping agent, see [de
 
 The conversation history is the agent's decision trail, grouped by [loop iteration](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations). Operate labels each group simply as `iteration`, for example `1. iteration`.
 
-By default, entries are sorted by **Most recent first**. You can select **Oldest first** to read the history chronologically:
+By default, entries are sorted by **Latest first**. You can select **Oldest first** to read the history chronologically:
 
-- **Most recent first** helps you quickly understand the current situation, typically when resolving a problem.
-- **Oldest first** helps you trace how the agent reached its current state, typically when building an agent for the first time.
+- **Latest first**: Quickly understand the current situation, typically when resolving a problem.
+- **Oldest first**: Trace how the agent reached its current state, typically when building an agent for the first time.
 
 For this example, the first iteration shows:
 
@@ -120,7 +119,7 @@ Use the copy icon in any of these expanded views to copy its content.
 
 ## Step 5: Understand how agent memory is stored
 
-In Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
 
 By default, agent memory uses the **In Process** type, which stores it as part of the agent context, the same underlying data the conversation history in [step 4](#step-4-review-the-conversation-history) is built from.
 
@@ -136,7 +135,7 @@ Go back to Operate. In the **User Feedback** element, you will see the execution
 
 In this case, the required action is to provide feedback on the agent results. To do so:
 
-1. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md).
+1. [Open Tasklist](/components/tasklist/userguide/using-tasklist.md#open-tasklist).
 2. Locate the user feedback task and assign it to yourself by clicking **Assign to me**.
 3. Analyze the result. You will see a joke, as requested in the prompt.
 4. You can follow up with more prompts to continue testing your AI agent.

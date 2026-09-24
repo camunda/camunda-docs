@@ -32,7 +32,7 @@ For example, given the following `$schema` definition, the application takes `0.
 ## Identification: `id` and `version`
 
 - `id : String` is a required key and must be set.
-- `version : Integer` is optional but Camunda strongly recommends setting it.
+- `version : Integer` is optional but Camunda strongly recommends setting it. When using the [Camunda Hub catalog](/components/hub/organization/manage-catalog/getting-started.md), the version is required.
 
 The `id` key defines the identifier of the template.
 If no `version` is set, templates with the same `id` are regarded as equal, independent of their other key-value pairs.
@@ -339,7 +339,7 @@ An element template embeds the configuration template definitions referenced by 
   - `id : String` is a required key that uniquely identifies the configuration template. It is referenced by a property's `configurationTemplate`.
   - `name : String` is a required key that defines the configuration template's display name.
   - `version : Integer` is a required key that defines the configuration template's version.
-  - `kind : String` is a required key that identifies the kind of configuration, for example `CREDENTIAL`. It determines how the configuration is interpreted and where it can be used.
+  - `kind : String` is a required key that identifies the kind of configuration, for example `CREDENTIAL`. It determines how the configuration is interpreted and where it can be used. For a worked example of a `CREDENTIAL` template, see [create a credential template](/components/connectors/custom-built-connectors/credential-templates.md).
   - `properties : Array<Object>` is a required key that defines the [properties](./template-properties.md) making up a configuration. Each property defines one field of the configuration's stored value; its `binding` names that field.
 
 ```json

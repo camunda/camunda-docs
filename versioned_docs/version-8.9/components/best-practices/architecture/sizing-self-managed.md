@@ -336,7 +336,7 @@ Once you have a baseline configuration running, you can scale in several ways:
 
 Add more brokers and partitions to increase throughput capacity. Partitions can be [scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) but not down, so avoid over-provisioning.
 
-When scaling horizontally, **secondary storage often becomes the limiting factor**. Adding brokers increases export volume to Elasticsearch/OpenSearch. If secondary storage isn't scaled accordingly, it will bottleneck overall throughput. See [Elasticsearch scaling](#elasticsearch-scaling) for guidance.
+When scaling horizontally, **secondary storage often becomes the limiting factor**. Adding brokers increases export volume to Elasticsearch/OpenSearch. If secondary storage isn't scaled accordingly, it will bottleneck overall throughput. See [Elasticsearch scaling](#elasticsearch-scaling) for tuning options, and [secondary storage considerations](#secondary-storage-considerations) for a sharding limitation that adding nodes alone doesn’t resolve.
 
 ### Vertical scaling
 
@@ -352,9 +352,13 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 
 ## Secondary storage considerations
 
-The resource tables above assume Elasticsearch as the secondary storage backend. If you are using a different backend:
+The resource tables above assume Elasticsearch as the secondary storage backend.
 
-- **OpenSearch:** Similar resource profile to Elasticsearch. The tables above generally apply.
+All Zeebe partitions currently export data to the same Elasticsearch indices. Write throughput for an index scales with the number of primary shards, not the number of Elasticsearch nodes. Scaling Zeebe partitions does not automatically reshard the indices. Reassess the shard count for your indices when scaling the number of partitions. See the [Elasticsearch shards documentation](/self-managed/concepts/secondary-storage/managing-secondary-storage.md#shards).
+
+If you are using a different backend:
+
+- **OpenSearch:** Similar resource profile to Elasticsearch. The tables above generally apply, including the index-sharding consideration.
 - **RDBMS (PostgreSQL, available from 8.9):** Replace the Elasticsearch resource block with appropriately sized PostgreSQL resources. Adjust throughput expectations **downward by approximately 30%** compared to the Elasticsearch-based tables. Unlike Elasticsearch, RDBMS scales primarily **vertically** (a larger instance) rather than horizontally, so plan your initial sizing with more headroom, as adding capacity later is more disruptive.
 
 :::note

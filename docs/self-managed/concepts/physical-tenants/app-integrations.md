@@ -5,7 +5,7 @@ sidebar_label: "App Integrations"
 description: "Configure one App Integrations deployment to serve several Physical Tenants, with per-tenant web apps, audiences, and notification routing."
 ---
 
-A single App Integrations deployment can serve every Physical Tenant of an orchestration cluster. Each tenant gets its own API endpoint, web app links, and notification rules, while the backend, its database, and the Microsoft Teams app registration stay shared.
+A single App Integrations deployment can serve every Physical Tenant of an orchestration cluster. Each tenant gets its own API endpoint, web app links, and notification rules, while the backend, its database, and the Microsoft Teams and Slack app registrations stay shared.
 
 :::note
 Physical Tenant support in App Integrations is available in Camunda 8.10 Self-Managed only. It is not available on SaaS.
@@ -13,9 +13,9 @@ Physical Tenant support in App Integrations is available in Camunda 8.10 Self-Ma
 
 :::note Related pages
 
-- **[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)** — How Physical Tenants isolate execution and storage
-- **[Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md)** — Identity deployment models and token routing
-- **[Microsoft Teams installation](/components/camunda-integrations/ms-teams/ms-teams-installation.md)** — The full `config.yaml` reference
+- **[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)**: How Physical Tenants isolate execution and storage
+- **[Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md)**: Identity deployment models and token routing
+- **[Microsoft Teams installation](/components/camunda-integrations/app-integrations/installation.md)**: The full `config.yaml` reference
   :::
 
 ## Terminology
@@ -97,17 +97,17 @@ clusters:
           operate: https://<your-camunda-host>/physical-tenants/tenantb/operate
 ```
 
-| Field                                | Required | Description                                                                                                                                                                                                         |
-| :----------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `id`                                 | Yes      | The `physicalTenantId`, matching the tenant configured on the orchestration cluster.                                                                                                                                |
-| `name`                               | Yes      | Display name shown in the Teams cluster selector.                                                                                                                                                                   |
-| `urls.tasklist`                      | Yes      | The tenant's Tasklist URL. Accepts a plain URL or the `{ base, task }` object described in the [installation guide](/components/camunda-integrations/ms-teams/ms-teams-installation.md#example-configuration-file). |
-| `urls.operate`                       | Yes      | The tenant's Operate URL.                                                                                                                                                                                           |
-| `urls.orchestration`                 | No       | Overrides the tenant's API base URL. Defaults to `<cluster orchestration URL>/physical-tenants/<id>`. Specify it without the `/v2` suffix, as at cluster level.                                                     |
-| `exporter.apiKey`                    | No       | Identifies this tenant on an inbound exporter request that carries no `X-Physical-Tenant-Id` header.                                                                                                                |
-| `connector.apiKey`                   | No       | A separate key for the App Integrations connector endpoints. Rotates independently of `exporter.apiKey`.                                                                                                            |
-| `auth.audiences.zeebe`               | No       | Overrides the audience requested for this tenant's API calls. See [authentication](#authentication).                                                                                                                |
-| `exposeDefaultTenant` _(on cluster)_ | No       | Whether the `default` tenant is selectable alongside the configured ones. Defaults to `false`.                                                                                                                      |
+| Field                                | Required | Description                                                                                                                                                                                                        |
+| :----------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                 | Yes      | The `physicalTenantId`, matching the tenant configured on the orchestration cluster.                                                                                                                               |
+| `name`                               | Yes      | Display name shown in the cluster selector, for Microsoft Teams or Slack.                                                                                                                                          |
+| `urls.tasklist`                      | Yes      | The tenant's Tasklist URL. Accepts a plain URL or the `{ base, task }` object described in the [installation guide](/components/camunda-integrations/app-integrations/installation.md#example-configuration-file). |
+| `urls.operate`                       | Yes      | The tenant's Operate URL.                                                                                                                                                                                          |
+| `urls.orchestration`                 | No       | Overrides the tenant's API base URL. Defaults to `<cluster orchestration URL>/physical-tenants/<id>`. Specify it without the `/v2` suffix, as at cluster level.                                                    |
+| `exporter.apiKey`                    | No       | Identifies this tenant on an inbound exporter request that carries no `X-Physical-Tenant-Id` header.                                                                                                               |
+| `connector.apiKey`                   | No       | A separate key for the App Integrations connector endpoints. Rotates independently of `exporter.apiKey`.                                                                                                           |
+| `auth.audiences.zeebe`               | No       | Overrides the audience requested for this tenant's API calls. See [authentication](#authentication).                                                                                                               |
+| `exposeDefaultTenant` _(on cluster)_ | No       | Whether the `default` tenant is selectable alongside the configured ones. Defaults to `false`.                                                                                                                     |
 
 Note that `urls.tasklist` and `urls.operate` are required on every tenant: a tenant never inherits the cluster's web app URLs, because those point at the cluster's own `default` tenant.
 
@@ -115,15 +115,15 @@ Note that `urls.tasklist` and `urls.operate` are required on every tenant: a ten
 
 The `default` Physical Tenant represents the cluster itself and always uses the cluster's own URLs, never a `/physical-tenants/default/…` path.
 
-- **No `physicalTenants` configured** — App Integrations synthesizes a single `default` tenant that takes the cluster's name and URLs. This is the behavior of every cluster configured before 8.10, and it needs no migration.
-- **`physicalTenants` configured** — only the tenants you declare are offered. The `default` tenant is hidden, so users cannot accidentally read from the cluster-wide endpoint.
-- **`physicalTenants` configured with `exposeDefaultTenant: true`** — the `default` tenant is added at the top of the list, in addition to the configured tenants.
+- **No `physicalTenants` configured**: App Integrations synthesizes a single `default` tenant that takes the cluster's name and URLs. This is the behavior of every cluster configured before 8.10, and it needs no migration.
+- **`physicalTenants` configured**: only the tenants you declare are offered. The `default` tenant is hidden, so users cannot accidentally read from the cluster-wide endpoint.
+- **`physicalTenants` configured with `exposeDefaultTenant: true`**: the `default` tenant is added at the top of the list, in addition to the configured tenants.
 
 ## Authentication
 
 App Integrations defines **one** identity provider for the whole deployment: a single `auth.issuer` and `auth.kind`, and one M2M/SPA client pair. Tenants are distinguished by **audience**, configured per tenant under `auth.audiences.zeebe`.
 
-This implements [Model B: single IdP, multiple role-level clients](./authentication-authorization.md#model-b-single-idp-multiple-role-level-clients). [Model C](./authentication-authorization.md#model-c-multiple-idps-advanced), a separate identity provider per Physical Tenant, is **not supported** — App Integrations cannot hold more than one issuer.
+This implements [Model B: single IdP, multiple role-level clients](./authentication-authorization.md#model-b-single-idp-multiple-role-level-clients). [Model C](./authentication-authorization.md#model-c-multiple-idps-advanced), a separate identity provider per Physical Tenant, is **not supported**, since App Integrations cannot hold more than one issuer.
 
 The audience for an outbound call is resolved in this order, first match wins:
 
@@ -185,7 +185,7 @@ Adding `physicalTenants` to a cluster that already runs App Integrations changes
 
 To keep the cluster-wide view available during a migration, set `exposeDefaultTenant: true` and remove it once every rule has been recreated.
 
-## Known limitations in 8.10
+## Known limitations
 
 - A separate identity provider per Physical Tenant ([Model C](./authentication-authorization.md#model-c-multiple-idps-advanced)) is not supported.
 - Identity linking and sign-in are deployment-wide, not per tenant.
