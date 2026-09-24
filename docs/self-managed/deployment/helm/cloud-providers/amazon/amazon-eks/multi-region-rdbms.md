@@ -131,7 +131,9 @@ Two variables control the topology, and they are not interchangeable:
 | `regions`             | The full list of region slots the cluster will ever have. Every slot contributes a zone to the Camunda zone list. |
 | `active_region_count` | How many of those slots are actually deployed. At most one slot may be left empty.                                |
 
-Declaring a slot without deploying it is the supported growth path: its replicas are reserved, each partition runs at `N - 1` of `N`, and activating the slot later fills them in without redistributing anything. Leaving two or more slots empty is rejected at plan time. Within the two to four slots this module supports, a second empty slot costs every partition its majority and the cluster cannot form.
+Declaring a slot without deploying it is the supported growth path. The deployed slots are always the first ones in the list, so the empty slot is the last, and activating it later fills in its replicas without redistributing anything. What that costs depends on how many replicas the empty slot holds, not on how many slots there are: the default layout gives the trailing slots one replica each, so every partition runs at four of five with three slots and five of six with four. The cluster tolerates no further zone loss while a slot is empty.
+
+Leaving two or more slots empty is rejected at plan time. The guard that rejects it counts region slots rather than replicas, and requires the deployed slots to be a majority of the declared ones, so it can also refuse a layout whose deployed zones would still hold a majority of the replicas. The replica-level test runs separately in `export_environment_prerequisites.sh`, which is what catches a layout whose undeployed zones hold the majority.
 
 ### Apply the infrastructure
 
@@ -409,7 +411,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 The parts worth reading before you install:
 
-- `orchestration.partitioning.scheme: zone-aware` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the `regions` and `regionId` keys with this scheme, and derives the cluster size, replication factor, and broker node IDs from the zone list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
+- `orchestration.partitioning.scheme: zone-aware` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects `numberOfZones` and `zoneIndex` with this scheme, because the zone list describes the topology instead, and it derives the cluster size, replication factor, and broker node IDs from that list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
 - `orchestration.partitioning.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - The AWS Advanced JDBC Wrapper uses `initialConnection,failover`: `initialConnection` discovers the current writer when a broker starts after a switchover, and `failover` follows a writer change on an established connection.
