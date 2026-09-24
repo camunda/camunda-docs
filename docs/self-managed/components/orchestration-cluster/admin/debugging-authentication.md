@@ -94,7 +94,7 @@ The Orchestration Cluster contacts an OIDC provider at the first request that ne
 
 While a provider is unreachable:
 
-- Those requests fail with a server error, and not with an authentication error. This includes a browser login and an API request with a token from that provider.
+- Those requests fail with a server error, and not with an authentication error. This can include a browser login and an API request with a token from that provider.
 - All other requests succeed.
 - Each new request tries again. The cluster serves the failed traffic again when the provider answers. You do not need to restart the cluster.
 - A failed request writes a warning for the resolution that failed: a client registration, a token decoder, or a UserInfo endpoint lookup. The cluster writes at most one warning each minute for each of these. A minute without a failed request writes nothing.
@@ -103,7 +103,7 @@ An unreachable provider no longer stops the cluster from starting. This warning 
 
 The warning follows the traffic, and it is not a health check of the provider. A cluster that gets no request for an unreachable provider writes no warning. Use a synthetic login or a synthetic API request if you must detect such an outage before a user does.
 
-The warning gives the provider, its issuer, and the scope. It does not give the endpoint that did not answer. Read the exception that the warning attaches to find that endpoint. For a provider that is configured with an issuer URI, this is the discovery endpoint `<issuer-uri>/.well-known/openid-configuration`. Then make sure that the cluster can reach that endpoint. See [Test the IdP directly](#test-the-idp-directly).
+The warning gives the provider, its issuer, and the scope. It does not give the endpoint that did not answer. Read the exception that the warning attaches to find that endpoint. For a provider that is configured with an issuer URI, this is the discovery endpoint `<issuer-uri>/.well-known/openid-configuration`. Then make sure that the cluster can reach that endpoint. See [test the IdP directly](#test-the-idp-directly).
 
 A provider that sets `jwk-set-uri` or `user-info-uri` needs no discovery. A failure of these endpoints therefore gives a different signal:
 

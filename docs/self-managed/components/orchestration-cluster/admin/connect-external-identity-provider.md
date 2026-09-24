@@ -129,7 +129,7 @@ Regardless of customization, the redirect URI must always point to the `/sso-cal
 
 The Orchestration Cluster checks the redirect URI at startup and writes a warning if the value cannot expand to a usable callback URL. It still starts. A usable value:
 
-- starts with `{baseUrl}`, or has an `http` or `https` scheme and a host,
+- starts with `{baseUrl}`, or has an `https` or `http` scheme and a host,
 - has a port between 1 and 65535, if it has a port,
 - has a callback path,
 - has no fragment (`#`).
