@@ -6,15 +6,13 @@ description: "Temporarily pause a running process instance and resume it later w
 
 Process instance suspension lets you temporarily freeze a running process instance without canceling it. The instance retains all its state during suspension, and execution continues from the same point when you resume it.
 
+Suspension is not a substitute for cancellation or deletion. The instance continues to occupy cluster resources during suspension, including storage for any commands that accumulate while suspended.
+
 Common use cases include:
 
 - Pausing execution while an upstream or downstream system is unavailable or misconfigured.
 - Preventing new jobs from being handed out to workers during a planned maintenance window.
 - Temporarily halting a batch of instances while an investigation is in progress.
-
-:::note
-Suspension is not a substitute for cancellation or deletion. The instance continues to occupy cluster resources during suspension, including storage for any commands that accumulate while suspended.
-:::
 
 ## Suspend and resume a process instance
 
@@ -40,7 +38,7 @@ The following describes what happens to each element type when a process instanc
 
 ### Jobs
 
-Job handout is suppressed during suspension — workers can't pick up new jobs from a suspended process instance.
+Job handout is suppressed during suspension: workers can't pick up new jobs from a suspended process instance.
 
 Jobs already running in a worker before suspension are not interrupted. They keep executing, but any attempt to complete or fail the job during suspension is rejected. If the instance resumes before the worker finishes, the job can complete normally. If the worker completes or fails the job while the instance is still suspended, the job is re-activated on resume and executed again. Because of this at-least-once behavior, outbound actions performed by the job (for example, an API call or a message) may run more than once if they are not idempotent.
 
@@ -58,7 +56,7 @@ Signals received while a process instance is suspended are discarded and never r
 
 ### Multi-instance
 
-If an active multi-instance body is suspended, child elements are spawned on resume according to the input collection at the time of suspension. Changes to the input collection during suspension — whether items are added or removed — are not taken into account once the multi-instance body has been created.
+If an active multi-instance body is suspended, child elements are spawned on resume according to the input collection at the time of suspension. Changes to the input collection during suspension (whether items are added or removed) are not taken into account once the multi-instance body has been created.
 
 ### Call activities
 
@@ -120,11 +118,11 @@ Additionally:
 - **Broker PVC usage**: Buffered commands are stored on the broker's persistent volume (PVC). A process instance with many active tokens or long-lived subscriptions generates more buffered commands during suspension. Monitor PVC utilization when suspending large numbers of instances or instances with complex execution states.
 - **Suspension processing load**: Suspending process instances with a large number of active jobs or message subscriptions increases cluster load during the suspension window.
 - **Resumption processing load**: Resuming a process instance is roughly equivalent to simultaneously creating all active element instances that were suspended. Resuming a large number of instances, or an instance with many active tokens, can noticeably reduce processing throughput.
-- **Stale data in buffered commands**: Buffered commands are recorded at the time of suspension and may rely on data that changes while the instance is suspended. Because some actions are permitted during suspension — such as variable updates — a buffered command may operate on stale values when it drains on resume, potentially producing unexpected behavior or incidents.
+- **Stale data in buffered commands**: Buffered commands are recorded at the time of suspension and may rely on data that changes while the instance is suspended. Because some actions are permitted during suspension (such as variable updates), a buffered command may operate on stale values when it drains on resume, potentially producing unexpected behavior or incidents.
 
 ### Resume failures
 
-In rare cases, a buffered command can't be drained — for example, if a preceding permitted change left the instance in an inconsistent state for that command. This typically surfaces as an incident on resume. In very rare cases, a drain failure may not surface as an incident if the failure is unrelated to process-instance-specific command processing. In that case, the process instance continues to show as `SUSPENDED` but can't complete draining. Check error logs for details and contact support if necessary.
+In rare cases, a buffered command can't be drained, for example, if a preceding permitted change left the instance in an inconsistent state for that command. This typically surfaces as an incident on resume. In very rare cases, a drain failure may not surface as an incident if the failure is unrelated to process-instance-specific command processing. In that case, the process instance continues to show as `SUSPENDED` but can't complete draining. Check error logs for details and contact support if necessary.
 
 ## Limitations
 
@@ -140,6 +138,6 @@ Under the default 4 MB `maxMessageSize` [configuration](./secret-resolution-and-
 
 ### Suspension vs. banning
 
-Suspension is processed through the normal engine command pipeline, which means it isn't applied instantaneously. The suspend command is queued and processed in order behind other pending commands. If the engine is under high backpressure — for example, because a process instance is executing a tight loop or processing a very large input collection — the suspend command may be delayed significantly or rejected entirely.
+Suspension is processed through the normal engine command pipeline, which means it isn't applied instantaneously. The suspend command is queued and processed in order behind other pending commands. If the engine is under high backpressure (for example, because a process instance is executing a tight loop or processing a very large input collection), the suspend command may be delayed significantly or rejected entirely.
 
 As a result, suspension isn't a reliable mechanism for immediately stopping a process instance that is causing high cluster load. In situations where a runaway instance must be halted urgently, cancellation is more appropriate and should be preferred over suspension. For context on how the engine handles runaway instances internally, see [banned process instances](../zeebe/technical-concepts/internal-processing.md#banned-process-instance).
