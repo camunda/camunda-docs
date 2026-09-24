@@ -54,7 +54,7 @@ The `ZONE_AWARE` partitioning scheme drives partition distribution and leadershi
 
 ### Comparison to dual-region broker numbering
 
-In the [dual-region](../../../../concepts/multi-region/dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering. Zone awareness replaces it with explicit zone names, which works for any number of zones. Changing the zone list afterwards is possible, but it is not a configuration-only change: existing partitions have to be told about the new zone through the [cluster management API](../operations/management-api.md#partition-distribution-api).
+In the [dual-region](../../../../concepts/multi-region/dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering. Zone awareness replaces it with explicit zone names, which works for any number of zones. Changing the zone list afterwards is possible, but it is not a configuration-only change: existing partitions have to be told about the new zone through the [cluster management API](../operations/management-api.md#partitioning-api).
 
 ## Example configuration
 
