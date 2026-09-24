@@ -1,0 +1,432 @@
+---
+id: request-project-snapshot-review
+title: "Request a review of a project snapshot"
+description: "Marks the project snapshot as awaiting review and returns the created review request. A snapshot has at most one review request: requesting a review for a snapshot that already has one is rejected with `409`, even after that request has been reviewed. A reviewed snapshot can therefore never be re-requested; create a new snapshot to start another review round. Creating a request also supersedes any pending request on a different snapshot of the same project, so a project has at most one snapshot awaiting review at a time."
+sidebar_label: "Request a review of a project snapshot"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Request a review of a project snapshot"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/project-snapshots/{projectSnapshotKey}/review-requests"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Marks the project snapshot as awaiting review and returns the created review request. A snapshot has at most one review request: requesting a review for a snapshot that already has one is rejected with `409`, even after that request has been reviewed. A reviewed snapshot can therefore never be re-requested; create a new snapshot to start another review round. Creating a request also supersedes any pending request on a different snapshot of the same project, so a project has at most one snapshot awaiting review at a time.
+Requesting a review adds a system-authored comment to the project's BPMN files.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "projectSnapshotKey",
+      in: "path",
+      required: true,
+      description: "The unique key of the project snapshot.",
+      schema: {
+        description: "System-generated key for a project snapshot.",
+        type: "string",
+        format: "ProjectSnapshotKey",
+        "x-semantic-type": "ProjectSnapshotKey",
+        example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+        title: "ProjectSnapshotKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The review was requested successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: {
+              reviewRequestKey: "b1e8f0c2-7a3d-4e5f-9a1b-2c3d4e5f6a7b",
+              projectSnapshotKey: "a2b3c4d5-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+              created: "2025-03-16T09:00:00.000Z",
+              createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+            },
+            required: [
+              "reviewRequestKey",
+              "projectSnapshotKey",
+              "created",
+              "createdBy",
+            ],
+            properties: {
+              reviewRequestKey: {
+                description: "The unique key of the review request.",
+                type: "string",
+              },
+              projectSnapshotKey: {
+                description:
+                  "The unique key of the project snapshot the review request was made for.",
+                allOf: [
+                  {
+                    description: "System-generated key for a project snapshot.",
+                    type: "string",
+                    format: "ProjectSnapshotKey",
+                    "x-semantic-type": "ProjectSnapshotKey",
+                    example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+                    title: "ProjectSnapshotKey",
+                  },
+                ],
+              },
+              created: {
+                description: "The timestamp when the review was requested.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description:
+                  "The user who requested the review. Reviews requested through the public API are attributed to the public API user rather than a person.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
+                        type: "string",
+                        format: "email",
+                        nullable: true,
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+            },
+            title: "ProjectSnapshotReviewRequest",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "409": {
+      description: "A conflict occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Conflict",
+            status: 409,
+            detail:
+              "The request conflicts with the current state of the resource.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
