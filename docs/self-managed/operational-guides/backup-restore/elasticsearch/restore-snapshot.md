@@ -10,11 +10,9 @@ description: "Learn how to restore Elasticsearch or OpenSearch snapshots from a 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Restore Elasticsearch/OpenSearch snapshots
-
 This page is part of the overall Elasticsearch/OpenSearch [restore procedure](./restore.md). Return to the parent procedure after restoring the snapshots to continue with the remaining restore steps.
 
-### Prerequisites
+## Prerequisites
 
 The following specific prerequisites are required when restoring Elasticsearch/OpenSearch:
 
@@ -24,7 +22,7 @@ The following specific prerequisites are required when restoring Elasticsearch/O
 | Snapshot repository | Elasticsearch or OpenSearch is configured to use the same snapshot repository as the backup. See [prerequisites](./backup.md#prerequisites).                                                                                     |
 | Sizing              | Elasticsearch or OpenSearch should be sized the same or larger than the original cluster. Restoring to a smaller cluster (for example, with fewer data nodes) can prevent shards from being assigned and cause restore failures. |
 
-### 1. Restore [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
+## 1. Restore [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
 
 :::note
 This step is only required for restoring an Elasticsearch/OpenSearch snapshot on a fresh cluster.
@@ -58,7 +56,6 @@ curl -s "$ELASTIC_ENDPOINT/_index_template" \
 
    <details>
       <summary>Example Output</summary>
-      <summary>
 
       ```bash
       operate-batch-operation-1.0.0_template
@@ -79,8 +76,6 @@ curl -s "$ELASTIC_ENDPOINT/_index_template" \
       ...
       ```
 
-      </summary>
-
    </details>
 
    </TabItem>
@@ -97,7 +92,6 @@ curl -s "$OPENSEARCH_ENDPOINT/_index_template" \
 
    <details>
       <summary>Example Output</summary>
-      <summary>
 
       ```bash
       operate-batch-operation-1.0.0_template
@@ -119,14 +113,12 @@ curl -s "$OPENSEARCH_ENDPOINT/_index_template" \
       ...
       ```
 
-      </summary>
-
    </details>
 
    </TabItem>
 </Tabs>
 
-### 2. Find available backup IDs
+## 2. Find available backup IDs
 
 With the active environment that was required to restore the datastore templates you can quickly work out available backups, using the backup APIs for each component to list available backups.
 
@@ -136,7 +128,6 @@ You will need the output for your chosen backup ID in the following steps to be 
 
    <details>
       <summary>Web Applications Example</summary>
-      <summary>
 
       Using the [Web Applications management API](/self-managed/operational-guides/backup-restore/webapps-backup.md#get-backups-list-api) to list backups.
 
@@ -186,13 +177,11 @@ You will need the output for your chosen backup ID in the following steps to be 
       }
       ]
       ```
-      </summary>
 
    </details>
 
    <details>
       <summary>Optimize Example</summary>
-      <summary>
 
       Using the [Optimize management API](/self-managed/operational-guides/backup-restore/optimize-backup.md#get-backup-info-api) to list backups.
 
@@ -224,13 +213,11 @@ You will need the output for your chosen backup ID in the following steps to be 
       }
       ]
       ```
-      </summary>
 
    </details>
 
    <details>
       <summary>Zeebe Example</summary>
-      <summary>
 
       Using the [Zeebe management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#list-backups-api) to list backups.
 
@@ -266,13 +253,12 @@ You will need the output for your chosen backup ID in the following steps to be 
       }
       ]
       ```
-      </summary>
 
    </details>
 
 As there may be cases where this is not possible, an alternative approach is covered in the following example.
 
-#### Available Backups on Elasticsearch/OpenSearch
+### Available Backups on Elasticsearch/OpenSearch
 
 In this scenario, follow the steps above, but when you have your Elasticsearch/OpenSearch available, use the snapshot API to list available snapshots and correlate this to the available snapshots in your backup bucket (AWS S3, Azure Store, Google GCS). It is important to use the same ID for all backups.
 
@@ -296,7 +282,6 @@ In this scenario, follow the steps above, but when you have your Elasticsearch/O
 
       <details>
          <summary>Example output</summary>
-         <summary>
 
          ```bash
          camunda_optimize_1748937221_8.8.0_part_1_of_2
@@ -309,7 +294,6 @@ In this scenario, follow the steps above, but when you have your Elasticsearch/O
          camunda_zeebe_records_backup_1748937221
          ```
 
-         </summary>
       </details>
 
    </TabItem>
@@ -333,7 +317,6 @@ In this scenario, follow the steps above, but when you have your Elasticsearch/O
 
       <details>
       <summary>Example output</summary>
-      <summary>
 
       ```bash
       camunda_optimize_1748937221_8.8.0_part_1_of_2
@@ -346,13 +329,12 @@ In this scenario, follow the steps above, but when you have your Elasticsearch/O
       camunda_zeebe_records_backup_1748937221
       ```
 
-      </summary>
       </details>
 
    </TabItem>
 </Tabs>
 
-#### Available Backups of Zeebe Partitions
+### Available Backups of Zeebe Partitions
 
 For the Zeebe partitions backup, you will need to check your configured backup store for available backup IDs, and correlate those to the available backups on Elasticsearch/OpenSearch.
 
@@ -364,7 +346,6 @@ Using the [Zeebe Management Backup API](/self-managed/operational-guides/backup-
 
 <details>
    <summary>Example output</summary>
-   <summary>
    Example in the case of 3 partitions with two available backups:
 
 ```bash
@@ -381,10 +362,9 @@ Using the [Zeebe Management Backup API](/self-managed/operational-guides/backup-
 └── 1749130104
 ```
 
-   </summary>
 </details>
 
-### 3. Stop all components apart from Elasticsearch/OpenSearch
+## 3. Stop all components apart from Elasticsearch/OpenSearch
 
 :::note
 It is only required to stop all components if opted for the legacy restore approach. For the Restore API approach, the only component that requires stopping is Optimize.
@@ -410,7 +390,7 @@ orchestration:
   enabled: false
 ```
 
-### 4. Delete all indices
+## 4. Delete all indices
 
 Now that you have successfully restored the templates and stopped the components adding more indices, you must delete the existing indices to be able to successfully restore the snapshots (otherwise these will block a successful restore).
 
@@ -429,7 +409,6 @@ done
 
    <details>
       <summary>Example Output</summary>
-      <summary>
 
       ```bash
       Deleting index: operate-import-position-8.3.0_
@@ -468,8 +447,6 @@ done
       {"acknowledged":true}Deleting index: operate-sequence-flow-8.3.0_
       {"acknowledged":true}
       ```
-
-      </summary>
 
    </details>
 
@@ -488,7 +465,6 @@ done
 
    <details>
       <summary>Example Output</summary>
-      <summary>
 
       ```bash
       Deleting index: operate-import-position-8.3.0_
@@ -528,14 +504,12 @@ done
       {"acknowledged":true}
       ```
 
-      </summary>
-
    </details>
 
    </TabItem>
 </Tabs>
 
-### 5. Restore Elasticsearch/OpenSearch snapshots
+## 5. Restore Elasticsearch/OpenSearch snapshots
 
 Although the backup order was important so far to ensure consistent backups, you can restore the backed up indices in any order.
 
