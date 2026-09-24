@@ -1,0 +1,955 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
+
+# Project snapshot resource paths and schemas
+paths:
+  /project-snapshots:
+    post:
+      operationId: createProjectSnapshot
+      summary: Create a project snapshot
+      description: >
+        Creates a new project snapshot by taking a snapshot of every file currently in the
+        project. Each file contributes one file version to the snapshot, recorded together
+        with the file's name and folder location at that moment.
+      x-added-in-version: "8.10"
+      x-semantic-provider:
+        - projectSnapshotKey
+      tags:
+        - Project Snapshot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectSnapshotCreateRequest"
+      responses:
+        "200":
+          description: The project snapshot was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSnapshotResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /project-snapshots/{projectSnapshotKey}:
+    get:
+      operationId: getProjectSnapshot
+      summary: Get a project snapshot
+      description: >
+        Returns the project snapshot metadata together with the file versions it captured.
+        Each file version carries the content hash and the file name and folder location
+        recorded at snapshot time. To compare two project snapshots, request both and match
+        their file versions on `fileKey` to find the same file across both snapshots, then
+        compare `contentHash` to detect changes.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: ProjectSnapshot
+        bind:
+          projectSnapshotKey:
+            from: path
+            name: projectSnapshotKey
+      tags:
+        - Project Snapshot
+      parameters:
+        - $ref: "#/components/parameters/ProjectSnapshotKeyPathParam"
+      responses:
+        "200":
+          description: The project snapshot was found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSnapshotDetailResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+    patch:
+      operationId: updateProjectSnapshot
+      summary: Update a project snapshot
+      description: Updates the attributes of an existing project snapshot.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: ProjectSnapshot
+        bind:
+          projectSnapshotKey:
+            from: path
+            name: projectSnapshotKey
+      tags:
+        - Project Snapshot
+      parameters:
+        - $ref: "#/components/parameters/ProjectSnapshotKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectSnapshotUpdateRequest"
+      responses:
+        "200":
+          description: The project snapshot was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSnapshotResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+    delete:
+      operationId: deleteProjectSnapshot
+      summary: Delete a project snapshot
+      description: >
+        Deletes the specified project snapshot. The file versions it captured are not
+        deleted, because they can be shared with other project snapshots.
+
+
+        Deleting a project snapshot that captured a file version published to shared
+        resources requires elevated organization access and is rejected with `403`
+        otherwise. On SaaS, public API clients never hold elevated organization
+        access, so deleting a snapshot that captured such a file version always
+        fails with `403` in that case.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: ProjectSnapshot
+        bind:
+          projectSnapshotKey:
+            from: path
+            name: projectSnapshotKey
+      tags:
+        - Project Snapshot
+      parameters:
+        - $ref: "#/components/parameters/ProjectSnapshotKeyPathParam"
+      responses:
+        "204":
+          description: The project snapshot was deleted successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /project-snapshots/search:
+    post:
+      operationId: searchProjectSnapshots
+      summary: Search project snapshots
+      description: >
+        Returns the project snapshots matching the given search criteria, scoped to
+        the caller's organization. Restoring a project snapshot can create an
+        additional, automatically named project snapshot capturing the state that
+        was replaced; those appear here like any other project snapshot. Filter by
+        `fileVersionKey` to find the project snapshots that captured a given file
+        version.
+      x-added-in-version: "8.10"
+      tags:
+        - Project Snapshot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectSnapshotSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSnapshotSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /project-snapshots/{projectSnapshotKey}/restoration:
+    post:
+      operationId: restoreProjectSnapshot
+      summary: Restore a project snapshot
+      description: >
+        Restores the project to the state captured in this project snapshot: file contents,
+        names and folder locations are all reset to the snapshot, files added since are
+        removed, and files deleted since are recreated.
+
+        Before anything is replaced, the project's current state is preserved as a new,
+        automatically named project snapshot, unless the project has not changed since its
+        most recent project snapshot. The restored-to project snapshot itself is left
+        unchanged, so it can be restored again later.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: ProjectSnapshot
+        bind:
+          projectSnapshotKey:
+            from: path
+            name: projectSnapshotKey
+      tags:
+        - Project Snapshot
+      parameters:
+        - $ref: "#/components/parameters/ProjectSnapshotKeyPathParam"
+      responses:
+        "204":
+          description: The project snapshot was restored successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /project-snapshots/{projectSnapshotKey}/review-requests:
+    post:
+      operationId: requestProjectSnapshotReview
+      summary: Request a review of a project snapshot
+      description: >
+        Marks the project snapshot as awaiting review and returns the created review request.
+        A snapshot has at most one review request: requesting a review for a snapshot that
+        already has one is rejected with `409`, even after that request has been reviewed.
+        A reviewed snapshot can therefore never be re-requested; create a new snapshot to start
+        another review round. Creating a request also supersedes any pending request on a
+        different snapshot of the same project, so a project has at most one snapshot awaiting
+        review at a time.
+
+        Requesting a review adds a system-authored comment to the project's BPMN files.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: ProjectSnapshot
+        bind:
+          projectSnapshotKey:
+            from: path
+            name: projectSnapshotKey
+      tags:
+        - Project Snapshot
+      parameters:
+        - $ref: "#/components/parameters/ProjectSnapshotKeyPathParam"
+      responses:
+        "200":
+          description: The review was requested successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSnapshotReviewRequest"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "409":
+          $ref: "common-responses.yaml#/components/responses/Conflict"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /project-snapshots/{projectSnapshotKey}/reviews:
+    post:
+      operationId: submitProjectSnapshotReview
+      summary: Submit a review decision for a project snapshot
+      description: >
+        Records a review decision, with an optional comment, for a project snapshot that has a
+        review request. A snapshot keeps accepting reviews as long as its request has not been
+        superseded, so a follow-up review can be submitted after an earlier one. Submitting a
+        review for a snapshot with no review request at all is rejected with `403`.
+
+        Submitting a review adds a system-authored comment to the project's BPMN files. The
+        review is attributed to the public API user rather than to a person, and the API does
+        not enforce that the reviewer differs from whoever created the snapshot.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: ProjectSnapshot
+        bind:
+          projectSnapshotKey:
+            from: path
+            name: projectSnapshotKey
+      tags:
+        - Project Snapshot
+      parameters:
+        - $ref: "#/components/parameters/ProjectSnapshotKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectSnapshotReviewCreateRequest"
+      responses:
+        "200":
+          description: The review was submitted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSnapshotReview"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /project-snapshots/{projectSnapshotKey}/duplication:
+    post:
+      operationId: duplicateProjectSnapshot
+      summary: Duplicate a project snapshot
+      description: >
+        Creates a new project in the target workspace from this project snapshot. The new
+        project takes the current name of the snapshot's project, with a copy suffix appended
+        if a project of that name already exists in the target workspace. If appending the suffix would exceed
+        the maximum project name length, the base name is truncated first.
+
+        The duplicate is created with one project snapshot of its own, carrying the source
+        snapshot's name and description. The source project snapshot is left unchanged.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: ProjectSnapshot
+        bind:
+          projectSnapshotKey:
+            from: path
+            name: projectSnapshotKey
+      x-semantic-provider:
+        - projectKey
+      tags:
+        - Project Snapshot
+      parameters:
+        - $ref: "#/components/parameters/ProjectSnapshotKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectSnapshotDuplicationRequest"
+      responses:
+        "200":
+          description: The project snapshot was duplicated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "projects.yaml#/components/schemas/ProjectResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /project-snapshots/{projectSnapshotKey}/external-resources:
+    get:
+      operationId: getProjectSnapshotExternalResources
+      summary: Check whether a project snapshot references external resources
+      description: >
+        Reports whether this project snapshot references resources that live outside the
+        snapshot itself: forms, call activities, business rule tasks, and RPA resources.
+        `false` for each flag means the snapshot does not reference anything of that kind
+        outside itself.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: ProjectSnapshot
+        bind:
+          projectSnapshotKey:
+            from: path
+            name: projectSnapshotKey
+      tags:
+        - Project Snapshot
+      parameters:
+        - $ref: "#/components/parameters/ProjectSnapshotKeyPathParam"
+      responses:
+        "200":
+          description: The external resource report was returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSnapshotExternalResourcesResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    ProjectSnapshotKeyPathParam:
+      name: projectSnapshotKey
+      in: path
+      required: true
+      description: The unique key of the project snapshot.
+      schema:
+        $ref: "keys.yaml#/components/schemas/ProjectSnapshotKey"
+
+  schemas:
+    # --- Request schemas ---
+
+    ProjectSnapshotCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - projectKey
+        - name
+      example:
+        projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+        name: "Release 1.0"
+        description: "First stable release of the order fulfillment application."
+      properties:
+        projectKey:
+          description: The key of the project to create a snapshot for.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        name:
+          description: The name for the project snapshot.
+          type: string
+          minLength: 1
+          maxLength: 255
+        description:
+          description: An optional description for the project snapshot.
+          type: string
+          maxLength: 255
+
+    ProjectSnapshotUpdateRequest:
+      type: object
+      additionalProperties: false
+      example:
+        name: "Release 1.1"
+        description: "Updated with error-handling improvements."
+      properties:
+        name:
+          description: The new name for the project snapshot.
+          type: string
+          minLength: 1
+          maxLength: 255
+        description:
+          description: An optional description for the project snapshot.
+          type: string
+          nullable: true
+          maxLength: 255
+
+    ProjectSnapshotReviewCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - status
+      example:
+        status: "APPROVED"
+        comment: "Checks pass, safe to promote."
+      properties:
+        status:
+          description: The review decision.
+          type: string
+          enum:
+            - APPROVED
+            - CHANGES_REQUESTED
+        comment:
+          description: An optional comment to record with the decision. Must not be blank if provided.
+          type: string
+          nullable: true
+
+    ProjectSnapshotDuplicationRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - targetWorkspaceKey
+      example:
+        targetWorkspaceKey: "5f0c1a6e-3a8d-4c2f-9b7e-1d2a3b4c5d6e"
+      properties:
+        targetWorkspaceKey:
+          description: >
+            The key of the workspace to create the duplicate in. The workspace must belong to the
+            same organization as the source project snapshot.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+
+    # --- Response schemas ---
+
+    ProjectSnapshotResult:
+      type: object
+      description: >-
+        A project snapshot and its review state. The example shows a snapshot that has been reviewed,
+        so its pending request is cleared; see ProjectSnapshotDetailResult for one still pending.
+      example:
+        projectSnapshotKey: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77"
+        projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+        name: "Release 1.0"
+        description: "First stable release of the order fulfillment application."
+        created: "2025-03-15T10:30:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-03-15T10:30:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        reviewRequest: null
+        latestReview:
+          reviewKey: "c2f9a1d3-8b4e-4f60-ab2c-3d4e5f6a7b8c"
+          projectSnapshotKey: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77"
+          status: "APPROVED"
+          comment: "Looks good, safe to promote."
+          created: "2025-03-16T11:20:00.000Z"
+          createdBy:
+            name: "John Smith"
+            email: "john.smith@example.com"
+      required:
+        - projectSnapshotKey
+        - projectKey
+        - name
+        - description
+        - created
+        - createdBy
+        - updated
+        - updatedBy
+        - reviewRequest
+        - latestReview
+      properties:
+        projectSnapshotKey:
+          description: The unique key of the project snapshot.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectSnapshotKey"
+        projectKey:
+          description: The key of the project this snapshot belongs to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        name:
+          description: The name of the project snapshot.
+          type: string
+        description:
+          description: The description of the project snapshot.
+          type: string
+          nullable: true
+        created:
+          description: The timestamp when the project snapshot was created.
+          type: string
+          format: date-time
+        createdBy:
+          description: >-
+            The user who created the project snapshot. Snapshots created automatically by
+            the system, such as the one recorded before a restore, are attributed to the
+            Camunda system user.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+        updated:
+          description: The timestamp when the project snapshot was last updated.
+          type: string
+          format: date-time
+        updatedBy:
+          description: >-
+            The user who last updated the project snapshot. Snapshots created automatically
+            by the system, such as the one recorded before a restore, are attributed to the
+            Camunda system user.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+        reviewRequest:
+          description: >-
+            The pending review request for this project snapshot, or null when no review is
+            currently pending (including after a pending request has been reviewed). A snapshot
+            has at most one pending request.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ProjectSnapshotReviewRequest"
+        latestReview:
+          description: >-
+            The most recent review decision recorded for this project snapshot, or null when none
+            has been submitted.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ProjectSnapshotReview"
+
+    ProjectSnapshotReviewRequest:
+      type: object
+      example:
+        reviewRequestKey: "b1e8f0c2-7a3d-4e5f-9a1b-2c3d4e5f6a7b"
+        projectSnapshotKey: "a2b3c4d5-6e7f-4a8b-9c0d-1e2f3a4b5c6d"
+        created: "2025-03-16T09:00:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+      required:
+        - reviewRequestKey
+        - projectSnapshotKey
+        - created
+        - createdBy
+      properties:
+        reviewRequestKey:
+          description: The unique key of the review request.
+          type: string
+        projectSnapshotKey:
+          description: The unique key of the project snapshot the review request was made for.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectSnapshotKey"
+        created:
+          description: The timestamp when the review was requested.
+          type: string
+          format: date-time
+        createdBy:
+          description: >-
+            The user who requested the review. Reviews requested through the public API are
+            attributed to the public API user rather than a person.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+
+    ProjectSnapshotReview:
+      type: object
+      example:
+        reviewKey: "c2f9a1d3-8b4e-4f60-ab2c-3d4e5f6a7b8c"
+        projectSnapshotKey: "a2b3c4d5-6e7f-4a8b-9c0d-1e2f3a4b5c6d"
+        status: "APPROVED"
+        comment: "Looks good, safe to promote."
+        created: "2025-03-16T11:20:00.000Z"
+        createdBy:
+          name: "John Smith"
+          email: "john.smith@example.com"
+      required:
+        - reviewKey
+        - projectSnapshotKey
+        - status
+        - comment
+        - created
+        - createdBy
+      properties:
+        reviewKey:
+          description: The unique key of the review.
+          type: string
+        projectSnapshotKey:
+          description: The unique key of the project snapshot the review was submitted for.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectSnapshotKey"
+        status:
+          description: The review decision.
+          type: string
+          enum:
+            - APPROVED
+            - CHANGES_REQUESTED
+        comment:
+          description: The optional comment recorded with the decision.
+          type: string
+          nullable: true
+        created:
+          description: The timestamp when the review was submitted.
+          type: string
+          format: date-time
+        createdBy:
+          description: >-
+            The user who submitted the review. Reviews submitted through the public API are
+            attributed to the public API user rather than a person.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+
+    ProjectSnapshotDetailResult:
+      type: object
+      description: >-
+        A project snapshot together with the file versions it captured and its review state. The example shows
+        a snapshot whose review is still pending; see ProjectSnapshotResult for one that has been reviewed.
+      example:
+        projectSnapshot:
+          projectSnapshotKey: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77"
+          projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+          name: "Release 1.0"
+          description: "First stable release of the order fulfillment application."
+          created: "2025-03-15T10:30:00.000Z"
+          createdBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+          updated: "2025-03-15T10:30:00.000Z"
+          updatedBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+          reviewRequest:
+            reviewRequestKey: "b1e8f0c2-7a3d-4e5f-9a1b-2c3d4e5f6a7b"
+            projectSnapshotKey: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77"
+            created: "2025-03-16T09:00:00.000Z"
+            createdBy:
+              name: "Jane Doe"
+              email: "jane.doe@example.com"
+          latestReview: null
+        fileVersions:
+          - versionKey: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7"
+            fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
+            fileName: "order-fulfillment"
+            fileType: "bpmn"
+            folderPath: "processes"
+            folderIdPath: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee"
+            contentHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            name: "Release 1.0"
+            description: null
+            organizationPublic: false
+            created: "2025-03-15T10:30:00.000Z"
+            createdBy:
+              name: "Jane Doe"
+              email: "jane.doe@example.com"
+      required:
+        - projectSnapshot
+        - fileVersions
+      properties:
+        projectSnapshot:
+          description: The project snapshot metadata.
+          allOf:
+            - $ref: "#/components/schemas/ProjectSnapshotResult"
+        fileVersions:
+          description: >-
+            The file versions captured by this project snapshot, one per file that was in
+            the project at snapshot time, ordered by file name.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProjectSnapshotFileVersion"
+
+    ProjectSnapshotFileVersion:
+      type: object
+      description: >-
+        A file version captured by a project snapshot, enriched with the file name and
+        folder location recorded at snapshot time.
+      required:
+        - versionKey
+        - fileKey
+        - fileName
+        - fileType
+        - folderPath
+        - folderIdPath
+        - contentHash
+        - name
+        - description
+        - organizationPublic
+        - created
+        - createdBy
+      properties:
+        versionKey:
+          description: >-
+            The unique key of the file version. Can be read through the version endpoints
+            for its content, and can be captured by more than one project snapshot.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/VersionKey"
+        fileKey:
+          description: >-
+            The key of the file this version originally belonged to, preserved even after
+            the file has since been permanently deleted.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
+        fileName:
+          description: The name the file had when this project snapshot was created.
+          type: string
+        fileType:
+          description: The type of the file.
+          type: string
+          enum:
+            - bpmn
+            - dmn
+            - form
+            - element-template
+            - rpa
+            - markdown
+            - tests
+        folderPath:
+          description: >-
+            The folder path from the project root to the file, as recorded for this project
+            snapshot, relative to the project. Path segments are sanitized, so a folder name
+            containing a slash appears with it replaced by an underscore. Null if the file
+            was at the project root, or if this project snapshot predates path recording.
+          type: string
+          nullable: true
+        folderIdPath:
+          description: >-
+            The folder key path parallel to `folderPath`, letting a caller tell a renamed
+            folder from a different one. Null under the same conditions as `folderPath`.
+          type: string
+          nullable: true
+        contentHash:
+          description: >-
+            Hash of the file content at this version. Two file versions with the same hash
+            have identical content, which is what lets a caller compare project snapshots
+            without downloading every file.
+          type: string
+        name:
+          description: The name of the file version.
+          type: string
+        description:
+          description: The description of the file version.
+          type: string
+          nullable: true
+        organizationPublic:
+          description: Whether the file version is published to shared resources.
+          type: boolean
+        created:
+          description: The timestamp when the file version was created.
+          type: string
+          format: date-time
+        createdBy:
+          description: >-
+            The user who created the file version. May be null for legacy or
+            system-created file versions.
+          nullable: true
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+
+    # --- Search schemas ---
+
+    ProjectSnapshotSearchQuery:
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProjectSnapshotSearchQuerySortRequest"
+        filter:
+          description: The project snapshot search filters.
+          allOf:
+            - $ref: "#/components/schemas/ProjectSnapshotFilter"
+
+    ProjectSnapshotSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - created
+            - updated
+        order:
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    ProjectSnapshotFilter:
+      type: object
+      description: Filter criteria for searching project snapshots.
+      properties:
+        projectKey:
+          description: Filter by the key of the project the snapshot belongs to.
+          x-semantic-type: ProjectKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        fileVersionKey:
+          description: >-
+            Filter by the key of a file version captured by the snapshot. A snapshot
+            captures many file versions, so the operators apply to that whole set rather
+            than to a single value: `$exists` asks whether the snapshot captured any file
+            version at all, independent of any key, so `$exists: true` matches every
+            non-empty snapshot and `$exists: false` only snapshots that captured nothing.
+            `$neq` and `$notIn` match snapshots that captured none of the given keys, and
+            therefore also match empty snapshots.
+          x-semantic-type: VersionKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        name:
+          description: Filter by project snapshot name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        created:
+          description: Filter by creation date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        updated:
+          description: Filter by last update date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        createdBy:
+          description: Filter by creator email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        updatedBy:
+          description: Filter by last updater email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        hasPendingReviewRequest:
+          description: >
+            Filter by whether the project snapshot has a review request pending a decision. A
+            request stops being pending as soon as any review is recorded for it.
+          type: boolean
+
+    ProjectSnapshotSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching project snapshots.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProjectSnapshotResult"
+        page:
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    ProjectSnapshotExternalResourcesResult:
+      type: object
+      description: >
+        Whether a project snapshot references resources outside the snapshot itself. Each flag
+        is independent. All four `false` means no external reference was detected.
+      example:
+        hasRefToExternalForms: false
+        hasRefToExternalCallActivities: true
+        hasRefToExternalBusinessRuleTasks: false
+        hasRefToExternalRpaResources: false
+      required:
+        - hasRefToExternalForms
+        - hasRefToExternalCallActivities
+        - hasRefToExternalBusinessRuleTasks
+        - hasRefToExternalRpaResources
+      properties:
+        hasRefToExternalForms:
+          description: >
+            Whether a BPMN process in the snapshot references a form that is not defined within
+            the snapshot itself, whether or not that form exists anywhere else.
+          type: boolean
+        hasRefToExternalCallActivities:
+          description: >
+            Whether a BPMN process in the snapshot references, via a call activity, a process
+            that is not defined within the snapshot itself, whether or not that process exists
+            anywhere else.
+          type: boolean
+        hasRefToExternalBusinessRuleTasks:
+          description: >
+            Whether a BPMN process in the snapshot references a DMN decision that is not defined
+            within the snapshot itself, whether or not that decision exists anywhere else.
+          type: boolean
+        hasRefToExternalRpaResources:
+          description: >
+            Whether a BPMN process in the snapshot references an RPA resource that is not defined
+            within the snapshot itself, whether or not that resource exists anywhere else.
+          type: boolean
