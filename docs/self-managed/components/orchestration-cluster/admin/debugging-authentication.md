@@ -94,9 +94,11 @@ The Orchestration Cluster contacts an OIDC provider at the first request that ne
 
 While a provider is unreachable:
 
-- Those requests fail with a server error, and not with an authentication error. This can include a browser login and an API request with a token from that provider.
+- A request that needs a provider the cluster did not resolve yet fails with a server error, and not with an authentication error. This can include a browser login and an API request with a token from that provider.
+- A session that the cluster authenticated before the outage keeps its access token until the token expires. The refresh that follows fails, the cluster ends the session, and the request gets an authentication error.
 - All other requests succeed.
 - Each new request tries again. The cluster serves the failed traffic again when the provider answers. You do not need to restart the cluster.
+- The cluster holds no queue of failed requests, and it makes no attempt in the background. One request makes one attempt, thus the load on the provider is the rate of the requests that need it. The cluster keeps the first result that it gets, so the attempts stop when the provider answers.
 - A failed request writes a warning for the resolution that failed: a client registration, a token decoder, or a UserInfo endpoint lookup. The cluster writes at most one warning each minute for each of these. A minute without a failed request writes nothing.
 
 An unreachable provider no longer stops the cluster from starting. This warning is your only signal that part of the authentication traffic fails. Monitor your log pipeline for `WARN` entries of the logger `io.camunda.security.spring.oidc.DeferredOidcResolution`. Each entry starts with `Failed to resolve`.
