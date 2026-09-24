@@ -852,7 +852,7 @@ In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its AP
 
 **Action:** Change these API clients to OIDC bearer tokens before you upgrade to 8.10. Then remove `api.accessToken` from your configuration.
 
-**Alternative:** The static token works only if you opt into the 8.9 security fallback with `optimize.security.csl.enabled=false`. Camunda 8.11 will remove this fallback and the legacy configuration keys. Migrate these API clients during 8.10.
+**Alternative:** The static token works only if you opt into the 8.9 component-specific configuration fallback with `optimize.security.csl.enabled=false`. Camunda 8.11 will remove this fallback and the legacy configuration keys. Migrate these API clients during 8.10.
 
 <p className="link-arrow">[Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md)</p>
 
@@ -884,11 +884,11 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 
 #### `optimize.security.csl.enabled=false` fallback is temporary
 
-If the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL) causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+If the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL) causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 component-specific configuration. This fallback, the 8.9 behavior it restores, and the legacy configuration keys are all removed in Camunda 8.11.
 
 **Action:** Treat this as a temporary escape hatch, not a supported long-term mode. If you rely on it in 8.10, migrate to CSL before upgrading to 8.11.
 
-<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-security-stack)</p>
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-component-specific-configuration)</p>
 
 </div>
 </div>

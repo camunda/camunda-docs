@@ -39,7 +39,7 @@ If you deploy with the Camunda Helm chart, you don't need to set these directly.
 
 The Optimize API accepts OIDC bearer tokens. A client gets a token from your IdP with the client credentials flow, then sends the token in the `Authorization` header. Add the audience that your IdP issues for the client to `camunda.security.authentication.oidc.audiences`.
 
-Camunda 8.10 no longer accepts the static token `api.accessToken` on this API. The token works only if you opt into the [8.9 security fallback](#fall-back-to-the-89-security-stack), which Camunda 8.11 will remove. Migrate these API clients to OIDC bearer tokens during 8.10. For the token steps, see [Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md).
+Camunda 8.10 no longer accepts the static token `api.accessToken` on this API. The token works only if you opt into the [8.9 component-specific configuration fallback](#fall-back-to-the-89-component-specific-configuration), which Camunda 8.11 will remove. Migrate these API clients to OIDC bearer tokens during 8.10. For the token steps, see [Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md).
 
 ## Legacy configuration keys are deprecated
 
@@ -51,7 +51,7 @@ If you're deploying Camunda 8.10 for the first time, none of this applies to you
 
 See [Upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping, precedence rules, and the keys that no longer have any effect.
 
-## Fall back to the 8.9 security stack
+## Fall back to the 8.9 component-specific configuration
 
 If the 8.10 authentication changes cause a regression in your deployment, you can temporarily revert Optimize to its 8.9 behavior:
 
