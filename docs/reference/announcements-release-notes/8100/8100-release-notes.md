@@ -53,6 +53,16 @@ Your AI agents can now use Claude models hosted by Microsoft Foundry (Azure), th
 The custom or compatible endpoint backends for both the Anthropic and OpenAI providers now support **OAuth 2.0 client credentials**. Use this authentication method with internal gateways that issue bearer tokens instead of accepting static API keys.
 
 <p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#anthropic)</p>
+#### Readable model reasoning in Operate
+
+<!-- https://github.com/camunda/product-hub/issues/3462
+https://github.com/camunda/camunda/issues/62266 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+Operate now displays readable model reasoning as an inline **Thinking** entry in the conversation history. [Migrate to the AI Agent element templates introduced in 8.10](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) to display reasoning where supported.
+
+<p class="link-arrow">[Monitor AI agent reasoning in Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md#step-4-review-the-conversation-history)</p>
 
 ### Camunda Hub
 

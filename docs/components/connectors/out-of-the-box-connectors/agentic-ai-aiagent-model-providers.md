@@ -329,8 +329,17 @@ Select this provider to use a custom chat model provider implementation that you
 
 Implementing a custom provider requires building and registering a chat model provider with your Self-Managed or hybrid connector runtime, similar to how [custom conversation storage backends](./agentic-ai-aiagent-customization.md#custom-conversation-storage) are registered.
 
-## Missing a field?
+## Customize AI backend requests
 
-Most backends also provide advanced, low-level customization fields: **HTTP headers**, **query parameters**, and **body properties**. With these fields, you can add or override values in the outgoing HTTP request.
+Most backends provide advanced, low-level fields for customizing outgoing HTTP requests:
 
-If you don't see these fields on the provider or backend you selected, that's expected for backends with a well-known REST-style API surface, such as the native Anthropic API, OpenAI API, and Google Gemini or Enterprise Agent Platform backends: the fields are reserved for internal or future use and aren't exposed in the properties panel there. For backends without a fixed request structure, such as AWS Bedrock Converse and custom or compatible endpoints, the fields are exposed as editable [FEEL](/components/modeler/feel/what-is-feel.md) map expressions, which you can use to adapt the request to your deployment.
+- **HTTP headers**
+- **Query parameters**
+- **Body properties**
+
+Use these fields to add or override values in the request.
+
+Whether these fields are available depends on the selected provider or backend:
+
+- For backends with a well-known REST-style API, such as the native Anthropic API, OpenAI API, Google Gemini, and Enterprise Agent Platform backends, these fields are reserved for internal or future use and are not exposed in the properties panel.
+- For backends without a fixed request structure, such as AWS Bedrock Converse and custom or compatible endpoints, these fields are available as editable [FEEL](/components/modeler/feel/what-is-feel.md) map expressions. You can use them to adapt the request to your deployment.
