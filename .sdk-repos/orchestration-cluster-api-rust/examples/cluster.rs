@@ -70,6 +70,17 @@ async fn get_cluster_topology() -> Result<(), Box<dyn std::error::Error>> {
 }
 // endregion GetClusterTopology
 
+// region GetClusterUpgradeStatus
+async fn get_cluster_upgrade_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client.get_cluster_upgrade_status().await?;
+    println!("Upgrade-readiness status: {:?}", result.status);
+
+    Ok(())
+}
+// endregion GetClusterUpgradeStatus
+
 // region TriggerClusterRebalance
 async fn trigger_cluster_rebalance() -> Result<(), Box<dyn std::error::Error>> {
     let client = CamundaClient::from_env()?;
