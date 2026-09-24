@@ -54,7 +54,7 @@ If you had a custom **Endpoint** configured in the legacy template:
 | :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Endpoint     | Select **Backend**: [Anthropic](./agentic-ai-aiagent-model-providers.md#anthropic) > Custom / compatible endpoint, and enter it as **API endpoint**. |
 
-The custom / compatible backend also supports **OAuth 2.0** client credentials, for a gateway in front of Anthropic that requires a bearer token.
+The custom or compatible backend also supports **OAuth 2.0 client credentials** for gateways in front of Anthropic that require a bearer token.
 
 The new template additionally exposes **Effort**, **Thinking mode**, and **Enable prompt caching**. None of these have a legacy equivalent.
 
