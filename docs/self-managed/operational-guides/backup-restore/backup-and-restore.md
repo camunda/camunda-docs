@@ -206,7 +206,7 @@ Configure non-overlapping backup locations before starting the cluster. Camunda 
 
 ### Choose a restore approach
 
-With Camunda 8.10 and the introduction of the Restore API, there are now two ways to restore Zeebe partitions, the Restore API and the legacy Restore Application. Using the Restore API means that the brokers do not need to undergo a restart and can continue service other physical tenants while the restore is in progress. The legacy Restore Application, on the other hand, requires stopping all brokers to perform the restore.
+With Camunda 8.10 and the introduction of the Restore API, there are now two ways to restore Zeebe partitions, the Restore API and the legacy Restore Application. With the Restore API, the brokers do not need to restart. Instead, the cluster switches into recovery mode, where it processes no work until the restore completes. The legacy Restore Application, on the other hand, requires stopping all brokers to perform the restore.
 
 ### ContextPath
 

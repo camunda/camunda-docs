@@ -58,9 +58,9 @@ export const rdbmsCards = [
   },
   {
     link: "../rdbms/rdbms-restore",
-    title: "Restore a backup ",
+    title: "Restore a backup",
     image: IconRepeat,
     description:
-      "Perform a restore of all components while using an RDBMS as secondary storage.",
+      "Restore Zeebe, Operate, Tasklist, and Admin while using an RDBMS as secondary storage. Optimize and Management Identity are not included.",
   },
 ];
