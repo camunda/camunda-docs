@@ -793,9 +793,9 @@ The Orchestration Cluster checks its OIDC configuration at startup and writes a 
 
 #### Orchestration Cluster starts when an identity provider is unreachable
 
-The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is down no longer stops the cluster from starting. The cluster serves all requests that it can authenticate without that provider, and fails only the requests that need it. Each new request tries again, thus the traffic recovers when the provider answers, and you do not need a restart. A failed request writes a warning that gives the provider, its issuer, and the scope, at most once each minute for each of these.
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is down no longer stops the cluster from starting. The cluster serves all requests that it can authenticate without that provider, and fails only the requests that need it, such as browser login requests and token-validation requests for that provider. Each new request tries again, so the traffic recovers when the provider answers, and you do not need a restart. A failed request writes a warning that gives the provider, its issuer, and the scope, at most once each minute for each of these.
 
-**Action:** If you used a failed startup to detect an unreachable identity provider, alert on that warning instead. The warning follows the traffic, so add a synthetic request if you must detect an outage that no user request reaches.
+**Action:** If you used a failed startup to detect an unreachable identity provider, alert on the `DeferredOidcResolution` warning instead. The warning follows the traffic, so add a synthetic request if you must detect an outage that no user request reaches.
 
 <p className="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
 </div>
