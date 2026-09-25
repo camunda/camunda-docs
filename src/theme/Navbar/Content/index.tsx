@@ -66,7 +66,13 @@ function WhatsNewBadge() {
       : "/docs";
 
   return (
-    <Link to={`${basePath}/${page.docPath}/`} className={styles.whatsNewBadge}>
+    <Link
+      to={`${basePath}/${page.docPath}/`}
+      className={styles.whatsNewBadge}
+      title={`See what's new in ${
+        resolvedVersion?.label ?? "this release"
+      } and how to upgrade`}
+    >
       <svg
         className={styles.rocketIcon}
         viewBox="0 0 24 24"
