@@ -17,6 +17,4 @@ Log in with the email address and password you used in the previous form, or use
 
 ![login](./../img/login.png)
 
-After login, select the square-shaped **Camunda components** icon in the upper-left corner, and select **Console** to view the Console overview page. This is the central place to manage the clusters, diagrams, and forms you want to deploy to Camunda 8.
-
-![overview-home](./../img/home.png)
+After login, you're brought directly to [Camunda Hub](/components/hub/index.md). From here, you can manage your clusters, workspaces, projects, and other organizational resources.

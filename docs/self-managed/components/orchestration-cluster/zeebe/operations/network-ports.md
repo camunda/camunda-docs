@@ -50,28 +50,29 @@ Environment Variables
 
 The broker needs to receive communication from the gateway and from other brokers. It also exposes a port for monitoring.
 
-- `zeebe.broker.network.commandApi.port: 26501`: Gateway-to-broker communication, using an internal SBE (Simple Binary Encoding) protocol. This is the Command API port. This should be exposed to the gateway.
-- `zeebe.broker.network.internalApi.port: 26502`: Inter-broker clustering using the Gossip and Raft protocols for partition replication, broker elections, topology sharing, and message subscriptions. This should be exposed to other brokers and the gateway.
-- `zeebe.broker.network.monitoringApi.port: 9600`: Metrics and Readiness Probe. Prometheus metrics are exported on the route `/metrics`. There is a readiness probe on `/ready`.
+- `camunda.cluster.network.command-api.port: 26501`: Gateway-to-broker communication, using an internal SBE (Simple Binary Encoding) protocol. This is the Command API port. This should be exposed to the gateway.
+- `camunda.cluster.network.internal-api.port: 26502`: Inter-broker clustering using the Gossip and Raft protocols for partition replication, broker elections, topology sharing, and message subscriptions. This should be exposed to other brokers and the gateway.
+- `management.server.port: 9600`: Metrics and Readiness Probe. Prometheus metrics are exported on the route `/metrics`. There is a readiness probe on `/ready`. This is the same port the [management API](./management-api.md) is served on.
 
 The relevant [configuration](../configuration/configuration.md) settings are:
 
 ```
 Config file
-    zeebe:
-      broker:
+    camunda:
+      cluster:
         network:
-          commandAPI:
+          command-api:
             port: 26501
-          internalAPI:
+          internal-api:
             port: 26502
-          monitoringApi
-            port: 9600
+    management:
+      server:
+        port: 9600
 
 Environment Variables
-  ZEEBE_BROKER_NETWORK_COMMANDAPI_PORT = 26501
-  ZEEBE_BROKER_NETWORK_INTERNALAPI_PORT = 26501
-  ZEEBE_BROKER_NETWORK_MONITORINGAPI_PORT = 26501
+  CAMUNDA_CLUSTER_NETWORK_COMMANDAPI_PORT = 26501
+  CAMUNDA_CLUSTER_NETWORK_INTERNALAPI_PORT = 26502
+  MANAGEMENT_SERVER_PORT = 9600
 ```
 
 </TabItem>

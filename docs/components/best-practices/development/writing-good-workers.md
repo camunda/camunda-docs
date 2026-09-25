@@ -117,8 +117,9 @@ We recommend enabling [job streaming](../../concepts/job-workers.md#job-streamin
 your job workers have to periodically poll every partition in your Zeebe cluster to check if there are new jobs available. Additionally, they have to
 balance polling aggressively with minimizing their impact on the cluster, which still has to handle all requests, even when no jobs are available. In large clusters, this can add a noticeable delay in the order of seconds, which can be unacceptable for certain workloads.
 
-> [!Note]
-> You can read more about the difference between long polling and job streaming [in this blog post](https://camunda.com/blog/2024/03/reducing-job-activation-delay-zeebe/).
+:::note
+You can read more about the difference between long polling and job streaming [in this blog post](https://camunda.com/blog/2024/03/reducing-job-activation-delay-zeebe/).
+:::
 
 As such, we recommend using job streaming if possible.
 
