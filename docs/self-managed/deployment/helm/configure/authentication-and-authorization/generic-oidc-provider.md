@@ -171,6 +171,28 @@ If `offline_access` is not available or not granted, users will be redirected to
 For more information, see [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
 :::
 
+## Handle separate access token and ID token signing keys
+
+Most OIDC providers sign access tokens and ID tokens with the same key, published at the single `jwks_uri` in the discovery document. Some enterprise identity provider deployments sign access tokens with a different key than ID tokens. Camunda validates access tokens on every API request and ID tokens only during the login callback, so if you configure only the discovery document's `jwksUrl`, access token validation fails even though login succeeds.
+
+To check whether this applies to your provider, compare the `jwks_uri` in the discovery document against the JWKS endpoint listed for access tokens (or API and runtime tokens) in your provider's admin console. If both are the same URL, skip this section.
+
+If the URLs differ, configure both endpoints:
+
+- Set `global.identity.auth.jwksUrl` to the **access token** JWKS endpoint. Management Identity validates access tokens using this single URL only, and doesn't call the userinfo endpoint or fall back to any other source.
+- Add the same URL as an additional JWKS source for the Orchestration Cluster, which otherwise fetches only the primary JWKS from the discovery document:
+
+  ```yaml
+  orchestration:
+    env:
+      - name: CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ADDITIONALJWKSETURIS_0_
+        value: "<access-token-jwks-url>"
+  ```
+
+  This setting has no dedicated Helm value. It maps to the Spring Boot list property `camunda.security.authentication.oidc.additionalJwkSetUris`, set through `orchestration.env` using Spring's relaxed-binding convention for list properties: one environment variable per index, with the index surrounded by underscores (`..._0_`, `..._1_`, and so on).
+
+The Orchestration Cluster merges keys from the primary JWKS endpoint and all additional endpoints, then selects whichever key matches the `kid` in the incoming token. Both ID tokens and access tokens then validate correctly, regardless of which key set signed them.
+
 ## Create secrets
 
 Create a secret in your Kubernetes namespace that contains all OIDC client secrets:
@@ -188,7 +210,6 @@ The secret key `webmodeler-api-client-secret` is not used elsewhere in this guid
 :::
 
 The PostgreSQL credentials for Management Identity and Camunda Hub are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
-
 :::tip Alternative secret management
 For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended) for more options.
 :::
@@ -268,6 +289,8 @@ identity:
       existingSecret: pg-identity-secret
       existingSecretKey: password
 ```
+
+Management Identity requires an externally managed PostgreSQL database. Provision the database before you deploy, and adapt the connection values and secret references to your setup. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 #### Identity-specific parameters
 
@@ -567,7 +590,6 @@ identity:
     secret:
       existingSecret: pg-identity-secret
       existingSecretKey: password
-
 # Optimize
 optimize:
   enabled: true
