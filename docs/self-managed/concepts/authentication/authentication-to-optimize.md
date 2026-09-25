@@ -62,4 +62,4 @@ optimize:
       enabled: false
 ```
 
-Treat this as a temporary escape hatch, not a supported long-term mode. `optimize.security.csl.enabled=false`, the 8.9 behavior it restores, and the legacy configuration keys are all removed in Camunda 8.11. If you rely on this fallback in 8.10, migrate to the `camunda.security.*` settings before upgrading to 8.11.
+Treat this as a temporary escape hatch, not a supported long-term mode. Camunda plans to remove `optimize.security.csl.enabled=false`, the 8.9 behavior it restores, and the component-specific configuration keys in a future release. If you rely on this fallback in 8.10, migrate to the `camunda.security.*` settings as soon as you can.
