@@ -1,6 +1,6 @@
 ---
 id: hub-dashboard
-title: Hub dashboard
+title: View Hub dashboard
 description: "Use the Hub dashboard to view clusters, alerts, recent activity, instances, and more."
 ---
 
@@ -19,4 +19,4 @@ From the Hub dashboard, you can view:
 
 ## View the dashboard
 
-To view the Hub dashboard, under **Console** in the left navigation, click **Dashboard**.
+To view the Hub dashboard, click **Console**.

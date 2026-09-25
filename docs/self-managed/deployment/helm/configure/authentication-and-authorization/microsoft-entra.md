@@ -7,6 +7,10 @@ description: Learn how to connect the Camunda Helm chart to a Microsoft Entra te
 
 This guide shows you how to configure the Helm chart to use a Microsoft Entra tenant, with each Camunda component using a dedicated OIDC or OAuth client.
 
+:::info Bitnami subcharts removed in Camunda 8.10
+Earlier releases bundled PostgreSQL through Bitnami subcharts (`identityPostgresql`, `webModelerPostgresql`). As of Camunda 8.10 (Helm chart `15.x`), the bundled Bitnami subcharts are removed: provide PostgreSQL with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database, as shown in the examples below.
+:::
+
 ## Prerequisites
 
 Before you begin, ensure you have:
@@ -14,7 +18,11 @@ Before you begin, ensure you have:
 - Access to a Microsoft Entra tenant with permission to create applications and app registrations
 - The ID of your tenant
 - An understanding of the structure and claims of access tokens in Entra
-- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
+
+If your Entra issuer presents a certificate signed by a private or internal certificate authority, Camunda components don't trust certificates signed by that CA by default.
+
+Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) to avoid `PKIX path building failed` errors when components connect to the issuer.
 
 ## Configuration
 
@@ -24,6 +32,7 @@ To use Microsoft Entra, complete the following steps:
 1. [Create applications in Entra](#create-applications-in-entra)
 1. [Create secrets](#create-secrets)
 1. [Configure components using OIDC](#configure-components-using-oidc)
+1. [Configure machine-to-machine (M2M) API access](#configure-machine-to-machine-m2m-api-access)
 
 See the [full configuration example](#full-configuration-example) for the complete setup.
 
@@ -108,9 +117,7 @@ If you plan to expose the services only on `localhost` (as described later in th
 
 ### Create secrets
 
-Create two secrets in your Kubernetes namespace.
-
-First, create a secret that contains all OIDC client secrets:
+Create a secret in your Kubernetes namespace that contains all OIDC client secrets:
 
 ```
 kubectl create secret generic entra-credentials \
@@ -129,27 +136,9 @@ In Camunda configuration, this value is referred to as a _client secret_ to alig
 The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-Next, create a secret with the remaining credentials for the Camunda Helm chart:
+The PostgreSQL credentials for Management Identity and Camunda Hub are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
-```
-kubectl create secret generic camunda-credentials \
-  --from-literal=identity-postgresql-admin-password=CHANGE_ME \
-  --from-literal=identity-postgresql-user-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-admin-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-user-password=CHANGE_ME
-```
-
-Unlike the OIDC client secrets, these passwords initialize the component databases.
-You can choose any values.
-
-This secret includes the following keys:
-
-- `identity-postgresql-admin-password`: Password for the administrative PostgreSQL account used by Management Identity (`postgres`).
-- `identity-postgresql-user-password`: Password for the non-privileged PostgreSQL account used by Management Identity (`bn_keycloak`).
-- `literal=webmodeler-postgresql-admin-password`: Password for the administrative PostgreSQL account used by Web Modeler (`postgres`).
-- `webmodeler-postgresql-user-password` Password for the non-privileged PostgreSQL account used by Web Modeler (`web-modeler`).
-
-For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
+For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended).
 
 ### Configure components using OIDC
 
@@ -227,7 +216,7 @@ For more information, see the [Orchestration Cluster OIDC configuration guide](/
 :::note Username display in Web Modeler (Helm)
 With Helm defaults, usernames are typically resolved from `preferred_username`. If you want Web Modeler to use the `name` claim instead (for example, to show display names), set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
-See [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
+See [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak).
 :::
 
 #### Configure Connectors
@@ -266,14 +255,15 @@ global:
 
 identity:
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "identity-postgresql-admin-password"
-      userPasswordKey: "identity-postgresql-admin-password"
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    username: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 ```
 
 Replace `<IDENTITY_URL>` with the base URL of Management Identity as it will be reachable from your users' browser. For local deployment, use `http://localhost:8084`.
@@ -338,26 +328,26 @@ global:
         publicApiAudience: "<web-modeler-api-app-id>"
         redirectUrl: "<WEB_MODELER_URL>"
 
-webModeler:
-  enabled: true
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: noreply@example.com
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "webmodeler-postgresql-admin-password"
-      userPasswordKey: "webmodeler-postgresql-user-password"
+    externalDatabase:
+      host: pg-hub-rw
+      port: 5432
+      database: hub
+      username: hub
+      secret:
+        existingSecret: pg-hub-secret
+        existingSecretKey: password
 ```
 
 Replace `<WEB_MODELER_URL>` with the base URL of Web Modeler as it will be reachable from your users' browser. For local deployment, use `http://localhost:8070`.
 
-You can update `webModeler.restapi.mail.fromAddress` with an address suitable for your environment.
+You can update `camundaHub.restapi.mail.fromAddress` with an address suitable for your environment.
 This address appears as the sender in emails sent by Web Modeler.
-For more details on configuring email delivery, see the [Web Modeler section in Enable additional Camunda components](../enable-additional-components.md#web-modeler).
+For more details on configuring email delivery, see the [Camunda Hub section in Enable additional Camunda components](../enable-additional-components.md#camunda-hub).
 
 #### Configure Console
 
@@ -371,10 +361,9 @@ global:
         clientId: "<console-app-id>"
         audience: "<console-app-id>"
         redirectUrl: "http://localhost:8087"
-
-console:
-  enabled: true
 ```
+
+Console is deployed by Camunda Hub, which you enabled in the [Configure Web Modeler](#configure-web-modeler) step; the configuration above only defines its OIDC client.
 
 ### Full configuration example
 
@@ -464,14 +453,15 @@ connectors:
 
 identity:
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "identity-postgresql-admin-password"
-      userPasswordKey: "identity-postgresql-admin-password"
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    username: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 
 optimize:
   enabled: true
@@ -484,22 +474,19 @@ optimize:
         host: "<elasticsearch-host>"
         port: 9200
 
-webModeler:
-  enabled: true
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: noreply@example.com
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "webmodeler-postgresql-admin-password"
-      userPasswordKey: "webmodeler-postgresql-user-password"
-
-console:
-  enabled: true
+    externalDatabase:
+      host: pg-hub-rw
+      port: 5432
+      database: hub
+      username: hub
+      secret:
+        existingSecret: pg-hub-secret
+        existingSecretKey: password
 ```
 
 ### Connect to the cluster
@@ -534,6 +521,55 @@ For example:
 - Orchestration Cluster: `http://localhost:8080` (redirects you to Entra for login)
 - Management Identity: `http://localhost:8084`
 - Console: `http://localhost:8087`
+
+## Configure machine-to-machine (M2M) API access
+
+Job workers, Connectors, and other applications that call the Orchestration Cluster REST or gRPC API without a user present use the OAuth client credentials grant instead of interactive login.
+
+In this section, you register a dedicated Entra application for M2M access and configure a Camunda client to use it.
+
+For the general, provider-agnostic explanation of this flow, see [machine-to-machine (M2M) API access](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#machine-to-machine-m2m-api-access).
+
+### Register an M2M application in Entra
+
+1. In the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for your job worker or Connector. You do not need to configure a redirect URI or a platform type, since this application never redirects a user's browser.
+1. On the application's **Overview** page, note the **Client ID**. This value is your M2M client's `clientId`.
+1. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials) and record the secret **value**.
+1. Confirm the application supports the `client_credentials` grant type. This is enabled by default; see [Ensure Entra prerequisites](#ensure-entra-prerequisites).
+1. Grant the application access to the Orchestration Cluster API. Reuse the `<oc-app-id>/.default` scope from the Orchestration Cluster app registration, or [expose an API permission](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-expose-web-apis) specific to your M2M client and grant admin consent for it.
+
+### Configure the Camunda client
+
+Configure your job worker, Connector runtime, or custom application to request tokens from Entra using client credentials. Camunda clients (the Java client, the Spring Boot starter, and the Connector runtime) read these settings from `CAMUNDA_CLIENT_AUTH_*` environment variables or the equivalent `camunda.client.auth.*` properties:
+
+```
+CAMUNDA_CLIENT_AUTH_METHOD=oidc
+CAMUNDA_CLIENT_AUTH_CLIENTID=<m2m-app-id>
+CAMUNDA_CLIENT_AUTH_CLIENTSECRET=<m2m-app-secret>
+CAMUNDA_CLIENT_AUTH_TOKENURL=https://login.microsoftonline.com/<tenant id>/oauth2/v2.0/token
+CAMUNDA_CLIENT_AUTH_AUDIENCE=<oc-app-id>
+CAMUNDA_CLIENT_AUTH_SCOPE=<oc-app-id>/.default
+```
+
+```yaml
+camunda:
+  client:
+    auth:
+      method: oidc
+      client-id: <m2m-app-id>
+      client-secret: <m2m-app-secret>
+      token-url: https://login.microsoftonline.com/<tenant id>/oauth2/v2.0/token
+      audience: <oc-app-id>
+      scope: <oc-app-id>/.default
+```
+
+Replace `<oc-app-id>` with the Orchestration Cluster application's client ID from [Create applications in Entra](#create-applications-in-entra), and `<tenant id>` with your Microsoft Entra tenant ID.
+
+:::note
+For the client credentials flow, request the `<oc-app-id>/.default` scope. This tells Entra to issue a token for the statically configured application permissions on the API rather than the delegated permissions used during interactive login.
+:::
+
+The Orchestration Cluster identifies this client using the `azp` claim, configured as `clientIdClaim: azp` in [Configure Orchestration Cluster](#configure-orchestration-cluster). By default, requests from this client can only retrieve the cluster topology. To grant it access to other APIs, [configure authorizations](/components/concepts/access-control/authorizations.md) for its client ID.
 
 ## Grant access to components
 

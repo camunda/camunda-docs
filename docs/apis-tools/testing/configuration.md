@@ -891,6 +891,45 @@ private static final CamundaProcessTestExtension EXTENSION =
 
 </Tabs>
 
+## Query page limit
+
+CPT paginates the individual search requests used by assertions, utilities, and the coverage report, with a default page limit of 100 results. If your process tests create a lot of data, such as many process instances or a process with a multi-instance activity, assertions can fail or the coverage report can be incomplete. In that case, increase the query page limit.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    query-page-limit: 1000
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+queryPageLimit=1000
+```
+
+</TabItem>
+
+</Tabs>
+
+### Property reference
+
+| Property           | Type      | Default | Description                                              |
+| ------------------ | --------- | ------- | -------------------------------------------------------- |
+| `query-page-limit` | `integer` | `100`   | The maximum number of results to return per paged query. |
+
 ## Test cleanup settings {#test-cleanup-settings}
 
 After each test, CPT resets the Camunda runtime clock and deletes all runtime data by default. You can disable either behavior to inspect the process state after a test run.

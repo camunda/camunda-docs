@@ -534,6 +534,10 @@ Returned if:
 
 ## `DeleteResource` RPC
 
+Deletes a resource (a process definition, decision requirements definition, or form) identified by its key.
+
+Deleting a process definition that still has running instances no longer fails. The definition starts draining: new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically once its last instance finishes. See [resource deletion](../../components/concepts/resource-deletion.md#draining).
+
 ### Input `DeleteResourceRequest`
 
 ```protobuf
@@ -559,12 +563,6 @@ Returned if:
 
 - No resource exists with the given key.
 - No resource was found with the given key for the tenants the user is authorized to work with.
-
-#### GRPC_STATUS_FAILED_PRECONDITION
-
-Returned if:
-
-- The deleted resource is a process definition, and there are running instances for this process definition.
 
 ## `DeployResource` RPC
 
