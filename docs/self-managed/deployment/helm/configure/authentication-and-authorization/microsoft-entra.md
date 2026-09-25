@@ -20,6 +20,10 @@ Before you begin, ensure you have:
 - An understanding of the structure and claims of access tokens in Entra
 - When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
+If your Entra issuer presents a certificate signed by a private or internal certificate authority, Camunda components don't trust certificates signed by that CA by default.
+
+Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) to avoid `PKIX path building failed` errors when components connect to the issuer.
+
 ## Configuration
 
 To use Microsoft Entra, complete the following steps:
