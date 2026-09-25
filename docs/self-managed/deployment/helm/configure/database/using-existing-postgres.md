@@ -31,7 +31,7 @@ CREATE DATABASE "web-modeler";
 CREATE DATABASE "management-identity";
 ```
 
-- **Kubernetes secrests:** Store the database password in a Kubernetes secret so it is not referenced in plain text within your values.yaml (This secret exists outside the Helm chart and will not be overwritten by subsequent helm upgrade commands). For example:
+- **Kubernetes secrets:** Store the database password in a Kubernetes secret so it is not referenced in plain text within your values.yaml (This secret exists outside the Helm chart and will not be overwritten by subsequent helm upgrade commands). For example:
 
 ```bash
 kubectl create secret generic camunda-psql-db --from-literal=password=examplePassword -n camunda
