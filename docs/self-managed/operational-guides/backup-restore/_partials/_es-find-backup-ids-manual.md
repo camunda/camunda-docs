@@ -1,8 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-**Find available backup IDs**
-
 With the active environment that was required to restore the datastore templates you can quickly work out available backups, using the backup APIs for each component to list available backups.
 
 :::note

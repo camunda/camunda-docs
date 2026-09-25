@@ -1,8 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-**Restore the snapshots**
-
 Although the backup order was important so far to ensure consistent backups, you can restore the backed up indices in any order.
 
 As the components do not have an endpoint to restore the backup in Elasticsearch, you will need to restore it yourself directly in your selected datastore.

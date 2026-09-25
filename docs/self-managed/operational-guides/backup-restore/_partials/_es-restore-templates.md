@@ -1,8 +1,6 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-**Restore templates**
-
 :::note
 This step is only required for restoring an Elasticsearch/OpenSearch snapshot on a fresh cluster.
 :::

@@ -28,7 +28,7 @@ import RestoreSnapshotsAction from '../\_partials/\_es-restore-snapshots-action.
 
 Restore Zeebe partition data with the legacy Restore Application, a standalone app that runs on each broker node while all Camunda components are stopped, when using Elasticsearch or OpenSearch as secondary storage.
 
-This page is part of the Elasticsearch/OpenSearch [restore procedure](./restore.md). With Camunda 8.10 and later, you can use the [Restore API](./restore-api.md) instead, which does not require restarting the brokers. To compare the two, see [choosing a restore approach](../backup-and-restore.md#choosing-a-restore-approach).
+This page is part of the Elasticsearch/OpenSearch [restore procedure](./restore.md). With Camunda 8.10 and later, you can use the [Restore API](./restore-api.md) instead, which does not require restarting the brokers.
 
 ## Prerequisites
 
@@ -44,13 +44,23 @@ In addition to the [general restore prerequisites](./restore.md#prerequisites), 
 
 Restore the Elasticsearch/OpenSearch snapshots in five steps, then continue with restoring the Zeebe cluster below.
 
+### 1. Restore templates
+
 <RestoreTemplates />
+
+### 2. Find available backup IDs
 
 <FindBackupIdsManual />
 
+### 3. Stop all components apart from Elasticsearch/OpenSearch {#stop-all-components}
+
 <StopComponentsLegacy />
 
+### 4. Delete all indices
+
 <DeleteIndices />
+
+### 5. Restore the snapshots
 
 <RestoreSnapshotsAction />
 
@@ -81,7 +91,7 @@ Camunda provides a standalone app which must be run on each node where a Zeebe B
 :::warning
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count **must be same** as in the backup.
 
-The amount of partitions backed up are also visible in the backup store of Zeebe; see the available backups of Zeebe partitions you found in [step 1](#restore-es-snapshots-step) above.
+The amount of partitions backed up are also visible in the backup store of Zeebe; see the available backups of Zeebe partitions you found when [finding available backup IDs](#find-available-backup-ids) above.
 If brokers were dynamically scaled between backup and restore, this is not an issue - as long as the partition count remains unchanged.
 :::
 
