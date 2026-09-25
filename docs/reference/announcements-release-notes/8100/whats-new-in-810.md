@@ -45,7 +45,7 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 </div>
 
-:::info Release information
+:::note Release information
 
 For a full summary of what's included in Camunda 8.10, including all breaking changes, deprecations, and supported environment changes, see [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
 
@@ -88,7 +88,7 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Camunda Hub](#camunda-hub)</td>
-    <td>Camunda Hub is now the single place where teams build, govern, and run process solutions in Camunda. Hub replaces Web Modeler and Console.</td>
+    <td>Build, govern, and run your process solutions. Hub replaces Web Modeler and Console.</td>
 </tr>
 <tr>
     <td>[Multi-region resilience](#multi-region-resilience)</td>
@@ -107,8 +107,8 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>The new visual design system is introduced for Admin, Camunda Hub, and Tasklist.</td>
 </tr>
 <tr>
-    <td>[Centralized secret resolution via Zeebe](#centralized-secret-resolution-via-zeebe)</td>
-    <td>Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.</td>
+    <td>[Centralized secret resolution](#centralized-secret-resolution-via-zeebe)</td>
+    <td>Reference credentials from customer-managed secret stores.</td>
 </tr>
 <tr>
     <td>[Connector operations](#connector-operations)</td>
@@ -124,7 +124,7 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Unified authentication](#unified-authentication-for-orchestration-cluster-camunda-hub-and-optimize)</td>
-    <td>The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through the Camunda Security Library.</td>
+    <td>Shared authentication implementation based on Orchestration Cluster authentication.</td>
 </tr>
 <tr>
     <td>[Wait states](#wait-states)</td>
