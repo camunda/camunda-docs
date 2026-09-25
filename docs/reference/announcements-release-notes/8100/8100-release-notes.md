@@ -95,8 +95,8 @@ The Orchestration Cluster contacts an OIDC provider at the first request that ne
 The Orchestration Cluster checks its OIDC configuration at startup, without contacting the provider, and writes a warning for each problem it finds. The cluster still starts.
 
 - The checks cover the client ID, the set of endpoints, the scope, and the shape of the redirect URI.
-- A redirect URI with no callback path falls back to `{baseUrl}/sso-callback`, which is the only callback path the cluster serves. Any other unusable value stays as configured, and the login fails later.
-- The warnings come from the logger `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory`.
+- A redirect URI with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`. Any other unusable value stays as configured, and the login fails later.
+- The warnings come from the loggers `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` and `io.camunda.security.spring.oidc.OidcRedirectionEndpoint`.
 
 <p class="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
 
