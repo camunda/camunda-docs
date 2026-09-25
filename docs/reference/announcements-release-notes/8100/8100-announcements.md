@@ -938,17 +938,34 @@ Starting with Camunda 8.10, Optimize authenticates through the same shared imple
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize static API access token is no longer supported
+
+In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its API. A request that carries the static token from `api.accessToken` (environment variable `OPTIMIZE_API_ACCESS_TOKEN`) gets a `401` response. This applies to the [Optimize API](/apis-tools/optimize-api/overview.md) and to the [external variable ingestion](/apis-tools/optimize-api/external-variable-ingestion.md) endpoint. The Camunda Helm chart and SaaS do not set this token. They configure OIDC for the Optimize API. You are affected only if you set the property or the environment variable yourself, for example as a property override or an extra environment variable in your Helm values.
+
+**Action:** Change the API clients that send the static token to OIDC bearer tokens before you upgrade to 8.10. Then remove `api.accessToken` from your configuration. If you need more time, set `optimize.security.csl.enabled=false`. This opts into the 8.9 component-specific configuration fallback, and the static token works again. Camunda plans to remove this fallback and the component-specific configuration keys in a future release.
+
+<p className="link-arrow">[Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
 
 #### Legacy Optimize security configuration keys deprecated
 
-With the move to the shared authentication implementation, the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. The legacy keys are removed in Camunda 8.11.
+With the move to the shared authentication implementation, the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. Camunda plans to remove these keys in a future release.
 
 Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
 
-**Action:** Migrate to the `camunda.security.*` keys before upgrading to 8.11. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
+**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
 
 </div>
 </div>
@@ -961,11 +978,11 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 
 #### `optimize.security.csl.enabled=false` fallback is temporary
 
-`optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. Use it only if your integrations depend on the static API access token that the 8.9 stack accepted, or if your migration to the `camunda.security.*` keys was misconfigured and you need a working deployment while you fix it. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+`optimize.security.csl.enabled=false` temporarily restores the 8.9 component-specific configuration. Use it only if your integrations depend on the static API access token that the 8.9 configuration accepted, or if your migration to the `camunda.security.*` keys was misconfigured and you need a working deployment while you fix it. Camunda plans to remove this fallback, the 8.9 behavior it restores, and the component-specific configuration keys in a future release.
 
-**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required before you can upgrade to 8.11.
+**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required.
 
-<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-security-stack)</p>
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-component-specific-configuration)</p>
 
 </div>
 </div>

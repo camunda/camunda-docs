@@ -35,6 +35,12 @@ Note the following:
 If you deploy with the Camunda Helm chart, you don't need to set these directly. The chart continues to read the same `global.identity.auth.optimize.*` values you already use, and renders them into the properties above for you.
 :::
 
+## Authenticate API requests
+
+The Optimize API accepts OIDC bearer tokens. For the client steps, see [Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md).
+
+Camunda 8.10 no longer accepts the static token `api.accessToken` on this API. The token works only if you opt into the [8.9 component-specific configuration fallback](#fall-back-to-the-89-component-specific-configuration), which Camunda plans to remove in a future release. Migrate the affected API clients to OIDC bearer tokens during 8.10.
+
 ## Legacy configuration keys are deprecated
 
 The Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement.
@@ -45,7 +51,7 @@ If you're deploying Camunda 8.10 for the first time, none of this applies to you
 
 See [Upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping, precedence rules, and the keys that no longer have any effect.
 
-## Fall back to the 8.9 security stack
+## Fall back to the 8.9 component-specific configuration
 
 If the 8.10 authentication changes cause a regression in your deployment, you can temporarily revert Optimize to its 8.9 behavior. Use this only if your integrations depend on the static API access token that the 8.9 stack accepted, or if your migration to the `camunda.security.*` keys was misconfigured and you need a working deployment while you fix it:
 
@@ -56,4 +62,4 @@ optimize:
       enabled: false
 ```
 
-Treat this as a temporary escape hatch, not a supported long-term mode. `optimize.security.csl.enabled=false`, the 8.9 behavior it restores, and the legacy configuration keys are all removed in Camunda 8.11. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required before you can upgrade to 8.11.
+Treat this as a temporary escape hatch, not a supported long-term mode. Camunda plans to remove `optimize.security.csl.enabled=false`, the 8.9 behavior it restores, and the component-specific configuration keys in a future release. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required.
