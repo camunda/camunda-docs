@@ -864,6 +864,49 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster warns about an incorrect OIDC configuration at startup
+
+The Orchestration Cluster checks its OIDC configuration at startup and writes a warning for each problem it finds. The cluster still starts.
+
+- The checks cover the client ID, the set of endpoints, the scope, and the shape of the redirect URI.
+- A redirect URI with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`.
+- Any other unusable value stays as configured, and the login fails later.
+
+**Action:** Review your startup logs after the upgrade. The warnings come from the loggers `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` and `io.camunda.security.spring.oidc.OidcRedirectionEndpoint`.
+
+<p className="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster starts when an identity provider is unreachable
+
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is down no longer stops the cluster from starting.
+
+- Only the requests that need that provider fail, such as browser login requests and token-validation requests. All other requests succeed.
+- A session that the cluster authenticated before the outage keeps its access token until the token expires. The refresh that follows fails, and the session ends.
+- Each new request tries again, so the traffic recovers when the provider answers, and you do not need a restart.
+- A failed request writes a warning that gives the provider, its issuer, and the scope, at most once each minute for each of these.
+
+**Action:** If you used a failed startup to detect an unreachable identity provider, alert on the `DeferredOidcResolution` warning instead. The warning follows the traffic, so add a synthetic request if you must detect an outage that no user request reaches.
+
+<p className="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
+
+</div>
+</div>
+
 ## Integrations
 
 <div className="release-announcement-row">
