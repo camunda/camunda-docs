@@ -138,7 +138,7 @@ This is limited product usage data from the Camunda SaaS applications, used to m
   <img src={CookiePrefsImg} alt="Cookie preferences in user settings" width="300px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
   <img src={AnalyticsImg} alt="Analytics opt-in menu" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
-- AI Usage: Camunda's AI features, currently available in SaaS only, are clearly labeled as AI features. Usage telemetry for these features, meaning which feature was invoked and how often, is telemetry data. Conversation content submitted to an AI feature is not telemetry data: it is content you provide to the feature, and it is covered separately below. These features must be enabled by the customer via opt-in in the [Console](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-ai-powered-features). Depending on the feature, they may collect different information.
+- AI Usage: Camunda's AI features, currently available in SaaS only, are clearly labeled as AI features. Usage telemetry for these features, meaning which feature was invoked and how often, is telemetry data. Conversation content submitted to an AI feature is not telemetry data: it is content you provide to the feature, and it is covered separately below. These features must be enabled by the customer via opt-in in [Camunda Hub](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-ai-powered-features). Depending on the feature, they may collect different information.
 
 #### AI conversation content
 

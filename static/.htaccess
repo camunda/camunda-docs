@@ -182,6 +182,9 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Adjust enable secure connectivity path to drop the "console" reference
+RewriteRule ^docs/next/components/saas/secure-connectivity/secure-connectivity-console-setup/?$ docs/next/components/saas/secure-connectivity/enable-secure-connectivity/ [R=301,L]
+
 # Microsoft Teams docs became App Integrations, which covers Slack as well (8.10)
 RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
 RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-installation/?$ /docs/next/components/camunda-integrations/app-integrations/installation/ [R=301,L]
@@ -216,6 +219,10 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administr
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 
+# TEMPORARY REDIRECT - This file didn't belong in 8.9. However, it was in production, so removing it broke builds (pr #10044).
+# We should be able to remove this redirect after we publish the docs to production, removing it from the sitemap.
+RewriteRule ^docs/self-managed/upgrade/helm/890-to-8100/?$ /docs/next/self-managed/upgrade/helm/890-to-8100/ [R=301,L]
+
 # 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)
 RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-89/?$ /docs/next/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
 
@@ -230,6 +237,8 @@ RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/us
 RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/?$ /docs/next/components/tasklist/userguide/starting-processes/ [R=301,L]
 
 # Redirects associated with Camunda Hub
+RewriteRule ^docs/next/components/modeler/forms/utilizing-forms/?$ docs/next/components/hub/workspace/modeler/modeling/utilize-forms [R=301,L]
+RewriteRule ^docs/next/components/modeler/using-web-and-desktop-modeler-together/?$ docs/next/components/modeler/using-hub-and-desktop-modeler-together [R=301,L]
 RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-users/manage-user-groups [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-users/ [R=301,L]
@@ -328,9 +337,6 @@ RewriteRule ^docs/next/guides/configuring-out-of-the-box-connectors/?$ /docs/com
 
 # Designing a process using BPMN
 RewriteRule ^docs/next/guides/automating-a-process-using-bpmn/?$ /docs/components/modeler/bpmn/automating-a-process-using-bpmn/ [R=301,L]
-
-# Create a user task form using Modeler
-RewriteRule ^docs/next/guides/utilizing-forms/?$ /docs/components/modeler/forms/utilizing-forms/ [R=301,L]
 
 # Self-Managed upgrade guide restructuring
 RewriteRule ^docs/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/self-managed/upgrade/ [R=301,L]
