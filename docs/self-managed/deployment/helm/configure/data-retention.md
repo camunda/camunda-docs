@@ -20,7 +20,7 @@ If you use an RDBMS as your secondary storage backend, implement retention and c
 ## Prerequisites
 
 - Camunda 8.8+ Helm chart deployment
-- Elasticsearch 7+ or OpenSearch 2.5+
+- A supported Elasticsearch or OpenSearch version. See [supported environments](/reference/supported-environments.md).
 - Access to modify your `values.yaml` file
 
 ## Configuration
