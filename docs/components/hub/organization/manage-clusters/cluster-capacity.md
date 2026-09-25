@@ -5,6 +5,9 @@ description: "Cluster load provides you with a high-level overview of how well a
 keywords: [capacity, "cluster capacity", load, "cluster load"]
 ---
 
+import CapacityImg from './img/cluster-capacity.png';
+import CapacityPercentImg from './img/cluster-capacity-percent.png';
+
 Use the cluster load metric to view and manage your cluster load and utilization.
 
 ## About cluster load
@@ -30,7 +33,13 @@ View cluster load in the **Clusters** page:
 
 1. In the left navigation under **Console**, click **Clusters**.
 1. In the table, find the **Cluster load** column.
+
+   <img src={CapacityPercentImg} alt="Example cluster load percentage" />
+
 1. Select a cluster to view detailed cluster load information in the cluster **Overview** tab.
+
+   <img src={CapacityImg} alt="Example cluster load" style={{width: '550px'}}/>
+
    - The current cluster load is shown as a percentage bar at the top of the section.
    - The chart shows detailed cluster load data for the last 24 hours, 7 days, or 30 days.
    - Select the time period you want to view data for.

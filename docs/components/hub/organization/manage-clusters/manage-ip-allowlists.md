@@ -13,5 +13,10 @@ Create an IP allowlist:
 
 1. In the left navigation under **Clusters**, select a cluster.
 1. On the **IP Allowlist** tab, click **Create an entry**.
+
+   ![cluster-details](./img/cluster-detail-ip-whitelists.png)
+
+   ![create-alert](./img/cluster-detail-create-ip-whitelist.png)
+
 1. Enter a list of IPs or CIDR blocks separated by commas.
 1. Enter an optional description for the allowlist.
