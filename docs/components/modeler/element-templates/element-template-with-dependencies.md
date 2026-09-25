@@ -6,6 +6,8 @@ description: "Learn what you need to consider when handling template dependencie
 
 When creating element templates, you may want to link to a resource like a [form](/components/modeler/forms/camunda-forms-reference.md), or pre-populate a [secret](/components/connectors/use-connectors/index.md#using-secrets) expression. Your template might require a specific [job worker](/components/concepts/job-workers.md) to execute an action. These are all examples of dependencies.
 
+<!-- source: https://www.figma.com/design/VyyoV0hNbazXV8DKcMMEU9/Camunda-Documentation-Assets?node-id=2092-171&t=iLUDOvmj8m6yUQ5U-1 -->
+
 ![Element template dependencies](./img/element-template-dependencies.png)
 
 Element templates can depend on:

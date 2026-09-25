@@ -53,7 +53,7 @@ When you **deploy** such a BPMN diagram with an inbound connector, the connector
 5. Deploy it to your Camunda 8 instance.
 
 :::note
-You can still start instances of that process manually via Modeler, which is sometimes useful during testing.
+You can still start instances of that process manually via Camunda Hub or Desktop Modeler, which is sometimes useful during testing.
 :::
 
 </TabItem>

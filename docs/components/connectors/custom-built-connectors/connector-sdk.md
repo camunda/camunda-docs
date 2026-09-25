@@ -557,6 +557,8 @@ pattern `{{secrets.*}}`. To make this mechanism as robust as possible, secret ha
 the connector SDK out of the box. That way, all connectors can use the same standard way of
 handling secrets in input data.
 
+`{{secrets.*}}` is the legacy syntax, resolved by the connector runtime. The recommended `camunda.secrets.<name>` syntax is resolved by the Orchestration Cluster before the job reaches the connector, so your connector receives the value already in place. See [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md) for how the two syntaxes differ and how to migrate.
+
 The SDK allows replacing secrets in input data as late as possible to avoid passing them around
 in the environments that handle connector invocation. We do not pass secrets into the
 Connector function in clear text but only as placeholders that you can replace from

@@ -308,6 +308,14 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 
 Whenever you send `history`, also send the `jobKey` and `jobLeaseToken` from the job activation. Camunda records each item with a `PENDING` commit status and promotes it to `COMMITTED` when the job completes successfully. If the job fails and a later activation supersedes the lease, the items are marked `DISCARDED` instead.
 
+:::note Usage metrics can be lost
+Camunda can only record usage metrics when your runtime reports them. If your runtime fails after interacting with the LLM but before it reports the usage, for example, if it crashes or loses connectivity, those metrics are lost, even though the LLM provider already processed and billed for the call.
+
+For the authoritative token counts and costs, always refer to your LLM provider's own usage reporting rather than relying solely on Camunda's metrics.
+
+You can still report those metrics under the new activation’s lease if you reconnect before the job is completed.
+:::
+
 The response echoes one entry per submitted item, in request order, with the `historyItemKey` Camunda assigned and an `isDuplicate` flag showing whether the item had already been recorded.
 
 ## Step 6: Complete the job
@@ -330,6 +338,6 @@ If your agent can't finish, [fail the job](/apis-tools/orchestration-cluster-api
 
 ## Step 7: Verify the agent in Operate
 
-Start a process instance and open it in Operate. Select the agent element on the diagram to see the agent instance data you reported: its state, usage metrics, model, system prompt, tools, and conversation history grouped by loop iteration.
+Start a process instance and [open it in Operate](/components/operate/userguide/basic-operate-navigation.md). Select the agent element on the diagram to see the agent instance data you reported: its state, usage metrics, model, system prompt, tools, and conversation history grouped by loop iteration.
 
 See [monitor your AI agents](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md) to learn how to inspect and debug AI agents in Operate.
