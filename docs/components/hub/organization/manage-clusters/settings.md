@@ -13,6 +13,8 @@ To manage your cluster settings in Camunda Hub SaaS:
 1. In the left navigation under **Clusters**, select a cluster.
 1. On the **Settings** tab, enable/disable cluster settings as required, or delete the cluster.
 
+![Cluster settings](./img/cluster-settings.png)
+
 :::tip
 In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
 :::

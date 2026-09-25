@@ -24,6 +24,8 @@ To create a cluster in SaaS:
 
 If you haven't created a cluster yet, the **Clusters** page will be empty. You can start modeling even if the cluster shows a **Creating** status.
 
+![cluster-creating-modal](./img/cluster-creating-modal.png)
+
 :::tip
 In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
 :::
@@ -34,6 +36,11 @@ After creating the cluster, you can view the new entry:
 
 1. In the left navigation under **Console**, click **Clusters**.
 1. The cluster is now being set up. During this phase, its state is **Creating**. After one or two minutes, the cluster is ready for use and changes its state to **Healthy**.
+
+   ![cluster-creating](./img/cluster-overview-new-cluster-creating.png)
+
+   ![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
+
 1. After the cluster is created, click the cluster name to visit the cluster detail page.
 
 ## Tag your cluster

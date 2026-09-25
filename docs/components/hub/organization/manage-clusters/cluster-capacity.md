@@ -30,7 +30,13 @@ View cluster load in the **Clusters** page:
 
 1. In the left navigation under **Console**, click **Clusters**.
 1. In the table, find the **Cluster load** column.
+
+   ![Example cluster load percentage](./img/cluster-capacity-percent.png)
+
 1. Select a cluster to view detailed cluster load information in the cluster **Overview** tab.
+
+   ![Example cluster load](./img/cluster-capacity.png)
+
    - The current cluster load is shown as a percentage bar at the top of the section.
    - The chart shows detailed cluster load data for the last 24 hours, 7 days, or 30 days.
    - Select the time period you want to view data for.
