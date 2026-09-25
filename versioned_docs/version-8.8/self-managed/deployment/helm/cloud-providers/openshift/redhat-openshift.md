@@ -148,26 +148,30 @@ The OpenShift router advertises ALPN `h2` on a per-SNI basis through a `crt-list
 
 To fix this, copy the router default wildcard TLS Secret from `openshift-ingress` into the Camunda namespace, then point the gRPC Ingress to it:
 
-1. Copy the router wildcard certificate Secret into the Camunda namespace:
+1. Copy the router wildcard certificate Secret into the Camunda namespace. This guide does not clone the reference architectures repository, so download the script first:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/single-region/procedure/copy-router-tls-secret.sh
    ```
 
    ```bash
+   curl -fsSL -o copy-router-tls-secret.sh \
+       https://raw.githubusercontent.com/camunda/camunda-deployment-references/stable/8.8/generic/openshift/single-region/procedure/copy-router-tls-secret.sh
+   chmod +x copy-router-tls-secret.sh
+
    export CAMUNDA_NAMESPACE="camunda"
    export CAMUNDA_PLATFORM_ROUTER_TLS_SECRET="camunda-platform-router-tls"
-   ./generic/openshift/single-region/procedure/copy-router-tls-secret.sh
+   ./copy-router-tls-secret.sh
    ```
 
-2. After you have merged the OpenShift overlay into your local `values.yml` (see the _Configure Route TLS_ section below), override `orchestration.ingress.grpc.tls.secretName` in that `values.yml`. The default value `'-'` lets the Ingress Operator manage the certificate automatically; on ROSA HCP, replace it with the Secret you just created:
+2. After you have added the Zeebe Gateway Route configuration to your `values.yml`, as described in [Configure Route TLS](#configure-route-tls) below, override `orchestration.ingress.grpc.tls.secretName` in that same file. The `'-'` default lets the Ingress Operator manage the certificate automatically; on ROSA HCP, replace it with the Secret you just created:
 
    ```bash
    yq -i ".orchestration.ingress.grpc.tls.secretName = \"$CAMUNDA_PLATFORM_ROUTER_TLS_SECRET\"" \
        values.yml
    ```
 
-   This keeps the upstream `orchestration-route.yml` overlay file untouched so future updates can be pulled cleanly.
+   Run this **after** the Route configuration is in `values.yml`, never before. Pasting that snippet afterwards would reset `secretName` to its default and the Route would lose its certificate.
 
 After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress will carry an inlined `spec.tls.certificate`, HAProxy will emit a per-SNI `[alpn h2,http/1.1]` `crt-list` entry, and gRPC clients will negotiate `h2` successfully.
 
