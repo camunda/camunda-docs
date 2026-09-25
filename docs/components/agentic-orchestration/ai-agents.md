@@ -72,7 +72,7 @@ Consider an export shipment process where the compliance details arrive as free 
 - **Check destination country**: a GraphQL query that resolves the destination to an ISO country code.
 - **Compute compliance score**: a REST connector call that scores the shipment from the marker and country.
 
-The agent extracts the marker and destination country from the shipment notes, decides which tools to call, and returns a decision. Camunda then applies deterministic routing: an exclusive gateway sends cleared shipments to an automatic notification, and flagged shipments to a human reviewer task.
+The agent extracts the marker and destination country from the shipment notes, decides which tools to call, and returns a decision. Camunda then applies deterministic routing: an exclusive [gateway](/reference/glossary.md#gateway) sends cleared shipments to an automatic notification, and flagged shipments to a [human task](/reference/glossary.md#human-task) for review.
 
 ![Seed export compliance agent BPMN process, showing an AI agent ad-hoc sub-process followed by a gateway that routes to either an automatic notification or a human review task](img/seed-export-compliance-agent.png)
 

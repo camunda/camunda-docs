@@ -111,15 +111,15 @@ For a how-to guide on adding tools, see [add tools to an AI agent](./add-tool-to
 
 #### Example: an orchestrator agent that delegates to specialist agents
 
-Consider a bank support process where one orchestrator agent receives a customer request and delegates parts of it to specialist agents rather than handling everything itself:
+The following example applies this workflow pattern to a bank support process, where an orchestrator agent receives a customer request and delegates parts of it to specialist agents:
 
 - A **loan support agent** that calculates loan payments.
 - An **account support agent** that validates IBANs.
 - A **card support agent** that looks up card issuers.
 
-Each specialist is modeled as its own separate BPMN process: a single AI Agent Sub-process wrapping one real tool call. The orchestrator's ad-hoc sub-process exposes each specialist as a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) tool, so the LLM can delegate to one or more specialists based on the customer's request. Because delegation is modeled with call activities, every specialist that runs shows up as its own, separately inspectable process instance in Operate.
+Each specialist is modeled as its own separate BPMN process: a single AI Agent Sub-process wrapping one real tool call. The orchestrator's [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) exposes each specialist as a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) tool, so the LLM can delegate to one or more specialists based on the customer's request. Because delegation is modeled with call activities, every specialist that runs shows up as its own, separately inspectable [child process instance](/reference/glossary.md#child-process-instance) in Operate.
 
-After the specialists return their results, a script task combines their summaries into one readable block, and a gateway routes automatically resolved cases to a customer notification, or escalates unresolved cases to a human review task.
+After the specialists return their results, a script task combines their summaries into one readable block, and a [gateway](/reference/glossary.md#gateway) routes automatically resolved cases to a customer notification, or escalates unresolved cases to a [human task](/reference/glossary.md#human-task) for review.
 
 ![Bank support orchestrator BPMN process, showing an orchestrator agent ad-hoc sub-process delegating to loan, account, and card specialist agents through call activities](img/orchestrator-agent.png)
 
