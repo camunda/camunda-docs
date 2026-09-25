@@ -27,7 +27,7 @@ In a dual-region cluster, the primary zone is the region with `zoneIndex: 0`, wh
 Zone migration must proceed from the highest remaining zone index to the lowest. Expected next zoneIndex 1 but got 0.
 ```
 
-In a dual-region cluster, run every Helm step once per release, one release at a time, and wait for each release to be healthy before you continue with the next one. Send each management API request only once, through either region. The rest of this guide describes each step once for both topologies.
+In a dual-region cluster, run every Helm step once per release, one release at a time, and wait for each release to be healthy before you continue with the next one. You can send each management API request to any node in the cluster: however it's advised to configure the port-forward on region with `zoneIndex:0`, as that region is the last to be migrated.
 
 The procedure consists of these steps:
 
