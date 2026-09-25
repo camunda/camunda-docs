@@ -87,7 +87,7 @@ The [`categories`](#configuration-reference) option controls which signals are e
 
 | Category      | What it contains                                                                                                                                                | Why Camunda collects it                                                                      |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `contractual` | Root process instance starts, decision evaluations, user task assignments, and tenant creation and deletion.                                                    | To verify usage against the metrics in your agreement and to bill for overages.              |
+| `contractual` | Root process instance starts, decision evaluations, user task assignments, and tenant creation and deletion.                                                    | To verify usage against the metrics in your agreement.                                       |
 | `optional`    | Process, decision, and form definition deployments and deletions; incidents raised and resolved; user task creation; and agent instance starts and completions. | To understand how the product is used, prioritize improvements, and support your deployment. |
 
 Every signal in each category, with its attributes, is listed in [What data is sent](#what-data-is-sent).
