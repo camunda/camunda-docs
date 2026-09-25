@@ -38,9 +38,13 @@ Each cluster-wide endpoint (other than the `/cluster/v2/rebalance` endpoints) al
 
 For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
 
-For request and response schemas, see the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) reference.
+The [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) reference includes request and response schemas for status, topology, mode, and restore operations. It does not yet include the cluster backup, exporting, or rebalance endpoints listed above. For their current TypeScript client methods and generated input and response types, see the [CamundaClient API reference](/apis-tools/typescript/api-reference/index/classes/CamundaClient.md).
 
 Cluster admin protects every operation under this prefix except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers and operators can use it as a health check. Cluster topology is its authenticated counterpart, because topology exposes Physical Tenant identifiers.
+
+To preview a cluster mode change without applying it, send `PATCH /cluster/v2/mode?dryRun=true`. The response contains the planned changes. See the [change cluster mode API specification](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode-as-cluster-admin.api.mdx).
+
+To preview a partition rebalance, send `POST /cluster/v2/rebalance?dryRun=true`. This returns the rebalance plan without starting it. For details, see the [CamundaClient API reference](/apis-tools/typescript/api-reference/index/classes/CamundaClient.md).
 
 ## Configure cluster admin access
 

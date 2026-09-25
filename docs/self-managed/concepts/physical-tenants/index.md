@@ -11,7 +11,7 @@ Learn how Physical Tenants isolate execution, storage, and API routing within on
 Use the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models and choose a starting point.
 :::
 
-Physical Tenants provide strong isolation within a single orchestration cluster. This page assumes one orchestration cluster with multiple Physical Tenants. Multi-region and multi-cluster topologies are separate topics.
+Physical Tenants provide strong isolation within a single orchestration cluster. This page describes that isolation model; multi-region and multi-cluster deployments are separate topology topics. Physical Tenant state can affect multi-region failover. See [Physical Tenant topology during failover](../multi-region/dual-region.md#physical-tenant-topology-during-failover).
 
 ## Isolation model
 
@@ -72,6 +72,16 @@ To configure tenant defaults, per-tenant overrides, validation expectations, and
 To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
 Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
+
+## Spring Boot applications with multiple clients
+
+When a Spring Boot application configures multiple clients, the starter registers every `@JobWorker` against all configured clients and deploys every `@Deployment` resource to all configured clients. Workers can therefore poll and process jobs across multiple Physical Tenants, and the same BPMN resources can be deployed to each tenant. See [Physical Tenant behavior for job workers](/apis-tools/camunda-spring-boot-starter/configuration.md#physical-tenant-fan-out-for-multi-client-applications) and [deployment behavior for multi-client applications](/apis-tools/camunda-spring-boot-starter/configuration.md#deploy-resources-on-start-up).
+
+## Optimize deployment
+
+Deploy Optimize separately for each Physical Tenant and configure each instance to use that tenant's cluster connection. Native multi-tenant Helm support does not manage multiple Optimize instances.
+
+<!-- TODO: Confirm with the Optimize team whether additional Physical Tenant setup guidance is ready to publish. -->
 
 For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 

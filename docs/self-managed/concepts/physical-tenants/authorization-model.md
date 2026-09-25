@@ -92,7 +92,7 @@ A user with cluster-admin access does not automatically have admin rights within
 
 ## Audit implications
 
-Because each Physical Tenant is independently authorized, audit logs for tenant-local operations are also scoped to the tenant level. Operations performed in one tenant do not appear in another tenant's audit records.
+Audit log queries follow the same Physical Tenant scope as other tenant-local API requests. Records from one Physical Tenant are not returned by another tenant's audit-log query. See [audit logs and Physical Tenants](/self-managed/concepts/audit-log/index.md#audit-logs-and-physical-tenants) for storage scope and query paths.
 
 ## Cluster-admin role
 

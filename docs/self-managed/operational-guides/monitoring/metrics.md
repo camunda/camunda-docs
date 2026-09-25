@@ -237,6 +237,15 @@ Monitor backpressure and processing latency of the commands using the following 
 
 The health of partitions in a broker can be monitored using the metric `zeebe_health`.
 
+### Physical Tenant metrics
+
+Use these metrics to monitor secondary-storage readiness and schema initialization for each Physical Tenant:
+
+| Metric name                                       | Type  | Description                                                                       | Labels           |
+| ------------------------------------------------- | ----- | --------------------------------------------------------------------------------- | ---------------- |
+| `camunda.physical.tenant.secondary.storage.ready` | Gauge | Whether the Physical Tenant's secondary storage is ready (`1`) or degraded (`0`). | `physicalTenant` |
+| `camunda.schema.init.time`                        | Timer | Duration of secondary-storage schema initialization for the tenant.               | `physicalTenant` |
+
 ## Execution latency metrics
 
 Brokers can export optional execution latency metrics.
@@ -417,7 +426,7 @@ The following image shows an example of the Zeebe Grafana dashboard after import
 
 #### Physical Tenant filtering
 
-Partition-scoped Zeebe metrics include a `physicalTenant` label. Node-level metrics that are not partition-scoped do not carry this label. The Zeebe dashboard supports filtering and aggregating metrics by `physicalTenant` and `partition`, and exposes `physicalTenant` as a variable selector, so you can monitor throughput, latency, and resource usage for each Physical Tenant independently.
+Partition-scoped Zeebe metrics include a `physicalTenant` label. Most node-level metrics that are not partition-scoped do not carry this label. Per-tenant Hikari connection-pool metrics are an exception. The Zeebe dashboard supports filtering and aggregating metrics by `physicalTenant` and `partition`, and exposes `physicalTenant` as a variable selector, so you can monitor throughput, latency, and resource usage for each Physical Tenant independently.
 
 To compare across tenants in Prometheus queries, use the `physicalTenant` label directly. For example:
 
