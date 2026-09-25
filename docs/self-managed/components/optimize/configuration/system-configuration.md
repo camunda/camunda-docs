@@ -112,20 +112,35 @@ These values relate to Optimize data import.
 
 ### External API
 
-This section focuses on common properties related to the External REST API of Optimize. It is
-mandatory to configure one of the values below if the External REST API is to be used. If neither is
-configured an error will be thrown and all requests to the External API will get rejected. If both are configured then
-the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
+This section focuses on common properties related to the External REST API of Optimize.
+
+In Camunda 8.10, these properties are optional. The External REST API is protected by the
+`camunda.security.*` configuration Optimize shares with the rest of the platform, and the properties
+below refine it rather than being the only thing standing in front of the API. See the note below
+for what each one does.
+
+With `optimize.security.csl.enabled=false`, which temporarily restores the 8.9 security stack, it is
+mandatory to configure either `api.accessToken` or `api.jwtSetUri` if the External REST API is to be
+used. If neither is configured, every request to the External API is rejected. If both are
+configured, `jwtSetUri` takes precedence and `accessToken` is ignored.
 
 :::note
-In Camunda 8.10, set `camunda.security.authentication.oidc.jwk-set-uri` and `camunda.security.authentication.oidc.audiences` instead of `api.jwtSetUri` and `api.audience`. The `api.accessToken` setting is no longer used, and you can remove it. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
+In Camunda 8.10, `api.jwtSetUri` and `api.audience` still work, from either the YAML path or the environment variable, but they are deprecated and are removed in 8.11. Set `camunda.security.authentication.oidc.additional-jwk-set-uris` and `camunda.security.authentication.oidc.audiences` instead.
+
+Three behavior changes come with that:
+
+- The `optimize` default shown below is not carried over. Only an audience you set explicitly takes effect, so if you configure no audience at all, any audience is accepted, and if you configure a different audience but not this one, a token audienced `optimize` is rejected. Set the audience explicitly rather than relying on the default.
+- A key set applies to the whole API surface rather than to the public API and ingestion endpoints alone, so a token it signed is accepted on any `/api/**` endpoint that its audience allows.
+- `api.jwtSetUri` is added alongside the key set that verifies logins instead of replacing it, so configuring a separate identity provider for your API no longer affects logging in to Optimize. This only works where no `camunda.security.authentication.oidc.issuer-uri` is configured. With one set, tokens from any other issuer are rejected regardless of which key set can verify them.
+
+The `api.accessToken` setting is no longer used, and you can remove it. Switch those callers to OIDC bearer tokens. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
 :::
 
 | YAML path       | Environment variable                                  | Default value | Description                                                                                                                                    |
 | --------------- | ----------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | api.accessToken | OPTIMIZE_API_ACCESS_TOKEN                             | null          | Secret static shared token to be provided to the secured REST API in the authorization header. Will be ignored if `api.jwtSetUri` is also set. |
 | api.jwtSetUri   | SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | null          | Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`                            |
-| api.audience    | CAMUNDA_OPTIMIZE_API_AUDIENCE                         | optimize      | Optimize tries to match this with the `aud` field contained in the JWT token. Only used when `jwtSetUri` is set.                               |
+| api.audience    | CAMUNDA_OPTIMIZE_API_AUDIENCE                         | optimize      | Optimize tries to match this with the `aud` field contained in the JWT token.                                                                  |
 
 ### Container
 
