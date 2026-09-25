@@ -1336,6 +1336,7 @@ module.exports = {
             "components/saas/how-to-restore",
             "components/saas/restore-scenarios",
             "components/saas/restore-troubleshooting",
+            "components/saas/cross-region-cold-recovery",
           ],
         },
         "components/saas/auto-updates",
