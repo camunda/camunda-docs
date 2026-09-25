@@ -683,7 +683,9 @@ You can now assign a business ID to a running process instance that has none, us
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.6+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+
+The Self-Managed [reference architectures](/self-managed/reference-architecture/reference-architecture.md) ship these versions out of the box. The Elasticsearch clusters they deploy through the ECK operator run Elasticsearch 9.x, and the Amazon OpenSearch domains they provision through Terraform run OpenSearch 3.x. If you based your deployment on an earlier copy of a reference architecture, upgrade your search layer to a supported version before you move to 8.10.
 
 <p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
