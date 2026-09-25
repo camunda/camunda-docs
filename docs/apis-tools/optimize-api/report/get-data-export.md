@@ -24,9 +24,9 @@ Where `report-ID` is the ID of the report you wish to export.
 
 The following request headers have to be provided with every data export request:
 
-| Header         | Constraints | Value                                               |
-| -------------- | ----------- | --------------------------------------------------- |
-| Authentication | REQUIRED    | [Authentication](../optimize-api-authentication.md) |
+| Header        | Constraints | Value                                               |
+| ------------- | ----------- | --------------------------------------------------- |
+| Authorization | REQUIRED    | [Authentication](../optimize-api-authentication.md) |
 
 ## Query parameters
 

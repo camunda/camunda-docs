@@ -27,9 +27,9 @@ POST `/api/public/variables/labels`
 
 The following request headers must be provided with every variable labeling request:
 
-| Header         | Constraints | Value                                              |
-| -------------- | ----------- | -------------------------------------------------- |
-| Authentication | REQUIRED\*  | [Authentication](./optimize-api-authentication.md) |
+| Header        | Constraints | Value                                              |
+| ------------- | ----------- | -------------------------------------------------- |
+| Authorization | REQUIRED    | [Authentication](./optimize-api-authentication.md) |
 
 ## Request body
 

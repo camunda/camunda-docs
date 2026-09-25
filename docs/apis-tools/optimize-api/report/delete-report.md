@@ -20,9 +20,9 @@ Where `report-ID` is the ID of the report you wish to delete.
 
 The following request headers have to be provided with every delete request:
 
-| Header         | Constraints | Value                                                   |
-| -------------- | ----------- | ------------------------------------------------------- |
-| Authentication | REQUIRED    | See [authentication](../optimize-api-authentication.md) |
+| Header        | Constraints | Value                                                   |
+| ------------- | ----------- | ------------------------------------------------------- |
+| Authorization | REQUIRED    | See [authentication](../optimize-api-authentication.md) |
 
 ## Query parameters
 

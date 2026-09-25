@@ -16,9 +16,9 @@ POST `api/public/share/disable`
 
 The following request headers must be provided with every request:
 
-| Header         | Constraints | Value                                                   |
-| -------------- | ----------- | ------------------------------------------------------- |
-| Authentication | REQUIRED    | See [authentication](../optimize-api-authentication.md) |
+| Header        | Constraints | Value                                                   |
+| ------------- | ----------- | ------------------------------------------------------- |
+| Authorization | REQUIRED    | See [authentication](../optimize-api-authentication.md) |
 
 ## Query parameters
 

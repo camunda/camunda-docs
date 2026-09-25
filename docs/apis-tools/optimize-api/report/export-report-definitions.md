@@ -16,9 +16,9 @@ POST `/api/public/export/report/definition/json`
 
 The following request headers have to be provided with every request:
 
-| Header         | Constraints | Value                                               |
-| -------------- | ----------- | --------------------------------------------------- |
-| Authentication | REQUIRED    | [Authentication](../optimize-api-authentication.md) |
+| Header        | Constraints | Value                                               |
+| ------------- | ----------- | --------------------------------------------------- |
+| Authorization | REQUIRED    | [Authentication](../optimize-api-authentication.md) |
 
 ## Query parameters
 
