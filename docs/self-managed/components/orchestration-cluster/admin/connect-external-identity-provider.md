@@ -129,14 +129,16 @@ Regardless of customization, the redirect URI must always point to the `/sso-cal
 
 The Orchestration Cluster checks the redirect URI at startup and writes a warning if the value cannot expand to a usable callback URL. It still starts. A usable value:
 
-- starts with `{baseUrl}`, or has an `https` or `http` scheme and a host,
-- has a port between 1 and 65535, if it has a port,
-- has a callback path,
-- has no fragment (`#`).
+- Starts with `{baseUrl}`, or has an `https` or `http` scheme and a host
+- Has a port between 1 and 65535, if it has a port
+- Has a callback path
+- Has no fragment (`#`)
 
-A value with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`, and the login completes. Any other unusable value stays as configured, so the login fails when the browser returns from the IdP. A callback path other than `/sso-callback` also leaves the login incomplete, because the cluster does not serve that path.
+A value with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`, and the login completes. Any other unusable value stays as configured, so the login fails when the browser returns from the IdP.
 
-The default value `{baseUrl}/sso-callback` is correct. The cluster also checks the value if you only use API clients, which never use it.
+The cluster serves the callback at the path that the redirect URI resolves to. The path must be one that the cluster routes to its web applications, and `/sso-callback` is the path that the cluster keeps for this purpose. A path outside that set passes the startup check, but the callback request does not reach the cluster's login handling, and the login does not complete.
+
+The default value `{baseUrl}/sso-callback` is correct. The cluster also checks the redirect URI if you only use API clients, which never use the redirect URI.
 
 Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
 
