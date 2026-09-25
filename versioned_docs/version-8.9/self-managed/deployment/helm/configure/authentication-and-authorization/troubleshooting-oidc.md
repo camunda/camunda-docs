@@ -82,7 +82,7 @@ Any claims that would normally come from the `/userinfo` response, and aren't al
 
 **Why this happens:** Your identity provider's `/userinfo` endpoint rejected the access token Camunda sent it, most often because of an audience mismatch. This is structural for several identity providers, not a misconfiguration:
 
-- **Microsoft Entra:** UserInfo is served by Microsoft Graph, which requires an access token whose audience is Microsoft Graph, never the Camunda client. The documented Entra scope, `<client-id>/.default,openid,profile,email`, always produces this mismatch. See [Ensure Entra prerequisites](./microsoft-entra.md#ensure-entra-prerequisites).
+- **Microsoft Entra:** UserInfo is served by Microsoft Graph, which requires an access token whose audience is Microsoft Graph, never the Camunda client. The documented Entra scopes include `<CLIENT_UUID>/.default`, which always produces this mismatch. See [Ensure Entra prerequisites](./microsoft-entra.md#ensure-entra-prerequisites).
 - **Auth0, Okta, and PingFederate:** The same rejection occurs whenever the access token is bound to an `audience` other than the provider's own UserInfo endpoint.
 
 **How to fix:**
