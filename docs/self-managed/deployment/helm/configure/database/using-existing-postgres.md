@@ -5,6 +5,8 @@ sidebar_label: External PostgreSQL
 description: "Learn how to use an external PostgresQL instance in Camunda 8 Self-Managed deployment."
 ---
 
+import ExpandableTable from "@site/src/components/ExpandableTable";
+
 The Camunda Helm chart requires externally managed PostgreSQL for Camunda Hub and Management Identity. This guide steps through connecting these components to an external PostgreSQL instance.
 
 This page applies to Management Identity and Camunda Hub. Configure the database for an external Keycloak deployment separately. It does not apply to the Orchestration Cluster or Optimize.
@@ -42,6 +44,8 @@ Management Identity and Camunda Hub require PostgreSQL. Configure each component
 
 ### Parameters
 
+<ExpandableTable title="External database parameters">
+
 | values.yaml option                                             | type    | default | description                                                              |
 | -------------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------ |
 | `camundaHub.restapi.externalDatabase.url`                      | string  | `""`    | JDBC URL of the database                                                 |
@@ -56,6 +60,8 @@ Management Identity and Camunda Hub require PostgreSQL. Configure each component
 | `identity.externalDatabase.secret.existingSecret`              | string  | `""`    | Kubernetes Secret name containing database password                      |
 | `identity.externalDatabase.secret.existingSecretKey`           | string  | `""`    | Key within the Kubernetes Secret that contains the database password     |
 | `identity.externalDatabase.database`                           | string  | `""`    | Database name                                                            |
+
+</ExpandableTable>
 
 ### Example usage
 

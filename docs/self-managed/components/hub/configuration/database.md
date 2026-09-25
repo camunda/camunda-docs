@@ -140,13 +140,13 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:h2:mem:[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
       - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
         value: "[YOUR_CUSTOM_DRIVER]"
@@ -206,13 +206,13 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to u
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:mariadb://[DB_HOST]:[DB_PORT]/[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
       - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
         value: "[YOUR_CUSTOM_DRIVER]"
@@ -271,13 +271,13 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to u
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
       - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MSSQL driver
         value: "[YOUR_CUSTOM_DRIVER]"
@@ -346,13 +346,13 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to u
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:mysql://[DB_HOST]:[DB_PORT]/[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
       - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MySQL driver
         value: "[YOUR_CUSTOM_DRIVER]"
@@ -438,13 +438,13 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to u
 <TabItem value="valuesYaml">
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
-      enabled: true
       url: "jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
+      username: "[DB_USER]"
+      secret:
+        inlineSecret: "[DB_PASSWORD]"
     env:
       - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default Oracle driver
         value: "[YOUR_CUSTOM_DRIVER]"
