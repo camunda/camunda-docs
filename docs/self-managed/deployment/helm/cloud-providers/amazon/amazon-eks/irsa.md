@@ -56,6 +56,10 @@ Compatibility is confirmed for [Camunda Helm chart releases version 11 and above
 
 You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks/). Below is a quick reference for common usage options:
 
+:::note `identityKeycloak` in the default component list
+The default PostgreSQL component list below still contains `identityKeycloak`, the Bitnami subchart removed in Camunda 8.10. The script cannot yet detect an operator-managed or external Keycloak from a boolean `global.identity.keycloak.internal: false`, so it still runs the `identityKeycloak` checks and reports them as failures. Pass `-p "identity,webModeler"` to drop it from the list.
+:::
+
 ```bash
 Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p] [-l] [-s]
 Options:
@@ -336,34 +340,19 @@ The remaining steps differ from the IRSA setup:
 
 When implementing [backup and restore procedures](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for Elasticsearch in your Camunda deployment, you can use IRSA to securely access S3 buckets.
 
-### Bitnami Elasticsearch chart configuration
+### Elasticsearch backup configuration
 
-Camunda’s Helm chart uses the [Bitnami Elasticsearch chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) as a sub-chart. If you are using this setup, IRSA can be integrated for backup operations.
+:::note
+The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10, so the snapshot configuration that targeted that subchart no longer applies. For those steps, see the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa/).
+:::
 
-Following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html), create an IAM role mapped to a Kubernetes service account with the required permissions for S3, as detailed in the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#repository-s3-permissions).
+In Camunda 8.10, deploy Elasticsearch with the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or use a managed service. IRSA covers the ECK deployment only, because a managed service runs outside your cluster and exposes no Kubernetes service account.
 
-Additionally, ensure Elasticsearch is configured to recognize the IRSA token. The [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#iam-kubernetes-service-accounts) outlines this requirement for official Elasticsearch images.
+For an ECK deployment, create an IAM role mapped to the Elasticsearch service account with the required S3 permissions, following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html) and the [Elasticsearch S3 repository documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#repository-s3-permissions).
 
-Once the IRSA setup is complete, configure the Bitnami Elasticsearch chart in your Camunda Helm chart by adjusting your `values.yaml` as follows:
+Then configure the ECK deployment to recognize the IRSA token and register the S3 snapshot repository, as described in the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#iam-kubernetes-service-accounts). The `<account-id>` and IAM role ARN come from the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
 
-```yaml
-elasticsearch:
-  enabled: true
-  master:
-    serviceAccount:
-      create: true
-      annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
-  initScripts:
-    irsa_access_init_script.sh: |
-      #!/bin/sh
-      mkdir -p "/opt/bitnami/elasticsearch/config/repository-s3"
-      ln -s $AWS_WEB_IDENTITY_TOKEN_FILE "/opt/bitnami/elasticsearch/config/repository-s3/aws-web-identity-token-file"
-```
-
-The values `<account-id>` and `<iam-role-arn>` are based on the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
-
-The init script remains consistent across environments, as the Elasticsearch S3 plugin expects the credentials at the fixed path `repository-s3`. This path is **not configurable**.
+For a managed service, grant snapshot access through the provider's own IAM configuration instead. Amazon OpenSearch Service registers the repository with a dedicated IAM role, as described in [Creating index snapshots in Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshots.html).
 
 :::info
 `$AWS_WEB_IDENTITY_TOKEN_FILE` is automatically injected into the pod by EKS when the pod is using a service account annotated with a valid `eks.amazonaws.com/role-arn`.

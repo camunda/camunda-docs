@@ -10,6 +10,10 @@ import TabItem from "@theme/TabItem";
 
 This guide shows you how to configure Camunda 8 Self-Managed to authenticate with any OpenID connect (OIDC)-compliant identity provider.
 
+:::info Bitnami subcharts removed in Camunda 8.10
+Earlier releases bundled PostgreSQL through Bitnami subcharts (`identityPostgresql`, `webModelerPostgresql`). As of Camunda 8.10 (Helm chart `15.x`), the bundled Bitnami subcharts are removed: provide PostgreSQL with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database, as shown in the examples below.
+:::
+
 :::info
 Before proceeding, since this is a general guide, refer to [External OIDC provider](./external-oidc-provider.md) to see the available provider-specific guides, as they include detailed setup instructions tailored to provider's interface.
 :::
@@ -23,7 +27,7 @@ Before you begin, ensure you have:
 - Access to your provider's discovery document to obtain endpoint URLs.
 - A Kubernetes cluster with the Helm CLI v4 installed.
 - kubectl configured to access your cluster.
-- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
 
@@ -191,9 +195,7 @@ The Orchestration Cluster merges keys from the primary JWKS endpoint and all add
 
 ## Create secrets
 
-Create two secrets in your Kubernetes namespace.
-
-First, create a secret that contains all OIDC client secrets:
+Create a secret in your Kubernetes namespace that contains all OIDC client secrets:
 
 ```bash
 kubectl create secret generic oidc-credentials \
@@ -207,20 +209,9 @@ kubectl create secret generic oidc-credentials \
 The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-Next, create a secret with the remaining credentials for the Camunda Helm chart:
-
-```bash
-kubectl create secret generic camunda-credentials \
-  --from-literal=identity-postgresql-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-password=CHANGE_ME
-```
-
-Unlike the OIDC client secrets, these passwords authenticate each component against its external PostgreSQL database, so each value must match the password of the database user you created.
-
-Management Identity and Web Modeler each require an externally managed PostgreSQL database. Create the `management-identity` and `web-modeler` databases, along with their users, before you deploy. See [Use external PostgreSQL](../database/using-existing-postgres.md).
-
+The PostgreSQL credentials for Management Identity and Camunda Hub are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 :::tip Alternative secret management
-For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions) for more options.
+For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended) for more options.
 :::
 
 ## Configure Camunda components
@@ -290,16 +281,16 @@ identity:
   enabled: true
   externalDatabase:
     enabled: true
-    host: <postgres-host>
+    host: pg-identity-rw
     port: 5432
-    database: management-identity
-    username: <postgres-username>
+    database: identity
+    username: identity
     secret:
-      existingSecret: camunda-credentials
-      existingSecretKey: identity-postgresql-password
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 ```
 
-Management Identity requires an externally managed PostgreSQL database. Create the `management-identity` database and its user before you deploy. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
+Management Identity requires an externally managed PostgreSQL database. Provision the database before you deploy, and adapt the connection values and secret references to your setup. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 #### Identity-specific parameters
 
@@ -364,7 +355,7 @@ In Helm deployments, the default OIDC username claim is `preferred_username`, wh
 
 If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
-For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
+For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak).
 :::
 
 #### Default roles
@@ -444,19 +435,20 @@ global:
         clientApiAudience: <web-modeler-ui-audience>
         publicApiAudience: <web-modeler-api-audience>
 
-webModeler:
-  enabled: true
-
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: noreply@example.com # Update with your email address
       # Additional SMTP configuration may be required - see Web Modeler docs
     externalDatabase:
-      url: jdbc:postgresql://<postgres-host>:5432/web-modeler
-      username: <postgres-username>
+      host: pg-hub-rw
+      port: 5432
+      database: hub
+      username: hub
       secret:
-        existingSecret: camunda-credentials
-        existingSecretKey: webmodeler-postgresql-password
+        existingSecret: pg-hub-secret
+        existingSecretKey: password
 ```
 
 #### Web Modeler parameters
@@ -486,12 +478,9 @@ global:
         clientId: <console-client-id>
         audience: <console-audience>
         redirectUrl: <console-base-url>
-
-console:
-  enabled: true
 ```
 
-Replace `<console-base-url>` with the base URL where Console will be accessible. For local deployment, use `http://localhost:8087`.
+Console is deployed as part of Camunda Hub, which you enable with `camundaHub.enabled: true` in the [Web Modeler step](#configure-web-modeler). Replace `<console-base-url>` with the base URL where Console will be accessible. For local deployment, use `http://localhost:8087`.
 
 ## Complete configuration example
 
@@ -594,34 +583,31 @@ identity:
   enabled: true
   externalDatabase:
     enabled: true
-    host: <postgres-host>
+    host: pg-identity-rw
     port: 5432
-    database: management-identity
-    username: <postgres-username>
+    database: identity
+    username: identity
     secret:
-      existingSecret: camunda-credentials
-      existingSecretKey: identity-postgresql-password
-
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 # Optimize
 optimize:
   enabled: true
 
-# Web Modeler
-webModeler:
-  enabled: true
+# Console and Web Modeler (Camunda Hub)
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: <your-email-address>
     externalDatabase:
-      url: jdbc:postgresql://<postgres-host>:5432/web-modeler
-      username: <postgres-username>
+      host: pg-hub-rw
+      port: 5432
+      database: hub
+      username: hub
       secret:
-        existingSecret: camunda-credentials
-        existingSecretKey: webmodeler-postgresql-password
-
-# Console
-console:
-  enabled: true
+        existingSecret: pg-hub-secret
+        existingSecretKey: password
 ```
 
 **Placeholders to replace:**
@@ -637,7 +623,7 @@ console:
 
 - All `<placeholders>` replaced with actual values.
 - All client secrets stored in the `oidc-credentials` secret.
-- Database passwords stored in the `camunda-credentials` secret.
+- Database credentials provided by the operator-managed database secrets (for example, `pg-identity-secret` and `pg-hub-secret`).
 - Redirect URIs in OIDC provider match `redirectUrl` values.
 - Each component has a distinct resource audience by default. Any cross-component audience acceptance supports a documented integration.
 - Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names.

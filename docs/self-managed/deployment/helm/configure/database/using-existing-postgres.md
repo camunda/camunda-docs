@@ -5,7 +5,7 @@ sidebar_label: External PostgreSQL
 description: "Learn how to use an external PostgresQL instance in Camunda 8 Self-Managed deployment."
 ---
 
-The Camunda Helm chart requires externally managed PostgreSQL for Camunda Hub and Management Identity. This guide steps through connecting these components to an external PostgreSQL instance.
+The Camunda Helm chart requires externally managed PostgreSQL for Camunda Hub and Management Identity. This guide steps through connecting these components to an external PostgreSQL instance. Provide PostgreSQL through a managed service or a Kubernetes operator, such as the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 This page applies to Management Identity and Camunda Hub. Configure the database for an external Keycloak deployment separately. It does not apply to the Orchestration Cluster or Optimize.
 
@@ -26,7 +26,6 @@ password: `examplePassword`
 
 ```SQL
 CREATE DATABASE "web-modeler";
-CREATE DATABASE "keycloak";
 CREATE DATABASE "management-identity";
 ```
 
@@ -38,7 +37,7 @@ kubectl create secret generic camunda-psql-db --from-literal=password=examplePas
 
 ## Configuration
 
-Management Identity and Camunda Hub require PostgreSQL. Configure each component to connect to the external PostgreSQL instance.
+Management Identity and Camunda Hub require PostgreSQL. Configure each component to connect to the external PostgreSQL instance. Keycloak's database is configured where Keycloak is deployed (operator or external), not through the Helm chart.
 
 ### Parameters
 

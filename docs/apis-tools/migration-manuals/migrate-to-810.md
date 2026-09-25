@@ -66,6 +66,7 @@ Review the actions required for the following 8.10 changes:
 | <span className="label-highlight red">Breaking change</span>      | [Administration API (Self-Managed) migrated](#administration-api-self-managed-migrated)                                     |
 | <span className="label-highlight orange">Behavioral change</span> | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
 | <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
+| <span className="label-highlight orange">Behavioral change</span> | [Deleting a process definition with running instances defers history deletion](#delete-draining)                            |
 | <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
 
 ## Breaking changes
@@ -260,6 +261,14 @@ The [Get resource] and [Get resource content] APIs now retrieve from secondary s
 
 If your application assumes immediate resource retrieval after deployment, add retry logic or a short delay before querying resources.
 
+### Deleting a process definition with running instances defers history deletion {#delete-draining}
+
+The [delete resource](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) endpoint now accepts process definition deletion when the definition still has running instances. Instead of rejecting the request or waiting for physical removal, the definition [drains](/components/concepts/resource-deletion.md#draining): new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically afterwards.
+
+As a result, when `deleteHistory` is `true`, the `batchOperation` field in the response is `null` for such a definition. Its history is removed as part of the draining lifecycle rather than through an immediately-returned batch operation. The field is still populated for decision requirements definitions and for process definitions that are already fully deleted from the runtime state.
+
+If you read `batchOperation` from the delete response to track history deletion, handle a `null` value: the definition is draining. Track progress through the process definition `state` (`DRAINING`) or the `zeebe_process_definitions_draining_count` metric instead.
+
 ## Deprecations
 
 Review the actions required for the following deprecations:
@@ -273,6 +282,7 @@ The [Get resource content] endpoint is deprecated. Use [Get resource content bin
 Once you have completed the [upgrade steps](#upgrade-steps) in this guide, you should:
 
 1. Re-compile and run your test suite against the 8.10 API.
+
 <!--- 1. Review [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) for additional context on each change. --->
 
 [Get resource]: ../orchestration-cluster-api-rest/specifications/get-resource.api.mdx
