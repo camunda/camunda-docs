@@ -725,15 +725,7 @@ When a tenant is degraded because its schema has not initialized, REST query API
 
 ## Known limitations
 
-:::note
-**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported. This constraint exists in the Query API stack, not the exporter layer.
-:::
-
-:::caution Custom exporter configuration merge (alpha3)
-In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not merged. If you have a custom exporter, such as a Kafka exporter, and want each tenant to publish to a different topic, declare the full exporter configuration separately under each Physical Tenant's section. You cannot declare it once at root level and override only the topic per tenant. This will be addressed in a later alpha. See [camunda/camunda#55155](https://github.com/camunda/camunda/issues/55155).
-:::
-
-<!-- Remove custom exporter caution once camunda/camunda#55155 is resolved. -->
+**Secondary storage types must be compatible across tenants.** RDBMS and `none` cannot be mixed with another secondary-storage type. For startup compatibility validation, Elasticsearch and OpenSearch are treated as one class and can be mixed. This validation behavior does not establish support for every Elasticsearch/OpenSearch combination in every component.
 
 ## Storage configuration matrix
 

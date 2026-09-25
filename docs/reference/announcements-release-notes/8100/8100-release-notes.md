@@ -1055,7 +1055,7 @@ New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Micros
 
 Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isolation across tenants.
 
-- The REST API and gRPC API are exposed per Physical Tenant, with `CamundaClient` supporting Physical Tenant selection in the gRPC API.
+- The REST API and gRPC API are exposed per Physical Tenant. `CamundaClient` supports tenant selection over both REST and gRPC.
 - Web apps (Operate, Tasklist, and Admin) are accessible per Physical Tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
 - Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
 
