@@ -53,30 +53,19 @@ Decision-making and execution are intentionally split:
 Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
 
-#### Example: an order exception agent
+#### Example: an export compliance agent
 
-Consider an order fulfillment process that hands off exception handling to an AI agent. The agent's ad-hoc sub-process exposes tools built from existing BPMN elements and connectors:
+Consider an export shipment process where the compliance details arrive as free text instead of pre-parsed fields, and a shipment must be checked before it can proceed. An AI agent extracts what it needs from the text and calls tools built from real connector calls:
 
-- **Check inventory**: a REST connector call to an inventory system.
-- **Apply discount rules**: a business rule task evaluating a DMN decision.
-- **Notify customer**: a REST connector call to an email or messaging service.
-- **Escalate to support**: a user task routed to a human.
+- **Verify genetic marker**: a SQL query against a genetic marker database.
+- **Check destination country**: a GraphQL query that resolves the destination to an ISO country code.
+- **Compute compliance score**: a REST connector call that scores the shipment from the marker and country.
 
-Given the order details, the LLM decides which tools to call, in what order, and with what parameters. Camunda executes each selected tool as a governed BPMN activity and returns the result to the LLM, until the agent reaches a final response.
+The agent extracts the marker and destination country from the shipment notes, decides which tools to call, and returns a decision. Camunda then applies deterministic routing: an exclusive gateway sends cleared shipments to an automatic notification, and flagged shipments to a human reviewer task.
 
-```mermaid
-flowchart LR
-    Start([Order exception]) --> Agent{{AI agent<br/>ad-hoc sub-process}}
-    Agent -->|checkInventory| Inventory[Check inventory]
-    Agent -->|applyDiscountRules| Discount[Apply discount rules]
-    Agent -->|notifyCustomer| Notify[Notify customer]
-    Agent -->|escalateToSupport| Escalate[Escalate to support]
-    Inventory --> Agent
-    Discount --> Agent
-    Notify --> Agent
-    Escalate --> Agent
-    Agent --> Done([Final response])
-```
+![Seed export compliance agent BPMN process, showing an AI agent ad-hoc sub-process followed by a gateway that routes to either an automatic notification or a human review task](img/seed-export-compliance-agent.png)
+
+<p><a href="https://github.com/camunda/camunda-8-tutorials/tree/main/examples/task-agent#readme" class="link-arrow" target="_blank">Try out this example</a></p>
 
 ## AI agent integration features
 

@@ -109,23 +109,20 @@ For a how-to guide on adding tools, see [add tools to an AI agent](./add-tool-to
 </tr>
 </table>
 
-#### Example: an agent that delegates to specialized agents
+#### Example: an orchestrator agent that delegates to specialist agents
 
-Consider a support process where one agent receives an incoming request and delegates parts of it to other, more specialized agents rather than handling everything itself:
+Consider a bank support process where one orchestrator agent receives a customer request and delegates parts of it to specialist agents rather than handling everything itself:
 
-- A **billing agent** with tools scoped to invoices, payments, and refunds.
-- A **technical agent** with tools scoped to diagnostics and troubleshooting.
+- A **loan support agent** that calculates loan payments.
+- An **account support agent** that validates IBANs.
+- A **card support agent** that looks up card issuers.
 
-The receiving agent uses the [A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client.md) as a tool to call each specialized agent over the Agent-to-Agent (A2A) protocol, then combines their responses into a single result.
+Each specialist is modeled as its own separate BPMN process: a single AI Agent Sub-process wrapping one real tool call. The orchestrator's ad-hoc sub-process exposes each specialist as a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) tool, so the LLM can delegate to one or more specialists based on the customer's request. Because delegation is modeled with call activities, every specialist that runs shows up as its own, separately inspectable process instance in Operate.
 
-```mermaid
-flowchart TB
-    Request([Support request]) --> Coordinator{{Coordinating agent}}
-    Coordinator -->|A2A Client connector| Billing[Billing agent]
-    Coordinator -->|A2A Client connector| Technical[Technical agent]
-    Billing --> Coordinator
-    Technical --> Coordinator
-    Coordinator --> Response([Combined response])
-```
+After the specialists return their results, a script task combines their summaries into one readable block, and a gateway routes automatically resolved cases to a customer notification, or escalates unresolved cases to a human review task.
 
-Splitting agents this way keeps each agent's tool set small and scoped to one domain, and lets specialized agents be reused across multiple processes.
+![Bank support orchestrator BPMN process, showing an orchestrator agent ad-hoc sub-process delegating to loan, account, and card specialist agents through call activities](img/orchestrator-agent.png)
+
+Splitting agents this way keeps each agent's tool set small and scoped to one domain, and lets specialist agents be reused across multiple processes. Call activities work here because every specialist is itself a Camunda process; if a specialist agent runs outside Camunda, use the [A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client.md) instead.
+
+<p><a href="https://github.com/camunda/camunda-8-tutorials/tree/main/examples/orchestrator-agent#readme" class="link-arrow" target="_blank">Try out this example</a></p>
