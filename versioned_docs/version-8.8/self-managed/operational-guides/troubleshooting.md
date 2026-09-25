@@ -137,6 +137,23 @@ To mitigate this, set the following environment variable on your Zeebe brokers t
 AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 ```
 
+## Zeebe incompatibility with the AppDynamics Java agent
+
+Zeebe uses virtual threads in certain code paths (for example, S3 backups). The AppDynamics Java agent's bytecode instrumentation can trigger a `java.lang.ClassCircularityError` on virtual threads when it intercepts class definition during operations that require class loading.
+
+This has been observed during S3 backups, where a `ClassCircularityError: jdk/internal/misc/VirtualThreads` caused the broker to fail to shut down cleanly, leaving the leader partition unable to transition to `INACTIVE` and the JVM process hanging. The same underlying incompatibility may affect any Zeebe code path that uses virtual threads alongside the AppDynamics agent.
+
+### Symptoms
+
+- `java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads` appears in the Zeebe broker logs.
+- The broker fails to shut down cleanly and the JVM process hangs.
+- A leader partition does not transition to `INACTIVE`, causing partition unavailability.
+
+### Workarounds
+
+- Forcefully kill the pod or JVM process when the broker gets stuck.
+- Disable bytecode instrumentation in the AppDynamics Java agent.
+
 ## Enable Azure logging for troubleshooting
 
 When using Azure Blob Storage as a backup store, you can enable logging to
