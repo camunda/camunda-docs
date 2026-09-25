@@ -451,9 +451,6 @@ webModeler:
     mail:
       fromAddress: noreply@example.com # Update with your email address
       # Additional SMTP configuration may be required - see Web Modeler docs
-
-camundaHub:
-  restapi:
     externalDatabase:
       url: jdbc:postgresql://<postgres-host>:5432/web-modeler
       username: <postgres-username>
@@ -615,9 +612,6 @@ webModeler:
   restapi:
     mail:
       fromAddress: <your-email-address>
-
-camundaHub:
-  restapi:
     externalDatabase:
       url: jdbc:postgresql://<postgres-host>:5432/web-modeler
       username: <postgres-username>

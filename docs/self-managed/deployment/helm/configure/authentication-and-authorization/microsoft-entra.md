@@ -367,9 +367,6 @@ webModeler:
   restapi:
     mail:
       fromAddress: noreply@example.com
-
-camundaHub:
-  restapi:
     externalDatabase:
       url: "jdbc:postgresql://<postgres-host>:5432/web-modeler"
       username: "<postgres-username>"
@@ -380,7 +377,7 @@ camundaHub:
 
 Replace `<WEB_MODELER_URL>` with the base URL of Web Modeler as it will be reachable from your users' browser. For local deployment, use `http://localhost:8070`.
 
-Web Modeler requires an externally managed PostgreSQL database, configured under `camundaHub.restapi.externalDatabase`. Create the `web-modeler` database before deploying. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
+Web Modeler requires an externally managed PostgreSQL database, configured under `webModeler.restapi.externalDatabase`. Create the `web-modeler` database before deploying. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 You can update `webModeler.restapi.mail.fromAddress` with an address suitable for your environment.
 This address appears as the sender in emails sent by Web Modeler.
@@ -522,9 +519,6 @@ webModeler:
   restapi:
     mail:
       fromAddress: noreply@example.com
-
-camundaHub:
-  restapi:
     externalDatabase:
       url: "jdbc:postgresql://<postgres-host>:5432/web-modeler"
       username: "<postgres-username>"

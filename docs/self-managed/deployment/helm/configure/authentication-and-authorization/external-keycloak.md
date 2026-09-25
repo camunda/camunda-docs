@@ -244,9 +244,6 @@ webModeler:
   restapi:
     mail:
       fromAddress: noreply@example.com
-
-camundaHub:
-  restapi:
     externalDatabase:
       url: "jdbc:postgresql://<postgres-host>:5432/web-modeler"
       username: "<postgres-username>"
