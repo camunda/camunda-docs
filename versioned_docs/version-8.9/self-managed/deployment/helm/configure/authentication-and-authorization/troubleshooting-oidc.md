@@ -64,6 +64,32 @@ Use `http://localhost:8080` in Helm values when users access via `https://camund
 Some providers, such as Keycloak, may not include the appropriate audience by default. Consult your provider's documentation on configuring token audiences. For Keycloak, see [External Keycloak](./external-keycloak.md).
 :::
 
+## UserInfo endpoint rejects the access token
+
+**Observed behavior:** Before Camunda 8.9.22, logging in to the Orchestration Cluster fails with a 500 error, and logs show:
+
+```text
+invalid_user_info_response
+```
+
+Starting in Camunda 8.9.22, login succeeds instead, and logs show a warning similar to:
+
+```text
+OIDC /userinfo call failed for registration '<registration-id>' (invalid_user_info_response): <message>; continuing login with ID token claims only
+```
+
+Any claims that would normally come from the `/userinfo` response, and aren't already present in the ID token, are missing from the session.
+
+**Why this happens:** Your identity provider's `/userinfo` endpoint rejected the access token Camunda sent it, most often because of an audience mismatch. This is structural for several identity providers, not a misconfiguration:
+
+- **Microsoft Entra:** UserInfo is served by Microsoft Graph, which requires an access token whose audience is Microsoft Graph, never the Camunda client. The documented Entra scopes include `<CLIENT_UUID>/.default`, which always produces this mismatch. See [Ensure Entra prerequisites](./microsoft-entra.md#ensure-entra-prerequisites).
+- **Auth0, Okta, and PingFederate:** The same rejection occurs whenever the access token is bound to an `audience` other than the provider's own UserInfo endpoint.
+
+**How to fix:**
+
+1. **On Camunda 8.9.22 and later:** No fix is needed. Login continues using only the claims from the ID token. Camunda 8.9 has no per-provider override to restore the previous hard-failure behavior; if a provider's authorization-relevant claims (for example, group membership) are only available from UserInfo, upgrade to Camunda 8.10 or later, which adds [`user-info-required`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc) for this case.
+2. **On an earlier patch:** Upgrade to 8.9.22 or later. Until you can upgrade, set `user-info-enabled: false` for the affected provider to skip the UserInfo call and avoid the failure; this also removes any claims UserInfo would have added.
+
 ## Insufficient permissions
 
 **Observed behavior:** You authenticate, but Camunda shows "Insufficient permissions".

@@ -59,6 +59,10 @@ The applications you configure in this guide must support the following `grant_t
 
 These grant types are enabled by default, but they may be restricted by custom policies in your organization.
 
+:::note Disable UserInfo for Entra
+Microsoft Entra's `/userinfo` endpoint is served by Microsoft Graph, which requires the access token to have a Graph audience. The `<CLIENT_UUID>/.default` scope used in this guide audiences the token to the Camunda client instead, so Entra always rejects the call. Set `user-info-enabled: false` for this provider to skip it. See [troubleshoot OIDC authentication](./troubleshooting-oidc.md#userinfo-endpoint-rejects-the-access-token) for details.
+:::
+
 ### Create applications in Entra
 
 Before configuring Camunda, create the following app registrations that map to Camunda components.
