@@ -2338,8 +2338,10 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/data-purge",
-        "self-managed/operational-guides/troubleshooting",
       ],
+    },
+    {
+      "Operational guides": ["self-managed/operational-guides/troubleshooting"],
     },
     {
       Components: [

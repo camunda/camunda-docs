@@ -3975,7 +3975,11 @@
             "self-managed/concepts/multi-region/dual-region"
           ]
         },
-        "self-managed/operational-guides/data-purge",
+        "self-managed/operational-guides/data-purge"
+      ]
+    },
+    {
+      "Operational guides": [
         {
           "Troubleshooting": ["self-managed/operational-guides/troubleshooting"]
         }
