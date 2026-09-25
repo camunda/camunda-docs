@@ -84,4 +84,3 @@ In Operate, when the inbound channel is `MCP`, it is shown separately in the **A
 ## REST API
 
 With the API, you can access more operation data than you can in the applications. See the [API response schema](../../../apis-tools/orchestration-cluster-api-rest/specifications/search-audit-logs.api.mdx#responses) for more information.
-
