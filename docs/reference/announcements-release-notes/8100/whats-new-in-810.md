@@ -734,9 +734,9 @@ The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which l
 
 Important changes to Optimize in 8.10 are as follows:
 
-### Optimize moves to the Camunda Security Library
+### Optimize adopts the shared authentication implementation
 
-With the move to the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), Optimize adopts the same authentication and session handling as the Orchestration Cluster components.
+Optimize now authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
 
 The legacy Optimize login and API security keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback. `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping.
 
@@ -752,9 +752,9 @@ New SaaS clusters include a default `business_` variable include filter, which l
 
 ## Unified authentication for Orchestration Cluster, Camunda Hub, and Optimize
 
-In 8.10, the Orchestration Cluster, Camunda Hub, and Optimize all now authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl). This shared implementation replaces the separate identity stacks previously used by these components.
+With Camunda 8.10, Camunda Hub and Optimize authenticate through a shared implementation based on the Orchestration Cluster's existing authentication, replacing their separate identity stacks.
 
-Each component accepts the same `camunda.security.authentication.*` settings, so there is only one configuration surface to learn and troubleshoot if authentication issues arise. Nothing changes for the Orchestration Cluster as it already uses these settings since 8.9.
+Each component now accepts the same `camunda.security.authentication.*` settings, so there is only one configuration surface to learn and troubleshoot if authentication issues arise. Nothing changes for the Orchestration Cluster as it already uses these settings since 8.9.
 
 - Camunda Hub and Optimize continue to accept existing authentication settings in 8.10, translating the recognized properties to new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11.
 - Camunda Hub requires no configuration change to upgrade to 8.10.
