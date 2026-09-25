@@ -173,9 +173,7 @@ For more information, see [OpenID Connect Core specification](https://openid.net
 
 ## Create secrets
 
-Create two secrets in your Kubernetes namespace.
-
-First, create a secret that contains all OIDC client secrets:
+Create a secret in your Kubernetes namespace that contains all OIDC client secrets:
 
 ```bash
 kubectl create secret generic oidc-credentials \
