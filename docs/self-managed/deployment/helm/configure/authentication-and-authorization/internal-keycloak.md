@@ -214,7 +214,7 @@ If you're using a domain or Ingress to expose Web Modeler, you **must** update t
 Mismatched redirect URLs will cause authentication failures that are difficult to debug.
 :::
 
-You can update `webModeler.restapi.mail.fromAddress` with an address suitable for your environment.
+You can update `camundaHub.restapi.mail.fromAddress` with an address suitable for your environment.
 This address appears as the sender in emails sent by Web Modeler.
 For more details on configuring email delivery, see the [Camunda Hub section in Enable additional Camunda components](../enable-additional-components.md#camunda-hub).
 

@@ -341,7 +341,7 @@ camundaHub:
 
 Replace `<WEB_MODELER_URL>` with the base URL of Web Modeler as it will be reachable from your users' browser. For local deployment, use `http://localhost:8070`.
 
-You can update `webModeler.restapi.mail.fromAddress` with an address suitable for your environment.
+You can update `camundaHub.restapi.mail.fromAddress` with an address suitable for your environment.
 This address appears as the sender in emails sent by Web Modeler.
 For more details on configuring email delivery, see the [Camunda Hub section in Enable additional Camunda components](../enable-additional-components.md#camunda-hub).
 
