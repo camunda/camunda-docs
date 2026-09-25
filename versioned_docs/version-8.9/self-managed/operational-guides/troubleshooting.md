@@ -137,32 +137,40 @@ To mitigate this, set the following environment variable on your Zeebe brokers t
 AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 ```
 
-## Zeebe broker shuts down with `ClassCircularityError` when using AppDynamics
+## Zeebe fails with `ClassCircularityError` when using AppDynamics
 
-Zeebe brokers can shut down with a `java.lang.ClassCircularityError` when the AppDynamics Java agent is attached to the broker JVM.
+Zeebe brokers and gateways can fail with a `java.lang.ClassCircularityError` when the AppDynamics Java agent is attached to the JVM.
 
 ### Symptoms
 
-The broker logs an error similar to the following and then shuts down:
+One of the following errors appears in the logs:
 
 ```
-ERROR io.camunda.zeebe.broker.system - Shutting down because we can't recover from JVM errors. Consider restarting this broker if it is a temporary issue.
 java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads
 ```
 
-This error was first observed during S3 backups, but it can occur in any code path that runs on virtual threads. Partitions led by the affected broker are unavailable until another broker takes over leadership or the broker restarts.
+```
+java.lang.IllegalStateException: java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads
+```
+
+The error can occur in any code path that runs on virtual threads, for example during S3 backups or while the gateway handles gRPC requests. After the error, the JVM may be left in a broken state:
+
+- A broker tries to shut down, but the shutdown doesn't complete and the JVM process keeps running. Partitions led by that broker stay unavailable.
+- A gateway stops responding to gRPC requests, while health checks such as `/actuator/health/liveness` still report it as healthy.
+
+Because health checks don't always detect the broken state, Kubernetes might not restart the affected pod automatically.
 
 ### Cause
 
-Zeebe and several libraries it depends on, such as the AWS SDK, run work on Java virtual threads. The AppDynamics Java agent intercepts class definitions to instrument bytecode. On a virtual thread, the agent's own code triggers loading of `jdk/internal/misc/VirtualThreads`, which the agent intercepts again. The JVM detects this circular class loading and throws `ClassCircularityError`.
+Zeebe and several libraries it depends on, such as the AWS SDK and gRPC, run work on Java virtual threads. The AppDynamics Java agent intercepts class definitions to instrument bytecode. On a virtual thread, the agent's own code triggers loading of `jdk/internal/misc/VirtualThreads`, which the agent intercepts again. The JVM detects this circular class loading and throws `ClassCircularityError`, and the JVM can't reliably recover from it.
 
 This is a defect in the AppDynamics Java agent. Zeebe doesn't provide an option to disable virtual threads, because third-party libraries also use them internally.
 
 ### Solution
 
-- Don't attach the AppDynamics Java agent to Zeebe brokers. Remove the AppDynamics `-javaagent` option from the broker JVM options, for example from the `JAVA_TOOL_OPTIONS` environment variable.
-- If you need AppDynamics for a specific investigation, attach the agent temporarily and remove it afterward. Bytecode instrumentation also adds overhead that can affect broker performance.
-- If the broker process doesn't exit after the error, restart the broker pod or JVM process.
+- Don't attach the AppDynamics Java agent to Zeebe brokers or gateways. Remove the AppDynamics `-javaagent` option from the JVM options, for example from the `JAVA_TOOL_OPTIONS` environment variable.
+- If you need AppDynamics for a specific investigation, attach the agent temporarily and remove it afterward. Bytecode instrumentation also adds overhead that can affect performance.
+- If the error occurs, restart the affected pod or JVM process. Don't wait for the process to exit or for health checks to fail, as neither is guaranteed.
 
 ## Enable Azure logging for troubleshooting
 
