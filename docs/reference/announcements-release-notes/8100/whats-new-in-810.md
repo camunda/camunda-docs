@@ -45,12 +45,33 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 </div>
 
-:::info learn more and upgrade
+:::info Release information
 
-- For a full summary of what's included in Camunda 8.10, including all breaking changes, deprecations, and supported environment changes, see [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
-- Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.9 to 8.10.
+For a full summary of what's included in Camunda 8.10, including all breaking changes, deprecations, and supported environment changes, see [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
 
 :::
+
+## Upgrade guides {#upgrade-guides}
+
+Ready to upgrade? The following guides offer detailed information on how to upgrade to Camunda 8.10.
+
+<table className="table-callout">
+<tr>
+    <td width="25%">**Guide**</td>
+    <td>**Description**</td>
+    <td>**Who is this guide for?**</td>
+</tr>
+<tr>
+    <td>[Self-Managed upgrade guide](/self-managed/upgrade/index.md)</td>
+    <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
+    <td>Operations and platform administrators of Self-Managed installations.</td>
+</tr>
+<tr>
+    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/migrate-to-810.md)</td>
+    <td>Plan and execute an upgrade from Camunda 8.9 to 8.10, focusing on API and tools transitions.</td>
+    <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
+</tr>
+</table>
 
 ## Summary of important changes
 
@@ -822,25 +843,3 @@ Highlights include:
 | [OpenSearch](/reference/announcements-release-notes/8100/8100-announcements.md#opensearch-34-and-35-no-longer-supported)                   | Minimum supported 3.x version raised to 3.6. Supported versions are now 2.19+ and 3.6+. |
 | [Oracle](/reference/announcements-release-notes/8100/8100-announcements.md#oracle-23ai-rebranded-as-oracle-26ai)                           | Oracle 23ai rebranded as Oracle AI Database 26ai. Supported versions are 19c and 26ai.  |
 | [PostgreSQL](/reference/announcements-release-notes/8100/8100-announcements.md#postgresql-14-no-longer-supported)                          | Version 14 no longer supported. Supported versions are now 15, 16, 17, and 18.          |
-
-## Upgrade guides {#upgrade-guides}
-
-The following guides offer detailed information on how to upgrade to Camunda 8.10.
-
-<table className="table-callout">
-<tr>
-    <td width="25%">**Guide**</td>
-    <td>**Description**</td>
-    <td>**Who is this guide for?**</td>
-</tr>
-<tr>
-    <td>[Self-Managed upgrade guide](/self-managed/upgrade/index.md)</td>
-    <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
-    <td>Operations and platform administrators of Self-Managed installations.</td>
-</tr>
-<tr>
-    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/migrate-to-810.md)</td>
-    <td>Plan and execute an upgrade from Camunda 8.9 to 8.10, focusing on API and tools transitions.</td>
-    <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
-</tr>
-</table>
