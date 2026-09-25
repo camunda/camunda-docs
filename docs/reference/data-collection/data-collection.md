@@ -216,7 +216,7 @@ Unlike the application telemetry above, these events are not controlled through 
 
 **Data category:** Non-commercial usage data only. This source does not collect commercial usage data.
 
-**Applies to:** every Desktop Modeler installation.
+**Applies to:** Self-Managed only.
 
 Telemetry collection in [Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) is enabled at first run unless you turn it off, and is controlled per installation. It tracks how certain features are used.
 
