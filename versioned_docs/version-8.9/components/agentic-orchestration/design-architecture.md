@@ -123,6 +123,6 @@ After the specialists return their results, a script task combines their summari
 
 ![Bank support orchestrator BPMN process, showing an orchestrator agent ad-hoc sub-process delegating to loan, account, and card specialist agents through call activities](img/orchestrator-agent.png)
 
-Splitting agents this way keeps each agent's tool set small and scoped to one domain, and lets specialist agents be reused across multiple processes. Call activities work here because every specialist is itself a Camunda process; if a specialist agent runs outside Camunda, use the [A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client.md) instead.
+Splitting agents this way keeps each agent's tool set small and scoped to one domain, and lets specialist agents be reused across multiple processes. You can also design specialist agents that run outside Camunda and integrate them using the [A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client.md).
 
-<p><a href="https://github.com/camunda/camunda-8-tutorials/tree/main/examples/orchestrator-agent#readme" class="link-arrow" target="_blank">Try out this example</a></p>
+See the [bank support orchestrator agent example](https://github.com/camunda/camunda-8-tutorials/tree/main/examples/orchestrator-agent) for the full BPMN models and setup instructions.

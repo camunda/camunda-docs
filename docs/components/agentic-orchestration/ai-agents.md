@@ -76,7 +76,7 @@ The agent extracts the marker and destination country from the shipment notes, d
 
 ![Seed export compliance agent BPMN process, showing an AI agent ad-hoc sub-process followed by a gateway that routes to either an automatic notification or a human review task](img/seed-export-compliance-agent.png)
 
-<p><a href="https://github.com/camunda/camunda-8-tutorials/tree/main/examples/task-agent#readme" class="link-arrow" target="_blank">Try out this example</a></p>
+See the [seed export compliance agent example](https://github.com/camunda/camunda-8-tutorials/tree/main/examples/task-agent) for the full BPMN models and setup instructions.
 
 ## AI agent integration features
 
