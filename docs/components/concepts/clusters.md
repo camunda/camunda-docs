@@ -36,14 +36,23 @@ See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-o
 An uptime SLA and RTO/RPO targets measure different things. Keep them separate when you evaluate a cluster type for disaster recovery planning.
 
 - **Uptime percentage (SLA)** is a contractual commitment that measures how much of the time, in a given month, the service is available and responsive. It doesn't describe what happens during or immediately after an outage.
-- **RTO (Recovery Time Objective)** measures how long it takes to restore service after a disruptive failure, such as an availability zone or region outage.
+- **RTO (Recovery Time Objective)** measures how long a failure disrupts service, from the moment it starts affecting your cluster until the cluster is fully functional again.
 - **RPO (Recovery Point Objective)** measures how much data you can lose when that failure happens, expressed as the time between the last recoverable point and the failure.
 
 A high uptime percentage doesn't imply a fast recovery or minimal data loss during a major infrastructure failure. Uptime percentage tells you how rarely a failure disrupts your cluster; RTO and RPO tell you how well the cluster recovers when a major failure does happen. See [how Camunda SaaS recovers from node, zone, and region failures](#how-camunda-saas-recovers-from-node-zone-and-region-failures) for the RTO and RPO of each failure scenario.
 
 ## How Camunda SaaS recovers from node, zone, and region failures
 
-Camunda 8 SaaS handles three kinds of infrastructure failure differently, each with its own recovery time and data loss profile: node failure, availability zone failure, and region failure. These RTO and RPO assessments describe expected behavior on a best-effort basis and aren't contractual commitments.
+Camunda 8 SaaS sets recovery objectives for each type of outage, based on how much infrastructure the outage affects. These objectives describe expected behavior on a best-effort basis and aren't contractual commitments.
+
+| Outage              | RPO                                                           | RTO                                          | Recovery                           | Requirement                 |
+| :------------------ | :------------------------------------------------------------ | :------------------------------------------- | :--------------------------------- | :-------------------------- |
+| Node                | Zero                                                          | Near zero                                    | Automatic                          | None                        |
+| Availability zone   | Zero                                                          | Near zero                                    | Automatic                          | None                        |
+| Region              | Time since the last backup replicated to the secondary region | Depends on provisioning time and data volume | Manual cold recovery by Camunda    | Dual-region backup location |
+| Cloud provider-wide | Not defined                                                   | Not defined                                  | Depends on the provider's recovery | Not available               |
+
+Your application's overall recovery time also depends on your own job workers and clients being able to reach the cluster and continue processing.
 
 ### Node failure
 
@@ -51,11 +60,15 @@ A node failure is the loss of a single Zeebe broker (or other component instance
 
 **RTO/RPO assessment:** RPO is zero, because every committed record is already replicated to the remaining brokers. RTO is near zero. Partition leader election typically completes within seconds, and clients recover through their standard retry mechanisms.
 
+**Your responsibilities:** Configure your clients and job workers to retry failed requests. Run job workers across multiple availability zones so that the same outage doesn't disrupt them.
+
 ### Availability zone failure
 
 An availability zone (AZ) failure is the loss of an entire zone in the cluster's region, taking every broker hosted there down at once. Basic, Standard, and Advanced clusters use a replication factor of three spread across three availability zones, so losing one zone still leaves a quorum of two zones able to confirm writes.
 
 **RTO/RPO assessment:** RPO is zero, because the remaining zones already hold every committed record. RTO is near zero. Failover is automatic, doesn't require a restore, and clients recover through their standard retry mechanisms. While the zone is unavailable, the cluster runs with reduced redundancy. A second failure in another zone before recovery can cause partitions to lose quorum.
+
+**Your responsibilities:** Configure your clients and job workers to retry failed requests. Run job workers across multiple availability zones so that the same outage doesn't disrupt them.
 
 ### Region failure
 
@@ -65,6 +78,14 @@ A region failure is the loss of every availability zone in the cluster's region 
 
 - **RPO** is the time between the most recent backup replicated to the secondary region and the failure. Your backup schedule determines this value.
 - **RTO** is the time needed to provision the new cluster, restore its data, and reconnect your applications. Restore duration depends on cluster data volume. The recovered cluster has new endpoints, so you must update your client configuration.
+
+**Your responsibilities:** Choose a dual-region backup location when you create the cluster. Set a backup schedule that matches the data loss you can tolerate. Plan how you'll point your clients and job workers at the recovered cluster's new endpoints.
+
+### Cloud provider-wide outage
+
+A cloud provider-wide outage affects several regions of the same cloud provider at once, or prevents the provider from starting or replacing infrastructure. Camunda SaaS clusters run on a single cloud provider and can't fail over to another provider.
+
+**RTO/RPO assessment:** Clusters stay unavailable until the provider recovers, so Camunda doesn't set an RTO or RPO for this type of outage. Camunda follows its incident response process and publishes updates on the [Camunda status page](/components/saas/status.md).
 
 ## Cluster size
 
