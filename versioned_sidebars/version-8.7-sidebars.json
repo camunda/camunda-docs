@@ -1943,6 +1943,7 @@
             "id": "self-managed/setup/guides/guides"
           },
           "items": [
+            "self-managed/setup/guides/camunda-helm-toolkit",
             "self-managed/setup/guides/accessing-components-without-ingress",
             "self-managed/setup/guides/ingress-setup",
             "self-managed/setup/guides/gateway-api-setup",

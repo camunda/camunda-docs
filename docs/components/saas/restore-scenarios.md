@@ -24,7 +24,7 @@ Use this when cluster data is inconsistent after an operational incident.
 
 1. Identify the last known-good backup.
 2. Confirm the backup is in `Completed` state.
-3. Start restore from Console.
+3. Start restore from Hub.
 4. Wait for cluster to return to healthy state.
 5. Validate process execution and key business variables in Operate.
 

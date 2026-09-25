@@ -17,7 +17,7 @@ For an architectural explanation of how secondary storage fits into Camunda 8, s
 | --------------------- | ----- | ------- |
 | Orchestration Cluster | Yes   | Yes     |
 | Optimize              | No    | Yes     |
-| Web Modeler           | Yes   | No      |
+| Camunda Hub           | Yes   | No      |
 | Management Identity   | Yes   | No      |
 
 Use this matrix as a compatibility summary for the main Camunda components and their supported database backends.

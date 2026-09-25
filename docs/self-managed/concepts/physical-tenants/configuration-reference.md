@@ -7,7 +7,7 @@ description: "Configure Physical Tenants with root defaults, per-tenant override
 
 Learn how to configure Physical Tenants in Camunda 8.10 Self-Managed deployments.
 
-In 8.10, configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
+Configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
 
 ## Configuration model
 
@@ -92,7 +92,7 @@ Some properties are cluster-scoped and cannot be overridden per tenant. Per-tena
 
 ## Default tenant behavior and compatibility
 
-The `default` Physical Tenant is always present in 8.10 and is immutable.
+The `default` Physical Tenant is always present and immutable.
 
 For backward compatibility:
 
@@ -102,9 +102,9 @@ For backward compatibility:
 
 ## Validation and constraints
 
-At startup, configuration validation enforces tenant-level constraints, and any failure prevents the cluster from starting. Most validation failures throw a `UnifiedConfigurationException`; secret store and cache validation (see **Secrets** below) is the exception, throwing an `IllegalStateException` or an `IllegalArgumentException` directly instead. Either way, there is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
+At startup, configuration validation enforces tenant-level constraints. Any validation failure prevents the cluster from starting. Most validation failures throw a `UnifiedConfigurationException`. Secret store and cache validation is an exception and throws an `IllegalStateException` or `IllegalArgumentException` directly. These validation failures don't have a separate error code. Camunda reports the message at startup instead of logging it as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
-Known constraints and behavior for 8.10:
+Known constraints and behavior:
 
 - Tenant keys in `camunda.physical-tenants.<tenant-key>` must be lowercase alphanumeric (`[a-z0-9]+`) with a maximum length of 64 characters.
 - Validation rejects unsupported or colliding storage configurations across tenants.
@@ -117,7 +117,7 @@ Known constraints and behavior for 8.10:
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
 - **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
-- **Secrets**: each physical tenant supports at most one secret store, and its id must be `default`; any other id is rejected. The cache `ttl` (minimum `1m`, whole minutes only) and `max-size` (minimum `1`) are validated per tenant. Override the root-level `camunda.secrets.*` defaults per tenant via `camunda.physical-tenants.<tenant-key>.secrets.*`.
+- **Secrets**: each physical tenant supports at most one secret store, and its ID must be `default`; any other ID is rejected. Camunda validates the cache settings per tenant. `ttl` must be at least `1m` and use whole minutes, and `max-size` must be at least `1`. To override the root-level `camunda.secrets.*` defaults for a physical tenant, use `camunda.physical-tenants.<tenant-key>.secrets.*`.
 
 ### Startup error message formats
 

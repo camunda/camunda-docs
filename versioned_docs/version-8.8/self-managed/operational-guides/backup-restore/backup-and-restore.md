@@ -43,6 +43,8 @@ This guide includes procedures to:
 
 - [Restore](./restore.md) a cluster from a backup if any failures occur that cause data loss.
 
+If you restore a Camunda 8.8 deployment after upgrading from 8.7, verify the Zeebe data volume mount path. See [Zeebe data path and custom mounts](../../upgrade/helm/870-to-880.md#zeebe-data-path-and-custom-mounts) in the 8.7 to 8.8 Helm upgrade guide.
+
 <ZeebeGrid zeebe={overviewCards} />
 
 :::note

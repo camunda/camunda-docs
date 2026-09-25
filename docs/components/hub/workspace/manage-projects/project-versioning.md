@@ -21,6 +21,10 @@ To create a project snapshot:
 3. Enter a **Snapshot tag** in the snapshot creation modal.
 4. Click **Create**.
 
+:::note
+A snapshot references each element template's last published version, not any unpublished draft changes. To include recent template edits in a snapshot, [publish a new element template version](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#versioning-element-templates) first.
+:::
+
 ## View all snapshots
 
 To view all snapshots:
