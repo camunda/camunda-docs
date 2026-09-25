@@ -80,7 +80,7 @@ helm repo update
 helm pull camunda/camunda-platform
 ```
 
-If you deploy infrastructure (PostgreSQL, Elasticsearch, Keycloak) with Kubernetes operators or managed services, also make their Helm charts or images available in your air-gapped environment, following their documentation.
+If you deploy infrastructure (PostgreSQL, Elasticsearch, Keycloak) with Kubernetes operators, also make the operator Helm charts and images available in your air-gapped environment, following their documentation. Managed services run outside the cluster, so they need nothing mirrored.
 
 Install the Helm chart by either making it available in a [private repository](https://helm.sh/docs/topics/chart_repository/) that can be accessed from the air-gapped environment or providing the downloaded chart archive locally, for example:
 

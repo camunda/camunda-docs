@@ -227,11 +227,11 @@ Make sure the host and port are correctly defined.
 The following example `values.yaml` configures Web Modeler with an external Amazon Aurora PostgreSQL database:
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
       url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-      user: web_modeler_user
+      username: web_modeler_user
       secret:
         existingSecret: web-modeler-db-secret
         existingSecretKey: database-password
