@@ -138,8 +138,7 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 
 </details>
 
-<details>
-   <summary>ROSA HCP — additional steps for ALPN h2</summary>
+#### Enable ALPN h2 on ROSA HCP
 
 These steps are required only on **Red Hat OpenShift Service on AWS – Hosted Control Planes (ROSA HCP)** managed clusters. Self-managed OpenShift clusters where the cluster-wide `ingress.operator.openshift.io/default-enable-http2=true` annotation is honored do **not** need this workaround.
 
@@ -172,7 +171,9 @@ To fix this, copy the router default wildcard TLS Secret from `openshift-ingress
 
 After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress will carry an inlined `spec.tls.certificate`, HAProxy will emit a per-SNI `[alpn h2,http/1.1]` `crt-list` entry, and gRPC clients will negotiate `h2` successfully.
 
-</details>
+:::warning
+`copy-router-tls-secret.sh` copies the certificate as it exists at that moment. It does not track later changes. When the router wildcard certificate is rotated or replaced, the copy in the Camunda namespace goes stale, the Route serves an expired certificate, and gRPC clients fail again. Re-run the script and restart the affected pods after any router certificate change, or manage the copy with a controller that keeps the two Secrets in sync.
+:::
 
 #### Configure Route TLS
 
