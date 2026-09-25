@@ -807,7 +807,9 @@ The Go SDK additionally contains support for gRPC job streaming. During 8.10 the
 
 ## Supported environments
 
-Camunda 8.10 updates several platform and environment baselines. Highlights include:
+Camunda 8.10 updates several platform and environment baselines. For complete details, including breaking changes and deprecations, see [release announcements](./8100-announcements.md) and [supported environments](/reference/supported-environments.md).
+
+Highlights include:
 
 | Environment                                                                                                                                | Description                                                                             |
 | :----------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
@@ -820,10 +822,6 @@ Camunda 8.10 updates several platform and environment baselines. Highlights incl
 | [OpenSearch](/reference/announcements-release-notes/8100/8100-announcements.md#opensearch-34-and-35-no-longer-supported)                   | Minimum supported 3.x version raised to 3.6. Supported versions are now 2.19+ and 3.6+. |
 | [Oracle](/reference/announcements-release-notes/8100/8100-announcements.md#oracle-23ai-rebranded-as-oracle-26ai)                           | Oracle 23ai rebranded as Oracle AI Database 26ai. Supported versions are 19c and 26ai.  |
 | [PostgreSQL](/reference/announcements-release-notes/8100/8100-announcements.md#postgresql-14-no-longer-supported)                          | Version 14 no longer supported. Supported versions are now 15, 16, 17, and 18.          |
-
-:::info
-For complete details, including breaking changes and deprecations, see [release announcements](./8100-announcements.md) and [supported environments](/reference/supported-environments.md).
-:::
 
 ## Upgrade guides {#upgrade-guides}
 
