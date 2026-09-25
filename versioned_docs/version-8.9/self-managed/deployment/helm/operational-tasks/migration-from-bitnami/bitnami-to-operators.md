@@ -107,14 +107,18 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic
 
 Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for example, if the component isn't deployed or already uses an external service.
 
-:::warning Custom index prefixes must be declared
-`ES_INDEX_PREFIXES` selects which Elasticsearch indices the migration lists, reindexes, and re-aliases. Indices outside these patterns are silently ignored, so if you changed the index prefix (for example through `camunda.data.exporters.elasticsearch.args.index-prefix`), the migration completes successfully while leaving that data behind. Replace the defaults with your own prefixes followed by a wildcard:
+### Elasticsearch index prefixes
+
+`ES_INDEX_PREFIXES` selects which Elasticsearch indices the migration lists, reindexes, and re-aliases. Indices outside these patterns are ignored without warning, so an installation using a custom index prefix migrates successfully while leaving that data behind.
+
+Each component's prefix is configured independently, for example through `camunda.data.exporters.elasticsearch.args.index-prefix`. Keep every default pattern and add your custom ones, rather than replacing the list: a pattern that matches no index is skipped harmlessly, while a missing pattern silently drops a whole index family.
 
 ```bash
-export ES_INDEX_PREFIXES="my-prefix-zeebe-* my-prefix-operate-* my-prefix-tasklist-* my-prefix-optimize-*"
+# Defaults retained, custom Zeebe and Operate prefixes added
+export ES_INDEX_PREFIXES="zeebe-* operate-* tasklist-* optimize-* connectors-* camunda-* my-prefix-zeebe-* my-prefix-operate-*"
 ```
 
-:::
+Phase 2 logs the indices it matched. Check that list against `_cat/indices` on the source before starting the cutover.
 
 ### Source and target database names
 
@@ -207,13 +211,13 @@ The migration patches the reference ECK cluster manifest from `operator-based/el
 
 Phase 1 compares the Elasticsearch version of your source installation against `spec.version` in the ECK manifest, and stops the migration if the two are incompatible:
 
-| Source to target                               | Result                        |
-| ---------------------------------------------- | ----------------------------- |
-| Same version                                   | Allowed                       |
-| Same minor, different patch (8.18.0 to 8.18.3) | Allowed                       |
-| Newer minor, same major (8.18.0 to 8.19.20)    | Allowed, logged as an upgrade |
-| Older minor (8.19.0 to 8.18.0)                 | Blocked, downgrade            |
-| Different major (8.x to 7.x, or 8.x to 9.x)    | Blocked                       |
+| Source to target                                              | Result                             |
+| ------------------------------------------------------------- | ---------------------------------- |
+| Same version                                                  | Allowed                            |
+| Same minor, any patch (8.18.0 to 8.18.3, or 8.18.3 to 8.18.0) | Allowed, the patch is not compared |
+| Newer minor, same major (8.18.0 to 8.19.20)                   | Allowed, logged as an upgrade      |
+| Older minor (8.19.0 to 8.18.0)                                | Blocked, downgrade                 |
+| Different major (8.x to 7.x, or 8.x to 9.x)                   | Blocked                            |
 
 The target is allowed to be ahead of the source within the same major version, because reindex from remote reads an older source into a newer target.
 
@@ -763,9 +767,9 @@ ES: major version mismatch (source=8.19.0 → target=9.1.0)
   Reindex-from-remote is only supported within the same major version.
 ```
 
-The preflight check compares the Elasticsearch version running in your source installation against `spec.version` in `operator-based/elasticsearch/elasticsearch-cluster.yml`. Reindex from remote reads an older source into a newer target, so the target may be ahead of the source within the same major version, but it cannot be behind it or on a different major.
+The preflight check compares the major and minor version of the Elasticsearch running in your source installation against `spec.version` in `operator-based/elasticsearch/elasticsearch-cluster.yml`. Reindex from remote reads an older source into a newer target, so the target minor may be ahead of the source minor, but it cannot be behind it, and the major must match.
 
-Edit `spec.version` in the ECK manifest so it is greater than or equal to your source version and shares its major version, then rerun Phase 1. For the full matrix of accepted combinations, see [Elasticsearch version compatibility](#elasticsearch-version-compatibility).
+Edit `spec.version` in the ECK manifest so it keeps the major version of your source and its minor is greater than or equal to the source minor, then rerun Phase 1. The patch component is not compared. For the full matrix of accepted combinations, see [Elasticsearch version compatibility](#elasticsearch-version-compatibility).
 
 ### Migration status check
 
