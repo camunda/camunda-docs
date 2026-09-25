@@ -29,7 +29,7 @@ An isolated execution unit within an Orchestration Cluster. Each Physical Tenant
 
 ### Default Physical Tenant
 
-Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant.
+Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, REST API traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant. This routing rule is specific to the `/v2/...` REST API; the actuator surface used for scaling and purging does not follow it (see [data purge](/self-managed/operational-guides/data-purge.md) for an operation where an unscoped request instead targets every tenant).
 
 ### Cluster-wide operation
 
@@ -46,7 +46,7 @@ Tenant-scoped APIs are accessible at `/physical-tenants/{physicalTenantId}/v2/`:
 - REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
 - Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-Cluster-wide APIs use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
+Cluster-wide APIs use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role, except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers can use it as a health check. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
 
 gRPC clients specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
