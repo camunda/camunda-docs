@@ -132,8 +132,8 @@ skopeo copy --src-creds=<your-username>:<your-password> \
 
 # Copy Bitnami Premium Elasticsearch image
 skopeo copy --src-creds=<your-username>:<your-password> \
-  docker://registry.camunda.cloud/vendor-ee/elasticsearch:9.5.4-debian-12-r0 \
-  docker://your-private-registry.com/bitnami/elasticsearch:9.5.4-debian-12-r0
+  docker://registry.camunda.cloud/vendor-ee/elasticsearch:8.11.4-debian-12-r0 \
+  docker://your-private-registry.com/bitnami/elasticsearch:8.11.4-debian-12-r0
 
 # Copy Bitnami Premium Keycloak image
 skopeo copy --src-creds=<your-username>:<your-password> \
