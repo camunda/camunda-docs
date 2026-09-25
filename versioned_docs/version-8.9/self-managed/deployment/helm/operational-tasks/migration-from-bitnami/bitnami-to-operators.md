@@ -84,27 +84,37 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic
 
 ### Key configuration variables
 
-| Variable                     | Default                | Description                                                                                               |
-| ---------------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------- |
-| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                                                         |
-| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                                                         |
-| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                                                                 |
-| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups                                          |
-| `IDENTITY_DB_NAME`           | `identity`             | Identity database name on the target                                                                      |
-| `IDENTITY_DB_USER`           | `identity`             | Identity database user on the target                                                                      |
-| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name on the target                                                                      |
-| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user on the target                                                                      |
-| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name on the target                                                                   |
-| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user on the target                                                                   |
-| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                                                          |
-| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                                                             |
-| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration                                                        |
-| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration                                                |
-| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration                                                     |
-| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                                                                  |
-| `ES_WARM_REINDEX`            | `false`                | When `true`, pre-copies ES data during Phase 2 (no downtime), reducing Phase 3 to a ~5 minute delta sync. |
+| Variable                     | Default                                                          | Description                                                                                                  |
+| ---------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `NAMESPACE`                  | `camunda`                                                        | Kubernetes namespace of your Camunda installation                                                            |
+| `CAMUNDA_RELEASE_NAME`       | `camunda`                                                        | Helm release name                                                                                            |
+| `CAMUNDA_HELM_CHART_VERSION` | (chart version)                                                  | Target Helm chart version for the upgrade                                                                    |
+| `CAMUNDA_DOMAIN`             | (empty)                                                          | Domain for Keycloak Ingress. Leave empty for port-forward setups                                             |
+| `IDENTITY_DB_NAME`           | `identity`                                                       | Identity database name on the target                                                                         |
+| `IDENTITY_DB_USER`           | `identity`                                                       | Identity database user on the target                                                                         |
+| `KEYCLOAK_DB_NAME`           | `keycloak`                                                       | Keycloak database name on the target                                                                         |
+| `KEYCLOAK_DB_USER`           | `keycloak`                                                       | Keycloak database user on the target                                                                         |
+| `WEBMODELER_DB_NAME`         | `webmodeler`                                                     | Web Modeler database name on the target                                                                      |
+| `WEBMODELER_DB_USER`         | `webmodeler`                                                     | Web Modeler database user on the target                                                                      |
+| `BACKUP_PVC`                 | `migration-backup-pvc`                                           | PVC name for storing backup data                                                                             |
+| `BACKUP_STORAGE_SIZE`        | `50Gi`                                                           | Backup PVC size (must fit all database dumps)                                                                |
+| `MIGRATE_IDENTITY`           | `true`                                                           | Enables the Identity PostgreSQL database migration                                                           |
+| `MIGRATE_KEYCLOAK`           | `true`                                                           | Enables the Keycloak and its PostgreSQL database migration                                                   |
+| `MIGRATE_WEBMODELER`         | `true`                                                           | Enables the Web Modeler PostgreSQL database migration                                                        |
+| `MIGRATE_ELASTICSEARCH`      | `true`                                                           | Enables the Elasticsearch data migration                                                                     |
+| `ES_WARM_REINDEX`            | `false`                                                          | When `true`, pre-copies ES data during Phase 2 (no downtime), reducing Phase 3 to a ~5 minute delta sync.    |
+| `ES_INDEX_PREFIXES`          | `zeebe-* operate-* tasklist-* optimize-* connectors-* camunda-*` | Index patterns that identify your Camunda indices. Set this if your installation uses a custom index prefix. |
 
 Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for example, if the component isn't deployed or already uses an external service.
+
+:::warning Custom index prefixes must be declared
+`ES_INDEX_PREFIXES` selects which Elasticsearch indices the migration lists, reindexes, and re-aliases. Indices outside these patterns are silently ignored, so if you changed the index prefix (for example through `camunda.data.exporters.elasticsearch.args.index-prefix`), the migration completes successfully while leaving that data behind. Replace the defaults with your own prefixes followed by a wildcard:
+
+```bash
+export ES_INDEX_PREFIXES="my-prefix-zeebe-* my-prefix-operate-* my-prefix-tasklist-* my-prefix-optimize-*"
+```
+
+:::
 
 ### Source and target database names
 
@@ -709,6 +719,23 @@ When restoring to CNPG, the `pg_restore` command uses `--no-owner --no-privilege
 ```bash
 kubectl exec -it <cnpg-primary-pod> -n ${NAMESPACE} -- psql -U postgres -c "\\du"
 ```
+
+### Migrated Keycloak crashes on startup with a duplicate key on `constraint_jgroups_ping`
+
+The migrated Keycloak enters `CrashLoopBackOff` and its logs show:
+
+```text
+ERROR: Failed to start server in (production) mode
+JDBC exception executing SQL [INSERT INTO JGROUPS_PING values (?, ?, ?, ?, ?)]
+duplicate key value violates unique constraint "constraint_jgroups_ping"
+  Detail: Key (address)=(uuid://...0002) already exists.
+```
+
+`JGROUPS_PING` is Keycloak's transient JDBC_PING cluster-discovery table. Its rows hold the node addresses of the **source** cluster, so restoring them into a fresh Keycloak collides with the membership row the target inserts on its own startup.
+
+The migration scripts prevent this: the Keycloak dump excludes the `JGROUPS_PING` table data while keeping its schema, so the target starts clean and registers its own membership. The exclusion is keyed on the component being backed up, so it applies whether `KEYCLOAK_TARGET_MODE` is `operator` or `external`.
+
+If you hit this on a custom or older pipeline, exclude the table data from the dump with `pg_dump --exclude-table-data=jgroups_ping`, or run `TRUNCATE jgroups_ping` in the target database before starting Keycloak.
 
 ### Elasticsearch reindex fails
 
