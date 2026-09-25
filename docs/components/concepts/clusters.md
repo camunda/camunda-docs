@@ -31,40 +31,14 @@ You can choose from three different cluster types:
 See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-enterprise-general-terms) for term definitions for **Monthly Uptime Percentage** and **Downtime**.
 :::
 
-### SLA versus RTO and RPO
+### Resilience and disaster recovery
 
-An uptime SLA and RTO/RPO targets measure different things. Keep them separate when you evaluate a cluster type for disaster recovery planning.
+Uptime percentage measures how often your cluster is available. Recovery Time Objective (RTO) and Recovery Point Objective (RPO) measure how quickly service is restored and how much data could be lost after a failure. A high uptime percentage doesn't imply a fast recovery or minimal data loss during a major failure.
 
-- **Uptime percentage (SLA)** is a contractual commitment that measures how much of the time, in a given month, the service is available and responsive. It doesn't describe what happens during or immediately after an outage.
-- **RTO (Recovery Time Objective)** measures how long it takes to restore service after a disruptive failure, such as an availability zone or region outage.
-- **RPO (Recovery Point Objective)** measures how much data you can lose when that failure happens, expressed as the time between the last recoverable point and the failure.
+- **Node and availability zone failures:** Clusters replicate data across three availability zones and recover automatically, with no data loss.
+- **Region failures:** If you choose a [dual-region backup location](/components/saas/backups.md#backup-location), the cluster can be recovered from backups replicated to a secondary region. Data loss depends on your backup schedule.
 
-A high uptime percentage doesn't imply a fast recovery or minimal data loss during a major infrastructure failure. Uptime percentage tells you how rarely a failure disrupts your cluster; RTO and RPO tell you how well the cluster recovers when a major failure does happen. See [how Camunda SaaS recovers from node, zone, and region failures](#how-camunda-saas-recovers-from-node-zone-and-region-failures) for the RTO and RPO of each failure scenario.
-
-## How Camunda SaaS recovers from node, zone, and region failures
-
-Camunda 8 SaaS handles three kinds of infrastructure failure differently, each with its own recovery time and data loss profile: node failure, availability zone failure, and region failure. These RTO and RPO assessments describe expected behavior on a best-effort basis and aren't contractual commitments.
-
-### Node failure
-
-A node failure is the loss of a single Zeebe broker (or other component instance) within a cluster. Camunda SaaS orchestration clusters replicate each partition across multiple brokers using [Raft consensus](/components/zeebe/technical-concepts/clustering.md), typically one broker per availability zone. When a single broker fails, the remaining brokers already hold every committed record and automatically elect a new leader for the affected partitions.
-
-**RTO/RPO assessment:** RPO is zero, because every committed record is already replicated to the remaining brokers. RTO is near zero. Partition leader election typically completes within seconds, and clients recover through their standard retry mechanisms.
-
-### Availability zone failure
-
-An availability zone (AZ) failure is the loss of an entire zone in the cluster's region, taking every broker hosted there down at once. Basic, Standard, and Advanced clusters use a replication factor of three spread across three availability zones, so losing one zone still leaves a quorum of two zones able to confirm writes.
-
-**RTO/RPO assessment:** RPO is zero, because the remaining zones already hold every committed record. RTO is near zero. Failover is automatic, doesn't require a restore, and clients recover through their standard retry mechanisms. While the zone is unavailable, the cluster runs with reduced redundancy. A second failure in another zone before recovery can cause partitions to lose quorum.
-
-### Region failure
-
-A region failure is the loss of every availability zone in the cluster's region at once, for example, during a regional cloud provider outage. Camunda SaaS clusters run in a [single region](/components/saas/regions.md). By default, backups are stored in the same region as the cluster. If you select a [dual-region backup location](/components/saas/backups.md#backup-location), backups are also replicated to the secondary backups region. Self-service [restore is limited to the same cluster, organization, and region](/components/saas/backup-restore-overview.md#limitations-and-constraints). For some region pairs, Camunda can perform a cold recovery to the secondary backups region.
-
-**RTO/RPO assessment:** Recovery from a region failure is a manual cold recovery, the same strategy as the Cold Recovery tier in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md) for Self-Managed. Camunda provisions a new cluster in the secondary backups region and restores it from the replicated backup. Without dual-region backups, recovery to another region isn't possible.
-
-- **RPO** is the time between the most recent backup replicated to the secondary region and the failure. Your backup schedule determines this value.
-- **RTO** is the time needed to provision the new cluster, restore its data, and reconnect your applications. Restore duration depends on cluster data volume. The recovered cluster has new endpoints, so you must update your client configuration.
+Recovery behavior is described on a best-effort basis and isn't a contractual commitment. To learn how recovery from backups works, see the [backup and restore overview](/components/saas/backup-restore-overview.md).
 
 ## Cluster size
 
