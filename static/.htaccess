@@ -223,8 +223,8 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage
 # usable from chart 15.x); redirect to the 8.9 page, the last version that documents them.
 RewriteRule ^docs/next/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]
 
-# TEMPORARY REDIRECT - This file didn't belong in 8.9. However, it was in production, so removing it broke builds (pr #10044).
-# We should be able to remove this redirect after we publish the docs to production, removing it from the sitemap.
+# This file didn't belong in 8.9. However, it was in production and was receiving traffic, so we decided to maintain
+# a redirect.
 RewriteRule ^docs/self-managed/upgrade/helm/890-to-8100/?$ /docs/next/self-managed/upgrade/helm/890-to-8100/ [R=301,L]
 
 # 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)

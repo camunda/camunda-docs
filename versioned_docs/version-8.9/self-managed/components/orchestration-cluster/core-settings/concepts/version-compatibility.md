@@ -39,6 +39,10 @@ You must not:
 
 Failure to follow this procedure results in an unsupported upgrade path. The broker or schema manager will block startup to prevent unsafe migrations.
 
+:::note
+The compatibility check compares minor versions, but an individual feature may require a specific minimum **patch** of the target minor. For example, upgrading a cluster that used [draining process definition deletion](/reference/announcements-release-notes/880/880-announcements.md#draining-deletion-upgrade-constraint) on 8.8 requires 8.9.19 or later. Check the [prepare-for-upgrade guide](/self-managed/upgrade/prepare-for-upgrade.md) for feature-specific minimum patches before upgrading.
+:::
+
 ## Supported upgrade paths
 
 The examples below show representative compatible and incompatible paths. Patch versions can vary as long as minor-version rules are followed.

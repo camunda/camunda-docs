@@ -58,7 +58,7 @@ The equivalent of a Camunda Hub project in Desktop Modeler is a process applicat
 Desktop Modeler
 ├─ BPMN
 ├─ DMN
-└─ Project B
+└─ Process Application
     ├─ .process-application
     ├─ BPMN
     ├─ Folder
