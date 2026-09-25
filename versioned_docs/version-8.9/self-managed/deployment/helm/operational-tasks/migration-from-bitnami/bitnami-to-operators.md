@@ -126,7 +126,7 @@ The `*_DB_NAME` and `*_DB_USER` variables above name the databases and roles the
 | Keycloak    | `bitnami_keycloak` / `bn_keycloak`       | `keycloak`                           |
 | Web Modeler | `web-modeler`                            | `webmodeler`                         |
 
-The migration scripts read the real source database and role from the Bitnami StatefulSet at run time, so you don't need to configure them. Restores run with `--no-owner --no-privileges`, which is why a differing source role is not a problem.
+The migration scripts read the real source database and role from the Bitnami StatefulSet at runtime, so you don't need to configure them. Restores run with `--no-owner --no-privileges`, which is why a differing source role is not a problem.
 
 Override the detection only if your installation was renamed away from the chart defaults, or if you want to back up a different database:
 
