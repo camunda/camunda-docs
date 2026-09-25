@@ -29,7 +29,7 @@ An isolated execution unit within an Orchestration Cluster. Each Physical Tenant
 
 ### Default Physical Tenant
 
-Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant.
+Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, REST API traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant. This routing rule is specific to the `/v2/...` REST API; the actuator surface used for scaling and purging does not follow it (see [data purge](/self-managed/operational-guides/data-purge.md) for an operation where an unscoped request instead targets every tenant).
 
 ### Cluster-wide operation
 

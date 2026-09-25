@@ -26,7 +26,7 @@ The `physicalTenantId` in the path must match a configured Physical Tenant. The 
 
 ## Default tenant routing
 
-Requests that omit the Physical Tenant prefix are routed to the `default` Physical Tenant:
+On the REST API, requests that omit the Physical Tenant prefix are routed to the `default` Physical Tenant. This rule is specific to the `/v2/...` REST API; the actuator surface does not follow it uniformly. For example, an unscoped `POST /actuator/cluster/purge` targets every configured tenant, not just the default one. See [data purge](/self-managed/operational-guides/data-purge.md).
 
 ```
 /v2/{resource}  →  /physical-tenants/default/v2/{resource}
