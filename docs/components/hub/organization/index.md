@@ -24,27 +24,21 @@ Create, monitor, and assign clusters for seamless execution across all rollout s
 
 <span class="link-arrow">[Get started](./manage-clusters/index.md)</span>
 
-## Manage credentials
-
-Create a reusable credential, then select it wherever an element template needs authentication or connection configuration, instead of repeating the settings in every diagram:
-
-<span class="link-arrow">[Get started](./credentials/index.md)</span>
-
 ## Manage the catalog
 
 Establish a Git repository with catalog assets, upload the assets in a CI/CD pipeline, and approve them for use within your organization:
 
 <span class="link-arrow">[Get started](./manage-catalog/index.md)</span>
 
-## Manage users
+## Manage credentials
 
-Manage the users, user groups, and roles in your organization:
+Create a reusable credential, then select it wherever an element template needs authentication or connection configuration, instead of repeating the settings in every diagram:
 
-<span class="link-arrow">[Get started](./manage-users/index.md)</span>
+<span class="link-arrow">[Get started](./credentials/index.md)</span>
 
 ## Manage organization settings
 
-Manage organizational settings, and view usage alerts and history:
+Manage users and organizational settings, and view usage alerts and history:
 
 <span class="link-arrow">[Get started](./manage-organization-settings/organization-settings.md)</span>
 

@@ -759,17 +759,6 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Manage credentials",
-              link: {
-                type: "doc",
-                id: "components/hub/organization/credentials/credentials",
-              },
-              items: [
-                "components/hub/organization/credentials/credentials-modeling-interface",
-              ],
-            },
-            {
-              type: "category",
               label: "Manage the catalog",
               link: {
                 type: "doc",
@@ -782,27 +771,40 @@ module.exports = {
                 "components/hub/organization/manage-catalog/sync-multiple-repositories",
               ],
             },
+            "components/hub/organization/analyze-operations/business-value-dashboard",
             {
               type: "category",
-              label: "Manage users",
+              label: "Manage credentials",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-users/index",
+                id: "components/hub/organization/credentials/credentials",
               },
               items: [
-                "components/hub/organization/manage-users/create-manage-users",
-                "components/hub/organization/manage-users/manage-user-groups",
-                "components/hub/organization/manage-users/resource-based-auth",
+                "components/hub/organization/credentials/credentials-modeling-interface",
               ],
             },
+            "components/hub/organization/analyze-operations/hub-dashboard",
             {
               type: "category",
-              label: "Manage organization settings",
+              label: "Manage organization",
               link: {
                 type: "doc",
                 id: "components/hub/organization/manage-organization-settings/organization-settings",
               },
               items: [
+                {
+                  type: "category",
+                  label: "Manage users",
+                  link: {
+                    type: "doc",
+                    id: "components/hub/organization/manage-users/index",
+                  },
+                  items: [
+                    "components/hub/organization/manage-users/create-manage-users",
+                    "components/hub/organization/manage-users/manage-user-groups",
+                    "components/hub/organization/manage-users/resource-based-auth",
+                  ],
+                },
                 "components/hub/organization/manage-organization-settings/external-sso",
                 "components/hub/organization/manage-organization-settings/view-organization-activity",
                 "components/hub/organization/manage-organization-settings/enable-alpha-features",
@@ -829,9 +831,7 @@ module.exports = {
                 id: "components/hub/organization/analyze-operations/analyze-operations",
               },
               items: [
-                "components/hub/organization/analyze-operations/hub-dashboard",
                 "components/hub/organization/analyze-operations/job-dashboard",
-                "components/hub/organization/analyze-operations/business-value-dashboard",
               ],
             },
           ],
