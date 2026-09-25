@@ -187,6 +187,7 @@ module.exports = {
             "components/concepts/process-instance-modification",
             "components/concepts/process-instance-migration",
             "components/concepts/process-instance-deletion",
+            "components/concepts/process-instance-suspension",
             "components/concepts/incidents",
           ],
         },
@@ -651,6 +652,7 @@ module.exports = {
             "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
+            "components/operate/userguide/suspend-resume-process-instance",
             {
               "Process instance modification": [
                 "components/operate/userguide/process-instance-modification",

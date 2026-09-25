@@ -486,6 +486,21 @@ What's included:
 
 <p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
+#### Process instance suspension and resumption
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3526 -->
+
+You can now suspend and resume a running process instance without canceling it. Suspending halts execution at its current point: no jobs activate or complete, no events correlate, and no timers fire. Resuming picks up from exactly where execution stopped, with no loss of progress or data.
+
+- Suspend or resume a single instance, or a batch of instances at once, from Operate or the REST API.
+- Variables are the one exception to the halt — you can still read and update variables on a suspended instance, so you can fix data before resuming.
+- Timers whose due dates pass during suspension fire immediately on resume rather than waiting out their remaining duration.
+- Messages and signals are not correlated to a suspended instance; publishing itself is unaffected.
+
+<p class="link-arrow">[Suspend and resume a process instance](/components/operate/userguide/suspend-resume-process-instance.md)</p>
+
 #### Task testing supports call activities
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
