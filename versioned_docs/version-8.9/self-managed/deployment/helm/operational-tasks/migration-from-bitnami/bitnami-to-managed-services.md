@@ -140,6 +140,28 @@ kubectl create secret generic external-es \
 The migration scripts use the term **external targets** (`PG_TARGET_MODE=external`, `ES_TARGET_MODE=external`) for any non-operator target. This includes cloud-managed services (AWS RDS, Elastic Cloud, etc.) but also self-hosted databases outside the Kubernetes cluster. This guide uses "managed services" as a shorthand, but the scripts themselves are not restricted to cloud-managed offerings.
 :::
 
+### When to use external target mode
+
+Set `PG_TARGET_MODE=external` or `ES_TARGET_MODE=external` when the migration should **not** deploy operators or create cluster instances, because the target already exists:
+
+| Scenario                                                                                 | Setting                         | Why                                                                                                                   |
+| ---------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Fresh cluster, no operators installed                                                    | `operator` (default)            | The scripts install CloudNativePG and ECK, then create the clusters.                                                  |
+| A platform team already installed the operators **and** provisioned the target instances | `external`                      | Avoids overwriting the operator version, since the scripts apply a pinned version with `kubectl apply --server-side`. |
+| You run a different PostgreSQL operator, such as StackGres, Crunchy, or Zalando          | `PG_TARGET_MODE=external`       | CloudNativePG is never installed. Create the databases with your own operator and point the migration at them.        |
+| The target is a managed service, such as Amazon RDS or Elastic Cloud                     | `external`                      | No operator is needed. Data migrates directly to the managed endpoint.                                                |
+| Keycloak runs as a managed, standalone, or Helm-managed instance                         | `KEYCLOAK_TARGET_MODE=external` | Migrates the realm into the external Keycloak database and points Camunda at the existing instance.                   |
+
+External mode skips both the operator installation and the creation of the target instances. Create the PostgreSQL databases and the Elasticsearch cluster yourself before starting, and verify they are reachable from the Camunda namespace. Phase 3 restores into them directly, so a missing or unreachable target fails the cutover after the application has already been frozen.
+
+In external mode you must also provide the `EXTERNAL_PG_*` or `EXTERNAL_ES_*` connection details, and a `CUSTOM_HELM_VALUES_FILE` with Helm values pointing Camunda at the external targets.
+
+### Data-only cutover with `SKIP_HELM_UPGRADE`
+
+Set `SKIP_HELM_UPGRADE=true` to run the Phase 3 data migration, the backup, restore, and reindex, but skip the final `helm upgrade`. The caller then owns the chart upgrade.
+
+This is intended for continuous integration harnesses that migrate Bitnami data onto external infrastructure and then perform an N to N+1 chart upgrade themselves. Normal migrations leave it `false`. Setting `KEYCLOAK_TARGET_MODE=external` derives it automatically, so you do not set it yourself in that case.
+
 Edit `env.sh`, and set the target mode to `external`. The base configuration variables (`NAMESPACE`, `CAMUNDA_RELEASE_NAME`, `MIGRATE_*`, etc.) are the same as in the [operator-based guide](./bitnami-to-operators.md#key-configuration-variables), only the target mode and external endpoint variables differ:
 
 <details>
@@ -218,7 +240,9 @@ export EXTERNAL_KEYCLOAK_REALM="/realms/camunda-platform"
 
 #### Source database names that differ from the target
 
-The bundled Bitnami Keycloak subchart defaults to database `bitnami_keycloak` and user `bn_keycloak`, which differ from the migration target names. When the source names differ, set the `*_SOURCE_DB_NAME` and `*_SOURCE_DB_USER` overrides. They default to the target names, so you only set them when the source differs:
+The bundled Bitnami Keycloak subchart serves database `bitnami_keycloak` and user `bn_keycloak`, and Web Modeler serves `web-modeler`, none of which match the migration target names. You do not need to configure this: the scripts read the real source database and role off the Bitnami StatefulSet, and restores run with `--no-owner --no-privileges`, so a differing source role is not a problem. See [source and target database names](./bitnami-to-operators.md#source-and-target-database-names) for the full mapping.
+
+Set the `*_SOURCE_DB_NAME` and `*_SOURCE_DB_USER` variables only to override that detection, for example when your installation was renamed away from the chart defaults:
 
 ```bash
 export KEYCLOAK_SOURCE_DB_NAME="bitnami_keycloak"
@@ -227,11 +251,11 @@ export KEYCLOAK_DB_NAME="keycloak"
 export KEYCLOAK_DB_USER="keycloak"
 ```
 
-The same pattern applies to the Identity and Web Modeler source database variables: `IDENTITY_SOURCE_DB_NAME`, `IDENTITY_SOURCE_DB_USER`, `WEBMODELER_SOURCE_DB_NAME`, and `WEBMODELER_SOURCE_DB_USER`. They default to the corresponding target names.
+The same applies to `IDENTITY_SOURCE_DB_NAME`, `IDENTITY_SOURCE_DB_USER`, `WEBMODELER_SOURCE_DB_NAME`, and `WEBMODELER_SOURCE_DB_USER`. Left unset, each one falls back to what the source StatefulSet declares.
 
 #### Transient Keycloak cluster data is excluded automatically
 
-When the realm database is backed up, the scripts automatically exclude the data in Keycloak's `JGROUPS_PING` table,  the transient JDBC_PING cluster-discovery table whose rows hold the source cluster's node addresses. Restoring those rows into the target Keycloak would make it fail on startup with a duplicate-key violation on `constraint_jgroups_ping`, leaving the migrated Keycloak in `CrashLoopBackOff`. The table schema is preserved and restored empty, so the external Keycloak re-registers its own cluster membership on startup.
+When the realm database is backed up, the scripts automatically exclude the data in Keycloak's `JGROUPS_PING` table, the transient JDBC_PING cluster-discovery table whose rows hold the source cluster's node addresses. Restoring those rows into the target Keycloak would make it fail on startup with a duplicate-key violation on `constraint_jgroups_ping`, leaving the migrated Keycloak in `CrashLoopBackOff`. The table schema is preserved and restored empty, so the external Keycloak re-registers its own cluster membership on startup.
 
 ### Create custom Helm values
 
