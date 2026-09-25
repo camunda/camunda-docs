@@ -115,11 +115,19 @@ With the cluster in recovery mode, restore the Elasticsearch/OpenSearch snapshot
 
 Keep the Orchestration Cluster running in recovery mode while you restore the snapshots.
 
+#### 1. Restore templates
+
 <RestoreTemplates />
+
+#### 2. Stop Optimize
 
 <StopOptimize />
 
+#### 3. Delete all indices
+
 <DeleteIndices />
+
+#### 4. Restore the snapshots
 
 <RestoreSnapshotsAction />
 
