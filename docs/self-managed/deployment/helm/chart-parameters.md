@@ -66,13 +66,13 @@ Check this page when installing or upgrading to ensure you use the latest option
 In addition to the default `values.yaml`, the Helm chart repository includes several additional values files for special use cases.  
 You can use these files individually or combine them with your own overrides.
 
-| File                     | Purpose                                                                                                                         |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `values.yaml`            | The default configuration. Includes all chart parameters with baseline values.                                                  |
-| `values-local.yaml`      | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments. |
-| `values-enterprise.yaml` | Configures Camunda Enterprise images. For Camunda Enterprise customers only.                                                    |
-| `values-latest.yaml`     | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.  |
-| `values-digest.yaml`     | Uses the latest snapshot images referenced by digest (for internal development only).                                           |
+| File                 | Purpose                                                                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `values.yaml`        | The default configuration. Includes all chart parameters with baseline values.                                                  |
+| `values-local.yaml`  | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments. |
+| `values-tls.yaml`    | An overlay that enables TLS for the connections the chart can configure. Requires a CA bundle secret in the namespace.          |
+| `values-latest.yaml` | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.  |
+| `values-digest.yaml` | Uses the latest snapshot images referenced by digest (for internal development only).                                           |
 
 ### Creating your own values files
 
@@ -88,8 +88,8 @@ Helm lets you specify multiple values files. You can layer them to build the con
 ```bash
 helm install camunda camunda/camunda-platform \
   -f values.yaml \
-  -f values-enterprise.yaml \
+  -f values-local.yaml \
   -f my-overrides.yaml
 ```
 
-If the same parameter is defined in more than one file, the value in the last file listed takes precedence. In the example above, settings from `my-overrides.yaml` override values from both `values-enterprise.yaml` and `values.yaml`.
+If the same parameter is defined in more than one file, the value in the last file listed takes precedence. In the example above, settings from `my-overrides.yaml` override values from both `values-local.yaml` and `values.yaml`.

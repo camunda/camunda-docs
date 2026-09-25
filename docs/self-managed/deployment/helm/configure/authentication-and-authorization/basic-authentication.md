@@ -112,7 +112,6 @@ global:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-optimize-client-token"
     keycloak:
-      internal: false # Connect to the operator-managed Keycloak instead of a bundled one
       url:
         protocol: http
         host: keycloak-service

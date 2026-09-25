@@ -68,7 +68,6 @@ global:
       publicIssuerUrl: http://keycloak-service:18080/auth/realms/camunda-platform
       issuerBackendUrl: http://keycloak-service:18080/auth/realms/camunda-platform
     keycloak:
-      internal: false # Connect to the operator-managed Keycloak instead of a bundled one
       url:
         protocol: http
         host: keycloak-service
@@ -244,7 +243,6 @@ global:
         # Update this when using a domain/Ingress, e.g., https://your-domain.com/modeler
         redirectUrl: "http://localhost:8070"
     keycloak:
-      internal: false # Connect to the operator-managed Keycloak instead of a bundled one
       url:
         protocol: http
         host: keycloak-service
