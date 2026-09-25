@@ -137,7 +137,7 @@ Once connected successfully, your project will display a **Sync with GitLab** bu
 <h3> Register an App in Microsoft Entra </h3>
 
 :::note
-Camunda Hub SaaS supports authenticating against `Microsoft Entra ID (global service)`. Other [national clouds](https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud#microsoft-entra-authentication-endpoints) can be used in Self-Managed by setting the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH`.
+Camunda Hub SaaS supports authenticating against `Microsoft Entra ID (global service)`. Other [national clouds](https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud#microsoft-entra-authentication-endpoints) can be used in Self-Managed by setting the environment variable `CAMUNDA_HUB_GITSYNC_AZURE_AUTHORITY_BASE_PATH`.
 :::
 
 Camunda Hub requires an application to be registered with Microsoft Entra ID to sync changes with your Azure repository.
