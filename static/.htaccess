@@ -201,6 +201,12 @@ RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-
 # Physical Tenants web-apps page merged into api-routing.md's "Webapp routing" section (too thin to stand alone).
 RewriteRule ^docs/next/self-managed/concepts/physical-tenants/web-apps/?$ /docs/next/self-managed/concepts/physical-tenants/api-routing/#webapp-routing [R=301,L]
 
+# In-process restore page folded into the Restore API tab of the Elasticsearch/OpenSearch and RDBMS restore guides (8.10).
+RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/in-process-restore/?$ /docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
+
+# Elasticsearch/OpenSearch snapshot restore page broken into partials and inlined into the Restore API and Restore Application guides (8.10).
+RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/elasticsearch/es-restore-snapshot/?$ /docs/next/self-managed/operational-guides/backup-restore/elasticsearch/es-restore/ [R=301,L]
+
 # configure-multi-tenancy renamed to configure-logical-tenants: "multi-tenancy" collided with Physical Tenants, which is also a multi-tenancy model.
 RewriteRule ^docs/next/self-managed/deployment/helm/configure/configure-multi-tenancy/?$ /docs/next/self-managed/deployment/helm/configure/configure-logical-tenants/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
