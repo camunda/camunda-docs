@@ -265,6 +265,7 @@ identity:
     host: pg-identity-rw
     port: 5432
     database: identity
+    username: identity
     secret:
       existingSecret: pg-identity-secret
       existingSecretKey: password
@@ -566,6 +567,7 @@ identity:
     host: pg-identity-rw
     port: 5432
     database: identity
+    username: identity
     secret:
       existingSecret: pg-identity-secret
       existingSecretKey: password

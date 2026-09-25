@@ -18,7 +18,7 @@ With minimal configuration for administrative access, the Management Identity co
 
 Use this guide if you already have an existing Keycloak instance and want Camunda to automatically configure the required Keycloak entities.
 
-If you prefer Camunda to also create and manage a Keycloak pod, see the [internal Keycloak guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md).
+If you prefer to run Keycloak inside your cluster and deploy it with the Keycloak operator, see the [internal Keycloak guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md).
 
 :::tip Private or internal CA
 If your external Keycloak instance presents a certificate signed by a private or internal certificate authority, Camunda components won't trust it by default. Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) before or alongside this guide to avoid `PKIX path building failed` errors.
