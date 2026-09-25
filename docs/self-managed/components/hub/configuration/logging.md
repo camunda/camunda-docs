@@ -89,14 +89,14 @@ The default `log4j2-spring.xml` used by Camunda Hub's `restapi` component is as 
   <Loggers>
 
     <Logger name="io.camunda" level="${env:CAMUNDA_LOG_LEVEL:-INFO}" />
-    <Logger name="io.camunda.modeler" level="${env:CAMUNDA_MODELER_LOG_LEVEL:-${env:CAMUNDA_LOG_LEVEL:-INFO}}" />
+    <Logger name="io.camunda.modeler" level="${env:CAMUNDA_HUB_LOG_LEVEL:-${env:CAMUNDA_LOG_LEVEL:-INFO}}" />
     <Logger name="org.springframework" level="INFO" />
 
     <Root level="INFO">
       <AppenderRef ref="RollingFile" />
 
       <!-- remove to disable console logging -->
-      <AppenderRef ref="${env:CAMUNDA_MODELER_LOG_APPENDER:-Console}"/>
+      <AppenderRef ref="${env:CAMUNDA_HUB_LOG_APPENDER:-Console}"/>
     </Root>
   </Loggers>
 </Configuration>
@@ -108,18 +108,18 @@ This is a simplified example. The actual `log4j2.xml` may include additional app
 
 ### Environment variables
 
-| Purpose               | Variable                    | Component(s) | Example / Notes               |
-| --------------------- | --------------------------- | ------------ | ----------------------------- |
-| Global log level      | `CAMUNDA_LOG_LEVEL`         | All          | `DEBUG`, `INFO`, `WARN`, etc. |
-| Modeler package level | `CAMUNDA_MODELER_LOG_LEVEL` | RestApi      | Overrides global level        |
+| Purpose               | Variable                | Component(s) | Example / Notes               |
+| --------------------- | ----------------------- | ------------ | ----------------------------- |
+| Global log level      | `CAMUNDA_LOG_LEVEL`     | All          | `DEBUG`, `INFO`, `WARN`, etc. |
+| Modeler package level | `CAMUNDA_HUB_LOG_LEVEL` | RestApi      | Overrides global level        |
 
 ### JSON logging appenders
 
-| Appender           | Description                                          | Enable / Variable                                                                     |
-| ------------------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Console            | Standard text output.                                | `CAMUNDA_MODELER_LOG_APPENDER=Console`                                                |
-| Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver.          | `CAMUNDA_MODELER_LOG_APPENDER=Stackdriver`                                            |
-| RollingFile        | Writes logs to a rotating file, disabled by default. | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` + `CAMUNDA_MODELER_LOG_APPENDER=RollingFile` |
+| Appender           | Description                                          | Enable / Variable                                                                 |
+| ------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Console            | Standard text output.                                | `CAMUNDA_HUB_LOG_APPENDER=Console`                                                |
+| Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver.          | `CAMUNDA_HUB_LOG_APPENDER=Stackdriver`                                            |
+| RollingFile        | Writes logs to a rotating file, disabled by default. | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` + `CAMUNDA_HUB_LOG_APPENDER=RollingFile` |
 
 #### JSON structure
 

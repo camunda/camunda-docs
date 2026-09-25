@@ -73,7 +73,7 @@ MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY=file:/full/path/to/key.pem
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.server.url: https://web-modeler.example.com
+camunda.hub.server.url: https://web-modeler.example.com
 
 server:
   ssl:
@@ -119,7 +119,7 @@ RESTAPI_PUSHER_SSL_ENABLED=true
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.pusher.ssl-enabled: true
+camunda.hub.pusher.ssl-enabled: true
 ```
 
 </TabItem>

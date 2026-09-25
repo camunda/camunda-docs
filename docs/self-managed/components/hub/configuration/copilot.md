@@ -26,7 +26,7 @@ Copilot supports the following LLM providers:
 
 ## Configuration
 
-To enable Copilot, set the AI feature flag (`FEATURE_AI_ENABLED` / `camunda.modeler.feature.ai-enabled`) to `true`.
+To enable Copilot, set the AI feature flag (`FEATURE_AI_ENABLED` / `camunda.hub.feature.ai-enabled`) to `true`.
 Then configure the default LLM provider for BPMN, FEEL, and form copilots.
 Each provider has its own configuration options described below.
 
@@ -50,7 +50,7 @@ Each provider has its own configuration options described below.
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler:
+camunda.hub:
   feature.ai-enabled: true
 
   copilot:
@@ -92,7 +92,7 @@ camunda.modeler:
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.default-bpmn-copilot-llm-configuration:
+camunda.hub.copilot.default-bpmn-copilot-llm-configuration:
   temperature: 0.2 # optional, default: 0.3
   top-p: 0.90 # optional, default: 0.95
   top-k: 100 # optional, default: 64
@@ -138,7 +138,7 @@ camunda.modeler.default-bpmn-copilot-llm-configuration:
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.default-feel-copilot-llm-configuration:
+camunda.hub.copilot.default-feel-copilot-llm-configuration:
   temperature: 0.2 # optional, default: 0.3
   top-p: 0.90 # optional, default: 0.95
   top-k: 100 # optional, default: 64
@@ -184,7 +184,7 @@ camunda.modeler.default-feel-copilot-llm-configuration:
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.default-form-copilot-llm-configuration:
+camunda.hub.copilot.default-form-copilot-llm-configuration:
   temperature: 0.2 # optional, default: 0.3
   top-p: 0.90 # optional, default: 0.95
   top-k: 100 # optional, default: 64
@@ -227,7 +227,7 @@ When configuring AWS Bedrock, make sure the model is available in the provided A
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.copilot.providers.bedrock:
+camunda.hub.copilot.providers.bedrock:
   default-model-id: anthropic.claude-3-5-sonnet-20240620-v1:0
   region: us-east-1
   access-key-id: AKIA... # optional, if not using instance or role credentials
@@ -285,7 +285,7 @@ Camunda recommends using a stronger model, such as GPT-4 or comparable, for reli
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.copilot.openai:
+camunda.hub.copilot.providers.open-ai:
   default-model-id: gpt-4.1
   api-key: sk-live-******** # conditionally required
   endpoint: https://my-proxy.example.com/v1 # conditionally required
@@ -319,7 +319,7 @@ camunda.modeler.copilot.openai:
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.copilot.azure-open-ai:
+camunda.hub.copilot.providers.azure-open-ai:
   default-model-id: gpt-4o
   api-key: "az-aoai-key-***"
   endpoint: https://my-aoai.openai.azure.com
@@ -357,7 +357,7 @@ Azure AI supports authentication with an API key or Microsoft Entra ID (formerly
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.copilot.azure-ai:
+camunda.hub.copilot.providers.azure-ai:
   default-model-id: gpt-4o-mini
   endpoint: https://my-resource.cognitiveservices.azure.com/openai/deployments/gpt-4o
   api-key: "az-ai-key-***" # conditionally required (alternative to OAuth)
@@ -392,7 +392,7 @@ camunda.modeler.copilot.azure-ai:
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.copilot.vertex-ai:
+camunda.hub.copilot.providers.vertex-ai:
   default-model-id: gemini-1.5-pro-002
   project-id: my-gcp-project
   location: us-central1
@@ -424,7 +424,7 @@ camunda.modeler.copilot.vertex-ai:
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.copilot.anthropic:
+camunda.hub.copilot.providers.anthropic:
   default-model-id: claude-3-5-sonnet-20240620
   api-key: "sk-ant-***"
   cache-system-messages: false # optional, default: true
@@ -455,7 +455,7 @@ camunda.modeler.copilot.anthropic:
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.copilot.ollama:
+camunda.hub.copilot.providers.ollama:
   default-model-id: llama3.1
   base-url: http://localhost:11434
   headers: '{"X-Org":"camunda","X-Trace":"on"}' # optional
@@ -487,7 +487,7 @@ camunda.modeler.copilot.ollama:
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.copilot.hugging-face:
+camunda.hub.copilot.providers.hugging-face:
   default-model-id: mistralai/Mixtral-8x7B-Instruct-v0.1
   base-url: https://api-inference.huggingface.co/models
   access-token: "hf_***"
