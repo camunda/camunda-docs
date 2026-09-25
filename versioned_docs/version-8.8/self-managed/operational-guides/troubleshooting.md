@@ -149,7 +149,7 @@ One of the following errors appears in the logs:
 java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads
 ```
 
-```
+```text
 java.lang.IllegalStateException: java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads
 ```
 
