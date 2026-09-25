@@ -65,6 +65,7 @@ global:
   identity:
     auth:
       type: KEYCLOAK
+      publicIssuerUrl: http://keycloak-service:18080/auth/realms/camunda-platform
       issuerBackendUrl: http://keycloak-service:18080/auth/realms/camunda-platform
     keycloak:
       internal: false # Connect to the operator-managed Keycloak instead of a bundled one
@@ -232,6 +233,7 @@ global:
     auth:
       enabled: true
       type: KEYCLOAK
+      publicIssuerUrl: http://keycloak-service:18080/auth/realms/camunda-platform
       issuerBackendUrl: http://keycloak-service:18080/auth/realms/camunda-platform
       optimize:
         secret:
