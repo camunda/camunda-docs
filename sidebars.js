@@ -2340,7 +2340,6 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/data-purge",
-        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {
@@ -2615,6 +2614,7 @@ module.exports = {
         },
       ],
     },
+    "self-managed/operational-guides/troubleshooting",
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",

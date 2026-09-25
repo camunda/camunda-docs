@@ -3243,9 +3243,6 @@
             "self-managed/concepts/opensearch-privileges"
           ]
         },
-        {
-          "Troubleshooting": ["self-managed/operational-guides/troubleshooting"]
-        },
         "self-managed/concepts/secondary-storage-management",
         "self-managed/concepts/no-secondary-storage"
       ]
@@ -3533,6 +3530,7 @@
         }
       ]
     },
+    "self-managed/operational-guides/troubleshooting",
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.8",
