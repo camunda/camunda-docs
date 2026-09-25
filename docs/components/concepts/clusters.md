@@ -36,7 +36,7 @@ See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-o
 An uptime SLA and RTO/RPO targets measure different things. Keep them separate when you evaluate a cluster type for disaster recovery planning.
 
 - **Uptime percentage (SLA)** is a contractual commitment that measures how much of the time, in a given month, the service is available and responsive. It doesn't describe what happens during or immediately after an outage.
-- **RTO (Recovery Time Objective)** measures how long a failure disrupts service, from the moment it starts affecting your cluster until the cluster is fully functional again.
+- **RTO (Recovery Time Objective)** measures how long a failure disrupts service, from the moment it starts affecting your cluster until the cluster is fully functional again. For outages that need manual recovery, RTO also includes the time to detect, escalate, and diagnose the problem.
 - **RPO (Recovery Point Objective)** measures how much data you can lose when that failure happens, expressed as the time between the last recoverable point and the failure.
 
 A high uptime percentage doesn't imply a fast recovery or minimal data loss during a major infrastructure failure. Uptime percentage tells you how rarely a failure disrupts your cluster; RTO and RPO tell you how well the cluster recovers when a major failure does happen. See [how Camunda SaaS recovers from node, zone, and region failures](#how-camunda-saas-recovers-from-node-zone-and-region-failures) for the RTO and RPO of each failure scenario.
@@ -45,12 +45,13 @@ A high uptime percentage doesn't imply a fast recovery or minimal data loss duri
 
 Camunda 8 SaaS sets recovery objectives for each type of outage, based on how much infrastructure the outage affects. These objectives describe expected behavior on a best-effort basis and aren't contractual commitments.
 
-| Outage              | RPO                                                           | RTO                                          | Recovery                           | Requirement                 |
-| :------------------ | :------------------------------------------------------------ | :------------------------------------------- | :--------------------------------- | :-------------------------- |
-| Node                | Zero                                                          | Near zero                                    | Automatic                          | None                        |
-| Availability zone   | Zero                                                          | Near zero                                    | Automatic                          | None                        |
-| Region              | Time since the last backup replicated to the secondary region | Depends on provisioning time and data volume | Manual cold recovery by Camunda    | Dual-region backup location |
-| Cloud provider-wide | Not defined                                                   | Not defined                                  | Depends on the provider's recovery | Not available               |
+| Outage                                | RPO                                                           | RTO                                          | Recovery                           | Requirement                 |
+| :------------------------------------ | :------------------------------------------------------------ | :------------------------------------------- | :--------------------------------- | :-------------------------- |
+| Node                                  | Zero                                                          | Near zero                                    | Automatic                          | None                        |
+| Availability zone                     | Zero                                                          | Near zero                                    | Automatic                          | None                        |
+| Region                                | Time since the last backup replicated to the secondary region | Depends on provisioning time and data volume | Manual cold recovery by Camunda    | Dual-region backup location |
+| Cloud provider or third-party service | Not defined                                                   | Not defined                                  | Depends on the provider's recovery | Not available               |
+| Platform or cluster incident          | Typically zero                                                | Depends on the incident                      | Camunda incident response          | None                        |
 
 Your application's overall recovery time also depends on your own job workers and clients being able to reach the cluster and continue processing.
 
@@ -77,15 +78,21 @@ A region failure is the loss of every availability zone in the cluster's region 
 **RTO/RPO assessment:** Recovery from a region failure is a manual, user initiated cold recovery, the same strategy as the Cold Recovery tier in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md) for Self-Managed. Camunda provisions a new cluster in the secondary backups region and restores it from the replicated backup. Without dual-region backups, recovery to another region isn't possible.
 
 - **RPO** is the time between the most recent backup replicated to the secondary region and the failure. Your backup schedule determines this value.
-- **RTO** is the time needed to provision the new cluster, restore its data, and reconnect your applications. Restore duration depends on cluster data volume. The recovered cluster has new endpoints, so you must update your client configuration.
+- **RTO** is the time needed to detect the outage, decide to recover, provision the new cluster, restore its data, and reconnect your applications. Restore duration depends on cluster data volume. The recovered cluster has new endpoints, so you must update your client configuration.
 
 **Your responsibilities:** Choose a dual-region backup location when you create the cluster. Set a backup schedule that matches the data loss you can tolerate. Plan how you'll point your clients and job workers at the recovered cluster's new endpoints.
 
-### Cloud provider-wide outage
+### Cloud provider and third-party service outages
 
-A cloud provider-wide outage affects several regions of the same cloud provider at once, or prevents the provider from starting or replacing infrastructure. Camunda SaaS clusters run on a single cloud provider and can't fail over to another provider.
+An outage at Camunda's cloud provider, network and edge providers, or other third-party services can make clusters unreachable, or prevent Camunda from starting or replacing infrastructure, until the provider recovers. Camunda SaaS clusters run on a single cloud provider and can't fail over to another provider.
 
 **RTO/RPO assessment:** Clusters stay unavailable until the provider recovers, so Camunda doesn't set an RTO or RPO for this type of outage. Camunda follows its incident response process and publishes updates on the [Camunda status page](/components/saas/status.md).
+
+### Platform and cluster incidents
+
+Some incidents originate in Camunda's own platform or in a single cluster. Examples include platform configuration issues that affect network access, software defects, and cluster components in an inconsistent state.
+
+**RTO/RPO assessment:** RTO depends on how quickly the incident is detected, escalated, diagnosed, and resolved, so Camunda doesn't set a fixed RTO. RPO is typically zero, because these incidents usually affect availability, not stored data.
 
 ## Cluster size
 
