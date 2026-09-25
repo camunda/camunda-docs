@@ -75,7 +75,7 @@ Ready to upgrade? The following guides offer detailed information on how to upgr
 
 ## Summary of important changes
 
-Important changes in Camunda 8.9 are summarized as follows:
+Important changes in Camunda 8.10 are summarized as follows:
 
 <table className="table-callout">
 <tr>
