@@ -137,6 +137,33 @@ To mitigate this, set the following environment variable on your Zeebe brokers t
 AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 ```
 
+## Zeebe broker shuts down with `ClassCircularityError` when using AppDynamics
+
+Zeebe brokers can shut down with a `java.lang.ClassCircularityError` when the AppDynamics Java agent is attached to the broker JVM.
+
+### Symptoms
+
+The broker logs an error similar to the following and then shuts down:
+
+```
+ERROR io.camunda.zeebe.broker.system - Shutting down because we can't recover from JVM errors. Consider restarting this broker if it is a temporary issue.
+java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads
+```
+
+This error was first observed during S3 backups, but it can occur in any code path that runs on virtual threads. Partitions led by the affected broker are unavailable until another broker takes over leadership or the broker restarts.
+
+### Cause
+
+Zeebe and several libraries it depends on, such as the AWS SDK, run work on Java virtual threads. The AppDynamics Java agent intercepts class definitions to instrument bytecode. On a virtual thread, the agent's own code triggers loading of `jdk/internal/misc/VirtualThreads`, which the agent intercepts again. The JVM detects this circular class loading and throws `ClassCircularityError`.
+
+This is a defect in the AppDynamics Java agent. Zeebe doesn't provide an option to disable virtual threads, because third-party libraries also use them internally.
+
+### Solution
+
+- Don't attach the AppDynamics Java agent to Zeebe brokers. Remove the AppDynamics `-javaagent` option from the broker JVM options, for example from the `JAVA_TOOL_OPTIONS` environment variable.
+- If you need AppDynamics for a specific investigation, attach the agent temporarily and remove it afterward. Bytecode instrumentation also adds overhead that can affect broker performance.
+- If the broker process doesn't exit after the error, restart the broker pod or JVM process.
+
 ## Enable Azure logging for troubleshooting
 
 When using Azure Blob Storage as a backup store, you can enable logging to
