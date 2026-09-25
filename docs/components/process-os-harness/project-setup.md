@@ -12,7 +12,7 @@ ProcessOS Harness is a new way of running projects, not a new feature in a famil
 
 ## Run your first project with a partner or a Camunda FDE
 
-Run your first ProcessOS Harness project together with an enabled partner or a Camunda Field Delivery Engineer (FDE), rather than on your own.
+Run your first ProcessOS Harness project together with an enabled partner or a Camunda Forward Deployed Engineer (FDE), rather than on your own.
 
 The first journey is where an unfamiliar interaction model costs the most. Someone who has already completed an engagement can tell a recoverable result from a dead end, which saves you iterations. Once your team has one project behind it, later projects are far less dependent on outside support.
 
