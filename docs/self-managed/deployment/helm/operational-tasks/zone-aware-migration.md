@@ -27,7 +27,7 @@ In a dual-region cluster, the primary zone is the region with `zoneIndex: 0`, wh
 Zone migration must proceed from the highest remaining zone index to the lowest. Expected next zoneIndex 1 but got 0.
 ```
 
-In a dual-region cluster, run every Helm step once per release, one release at a time, and wait for each release to be healthy before you continue with the next one. You can send each management API request to any node in the cluster: however it's advised to configure the port-forward on region with `zoneIndex:0`, as that region is the last to be migrated.
+In a dual-region cluster, run every Helm step once per release, one release at a time, and wait for each release to be healthy before you continue with the next one. You can send each management API request to any node in the cluster. However, configure the port-forward on the region with `zoneIndex: 0`, since that region is the last to be migrated.
 
 The procedure consists of these steps:
 
@@ -36,9 +36,7 @@ The procedure consists of these steps:
 1. Update the persisted partitioning configuration once.
 1. For each zone, add the zone's zone-aware brokers to the cluster with the management API, then remove the numbered brokers of that zone's release.
 
-:::warning
 The migration is not reversible. After you update the persisted partitioning configuration, you can't return the cluster to numbered brokers. If a later step fails, complete the migration instead of reverting it. See [Recover from an incomplete migration](#recover-from-an-incomplete-migration).
-:::
 
 ## Before you begin
 
