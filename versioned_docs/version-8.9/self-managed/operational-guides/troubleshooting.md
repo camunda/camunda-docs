@@ -145,7 +145,7 @@ Zeebe brokers and gateways can fail with a `java.lang.ClassCircularityError` whe
 
 One of the following errors appears in the logs:
 
-```
+```text
 java.lang.ClassCircularityError: jdk/internal/misc/VirtualThreads
 ```
 
