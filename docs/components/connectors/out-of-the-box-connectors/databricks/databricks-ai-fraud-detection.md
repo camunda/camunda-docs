@@ -31,6 +31,10 @@ This scenario fits a webhook integration well because Databricks controls when t
 
 Hub Modeler opens a blank diagram with a default start event.
 
+The following diagram shows the completed process structure:
+
+![Fraud detection process diagram](./img/fraud-detection-process.png)
+
 ## Convert the start event to a webhook
 
 The default start event starts a process instance manually. Change it to start the process from an incoming webhook call instead.
@@ -44,7 +48,7 @@ The start event now shows a webhook icon. Configure it in the properties panel:
 | :-------------- | :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Webhook ID      | `fraud-detection-trigger`                       | Becomes part of the webhook URL.                                                                                                                                                                        |
 | Authorization   | API Key                                         | Authenticates incoming webhook calls.                                                                                                                                                                   |
-| API Key         | `{{secrets.FraudWebhookKey}}`                   | The expected value, referenced from a secret rather than typed directly into the field.                                                                                                                 |
+| API Key         | `camunda.secrets.FraudWebhookKey`               | The expected value, referenced from a secret rather than typed directly into the field.                                                                                                                 |
 | API Key locator | `=split(request.headers.authorization, " ")[2]` | Extracts the key from the `Authorization: Bearer <value>` header. See [how to configure API key authorization](/components/connectors/protocol/http-webhook.md#how-to-configure-api-key-authorization). |
 
 The Databricks notebook in this guide sends the key as a `Bearer` token, so the locator splits the header on the space and takes the second part rather than comparing the raw header value.
@@ -80,7 +84,7 @@ On the high-risk path, add a service task after the gateway named `Generate Emai
 
 | Setting        | Value                                                 |
 | :------------- | :---------------------------------------------------- |
-| OpenAI API key | `{{secrets.OpenAI}}`                                  |
+| OpenAI API key | `camunda.secrets.OpenAI`                              |
 | Operation      | Chat                                                  |
 | Model          | Select a chat model available to your OpenAI account. |
 
@@ -115,7 +119,7 @@ After the review task, add a service task named `Send Email`, and change its typ
 
 | Setting          | Value                                                                           |
 | :--------------- | :------------------------------------------------------------------------------ |
-| SendGrid API Key | `{{secrets.SendGrid}}`                                                          |
+| SendGrid API Key | `camunda.secrets.SendGrid`                                                      |
 | Sender Name      | Your organization's name, for example `Fraud Detection Team`.                   |
 | Sender Email     | Your verified sender address, for example `community@camunda.com`.              |
 | Receiver Name    | Leave blank, or provide a display name if you map one from the webhook payload. |
@@ -135,7 +139,7 @@ Store the webhook API key, and the OpenAI and SendGrid API keys, as cluster [sec
 3. Click **Create new secret** again, set **Key** to `OpenAI`, and paste your OpenAI API key as the value.
 4. Click **Create new secret** again, set **Key** to `SendGrid`, and paste your SendGrid API key as the value.
 
-Reference the secrets from Connector fields so their values aren't stored as plain text in the BPMN model. Reference them from a connector task as `{{secrets.FraudWebhookKey}}`, `{{secrets.OpenAI}}`, or `{{secrets.SendGrid}}`.
+Reference the secrets from Connector fields so their values aren't stored as plain text in the BPMN model. Reference them from a connector task as `camunda.secrets.FraudWebhookKey`, `camunda.secrets.OpenAI`, or `camunda.secrets.SendGrid`.
 
 ## Deploy the process and copy the webhook URL
 
