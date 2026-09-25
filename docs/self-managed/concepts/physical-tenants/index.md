@@ -5,17 +5,19 @@ sidebar_label: "Isolation model"
 description: "Learn how Physical Tenants isolate execution, storage, and API routing within a single orchestration cluster."
 ---
 
-Learn how Physical Tenants isolate execution, storage, and API routing within one orchestration cluster.
+import DocCardList from '@theme/DocCardList';
+
+A Physical Tenant is an isolated execution unit inside one orchestration cluster, with its own storage, identity, and backups.
 
 :::info
-Use the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models and choose a starting point.
+New to Physical Tenants? Start with the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models, or jump straight to [set up two isolated Physical Tenants](./getting-started.md) for a hands-on walkthrough.
 :::
 
-Physical Tenants provide strong isolation within a single orchestration cluster. This page assumes one orchestration cluster with multiple Physical Tenants. Multi-region and multi-cluster topologies are separate topics.
+This page covers one orchestration cluster with multiple Physical Tenants. Multi-region and multi-cluster topologies are separate topics.
 
 ## Isolation model
 
-A Physical Tenant is an isolated execution unit inside one orchestration cluster.
+Isolation applies differently at each layer of the stack:
 
 | Layer             | Isolation model                                                                                          | Shared or isolated    |
 | ----------------- | -------------------------------------------------------------------------------------------------------- | --------------------- |
@@ -55,6 +57,10 @@ graph TD
 
 The diagram shows one orchestration cluster boundary with shared control-plane components and tenant-specific execution and storage boundaries.
 
+The same isolation extends to authentication and authorization, and web apps. Each Physical Tenant authenticates through its own identity provider, gets its own Operate, Tasklist, and Admin, and its own backup and restore, while Logical Tenants remain available for lightweight subdivision inside each one:
+
+![Two Physical Tenants inside one Orchestration Cluster, each with its own identity provider, web apps, and secondary storage.](./img/physical-tenant-architecture.png)
+
 ## API routing
 
 Use tenant-scoped routes for tenant-specific requests:
@@ -63,19 +69,11 @@ Use tenant-scoped routes for tenant-specific requests:
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to the default Physical Tenant. See [cluster admin](/components/admin/cluster-admin.md) for the operations served under this prefix.
+Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role, except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers can use it as a health check. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to the default Physical Tenant. See [cluster admin](/components/admin/cluster-admin.md) for the operations served under this prefix.
 
-## Configure and provision Physical Tenants
+## Day-2 operations
 
-To configure tenant defaults, per-tenant overrides, validation expectations, and property examples, see [configuration reference](./configuration-reference.md).
-
-To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
-
-Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
-
-For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
-
-To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
+Once tenants are running, these pages cover operating them: [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 ## What is not isolated
 
@@ -98,15 +96,17 @@ Physical Tenants expose three distinct endpoints for health and status:
 | `/cluster/v2/status`                 | Cluster | Determining whether the cluster as a whole is operational.                                                                                                                                                                                                    |
 | `/physical-tenants/{id}/v2/topology` | Tenant  | Checking whether a specific Physical Tenant can accept work and which of its partitions are available.                                                                                                                                                        |
 
-The legacy `/v2/status` endpoint is deprecated. It remains available for the default Physical Tenant only to preserve backward compatibility. Switch to `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
+`/physical-tenants/{id}/v2/topology` is the tenant-prefixed form of `/v2/topology`: the same endpoint, reached through the tenant prefix. An unprefixed `/v2/topology` request returns the `default` tenant's topology, not a cluster-wide view. For the cluster-wide aggregate, use `/cluster/v2/topology`.
+
+The `/v2/status` endpoint is scoped to the default Physical Tenant. Use `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
 
 ## Readiness
 
 When configuring Kubernetes readiness probes, point the probe at `/actuator/health/readiness` for node-level readiness. To check whether a specific Physical Tenant can accept work independently of the node probe, poll `/physical-tenants/{id}/v2/topology` from your own health-check logic.
 
-A node reports ready while at least one of its Physical Tenants is serviceable. If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
+For Elasticsearch and OpenSearch deployments, the secondary-storage readiness check uses schema-initialization state. The check is `UP` while at least one Physical Tenant is serviceable and `DOWN` when none are serviceable, but the overall readiness group can still be `DOWN` because of other readiness contributors. In the current implementation, a degraded `default` tenant can also keep node readiness `DOWN` even when another tenant is ready; this known limitation is tracked in [camunda/camunda#63674](https://github.com/camunda/camunda/issues/63674). If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other serviceable tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
 
-Per-tenant isolation of this kind applies to nodes serving two or more Physical Tenants. A node configured with a single tenant keeps the original fail-fast startup behavior. For diagnosis steps, see [troubleshooting](./troubleshooting.md).
+For diagnosis steps, see [troubleshooting](./troubleshooting.md).
 
 ## Document store details
 
@@ -117,3 +117,7 @@ Isolation is enforced by validating the resolved `provider, bucket/container, pa
 For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store storage](./storage-isolation.md#document-store-storage).
 
 For the storage backends used by tenant-scoped data, see [secondary storage](../secondary-storage/index.md) and [document handling configuration](../document-handling/configuration/index.md).
+
+## Explore the docs
+
+<DocCardList />

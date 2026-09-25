@@ -7,9 +7,11 @@ description: "Physical Tenants enable strong data isolation and independent mana
 
 A Physical Tenant is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each with fully isolated data, its own partition group, and independent lifecycle management.
 
-Isolation covers data and management, not compute. Physical Tenants share the cluster's brokers and gateways, so runtime interference between tenants is reduced but not eliminated. See [what is not isolated](/self-managed/concepts/physical-tenants/index.md#what-is-not-isolated-in-810).
+Isolation covers data and management, not compute. Physical Tenants share the cluster's brokers and gateways, so runtime interference between tenants is reduced but not eliminated. See [what is not isolated](/self-managed/concepts/physical-tenants/index.md#what-is-not-isolated).
 
 Physical Tenants provide a balanced approach to multi-tenancy. They offer strong isolation without the operational complexity and cost of running separate clusters. See [multi-tenancy overview](index.md) to compare isolation models.
+
+![Two Physical Tenants, payments and lending, each with its own database, identity provider, backup and restore, and web apps, running inside one Orchestration Cluster. Logical Tenants remain available inside each Physical Tenant.](./img/physical-tenant-summary.png)
 
 ## Why Physical Tenants
 
@@ -27,7 +29,7 @@ An isolated execution unit within an Orchestration Cluster. Each Physical Tenant
 
 ### Default Physical Tenant
 
-Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant.
+Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, REST API traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant. This routing rule is specific to the `/v2/...` REST API; the actuator surface used for scaling and purging does not follow it (see [data purge](/self-managed/operational-guides/data-purge.md) for an operation where an unscoped request instead targets every tenant).
 
 ### Cluster-wide operation
 
@@ -44,7 +46,7 @@ Tenant-scoped APIs are accessible at `/physical-tenants/{physicalTenantId}/v2/`:
 - REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
 - Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-Cluster-wide APIs use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
+Cluster-wide APIs use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role, except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers can use it as a health check. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
 
 gRPC clients specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
@@ -70,6 +72,8 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 ## Learn more
 
 For detailed technical information about isolation model, architecture, and storage configuration, see [physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
+
+To set up a second isolated Physical Tenant end to end, see [set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md).
 
 For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
 

@@ -54,7 +54,7 @@ Send the partition count change with the `physicalTenant` query parameter. Only 
 
 ```
 curl -X 'PATCH' \
-   'http://localhost:9600/orchestration/actuator/cluster?physicalTenant=tenant-a' \
+   'http://localhost:9600/orchestration/actuator/cluster?physicalTenant=tenanta' \
    -H 'accept: application/json' \
    -H 'Content-Type: application/json' \
    -d '{ "partitions": { "count": 6 } }'
@@ -71,7 +71,7 @@ A partition count change sent **without** the `physicalTenant` parameter targets
 Monitor the change with the [monitoring API](#monitoring-api) or `GET /actuator/cluster/changes`, then confirm the result through topology:
 
 ```
-curl "http://localhost:8080/physical-tenants/tenant-a/v2/topology"
+curl "http://localhost:8080/physical-tenants/tenanta/v2/topology"
 curl "http://localhost:8080/cluster/v2/topology"
 ```
 

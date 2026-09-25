@@ -52,7 +52,9 @@ If tenant scope is omitted in compatibility paths, requests resolve to the defau
 
 - Disabling and re-enabling a Physical Tenant is supported through configuration. There is no dedicated API for this operation.
 - Renaming a Physical Tenant is not supported.
-- Deleting a Physical Tenant is not supported. No API deletes a tenant's data.
+- Deleting a Physical Tenant is not supported. No single API removes a tenant's configuration and its data together.
+
+Purging removes data for a tenant or for every tenant when you scope it that way; removing a tenant from configuration disables it without deleting persisted data. These are separate operations.
 
 A Physical Tenant's enabled state follows its configuration directly:
 
