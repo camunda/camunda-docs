@@ -279,12 +279,10 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 ## Legacy: per-component JKS truststore (deprecated)
 
-Deprecated as of chart 15.x. Affected fields:
+The `global.elasticsearch.*` and `global.opensearch.*` trees were removed in chart 15.x, including their `tls.secret.*` and `tls.jks.secret.*` password-injection blocks. Setting any key under them fails the render. See the [8.9 to 8.10 upgrade guide](/self-managed/upgrade/helm/890-to-8100.md#migrate-globalelasticsearch-and-globalopensearch) for the migration mapping.
 
-- `global.elasticsearch.tls.secret.existingSecret` / `existingSecretKey`
-- `global.opensearch.tls.secret.existingSecret` / `existingSecretKey`
-- `global.elasticsearch.tls.jks.secret.*`
-- `global.opensearch.tls.jks.secret.*`
+The following per-component fields still work in chart 15.x, but are deprecated:
+
 - `orchestration.data.secondaryStorage.elasticsearch.tls.secret.*`
 - `orchestration.data.secondaryStorage.opensearch.tls.secret.*`
 - `optimize.database.elasticsearch.tls.secret.*`

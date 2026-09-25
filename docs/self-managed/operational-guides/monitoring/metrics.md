@@ -281,6 +281,125 @@ The `REPORT_NAME` and `REPORT_ID` labels identify the evaluated report or dashbo
 
 Report latency metrics are controlled by the `optimize.metrics.report-latency.enabled=true` configuration property. Set the property to `false` to disable report latency metrics.
 
+## Secret resolution and cache metrics
+
+Camunda emits meters for secret resolution and for the in-memory cache associated with each configured store. Use these meters to distinguish a slow or unavailable secret store from a cold cache when jobs don't activate.
+
+These meters don't use secret names as labels because secret-name cardinality is unbounded and secret names contain customer data.
+
+### Secret resolution metrics
+
+These meters cover resolving secret references against a secret store.
+
+| Metric name                             | Type    | Description                                                                                                                                                                                                                                                                                                                                                          | Labels                                                       |
+| --------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `camunda.secret.resolution.duration`    | Timer   | Latency of one batch resolution call against a secret store. Measures the store call only, not the follow-up commands the engine writes for its results. The `result` label separates calls by outcome so store timeouts don't distort the latency of successful calls.                                                                                              | `store`, `result` (see below), `physicalTenant`, `partition` |
+| `camunda.secret.resolution.outcome`     | Counter | Number of secret reference resolutions that produced an outcome, per store. Every result value is terminal for the reference it counts, so the values can be summed or divided by one another to derive rates. A reference whose store is unavailable but still has retry attempts left is not counted at all, since it has not reached a terminal outcome.          | `store`, `result` (see below), `physicalTenant`, `partition` |
+| `camunda.secret.resolution.cycle.error` | Counter | Number of resolution cycles in which a store encounters an unexpected exception that the engine does not model as a per-secret failure or unavailable store. Counted per store. A nonzero value indicates a bug in either the store implementation or the engine. Counts cycles, not references, so it is a separate meter from `camunda.secret.resolution.outcome`. | `store`, `physicalTenant`, `partition`                       |
+| `camunda.secret.resolution.cycle.delay` | Timer   | Delay before the next resolution cycle, grouped by the reason for the delay. Monitor `IDLE_BACKOFF` to verify that the delay increases geometrically after consecutive misses. Its distribution shows the backoff behavior without requiring you to infer it from the cycle rate.                                                                                    | `result` (see below), `physicalTenant`, `partition`          |
+
+The `store` label carries the ID of the secret store a reference belongs to. `camunda.secret.resolution.cycle.delay` carries no `store` label, since a resolution cycle isn't scoped to one store. Every resolution meter also carries the `physicalTenant` and `partition` labels applied to Zeebe metrics generally.
+
+The `result` label uses different values depending on the meter:
+
+`result` values on `camunda.secret.resolution.duration`:
+
+| Value               | Description                                                                  |
+| ------------------- | ---------------------------------------------------------------------------- |
+| `RETURNED`          | The store returned, whatever the per-reference results were.                 |
+| `STORE_UNAVAILABLE` | The store could not be reached for this call.                                |
+| `ERROR`             | The store threw something the engine does not model. Always indicates a bug. |
+
+`result` values on `camunda.secret.resolution.outcome`:
+
+| Value               | Description                                                                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `RESOLVED`          | The store returned a value for the reference.                                                                                         |
+| `NOT_FOUND`         | The store does not hold the reference.                                                                                                |
+| `ACCESS_DENIED`     | The store refused to read the reference.                                                                                              |
+| `INVALID_REF`       | The reference is not valid for the store.                                                                                             |
+| `UNREADABLE`        | The store holds the reference but could not read a value from it.                                                                     |
+| `STORE_UNAVAILABLE` | The store could not serve the reference at all: either it is not configured, or it could not be reached and no retry attempt is left. |
+
+`result` values on `camunda.secret.resolution.cycle.delay` (why the cycle chose its delay, not a per-reference outcome):
+
+| Value            | Description                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------- |
+| `DRAINING`       | More pending references remained than the batch cap allowed this cycle to take. The delay is always zero. |
+| `WAKE`           | This cycle resolved something, or a reference was requested since the last cycle ran.                     |
+| `IDLE_BACKOFF`   | Neither of the above, and no store is in retry cooldown.                                                  |
+| `RETRY_COOLDOWN` | Neither of the above, and a store's retry cooldown deadline set the delay instead.                        |
+
+### Interpret secret cache metrics
+
+Each configured secret store uses an in-memory cache during resolution. Use these metrics to evaluate cache behavior and distinguish cache misses from store-level resolution failures.
+
+| Metric name                      | Type    | Description                                                                                                                                                                                                                                                                                                                                   | Labels                                          |
+| -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `camunda.secret.cache.result`    | Counter | Number of secret cache lookups, grouped by store and result. Use `HIT / (HIT + MISS)` to calculate the cache hit rate. Each lookup is counted once. References that result in permanent failures, such as not found, access denied, or invalid, are never cached and therefore produce a `MISS` on every lookup while they remain referenced. | `store`, `result` (see below), `physicalTenant` |
+| `camunda.secret.cache.evictions` | Counter | Number of entries removed from a secret cache, grouped by store and cause.                                                                                                                                                                                                                                                                    | `store`, `cause` (see below), `physicalTenant`  |
+| `camunda.secret.cache.size`      | Gauge   | Estimated number of entries currently held in a secret cache, per store. Because eviction is asynchronous, the value can briefly exceed the configured maximum. Use this metric to compare the current cache level with the configured maximum rather than as an exact count.                                                                 | `store`, `physicalTenant`                       |
+
+The `store` label contains the ID of the secret store associated with the cache. Every cache metric also includes `physicalTenant` because the registry that publishes these metrics is scoped per tenant. Cache metrics don't include `partition` because a secret cache exists outside any partition.
+
+#### `result` values for `camunda.secret.cache.result`
+
+| Value  | Description                                                                                               |
+| ------ | --------------------------------------------------------------------------------------------------------- |
+| `HIT`  | The cache contains a value for the requested name.                                                        |
+| `MISS` | The cache contains no value for the requested name, so resolution must continue against the secret store. |
+
+#### `cause` values for `camunda.secret.cache.evictions`
+
+| Value       | Description                                                                                                                                                                              |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SIZE`      | The cache reached its configured maximum and evicted an entry to make room for another.                                                                                                  |
+| `EXPIRED`   | The entry's time-to-live expired.                                                                                                                                                        |
+| `EXPLICIT`  | An entry was explicitly removed by name. In the current implementation, this occurs when a store reports a permanent failure, such as not found, access denied, or an invalid reference. |
+| `COLLECTED` | The entry's key or value was garbage collected. The current cache configuration does not emit this value because it uses neither weak keys nor soft values.                              |
+
+### Read cache and resolution metrics together
+
+`camunda.secret.cache.result` and `camunda.secret.resolution.outcome` describe different parts of secret resolution.
+
+A low cache hit rate does not necessarily indicate a cache problem. References that result in permanent failures, such as not found, access denied, or invalid, are never cached and therefore produce a `MISS` on every lookup.
+
+When the cache hit rate is low, check `camunda.secret.resolution.outcome` first. If the misses correspond to references that never resolve successfully, address the resolution failures rather than the cache configuration.
+
+### Cache size and the configured maximum
+
+`camunda.secret.cache.size` is bounded per store by the
+[`camunda.secrets.cache.max-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecretscache)
+property. The bound applies per store, not as a shared budget, so the worst-case memory footprint
+across a deployment is the number of configured stores multiplied by that maximum.
+
+### Metric names in Prometheus
+
+The tables above name meters by their Micrometer meter ID. When Prometheus scrapes them, dots
+become underscores, and Micrometer appends a type suffix: `_total` for a counter, the base unit for
+a timer (plus `_count` and `_sum`; both timers here also declare fixed histogram buckets, so
+`_bucket` is always emitted for them too), and no suffix for a gauge:
+
+| Metric name                             | Prometheus metric name                          |
+| --------------------------------------- | ----------------------------------------------- |
+| `camunda.secret.resolution.duration`    | `camunda_secret_resolution_duration_seconds`    |
+| `camunda.secret.resolution.cycle.delay` | `camunda_secret_resolution_cycle_delay_seconds` |
+| `camunda.secret.resolution.outcome`     | `camunda_secret_resolution_outcome_total`       |
+| `camunda.secret.resolution.cycle.error` | `camunda_secret_resolution_cycle_error_total`   |
+| `camunda.secret.cache.result`           | `camunda_secret_cache_result_total`             |
+| `camunda.secret.cache.evictions`        | `camunda_secret_cache_evictions_total`          |
+| `camunda.secret.cache.size`             | `camunda_secret_cache_size`                     |
+
+`camunda.secret.cache.size` is the one exception with no unit suffix at all, so it stays exactly
+`camunda_secret_cache_size`. For example, the cache hit rate described above becomes:
+
+```promql
+camunda_secret_cache_result_total{result="HIT"} / ignoring(result) sum without (result) (camunda_secret_cache_result_total)
+```
+
+For how the broker resolves secret references before job activation, see
+[Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
+
 ## Grafana
 
 ### Zeebe
@@ -324,9 +443,63 @@ The dashboard provides insights into key data layer components for Camunda versi
 
 ![Example panels](assets/example-panels-data-layer.png)
 
+## Troubleshoot metrics and dashboards
+
+### Grafana dashboard shows no data after import
+
+**Observed behavior:** The dashboard renders, but panels show "No data" or stay empty.
+
+**Why this happens:** The dashboard's panels aren't bound to a Prometheus data source, either because none was selected during import, or because the wrong one was selected when more than one is configured in Grafana.
+
+**How to fix:**
+
+1. Open the dashboard's settings and check the data source assigned under its variables and panels.
+2. If it's missing or wrong, re-import the dashboard and explicitly select your Prometheus data source when prompted.
+3. Confirm the data source itself can reach Prometheus by testing it from **Connections > Data sources** in Grafana.
+
+### Prometheus scraping endpoint returns no data, or the target shows as down
+
+**Observed behavior:** `/actuator/prometheus` returns an empty response or `404`, or Prometheus shows the Camunda target as down in its **Targets** page.
+
+**Why this happens:** The Prometheus endpoint is available when the default Prometheus export settings are in place. If those defaults were changed, `management.endpoint.prometheus.access` or `management.prometheus.metrics.export.enabled` can prevent the endpoint from exporting metrics. A mismatch between the scraping job's `scheme` and the management context's actual protocol (HTTP vs. HTTPS) also causes the target to show as down.
+
+**How to fix:**
+
+1. Confirm both properties above are set. See [Prometheus](#prometheus).
+2. Confirm the scraping job's `scheme` matches the management context's actual protocol, and its `targets` port matches the management port (default `9600`).
+3. Query the endpoint directly (`curl http://<host>:9600/actuator/prometheus`) to confirm it responds before checking Prometheus.
+
+### A metric you expect to see is missing
+
+**Observed behavior:** A documented metric name doesn't appear in Prometheus or Grafana, even though scraping otherwise works.
+
+**Why this happens:** One of three causes, in order of likelihood:
+
+- The metric is processing-related and only recorded when its triggering event occurs. For example, `zeebe_incident_events_total` only appears after an incident is created or resolved, see [available metrics](#available-metrics).
+- The metric was filtered out. Filtering matches by prefix, so a rule intended to filter `zeebe.foo` also filters `zeebe.foobar` and anything else starting with that prefix. See [filtering](#filtering).
+- The node role doesn't expose that metric. Brokers and gateways expose different metric sets, see the note under [available metrics](#available-metrics).
+
+**How to fix:** Trigger the underlying event and check again, then review your filter configuration for an overly broad prefix match, then confirm you're querying the node role that actually exposes that metric.
+
+### Physical Tenant filtering is missing from a panel
+
+**Observed behavior:** The `physicalTenant` variable or label isn't available on a specific Grafana panel, even though it works elsewhere in the same dashboard.
+
+**Why this happens:** See [Physical Tenant filtering](#physical-tenant-filtering) for which metrics and dashboards expose the `physicalTenant` label.
+
+**How to fix:** Confirm the panel's underlying metric is partition-scoped. If it is and still lacks the label, check the linked issue in [Physical Tenant filtering](#physical-tenant-filtering) for status before assuming a misconfiguration.
+
+### OTLP export fails or backend rejects the data
+
+**Observed behavior:** Metrics reach your OTLP endpoint's logs as errors, or don't appear in the target system at all.
+
+**Why this happens:** OTLP backends vary in what they require beyond a reachable `url`. Some need authentication headers (`otlp.metrics.export.headers`), and some don't support the default `cumulative` aggregation temporality and require `delta` instead (for example, Dynatrace). See [OpenTelemetry Protocol](#opentelemetry-protocol).
+
+**How to fix:** Check your target system's OTLP requirements for authentication headers and its required aggregation temporality, and set both explicitly rather than relying on Micrometer's defaults.
+
 ## Configure metrics
 
 Configure metrics for each Camunda 8 component as follows:
 
 - [Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/concepts/monitoring.md)
-- [Web Modeler](/self-managed/components/hub/monitoring.md)
+- [Camunda Hub](/self-managed/components/hub/monitoring.md)

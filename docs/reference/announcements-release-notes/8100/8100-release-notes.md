@@ -32,6 +32,470 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0
+
+| Release date    | Changelog(s)                                                                                 | Blog |
+| :-------------- | :------------------------------------------------------------------------------------------- | :--- |
+| 13 October 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0)</li></ul> | -    |
+
+### Agentic orchestration
+
+#### AI Agent connector: Claude on Microsoft Foundry and OAuth 2.0 for compatible endpoints
+
+<!-- https://github.com/camunda/connectors/issues/8060
+https://github.com/camunda/connectors/issues/8056
+https://github.com/camunda/connectors/issues/8062 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+Your AI agents can now use Claude models hosted by Microsoft Foundry (Azure), through the Anthropic provider of the new AI Agent element templates. The provider keeps Anthropic-specific configuration such as extended thinking and prompt caching. Authenticate with an API key, Microsoft Entra ID client credentials, or a managed identity (Hybrid and Self-Managed only).
+
+The custom or compatible endpoint backends for both the Anthropic and OpenAI providers now support **OAuth 2.0 client credentials**. Use this authentication method with internal gateways that issue bearer tokens instead of accepting static API keys.
+
+<p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#anthropic)</p>
+
+#### Readable model reasoning in Operate
+
+<!-- https://github.com/camunda/product-hub/issues/3462
+https://github.com/camunda/camunda/issues/62266 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+Operate now displays readable model reasoning as an inline **Thinking** entry in the conversation history. [Migrate to the AI Agent element templates introduced in 8.10](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) to display reasoning where supported.
+
+<p class="link-arrow">[Monitor AI agent reasoning in Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md#step-4-review-the-conversation-history)</p>
+
+### Camunda Hub
+
+#### Business value dashboard
+
+<!-- https://github.com/camunda/product-hub/issues/3543 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Use the new **Business Value** page in Camunda Hub to track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and to set targets for cycle time and automation rate.
+
+- A portfolio view compares every process in the selected Orchestration Cluster on target coverage, target attainment, activity, automation rate, cycle time, and agentic adoption, and ranks off-target processes by how many targets are missed and by how far.
+- A process view shows the metrics and targets for a single process, including per-metric target status and a cycle time distribution with P50, average, and P95.
+- Set optional targets for cycle time and automation rate against the current baseline. Activity is shown as a metric, but you can't set a target for it in 8.10.
+- Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
+
+<p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
+
+### Helm chart deployment
+
+#### PostgreSQL databases are highly available by default
+
+<!-- https://github.com/camunda/camunda-deployment-references/pull/3463 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+The operator-based infrastructure reference architecture now deploys each CloudNativePG cluster with two instances instead of one, on a dedicated write-ahead log (WAL) volume, and requires the two instances of a cluster to sit on different nodes.
+
+A single-instance cluster gives CloudNativePG no switchover target, so the operator refuses to evict it and `kubectl drain` never completes. Because a Kubernetes upgrade drains one node at a time, that stalls the upgrade on whichever node holds a database. A second instance gives the operator somewhere to switch over to. The dedicated WAL volume keeps the write-ahead log that a standby's replication slot retains from growing into the data directory.
+
+Deployments already running the single-instance shape migrate in place: CloudNativePG clones the standby from the running primary and relocates `pg_wal` onto the new volume, with no dump or restore. Environments that cannot host a second instance, such as local Kind clusters, can pass `PG_INSTANCES=1` to `deploy.sh`.
+
+<p class="link-arrow">[High availability and node maintenance](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#high-availability-and-node-maintenance)</p>
+
+<p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
+
+## 8.10.0-alpha5
+
+| Release date     | Changelog(s)                                                                                        | Blog |
+| :--------------- | :-------------------------------------------------------------------------------------------------- | :--- |
+| 8 September 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha5)</li></ul> | -    |
+
+### Agentic orchestration
+
+#### AI Agent connector: new native element templates
+
+<!-- https://github.com/camunda/connectors/issues/7211
+https://github.com/camunda/connectors/issues/7225 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The AI Agent Task and AI Agent Sub-process connectors are now available as new, native element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
+
+Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The legacy element templates are deprecated as of Camunda 8.10.
+
+- This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manually [migrating](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) each element from the still-functioning legacy connector.
+
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) for more details.
+
+:::note
+The legacy connector is deprecated in 8.10 but not removed, and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
+:::
+
+#### Improved agent tool configuration
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3719, https://github.com/camunda/product-hub/issues/3574 -->
+
+New features help you more easily configure your agent tools when modeling.
+
+| Feature                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Available in                                                                                |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| Fix                               | Automatically detect and apply a safe fix for an agent misconfiguration. <p><ul><li><p>If a `fromAi()` key or an output key is detected as invalid, click the **Fix** button to apply a fix.</p></li><li><p>Applying a fix only rewrites the invalid part of a field value. The **Fix** button is only shown if the field has an existing (misconfigured) value.</p></li></ul></p>                                                                                                                                                                                                            | <p><ul><li>Desktop Modeler</li><li>Web Modeler</li></ul></p>                                |
+| Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Web Modeler</li></ul></p>                                |
+| Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Web Modeler</li></ul></p> |
+
+<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+
+:::note
+
+- Changes are explicit, apply only when the correction is deterministic, and can be undone.
+- These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You might need to [update your element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this new feature.
+
+:::
+
+#### Real-time agent visibility and monitoring
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3462 -->
+
+Monitor and evaluate AI agent behavior in Operate.
+
+- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics) (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
+- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
+- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
+
+<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
+
+:::note
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+:::
+
+### Camunda design system
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+The new Camunda visual design system is introduced with this alpha for Self-Managed deployments.
+
+- A new, streamlined design system offers a cleaner, more consistent look across components.
+- Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
+- The new design system is enabled by default in Self-Managed for Web Modeler, Console and Operate.
+
+:::note
+The new design system will be introduced for SaaS deployments with the 8.10 minor release.
+:::
+
+### Connectors
+
+#### AWS Connectors updated to AWS SDK for Java v2
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3581 -->
+
+All AWS connectors are updated to use AWS SDK for Java v2.
+
+This ensures Camunda AWS connector implementations are using supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
+
+#### Connector Management observability improvements
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3019 -->
+
+Connector Management now provides a unified view of inbound and outbound connectors in Console.
+
+- The refreshed experience adds status summaries, search, filtering, sorting, per-runtime health and metrics, richer process details, clearer activity logs, and direct links to Operate.
+- Operators can also reset inbound connector executables from the UI, while webhook activity logs expose redacted request metadata and bounded body previews to make troubleshooting easier.
+
+<p class="link-arrow">[Manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md)</p>
+
+#### Storage connector improvements
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3224 -->
+
+The following improvements are made to storage connectors (S3, Azure Blob, GCS):
+
+- These connectors now support direct object creation from variables and better content extraction for document references.
+- You can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store. Documents with incorrect content-types can be read using conversion options (for example, "read as text", "read as JSON").
+
+### Helm chart deployment
+
+#### Elasticsearch index sizing and replication
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+<!-- https://github.com/camunda/camunda-docs/pull/9809 -->
+
+New comprehensive Elasticsearch configuration documentation explains how to:
+
+- Size your Elasticsearch cluster for Camunda 8 workloads.
+- Configure index replicas to achieve fault‑tolerant indices in multi‑node clusters.
+- Adjust retention and rollover intervals to avoid oversharding while meeting your data‑retention requirements.
+
+This documentation helps Self‑Managed customers:
+
+- Avoid oversharding (too many shards per node).
+- Prevent index unavailability and related Operate/Tasklist errors.
+- Reduce Elasticsearch‑related incidents in production.
+
+<p class="link-arrow">[Install Camunda for production with Helm](/self-managed/deployment/helm/install/production/index.md)</p>
+
+#### Helm migration and validation tool
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3563 -->
+
+The new Helm migration and validation tool can help you upgrade from Camunda 8.9 to 8.10 on Kubernetes with Helm.
+
+Use the tool to:
+
+- Read your existing 8.9 Helm values (for example, values.yaml).
+- Generate a sample 8.10 values file reflecting:
+  - Helm 4-only support.
+  - Bitnami sub‑charts removal.
+  - Hub‑aware deployment patterns.
+  - Simplified application configuration.
+- Produce a migration report that:
+  - Lists the keys that were migrated automatically.
+  - Flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options).
+  - Suggests where to find more information in the documentation.
+  - Can validate an existing 8.10 values file (for example, one drafted by hand or by an AI tool) against Camunda’s migration rules.
+
+The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
+
+#### IRSA Document store support
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3388 -->
+
+Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA) with the AWS S3 document store:
+
+- You can deploy Camunda 8 on Amazon EKS with the document store configured for S3 without providing static AWS credentials.
+- The Helm chart no longer requires AWS access keys when IRSA is in use and allows pods to rely solely on their IAM role for S3 access.
+- Existing deployments using static AWS keys can migrate to IRSA following documented steps.
+
+Refer to the updated Helm configuration and secret management documentation for:
+
+- Enabling IRSA for new EKS deployments using the AWS document store.
+- Safely migrating existing deployments from static AWS keys to IRSA.
+
+<p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
+
+#### REST API, RDBMS, and Document Store support for physical tenants
+
+<!-- https://github.com/camunda/product-hub/issues/3639 -->
+
+Support for physical tenant isolation in 8.10 is added for the Camunda 8 REST API, RDBMS storage, and Document Store.
+
+### Integrations
+
+#### Camunda for Slack
+
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
+
+Camunda for Slack brings tasks, processes, and notifications into Slack through the same App Integrations backend as Microsoft Teams. Everything runs through the `/camunda` slash command, the Camunda direct message, and channel mentions; there is no tab app.
+
+From Slack, you can list and filter tasks, claim and release them, complete a task from a Block Kit modal, start a process, switch organization and cluster, and subscribe a channel or direct message to user task notifications. Slack also works with the App Integrations connector in both directions: a process can send a Slack message, and a Slack message can reach a process.
+
+Microsoft Teams and Slack are independent. You can run either on its own, or both against the same backend.
+
+This feature is released as an early access alpha feature.
+
+<p class="link-arrow">[Camunda for Slack](/components/camunda-integrations/app-integrations/slack.md)</p>
+
+### Modeler
+
+#### Modeling menu improvements
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3481, https://github.com/camunda/camunda-docs/pull/9764 -->
+
+When you create, append, or change an element, the menu groups insertion options into two tabs:
+
+- **BPMN**: Standard BPMN elements, organized by their usual categories.
+- **Reusable assets**: Assets, connectors, and templates from your project, along with existing project resources such as forms, called processes, decisions, and RPA scripts.
+
+<p class="link-arrow">[Find reusable assets in the modeling menus](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#find-reusable-assets-in-the-modeling-menus)</p>
+
+#### New organizational structure for projects and process applications
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+A new organizational structure for projects and process applications is introduced with this alpha.
+
+With this new file resource hierarchy:
+
+- Projects now **only** contain process applications and IDP applications.
+- Files and folders are stored inside process applications.
+- Previously, a project could contain process applications, folders, and files.
+
+The new **Project > Process application > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
+
+:::note
+SaaS Web Modeler data was updated during the 29 August 2026 maintenance window to support this new structure.
+:::
+
+#### Project versioning model
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+A new versioning model for projects, process applications and file resources is introduced with this alpha. Projects now only contain process applications and IDP applications on the root level. Folders and files are stored inside process applications.
+
+**Process applications**: The new process application versioning model uses snapshots to save the current state of all the process application files, in a single action. This helps you track a process application throughout its development lifecycle and ensures the correct state is referenced.
+
+**File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
+
+:::note
+This new versioning model will be introduced for Self-Managed deployments with the 8.10 minor release.
+:::
+
+#### Runtime connection in Web Modeler
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3475 -->
+
+You can now view and choose which cluster you are connected to in Web Modeler.
+
+- Connector-credential names from the cluster autocomplete in your FEEL expressions.
+- Task testing runs against the connected cluster.
+- Connect your cluster from the modeling toolbar to model against your real environment.
+
+:::note
+This is disabled by default and behind feature flag `runtimeConnectionEnabled` (cluster selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
+:::
+
+### Optimize
+
+#### Object variables no longer flattened by default in Self-Managed
+
+<!-- https://github.com/camunda/product-hub/issues/3785 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Starting in 8.10, Optimize no longer flattens object variables by default in Self-Managed deployments.
+
+Object variables are not flattened into per-property fields, and their raw values are no longer stored. This significantly reduces Optimize storage and CPU usage and aligns Self-Managed with the default Camunda 8 SaaS behavior.
+
+- If you rely on object variable properties in reports, filters, or Raw Data Reports, you can opt in by setting `zeebe.includeObjectVariableValue: true` (env `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true`).
+
+- If the setting is not explicitly configured, Optimize logs a `WARN` on startup stating that object variables will not be flattened, and details the opt-in setting.
+
+- SaaS deployments are unaffected as this behavior is already disabled.
+
+**Recovery:** The Optimize importer is idempotent. As long as the object variables still exist in the `zeebe-record-variable\*` indices (within your Zeebe retention window), you can enable the flag and reset the importer to reimport/flatten historical variables.
+
+<p class="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
+
+#### Delete a process definition's data via API
+
+<!-- https://github.com/camunda/product-hub/issues/3716 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Optimize now exposes a public API endpoint to delete all analytics data for a given process definition, so you can remove data for retired processes or respond to data removal requests without manually touching Elasticsearch or OpenSearch.
+
+The deletion runs asynchronously: the API accepts and queues the request, then processes it in the background.
+
+<p class="link-arrow">[Delete process definition data](/apis-tools/optimize-api/delete-process-definition-data.md)</p>
+
+### Orchestration Cluster
+
+#### Centralized Secret Resolution via Zeebe
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3040 -->
+
+Centralized secret resolution through Zeebe is introduced with this alpha. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
+
+- Reference secrets as `camunda.secrets.NAME` in input mappings and expressions. The legacy `{{secrets.NAME}}` syntax continues to work.
+- Secrets are resolved automatically for activated jobs and can also be requested through the Gateway APIs `/v2/secrets/resolve` and `/v2/secrets/list`.
+- Resolved values are not written to engine state, exports, backups, Operate, Tasklist, or application logs.
+- Self-Managed deployments support AWS Secrets Manager and GCP Secret Manager with workload identity authentication. A file-based provider, backed by a mounted Kubernetes secret or a local directory, is also available and can be used in production as well as for local development.
+- SaaS requires no configuration and uses Camunda’s managed secret backend.
+- Camunda 8 Run uses the file-based provider: create one file per secret (filename = secret name, contents = value), and set `camunda.secrets.stores.file.default.path` to that directory in the Camunda 8 Run application configuration.
+
+**Migration:** Existing processes continue to work without changes. For new processes, use `camunda.secrets.NAME`. To migrate hardcoded or connector-specific credentials, store the value in a supported secret store and replace it with a centralized secret reference.
+
+**Limitations:**
+This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 minutes by default.
+
+#### New rebalance API for coordinated leadership transfer
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3630 -->
+
+Coordinated leadership transfer for Orchestration Clusters is introduced with this alpha.
+
+The existing rebalance endpoint asks every leader to step down at once and returns immediately, without guarantee that the intended broker wins the resulting election. The new rebalance API transfers leadership deterministically, ensuring transfer in most cases in a way that is both minimally disruptive and observable.
+
+| Feature                     | Description                                                                                                                                                                                                                                                                                                                                                             |
+| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Coordinated rebalancing API | `POST /cluster/v2/rebalance` starts a rebalance, `GET /cluster/v2/rebalance` reports the cluster's balance state and the progress of each partition, and `DELETE /cluster/v2/rebalance` stops a running rebalance once the transfer in flight has finished. The endpoint requires cluster-admin credentials.                                                            |
+| Deterministic transfers     | Leadership is handed directly to the partition's highest-priority replica instead of being left to an open election, so a rebalance reaches the intended leader layout.                                                                                                                                                                                                 |
+| Minimal disruptions         | Transfers are sequenced one partition at a time across the cluster, so at most one partition is affected at any moment, rather than every partition becoming leaderless simultaneously.                                                                                                                                                                                 |
+| Configurable                | The replication lag a desired leader is allowed to have, how long a partition may wait for that leader to catch up, and how long to wait for a leaderless partition can all be set as cluster defaults and overridden per request. When the desired leader cannot take over in time, the partition resumes under its current leader.                                    |
+| Observable                  | `POST /cluster/v2/rebalance?dryRun=true` returns the plan a rebalance would carry out, without pausing any partition or moving any leadership. Each partition reports how its transfer ended or why it was skipped (already led by the desired leader, replication lag too high, replication timed out, and so on), so an incomplete rebalance can be diagnosed easily. |
+
+:::important
+
+- The previous /actuator/rebalance endpoint continues to work unchanged, and is superseded by the new API.
+- There are some cases where rebalancing is still not guaranteed, notably where the desired leader is simply not available or becomes unavailable during the operation. Such cases require manual retries once the desired leader of a given partition is back online.
+
+:::
+
+#### Reference architecture for Amazon ECS
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3432 -->
+
+A new reference architecture details how you can run the full Camunda 8 stack on Amazon ECS, including Orchestration Cluster, Camunda Hub, and Management Identity.
+
+What’s included:
+
+- A reference architecture diagram and dependency overview for ECS.
+- A Terraform‑based reference deployment paired with step‑by‑step documentation.
+- Guidance for:
+  - Networking, storage, secrets, and IAM (including IRSA where relevant).
+  - Basic Day‑2 operations (scaling, updates, troubleshooting entry points).
+
+This helps support Amazon ECS as a first‑class, documented deployment option for Camunda 8 Self‑Managed, alongside Kubernetes.
+
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+
+#### Reference architecture for dual-region ECS RDBMS
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3552 -->
+
+A new dual‑region reference architecture details how you can run the Orchestration Cluster and Connectors on AWS ECS with RDBMS secondary storage (such as Aurora Global Database).
+
+What's included:
+
+- Recommended topology, exporter configuration, and RDBMS replication setup.
+- Step‑by‑step failover and failback procedures so your platform team can design, deploy, and operate an active‑active (or active‑passive) two‑region ECS environment that meets enterprise HA/DR requirements without bespoke architecture work.
+
+<p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
+
+#### Task testing supports call activities
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3486 -->
+
+Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
+
+<p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
+
 ## 8.10.0-alpha4
 
 | Release date   | Changelog(s)                                                                                        | Blog |
@@ -103,6 +567,18 @@ Messages can address a Microsoft Teams channel, user, or conversation, a Slack c
 
 <p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
 
+#### Receive Microsoft Teams and Slack messages in a process
+
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The **App Integrations connector** now receives messages as well as sending them. A process can start from a message someone writes to the Camunda app in Microsoft Teams or Slack, and a process that is already holding a conversation receives the reply, so an approval, a choice, or a correction can be collected in the chat people are already in rather than in a separate form.
+
+Receiving needs no connector task and no job worker. Element templates for a chat start event, an intermediate catch event, a receive task, and a boundary event set up the correlation, so a start event and a catch event are enough for a working conversation loop. A **Chat key** on the start event decides which chats it answers: configure a Microsoft Teams channel or chat in the Camunda app's **Settings** tab, or a Slack channel or direct message with `/camunda chat`, and give the process the same key. A reply always reaches the cluster whose process asked the question. In a personal chat or direct message every message reaches the process; in a channel on either platform, @mention the Camunda app.
+
+<p class="link-arrow">[Receive a chat message](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message)</p>
+
 ### Modeler
 
 #### BPMN element menu improvements
@@ -134,7 +610,7 @@ Element templates support the `steps` and `presets` keys to offer several predef
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-In Self-Managed, you can now hide the **Add user** button on the Web Modeler **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
+In Self-Managed, you can now hide the **Add user** button on the Web Modeler **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
 
 <p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
 
@@ -149,6 +625,20 @@ In Self-Managed, you can now hide the **Add user** button on the Web Modeler **C
 Business ID is now visible in Operate for decision instances, in both the decision instance list and the decision instance details view. Filter decision instances by business ID using **Equals**, **Contains**, and **Is one of** in the filter UI, or the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
 
 <p class="link-arrow">[Business ID](/components/operate/userguide/basic-operate-navigation.md#business-id-for-decision-instances)</p>
+
+### Optimize
+
+#### Optimize authentication moves to the Camunda Security Library
+
+<!-- https://github.com/camunda/camunda/issues/58600 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Optimize now authenticates through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), adopting the same authentication and session handling as the Orchestration Cluster components.
+
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-authentication-moves-to-the-camunda-security-library) for the upgrade action required, and [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
 ### Orchestration Cluster
 
@@ -196,6 +686,22 @@ Physical Tenants now support independent per-tenant authorization.
 - Identity providers are defined at the cluster level. Each Physical Tenant chooses which IdPs it can accept.
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+
+#### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
+
+<!-- https://github.com/camunda/product-hub/issues/3607 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl), a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings, so you configure authentication once, in one place. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+
+Camunda Hub and Optimize both continue to accept their existing authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
+
+User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
+
+<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
 #### Rolling upgrades
 

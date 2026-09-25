@@ -639,7 +639,7 @@ public DocumentResult sendDocumentAsResult() {
 
 ##### Completing ad-hoc sub-process jobs with a result
 
-When your job worker handles an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when you complete the job.
+When your job worker handles an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when you complete the job.
 
 Return a lambda that calls `activateElement` with the target element ID:
 

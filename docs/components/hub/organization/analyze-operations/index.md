@@ -12,10 +12,22 @@ Monitor cluster health, track job and process execution, and measure business va
 
 <AoGrid ao={[
 {
+link: "./hub-dashboard",
+title: "Monitor the Hub dashboard",
+image: DocsIcon,
+description: "View organization activities at a high level.",
+},
+{
 link: "./job-dashboard",
 title: "Monitor the job dashboard",
 image: DocsIcon,
 description: "Track active job types, job outcomes, and job worker activity.",
+},
+{
+link: "./business-value-dashboard",
+title: "Monitor the business value dashboard",
+image: DocsIcon,
+description: "Track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics.",
 },
 {
 link: "../../../optimize/userguide/agentic-control-plane/",

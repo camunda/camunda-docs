@@ -98,7 +98,7 @@ Application "sap-rfc-connector" started and available at "some.url.hana.ondemand
 
 - If using Desktop Modeler, [follow the standard importing procedure](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
-## Working with the SAP RFC connector in Camunda Modeler
+## Working with the SAP RFC connector in Camunda Hub and Desktop Modeler
 
 ### Modeling options
 

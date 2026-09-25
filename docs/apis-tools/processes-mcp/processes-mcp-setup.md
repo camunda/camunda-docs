@@ -52,7 +52,11 @@ orchestration:
 
 <TabItem value="saas">
 
-In the Camunda Console, navigate to your cluster, open **Cluster Settings**, and enable **MCP Support**.
+In Camunda Hub:
+
+1. In the left navigation, under **Clusters**, select a cluster.
+1. Open the **Settings** tab
+1. Enable MCP support.
 
 :::info
 MCP server support is available on SaaS clusters running Camunda 8.10.0 or later.
@@ -69,7 +73,7 @@ For a full reference of MCP configuration properties, see [Property reference](/
 Once the Processes MCP Server is enabled, you can connect any MCP-compliant client. The approach depends on your client's capabilities and authentication requirements.
 
 :::important
-When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details, including the base URL, OAuth endpoint, client ID, and audience, are displayed on the credentials page.
+When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in Camunda Hub, all required connection details, including the base URL, OAuth endpoint, client ID, and audience, are displayed on the credentials page.
 :::
 
 ### MCP endpoint URL
@@ -84,7 +88,7 @@ The Processes MCP Server is served at `/mcp/processes` on the Orchestration Clus
 | SaaS – secure connectivity | `https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/mcp/processes` |
 | Self-Managed (custom)      | `https://<your-host>/mcp/processes`                                               |
 
-For SaaS, find your **Region Id** and **Cluster Id** in the Camunda Console under **Cluster Details**.
+For SaaS, find your **Region Id** and **Cluster Id** in [Camunda Hub](/components/hub/organization/manage-clusters/manage-api-clients.md#view-connection-information).
 
 ### Direct HTTP connection
 
@@ -147,7 +151,7 @@ For example, use the following in `claude_desktop_config.json` for Claude Code:
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                                                                                                                                                                |
 
 :::tip Where to find these values
-When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are displayed on the credentials page. You can also copy a ready-to-use c8ctl configuration snippet directly from the **MCP** tab on the credentials screen.
+When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in Camunda Hub, all required connection details are displayed on the credentials page. You can also copy a ready-to-use c8ctl configuration snippet directly from the **MCP** tab on the credentials screen.
 :::
 
 For the full list of supported environment variables, see the [c8ctl documentation](https://github.com/camunda/c8ctl).
@@ -207,7 +211,7 @@ camunda:
                     client-authentication: credentials-body
 ```
 
-The example above shows a SaaS configuration using the public endpoint. For clusters with Secure connectivity (AWS PrivateLink), set `url` to the private MCP endpoint URL shown in Camunda Console instead of the public `zeebe.camunda.io` host (the path still ends with `/mcp/processes`).
+The example above shows a SaaS configuration using the public endpoint. For clusters with Secure connectivity (AWS PrivateLink), set `url` to the private MCP endpoint URL shown in Camunda Hub instead of the public `zeebe.camunda.io` host (the path still ends with `/mcp/processes`).
 
 For local unauthenticated setups, you can omit the `authentication` block and use `http://localhost:8080/mcp/processes` as the URL.
 

@@ -20,6 +20,7 @@ import PortForwardServices from '../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
 import SecondaryStorageOptionsNote from '../\_partials/\_secondary-storage-options-note.md'
 import DeploymentReadinessCheck from '../\_partials/\_deployment-readiness-check.md'
+import ZeebeGatewayNetworkPolicies from '../\_partials/\_zeebe-gateway-network-policies.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -53,7 +54,7 @@ This section installs Camunda 8 following the architecture described in the [ref
 Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
 - **[Elasticsearch with ECK](#deploy-elasticsearch)**: Document-store example path used in this guide for secondary storage
-- **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
+- **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Camunda Hub databases
 - **[Keycloak](#deploy-keycloak) (optional)**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) as an identity provider for Single Sign-On (SSO)
 
 For OpenShift deployments, the following OpenShift-specific configurations are also included:
@@ -134,6 +135,13 @@ We strongly recommend double-checking your YAML file before applying it. You can
 #### Configuring the Ingress
 
 Before exposing services outside the cluster, we need an Ingress component. Here's how you can configure it:
+
+:::danger Exposure of the Zeebe Gateway Service
+For production-grade security, keep the Zeebe Gateway on a private network with no publicly reachable route, and access it only from internal workloads or over a secure private connection. This limits the attack surface and keeps process and job traffic inside your trusted network boundary.
+
+<ZeebeGatewayNetworkPolicies />
+
+:::
 
 <Tabs queryString="current-ingress">
 
@@ -454,7 +462,7 @@ All commands in this guide assume you are at the **repository root** (the direct
 Deploy PostgreSQL clusters using the CloudNativePG operator:
 
 ```bash
-CLUSTER_FILTER="pg-identity,pg-webmodeler" (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-identity,pg-hub" ./deploy.sh)
 ```
 
 This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys the specified PostgreSQL clusters, and waits for readiness.
@@ -462,7 +470,19 @@ This script installs the CNPG operator (auto-detecting OpenShift to apply SCC pa
 The following PostgreSQL clusters are created:
 
 - **pg-identity**: Database for Camunda Identity component
-- **pg-webmodeler**: Database for Web Modeler component (remove from configuration if not needed)
+- **pg-hub**: Database for Camunda Hub (remove from configuration if not needed)
+
+If you use **RDBMS as the secondary storage** for the Orchestration Cluster instead of Elasticsearch, add `pg-camunda` to the filter:
+
+<!-- TODO: deploy.sh only learns to resolve pg-camunda from postgresql-orchestration-cluster.yml
+     when camunda/camunda-deployment-references#2726 (stable/8.9) and #2724 (main) merge.
+     Until then this command deploys the two application clusters only. -->
+
+```bash
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-identity,pg-hub,pg-camunda" ./deploy.sh)
+```
+
+- **pg-camunda**: Secondary storage for the Orchestration Cluster, defined in `postgresql-orchestration-cluster.yml`
 
 <details>
 <summary>Review the PostgreSQL cluster configuration</summary>
@@ -572,6 +592,23 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
+If you use **RDBMS as the secondary storage**, skip the [Elasticsearch deployment](#deploy-elasticsearch) and the overlay above, and merge the **RDBMS** overlay instead:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the RDBMS Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml
+```
+
+</details>
+
+This overlay points the Orchestration Cluster at the `pg-camunda` cluster and disables Elasticsearch. Optimize requires Elasticsearch or OpenSearch, so it is disabled as well.
+
 Merge the **Identity PostgreSQL** overlay:
 
 ```bash
@@ -587,17 +624,17 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
-If **Web Modeler** is enabled, also merge the **Web Modeler PostgreSQL** overlay:
+If **Camunda Hub** is enabled, also merge the **Camunda Hub PostgreSQL** overlay:
 
 ```bash
-yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-hub-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
 ```
 
 <details>
-<summary>Review the Web Modeler PostgreSQL Helm overlay</summary>
+<summary>Review the Camunda Hub PostgreSQL Helm overlay</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-hub-values.yml
 ```
 
 </details>

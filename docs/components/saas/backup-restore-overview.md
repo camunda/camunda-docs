@@ -6,7 +6,7 @@ description: "Understand what Camunda 8 SaaS backups include, how same-cluster r
 
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
-Camunda 8 SaaS lets you create backups and restore a cluster from a selected backup in Console, without opening a support ticket.
+Camunda 8 SaaS lets you create backups and restore a cluster from a selected backup in Camunda Hub, without opening a support ticket.
 
 Backups are designed for disaster recovery, not long-term archival.
 
@@ -27,7 +27,7 @@ A backup captures a consistent cluster snapshot across Camunda components:
 - Operate data
 - Tasklist data
 - Optimize data
-- Exported Zeebe records stored in Elasticsearch/OpenSearch
+- Exported Zeebe records stored in Elasticsearch
 
 ## Restore model
 

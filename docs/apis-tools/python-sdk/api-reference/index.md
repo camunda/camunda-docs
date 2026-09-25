@@ -47,6 +47,7 @@ mdx:
   - [`FormKey`](types.md#camunda_orchestration_sdk.semantic_types.FormKey)
   - [`GlobalListenerId`](types.md#camunda_orchestration_sdk.semantic_types.GlobalListenerId)
   - [`GroupId`](types.md#camunda_orchestration_sdk.semantic_types.GroupId)
+  - [`HistoryItemId`](types.md#camunda_orchestration_sdk.semantic_types.HistoryItemId)
   - [`IncidentKey`](types.md#camunda_orchestration_sdk.semantic_types.IncidentKey)
   - [`JobKey`](types.md#camunda_orchestration_sdk.semantic_types.JobKey)
   - [`MappingRuleId`](types.md#camunda_orchestration_sdk.semantic_types.MappingRuleId)
