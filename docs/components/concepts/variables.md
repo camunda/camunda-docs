@@ -145,14 +145,16 @@ The scope boundary depends on the BPMN element you use:
 
 If a form field or task variable should be different for each subprocess or each multi-instance instance, define it as a local variable with an input mapping instead of writing it directly to the root process scope.
 
-:::tip When to use local variables
-Use local variables to isolate data within a specific scope, especially for:
+Use local variables to isolate data within a specific scope: per-instance data in multi-instance activities (to avoid race conditions when parallel instances update the same root process variable), subprocess-specific data that shouldn't affect sibling instances or the parent scope, and task-specific context that shouldn't persist to the process level. Local variables are removed when a scope is exited unless you explicitly propagate them with output mappings.
 
-- **Per-instance data in multi-instance activities**: Create per-instance copies of variables to avoid race conditions when parallel instances update the same root process variable.
-- **Subprocess-specific data**: Variables that should not affect sibling subprocess instances or the parent scope.
-- **Task-specific context**: Variables computed for a single task that shouldn't persist to the process level.
+:::warning A local variable blocks later writes of the same name
+If another operation writes a variable with the same name, variable propagation finds the local variable first. This happens when a job completes or an input mapping creates the variable.
 
-Remember: Local variables are removed when a scope is exited unless you explicitly propagate them with output mappings.
+Later writes update only the local variable, not the process instance. When the scope exits, Camunda discards the local variable and any updates. The operation appears to succeed, but the change never propagates.
+
+For example, an input mapping creates a local variable `x`. When the element's job completes with a new value for `x` (without an output mapping), it updates the local `x`, not the process instance. The next element still sees the previous value.
+
+To expose a variable outside its scope, use an [output mapping](#inputoutput-variable-mappings).
 :::
 
 ## Input/output variable mappings

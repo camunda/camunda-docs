@@ -79,7 +79,7 @@ paths:
     patch:
       operationId: updateVersion
       summary: Update a version
-      description: Updates the name of an existing version.
+      description: Updates the attributes of an existing version.
       x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Version
@@ -275,8 +275,6 @@ components:
     VersionUpdateRequest:
       type: object
       additionalProperties: false
-      required:
-        - name
       example:
         name: "Release 1.1"
         description: "Updated with error-handling improvements."
@@ -360,7 +358,8 @@ components:
           type: boolean
         linkedToProcessApplication:
           description: >-
-            Whether this version is linked to one or more process application versions.
+            Whether this version is captured by one or more project snapshots. Use
+            `POST /project-snapshots/search` with a `fileVersionKey` filter to find out which ones.
           type: boolean
         created:
           description: The timestamp when the version was created.
@@ -433,7 +432,8 @@ components:
           type: boolean
         linkedToProcessApplication:
           description: >-
-            Whether this version is linked to one or more process application versions.
+            Whether this version is captured by one or more project snapshots. Use
+            `POST /project-snapshots/search` with a `fileVersionKey` filter to find out which ones.
           type: boolean
         created:
           description: The timestamp when the version was created.

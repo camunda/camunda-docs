@@ -274,10 +274,10 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         {
           type: "category",
-          label: "Secret management",
+          label: "Secrets",
           link: {
             type: "doc",
-            id: "components/concepts/secret-management",
+            id: "components/concepts/secrets",
           },
           items: [
             "components/concepts/secret-resolution",
@@ -1351,7 +1351,7 @@ module.exports = {
             id: "components/saas/secure-connectivity/secure-connectivity-AWS",
           },
           items: [
-            "components/saas/secure-connectivity/secure-connectivity-console-setup",
+            "components/saas/secure-connectivity/enable-secure-connectivity",
           ],
         },
 
@@ -2523,6 +2523,7 @@ module.exports = {
           items: [
             "self-managed/components/hub/usage-metrics",
             "self-managed/components/hub/monitoring",
+            "self-managed/components/hub/version-upgrade",
             {
               Configuration: [
                 "self-managed/components/hub/configuration/properties",
