@@ -90,7 +90,7 @@ This secret includes the following keys:
 - `identity-optimize-client-token`: Client secret of the Keycloak OIDC client `optimize` used by Optimize.
 - `identity-orchestration-client-token`: Client secret of the Keycloak OIDC client `orchestration` used by the Orchestration Cluster.
 
-The PostgreSQL credentials for Web Modeler are no longer part of this secret. They are provided by the operator (or managed database) that hosts the Web Modeler database, such as the `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
+The PostgreSQL credentials for Management Identity and Camunda Hub are no longer part of this secret. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended).
 
@@ -158,6 +158,15 @@ identity:
     secret:
       existingSecret: "camunda-credentials"
       existingSecretKey: "identity-firstuser-password"
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    username: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
   env:
     - name: KEYCLOAK_REALM
       value: <realm>
@@ -166,6 +175,8 @@ identity:
 ```
 
 Add the section under `global.identity` to the `global` configuration you created in the previous step.
+
+Management Identity stores its data in a dedicated PostgreSQL database. Connect it to the `pg-identity` cluster created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment), or to a managed database. Chart `15.x` no longer bundles the `identityPostgresql` subchart, so this connection has to be configured explicitly.
 
 The `identity.firstUser` field defines the initial user that Management Identity creates in Keycloak with full access to all Camunda components.
 By default, this user is named `demo`. To use a different name, set `identity.firstUser.username`.
@@ -220,6 +231,15 @@ identity:
     secret:
       existingSecret: "camunda-credentials"
       existingSecretKey: "identity-firstuser-password"
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    username: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
   env:
     - name: KEYCLOAK_REALM
       value: <realm>
@@ -239,21 +259,17 @@ connectors:
 
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
-
-webModeler:
-  # Web Modeler settings use the top-level webModeler.* path; the chart passes
-  # them through to the Camunda Hub sub-component.
   restapi:
     mail:
       fromAddress: noreply@example.com
-    # Connect Web Modeler to the operator-managed PostgreSQL cluster (pg-webmodeler)
+    # Connect Camunda Hub to the operator-managed PostgreSQL cluster (pg-hub)
     externalDatabase:
-      host: pg-webmodeler-rw
+      host: pg-hub-rw
       port: 5432
-      database: webmodeler
-      username: webmodeler
+      database: hub
+      username: hub
       secret:
-        existingSecret: pg-webmodeler-secret
+        existingSecret: pg-hub-secret
         existingSecretKey: password
 
 orchestration:

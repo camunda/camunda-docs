@@ -27,7 +27,7 @@ Before you begin, ensure you have:
 - Access to your provider's discovery document to obtain endpoint URLs.
 - A Kubernetes cluster with the Helm CLI v4 installed.
 - kubectl configured to access your cluster.
-- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
 
@@ -189,7 +189,7 @@ kubectl create secret generic oidc-credentials \
 The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-The PostgreSQL credentials for Management Identity and Web Modeler are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
+The PostgreSQL credentials for Management Identity and Camunda Hub are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 :::tip Alternative secret management
 For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended) for more options.
@@ -416,19 +416,17 @@ global:
 
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
-
-webModeler:
   restapi:
     mail:
       fromAddress: noreply@example.com # Update with your email address
       # Additional SMTP configuration may be required - see Web Modeler docs
     externalDatabase:
-      host: pg-webmodeler-rw
+      host: pg-hub-rw
       port: 5432
-      database: webmodeler
-      username: webmodeler
+      database: hub
+      username: hub
       secret:
-        existingSecret: pg-webmodeler-secret
+        existingSecret: pg-hub-secret
         existingSecretKey: password
 ```
 
@@ -579,19 +577,16 @@ optimize:
 # Console and Web Modeler (Camunda Hub)
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
-
-# Web Modeler
-webModeler:
   restapi:
     mail:
       fromAddress: <your-email-address>
     externalDatabase:
-      host: pg-webmodeler-rw
+      host: pg-hub-rw
       port: 5432
-      database: webmodeler
-      username: webmodeler
+      database: hub
+      username: hub
       secret:
-        existingSecret: pg-webmodeler-secret
+        existingSecret: pg-hub-secret
         existingSecretKey: password
 ```
 
@@ -608,7 +603,7 @@ webModeler:
 
 - All `<placeholders>` replaced with actual values.
 - All client secrets stored in the `oidc-credentials` secret.
-- Database credentials provided by the operator-managed database secrets (for example, `pg-identity-secret` and `pg-webmodeler-secret`).
+- Database credentials provided by the operator-managed database secrets (for example, `pg-identity-secret` and `pg-hub-secret`).
 - Redirect URIs in OIDC provider match `redirectUrl` values.
 - Each component has a distinct resource audience by default. Any cross-component audience acceptance supports a documented integration.
 - Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names.

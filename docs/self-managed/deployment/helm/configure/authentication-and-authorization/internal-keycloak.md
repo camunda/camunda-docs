@@ -189,21 +189,17 @@ global:
 
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
-
-webModeler:
-  # Web Modeler settings still use the top-level webModeler.* path; the chart
-  # passes them through to the Camunda Hub sub-component.
   restapi:
     mail:
       fromAddress: noreply@example.com
-    # Connect Web Modeler to the operator-managed PostgreSQL cluster (pg-webmodeler)
+    # Connect Camunda Hub to the operator-managed PostgreSQL cluster (pg-hub)
     externalDatabase:
-      host: pg-webmodeler-rw
+      host: pg-hub-rw
       port: 5432
-      database: webmodeler
-      username: webmodeler
+      database: hub
+      username: hub
       secret:
-        existingSecret: pg-webmodeler-secret
+        existingSecret: pg-hub-secret
         existingSecretKey: password
 ```
 
@@ -289,17 +285,18 @@ connectors:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-connectors-client-token"
 
-webModeler:
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: noreply@example.com
     externalDatabase:
-      host: pg-webmodeler-rw
+      host: pg-hub-rw
       port: 5432
-      database: webmodeler
-      username: webmodeler
+      database: hub
+      username: hub
       secret:
-        existingSecret: pg-webmodeler-secret
+        existingSecret: pg-hub-secret
         existingSecretKey: password
 
 orchestration:
@@ -309,9 +306,6 @@ orchestration:
         secret:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-orchestration-client-token"
-
-camundaHub:
-  enabled: true # Deploys both Console and Web Modeler
 ```
 
 In this setup, Keycloak and PostgreSQL are deployed and managed by their operators, while the Camunda Helm chart handles the application-side Keycloak configuration automatically, including creating OIDC or OAuth clients and linking components. Your values file primarily connects to the operator-managed services, enables components, and defines client secrets.
@@ -355,14 +349,19 @@ kubectl port-forward svc/camunda-console 8087:80
 Once port forwarding is active, access each component through `http://localhost:<port>`.
 For example:
 
-- Keycloak: `http://localhost:18080`
 - Web Modeler: `http://localhost:8070`
 - Orchestration Cluster: `http://localhost:8080`
+
+Reach Keycloak at `http://keycloak-service:18080/auth` rather than through `localhost`. The configuration above sets the token issuer to `http://keycloak-service:18080/auth/realms/camunda-platform`, so your browser is redirected to that hostname during login and must resolve it to the forwarded port. Map it to the loopback address first:
+
+```bash
+echo "127.0.0.1  keycloak-service" | sudo tee -a /etc/hosts
+```
 
 Log in with username `demo` and the password you defined under `identity-firstuser-password`.
 
 :::note Default URLs and port forwarding
-The configuration shown above uses default `redirectUrl` values that match the port-forwarding setup (`http://localhost:8070` for Web Modeler, `http://localhost:18080` for Keycloak). These defaults work automatically when using `kubectl port-forward`.
+The configuration shown above uses a default `redirectUrl` of `http://localhost:8070` for Web Modeler, which matches the port-forwarding setup. The Keycloak issuer stays on the in-cluster service name and needs the `/etc/hosts` entry above.
 
 If you don't use port forwarding and instead expose components via Ingress or a domain, you **must** update the `redirectUrl` parameters under `global.identity.auth` to match your actual URLs. See [Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for domain-based configuration examples.
 :::

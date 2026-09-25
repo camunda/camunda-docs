@@ -150,18 +150,16 @@ connectors:
 
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
-
-webModeler:
   restapi:
     mail:
       fromAddress: noreply@example.com
     externalDatabase:
-      host: pg-webmodeler-rw
+      host: pg-hub-rw
       port: 5432
-      database: webmodeler
-      username: webmodeler
+      database: hub
+      username: hub
       secret:
-        existingSecret: pg-webmodeler-secret
+        existingSecret: pg-hub-secret
         existingSecretKey: password
 
 orchestration:

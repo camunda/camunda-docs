@@ -18,7 +18,7 @@ Before you begin, ensure you have:
 - Access to a Microsoft Entra tenant with permission to create applications and app registrations
 - The ID of your tenant
 - An understanding of the structure and claims of access tokens in Entra
-- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
 ## Configuration
 
@@ -132,7 +132,7 @@ In Camunda configuration, this value is referred to as a _client secret_ to alig
 The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-The PostgreSQL credentials for Management Identity and Web Modeler are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
+The PostgreSQL credentials for Management Identity and Camunda Hub are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended).
 
@@ -326,18 +326,16 @@ global:
 
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
-
-webModeler:
   restapi:
     mail:
       fromAddress: noreply@example.com
     externalDatabase:
-      host: pg-webmodeler-rw
+      host: pg-hub-rw
       port: 5432
-      database: webmodeler
-      username: webmodeler
+      database: hub
+      username: hub
       secret:
-        existingSecret: pg-webmodeler-secret
+        existingSecret: pg-hub-secret
         existingSecretKey: password
 ```
 
@@ -474,18 +472,16 @@ optimize:
 
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
-
-webModeler:
   restapi:
     mail:
       fromAddress: noreply@example.com
     externalDatabase:
-      host: pg-webmodeler-rw
+      host: pg-hub-rw
       port: 5432
-      database: webmodeler
-      username: webmodeler
+      database: hub
+      username: hub
       secret:
-        existingSecret: pg-webmodeler-secret
+        existingSecret: pg-hub-secret
         existingSecretKey: password
 ```
 
