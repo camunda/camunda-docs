@@ -10,6 +10,10 @@ import TabItem from "@theme/TabItem";
 
 This guide shows you how to configure Camunda 8 Self-Managed to authenticate with any OpenID connect (OIDC)-compliant identity provider.
 
+:::info Bitnami subcharts removed in Camunda 8.10
+Earlier releases bundled PostgreSQL through Bitnami subcharts (`identityPostgresql`, `webModelerPostgresql`). As of Camunda 8.10 (Helm chart `15.x`), the bundled Bitnami subcharts are removed: provide PostgreSQL with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database, as shown in the examples below.
+:::
+
 :::info
 Before proceeding, since this is a general guide, refer to [External OIDC provider](./external-oidc-provider.md) to see the available provider-specific guides, as they include detailed setup instructions tailored to provider's interface.
 :::
@@ -23,6 +27,7 @@ Before you begin, ensure you have:
 - Access to your provider's discovery document to obtain endpoint URLs.
 - A Kubernetes cluster with the Helm CLI v4 installed.
 - kubectl configured to access your cluster.
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
 
@@ -49,6 +54,34 @@ For each client, record:
 - Client ID
 - Client secret (for confidential clients only)
   :::
+
+## Assign a unique audience to each component
+
+Camunda components can trust tokens from the same OIDC issuer while using the `aud` claim to identify the intended resource. Each component validates this claim against its configured audience and accepts any token that carries it.
+
+Management Identity controls access to Camunda Hub and Optimize. The Orchestration Cluster manages its own roles and authorizations through Admin. Both subsystems can use the same OIDC provider, but their authorization checks remain independent.
+
+Decide a distinct audience for each component before you configure Helm, then configure your provider to issue it.
+
+| Component              | Helm value                                            | Chart default                      |
+| ---------------------- | ----------------------------------------------------- | ---------------------------------- |
+| Management Identity    | `global.identity.auth.identity.audience`              | `camunda-identity-resource-server` |
+| Orchestration Cluster  | `orchestration.security.authentication.oidc.audience` | `orchestration-api`                |
+| Optimize               | `global.identity.auth.optimize.audience`              | `optimize-api`                     |
+| Web Modeler client API | `global.identity.auth.webModeler.clientApiAudience`   | `web-modeler-api`                  |
+| Web Modeler public API | `global.identity.auth.webModeler.publicApiAudience`   | `web-modeler-public-api`           |
+| Connectors             | Inherits the Orchestration Cluster audience           | `orchestration-api`                |
+
+:::warning
+If two components accept the same audience, a token intended for one can also pass the other's audience validation. Keep the resource audiences in this table distinct unless a supported integration requires one component to accept another's token.
+:::
+
+Do not derive these values by inspecting whatever token your provider returns by default. If several components are registered against one client or API identifier, inspection returns the same `aud` for all of them, so configuring what you find reproduces the collision instead of revealing it. Decide the values first, then use [token inspection](./jwt-token-claims.md) to confirm your provider issues them.
+
+The following integrations intentionally cross this audience boundary:
+
+- Connectors calls the Orchestration Cluster as a client and uses the Orchestration Cluster's audience. See [Configure Connectors](#configure-connectors).
+- Camunda Hub deployments that use `BEARER_TOKEN` authentication forward the user's Hub token to the Orchestration Cluster. Configure the cluster to accept the Camunda Hub UI audience in addition to its own audience. See [connect Admin to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 
 ## Configure redirect URIs
 
@@ -140,9 +173,7 @@ For more information, see [OpenID Connect Core specification](https://openid.net
 
 ## Create secrets
 
-Create two secrets in your Kubernetes namespace.
-
-First, create a secret that contains all OIDC client secrets:
+Create a secret in your Kubernetes namespace that contains all OIDC client secrets:
 
 ```bash
 kubectl create secret generic oidc-credentials \
@@ -156,21 +187,10 @@ kubectl create secret generic oidc-credentials \
 The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-Next, create a secret with the remaining credentials for the Camunda Helm chart:
-
-```bash
-kubectl create secret generic camunda-credentials \
-  --from-literal=identity-postgresql-admin-password=CHANGE_ME \
-  --from-literal=identity-postgresql-user-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-admin-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-user-password=CHANGE_ME
-```
-
-Unlike the OIDC client secrets, these passwords initialize the component databases.
-You can choose any values.
+The PostgreSQL credentials for Management Identity and Camunda Hub are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 :::tip Alternative secret management
-For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions) for more options.
+For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended) for more options.
 :::
 
 ## Configure Camunda components
@@ -238,24 +258,25 @@ global:
 identity:
   fullURL: <identity-base-url>
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    username: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 ```
 
 #### Identity-specific parameters
 
-| Parameter           | Description                                  | How to Determine                                                                                |
-| ------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `clientId`          | Client ID from your OIDC provider            | From your Identity client configuration                                                         |
-| `audience`          | Expected audience in access tokens           | From token inspection (see [Discover provider configuration](#discover-provider-configuration)) |
-| `initialClaimName`  | Claim that identifies the initial admin user | `email`, `sub`, or another user claim from token inspection                                     |
-| `initialClaimValue` | Value granting initial admin access          | Your admin user's value for the specified claim (e.g., `admin@example.com`)                     |
+| Parameter           | Description                                  | How to Determine                                                                                                           |
+| ------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`          | Client ID from your OIDC provider            | From your Identity client configuration                                                                                    |
+| `audience`          | Expected audience in access tokens           | The unique value you assigned in [Assign a unique audience to each component](#assign-a-unique-audience-to-each-component) |
+| `initialClaimName`  | Claim that identifies the initial admin user | `email`, `sub`, or another user claim from token inspection                                                                |
+| `initialClaimValue` | Value granting initial admin access          | Your admin user's value for the specified claim (e.g., `admin@example.com`)                                                |
 
 :::warning Initial claim cannot be changed
 The `initialClaimName` and `initialClaimValue` parameters are used only during the first startup to grant initial admin access. Once Management Identity has started, these values are stored in the database and cannot be changed via Helm values.
@@ -298,20 +319,20 @@ orchestration:
 
 #### Orchestration-specific parameters
 
-| Parameter       | Description                        | Value                                                                                          |
-| --------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `clientId`      | Orchestration client ID            | From your provider                                                                             |
-| `audience`      | Expected audience in tokens        | From token inspection                                                                          |
-| `redirectUrl`   | Full URL for Orchestration Cluster | `http://localhost:8080` (local) or `https://your-domain.com/orchestration` (Ingress)           |
-| `usernameClaim` | Claim identifying users            | Default: `preferred_username`. Override if your provider uses `email`, `sub`, or another claim |
-| `clientIdClaim` | Claim identifying clients          | Default: `client_id`. Override if your provider uses `azp` or another claim                    |
+| Parameter       | Description                        | Value                                                                                                                      |
+| --------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`      | Orchestration client ID            | From your provider                                                                                                         |
+| `audience`      | Expected audience in tokens        | The unique value you assigned in [Assign a unique audience to each component](#assign-a-unique-audience-to-each-component) |
+| `redirectUrl`   | Full URL for Orchestration Cluster | `http://localhost:8080` (local) or `https://your-domain.com/orchestration` (Ingress)                                       |
+| `usernameClaim` | Claim identifying users            | Default: `preferred_username`. Override if your provider uses `email`, `sub`, or another claim                             |
+| `clientIdClaim` | Claim identifying clients          | Default: `client_id`. Override if your provider uses `azp` or another claim                                                |
 
 :::note Username display in Web Modeler (Helm)
 In Helm deployments, the default OIDC username claim is `preferred_username`, which often maps to an email address.
 
 If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
-For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
+For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak).
 :::
 
 #### Default roles
@@ -342,7 +363,7 @@ connectors:
 ```
 
 :::info Connectors shares credentials
-Connectors typically uses the same OIDC client as the Orchestration Cluster. This allows the Orchestration Cluster to accept the Connectors client's audience by default, since they share the same client configuration. If you prefer to use a separate OIDC client for Connectors, you'll need to configure the Orchestration Cluster to accept that client's audience.
+Connectors calls the Orchestration Cluster as a client, so it deliberately reuses the Orchestration Cluster's OIDC client and audience. This is a scoped exception to the [unique audience guidance](#assign-a-unique-audience-to-each-component). If you prefer a separate OIDC client for Connectors, you must also configure the Orchestration Cluster to accept that client's audience.
 :::
 
 ### Configure Optimize
@@ -367,11 +388,11 @@ optimize:
 
 #### Optimize parameters
 
-| Parameter     | Value                                                                           |
-| ------------- | ------------------------------------------------------------------------------- |
-| `clientId`    | Optimize client ID from your provider                                           |
-| `audience`    | Expected audience (from token inspection)                                       |
-| `redirectUrl` | `http://localhost:8083` (local) or `https://your-domain.com/optimize` (Ingress) |
+| Parameter     | Value                                                                                                                      |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`    | Optimize client ID from your provider                                                                                      |
+| `audience`    | The unique value you assigned in [Assign a unique audience to each component](#assign-a-unique-audience-to-each-component) |
+| `redirectUrl` | `http://localhost:8083` (local) or `https://your-domain.com/optimize` (Ingress)                                            |
 
 ### Configure Web Modeler
 
@@ -391,31 +412,30 @@ global:
         clientApiAudience: <web-modeler-ui-audience>
         publicApiAudience: <web-modeler-api-audience>
 
-webModeler:
-  enabled: true
-
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: noreply@example.com # Update with your email address
       # Additional SMTP configuration may be required - see Web Modeler docs
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: webmodeler-postgresql-admin-password
-      userPasswordKey: webmodeler-postgresql-user-password
+    externalDatabase:
+      host: pg-hub-rw
+      port: 5432
+      database: hub
+      username: hub
+      secret:
+        existingSecret: pg-hub-secret
+        existingSecretKey: password
 ```
 
 #### Web Modeler parameters
 
-| Parameter           | Description                              | Value                                                                          |
-| ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------ |
-| `clientId`          | Web Modeler UI client ID (public client) | From your provider                                                             |
-| `redirectUrl`       | Full URL for Web Modeler                 | `http://localhost:8070` (local) or `https://your-domain.com/modeler` (Ingress) |
-| `clientApiAudience` | Audience for UI-to-API communication     | Usually the UI client ID                                                       |
-| `publicApiAudience` | Audience for external API access         | The API client ID or custom audience                                           |
+| Parameter           | Description                              | Value                                                                                             |
+| ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `clientId`          | Web Modeler UI client ID (public client) | From your provider                                                                                |
+| `redirectUrl`       | Full URL for Web Modeler                 | `http://localhost:8070` (local) or `https://your-domain.com/modeler` (Ingress)                    |
+| `clientApiAudience` | Audience for UI-to-API communication     | A unique value for the Web Modeler client API. Must differ from every other component's audience. |
+| `publicApiAudience` | Audience for external API access         | The API client ID or custom audience                                                              |
 
 #### Email configuration
 
@@ -435,12 +455,9 @@ global:
         clientId: <console-client-id>
         audience: <console-audience>
         redirectUrl: <console-base-url>
-
-console:
-  enabled: true
 ```
 
-Replace `<console-base-url>` with the base URL where Console will be accessible. For local deployment, use `http://localhost:8087`.
+Console is deployed as part of Camunda Hub, which you enable with `camundaHub.enabled: true` in the [Web Modeler step](#configure-web-modeler). Replace `<console-base-url>` with the base URL where Console will be accessible. For local deployment, use `http://localhost:8087`.
 
 ## Complete configuration example
 
@@ -541,59 +558,52 @@ connectors:
 identity:
   fullURL: <identity-base-url>
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
-
-# Disable internal Keycloak
-identityKeycloak:
-  enabled: false
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    username: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 
 # Optimize
 optimize:
   enabled: true
 
-# Web Modeler
-webModeler:
-  enabled: true
+# Console and Web Modeler (Camunda Hub)
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: <your-email-address>
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: webmodeler-postgresql-admin-password
-      userPasswordKey: webmodeler-postgresql-user-password
-
-# Console
-console:
-  enabled: true
+    externalDatabase:
+      host: pg-hub-rw
+      port: 5432
+      database: hub
+      username: hub
+      secret:
+        existingSecret: pg-hub-secret
+        existingSecretKey: password
 ```
 
 **Placeholders to replace:**
 
-| Placeholder                                               | Replace with                                 |
-| --------------------------------------------------------- | -------------------------------------------- |
-| `https://your-provider.example.com`                       | Your OIDC provider's issuer URL              |
-| `identity`, `orchestration`, `optimize`, etc.             | Your actual client IDs                       |
-| `identity`, `orchestration`, `optimize` (audience values) | Actual audience values from token inspection |
-| `admin@example.com`                                       | Your admin user's claim value                |
+| Placeholder                                               | Replace with                                       |
+| --------------------------------------------------------- | -------------------------------------------------- |
+| `https://your-provider.example.com`                       | Your OIDC provider's issuer URL                    |
+| `identity`, `orchestration`, `optimize`, etc.             | Your actual client IDs                             |
+| `identity`, `orchestration`, `optimize` (audience values) | The unique audience you assigned to each component |
+| `admin@example.com`                                       | Your admin user's claim value                      |
 
 ### Verify before deploying
 
 - All `<placeholders>` replaced with actual values.
 - All client secrets stored in the `oidc-credentials` secret.
-- Database passwords stored in the `camunda-credentials` secret.
+- Database credentials provided by the operator-managed database secrets (for example, `pg-identity-secret` and `pg-hub-secret`).
 - Redirect URIs in OIDC provider match `redirectUrl` values.
-- Token inspection confirms audience values.
+- Each component has a distinct resource audience by default. Any cross-component audience acceptance supports a documented integration.
 - Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names.
 
 ## Connect to the cluster

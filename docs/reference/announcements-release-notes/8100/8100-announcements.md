@@ -293,6 +293,26 @@ The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifica
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deleting a process definition with running instances defers history deletion
+
+The delete resource endpoint now accepts process definition deletion when the definition still has running instances. Instead of rejecting the request or waiting for physical removal, the definition [drains](/components/concepts/resource-deletion.md#draining): new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically afterwards.
+
+As a result, when `deleteHistory` is `true`, the `batchOperation` field in the response is `null` for such a definition. Its history is removed as part of the draining lifecycle rather than through an immediately-returned batch operation. The field is still populated for decision requirements definitions and for process definitions that are already fully deleted.
+
+**Action:** If you read `batchOperation` from the delete response to track history deletion, handle a `null` value: the definition is draining. Track progress through the process definition `state` (`DRAINING`) or the `zeebe_process_definitions_draining_count` metric instead.
+
+<p className="link-arrow">[Resource deletion](/components/concepts/resource-deletion.md#draining)</p>
+<p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#delete-draining)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -344,7 +364,7 @@ The following items are removed:
 
 - Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) instead of the removed Operate API and Tasklist API.
 - Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) instead of user task access restrictions.
-- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
+- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) and the Orchestration Cluster REST API instead of public start forms.
 - Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
 
 <p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
@@ -459,6 +479,25 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 **Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, add the reference. To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
 
 <p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### JWT-authorized inbound webhooks require issuer, audience, and expiration claims
+
+Starting with Camunda 8.10, inbound webhooks configured with JWT authorization validate the token's `iss` and `aud` claims and reject tokens without an `exp` claim. The **Issuer** and **Audience** fields are now required in the element templates for the Webhook connector, Amazon EventBridge inbound connector, and A2A Client webhook.
+
+Existing JWT-authorized inbound webhooks modeled with earlier template versions don't contain these fields and can't activate after the upgrade. The connector runtime reports the affected connector as **DOWN**.
+
+**Action:** Update each affected element to the latest template version, set **Issuer** and **Audience** to the expected claim values, and redeploy the process. Ensure callers provide JWTs with matching `iss` and `aud` claims and a valid `exp` claim.
+
+<p className="link-arrow">[Webhook connector authorization](/components/connectors/protocol/http-webhook.md#make-your-http-webhook-connector-executable)</p>
 
 </div>
 </div>
@@ -585,6 +624,82 @@ This default does not apply to existing clusters. Existing clusters show data fi
 Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. The Helm chart adds a CLI version check and fails fast if Helm v3 is used to install or upgrade chart 15.x.
 
 **Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Ingress-nginx annotation defaults deprecated in the Helm chart {#ingress-annotation-defaults-deprecated}
+
+The Helm chart used to ship Ingress-nginx-specific defaults in `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Helm deep-merges maps, so setting a single annotation of your own still inherited all of them, and they were written onto the `Ingress` whatever `ingressClassName` you configured. On Contour, Traefik, or any other controller they are dead configuration, and removing them meant setting each key to `null`.
+
+Starting with Camunda 8.10 (chart 15.x), those annotations come from a compatibility shim controlled by `global.compatibility.nginx.renderAnnotations`, which defaults to `true`. **Nothing changes on upgrade:** the same annotations render, so Ingress-nginx deployments are unaffected. The shim is removed in the next major, after which the annotations are opt-in.
+
+**Action:** If you run an Ingress controller other than Ingress-nginx, set `global.compatibility.nginx.renderAnnotations: false` and configure whatever your controller needs through `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Keys you set there always win over the shim.
+
+That removes the shim's annotations only. The chart still adds `nginx.ingress.kubernetes.io/backend-protocol` to the dedicated Ingress objects it renders when an upstream TLS mode is enabled through `global.tls.orchestration`, `global.tls.connectors`, or `global.tls.optimize`, and only Ingress-nginx reads that annotation.
+
+```yaml
+global:
+  compatibility:
+    nginx:
+      renderAnnotations: false
+  ingress:
+    annotations:
+      # for example, with Contour
+      kubernetes.io/tls-acme: "true"
+```
+
+If you stay on Ingress-nginx, no action is required before the next major. When the shim is removed you will need to set the annotations yourself:
+
+```yaml
+global:
+  ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/proxy-buffering: "on"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+      # keep in sync with global.config.requestBodySize
+      nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+
+orchestration:
+  ingress:
+    grpc:
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+```
+
+The gRPC Ingress reads `orchestration.ingress.grpc.annotations` only; it inherits nothing from `global.ingress.annotations`, so set all three keys there.
+
+Two of those carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes Ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
+
+With [Contour](https://projectcontour.io/), the gRPC upstream is declared on the Orchestration Cluster **Service**, not on the Ingress, so set it through `orchestration.service.annotations` and not `orchestration.ingress.grpc.annotations`. The annotation value lists the gRPC port, and the key depends on whether that upstream uses TLS:
+
+| gRPC upstream                                           | Contour annotation                        | Envoy behavior   |
+| ------------------------------------------------------- | ----------------------------------------- | ---------------- |
+| Plaintext, the chart default                            | `projectcontour.io/upstream-protocol.h2c` | Cleartext HTTP/2 |
+| TLS, with `global.tls.orchestration.grpc.enabled: true` | `projectcontour.io/upstream-protocol.h2`  | HTTP/2 over TLS  |
+
+```yaml
+orchestration:
+  service:
+    annotations:
+      # plaintext upstream; use upstream-protocol.h2 if the gRPC upstream has TLS
+      projectcontour.io/upstream-protocol.h2c: "26500"
+```
+
+Contour reads `h2c` as cleartext HTTP/2, so leaving it on a TLS-enabled upstream breaks gRPC routing. The chart draws the same distinction on Ingress-nginx, where it swaps `nginx.ingress.kubernetes.io/backend-protocol` from `GRPC` to `GRPCS` for a TLS-enabled gRPC upstream.
+
+The chart emits a deprecation warning naming the flag and the removal only when the shim actually injects an annotation: the flag is on, the Ingress it applies to renders, and you have not set that key yourself. Setting every shim key silences the warning even with the flag still on.
+
+<p className="link-arrow">[Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)</p>
 
 </div>
 </div>
@@ -732,7 +847,7 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 
 #### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
-With Camunda 8.10, the Orchestration Cluster, Camunda Hub, and Optimize authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl), a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+With Camunda 8.10, Camunda Hub and Optimize authenticate through a shared implementation based on the Orchestration Cluster's existing authentication, replacing their separate identity stacks. All three components now accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
 Camunda Hub and Optimize accept their existing authentication settings in 8.10 and translate the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
 
@@ -745,6 +860,40 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 <p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+## Integrations
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### SAP BTP Plugin retired
+
+The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration.
+
+<p className="link-arrow">[SAP BTP Plugin documentation](/components/camunda-integrations/sap/btp-plugin.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### CSAP CLI replaced by a c8ctl plugin
+
+The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools/c8ctl/getting-started.md), which becomes the single tool for configuring and deploying the SAP integration modules.
+
+<!-- TODO: replace the placeholder link below with the dedicated c8ctl SAP plugin page once it is published. -->
+
+<p className="link-arrow">[CSAP CLI documentation](/components/camunda-integrations/sap/csap-cli.md)</p>
 
 </div>
 </div>
@@ -776,9 +925,9 @@ Web Modeler change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Optimize authentication moves to the Camunda Security Library
+#### Optimize adopts the shared authentication implementation
 
-Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), adopting the same authentication and session handling as the Orchestration Cluster components.
+Starting with Camunda 8.10, Optimize authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
 
 **Action:** Confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
 
@@ -795,7 +944,7 @@ Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security
 
 #### Legacy Optimize security configuration keys deprecated
 
-With the move to the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. The legacy keys are removed in Camunda 8.11.
+With the move to the shared authentication implementation, the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. The legacy keys are removed in Camunda 8.11.
 
 Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
 
@@ -812,9 +961,9 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 
 #### `optimize.security.csl.enabled=false` fallback is temporary
 
-If the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL) causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+`optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. Use it only if your integrations depend on the static API access token that the 8.9 stack accepted, or if your migration to the `camunda.security.*` keys was misconfigured and you need a working deployment while you fix it. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
 
-**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. If you rely on it in 8.10, migrate to CSL before upgrading to 8.11.
+**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required before you can upgrade to 8.11.
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-security-stack)</p>
 

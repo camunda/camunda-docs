@@ -187,6 +187,7 @@ module.exports = {
             "components/concepts/process-instance-modification",
             "components/concepts/process-instance-migration",
             "components/concepts/process-instance-deletion",
+            "components/concepts/process-instance-suspension",
             "components/concepts/incidents",
           ],
         },
@@ -198,6 +199,7 @@ module.exports = {
             id: "components/modeler/about-modeler",
           },
           items: [
+            "components/modeler/using-hub-and-desktop-modeler-together",
             require("./docs/components/modeler/forms/sidebar-schema"),
             require("./docs/components/modeler/element-templates/sidebar-schema"),
             "components/modeler/data-handling",
@@ -226,12 +228,13 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         {
           type: "category",
-          label: "Secret resolution",
+          label: "Secrets",
           link: {
             type: "doc",
-            id: "components/concepts/secret-resolution",
+            id: "components/concepts/secrets",
           },
           items: [
+            "components/concepts/secret-resolution",
             "components/concepts/secret-resolution-and-job-activation",
             "components/concepts/secret-resolution-incidents",
           ],
@@ -649,6 +652,7 @@ module.exports = {
             "components/operate/userguide/manage-batch-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
+            "components/operate/userguide/suspend-resume-process-instance",
             {
               "Process instance modification": [
                 "components/operate/userguide/process-instance-modification",
@@ -755,17 +759,6 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Manage credentials",
-              link: {
-                type: "doc",
-                id: "components/hub/organization/credentials/credentials",
-              },
-              items: [
-                "components/hub/organization/credentials/credentials-modeling-interface",
-              ],
-            },
-            {
-              type: "category",
               label: "Manage the catalog",
               link: {
                 type: "doc",
@@ -778,27 +771,40 @@ module.exports = {
                 "components/hub/organization/manage-catalog/sync-multiple-repositories",
               ],
             },
+            "components/hub/organization/analyze-operations/business-value-dashboard",
             {
               type: "category",
-              label: "Manage users",
+              label: "Manage credentials",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-users/index",
+                id: "components/hub/organization/credentials/credentials",
               },
               items: [
-                "components/hub/organization/manage-users/create-manage-users",
-                "components/hub/organization/manage-users/manage-user-groups",
-                "components/hub/organization/manage-users/resource-based-auth",
+                "components/hub/organization/credentials/credentials-modeling-interface",
               ],
             },
+            "components/hub/organization/analyze-operations/hub-dashboard",
             {
               type: "category",
-              label: "Manage organization settings",
+              label: "Manage organization",
               link: {
                 type: "doc",
                 id: "components/hub/organization/manage-organization-settings/organization-settings",
               },
               items: [
+                {
+                  type: "category",
+                  label: "Manage users",
+                  link: {
+                    type: "doc",
+                    id: "components/hub/organization/manage-users/index",
+                  },
+                  items: [
+                    "components/hub/organization/manage-users/create-manage-users",
+                    "components/hub/organization/manage-users/manage-user-groups",
+                    "components/hub/organization/manage-users/resource-based-auth",
+                  ],
+                },
                 "components/hub/organization/manage-organization-settings/external-sso",
                 "components/hub/organization/manage-organization-settings/view-organization-activity",
                 "components/hub/organization/manage-organization-settings/enable-alpha-features",
@@ -825,9 +831,7 @@ module.exports = {
                 id: "components/hub/organization/analyze-operations/analyze-operations",
               },
               items: [
-                "components/hub/organization/analyze-operations/hub-dashboard",
                 "components/hub/organization/analyze-operations/job-dashboard",
-                "components/hub/organization/analyze-operations/business-value-dashboard",
               ],
             },
           ],
@@ -871,6 +875,7 @@ module.exports = {
                 {
                   Model: [
                     "components/hub/workspace/modeler/modeling/model-your-first-diagram",
+                    "components/hub/workspace/modeler/modeling/utilize-forms",
                     "components/hub/workspace/modeler/run-or-publish-your-process",
                     "components/hub/workspace/modeler/process-landscape-visualization",
                     "components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram",
@@ -959,7 +964,7 @@ module.exports = {
         "components/modeler/desktop-modeler/deploy-diagram",
         "components/modeler/desktop-modeler/start-instance",
         "components/modeler/desktop-modeler/process-applications",
-        "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/desktop-modeler/utilize-forms",
         "components/modeler/desktop-modeler/use-connectors",
         "components/modeler/desktop-modeler/credentials",
         {
@@ -998,6 +1003,7 @@ module.exports = {
             id: "components/connectors/use-connectors/index",
           },
           items: [
+            "components/connectors/use-connectors/migrate-secrets",
             "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
@@ -1300,7 +1306,7 @@ module.exports = {
             id: "components/saas/secure-connectivity/secure-connectivity-AWS",
           },
           items: [
-            "components/saas/secure-connectivity/secure-connectivity-console-setup",
+            "components/saas/secure-connectivity/enable-secure-connectivity",
           ],
         },
 
@@ -1332,6 +1338,7 @@ module.exports = {
             "components/saas/how-to-restore",
             "components/saas/restore-scenarios",
             "components/saas/restore-troubleshooting",
+            "components/saas/cross-region-cold-recovery",
           ],
         },
         "components/saas/auto-updates",
@@ -1851,7 +1858,6 @@ module.exports = {
                   },
                   items: [
                     "self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation",
-                    "self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images",
                   ],
                 },
                 {
@@ -1994,6 +2000,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/deploy-multiple-optimize-instances",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/deployment/helm/operational-tasks/zone-aware-migration",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
                 "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
                 "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
@@ -2473,6 +2480,7 @@ module.exports = {
           items: [
             "self-managed/components/hub/usage-metrics",
             "self-managed/components/hub/monitoring",
+            "self-managed/components/hub/version-upgrade",
             {
               Configuration: [
                 "self-managed/components/hub/configuration/properties",

@@ -7,6 +7,8 @@ description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import CostManagement from "../../../../_partials/_cost-management.md";
+
 This guide provides a detailed tutorial for deploying an Azure Kubernetes Service (AKS) cluster, tailored specifically for deploying Camunda 8 using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 This guide is designed to help you leverage the power of Infrastructure as Code (IaC) to streamline and reproduce your cloud infrastructure setup. By walking through the essentials of setting up an AKS cluster, and provisioning managed Azure resources such as Azure Database for PostgreSQL, this guide demonstrates how to use Terraform with Azure. It makes the process accessible even to those new to Terraform or IaC concepts. It utilizes Azure-managed services where available, offering these as optional components for added convenience and maintainability.
@@ -48,11 +50,7 @@ This approach allows you to extend and customize the codebase according to your 
 
 :::
 
-:::danger Cost management
-
-Following this guide will incur costs on your Azure account, including charges for Azure Kubernetes Service (AKS), the compute (virtual machine instances) for the underlying nodes, Azure Managed Disks for persistent volumes, and Azure DNS zones for domain resolution. For more information, refer to the [AKS pricing page](https://azure.microsoft.com/pricing/details/kubernetes-service/) and the [Azure pricing calculator](https://azure.microsoft.com/pricing/calculator/), as costs depend on region and configuration choices.
-
-:::
+<CostManagement />
 
 ### Variants
 
