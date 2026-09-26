@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
-
         [[ADDED_IN_VERSION:8.5]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -40,9 +40,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
-
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -53,6 +53,30 @@ paths:
         "503":
           description: The default physical tenant is DOWN and does not have any partition with a healthy leader.
       x-added-in-version: "8.8"
+  /status/upgrade:
+    get:
+      tags:
+        - Cluster
+      operationId: getClusterUpgradeStatus
+      security: []
+      summary: Get the upgrade-readiness status of the whole cluster
+      description: |-
+
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[CONSISTENCY:STRONG]]
+        Reports one overall upgrade-readiness status for the whole cluster, folded over every physical tenant and condition. `MIGRATED` only once every known condition has migrated for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise (including before anything has been reported yet). No per-tenant or per-condition detail is reported here; see the `upgradeReadiness` actuator endpoint for that.
+      responses:
+        "200":
+          description: The cluster's upgrade-readiness status.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterUpgradeStatusResponse"
+      x-added-in-version: "8.10"
   /mode:
     patch:
       tags:
@@ -65,9 +89,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlNZU1RFTSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn0seyJyZXNvdXJjZVR5cGUiOiJCQUNLVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFU1RPUkUifV19XX0]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlNZU1RFTSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn0seyJyZXNvdXJjZVR5cGUiOiJCQUNLVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFU1RPUkUifV19XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -103,9 +127,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRVNUT1JFIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRVNUT1JFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -147,9 +171,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRVNUT1JFIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRVNUT1JFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -676,3 +700,17 @@ components:
           format: date-time
           nullable: true
           example: "2024-01-01T10:02:00Z"
+    ClusterUpgradeStatusResponse:
+      description: The upgrade-readiness status of the whole cluster.
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          description: "`MIGRATED` once every known upgrade-readiness condition is met for every known physical tenant; `MIGRATION_IN_PROGRESS` when at least one is confirmed not yet migrated; `UNKNOWN` otherwise."
+          type: string
+          example: MIGRATED
+          enum:
+            - MIGRATED
+            - MIGRATION_IN_PROGRESS
+            - UNKNOWN

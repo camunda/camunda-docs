@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -69,9 +69,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -118,9 +118,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -155,9 +155,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -188,9 +188,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -231,9 +231,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -278,9 +278,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -316,9 +316,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -375,9 +375,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -437,9 +437,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -486,9 +486,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
-
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFDS1VQIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
