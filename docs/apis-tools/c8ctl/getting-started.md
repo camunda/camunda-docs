@@ -24,7 +24,7 @@ Use `c8ctl` to:
 
 - Inspect running clusters — list process instances, user tasks, incidents, and jobs.
 - Deploy BPMN, DMN, and form resources, optionally watching for file changes.
-- Manage profiles for multiple clusters, including profiles imported from Desktop Modeler.
+- Manage profiles for multiple clusters, including profiles imported from Camunda Modeler.
 - Extend the CLI with custom plugins.
 
 ## Prerequisites
@@ -214,7 +214,7 @@ c8 deploy ./process.bpmn --profile=prod
 c8 search ut --assignee=jane --profile=dev
 ```
 
-The `--profile` flag works with both `c8ctl` profiles and Desktop Modeler profiles (prefixed with `modeler:`):
+The `--profile` flag works with both `c8ctl` profiles and Camunda Modeler profiles (prefixed with `modeler:`):
 
 ```bash
 c8 list pi --profile=modeler:Cloud Cluster
@@ -240,7 +240,7 @@ c8 list pi   # uses my-tenant-id
 `c8ctl` supports two types of profiles:
 
 1. `c8ctl` profiles — managed directly with `c8ctl` commands.
-2. Desktop Modeler profiles — automatically imported from Desktop Modeler (read-only, prefixed with `modeler:`).
+2. Camunda Modeler profiles — automatically imported from Camunda Modeler (read-only, prefixed with `modeler:`).
 
 ### Add a profile
 
@@ -305,7 +305,7 @@ Both flags are optional and independent of each other. A profile that sets neith
 c8 list profiles
 ```
 
-Lists both `c8ctl` and modeler profiles. Modeler profiles appear with a `modeler:` prefix.
+Lists both `c8ctl` and Modeler profiles. Modeler profiles appear with a `modeler:` prefix.
 
 ### Switch the active profile
 
@@ -330,12 +330,12 @@ c8 rm profile prod   # alias
 ```
 
 :::note
-Modeler profiles are read-only. They cannot be modified or removed through `c8ctl` — manage them in Desktop Modeler.
+Modeler profiles are read-only. They cannot be modified or removed through `c8ctl` — manage them in Camunda Modeler.
 :::
 
-### Desktop Modeler integration
+### Camunda Modeler integration
 
-`c8ctl` automatically reads profiles from Desktop Modeler's `profiles.json` file. These profiles are:
+`c8ctl` automatically reads profiles from Camunda Modeler's `profiles.json` file. These profiles are:
 
 - **Read-only** — cannot be modified or deleted via `c8ctl`.
 - **Prefixed** — always displayed with a `modeler:` prefix (for example, `modeler:Local Dev`).
@@ -350,10 +350,10 @@ Platform-specific locations:
 | Windows  | `%APPDATA%\camunda-modeler\profiles.json`                     |
 
 ```bash
-# Use a modeler profile as the active session profile
+# Use a Modeler profile as the active session profile
 c8 use profile "modeler:Local Dev"
 
-# Use a modeler profile for a single command
+# Use a Modeler profile for a single command
 c8 list pi --profile=modeler:Cloud Cluster
 ```
 
@@ -447,15 +447,15 @@ c8 output text    # back to formatted tables (default)
 
 ## Environment variables
 
-| Variable                    | Description                   |
-| :-------------------------- | :---------------------------- |
-| `CAMUNDA_BASE_URL`          | Cluster base URL              |
-| `CAMUNDA_CLIENT_ID`         | OAuth client ID               |
-| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret           |
-| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience          |
-| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint          |
+| Variable                    | Description          |
+| :-------------------------- | :------------------- |
+| `CAMUNDA_BASE_URL`          | Cluster base URL     |
+| `CAMUNDA_CLIENT_ID`         | OAuth client ID      |
+| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret  |
+| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience |
+| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint |
 | `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated) |
-| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID             |
+| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID    |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.
 
