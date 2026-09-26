@@ -6,7 +6,7 @@ description: "Learn more about the clusters available in your Camunda 8 plan."
 
 A [cluster](/components/hub/organization/manage-clusters/create-cluster.md) is a provided group of production-ready nodes that run Camunda 8.
 
-When [creating a cluster in SaaS](/components/hub/organization/manage-clusters/create-cluster.md), you can choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery guarantees.
+When [creating a cluster in SaaS](/components/hub/organization/manage-clusters/create-cluster.md), you can choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery objectives.
 
 ## Cluster type
 
@@ -20,18 +20,79 @@ You can choose from three different cluster types:
 
 ### Cluster availability and uptime
 
-| Type                                                                        | Basic                                                                                  | Standard                                                  | Advanced                                                                              |
-| :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :------------------------------------------------------------------------------------ |
-| Usage                                                                       | Non-production use, including experimentation, early development, and basic use cases. | Production-ready use cases with guaranteed higher uptime. | Production-ready use cases with guaranteed minimal disruption and the highest uptime. |
-| Uptime Percentage<br/> (Orchestration Cluster<strong>\*</strong>)           | 99%                                                                                    | 99.5%                                                     | 99.9%                                                                                 |
-| RTO/RPO<strong>\*\*</strong><br/>(Orchestration Cluster<strong>\*</strong>) | RTO: 8 hours<br/>RPO: 24 hours                                                         | RTO: 2 hours<br/>RPO: 4 hours                             | RTO: < 1 hour<br/>RPO: < 1 hour                                                       |
+| Type                                                             | Basic                                                                                  | Standard                                                  | Advanced                                                                              |
+| :--------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :------------------------------------------------------------------------------------ |
+| Usage                                                            | Non-production use, including experimentation, early development, and basic use cases. | Production-ready use cases with guaranteed higher uptime. | Production-ready use cases with guaranteed minimal disruption and the highest uptime. |
+| Uptime percentage<br/>(Orchestration Cluster<strong>\*</strong>) | 99%                                                                                    | 99.5%                                                     | 99.9%                                                                                 |
 
 <p><strong>* Orchestration Cluster</strong> means the components critical for automating processes and decisions, such as Zeebe, Operate, Tasklist, Optimize, and connectors.</p>
-<p><strong>**  RTO (Recovery Time Objective)</strong> means the maximum allowable time that a system or application can be down after a failure or disaster before it must be restored. It defines the target time to get the system back up and running. <strong>RPO (Recovery Point Objective)</strong> means the maximum acceptable amount of data loss measured in time. It indicates the point in time to which data must be restored to resume normal operations after a failure. It defines how much data you can afford to lose. The RTO/RPO figures shown in the table are provided on a best-effort basis and are not guaranteed.</p>
 
 :::info
 See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-enterprise-general-terms) for term definitions for **Monthly Uptime Percentage** and **Downtime**.
 :::
+
+### SLA versus RTO and RPO
+
+An uptime SLA and RTO/RPO targets measure different things. Keep them separate when you evaluate a cluster type for disaster recovery planning.
+
+- **Uptime percentage (SLA)** is a contractual commitment that measures how much of the time, in a given month, the service is available and responsive. It doesn't describe what happens during or immediately after an outage.
+- **RTO (Recovery Time Objective)** measures how long a failure disrupts service, from the moment it starts affecting your cluster until the cluster is fully functional again. For outages that need manual recovery, RTO also includes the time to detect, escalate, and diagnose the problem.
+- **RPO (Recovery Point Objective)** measures how much data you can lose when that failure happens, expressed as the time between the last recoverable point and the failure.
+
+A high uptime percentage doesn't imply a fast recovery or minimal data loss during a major infrastructure failure. Uptime percentage tells you how rarely a failure disrupts your cluster; RTO and RPO tell you how well the cluster recovers when a major failure does happen. See [how Camunda SaaS recovers from node, zone, and region failures](#how-camunda-saas-recovers-from-node-zone-and-region-failures) for the RTO and RPO of each failure scenario.
+
+## How Camunda SaaS recovers from node, zone, and region failures
+
+Camunda 8 SaaS sets recovery objectives for each type of outage, based on how much infrastructure the outage affects. These objectives describe expected behavior on a best-effort basis and aren't contractual commitments.
+
+| Outage                                | RPO                                                           | RTO                                          | Recovery                           | Requirement                 |
+| :------------------------------------ | :------------------------------------------------------------ | :------------------------------------------- | :--------------------------------- | :-------------------------- |
+| Node                                  | Zero                                                          | Near zero                                    | Automatic                          | None                        |
+| Availability zone                     | Zero                                                          | Near zero                                    | Automatic                          | None                        |
+| Region                                | Time since the last backup replicated to the secondary region | Depends on provisioning time and data volume | Manual cold recovery by Camunda    | Dual-region backup location |
+| Cloud provider or third-party service | Not defined                                                   | Not defined                                  | Depends on the provider's recovery | Not available               |
+| Platform or cluster incident          | Typically zero                                                | Depends on the incident                      | Camunda incident response          | None                        |
+
+Your application's overall recovery time also depends on your own job workers and clients being able to reach the cluster and continue processing.
+
+### Node failure
+
+A node failure is the loss of a single Zeebe broker (or other component instance) within a cluster. Camunda SaaS orchestration clusters replicate each partition across multiple brokers using [Raft consensus](/components/zeebe/technical-concepts/clustering.md), typically one broker per availability zone. When a single broker fails, the remaining brokers already hold every committed record and automatically elect a new leader for the affected partitions.
+
+**RTO/RPO assessment:** RPO is zero, because every committed record is already replicated to the remaining brokers. RTO is near zero. Partition leader election typically completes within seconds, and clients recover through their standard retry mechanisms.
+
+**Your responsibilities:** Configure your clients and job workers to retry failed requests. Run job workers across multiple availability zones so that the same outage doesn't disrupt them.
+
+### Availability zone failure
+
+An availability zone (AZ) failure is the loss of an entire zone in the cluster's region, taking every broker hosted there down at once. Basic, Standard, and Advanced clusters use a replication factor of three spread across three availability zones, so losing one zone still leaves a quorum of two zones able to confirm writes.
+
+**RTO/RPO assessment:** RPO is zero, because the remaining zones already hold every committed record. RTO is near zero. Failover is automatic, doesn't require a restore, and clients recover through their standard retry mechanisms. While the zone is unavailable, the cluster runs with reduced redundancy. A second failure in another zone before recovery can cause partitions to lose quorum.
+
+**Your responsibilities:** Configure your clients and job workers to retry failed requests. Run job workers across multiple availability zones so that the same outage doesn't disrupt them.
+
+### Region failure
+
+A region failure is the loss of every availability zone in the cluster's region at once, for example, during a regional cloud provider outage. Camunda SaaS clusters run in a [single region](/components/saas/regions.md). By default, backups are stored in the same region as the cluster. If you select a [dual-region backup location](/components/saas/backups.md#backup-location), backups are also replicated to the secondary backups region. Self-service [restore is limited to the same cluster, organization, and region](/components/saas/backup-restore-overview.md#limitations-and-constraints). For some region pairs, Camunda can perform a cold recovery to the secondary backups region.
+
+**RTO/RPO assessment:** Recovery from a region failure is a manual, user initiated cold recovery, the same strategy as the Cold Recovery tier in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md) for Self-Managed. Camunda provisions a new cluster in the secondary backups region and restores it from the replicated backup. Without dual-region backups, recovery to another region isn't possible.
+
+- **RPO** is the time between the most recent backup replicated to the secondary region and the failure. Your backup schedule determines this value.
+- **RTO** is the time needed to detect the outage, decide to recover, provision the new cluster, restore its data, and reconnect your applications. Restore duration depends on cluster data volume. The recovered cluster has new endpoints, so you must update your client configuration.
+
+**Your responsibilities:** Choose a dual-region backup location when you create the cluster. Set a backup schedule that matches the data loss you can tolerate. Plan how you'll point your clients and job workers at the recovered cluster's new endpoints.
+
+### Cloud provider and third-party service outages
+
+An outage at Camunda's cloud provider, network and edge providers, or other third-party services can make clusters unreachable, or prevent Camunda from starting or replacing infrastructure, until the provider recovers. Camunda SaaS clusters run on a single cloud provider and can't fail over to another provider.
+
+**RTO/RPO assessment:** Clusters stay unavailable until the provider recovers, so Camunda doesn't set an RTO or RPO for this type of outage. Camunda follows its incident response process and publishes updates on the [Camunda status page](/components/saas/status.md).
+
+### Platform and cluster incidents
+
+Some incidents originate in Camunda's own platform or in a single cluster. Examples include platform configuration issues that affect network access, software defects, and cluster components in an inconsistent state.
+
+**RTO/RPO assessment:** RTO depends on how quickly the incident is detected, escalated, diagnosed, and resolved, so Camunda doesn't set a fixed RTO. RPO is typically zero, because these incidents usually affect availability, not stored data.
 
 ## Cluster size
 
