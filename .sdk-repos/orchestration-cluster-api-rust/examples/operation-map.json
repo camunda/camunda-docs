@@ -545,6 +545,13 @@
       "label": "Get the cluster topology"
     }
   ],
+  "getClusterUpgradeStatus": [
+    {
+      "file": "cluster.rs",
+      "region": "GetClusterUpgradeStatus",
+      "label": "Get the cluster upgrade status"
+    }
+  ],
   "getDecisionDefinition": [
     {
       "file": "decision_definition.rs",
