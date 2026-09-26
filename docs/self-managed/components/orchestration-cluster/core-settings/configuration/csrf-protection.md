@@ -33,6 +33,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 - `/api/**` – API endpoints (except specifically excluded paths)
 - `/v2/**` – Versioned API endpoints
+- `/login` – The form-login endpoint (see [Logging in with CSRF protection](#logging-in-with-csrf-protection) below)
 - All state-changing operations (POST, PUT, DELETE, PATCH)
 
 ### Unprotected paths (no CSRF token required)
@@ -40,8 +41,24 @@ Disabling CSRF protection is not recommended for production environments as it l
 - `/actuator/**` – Health and monitoring endpoints
 - `/v2/license` – Public license endpoint
 - `/error` – Error handling
-- Authentication endpoints (`/login`, `/logout`)
+- `/logout` – The logout endpoint
 - Safe HTTP methods (GET, HEAD, OPTIONS, TRACE)
+
+## Logging in with CSRF protection
+
+`POST /login` requires a valid CSRF token like any other state-changing request — it is not exempt, even for a browser
+that does not have a session yet. This prevents an attacker-controlled page from silently logging a victim's browser
+into an attacker-chosen account ([login CSRF](https://developer.mozilla.org/en-US/docs/Glossary/CSRF)).
+
+A client driving login itself (a script, health check, or custom frontend) must fetch a token before submitting
+credentials:
+
+1. Send a `GET` request to `/login`. The response includes the token both as an `X-CSRF-TOKEN` cookie and as an
+   `X-CSRF-TOKEN` response header.
+2. Submit `POST /login` with `username` and `password`, echoing the value from step 1 back as an `X-CSRF-TOKEN`
+   request header (in addition to sending the cookie the browser already stored from step 1).
+
+Omitting the header on `POST /login` now fails with `401`/`403` instead of succeeding with `204`.
 
 ## Security considerations
 
