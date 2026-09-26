@@ -1,13 +1,13 @@
 ---
 id: mapping-rule-api
-title: "Mapping Rule API"
-sidebar_label: "Mapping Rule API"
+title: "Mapping Rule Api"
+sidebar_label: "Mapping Rule Api"
 sidebar_position: 26
 mdx:
   format: md
 ---
 
-# Mapping Rule API
+# Mapping Rule Api
 
 `MappingRuleApi` — 5 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\MappingRuleApi::class)`.
 
