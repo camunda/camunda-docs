@@ -54,6 +54,10 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/self-managed/reference-architecture/kubernetes.md#kubernetes).
 
+This page describes a single production release. For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases, with one Optimize release per Physical Tenant. See [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+
+Before you write a production values file, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md) for which settings belong in `values.yaml` and which belong in a component's `extraConfiguration`.
+
 ## Installation and configuration
 
 After following the [prerequisites](#prerequisites), you should have a Kubernetes cluster ready with `kubectl` and the `helm` CLI installed.
@@ -543,7 +547,7 @@ The following resources and configuration options are important to keep in mind 
 
 #### Required network traffic
 
-If you enforce network policies, a default-deny posture blocks traffic Camunda depends on. Allow the following flows for a single-namespace installation. For a deployment split across namespaces, see [multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace.md#allow-required-network-traffic).
+If you enforce network policies, a default-deny posture blocks traffic Camunda depends on. Allow the following flows for a single-namespace installation. For a deployment split across namespaces, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md#allow-required-network-traffic).
 
 | Direction | Source                          | Destination           | Ports                    | Purpose                                              |
 | :-------- | :------------------------------ | :-------------------- | :----------------------- | :--------------------------------------------------- |
@@ -582,7 +586,7 @@ The following resources and configuration options are important to keep in mind 
 
 Use separate Helm values files and releases when you deploy Camunda components across namespaces. The Hub release contains Camunda Hub and Management Identity, while the orchestration release contains the Orchestration Cluster, Connectors, and Optimize.
 
-The [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace.md) provides complete 8.10 examples for both releases. It also explains how to:
+The [deployment topology install guide](/self-managed/deployment/helm/install/topology/index.md) provides complete 8.10 examples for every release role. It also explains how to:
 
 - Register remote Orchestration Cluster, Optimize, and Connectors clients with central Management Identity.
 - Configure Camunda Hub to connect to an Orchestration Cluster in another namespace.
@@ -600,7 +604,7 @@ The [multi-namespace deployment guide](/self-managed/deployment/helm/configure/m
 
 Camunda 8 supports running multiple orchestration clusters in separate namespaces. This setup allows you to isolate environments such as development, staging, and production, while sharing infrastructure resources.
 
-To add another orchestration cluster, follow the [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace.md#add-another-orchestration-cluster).
+To add another orchestration cluster, see [add another Orchestration Cluster](/self-managed/deployment/helm/install/topology/orchestration-release.md#add-another-orchestration-cluster).
 
 ### Running benchmarks
 
