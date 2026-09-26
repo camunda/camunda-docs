@@ -17,7 +17,7 @@ Select any environment configured for your project as your test target. In SaaS,
 Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
 :::
 
-Opening the **Test** tab no longer deploys your process automatically. Click **Deploy** to deploy the current version of the active process and all its dependencies, like called processes or DMN files, to the selected cluster. Once deployed, you can run or create test cases.
+Opening the **Test** tab no longer deploys your process automatically. Use the **Set up test run** panel to connect a cluster, deploy, and configure a test case — see [get started with Test mode](#get-started-with-test-mode) for the full flow.
 
 The selected cluster name is shown in the Test action bar. Click it to switch clusters without leaving Test mode; the newly selected cluster becomes the deployment and execution target.
 
@@ -44,31 +44,34 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 ## Get started with Test mode
 
-![Test mode process definition view showing the Configure test case overlay](../img/test-definition.png)
+When you open the **Test** tab for the first time in a process, the **Set up test run** panel guides you through three steps:
 
-When you open the **Test** tab for the first time in a process a **Setup environment** overlay prompts you to select a cluster and deploy your process. Once deployed you can **Configure a test case**.
+1. **Choose where to run**
+2. **Choose resources to deploy**
+3. **Configure test case**
 
-![Configure test case panel](../img/test-configure-test-case.png)
+### 1. Choose where to run
 
-In the **Configure test case** panel, select the start and end elements that define the segment of the process you want to test. Click the selected start event to configure how the process should start — the panel shows various options depending on its Start event type:
+Click **Connect cluster**, and select a target cluster. Once the cluster is healthy, it advances to the next step.
 
-- **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
-- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. The **Start** button is disabled when the message name is empty.
-- **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
+### 2. Choose resources to deploy
 
-**Start** is also disabled when the variables field contains invalid JSON.
+- **All resources**: Deploys the whole project, including dependencies like called processes or DMN files.
+- **Only this resource**: Deploys only the open file. An info alert reminds you that referenced resources, such as called processes, DMN files, or forms, must be deployed separately, or test runs fail with a not found incident.
 
-To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
+When testing a snapshot version, **Only this resource** is not allowed.
 
-## Define a test segment
+Click **Deploy**. Once the deploy succeeds, it automatically progresses to the next step.
 
-By default, execution starts from the process start event and runs to natural completion. To focus on a specific part of your process, define a segment with a custom start and end boundary in the **Configure test case** panel.
+### 3. Configure test case
 
-### Start boundary
+Start and end elements for the segment are auto-selected. Some processes have no selectable end element — for example, when the process starts with a message or signal event, or has no end event — in which case the test run completes naturally. Click the edit icon to pick a different element.
+
+#### Start boundary
 
 The start boundary defaults to the process start event. To change it:
 
-1. In the **Configure test case** panel, click the start row.
+1. In the **Configure test case** step, click the start row.
 2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with a **Start** label on the diagram.
 
 Elements before the start boundary are not activated and do not appear in the instance history.
@@ -77,18 +80,27 @@ The same element type restrictions apply as for [**Add token** modifications](#m
 
 **Publish message** and **Broadcast signal** elements don't support segment boundaries. If you select either as the start boundary, you can't select an end boundary, and the process runs until it reaches the end node naturally reached from that selected start event.
 
-### End boundary
+#### End boundary
 
-The end boundary defaults to the first end event. To change it:
+The end boundary is optional and defaults to the first end event. Click **Start** without changing it to accept the default, or change it:
 
-1. In the **Configure test case** panel, click the end row.
+1. In the **Configure test case** step, click the end row.
 2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with an **End** label on the diagram.
+3. To clear the end boundary, click the **x** icon on the **End** label on the canvas, or search for the same element again and deselect it from the results.
 
 When an end boundary is set, the process instance terminates after that element completes. Elements after it are not activated and do not appear in the instance history.
 
-### Canvas click interaction
+#### Canvas click interaction
 
 Once both boundaries are set, clicking the canvas resets the start boundary and clears the end boundary. To change only one boundary, click its row in the panel first, then click the new element on the canvas.
+
+Click the selected start event to configure how the process should start — the panel shows various options depending on its Start event type:
+
+- **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
+- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID.
+- **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
+
+To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
 
 :::note
 Test mode will only consider the first executable process ID in the BPMN file.
