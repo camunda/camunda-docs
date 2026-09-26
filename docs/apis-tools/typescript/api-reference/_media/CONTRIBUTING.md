@@ -42,6 +42,7 @@ Current policy:
 
 - Do **not** reintroduce wall‑clock timestamps, date banners, or build times into any committed generated file (TypeScript, JSON, Markdown) unless they are logically required for runtime behavior.
 - If you need provenance, prefer stable content hashes (already present: `specHash`, branding key hashes) or add a new hash field rather than a timestamp.
+- Where an external generator insists on stamping one — `assert-json-body extract` writes `metadata.generatedAt` into `json-body-assertions/responses.json` — strip it afterwards. `npm run responses:strip-timestamps` does this, and `tests/response-fixture-determinism.test.ts` fails if a regeneration script skips it.
 - The publish workflow sets `CAMUNDA_SDK_SKIP_FETCH_SPEC=1` to avoid pulling a moving upstream spec mid‑release.
 
 Rationale:

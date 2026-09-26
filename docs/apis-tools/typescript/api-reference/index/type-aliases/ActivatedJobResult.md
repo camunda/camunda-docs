@@ -81,21 +81,21 @@ The key, a unique identifier for the job.
 
 ---
 
+### jobLeaseToken
+
+```ts
+jobLeaseToken: JobLeaseToken | null;
+```
+
+The lease token identifying this activation. This is `null` when the job was activated without a lease.
+
+---
+
 ### kind
 
 ```ts
 kind: JobKindEnum;
 ```
-
----
-
-### leaseToken
-
-```ts
-leaseToken: string | null;
-```
-
-The lease token identifying this activation. This is `null` when the job was activated without a lease.
 
 ---
 
