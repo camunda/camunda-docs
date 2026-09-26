@@ -58,7 +58,7 @@ To produce logging output, you can also run Desktop Modeler from the command lin
 
 ## I cannot connect to Zeebe {#i-cannot-connect-to-zeebe}
 
-You try to connect (i.e., to deploy) to a remote cluster, and Desktop Modeler tells you it "Cannot connect to cluster."
+You try to connect (i.e., to deploy) to a remote cluster, and Desktop Modeler tells you it "Cannot connect to Camunda 8."
 
 :::tip
 If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
@@ -68,13 +68,13 @@ To resolve this issue, check if you can connect to Zeebe through another client,
 
 ## I cannot connect to local Zeebe {#i-cannot-connect-to-local-zeebe}
 
-You try to connect (i.e., to deploy) to a local cluster, and Desktop Modeler tells you it "Cannot connect to cluster."
+You try to connect (i.e., to deploy) to a local cluster, and Desktop Modeler tells you it "Cannot connect to Camunda 8."
 
 Ensure your local cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), a lightweight all-in-one distribution.
 
 ## Cannot connect to an orchestration cluster in a local network
 
-Use this guidance when Desktop Modeler cannot connect to an orchestration cluster running in your local network and shows a "Cannot connect to orchestration cluster" error.
+Use this guidance when Desktop Modeler cannot connect to an orchestration cluster running in your local network and shows a "Cannot connect to Camunda 8" error.
 
 Verify that your operating system allows Desktop Modeler to access the local network.
 
