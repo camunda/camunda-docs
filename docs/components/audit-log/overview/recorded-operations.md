@@ -97,6 +97,8 @@ These operations belong to the category `DEPLOYED_RESOURCES`. The following oper
 | Delete         | Decision         | –                               |
 | Evaluate       | Decision         | –                               |
 
+For tasks with output mappings, the audit log shows changes made by those mappings. Unchanged variables aren't included. Variable audit entries don't include variable values.
+
 #### Batch operations
 
 While the operations for creating and managing batch operations are recorded in the audit log, the batch operation state changes aren't. For more information, learn how to [monitor batch operations](../../operate/userguide/monitor-batch-operations.md).
