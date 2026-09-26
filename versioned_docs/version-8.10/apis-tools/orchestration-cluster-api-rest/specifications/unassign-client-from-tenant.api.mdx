@@ -1,0 +1,346 @@
+---
+id: unassign-client-from-tenant
+title: "Unassign a client from a tenant"
+sidebar_label: "Unassign a client from a tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Unassign a client from a tenant"} <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/tenants/{tenantId}/clients/{clientId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Unassigns the client from the specified tenant.
+The client can no longer access tenant data.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "TENANT", permissionType: "UPDATE" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: {
+        example: "customer-service",
+        description: "The unique identifier of the tenant.",
+        format: "TenantId",
+        type: "string",
+        title: "TenantId",
+      },
+    },
+    {
+      name: "clientId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the application.",
+      schema: {
+        example: "my-application",
+        description:
+          "The unique identifier of an OAuth client.\nMinted outside the Camunda REST API: in SaaS by Console, in Self-Managed\nwith OIDC by the external identity provider (e.g. EntraID, Keycloak,\nOkta). In Self-Managed with Basic authentication, machine-to-machine\napplications are modelled as users instead — see the user identifier.\n",
+        format: "ClientId",
+        type: "string",
+        title: "ClientId",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The client was successfully unassigned from the tenant.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The tenant does not exist or the client was not assigned to it.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
