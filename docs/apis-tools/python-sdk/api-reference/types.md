@@ -385,6 +385,19 @@ Bases: `str`
 - **Return type:**
   [JobKey](#jobkey)
 
+## JobLeaseToken
+
+```python
+class JobLeaseToken(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [JobLeaseToken](#jobleasetoken)
+
 ## MappingRuleId
 
 ```python

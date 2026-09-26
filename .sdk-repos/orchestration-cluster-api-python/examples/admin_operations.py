@@ -641,6 +641,16 @@ def get_cluster_status_example() -> None:
 # endregion GetClusterStatus
 
 
+# region GetClusterUpgradeStatus
+def get_cluster_upgrade_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_cluster_upgrade_status()
+
+    print(f"Cluster upgrade readiness: {result.status.value}")
+# endregion GetClusterUpgradeStatus
+
+
 # region GetRestoreStatus
 def get_restore_status_example() -> None:
     client = CamundaClient()
@@ -746,4 +756,3 @@ def cancel_cluster_rebalance_example() -> None:
     else:
         print("No rebalance was running.")
 # endregion CancelClusterRebalance
-
