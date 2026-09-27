@@ -83,6 +83,16 @@ The job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition type="p
 
 ---
 
+### withLease?
+
+```ts
+optional withLease?: boolean | null;
+```
+
+Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.
+
+---
+
 ### worker?
 
 ```ts

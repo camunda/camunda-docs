@@ -14,7 +14,7 @@ View and audit a comprehensive record of operations across process, identity, an
 
 ## About
 
-The audit log provides a record of operations, including who performed an operation, when it was performed, and on which entities the operation was performed.
+The audit log provides a record of operations, including who performed an operation (a user, client, or [AI agent](/reference/glossary.md#ai-agent)), when it was performed, and on which entities the operation was performed.
 
 Use the audit log to:
 

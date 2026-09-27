@@ -8,7 +8,7 @@ description: "Variables are part of process instances and represent their data. 
 
 A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
-When [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) or [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
+When [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md), [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), or implementing [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
 
 ## Variable names
 
@@ -153,6 +153,16 @@ Use local variables to isolate data within a specific scope, especially for:
 - **Task-specific context**: Variables computed for a single task that shouldn't persist to the process level.
 
 Remember: Local variables are removed when a scope is exited unless you explicitly propagate them with output mappings.
+:::
+
+:::warning A local variable blocks later writes of the same name
+If another operation writes a variable with the same name, variable propagation finds the local variable first. This happens when a job completes or an input mapping creates the variable.
+
+Later writes update only the local variable, not the process instance. When the scope exits, Camunda discards the local variable and any updates. The operation appears to succeed, but the change never propagates.
+
+For example, an input mapping creates a local variable `x`. When the element's job completes with a new value for `x` (without an output mapping), it updates the local `x`, not the process instance. The next element still sees the previous value.
+
+To expose a variable outside its scope, use an [output mapping](#inputoutput-variable-mappings).
 :::
 
 ## Input/output variable mappings

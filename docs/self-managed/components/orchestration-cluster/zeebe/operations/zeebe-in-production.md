@@ -7,7 +7,7 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 
 This chapter covers topics relevant to anyone who wants to operate Zeebe in production.
 
-- [Resource planning](resource-planning.md) - Gives an introduction for calculating how many resources need to be provisioned.
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md) - Gives an introduction for calculating how many resources need to be provisioned.
 - [Network ports](network-ports.md) - Discusses which ports are needed to run Zeebe.
 - [Setting up a Zeebe cluster](setting-up-a-cluster.md) - Quick guide on how to set up a cluster with multiple brokers.
 - [Health status](health.md) - Lists available high-level health and liveness probes.

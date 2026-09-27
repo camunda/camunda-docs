@@ -32,6 +32,8 @@ The purge operation is irreversible. It will delete the runtime data in the clus
 
 The purge operation is a cluster-wide, asynchronous operation. Since it is asynchronous, you first launch it by sending a `POST` request to `/actuator/cluster/purge`, and then monitor by polling the topology via `/actuator/cluster` until it is finished.
 
+In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), a request without a `physicalTenant` parameter purges every Physical Tenant. Add `?physicalTenant={physicalTenantId}` to purge a single tenant and leave the others untouched.
+
 <Tabs groupId="language" defaultValue="shell" queryString values={
 [
 {label: 'shell', value: 'shell' },

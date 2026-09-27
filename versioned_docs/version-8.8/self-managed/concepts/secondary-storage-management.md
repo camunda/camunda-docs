@@ -1,8 +1,5 @@
 ---
 title: "Managing secondary storage data"
-tags:
-  - Database
-  - Secondary Storage
 description: "Best practices for configuring and managing the data in secondary storage."
 ---
 

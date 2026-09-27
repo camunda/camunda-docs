@@ -1,12 +1,5 @@
 ---
 title: Extending human task management in Camunda 7
-tags:
-  - Human Task
-  - Delegation
-  - Escalation
-  - E-Mail Notification
-  - 4-Eyes-Principle
-  - Overdue Task
 ---
 
 :::caution Camunda 7 only

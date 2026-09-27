@@ -127,9 +127,9 @@ Where a specific embedded gateway property has a unified `camunda.*` equivalent,
 
 To configure the embedded gateway, see [Gateway configuration](./gateway.md).
 
-| Field  | Description                                                                                                                                       | Example value |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enable | Enables the embedded gateway on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | false         |
+| Field  | Description                                                                                                                                                           | Example value |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enable | Enables the embedded gateway on broker startup. Enabled by default. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | true          |
 
 #### YAML snippet
 
@@ -137,7 +137,7 @@ To configure the embedded gateway, see [Gateway configuration](./gateway.md).
 zeebe:
   broker:
     gateway:
-      enable: false
+      enable: true
 ```
 
 ### camunda.cluster.network
@@ -372,6 +372,13 @@ Zeebe does not support backup encryption natively, but it _can_ use encrypted S3
 Using default bucket encryption gives you control over the encryption keys and algorithms while being completely transparent with Zeebe.
 
 Combined with TLS between Zeebe and the S3 API, backups are fully encrypted in transit and at rest. Other S3 compatible services might have similar features that should work as well.
+
+Set `ssecKey` only if your bucket enforces [server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html), where every request must supply the encryption key. When set, Zeebe attaches the key to every backup object write and read. SSE-S3 and SSE-KMS are handled transparently through default bucket encryption and need no Zeebe configuration.
+
+- The value must be a **base64-encoded 32-byte (AES-256) key**, which is a 44-character base64 string.
+- The **same key** must be configured on the brokers and on the restore application. S3 does not store the key and cannot return objects without it, so a lost key means the backup cannot be restored.
+- Source the key from a secret rather than a plaintext value, and rotate it deliberately: objects written with one key can only be read back with that same key.
+
 :::
 
 :::note Backup compression
@@ -400,6 +407,7 @@ More compression algorithms are available; check [commons-compress](https://comm
 | max-concurrent-connections     | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads to avoid connection timeouts when uploading backups with large or many files. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_S3_MAXCONCURRENTCONNECTIONS`.                                                                                                                                                                                                      |               |
 | connection-acquisition-timeout | Timeout for acquiring an already-established connection from a connection pool to a remote service. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_S3_CONNECTIONACQUISITIONTIMEOUT`.                                                                                                                                                                                                                                                                                                          |               |
 | support-legacy-md5             | Enables the AWS-provided `LegacyMd5Plugin` to extend backwards compatibility of the client. Useful when using an S3-compatible object storage as your backup store that is not up to date with the latest AWS SDK guidelines. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_S3_SUPPORTLEGACYMD5`.                                                                                                                                                                                            | false         |
+| ssec-key                       | Base64-encoded 32-byte (AES-256) key enabling [server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html). When set, the key is attached to every backup object write and read; leave unset to disable SSE-C. The same key must be configured on the brokers and on the restore application, as S3 does not store it and cannot return objects without it. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_S3_SSECKEY`. |               |
 
 #### YAML snippet
 
@@ -422,6 +430,7 @@ camunda:
           max-concurrent-connections: null
           connection-acquisition-timeout: null
           support-legacy-md5: false
+          ssec-key: null
 ```
 
 ### camunda.data.primary-storage.backup.gcs
@@ -580,6 +589,17 @@ This section contains properties required to configure Raft.
 | heartbeat-interval        | The leader sends a heartbeat to a follower every heartbeat interval. Note: This is an advanced setting. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_HEARTBEATINTERVAL`.                                                                                                                                                                                                                                                                                                                        | 250ms         |
 | election-timeout          | If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election. `election-timeout` should be greater than `heartbeat-interval`. Larger values delay leader-failure detection; smaller values can increase false positives and unnecessary leader changes. If network latency between nodes is high, use a higher election timeout. Note: This is an advanced setting. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_ELECTIONTIMEOUT`. | 2500ms        |
 
+#### camunda.cluster.raft.rebalance
+
+This section contains properties that control how partition rebalancing operations execute. Operators can override these defaults per rebalance request; see [rebalancing](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md).
+
+| Field                     | Description                                                                                                                                                                                                                                                                                                    | Example Value |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| replication-lag-threshold | The maximum replication lag, in bytes, a desired leader may have for the current leader to attempt a transfer. Above this threshold the partition is skipped with `LAG_TOO_HIGH`. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_REBALANCE_REPLICATIONLAGTHRESHOLD`. | 8MB           |
+| replication-timeout       | How long the current leader waits (paused, declining writes) for the desired leader to finish replicating before the transfer is canceled with `REPLICATION_TIMED_OUT`. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_REBALANCE_REPLICATIONTIMEOUT`.                | 10s           |
+| max-transfer-attempts     | The maximum number of `TimeoutNow` requests the current leader sends (including the initial request) before reporting `TIMEOUT_NOW_EXHAUSTED`. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_REBALANCE_MAXTRANSFERATTEMPTS`.                                        | 3             |
+| leader-wait-timeout       | How long the coordinator waits for a partition with no contactable leader to get one before giving up with `NO_LEADER`. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_REBALANCE_LEADERWAITTIMEOUT`.                                                                 | 1m            |
+
 #### YAML snippet
 
 ```yaml
@@ -591,6 +611,11 @@ camunda:
       flush-delay: 0s
       heartbeat-interval: 250ms
       election-timeout: 2500ms
+      rebalance:
+        replication-lag-threshold: 8MB
+        replication-timeout: 10s
+        max-transfer-attempts: 3
+        leader-wait-timeout: 1m
 ```
 
 ### camunda.cluster.membership
@@ -903,7 +928,7 @@ as well.
 :::
 
 :::note
-If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md#zeebegatewaymultitenancy).
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md).
 :::
 
 | Field   | Description                                                                                                                                                  | Example value |
@@ -969,7 +994,7 @@ This feature enables components like the Zeebe Broker, Tasklist, Operate, and Ze
 | `enabled`                    | Enables or disables the ping to console feature. Disabled by default. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENABLED`                     | `true`                                     |
 | `endpoint`                   | Create cluster API endpoint where pings should be sent. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENDPOINT`.                                 | `https://hub.endpoint.com/api/v1/clusters` |
 | `clusterName`                | Cluster name sent with telemetry. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_CLUSTERNAME`.                                                    | `test_cluster_name`                        |
-| `pingPeriod`                 | Frequency of pings (for example, `1s`, `1h`, `1d`). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PINGPERIOD`.                                  | `1h`                                       |
+| `pingPeriod`                 | Frequency of pings (for example, `1s`, `1h`, `1d`). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PINGPERIOD`.                                   | `1h`                                       |
 | `properties`                 | Additional properties to include in the ping payload (as key-value pairs). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PROPERTIES`.            | `testProperty: 123`                        |
 | `retry.maxRetries`           | Maximum number of retry attempts after a failed ping. Uses exponential backoff. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MAXRETRIES`. | `1`                                        |
 | `retry.minRetryDelay`        | Minimum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MINRETRYDELAY`.                                               | `1s`                                       |

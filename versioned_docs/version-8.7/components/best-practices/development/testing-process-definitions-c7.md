@@ -1,12 +1,5 @@
 ---
 title: "Testing process definitions in Camunda 7"
-tags:
-  - Test / Unit Test
-  - Test / Integration Test
-  - Mock
-  - Exception
-  - Java Delegate
-  - JUnit
 description: "Camunda supports writing tests in Java. Step through an example, the basic ideas of test scopes, and testing in chunks with Camunda 7."
 ---
 

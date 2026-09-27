@@ -144,6 +144,10 @@ Zeebe supports the following broker and replication configurations for dual-regi
 
 Zeebe creates partitions in a [round-robin fashion](/components/zeebe/technical-concepts/partitions.md#partition-distribution). The Helm chart places all brokers with even numbers (0, 2, 4, 6, ...) in one region and all brokers with odd numbers (1, 3, 5, 7, ...) in the other. This distribution ensures even partition replication across both regions.
 
+:::info Zone-aware brokers
+This numbered, parity-based broker distribution was the default multi-region configuration before Camunda 8.10 and remains supported. Starting with 8.10, [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) name brokers after their zone instead of inferring the region from node ID parity, which extends beyond two regions and simplifies managing zones. To move an existing dual-region cluster to zone-aware brokers, see [Migrate to zone-aware brokers](/self-managed/deployment/helm/operational-tasks/zone-aware-migration.md).
+:::
+
 #### Scaling the Zeebe cluster
 
 When scaling, follow the [cluster scaling steps](../../components/orchestration-cluster/zeebe/operations/cluster-scaling.md) and ensure you meet the [Zeebe cluster configuration](#zeebe-cluster-configuration) requirements.
@@ -191,7 +195,7 @@ Certain **minor version upgrades** might require you to upgrade both regions sim
 | Connectors deployment       | Connectors can be deployed in a dual-region setup, but you must account for [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) to avoid event duplication. With two connector deployments running, message idempotency is critical.                                                                                                |
 | Connectors                  | If you run Connectors with an inbound connector deployed in a dual-region setup: <ul><li>To delete a process deployment, do so via Operate, otherwise the inbound connector won't deregister.</li><li>If you have multiple Operate instances running, delete the process in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).</li></ul> |
 | Zeebe cluster scaling       | Supported. See [Zeebe cluster configuration](#zeebe-cluster-configuration).                                                                                                                                                                                                                                                                                                          |
-| Web Modeler                 | Web Modeler is a standalone component not covered in this guide. Modeling applications can operate independently outside of the Orchestration Clusters. Web Modeler also depends on Management Identity.                                                                                                                                                                             |
+| Camunda Hub                 | Hub is a standalone component not covered in this guide. Modeling applications can operate independently outside of the Orchestration Clusters. Hub also depends on Management Identity.                                                                                                                                                                                             |
 
 ## Region failure and recovery
 

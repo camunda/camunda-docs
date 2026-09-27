@@ -223,7 +223,7 @@ orchestration:
             gcp:
               gcp1: # store instance ID — must match activeStoreId
                 bucket-name: my-gcp-bucket
-                prefix: documents/ # optional
+                prefix: documents/ # optional, defaults to temp/ when unset
 
 connectors:
   extraConfiguration:

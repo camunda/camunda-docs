@@ -6,6 +6,10 @@ description: "Learn about the Camunda SAP Business Technology Platform (BTP) plu
 
 The [Camunda SAP Business Technology Platform (BTP) plugin](/reference/glossary.md#btp) is an artifact run on BTP. It consists of a [UI5 app](https://ui5.sap.com/), a [CAP service layer and backend](https://cap.cloud.sap/) (using PostgreSQL), and an [approuter](https://www.npmjs.com/package/@sap/approuter) for traffic dispatching.
 
+:::note
+The SAP BTP plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration. For details, see the [Camunda 8.10 announcements](/reference/announcements-release-notes/8100/8100-announcements.md).
+:::
+
 The BTP plugin connects to Camunda 8 SaaS to provide:
 
 - A generic Fiori app for starting BPMN processes and displaying [Camunda Forms](/components/modeler/forms/camunda-forms-reference.md) in the Fiori design language.
@@ -27,7 +31,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Features
 
-- Model user tasks in your BPMN process—they will be automatically detected and rendered by the BTP plugin at runtime.
+- Model user tasks in your BPMN process. They will be automatically detected and rendered by the BTP plugin at runtime.
 - Design your form in the Form Builder as part of the BPMN process. When you model a user task and link it to the form, the BTP plugin will automatically detect and render the task and its associated form at runtime.
 
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
@@ -175,7 +179,7 @@ When modeling a process for the BTP plugin, choose one of the following variants
 User task listeners are available from **Camunda 8.8** onwards. They were briefly included in 8.7.0-alpha2 but were not available in the 8.7.0 GA release. Use Camunda 8.8 or higher for this variant.
 :::
 
-In Camunda Modeler, model each user interaction step as a separate Camunda user task and link it to a Camunda Form. The BTP plugin detects these tasks and renders the linked forms in the Fiori UI.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, model each user interaction step as a separate Camunda user task and link it to a Camunda Form. The BTP plugin detects these tasks and renders the linked forms in the Fiori UI.
 
 For each form step:
 
@@ -204,7 +208,7 @@ This setup is deprecated and kept for backward compatibility only. Use the Camun
 
 Model the process to be advanced by a job worker that polls for work and drives the flow. This means the BTP plugin is not responsible for task progression in the process model.
 
-In Camunda Modeler, configure each form step as a job worker task.
+In [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler, configure each form step as a job worker task.
 
 For each form step:
 

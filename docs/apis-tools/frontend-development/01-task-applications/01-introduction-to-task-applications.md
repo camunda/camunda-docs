@@ -13,7 +13,7 @@ Task applications are the interface between humans and Camunda processes to orch
 
 ## What are task applications?
 
-Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) (for [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md)) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
+Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) (for [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md)) represents a single **work item** to be performed by an individual or a group, whether the preceding step ran automatically or an [AI agent](/reference/glossary.md#ai-agent) escalated it for human input. The jobs of a task application include:
 
 - Listing available tasks and allowing users to select a task to work on.
 - Providing filter and search options for users so they can more easily find the right next task to work on.
@@ -54,7 +54,7 @@ Learn more how to work with the task queue in the [Tasklist user guide](/compone
 
 #### Task details
 
-Task details are shown when a task is selected from the queue. A [form](/components/modeler/forms/utilizing-forms.md) is displayed as the task content, which must be filled out to complete the task.
+Task details are shown when a task is selected from the queue. A [form](/components/modeler/desktop-modeler/utilize-forms.md) is displayed as the task content, which must be filled out to complete the task.
 
 :::tip
 Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.
@@ -148,7 +148,7 @@ Then, require individual members of that group to explicitly claim tasks before 
 
 Often, task applications support the collaborative work on tasks, generally done using **comments**. **Document management** is a common use case of task applications, allowing users to upload, manage, and review **attachments**. Task applications are also the right place to browse, reference, and manage **case management data**.
 
-Task applications are not limited to web applications to be worked on desktops. Camunda has been used successfully for the the development of omnichannel customer-facing applications, such as **mobile banking apps**, often via a **backend-for-frontend** implementation.
+Task applications are not limited to web applications to be worked on desktops. Camunda has been used successfully for the development of omnichannel customer-facing applications, such as **mobile banking apps**, often via a **backend-for-frontend** implementation.
 
 ## Next steps
 

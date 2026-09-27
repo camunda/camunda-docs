@@ -8,7 +8,7 @@ description: "Chat with the AI FEEL Copilot for help generating FEEL (Friendly E
 import OpenFeelCopilot from './img/open-feel-copilot.png';
 import FeelCopilotPanel from './img/feel-copilot-panel.png'
 
-Chat with the AI FEEL Copilot for help generating [FEEL (Friendly Enough Expression Language)](/components/modeler/feel/what-is-feel.md) expressions in [Camunda Hub](/components/hub/workspace/modeler/launch-modeler.md).
+Chat with the AI FEEL Copilot for help generating [FEEL (Friendly Enough Expression Language)](/components/modeler/feel/what-is-feel.md) expressions in [Camunda Hub](/components/hub/workspace/modeler/index.md).
 
 :::note Terms of use
 By using this tool, you agree to Camunda's use of the anonymized input and output data and anonymized feedback to improve it.

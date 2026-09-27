@@ -1,11 +1,6 @@
 ---
 id: sizing-your-environment
 title: Size your environment
-tags:
-  - Database
-  - Performance
-  - Hardware
-  - Sizing
 description: "Understand the aspects relevant to Camunda 8 sizing. Once you do, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration."
 ---
 
@@ -41,6 +36,8 @@ In addition, it sends data to secondary storage (Elasticsearch, OpenSearch, or a
 
 You can configure retention times for data stored in secondary storage.
 
+For Self-Managed, see [Disk space](sizing-self-managed.md#disk-space) for the formula and mechanics behind Zeebe's primary storage disk usage.
+
 ### Impact of Optimize
 
 Optimize is an optional component that provides process analytics and reporting. When enabled, it has significant implications for sizing.
@@ -60,8 +57,8 @@ For how Optimize fits into the export pipeline, see [Optimize data flow](./data-
 
 #### Why Optimize matters for sizing
 
-- Optimize is a second-tier consumer of the export pipeline: the Elasticsearch/OpenSearch exporter writes raw engine events, and Optimize's importer reads them and writes its own analytics indices back to Elasticsearch/OpenSearch. This means data is written to secondary storage twice. See [Optimize data flow](./data-flow.md#optimize-data-flow).
-- In Camunda 8.8+, the Camunda Exporter and the Elasticsearch exporter run in the same thread within the broker, so Optimize data pipeline competes directly with core platform exporting for throughput.
+- Optimize is a second-tier consumer of the export pipeline: the Elasticsearch/OpenSearch exporter writes raw engine events, Optimize's importer reads them and writes its own analytics indices back to Elasticsearch/OpenSearch, so data is written to secondary storage twice. See [Optimize data flow](./data-flow.md#optimize-data-flow).
+- In Camunda 8.8+, the Camunda Exporter and the Elasticsearch exporter run in the same thread within the broker, so Optimize data-pipeline competes directly with core platform exporting for throughput.
 - The overhead is **not proportional to throughput.** It scales with process model complexity (multi-instance and call activities) and variable volume. At a realistic workload where Optimize-enabled and Optimize-disabled clusters reached identical throughput with zero backpressure, the Optimize-enabled cluster still consumed **around 3.4x more Elasticsearch CPU.** Budget for this even at comfortable throughput.
 
 #### What Optimize affects
@@ -211,6 +208,7 @@ Consider these general rules for payload size:
 
 - The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly three MB.
 - Camunda does not recommend storing large amounts of data in your process context. Refer to our [best practices on handling data in processes](/components/best-practices/development/handling-data-in-processes.md) for more details.
+- An AI agent's conversation memory is held in a process variable that grows with each loop iteration, so it counts toward this limit. Switch the agent's memory to [Camunda document storage](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#choose-a-memory-storage-backend) when a long conversation would outgrow it.
 - Each [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to one GB of payload in total. Larger payloads can lead to slower processing. For example,
   one million process instances with four KB each is about 3.9 GB, so you need at least four partitions. In practice, you’d typically use six partitions, since the number of partitions is usually a multiple of the replication factor (three by default).
 
@@ -221,6 +219,20 @@ In most scenarios, your load will be volatile rather than constant. For example,
 In this example, that single peak day defines your overall throughput requirements.
 
 In addition, sizing for peaks may mean you shouldn’t assume a full 24-hour day. Instead, you might size for just the eight business hours, or even the busiest two hours—depending on your workload.
+
+### Job worker capacity
+
+Even when your cluster has spare throughput capacity, an undersized job worker can still allow jobs to accumulate in the backlog. Worker capacity requires its own sizing exercise, separate from cluster sizing.
+
+The workflow engine delivers jobs to workers through two paths that share a worker's capacity but behave differently: [Job streaming pushes a job as soon as it becomes available for activation](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs), while polling is the only path that drains jobs already queued in the backlog.
+
+Therefore, healthy throughput does not indicate whether the backlog is draining; they are independent signals. The backlog can continue to grow after workers recover from an outage, even when throughput appears to have fully recovered. See [impact of worker downtime on a realistic load test](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details.
+
+:::note
+There is currently no built-in metric that directly reports the size of this backlog.
+:::
+
+Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#size-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
 
 ### Secondary storage
 

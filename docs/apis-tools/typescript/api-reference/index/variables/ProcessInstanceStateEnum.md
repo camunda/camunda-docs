@@ -27,6 +27,12 @@ readonly ACTIVE: "ACTIVE" = 'ACTIVE';
 readonly COMPLETED: "COMPLETED" = 'COMPLETED';
 ```
 
+### SUSPENDED
+
+```ts
+readonly SUSPENDED: "SUSPENDED" = 'SUSPENDED';
+```
+
 ### TERMINATED
 
 ```ts

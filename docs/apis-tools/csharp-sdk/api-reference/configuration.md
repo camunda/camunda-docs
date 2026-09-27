@@ -7,10 +7,6 @@ mdx:
 
 # Configuration
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 Configuration and authentication types for the Camunda C# SDK.
 
 ## CamundaOptions
@@ -27,7 +23,7 @@ public sealed class CamundaOptions
 
 | Property             | Type                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | -------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Config`             | `Dictionary<String, String>` | Strongly typed env-style overrides (CAMUNDA_* keys).                                                                                                                                                                                                                                                                                                                                                                                             |
+| `Config`             | `Dictionary<String, String>` | Strongly typed env-style overrides (CAMUNDA\_\* keys).                                                                                                                                                                                                                                                                                                                                                                                           |
 | `Configuration`      | `IConfiguration`             | An `Configuration.IConfiguration` section (typically `configuration.GetSection("Camunda")`) to bind settings from `appsettings.json` or any other configuration provider. Keys use PascalCase property names (e.g. `RestAddress`, `Auth:Strategy`) and are mapped to the canonical `CAMUNDA_*` env-var names internally. Precedence (highest wins): `CamundaOptions.Config` > `CamundaOptions.Configuration` > environment variables > defaults. |
 | `HttpClient`         | `HttpClient`                 | Custom HttpClient factory. If not provided, a default HttpClient is created.                                                                                                                                                                                                                                                                                                                                                                     |
 | `HttpMessageHandler` | `HttpMessageHandler`         | Custom HttpMessageHandler for the internal HttpClient (ignored if HttpClient is set). Useful for tests (e.g., MockHttpMessageHandler).                                                                                                                                                                                                                                                                                                           |

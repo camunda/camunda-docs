@@ -117,8 +117,9 @@ We recommend enabling [job streaming](../../concepts/job-workers.md#job-streamin
 your job workers have to periodically poll every partition in your Zeebe cluster to check if there are new jobs available. Additionally, they have to
 balance polling aggressively with minimizing their impact on the cluster, which still has to handle all requests, even when no jobs are available. In large clusters, this can add a noticeable delay in the order of seconds, which can be unacceptable for certain workloads.
 
-> [!Note]
-> You can read more about the difference between long polling and job streaming [in this blog post](https://camunda.com/blog/2024/03/reducing-job-activation-delay-zeebe/).
+:::note
+You can read more about the difference between long polling and job streaming [in this blog post](https://camunda.com/blog/2024/03/reducing-job-activation-delay-zeebe/).
+:::
 
 As such, we recommend using job streaming if possible.
 
@@ -257,6 +258,24 @@ These observations yield the following recommendations for Java:
 | Parallelism  | Some parallelism is possible with a thread pool, which is used by the client library. The default thread pool size is one, which needs to be adjusted in the config in order to scale. | Many blocked operations can run concurrently without tying each blocked operation to a platform thread.               | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform.                           |
 | **Use when** | You don't have requirements to process jobs in parallel.                                                                                                                               | You use Java 21 or later, need to process I/O-bound jobs in parallel, and want to keep straightforward blocking code. | Your client stack already uses reactive programming, or you need extremely high throughput or low latency and have measured the tradeoffs. |
 |              | You intentionally want to limit parallelism with a small worker thread pool.                                                                                                           | This should be the default for Java workers that need parallel I/O and don't otherwise require reactive programming.  | Your developers are familiar with reactive programming and the added complexity is acceptable.                                             |
+
+#### Size `maxJobsActive` against execution threads
+
+For workers backed by a fixed execution thread pool (blocking or virtual threads), `maxJobsActive` defines the queue length and bounds the number of jobs a worker holds at once, but it isn't a throughput knob: throughput is `numJobWorkerExecutionThreads / handlerDuration`. Increasing `maxJobsActive` beyond what your execution threads and job timeouts can support only lengthens the queue within the worker; it does not make jobs complete faster.
+
+Size `maxJobsActive` so your worker's queue stays within its job deadlines, with some margin:
+
+```text
+maxJobsActive < numJobWorkerExecutionThreads × (jobTimeout / averageHandlerDuration)
+```
+
+For example, with 30 execution threads, a job timeout of 1,800 ms, and an average handler duration of 300 ms, `maxJobsActive` should remain below 180 (`30 × (1800 / 300)`). A higher value allows more jobs to queue behind busy threads than can be completed before their deadlines. As a result, jobs may time out and be redelivered to other workers instead of completing.
+
+Size the job timeout against your worst-case handler duration, not the average. The timeout serves two purposes at once: it's the broker's deadline for redelivering a job to another worker, and, if [job streaming](/components/concepts/job-workers.md#job-streaming) is enabled, it also determines how long a pushed job can wait for an available capacity slot before it is dropped and retried. A handler that occasionally takes longer than average will exceed a timeout sized only for the average case.
+
+:::note
+This formula and the `maxJobsActive` capacity model it describes are specific to the Java client’s worker implementation, which uses a shared semaphore to limit both pushed and polled jobs. Other client SDKs implement worker capacity differently. Check your client’s documentation for the equivalent tuning parameters.
+:::
 
 ### Node.js client
 

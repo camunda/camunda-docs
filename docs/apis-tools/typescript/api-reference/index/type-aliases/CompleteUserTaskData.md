@@ -30,7 +30,7 @@ path: object;
 #### userTaskKey
 
 ```ts
-userTaskKey: UserTaskKey;
+userTaskKey: UserTaskKeyWritable;
 ```
 
 The key of the user task to complete.

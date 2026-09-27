@@ -57,6 +57,11 @@ get stopped(): boolean;
 start(): void;
 ```
 
+Begin polling for jobs. Safe to call at any point: the request is buffered
+until the transport is ready, and redundant calls (including an explicit
+call on an `autoStart` worker) are dropped rather than starting a second
+poll loop. Once the worker is stopped, `start()` is a no-op.
+
 #### Returns
 
 `void`

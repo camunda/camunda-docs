@@ -62,6 +62,69 @@
       "label": "Restore from a backup"
     }
   ],
+  "takeRuntimeBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
+    }
+  ],
+  "listRuntimeBackups": [
+    {
+      "file": "Backup.cs",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "getRuntimeBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "deleteRuntimeBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "getRuntimeBackupState": [
+    {
+      "file": "Backup.cs",
+      "region": "GetRuntimeBackupState",
+      "label": "Get the runtime backup state"
+    }
+  ],
+  "syncRuntimeBackupState": [
+    {
+      "file": "Backup.cs",
+      "region": "SyncRuntimeBackupState",
+      "label": "Force-write the runtime backup state"
+    }
+  ],
+  "deleteRuntimeBackupState": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete the runtime backup state"
+    }
+  ],
+  "pauseExporting": [
+    {
+      "file": "Exporting.cs",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
+    }
+  ],
+  "resumeExporting": [
+    {
+      "file": "Exporting.cs",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
+  ],
   "createProcessInstance": [
     {
       "file": "ProcessInstance.cs",
@@ -1435,6 +1498,13 @@
       "file": "Secret.cs",
       "region": "ResolveSecrets",
       "label": "Resolve secrets"
+    }
+  ],
+  "listSecrets": [
+    {
+      "file": "Secret.cs",
+      "region": "ListSecrets",
+      "label": "List secret references"
     }
   ]
 }

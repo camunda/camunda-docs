@@ -1,13 +1,5 @@
 ---
 title: Reporting about processes
-tags:
-  - Reporting
-  - History
-  - DWH
-  - BI
-  - KPI
-  - SQL
-  - MIS (Management Information System)
 description: "The Camunda engine automatically collects audit information about historical process or instances for users to leverage and generate relevant reports."
 ---
 
@@ -87,4 +79,4 @@ Leveraging typical BI system's **ETL** (extract, transform, and load) features a
 
 To get the data into the BI system, leverage one of the mechanisms described above. Our recommendation generally is:
 
-- In SaaS, leverage the history API to regularly pull data, as custom exporters are not supported there.
+- In SaaS, leverage the Operate API to regularly pull data, as custom exporters are not supported there.

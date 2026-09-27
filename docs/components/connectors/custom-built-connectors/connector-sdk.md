@@ -288,6 +288,8 @@ A single `@OutboundConnector` annotated connector (**(1)**) can declare one or m
 
 Every declared operation (**(3)**) can accept one or multiple inputs as parameters.
 
+Describe each operation with the `name`, `description`, and `keywords` attributes of `@Operation`. The element template generator turns them into the template's [`steps` and `presets`](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets), so users can find the operation by searching for the action it performs and select it directly when they apply the template. Once a connector declares more than one operation, every operation must declare at least one keyword, or template generation fails.
+
 Using the `@Variable` annotation, a primitive type has to specify the variable name for example `input` as shown in (**(4)**). Binding to a complex type will use the property names (`a`, `b`) of the type for variable mapping (**(5)**).
 
 Types can use [Jakarta Validation](https://beanvalidation.org/) annotations. Validation will be applied during binding.
@@ -554,6 +556,8 @@ controlled in a secure location and referenced in a connector's properties using
 pattern `{{secrets.*}}`. To make this mechanism as robust as possible, secret handling comes with
 the connector SDK out of the box. That way, all connectors can use the same standard way of
 handling secrets in input data.
+
+`{{secrets.*}}` is the legacy syntax, resolved by the connector runtime. The recommended `camunda.secrets.<name>` syntax is resolved by the Orchestration Cluster before the job reaches the connector, so your connector receives the value already in place. See [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md) for how the two syntaxes differ and how to migrate.
 
 The SDK allows replacing secrets in input data as late as possible to avoid passing them around
 in the environments that handle connector invocation. We do not pass secrets into the

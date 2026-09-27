@@ -1036,6 +1036,13 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserTaskVariableFilter"
           description: The user task variable search filters.
+      x-properties-added-in-version:
+        - propertyName: page
+          addedInVersionOverride: "8.8"
+        - propertyName: sort
+          addedInVersionOverride: "8.8"
+        - propertyName: filter
+          addedInVersionOverride: "8.8"
     UserTaskAuditLogSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"

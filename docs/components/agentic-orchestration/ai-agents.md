@@ -15,12 +15,16 @@ An AI agent is an addressable execution of an LLM-driven loop with shared memory
 
 AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
 
+### Agent types
+
 Camunda supports two types of agents:
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
-- **[External agents](/reference/glossary.md#external-agent)** run their loop in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. They run their [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
+- **[External agents](/reference/glossary.md#external-agent)** run their [agent loop](/reference/glossary.md#agent-loop) in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
 
-The rest of this page describes how to build a Camunda AI agent using the AI Agent connector.
+:::note
+Camunda represents every agent with an [agent definition and agent instances](/components/agentic-orchestration/agent-definitions-and-instances.md).
+:::
 
 ## The AI Agent connector
 
@@ -57,7 +61,7 @@ Decision-making and execution are intentionally split:
 - **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
 
 :::tip
-Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
+Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
 
 ## AI agent integration features

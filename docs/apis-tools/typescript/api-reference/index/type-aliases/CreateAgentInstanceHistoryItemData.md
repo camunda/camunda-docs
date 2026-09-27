@@ -30,7 +30,7 @@ path: object;
 #### agentInstanceKey
 
 ```ts
-agentInstanceKey: AgentInstanceKey;
+agentInstanceKey: AgentInstanceKeyWritable;
 ```
 
 The key of the agent instance to append the history item to.

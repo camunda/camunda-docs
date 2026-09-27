@@ -188,6 +188,15 @@ For each new message a new instance is created.
 
 A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
 
+## FEEL context variables
+
+Starting in 8.10, the process instance properties are accessible in [FEEL expressions](/components/concepts/expressions.md) via the `camunda.processInstance` context, resolvable in any FEEL expression across the process:
+
+- `camunda.processInstance.key` — the process instance's system-generated key.
+- `camunda.processInstance.businessId` — the process instance's [business ID](#business-id), or `null` if none is set.
+
+These are the only `camunda.processInstance.*` context variables available in 8.10.
+
 ## Business ID
 
 ### What is a business ID?
@@ -254,6 +263,7 @@ The API supports the following operators for `businessId`. Operate and Tasklist 
 | `$exists` | Field is set or absent      | —                                   | API only  |
 | `$like`   | Pattern match               | `*` (multi-char), `?` (single-char) | Contains  |
 | `$in`     | Matches any value in a list | —                                   | Is one of |
+| `$notIn`  | Matches no value in a list  | —                                   | API only  |
 
 #### API reference
 
@@ -321,7 +331,10 @@ Uniqueness is checked against **active root process instances**.
 Uniqueness control is **retroactive**. When you enable it, business IDs that were already assigned to active process instances _before_ the feature was turned on are taken into account. This prevents duplicate instances from being created after the feature is enabled, even if duplicates already existed before activation.
 :::
 
-Uniqueness control is opt-in. Enable it using the configuration property [`camunda.process-instance-creation.business-id-uniqueness-enabled`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#process-instance-creation). For SaaS, configure this in the cluster configuration via Camunda Hub. For Self-Managed, set it in the application config (for example, `application.yaml` or as an environment variable).
+Uniqueness control is opt-in:
+
+- For SaaS, configure this in the [cluster configuration via Camunda Hub](/components/hub/organization/manage-clusters/settings.md#enable-business-id-uniqueness).
+- For Self-Managed, set the [`camunda.process-instance-creation.business-id-uniqueness-enabled`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#process-instance-creation) property in the application config (for example, `application.yaml` or as an environment variable).
 
 :::note
 When a business ID is specified, the partition for the new process instance is determined deterministically by **hashing the business ID**, rather than using the default round-robin distribution. This ensures that uniqueness checks occur on a single partition.
@@ -405,5 +418,5 @@ curl -L 'http://localhost:8080/v2/process-instances' \
 
 ## Next steps
 
-- [About Modeler](/components/modeler/about-modeler.md)
+- [About process modeling](/components/modeler/about-modeler.md)
 - [Automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)

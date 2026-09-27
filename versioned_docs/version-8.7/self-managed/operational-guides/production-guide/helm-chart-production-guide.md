@@ -413,7 +413,42 @@ The following resources and configuration options are important to keep in mind 
           mountPath: /mount
   ```
 
-- It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
+- Set a memory and resource quota for your namespace. See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) for configuration details. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
+
+#### Spread Web Modeler pods across availability zones
+
+Use a stable Pod label you control to spread Web Modeler replicas without depending on labels managed by the Helm chart.
+
+Set the same label key and value in `podLabels` and `affinity`:
+
+```yaml
+webModeler:
+  enabled: true
+  restapi:
+    replicas: 2
+    podLabels:
+      scheduling.example.com/affinity-group: web-modeler-restapi
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  scheduling.example.com/affinity-group: web-modeler-restapi
+              topologyKey: topology.kubernetes.io/zone
+```
+
+Apply the same pattern to `webModeler.webapp` and `webModeler.websockets`.
+
+The same `podLabels` and `affinity` pairing applies to every component that exposes these values, including `zeebe`, `zeebeGateway`, `operate`, `tasklist`, `optimize`, `identity`, `connectors`, and `console`. Prefer a label you own over chart-managed labels such as `app.kubernetes.io/component`, whose values can change between chart versions. For Zeebe, overriding `zeebe.affinity` replaces the default hard `podAntiAffinity` rule that keeps broker pods on distinct nodes.
+
+Consider the following when you configure Pod anti-affinity:
+
+- Use a label key with a DNS prefix you control. If multiple Helm releases share a namespace, choose a label value unique to each component and release because Pod affinity selectors use the current namespace by default.
+- Ensure every eligible node has the label named by `topologyKey`. Managed cloud clusters normally set `topology.kubernetes.io/zone`.
+- A preferred rule is best effort and can colocate Pods when no better placement is available. A required rule can leave Pods `Pending` or stall rolling updates when the cluster lacks capacity in enough topology domains.
+- Avoid inter-Pod affinity and anti-affinity for clusters larger than several hundred nodes because they add substantial scheduler processing.
 
 ### Security
 

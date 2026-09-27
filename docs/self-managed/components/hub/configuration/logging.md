@@ -1,12 +1,12 @@
 ---
 id: logging
 title: "Logging"
-description: "Read details on additional logging configuration for Web Modeler."
+description: "Read details on additional logging configuration for Camunda Hub."
 ---
 
 ## Logging configuration for the `restapi` component
 
-Web Modeler's `restapi` component uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. By default, the
+Camunda Hub's `restapi` component uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. By default, the
 `restapi` component logs to the Docker container's standard output. To change the default logging behavior, create a
 custom configuration file and let the `restapi` know of it by specifying the following environment variable:
 
@@ -20,7 +20,7 @@ for more information on how to customize the `log4j2` configuration for specific
 Enabling `DEBUG` logging for the `restapi` component can be useful for troubleshooting purposes, e.g. for
 [debugging Zeebe connection issues](../troubleshooting/troubleshoot-zeebe-connection.md#how-can-i-debug-log-grpc--zeebe-communication).
 
-By default, Web Modeler's `restapi` component logs in a simple, readable format to the console.
+By default, Camunda Hub's `restapi` component logs in a simple, readable format to the console.
 
 You can configure log levels, output formats, and appenders, and adjust logging dynamically at runtime.
 
@@ -38,12 +38,12 @@ curl 'http://localhost:8091/actuator/loggers/io.camunda' \
 Replace `io.camunda` with the logger you want to adjust.
 
 :::note
-The base URL may differ depending on your environment configuration. The example above assumes execution from the same host running the Web Modeler `restapi` component. This URL is only callable via the [management port](https://docs.spring.io/spring-boot/reference/actuator/monitoring.html#actuator.monitoring.customizing-management-server-port), usually not publicly available.
+The base URL may differ depending on your environment configuration. The example above assumes execution from the same host running the Camunda Hub `restapi` component. This URL is only callable via the [management port](https://docs.spring.io/spring-boot/reference/actuator/monitoring.html#actuator.monitoring.customizing-management-server-port), usually not publicly available.
 :::
 
 ### Default Log4j2 configuration
 
-The default `log4j2-spring.xml` used by Web Modeler's `restapi` component is as follows:
+The default `log4j2-spring.xml` used by Camunda Hub's `restapi` component is as follows:
 
 ```xml
 <Configuration xmlns="https://logging.apache.org/xml/ns"
