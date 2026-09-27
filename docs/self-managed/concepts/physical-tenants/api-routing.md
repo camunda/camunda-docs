@@ -5,7 +5,9 @@ sidebar_label: "API routing"
 description: "Learn how REST API requests are routed to Physical Tenants, including tenant-scoped paths, default tenant routing, and gRPC routing."
 ---
 
-Learn how Camunda 8.10 routes REST API requests to Physical Tenants.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Tenant-scoped REST API routing
 

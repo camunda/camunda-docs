@@ -2,10 +2,12 @@
 id: provisioning-and-lifecycle
 title: "Provisioning and lifecycle"
 sidebar_label: "Provisioning and lifecycle"
-description: "Provision and manage Physical Tenants in 8.10, including restart behavior and out-of-scope operations."
+description: "Learn how to provision and manage Physical Tenants, including restart behavior and out-of-scope operations."
 ---
 
-Learn how to provision and operate Physical Tenants in Camunda 8.10.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Provisioning model
 

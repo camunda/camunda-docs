@@ -5,7 +5,13 @@ sidebar_label: "Troubleshooting"
 description: "Diagnose startup, routing, authorization, storage, and performance problems in an Orchestration Cluster running multiple Physical Tenants."
 ---
 
-Diagnose problems specific to running multiple Physical Tenants in one Orchestration Cluster, and separate them from general cluster faults.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Learn how to diagnose problems specific to running multiple Physical Tenants in one Orchestration Cluster, and separate them from general cluster faults.
 
 Most symptoms in a multi-tenant cluster fall into one of two categories: the whole cluster is unhealthy, or a single Physical Tenant is degraded while its peers keep serving traffic. Start by determining which one you have, because the two have different causes and different fixes.
 

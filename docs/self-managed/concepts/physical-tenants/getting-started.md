@@ -2,17 +2,20 @@
 id: getting-started
 title: "Set up two isolated Physical Tenants"
 sidebar_label: "Getting started"
-description: "A hands-on walkthrough for adding a strongly isolated second team to a Camunda 8 Self-Managed cluster with Helm."
+description: "A hands-on walkthrough for adding a strongly isolated second team to a Self-Managed cluster with Helm."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Set up a second, strongly isolated Physical Tenant on an existing Camunda 8 Self-Managed cluster, with its own storage, identity, and backups.
 
-:::note The scenario
-A bank runs its day-to-day operations on one Camunda 8 cluster today, the always-present `default` Physical Tenant. Its Risk team is now onboarding, and compliance requires Risk's process data, identity provider, and backups to be fully separate from Operations, without a second cluster to operate. This is the internal-domain pattern from [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md): strong isolation for teams that must not blur, on one platform.
-:::
+In this scenario, a bank runs its day-to-day operations on one Camunda 8 cluster today, the always-present `default` Physical Tenant. Its Risk team is now onboarding, and compliance requires Risk's process data, identity provider, and backups to be fully separate from Operations, without a second cluster to operate. This is the internal-domain pattern from [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md): strong isolation for teams that must not blur, on one platform.
 
 This guide assumes Kubernetes with the Camunda Helm chart and a shared Keycloak or external OIDC provider.
 

@@ -5,6 +5,12 @@ sidebar_label: "Physical Tenants"
 description: "Physical Tenants enable strong data isolation and independent management within a single Camunda 8 cluster."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 A Physical Tenant is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each with fully isolated data, its own partition group, and independent lifecycle management.
 
 Isolation covers data and management, not compute. Physical Tenants share the cluster's brokers and gateways, so runtime interference between tenants is reduced but not eliminated. See [what is not isolated](/self-managed/concepts/physical-tenants/index.md#what-is-not-isolated).
@@ -71,18 +77,11 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 
 ## Learn more
 
-For detailed technical information about isolation model, architecture, and storage configuration, see [physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
-
-To set up a second isolated Physical Tenant end to end, see [set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md).
-
-For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
-
-For adding tenants and lifecycle expectations in 8.10, see [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md).
-
-For how REST API requests are routed to Physical Tenants, including default tenant compatibility and HTTP status codes, see [API routing](/self-managed/concepts/physical-tenants/api-routing.md).
-
-For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
-
-For how authorization is divided between cluster-wide and tenant-local operations, see [authorization model](/self-managed/concepts/physical-tenants/authorization-model.md).
-
-For how Physical Tenant storage isolation works across primary storage, secondary storage, and document stores, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).
+- For detailed technical information about isolation model, architecture, and storage configuration, see [physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
+- To set up a second isolated Physical Tenant end to end, see [set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md).
+- For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
+- For adding tenants and lifecycle expectations in 8.10, see [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md).
+- For how REST API requests are routed to Physical Tenants, including default tenant compatibility and HTTP status codes, see [API routing](/self-managed/concepts/physical-tenants/api-routing.md).
+- For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
+- For how authorization is divided between cluster-wide and tenant-local operations, see [authorization model](/self-managed/concepts/physical-tenants/authorization-model.md).
+- For how Physical Tenant storage isolation works across primary storage, secondary storage, and document stores, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).

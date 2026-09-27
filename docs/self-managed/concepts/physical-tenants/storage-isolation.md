@@ -9,6 +9,11 @@ import TabItem from "@theme/TabItem";
 import AoGrid from "../../../components/react-components/_ao-card";
 import IconConfigImg from "../../../components/assets/icon-config.png";
 import IconOperateImg from "../../../components/assets/icon-operate.png";
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Learn how to configure isolated secondary storage for Physical Tenants across RDBMS, Elasticsearch/OpenSearch, and Document Store backends.
 

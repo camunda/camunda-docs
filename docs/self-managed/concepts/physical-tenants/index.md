@@ -2,25 +2,30 @@
 id: index
 title: "Physical Tenant isolation model"
 sidebar_label: "Isolation model"
-description: "Learn how Physical Tenants isolate execution, storage, and API routing within a single orchestration cluster."
+description: "Learn how Physical Tenants isolate execution, storage, and API routing within a single Orchestration Cluster."
 ---
 
 import DocCardList from '@theme/DocCardList';
+import PageDescription from '@site/src/components/PageDescription';
 
-A Physical Tenant is an isolated execution unit inside one orchestration cluster, with its own storage, identity, and backups.
+<PageDescription />
 
-:::info
+## About
+
+A Physical Tenant is an isolated execution unit inside one Orchestration Cluster, with its own storage, identity, and backups.
+
+This page covers one Orchestration Cluster with multiple Physical Tenants. Multi-region and multi-cluster topologies are separate topics.
+
+:::tip
 New to Physical Tenants? Start with the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models, or jump straight to [set up two isolated Physical Tenants](./getting-started.md) for a hands-on walkthrough.
 :::
-
-This page covers one orchestration cluster with multiple Physical Tenants. Multi-region and multi-cluster topologies are separate topics.
 
 ## Isolation model
 
 Isolation applies differently at each layer of the stack:
 
 | Layer             | Isolation model                                                                                          | Shared or isolated    |
-| ----------------- | -------------------------------------------------------------------------------------------------------- | --------------------- |
+| :---------------- | :------------------------------------------------------------------------------------------------------- | :-------------------- |
 | Primary storage   | Dedicated Raft groups per Physical Tenant. A single tenant can span multiple brokers.                    | Isolated              |
 | Brokers           | Brokers are co-located and can host more than one Physical Tenant.                                       | Shared infrastructure |
 | Gateways          | Gateways route requests to the targeted tenant.                                                          | Shared                |
@@ -31,7 +36,7 @@ Isolation applies differently at each layer of the stack:
 
 ```mermaid
 graph TD
-    subgraph cluster["Single orchestration cluster"]
+    subgraph cluster["Single Orchestration Cluster"]
         cp["Cluster control plane\nshared"]
         gw["Gateways\nshared"]
 
@@ -55,7 +60,7 @@ graph TD
     end
 ```
 
-The diagram shows one orchestration cluster boundary with shared control-plane components and tenant-specific execution and storage boundaries.
+The diagram shows one Orchestration Cluster boundary with shared control-plane components and tenant-specific execution and storage boundaries.
 
 The same isolation extends to authentication and authorization, and web apps. Each Physical Tenant authenticates through its own identity provider, gets its own Operate, Tasklist, and Admin, and its own backup and restore, while Logical Tenants remain available for lightweight subdivision inside each one:
 
