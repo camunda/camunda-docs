@@ -84,7 +84,7 @@ See [reliability testing](https://github.com/camunda/camunda/blob/main/docs/test
 
 <TabItem value="without-optimize">
 
-The following configuration is the exact Helm values Camunda runs in its continuous realistic-load tests without Optimize enabled (see [How we test](#how-we-test)), sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) (Orchestration Cluster) and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) (Elasticsearch).
+The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch.
 
 | Component                 |                     | Request | Limit |
 | ------------------------- | ------------------- | ------: | ----: |
@@ -125,7 +125,7 @@ Identity and Keycloak, including Keycloak’s bundled PostgreSQL database, which
 
 When Optimize is enabled, additional resources are needed, especially for Elasticsearch, because Optimize's importer reads from and writes to Elasticsearch indices. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for more details.
 
-The following configuration is the exact Helm values Camunda runs in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)), sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) (Orchestration Cluster) and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) (Elasticsearch).
+The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch.
 
 | Component                 |                     | Request | Limit |
 | ------------------------- | ------------------- | ------: | ----: |
