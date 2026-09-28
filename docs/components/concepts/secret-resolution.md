@@ -77,7 +77,7 @@ The broker path resolves references in a job's variables in the background and i
 The gateway API path serves callers that have no job to wait on.
 
 - An inbound connector resolves the references an expression evaluation used, in batches, through `POST /v2/secrets/resolve`.
-- Camunda Hub calls `POST /v2/secrets/list` to offer known reference names in a [credential's](../../components/hub/organization/credentials) secret fields.
+- Camunda Hub calls `POST /v2/secrets/list` to offer known reference names in a [credential's](/components/hub/organization/credentials/index.md) secret fields.
 
 Both endpoints share a request and response contract described in [secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md). For the full request and response schema of each, see [resolve secrets](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets.api.mdx) and [list secrets](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx).
 
