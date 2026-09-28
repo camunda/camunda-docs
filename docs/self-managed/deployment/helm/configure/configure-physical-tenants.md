@@ -51,7 +51,7 @@ orchestration:
       physical-tenants:
         default:
           cluster:
-            partitions-count: 3
+            partition-count: 3
           document:
             default-store-id: shared-s3
             assigned:
@@ -64,7 +64,7 @@ orchestration:
 
         riskprod:
           cluster:
-            partitions-count: 3
+            partition-count: 3
           data:
             secondary-storage:
               rdbms:
@@ -75,13 +75,41 @@ orchestration:
               - shared-s3
             aws:
               shared-s3:
-                bucket-path: riskprod/ # distinct path — no collision with default
+                bucket-path: riskprod/ # distinct path, no collision with default
           security:
             authentication:
               providers:
                 assigned:
                   - corp-idp
+            initialization:
+              roles:
+                - roleId: riskprod-admin
+                  name: Risk Production Admin
+                  mappingRules:
+                    - riskprod-admins-mapping
+              mappingrules:
+                - mapping-rule-id: riskprod-admins-mapping
+                  claim-name: groups
+                  claim-value: risk-admins
+              authorizations:
+                - ownerType: ROLE
+                  ownerId: riskprod-admin
+                  resourceType: RESOURCE
+                  resourceId: "*"
+                  permissions:
+                    - CREATE
+                - ownerType: ROLE
+                  ownerId: riskprod-admin
+                  resourceType: PROCESS_DEFINITION
+                  resourceId: "*"
+                  permissions:
+                    - CREATE_PROCESS_INSTANCE
+                    - UPDATE_PROCESS_INSTANCE
+                    - READ_PROCESS_INSTANCE
+                    - READ_PROCESS_DEFINITION
 ```
+
+Every explicitly configured tenant needs its own `security.initialization` block when authorization is enabled; it is not inherited from the root or from other tenants.
 
 This is the same configuration shape as the [configuration reference's application.yaml example](/self-managed/concepts/physical-tenants/configuration-reference.md#configuration-examples) — `orchestration.configuration` renders as-is into the pod's `application.yaml`.
 
@@ -100,7 +128,7 @@ orchestration:
           physical-tenants:
             default:
               cluster:
-                partitions-count: 3
+                partition-count: 3
               document:
                 default-store-id: shared-s3
                 assigned:
@@ -113,7 +141,7 @@ orchestration:
 
             riskprod:
               cluster:
-                partitions-count: 3
+                partition-count: 3
               data:
                 secondary-storage:
                   rdbms:
@@ -124,13 +152,41 @@ orchestration:
                   - shared-s3
                 aws:
                   shared-s3:
-                    bucket-path: riskprod/ # distinct path — no collision with default
+                    bucket-path: riskprod/ # distinct path, no collision with default
               security:
                 authentication:
                   providers:
                     assigned:
                       - corp-idp
+                initialization:
+                  roles:
+                    - roleId: riskprod-admin
+                      name: Risk Production Admin
+                      mappingRules:
+                        - riskprod-admins-mapping
+                  mappingrules:
+                    - mapping-rule-id: riskprod-admins-mapping
+                      claim-name: groups
+                      claim-value: risk-admins
+                  authorizations:
+                    - ownerType: ROLE
+                      ownerId: riskprod-admin
+                      resourceType: RESOURCE
+                      resourceId: "*"
+                      permissions:
+                        - CREATE
+                    - ownerType: ROLE
+                      ownerId: riskprod-admin
+                      resourceType: PROCESS_DEFINITION
+                      resourceId: "*"
+                      permissions:
+                        - CREATE_PROCESS_INSTANCE
+                        - UPDATE_PROCESS_INSTANCE
+                        - READ_PROCESS_INSTANCE
+                        - READ_PROCESS_DEFINITION
 ```
+
+Every explicitly configured tenant needs its own `security.initialization` block when authorization is enabled; it is not inherited from the root or from other tenants.
 
 This still requires the base `camunda.security.authentication` and `camunda.document` configuration (shown in the `orchestration.configuration` example above) to be set elsewhere — through `orchestration.configuration` or your own base `application.yaml` — since `extraConfiguration` only adds to that configuration, it doesn't replace it.
 
@@ -150,5 +206,6 @@ Environment variables and `orchestration.configuration` can be combined. Use the
 ## Related pages
 
 - [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)
+- [Set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md)
 - [Configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md)
 - [Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md)
