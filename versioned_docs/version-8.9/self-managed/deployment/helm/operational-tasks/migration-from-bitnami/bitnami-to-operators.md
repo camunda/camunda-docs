@@ -211,13 +211,16 @@ The migration patches the reference ECK cluster manifest from `operator-based/el
 
 Phase 1 compares the Elasticsearch version of your source installation against `spec.version` in the ECK manifest, and stops the migration if the two are incompatible:
 
-| Source to target                                              | Result                             |
-| ------------------------------------------------------------- | ---------------------------------- |
-| Same version                                                  | Allowed                            |
-| Same minor, any patch (8.18.0 to 8.18.3, or 8.18.3 to 8.18.0) | Allowed, the patch is not compared |
-| Newer minor, same major (8.18.0 to 8.19.20)                   | Allowed, logged as an upgrade      |
-| Older minor (8.19.0 to 8.18.0)                                | Blocked, downgrade                 |
-| Different major (8.x to 7.x, or 8.x to 9.x)                   | Blocked                            |
+| Source to target                            | Result                        |
+| ------------------------------------------- | ----------------------------- |
+| Same version                                | Allowed                       |
+| Same minor, higher patch (8.18.0 to 8.18.3) | Allowed                       |
+| Same minor, lower patch (8.18.3 to 8.18.0)  | Blocked, downgrade            |
+| Newer minor, same major (8.18.0 to 8.19.20) | Allowed, logged as an upgrade |
+| Older minor (8.19.0 to 8.18.0)              | Blocked, downgrade            |
+| Different major (8.x to 7.x, or 8.x to 9.x) | Blocked                       |
+
+In short, the target must share the major version of your source and be the same version or newer. A target carrying no patch component counts as patch `0`, so `8.18.1` to `8.18` is a downgrade rather than a match.
 
 The target is allowed to be ahead of the source within the same major version, because reindex from remote reads an older source into a newer target.
 
@@ -767,9 +770,9 @@ ES: major version mismatch (source=8.19.0 → target=9.1.0)
   Reindex-from-remote is only supported within the same major version.
 ```
 
-The preflight check compares the major and minor version of the Elasticsearch running in your source installation against `spec.version` in `operator-based/elasticsearch/elasticsearch-cluster.yml`. Reindex from remote reads an older source into a newer target, so the target minor may be ahead of the source minor, but it cannot be behind it, and the major must match.
+The preflight check compares the Elasticsearch version running in your source installation against `spec.version` in `operator-based/elasticsearch/elasticsearch-cluster.yml`. Reindex from remote reads an older source into a newer target, so the target may be ahead of the source, but it cannot be behind it on any component, and the major must match.
 
-Edit `spec.version` in the ECK manifest so it keeps the major version of your source and its minor is greater than or equal to the source minor, then rerun Phase 1. The patch component is not compared. For the full matrix of accepted combinations, see [Elasticsearch version compatibility](#elasticsearch-version-compatibility).
+Edit `spec.version` in the ECK manifest so it keeps the major version of your source and is the same version or newer, then rerun Phase 1. The patch counts: a lower patch on the same minor is rejected as a downgrade. For the full matrix of accepted combinations, see [Elasticsearch version compatibility](#elasticsearch-version-compatibility).
 
 ### Migration status check
 
