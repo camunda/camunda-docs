@@ -131,7 +131,7 @@ Two variables control the topology, and they are not interchangeable:
 | `regions`             | The full list of region slots the cluster can grow into. A slot contributes a zone once Camunda runs in it. |
 | `active_region_count` | How many of those slots are deployed. At least two.                                                         |
 
-Deploying fewer slots than you provision is the supported growth path. The Camunda zone list covers only the deployed slots, so the cluster is complete at every size: each partition holds all of its replicas, and a region loss is tolerated from the start. A spare slot joins later through the [add-zone procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#add-a-region), which adds its zone to the running cluster.
+Deploying fewer slots than you provision is the supported growth path. The Camunda zone list covers only the deployed slots, so each partition holds all of its replicas at every size. A region loss is tolerated once three or more slots are deployed; with two, losing either zone leaves no majority, so processing stops until the zone returns. A spare slot joins later through the [add-zone procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#add-a-region), which adds its zone to the running cluster.
 
 ### Apply the infrastructure
 

@@ -11,7 +11,7 @@ import RegionLoss from './img/multi-region-rdbms-region-loss.svg';
 
 import MultiRegionRdbmsCopy from '../\_partials/\_multi-region-rdbms-copy.md'
 
-This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup: losing a region, bringing it back, and activating a zone that was declared but never deployed.
+This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup: losing a region, bringing it back, and adding a region.
 
 :::caution
 Develop, test, and rehearse these procedures in a non-production environment before you need them. The commands below are examples from the [reference implementation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md); adapt them to your environment.
@@ -35,7 +35,7 @@ With three or more zones, none of that applies. Every partition keeps a majority
 In step count, the [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. Here, a region loss takes at most five, most of them checks, and bringing the region back is one redeploy.
 
 :::warning Use this runbook only for Multi-Region RDBMS
-This runbook applies only to a zone-aware cluster with three or more zones and RDBMS secondary storage. Don't run the [dual-region procedure](./dual-region-ops.md) on it: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here and can lose data. For a two-region cluster with Elasticsearch, use the dual-region procedure instead.
+This runbook applies only to a zone-aware cluster with RDBMS secondary storage. Its region-loss procedures assume three or more zones; a cluster bootstrapped on two zones uses only [Add a region](#add-a-region) until it runs three. Don't run the [dual-region procedure](./dual-region-ops.md) on it: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here and can lose data. For a two-region cluster with Elasticsearch, use the dual-region procedure instead.
 :::
 
 ## Terminology

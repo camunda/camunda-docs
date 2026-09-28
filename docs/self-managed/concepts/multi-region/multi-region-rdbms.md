@@ -238,7 +238,7 @@ The [operational procedure](/self-managed/deployment/helm/operational-tasks/mult
 | Optimize support            | Not available. Optimize requires Elasticsearch or OpenSearch, regardless of the region count.                                                                                                 |
 | Web Modeler                 | Web Modeler is a standalone component not covered in this guide, and it depends on Management Identity. Modeling applications can operate independently outside the Orchestration Cluster.    |
 | Connectors deployment       | Connectors run in every region and are not deduplicated. Account for [idempotency](/components/connectors/use-connectors/inbound.md#creating-the-connector-event) to avoid event duplication. |
-| Zone list changes           | Activating a zone declared up front is online. Adding a zone that was never declared redistributes partitions across every region.                                                            |
+| Zone list changes           | Adding a zone is online, through the cluster management API: the engine places the new zone's replicas without renumbering brokers. The partition count stays fixed at its bootstrap value.   |
 | Backup and restore          | RDBMS backup relies on continuous primary storage backups plus a database-native backup. See [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).     |
 
 ## Reference implementation
