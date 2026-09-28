@@ -20,28 +20,17 @@ Access tokens have a validity period that can be found in the access token. Afte
 
 ## Create a client
 
-Camunda 8 SaaS supports the following scopes:
-
-- **Orchestration Cluster API**: Access the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).
-- **Optimize API**: Access the [Optimize REST API](/apis-tools/optimize-api/overview.md).
-- **Administration API (Secrets resource)**: Access cluster secrets in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
-
 To create a client, take the following steps:
 
-1. Navigate into the **API** tab.
-2. Click to **create a new client**.
+1. In Camunda Hub, in the left navigation, under **Console**, click **Clusters**.
+2. Select a cluster.
+3. Click the **API** tab.
+4. Click **Create new client**.
+5. Provide a **Client Name** and [**Scopes**](#scopes).
+6. Click **Create**.
+7. Copy or download your client credentials.
 
-![cluster-details](img/cluster-detail-clients.png)
-
-3. In the opened dialog, name your client and define it's **scope**.
-
-![create-client](img/cluster-details-create-client.png)
-
-4. After creating the client, you can select the format for your credentials.
-
-Ensure you keep the generated client credentials in a safe place. The **client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
-
-![created-client](img/cluster-details-created-client.png)
+Ensure you keep the generated client credentials in a safe place. The **client secret** will not be shown again.
 
 The downloaded file contains all necessary information to communicate with your Zeebe instance in the future:
 
@@ -59,6 +48,32 @@ Depending on the scopes granted to these client credentials, the following varia
 - `CAMUNDA_TASKLIST_BASE_URL`: The base URL for Tasklist.
 - `CAMUNDA_OPERATE_BASE_URL`: The base URL for Operate.
 - `CAMUNDA_OPTIMIZE_BASE_URL`: The base URL for Optimize.
+
+## View connection information
+
+To view client connection information:
+
+1. In Camunda Hub, in the left navigation, under **Console**, click **Clusters**.
+2. Select a cluster.
+3. Click the **API** tab.
+4. Select your client.
+5. Under **Connection information**, find the following values:
+   - Cluster ID
+   - Region ID
+   - Cluster URL
+   - Tasklist URL
+   - Operate URL
+   - Optimize URL
+   - OAuth URL
+   - Camunda REST API
+
+## Scopes
+
+Camunda 8 SaaS supports the following scopes:
+
+- **Orchestration Cluster API**: Access the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).
+- **Optimize API**: Access the [Optimize REST API](/apis-tools/optimize-api/overview.md).
+- **Administration API (Secrets resource)**: Access [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret) in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
 
 ## Rate limiting
 

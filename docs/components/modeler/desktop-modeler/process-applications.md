@@ -10,7 +10,7 @@ import OverlayImg from './img/process-applications/overlay.png'
 import DeployImg from './img/process-applications/deploy.png'
 import StartInstanceImg from './img/process-applications/start-instance.png'
 
-Desktop Modeler recognizes [process applications](../../concepts/process-applications.md) you build and offers you advanced editor intelligence, deployment, and execution features within the context of such an application. To identify the boundaries of a process application, Desktop Modeler searches for a `.process-application` file in the root of your project.
+Desktop Modeler recognizes [process applications](../../concepts/projects.md) you build and offers you advanced editor intelligence, deployment, and execution features within the context of such an application. To identify the boundaries of a process application, Desktop Modeler searches for a `.process-application` file in the root of your project.
 
 In professional software development, a typical process application contains resources such as BPMN, DMN, and Form files. These live alongside [job workers](/components/concepts/job-workers.md), implementing process logic, additional application code, and tests. How exactly your project is structured may vary depending on the implementation language, libraries, and frameworks you use.
 

@@ -231,17 +231,27 @@ The next steps focus on the Camunda application-specific configurations suitable
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-The following example configures an ILM policy for the Orchestration Cluster, and can be added to your `orchestration-values.yaml`:
+The Helm value **`orchestration.history.retention`** configures retention for archived Operate, Tasklist, and Camunda indices stored in secondary storage (for example, `operate-process-*`, `tasklist-task-*`).
+
+The following example configures an ILM policy for the Orchestration Cluster's archived history indices and can be added to the Helm values file `orchestration-values.yaml`:
 
 ```yaml
 orchestration:
-  retention:
-    enabled: true
-    minimumAge: 30d
-    policyName: zeebe-record-retention-policy
+  history:
+    rolloverInterval: 7d
+    retention:
+      enabled: true
+      minimumAge: 30d
+      policyName: camunda-history-retention-policy
 ```
 
-For more information on configuring ILM policy, refer to the configuration guide on the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration).
+:::warning
+The `orchestration.history.rolloverInterval` value significantly affects Elasticsearch/OpenSearch performance. Review the [data retention performance](/self-managed/deployment/helm/configure/data-retention.md#performance) section to ensure the value fits your use case.
+:::
+
+:::note
+For more information on configuring both retention policy types, refer to the [data retention configuration guide](/self-managed/deployment/helm/configure/data-retention.md).
+:::
 
 ### Configure backups
 

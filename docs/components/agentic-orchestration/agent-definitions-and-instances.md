@@ -57,6 +57,12 @@ For a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), the AI Agent 
 
 For an [external agent](/reference/glossary.md#external-agent), Camunda doesn't ship an element template, so add the marker to the BPMN XML yourself. See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for the full setup, including how to package your agent as a custom element template.
 
+:::info Update element templates created before Camunda 8.10
+If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template.
+
+Open the process in Camunda Hub or Desktop Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+:::
+
 #### Mark an element as an agent in XML
 
 The marker is an extension element on the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) or [service task](/components/modeler/bpmn/service-tasks/service-tasks.md) that hosts the agent. Its `agentType` attribute declares the [agent type](#what-an-agent-definition-contains), and accepts `aiAgentSubProcess`, `aiAgentTask`, or `external`.
@@ -137,6 +143,12 @@ The conversation history captures the full reasoning chain of an agent execution
 Grouping the history by loop iteration makes it easier to reference a specific point in an agent's execution. Rather than describing a moment in time, you can refer to a specific loop iteration, for example "on loop iteration five the agent called this tool."
 
 Operate labels each entry in the conversation history simply as `iteration` (for example, `5. iteration`) as shorthand for loop iteration.
+
+#### Model reasoning in conversation history
+
+Operate displays readable model reasoning as a static **Thinking** entry before the assistant’s response. It recognizes non-empty text in the assistant history marked with `camunda.agenticai.content.type: reasoning`.
+
+To display readable model reasoning where supported, [migrate to the AI Agent element templates introduced in Camunda 8.10](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md). If you do not see **Thinking**, confirm that your [model provider](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) returns readable reasoning. Opaque or redacted reasoning is not displayed.
 
 #### Visibility for external agents
 

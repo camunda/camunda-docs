@@ -639,6 +639,32 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 | Backup storage     | Zeebe is configured with the same backup storage as outlined in the [prerequisites](backup-and-restore.md#prerequisites).                                                                        |
 | Components stopped | It’s critical that no Camunda components are running during a Zeebe restore. Restored components may propagate an incorrect cluster configuration, potentially disrupting cluster communication. |
 
+:::warning
+From Camunda 8.8 onward, Zeebe data is stored at `/usr/local/camunda/data`. The restore script, the broker container, and any `initContainer` must mount the same persistent volume claim at this path. A leftover `/usr/local/zeebe/data` mount from a pre-8.8 `initContainer` can cause the restore to write outside the persistent volume claim, leaving Zeebe data unrestored.
+:::
+
+Before you start the restore, verify the mount path for every container that touches Zeebe data:
+
+```bash
+kubectl get statefulset <release>-orchestration -o yaml
+```
+
+Confirm that the main container and every `initContainer` mount the same path:
+
+```yaml
+spec:
+  template:
+    spec:
+      containers:
+        - volumeMounts:
+            - mountPath: /usr/local/camunda/data
+      initContainers:
+        - volumeMounts:
+            - mountPath: /usr/local/camunda/data
+```
+
+Confirm any restore script also writes to `/usr/local/camunda/data`.
+
 ### Restore Zeebe Cluster
 
 :::note
@@ -768,7 +794,7 @@ If the restore fails, you can re-run the application after fixing the root cause
 If the data directory is not empty, the restore will fail with an error message:
 
 ```
-Brokers's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+Brokers's data directory /usr/local/camunda/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
 ```
 
 On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted.

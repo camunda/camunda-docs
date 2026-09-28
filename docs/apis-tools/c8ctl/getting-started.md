@@ -24,7 +24,7 @@ Use `c8ctl` to:
 
 - Inspect running clusters — list process instances, user tasks, incidents, and jobs.
 - Deploy BPMN, DMN, and form resources, optionally watching for file changes.
-- Manage profiles for multiple clusters, including profiles imported from Camunda Modeler.
+- Manage profiles for multiple clusters, including profiles imported from Desktop Modeler.
 - Extend the CLI with custom plugins.
 
 ## Prerequisites
@@ -108,6 +108,33 @@ c8 cluster purge 8.8
 c8 cluster stop --purge
 ```
 
+### Manage secrets
+
+`c8 cluster secrets` forwards to the `secrets` command of the c8run binary c8ctl already downloads and manages. c8ctl adds no storage of its own and never sees a secret value: `set` prompts for the value without echoing it (or reads exactly one value from stdin with `--stdin`), and the store is c8run's, shared across versions and projects for the current OS user.
+
+```bash
+# Store a secret — prompts, no-echo
+c8 cluster secrets set OPENAI_API_KEY
+
+# List secret names (values are never shown)
+c8 cluster secrets list
+
+# Import multiple secrets from a dotenv file
+c8 cluster secrets import .env.secrets
+
+# Delete a secret without an interactive prompt
+c8 cluster secrets delete OPENAI_API_KEY --yes
+
+# Target a specific installed version instead of the running/highest one
+c8 cluster secrets --c8-version 8.10 list
+```
+
+Everything after `secrets` is passed to c8run unchanged, so any verb or flag c8run supports works here too, including ones added after this was written — run `c8 cluster secrets help` for c8run's own help (`--help` on the `c8ctl` command itself belongs to c8ctl). This requires a c8run build that includes the `secrets` command; older cached versions print a hint if it is missing. Until then, or as an ephemeral alternative for a single run, pass secrets as environment variables when starting instead:
+
+```bash
+SECRET_OPENAI_API_KEY=sk-... c8 cluster start
+```
+
 ### Version aliases
 
 The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Download Center](https://downloads.camunda.cloud/release/camunda/c8run/):
@@ -187,7 +214,7 @@ c8 deploy ./process.bpmn --profile=prod
 c8 search ut --assignee=jane --profile=dev
 ```
 
-The `--profile` flag works with both `c8ctl` profiles and Camunda Modeler profiles (prefixed with `modeler:`):
+The `--profile` flag works with both `c8ctl` profiles and Desktop Modeler profiles (prefixed with `modeler:`):
 
 ```bash
 c8 list pi --profile=modeler:Cloud Cluster
@@ -213,7 +240,7 @@ c8 list pi   # uses my-tenant-id
 `c8ctl` supports two types of profiles:
 
 1. `c8ctl` profiles — managed directly with `c8ctl` commands.
-2. Camunda Modeler profiles — automatically imported from Camunda Modeler (read-only, prefixed with `modeler:`).
+2. Desktop Modeler profiles — automatically imported from Desktop Modeler (read-only, prefixed with `modeler:`).
 
 ### Add a profile
 
@@ -251,13 +278,34 @@ source .env.prod
 c8 add profile prod --from-env
 ```
 
+### Gateway-fronted clusters
+
+For a cluster reached through an API gateway or reverse proxy, a profile can attach a custom header to every request and target `--baseUrl` exactly, without `c8ctl`'s automatic `/v2` suffixing:
+
+```bash
+# Attach a header (e.g. an API key) to every REST request made under this profile.
+# Repeat --header to attach more than one.
+c8 add profile gateway \
+  --baseUrl=https://gateway.example.com/camunda-api \
+  --header "X-Api-Key: your-api-key" \
+  --header "X-Correlation-Id: your-correlation-id"
+
+# --exactBaseUrl: use --baseUrl as the exact request path instead of
+# appending /v2 (the default for self-managed profiles).
+c8 add profile gateway-exact \
+  --baseUrl=https://gateway.example.com/camunda-api \
+  --exactBaseUrl
+```
+
+Both flags are optional and independent of each other. A profile that sets neither behaves exactly as before.
+
 ### List profiles
 
 ```bash
 c8 list profiles
 ```
 
-Lists both `c8ctl` and Modeler profiles. Modeler profiles appear with a `modeler:` prefix.
+Lists both `c8ctl` and modeler profiles. Modeler profiles appear with a `modeler:` prefix.
 
 ### Switch the active profile
 
@@ -282,12 +330,12 @@ c8 rm profile prod   # alias
 ```
 
 :::note
-Modeler profiles are read-only. They cannot be modified or removed through `c8ctl` — manage them in Camunda Modeler.
+Modeler profiles are read-only. They cannot be modified or removed through `c8ctl` — manage them in Desktop Modeler.
 :::
 
-### Camunda Modeler integration
+### Desktop Modeler integration
 
-`c8ctl` automatically reads profiles from Camunda Modeler's `profiles.json` file. These profiles are:
+`c8ctl` automatically reads profiles from Desktop Modeler's `profiles.json` file. These profiles are:
 
 - **Read-only** — cannot be modified or deleted via `c8ctl`.
 - **Prefixed** — always displayed with a `modeler:` prefix (for example, `modeler:Local Dev`).
@@ -302,10 +350,10 @@ Platform-specific locations:
 | Windows  | `%APPDATA%\camunda-modeler\profiles.json`                     |
 
 ```bash
-# Use a Modeler profile as the active session profile
+# Use a modeler profile as the active session profile
 c8 use profile "modeler:Local Dev"
 
-# Use a Modeler profile for a single command
+# Use a modeler profile for a single command
 c8 list pi --profile=modeler:Cloud Cluster
 ```
 

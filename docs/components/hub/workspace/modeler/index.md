@@ -1,18 +1,13 @@
 ---
 id: index
-title: Web Modeler
+title: Modeling in Camunda Hub
 sidebar_label: About
-description: "Camunda Web Modeler is a collaborative, browser-based application for modeling BPMN, DMN, Camunda Forms, and element templates for Camunda 8. It enables teams to collaboratively design, implement, and deploy processes."
+description: "Camunda Hub provides a collaborative, browser-based interface for modeling BPMN, DMN, Camunda Forms, and element templates for Camunda 8. It enables teams to collaboratively design, implement, and deploy processes."
 ---
 
 import DocCardList from '@theme/DocCardList';
 
-<span class="badge badge--cloud">Camunda 8 only</span>
-
-Web Modeler is a browser-based application for modeling BPMN, DMN, Camunda Forms, and element templates.  
-It enables teams to collaboratively design executable processes as the foundation for scalable IT and business automation.
-
-![Web Modeler Screenshot](./img/context-pad/overview.png)
+Camunda Hub provides a collaborative, browser-based interface for modeling BPMN, DMN, Camunda Forms, and element templates for Camunda 8. It enables teams to collaboratively design, implement, and deploy processes.
 
 ## Key features
 
@@ -22,14 +17,14 @@ It enables teams to collaboratively design executable processes as the foundatio
 | [Element templates](./element-templates/using-templates.md)                   | Reuse building blocks to standardize modeling across teams and workspaces.                      |
 | [Collaboration](./collaboration/collaboration.md)                             | Work with team members to speed up the process development cycle.                               |
 | [Test mode](validation/test-your-process.md)                                  | Test and validate processes during development.                                                 |
-| [Camunda Marketplace](./modeling/camunda-marketplace.md)                      | Extend Web Modeler with prebuilt blueprints and connectors.                                     |
+| [Camunda Marketplace](./modeling/camunda-marketplace.md)                      | Extend functionality with prebuilt blueprints and connectors.                                   |
 | [Projects](/components/hub/workspace/manage-projects/manage-projects.md)      | Work with sets of files and deploy them in a single bundle.                                     |
 | [Git synchronization](/components/hub/workspace/manage-projects/git-sync.md)  | Connect projects to Git repositories for version control.                                       |
 | [Process landscape visualization](./process-landscape-visualization.md)       | View dependencies and interactions between processes at a glance.                               |
 | [Intelligent Document Processing (IDP)](./intelligent-document-processing.md) | Extract and process data from documents to accelerate process automation.                       |
 | [AI-powered assistance](modeling/advanced-modeling/camunda-docs-ai.md)        | Get intelligent modeling suggestions and automation support.                                    |
 
-## Access Web Modeler
+## Access the modeler
 
 Access the modeler in [Camunda Hub](/components/hub/index.md). No installation is required.
 

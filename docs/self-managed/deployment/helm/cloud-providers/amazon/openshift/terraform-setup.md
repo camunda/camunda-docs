@@ -12,6 +12,7 @@ import TabItem from "@theme/TabItem";
 import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
 import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
 import RosaHcpAuth from '../../\_partials/\_rosa-hcp-auth.md'
+import CostManagement from "../../../../_partials/_cost-management.md";
 
 This guide provides a detailed tutorial for deploying a [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) capabilities. It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
@@ -48,17 +49,13 @@ This setup provides a foundational starting point for working with Camunda 8, th
 
 Terraform can initially appear complex. If you're new to it, you might want to start by considering trying out the [Red Hat OpenShift on AWS UI-based tutorial](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-getting-started.html). This guide will show you what resources are created and how they interact with each other.
 
-If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. This guide uses integrated Helm chart database services in its example path (PostgreSQL and Elasticsearch), but you can choose another supported secondary storage backend for the Orchestration Cluster, including RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. This guide uses integrated Helm chart database services in its example path (PostgreSQL and Elasticsearch), but you can choose another supported secondary storage backend for the Orchestration Cluster. To run the Orchestration Cluster on a relational database instead of Elasticsearch, follow the RDBMS steps in the [Red Hat OpenShift Helm guide](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md#deploy-postgresql), which deploy an in-cluster `pg-camunda` database with CloudNativePG. See also [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) and the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the supported engines.
 
 For testing Camunda 8 or developing against it, you might consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have a Red Hat OpenShift cluster on AWS, you can skip ahead to the [Helm setup guide](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md).
 
 To keep this guide concise, we provide links to additional documentation covering best practices, allowing you to explore each topic in greater depth.
 
-:::danger Cost management
-
-Following this guide will incur costs on your cloud provider account and your Red Hat account, specifically for the managed OpenShift service, OpenShift worker nodes running in EC2, the hosted control plane, Elastic Block Storage (EBS), and Route 53. For more details, refer to [ROSA AWS pricing](https://aws.amazon.com/rosa/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/) as total costs vary by region.
-
-:::
+<CostManagement />
 
 ### Variants
 

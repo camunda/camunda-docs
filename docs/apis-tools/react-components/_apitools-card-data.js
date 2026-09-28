@@ -10,6 +10,8 @@ import IconMcpImg from "../img/icon-mcp.png";
 import IconCliImg from "../img/icon-cli.png";
 import IconPythonImg from "../img/icon-python.png";
 import IconCsharpImg from "../img/icon-csharp.png";
+// TODO: replace with a dedicated icon-php.png once the asset is available.
+import IconPhpImg from "../img/icon-earlyaccess.png";
 // TODO: replace with a dedicated icon-rust.png once the asset is available.
 import IconRustImg from "../img/icon-earlyaccess.png";
 // TODO: replace with a dedicated icon-go.png once the asset is available.
@@ -138,6 +140,14 @@ export const clientCards = [
     image: IconGoImg,
     description:
       "Technical preview of the Go client SDK for the Camunda 8 Orchestration Cluster REST API.",
+    type: "",
+  },
+  {
+    link: "../php-sdk/",
+    title: "PHP SDK",
+    image: IconPhpImg,
+    description:
+      "Technical preview of the PHP client SDK for the Camunda 8 Orchestration Cluster REST API.",
     type: "",
   },
 ];

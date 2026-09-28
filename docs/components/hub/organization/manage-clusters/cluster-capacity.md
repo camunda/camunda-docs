@@ -1,12 +1,9 @@
 ---
 id: cluster-capacity
-title: Cluster load
+title: Monitor cluster load
 description: "Cluster load provides you with a high-level overview of how well a cluster is coping with and handling its current workload."
 keywords: [capacity, "cluster capacity", load, "cluster load"]
 ---
-
-import CapacityImg from './img/cluster-capacity.png';
-import CapacityPercentImg from './img/cluster-capacity-percent.png';
 
 Use the cluster load metric to view and manage your cluster load and utilization.
 
@@ -23,29 +20,26 @@ A general guideline to follow when using the cluster load metric is:
 
 - **Low cluster load percentage**: The lower the cluster load percentage value, the more you could increase the cluster workload as the cluster is probably underused. For example, if a cluster load is only 5% then the cluster can probably accept more workload and may be underused.
 
-:::info
+:::note
 To understand how cluster load is calculated, see [how cluster load is calculated](#load-calculation).
 :::
 
 ## View cluster load
 
-If your cluster supports load monitoring, the cluster load percentage is shown in the **Load** column on the Camunda Hub **Clusters** tab.
+View cluster load in the **Clusters** page:
 
-<img src={CapacityPercentImg} alt="Example cluster load percentage" />
-
-Select a cluster to view detailed cluster load information on the cluster **Overview** tab.
-
-<img src={CapacityImg} alt="Example cluster load" style={{width: '550px'}}/>
-
-- The current cluster load is shown as a percentage bar at the top of the section.
-- The chart shows detailed cluster load data for the last 24 hours, 7 days, or 30 days.
-  - Select the time period you want to view data for.
-  - Hover over individual nodes in the chart to view data for a specific time or day.
-- Click the **Refresh** icon to refresh and update the cluster load data.
+1. In the left navigation under **Console**, click **Clusters**.
+1. In the table, find the **Cluster load** column.
+1. Select a cluster to view detailed cluster load information in the cluster **Overview** tab.
+   - The current cluster load is shown as a percentage bar at the top of the section.
+   - The chart shows detailed cluster load data for the last 24 hours, 7 days, or 30 days.
+   - Select the time period you want to view data for.
+   - Hover over individual nodes in the chart to view data for a specific time or day.
+   - Click the **Refresh** icon to refresh and update the cluster load data.
 
 ## Manage cluster load
 
-Cluster load will fluctuate based on incoming user requests, and internal processing load.
+Cluster load will fluctuate based on incoming user requests and internal processing load:
 
 - User requests are those sent directly by an external client.
 - Internal load refers to all other processing that is **not** directly triggered by a client. For example, timer events, a job being made available after back off, and so on.

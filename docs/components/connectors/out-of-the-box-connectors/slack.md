@@ -18,6 +18,10 @@ import TabItem from "@theme/TabItem";
 
 The **Slack connector** is an outbound connector that allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
+:::note
+If your organization uses [Camunda app integrations](/components/camunda-integrations/app-integrations/app-integrations.md), the [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md) sends through the app your users already have connected, and carries no credentials in the process model.
+:::
+
 ## Prerequisites
 
 To use the Slack connector, a Slack app must be registered with the Slack workspace you would like to send messages to. A respective OAuth token needs to be configured as a secret in your cluster. Follow [these steps in the appendix](#appendix) to learn how to set this up.
@@ -222,6 +226,10 @@ We advise you to keep your Slack bot token safe and avoid exposing it in the BPM
 The **Slack inbound connector** is a connector that allows you to start or continue
 a BPMN process triggered by a [Slack](https://slack.com/) message.
 
+:::note
+If your organization uses [Camunda app integrations](/components/camunda-integrations/app-integrations/app-integrations.md), the [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message) receives chat messages through the app your users already have connected.
+:::
+
 ## Create a Slack inbound connector task
 
 1. Start building your BPMN diagram. You can use the **Slack inbound connector** with either a **Start Event** or **Intermediate Catch Event**.
@@ -318,7 +326,7 @@ When you click on the event with **Slack inbound connector** applied to it, a ne
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use Slack inbound connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, Slack inbound connector deployments and URLs will not be displayed in Modeler.
+In that case, Slack inbound connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 ## Wiring with Slack

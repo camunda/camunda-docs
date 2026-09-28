@@ -62,7 +62,7 @@ In standard BPMN, an interrupting event subprocess cancels its parent scope when
 
 For the AI Agent Sub-process (implemented as an ad-hoc sub-process):
 
-- **Only non-interrupting event subprocesses are allowed** on the agent scope, by design and enforced by Modeler.
+- **Only non-interrupting event subprocesses are allowed** on the agent scope, by design and enforced by the modeling interface.
 - The **Event handling behavior** field controls how the agent treats running tool calls when such a (non-interrupting) event subprocess is triggered:
   - [Wait for tool call results](#wait-for-tool-call-results): the event handler runs only after all tool calls complete.
   - [Cancel tool calls](#cancel-tool-calls): running tools are canceled, and their cancellation is surfaced to the LLM, even though the event subprocess itself remains non-interrupting from a BPMN perspective.

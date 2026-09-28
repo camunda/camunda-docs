@@ -1,0 +1,302 @@
+---
+id: restore-project-snapshot
+title: "Restore a project snapshot"
+description: "Restores the project to the state captured in this project snapshot: file contents, names and folder locations are all reset to the snapshot, files added since are removed, and files deleted since are recreated."
+sidebar_label: "Restore a project snapshot"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Restore a project snapshot"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/project-snapshots/{projectSnapshotKey}/restoration"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Restores the project to the state captured in this project snapshot: file contents, names and folder locations are all reset to the snapshot, files added since are removed, and files deleted since are recreated.
+Before anything is replaced, the project's current state is preserved as a new, automatically named project snapshot, unless the project has not changed since its most recent project snapshot. The restored-to project snapshot itself is left unchanged, so it can be restored again later.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "projectSnapshotKey",
+      in: "path",
+      required: true,
+      description: "The unique key of the project snapshot.",
+      schema: {
+        description: "System-generated key for a project snapshot.",
+        type: "string",
+        format: "ProjectSnapshotKey",
+        "x-semantic-type": "ProjectSnapshotKey",
+        example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+        title: "ProjectSnapshotKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The project snapshot was restored successfully." },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

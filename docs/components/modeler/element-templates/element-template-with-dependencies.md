@@ -6,6 +6,8 @@ description: "Learn what you need to consider when handling template dependencie
 
 When creating element templates, you may want to link to a resource like a [form](/components/modeler/forms/camunda-forms-reference.md), or pre-populate a [secret](/components/connectors/use-connectors/index.md#using-secrets) expression. Your template might require a specific [job worker](/components/concepts/job-workers.md) to execute an action. These are all examples of dependencies.
 
+<!-- source: https://www.figma.com/design/VyyoV0hNbazXV8DKcMMEU9/Camunda-Documentation-Assets?node-id=2092-171&t=iLUDOvmj8m6yUQ5U-1 -->
+
 ![Element template dependencies](./img/element-template-dependencies.png)
 
 Element templates can depend on:
@@ -24,12 +26,12 @@ To make a template available for use, complete two key steps:
    - Secrets must be configured beforehand.
    - Other dependency types (e.g., Camunda forms, RPA scripts, DMN decisions) need to be deployed to the cluster.
 
-2. **Make the template available at design time**: Ensure Web Modeler or Desktop Modeler can access the template for use in your projects.
+2. **Make the template available at design time**: Ensure Camunda Hub or Desktop Modeler can access the template for use in your projects.
 
 ## Next steps
 
 - [Defining element templates](./defining-templates.md)
-- [Publishing an element template in Web Modeler](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template)
-- [Using element templates in Web Modeler](/components/hub/workspace/modeler/element-templates/using-templates.md)
+- [Publishing an element template in Camunda Hub](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template)
+- [Using element templates in Camunda Hub](/components/hub/workspace/modeler/element-templates/using-templates.md)
 - [Configuring element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md)
 - [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)

@@ -16,6 +16,8 @@ Upgrading a Helm-based dual-region Camunda 8 Self-Managed deployment from 8.7 to
 
 1. If your deployment requires component-specific upgrade steps, also review the [component upgrade guide](../components/870-to-880.md).
 
+You can use the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md#migrate-layered-overrides) with source `8.7` and target `8.8` to prepare copies of your regional override files. Review the output and findings. The toolkit doesn't replace the manual exporter configuration, regional coordination, or data-migration steps in these guides.
+
 :::info
 Dual-region deployments, as described in [dual-region setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), require manual exporter configuration.
 :::

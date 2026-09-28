@@ -52,6 +52,8 @@ If you are still using a Camunda Helm chart that references the old repository, 
 
 Configuration adjustments may be required when upgrading to a new version of the Helm chart. Before beginning your upgrade, ensure you have implemented any changes required by your new version.
 
+For an upgrade from 8.7 to 8.8, you can [prepare your overrides with the Camunda Helm Toolkit](guides/camunda-helm-toolkit.md#migrate-from-the-cli). Review its findings and follow the 8.8 upgrade procedure linked from that guide. The toolkit doesn't handle the earlier upgrade paths described below or validate an unmigrated 8.7 file.
+
 :::note
 With the 8.7 release, no special configuration is required to update Helm from 8.6 to 8.7. Review the full [8.6 to 8.7 update guide](/self-managed/operational-guides/update-guide/860-to-870.md) for additional details.
 :::

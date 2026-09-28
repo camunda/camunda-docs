@@ -17,6 +17,7 @@ import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../../\_partials/\_deploy-eck-elasticsearch.md'
 import DeploymentReadinessCheck from '../../\_partials/\_deployment-readiness-check.md'
+import ZeebeGatewayNetworkPolicies from '../../\_partials/\_zeebe-gateway-network-policies.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster and confirming that it is working as intended.
 
@@ -266,7 +267,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/azure/k
 
 For secure operation, do not publicly expose the Zeebe Gateway Service. Keep it reachable only within your Azure Virtual Network (for example, by deploying it without a public Ingress) and access it from internal services or over a private network extension such as an Azure VPN or ExpressRoute connection. This reduces external attack surface while preserving controlled operational access.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+<ZeebeGatewayNetworkPolicies />
 
 :::
 
