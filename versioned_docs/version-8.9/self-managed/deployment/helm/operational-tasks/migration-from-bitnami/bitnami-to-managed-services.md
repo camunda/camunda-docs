@@ -190,7 +190,7 @@ In external mode you must also provide the `EXTERNAL_PG_*` or `EXTERNAL_ES_*` co
 
 ### Data-only cutover with `SKIP_HELM_UPGRADE`
 
-Set `SKIP_HELM_UPGRADE=true` to run the Phase 3 data migration, the backup, restore, and reindex, but skip the final `helm upgrade`. The caller then owns the chart upgrade.
+Set `SKIP_HELM_UPGRADE=true` to run the Phase 3 data migration, the backup and the restore, but skip the final `helm upgrade`. The caller then owns the chart upgrade. Elasticsearch is reindexed as part of that phase only if you ran Phase 2 with `ES_WARM_REINDEX=true`; with the default `ES_WARM_REINDEX=false` and an external target, `3-cutover.sh` warns that automated transfer is unsupported and you move the data yourself.
 
 This is intended for continuous integration harnesses that migrate Bitnami data onto external infrastructure and then perform an N to N+1 chart upgrade themselves. Normal migrations leave it `false`. Setting `KEYCLOAK_TARGET_MODE=external` derives it automatically, so you do not set it yourself in that case.
 

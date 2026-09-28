@@ -111,7 +111,7 @@ Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for
 
 `ES_INDEX_PREFIXES` selects which Elasticsearch indices the migration lists, reindexes, and re-aliases. Indices outside these patterns are ignored without warning, so an installation using a custom index prefix migrates successfully while leaving that data behind.
 
-Each component's prefix is configured independently, through the Helm value `orchestration.index.prefix` or the equivalent `camunda.data.secondary-storage.elasticsearch.index-prefix` setting. See [configure Elasticsearch prefix indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md) for the full picture. Keep every default pattern and add your custom ones, rather than replacing the list: a pattern that matches no index is skipped harmlessly, while a missing pattern silently drops a whole index family.
+Prefixes come from several independent settings, not one. `orchestration.index.prefix` covers the Orchestration Cluster indices, `global.elasticsearch.prefix` or `global.opensearch.prefix` covers the legacy `zeebe-record` indices, and Optimize carries its own through `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or its OpenSearch equivalent. Work through [configure Elasticsearch prefix indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md) and add every prefix your installation actually sets, since deriving the list from one setting alone leaves the other index families behind. Keep every default pattern as well as your custom ones: a pattern that matches no index is skipped harmlessly, while a missing pattern silently drops a whole index family.
 
 ```bash
 # Defaults retained, custom Zeebe and Operate prefixes added
@@ -131,6 +131,8 @@ The `*_DB_NAME` and `*_DB_USER` variables above name the databases and roles the
 | Web Modeler | `web-modeler`                            | `webmodeler`                         |
 
 The migration scripts read the real source database and role from the Bitnami StatefulSet at runtime, so you don't need to configure them. Restores run with `--no-owner --no-privileges`, which is why a differing source role is not a problem.
+
+Detection arrived with [camunda-deployment-references#3511](https://github.com/camunda/camunda-deployment-references/pull/3511). Check your copy of `env.sh` before relying on it. Older copies default `*_SOURCE_DB_NAME` and `*_SOURCE_DB_USER` to the target names, so a stock installation backs up `keycloak` and `webmodeler` rather than the `bitnami_keycloak` and `web-modeler` the source actually serves, and the migration fails. If your `env.sh` still carries those defaults, set the overrides explicitly as shown below.
 
 Override the detection only if your installation was renamed away from the chart defaults, or if you want to back up a different database:
 
