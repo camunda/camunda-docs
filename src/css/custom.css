@@ -321,7 +321,7 @@ we make it less bold compared to the search keyword */
 }
 
 .page-description {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 400;
   margin-top: -15px;
   margin-bottom: 40px !important;
@@ -2251,7 +2251,7 @@ h3.subheading {
   margin-bottom: 40px;
   margin-top: -10px;
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 @media (max-width: 996px) {
   .hero-topic {
@@ -2265,6 +2265,7 @@ h3.subheading {
   background-color: #171717;
   border-color: #171717;
   color: #fff !important;
+  font-size: 0.925rem;
   transition: all 0.3s;
 }
 
