@@ -668,13 +668,13 @@ Introduced in 8.9 as an immutable domain-specific identifier, Business ID in 8.1
 
 ## Camunda design system
 
-The new visual Camunda design system is introduced for Admin, Camunda Hub, and Tasklist with the 8.10 release.
+The new visual Camunda design system and navigation are introduced for all components with the 8.10 release in both SaaS and Self-Managed.
 
 <img src={DesignSystem} alt="Camunda design system" class="img-noborder img-transparent img-900"/>
 
-- The new, streamlined design system offers a cleaner, more consistent look across components.
-- Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
-- The new design system is enabled by default in both Self-Managed and SaaS.
+- **Updated navigation:** A persistent sidebar makes it easy to jump between pages and accomplish tasks.
+- **Clear context:** The top bar shows which organization, workspace, and component you are working in.
+- **Designed for accessibility:** The interface follows accessibility best practices, including keyboard navigation and color contrast.
 
 ## Centralized secret resolution via Zeebe
 
