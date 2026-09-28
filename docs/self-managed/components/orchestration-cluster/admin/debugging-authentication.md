@@ -84,9 +84,11 @@ With these settings, you can trace request handling and how Spring Security filt
 The Orchestration Cluster checks its OIDC configuration at startup, without contacting the provider, and writes a warning for each problem it finds. It still starts, so a login can fail later for a problem that was already reported at startup. Read these warnings first.
 
 - The logger `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` reports a missing client ID, an incomplete set of endpoints, an unusable scope, and a redirect URI that cannot expand to a usable callback URL. Each entry names the provider.
-- The logger `io.camunda.security.spring.oidc.OidcRedirectionEndpoint` reports a redirect URI with no callback path. The cluster then uses `{baseUrl}/sso-callback`, and the login completes.
+- The logger `io.camunda.security.spring.oidc.OidcRedirectionEndpoint` reports a redirect URI with no callback path, or with a path that has no leading slash. The cluster then uses `{baseUrl}/sso-callback`, and the login completes.
 
 A redirect URI that is unusable in any other way stays as configured. See [redirect URI](connect-external-identity-provider.md#redirect-uri).
+
+These checks run once while the cluster starts. The cluster writes each warning one time, and it does not repeat or limit them. The configuration cannot change while the cluster runs, so a new warning needs a restart. A change on the identity provider, such as a different list of permitted redirect URIs, writes no warning at all. Use a synthetic login to detect such a change.
 
 ## Requests fail when an identity provider is unreachable
 
@@ -99,13 +101,13 @@ While a provider is unreachable:
 - All other requests succeed.
 - Each new request tries again. The cluster serves the failed traffic again when the provider answers. You do not need to restart the cluster.
 - The cluster holds no queue of failed requests, and it makes no attempt in the background. One request makes one attempt, so the load on the provider is the rate of the requests that need it. The cluster keeps the first result that it gets, so the attempts stop when the provider answers.
-- A failed request writes a warning for the resolution that failed: a client registration, a token decoder, or a UserInfo endpoint lookup. The cluster writes at most one warning each minute for each of these. A minute without a failed request writes nothing.
+- A failed request writes a warning that names the step that failed — a client registration, the access-token decoder, or a UserInfo endpoint lookup — and the provider with its issuer. The cluster writes at most one warning each minute for each combination of step and provider. A minute without a failed request writes nothing.
 
 An unreachable provider no longer stops the cluster from starting. For a provider that the cluster resolves through its issuer URI, this warning is your only signal that part of the authentication traffic fails. Monitor your log pipeline for `WARN` entries of the logger `io.camunda.security.spring.oidc.DeferredOidcResolution`. Each entry starts with `Failed to resolve`.
 
 The warning follows the traffic, and it is not a health check of the provider. A cluster that gets no request for an unreachable provider writes no warning. Use a synthetic login or a synthetic API request if you must detect such an outage before a user does.
 
-The warning gives the provider, its issuer, and the scope. It does not give the endpoint that did not answer. Read the exception that the warning attaches to find that endpoint. For a provider that is configured with an issuer URI, this is the discovery endpoint `<issuer-uri>/.well-known/openid-configuration`. Then make sure that the cluster can reach that endpoint. See [test the IdP directly](#test-the-idp-directly).
+The warning gives the step that failed and the provider with its issuer. It does not give the endpoint that did not answer. Read the exception that the warning attaches to find that endpoint. For a provider that is configured with an issuer URI, this is the discovery endpoint `<issuer-uri>/.well-known/openid-configuration`. Then make sure that the cluster can reach that endpoint. See [test the IdP directly](#test-the-idp-directly).
 
 A provider that sets `jwk-set-uri` or `user-info-uri` needs no discovery. A failure of these endpoints therefore gives a different signal:
 
