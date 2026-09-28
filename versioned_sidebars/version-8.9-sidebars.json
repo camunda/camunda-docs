@@ -1344,6 +1344,8 @@
             "components/saas/byok/faq-and-troubleshooting"
           ]
         },
+        "components/saas/backups",
+        "components/saas/cross-region-cold-recovery",
         {
           "type": "category",
           "label": "Backup and restore",

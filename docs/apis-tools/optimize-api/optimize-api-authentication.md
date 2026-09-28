@@ -57,7 +57,7 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
 
 <TabItem value='self-managed'>
 
-1. [Configure the `api.audience` setting](/self-managed/components/optimize/configuration/system-configuration.md#public-api) in your Optimize installation to match the audience property of the **Optimize API** in [Management Identity](/self-managed/components/management-identity/access-management/access-management-overview.md).
+1. [Configure the `camunda.security.authentication.oidc.audiences` setting](/self-managed/concepts/authentication/authentication-to-optimize.md#configure-oidc-for-optimize) in your Optimize installation to match the audience property of the **Optimize API** in [Management Identity](/self-managed/components/management-identity/access-management/access-management-overview.md).
 2. [Add an M2M application in Management Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
 3. [Add permissions to this application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) for **Optimize API**.
 4. Capture the `Client ID` and `Client Secret` from the application in Management Identity.
@@ -81,9 +81,7 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
    ```
 6. Capture the value of the `access_token` property and store it as your token.
 
-:::note
-The Optimize API can also be configured in a Self-Managed environment to authenticate using a single shared access token. See [External API Configuration](/self-managed/components/optimize/configuration/system-configuration.md#external-api) for the configuration required to access the public API using a specific token.
-:::
+Through Camunda 8.9, Self-Managed also accepted a single shared access token on this API. Camunda 8.10 no longer accepts it. The token works only if you opt into the 8.9 component-specific configuration fallback, which Camunda plans to remove in a future release. See [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
 
 </TabItem>
 
@@ -104,7 +102,7 @@ For example, to send a request to the Optimize API's ["Get dashboard IDs"](./das
 <TabItem value='saas'>
 
 :::tip
-The `${CAMUNDA_TASKLIST_BASE_URL}` variable below represents the URL of the Optimize API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.optimize.camunda.io/${CLUSTER_ID}`.
+The `${CAMUNDA_OPTIMIZE_BASE_URL}` variable below represents the URL of the Optimize API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.optimize.camunda.io/${CLUSTER_ID}`.
 :::
 
 </TabItem>

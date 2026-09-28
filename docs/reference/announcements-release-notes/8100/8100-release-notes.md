@@ -75,6 +75,18 @@ This is a major redesign of the AI Agent connector, available from 8.10 only, an
 The legacy connector is deprecated in 8.10, but is not removed and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
 :::
 
+#### Claude on Microsoft Foundry and OAuth 2.0 for compatible endpoints
+
+<!-- https://github.com/camunda/connectors/issues/8060
+https://github.com/camunda/connectors/issues/8056
+https://github.com/camunda/connectors/issues/8062 -->
+
+Your AI agents can now use Claude models hosted by Microsoft Foundry (Azure), through the Anthropic provider of the new AI Agent element templates. The provider keeps Anthropic-specific configuration such as extended thinking and prompt caching. Authenticate with an API key, Microsoft Entra ID client credentials, or a managed identity (Hybrid and Self-Managed only).
+
+The custom or compatible endpoint backends for both the Anthropic and OpenAI providers now support **OAuth 2.0 client credentials**. Use this authentication method with internal gateways that issue bearer tokens instead of accepting static API keys.
+
+<p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#anthropic)</p>
+
 ### AI agent testing with Camunda Process Test
 
 <!-- https://github.com/camunda/product-hub/issues/3315, https://github.com/camunda/camunda/issues/46462, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/49548 -->
@@ -1752,6 +1764,21 @@ What's included:
 
 <p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
+#### Process instance suspension and resumption
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3526 -->
+
+You can now suspend and resume a running process instance without canceling it. Suspending halts execution at its current point: no jobs activate or complete, no events correlate, and no timers fire. Resuming picks up from exactly where execution stopped, with no loss of progress or data.
+
+- Suspend or resume a single instance, or a batch of instances at once, from Operate or the REST API.
+- Variables are the one exception to the halt — you can still read and update variables on a suspended instance, so you can fix data before resuming.
+- Timers whose due dates pass during suspension fire immediately on resume rather than waiting out their remaining duration.
+- Messages and signals are not correlated to a suspended instance; publishing itself is unaffected.
+
+<p class="link-arrow">[Suspend and resume a process instance](/components/operate/userguide/suspend-resume-process-instance.md)</p>
+
 #### Task testing supports call activities
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
@@ -1894,15 +1921,15 @@ Business ID is now visible in Operate for decision instances, in both the decisi
 
 ### Optimize
 
-#### Optimize authentication moves to the Camunda Security Library
+#### Optimize adopts the shared authentication implementation
 
 <!-- https://github.com/camunda/camunda/issues/58600 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-Optimize now authenticates through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), adopting the same authentication and session handling as the Orchestration Cluster components.
+Optimize now authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-authentication-moves-to-the-camunda-security-library) for the upgrade action required, and [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-adopts-the-shared-authentication-implementation) for the upgrade action required, and [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -1934,7 +1961,9 @@ You can now assign a business ID to a running process instance that has none, us
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.6+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+
+The Self-Managed [reference architectures](/self-managed/reference-architecture/reference-architecture.md) ship these versions out of the box. The Elasticsearch clusters they deploy through the ECK operator run Elasticsearch 9.x, and the Amazon OpenSearch domains they provision through Terraform run OpenSearch 3.x. If you based your deployment on an earlier copy of a reference architecture, upgrade your search layer to a supported version before you move to 8.10.
 
 <p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
@@ -1959,7 +1988,7 @@ Physical Tenants now support independent per-tenant authorization.
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl), a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings, so you configure authentication once, in one place. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings, so you configure authentication once, in one place. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
 Camunda Hub and Optimize both continue to accept their existing authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
 
