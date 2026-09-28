@@ -5,17 +5,21 @@ sidebar_label: "App Integrations"
 description: "Configure one App Integrations deployment to serve several Physical Tenants, with per-tenant web apps, audiences, and notification routing."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 A single App Integrations deployment can serve every Physical Tenant of an orchestration cluster. Each tenant gets its own API endpoint, web app links, and notification rules, while the backend, its database, and the Microsoft Teams and Slack app registrations stay shared.
 
-:::note
 Physical Tenant support in App Integrations is available in Camunda 8.10 Self-Managed only. It is not available on SaaS.
-:::
 
 :::note Related pages
 
-- **[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)**: How Physical Tenants isolate execution and storage
-- **[Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md)**: Identity deployment models and token routing
-- **[Microsoft Teams installation](/components/camunda-integrations/app-integrations/installation.md)**: The full `config.yaml` reference
+- [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md): How Physical Tenants isolate execution and storage
+- [Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md): Identity deployment models and token routing
+- [Microsoft Teams installation](/components/camunda-integrations/app-integrations/installation.md): The full `config.yaml` reference
   :::
 
 ## Terminology

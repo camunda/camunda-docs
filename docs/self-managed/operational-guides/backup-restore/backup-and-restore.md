@@ -245,9 +245,9 @@ Both scopes serve the same operations:
 | History backup    | `/backups/history`              | `/cluster/v2/backups/history`       |
 | Exporting control | `/exporting`                    | `/cluster/v2/exporting`             |
 
-Each cluster-wide endpoint also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin call to one tenant. Omit it to target every Physical Tenant.
+Some cluster-wide backup and exporting endpoints accept a `physicalTenantId` query parameter to narrow the call to one tenant. Parameter support varies by endpoint and is documented in the generated [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) reference.
 
-A cluster-wide request fans out to each tenant and reports the outcome per tenant, so a partial result is visible rather than hidden. Because each tenant reaches its terminal state independently, a cluster-wide backup is a set of per-tenant backups rather than a single coordinated snapshot.
+A cluster-wide request without a tenant parameter fans out to each tenant and reports the outcome per tenant, so a partial result is visible rather than hidden. Because each tenant reaches its terminal state independently, a cluster-wide backup is a set of per-tenant backups rather than a single coordinated snapshot.
 
 ### Backup IDs across Physical Tenants
 
