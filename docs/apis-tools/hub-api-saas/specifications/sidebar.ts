@@ -44,6 +44,36 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Environment",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-environments",
+          label: "Get all environments",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-workspace-environments",
+          label: "Get a workspace's assigned environments",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/replace-workspace-environments",
+          label: "Replace a workspace's assigned environments",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-project-environments",
+          label: "Get a project's available environments",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "File",
       items: [
         {
@@ -213,6 +243,73 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/hub-api-saas/specifications/restore-project",
           label: "Restore a recently deleted project",
           className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Project Snapshot",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/create-project-snapshot",
+          label: "Create a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-project-snapshot",
+          label: "Get a project snapshot",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/update-project-snapshot",
+          label: "Update a project snapshot",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/delete-project-snapshot",
+          label: "Delete a project snapshot",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/search-project-snapshots",
+          label: "Search project snapshots",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/restore-project-snapshot",
+          label: "Restore a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/request-project-snapshot-review",
+          label: "Request a review of a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/submit-project-snapshot-review",
+          label: "Submit a review decision for a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/duplicate-project-snapshot",
+          label: "Duplicate a project snapshot",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-project-snapshot-external-resources",
+          label:
+            "Check whether a project snapshot references external resources",
+          className: "api-method get",
         },
       ],
     },

@@ -24,7 +24,7 @@ operations (job completion / failure) bypass the gate entirely.
 | Method                | Description                                                                     |
 | --------------------- | ------------------------------------------------------------------------------- |
 | `acquire`             | Acquire a permit, awaiting until one is available.                              |
-| `new`                 | Create a manager for the given profile.                                         |
+| `new`                 | Create a manager for the given profile, resolving its cadence through `clock`.  |
 | `record_backpressure` | Record a backpressure signal from the server.                                   |
 | `record_healthy_hint` | Record a successful (non-backpressure) completion, triggering passive recovery. |
 | `release`             | Release a permit and wake one waiter. In the `Legacy` profile this is a no-op.  |
@@ -92,6 +92,76 @@ Errors returned by the Camunda SDK.
 | Method   | Description                                                   |
 | -------- | ------------------------------------------------------------- |
 | `status` | The HTTP status code, if this is a `CamundaError::Api` error. |
+
+## Clock
+
+Time and waiting, as the SDK runtime sees them.
+
+Implementations must be cheap to clone behind an `Arc` and safe to share across tasks
+and threads.
+
+### Methods
+
+| Method     | Description                                                      |
+| ---------- | ---------------------------------------------------------------- |
+| `now`      | A monotonic reading, for deadlines and elapsed-time measurement. |
+| `now_wall` | A wall-clock reading, for state that outlives the process.       |
+| `sleep`    | Wait for `duration`.                                             |
+
+## ClockController
+
+The engine-side clock an `EngineClock` drives.
+
+Implemented for `CamundaClient` in terms of the
+`PUT /clock` and `POST /clock/reset` endpoints. It exists as a trait so the pin
+semantics can be tested without a running engine.
+
+### Methods
+
+| Method  | Description                                                         |
+| ------- | ------------------------------------------------------------------- |
+| `pin`   | Pin the engine clock to an absolute instant, in epoch milliseconds. |
+| `reset` | Return the engine clock to real time.                               |
+
+## EngineClock
+
+A clock bound to the engine's own clock.
+
+A wait does not pass time locally -- it moves the _engine_ forward and reports the new
+instant. Process instances, timers and the SDK therefore agree on what time it is,
+which a purely local test clock cannot achieve.
+
+```rust
+let control = CamundaClient::from_env()?;
+let clock: Arc<dyn Clock> = Arc::new(EngineClock::new(Arc::new(control)));
+
+// Anything the SDK waits on now advances the engine instead of real time.
+let client = CamundaClient::new(CamundaOptions::new().with_clock(clock))?;
+```
+
+A wait resolves against an instant read before the engine is contacted, so waits
+that overlap -- those that read the clock before any of them lands -- settle at a
+single instant instead of summing. A wait that begins after an earlier one has
+landed reads the new time and composes from it, which is the intended behaviour: it
+really did start later.
+
+### Methods
+
+| Method      | Description                                                                                                                  |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `is_pinned` | Whether the engine clock is currently pinned by this clock.                                                                  |
+| `new`       | Bind to an engine. The clock starts unpinned, following real time until the first wait or `pin_to`.                          |
+| `pin_to`    | Move the engine clock to an absolute instant, in epoch milliseconds.                                                         |
+| `reset`     | Return the engine to real time. Readings follow live time again afterwards, rather than freezing at the last pinned instant. |
+
+## LiveClock
+
+Real time.
+
+`now` and `sleep` are both tokio's, so they share one timeline: under
+`#[tokio::test(start_paused = true)]` this clock is already virtual, and a poll loop
+settles without waiting. That covers cadence in tests; it does not bind the engine's
+clock, which is what an engine-bound implementation is for.
 
 ## Result
 

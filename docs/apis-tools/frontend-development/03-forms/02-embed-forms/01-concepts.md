@@ -39,7 +39,7 @@ See the following example form using the form viewer, and interact with it:
 
 The [form playground](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-playground) <GHIcon /> is a tool to preview forms, simulate their behavior, and explore form-js in a playful manner. It combines the [editor](#form-editor) and the [viewer](#form-viewer) with mock data input and output panels to test a form and form editor features instantly.
 
-There is also a [Camunda-flavored version of the form playground](https://github.com/camunda/form-playground) <GHIcon />, which closely resembles the form editor experience in Camunda Web and Desktop Modeler, and supports rapid development.
+There is also a [Camunda-flavored version of the form playground](https://github.com/camunda/form-playground) <GHIcon />, which closely resembles the form editor experience in [Camunda Hub](/components/hub/workspace/modeler/index.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md), and supports rapid development.
 
 The form playground mainly comprises the following areas:
 

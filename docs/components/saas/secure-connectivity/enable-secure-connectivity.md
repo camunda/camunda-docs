@@ -1,5 +1,4 @@
 ---
-id: secure-connectivity-console-setup
 title: Enable secure connectivity
 description: Configure AWS PrivateLink connectivity for a Camunda 8 SaaS Orchestration Cluster in Camunda Hub.
 ---
@@ -16,7 +15,7 @@ Before enabling secure connectivity:
 
 - The cluster must be hosted in AWS.
 - The cluster must be version 8.8.0+.
-- You must have sufficient permissions to manage clusters in Camunda Hub.
+- You must have [sufficient permissions](/components/hub/organization/manage-users/index.md#roles-and-permissions) to manage clusters in Camunda Hub.
 - You must know the AWS account IDs or ARNs that should be allowed to connect.
 - Your organization must be on an Enterprise plan.
 
@@ -30,10 +29,11 @@ For instructions on creating a VPC interface endpoint, see the [AWS documentatio
 
 ## Enable secure connectivity for a cluster
 
-1. Navigate to **Camunda Hub > Clusters**.
-2. Select the cluster.
-3. Open the **Private networking** tab. The **Private networking** tab is available only for clusters hosted in AWS. It is not displayed for clusters hosted in other cloud providers.
-4. Select **Activate PrivateLink endpoint service**.
+1. Open Camunda Hub.
+1. In the left navigation under **Console**, click **Clusters**.
+1. Select a cluster.
+1. Open the **Private networking** tab. The **Private networking** tab is available only for clusters hosted in AWS. It is not displayed for clusters hosted in other cloud providers.
+1. Select **Activate PrivateLink endpoint service**.
 
 ### Allowed principals
 
