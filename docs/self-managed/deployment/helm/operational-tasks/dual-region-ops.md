@@ -38,7 +38,7 @@ This operational blueprint procedure is a step-by-step guide on how to restore o
 :::tip Resilience tier context
 This procedure is the failover and failback runbook for [Dual-Region](/self-managed/concepts/multi-region/dual-region.md). For an overview of Camunda's multi-region resilience options and how Dual-Region compares to Cold Recovery, see [Multi-region resilience tiers](/self-managed/concepts/multi-region/resilience-tiers.md).
 
-Running three or more regions? See the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) and [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md).
+Running three or more regions? Use the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) instead, and see [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). Don't run this procedure on a Multi-Region RDBMS cluster: its force-remove, exporter, and Elasticsearch restore steps don't apply there.
 :::
 
 The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.

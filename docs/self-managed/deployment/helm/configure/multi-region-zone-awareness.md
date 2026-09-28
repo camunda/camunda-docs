@@ -60,7 +60,7 @@ Existing deployments keep their behavior: when you don't set `scheme`, the chart
 Zone-aware brokers are identified by the composite `<zone>_<index>` and round-robin brokers by a plain node ID, so switching `scheme` on a running release re-identifies every broker against Raft state written under the old identifiers, and the members stop recognizing each other.
 
 :::warning
-Changing `orchestration.partitioning.scheme` on a running release is not a values change you can apply on its own. Moving an existing cluster onto zone awareness requires the migration procedure in **Migrate to zone-aware brokers**, which keeps both broker generations alive through `orchestration.partitioning.keepUnzonedBrokers` and moves the partition distribution over with the cluster management API. Set the scheme when you create the cluster, or follow that procedure; do not edit the key in place.
+Changing `orchestration.partitioning.scheme` on a running release is not a values change you can apply on its own. Moving an existing cluster onto zone awareness requires the [migration procedure](/self-managed/deployment/helm/operational-tasks/zone-aware-migration.md), which keeps both broker generations alive through `orchestration.partitioning.keepUnzonedBrokers` and moves the partition distribution over with the cluster management API. Set the scheme when you create the cluster, or follow that procedure; do not edit the key in place.
 :::
 
 The chart states the same constraint at render time, so an upgrade that flips the scheme prints a warning rather than failing silently.

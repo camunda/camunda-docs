@@ -32,6 +32,8 @@ With three or more zones, none of that applies. Every partition keeps a majority
 | Promote the database             | n/a                                     | Only if the writer was in the lost region       |
 | Failback                         | Snapshot and restore secondary storage  | Redeploy the region                             |
 
+In step count, the [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. Here, a region loss takes at most five, most of them checks, and bringing the region back is one redeploy. Don't apply the dual-region procedure to this architecture: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here, and can cost data.
+
 ## Terminology
 
 | Term          | Meaning                                                                                   |
@@ -68,7 +70,7 @@ Verify the cluster is healthy before you start, so you can tell what the procedu
 
 ### 1. Confirm the quorum is intact
 
-Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority, so partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker.
+Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority, so partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker. This only holds when every declared zone is deployed. With one zone declared but not yet active, `2-2-1` runs four replicas of five, and losing either database region leaves two, so processing stops until that zone is deployed or the lost one returns.
 
 Confirm this rather than assuming it, especially if more than one zone is affected:
 
@@ -112,7 +114,7 @@ If the writer was not in the lost region, no database action is required.
 
 #### Move the Raft leaders to the new writer region
 
-Once the writer has moved, the zone priorities still favor the region that hosted the old one, so partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Raise the priority of the zone that now hosts the writer. Priorities do not move existing leaders on their own, they apply at the next election, so follow the change with a [rebalance](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md) to move the leaders. Check the replication lag first, because a rebalance only succeeds when the intended leader is not lagging behind the current one. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) for applying it to a running cluster.
+Once the writer has moved, the zone priorities still favor the region that hosted the old one, so partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Raise the priority of the zone that now hosts the writer, and wait until the change reports `COMPLETED` before you rebalance, because the cluster rejects a new change while one is still in progress. Priorities do not move existing leaders on their own, they apply at the next election, so follow the change with a [rebalance](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md) to move the leaders. Check the replication lag first, because a rebalance only succeeds when the intended leader is not lagging behind the current one. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) for applying it to a running cluster.
 
 ### 3. Route client traffic away from the lost region
 
@@ -139,7 +141,7 @@ If you do need to remove it, one atomic change evicts the zone's brokers and dro
 ./failover.sh <lost-region-slot> --drain-brokers
 ```
 
-This issues `DELETE /actuator/cluster/zones/<zone>` against a surviving region. Only do this for a zone that is down and unreachable. See the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+This issues `DELETE /actuator/cluster/zones/<zone>?force=true` against a surviving region. Without `force=true`, the API tries a graceful drain, which fails when the zone is down. Only do this for a zone that is down and unreachable. See the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
 
 ### 5. Verify the degraded cluster
 
