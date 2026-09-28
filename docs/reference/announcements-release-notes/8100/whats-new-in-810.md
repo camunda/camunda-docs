@@ -26,6 +26,7 @@ import HubWorkspace from '../../img/whats-new-hub-workspace.png';
 import HubSnapshot from '../../img/whats-new-hub-snapshot.png';
 import DesignSystem from '../../img/whats-new-design.png';
 import SecretsOverviewImg from '../../../components/concepts/assets/secrets-overview.png';
+import TenantImg from '../../../self-managed/concepts/multi-tenancy/img/tenancy-models-comparison.png';
 
 <PageDescription />
 
@@ -490,29 +491,6 @@ Additionally, when you upgrade, your data is [migrated](/self-managed/upgrade/co
 <p class="link-arrow">[Upgrade from Helm 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md)</p>
 
 ### Web Modeler data
-## Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
-
-The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through a shared implementation that replaces the separate identity stacks these components used previously. All three accept the same `camunda.security.authentication.*` settings, so there is one configuration surface to learn and one place to look when authentication does not behave as expected. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
-
-Camunda Hub and Optimize both continue to accept their existing authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11. Camunda Hub therefore requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged in 8.10 and is still handled by Management Identity.
-
-<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
-
-### Optimize's move to the shared authentication implementation
-
-With this move, Optimize adopts the same authentication and session handling as the Orchestration Cluster components.
-
-The legacy Optimize login and API security keys are deprecated in favor of `camunda.security.*`. Camunda plans to remove them in a future release, with the component-specific configuration and its `optimize.security.csl.enabled=false` fallback. `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping.
-
-<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
-
-## Optimize data filters in Camunda Hub
-
-On SaaS, you can now configure Optimize export filters directly in Hub cluster settings. No Helm values or configuration files required. Use the **Data filters** section in cluster settings to control which process definitions (by `bpmnProcessId`) and variable names reach Optimize.
-
-New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
-
-<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
 On 29 August 2026, your SaaS Web Modeler data received three updates to prepare for Hub in 8.10, around [Organizational structure](#new-file-structure-and-requirements), data migration, and the process application versioning model.
 
@@ -666,6 +644,8 @@ Camunda 8.10 provides a structured multi-region resilience framework for Self-Ma
 
 Camunda 8.10 introduces Physical Tenants for strong physical data isolation within a single cluster with separate data storage and independent operations per tenant. Physical Tenants still share cluster compute resources such as CPU and memory, so runtime interference is reduced but not fully eliminated.
 
+<img src={TenantImg} alt="Three tenancy models compared: Logical Tenant with lightweight isolation and one shared data store per cluster, Physical Tenant with strong isolation and multiple isolated data stores in one cluster, and Multi-Cluster with maximum isolation across separate clusters." class="img-noborder"/>
+
 - Physical Tenant isolation is best for multiple teams or organizations needing strong isolation without the cost and complexity of separate clusters.
 
 - Physical Tenants and Logical Tenants can be used together. Each Physical Tenant can contain its own set of Logical Tenants, providing two independent layers of isolation: physical separation between top-level tenant groups, and logical separation within each group.
@@ -782,7 +762,9 @@ Important changes to Optimize in 8.10 are as follows:
 
 Optimize now authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
 
-The legacy Optimize login and API security keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback. `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping.
+- The legacy Optimize login and API security keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback.
+
+- `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -790,7 +772,7 @@ The legacy Optimize login and API security keys are deprecated in favor of `camu
 
 On SaaS, you can now configure Optimize export filters directly in Hub cluster settings. No Helm values or configuration files required. Use the **Data filters** section in cluster settings to control which process definitions (by `bpmnProcessId`) and variable names reach Optimize.
 
-New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
+New SaaS clusters include a default `business_` variable include filter that limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
 
 <p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
@@ -798,13 +780,17 @@ New SaaS clusters include a default `business_` variable include filter, which l
 
 With Camunda 8.10, Camunda Hub and Optimize authenticate through a shared implementation based on the Orchestration Cluster's existing authentication, replacing their separate identity stacks.
 
-Each component now accepts the same `camunda.security.authentication.*` settings, so there is only one configuration surface to learn and troubleshoot if authentication issues arise. Nothing changes for the Orchestration Cluster as it already uses these settings since 8.9.
+Each component now accepts the same `camunda.security.authentication.*` settings, so there is only one configuration surface to learn and troubleshoot if authentication issues arise.
 
 - Camunda Hub and Optimize continue to accept existing authentication settings in 8.10, translating the recognized properties to new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11.
 - Camunda Hub requires no configuration change to upgrade to 8.10.
 - User, group, role, tenant, and permission management for both components is unchanged in 8.10 and is still handled by Management Identity.
 
 <p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+
+:::note
+Nothing changes for the Orchestration Cluster as it already uses these settings since Camunda 8.9.
+:::
 
 ## Wait states
 
