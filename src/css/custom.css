@@ -138,6 +138,19 @@ logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
   --docsearch-icon-color: rgb(140, 140, 140) !important;
 }
 
+[data-theme="dark"] {
+  --docsearch-muted-color: #a0a0a0 !important;
+  --docsearch-hit-highlight-color: transparent !important;
+  --docsearch-highlight-color: #ffffff !important;
+  --docsearch-primary-color: #ffffff !important;
+  --docsearch-secondary-text-color: #a0a0a0 !important;
+  --docsearch-icon-color: #ffffff !important;
+}
+
+[data-theme="dark"] .DocSearch-Hit[aria-selected="true"] a {
+  box-shadow: inset 0 0 0 1px #ffffff !important;
+}
+
 .DocSearch-Button {
   background-color: transparent !important;
   border: 1px solid #d0d0d0 !important;
@@ -183,6 +196,10 @@ logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
 }
 .DocSearch-Form {
   border: 2px solid #171717 !important;
+}
+
+[data-theme="dark"] .DocSearch-Form {
+  border: 2px solid #ffffff !important;
 }
 /* Search bar general */
 
@@ -472,7 +489,7 @@ a {
   text-decoration: underline;
   text-decoration-color: #f3f3f3;
   color: #f3f3f3;
-  font-weight: 600;
+  font-weight: 400;
 }
 [data-theme="dark"] li a.osano-footer-link-docu {
   text-decoration: none;
