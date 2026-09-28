@@ -126,14 +126,12 @@ The region slots are declared in [variables.tf](https://github.com/camunda/camun
 
 Two variables control the topology, and they are not interchangeable:
 
-| Variable              | Meaning                                                                                                           |
-| :-------------------- | :---------------------------------------------------------------------------------------------------------------- |
-| `regions`             | The full list of region slots the cluster will ever have. Every slot contributes a zone to the Camunda zone list. |
-| `active_region_count` | How many of those slots are actually deployed. At most one slot may be left empty.                                |
+| Variable              | Meaning                                                                                                     |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------- |
+| `regions`             | The full list of region slots the cluster can grow into. A slot contributes a zone once Camunda runs in it. |
+| `active_region_count` | How many of those slots are deployed. At least two.                                                         |
 
-Declaring a slot without deploying it is the supported growth path. The deployed slots are always the first ones in the list, so the empty slot is the last, and activating it later fills in its replicas without redistributing anything. What that costs depends on how many replicas the empty slot holds, not on how many slots there are: the default layout gives the trailing slots one replica each, so every partition runs at four of five with three slots and five of six with four. The cluster tolerates no further zone loss while a slot is empty.
-
-Leaving two or more slots empty is rejected at plan time. The guard that rejects it counts region slots rather than replicas, and requires the deployed slots to be a majority of the declared ones, so it can also refuse a layout whose deployed zones would still hold a majority of the replicas. The replica-level test runs separately in `export_environment_prerequisites.sh`, which is what catches a layout whose undeployed zones hold the majority.
+Deploying fewer slots than you provision is the supported growth path. The Camunda zone list covers only the deployed slots, so the cluster is complete at every size: each partition holds all of its replicas, and a region loss is tolerated from the start. A spare slot joins later through the [add-zone procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#add-a-region), which adds its zone to the running cluster.
 
 ### Apply the infrastructure
 
@@ -145,7 +143,7 @@ terraform init
 terraform apply -var cluster_name=camunda
 ```
 
-For a cheaper evaluation, deploy two of the three slots and reduce the node count. This is a valid state: with the default `2-2-1` layout, every partition holds four of its five replicas, and the third slot's replica stays reserved until you deploy it.
+For a cheaper evaluation, deploy two of the three slots and reduce the node count. The cluster then runs two zones, `2-2` at replication factor four, and tolerates no zone loss until you add the third region: losing either zone leaves two replicas of four, which is not a majority.
 
 ```bash
 terraform apply \
@@ -387,7 +385,7 @@ Three values cannot be hardcoded in the Helm values, because they depend on the 
 | :------------------------------------- | :----------------------------------------------------------------------------- |
 | `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` | One entry per active region, pointing at that region's headless Zeebe service. |
 | `REGION_<slot>_ZEEBE_SERVICE_NAME`     | The suffix each broker advertises, so peers in other regions can resolve it.   |
-| `CAMUNDA_MULTIREGION_ZONES`            | The zone list, covering **every** slot including any not yet deployed.         |
+| `CAMUNDA_MULTIREGION_ZONES`            | The zone list, covering the deployed slots only.                               |
 
 ```bash
 . ./generate-zeebe-helm-values.sh
@@ -480,7 +478,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 ## 6. Operate the cluster
 
-Day-2 procedures, including region loss, failback, and activating a declared zone, are documented separately in the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
+Day-2 procedures, including region loss, failback, and adding a region, are documented separately in the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
 
 ## Troubleshooting
 
@@ -544,7 +542,7 @@ If brokers are `Pending` rather than `Running`, the storage class is missing in 
 
 ## Next steps
 
-- [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md): region loss, failback, and activating a declared zone.
+- [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md): region loss, failback, and adding a region.
 - [Multi-Region RDBMS concept](/self-managed/concepts/multi-region/multi-region-rdbms.md): the architecture and its trade-offs.
 - [Zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md): the full zone configuration reference.
 - [Relational database configuration](/self-managed/concepts/databases/relational-db/configuration.md): RDBMS secondary storage settings.

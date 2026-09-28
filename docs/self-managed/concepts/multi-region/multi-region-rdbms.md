@@ -8,7 +8,6 @@ description: "Multi-Region RDBMS spreads an Orchestration Cluster across three o
 import PageDescription from '@site/src/components/PageDescription';
 import TopologyImg from './img/multi-region-rdbms-topology.svg';
 import QuorumImg from './img/multi-region-rdbms-quorum.svg';
-import ZoneActivationImg from './img/multi-region-rdbms-zone-activation.svg';
 
 <PageDescription />
 
@@ -172,17 +171,13 @@ Follow the upgrade recommendations in the [Camunda Helm chart](/self-managed/upg
 
 ## Growing the cluster
 
-Zone awareness names zones instead of numbering brokers, so the zone list can change without renumbering the cluster. That makes one growth path online and another one a migration.
+Zone awareness names zones instead of numbering brokers, so a zone can be added to a running cluster without renumbering it.
 
-<ZoneActivationImg role="img" title="Two states of the same cluster using the default 2-2-1 layout. On the left, three zones are declared and two deployed: the third zone's replica is reserved, every partition runs at four of five replicas, a majority, and the cluster runs. On the right, the third zone has been activated and every partition holds five of five replicas. No broker is renumbered and no partition is redistributed between the two states." />
+**Declare only the zones you deploy.** A zone in the zone list receives partition replicas whether or not its brokers run. A declared zone without brokers therefore leaves every partition one zone short: with the default `2-2-1` layout and the third zone missing, each partition runs four replicas of five, and losing either database zone leaves two, so processing stops.
 
-**Activating a declared zone is online.** List every zone the cluster will ever have from the start, and deploy fewer of them. The partition layout reserves the missing zone's replicas, so each partition runs below full redundancy while still holding a majority, and the cluster forms and serves normally. With the default `2-2-1` layout, holding back the third zone runs every partition at four replicas of five, and deploying it reaches five of five. Deploying that zone later only fills in replicas that were already reserved: no broker is renumbered, no partition is redistributed, and the running regions are untouched.
+**Add a zone to the running cluster.** Start the brokers of the new zone, then add the zone with the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md). The engine places the zone's replicas and raises the replication factor in one change. No broker is renumbered, and the regions already running are not restarted. With the default layout, growing from two zones (`2-2`) to three (`2-2-1`) raises the replication factor from four to five.
 
-Whether a zone can be left undeployed depends on the **replicas** it would have held, not on the zone count. The deployed zones have to keep a majority of the replication factor. With the default `2-2-1`, holding back either database zone leaves 3 of 5 and holding back the tie-breaker leaves 4 of 5, so any single zone can be the one you defer. A lopsided layout such as `4-1-1` does not have that property: deferring the first zone leaves 2 replicas of 6.
-
-The reference implementation checks this rather than assuming it, and refuses to deploy a topology whose undeployed zones hold the majority. It also allows at most one zone to be held back, so the growth path stays the same whatever the zone count.
-
-**Adding a zone that was never declared** changes the zone list in every region and redistributes partitions. Plan the largest topology you expect up front and grow into it.
+The partition count is fixed at bootstrap, so size it for the largest topology you expect. The reference implementation sizes it on the provisioned region slots rather than on the zones running at bootstrap.
 
 ## Region failure and recovery
 
@@ -251,7 +246,7 @@ The [operational procedure](/self-managed/deployment/helm/operational-tasks/mult
 Camunda publishes one implementation of this architecture, on Amazon Web Services:
 
 - [Multi-region setup with RDBMS on Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md) deploys three EKS clusters connected by AWS Transit Gateway, with Submariner for cross-cluster service discovery and Aurora Global Database as secondary storage.
-- [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) covers region loss, failback, and activating a declared zone.
+- [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) covers region loss, failback, and adding a zone.
 
 The architecture is not AWS-specific. Each of its three layers has an equivalent on other platforms. For example, Red Hat OpenShift provides Submariner through Advanced Cluster Management, as the [OpenShift dual-region setup](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md) already uses.
 

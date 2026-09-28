@@ -2,7 +2,7 @@
 id: multi-region-rdbms-operational-procedure
 sidebar_label: Multi-Region RDBMS operational procedure
 title: Multi-Region RDBMS operational procedure
-description: "Handle a region loss, bring a region back, and activate a declared zone in a Multi-Region RDBMS setup."
+description: "Handle a region loss, bring a region back, and add a region to a Multi-Region RDBMS setup."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -44,7 +44,6 @@ This runbook applies only to a zone-aware cluster with three or more zones and R
 | :------------ | :---------------------------------------------------------------------------------------- |
 | Slot          | A position in the region list, numbered from `0`. Fixed when the cluster is bootstrapped. |
 | Zone          | The Camunda-level name of a region, for example `london`. One zone per region.            |
-| Declared zone | A zone present in the zone list, whether or not it is deployed.                           |
 | Active region | A slot that is actually deployed.                                                         |
 | Writer        | The single database instance accepting writes from every region.                          |
 
@@ -74,7 +73,7 @@ Verify the cluster is healthy before you start, so you can tell what the procedu
 
 ### 1. Confirm the quorum is intact
 
-Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority, so partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker. This only holds when every declared zone is deployed. With one zone declared but not yet active, `2-2-1` runs four replicas of five, and losing either database region leaves two, so processing stops until that zone is deployed or the lost one returns.
+Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority, so partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker. A cluster running only two zones, such as `2-2` before its third region is added, has no such margin: losing either zone leaves two replicas of four, and processing stops.
 
 Confirm this rather than assuming it. The script takes one lost slot and computes the surviving replicas without it, so its verdict only covers a single lost zone. If more than one zone is affected, don't rely on it: check the partition health of every surviving broker with `./check-cluster-topology.sh`.
 
@@ -188,11 +187,11 @@ Verify when done:
 ./check-cluster-topology.sh
 ```
 
-## Activate a declared zone
+## Add a region
 
-Activating a zone that was declared in the zone list but never deployed is an **online** operation.
+Adding a region to a running cluster is an **online** operation: the regions already running keep processing and are not restarted.
 
-The distinction that makes it online is that the zone already exists as far as the cluster is concerned. It was in the zone list every region was deployed with, so the partition distribution already assigned it replicas and every partition has been running one replica short of its full count. Deploying the zone starts brokers that claim replicas already reserved for them: no broker is renumbered, no partition is redistributed, no running region is restarted, and no cluster management API call is needed.
+The cluster declares only the zones it runs, so the new region's zone is not in the partition distribution yet. The procedure starts the region's brokers, then adds its zone with `POST /actuator/cluster/zones/<zone>`. The engine assigns the zone's replicas and raises the replication factor in one change, for example from four (`2-2`) to five (`2-2-1`). No broker is renumbered.
 
 ### 1. Provision the infrastructure
 
@@ -221,12 +220,12 @@ unset CAMUNDA_ACTIVE_REGIONS
 ./activate-region.sh <slot>
 ```
 
-The procedure joins the new cluster to the ClusterSet, prepares its storage class, namespace, and database secret, renders the Helm values with the longer contact point list, installs only the new region, exports its services, and waits for the new brokers to join.
+The procedure joins the new cluster to the ClusterSet, prepares its storage class, namespace, and database secret, renders the Helm values with the longer contact point and zone lists, installs only the new region, exports its services, adds the zone to the cluster, and waits for the change to complete.
 
 The regions already running keep their shorter contact point list and are not restarted. The contact point list matters at bootstrap; once a cluster is formed, a newcomer only has to reach one member and the rest learn about it by gossip. The running regions pick up the longer list on their next upgrade.
 
 :::warning
-`activate-region.sh` fills a slot that already exists in the zone list. It does not add a new zone. Adding a zone that was never declared changes the zone list in every region and redistributes partitions, which is a migration rather than an online operation.
+`activate-region.sh` adds the zone of a slot that Terraform already provisioned. To grow beyond the provisioned slots, add a slot to `regions` first. The partition count stays the one chosen at bootstrap.
 :::
 
 The script refuses a slot that is not yet part of the deployed topology, so run the Terraform step above first: it rejects any slot at or beyond `CAMUNDA_ACTIVE_REGIONS` and reports the valid range, rather than deploying into a zone the cluster does not expect.
