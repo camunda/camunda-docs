@@ -5,7 +5,7 @@ sidebar_label: "Move from Helm v3 to v4"
 description: "Switch from the Helm v3 CLI to Helm v4 against the same cluster. No release-state migration is required for Camunda charts."
 ---
 
-Since Camunda 8.10 (chart 15.x), Helm CLI v4 is required. If you are upgrading from Camunda 8.7, 8.8, or 8.9 using the Helm v3 CLI, switch to the Helm v4 CLI before you upgrade. **No release-state migration is required.**
+Camunda 8.9 (chart 14.x) supports both the Helm CLI v3 and v4. Helm v3 receives security fixes only until February 10, 2027, so switch to the Helm v4 CLI before then. **No release-state migration is required.**
 
 ## Why no migration is required
 
@@ -46,5 +46,5 @@ Helm 4 enables server-side apply by default and removes some Helm 3 plugin behav
 
 ## Helm v3 support
 
-- Chart 15.x and later do not support Helm v3. Chart 14.x is the last minor that supports Helm v3.
-- Helm v3 itself reaches end of support upstream: bug fixes through July 8, 2026, and security fixes through November 11, 2026. See the [Helm support policy](https://helm.sh/blog/helm-4-released#helm-v3-support).
+- Chart 14.x supports Helm v3 and Helm v4. With Helm v3, the chart shows a warning when you run `helm install` or `helm upgrade`. See [Camunda Helm chart compatibility](./helm-v4.md#camunda-helm-chart-compatibility).
+- Helm v3 itself reaches end of support upstream: security fixes through February 10, 2027. Helm v3.22 is the final Helm v3 minor release. See the [Helm v3 end-of-life announcement](https://helm.sh/blog/helm-v3-end-of-life/).

@@ -50,7 +50,7 @@ Python-based connector containers are an exception: `requests` reads `REQUESTS_C
 
 ### Prerequisites
 
-- Helm 3.10+
+- Helm 3.10+ or 4.x
 - A PEM-encoded CA bundle file (`your-ca-bundle.pem`) containing the root and any intermediate certs that signed your datastore / IdP certs
 
 ### 1. Create the CA bundle Secret

@@ -159,7 +159,7 @@ A gateway timeout can occur if the headers of a response are too big (for exampl
 
 ## Helm CLI version and installation failures
 
-If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Ensure you use the Helm CLI version `3.13` or higher.
+If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Ensure you use the Helm CLI version `3.10` or a later 3.x version.
 
 ## DNS disruption issue for Zeebe in Kubernetes clusters (1.29-1.31)
 

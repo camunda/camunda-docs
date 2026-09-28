@@ -190,13 +190,9 @@ You should update any hardcoded port references in network policies, Ingress rul
 
 ### Helm 4 support
 
-As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
+Camunda 8.9 (chart 14.x) supports both Helm 3 and Helm 4. Helm 3 receives security fixes only until February 10, 2027. The Helm 4 guide covers the Helm 4 behavior changes that affect the Camunda Helm chart, and how to apply workarounds.
 
 <p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
-
-:::note
-Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
-:::
 
 ### RDBMS as secondary storage
 

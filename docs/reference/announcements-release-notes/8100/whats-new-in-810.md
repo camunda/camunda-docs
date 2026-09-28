@@ -513,13 +513,11 @@ Camunda for Slack joins Camunda for Microsoft Teams as a second chat platform se
 
 Important changes to Helm chart deployment in 8.10 are as follows:
 
-### Helm v4 required
+### Helm CLI v3 and v4 support {#helm-v4-required}
 
-:::warning Breaking change
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
-:::
+Camunda 8.10 (chart 15.x) supports the Helm CLI v3 (3.10 or later) and v4. With Helm v3, the chart shows a warning when you run `helm install` or `helm upgrade`, because Helm v3 receives security fixes only until February 10, 2027.
 
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
+Switching CLIs does not require a release-state migration; Helm is client-side only. Plan your move to the Helm v4 CLI before February 10, 2027.
 
 <ul>
   <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>

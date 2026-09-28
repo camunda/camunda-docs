@@ -84,6 +84,19 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 
 ### Helm chart deployment
 
+#### Helm CLI v3 and v4 support {#helm-v4-required}
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+Camunda 8.10 (chart 15.x) supports the Helm CLI v3 (3.10 or later) and v4. With Helm v3, the chart shows a warning when you run `helm install` or `helm upgrade`, because Helm v3 receives security fixes only until February 10, 2027.
+
+Switching CLIs does not require a release-state migration; Helm is client-side only. Plan your move to the Helm v4 CLI before February 10, 2027.
+
+<ul>
+  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+</ul>
+
 #### PostgreSQL databases are highly available by default
 
 <!-- https://github.com/camunda/camunda-deployment-references/pull/3463 -->
@@ -279,7 +292,6 @@ Use the tool to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
 - Generate a sample 8.10 values file reflecting:
-  - Helm 4-only support.
   - Bitnami sub‑charts removal.
   - Hub‑aware deployment patterns.
   - Simplified application configuration.
@@ -1480,17 +1492,6 @@ For details, see [`cancel` listeners](/components/concepts/execution-listeners.m
 ### Helm chart deployment
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-#### Helm v4 required
-
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
-
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
-
-<ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
-</ul>
 
 #### Host network support for Orchestration Cluster pods
 

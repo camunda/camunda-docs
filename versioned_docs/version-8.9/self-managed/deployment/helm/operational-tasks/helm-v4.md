@@ -21,9 +21,15 @@ Helm CLI compatibility depends on the Camunda Helm chart version.
 | Camunda 8.7 – Chart 12.x  | ✅          | ❌          |
 | Camunda 8.8 – Chart 13.x  | ✅          | ❌          |
 | Camunda 8.9 – Chart 14.x  | ✅          | ✅ \*       |
-| Camunda 8.10 – Chart 15.x | ❌          | ✅ \*       |
+| Camunda 8.10 – Chart 15.x | ✅          | ✅ \*       |
 
 \* Helm CLI v4 may require workarounds when overriding environment variables.
+
+With Helm CLI v3, charts 12.x to 14.x require Helm v3.10 or later. Chart 14.x also shows the following warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
+
+```text
+[camunda][warning] Helm CLI <version> detected. Helm v3 receives security fixes only until February 10, 2027 (https://helm.sh/blog/helm-v3-end-of-life/). Upgrade to Helm v4 before then: https://helm.sh/docs/overview
+```
 
 ## Helm 4 breaking changes
 
@@ -86,11 +92,10 @@ If you encounter a duplicate environment variable error, apply one of the follow
 4. Use Helm CLI v3 as a temporary workaround.
 
 :::note Helm CLI v3 support timeline
-Helm CLI v3 receives bug fixes until July 8, 2026, and security fixes until November 11, 2026.  
-See the [Helm support policy](https://helm.sh/blog/helm-4-released#helm-v3-support).
+Helm CLI v3 receives security fixes until February 10, 2027. Helm v3.22 is the final Helm v3 minor release. See the [Helm v3 end-of-life announcement](https://helm.sh/blog/helm-v3-end-of-life/).
 :::
 
-If your package manager no longer provides Helm CLI v3, you can run it using Docker:
+If your package manager doesn't provide Helm CLI v3, you can run it using Docker:
 
 ```bash
 docker run \
