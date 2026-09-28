@@ -11,7 +11,7 @@ For what zones are and how the application places partition replicas across them
 
 ## Move from global.multiregion
 
-`global.multiregion` is deprecated since chart v15 (Camunda 8.10). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.partitioning`. The deprecated keys still work and still render; move them when convenient.
+`global.multiregion` is deprecated since chart v15 (Camunda 8.10). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.partitioning`. The deprecated keys still work and still render in v15, but chart v16 removes them, so move them before you upgrade to v16.
 
 Two keys shipped under `global.multiregion`: `regions` and `regionId`, which configure the broker numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. They were renamed as well as moved, because the new block describes zones rather than regions:
 
