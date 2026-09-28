@@ -127,7 +127,9 @@ Set `global.ingress.publicPorts` when clients reach your Ingress controller on p
 
 Both values accept integers from 1 to 65535. The chart omits port `80` from HTTP URLs and port `443` from HTTPS URLs.
 
-The TLS setting of each Ingress decides which port applies. The web applications Ingress follows `global.ingress.tls.enabled`, and the Zeebe gRPC Ingress follows `orchestration.ingress.grpc.tls.enabled`, even when `global.ingress.enabled` is `false`. Setting a public port doesn't enable TLS.
+The TLS setting for each Ingress determines which public port the chart uses. For web applications, the chart uses `global.ingress.tls.enabled`. For the Zeebe gRPC Ingress, it uses `orchestration.ingress.grpc.tls.enabled`, even when `global.ingress.enabled` is `false`.
+
+Setting a public port doesn't enable TLS.
 
 The chart adds the public port to the URLs it derives from `global.host` and the Zeebe gRPC Ingress host:
 
@@ -135,11 +137,13 @@ The chart adds the public port to the URLs it derives from `global.host` and the
 - The Identity URL and its login callback, if `identity.fullURL` is empty.
 - The WebSocket port browsers use to connect to Web Modeler, if Web Modeler has a context path.
 
-The chart doesn't rewrite URLs you set explicitly. Add the port yourself to `identity.fullURL`, `global.identity.auth.publicIssuerUrl`, and each `global.identity.auth.<component>.redirectUrl`.
+The chart doesn't rewrite URLs you configure explicitly. Include the port in `identity.fullURL`, `global.identity.auth.publicIssuerUrl`, and each `global.identity.auth.<component>.redirectUrl`.
 
-Public ports change only the generated URLs. They don't configure Ingress controller listeners, Kubernetes Services, or host port mappings, so expose the ports in your Ingress controller and cluster setup. The Gateway API integration doesn't use these values. To change the Gateway listener ports, see [custom listener ports](./gateway-api-setup.md#custom-listener-ports).
+Public ports change only the generated URLs. They don't configure Ingress controller listeners, Kubernetes Services, or host port mappings. Configure your Ingress controller and cluster to expose the required ports.
 
-The following values serve the web applications over HTTPS on port `8443`:
+The Gateway API integration doesn't use these values. To change the Gateway listener ports, see [custom listener ports](./gateway-api-setup.md#custom-listener-ports).
+
+The following example configures the generated web application URLs to use HTTPS on public port `8443`:
 
 ```yaml
 global:
