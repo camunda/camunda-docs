@@ -111,7 +111,7 @@ Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for
 
 `ES_INDEX_PREFIXES` selects which Elasticsearch indices the migration lists, reindexes, and re-aliases. Indices outside these patterns are ignored without warning, so an installation using a custom index prefix migrates successfully while leaving that data behind.
 
-Each component's prefix is configured independently, for example through `camunda.data.exporters.elasticsearch.args.index-prefix`. Keep every default pattern and add your custom ones, rather than replacing the list: a pattern that matches no index is skipped harmlessly, while a missing pattern silently drops a whole index family.
+Each component's prefix is configured independently, through the Helm value `orchestration.index.prefix` or the equivalent `camunda.data.secondary-storage.elasticsearch.index-prefix` setting. See [configure Elasticsearch prefix indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md) for the full picture. Keep every default pattern and add your custom ones, rather than replacing the list: a pattern that matches no index is skipped harmlessly, while a missing pattern silently drops a whole index family.
 
 ```bash
 # Defaults retained, custom Zeebe and Operate prefixes added

@@ -140,28 +140,6 @@ kubectl create secret generic external-es \
 The migration scripts use the term **external targets** (`PG_TARGET_MODE=external`, `ES_TARGET_MODE=external`) for any non-operator target. This includes cloud-managed services (AWS RDS, Elastic Cloud, etc.) but also self-hosted databases outside the Kubernetes cluster. This guide uses "managed services" as a shorthand, but the scripts themselves are not restricted to cloud-managed offerings.
 :::
 
-### When to use external target mode
-
-Set `PG_TARGET_MODE=external` or `ES_TARGET_MODE=external` when the migration should **not** deploy operators or create cluster instances, because the target already exists:
-
-| Scenario                                                                                 | Setting                         | Why                                                                                                                   |
-| ---------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Fresh cluster, no operators installed                                                    | `operator` (default)            | The scripts install CloudNativePG and ECK, then create the clusters.                                                  |
-| A platform team already installed the operators **and** provisioned the target instances | `external`                      | Avoids overwriting the operator version, since the scripts apply a pinned version with `kubectl apply --server-side`. |
-| You run a different PostgreSQL operator, such as StackGres, Crunchy, or Zalando          | `PG_TARGET_MODE=external`       | CloudNativePG is never installed. Create the databases with your own operator and point the migration at them.        |
-| The target is a managed service, such as Amazon RDS or Elastic Cloud                     | `external`                      | No operator is needed. Data migrates directly to the managed endpoint.                                                |
-| Keycloak runs as a managed, standalone, or Helm-managed instance                         | `KEYCLOAK_TARGET_MODE=external` | Migrates the realm into the external Keycloak database and points Camunda at the existing instance.                   |
-
-External mode skips both the operator installation and the creation of the target instances. Create the PostgreSQL databases and the Elasticsearch cluster yourself before starting, and verify they are reachable from the Camunda namespace. Phase 3 restores into them directly, so a missing or unreachable target fails the cutover after the application has already been frozen.
-
-In external mode you must also provide the `EXTERNAL_PG_*` or `EXTERNAL_ES_*` connection details, and a `CUSTOM_HELM_VALUES_FILE` with Helm values pointing Camunda at the external targets.
-
-### Data-only cutover with `SKIP_HELM_UPGRADE`
-
-Set `SKIP_HELM_UPGRADE=true` to run the Phase 3 data migration, the backup, restore, and reindex, but skip the final `helm upgrade`. The caller then owns the chart upgrade.
-
-This is intended for continuous integration harnesses that migrate Bitnami data onto external infrastructure and then perform an N to N+1 chart upgrade themselves. Normal migrations leave it `false`. Setting `KEYCLOAK_TARGET_MODE=external` derives it automatically, so you do not set it yourself in that case.
-
 Edit `env.sh`, and set the target mode to `external`. The base configuration variables (`NAMESPACE`, `CAMUNDA_RELEASE_NAME`, `MIGRATE_*`, etc.) are the same as in the [operator-based guide](./bitnami-to-operators.md#key-configuration-variables), only the target mode and external endpoint variables differ:
 
 <details>
@@ -192,6 +170,27 @@ export EXTERNAL_ES_SECRET="external-es"
 ```
 
 </details>
+
+### When to use external target mode
+
+Set `PG_TARGET_MODE=external` or `ES_TARGET_MODE=external` when the migration should **not** deploy operators or create cluster instances, because the target already exists:
+
+| Scenario                                                                                 | Setting                   | Why                                                                                                                                                                                   |
+| ---------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fresh cluster, no operators installed                                                    | `operator` (default)      | The scripts install CloudNativePG and ECK, then create the clusters.                                                                                                                  |
+| A platform team already installed the operators **and** provisioned the target instances | `external`                | Avoids overwriting the operator version, since the scripts apply a pinned version with `kubectl apply --server-side`.                                                                 |
+| You run a different PostgreSQL operator, such as StackGres, Crunchy, or Zalando          | `PG_TARGET_MODE=external` | CloudNativePG is never installed. Create the databases with your own operator and point the migration at them.                                                                        |
+| The target is a managed service, such as Amazon RDS or Elastic Cloud                     | `external`                | No operator is needed. PostgreSQL is restored straight into the managed endpoint. Elasticsearch data is only transferred when `ES_WARM_REINDEX=true`; otherwise you move it yourself. |
+
+External mode skips both the operator installation and the creation of the target instances. Create the PostgreSQL databases and the Elasticsearch cluster yourself before starting, and verify they are reachable from the Camunda namespace. Phase 3 restores into them directly, so a missing or unreachable target fails the cutover after the application has already been frozen.
+
+In external mode you must also provide the `EXTERNAL_PG_*` or `EXTERNAL_ES_*` connection details, and a `CUSTOM_HELM_VALUES_FILE` with Helm values pointing Camunda at the external targets.
+
+### Data-only cutover with `SKIP_HELM_UPGRADE`
+
+Set `SKIP_HELM_UPGRADE=true` to run the Phase 3 data migration, the backup, restore, and reindex, but skip the final `helm upgrade`. The caller then owns the chart upgrade.
+
+This is intended for continuous integration harnesses that migrate Bitnami data onto external infrastructure and then perform an N to N+1 chart upgrade themselves. Normal migrations leave it `false`. Setting `KEYCLOAK_TARGET_MODE=external` derives it automatically, so you do not set it yourself in that case.
 
 You can use the same managed PostgreSQL host for all components—each database is separate. This is common when using a single RDS instance with multiple databases.
 
@@ -363,7 +362,7 @@ What happens:
 - When `PG_TARGET_MODE=external`, the CloudNativePG (CNPG) operator is not installed; your managed PostgreSQL is used directly.
 - When `ES_TARGET_MODE=external`, the Elastic Cloud on Kubernetes (ECK) operator is not installed; your managed Elasticsearch target is used directly.
 - The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL. If you set `KEYCLOAK_TARGET_MODE=external`, the operator is not deployed. Your pipeline repoints Camunda to the external Keycloak when it runs the `helm upgrade`. See [Migrate Keycloak to an external instance](#migrate-keycloak-to-an-external-instance).
-- The script validates connectivity to each external endpoint before proceeding.
+- Phase 1 checks only that the `EXTERNAL_*` variables are set and that the referenced Kubernetes Secrets exist. It does not open a connection, so an unreachable or misconfigured endpoint is not detected until Phase 3, after the application has been frozen. Verify reachability yourself before starting the cutover.
 
 ### Phase 2: Initial backup (no downtime)
 
