@@ -150,7 +150,7 @@ The default `minimum-age` of `30d` provides sufficient headroom. If you reduced 
 
 **Symptom:** If Optimize history cleanup runs on schedule but consistently completes in zero seconds against a large dataset, orphaned `ACTIVE` documents are likely accumulating. See [diagnosing stalled cleanup](/self-managed/components/optimize/configuration/history-cleanup.md#diagnosing-stalled-cleanup).
 
-The sizing guidance for [Self-Managed](./sizing-self-managed.md#baseline-resource-configuration) provides configurations with and without Optimize to help you plan accordingly.
+The sizing guidance for [Self-Managed](./sizing-self-managed.md#baseline-resource-configuration) provides a baseline configuration, including Optimize's resource impact, for each secondary storage backend to help you plan accordingly.
 
 ### Latency and cycle time
 
@@ -249,17 +249,6 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 - A drop-in alternative to Elasticsearch with a similar resource profile.
 - Supported for all components including Optimize. See [supported environments](/reference/supported-environments.md) for more details.
 - Sizing recommendations for Elasticsearch generally apply to OpenSearch as well.
-
-#### RDBMS
-
-- A different storage paradigm: a relational database instead of a document store.
-- A different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
-- Write throughput is approximately **70% of Elasticsearch** on equivalent hardware.
-- **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
-- **Scales primarily vertically** rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
-- Ideal for organizations that already operate a supported RDBMS at scale and want to avoid adding Elasticsearch to their infrastructure.
-  <!-- To be validated - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated). -->
-  <!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
 
 ### Throughput
 
