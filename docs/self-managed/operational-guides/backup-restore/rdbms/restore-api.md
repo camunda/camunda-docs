@@ -19,7 +19,6 @@ import TabItem from '@theme/TabItem';
 import BeforeYouStart from '../\_partials/\_restore-api-before-you-start.md';
 import TrackRestore from '../\_partials/\_restore-api-track.md';
 import FailedRestore from '../\_partials/\_restore-api-failed.md';
-import RetryRestore from '../\_partials/\_restore-api-retry.md';
 import RestoreOptimize from '../\_partials/\_restore-optimize-data.md';
 import RestoreHub from '../\_partials/\_restore-camunda-hub-data.md';
 
@@ -213,6 +212,10 @@ The response returns the `changeId` of the restore, along with the planned opera
       "physicalTenantId": "default",
       "operations": [
         {
+          "operation": "SchemaInitializationOperation",
+          "brokerId": "0"
+        },
+        {
           "operation": "PartitionPreRestoreOperation",
           "brokerId": "0",
           "partitionId": 1
@@ -321,10 +324,6 @@ The dry run does not report which backups it resolved. The response only contain
 ## Handling a failed Restore API operation
 
 <FailedRestore />
-
-### Retry a Restore API operation externally
-
-<RetryRestore />
 
 <RestoreOptimize />
 

@@ -47,11 +47,7 @@ The following prerequisites are required before you can restore a backup:
 
 ## 1. Stop all Camunda components {#stop-all-camunda-components}
 
-Stop all Camunda components (Zeebe, Operate, Tasklist, Optimize, Connectors) before starting the restore process.
-
-:::warning
-It is critical that no Camunda components are running during the restore. Running components may propagate an incorrect cluster configuration, potentially disrupting cluster communication and data consistency.
-:::
+It is critical that no Camunda components (Zeebe, Operate, Tasklist, Optimize, Connectors) are running during the restore. Running components may propagate an incorrect cluster configuration, potentially disrupting cluster communication and data consistency.
 
 ## 2. Restore the RDBMS {#restore-rdbms}
 
@@ -66,7 +62,7 @@ Complete this step before you restore Zeebe. Each restore option below reads the
 Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::warning
-Persistent volumes or disks must not contain any pre-existing data before restoring Zeebe. If data exists from a previous deployment, it must be cleared first.
+Persistent volumes or disks must not contain any pre-existing data before restoring Zeebe. If data exists from a previous deployment, it must be cleared first. On physical tenant enabled environments, only the data directory for the specific tenant must be cleared.
 :::
 
 :::warning

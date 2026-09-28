@@ -12,7 +12,6 @@ import TabItem from '@theme/TabItem';
 import BeforeYouStart from '../\_partials/\_restore-api-before-you-start.md';
 import TrackRestore from '../\_partials/\_restore-api-track.md';
 import FailedRestore from '../\_partials/\_restore-api-failed.md';
-import RetryRestore from '../\_partials/\_restore-api-retry.md';
 import RestoreHub from '../\_partials/\_restore-camunda-hub-data.md';
 import RestoreTemplates from '../\_partials/\_es-restore-templates.md';
 import StopOptimize from '../\_partials/\_es-stop-optimize.md';
@@ -43,8 +42,6 @@ In addition to the [general restore prerequisites](./restore.md#prerequisites), 
 | Camunda version  | Camunda 8.10 or later, restored with the exact version the backup was created with.                                                                                                                                            |
 | Backup store     | Every broker is configured with the same backup store that holds the Zeebe backup, and Elasticsearch/OpenSearch is configured with the same snapshot repository as the backup. See [prerequisites](./backup.md#prerequisites). |
 | Sizing           | Elasticsearch/OpenSearch should be sized the same or larger than the original cluster; a smaller cluster can prevent shards from being assigned and fail the restore.                                                          |
-| Completed backup | A completed backup exists for every partition. List the available backups with [step 2](#find-available-backup-ids) below.                                                                                                     |
-| Snapshot backup  | Elasticsearch/OpenSearch snapshots for all components exist under the same backup ID. See [step 3](#restore-es-snapshots-step) below.                                                                                          |
 | Optimize stopped | Optimize must be stopped before you restore the Elasticsearch/OpenSearch snapshots in [step 3](#restore-es-snapshots-step); every other component keeps running in recovery mode.                                              |
 | Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged.                                                    |
 | API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                                                 |
@@ -156,6 +153,10 @@ The response returns the `changeId` of the restore, along with the planned opera
       "physicalTenantId": "default",
       "operations": [
         {
+          "operation": "SchemaInitializationOperation",
+          "brokerId": "0"
+        },
+        {
           "operation": "PartitionPreRestoreOperation",
           "brokerId": "0",
           "partitionId": 1
@@ -241,9 +242,5 @@ A dry run rejects requests without a backup ID, with multiple backup IDs, or wit
 ## Handling a failed Restore API operation
 
 <FailedRestore />
-
-### Retry a Restore API operation externally
-
-<RetryRestore />
 
 <RestoreHub />

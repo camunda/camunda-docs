@@ -6,5 +6,3 @@ If you are using the Camunda Helm chart, disable Optimize in the `values.yml`:
 optimize:
   enabled: false
 ```
-
-In a manual setup, stop the Optimize process.
