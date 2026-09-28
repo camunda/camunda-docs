@@ -2,22 +2,22 @@
 id: agentic-ai-aiagent-task-example
 sidebar_label: Example integration
 title: Example AI Agent Task connector integration
-description: Example integration using the AI Agent Task connector to implement a feedback loop for user interactions and tool calls with an LLM.
+description: Example integration using the AI Agent Task connector to implement an agent loop for tool calls with an LLM.
 ---
 
-import AgentTaskImg from '../img/ai-agent-task-feedback-loop.png';
+import AgentTaskImg from '../img/ai-agent-task-loop.png';
 
-This worked example demonstrates how to use the [AI Agent Task connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model AI Agent [tools and response interaction feedback loops](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases).
+This worked example demonstrates how to use the [AI Agent Task connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model an AI Agent [agent loop for tools and response interaction](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#agent-loop-use-cases).
 
 ## Create an AI Agent element
 
-First, an AI Agent connector is added and configured in the process diagram. Next, an ad-hoc sub-process is added in a feedback loop to connect the agent to the tools it needs.
+First, an AI Agent connector is added and configured in the process diagram. Next, an ad-hoc sub-process is added in an agent loop to connect the agent to the tools it needs.
 
 :::info
 For more information on how to model the tools available to the AI agent, see [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
 :::
 
-<img src={AgentTaskImg} alt="AI Agent Task with tool calling feedback loop" class="img-700"/>
+<img src={AgentTaskImg} alt="AI Agent Task with tool calling loop" class="img-700"/>
 
 After adding the element, open the properties panel to configure the connection to your model provider and adapt the system and user prompts as needed.
 
@@ -26,7 +26,7 @@ It is important to align the **Agent context** field and the result variable. Th
 - **Agent context**: `agent.context`
 - **Result variable**: `agent`
 
-## Example tools feedback loop {#tools-loop}
+## Agent loop for tool calls {#tools-loop}
 
 ### Configure ad-hoc sub-process and loop
 
@@ -88,9 +88,9 @@ To prevent interference between tool calls, create an [input mapping](../../conc
 2. In the **Local variable name** field, enter `toolCallResult` (or use your custom variable name if you changed it earlier).
 3. Leave the **Variable assignment value** field blank.
 
-## Example response interaction feedback loop {#response-loop}
+## Human-in-the-loop (HITL) follow-up {#response-loop}
 
-Similar to the tools feedback loop, another feedback loop acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.
+Separately from the [agent loop for tool calls](#tools-loop), a [human-in-the-loop (HITL)](/reference/glossary.md#human-in-the-loop-hitl) follow-up acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.
 
 For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts upon follow-up input:
 
@@ -98,14 +98,14 @@ For example, your **User Prompt** field could contain the following FEEL express
 =if (is defined(followUpInput)) then followUpInput else initialUserInput
 ```
 
-With the **AI Agent Task** implementation, the user feedback needs to be modeled to loop back to the AI Agent task:
+With the **AI Agent Task** implementation, the follow-up needs to be modeled to loop back to the AI Agent task:
 
-![AI Agent Task with user feedback loop](../img/ai-agent-task-user-feedback-loop.png)
+![AI Agent Task with human-in-the-loop follow-up](../img/ai-agent-task-human-in-the-loop.png)
 
 :::note
-How you model this type of feedback loop greatly depends on your specific use case.
+How you model this type of follow-up greatly depends on your specific use case.
 
-- The example feedback loop expects a simple feedback action based on a user task, but this could also interact with other process flows or another agent process.
+- The example follow-up expects a simple feedback action based on a user task, but this could also interact with other process flows or another agent process.
 - Instead of the user task, you could also use another LLM connector to verify the response of the AI Agent. For an example of this pattern, see the [fraud detection example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/ai-agent/service-task/fraud-detection).
   :::
 

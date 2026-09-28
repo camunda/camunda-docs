@@ -226,7 +226,7 @@ processTestContext
     .when(
         () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
             .hasActiveElements("User_Feedback"))
-    .as("feedback loop")
+    .as("human-in-the-loop follow-up")
     .then(
         () -> processTestContext.completeUserTask(
             "User_Feedback",
