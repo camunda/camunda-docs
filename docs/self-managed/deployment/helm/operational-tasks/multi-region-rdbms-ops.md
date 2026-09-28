@@ -32,7 +32,11 @@ With three or more zones, none of that applies. Every partition keeps a majority
 | Promote the database             | n/a                                     | Only if the writer was in the lost region       |
 | Failback                         | Snapshot and restore secondary storage  | Redeploy the region                             |
 
-In step count, the [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. Here, a region loss takes at most five, most of them checks, and bringing the region back is one redeploy. Don't apply the dual-region procedure to this architecture: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here, and can cost data.
+In step count, the [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. Here, a region loss takes at most five, most of them checks, and bringing the region back is one redeploy.
+
+:::warning Use this runbook only for Multi-Region RDBMS
+This runbook applies only to a zone-aware cluster with three or more zones and RDBMS secondary storage. Don't run the [dual-region procedure](./dual-region-ops.md) on it: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here and can lose data. For a two-region cluster with Elasticsearch, use the dual-region procedure instead.
+:::
 
 ## Terminology
 

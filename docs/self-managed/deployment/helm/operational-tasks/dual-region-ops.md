@@ -35,10 +35,14 @@ import Fifteen from './img/15.jpg';
 
 This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region and how to ultimately do a full recovery to restore the dual-region setup.
 
-:::tip Resilience tier context
 This procedure is the failover and failback runbook for [Dual-Region](/self-managed/concepts/multi-region/dual-region.md). For an overview of Camunda's multi-region resilience options and how Dual-Region compares to Cold Recovery, see [Multi-region resilience tiers](/self-managed/concepts/multi-region/resilience-tiers.md).
 
-Running three or more regions? Use the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) instead, and see [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). Don't run this procedure on a Multi-Region RDBMS cluster: its force-remove, exporter, and Elasticsearch restore steps don't apply there.
+:::warning Check your topology before you start
+This procedure applies only to a two-region cluster with Elasticsearch secondary storage and numbered brokers, where even node IDs run in one region and odd node IDs in the other.
+
+- On a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) cluster with three or more regions, don't run it: its force-remove, exporter, and Elasticsearch restore steps don't apply there. Use the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) instead.
+- On a cluster that you [migrated to zone-aware brokers](/self-managed/deployment/helm/operational-tasks/zone-aware-migration.md), the node IDs in its commands don't match your brokers. Don't apply them as written.
+
 :::
 
 The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
