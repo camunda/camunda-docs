@@ -193,21 +193,6 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-
-#### AI Agent connectors: redesigned templates, legacy templates deprecated {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
-
-Camunda 8.10 introduces redesigned element templates for the AI Agent Task and AI Agent Sub-process connectors. The new templates broaden support for AI providers and backends, helping you use LLM routes that meet your organization's requirements. Provider-specific capabilities, such as thinking and prompt caching, can support cheaper, faster, and more transparent agent behavior. The legacy element templates are deprecated as of Camunda 8.10, but keep working; existing implementations aren't required to migrate immediately.
-
-**Action:** Use the new element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing legacy implementation to the new templates.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -217,6 +202,21 @@ Camunda 8.10 introduces redesigned element templates for the AI Agent Task and A
 [Camunda 8.10.0-alpha1](/reference/announcements-release-notes/8100/8100-release-notes.md#8100-alpha1) redesigns the conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage). Built-in stores (in-process, Camunda Document, AWS AgentCore) are migrated transparently; only custom `ConversationStore` implementations are affected.
 
 **Action:** If you maintain a custom `ConversationStore`, migrate to the new SPI. See the updated [AI Agent connector customization guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) for the new shape, and the [migration guide on GitHub](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for a step-by-step walkthrough.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### AI Agent connectors: redesigned templates, legacy templates deprecated {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
+
+Camunda 8.10 introduces redesigned element templates for the AI Agent Task and AI Agent Sub-process connectors. The new templates broaden support for AI providers and backends, helping you use LLM routes that meet your organization's requirements. Provider-specific capabilities, such as thinking and prompt caching, can support cheaper, faster, and more transparent agent behavior. The legacy element templates are deprecated as of Camunda 8.10, but keep working; existing implementations aren't required to migrate immediately.
+
+**Action:** Use the new element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing legacy implementation to the new templates.
 
 </div>
 </div>
@@ -302,26 +302,6 @@ A new `messageSubscriptionType` enum field is included in each result. Existing 
 The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance.api.mdx) endpoint previously returned `404 Not Found` when the `decisionEvaluationInstanceKey` path parameter contained invalid characters that did not match the required pattern `^[0-9]+-[0-9]+$`. The endpoint now correctly returns `400 Bad Request` in this case, while `404 Not Found` is reserved for well-formed keys that do not exist.
 
 **Action:** Update any client code or error handling that relied on receiving `404 Not Found` for malformed keys to also handle `400 Bad Request`.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Deleting a process definition with running instances defers history deletion
-
-The delete resource endpoint now accepts process definition deletion when the definition still has running instances. Instead of rejecting the request or waiting for physical removal, the definition [drains](/components/concepts/resource-deletion.md#draining): new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically afterwards.
-
-As a result, when `deleteHistory` is `true`, the `batchOperation` field in the response is `null` for such a definition. Its history is removed as part of the draining lifecycle rather than through an immediately-returned batch operation. The field is still populated for decision requirements definitions and for process definitions that are already fully deleted.
-
-**Action:** If you read `batchOperation` from the delete response to track history deletion, handle a `null` value: the definition is draining. Track progress through the process definition `state` (`DRAINING`) or the `zeebe_process_definitions_draining_count` metric instead.
-
-<p className="link-arrow">[Resource deletion](/components/concepts/resource-deletion.md#draining)</p>
-<p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#delete-draining)</p>
 
 </div>
 </div>
@@ -425,6 +405,26 @@ The `key` sort field on the [Search tenants](/apis-tools/orchestration-cluster-a
 </div>
 <div className="release-announcement-content">
 
+#### Deleting a process definition with running instances defers history deletion
+
+The delete resource endpoint now accepts process definition deletion when the definition still has running instances. Instead of rejecting the request or waiting for physical removal, the definition [drains](/components/concepts/resource-deletion.md#draining): new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically afterwards.
+
+As a result, when `deleteHistory` is `true`, the `batchOperation` field in the response is `null` for such a definition. Its history is removed as part of the draining lifecycle rather than through an immediately-returned batch operation. The field is still populated for decision requirements definitions and for process definitions that are already fully deleted.
+
+**Action:** If you read `batchOperation` from the delete response to track history deletion, handle a `null` value: the definition is draining. Track progress through the process definition `state` (`DRAINING`) or the `zeebe_process_definitions_draining_count` metric instead.
+
+<p className="link-arrow">[Resource deletion](/components/concepts/resource-deletion.md#draining)</p>
+<p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#delete-draining)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Camunda Spring Boot Starter now bundles Spring Boot 4.1.x
 
 Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
@@ -435,51 +435,6 @@ Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tool
 </div>
 
 ## Connectors
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Connectors with a single operation are renamed after the operation
-
-Connectors that provide a single operation are renamed in Modeler so their name describes the action they perform instead of the product they connect to. For example, the **REST Outbound Connector** is now named **Send REST Request**. Connectors with several operations keep their names and expose their operations as searchable entries instead.
-
-Only the name shown in Modeler changed. Template IDs, versions, connector types, and runtime behavior are unchanged, so existing process models continue to run and do not need to be remodeled or redeployed.
-
-**Action:** Search for the new name when you add one of these connectors to a process, and update your own documentation, templates, and training material that refer to the previous names.
-
-**Renamed connectors:**
-
-| Previous name                                   | New name                                           |
-| :---------------------------------------------- | :------------------------------------------------- |
-| Amazon EventBridge Outbound Connector           | Send Event to AWS EventBridge                      |
-| Amazon SNS Outbound connector                   | Publish Message to AWS SNS                         |
-| Amazon SQS Outbound Connector                   | Send Message to AWS SQS                            |
-| AWS Bedrock AgentCore Runtime                   | Invoke Agent in AWS Bedrock AgentCore Runtime      |
-| AWS Bedrock Code Interpreter Outbound Connector | Run Code with AWS Bedrock Code Interpreter         |
-| AWS Bedrock Knowledge Base Outbound Connector   | Retrieve Documents from AWS Bedrock Knowledge Base |
-| AWS Lambda Outbound Connector                   | Invoke AWS Lambda Function                         |
-| AWS SageMaker Outbound Connector                | Run Inference with AWS SageMaker                   |
-| AWS Textract Outbound Connector                 | Extract Text from Document with AWS Textract       |
-| Google Gemini Outbound Connector                | Generate Content with Google Gemini                |
-| GraphQL Outbound Connector                      | Send GraphQL Request                               |
-| Hugging Face Outbound Connector                 | Run Inference on Hugging Face                      |
-| Kafka Outbound Connector                        | Publish Message to Kafka                           |
-| RabbitMQ Outbound Connector                     | Publish Message to RabbitMQ                        |
-| REST Outbound Connector                         | Send REST Request                                  |
-| RPA Connector                                   | Run RPA Script                                     |
-| SendGrid Outbound Connector                     | Send Email with SendGrid                           |
-| SOAP Connector                                  | Send SOAP Request                                  |
-| SQL Database Connector                          | Execute SQL Statement on Database                  |
-
-Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound connector is renamed.
-
-<p className="link-arrow">[Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)</p>
-
-</div>
-</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -540,6 +495,51 @@ The connector runtime reports the connector as **DOWN**, and the validation erro
 ```
 
 <p className="link-arrow">[Response expression](/components/connectors/protocol/http-webhook.md#response-expression)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connectors with a single operation are renamed after the operation
+
+Connectors that provide a single operation are renamed in Modeler so their name describes the action they perform instead of the product they connect to. For example, the **REST Outbound Connector** is now named **Send REST Request**. Connectors with several operations keep their names and expose their operations as searchable entries instead.
+
+Only the name shown in Modeler changed. Template IDs, versions, connector types, and runtime behavior are unchanged, so existing process models continue to run and do not need to be remodeled or redeployed.
+
+**Action:** Search for the new name when you add one of these connectors to a process, and update your own documentation, templates, and training material that refer to the previous names.
+
+**Renamed connectors:**
+
+| Previous name                                   | New name                                           |
+| :---------------------------------------------- | :------------------------------------------------- |
+| Amazon EventBridge Outbound Connector           | Send Event to AWS EventBridge                      |
+| Amazon SNS Outbound connector                   | Publish Message to AWS SNS                         |
+| Amazon SQS Outbound Connector                   | Send Message to AWS SQS                            |
+| AWS Bedrock AgentCore Runtime                   | Invoke Agent in AWS Bedrock AgentCore Runtime      |
+| AWS Bedrock Code Interpreter Outbound Connector | Run Code with AWS Bedrock Code Interpreter         |
+| AWS Bedrock Knowledge Base Outbound Connector   | Retrieve Documents from AWS Bedrock Knowledge Base |
+| AWS Lambda Outbound Connector                   | Invoke AWS Lambda Function                         |
+| AWS SageMaker Outbound Connector                | Run Inference with AWS SageMaker                   |
+| AWS Textract Outbound Connector                 | Extract Text from Document with AWS Textract       |
+| Google Gemini Outbound Connector                | Generate Content with Google Gemini                |
+| GraphQL Outbound Connector                      | Send GraphQL Request                               |
+| Hugging Face Outbound Connector                 | Run Inference on Hugging Face                      |
+| Kafka Outbound Connector                        | Publish Message to Kafka                           |
+| RabbitMQ Outbound Connector                     | Publish Message to RabbitMQ                        |
+| REST Outbound Connector                         | Send REST Request                                  |
+| RPA Connector                                   | Run RPA Script                                     |
+| SendGrid Outbound Connector                     | Send Email with SendGrid                           |
+| SOAP Connector                                  | Send SOAP Request                                  |
+| SQL Database Connector                          | Execute SQL Statement on Database                  |
+
+Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound connector is renamed.
+
+<p className="link-arrow">[Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)</p>
 
 </div>
 </div>
@@ -645,6 +645,70 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Bitnami subcharts removed from the Helm chart
+
+Camunda 8.10 (chart 15.x) no longer bundles the Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak. Camunda 8.9 is the last minor that ships them. Helm installations must connect to external infrastructure instead, such as managed databases and search services, Kubernetes operators, or customer-owned images.
+
+**Action:** If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10; the 8.10 Helm chart has no Bitnami-based fallback. See [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Individual component Docker images no longer produced
+
+Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Operate and Tasklist health indicators replaced by a unified schema readiness check
+
+Camunda 8.10 removes the Operate- and Tasklist-specific Elasticsearch/OpenSearch health indicators (`indicesCheck` and `searchEngineCheck`). A single `schemaReadinessCheck` now backs the gateways readiness probe; it is set once at startup, after the schema is initialized and the cluster reports green or yellow. `searchEngineStatus` reflects the current health status of Elasticsearch/OpenSearch and can be fetched via `/actuator/health` (it is not part of the readiness probe group).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unused PVC in Optimize is unmounted
+
+An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
+
+By default, this mount used an `emptyDir`, so no PVC cleanup is required. However, if you set `optimize.persistence.enabled=true` in `values.yaml`, the PVC may still exist in your Kubernetes cluster even though Optimize no longer mounts it.
+
+**Action:** If you previously enabled `optimize.persistence.enabled=true`, delete the leftover PVC to reclaim storage quota. The claim name is `<releaseName>-camunda-platform-optimize-data`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
@@ -715,70 +779,6 @@ Contour reads `h2c` as cleartext HTTP/2, so leaving it on a TLS-enabled upstream
 The chart emits a deprecation warning naming the flag and the removal only when the shim actually injects an annotation: the flag is on, the Ingress it applies to renders, and you have not set that key yourself. Setting every shim key silences the warning even with the flag still on.
 
 <p className="link-arrow">[Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Bitnami subcharts removed from the Helm chart
-
-Camunda 8.10 (chart 15.x) no longer bundles the Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak. Camunda 8.9 is the last minor that ships them. Helm installations must connect to external infrastructure instead, such as managed databases and search services, Kubernetes operators, or customer-owned images.
-
-**Action:** If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10; the 8.10 Helm chart has no Bitnami-based fallback. See [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Individual component Docker images no longer produced
-
-Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
-
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
-- [camunda/operate](https://hub.docker.com/r/camunda/operate)
-- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
-
-**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Operate and Tasklist health indicators replaced by a unified schema readiness check
-
-Camunda 8.10 removes the Operate- and Tasklist-specific Elasticsearch/OpenSearch health indicators (`indicesCheck` and `searchEngineCheck`). A single `schemaReadinessCheck` now backs the gateways readiness probe; it is set once at startup, after the schema is initialized and the cluster reports green or yellow. `searchEngineStatus` reflects the current health status of Elasticsearch/OpenSearch and can be fetched via `/actuator/health` (it is not part of the readiness probe group).
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Unused PVC in Optimize is unmounted
-
-An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
-
-By default, this mount used an `emptyDir`, so no PVC cleanup is required. However, if you set `optimize.persistence.enabled=true` in `values.yaml`, the PVC may still exist in your Kubernetes cluster even though Optimize no longer mounts it.
-
-**Action:** If you previously enabled `optimize.persistence.enabled=true`, delete the leftover PVC to reclaim storage quota. The claim name is `<releaseName>-camunda-platform-optimize-data`.
 
 </div>
 </div>
