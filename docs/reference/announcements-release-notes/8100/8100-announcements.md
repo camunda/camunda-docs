@@ -150,6 +150,21 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 </div>
 <div className="release-announcement-content">
 
+#### New GCP region
+
+Camunda 8.10 adds support for the Montréal, North America (`northamerica-northeast1`) region in Camunda 8 SaaS.
+
+<p className="link-arrow">[Supported GCP regions](/components/saas/regions.md#google-cloud-platform-gcp-regions)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
 #### MariaDB 12.3 now supported
 
 Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11, 11.4, 11.8, and 12.3.
