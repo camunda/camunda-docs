@@ -162,9 +162,4 @@ The application owns the checks the chart cannot make from values alone, includi
 - [Zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md): how the application places partition replicas and biases leadership across zones.
 - [Configure pod scheduling](pod-scheduling.md): make Kubernetes schedule broker pods into the zones you assigned them to.
 - [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md): a three-region architecture built on zone awareness.
-- **Migrate to zone-aware brokers**: the operational procedure for moving an existing numbered cluster onto zone awareness, once it is published.
-
-<!-- TODO: turn the two "Migrate to zone-aware brokers" references on this page into links to
-     /self-managed/deployment/helm/operational-tasks/zone-aware-migration.md once camunda-docs#10057
-     merges. docusaurus.config.js sets onBrokenLinks to "throw", so the link cannot land before the
-     page exists. -->
+- [Migrate to zone-aware brokers](/self-managed/deployment/helm/operational-tasks/zone-aware-migration.md): the operational procedure for moving an existing numbered cluster onto zone awareness.

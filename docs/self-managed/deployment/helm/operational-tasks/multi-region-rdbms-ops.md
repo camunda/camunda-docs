@@ -76,7 +76,7 @@ Verify the cluster is healthy before you start, so you can tell what the procedu
 
 Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority, so partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker. This only holds when every declared zone is deployed. With one zone declared but not yet active, `2-2-1` runs four replicas of five, and losing either database region leaves two, so processing stops until that zone is deployed or the lost one returns.
 
-Confirm this rather than assuming it, especially if more than one zone is affected:
+Confirm this rather than assuming it. The script takes one lost slot and computes the surviving replicas without it, so its verdict only covers a single lost zone. If more than one zone is affected, don't rely on it: check the partition health of every surviving broker with `./check-cluster-topology.sh`.
 
 ```bash
 ./failover.sh <lost-region-slot> --dry-run
@@ -145,7 +145,7 @@ If you do need to remove it, one atomic change evicts the zone's brokers and dro
 ./failover.sh <lost-region-slot> --drain-brokers
 ```
 
-This issues `DELETE /actuator/cluster/zones/<zone>?force=true` against a surviving region. Without `force=true`, the API tries a graceful drain, which fails when the zone is down. Only do this for a zone that is down and unreachable. See the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+This issues `DELETE /actuator/cluster/zones/<zone>?force=true` against a surviving region. Without `force=true`, the API tries a graceful drain, which fails when the zone is down. Only do this for a zone that is down and unreachable, and for one zone at a time. See the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
 
 ### 5. Verify the degraded cluster
 
