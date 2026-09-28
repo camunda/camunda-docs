@@ -171,6 +171,8 @@ export EXTERNAL_ES_SECRET="external-es"
 
 </details>
 
+You can use the same managed PostgreSQL host for all components—each database is separate. This is common when using a single RDS instance with multiple databases.
+
 ### When to use external target mode
 
 Set `PG_TARGET_MODE=external` or `ES_TARGET_MODE=external` when the migration should **not** deploy operators or create cluster instances, because the target already exists:
@@ -192,7 +194,7 @@ Set `SKIP_HELM_UPGRADE=true` to run the Phase 3 data migration, the backup, rest
 
 This is intended for continuous integration harnesses that migrate Bitnami data onto external infrastructure and then perform an N to N+1 chart upgrade themselves. Normal migrations leave it `false`. Setting `KEYCLOAK_TARGET_MODE=external` derives it automatically, so you do not set it yourself in that case.
 
-You can use the same managed PostgreSQL host for all components—each database is separate. This is common when using a single RDS instance with multiple databases.
+Phase 3 freezes Camunda before the upgrade step, and skipping the upgrade leaves it that way: the components stay scaled to zero and still point at the old backends, so the downtime continues until the caller acts. That upgrade must both switch Camunda to the new backends and restart the components. Phase 3 is still marked complete, so `4-validate.sh` and `5-cleanup-bitnami.sh` will run, but only run them once the caller's upgrade has switched Camunda over.
 
 ### Migrate Keycloak to an external instance {#migrate-keycloak-to-an-external-instance}
 
