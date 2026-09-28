@@ -6,7 +6,7 @@ description: "Learn how to install Camunda 8 on AWS ECS."
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import CostManagement from "../../../\_partials/\_cost-management.md";
+import CostManagement from "../../../_partials/_cost-management.md";
 
 This guide walks you through deploying the [Camunda 8 Orchestration Cluster](/reference/glossary.md#orchestration-cluster) and Connectors on AWS Elastic Container Service (ECS) using Fargate and Aurora PostgreSQL, and verifying that all components are working.
 
