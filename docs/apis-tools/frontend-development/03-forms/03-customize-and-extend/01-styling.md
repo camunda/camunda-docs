@@ -93,7 +93,7 @@ To theme a form after another design system, bind the tokens to its palette. Thi
 }
 ```
 
-That covers color. Anything the tokens do not express — typography, and Material's underlined field, which is a border shape rather than a color — is a component variable or a plain rule:
+That covers color. Anything the tokens don't express is defined by a component variable or a plain rule. This includes typography and Material's underlined field, which uses a border shape rather than a color:
 
 ```css
 .materialized .fjs-container {
