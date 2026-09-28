@@ -102,6 +102,8 @@ tags:
     description: Catalog asset management operations.
   - name: Cluster
     description: Cluster registration operations.
+  - name: Environment
+    description: Environment management operations.
   - name: File
     description: File management operations.
   - name: Folder
@@ -119,6 +121,12 @@ tags:
   - name: Member
     description: Member management operations.
 paths:
+  /environments:
+    $ref: environments.yaml#/paths/~1environments
+  /workspaces/{workspaceKey}/environments:
+    $ref: environments.yaml#/paths/~1workspaces~1{workspaceKey}~1environments
+  /projects/{projectKey}/environments:
+    $ref: environments.yaml#/paths/~1projects~1{projectKey}~1environments
   /catalog/assets/ingestion:
     $ref: catalog.yaml#/paths/~1catalog~1assets~1ingestion
   /catalog/assets/{assetKey}:

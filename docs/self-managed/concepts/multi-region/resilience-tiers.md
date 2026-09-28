@@ -10,9 +10,11 @@ import OverviewImg from './img/multi-region-overview.png';
 
 <PageDescription />
 
+## About
+
 Camunda provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments.
 
-<img src={OverviewImg} alt="High-level diagram showing the Cold Recovery, Dual-Region, and Multi-Region RDBMS strategies" title="Multi-region resilience strategies" class="img-noborder img-700"/>
+<img src={OverviewImg} alt="High-level diagram showing the Cold Recovery, Dual-Region, and Multi-Region RDBMS strategies" title="Multi-region resilience strategies" class="img-noborder img-900"/>
 
 - **[Cold Recovery](./cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable.
 
@@ -20,7 +22,7 @@ Camunda provides a structured multi-region resilience framework for Self-Managed
 
 - **[Multi-Region RDBMS](./multi-region-rdbms.md)**: One Orchestration Cluster runs active-active across three or more regions, backed by a relational database (RDBMS) with cross-region replication as secondary storage. Losing one region preserves the cluster quorum. Database writer failover is required if the lost region held the writer.
 
-## Get started: Choose your strategy
+## Get started: choose your strategy
 
 Choosing the right recovery strategy is determined by how critical your process automation is to your business. How much downtime and data loss can you tolerate, and what compliance obligations do you have?
 

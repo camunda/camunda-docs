@@ -24,7 +24,7 @@ Cluster admin was added in 8.10 alongside [Physical Tenants](/self-managed/conce
 
 ## Cluster-wide operations
 
-Cluster admin protects the operations served under the `/cluster/v2/...` path prefix. Every one of these operations fans out across all Physical Tenants in the cluster.
+Cluster admin protects the operations served under the `/cluster/v2/...` path prefix. These operations can act at cluster scope, with endpoint-specific parameters documented in the generated API reference.
 
 | Area                | Endpoints                                                                                            |
 | ------------------- | ---------------------------------------------------------------------------------------------------- |
