@@ -2,12 +2,18 @@
 id: authorization-model
 title: "Authorization model for Physical Tenants"
 sidebar_label: "Authorization model"
-description: "Learn how cluster-wide and tenant-local authorization work for Physical Tenants in Camunda 8.10."
+description: "Learn how cluster-wide and tenant-local authorization work for Physical Tenants."
 ---
 
-Learn how Camunda 8.10 authorizes Physical Tenant operations at the cluster-wide and tenant-local scopes. For identity provider connections and token routing, see [authentication and authorization](./authentication-authorization.md). For the cluster-admin role itself, see [cluster admin](/components/admin/cluster-admin.md).
+import PageDescription from '@site/src/components/PageDescription';
 
-Authorization is divided into two scopes: cluster-wide operations, which affect the entire orchestration cluster, and tenant-local operations, which are scoped to a single Physical Tenant. Tenant-local operations are fully available in 8.10.
+<PageDescription />
+
+## About
+
+Learn how Camunda authorizes Physical Tenant operations at the cluster-wide and tenant-local scopes. For identity provider connections and token routing, see [authentication and authorization](./authentication-authorization.md). For the cluster-admin role itself, see [cluster admin](/components/admin/cluster-admin.md).
+
+Authorization is divided into two scopes: cluster-wide operations, which affect the entire orchestration cluster, and tenant-local operations, which are scoped to a single Physical Tenant. Tenant-local operations are fully available in Camunda 8.10.
 
 Two new authorization resource types were added for the per-tenant management APIs introduced alongside Physical Tenants:
 
@@ -34,7 +40,7 @@ The Physical Tenant authorization model is designed around per-engine, per-tenan
 
 ## Cluster-wide operations
 
-Cluster-wide operations affect the entire orchestration cluster rather than a single Physical Tenant. Examples include viewing cluster topology, triggering cluster backups, and modifying Physical Tenant configuration at runtime. They are protected by the [cluster-admin role](#cluster-admin-role), exposed under the `/cluster/v2/...` path prefix.
+Cluster-wide operations affect the entire orchestration cluster rather than a single Physical Tenant. Examples include viewing cluster topology, triggering cluster backups, and modifying Physical Tenant configuration at runtime. They are protected by the [cluster-admin role](#cluster-admin-role), exposed under the `/cluster/v2/...` path prefix, except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers can use it as a health check.
 
 Endpoints served at `/v2/...` without a `/physical-tenants/{physicalTenantId}` prefix, including `/v2/topology`, are scoped to the default Physical Tenant. They are not cluster-wide endpoints. Cluster-wide endpoints use the `/cluster/v2/...` prefix.
 
