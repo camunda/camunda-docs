@@ -207,13 +207,25 @@ Recovery is the reverse and has no restore step: redeploy the region, and its br
 
 There is no recovery procedure. There is still a recovery window.
 
-**No procedure**, because on the engine a zone loss is the same class of event as a broker loss. A single-region cluster that loses a broker holds a Raft re-election for the partitions that broker led, and its clients reconnect to the new leaders. Nobody calls that downtime. Losing a zone runs the same sequence over the same protocol: no restore, no backup to replay, and no judgment call about whether the failure is temporary or permanent. That is the difference from [Dual-Region](./dual-region.md), where the same event costs the quorum and processing stops until an operator intervenes.
+**No procedure**, because on the engine a zone loss is the same class of event as a broker loss.
+
+A single-region cluster that loses a broker holds a Raft re-election for the partitions that broker led, and its clients reconnect to the new leaders. Nobody calls that downtime. Losing a zone runs the same sequence over the same protocol:
+
+- No restore, and no backup to replay.
+- No judgment call about whether the failure is temporary or permanent.
+
+That is the difference from [Dual-Region](./dual-region.md), where the same event costs the quorum and processing stops until an operator intervenes.
 
 **A window**, because reconfiguration takes time, and two thirds of it are not Camunda's to shorten. That is why this page describes the behavior instead of publishing an RTO figure: the number you would actually experience is mostly a property of your client timeouts and your traffic routing.
 
 **Data loss depends on which store you mean.** The engine's own state loses nothing: Raft commits a record only once a majority of its replicas hold it, so with one replica per zone and three zones a commit needs two, and losing one zone always leaves at least one replica that has the record.
 
-Secondary storage is different, because the database replicates asynchronously. An unplanned promotion can omit records that had not reached the promoted standby. With `LOG_SEQ`, the exporter acknowledges a record only after the configured minimum number of standbys report its log sequence number. Zero secondary-storage loss therefore requires the promoted standby to be among those confirmed replicas. With `DELAY`, the exporter observes no replication state; the configured delay must exceed the actual lag, which you monitor outside Camunda. Both strategies hold back Zeebe log compaction so retained records can be replayed after promotion.
+Secondary storage is different, because the database replicates asynchronously. An unplanned promotion can omit records that had not reached the promoted standby.
+
+- **With `LOG_SEQ`**, the exporter acknowledges a record only after the configured minimum number of standbys report its log sequence number. Zero secondary-storage loss requires the promoted standby to be among those confirmed replicas.
+- **With `DELAY`**, the exporter observes no replication state. The configured delay must exceed the actual lag, which you monitor outside Camunda.
+
+Both strategies hold back Zeebe log compaction, so retained records can be replayed after promotion.
 
 That makes the guarantee conditional on replication configuration and disk capacity rather than on the architecture alone. Retained log segments accumulate for as long as records remain unacknowledged. Size the volume for your write rate and the longest replication outage you plan to tolerate, and alert on broker disk usage.
 
@@ -229,11 +241,16 @@ That makes the guarantee conditional on replication configuration and disk capac
 
 Skewing partition leadership to the writer's zone makes the first of these worse in one specific case: losing that zone loses most partition leaders at once, so more partitions re-elect simultaneously. That is the price of avoiding an inter-region round trip on every export flush, and it is worth knowing which zone you made expensive to lose.
 
-**Client configuration decides whether the re-election and rerouting windows are visible.** A re-election is a window a client retries through, not an outage, but only if its timeout and retry budget is set to survive one. A client that gives up on the first refused connection sees the re-election as downtime, in a single-region cluster as much as here. The window is longer here, because the new leader and the rerouted client can both be a region away. Size client timeouts and retries for a leader change that crosses a region boundary.
+**Client configuration decides whether the re-election and rerouting windows are visible.** A re-election is a window a client retries through, not an outage, but only if its timeout and retry budget survives one. A client that gives up on the first refused connection sees the re-election as downtime, in a single-region cluster as much as here.
+
+The window is longer here, because the new leader and the rerouted client can both be a region away. Size client timeouts and retries for a leader change that crosses a region boundary.
 
 ### Removing a lost zone
 
-Whether the lost zone has to be removed depends on the replicas it held, not on how many zones there are. It is the same rule that governs the layout in the first place: a partition keeps its quorum as long as the lost zone held fewer than half its replicas. Under a layout that satisfies it, such as the default `2-2-1` across three zones, the majority holds and removing the zone is optional. With two zones, or under a layout where one zone holds half the replicas or more such as `4-1-1`, losing that zone costs the quorum, and processing only resumes once the zone is removed from the partition distribution.
+Whether the lost zone has to be removed depends on the replicas it held, not on how many zones there are. A partition keeps its quorum as long as the lost zone held fewer than half its replicas:
+
+- **Under a layout that satisfies this**, such as the default `2-2-1` across three zones, the majority holds and removing the zone is optional.
+- **With two zones, or when one zone holds half the replicas or more** (for example `4-1-1`), losing that zone costs the quorum. Processing only resumes once the zone is removed from the partition distribution.
 
 Removing an optional zone is usually not worth it for a zone you expect back, because brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
 
