@@ -17,12 +17,13 @@ This is a topology change in SaaS only and does not affect Self-Managed deployme
 What's new:
 
 - [Unified API domain for Orchestration Clusters](#unified-api-domain-for-orchestration-clusters). Legacy hostnames are deprecated but will remain available throughout 8.9 and are scheduled for removal in 8.10.
+- [Web app URLs require an explicit application path.](#web-app-urls-require-an-explicit-application-path) The cluster base URL no longer redirects to Operate, Tasklist, or Admin automatically.
 - [Client credentials for new clusters use unified API URLs.](#client-credentials-and-legacy-hostnames)
 - [Cluster Metrics endpoint: `service` labels have changed on Orchestration Cluster metrics.](#service-label-changes)
 
 What didn't change:
 
-- The same UIs for Operate, Tasklist, and Admin/Identity and the REST API remain available as before.
+- The same UIs for Operate, Tasklist, and Admin/Identity and the REST API remain available, although web app URLs now [require an explicit application path](#web-app-urls-require-an-explicit-application-path).
 - The Zeebe gRPC endpoint is unchanged.
 
 ## Unified API domain for Orchestration Clusters
@@ -39,6 +40,28 @@ Camunda 8.9 introduces a unified API domain for Orchestration Clusters. All serv
 Legacy hostnames (`*.zeebe.<camunda-domain>`, `*.operate.<camunda-domain>`, `*.tasklist.<camunda-domain>`, and `*.identity.<camunda-domain>`) continue to work in 8.9 and are internally routed to the unified service, but are deprecated and scheduled for removal in 8.10.
 
 After the 8.10 release, only the Zeebe gRPC endpoint and the unified `*.api.*` endpoints will remain.
+
+### Web app URLs require an explicit application path
+
+From 8.9, you must include the application path (`/operate`, `/tasklist`, or `/admin`) when opening a web app. Requesting the cluster base URL on its own no longer opens a web app.
+
+Before 8.9, Operate, Tasklist, and Admin ran as standalone applications, so the runtime could determine which frontend to serve and redirected the cluster base URL to the matching web app automatically. For example, `https://bru-2.operate.camunda.io/abc123-def456-ghi789` redirected to `https://bru-2.operate.camunda.io/abc123-def456-ghi789/operate`.
+
+From 8.9, Operate, Tasklist, Admin, and the REST API are served by the same unified application, so the runtime cannot infer which frontend a request is for. The automatic redirect no longer happens, and the cluster base URL does not resolve to a web app.
+
+Update any stored links that rely on the previous redirect, including browser bookmarks, links saved in external systems, and links embedded in processes or documentation created before 8.9. Each must point at the full path:
+
+- `https://<region>.api.<camunda-domain>/<cluster-id>/operate`
+- `https://<region>.api.<camunda-domain>/<cluster-id>/tasklist`
+- `https://<region>.api.<camunda-domain>/<cluster-id>/admin`
+
+To confirm the correct URL for a cluster, open the cluster in Camunda Console and use the launch links for Operate, Tasklist, or Admin.
+
+If your organization uses [IP allowlisting](/components/hub/organization/manage-clusters/manage-ip-allowlists.md), a request to the cluster base URL without an application path can return `403 Forbidden` rather than an obvious routing error, because the base path is subject to allowlist restrictions. A `403` on the base URL is therefore an expected symptom of a stored link that is missing its application path, not necessarily an allowlist misconfiguration.
+
+:::note
+URLs extracted from the HTML of Camunda web UIs are not a stable interface and can change between releases. Use the documented URL formats above or the Console launch links instead of scraping links from the UI.
+:::
 
 ### Deprecation
 
