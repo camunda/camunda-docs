@@ -56,6 +56,7 @@ mdx:
 
 ## Classes
 
+- [CamundaClientBase](classes/CamundaClientBase.md)
 - [CamundaValidationError](classes/CamundaValidationError.md)
 - [CancelError](classes/CancelError.md)
 - [EventualConsistencyTimeoutError](classes/EventualConsistencyTimeoutError.md)
