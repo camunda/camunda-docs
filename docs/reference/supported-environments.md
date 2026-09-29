@@ -62,7 +62,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
   - [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
   - [Google GKE](/self-managed/deployment/helm/cloud-providers/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md) (4.10+)
+- [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)
 - [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`, `linux/arm64`)
 - [Manual](/self-managed/deployment/manual/install.md)
 
