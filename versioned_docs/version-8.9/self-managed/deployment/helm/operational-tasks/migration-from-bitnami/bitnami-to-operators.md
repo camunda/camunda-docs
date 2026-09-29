@@ -122,7 +122,7 @@ Phase 2 logs the indices it matched. Check that list against `_cat/indices` on t
 
 ### Source and target database names
 
-The `*_DB_NAME` and `*_DB_USER` variables above name the databases and roles the migration writes **into**. They do not have to match your Bitnami installation, because the source names are different by default:
+The `*_DB_NAME` and `*_DB_USER` variables above name the databases and roles the migration writes into. They do not have to match your Bitnami installation, because the source names are different by default:
 
 | Component   | Source name in a stock Helm installation | Target name created by the migration |
 | ----------- | ---------------------------------------- | ------------------------------------ |
@@ -740,9 +740,7 @@ duplicate key value violates unique constraint "constraint_jgroups_ping"
   Detail: Key (address)=(uuid://...0002) already exists.
 ```
 
-`JGROUPS_PING` is Keycloak's transient JDBC_PING cluster-discovery table. Its rows hold the node addresses of the **source** cluster, so restoring them into a fresh Keycloak collides with the membership row the target inserts on its own startup.
-
-The migration scripts prevent this: the Keycloak dump excludes the `JGROUPS_PING` table data while keeping its schema, so the target starts clean and registers its own membership. The exclusion is keyed on the component being backed up, so it applies whether `KEYCLOAK_TARGET_MODE` is `operator` or `external`.
+See [transient Keycloak cluster data is excluded automatically](./bitnami-to-managed-services.md#transient-keycloak-cluster-data-is-excluded-automatically) for why `JGROUPS_PING` causes this. The migration scripts already prevent it: the Keycloak dump excludes the `JGROUPS_PING` table data while keeping its schema, so the target starts clean and registers its own membership. The exclusion is keyed on the component being backed up, so it applies whether `KEYCLOAK_TARGET_MODE` is `operator` or `external`.
 
 If you hit this on a custom or older pipeline, exclude the table data from the dump with `pg_dump --exclude-table-data=jgroups_ping`, or run `TRUNCATE jgroups_ping` in the target database before starting Keycloak.
 

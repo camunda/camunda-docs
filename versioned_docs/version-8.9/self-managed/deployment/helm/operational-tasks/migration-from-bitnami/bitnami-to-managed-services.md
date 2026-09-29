@@ -175,14 +175,14 @@ You can use the same managed PostgreSQL host for all components—each database 
 
 ### When to use external target mode
 
-Set `PG_TARGET_MODE=external` or `ES_TARGET_MODE=external` when the migration should **not** deploy operators or create cluster instances, because the target already exists:
+Set `PG_TARGET_MODE=external` or `ES_TARGET_MODE=external` when the migration should not deploy operators or create cluster instances, because the target already exists:
 
-| Scenario                                                                                 | Setting                   | Why                                                                                                                                                                                   |
-| ---------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Fresh cluster, no operators installed                                                    | `operator` (default)      | The scripts install CloudNativePG and ECK, then create the clusters.                                                                                                                  |
-| A platform team already installed the operators **and** provisioned the target instances | `external`                | Avoids overwriting the operator version, since the scripts apply a pinned version with `kubectl apply --server-side`.                                                                 |
-| You run a different PostgreSQL operator, such as StackGres, Crunchy, or Zalando          | `PG_TARGET_MODE=external` | CloudNativePG is never installed. Create the databases with your own operator and point the migration at them.                                                                        |
-| The target is a managed service, such as Amazon RDS or Elastic Cloud                     | `external`                | No operator is needed. PostgreSQL is restored straight into the managed endpoint. Elasticsearch data is only transferred when `ES_WARM_REINDEX=true`; otherwise you move it yourself. |
+| Scenario                                                                             | Setting                   | Why                                                                                                                                                                                   |
+| ------------------------------------------------------------------------------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fresh cluster, no operators installed                                                | `operator` (default)      | The scripts install CloudNativePG and ECK, then create the clusters.                                                                                                                  |
+| A platform team already installed the operators and provisioned the target instances | `external`                | Avoids overwriting the operator version, since the scripts apply a pinned version with `kubectl apply --server-side`.                                                                 |
+| You run a different PostgreSQL operator, such as StackGres, Crunchy, or Zalando      | `PG_TARGET_MODE=external` | CloudNativePG is never installed. Create the databases with your own operator and point the migration at them.                                                                        |
+| The target is a managed service, such as Amazon RDS or Elastic Cloud                 | `external`                | No operator is needed. PostgreSQL is restored straight into the managed endpoint. Elasticsearch data is only transferred when `ES_WARM_REINDEX=true`; otherwise you move it yourself. |
 
 External mode skips both the operator installation and the creation of the target instances. Create the PostgreSQL databases and the Elasticsearch cluster yourself before starting, and verify they are reachable from the Camunda namespace. Phase 3 restores into them directly, so a missing or unreachable target fails the cutover after the application has already been frozen.
 
@@ -190,7 +190,7 @@ In external mode you must also provide the `EXTERNAL_PG_*` or `EXTERNAL_ES_*` co
 
 ### Data-only cutover with `SKIP_HELM_UPGRADE`
 
-Set `SKIP_HELM_UPGRADE=true` to run the Phase 3 data migration, the backup and the restore, but skip the final `helm upgrade`. The caller then owns the chart upgrade. Elasticsearch is reindexed as part of that phase only if you ran Phase 2 with `ES_WARM_REINDEX=true`; with the default `ES_WARM_REINDEX=false` and an external target, `3-cutover.sh` warns that automated transfer is unsupported and you move the data yourself.
+Set `SKIP_HELM_UPGRADE=true` to run the Phase 3 data migration, the backup, and the restore, but skip the final `helm upgrade`. The caller then owns the chart upgrade. Elasticsearch is reindexed as part of that phase only if you ran Phase 2 with `ES_WARM_REINDEX=true`; with the default `ES_WARM_REINDEX=false` and an external target, `3-cutover.sh` warns that automated transfer is unsupported and you move the data yourself.
 
 This is intended for continuous integration harnesses that migrate Bitnami data onto external infrastructure and then perform an N to N+1 chart upgrade themselves. Normal migrations leave it `false`. Setting `KEYCLOAK_TARGET_MODE=external` derives it automatically, so you do not set it yourself in that case.
 
