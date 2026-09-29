@@ -42,9 +42,8 @@ logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
   );
   /* Two-level navbar: accommodate both rows */
   --ifm-navbar-height: 6rem;
-  /* Body text links stay blue, distinct from the neutral primary scale */
-  --ifm-link-color: #1f6fb5;
-  --ifm-link-hover-color: #17568c;
+  --ifm-link-color: #171717;
+  --ifm-link-hover-color: #000000;
 }
 
 /* Two-level navbar layout */
@@ -501,7 +500,19 @@ a {
 .markdown h5 a,
 .markdown h6 a {
   text-decoration: underline;
-  text-decoration-color: #1f6fb559;
+  text-decoration-color: #17171799;
+}
+
+.markdown p a:hover,
+.markdown li a:hover,
+.markdown td a:hover,
+.markdown h1 a:hover,
+.markdown h2 a:hover,
+.markdown h3 a:hover,
+.markdown h4 a:hover,
+.markdown h5 a:hover,
+.markdown h6 a:hover {
+  text-decoration-color: #171717;
 }
 
 /* Dark Mode > Link underlines for AA accessibility */
@@ -575,6 +586,9 @@ a {
 }
 [data-theme="dark"] .footer__link-item {
   text-decoration: none;
+}
+.footer__link-item:hover {
+  color: #ffffff;
 }
 [data-theme="dark"] li a.dropdown__link {
   text-decoration: none;
