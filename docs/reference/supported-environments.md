@@ -139,7 +139,11 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 ### Component version matrix
 
-The following matrix shows which component versions work together. Within each row, components in each column must align on version: Orchestration Cluster components (Zeebe, Connectors, Optimize) must share the same `minor` and `patch` version, and Management Identity and Camunda Hub must share the same version. Desktop Modeler follows its own versioning and is not version-locked to other components.
+The following matrix shows which component versions work together. Within each row, components in each column must align on version:
+
+- Orchestration Cluster components, Connectors, and Optimize must share the same `minor` and `patch` version
+- Management Identity and Camunda Hub must share the same `minor` and `patch` version
+- Desktop Modeler follows its own versioning and is not version-locked to other components
 
 For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
 
