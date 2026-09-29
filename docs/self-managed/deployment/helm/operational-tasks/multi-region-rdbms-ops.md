@@ -78,7 +78,7 @@ The surviving zones keep processing if they hold a majority of each partition's 
 
 A cluster with only two zones, such as `2-2` before you add the third region, has no such margin. Losing either zone leaves two replicas of four, and processing stops.
 
-Check this rather than assuming it. The script takes one lost slot and computes the surviving replicas without it, so its verdict only covers a single lost zone. If more than one zone is affected, don't rely on it: check the partition health of every surviving broker with `./check-cluster-topology.sh`.
+Confirm this rather than assuming it. The script takes one lost slot and computes the surviving replicas without it. Its verdict only covers a single lost zone. If more than one zone is affected, the reference procedures don't cover the situation. Read the partition health of the surviving brokers from `GET /actuator/cluster` on a surviving region instead. Don't use `./check-cluster-topology.sh` here: it expects every active region to be up.
 
 ```bash
 ./failover.sh <lost-region-slot> --dry-run
@@ -245,7 +245,7 @@ The regions already running keep their shorter contact point list, and they don'
 `activate-region.sh` only adds the zone of a slot that was in `regions` when the cluster was bootstrapped. The reference implementation derives the partition count from that slot list, and the partition count can't change after bootstrap. List every region you may ever run in `regions` before the first deployment.
 :::
 
-The script refuses a slot that is not yet part of the deployed topology. Run the Terraform step above first. The script rejects any slot at or beyond `CAMUNDA_ACTIVE_REGIONS` and reports the valid range. It does not deploy into a zone the cluster does not expect.
+The script rejects any slot outside the provisioned range, `0` to `CAMUNDA_REGION_SLOTS - 1`. Before you run it, apply the Terraform step above. Then re-source the environment and register the kubectl context, so `CAMUNDA_ACTIVE_REGIONS` and `CLUSTER_CONTEXTS` include the new slot.
 
 ## Upgrade the cluster
 
