@@ -32,7 +32,7 @@ Multi-Region RDBMS removes both by changing two things: the number of regions, a
 
 | Consideration     | Dual-Region                                                                       | Multi-Region RDBMS                                                                           |
 | :---------------- | :-------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
-| Regions           | Exactly two                                                                       | Three or more                                                                                |
+| Regions           | Exactly two                                                                       | Two or more. Three or more to keep processing through a region loss                          |
 | Region loss       | Quorum lost, processing stops until brokers are force-removed                     | Quorum preserved, processing continues                                                       |
 | Failback          | Multi-step runbook including a secondary storage snapshot and restore             | Redeploy the region, nothing to restore                                                      |
 | Secondary storage | Elasticsearch, one cluster per region, one Camunda exporter per region            | RDBMS, one database, one exporter, replication inside the database                           |
@@ -129,7 +129,7 @@ Skewing partition leadership to the writer's zone through zone priority reduces 
 | Setting                       | Requirement                                                                                                                                  |
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
 | Partitioning scheme           | `ZONE_AWARE`. The parity-based broker numbering only supports exactly two regions.                                                           |
-| Zones                         | One zone per region, three or more.                                                                                                          |
+| Zones                         | One zone per region, two or more. Three or more to keep processing through a region loss.                                                    |
 | `number-of-replicas` per zone | Declared per zone, and free to differ between them. No zone may hold half the replication factor or more.                                    |
 | `number-of-brokers` per zone  | Declared per zone. Keep zones balanced so a zone loss removes an equal share of capacity.                                                    |
 | Surviving capacity            | Size the cluster so the regions left after a loss carry the full workload. Quorum surviving is not the same as the cluster keeping up.       |
