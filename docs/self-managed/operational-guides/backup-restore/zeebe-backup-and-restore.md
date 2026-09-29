@@ -6,6 +6,10 @@ description: "Backup API to create a backup of a running Zeebe cluster comprised
 keywords: ["backup", "backups"]
 ---
 
+:::tip
+From Camunda 8.10, you can also use the Orchestration Cluster REST API to create, query, and manage runtime backups. See the [Orchestration Cluster REST API reference](/apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup.api.mdx).
+:::
+
 :::warning breaking changes
 As of the Camunda 8.8 release, the `/actuator` endpoints for backups have been moved to `/actuator/backupRuntime`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
 :::

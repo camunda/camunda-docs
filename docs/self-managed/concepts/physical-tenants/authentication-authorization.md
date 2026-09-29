@@ -2,8 +2,14 @@
 id: authentication-authorization
 title: "Authentication and authorization for Physical Tenants"
 sidebar_label: "Authentication and authorization"
-description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
+description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Learn how identity providers connect to Physical Tenants and how tokens are routed to the correct tenant. For the resource and permission model and cluster-wide versus tenant-local authorization, see [authorization model](./authorization-model.md).
 

@@ -2236,14 +2236,35 @@ module.exports = {
             {
               Elasticsearch: [
                 "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
-                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+                {
+                  type: "category",
+                  label: "Restore a backup",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+                  },
+                  items: [
+                    "self-managed/operational-guides/backup-restore/elasticsearch/es-restore-api",
+                    "self-managed/operational-guides/backup-restore/elasticsearch/es-restore-application",
+                  ],
+                },
               ],
               "Relational databases": [
                 "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
-                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+                {
+                  type: "category",
+                  label: "Restore a backup",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+                  },
+                  items: [
+                    "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore-api",
+                    "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore-application",
+                  ],
+                },
               ],
             },
-            "self-managed/operational-guides/backup-restore/in-process-restore",
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",
@@ -2296,16 +2317,17 @@ module.exports = {
               },
               items: [
                 "self-managed/concepts/physical-tenants/index",
-                "self-managed/concepts/physical-tenants/storage-isolation",
-                "self-managed/concepts/physical-tenants/custom-exporters",
-                "self-managed/concepts/physical-tenants/api-routing",
-                "self-managed/concepts/physical-tenants/authentication-authorization",
-                "self-managed/concepts/physical-tenants/authorization-model",
+                "self-managed/concepts/physical-tenants/getting-started",
                 "self-managed/concepts/physical-tenants/configuration-reference",
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
+                "self-managed/concepts/physical-tenants/storage-isolation",
+                "self-managed/concepts/physical-tenants/custom-exporters",
+                "self-managed/concepts/physical-tenants/authentication-authorization",
+                "self-managed/concepts/physical-tenants/authorization-model",
+                "self-managed/concepts/physical-tenants/api-routing",
+                "self-managed/concepts/physical-tenants/troubleshooting",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
                 "self-managed/concepts/physical-tenants/app-integrations",
-                "self-managed/concepts/physical-tenants/troubleshooting",
               ],
             },
           ],

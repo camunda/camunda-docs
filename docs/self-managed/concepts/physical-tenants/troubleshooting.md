@@ -5,7 +5,13 @@ sidebar_label: "Troubleshooting"
 description: "Diagnose startup, routing, authorization, storage, and performance problems in an Orchestration Cluster running multiple Physical Tenants."
 ---
 
-Diagnose problems specific to running multiple Physical Tenants in one Orchestration Cluster, and separate them from general cluster faults.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Learn how to diagnose problems specific to running multiple Physical Tenants in one Orchestration Cluster, and separate them from general cluster faults.
 
 Most symptoms in a multi-tenant cluster fall into one of two categories: the whole cluster is unhealthy, or a single Physical Tenant is degraded while its peers keep serving traffic. Start by determining which one you have, because the two have different causes and different fixes.
 
@@ -43,6 +49,8 @@ Use these endpoints to answer the questions above:
 | `/actuator/cluster`                  | Cluster | Cluster topology, plus `pendingChange` and `lastChange` for configuration changes in progress. |
 | `/actuator/health`                   | Node    | Whether an individual broker or gateway node is healthy.                                       |
 
+`/physical-tenants/{id}/v2/topology` is the tenant-prefixed form of `/v2/topology`, not a separate endpoint. An unprefixed `/v2/topology` request returns the `default` tenant's topology only; for the cluster-wide aggregate, use `/cluster/v2/topology`.
+
 The `/cluster/v2/...` and `/physical-tenants/...` endpoints are served on the Gateway REST port, 8080 by default. The `/actuator/...` endpoints are served on the management port, 9600 by default.
 
 If `/cluster/v2/status` is healthy but one tenant is failing, the problem is scoped to that tenant. Troubleshoot it with the sections below rather than treating it as a cluster outage.
@@ -55,7 +63,7 @@ A Physical Tenant most often becomes **degraded** because its secondary storage 
 
 - Storage-dependent `/v2/...` REST endpoints for that tenant return `503 Service Unavailable` with a `Retry-After` header and a problem-detail body.
 - Other Physical Tenants continue serving requests normally.
-- The node stays in the load balancer as long as at least one tenant is serviceable.
+- On Elasticsearch and OpenSearch deployments where the secondary-storage readiness check is enabled, the check is `UP` as long as at least one tenant is serviceable. The overall readiness group can still be `DOWN` because of other readiness contributors. In the current implementation, a degraded `default` tenant can also keep node readiness `DOWN` even when another tenant is ready; this known limitation is tracked in [camunda/camunda#63674](https://github.com/camunda/camunda/issues/63674).
 - The per-tenant readiness gauge `camunda.physical.tenant.secondary.storage.ready` reports `0` for the affected tenant.
 - Per-tenant transition logs name the tenant and state whether an operator needs to act.
 
@@ -70,13 +78,6 @@ If you have capped the retry count in your retry configuration, a tenant that ex
 :::note
 Request rejection for degraded tenants applies to REST endpoints. gRPC and MCP requests are not rejected on this basis.
 :::
-
-### When a degraded tenant still takes the node down
-
-Two cases fall outside per-tenant isolation:
-
-- **Nodes with a single Physical Tenant.** A node configured with only one tenant keeps the original synchronous fail-fast startup behavior. Per-tenant isolation applies to nodes serving two or more tenants.
-- **A database vendor that cannot be resolved from configuration.** Camunda resolves each tenant's database vendor from an explicit `database-vendor-id`, or from the JDBC URL prefix. If neither resolves, startup fails for the whole node. This is a static configuration error rather than a statement about tenant health.
 
 If a tenant's JDBC URL uses a prefix Camunda does not recognize, such as jTDS or a driver proxy, Camunda falls back to opening one connection at startup to identify the vendor. That tenant is no longer isolated from an unreachable database, and the startup log warns and names the property that removes the fallback. Set `database-vendor-id` explicitly for these tenants.
 
@@ -155,7 +156,7 @@ Each Physical Tenant applies its own mapping rules independently. The same token
 
 ### Cluster-wide operations are rejected
 
-Endpoints under `/cluster/v2/...` require the cluster-admin role. Brokers start successfully when the role is not configured, so a missing cluster-admin configuration only surfaces when someone calls a cluster-wide endpoint.
+Endpoints under `/cluster/v2/...` require the cluster-admin role, except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers can use it as a health check (see [health and status endpoints](./index.md#health-and-status-endpoints)). Brokers start successfully when the role is not configured, so a missing cluster-admin configuration only surfaces when someone calls a cluster-wide endpoint other than `/status`.
 
 Configure cluster-admin access under `camunda.security.cluster-admin.oidc.*` for OIDC, or `camunda.security.cluster-admin.basic.users` for Basic authentication.
 

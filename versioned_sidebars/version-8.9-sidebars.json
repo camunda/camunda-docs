@@ -3948,6 +3948,15 @@
         },
         {
           "type": "category",
+          "label": "Multi-tenancy",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/multi-tenancy/index"
+          },
+          "items": ["self-managed/concepts/multi-tenancy/logical-tenants"]
+        },
+        {
+          "type": "category",
           "label": "Audit log",
           "link": {
             "type": "doc",

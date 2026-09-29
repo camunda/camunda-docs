@@ -864,6 +864,47 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster warns about an incorrect OIDC configuration at startup
+
+The Orchestration Cluster checks its OIDC configuration at startup and writes a warning for each problem it finds. The cluster still starts.
+
+- The checks cover the client ID, the set of endpoints, the scope, and the shape of the redirect URI.
+- A redirect URI with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`.
+- Any other unusable value stays as configured, and the login fails later.
+
+**Action:** Review your startup logs after the upgrade. The warnings come from the loggers `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` and `io.camunda.security.spring.oidc.OidcRedirectionEndpoint`.
+
+<p className="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster starts when an identity provider is unreachable
+
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is down no longer stops the cluster from starting.
+
+- Only the requests that need that provider fail, such as browser login requests and token-validation requests. All other requests succeed, and a failed request recovers when the provider answers, without a restart.
+- A failed request writes a warning, at most once each minute for each combination of failed step and provider.
+
+**Action:** If you used a failed startup to detect an unreachable identity provider, alert on the `DeferredOidcResolution` warning instead. This covers a provider that the cluster resolves through its issuer URI. A provider with a static `jwk-set-uri` or `user-info-uri` gives a different signal, or none, so read the debugging guide before you rely on this alert.
+
+<p className="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
+
+</div>
+</div>
+
 ## Integrations
 
 <div className="release-announcement-row">
@@ -983,6 +1024,27 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 **Action:** Treat this as a temporary escape hatch, not a supported long-term mode. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required.
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-component-specific-configuration)</p>
+
+</div>
+</div>
+
+## Tasklist
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Tasklist custom styling uses Camunda design system tokens
+
+Starting with Camunda 8.10, the Tasklist UI uses the Camunda design system instead of the Carbon Design System. Custom styles in `custom.css` that override Carbon `--cds-*` tokens or use `:root[data-carbon-theme='g10']` and `:root[data-carbon-theme='g100']` selectors no longer have any effect. Tasklist falls back to its default styling without showing an error.
+
+The `custom.css` file location has also changed. In the Docker image, place the file at `/usr/local/camunda/config/custom.css` instead of `/usr/local/tasklist/config/custom.css`. In the distribution archive, place it in the `config` directory. Camunda now serves the file at `<context-path>/custom.css` instead of `/tasklist/custom.css`.
+
+**Action:** When you upgrade to 8.10, rewrite your custom styles to override the Camunda design system tokens using the `html .c4-ui` (light theme) and `html .c4-ui.dark` (dark theme) selectors, and move `custom.css` to the new location.
+
+<p className="link-arrow">[Tasklist custom styling](/self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling.md)</p>
 
 </div>
 </div>
