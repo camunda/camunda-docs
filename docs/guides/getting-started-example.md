@@ -31,7 +31,7 @@ This guide is tailored for developers who want to implement process automation s
 You will:
 
 - Run Camunda 8 in a local development environment using **Camunda 8 Run**.
-- Use the **Camunda Modeler** to deploy and start a business process.
+- Use the **Desktop Modeler** to deploy and start a business process.
 - Run workers written in one of:
   - The **Spring (Java) SDK**,
   - The **Node.js (JavaScript) SDK**,
@@ -81,7 +81,7 @@ Download the Getting Started Package from [Camunda Downloads](/downloads).
 The starter package includes the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
-- [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
+- [Desktop Modeler](/components/modeler/desktop-modeler/index.md) – An application for modeling BPMN, DMN, and Forms.
 - [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C#.
 
 All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
@@ -122,33 +122,31 @@ The service tasks in the process are executed by [job workers](/reference/glossa
   </li>
 
   <li>
-    Open the Camunda Modeler application from the starter package.
+    Open the Desktop Modeler application from the starter package.
   </li>
 
   <li>
-    In Camunda Modeler, use:
-    <pre><code>File &gt; Open File...</code></pre>
-    to open the file:
-    <pre><code>camunda-8-get-started/2-order-process-with-service-workers/bpmn/order-process.bpmn</code></pre>
+    In Desktop Modeler, click <b>File > Open File</b>
+  </li>
+
+  <li>
+  Select `camunda-8-get-started/2-order-process-with-service-workers/bpmn/order-process.bpmn`
   </li>
 
   <li>
     Click the "Rocket" icon to connect to your Camunda 8 Run instance and deploy the model.
     You can use the pre-configured `c8run (local)` connection.
-
-    ![Connect to Cluster and deploy model](./img/get-started-example-deploy.png)
-
   </li>
 
   <li>
-    Click the “Play” icon on the bottom toolbar of Modeler to deploy and start an instance of the process model.
+    Click the “Play” icon on the bottom toolbar of Desktop Modeler to deploy and start an instance of the process model.
 
     <p>You do not need to set any variables for the process.</p>
 
     <p>Optionally, you can set a value for the <code>item</code> variable by pasting in:</p>
     <pre><code>{`{"item": "special widget"}`}</code></pre>
 
-    ![Start a new process instance in Camunda Modeler](./img/get-started-example-start-process.png)
+    ![Start a new process instance in Desktop Modeler](./img/get-started-example-start-process.png)
 
   </li>
 </ol>
@@ -157,9 +155,10 @@ The service tasks in the process are executed by [job workers](/reference/glossa
 
 A [process instance](/reference/glossary.md#process-instance) is now running in the engine.
 
-You can view the process instance in **Operate**, the visual operations tool, by navigating to:  
-[http://localhost:8080/operate](http://localhost:8080/operate)  
-Login with the credentials: `demo` / `demo`.
+You can view the process instance in **Operate**, the visual operations tool:
+
+1. Navigate to: [http://localhost:8080/operate](http://localhost:8080/operate)
+2. Login with the credentials: `demo` / `demo`.
 
 There you will see an active process instance.
 

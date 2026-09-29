@@ -265,7 +265,7 @@ Without this step, Management Identity and Web Modeler will fail to connect to t
 <Tabs groupId="values">
   <TabItem value="with-domain-std" label="Standard with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -316,7 +316,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
   <TabItem value="with-domain-irsa" label="IRSA with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -347,7 +347,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
   <TabItem value="with-domain-rdbms" label="RDBMS with domain">
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -414,45 +414,13 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 
 This guide supports a managed Amazon OpenSearch domain (provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup) or Amazon Aurora PostgreSQL as secondary storage. For a comparison of both backends and their reference architectures, see [Secondary storage](#secondary-storage), then select your backend using the authentication and values tabs shown earlier in this guide.
 
-To use Elasticsearch instead of managed OpenSearch, deploy it with [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment), then configure the component-scoped connection values.
+RDBMS as secondary storage disables Optimize unless you also deploy Elasticsearch or OpenSearch alongside it.
 
-#### Use internal PostgreSQL instead of the managed Aurora
+To use Elasticsearch instead of managed OpenSearch, deploy it with [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment), then configure the component-scoped connection values. The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10.
 
-If you prefer not to use an external PostgreSQL service, you can switch to the internal PostgreSQL deployment. In this case, you will need to configure the Helm chart as follows and remove certain configurations related to the external database and service account:
+#### Use an in-cluster PostgreSQL instead of the managed Aurora
 
-:::tip Alternative: Operator-based PostgreSQL deployment
-Instead of using Bitnami subcharts for internal PostgreSQL, consider using [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) for production-grade PostgreSQL clusters with automated backup, monitoring, and scaling capabilities.
-:::
-
-<details>
-<summary>Show configuration changes to disable external database usage</summary>
-
-```yaml
-webModelerPostgresql:
-  enabled: true
-
-webModeler:
-  # Remove this part
-
-  # restapi:
-  #     externalDatabase:
-  #         url: jdbc:aws-wrapper:postgresql://${DB_HOST}:5432/${DB_WEBMODELER_NAME}
-  #         user: ${DB_WEBMODELER_USERNAME}
-  #         ...
-
-identity:
-  # Remove this part
-
-  # externalDatabase:
-  #     enabled: true
-  #     host: ${DB_HOST}
-  #     port: 5432
-  #     username: ${DB_IDENTITY_USERNAME}
-  #     database: ${DB_IDENTITY_NAME}
-  #     ...
-```
-
-</details>
+To run PostgreSQL inside the cluster instead of managed Aurora, deploy it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) and point Management Identity and Camunda Hub at it through their `externalDatabase` values. The bundled Bitnami PostgreSQL subchart is removed in Camunda 8.10, so there is no in-chart PostgreSQL to enable.
 
 #### Fill your deployment with actual values
 
@@ -497,7 +465,7 @@ You can track the progress of the installation with the deployment readiness che
 
 #### Web Modeler
 
-As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/hub/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/hub/configuration/database.md#running-camunda-hub-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Identity

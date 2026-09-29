@@ -21,7 +21,7 @@ Enable the Cluster Metrics endpoint per Orchestration cluster via either Camunda
 To activate the endpoint:
 
 1. Sign in to Camunda Hub.
-1. Navigate to **Clusters**.
+1. In the left navigation under **Console**, click **Clusters**.
 1. Select an existing cluster, or create a new one.
 1. Open the **Monitoring** tab for the cluster.
 1. Click **Activate monitoring endpoint**.

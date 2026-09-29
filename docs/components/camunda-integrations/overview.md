@@ -1,32 +1,32 @@
 ---
 id: overview
 title: "Camunda integrations"
-description: "Learn more about Camunda integrations, such as Camunda's SAP and ServiceNow integrations."
+description: "Learn more about Camunda integrations, such as Camunda's app integrations, SAP, and ServiceNow integrations."
 ---
 
 import "../react-components/\_using-table.css";
 import UsingGrid from '../react-components/\_using-card';
-import { msTeamsCard, sapCard, serviceNowCard } from '../react-components/\_camunda-integrations-card-data';
+import { appIntegrationsCard, sapCard, serviceNowCard } from '../react-components/\_camunda-integrations-card-data';
 
 Extend the power of your process orchestration by connecting Camunda with your core enterprise systems. Our pre-built integrations simplify communication across platforms and enable true end-to-end automation in your technology landscape.
 
-## Microsoft Teams integration
+## App integrations
 
-Camunda for Microsoft Teams brings process management into your collaboration environment, so you can manage processes without leaving Microsoft Teams.
+App integrations bring Camunda process management into the chat tool your team uses, currently Microsoft Teams and Slack. You can use one platform, the other, or both.
 
-With this integration, you can:
+With app integrations, you can:
 
 - **Manage tasks and processes**  
-  View, claim, assign, and complete user tasks, and start new process instances, directly from Microsoft Teams.
+  View, claim, assign, and complete user tasks, and start new process instances, directly from Microsoft Teams or Slack.
 
 - **Get notified**  
   Receive personal and channel notifications for user tasks based on configurable notification rules.
 
 :::note
-This integration is released as an [early access](/components/early-access/overview.md) alpha feature.
+App integrations are released as an [early access](/components/early-access/overview.md) alpha feature.
 :::
 
-<UsingGrid using={[msTeamsCard]} />
+<UsingGrid using={[appIntegrationsCard]} />
 
 ## SAP integration
 

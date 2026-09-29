@@ -1344,6 +1344,8 @@
             "components/saas/byok/faq-and-troubleshooting"
           ]
         },
+        "components/saas/backups",
+        "components/saas/cross-region-cold-recovery",
         {
           "type": "category",
           "label": "Backup and restore",
@@ -3946,6 +3948,15 @@
         },
         {
           "type": "category",
+          "label": "Multi-tenancy",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/multi-tenancy/index"
+          },
+          "items": ["self-managed/concepts/multi-tenancy/logical-tenants"]
+        },
+        {
+          "type": "category",
           "label": "Audit log",
           "link": {
             "type": "doc",
@@ -4283,10 +4294,7 @@
             "type": "doc",
             "id": "self-managed/upgrade/helm/index"
           },
-          "items": [
-            "self-managed/upgrade/helm/890-to-8100",
-            "self-managed/upgrade/helm/880-to-890"
-          ]
+          "items": ["self-managed/upgrade/helm/880-to-890"]
         },
         "self-managed/upgrade/manual/index",
         {

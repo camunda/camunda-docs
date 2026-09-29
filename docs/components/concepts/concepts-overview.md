@@ -5,7 +5,7 @@ description: "Learn how Camunda 8 components work together to orchestrate and au
 toc_max_heading_level: 2
 ---
 
-import ArchDiagramImg from '../assets/c8-architecture-diagram.png';
+import ArchDiagramImg from '../assets/c8-architecture-diagram.jpg';
 
 Use [Camunda 8](https://camunda.io) to orchestrate and automate complex business processes that include people, AI agents, systems, and devices.
 
@@ -16,9 +16,11 @@ You can deploy Camunda 8 in two ways:
 - **Camunda 8 SaaS**: A fully managed cloud service for rapid deployment and minimal operational overhead.
 - **Camunda 8 Self-Managed**: A self-hosted solution for organizations requiring full control over their infrastructure.
 
-Camunda 8 combines powerful execution engines for BPMN processes and DMN decisions with tools for collaborative modeling, operations, and analytics. Camunda 8 [components](/components/components-overview.md) work together to form the complete Camunda 8 experience, allowing you to design, automate, and improve your business processes.
+Camunda 8 combines powerful execution engines for BPMN processes and DMN decisions with tools for collaborative modeling, operations, and analytics. Camunda 8 [components](/components/components-overview.md#camunda-components) work together to form the complete Camunda 8 experience, allowing you to design, automate, and improve your business processes.
 
 Camunda 8 separates runtime execution data from analytical and operational data by using distinct storage roles.
+
+<!-- source: https://miro.com/app/board/uXjVJfVj0oY=/?moveToWidget=3458764684198375785&cot=14 -->
 
 <img src={ArchDiagramImg} alt="Camunda 8 architecture diagram" class="img-noborder"/>
 
@@ -106,21 +108,17 @@ Camunda 8 is designed to operate on a very large scale. To achieve this, it prov
 
 ## What are the Camunda 8 components?
 
-### Modeler
-
-Design fully-executable process and decision models that reduce misalignment and handoff friction while giving engineers the freedom they need to build the right solution. Camunda Modeler gives business users an intuitive way to model processes and decisions using the BPMN and DMN standards so their intent is clear, structured, and directly usable by developers. Developers can take the model as-is and build scalable, flexible solutions without worrying about losing alignment with business intent. Available via [Camunda Hub](/components/hub/workspace/modeler/index.md) and a dedicated [desktop app](/components/modeler/desktop-modeler/index.md).
-
-#### Connectors
+### Connectors
 
 Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. [Outbound connectors](/reference/glossary.md#outbound-connector) trigger events outside of Camunda, while [inbound connectors](/reference/glossary.md#inbound-connector) allow processes running on Camunda to receive messages from external systems. Connectors also serve as the tool layer for AI agents, enabling agents to interact with external systems in a governed, reusable way. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
 
-#### AI agents
+### AI agents
 
 Build governed [AI agents](/reference/glossary.md#ai-agent) with guardrails so they can solve complex problems with autonomy. Camunda's [agentic BPMN](/components/agentic-orchestration/ai-agents.md) lets teams model deterministic process logic and dynamic agentic behavior, such as reasoning loops, memory, prompts, RAG, and human‑in‑the‑loop boundaries, in one unified, executable model.
 
-#### Forms
+### Forms
 
-Some automated processes require human contribution and interaction. [Create and implement custom forms](/components/modeler/forms/utilizing-forms.md) that give work instructions, collect information, and help people make decisions about the tasks they need to complete.
+Some automated processes require human contribution and interaction. [Create and implement custom forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) that give work instructions, collect information, and help people make decisions about the tasks they need to complete.
 
 ### Tasklist
 
@@ -140,7 +138,16 @@ With [Operate](/components/operate/operate-introduction.md), teams can monitor r
 
 ### Camunda Hub
 
-With [Camunda Hub](/components/hub/index.md), you'll manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
+[Camunda Hub](/components/hub/index.md) is a unified platform for managing organizational resources and delivering business processes. It's organized into two levels: organization and workspace.
+
+- **Organization level**: This is the management and governance layer. Center of excellence teams govern the infrastructure and tooling delivery teams need, including managing users, runtime environments, a catalog of shared reusable resources, and workspaces.
+- **Workspace level**: This is the process modeling and delivery layer. Delivery teams design business process and decision models, discover and use approved catalog assets, and deploy projects to development, testing, staging, and production environments.
+
+With this separation, center of excellence teams govern infrastructure and standards at the organization level, while delivery teams work within organizational guardrails to design, test, and deploy business solutions at the workspace level.
+
+### Desktop Modeler
+
+[Desktop Modeler](/components/modeler/desktop-modeler/index.md) is a standalone desktop application for modeling business processes. Desktop Modeler gives business users and developers an intuitive way to design fully-executable process and decision models so their intent is clear, structured, and directly usable by developers. At the same time, Desktop Modeler integrates into your preferred IDE and local filesystem for a professional software development setup.
 
 ## How does Camunda 8 compare to other solutions?
 

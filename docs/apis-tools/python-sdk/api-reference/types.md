@@ -346,6 +346,19 @@ Bases: `str`
 - **Return type:**
   [GroupId](#groupid)
 
+## HistoryItemId
+
+```python
+class HistoryItemId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [HistoryItemId](#historyitemid)
+
 ## IncidentKey
 
 ```python

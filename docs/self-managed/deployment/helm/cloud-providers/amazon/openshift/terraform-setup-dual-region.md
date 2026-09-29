@@ -12,6 +12,7 @@ import TabItem from "@theme/TabItem";
 import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
 import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
 import RosaHcpAuth from '../../\_partials/\_rosa-hcp-auth.md'
+import CostManagement from "../../../../_partials/_cost-management.md";
 
 This guide provides a detailed tutorial for deploying two [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) in two different [regions](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool, details of the High Level design are available in the generic [Red Hat OpenShift dual-region for Camunda 8 guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
 
@@ -44,11 +45,7 @@ This setup provides a foundational starting point for working with Camunda 8, th
 
 Terraform can initially appear complex. If you're new to it, you might want to start by considering [deployment in a single region](terraform-setup.md) first.
 
-:::warning Cost management
-
-Following this guide will incur costs on your cloud provider account and your Red Hat account, specifically for the managed OpenShift service, OpenShift worker nodes running in EC2, the hosted control plane, Elastic Block Storage (EBS), and Route 53. For more details, refer to [ROSA AWS pricing](https://aws.amazon.com/rosa/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/) as total costs vary by region.
-
-:::
+<CostManagement />
 
 ### Outcome
 
@@ -66,6 +63,7 @@ Following this tutorial and steps will result in:
 - An [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket for [Elasticsearch backups](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
 - [Red Hat OpenShift Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) used to manage the two clusters and configure Submariner.
 - [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner) configured on the two clusters to enable cross-namespace and cross-cluster network communication.
+
 <!-- TODO: will be re-included in an other PR - [Route 53](https://aws.amazon.com/en/route53/) configured on [a domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) with an [active-passive failover](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html), enabling access to Camunda 8 on both clusters. -->
 
 ## 1. Configure AWS and initialize Terraform

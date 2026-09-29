@@ -178,32 +178,35 @@ The following configuration uses the default name `camundaExporter`. To use a cu
 
 ## Troubleshooting
 
-### Exception: Unknown type of interceptor plugin or wrong class specified
+### `Unknown type of interceptor plugin or wrong class specified`
 
-This exception means that the incorrect class was specified in the `CLASSNAME` property. Possible causes include:
+**Observed behavior:** Startup fails with `Unknown type of interceptor plugin or wrong class specified`.
 
-- The class name or package does not exist.
-- The class does not implement the required SDK interface.
+**Why this happens:** The class configured in the `CLASSNAME` property is incorrect. Possible causes include:
+
+- The class name or package doesn't exist.
+- The class doesn't implement the required SDK interface.
 - The class is defined as `inner`, `static`, or `final`.
 
-To fix this:
+**How to fix:**
 
 - Use the latest Search Plugins SDK.
 - Ensure your class implements the correct SDK interface.
 - Verify that the plugin class is `public` and not `final`.
 
-### Exception: Failed to load interceptor plugin due to exception
+### `Failed to load interceptor plugin due to exception`
 
-This error usually indicates an issue with JAR loading.
+**Observed behavior:** Startup fails with `Failed to load interceptor plugin due to exception`.
 
-- Make sure that the path to your plugin JAR file is correct and that the application has permission to read it.
-- Also confirm that the JAR is valid and contains all required dependencies.
+**Why this happens:** This error usually indicates an issue with JAR loading, either the path is wrong, the file isn't readable, or the JAR is missing required dependencies.
 
-To check the contents of your JAR file, run the following command:
+**How to fix:**
 
-```bash
-jar xf <file-name>.jar
-```
+1. Confirm the path to your plugin JAR file is correct and that the application has permission to read it.
+2. Confirm the JAR is valid and contains all required dependencies. Check its contents with:
+   ```bash
+   jar xf <file-name>.jar
+   ```
 
 ## References
 

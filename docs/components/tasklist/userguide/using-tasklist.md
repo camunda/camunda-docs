@@ -8,7 +8,7 @@ import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications
 import TaskTileSpecification from '../img/task-tile-specification.png';
 import styles from "./styles.module.css";
 
-The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](/components/modeler/forms/utilizing-forms.md), or simply reviewing and completing the task.
+The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](/components/hub/workspace/modeler/modeling/utilize-forms.md), or simply reviewing and completing the task.
 
 User tasks can be automatically assigned to users and groups in the BPMN process, or they must be self-assigned from Tasklist.
 Once assigned to a user, the task can be completed. The user can unassign the task if they do not intend to work on it.
@@ -17,6 +17,19 @@ Tasklist has two main pages:
 
 - [Tasks page](#tasks-overview) to manage tasks.
 - [Processes page](./starting-processes.md) to start processes.
+
+## Open Tasklist
+
+From Camunda Hub, you can access all your clusters and navigate to any running instance of Tasklist:
+
+1. Log in to Camunda Hub.
+1. In the left navigation under **Console**, click **Clusters**.
+1. Select a cluster. Each cluster contains its own instance of Tasklist.
+1. On the **Tasklist** card, click **Launch**. This opens the cluster's Tasklist instance.
+
+:::tip
+If the cluster is paused, you won't see a **Launch** button. You must [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) to access its components.
+:::
 
 ## Tasks queue
 
