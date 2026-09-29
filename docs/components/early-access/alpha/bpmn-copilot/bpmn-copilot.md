@@ -7,8 +7,6 @@ description: "Chat with the AI BPMN Copilot for help generating new BPMN process
 
 import CopilotImg from './img/bpmn-copilot-chat.png';
 
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-
 Chat with the AI BPMN Copilot for help generating new BPMN process diagrams in [Camunda Hub](/components/hub/workspace/modeler/index.md) based on a process description. You can also ask the BPMN Copilot questions about existing diagrams.
 
 :::note Terms of use

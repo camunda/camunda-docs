@@ -1,6 +1,6 @@
 ---
 id: business-value-dashboard
-title: Business value dashboard
+title: Assess business value
 description: "Track process outcomes in Camunda Hub using cycle time, automation rate, activity, and agentic adoption metrics, and set targets for cycle time and automation rate."
 ---
 

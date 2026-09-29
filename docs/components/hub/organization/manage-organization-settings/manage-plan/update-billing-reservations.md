@@ -22,3 +22,5 @@ To access billing details:
 
 1. In the left navigation under **Console**, click **Organization**.
 1. Click the **Billing** tab.
+
+![billing-overview](./img/billing-overview.png)

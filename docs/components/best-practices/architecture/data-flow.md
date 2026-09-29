@@ -13,7 +13,7 @@ Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orches
 
 This is an overview of Camunda 8.10+ architecture:
 
-<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684414633986&cot=14 -->
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684561552016&cot=14 -->
 
 ![Camunda 8.10+ architecture overview](assets/architecture-8.10plus.jpg)
 
@@ -25,7 +25,7 @@ Every record in Camunda passes through two distinct storage layers. Understandin
 
 - **[Primary storage](/reference/glossary.md#primary-storage)** is the multi-Raft cluster in Camunda, with partitions as the scaling unit. Each partition has a Raft append-only log, RocksDB to store internal state, and snapshots for compaction. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader responsible for both processing commands and exporting records.
 
-- **[Secondary storage](/reference/glossary.md#secondary-storage)** is an external data storage where events are written, such as Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent and populated asynchronously by the export pipeline. Everything Operate, Tasklist, Identity, and the REST Query API reads comes exclusively from secondary storage.
+- **[Secondary storage](/reference/glossary.md#secondary-storage)** is an external data storage where events are written, such as Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent and populated asynchronously by the export pipeline. Everything Operate, Tasklist, Admin, and the REST Query API reads comes exclusively from secondary storage.
 
 ## Command processing path
 
@@ -36,7 +36,7 @@ Its processing path (command lifecycle) follows this pattern:
 
 This path is highlighted green in the following diagram:
 
-<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415105456&cot=14 -->
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684814573543&cot=14 -->
 
 ![Camunda 8.10+ architecture overview - Data Flow Command processing path](assets/architecture-8.10plus-data-flow-command.jpg)
 
@@ -54,7 +54,7 @@ After the engine processes a command, it confirms its state change with an event
 
 This pipeline is highlighted blue in the following diagram:
 
-<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415254414&cot=14 -->
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684816064256&cot=14 -->
 
 ![Camunda 8.10+ architecture overview - Data Flow Export pipeline](assets/architecture-8.10plus-data-flow-export-path.jpg)
 
@@ -89,7 +89,7 @@ Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from 
 
 This path is highlighted red in the following diagram:
 
-<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415254807&cot=14 -->
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684816430552&cot=14 -->
 
 ![Camunda 8.10+ architecture overview - Data Flow Query path](assets/architecture-8.10plus-data-flow-query.jpg)
 
@@ -103,7 +103,7 @@ Optimize sits on top of the export pipeline as a second-tier consumer.
 
 This is highlighted purple in the following diagram:
 
-<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684415429374&cot=14 -->
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/?moveToWidget=3458764684816569431&cot=14 -->
 
 ![Camunda 8.10+ architecture overview - Data Flow Optimize](assets/architecture-8.10plus-data-flow-optimize.jpg)
 

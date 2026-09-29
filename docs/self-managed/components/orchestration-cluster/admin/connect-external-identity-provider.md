@@ -127,6 +127,19 @@ You may need to customize the redirect URI in advanced scenarios, such as:
 
 Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
 
+The Orchestration Cluster checks the redirect URI at startup and writes a warning if the value cannot expand to a usable callback URL. It still starts. A usable value:
+
+- Starts with `{baseUrl}`, or has an `https` or `http` scheme and a host
+- Has a port between 1 and 65535, if it has a port
+- Has a callback path
+- Has no fragment (`#`)
+
+A value with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`, and the login completes. Any other unusable value stays as configured, so the login fails when the browser returns from the IdP.
+
+The cluster serves the callback at the path that the redirect URI resolves to. The path must be one that the cluster routes to its web applications, and `/sso-callback` is the path that the cluster keeps for this purpose. A path outside that set passes the startup check, but the callback request does not reach the cluster's login handling, and the login does not complete.
+
+The default value `{baseUrl}/sso-callback` is correct. The cluster also checks the redirect URI if you only use API clients, which never use the redirect URI.
+
 Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
 
 :::note
@@ -185,6 +198,8 @@ camunda.security.authentication.oidc.scope: ["openid", "profile", "email"]
 ### Step 5: Restart the Orchestration Cluster
 
 After updating your configuration, (re)start the Orchestration Cluster for the configuration changes to be applied.
+
+A successful start does not confirm that your IdP is reachable. The cluster contacts a provider at the first request that needs it. If the cluster is up but authentication fails, see [requests fail when an identity provider is unreachable](debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable).
 
 ### Step 6: Test user authentication
 

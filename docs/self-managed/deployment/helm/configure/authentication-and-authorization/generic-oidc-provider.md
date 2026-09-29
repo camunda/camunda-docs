@@ -10,6 +10,10 @@ import TabItem from "@theme/TabItem";
 
 This guide shows you how to configure Camunda 8 Self-Managed to authenticate with any OpenID connect (OIDC)-compliant identity provider.
 
+:::info Bitnami subcharts removed in Camunda 8.10
+Earlier releases bundled PostgreSQL through Bitnami subcharts (`identityPostgresql`, `webModelerPostgresql`). As of Camunda 8.10 (Helm chart `15.x`), the bundled Bitnami subcharts are removed: provide PostgreSQL with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database, as shown in the examples below.
+:::
+
 :::info
 Before proceeding, since this is a general guide, refer to [External OIDC provider](./external-oidc-provider.md) to see the available provider-specific guides, as they include detailed setup instructions tailored to provider's interface.
 :::
@@ -23,7 +27,7 @@ Before you begin, ensure you have:
 - Access to your provider's discovery document to obtain endpoint URLs.
 - A Kubernetes cluster with the Helm CLI v4 installed.
 - kubectl configured to access your cluster.
-- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
 
@@ -167,11 +171,31 @@ If `offline_access` is not available or not granted, users will be redirected to
 For more information, see [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
 :::
 
+## Handle separate access token and ID token signing keys
+
+Most OIDC providers sign access tokens and ID tokens with the same key, published at the single `jwks_uri` in the discovery document. Some enterprise identity provider deployments sign access tokens with a different key than ID tokens. Camunda validates access tokens on every API request and ID tokens only during the login callback, so if you configure only the discovery document's `jwksUrl`, access token validation fails even though login succeeds.
+
+To check whether this applies to your provider, compare the `jwks_uri` in the discovery document against the JWKS endpoint listed for access tokens (or API and runtime tokens) in your provider's admin console. If both are the same URL, skip this section.
+
+If the URLs differ, configure both endpoints:
+
+- Set `global.identity.auth.jwksUrl` to the **access token** JWKS endpoint. Management Identity validates access tokens using this single URL only, and doesn't call the userinfo endpoint or fall back to any other source.
+- Add the same URL as an additional JWKS source for the Orchestration Cluster, which otherwise fetches only the primary JWKS from the discovery document:
+
+  ```yaml
+  orchestration:
+    env:
+      - name: CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ADDITIONALJWKSETURIS_0_
+        value: "<access-token-jwks-url>"
+  ```
+
+  This setting has no dedicated Helm value. It maps to the Spring Boot list property `camunda.security.authentication.oidc.additionalJwkSetUris`, set through `orchestration.env` using Spring's relaxed-binding convention for list properties: one environment variable per index, with the index surrounded by underscores (`..._0_`, `..._1_`, and so on).
+
+The Orchestration Cluster merges keys from the primary JWKS endpoint and all additional endpoints, then selects whichever key matches the `kid` in the incoming token. Both ID tokens and access tokens then validate correctly, regardless of which key set signed them.
+
 ## Create secrets
 
-Create two secrets in your Kubernetes namespace.
-
-First, create a secret that contains all OIDC client secrets:
+Create a secret in your Kubernetes namespace that contains all OIDC client secrets:
 
 ```bash
 kubectl create secret generic oidc-credentials \
@@ -185,21 +209,9 @@ kubectl create secret generic oidc-credentials \
 The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-Next, create a secret with the remaining credentials for the Camunda Helm chart:
-
-```bash
-kubectl create secret generic camunda-credentials \
-  --from-literal=identity-postgresql-admin-password=CHANGE_ME \
-  --from-literal=identity-postgresql-user-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-admin-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-user-password=CHANGE_ME
-```
-
-Unlike the OIDC client secrets, these passwords initialize the component databases.
-You can choose any values.
-
+The PostgreSQL credentials for Management Identity and Camunda Hub are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 :::tip Alternative secret management
-For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions) for more options.
+For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended) for more options.
 :::
 
 ## Configure Camunda components
@@ -267,15 +279,18 @@ global:
 identity:
   fullURL: <identity-base-url>
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    username: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 ```
+
+Management Identity requires an externally managed PostgreSQL database. Provision the database before you deploy, and adapt the connection values and secret references to your setup. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 #### Identity-specific parameters
 
@@ -338,9 +353,9 @@ orchestration:
 :::note Username display in Web Modeler (Helm)
 In Helm deployments, the default OIDC username claim is `preferred_username`, which often maps to an email address.
 
-If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
+If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
-For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
+For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak).
 :::
 
 #### Default roles
@@ -407,7 +422,7 @@ optimize:
 Web Modeler requires two OIDC clients: one for the UI (public) and one for the API (confidential).
 
 :::note
-If your IdP provides user-friendly names in the `name` claim, and you want Web Modeler to use that claim, configure the Web Modeler `restapi` environment variable `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
+If your IdP provides user-friendly names in the `name` claim, and you want Web Modeler to use that claim, configure the Web Modeler `restapi` environment variable `CAMUNDA_IDENTITY_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
 :::
 
 ```yaml
@@ -420,21 +435,20 @@ global:
         clientApiAudience: <web-modeler-ui-audience>
         publicApiAudience: <web-modeler-api-audience>
 
-webModeler:
-  enabled: true
-
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: noreply@example.com # Update with your email address
       # Additional SMTP configuration may be required - see Web Modeler docs
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: webmodeler-postgresql-admin-password
-      userPasswordKey: webmodeler-postgresql-user-password
+    externalDatabase:
+      host: pg-hub-rw
+      port: 5432
+      database: hub
+      username: hub
+      secret:
+        existingSecret: pg-hub-secret
+        existingSecretKey: password
 ```
 
 #### Web Modeler parameters
@@ -464,12 +478,9 @@ global:
         clientId: <console-client-id>
         audience: <console-audience>
         redirectUrl: <console-base-url>
-
-console:
-  enabled: true
 ```
 
-Replace `<console-base-url>` with the base URL where Console will be accessible. For local deployment, use `http://localhost:8087`.
+Console is deployed as part of Camunda Hub, which you enable with `camundaHub.enabled: true` in the [Web Modeler step](#configure-web-modeler). Replace `<console-base-url>` with the base URL where Console will be accessible. For local deployment, use `http://localhost:8087`.
 
 ## Complete configuration example
 
@@ -570,41 +581,33 @@ connectors:
 identity:
   fullURL: <identity-base-url>
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
-
-# Disable internal Keycloak
-identityKeycloak:
-  enabled: false
-
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    username: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 # Optimize
 optimize:
   enabled: true
 
-# Web Modeler
-webModeler:
-  enabled: true
+# Console and Web Modeler (Camunda Hub)
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
   restapi:
     mail:
       fromAddress: <your-email-address>
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: webmodeler-postgresql-admin-password
-      userPasswordKey: webmodeler-postgresql-user-password
-
-# Console
-console:
-  enabled: true
+    externalDatabase:
+      host: pg-hub-rw
+      port: 5432
+      database: hub
+      username: hub
+      secret:
+        existingSecret: pg-hub-secret
+        existingSecretKey: password
 ```
 
 **Placeholders to replace:**
@@ -620,7 +623,7 @@ console:
 
 - All `<placeholders>` replaced with actual values.
 - All client secrets stored in the `oidc-credentials` secret.
-- Database passwords stored in the `camunda-credentials` secret.
+- Database credentials provided by the operator-managed database secrets (for example, `pg-identity-secret` and `pg-hub-secret`).
 - Redirect URIs in OIDC provider match `redirectUrl` values.
 - Each component has a distinct resource audience by default. Any cross-component audience acceptance supports a documented integration.
 - Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names.
