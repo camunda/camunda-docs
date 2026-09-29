@@ -45,21 +45,23 @@ A high uptime percentage doesn't imply a fast recovery or minimal data loss duri
 
 Camunda 8 SaaS sets recovery objectives for each type of outage, based on how much infrastructure the outage affects. These objectives describe expected behavior on a best-effort basis and aren't contractual commitments.
 
-| Outage                                | RPO                                                           | RTO                                          | Recovery                           | Requirement                 |
-| :------------------------------------ | :------------------------------------------------------------ | :------------------------------------------- | :--------------------------------- | :-------------------------- |
-| Node                                  | Zero                                                          | Near zero                                    | Automatic                          | None                        |
-| Availability zone                     | Zero                                                          | Near zero                                    | Automatic                          | None                        |
-| Region                                | Time since the last backup replicated to the secondary region | Depends on provisioning time and data volume | Manual cold recovery by Camunda    | Dual-region backup location |
-| Cloud provider or third-party service | Not defined                                                   | Not defined                                  | Depends on the provider's recovery | Not available               |
-| Platform or cluster incident          | Typically zero                                                | Depends on the incident                      | Camunda incident response          | None                        |
+| Outage                                | RPO                            | RTO                                          | Recovery                            | Requirement                                            |
+| :------------------------------------ | :----------------------------- | :------------------------------------------- | :---------------------------------- | :----------------------------------------------------- |
+| Node                                  | Zero                           | Near zero                                    | Automatic                           | None                                                   |
+| Availability zone                     | Zero                           | Near zero                                    | Automatic                           | None                                                   |
+| Region                                | Time since the restored backup | Depends on data volume and reconnection time | Manual cold recovery that you start | Dual-region backup location in a supported region pair |
+| Cloud provider or third-party service | Not defined                    | Not defined                                  | Depends on the provider's recovery  | Not available                                          |
+| Platform or cluster incident          | Typically zero                 | Depends on the incident                      | Camunda incident response           | None                                                   |
+
+Near zero means service resumes automatically, typically within seconds, without a restore. Requests in progress during that time can fail, so configure your clients and job workers to retry them, for example with exponential backoff.
 
 Your application's overall recovery time also depends on your own job workers and clients being able to reach the cluster and continue processing.
 
 ### Node failure
 
-A node failure is the loss of a single Zeebe broker (or other component instance) within a cluster. Camunda SaaS orchestration clusters replicate each partition across multiple brokers using [Raft consensus](/components/zeebe/technical-concepts/clustering.md), typically one broker per availability zone. When a single broker fails, the remaining brokers already hold every committed record and automatically elect a new leader for the affected partitions.
+A node failure is the loss of a single Zeebe broker (or other component instance) within a cluster. Camunda SaaS clusters replicate each partition across multiple brokers, typically one broker per availability zone. When a single broker fails, the remaining brokers take over its partitions automatically, without data loss. To learn more, see [clustering](/components/zeebe/technical-concepts/clustering.md).
 
-**RTO/RPO assessment:** RPO is zero, because every committed record is already replicated to the remaining brokers. RTO is near zero. Partition leader election typically completes within seconds, and clients recover through their standard retry mechanisms.
+**RTO/RPO assessment:** RPO is zero, because every committed record is already stored on the remaining brokers. RTO is near zero, and clients recover through their standard retry mechanisms.
 
 **Your responsibilities:** Configure your clients and job workers to retry failed requests. Run job workers across multiple availability zones so that the same outage doesn't disrupt them.
 
@@ -73,14 +75,14 @@ An availability zone (AZ) failure is the loss of an entire zone in the cluster's
 
 ### Region failure
 
-A region failure is the loss of every availability zone in the cluster's region at once, for example, during a regional cloud provider outage. Camunda SaaS clusters run in a [single region](/components/saas/regions.md). By default, backups are stored in the same region as the cluster. If you select a [dual-region backup location](/components/saas/backups.md#backup-location), backups are also replicated to the secondary backups region. Self-service [restore is limited to the same cluster, organization, and region](/components/saas/backup-restore-overview.md#limitations-and-constraints). For some region pairs, Camunda can perform a cold recovery to the secondary backups region.
+A region failure is the loss of every availability zone in the cluster's region at once, for example, during a regional cloud provider outage. Camunda SaaS clusters run in a [single region](/components/saas/regions.md). By default, backups are stored in the same region as the cluster. If you select a [dual-region backup location](/components/saas/backups.md#backup-location), backups are also replicated to the secondary backups region. For [supported region pairs](/components/saas/cross-region-cold-recovery.md#supported-region-pairs), you can then use [cross-region cold recovery](/components/saas/cross-region-cold-recovery.md) to recover the cluster in the secondary region.
 
-**RTO/RPO assessment:** Recovery from a region failure is a manual, user initiated cold recovery, the same strategy as the Cold Recovery tier in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md) for Self-Managed. Camunda provisions a new cluster in the secondary backups region and restores it from the replicated backup. Without dual-region backups, recovery to another region isn't possible.
+**RTO/RPO assessment:** Recovery from a region failure is a manual cold recovery that you start in Console or the API. Camunda creates a new cluster in the recovery region and restores the backup you select. Without a dual-region backup location in a supported region pair, recovery to another region isn't possible.
 
-- **RPO** is the time between the most recent backup replicated to the secondary region and the failure. Your backup schedule determines this value.
-- **RTO** is the time needed to detect the outage, decide to recover, provision the new cluster, restore its data, and reconnect your applications. Restore duration depends on cluster data volume. The recovered cluster has new endpoints, so you must update your client configuration.
+- **RPO** is the time between the backup you restore and the failure. It depends on your backup schedule, on backups being created and replicated successfully, and on the restore point you select. A 15-minute backup schedule doesn't guarantee a 15-minute RPO.
+- **RTO** is the time needed to detect the outage, start failover, restore the backup, and reconnect your applications. The more data your cluster holds, the longer the restore takes, which increases the RTO. The recovered cluster has new endpoints, so you must update your DNS or client configuration. Preparing network infrastructure in the recovery region in advance reduces the RTO.
 
-**Your responsibilities:** Choose a dual-region backup location when you create the cluster. Set a backup schedule that matches the data loss you can tolerate. Plan how you'll point your clients and job workers at the recovered cluster's new endpoints.
+**Your responsibilities:** Choose a dual-region backup location in a supported region pair when you create the cluster, and keep your backup schedule healthy. Prepare network infrastructure in the recovery region in advance. After failover, point your clients and job workers at the recovered cluster, and don't use the original cluster again. For the full procedure, see [fail over](/components/saas/cross-region-cold-recovery.md#fail-over).
 
 ### Cloud provider and third-party service outages
 
