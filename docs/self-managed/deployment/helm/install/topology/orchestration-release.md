@@ -34,7 +34,7 @@ The component client IDs, audiences, redirect URLs, and secrets must match the c
 The `optimize` role, `physicalTenants` cluster records, and the `orchestration` role on the 8.7, 8.8, and 8.9 charts aren't in any published chart yet. The published 8.10 pre-release chart `15.0.0-alpha5` accepts only `combined`, `hub`, and `orchestration`, and the latest published 8.7, 8.8, and 8.9 charts (12.13.8, 13.13.2, and 14.10.1) have no `global.topology` key, so they silently ignore `global.topology.mode` and deploy a combined release. Minimum chart versions will be listed on this page once the charts that carry these features are published.
 :::
 
-An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same; the values it requires differ, because the older charts predate the unified Orchestration Cluster and still bundle Hub-plane dependencies.
+An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same; the values it requires differ, because the older charts predate the unified Orchestration Cluster and still bundle management plane dependencies.
 
 Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
 
@@ -45,7 +45,7 @@ Every version requires `global.identity.auth.enabled: true`, `identity.enabled: 
 | 8.8   | `orchestration.enabled: true`                  | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`                                                              |
 | 8.7   | `zeebe.enabled: true`, `operate.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
 
-The Hub-plane databases belong to the Hub release, which is why the 8.7, 8.8, and 8.9 charts reject them here: leaving them enabled would deploy a second Management Identity or Hub database beside the one the Hub release already owns.
+The management plane databases belong to the Hub release, which is why the 8.7, 8.8, and 8.9 charts reject them here: leaving them enabled would deploy a second Management Identity or Hub database beside the one the Hub release already owns.
 
 These keys default to `false`, so a fresh install is unaffected. The check matters when you convert an existing combined release, whose values file may already enable them.
 
@@ -238,7 +238,7 @@ Generated internal service URLs in the Hub inventory use Kubernetes service DNS,
 
 ## Declare Physical Tenants
 
-Physical Tenants are application configuration, not chart values. There's no `orchestration.physicalTenants` values key. Declare tenants as `camunda.physical-tenants.*` through `orchestration.extraConfiguration`:
+Physical Tenants are application configuration, not chart values. There's no `orchestration.physicalTenants` values key. Declare tenants as `camunda.physical-tenants.*` through `orchestration.extraConfiguration`. For why this is application configuration, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md).
 
 ```yaml
 orchestration:

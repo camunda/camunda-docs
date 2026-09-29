@@ -11,11 +11,9 @@ Install it first. For the prerequisites, Secrets, and network policies this page
 
 ## What a Hub release deploys
 
-`global.topology.mode: hub` deploys Camunda Hub and Management Identity, and suppresses the chart's default Orchestration Cluster, Optimize, and Connectors workloads. You don't configure disabled components in this release.
+A Hub release runs Camunda Hub and Management Identity, and nothing else. It always uses the 8.10 chart, even when it manages Orchestration Clusters on older chart versions. Upgrading from 8.9? See [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md).
 
-The `hub` role requires the 8.10 chart. Camunda Hub and `global.topology.clusters` don't exist in the 8.7, 8.8, and 8.9 charts, so the Hub release is always the 8.10 chart even when it manages older clusters.
-
-Camunda Hub contains Web Modeler and Console. Console isn't a separate deployment in 8.10.
+After you [create `hub-values.yaml`](#create-hub-valuesyaml), the release role it sets, `global.topology.mode: hub`, suppresses the chart's Orchestration Cluster, Optimize, and Connectors workloads, so you don't configure them here. The chart checks the following:
 
 | Requirement                                           | Reason                                                             |
 | ----------------------------------------------------- | ------------------------------------------------------------------ |
@@ -45,6 +43,8 @@ Each record declares a stable unique `id`, the enabled workload components with 
 | `physicalTenants`                 | One entry per Physical Tenant that runs its own Optimize release                               |
 
 ## Create `hub-values.yaml`
+
+Create a values file that sets the `hub` role, configures Camunda Hub and Management Identity, and declares one record for each Orchestration Cluster the Hub manages:
 
 ```yaml
 global:
@@ -219,7 +219,21 @@ For Microsoft Entra ID or a generic OIDC provider, first complete the provider s
 
 ## Role assignment across clusters
 
-By default, every cluster contributes permissions to the canonical `Orchestration` and `Optimize` roles. Assigning either role grants access to every declared cluster of that component type. Set `components.<component>.roleName` to a unique value in each Hub topology entry when users must be authorized per cluster.
+By default, each cluster record that declares an `orchestration` component adds that component's permissions to the shared `Orchestration` role, and each record that declares an `optimize` component does the same for the shared `Optimize` role. So assigning the `Optimize` role grants access to the Optimize instance of every cluster that declares one, but not to those clusters' Orchestration Clusters.
+
+To authorize users per cluster, give each component its own role name:
+
+```yaml
+global:
+  topology:
+    clusters:
+      - id: production-a
+        components:
+          orchestration:
+            roleName: Orchestration production-a
+          optimize:
+            roleName: Optimize production-a
+```
 
 :::warning
 Identity preset initialization is additive. Removing or renaming a topology entry doesn't delete the corresponding clients, resource servers, permissions, or roles from Keycloak or Management Identity. Remove obsolete resources explicitly after the related workload is retired.

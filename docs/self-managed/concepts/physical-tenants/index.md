@@ -133,7 +133,7 @@ For the storage backends used by tenant-scoped data, see [secondary storage](../
 
 ## Deploying Physical Tenants with Helm
 
-The Helm chart delivers tenant configuration rather than modeling it: there's no `orchestration.physicalTenants` values key, and tenants are declared as `camunda.physical-tenants.*` application configuration through `orchestration.extraConfiguration`.
+The Helm chart delivers tenant configuration rather than modeling it: there's no `orchestration.physicalTenants` values key, and tenants are declared as `camunda.physical-tenants.*` application configuration through `orchestration.extraConfiguration`. See [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md).
 
 What the chart does own is the release shape around your tenants. Each tenant needs its own Optimize release, its own index prefixes, and its own OIDC client, and adding or removing a tenant is an ordered operation across several releases.
 

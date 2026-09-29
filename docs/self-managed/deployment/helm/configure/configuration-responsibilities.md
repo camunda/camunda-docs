@@ -11,20 +11,20 @@ Neither layer is more authoritative than the other. They answer different questi
 
 Starting with Camunda 8.10, chart values that existed only to proxy a single application property are deprecated in favor of `extraConfiguration`. The chart keeps the Kubernetes surface it's responsible for and stops mirroring the application's own configuration.
 
-## Which layer owns a setting
+## Where settings belong
 
-Ask one question: does this control what the application **does**, or **how and where** it runs and connects?
+_What_ you're configuring determines _where_ the setting belongs:
 
-| Layer                        | Controls                                                                                                                                          | Where to set it                  |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| Application configuration    | Feature flags, toggles, log levels, security and authorization behavior, Spring Boot properties, and anything else that changes application logic | `<component>.extraConfiguration` |
+| Configuring                  | Examples                                                                                                                                          | Belongs in                       |
+| :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------- |
+| Application behavior         | Feature flags, toggles, log levels, security and authorization behavior, Spring Boot properties, and anything else that changes application logic | `<component>.extraConfiguration` |
 | Kubernetes infrastructure    | Resource requests and limits, affinity and scheduling, service accounts, volumes, replica counts, deployment strategy                             | `values.yaml`                    |
 | Connectivity and credentials | External endpoints, database URLs, secondary storage hosts, TLS certificates, secret references, Ingress and Gateway wiring                       | `values.yaml`                    |
 | Cross-component coordination | Release role (`global.topology.mode`), the Hub cluster inventory, shared authentication identifiers                                               | `values.yaml`                    |
 
 Application property names are the same whichever deployment method you use, so what you learn about `camunda.security.*` or `camunda.physical-tenants.*` transfers from Helm to Docker, to a JAR, or to ECS. Chart values don't transfer, which is why they're limited to the deployment layer.
 
-## Deliver application configuration
+## Provide application settings
 
 Three forms are supported, and they behave differently. For the full mechanics, including per-component merge behavior and a worked migration from environment variables, see [configure component configuration](/self-managed/deployment/helm/configure/application-configs.md).
 

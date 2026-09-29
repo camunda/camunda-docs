@@ -7,7 +7,7 @@ description: Plan and execute the move from a single combined Camunda 8.10 Helm 
 
 Move an existing single-release Camunda 8.10 deployment to the split topology: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
 
-This is a topology change, not a version upgrade. It doesn't change any component version, and it isn't required. A `combined` release remains supported and remains the chart default.
+This is a topology change, not a version upgrade. It doesn't change any component version, and it isn't required. A `combined` release remains both supported and the chart default.
 
 :::warning
 The hard part of this move is data, not values. Orchestration Cluster broker volumes hold active process state and don't move between releases. Read [what moves and what doesn't](#what-moves-and-what-doesnt) before you plan a cutover, and choose [keep the cluster in place](#strategy-1-keep-the-cluster-in-place-recommended) unless you have a specific reason not to.
@@ -21,7 +21,7 @@ Make it when you need something the combined release can't give you:
 - Independent upgrade, scaling, or removal of a cluster without touching the management plane.
 - Physical Tenants with a separate Optimize instance per tenant.
 
-If none of those apply, staying on a combined release is a reasonable long-term choice.
+If none of those apply, staying on a combined release is a fully supported long-term choice.
 
 ## Prerequisites
 
@@ -49,20 +49,20 @@ Secondary storage doesn't substitute for broker storage. Installing a fresh orch
 Switching an existing release to `global.topology.mode: hub` suppresses its Orchestration Cluster StatefulSet. The PVCs remain, but the cluster stops. Never flip a release running your only Orchestration Cluster to `hub` mode.
 :::
 
-## Strategy 1: keep the cluster in place (recommended)
+## Strategy 1: Keep the cluster in place (recommended)
 
 Keep the existing release and namespace as the orchestration release, and stand up a new Hub release alongside it. Broker storage and cluster identity never move, so there's no process-state cutover.
 
-### Step 1: inventory what the combined release owns
+### Step 1: Inventory what the combined release owns
 
-Record, from your current values file and cluster:
+From your current values file and cluster, record:
 
 - Every index prefix in use. See [isolate every index prefix family](/self-managed/deployment/helm/install/topology/physical-tenants.md#isolate-every-index-prefix-family).
 - Every OIDC client ID, audience, redirect URL, and role, and which secret holds each client secret.
 - The Management Identity and Camunda Hub database connection details.
 - The release name, namespace, and Orchestration Cluster context paths and hostnames.
 
-### Step 2: install the Hub release in a new namespace
+### Step 2: Install the Hub release in a new namespace
 
 Create `hub-values.yaml` with `global.topology.mode: hub`, and a `global.topology.clusters` record whose component client IDs, audiences, redirect URLs, and secrets exactly match what the existing combined release already uses. Reusing the existing identifiers is what lets Hub adopt the running cluster instead of registering a second one.
 
@@ -72,13 +72,13 @@ Project the workload client secrets into the Hub namespace as well. Kubernetes S
 
 At this point Hub and Management Identity are running twice: once in the combined release, once in the new Hub release. Both read the same external databases. Each Management Identity instance runs schema initialization and additive client, resource server, permission, and role provisioning at startup, against the same database and topology identifiers. Running two instances this way hasn't been validated. Don't perform this step in production until you've rehearsed it against a copy of your databases.
 
-### Step 3: verify the new Hub release
+### Step 3: Verify the new Hub release
 
 Sign in to the new Hub host. Confirm the Orchestration Cluster appears in its cluster list, is reachable, and reports healthy. Deploy a test process through the new Hub to the existing cluster.
 
 Stop here and roll back if the cluster doesn't appear. Nothing has changed in the execution plane yet.
 
-### Step 4: convert the combined release to an orchestration release
+### Step 4: Convert the combined release to an orchestration release
 
 Update the existing release's values:
 
@@ -94,7 +94,7 @@ Run `helm upgrade` on the existing release, without changing its name or namespa
 Verify with `helm template` or `helm diff` before you apply this step. Confirm the rendered output still contains the Orchestration Cluster StatefulSet with the same name, and the same `volumeClaimTemplates`. If the StatefulSet is absent or renamed, stop: applying it will detach your brokers from their storage.
 :::
 
-### Step 5: move Optimize to its own release
+### Step 5: Move Optimize to its own release
 
 If the combined release ran Optimize, install it as a separate release per Physical Tenant, and keep both of its existing prefixes:
 
@@ -105,13 +105,13 @@ Route the Optimize host and path to the new release before users return. See [ro
 
 See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
 
-### Step 6: clean up
+### Step 6: Clean up
 
 - Confirm no workload still resolves the old in-release Management Identity or Hub service names.
 - Inventory the OIDC clients, resource servers, permissions, and roles. Identity initialization is additive, so the combined release's objects still exist. Remove only what no release uses.
 - Retire the old Hub hostname and its TLS certificate, or redirect it.
 
-## Strategy 2: drain and re-create
+## Strategy 2: Drain and recreate
 
 Use this only when the cluster must move to a different release name, namespace, or Kubernetes cluster, and in-place conversion isn't possible.
 
