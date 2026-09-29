@@ -11,11 +11,6 @@ inputs:
     description: URL of a page containing links to check with Muffet
     required: true
 
-  timeout:
-    default: "30"
-    description: Timeout for each HTTP request, in seconds (Muffet's default is 10)
-    required: false
-
   muffet_version:
     default: v2.10.8
     description: Version tag of Muffet CLI tool
@@ -36,7 +31,6 @@ runs:
         echo "-----"
         echo "Muffet version  : ${{ inputs.muffet_version }}"
         echo "URL to validate : ${{ inputs.url_to_validate }}"
-        echo "Timeout (s)     : ${{ inputs.timeout }}"
     - name: Restore cache
       uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       id: tool-cache-muffet
@@ -56,7 +50,13 @@ runs:
       shell: bash
       run: |
         echo "$MUFFET_DIR" >> "$GITHUB_PATH"
+
+    # Validate URLs excludes unsupported.docs.camunda.io. Archived docs versions aren't built locally,
+    # which means if the docs site has an outage or slow page load times, the validate-links pipeline fails.
+    # Unsupported URLs are low priority, so we won't verify those on every PR. Instead, we'll verify them in a
+    # separate scheduled pipeline. (issue #10127)
+
     - name: Validate URLs
       shell: bash
       run: |-
-        muffet --one-page-only --verbose --timeout ${{ inputs.timeout }} ${{ inputs.url_to_validate }}
+        muffet --one-page-only --verbose --exclude "https://unsupported\.docs\.camunda\.io(.*)" ${{ inputs.url_to_validate }}
