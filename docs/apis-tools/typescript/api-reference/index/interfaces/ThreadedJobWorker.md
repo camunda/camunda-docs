@@ -138,10 +138,7 @@ stop(): void;
 ### stopGracefully()
 
 ```ts
-stopGracefully(opts?): Promise<{
-  remainingJobs: number;
-  timedOut: boolean;
-}>;
+stopGracefully(opts?): Promise<GracefulStopResult>;
 ```
 
 #### Parameters
@@ -158,7 +155,4 @@ stopGracefully(opts?): Promise<{
 
 #### Returns
 
-`Promise`\<\{
-`remainingJobs`: `number`;
-`timedOut`: `boolean`;
-\}\>
+`Promise`\<`GracefulStopResult`\>
