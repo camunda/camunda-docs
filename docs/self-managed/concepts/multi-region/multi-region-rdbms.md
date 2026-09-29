@@ -124,13 +124,13 @@ The Camunda configuration does not change between them.
 :::warning Replication monitoring is required
 Asynchronous replication monitoring is required, not a tuning option. Without it the RDBMS exporter acknowledges records the standby has not received yet, and a writer failover loses exported data. This architecture treats a writer failover as a routine operation rather than an incident, so set `camunda.data.secondary-storage.rdbms.async-replication.enabled` to `true`.
 
-Monitoring is off by default, because `async-replication.enabled` defaults to `false`. Once you enable it, the strategy defaults to `LOG_SEQ`. On a backend without log sequence number support, set `async-replication.type` to `DELAY` explicitly.
+Monitoring is off by default, because `async-replication.enabled` defaults to `false`. Once you enable it, the strategy defaults to `LOG_SEQ`. Use `LOG_SEQ`: every database this architecture supports today also supports it.
 
 | Strategy                   | When to use it                                                                                                                                                                       | What you configure                                                                          |
 | :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
 | `LOG_SEQ` (LSN monitoring) | Default and preferred. Reads the database's own replication position. Supported on Aurora Global Database with PostgreSQL, Aurora Global Database with MySQL, MSSQL, and PostgreSQL. | `async-replication.type: LOG_SEQ`                                                           |
-| `TIME_LAG`                 | Less precise alternative to `LOG_SEQ`. Reads the replication lag the primary reports, and acknowledges less often. Same backends as `LOG_SEQ`.                                       | `async-replication.type: TIME_LAG`                                                          |
-| `DELAY`                    | Backends without LSN support. Works with any backend. Carries no replication signal.                                                                                                 | `async-replication.type: DELAY`, a `delay` value, and your own monitoring of the actual lag |
+| `TIME_LAG`                 | Not needed today. Less precise than `LOG_SEQ`: it reads the replication lag the primary reports, and acknowledges less often. Same backends as `LOG_SEQ`.                            | `async-replication.type: TIME_LAG`                                                          |
+| `DELAY`                    | Not needed today. A fallback for a backend without LSN support. Carries no replication signal.                                                                                       | `async-replication.type: DELAY`, a `delay` value, and your own monitoring of the actual lag |
 
 Camunda doesn't switch strategies for you. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported backends and the settings.
 :::
