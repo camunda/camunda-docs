@@ -101,7 +101,7 @@ Zone awareness also assigns a Raft election priority per zone. Give the zone tha
 
 ### Replication-agnostic secondary storage
 
-Camunda exposes one JDBC connection per Orchestration Cluster, and the RDBMS exporter has no multi-region mode. As the [RDBMS multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) documentation states, multi-region replication must be handled within the database itself.
+Camunda uses one JDBC URL per Orchestration Cluster, through a connection pool on each broker, and the RDBMS exporter has no multi-region mode. As the [RDBMS multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) documentation states, multi-region replication must be handled within the database itself.
 
 Multi-Region RDBMS adopts that constraint rather than working around it:
 
