@@ -23,16 +23,17 @@ In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe 
 
 With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas, so **Zeebe keeps processing** and no Zeebe action is required to restore service. The [dry run](#1-confirm-the-quorum-is-intact) confirms this before you act. The failover procedure mostly reports. Its only real work is the database writer, and only when the writer was in the lost region.
 
-<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. In a two-zone cluster, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter, and failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone cluster, quorum holds and processing continues, there is nothing to force-remove, disable, or restore, and two operator steps remain: promoting the database writer if it was in the lost zone, and redeploying the zone." />
+<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. In a two-zone cluster, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone cluster, quorum holds and processing continues. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
 
 | Step                             | Dual-region                             | Multi-Region RDBMS                              |
 | :------------------------------- | :-------------------------------------- | :---------------------------------------------- |
 | Restore processing               | Force-remove the lost brokers           | Nothing, processing never stopped               |
 | Secondary storage after failover | Disable the exporter to the lost region | Nothing, there is one exporter and one database |
 | Promote the database             | n/a                                     | Only if the writer was in the lost region       |
+| Remove the lost zone             | Same step as restoring processing       | Recommended, not needed for quorum              |
 | Failback                         | Snapshot and restore secondary storage  | Redeploy the region                             |
 
-In step count, the [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. Here, a region loss takes at most five, most of them checks, and bringing the region back is one redeploy.
+In step count, the [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. Here, the diagram counts three operator actions: promote the writer if needed, remove the lost zone, and redeploy the region at failback. The runbook below adds checks around them, for five steps in total.
 
 :::warning Use this runbook only for Multi-Region RDBMS
 This runbook applies only to a zone-aware cluster with RDBMS secondary storage. Its region-loss procedures assume three or more zones. A cluster that starts on two zones uses only [Add a region](#add-a-region) until it runs three. Don't run the [dual-region procedure](./dual-region-ops.md) on it: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here and can lose data. For a two-region cluster with Elasticsearch, use the dual-region procedure instead.
@@ -139,6 +140,8 @@ Remove the brokers of the lost zone. One atomic change evicts them. It also drop
 
 This issues `DELETE /actuator/cluster/zones/<zone>?force=true` against a surviving region. Without `force=true`, the API tries a graceful drain, which fails when the zone is down. Only do this for a zone that is down and unreachable, and for one zone at a time. See the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
 
+In a planned evacuation, the zone is still reachable, so don't force-remove it. Drain it gracefully instead: send `DELETE /actuator/cluster/zones/<zone>` without `force=true` through the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md). The engine moves the zone's partitions to the remaining zones before it removes the brokers.
+
 Removal is required when the lost zone held half the replicas or more. The replica count decides this, not the number of zones. See [step 1](#1-confirm-the-quorum-is-intact). An evenly split two-zone cluster always needs it, which is why [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) has a failover runbook and this architecture does not.
 
 The trade-off is failback cost. You must add a removed zone back when you bring the region back, and its brokers start empty.
@@ -237,9 +240,7 @@ The script refuses a slot that is not yet part of the deployed topology. Run the
 
 ## Upgrade the cluster
 
-:::warning Upgrade paths not tested yet
-Multi-region upgrade paths are not yet tested for this architecture. Follow the [tracking issue](https://github.com/camunda/team-infrastructure-experience/issues/1270) for updates.
-:::
+{/* TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. */}
 
 Upgrade **one region at a time**, and wait for the cluster to report healthy before starting the next:
 

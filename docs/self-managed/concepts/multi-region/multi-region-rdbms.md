@@ -146,7 +146,7 @@ Two consequences follow, and both are sizing decisions rather than configuration
 
 Skewing partition leadership to the writer's zone through zone priority reduces how often that round trip is paid, but it does not remove it.
 
-<ActiveStandbyImg role="img" title="Three regions, london, paris, and zurich, each run Zeebe brokers that process and export. Only london hosts the Aurora writer, which accepts every write. Paris hosts an asynchronous read-only standby that the database replicates to. Zurich has no database member and acts as the tie-breaker zone. Exports from paris and zurich cross a region on every flush. Zone priority biases leaders toward london, so fewer flushes cross a region." />
+<ActiveStandbyImg role="img" title="Three regions, london, paris, and zurich, each run Zeebe brokers. Only london hosts the database writer. The london brokers export to it locally, while the paris and zurich brokers export across a region. The writer replicates asynchronously to the database standby in paris. Zurich has no database member." />
 
 ## Requirements
 
@@ -196,9 +196,7 @@ Multi-region setups require careful planning. You must manage the following area
 
 ### Upgrade considerations
 
-:::warning Upgrade paths not tested yet
-Multi-region upgrade paths are not tested yet for this architecture. Follow the [tracking issue](https://github.com/camunda/team-infrastructure-experience/issues/1270) for progress.
-:::
+{/* TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. */}
 
 Upgrade **one region at a time**, so the other regions keep the quorum. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#upgrade-the-cluster) lists the steps.
 
@@ -235,7 +233,7 @@ The partition count is fixed at bootstrap, so size it for the largest topology y
 
 Growing the cluster is a planned change. This section describes the unplanned one, and what the cluster does when a region disappears.
 
-<RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas per partition and the database writer. Paris and zurich keep three of five replicas, a majority, so Zeebe elects new leaders and keeps processing. The operator still routes client traffic away from london with DNS failover or a global load balancer. Because the writer was in london, the operator promotes the paris standby. Removing the lost zone with failover.sh --drain-brokers is recommended but not required for quorum here." />
+<RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas and the database writer. Paris, with two replicas and the standby, and zurich, with one replica and no database, keep three of five replicas, so the quorum holds." />
 
 Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. **You need no operator step to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
 
@@ -243,7 +241,7 @@ Two things still need attention.
 
 **The database writer.** If the writer was in the lost region, promote a surviving member. A planned switchover loses no data. An unplanned promotion loses whatever had not replicated at the time of the outage, bounded by the replication lag your [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) strategy allows. Camunda itself needs no reconfiguration as long as the JDBC URL keeps resolving to the current writer.
 
-**Client traffic.** Camunda clients take one REST address and one gRPC address, not a list of endpoints. Point them at one address that fails over. For example, use a DNS record with health-checked failover, such as Amazon Route 53 failover routing. You can also use a global load balancer, such as AWS Global Accelerator, in front of the regional load balancers.
+**Client traffic.** Camunda clients take one REST address and one gRPC address, not a list of endpoints. Point them at one address that fails over. For example, use a DNS record with health checks and failover routing, or a global load balancer in front of the regional load balancers. Most providers offer both, for example Amazon Route 53 and AWS Global Accelerator, Azure Traffic Manager and Azure Front Door, or Google Cloud DNS routing policies and Cloud Load Balancing.
 
 Recovery is the reverse and has no restore step. Redeploy the region. Its brokers replay from the surviving replicas exactly as they would after a node restart. For the step-by-step procedure, see [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
 
@@ -264,7 +262,7 @@ That is the difference from [Dual-Region](./dual-region.md), where the same even
 
 **Data loss depends on which store you mean.** The engine's own state loses nothing. Raft commits a record only once a majority of its replicas hold it. With one replica per zone and three zones, a commit needs two replicas. Losing one zone always leaves at least one replica that has the record.
 
-Secondary storage is different, because the database replicates asynchronously. An unplanned promotion can omit records that had not reached the promoted standby.
+Secondary storage is different, because the database replicates asynchronously. In the table, `min-sync-replicas` stands for `camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas`, the number of standbys that must confirm a record. An unplanned promotion can omit records that had not reached the promoted standby.
 
 | Strategy   | Secondary-storage RPO | Condition                                                                                                                        |
 | :--------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
@@ -278,7 +276,7 @@ That makes the guarantee conditional on replication configuration and disk capac
 
 `pause-on-max-lag-exceeded` decides what happens once the lag passes the configured threshold. It is off by default, and it caps neither data loss nor retained log growth. Acknowledgement waits for confirmed replication either way, so the unacknowledged position holds the log either way. With it off, exporting continues against a database that is already behind. With it on, exporting stops, so secondary storage receives nothing new and the APIs reading it fall behind the engine until replication recovers. Enable it deliberately, once you have alerting on replication lag.
 
-<RecoveryWindowImg role="img" title="Timeline of the recovery window after a region loss. Three phases start when the region is lost and overlap. Raft re-election happens inside the engine. Client traffic rerouting depends on your DNS or load balancer and on client timeouts and retries. Database writer promotion applies only if the writer was lost, and depends on the promotion and on SQL connection timeouts. Bar lengths are illustrative." />
+<RecoveryWindowImg role="img" title="Timeline after a region loss. Three phases start when the region is lost: Raft re-election inside the engine, client traffic rerouting through your DNS or load balancer, and database writer promotion only if the writer was lost. Bar lengths are illustrative." />
 
 **The window has three parts**, and only the first happens inside the engine:
 
