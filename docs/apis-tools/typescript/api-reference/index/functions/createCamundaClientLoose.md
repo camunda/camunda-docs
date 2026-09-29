@@ -864,7 +864,7 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         | "SCRIPT_TASK"
         | "SEND_TASK";
   }>;
-  getErrorMode: "result" | "throw";
+  getErrorMode: "throw" | "result";
   getExportingStatus: CancelablePromise<{
      status: ExportingStatusCode;
   }>;
@@ -3253,7 +3253,7 @@ signatures), matching the runtime wrappers the constructor installs.
 \| `"SCRIPT_TASK"`
 \| `"SEND_TASK"`;
 \}\>;
-`getErrorMode`: `"result"` \| `"throw"`;
+`getErrorMode`: `"throw"` \| `"result"`;
 `getExportingStatus`: [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `status`: [`ExportingStatusCode`](../type-aliases/ExportingStatusCode.md);
 \}\>;
