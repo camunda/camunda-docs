@@ -42,6 +42,7 @@ This procedure applies only to a two-region cluster with Elasticsearch secondary
 
 - On a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) cluster with three or more regions, don't run it: its force-remove, exporter, and Elasticsearch restore steps don't apply there. Use the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) instead.
 - On a cluster that you [migrated to zone-aware brokers](/self-managed/deployment/helm/operational-tasks/zone-aware-migration.md), the node IDs in its commands don't match your brokers. Don't apply them as written.
+- On a two-region cluster with RDBMS secondary storage and database replication, for example the [Amazon ECS dual-region setup](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md), don't run this procedure either. Its Elasticsearch exporter and restore steps don't apply there.
 
 :::
 

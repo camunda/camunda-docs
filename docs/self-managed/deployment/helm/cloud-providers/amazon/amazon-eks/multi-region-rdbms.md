@@ -40,15 +40,15 @@ New to Terraform or to running Camunda on EKS? Start with the [single-region EKS
 
 ## Requirements
 
-- **AWS account** with permission to create resources in every target region. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
-- **AWS CLI**, to manage AWS resources. See [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-- **Terraform**, to provision the infrastructure. See [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
-- **kubectl**, to interact with the Kubernetes clusters. See [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-- **Helm**, to install Camunda. See [Install Helm](https://helm.sh/docs/intro/install/).
-- **subctl**, the Submariner CLI. The reference architecture installs it for you.
-- **jq**, used by the procedure scripts to read the Orchestration Cluster management API.
+- **AWS account** – Required to create AWS resources in every target region. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
+- **AWS CLI** – Command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+- **Terraform** – IaC tool used to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
+- **kubectl** – CLI for interacting with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
+- **Helm** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
+- **jq** – Lightweight JSON processor. [Download jq](https://jqlang.github.io/jq/download/).
+- **subctl** – Submariner CLI. The reference architecture installs it for you.
 
-For the tool versions used in testing, see the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the reference architecture repository.
+For the tool versions used in testing, see the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
 
 ### AWS service quotas
 
@@ -110,7 +110,8 @@ Every region owns a distinct VPC range and a distinct Kubernetes service range. 
 | 0    | `eu-west-2`    | `10.192.0.0/16`  | `10.190.0.0/16`         |
 | 1    | `eu-west-3`    | `10.202.0.0/16`  | `10.200.0.0/16`         |
 | 2    | `eu-central-2` | `10.212.0.0/16`  | `10.210.0.0/16`         |
-| 3    | `eu-south-1`   | `10.222.0.0/16`  | `10.220.0.0/16`         |
+
+A fourth slot (`eu-south-1`, VPC `10.222.0.0/16`, service CIDR `10.220.0.0/16`) is prepared but disabled. Enable it in `variables.tf` before you bootstrap the cluster.
 
 There is no separate pod range, and that is deliberate. With the [AWS VPC CNI](https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html) a pod address is an ordinary VPC address. Routing the VPC range over the Transit Gateway therefore makes cross-region pod-to-pod traffic work natively, with no overlay network. The Transit Gateway routes the service range too, because Submariner resolves a remote ClusterIP service out of the exporting cluster's service range.
 
@@ -137,25 +138,7 @@ Deploying fewer slots than you provision is the supported growth path. The Camun
 
 The root module creates every EKS cluster, the Transit Gateway mesh, the security group rules, and the Aurora Global Database in a single state.
 
-```bash
-cd terraform/clusters
-terraform init
-terraform apply -var cluster_name=camunda
-```
-
-For a cheaper evaluation, deploy two of the three slots and reduce the node count. The cluster then runs two zones, `2-2` at replication factor four. Until you add the third region, it survives no zone loss. Losing either zone leaves two replicas of four, which is not a majority.
-
-```bash
-terraform apply \
-  -var cluster_name=camunda \
-  -var active_region_count=2 \
-  -var single_nat_gateway=true \
-  -var np_desired_node_count=2
-```
-
-Expect roughly 25 minutes for the EKS clusters and 15 minutes for the Aurora Global Database. They are created in parallel.
-
-For settings you reapply on every plan, keep them in a variable file rather than repeating the flags:
+Keep your settings in a variable file. The reference architecture ships no variable file, so create one:
 
 ```hcl title="terraform-cluster.tfvars"
 cluster_name            = "camunda"
@@ -169,8 +152,23 @@ default_tags = {
 }
 ```
 
+Then apply it:
+
 ```bash
+cd terraform/clusters
+terraform init
 terraform apply -var-file=terraform-cluster.tfvars
+```
+
+Expect roughly 25 minutes for the EKS clusters and 15 minutes for the Aurora Global Database. They are created in parallel.
+
+For a cheaper evaluation, deploy two of the three slots and reduce the node count. The cluster then runs two zones, `2-2` at replication factor four. Until you add the third region, it survives no zone loss. Losing either zone leaves two replicas of four, which is not a majority.
+
+```hcl title="terraform-cluster.tfvars"
+cluster_name          = "camunda"
+active_region_count   = 2
+single_nat_gateway    = true
+np_desired_node_count = 2
 ```
 
 :::note
@@ -181,7 +179,7 @@ Set up remote Terraform state before deploying anything you intend to keep. The 
 
 To run this architecture on a database other than Aurora Global Database, set `deploy_database = false` and supply your own JDBC URL through `CAMUNDA_RDBMS_URL`. Anything that presents a single endpoint following its own writer works the same way. Examples are a PostgreSQL cluster behind a floating endpoint, a connection proxy, or a DNS record you repoint during failover.
 
-The generated Helm values set `async-replication.type` to `LOG_SEQ`. That strategy only works on a backend that supports LSN monitoring. With an unsupported backend, Camunda fails at startup. In that case, set `async-replication.type` to `DELAY`, give it a `delay` value, and monitor the replication lag yourself. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported backends.
+The generated Helm values use the `LOG_SEQ` replication strategy, which fails at startup on a backend without LSN support. For such a backend, see [replication-agnostic secondary storage](/self-managed/concepts/multi-region/multi-region-rdbms.md#replication-agnostic-secondary-storage) to choose `DELAY` instead.
 
 ## 2. Prepare the environment
 
@@ -195,7 +193,9 @@ cd ../../procedure
 . ./export_environment_prerequisites.sh
 ```
 
-The dot is required: these scripts export variables into your current shell, not into a subshell.
+:::note
+The dot is required. These scripts export variables into your current shell, not into a subshell.
+:::
 
 `export_environment_prerequisites.sh` is the environment contract of the architecture. Every value can be overridden by exporting it beforehand, and region-indexed values are space-separated lists in slot order.
 
@@ -257,7 +257,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 ## 3. Connect the clusters
 
-Two layers connect the regions, and they have different jobs. The Transit Gateway carries the traffic. Submariner only publishes names.
+Two layers connect the regions, and they have different jobs:
+
+- **Transit Gateway**: carries the traffic.
+- **Submariner**: publishes service names across clusters.
 
 ### Install subctl
 
@@ -343,10 +346,10 @@ Before spending twenty-five minutes deploying Camunda, spend two proving that po
 
 If this fails, the problem is routing or firewalling, not Camunda. See [troubleshooting](#troubleshooting).
 
-The probe runs `busybox:1.37`. Set `PROBE_IMAGE` before the script to pull from an approved mirror instead:
+The probe image is set in [diagnose-submariner.sh](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/diagnose-submariner.sh). Set `PROBE_IMAGE` before the script to pull from an approved mirror instead:
 
 ```bash
-export PROBE_IMAGE=my-registry.example.com/busybox:1.37
+export PROBE_IMAGE=my-registry.example.com/busybox
 ```
 
 ### Ports open between regions
