@@ -23,7 +23,7 @@ Camunda 8 versions follow the `MAJOR.MINOR.PATCH` format (for example, `8.8.3`).
 
 All minor version upgrades in a Self-Managed Orchestration Cluster must follow this procedure:
 
-1. **Upgrade to the latest patch version of your current minor.** For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to the latest `8.7` patch. This is strongly recommended for fix coverage. The compatibility check itself compares minor versions, so any patch of the source minor is accepted.
+1. **Upgrade to the latest patch version of your current minor.** For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to the latest `8.7` patch. This is strongly recommended for fix coverage. The compatibility check itself compares minor versions, so any patch of the source minor is accepted. Skipping this step can still expose you to bugs already fixed in later patches.
 
 2. **Upgrade to the next minor version.** Do not skip minor versions. For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
 
@@ -38,6 +38,10 @@ You must not:
 - Include pre-release (`-alpha*`) versions in an upgrade chain.
 
 Failure to follow this procedure results in an unsupported upgrade path. The broker or schema manager will block startup to prevent unsafe migrations.
+
+:::note
+The compatibility check compares minor versions, but an individual feature may require a specific minimum **patch** of the target minor. For example, upgrading a cluster that used [draining process definition deletion](/reference/announcements-release-notes/880/880-announcements.md#draining-deletion-upgrade-constraint) on 8.8 requires 8.9.19 or later. Check the [prepare-for-upgrade guide](/self-managed/upgrade/prepare-for-upgrade.md) for feature-specific minimum patches before upgrading.
+:::
 
 ## Supported upgrade paths
 

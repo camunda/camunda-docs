@@ -1,19 +1,19 @@
 ---
 id: prepare-resources
-title: Prepare resources for import into Web Modeler
+title: Prepare resources for import into Camunda Hub
 sidebar_label: Prepare resources
-description: "Learn how to prepare resources for import into Web Modeler, including guidelines and steps to create import URLs."
+description: "Learn how to prepare resources for import into Camunda Hub, including guidelines and steps to create import URLs."
 ---
 
-Learn how to prepare resources for import into Web Modeler, including guidelines and steps to create import URLs.
+Learn how to prepare resources for import into Camunda Hub, including guidelines and steps to create import URLs.
 
 :::note
-This guide is intended for repository maintainers, blueprint authors, and solution builders who prepare resources for others to import into Web Modeler.
+This guide is intended for repository maintainers, blueprint authors, and solution builders who prepare resources for others to import into Camunda Hub.
 :::
 
 ## Supported methods
 
-Prepare resources for import into Web Modeler in two main ways:
+Prepare resources for import into Camunda Hub in two main ways:
 
 1. [**Individual resources**](#prepare-individual-resources): Each resource, such as a BPMN or DMN file, a template, or a README, is accessible via its own public URL and can be imported one by one.
 2. [**Packaged resources**](#prepare-packaged-resources): Bundle all resources, such as an entire project, into a single `.zip` file. This allows importing the full package from a single URL.
@@ -36,7 +36,7 @@ Each individual resource (or `.zip` file package) must:
 
 :::important
 
-- If the imported resources include at least one BPMN, Web Modeler treats them as a **project** and groups them accordingly.
+- If the imported resources include at least one BPMN, Camunda Hub treats them as a **project** and groups them accordingly.
 - If no BPMN file is present, the resources are imported as **independent files** into the chosen project or folder.
   :::
 
@@ -49,7 +49,7 @@ Use this approach when:
 - You have a small set of resources.
 - You don't expect to add or remove files often.
 
-Keep each file within Web Modeler’s per‑resource size limit of **three MB**.
+Keep each file within Camunda Hub’s per‑resource size limit of **three MB**.
 
 ### Prepare packaged resources
 
@@ -63,18 +63,18 @@ Use this approach when:
 When preparing the packaged resources into a `.zip` file:
 
 - Keep the total `.zip` file size at or below **10 MB**.
-- Include **at most 100 files** that Web Modeler can support.
-- Keep each packaged file within Web Modeler’s per‑resource size limit of **three MB**.
+- Include **at most 100 files** that Camunda Hub can support.
+- Keep each packaged file within Camunda Hub’s per‑resource size limit of **three MB**.
 - Include at most one README file.
-- Note that the folder structure **will not** be imported into Web Modeler.
+- Note that the folder structure **will not** be imported into Camunda Hub.
 
 #### Content and security rules
 
 To minimize issues during import:
 
 - Do not include files with `..` or leading slashes in their name.
-- Exclude executables, scripts, and any other files not supported by Web Modeler.
-- Ensure each resource file is within Web Modeler’s per‑resource size limit.
+- Exclude executables, scripts, and any other files not supported by Camunda Hub.
+- Ensure each resource file is within Camunda Hub’s per‑resource size limit.
 - Use clear, stable file names.
 
 ## Create an import URL
@@ -83,22 +83,22 @@ To minimize issues during import:
 
 For GitHub-hosted resources, see first [Get public URLs from GitHub](#get-public-urls-from-github).
 
-2. Form the Web Modeler URL like this:
+2. Form the Camunda Hub URL like this:
 
 ```
-<Web Modeler host>/import/resources?source=<raw file URL>
+<Camunda Hub host>/import/resources?source=<raw file URL>
 ```
 
 3. To add more resources, add a comma after the last URL and paste the next URL:
 
 ```
-<Web Modeler host>/import/resources?source=<raw file URL 1>,<raw file URL 2>
+<Camunda Hub host>/import/resources?source=<raw file URL 1>,<raw file URL 2>
 ```
 
 4. (Optional) Add a title. When the resources are treated as a project, this will be the project's name.
 
 ```
-<Web Modeler host>/import/resources?title=<project name>&source=<raw file URL 1>,<raw file URL 2>
+<Camunda Hub host>/import/resources?title=<project name>&source=<raw file URL 1>,<raw file URL 2>
 ```
 
 ### Get public URLs from GitHub
@@ -111,11 +111,10 @@ To get a public URL for a single resource:
 
 1. Open the resource in your public GitHub repository.
 2. Click **Raw**.
-3. Copy the URL from your browser’s address bar.
+3. Copy the URL from your browser's address bar.
 
 :::important
-
-The URL from step 3 is a direct link that Web Modeler can access without redirects.
+The URL from step 3 is a direct link that Camunda Hub can access without redirects.
 :::
 
 ### Packaged resources URL

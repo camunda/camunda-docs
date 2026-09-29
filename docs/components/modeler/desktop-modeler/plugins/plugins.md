@@ -5,18 +5,18 @@ description: "Plugins allow you to change the appearance and behavior of Desktop
 ---
 
 :::note
-The Camunda Modeler plugins API is not stable and might change in the future.
+The Desktop Modeler plugins API is not stable and might change in the future.
 :::
 
-Plugins allow you to change the appearance and behavior of Camunda Modeler and add new features.
+Plugins allow you to change the appearance and behavior of Desktop Modeler and add new features.
 
-## Plugging into Camunda Modeler
+## Plugging into Desktop Modeler
 
-You can plug into the modeler to change its appearance, add new menu entries, extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js) and [DMN](https://github.com/bpmn-io/dmn-js), or even slot React.js components into the Camunda Modeler UI.
+You can plug into the modeler to change its appearance, add new menu entries, extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js) and [DMN](https://github.com/bpmn-io/dmn-js), or even slot React.js components into the Desktop Modeler UI.
 
 To add a plugin, put it into the `resources/plugins` directory relative to your [`{APP_DATA_DIRECTORY}`](../search-paths#app-data-directory) or [`{USER_DATA_DIRECTORY}`](../search-paths#user-data-directory) directory.
 
-Camunda Modeler searches for available plugin entry points via the `resources/plugins/*/index.js` pattern. This means that each plugin must reside in it's own folder which is a direct child of the `plugins` directory.
+Desktop Modeler searches for available plugin entry points via the `resources/plugins/*/index.js` pattern. This means that each plugin must reside in its own folder, which is a direct child of the `plugins` directory.
 
 :::note
 If you download and extract plugins from GitHub, the extracted directory contains the actual plugin, so make sure to copy the plugin, not its parent directory.
@@ -24,13 +24,13 @@ If you download and extract plugins from GitHub, the extracted directory contain
 
 ## Overview of your possibilities as a plugin developer
 
-There are many ways for a developer to extend Camunda Modeler and its modeling tools. The following table shows an overview:
+There are many ways for a developer to extend Desktop Modeler and its modeling tools. The following table shows an overview:
 
 | Plugin type            | Functionality                                                                                                              | Example                                                                                                                                 |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | Menu Entries           | Add new entries to the menu bar - useful to interact with your plugins, link to external pages, add settings, etc.         | [Menu Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/menu-plugin-example)                                      |
-| Custom Styles          | Change the look and feel of Camunda Modeler by adding stylesheets.                                                         | [Styles Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/style-plugin-example)                                   |
-| React Components       | Embed custom React.js components into specific anchor points of Camunda Modeler.                                           | [React Plugin Example](https://github.com/pinussilvestrus/camunda-modeler-autosave-plugin)                                              |
+| Custom Styles          | Change the look and feel of Desktop Modeler by adding stylesheets.                                                         | [Styles Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/style-plugin-example)                                   |
+| React Components       | Embed custom React.js components into specific anchor points of Desktop Modeler.                                           | [React Plugin Example](https://github.com/pinussilvestrus/camunda-modeler-autosave-plugin)                                              |
 | bpmn-js Modules        | Extend our BPMN editor by injecting your own custom [bpmn-js](https://github.com/bpmn-io/bpmn-js) modules.                 | [bpmn-js Module Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/bpmn-js-plugin-example)                         |
 | bpmn-moddle Extensions | Extend the BPMN language model by injecting your own custom [bpmn-moddle](https://github.com/bpmn-io/bpmn-moddle) modules. | [bpmn-moddle Extension Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/bpmn-js-plugin-moddle-extension-example) |
 | dmn-js Modules         | Extend our DMN editor by injecting your own custom [dmn-js](https://github.com/bpmn-io/dmn-js) modules.                    | [dmn-js Module Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/dmn-js-plugin-example)                           |
@@ -115,7 +115,7 @@ For more information on how the modeler's menu works, take a look at its [implem
 
 ### Extend the modeler and its BPMN and DMN components
 
-You can extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js) and [DMN](https://github.com/bpmn-io/dmn-js) with your own modules, as well as embedding React.js components into certain sections of Camunda Modeler.
+You can extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js) and [DMN](https://github.com/bpmn-io/dmn-js) with your own modules, as well as embedding React.js components into certain sections of Desktop Modeler.
 
 Since the client of the modeler uses [Chromium](https://www.chromium.org/Home), you can't use Node.js modules to extend the modeling tools. You need to bundle your plugin first. The easiest way to get started with client-side plugins is through [this example project](https://github.com/camunda/camunda-modeler-plugin-example).
 
@@ -187,7 +187,7 @@ function LoggingPlugin(eventBus, canvas) {
 npm run build
 ```
 
-8. Put the folder into the `resources/plugins` directory relative to your Camunda Modeler installation directory. You can now use your plugin!
+8. Put the folder into the `resources/plugins` directory relative to your Desktop Modeler installation directory. You can now use your plugin!
 
 ### Development workflow
 

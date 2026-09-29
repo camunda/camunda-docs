@@ -363,7 +363,7 @@ If the restore fails, you can re-run the application after fixing the root cause
 If the data directory is not empty, the restore will fail with an error message:
 
 ```
-Broker's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+Broker's data directory /usr/local/camunda/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
 ```
 
 On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted. In such cases, the restore application can be configured to ignore the presence of these files and folders. The configuration option `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder names to ignore. By default, it ignores the `lost+found` folder found on ext4 filesystems. To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.
@@ -382,8 +382,8 @@ If you previously backed up Optimize data, restore it independently using the st
 
 See [back up and restore Optimize independently](../optimize-backup-and-restore.md#restore-a-backup) for the complete procedure.
 
-## (Optional) Restore Web Modeler data
+## (Optional) Restore Camunda Hub data
 
-If you previously backed up Web Modeler data, restore it using the same RDBMS restore tools.
+If you previously backed up Camunda Hub data, restore it using the same RDBMS restore tools.
 
-See [backup and restore Web Modeler data](../modeler-backup-and-restore.md) for more details.
+See [backup and restore Camunda Hub data](../modeler-backup-and-restore.md) for more details.

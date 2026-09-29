@@ -91,5 +91,6 @@ If you previously set `webModeler.persistence.enabled: true` without `existingCl
 
 ## Related resources
 
+- [Migrate and validate Helm overrides with the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)
 - [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)
 - [Component upgrade from 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md)
