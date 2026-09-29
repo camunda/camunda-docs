@@ -73,6 +73,10 @@ To provision new tenants and understand lifecycle behavior in 8.10, including ro
 
 Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
 
+For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
+
+To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
+
 ## Spring Boot applications with multiple clients
 
 When a Spring Boot application configures multiple clients, the starter registers every `@JobWorker` against all configured clients and deploys every `@Deployment` resource to all configured clients. Workers can therefore poll and process jobs across multiple Physical Tenants, and the same BPMN resources can be deployed to each tenant. See [Physical Tenant behavior for job workers](/apis-tools/camunda-spring-boot-starter/configuration.md#physical-tenant-fan-out-for-multi-client-applications) and [deployment behavior for multi-client applications](/apis-tools/camunda-spring-boot-starter/configuration.md#deploy-resources-on-start-up).
@@ -82,10 +86,6 @@ When a Spring Boot application configures multiple clients, the starter register
 Deploy Optimize separately for each Physical Tenant and configure each instance to use that tenant's cluster connection. Native multi-tenant Helm support does not manage multiple Optimize instances.
 
 <!-- TODO: Confirm with the Optimize team whether additional Physical Tenant setup guidance is ready to publish. -->
-
-For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
-
-To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
 
 ## What is not isolated
 
