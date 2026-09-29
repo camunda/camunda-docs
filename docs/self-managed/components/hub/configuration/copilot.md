@@ -1,7 +1,7 @@
 ---
 id: copilot
 title: "Copilot"
-description: "Configure Copilot in Web Modeler with a custom LLM provider."
+description: "Configure Copilot in Camunda Hub with a custom LLM provider."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 <span class="badge badge--alpha">Alpha</span>
 
-Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms. You can configure the default LLM provider for BPMN, FEEL, and form copilots.
+Camunda Hub supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms. You can configure the default LLM provider for BPMN, FEEL, and form copilots.
 
 Copilot supports the following LLM providers:
 

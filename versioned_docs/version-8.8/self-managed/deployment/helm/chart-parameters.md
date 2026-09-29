@@ -20,6 +20,8 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestration.hostNetwork`, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
 
+For service-level options such as the `appProtocol` hint per port, see [configure Kubernetes Service ports](/self-managed/deployment/helm/configure/service-configuration.md).
+
 ### Other Camunda applications
 
 | Section      | Purpose                                             |
@@ -75,6 +77,8 @@ You can use these files individually or combine them with your own overrides.
 
 To customize parameters, create an override file (for example, `my-overrides.yaml`) with custom settings.  
 This approach is recommended over editing `values.yaml` directly.
+
+You can [validate the keys in your overrides with the Camunda Helm Toolkit](operational-tasks/camunda-helm-toolkit.md#validate-override-files). This checks the supplied configuration, not the completeness or deployment readiness of all merged Helm values.
 
 ### Combining multiple values files
 

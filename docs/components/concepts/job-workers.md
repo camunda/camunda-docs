@@ -42,6 +42,8 @@ Many workers can request the same job type to scale up processing. In this scena
 
 Such a job is considered activated until the job is completed, failed, or the job activation times out.
 
+If a job's variables contain secret references, the job is handed out only once those references have been resolved. A job that is still waiting is not returned by the request and does not count against **MaxJobsToActivate**, so jobs behind it are still activated, and it becomes available again on its own once resolution completes. See [secret resolution and job activation](secret-resolution-and-job-activation.md).
+
 On requesting jobs, the following properties can be set:
 
 - **Worker**: The identifier of the worker used for auditing purposes.
@@ -183,6 +185,8 @@ The RNG used to randomly pick streams and clients provides a good uniform distri
 :::
 
 Job leasing also applies to streaming: a leased job only matches streams opened with a lease request, and streams opened without one only match unleased jobs. See [job leasing](#job-leasing) for details.
+
+If a job contains unresolved secret references, the broker requests resolution before pushing the job. Once the references resolve, the broker pushes the job. See [secret resolution and job activation](secret-resolution-and-job-activation.md).
 
 To help visualize the process in general, here is a sequence diagram which shows a single worker opening a job stream for jobs of type "foo" against a cluster consisting of a single gateway and a single broker. It receives some jobs, and when it closes, one job that was pushed asynchronously is returned to the broker:
 
@@ -408,15 +412,15 @@ sequenceDiagram
     participant B as Worker B
 
     A->>Z: Activate job (withLease)
-    Z-->>A: Job with leaseToken A
+    Z-->>A: Job with jobLeaseToken A
     Note over A: Deciding: approve
     Z->>Z: Job times out, reassigned
     B->>Z: Activate job (withLease)
-    Z-->>B: Job with leaseToken B
+    Z-->>B: Job with jobLeaseToken B
     Note over B: Sees new record, decides: reject
-    A->>Z: Complete job (leaseToken A)
+    A->>Z: Complete job (jobLeaseToken A)
     Z-->>A: Rejected: INVALID_STATE, stale lease
-    B->>Z: Complete job (leaseToken B)
+    B->>Z: Complete job (jobLeaseToken B)
     Z-->>B: Accepted
 ```
 
@@ -429,15 +433,15 @@ sequenceDiagram
     participant A2 as Activation 2
 
     A1->>Z: Activate job (withLease)
-    Z-->>A1: Job with leaseToken 1
-    A1->>Z: Update agent instance (leaseToken 1)
+    Z-->>A1: Job with jobLeaseToken 1
+    A1->>Z: Update agent instance (jobLeaseToken 1)
     Z-->>A1: Update pending
     Z->>Z: Job times out, reassigned
     A2->>Z: Activate job (withLease)
-    Z-->>A2: Job with leaseToken 2
-    A2->>Z: Update agent instance (leaseToken 2)
+    Z-->>A2: Job with jobLeaseToken 2
+    A2->>Z: Update agent instance (jobLeaseToken 2)
     Z-->>A2: Update pending
-    A2->>Z: Complete job (leaseToken 2)
+    A2->>Z: Complete job (jobLeaseToken 2)
     Z-->>A2: Accepted
     Note over Z: Commits activation 2's update,<br/>discards activation 1's pending update
 ```
@@ -446,7 +450,7 @@ See [connect an external agent](../agentic-orchestration/connect-external-agent.
 
 ### How job leasing works
 
-To use leasing, request a lease by setting `withLease` to `true` when you activate jobs. Zeebe then returns a `leaseToken` on each activated job. This token identifies that specific activation, not the job itself.
+To use leasing, request a lease by setting `withLease` to `true` when you activate jobs. Zeebe then returns a `jobLeaseToken` on each activated job. This token identifies that specific activation, not the job itself.
 
 Pass the matching lease token back when you complete, fail, or throw an error on the job. You can also include it when you update the job timeout, retries, or priority, to verify the activation is still current before the update applies.
 
@@ -492,7 +496,7 @@ client
             jobClient
                 // highlight-start
                 .newCompleteCommand(job.getKey())
-                .withLeaseToken(job.getLeaseToken())
+                .withJobLeaseToken(job.getJobLeaseToken())
                 // highlight-end
                 .send();
         })

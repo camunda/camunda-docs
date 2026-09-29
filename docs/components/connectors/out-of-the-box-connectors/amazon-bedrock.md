@@ -21,7 +21,7 @@ Learn more about Amazon bedrock in
 the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html).
 
 :::note
-Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer
+Use secrets to store credentials and avoid exposing sensitive information directly from the process. Refer
 to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 

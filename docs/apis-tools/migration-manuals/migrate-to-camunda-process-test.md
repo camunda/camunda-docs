@@ -12,7 +12,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::note Have you already migrated?
-You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide is retained to help customers migrate before upgrading from 8.9 to 8.10. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-810.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
@@ -597,4 +597,4 @@ When you’re ready, take the next steps to continue your journey:
 
 ## Troubleshooting
 
-If you encounter issues with the migration or notice missing features, please report them in the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).
+If you encounter issues with the migration or notice missing features, report them in the [Camunda GitHub repository](https://github.com/camunda/camunda/issues).

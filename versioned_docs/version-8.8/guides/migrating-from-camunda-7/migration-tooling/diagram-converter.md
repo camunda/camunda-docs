@@ -24,13 +24,6 @@ The results are available as:
 - **XLSX**: A Microsoft Excel file, including pre-built pivot tables for data exploration.
 - **CSV**: A plain-text comma-separated file, compatible with any spreadsheet tool.
 
-In the following sections, you'll learn how to:
-
-- [Install the Diagram Converter](#install-the-diagram-converter)
-- [Analyze your diagrams using the web interface](#analyze-your-diagrams-using-the-web-interface)
-- [Use the CLI](#use-the-cli)
-- [Convert your diagrams](#convert-your-diagrams)
-
 ## Install the Diagram Converter
 
 ### Hosted Diagram Converter

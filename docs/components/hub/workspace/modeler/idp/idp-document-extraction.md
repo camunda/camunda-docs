@@ -29,7 +29,7 @@ To create a new document extraction template:
    - **Structured form extraction**: Extract data from structured documents.
 1. **Template Name**: Enter a descriptive name for the type of document, such as “Invoice type A” for example.
 1. **Description**: Enter a description to provide more detailed information about the document type.
-1. **Provider**: Select the cloud provider you want to use for document extraction. The available providers depend on the connector secrets configured for your cluster.
+1. **Provider**: Select the cloud provider you want to use for document extraction. The available providers depend on the connector secrets configured for your environment's cluster.
 
    <img src={IdpCreateExtractionProvidersImg} alt="Provider selection dropdown" width="700px" style={{marginTop: '0'}} />
 
@@ -40,7 +40,7 @@ To create a new document extraction template:
    - **OpenAI compatible**: Any provider that implements the OpenAI `/chat/completions` API (unstructured extraction only)
 
    :::note
-   If the connector secrets for a specific provider are missing from your cluster configuration, that provider will be unavailable for selection. To enable additional providers, configure the required connector secrets as described in the [IDP configuration guide](idp-configuration.md).
+   If the connector secrets for a specific provider are missing from your environment's cluster configuration, that provider will be unavailable for selection. To enable additional providers, configure the required connector secrets as described in the [IDP configuration guide](idp-configuration.md).
    :::
 
 1. Click **Create** to create and open the new document extraction template.

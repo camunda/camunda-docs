@@ -41,7 +41,7 @@ import CreateCluster from '../../../components/react-components/create-cluster.m
    - <a href="/bpmn/connectors/upload-receipt.form" download>`upload-receipt.form`</a>: A form for uploading receipts.
    - <a href="/bpmn/connectors/approve-receipt.form" download>`approve-receipt.form`</a>: A form for approving receipts.
 2. Log in to your Camunda 8 account.
-3. In your Camunda Hub workspace, click **New project**, and name your project `Expense process`.
+3. In your Camunda Hub workspace, click **Create project**, and name your project `Expense process`.
 4. In your project, delete the default diagram, and click **Create new > Upload files**.
 5. Upload `submit-expense.bpmn`, `upload-receipt.form`, and `approve-receipt.form`.
 
@@ -85,7 +85,7 @@ To execute your completed process with the diagram open:
 1. Make sure you're in [**Implement** mode](/components/hub/workspace/modeler/collaboration/implement-your-process.md).
 2. Click **Deploy and run**.
 
-You can now monitor your instances in [Operate](/components/operate/operate-introduction.md).
+You can now monitor your instances in [Operate](/components/operate/userguide/basic-operate-navigation.md#open-operate).
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](/components/concepts/variables.md).
@@ -95,7 +95,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 After the [user task](/guides/getting-started-orchestrate-human-tasks.md) **Upload receipt** is completed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), an email is automatically sent to the address you specified in the SendGrid connector's properties panel.
 
-In [Operate](/components/operate/operate-introduction.md), you will now see the process move forward to **Review receipt**.
+In [Operate](/components/operate/userguide/basic-operate-navigation.md#open-operate), you will now see the process move forward to **Review receipt**.
 
 ## Additional resources and next steps
 

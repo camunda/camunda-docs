@@ -372,6 +372,13 @@ Zeebe does not support backup encryption natively, but it _can_ use encrypted S3
 Using default bucket encryption gives you control over the encryption keys and algorithms while being completely transparent with Zeebe.
 
 Combined with TLS between Zeebe and the S3 API, backups are fully encrypted in transit and at rest. Other S3 compatible services might have similar features that should work as well.
+
+Set `ssecKey` only if your bucket enforces [server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html), where every request must supply the encryption key. When set, Zeebe attaches the key to every backup object write and read. SSE-S3 and SSE-KMS are handled transparently through default bucket encryption and need no Zeebe configuration.
+
+- The value must be a **base64-encoded 32-byte (AES-256) key**, which is a 44-character base64 string.
+- The **same key** must be configured on the brokers and on the restore application. S3 does not store the key and cannot return objects without it, so a lost key means the backup cannot be restored.
+- Source the key from a secret rather than a plaintext value, and rotate it deliberately: objects written with one key can only be read back with that same key.
+
 :::
 
 :::note Backup compression
@@ -400,6 +407,7 @@ More compression algorithms are available; check [commons-compress](https://comm
 | max-concurrent-connections     | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads to avoid connection timeouts when uploading backups with large or many files. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_S3_MAXCONCURRENTCONNECTIONS`.                                                                                                                                                                                                      |               |
 | connection-acquisition-timeout | Timeout for acquiring an already-established connection from a connection pool to a remote service. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_S3_CONNECTIONACQUISITIONTIMEOUT`.                                                                                                                                                                                                                                                                                                          |               |
 | support-legacy-md5             | Enables the AWS-provided `LegacyMd5Plugin` to extend backwards compatibility of the client. Useful when using an S3-compatible object storage as your backup store that is not up to date with the latest AWS SDK guidelines. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_S3_SUPPORTLEGACYMD5`.                                                                                                                                                                                            | false         |
+| ssec-key                       | Base64-encoded 32-byte (AES-256) key enabling [server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html). When set, the key is attached to every backup object write and read; leave unset to disable SSE-C. The same key must be configured on the brokers and on the restore application, as S3 does not store it and cannot return objects without it. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_S3_SSECKEY`. |               |
 
 #### YAML snippet
 
@@ -422,6 +430,7 @@ camunda:
           max-concurrent-connections: null
           connection-acquisition-timeout: null
           support-legacy-md5: false
+          ssec-key: null
 ```
 
 ### camunda.data.primary-storage.backup.gcs

@@ -12,7 +12,12 @@ The Camunda Forms feature allows you to design and configure forms. Once configu
 
 While you can incorporate Camunda Forms solely within Camunda 8, you can also utilize Camunda Forms in Camunda 7. After deploying a diagram with an embedded form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
 
-To learn more about how Camunda Forms are created in Camunda Modeler and embedded in Camunda Tasklist, visit our guide on [user task forms](/components/modeler/forms/utilizing-forms.md).
+:::tip
+To learn more about how to work with forms, see the following resources:
+
+- [Utilize forms in Camunda Hub](/components/hub/workspace/modeler/modeling/utilize-forms.md).
+- [Utilize forms in Desktop Modeler](/components/modeler/desktop-modeler/utilize-forms.md).
+  :::
 
 Camunda Forms are powered by the open source [bpmn-io form-js library](https://github.com/bpmn-io/form-js). Visit the [open source repository](https://github.com/bpmn-io/form-js) to find out how to render a form using plain JavaScript in a custom application (note that this also requires you to fetch the form from the respective BPMN 2.0 element and provide data as needed to the form.)
 
