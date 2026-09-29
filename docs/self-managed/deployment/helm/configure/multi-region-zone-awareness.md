@@ -132,7 +132,7 @@ Zone awareness with one zone provides named broker identities but cannot bias le
 Adding a zone that was not part of the original zone list is not a Helm-only change. The partition distribution has to be updated through the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api) as well, because existing partitions have to be told about the new zone.
 :::
 
-Don't declare a zone before you deploy it. The engine assigns the zone's replicas to brokers that don't run. Every partition then runs one zone short until you deploy the zone, and the cluster can't survive another zone loss. Declare the zones you run, and add a later one through the management API.
+Don't declare a zone before you deploy it. The engine assigns the zone's replicas to brokers that don't run. Every partition then runs one zone short until you deploy the zone. That reduces the cluster's margin for another zone loss. Whether it can still survive one depends on the replicas the other zones hold. Declare the zones you run, and add a later one through the management API.
 
 ## Custom application configuration is not merged
 
