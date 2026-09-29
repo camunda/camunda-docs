@@ -144,7 +144,6 @@ Keep your settings in a variable file. The reference architecture ships no varia
 
 ```hcl title="terraform-cluster.tfvars"
 cluster_name            = "camunda"
-kubernetes_version      = "1.36"
 active_region_count     = 3
 np_desired_node_count   = 4
 single_nat_gateway      = false
