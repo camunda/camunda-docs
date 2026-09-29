@@ -111,6 +111,18 @@ logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
   --ifm-footer-background-color: #0a0a0a;
 }
 
+/* --ifm-color-primary is near-white in dark mode; Infima's solid
+   .button--primary keeps white text, so give it dark text instead.
+   Excludes .try-free, which has its own dark-mode colors below. */
+[data-theme="dark"] .button--primary:not(.button--outline):not(.try-free) {
+  color: #171717;
+}
+
+[data-theme="dark"]
+  .button--primary:not(.button--outline):not(.try-free):hover {
+  color: #171717;
+}
+
 @media (min-width: 996px) {
   .theme-doc-version-badge {
     display: none;
