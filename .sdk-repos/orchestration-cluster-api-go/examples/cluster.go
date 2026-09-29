@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
+	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func getTopologyExample(ctx context.Context, client *camunda.CamundaClient) error {
@@ -55,5 +56,68 @@ func getClusterTopologyExample(ctx context.Context, client *camunda.CamundaClien
 	fmt.Printf("cluster %s — %d broker(s), %d physical tenant(s)\n",
 		topology.GetClusterId(), len(topology.GetBrokers()), len(topology.GetPhysicalTenants()))
 	// endregion GetClusterTopology
+	return nil
+}
+
+func getClusterUpgradeStatusExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region GetClusterUpgradeStatus
+	// One overall status folded over every physical tenant and condition:
+	// MIGRATED, MIGRATION_IN_PROGRESS, or UNKNOWN before anything has been reported yet.
+	status, err := client.GetClusterUpgradeStatus(ctx)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("cluster upgrade status: %s\n", status.GetStatus())
+	// endregion GetClusterUpgradeStatus
+	return nil
+}
+
+func triggerClusterRebalanceExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region TriggerClusterRebalance
+	// Starts a cluster rebalance, redistributing partition leadership to the preferred nodes.
+	// Requires cluster-admin credentials (a separate cluster-admin security chain) —
+	// calling this with standard Orchestration credentials will fail authorization.
+	req := openapi.NewClusterRebalanceRequest()
+	req.SetReplicationLagThreshold(1024 * 1024) // 1 MiB max lag for leader transfer
+
+	balance, err := client.TriggerClusterRebalance(ctx, *req)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("cluster balance state: %s, %d partition(s)\n", balance.GetState(), len(balance.GetPartitions()))
+	// endregion TriggerClusterRebalance
+	return nil
+}
+
+func getClusterRebalanceExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region GetClusterRebalance
+	// Requires cluster-admin credentials (a separate cluster-admin security chain) —
+	// calling this with standard Orchestration credentials will fail authorization.
+	balance, err := client.GetClusterRebalance(ctx)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("cluster balance state: %s, %d partition(s)\n", balance.GetState(), len(balance.GetPartitions()))
+	if running, ok := balance.GetRunningRebalanceOk(); ok && running != nil {
+		fmt.Printf("rebalance in progress: %v\n", running)
+	}
+	// endregion GetClusterRebalance
+	return nil
+}
+
+func cancelClusterRebalanceExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region CancelClusterRebalance
+	// Requires cluster-admin credentials (a separate cluster-admin security chain) —
+	// calling this with standard Orchestration credentials will fail authorization.
+	resp, err := client.CancelClusterRebalance(ctx)
+	if err != nil {
+		return err
+	}
+	if resp.GetWasRunning() {
+		fmt.Println("rebalance cancelled")
+	} else {
+		fmt.Println("no rebalance was running")
+	}
+	// endregion CancelClusterRebalance
 	return nil
 }

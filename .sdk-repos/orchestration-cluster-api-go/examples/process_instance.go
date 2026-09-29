@@ -12,7 +12,7 @@ import (
 
 func createProcessInstanceByIdExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateProcessInstanceById
-	byID := openapi.NewProcessInstanceCreationInstructionById("order-process")
+	byID := openapi.NewProcessInstanceCreationInstructionById(openapi.ProcessDefinitionId("order-process"))
 	byID.SetVariables(map[string]any{"orderId": "order-42"})
 
 	result, err := client.CreateProcessInstance(ctx,
@@ -28,7 +28,7 @@ func createProcessInstanceByIdExample(ctx context.Context, client *camunda.Camun
 func createProcessInstanceByKeyExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateProcessInstanceByKey
 	// Use a specific process definition version by its key.
-	byKey := openapi.NewProcessInstanceCreationInstructionByKey(openapi.ModelString("2251799813685330"))
+	byKey := openapi.NewProcessInstanceCreationInstructionByKey(openapi.ProcessDefinitionKey("2251799813685330"))
 	byKey.SetVariables(map[string]any{"orderId": "order-42"})
 
 	result, err := client.CreateProcessInstance(ctx,
@@ -156,7 +156,7 @@ func searchProcessInstanceIncidentsExample(ctx context.Context, client *camunda.
 func migrateProcessInstanceExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region MigrateProcessInstance
 	instruction := openapi.NewProcessInstanceMigrationInstruction(
-		openapi.ModelString("2251799813685399"),
+		openapi.ProcessDefinitionKey("2251799813685399"),
 		[]openapi.MigrateProcessInstanceMappingInstruction{
 			*openapi.NewMigrateProcessInstanceMappingInstruction("review", "review-v2"),
 		})
@@ -216,7 +216,7 @@ func resolveIncidentsBatchOperationExample(ctx context.Context, client *camunda.
 func migrateProcessInstancesBatchOperationExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region MigrateProcessInstancesBatchOperation
 	plan := openapi.NewProcessInstanceMigrationBatchOperationPlan(
-		openapi.ModelString("2251799813685399"),
+		openapi.ProcessDefinitionKey("2251799813685399"),
 		[]openapi.MigrateProcessInstanceMappingInstruction{
 			*openapi.NewMigrateProcessInstanceMappingInstruction("review", "review-v2"),
 		})
