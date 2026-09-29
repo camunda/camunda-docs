@@ -51,12 +51,7 @@ runs:
       run: |
         echo "$MUFFET_DIR" >> "$GITHUB_PATH"
 
-    # Validate URLs excludes unsupported.docs.camunda.io. Archived docs versions aren't built locally,
-    # which means if the docs site has an outage or slow page load times, the validate-links pipeline fails.
-    # Unsupported URLs are low priority, so we won't verify those on every PR. Instead, we'll verify them in a
-    # separate scheduled pipeline. (issue #10127)
-
     - name: Validate URLs
       shell: bash
       run: |-
-        muffet --one-page-only --verbose --exclude "https://unsupported\.docs\.camunda\.io(.*)" ${{ inputs.url_to_validate }}
+        muffet --one-page-only --verbose ${{ inputs.url_to_validate }}

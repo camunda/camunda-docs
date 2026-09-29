@@ -83,6 +83,15 @@ jobs:
       - name: Remove https redirect
         run: |
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
+
+      # Archived docs versions aren't built locally, which means if the docs site has an outage or slow page load times,
+      # the validate-links pipeline fails. Unsupported URLs are low priority, so we won't verify those on every PR.
+      # Instead, we'll verify them in a separate scheduled pipeline. (issue #10127)
+      # By replacing those redirects with '/' we will always get a 200.
+      - name: Ignore unsupported redirects
+        run: |
+          sed -i 's|https://unsupported\.docs\.camunda\.io[^ ]*|/|g' build/.htaccess
+
       - name: Run a web server for link checking
         run: |
           docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnamilegacy/apache:2.4.54
