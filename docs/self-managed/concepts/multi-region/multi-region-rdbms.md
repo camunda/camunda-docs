@@ -9,10 +9,13 @@ import PageDescription from '@site/src/components/PageDescription';
 import TopologyImg from './img/multi-region-rdbms-topology.svg';
 import QuorumImg from './img/multi-region-rdbms-quorum.svg';
 import ZoneActivationImg from './img/multi-region-rdbms-zone-activation.svg';
+import ActiveStandbyImg from './img/multi-region-rdbms-active-standby.svg';
+import RegionLossDiagram from './img/multi-region-rdbms-region-loss.svg';
+import RecoveryWindowImg from './img/multi-region-rdbms-recovery-window.svg';
 
 <PageDescription />
 
-Multi-Region RDBMS spreads a single Orchestration Cluster across three or more regions. It uses a relational database as its secondary storage, and leaves replication to that database. Every partition keeps a majority when one region disappears, as long as no region holds half the replicas of a partition or more. The engine keeps processing through a region loss instead of stopping for an operator.
+Multi-Region RDBMS spreads a single Orchestration Cluster across two or more regions. It uses a relational database as its secondary storage, and leaves replication to that database. You need three or more regions to keep processing through a region loss. Every partition then keeps a majority when one region disappears, as long as no region holds half the replicas of a partition or more. The engine keeps processing instead of stopping for an operator.
 
 :::caution Before you begin
 Running a multi-region setup requires you to develop, test, and execute [operational procedures](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) specific to your environment. Review the [limitations](#limitations) and [requirements](#requirements) before you commit to this configuration.
@@ -24,7 +27,9 @@ That review covers the architecture you build. It does not make the [reference i
 
 ## How Multi-Region RDBMS differs from Dual-Region
 
-[Dual-Region](./dual-region.md) has two properties that come from the region count rather than from any implementation choice.
+This section compares the two multi-region architectures, so you can tell which one matches your region count and your storage choice.
+
+[Dual-Region](./dual-region.md) is the two-region architecture with Elasticsearch secondary storage and parity-numbered brokers. It has two properties that come from the region count rather than from any implementation choice.
 
 With two regions, no replica placement survives losing half of them. A region loss therefore costs the Raft quorum, and Zeebe stops processing until an operator force-removes the lost brokers. Each region also owns its own copy of the secondary storage, so a returning region has to be re-seeded. That is why failback includes a secondary storage snapshot and a cross-region restore.
 
@@ -42,6 +47,8 @@ Multi-Region RDBMS removes both by changing two things: the number of regions, a
 Choose Multi-Region RDBMS when processing must continue through a region loss without operator intervention, and when you can run without Optimize. Choose [Dual-Region](./dual-region.md) when two regions are sufficient, or when you need Optimize on the same cluster.
 
 ## Architecture
+
+Now that the differences are clear, this section describes the layers that make one cluster span several regions.
 
 <TopologyImg role="img" title="Three regions each running an Orchestration Cluster, connected by a private inter-region network and a cross-cluster service discovery layer, all writing to a single replicated relational database" />
 
@@ -90,7 +97,7 @@ It is still a full region: the brokers there hold data and process work like any
 
 The only rule is that **no single zone may hold half the replicas or more**, or losing that zone stops the engine. A `4-1-1` layout across three zones fails it: losing the first leaves two replicas of six.
 
-Zone awareness also assigns a Raft election priority per zone. Give the zone that hosts the database writer the highest priority. Elections then favor leaders next to the writer, which reduces inter-region round trips on export flushes. The priority biases elections but does not pin leaders: move existing leaders with a rebalance.
+Zone awareness also assigns a Raft election priority per zone. Give the zone that hosts the database writer the highest priority. Elections then favor leaders next to the writer, which reduces inter-region round trips on export flushes. The priority biases elections but does not pin leaders. Move existing leaders with the coordinated rebalancing API (`POST /cluster/v2/rebalance`), described in [rebalancing](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md).
 
 ### Replication-agnostic secondary storage
 
@@ -103,24 +110,26 @@ Multi-Region RDBMS adopts that constraint rather than working around it:
 - Region loss desynchronizes nothing at the Camunda layer, so failback has no restore step.
 - Swapping the database changes one value.
 
-Any database that presents a single endpoint following its own writer fits. For example:
+Any database that presents a single endpoint following its own writer fits. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported databases. For example:
 
 - A globally replicated managed database.
 - A PostgreSQL cluster behind a floating endpoint.
 - A connection proxy.
 - A DNS record you repoint during failover.
 
+Whichever mechanism you choose, test it with the [failover procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) before you go to production.
+
 The Camunda configuration does not change between them.
 
-:::warning
+:::warning Replication monitoring is required
 Asynchronous replication monitoring is required, not a tuning option. Without it the RDBMS exporter acknowledges records the standby has not received yet, and a writer failover loses exported data. This architecture treats a writer failover as a routine operation rather than an incident, so set `camunda.data.secondary-storage.rdbms.async-replication.enabled` to `true`.
 
-Neither the monitoring nor a strategy is on by default: `async-replication.enabled` defaults to `false`, and you choose `async-replication.type` yourself. Which strategy you can use depends on your database vendor, so confirm it before you choose a database:
+Monitoring is off by default, because `async-replication.enabled` defaults to `false`. Once you enable it, the strategy defaults to `LOG_SEQ`. On a backend without log sequence number support, you must set `async-replication.type` to `DELAY` explicitly.
 
-| Strategy                   | When to use it                                                                           | What you configure                                                                          |
-| :------------------------- | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
-| `LOG_SEQ` (LSN monitoring) | Preferred. Reads the database's own replication position. Only some backends support it. | `async-replication.type: LOG_SEQ`                                                           |
-| `DELAY`                    | Backends without LSN support. Carries no replication signal.                             | `async-replication.type: DELAY`, a `delay` value, and your own monitoring of the actual lag |
+| Strategy                   | When to use it                                                                                                                                                                       | What you configure                                                                          |
+| :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| `LOG_SEQ` (LSN monitoring) | Default and preferred. Reads the database's own replication position. Supported on Aurora Global Database with PostgreSQL, Aurora Global Database with MySQL, MSSQL, and PostgreSQL. | `async-replication.type: LOG_SEQ`                                                           |
+| `DELAY`                    | Backends without LSN support. Works with any backend. Carries no replication signal.                                                                                                 | `async-replication.type: DELAY`, a `delay` value, and your own monitoring of the actual lag |
 
 Camunda doesn't switch strategies for you. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported backends and the settings.
 :::
@@ -136,7 +145,11 @@ Two consequences follow, and both are sizing decisions rather than configuration
 
 Skewing partition leadership to the writer's zone through zone priority reduces how often that round trip is paid, but it does not remove it.
 
+<ActiveStandbyImg role="img" title="Three regions, london, paris, and zurich, each run Zeebe brokers that process and export. Only london hosts the Aurora writer, which accepts every write. Paris hosts an asynchronous read-only standby that the database replicates to. Zurich has no database member and acts as the tie-breaker zone. Exports from paris and zurich cross a region on every flush. Zone priority biases leaders toward london, so fewer flushes cross a region." />
+
 ## Requirements
+
+The architecture above only works under the cluster, network, platform, and upgrade requirements listed in this section.
 
 ### Zeebe cluster configuration
 
@@ -150,7 +163,7 @@ Skewing partition leadership to the writer's zone through zone priority reduces 
 | `priority` per zone           | Highest for the zone hosting the database writer, to keep partition leaders next to it.                                                      |
 | `partitionCount`              | Unrestricted. Size it from your workload. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md). |
 
-Each broker sets its own zone, while the zone list is identical in every region. For the full property reference, see [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md).
+Each broker sets its own zone, while the zone list is identical in every region. For the full property reference, see [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). For the matching Helm keys, see [multi-region zone awareness](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
 
 ### Network requirements
 
@@ -164,7 +177,9 @@ Each broker sets its own zone, while the zone list is identical in every region.
   - **8080**: Orchestration Cluster REST API
   - **53**: DNS, for cross-cluster service resolution
 
-The database is reached over the same private inter-region network. It does not need to be exposed publicly.
+These are the default ports. Change them if you customize them in your configuration.
+
+A private inter-region network is preferred for the database, but it is not required. A public path also works, and it adds egress cost and exposure. You must measure the latency between the regions, and the inter-region connectivity must stay stable.
 
 ### Infrastructure and deployment platform considerations
 
@@ -180,11 +195,15 @@ Multi-region setups require careful planning. You must manage the following area
 
 ### Upgrade considerations
 
-Upgrade **one region at a time**, and wait for the cluster to report healthy before you upgrade the next one. Upgrading several regions simultaneously risks quorum loss.
+:::warning Upgrade paths not tested yet
+Multi-region upgrade paths are not tested yet for this architecture. Follow the [tracking issue](https://github.com/camunda/team-infrastructure-experience/issues/1270) for progress.
+:::
 
-Follow the upgrade recommendations in the [Camunda Helm chart](/self-managed/upgrade/helm/index.md), review the [upgrade overview](/self-managed/upgrade/index.md), and create a [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) first.
+Upgrade **one region at a time**, so the other regions keep the quorum. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#upgrade-the-cluster) lists the steps.
 
 ## Growing the cluster
+
+Once the cluster meets those requirements, you can add capacity in two ways, and this section explains which one stays online.
 
 Zone awareness names zones instead of numbering brokers, so the zone list can change without renumbering the cluster. That makes one growth path online and another one a migration.
 
@@ -200,13 +219,17 @@ The reference implementation confirms this rather than assuming it, and refuses 
 
 ## Region failure and recovery
 
-Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. When every declared zone runs and no zone holds half the replicas or more, the remaining replicas still form a majority, so the cluster keeps its quorum. **You need no operator step to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
+Growing the cluster is a planned change. This section describes the unplanned one, and what the cluster does when a region disappears.
+
+<RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas per partition and the database writer. Paris and zurich keep three of five replicas, a majority, so Zeebe elects new leaders and keeps processing. The operator still promotes the paris standby, routes client traffic away from london with DNS failover or a global load balancer, and removes the lost zone with failover.sh --drain-brokers before bringing the region back later." />
+
+Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. **You need no operator step to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
 
 Two things still need attention.
 
 **The database writer.** If the writer was in the lost region, promote a surviving member. A planned switchover loses no data. An unplanned promotion loses whatever had not replicated at the time of the outage, bounded by the replication lag your [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) strategy allows. Camunda itself needs no reconfiguration as long as the JDBC URL keeps resolving to the current writer.
 
-**Client traffic.** Route clients away from the lost region.
+**Client traffic.** Camunda clients take one REST address and one gRPC address, not a list of endpoints. Point them at one address that fails over. For example, use a DNS record with health-checked failover, such as Amazon Route 53 failover routing. You can also use a global load balancer, such as AWS Global Accelerator, in front of the regional load balancers.
 
 Recovery is the reverse and has no restore step. Redeploy the region. Its brokers replay from the surviving replicas exactly as they would after a node restart. For the step-by-step procedure, see [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
 
@@ -216,21 +239,23 @@ There is no recovery procedure. There is still a recovery window.
 
 **No procedure**, because on the engine a zone loss is the same class of event as a broker loss.
 
-A single-region cluster that loses a broker holds a Raft re-election for the partitions that broker led, and its clients reconnect to the new leaders. Nobody calls that downtime. Losing a zone runs the same sequence over the same protocol:
+A single-region cluster that loses a broker holds a Raft re-election for the partitions that broker led, and its clients reconnect to the new leaders. Losing a zone runs the same sequence over the same protocol:
 
 - No restore, and no backup to replay.
 - No judgment call about whether the failure is temporary or permanent.
 
 That is the difference from [Dual-Region](./dual-region.md), where the same event costs the quorum and processing stops until an operator intervenes.
 
-**A window**, because reconfiguration takes time, and two thirds of it are not Camunda's to shorten. That is why this page describes the behavior instead of publishing an RTO figure. The number you would actually experience is mostly a property of your client timeouts and your traffic routing.
+**A window**, because reconfiguration takes time. Most of that window depends on settings outside the engine: client timeouts and retries, traffic routing, database failover, and Camunda's own SQL connection timeouts. That is why this page describes the behavior instead of publishing an RTO figure.
 
 **Data loss depends on which store you mean.** The engine's own state loses nothing. Raft commits a record only once a majority of its replicas hold it. With one replica per zone and three zones, a commit needs two replicas. Losing one zone always leaves at least one replica that has the record.
 
 Secondary storage is different, because the database replicates asynchronously. An unplanned promotion can omit records that had not reached the promoted standby.
 
-- **With `LOG_SEQ`**, the exporter acknowledges a record only after the configured minimum number of standbys report its log sequence number. Zero secondary-storage loss requires the promoted standby to be among those confirmed replicas.
-- **With `DELAY`**, the exporter observes no replication state. The configured delay must exceed the actual lag, which you monitor outside Camunda.
+| Strategy  | Secondary-storage RPO | Condition                                                                                                                        |
+| :-------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| `LOG_SEQ` | 0                     | The promoted standby is one of the standbys counted by `min-sync-replicas`. This is always the case with a single standby.       |
+| `DELAY`   | 0                     | The actual replication lag stays below the configured delay. The exporter observes no replication state, so you monitor the lag. |
 
 Both strategies hold back Zeebe log compaction, so retained records can be replayed after promotion.
 
@@ -238,7 +263,9 @@ That makes the guarantee conditional on replication configuration and disk capac
 
 `pause-on-max-lag-exceeded` decides what happens once the lag passes the configured threshold. It is off by default, and it caps neither data loss nor retained log growth. Acknowledgement waits for confirmed replication either way, so the unacknowledged position holds the log either way. With it off, exporting continues against a database that is already behind. With it on, exporting stops, so secondary storage receives nothing new and the APIs reading it fall behind the engine until replication recovers. Enable it deliberately, once you have alerting on replication lag.
 
-**The window has three parts**, and only the first belongs to Camunda:
+<RecoveryWindowImg role="img" title="Timeline of the recovery window after a region loss. Three phases start when the region is lost and overlap. Raft re-election happens inside the engine. Client traffic rerouting depends on your DNS or load balancer and on client timeouts and retries. Database writer promotion applies only if the writer was lost, and depends on the promotion and on SQL connection timeouts. Bar lengths are illustrative." />
+
+**The window has three parts**, and only the first happens inside the engine:
 
 | What                      | Why it takes time                                                                                                                                                                                                                                                                                                         |
 | :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -257,13 +284,17 @@ The window is longer here, because the new leader and the rerouted client can bo
 Whether the lost zone has to be removed depends on the replicas it held, not on how many zones there are. A partition keeps its quorum as long as the lost zone held fewer than half its replicas:
 
 - **Under a layout that satisfies this**, such as the default `2-2-1` across three zones, the majority holds and removing the zone is optional.
-- **With two zones, or when one zone holds half the replicas or more** (for example `4-1-1`), losing that zone costs the quorum. Processing only resumes once the zone is removed from the partition distribution.
+- **When one zone holds half the replicas or more**, losing that zone costs the quorum. Processing only resumes once the zone is removed from the partition distribution.
+
+A two-zone cluster always loses its quorum with a zone, whatever the replica counts. That is the [Dual-Region](./dual-region.md) situation, not a normal layout of this architecture.
 
 Removing an optional zone is usually not worth it for a zone you expect back. Brokers that stayed members rejoin and catch up from the Raft log. A removed zone has to be added back explicitly, and its brokers rebuild from nothing.
 
 The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-decide-whether-to-remove-the-zone) has the decision table and the command.
 
 ## Limitations
+
+Recovery behaves as described above only inside the boundaries this architecture sets. The following table lists them.
 
 | Aspect                      | Details                                                                                                                                                                                       |
 | :-------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -272,14 +303,14 @@ The [operational procedure](/self-managed/deployment/helm/operational-tasks/mult
 | Database availability       | The database tier is active-standby. A single writer serves every region, and regions further from it pay more export latency.                                                                |
 | Management Identity support | Management Identity is not available in this setup. The Orchestration Cluster-level Admin supports multi-tenancy and role-based access control instead.                                       |
 | Optimize support            | Not available. Optimize requires Elasticsearch or OpenSearch, regardless of the region count.                                                                                                 |
-| Web Modeler                 | Web Modeler is a standalone component not covered in this guide, and it depends on Management Identity. Modeling applications can operate independently outside the Orchestration Cluster.    |
+| Camunda Hub                 | Hub is a standalone component not covered in this guide. Modeling applications can operate independently outside of the Orchestration Clusters. Hub also depends on Management Identity.      |
 | Connectors deployment       | Connectors run in every region and are not deduplicated. Account for [idempotency](/components/connectors/use-connectors/inbound.md#creating-the-connector-event) to avoid event duplication. |
 | Zone list changes           | Activating a zone declared up front is online. Adding a zone that was never declared redistributes partitions across every region.                                                            |
 | Backup and restore          | RDBMS backup relies on continuous primary storage backups plus a database-native backup. See [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).     |
 
 ## Reference implementation
 
-Camunda publishes one implementation of this architecture, on Amazon Web Services:
+Within those limitations, Camunda publishes one implementation of this architecture, on Amazon Web Services:
 
 - [Multi-region setup with RDBMS on Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md) deploys three EKS clusters connected by AWS Transit Gateway. It uses Submariner for cross-cluster service discovery and Aurora Global Database as secondary storage.
 - [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) covers region loss, failback, and activating a declared zone.
@@ -287,6 +318,8 @@ Camunda publishes one implementation of this architecture, on Amazon Web Service
 The architecture is not AWS-specific. Each of its three layers has an equivalent on other platforms. For example, Red Hat OpenShift provides Submariner through Advanced Cluster Management, as the [OpenShift dual-region setup](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md) already uses.
 
 ## Related resources
+
+These pages cover the concepts and settings this page refers to.
 
 - [Multi-region resilience](./resilience-tiers.md): compare all multi-region strategies.
 - [Dual-Region](./dual-region.md): the two-region configuration with Elasticsearch secondary storage.

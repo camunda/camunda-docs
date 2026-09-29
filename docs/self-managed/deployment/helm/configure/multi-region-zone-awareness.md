@@ -57,10 +57,10 @@ Existing deployments keep their behavior: when you don't set `scheme`, the chart
 
 ## The scheme is fixed for the life of the cluster
 
-Zone-aware brokers carry the composite ID `<zone>_<index>`. Round-robin brokers carry a plain node ID. Switching `scheme` on a running release therefore re-identifies every broker against Raft state written under the old identifiers. The members then stop recognizing each other.
+Zone-aware brokers carry the composite ID `<zone>_<index>`. Round-robin brokers carry a plain node ID. Do not change `scheme` on a running release. To move an existing cluster onto zone awareness, follow the [migration procedure](/self-managed/deployment/helm/operational-tasks/zone-aware-migration.md).
 
 :::warning
-Changing `orchestration.partitioning.scheme` on a running release is not a values change you can apply on its own. To move an existing cluster onto zone awareness, follow the [migration procedure](/self-managed/deployment/helm/operational-tasks/zone-aware-migration.md). That procedure keeps both broker generations alive through `orchestration.partitioning.keepUnzonedBrokers`. It then moves the partition distribution with the cluster management API. Set the scheme when you create the cluster, or follow that procedure. Do not edit the key in place.
+Changing `orchestration.partitioning.scheme` on a running release is not a values change you can apply on its own. The migration procedure keeps both broker generations alive through `orchestration.partitioning.keepUnzonedBrokers`. It then moves the partition distribution with the cluster management API. Set the scheme when you create the cluster, or follow that procedure. Do not edit the key in place.
 :::
 
 The chart states the same constraint at render time, so an upgrade that flips the scheme prints a warning rather than failing silently.
@@ -87,7 +87,7 @@ orchestration:
 
 Use the same `zones` list in every region and change only `zone` to name the local one. The list accepts any number of zones. One, two, and three are the common cases.
 
-Each zone field maps to an application property:
+Each zone field maps to an application property. For what these properties do, see [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) and the [`camunda.cluster.partitioning` reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterpartitioning).
 
 | Helm value         | Application property |
 | :----------------- | :------------------- |
@@ -118,7 +118,7 @@ A cluster that spans more than one zone with no contact points still **renders a
 
 One entry per zone is enough, and it does not have to name a specific broker. A broker resolves a contact point once, to a single address. An entry that points at a zone's headless Zeebe service reaches whichever broker pod DNS returns.
 
-That is enough. A broker only has to reach one live member to join. SWIM membership gossip carries the rest of the cluster from there. The chart sets `publishNotReadyAddresses: true` on that service. The name therefore resolves to a pod during a cold start, before any broker is ready.
+That is enough. A broker only has to reach one live member to join. SWIM membership gossip carries the rest of the cluster from there. For what contact points do, see [setting up a cluster](/self-managed/components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md). The chart sets `publishNotReadyAddresses: true` on that service. The name therefore resolves to a pod during a cold start, before any broker is ready. For how that flag works, see [Kubernetes headless services](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services).
 
 You can also list every broker pod. That list tolerates more of the zone being down at bootstrap. You then rewrite the list whenever a zone's broker count changes.
 
@@ -132,7 +132,7 @@ Zone awareness with one zone provides named broker identities but cannot bias le
 Adding a zone that was not part of the original zone list is not a Helm-only change. The partition distribution has to be updated through the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api) as well, because existing partitions have to be told about the new zone.
 :::
 
-Declaring a zone you have not deployed yet trades that API step for a degraded cluster. The zone's replicas belong to brokers that do not run. Every partition therefore runs one zone short until you deploy that zone. This is only safe while the running zones still hold a majority of each partition's replicas. It also costs you the headroom to lose another zone. Treat it as a bounded step in a planned rollout, not as a way to keep zones in reserve. Declare the zones you intend to run, and add a later one through the management API.
+To add a zone, start the brokers in the new zone first. Then update the configuration and add the zone through the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api). Do not declare a zone before its brokers run, because every partition then runs one zone short.
 
 ## Custom application configuration is not merged
 

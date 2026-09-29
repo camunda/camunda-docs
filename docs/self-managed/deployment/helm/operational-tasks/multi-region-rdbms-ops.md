@@ -74,9 +74,7 @@ Check the cluster is healthy before you start, so you can tell what the procedur
 
 ### 1. Confirm the quorum is intact
 
-Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority. Partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker.
-
-This only holds when every declared zone is deployed. With one zone declared but not yet active, `2-2-1` runs four replicas of five. Losing either database region leaves two, so processing stops until you deploy that zone or the lost one returns.
+The surviving zones keep processing if they hold a majority of each partition's replicas. The [concept page](/self-managed/concepts/multi-region/multi-region-rdbms.md#region-failure-and-recovery) explains when this holds.
 
 Check this rather than assuming it. The script takes one lost slot and computes the surviving replicas without it, so its verdict only covers a single lost zone. If more than one zone is affected, don't rely on it: check the partition health of every surviving broker with `./check-cluster-topology.sh`.
 
@@ -124,35 +122,25 @@ Once the writer moves, the zone priorities still favor the region that hosted th
 
 1. Raise the priority of the zone that now hosts the writer. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) for applying it to a running cluster.
 1. Wait until the change reports `COMPLETED`. The cluster rejects a new change while one is still in progress.
-1. Check the replication lag. A rebalance only succeeds when the intended leader is not lagging behind the current one.
-1. Run a [rebalance](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md). Priorities apply at the next election and don't move existing leaders on their own.
+1. Run a [rebalance](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md) with `POST /cluster/v2/rebalance`. Priorities apply at the next election and don't move existing leaders on their own.
 
 ### 3. Route client traffic away from the lost region
 
 Zeebe keeps processing, but the gateway in the lost region is unreachable. Update your DNS or load balancer to stop sending client traffic there. This is outside Camunda's control and specific to your traffic management setup.
 
-### 4. Decide whether to remove the zone
+### 4. Remove the lost zone
 
-Removing the lost zone from the partition distribution is **optional** whenever the surviving zones still hold a majority of each partition's replicas. It is usually not worth it for a zone you expect back.
-
-What decides it is the replica count of the zone you lost, not the number of zones:
-
-| Replicas held by the lost zone | After losing it                                              | Removing the zone                                                                |
-| :----------------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------- |
-| Fewer than half the total      | A majority of the replicas survives, so processing continues | **Optional**, and cheaper to skip.                                               |
-| Half the total or more         | The survivors are not a majority, so processing stops        | **Required**. Removing the zone restores a quorum the survivors can reach alone. |
-
-The default `2-2-1` across three zones always lands in the first row, whichever zone is lost. An asymmetric layout such as `4-1-1` lands in the second when its four-replica zone is the one lost. An evenly split two-zone cluster lands in the second whichever zone it loses. That is why [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) has a failover runbook and this architecture does not.
-
-The reason to leave a zone in place is failback cost. Brokers that stayed members rejoin and catch up from the Raft log. You have to add a removed zone back explicitly, and its brokers start from nothing.
-
-If you do need to remove it, one atomic change evicts the zone's brokers. It also drops the zone from the persisted partition distribution, so quorum stops counting replicas that cannot answer:
+Remove the brokers of the lost zone. One atomic change evicts them. It also drops the zone from the persisted partition distribution, so quorum stops counting replicas that cannot answer:
 
 ```bash
 ./failover.sh <lost-region-slot> --drain-brokers
 ```
 
 This issues `DELETE /actuator/cluster/zones/<zone>?force=true` against a surviving region. Without `force=true`, the API tries a graceful drain, which fails when the zone is down. Only do this for a zone that is down and unreachable, and for one zone at a time. See the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+
+Removal is required when the lost zone held half the replicas or more. The replica count decides this, not the number of zones. See [step 1](#1-confirm-the-quorum-is-intact). An evenly split two-zone cluster always needs it, which is why [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) has a failover runbook and this architecture does not.
+
+The trade-off is failback cost. You must add a removed zone back when you bring the region back, and its brokers start empty.
 
 ### 5. Verify the degraded cluster
 
@@ -198,6 +186,8 @@ Verify when done:
 ## Activate a declared zone
 
 Activating a zone that was declared in the zone list but never deployed is an **online** operation.
+
+This section applies only to a zone that was declared at bootstrap and never ran. A zone that you removed during failover comes back through [Bring a region back](#bring-a-region-back) instead.
 
 The distinction that makes it online is that the zone already exists as far as the cluster is concerned. It was in the zone list every region was deployed with. So the partition distribution already assigned it replicas, and every partition runs one replica short of its full count. Deploying the zone starts brokers that claim replicas already reserved for them. Nothing else changes:
 
@@ -251,6 +241,10 @@ The regions already running keep their shorter contact point list and are not re
 The script refuses a slot that is not yet part of the deployed topology. Run the Terraform step above first. The script rejects any slot at or beyond `CAMUNDA_ACTIVE_REGIONS` and reports the valid range. It does not deploy into a zone the cluster does not expect.
 
 ## Upgrade the cluster
+
+:::warning Upgrade paths not tested yet
+Multi-region upgrade paths are not yet tested for this architecture. Follow the [tracking issue](https://github.com/camunda/team-infrastructure-experience/issues/1270) for updates.
+:::
 
 Upgrade **one region at a time**, and wait for the cluster to report healthy before starting the next:
 
