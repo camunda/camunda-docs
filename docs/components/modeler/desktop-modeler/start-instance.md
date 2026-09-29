@@ -6,7 +6,7 @@ description: "After you have deployed your process to Camunda 8, you can start a
 
 1. Ensure you have already set up and selected a connection by following the [Connect to Camunda 8](./connect-to-camunda-8.md) guide.
 
-   ![dev cluster connected](img/connection-selector-dev-connection.png)
+   ![Connection selector showing the Dev connection selected](img/connection-selector-dev-connection.png)
 
 2. Click the play icon to start a new process instance.
 

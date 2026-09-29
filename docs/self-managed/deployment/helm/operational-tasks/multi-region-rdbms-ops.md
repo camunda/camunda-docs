@@ -21,7 +21,7 @@ Develop, test, and rehearse these procedures in a non-production environment bef
 
 In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe quorum. Processing stops, and the failover procedure exists to restore it. That procedure removes the lost brokers, disables the exporter to the lost region, and later restores secondary storage from a snapshot.
 
-With three or more zones, none of that applies. Every partition keeps a majority of its replicas, so **Zeebe keeps processing** and no Zeebe action is required to restore service. The failover procedure mostly reports. Its only real work is the database writer, and only when the writer was in the lost region.
+With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas, so **Zeebe keeps processing** and no Zeebe action is required to restore service. The [dry run](#1-confirm-the-quorum-is-intact) confirms this before you act. The failover procedure mostly reports. Its only real work is the database writer, and only when the writer was in the lost region.
 
 <RegionLoss role="img" title="Side-by-side timelines of the same zone loss. In a two-zone cluster, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter, and failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone cluster, quorum holds and processing continues, there is nothing to force-remove, disable, or restore, and two operator steps remain: promoting the database writer if it was in the lost zone, and redeploying the zone." />
 
@@ -192,11 +192,11 @@ The cluster declares only the zones it runs, so the new region's zone is not in 
 
 ### 1. Provision the infrastructure
 
-Raise `active_region_count` so the region's cluster, Transit Gateway attachments, and security group rules exist:
+Raise `active_region_count` so the region's cluster, Transit Gateway attachments, and security group rules exist. Use the same variable file as the initial deployment:
 
 ```bash
 cd ../terraform/clusters
-terraform apply -var cluster_name=camunda -var active_region_count=3
+terraform apply -var-file=terraform-cluster.tfvars -var active_region_count=3
 ```
 
 ### 2. Update the environment

@@ -199,6 +199,8 @@ The dot is required. These scripts export variables into your current shell, not
 
 `export_environment_prerequisites.sh` is the environment contract of the architecture. Every value can be overridden by exporting it beforehand, and region-indexed values are space-separated lists in slot order.
 
+`export-terraform-outputs.sh` always sets `CAMUNDA_RDBMS_URL`, `CAMUNDA_RDBMS_USERNAME`, and `CAMUNDA_RDBMS_PASSWORD` from the Terraform outputs. They are empty with `deploy_database = false`. If you bring your own database, export these three values after that script and before `export_environment_prerequisites.sh`.
+
 <details>
 <summary>See the export_environment_prerequisites.sh script</summary>
 ```bash reference
