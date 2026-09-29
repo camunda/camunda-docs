@@ -189,7 +189,7 @@ Activating a zone that was declared in the zone list but never deployed is an **
 
 This section applies only to a zone that was declared at bootstrap and never ran. A zone that you removed during failover comes back through [Bring a region back](#bring-a-region-back) instead.
 
-The distinction that makes it online is that the zone already exists as far as the cluster is concerned. It was in the zone list every region was deployed with. So the partition distribution already assigned it replicas, and every partition runs one replica short of its full count. Deploying the zone starts brokers that claim replicas already reserved for them. Nothing else changes:
+The distinction that makes it online is that the zone already exists as far as the cluster is concerned. It was in the zone list every region was deployed with. So the partition distribution already assigned it replicas, and every partition runs short of the replicas assigned to that zone. Deploying the zone starts brokers that claim replicas already reserved for them. Nothing else changes:
 
 - No broker is renumbered.
 - No partition is redistributed.

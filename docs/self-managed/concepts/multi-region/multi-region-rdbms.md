@@ -222,7 +222,7 @@ The reference implementation confirms this rather than assuming it, and refuses 
 
 Growing the cluster is a planned change. This section describes the unplanned one, and what the cluster does when a region disappears.
 
-<RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas per partition and the database writer. Paris and zurich keep three of five replicas, a majority, so Zeebe elects new leaders and keeps processing. The operator still promotes the paris standby, routes client traffic away from london with DNS failover or a global load balancer, and removes the lost zone with failover.sh --drain-brokers before bringing the region back later." />
+<RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas per partition and the database writer. Paris and zurich keep three of five replicas, a majority, so Zeebe elects new leaders and keeps processing. The operator still routes client traffic away from london with DNS failover or a global load balancer. Because the writer was in london, the operator promotes the paris standby. Removing the lost zone with failover.sh --drain-brokers is recommended but not required for quorum here." />
 
 Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. **You need no operator step to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
 
@@ -259,7 +259,7 @@ Secondary storage is different, because the database replicates asynchronously. 
 | `TIME_LAG` | 0                     | Same as `LOG_SEQ`: the promoted standby is one of the standbys counted by `min-sync-replicas`.                                   |
 | `DELAY`    | 0                     | The actual replication lag stays below the configured delay. The exporter observes no replication state, so you monitor the lag. |
 
-Both strategies hold back Zeebe log compaction, so retained records can be replayed after promotion.
+The database's own failover can still lose up to its replication lag. Every strategy holds back Zeebe log compaction, so Camunda replays the missing records from the retained log after promotion. The table describes that combined result.
 
 That makes the guarantee conditional on replication configuration and disk capacity rather than on the architecture alone. Retained log segments accumulate for as long as records remain unacknowledged. Size the volume for your write rate and the longest replication outage you plan to tolerate, and alert on broker disk usage.
 
@@ -285,14 +285,12 @@ The window is longer here, because the new leader and the rerouted client can bo
 
 Whether the lost zone has to be removed depends on the replicas it held, not on how many zones there are. A partition keeps its quorum as long as the lost zone held fewer than half its replicas:
 
-- **Under a layout that satisfies this**, such as the default `2-2-1` across three zones, the majority holds and removing the zone is optional.
+- **Under a layout that satisfies this**, such as the default `2-2-1` across three zones, the majority holds. Processing continues whether or not you remove the zone.
 - **When one zone holds half the replicas or more**, losing that zone costs the quorum. Processing only resumes once the zone is removed from the partition distribution.
 
 A two-zone cluster always loses its quorum with a zone, whatever the replica counts. That is the [Dual-Region](./dual-region.md) situation, not a normal layout of this architecture.
 
-Removing an optional zone is usually not worth it for a zone you expect back. Brokers that stayed members rejoin and catch up from the Raft log. A removed zone has to be added back explicitly, and its brokers rebuild from nothing.
-
-The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-decide-whether-to-remove-the-zone) has the decision table and the command.
+The recommended practice is to remove a lost zone once you confirm it is down. The trade-off is failback cost: a removed zone has to be added back explicitly, and its brokers rebuild from nothing. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-remove-the-lost-zone) has the command.
 
 ## Limitations
 
