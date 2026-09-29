@@ -32,4 +32,4 @@ You can also [orchestrate human tasks](/guides/getting-started-orchestrate-human
 
 For example, you might name your element and give it an ID under the **General** section.
 
-5. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda 8 cluster](./connect-to-camunda-8.md).
+5. Once you finish modeling and configuring your diagram, you can deploy it to [Camunda](./connect-to-camunda-8.md).
