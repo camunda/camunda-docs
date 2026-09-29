@@ -149,6 +149,6 @@ For Helm-managed deployments, use the Helm chart [version matrix](https://helm.c
 
 | [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management and design](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) |
 | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Orchestration Cluster 8.10.x<br/>Connectors 8.10.x<br/>Optimize 8.10.x                                          | Management Identity 8.10.x<br/>Camunda Hub 8.10.x<br/>Desktop Modeler 5.52+                                       |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.10.x<br/>Camunda Hub 8.10.x<br/>Desktop Modeler 5.51+                                       |
-| Orchestration Cluster 8.8.x<br/>Connectors 8.8.x<br/>Optimize 8.8.x                                             | Management Identity 8.10.x<br/>Camunda Hub 8.10.x<br/>Desktop Modeler 5.40+                                       |
+| Orchestration Cluster 8.10.X<br/>Connectors 8.10.X<br/>Optimize 8.10.X                                          | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.52+                                       |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.51+                                       |
+| Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.40+                                       |
