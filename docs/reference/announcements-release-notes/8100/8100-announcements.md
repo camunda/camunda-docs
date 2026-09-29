@@ -776,7 +776,7 @@ Deployment change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Legacy Camunda Hub and Optimize authentication properties deprecated
+#### Component-specific Camunda Hub and Optimize authentication properties deprecated
 
 The authentication properties Camunda Hub and Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Both components still accept them in 8.10 and translate the recognized properties to their new equivalents at startup, and both remove them in 8.11.
 
@@ -784,7 +784,7 @@ The authentication properties Camunda Hub and Optimize used through 8.9 are depr
 
 <p className="link-arrow">[Camunda Hub authentication mapping](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
 
-<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -847,15 +847,15 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 
 #### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
-With Camunda 8.10, Camunda Hub and Optimize authenticate through a shared implementation based on the Orchestration Cluster's existing authentication, replacing their separate identity stacks. All three components now accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+With Camunda 8.10, Camunda Hub and Optimize authentication is homogenized with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, accepting the same `camunda.security.authentication.*` settings. Camunda Hub and Optimize continue to accept their existing 8.9 authentication settings in 8.10, translating recognized properties to their new equivalents at startup, but those settings are deprecated and are removed in 8.11. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Camunda Hub and Optimize accept their existing authentication settings in 8.10 and translate the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
+Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
 
-**Action:** Migrate Camunda Hub and Optimize to the `camunda.security.*` settings before upgrading to 8.11, when their legacy authentication properties are removed.
+**Action:** Migrate Camunda Hub and Optimize to the `camunda.security.*` settings before upgrading to 8.11, when their component-specific authentication properties are removed.
 
 <p className="link-arrow">[Camunda Hub authentication configuration](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
 
-<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
 <p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
 
@@ -966,23 +966,6 @@ Web Modeler change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Optimize adopts the shared authentication implementation
-
-Starting with Camunda 8.10, Optimize authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
-
-**Action:** Confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
-
-<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
 #### Optimize static API access token is no longer supported
 
 In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its API. A request that carries the static token from `api.accessToken` (environment variable `OPTIMIZE_API_ACCESS_TOKEN`) gets a `401` response. This applies to the [Optimize API](/apis-tools/optimize-api/overview.md) and to the [external variable ingestion](/apis-tools/optimize-api/external-variable-ingestion.md) endpoint. The Camunda Helm chart and SaaS do not set this token. They configure OIDC for the Optimize API. You are affected only if you set the property or the environment variable yourself, for example as a property override or an extra environment variable in your Helm values.
@@ -1000,13 +983,13 @@ In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its AP
 </div>
 <div className="release-announcement-content">
 
-#### Legacy Optimize security configuration keys deprecated
+#### Component-specific Optimize security configuration keys deprecated
 
-With the move to the shared authentication implementation, the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. Camunda plans to remove these keys in a future release.
+The Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized component-specific keys automatically and logs a deprecation warning naming the replacement. Camunda plans to remove these keys in a future release.
 
 Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
 
-**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
+**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
 
 </div>
 </div>

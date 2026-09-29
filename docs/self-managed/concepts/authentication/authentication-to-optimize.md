@@ -23,16 +23,34 @@ Set the following properties, shared with the other Camunda components:
 - `camunda.security.authentication.oidc.client-id`
 - `camunda.security.authentication.oidc.client-secret`
 - `camunda.security.authentication.oidc.audiences`
+- `camunda.security.authentication.oidc.username-claim`
+- `camunda.security.authentication.oidc.client-id-claim`
 
 See the [OIDC configuration properties reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc) for the full list and defaults.
 
 Note the following:
 
 - `issuer-uri` must match the issuer your IdP puts in the `id_token`.
-- `audiences` must contain every audience your IdP issues for Optimize, plus the audience of any other application that calls Optimize on a user's behalf, such as Camunda Hub. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the audiences the legacy keys covered.
+- `audiences` must contain every audience your IdP issues for Optimize, plus the audience of any other application that calls Optimize on a user's behalf, such as Camunda Hub. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the audiences the component-specific keys covered.
+- Optimize classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token it can't classify is treated as a user's, and checked against your configured Optimize permission.
 
 :::note
-If you deploy with the Camunda Helm chart, you don't need to set these directly. The chart continues to read the same `global.identity.auth.optimize.*` values you already use, and renders them into the properties above for you.
+If you deploy with the Camunda Helm chart, you don't need to set `issuer-uri`, `client-id`, `client-secret`, or `audiences` directly. The chart continues to read the same `global.identity.auth.optimize.*` values you already use, and renders them into the properties above for you.
+
+For `username-claim` and `client-id-claim`, the chart renders the same defaults the Orchestration Cluster uses (`preferred_username` and `client_id`), matching Keycloak's token shape out of the box. If your identity provider issues the client ID under a different claim (for example, Microsoft Entra's `azp` or Okta's `cid`), set it through `optimize.extraConfiguration`:
+
+```yaml
+optimize:
+  extraConfiguration:
+    - file: security.yaml
+      content: |
+        camunda:
+          security:
+            authentication:
+              oidc:
+                client-id-claim: azp
+```
+
 :::
 
 ## Authenticate API requests
@@ -41,15 +59,15 @@ The Optimize API accepts OIDC bearer tokens. For the client steps, see [Optimize
 
 Camunda 8.10 no longer accepts the static token `api.accessToken` on this API. The token works only if you opt into the [8.9 component-specific configuration fallback](#fall-back-to-the-89-component-specific-configuration), which Camunda plans to remove in a future release. Migrate the affected API clients to OIDC bearer tokens during 8.10.
 
-## Legacy configuration keys are deprecated
+## Component-specific configuration keys are deprecated
 
-The Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement.
+The Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized component-specific keys automatically and logs a deprecation warning naming the replacement.
 
 Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
 
 If you're deploying Camunda 8.10 for the first time, none of this applies to you: configure the `camunda.security.*` properties above and skip this section and the next one.
 
-See [Upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping, precedence rules, and the keys that no longer have any effect.
+See [Upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full key mapping, precedence rules, and the keys that no longer have any effect.
 
 ## Fall back to the 8.9 component-specific configuration
 
