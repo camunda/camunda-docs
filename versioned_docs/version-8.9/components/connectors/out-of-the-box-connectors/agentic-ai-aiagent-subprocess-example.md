@@ -21,9 +21,9 @@ For more information on how to model the tools available to the AI agent, see [t
 
 After adding the element, open the properties panel to configure the connection to your model provider, and modify the system and user prompts as required.
 
-## Human-in-the-loop (HITL) follow-up {#response-loop}
+## Response follow-up {#response-loop}
 
-Separately from the agent loop for tools, a [human-in-the-loop (HITL)](/reference/glossary.md#human-in-the-loop-hitl) follow-up acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.
+Separately from the agent loop for tools, a response follow-up acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.
 
 For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts upon follow-up input:
 
@@ -33,7 +33,7 @@ For example, your **User Prompt** field could contain the following FEEL express
 
 With the **AI Agent Sub-process** implementation, the follow-up needs to be modeled to loop back to the AI Agent ad-hoc sub-process:
 
-![AI Agent Sub-process with human-in-the-loop follow-up](../img/ai-agent-subprocess-human-in-the-loop.png)
+![AI Agent Sub-process with response follow-up](../img/ai-agent-subprocess-follow-up.png)
 
 :::note
 How you model this type of follow-up greatly depends on your specific use case.

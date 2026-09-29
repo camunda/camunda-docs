@@ -88,9 +88,9 @@ To prevent interference between tool calls, create an [input mapping](../../conc
 2. In the **Local variable name** field, enter `toolCallResult` (or use your custom variable name if you changed it earlier).
 3. Leave the **Variable assignment value** field blank.
 
-## Human-in-the-loop (HITL) follow-up {#response-loop}
+## Response follow-up {#response-loop}
 
-Separately from the [agent loop for tool calls](#tools-loop), a [human-in-the-loop (HITL)](/reference/glossary.md#human-in-the-loop-hitl) follow-up acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.
+Separately from the [agent loop for tool calls](#tools-loop), a response follow-up acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.
 
 For example, your **User Prompt** field could contain the following FEEL expression to make sure it acts upon follow-up input:
 
@@ -100,7 +100,7 @@ For example, your **User Prompt** field could contain the following FEEL express
 
 With the **AI Agent Task** implementation, the follow-up needs to be modeled to loop back to the AI Agent task:
 
-![AI Agent Task with human-in-the-loop follow-up](../img/ai-agent-task-human-in-the-loop.png)
+![AI Agent Task with response follow-up](../img/ai-agent-task-follow-up.png)
 
 :::note
 How you model this type of follow-up greatly depends on your specific use case.
