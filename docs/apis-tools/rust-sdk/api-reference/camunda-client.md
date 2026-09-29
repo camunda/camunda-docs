@@ -12,7 +12,7 @@ The primary entry point of the SDK.
 A `CamundaClient` is cheap to clone — clones share the same configuration,
 HTTP client, OAuth token cache, and worker registry.
 
-`CamundaClient` exposes **260** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **261** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ## Methods
 
@@ -106,6 +106,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_cluster_rebalance`](#get_cluster_rebalance)                                                                   | Report the cluster's current leadership balance (`GET /cluster/v2/rebalance`).                                                                                                                                                                                                               |
 | [`get_cluster_status`](#get_cluster_status)                                                                         | Get the status of the whole cluster (`GET /cluster/v2/status`).                                                                                                                                                                                                                              |
 | [`get_cluster_topology`](#get_cluster_topology)                                                                     | Get the topology of the whole cluster (`GET /cluster/v2/topology`).                                                                                                                                                                                                                          |
+| [`get_cluster_upgrade_status`](#get_cluster_upgrade_status)                                                         | Get the upgrade-readiness status of the whole cluster (`GET /cluster/v2/status/upgrade`).                                                                                                                                                                                                    |
 | [`get_decision_definition`](#get_decision_definition)                                                               | Get decision definition (`GET /decision-definitions/{decisionDefinitionKey}`).                                                                                                                                                                                                               |
 | [`get_decision_definition_xml`](#get_decision_definition_xml)                                                       | Get decision definition XML (`GET /decision-definitions/{decisionDefinitionKey}/xml`).                                                                                                                                                                                                       |
 | [`get_decision_instance`](#get_decision_instance)                                                                   | Get decision instance (`GET /decision-instances/{decisionEvaluationInstanceKey}`).                                                                                                                                                                                                           |
@@ -165,7 +166,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`list_history_backups_as_cluster_admin`](#list_history_backups_as_cluster_admin)                                   | List history backups across physical tenants (`GET /cluster/v2/backups/history`).                                                                                                                                                                                                            |
 | [`list_runtime_backups`](#list_runtime_backups)                                                                     | List runtime backups (`GET /backups/runtime`).                                                                                                                                                                                                                                               |
 | [`list_runtime_backups_as_cluster_admin`](#list_runtime_backups_as_cluster_admin)                                   | List runtime backups across physical tenants (`GET /cluster/v2/backups/runtime`).                                                                                                                                                                                                            |
-| [`list_secrets`](#list_secrets)                                                                                     | List secrets (alpha) (`POST /secrets/list`).                                                                                                                                                                                                                                                 |
+| [`list_secrets`](#list_secrets)                                                                                     | List secrets (`POST /secrets/list`).                                                                                                                                                                                                                                                         |
 | [`migrate_process_instance`](#migrate_process_instance)                                                             | Migrate process instance (`POST /process-instances/{processInstanceKey}/migration`).                                                                                                                                                                                                         |
 | [`migrate_process_instances_batch_operation`](#migrate_process_instances_batch_operation)                           | Migrate process instances (batch) (`POST /process-instances/migration`).                                                                                                                                                                                                                     |
 | [`modify_process_instance`](#modify_process_instance)                                                               | Modify process instance (`POST /process-instances/{processInstanceKey}/modification`).                                                                                                                                                                                                       |
@@ -179,7 +180,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`resolve_incident`](#resolve_incident)                                                                             | Resolve incident (`POST /incidents/{incidentKey}/resolution`).                                                                                                                                                                                                                               |
 | [`resolve_incidents_batch_operation`](#resolve_incidents_batch_operation)                                           | Resolve related incidents (batch) (`POST /process-instances/incident-resolution`).                                                                                                                                                                                                           |
 | [`resolve_process_instance_incidents`](#resolve_process_instance_incidents)                                         | Resolve related incidents (`POST /process-instances/{processInstanceKey}/incident-resolution`).                                                                                                                                                                                              |
-| [`resolve_secrets`](#resolve_secrets)                                                                               | Resolve secrets (alpha) (`POST /secrets/resolve`).                                                                                                                                                                                                                                           |
+| [`resolve_secrets`](#resolve_secrets)                                                                               | Resolve secrets (`POST /secrets/resolve`).                                                                                                                                                                                                                                                   |
 | [`restore`](#restore)                                                                                               | Restore from a backup (`POST /restore`).                                                                                                                                                                                                                                                     |
 | [`restore_as_cluster_admin`](#restore_as_cluster_admin)                                                             | Restore one or every physical tenant from a backup (`POST /cluster/v2/restore`).                                                                                                                                                                                                             |
 | [`resume_batch_operation`](#resume_batch_operation)                                                                 | Resume Batch operation (`POST /batch-operations/{batchOperationKey}/resumption`).                                                                                                                                                                                                            |
@@ -1135,7 +1136,7 @@ async fn create_agent_instance() -> Result<(), Box<dyn std::error::Error>> {
                     "my-element-instance",
                 )),
                 job_key: Box::new(JobKey::assume_exists("my-job")),
-                job_lease: "my-job-lease".to_string(),
+                job_lease_token: JobLeaseToken::assume_exists("my-job-lease"),
                 history: vec![AgentInstanceHistoryItem {
                     history_item_id: HistoryItemId::assume_exists("configuration-1"),
                     loop_iteration: 0,
@@ -2537,6 +2538,27 @@ async fn get_cluster_topology() -> Result<(), Box<dyn std::error::Error>> {
     for tenant in topology.physical_tenants {
         println!("{tenant:#?}");
     }
+
+    Ok(())
+}
+```
+
+### get_cluster_upgrade_status
+
+```rust
+pub async fn get_cluster_upgrade_status(&self) -> Result<models::ClusterUpgradeStatusResponse>
+```
+
+Get the upgrade-readiness status of the whole cluster (`GET /cluster/v2/status/upgrade`).
+
+**Example**
+
+```rust
+async fn get_cluster_upgrade_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client.get_cluster_upgrade_status().await?;
+    println!("Upgrade-readiness status: {:?}", result.status);
 
     Ok(())
 }
@@ -4055,7 +4077,7 @@ async fn list_runtime_backups_as_cluster_admin() -> Result<(), Box<dyn std::erro
 pub async fn list_secrets(&self, params: ListSecretsParams) -> Result<models::SecretListResult>
 ```
 
-List secrets (alpha) (`POST /secrets/list`).
+List secrets (`POST /secrets/list`).
 
 **Example**
 
@@ -4432,7 +4454,7 @@ async fn resolve_process_instance_incidents(
 pub async fn resolve_secrets(&self, params: ResolveSecretsParams) -> Result<models::SecretResolveResult>
 ```
 
-Resolve secrets (alpha) (`POST /secrets/resolve`).
+Resolve secrets (`POST /secrets/resolve`).
 
 **Example**
 
@@ -4694,7 +4716,7 @@ async fn search_agent_instance_history(
         })
         .await?;
     for item in result.items {
-        println!("{}", item.job_lease);
+        println!("{}", item.job_lease_token);
     }
 
     Ok(())
@@ -6707,7 +6729,7 @@ async fn update_agent_instance(
                     "my-element-instance",
                 )),
                 job_key: Box::new(JobKey::assume_exists("my-job")),
-                job_lease: "my-job-lease".to_string(),
+                job_lease_token: JobLeaseToken::assume_exists("my-job-lease"),
                 ..Default::default()
             },
         })
