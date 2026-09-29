@@ -99,7 +99,7 @@ The default topology uses three regions and three zones:
 | `orchestration.partitionCount`      | `6`                                      | One partition per broker                                        |
 | Database regions                    | Slots `0` and `1`                        | Aurora members, writer first                                    |
 
-Each broker has the name `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region. Only `orchestration.partitioning.zone` and the advertised host differ.
+Each broker has the name `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region, as the [values section](#review-the-helm-values) shows.
 
 ### CIDR allocation
 
