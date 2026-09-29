@@ -40,7 +40,6 @@ These features may be unstable, and subject to significant changes or removal.
 | <b>Release cycle</b>               | Outside the standard [release policy](/reference/announcements-release-notes/release-policy.md). |
 | <b>Admin/owner access required</b> | Yes                                                                                              |
 
-
 ## Early access release
 An Early access release is the release of a new product. By testing this release, you have the opportunity to participate in their development by sharing feedback before they reach [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
 
