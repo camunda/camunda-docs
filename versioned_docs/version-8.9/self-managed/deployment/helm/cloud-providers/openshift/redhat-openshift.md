@@ -35,6 +35,7 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [yq](https://github.com/mikefarah/yq/#install) to edit your `values.yml` file.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
 - A namespace to host Camunda.
@@ -222,7 +223,7 @@ To fix this, copy the router default wildcard TLS Secret from `openshift-ingress
    ```
 
    ```bash
-   export CAMUNDA_NAMESPACE="camunda"
+   export CAMUNDA_NAMESPACE="${CAMUNDA_NAMESPACE:-camunda}"
    export CAMUNDA_PLATFORM_ROUTER_TLS_SECRET="camunda-platform-router-tls"
    ./generic/openshift/single-region/procedure/copy-router-tls-secret.sh
    ```
