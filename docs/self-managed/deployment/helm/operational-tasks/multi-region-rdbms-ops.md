@@ -198,11 +198,11 @@ The distinction that makes it online is that the zone already exists as far as t
 
 ### 1. Provision the infrastructure
 
-Raise `active_region_count` so the region's cluster, Transit Gateway attachments, and security group rules exist:
+Raise `active_region_count` so the region's cluster, Transit Gateway attachments, and security group rules exist. Use the same variable file as the initial deployment:
 
 ```bash
 cd ../terraform/clusters
-terraform apply -var cluster_name=camunda -var active_region_count=3
+terraform apply -var-file=terraform-cluster.tfvars -var active_region_count=3
 ```
 
 ### 2. Update the environment

@@ -288,7 +288,7 @@ Whether the lost zone has to be removed depends on the replicas it held, not on 
 - **Under a layout that satisfies this**, such as the default `2-2-1` across three zones, the majority holds. Processing continues whether or not you remove the zone.
 - **When one zone holds half the replicas or more**, losing that zone costs the quorum. Processing only resumes once the zone is removed from the partition distribution.
 
-A two-zone cluster always loses its quorum with a zone, whatever the replica counts. That is the [Dual-Region](./dual-region.md) situation, not a normal layout of this architecture.
+An evenly split two-zone cluster always loses its quorum with a zone. That is the [Dual-Region](./dual-region.md) situation, not a normal layout of this architecture. An uneven two-zone layout keeps its quorum only when it loses the smaller zone.
 
 The recommended practice is to remove a lost zone once you confirm it is down. The trade-off is failback cost: a removed zone has to be added back explicitly, and its brokers rebuild from nothing. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-remove-the-lost-zone) has the command.
 
