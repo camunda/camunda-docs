@@ -53,4 +53,4 @@ runs:
     - name: Validate URLs
       shell: bash
       run: |-
-        muffet --one-page-only --verbose ${{ inputs.url_to_validate }}
+        muffet --one-page-only --verbose --timeout 30 --max-retries 2 ${{ inputs.url_to_validate }}
