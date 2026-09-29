@@ -139,17 +139,14 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 ### Component version matrix
 
-The following matrix shows which component versions work together. Within each row, components in each column must align on version:
-
-- Orchestration Cluster components, Connectors, and Optimize must share the same `minor` and `patch` version
-- Management Identity and Camunda Hub must share the same `minor` and `patch` version
-- Desktop Modeler follows its own versioning and is not version-locked to other components
+The following matrix shows which component versions work together. The components in each cell must share the same `minor` and `patch` version except Desktop Modeler, which follows its own versioning and is not version-locked to other components.
 
 For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
 
 | [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management and design](../self-managed/reference-architecture/reference-architecture.md#camunda-hub)    |
 | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | Orchestration Cluster 8.10.X<br/>Connectors 8.10.X<br/>Optimize 8.10.X                                          | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.52+                              |
-| Orchestration Cluster 8.10.X<br/>Connectors 8.10.X<br/>Optimize 8.10.X                                          | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x<br/>Web Modeler 8.9.x<br/>Desktop Modeler 5.52+ |
-| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.51+                              |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.46+                              |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x<br/>Web Modeler 8.9.x<br/>Desktop Modeler 5.46+ |
 | Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.40+                              |
+| Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.8.x<br/>Self-Managed Console 8.8.x<br/>Web Modeler 8.8.x<br/>Desktop Modeler 5.40+ |
