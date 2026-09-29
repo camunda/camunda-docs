@@ -966,6 +966,23 @@ Web Modeler change 1 description.
 </div>
 <div className="release-announcement-content">
 
+#### Client bearer tokens are now classified for permission checks
+
+Optimize classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `camunda.security.authentication.oidc.username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token Optimize can't classify is treated as belonging to a user, and checked against your configured Optimize permission.
+
+**Action:** Set `username-claim` and `client-id-claim` to match your identity provider's token shape before upgrading. If you've already configured these claims for the Orchestration Cluster, use the same values for Optimize. Otherwise, M2M clients without an Optimize permission may see new permission errors after upgrading.
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#configure-oidc-for-optimize)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Optimize static API access token is no longer supported
 
 In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its API. A request that carries the static token from `api.accessToken` (environment variable `OPTIMIZE_API_ACCESS_TOKEN`) gets a `401` response. This applies to the [Optimize API](/apis-tools/optimize-api/overview.md) and to the [external variable ingestion](/apis-tools/optimize-api/external-variable-ingestion.md) endpoint. The Camunda Helm chart and SaaS do not set this token. They configure OIDC for the Optimize API. You are affected only if you set the property or the environment variable yourself, for example as a property override or an extra environment variable in your Helm values.

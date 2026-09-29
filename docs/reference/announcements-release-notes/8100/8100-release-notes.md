@@ -668,6 +668,16 @@ Business ID is now visible in Operate for decision instances, in both the decisi
 
 <p class="link-arrow">[Business ID](/components/operate/userguide/basic-operate-navigation.md#business-id-for-decision-instances)</p>
 
+### Optimize
+
+#### Client bearer tokens are now classified for permission checks
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Optimize now classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `camunda.security.authentication.oidc.username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token Optimize can't classify is treated as belonging to a user, and checked against your configured Optimize permission.
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#configure-oidc-for-optimize)</p>
+
 ### Orchestration Cluster
 
 #### FEEL context variables for the process instance
