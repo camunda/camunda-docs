@@ -92,7 +92,7 @@ Treat that output as the authoritative list for your chart version. Camunda 8.10
 
 ```sh
 helm upgrade camunda camunda/camunda-platform \
-  --version "$HELM_CHART_VERSION" \
+  --version "$ORCHESTRATION_CHART_VERSION" \
   --namespace camunda \
   -f values.yaml 2>&1 | grep 'DEPRECATION'
 ```

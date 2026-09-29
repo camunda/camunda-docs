@@ -34,7 +34,7 @@ This procedure applies to fresh Camunda 8.10 topology deployments. To convert an
 The tenant ID must be identical in all three places.
 
 :::note
-The chart exposes no `orchestration.physicalTenants` values schema. A tenant's own configuration is application configuration, so it's delivered through `extraConfiguration` rather than typed chart values. The chart detects that tenants are declared only to enforce its own input constraints. See [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md).
+The chart exposes no `orchestration.physicalTenants` values schema. A tenant's own configuration is application configuration, so it's set through `extraConfiguration` rather than typed chart values. The chart detects that tenants are declared only to enforce its own input constraints. See [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md).
 :::
 
 ## Declare tenants in the Orchestration Cluster release
@@ -87,6 +87,8 @@ global:
 ```
 
 Give every Optimize release its own OIDC client ID, audience, role name, redirect URL, and secret. Set the same client ID, audience, redirect URL, and secret on that tenant's Optimize release under `optimize.security.authentication.oidc`. Setting a dedicated `roleName` avoids adding the audience to the shared `Optimize` role.
+
+A `physicalTenants` entry registers the tenant's Optimize client and role in Management Identity. It doesn't add the tenant's Optimize to the Camunda Hub cluster inventory.
 
 ## Isolate every index prefix family
 
