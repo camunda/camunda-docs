@@ -847,7 +847,7 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 
 #### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
-With Camunda 8.10, the Orchestration Cluster, Camunda Hub, and Optimize authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl), a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+With Camunda 8.10, Camunda Hub and Optimize authenticate through a shared implementation based on the Orchestration Cluster's existing authentication, replacing their separate identity stacks. All three components now accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
 Camunda Hub and Optimize accept their existing authentication settings in 8.10 and translate the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
 
@@ -860,6 +860,47 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 <p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster warns about an incorrect OIDC configuration at startup
+
+The Orchestration Cluster checks its OIDC configuration at startup and writes a warning for each problem it finds. The cluster still starts.
+
+- The checks cover the client ID, the set of endpoints, the scope, and the shape of the redirect URI.
+- A redirect URI with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`.
+- Any other unusable value stays as configured, and the login fails later.
+
+**Action:** Review your startup logs after the upgrade. The warnings come from the loggers `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` and `io.camunda.security.spring.oidc.OidcRedirectionEndpoint`.
+
+<p className="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster starts when an identity provider is unreachable
+
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is down no longer stops the cluster from starting.
+
+- Only the requests that need that provider fail, such as browser login requests and token-validation requests. All other requests succeed, and a failed request recovers when the provider answers, without a restart.
+- A failed request writes a warning, at most once each minute for each combination of failed step and provider.
+
+**Action:** If you used a failed startup to detect an unreachable identity provider, alert on the `DeferredOidcResolution` warning instead. This covers a provider that the cluster resolves through its issuer URI. A provider with a static `jwk-set-uri` or `user-info-uri` gives a different signal, or none, so read the debugging guide before you rely on this alert.
+
+<p className="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
 
 </div>
 </div>
@@ -925,13 +966,30 @@ Web Modeler change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Optimize authentication moves to the Camunda Security Library
+#### Optimize adopts the shared authentication implementation
 
-Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), adopting the same authentication and session handling as the Orchestration Cluster components.
+Starting with Camunda 8.10, Optimize authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
 
 **Action:** Confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize static API access token is no longer supported
+
+In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its API. A request that carries the static token from `api.accessToken` (environment variable `OPTIMIZE_API_ACCESS_TOKEN`) gets a `401` response. This applies to the [Optimize API](/apis-tools/optimize-api/overview.md) and to the [external variable ingestion](/apis-tools/optimize-api/external-variable-ingestion.md) endpoint. The Camunda Helm chart and SaaS do not set this token. They configure OIDC for the Optimize API. You are affected only if you set the property or the environment variable yourself, for example as a property override or an extra environment variable in your Helm values.
+
+**Action:** Change the API clients that send the static token to OIDC bearer tokens before you upgrade to 8.10. Then remove `api.accessToken` from your configuration. If you need more time, set `optimize.security.csl.enabled=false`. This opts into the 8.9 component-specific configuration fallback, and the static token works again. Camunda plans to remove this fallback and the component-specific configuration keys in a future release.
+
+<p className="link-arrow">[Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md)</p>
 
 </div>
 </div>
@@ -944,11 +1002,11 @@ Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security
 
 #### Legacy Optimize security configuration keys deprecated
 
-With the move to the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. The legacy keys are removed in Camunda 8.11.
+With the move to the shared authentication implementation, the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. Camunda plans to remove these keys in a future release.
 
 Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
 
-**Action:** Migrate to the `camunda.security.*` keys before upgrading to 8.11. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
+**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
 
 </div>
 </div>
@@ -961,11 +1019,11 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 
 #### `optimize.security.csl.enabled=false` fallback is temporary
 
-If the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL) causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+`optimize.security.csl.enabled=false` temporarily restores the 8.9 component-specific configuration. Use it only if your integrations depend on the static API access token that the 8.9 configuration accepted, or if your migration to the `camunda.security.*` keys was misconfigured and you need a working deployment while you fix it. Camunda plans to remove this fallback, the 8.9 behavior it restores, and the component-specific configuration keys in a future release.
 
-**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. If you rely on it in 8.10, migrate to CSL before upgrading to 8.11.
+**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required.
 
-<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-security-stack)</p>
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-component-specific-configuration)</p>
 
 </div>
 </div>

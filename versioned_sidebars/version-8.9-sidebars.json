@@ -1344,6 +1344,8 @@
             "components/saas/byok/faq-and-troubleshooting"
           ]
         },
+        "components/saas/backups",
+        "components/saas/cross-region-cold-recovery",
         {
           "type": "category",
           "label": "Backup and restore",
@@ -3943,6 +3945,15 @@
               ]
             }
           ]
+        },
+        {
+          "type": "category",
+          "label": "Multi-tenancy",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/multi-tenancy/index"
+          },
+          "items": ["self-managed/concepts/multi-tenancy/logical-tenants"]
         },
         {
           "type": "category",
