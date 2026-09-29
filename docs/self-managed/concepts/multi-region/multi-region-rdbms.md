@@ -8,6 +8,7 @@ description: "Multi-Region RDBMS spreads an Orchestration Cluster across three o
 import PageDescription from '@site/src/components/PageDescription';
 import TopologyImg from './img/multi-region-rdbms-topology.svg';
 import QuorumImg from './img/multi-region-rdbms-quorum.svg';
+import AddZoneImg from './img/multi-region-rdbms-add-zone.svg';
 
 <PageDescription />
 
@@ -172,6 +173,8 @@ Follow the upgrade recommendations in the [Camunda Helm chart](/self-managed/upg
 ## Growing the cluster
 
 Zone awareness names zones instead of numbering brokers, so a zone can be added to a running cluster without renumbering it.
+
+<AddZoneImg role="img" title="Three stages of the same cluster. First, two zones, london and paris, with two replicas each and replication factor four; the zurich slot is provisioned but not declared, and losing either zone leaves two of four replicas, so processing stops. Second, the zurich brokers are deployed and the zone is added with POST /actuator/cluster/zones/zurich, one replica and priority 800, then the operator waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues. No broker is renumbered and the running regions are not restarted." />
 
 **Declare only the zones you deploy.** A zone in the zone list receives partition replicas whether or not its brokers run. A declared zone without brokers therefore leaves every partition one zone short: with the default `2-2-1` layout and the third zone missing, each partition runs four replicas of five, and losing either database zone leaves two, so processing stops.
 
