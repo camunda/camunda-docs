@@ -66,7 +66,7 @@ https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connecto
 https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connectors/outbound-connector
 https://docs.camunda.io/docs/components/concepts/messages/#message-correlation-overview
 https://docs.camunda.io/docs/components/concepts/messages/#message-subscriptions
-https://docs.camunda.io/docs/components/connectors/connectors/protocol/http-webhook/#use-the-correlation-object
+https://docs.camunda.io/docs/components/connectors/protocol/http-webhook/#use-the-correlation-object
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/#authentication
