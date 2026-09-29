@@ -14,7 +14,7 @@ import OverviewImg from './img/multi-region-overview.png';
 
 Camunda provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments.
 
-<img src={OverviewImg} alt="High-level diagram showing the Cold Recovery, Dual-Region, and Multi-Region RDBMS strategies" title="Multi-region resilience strategies" class="img-noborder img-900"/>
+<img src={OverviewImg} alt="High-level diagram showing Cold Recovery and Dual-Region strategies" title="Cold Recovery and Dual-Region strategies" class="img-noborder img-900"/>
 
 - **[Cold Recovery](./cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable.
 

@@ -181,6 +181,8 @@ Set up remote Terraform state before deploying anything you intend to keep. The 
 
 To run this architecture on a database other than Aurora Global Database, set `deploy_database = false` and supply your own JDBC URL through `CAMUNDA_RDBMS_URL`. Anything that presents a single endpoint following its own writer works the same way. Examples are a PostgreSQL cluster behind a floating endpoint, a connection proxy, or a DNS record you repoint during failover.
 
+The generated Helm values set `async-replication.type` to `LOG_SEQ`. That strategy only works on a backend that supports LSN monitoring. With an unsupported backend, Camunda fails at startup. In that case, set `async-replication.type` to `DELAY`, give it a `delay` value, and monitor the replication lag yourself. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported backends.
+
 ## 2. Prepare the environment
 
 ### Export the Terraform outputs
