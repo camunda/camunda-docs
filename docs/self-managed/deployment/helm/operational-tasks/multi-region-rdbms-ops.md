@@ -11,17 +11,17 @@ import RegionLoss from './img/multi-region-rdbms-region-loss.svg';
 
 import MultiRegionRdbmsCopy from '../\_partials/\_multi-region-rdbms-copy.md'
 
-This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup: losing a region, bringing it back, and activating a zone that was declared but never deployed.
+This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup. It covers losing a region, bringing it back, and activating a zone that was declared but never deployed.
 
 :::caution
-Develop, test, and rehearse these procedures in a non-production environment before you need them. The commands below are examples from the [reference implementation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md); adapt them to your environment.
+Develop, test, and rehearse these procedures in a non-production environment before you need them. The commands below are examples from the [reference implementation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md). Adapt them to your environment.
 :::
 
 ## What is different from dual-region
 
-In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe quorum. Processing stops, and the failover procedure exists to restore it: remove the lost brokers, disable the exporter to the lost region, and later restore secondary storage from a snapshot.
+In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe quorum. Processing stops, and the failover procedure exists to restore it. That procedure removes the lost brokers, disables the exporter to the lost region, and later restores secondary storage from a snapshot.
 
-With three or more zones, none of that applies. Every partition keeps a majority of its replicas, so **Zeebe keeps processing** and no Zeebe action is required to restore service. The failover procedure mostly reports; its only real work is the database writer, and only when the writer was in the lost region.
+With three or more zones, none of that applies. Every partition keeps a majority of its replicas, so **Zeebe keeps processing** and no Zeebe action is required to restore service. The failover procedure mostly reports. Its only real work is the database writer, and only when the writer was in the lost region.
 
 <RegionLoss role="img" title="Side-by-side timelines of the same zone loss. In a two-zone cluster, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter, and failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone cluster, quorum holds and processing continues, there is nothing to force-remove, disable, or restore, and two operator steps remain: promoting the database writer if it was in the lost zone, and redeploying the zone." />
 
@@ -64,7 +64,7 @@ The dot is required: these scripts export variables into your current shell, not
 
 You also need the credentials and the CLI tools the deployment used: `kubectl` contexts for every active region, `helm`, `jq`, and your cloud provider's CLI. The [deployment guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md#requirements) lists them.
 
-Verify the cluster is healthy before you start, so you can tell what the procedure changed:
+Check the cluster is healthy before you start, so you can tell what the procedure changed:
 
 ```bash
 ./check-cluster-topology.sh
@@ -74,11 +74,11 @@ Verify the cluster is healthy before you start, so you can tell what the procedu
 
 ### 1. Confirm the quorum is intact
 
-Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority, so partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker.
+Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority. Partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker.
 
-This only holds when every declared zone is deployed. With one zone declared but not yet active, `2-2-1` runs four replicas of five, and losing either database region leaves two, so processing stops until that zone is deployed or the lost one returns.
+This only holds when every declared zone is deployed. With one zone declared but not yet active, `2-2-1` runs four replicas of five. Losing either database region leaves two, so processing stops until you deploy that zone or the lost one returns.
 
-Confirm this rather than assuming it. The script takes one lost slot and computes the surviving replicas without it, so its verdict only covers a single lost zone. If more than one zone is affected, don't rely on it: check the partition health of every surviving broker with `./check-cluster-topology.sh`.
+Check this rather than assuming it. The script takes one lost slot and computes the surviving replicas without it, so its verdict only covers a single lost zone. If more than one zone is affected, don't rely on it: check the partition health of every surviving broker with `./check-cluster-topology.sh`.
 
 ```bash
 ./failover.sh <lost-region-slot> --dry-run
@@ -114,13 +114,13 @@ Whatever had not replicated at the time of the outage can be missing from the pr
 
 </Tabs>
 
-Camunda needs no reconfiguration and no restart, as long as the JDBC URL keeps resolving to the current writer. The reference implementation gets that from the [AWS Advanced JDBC Wrapper](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql), whose `failover` plugin follows the writer on established connections and on brokers that start after the promotion. This is not general JDBC behavior: with your own database, whether connections re-resolve the writer depends on your driver and endpoint, so confirm it or plan a restart.
+Camunda needs no reconfiguration and no restart, as long as the JDBC URL keeps resolving to the current writer. The reference implementation gets that from the [AWS Advanced JDBC Wrapper](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql). Its `failover` plugin follows the writer on established connections, and on brokers that start after the promotion. This is not general JDBC behavior. With your own database, whether connections re-resolve the writer depends on your driver and endpoint. Check it or plan a restart.
 
 If the writer was not in the lost region, no database action is required.
 
 #### Move the Raft leaders to the new writer region
 
-Once the writer has moved, the zone priorities still favor the region that hosted the old one, so partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Move the leaders next to the new writer:
+Once the writer moves, the zone priorities still favor the region that hosted the old one. Partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Move the leaders next to the new writer:
 
 1. Raise the priority of the zone that now hosts the writer. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) for applying it to a running cluster.
 1. Wait until the change reports `COMPLETED`. The cluster rejects a new change while one is still in progress.
@@ -133,7 +133,7 @@ Zeebe keeps processing, but the gateway in the lost region is unreachable. Updat
 
 ### 4. Decide whether to remove the zone
 
-Removing the lost zone from the partition distribution is **optional** whenever the surviving zones still hold a majority of each partition's replicas, and usually not worth it for a zone you expect back.
+Removing the lost zone from the partition distribution is **optional** whenever the surviving zones still hold a majority of each partition's replicas. It is usually not worth it for a zone you expect back.
 
 What decides it is the replica count of the zone you lost, not the number of zones:
 
@@ -142,11 +142,11 @@ What decides it is the replica count of the zone you lost, not the number of zon
 | Fewer than half the total      | A majority of the replicas survives, so processing continues | **Optional**, and cheaper to skip.                                               |
 | Half the total or more         | The survivors are not a majority, so processing stops        | **Required**. Removing the zone restores a quorum the survivors can reach alone. |
 
-The default `2-2-1` across three zones always lands in the first row, whichever zone is lost. An asymmetric layout such as `4-1-1` lands in the second when its four-replica zone is the one lost. An evenly split two-zone cluster lands in the second whichever zone it loses, which is why [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) has a failover runbook and this architecture does not.
+The default `2-2-1` across three zones always lands in the first row, whichever zone is lost. An asymmetric layout such as `4-1-1` lands in the second when its four-replica zone is the one lost. An evenly split two-zone cluster lands in the second whichever zone it loses. That is why [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) has a failover runbook and this architecture does not.
 
-The reason to leave a zone in place is failback cost. Brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
+The reason to leave a zone in place is failback cost. Brokers that stayed members rejoin and catch up from the Raft log. You have to add a removed zone back explicitly, and its brokers start from nothing.
 
-If you do need to remove it, one atomic change evicts the zone's brokers and drops the zone from the persisted partition distribution, so quorum stops counting replicas that cannot answer:
+If you do need to remove it, one atomic change evicts the zone's brokers. It also drops the zone from the persisted partition distribution, so quorum stops counting replicas that cannot answer:
 
 ```bash
 ./failover.sh <lost-region-slot> --drain-brokers
@@ -164,7 +164,7 @@ The cluster should report the surviving brokers, all partitions healthy, and pro
 
 ## Bring a region back
 
-Failback is short, and deliberately so. There is no secondary storage snapshot and restore step: the database holds a single copy of the exported data and replicates it itself, so a returning region has nothing to catch up on at the Camunda level.
+Failback is short, and deliberately so. There is no secondary storage snapshot and restore step. The database holds a single copy of the exported data and replicates it itself. A returning region has nothing to catch up on at the Camunda level.
 
 ```bash
 ./failback.sh <recovered-region-slot>
@@ -199,7 +199,12 @@ Verify when done:
 
 Activating a zone that was declared in the zone list but never deployed is an **online** operation.
 
-The distinction that makes it online is that the zone already exists as far as the cluster is concerned. It was in the zone list every region was deployed with, so the partition distribution already assigned it replicas and every partition has been running one replica short of its full count. Deploying the zone starts brokers that claim replicas already reserved for them: no broker is renumbered, no partition is redistributed, no running region is restarted, and no cluster management API call is needed.
+The distinction that makes it online is that the zone already exists as far as the cluster is concerned. It was in the zone list every region was deployed with. So the partition distribution already assigned it replicas, and every partition runs one replica short of its full count. Deploying the zone starts brokers that claim replicas already reserved for them. Nothing else changes:
+
+- No broker is renumbered.
+- No partition is redistributed.
+- No running region is restarted.
+- No cluster management API call is needed.
 
 ### 1. Provision the infrastructure
 
@@ -228,15 +233,22 @@ unset CAMUNDA_ACTIVE_REGIONS
 ./activate-region.sh <slot>
 ```
 
-The procedure joins the new cluster to the ClusterSet, prepares its storage class, namespace, and database secret, renders the Helm values with the longer contact point list, installs only the new region, exports its services, and waits for the new brokers to join.
+The procedure does the following:
 
-The regions already running keep their shorter contact point list and are not restarted. The contact point list matters at bootstrap; once a cluster is formed, a newcomer only has to reach one member and the rest learn about it by gossip. The running regions pick up the longer list on their next upgrade.
+1. Joins the new cluster to the ClusterSet.
+1. Prepares its storage class, namespace, and database secret.
+1. Renders the Helm values with the longer contact point list.
+1. Installs only the new region.
+1. Exports its services.
+1. Waits for the new brokers to join.
+
+The regions already running keep their shorter contact point list and are not restarted. The contact point list matters at bootstrap. Once a cluster forms, a newcomer only has to reach one member, and the rest learn about it by gossip. The running regions pick up the longer list on their next upgrade.
 
 :::warning
-`activate-region.sh` fills a slot that already exists in the zone list. It does not add a new zone. Adding a zone that was never declared changes the zone list in every region and redistributes partitions, which is a migration rather than an online operation.
+`activate-region.sh` fills a slot that already exists in the zone list. It does not add a new zone. Adding a zone that was never declared changes the zone list in every region and redistributes partitions. That is a migration rather than an online operation.
 :::
 
-The script refuses a slot that is not yet part of the deployed topology, so run the Terraform step above first: it rejects any slot at or beyond `CAMUNDA_ACTIVE_REGIONS` and reports the valid range, rather than deploying into a zone the cluster does not expect.
+The script refuses a slot that is not yet part of the deployed topology. Run the Terraform step above first. The script rejects any slot at or beyond `CAMUNDA_ACTIVE_REGIONS` and reports the valid range. It does not deploy into a zone the cluster does not expect.
 
 ## Upgrade the cluster
 

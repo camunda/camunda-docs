@@ -11,13 +11,13 @@ import HighLevelDesign from './assets/eks-multi-region-rdbms.svg';
 
 import MultiRegionRdbmsCopy from '../../../\_partials/\_multi-region-rdbms-copy.md'
 
-This guide deploys one Camunda 8 Orchestration Cluster across three AWS regions, using [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for compute, [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) for inter-region routing, [Submariner](https://submariner.io/) for cross-cluster service discovery, and [Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) as relational secondary storage.
+This guide deploys one Camunda 8 Orchestration Cluster across three AWS regions. It uses [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for compute and [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) for inter-region routing. It uses [Submariner](https://submariner.io/) for cross-cluster service discovery and [Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) as relational secondary storage.
 
 :::caution
 Review the [Multi-Region RDBMS concept documentation](/self-managed/concepts/multi-region/multi-region-rdbms.md) before continuing, to understand the limitations and requirements of this configuration.
 :::
 
-The result is a cluster in which losing a region does not stop processing, and in which bringing the region back is a redeployment rather than a data restore. For the reasoning behind the topology, see [partition placement across zones](/self-managed/concepts/multi-region/multi-region-rdbms.md#partition-placement-across-zones).
+The result is a cluster where losing a region does not stop processing. Bringing the region back is a redeployment rather than a data restore. For the reasoning behind the topology, see [partition placement across zones](/self-managed/concepts/multi-region/multi-region-rdbms.md#partition-placement-across-zones).
 
 ## High-level design
 
@@ -67,7 +67,7 @@ aws account enable-region --region-name eu-central-2
 
 ### Considerations
 
-- **This is a multi-region deployment, and costs scale with the region count.** Three EKS control planes and node groups, three Transit Gateways with a full peering mesh billed per attachment-hour, and an Aurora Global Database with a member per database region. Inter-region data transfer is billed per gigabyte. Destroy the environment when you are done evaluating.
+- **This is a multi-region deployment, and costs scale with the region count.** You pay for three EKS control planes and node groups. You also pay for three Transit Gateways with a full peering mesh, billed per attachment-hour. An Aurora Global Database adds a member per database region. AWS bills inter-region data transfer per gigabyte. Destroy the environment when you are done evaluating.
 - **Non-overlapping CIDRs are mandatory.** Transit Gateway cannot route duplicate prefixes, and Submariner runs without Globalnet, so every CIDR must identify exactly one cluster.
 - **Round-trip time between regions matters.** Keep it at or below 100 ms. The regions used in this guide are London, Paris, and Zurich, whose pairwise round-trip times are well inside that budget.
 - **Management Identity, Web Modeler, Console, and Optimize are not part of this deployment.** See [limitations](/self-managed/concepts/multi-region/multi-region-rdbms.md#limitations).
@@ -81,25 +81,25 @@ Following this guide gives you:
 - A Transit Gateway per region, peered in a full mesh, routing every VPC and Kubernetes service range between regions.
 - Submariner service discovery, publishing each region's Zeebe service as `<clusterID>.<service>.<namespace>.svc.clusterset.local`.
 - An Aurora Global Database with a writer in one region and readers in the others, reached through a single JDBC URL.
-- One Orchestration Cluster with six brokers, six partitions, and a replication factor of five: two replicas of every partition in each database region and one in the third.
+- One Orchestration Cluster with six brokers, six partitions, and a replication factor of five. Each database region holds two replicas of every partition, and the third region holds one.
 
 ## Topology
 
 The default topology uses three regions and three zones:
 
-| Setting                             | Default                                  | Meaning                                                                 |
-| :---------------------------------- | :--------------------------------------- | :---------------------------------------------------------------------- |
-| Regions                             | `eu-west-2`, `eu-west-3`, `eu-central-2` | London, Paris, Zurich                                                   |
-| Zone names                          | `london`, `paris`, `zurich`              | One zone per region                                                     |
-| `orchestration.partitioning.scheme` | `zone-aware`                             | Zone-aware partitioning                                                 |
-| `numberOfBrokers` per zone          | `2`                                      | Brokers deployed in that zone                                           |
-| `numberOfReplicas` per zone         | `2`, `2`, `1`                            | Two in each database region, one in the tie-breaker                     |
-| `orchestration.clusterSize`         | `6`                                      | Sum of `numberOfBrokers` across zones; the zone list is what derives it |
-| Replication factor                  | `5`                                      | Sum of `numberOfReplicas` across zones                                  |
-| `orchestration.partitionCount`      | `6`                                      | One partition per broker                                                |
-| Database regions                    | Slots `0` and `1`                        | Aurora members, writer first                                            |
+| Setting                             | Default                                  | Meaning                                                         |
+| :---------------------------------- | :--------------------------------------- | :-------------------------------------------------------------- |
+| Regions                             | `eu-west-2`, `eu-west-3`, `eu-central-2` | London, Paris, Zurich                                           |
+| Zone names                          | `london`, `paris`, `zurich`              | One zone per region                                             |
+| `orchestration.partitioning.scheme` | `zone-aware`                             | Zone-aware partitioning                                         |
+| `numberOfBrokers` per zone          | `2`                                      | Brokers deployed in that zone                                   |
+| `numberOfReplicas` per zone         | `2`, `2`, `1`                            | Two in each database region, one in the tie-breaker             |
+| `orchestration.clusterSize`         | `6`                                      | Sum of `numberOfBrokers` across zones. The zone list derives it |
+| Replication factor                  | `5`                                      | Sum of `numberOfReplicas` across zones                          |
+| `orchestration.partitionCount`      | `6`                                      | One partition per broker                                        |
+| Database regions                    | Slots `0` and `1`                        | Aurora members, writer first                                    |
 
-Brokers are identified as `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region; only `orchestration.partitioning.zone` and the advertised host differ.
+Each broker has the name `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region. Only `orchestration.partitioning.zone` and the advertised host differ.
 
 ### CIDR allocation
 
@@ -112,7 +112,7 @@ Every region owns a distinct VPC range and a distinct Kubernetes service range. 
 | 2    | `eu-central-2` | `10.212.0.0/16`  | `10.210.0.0/16`         |
 | 3    | `eu-south-1`   | `10.222.0.0/16`  | `10.220.0.0/16`         |
 
-There is no separate pod range, and that is deliberate. With the [AWS VPC CNI](https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html) a pod address is an ordinary VPC address, so routing the VPC range over the Transit Gateway makes cross-region pod-to-pod traffic work natively, with no overlay network. The service range is routed too, because Submariner resolves a remote ClusterIP service out of the exporting cluster's service range.
+There is no separate pod range, and that is deliberate. With the [AWS VPC CNI](https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html) a pod address is an ordinary VPC address. Routing the VPC range over the Transit Gateway therefore makes cross-region pod-to-pod traffic work natively, with no overlay network. The Transit Gateway routes the service range too, because Submariner resolves a remote ClusterIP service out of the exporting cluster's service range.
 
 ## 1. Configure AWS and apply Terraform
 
@@ -131,9 +131,9 @@ Two variables control the topology, and they are not interchangeable:
 | `regions`             | The full list of region slots the cluster will ever have. Every slot contributes a zone to the Camunda zone list. |
 | `active_region_count` | How many of those slots are actually deployed. At most one slot may be left empty.                                |
 
-Declaring a slot without deploying it is the supported growth path. The deployed slots are always the first ones in the list, so the empty slot is the last, and activating it later fills in its replicas without redistributing anything. What that costs depends on how many replicas the empty slot holds, not on how many slots there are: the default layout gives the trailing slots one replica each, so every partition runs at four of five with three slots and five of six with four. The cluster tolerates no further zone loss while a slot is empty.
+Declaring a slot without deploying it is the supported growth path. The deployed slots are always the first ones in the list, so the empty slot is the last. Activating it later fills in its replicas without redistributing anything. What that costs depends on how many replicas the empty slot holds, not on how many slots there are. The default layout gives the trailing slots one replica each. Every partition therefore runs at four of five with three slots, and five of six with four. The cluster tolerates no further zone loss while a slot is empty.
 
-Leaving two or more slots empty is rejected at plan time. The guard that rejects it counts region slots rather than replicas, and requires the deployed slots to be a majority of the declared ones, so it can also refuse a layout whose deployed zones would still hold a majority of the replicas. The replica-level test runs separately in `export_environment_prerequisites.sh`, which is what catches a layout whose undeployed zones hold the majority.
+Leaving two or more slots empty fails at plan time. The guard counts region slots rather than replicas, and requires the deployed slots to be a majority of the declared ones. It can therefore also refuse a layout whose deployed zones would still hold a majority of the replicas. The replica-level test runs separately in `export_environment_prerequisites.sh`, which catches a layout whose undeployed zones hold the majority.
 
 ### Apply the infrastructure
 
@@ -145,7 +145,7 @@ terraform init
 terraform apply -var cluster_name=camunda
 ```
 
-For a cheaper evaluation, deploy two of the three slots and reduce the node count. This is a valid state: with the default `2-2-1` layout, every partition holds four of its five replicas, and the third slot's replica stays reserved until you deploy it.
+For a cheaper evaluation, deploy two of the three slots and reduce the node count. This is a valid state. With the default `2-2-1` layout, every partition holds four of its five replicas. The third slot's replica stays reserved until you deploy it.
 
 ```bash
 terraform apply \
@@ -181,7 +181,7 @@ Set up remote Terraform state before deploying anything you intend to keep. The 
 
 ### Bring your own database
 
-To run this architecture on a database other than Aurora Global Database, set `deploy_database = false` and supply your own JDBC URL through `CAMUNDA_RDBMS_URL`. Anything that presents a single endpoint following its own writer works the same way: a PostgreSQL cluster behind a floating endpoint, a connection proxy, or a DNS record you repoint during failover.
+To run this architecture on a database other than Aurora Global Database, set `deploy_database = false` and supply your own JDBC URL through `CAMUNDA_RDBMS_URL`. Anything that presents a single endpoint following its own writer works the same way. Examples are a PostgreSQL cluster behind a floating endpoint, a connection proxy, or a DNS record you repoint during failover.
 
 ## 2. Prepare the environment
 
@@ -209,7 +209,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 The script refuses to continue if the topology is inconsistent, for example if more than one slot is left empty.
 
 :::note One namespace in every cluster
-Unlike the [dual-region setup](./dual-region.md), which needs a different namespace per region because CoreDNS stub forwarding cannot distinguish local from remote traffic, this architecture uses the **same namespace name in every cluster**. Submariner disambiguates identically named services with the cluster ID prefix.
+The [dual-region setup](./dual-region.md) needs a different namespace per region, because CoreDNS stub forwarding cannot distinguish local from remote traffic. This architecture instead uses the **same namespace name in every cluster**. Submariner disambiguates identically named services with the cluster ID prefix.
 :::
 
 ### Register the kubectl contexts
@@ -298,9 +298,9 @@ Running Submariner's connectivity component alongside the AWS VPC CNI puts two o
 
 Removing one of the two owners removes the whole class of problem, and the Transit Gateway is the one that cannot be removed.
 
-This does not leave the traffic in clear text. AWS encrypts inter-region Transit Gateway peering itself: traffic is encrypted with AES-256 at the virtual network layer as it travels between regions, and again at the physical layer on links outside AWS's physical control. See [transit gateway peering attachments](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html) and [encryption in transit](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit).
+This does not leave the traffic in clear text. AWS encrypts inter-region Transit Gateway peering itself. AES-256 protects the traffic at the virtual network layer as it travels between regions. AWS encrypts it again at the physical layer, on links outside its physical control. See [transit gateway peering attachments](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html) and [encryption in transit](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit).
 
-What you give up is control of the encryption, not the encryption: the keys are AWS-managed. If a control requires customer-managed keys, enable TLS in the workload, or replace the VPC CNI with Cilium in ENI mode plus WireGuard or IPsec. In ENI mode pod addresses stay ordinary VPC addresses, so the Transit Gateway remains the only owner of the routes.
+What you give up is control of the encryption, not the encryption. The keys are AWS-managed. If a control requires customer-managed keys, enable TLS in the workload, or replace the VPC CNI with Cilium in ENI mode plus WireGuard or IPsec. In ENI mode pod addresses stay ordinary VPC addresses, so the Transit Gateway remains the only owner of the routes.
 
 </details>
 
@@ -360,7 +360,7 @@ The security group rules are declared explicitly in [security.tf](https://github
 | 53            | TCP/UDP  | CoreDNS and Submariner service discovery                            |
 | n/a           | ICMP     | Cross-region connectivity diagnostics                               |
 
-Each rule is instantiated once per remote VPC range and once per remote service range, so the rule count grows linearly with the region count: 20 inbound rules at three regions, 30 at four, against an AWS limit of 60 per security group. Terraform asserts that budget at plan time rather than letting the apply fail after the clusters exist.
+Terraform creates each rule once per remote VPC range and once per remote service range. The rule count therefore grows linearly with the region count: 20 inbound rules at three regions and 30 at four. The AWS limit is 60 per security group. Terraform asserts that budget at plan time rather than letting the apply fail after the clusters exist.
 
 ## 4. Deploy Camunda 8
 
@@ -395,7 +395,7 @@ Three values cannot be hardcoded in the Helm values, because they depend on the 
 ```
 
 :::note Contact points are fully qualified
-The generated contact points end with a trailing dot, which marks them as fully qualified names. Without it, the resolver walks the pod's search domains first, and on a cold multi-region start a broker whose peer is not yet published can exhaust its DNS budget and never finish starting. The trailing dot is required, not cosmetic.
+The generated contact points end with a trailing dot, which marks them as fully qualified names. Without it, the resolver walks the pod's search domains first. On a cold multi-region start, a broker whose peer is not yet published can then exhaust its DNS budget and never finish starting. The trailing dot is required, not cosmetic.
 :::
 
 ### Review the Helm values
@@ -411,12 +411,12 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 The parts worth reading before you install:
 
-- `orchestration.partitioning.scheme: zone-aware` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects `numberOfZones` and `zoneIndex` with this scheme, because the zone list describes the topology instead, and it derives the cluster size, replication factor, and broker node IDs from that list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
+- `orchestration.partitioning.scheme: zone-aware` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects `numberOfZones` and `zoneIndex` with this scheme, because the zone list describes the topology instead. The chart derives the cluster size, replication factor, and broker node IDs from that list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
 - `orchestration.partitioning.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
-- The AWS Advanced JDBC Wrapper uses `initialConnection,failover`: `initialConnection` discovers the current writer when a broker starts after a switchover, and `failover` follows a writer change on an established connection.
+- The AWS Advanced JDBC Wrapper uses `initialConnection,failover`. `initialConnection` discovers the current writer when a broker starts after a switchover. `failover` follows a writer change on an established connection.
 - `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_ENABLED: "true"` is required. Without it the exporter acknowledges records the standby has not received, and a writer failover loses exported data.
-- The reference architecture also pins `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_TYPE: LOG_SEQ`, `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_MAXLAG: PT1H`, and `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_PAUSEONMAXLAGEXCEEDED: "false"`. The first two are a strategy and a budget; the third keeps the engine default, because pausing stops exporting on its own and is a decision to make knowingly. The lag budget has no effect until you enable pausing, since the engine compares it only inside the pause check.
+- The reference architecture also pins `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_TYPE: LOG_SEQ`, `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_MAXLAG: PT1H`, and `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_PAUSEONMAXLAGEXCEEDED: "false"`. The first two are a strategy and a budget. The third keeps the engine default, because pausing stops exporting on its own and is a decision to make knowingly. The lag budget has no effect until you enable pausing. The engine compares it only inside the pause condition.
 - Cross-region SWIM membership timeouts are relaxed. The defaults are tuned for intra-region latency, and on a cold start brokers otherwise see remote peers as unreachable, eject them, and never converge.
 - `identity`, `console`, and `optimize` are disabled. See [limitations](/self-managed/concepts/multi-region/multi-region-rdbms.md#limitations).
 
@@ -450,7 +450,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 ## 5. Verify the deployment
 
-Confirm that every broker joined and that the partition distribution matches the zone list:
+Verify that every broker joined and that the partition distribution matches the zone list:
 
 ```bash
 ./check-cluster-topology.sh
@@ -465,7 +465,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 Expect roughly 10 minutes for the Zeebe cluster to converge across regions. A healthy three-zone cluster reports six brokers, six partitions, and a replication factor of five.
 
-Measure the cost of the write path from each region to the database writer. Regions that are not co-located with the writer pay the inter-region round trip on every export flush, and this is what tells you whether the exporter queue is sized correctly:
+Measure the cost of the write path from each region to the database writer. Regions that are not co-located with the writer pay the inter-region round trip on every export flush. That number tells you whether the exporter queue is sized correctly:
 
 ```bash
 ./measure-rdbms-latency.sh
