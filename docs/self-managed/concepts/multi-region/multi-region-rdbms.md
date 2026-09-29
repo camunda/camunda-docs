@@ -108,7 +108,14 @@ Any database that presents a single endpoint following its own writer fits: a gl
 :::warning
 Asynchronous replication monitoring is required, not a tuning option. Without it the RDBMS exporter acknowledges records the standby has not received yet, and a writer failover loses exported data. This architecture treats a writer failover as a routine operation rather than an incident, so set `camunda.data.secondary-storage.rdbms.async-replication.enabled` to `true`.
 
-Which strategy is available to you is **vendor dependent**, and it is worth checking before you choose a database. Neither the monitoring nor a strategy is on by default: `async-replication.enabled` defaults to `false`, and you choose `async-replication.type` yourself. LSN monitoring (`LOG_SEQ`) reads the database's own replication position and is the preferred strategy, but only some backends support it. Camunda does not switch strategies for you: on a backend without LSN support, set `async-replication.type` to `DELAY` explicitly. That strategy carries no replication signal, needs its own `delay` value, and requires you to monitor the actual lag yourself. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported list and the settings.
+Neither the monitoring nor a strategy is on by default: `async-replication.enabled` defaults to `false`, and you choose `async-replication.type` yourself. Which strategy you can use depends on your database vendor, so check it before you choose a database:
+
+| Strategy                   | When to use it                                                                           | What you configure                                                                          |
+| :------------------------- | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| `LOG_SEQ` (LSN monitoring) | Preferred. Reads the database's own replication position. Only some backends support it. | `async-replication.type: LOG_SEQ`                                                           |
+| `DELAY`                    | Backends without LSN support. Carries no replication signal.                             | `async-replication.type: DELAY`, a `delay` value, and your own monitoring of the actual lag |
+
+Camunda doesn't switch strategies for you. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported backends and the settings.
 :::
 
 ### The database tier is active-standby
