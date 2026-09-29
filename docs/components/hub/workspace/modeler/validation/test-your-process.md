@@ -57,7 +57,7 @@ Click **Connect cluster**, and select a target cluster. Once the cluster is heal
 ### 2. Choose resources to deploy
 
 - **All resources**: Deploys the whole project, including dependencies like called processes or DMN files.
-- **Only this resource**: Deploys only the open file. An info alert reminds you that referenced resources, such as called processes, DMN files, or forms, must be deployed separately, or test runs fail with a not found incident.
+- **Only this resource**: Deploys only the open file. 
 
 When testing a snapshot version, **Only this resource** is not allowed.
 
