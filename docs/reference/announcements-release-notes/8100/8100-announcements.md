@@ -1027,3 +1027,24 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 
 </div>
 </div>
+
+## Tasklist
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Tasklist custom styling uses Camunda design system tokens
+
+Starting with Camunda 8.10, the Tasklist UI uses the Camunda design system instead of the Carbon Design System. Custom styles in `custom.css` that override Carbon `--cds-*` tokens or use `:root[data-carbon-theme='g10']` and `:root[data-carbon-theme='g100']` selectors no longer have any effect. Tasklist falls back to its default styling without showing an error.
+
+The `custom.css` file location has also changed. In the Docker image, place the file at `/usr/local/camunda/config/custom.css` instead of `/usr/local/tasklist/config/custom.css`. In the distribution archive, place it in the `config` directory. Camunda now serves the file at `<context-path>/custom.css` instead of `/tasklist/custom.css`.
+
+**Action:** When you upgrade to 8.10, rewrite your custom styles to override the Camunda design system tokens using the `html .c4-ui` (light theme) and `html .c4-ui.dark` (dark theme) selectors, and move `custom.css` to the new location.
+
+<p className="link-arrow">[Tasklist custom styling](/self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling.md)</p>
+
+</div>
+</div>
