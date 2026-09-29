@@ -225,7 +225,7 @@ The procedure joins the new cluster to the ClusterSet, prepares its storage clas
 The regions already running keep their shorter contact point list and are not restarted. The contact point list matters at bootstrap; once a cluster is formed, a newcomer only has to reach one member and the rest learn about it by gossip. The running regions pick up the longer list on their next upgrade.
 
 :::warning
-`activate-region.sh` adds the zone of a slot that Terraform already provisioned. To grow beyond the provisioned slots, add a slot to `regions` first. The partition count stays the one chosen at bootstrap.
+`activate-region.sh` only adds the zone of a slot that was in `regions` when the cluster was bootstrapped. The reference implementation derives the partition count from that slot list, and the partition count can't change after bootstrap. List every region you may ever run in `regions` before the first deployment.
 :::
 
 The script refuses a slot that is not yet part of the deployed topology, so run the Terraform step above first: it rejects any slot at or beyond `CAMUNDA_ACTIVE_REGIONS` and reports the valid range, rather than deploying into a zone the cluster does not expect.
