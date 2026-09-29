@@ -16,7 +16,7 @@ Cluster API. It wraps the generated REST client with configuration,
 authentication, adaptive backpressure, and transient retry. Its per-operation
 methods are generated in facade_generated.go.
 
-`CamundaClient` exposes **231** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **251** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ```go
 import camunda "github.com/camunda/orchestration-cluster-api-go"
@@ -55,17 +55,18 @@ a ready-to-use client. Options take precedence over the environment.
 | [`AssignUserToTenant`](#assignusertotenant)                                                               | AssignUserToTenant calls the AssignUserToTenant operation.                                                                                                               |
 | [`BroadcastSignal`](#broadcastsignal)                                                                     | BroadcastSignal calls the BroadcastSignal operation.                                                                                                                     |
 | [`CancelBatchOperation`](#cancelbatchoperation)                                                           | CancelBatchOperation calls the CancelBatchOperation operation.                                                                                                           |
+| [`CancelClusterRebalance`](#cancelclusterrebalance)                                                       | CancelClusterRebalance calls the CancelClusterRebalance operation.                                                                                                       |
 | [`CancelProcessInstance`](#cancelprocessinstance)                                                         | CancelProcessInstance calls the CancelProcessInstance operation.                                                                                                         |
 | [`CancelProcessInstancesBatchOperation`](#cancelprocessinstancesbatchoperation)                           | CancelProcessInstancesBatchOperation calls the CancelProcessInstancesBatchOperation operation.                                                                           |
 | [`ChangeClusterMode`](#changeclustermode)                                                                 | ChangeClusterMode calls the ChangeClusterMode operation.                                                                                                                 |
 | [`ChangeClusterModeAsClusterAdmin`](#changeclustermodeasclusteradmin)                                     | ChangeClusterModeAsClusterAdmin calls the ChangeClusterModeAsClusterAdmin operation.                                                                                     |
+| [`Clock`](#clock)                                                                                         | Clock returns the clock this client resolves cadence through.                                                                                                            |
 | [`CompleteJob`](#completejob)                                                                             | CompleteJob calls the CompleteJob operation.                                                                                                                             |
 | [`CompleteUserTask`](#completeusertask)                                                                   | CompleteUserTask calls the CompleteUserTask operation.                                                                                                                   |
 | [`Config`](#config)                                                                                       | Config returns the resolved configuration.                                                                                                                               |
 | [`CorrelateMessage`](#correlatemessage)                                                                   | CorrelateMessage calls the CorrelateMessage operation.                                                                                                                   |
 | [`CreateAdminUser`](#createadminuser)                                                                     | CreateAdminUser calls the CreateAdminUser operation.                                                                                                                     |
 | [`CreateAgentInstance`](#createagentinstance)                                                             | CreateAgentInstance calls the CreateAgentInstance operation.                                                                                                             |
-| [`CreateAgentInstanceHistoryItem`](#createagentinstancehistoryitem)                                       | CreateAgentInstanceHistoryItem calls the CreateAgentInstanceHistoryItem operation.                                                                                       |
 | [`CreateAuthorization`](#createauthorization)                                                             | CreateAuthorization calls the CreateAuthorization operation.                                                                                                             |
 | [`CreateDeployment`](#createdeployment)                                                                   | CreateDeployment calls the CreateDeployment operation.                                                                                                                   |
 | [`CreateDocument`](#createdocument)                                                                       | CreateDocument calls the CreateDocument operation.                                                                                                                       |
@@ -89,13 +90,16 @@ a ready-to-use client. Options take precedence over the environment.
 | [`DeleteGlobalTaskListener`](#deleteglobaltasklistener)                                                   | DeleteGlobalTaskListener calls the DeleteGlobalTaskListener operation.                                                                                                   |
 | [`DeleteGroup`](#deletegroup)                                                                             | DeleteGroup calls the DeleteGroup operation.                                                                                                                             |
 | [`DeleteHistoryBackup`](#deletehistorybackup)                                                             | DeleteHistoryBackup calls the DeleteHistoryBackup operation.                                                                                                             |
+| [`DeleteHistoryBackupAsClusterAdmin`](#deletehistorybackupasclusteradmin)                                 | DeleteHistoryBackupAsClusterAdmin calls the DeleteHistoryBackupAsClusterAdmin operation.                                                                                 |
 | [`DeleteMappingRule`](#deletemappingrule)                                                                 | DeleteMappingRule calls the DeleteMappingRule operation.                                                                                                                 |
 | [`DeleteProcessInstance`](#deleteprocessinstance)                                                         | DeleteProcessInstance calls the DeleteProcessInstance operation.                                                                                                         |
 | [`DeleteProcessInstancesBatchOperation`](#deleteprocessinstancesbatchoperation)                           | DeleteProcessInstancesBatchOperation calls the DeleteProcessInstancesBatchOperation operation.                                                                           |
 | [`DeleteResource`](#deleteresource)                                                                       | DeleteResource calls the DeleteResource operation.                                                                                                                       |
 | [`DeleteRole`](#deleterole)                                                                               | DeleteRole calls the DeleteRole operation.                                                                                                                               |
 | [`DeleteRuntimeBackup`](#deleteruntimebackup)                                                             | DeleteRuntimeBackup calls the DeleteRuntimeBackup operation.                                                                                                             |
+| [`DeleteRuntimeBackupAsClusterAdmin`](#deleteruntimebackupasclusteradmin)                                 | DeleteRuntimeBackupAsClusterAdmin calls the DeleteRuntimeBackupAsClusterAdmin operation.                                                                                 |
 | [`DeleteRuntimeBackupState`](#deleteruntimebackupstate)                                                   | DeleteRuntimeBackupState calls the DeleteRuntimeBackupState operation.                                                                                                   |
+| [`DeleteRuntimeBackupStateAsClusterAdmin`](#deleteruntimebackupstateasclusteradmin)                       | DeleteRuntimeBackupStateAsClusterAdmin calls the DeleteRuntimeBackupStateAsClusterAdmin operation.                                                                       |
 | [`DeleteTenant`](#deletetenant)                                                                           | DeleteTenant calls the DeleteTenant operation.                                                                                                                           |
 | [`DeleteTenantClusterVariable`](#deletetenantclustervariable)                                             | DeleteTenantClusterVariable calls the DeleteTenantClusterVariable operation.                                                                                             |
 | [`DeleteUser`](#deleteuser)                                                                               | DeleteUser calls the DeleteUser operation.                                                                                                                               |
@@ -109,8 +113,11 @@ a ready-to-use client. Options take precedence over the environment.
 | [`GetAuthentication`](#getauthentication)                                                                 | GetAuthentication calls the GetAuthentication operation.                                                                                                                 |
 | [`GetAuthorization`](#getauthorization)                                                                   | GetAuthorization calls the GetAuthorization operation.                                                                                                                   |
 | [`GetBatchOperation`](#getbatchoperation)                                                                 | GetBatchOperation calls the GetBatchOperation operation.                                                                                                                 |
+| [`GetClusterExportingStatus`](#getclusterexportingstatus)                                                 | GetClusterExportingStatus calls the GetClusterExportingStatus operation.                                                                                                 |
+| [`GetClusterRebalance`](#getclusterrebalance)                                                             | GetClusterRebalance calls the GetClusterRebalance operation.                                                                                                             |
 | [`GetClusterStatus`](#getclusterstatus)                                                                   | GetClusterStatus calls the GetClusterStatus operation.                                                                                                                   |
 | [`GetClusterTopology`](#getclustertopology)                                                               | GetClusterTopology calls the GetClusterTopology operation.                                                                                                               |
+| [`GetClusterUpgradeStatus`](#getclusterupgradestatus)                                                     | GetClusterUpgradeStatus calls the GetClusterUpgradeStatus operation.                                                                                                     |
 | [`GetDecisionDefinition`](#getdecisiondefinition)                                                         | GetDecisionDefinition calls the GetDecisionDefinition operation.                                                                                                         |
 | [`GetDecisionDefinitionXML`](#getdecisiondefinitionxml)                                                   | GetDecisionDefinitionXML calls the GetDecisionDefinitionXML operation.                                                                                                   |
 | [`GetDecisionInstance`](#getdecisioninstance)                                                             | GetDecisionInstance calls the GetDecisionInstance operation.                                                                                                             |
@@ -125,6 +132,7 @@ a ready-to-use client. Options take precedence over the environment.
 | [`GetGlobalTaskListener`](#getglobaltasklistener)                                                         | GetGlobalTaskListener calls the GetGlobalTaskListener operation.                                                                                                         |
 | [`GetGroup`](#getgroup)                                                                                   | GetGroup calls the GetGroup operation.                                                                                                                                   |
 | [`GetHistoryBackup`](#gethistorybackup)                                                                   | GetHistoryBackup calls the GetHistoryBackup operation.                                                                                                                   |
+| [`GetHistoryBackupAsClusterAdmin`](#gethistorybackupasclusteradmin)                                       | GetHistoryBackupAsClusterAdmin calls the GetHistoryBackupAsClusterAdmin operation.                                                                                       |
 | [`GetIncident`](#getincident)                                                                             | GetIncident calls the GetIncident operation.                                                                                                                             |
 | [`GetJobErrorStatistics`](#getjoberrorstatistics)                                                         | GetJobErrorStatistics calls the GetJobErrorStatistics operation.                                                                                                         |
 | [`GetJobTimeSeriesStatistics`](#getjobtimeseriesstatistics)                                               | GetJobTimeSeriesStatistics calls the GetJobTimeSeriesStatistics operation.                                                                                               |
@@ -151,7 +159,9 @@ a ready-to-use client. Options take precedence over the environment.
 | [`GetRestoreStatus`](#getrestorestatus)                                                                   | GetRestoreStatus calls the GetRestoreStatus operation.                                                                                                                   |
 | [`GetRole`](#getrole)                                                                                     | GetRole calls the GetRole operation.                                                                                                                                     |
 | [`GetRuntimeBackup`](#getruntimebackup)                                                                   | GetRuntimeBackup calls the GetRuntimeBackup operation.                                                                                                                   |
+| [`GetRuntimeBackupAsClusterAdmin`](#getruntimebackupasclusteradmin)                                       | GetRuntimeBackupAsClusterAdmin calls the GetRuntimeBackupAsClusterAdmin operation.                                                                                       |
 | [`GetRuntimeBackupState`](#getruntimebackupstate)                                                         | GetRuntimeBackupState calls the GetRuntimeBackupState operation.                                                                                                         |
+| [`GetRuntimeBackupStateAsClusterAdmin`](#getruntimebackupstateasclusteradmin)                             | GetRuntimeBackupStateAsClusterAdmin calls the GetRuntimeBackupStateAsClusterAdmin operation.                                                                             |
 | [`GetStartProcessForm`](#getstartprocessform)                                                             | GetStartProcessForm calls the GetStartProcessForm operation.                                                                                                             |
 | [`GetStatus`](#getstatus)                                                                                 | GetStatus calls the GetStatus operation.                                                                                                                                 |
 | [`GetSystemConfiguration`](#getsystemconfiguration)                                                       | GetSystemConfiguration calls the GetSystemConfiguration operation.                                                                                                       |
@@ -164,7 +174,9 @@ a ready-to-use client. Options take precedence over the environment.
 | [`GetUserTaskForm`](#getusertaskform)                                                                     | GetUserTaskForm calls the GetUserTaskForm operation.                                                                                                                     |
 | [`GetVariable`](#getvariable)                                                                             | GetVariable calls the GetVariable operation.                                                                                                                             |
 | [`ListHistoryBackups`](#listhistorybackups)                                                               | ListHistoryBackups calls the ListHistoryBackups operation.                                                                                                               |
+| [`ListHistoryBackupsAsClusterAdmin`](#listhistorybackupsasclusteradmin)                                   | ListHistoryBackupsAsClusterAdmin calls the ListHistoryBackupsAsClusterAdmin operation.                                                                                   |
 | [`ListRuntimeBackups`](#listruntimebackups)                                                               | ListRuntimeBackups calls the ListRuntimeBackups operation.                                                                                                               |
+| [`ListRuntimeBackupsAsClusterAdmin`](#listruntimebackupsasclusteradmin)                                   | ListRuntimeBackupsAsClusterAdmin calls the ListRuntimeBackupsAsClusterAdmin operation.                                                                                   |
 | [`ListSecrets`](#listsecrets)                                                                             | ListSecrets calls the ListSecrets operation.                                                                                                                             |
 | [`MigrateProcessInstance`](#migrateprocessinstance)                                                       | MigrateProcessInstance calls the MigrateProcessInstance operation.                                                                                                       |
 | [`MigrateProcessInstancesBatchOperation`](#migrateprocessinstancesbatchoperation)                         | MigrateProcessInstancesBatchOperation calls the MigrateProcessInstancesBatchOperation operation.                                                                         |
@@ -172,11 +184,14 @@ a ready-to-use client. Options take precedence over the environment.
 | [`ModifyProcessInstancesBatchOperation`](#modifyprocessinstancesbatchoperation)                           | ModifyProcessInstancesBatchOperation calls the ModifyProcessInstancesBatchOperation operation.                                                                           |
 | [`NewJobWorker`](#newjobworker)                                                                           | NewJobWorker creates a worker for jobType. Defaults are seeded from the client's CAMUNDA_WORKER_* configuration and can be overridden with options.                      |
 | [`NewStreamJobWorker`](#newstreamjobworker)                                                               | NewStreamJobWorker creates a gRPC streaming worker for jobType. Defaults are seeded from the client's CAMUNDA_WORKER_* configuration and can be overridden with options. |
+| [`PauseClusterExporting`](#pauseclusterexporting)                                                         | PauseClusterExporting calls the PauseClusterExporting operation.                                                                                                         |
 | [`PauseExporting`](#pauseexporting)                                                                       | PauseExporting calls the PauseExporting operation.                                                                                                                       |
+| [`PinAt`](#pinat)                                                                                         | PinAt moves the engine clock to t.                                                                                                                                       |
 | [`PinClock`](#pinclock)                                                                                   | PinClock calls the PinClock operation.                                                                                                                                   |
 | [`PublishMessage`](#publishmessage)                                                                       | PublishMessage calls the PublishMessage operation.                                                                                                                       |
 | [`Raw`](#raw)                                                                                             | Raw returns the underlying generated client for operations or options not yet surfaced on the ergonomic facade.                                                          |
 | [`ResetClock`](#resetclock)                                                                               | ResetClock calls the ResetClock operation.                                                                                                                               |
+| [`ResetToLive`](#resettolive)                                                                             | ResetToLive returns the engine clock to real time.                                                                                                                       |
 | [`ResolveIncident`](#resolveincident)                                                                     | ResolveIncident calls the ResolveIncident operation.                                                                                                                     |
 | [`ResolveIncidentsBatchOperation`](#resolveincidentsbatchoperation)                                       | ResolveIncidentsBatchOperation calls the ResolveIncidentsBatchOperation operation.                                                                                       |
 | [`ResolveProcessInstanceIncidents`](#resolveprocessinstanceincidents)                                     | ResolveProcessInstanceIncidents calls the ResolveProcessInstanceIncidents operation.                                                                                     |
@@ -184,6 +199,7 @@ a ready-to-use client. Options take precedence over the environment.
 | [`Restore`](#restore)                                                                                     | Restore calls the Restore operation.                                                                                                                                     |
 | [`RestoreAsClusterAdmin`](#restoreasclusteradmin)                                                         | RestoreAsClusterAdmin calls the RestoreAsClusterAdmin operation.                                                                                                         |
 | [`ResumeBatchOperation`](#resumebatchoperation)                                                           | ResumeBatchOperation calls the ResumeBatchOperation operation.                                                                                                           |
+| [`ResumeClusterExporting`](#resumeclusterexporting)                                                       | ResumeClusterExporting calls the ResumeClusterExporting operation.                                                                                                       |
 | [`ResumeExporting`](#resumeexporting)                                                                     | ResumeExporting calls the ResumeExporting operation.                                                                                                                     |
 | [`ResumeProcessInstance`](#resumeprocessinstance)                                                         | ResumeProcessInstance calls the ResumeProcessInstance operation.                                                                                                         |
 | [`ResumeProcessInstancesBatchOperation`](#resumeprocessinstancesbatchoperation)                           | ResumeProcessInstancesBatchOperation calls the ResumeProcessInstancesBatchOperation operation.                                                                           |
@@ -239,9 +255,13 @@ a ready-to-use client. Options take precedence over the environment.
 | [`SuspendProcessInstance`](#suspendprocessinstance)                                                       | SuspendProcessInstance calls the SuspendProcessInstance operation.                                                                                                       |
 | [`SuspendProcessInstancesBatchOperation`](#suspendprocessinstancesbatchoperation)                         | SuspendProcessInstancesBatchOperation calls the SuspendProcessInstancesBatchOperation operation.                                                                         |
 | [`SyncRuntimeBackupState`](#syncruntimebackupstate)                                                       | SyncRuntimeBackupState calls the SyncRuntimeBackupState operation.                                                                                                       |
+| [`SyncRuntimeBackupStateAsClusterAdmin`](#syncruntimebackupstateasclusteradmin)                           | SyncRuntimeBackupStateAsClusterAdmin calls the SyncRuntimeBackupStateAsClusterAdmin operation.                                                                           |
 | [`TakeHistoryBackup`](#takehistorybackup)                                                                 | TakeHistoryBackup calls the TakeHistoryBackup operation.                                                                                                                 |
+| [`TakeHistoryBackupAsClusterAdmin`](#takehistorybackupasclusteradmin)                                     | TakeHistoryBackupAsClusterAdmin calls the TakeHistoryBackupAsClusterAdmin operation.                                                                                     |
 | [`TakeRuntimeBackup`](#takeruntimebackup)                                                                 | TakeRuntimeBackup calls the TakeRuntimeBackup operation.                                                                                                                 |
+| [`TakeRuntimeBackupAsClusterAdmin`](#takeruntimebackupasclusteradmin)                                     | TakeRuntimeBackupAsClusterAdmin calls the TakeRuntimeBackupAsClusterAdmin operation.                                                                                     |
 | [`ThrowJobError`](#throwjoberror)                                                                         | ThrowJobError calls the ThrowJobError operation.                                                                                                                         |
+| [`TriggerClusterRebalance`](#triggerclusterrebalance)                                                     | TriggerClusterRebalance calls the TriggerClusterRebalance operation.                                                                                                     |
 | [`UnassignClientFromGroup`](#unassignclientfromgroup)                                                     | UnassignClientFromGroup calls the UnassignClientFromGroup operation.                                                                                                     |
 | [`UnassignClientFromTenant`](#unassignclientfromtenant)                                                   | UnassignClientFromTenant calls the UnassignClientFromTenant operation.                                                                                                   |
 | [`UnassignGroupFromTenant`](#unassigngroupfromtenant)                                                     | UnassignGroupFromTenant calls the UnassignGroupFromTenant operation.                                                                                                     |
@@ -551,6 +571,30 @@ Example:
 return client.CancelBatchOperation(ctx, "2251799813685290")
 ```
 
+### CancelClusterRebalance
+
+```go
+func (c *CamundaClient) CancelClusterRebalance(ctx context.Context, opts ...func(openapi.ApiCancelClusterRebalanceRequest) openapi.ApiCancelClusterRebalanceRequest) (*openapi.RebalanceCancellationResponse, error)
+```
+
+CancelClusterRebalance calls the CancelClusterRebalance operation.
+
+Example:
+
+```go
+// Requires cluster-admin credentials (a separate cluster-admin security chain) —
+// calling this with standard Orchestration credentials will fail authorization.
+resp, err := client.CancelClusterRebalance(ctx)
+if err != nil {
+	return err
+}
+if resp.GetWasRunning() {
+	fmt.Println("rebalance cancelled")
+} else {
+	fmt.Println("no rebalance was running")
+}
+```
+
 ### CancelProcessInstance
 
 ```go
@@ -626,6 +670,14 @@ if err != nil {
 }
 fmt.Printf("change %s: %d planned operation group(s)\n", result.GetChangeId(), len(result.GetPlannedChanges()))
 ```
+
+### Clock
+
+```go
+func (c *CamundaClient) Clock() Clock
+```
+
+Clock returns the clock this client resolves cadence through.
 
 ### CompleteJob
 
@@ -703,7 +755,8 @@ Example:
 
 ```go
 // One-time setup: create the initial administrator on a fresh cluster.
-result, err := client.CreateAdminUser(ctx, *openapi.NewUserRequest("ChangeMe123!", "admin"))
+// "admin-password-123" is a placeholder — don't hardcode passwords in production.
+result, err := client.CreateAdminUser(ctx, *openapi.NewUserRequest("admin-password-123", "admin"))
 if err != nil {
 	return err
 }
@@ -721,38 +774,24 @@ CreateAgentInstance calls the CreateAgentInstance operation.
 Example:
 
 ```go
-definition := openapi.NewAgentInstanceDefinition("gpt-4o", "openai", "You are a helpful assistant.")
-req := openapi.NewAgentInstanceCreationRequest(openapi.ModelString("2251799813685360"), *definition)
-
-result, err := client.CreateAgentInstance(ctx, *req)
-if err != nil {
-	return err
+systemPrompt := []openapi.AgentInstanceMessageContent{
+	openapi.AgentInstanceTextContentAsAgentInstanceMessageContent(
+		openapi.NewAgentInstanceTextContent("TEXT", "You are a helpful assistant.")),
 }
-fmt.Printf("%v\n", result)
-```
+configItem := openapi.NewAgentInstanceHistoryItem(
+	"config-1", openapi.MustLoopIterationId(1), openapi.AGENTINSTANCEHISTORYROLEENUM_CONFIGURATION, nil, time.Now())
+configItem.SetModel("gpt-4o")
+configItem.SetProvider("openai")
+configItem.SetSystemPrompt(systemPrompt)
 
-### CreateAgentInstanceHistoryItem
-
-```go
-func (c *CamundaClient) CreateAgentInstanceHistoryItem(ctx context.Context, agentInstanceKey openapi.AgentInstanceKey, body openapi.AgentInstanceHistoryItemRequest, opts ...func(openapi.ApiCreateAgentInstanceHistoryItemRequest) openapi.ApiCreateAgentInstanceHistoryItemRequest) (*openapi.AgentInstanceHistoryItemCreationResult, error)
-```
-
-CreateAgentInstanceHistoryItem calls the CreateAgentInstanceHistoryItem operation.
-
-Example:
-
-```go
-req := openapi.NewAgentInstanceHistoryItemRequest(
-	openapi.ModelString("2251799813685360"), // elementInstanceKey
-	openapi.ModelString("2251799813685424"), // jobKey
+req := openapi.NewAgentInstanceCreationRequest(
+	openapi.ElementInstanceKey("2251799813685360"), // elementInstanceKey
+	openapi.JobKey("2251799813685424"),             // jobKey
 	"lease-token",
-	openapi.AGENTINSTANCEHISTORYROLEENUM_USER,
-	nil, // message content
-	time.Now(),
+	[]openapi.AgentInstanceHistoryItem{*configItem}, // history
 )
 
-result, err := client.CreateAgentInstanceHistoryItem(ctx,
-	openapi.MustAgentInstanceKey("2251799813685370"), *req)
+result, err := client.CreateAgentInstance(ctx, *req)
 if err != nil {
 	return err
 }
@@ -1058,7 +1097,8 @@ CreateUser calls the CreateUser operation.
 Example:
 
 ```go
-req := openapi.NewUserRequest("s3cret!", "alice")
+// "secure-password-123" is a placeholder — don't hardcode passwords in production.
+req := openapi.NewUserRequest("secure-password-123", "alice")
 req.SetName("Alice Example")
 req.SetEmail("alice@example.com")
 
@@ -1191,6 +1231,22 @@ if err := client.DeleteHistoryBackup(ctx, 42); err != nil {
 }
 ```
 
+### DeleteHistoryBackupAsClusterAdmin
+
+```go
+func (c *CamundaClient) DeleteHistoryBackupAsClusterAdmin(ctx context.Context, backupId int64, opts ...func(openapi.ApiDeleteHistoryBackupAsClusterAdminRequest) openapi.ApiDeleteHistoryBackupAsClusterAdminRequest) error
+```
+
+DeleteHistoryBackupAsClusterAdmin calls the DeleteHistoryBackupAsClusterAdmin operation.
+
+Example:
+
+```go
+if err := client.DeleteHistoryBackupAsClusterAdmin(ctx, 42); err != nil {
+	return err
+}
+```
+
 ### DeleteMappingRule
 
 ```go
@@ -1291,6 +1347,23 @@ if err := client.DeleteRuntimeBackup(ctx, 42); err != nil {
 }
 ```
 
+### DeleteRuntimeBackupAsClusterAdmin
+
+```go
+func (c *CamundaClient) DeleteRuntimeBackupAsClusterAdmin(ctx context.Context, backupId int64, opts ...func(openapi.ApiDeleteRuntimeBackupAsClusterAdminRequest) openapi.ApiDeleteRuntimeBackupAsClusterAdminRequest) error
+```
+
+DeleteRuntimeBackupAsClusterAdmin calls the DeleteRuntimeBackupAsClusterAdmin operation.
+
+Example:
+
+```go
+// Deletes the runtime backup with the given id from all physical tenants.
+if err := client.DeleteRuntimeBackupAsClusterAdmin(ctx, 42); err != nil {
+	return err
+}
+```
+
 ### DeleteRuntimeBackupState
 
 ```go
@@ -1303,6 +1376,23 @@ Example:
 
 ```go
 if err := client.DeleteRuntimeBackupState(ctx); err != nil {
+	return err
+}
+```
+
+### DeleteRuntimeBackupStateAsClusterAdmin
+
+```go
+func (c *CamundaClient) DeleteRuntimeBackupStateAsClusterAdmin(ctx context.Context, opts ...func(openapi.ApiDeleteRuntimeBackupStateAsClusterAdminRequest) openapi.ApiDeleteRuntimeBackupStateAsClusterAdminRequest) error
+```
+
+DeleteRuntimeBackupStateAsClusterAdmin calls the DeleteRuntimeBackupStateAsClusterAdmin operation.
+
+Example:
+
+```go
+// Clears the persisted runtime backup state across all physical tenants.
+if err := client.DeleteRuntimeBackupStateAsClusterAdmin(ctx); err != nil {
 	return err
 }
 ```
@@ -1542,6 +1632,48 @@ if err != nil {
 fmt.Printf("%v\n", op)
 ```
 
+### GetClusterExportingStatus
+
+```go
+func (c *CamundaClient) GetClusterExportingStatus(ctx context.Context, opts ...func(openapi.ApiGetClusterExportingStatusRequest) openapi.ApiGetClusterExportingStatusRequest) (*openapi.ExportingStatusResponse, error)
+```
+
+GetClusterExportingStatus calls the GetClusterExportingStatus operation.
+
+Example:
+
+```go
+// Retrieves the exporting status aggregated across all physical tenants in the cluster.
+status, err := client.GetClusterExportingStatus(ctx)
+if err != nil {
+	return err
+}
+fmt.Printf("cluster exporting status: %s\n", status.GetStatus())
+```
+
+### GetClusterRebalance
+
+```go
+func (c *CamundaClient) GetClusterRebalance(ctx context.Context, opts ...func(openapi.ApiGetClusterRebalanceRequest) openapi.ApiGetClusterRebalanceRequest) (*openapi.ClusterBalanceResponse, error)
+```
+
+GetClusterRebalance calls the GetClusterRebalance operation.
+
+Example:
+
+```go
+// Requires cluster-admin credentials (a separate cluster-admin security chain) —
+// calling this with standard Orchestration credentials will fail authorization.
+balance, err := client.GetClusterRebalance(ctx)
+if err != nil {
+	return err
+}
+fmt.Printf("cluster balance state: %s, %d partition(s)\n", balance.GetState(), len(balance.GetPartitions()))
+if running, ok := balance.GetRunningRebalanceOk(); ok && running != nil {
+	fmt.Printf("rebalance in progress: %v\n", running)
+}
+```
+
 ### GetClusterStatus
 
 ```go
@@ -1581,6 +1713,26 @@ if err != nil {
 }
 fmt.Printf("cluster %s — %d broker(s), %d physical tenant(s)\n",
 	topology.GetClusterId(), len(topology.GetBrokers()), len(topology.GetPhysicalTenants()))
+```
+
+### GetClusterUpgradeStatus
+
+```go
+func (c *CamundaClient) GetClusterUpgradeStatus(ctx context.Context, opts ...func(openapi.ApiGetClusterUpgradeStatusRequest) openapi.ApiGetClusterUpgradeStatusRequest) (*openapi.ClusterUpgradeStatusResponse, error)
+```
+
+GetClusterUpgradeStatus calls the GetClusterUpgradeStatus operation.
+
+**Example**
+
+```go
+// One overall status folded over every physical tenant and condition:
+// MIGRATED, MIGRATION_IN_PROGRESS, or UNKNOWN before anything has been reported yet.
+status, err := client.GetClusterUpgradeStatus(ctx)
+if err != nil {
+	return err
+}
+fmt.Printf("cluster upgrade status: %s\n", status.GetStatus())
 ```
 
 ### GetDecisionDefinition
@@ -1836,6 +1988,26 @@ if err != nil {
 fmt.Printf("history backup %d state=%v\n", backup.GetBackupId(), backup.GetState())
 for _, snapshot := range backup.GetDetails() {
 	fmt.Printf("  snapshot %v\n", snapshot)
+}
+```
+
+### GetHistoryBackupAsClusterAdmin
+
+```go
+func (c *CamundaClient) GetHistoryBackupAsClusterAdmin(ctx context.Context, backupId int64, opts ...func(openapi.ApiGetHistoryBackupAsClusterAdminRequest) openapi.ApiGetHistoryBackupAsClusterAdminRequest) (*openapi.ClusterHistoryBackupInfo, error)
+```
+
+GetHistoryBackupAsClusterAdmin calls the GetHistoryBackupAsClusterAdmin operation.
+
+Example:
+
+```go
+backup, err := client.GetHistoryBackupAsClusterAdmin(ctx, 42)
+if err != nil {
+	return err
+}
+for _, tenant := range backup.GetPhysicalTenants() {
+	fmt.Printf("tenant %s: state=%v\n", tenant.GetPhysicalTenantId(), tenant.GetState())
 }
 ```
 
@@ -2336,6 +2508,27 @@ for _, partition := range backup.GetDetails() {
 }
 ```
 
+### GetRuntimeBackupAsClusterAdmin
+
+```go
+func (c *CamundaClient) GetRuntimeBackupAsClusterAdmin(ctx context.Context, backupId int64, opts ...func(openapi.ApiGetRuntimeBackupAsClusterAdminRequest) openapi.ApiGetRuntimeBackupAsClusterAdminRequest) (*openapi.ClusterRuntimeBackupInfo, error)
+```
+
+GetRuntimeBackupAsClusterAdmin calls the GetRuntimeBackupAsClusterAdmin operation.
+
+Example:
+
+```go
+backup, err := client.GetRuntimeBackupAsClusterAdmin(ctx, 42)
+if err != nil {
+	return err
+}
+fmt.Printf("cluster runtime backup %d: state=%v\n", backup.GetBackupId(), backup.GetState())
+for _, tenant := range backup.GetPhysicalTenants() {
+	fmt.Printf("  tenant %v\n", tenant)
+}
+```
+
 ### GetRuntimeBackupState
 
 ```go
@@ -2353,6 +2546,27 @@ if err != nil {
 }
 for _, checkpoint := range state.GetCheckpointStates() {
 	fmt.Printf("%v\n", checkpoint)
+}
+```
+
+### GetRuntimeBackupStateAsClusterAdmin
+
+```go
+func (c *CamundaClient) GetRuntimeBackupStateAsClusterAdmin(ctx context.Context, opts ...func(openapi.ApiGetRuntimeBackupStateAsClusterAdminRequest) openapi.ApiGetRuntimeBackupStateAsClusterAdminRequest) (*openapi.ClusterRuntimeBackupState, error)
+```
+
+GetRuntimeBackupStateAsClusterAdmin calls the GetRuntimeBackupStateAsClusterAdmin operation.
+
+Example:
+
+```go
+// Returns the runtime backup state for every physical tenant in the cluster.
+state, err := client.GetRuntimeBackupStateAsClusterAdmin(ctx)
+if err != nil {
+	return err
+}
+for _, tenant := range state.GetPhysicalTenants() {
+	fmt.Printf("%v\n", tenant)
 }
 ```
 
@@ -2575,6 +2789,27 @@ for _, backup := range backups {
 }
 ```
 
+### ListHistoryBackupsAsClusterAdmin
+
+```go
+func (c *CamundaClient) ListHistoryBackupsAsClusterAdmin(ctx context.Context, opts ...func(openapi.ApiListHistoryBackupsAsClusterAdminRequest) openapi.ApiListHistoryBackupsAsClusterAdminRequest) ([]openapi.ClusterHistoryBackupInfo, error)
+```
+
+ListHistoryBackupsAsClusterAdmin calls the ListHistoryBackupsAsClusterAdmin operation.
+
+Example:
+
+```go
+// Lists history backups across all physical tenants in the cluster.
+backups, err := client.ListHistoryBackupsAsClusterAdmin(ctx)
+if err != nil {
+	return err
+}
+for _, backup := range backups {
+	fmt.Printf("cluster history backup %d: %d tenant(s)\n", backup.GetBackupId(), len(backup.GetPhysicalTenants()))
+}
+```
+
 ### ListRuntimeBackups
 
 ```go
@@ -2592,6 +2827,28 @@ if err != nil {
 }
 for _, backup := range backups {
 	fmt.Printf("backup %v is %v\n", backup.GetBackupId(), backup.GetState())
+}
+```
+
+### ListRuntimeBackupsAsClusterAdmin
+
+```go
+func (c *CamundaClient) ListRuntimeBackupsAsClusterAdmin(ctx context.Context, opts ...func(openapi.ApiListRuntimeBackupsAsClusterAdminRequest) openapi.ApiListRuntimeBackupsAsClusterAdminRequest) ([]openapi.ClusterRuntimeBackupInfo, error)
+```
+
+ListRuntimeBackupsAsClusterAdmin calls the ListRuntimeBackupsAsClusterAdmin operation.
+
+Example:
+
+```go
+// Lists runtime backups across all physical tenants in the cluster.
+backups, err := client.ListRuntimeBackupsAsClusterAdmin(ctx)
+if err != nil {
+	return err
+}
+for _, backup := range backups {
+	fmt.Printf("cluster runtime backup %d: state=%v, %d tenant(s)\n",
+		backup.GetBackupId(), backup.GetState(), len(backup.GetPhysicalTenants()))
 }
 ```
 
@@ -2628,7 +2885,7 @@ Example:
 
 ```go
 instruction := openapi.NewProcessInstanceMigrationInstruction(
-	openapi.ModelString("2251799813685399"),
+	openapi.ProcessDefinitionKey("2251799813685399"),
 	[]openapi.MigrateProcessInstanceMappingInstruction{
 		*openapi.NewMigrateProcessInstanceMappingInstruction("review", "review-v2"),
 	})
@@ -2648,7 +2905,7 @@ Example:
 
 ```go
 plan := openapi.NewProcessInstanceMigrationBatchOperationPlan(
-	openapi.ModelString("2251799813685399"),
+	openapi.ProcessDefinitionKey("2251799813685399"),
 	[]openapi.MigrateProcessInstanceMappingInstruction{
 		*openapi.NewMigrateProcessInstanceMappingInstruction("review", "review-v2"),
 	})
@@ -2720,6 +2977,24 @@ NewStreamJobWorker creates a gRPC streaming worker for jobType. Defaults are
 seeded from the client's CAMUNDA_WORKER_* configuration and can be overridden
 with options.
 
+### PauseClusterExporting
+
+```go
+func (c *CamundaClient) PauseClusterExporting(ctx context.Context, opts ...func(openapi.ApiPauseClusterExportingRequest) openapi.ApiPauseClusterExportingRequest) error
+```
+
+PauseClusterExporting calls the PauseClusterExporting operation.
+
+Example:
+
+```go
+// Pauses exporting across all physical tenants in the cluster.
+// While paused, reads from secondary storage stop advancing for every tenant.
+if err := client.PauseClusterExporting(ctx); err != nil {
+	return err
+}
+```
+
 ### PauseExporting
 
 ```go
@@ -2736,6 +3011,14 @@ if err := client.PauseExporting(ctx); err != nil {
 	return err
 }
 ```
+
+### PinAt
+
+```go
+func (c *CamundaClient) PinAt(ctx context.Context, t time.Time) error
+```
+
+PinAt moves the engine clock to t.
 
 ### PinClock
 
@@ -2798,6 +3081,14 @@ Example:
 // Release a previously pinned clock back to system time.
 return client.ResetClock(ctx)
 ```
+
+### ResetToLive
+
+```go
+func (c *CamundaClient) ResetToLive(ctx context.Context) error
+```
+
+ResetToLive returns the engine clock to real time.
 
 ### ResolveIncident
 
@@ -2931,6 +3222,23 @@ Example:
 
 ```go
 return client.ResumeBatchOperation(ctx, "2251799813685290")
+```
+
+### ResumeClusterExporting
+
+```go
+func (c *CamundaClient) ResumeClusterExporting(ctx context.Context, opts ...func(openapi.ApiResumeClusterExportingRequest) openapi.ApiResumeClusterExportingRequest) error
+```
+
+ResumeClusterExporting calls the ResumeClusterExporting operation.
+
+Example:
+
+```go
+// Resumes exporting across all physical tenants in the cluster.
+if err := client.ResumeClusterExporting(ctx); err != nil {
+	return err
+}
 ```
 
 ### ResumeExporting
@@ -3554,7 +3862,7 @@ for _, s := range result.GetItems() {
 ### SearchOwnAuthorizations
 
 ```go
-func (c *CamundaClient) SearchOwnAuthorizations(ctx context.Context, body openapi.AuthorizationSearchQuery, opts ...func(openapi.ApiSearchOwnAuthorizationsRequest) openapi.ApiSearchOwnAuthorizationsRequest) (*openapi.AuthorizationSearchResult, error)
+func (c *CamundaClient) SearchOwnAuthorizations(ctx context.Context, body openapi.AuthorizationSearchQuery, opts ...func(openapi.ApiSearchOwnAuthorizationsRequest) openapi.ApiSearchOwnAuthorizationsRequest) (*openapi.OwnAuthorizationSearchResult, error)
 ```
 
 SearchOwnAuthorizations calls the SearchOwnAuthorizations operation.
@@ -3997,6 +4305,29 @@ for _, backup := range state.GetBackupStates() {
 }
 ```
 
+### SyncRuntimeBackupStateAsClusterAdmin
+
+```go
+func (c *CamundaClient) SyncRuntimeBackupStateAsClusterAdmin(ctx context.Context, opts ...func(openapi.ApiSyncRuntimeBackupStateAsClusterAdminRequest) openapi.ApiSyncRuntimeBackupStateAsClusterAdminRequest) (*openapi.ClusterRuntimeBackupState, error)
+```
+
+SyncRuntimeBackupStateAsClusterAdmin calls the SyncRuntimeBackupStateAsClusterAdmin operation.
+
+Example:
+
+```go
+// Force-writes the current checkpoint/backup metadata to each physical tenant's
+// backup store and returns the updated state. Use this to repair stale or missing
+// state entries without triggering a new backup.
+state, err := client.SyncRuntimeBackupStateAsClusterAdmin(ctx)
+if err != nil {
+	return err
+}
+for _, tenant := range state.GetPhysicalTenants() {
+	fmt.Printf("%v\n", tenant)
+}
+```
+
 ### TakeHistoryBackup
 
 ```go
@@ -4013,6 +4344,25 @@ if err != nil {
 	return err
 }
 fmt.Printf("backup %d scheduled %d snapshot(s)\n", result.GetBackupId(), len(result.GetScheduledSnapshots()))
+```
+
+### TakeHistoryBackupAsClusterAdmin
+
+```go
+func (c *CamundaClient) TakeHistoryBackupAsClusterAdmin(ctx context.Context, body openapi.TakeHistoryBackupRequest, opts ...func(openapi.ApiTakeHistoryBackupAsClusterAdminRequest) openapi.ApiTakeHistoryBackupAsClusterAdminRequest) (*openapi.ClusterTakeHistoryBackupResponse, error)
+```
+
+TakeHistoryBackupAsClusterAdmin calls the TakeHistoryBackupAsClusterAdmin operation.
+
+Example:
+
+```go
+// Takes a history backup for every physical tenant in the cluster simultaneously.
+result, err := client.TakeHistoryBackupAsClusterAdmin(ctx, *openapi.NewTakeHistoryBackupRequest(42))
+if err != nil {
+	return err
+}
+fmt.Printf("cluster history backup %d across %d tenant(s)\n", result.GetBackupId(), len(result.GetPhysicalTenants()))
 ```
 
 ### TakeRuntimeBackup
@@ -4039,6 +4389,33 @@ if err != nil {
 fmt.Printf("%v\n", result)
 ```
 
+### TakeRuntimeBackupAsClusterAdmin
+
+```go
+func (c *CamundaClient) TakeRuntimeBackupAsClusterAdmin(ctx context.Context, body openapi.TakeRuntimeBackupRequest, opts ...func(openapi.ApiTakeRuntimeBackupAsClusterAdminRequest) openapi.ApiTakeRuntimeBackupAsClusterAdminRequest) (*openapi.ClusterTakeRuntimeBackupResponse, error)
+```
+
+TakeRuntimeBackupAsClusterAdmin calls the TakeRuntimeBackupAsClusterAdmin operation.
+
+Example:
+
+```go
+// Takes a runtime backup across every physical tenant in the cluster simultaneously.
+// Pass SetBackupId to use an explicit backup ID; omit it to let the cluster
+// generate one automatically (generated-id mode). Do not mix modes: sending a
+// backup ID when the cluster is configured for generated IDs will be rejected.
+req := openapi.NewTakeRuntimeBackupRequest()
+req.SetBackupId(42)
+
+result, err := client.TakeRuntimeBackupAsClusterAdmin(ctx, *req)
+if err != nil {
+	return err
+}
+for _, tenant := range result.GetPhysicalTenants() {
+	fmt.Printf("%v\n", tenant)
+}
+```
+
 ### ThrowJobError
 
 ```go
@@ -4054,6 +4431,30 @@ req := openapi.NewJobErrorRequest("OUT_OF_STOCK")
 req.SetErrorMessage("item is out of stock")
 
 return client.ThrowJobError(ctx, openapi.MustJobKey("2251799813685424"), *req)
+```
+
+### TriggerClusterRebalance
+
+```go
+func (c *CamundaClient) TriggerClusterRebalance(ctx context.Context, body openapi.ClusterRebalanceRequest, opts ...func(openapi.ApiTriggerClusterRebalanceRequest) openapi.ApiTriggerClusterRebalanceRequest) (*openapi.ClusterBalanceResponse, error)
+```
+
+TriggerClusterRebalance calls the TriggerClusterRebalance operation.
+
+Example:
+
+```go
+// Starts a cluster rebalance, redistributing partition leadership to the preferred nodes.
+// Requires cluster-admin credentials (a separate cluster-admin security chain) —
+// calling this with standard Orchestration credentials will fail authorization.
+req := openapi.NewClusterRebalanceRequest()
+req.SetReplicationLagThreshold(1024 * 1024) // 1 MiB max lag for leader transfer
+
+balance, err := client.TriggerClusterRebalance(ctx, *req)
+if err != nil {
+	return err
+}
+fmt.Printf("cluster balance state: %s, %d partition(s)\n", balance.GetState(), len(balance.GetPartitions()))
 ```
 
 ### UnassignClientFromGroup
@@ -4249,7 +4650,11 @@ UpdateAgentInstance calls the UpdateAgentInstance operation.
 Example:
 
 ```go
-req := openapi.NewAgentInstanceUpdateRequest(openapi.ModelString("2251799813685360"))
+req := openapi.NewAgentInstanceUpdateRequest(
+	openapi.ElementInstanceKey("2251799813685360"), // elementInstanceKey
+	openapi.JobKey("2251799813685424"),             // jobKey
+	"lease-token",
+)
 
 result, err := client.UpdateAgentInstance(ctx, openapi.MustAgentInstanceKey("2251799813685370"), *req)
 if err != nil {

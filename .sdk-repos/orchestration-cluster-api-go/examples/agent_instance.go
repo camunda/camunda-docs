@@ -12,8 +12,22 @@ import (
 
 func createAgentInstanceExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateAgentInstance
-	definition := openapi.NewAgentInstanceDefinition("gpt-4o", "openai", "You are a helpful assistant.")
-	req := openapi.NewAgentInstanceCreationRequest(openapi.ModelString("2251799813685360"), *definition)
+	systemPrompt := []openapi.AgentInstanceMessageContent{
+		openapi.AgentInstanceTextContentAsAgentInstanceMessageContent(
+			openapi.NewAgentInstanceTextContent("TEXT", "You are a helpful assistant.")),
+	}
+	configItem := openapi.NewAgentInstanceHistoryItem(
+		"config-1", openapi.MustLoopIterationId(1), openapi.AGENTINSTANCEHISTORYROLEENUM_CONFIGURATION, nil, time.Now())
+	configItem.SetModel("gpt-4o")
+	configItem.SetProvider("openai")
+	configItem.SetSystemPrompt(systemPrompt)
+
+	req := openapi.NewAgentInstanceCreationRequest(
+		openapi.ElementInstanceKey("2251799813685360"), // elementInstanceKey
+		openapi.JobKey("2251799813685424"),             // jobKey
+		"lease-token",
+		[]openapi.AgentInstanceHistoryItem{*configItem}, // history
+	)
 
 	result, err := client.CreateAgentInstance(ctx, *req)
 	if err != nil {
@@ -37,7 +51,11 @@ func getAgentInstanceExample(ctx context.Context, client *camunda.CamundaClient)
 
 func updateAgentInstanceExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region UpdateAgentInstance
-	req := openapi.NewAgentInstanceUpdateRequest(openapi.ModelString("2251799813685360"))
+	req := openapi.NewAgentInstanceUpdateRequest(
+		openapi.ElementInstanceKey("2251799813685360"), // elementInstanceKey
+		openapi.JobKey("2251799813685424"),             // jobKey
+		"lease-token",
+	)
 
 	result, err := client.UpdateAgentInstance(ctx, openapi.MustAgentInstanceKey("2251799813685370"), *req)
 	if err != nil {
@@ -58,27 +76,6 @@ func searchAgentInstancesExample(ctx context.Context, client *camunda.CamundaCli
 		fmt.Printf("%v\n", a)
 	}
 	// endregion SearchAgentInstances
-	return nil
-}
-
-func createAgentInstanceHistoryItemExample(ctx context.Context, client *camunda.CamundaClient) error {
-	// region CreateAgentInstanceHistoryItem
-	req := openapi.NewAgentInstanceHistoryItemRequest(
-		openapi.ModelString("2251799813685360"), // elementInstanceKey
-		openapi.ModelString("2251799813685424"), // jobKey
-		"lease-token",
-		openapi.AGENTINSTANCEHISTORYROLEENUM_USER,
-		nil, // message content
-		time.Now(),
-	)
-
-	result, err := client.CreateAgentInstanceHistoryItem(ctx,
-		openapi.MustAgentInstanceKey("2251799813685370"), *req)
-	if err != nil {
-		return err
-	}
-	fmt.Printf("%v\n", result)
-	// endregion CreateAgentInstanceHistoryItem
 	return nil
 }
 
