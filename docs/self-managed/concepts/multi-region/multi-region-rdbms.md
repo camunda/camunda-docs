@@ -90,7 +90,7 @@ It is still a full region: the brokers there hold data and process work like any
 
 The only rule is that **no single zone may hold half the replicas or more**, or losing that zone stops the engine. A `4-1-1` layout across three zones fails it: losing the first leaves two replicas of six.
 
-Zone awareness also assigns a Raft election priority per zone. Give the zone that hosts the database writer the highest priority. Partition leaders then stay next to it, which avoids an inter-region round trip on every export flush.
+Zone awareness also assigns a Raft election priority per zone. Give the zone that hosts the database writer the highest priority. Elections then favor leaders next to the writer, which reduces inter-region round trips on export flushes. The priority biases elections but does not pin leaders: move existing leaders with a rebalance.
 
 ### Replication-agnostic secondary storage
 
@@ -200,7 +200,7 @@ The reference implementation confirms this rather than assuming it, and refuses 
 
 ## Region failure and recovery
 
-Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority, so the cluster keeps its quorum. **You need no operator step to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
+Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. When every declared zone runs and no zone holds half the replicas or more, the remaining replicas still form a majority, so the cluster keeps its quorum. **You need no operator step to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
 
 Two things still need attention.
 
