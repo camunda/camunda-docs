@@ -144,7 +144,7 @@ The chart still injects `CAMUNDA_CLUSTER_ZONE` into the pod environment, because
 
 The chart rejects the inputs that would otherwise render a cluster that cannot form:
 
-| Rejected                                                                                        | Why                                                                                                                                        |
+| Rejected                                                                                        | What would happen without the check                                                                                                        |
 | :---------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
 | `zone` or `zones` set while `scheme` is not `zone-aware`                                        | The topology would be ignored and the cluster would come up single-region with no bootstrap peers.                                         |
 | `zone` unset, or naming a zone absent from `zones`                                              | The release would take the broker IDs of the first zone and collide with it.                                                               |
