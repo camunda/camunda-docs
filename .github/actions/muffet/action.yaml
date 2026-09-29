@@ -16,6 +16,19 @@ inputs:
     description: Version tag of Muffet CLI tool
     required: false
 
+  exclude:
+    description: |
+      Regular expression matching URLs to skip, passed to Muffet's `--exclude`.
+
+      Muffet matches this against the link found on the page, not against the
+      target of any redirect that link follows.
+    required: false
+
+  timeout:
+    default: "30"
+    description: Timeout for HTTP requests in seconds
+    required: false
+
 runs:
   using: composite
   steps:
@@ -31,6 +44,8 @@ runs:
         echo "-----"
         echo "Muffet version  : ${{ inputs.muffet_version }}"
         echo "URL to validate : ${{ inputs.url_to_validate }}"
+        echo "Timeout         : ${{ inputs.timeout }}"
+        echo "Exclude         : ${{ inputs.exclude }}"
     - name: Restore cache
       uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       id: tool-cache-muffet
@@ -52,5 +67,13 @@ runs:
         echo "$MUFFET_DIR" >> "$GITHUB_PATH"
     - name: Validate URLs
       shell: bash
+      env:
+        URL_TO_VALIDATE: ${{ inputs.url_to_validate }}
+        MUFFET_EXCLUDE: ${{ inputs.exclude }}
+        MUFFET_TIMEOUT: ${{ inputs.timeout }}
       run: |-
-        muffet --one-page-only --verbose ${{ inputs.url_to_validate }}
+        args=(--one-page-only --verbose --timeout "$MUFFET_TIMEOUT")
+        while IFS= read -r pattern; do
+          [[ -n "$pattern" ]] && args+=(--exclude "$pattern")
+        done <<< "$MUFFET_EXCLUDE"
+        muffet "${args[@]}" "$URL_TO_VALIDATE"

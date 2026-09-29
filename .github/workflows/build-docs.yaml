@@ -125,6 +125,12 @@ jobs:
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/product-links.html
+          # This link redirects to unsupported.docs.camunda.io, an archived docs
+          # site outside this repo's control that is slow enough to exceed
+          # Muffet's timeout and drops connections under repeated requests.
+          # Muffet matches --exclude against the link on the page rather than
+          # the redirect target, so the local path is excluded here.
+          exclude: apis-clients/go-client
       - name: Validate element template links
         uses: ./.github/actions/muffet
         with:
