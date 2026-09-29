@@ -11,6 +11,11 @@ inputs:
     description: URL of a page containing links to check with Muffet
     required: true
 
+  exclude_file:
+    default: ""
+    description: Path to a file of URL regexes, one per line, that Muffet should not check
+    required: false
+
   muffet_version:
     default: v2.10.8
     description: Version tag of Muffet CLI tool
@@ -53,5 +58,13 @@ runs:
 
     - name: Validate URLs
       shell: bash
+      env:
+        EXCLUDE_FILE: ${{ inputs.exclude_file }}
       run: |-
-        muffet --one-page-only --verbose ${{ inputs.url_to_validate }}
+        exclude_args=()
+        if [[ -n "$EXCLUDE_FILE" ]]; then
+          while IFS= read -r pattern; do
+            [[ -n "$pattern" ]] && exclude_args+=(--exclude "$pattern")
+          done < "$EXCLUDE_FILE"
+        fi
+        muffet --one-page-only --verbose "${exclude_args[@]}" ${{ inputs.url_to_validate }}

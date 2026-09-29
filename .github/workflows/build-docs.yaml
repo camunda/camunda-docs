@@ -83,15 +83,6 @@ jobs:
       - name: Remove https redirect
         run: |
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
-
-      # Archived docs versions aren't built locally, which means if the docs site has an outage or slow page load times,
-      # the validate-links pipeline fails. Unsupported URLs are low priority, so we won't verify those on every PR.
-      # Instead, we'll verify them in a separate scheduled pipeline. (issue #10127)
-      # By replacing those redirects with '/' we will always get a 200.
-      - name: Ignore unsupported redirects
-        run: |
-          sed -i 's|https://unsupported\.docs\.camunda\.io[^ ]*|/|g' build/.htaccess
-
       - name: Run a web server for link checking
         run: |
           docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnamilegacy/apache:2.4.54
@@ -107,6 +98,19 @@ jobs:
       - name: Remove known broken anchors.
         run: |
           sed -i 's!power-automate/#oauth-token-endpoint!power-automate/!g' connectors-element-template-links.txt
+      # Archived docs versions aren't built locally, so links that redirect to unsupported.docs.camunda.io depend on
+      # that site's availability. They're low priority, so we defer them to a separate scheduled pipeline. (issue #10127)
+      # Each RewriteRule pattern targeting the unsupported site becomes a Muffet exclude regex for the local URL.
+      - name: Build exclude list of unsupported redirects
+        run: |
+          awk '$1 == "RewriteRule" && $3 ~ /^https:\/\/unsupported\.docs\.camunda\.io/ {
+            pattern = $2
+            sub(/^\^/, "", pattern)
+            if (sub(/\$$/, "", pattern)) pattern = pattern "([?#].*)?$"
+            print "^https?://[^/]+/" pattern
+          }' build/.htaccess > "${RUNNER_TEMP}/unsupported-redirects.txt"
+          echo "Deferring $(wc -l < "${RUNNER_TEMP}/unsupported-redirects.txt") unsupported redirect pattern(s):"
+          cat "${RUNNER_TEMP}/unsupported-redirects.txt"
       - name: Prepare link collections
         # Turn static lists of URLs into HTML files with anchor tags.
         run: |
@@ -130,14 +134,17 @@ jobs:
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/sitemap-prod.html
+          exclude_file: ${{ runner.temp }}/unsupported-redirects.txt
       - name: Validate product links
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/product-links.html
+          exclude_file: ${{ runner.temp }}/unsupported-redirects.txt
       - name: Validate element template links
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/connectors-element-template-links.html
+          exclude_file: ${{ runner.temp }}/unsupported-redirects.txt
       - name: Observe build status
         if: always()
         continue-on-error: true
