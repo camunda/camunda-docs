@@ -84,9 +84,9 @@ See [reliability testing](https://github.com/camunda/camunda/blob/main/docs/test
 
 <TabItem value="elasticsearch">
 
-This baseline includes Optimize, which is the main driver of Elasticsearch sizing here: its importer reads from and writes to Elasticsearch indices on top of the primary export traffic. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the resource breakdown.
+This baseline includes Optimize, which is the main driver of Elasticsearch sizing in this configuration. Its importer reads from and writes to Elasticsearch indices in addition to the primary export traffic. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
 
-The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch.
+The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch.
 
 | Component                 |                     | Request | Limit |
 | ------------------------- | ------------------- | ------: | ----: |
@@ -120,14 +120,14 @@ The following configuration contains the exact Helm values that Camunda uses in 
 |                           | Disk request \[GB\] |         |   256 |
 
 :::note
-If you don't use Optimize, omit the Optimize row above, and size the secondary storage accordingly. Be aware that enabling Optimize roughly triples to quadruples Elasticsearch CPU and disk usage at a realistic workload (see [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown), so use that ratio as a starting point for a smaller Elasticsearch (see [Elasticsearch scaling](#elasticsearch-scaling) for tuning options), and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
+If you don’t use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
 :::
 
 </TabItem>
 
 <TabItem value="opensearch">
 
-OpenSearch has the same resource profile as Elasticsearch in our continuous load tests. The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for OpenSearch.
+OpenSearch has the same resource profile as Elasticsearch in our continuous load tests. The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for OpenSearch.
 
 | Component                 |                     | Request | Limit |
 | ------------------------- | ------------------- | ------: | ----: |
@@ -161,7 +161,7 @@ OpenSearch has the same resource profile as Elasticsearch in our continuous load
 |                           | Disk request \[GB\] |         |   256 |
 
 :::note
-OpenSearch is expected to see a similar magnitude of impact from enabling Optimize as Elasticsearch does (see [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the measured Elasticsearch ratios), though this hasn't been separately measured on OpenSearch, so validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
+OpenSearch is expected to experience a similar impact from enabling Optimize as Elasticsearch does. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the measured Elasticsearch ratios. However, this impact has not been measured separately for OpenSearch, so validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
 :::
 
 </TabItem>
@@ -170,7 +170,7 @@ OpenSearch is expected to see a similar magnitude of impact from enabling Optimi
 
 Identity and Keycloak, including Keycloak’s bundled PostgreSQL database, which is not itemized here, are included in each table above because our test harness always authenticates through OIDC, reflecting a production-like setup. If you plan to use an external identity provider instead of the bundled Keycloak, you can omit these rows entirely.
 
-In our sizing, retention is set to one day for the Camunda Exporter and three days for the legacy exporter, where still applicable. This gives the Optimize importer time to catch up before the data is removed. See [Elasticsearch scaling](#elasticsearch-scaling) for information about how retention affects disk sizing. Day-based metrics above assume that the load is distributed evenly over 24 hours.
+In our sizing, retention is set to one day for the Camunda Exporter and three days for the legacy exporter, where applicable. This gives the Optimize importer enough time to catch up before the data is removed. See [Elasticsearch scaling](#elasticsearch-scaling) for information about how retention affects disk sizing. The daily metrics above assume that the load is distributed evenly over 24 hours.
 
 ## Primary storage
 
