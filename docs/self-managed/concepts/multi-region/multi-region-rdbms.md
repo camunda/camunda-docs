@@ -27,13 +27,13 @@ That review covers the architecture you build. It does not make the [reference i
 
 ## How Multi-Region RDBMS differs from Dual-Region
 
-This section compares the two multi-region architectures, so you can tell which one matches your region count and your storage choice.
+The two multi-region architectures differ in region count and in secondary storage.
 
 [Dual-Region](./dual-region.md) is the two-region architecture with Elasticsearch secondary storage and parity-numbered brokers. It has two properties that come from the region count rather than from any implementation choice.
 
-With two regions, no replica placement survives losing half of them. A region loss therefore costs the Raft quorum, and Zeebe stops processing until an operator force-removes the lost brokers. Each region also owns its own copy of the secondary storage, so a returning region has to be re-seeded. That is why failback includes a secondary storage snapshot and a cross-region restore.
+With two regions, no replica placement survives losing half of them. A region loss therefore costs the Raft quorum, and Zeebe stops processing until an operator force-removes the lost brokers. Each region also owns its own copy of the secondary storage, so a returning region has to be re-seeded. Failback therefore includes a secondary storage snapshot and a cross-region restore.
 
-Multi-Region RDBMS removes both by changing two things: the number of regions, and who owns replication of the secondary storage.
+Multi-Region RDBMS removes both. It changes the number of regions, and it changes who owns replication of the secondary storage.
 
 | Consideration     | Dual-Region                                                                       | Multi-Region RDBMS                                                                           |
 | :---------------- | :-------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
@@ -48,7 +48,7 @@ Choose Multi-Region RDBMS when processing must continue through a region loss wi
 
 ## Architecture
 
-Now that the differences are clear, this section describes the layers that make one cluster span several regions.
+Three infrastructure layers let one cluster span several regions.
 
 <TopologyImg role="img" title="Three regions each running an Orchestration Cluster, connected by a private inter-region network and a cross-cluster service discovery layer, all writing to a single replicated relational database" />
 
@@ -60,7 +60,7 @@ One Orchestration Cluster spans every region. Each region runs its own brokers a
 | Cross-cluster service discovery | Publishes each region's Zeebe service under a name every other region can resolve.      |
 | Relational secondary storage    | Accepts writes from every region through a single endpoint, and replicates them itself. |
 
-The Camunda layer sees one cluster and one database. Everything region-specific lives in the infrastructure layers, which is what keeps the architecture portable across deployment platforms.
+The Camunda layer sees one cluster and one database. Everything region-specific lives in the infrastructure layers, which keeps the architecture portable across deployment platforms.
 
 ### Partition placement across zones
 
@@ -150,7 +150,7 @@ Skewing partition leadership to the writer's zone through zone priority reduces 
 
 ## Requirements
 
-The architecture above only works under the cluster, network, platform, and upgrade requirements listed in this section.
+The architecture only works under the cluster, network, platform, and upgrade requirements below.
 
 ### Zeebe cluster configuration
 
@@ -202,7 +202,7 @@ Upgrade **one region at a time**, so the other regions keep the quorum. The [ope
 
 ## Growing the cluster
 
-Once the cluster meets those requirements, you can add capacity. This section explains how.
+You can add capacity to a running cluster.
 
 Zone awareness names zones instead of numbering brokers, so a zone can be added to a running cluster without renumbering it.
 
@@ -231,11 +231,11 @@ The partition count is fixed at bootstrap, so size it for the largest topology y
 
 ## Region failure and recovery
 
-Growing the cluster is a planned change. This section describes the unplanned one, and what the cluster does when a region disappears.
+A region loss is the unplanned change. This section describes what the cluster does when a region disappears.
 
 <RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas and the database writer. Paris, with two replicas and the standby, and zurich, with one replica and no database, keep three of five replicas, so the quorum holds." />
 
-Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. **You need no operator step to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
+Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. **You need no operator step to resume processing.** Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
 
 Two things still need attention.
 
@@ -258,7 +258,7 @@ A single-region cluster that loses a broker holds a Raft re-election for the par
 
 That is the difference from [Dual-Region](./dual-region.md), where the same event costs the quorum and processing stops until an operator intervenes.
 
-**A window**, because reconfiguration takes time. Most of that window depends on settings outside the engine: client timeouts and retries, traffic routing, database failover, and Camunda's own SQL connection timeouts. That is why this page describes the behavior instead of publishing an RTO figure.
+**A window**, because reconfiguration takes time. Most of that window depends on settings outside the engine: client timeouts and retries, traffic routing, database failover, and Camunda's own SQL connection timeouts. This page therefore describes the behavior instead of publishing an RTO figure.
 
 **Data loss depends on which store you mean.** The engine's own state loses nothing. Raft commits a record only once a majority of its replicas hold it. With one replica per zone and three zones, a commit needs two replicas. Losing one zone always leaves at least one replica that has the record.
 
@@ -286,7 +286,7 @@ That makes the guarantee conditional on replication configuration and disk capac
 | Client traffic rerouting  | The gateway in the lost region is unreachable. Clients pointed at it fail until you reroute them, which is your traffic management, not Camunda's.                                                                                                                                                                        |
 | Database writer promotion | If the writer was in the lost region, exporting stops until you promote a surviving member. The engine keeps processing. A long enough export backlog trades write rate against backlog once you enable flow control. The APIs and web applications that read secondary storage serve stale data until exporting resumes. |
 
-Skewing partition leadership to the writer's zone makes the first of these worse in one specific case. Losing that zone loses most partition leaders at once, so more partitions re-elect simultaneously. That is the price of avoiding an inter-region round trip on every export flush. It is worth knowing which zone you made expensive to lose.
+Skewing partition leadership to the writer's zone makes the first of these worse in one specific case. Losing that zone loses most partition leaders at once, so more partitions re-elect simultaneously. That is the price of avoiding an inter-region round trip on every export flush.
 
 **Client configuration decides whether the re-election and rerouting windows are visible.** A re-election is a window a client retries through, not an outage. That only holds if its timeout and retry budget survives one. A client that gives up on the first refused connection sees the re-election as downtime, in a single-region cluster as much as here.
 
@@ -305,7 +305,7 @@ The recommended practice is to remove a lost zone once you confirm it is down. T
 
 ## Limitations
 
-Recovery behaves as described above only inside the boundaries this architecture sets. The following table lists them.
+Recovery behaves as described only inside the boundaries this architecture sets. The following table lists them.
 
 | Aspect                      | Details                                                                                                                                                                                       |
 | :-------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -321,7 +321,7 @@ Recovery behaves as described above only inside the boundaries this architecture
 
 ## Reference implementation
 
-Within those limitations, Camunda publishes one implementation of this architecture, on Amazon Web Services:
+Camunda publishes one implementation of this architecture, on Amazon Web Services:
 
 - [Multi-region setup with RDBMS on Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md) deploys three EKS clusters connected by AWS Transit Gateway. It uses Submariner for cross-cluster service discovery and Aurora Global Database as secondary storage.
 - [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) covers region loss, failback, and adding a zone.

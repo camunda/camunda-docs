@@ -23,7 +23,7 @@ The result is a cluster where losing a region does not stop processing. Bringing
 
 <HighLevelDesign role="img" title="Three AWS regions, each with an EKS cluster in its own VPC and a Camunda zone. A Transit Gateway per region is peered in a full mesh, Submariner publishes each region's Zeebe service under a clusterset name, and an Aurora Global Database with a writer in eu-west-2 and a reader in eu-west-3 backs all three regions through a single JDBC URL." />
 
-Each layer of the design has one job, and they are independent of each other:
+Each layer of the design has one job, and the layers are independent:
 
 | Layer                    | Component                  | What it provides                                                                                |
 | :----------------------- | :------------------------- | :---------------------------------------------------------------------------------------------- |
@@ -32,7 +32,7 @@ Each layer of the design has one job, and they are independent of each other:
 | L7, service discovery    | Submariner                 | Publishes each region's Zeebe service under a name every other region can resolve.              |
 | Secondary storage        | Aurora Global Database     | One writer and its readers, replicated by the database, reached through a single JDBC URL.      |
 
-The database regions are deliberately **decoupled** from the compute regions: the Aurora members live in London and Paris while compute spans all three regions. That keeps the database cheaper and demonstrates that the two topologies are independent.
+The database regions are **decoupled** from the compute regions. The Aurora members live in London and Paris, while compute spans all three regions. That keeps the database cheaper, and the two topologies stay independent.
 
 :::tip
 New to Terraform or to running Camunda on EKS? Start with the [single-region EKS Terraform setup](./terraform-setup.md), which covers AWS authentication, Terraform state management, and the essentials of an EKS cluster. This guide assumes you have completed a single-region deployment at least once.
@@ -40,15 +40,15 @@ New to Terraform or to running Camunda on EKS? Start with the [single-region EKS
 
 ## Requirements
 
-- **AWS account** – Required to create AWS resources in every target region. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
-- **AWS CLI** – Command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-- **Terraform** – IaC tool used to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
-- **kubectl** – CLI for interacting with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-- **Helm** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
-- **jq** – Lightweight JSON processor. [Download jq](https://jqlang.github.io/jq/download/).
-- **subctl** – Submariner CLI. The reference architecture installs it for you.
+- **AWS account**: required to create AWS resources in every target region. See [What is an AWS account?](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html).
+- **AWS CLI**: command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+- **Terraform**: IaC tool to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
+- **kubectl**: CLI to interact with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
+- **Helm**: package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
+- **jq**: lightweight JSON processor. [Download jq](https://jqlang.github.io/jq/download/).
+- **subctl**: Submariner CLI. The reference architecture installs it for you.
 
-For the tool versions used in testing, see the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
+For the tool versions used in testing, see the repository's [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
 
 ### AWS service quotas
 
@@ -113,7 +113,7 @@ Every region owns a distinct VPC range and a distinct Kubernetes service range. 
 
 A fourth slot (`eu-south-1`, VPC `10.222.0.0/16`, service CIDR `10.220.0.0/16`) is prepared but disabled. Enable it in `variables.tf` before you bootstrap the cluster.
 
-There is no separate pod range, and that is deliberate. With the [AWS VPC CNI](https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html) a pod address is an ordinary VPC address. Routing the VPC range over the Transit Gateway therefore makes cross-region pod-to-pod traffic work natively, with no overlay network. The Transit Gateway routes the service range too, because Submariner resolves a remote ClusterIP service out of the exporting cluster's service range.
+There is no separate pod range. With the [AWS VPC CNI](https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html) a pod address is an ordinary VPC address. Routing the VPC range over the Transit Gateway makes cross-region pod-to-pod traffic work natively, with no overlay network. The Transit Gateway also routes the service range, because Submariner resolves a remote ClusterIP service out of the exporting cluster's service range.
 
 ## 1. Configure AWS and apply Terraform
 
@@ -196,7 +196,7 @@ cd ../../procedure
 The dot is required. These scripts export variables into your current shell, not into a subshell.
 :::
 
-`export_environment_prerequisites.sh` is the environment contract of the architecture. Every value can be overridden by exporting it beforehand, and region-indexed values are space-separated lists in slot order.
+`export_environment_prerequisites.sh` defines the environment contract of the architecture. You can override every value by exporting it beforehand. Region-indexed values are space-separated lists in slot order.
 
 `export-terraform-outputs.sh` always sets `CAMUNDA_RDBMS_URL`, `CAMUNDA_RDBMS_USERNAME`, and `CAMUNDA_RDBMS_PASSWORD` from the Terraform outputs. They are empty with `deploy_database = false`. If you bring your own database, export these three values after that script and before `export_environment_prerequisites.sh`.
 
@@ -300,11 +300,11 @@ Submariner is deployed with its **service-discovery component only**. It provide
 
 Running Submariner's connectivity component alongside the AWS VPC CNI puts two owners on the same prefixes. Submariner installs node routes for every remote cluster CIDR so it can pull that traffic into its tunnel. With the VPC CNI those CIDRs are the VPC ranges, which the Transit Gateway also routes, including the node addresses the tunnels are built on. The result is tunnels that report `connected`, cross-cluster DNS that resolves correctly, and Raft messages that are silently dropped.
 
-Removing one of the two owners removes the whole class of problem, and the Transit Gateway is the one that cannot be removed.
+Removing one of the two owners removes the whole class of problem. You cannot remove the Transit Gateway, so remove the other owner.
 
-This does not leave the traffic in clear text. AWS encrypts inter-region Transit Gateway peering itself. AES-256 protects the traffic at the virtual network layer as it travels between regions. AWS encrypts it again at the physical layer, on links outside its physical control. See [transit gateway peering attachments](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html) and [encryption in transit](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit).
+The traffic is still encrypted. AWS encrypts inter-region Transit Gateway peering itself. AES-256 protects the traffic at the virtual network layer as it travels between regions. AWS encrypts it again at the physical layer, on links outside its physical control. See [transit gateway peering attachments](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html) and [encryption in transit](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit).
 
-What you give up is control of the encryption, not the encryption. The keys are AWS-managed. If a control requires customer-managed keys, enable TLS in the workload, or replace the VPC CNI with Cilium in ENI mode plus WireGuard or IPsec. In ENI mode pod addresses stay ordinary VPC addresses, so the Transit Gateway remains the only owner of the routes.
+You give up control of the encryption. The keys are AWS-managed. If a control requires customer-managed keys, enable TLS in the workload, or replace the VPC CNI with Cilium in ENI mode plus WireGuard or IPsec. In ENI mode pod addresses stay ordinary VPC addresses, so the Transit Gateway remains the only owner of the routes.
 
 </details>
 
@@ -338,7 +338,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 ### Verify the cross-region substrate
 
-Before spending twenty-five minutes deploying Camunda, spend two proving that pods in one region can reach pods in another. Submariner does not carry this traffic, so nothing else covers the Transit Gateway routes and the security group rules.
+Check that pods in one region can reach pods in another before you deploy Camunda. Submariner does not carry this traffic, so nothing else covers the Transit Gateway routes and the security group rules.
 
 ```bash
 ./setup-namespaces.sh
@@ -399,12 +399,12 @@ Three values cannot be hardcoded in the Helm values, because they depend on the 
 ```
 
 :::note Contact points are fully qualified
-The generated contact points end with a trailing dot, which marks them as fully qualified names. Without it, the resolver walks the pod's search domains first. On a cold multi-region start, a broker whose peer is not yet published can then exhaust its DNS budget and never finish starting. The trailing dot is required, not cosmetic.
+The generated contact points end with a trailing dot, which marks them as fully qualified names. Without it, the resolver walks the pod's search domains first. On a cold multi-region start, a broker whose peer is not yet published can then exhaust its DNS budget and never finish starting. Always keep the trailing dot.
 :::
 
 ### Review the Helm values
 
-The values file is the same in every region. Only `orchestration.partitioning.zone` and the advertised host differ, which is what makes the topology a single description rather than one per region.
+The values file is the same in every region. Only `orchestration.partitioning.zone` and the advertised host differ, so one file describes the whole topology.
 
 <details>
 <summary>See the full camunda-values.yml</summary>
@@ -420,7 +420,7 @@ The parts worth reading before you install:
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - The AWS Advanced JDBC Wrapper uses `initialConnection,failover`. `initialConnection` discovers the current writer when a broker starts after a switchover. `failover` follows a writer change on an established connection.
 - `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_ENABLED: "true"` is required. Without it the exporter acknowledges records the standby has not received, and a writer failover loses exported data.
-- The reference architecture also pins `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_TYPE: LOG_SEQ`, `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_MAXLAG: PT1H`, and `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_PAUSEONMAXLAGEXCEEDED: "false"`. The first two are a strategy and a budget. The third keeps the engine default, because pausing stops exporting on its own and is a decision to make knowingly. The lag budget has no effect until you enable pausing. The engine compares it only inside the pause condition.
+- The reference architecture also pins `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_TYPE: LOG_SEQ`, `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_MAXLAG: PT1H`, and `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_PAUSEONMAXLAGEXCEEDED: "false"`. The first two set a strategy and a lag budget. The third keeps the engine default, because pausing stops exporting. Enable pausing only on purpose. The lag budget has no effect until you enable pausing. The engine compares it only inside the pause condition.
 - Cross-region SWIM membership timeouts are relaxed. The defaults are tuned for intra-region latency, and on a cold start brokers otherwise see remote peers as unreachable, eject them, and never converge.
 - `identity`, `console`, and `optimize` are disabled. See [limitations](/self-managed/concepts/multi-region/multi-region-rdbms.md#limitations).
 
