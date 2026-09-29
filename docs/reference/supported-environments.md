@@ -62,7 +62,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
   - [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
   - [Google GKE](/self-managed/deployment/helm/cloud-providers/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)
+- [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md) (4.10+)
 - [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`, `linux/arm64`)
 - [Manual](/self-managed/deployment/manual/install.md)
 
@@ -139,14 +139,12 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 ### Component version matrix
 
-The following matrix shows which component versions work together. Components within the same column must share the same `minor` and `patch` version.
+The following matrix shows which component versions work together. Within each row, components in each column must align on version: Orchestration Cluster components (Zeebe, Connectors, Optimize) must share the same `minor` and `patch` version, and Management Identity and Camunda Hub must share the same version. Desktop Modeler follows its own versioning and is not version-locked to other components.
 
 For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
 
-| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                       |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x                                                                              | Camunda Hub 8.10.x<br/>Desktop Modeler 5.46+ |
-
-:::note
-You can use newer versions of Desktop and Camunda Hub with older versions of the Orchestration Cluster.
-:::
+| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management and design](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) |
+| --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster 8.10.x<br/>Connectors 8.10.x<br/>Optimize 8.10.x                                          | Management Identity 8.10.x<br/>Camunda Hub 8.10.x<br/>Desktop Modeler 5.51+                                       |
+| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.10.x<br/>Camunda Hub 8.10.x<br/>Desktop Modeler 5.51+                                       |
+| Orchestration Cluster 8.8.x<br/>Connectors 8.8.x<br/>Optimize 8.8.x                                             | Management Identity 8.10.x<br/>Camunda Hub 8.10.x<br/>Desktop Modeler 5.51+                                       |
