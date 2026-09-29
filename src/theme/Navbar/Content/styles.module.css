@@ -150,6 +150,7 @@
 
 .bottomRowLeft :global(.navbar__link--active) {
   border-bottom: 2px solid var(--ifm-color-primary);
+  font-weight: 600;
 }
 
 /* ---- Responsive ---- */
