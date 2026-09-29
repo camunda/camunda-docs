@@ -489,6 +489,21 @@ a {
   color: #000 !important;
 }
 
+/* Light Mode > Subtle underline for blue body/heading text links */
+
+.markdown p a,
+.markdown li a,
+.markdown td a,
+.markdown h1 a,
+.markdown h2 a,
+.markdown h3 a,
+.markdown h4 a,
+.markdown h5 a,
+.markdown h6 a {
+  text-decoration: underline;
+  text-decoration-color: #1f6fb559;
+}
+
 /* Dark Mode > Link underlines for AA accessibility */
 
 [data-theme="dark"] p a {
@@ -531,6 +546,14 @@ a {
 [data-theme="dark"] .alert a:hover {
   text-decoration: underline;
   text-decoration-color: white;
+}
+[data-theme="dark"] h1 a,
+[data-theme="dark"] h2 a,
+[data-theme="dark"] h3 a,
+[data-theme="dark"] h4 a,
+[data-theme="dark"] h5 a,
+[data-theme="dark"] h6 a {
+  text-decoration: none;
 }
 [data-theme="dark"] .menu__link:hover {
   text-decoration: none;
