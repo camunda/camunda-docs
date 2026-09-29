@@ -365,7 +365,7 @@ FEEL (Friendly Enough Expression Language) expressions are the unit of computati
 
 ### File version {#version-file}
 
-A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from deployed process definition versions in the Orchestration Cluster.
+A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from [project snapshots](#snapshot-project).
 
 - [Versions](/components/hub/workspace/modeler/modeling/versions.md)
 
@@ -694,7 +694,7 @@ A collection of related files in a Camunda Hub workspace you can work on, versio
 
 ### Project snapshot {#snapshot-project}
 
-A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from [individual file versions](#version-file).
 
 - [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
 
