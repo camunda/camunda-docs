@@ -183,11 +183,26 @@ Zone awareness names zones instead of numbering brokers, so a zone can be added 
 
 <AddZoneImg role="img" title="Three stages of the same cluster. First, two zones, london and paris, with two replicas each and replication factor four; the zurich slot is provisioned but not declared, and losing either zone leaves two of four replicas, so processing stops. Second, the zurich brokers are deployed and the zone is added with POST /actuator/cluster/zones/zurich, one replica and priority 800, then the operator waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues. No broker is renumbered and the running regions are not restarted." />
 
-**Declare only the zones you deploy.** A zone in the zone list receives partition replicas whether or not its brokers run. A declared zone without brokers therefore leaves every partition one zone short: with the default `2-2-1` layout and the third zone missing, each partition runs four replicas of five, and losing either database zone leaves two, so processing stops.
+### Declare only the zones you deploy
 
-**Add a zone to the running cluster.** Start the brokers of the new zone, then add the zone with the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md). The engine places the zone's replicas and raises the replication factor in one change. No broker is renumbered, and the regions already running are not restarted. With the default layout, growing from two zones (`2-2`) to three (`2-2-1`) raises the replication factor from four to five.
+A zone in the zone list receives partition replicas whether or not its brokers run. A declared zone without brokers leaves every partition one zone short. With the default `2-2-1` layout and the third zone missing, each partition runs four replicas of five, and losing either database zone stops processing.
 
-The partition count is fixed at bootstrap, so size it for the largest topology you expect. The reference implementation sizes it on the provisioned region slots rather than on the zones running at bootstrap.
+### Add a zone to the running cluster
+
+1. Start the brokers of the new zone.
+1. Add the zone with the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+1. Wait for the change to report `COMPLETED`.
+
+The engine places the zone's replicas and raises the replication factor in one change. No broker is renumbered, and the regions already running are not restarted.
+
+| Zones running | Layout  | Replication factor | After losing one zone                          |
+| :------------ | :------ | :----------------- | :--------------------------------------------- |
+| Two           | `2-2`   | 4                  | 2 of 4 replicas: processing stops              |
+| Three         | `2-2-1` | 5                  | 3 of 5 replicas at worst: processing continues |
+
+### Size the partition count up front
+
+The partition count is fixed at bootstrap, so size it for the largest topology you expect. The reference implementation sizes it on the provisioned region slots, not on the zones running at bootstrap.
 
 ## Region failure and recovery
 
