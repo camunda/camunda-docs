@@ -272,8 +272,7 @@ The role's **trust policy** must allow the relevant Kubernetes service accounts 
       "Condition": {
         "StringEquals": {
           "oidc.eks.<region>.amazonaws.com/id/<oidc-id>:sub": [
-            "system:serviceaccount:<namespace>:<release-name>-orchestration",
-            "system:serviceaccount:<namespace>:<release-name>-connectors"
+            "system:serviceaccount:<namespace>:<release-name>-orchestration"
           ]
         }
       }
@@ -302,16 +301,19 @@ orchestration:
   serviceAccount:
     annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
-
-connectors:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
 ```
 
+Annotate the `orchestration` service account shown above.
+
 :::note
-With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token. Annotate the service account of every component you have enabled to use the document store; otherwise that component cannot reach S3.
+With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token.
 :::
+
+### Configure connector task credentials separately
+
+Connectors accesses documents through the Orchestration REST API, not the document store directly. Don't grant the document-store IAM role to the Connectors service account.
+
+Starting with Camunda 8.10 (Helm chart 15.x), the chart no longer propagates document-store credentials to the Connectors pod. If a connector task uses cloud credentials from the pod environment, configure a role or Secret scoped to the connector tasks under `connectors`, as shown in [migrate document-store cloud credentials](/self-managed/upgrade/helm/890-to-8100.md#migrate-document-store-cloud-credentials). Don't reuse the document-store role or credentials.
 
 ### Verify
 
@@ -333,7 +335,7 @@ To authenticate the document store with [EKS Pod Identity](https://docs.aws.amaz
 The remaining steps differ from the IRSA setup:
 
 - Skip the OIDC trust policy and the `eks.amazonaws.com/role-arn` service account annotation. Both apply to IRSA only.
-- Grant the IAM role to each component's service account by creating an [EKS Pod Identity association](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-association.html). The role still needs the same S3 permission policy as the IRSA setup, with a trust policy for the `pods.eks.amazonaws.com` service principal.
+- Grant the IAM role to the `orchestration` service account by creating an [EKS Pod Identity association](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-association.html). The role still needs the same S3 permission policy as the IRSA setup, with a trust policy for the `pods.eks.amazonaws.com` service principal.
 - When you verify the pods, expect the `AWS_CONTAINER_CREDENTIALS_FULL_URI` environment variable instead of `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`.
 
 ## Elasticsearch backup with IRSA
