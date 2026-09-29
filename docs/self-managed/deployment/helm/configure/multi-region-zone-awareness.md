@@ -116,7 +116,9 @@ The chart generates initial contact points only for a single-zone cluster, becau
 
 A cluster spanning more than one zone with no contact points supplied **renders and installs**. The chart prints a `[camunda][warning]` telling you to set `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` through `orchestration.env`, but it does not fail the render, so a missing list surfaces as brokers that never form a cluster rather than as a failed `helm upgrade`. Treat the warning as an error.
 
-One entry per zone is enough, and it does not have to name a specific broker. A contact point is resolved once, to a single address, so an entry pointing at a zone's headless Zeebe service reaches whichever broker pod DNS returns. That is sufficient: a broker only has to reach one live member to join, and SWIM membership gossip carries the rest of the cluster from there. The chart sets `publishNotReadyAddresses: true` on that service, so the name resolves to a pod during a cold start, before any broker is ready.
+One entry per zone is enough, and it does not have to name a specific broker. A contact point is resolved once, to a single address, so an entry pointing at a zone's headless Zeebe service reaches whichever broker pod DNS returns.
+
+That is sufficient: a broker only has to reach one live member to join, and SWIM membership gossip carries the rest of the cluster from there. The chart sets `publishNotReadyAddresses: true` on that service, so the name resolves to a pod during a cold start, before any broker is ready.
 
 Listing every broker pod individually also works and tolerates more of the zone being down at bootstrap, at the cost of rewriting the list whenever a zone's broker count changes.
 
