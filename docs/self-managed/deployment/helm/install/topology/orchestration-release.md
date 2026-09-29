@@ -226,7 +226,7 @@ Confirm the cluster appears in Camunda Hub's cluster list before you install its
 
 ## Add another Orchestration Cluster
 
-Add another entry to `global.topology.clusters` in the Hub release, then install another orchestration release configured to match that entry. Use unique client IDs, audiences, and secrets so the clusters are isolated from each other.
+Add another entry to `global.topology.clusters` in the Hub release, then install another orchestration release configured to match that entry. Use unique client IDs, audiences, and secrets so each cluster has its own client registration. To also authorize users per cluster, set a distinct `components.<component>.roleName` in each record. See [role assignment across clusters](./hub-release.md#role-assignment-across-clusters).
 
 :::warning
 If orchestration releases share Elasticsearch or OpenSearch, every cluster needs its own index prefixes. Reusing a prefix mixes one cluster's records into another cluster's Operate, Tasklist, or Optimize data. See [index prefixes](./physical-tenants.md#isolate-every-index-prefix-family).

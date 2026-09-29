@@ -70,7 +70,7 @@ Follow [install the Hub release](/self-managed/deployment/helm/install/topology/
 
 Project the workload client secrets into the Hub namespace as well. Kubernetes Secrets are namespace-scoped.
 
-At this point Hub and Management Identity are running twice: once in the combined release, once in the new Hub release. Both read the same external databases. Each Management Identity instance runs schema initialization and additive client, resource server, permission, and role provisioning at startup, against the same database and topology identifiers. Running two instances this way hasn't been validated. Don't perform this step in production until you've rehearsed it against a copy of your databases.
+At this point Hub and Management Identity are running twice: once in the combined release, once in the new Hub release. Both read the same external databases. Each Management Identity instance runs schema initialization and additive client, resource server, permission, and role provisioning at startup, against the same database and topology identifiers. Camunda hasn't yet confirmed that two Management Identity instances can safely provision against the same database at the same time, and a rehearsal against a copy of your databases doesn't prove it for production. Don't perform this step in production until this page states that concurrent provisioning is safe, or describes a handoff that stops the combined release's Management Identity first.
 
 ### Step 3: Verify the new Hub release
 
@@ -126,13 +126,13 @@ This costs a process-state cutover. Any instance still running in the old cluste
 
 ## Roll back
 
-| After step                 | To roll back                                                                                                                                                                                                                                 |
-| :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Step 2, Hub installed      | Uninstall the Hub release. The combined release is untouched                                                                                                                                                                                 |
-| Step 3, Hub verified       | Same. Nothing in the execution plane has changed                                                                                                                                                                                             |
-| Step 4, release converted  | `helm rollback` the orchestration release to its previous revision. Broker volumes are unchanged, so the combined release's Hub and Identity workloads return. Two Management Identity instances then share one database again, as in step 2 |
-| Step 5, Optimize separated | Uninstall the Optimize release, remove the explicit exporter, and re-enable `optimize` in the orchestration release with the same reader and application prefixes                                                                            |
-| Step 6, cleanup done       | Identity object deletion isn't reversible. Re-create any client, resource server, permission, or role you removed in error                                                                                                                   |
+| After step                 | To roll back                                                                                                                                                                                                                                                             |
+| :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Step 2, Hub installed      | Uninstall the Hub release. The combined release is untouched                                                                                                                                                                                                             |
+| Step 3, Hub verified       | Same. Nothing in the execution plane has changed                                                                                                                                                                                                                         |
+| Step 4, release converted  | `helm rollback` the orchestration release to its previous revision. Broker volumes are unchanged, so the combined release's Hub and Identity workloads return. Two Management Identity instances then share one database again, so the same constraint as step 2 applies |
+| Step 5, Optimize separated | Uninstall the Optimize release, remove the explicit exporter, and re-enable `optimize` in the orchestration release with the same reader and application prefixes                                                                                                        |
+| Step 6, cleanup done       | Identity object deletion isn't reversible. Re-create any client, resource server, permission, or role you removed in error                                                                                                                                               |
 
 Roll back before step 6. Once you've deleted Identity objects, recovery is manual.
 

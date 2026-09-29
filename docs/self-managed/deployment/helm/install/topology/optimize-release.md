@@ -136,7 +136,7 @@ global:
       secretName: production-a-tls
 ```
 
-The chart then renders an Ingress rule for `optimize.contextPath` on `global.host`. The host must match `redirectUrl`, and the TLS Secret must exist in this release's namespace. If another Ingress already serves that host, confirm your ingress controller merges rules from several Ingress resources for one host.
+The chart then renders an Ingress rule for `optimize.contextPath` on `global.host`. The host must match `redirectUrl`, and the TLS Secret must exist in this release's namespace. If another Ingress already serves that host, confirm your Ingress controller merges rules from several Ingress resources for one host.
 
 ## Install the release
 
