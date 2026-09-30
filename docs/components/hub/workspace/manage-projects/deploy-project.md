@@ -40,7 +40,7 @@ Once you've [validated your process](./validate-project.md), deploy your project
 1. At the top right of the project view, click the **Deploy & run** combo button, and select **Deploy latest changes**. This opens the **Deploy project** dialog.
 1. Under **Deployment environment**, select the Environment to deploy to. Camunda Hub preselects the first one.
 1. If the Environment has [Logical Tenants](/self-managed/concepts/multi-tenancy/logical-tenants.md), select one under **Logical tenant**. In Self-Managed, you can enter a **Logical tenant ID**, which is optional.
-1. In Self-Managed, if the cluster uses basic authentication, enter your **Username** and **Password** under **Authentication**.
+1. In Self-Managed, if the cluster uses Basic authentication, enter your **Username** and **Password** under **Authentication**.
 1. Click **Deploy** to deploy the project to the selected Environment.
 
 When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle. Camunda Hub confirms a successful deployment with **Project deployed!**
