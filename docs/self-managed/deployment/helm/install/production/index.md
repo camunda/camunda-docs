@@ -37,10 +37,10 @@ Before proceeding with the setup, ensure the following requirements are met:
   If managed PostgreSQL, Elasticsearch, or an external OIDC provider are not available in your organization, you can deploy these infrastructure components on Kubernetes using official operators. See [Required infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions.
   :::
 
-- **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
+- **Ingress controller**: Ensure an Ingress controller supporting gRPC and HTTP/2 is set up in the cluster. The reference architectures deploy [Contour](https://projectcontour.io/) by choice, but any such controller works, for example Traefik or HAProxy; select yours through `global.ingress.className`. Alternatively, use the [Gateway API](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md), which the chart also supports.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
-- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed), and have evaluated sufficient CPU, memory, and storage necessary for the deployment.
+- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md), and have evaluated sufficient CPU, memory, and storage necessary for the deployment.
 
 Ensure all prerequisites are in place to avoid issues during installation or when upgrading in a production environment.
 
@@ -74,7 +74,7 @@ kubectl create namespace orchestration
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
 :::note
-For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
+For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-camunda-hub).
 :::
 
 ### Install the Helm chart
@@ -156,7 +156,7 @@ You must create Kubernetes secrets for all client secrets required by your ident
 ### Connect external databases
 
 :::note
-To allow for easier testing, the Camunda Helm chart provides databases as an external dependency, such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead.
+Camunda 8.10 does not bundle databases. Provide PostgreSQL and Elasticsearch or OpenSearch through managed services or Kubernetes operators (see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md)), and use production-grade databases.
 :::
 
 This guide keeps database configuration in one flow and provides two options:
@@ -170,26 +170,35 @@ You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL 
 
 #### Connecting to Amazon OpenSearch
 
-The following example `values.yaml` enables OpenSearch with the required configuration. This example also globally disables all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false`, and disables internal Elasticsearch through `elasticsearch.enabled: false`:
+The following example `values.yaml` configures OpenSearch as the secondary storage for the Orchestration Cluster, and points Optimize at the same cluster:
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    auth:
-      username: user
-      secret:
-        existingSecret: opensearch-credentials
-        existingSecretKey: password
-    url:
-      protocol: https
-      host: opensearch.example.com
-      port: 443
+orchestration:
+  data:
+    secondaryStorage:
+      type: opensearch
+      opensearch:
+        url: https://opensearch.example.com:443
+        auth:
+          username: user
+          secret:
+            existingSecret: opensearch-credentials
+            existingSecretKey: password
 
-elasticsearch:
-  enabled: false
+optimize:
+  enabled: true
+  database:
+    opensearch:
+      enabled: true
+      url:
+        protocol: https
+        host: opensearch.example.com
+        port: 443
+      auth:
+        username: user
+        secret:
+          existingSecret: opensearch-credentials
+          existingSecretKey: password
 ```
 
 #### Connect to an external database for Management Identity
@@ -218,11 +227,11 @@ Make sure the host and port are correctly defined.
 The following example `values.yaml` configures Web Modeler with an external Amazon Aurora PostgreSQL database:
 
 ```yaml
-webModeler:
+camundaHub:
   restapi:
     externalDatabase:
       url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-      user: web_modeler_user
+      username: web_modeler_user
       secret:
         existingSecret: web-modeler-db-secret
         existingSecretKey: database-password
@@ -238,7 +247,7 @@ For more information on connecting to external databases, the following guides a
 - Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
 - [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
 - Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
-- Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/hub/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
+- Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/hub/configuration/database.md#running-camunda-hub-on-amazon-aurora-postgresql)
 
 ## Orchestration Cluster configuration
 
@@ -252,17 +261,27 @@ The next steps focus on the Camunda application-specific configurations suitable
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-The following example configures an ILM policy for the Orchestration Cluster, and can be added to your `orchestration-values.yaml`:
+The Helm value **`orchestration.history.retention`** configures retention for archived Operate, Tasklist, and Camunda indices stored in secondary storage (for example, `operate-process-*`, `tasklist-task-*`).
+
+The following example configures an ILM policy for the Orchestration Cluster's archived history indices and can be added to the Helm values file `orchestration-values.yaml`:
 
 ```yaml
 orchestration:
-  retention:
-    enabled: true
-    minimumAge: 30d
-    policyName: zeebe-record-retention-policy
+  history:
+    rolloverInterval: 7d
+    retention:
+      enabled: true
+      minimumAge: 30d
+      policyName: camunda-history-retention-policy
 ```
 
-For more information on configuring ILM policy, refer to the configuration guide on the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration).
+:::warning
+The `orchestration.history.rolloverInterval` value significantly affects Elasticsearch/OpenSearch performance. Review the [data retention performance](/self-managed/deployment/helm/configure/data-retention.md#performance) section to ensure the value fits your use case.
+:::
+
+:::note
+For more information on configuring both retention policy types, refer to the [data retention configuration guide](/self-managed/deployment/helm/configure/data-retention.md).
+:::
 
 ### Configure backups
 

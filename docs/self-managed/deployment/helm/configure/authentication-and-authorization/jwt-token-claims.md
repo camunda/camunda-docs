@@ -64,22 +64,26 @@ Specifies the intended audience of the token.
 
 - **Helm configuration:** `audience`
 - **Claim name:** `aud`
-- **Typical value:** Client ID or a custom value configured in the provider
+- **Typical value:** Client ID or a custom value configured in the provider. Use a distinct resource audience for each component by default.
 
 ## Common claim patterns by provider
 
-| Provider        | User claim                      | Client claim         | Audience default          |
-| --------------- | ------------------------------- | -------------------- | ------------------------- |
-| Microsoft Entra | `preferred_username`            | `azp`                | Client ID                 |
-| Keycloak        | `email` or `preferred_username` | `azp` or `client_id` | May require configuration |
-| Auth0           | `email`                         | `client_id`          | Client ID                 |
-| Okta            | `email`                         | `client_id`          | Client ID                 |
+| Provider        | User claim                      | Client claim         | Audience default                            |
+| --------------- | ------------------------------- | -------------------- | ------------------------------------------- |
+| Microsoft Entra | `preferred_username`            | `azp`                | Client ID                                   |
+| Keycloak        | `email` or `preferred_username` | `azp` or `client_id` | May require configuration                   |
+| Auth0           | `email`                         | `client_id`          | Client ID                                   |
+| Okta            | `email`                         | `client_id`          | Client ID                                   |
+| PingFederate    | `sub`                           | `client_id`          | Shared Access Token Manager for all clients |
+| PingOne         | `sub`                           | `client_id`          | Per-application, via resource/scope grants  |
 
 ## Verify audience configuration
 
-1. Decode a test token.
-2. Inspect the value of the `aud` claim.
-3. Use that value for the `audience` setting in your Camunda Helm configuration.
+Each component should have its own resource audience by default. Supported integrations can require a component to accept another component's audience. For the per-component Helm values and exceptions, see [Assign a unique audience to each component](./generic-oidc-provider.md#assign-a-unique-audience-to-each-component).
+
+1. Decide the audience for the component, and configure your provider to issue it.
+2. Decode a test token issued for that component.
+3. Confirm the `aud` claim contains the value you configured. If another component accepts the same value, confirm a supported integration requires that trust relationship.
 
 :::warning
 The audience claim is required for token validation.  

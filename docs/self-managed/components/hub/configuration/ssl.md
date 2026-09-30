@@ -1,13 +1,13 @@
 ---
 id: ssl
 title: SSL
-description: "Read details on additional SSL configuration for Web Modeler."
+description: "Read details on additional SSL configuration for Camunda Hub."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-By default, communication between Web Modeler and Identity and the Web Modeler components is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/deployment/docker/docker.md) network or [Kubernetes](/self-managed/deployment/helm/install/quick-install.md) cluster.
+By default, communication between Camunda Hub and Identity and the Camunda Hub components is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/deployment/docker/docker.md) network or [Kubernetes](/self-managed/deployment/helm/install/quick-install.md) cluster.
 However, you can enable TLS-encrypted communication by following the steps below (for example, if backend-to-backend communication is not possible in a custom Camunda 8 installation setup).
 
 ## Configuring secure connections to Identity
@@ -39,7 +39,7 @@ camunda.identity.base-url: https://identity.example.com
 
 </Tabs>
 
-## Configuring secure connections for Web Modeler components
+## Configuring secure connections for Camunda Hub components
 
 ### Configure `restapi` SSL certificate
 
@@ -73,7 +73,7 @@ MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY=file:/full/path/to/key.pem
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.server.url: https://web-modeler.example.com
+camunda.hub.server.url: https://web-modeler.example.com
 
 server:
   ssl:
@@ -119,7 +119,7 @@ RESTAPI_PUSHER_SSL_ENABLED=true
 <TabItem value="applicationYaml">
 
 ```yaml
-camunda.modeler.pusher.ssl-enabled: true
+camunda.hub.pusher.ssl-enabled: true
 ```
 
 </TabItem>
@@ -144,7 +144,7 @@ Currently, there is no option to configure SSL for the `websocket` management ro
 
 ## (Optional) Provide a custom certificate
 
-If you are using a custom (self-signed) TLS certificate for either the `restapi` or Identity, you need to make Web Modeler accept the certificate.
+If you are using a custom (self-signed) TLS certificate for either the `restapi` or Identity, you need to make Camunda Hub accept the certificate.
 For the `modeler-restapi` container:
 
 - Add the certificate to a custom Java trust store (using the [`keytool`](https://docs.oracle.com/en/java/javase/21/docs/specs/man/keytool.html) utility).

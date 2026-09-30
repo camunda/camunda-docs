@@ -33,11 +33,11 @@ Usage metrics can report how many tenants were active in a period and, when avai
 
 ## Retrieve metrics in SaaS
 
-In Camunda 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page.
+In Camunda 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page:
 
-You can access the **Billing** page by selecting **Organization Management** in the Camunda Console navigation bar.
-
-<!-- Billing Page and link to existing guide from Console -->
+1. Open Camunda Hub.
+1. In the left navigation under **Console**, click **Organization**.
+1. Click the **Billing** tab.
 
 ## Retrieve metrics on Self-Managed
 

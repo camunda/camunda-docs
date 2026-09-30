@@ -90,7 +90,7 @@ jobs:
           echo "container_ip=${container_ip}" >> $GITHUB_ENV
           echo "domain_to_test=http://${container_ip}:8080" >> $GITHUB_ENV
       - name: Wait for running docs web server
-        uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1 # v1.0.1
+        uses: nev7n/wait_for_response@8bfc0523300e46e24e1b42d6783680aa921ee6cc # v1.2.0
         with:
           url: ${{ env.domain_to_test }}
       - name: Download sitemap from production
@@ -98,6 +98,19 @@ jobs:
       - name: Remove known broken anchors.
         run: |
           sed -i 's!power-automate/#oauth-token-endpoint!power-automate/!g' connectors-element-template-links.txt
+      # Archived docs versions aren't built locally, so links that redirect to unsupported.docs.camunda.io depend on
+      # that site's availability. They're low priority, so we defer them to a separate scheduled pipeline. (issue #10127)
+      # Each RewriteRule pattern targeting the unsupported site becomes a Muffet exclude regex for the local URL.
+      - name: Build exclude list of unsupported redirects
+        run: |
+          awk '$1 == "RewriteRule" && $3 ~ /^https:\/\/unsupported\.docs\.camunda\.io/ {
+            pattern = $2
+            sub(/^\^/, "", pattern)
+            if (sub(/\$$/, "", pattern)) pattern = pattern "([?#].*)?$"
+            print "^https?://[^/]+/" pattern
+          }' build/.htaccess > "${RUNNER_TEMP}/unsupported-redirects.txt"
+          echo "Deferring $(wc -l < "${RUNNER_TEMP}/unsupported-redirects.txt") unsupported redirect pattern(s):"
+          cat "${RUNNER_TEMP}/unsupported-redirects.txt"
       - name: Prepare link collections
         # Turn static lists of URLs into HTML files with anchor tags.
         run: |
@@ -121,14 +134,17 @@ jobs:
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/sitemap-prod.html
+          exclude_file: ${{ runner.temp }}/unsupported-redirects.txt
       - name: Validate product links
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/product-links.html
+          exclude_file: ${{ runner.temp }}/unsupported-redirects.txt
       - name: Validate element template links
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/connectors-element-template-links.html
+          exclude_file: ${{ runner.temp }}/unsupported-redirects.txt
       - name: Observe build status
         if: always()
         continue-on-error: true

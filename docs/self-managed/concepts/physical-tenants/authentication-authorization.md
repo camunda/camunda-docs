@@ -2,8 +2,14 @@
 id: authentication-authorization
 title: "Authentication and authorization for Physical Tenants"
 sidebar_label: "Authentication and authorization"
-description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
+description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Learn how identity providers connect to Physical Tenants and how tokens are routed to the correct tenant. For the resource and permission model and cluster-wide versus tenant-local authorization, see [authorization model](./authorization-model.md).
 
@@ -11,7 +17,7 @@ For configuration properties used to assign identity providers to tenants, see [
 
 ## Centralized identity model
 
-In Camunda 8.10, identity is **centralized at the cluster boundary**. This means:
+Identity is **centralized at the cluster boundary**. This means:
 
 - Identity providers (IdPs) are defined once at the cluster level.
 - Each Physical Tenant selects which cluster-defined providers it accepts using `providers.assigned`.
@@ -21,7 +27,7 @@ This design keeps identity management simple and avoids per-engine IdP fragmenta
 
 ## Identity deployment models
 
-Camunda 8.10 supports two recommended identity deployment models for Physical Tenants. A third model for advanced or managed-service scenarios is available but not recommended as a baseline.
+Physical Tenants support two recommended identity deployment models. A third model for advanced or managed-service scenarios is available but not recommended as a baseline.
 
 ### Model A: Single IdP, single client
 
@@ -43,13 +49,13 @@ Use Model B when:
 - Different teams or departments require separate client configurations.
 - You want role-level client separation within one IdP.
 
-Model B is the recommended baseline for most customers deploying Physical Tenants in 8.10.
+Model B is the recommended baseline for most customers deploying Physical Tenants.
 
 ### Model C: Multiple IdPs (advanced)
 
 Each Physical Tenant uses a separate identity provider. This model is intended for managed services or advanced deployments where tenants are fully autonomous organizations with their own IdPs.
 
-Model C is not a recommended baseline for 8.10. Use it only when:
+Model C is not a recommended baseline. Use it only when:
 
 - Tenants are separate organizations that each manage their own IdP.
 - You are operating a managed service where per-tenant IdP autonomy is required.

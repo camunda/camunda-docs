@@ -55,7 +55,7 @@ If any resource fails to deploy, the whole deployment [fails](#deployment-errors
 In Self-Managed, you can deploy your project to the cluster defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::tip
-If you don't want to deploy all resources in a process application, you can [deploy an individual resource](../modeler/run-or-publish-your-process.md#deploy-a-process).
+If you don't want to deploy all resources in a project, you can [deploy an individual resource](../modeler/run-or-publish-your-process.md#deploy-a-process).
 :::
 
 ## Run your project

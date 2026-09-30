@@ -34,7 +34,7 @@ async def aget_headers()
 ## AsyncOAuthClientCredentialsAuthProvider
 
 ```python
-class AsyncOAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None)
+class AsyncOAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None)
 ```
 
 Bases: `object`
@@ -57,6 +57,7 @@ This is designed for async clients.
 | `transport`           | `httpx.AsyncBaseTransport` \| `None` |             |
 | `timeout`             | `float` \| `None`                    |             |
 | `logger`              | [SdkLogger](#sdklogger) \| `None`    |             |
+| `clock`               | `Clock` \| `None`                    |             |
 
 ### aclose()
 
@@ -162,7 +163,7 @@ def get_headers()
 ## OAuthClientCredentialsAuthProvider
 
 ```python
-class OAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None)
+class OAuthClientCredentialsAuthProvider(, oauth_url, client_id, client_secret, audience, cache_dir=None, disk_cache_disable=False, saas_401_cooldown_s=30.0, transport=None, timeout=None, logger=None, clock=None)
 ```
 
 Bases: `object`
@@ -185,6 +186,7 @@ This is designed for sync clients.
 | `transport`           | `httpx.BaseTransport` \| `None`   |             |
 | `timeout`             | `float` \| `None`                 |             |
 | `logger`              | [SdkLogger](#sdklogger) \| `None` |             |
+| `clock`               | `Clock` \| `None`                 |             |
 
 ### close()
 
@@ -559,7 +561,7 @@ alias of [`ConnectedJobContext`](#connectedjobcontext)
 ## ConnectedJobContext
 
 ```python
-class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING, , client)
+class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING, , client, clock)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -600,9 +602,25 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 | `client`                     | [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient)                   |             |
+| `clock`                      | `Clock`                                                                                              |             |
+
+### clock
+
+The worker’s clock. Await `job.clock.sleep(...)` rather than
+`asyncio.sleep(...)` so a handler that waits follows engine time when the
+engine’s clock is pinned, instead of stalling on the real one.
+
+For short in-handler coordination only – spacing a retry, waiting on a resource
+to settle. A long or business wait belongs in the process as a BPMN timer event:
+a handler holding a job for minutes occupies a worker slot, risks the job
+timeout expiring underneath it, and hides the wait from the process model where
+it cannot be seen or changed.
+
+- **Type:**
+  Clock
 
 ### client
 
@@ -610,7 +628,13 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 client: [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient)
 ```
 
-### _classmethod_ create(job, client, logger=None)
+### clock
+
+```python
+clock: Clock
+```
+
+### _classmethod_ create(job, client, clock, logger=None)
 
 **Parameters:**
 
@@ -618,6 +642,7 @@ client: [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAs
 | --------- | --------------------------------- | ----------- |
 | `job`     | `ActivatedJobResult`              |             |
 | `client`  | `Any`                             |             |
+| `clock`   | `Clock`                           |             |
 | `logger`  | [SdkLogger](#sdklogger) \| `None` |             |
 
 - **Return type:**
@@ -626,12 +651,18 @@ client: [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAs
 ## JobContext
 
 ```python
-class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING)
+class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING)
 ```
 
 Bases: `ActivatedJobResult`
 
 Read-only context for a job execution.
+
+Deliberately has no `clock`. This is the context handed to `process` handlers, so it
+is pickled across a process boundary, and a clock owns a lock (and, once pinned, a live
+connection to an engine) – neither of which survives the trip. Handlers that need the
+injected clock run under the `async` or `thread` strategies, whose contexts carry
+one; see [`ConnectedJobContext`](#connectedjobcontext) and [`SyncJobContext`](#syncjobcontext).
 
 **Parameters:**
 
@@ -659,7 +690,7 @@ Read-only context for a job execution.
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 
 ### log
@@ -721,7 +752,7 @@ Raise this exception to explicitly fail a job with custom retries/backoff.
 ## JobWorker
 
 ```python
-class JobWorker(client, callback, config, logger=None, execution_strategy='auto', startup_jitter_max_seconds=0)
+class JobWorker(client, callback, config, logger=None, execution_strategy='auto', startup_jitter_max_seconds=0, clock=None)
 ```
 
 Bases: `object`
@@ -736,6 +767,7 @@ Bases: `object`
 | `logger`                     | [SdkLogger](#sdklogger) \| `None`                                                  |             |
 | `execution_strategy`         | `EXECUTION_STRATEGY`                                                               |             |
 | `startup_jitter_max_seconds` | `float`                                                                            |             |
+| `clock`                      | `Clock` \| `None`                                                                  |             |
 
 ### aclose()
 
@@ -813,7 +845,7 @@ def stop()
 ## SyncJobContext
 
 ```python
-class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING, , client)
+class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING, , client, clock)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -854,9 +886,25 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 | `client`                     | [CamundaClient](client.md#camunda_orchestration_sdk.CamundaClient)                                   |             |
+| `clock`                      | `Clock`                                                                                              |             |
+
+### clock
+
+The worker’s clock. Call `job.clock.sleep_sync(...)` rather than
+`time.sleep(...)` so a handler that waits follows engine time when the
+engine’s clock is pinned, instead of stalling on the real one.
+
+For short in-handler coordination only – spacing a retry, waiting on a resource
+to settle. A long or business wait belongs in the process as a BPMN timer event:
+a handler holding a job for minutes occupies a worker slot, risks the job
+timeout expiring underneath it, and hides the wait from the process model where
+it cannot be seen or changed.
+
+- **Type:**
+  Clock
 
 ### client
 
@@ -864,7 +912,13 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 client: [CamundaClient](client.md#camunda_orchestration_sdk.CamundaClient)
 ```
 
-### _classmethod_ create(job, client, logger=None)
+### clock
+
+```python
+clock: Clock
+```
+
+### _classmethod_ create(job, client, clock, logger=None)
 
 **Parameters:**
 
@@ -872,6 +926,7 @@ client: [CamundaClient](client.md#camunda_orchestration_sdk.CamundaClient)
 | --------- | --------------------------------- | ----------- |
 | `job`     | `ActivatedJobResult`              |             |
 | `client`  | `Any`                             |             |
+| `clock`   | `Clock`                           |             |
 | `logger`  | [SdkLogger](#sdklogger) \| `None` |             |
 
 - **Return type:**
@@ -880,7 +935,7 @@ client: [CamundaClient](client.md#camunda_orchestration_sdk.CamundaClient)
 ## WorkerConfig
 
 ```python
-class WorkerConfig(job_type, job_timeout_milliseconds=None, request_timeout_milliseconds=None, max_concurrent_jobs=None, fetch_variables=None, worker_name=None)
+class WorkerConfig(job_type, job_timeout_milliseconds=None, request_timeout_milliseconds=None, max_concurrent_jobs=None, fetch_variables=None, worker_name=None, with_lease=False)
 ```
 
 Bases: `object`
@@ -901,6 +956,7 @@ falling back to the hardcoded SDK default when neither is set.
 | `max_concurrent_jobs`          | `int` \| `None`       |             |
 | `fetch_variables`              | list [str ] \| `None` |             |
 | `worker_name`                  | `str` \| `None`       |             |
+| `with_lease`                   | `bool`                |             |
 
 ### fetch_variables
 
@@ -942,6 +998,18 @@ request_timeout_milliseconds: int | None* *= None
 
 Long-poll request timeout in milliseconds. Falls back to
 `CAMUNDA_WORKER_REQUEST_TIMEOUT` env var, then `0`.
+
+### with_lease
+
+```python
+with_lease: bool* *= False
+```
+
+Activate jobs with a lease. Each job then carries a lease token that the worker sends
+back on complete, fail, and throw-error, so the engine can fence the command against a
+superseded activation. Off by default, matching the engine. Requires a server that
+supports job leases: rather than degrade to unfenced commands, a worker that asked for a
+lease and is handed a job without a token raises `LeaseNotHonoredError`.
 
 ### worker_name
 

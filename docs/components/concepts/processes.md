@@ -32,9 +32,7 @@ New to BPMN? Visit our step-by-step introductory guide on [automating a process 
 
 ## Modeling BPMN
 
-Camunda provides [Modeler](/components/modeler/about-modeler.md), a free and open source BPMN modeling tool to create BPMN diagrams and configure their technical properties.
-
-Camunda offers two Modeler tools to design and implement your diagrams:
+Camunda offers two modeling tools to design and implement your diagrams:
 
 - [Camunda Hub](/components/hub/workspace/modeler/index.md): Integrate seamlessly with Camunda 8 SaaS and Self-Managed installations.
 - [Desktop Modeler](/components/modeler/desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
