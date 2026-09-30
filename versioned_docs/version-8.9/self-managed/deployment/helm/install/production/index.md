@@ -494,6 +494,16 @@ The following resources and configuration options are important to keep in mind 
   You should only enable the auto-mounting of a service account token when the application explicitly needs access to the Kubernetes API server, or you have created a service account with the exact permissions required for the application and bound it to the pod.
   :::
 
+- If you keep the chart-created service accounts, note that the Management Identity service account mounts its token by default, unlike the other components. Management Identity does not call the Kubernetes API, so you can disable the token mount:
+
+  ```yaml
+  identity:
+    serviceAccount:
+      automountServiceAccountToken: false
+  ```
+
+  Keep it enabled only if a sidecar or init container in the Identity pod, such as Vault Agent with Kubernetes auth, relies on the default token. Starting with 8.10, this is the default.
+
 - Restrict pod-to-pod traffic with [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/). See [required network traffic](#required-network-traffic) for the flows a Camunda installation depends on.
 
 - Several in-cluster connections, including Connectors to the Orchestration Cluster gateway and Spring Boot management endpoints, are plaintext by default. `global.tls.caBundle` does not cover them. To encrypt them, run a service mesh such as Linkerd, Istio, or Cilium. See [in-cluster transport](/self-managed/deployment/helm/configure/tls.md#in-cluster-transport-service-mesh-required) for the affected connections.
