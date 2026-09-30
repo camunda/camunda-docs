@@ -73,7 +73,12 @@ Keep the existing release and namespace as the orchestration release, and then i
 Camunda doesn't support running more than one Management Identity against the same database. That's why this procedure converts the combined release first, which removes its Management Identity, and only then installs the Hub release against the same database. Never have the combined release's Management Identity and the Hub release's Management Identity running at the same time.
 :::
 
-Plan a maintenance window. From step 2 until the Hub release is ready in step 3, Camunda Hub and Management Identity aren't running.
+Plan a maintenance window. From step 2 until the Hub release is ready in step 3, Camunda Hub and Management Identity aren't running. During that window:
+
+- **The Orchestration Cluster keeps running.** Brokers keep processing, the REST and gRPC APIs keep authenticating, and Operate and Tasklist sign-in keeps working. The Orchestration Cluster validates tokens against your OIDC provider and uses its own authorizations, so it doesn't depend on Management Identity. Pods that restart during the window start normally.
+- **Connectors keep running.** Connectors get their tokens from your OIDC provider, not from Management Identity.
+- **Optimize is degraded.** Its pods stay ready, but Optimize reads tenant assignments and user details from Management Identity, and with a provider other than Keycloak it also checks permissions there. Expect missing or failing user lookups, and failed report and dashboard queries when multi-tenancy is enabled. Treat Optimize as unavailable for the window.
+- **Your OIDC provider must stay up.** Every component authenticates against it. If Keycloak runs alongside Management Identity, make sure it isn't part of the outage.
 
 ### Step 1: Inventory what the combined release owns
 
