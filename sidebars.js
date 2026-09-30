@@ -739,6 +739,17 @@ module.exports = {
             },
             {
               type: "category",
+              label: "Manage environments",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-environments/manage-environments",
+              },
+              items: [
+                "components/hub/organization/manage-environments/assign-environments",
+              ],
+            },
+            {
+              type: "category",
               label: "Manage clusters",
               link: {
                 type: "doc",

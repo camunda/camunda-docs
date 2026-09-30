@@ -11,7 +11,11 @@ Learn how to rename, resume, update, resize, or delete your cluster.
 
 ## View clusters
 
-To view your clusters in Camunda Hub, under **Console** in the left navigation, click **Clusters**.
+To view your clusters in Camunda Hub, click **Environments** in the left navigation, and then click **Clusters** next to the page title. You only see **Clusters** if you're an organization owner, admin, or DevOps user.
+
+The cluster page lists the Environments that a cluster hosts. To manage the Environments themselves, see [manage Environments](../manage-environments/index.md).
+
+In Self-Managed, you provision clusters outside Camunda Hub. Click **Register new cluster** to see how to make a cluster you provision visible in Camunda Hub.
 
 ## Rename a cluster
 
@@ -19,7 +23,7 @@ You can safely rename a cluster at any time.
 
 To rename a cluster in SaaS:
 
-1. In the left navigation, under **Clusters**, select a cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 2. At the top of the view, next to the cluster name, open the vertical ellipsis menu.
 3. Click **Rename**.
 
@@ -46,7 +50,7 @@ You can resume your paused cluster from Camunda Hub at any time.
 
 ![Resume a paused cluster from the Console](./img/cluster-resume-console.png)
 
-1. In the left navigation under **Clusters**, select the paused cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select the paused cluster.
 2. On the **Overview** tab, under **Cluster details**, click **Resume cluster**.
 
 ## Update a cluster
@@ -87,7 +91,7 @@ In SaaS, you can enable [automated patch updates](/components/saas/auto-updates.
 
 You can increase or decrease the [cluster size](/components/concepts/clusters.md#cluster-size) at any time. For example, increase the cluster size to improve performance and add capacity, or decrease the cluster size to free up reservations for another cluster.
 
-1. In the left navigation under **Clusters**, select your cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select your cluster.
 1. On the **Overview** tab, next to the cluster type, click **Resize cluster**.
 1. Select the new cluster size from the available sizes.
 1. Click **Confirm** to resize the cluster, or **Cancel** to close the modal without resizing the cluster.
@@ -102,8 +106,10 @@ To increase the cluster size beyond the maximum 4x size, [reach out to Camunda](
 Deleting a cluster is **permanent** and cannot be undone.
 :::
 
+Deleting a cluster also removes the Environments it hosts, so they're no longer available to any workspace.
+
 You can delete a cluster at any time:
 
-1. In the left navigation under **Clusters**, select your cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select your cluster.
 1. On the **Settings** tab, click **Delete**.
 1. If you're sure you want to _permanently_ delete the cluster, confirm the deletion.
