@@ -38,7 +38,7 @@ Three primary setups are supported:
 
 ## Use Keycloak as the default IdP
 
-This is the default authentication setup for Self-Managed installation methods, including [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deployment/helm/index.md) and [Manual installation](/self-managed/deployment/manual/install.md). Except for Helm charts, these methods come with a pre-packaged Keycloak instance that acts as the Identity Provider. With Helm, you deploy Keycloak with the [Keycloak operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) and connect the Helm chart to it.
+This is the default authentication setup for Self-Managed installation methods, including [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deployment/helm/index.md) and [Manual installation](/self-managed/deployment/manual/install.md). The full Docker Compose configuration comes with a pre-packaged Keycloak instance that acts as the Identity Provider. With Helm, you deploy Keycloak with the [Keycloak operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) and connect the Helm chart to it.
 
 In this setup:
 
