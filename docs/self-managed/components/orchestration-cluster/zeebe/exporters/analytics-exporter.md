@@ -2,16 +2,16 @@
 id: analytics-exporter
 title: "Analytics Exporter"
 sidebar_label: "Analytics Exporter"
-description: "Understand how the Analytics Exporter sends product telemetry from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends."
+description: "Understand how the Analytics Exporter sends product telemetry data from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends."
 ---
 
-Understand how the Analytics Exporter sends product telemetry from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends.
+Understand how the Analytics Exporter sends product telemetry data from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends.
 
 ## About
 
 The Analytics Exporter sends product telemetry from your Orchestration Cluster to a Camunda-operated analytics endpoint over OTLP/HTTP.
 
-Camunda uses this data to verify contractual usage, understand how the product is used, and support your deployment. For what Camunda collects and why across all products, see [Data collection](/reference/data-collection/data-collection.md).
+Camunda uses this data to verify contractual usage, understand how the product is used, and support your deployment. For what Camunda collects and why across all products, see [data collection](/reference/data-collection/data-collection.md).
 
 The exporter is **disabled by default**. No data leaves your cluster until you add the exporter to your broker configuration.
 
@@ -26,7 +26,7 @@ The exporter reads records from the Zeebe log stream, keeps a fixed set of event
 Three properties are worth understanding before you enable it:
 
 - **It cannot slow down your brokers.** The exporter is fire-and-forget. Records are handed to a background thread and the broker acknowledges the log position immediately. If the queue fills or the endpoint is unreachable, records are dropped rather than back-pressuring the engine.
-- **Delivery is best effort.** Records can be dropped if the endpoint is unreachable or a broker restarts, so the data is not guaranteed to be complete. Do not use it for billing, audit, or anything that depends on a complete record. For contractual metric reporting, see [Usage metrics](/reference/data-collection/usage-metrics.md).
+- **Delivery is best effort.** Records can be dropped if the endpoint is unreachable or a broker restarts, so the data is not guaranteed to be complete. Do not use it for billing, audit, or anything that depends on a complete record. For contractual metric reporting, see [usage metrics](/reference/data-collection/usage-metrics.md).
 - **It runs on the partition leader only.** No additional high-availability setup is required.
 
 ## Enable the exporter
@@ -85,12 +85,12 @@ Analytics exporter configured: endpoint=<endpoint>, clusterId=<cluster-id>, part
 
 The [`categories`](#configuration-reference) option controls which signals are exported:
 
-| Category      | What it contains                                                                                                                                                | Why Camunda collects it                                                                      |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `contractual` | Root process instance starts, decision evaluations, user task assignments, and tenant creation and deletion.                                                    | To verify usage against the metrics in your agreement.                                       |
-| `optional`    | Process, decision, and form definition deployments and deletions; incidents raised and resolved; user task creation; and agent instance starts and completions. | To understand how the product is used, prioritize improvements, and support your deployment. |
+| Category    | What it contains                                                                                                                                                | Why Camunda collects it                                                                      |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| contractual | Root process instance starts, decision evaluations, user task assignments, and tenant creation and deletion.                                                    | To verify usage against the metrics in your agreement.                                       |
+| optional    | Process, decision, and form definition deployments and deletions; incidents raised and resolved; user task creation; and agent instance starts and completions. | To understand how the product is used, prioritize improvements, and support your deployment. |
 
-Every signal in each category, with its attributes, is listed in [What data is sent](#what-data-is-sent).
+Every signal in each category, with its attributes, is listed in [what data is sent](#what-data-is-sent).
 
 Both categories are active by default. Narrow the set by removing entries. For example, to send contractual signals only:
 
