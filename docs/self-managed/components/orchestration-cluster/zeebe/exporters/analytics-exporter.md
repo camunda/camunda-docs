@@ -105,7 +105,7 @@ camunda:
             - contractual
 ```
 
-Omit `categories` (or leave it unset) to enable both by default. Explicitly setting `categories: []` disables data-category telemetry entirely; only the heartbeat and export-window signals below continue to be sent.
+Explicitly setting `categories: []` disables data-category telemetry entirely. Only the heartbeat and export-window signals below continue to be sent.
 
 The `camunda.telemetry.heartbeat` event and the `camunda.metric.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
 
@@ -245,6 +245,8 @@ The agent definition (model, provider, system prompt), its tools, its token coun
 
 ### Always-on signals
 
+Together with the resource attributes attached to every record, these signals make up the environment data described on the [data collection](/reference/data-collection/data-collection.md) page.
+
 **`camunda.telemetry.heartbeat`**: periodic liveness signal from the partition leader.
 
 | Attribute                                      | Type   | Description                           |
@@ -264,8 +266,8 @@ Regardless of configuration, the exporter never sends:
 - Incident error messages
 - BPMN, DMN, and form resources, resource names, or version tags
 - Tenant names and descriptions
-- Agent system prompts, tool definitions, or model configuration
-- Raw user names, email addresses, or your license key
+- Agent system prompts, tool definitions, model configuration, or token counts
+- Raw user names, email addresses, assignee data, or your license key
 
 ## Configuration reference
 
@@ -276,7 +278,7 @@ All options live under `args`. The defaults suit typical Self-Managed deployment
 | `endpoint`           | string   | OTLP/HTTP base URL for the analytics endpoint. The path `/v1/logs` is appended automatically.                                                       | `https://telemetry.camunda.io` |
 | `categories`         | list     | Signal categories to export: `contractual`, `optional`. Omitted enables both (the default); an explicit empty list (`[]`) disables both.            | `[contractual, optional]`      |
 | `push-interval`      | duration | Maximum time between batch pushes, as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).                                     | `PT5M`                         |
-| `heartbeat-interval` | duration | Interval between heartbeat events carrying static cluster metadata.                                                                                 | `PT10M`                        |
+| `heartbeat-interval` | duration | Interval between heartbeat events carrying the broker and exporter versions.                                                                        | `PT10M`                        |
 | `max-queue-size`     | int      | Maximum number of records buffered in memory before new records are dropped.                                                                        | `2048`                         |
 | `max-batch-size`     | int      | Maximum number of records per OTLP request. Must not exceed `max-queue-size`.                                                                       | `512`                          |
 | `sampling-rate`      | double   | Default sampling rate for events, between `0.0` and `1.0`. Individual signals may declare a lower rate; the effective rate is the lower of the two. | `1.0`                          |
