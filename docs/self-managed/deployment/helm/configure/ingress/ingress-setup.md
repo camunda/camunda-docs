@@ -192,7 +192,7 @@ orchestration:
 
 With `global.ingress.external: true`, the chart doesn't render any web application Ingress object. The setting has no effect if `global.ingress.enabled` is `false`.
 
-The chart still derives external URLs from `global.host`, the component context paths, `global.ingress.protocol`, and `global.ingress.publicPorts`. It uses these URLs for:
+The chart still derives external URLs from `global.host`, the component context paths, `global.ingress.protocol`, and `global.ingress.publicPorts`. The chart uses these URLs for:
 
 - Links in the installation notes and release information.
 - The Identity URL and its login callback, if `identity.fullURL` is empty.
@@ -202,13 +202,13 @@ Configure your routing resources to serve each component on these URLs. If clien
 
 `global.ingress.external` doesn't affect the Zeebe gRPC Ingress. To skip the gRPC Ingress, set `orchestration.ingress.grpc.external: true`. The chart still derives the gRPC URL from `orchestration.ingress.grpc.host`.
 
-Use `global.ingress.external: true` instead of `global.ingress.enabled: false` for this setup:
+If a service mesh or your own routing resources send traffic to Camunda, use `global.ingress.external: true` instead of `global.ingress.enabled: false`:
 
-| Values                                                             | Chart renders Ingress objects | Chart derives the listed URLs from | Use when                                                                                 |
-| ------------------------------------------------------------------ | ----------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
-| `global.ingress.enabled: true`                                     | Yes                           | `global.host`                      | The chart's Ingress objects route traffic.                                               |
-| `global.ingress.enabled: true` and `global.ingress.external: true` | No                            | `global.host`                      | A service mesh or your own routing resources route traffic.                              |
-| `global.ingress.enabled: false`                                    | No                            | `localhost` defaults               | You access components with [port forwarding](./accessing-components-without-ingress.md). |
+| Values                                                             | Chart renders Ingress objects | URL source           | Use when                                                                                 |
+| ------------------------------------------------------------------ | ----------------------------- | -------------------- | ---------------------------------------------------------------------------------------- |
+| `global.ingress.enabled: true`                                     | Yes                           | `global.host`        | The chart's Ingress objects route traffic.                                               |
+| `global.ingress.enabled: true` and `global.ingress.external: true` | No                            | `global.host`        | A service mesh or your own routing resources route traffic.                              |
+| `global.ingress.enabled: false`                                    | No                            | `localhost` defaults | You access components with [port forwarding](./accessing-components-without-ingress.md). |
 
 If you manage Gateway API resources yourself, use `global.gateway.external` instead. See [manage all resources yourself](./gateway-api-setup.md#scenario-d-manage-all-resources-yourself).
 
