@@ -2,10 +2,10 @@
 id: deployment-topology
 title: "Camunda 8.10 deployment topology"
 sidebar_label: "Deployment topology"
-description: "Camunda 8.10 Self-Managed is deployed as a management plane and one or more execution planes, each installed as its own Helm release."
+description: "Camunda 8.10 Self-Managed is deployed as a Hub plane and one or more execution planes, each installed as its own Helm release."
 ---
 
-Camunda 8.10 Self-Managed is deployed as a management plane and one or more execution planes, each installed as its own Helm release.
+Camunda 8.10 Self-Managed is deployed as a Hub plane and one or more execution planes, each installed as its own Helm release.
 
 A single Helm chart still produces every component. What changed in 8.10 is that you choose the _role_ each release plays in the wider deployment, using `global.topology.mode`. One management release running Camunda Hub can serve many independently deployed Orchestration Clusters, and each cluster can host several [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), each with its own Optimize release.
 

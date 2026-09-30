@@ -18,7 +18,7 @@ The hard part of this move is data, not values. Orchestration Cluster broker vol
 Make it when you need something the combined release can't give you:
 
 - Several Orchestration Clusters sharing one Camunda Hub and one Management Identity.
-- Independent upgrade, scaling, or removal of a cluster without touching the management plane.
+- Independent upgrade, scaling, or removal of a cluster without touching the Hub plane.
 - Physical Tenants with a separate Optimize instance per tenant.
 
 If none of those apply, staying on a combined release is a fully supported long-term choice.

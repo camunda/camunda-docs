@@ -84,7 +84,7 @@ The Orchestration Cluster exposes two services:
 
 ![Camunda Hub and Management Identity](./img/management-cluster.jpg)
 
-Camunda Hub and Management Identity form the management plane that serves all Orchestration Clusters. Both are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes it easy to scale each horizontally by running multiple replica pods behind a load balancer, improving availability and request throughput.
+Camunda Hub and Management Identity form the Hub plane that serves all Orchestration Clusters. Both are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes it easy to scale each horizontally by running multiple replica pods behind a load balancer, improving availability and request throughput.
 
 Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
 
@@ -115,7 +115,7 @@ To further improve fault tolerance, distribute the Orchestration Cluster and oth
 
 Camunda 8 deployments separate workloads into three logical groups, each installed as its own Helm release with a `global.topology.mode` role:
 
-- **Management plane:** Camunda Hub and Management Identity (`hub`)
+- **Hub plane:** Camunda Hub and Management Identity (`hub`)
 - **Execution plane:** Orchestration Cluster and Connectors (`orchestration`)
 - **Optimize**, one release per Physical Tenant (`optimize`)
 
