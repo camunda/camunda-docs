@@ -4,7 +4,7 @@ title: Job dashboard
 description: "Use the job dashboard in Camunda Hub to see active job types, track created, completed and failed jobs, spot trends over time, and drill into job worker errors."
 ---
 
-Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.
+Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved. In Self-Managed, the job dashboard shows the jobs of an [Environment](/components/concepts/environments.md). In SaaS, it shows the jobs of a cluster, and each SaaS cluster hosts one Environment.
 
 ## Availability and permissions
 
@@ -48,14 +48,23 @@ With the job dashboard, you can:
 
 ### 1. Open the Jobs overview
 
-1. In Camunda Hub, go to **Clusters**.
+In Self-Managed:
+
+1. In Camunda Hub, click **Environments** in the left navigation.
+2. Select an Environment.
+3. On the **Overview** tab, locate the **Jobs (last 24 hours)** card. It shows the number of created, completed, and not completed jobs.
+4. Click **View all job types** to open the **Jobs** page of the Environment.
+
+In SaaS:
+
+1. In Camunda Hub, click **Environments** in the left navigation, and then click **Clusters**.
 2. Select a cluster.
-3. On the **Overview** tab, locate the **Jobs** card.
-4. Click **View jobs** to open the **Job types** page.
+3. On the **Overview** tab, locate the **Jobs (last 24h)** card.
+4. Click **View all job types** to open the **Job types** page.
 
 ### 2. Job types overview
 
-The **Job types** page shows all job types running against the selected cluster.
+The **Job types** page, called **Jobs** in Self-Managed, shows all job types running in the selected Environment or cluster.
 
 ![Jobs overview with Job types table](img/jobs-overview.png)
 
@@ -140,7 +149,7 @@ Click **View errors** to open related instances in **Operate**, with the **Error
 
 ### No jobs in the queue
 
-If there are no jobs for the cluster or selected time range, the Jobs page shows:
+If there are no jobs for the Environment, cluster, or selected time range, the Jobs page shows:
 
 - Heading: **No jobs in the queue**
 - Message: **No jobs found.**
@@ -150,7 +159,7 @@ This means there is no job activity to display.
 
 ### Jobs card access restricted
 
-If the feature is disabled for the cluster or you don't have permission, the **Jobs** card on the cluster overview shows:
+If the feature is disabled for the cluster or you don't have permission, the **Jobs** card on the Environment or cluster overview shows:
 
 - Status: **Access restricted**
 - Message explaining that the feature is restricted or disabled and you must contact an administrator.

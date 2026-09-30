@@ -77,7 +77,7 @@ Tenants can be created and principals assigned regardless of whether checks are 
 On SaaS, enable multi-tenancy checks per cluster using the **Multi-tenancy** toggle in Camunda Hub:
 
 1. Navigate to **Camunda Hub**.
-1. In the left navigation under **Console**, select the **Clusters**.
+1. In the left navigation, click **Environments**, and then click **Clusters**.
 1. Select the cluster you want to manage, and select the **Settings** tab.
 1. Enable the **Multi-tenancy** setting.
 

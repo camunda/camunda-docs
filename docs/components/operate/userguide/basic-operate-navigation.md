@@ -12,15 +12,16 @@ This guide and [resolve incidents and update variables](./resolve-incidents-upda
 
 ## Open Operate
 
-From Camunda Hub, you can access all your clusters and navigate to any running instance of Operate:
+From Camunda Hub, you can open Operate in any [Environment](/components/concepts/environments.md) you have access to:
 
 1. Log in to Camunda Hub.
-1. In the left navigation under **Console**, click **Clusters**.
-1. Select a cluster. Each cluster contains its own instance of Operate.
-1. On the **Operate** card, click **Launch**. This opens the cluster's Operate instance.
+1. In the left navigation, click **Environments**, and then select an Environment. Each Environment has its own instance of Operate.
+1. Under **Applications**, on the **Operate** card, click **Open**. This opens Operate for the Environment in a new tab.
+
+You can also expand an Environment in the left navigation, and select Operate from its applications.
 
 :::tip
-If the cluster is paused, you won't see a **Launch** button. You must [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) to access its components.
+If the Environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
 :::
 
 ## View a deployed process

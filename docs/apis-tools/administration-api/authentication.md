@@ -10,7 +10,7 @@ All Administration API requests require authentication. To authenticate, generat
 
 ## Generate a token
 
-1. In Camunda Hub, in the left navigation under **Console**, click **Organization**.
+1. In Camunda Hub, in the left navigation, click **Organization > Manage organization**.
 2. In the **Administration API** tab, click **Create new credentials**.
 3. Name the client, and add permissions to this client for [the needed scopes](#client-credentials-and-scopes).
 4. Click **Create**.

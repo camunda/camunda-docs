@@ -22,7 +22,7 @@ Access tokens have a validity period that can be found in the access token. Afte
 
 To create a client, take the following steps:
 
-1. In Camunda Hub, in the left navigation, under **Console**, click **Clusters**.
+1. In Camunda Hub, in the left navigation, click **Environments**, and then click **Clusters**.
 2. Select a cluster.
 3. Click the **API** tab.
 4. Click **Create new client**.
@@ -61,7 +61,7 @@ Depending on the scopes granted to these client credentials, the following varia
 
 To view client connection information:
 
-1. In Camunda Hub, in the left navigation, under **Console**, click **Clusters**.
+1. In Camunda Hub, in the left navigation, click **Environments**, and then click **Clusters**.
 2. Select a cluster.
 3. Click the **API** tab.
 4. Select your client.
