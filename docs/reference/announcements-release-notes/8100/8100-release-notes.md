@@ -381,6 +381,23 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 
 <p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
 
+### Catalog
+
+<!-- https://github.com/camunda/product-hub/issues/3402 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+The new Camunda Hub catalog gives your center of excellence (CoE) a governed, organization-wide place to publish approved element templates, so delivery teams can reuse trusted building blocks instead of rebuilding them in each project.
+
+- Manage element templates and their metadata in your own Git repository, and use a CI/CD pipeline to publish them to the catalog through the Hub API whenever the approved set changes.
+- Browse, search, and filter published assets in Hub, and read each asset's details before you apply it while modeling.
+- Track where each asset version is used, and identify projects that still use an outdated version.
+- Unpublish assets you no longer want used. Elements that already use an unpublished asset keep working and show a deprecation hint.
+
+In 8.10, the catalog supports element templates as its only asset type.
+
+<p class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</p>
+
 ### Duplicate a cluster in Console
 
 <!-- https://github.com/camunda/product-hub/issues/3824 -->
@@ -707,11 +724,13 @@ When testing your process with Play in Web Modeler, you can now capture and reru
 
 ### Variables panel improvements
 
-<!-- https://github.com/camunda/camunda-modeler/issues/5934, https://github.com/camunda/camunda-modeler/issues/5938 -->
+<!-- https://github.com/camunda/product-hub/issues/3474, https://github.com/camunda/camunda-modeler/issues/5934, https://github.com/camunda/camunda-modeler/issues/5938, https://github.com/camunda/camunda-modeler/issues/5926, https://github.com/camunda/camunda-modeler/issues/5928 -->
 
 When you hover over "written in X elements" or an element ID in the variables panel, the diagram now highlights the corresponding element or elements so you can quickly see where a variable is used.
 
 FEEL expressions in the variable outline now use the same syntax highlighting as the FEEL editor, with more granular tokens that distinguish function names from arguments and operators from literals, making complex expressions easier to read.
+
+When no element is selected on the canvas, the variables panel now highlights the process (root) scope, matching how it highlights the scope of a selected element. Variable value previews also no longer repeat the opening brackets of nested objects and arrays, so previews are easier to scan.
 
 <p class="link-arrow">[Inspect variables](/components/modeler/data-handling.md#inspecting-variables)</p>
 
@@ -2125,6 +2144,23 @@ Adding a project collaborator through the public API — `PUT /v1/collaborators`
 
 <p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
 
+### Camunda Hub
+
+#### Catalog
+
+<!-- https://github.com/camunda/product-hub/issues/3402 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+The new Camunda Hub catalog gives your center of excellence (CoE) a governed, organization-wide place to publish approved element templates, so delivery teams can reuse trusted building blocks instead of rebuilding them in each project.
+
+- Manage element templates and their metadata in your own Git repository, and use a CI/CD pipeline to publish them to the catalog through the Hub API whenever the approved set changes.
+- Browse, search, and filter published assets in Hub, and read each asset's details before you apply it while modeling.
+- Track where each asset version is used, and identify projects that still use an outdated version.
+- Unpublish assets you no longer want used. Elements that already use an unpublished asset keep working and show a deprecation hint.
+
+<p class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</p>
+
 ### Console
 
 #### Bespoke cluster generations for SaaS
@@ -2202,13 +2238,15 @@ When testing your process with Play in Web Modeler, you can now capture and reru
 
 #### Variables panel improvements
 
-<!-- https://github.com/camunda/camunda-modeler/issues/5934, https://github.com/camunda/camunda-modeler/issues/5938 -->
+<!-- https://github.com/camunda/product-hub/issues/3474, https://github.com/camunda/camunda-modeler/issues/5934, https://github.com/camunda/camunda-modeler/issues/5938, https://github.com/camunda/camunda-modeler/issues/5926, https://github.com/camunda/camunda-modeler/issues/5928 -->
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 When you hover over "written in X elements" or an element ID in the variables panel, the diagram now highlights the corresponding element or elements so you can quickly see where a variable is used.
 
 FEEL expressions in the variable outline now use the same syntax highlighting as the FEEL editor, with more granular tokens that distinguish function names from arguments and operators from literals, making complex expressions easier to read.
+
+When no element is selected on the canvas, the variables panel now highlights the process (root) scope, matching how it highlights the scope of a selected element. Variable value previews also no longer repeat the opening brackets of nested objects and arrays, so previews are easier to scan.
 
 <p class="link-arrow">[Inspect variables](/components/modeler/data-handling.md#inspecting-variables)</p>
 
