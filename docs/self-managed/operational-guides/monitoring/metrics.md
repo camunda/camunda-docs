@@ -219,9 +219,9 @@ The following table lists the default metrics endpoint of each component that ex
 | Connectors            | `8080`               | `8080`                 | `/actuator/prometheus` | `connectors.metrics.prometheus`         |
 | Management Identity   | `82`                 | `8082`                 | `/actuator/prometheus` | `identity.metrics.prometheus`           |
 | Optimize              | `8092`               | `8092`                 | `/actuator/prometheus` | `optimize.metrics.prometheus`           |
-| Hub REST API          | `8091`               | `8091`                 | `/metrics`             | `camundaHub.restapi.metrics.prometheus` |
+| Camunda Hub REST API  | `8091`               | `8091`                 | `/metrics`             | `camundaHub.restapi.metrics.prometheus` |
 
-The chart creates the Management Identity `ServiceMonitor` resource only if `global.identity.auth.enabled` is `true`. The chart configures no metrics port for Hub WebSockets, so no `ServiceMonitor` resource covers it.
+The chart creates the Management Identity `ServiceMonitor` resource only if `global.identity.auth.enabled` is `true`. The chart configures no metrics port for Camunda Hub WebSockets, so no `ServiceMonitor` resource covers it.
 
 ## Available metrics
 
