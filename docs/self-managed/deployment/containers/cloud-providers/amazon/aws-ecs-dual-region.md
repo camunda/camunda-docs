@@ -585,7 +585,13 @@ source ./procedure/export_environment_prerequisites.sh
 
 The writer switch is a planned switchover, so it needs the failed region's Aurora cluster to still be available. The script returns only after the global cluster reports the switchover complete.
 
-If the region is gone, `failover.sh` still removes the zone, and Camunda keeps processing in the surviving region. The script then stops with an error instead of switching the writer, and exporting to secondary storage waits for a writer. Recover Aurora with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html). The scripts don't automate it, because it can lose data that was not replicated yet.
+If the region is gone, `failover.sh` still removes the zone, and Camunda keeps processing in the surviving region. The script then stops instead of switching the writer, with this error:
+
+```text
+[<time>] ERROR: The Aurora writer in <failed-region> is <status>, so a planned switchover cannot run.
+```
+
+Exporting to secondary storage waits until a writer is available again. Recover Aurora with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html). The scripts don't automate it, because it can lose data that was not replicated yet.
 
 Read the scripts in the reference repository for the exact actions and prerequisites. Failover is manual — no automated health-check-driven promotion is included.
 
