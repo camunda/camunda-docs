@@ -560,21 +560,27 @@ Camunda recommends restoring to a fresh cluster rather than reusing an existing 
 
 ### Failover and failback
 
-The reference repository ships helper scripts under `aws/containers/ecs-dual-region-fargate/procedure/`:
+The reference repository ships helper scripts under `aws/containers/ecs-dual-region-fargate/procedure/`. Source `export_environment_prerequisites.sh` before you run them:
 
 ```bash
-# Planned switchover to region 1
-./procedure/failover.sh
+# Fail region 0: scale its ECS services to 0, force-remove its zone,
+# and switch the Aurora writer to region 1 if the writer was in region 0
+./procedure/failover.sh --failed-region 0
 
-# Unplanned promote-detach to region 1
-./procedure/failover.sh --unplanned
+# Validate the zone removal without changing anything
+./procedure/failover.sh --failed-region 0 --dry-run
 
-# Failback to region 0
-./procedure/failback.sh
+# The region's tasks are already down: skip the ECS scale-down
+./procedure/failover.sh --failed-region 0 --keep-tasks
 
-# Failback and also switch the Aurora writer back to region 0
-./procedure/failback.sh --switch-writer
+# Restore region 0: scale it up and re-add its zone
+./procedure/failback.sh --failed-region 0
+
+# Also switch the Aurora writer back to region 0
+./procedure/failback.sh --failed-region 0 --switch-writer
 ```
+
+The writer switch is a planned switchover, so it needs the failed region's Aurora cluster to still be reachable. The script returns only after the global cluster reports the switchover complete. If the region is gone, follow the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html) instead. The scripts don't automate it.
 
 Read the scripts in the reference repository for the exact actions and prerequisites. Failover is manual — no automated health-check-driven promotion is included.
 
