@@ -357,6 +357,7 @@ Web Modeler uses Keycloak as the default authentication provider (using OAuth 2.
 | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------ |
 | `CAMUNDA_IDENTITY_BASEURL`                                 | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                                               | `http://identity:8080`                                                                    | -                        |
 | `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM`               | ID token claim used to assign usernames.                                                                                                                                                                                                                                                | `preferred_username`                                                                      | `name`                   |
+| `CAMUNDA_MODELER_OAUTH2_TOKEN_USERIDCLAIM`                 | [optional]<br/>Access token claim used to uniquely identify a user. The claim must be present in every user access token and contain a string value; otherwise, requests are rejected. See [changing the user ID claim](#change-the-user-id-claim). Available from `8.9.10` onwards.    | `oid`                                                                                     | `sub`                    |
 | `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API`       | Expected value of the audience claim in user access tokens (used for JWT validation).                                                                                                                                                                                                   | `web-modeler-api`                                                                         | `web-modeler-api`        |
 | `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API`         | Expected value of the audience claim in M2M access tokens required for [Web Modeler's API](/apis-tools/web-modeler-api/authentication.md?environment=self-managed) (used for JWT validation).                                                                                           | `web-modeler-public-api`                                                                  | `web-modeler-public-api` |
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`                  | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:18080/auth/realms/camunda-platform`                                      | -                        |
@@ -391,6 +392,7 @@ camunda:
         fetch-request-credentials: include # optional
         scope: openid email profile # optional
       token.username-claim: name # optional, default: name
+      token.user-id-claim: sub # optional, default: sub
 
 spring:
   security:
@@ -409,6 +411,36 @@ spring:
 :::note Helm behavior
 The `restapi` component default for `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM` is `name`.
 In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
+:::
+
+#### Change the user ID claim
+
+Web Modeler identifies users by the `sub` claim of their access token. To use a different claim, for example `oid` in Microsoft Entra ID, set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERIDCLAIM` for the `restapi` component. The claim must:
+
+- Never change for a user, such as `sub` or `oid`. If the value changes, for example when a user's email address changes, the user gets a new, empty account.
+- Contain a non-empty string of at most 255 characters. Otherwise, the user can't log in.
+
+With Helm, use [`webModeler.restapi.extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#componentnameextraconfiguration):
+
+```yaml
+webModeler:
+  restapi:
+    extraConfiguration:
+      - file: user-id-claim.yaml
+        content: |
+          camunda:
+            modeler:
+              oauth2:
+                token:
+                  user-id-claim: oid
+```
+
+If `CAMUNDA_MODELER_OAUTH2_TOKEN_USERIDCLAIM` is not set, Web Modeler uses `CAMUNDA_IDENTITY_USERIDCLAIM`.
+
+Existing users keep their account. On their next login, Web Modeler moves accounts stored under `sub` to the new claim.
+
+:::warning
+Moving accounts is a one-way operation. If you change the claim again, Web Modeler doesn't move the accounts back, and affected users get a new, empty account.
 :::
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
