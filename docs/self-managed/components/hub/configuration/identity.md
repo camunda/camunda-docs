@@ -18,4 +18,4 @@ Configure Camunda Hub's OIDC authentication with the properties documented under
 
 ## Use a different OIDC provider than Keycloak
 
-By default, Camunda Hub uses Keycloak as its identity provider. With Helm, you deploy Keycloak with the [Keycloak operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment). To use a different OIDC provider, follow the steps in the [OIDC connection guide](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
+By default, Camunda Hub uses Keycloak as its identity provider. For the installation methods that start Keycloak, see [About Management Identity](/self-managed/components/management-identity/overview.md#about-management-identity). To use a different OIDC provider, follow the steps in the [OIDC connection guide](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
