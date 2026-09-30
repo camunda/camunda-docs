@@ -10,7 +10,7 @@ Move an existing single-release Camunda 8.10 deployment to the split topology: o
 This is a topology change, not a version upgrade. It doesn't change any component version, and it isn't required. A `combined` release remains both supported and the chart default.
 
 :::warning
-The hard part of this move is data, not values. Orchestration Cluster broker volumes hold active process state and don't move between releases. Read [what moves and what doesn't](#what-moves-and-what-doesnt) before you plan a cutover, and choose [keep the cluster in place](#strategy-1-keep-the-cluster-in-place-recommended) unless you have a specific reason not to.
+The hard part of this move is data, not values. Orchestration Cluster broker volumes hold active process state and don't move between releases. Read [what moves and what doesn't](#what-moves-and-what-doesnt) before you plan the move.
 :::
 
 ## When to make this move
@@ -65,7 +65,7 @@ Secondary storage doesn't substitute for broker storage. Installing a fresh orch
 Switching an existing release to `global.topology.mode: hub` suppresses its Orchestration Cluster StatefulSet. The PVCs remain, but the cluster stops. Never flip a release running your only Orchestration Cluster to `hub` mode.
 :::
 
-## Strategy 1: Keep the cluster in place (recommended)
+## Keep the cluster in place
 
 Keep the existing release and namespace as the orchestration release, and then install a new Hub release that takes over the existing Management Identity and Camunda Hub databases. Broker storage and cluster identity never move, so there's no process-state cutover.
 
@@ -138,17 +138,9 @@ See [install an Optimize release](/self-managed/deployment/helm/install/topology
 - Inventory the OIDC clients, resource servers, permissions, and roles. Identity initialization is additive, so the combined release's objects still exist. Remove only what no release uses.
 - Retire the old Hub hostname and its TLS certificate, or redirect it.
 
-## Strategy 2: Drain and recreate
+## Moving a cluster to a different release, namespace, or Kubernetes cluster
 
-Use this only when the cluster must move to a different release name, namespace, or Kubernetes cluster, and in-place conversion isn't possible. Process state can't be transferred between Orchestration Clusters, so the old cluster must drain completely before you retire it.
-
-1. Stop new process instances at the application boundary.
-2. Let every running instance in the old cluster complete. Keep the old cluster and its workers serving until no active instances remain. [Process instance migration](/components/concepts/process-instance-migration.md) changes an instance's process definition inside its current cluster; it doesn't move instances to another cluster, so it isn't a way to drain.
-3. Take a verified backup of the broker state, secondary storage, and the Management Identity and Camunda Hub databases. See [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
-4. Stop the old release's Management Identity and Camunda Hub before any new Hub release starts, because only one Management Identity can run against a database. Convert the old release to `global.topology.mode: orchestration`, as in [strategy 1, step 2](#step-2-convert-the-combined-release-to-an-orchestration-release), or uninstall it if it has fully drained. Confirm its Management Identity pods have terminated. Keep the external databases and your OIDC provider running.
-5. Install the Hub release against the existing Management Identity and Camunda Hub databases, then install a new orchestration release with new index prefixes.
-6. Redeploy your process definitions and repoint your clients and workers to the new cluster.
-7. Retire the old release only after it has no active instances and you've confirmed the new cluster is serving correctly.
+This procedure keeps the Orchestration Cluster in its existing release and namespace. Moving an Orchestration Cluster to a different release name, namespace, or Kubernetes cluster isn't covered: broker volumes hold the live process state and don't move between releases. If you need to do this, contact Camunda before you plan it.
 
 ## Roll back
 
