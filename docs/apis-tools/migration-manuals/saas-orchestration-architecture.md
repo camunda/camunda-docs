@@ -45,7 +45,7 @@ After the 8.10 release, only the Zeebe gRPC endpoint and the unified `*.api.*` e
 
 From 8.9, you must include the application path (`/operate`, `/tasklist`, or `/admin`) when opening a web app. Requesting the cluster base URL on its own no longer opens a web app.
 
-Before 8.9, Operate, Tasklist, and Admin ran as standalone applications, so the runtime could determine which frontend to serve and redirected the cluster base URL to the matching web app automatically. For example, `https://bru-2.operate.camunda.io/abc123-def456-ghi789` redirected to `https://bru-2.operate.camunda.io/abc123-def456-ghi789/operate`.
+Before 8.9, Operate, Tasklist, and Admin ran as standalone applications, so the runtime could determine which frontend to serve and redirected the cluster base URL to the matching web app automatically. For example, `https://<region>.operate.camunda.io/<cluster-id>` redirected to `https://<region>.operate.camunda.io/<cluster-id>/operate`.
 
 From 8.9, Operate, Tasklist, Admin, and the REST API are served by the same unified application, so the runtime cannot infer which frontend a request is for. The automatic redirect no longer happens, and the cluster base URL does not resolve to a web app.
 
