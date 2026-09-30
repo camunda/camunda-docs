@@ -95,30 +95,30 @@ Access to the cluster pages in Camunda Hub depends on the user's role: `Console`
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-| Property                                         | Description                                                                                                         | Example value                                |
-| :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
-| `camunda.hub.clusters[0].id`                     | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
-| `camunda.hub.clusters[0].name`                   | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
-| `camunda.hub.clusters[0].version`                | The cluster version.                                                                                                | `8.10.0`                                     |
-| `camunda.hub.clusters[0].tags`                   | A list of tags.                                                                                                     | `['dev', 'test']`                            |
-| `camunda.hub.clusters[0].authentication`         | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
-| `camunda.hub.clusters[0].authorizations.enabled` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
-| `camunda.hub.clusters[0].custom-properties`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
-| `camunda.hub.clusters[0].components`             | A list of components for the clusters.                                                                              | See [components](#components).               |
+| Property                                         | Description                                                                                                          | Example value                                |
+| :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------------------- |
+| `camunda.hub.clusters[0].id`                     | An identifier for the cluster.                                                                                       | `camunda-platform`                           |
+| `camunda.hub.clusters[0].name`                   | A readable name for the cluster.                                                                                     | `Camunda Platform`                           |
+| `camunda.hub.clusters[0].version`                | The cluster version.                                                                                                 | `8.10.0`                                     |
+| `camunda.hub.clusters[0].tags`                   | A list of tags. The tags appear on every [Environment](#environments) of the cluster. Use `prod` to mark production. | `['dev', 'test']`                            |
+| `camunda.hub.clusters[0].authentication`         | The [authentication method](#available-authentication-methods).                                                      | `BEARER_TOKEN`                               |
+| `camunda.hub.clusters[0].authorizations.enabled` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub.  | `true`                                       |
+| `camunda.hub.clusters[0].custom-properties`      | A list of custom properties.                                                                                         | See [custom properties](#custom-properties). |
+| `camunda.hub.clusters[0].components`             | A list of components for the clusters.                                                                               | See [components](#components).               |
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Environment variable                            | Description                                                                                                         | Example value                                |
-| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
-| `CAMUNDA_HUB_CLUSTERS_0_ID`                     | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
-| `CAMUNDA_HUB_CLUSTERS_0_NAME`                   | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
-| `CAMUNDA_HUB_CLUSTERS_0_VERSION`                | The cluster version.                                                                                                | `8.10.0`                                     |
-| `CAMUNDA_HUB_CLUSTERS_0_TAGS`                   | A list of tags.                                                                                                     | `['dev', 'test']`                            |
-| `CAMUNDA_HUB_CLUSTERS_0_AUTHENTICATION`         | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
-| `CAMUNDA_HUB_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
-| `CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS`             | A list of components for the cluster.                                                                               | See [components](#components).               |
+| Environment variable                            | Description                                                                                                          | Example value                                |
+| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------------------- |
+| `CAMUNDA_HUB_CLUSTERS_0_ID`                     | An identifier for the cluster.                                                                                       | `camunda-platform`                           |
+| `CAMUNDA_HUB_CLUSTERS_0_NAME`                   | A readable name for the cluster.                                                                                     | `Camunda Platform`                           |
+| `CAMUNDA_HUB_CLUSTERS_0_VERSION`                | The cluster version.                                                                                                 | `8.10.0`                                     |
+| `CAMUNDA_HUB_CLUSTERS_0_TAGS`                   | A list of tags. The tags appear on every [Environment](#environments) of the cluster. Use `prod` to mark production. | `['dev', 'test']`                            |
+| `CAMUNDA_HUB_CLUSTERS_0_AUTHENTICATION`         | The [authentication method](#available-authentication-methods).                                                      | `BEARER_TOKEN`                               |
+| `CAMUNDA_HUB_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub.  | `true`                                       |
+| `CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES`      | A list of custom properties.                                                                                         | See [custom properties](#custom-properties). |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS`             | A list of components for the cluster.                                                                                | See [components](#components).               |
 
 </TabItem>
 </Tabs>
@@ -285,6 +285,101 @@ CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_1_URLS_READINESS=https://camunda.example.com:9
 
 </TabItem>
 </Tabs>
+
+#### Environments
+
+Camunda Hub creates an [Environment](/components/concepts/environments.md) from each cluster in your configuration. Teams deploy to Environments, so an Environment appears only if its cluster is in your configuration. Camunda Hub reads the cluster configuration once at startup on every instance, so after you change it, perform a rolling restart.
+
+The version of the cluster decides how many Environments it has:
+
+| Cluster version   | Environments                                                                                                                                                                               |
+| :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.10 or later     | One for the `default` Physical Tenant, which always exists, plus one for each Physical Tenant you declare under `physical-tenants`. Camunda Hub names the `default` one after the cluster. |
+| Earlier than 8.10 | One Environment for the whole cluster, named after the cluster.                                                                                                                            |
+
+If you declare `physical-tenants` on a cluster earlier than 8.10, Camunda Hub ignores them and logs a warning.
+
+##### Declare Physical Tenants
+
+Declare each additional [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) of a cluster with `physical-tenants`. Camunda Hub uses the ID of a tenant as the name of its Environment, except for the `default` tenant.
+
+| Property                                                 | Description                                                                                                                | Required |
+| :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :------- |
+| `camunda.hub.clusters[0].physical-tenants[0].id`         | The ID of the Physical Tenant. Camunda Hub shows it as the Environment name.                                               | Yes      |
+| `camunda.hub.clusters[0].physical-tenants[0].components` | The [components](#components) that differ from the cluster for this tenant. Each component needs a `type` and a `version`. | No       |
+
+Example configuration:
+
+```yaml
+camunda:
+  hub:
+    clusters:
+      - id: camunda-platform
+        # other fields...
+        physical-tenants:
+          - id: payments
+          - id: lending
+```
+
+Each Physical Tenant of a cluster shows the same [tags](#clusters) as the cluster. The tenant inherits the web application addresses of the cluster, and Camunda Hub adds the `/physical-tenants/<tenant ID>` path for the tenants other than `default`.
+
+##### Override components for a Physical Tenant
+
+Use `components` on a Physical Tenant to point it at its own component instances. This is a partial override:
+
+- Only the component types you list are replaced for the tenant. A listed component replaces the cluster entry completely, so set every address the tenant needs, such as `urls.webapp` and `urls.readiness`.
+- Every other component keeps using the configuration of the cluster, and follows later changes to it.
+- A tenant other than `default` never inherits Optimize from the cluster, because Optimize needs its own instance for each Physical Tenant. Add an `optimize` component to the tenant to show Optimize.
+- If you remove the override and restart Camunda Hub, the component uses the configuration of the cluster again.
+
+Example configuration that overrides only Optimize for the `payments` tenant. The other components still come from the cluster:
+
+```yaml
+camunda:
+  hub:
+    clusters:
+      - id: camunda-platform
+        # other fields...
+        physical-tenants:
+          - id: payments
+            components:
+              - type: optimize
+                version: 8.10.0
+                urls:
+                  webapp: https://optimize-payments.example.com
+                  readiness: https://optimize-payments.example.com/api/readyz
+```
+
+If a cluster earlier than 8.10 declares `components` on a tenant, Camunda Hub fails to start with the message `must not declare physical tenant 'components' if 'version' is lower than the minimum physical tenant version`.
+
+##### Environment status
+
+Camunda Hub sends an HTTP request to the `urls.readiness` address of each component of an Environment to determine its status. The status of the Environment is the worst result of its components:
+
+| Component response                                                                                      | Status    |
+| :------------------------------------------------------------------------------------------------------ | :-------- |
+| A successful response, with no body or with a `status` of `up` or `ready`                               | Healthy   |
+| An error response, or any other `status`                                                                | Unhealthy |
+| No `readiness` address, no response within five seconds, a redirect, or a body without a `status` field | Unknown   |
+
+A cluster that you configure with `url` instead of `components` has no readiness address, so its Environments always have the status **Unknown**.
+
+##### Not reported Environments
+
+If you remove a cluster or Physical Tenant from the configuration, but its Environment is still assigned to a workspace, the Environment stays in Camunda Hub with the status **Not reported**. It shows no live data, and you can't select it for a deployment. Remove the assignment from the workspace when you no longer need it.
+
+##### Mark a cluster as production
+
+Camunda Hub treats an Environment as a production Environment if the tags of its cluster include `prod`. The match is exact and case-sensitive, so `prod` works but `Prod` and `production` don't. All Physical Tenants of a cluster tagged `prod` are production Environments. See the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
+
+```yaml
+camunda:
+  hub:
+    clusters:
+      - id: camunda-platform
+        # other fields...
+        tags: ["prod"]
+```
 
 ### Database
 

@@ -45,16 +45,16 @@ In Self-Managed, use the **Layout** toggle to switch between **Grid** and **By c
 
 ### Environment statuses
 
-| Status       | Description                                                                                       |
-| :----------- | :------------------------------------------------------------------------------------------------ |
-| Healthy      | The Environment is running.                                                                       |
-| Unhealthy    | The Environment reports a problem.                                                                |
-| Paused       | The cluster is paused. In SaaS, you can [resume](#resume-a-paused-environment) it.                |
-| Resuming     | The cluster is starting after a resume.                                                           |
-| Unknown      | Camunda Hub can't determine the status.                                                           |
-| Not reported | In Self-Managed, the Environment is configured in Camunda Hub, but the cluster doesn't report it. |
+| Status       | Description                                                                                                                                                                                       |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Healthy      | The Environment is running.                                                                                                                                                                       |
+| Unhealthy    | The Environment reports a problem.                                                                                                                                                                |
+| Paused       | The cluster is paused. In SaaS, you can [resume](#resume-a-paused-environment) it.                                                                                                                |
+| Resuming     | The cluster is starting after a resume.                                                                                                                                                           |
+| Unknown      | Camunda Hub can't determine the status.                                                                                                                                                           |
+| Not reported | In Self-Managed, the Environment is assigned to a workspace, but its cluster or Physical Tenant is no longer in the Camunda Hub configuration. It shows no live data, and you can't deploy to it. |
 
-An Environment can also show **Creating**, **Updating**, or **Unavailable** while its cluster changes state.
+An Environment can also show **Creating**, **Updating**, or **Unavailable** while its cluster changes state. In Self-Managed, Camunda Hub determines the status from the readiness addresses of the components. See [Environment status](/self-managed/components/hub/configuration/properties.md#environment-status).
 
 ## Open an Environment
 
@@ -82,7 +82,7 @@ The status changes to **Resuming** while the cluster starts. Self-Managed Enviro
 Camunda Hub adds Environments automatically when a cluster exists. To add one, click **Add new environment** on the **Environments** page. Only organization owners and admins see this button.
 
 - **SaaS**: [Create a cluster](../manage-clusters/create-cluster.md). Every cluster gets one Environment automatically. Then [assign the Environment to a workspace](./assign-environments.md).
-- **Self-Managed**: Provision the cluster. On Camunda 8.10 and later, declare additional [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) if you need more than one Environment on the cluster. Configure the cluster in Camunda Hub, and restart it. Camunda Hub reads the configuration only at startup, and the Environments of the cluster then appear automatically. See the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
+- **Self-Managed**: Provision the cluster. On Camunda 8.10 and later, declare additional [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) if you need more than one Environment on the cluster. Configure the cluster in Camunda Hub, and perform a rolling restart. Camunda Hub reads the configuration only at startup, and the Environments of the cluster then appear automatically. See [Environments in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
 
 ## Next steps
 

@@ -945,6 +945,29 @@ The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools
 Changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deployments target Environments instead of clusters
+
+Starting with Camunda 8.10, teams deploy to [Environments](/components/concepts/environments.md) instead of the clusters connected to a project. An Environment is the named place where a team deploys and runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
+
+- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every Environment assigned to its workspace.
+- Organization admins assign Environments to workspaces.
+- In Self-Managed, Camunda Hub creates Environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
+
+**Action:** After you upgrade, assign Environments to the workspaces you create. If you use the project deployment policy, tag your production clusters with `prod` before you upgrade.
+
+<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
+<br />
+<p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
+
+</div>
+</div>
+
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
