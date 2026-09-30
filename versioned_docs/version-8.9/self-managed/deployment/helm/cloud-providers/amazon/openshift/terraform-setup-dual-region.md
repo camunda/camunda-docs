@@ -53,7 +53,7 @@ Following this guide will incur costs on your cloud provider account and your Re
 ### Outcome
 
 <!-- Diagram source: rosa-dual-region.excalidraw. Open and edit at https://excalidraw.com -->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+<!-- To export: see howtos/diagrams.md in the camunda-docs repository -->
 
 _Infrastructure diagram for a dual region ROSA setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram ROSA Dual-Region](./assets/rosa-dual-region.svg)](./assets/rosa-dual-region.pdf)

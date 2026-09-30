@@ -24,7 +24,7 @@ Please review our [dual-region concept documentation](/self-managed/concepts/mul
 
 ## High Level Design
 
-<!-- Diagram source: assets/submariner-hld.excalidraw. Open and edit at https://excalidraw.com -->
+<!-- Diagram source: assets/openshift-dual-region.excalidraw. Open and edit at https://excalidraw.com -->
 
 _Infrastructure diagram for a OpenShift dual-region setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram OpenShift Dual-Region](./assets/openshift-dual-region.svg)](./assets/openshift-dual-region.pdf)

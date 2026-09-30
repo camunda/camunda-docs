@@ -25,7 +25,7 @@ When using a different cloud provider, you are responsible for configuring and m
 The architecture outlined below describes a standard three-node deployment, distributed across three [availability zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) within a single AWS region. It includes a managed OpenSearch domain deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
 <!-- Diagram source: aws-ec2-arch.excalidraw. Open and edit at https://excalidraw.com -->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
+<!-- To export: see howtos/diagrams.md in the camunda-docs repository -->
 
 _Infrastructure diagram for a 3-node EC2 architecture (click the image to view the PDF version)_
 

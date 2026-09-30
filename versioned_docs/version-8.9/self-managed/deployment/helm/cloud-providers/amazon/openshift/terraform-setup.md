@@ -71,7 +71,7 @@ Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently
 ### Outcome
 
 <!-- Diagram source: rosa-single-region.excalidraw. Open and edit at https://excalidraw.com -->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+<!-- To export: see howtos/diagrams.md in the camunda-docs repository -->
 
 _Infrastructure diagram for a single region ROSA setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram ROSA Single-Region](./assets/rosa-single-region.svg)](./assets/rosa-single-region.pdf)
@@ -228,8 +228,8 @@ This step is **optional** and only necessary if you have configured a **private 
 
 Using a VPN offers a flexible and secure way to connect to the private subnets within your VPC. It can be used either by a user to access cluster resources or to enable cross-site communications via [PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html). This module focuses on user access.
 
-<!-- Diagram source: rosa-single-region.excalidraw. Open and edit at https://excalidraw.com -->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+<!-- Diagram source: rosa-single-region-vpn.excalidraw. Open and edit at https://excalidraw.com -->
+<!-- To export: see howtos/diagrams.md in the camunda-docs repository -->
 
 _Infrastructure diagram for a single region ROSA setup with VPN (click on the image to open the PDF version)_
 [![Infrastructure Diagram ROSA Single-Region VPN](./assets/rosa-single-region-vpn.svg)](./assets/rosa-single-region-vpn.pdf)

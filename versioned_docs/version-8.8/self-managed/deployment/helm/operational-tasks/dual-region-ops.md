@@ -1074,7 +1074,7 @@ Follow the installation steps for the **surviving region**:
 
 <StateContainer
 current={<Nine role="img" title="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Ten role="img" title="Desired state diagram" style={{border: 'none', transform: 'scale(1.1'}}/>}
+desired={<Ten role="img" title="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}}/>}
 />
 
 | **Details**   | **Current state**                                                                                                                                                                                                                                                                                                                                                      | **Desired state**                                                                                                                                                                                                   |

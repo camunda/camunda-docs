@@ -23,6 +23,7 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 
 - Name Markdown files in **kebab-case** matching the page title (for example, `introduction-to-camunda-8.md`). Avoid non-alphanumeric characters in file names.
 - Place version-sensitive images in an `img/` (or `assets/`) subdirectory alongside the doc file. Reuse existing co-located directories when they exist (for example, `docs/components/<area>/img/`) before adding new images to `static/img/`. Reserve `static/img/` for cross-cutting, non-versioned assets such as home page card images.
+- Author architecture diagrams in Excalidraw and commit the `.excalidraw` source next to its `.svg` export. Follow `/howtos/diagrams.md` for the file layout, export settings, and color tokens.
 - Place BPMN files in `static/bpmn/<section>/`.
 - **Do not** modify `package-lock.json`, generated API docs in `docs/apis-tools/*/specifications/`, or versioned docs unless explicitly asked to.
 

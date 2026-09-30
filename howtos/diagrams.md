@@ -1,10 +1,10 @@
 # Diagrams
 
-Architecture and reference diagrams in this repository are authored in [Excalidraw](https://excalidraw.com). Every diagram ships an editable `.excalidraw` source next to the image it produces, so you can change a diagram without tracking down whoever drew it.
+This guide covers the diagrams authored in [Excalidraw](https://excalidraw.com), which today are the Self-Managed architecture and reference diagrams. Other diagrams, such as Mermaid blocks and screenshots, are out of scope. Every Excalidraw diagram ships an editable `.excalidraw` source next to the image it produces, so you can change a diagram without tracking down whoever drew it.
 
 ## Where the files live
 
-Each diagram is three or four files in the same directory, sharing one base name:
+Each diagram is two or three files in the same directory, sharing one base name:
 
 | File              | Purpose                                                                  | Committed |
 | ----------------- | ------------------------------------------------------------------------ | --------- |
@@ -78,7 +78,7 @@ Decorative detail is exempt from the 3:1 rule, and deliberately so: the drop sha
 
 ### Type scale
 
-Use `11`, `13`, `15`, `18`, `20`, `22`, `26`, or `30`. Picking sizes in between is what produced 23 different text sizes across the set before it was normalized.
+Use `11`, `13`, `15`, `18`, `20`, `22`, `26`, or `30`, and `34` or `42` only for a diagram title on a large canvas. Picking sizes in between is what produced 23 different text sizes across the set before it was normalized.
 
 ### Canvas width decides whether anyone can read it
 
