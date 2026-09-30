@@ -208,13 +208,13 @@ Upgrade **one region at a time**, so the other regions keep the quorum. The [ope
 
 You can add a zone to a running cluster without renumbering any broker, because zone awareness names zones instead of numbering brokers.
 
-<AddZoneImg role="img" title="Three stages of the same cluster. First, two zones, london and paris, with two replicas each and replication factor four; the zurich slot is provisioned but not declared, and losing either zone leaves two of four replicas, so processing stops. Second, the zurich brokers are deployed and the zone is added with POST /actuator/cluster/zones/zurich, one replica and priority 800, then the operator waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues. No broker is renumbered and the running regions are not restarted." />
+<AddZoneImg role="img" title="Three stages of the same cluster. First, two zones, london and paris, hold two replicas each, for a replication factor of four. The zurich slot exists but is not in the zone list. Losing either zone leaves two of four replicas, so processing stops. Second, the operator deploys the zurich brokers, adds the zone with POST /actuator/cluster/zones/zurich, one replica and priority 800, and waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues. No broker is renumbered and the running regions are not restarted." />
 
 ### Declare only the zones you deploy
 
-Every zone in the zone list must have its brokers running when the cluster bootstraps. Do not declare a zone to reserve it for later growth. Add it through the management API when you deploy it, as described in the next section.
+Every zone in the zone list must have its brokers running when the cluster bootstraps. Do not declare a zone to reserve it for later growth. Add it through the management API after its brokers run.
 
-A zone in the zone list receives partition replicas whether or not its brokers run. A declared zone without brokers leaves every partition one zone short. With the default `2-2-1` layout and the third zone missing, each partition runs four replicas of five, and losing either database zone stops processing.
+A zone in the zone list receives partition replicas even if its brokers do not run. A declared zone without brokers leaves every partition one zone short. With the default `2-2-1` layout and the third zone missing, each partition runs four replicas of five, and losing either database zone stops processing.
 
 ### Add a zone to the running cluster
 

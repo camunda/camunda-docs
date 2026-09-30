@@ -189,7 +189,7 @@ Confirm the topology when done:
 
 ## Add a region
 
-Adding a region to a running cluster is an **online** operation: the regions already running keep processing and are not restarted.
+Adding a region to a running cluster is an online operation. The regions already running keep processing and are not restarted.
 
 Activating a zone that you declared in the zone list but never deployed is an online operation.
 
@@ -242,7 +242,7 @@ The procedure does the following:
 The regions already running keep their shorter contact point list, and they don't restart. The contact point list matters at bootstrap. Once a cluster forms, a newcomer only has to reach one member, and the rest learn about it by gossip. The running regions pick up the longer list on their next upgrade.
 
 :::warning
-`activate-region.sh` only adds the zone of a slot that was in `regions` when the cluster was bootstrapped. The reference implementation derives the partition count from that slot list, and the partition count can't change after bootstrap. List every region you may ever run in `regions` before the first deployment.
+`activate-region.sh` only adds the zone of a slot that was in `regions` when you bootstrapped the cluster. The reference implementation derives the partition count from that slot list, and the partition count can't change after bootstrap. List every region you may ever run in `regions` before the first deployment.
 :::
 
 The script rejects any slot outside the provisioned range, `0` to `CAMUNDA_REGION_SLOTS - 1`. Before you run it, apply the Terraform step above. Then re-source the environment and register the kubectl context, so `CAMUNDA_ACTIVE_REGIONS` and `CLUSTER_CONTEXTS` include the new slot.
