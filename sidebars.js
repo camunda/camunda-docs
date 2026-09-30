@@ -2236,14 +2236,35 @@ module.exports = {
             {
               Elasticsearch: [
                 "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
-                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+                {
+                  type: "category",
+                  label: "Restore a backup",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+                  },
+                  items: [
+                    "self-managed/operational-guides/backup-restore/elasticsearch/es-restore-api",
+                    "self-managed/operational-guides/backup-restore/elasticsearch/es-restore-application",
+                  ],
+                },
               ],
               "Relational databases": [
                 "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
-                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+                {
+                  type: "category",
+                  label: "Restore a backup",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+                  },
+                  items: [
+                    "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore-api",
+                    "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore-application",
+                  ],
+                },
               ],
             },
-            "self-managed/operational-guides/backup-restore/in-process-restore",
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",

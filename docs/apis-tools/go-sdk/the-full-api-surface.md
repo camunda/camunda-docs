@@ -2,7 +2,7 @@
 id: the-full-api-surface
 title: "The full API surface"
 sidebar_label: "The full API surface"
-sidebar_position: 17
+sidebar_position: 18
 mdx:
   format: md
 ---
