@@ -4,6 +4,8 @@ title: Fix problems in your diagram
 description: This feature assists you in debugging and fixing errors in your processes.
 ---
 
+import FollowRuntimeClusterImg from './img/follow-runtime-cluster.png';
+
 The **Problems** panel is at the bottom of the modeling interface. Use it to debug and fix errors in your processes.
 
 ## Design time errors
@@ -23,6 +25,14 @@ If you don't know the version click **Deploy & run** at the top right of the mod
 :::
 
 The version selector also provides information about the number of clusters available for each Camunda version within the current organization.
+
+### Follow the runtime connection version
+
+Click **Check problems against** and select **Follow runtime cluster** to validate the diagram against the Camunda version of the runtime you're [connected to](./connect-to-a-runtime.md). When you connect to a different runtime, the validated version follows automatically. To stop following, select a specific Camunda version.
+
+<img src={FollowRuntimeClusterImg} width="265px" alt="Select Camunda version menu of Check problems against, with Follow runtime cluster selected and following Camunda 8.9" />
+
+Below **Follow runtime cluster**, the menu shows the followed version, for example **Camunda 8.9**. It shows **Not connected to a cluster.** if you're working offline, and **Version not recognized.** if Camunda Hub can't map the runtime's version to a supported Camunda version.
 
 ## Interactivity
 
