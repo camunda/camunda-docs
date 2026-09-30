@@ -20,7 +20,7 @@ With **Browse all**, you can find and use the resources available for the curren
 
 The dialog title identifies the action and target. Each card uses the corresponding **Create**, **Append**, or **Change** action.
 
-**Browse all** appears when the contextual menu offers a broad set of choices. If it isn't offered, use the choices in the compact menu. The compact menu can also provide a direct Marketplace action.
+**Browse all** appears when the contextual menu offers a broad set of choices. If it isn't offered, use the choices in the compact menu. If your search has no matches, a compact menu with Marketplace access can show **Browse Marketplace for more connectors**. Select it to browse Marketplace connectors only.
 
 ## Search and filter resources
 
@@ -62,7 +62,12 @@ Marketplace is the final section and contains the complete collection that match
 
 Browsing, filtering, searching, or scrolling Marketplace cards doesn't check which connectors are already in your project. Select **View details** on a connector to check only that connector and review its project availability.
 
-For create and append actions, Marketplace results aren't filtered by BPMN type. For a supported change-element action, results are filtered by Marketplace's supported BPMN type only. Task variants, such as user and service tasks, are grouped as task connectors. Configuration requirements and runtime compatibility can still vary.
+Marketplace applies BPMN type filtering based on the modeling action:
+
+- **Create** and **Append**: Results aren't filtered by BPMN type.
+- **Change**: For a supported change-element action, results are filtered by Marketplace's supported BPMN type. User tasks and service tasks use the broader task type.
+
+Showing a connector doesn't guarantee it is compatible with your configuration or runtime.
 
 A self-hosted connector card opens **View setup instructions** instead of connector details. Follow the linked setup guide to make the connector available in your environment.
 

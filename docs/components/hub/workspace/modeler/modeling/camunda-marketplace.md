@@ -26,7 +26,7 @@ To browse Marketplace connectors from a modeling menu:
 6. Under **Show**, select **Marketplace** or search across all sources.
 7. Select **View details** for a connector.
 
-Marketplace cards don't report whether a connector is already in the project. The details check the selected connector and show its included or available elements.
+Marketplace cards don't report whether a connector is already in the project. The details check the selected connector. **Included elements** can be added to the project. **Available elements** are already usable in the project.
 
 For a complete guide to source filters, project availability, and direct modeling actions, see [find resources with Browse all](./browse-all-resources.md#browse-marketplace-connectors).
 
