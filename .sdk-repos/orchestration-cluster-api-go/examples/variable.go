@@ -6,12 +6,11 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func searchVariablesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchVariables
-	result, err := client.SearchVariables(ctx, *openapi.NewVariableSearchQuery())
+	result, err := client.SearchVariables(ctx, *camunda.NewVariableSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -24,7 +23,7 @@ func searchVariablesExample(ctx context.Context, client *camunda.CamundaClient) 
 
 func getVariableExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetVariable
-	variable, err := client.GetVariable(ctx, openapi.MustVariableKey("2251799813685390"))
+	variable, err := client.GetVariable(ctx, camunda.MustVariableKey("2251799813685390"))
 	if err != nil {
 		return err
 	}

@@ -180,7 +180,7 @@ This tab displays the URL of the HTTP Webhook connector for every cluster where 
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use HTTP Webhook connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, HTTP Webhook connector deployments and URLs will not be displayed in Modeler.
+In that case, HTTP Webhook connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 For self-managed installations, the webhook URL format is:

@@ -23,3 +23,7 @@ Alternatively, you can replace the content of an existing file with the content 
 ### Undo/redo management limitations
 
 You cannot undo or redo any actions taken before an upload as the undo/redo history is cleared when a diagram is uploaded. This prevents inconsistencies between the uploaded diagram and any actions taken before the upload.
+
+### Troubleshoot a failed upload
+
+If a file doesn't appear after uploading, or you see an error, see [why resources might fail to import](./importing-resources.md#why-your-resources-might-fail-to-import). Common causes include an unrecognized file type or exceeding the per-file size limit.

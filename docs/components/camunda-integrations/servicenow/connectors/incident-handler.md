@@ -19,7 +19,7 @@ This connector works with the ServiceNow `incident` table, enabling automated IT
 
 ## Configure the connector
 
-Select **ServiceNow Incident Handler** from Camunda Modeler connector templates or download it from the [Camunda Marketplace](https://marketplace.camunda.com/).
+Select **ServiceNow Incident Handler** from [Camunda Hub](/components/hub/workspace/modeler/index.md) or Desktop Modeler connector templates or download it from the [Camunda Marketplace](https://marketplace.camunda.com/).
 
 ### Required fields
 
@@ -36,7 +36,7 @@ Store ServiceNow credentials securely as [secrets](/components/hub/organization/
 :::
 
 ![ServiceNow Incident Handler example](../img/incident-handler.png)  
-_Configuration of the Incident Handler connector in Camunda Modeler._
+_Configuration of the Incident Handler connector in Camunda Hub._
 
 ## Example configurations
 

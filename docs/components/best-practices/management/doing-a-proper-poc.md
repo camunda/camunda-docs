@@ -71,7 +71,7 @@ If your organization cannot easily set up a repository for the POC, or access fo
 
 As already mentioned above, we typically plan no more than _a focused week_ for the POC workshop itself. Sometimes it also works well to split up the POC into two weeks of 2-3 days each, which allows everybody to reflect on the POC over the weekend.
 
-- Plan _1-3 days_ for _modeling_ the process with Camunda Modeler.
+- Plan _1-3 days_ for _modeling_ the process.
 - Plan _2-3 days_ for _implementing_ the process solution.
 
 When selecting the exact time frame, consider all the people involved, as well as any technical preparation you need to do up front. You also might want to plan for further steps, like a few more things you implement yourself internally in a second follow up week.
@@ -89,7 +89,7 @@ The speaker might also be your Camunda Consultant - they are used to presenting 
 - _Cloud Access_: Make sure you have an account for Camunda 8 with an active subscription or trial account.
 
 - _Installations_: Make sure your _developer systems_, as well as any _target systems_ for the POC test and production you wish to use are set up. In particular install:
-  - Camunda _Modeler_ (https://camunda.org/download/modeler/)
+  - Camunda [Desktop Modeler](https://docs.camunda.io/downloads/)
   - Java, Maven, and your favorite IDE (e.g. Eclipse)
   - Make sure _Maven_ runs and builds and it can access all necessary dependencies. [Download and build this project](https://github.com/camunda/camunda-platform-tutorials/tree/main/quick-start/microservice-orchestration/worker-java) to verify that your build runs.
 

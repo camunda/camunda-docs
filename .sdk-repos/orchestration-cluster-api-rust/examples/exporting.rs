@@ -4,6 +4,7 @@
 //! `examples/operation-map.json`, and are type-checked by `cargo build --examples`.
 #![allow(dead_code, unused_variables, unused_imports)]
 
+use camunda_orchestration_sdk::apis::exporting_api::PauseClusterExportingParams;
 use camunda_orchestration_sdk::apis::exporting_api::PauseExportingParams;
 use camunda_orchestration_sdk::CamundaClient;
 
@@ -41,6 +42,41 @@ async fn resume_exporting() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 // endregion ResumeExporting
+
+// region GetClusterExportingStatus
+async fn get_cluster_exporting_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let status = client.get_cluster_exporting_status().await?;
+    println!("{status:#?}");
+
+    Ok(())
+}
+// endregion GetClusterExportingStatus
+
+// region PauseClusterExporting
+async fn pause_cluster_exporting() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .pause_cluster_exporting(PauseClusterExportingParams { soft: Some(true) })
+        .await?;
+    println!("Pause cluster exporting: done");
+
+    Ok(())
+}
+// endregion PauseClusterExporting
+
+// region ResumeClusterExporting
+async fn resume_cluster_exporting() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client.resume_cluster_exporting().await?;
+    println!("Resume cluster exporting: done");
+
+    Ok(())
+}
+// endregion ResumeClusterExporting
 
 fn main() {
     // Examples above are compiled, not executed.

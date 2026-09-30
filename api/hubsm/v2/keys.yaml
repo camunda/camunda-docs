@@ -42,6 +42,13 @@ components:
       x-semantic-type: ProjectKey
       example: 28b47b0a-364c-4dbe-9836-41ab371c15b2
 
+    ProjectSnapshotKey:
+      description: System-generated key for a project snapshot.
+      type: string
+      format: ProjectSnapshotKey
+      x-semantic-type: ProjectSnapshotKey
+      example: 9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77
+
     VersionKey:
       description: System-generated key for a version.
       type: string

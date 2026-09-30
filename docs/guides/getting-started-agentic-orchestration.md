@@ -267,7 +267,7 @@ Because the AI agent in this example is an ad-hoc sub-process, you can't use **T
 
 1. If using **Desktop Modeler**:
    1. [Deploy the process model](/components/modeler/desktop-modeler/deploy-diagram.md) to your local Camunda 8 environment.
-   1. Open each form, and click **Deploy**. [Linked forms are not deployed automatically with the process](/components/modeler/forms/utilizing-forms.md#deploy-a-linked-form). Skipping this step causes Tasklist to fail with "We were not able to load the form" when you try to start the process.
+   1. Open each form, and click **Deploy**. [Linked forms are not deployed automatically with the process](/components/modeler/desktop-modeler/utilize-forms.md#deploy-a-form). Skipping this step causes Tasklist to fail with "We were not able to load the form" when you try to start the process.
 1. If using **Camunda Hub**, choose one of the following options:
    - [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md) as a bundle.
    - [Deploy **All resources**](/components/hub/workspace/modeler/run-or-publish-your-process.md) from the diagram or a form.
