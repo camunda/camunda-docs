@@ -403,5 +403,5 @@ After selecting the **Test** tab in Self-Managed, the Test view opens directly. 
 
 The use of Test mode may result in additional charges depending on your organization's [plan](/components/hub/organization/manage-organization-settings/manage-plan/available-plans.md) and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
 
-- **Enterprise plan:** Use a [Basic cluster](/components/concepts/clusters.md#cluster-type) for non-production testing to avoid costs. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
-- **Free trial plan:** You can use any cluster. See [Free Trial clusters](/components/concepts/clusters.md#free-trial-clusters).
+- **Enterprise plan:** Use a [Basic cluster](/components/saas/clusters.md#cluster-type) for non-production testing to avoid costs. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
+- **Free trial plan:** You can use any cluster. See [Free Trial clusters](/components/saas/clusters.md#free-trial-clusters).

@@ -704,6 +704,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 A collection of related files in a Camunda Hub workspace you can work on, version, and deploy as a single bundle or as individual files. A workspace may contain multiple projects.
 
+- [Projects](/components/concepts/projects.md)
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
 
 ### Project snapshot {#snapshot-project}
@@ -991,8 +992,9 @@ See [process variable](#process-variable).
 
 ### Workspace
 
-A collaboration environment within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and clusters, so all related work happens in one shared space.
+A collaboration environment within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and [Environments](#environment), so all related work happens in one shared space.
 
+- [Workspaces](/components/concepts/workspaces.md)
 - [Workspace](/components/hub/workspace/index.md)
 
 ## Z

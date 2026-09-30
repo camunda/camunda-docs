@@ -81,7 +81,7 @@ If your cluster load and utilization is too high, you can help reduce it by:
   - Straight-through processing loops, where there are no wait states. For example, a sub process with an error boundary event which loops back to an activity leading into the sub-process. If you have an activity which consistently throws an error, this will result in a subtle infinite loop where the engine is stuck and cannot process anything else. You would have to cancel this instance, or contact support to force cancel it for you.
 
 :::important
-If your cluster load percentage remains high even after attempts to reduce it, you might need to increase your cluster size and scale. See [cluster size](/components/concepts/clusters.md#cluster-size) and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
+If your cluster load percentage remains high even after attempts to reduce it, you might need to increase your cluster size and scale. See [cluster size](/components/saas/clusters.md#cluster-size) and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
 :::
 
 ## How cluster load percentage is calculated {#load-calculation}

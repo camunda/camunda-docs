@@ -61,7 +61,7 @@ To produce logging output, you can also run Desktop Modeler from the command lin
 You try to connect (i.e., to deploy) to a remote orchestration cluster, and Desktop Modeler tells you it "Cannot connect to Camunda 8."
 
 :::tip
-If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
+If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](/components/saas/clusters.md#auto-pause).
 :::
 
 To resolve this issue, check if you can connect to Zeebe through another client, for example, community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
@@ -123,7 +123,7 @@ You try to connect to Zeebe from both Desktop Modeler _and_ community-supported 
 Ensure your computer has access to the (remote) network.
 
 :::tip
-If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
+If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](/components/saas/clusters.md#auto-pause).
 :::
 
 ### The connection to Zeebe happens through a proxy

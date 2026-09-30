@@ -14,7 +14,7 @@ To create a cluster in SaaS:
 1. Click **Create cluster**.
 1. Name your cluster.
 1. Select your [region](/components/saas/regions.md).
-1. Select a [cluster type](/components/concepts/clusters.md#cluster-type) and [cluster size](/components/concepts/clusters.md#cluster-size).
+1. Select a [cluster type](/components/saas/clusters.md#cluster-type) and [cluster size](/components/saas/clusters.md#cluster-size).
 1. Assign a cluster tag to indicate what type of cluster it is.
 1. Select your [encryption at rest protection level](/components/saas/encryption-at-rest.md) (enterprise only).
 1. Select a channel and release. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation.

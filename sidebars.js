@@ -207,8 +207,10 @@ module.exports = {
             require("./docs/components/modeler/reference/sidebar-schema"),
           ],
         },
+        "components/concepts/workspaces",
         "components/concepts/projects",
         "components/concepts/environments",
+        "components/concepts/clusters",
         "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {
@@ -1286,7 +1288,7 @@ module.exports = {
         id: "components/saas/saas",
       },
       items: [
-        "components/concepts/clusters",
+        "components/saas/clusters",
         "components/saas/regions",
         "components/saas/data-locations",
         {

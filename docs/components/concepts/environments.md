@@ -4,9 +4,9 @@ title: Environments
 description: "Learn how Environments give teams a named place to deploy and run processes in Camunda Hub, and how they relate to clusters and tenants."
 ---
 
-An Environment is the named place where a team deploys and runs its processes in Camunda Hub. For example, a `payments` Environment gives the payments team its own isolated place to run processes.
+An Environment is the named place where a team deploys and runs its processes in Camunda Hub. For example, a `payments-prod` Environment gives the payments team its own isolated place to run production processes.
 
-Clusters are the infrastructure underneath. Org admins manage clusters, and teams work with the Environments assigned to their workspace.
+Clusters are the infrastructure underneath. Org admins manage [clusters](./clusters.md), and teams work with the Environments assigned to their [workspace](./workspaces.md).
 
 ## Environments and clusters
 
@@ -18,7 +18,7 @@ Camunda Hub separates the infrastructure you operate from the place your teams w
 | Managed by    | Org admins and DevOps                                        | Assigned to workspaces by org admins                                             |
 | Typical tasks | Create, size, update, back up, and secure the cluster.       | Deploy a project, test a process, and open Operate, Tasklist, or Admin.          |
 
-Teams deploy to an Environment, not to a cluster. A cluster can host more than one Environment, and every Environment belongs to exactly one cluster.
+Teams deploy to an Environment, not to a cluster. A cluster can host more than one Environment, and every Environment belongs to exactly one cluster. Learn more about [clusters](./clusters.md).
 
 ## How an Environment maps to infrastructure
 
@@ -56,7 +56,7 @@ The `prod` tag also marks an Environment as a production Environment. Your organ
 
 Org admins assign Environments to workspaces. An Environment can be assigned to more than one workspace, and a workspace can have any number of Environments, including none.
 
-Every project in a workspace can use all the Environments assigned to the workspace. A project can't reach an Environment that its workspace doesn't have.
+Every [project](./projects.md) in a [workspace](./workspaces.md) can use all the Environments assigned to the workspace. A project can't reach an Environment that its workspace doesn't have.
 
 | Role                          | What the role sees                            |
 | :---------------------------- | :-------------------------------------------- |
@@ -79,5 +79,6 @@ Cluster-level settings, such as the cluster size, version, backups, and IP allow
 ## Next steps
 
 - Learn how to [deploy a project](/components/hub/workspace/manage-projects/deploy-project.md).
+- Read about [clusters](./clusters.md), [workspaces](./workspaces.md), and [projects](./projects.md).
 - Read about [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) and [Logical Tenants](/self-managed/concepts/multi-tenancy/logical-tenants.md).
 - Look up the term in the [glossary](/reference/glossary.md#environment).

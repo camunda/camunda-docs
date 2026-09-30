@@ -89,7 +89,7 @@ In SaaS, you can enable [automated patch updates](/components/saas/auto-updates.
 
 ## Resize a cluster
 
-You can increase or decrease the [cluster size](/components/concepts/clusters.md#cluster-size) at any time. For example, increase the cluster size to improve performance and add capacity, or decrease the cluster size to free up reservations for another cluster.
+You can increase or decrease the [cluster size](/components/saas/clusters.md#cluster-size) at any time. For example, increase the cluster size to improve performance and add capacity, or decrease the cluster size to free up reservations for another cluster.
 
 1. In the left navigation, click **Environments**, click **Clusters**, and then select your cluster.
 1. On the **Overview** tab, next to the cluster type, click **Resize cluster**.

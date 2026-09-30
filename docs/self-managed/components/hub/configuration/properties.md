@@ -317,8 +317,8 @@ camunda:
       - id: camunda-platform
         # other fields...
         physical-tenants:
-          - id: payments
-          - id: lending
+          - id: payments-prod
+          - id: lending-prod
 ```
 
 Each Physical Tenant of a cluster shows the same [tags](#clusters) as the cluster. The tenant inherits the web application addresses of the cluster, and Camunda Hub adds the `/physical-tenants/<tenant ID>` path for the tenants other than `default`.
@@ -332,7 +332,7 @@ Use `components` on a Physical Tenant to point it at its own component instances
 - A tenant other than `default` never inherits Optimize from the cluster, because Optimize needs its own instance for each Physical Tenant. Add an `optimize` component to the tenant to show Optimize.
 - If you remove the override and restart Camunda Hub, the component uses the configuration of the cluster again.
 
-Example configuration that overrides only Optimize for the `payments` tenant. The other components still come from the cluster:
+Example configuration that overrides only Optimize for the `payments-prod` tenant. The other components still come from the cluster:
 
 ```yaml
 camunda:
@@ -341,13 +341,13 @@ camunda:
       - id: camunda-platform
         # other fields...
         physical-tenants:
-          - id: payments
+          - id: payments-prod
             components:
               - type: optimize
                 version: 8.10.0
                 urls:
-                  webapp: https://optimize-payments.example.com
-                  readiness: https://optimize-payments.example.com/api/readyz
+                  webapp: https://optimize-payments-prod.example.com
+                  readiness: https://optimize-payments-prod.example.com/api/readyz
 ```
 
 If a cluster earlier than 8.10 declares `components` on a tenant, Camunda Hub fails to start with the message `must not declare physical tenant 'components' if 'version' is lower than the minimum physical tenant version`.
