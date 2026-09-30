@@ -57,10 +57,12 @@ In Self-Managed:
 
 In SaaS:
 
-1. In Camunda Hub, click **Environments** in the left navigation, and then click **Clusters**.
-2. Select a cluster.
-3. On the **Overview** tab, locate the **Jobs (last 24h)** card.
-4. Click **View all job types** to open the **Job types** page.
+1. In Camunda Hub, click **Environments** in the left navigation.
+2. Select an Environment. On the **Overview** tab, the **Jobs (last 24 hours)** card summarizes the jobs of the Environment.
+3. To see all job types, open the cluster that hosts the Environment. Click **Clusters** on the **Environments** page, and select the cluster.
+4. On the **Overview** tab of the cluster, locate the **Jobs (last 24h)** card, and click **View all job types** to open the **Job types** page.
+
+Each SaaS cluster hosts one Environment, so the cluster shows the jobs of that Environment.
 
 ### 2. Job types overview
 
