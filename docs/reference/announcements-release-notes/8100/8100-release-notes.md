@@ -67,6 +67,41 @@ Operate now displays readable model reasoning as an inline **Thinking** entry in
 
 ### Camunda Hub
 
+#### Environments
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3715 -->
+
+Environments are the new places where teams deploy and run their processes in Camunda Hub. A cluster remains the infrastructure that administrators manage, and an Environment is hosted on a cluster.
+
+- Organization admins assign Environments to workspaces, in the Camunda Hub interface or with the Camunda Hub API. Every project in a workspace can deploy to all the Environments assigned to the workspace.
+- Projects no longer connect clusters to deployment stages. The deploy dialog and the **Test** tab list the Environments of the workspace, with their tags, version, and status.
+- In Self-Managed, each Physical Tenant of a cluster at version 8.10 or later is an Environment. In SaaS, each cluster has one Environment.
+- The **Environments** page shows every Environment of the organization with its status, opens its applications, and shows a summary of its jobs.
+- Organization admins can require an approved project snapshot before anyone deploys to an Environment tagged `prod`.
+- When you upgrade, Camunda Hub assigns the clusters that your projects used to their workspaces as Environments.
+
+<p class="link-arrow">[Environments](/components/concepts/environments.md)</p>
+<br />
+<p class="link-arrow">[Manage Environments](/components/hub/organization/manage-environments/index.md)</p>
+
+#### Runtime connection targets Environments
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3475 -->
+
+In Camunda Hub, the runtime connection of the modeler is a connection to an Environment instead of a cluster. Select the Environment from the modeling toolbar to model against.
+
+- Connector-credential names of the connected Environment autocomplete in your FEEL expressions.
+- Task testing runs in the connected Environment.
+- Two Physical Tenants on the same cluster are separate connections.
+
+:::note
+The runtime connection is disabled by default and behind the feature flag `runtimeConnectionEnabled`. The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
+:::
+
 #### Business value dashboard
 
 <!-- https://github.com/camunda/product-hub/issues/3543 -->
@@ -75,10 +110,10 @@ Operate now displays readable model reasoning as an inline **Thinking** entry in
 
 Use the new **Business Value** page in Camunda Hub to track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and to set targets for cycle time and automation rate.
 
-- A portfolio view compares every process in the selected Orchestration Cluster on target coverage, target attainment, activity, automation rate, cycle time, and agentic adoption, and ranks off-target processes by how many targets are missed and by how far.
+- A portfolio view compares every process in the selected Environment on target coverage, target attainment, activity, automation rate, cycle time, and agentic adoption, and ranks off-target processes by how many targets are missed and by how far.
 - A process view shows the metrics and targets for a single process, including per-metric target status and a cycle time distribution with P50, average, and P95.
 - Set optional targets for cycle time and automation rate against the current baseline. Activity is shown as a metric, but you can't set a target for it in 8.10.
-- Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
+- Every metric is calculated from completed process instances in the selected Environment. No changes to your process models are required.
 
 <p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
 
