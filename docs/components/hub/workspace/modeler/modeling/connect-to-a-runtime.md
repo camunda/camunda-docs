@@ -80,7 +80,7 @@ On SaaS, selecting a paused runtime resumes it and connects to it in one step. W
 
 ### Enter credentials for a runtime
 
-Some Self-Managed runtimes require a username and password (basic authentication). These runtimes show a **Needs credentials** badge in the list and a lock icon next to **Runtime** when connected.
+Some Self-Managed runtimes require a username and password (Basic authentication). These runtimes show a **Needs credentials** badge in the list and a lock icon next to **Runtime** when connected.
 
 1. Select the runtime. The **Enter environment credentials** dialog opens and shows the runtime you're connecting to.
 
