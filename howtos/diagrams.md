@@ -59,6 +59,8 @@ Every ratio below is measured against the white export background. A tinted pane
 | Kubernetes blue      | `#1e88e5` | 3.7:1  | `#1a79cb` | 4.5:1  | Kubernetes resources and security groups          |
 | Cluster orange       | `#e57419` | 3.1:1  | `#b75d14` | 4.6:1  | Worker node bands and managed cluster icons       |
 | Stretch cluster blue | `#5999d2` | 3.0:1  | `#43749f` | 5.0:1  | Zeebe stretch cluster shells                      |
+| HTTP connector amber | `#a67c00` | 3.8:1  | n/a       |        | HTTP and generic TCP connectors                   |
+| Network path green   | `#558b2f` | 4.1:1  | n/a       |        | Routed network paths in infrastructure diagrams   |
 | Failure violet       | `#9b7ede` | 3.3:1  | `#1a1a1a` | 17.4:1 | Failure and interruption markers                  |
 
 Camunda orange is `#fc5d0d`, the `orange-munda` value the site's own theme is built from in `src/css/custom.css`. Use that one rather than picking a near neighbor.
