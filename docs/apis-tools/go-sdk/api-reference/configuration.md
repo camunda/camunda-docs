@@ -116,6 +116,7 @@ Config is the resolved SDK configuration.
 | `Retry`               | `RetryConfig`         |                                                                                                                                                                                                                                                                                                            |
 | `TLS`                 | `TLSConfig`           |                                                                                                                                                                                                                                                                                                            |
 | `WorkerDefaults`      | `WorkerDefaults`      |                                                                                                                                                                                                                                                                                                            |
+| `Clock`               | `Clock`               | Clock resolves runtime cadence. Nil selects `LiveClock`.                                                                                                                                                                                                                                                   |
 
 ### Functions
 
@@ -232,6 +233,25 @@ func WithBasicAuth(username, password string) Option
 ```
 
 WithBasicAuth selects HTTP Basic authentication with the given credentials.
+
+#### WithClock
+
+```go
+func WithClock(c Clock) Option
+```
+
+WithClock sets the clock the client will resolve cadence through. Defaults to
+`LiveClock`.
+
+Runtime call sites are being migrated onto the injected clock (see
+camunda/orchestration-cluster-api-go#40); until that lands the clock is stored and
+reachable via CamundaClient.Clock, but retry backoff, the backpressure gate, token
+refresh, worker polling and consistency polling still use real time.
+
+A nil Clock selects the default. A _typed_ nil -- a nil pointer boxed in a non-nil
+interface, such as (*myClock)(nil) -- is rejected by `New` with a configuration
+error instead: unlike an untyped nil it claims to be a usable clock, and would
+panic on first use deep inside the runtime.
 
 #### WithDefaultTenantID
 
