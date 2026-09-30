@@ -424,6 +424,7 @@ camunda:
   identity:
     base-url: http://identity:8080
     issuer-backend-url: http://keycloak:18080/auth/realms/camunda-platform # optional
+    username-claim: name # optional, default: name
 
   hub:
     security:
@@ -438,7 +439,6 @@ camunda:
       client:
         fetch-request-credentials: include # optional
         scope: openid email profile # optional
-      token.username-claim: name # optional, default: name
 
 spring:
   security:
@@ -457,7 +457,7 @@ spring:
 | Environment variable                                       | Description                                                                                                                                                                                                                                                                             | Example value                                                                             | Default value            |
 | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------ |
 | `CAMUNDA_IDENTITY_BASEURL`                                 | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                                               | `http://identity:8080`                                                                    | -                        |
-| `CAMUNDA_HUB_OAUTH2_TOKEN_USERNAMECLAIM`                   | ID token claim used to assign usernames.                                                                                                                                                                                                                                                | `preferred_username`                                                                      | `name`                   |
+| `CAMUNDA_IDENTITY_USERNAMECLAIM`                           | ID token claim used to assign usernames.                                                                                                                                                                                                                                                | `preferred_username`                                                                      | `name`                   |
 | `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_INTERNAL_API`           | Expected value of the audience claim in user access tokens (used for JWT validation).                                                                                                                                                                                                   | `web-modeler-api`                                                                         | `web-modeler-api`        |
 | `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_PUBLIC_API`             | Expected value of the audience claim in M2M access tokens required for [Camunda Hub's API](/apis-tools/hub-api-sm/authentication.md) (used for JWT validation).                                                                                                                         | `web-modeler-public-api`                                                                  | `web-modeler-public-api` |
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`                  | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:18080/auth/realms/camunda-platform`                                      | -                        |
@@ -473,8 +473,8 @@ spring:
 </Tabs>
 
 :::note Helm behavior
-The `restapi` component default for `CAMUNDA_HUB_OAUTH2_TOKEN_USERNAMECLAIM` is `name`.
-In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_HUB_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Camunda Hub `restapi` environment.
+The `restapi` component default for `CAMUNDA_IDENTITY_USERNAMECLAIM` is `name`.
+In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Camunda Hub `restapi` environment.
 :::
 
 Refer to the [authentication guide](./identity.md) for additional details on how Camunda Hub authenticates users, and on how to connect a custom OpenID Connect (OIDC) authentication provider.
