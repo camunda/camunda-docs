@@ -240,7 +240,7 @@ To fix this, copy the router default wildcard TLS Secret from `openshift-ingress
 After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress will carry an inlined `spec.tls.certificate`, HAProxy will emit a per-SNI `[alpn h2,http/1.1]` `crt-list` entry, and gRPC clients will negotiate `h2` successfully.
 
 :::warning
-`copy-router-tls-secret.sh` copies the certificate as it exists at that moment. It does not track later changes. When the router wildcard certificate is rotated or replaced, the copy in the Camunda namespace goes stale, the Route serves an expired certificate, and gRPC clients fail again.
+`copy-router-tls-secret.sh` copies the certificate as it exists at that moment. It does not track later changes. When the router wildcard certificate is rotated or replaced, the copy in the Camunda namespace goes stale. The Route keeps serving the old certificate, and gRPC clients fail once that certificate expires or is revoked.
 
 Re-run the script after any router certificate change, then confirm the Route picked the new certificate up:
 
