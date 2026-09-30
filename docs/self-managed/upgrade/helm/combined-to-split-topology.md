@@ -140,16 +140,15 @@ See [install an Optimize release](/self-managed/deployment/helm/install/topology
 
 ## Strategy 2: Drain and recreate
 
-Use this only when the cluster must move to a different release name, namespace, or Kubernetes cluster, and in-place conversion isn't possible.
+Use this only when the cluster must move to a different release name, namespace, or Kubernetes cluster, and in-place conversion isn't possible. Process state can't be transferred between Orchestration Clusters, so the old cluster must drain completely before you retire it.
 
 1. Stop new process instances at the application boundary.
-2. Let running instances complete, or migrate them. See [process instance migration](/components/concepts/process-instance-migration.md).
-3. Take a verified backup of the broker state and secondary storage. See [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
-4. Install the Hub release, then a new orchestration release with new index prefixes.
-5. Redeploy your process definitions and repoint your clients and workers.
-6. Retire the old release only after you've confirmed the new cluster is serving correctly.
-
-This costs a process-state cutover. Any instance still running in the old cluster stays there.
+2. Let every running instance in the old cluster complete. Keep the old cluster and its workers serving until no active instances remain. [Process instance migration](/components/concepts/process-instance-migration.md) changes an instance's process definition inside its current cluster; it doesn't move instances to another cluster, so it isn't a way to drain.
+3. Take a verified backup of the broker state, secondary storage, and the Management Identity and Camunda Hub databases. See [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+4. Stop the old release's Management Identity and Camunda Hub before any new Hub release starts, because only one Management Identity can run against a database. Convert the old release to `global.topology.mode: orchestration`, as in [strategy 1, step 2](#step-2-convert-the-combined-release-to-an-orchestration-release), or uninstall it if it has fully drained. Confirm its Management Identity pods have terminated. Keep the external databases and your OIDC provider running.
+5. Install the Hub release against the existing Management Identity and Camunda Hub databases, then install a new orchestration release with new index prefixes.
+6. Redeploy your process definitions and repoint your clients and workers to the new cluster.
+7. Retire the old release only after it has no active instances and you've confirmed the new cluster is serving correctly.
 
 ## Roll back
 
