@@ -6939,16 +6939,16 @@
     },
     {
       "id": "act",
-      "type": "arrow",
+      "type": "line",
       "x": 2023,
-      "y": 292,
+      "y": 276.0,
       "width": 156,
-      "height": 0,
+      "height": 32,
       "angle": 0,
       "strokeColor": "#7e3ff2",
-      "backgroundColor": "transparent",
+      "backgroundColor": "#7e3ff2",
       "fillStyle": "solid",
-      "strokeWidth": 11,
+      "strokeWidth": 2,
       "strokeStyle": "solid",
       "roundness": null,
       "roughness": 0,
@@ -6970,7 +6970,23 @@
           0
         ],
         [
+          -138,
+          0
+        ],
+        [
           -156,
+          16.0
+        ],
+        [
+          -138,
+          32
+        ],
+        [
+          0,
+          32
+        ],
+        [
+          0,
           0
         ]
       ],
@@ -6978,8 +6994,7 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": "triangle",
-      "elbowed": false
+      "endArrowhead": null
     },
     {
       "id": "sb",
@@ -8220,38 +8235,10 @@
       "lineHeight": 1.25
     },
     {
-      "id": "pad-act_t",
-      "type": "rectangle",
-      "x": 1890.525,
-      "y": 282,
-      "width": 102.95,
-      "height": 20.25,
-      "angle": 0,
-      "strokeColor": "transparent",
-      "backgroundColor": "#ffffff",
-      "fillStyle": "solid",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 0,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "roundness": null,
-      "seed": 1,
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "boundElements": null,
-      "updated": 1,
-      "link": null,
-      "locked": false,
-      "index": "a0227"
-    },
-    {
       "id": "act_t",
       "type": "text",
-      "x": 1895.525,
-      "y": 284,
+      "x": 1907.525,
+      "y": 283.875,
       "width": 92.95,
       "height": 16.25,
       "angle": 0,
