@@ -48,7 +48,7 @@ The start event now shows a webhook icon. Configure it in the properties panel:
 | :-------------- | :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Webhook ID      | `fraud-detection-trigger`                       | Becomes part of the webhook URL.                                                                                                                                                                        |
 | Authorization   | API Key                                         | Authenticates incoming webhook calls.                                                                                                                                                                   |
-| API Key         | `=camunda.secrets.FraudWebhookKey`              | The expected value, referenced from a secret rather than typed directly into the field.                                                                                                                 |
+| API Key         | `{{secrets.FraudWebhookKey}}`                   | The expected value, referenced from a secret rather than typed directly into the field.                                                                                                                 |
 | API Key locator | `=split(request.headers.authorization, " ")[2]` | Extracts the key from the `Authorization: Bearer <value>` header. See [how to configure API key authorization](/components/connectors/protocol/http-webhook.md#how-to-configure-api-key-authorization). |
 
 The Databricks notebook in this guide sends the key as a `Bearer` token, so the locator splits the header on the space and takes the second part rather than comparing the raw header value.
@@ -84,7 +84,7 @@ On the high-risk path, add a service task after the gateway named `Generate Emai
 
 | Setting        | Value                                                 |
 | :------------- | :---------------------------------------------------- |
-| OpenAI API key | `=camunda.secrets.OpenAI`                             |
+| OpenAI API key | `{{secrets.OpenAI}}`                                  |
 | Operation      | Chat                                                  |
 | Model          | Select a chat model available to your OpenAI account. |
 
@@ -97,7 +97,7 @@ Set the prompt as a FEEL expression so the process variables are substituted at 
 Map the response to a variable with a result expression:
 
 ```feel
-= {emailBody: response.body.choices[0].message.content}
+= {emailBody: response.body.choices[1].message.content}
 ```
 
 ## Review the drafted email
@@ -119,7 +119,7 @@ After the review task, add a service task named `Send Email`, and change its typ
 
 | Setting          | Value                                                                           |
 | :--------------- | :------------------------------------------------------------------------------ |
-| SendGrid API Key | `=camunda.secrets.SendGrid`                                                     |
+| SendGrid API Key | `{{secrets.SendGrid}}`                                                          |
 | Sender Name      | Your organization's name, for example `Fraud Detection Team`.                   |
 | Sender Email     | Your verified sender address, for example `community@camunda.com`.              |
 | Receiver Name    | Leave blank, or provide a display name if you map one from the webhook payload. |
@@ -136,14 +136,24 @@ Here's what your completed diagram should look like in Web Modeler:
 
 ## Store your API credentials as secrets
 
-Store the webhook API key, and the OpenAI and SendGrid API keys, as cluster [secrets](/components/hub/organization/manage-clusters/manage-secrets.md) before you deploy the process:
+Store the webhook credential and the OpenAI and SendGrid API keys as [secrets](/components/hub/organization/manage-clusters/manage-secrets.md) before you deploy the process. Create three secrets:
 
-1. In Camunda Hub, under **Console** in the left navigation, click **Clusters**, select your cluster, and open the **Cluster secrets** tab.
-2. Click **Create new secret**, set **Key** to `FraudWebhookKey`, and paste the value you used for the webhook's **API Key** field, for example `fraud-webhook-test-abc123xyz`.
-3. Click **Create new secret** again, set **Key** to `OpenAI`, and paste your OpenAI API key as the value.
-4. Click **Create new secret** again, set **Key** to `SendGrid`, and paste your SendGrid API key as the value.
+| Key               | Value                                                                                       |
+| :---------------- | :------------------------------------------------------------------------------------------ |
+| `FraudWebhookKey` | The credential Databricks sends to the webhook, for example `fraud-webhook-test-abc123xyz`. |
+| `OpenAI`          | Your OpenAI API key.                                                                        |
+| `SendGrid`        | Your SendGrid API key.                                                                      |
 
-Reference the secrets from Connector fields so their values aren't stored as plain text in the BPMN model. Reference them from a connector task as `=camunda.secrets.FraudWebhookKey`, `=camunda.secrets.OpenAI`, or `=camunda.secrets.SendGrid`.
+How you create them depends on where your cluster runs:
+
+- **SaaS**: In Camunda Hub, under **Console** in the left navigation, click **Clusters**, select your cluster, and open the **Cluster secrets** tab. Click **Create new secret** for each key in the table.
+- **Self-Managed**: Secrets aren't managed in the UI. Ask an operator to add these keys as described in [connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md).
+
+Reference the secrets from Connector fields so their values aren't stored as plain text in the BPMN model. Reference them from a connector task as `{{secrets.FraudWebhookKey}}`, `{{secrets.OpenAI}}`, or `{{secrets.SendGrid}}`.
+
+:::tip
+On Camunda 8.10 and later, you can also reference these secrets as `=camunda.secrets.FraudWebhookKey`, `=camunda.secrets.OpenAI`, and `=camunda.secrets.SendGrid`. See [reference connector secrets as `camunda.secrets.<name>`](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
+:::
 
 ## Deploy the process and copy the webhook URL
 
@@ -211,9 +221,9 @@ Replace `CAMUNDA_WEBHOOK_URL` and `CAMUNDA_WEBHOOK_SECRET` with the values you c
 2. Confirm the cell prints `Process instance started`.
 3. Open [Operate](/components/operate/operate-introduction.md), find the `Fraud Detection` process, and open the running instance.
 
-The sample transaction has `riskScore: 0.87`, which is above the `0.75` threshold, so the instance should have already run the OpenAI and SendGrid tasks and be waiting at the `Review Flagged Transaction` user task. In Operate, you can see the process variables from the webhook payload (`caseId`, `riskScore`, `emailBody`, and so on), the current execution state, and any incidents, such as a missing secret.
+The sample transaction has `riskScore: 0.87`, which is above the `0.75` threshold, so the instance should have already run the OpenAI task and be waiting at the `Review Flagged Transaction` user task. The SendGrid task runs only after the analyst completes the review. In Operate, you can see the process variables from the webhook payload (`caseId`, `riskScore`, `emailBody`, and so on), the current execution state, and any incidents, such as a missing secret.
 
-If the instance isn't waiting at `Review Flagged Transaction`, check for an incident on the OpenAI or SendGrid task first; a missing or misspelled secret reference is the most common cause.
+If the instance isn't waiting at `Review Flagged Transaction`, check for an incident on the OpenAI task first; a missing or misspelled secret reference is the most common cause.
 
 :::tip
 If the webhook call fails with a `401` status, check that `CAMUNDA_WEBHOOK_SECRET` matches the `FraudWebhookKey` secret value you set in [Store your API credentials as secrets](#store-your-api-credentials-as-secrets).
