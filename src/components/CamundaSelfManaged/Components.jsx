@@ -21,9 +21,15 @@ const ComponentCard = ({ link, title, icon: Icon, description }) => {
   );
 };
 
+// Versions predating the Camunda Hub merge, which still have separate
+// Web Modeler and Console component pages instead of a single Hub page.
+const legacyConsoleModelerVersions = ["8.9", "8.8", "8.7"];
+
 const Components = ({ hideHeading = false }) => {
   const docsVersion = useActiveVersion();
-  const isNextVersion = docsVersion?.name === "current";
+  const isLegacyVersion = legacyConsoleModelerVersions.includes(
+    docsVersion?.name
+  );
 
   const componentItems = [
     {
@@ -47,17 +53,8 @@ const Components = ({ hideHeading = false }) => {
         "Business intelligence and analytics for enterprise customers.",
       link: "/self-managed/components/optimize/overview",
     },
-    ...(isNextVersion
+    ...(isLegacyVersion
       ? [
-          {
-            title: "Camunda Hub",
-            icon: ConsoleIcon,
-            description:
-              "Manage deployments and model your BPMN diagrams in one place.",
-            link: "/self-managed/components/hub",
-          },
-        ]
-      : [
           {
             title: "Web Modeler",
             icon: ModelerIcon,
@@ -71,6 +68,15 @@ const Components = ({ hideHeading = false }) => {
             description:
               "Manage and monitor your Camunda 8 Self-Managed deployments.",
             link: "/self-managed/components/console/overview",
+          },
+        ]
+      : [
+          {
+            title: "Camunda Hub",
+            icon: ConsoleIcon,
+            description:
+              "Manage deployments and model your BPMN diagrams in one place.",
+            link: "/self-managed/components/hub",
           },
         ]),
     {

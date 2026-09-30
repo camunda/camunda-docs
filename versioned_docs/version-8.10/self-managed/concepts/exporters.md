@@ -191,7 +191,7 @@ At a high level, filtering happens in two phases:
 - Metadata-level filtering via `acceptType`, `acceptValue`, and `acceptIntent`, which runs before records are deserialized and is very cheap.
 - Record-level filtering via `acceptRecord(Record<?>)`, which can inspect the fully deserialized record value when you need richer conditions (for example, inspecting variables or BPMN process IDs).
 
-Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
+Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/stable/8.10/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
 
 For example, you can implement a custom exporter that only exports records with:
 
@@ -368,7 +368,7 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
 
         - Because each expired message now carries its entire payload, the expiration checker's write buffer fills up faster. As a result, the checker requires more time (or more roundtrips) to process the same number of expired messages.
 
-        - This can lead to an increasing backlog of messages waiting to be expired. For finer control over the expiration checker's behavior, see the [message TTL checker configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L1223).
+        - This can lead to an increasing backlog of messages waiting to be expired. For finer control over the expiration checker's behavior, see the [message TTL checker configuration](https://github.com/camunda/camunda/blob/stable/8.10/dist/src/main/config/defaults.yaml) (`enable-async-message-ttl-checker`).
 
         :::
 

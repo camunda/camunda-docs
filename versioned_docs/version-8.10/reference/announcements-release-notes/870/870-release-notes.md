@@ -17,13 +17,13 @@ These release notes identify the new features included in 8.7, including [alpha 
 
 ### Spring Zeebe SDK - Spring Boot 4.1 support
 
-As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified from the `8.7.38` patch onward. Spring Boot 4.0.x remains the default bundled version.
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified from the `8.7.38` patch onward. Spring Boot 4.0.x remains the default bundled version.
 
 ## 8.7.17
 
 ### Spring Zeebe SDK - Spring-Boot 3.5 support
 
-As the [Spring-Boot OSS Support](https://spring.io/projects/spring-boot#support) for the bundled Spring-Boot version 3.4 ends in in 2025-12, [Spring-Boot 3.5.x compatibility](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified since the `8.7.17` patch onward.
+As the [Spring-Boot OSS Support](https://spring.io/projects/spring-boot#support) for the bundled Spring-Boot version 3.4 ends in in 2025-12, [Spring-Boot 3.5.x compatibility](/versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified since the `8.7.17` patch onward.
 
 ## 8.7 minor
 
