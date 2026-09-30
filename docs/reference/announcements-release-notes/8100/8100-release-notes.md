@@ -966,6 +966,22 @@ Camunda no longer produces the following Docker images in Camunda 8.10 and later
 
 Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
 
+### Edit roles and tenants in Admin
+
+<!-- https://github.com/camunda/product-hub/issues/3469, https://github.com/camunda/product-hub/issues/3470 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Admin">Admin</span></div>
+
+You can now edit the name and description of a role or tenant directly in Admin, without deleting and re-creating it. Existing assignments stay in place.
+
+- Default roles and the `<default>` tenant are system entities and cannot be edited.
+- Role and tenant IDs cannot be changed after creation.
+
+<ul>
+  <li><span class="link-arrow">[Update a role](/components/admin/role.md#update-a-role)</span></li>
+  <li><span class="link-arrow">[Update a tenant](/components/admin/tenant.md#update-a-tenant)</span></li>
+</ul>
+
 ### Job and process prioritization
 
 <!-- https://github.com/camunda/product-hub/issues/3573 -->
@@ -2633,6 +2649,22 @@ The default RocksDB memory allocation strategy changes from `PARTITION` to `FRAC
 To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#rocksdb-memory-allocation-strategy) for more details.
 
 <p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
+
+#### Edit roles and tenants in Admin
+
+<!-- https://github.com/camunda/product-hub/issues/3469, https://github.com/camunda/product-hub/issues/3470 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Admin">Admin</span></div>
+
+You can now edit the name and description of a role or tenant directly in Admin, without deleting and re-creating it. Existing assignments stay in place.
+
+- Default roles and the `<default>` tenant are system entities and cannot be edited.
+- Role and tenant IDs cannot be changed after creation.
+
+<ul>
+  <li><span class="link-arrow">[Update a role](/components/admin/role.md#update-a-role)</span></li>
+  <li><span class="link-arrow">[Update a tenant](/components/admin/tenant.md#update-a-tenant)</span></li>
+</ul>
 
 #### Multi-Instance activity execution listeners
 
