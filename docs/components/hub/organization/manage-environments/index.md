@@ -1,6 +1,6 @@
 ---
 id: manage-environments
-title: Manage environments
+title: Manage Environments
 description: "View the Environments in your organization, open their applications, resume a paused Environment, and learn how to add a new one."
 ---
 
@@ -19,7 +19,7 @@ What you see on the **Environments** page depends on your role:
 | Editor or admin in a workspace     | See the Environments assigned to workspaces where you're an editor or workspace admin.                                          |
 | Viewer or commenter in a workspace | See no Environments.                                                                                                            |
 
-## View environments
+## View Environments
 
 To view the Environments in your organization, click **Environments** in the left navigation.
 
@@ -77,7 +77,7 @@ In SaaS, an organization owner, admin, or DevOps user can resume a paused Enviro
 
 The status changes to **Resuming** while the cluster starts. Self-Managed Environments don't pause.
 
-## Add a new environment
+## Add a new Environment
 
 Camunda Hub adds Environments automatically when a cluster exists. To add one, click **Add new environment** on the **Environments** page. Only organization owners and admins see this button.
 

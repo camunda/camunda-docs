@@ -25,7 +25,7 @@ Use task testing during implementation for quick feedback, and use Test mode for
 
 Before running task testing, ensure you have:
 
-- A [runtime connection](../modeling/runtime-connection.md) to an Environment, hosted on an active Camunda 8.8 or later orchestration cluster
+- A [runtime connection](../modeling/runtime-connection.md) to an Environment, hosted on an active Camunda 8.8 or later Orchestration Cluster
 - Permissions to deploy and run processes in the target environment
 
 ## Run a task test

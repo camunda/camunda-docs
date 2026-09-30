@@ -6,11 +6,11 @@ description: "A cluster is the infrastructure that runs Camunda 8. Learn how clu
 
 A cluster is the infrastructure that runs Camunda 8. It includes the Orchestration Cluster that automates your processes, and the components that run alongside it, such as connectors and Optimize.
 
-In Camunda Hub, a cluster is an administrative unit: the infrastructure that org admins create, size, and maintain. Teams don't deploy to a cluster directly. They deploy to an [Environment](./environments.md) hosted on it.
+In Camunda Hub, a cluster is an administrative unit: the infrastructure that organization admins create, size, and maintain. Teams don't deploy to a cluster directly. They deploy to an [Environment](./environments.md) hosted on it.
 
 ## Clusters and Environments
 
-A cluster is an administrative unit, and an Environment is an operational unit. Org admins create, size, update, and back up clusters. Teams deploy and run processes in the Environments that are assigned to their [workspace](./workspaces.md).
+A cluster is an administrative unit, and an Environment is an operational unit. Organization admins create, size, update, and back up clusters. Teams deploy and run processes in the Environments that are assigned to their [workspace](./workspaces.md).
 
 | Cluster                             | Environments of the cluster                                                               |
 | :---------------------------------- | :---------------------------------------------------------------------------------------- |
@@ -24,7 +24,7 @@ Learn more about [Environments](./environments.md).
 
 ## Clusters in SaaS
 
-In SaaS, org admins create clusters in Camunda Hub. When you create a cluster, you choose its type, size, region, and version. The type defines the availability and uptime of the cluster, and the size defines its capacity.
+In SaaS, organization admins create clusters in Camunda Hub. When you create a cluster, you choose its type, size, region, and version. The type defines the availability and uptime of the cluster, and the size defines its capacity.
 
 Learn more about [SaaS clusters](/components/saas/clusters.md), including cluster types, sizes, and Free Trial clusters.
 
@@ -36,7 +36,7 @@ Learn more about [Environments in the Camunda Hub configuration](/self-managed/c
 
 ## Manage clusters
 
-Org admins and DevOps users manage clusters in Camunda Hub, for example to rename, resume, update, or resize a cluster in SaaS.
+Organization admins and DevOps users manage clusters in Camunda Hub, for example to rename, resume, update, or resize a cluster in SaaS.
 
 - [Manage clusters](/components/hub/organization/manage-clusters/index.md)
 - [Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md)

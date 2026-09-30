@@ -8,7 +8,7 @@ import DeployErrorImg from './img/deploy-error.png'
 
 Deploy your project to an Environment assigned to your workspace, for example a testing, staging, or production Environment.
 
-## Deployment environments
+## Deployment Environments
 
 You deploy a project to an [Environment](/components/concepts/environments.md), not to a cluster. The deploy dialog lists the Environments that are assigned to the workspace of the project. Each entry shows the following details:
 
@@ -73,11 +73,11 @@ The status of an Environment decides whether you can deploy to it:
 
 These messages appear in the SaaS deploy dialog. To resume a paused Environment, click **Resume** next to it. Only organization owners, admins, and DevOps users see this button. You can also [resume the Environment from the Environments page](../../organization/manage-environments/index.md#resume-a-paused-environment).
 
-### No environment available
+### No Environment available
 
 If no Environment is assigned to the workspace, the dialog shows **No deployment environments available**. An organization admin must assign an Environment to the workspace. If you can manage the Environments of the workspace, click **Manage workspace environments** in the dialog to open the workspace settings.
 
-### Production environments
+### Production Environments
 
 Camunda Hub treats an Environment as a production Environment if its tags include `prod`. Your organization can require that a project snapshot is approved before anyone deploys it to a production Environment. When this is enabled, and you select a production Environment, the dialog shows one of the following messages:
 

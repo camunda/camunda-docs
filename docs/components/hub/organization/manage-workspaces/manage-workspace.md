@@ -8,7 +8,7 @@ Create a workspace, update a workspace's information, or delete a workspace.
 
 ## About
 
-In Camunda Hub, a workspace is a collaboration environment within an organization, representing a team or business domain. It groups organizational resources like members, projects, and Environments so related work happens in one shared space.
+In Camunda Hub, a workspace is a collaboration space within an organization, representing a team or business domain. It groups organizational resources like members, projects, and Environments so related work happens in one shared space.
 
 :::tip
 You can also [manage a workspace from within the workspace](../../workspace/manage-workspace/index.md) itself.
@@ -28,7 +28,7 @@ Create a workspace, invite members, and assign Environments:
 4. Under **Members**, [manage the workspace's members](./manage-workspace-members.md), then click **Next**.
 5. Under **Environments**, [assign Environments](../manage-environments/assign-environments.md) to the workspace, then click **Create workspace**. Only organization owners and admins see this step. You can also assign Environments later.
 
-## Assign environments
+## Assign Environments
 
 Choose the Environments that the projects of the workspace can deploy to. See [assign Environments to a workspace](../manage-environments/assign-environments.md).
 

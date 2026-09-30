@@ -200,7 +200,7 @@ See [Zeebe Client](#zeebe-client).
 
 ### Cluster
 
-A cluster is the infrastructure that runs Camunda 8. In Camunda Hub, a cluster is an administrative unit that org admins create, size, update, and back up. Teams deploy to an [Environment](#environment) hosted on the cluster, not to the cluster itself.
+A cluster is the infrastructure that runs Camunda 8. In Camunda Hub, a cluster is an administrative unit that organization admins create, size, update, and back up. Teams deploy to an [Environment](#environment) hosted on the cluster, not to the cluster itself.
 
 - [Clusters](/components/concepts/clusters.md)
 - [Environments](/components/concepts/environments.md)
@@ -328,7 +328,7 @@ A vector representation of data, including words, sentences, images, in a numeri
 
 ### Environment
 
-An Environment is the named place where a team deploys and runs [processes](#process) in [Camunda Hub](/components/hub/index.md). It's the operational unit for deployment, while the [cluster](#cluster) is the administrative unit. An Environment is backed by a [Physical Tenant](#physical-tenant) on Self-Managed 8.10 and later, or by the whole cluster on SaaS and on earlier versions. Org admins assign Environments to workspaces, and every project in a workspace can deploy to the Environments assigned to it.
+An Environment is the named place where a team deploys and runs [processes](#process) in [Camunda Hub](/components/hub/index.md). It's the operational unit for deployment, while the [cluster](#cluster) is the administrative unit. An Environment is backed by a [Physical Tenant](#physical-tenant) on Self-Managed 8.10 and later, or by the whole cluster on SaaS and on earlier versions. Organization admins assign Environments to workspaces, and every project in a workspace can deploy to the Environments assigned to it.
 
 - [Environments](/components/concepts/environments.md)
 - [Cluster](#cluster)
@@ -992,7 +992,7 @@ See [process variable](#process-variable).
 
 ### Workspace
 
-A collaboration environment within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and [Environments](#environment), so all related work happens in one shared space.
+A collaboration space within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and [Environments](#environment), so all related work happens in one shared space.
 
 - [Workspaces](/components/concepts/workspaces.md)
 - [Workspace](/components/hub/workspace/index.md)

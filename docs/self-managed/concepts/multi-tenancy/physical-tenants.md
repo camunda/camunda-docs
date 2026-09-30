@@ -68,7 +68,7 @@ There is no migration path from Logical Tenants to Physical Tenants. Logical Ten
 
 ## Physical Tenants in Camunda Hub
 
-In Camunda Hub, each Physical Tenant appears as an [Environment](/components/concepts/environments.md). Org admins assign Environments to workspaces, and teams deploy to the Environment rather than to the cluster. The `default` Physical Tenant appears under the cluster name, and every other Physical Tenant appears under its tenant ID.
+In Camunda Hub, each Physical Tenant appears as an [Environment](/components/concepts/environments.md). Organization admins assign Environments to workspaces, and teams deploy to the Environment rather than to the cluster. The `default` Physical Tenant appears under the cluster name, and every other Physical Tenant appears under its tenant ID.
 
 ## Wording conventions
 

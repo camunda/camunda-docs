@@ -83,7 +83,7 @@ description: "Create and manage workspaces within your organization.",
 },
 {
 link: "./organization/manage-environments",
-title: "Manage environments",
+title: "Manage Environments",
 image: BPMNIcon,
 description: "See your Environments, check their status, and assign them to workspaces.",
 },
