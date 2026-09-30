@@ -361,12 +361,9 @@ If you are using an external Elasticsearch/OpenSearch and Kubernetes, you could 
 
 In a manual setup, you can simply stop Optimize component.
 
-If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling Optimize in the `values.yml`.
+If you are using the Camunda Helm chart, you can achieve this by (for example) disabling Optimize in the `values.yml`.
 
 ```yaml
-elasticsearch:
-  enabled: true
-
 optimize:
   enabled: false
 ```

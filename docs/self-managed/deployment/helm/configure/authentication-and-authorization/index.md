@@ -8,14 +8,14 @@ Camunda 8 Self-Managed supports multiple authentication methods for securing acc
 
 ## Overview
 
-By default, Camunda uses Basic authentication with predefined demo users. Alternatively, you can configure OpenID Connect (OIDC) authentication, either through an internal Keycloak instance deployed with Camunda or an external OIDC provider.
+By default, Camunda uses Basic authentication with predefined demo users. Alternatively, you can configure OpenID Connect (OIDC) authentication through an in-cluster Keycloak instance or an external OIDC provider. Deploy the in-cluster Keycloak instance with the [Keycloak operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment).
 
 ### Authentication options
 
 | Method                                                                        | Description                                                                                                         | Recommended for                                                                            |
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | [Basic authentication](./basic-authentication.md)                             | Authentication using preconfigured demo users. No external identity provider (IdP) required.                        | Local development and testing, as well as smaller-scale production setups.                 |
-| [Internal Keycloak](./internal-keycloak.md)                                   | Deploys an internal Keycloak instance with the Helm release, preconfigured by Management Identity.                  | Small teams or self-contained environments.                                                |
+| [Internal Keycloak](./internal-keycloak.md)                                   | Connects to an in-cluster Keycloak that the Keycloak operator deploys, preconfigured by Management Identity.        | Small teams or self-contained environments.                                                |
 | [External IdP via Internal Keycloak](./external-idp-via-internal-keycloak.md) | Uses the internal Keycloak as an identity broker, delegating authentication to an external identity provider (IdP). | Organizations with existing identity infrastructure that want to retain Keycloak features. |
 | [External OIDC provider](./external-oidc-provider.md)                         | Integrates Camunda with an external identity provider, such as Microsoft Entra ID or Okta, via OpenID Connect.      | Organizations with an existing enterprise identity infrastructure.                         |
 
