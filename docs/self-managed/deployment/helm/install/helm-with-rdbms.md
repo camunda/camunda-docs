@@ -318,8 +318,6 @@ connectors:
   enabled: true
 
 # Disable management components
-console:
-  enabled: false
 optimize:
   enabled: false
 webModeler:
