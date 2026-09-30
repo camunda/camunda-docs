@@ -1182,6 +1182,11 @@ h2 .badge:nth-of-type(1) {
 h3 .badge:nth-of-type(1) {
   margin-bottom: 0rem;
 }
+table .badge,
+table .badge:nth-of-type(1) {
+  margin: 0;
+  white-space: nowrap;
+}
 .theme-doc-version-badge {
   margin-left: 0;
   margin-bottom: 0.5rem !important;
