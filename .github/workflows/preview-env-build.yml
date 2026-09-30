@@ -1,0 +1,59 @@
+name: preview-env-build
+on: pull_request
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  build-docs:
+    # Use self-hosted runner with more resources
+    runs-on: gcp-core-16-default
+
+    # The execution of a job shares the same container and resources as the runner agent
+    # that communicates with GitHub. Excessive and intensive consumption of resources
+    # by a job steps may starve the runner agent to the point where communication is lost,
+    # forcing GitHub to consider it offline. To prevent this, we can use a separate container
+    # with its own resources for the job execution.
+    container: node:24
+
+    name: build-docs
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Import secrets from Vault
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          secrets: |
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Docs
+        env:
+          NODE_OPTIONS: --max-old-space-size=30720
+          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
+        run: npm run build
+
+      # Branch names can contain characters that artifact names disallow (e.g. "/").
+      - name: Set artifact name
+        id: artifact
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: echo "name=docs-build-$(echo "$BRANCH" | sed 's/[^A-Za-z0-9._-]/-/g')" >> "$GITHUB_OUTPUT"
+
+      - name: Upload build
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ${{ steps.artifact.outputs.name }}
+          path: build
+          include-hidden-files: true
+          retention-days: 1
+          overwrite: true
