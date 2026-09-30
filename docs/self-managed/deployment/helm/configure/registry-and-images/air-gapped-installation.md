@@ -154,7 +154,7 @@ camundaHub:
       repository: camunda/hub-websockets
 ```
 
-The `pullSecrets` value references a Kubernetes Secret with the credentials of your registry. To create the Secret, see [pull images from a private registry](./index.md#pull-images-from-a-private-registry). If your registry doesn't require credentials, remove `pullSecrets`.
+The `pullSecrets` value references a Kubernetes Secret with your registry credentials. To create the Secret, see [pull images from a private registry](./index.md#pull-images-from-a-private-registry). If your registry doesn't require credentials, remove `pullSecrets`.
 
 #### Deploy Camunda with custom values
 
