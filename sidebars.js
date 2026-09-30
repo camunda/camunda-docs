@@ -1859,6 +1859,7 @@ module.exports = {
                 "self-managed/deployment/helm/configure/orchestration-tls-modes",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
+                "self-managed/deployment/helm/configure/multi-region-zone-awareness",
                 "self-managed/deployment/helm/configure/service-configuration",
                 "self-managed/deployment/helm/configure/health-probes",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
@@ -2017,6 +2018,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/deploy-multiple-optimize-instances",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/deployment/helm/operational-tasks/multi-region-rdbms-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/zone-aware-migration",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
                 "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
@@ -2060,6 +2062,7 @@ module.exports = {
                         "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-terraform",
                         "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm",
                         "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region",
+                        "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms",
                         {
                           Troubleshooting: [
                             "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa",
@@ -2376,6 +2379,7 @@ module.exports = {
           items: [
             "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
+            "self-managed/concepts/multi-region/multi-region-rdbms",
           ],
         },
         "self-managed/operational-guides/data-purge",
