@@ -1,1 +1,1 @@
-Helm CLI v4 is the recommended Helm CLI and is supported for the whole Camunda 8.9 release cycle. Helm CLI v3 (3.10 or later) is supported until its upstream end of life on February 10, 2027. After that date, support for Helm CLI v3 is best effort only.
+Camunda recommends Helm CLI v4 and supports it for the full Camunda 8.9 release cycle. Camunda supports Helm CLI v3 (3.10 or later) until February 10, 2027, when upstream support ends. After that date, Camunda provides best-effort support only. Customers who continue to run Helm CLI v3 after that date do so at their own risk.

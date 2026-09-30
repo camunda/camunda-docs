@@ -64,7 +64,7 @@ Important changes in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
 <td>[Helm chart deployment](#helm-chart-deployment)</td>
-    <td>RDBMS and secondary storage configuration, `*.secret.existingSecret` pattern migration, default 8080 REST port, Helm 4 support, and more.</td>
+    <td>RDBMS and secondary storage configuration, `*.secret.existingSecret` pattern migration, default 8080 REST port, Helm CLI v4 support, and more.</td>
 </tr>
 <tr>
 <td>[Migration from Camunda 7](#migration)</td>
@@ -193,15 +193,13 @@ The Orchestration Cluster's default HTTP port has changed from 8090 to 8080.
 
 You should update any hardcoded port references in network policies, Ingress rules, or service configuration.
 
-### Helm 4 support
+### Helm CLI v4 support {#helm-4-support}
 
-Camunda 8.9 (chart 14.x) supports both the Helm CLI v3 and v4.
+Camunda 8.9 (chart 14.x) supports Helm CLI v3 and v4.
 
 <HelmCliSupport />
 
-The Helm 4 guide covers the Helm 4 behavior changes that affect the Camunda Helm chart, and how to apply workarounds.
-
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+For Helm CLI v4 behavior changes and workarounds, see [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 ### RDBMS as secondary storage
 

@@ -15,12 +15,12 @@ Upgrade a Camunda 8 Self-Managed deployment installation using the official Camu
 If you are upgrading from a version earlier than 8.8, see [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 :::
 
-:::warning Plan your move to the Helm v4 CLI
-Camunda 8.10 (chart 15.x) supports both the Helm v3 and v4 CLIs.
+:::note Helm CLI support
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 and v4.
 
 <HelmCliSupport />
 
-Switch to the Helm v4 CLI before Helm v3 support ends. No release-state migration is required when switching CLIs. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
+Switching CLIs does not require a release-state migration. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
 :::
 
 ## Upgrade guides

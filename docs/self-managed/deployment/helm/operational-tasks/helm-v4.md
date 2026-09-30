@@ -2,19 +2,19 @@
 id: helm-v4
 title: "Helm 4"
 sidebar_label: "Helm 4"
-description: "Learn how Helm 4 behavior affects Camunda Helm chart installs and upgrades."
+description: "Learn how Helm CLI v4 behavior affects Camunda Helm chart installs and upgrades."
 ---
 
 import HelmCliSupport from '../_partials/_helm-cli-support.md';
 
-Learn how Helm 4 behavior can affect Camunda Helm chart installs and upgrades, and how to apply workarounds.
+Learn how Helm CLI v4 behavior can affect Camunda Helm chart installs and upgrades, and how to apply workarounds.
 
 :::note Switching from Helm v3
 Switching CLIs does not require a release-state migration; Helm is client-side only. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
 :::
 
 :::info
-Learn more about Helm 4 changes in the [Helm documentation](https://helm.sh/docs/overview/#whats-new).
+Learn more about Helm CLI v4 changes in the [Helm documentation](https://helm.sh/docs/overview/#whats-new).
 :::
 
 ## Camunda Helm chart compatibility
@@ -31,7 +31,9 @@ Helm CLI compatibility depends on the Camunda Helm chart version.
 
 \* Helm CLI v4 may require workarounds when overriding environment variables. See [Workarounds](#workarounds).
 
-With Helm CLI v3, charts 12.x to 15.x require Helm v3.10 or later. Charts 14.x and 15.x also show the following warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
+When you use Helm CLI v3, charts 12.x to 15.x require version 3.10 or later. Charts 14.x and 15.x also show a warning when you run `helm install` or `helm upgrade`. The warning appears in command output and in a ConfigMap with a name ending in `-warnings`. It does not block either command.
+
+<!-- Keep this warning in sync with the chart template: https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.10/templates/common/constraints.tpl. -->
 
 ```text
 [camunda][warning] Helm CLI <version> detected. Helm v3 receives security fixes only until February 10, 2027 (https://helm.sh/blog/helm-v3-end-of-life/). Upgrade to Helm v4 before then: https://helm.sh/docs/overview
@@ -39,13 +41,13 @@ With Helm CLI v3, charts 12.x to 15.x require Helm v3.10 or later. Charts 14.x a
 
 <HelmCliSupport />
 
-## Helm 4 breaking changes
+## Helm CLI v4 breaking changes {#helm-4-breaking-changes}
 
 ### Server-side apply is enabled by default
 
 Server-side apply is a Kubernetes feature that improves how changes to Kubernetes resources are merged. When multiple clients update the same resource, server-side apply reduces the risk of unintentional overwrites.
 
-In Helm 4, server-side apply is enabled by default. This changes the behavior of `helm install` and `helm upgrade` compared to Helm 3.
+In Helm CLI v4, server-side apply is enabled by default. This changes the behavior of `helm install` and `helm upgrade` compared to Helm CLI v3.
 
 #### Problem
 
@@ -73,7 +75,7 @@ spec:
           value: "--- YOUR LICENSE KEY HERE ---"
 ```
 
-In Helm 4, this causes the install or upgrade to fail with an error similar to the following:
+In Helm CLI v4, this causes the install or upgrade to fail with an error similar to the following:
 
 > Error: INSTALLATION FAILED: failed to create typed patch object (default/RELEASE-identity; apps/v1, Kind=Deployment):  
 > .spec.template.spec.containers[name="identity"].env: duplicate entries for key [name="CAMUNDA_LICENSE_KEY"]
@@ -97,13 +99,13 @@ If you encounter a duplicate environment variable error, apply one of the follow
    helm upgrade ... --server-side=false
    ```
 
-4. Until February 10, 2027, use Helm CLI v3 as a temporary workaround. After that date, support for Helm CLI v3 is best effort only, so use one of the other workarounds.
+4. Until Helm CLI v3 support ends, use Helm CLI v3 as a temporary workaround. After that, support is best effort only, so use one of the other workarounds.
 
-:::note Helm CLI v3 support timeline
-Helm CLI v3 receives security fixes until February 10, 2027. Helm v3.22 is the final Helm v3 minor release. See the [Helm v3 end-of-life announcement](https://helm.sh/blog/helm-v3-end-of-life/).
+:::note Helm CLI v3 support
+Helm CLI v3.22.0 is the final Helm CLI v3 minor release. See the [Helm v3 end-of-life announcement](https://helm.sh/blog/helm-v3-end-of-life/).
 :::
 
-Until February 10, 2027, if your package manager doesn't provide Helm CLI v3, you can run it using Docker:
+Until Helm CLI v3 support ends, if your package manager doesn't provide Helm CLI v3, you can run it using Docker:
 
 ```bash
 docker run \
@@ -115,7 +117,7 @@ docker run \
 
 ### Post-renderers are now plugins
 
-In Helm 4, post-renderers must be implemented as Helm plugins.
+In Helm CLI v4, post-renderers must be implemented as Helm plugins.
 
 If you previously passed an executable path (for example, a shell script) using the `--post-renderer` option, you must migrate that logic into a Helm plugin.
 

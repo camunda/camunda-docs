@@ -32,7 +32,7 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 
 ## Requirements
 
-- [Helm v4](https://helm.sh/docs/intro/install/)
+- [Helm CLI v4](https://helm.sh/docs/intro/install/) (recommended; see [supported versions](/reference/supported-environments.md#clients)).
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.

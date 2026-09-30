@@ -514,17 +514,19 @@ Camunda for Slack joins Camunda for Microsoft Teams as a second chat platform se
 
 Important changes to Helm chart deployment in 8.10 are as follows:
 
+<!-- Legacy anchor retained for inbound links. -->
+
 ### Helm CLI v3 and v4 support {#helm-v4-required}
 
-Camunda 8.10 (chart 15.x) supports the Helm CLI v3 (3.10 or later) and v4. With Helm v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm CLI v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
 
 <HelmCliSupport />
 
-Switching CLIs does not require a release-state migration; Helm is client-side only. Use the Helm v4 CLI for new installations, and switch existing deployments to the Helm v4 CLI before Helm v3 support ends.
+Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
 
 <ul>
   <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
 </ul>
 
 ### Host network support for orchestration cluster pods

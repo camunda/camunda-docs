@@ -18,7 +18,7 @@ Camunda provides continuously improved Helm charts that are not tied to any spec
 :::note Helm CLI support
 <HelmCliSupport />
 
-Use the Helm v4 CLI for new installations.
+Use Helm CLI v4 for new installations.
 :::
 
 ## What is Helm?

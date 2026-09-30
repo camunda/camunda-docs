@@ -45,7 +45,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
 - **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x, 4.0.x, 4.1.x
-- **Helm CLI**: 4.x [recommended], 3.10+ (supported until February 10, 2027, best effort after that). For the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+- **Helm CLI**: 4.x [recommended], 3.10+ (supported until upstream support for Helm CLI v3 ends, then best effort). For details, see [Helm CLI support](/self-managed/deployment/helm/operational-tasks/helm-v4.md#camunda-helm-chart-compatibility) and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## Camunda 8 Self-Managed
 

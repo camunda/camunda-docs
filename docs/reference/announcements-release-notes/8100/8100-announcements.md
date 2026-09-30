@@ -622,13 +622,13 @@ This default does not apply to existing clusters. Existing clusters show data fi
 
 #### Helm CLI v3 and v4 supported for Camunda 8.10 {#helm-v4-required-for-camunda-810}
 
-Camunda 8.10 (chart 15.x) supports the Helm CLI v3 (3.10 or later) and v4.
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4.
 
 <HelmCliSupport />
 
 With Helm v3, the chart shows a warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
 
-**Action:** Use the Helm v4 CLI for new installations. For existing deployments, switch to the Helm v4 CLI before Helm v3 support ends. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+**Action:** Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends. Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 </div>
 </div>

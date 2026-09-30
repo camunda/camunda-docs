@@ -136,9 +136,9 @@ A gateway timeout can occur if the headers of a response are too big (for exampl
 
 ## Helm CLI version and installation failures
 
-If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an unsupported version of the Helm CLI. Camunda 8.10 (chart 15.x) requires Helm CLI v3.10 or later, or Helm CLI v4.
+If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an unsupported version of the Helm CLI. Camunda 8.10 (chart 15.x) supports Helm CLI 3.10 or a later 3.x version, or Helm CLI 4.x.
 
-For chart-to-CLI compatibility across versions, see [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+For chart-to-CLI compatibility across versions, see [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 ## DNS disruption issue for Zeebe in Kubernetes clusters (1.29-1.31)
 

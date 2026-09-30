@@ -244,14 +244,14 @@ Camunda 8.9 adds migration guidance for customers moving Self-Managed Helm deplo
 
 <p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
 
-### Gateway API, templating, and Helm 4 support
+### Gateway API, templating, and Helm CLI v4 support {#gateway-api-templating-and-helm-4-support}
 
-The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm 4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm 3 end of life.
+The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm CLI v4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm CLI v3 end of life.
 
 <ul>
   <li><span class="link-arrow">[Gateway API setup](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</span></li>
   <li><span class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
 </ul>
 
 ### Secondary storage and authorization defaults
@@ -697,17 +697,15 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
 
-#### Helm 4 support
+#### Helm CLI v4 support {#helm-4-support}
 
 <!-- https://github.com/camunda/product-hub/issues/3358 -->
 
-Camunda 8.9 (chart 14.x) supports both the Helm CLI v3 and v4.
+Camunda 8.9 (chart 14.x) supports Helm CLI v3 and v4.
 
 <HelmCliSupport />
 
-The Helm 4 guide covers the Helm 4 behavior changes that affect the Camunda Helm chart, and how to apply workarounds.
-
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+For Helm CLI v4 behavior changes and workarounds, see [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 ### Global user task listeners
 
