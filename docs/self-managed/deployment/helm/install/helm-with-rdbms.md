@@ -135,9 +135,6 @@ orchestration:
                 history:
                   default-history-ttl: P30D
 
-# Disable default Elasticsearch subchart
-elasticsearch:
-  enabled: false
 # If deploying Optimize, you still need Elasticsearch/OpenSearch
 # Uncomment below and configure as needed:
 # opensearch:
@@ -348,9 +345,6 @@ identity:
 # Optimize requires Elasticsearch/OpenSearch
 opensearch:
   enabled: true
-  # or
-  # elasticsearch:
-  #   enabled: true
 ```
 
 ## Configuration reference
@@ -375,8 +369,6 @@ optimize:
   enabled: true
 # Choose one secondary storage for Optimize:
 # opensearch:
-#   enabled: true
-# elasticsearch:
 #   enabled: true
 ```
 

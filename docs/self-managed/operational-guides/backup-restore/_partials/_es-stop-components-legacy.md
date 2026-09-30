@@ -4,12 +4,9 @@ In a manual setup, you can simply stop all components.
 
 Before restoring the Elasticsearch/OpenSearch snapshots, stop Optimize if it is installed. If Operate and Tasklist are deployed as standalone applications, stop them as well. With the official Camunda Helm chart, Operate and Tasklist run as part of the single orchestration cluster deployment, so stop the orchestration deployment as described above rather than stopping separate application deployments.
 
-If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling all other components in the `values.yml`.
+If you are using the Camunda Helm chart, you can achieve this by (for example) disabling all other components in the `values.yml`.
 
 ```yaml
-elasticsearch:
-  enabled: true
-
 connectors:
   enabled: false
 optimize:
