@@ -137,8 +137,10 @@ If you need to pass props, render the component instead:
 ```jsx
 import Foo from "./img/foo.svg";
 
-<Foo title="Dual-region deployment" width="800" />;
+<Foo role="img" title="Dual-region deployment" width="800" />;
 ```
+
+Keep `role="img"`. The component renders an inline `<svg>`, and without the role some screen readers walk into it and read every label in the drawing instead of the title.
 
 ### A stale cache reports a file you already replaced
 
