@@ -272,6 +272,7 @@ The following databases are supported for LSN replication monitoring:
 - Aurora Global Database with MySQL
 - MSSQL
 - PostgreSQL
+- Oracle
 
 To use the LSN replication monitoring with PostgreSQL, the database user must have the following additional privileges:
 
@@ -361,7 +362,8 @@ replication is not fully in sync. This strategy requires external monitoring of 
 that the configured delay is sufficient for the database replication to catch up in case of a failover.
 
 :::warning
-The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. Size the persistent volume to hold all records produced during that interval. If the volume is too small, Zeebe runs out of disk space and stops processing.
+The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. The exporter never acknowledges records before the configured delay period has elapsed, but may acknowledge them after this period has elapsed.
+Size the persistent volume to hold all records produced during the delay interval. If the volume is too small, Zeebe will run out of disk space and stop processing.
 :::
 
 ```yaml
@@ -375,6 +377,21 @@ camunda.data.secondary-storage.rdbms.async-replication.type: DELAY
 | `async-replication.delay`               | The delay to wait until a flushed record is acknowledged to the broker            | --      |
 | `async-replication.queue-capacity`      | Size of the internal queue of record positions to acknowledge                     | 8192    |
 | `async-replication.queue-debounce-time` | A debounce time to not add every record to the queue but only one every X seconds | PT5S    |
+
+### Compatibility Matrix
+
+It is recommended to always use the left-most supported strategy for your database vendor. If your database vendor does
+not support LSN or time based replication monitoring, you can use the delay backoff strategy as a fallback.
+
+| Database Vendor   | LSN based          | Time based         | Delay backoff      |
+| ----------------- | ------------------ | ------------------ | ------------------ |
+| Aurora PostgreSQL | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Aurora MySQL      | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| PostgreSQL        | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| MSSQL             | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Oracle            | :white_check_mark: | :x:                | :white_check_mark: |
+| MariaDB           | :x:                | :x:                | :white_check_mark: |
+| MySQL             | :x:                | :x:                | :white_check_mark: |
 
 ## Usage with AWS Aurora PostgreSQL / MySQL
 
