@@ -7,6 +7,7 @@ description: "Learn about authentication methods for management and modeling com
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ManagementIdentityAvailability from '../../components/management-identity/\_partials/\_management-identity-availability.md';
 
 The Camunda 8 management and modeling components authenticate with the same `camunda.security.*` settings as the [Orchestration Cluster](authentication-to-orchestration-cluster.md). This includes components such as [Camunda Hub](/self-managed/components/hub/index.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
@@ -38,7 +39,9 @@ Three primary setups are supported:
 
 ## Use Keycloak as the default IdP
 
-This is the default authentication setup for Self-Managed installation methods, including [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deployment/helm/index.md) and [Manual installation](/self-managed/deployment/manual/install.md). The full Docker Compose configuration comes with a pre-packaged Keycloak instance that acts as the Identity Provider. With Helm, you deploy Keycloak with the [Keycloak operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) and connect the Helm chart to it.
+Management Identity uses Keycloak as its Identity Provider (IdP) by default. With Helm, Keycloak is an option. The Helm default is Basic authentication. See [Helm chart authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
+
+<ManagementIdentityAvailability />
 
 In this setup:
 
