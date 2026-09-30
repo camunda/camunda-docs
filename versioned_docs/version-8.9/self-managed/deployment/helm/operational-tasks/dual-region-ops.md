@@ -164,7 +164,7 @@ echo "You have lost $CLUSTER_RECREATED, $CLUSTER_SURVIVING is still alive"
 The `camunda-zeebe-x` pod represents the new architecture that contains the Orchestration Cluster and its components. It includes the former Zeebe Gateway, Operate, Tasklist, the new embedded Admin, and the new Camunda Exporter.
 
 <div style={{textAlign: 'center'}}>
-  <OC role="img" title="Orchestration Cluster" style={{border: 'none', width: '60%', transform: 'scale(1.3)'}}/>
+  <OC role="img" title="Orchestration Cluster" style={{border: 'none', width: '60%', height: 'auto', transform: 'scale(1.3)'}}/>
 </div>
 
 ### Failover phase
@@ -177,8 +177,8 @@ The Failover phase outlines steps for removing lost brokers, redistributing load
 #### Remove lost brokers from Zeebe cluster in the surviving region
 
 <StateContainer
-current={<Four role="img" title="Before: Remove lost brokers from Zeebe cluster in the surviving region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Five role="img" title="After: Remove lost brokers from Zeebe cluster in the surviving region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Four role="img" title="Before: Remove lost brokers from Zeebe cluster in the surviving region" style={{border: 'none'}}/>}
+desired={<Five role="img" title="After: Remove lost brokers from Zeebe cluster in the surviving region" style={{border: 'none'}}/>}
 />
 
 <div>
@@ -552,8 +552,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 #### Configure Zeebe to disable the Elastic exporter to the lost region
 
 <StateContainer
-current={<Five role="img" title="Before: Configure Zeebe to disable the Elastic exporter to the lost region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Six role="img" title="After: Configure Zeebe to disable the Elastic exporter to the lost region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Five role="img" title="Before: Configure Zeebe to disable the Elastic exporter to the lost region" style={{border: 'none'}}/>}
+desired={<Six role="img" title="After: Configure Zeebe to disable the Elastic exporter to the lost region" style={{border: 'none'}}/>}
 />
 
 <div>
@@ -657,8 +657,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 #### Deploy Camunda 8 in the newly created region
 
 <StateContainer
-current={<Six role="img" title="Before: Deploy Camunda 8 in the newly created region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Eight role="img" title="After: Deploy Camunda 8 in the newly created region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Six role="img" title="Before: Deploy Camunda 8 in the newly created region" style={{border: 'none'}}/>}
+desired={<Eight role="img" title="After: Deploy Camunda 8 in the newly created region" style={{border: 'none'}}/>}
 />
 
 <div>
@@ -1023,8 +1023,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 #### Deactivate Operate and Tasklist in the active region
 
 <StateContainer
-current={<Eight role="img" title="Before: Deactivate Operate and Tasklist in the active region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Nine role="img" title="After: Deactivate Operate and Tasklist in the active region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Eight role="img" title="Before: Deactivate Operate and Tasklist in the active region" style={{border: 'none'}}/>}
+desired={<Nine role="img" title="After: Deactivate Operate and Tasklist in the active region" style={{border: 'none'}}/>}
 />
 
 | **Details**   | **Current State**                                                                                                                                    | **Desired State**                                                                                           |
@@ -1142,8 +1142,8 @@ Follow the installation steps for the **surviving region**:
 #### Pause Camunda exporters to Elasticsearch
 
 <StateContainer
-current={<Nine role="img" title="Before: Pause Camunda exporters to Elasticsearch" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Ten role="img" title="After: Pause Camunda exporters to Elasticsearch" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Nine role="img" title="Before: Pause Camunda exporters to Elasticsearch" style={{border: 'none'}}/>}
+desired={<Ten role="img" title="After: Pause Camunda exporters to Elasticsearch" style={{border: 'none'}}/>}
 />
 
 | **Details**   | **Current state**                                                                                                                                                                                                                                                                                                                                                      | **Desired state**                                                                                                                                                                                                   |
@@ -1177,8 +1177,8 @@ There is no API available to confirm the status of the Camunda exporters. A resp
 #### Create and restore Elasticsearch backup
 
 <StateContainer
-current={<Ten role="img" title="Before: Create and restore Elasticsearch backup" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Eleven role="img" title="After: Create and restore Elasticsearch backup" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Ten role="img" title="Before: Create and restore Elasticsearch backup" style={{border: 'none'}}/>}
+desired={<Eleven role="img" title="After: Create and restore Elasticsearch backup" style={{border: 'none'}}/>}
 />
 
 <div>
@@ -1426,8 +1426,8 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 #### Initialize new Camunda exporter to the recreated region
 
 <StateContainer
-current={<Eleven role="img" title="Before: Initialize new Camunda exporter to the recreated region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Twelve role="img" title="After: Initialize new Camunda exporter to the recreated region" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Eleven role="img" title="Before: Initialize new Camunda exporter to the recreated region" style={{border: 'none'}}/>}
+desired={<Twelve role="img" title="After: Initialize new Camunda exporter to the recreated region" style={{border: 'none'}}/>}
 />
 
 <div>
@@ -1506,8 +1506,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 #### Reactivate Camunda exporter
 
 <StateContainer
-current={<Twelve role="img" title="Before: Reactivate Camunda exporter" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Thirteen role="img" title="After: Reactivate Camunda exporter" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Twelve role="img" title="Before: Reactivate Camunda exporter" style={{border: 'none'}}/>}
+desired={<Thirteen role="img" title="After: Reactivate Camunda exporter" style={{border: 'none'}}/>}
 />
 
 <div>
@@ -1538,8 +1538,8 @@ There is currently no API available to confirm the reactivation of the exporters
 #### Add new brokers to the Zeebe cluster
 
 <StateContainer
-current={<Thirteen role="img" title="Before: Add new brokers to the Zeebe cluster" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Fourteen role="img" title="After: Add new brokers to the Zeebe cluster" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Thirteen role="img" title="Before: Add new brokers to the Zeebe cluster" style={{border: 'none'}}/>}
+desired={<Fourteen role="img" title="After: Add new brokers to the Zeebe cluster" style={{border: 'none'}}/>}
 />
 
 <div>
@@ -1883,8 +1883,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 #### Start Operate and Tasklist
 
 <StateContainer
-current={<Fourteen role="img" title="Before: Start Operate and Tasklist" style={{border: 'none', transform: 'scale(1.1)'}}/>}
-desired={<Fifteen role="img" title="After: Start Operate and Tasklist" style={{border: 'none', transform: 'scale(1.1)'}}/>}
+current={<Fourteen role="img" title="Before: Start Operate and Tasklist" style={{border: 'none'}}/>}
+desired={<Fifteen role="img" title="After: Start Operate and Tasklist" style={{border: 'none'}}/>}
 />
 
 <div>

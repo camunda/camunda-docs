@@ -31,7 +31,7 @@ Cold Recovery [RTO](/reference/glossary.md#recovery-time-objective-rto) and [RPO
 
 In Cold Recovery, a single active region runs the Camunda Orchestration Cluster.
 
-<ColdRecoveryImg role="img" title="Camunda Cold Recovery from Backup architecture" width="800" />
+<ColdRecoveryImg role="img" title="Camunda Cold Recovery from Backup architecture" style={{width: "100%", maxWidth: "800px", height: "auto"}} />
 
 - Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch, OpenSearch) to an S3-compatible object storage bucket replicated to a separate region. RDBMS secondary storage relies on database backup tools and must ensure durability across multiple regions.
 - There is no warm standby. For example, a second cluster does not run during normal operations.
