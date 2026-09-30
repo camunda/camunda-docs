@@ -62,7 +62,7 @@ You are responsible for operating and maintaining the infrastructure. Camunda up
 
 ### Outcome
 
-<!-- Diagram source: eks-dual-region.excalidraw. Open and edit at https://excalidraw.com -->
+<!-- Diagram source: assets/eks-dual-region.excalidraw. Open and edit at https://excalidraw.com -->
 <!-- To export: see howtos/diagrams.md in the camunda-docs repository -->
 
 _Infrastructure diagram for a dual-region EKS setup (click on the image to open the PDF version)_

@@ -49,7 +49,7 @@ Terraform can initially appear complex. If you're new to it, you might want to s
 
 ### Outcome
 
-<!-- Diagram source: rosa-dual-region.excalidraw. Open and edit at https://excalidraw.com -->
+<!-- Diagram source: assets/rosa-dual-region.excalidraw. Open and edit at https://excalidraw.com -->
 <!-- To export: see howtos/diagrams.md in the camunda-docs repository -->
 
 _Infrastructure diagram for a dual region ROSA setup (click on the image to open the PDF version)_
