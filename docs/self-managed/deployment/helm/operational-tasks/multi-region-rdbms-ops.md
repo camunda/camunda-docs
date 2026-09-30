@@ -74,7 +74,7 @@ Confirm the cluster is healthy before you start, so you can tell what the proced
 
 ### 1. Confirm the quorum is intact
 
-The surviving zones keep processing if they hold a majority of each partition's replicas. The [concept page](/self-managed/concepts/multi-region/multi-region-rdbms.md#region-failure-and-recovery) explains when this holds.
+The surviving zones keep processing if they hold a majority of each partition's replicas. The [concept page](/self-managed/concepts/multi-region/multi-region-rdbms-region-loss.md) explains when this holds.
 
 A cluster with only two zones, such as `2-2` before you add the third region, has no such margin. Losing either zone leaves two replicas of four, and processing stops.
 
@@ -249,7 +249,7 @@ The script rejects any slot outside the provisioned range, `0` to `CAMUNDA_REGIO
 
 ## Upgrade the cluster
 
-{/* TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. */}
+{/* TODO: multi-region upgrade paths are not tested yet. Document them once they are. */}
 
 Upgrade **one region at a time**, and wait for the cluster to report healthy before starting the next:
 

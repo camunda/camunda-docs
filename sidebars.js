@@ -2343,6 +2343,8 @@ module.exports = {
             "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
             "self-managed/concepts/multi-region/multi-region-rdbms",
+            "self-managed/concepts/multi-region/multi-region-rdbms-growth",
+            "self-managed/concepts/multi-region/multi-region-rdbms-region-loss",
           ],
         },
         "self-managed/operational-guides/data-purge",
