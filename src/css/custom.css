@@ -740,6 +740,30 @@ body {
   text-decoration-color: var(--ifm-alert-border-color);
 }
 
+[data-theme="light"] .theme-admonition-info {
+  --ifm-alert-background-color: #eff8ff;
+  --ifm-alert-border-color: #c2e4fd;
+  background-color: #eff8ff;
+  border-color: #c2e4fd;
+}
+
+[data-theme="light"] .theme-admonition-info > div:first-child svg {
+  fill: #082b52;
+}
+
+[data-theme="light"] .theme-admonition-tip {
+  --ifm-alert-background-color: #ebf3ef;
+  --ifm-alert-border-color: #bbd6c8;
+  background-color: #ebf3ef;
+  border-color: #bbd6c8;
+}
+
+[data-theme="light"] .theme-admonition-tip > div:first-child,
+[data-theme="light"] .theme-admonition-tip > div:first-child svg {
+  color: #197547;
+  fill: #197547;
+}
+
 [data-theme="dark"] .theme-admonition-info {
   background-color: transparent;
   border-color: #3d6fa3;
