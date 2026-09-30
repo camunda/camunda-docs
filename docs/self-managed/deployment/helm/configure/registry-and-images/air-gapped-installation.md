@@ -127,6 +127,8 @@ You can override the image registry and tag in a custom `values.yaml` file:
 global:
   image:
     registry: example.jfrog.io
+    pullSecrets:
+      - name: registry-credentials
 orchestration:
   image:
     repository: camunda/camunda
@@ -151,6 +153,8 @@ camundaHub:
     image:
       repository: camunda/hub-websockets
 ```
+
+The `pullSecrets` value references a Kubernetes Secret with the credentials of your registry. To create the Secret, see [pull images from a private registry](./index.md#pull-images-from-a-private-registry). If your registry doesn't require credentials, remove `pullSecrets`.
 
 #### Deploy Camunda with custom values
 
