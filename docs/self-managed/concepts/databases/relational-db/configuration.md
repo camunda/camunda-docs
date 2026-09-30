@@ -271,6 +271,14 @@ The following databases are supported for LSN replication monitoring:
 - PostgreSQL
 - Oracle
 
+Oracle uses system change numbers (SCNs) to track replication progress. To use LSN replication monitoring with Oracle, grant the database user `SELECT` access to the following views:
+
+```sql
+GRANT SELECT ON v_$database TO <user>;
+GRANT SELECT ON v_$archive_dest TO <user>;
+GRANT SELECT ON v_$archive_dest_status TO <user>;
+```
+
 To use the LSN replication monitoring with PostgreSQL, the database user must have the following additional privileges:
 
 - `PG_MONITOR` role
@@ -375,12 +383,11 @@ camunda.data.secondary-storage.rdbms.async-replication.type: DELAY
 | `async-replication.queue-capacity`      | Size of the internal queue of record positions to acknowledge                     | 8192    |
 | `async-replication.queue-debounce-time` | A debounce time to not add every record to the queue but only one every X seconds | PT5S    |
 
-### Compatibility Matrix
+### Compatibility matrix
 
-It is recommended to always use the left-most supported strategy for your database vendor. If your database vendor does
-not support LSN or time based replication monitoring, you can use the delay backoff strategy as a fallback.
+Use LSN-based monitoring when your database supports it. Otherwise, use time-based monitoring if available. Use delay backoff only when neither strategy is supported. Delay backoff doesn't monitor replication state directly and requires external monitoring of replication lag; see [delay backoff replication monitoring](#delay-backoff-replication-monitoring).
 
-| Database Vendor   | LSN based          | Time based         | Delay backoff      |
+| Database Vendor   | LSN-based          | Time-based         | Delay backoff      |
 | ----------------- | ------------------ | ------------------ | ------------------ |
 | Aurora PostgreSQL | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Aurora MySQL      | :white_check_mark: | :white_check_mark: | :white_check_mark: |
