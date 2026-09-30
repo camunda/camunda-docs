@@ -45,20 +45,20 @@ Stay on these values. They're what the existing diagrams use, and drifting off t
 
 An accent color needs a different contrast ratio depending on what it draws. [WCAG 2.1](https://www.w3.org/TR/WCAG21/) asks 4.5:1 of text against its background, and only 3:1 of a shape that carries meaning. That's why several accents have a darker text variant: the shell outline stays bright, and the label drawn in the same accent goes darker so it stays readable.
 
-Every ratio below is measured against the white export background.
+Every ratio below is measured against the white export background. A tinted panel such as `#fbfbfb` or `#f7f7f7` lowers every ratio, and a text color that clears 4.5:1 on white by a small margin can drop under it there. Re-measure a label you place on a tinted panel.
 
 | Token                | Shape     | Ratio  | Text      | Ratio  | Use                                               |
 | -------------------- | --------- | ------ | --------- | ------ | ------------------------------------------------- |
 | Ink                  | `#1a1a1a` | 17.4:1 | `#1a1a1a` | 17.4:1 | Text, shape outlines, arrows                      |
 | Muted                | `#5a5a5a` | 6.9:1  | `#5a5a5a` | 6.9:1  | Secondary text such as CIDR ranges                |
 | Camunda orange       | `#fc5d0d` | 3.1:1  | `#b75d14` | 4.6:1  | Orchestration Cluster and Camunda components      |
-| Component green      | `#1d9e4b` | 3.5:1  | `#1d9e4b` | 3.5:1  | Component chips such as Zeebe, Operate, Tasklist  |
+| Component green      | `#1d9e4b` | 3.5:1  | `#17803d` | 5.0:1  | Component chips such as Zeebe, Operate, Tasklist  |
 | Region teal          | `#00a19b` | 3.2:1  | `#00847f` | 4.6:1  | Cloud region and availability zone shells         |
 | Network purple       | `#7e3ff2` | 5.4:1  | `#7e3ff2` | 5.4:1  | VPC, private network, routers, and load balancers |
-| Subnet olive         | `#7a8b1e` | 3.9:1  | `#7a8b1e` | 3.9:1  | Public subnets                                    |
+| Subnet olive         | `#7a8b1e` | 3.8:1  | `#66741a` | 5.2:1  | Public subnets                                    |
 | Kubernetes blue      | `#1e88e5` | 3.7:1  | `#1a79cb` | 4.5:1  | Kubernetes resources and security groups          |
 | Cluster orange       | `#e57419` | 3.1:1  | `#b75d14` | 4.6:1  | Worker node bands and managed cluster icons       |
-| Stretch cluster blue | `#5999d2` | 3.0:1  | `#477aa8` | 4.6:1  | Zeebe stretch cluster shells                      |
+| Stretch cluster blue | `#5999d2` | 3.0:1  | `#43749f` | 5.0:1  | Zeebe stretch cluster shells                      |
 | Failure violet       | `#9b7ede` | 3.3:1  | `#1a1a1a` | 17.4:1 | Failure and interruption markers                  |
 
 Camunda orange is `#fc5d0d`, the `orange-munda` value the site's own theme is built from in `src/css/custom.css`. Use that one rather than picking a near neighbor.
