@@ -131,7 +131,7 @@ The OpenShift router advertises ALPN `h2` on a per-SNI basis through a `crt-list
 
 To fix this, copy the router default wildcard TLS Secret from `openshift-ingress` into the Camunda namespace, then point the gRPC Ingress to it:
 
-1. Copy the router wildcard certificate Secret into the Camunda namespace. This guide does not clone the reference architectures repository, so download the script first:
+1. Copy the router wildcard certificate Secret into the Camunda namespace. If you install Camunda into a namespace other than `camunda`, export `CAMUNDA_NAMESPACE` with that namespace before you run this step, and use the same value when you set up the chart environment later in this guide. This guide does not clone the reference architectures repository, so download the script first:
 
    ```bash reference
    https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/openshift/single-region/procedure/copy-router-tls-secret.sh
