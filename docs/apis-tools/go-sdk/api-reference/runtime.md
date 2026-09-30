@@ -294,7 +294,7 @@ error is returned immediately.
 Example:
 
 ```go
-pi, err := camunda.Poll(ctx, func(ctx context.Context) (*openapi.ProcessInstanceResult, error) {
+pi, err := camunda.Poll(ctx, func(ctx context.Context) (*camunda.ProcessInstanceResult, error) {
     return client.GetProcessInstance(ctx, key)
 })
 ```

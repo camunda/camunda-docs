@@ -31,7 +31,7 @@ if errors.As(err, &apiErr) {
 Two helpers cover the common classifications without unwrapping by hand:
 
 ```go
-key := openapi.MustProcessInstanceKey("2251799813685249")
+key := camunda.MustProcessInstanceKey("2251799813685249")
 
 _, err := client.GetProcessInstance(ctx, key)
 

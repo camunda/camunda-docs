@@ -21,4 +21,4 @@ This reference covers the hand-written ergonomic surface of the Go SDK: the clie
 | [Runtime](runtime.md)              | Error types, error classification, and eventual-consistency polling. |
 | [Domain keys](domain-keys.md)      | 46 validated identifier types.                                       |
 
-The generated request and response models are not reproduced here — there are several hundred of them. Browse them on [pkg.go.dev](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client), or use your editor's go-to-definition on any method signature.
+The generated request and response models, enums and builders are not reproduced here — there are several hundred of them. Import them from the `camunda` package like everything else (for example `camunda.ProcessInstanceResult`); their fields and methods are documented on [pkg.go.dev](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client). Each method on the [CamundaClient](camunda-client.md) page links the generated types in its signature to that documentation.

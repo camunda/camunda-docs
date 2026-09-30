@@ -6,12 +6,11 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func takeRuntimeBackupExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region TakeRuntimeBackup
-	req := openapi.NewTakeRuntimeBackupRequest()
+	req := camunda.NewTakeRuntimeBackupRequest()
 	// The id is required here, and must be omitted instead when continuous backups
 	// or a backup/checkpoint schedule is enabled for the tenant — the server
 	// generates it in that case.
@@ -100,7 +99,7 @@ func deleteRuntimeBackupStateExample(ctx context.Context, client *camunda.Camund
 
 func takeHistoryBackupExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region TakeHistoryBackup
-	result, err := client.TakeHistoryBackup(ctx, *openapi.NewTakeHistoryBackupRequest(42))
+	result, err := client.TakeHistoryBackup(ctx, *camunda.NewTakeHistoryBackupRequest(42))
 	if err != nil {
 		return err
 	}
@@ -148,7 +147,7 @@ func deleteHistoryBackupExample(ctx context.Context, client *camunda.CamundaClie
 func takeHistoryBackupAsClusterAdminExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region TakeHistoryBackupAsClusterAdmin
 	// Takes a history backup for every physical tenant in the cluster simultaneously.
-	result, err := client.TakeHistoryBackupAsClusterAdmin(ctx, *openapi.NewTakeHistoryBackupRequest(42))
+	result, err := client.TakeHistoryBackupAsClusterAdmin(ctx, *camunda.NewTakeHistoryBackupRequest(42))
 	if err != nil {
 		return err
 	}
@@ -199,7 +198,7 @@ func takeRuntimeBackupAsClusterAdminExample(ctx context.Context, client *camunda
 	// Pass SetBackupId to use an explicit backup ID; omit it to let the cluster
 	// generate one automatically (generated-id mode). Do not mix modes: sending a
 	// backup ID when the cluster is configured for generated IDs will be rejected.
-	req := openapi.NewTakeRuntimeBackupRequest()
+	req := camunda.NewTakeRuntimeBackupRequest()
 	req.SetBackupId(42)
 
 	result, err := client.TakeRuntimeBackupAsClusterAdmin(ctx, *req)

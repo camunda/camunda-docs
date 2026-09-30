@@ -17,7 +17,6 @@ import (
 	"time"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func quickStart() error {
@@ -129,9 +128,9 @@ func deployAndStart(ctx context.Context, client *camunda.CamundaClient) error {
 
 	// Start an instance by process id. The request body is a first-class facade
 	// parameter — no Raw() needed.
-	byID := openapi.NewProcessInstanceCreationInstructionById(openapi.ProcessDefinitionId("demo-process"))
+	byID := camunda.NewProcessInstanceCreationInstructionById(camunda.ProcessDefinitionId("demo-process"))
 	byID.SetVariables(map[string]any{"name": "Camunda"})
-	instruction := openapi.ProcessInstanceCreationInstructionByIdAsProcessInstanceCreationInstruction(byID)
+	instruction := camunda.ProcessInstanceCreationInstructionByIdAsProcessInstanceCreationInstruction(byID)
 
 	instance, err := client.CreateProcessInstance(ctx, instruction)
 	if err != nil {
@@ -146,9 +145,9 @@ func eventualConsistency(ctx context.Context, client *camunda.CamundaClient) err
 	// region EventualConsistency
 	// Reads are eventually consistent: a just-created entity may briefly 404.
 	// Poll retries 404s until the entity is visible or the timeout elapses.
-	key := openapi.MustProcessInstanceKey("2251799813685249")
+	key := camunda.MustProcessInstanceKey("2251799813685249")
 
-	instance, err := camunda.Poll(ctx, func(ctx context.Context) (*openapi.ProcessInstanceResult, error) {
+	instance, err := camunda.Poll(ctx, func(ctx context.Context) (*camunda.ProcessInstanceResult, error) {
 		return client.GetProcessInstance(ctx, key)
 	}, camunda.WithPollTimeout(10*time.Second))
 	if err != nil {
@@ -162,14 +161,14 @@ func eventualConsistency(ctx context.Context, client *camunda.CamundaClient) err
 func semanticKeys() error {
 	// region SemanticKeys
 	// Semantic key types validate their format at construction.
-	key, err := openapi.NewJobKey("2251799813685424") // validates pattern & length
+	key, err := camunda.NewJobKey("2251799813685424") // validates pattern & length
 	if err != nil {
 		return err
 	}
 	fmt.Println(key.String())
 
 	// Side-load a key you already trust, without validation:
-	loose := openapi.MustJobKey("2251799813685424")
+	loose := camunda.MustJobKey("2251799813685424")
 	_ = loose
 	// endregion SemanticKeys
 	return nil
@@ -191,7 +190,7 @@ func errorHandling(ctx context.Context, client *camunda.CamundaClient) {
 
 func errorClassification(ctx context.Context, client *camunda.CamundaClient) error {
 	// region ErrorClassification
-	key := openapi.MustProcessInstanceKey("2251799813685249")
+	key := camunda.MustProcessInstanceKey("2251799813685249")
 
 	_, err := client.GetProcessInstance(ctx, key)
 

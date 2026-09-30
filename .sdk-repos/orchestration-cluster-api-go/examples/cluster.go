@@ -6,7 +6,6 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func getTopologyExample(ctx context.Context, client *camunda.CamundaClient) error {
@@ -77,7 +76,7 @@ func triggerClusterRebalanceExample(ctx context.Context, client *camunda.Camunda
 	// Starts a cluster rebalance, redistributing partition leadership to the preferred nodes.
 	// Requires cluster-admin credentials (a separate cluster-admin security chain) —
 	// calling this with standard Orchestration credentials will fail authorization.
-	req := openapi.NewClusterRebalanceRequest()
+	req := camunda.NewClusterRebalanceRequest()
 	req.SetReplicationLagThreshold(1024 * 1024) // 1 MiB max lag for leader transfer
 
 	balance, err := client.TriggerClusterRebalance(ctx, *req)

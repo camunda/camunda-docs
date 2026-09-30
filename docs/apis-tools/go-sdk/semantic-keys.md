@@ -18,13 +18,13 @@ types rather than bare strings:
 
 ```go
 // Semantic key types validate their format at construction.
-key, err := openapi.NewJobKey("2251799813685424") // validates pattern & length
+key, err := camunda.NewJobKey("2251799813685424") // validates pattern & length
 if err != nil {
 	return err
 }
 fmt.Println(key.String())
 
 // Side-load a key you already trust, without validation:
-loose := openapi.MustJobKey("2251799813685424")
+loose := camunda.MustJobKey("2251799813685424")
 _ = loose
 ```
