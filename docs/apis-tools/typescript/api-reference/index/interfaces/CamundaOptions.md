@@ -9,6 +9,14 @@ mdx:
 
 ## Properties
 
+### clock?
+
+```ts
+optional clock?: Clock;
+```
+
+---
+
 ### config?
 
 ```ts

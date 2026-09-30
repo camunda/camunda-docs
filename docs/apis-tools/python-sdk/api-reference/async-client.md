@@ -1042,9 +1042,9 @@ async def cancel_process_instances_batch_operation(*, data, **kwargs)
 
 Cancel process instances (batch)
 
-> Cancels multiple running process instances.
+> Cancels multiple active or suspended process instances.
 >
-> Since only ACTIVE root instances can be cancelled, any given filters for state and
+> Since only ACTIVE and SUSPENDED root instances can be cancelled, any given filters for state and
 > parentProcessInstanceKey are ignored and overridden during this batch operation.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -1476,6 +1476,8 @@ Create agent instance
 def create_agent_instance_example(
     element_instance_key: ElementInstanceKey,
     job_key: JobKey,
+    # Engine-minted: take the token from the job activation response, never build one.
+    job_lease_token: JobLeaseToken,
 ) -> None:
     client = CamundaClient()
 
@@ -1483,7 +1485,7 @@ def create_agent_instance_example(
         data=AgentInstanceCreationRequest(
             element_instance_key=element_instance_key,
             job_key=job_key,
-            job_lease="lease-token",
+            job_lease_token=job_lease_token,
             history=[
                 # A CONFIGURATION item is mandatory on creation; it carries the model,
                 # provider and system prompt in role-specific fields, not in content.
@@ -4050,6 +4052,43 @@ def get_cluster_topology_example() -> None:
 
     for tenant in result.physical_tenants:
         print(f"  Physical tenant: {tenant.physical_tenant_id}")
+```
+
+### get_cluster_upgrade_status()
+
+```python
+async def get_cluster_upgrade_status(**kwargs)
+```
+
+Get the upgrade-readiness status of the whole cluster
+
+> Reports one overall upgrade-readiness status for the whole cluster, folded over every physical
+> tenant and condition. MIGRATED only once every known condition has migrated for every known
+> physical tenant; MIGRATION_IN_PROGRESS when at least one is confirmed not yet migrated; UNKNOWN
+> otherwise (including before anything has been reported yet). No per-tenant or per-condition detail
+> is reported here; see the upgradeReadiness actuator endpoint for that.
+
+- **Raises:**
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ClusterUpgradeStatusResponse
+- **Parameters:**
+  **kwargs** (_Any_)
+- **Return type:**
+  ClusterUpgradeStatusResponse
+
+#### Examples
+
+**Get cluster upgrade readiness status:**
+
+```python
+def get_cluster_upgrade_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_cluster_upgrade_status()
+
+    print(f"Cluster upgrade readiness: {result.status.value}")
 ```
 
 ### get_decision_definition()
@@ -6939,7 +6978,7 @@ def list_runtime_backups_as_cluster_admin_example() -> None:
 async def list_secrets(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
 ```
 
-List secrets (alpha)
+List secrets
 
 > List the camunda.secrets.\* references known for the caller’s physical tenant.
 >
@@ -6955,8 +6994,6 @@ List secrets (alpha)
 > however, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads
 > a bare dash as the minus operator: a listed camunda.secrets.db-password is written
 > \`\` =camunda.secrets.\`db-password\` \`\` in a BPMN input mapping.
->
-> This endpoint is an alpha feature and may be subject to change in future releases.
 
 **Parameters:**
 
@@ -7615,7 +7652,7 @@ def resolve_process_instance_incidents_example(
 async def resolve_secrets(*, data, **kwargs)
 ```
 
-Resolve secrets (alpha)
+Resolve secrets
 
 > Resolve a deduplicated batch of camunda.secrets.\* references for the caller’s
 > physical tenant in a single round-trip.
@@ -7630,8 +7667,6 @@ Resolve secrets (alpha)
 > References are resolved against the secret stores configured for the caller’s physical
 > tenant, served from the gateway’s secret cache when the value is already cached and read
 > from the store otherwise.
->
-> This endpoint is an alpha feature and may be subject to change in future releases.
 
 **Parameters:**
 
@@ -11724,6 +11759,8 @@ def update_agent_instance_example(
     agent_instance_key: AgentInstanceKey,
     element_instance_key: ElementInstanceKey,
     job_key: JobKey,
+    # Engine-minted: take the token from the job activation response, never build one.
+    job_lease_token: JobLeaseToken,
 ) -> None:
     client = CamundaClient()
 
@@ -11734,7 +11771,7 @@ def update_agent_instance_example(
         data=AgentInstanceUpdateRequest(
             element_instance_key=element_instance_key,
             job_key=job_key,
-            job_lease="lease-token",
+            job_lease_token=job_lease_token,
             status=AgentInstanceUpdateRequestStatus.THINKING,
             history=[
                 AgentInstanceHistoryItem(
