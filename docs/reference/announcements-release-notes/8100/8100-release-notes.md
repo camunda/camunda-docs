@@ -573,7 +573,7 @@ Camunda for Microsoft Teams now supports routing incident and task collaboration
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Hub Modeler">Hub Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
-### Low-Code Assertions
+### Low-code assertions
 
 <!-- https://github.com/camunda/product-hub/issues/3496 -->
 
@@ -584,7 +584,18 @@ Turn process instance runs into repeatable tests. Run a process instance, observ
 - View pass/fail results based on assertions, not just "process completed without incidents".
 - Manage test metadata and assertions in one place in the **Test** tab.
 
-### Low-Code Test Repair
+### Low-code test CI/CD compatibility
+
+<!-- https://github.com/camunda/product-hub/issues/3498 -->
+
+Test files in Test Studio now use the same schema as Camunda Process Test (CPT). You can record a test in Test Studio and run it in your CI/CD pipeline through CPT without converting formats, and load CPT-authored test files into Test Studio to debug them visually.
+
+- Use one JSON schema across Test Studio and CPT: record once, run anywhere.
+- Existing Play test scenario files are migrated automatically to the new format.
+
+<p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
+
+### Low-code test repair
 
 <!-- https://github.com/camunda/product-hub/issues/3676 -->
 
@@ -2589,6 +2600,17 @@ You can configure start forms directly in Desktop Modeler's properties panel usi
 - Camunda Form (embedded): Embed form JSON in the BPMN diagram (deprecated).
 
 Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
+
+#### Low-code test CI/CD compatibility
+
+<!-- https://github.com/camunda/product-hub/issues/3498 -->
+
+Test files in Test Studio now use the same schema as Camunda Process Test (CPT). You can record a test in Test Studio and run it in your CI/CD pipeline through CPT without converting formats, and load CPT-authored test files into Test Studio to debug them visually.
+
+- Use one JSON schema across Test Studio and CPT: record once, run anywhere.
+- Existing Play test scenario files are migrated automatically to the new format.
+
+<p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
 
 ### Orchestration Cluster
 
