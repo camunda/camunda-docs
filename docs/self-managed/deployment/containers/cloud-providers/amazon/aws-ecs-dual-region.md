@@ -560,9 +560,12 @@ Camunda recommends restoring to a fresh cluster rather than reusing an existing 
 
 ### Failover and failback
 
-The reference repository ships helper scripts under `aws/containers/ecs-dual-region-fargate/procedure/`. Source `export_environment_prerequisites.sh` before you run them:
+The reference repository ships helper scripts under `aws/containers/ecs-dual-region-fargate/procedure/`:
 
 ```bash
+# Export the variables the scripts read from the Terraform outputs
+source ./procedure/export_environment_prerequisites.sh
+
 # Fail region 0: scale its ECS services to 0, force-remove its zone,
 # and switch the Aurora writer to region 1 if the writer was in region 0
 ./procedure/failover.sh --failed-region 0
@@ -580,7 +583,9 @@ The reference repository ships helper scripts under `aws/containers/ecs-dual-reg
 ./procedure/failback.sh --failed-region 0 --switch-writer
 ```
 
-The writer switch is a planned switchover, so it needs the failed region's Aurora cluster to still be reachable. The script returns only after the global cluster reports the switchover complete. If the region is gone, follow the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html) instead. The scripts don't automate it.
+The writer switch is a planned switchover, so it needs the failed region's Aurora cluster to still be available. The script returns only after the global cluster reports the switchover complete.
+
+If the region is gone, `failover.sh` still removes the zone, and Camunda keeps processing in the surviving region. The script then stops with an error instead of switching the writer, and exporting to secondary storage waits for a writer. Recover Aurora with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html). The scripts don't automate it, because it can lose data that was not replicated yet.
 
 Read the scripts in the reference repository for the exact actions and prerequisites. Failover is manual — no automated health-check-driven promotion is included.
 
