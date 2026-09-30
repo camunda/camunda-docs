@@ -158,7 +158,7 @@ The **MCP start event** element template is now available in Modeler. Apply it t
 
 ### Processes MCP Server
 
-<!-- https://github.com/camunda/camunda/issues/48491 -->
+<!-- https://github.com/camunda/product-hub/issues/3353, https://github.com/camunda/camunda/issues/48491 -->
 
 AI agents can use the Processes MCP Server to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
 
@@ -2510,7 +2510,7 @@ Camunda Process Test (CPT) now supports **judge assertions** in JSON test cases.
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-<!-- https://github.com/camunda/camunda/issues/48491 -->
+<!-- https://github.com/camunda/product-hub/issues/3353, https://github.com/camunda/camunda/issues/48491 -->
 
 AI agents can use the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
 
