@@ -370,7 +370,7 @@ If you remove a cluster or Physical Tenant from the configuration, but its Envir
 
 ##### Mark a cluster as production
 
-Camunda Hub treats an Environment as a production Environment if the tags of its cluster include `prod`. The match is exact and case-sensitive, so `prod` works but `Prod` and `production` don't. All Physical Tenants of a cluster tagged `prod` are production Environments. See the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
+This step is optional. Tag a cluster with `prod` only if you want Camunda Hub to treat its Environments as production Environments. Camunda Hub treats an Environment as a production Environment if the tags of its cluster include `prod`. The match is exact and case-sensitive, so `prod` works but `Prod` and `production` don't. All Physical Tenants of a cluster tagged `prod` are production Environments. See the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
 
 ```yaml
 camunda:

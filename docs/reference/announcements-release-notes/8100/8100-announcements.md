@@ -959,7 +959,7 @@ Starting with Camunda 8.10, teams deploy to [Environments](/components/concepts/
 - Organization admins assign Environments to workspaces.
 - In Self-Managed, Camunda Hub creates Environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
 
-**Action:** After you upgrade, assign Environments to the workspaces you create. If you use the project deployment policy, tag your production clusters with `prod` before you upgrade.
+**Action:** After you upgrade, assign Environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its Environments as production Environments for the project deployment policy.
 
 <p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
 <br />
