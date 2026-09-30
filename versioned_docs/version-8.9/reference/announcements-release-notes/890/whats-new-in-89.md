@@ -17,6 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -190,7 +191,11 @@ You should update any hardcoded port references in network policies, Ingress rul
 
 ### Helm 4 support
 
-Camunda 8.9 (chart 14.x) supports both Helm 3 and Helm 4. Helm 3 receives security fixes only until February 10, 2027. The Helm 4 guide covers the Helm 4 behavior changes that affect the Camunda Helm chart, and how to apply workarounds.
+Camunda 8.9 (chart 14.x) supports both the Helm CLI v3 and v4.
+
+<HelmCliSupport />
+
+The Helm 4 guide covers the Helm 4 behavior changes that affect the Camunda Helm chart, and how to apply workarounds.
 
 <p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
 

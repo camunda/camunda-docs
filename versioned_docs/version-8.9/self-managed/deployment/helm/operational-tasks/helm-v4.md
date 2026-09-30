@@ -5,6 +5,8 @@ sidebar_label: "Helm 4"
 description: "Learn more about how Helm 4 behavior can affect Camunda Helm chart installs/upgrades and how to apply workarounds."
 ---
 
+import HelmCliSupport from '../_partials/_helm-cli-support.md';
+
 Learn how Helm 4 behavior can affect Camunda Helm chart installs and upgrades, and how to apply workarounds.
 
 :::info
@@ -25,11 +27,13 @@ Helm CLI compatibility depends on the Camunda Helm chart version.
 
 \* Helm CLI v4 may require workarounds when overriding environment variables.
 
-With Helm CLI v3, charts 12.x to 14.x require Helm v3.10 or later. Chart 14.x also shows the following warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
+With Helm CLI v3, charts 12.x to 15.x require Helm v3.10 or later. Charts 14.x and 15.x also show the following warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
 
 ```text
 [camunda][warning] Helm CLI <version> detected. Helm v3 receives security fixes only until February 10, 2027 (https://helm.sh/blog/helm-v3-end-of-life/). Upgrade to Helm v4 before then: https://helm.sh/docs/overview
 ```
+
+<HelmCliSupport />
 
 ## Helm 4 breaking changes
 
@@ -89,13 +93,13 @@ If you encounter a duplicate environment variable error, apply one of the follow
    helm upgrade ... --server-side=false
    ```
 
-4. Use Helm CLI v3 as a temporary workaround.
+4. Until February 10, 2027, use Helm CLI v3 as a temporary workaround. After that date, support for Helm CLI v3 is best effort only, so use one of the other workarounds.
 
 :::note Helm CLI v3 support timeline
 Helm CLI v3 receives security fixes until February 10, 2027. Helm v3.22 is the final Helm v3 minor release. See the [Helm v3 end-of-life announcement](https://helm.sh/blog/helm-v3-end-of-life/).
 :::
 
-If your package manager doesn't provide Helm CLI v3, you can run it using Docker:
+Until February 10, 2027, if your package manager doesn't provide Helm CLI v3, you can run it using Docker:
 
 ```bash
 docker run \

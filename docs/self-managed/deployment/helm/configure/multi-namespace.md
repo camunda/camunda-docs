@@ -27,7 +27,7 @@ Prepare the following resources:
 
 The examples use `camunda` as the release name in both namespaces, `hub` as the Hub namespace, and `orchestration` as the orchestration namespace. If you change the release name or namespaces, update every Kubernetes service name.
 
-Use a chart 15.x version that supports Camunda 8.10. Select a supported version from the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), then set it before installation:
+Use Helm 4 and a chart 15.x version that supports Camunda 8.10. Select a supported version from the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), then set it before installation:
 
 ```sh
 export HELM_CHART_VERSION=<15.x-chart-version>

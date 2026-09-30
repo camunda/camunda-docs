@@ -8,6 +8,7 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -88,9 +89,11 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
 
-Camunda 8.10 (chart 15.x) supports the Helm CLI v3 (3.10 or later) and v4. With Helm v3, the chart shows a warning when you run `helm install` or `helm upgrade`, because Helm v3 receives security fixes only until February 10, 2027.
+Camunda 8.10 (chart 15.x) supports the Helm CLI v3 (3.10 or later) and v4. With Helm v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
 
-Switching CLIs does not require a release-state migration; Helm is client-side only. Plan your move to the Helm v4 CLI before February 10, 2027.
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration; Helm is client-side only. Use the Helm v4 CLI for new installations, and switch existing deployments to the Helm v4 CLI before Helm v3 support ends.
 
 <ul>
   <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>

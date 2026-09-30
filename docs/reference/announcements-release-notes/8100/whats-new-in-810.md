@@ -17,6 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -515,9 +516,11 @@ Important changes to Helm chart deployment in 8.10 are as follows:
 
 ### Helm CLI v3 and v4 support {#helm-v4-required}
 
-Camunda 8.10 (chart 15.x) supports the Helm CLI v3 (3.10 or later) and v4. With Helm v3, the chart shows a warning when you run `helm install` or `helm upgrade`, because Helm v3 receives security fixes only until February 10, 2027.
+Camunda 8.10 (chart 15.x) supports the Helm CLI v3 (3.10 or later) and v4. With Helm v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
 
-Switching CLIs does not require a release-state migration; Helm is client-side only. Plan your move to the Helm v4 CLI before February 10, 2027.
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration; Helm is client-side only. Use the Helm v4 CLI for new installations, and switch existing deployments to the Helm v4 CLI before Helm v3 support ends.
 
 <ul>
   <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>

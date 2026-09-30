@@ -23,7 +23,7 @@ In this guide, you deploy the Orchestration Cluster with Basic authentication an
 ## Prerequisites
 
 - **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components.
-- **Helm**: The Helm CLI installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
+- **Helm**: The Helm CLI v4 installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
 
 ## Orchestration Cluster only
 
