@@ -78,7 +78,15 @@ Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix 
 
 ## Day-2 operations
 
-Once tenants are running, these pages cover operating them: [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
+To configure tenant defaults, per-tenant overrides, validation expectations, and property examples, see [configuration reference](./configuration-reference.md).
+
+To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
+
+Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
+
+For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
+
+To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
 
 ## What is not isolated
 

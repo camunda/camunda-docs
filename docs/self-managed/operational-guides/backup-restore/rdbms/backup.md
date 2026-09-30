@@ -105,7 +105,7 @@ export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_CONTINUOUS=true
 
 ### Checkpoint interval
 
-The checkpoint interval controls how frequently Zeebe injects marker checkpoints into the log stream. These markers serve as potential restore points — since a cluster can only be restored to a checkpoint that exists on all partitions, more frequent markers enable finer-grained [point-in-time restore](./restore.md#point-in-time-restore).
+The checkpoint interval controls how frequently Zeebe injects marker checkpoints into the log stream. These markers serve as potential restore points — since a cluster can only be restored to a checkpoint that exists on all partitions, more frequent markers enable finer-grained [point-in-time restore](./restore-api.md#trigger-the-restore).
 
 ```yaml
 camunda:

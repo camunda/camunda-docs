@@ -7,12 +7,11 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func searchUserTasksExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchUserTasks
-	result, err := client.SearchUserTasks(ctx, *openapi.NewUserTaskSearchQuery())
+	result, err := client.SearchUserTasks(ctx, *camunda.NewUserTaskSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -25,7 +24,7 @@ func searchUserTasksExample(ctx context.Context, client *camunda.CamundaClient) 
 
 func getUserTaskExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetUserTask
-	task, err := client.GetUserTask(ctx, openapi.MustUserTaskKey("2251799813685380"))
+	task, err := client.GetUserTask(ctx, camunda.MustUserTaskKey("2251799813685380"))
 	if err != nil {
 		return err
 	}
@@ -36,25 +35,25 @@ func getUserTaskExample(ctx context.Context, client *camunda.CamundaClient) erro
 
 func assignUserTaskExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region AssignUserTask
-	req := openapi.NewUserTaskAssignmentRequest()
+	req := camunda.NewUserTaskAssignmentRequest()
 	req.SetAssignee("alice")
 
-	return client.AssignUserTask(ctx, openapi.MustUserTaskKey("2251799813685380"), *req)
+	return client.AssignUserTask(ctx, camunda.MustUserTaskKey("2251799813685380"), *req)
 	// endregion AssignUserTask
 }
 
 func unassignUserTaskExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region UnassignUserTask
-	return client.UnassignUserTask(ctx, openapi.MustUserTaskKey("2251799813685380"))
+	return client.UnassignUserTask(ctx, camunda.MustUserTaskKey("2251799813685380"))
 	// endregion UnassignUserTask
 }
 
 func completeUserTaskExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CompleteUserTask
-	req := openapi.NewUserTaskCompletionRequest()
+	req := camunda.NewUserTaskCompletionRequest()
 	req.SetVariables(map[string]any{"approved": true})
 
-	return client.CompleteUserTask(ctx, openapi.MustUserTaskKey("2251799813685380"), *req)
+	return client.CompleteUserTask(ctx, camunda.MustUserTaskKey("2251799813685380"), *req)
 	// endregion CompleteUserTask
 }
 
@@ -62,15 +61,15 @@ func updateUserTaskExample(ctx context.Context, client *camunda.CamundaClient) e
 	// region UpdateUserTask
 	// Update fields (priority, due/follow-up dates, ...) via the request's
 	// changeset. An empty request is a no-op.
-	req := openapi.NewUserTaskUpdateRequest()
+	req := camunda.NewUserTaskUpdateRequest()
 
-	return client.UpdateUserTask(ctx, openapi.MustUserTaskKey("2251799813685380"), *req)
+	return client.UpdateUserTask(ctx, camunda.MustUserTaskKey("2251799813685380"), *req)
 	// endregion UpdateUserTask
 }
 
 func getUserTaskFormExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetUserTaskForm
-	form, err := client.GetUserTaskForm(ctx, openapi.MustUserTaskKey("2251799813685380"))
+	form, err := client.GetUserTaskForm(ctx, camunda.MustUserTaskKey("2251799813685380"))
 	if err != nil {
 		return err
 	}
@@ -82,8 +81,8 @@ func getUserTaskFormExample(ctx context.Context, client *camunda.CamundaClient) 
 func searchUserTaskVariablesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchUserTaskVariables
 	result, err := client.SearchUserTaskVariables(ctx,
-		openapi.MustUserTaskKey("2251799813685380"),
-		*openapi.NewUserTaskVariableSearchQueryRequest())
+		camunda.MustUserTaskKey("2251799813685380"),
+		*camunda.NewUserTaskVariableSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -95,8 +94,8 @@ func searchUserTaskVariablesExample(ctx context.Context, client *camunda.Camunda
 func searchUserTaskEffectiveVariablesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchUserTaskEffectiveVariables
 	result, err := client.SearchUserTaskEffectiveVariables(ctx,
-		openapi.MustUserTaskKey("2251799813685380"),
-		*openapi.NewUserTaskEffectiveVariableSearchQueryRequest())
+		camunda.MustUserTaskKey("2251799813685380"),
+		*camunda.NewUserTaskEffectiveVariableSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -108,8 +107,8 @@ func searchUserTaskEffectiveVariablesExample(ctx context.Context, client *camund
 func searchUserTaskAuditLogsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchUserTaskAuditLogs
 	result, err := client.SearchUserTaskAuditLogs(ctx,
-		openapi.MustUserTaskKey("2251799813685380"),
-		*openapi.NewUserTaskAuditLogSearchQueryRequest())
+		camunda.MustUserTaskKey("2251799813685380"),
+		*camunda.NewUserTaskAuditLogSearchQueryRequest())
 	if err != nil {
 		return err
 	}
