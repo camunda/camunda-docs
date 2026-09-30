@@ -23,10 +23,10 @@ Manage organizational resources, analyze operations and business value, and deli
 
 Camunda Hub is the unified platform where:
 
-- **Center of excellence teams** manage infrastructure, member access, and workspaces, so delivery teams have the environments and tools they need to ship process solutions at scale.
+- **Center of excellence teams** manage infrastructure, member access, and workspaces, so delivery teams have the Environments and tools they need to ship process solutions at scale.
 - **Delivery teams** collaborate in managed workspaces, discover and use approved catalog assets, and model and deploy business processes.
 
-With Hub, teams within your organization can build, deploy, and operate your processes faster with a clear organizational structure and dedicated deployment environments.
+With Hub, teams within your organization can build, deploy, and operate your processes faster with a clear organizational structure and dedicated Environments to deploy to.
 
 <hr style={{ margin: '2.5rem 0', backgroundColor: '#dedede' }} />
 
@@ -44,7 +44,7 @@ Camunda Hub's organization view shows the workspaces you belong to, organized in
 
 **Organization → Workspace → Project → Files and folders**
 
-You can manage organizational resources, including clusters and workspaces, and govern the use of reusable assets.
+You can manage organizational resources, including clusters, Environments, and workspaces, and govern the use of reusable assets.
 
 <p class="link-arrow">[Manage organizational resources](/components/hub/organization/index.md)</p>
 
@@ -54,25 +54,25 @@ You can manage organizational resources, including clusters and workspaces, and 
 <div class="double-column-container" style={{ paddingTop: '50px' }}>
 <div class="double-column-left" style={{ flex: '2', paddingRight: '40px', marginTop: '-2.2rem' }}>
 
-### Workspaces and environments
+### Workspaces and Environments
 
-Each workspace includes dedicated deployment environments for development, staging, and production.
+An Environment is the place where a team deploys and runs its processes, for example a development, staging, or production Environment. Each Environment is hosted on a cluster, which remains the infrastructure that your administrators manage.
 
-Organization admins define which clusters back each environment, so you can deploy and promote your work through approved stages with clear access controls.
+Organization admins assign Environments to workspaces. Projects in a workspace can deploy to all the Environments assigned to it, so you can deploy and promote your work with clear access controls.
 
 <p class="link-arrow">[Build within a workspace](/components/hub/workspace/index.md)</p>
 
 </div>
 <div class="double-column-right" style={{ flex: '1.8' }}>
 
-<img src={HubWorkspacesImg} alt="Deployment environments diagram" title="Deployment environments" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={HubWorkspacesImg} alt="Environments assigned to workspaces and hosted on clusters" title="Environments" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
 
 ## Manage organizational resources
 
-Manage organizational resources, including clusters and workspaces, and govern the use of reusable assets:
+Manage organizational resources, including clusters, Environments, and workspaces, and govern the use of reusable assets:
 
 <AoGrid ao={[
 {
@@ -82,10 +82,16 @@ image: ModelerIcon,
 description: "Create and manage workspaces within your organization.",
 },
 {
+link: "./organization/manage-environments",
+title: "Manage environments",
+image: BPMNIcon,
+description: "See your Environments, check their status, and assign them to workspaces.",
+},
+{
 link: "./organization/manage-clusters/manage-cluster",
 title: "Manage clusters",
 image: BPMNIcon,
-description: "Create, monitor, and assign clusters for seamless execution across all rollout stages.",
+description: "Create, monitor, and maintain the clusters that host your Environments.",
 },
 {
 link: "./organization/credentials",
