@@ -55,15 +55,15 @@ Camunda follows these principles when collecting and using telemetry data to pro
 - Customers are responsible for avoiding sharing intellectual property, personal data, or sensitive data through interaction with AI features. The data collected by different AI features is shared [below](#camunda-saas-application-telemetry).
 - Camunda will not use telemetry data in any way that identifies the source of the telemetry data to third parties except as necessary for Camunda to enforce its rights and contractual obligations, such as charging fees for overage of usage metrics or complying with a lawful subpoena.
 
-## Telemetry at a glance: SaaS and Self-Managed
+## Telemetry collection by deployment type
 
-What Camunda collects and how you control it depend on how Camunda is deployed. Each source is described in [Telemetry sources in detail](#telemetry-sources-in-detail).
+What Camunda collects and how you control it depend on how Camunda is deployed. For more information about each source, see [telemetry sources](#telemetry-sources).
 
 Three terms are used throughout:
 
-- **Commercial usage data:** the counts Camunda uses to verify usage against your agreement and bill for overages.
-- **Non-commercial usage data:** product usage Camunda uses to improve the software and support your deployment.
-- **Environment data:** technical information about the deployment itself, such as the Camunda version, the Analytics Exporter version, and cluster identifiers. Environment data is not usage data: it does not describe how the product is used. Camunda uses it to detect offline clusters and gaps in the data it receives.
+- **Commercial usage data:** Usage counts that Camunda uses to verify usage against your agreement and bill for overages.
+- **Non-commercial usage data:** Product usage information that Camunda uses to improve the software and support your deployment.
+- **Environment data:** Technical information about the deployment itself, such as the Camunda version, the Analytics Exporter version, and cluster identifiers. Environment data is not usage data because it does not describe how the product is used. Camunda uses this information to detect offline clusters and gaps in the data it receives.
 
 | Source                                                                | SaaS                                                                                                                          | Self-Managed                                                                                                                                                                                                                                         |
 | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -91,7 +91,7 @@ Telemetry data is grouped by its source. Each source below states what it contai
 
 Environment data is not usage data, so it is not listed in this table. How to control each source, for SaaS and for Self-Managed, is shown in [Telemetry at a glance](#telemetry-at-a-glance-saas-and-self-managed).
 
-## Telemetry sources in detail
+## Telemetry sources
 
 ### Usage metrics reporting
 
