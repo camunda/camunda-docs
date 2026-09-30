@@ -217,8 +217,7 @@ Telemetry collection in [Desktop Modeler](/components/modeler/desktop-modeler/te
 
 ## Identifiability
 
-This section explains how identifiable the data from each source is.
-Camunda distinguishes between three states and handles each differently:
+This section explains how identifiable the data from each source is. Camunda distinguishes between three states and handles each differently:
 
 | State                     | Meaning                                                                                                                           |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -228,28 +227,31 @@ Camunda distinguishes between three states and handles each differently:
 
 Pseudonymized data is personal data. Replacing an identifier with a substitute value does not make the data anonymous, because the individual can still be singled out.
 
-Where each category of telemetry sits:
+Where each source sits:
 
-| Telemetry                                                                     | Identifiability       |
-| ----------------------------------------------------------------------------- | --------------------- |
-| Usage metrics reporting                                                       | Anonymous             |
-| Environment data                                                              | Anonymous             |
-| Orchestration Cluster telemetry (Analytics Exporter)                          | Anonymous             |
-| Camunda SaaS application telemetry, system actions and backend-sourced events | Pseudonymized         |
-| Camunda SaaS application telemetry, user actions                              | Directly identifiable |
-| Camunda SaaS user-lifecycle events                                            | Directly identifiable |
-| Desktop Modeler telemetry                                                     | Pseudonymized         |
+| Telemetry                                                  | Identifiability                              |
+| ---------------------------------------------------------- | -------------------------------------------- |
+| Usage metrics reporting                                    | Anonymous                                    |
+| Environment data                                           | Anonymous                                    |
+| Orchestration Cluster telemetry                            | Anonymous                                    |
+| Camunda SaaS application telemetry, system actions         | Pseudonymized (organization identifier only) |
+| Camunda SaaS application telemetry, backend-sourced events | Pseudonymized (internal user identifier)     |
+| Camunda SaaS application telemetry, user actions           | Directly identifiable                        |
+| Camunda SaaS user-lifecycle events                         | Directly identifiable                        |
+| Desktop Modeler telemetry                                  | Pseudonymized                                |
 
 ### Where identifiers are retained
 
 Identifiers that can distinguish an individual are retained in Camunda SaaS only, in three places:
 
-- SaaS application telemetry, user actions. An account identifier, a device identifier, coarse location, and the email address and name of the Camunda SaaS user.
-- SaaS application telemetry, backend-sourced events. An internal user identifier.
-- SaaS user-lifecycle events. The name and email address of the Camunda SaaS user, recorded with sign-ins, user records, invitations, and membership or role changes.
+- **SaaS application telemetry, user actions:** An account identifier, a device identifier, coarse location, and the email address and name of the Camunda SaaS user.
+- **SaaS application telemetry, backend-sourced events:** An internal user identifier.
+- **SaaS user-lifecycle events:** The name and email address of the Camunda SaaS user, recorded with sign-ins, user records, invitations, and membership or role changes.
 
 No other telemetry described on this page retains an identifier that can distinguish an individual.
 
 Desktop Modeler telemetry carries a randomly generated installation identifier. It is persistent, so it can distinguish one installation from another across records, but it is not linked to a Camunda account and does not identify an individual.
+
+### Data subject requests
 
 To object to processing, or to make a data subject request, contact Camunda through the route described in the [Privacy Policy](https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy).
