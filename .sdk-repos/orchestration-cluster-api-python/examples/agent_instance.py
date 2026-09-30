@@ -18,6 +18,7 @@ from camunda_orchestration_sdk import (
     ElementInstanceKey,
     HistoryItemId,
     JobKey,
+    JobLeaseToken,
     TextContent,
     Unset,
 )
@@ -53,6 +54,8 @@ def search_agent_instances_example() -> None:
 def create_agent_instance_example(
     element_instance_key: ElementInstanceKey,
     job_key: JobKey,
+    # Engine-minted: take the token from the job activation response, never build one.
+    job_lease_token: JobLeaseToken,
 ) -> None:
     client = CamundaClient()
 
@@ -60,7 +63,7 @@ def create_agent_instance_example(
         data=AgentInstanceCreationRequest(
             element_instance_key=element_instance_key,
             job_key=job_key,
-            job_lease="lease-token",
+            job_lease_token=job_lease_token,
             history=[
                 # A CONFIGURATION item is mandatory on creation; it carries the model,
                 # provider and system prompt in role-specific fields, not in content.
@@ -96,6 +99,8 @@ def update_agent_instance_example(
     agent_instance_key: AgentInstanceKey,
     element_instance_key: ElementInstanceKey,
     job_key: JobKey,
+    # Engine-minted: take the token from the job activation response, never build one.
+    job_lease_token: JobLeaseToken,
 ) -> None:
     client = CamundaClient()
 
@@ -106,7 +111,7 @@ def update_agent_instance_example(
         data=AgentInstanceUpdateRequest(
             element_instance_key=element_instance_key,
             job_key=job_key,
-            job_lease="lease-token",
+            job_lease_token=job_lease_token,
             status=AgentInstanceUpdateRequestStatus.THINKING,
             history=[
                 AgentInstanceHistoryItem(

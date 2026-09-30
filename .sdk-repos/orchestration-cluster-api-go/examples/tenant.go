@@ -7,12 +7,11 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func createTenantExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateTenant
-	result, err := client.CreateTenant(ctx, *openapi.NewTenantCreateRequest("tenant-a", "Tenant A"))
+	result, err := client.CreateTenant(ctx, *camunda.NewTenantCreateRequest("tenant-a", "Tenant A"))
 	if err != nil {
 		return err
 	}
@@ -23,7 +22,7 @@ func createTenantExample(ctx context.Context, client *camunda.CamundaClient) err
 
 func searchTenantsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchTenants
-	result, err := client.SearchTenants(ctx, *openapi.NewTenantSearchQueryRequest())
+	result, err := client.SearchTenants(ctx, *camunda.NewTenantSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -47,7 +46,7 @@ func getTenantExample(ctx context.Context, client *camunda.CamundaClient) error 
 
 func updateTenantExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region UpdateTenant
-	result, err := client.UpdateTenant(ctx, "tenant-a", *openapi.NewTenantUpdateRequest("Tenant A (renamed)"))
+	result, err := client.UpdateTenant(ctx, "tenant-a", *camunda.NewTenantUpdateRequest("Tenant A (renamed)"))
 	if err != nil {
 		return err
 	}
@@ -64,7 +63,7 @@ func deleteTenantExample(ctx context.Context, client *camunda.CamundaClient) err
 
 func searchUsersForTenantExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchUsersForTenant
-	result, err := client.SearchUsersForTenant(ctx, "tenant-a", *openapi.NewTenantUserSearchQueryRequest())
+	result, err := client.SearchUsersForTenant(ctx, "tenant-a", *camunda.NewTenantUserSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -87,7 +86,7 @@ func unassignUserFromTenantExample(ctx context.Context, client *camunda.CamundaC
 
 func searchGroupIdsForTenantExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchGroupIdsForTenant
-	result, err := client.SearchGroupIdsForTenant(ctx, "tenant-a", *openapi.NewTenantGroupSearchQueryRequest())
+	result, err := client.SearchGroupIdsForTenant(ctx, "tenant-a", *camunda.NewTenantGroupSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -110,7 +109,7 @@ func unassignGroupFromTenantExample(ctx context.Context, client *camunda.Camunda
 
 func searchClientsForTenantExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchClientsForTenant
-	result, err := client.SearchClientsForTenant(ctx, "tenant-a", *openapi.NewTenantClientSearchQueryRequest())
+	result, err := client.SearchClientsForTenant(ctx, "tenant-a", *camunda.NewTenantClientSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -133,7 +132,7 @@ func unassignClientFromTenantExample(ctx context.Context, client *camunda.Camund
 
 func searchRolesForTenantExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchRolesForTenant
-	result, err := client.SearchRolesForTenant(ctx, "tenant-a", *openapi.NewRoleSearchQueryRequest())
+	result, err := client.SearchRolesForTenant(ctx, "tenant-a", *camunda.NewRoleSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -156,7 +155,7 @@ func unassignRoleFromTenantExample(ctx context.Context, client *camunda.CamundaC
 
 func searchMappingRulesForTenantExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchMappingRulesForTenant
-	result, err := client.SearchMappingRulesForTenant(ctx, "tenant-a", *openapi.NewMappingRuleSearchQueryRequest())
+	result, err := client.SearchMappingRulesForTenant(ctx, "tenant-a", *camunda.NewMappingRuleSearchQueryRequest())
 	if err != nil {
 		return err
 	}

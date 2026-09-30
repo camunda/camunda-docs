@@ -6,12 +6,11 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func searchProcessDefinitionsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchProcessDefinitions
-	result, err := client.SearchProcessDefinitions(ctx, *openapi.NewProcessDefinitionSearchQuery())
+	result, err := client.SearchProcessDefinitions(ctx, *camunda.NewProcessDefinitionSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -24,7 +23,7 @@ func searchProcessDefinitionsExample(ctx context.Context, client *camunda.Camund
 
 func getProcessDefinitionExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetProcessDefinition
-	def, err := client.GetProcessDefinition(ctx, openapi.MustProcessDefinitionKey("2251799813685330"))
+	def, err := client.GetProcessDefinition(ctx, camunda.MustProcessDefinitionKey("2251799813685330"))
 	if err != nil {
 		return err
 	}
@@ -35,7 +34,7 @@ func getProcessDefinitionExample(ctx context.Context, client *camunda.CamundaCli
 
 func getProcessDefinitionXMLExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetProcessDefinitionXML
-	xml, err := client.GetProcessDefinitionXML(ctx, openapi.MustProcessDefinitionKey("2251799813685330"))
+	xml, err := client.GetProcessDefinitionXML(ctx, camunda.MustProcessDefinitionKey("2251799813685330"))
 	if err != nil {
 		return err
 	}
@@ -46,7 +45,7 @@ func getProcessDefinitionXMLExample(ctx context.Context, client *camunda.Camunda
 
 func getStartProcessFormExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetStartProcessForm
-	form, err := client.GetStartProcessForm(ctx, openapi.MustProcessDefinitionKey("2251799813685330"))
+	form, err := client.GetStartProcessForm(ctx, camunda.MustProcessDefinitionKey("2251799813685330"))
 	if err != nil {
 		return err
 	}
@@ -58,8 +57,8 @@ func getStartProcessFormExample(ctx context.Context, client *camunda.CamundaClie
 func getProcessDefinitionStatisticsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetProcessDefinitionStatistics
 	result, err := client.GetProcessDefinitionStatistics(ctx,
-		openapi.MustProcessDefinitionKey("2251799813685330"),
-		*openapi.NewProcessDefinitionElementStatisticsQuery())
+		camunda.MustProcessDefinitionKey("2251799813685330"),
+		*camunda.NewProcessDefinitionElementStatisticsQuery())
 	if err != nil {
 		return err
 	}
@@ -71,8 +70,8 @@ func getProcessDefinitionStatisticsExample(ctx context.Context, client *camunda.
 func searchProcessDefinitionVariableNamesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchProcessDefinitionVariableNames
 	result, err := client.SearchProcessDefinitionVariableNames(ctx,
-		openapi.MustProcessDefinitionKey("2251799813685330"),
-		*openapi.NewProcessDefinitionVariableNameSearchQuery())
+		camunda.MustProcessDefinitionKey("2251799813685330"),
+		*camunda.NewProcessDefinitionVariableNameSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -84,7 +83,7 @@ func searchProcessDefinitionVariableNamesExample(ctx context.Context, client *ca
 func getProcessDefinitionInstanceStatisticsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetProcessDefinitionInstanceStatistics
 	result, err := client.GetProcessDefinitionInstanceStatistics(ctx,
-		*openapi.NewProcessDefinitionInstanceStatisticsQuery())
+		*camunda.NewProcessDefinitionInstanceStatisticsQuery())
 	if err != nil {
 		return err
 	}
@@ -95,8 +94,8 @@ func getProcessDefinitionInstanceStatisticsExample(ctx context.Context, client *
 
 func getProcessDefinitionInstanceVersionStatisticsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetProcessDefinitionInstanceVersionStatistics
-	query := openapi.NewProcessDefinitionInstanceVersionStatisticsQuery(
-		*openapi.NewProcessDefinitionInstanceVersionStatisticsFilter("order-process"))
+	query := camunda.NewProcessDefinitionInstanceVersionStatisticsQuery(
+		*camunda.NewProcessDefinitionInstanceVersionStatisticsFilter("order-process"))
 
 	result, err := client.GetProcessDefinitionInstanceVersionStatistics(ctx, *query)
 	if err != nil {
@@ -110,7 +109,7 @@ func getProcessDefinitionInstanceVersionStatisticsExample(ctx context.Context, c
 func getProcessDefinitionMessageSubscriptionStatisticsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetProcessDefinitionMessageSubscriptionStatistics
 	result, err := client.GetProcessDefinitionMessageSubscriptionStatistics(ctx,
-		*openapi.NewProcessDefinitionMessageSubscriptionStatisticsQuery())
+		*camunda.NewProcessDefinitionMessageSubscriptionStatisticsQuery())
 	if err != nil {
 		return err
 	}

@@ -41,13 +41,6 @@
       "label": "Search agent instances"
     }
   ],
-  "createAgentInstanceHistoryItem": [
-    {
-      "file": "agent_instance.go",
-      "region": "CreateAgentInstanceHistoryItem",
-      "label": "Create agent instance history item"
-    }
-  ],
   "searchAgentInstanceHistory": [
     {
       "file": "agent_instance.go",
@@ -1329,6 +1322,13 @@
       "label": "Get the status of the whole cluster"
     }
   ],
+  "getClusterUpgradeStatus": [
+    {
+      "file": "cluster.go",
+      "region": "GetClusterUpgradeStatus",
+      "label": "Get the upgrade-readiness status of the whole cluster"
+    }
+  ],
   "changeClusterMode": [
     {
       "file": "recovery.go",
@@ -1586,6 +1586,125 @@
       "file": "recovery.go",
       "region": "RestoreAsClusterAdmin",
       "label": "Restore as cluster admin"
+    }
+  ],
+  "getClusterExportingStatus": [
+    {
+      "file": "exporting.go",
+      "region": "GetClusterExportingStatus",
+      "label": "Get cluster exporting status"
+    }
+  ],
+  "pauseClusterExporting": [
+    {
+      "file": "exporting.go",
+      "region": "PauseClusterExporting",
+      "label": "Pause cluster exporting"
+    }
+  ],
+  "resumeClusterExporting": [
+    {
+      "file": "exporting.go",
+      "region": "ResumeClusterExporting",
+      "label": "Resume cluster exporting"
+    }
+  ],
+  "takeHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "TakeHistoryBackupAsClusterAdmin",
+      "label": "Take a cluster history backup"
+    }
+  ],
+  "listHistoryBackupsAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "ListHistoryBackupsAsClusterAdmin",
+      "label": "List cluster history backups"
+    }
+  ],
+  "getHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "GetHistoryBackupAsClusterAdmin",
+      "label": "Get a cluster history backup"
+    }
+  ],
+  "deleteHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "DeleteHistoryBackupAsClusterAdmin",
+      "label": "Delete a cluster history backup"
+    }
+  ],
+  "takeRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "TakeRuntimeBackupAsClusterAdmin",
+      "label": "Take a cluster runtime backup"
+    }
+  ],
+  "listRuntimeBackupsAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "ListRuntimeBackupsAsClusterAdmin",
+      "label": "List cluster runtime backups"
+    }
+  ],
+  "getRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "GetRuntimeBackupStateAsClusterAdmin",
+      "label": "Get cluster runtime backup state"
+    }
+  ],
+  "deleteRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "DeleteRuntimeBackupStateAsClusterAdmin",
+      "label": "Delete cluster runtime backup state"
+    }
+  ],
+  "syncRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "SyncRuntimeBackupStateAsClusterAdmin",
+      "label": "Sync cluster runtime backup state"
+    }
+  ],
+  "getRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "GetRuntimeBackupAsClusterAdmin",
+      "label": "Get a cluster runtime backup"
+    }
+  ],
+  "deleteRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.go",
+      "region": "DeleteRuntimeBackupAsClusterAdmin",
+      "label": "Delete a cluster runtime backup"
+    }
+  ],
+  "triggerClusterRebalance": [
+    {
+      "file": "cluster.go",
+      "region": "TriggerClusterRebalance",
+      "label": "Trigger a cluster rebalance"
+    }
+  ],
+  "getClusterRebalance": [
+    {
+      "file": "cluster.go",
+      "region": "GetClusterRebalance",
+      "label": "Get cluster rebalance status"
+    }
+  ],
+  "cancelClusterRebalance": [
+    {
+      "file": "cluster.go",
+      "region": "CancelClusterRebalance",
+      "label": "Cancel a cluster rebalance"
     }
   ]
 }
