@@ -8,7 +8,7 @@ description: "Let's analyze how to configure the Zeebe Broker"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A complete broker configuration template is available in the [Zeebe repo](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template).
+A complete list of broker configuration properties and their defaults is available in the [Zeebe repo](https://github.com/camunda/camunda/blob/stable/8.10/dist/src/main/config/defaults.yaml).
 
 ## Conventions
 
