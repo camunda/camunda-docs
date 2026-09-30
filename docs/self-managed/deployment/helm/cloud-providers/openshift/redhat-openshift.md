@@ -737,7 +737,7 @@ The following are the required environment variables with some example values:
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/chart-env.sh
 ```
 
-- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
+- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed. The script sets it to `camunda`. If you use another namespace, for example the one you exported in [Enable ALPN h2 on ROSA HCP](#enable-alpn-h2-on-rosa-hcp), set that value here, or export it again after you run the script.
 - `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation.
 
 Then run the following command:
