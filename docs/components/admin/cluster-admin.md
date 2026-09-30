@@ -34,17 +34,13 @@ Cluster admin protects the operations served under the `/cluster/v2/...` path pr
 | Recovery            | `POST /cluster/v2/restore`, `PATCH /cluster/v2/mode`                                                 |
 | Partition placement | `POST /cluster/v2/rebalance`, `GET /cluster/v2/rebalance`, `DELETE /cluster/v2/rebalance`            |
 
-Each cluster-wide endpoint (other than the `/cluster/v2/rebalance` endpoints) also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin operation to a single Physical Tenant without switching to the tenant-scoped API. Omitting the parameter targets every Physical Tenant.
+Some operations can target a single Physical Tenant, while others always apply to the whole cluster. See the API reference for each operation's scope and parameters.
 
 For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
 
-The [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) reference includes request and response schemas for status, topology, mode, and restore operations. It does not yet include the cluster backup, exporting, or rebalance endpoints listed above. For the backup and exporting endpoints, see the current TypeScript client methods and generated input and response types in the [CamundaClient API reference](/apis-tools/typescript/api-reference/index/classes/CamundaClient.md). The rebalance endpoints are not yet covered by either generated reference.
+For endpoint details, see the [Orchestration Cluster REST API reference](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 Cluster admin protects every operation under this prefix except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers and operators can use it as a health check. Cluster topology is its authenticated counterpart, because topology exposes Physical Tenant identifiers.
-
-To preview a cluster mode change without applying it, send `PATCH /cluster/v2/mode?dryRun=true`. The response contains the planned changes. See the [change cluster mode API specification](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode-as-cluster-admin.api.mdx).
-
-To preview a partition rebalance, send `POST /cluster/v2/rebalance?dryRun=true`. This returns the plan a rebalance would carry out, without pausing any partition or moving any leadership.
 
 ## Configure cluster admin access
 

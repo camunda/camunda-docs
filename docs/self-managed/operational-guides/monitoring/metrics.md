@@ -237,9 +237,9 @@ Monitor backpressure and processing latency of the commands using the following 
 
 The health of partitions in a broker can be monitored using the metric `zeebe_health`.
 
-### Physical Tenant metrics
+### Schema initialization metrics
 
-Use these metrics to monitor secondary-storage readiness and schema initialization for each Physical Tenant:
+Use these metrics to monitor secondary-storage readiness and schema initialization:
 
 | Metric name                                       | Type  | Description                                                                       | Labels           |
 | ------------------------------------------------- | ----- | --------------------------------------------------------------------------------- | ---------------- |

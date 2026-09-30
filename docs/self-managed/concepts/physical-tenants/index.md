@@ -20,8 +20,6 @@ This page covers one Orchestration Cluster with multiple Physical Tenants. Multi
 New to Physical Tenants? Start with the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models, or jump straight to [set up two isolated Physical Tenants](./getting-started.md) for a hands-on walkthrough.
 :::
 
-Physical Tenant state can affect multi-region failover. See [Physical Tenant topology during failover](../multi-region/dual-region.md#physical-tenant-topology-during-failover).
-
 ## Isolation model
 
 Isolation applies differently at each layer of the stack:
@@ -90,9 +88,9 @@ For post-deployment operations, see [back up and restore](/self-managed/operatio
 
 To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
 
-## Spring Boot applications with multiple clients
+## Camunda Spring Boot Starter applications with multiple clients
 
-When a Spring Boot application configures multiple clients, the starter registers every `@JobWorker` against all configured clients and deploys every `@Deployment` resource to all configured clients. Workers can therefore poll and process jobs across multiple Physical Tenants, and the same BPMN resources can be deployed to each tenant. See [Physical Tenant behavior for job workers](/apis-tools/camunda-spring-boot-starter/configuration.md#physical-tenant-fan-out-for-multi-client-applications) and [deployment behavior for multi-client applications](/apis-tools/camunda-spring-boot-starter/configuration.md#deploy-resources-on-start-up).
+When you configure multiple clients in a [Camunda Spring Boot Starter application](/apis-tools/camunda-spring-boot-starter/getting-started.md), the starter registers every `@JobWorker` against all configured clients and deploys every `@Deployment` resource to all configured clients. Workers can therefore poll and process jobs across multiple Physical Tenants, and the same BPMN resources can be deployed to each tenant. See [Physical Tenant behavior for job workers](/apis-tools/camunda-spring-boot-starter/configuration.md#physical-tenant-fan-out-for-multi-client-applications) and [deployment behavior for multi-client applications](/apis-tools/camunda-spring-boot-starter/configuration.md#deploy-resources-on-start-up).
 
 ## Optimize deployment
 

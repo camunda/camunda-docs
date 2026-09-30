@@ -730,9 +730,7 @@ When a tenant is degraded because its schema has not initialized, REST query API
 
 ## Known limitations
 
-**Secondary storage types must be compatible across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported. This constraint exists in the Query API stack, not the exporter layer.
-
-<!-- TODO(physical-tenants): Alpha testing notes indicate startup compatibility validation may treat Elasticsearch and OpenSearch as a single class, permitting them to be mixed across tenants, while RDBMS and `none` remain exclusive. This has not been confirmed against a tracked issue or engineering source, and what startup validation permits may be narrower than what is supported. Confirm with Deepthi Devaki and Houssain Barouni before relaxing the constraint above. -->
+**Secondary storage types must be compatible across tenants.** Use RDBMS for every tenant, Elasticsearch and OpenSearch in any combination, or `none` for every tenant. Do not mix RDBMS or `none` with another type. For example, a cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported.
 
 ## Storage configuration matrix
 
