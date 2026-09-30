@@ -197,7 +197,7 @@ public class MyProcessTest {
 You can find some example process tests using JSON test cases on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example), like the following one:
 
 ```json reference referenceLinkText="Source" title="Invoice Approval JSON test case"
-https://github.com/camunda/camunda/blob/stable/8.9/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
+https://github.com/camunda/camunda/blob/stable/8.10/testing/camunda-process-test-example/src/test/resources/test-cases/invoice-approval.json
 ```
 
 ## Reference: Instructions
