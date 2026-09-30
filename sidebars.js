@@ -208,6 +208,7 @@ module.exports = {
           ],
         },
         "components/concepts/projects",
+        "components/concepts/environments",
         "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {

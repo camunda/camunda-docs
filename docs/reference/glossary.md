@@ -200,7 +200,12 @@ See [Zeebe Client](#zeebe-client).
 
 ### Cluster
 
-See [Zeebe cluster](#zeebe-cluster).
+A cluster is the infrastructure that runs Camunda 8. In Camunda Hub, a cluster is an administrative unit that org admins create, size, update, and back up. Teams deploy to an [Environment](#environment) hosted on the cluster, not to the cluster itself.
+
+- [Clusters](/components/concepts/clusters.md)
+- [Environments](/components/concepts/environments.md)
+- [Orchestration Cluster](#orchestration-cluster)
+- [Zeebe cluster](#zeebe-cluster)
 
 ### Cluster variable
 
@@ -320,6 +325,14 @@ Use an element template to extend [Modeler](/components/modeler/about-modeler.md
 A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
 
 - [Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)
+
+### Environment
+
+An Environment is the named place where a team deploys and runs [processes](#process) in [Camunda Hub](/components/hub/index.md). It's the operational unit for deployment, while the [cluster](#cluster) is the administrative unit. An Environment is backed by a [Physical Tenant](#physical-tenant) on Self-Managed 8.10 and later, or by the whole cluster on SaaS and on earlier versions. Org admins assign Environments to workspaces, and every project in a workspace can deploy to the Environments assigned to it.
+
+- [Environments](/components/concepts/environments.md)
+- [Cluster](#cluster)
+- [Physical Tenant](#physical-tenant)
 
 ### Event
 
@@ -610,6 +623,7 @@ An isolated execution unit within an [Orchestration Cluster](#orchestration-clus
 
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 - [Logical Tenant](#logical-tenant)
+- [Environment](#environment)
 - [Multi-tenancy](#multi-tenancy)
 
 ### Polling connector

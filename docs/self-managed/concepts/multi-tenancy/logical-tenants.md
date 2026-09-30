@@ -99,6 +99,10 @@ All Logical Tenant configuration and management pages are consolidated here. Eac
 
 - [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md). Enable and configure multi-tenancy features specific to Optimize.
 
+## Logical Tenants in Camunda Hub
+
+When you deploy from Camunda Hub to an [Environment](/components/concepts/environments.md) that has more than one Logical Tenant, the deploy dialog asks you to choose one. If the Environment has exactly one Logical Tenant, Camunda Hub selects it. If it has none, the step is skipped.
+
 ## Next steps
 
 - Need stronger isolation? See [Physical Tenants](physical-tenants.md).

@@ -66,6 +66,10 @@ See [Logical Tenants](logical-tenants.md) for details on the lightweight tenant-
 There is no migration path from Logical Tenants to Physical Tenants. Logical Tenants created in a Physical Tenant remain associated with that tenant and cannot be migrated to another Physical Tenant.
 :::
 
+## Physical Tenants in Camunda Hub
+
+In Camunda Hub, each Physical Tenant appears as an [Environment](/components/concepts/environments.md). Org admins assign Environments to workspaces, and teams deploy to the Environment rather than to the cluster. The `default` Physical Tenant appears under the cluster name, and every other Physical Tenant appears under its tenant ID.
+
 ## Wording conventions
 
 When referencing Physical Tenants and Logical Tenants in documentation and code:

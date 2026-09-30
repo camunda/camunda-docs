@@ -18,6 +18,8 @@ This page describes **logical multi-tenancy**: tenant-ID based isolation within 
 Self-Managed also supports stronger isolation models. For a comparison of logical tenants, Physical Tenants, and multi-cluster deployments, see the [Self-Managed multi-tenancy overview](/self-managed/concepts/multi-tenancy/index.md).
 :::
 
+In Camunda Hub, teams deploy to [Environments](/components/concepts/environments.md). Each Environment is backed by a Physical Tenant or, on SaaS, by the cluster.
+
 ## How multi-tenancy works
 
 Camunda 8 implements multi-tenancy using tenant identifiers within a single installation. All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object, such as process definitions, process instances, and jobs.

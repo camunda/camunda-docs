@@ -8,6 +8,8 @@ A [cluster](/components/hub/organization/manage-clusters/create-cluster.md) is a
 
 When [creating a cluster in SaaS](/components/hub/organization/manage-clusters/create-cluster.md), you can choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery guarantees.
 
+In Camunda Hub, a cluster is an administrative unit: the infrastructure that org admins create, size, and maintain. Teams don't deploy to a cluster directly. They deploy to an [Environment](/components/concepts/environments.md) hosted on it. On SaaS, each cluster hosts exactly one Environment, named after the cluster.
+
 ## Cluster type
 
 The cluster type defines the level of availability and uptime for the cluster.
