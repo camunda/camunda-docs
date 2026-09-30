@@ -540,3 +540,56 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 ##### Response
 
 The response is a JSON object with the same shape as the [partitioning response](#partitioning-response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before taking further action.
+
+### Upgrade Readiness API
+
+Use the Upgrade Readiness API to check after or before a minor version upgrade of the Orchestration Cluster, if the cluster has completwd all synchronous and asynchronous migration tasks and is ready for a migration to the next minor version.
+
+#### Check the upgrade readiness status
+
+To check the upgrade readiness status, send a request to the Upgrade Readiness API. The API returns whether the cluster has completed all synchronous and asynchronous migration tasks and is ready for a migration to the next minor version.
+
+##### Request
+
+```
+GET actuator/upgradeReadiness
+```
+
+##### Response
+
+The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/upgrade-readiness-api.yaml) for details:
+
+```
+{
+  "upgradeable": true,
+  "physicalTenants": {
+    "default": {
+      "rdbmsSchemaMigrated": {
+        "state": "MIGRATED",
+        "detail": "schema version 8.10.0 matches the application version"
+      },
+      "brokerVersionMigrated": {
+        "state": "MIGRATED",
+        "detail": "every broker is running 8.10.0"
+      },
+      "exporterMigrated": {
+        "state": "MIGRATED",
+        "detail": "All partitions migrated"
+      },
+      "rocksDbMigrated": {
+        "state": "MIGRATED",
+        "detail": "All partitions migrated"
+      }
+    }
+  }
+}
+```
+
+- `upgradeable`: Whether the cluster is upgradeable to the next minor version.
+  - `true`: The cluster is upgradeable to the next minor version, all components reported `MIGRATED`.
+  - `false`: The cluster is not upgradeable to the next minor version. Check the detailed status reports.
+- `physicalTenants`: A map of physical tenants and their upgrade readiness status.
+- `rdbmsSchemaMigrated`: Whether the RDBMS schema has been migrated to the latest minor version.
+- `brokerVersionMigrated`: Whether all brokers are running the expected version.
+- `exporterMigrated`: Whether the exporters have exported and acknowledged all records of the previous minor version.
+- `rocksDbMigrated`: Whether the RocksDB has been migrated and the last snapshot is of the latest minor version.
