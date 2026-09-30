@@ -36,7 +36,7 @@ For general deployment pitfalls, visit the [deployment troubleshooting guide](/s
 
 _Infrastructure diagram for a single-region setup (click the image to open the PDF version)_
 
-[![Architecture Overview](./img/k8s-single.svg)](./img/k8s-single.pdf)
+[![Single-region Kubernetes deployment across three availability zones, with public and private subnets, a network load balancer and ingress controller for HTTPS and gRPC traffic, worker nodes in each zone, and an Elasticsearch backup bucket](./img/k8s-single.svg)](./img/k8s-single.pdf)
 
 This Kubernetes architecture diagram illustrates a high-availability setup spanning multiple availability zones (A, B, and C) with key networking components to ensure scalability, security, and reliability. Whenever possible, we recommend leveraging multiple availability zones to enhance fault tolerance and eliminate single points of failure.
 

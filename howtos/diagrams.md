@@ -45,7 +45,7 @@ Stay on these values. They're what the existing diagrams use, and drifting off t
 
 An accent color needs a different contrast ratio depending on what it draws. [WCAG 2.1](https://www.w3.org/TR/WCAG21/) asks 4.5:1 of text against its background, and only 3:1 of a shape that carries meaning. That's why several accents have a darker text variant: the shell outline stays bright, and the label drawn in the same accent goes darker so it stays readable.
 
-Every ratio below is measured against the white export background. A tinted panel such as `#fbfbfb` or `#f7f7f7` lowers every ratio, and a text color that clears 4.5:1 on white by a small margin can drop under it there. Re-measure a label you place on a tinted panel.
+Every ratio below is measured against the white export background. A tinted panel such as `#fbfbfb` or `#f7f7f7` lowers every ratio, and a text color that clears 4.5:1 on white by a small margin can drop under it there. Re-measure any label or meaningful shape you place on a tinted panel. Several shape tokens clear 3:1 on white by a small margin.
 
 | Token                | Shape     | Ratio  | Text      | Ratio  | Use                                               |
 | -------------------- | --------- | ------ | --------- | ------ | ------------------------------------------------- |
@@ -71,12 +71,15 @@ Decorative detail is exempt from the 3:1 rule, and deliberately so: the drop sha
 
 ### Stroke width
 
-| Width | Use                                    |
-| ----- | -------------------------------------- |
-| `1`   | Icon detail                            |
-| `2`   | Default outlines, arrows, dashed bands |
-| `3`   | Container shells and emphasis          |
-| `4`   | The Orchestration Cluster card border  |
+| Width | Use                                                  |
+| ----- | ---------------------------------------------------- |
+| `1`   | Icon detail                                          |
+| `2`   | Default outlines, arrows, dashed bands               |
+| `3`   | Container shells and emphasis                        |
+| `4`   | The Orchestration Cluster card border                |
+| `6`   | Main request flow arrows in the 8.7 cluster diagrams |
+| `8`   | The cluster divider in the 8.7 orchestration diagram |
+| `11`  | Region bands in the dual-region procedure diagrams   |
 
 ### Type scale
 
@@ -84,11 +87,7 @@ Use `11`, `13`, `15`, `18`, `20`, `22`, `26`, or `30`, and `34` or `42` only for
 
 ### Canvas width decides whether anyone can read it
 
-A docs page renders an image into a column about 820px wide, and an SVG is scaled to fit. The font size you set is not the size a reader sees. The size a reader sees is:
-
-```
-rendered size = font size x (820 / canvas width)
-```
+A docs page renders an image into a column about 820px wide, and an SVG is scaled to fit. The font size you set is not the size a reader sees. The size a reader sees is `font size x (820 / canvas width)`.
 
 That multiplier is unforgiving on a wide diagram:
 
