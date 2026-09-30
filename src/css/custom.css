@@ -17,8 +17,10 @@ logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
   --ifm-color-primary-light: #262626;
   --ifm-color-primary-lighter: #333333;
   --ifm-color-primary-lightest: #525252;
-  --ifm-font-color-base: #262626;
-  --ifm-heading-color: #171717;
+  --neutral-foreground-subtle: oklch(44.2% 0.017 285.786);
+  --neutral-foreground-strong: oklch(27.4% 0.006 286.033);
+  --ifm-font-color-base: oklch(36% 0.012 285.8);
+  --ifm-heading-color: var(--neutral-foreground-strong);
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
   --ifm-menu-color: var(--ifm-color-emphasis-800);
@@ -86,8 +88,10 @@ logo mark only). See src/theme/Navbar/Logo for the orange brand accent.
   --ifm-color-primary-lightest: #ffffff;
   --ifm-background-color: #0a0a0a;
   --ifm-background-surface-color: #141414;
-  --ifm-font-color-base: #e5e5e5;
-  --ifm-heading-color: #fafafa;
+  --neutral-foreground-subtle: #d4d4d4;
+  --neutral-foreground-strong: #fafafa;
+  --ifm-font-color-base: var(--neutral-foreground-subtle);
+  --ifm-heading-color: var(--neutral-foreground-strong);
   --ifm-footer-background-color: #0a0a0a;
   --ifm-footer-color: #0a0a0a;
   --ifm-footer-link-color: var(--ifm-color-secondary);
