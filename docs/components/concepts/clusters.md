@@ -6,44 +6,44 @@ description: "Learn more about the clusters available in your Camunda 8 plan."
 
 A [cluster](/components/hub/organization/manage-clusters/create-cluster.md) is a provided group of production-ready nodes that run Camunda 8.
 
-When [creating a cluster in SaaS](/components/hub/organization/manage-clusters/create-cluster.md), you can choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance and uptime.
+When [creating a cluster in SaaS](/components/hub/organization/manage-clusters/create-cluster.md), you can choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance and availability.
 
 ## Cluster type
 
-The cluster type defines the level of availability and uptime for the cluster.
+The cluster type defines the Availability Target for the cluster.
 
 You can choose from three different cluster types:
 
-- **Basic**: A cluster for non-production use, including experimentation, early development, and basic use cases that do not require a guaranteed high uptime.
-- **Standard**: A production-ready cluster with guaranteed higher uptime.
-- **Advanced**: A production-ready cluster with guaranteed minimal disruption and the highest uptime.
+- **Basic**: A cluster for non-production use, including experimentation, early development, and basic use cases that don't require a high Availability Target.
+- **Standard**: A production-ready cluster with a higher Availability Target.
+- **Advanced**: A production-ready cluster with the highest Availability Target.
 
 ### Cluster availability and uptime
 
-| Type                                                             | Basic                                                                                  | Standard                                                  | Advanced                                                                              |
-| :--------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :------------------------------------------------------------------------------------ |
-| Usage                                                            | Non-production use, including experimentation, early development, and basic use cases. | Production-ready use cases with guaranteed higher uptime. | Production-ready use cases with guaranteed minimal disruption and the highest uptime. |
-| Uptime percentage<br/>(Orchestration Cluster<strong>\*</strong>) | 99%                                                                                    | 99.5%                                                     | 99.9%                                                                                 |
+| Type                                                               | Basic                                                                                  | Standard                                                      | Advanced                                                         |
+| :----------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------------------ | :--------------------------------------------------------------- |
+| Usage                                                              | Non-production use, including experimentation, early development, and basic use cases. | A production-ready cluster with a higher Availability Target. | A production-ready cluster with the highest Availability Target. |
+| Availability Target<br/>(Orchestration Cluster<strong>\*</strong>) | 99%                                                                                    | 99.5%                                                         | 99.9%                                                            |
 
-<p><strong>* Orchestration Cluster</strong> means the components critical for automating processes and decisions, such as Zeebe, Operate, Tasklist, Optimize, and connectors.</p>
+<p><strong>* Orchestration Cluster</strong> means the core components for process automation and orchestration: Zeebe, Operate, Tasklist, Identity, and the Orchestration Cluster APIs (or any successor or renamed equivalent as specified in the Documentation from time to time).</p>
 
 :::info
-See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-enterprise-general-terms) for term definitions for **Monthly Uptime Percentage** and **Downtime**.
+See the terms of your agreement with Camunda for the definitions of Availability Target, Downtime, and Excluded Downtime.
 :::
 
 ## Recovery objectives by outage type
 
-Camunda 8 SaaS sets Recovery Time Objective (RTO) and Recovery Point Objective (RPO) targets for each type of outage, based on how much infrastructure the outage affects. They don't vary by cluster type. These objectives describe expected behavior on a best-effort basis and aren't contractual commitments.
+Camunda 8 SaaS sets Recovery Time Objective (RTO) and Recovery Point Objective (RPO) targets for each type of outage, based on how much infrastructure the outage affects. They don't vary by cluster type. These objectives, including those in the **Recovery objectives summary** table and the RTO/RPO assessments for each type of outage below, describe expected behavior on a best-effort basis. They aren't contractual commitments and are separate from the Availability Target.
 
-### Uptime SLA versus recovery objectives
+### Availability Target versus recovery objectives
 
-An uptime SLA and recovery objectives measure different things. Keep them separate when you plan for disaster recovery.
+The Availability Target and recovery objectives measure different things. Keep them separate when you plan for disaster recovery.
 
-- **Uptime percentage (SLA)** is a contractual commitment that measures how much of the time, in a given month, the service is available and responsive. It doesn't describe what happens during or immediately after an outage.
+- **The Availability Target** is a contractual commitment. It measures the percentage of minutes in a calendar month during which the Orchestration Cluster is available, based on connection checks by Camunda's monitoring system, as defined in your agreement with Camunda. It doesn't describe what happens during or immediately after an outage.
 - **RTO (Recovery Time Objective)** measures how long a failure disrupts service, from the moment it starts affecting your cluster until the cluster is fully functional again. For outages that need manual recovery, RTO also includes the time to detect, escalate, and diagnose the problem.
 - **RPO (Recovery Point Objective)** measures how much data you can lose when that failure happens, expressed as the time between the last recoverable point and the failure.
 
-A high uptime percentage doesn't imply a fast recovery or minimal data loss during a major infrastructure failure. Uptime percentage tells you how rarely a failure disrupts your cluster; RTO and RPO tell you how well the cluster recovers when a major failure does happen.
+A high Availability Target doesn't imply a fast recovery or minimal data loss during a major infrastructure failure. The Availability Target tells you how rarely a failure disrupts your cluster; RTO and RPO tell you how well the cluster recovers when a major failure does happen.
 
 ### Recovery objectives summary
 
@@ -55,7 +55,7 @@ A high uptime percentage doesn't imply a fast recovery or minimal data loss duri
 | Cloud provider or third-party service | Not defined                    | Not defined                                  | Depends on the provider's recovery  | Not available                                          |
 | Platform or cluster incident          | Typically zero                 | Depends on the incident                      | Camunda incident response           | None                                                   |
 
-Near zero means service resumes automatically, typically within seconds, without a restore. Requests in progress during that time can fail, so configure your clients and job workers to retry them, for example with exponential backoff.
+Near zero means service resumes automatically, typically within seconds, without a backup restore. Requests in progress during that time can fail, so configure your clients and job workers to retry them, for example with exponential backoff.
 
 Your application's overall recovery time also depends on your own job workers and clients being able to reach the cluster and continue processing.
 
@@ -89,6 +89,8 @@ A region failure is the loss of every availability zone in the cluster's region 
 ### Cloud provider or third-party service outage
 
 An outage at Camunda's cloud provider, network and edge providers, or other third-party services can make clusters unreachable, or prevent Camunda from starting or replacing infrastructure, until the provider recovers. Camunda SaaS clusters run on a single cloud provider and can't fail over to another provider.
+
+This differs from a region failure. If an outage affects only your cluster's region and your secondary backups region is still available, you can recover through cross-region cold recovery. If the outage also affects the secondary backups region, or prevents Camunda from creating infrastructure there, the cluster stays unavailable until the provider recovers.
 
 **RTO/RPO assessment:** Clusters stay unavailable until the provider recovers, so Camunda doesn't set an RTO or RPO for this type of outage. Camunda follows its incident response process and publishes updates on the [Camunda status page](/components/saas/status.md).
 
