@@ -75,7 +75,7 @@ If you rotate your license key, the exporter picks up the new key the next time 
 
 ### Verify the exporter is running
 
-On broker startup, look for this log line:
+On broker startup, look for the following log line:
 
 ```
 Analytics exporter configured: endpoint=<endpoint>, clusterId=<cluster-id>, partitionId=<partition-id>
