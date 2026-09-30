@@ -11,7 +11,7 @@ By default, the chart enables only the readiness probe of each component. The st
 
 ## Default probe endpoints
 
-Each probe sends an HTTP GET request to a container port and path. The following table lists the values prefix, the default port, and the default `probePath` of each probe.
+For each probe, Kubernetes sends an HTTP GET request to a container port and path. The following table lists the values prefix, the default port, and the default `probePath` of each probe.
 
 | Component              | Values prefix           | Port   | Startup `probePath`          | Readiness `probePath`        | Liveness `probePath`        |
 | ---------------------- | ----------------------- | ------ | ---------------------------- | ---------------------------- | --------------------------- |
@@ -22,11 +22,11 @@ Each probe sends an HTTP GET request to a container port and path. The following
 | Camunda Hub REST API   | `camundaHub.restapi`    | `8091` | `/health/liveness`           | `/health/readiness`          | `/health/liveness`          |
 | Camunda Hub WebSockets | `camundaHub.websockets` | `8060` | `/up`                        | `/up`                        | `/up`                       |
 
-Keep the following in mind:
+The following rules apply:
 
-- The `scheme` value defaults to `HTTP`. For Connectors and Optimize, it's empty by default. When TLS is enabled for the component, an empty `scheme` resolves to `HTTPS`. Otherwise, it resolves to `HTTP`. See [Connectors TLS](./orchestration-tls-modes.md#connectors-tls) and [Optimize TLS](./orchestration-tls-modes.md#optimize-tls).
-- For the Orchestration Cluster, Connectors, Optimize, and the Camunda Hub REST API, the chart adds the component's `contextPath` value in front of `probePath`. For Camunda Hub, that value is `camundaHub.contextPath`. Management Identity and Camunda Hub WebSockets use `probePath` without a context path.
-- The Camunda Hub probe values default to the `webModeler.restapi` and `webModeler.websockets` values. Values that you set under `camundaHub.restapi` and `camundaHub.websockets` take precedence. The chart merges them key by key, so you set only the keys that you want to change.
+- The `scheme` value defaults to `HTTP`. For Connectors and Optimize, the default is empty. When you enable TLS for the component, the chart uses `HTTPS` for an empty `scheme`. Otherwise, it uses `HTTP`. See [Connectors TLS](./orchestration-tls-modes.md#connectors-tls) and [Optimize TLS](./orchestration-tls-modes.md#optimize-tls).
+- The Orchestration Cluster, Connectors, Optimize, and Camunda Hub REST API probes use the `contextPath` value of the component as a path prefix. For Camunda Hub, that value is `camundaHub.contextPath`. Management Identity and Camunda Hub WebSockets probes use `probePath` only.
+- Camunda Hub inherits its probe defaults from the `webModeler.restapi` and `webModeler.websockets` values. Values you set under `camundaHub.restapi` and `camundaHub.websockets` take precedence. The chart merges both sets of values key by key. You set only the keys you want to change.
 
 ## Probe values
 
@@ -37,7 +37,7 @@ Every probe accepts the same values. Set them under the values prefix and the pr
 | `enabled`             | `false` for `startupProbe` and `livenessProbe`, `true` for `readinessProbe` | Adds the probe to the container when `true`.                                                                                                 |
 | `scheme`              | `HTTP`. Empty for Connectors and Optimize.                                  | Protocol of the request, `HTTP` or `HTTPS`.                                                                                                  |
 | `probePath`           | See the previous table.                                                     | Path of the request.                                                                                                                         |
-| `initialDelaySeconds` | `30`. `10` for Camunda Hub WebSockets.                                      | Seconds after the container starts before the probe begins.                                                                                  |
+| `initialDelaySeconds` | `30`. `10` for Camunda Hub WebSockets.                                      | Seconds to wait after the container starts before the first probe.                                                                           |
 | `periodSeconds`       | `30`                                                                        | Seconds between probes.                                                                                                                      |
 | `successThreshold`    | `1`                                                                         | Consecutive successes that mark the probe as successful again after a failure.                                                               |
 | `failureThreshold`    | `5`                                                                         | Consecutive failures before Kubernetes marks the pod as not ready (readiness probe) or restarts the container (startup and liveness probes). |
@@ -47,7 +47,7 @@ The timing values match the fields of the same name in the [Kubernetes probe con
 
 ## Tune a probe
 
-Set only the values that you want to change. The chart keeps the defaults for all other values.
+Set only the values you want to change. The chart keeps the defaults for all other values.
 
 The following example enables the startup probe of the Orchestration Cluster. Kubernetes restarts the container if the probe fails 30 times in a row, 10 seconds apart. Until the startup probe succeeds, Kubernetes doesn't run the readiness and liveness probes.
 
