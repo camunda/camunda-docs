@@ -20,7 +20,7 @@ You can add a zone to a running cluster without renumbering any broker, because 
 
 Every zone in the zone list must have its brokers running when the cluster bootstraps. Do not declare a zone to reserve it for later growth. Add it through the management API after its brokers run.
 
-A zone in the zone list receives partition replicas even if its brokers do not run. A declared zone without brokers leaves every partition one zone short. With the default `2-2-1` layout and the third zone missing, each partition runs four replicas of five, and losing either database zone stops processing.
+A zone in the zone list receives partition replicas even if its brokers do not run. A declared zone without brokers leaves every partition one zone short. For example, if you declare a `2-2-1` layout but deploy only the first two zones, each partition runs four replicas of five. Losing either database zone then stops processing.
 
 ## Add a zone to the running cluster
 

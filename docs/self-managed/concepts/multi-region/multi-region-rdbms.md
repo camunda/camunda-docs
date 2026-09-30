@@ -2,7 +2,7 @@
 id: multi-region-rdbms
 title: "Multi-Region RDBMS"
 sidebar_label: "Multi-Region RDBMS"
-description: "Multi-Region RDBMS spreads an Orchestration Cluster across three or more regions so that a region loss leaves the Raft quorum intact, and delegates secondary storage replication to the database."
+description: "Multi-Region RDBMS spreads an Orchestration Cluster across two or more regions and delegates secondary storage replication to the database. With three or more regions, a region loss leaves the Raft quorum intact."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
@@ -35,7 +35,7 @@ Multi-Region RDBMS removes both. It changes the number of regions, and it change
 | Consideration     | Dual-Region                                                                       | Multi-Region RDBMS                                                                           |
 | :---------------- | :-------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
 | Regions           | Exactly two                                                                       | Two or more. Three or more to keep processing through a region loss                          |
-| Region loss       | Quorum lost, processing stops until brokers are force-removed                     | Quorum preserved, processing continues                                                       |
+| Region loss       | Quorum lost, processing stops until brokers are force-removed                     | With three or more regions, quorum preserved and processing continues                        |
 | Failback          | Multi-step runbook including a secondary storage snapshot and restore             | Redeploy the region, nothing to restore                                                      |
 | Secondary storage | Elasticsearch, one cluster per region, one Camunda exporter per region            | RDBMS, one database, one exporter, replication inside the database                           |
 | Optimize          | Supported                                                                         | Not available, Optimize requires Elasticsearch or OpenSearch                                 |
@@ -159,7 +159,7 @@ The architecture only works under the cluster, network, platform, and upgrade re
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
 | Partitioning scheme           | `ZONE_AWARE`. The parity-based broker numbering only supports exactly two regions.                                                           |
 | Zones                         | One zone per region, two or more. Three or more to keep processing through a region loss.                                                    |
-| `number-of-replicas` per zone | Declared per zone, and free to differ between them. No zone may hold half the replication factor or more.                                    |
+| `number-of-replicas` per zone | Declared per zone, and free to differ between them. To survive a zone loss, no zone may hold half the replication factor or more.            |
 | `number-of-brokers` per zone  | Declared per zone. Keep zones balanced so a zone loss removes an equal share of capacity.                                                    |
 | Surviving capacity            | Size the cluster so the regions left after a loss carry the full workload. Quorum surviving is not the same as the cluster keeping up.       |
 | `priority` per zone           | Highest for the zone hosting the database writer, to keep partition leaders next to it.                                                      |

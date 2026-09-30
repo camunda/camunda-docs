@@ -191,16 +191,9 @@ Confirm the topology when done:
 
 Adding a region to a running cluster is an online operation. The regions already running keep processing and are not restarted.
 
-Activating a zone that you declared in the zone list but never deployed is an online operation.
+The new region's brokers start first. Then `activate-region.sh` adds its zone with `POST /actuator/cluster/zones/<zone>` and waits for the change to report `COMPLETED`. The engine places the zone's replicas and raises the replication factor in one change. It does not renumber any broker.
 
-This section applies only to a zone that you declared at bootstrap and never ran. A zone that you removed during failover comes back through [Bring a region back](#bring-a-region-back) instead.
-
-The operation is online because the zone already exists as far as the cluster is concerned. Every region started with that zone in its zone list. The partition distribution already assigned it replicas, and every partition runs short of those replicas. Deploying the zone starts brokers that claim replicas already reserved for them. Nothing else changes:
-
-- The cluster does not renumber any broker.
-- The cluster does not redistribute any partition.
-- No running region restarts.
-- You do not need a cluster management API call.
+This section applies to a region slot that you provisioned but never ran. A zone that you removed during failover comes back through [Bring a region back](#bring-a-region-back) instead.
 
 ### 1. Provision the infrastructure
 
