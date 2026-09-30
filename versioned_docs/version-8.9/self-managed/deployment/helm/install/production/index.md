@@ -46,7 +46,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 <!-- Diagram source: img/architecture.excalidraw. Open and edit at https://excalidraw.com -->
 
-![Architecture Diagram](./img/architecture.svg)
+![Production Kubernetes cluster with an orchestration namespace for the Orchestration Cluster, Connectors, and Optimize, and a management-and-modeling namespace for Management Identity, Console, and Web Modeler, both behind an ingress and connected to an external OIDC provider and databases](./img/architecture.svg)
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/docs/self-managed/reference-architecture/kubernetes/#kubernetes).
 
