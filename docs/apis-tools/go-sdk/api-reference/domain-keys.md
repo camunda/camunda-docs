@@ -14,7 +14,7 @@ The Go SDK is a **technical preview**. Its API surface may still evolve and chan
 The Camunda Domain Type System replaces the bare `string` identifiers emitted by the OpenAPI generator with validated named types. Passing a `ProcessInstanceKey` where a `JobKey` is expected is a compile error, so whole classes of identifier mix-ups are caught before the request is sent.
 
 ```go
-import openapi "github.com/camunda/orchestration-cluster-api-go/client"
+import camunda "github.com/camunda/orchestration-cluster-api-go"
 ```
 
 Every key type exposes the same surface, shown here for `AgentDefinitionKey`:
