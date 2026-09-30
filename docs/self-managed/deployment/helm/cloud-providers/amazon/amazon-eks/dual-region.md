@@ -627,8 +627,6 @@ This forms the base layer that contains the basic required setup, which applies 
 
 Key changes of the dual-region setup:
 
-- `global.multiregion.regions: 2`
-  - Indicates the use for two regions
 - `global.security.authentication.method: basic`
   - Uses Basic authentication for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.
 - `global.identity.auth.enabled: false`
@@ -664,11 +662,11 @@ Key changes of the dual-region setup:
 
 ##### region0/camunda-values.yml
 
-This overlay contains the multi-region identification for the cluster in region 0.
+This overlay contains the multi-region identification for the cluster in region 0. It sets `orchestration.partitioning.numberOfZones: 2` and `orchestration.partitioning.zoneIndex: 0`. These two keys replace the deprecated `global.multiregion.regions` and `global.multiregion.regionId`.
 
 ##### region1/camunda-values.yml
 
-This overlay contains the multi-region identification for the cluster in region 1.
+This overlay contains the multi-region identification for the cluster in region 1. It sets `orchestration.partitioning.numberOfZones: 2` and `orchestration.partitioning.zoneIndex: 1`. These two keys replace the deprecated `global.multiregion.regions` and `global.multiregion.regionId`.
 
 ### Configure Zeebe environment variables
 
