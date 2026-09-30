@@ -7,8 +7,8 @@ description: "Install Camunda 8.10 Self-Managed as separate Hub, Orchestration C
 
 import HelmV4Required from '../../_partials/_helm-v4-required.md'
 
-:::caution Chart availability
-The `optimize` role, `physicalTenants` cluster records, and the `orchestration` role on the 8.7, 8.8, and 8.9 charts aren't in any published chart yet. The published 8.10 pre-release chart `15.0.0-alpha5` accepts only `combined`, `hub`, and `orchestration`, and the latest published 8.7, 8.8, and 8.9 charts (12.13.8, 13.13.2, and 14.10.1) have no `global.topology` key, so they silently ignore `global.topology.mode` and deploy a combined release. Minimum chart versions will be listed on this page once the charts that carry these features are published.
+:::note Minimum chart versions
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/reference-architecture/deployment-topology.md#release-roles).
 :::
 
 Install Camunda 8.10 Self-Managed as separate Helm releases: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
