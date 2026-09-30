@@ -1022,6 +1022,16 @@ With the new Camunda 8 SaaS **AWS US West (us-west-2)** region in North America,
 
 <p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
+### New GCP Montréal region
+
+<!-- https://github.com/camunda/product-hub/issues/3744 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+
+Camunda 8 SaaS now supports the Google Cloud Platform (GCP) Montréal, North America (`northamerica-northeast1`) region. Together with the existing Toronto region, you can now run process orchestration with your data hosted in Canada. To use it, select the Montréal region when you create a cluster in Console.
+
+<p class="link-arrow">[Supported GCP regions](/components/saas/regions.md#google-cloud-platform-gcp-regions)</p>
+
 ### OIDC Diagnostic Logging
 
 <!-- https://github.com/camunda/product-hub/issues/3758 -->
