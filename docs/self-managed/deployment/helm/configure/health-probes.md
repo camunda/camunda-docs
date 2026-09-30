@@ -43,7 +43,7 @@ Every probe accepts the same values. The key of a value has three parts: the val
 | `failureThreshold`    | `5`                                                                         | Consecutive failures before Kubernetes marks the pod as not ready (readiness probe) or restarts the container (startup and liveness probes). |
 | `timeoutSeconds`      | `1`                                                                         | Seconds after which a probe request counts as failed.                                                                                        |
 
-The timing values match the fields of the same name in the [Kubernetes probe configuration](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes).
+The timing values match the fields of the same name in the [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/probes/#configure-probes).
 
 ## Tune a probe
 
