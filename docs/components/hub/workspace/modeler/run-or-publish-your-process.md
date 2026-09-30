@@ -1,20 +1,19 @@
 ---
 id: run-or-publish-your-process
 title: Run or publish your process
-description: "Run or publish a process in any environment and for any audience."
+description: "Run or publish a process in any Environment and for any audience."
 ---
 
-When you design a process in Camunda Hub, you have multiple flexible options to either run or publish it on Camunda 8. This page explains the differences between running and publishing a process, and outlines the various options to publish a process into any environment and to any audience.
+When you design a process in Camunda Hub, you have multiple flexible options to either run or publish it on Camunda 8. This page explains the differences between running and publishing a process, and outlines the various options to publish a process into any Environment and to any audience.
 
 ## Deploy a process
 
-Camunda Hub autosaves all your changes on a diagram. If you change a diagram and it is autosaved, this has no effect on deployed or running processes in your cluster(s).
+Camunda Hub autosaves all your changes on a diagram. If you change a diagram and it is autosaved, this has no effect on deployed or running processes in your Environments.
 
-To make any change live in your cluster(s), you need to deploy it. If you deploy a process, it becomes available on the selected cluster and you can run or publish it.
+To make any change live in an Environment, you need to deploy it. If you deploy a process, it becomes available in the selected [Environment](/components/concepts/environments.md) and you can run or publish it.
 
 :::info
-Only users with the **Organization Owner** or **Organization Admin** role in Camunda Hub can deploy to `prod` clusters.
-Users without admin roles can only deploy to `dev`, `test`, or `stage` clusters.
+You can deploy to any Environment assigned to your workspace if you have deployment permissions in the cluster. Your organization can require an approved project snapshot for Environments tagged `prod`. See [production environments](../manage-projects/deploy-project.md#production-environments).
 :::
 
 To deploy:
@@ -23,16 +22,16 @@ To deploy:
 2. Open a process file.
 3. In the top right corner of the modeling interface, click the dropdown next to **Deploy & run**.
 4. Click **Deploy**.
-5. Select a stage, optional tenant ID, and the resources to deploy. You can either deploy **All resources** or **Only this resource**.
+5. Select the Environment, the Logical Tenant if the Environment has more than one, and the resources to deploy. You can either deploy **All resources** or **Only this resource**.
 6. Click **Deploy**.
 
 :::tip
-In Self-Managed, you can deploy your diagram to the cluster defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
+In Self-Managed, you can deploy your diagram to the Environments of the clusters defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 :::
 
 ### Before deploying a process
 
-- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
+- If the target Environment has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](modeling/fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](modeling/advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
   If you are using [`versionTag` binding](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
@@ -50,7 +49,7 @@ Running a process means that you execute the process as a process instance on Ca
 
 ### Before running a process
 
-If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the users running the process are assigned to both:
+If the target Environment has [authorizations](/components/admin/authorization.md) enabled, make sure that the users running the process are assigned to both:
 
 - The `CREATE_PROCESS_INSTANCE` permission to the `PROCESS_DEFINITION` resource type
 - The `CREATE` permission to the `RESOURCE` resource type
@@ -61,12 +60,12 @@ Before you publish or run a process, you can test it manually using the [Test mo
 
 ### Run manually from Hub
 
-You can also test your process thoroughly on a development cluster to observe how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
+You can also test your process thoroughly in a development Environment to observe how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
 
 1. From your Camunda Hub workspace, open a project.
 2. Open a process file.
 3. In the top right corner of the modeling interface, click **Deploy & run**.
-4. Select a stage, optional tenant ID, and the resources to deploy.
+4. Select the Environment, the Logical Tenant if the Environment has more than one, and the resources to deploy.
 5. **(Optional)** Specify variables written to the process context at startup. The variables must be formatted in valid JSON. As an example, you can use the following JSON:
 
 ```json
@@ -75,14 +74,14 @@ You can also test your process thoroughly on a development cluster to observe ho
 }
 ```
 
-6. Click **Deploy & run** to confirm. This (re-)deploys the process and starts a process instance on the selected cluster.
+6. Click **Deploy & run** to confirm. This (re-)deploys the process and starts a process instance in the selected Environment.
 
-After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../../operate/operate-introduction.md). Follow this link to observe the progress of the process instance and interact with it if required. If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
+After the process instance has been started, you will receive an **Instance started!** notification. Click **View process instance** to open the process instance in the [Operate](../../../operate/operate-introduction.md) of the Environment, where you can observe its progress and interact with it if required. If the target Environment has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
 
 - `READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type
 - `operate` permission to the `COMPONENT` resource type
 
-Starting an instance from Camunda Hub [deploys](#deploy-a-process) recent changes to the target cluster, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.
+Starting an instance from Camunda Hub [deploys](#deploy-a-process) recent changes to the target Environment, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.
 
 :::tip
 By [linking a Camunda Form to a start event](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md), process instances can be started with the form's input [via a public form](#publish-via-a-public-form) (SaaS only) or directly [in Tasklist](#publish-to-tasklist).
@@ -106,7 +105,7 @@ Once the process is deployed, the timer will be activated and the process will b
 ### Best practices for running a process
 
 - Use the [Test mode](#test-run-using-test-mode) to run a process instance with test data before running it with live data.
-- Verify that the process is running as expected on a development cluster before running it with live data in your production environment.
+- Verify that the process is running as expected in a development Environment before running it with live data in your production Environment.
 - Use [Operate](../../../operate/operate-introduction.md) to help you diagnose any problems with the process.
 
 :::tip

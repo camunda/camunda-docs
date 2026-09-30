@@ -224,10 +224,10 @@ Human-centric processes involving user tasks seamlessly unfold within Tasklist, 
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-If you have not yet configured a cluster to deploy to, you'll see a notification. You must [configure at least one cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) before moving on.
+If no Environment is assigned to your workspace, the deploy dialog tells you so. In SaaS, every cluster you create has one Environment, which an organization admin must [assign to your workspace](/components/hub/organization/manage-environments/assign-environments.md) before you move on.
 
 1. At the top right of the modeling interface, click **Deploy & run** to deploy the process to your cluster.
-2. Select a target cluster.
+2. Select a target Environment.
 3. Under **Resources**, select **All resources**. Your project contains two files: the BPMN process diagram and the linked form. This option deploys both together. In other contexts, it might make sense to deploy **Only this resource** for individual files.
 4. Click **Deploy & run**.
 

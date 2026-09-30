@@ -47,7 +47,7 @@ description: "Design and implement your first diagram using Camunda Hub",
 link: "./validate-project",
 title: "Validate your project",
 image: DocsIcon,
-description: "Validate your project in development before deploying it to your target environment.",
+description: "Validate your project in development before deploying it to your target Environment.",
 },
 {
 link: "./project-versioning",
@@ -59,7 +59,7 @@ description: "Create and review distinct snapshots for the entire project.",
 link: "./deploy-project",
 title: "Deploy your project",
 image: DocsIcon,
-description: "Deploy your project to a testing, staging, or production environment.",
+description: "Deploy your project to an Environment assigned to your workspace.",
 },
 {
 link: "./git-sync",
@@ -74,10 +74,6 @@ For business-critical and higher-risk processes that require strict governance a
 ## Known limitations
 
 You should be aware of the following limitations when working with projects.
-
-### General limitations
-
-- Self-Managed does not support defining cluster stages, identifying clusters by tags, or cluster promotion.
 
 ### Deployment limitations
 

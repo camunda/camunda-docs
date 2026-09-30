@@ -1,7 +1,7 @@
 ---
 id: task-testing
 title: Task testing
-description: Test and debug a single BPMN task directly in Camunda Hub using live data from your connected Camunda 8 cluster.
+description: Test and debug a single BPMN task directly in Camunda Hub using live data from your connected Environment.
 ---
 
 You can test a single task directly within Camunda Hub to validate its configuration and logic without executing the entire process.  
@@ -25,7 +25,7 @@ Use task testing during implementation for quick feedback, and use Test mode for
 
 Before running task testing, ensure you have:
 
-- A connection to an active Camunda 8.8 or later orchestration cluster
+- A runtime connection to an Environment, hosted on an active Camunda 8.8 or later orchestration cluster
 - Permissions to deploy and run processes in the target environment
 
 ## Run a task test
@@ -42,7 +42,7 @@ To test a task in Camunda Hub:
    - Provide realistic sample data to reflect actual execution conditions.
 5. Click **Run test** to execute the task.
 
-Camunda Hub automatically deploys the process before running the test. The task executes on the connected cluster using your defined input data.
+Camunda Hub automatically deploys the process before running the test. The task executes in the connected Environment using your defined input data.
 
 During execution, the log displays each step in real time, including any states where the test is waiting for an external action to complete.
 

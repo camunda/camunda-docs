@@ -1,69 +1,99 @@
 ---
 id: deploy-project
 title: Deploy your project
-description: Deploy your project to a testing, staging, or production environment.
+description: Deploy your project to an Environment assigned to your workspace.
 ---
 
 import DeployErrorImg from './img/deploy-error.png'
 
-Deploy your project to a testing, staging, or production environment.
+Deploy your project to an Environment assigned to your workspace, for example a testing, staging, or production Environment.
 
-## Deployment stages
+## Deployment environments
 
-The deployment pipeline has the following stages:
+You deploy a project to an [Environment](/components/concepts/environments.md), not to a cluster. The deploy dialog lists the Environments that are assigned to the workspace of the project. Each entry shows the following details:
 
-| Stage       | Description                                                                                                     |
-| :---------- | :-------------------------------------------------------------------------------------------------------------- |
-| Development | Use to create and test new software features and changes.                                                       |
-| Testing     | Use for quality checks, ensuring software meets defined standards before release.                               |
-| Staging     | Use for controlled testing where changes are validated before deployment to production.                         |
-| Production  | The live system with the latest software. Only administrators and organization owners can deploy to this stage. |
+| Detail  | Description                                                                                                           |
+| :------ | :-------------------------------------------------------------------------------------------------------------------- |
+| Name    | The [name of the Environment](/components/concepts/environments.md#environment-names).                                |
+| Cluster | The cluster that hosts the Environment. Camunda Hub shows the cluster only if it's needed to tell Environments apart. |
+| Version | The Camunda version of the cluster, for example **Camunda 8.9**.                                                      |
+| Tags    | The tags of the cluster, for example `dev`, `test`, `stage`, or `prod`.                                               |
+| Status  | The [status](#environment-status) of the Environment.                                                                 |
 
-To define your deployment pipeline stages, follow the [connect clusters](./create-a-project.md#connect-clusters) instructions.
-
-:::note
-
-- For each stage, an administrator must define the cluster to deploy to. Deployments can only be made to the pre-defined set of approved clusters. An **Undefined stages** warning is shown if no cluster is selected for at least one stage.
-- Each deployment action is logged with information on the user and stage it was deployed to.
-  :::
+An organization admin decides which Environments a workspace can use. Camunda Hub doesn't offer any other targets, and it doesn't select the next Environment for you when you promote a project. You choose the Environment you want to deploy to.
 
 ### Prerequisites
 
-Make sure you've [set up a project](./create-a-project.md), including at least one cluster.
+Before you deploy a project:
 
-Only users with correct privileges can deploy:
+- An organization admin has [assigned at least one Environment to the workspace](../../organization/manage-environments/assign-environments.md).
+- You're a **Workspace Admin** or **Editor** in the workspace.
+- You have permission to deploy in the target Environment. If the cluster or its Physical Tenant has [authorizations](/components/admin/authorization.md) enabled, ensure you have the [`CREATE` permission to the `RESOURCE` resource type](/components/admin/authorization.md#create-an-authorization-in-admin).
 
-- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, ensure deploying users have [`CREATE` permission to the `RESOURCE` resource type](/components/admin/authorization.md#create-an-authorization-in-admin).
-- Configure your [deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment)
+Camunda Hub doesn't check your permissions before you deploy. The cluster decides whether you can deploy, and Camunda Hub shows you the result.
 
 ## Deploy your project
 
-Once you've [validated your process](./validate-project.md), deploy your project to cluster stages in your [development lifecycle](./manage-projects.md#project-development-lifecycle), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
+Once you've [validated your process](./validate-project.md), deploy your project to an Environment in your [development lifecycle](./manage-projects.md#project-development-lifecycle), such as testing, staging, or production. For example, deploy to your testing Environment to run automated tests or make it available for testing.
 
 1. In your workspace, open a project.
-1. At the top right of the project view, click the **Deploy & run** combo button, and select **Deploy latest changes**. This opens the deployment modal.
-1. Select the cluster stage to deploy to. The next stage is not automatically selected. You must select the stage you want to promote to.
-1. If the cluster is paused, you must resume it.
-1. Click **Deploy** to deploy the project to the selected cluster.
+1. At the top right of the project view, click the **Deploy & run** combo button, and select **Deploy latest changes**. This opens the **Deploy project** dialog.
+1. Under **Deployment environment**, select the Environment to deploy to. Camunda Hub preselects the first one.
+1. If the Environment has [Logical Tenants](/self-managed/concepts/multi-tenancy/logical-tenants.md), select one under **Logical tenant**. In Self-Managed, you can enter a **Logical tenant ID**, which is optional.
+1. In Self-Managed, if the cluster uses basic authentication, enter your **Username** and **Password** under **Authentication**.
+1. Click **Deploy** to deploy the project to the selected Environment.
 
-When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle.
+When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle. Camunda Hub confirms a successful deployment with **Project deployed!**
 
 :::note
-If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a project cannot be deployed incompletely or in an inconsistent state.
+If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the Environment state remains unchanged. This safely ensures that a project cannot be deployed incompletely or in an inconsistent state.
 :::
-
-In Self-Managed, you can deploy your project to the cluster defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::tip
 If you don't want to deploy all resources in a project, you can [deploy an individual resource](../modeler/run-or-publish-your-process.md#deploy-a-process).
 :::
 
+### Logical Tenants
+
+If the target of the deployment has more than one Logical Tenant, choose the Logical Tenant to deploy to. If it has exactly one, Camunda Hub selects it automatically. In SaaS, the **Logical tenant** field doesn't appear if the cluster doesn't support tenants.
+
+### Environment status
+
+The status of an Environment decides whether you can deploy to it:
+
+| Status                        | What the dialog shows                                                                   | Can you deploy?                   |
+| :---------------------------- | :-------------------------------------------------------------------------------------- | :-------------------------------- |
+| Healthy                       | No message.                                                                             | Yes                               |
+| Unhealthy                     | **Deployment may fail**: The selected environment is unhealthy.                         | Yes                               |
+| Updating                      | **Deployment may fail**: The selected environment is updating.                          | Yes                               |
+| Paused                        | To deploy to this environment, it needs to be resumed.                                  | No. Resume the Environment first. |
+| Resuming                      | **Environment is resuming**: Wait until the environment is healthy before deploying.    | No                                |
+| Creating                      | **Environment is being created**: Wait until the environment is ready before deploying. | No                                |
+| Removed or no longer reported | **Environment unavailable**: Select another environment to deploy.                      | No                                |
+
+These messages appear in the SaaS deploy dialog. To resume a paused Environment, click **Resume** next to it. Only organization owners, admins, and DevOps users see this button. You can also [resume the Environment from the Environments page](../../organization/manage-environments/index.md#resume-a-paused-environment).
+
+### No environment available
+
+If no Environment is assigned to the workspace, the dialog shows **No deployment environments available**. An organization admin must assign an Environment to the workspace. If you can manage the Environments of the workspace, click **Manage workspace environments** in the dialog to open the workspace settings.
+
+### Production environments
+
+Camunda Hub treats an Environment as a production Environment if its tags include `prod`. Your organization can require that a project snapshot is approved before anyone deploys it to a production Environment. When this is enabled, and you select a production Environment, the dialog shows one of the following messages:
+
+| Message               | Meaning                                                                                                                                                                         |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Approval required** | The project snapshot must be approved by a reviewer before it can be deployed to a production Environment.                                                                      |
+| **Snapshot required** | Drafts can't be deployed to a production Environment. Create a project snapshot, get it approved, and deploy it. Click **Show snapshots** to open the snapshots of the project. |
+
+Organization admins configure this in the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment). Learn how to [request a review](./project-versioning.md#request-a-review).
+
 ## Run your project
 
-You can manually [run](/components/hub/workspace/modeler/run-or-publish-your-process.md#run-a-process) your project to test it after it has been deployed to a testing, staging, or production cluster.
+You can manually [run](/components/hub/workspace/modeler/run-or-publish-your-process.md#run-a-process) your project to test it after it has been deployed to an Environment.
 
 :::note
-Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate and debug your project against any environment. Use Run to execute a full process instance of your already-deployed project, for example to exercise your real job workers and APIs on a testing, staging, or production cluster.
+Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate and debug your project against any Environment assigned to your workspace. Use Run to execute a full process instance of your already-deployed project, for example to exercise your real job workers and APIs on a testing, staging, or production Environment.
 :::
 
 To run your project:
@@ -73,11 +103,11 @@ To run your project:
 1. Select the process for which you want to start a new instance in **Process to run**.
 1. Select **Deploy & run** to start a new instance.
    - Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.
-   - After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](/components/operate/operate-introduction.md). Open this link to monitor the process instance.
+   - After the process instance starts, you will receive an **Instance started!** notification. Click **View process instance** to open the process instance in the [Operate](/components/operate/operate-introduction.md) of the Environment, and monitor it.
 
 You can also open the **Deploy & run** modal from the details page of any BPMN file in the project. In that case, the current process is run and the modal includes an additional option to select the resources to deploy.
 
-If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
+If the target Environment has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
 
 | Resource type        | Permission                                            |
 | :------------------- | :---------------------------------------------------- |
@@ -86,7 +116,7 @@ If the target cluster has [authorizations](/components/admin/authorization.md) e
 
 ## Deployment errors
 
-If the deployment of a project fails (for example, because one or more of the contained resources has invalid implementation properties), a modal is shown containing the error message thrown by the Zeebe engine.
+If the deployment of a project fails (for example, because one or more of the contained resources has invalid implementation properties), a modal is shown containing the error message thrown by the Zeebe engine. If the cluster rejects the deployment because you lack the permissions to deploy to the Environment, the message says so. Contact your organization admin to request them.
 
 The message typically provides the name of the affected resource, the ID of the invalid diagram element, and the error details.
 
