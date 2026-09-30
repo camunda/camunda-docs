@@ -124,7 +124,7 @@ The Camunda configuration does not change between them.
 :::warning Replication monitoring is required
 Asynchronous replication monitoring is required, not a tuning option. Without it the RDBMS exporter acknowledges records the standby has not received yet, and a writer failover loses exported data. This architecture treats a writer failover as a routine operation rather than an incident, so set `camunda.data.secondary-storage.rdbms.async-replication.enabled` to `true`.
 
-Monitoring is off by default, because `async-replication.enabled` defaults to `false`. Once you enable it, the strategy defaults to `LOG_SEQ`.
+Camunda turns this monitoring off by default. The default suits a single database without asynchronous replicas, and the monitoring needs extra database privileges, for example the `PG_MONITOR` role on PostgreSQL. This architecture needs it, so the reference implementation sets it to `true`. Once you turn it on, the strategy defaults to `LOG_SEQ`.
 
 The strategy you can use depends on the database engine, not on the cloud provider. Use `LOG_SEQ` when your database is in its [vendor support list](/self-managed/concepts/databases/relational-db/configuration.md#lsn-replication-monitoring). Otherwise, choose `TIME_LAG` or `DELAY`. The reference implementation covers only Aurora Global Database. Managed databases on other providers, such as Azure or Google Cloud, follow the same rules but have no reference implementation.
 
@@ -206,9 +206,9 @@ Upgrade **one region at a time**, so the other regions keep the quorum. The [ope
 
 ## Growing the cluster
 
-You can add capacity in two ways, and only one of them stays online.
+You can add a zone in two ways. If you declared the zone at bootstrap, you activate it and the cluster stays online. If you never declared it, you change the zone list, which is a migration.
 
-Zone awareness names zones instead of numbering brokers, so the zone list can change without renumbering the cluster. That makes one growth path online and another one a migration.
+Both paths work because zone awareness names zones instead of numbering brokers. No broker is renumbered.
 
 <ZoneActivationImg role="img" title="Two states of the same cluster using the default 2-2-1 layout. On the left, three zones are declared and two deployed: the third zone's replica is reserved, every partition runs at four of five replicas, a majority, and the cluster runs. On the right, the third zone has been activated and every partition holds five of five replicas. No broker is renumbered and no partition is redistributed between the two states." />
 
