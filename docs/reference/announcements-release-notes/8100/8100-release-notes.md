@@ -102,6 +102,8 @@ In Camunda Hub, the runtime connection of the modeler is a connection to an Envi
 The runtime connection is disabled by default and behind the feature flag `runtimeConnectionEnabled`. The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
 :::
 
+<p class="link-arrow">[Connect to an Environment](/components/hub/workspace/modeler/modeling/runtime-connection.md)</p>
+
 #### Business value dashboard
 
 <!-- https://github.com/camunda/product-hub/issues/3543 -->

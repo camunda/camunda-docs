@@ -22,7 +22,7 @@ The version selector at the top right of the **Problems** panel can be used to c
 If you don't know the version click **Deploy & run** at the top right of the modeling interface. In the deployment dialog, next to the name of each Environment, you'll see the Camunda version of its cluster.
 :::
 
-The version selector also provides information about the number of clusters available for each Camunda version within the current organization. The **Follow runtime cluster** option uses the Camunda version of the Environment you're connected to.
+The version selector also provides information about the number of clusters available for each Camunda version within the current organization. The **Follow runtime cluster** option uses the Camunda version of the Environment you're [connected to](./runtime-connection.md).
 
 ## Interactivity
 

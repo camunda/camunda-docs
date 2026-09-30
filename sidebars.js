@@ -891,6 +891,7 @@ module.exports = {
                     "components/hub/workspace/modeler/run-or-publish-your-process",
                     "components/hub/workspace/modeler/process-landscape-visualization",
                     "components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram",
+                    "components/hub/workspace/modeler/modeling/runtime-connection",
                     "components/hub/workspace/modeler/modeling/versions",
                     "components/hub/workspace/modeler/modeling/file-download",
                     "components/hub/workspace/modeler/modeling/camunda-marketplace",
