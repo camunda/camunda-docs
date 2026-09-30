@@ -875,6 +875,7 @@ module.exports = {
                 {
                   Model: [
                     "components/hub/workspace/modeler/modeling/model-your-first-diagram",
+                    "components/hub/workspace/modeler/modeling/browse-all-resources",
                     "components/hub/workspace/modeler/modeling/utilize-forms",
                     "components/hub/workspace/modeler/run-or-publish-your-process",
                     "components/hub/workspace/modeler/process-landscape-visualization",
