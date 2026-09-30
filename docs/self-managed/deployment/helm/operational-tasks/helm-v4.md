@@ -99,7 +99,7 @@ If you encounter a duplicate environment variable error, apply one of the follow
    helm upgrade ... --server-side=false
    ```
 
-4. Until Helm CLI v3 support ends, use Helm CLI v3 as a temporary workaround. After that, support is best effort only, so use one of the other workarounds.
+4. Helm CLI v3 can be used as a temporary workaround until February 10, 2027. After that date, Camunda no longer supports Helm CLI v3, and continued use is at the customer’s own risk. Use one of the other workarounds instead.
 
 :::note Helm CLI v3 support
 Helm CLI v3.22.0 is the final Helm CLI v3 minor release. See the [Helm v3 end-of-life announcement](https://helm.sh/blog/helm-v3-end-of-life/).
