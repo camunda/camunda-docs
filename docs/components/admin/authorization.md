@@ -127,10 +127,6 @@ To adjust permissions, create and manage custom roles instead.
 
 Use authorizations on the `SECRET` resource to control which owners can see that a secret reference exists, and which owners can resolve it to its actual value. For background on the `camunda.secrets.<name>` reference syntax, see [secret resolution](/components/concepts/secret-resolution.md).
 
-:::note
-Secret resolution is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may change in future releases.
-:::
-
 A `SECRET` authorization grants one of two permissions:
 
 - `READ`: Lets the owner see that a secret reference exists, for example in a `POST /v2/secrets/list` response.

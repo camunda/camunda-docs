@@ -120,7 +120,6 @@ Requirements for components are as follows:
 | Connectors                                                 | OpenJDK 21–25 | –                                                                                                                                                                                                                                                                                                                                                    |
 | Management Identity                                        | OpenJDK 17+   | <ul><li>Keycloak 26.x</li><li>PostgreSQL 14.x, 15.x, 16.x, 17.x (required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)), or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x</li><li>Oracle 19c</li><li>Microsoft SQL Server 2019, 2022, 2025</li></ul> |
 | Camunda Hub                                                | –             | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                              |
-| Self-Managed Console                                       | –             | –                                                                                                                                                                                                                                                                                                                                                    |
 
 :::info Optimize compatibility
 When running Optimize, make sure you use an [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) version that is compatible with your Optimize version.
@@ -140,14 +139,14 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 ### Component version matrix
 
-The following matrix shows which component versions work together. Components within the same column must share the same `minor` and `patch` version.
+The following matrix shows which component versions work together. The components in each cell must share the same `minor` and `patch` version except Desktop Modeler, which follows its own versioning and is not version-locked to other components.
 
 For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
 
-| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                       |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x                                                                              | Camunda Hub 8.10.x<br/>Desktop Modeler 5.46+ |
-
-:::note
-You can use newer versions of Desktop and Camunda Hub with older versions of the Orchestration Cluster.
-:::
+| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management and design](../self-managed/reference-architecture/reference-architecture.md#camunda-hub)    |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster 8.10.X<br/>Connectors 8.10.X<br/>Optimize 8.10.X                                          | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.52+                              |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.46+                              |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x<br/>Web Modeler 8.9.x<br/>Desktop Modeler 5.46+ |
+| Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.40+                              |
+| Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.8.x<br/>Self-Managed Console 8.8.x<br/>Web Modeler 8.8.x<br/>Desktop Modeler 5.40+ |

@@ -13,6 +13,8 @@ To manage your cluster settings in Camunda Hub SaaS:
 1. In the left navigation under **Clusters**, select a cluster.
 1. On the **Settings** tab, enable/disable cluster settings as required, or delete the cluster.
 
+![Cluster settings](./img/cluster-settings.png)
+
 :::tip
 In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
 :::
@@ -62,6 +64,10 @@ This setting applies to Camunda 8 SaaS. In Self-Managed, configure the mode usin
 This setting is available for clusters running a version where `STRICT` is the shipped default: 8.6.28+, 8.7.25+, 8.8.19+, 8.9.10+, and 8.10.0-alpha5+. Only organization admins can change it.
 
 For details on each mode, see [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
+
+## Enable business ID uniqueness
+
+When enabled, the cluster enforces uniqueness constraints on business identifiers to prevent duplicate process instances.
 
 ## Enable app integrations extensions
 

@@ -5,7 +5,7 @@ description: "Define a credential type for your custom connector, so users can c
 keywords: [credential, credential template, configuration, custom connector]
 ---
 
-Define a credential type for your custom connector, so users can create and select a credential for it in Camunda Hub or Modeler, instead of configuring authentication fields directly on the connector task. See [credentials](/components/hub/organization/credentials/index.md) for the concept this page builds on, and [`Configuration` input type](/components/modeler/element-templates/template-properties.md#configuration-input-type) for the generic `Configuration` property type it uses.
+Define a credential type for your custom connector, so users can create and select a credential for it in [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md), instead of configuring authentication fields directly on the connector task. See [credentials](/components/hub/organization/credentials/index.md) for the concept this page builds on, and [`Configuration` input type](/components/modeler/element-templates/template-properties.md#configuration-input-type) for the generic `Configuration` property type it uses.
 
 ## About credential templates
 
@@ -177,7 +177,7 @@ Mark a credential template field as holding a secret reference with `secret: tru
 }
 ```
 
-This is a rendering hint for the credential editor in Hub and Desktop Modeler. It doesn't restrict what the field can hold, but it tells the editor to treat entered values as secret references rather than literals. A user enters an existing secret's key, and the editor stores it as `camunda.secrets.<KEY>`. The engine resolves this reference when the job worker or connector task activates; your connector never sees the marker itself, only the resolved value.
+This is a rendering hint for the credential editor in Hub and Desktop Modeler. It doesn't restrict what the field can hold, but it tells the editor to treat entered values as secret references rather than literals. A user enters an existing secret's key, and the editor stores it as `camunda.secrets.<KEY>`. The engine resolves this reference when the job worker or connector task activates; your connector never sees the marker itself, only the resolved value. See [Secret resolution](/components/concepts/secret-resolution.md) for how `camunda.secrets.<name>` references are resolved.
 
 Your connector cannot create the secret itself from a credential field. The secret must already exist on the cluster. Don't design a credential template that requires a secret your users have no way to create ahead of time.
 

@@ -468,8 +468,8 @@ module.exports = {
       id: "camunda8",
       content:
         '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign up</a></b> for a free account to start orchestrating your business processes today.',
-      backgroundColor: "#14D890",
-      textColor: "#000",
+      backgroundColor: "#171717",
+      textColor: "#fff",
       isCloseable: true,
     },
 
@@ -545,6 +545,7 @@ module.exports = {
           type: "dropdown",
           label: "Help",
           position: "right",
+          className: "help-icon-btn",
           items: [
             {
               label: "Support",
@@ -645,8 +646,8 @@ module.exports = {
               to: "/downloads",
             },
             {
-              label: "Web Modeler",
-              href: "https://camunda.io",
+              label: "Camunda Hub",
+              href: "https://hub.camunda.io",
             },
             {
               label: "Status",
@@ -739,7 +740,7 @@ module.exports = {
         theme: "base",
         themeVariables: {
           fontFamily:
-            "IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif",
+            '"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", Arial, sans-serif',
           fontSize: "16px",
         },
       },

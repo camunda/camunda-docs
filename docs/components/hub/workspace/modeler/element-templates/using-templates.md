@@ -9,7 +9,7 @@ description: "Learn how to apply, remove, update, and replace templates."
 If you have already published an [element template](/components/modeler/element-templates/about-templates.md) to your workspace:
 
 1. Open a BPMN diagram.
-2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implement-mode).
 3. Select an element in the diagram that matches the element template's type. For example, if you've published a **Task** template, select a **Task** element in your diagram.
 4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Select**. This opens the **Choose element template** modal.
 5. Select the element template
@@ -38,7 +38,7 @@ Operations are also matched by search, so you can search for the action you want
 To remove an applied template from an element, either the _Unlink_ or _Remove_ function can be used:
 
 1. Open a BPMN diagram.
-2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implement-mode).
 3. Select an element in the diagram that is linked to an element template.
 4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Applied**.
 5. Select either:
@@ -50,7 +50,7 @@ To remove an applied template from an element, either the _Unlink_ or _Remove_ f
 If a template is applied and a new version of the template is found, you can _update_ the template:
 
 1. Open a BPMN diagram.
-2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implement-mode).
 3. Select an element in the diagram that is linked to an element template.
 4. On the right side of the modeling interface, under **Details > Properties > Template**, click **Update available**.
 
@@ -78,7 +78,7 @@ If a template was applied to an element but cannot be found, editing of the elem
 To save a diagram element as a template:
 
 1. Open a BPMN diagram.
-2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implementation-mode).
+2. Make sure you're in [**Implementation** mode](../collaboration/implement-your-process.md#switch-to-implement-mode).
 3. Select an element in the diagram that supports being used as a template.
 4. On the right side of the modeling interface, in the top right of the **Details** pane, click **Save as**.
 5. Provide a **Name** and **Description**.

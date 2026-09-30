@@ -57,12 +57,45 @@ Use `http://localhost:8080` in Helm values when users access via `https://camund
      cut -d'.' -f2 | base64 -d | jq '.aud'
    ```
 
-2. Update the `audience` parameter in Helm values to match this value.
+2. Confirm the `aud` value matches the audience you assigned to that component in [Assign a unique audience to each component](./generic-oidc-provider.md#assign-a-unique-audience-to-each-component). Update either the Helm value or your provider's client configuration so the two agree.
 3. Redeploy Camunda.
 
 :::note
 Some providers, such as Keycloak, may not include the appropriate audience by default. Consult your provider's documentation on configuring token audiences. For Keycloak, see [External Keycloak](./external-keycloak.md).
 :::
+
+## UserInfo endpoint rejects the access token
+
+**Observed behavior:** Login succeeds, but logs show a warning similar to:
+
+```text
+OIDC /userinfo call failed for registration '<registration-id>' (invalid_user_info_response); continuing login with ID-token-only claims. Set user-info-required=true for this provider to fail login instead, or adjust the requested scope so the access token is accepted at this IdP's userinfo endpoint.
+```
+
+Any claims that would normally come from the `/userinfo` response, and aren't already present in the ID token, are missing from the session.
+
+**Why this happens:** Your identity provider's `/userinfo` endpoint rejected the access token Camunda sent it, most often because of an audience mismatch. This is structural for several identity providers, not a misconfiguration:
+
+- **Microsoft Entra:** UserInfo is served by Microsoft Graph, which requires an access token whose audience is Microsoft Graph, never the Camunda client. The documented Entra scopes include `<CLIENT_UUID>/.default`, which always produces this mismatch. See [Ensure Entra prerequisites](./microsoft-entra.md#ensure-entra-prerequisites).
+- **Auth0, Okta, and PingFederate:** The same rejection occurs whenever the access token is bound to an `audience` other than the provider's own UserInfo endpoint.
+
+**How to fix:**
+
+1. By default, no fix is needed. Login continues using only the claims from the ID token.
+2. If this provider's authorization-relevant claims (for example, group membership) are only available from UserInfo, set `user-info-required: true` for that provider so a rejected call fails login loudly instead of silently continuing without those claims. See [`camunda.security.authentication.oidc.user-info-required`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
+3. To skip the UserInfo call entirely instead, for example if you don't need any claims from it, set `user-info-enabled: false` for that provider.
+
+## Shared audience between components
+
+**Observed behavior:** A token issued for one Camunda component is also accepted by another component that should not recognize it.
+
+**Why this happens:** Both components are configured to accept the same audience. This can be required when Connectors calls the Orchestration Cluster or when Camunda Hub forwards a user's token to the cluster with `BEARER_TOKEN` authentication. In other cases, a shared audience can allow unintended cross-component access.
+
+**How to fix:**
+
+1. Compare the audience configured for each component against [Assign a unique audience to each component](./generic-oidc-provider.md#assign-a-unique-audience-to-each-component).
+2. Check whether the shared audience supports one of the documented integrations. If it doesn't, give each component a distinct resource audience, and configure your provider to issue it.
+3. Redeploy Camunda.
 
 ## Insufficient permissions
 
@@ -137,15 +170,17 @@ By default, Tomcat rejects requests whose headers exceed this limit (typically 8
 
 Increase the maximum allowed HTTP request header size for the Identity service.
 
-1. Configure the Spring Boot property `server.max-http-request-header-size` (via the `SERVER_MAXHTTPREQUESTHEADERSIZE` environment variable) to a value higher than the default, for example 40KB.
+1. Configure the Spring Boot property `server.max-http-request-header-size` (via the `SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` environment variable) to a value higher than the default, for example 40KB.
 
 2. If you are using the Helm chart, set this environment variable on the Identity deployment in your `values.yaml`, similar to other Identity environment variables:
 
    ```yaml
    identity:
      env:
-       - name: SERVER_MAXHTTPREQUESTHEADERSIZE
+       - name: SERVER_MAX_HTTP_REQUEST_HEADER_SIZE
          value: "40KB"
    ```
 
 3. Upgrade or redeploy the release so the new environment variable takes effect.
+
+The Orchestration Cluster can hit the same limit when its session cookies and authorization code grow large enough, for example with Microsoft Entra. If Operate or Tasklist login fails with the same symptom, set `SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` under `orchestration.env` instead.
