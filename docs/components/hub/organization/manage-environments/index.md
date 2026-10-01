@@ -46,38 +46,9 @@ Camunda Hub provides details for each environment. Select an environment on the 
 | Addresses  | The **REST API** and **Swagger UI** addresses of the environment.                                                                                    |
 | Workspaces | The workspaces the environment is assigned to. Organization owners and admins see **Unassigned** if the environment isn't assigned to any workspace. |
 
-</TabItem>
-
-<TabItem value='self-managed'>
-
-| Detail             | Description                                                                                                                                          |
-| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name               | The [name of the environment](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure).                                       |
-| Cluster            | The cluster that hosts the environment.                                                                                                              |
-| Tags               | The tags of the cluster, for example `dev` or `prod`.                                                                                                |
-| Version            | The Camunda version of the cluster.                                                                                                                  |
-| Status             | The [status](#environment-statuses) of the environment.                                                                                              |
-| Physical tenant ID | The ID of the Physical Tenant, if the environment is backed by one.                                                                                  |
-| IDs                | The IDs of the environment.                                                                                                                          |
-| Workspaces         | The workspaces the environment is assigned to. Organization owners and admins see **Unassigned** if the environment isn't assigned to any workspace. |
-
-</TabItem>
-
-</Tabs>
-
 ### Environment statuses
 
-The status of an environment reflects the state of its cluster.
-
-<Tabs groupId="edition" defaultValue="saas" queryString values={
-[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'self-managed' },
-]}>
-
-<TabItem value='saas'>
-
-In SaaS, the status updates automatically while the cluster changes state, and settles on the health of the cluster when the change completes.
+The status of an environment reflects the state of its cluster. In SaaS, the status updates automatically while the cluster changes state, and settles on the health of the cluster when the change completes.
 
 | Status      | Description                                                                                         |
 | :---------- | :-------------------------------------------------------------------------------------------------- |
@@ -98,7 +69,20 @@ Organization owners, admins, and DevOps users can resume a paused environment wh
 
 <TabItem value='self-managed'>
 
-In Self-Managed, Camunda Hub monitors the health of the components of each environment to determine its status. For details on how the status is determined, see the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environment-status).
+| Detail             | Description                                                                                                                                          |
+| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name               | The [name of the environment](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure).                                       |
+| Cluster            | The cluster that hosts the environment.                                                                                                              |
+| Tags               | The tags of the cluster, for example `dev` or `prod`.                                                                                                |
+| Version            | The Camunda version of the cluster.                                                                                                                  |
+| Status             | The [status](#environment-statuses-self-managed) of the environment.                                                                                 |
+| Physical tenant ID | The ID of the Physical Tenant, if the environment is backed by one.                                                                                  |
+| IDs                | The IDs of the environment.                                                                                                                          |
+| Workspaces         | The workspaces the environment is assigned to. Organization owners and admins see **Unassigned** if the environment isn't assigned to any workspace. |
+
+### Environment statuses {#environment-statuses-self-managed}
+
+The status of an environment reflects the state of its cluster. In Self-Managed, Camunda Hub monitors the health of the components of each environment to determine its status. For details on how the status is determined, see the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environment-status).
 
 | Status       | Description                                                                                                                                                                      |
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
