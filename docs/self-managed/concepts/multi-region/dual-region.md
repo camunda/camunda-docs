@@ -250,6 +250,10 @@ When a region becomes unavailable, the Zeebe cluster loses quorum (half of its b
 
 This section covers the runtime plane. Failover doesn't recover Management Identity, Camunda Hub, or Optimize. For their behavior on region loss, see [Management plane and runtime plane](#management-plane-and-runtime-plane).
 
+### Physical Tenant topology during failover
+
+A Physical Tenant removed from configuration is disabled, but it remains in the persisted cluster topology until it is logically removed. Multi-region failover operations require every tenant in the topology to be accounted for, so a disabled tenant can block failover. Before starting failover, compare configured tenants with the persisted topology and resolve any disabled tenants. See [logically remove a disabled tenant](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md#logically-remove-a-disabled-tenant) for lifecycle details.
+
 :::warning Immediate impact
 Region failure causes **immediate service interruption**:
 

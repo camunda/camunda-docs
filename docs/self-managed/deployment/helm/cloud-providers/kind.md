@@ -76,6 +76,8 @@ Before you begin, you'll need:
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [Helm CLI v4](https://helm.sh/docs/intro/install/) (recommended; see [supported versions](/reference/supported-environments.md#clients)).
+- [yq](https://github.com/mikefarah/yq#install)
+- [jq](https://jqlang.org/download/)
 - [envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) (Domain mode only; part of the `gettext` package)
 - [mkcert](https://github.com/FiloSottile/mkcert#installation) (Domain mode only)
 
