@@ -41,17 +41,9 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 - **[Camunda Hub](#camunda-hub)**: Camunda Hub becomes the single place where teams build, govern, and run process solutions in Camunda. Hub replaces Web Modeler and Console and is now where you design, model, manage, and oversee your processes.
 
-- **[Hub catalog](#catalog)**: Center of excellence teams manage and publish vetted, reusable automation assets, and delivery teams discover and apply them when modeling.
-
-- **[Business value dashboard](#business-value-dashboard)**: Track process outcomes in Camunda Hub with cycle time, automation rate, activity, and agentic adoption metrics, and set targets for cycle time and automation rate.
-
-- **[Credentials](#credentials-manager)**: Create connector authentication and connection settings once and reuse them across processes, so a single update applies everywhere.
-
 - **[Multi-region resilience](#multi-region-resilience)**: Asynchronous RDBMS replication and failure-domain-aware partition placement provides configurable recovery behavior and stronger disaster recovery.
 
 - **[Strong tenant isolation via physical tenants](#strong-tenant-isolation-via-physical-tenants)**: Enterprise-grade physical isolation with per-tenant APIs, web apps, roles and identity provider selection. Logical multi-tenancy becomes officially supported on SaaS.
-
-- **[Low-code testing](#low-code-testing)**: Turn process instance runs into repeatable tests in Test Studio, and run the same test files in your CI/CD pipeline with Camunda Process Test.
 
 </div>
 
