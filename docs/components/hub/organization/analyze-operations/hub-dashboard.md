@@ -22,11 +22,11 @@ To open Console, click **Console** in the left navigation.
 In SaaS, Console shows a dashboard with the following information:
 
 - Number of users, task users, clusters, and Admin API credentials
+- Cluster health, with references to the [clusters](/components/hub/organization/manage-clusters/saas-clusters.md)
+- [Process instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
+- [Decision instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
 - [Usage alerts](/components/hub/organization/manage-organization-settings/usage-alerts.md)
 - [Recent activity](/components/hub/organization/manage-organization-settings/view-organization-activity.md)
-- Cluster health, with links to the [clusters](/components/hub/organization/manage-clusters/saas-clusters.md)
-- [Decision instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
-- [Process instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
 
 </TabItem>
 
