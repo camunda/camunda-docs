@@ -8,20 +8,6 @@ A cluster is the infrastructure that runs Camunda 8. It includes the Orchestrati
 
 In Camunda Hub, a cluster is an administrative unit: the infrastructure that organization admins create, size, and maintain. Teams don't deploy to a cluster directly. They deploy to an [environment](./environments.md) hosted on it.
 
-## Clusters and environments
-
-A cluster is an administrative unit, and an environment is an operational unit. Organization admins create, size, update, and back up clusters. Teams deploy and run processes in the environments that are assigned to their [workspace](./workspaces.md).
-
-| Cluster                             | Environments of the cluster                                                               |
-| :---------------------------------- | :---------------------------------------------------------------------------------------- |
-| SaaS                                | Exactly one, named after the cluster.                                                     |
-| Self-Managed, before version 8.10   | Exactly one, named after the cluster.                                                     |
-| Self-Managed, version 8.10 or later | One for each [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md). |
-
-Every environment belongs to exactly one cluster. The tags of a cluster, such as `dev` or `prod`, appear on each of its environments.
-
-Learn more about [environments](./environments.md).
-
 ## Clusters in SaaS
 
 In SaaS, organization admins create clusters in Camunda Hub. When you create a cluster, you choose its type, size, region, and version. The type defines the availability and uptime of the cluster, and the size defines its capacity.
