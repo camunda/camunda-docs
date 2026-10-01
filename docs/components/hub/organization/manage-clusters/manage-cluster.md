@@ -27,8 +27,6 @@ To rename a cluster in SaaS:
 2. At the top of the view, next to the cluster name, open the vertical ellipsis menu.
 3. Click **Rename**.
 
-![cluster-rename](./img/cluster-rename.png)
-
 :::tip
 In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
 :::
@@ -47,8 +45,6 @@ To resume the cluster during deployment:
 ### Resume from cluster details
 
 You can resume your paused cluster from Camunda Hub at any time.
-
-![Resume a paused cluster from the Console](./img/cluster-resume-console.png)
 
 1. In the left navigation, click **Environments**, click **Clusters**, and then select the paused cluster.
 2. On the **Overview** tab, under **Cluster details**, click **Resume cluster**.
