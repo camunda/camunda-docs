@@ -24,6 +24,10 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
 
 :::
 
+:::note Camunda Hub replaces Web Modeler and Console
+Camunda 8.10 replaces Web Modeler and Console with Camunda Hub. These notes use Camunda Hub terms, including workspace (previously project) and project (previously process application). See the [terminology table](/reference/announcements-release-notes/8100/whats-new-in-810.md#terminology) for the full mapping.
+:::
+
 ### Technical Changelogs for all 8.10.x releases
 
 <details className="changelog-dropdown">
@@ -192,7 +196,7 @@ The legacy connector is deprecated in 8.10 but not removed, and continues to wor
 
 #### Improved agent tool configuration
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3719, https://github.com/camunda/product-hub/issues/3574 -->
 
@@ -200,9 +204,9 @@ New features help you more easily configure your agent tools when modeling.
 
 | Feature                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Available in                                                                                |
 | :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
-| Fix                               | Automatically detect and apply a safe fix for an agent misconfiguration. <p><ul><li><p>If a `fromAi()` key or an output key is detected as invalid, click the **Fix** button to apply a fix.</p></li><li><p>Applying a fix only rewrites the invalid part of a field value. The **Fix** button is only shown if the field has an existing (misconfigured) value.</p></li></ul></p>                                                                                                                                                                                                            | <p><ul><li>Desktop Modeler</li><li>Web Modeler</li></ul></p>                                |
-| Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Web Modeler</li></ul></p>                                |
-| Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Web Modeler</li></ul></p> |
+| Fix                               | Automatically detect and apply a safe fix for an agent misconfiguration. <p><ul><li><p>If a `fromAi()` key or an output key is detected as invalid, click the **Fix** button to apply a fix.</p></li><li><p>Applying a fix only rewrites the invalid part of a field value. The **Fix** button is only shown if the field has an existing (misconfigured) value.</p></li></ul></p>                                                                                                                                                                                                            | <p><ul><li>Desktop Modeler</li><li>Camunda Hub</li></ul></p>                                |
+| Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Camunda Hub</li></ul></p>                                |
+| Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Camunda Hub</li></ul></p> |
 
 <p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
 
@@ -233,13 +237,13 @@ If you modeled the agent element before Camunda 8.10, you must [update its eleme
 
 ### Camunda design system
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 The new Camunda visual design system is introduced with this alpha for Self-Managed deployments.
 
 - A new, streamlined design system offers a cleaner, more consistent look across components.
 - Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
-- The new design system is enabled by default in Self-Managed for Web Modeler, Console and Operate.
+- The new design system is enabled by default in Self-Managed for Camunda Hub and Operate.
 
 :::note
 The new design system will be introduced for SaaS deployments with the 8.10 minor release.
@@ -263,7 +267,7 @@ This ensures Camunda AWS connector implementations are using supported client li
 
 <!-- https://github.com/camunda/product-hub/issues/3019 -->
 
-Connector Management now provides a unified view of inbound and outbound connectors in Console.
+Connector Management now provides a unified view of inbound and outbound connectors in Camunda Hub.
 
 - The refreshed experience adds status summaries, search, filtering, sorting, per-runtime health and metrics, richer process details, clearer activity logs, and direct links to Operate.
 - Operators can also reset inbound connector executables from the UI, while webhook activity logs expose redacted request metadata and bounded body previews to make troubleshooting easier.
@@ -373,7 +377,7 @@ This feature is released as an early access alpha feature.
 
 #### Modeling menu improvements
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3481, https://github.com/camunda/camunda-docs/pull/9764 -->
 
@@ -384,31 +388,31 @@ When you create, append, or change an element, the menu groups insertion options
 
 <p class="link-arrow">[Find reusable assets in the modeling menus](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#find-reusable-assets-in-the-modeling-menus)</p>
 
-#### New organizational structure for projects and process applications
+#### New organizational structure for workspaces and projects
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-A new organizational structure for projects and process applications is introduced with this alpha.
+A new organizational structure for workspaces and projects is introduced with this alpha.
 
 With this new file resource hierarchy:
 
-- Projects now **only** contain process applications and IDP applications.
-- Files and folders are stored inside process applications.
-- Previously, a project could contain process applications, folders, and files.
+- Workspaces now **only** contain projects and IDP projects.
+- Files and folders are stored inside projects.
+- Previously, a workspace (called a project in Web Modeler) could contain process applications (now projects), folders, and files.
 
-The new **Project > Process application > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
+The new **Workspace > Project > File/folder** hierarchy makes resources more discoverable and your workspaces more scalable.
 
 :::note
-SaaS Web Modeler data was updated during the 29 August 2026 maintenance window to support this new structure.
+Your SaaS Web Modeler data, now part of Camunda Hub, was updated during the 29 August 2026 maintenance window to support this new structure.
 :::
 
 #### Project versioning model
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-A new versioning model for projects, process applications and file resources is introduced with this alpha. Projects now only contain process applications and IDP applications on the root level. Folders and files are stored inside process applications.
+A new versioning model for workspaces, projects, and file resources is introduced with this alpha. Workspaces now only contain projects and IDP projects on the root level. Folders and files are stored inside projects.
 
-**Process applications**: The new process application versioning model uses snapshots to save the current state of all the process application files, in a single action. This helps you track a process application throughout its development lifecycle and ensures the correct state is referenced.
+**Projects**: The new project versioning model uses snapshots to save the current state of all the project files, in a single action. This helps you track a project throughout its development lifecycle and ensures the correct state is referenced.
 
 **File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
 
@@ -416,13 +420,13 @@ A new versioning model for projects, process applications and file resources is 
 This new versioning model will be introduced for Self-Managed deployments with the 8.10 minor release.
 :::
 
-#### Runtime connection in Web Modeler
+#### Runtime connection in Camunda Hub
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3475 -->
 
-You can now view and choose which cluster you are connected to in Web Modeler.
+You can now view and choose which cluster you are connected to in Camunda Hub.
 
 - Connector-credential names from the cluster autocomplete in your FEEL expressions.
 - Task testing runs against the connected cluster.
@@ -565,11 +569,11 @@ You can now suspend and resume a running process instance without canceling it. 
 
 #### Task testing supports call activities
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3486 -->
 
-Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
+Task testing now supports call activities in both Desktop Modeler and Camunda Hub. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
 
 <p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
 
@@ -595,13 +599,13 @@ The dashboard is primarily intended to help operators, process owners, and engin
 
 ### Camunda Hub
 
-#### Optimize data filters in Console
+#### Optimize data filters in Camunda Hub
 
 <!-- https://github.com/camunda/product-hub/issues/3679 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-You can now configure Optimize data filters directly in Console cluster settings, without editing Helm values or configuration files.
+You can now configure Optimize data filters directly in Camunda Hub cluster settings, without editing Helm values or configuration files.
 
 The **Data filters** section in cluster settings lets you:
 
@@ -626,7 +630,7 @@ Filtered records are permanently excluded from Optimize and cannot be recovered 
 
 <!-- https://github.com/camunda/product-hub/issues/3403 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 Built-in connector templates now describe their operations, so you can model by the action you want to take instead of the product that provides it. Searching in the create, append, or change element menu for `upload object` or `send email` returns the matching operations of every connector as their own entries, and selecting one applies the connector with that operation preselected. Connectors with several operations show their operations as a nested menu, and the operation selection is now the first group in the properties panel.
 
@@ -662,7 +666,7 @@ Receiving needs no connector task and no job worker. Element templates for a cha
 
 <!-- https://github.com/camunda/product-hub/issues/3480 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 The create, append, and change menus now group BPMN elements by category, such as tasks, gateways, events, and so on. Each category includes a short description so you can quickly find the right element.
 
@@ -675,7 +679,7 @@ The create, append, and change menus now group BPMN elements by category, such a
 
 <!-- https://github.com/camunda/product-hub/issues/3403 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 Element templates support the `steps` and `presets` keys to offer several predefined configurations within a single template. Use `steps` to define the menu users navigate when they apply the template, and `presets` to define the property values each operation applies. Operation names, descriptions, and keywords are matched by search, so your operations are as discoverable as the templates themselves.
 
@@ -685,11 +689,11 @@ Element templates support the `steps` and `presets` keys to offer several predef
 
 <!-- https://github.com/camunda/camunda-hub/issues/25824 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-In Self-Managed, you can now hide the **Add user** button on the Web Modeler **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
+In Self-Managed, you can now hide the **Add members** button on the workspace **Members** page, preventing non-organization admins from adding members via the UI. They can still add members via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
 
-<p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
+<p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-add-members-button)</p>
 
 ### Operate
 
@@ -861,7 +865,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-A new Camunda Hub API is provided under `/v2/` for programmatic access to Console and Web Modeler resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+A new Camunda Hub API is provided under `/v2/` for programmatic access to the resources previously managed in Console and Web Modeler. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
 The Console Self-Managed and Web Modeler APIs are deprecated in favor of the Camunda Hub API.
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
@@ -878,17 +882,17 @@ The Camunda Hub API is not yet exposed in Camunda 8. To access it, please reach 
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-Adding a project collaborator through the public API — `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members` — no longer requires the invitee to have already logged in to Web Modeler at least once. If the email address belongs to an organization member with no local user yet, Camunda now creates a pending invitation and sends an invitation email, the same as when inviting through the Web Modeler UI. The invitee gains project access once they accept the invitation.
+Adding a workspace member through the public API — `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members` — no longer requires the invitee to have already logged in to Camunda Hub at least once. If the email address belongs to an organization member with no local user yet, Camunda now creates a pending invitation and sends an invitation email, the same as when inviting through the Camunda Hub UI. The invitee gains workspace access once they accept the invitation.
 
 <p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
 
-### Console
+### Camunda Hub
 
 #### Bespoke cluster generations for SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/3704 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
 Organizations can now access exclusive Camunda 8 generation versions tailored specifically for their organization, available for both new cluster creation and upgrades. These generations are not visible to other organizations.
 
@@ -896,9 +900,9 @@ Organizations can now access exclusive Camunda 8 generation versions tailored sp
 
 <!-- https://github.com/camunda/product-hub/issues/3741 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-When you upgrade an Orchestration Cluster that has more than one valid upgrade target, Console now shows a version selection step in the upgrade wizard. Each option displays the generation name and the Zeebe patch version.
+When you upgrade an Orchestration Cluster that has more than one valid upgrade target, Camunda Hub now shows a version selection step in the upgrade wizard. Each option displays the generation name and the Zeebe patch version.
 
 The recommended version (the longest upgrade path) is pre-selected and labeled **latest**, and you can choose a different option before proceeding. Clusters with only one upgrade target keep the existing flow.
 
@@ -906,9 +910,9 @@ The recommended version (the longest upgrade path) is pre-selected and labeled *
 
 <!-- https://github.com/camunda/product-hub/issues/2135 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Organization admins can now restore a SaaS orchestration cluster directly from a completed backup in Console and through the Administration API.
+Organization admins can now restore a SaaS orchestration cluster directly from a completed backup in Camunda Hub and through the Administration API.
 
 Key benefits:
 
@@ -937,19 +941,19 @@ Learn more:
 
 <!-- https://github.com/camunda/product-hub/issues/3568 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Deleting an item in Web Modeler no longer removes it immediately. Deleted projects, files, folders, process applications, and IDP applications are moved to **Recently deleted** for 30 days. During that time, users with the appropriate permissions can see who deleted an item and when, and restore it. After 30 days, items are permanently deleted.
+Deleting an item in Camunda Hub no longer removes it immediately. Deleted workspaces, projects, files, folders, and IDP projects are moved to **Recently deleted** for 30 days. During that time, users with the appropriate permissions can see who deleted an item and when, and restore it. After 30 days, items are permanently deleted.
 
-Deletion no longer corrupts process application version history, as existing snapshots continue to reference deleted files correctly. The recovery window applies to deletions made in 8.10 and later; items deleted before upgrading cannot be recovered.
+Deletion no longer corrupts project version history, as existing snapshots continue to reference deleted files correctly. The recovery window applies to deletions made in 8.10 and later; items deleted before upgrading cannot be recovered.
 
 <p class="link-arrow">[Recover deleted resources](/components/hub/workspace/manage-projects/recently-deleted.md)</p>
 
 #### Test process segments in Play
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
+When testing your process with Play in Camunda Hub, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
 
 - Run segment tests individually or in batches to validate process changes faster.
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
@@ -973,7 +977,7 @@ FEEL expressions in the variable outline now use the same syntax highlighting as
 
 <!-- https://github.com/camunda/product-hub/issues/3436 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
 
@@ -1091,9 +1095,9 @@ Camunda 8 SaaS now officially supports multi-tenancy via tenant identifiers, bri
 Multi-tenancy is available on SaaS clusters running generation **8.8 and later** — including existing 8.8 and 8.9 clusters. You do not need to upgrade to 8.10 to use this feature.
 :::
 
-- Owners and Admins can create, update, and delete tenants in Console, and assign users, groups, and client credentials to them.
-- Web Modeler and Desktop Modeler support tenant-scoped deployments to multi-tenant clusters by specifying a tenant ID.
-- Tenant usage is reflected in Console reporting so org owners can monitor tenant consumption across a cluster.
+- Owners and Admins can create, update, and delete tenants in Camunda Hub, and assign users, groups, and client credentials to them.
+- Camunda Hub and Desktop Modeler support tenant-scoped deployments to multi-tenant clusters by specifying a tenant ID.
+- Tenant usage is reflected in Camunda Hub reporting so org owners can monitor tenant consumption across a cluster.
 
 Multi-tenancy is enabled at the cluster level. Process definitions, instances, and decisions are scoped to the tenant they were deployed to, keeping data isolated across teams and applications sharing a single cluster.
 
@@ -1288,14 +1292,14 @@ The Zeebe Process Test library is removed and replaced by [Camunda Process Test]
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
-Desktop Modeler now supports defining form references on [none start events](/components/modeler/bpmn/none-events/none-events.md) in Camunda 8 BPMN models, matching the existing Web Modeler capability.
+Desktop Modeler now supports defining form references on [none start events](/components/modeler/bpmn/none-events/none-events.md) in Camunda 8 BPMN models, matching the existing Camunda Hub capability.
 
 You can configure start forms directly in Desktop Modeler's properties panel using:
 
 - Camunda Form (linked): Reference a deployed Camunda Form by ID.
 - Camunda Form (embedded): Embed form JSON in the BPMN diagram (deprecated).
 
-Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
+Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Camunda Hub and Desktop Modeler.
 
 ### Orchestration Cluster
 
@@ -1377,11 +1381,11 @@ This dramatically reduces time-to-first-running-agent by removing the need for e
 
 #### MCP start event element template
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 <!-- https://github.com/camunda/connectors/pull/6742 -->
 
-The **MCP start event** element template is now available in Web Modeler and Desktop Modeler. Apply it to a BPMN message start event to configure the process as an MCP tool with name, purpose, inputs, and usage guidance for LLMs.
+The **MCP start event** element template is now available in Camunda Hub and Desktop Modeler. Apply it to a BPMN message start event to configure the process as an MCP tool with name, purpose, inputs, and usage guidance for LLMs.
 
 See [MCP start event](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) for the full property reference.
 
@@ -1395,15 +1399,15 @@ https://github.com/camunda/camunda/issues/49548 -->
 
 Camunda Process Test now exposes **judge-based evaluation** and **semantic similarity evaluation** as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
 
-### Console
+### Camunda Hub
 
 #### Usage & billing metrics for 2025 enterprise license model
 
 <!-- https://github.com/camunda/product-hub/issues/3571 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Console and Accounts now support the 2025 enterprise license model.
+Camunda Hub and Accounts now support the 2025 enterprise license model.
 
 - A new `licensing_model` attribute on `OrganizationMetaData` identifies if an enterprise organization is using the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
 - If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
@@ -1414,7 +1418,7 @@ Console and Accounts now support the 2025 enterprise license model.
 
 <!-- https://github.com/camunda/product-hub/issues/3582 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 You can now create new SaaS Orchestration Clusters on specific supported Camunda 8 minor and patch versions, including:
 
@@ -1437,7 +1441,7 @@ Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extractio
 
 <!-- https://github.com/camunda/product-hub/issues/3450 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 Execution listeners now support configurable headers, aligned with service task job headers.
 
