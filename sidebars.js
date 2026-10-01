@@ -741,7 +741,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Manage Environments",
+              label: "Manage environments",
               link: {
                 type: "doc",
                 id: "components/hub/organization/manage-environments/manage-environments",
