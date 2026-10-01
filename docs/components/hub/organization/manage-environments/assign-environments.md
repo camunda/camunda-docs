@@ -38,7 +38,7 @@ Saving replaces the assigned environments with your selection.
 
 ### Find an environment
 
-The selection view lists the available environments. Each card shows the version, status, region, and the other workspaces that use the environment, or **Not assigned**.
+The selection view lists the available environments. For each environment, it shows the version, status, region, and the other workspaces that use it, or **Not assigned**.
 
 - Use **Search environments** to search by name.
 - Filter by version or tag.
