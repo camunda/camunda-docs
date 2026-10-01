@@ -437,7 +437,7 @@ webModeler:
 
 If `CAMUNDA_MODELER_OAUTH2_TOKEN_USERIDCLAIM` is not set, Web Modeler uses `CAMUNDA_IDENTITY_USERIDCLAIM`.
 
-Existing users keep their account. On their next login, Web Modeler moves accounts stored under `sub` to the new claim.
+If you change the user ID claim for an existing installation, users keep their account. On their next login, Web Modeler moves accounts stored under `sub` to the new claim.
 
 :::warning
 Moving accounts is a one-way operation. If you change the claim again, Web Modeler doesn't move the accounts back, and affected users get a new, empty account.
