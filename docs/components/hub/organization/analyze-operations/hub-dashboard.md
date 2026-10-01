@@ -1,6 +1,6 @@
 ---
 id: hub-dashboard
-title: Console
+title: View Console
 description: "Use Console to view the clusters, usage, alerts, and activity of your organization at a high level."
 ---
 

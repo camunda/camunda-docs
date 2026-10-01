@@ -13,7 +13,7 @@ Monitor cluster health, track job and process execution, and measure business va
 <AoGrid ao={[
 {
 link: "./hub-dashboard",
-title: "Monitor in Console",
+title: "View Console",
 image: DocsIcon,
 description: "View clusters, usage, alerts, and activity of your organization at a high level.",
 },
