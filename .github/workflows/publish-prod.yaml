@@ -10,7 +10,8 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: gcp-core-8-default
+    container: node:24
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -80,7 +81,8 @@ jobs:
   # Temporarily publish to the old server and new server in parallel. Once we're satisfied everything is working properly,
   # we can remove the old server deployment job.
   publish-aws:
-    runs-on: ubuntu-latest
+    runs-on: gcp-core-8-default
+    container: node:24
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
