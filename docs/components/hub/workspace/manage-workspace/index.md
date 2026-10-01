@@ -23,7 +23,7 @@ Add members, edit member roles, or delete members:
 1. In your workspace, in the left-side navigation, click **Settings**.
 2. Under **Members**, follow the organization-level [manage the workspace's members](../../organization/manage-workspaces/manage-workspace-members.md) guide.
 
-## View assigned Environments
+## View assigned environments
 
 An [environment](/components/concepts/environments.md) is the place where the projects of your workspace deploy and run. Your organization admin assigns environments to the workspace, and every project in the workspace can use all of them.
 
@@ -44,7 +44,7 @@ An unhealthy or paused environment stays in the list with its status. If no envi
 
 Select an environment to see its applications, details, and a summary of its jobs from the last 24 hours. Camunda Hub doesn't check your permissions in the applications. Each application enforces its own access.
 
-## Manage assigned Environments
+## Manage assigned environments
 
 Organization owners and admins can change the environments assigned to a workspace. DevOps users can too, if they're also **Editor** or **Workspace Admin** in the workspace.
 

@@ -280,7 +280,7 @@ The following table shows how you can access the Hub equivalents for key Web Mod
 | Web Modeler   | Create a project                          | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)        |
 | Web Modeler   | Manage project collaborators              | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)             |
 | Web Modeler   | Rename/delete project                     | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                             |
-| Web Modeler   | Connect clusters to a process application | [Assign Environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md)      |
+| Web Modeler   | Connect clusters to a process application | [Assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md)      |
 | Web Modeler   | Deploy a process application              | [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md)                                 |
 | Web Modeler   | View shared resources                     | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**           |
 | Web Modeler   | Recently deleted                          | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                  |
@@ -347,7 +347,7 @@ Camunda Hub introduces an improved model with more granular control over project
 
 If you're not familiar with projects, the following sections explain how to:
 
-- [Deploy to Environments](/components/hub/workspace/manage-projects/deploy-project.md#deployment-environments)
+- [Deploy to environments](/components/hub/workspace/manage-projects/deploy-project.md#deployment-environments)
 - [Deploy a project](/components/hub/workspace/manage-projects/deploy-project.md)
 - [Deploy an individual resource](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process)
 - [Create a project snapshot](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot)
@@ -577,7 +577,7 @@ Before the new model, a process application and the resources within it were tig
 
 Learn more about using process applications in the following sections.
 
-#### Deploy to Environments
+#### Deploy to environments
 
 Before 8.10, you connected clusters to deployment stages in each process application. In 8.10, a project has no deployment stages. It deploys to the [environments](/components/concepts/environments.md) that are assigned to its workspace. An organization admin [assigns environments to the workspace](/components/hub/organization/manage-environments/assign-environments.md).
 

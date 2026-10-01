@@ -18,7 +18,7 @@ Create and manage workspaces within your organization:
 
 <span class="link-arrow">[Get started](./manage-workspaces/index.md)</span>
 
-## Manage Environments
+## Manage environments
 
 See your deployment environments and assign them to workspaces:
 

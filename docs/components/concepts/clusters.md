@@ -8,7 +8,7 @@ A cluster is the infrastructure that runs Camunda 8. It includes the Orchestrati
 
 In Camunda Hub, a cluster is an administrative unit: the infrastructure that organization admins create, size, and maintain. Teams don't deploy to a cluster directly. They deploy to an [environment](./environments.md) hosted on it.
 
-## Clusters and Environments
+## Clusters and environments
 
 A cluster is an administrative unit, and an environment is an operational unit. Organization admins create, size, update, and back up clusters. Teams deploy and run processes in the environments that are assigned to their [workspace](./workspaces.md).
 

@@ -41,7 +41,7 @@ description: "Manage members within your workspace.",
 },
 {
 link: "../manage-environments/assign-environments",
-title: "Assign Environments to a workspace",
+title: "Assign environments to a workspace",
 image: DocsIcon,
 description: "Choose the environments that projects in your workspace can deploy to.",
 },

@@ -55,7 +55,7 @@ You can manage organizational resources, including clusters, environments, and w
 <div class="double-column-container" style={{ paddingTop: '50px' }}>
 <div class="double-column-left" style={{ flex: '2', paddingRight: '40px', marginTop: '-2.2rem' }}>
 
-### Workspaces and Environments
+### Workspaces and environments
 
 An environment is the place where a team deploys and runs its processes, for example a development, staging, or production environment. Each environment is hosted on a cluster, which remains the infrastructure that your administrators manage.
 
@@ -84,7 +84,7 @@ description: "Create and manage workspaces within your organization.",
 },
 {
 link: "./organization/manage-environments",
-title: "Manage Environments",
+title: "Manage environments",
 image: ServerIcon,
 description: "See your deployment environments and assign them to workspaces.",
 },

@@ -1,6 +1,6 @@
 ---
 id: manage-environments
-title: Manage Environments
+title: Manage environments
 description: "View the environments in your organization, open their applications, resume a paused environment, and learn how to add a new one."
 ---
 
@@ -19,7 +19,7 @@ What you see on the **Environments** page depends on your role:
 | Editor or admin in a workspace     | See the environments assigned to workspaces where you're an editor or workspace admin.                                          |
 | Viewer or commenter in a workspace | See no environments.                                                                                                            |
 
-## View Environments
+## View environments
 
 To view the environments in your organization, click **Environments** in the left navigation.
 
@@ -56,7 +56,7 @@ In Self-Managed, use the **Layout** toggle to switch between **Grid** and **By c
 
 An environment can also show **Creating**, **Updating**, or **Unavailable** while its cluster changes state. In Self-Managed, Camunda Hub determines the status from the readiness addresses of the components. See [environment status](/self-managed/components/hub/configuration/properties.md#environment-status).
 
-## Open an Environment
+## Open an environment
 
 Select an environment to open its details. The **Overview** tab has the following sections:
 
@@ -68,7 +68,7 @@ Select an environment to open its details. The **Overview** tab has the followin
 
 Use the **Workspaces** tab to see the workspaces the environment is assigned to. Organization owners and admins can open a workspace from this list.
 
-## Resume a paused Environment
+## Resume a paused environment
 
 In SaaS, an organization owner, admin, or DevOps user can resume a paused environment:
 
@@ -77,7 +77,7 @@ In SaaS, an organization owner, admin, or DevOps user can resume a paused enviro
 
 The status changes to **Resuming** while the cluster starts. Self-Managed environments don't pause.
 
-## Add a new Environment
+## Add a new environment
 
 Camunda Hub adds environments automatically when a cluster exists. To add one, click **Add new environment** on the **Environments** page. Only organization owners and admins see this button.
 
@@ -86,6 +86,6 @@ Camunda Hub adds environments automatically when a cluster exists. To add one, c
 
 ## Next steps
 
-- [Assign Environments to a workspace](./assign-environments.md).
+- [Assign environments to a workspace](./assign-environments.md).
 - [Manage clusters](../manage-clusters/index.md).
 - Learn how to [deploy a project](/components/hub/workspace/manage-projects/deploy-project.md).

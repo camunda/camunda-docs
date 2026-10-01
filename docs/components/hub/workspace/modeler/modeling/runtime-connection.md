@@ -1,6 +1,6 @@
 ---
 id: runtime-connection
-title: Connect to an Environment
+title: Connect to an environment
 description: "Connect the modeler to an environment to model against real connector credentials, test tasks, and see the runtime status of your diagram."
 ---
 
@@ -25,7 +25,7 @@ Two Physical Tenants of the same cluster are separate environments, so they're s
 
 To connect to an environment, an organization admin must [assign an environment to your workspace](/components/hub/organization/manage-environments/assign-environments.md). You see only the environments assigned to the workspace of the project.
 
-## Connect to an Environment
+## Connect to an environment
 
 1. In your workspace, open a project, and open a diagram in **Implement** mode.
 1. In the bottom bar of the modeling interface, click the **Runtime** indicator. The **Connect to an environment** popover opens.

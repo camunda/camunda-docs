@@ -364,7 +364,7 @@ Camunda Hub sends an HTTP request to the `urls.readiness` address of each compon
 
 A cluster that you configure with `url` instead of `components` has no readiness address, so its environments always have the status **Unknown**.
 
-##### Not reported Environments
+##### Not reported environments
 
 If you remove a cluster or Physical Tenant from the configuration, but its environment is still assigned to a workspace, the environment stays in Camunda Hub with the status **Not reported**. It shows no live data, and you can't select it for a deployment. Remove the assignment from the workspace when you no longer need it.
 

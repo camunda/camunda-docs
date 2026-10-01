@@ -48,7 +48,7 @@ A workspace is the container of projects. Every project belongs to one workspace
 
 Learn more about [projects](./projects.md).
 
-## Workspaces and Environments
+## Workspaces and environments
 
 A workspace is assigned environments, never clusters. An organization admin decides which environments a workspace can use, so a team can deploy only to the places that were approved for it.
 
@@ -63,5 +63,5 @@ Desktop Modeler doesn't have workspaces. It works with local files and [projects
 ## Next steps
 
 - [Manage workspaces](/components/hub/organization/manage-workspaces/index.md)
-- [Assign Environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md)
+- [Assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md)
 - [Manage projects](/components/hub/workspace/manage-projects/manage-projects.md)

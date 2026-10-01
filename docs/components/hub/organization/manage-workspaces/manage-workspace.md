@@ -28,7 +28,7 @@ Create a workspace, invite members, and assign environments:
 4. Under **Members**, [manage the workspace's members](./manage-workspace-members.md), then click **Next**.
 5. Under **Environments**, [assign environments](../manage-environments/assign-environments.md) to the workspace, then click **Create workspace**. Only organization owners and admins see this step. You can also assign environments later.
 
-## Assign Environments
+## Assign environments
 
 Choose the environments that the projects of the workspace can deploy to. See [assign environments to a workspace](../manage-environments/assign-environments.md).
 
@@ -54,4 +54,4 @@ Your workspace is moved to [**Recently deleted**](../../workspace/manage-project
 
 - [Camunda Hub Workspace API](/apis-tools/hub-api-saas/specifications/create-workspace.api.mdx)
 - [Manage workspace members](./manage-workspace-members.md)
-- [Assign Environments to a workspace](../manage-environments/assign-environments.md)
+- [Assign environments to a workspace](../manage-environments/assign-environments.md)

@@ -19,7 +19,7 @@ Create a project to work on a set of related files:
 1. In your workspace, click **Create project**.
 2. Provide a project name, and click **Create project**.
 
-## Deployment Environments
+## Deployment environments
 
 A project doesn't have its own deployment targets. It can deploy to all the [environments](/components/concepts/environments.md) that are assigned to its workspace, and it always reflects changes to that set.
 

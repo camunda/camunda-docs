@@ -1,6 +1,6 @@
 ---
 id: assign-environments
-title: Assign Environments to a workspace
+title: Assign environments to a workspace
 description: "Assign environments to a workspace when you create it or later, and manage the assignments with the Camunda Hub API."
 ---
 
@@ -18,7 +18,7 @@ You can assign only environments of clusters that you can see.
 - An environment can be assigned to more than one workspace. Assigning one environment to one workspace is the recommended model, but Camunda Hub doesn't enforce it.
 - Workspace members see only the environments assigned to their workspace. Viewers and commenters see none. See [environments](/components/concepts/environments.md#who-can-see-and-use-environments).
 
-## Assign Environments when you create a workspace
+## Assign environments when you create a workspace
 
 1. In Camunda Hub, click **Workspaces** in the left navigation, and then click **Create workspace**.
 2. Complete the **General** and **Members** steps. See [create a workspace](../manage-workspaces/manage-workspace.md#create-a-workspace).
@@ -27,7 +27,7 @@ You can assign only environments of clusters that you can see.
 
 If Camunda Hub creates the workspace but can't assign the environments, it shows a message. Assign the environments from the workspace settings.
 
-## Change the assigned Environments
+## Change the assigned environments
 
 1. In Camunda Hub, click **Workspaces** in the left navigation, find the workspace, and click **Manage**. Alternatively, open the workspace and click **Settings** in the left navigation.
 2. Open the **Environments** tab.
@@ -36,7 +36,7 @@ If Camunda Hub creates the workspace but can't assign the environments, it shows
 
 Saving replaces the assigned environments with your selection.
 
-### Find an Environment
+### Find an environment
 
 The selection view lists the available environments. Each card shows the version, status, region, and the other workspaces that use the environment, or **Not assigned**.
 
@@ -45,15 +45,15 @@ The selection view lists the available environments. Each card shows the version
 - Turn on **Show only unassigned** to hide the environments that other workspaces use.
 - In Self-Managed, switch between **Grid** and **By cluster**.
 
-### Remove the last Environment
+### Remove the last environment
 
 If you remove every environment from a workspace, Camunda Hub asks you to confirm with **Remove environments**. The workspace then has no environment to deploy to. You can assign environments again at any time.
 
-### What happens when you unassign an Environment
+### What happens when you unassign an environment
 
 When you unassign an environment, projects in the workspace can no longer select it, and they can't deploy to it. Nothing else changes in the environment or in other workspaces that use it.
 
-## Assign Environments with the API
+## Assign environments with the API
 
 Use the Camunda Hub API to assign environments as part of your workspace setup or team onboarding automation. The API follows the same rules as the user interface.
 
@@ -70,6 +70,6 @@ See the API reference for [SaaS](/apis-tools/hub-api-saas/specifications/replace
 
 ## Next steps
 
-- [Manage Environments](./index.md).
+- [Manage environments](./index.md).
 - [Manage workspace members](../manage-workspaces/manage-workspace-members.md).
 - Learn how to [deploy a project](/components/hub/workspace/manage-projects/deploy-project.md).

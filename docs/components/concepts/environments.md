@@ -20,7 +20,7 @@ Camunda Hub separates the infrastructure you operate from the place your teams w
 
 Teams deploy to an environment, not to a cluster. A cluster can host more than one environment, and every environment belongs to exactly one cluster. Learn more about [clusters](./clusters.md).
 
-## How an Environment maps to infrastructure
+## How an environment maps to infrastructure
 
 An environment is backed by an isolated unit of a cluster. The cluster version determines which unit backs it, and you don't choose it:
 
@@ -42,7 +42,7 @@ An environment carries the tags of the cluster that backs it, for example `dev`,
 
 The `prod` tag also marks an environment as a production environment. Your organization can require an approved project snapshot before anyone deploys to it. See [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
 
-## Who can see and use Environments
+## Who can see and use environments
 
 Organization admins assign environments to workspaces. An environment can be assigned to more than one workspace, and a workspace can have any number of environments, including none.
 
@@ -56,7 +56,7 @@ Every [project](./projects.md) in a [workspace](./workspaces.md) can use all the
 
 Seeing an environment doesn't grant access to what runs in it. The Orchestration Cluster decides who can deploy to an environment and use its applications. See [access control](/components/concepts/access-control/access-control-overview.md).
 
-## What an Environment contains
+## What an environment contains
 
 Each environment has its own applications and its own health status:
 

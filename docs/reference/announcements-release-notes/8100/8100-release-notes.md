@@ -85,9 +85,9 @@ Environments are the new places where teams deploy and run their processes in Ca
 
 <p class="link-arrow">[Environments](/components/concepts/environments.md)</p>
 <br />
-<p class="link-arrow">[Manage Environments](/components/hub/organization/manage-environments/index.md)</p>
+<p class="link-arrow">[Manage environments](/components/hub/organization/manage-environments/index.md)</p>
 
-#### Runtime connection targets Environments
+#### Runtime connection targets environments
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
@@ -103,7 +103,7 @@ In Camunda Hub, the runtime connection of the modeler is a connection to an envi
 The runtime connection is disabled by default and behind the feature flag `runtimeConnectionEnabled`. The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
 :::
 
-<p class="link-arrow">[Connect to an Environment](/components/hub/workspace/modeler/modeling/runtime-connection.md)</p>
+<p class="link-arrow">[Connect to an environment](/components/hub/workspace/modeler/modeling/runtime-connection.md)</p>
 
 #### Business value dashboard
 
