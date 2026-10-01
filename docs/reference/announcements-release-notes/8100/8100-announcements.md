@@ -7,7 +7,7 @@ toc_max_heading_level: 3
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 
 <PageDescription />
 
@@ -717,7 +717,7 @@ The chart emits a deprecation warning naming the flag and the removal only when 
 
 #### Classic Grafana dashboard format deprecated {#classic-grafana-dashboard-format-deprecated}
 
-The Grafana dashboards published in the [`monitor/grafana` folder](https://github.com/camunda/camunda/tree/main/monitor/grafana) of the `camunda/camunda` repository use the classic Grafana dashboard JSON model. Starting with Camunda 8.11, Camunda will update the dashboards to the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/).
+The Grafana dashboards published in [`monitor/grafana`](https://github.com/camunda/camunda/tree/main/monitor/grafana) of the `camunda/camunda` repository use the classic Grafana dashboard JSON model. Starting with Camunda 8.11, Camunda will update the dashboards to the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/).
 
 Camunda 8.10 is the last release that provides the dashboards in the classic format. The classic dashboards of 8.10 and earlier releases continue to work with your Grafana instance.
 
