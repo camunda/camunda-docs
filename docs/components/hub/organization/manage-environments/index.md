@@ -59,6 +59,15 @@ The status of an environment reflects the state of its cluster:
 
 In SaaS, the status updates automatically while the cluster changes state, and settles on the health of the cluster when the change completes. In Self-Managed, Camunda Hub determines the status from the readiness addresses of the components. See [environment status](/self-managed/components/hub/configuration/properties.md#environment-status).
 
+#### Resume a paused environment
+
+Pausing and resuming is available only in SaaS. Organization owners, admins, and DevOps users can resume a paused environment:
+
+1. In the left navigation, click **Environments**.
+2. On the card of the paused environment, open the actions menu next to the status, and click **Resume**. You can also click **Resume** in the **Status** row of the environment details.
+
+The status changes to **Resuming** while the cluster starts. Environments in Self-Managed don't pause.
+
 ## Open an environment
 
 Select an environment to open its details. The **Overview** tab contains the following sections:
@@ -70,15 +79,6 @@ Select an environment to open its details. The **Overview** tab contains the fol
 | Jobs (last 24 hours) | The number of jobs that were created, completed, and not completed. Select **View all job types** for details. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).                                                                                |
 
 Use the **Workspaces** tab to see the workspaces the environment is assigned to. Organization owners and admins can open a workspace from this list.
-
-## Resume a paused environment
-
-Pausing and resuming is available only in SaaS. Organization owners, admins, and DevOps users can resume a paused environment:
-
-1. In the left navigation, click **Environments**.
-2. On the card of the paused environment, open the actions menu next to the status, and click **Resume**. You can also click **Resume** in the **Status** row of the environment details.
-
-The status changes to **Resuming** while the cluster starts. Environments in Self-Managed don't pause.
 
 ## Add a new environment
 

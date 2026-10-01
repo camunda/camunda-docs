@@ -43,7 +43,6 @@ The selection view lists the available environments. Each card shows the version
 - Use **Search environments** to search by name.
 - Filter by version or tag.
 - Turn on **Show only unassigned** to hide the environments that other workspaces use.
-- In Self-Managed, switch between **Grid** and **By cluster**.
 
 ### Remove the last environment
 
