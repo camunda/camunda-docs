@@ -1084,6 +1084,7 @@
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/databricks",
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               "Email": [
@@ -3948,6 +3949,15 @@
         },
         {
           "type": "category",
+          "label": "Multi-tenancy",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/multi-tenancy/index"
+          },
+          "items": ["self-managed/concepts/multi-tenancy/logical-tenants"]
+        },
+        {
+          "type": "category",
           "label": "Audit log",
           "link": {
             "type": "doc",
@@ -3975,10 +3985,7 @@
             "self-managed/concepts/multi-region/dual-region"
           ]
         },
-        "self-managed/operational-guides/data-purge",
-        {
-          "Troubleshooting": ["self-managed/operational-guides/troubleshooting"]
-        }
+        "self-managed/operational-guides/data-purge"
       ]
     },
     {
@@ -4268,6 +4275,7 @@
         }
       ]
     },
+    "self-managed/operational-guides/troubleshooting",
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.9",

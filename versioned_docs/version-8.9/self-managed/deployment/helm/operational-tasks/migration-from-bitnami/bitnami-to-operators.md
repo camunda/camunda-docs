@@ -84,27 +84,66 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic
 
 ### Key configuration variables
 
-| Variable                     | Default                | Description                                                                                               |
-| ---------------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------- |
-| `NAMESPACE`                  | `camunda`              | Kubernetes namespace of your Camunda installation                                                         |
-| `CAMUNDA_RELEASE_NAME`       | `camunda`              | Helm release name                                                                                         |
-| `CAMUNDA_HELM_CHART_VERSION` | (chart version)        | Target Helm chart version for the upgrade                                                                 |
-| `CAMUNDA_DOMAIN`             | (empty)                | Domain for Keycloak Ingress. Leave empty for port-forward setups                                          |
-| `IDENTITY_DB_NAME`           | `identity`             | Identity database name (must match the source installation)                                               |
-| `IDENTITY_DB_USER`           | `identity`             | Identity database user (must match the source installation)                                               |
-| `KEYCLOAK_DB_NAME`           | `keycloak`             | Keycloak database name (must match the source installation)                                               |
-| `KEYCLOAK_DB_USER`           | `keycloak`             | Keycloak database user (must match the source installation)                                               |
-| `WEBMODELER_DB_NAME`         | `webmodeler`           | Web Modeler database name (must match the source installation)                                            |
-| `WEBMODELER_DB_USER`         | `webmodeler`           | Web Modeler database user (must match the source installation)                                            |
-| `BACKUP_PVC`                 | `migration-backup-pvc` | PVC name for storing backup data                                                                          |
-| `BACKUP_STORAGE_SIZE`        | `50Gi`                 | Backup PVC size (must fit all database dumps)                                                             |
-| `MIGRATE_IDENTITY`           | `true`                 | Enables the Identity PostgreSQL database migration                                                        |
-| `MIGRATE_KEYCLOAK`           | `true`                 | Enables the Keycloak and its PostgreSQL database migration                                                |
-| `MIGRATE_WEBMODELER`         | `true`                 | Enables the Web Modeler PostgreSQL database migration                                                     |
-| `MIGRATE_ELASTICSEARCH`      | `true`                 | Enables the Elasticsearch data migration                                                                  |
-| `ES_WARM_REINDEX`            | `false`                | When `true`, pre-copies ES data during Phase 2 (no downtime), reducing Phase 3 to a ~5 minute delta sync. |
+| Variable                     | Default                                                          | Description                                                                                                  |
+| ---------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `NAMESPACE`                  | `camunda`                                                        | Kubernetes namespace of your Camunda installation                                                            |
+| `CAMUNDA_RELEASE_NAME`       | `camunda`                                                        | Helm release name                                                                                            |
+| `CAMUNDA_HELM_CHART_VERSION` | (chart version)                                                  | Target Helm chart version for the upgrade                                                                    |
+| `CAMUNDA_DOMAIN`             | (empty)                                                          | Domain for Keycloak Ingress. Leave empty for port-forward setups                                             |
+| `IDENTITY_DB_NAME`           | `identity`                                                       | Identity database name on the target                                                                         |
+| `IDENTITY_DB_USER`           | `identity`                                                       | Identity database user on the target                                                                         |
+| `KEYCLOAK_DB_NAME`           | `keycloak`                                                       | Keycloak database name on the target                                                                         |
+| `KEYCLOAK_DB_USER`           | `keycloak`                                                       | Keycloak database user on the target                                                                         |
+| `WEBMODELER_DB_NAME`         | `webmodeler`                                                     | Web Modeler database name on the target                                                                      |
+| `WEBMODELER_DB_USER`         | `webmodeler`                                                     | Web Modeler database user on the target                                                                      |
+| `BACKUP_PVC`                 | `migration-backup-pvc`                                           | PVC name for storing backup data                                                                             |
+| `BACKUP_STORAGE_SIZE`        | `50Gi`                                                           | Backup PVC size (must fit all database dumps)                                                                |
+| `MIGRATE_IDENTITY`           | `true`                                                           | Enables the Identity PostgreSQL database migration                                                           |
+| `MIGRATE_KEYCLOAK`           | `true`                                                           | Enables the Keycloak and its PostgreSQL database migration                                                   |
+| `MIGRATE_WEBMODELER`         | `true`                                                           | Enables the Web Modeler PostgreSQL database migration                                                        |
+| `MIGRATE_ELASTICSEARCH`      | `true`                                                           | Enables the Elasticsearch data migration                                                                     |
+| `ES_WARM_REINDEX`            | `false`                                                          | When `true`, pre-copies ES data during Phase 2 (no downtime), reducing Phase 3 to a ~5 minute delta sync.    |
+| `ES_INDEX_PREFIXES`          | `zeebe-* operate-* tasklist-* optimize-* connectors-* camunda-*` | Index patterns that identify your Camunda indices. Set this if your installation uses a custom index prefix. |
 
 Set any `MIGRATE_*` variable to `false` to skip a component. This is useful, for example, if the component isn't deployed or already uses an external service.
+
+### Elasticsearch index prefixes
+
+`ES_INDEX_PREFIXES` selects which Elasticsearch indices the migration lists, reindexes, and re-aliases. Indices outside these patterns are ignored without warning, so an installation using a custom index prefix migrates successfully while leaving that data behind.
+
+Prefixes come from several independent settings, not one. `orchestration.index.prefix` covers the Orchestration Cluster indices, `global.elasticsearch.prefix` or `global.opensearch.prefix` covers the legacy `zeebe-record` indices, and Optimize carries its own through `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or its OpenSearch equivalent. Work through [configure Elasticsearch prefix indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md) and add every prefix your installation actually sets, since deriving the list from one setting alone leaves the other index families behind. Keep every default pattern as well as your custom ones: a pattern that matches no index is skipped harmlessly, while a missing pattern silently drops a whole index family.
+
+```bash
+# Defaults retained, custom Zeebe and Operate prefixes added
+export ES_INDEX_PREFIXES="zeebe-* operate-* tasklist-* optimize-* connectors-* camunda-* my-prefix-zeebe-* my-prefix-operate-*"
+```
+
+Phase 2 logs the indices it matched. Check that list against `_cat/indices` on the source before starting the cutover.
+
+### Source and target database names
+
+The `*_DB_NAME` and `*_DB_USER` variables above name the databases and roles the migration writes into. They do not have to match your Bitnami installation, because the source names are different by default:
+
+| Component   | Source name in a stock Helm installation | Target name created by the migration |
+| ----------- | ---------------------------------------- | ------------------------------------ |
+| Identity    | `identity`                               | `identity`                           |
+| Keycloak    | `bitnami_keycloak` / `bn_keycloak`       | `keycloak`                           |
+| Web Modeler | `web-modeler`                            | `webmodeler`                         |
+
+The migration scripts read the real source database and role from the Bitnami StatefulSet at runtime, so you don't need to configure them. Restores run with `--no-owner --no-privileges`, which is why a differing source role is not a problem.
+
+Detection arrived with [camunda-deployment-references#3511](https://github.com/camunda/camunda-deployment-references/pull/3511). Check your copy of `env.sh` before relying on it. Older copies default `*_SOURCE_DB_NAME` and `*_SOURCE_DB_USER` to the target names, so a stock installation backs up `keycloak` and `webmodeler` rather than the `bitnami_keycloak` and `web-modeler` the source actually serves, and the migration fails. If your `env.sh` still carries those defaults, set the overrides explicitly as shown below.
+
+Override the detection only if your installation was renamed away from the chart defaults, or if you want to back up a different database:
+
+| Variable                    | Default         | Description                                     |
+| --------------------------- | --------------- | ----------------------------------------------- |
+| `IDENTITY_SOURCE_DB_NAME`   | (auto-detected) | Forces the source database name for Identity    |
+| `IDENTITY_SOURCE_DB_USER`   | (auto-detected) | Forces the source database user for Identity    |
+| `KEYCLOAK_SOURCE_DB_NAME`   | (auto-detected) | Forces the source database name for Keycloak    |
+| `KEYCLOAK_SOURCE_DB_USER`   | (auto-detected) | Forces the source database user for Keycloak    |
+| `WEBMODELER_SOURCE_DB_NAME` | (auto-detected) | Forces the source database name for Web Modeler |
+| `WEBMODELER_SOURCE_DB_USER` | (auto-detected) | Forces the source database user for Web Modeler |
 
 ### Operator-specific variables
 
@@ -151,6 +190,8 @@ Review the CloudNativePG (CNPG) cluster specifications in `operator-based/postgr
 - Resource requests and limits
 - PostgreSQL parameters (for example, `shared_buffers` and `max_connections`)
 
+CloudNativePG is the example this guide deploys, not a requirement. If you already run a different PostgreSQL operator such as StackGres, Crunchy, or Zalando, keep it: set `PG_TARGET_MODE=external` so the migration never installs CNPG, create the target databases with your own operator, and point the migration at them. The scripts treat any non-operator target the same way, whether it is a cloud-managed service or a database you run yourself, so follow [configure the migration for external targets](./bitnami-to-managed-services.md#step-2-configure-the-migration-for-external-targets) for the connection variables.
+
 <details>
 <summary>Show details: CloudNativePG manifest reference</summary>
 
@@ -167,6 +208,25 @@ The migration patches the reference ECK cluster manifest from `operator-based/el
 - Node count
 - Storage size (must be >= your current Bitnami ES PVC size)
 - Resource requests and limits
+
+#### Elasticsearch version compatibility
+
+Phase 1 compares the Elasticsearch version of your source installation against `spec.version` in the ECK manifest, and stops the migration if the two are incompatible:
+
+| Source to target                            | Result                        |
+| ------------------------------------------- | ----------------------------- |
+| Same version                                | Allowed                       |
+| Same minor, higher patch (8.18.0 to 8.18.3) | Allowed                       |
+| Same minor, lower patch (8.18.3 to 8.18.0)  | Blocked, downgrade            |
+| Newer minor, same major (8.18.0 to 8.19.20) | Allowed, logged as an upgrade |
+| Older minor (8.19.0 to 8.18.0)              | Blocked, downgrade            |
+| Different major (8.x to 7.x, or 8.x to 9.x) | Blocked                       |
+
+In short, the target must share the major version of your source and be the same version or newer. A target carrying no patch component counts as patch `0`, so `8.18.1` to `8.18` is a downgrade rather than a match.
+
+The target is allowed to be ahead of the source within the same major version, because reindex from remote reads an older source into a newer target.
+
+This matters in practice. The Camunda Helm chart pins Elasticsearch 8.18.0, while the ECK manifest in the deployment references tracks the latest 8.19 patch, so a stock installation always migrates upward. You cannot close that gap from the source side: no 8.19 image was published to the archived `bitnamilegacy` registry, where 8.18.0 is the highest 8.x tag.
 
 <details>
 <summary>Show details: Elasticsearch manifest reference</summary>
@@ -669,6 +729,21 @@ When restoring to CNPG, the `pg_restore` command uses `--no-owner --no-privilege
 kubectl exec -it <cnpg-primary-pod> -n ${NAMESPACE} -- psql -U postgres -c "\\du"
 ```
 
+### Migrated Keycloak crashes on startup with a duplicate key on `constraint_jgroups_ping`
+
+The migrated Keycloak enters `CrashLoopBackOff` and its logs show:
+
+```text
+ERROR: Failed to start server in (production) mode
+JDBC exception executing SQL [INSERT INTO JGROUPS_PING values (?, ?, ?, ?, ?)]
+duplicate key value violates unique constraint "constraint_jgroups_ping"
+  Detail: Key (address)=(uuid://...0002) already exists.
+```
+
+See [transient Keycloak cluster data is excluded automatically](./bitnami-to-managed-services.md#transient-keycloak-cluster-data-is-excluded-automatically) for why `JGROUPS_PING` causes this. The migration scripts already prevent it: the Keycloak dump excludes the `JGROUPS_PING` table data while keeping its schema, so the target starts clean and registers its own membership. The exclusion is keyed on the component being backed up, so it applies whether `KEYCLOAK_TARGET_MODE` is `operator` or `external`.
+
+If you hit this on a custom or older pipeline, exclude the table data from the dump with `pg_dump --exclude-table-data=jgroups_ping`, or run `TRUNCATE jgroups_ping` in the target database before starting Keycloak.
+
 ### Elasticsearch reindex fails
 
 The ES restore uses the `_reindex` API to pull data from the source Bitnami Elasticsearch to the target ECK cluster. Both clusters must be reachable within the same namespace. Check that the source ES is still running and accessible:
@@ -680,6 +755,24 @@ kubectl exec -it <eck-pod> -n ${NAMESPACE} -- \
 ```
 
 If the reindex fails for specific indices, check the job logs for mapping conflicts or timeout errors. You can delete the problematic indices on the target and rerun Phase 3.
+
+### Phase 1 stops on an Elasticsearch version check
+
+Phase 1 refuses to continue and prints one of the following:
+
+```text
+ES: version DOWNGRADE (source=8.19.20 → target=8.18.0)
+  Downgrades are not supported. Target must be >= source version.
+```
+
+```text
+ES: major version mismatch (source=8.19.0 → target=9.1.0)
+  Reindex-from-remote is only supported within the same major version.
+```
+
+The preflight check compares the Elasticsearch version running in your source installation against `spec.version` in `operator-based/elasticsearch/elasticsearch-cluster.yml`. Reindex from remote reads an older source into a newer target, so the target may be ahead of the source, but it cannot be behind it on any component, and the major must match.
+
+Edit `spec.version` in the ECK manifest so it keeps the major version of your source and is the same version or newer, then rerun Phase 1. The patch counts: a lower patch on the same minor is rejected as a downgrade. For the full matrix of accepted combinations, see [Elasticsearch version compatibility](#elasticsearch-version-compatibility).
 
 ### Migration status check
 

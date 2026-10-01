@@ -20,9 +20,9 @@ entity is visible or a timeout elapses:
 ```go
 // Reads are eventually consistent: a just-created entity may briefly 404.
 // Poll retries 404s until the entity is visible or the timeout elapses.
-key := openapi.MustProcessInstanceKey("2251799813685249")
+key := camunda.MustProcessInstanceKey("2251799813685249")
 
-instance, err := camunda.Poll(ctx, func(ctx context.Context) (*openapi.ProcessInstanceResult, error) {
+instance, err := camunda.Poll(ctx, func(ctx context.Context) (*camunda.ProcessInstanceResult, error) {
 	return client.GetProcessInstance(ctx, key)
 }, camunda.WithPollTimeout(10*time.Second))
 if err != nil {

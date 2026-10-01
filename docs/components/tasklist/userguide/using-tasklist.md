@@ -15,7 +15,7 @@ Once assigned to a user, the task can be completed. The user can unassign the ta
 
 Tasklist has two main pages:
 
-- [Tasks page](#tasks-overview) to manage tasks.
+- [Tasks page](#open-tasklist) to manage tasks.
 - [Processes page](./starting-processes.md) to start processes.
 
 ## Open Tasklist

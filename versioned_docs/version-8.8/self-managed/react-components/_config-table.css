@@ -128,20 +128,21 @@
   margin-top: 10px;
 }
 [data-theme="dark"] .badge--breaking-change {
-  background-color: #da1e28;
-  color: #e1d9cd;
+  background-color: #5c1a1a;
+  color: #f5b8b8;
+  border: 1px solid #c92a2a;
 }
 [data-theme="dark"] .badge--new {
-  background-color: #005d5d;
-  color: #bae6ff;
-  border: 1px solid #009d9a;
+  background-color: #16362b;
+  color: #7ee2a8;
+  border: 1px solid #2f9e64;
 }
 
 .badge--breaking-change {
   background-color: #da1e28;
   color: #fff;
   margin-top: 10px;
-  width: 105px;
+  width: 125px;
   word-wrap: break-word;
   word-break: break-word;
   white-space: normal;

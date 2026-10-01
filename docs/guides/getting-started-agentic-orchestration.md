@@ -89,7 +89,7 @@ Depending on your working environment, follow the corresponding steps below.
 1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SM** and download the blueprint files from the repository.
 
 :::note
-If you’re using Camunda 8 Run and installed it using the [starter package](./getting-started-example.md#download-the-camunda-8-starter-package), the blueprint was already downloaded as part of it.
+If you’re using Camunda 8 Run and installed it using the [starter package](./getting-started-example.md#download-the-getting-started-package), the blueprint was already downloaded as part of it.
 :::
 
 2. Open the blueprint BPMN diagram in Desktop Modeler or [upload them to Camunda Hub](/components/hub/workspace/modeler/modeling/import-diagram.md).
