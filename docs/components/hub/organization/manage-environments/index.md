@@ -65,8 +65,6 @@ Camunda Hub provides details for each environment. Select an environment on the 
 
 </Tabs>
 
-Organization owners and admins can open a workspace from the list of workspaces the environment is assigned to.
-
 ### Environment statuses
 
 The status of an environment reflects the state of its cluster.
@@ -134,6 +132,12 @@ Each environment has its own instances of the Camunda applications. Open an appl
 ## Jobs
 
 The details of an environment summarize its jobs for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).
+
+## Workspaces assigned to an environment
+
+The details of an environment list the workspaces that the environment is assigned to. Organization owners and admins can open a workspace from this list. An environment that isn't assigned to any workspace is shown as **Unassigned**.
+
+To change the assignment, see [assign environments to a workspace](./assign-environments.md).
 
 ## Add a new environment
 
