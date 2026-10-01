@@ -54,7 +54,7 @@ Select a cluster to open its details. The header shows the status of the cluster
 
 ## Update a cluster
 
-Updates to clusters happen outside Camunda Hub, and are performed via your platform tooling.
+Updates to clusters happen outside Camunda Hub:
 
 - To change how a cluster appears in Camunda Hub, for example its name, tags, [components](/self-managed/components/hub/configuration/properties.md#components), or Physical Tenants, update the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters), and perform a rolling restart.
 - To upgrade or scale the cluster and its components, use your platform tooling. See the [upgrade guides](/self-managed/upgrade/index.md).
