@@ -453,7 +453,7 @@ Camunda Hub introduces credentials. These are authentication and connection conf
   <li><span class="link-arrow">[Configure credentials in the modeling interface](/components/hub/organization/credentials/modeling-interface.md)</span></li>
 </ul>
 
-#### Environment connection in the modeler
+#### Environment connection in Modeler
 
 Connect Web Modeler to a cluster to model, test, and review against your real environment, instead of building in isolation.
 
