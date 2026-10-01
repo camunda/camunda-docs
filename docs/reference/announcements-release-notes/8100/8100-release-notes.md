@@ -25,7 +25,7 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
 :::
 
 :::note Camunda Hub replaces Web Modeler and Console
-Camunda 8.10 replaces Web Modeler and Console with Camunda Hub. These notes use Camunda Hub terms, including workspace (previously project) and project (previously process application). See the [terminology table](/reference/announcements-release-notes/8100/whats-new-in-810.md#terminology) for the full mapping.
+Camunda 8.10 replaces Web Modeler and Console with Camunda Hub. These notes use Camunda Hub terms, including workspace (previously project) and project (previously process application). See the [terminology table](/reference/announcements-release-notes/8100/whats-new-in-810.md#terminology) for the full mapping, including IDP projects and members.
 :::
 
 ### Technical Changelogs for all 8.10.x releases
@@ -685,7 +685,7 @@ Element templates support the `steps` and `presets` keys to offer several predef
 
 <p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
 
-#### Hide the Add user button
+#### Hide the Add members button
 
 <!-- https://github.com/camunda/camunda-hub/issues/25824 -->
 
