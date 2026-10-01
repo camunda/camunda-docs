@@ -158,7 +158,7 @@ A dual-region deployment stretches the runtime plane across both regions and run
 
 #### Deploy the management plane in a single region
 
-Deploy the management plane as a separate release in one region, next to the two Orchestration Clusters rather than inside them. Camunda doesn't stretch these components across regions, and they take no part in the dual-region failover procedure.
+Deploy the management plane as a separate release in one region, next to the two Orchestration Clusters rather than inside them. That region can be one of the two dual-region regions or a third region. Camunda doesn't stretch these components across regions, and they take no part in the dual-region failover procedure.
 
 The dual-region reference architecture doesn't deploy the management plane. It uses Basic authentication, disables Management Identity, and sets `optimize.enabled: false`. That's the scope of the reference configuration, not a product restriction: you can run Optimize and Web Modeler alongside a dual-region Orchestration Cluster.
 
@@ -185,7 +185,7 @@ Back up Management Identity and Web Modeler on their own schedule. If Optimize s
 
 | Component           | Backup method                                                                                                                                                                                                                                     |
 | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Management Identity | Back up its PostgreSQL database using your database's native tooling                                                                                                                                                                              |
+| Management Identity | Back up its PostgreSQL database using your database's native tooling. Also back up your OIDC provider, such as Keycloak, and keep user IDs unchanged when you restore it                                                                          |
 | Web Modeler         | Back up its PostgreSQL database. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md)                                                                                              |
 | Console             | No backup required. Console is stateless, so redeploy it alongside the rest of the management plane                                                                                                                                               |
 | Optimize            | Use the [Optimize backup management API](/self-managed/operational-guides/backup-restore/optimize-backup.md) with the same backup ID as the Orchestration Cluster [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) |

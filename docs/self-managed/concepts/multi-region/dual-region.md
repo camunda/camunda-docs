@@ -76,13 +76,13 @@ A dual-region deployment stretches the runtime plane across both regions and run
 
 ### Deploy the management plane in a single region
 
-Deploy the management plane as a separate release in one region, next to the two Orchestration Clusters rather than inside them. Camunda doesn't stretch these components across regions, and they take no part in the dual-region failover procedure.
+Deploy the management plane as a separate release in one region, next to the two Orchestration Clusters rather than inside them. That region can be one of the two dual-region regions or a third region. Camunda doesn't stretch these components across regions, and they take no part in the dual-region failover procedure.
 
 The dual-region reference architecture doesn't deploy the management plane. It uses Basic authentication, disables Management Identity, and sets `optimize.enabled: false`. That's the scope of the reference configuration, not a product restriction: you can run Optimize and Camunda Hub alongside a dual-region Orchestration Cluster.
 
 Both components authenticate through Management Identity, so a management plane requires OpenID Connect (OIDC) authentication rather than the Basic authentication the reference configuration uses. Point each component at your Management Identity instance with `global.identity.service.url`, and give Camunda Hub its own PostgreSQL database.
 
-With the 8.10 Helm chart, you can deploy the management plane as a Camunda Hub release and set `global.topology.mode: orchestration` in each regional Orchestration Cluster release. Each regional release then disables its local Management Identity and points `global.identity.service.url` at the Management Identity in the Hub release. See [Clusters](/self-managed/components/hub/configuration/properties.md#clusters).
+With the 8.10 Helm chart, you can deploy the management plane as a release with `global.topology.mode: hub` and set `global.topology.mode: orchestration` in each regional Orchestration Cluster release. Each regional release then disables its local Management Identity and points `global.identity.service.url` at the Management Identity in the Hub release. See [Clusters](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::note
 The Helm chart doesn't reject `optimize.enabled: true` in a release that has no Management Identity. That combination installs successfully and then fails to authenticate at runtime. Confirm Management Identity is reachable before you enable Optimize.
@@ -102,11 +102,11 @@ Management plane components don't replicate across regions, so losing the region
 
 Back up Management Identity and Camunda Hub on their own schedule. If Optimize shares the Elasticsearch instance of the Orchestration Cluster, back it up together with the Orchestration Cluster, using the same backup ID. Replicate all backups to a second region, so they survive the loss of the management plane region.
 
-| Component           | Backup method                                                                                                                                                                                                             |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Management Identity | Back up its PostgreSQL database using your database's native tooling                                                                                                                                                      |
-| Camunda Hub         | Back up its PostgreSQL database. Console needs no backup of its own. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md)                                  |
-| Optimize            | Use the Optimize backup API with the same backup ID as the Orchestration Cluster backup. See [back up and restore Optimize independently](/self-managed/operational-guides/backup-restore/optimize-backup-and-restore.md) |
+| Component           | Backup method                                                                                                                                                                                              |
+| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Management Identity | Back up its PostgreSQL database using your database's native tooling. Also back up your OIDC provider, such as Keycloak, and keep user IDs unchanged when you restore it                                   |
+| Camunda Hub         | Back up its PostgreSQL database. Console needs no backup of its own. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md)                   |
+| Optimize            | Use the Optimize backup API with the same backup ID as the Orchestration Cluster backup. See [Optimize backup and restore](/self-managed/operational-guides/backup-restore/optimize-backup-and-restore.md) |
 
 The management plane's recovery point and recovery time follow from your backup interval and restore procedure. The dual-region [recovery objectives](#recovery-objectives) don't cover them, because those objectives apply to the runtime plane only.
 
