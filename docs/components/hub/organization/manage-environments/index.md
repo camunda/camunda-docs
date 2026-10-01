@@ -22,18 +22,50 @@ Your role determines which environments you can see and what you can do with the
 | Editor or admin in a workspace     | View the environments assigned to the workspaces where you are an editor or workspace admin.                                  |
 | Viewer or commenter in a workspace | No access to environments.                                                                                                    |
 
-## Environment summary
+## Environment details
 
-Camunda Hub provides the following summary details for each environment:
+Camunda Hub provides details for each environment. Select an environment on the **Environments** page to open them. The details depend on your deployment:
+
+<Tabs groupId="edition" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
 
 | Detail     | Description                                                                                                                                          |
 | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name       | The [name of the environment](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure). Select it to open the details.        |
+| Name       | The [name of the environment](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure).                                       |
 | Cluster    | The cluster that hosts the environment.                                                                                                              |
 | Tags       | The tags of the cluster, for example `dev` or `prod`.                                                                                                |
 | Version    | The Camunda version of the cluster.                                                                                                                  |
+| Region     | The region where the cluster runs.                                                                                                                   |
 | Status     | The [status](#environment-statuses) of the environment.                                                                                              |
+| IDs        | The IDs of the environment.                                                                                                                          |
+| Addresses  | The **REST API** and **Swagger UI** addresses of the environment.                                                                                    |
 | Workspaces | The workspaces the environment is assigned to. Organization owners and admins see **Unassigned** if the environment isn't assigned to any workspace. |
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+| Detail             | Description                                                                                                                                          |
+| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name               | The [name of the environment](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure).                                       |
+| Cluster            | The cluster that hosts the environment.                                                                                                              |
+| Tags               | The tags of the cluster, for example `dev` or `prod`.                                                                                                |
+| Version            | The Camunda version of the cluster.                                                                                                                  |
+| Status             | The [status](#environment-statuses) of the environment.                                                                                              |
+| Physical tenant ID | The ID of the Physical Tenant, if the environment is backed by one.                                                                                  |
+| IDs                | The IDs of the environment.                                                                                                                          |
+| Workspaces         | The workspaces the environment is assigned to. Organization owners and admins see **Unassigned** if the environment isn't assigned to any workspace. |
+
+</TabItem>
+
+</Tabs>
+
+Organization owners and admins can open a workspace from the list of workspaces the environment is assigned to.
 
 ### Environment statuses
 
@@ -88,17 +120,20 @@ To find relevant environments, go to the **Environments** page of your Hub organ
 - **Search environments**: Search by the name of an environment or the name of its cluster.
 - **Status**, **Version**, and **Tag**: Show only the environments that match the selected values. Each filter lists only the values that exist in your organization.
 
-## Open an environment
+## Environment applications
 
-Select an environment to open its details. The **Overview** tab contains the following sections:
+Each environment has its own instances of the Camunda applications. Open an application from the details of the environment. An application shows **Unavailable** if Camunda Hub can't resolve its address.
 
-| Section              | Description                                                                                                                                                                                                                                                                          |
-| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Applications         | Links to open Operate, Tasklist, Admin, and Optimize (where it's configured). An application shows **Unavailable** if Camunda Hub can't resolve its address.                                                                                                                         |
-| Environment details  | The status, version, region, cluster, and IDs of the environment. If the environment is backed by a Physical Tenant, the details include the **Physical tenant ID**, which applies to Self-Managed only. In SaaS, the details include the **REST API** and **Swagger UI** addresses. |
-| Jobs (last 24 hours) | The number of jobs that were created, completed, and not completed. Select **View all job types** for details. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).                                                                                |
+| Application | Description                                                                                                                         |
+| :---------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| Operate     | Monitor and troubleshoot the process instances of the environment. See [Operate](/components/operate/operate-introduction.md).      |
+| Tasklist    | Work on the user tasks of the environment. See [Tasklist](/components/tasklist/introduction-to-tasklist.md).                        |
+| Admin       | Manage authentication, authorization, and administration for the environment. See [Admin](/components/admin/admin-introduction.md). |
+| Optimize    | Analyze and improve your processes, where Optimize is configured. See [Optimize](/components/optimize/what-is-optimize.md).         |
 
-Use the **Workspaces** tab to see the workspaces the environment is assigned to. Organization owners and admins can open a workspace from this list.
+## Jobs
+
+The details of an environment summarize its jobs for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).
 
 ## Add a new environment
 
