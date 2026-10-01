@@ -83,7 +83,7 @@ In Self-Managed, Camunda Hub monitors the health of the components of each envir
 
 ## Search and filter environments
 
-To find relevant environments, click **Environments** in the left navigation to open the **Environments** page. Use the toolbar to narrow down the list:
+To find relevant environments, go to the **Environments** page of your Hub organization. Use the toolbar to narrow down the list:
 
 - **Search environments**: Search by the name of an environment or the name of its cluster.
 - **Status**, **Version**, and **Tag**: Show only the environments that match the selected values. Each filter lists only the values that exist in your organization.
