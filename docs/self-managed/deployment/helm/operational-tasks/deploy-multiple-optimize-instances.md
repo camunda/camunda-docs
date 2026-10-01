@@ -37,7 +37,7 @@ Both releases must use the same Camunda 8.10 chart and application version. Inst
 Before you install the releases, prepare the following:
 
 - A production-ready Kubernetes cluster and a Helm CLI version supported by the Camunda 8.10 chart.
-- A single-region Camunda deployment. This pattern needs Management Identity, which a dual-region cluster runs [outside the stretched runtime plane](/self-managed/concepts/multi-region/dual-region.md#management-plane-and-runtime-plane), and the chart's automatic legacy Zeebe exporter, which the chart suppresses when `global.multiregion.regions` is 2 or more.
+- A single-region Camunda deployment. This pattern needs Management Identity, which a dual-region cluster runs [outside the stretched runtime plane](/self-managed/concepts/multi-region/dual-region.md#management-plane-and-runtime-plane). It also needs the automatic legacy Zeebe exporter. The chart turns this exporter off when the Orchestration Cluster spans more than one zone, for example when `orchestration.partitioning.numberOfZones` is 2 or more.
 - A namespace with enough capacity for the platform and a second Optimize Deployment.
 - An external Elasticsearch or OpenSearch cluster configured for the platform release. Follow the [Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md) or [OpenSearch](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) guide.
 - An external Keycloak or supported OIDC provider and a Management Identity configuration. The reference files use the [external Keycloak setup](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).

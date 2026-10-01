@@ -82,8 +82,10 @@ The dual-region reference architecture doesn't deploy the management plane. It u
 
 Both components authenticate through Management Identity, so a management plane requires OpenID Connect (OIDC) authentication rather than the Basic authentication the reference configuration uses. Point each component at your Management Identity instance with `global.identity.service.url`, and give Camunda Hub its own PostgreSQL database.
 
+With the 8.10 Helm chart, you can deploy the management plane as a Camunda Hub release and set `global.topology.mode: orchestration` in each regional Orchestration Cluster release. Each regional release then disables its local Management Identity and points `global.identity.service.url` at the Management Identity in the Hub release. See [Clusters](/self-managed/components/hub/configuration/properties.md#clusters).
+
 :::note
-The Helm chart doesn't reject `optimize.enabled: true` when Management Identity is disabled. That combination installs successfully and then fails to authenticate at runtime. Confirm Management Identity is reachable before you enable Optimize.
+The Helm chart doesn't reject `optimize.enabled: true` in a release that has no Management Identity. That combination installs successfully and then fails to authenticate at runtime. Confirm Management Identity is reachable before you enable Optimize.
 :::
 
 ### Region loss behavior for management plane components
@@ -98,7 +100,7 @@ Management plane components don't replicate across regions, so losing the region
 
 ### Protect the management plane with backup and restore
 
-Back up each management plane component on its own schedule, and replicate those backups to a region that survives the loss of the region the management plane runs in.
+Back up each management plane component on its own schedule. Replicate those backups to a second region, so they survive the loss of the management plane region.
 
 | Component           | Backup method                                                                                                                                                 |
 | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
