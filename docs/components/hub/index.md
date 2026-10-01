@@ -86,7 +86,7 @@ description: "Create and manage workspaces within your organization.",
 link: "./organization/manage-environments",
 title: "Manage Environments",
 image: ServerIcon,
-description: "See your Environments, check their status, and assign them to workspaces.",
+description: "See your deployment environments and assign them to workspaces.",
 },
 {
 link: "./organization/manage-clusters/manage-cluster",
