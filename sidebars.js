@@ -759,6 +759,7 @@ module.exports = {
               },
               items: [
                 "components/hub/organization/manage-clusters/self-managed-clusters",
+                "components/hub/organization/manage-clusters/saas-clusters",
                 "components/hub/organization/manage-clusters/cluster-connectors",
               ],
             },

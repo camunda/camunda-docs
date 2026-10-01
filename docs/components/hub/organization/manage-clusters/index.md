@@ -15,10 +15,10 @@ image: DocsIcon,
 description: "View the clusters that Camunda Hub shows, and learn how to make a cluster you provision visible.",
 },
 {
-link: "../../../saas/clusters/create-cluster",
+link: "./saas-clusters",
 title: "Clusters in SaaS",
 image: DocsIcon,
-description: "Create, rename, resume, update, resize, and delete your clusters, and configure their settings.",
+description: "Create and manage the SaaS clusters that host your deployment environments.",
 },
 {
 link: "./manage-connectors",

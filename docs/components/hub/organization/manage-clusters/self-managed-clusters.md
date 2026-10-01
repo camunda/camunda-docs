@@ -66,3 +66,4 @@ If you remove a cluster from the configuration but a workspace still uses its En
 - Learn how to [manage Environments](../manage-environments/index.md).
 - Review the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
 - Learn how to [monitor connectors](./manage-connectors.md).
+- Using Camunda 8 SaaS? See [clusters in SaaS](./saas-clusters.md).
