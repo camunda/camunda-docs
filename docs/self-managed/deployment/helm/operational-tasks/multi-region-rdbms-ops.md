@@ -206,11 +206,11 @@ terraform apply -var-file=terraform-cluster.tfvars -var active_region_count=3
 
 ### 2. Update the environment
 
-Re-source the environment so `CAMUNDA_ACTIVE_REGIONS` reflects the new count, and register a kubectl context for the new cluster:
+Re-source the environment so `CAMUNDA_ACTIVE_REGIONS`, the cluster size, and the replication factor reflect the new count, and register a kubectl context for the new cluster:
 
 ```bash
 cd ../../procedure
-unset CAMUNDA_ACTIVE_REGIONS
+unset CAMUNDA_ACTIVE_REGIONS CAMUNDA_CLUSTER_SIZE CAMUNDA_REPLICATION_FACTOR
 . ./export-terraform-outputs.sh
 . ./export_environment_prerequisites.sh
 ./register-kubecontexts.sh
