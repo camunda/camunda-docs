@@ -1001,19 +1001,6 @@ The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools
 Changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
 
-<!-- <div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Camunda Hub change 1
-
-Camunda Hub change 1 description.
-
-</div>
-</div> -->
-
 ## Optimize
 
 <div className="release-announcement-row">
