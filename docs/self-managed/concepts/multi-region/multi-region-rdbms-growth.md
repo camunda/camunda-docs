@@ -25,7 +25,7 @@ A zone in the zone list receives partition replicas even if its brokers do not r
 ## Add a zone to the running cluster
 
 1. Start the brokers of the new zone.
-1. Add the zone with the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+1. Add the zone with the [Add or re-add a zone](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#add-or-re-add-a-zone) request.
 1. Wait for the change to report `COMPLETED`.
 
 The engine places the zone's replicas and raises the replication factor in one change. No broker is renumbered, and the regions already running are not restarted.
