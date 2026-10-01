@@ -12,6 +12,10 @@ import StartInstanceImg from './img/process-applications/start-instance.png'
 
 Desktop Modeler recognizes [process applications](../../concepts/projects.md) you build and offers you advanced editor intelligence, deployment, and execution features within the context of such an application. To identify the boundaries of a process application, Desktop Modeler searches for a `.process-application` file in the root of your project.
 
+:::note
+In Camunda Hub 8.10 and later, the equivalent of a process application is called a [project](../../concepts/projects.md). See [using Camunda Hub and Desktop Modeler together](../using-hub-and-desktop-modeler-together.md#projects-and-process-applications) to learn how they compare.
+:::
+
 In professional software development, a typical process application contains resources such as BPMN, DMN, and Form files. These live alongside [job workers](/components/concepts/job-workers.md), implementing process logic, additional application code, and tests. How exactly your project is structured may vary depending on the implementation language, libraries, and frameworks you use.
 
 ## Example: Consumer loan application
@@ -88,6 +92,8 @@ Any file within a process application can be linked as a resource. Linking a res
 ### Deploying a process application
 
 Process applications can be deployed using the [deploy feature](./deploy-diagram.md). When deploying a process application, all files that are part of the process application will be deployed.
+
+Desktop Modeler deploys to the cluster you [connect to](./connect-to-camunda-8.md). It doesn't use [Environments](../../concepts/environments.md). To deploy to an Environment, use a project in Camunda Hub.
 
 <p><img src={DeployImg} alt="Deploying a process application" /></p>
 

@@ -58,7 +58,7 @@ Learn more about [Environments](./environments.md) and [clusters](./clusters.md)
 
 ## Workspaces in Desktop Modeler
 
-Desktop Modeler doesn't have workspaces. It works with local files and [process applications](./projects.md#process-applications-in-desktop-modeler).
+Desktop Modeler doesn't have workspaces. It works with local files and [projects](./projects.md#process-applications-in-desktop-modeler).
 
 ## Next steps
 
