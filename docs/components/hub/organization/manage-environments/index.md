@@ -41,8 +41,6 @@ Use the toolbar to find an environment:
 - **Search environments**: Search by the name of an environment or the name of its cluster.
 - **Status**, **Version**, and **Tag**: Show only the environments that match the selected values. Each filter lists only the values that exist in your organization.
 
-In Self-Managed, use the **Layout** toggle to switch between **Grid** and **By cluster**. **By cluster** groups the environments under the cluster that hosts them.
-
 ### Environment statuses
 
 The status of an environment reflects the state of its cluster:
