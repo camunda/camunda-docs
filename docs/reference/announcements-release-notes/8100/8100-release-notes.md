@@ -10,7 +10,7 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 
 <PageDescription />
 
@@ -1134,6 +1134,18 @@ Operate now shows what an active process instance is waiting for.
 - Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
+
+### Opt-in analytics exporter
+
+<!-- https://github.com/camunda/product-hub/issues/3247 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8.10 adds an opt-in analytics exporter for Self-Managed clusters. It is disabled by default, so you decide whether to enable it. When enabled, it shares product usage data with Camunda to help us prioritize improvements.
+
+<!-- TODO: Replace this link with the docs page once https://github.com/camunda/camunda-docs/pull/9697 is merged. -->
+
+<p class="link-arrow">[Analytics exporter](https://github.com/camunda/camunda/blob/main/zeebe/exporters/analytics-exporter/README.md)</p>
 
 ### Physical Tenant identity support
 
