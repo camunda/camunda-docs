@@ -102,7 +102,8 @@ dispatch(
    pw,
    jobData,
    handlerModule,
-callbacks): Promise<void>;
+   callbacks
+): Promise<void>;
 ```
 
 Dispatch a serialized job to a specific idle worker.

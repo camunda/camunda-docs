@@ -20,6 +20,7 @@ use camunda_orchestration_sdk::models::AgentInstanceUpdateRequest;
 use camunda_orchestration_sdk::models::ElementInstanceKey;
 use camunda_orchestration_sdk::models::HistoryItemId;
 use camunda_orchestration_sdk::models::JobKey;
+use camunda_orchestration_sdk::models::JobLeaseToken;
 use camunda_orchestration_sdk::CamundaClient;
 
 // region CreateAgentInstance
@@ -35,7 +36,7 @@ async fn create_agent_instance() -> Result<(), Box<dyn std::error::Error>> {
                     "my-element-instance",
                 )),
                 job_key: Box::new(JobKey::assume_exists("my-job")),
-                job_lease: "my-job-lease".to_string(),
+                job_lease_token: JobLeaseToken::assume_exists("my-job-lease"),
                 history: vec![AgentInstanceHistoryItem {
                     history_item_id: HistoryItemId::assume_exists("configuration-1"),
                     loop_iteration: 0,
@@ -86,7 +87,7 @@ async fn search_agent_instance_history(
         })
         .await?;
     for item in result.items {
-        println!("{}", item.job_lease);
+        println!("{}", item.job_lease_token);
     }
 
     Ok(())
@@ -124,7 +125,7 @@ async fn update_agent_instance(
                     "my-element-instance",
                 )),
                 job_key: Box::new(JobKey::assume_exists("my-job")),
-                job_lease: "my-job-lease".to_string(),
+                job_lease_token: JobLeaseToken::assume_exists("my-job-lease"),
                 ..Default::default()
             },
         })

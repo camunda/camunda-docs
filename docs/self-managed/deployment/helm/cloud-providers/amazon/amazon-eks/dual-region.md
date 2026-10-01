@@ -35,7 +35,7 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
 - **AWS CLI** – Command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 - **Terraform** – IaC tool used to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
 - **kubectl** – CLI for interacting with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-- **Helm** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
+- **Helm CLI v4 (recommended; see [supported versions](/reference/supported-environments.md#clients))** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
 - **AWS service quotas** – Verify your quotas before deployment:
   - At least 6 Elastic IPs (three per availability zone, per region).
   - Adequate quotas for **VPCs, EC2 instances, and storage** in both regions.
@@ -627,8 +627,6 @@ This forms the base layer that contains the basic required setup, which applies 
 
 Key changes of the dual-region setup:
 
-- `global.multiregion.regions: 2`
-  - Indicates the use for two regions
 - `global.security.authentication.method: basic`
   - Uses Basic authentication for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.
 - `global.identity.auth.enabled: false`
@@ -664,11 +662,11 @@ Key changes of the dual-region setup:
 
 ##### region0/camunda-values.yml
 
-This overlay contains the multi-region identification for the cluster in region 0.
+This overlay contains the multi-region identification for the cluster in region 0. It sets `orchestration.partitioning.numberOfZones: 2` and `orchestration.partitioning.zoneIndex: 0`. These two keys replace the deprecated `global.multiregion.regions` and `global.multiregion.regionId`.
 
 ##### region1/camunda-values.yml
 
-This overlay contains the multi-region identification for the cluster in region 1.
+This overlay contains the multi-region identification for the cluster in region 1. It sets `orchestration.partitioning.numberOfZones: 2` and `orchestration.partitioning.zoneIndex: 1`. These two keys replace the deprecated `global.multiregion.regions` and `global.multiregion.regionId`.
 
 ### Configure Zeebe environment variables
 
