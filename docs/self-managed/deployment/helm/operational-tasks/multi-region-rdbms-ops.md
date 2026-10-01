@@ -39,7 +39,7 @@ With three or more zones and no zone holding half the replicas or more, none of 
 The [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. The diagram above counts three operator actions here: promote the writer if needed, remove the lost zone, and redeploy the region at failback. The runbook below adds confirmations around them, for five steps in total.
 
 :::warning Use this runbook only for Multi-Region RDBMS
-This runbook applies only to a zone-aware cluster with RDBMS secondary storage. Its region-loss procedures assume three or more zones. A cluster that starts on two zones uses only [Add a region](#add-a-region) until it runs three. Don't run the [dual-region procedure](./dual-region-ops.md) on it: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here and can lose data. For a two-region cluster with Elasticsearch, use the dual-region procedure instead.
+This runbook applies only to a zone-aware cluster with RDBMS secondary storage. Its region-loss procedures assume three or more zones. A cluster that starts on two zones uses only [Add a region](#add-a-region) until it runs three. If it loses a zone before then, processing stops. Bring the lost zone back before you add the third region, because the add-zone change needs a quorum. Don't run the [dual-region procedure](./dual-region-ops.md) on it: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here and can lose data. For a two-region cluster with Elasticsearch, use the dual-region procedure instead.
 :::
 
 ## Terminology

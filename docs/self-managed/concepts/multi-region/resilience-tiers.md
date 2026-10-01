@@ -38,7 +38,7 @@ What each strategy asks of you:
 
 - **Cold Recovery** is a manual procedure built on the [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) guide. There is no reference architecture. Validate the procedure in your own environment.
 - **Dual-Region** includes a reference architecture and an operational runbook, with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets. A region loss stops processing until an operator runs the failover.
-- **Multi-Region RDBMS** keeps processing through a region loss with no Zeebe operator step. The database handles secondary-storage replication. In exchange, it costs a third region of capacity. Optimize is unavailable, because Optimize requires Elasticsearch or OpenSearch instead of a relational secondary storage.
+- **Multi-Region RDBMS**, with three or more regions, keeps processing through a region loss with no Zeebe operator step. The database handles secondary-storage replication. In exchange, it costs a third region of capacity. Optimize is unavailable, because Optimize requires Elasticsearch or OpenSearch instead of a relational secondary storage.
 
 ## Comparison of multi-region resilience
 
@@ -62,7 +62,7 @@ Cold Recovery RTO and RPO targets are bounded by data volume, backup frequency, 
 
 Dual-Region RTO is based on internal operational tests. Actual times may vary depending on your environment, level of automation and the specific manual steps performed during recovery. See [Dual-Region](./dual-region.md#recovery-objectives) for a phase-by-phase breakdown.
 
-Multi-Region RDBMS removes the recovery procedure, not the recovery window. A published RTO figure would not be meaningful here. Most of the elapsed time comes from your client timeouts, your traffic routing, and your database failover, not from the architecture. Measure the actual recovery window, including client reconnection, with a real failover test in your environment.
+With three or more regions, Multi-Region RDBMS removes the recovery procedure, not the recovery window. A published RTO figure would not be meaningful here. Most of the elapsed time comes from your client timeouts, your traffic routing, and your database failover, not from the architecture. Measure the actual recovery window, including client reconnection, with a real failover test in your environment.
 
 Multi-Region RDBMS reaches RPO 0 for engine state, and for secondary storage only under the replication conditions you configure. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
 :::
