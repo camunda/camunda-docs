@@ -34,7 +34,7 @@ Camunda Hub determines the status of a cluster from the readiness addresses of i
 Camunda Hub doesn't create clusters. To make a cluster you provision visible in Camunda Hub:
 
 1. Provision the cluster with your platform tooling, as described in the [Self-Managed installation guide](/self-managed/setup/overview.md).
-1. Add the cluster to the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters). Camunda Hub reads this configuration only at startup, so perform a rolling restart of Camunda Hub to pick up the change.
+1. Add the cluster to the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters). Camunda Hub reads this configuration at startup, so perform a rolling restart of Camunda Hub to pick up the change.
 
 Click **Register new cluster** on the **Clusters** page to see these steps in Camunda Hub. For the configuration options, see the [clusters](/self-managed/components/hub/configuration/properties.md#clusters) and [physical tenants](/self-managed/components/hub/configuration/properties.md#physical-tenants) sections of the Camunda Hub configuration.
 
