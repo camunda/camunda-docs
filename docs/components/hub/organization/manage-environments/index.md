@@ -25,14 +25,14 @@ To view the Environments in your organization, click **Environments** in the lef
 
 Each Environment appears as a card with the following details:
 
-| Detail     | Description                                                                                                                 |
-| :--------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| Name       | The [name of the Environment](/components/concepts/environments.md#environment-names). Select it to open the details.       |
-| Cluster    | The cluster that hosts the Environment. Camunda Hub shows the cluster only when its name differs from the Environment name. |
-| Tags       | The tags of the cluster, for example `dev` or `prod`.                                                                       |
-| Version    | The Camunda version of the cluster.                                                                                         |
-| Status     | The [status](#environment-statuses) of the Environment.                                                                     |
-| Workspaces | The workspaces the Environment is assigned to. Organization owners and admins see **Unassigned** if there are none.         |
+| Detail     | Description                                                                                                                                   |
+| :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name       | The [name of the Environment](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure). Select it to open the details. |
+| Cluster    | The cluster that hosts the Environment. Camunda Hub shows the cluster only when its name differs from the Environment name.                   |
+| Tags       | The tags of the cluster, for example `dev` or `prod`.                                                                                         |
+| Version    | The Camunda version of the cluster.                                                                                                           |
+| Status     | The [status](#environment-statuses) of the Environment.                                                                                       |
+| Workspaces | The workspaces the Environment is assigned to. Organization owners and admins see **Unassigned** if there are none.                           |
 
 ### Search and filter
 

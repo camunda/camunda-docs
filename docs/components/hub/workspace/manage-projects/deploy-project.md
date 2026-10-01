@@ -14,7 +14,7 @@ You deploy a project to an [Environment](/components/concepts/environments.md), 
 
 | Detail  | Description                                                                                                           |
 | :------ | :-------------------------------------------------------------------------------------------------------------------- |
-| Name    | The [name of the Environment](/components/concepts/environments.md#environment-names).                                |
+| Name    | The [name of the Environment](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure).        |
 | Cluster | The cluster that hosts the Environment. Camunda Hub shows the cluster only if it's needed to tell Environments apart. |
 | Version | The Camunda version of the cluster, for example **Camunda 8.9**.                                                      |
 | Tags    | The tags of the cluster, for example `dev`, `test`, `stage`, or `prod`.                                               |

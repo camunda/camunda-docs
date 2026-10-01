@@ -209,8 +209,8 @@ module.exports = {
         },
         "components/concepts/workspaces",
         "components/concepts/projects",
-        "components/concepts/environments",
         "components/concepts/clusters",
+        "components/concepts/environments",
         "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {
