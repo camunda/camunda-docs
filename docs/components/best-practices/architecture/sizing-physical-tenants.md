@@ -7,7 +7,7 @@ description: "Size broker memory, secondary storage, and noisy-neighbor protecti
 
 <span class="badge badge--platform">Self-Managed only</span>
 
-This page covers what changes in cluster sizing when you run multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md) on one Orchestration Cluster in Camunda 8.10.0. For the baseline configuration, partitions, disk, RocksDB, and Elasticsearch/OpenSearch, start from [Self-Managed resource planning](sizing-self-managed.md).
+This page covers what changes in cluster sizing when you run multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md) on one Orchestration Cluster. For the baseline configuration, partitions, disk, RocksDB, and Elasticsearch/OpenSearch, start from [Self-Managed resource planning](sizing-self-managed.md).
 
 Benchmark figures on this page come from internal Camunda tests. Each is listed with its test configuration and is not a capacity guarantee for your environment.
 
@@ -33,7 +33,7 @@ Size native RocksDB memory and Java heap separately. RocksDB memory grows with p
 
 ### Size RocksDB memory
 
-Each partition replica on a broker, leader or follower, needs at least 32 MiB of RocksDB memory, and all tenants' replicas share one pool. The broker checks this at startup for every allocation strategy. With the default `FRACTION` strategy:
+Each partition replica on a broker, leader or follower, needs at least 32 MiB of RocksDB memory, and by default all tenants' replicas share one pool. The broker checks this at startup for every allocation strategy. With the default `FRACTION` strategy:
 
 ```text
 broker memory × memory-fraction  ≥  partition replicas on the broker × 32 MiB
@@ -49,23 +49,15 @@ Expected the allocated memory for RocksDB per partition to be at least 33554432 
 
 For example, [baseline](sizing-self-managed.md#baseline-resource-configuration) brokers with 2 GiB and the default fraction of `0.1` have about 205 MiB, enough for six replicas. With three brokers and three partitions at replication factor three per tenant, each tenant adds three replicas per broker, so a third tenant stops the brokers from starting.
 
-For the same topology, the minimums are:
-
-| Tenants | Replicas per broker | Minimum RocksDB memory | Minimum `memory-fraction` at 2 GiB |
-| :------ | :------------------ | :--------------------- | :--------------------------------- |
-| 1       | 3                   | 96 MiB                 | 0.05                               |
-| 5       | 15                  | 480 MiB                | 0.23                               |
-| 10      | 30                  | 960 MiB                | 0.47                               |
-
-To meet the minimum, raise broker memory, raise `camunda.data.primary-storage.rocksdb.memory-fraction`, add brokers, or plan fewer partitions for low-load tenants when you create them. Partitions can be scaled up but not down. A higher fraction leaves less memory for the heap and page cache, so raising broker memory is usually safer. See [memory](sizing-self-managed.md#memory) for how these budgets fit together, and [RocksDB](sizing-self-managed.md#rocksdb) for disk usage, which is a separate budget.
+To meet the minimum, raise broker memory, raise `camunda.data.primary-storage.rocksdb.memory-fraction`, change the rocksdb allocation strategy or add brokers. A higher fraction leaves less memory for the heap and page cache, so raising broker memory is usually safer. See [memory](sizing-self-managed.md#memory) for how these budgets fit together, and [RocksDB](sizing-self-managed.md#rocksdb) for disk usage, which is a separate budget.
 
 ### Size Java heap
 
 With RDBMS secondary storage, every broker creates a connection pool and database mapping metadata for every tenant at startup. Heap usage grows with the tenant count, independent of load and broker count. If the heap is too small, brokers run out of memory during startup, so validate heap at your target tenant count.
 
-| Observation                                                                                                         | Test configuration                                                                                                                                                                                            |
-| :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| About 4.4 MB of heap per tenant, about 700 MB for 160 tenants. Brokers ran out of heap at startup, before any load. | Pre-release 8.10 build, September 2026. 160 tenants plus the default tenant, one partition each, replication factor three. 20 brokers with 6 vCPU, 8 GiB memory, and 2 GiB heap. PostgreSQL behind PgBouncer. |
+| Observation                                                                                                         | Test configuration                                                                                                                                                    |
+| :------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| About 4.4 MB of heap per tenant, about 700 MB for 160 tenants. Brokers ran out of heap at startup, before any load. | 160 tenants plus the default tenant, one partition each, replication factor three. 20 brokers with 6 vCPU, 8 GiB memory, and 2 GiB heap. PostgreSQL behind PgBouncer. |
 
 This figure covers only the retained database mapping metadata, so treat it as a lower bound. The per-tenant heap cost for Elasticsearch or OpenSearch has not been measured.
 
@@ -112,10 +104,10 @@ Each tenant that shares an Elasticsearch or OpenSearch cluster has its own index
 
 ### Benchmark observations for secondary storage
 
-| Observation                                                                                                                                                                                                                                                           | Test configuration                                                                                                                                                                                                          |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The [realistic baseline workload](sizing-self-managed.md#baseline-performance), split across five tenants, met the baseline targets with data availability p99 of 2.5 s. Broker CPU rose 24%, CPU throttling about eight times. Elasticsearch held about 290 indices. | 8.10.0-rc2, September 2026. Five tenants, three partitions each, replication factor three. Three brokers with 3 vCPU and 2 GiB, `memory-fraction` `0.3`. Three Elasticsearch nodes with 7 vCPU and 8 GiB. 40-minute window. |
-| With 10 tenants at maximum load, one shared PostgreSQL instance reached 69% of the throughput of 10 single-tenant clusters, unevenly spread across tenants. Two instances with five tenants each reached 88%, evenly spread.                                          | Pre-release 8.10 build, September 2026. 10 tenants, three partitions each, replication factor three, 30 brokers. PostgreSQL behind PgBouncer. Optimize disabled.                                                            |
+| Observation                                                                                                                                                                                                                                                           | Test configuration                                                                                                                                                                              |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The [realistic baseline workload](sizing-self-managed.md#baseline-performance), split across five tenants, met the baseline targets with data availability p99 of 2.5 s. Broker CPU rose 24%, CPU throttling about eight times. Elasticsearch held about 290 indices. | Five tenants, three partitions each, replication factor three. Three brokers with 3 vCPU and 2 GiB, `memory-fraction` `0.3`. Three Elasticsearch nodes with 7 vCPU and 8 GiB. 40-minute window. |
+| With 10 tenants at maximum load, one shared PostgreSQL instance reached 69% of the throughput of 10 single-tenant clusters, unevenly spread across tenants. Two instances with five tenants each reached 88%, evenly spread.                                          | 10 tenants, three partitions each, replication factor three, 30 brokers. PostgreSQL behind PgBouncer. Optimize disabled.                                                                        |
 
 ## Plan for noisy neighbors
 
@@ -123,7 +115,7 @@ A busy tenant mainly costs tenants that share its brokers and secondary storage 
 
 ### Observed effects
 
-The test used a pre-release 8.10 build in September 2026, with eight tenants on three brokers (6 vCPU, 8 GiB) and PostgreSQL behind PgBouncer. Quiet tenants ran a typical workload at 6 PI/s and kept that throughput while one tenant's load increased:
+The test used a pre-release 8.10 build, with eight tenants on three brokers (6 vCPU, 8 GiB) and PostgreSQL behind PgBouncer. Quiet tenants ran a typical workload at 6 PI/s and kept that throughput while one tenant's load increased:
 
 | Noisy tenant offered load | Quiet tenants' request-response p99 |
 | :------------------------ | :---------------------------------- |
@@ -140,7 +132,7 @@ Raising the noisy tenant from three to 12 partitions at 6 PI/s barely changed qu
 
 Use [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) to limit what a tenant can write:
 
-- **Static configuration**: Override `camunda.processing.flow-control.write.*` under `camunda.physical-tenants.<tenant-id>`. The legacy `zeebe.broker.flowControl.write.*` properties apply only to the default tenant.
+- **Static configuration**: Override `camunda.processing.flow-control.write.*` under `camunda.physical-tenants.<tenant-id>`.
 - **Runtime change**: Call `POST actuator/flowControl?physicalTenant=<tenant-id>`. Without the parameter, the change applies to every tenant. Runtime changes revert on broker restart.
 
 Flow control is not a direct per-tenant cap:
@@ -149,16 +141,15 @@ Flow control is not a direct per-tenant cap:
 - Throttling reacts to each partition's export backlog. In the 10-tenant PostgreSQL test above, one slow shared database throttled tenants unevenly.
 - Limits count records, not bytes or CPU time. Large payloads or expensive processing can use more shared resources at the same record rate.
 
-Runaway loops and large multi-instance elements are bounded by write limits. Expressions are cancelled after [`camunda.expression.timeout`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#expression) (default `5s`) and raise an incident.
+Runaway loops and large multi-instance elements are bounded by write limits. Expressions are canceled after [`camunda.expression.timeout`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#expression) (default `5s`) and raise an incident.
 
 ## Known limitations
 
 These limitations apply to Camunda 8.10.0:
 
-- **Per-tenant RDBMS infrastructure on every broker**: The tenant count is bounded by single-broker heap and database connections. Adding brokers does not add tenant capacity and increases total connections. See [camunda/camunda#61935](https://github.com/camunda/camunda/issues/61935).
-- **Tested range**: Sizing tests cover tens of tenants per cluster. Load test your own target if you plan for more.
-- **No per-tenant performance guarantee**: If one tenant needs high throughput or strict latency on its own, validate it with dedicated load tests or use a separate cluster.
-- **Shared RocksDB memory**: You cannot reserve RocksDB memory for a single tenant.
+- **Per-tenant RDBMS infrastructure on every broker**: The physical tenant count is bounded by single-broker heap and database connections. Adding brokers does not add tenant capacity and increases total connections. See [camunda/camunda#61935](https://github.com/camunda/camunda/issues/61935).
+- **Tested range**: Sizing tests cover tens of physical tenants per cluster. Load test your own target if you plan for more.
+- **No per-tenant performance guarantee**: If one physical tenant needs high throughput or strict latency on its own, validate it with dedicated load tests or use a separate cluster.
 - **Single secondary storage type**: All tenants must use the same type. See [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md#known-limitations).
 
 ## Validate your configuration
