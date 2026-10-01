@@ -44,7 +44,7 @@ Camunda Hub's organization view shows the workspaces you belong to, organized in
 
 **Organization → Workspace → Project → Files and folders**
 
-You can manage organizational resources, including clusters, environments, and workspaces, and govern the use of reusable assets.
+You can manage organizational resources, including clusters, deployment environments, and workspaces, and govern the use of reusable assets.
 
 <p class="link-arrow">[Manage organizational resources](/components/hub/organization/index.md)</p>
 
@@ -54,25 +54,25 @@ You can manage organizational resources, including clusters, environments, and w
 <div class="double-column-container" style={{ paddingTop: '50px' }}>
 <div class="double-column-left" style={{ flex: '2', paddingRight: '40px', marginTop: '-2.2rem' }}>
 
-### Workspaces and environments
+### Workspaces and deployment environments
 
-An environment is the place where a team deploys and runs its processes, for example a development, staging, or production environment. Each environment is hosted on a cluster, which remains the infrastructure that your administrators manage.
+A deployment environment is the place where a team deploys and runs its processes, for example a development, staging, or production environment. Each deployment environment is hosted on a cluster, which remains the infrastructure that your administrators manage.
 
-Organization admins assign environments to workspaces. Projects in a workspace can deploy to all the environments assigned to it, so you can deploy and promote your work with clear access controls.
+Organization admins assign deployment environments to workspaces. Projects in a workspace can deploy to all the deployment environments assigned to it, so you can deploy and promote your work with clear access controls.
 
 <p class="link-arrow">[Build within a workspace](/components/hub/workspace/index.md)</p>
 
 </div>
 <div class="double-column-right" style={{ flex: '1.8' }}>
 
-<img src={HubWorkspacesImg} alt="An organization sets up a workspace and assigns environments to it. The dev, stage, and prod environments are each hosted on their own cluster" title="Environments" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={HubWorkspacesImg} alt="An organization sets up a workspace and assigns deployment environments to it. The dev, stage, and prod deployment environments are each hosted on their own cluster" title="Deployment environments" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
 
 ## Manage organizational resources
 
-Manage organizational resources, including clusters, environments, and workspaces, and govern the use of reusable assets:
+Manage organizational resources, including clusters, deployment environments, and workspaces, and govern the use of reusable assets:
 
 <AoGrid ao={[
 {
@@ -82,16 +82,16 @@ image: ModelerIcon,
 description: "Create and manage workspaces within your organization.",
 },
 {
+link: "./organization/manage-clusters/manage-cluster",
+title: "Manage clusters",
+image: BPMNIcon,
+description: "Create, monitor, and maintain the clusters that host your deployment environments.",
+},
+{
 link: "./organization/manage-environments",
 title: "Manage environments",
 image: ServerIcon,
 description: "See your deployment environments and assign them to workspaces.",
-},
-{
-link: "./organization/manage-clusters/manage-cluster",
-title: "Manage clusters",
-image: BPMNIcon,
-description: "Create, monitor, and maintain the clusters that host your environments.",
 },
 {
 link: "./organization/credentials",
