@@ -82,7 +82,7 @@ Whether the lost zone has to be removed depends on the replicas it held, not on 
 - **Under a layout that satisfies this**, such as the default `2-2-1` across three zones, the majority holds. Processing continues whether or not you remove the zone.
 - **When one zone holds half the replicas or more**, losing that zone costs the quorum. Processing only resumes once the zone is removed from the partition distribution.
 
-<RemoveZoneImg role="img" title="Two layouts lose their first zone. In 2-2-1, losing london leaves 3 of 5 replicas: the majority holds and removing the zone is optional. In 4-1-1, losing zone A leaves 2 of 6 replicas: there is no majority, and processing resumes only after you remove the zone. Removal is recommended in both cases once the zone is confirmed down, because a removed zone has to be added back and its brokers rebuild." />
+<RemoveZoneImg role="img" title="Two layouts lose their first zone. In 2-2-1, losing london leaves 3 of 5 replicas: the majority holds and removing the zone is optional. In 4-1-1, losing zone A leaves 2 of 6 replicas: there is no majority, and processing resumes only after you remove the zone. In both cases, remove the zone once you confirm it is down. You must add a removed zone back, and its brokers rebuild." />
 
 An evenly split two-zone cluster always loses its quorum with a zone. That is the [Dual-Region](./dual-region.md) situation, not a normal layout of this architecture. An uneven two-zone layout keeps its quorum only when it loses the smaller zone.
 

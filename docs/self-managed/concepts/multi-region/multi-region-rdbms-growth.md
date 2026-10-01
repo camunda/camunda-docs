@@ -14,7 +14,7 @@ This page describes how a [Multi-Region RDBMS](./multi-region-rdbms.md) cluster 
 
 You can add a zone to a running cluster without renumbering any broker, because zone awareness names zones instead of numbering brokers.
 
-<AddZoneImg role="img" title="Three stages of the same cluster. First, two zones, london and paris, hold two replicas each, for a replication factor of four. The zurich slot exists but is not in the zone list. Losing either zone leaves two of four replicas, so processing stops. Second, the operator deploys the zurich brokers, adds the zone with POST /actuator/cluster/zones/zurich, one replica and priority 800, and waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues. No broker is renumbered and the running regions are not restarted." />
+<AddZoneImg role="img" title="Three stages of the same cluster. First, two zones, london and paris, hold two replicas each, for a replication factor of four. The zurich slot exists but is not in the zone list. Losing either zone leaves two of four replicas, so processing stops. Second, the operator deploys the zurich brokers, adds the zone with POST /actuator/cluster/zones/zurich, one replica and priority 800, and waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues. The engine renumbers no broker and restarts no running region." />
 
 ## Declare only the zones you deploy
 
