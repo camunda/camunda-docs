@@ -1,8 +1,11 @@
 ---
 id: manage-environments
 title: Manage environments
-description: "View the environments in your organization, monitor their status, open their applications, and add new environments."
+description: "View the environments in your organization, monitor their status, open their applications, and learn how new environments are added."
 ---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Environments are the places where your teams deploy and run their processes. Use the **Environments** page in Camunda Hub to view every environment in your organization, monitor its status, and open its applications.
 
@@ -14,7 +17,7 @@ What you see on the **Environments** page depends on your role:
 
 | Role                               | What you can do                                                                                                               |
 | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| Organization owner or admin        | View all environments, add an environment, assign environments to workspaces, and resume a paused environment (SaaS only).    |
+| Organization owner or admin        | View all environments, assign environments to workspaces, and resume a paused environment (SaaS only).                        |
 | DevOps                             | View all environments, open the cluster pages, and resume a paused environment (SaaS only). DevOps can't assign environments. |
 | Editor or admin in a workspace     | View the environments assigned to the workspaces where you are an editor or workspace admin.                                  |
 | Viewer or commenter in a workspace | No access to environments.                                                                                                    |
@@ -79,10 +82,35 @@ Use the **Workspaces** tab to see the workspaces the environment is assigned to.
 
 ## Add a new environment
 
-Camunda Hub adds environments automatically for each cluster. To add an environment, click **Add new environment** on the **Environments** page. Only organization owners and admins see this button.
+Camunda Hub creates an environment for each cluster, so you can't add an environment directly on the **Environments** page. Instead, you add a cluster or, in Self-Managed, a Physical Tenant. How a new environment appears depends on your deployment:
 
-- **SaaS**: [Create a cluster](../../../saas/clusters/create-cluster.md). Every cluster has one environment, which Camunda Hub creates automatically. Then [assign the environment to a workspace](./assign-environments.md).
-- **Self-Managed**: Provision the cluster, and add it to the Camunda Hub configuration. On Camunda 8.10 and later, declare additional [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) if you need more than one environment on the cluster. Camunda Hub reads the configuration only at startup, so perform a rolling restart. The environments of the cluster then appear automatically. See [physical tenants in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#physical-tenants).
+<Tabs groupId="edition" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
+
+Every SaaS cluster has one environment, which Camunda Hub creates when you create the cluster.
+
+1. [Create a cluster](../../../saas/clusters/create-cluster.md). The environment of the cluster appears on the **Environments** page.
+1. [Assign the environment to a workspace](./assign-environments.md) so that teams can deploy to it.
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+In Self-Managed, you provision clusters outside Camunda Hub, and you declare them in the Camunda Hub configuration. A cluster has an environment for its `default` Physical Tenant, and, on Camunda 8.10 and later, one for each additional [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) you declare.
+
+1. Provision the cluster with your platform tooling.
+1. Add the cluster to the Camunda Hub configuration, and declare any additional Physical Tenants. See [physical tenants in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#physical-tenants).
+1. Perform a rolling restart of Camunda Hub. Camunda Hub reads the configuration only at startup. After the restart, the environments appear on the **Environments** page.
+1. [Assign the environments to a workspace](./assign-environments.md) so that teams can deploy to them.
+
+</TabItem>
+
+</Tabs>
 
 ## Next steps
 
