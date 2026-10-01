@@ -69,6 +69,7 @@ The status of an environment decides whether you can deploy to it:
 | Paused                        | To deploy to this environment, it needs to be resumed.                                  | No. Resume the environment first. |
 | Resuming                      | **Environment is resuming**: Wait until the environment is healthy before deploying.    | No                                |
 | Creating                      | **Environment is being created**: Wait until the environment is ready before deploying. | No                                |
+| Unavailable                   | The dialog explains why the environment can't be deployed to, for example maintenance.  | No                                |
 | Removed or no longer reported | **Environment unavailable**: Select another environment to deploy.                      | No                                |
 
 These messages appear in the SaaS deploy dialog. To resume a paused environment, click **Resume** next to it. Only organization owners, admins, and DevOps users see this button. You can also [resume the environment from the environments page](../../organization/manage-environments/index.md#resume-a-paused-environment).
