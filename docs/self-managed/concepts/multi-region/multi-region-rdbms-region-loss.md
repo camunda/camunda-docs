@@ -30,7 +30,7 @@ Recovery is the reverse and has no restore step. Redeploy the region. Its broker
 
 ## Recovery objectives {#recovery-objectives}
 
-There is no recovery procedure. There is still a recovery window.
+A region loss needs no recovery procedure, but it still opens a recovery window.
 
 **No procedure**, because on the engine a zone loss is the same class of event as a broker loss.
 
