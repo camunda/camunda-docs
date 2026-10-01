@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="PricingDefinitions" name="Pricing decisions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="pricing" name="Determine price">
+    <decisionTable id="PricingTable" hitPolicy="UNIQUE">
+      <input id="OrderTotalInput" label="Order total">
+        <inputExpression id="OrderTotalExpression" typeRef="number">
+          <text>orderTotal</text>
+        </inputExpression>
+      </input>
+      <output id="PriceTierOutput" name="priceTier" label="Price tier" typeRef="string" />
+      <rule id="StandardPriceRule">
+        <inputEntry id="StandardPriceCondition">
+          <text>&lt; 100</text>
+        </inputEntry>
+        <outputEntry id="StandardPriceOutput">
+          <text>"STANDARD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="PremiumPriceRule">
+        <inputEntry id="PremiumPriceCondition">
+          <text>&gt;= 100</text>
+        </inputEntry>
+        <outputEntry id="PremiumPriceOutput">
+          <text>"PREMIUM"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
