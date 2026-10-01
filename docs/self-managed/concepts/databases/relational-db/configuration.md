@@ -222,6 +222,9 @@ Multi-region support for RDBMS uses the asynchronous replication feature of the 
 dependent on the database vendor. While most multi-region replication is performed by the database itself, Camunda
 provides additional features to enhance automatic recovery in the event of a failure.
 
+For an architecture built on this model, in which every region writes to a single endpoint and a region loss does not
+stop processing, see [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md).
+
 Asynchronous replicated databases are synchronized with a delay, meaning that after a failover, the new primary database
 may not contain all the data written to the old primary database. This can lead to data loss in secondary storage. While
 this data can be reproduced by replaying past records from the Zeebe log stream, the relevant segments and records must still

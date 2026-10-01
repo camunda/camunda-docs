@@ -8,6 +8,7 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -84,6 +85,23 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 
 ### Helm chart deployment
 
+<!-- Legacy anchor retained for inbound links. -->
+
+#### Helm CLI v3 and v4 support {#helm-v4-required}
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm CLI v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
+
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
+
+<ul>
+  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+</ul>
+
 #### PostgreSQL databases are highly available by default
 
 <!-- https://github.com/camunda/camunda-deployment-references/pull/3463 -->
@@ -101,6 +119,24 @@ Deployments already running the single-instance shape migrate in place: CloudNat
 <p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
 
 ### Orchestration Cluster
+
+#### Multi-region RDBMS reference architecture
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3553 -->
+
+A new multi-region reference architecture details how you can design, deploy, and operate one Orchestration Cluster stretched across three or more Kubernetes regions, where the Zeebe data plane is active-active across every region and the relational secondary storage is active-standby, with a single global writer and replication owned by the database.
+
+What's included:
+
+- A zone-aware topology for primary storage that keeps its Raft quorum when a region is lost, so processing continues without an operator step.
+- A multi-region RDBMS as secondary storage, with the asynchronous replication monitoring that lets Zeebe replay exported records after a writer failover.
+- Cross-region networking, zone activation, region loss, and failback procedures for a reference implementation on Amazon EKS.
+
+This architecture removes the recovery procedure rather than the recovery window: no operator step restores Zeebe processing after a region loss, while re-election, client rerouting, and database writer promotion still take time.
+
+<p class="link-arrow">[Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md)</p>
 
 #### Startup no longer depends on a reachable identity provider
 
@@ -279,7 +315,6 @@ Use the tool to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
 - Generate a sample 8.10 values file reflecting:
-  - Helm 4-only support.
   - Bitnami sub‑charts removal.
   - Hub‑aware deployment patterns.
   - Simplified application configuration.
@@ -1480,17 +1515,6 @@ For details, see [`cancel` listeners](/components/concepts/execution-listeners.m
 ### Helm chart deployment
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-#### Helm v4 required
-
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
-
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
-
-<ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
-</ul>
 
 #### Host network support for Orchestration Cluster pods
 

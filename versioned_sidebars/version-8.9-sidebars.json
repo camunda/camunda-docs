@@ -1084,6 +1084,7 @@
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/databricks",
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               "Email": [
@@ -3984,10 +3985,7 @@
             "self-managed/concepts/multi-region/dual-region"
           ]
         },
-        "self-managed/operational-guides/data-purge",
-        {
-          "Troubleshooting": ["self-managed/operational-guides/troubleshooting"]
-        }
+        "self-managed/operational-guides/data-purge"
       ]
     },
     {
@@ -4277,6 +4275,7 @@
         }
       ]
     },
+    "self-managed/operational-guides/troubleshooting",
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.9",
