@@ -17,6 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-region-overview.png';
 import AgentPanel from '../../img/whats-new-agent-monitoring.png';
 import overviewImg from '../../../components/optimize/assets/agentic-control-plane-overview.png';
@@ -721,6 +722,8 @@ Camunda for Slack joins Camunda for Microsoft Teams as a second chat platform se
 
 Important changes to Helm chart deployment in 8.10 are as follows:
 
+<!-- Legacy anchor retained for inbound links. -->
+
 ### Camunda Helm Toolkit
 
 The new Helm migration and validation toolkit can help you upgrade from Camunda 8.9 to 8.10 on Kubernetes with Helm.
@@ -728,24 +731,24 @@ The new Helm migration and validation toolkit can help you upgrade from Camunda 
 Use the toolkit to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
-- Generate a sample 8.10 values file reflecting Helm 4-only support, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
+- Generate a sample 8.10 values file reflecting the recommended Helm CLI v4, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
 - Create a migration report that lists the keys that were migrated automatically, flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options), suggests where to find more information in the documentation, and can validate an existing 8.10 values file (for example, one drafted by hand or AI tool) against Camunda’s migration rules.
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
 
 <p class="link-arrow">[Use the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
 
-### Helm v4 required
+### Helm CLI v3 and v4 support {#helm-v4-required}
 
-:::warning Breaking change
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
-:::
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm CLI v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
 
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
 
 <ul>
   <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
 </ul>
 
 ### Host network support for orchestration cluster pods

@@ -8,6 +8,7 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -83,6 +84,23 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 <p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
 
 ### Helm chart deployment
+
+<!-- Legacy anchor retained for inbound links. -->
+
+#### Helm CLI v3 and v4 support {#helm-v4-required}
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm CLI v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
+
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
+
+<ul>
+  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+</ul>
 
 #### PostgreSQL databases are highly available by default
 
@@ -297,7 +315,6 @@ Use the tool to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
 - Generate a sample 8.10 values file reflecting:
-  - Helm 4-only support.
   - Bitnami sub‑charts removal.
   - Hub‑aware deployment patterns.
   - Simplified application configuration.
@@ -1498,17 +1515,6 @@ For details, see [`cancel` listeners](/components/concepts/execution-listeners.m
 ### Helm chart deployment
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-#### Helm v4 required
-
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
-
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
-
-<ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
-</ul>
 
 #### Host network support for Orchestration Cluster pods
 
