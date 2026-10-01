@@ -18,7 +18,7 @@ Learn more about [SaaS clusters](/components/saas/clusters.md), including cluste
 
 In Self-Managed, you provision clusters outside Camunda Hub, and you don't create them in Camunda Hub. To show a cluster and its environments in Camunda Hub, add it to the Camunda Hub configuration.
 
-Learn more about [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md) and [environments in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
+Learn more about [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md) and [physical tenants in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#physical-tenants).
 
 ## Manage clusters
 

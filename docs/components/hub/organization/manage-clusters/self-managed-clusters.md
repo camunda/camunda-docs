@@ -36,7 +36,7 @@ Camunda Hub doesn't create clusters. To make a cluster you provision visible in 
 1. Provision the cluster with your platform tooling, as described in the [Self-Managed installation guide](/self-managed/setup/overview.md).
 1. Add the cluster to the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters). Camunda Hub reads this configuration only at startup, so perform a rolling restart of Camunda Hub to pick up the change.
 
-Click **Register new cluster** on the **Clusters** page to see these steps in Camunda Hub. For the configuration options, see [Environments in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
+Click **Register new cluster** on the **Clusters** page to see these steps in Camunda Hub. For the configuration options, see the [clusters](/self-managed/components/hub/configuration/properties.md#clusters) and [physical tenants](/self-managed/components/hub/configuration/properties.md#physical-tenants) sections of the Camunda Hub configuration.
 
 After the restart, the cluster appears on the **Clusters** page, and each of its [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) appears as an [Environment](/components/concepts/environments.md). An organization admin can then [assign the Environments to a workspace](../manage-environments/assign-environments.md).
 
@@ -56,7 +56,7 @@ Select a cluster to open its details. The header shows the status of the cluster
 
 Cluster changes happen outside Camunda Hub, so there is nothing to rename, resume, resize, or delete on the **Clusters** page.
 
-- To change how a cluster appears in Camunda Hub, for example its name, tags, or Physical Tenants, update the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments), and perform a rolling restart.
+- To change how a cluster appears in Camunda Hub, for example its name, tags, or Physical Tenants, update the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters), and perform a rolling restart.
 - To update or scale the cluster, use your platform tooling. See the [upgrade guides](/self-managed/upgrade/index.md).
 
 If you remove a cluster from the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters) but a workspace still uses its Environments, they stay in the workspace with the status **Not reported**.
@@ -64,6 +64,6 @@ If you remove a cluster from the [Camunda Hub configuration](/self-managed/compo
 ## Next steps
 
 - Learn how to [manage Environments](../manage-environments/index.md).
-- Review the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
+- Review the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 - Learn how to [monitor connectors](./manage-connectors.md).
 - Using Camunda 8 SaaS? See [clusters in SaaS](./saas-clusters.md).
