@@ -51,7 +51,7 @@ jobs:
       - name: Publish
         timeout-minutes: 30
         env:
-          REMOTE_PATH: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}
+          REMOTE_PATH: ${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}
           REMOTE_HOST: ${{ steps.secrets.outputs.HOST }}
           REMOTE_USER: ${{ steps.secrets.outputs.USER }}
           REMOTE_KEY: ${{ steps.secrets.outputs.PRIVATE_KEY }}
@@ -124,7 +124,7 @@ jobs:
       - name: Publish
         timeout-minutes: 30
         env:
-          REMOTE_PATH: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}
+          REMOTE_PATH: ${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}
           REMOTE_HOST: ${{ steps.secrets.outputs.HOST }}
           REMOTE_USER: ${{ steps.secrets.outputs.USER }}
           REMOTE_KEY: ${{ steps.secrets.outputs.PRIVATE_KEY }}
