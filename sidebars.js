@@ -2347,6 +2347,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/api-routing",
                 "self-managed/concepts/physical-tenants/troubleshooting",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
+                "self-managed/concepts/physical-tenants/optimize",
                 "self-managed/concepts/physical-tenants/app-integrations",
               ],
             },

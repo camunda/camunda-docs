@@ -94,9 +94,7 @@ When you configure multiple clients in a [Camunda Spring Boot Starter applicatio
 
 ## Optimize deployment
 
-Deploy Optimize separately for each Physical Tenant and configure each instance to use that tenant's cluster connection. Native multi-tenant Helm support does not manage multiple Optimize instances.
-
-<!-- TODO: Confirm with the Optimize team whether additional Physical Tenant setup guidance is ready to publish. -->
+Deploy Optimize separately for each Physical Tenant, as its own release, and point each instance at that tenant's exported records. For how to deploy Optimize per Physical Tenant and share one Management Identity across them, see [Optimize and Physical Tenants](./optimize.md).
 
 ## What is not isolated
 
