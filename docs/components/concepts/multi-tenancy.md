@@ -18,7 +18,7 @@ This page describes **logical multi-tenancy**: tenant-ID based isolation within 
 Self-Managed also supports stronger isolation models. For a comparison of logical tenants, Physical Tenants, and multi-cluster deployments, see the [Self-Managed multi-tenancy overview](/self-managed/concepts/multi-tenancy/index.md).
 :::
 
-In Camunda Hub, teams deploy to [Environments](/components/concepts/environments.md). Each Environment is backed by a Physical Tenant or, on SaaS, by the cluster.
+In Camunda Hub, a tenant isn't an [Environment](/components/concepts/environments.md). An Environment is a Physical Tenant or a cluster. When multi-tenancy is enabled, you also select a tenant when you deploy to an Environment.
 
 ## How multi-tenancy works
 
