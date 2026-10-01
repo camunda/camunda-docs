@@ -4,7 +4,7 @@ const sidebar: SidebarsConfig = {
   apisidebar: [
     {
       type: "doc",
-      id: "apis-tools/administration-sm-api/specifications/administration-api-self-managed",
+      id: "version-8.8/apis-tools/administration-sm-api/specifications/administration-api-self-managed",
     },
     {
       type: "category",
@@ -12,7 +12,7 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/administration-sm-api/specifications/get-usage-metrics",
+          id: "version-8.8/apis-tools/administration-sm-api/specifications/get-usage-metrics",
           label: "Get usage metrics for clusters",
           className: "api-method get",
         },
@@ -24,7 +24,7 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/administration-sm-api/specifications/get-clusters",
+          id: "version-8.8/apis-tools/administration-sm-api/specifications/get-clusters",
           label: "Get current clusters",
           className: "api-method get",
         },

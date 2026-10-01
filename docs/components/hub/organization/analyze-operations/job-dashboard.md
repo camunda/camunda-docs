@@ -53,8 +53,6 @@ With the job dashboard, you can:
 3. On the **Overview** tab, locate the **Jobs** card.
 4. Click **View jobs** to open the **Job types** page.
 
-![Cluster overview with Jobs card](img/сluster-overview-jobs.jpg)
-
 ### 2. Job types overview
 
 The **Job types** page shows all job types running against the selected cluster.

@@ -73,19 +73,33 @@ For Optimize and other data-analysis use cases, coordinate exporter-side filters
 
 **History archiving and retention parameters:**
 
-| Key                                                      | Type    | Default                                  | Description                                                                                                    |
-| -------------------------------------------------------- | ------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `orchestration.history.waitPeriodBeforeArchiving`        | string  | `1h`                                     | Grace period before archiving completed processes. Processes finished within this window are not yet archived. |
-| `orchestration.history.rolloverInterval`                 | string  | `1d`                                     | Time range for creating dated indices (for example, `1d` creates daily indices).                               |
-| `orchestration.history.rolloverBatchSize`                | integer | `100`                                    | Maximum number of process instances per archiving batch                                                        |
-| `orchestration.history.elsRolloverDateFormat`            | string  | `date`                                   | Date format for historical indices in Java DateTimeFormatter syntax                                            |
-| `orchestration.history.delayBetweenRuns`                 | integer | `2000`                                   | Millisecond interval between archiver runs                                                                     |
-| `orchestration.history.maxDelayBetweenRuns`              | integer | `60000`                                  | Maximum millisecond interval between archiver runs due to failure backoffs                                     |
-| `orchestration.history.retention.enabled`                | boolean | `false`                                  | If `true`, applies ILM/ISM policy to archived orchestration indices (Operate, Tasklist, Camunda)               |
-| `orchestration.history.retention.minimumAge`             | string  | `30d`                                    | How old archived data must be before deletion                                                                  |
-| `orchestration.history.retention.policyName`             | string  | `camunda-history-retention-policy`       | Name of the ILM/ISM policy for historical data                                                                 |
-| `orchestration.history.retention.usageMetricsMinimumAge` | string  | `730d`                                   | Retention period for usage metrics indices (2 years by default)                                                |
-| `orchestration.history.retention.usageMetricsPolicyName` | string  | `camunda-usage-metrics-retention-policy` | Name of the ILM/ISM policy for usage metrics                                                                   |
+| Key                                                      | Type    | Default                                  | Description                                                                                                                                    |
+| -------------------------------------------------------- | ------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `orchestration.history.waitPeriodBeforeArchiving`        | string  | `1h`                                     | Grace period before archiving completed processes. Processes finished within this window are not yet archived.                                 |
+| `orchestration.history.rolloverInterval`                 | string  | `1d`                                     | Time range for creating dated indices (for example, `1d` creates daily indices).                                                               |
+| `orchestration.history.rolloverBatchSize`                | integer | `500`                                    | Maximum number of process instances selected for archiving per run. Defaults to 500 when `archiveByIdEnabled` is `true`, and 100 when `false`. |
+| `orchestration.history.archiveByIdEnabled`               | boolean | `true`                                   | When `true`, archiving moves documents in small, targeted batches.                                                                             |
+| `orchestration.history.reindexBatchSize`                 | integer | `3000`                                   | Number of individual Elasticsearch/OpenSearch documents archived in each targeted batch when `archiveByIdEnabled` is `true`.                   |
+| `orchestration.history.elsRolloverDateFormat`            | string  | `date`                                   | Date format for historical indices in Java DateTimeFormatter syntax                                                                            |
+| `orchestration.history.delayBetweenRuns`                 | integer | `2000`                                   | Millisecond interval between archiver runs                                                                                                     |
+| `orchestration.history.maxDelayBetweenRuns`              | integer | `60000`                                  | Maximum millisecond interval between archiver runs due to failure backoffs                                                                     |
+| `orchestration.history.retention.enabled`                | boolean | `false`                                  | If `true`, applies ILM/ISM policy to archived orchestration indices (Operate, Tasklist, Camunda)                                               |
+| `orchestration.history.retention.minimumAge`             | string  | `30d`                                    | How old archived data must be before deletion                                                                                                  |
+| `orchestration.history.retention.policyName`             | string  | `camunda-history-retention-policy`       | Name of the ILM/ISM policy for historical data                                                                                                 |
+| `orchestration.history.retention.usageMetricsMinimumAge` | string  | `730d`                                   | Retention period for usage metrics indices (2 years by default)                                                                                |
+| `orchestration.history.retention.usageMetricsPolicyName` | string  | `camunda-usage-metrics-retention-policy` | Name of the ILM/ISM policy for usage metrics                                                                                                   |
+
+### Performance
+
+The Helm value `orchestration.history.rolloverInterval` controls how often the archiver creates a new dated index for historical data. For example, `1d` creates a new dated index every day for each archivable index type (Operate and Tasklist each have several), resulting in multiple new indices per day. This setting directly affects cluster performance:
+
+- A **shorter interval** (for example, `1d`) creates more, smaller indices. Queries, ILM/ISM operations, and deletions against a single index run faster because each index covers less data, but the cluster carries more shard and index metadata overhead overall.
+- A **longer interval** (for example, `30d`) creates fewer, larger indices. This reduces shard and metadata overhead across the cluster, but each index takes longer to query, roll over, and delete, and a spike in completed process instances can make a single index very large.
+
+Choose `rolloverInterval` based on your throughput and retention needs:
+
+- For low-to-moderate throughput clusters with long retention (more than three months), use a longer interval (for example, `7d` or longer) to avoid creating excessive numbers of small indices, which increases cluster management overhead.
+- For clusters with a strict shard count limit, prefer longer intervals to stay within your cluster's recommended shard count.
 
 ### Example usage
 
@@ -100,7 +114,9 @@ orchestration:
   history:
     waitPeriodBeforeArchiving: 1h
     rolloverInterval: 1d
-    rolloverBatchSize: 100
+    rolloverBatchSize: 500
+    archiveByIdEnabled: true
+    reindexBatchSize: 2500
     elsRolloverDateFormat: date
     delayBetweenRuns: 2000
     maxDelayBetweenRuns: 60000
@@ -153,7 +169,9 @@ orchestration:
   history:
     waitPeriodBeforeArchiving: 1h
     rolloverInterval: 1d
-    rolloverBatchSize: 100
+    rolloverBatchSize: 500
+    archiveByIdEnabled: true
+    reindexBatchSize: 2500
     elsRolloverDateFormat: date
     delayBetweenRuns: 2000
     maxDelayBetweenRuns: 60000

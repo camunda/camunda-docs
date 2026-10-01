@@ -6,9 +6,11 @@ sidebar_position: 1
 description: "Use the Web Modeler API to access your Web Modeler data."
 ---
 
-import PageDescription from '@site/src/components/PageDescription';
+:::note DEPRECATED
+Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [Migrate to Camunda Hub REST API v2](../migration-manuals/migrate-from-web-modeler-to-hub-api.md).
+:::
 
-<PageDescription />
+Use the Web Modeler API to access your Web Modeler data.
 
 ## About
 

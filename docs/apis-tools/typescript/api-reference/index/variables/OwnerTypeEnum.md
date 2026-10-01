@@ -27,7 +27,7 @@ readonly CLIENT: "CLIENT" = 'CLIENT';
 readonly GROUP: "GROUP" = 'GROUP';
 ```
 
-### MAPPING_RULE
+### MAPPING\_RULE
 
 ```ts
 readonly MAPPING_RULE: "MAPPING_RULE" = 'MAPPING_RULE';

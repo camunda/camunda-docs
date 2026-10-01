@@ -9,6 +9,5 @@ mdx:
 
 ```ts
 type DecisionEvaluationInstruction =
-  | DecisionEvaluationById
-  | DecisionEvaluationByKey;
+  DecisionEvaluationById | DecisionEvaluationByKey;
 ```

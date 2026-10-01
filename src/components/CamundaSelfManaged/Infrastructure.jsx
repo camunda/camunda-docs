@@ -18,7 +18,7 @@ const InfrastructureCard = ({ link, title, icon: Icon, description }) => {
   );
 };
 
-const Infrastructure = () => {
+const Infrastructure = ({ hideHeading = false }) => {
   const infrastructureItems = [
     {
       title: "Amazon",
@@ -51,7 +51,7 @@ const Infrastructure = () => {
 
   return (
     <div className="sm-infrastructure">
-      <h2>Infrastructure</h2>
+      {!hideHeading && <h2>Infrastructure</h2>}
       <p>
         Provision your cloud infrastructure to deploy Camunda 8
         Self-Managed in a scalable, secure, and production-ready environment.

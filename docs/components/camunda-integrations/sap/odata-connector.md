@@ -42,7 +42,7 @@ WebIDEUsage: odata_gen
 ```
 
 :::info
-The SAP OData connector currently supports only destination authentication types suitable for straight-through (machine-to-machine) processing — that is, scenarios without user tasks in the execution path.
+The SAP OData connector currently supports only destination authentication types suitable for straight-through (machine-to-machine) processing: scenarios without user tasks in the execution path.
 
 Use `BasicAuthentication` or any `OAuth2`-based mechanism.
 
@@ -54,21 +54,21 @@ Use `BasicAuthentication` or any `OAuth2`-based mechanism.
 
 A descriptor file is required to deploy the SAP OData connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application requiring deployment.
 
-### Using `csap`
+### Using the CSAP c8ctl plugin
 
-Use CSAP CLI in either:
+Use the CSAP c8ctl plugin in either:
 
 - **Interactive mode**: Follow the on-screen prompts.
-- **Non-interactive mode**: Provide all required parameters directly to the CLI.
+- **Non-interactive mode**: Provide all required parameters directly to the plugin.
 
-Configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. Using `csap` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
+Configure the OData connector via the [CSAP c8ctl plugin](./csap-cli.md) (recommended) or manually. Using `c8ctl csap-setup` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
 
-Use the command `csap setup` to guide you interactively.
+Use the command `c8ctl csap-setup` to guide you interactively.
 
 - Assuming your [Camunda cluster's API credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
-csap setup --for odata \
+c8ctl csap-setup --for odata \
 	--camunda 8.7 \
 	--deployment SaaS
 ```
@@ -84,7 +84,7 @@ Follow these steps:
    - `8.5.1` is the OData connector in version `1` for Camunda 8 SaaS version `8.5`
 
 2. Download the matching `mtad.yaml.example` from [the OData connector's GitHub release page](https://github.com/camunda/sap-odata-connector/releases). Adjust the values for the credentials (`client ID`, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
-3. Customize the names of the SAP BTP Destination and Connectivity instances as needed—both will be automatically created during deployment. If instances with the same names already exist in your subaccount, they will be reused.
+3. Customize the names of the SAP BTP Destination and Connectivity instances as needed. Both will be automatically created during deployment. If instances with the same names already exist in your subaccount, they will be reused.
 4. Download the connector template from the [OData connector's GitHub release page](https://github.com/camunda/sap-odata-connector/releases).
 
 ### Deploying to SAP BTP
@@ -109,7 +109,7 @@ Application "sap-odata-connector" started and available at "some.url.hana.ondema
 
 ### Deployment in Camunda 8 SaaS
 
-- If you are using Web Modeler, [import the SAP OData connector element](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) you downloaded in the earlier step to use it in your process design.
+- If you are using Camunda Hub, [import the SAP OData connector element](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#importing-an-existing-element-template) you downloaded in the earlier step to use it in your process design.
 
 ![sample BPMN diagram with SAP OData connector](./img/sap-odata-connector-task-in-model.png)
 

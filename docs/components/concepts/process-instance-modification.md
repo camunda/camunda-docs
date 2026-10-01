@@ -4,9 +4,7 @@ title: "Process instance modification"
 description: "Use process instance modification to repair a running process instance."
 ---
 
-Process instance modification is a powerful feature to repair a running process instance. The process instance may be
-stuck on an element, waiting for an event, or taking an unintended path because an external system is not
-available or doesn't respond as expected, for example.
+Process instance modification is a powerful feature for repairing a running process instance. For example, a process instance may be stuck at an element, waiting for an event, or following an unintended path because an external system is unavailable or doesn't respond as expected.
 
 Use the [modification command](/apis-tools/zeebe-api/gateway-service.md#modifyprocessinstance-rpc) to skip or repeat a step in the
 process. Consider the following example:
@@ -170,6 +168,8 @@ process instance doesn't apply the termination instruction and rejects the comma
 
 Instead, we can terminate the call activity that created the child process instance.
 :::
+
+Terminating a user task via modification does not trigger its [`canceling` user task listener](/components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
 
 ## Move an element instance
 

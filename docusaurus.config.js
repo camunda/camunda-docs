@@ -1,6 +1,10 @@
 const { unmaintainedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
 
+// Predict next version (e.g. 8.9 -> 8.10) for "next" page permalink hints.
+const [_currentMajor, _currentMinor] = currentVersion.split(".").map(Number);
+const nextVersion = `${_currentMajor}.${_currentMinor + 1}`;
+
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
@@ -22,6 +26,8 @@ module.exports = {
   baseUrl: docsSitebaseUrl,
   customFields: {
     canonicalUrlRoot: docsSiteUrl,
+    currentVersion,
+    nextVersion,
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -122,8 +128,12 @@ module.exports = {
         docsPluginId: "default",
         config: {
           adminsm: {
-            specPath: "api/administration-sm/administration-sm-openapi.yaml",
-            outputDir: "docs/apis-tools/administration-sm-api/specifications",
+            // This API is no longer supported from 8.10. Since this is required, I'm using 8.9 values.
+            // To generate docs for older versions, run `npm run api:generate -- adminsm <version>`.
+            specPath:
+              "api/administration-sm/version-8.9/administration-sm-openapi.yaml",
+            outputDir:
+              "versioned_docs/version-8.9/apis-tools/administration-sm-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -132,6 +142,22 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.9: {
+                specPath:
+                  "api/administration-sm/version-8.9/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.9/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.8: {
+                specPath:
+                  "api/administration-sm/version-8.8/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.8/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.7: {
                 specPath:
                   "api/administration-sm/version-8.7/administration-sm-openapi.yaml",
@@ -186,6 +212,23 @@ module.exports = {
                   ".sdk-repos/orchestration-cluster-api-csharp/examples/operation-map.json",
                 autoImports: true,
                 defaultImports: "using Camunda.Orchestration.Sdk;",
+              },
+              {
+                lang: "Rust",
+                highlight: "rust",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-rust/examples/operation-map.json",
+                autoImports: true,
+                defaultImports: "use camunda_orchestration_sdk::CamundaClient;",
+              },
+              {
+                lang: "Go",
+                highlight: "go",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-go/examples/operation-map.json",
+                autoImports: true,
+                defaultImports:
+                  'import (\n\tcamunda "github.com/camunda/orchestration-cluster-api-go"\n\topenapi "github.com/camunda/orchestration-cluster-api-go/client"\n)',
               },
             ],
             version: "1",
@@ -277,6 +320,48 @@ module.exports = {
       },
     ],
     [
+      // Hub API Self-Managed docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsm-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsm: {
+            specPath: "api/hubsm/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-sm/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
+      // Hub API SaaS docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsaas-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsaas: {
+            specPath: "api/hubsaas/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-saas/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
       // RSS feed for security notices
       "./static/plugins/notices-feed",
       {
@@ -301,7 +386,6 @@ module.exports = {
         addMdExtension: true,
         generateMarkdownFiles: true,
         preserveDirectoryStructure: true,
-        addLinkTag: false,
         ignoreFiles: ["apis-tools/*/specifications/*"],
         title: "Camunda 8 Documentation",
         description:
@@ -384,13 +468,13 @@ module.exports = {
       id: "camunda8",
       content:
         '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign up</a></b> for a free account to start orchestrating your business processes today.',
-      backgroundColor: "#14D890",
-      textColor: "#000",
+      backgroundColor: "#171717",
+      textColor: "#fff",
       isCloseable: true,
     },
 
     prism: {
-      additionalLanguages: ["java", "protobuf", "csharp", "bash"],
+      additionalLanguages: ["java", "protobuf", "csharp", "bash", "rust"],
       theme: themes.palenight,
       darkTheme: themes.dracula,
     },
@@ -461,14 +545,15 @@ module.exports = {
           type: "dropdown",
           label: "Help",
           position: "right",
+          className: "help-icon-btn",
           items: [
             {
               label: "Support",
               href: "https://camunda.com/services/enterprise-support-guide/",
             },
             {
-              label: "Developers",
-              href: "https://developers.camunda.com/",
+              label: "Downloads",
+              to: "/downloads",
             },
             {
               label: "Academy",
@@ -521,7 +606,7 @@ module.exports = {
           items: [
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              to: "/build-with-camunda",
             },
             {
               label: "Support and feedback",
@@ -548,10 +633,6 @@ module.exports = {
               href: "https://camunda.com/developers/how-to-contribute/",
             },
             {
-              label: "Developer resources",
-              href: "https://camunda.com/developers/",
-            },
-            {
               label: "Subscribe",
               href: "https://camunda.com/developers/developer-community-updates/",
             },
@@ -561,8 +642,12 @@ module.exports = {
           title: "Camunda",
           items: [
             {
-              label: "Web Modeler",
-              href: "https://camunda.io",
+              label: "Downloads",
+              to: "/downloads",
+            },
+            {
+              label: "Camunda Hub",
+              href: "https://hub.camunda.io",
             },
             {
               label: "Status",
@@ -605,7 +690,7 @@ module.exports = {
       // These keys are for our new standalone algolia instance!
       apiKey: "68db7725a8410eace68419c29385ad1e",
       appId: "6KYF3VMCXZ",
-      indexName: "camunda-v2",
+      indexName: "camunda-v3",
       placeholder: "Search Camunda 8 docs",
     },
     languageTabs: [
@@ -655,7 +740,7 @@ module.exports = {
         theme: "base",
         themeVariables: {
           fontFamily:
-            "IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif",
+            '"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", Arial, sans-serif',
           fontSize: "16px",
         },
       },
@@ -716,4 +801,5 @@ module.exports = {
     "@saucelabs/theme-github-codeblock",
     "@docusaurus/theme-mermaid",
   ],
+  clientModules: [require.resolve("./src/scripts/mermaid_icons.js")],
 };

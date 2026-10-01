@@ -10,6 +10,6 @@ mdx:
 
 ## Modules
 
-- [fp](fp/index.md)
+- [effect](effect/index.md)
 - [index](index/index.md)
 - [logger](logger/index.md)

@@ -8,11 +8,11 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import PageDescription from '@site/src/components/PageDescription';
 
-<PageDescription />
+<!-- This page is maintained in the c8ctl repository (https://github.com/camunda/c8ctl, in docs/) and
+     is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
+     overwritten. Edit the source in the c8ctl repo instead. -->
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
-:::
+<PageDescription />
 
 ## About
 
@@ -100,6 +100,39 @@ c8 cluster install 8.8
 
 # Remove a locally cached version
 c8 cluster delete 8.8
+
+# Delete a version's runtime data but keep the binary (the next start is fresh)
+c8 cluster purge 8.8
+
+# Or stop the running cluster and purge its runtime data in one step
+c8 cluster stop --purge
+```
+
+### Manage secrets
+
+`c8 cluster secrets` forwards to the `secrets` command of the c8run binary c8ctl already downloads and manages. c8ctl adds no storage of its own and never sees a secret value: `set` prompts for the value without echoing it (or reads exactly one value from stdin with `--stdin`), and the store is c8run's, shared across versions and projects for the current OS user.
+
+```bash
+# Store a secret — prompts, no-echo
+c8 cluster secrets set OPENAI_API_KEY
+
+# List secret names (values are never shown)
+c8 cluster secrets list
+
+# Import multiple secrets from a dotenv file
+c8 cluster secrets import .env.secrets
+
+# Delete a secret without an interactive prompt
+c8 cluster secrets delete OPENAI_API_KEY --yes
+
+# Target a specific installed version instead of the running/highest one
+c8 cluster secrets --c8-version 8.10 list
+```
+
+Everything after `secrets` is passed to c8run unchanged, so any verb or flag c8run supports works here too, including ones added after this was written — run `c8 cluster secrets help` for c8run's own help (`--help` on the `c8ctl` command itself belongs to c8ctl). This requires a c8run build that includes the `secrets` command; older cached versions print a hint if it is missing. Until then, or as an ephemeral alternative for a single run, pass secrets as environment variables when starting instead:
+
+```bash
+SECRET_OPENAI_API_KEY=sk-... c8 cluster start
 ```
 
 ### Version aliases
@@ -221,13 +254,14 @@ c8 add profile prod \
   --clientId=your-client-id \
   --clientSecret=your-client-secret
 
-# With explicit OAuth endpoint and audience
+# With explicit OAuth endpoint, audience, and scope
 c8 add profile prod \
   --baseUrl=https://camunda.example.com \
   --clientId=your-client-id \
   --clientSecret=your-client-secret \
   --audience=camunda-api \
-  --oAuthUrl=https://auth.example.com/oauth/token
+  --oAuthUrl=https://auth.example.com/oauth/token \
+  --scope="my-oauth-scope"
 
 # With a default tenant
 c8 add profile dev \
@@ -235,7 +269,35 @@ c8 add profile dev \
   --clientId=dev-client \
   --clientSecret=dev-secret \
   --defaultTenantId=dev-tenant
+
+# Import settings from a .env file
+c8 add profile staging --from-file .env.staging
+
+# Import settings from the current CAMUNDA_* environment variables
+source .env.prod
+c8 add profile prod --from-env
 ```
+
+### Gateway-fronted clusters
+
+For a cluster reached through an API gateway or reverse proxy, a profile can attach a custom header to every request and target `--baseUrl` exactly, without `c8ctl`'s automatic `/v2` suffixing:
+
+```bash
+# Attach a header (e.g. an API key) to every REST request made under this profile.
+# Repeat --header to attach more than one.
+c8 add profile gateway \
+  --baseUrl=https://gateway.example.com/camunda-api \
+  --header "X-Api-Key: your-api-key" \
+  --header "X-Correlation-Id: your-correlation-id"
+
+# --exactBaseUrl: use --baseUrl as the exact request path instead of
+# appending /v2 (the default for self-managed profiles).
+c8 add profile gateway-exact \
+  --baseUrl=https://gateway.example.com/camunda-api \
+  --exactBaseUrl
+```
+
+Both flags are optional and independent of each other. A profile that sets neither behaves exactly as before.
 
 ### List profiles
 
@@ -392,6 +454,7 @@ c8 output text    # back to formatted tables (default)
 | `CAMUNDA_CLIENT_SECRET`     | OAuth client secret  |
 | `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience |
 | `CAMUNDA_OAUTH_URL`         | OAuth token endpoint |
+| `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated) |
 | `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID    |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.

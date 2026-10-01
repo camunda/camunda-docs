@@ -32,7 +32,7 @@ https://camunda-docs.mcp.kapa.ai
 
 ### One-click install
 
-You can perform a one-click installation or copy the MCP server URL via the **Use MCP** dropdown.
+You can perform a one-click installation or copy the MCP server URL via the **Use MCP** dropdown in the **Ask AI** button popup at the top of this documentation page.
 
 <img src={McpServerDropdownImg} alt="Ask context-aware questions about Camunda within VS Code." title="Ask context-aware questions about Camunda within VS Code." class="img-700" style={{marginTop: '0'}}/>
 

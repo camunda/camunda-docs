@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Generate a GitHub token
         id: github-token
-        uses: camunda/infra-global-github-actions/generate-github-app-token-from-vault-secrets@main
+        uses: camunda/infra-global-github-actions/generate-github-app-token-from-vault-secrets@67d00e9260887361a31f6446252fffbecae4a02e # generate-github-app-token-from-vault-secrets-1.1.1
         with:
           github-app-id-vault-key: GITHUB_APP_ID
           github-app-id-vault-path: secret/data/products/infra/ci/team-infrastructure
@@ -30,7 +30,7 @@ jobs:
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v4.0.0
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -41,7 +41,7 @@ jobs:
             secret/data/products/infra/ci/infra-core SLACK_WEBHOOK_INFRA_ALERTS;
 
       - name: Apply maintenance parameters to the Pull Request if applicable
-        uses: camunda/infra-global-github-actions/teams/infra/configure-maintenance-pull-request@main
+        uses: camunda/infra-global-github-actions/teams/infra/configure-maintenance-pull-request@67d00e9260887361a31f6446252fffbecae4a02e # configure-maintenance-pull-request-1.0.1
         with:
           github-token: ${{ steps.github-token.outputs.token }}
           slack-webhook-url: ${{ steps.secrets.outputs.SLACK_WEBHOOK_INFRA_ALERTS }}

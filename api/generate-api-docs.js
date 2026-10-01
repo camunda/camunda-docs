@@ -6,12 +6,16 @@ const tasklist = require("./tasklist/generation-strategy");
 const adminsm = require("./administration-sm/generation-strategy");
 const camunda = require("./camunda/generation-strategy");
 const zeebe = require("./zeebe/generation-strategy");
+const hubsm = require("./hubsm/generation-strategy");
+const hubsaas = require("./hubsaas/generation-strategy");
 const apiStrategies = {
   operate,
   tasklist,
   adminsm,
   camunda,
   zeebe,
+  hubsm,
+  hubsaas,
 };
 
 // API name must be passed in as an arg.

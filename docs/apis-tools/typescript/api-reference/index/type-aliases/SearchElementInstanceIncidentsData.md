@@ -30,7 +30,7 @@ path: object;
 #### elementInstanceKey
 
 ```ts
-elementInstanceKey: ElementInstanceKey;
+elementInstanceKey: ElementInstanceKeyWritable;
 ```
 
 The unique key of the element instance to search incidents for.

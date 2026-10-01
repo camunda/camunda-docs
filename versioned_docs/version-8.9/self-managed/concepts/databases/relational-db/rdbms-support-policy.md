@@ -1,6 +1,7 @@
 ---
 id: rdbms-support-policy
 title: RDBMS version support policy
+sidebar_label: "Version support policy"
 description: Defines Camunda’s official RDBMS support policy, including supported databases, LTS-based version rules, managed PostgreSQL guidance, JDBC driver expectations, and component compatibility.
 ---
 
@@ -79,36 +80,14 @@ Camunda may remove support for a version if it contains known issues that preven
 
 ## Database-specific support notes
 
-### PostgreSQL
-
-Camunda supports multiple active PostgreSQL major versions concurrently.
-
-### MariaDB
-
-Camunda supports **MariaDB LTS releases only**.
-
-### MySQL
-
-Camunda supports **MySQL LTS releases only**.
-
-### Microsoft SQL Server
-
-Camunda supports SQL Server versions that are in mainstream or extended vendor support.
-
-### Oracle Database
-
-Camunda supports **Oracle LTS releases**.
-
-### H2
-
-H2 is supported for development, testing, and evaluation only. Production use is not recommended.
-
-For Camunda Orchestration Cluster secondary storage, H2 is a single-broker option only:
-
-- Multi-broker clusters with H2 are not a valid architecture.
-- H2 does not provide a shared database across brokers.
-- In-memory H2 is ephemeral and does not survive restarts.
-- File-based H2 persists on local disk and is suitable for local/dev usage only.
+| Database             | LTS policy                                    | Production use | Notes                                                                                     |
+| :------------------- | :-------------------------------------------- | :------------- | :---------------------------------------------------------------------------------------- |
+| PostgreSQL           | All active major LTS versions                 | ✅             | —                                                                                         |
+| MariaDB              | LTS releases only                             | ✅             | —                                                                                         |
+| MySQL                | LTS releases only                             | ✅             | —                                                                                         |
+| Microsoft SQL Server | Mainstream or extended vendor support         | ✅             | —                                                                                         |
+| Oracle Database      | LTS releases                                  | ✅             | —                                                                                         |
+| H2                   | Development, testing, and evaluation use only | ❌             | Not for multi-broker clusters. File-based H2 persists on disk; in-memory H2 is ephemeral. |
 
 ## Supported JDBC driver versions
 
@@ -164,7 +143,7 @@ This table shows RDBMS support status by component (including RDBMS as secondary
 | Management API (REST API) | ✅ Fully supported | All functionality available.                                                                                      |
 
 :::note
-"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their RDBMS support and maturity can differ by the alpha release.
+"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their support status can differ by component.
 :::
 
 ## Known limitations

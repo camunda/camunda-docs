@@ -70,6 +70,12 @@ When a non-interrupting boundary event is triggered, the instances are not affec
 
 Every instance has a local variable `loopCounter`. It holds the index in the `inputCollection` of this instance, starting with `1`.
 
+## Execution listeners in multi-instance bodies
+
+Execution listeners on a multi-instance body support a `beforeAll` event type that fires **once** per body activation — before the `inputCollection` expression is evaluated and before any instances are created. This is distinct from `start` listeners, which fire once per instance.
+
+For full details on execution listener types and configuration, see [execution listeners](/components/concepts/execution-listeners.md).
+
 ## Variable mappings
 
 Input and output variable mappings can be defined at the multi-instance activity; they are applied on each instance on activating and on completing.
@@ -81,6 +87,10 @@ In case of a parallel multi-instance activity, this can lead to variables that a
 The input mappings can access the local variables of the instance (e.g. `inputElement`, `loopCounter`); for example, to extract parts of the `inputElement` variable and apply them to separate variables.
 
 The output mappings can be used to update the `outputElement` variable; for example, to extract a part of the job variables.
+
+The `loopCounter` variable and the input element variable defined by `inputElement` are managed by the engine and stay local to a single instance. Do not reference them in output mappings, because propagating them to a higher scope produces a value that reflects only one iteration. See [internal engine variables](/components/concepts/variables.md#internal-engine-variables).
+
+When the loop finishes, the output collection is propagated to the parent scope. For how a multi-instance activity compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
 **Example:** We have a call activity marked as a parallel multi-instance. When the called process instance completes, its variables are [merged](/components/concepts/variables.md#variable-propagation) into the call activity's process instance. Its result is collected in the output collection variable, but this has become a race condition where each completed child instance again overwrites this same variable. We end up with a corrupted output collection. An output mapping can be used to overcome this, because it restricts which variables are merged. In the case of:
 

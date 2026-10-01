@@ -40,7 +40,7 @@ Get started by running the `helm template` command against version 8.9 or later 
 ```bash
 helm template camunda camunda/camunda-platform \
   --devel \
-  --version 14.0.0-alpha5 \
+  --version 14 \
   --set global.host=example.com \
   --set global.gateway.enabled=true \
   --set global.gateway.createGatewayResource=true \

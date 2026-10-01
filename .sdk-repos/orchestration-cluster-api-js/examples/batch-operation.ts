@@ -189,19 +189,55 @@ async function deleteDecisionInstancesBatchOperationExample() {
 }
 //#endregion DeleteDecisionInstancesBatchOperation
 
-// Suppress "declared but never read"
-void getBatchOperationExample;
-void searchBatchOperationsExample;
-void searchBatchOperationItemsExample;
-void cancelBatchOperationExample;
-void suspendBatchOperationExample;
-void resumeBatchOperationExample;
-void cancelProcessInstancesBatchOperationExample;
-void deleteProcessInstancesBatchOperationExample;
-void migrateProcessInstancesBatchOperationExample;
-void modifyProcessInstancesBatchOperationExample;
-void resolveIncidentsBatchOperationExample;
-void deleteDecisionInstancesBatchOperationExample;
+//#region UpdateJobsBatchOperation
+async function updateJobsBatchOperationExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.updateJobsBatchOperation({
+    filter: {
+      type: 'payment-processing',
+      hasFailedWithRetriesLeft: false,
+    },
+    changeset: {
+      retries: 3,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+//#endregion UpdateJobsBatchOperation
+
+//#region SuspendProcessInstancesBatchOperation
+async function suspendProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.suspendProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+//#endregion SuspendProcessInstancesBatchOperation
+
+//#region ResumeProcessInstancesBatchOperation
+async function resumeProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.resumeProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+//#endregion ResumeProcessInstancesBatchOperation
 
 // Suppress "declared but never read"
 void getBatchOperationExample;
@@ -216,3 +252,6 @@ void migrateProcessInstancesBatchOperationExample;
 void modifyProcessInstancesBatchOperationExample;
 void resolveIncidentsBatchOperationExample;
 void deleteDecisionInstancesBatchOperationExample;
+void updateJobsBatchOperationExample;
+void suspendProcessInstancesBatchOperationExample;
+void resumeProcessInstancesBatchOperationExample;

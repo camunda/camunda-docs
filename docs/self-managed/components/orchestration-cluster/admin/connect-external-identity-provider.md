@@ -127,6 +127,19 @@ You may need to customize the redirect URI in advanced scenarios, such as:
 
 Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
 
+The Orchestration Cluster checks the redirect URI at startup and writes a warning if the value cannot expand to a usable callback URL. It still starts. A usable value:
+
+- Starts with `{baseUrl}`, or has an `https` or `http` scheme and a host
+- Has a port between 1 and 65535, if it has a port
+- Has a callback path
+- Has no fragment (`#`)
+
+A value with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`, and the login completes. Any other unusable value stays as configured, so the login fails when the browser returns from the IdP.
+
+The cluster serves the callback at the path that the redirect URI resolves to. The path must be one that the cluster routes to its web applications, and `/sso-callback` is the path that the cluster keeps for this purpose. A path outside that set passes the startup check, but the callback request does not reach the cluster's login handling, and the login does not complete.
+
+The default value `{baseUrl}/sso-callback` is correct. The cluster also checks the redirect URI if you only use API clients, which never use the redirect URI.
+
 Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
 
 :::note
@@ -148,9 +161,9 @@ For example:
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
 
 :::info
-If you're using Web Modeler and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/hub/configuration/modeler-configuration.md#available-authentication-methods)),
-both applications must use the same IdP. You also need to make the cluster accept the token passed by Web Modeler.
-To do so, include the Web Modeler UI's token audience in the configured list of audiences.
+If you're using Camunda Hub and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/hub/configuration/properties.md#available-authentication-methods)),
+both applications must use the same IdP. You also need to make the cluster accept the token passed by Camunda Hub.
+To do so, include the Camunda Hub UI's token audience in the configured list of audiences.
 :::
 
 #### Example IdP configuration
@@ -185,6 +198,8 @@ camunda.security.authentication.oidc.scope: ["openid", "profile", "email"]
 ### Step 5: Restart the Orchestration Cluster
 
 After updating your configuration, (re)start the Orchestration Cluster for the configuration changes to be applied.
+
+A successful start does not confirm that your IdP is reachable. The cluster contacts a provider at the first request that needs it. If the cluster is up but authentication fails, see [requests fail when an identity provider is unreachable](debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable).
 
 ### Step 6: Test user authentication
 
@@ -660,6 +675,21 @@ No valid post-logout redirect URL found in session, falling back to default: '/'
 ```
 
 Ensure that the post-logout redirect URL (`<camunda-host>/post-logout`) is registered in your IdP configuration.
+
+#### IdP `end_session_endpoint` not available
+
+If RP-initiated logout is enabled but the IdP does not expose an `end_session_endpoint`, the local Orchestration Cluster session is terminated and the following message is displayed:
+
+```
+The identity provider's end_session_endpoint is not available. The local session has been terminated, but the IdP session will still be active.
+```
+
+The user is signed out of Camunda, but their IdP session remains active.
+
+To resolve this:
+
+- Verify that your IdP supports RP-initiated logout and exposes an `end_session_endpoint`.
+- If your IdP does not support RP-initiated logout, disable it by setting `idp-logout-enabled` to `false`.
 
 ## Further resources
 

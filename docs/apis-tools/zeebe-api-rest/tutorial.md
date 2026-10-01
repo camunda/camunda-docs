@@ -20,7 +20,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 ## Getting started
 
-- You need authentication to access the API endpoints. Find more information [here](./zeebe-api-rest-authentication.md).
+- You need authentication to access the API endpoints. See [Zeebe REST API authentication](./zeebe-api-rest-authentication.md).
 
 ## Set up authentication
 

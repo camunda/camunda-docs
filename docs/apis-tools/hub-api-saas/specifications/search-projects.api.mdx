@@ -1,0 +1,942 @@
+---
+id: search-projects
+title: "Search projects"
+description: "Returns projects matching the given search criteria across all workspaces in the caller's organization."
+sidebar_label: "Search projects"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search projects"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/projects/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns projects matching the given search criteria across all workspaces in the caller's organization.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            page: {
+              description:
+                "Pagination criteria. Supports offset-based pagination (from/limit) or a simple limit.\n",
+              allOf: [
+                {
+                  oneOf: [
+                    {
+                      type: "object",
+                      title: "Limit-based pagination",
+                      properties: {
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Offset-based pagination",
+                      required: ["from"],
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 0,
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                  ],
+                  title: "SearchQueryPage",
+                },
+              ],
+            },
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                required: ["field"],
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["name", "created", "updated"],
+                  },
+                  order: {
+                    description: "The sort direction. Defaults to ASC.",
+                    allOf: [
+                      {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    ],
+                  },
+                },
+                title: "ProjectSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The project search filters.",
+              allOf: [
+                {
+                  type: "object",
+                  description: "Filter criteria for searching projects.",
+                  properties: {
+                    workspaceKey: {
+                      description: "Filter by workspace key.",
+                      "x-semantic-type": "WorkspaceKey",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    name: {
+                      description: "Filter by project name.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      type: "string",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    created: {
+                      description: "Filter by creation date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    updated: {
+                      description: "Filter by last update date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    createdBy: {
+                      description: "Filter by creator email address.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                    updatedBy: {
+                      description: "Filter by last updater email address.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          oneOf: [
+                            {
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              type: "string",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "ProjectFilter",
+                },
+              ],
+            },
+          },
+          title: "ProjectSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search completed successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items", "page"],
+            properties: {
+              items: {
+                description: "The matching projects.",
+                type: "array",
+                items: {
+                  type: "object",
+                  example: {
+                    projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                    name: "Payment Flow",
+                    workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+                    created: "2025-02-01T08:00:00.000Z",
+                    createdBy: {
+                      name: "Jane Doe",
+                      email: "jane.doe@example.com",
+                    },
+                    updated: "2025-06-10T14:22:00.000Z",
+                    updatedBy: {
+                      name: "Jane Doe",
+                      email: "jane.doe@example.com",
+                    },
+                  },
+                  required: [
+                    "projectKey",
+                    "name",
+                    "workspaceKey",
+                    "created",
+                    "createdBy",
+                    "updated",
+                    "updatedBy",
+                  ],
+                  properties: {
+                    projectKey: {
+                      description: "The unique key identifying this project.",
+                      allOf: [
+                        {
+                          description: "System-generated key for a project.",
+                          type: "string",
+                          format: "ProjectKey",
+                          "x-semantic-type": "ProjectKey",
+                          example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                          title: "ProjectKey",
+                        },
+                      ],
+                    },
+                    name: {
+                      description: "The name of the project.",
+                      type: "string",
+                    },
+                    workspaceKey: {
+                      description:
+                        "The key of the workspace this project belongs to.",
+                      allOf: [
+                        {
+                          description: "System-generated key for a workspace.",
+                          type: "string",
+                          format: "WorkspaceKey",
+                          "x-semantic-type": "WorkspaceKey",
+                          example: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+                          title: "WorkspaceKey",
+                        },
+                      ],
+                    },
+                    created: {
+                      description:
+                        "The timestamp when the project was created.",
+                      type: "string",
+                      format: "date-time",
+                    },
+                    createdBy: {
+                      description: "The user who created the project.",
+                      allOf: [
+                        {
+                          type: "object",
+                          description: "A reference to a user.",
+                          required: ["name", "email"],
+                          properties: {
+                            name: {
+                              description: "The display name of the user.",
+                              type: "string",
+                            },
+                            email: {
+                              description:
+                                "The email address of the user, or null when the user has none on record.",
+                              type: "string",
+                              format: "email",
+                              nullable: true,
+                            },
+                          },
+                          title: "UserReference",
+                        },
+                      ],
+                    },
+                    updated: {
+                      description:
+                        "The timestamp when the project was last updated.",
+                      type: "string",
+                      format: "date-time",
+                    },
+                    updatedBy: {
+                      description: "The user who last updated the project.",
+                      allOf: [
+                        {
+                          type: "object",
+                          description: "A reference to a user.",
+                          required: ["name", "email"],
+                          properties: {
+                            name: {
+                              description: "The display name of the user.",
+                              type: "string",
+                            },
+                            email: {
+                              description:
+                                "The email address of the user, or null when the user has none on record.",
+                              type: "string",
+                              format: "email",
+                              nullable: true,
+                            },
+                          },
+                          title: "UserReference",
+                        },
+                      ],
+                    },
+                  },
+                  title: "ProjectResult",
+                },
+              },
+              page: {
+                description: "Pagination metadata for the search results.",
+                allOf: [
+                  {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: ["totalItems", "hasMoreTotalItems"],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits.\nWhen true, `totalItems` is a lower bound and the actual number of matching\nitems is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                ],
+              },
+            },
+            title: "ProjectSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

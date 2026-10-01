@@ -21,7 +21,7 @@ Camunda 8 [Alerts](/components/hub/organization/manage-clusters/manage-alerts.md
 
 | Host location     | Data handled                                          | Personal data processing |
 | :---------------- | :---------------------------------------------------- | :----------------------- |
-| Belgium, EU (GCP) | Route alerts containing administrative metadata only. | N/A                      |
+| Germany, EU (AWS) | Route alerts containing administrative metadata only. | N/A                      |
 
 :::note optional
 Camunda 8 Alerts are optional. This information only applies if you use Alerts.
@@ -49,7 +49,7 @@ Connector secrets are optional. This information only applies if you use connect
 | Host location            | Data handled                                 | Personal data processing                                                                                                                                                        |
 | :----------------------- | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <p>Germany, EU (AWS)</p> | Stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
-| Belgium, EU (GCP)        | Stores process models (diagrams/designs).    | Not intended for personal data processing.                                                                                                                                      |
+| Germany, EU (AWS)        | Stores process models (diagrams/designs).    | Not intended for personal data processing.                                                                                                                                      |
 
 You can use Camunda Hub and/or the [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda Self‑Managed if you want to control the hosting location.
 
@@ -66,6 +66,18 @@ You can use Camunda Hub and/or the [Desktop Modeler](/components/modeler/desktop
 - [Admin](/components/admin/admin-introduction.md)
 - [Connect to an identity provider](/components/hub/organization/manage-organization-settings/external-sso.md)
 
+:::
+
+## App Integrations
+
+App Integrations enable connection between Camunda 8 clusters and your productivity tools, currently Microsoft Teams and Slack.
+
+| Host location     | Data handled                                                               | Personal data processing                                                                                                                                                                                                                                           |
+| :---------------- | :------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Germany, EU (AWS) | User accounts and authentication metadata. Separate from process payloads. | Limited to account/authentication data to access the Camunda Platform SaaS. Dependent on the data you send to Camunda over App Integrations. We do not expect that personal data in scope of [Data Processing Agreements](https://legal.camunda.com/) is included. |
+
+:::note optional
+App Integrations are optional. This information only applies if you use App Integrations.
 :::
 
 ## Orchestration Clusters and backups

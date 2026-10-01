@@ -4,9 +4,14 @@ paths:
       tags:
         - Decision definition
       operationId: searchDecisionDefinitions
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search decision definitions
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -40,9 +45,14 @@ paths:
       tags:
         - Decision definition
       operationId: getDecisionDefinition
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get decision definition
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -87,9 +97,14 @@ paths:
       tags:
         - Decision definition
       operationId: getDecisionDefinitionXML
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get decision definition XML
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -134,9 +149,14 @@ paths:
       tags:
         - Decision definition
       operationId: evaluateDecision
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Evaluate decision
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFX0RFQ0lTSU9OX0lOU1RBTkNFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -161,7 +181,7 @@ paths:
               By decision definition ID:
                 summary: Evaluate the decision by decisionDefinitionId.
                 value:
-                  decisionDefinitionId: 1234-5678
+                  decisionDefinitionId: my-decision
                   variables: {}
       responses:
         "200":

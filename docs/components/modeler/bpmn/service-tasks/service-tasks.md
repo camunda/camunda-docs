@@ -38,11 +38,18 @@ Input mappings can be used to transform the variables into a format accepted by 
 
 For more information about this topic visit the documentation about [Input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
 
+## Job priority
+
+This task type supports `zeebe:jobPriorityDefinition`.
+
+You can define job priority on the process as a default and override it on this task.
+For priority behavior and limitations, see [Job prioritization](../../../concepts/job-workers.md#job-prioritization).
+
 ## Additional resources
 
 ### XML representation
 
-A service task with a custom header:
+A service task with a custom header and priority definition:
 
 ```xml
 <bpmn:serviceTask id="collect-money" name="Collect Money">
@@ -51,6 +58,7 @@ A service task with a custom header:
     <zeebe:taskHeaders>
       <zeebe:header key="method" value="VISA" />
     </zeebe:taskHeaders>
+    <zeebe:jobPriorityDefinition priority="90" />
   </bpmn:extensionElements>
 </bpmn:serviceTask>
 ```

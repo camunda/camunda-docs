@@ -33,6 +33,16 @@ Forbidden. The request is not allowed.
 
 ---
 
+### 409
+
+```ts
+409: ProblemDetail;
+```
+
+A user with this username already exists.
+
+---
+
 ### 500
 
 ```ts

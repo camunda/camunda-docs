@@ -1,0 +1,43 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "c72e043"
+  },
+  "schemaVersion": 19,
+  "id": "upload_receipt",
+  "components": [
+    {
+      "label": "Merchant",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_072rt6x",
+        "columns": null
+      },
+      "id": "Field_0pyzhsz",
+      "key": "merchant"
+    },
+    {
+      "label": "Description",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0goq8hn",
+        "columns": null
+      },
+      "id": "Field_0lgpq9z",
+      "key": "description"
+    },
+    {
+      "label": "Receipt",
+      "type": "filepicker",
+      "layout": {
+        "row": "Row_1e6dbw6",
+        "columns": null
+      },
+      "id": "Field_0xmloyc",
+      "key": "receipts"
+    }
+  ],
+  "type": "default"
+}

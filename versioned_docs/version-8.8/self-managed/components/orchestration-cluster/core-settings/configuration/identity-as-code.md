@@ -22,6 +22,10 @@ Identity checks only the ID to decide whether an entity already exists.
 
 When you deploy with Helm, the most reliable approach is to provide Identity as Code settings through [application configs](/self-managed/deployment/helm/configure/application-configs.md) using `orchestration.extraConfiguration`. The Helm examples below use this pattern so you can apply the same approach consistently across all entity types.
 
+:::note Chart 8.8 requires explicit Spring import
+On Helm chart `camunda-platform-8.8`, `orchestration.extraConfiguration` is a **map** (`filename: |`), not the `- file: / content:` array form introduced in chart 8.9. You must also set `SPRING_CONFIG_IMPORT` so Spring Boot loads the mounted file. The examples below show the required 8.8 syntax.
+:::
+
 ## Configure authorizations
 
 <Tabs groupId="config-method">
@@ -40,20 +44,22 @@ CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS=CREATE,READ
 
 ```yaml
 orchestration:
+  env:
+    - name: SPRING_CONFIG_IMPORT
+      value: "optional:file:/usr/local/camunda/config/identity-as-code.yaml"
   extraConfiguration:
-    - file: identity-as-code.yaml
-      content: |
-        camunda:
-          security:
-            initialization:
-              authorizations:
-                - ownerType: USER
-                  ownerId: john.doe
-                  resourceType: RESOURCE
-                  resourceId: "*"
-                  permissions:
-                    - CREATE
-                    - READ
+    identity-as-code.yaml: |
+      camunda:
+        security:
+          initialization:
+            authorizations:
+              - ownerType: USER
+                ownerId: john.doe
+                resourceType: RESOURCE
+                resourceId: "*"
+                permissions:
+                  - CREATE
+                  - READ
 ```
 
 </TabItem>
@@ -78,28 +84,30 @@ CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_USERS="UserA,UserB,UserC"
 
 ```yaml
 orchestration:
+  env:
+    - name: SPRING_CONFIG_IMPORT
+      value: "optional:file:/usr/local/camunda/config/identity-as-code.yaml"
   extraConfiguration:
-    - file: identity-as-code.yaml
-      content: |
-        camunda:
-          security:
-            initialization:
-              groups:
-                - groupId: test-group
-                  name: Test Group
-                  description: A cool test group!
-                  clients:
-                    - ClientA
-                    - ClientB
-                    - ClientC
-                  mappingRules:
-                    - RuleA
-                    - RuleB
-                    - RuleC
-                  users:
-                    - UserA
-                    - UserB
-                    - UserC
+    identity-as-code.yaml: |
+      camunda:
+        security:
+          initialization:
+            groups:
+              - groupId: test-group
+                name: Test Group
+                description: A cool test group!
+                clients:
+                  - ClientA
+                  - ClientB
+                  - ClientC
+                mappingRules:
+                  - RuleA
+                  - RuleB
+                  - RuleC
+                users:
+                  - UserA
+                  - UserB
+                  - UserC
 ```
 
 </TabItem>
@@ -121,16 +129,18 @@ CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_MAPPINGRULEID=my-mapping-rule
 
 ```yaml
 orchestration:
+  env:
+    - name: SPRING_CONFIG_IMPORT
+      value: "optional:file:/usr/local/camunda/config/identity-as-code.yaml"
   extraConfiguration:
-    - file: identity-as-code.yaml
-      content: |
-        camunda:
-          security:
-            initialization:
-              mappingRules:
-                - claimName: isAllowedToDoStuff
-                  claimValue: "true"
-                  mappingRuleId: my-mapping-rule
+    identity-as-code.yaml: |
+      camunda:
+        security:
+          initialization:
+            mappingRules:
+              - claimName: isAllowedToDoStuff
+                claimValue: "true"
+                mappingRuleId: my-mapping-rule
 ```
 
 </TabItem>
@@ -156,29 +166,31 @@ CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_USERS="UserA,UserB,UserC"
 
 ```yaml
 orchestration:
+  env:
+    - name: SPRING_CONFIG_IMPORT
+      value: "optional:file:/usr/local/camunda/config/identity-as-code.yaml"
   extraConfiguration:
-    - file: identity-as-code.yaml
-      content: |
-        camunda:
-          security:
-            initialization:
-              roles:
-                - roleId: test-role
-                  name: Test Role
-                  description: A cool test role!
-                  clients:
-                    - client1
-                    - client2
-                  groups:
-                    - group1
-                    - group2
-                  mappingRules:
-                    - m1
-                    - m2
-                  users:
-                    - UserA
-                    - UserB
-                    - UserC
+    identity-as-code.yaml: |
+      camunda:
+        security:
+          initialization:
+            roles:
+              - roleId: test-role
+                name: Test Role
+                description: A cool test role!
+                clients:
+                  - client1
+                  - client2
+                groups:
+                  - group1
+                  - group2
+                mappingRules:
+                  - m1
+                  - m2
+                users:
+                  - UserA
+                  - UserB
+                  - UserC
 ```
 
 </TabItem>
@@ -205,40 +217,42 @@ CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_USERS='UserA,UserB,UserC'
 
 ```yaml
 orchestration:
+  env:
+    - name: SPRING_CONFIG_IMPORT
+      value: "optional:file:/usr/local/camunda/config/identity-as-code.yaml"
   extraConfiguration:
-    - file: identity-as-code.yaml
-      content: |
-        camunda:
-          security:
-            initialization:
-              tenants:
-                - tenantId: tenantId
-                  name: test tenant
-                  description: test tenant description
-                  clients:
-                    - R1
-                    - R2
-                    - R3
-                    - R4
-                  groups:
-                    - R1
-                    - R2
-                    - R3
-                    - R4
-                  mappingRules:
-                    - R1
-                    - R2
-                    - R3
-                    - R4
-                  roles:
-                    - R1
-                    - R2
-                    - R3
-                    - R4
-                  users:
-                    - UserA
-                    - UserB
-                    - UserC
+    identity-as-code.yaml: |
+      camunda:
+        security:
+          initialization:
+            tenants:
+              - tenantId: tenantId
+                name: test tenant
+                description: test tenant description
+                clients:
+                  - R1
+                  - R2
+                  - R3
+                  - R4
+                groups:
+                  - R1
+                  - R2
+                  - R3
+                  - R4
+                mappingRules:
+                  - R1
+                  - R2
+                  - R3
+                  - R4
+                roles:
+                  - R1
+                  - R2
+                  - R3
+                  - R4
+                users:
+                  - UserA
+                  - UserB
+                  - UserC
 ```
 
 </TabItem>
@@ -263,17 +277,19 @@ CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME=john.doe
 
 ```yaml
 orchestration:
+  env:
+    - name: SPRING_CONFIG_IMPORT
+      value: "optional:file:/usr/local/camunda/config/identity-as-code.yaml"
   extraConfiguration:
-    - file: identity-as-code.yaml
-      content: |
-        camunda:
-          security:
-            initialization:
-              users:
-                - email: john.doe@example.com
-                  name: John Doe
-                  password: "*****"
-                  username: john.doe
+    identity-as-code.yaml: |
+      camunda:
+        security:
+          initialization:
+            users:
+              - email: john.doe@example.com
+                name: John Doe
+                password: "*****"
+                username: john.doe
 ```
 
 </TabItem>

@@ -9,14 +9,13 @@ page_rank: 90
 
 import DocCardList from '@theme/DocCardList';
 import OverviewImg from './img/hero-get-started.png';
-import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Ready to start? Run your first local Camunda 8 project.</h3>
 
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first AI agent, and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
+Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first [AI agent](/reference/glossary.md#ai-agent), and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 
 <a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first BPMN process with Camunda 8" href="getting-started-hello-world" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first BPMN process with Camunda 8</a>
 
@@ -34,17 +33,17 @@ Launch a fully-automated Rocket Launch process on your local machine with no cod
 
 <p><a href="./getting-started-hello-world/" class="link-arrow">Run your first BPMN process</a></p>
 
+## Build your first AI agent
+
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent). The agent runs as a step inside a BPMN process, so the engine executes, retries, and records it in the same way as the fixed steps around it.
+
+<p><a href="./getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
+
 ## Run your first Spring Boot or Node.js project with Camunda 8
 
 This guide is for developers who want to implement process automation solutions using Spring Boot or Node.js. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 <p><a href="./getting-started-example/" class="link-arrow">Run your first local project</a></p>
-
-## Build your first AI agent
-
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
-
-<p><a href="./getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
 
 ## Orchestrate human tasks
 
@@ -57,5 +56,3 @@ This guide is for low-code developers using Camunda 8 SaaS to efficiently alloca
 This guide is for users who prefer a low-code approach to process automation, walking you through working with a REST connector task as a first time Camunda 8 SaaS user. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
 <p><a href="./orchestrate-apis/" class="link-arrow">Get started with API orchestration</a></p>
-
-<AskAi/>

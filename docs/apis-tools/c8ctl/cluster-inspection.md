@@ -5,9 +5,9 @@ sidebar_label: "Cluster inspection"
 description: "Use c8ctl to list, search, and manage process instances, user tasks, incidents, jobs, messages, and forms in a Camunda 8 cluster."
 ---
 
-:::warning Alpha feature
-`c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
-:::
+<!-- This page is maintained in the c8ctl repository (https://github.com/camunda/c8ctl, in docs/) and
+     is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
+     overwritten. Edit the source in the c8ctl repo instead. -->
 
 `c8ctl` follows a `<verb> <resource>` command structure. Most resources have short aliases to reduce typing:
 
@@ -22,7 +22,7 @@ description: "Use c8ctl to list, search, and manage process instances, user task
 | `authorization(s)`      | `auth`        |
 | `mapping-rule(s)`       | `mr`          |
 
-Available verbs: `list`, `search`, `get`, `create`, `delete`, `set`, `cancel`, `complete`, `fail`, `activate`, `resolve`, `publish`, `correlate`, `assign`, `unassign`.
+Available verbs: `list`, `search`, `get`, `create`, `await`, `delete`, `set`, `cancel`, `complete`, `fail`, `activate`, `update`, `resolve`, `publish`, `correlate`, `assign`, `unassign`.
 
 :::tip
 All commands respect the active profile and tenant. Pass `--profile` to override the profile for a single command:
@@ -44,6 +44,8 @@ c8 get topology
 
 ## Process instances
 
+Business IDs require Camunda 8.9 or newer.
+
 ### List process instances
 
 ```bash
@@ -55,6 +57,9 @@ c8 list pi --id=order-process
 
 # Filter by state
 c8 list pi --state=ACTIVE
+
+# Filter by Business ID
+c8 list pi --businessId=order-123
 ```
 
 ### Get a process instance
@@ -77,6 +82,15 @@ c8 create pi --id=order-process --version=2
 # With variables
 c8 create pi --id=order-process --variables='{"orderId":"12345","amount":100}'
 
+# With variables read from a file (avoids shell quoting issues)
+c8 create pi --id=order-process --variables=@vars.json
+
+# With variables read from stdin
+cat vars.json | c8 create pi --id=order-process --variables=@-
+
+# With a Business ID for business-level correlation
+c8 create pi --id=order-process --businessId=order-123
+
 # Create and wait for completion
 c8 create pi --id=order-process --awaitCompletion
 
@@ -91,6 +105,7 @@ The `await` command is a shorthand for `create` with `--awaitCompletion`. It use
 ```bash
 c8 await pi --id=order-process
 c8 await pi --id=order-process --variables='{"orderId":"12345"}'
+c8 await pi --id=order-process --businessId=claim-456
 c8 await pi --id=order-process --requestTimeout=60000
 ```
 
@@ -174,7 +189,12 @@ c8 activate jobs email-service
 
 # With options
 c8 activate jobs email-service --maxJobsToActivate=20 --timeout=120000 --worker=my-worker
+
+# Include custom headers and fetch specific variables in the output
+c8 activate jobs email-service --customHeaders --fetchVariable=orderId,amount
 ```
+
+Use `--customHeaders` to include each job's custom headers in the output, and `--fetchVariable` to fetch a comma-separated list of variable names from the server and include them.
 
 ### Complete a job
 
@@ -192,6 +212,18 @@ c8 fail job 2251799813685252
 
 # With retries and error message
 c8 fail job 2251799813685252 --retries=3 --errorMessage="Email service unavailable"
+```
+
+### Update a job
+
+Update a job's retries or timeout. At least one of `--retries` or `--timeout` is required:
+
+```bash
+# Reset the retry count (for example, to make a failed job activatable again)
+c8 update job 2251799813685252 --retries=3
+
+# Extend the job timeout to 60 seconds
+c8 update job 2251799813685252 --timeout=60000
 ```
 
 ## Search
@@ -328,6 +360,7 @@ c8 search pd --id=order-process --profile=prod
 ```bash
 c8 search pi --state=ACTIVE
 c8 search pi --id=order-process
+c8 search pi --businessId=order-123
 c8 search pi --processDefinitionKey=2251799813685249
 c8 search pi --parentProcessInstanceKey=2251799813685250
 c8 search pi --id=order-process --state=ACTIVE
@@ -391,20 +424,48 @@ c8 search variables --name=orderPayload --fullValue
 
 By default, long variable values are truncated. Truncated values show a `✓` in the "Truncated" column. Use `--fullValue` to see complete values.
 
+### Search wait states
+
+Wait states are the points where a process instance is waiting — an open job, a message subscription, a timer, a condition, a user task, or a signal. Use `search wait-state` (alias `ws`) to find them:
+
+```bash
+# All wait states for a process instance
+c8 search ws --processInstanceKey=2251799813685249
+
+# Filter by wait state type (JOB, MESSAGE, TIMER, CONDITION, USER_TASK, SIGNAL)
+c8 search ws --waitStateType=JOB
+
+# Filter by BPMN element type, or by element ID (supports wildcards)
+c8 search ws --elementType=SERVICE_TASK
+c8 search ws --elementId='*Approve*'
+```
+
 ## Variables
 
 ### Set variables
 
-Set variables on a process instance or element instance scope:
+Set variables on a process instance or a specific flow element scope using its element instance key:
 
 ```bash
-c8 set variable 2251799813685249 --variables='{"status":"approved"}'
+# Set variables on a process instance (propagated to the outermost scope by default)
+c8 set variable 2251799813685249 --variables='{"status":"approved","amount":100}'
 
-# Set variables in local scope only (no propagation to parent scopes)
-c8 set variable 2251799813685249 --variables='{"x":1}' --local
+# Set variables in the local scope only (not propagated to the parent scope)
+c8 set variable 2251799813685249 --variables='{"localCounter":1}' --local
 ```
 
-The `--variables` flag accepts a JSON object. Use `--local` to restrict the variable scope to the specified element instance.
+The `--variables` flag accepts a JSON object. Use `--local` to restrict the update to the specified element instance scope instead of propagating to the outermost scope.
+
+Every command that takes `--variables` also accepts `@file.json` to read the JSON from a file and `@-` to read it from stdin. Prefer these when the payload is large or contains quotes — some shells (notably PowerShell) strip or re-split the quotes of inline JSON before the CLI ever sees it:
+
+```bash
+c8 complete job 2251799813685252 --variables=@vars.json
+Get-Content vars.json | c8 complete job 2251799813685252 --variables=@-
+```
+
+When inline JSON arrives with all of its quotes stripped (`{a:b}` instead of `{"a":"b"}`), c8ctl restores them and prints a warning showing the payload it recovered. Restoration is best-effort: it cannot tell `{"a":1}` from `{"a":"1"}`, and it fails outright when a stripped string contained a `:` or `,` of its own. Use `@file.json` or `@-` for anything non-trivial.
+
+The element instance key is the key of the process instance or the specific flow element scope you want to update. You can retrieve these keys from `c8 get pi` or `c8 search pi`.
 
 ## Identity management
 
@@ -510,7 +571,7 @@ c8 publish msg order-placed --correlationKey=order-12345 --timeToLive=3600000
 
 ### Correlate a message
 
-`correlate` is an alias for `publish`:
+Use `correlate` to correlate a message to waiting process instances. It is a separate command from `publish` and, like `publish`, accepts a `--correlationKey` and optional `--variables`:
 
 ```bash
 c8 correlate msg payment-received --correlationKey=order-12345 --variables='{"amount":250.00}'

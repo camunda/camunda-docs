@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Checkout last two commits of the PR
         # The last *two* commits are (1) everything in this branch, and (2) the parent of this branch.
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 2
 
@@ -31,7 +31,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Comment on PR if version updates are potentially missing
-        uses: thollander/actions-comment-pull-request@v3
+        uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3.0.1
         if: ${{ env.MESSAGES != '' }}
         with:
           message: |
@@ -43,7 +43,7 @@ jobs:
           comment-tag: check-versions
 
       - name: Comment 'LGTM' on PR once potential version issues are resolved
-        uses: thollander/actions-comment-pull-request@v3
+        uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3.0.1
         if: ${{ env.MESSAGES == '' }}
         with:
           message: |

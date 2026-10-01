@@ -9,10 +9,6 @@ mdx:
 
 # Resilience
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 ## HTTP Retry
 
 Automatic retry with exponential backoff and jitter for transient failures (429, 503, 500, timeouts).

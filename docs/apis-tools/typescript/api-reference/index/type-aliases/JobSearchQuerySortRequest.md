@@ -17,6 +17,7 @@ type JobSearchQuerySortRequest = object;
 
 ```ts
 field:
+  | "creationTime"
   | "deadline"
   | "deniedReason"
   | "elementId"
@@ -29,6 +30,7 @@ field:
   | "jobKey"
   | "kind"
   | "listenerEventType"
+  | "priority"
   | "processDefinitionId"
   | "processDefinitionKey"
   | "processInstanceKey"

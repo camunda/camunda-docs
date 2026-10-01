@@ -44,8 +44,8 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
-- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 4.0.x
-- **Helm CLI**: v4.x is required for Camunda 8.10 (chart 15.x) and later. See [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md) for details, and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
+- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x, 4.1.x
+- **Helm CLI**: 4.x [recommended], 3.10+ (supported until February 10, 2027; continued use after that date is at the customer’s own risk). For details, see [Helm CLI support](/self-managed/deployment/helm/operational-tasks/helm-v4.md#camunda-helm-chart-compatibility) and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## Camunda 8 Self-Managed
 
@@ -53,7 +53,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
+With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises), and is not tied to a specific Kubernetes version. The Helm chart supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
@@ -103,23 +103,23 @@ Regardless of the type, the network storage volumes you use must meet these requ
 - They must be capable of **at least 1,000 IOPS**.
 - The latency of write/msync operations must be in the **low single digit milliseconds** under normal conditions. Ideally, it's in the order of microseconds.
 - The p99 latency must be **lower than 300 milliseconds**.
+- They must be SSD-backed. HDD-backed volumes typically sustain only tens to a few hundred IOPS with multi-millisecond seek latency, well below the 1,000 IOPS minimum and single-digit-millisecond latency required for Zeebe, so they are not supported.
 
 ### Helm charts version matrix
 
-Camunda Helm chart version `15.x.x` works with Camunda version `8.10.x` and requires the Helm v4 CLI. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for more details.
+Camunda Helm chart version `15.x.x` works with Camunda version `8.10.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for more details.
 
 ## Component requirements
 
 Requirements for components are as follows:
 
-| Component                                                  | Java version  | Other requirements                                                                                                                                                                                                                                                                                                                                                                |
-| :--------------------------------------------------------- | :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21–25 | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                 |
-| Optimize                                                   | OpenJDK 21–25 | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                                                 |
-| Connectors                                                 | OpenJDK 21–25 | –                                                                                                                                                                                                                                                                                                                                                                                 |
-| Management Identity                                        | OpenJDK 17+   | <ul><li>Keycloak 26.x</li><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li><li>PostgreSQL is required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)</li></ul> |
-| Web Modeler                                                | –             | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                                                           |
-| Self-Managed Console                                       | –             | –                                                                                                                                                                                                                                                                                                                                                                                 |
+| Component                                                  | Java version  | Other requirements                                                                                                                                                                                                                                                                                                                                   |
+| :--------------------------------------------------------- | :------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21–25 | <ul><li>Elasticsearch 9.4+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.6+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>    |
+| Optimize                                                   | OpenJDK 21–25 | <ul><li>Elasticsearch 9.4+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.6+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                    |
+| Connectors                                                 | OpenJDK 21–25 | –                                                                                                                                                                                                                                                                                                                                                    |
+| Management Identity                                        | OpenJDK 17+   | <ul><li>Keycloak 26.x</li><li>PostgreSQL 14.x, 15.x, 16.x, 17.x (required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)), or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x</li><li>Oracle 19c</li><li>Microsoft SQL Server 2019, 2022, 2025</li></ul> |
+| Camunda Hub                                                | –             | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                              |
 
 :::info Optimize compatibility
 When running Optimize, make sure you use an [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) version that is compatible with your Optimize version.
@@ -139,12 +139,14 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 ### Component version matrix
 
-The following matrix shows which component versions work together. Components within the same column must share the same `minor` and `patch` version.
+The following matrix shows which component versions work together. The components in each cell must share the same `minor` and `patch` version except Desktop Modeler, which follows its own versioning and is not version-locked to other components.
 
-| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                      |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x                                               | Web Modeler 8.9.x<br/>Desktop Modeler 5.46+ |
+For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
 
-:::note
-You can use newer versions of Desktop and Web Modeler with older versions of the Orchestration Cluster.
-:::
+| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management and design](../self-managed/reference-architecture/reference-architecture.md#camunda-hub)    |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster 8.10.X<br/>Connectors 8.10.X<br/>Optimize 8.10.X                                          | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.52+                              |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.46+                              |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x<br/>Web Modeler 8.9.x<br/>Desktop Modeler 5.46+ |
+| Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.40+                              |
+| Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.8.x<br/>Self-Managed Console 8.8.x<br/>Web Modeler 8.8.x<br/>Desktop Modeler 5.40+ |

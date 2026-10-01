@@ -815,6 +815,32 @@
   color: #c8e1ff;
 }
 
+.darkSection.exploreSectionLast {
+  background: linear-gradient(
+    180deg,
+    #1c1a52 0%,
+    #100e36 35%,
+    #0d0b2a 70%,
+    #161616 100%
+  ) !important;
+}
+
+[data-theme="dark"] .darkSection.exploreSectionLast {
+  background: var(--ifm-background-color) !important;
+}
+
+.darkSection .heroCardCtaAlt {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff !important;
+}
+
+.darkSection .heroCardCtaAlt:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+  color: #ffffff !important;
+}
+
 /* Get started with Camunda downloads section bg */
 .downloadsSection {
   background: #f7f7f7 !important;
@@ -2103,6 +2129,18 @@
 .downloadButton:hover {
   background: var(--ifm-color-primary-dark);
   text-decoration: none !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .downloadButton {
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .downloadButton:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
   color: #ffffff !important;
 }
 

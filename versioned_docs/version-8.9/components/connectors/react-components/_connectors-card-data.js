@@ -73,7 +73,7 @@ export const latestConnectorCards = [
   },
   {
     link: "../out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
-    title: "Ad-Hoc Tools Schema Resolver",
+    title: "Ad-hoc Tools Schema Resolver",
     image: AiagentImg,
     description: "Implement tool resolution of the AI Agent connector.",
   },

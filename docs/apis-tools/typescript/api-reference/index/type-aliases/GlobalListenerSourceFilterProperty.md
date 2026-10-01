@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type GlobalListenerSourceFilterProperty =
-  | GlobalListenerSourceExactMatch
-  | AdvancedGlobalListenerSourceFilter;
+  GlobalListenerSourceExactMatch | AdvancedGlobalListenerSourceFilter;
 ```
 
 Global listener source property with full advanced search capabilities.

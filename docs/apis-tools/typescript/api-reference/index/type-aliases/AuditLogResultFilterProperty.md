@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type AuditLogResultFilterProperty =
-  | AuditLogResultExactMatch
-  | AdvancedResultFilter;
+  AuditLogResultExactMatch | AdvancedResultFilter;
 ```
 
 AuditLogResultEnum property with full advanced search capabilities.

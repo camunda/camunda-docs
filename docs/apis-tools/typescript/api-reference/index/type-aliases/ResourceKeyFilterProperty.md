@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type ResourceKeyFilterProperty =
-  | ResourceKeyExactMatch
-  | AdvancedResourceKeyFilter;
+  ResourceKeyExactMatch | AdvancedResourceKeyFilter;
 ```
 
 ResourceKey property with full advanced search capabilities.

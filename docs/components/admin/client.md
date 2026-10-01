@@ -8,7 +8,7 @@ Configure and manage client access to a cluster so the client application has th
 
 ## About client application access
 
-A client is an application that interacts with an Orchestration Cluster via its APIs.
+A client is an application that interacts with an Orchestration Cluster via its APIs. For example, an [external agent](/reference/glossary.md#external-agent)'s runtime can be configured as a client so it can call the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) to report its execution.
 
 This guide describes how to manage client access in SaaS and in Self-Managed environments that use an [external OpenID Connect (OIDC) identity provider](../concepts/access-control/connect-to-identity-provider.md) for authentication.
 

@@ -32,7 +32,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 ### Protected paths (require CSRF token)
 
 - `/api/**` – API endpoints (except specifically excluded paths)
-- `/v1/**`, `/v2/**` – Versioned API endpoints
+- `/v2/**` – Versioned API endpoints
 - All state-changing operations (POST, PUT, DELETE, PATCH)
 
 ### Unprotected paths (no CSRF token required)

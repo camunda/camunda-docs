@@ -6,6 +6,16 @@
   margin-bottom: 30px;
 }
 
+/* default (3 cols) */
+.migration-grid.migration-grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* two-column option */
+.migration-grid.migration-grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 a.migration-card {
   text-decoration: none;
   color: inherit;
@@ -70,13 +80,14 @@ a.migration-card {
 }
 
 @media (max-width: 1024px) {
-  .migration-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .migration-grid.migration-grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .migration-grid {
+  .migration-grid.migration-grid-cols-3,
+  .migration-grid.migration-grid-cols-2 {
     grid-template-columns: 1fr;
   }
 }

@@ -27,17 +27,17 @@ Build Camunda solutions with agentic orchestration and MCP integrations. Connect
 </div>
 </div>
 
-## Orchestrate AI agents
+## Build AI agents
 
-Orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
+Build AI agents that combine the flexibility of AI with the reliability of process orchestration. Embed LLM-powered agents directly in your BPMN processes so they can reason, call tools, and act, with enforceable steps you control between an agent's decision and what it actually does. Build anything from a simple task agent to a complex multi-agent system.
 
-Set up and build any enterprise automation pattern, from simple task agents to complex multi-agent systems.
+Orchestrate agents alongside human tasks, deterministic rules, and system integrations in end-to-end business processes.
 
 <p><a href="../../../components/agentic-orchestration/" class="link-arrow">Agentic orchestration</a></p>
 
 ## Design with AI
 
-Explore these selected AI features to design workflows and processes more easily and faster.
+Explore these selected AI features to design processes more easily and faster.
 
 <AoGrid columns={2} ao={[
 {

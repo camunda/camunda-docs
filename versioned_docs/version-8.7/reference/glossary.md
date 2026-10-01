@@ -43,6 +43,14 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ## A
 
+### Ad-hoc sub-process
+
+A special type of BPMN subprocess that allows activities to be executed in any order, skipped, or repeated, without a predefined sequence. Activities are activated dynamically at runtime, either by a human or a system, rather than following a fixed flow.
+
+In Camunda, ad-hoc sub-processes are the foundation for AI agent tool execution: each activity inside the sub-process acts as a tool the LLM can select and invoke during a feedback loop.
+
+- [Ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)
+
 ### Automation cluster
 
 See [Orchestration Cluster](#orchestration-cluster).
@@ -208,7 +216,7 @@ For example, this is useful when working with services that must be isolated wit
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
-Inbound connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
+Inbound connectors include three subtypes: [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
 
 Unlike [outbound connectors](#outbound-connector), inbound connectors are **stateful**. The Java code of the inbound connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
 Each element referencing an inbound connector will lead to the creation of one inbound connector instance. A process definition with one webhook start event and two additional webhooks as intermediate catch events would therefore lead to the creation of three inbound connector instances.

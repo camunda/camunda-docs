@@ -1,19 +1,5 @@
 ---
 title: Routing events to processes
-tags:
-  - Event Handling
-  - Process Instantiation
-  - Message Handling
-  - Correlation
-  - SOAP
-  - JMS
-  - REST
-  - Camel
-  - ESB
-  - API
-  - BPMN Message Event
-  - BPMN Signal Event
-  - BPMN Timer Event
 description: "To start a new process instance or to route a message to a running instance, choose the appropriate technology option to do so."
 ---
 
@@ -50,12 +36,12 @@ This message start event is defined to react to a specific message type...
 
 Several BPMN intermediate events (and the receive task) can be used to make a process instance _wait_ for and _react_ to certain triggers.
 
-|                         | Message Event                                                                | Receive Task                                                                            | Timer Event                                                                    | Signal Event                                                              | Conditional Event                                                            |
-| ----------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-|                         | ![message intermediate](/img/bpmn-elements/message-intermediate.svg)         | ![task receive](/img/bpmn-elements/task-receive.svg)                                    | ![timer intermediate](/img/bpmn-elements/timer-intermediate.svg)               | ![signal intermediate](/img/bpmn-elements/signal-intermediate.svg)        | ![conditional intermediate](/img/bpmn-elements/conditional-intermediate.svg) |
+|                         | Message Event                                                                | Receive Task                                                                                    | Timer Event                                                                    | Signal Event                                                              | Conditional Event                                                            |
+| ----------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+|                         | ![message intermediate](/img/bpmn-elements/message-intermediate.svg)         | ![task receive](/img/bpmn-elements/task-receive.svg)                                            | ![timer intermediate](/img/bpmn-elements/timer-intermediate.svg)               | ![signal intermediate](/img/bpmn-elements/signal-intermediate.svg)        | ![conditional intermediate](/img/bpmn-elements/conditional-intermediate.svg) |
 | Use when                | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, for example, for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
-| Supported for Execution | ✔                                                                            | ✔                                                                                       | ✔                                                                              | ✔                                                                         | Not yet supported in Camunda 8                                               |
-|                         | [Learn more](/components/modeler/bpmn/message-events/message-events.md)      | [Learn more](/components/modeler/bpmn/receive-tasks/receive-tasks.md)                   | [Learn more](/components/modeler/bpmn/timer-events/timer-events.md)            | [Learn more](/components/modeler/bpmn/signal-events/signal-events.md)     |                                                                              |
+| Supported for Execution | ✔                                                                            | ✔                                                                                               | ✔                                                                              | ✔                                                                         | Not yet supported in Camunda 8                                               |
+|                         | [Learn more](/components/modeler/bpmn/message-events/message-events.md)      | [Learn more](/components/modeler/bpmn/receive-tasks/receive-tasks.md)                           | [Learn more](/components/modeler/bpmn/timer-events/timer-events.md)            | [Learn more](/components/modeler/bpmn/signal-events/signal-events.md)     |                                                                              |
 
 Consider this example:
 
@@ -97,6 +83,7 @@ Most events actually occur somewhere external to the workflow engine and need to
 
 - Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
 - Using connectors: Configure a connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
+- Using the Processes MCP Server: Apply the [MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) to a message start event, and the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) registers the process as a tool that MCP clients, such as AI agents, can call to start an instance. See [expose a process as an MCP tool](/components/agentic-orchestration/expose-process-as-mcp-tool.md).
 
 ### Starting process instance by BPMN process ID
 

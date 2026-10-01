@@ -26,6 +26,7 @@ node_modules
 /playwright-report/
 /playwright/.cache/
 /python-sdk
+/rust-sdk
 
 camunda-deployment-references
 camunda-deployment-references/**

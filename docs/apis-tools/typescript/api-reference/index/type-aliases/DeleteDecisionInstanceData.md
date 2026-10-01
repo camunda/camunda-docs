@@ -30,7 +30,7 @@ path: object;
 #### decisionEvaluationKey
 
 ```ts
-decisionEvaluationKey: DecisionEvaluationKey;
+decisionEvaluationKey: DecisionEvaluationKeyWritable;
 ```
 
 The key of the decision evaluation to delete.

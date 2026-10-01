@@ -4,9 +4,14 @@ paths:
       tags:
         - System
       operationId: getUsageMetrics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get usage metrics
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1VTQUdFX01FVFJJQyJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -87,9 +92,14 @@ paths:
       tags:
         - System
       operationId: getSystemConfiguration
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: System configuration (alpha)
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -124,19 +134,13 @@ paths:
                         - operate
                         - tasklist
                     deployment:
-                      isEnterprise: false
                       isMultiTenancyEnabled: false
-                      contextPath: ""
                       maxRequestSize: 4194304
                     authentication:
                       canLogout: true
                       isLoginDelegated: false
                     cloud:
-                      organizationId: null
-                      clusterId: null
-                      stage: null
-                      mixpanelToken: null
-                      mixpanelAPIHost: null
+                      stage: prod
         "401":
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "500":
@@ -272,23 +276,13 @@ components:
       description: Configuration for deployment characteristics.
       type: object
       required:
-        - isEnterprise
         - isMultiTenancyEnabled
-        - contextPath
         - maxRequestSize
       properties:
-        isEnterprise:
-          description: Whether this is an enterprise deployment.
-          type: boolean
-          example: false
         isMultiTenancyEnabled:
           description: Whether multi-tenancy is enabled.
           type: boolean
           example: false
-        contextPath:
-          description: The servlet context path for the deployment.
-          type: string
-          example: ""
         maxRequestSize:
           description: The maximum HTTP request size in bytes.
           type: integer
@@ -313,38 +307,15 @@ components:
       description: Configuration for SaaS/cloud-specific settings.
       type: object
       required:
-        - organizationId
-        - clusterId
         - stage
-        - mixpanelToken
-        - mixpanelAPIHost
       properties:
-        organizationId:
-          description: The SaaS organization ID, if applicable.
-          type: string
-          nullable: true
-          example: org-123456
-        clusterId:
-          description: The SaaS cluster ID, if applicable.
-          type: string
-          nullable: true
-          example: cluster-abc
         stage:
           description: The cloud deployment stage.
+          type: string
           nullable: true
           allOf:
             - $ref: "#/components/schemas/CloudStage"
           example: prod
-        mixpanelToken:
-          description: The Mixpanel analytics token for the cloud UI.
-          type: string
-          nullable: true
-          example: abc123token
-        mixpanelAPIHost:
-          description: The Mixpanel API host URL.
-          type: string
-          nullable: true
-          example: https://api.mixpanel.com
     WebappComponent:
       description: A Camunda webapp component name.
       type: string

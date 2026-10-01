@@ -33,7 +33,7 @@ The following images must be available in your air-gapped environment:
 
 **Camunda images:**
 
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/camunda](https://hub.docker.com/r/camunda/camunda)
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
@@ -97,9 +97,11 @@ The open-source variant is based on the `bitnamilegacy` repository and receives 
 
 :::tip About the original Bitnami Keycloak images
 If you prefer to use the original Bitnami Keycloak images directly (`bitnamilegacy/keycloak` or `registry.camunda.cloud/vendor-ee/keycloak`), you can override the image in your Helm values. This is not required, as Camunda Keycloak images are fully compatible and recommended.
+
+`registry.camunda.cloud/vendor-ee/keycloak` is a proxied path: its tags are not fully listable (see the [registry migration notice](#access-enterprise-images-with-skopeo)), which can break registry mirrors that sync from the tag list. For enterprise deployments, prefer `registry.camunda.cloud/keycloak-ee/keycloak`, which is fully listable.
 :::
 
-A helper script is available in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) to pull and save Docker images.
+A helper script is available in the [camunda-helm-repository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) to pull and save Docker images.
 
 ### Access Camunda images from the Camunda registry
 
@@ -108,11 +110,11 @@ All required images published on Docker Hub (Camunda and Bitnami organizations) 
 - `registry.camunda.cloud/camunda/<image>`
 - `registry.camunda.cloud/bitnami/<image>`
 
-For example, you can pull the Zeebe and PostgreSQL images from Docker Hub or the Camunda registry:
+For example, you can pull the Camunda and PostgreSQL images from Docker Hub or the Camunda registry:
 
 ```shell
-docker pull camunda/zeebe:latest
-docker pull registry.camunda.cloud/camunda/zeebe:latest
+docker pull camunda/camunda:latest
+docker pull registry.camunda.cloud/camunda/camunda:latest
 
 docker pull bitnamilegacy/postgresql:latest
 docker pull registry.camunda.cloud/bitnami/postgresql:latest
@@ -120,8 +122,10 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 
 ### Access enterprise images with Skopeo
 
-:::info Registry migration notice
-As of November 30, 2025, our image vendor has migrated its repositories. All images downloaded before this date remain available but are no longer listable by the `skopeo` command. The `skopeo` command will return only images added by Bitnami after November 30, 2025.
+:::note Registry migration notice
+On November 30, 2025, the image vendor (Bitnami) migrated its repositories. This does not affect pulling images: you can still pull any image by its exact tag. It does affect tag listing. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI return only the tags cached since the migration, so the listed tags are incomplete. The registry stores cached images, not the full upstream catalog.
+
+For the complete list of available tags (with digests), see [Browse available images and tags](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags) and pick the exact tags to mirror from there. For supported combinations, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 :::
 
 If you use Bitnami Premium images from the `vendor-ee` registry, you can use [Skopeo](https://github.com/containers/skopeo) to copy images directly to your private registry without requiring Docker locally:

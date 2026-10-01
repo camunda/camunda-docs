@@ -4,9 +4,14 @@ paths:
       tags:
         - Form
       operationId: getFormByKey
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get form by key
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
 
         [[ADDED_IN_VERSION:8.10]]
 

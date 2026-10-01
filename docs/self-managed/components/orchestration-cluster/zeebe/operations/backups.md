@@ -6,7 +6,7 @@ keywords: ["backup", "backups"]
 ---
 
 :::note
-Refer to our documentation on [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) to learn how to take backups without downtime.
+Refer to our documentation on [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) to learn how to take backups without downtime. For disaster recovery context, see [Multi-region resilience tiers](/self-managed/concepts/multi-region/resilience-tiers.md).
 :::
 
 As Zeebe fully manages the state of your process instances, consider taking backups of Zeebe data; this is crucial to prevent data loss, roll back application-level errors, and more.
@@ -72,7 +72,7 @@ After taking the backup, brokers can be started again and will automatically res
 
 ### Prepare replacement cluster
 
-:::note Caution
+:::warning
 Always use the same or the next minor version of Zeebe that you were using when taking the backup.
 Using a different version may result in data corruption or data loss.
 See the [upgrade guide](/self-managed/upgrade/components/index.md) for more details.

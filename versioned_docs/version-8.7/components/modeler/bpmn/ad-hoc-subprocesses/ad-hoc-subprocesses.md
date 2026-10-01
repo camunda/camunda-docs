@@ -4,7 +4,7 @@ title: "Ad-hoc sub-processes"
 description: "The ad-hoc sub-processes allow flexibility while executing inner elements."
 ---
 
-Ad-hoc sub-processes are a special kind of [embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
+Ad-hoc sub-processes are a special kind of [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
 by a **~** tilde character). Compared to regular subprocesses, ad-hoc sub-processes allow more flexibility
 for executing inner elements.
 
@@ -59,6 +59,8 @@ An ad-hoc sub-process can define input and output
 
 **Output variable mappings** are applied on completing the ad-hoc sub-process. They can be used to propagate local variables
 from the ad-hoc sub-process into the process instance. By default, no local variables are propagated.
+
+Variables written by the activities the ad-hoc sub-process activates stay local to each activation and are not propagated on their own. If an output collection is configured, it is propagated to the parent scope when the ad-hoc sub-process completes. For how an ad-hoc sub-process compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
 ## Additional resources
 

@@ -22,7 +22,9 @@ For more information, visit [announcements](/reference/announcements-release-not
 | 8.7.x (< 8.7.17)         | `spring-boot-starter-camunda-sdk` | ≥ 17 | 8.7.x           | 3.4.x                       |                                   |
 | >= 8.7.17                | `spring-boot-starter-camunda-sdk` | ≥ 17 | 8.7.x           | 3.4.x                       | 3.5.x                             |
 | >= 8.7.24                | `camunda-spring-boot-3-starter`   | ≥ 17 | 8.7.x           | 3.4.x                       | 3.5.x                             |
-| >= 8.7.24                | `camunda-spring-boot-4-starter`   | ≥ 17 | 8.7.x           | 4.0.x                       |                                   |
+| >= 8.7.24                | `camunda-spring-boot-4-starter`   | ≥ 17 | 8.7.x           | 4.0.x                       | 4.1.x ¹                           |
+
+¹ Spring Boot 4.1.x compatibility is verified from patch 8.7.38 onward.
 
 ### Spring Boot 4.0 support
 
@@ -41,6 +43,10 @@ You should use this as a drop-in replacement for the default `spring-boot-starte
 :::note
 There is also a new `camunda-spring-boot-3-starter` module, which is an alias for `spring-boot-starter-camunda-sdk` in the 8.7 release. Use `camunda-spring-boot-3-starter` if you want to stay on Spring Boot 3.5 when eventuallyt upgrading to Camunda 8.8 or newer, where the default `camunda-spring-boot-starter` module will be based on Spring Boot 4.0.
 :::
+
+### Spring Boot 4.1 support
+
+The `camunda-spring-boot-4-starter` bundles Spring Boot 4.0.x by default. [Spring Boot 4.1.x compatibility](#version-compatibility) is verified from the `8.7.38` patch onward.
 
 ## Add the Spring Zeebe SDK to your project
 

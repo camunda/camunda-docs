@@ -4,6 +4,10 @@ title: "Overview"
 description: "Interact with Zeebe clusters. Run user task state operations for Zeebe user tasks."
 ---
 
+:::warning
+The Zeebe REST API is **deprecated**. While it continues to function, new development should use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). See the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for details.
+:::
+
 ## Introduction
 
 The Zeebe REST API is a REST API designed to interact with the Zeebe workflow engine.

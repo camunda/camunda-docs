@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type DecisionRequirementsKeyFilterProperty =
-  | DecisionRequirementsKeyExactMatch
-  | AdvancedDecisionRequirementsKeyFilter;
+  DecisionRequirementsKeyExactMatch | AdvancedDecisionRequirementsKeyFilter;
 ```
 
 DecisionRequirementsKey property with full advanced search capabilities.

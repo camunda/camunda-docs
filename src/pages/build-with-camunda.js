@@ -9,6 +9,14 @@ import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 import AwsSvgIcon from "../components/CamundaSelfManaged/icons/aws.svg";
 import GcpSvgIcon from "../components/CamundaSelfManaged/icons/gcp.svg";
 import IconAgenticImg from "../../docs/components/assets/icon-agentic.png";
+import downloads from "../data/downloads.json";
+
+const GETTING_STARTED = downloads.gettingStarted;
+const CAMUNDA_RUN = downloads.camundaRun;
+const CAMUNDA_RUN_STABLE_MINOR = CAMUNDA_RUN.version
+  .split(".")
+  .slice(0, 2)
+  .join(".");
 
 /* ─── Icon components ─── */
 
@@ -547,7 +555,7 @@ function ArrowDown() {
 
 /* ─── Reusable components ─── */
 
-function VersionBadge({ version = "Camunda 8.9+" }) {
+function VersionBadge({ version }) {
   return <span className={styles.versionBadge}>{version}</span>;
 }
 
@@ -641,7 +649,7 @@ function BuildWithCamunda() {
   return (
     <Layout
       title="Build with Camunda"
-      description="Process orchestration for developers. Go from zero to a running workflow in minutes."
+      description="Process orchestration for users. Go from zero to a running workflow in minutes."
     >
       <div className={styles.page}>
         {/* ─── Hero: Start from your terminal ─── */}
@@ -700,7 +708,7 @@ function BuildWithCamunda() {
                 </span>
                 <h2 className={styles.heroCardTitle}>Run Camunda locally</h2>
                 <p className={styles.heroCardMeta}>
-                  Camunda 8.9+ · macOS, Linux, Windows
+                  Camunda {CAMUNDA_RUN_STABLE_MINOR}+ · macOS, Linux, Windows
                 </p>
                 <p className={styles.heroCardDesc}>
                   Install and start Camunda locally, deploy your first process,
@@ -749,6 +757,10 @@ function BuildWithCamunda() {
                   <li>
                     <CheckIcon color="#22a06b" /> AI agent skills built in
                   </li>
+                  <li>
+                    <CheckIcon color="#22a06b" /> Free LLM tokens to run your
+                    first agent!
+                  </li>
                 </ul>
                 <span className={styles.heroCardCtaAlt}>
                   Create free account <ArrowRight />
@@ -770,7 +782,8 @@ function BuildWithCamunda() {
         >
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Run Camunda locally <VersionBadge />
+              Run Camunda locally{" "}
+              <VersionBadge version={`Camunda ${CAMUNDA_RUN_STABLE_MINOR}+`} />
             </h2>
             <p className={styles.sectionSub}>
               Install the Camunda CLI via npm and start a local Camunda
@@ -806,7 +819,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start 8.9`}
+              {`$ c8ctl cluster start ${CAMUNDA_RUN.alphaVersion}`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
@@ -840,16 +853,46 @@ function BuildWithCamunda() {
                 >
                   Install via npm
                 </Link>{" "}
-                requires Node.js 18+.{" "}
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                  )}
-                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                >
-                  Camunda 8 Run
+                requires Node.js 18+.
+              </span>
+            </p>
+            <p
+              className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+              style={{ marginTop: "0.5rem" }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              <span>
+                By downloading our self-managed packages, you agree to our{" "}
+                <Link to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
+                  Privacy Policy
                 </Link>{" "}
-                requires OpenJDK 21–25.
+                and{" "}
+                <Link to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
+                  Terms of Use
+                </Link>
+                .
               </span>
             </p>
           </div>
@@ -883,25 +926,25 @@ function BuildWithCamunda() {
               <div className={styles.downloadButtons}>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-aarch64.zip"
+                  href={GETTING_STARTED.links.mac[0].url}
                 >
                   <DownloadBtnIcon /> macOS (Apple Silicon)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-x86_64.zip"
+                  href={GETTING_STARTED.links.mac[1].url}
                 >
                   <DownloadBtnIcon /> macOS (Intel)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-windows-x86_64.zip"
+                  href={GETTING_STARTED.links.windows[0].url}
                 >
                   <DownloadBtnIcon /> Windows
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-linux-x86_64.tar.gz"
+                  href={GETTING_STARTED.links.linux[0].url}
                 >
                   <DownloadBtnIcon /> Linux
                 </a>
@@ -1039,7 +1082,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl cluster start 8.9.0-alpha5
+                {`$ c8ctl cluster start ${CAMUNDA_RUN_STABLE_MINOR}
 $ c8ctl cluster stop`}
               </TerminalWindow>
             </div>
@@ -1291,8 +1334,8 @@ Available skills:
                 <DockerIcon />
                 <h3>Docker Compose</h3>
                 <p>
-                  Run the full Camunda stack locally with a single{" "}
-                  <CodeBlock>docker compose up</CodeBlock>.
+                  Run Camunda 8 locally for development and evaluation with{" "}
+                  <CodeBlock>docker compose up -d</CodeBlock>.
                 </p>
               </Link>
               <Link
@@ -1364,133 +1407,31 @@ Available skills:
           className={clsx(
             styles.moreSection,
             styles.darkSection,
-            styles.noTopBorder
+            styles.noTopBorder,
+            styles.exploreSectionLast
           )}
-          style={{ scrollMarginTop: "5rem", paddingTop: "3rem" }}
+          style={{
+            scrollMarginTop: "5rem",
+            paddingTop: "3rem",
+            paddingBottom: "8rem",
+          }}
         >
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Camunda downloads</h2>
               <p className={styles.sectionSub}>
-                Download everything you need for local Camunda 8 development on
-                macOS, Windows, or Linux.
+                Download everything you need for local Camunda 8 development.
               </p>
             </div>
-            <div className={styles.downloadsGrid4}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Link
-                to="https://developers.camunda.com/install-camunda-8/"
-                className={styles.wayCard}
+                to={useBaseUrl("/downloads")}
+                className={styles.heroCardCtaAlt}
               >
-                <div className={styles.wayCardImage}>
-                  <SparklesIconLg />
-                </div>
-                <h3>Getting Started bundle</h3>
-                <p>
-                  Complete bundle with Desktop Modeler, Runtime, and examples.
-                </p>
-              </Link>
-              <Link
-                to="https://developers.camunda.com/install-camunda-8/"
-                className={styles.wayCard}
-              >
-                <div className={styles.wayCardImage}>
-                  <PencilIconLg />
-                </div>
-                <h3>Desktop Modeler</h3>
-                <p>Design BPMN processes, DMN tables, and forms locally.</p>
-              </Link>
-              <Link
-                to="https://developers.camunda.com/install-camunda-8/"
-                className={styles.wayCard}
-              >
-                <div className={styles.wayCardImage}>
-                  <PlayIconLg />
-                </div>
-                <h3>Camunda 8 Run</h3>
-                <p>Lightweight Camunda distribution for local development.</p>
-              </Link>
-              <Link
-                to="https://developers.camunda.com/install-camunda-8/"
-                className={styles.wayCard}
-              >
-                <div className={styles.wayCardImage}>
-                  <RpaIconLg />
-                </div>
-                <h3>RPA Worker</h3>
-                <p>
-                  Run robotic process automation tasks alongside your BPMN
-                  workflows.
-                </p>
+                Go to downloads <ArrowRight />
               </Link>
             </div>
           </div>
-        </section>
-
-        {/* ─── Explore docs ─── */}
-        <section
-          className={clsx(styles.exploreSection, styles.exploreSectionLast)}
-        >
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Explore the docs</h2>
-              <p className={styles.sectionSub}>
-                Browse Camunda 8 guides, resources, SDK, and API documentation.
-              </p>
-            </div>
-            <div className={styles.exploreGrid}>
-              <Link
-                to={useBaseUrl("docs/guides/")}
-                className={styles.exploreCard}
-              >
-                <h3>Get started</h3>
-                <p>
-                  New to Camunda? Create an account and model your first
-                  process.
-                </p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/components/")}
-                className={styles.exploreCard}
-              >
-                <h3>Using Camunda</h3>
-                <p>Learn about Modeler, Zeebe, Operate, Tasklist, and more.</p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/self-managed/about-self-managed/")}
-                className={styles.exploreCard}
-              >
-                <h3>Self-Managed</h3>
-                <p>Host and operate Camunda on your own infrastructure.</p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
-                className={styles.exploreCard}
-              >
-                <h3>APIs and tools</h3>
-                <p>Client libraries, REST APIs, SDKs, and integrations.</p>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/components/best-practices/best-practices-overview/"
-                )}
-                className={styles.exploreCard}
-              >
-                <h3>Best Practices</h3>
-                <p>
-                  Level up your BPMN, DMN, and process orchestration skills.
-                </p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/reference/")}
-                className={styles.exploreCard}
-              >
-                <h3>Reference</h3>
-                <p>Release notes, supported environments, and licenses.</p>
-              </Link>
-            </div>
-          </div>
-          <br />
-          <br />
         </section>
       </div>
     </Layout>

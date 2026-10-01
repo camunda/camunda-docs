@@ -13,6 +13,19 @@ type DecisionInstanceResult = object;
 
 ## Properties
 
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+The business ID of the owning process instance, inherited when the decision instance was
+evaluated. This is `null` for decision instances created before version 8.10, for
+standalone decision evaluations, and for decision instances whose owning process instance
+has no business ID.
+
+---
+
 ### decisionDefinitionId
 
 ```ts

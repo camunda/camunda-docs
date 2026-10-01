@@ -228,6 +228,12 @@ Document Store secrets now follow the structured `secret:` pattern introduced in
 | **AWS Document Store Secret Access Key** | `global.documentStore.type.aws.secretAccessKey.secret` | AWS secret access key for S3 document storage authentication     |
 | **GCP Document Store Service Account**   | `global.documentStore.type.gcp.secret`                 | GCP service account JSON for GCS document storage authentication |
 
+### Credential precedence with IRSA
+
+The AWS SDK resolves credentials through its [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which reads the static `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables before the IRSA web identity token. Because the chart injects these variables from the access key secrets above whenever the AWS document store is enabled, their presence takes precedence and prevents [IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#document-store-s3) from being used, even when the service account is annotated with an IAM role.
+
+To authenticate with IRSA instead, set `global.documentStore.type.aws.irsa.enabled` to `true`. The chart then skips injecting the static credentials, and the AWS access key secrets above are not required.
+
 ### Secrets using the legacy pattern (deprecated)
 
 The following legacy fields are deprecated in Camunda 8.8+ but remain functional during the transition period:

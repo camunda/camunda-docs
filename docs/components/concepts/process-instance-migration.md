@@ -13,16 +13,15 @@ While doing so, we aim to interfere as little as possible with the process insta
 For example, a migrated active user task remains assigned to the same user if no implementation migration occurs.
 This principle applies to all parts of the process instance.
 
+Use the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance.api.mdx) to change the process model of a running process instance. You can also migrate process instances using Operate's UI — see the [Operate user guide](../operate/userguide/process-instance-migration.md).
+
 :::tip
-To repair a broken process instance without making changes to the process definition, use [process instance modification](./process-instance-modification.md) instead.
+If you need to repair a broken process instance without changing the process definition, use [process instance modification](./process-instance-modification.md) instead.
 :::
 
-Use the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance.api.mdx) to change the process model of a running process instance.
+## Migrating from Camunda 7
 
-:::note
-You can also migrate your process instances using Operate's UI by following [the user guide](../operate/userguide/process-instance-migration.md).
-
-:::
+This page covers migrating running Camunda 8 process instances to a different Camunda 8 process definition. If you're moving process instances from Camunda 7 to Camunda 8, use the [Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/index.md) instead. The two features restrict different things—check the [limitations of the one you're using](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations.md).
 
 ## Change the process instance flow for inactive parts
 
@@ -213,7 +212,7 @@ The user task has not been completed and has already spent five days waiting for
 
 ![The process instance is waiting at the active user task A with a timer boundary event attached.](assets/process-instance-migration/migration-catch-event-source.png)
 
-Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the timer boundary event.
+Now we want to [change an inactive part of the process](#change-the-process-instance-flow-for-inactive-parts) by adding a user task after the timer boundary event.
 Instead of waiting for the full time defined by the target process' timer boundary event, we only want to wait for the remaining two days.
 To achieve this for the example above, the mapping between active user tasks `A` -> `A` and timer boundary events `Timer1` -> `Timer2` must be provided.
 This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
@@ -312,7 +311,7 @@ However, if the process instance is migrated by providing mapping instruction be
 Process instance migration allows you to migrate several scenarios for gateways:
 
 - An active exclusive gateway with an incident can be migrated like any other active element.
-- Parallel and inclusive gateways can be involved in [additional scenarios](#migrating-joining-parallel-and-inclusive-gateways).
+- Parallel and inclusive gateways can be involved in [additional scenarios](#migrate-joining-parallel-and-inclusive-gateways).
 
 ### Migrate joining parallel and inclusive gateways
 
@@ -456,7 +455,13 @@ In the following cases, the process instance can't apply the migration plan and 
 - Multi-instance body limitations:
   - Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
   - It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
+- Scope limitations:
+  - You cannot migrate an active embedded subprocess to an event subprocess. See [migrate active elements inside subprocesses](#migrate-active-elements-inside-subprocesses).
+  - You cannot change the scope of a subprocess during migration.
+  - Changing the scope of an ad-hoc subprocess during migration is not possible. See [migrate active elements inside ad-hoc subprocesses](#migrate-active-elements-inside-ad-hoc-subprocesses).
 - Mapping instructions can only change the user task implementation from a job-worker user task to a Camunda user task, but not vice versa.
+- You cannot migrate embedded forms when migrating a job worker user task to a Camunda user task. The migration uses the form defined in the target user task definition. See [migrate job worker user tasks to Camunda user tasks](#migrate-job-worker-user-tasks-to-camunda-user-tasks).
+- Provide a mapping instruction between catch events to migrate message catch events when the target catch event has the same message name. You cannot re-create a message catch event with the same message name in the target process definition. See [deal with catch events](#deal-with-catch-events).
 
 The following limitations exist that may be supported in future versions:
 
@@ -470,7 +475,7 @@ The following limitations exist that may be supported in future versions:
 A full overview of error codes can be found in the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance.api.mdx).
 
 :::tip
-If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](../../apis-tools/zeebe-api/gateway-service.md#cancelprocessinstance-rpc) and [create and start at a user-defined element](./process-instance-creation.md#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
+If process instance migration does not yet support your specific case, you can use [cancel process instance](../../apis-tools/zeebe-api/gateway-service.md#cancelprocessinstance-rpc) and [run a process segment](./process-instance-creation.md#run-process-segment) to recreate your process instance in the other process definition.
 Note that this results in new keys for the process instance and its associated variables, element instances, and other entities.
 :::
 

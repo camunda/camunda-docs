@@ -1,11 +1,11 @@
 ---
 id: model-recommendations-agentic
-title: LLM recommendations
+title: LLM recommendations for agentic processes
 sidebar_label: LLM recommendations
-description: Prompting recommendations when using models for agentic process
+description: Recommendations and best practices for choosing LLMs and designing effective prompts for agentic processes.
 ---
 
-Recommendations and best practices for working with Large Language Models (LLMs) and effective prompts.
+Recommendations and best practices for choosing LLMs and designing effective prompts for agentic processes.
 
 ## General model requirements
 
@@ -29,6 +29,15 @@ Choosing a model from these ecosystems ensures it will integrate with Camunda’
 The model should accept and return plain text.
 
 Agentic processes rely on text prompts and text-based replies (which may include JSON or other structured text). Avoid models that only produce non-text outputs or require special input formats. _Text in, text out_ is essential for simplicity and reliable tool integration.
+
+### Choose the right model for each use case
+
+Not every decision in a process needs the same model:
+
+- Frontier models deliver stronger reasoning and handle ambiguous inputs well, but carry higher per-call costs and depend on external infrastructure.
+- Open-weight models, hosted via Ollama or a compatible inference platform, offer lower costs and full infrastructure control. They're a good fit for high-volume or simpler decisions.
+
+With the right model choice, you can keep accuracy where it counts and control costs everywhere else.
 
 ## General recommendations for agentic processes
 

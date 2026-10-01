@@ -12,6 +12,8 @@ When the user task instance is completed, the process instance continues.
 
 ![user-task](assets/user-task.png)
 
+Inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md), a user task is commonly the [human-in-the-loop](/reference/glossary.md#human-in-the-loop-hitl) tool an [AI agent](/reference/glossary.md#ai-agent) calls to escalate a decision or request approval before continuing. See [designing agent orchestration workflows](/components/agentic-orchestration/design-architecture.md#design-agent-orchestration-workflows) for this pattern.
+
 ## User task implementation types
 
 A default user task implementation type is the **Camunda user task** with the `zeebe:userTask` extension element.
@@ -36,6 +38,15 @@ You can use this to define which user the task can be assigned to. You can speci
 - `assignee`: Specifies the user assigned to the task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) will claim the task for this user.
 - `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
+
+:::info
+Starting with Camunda 8.8, user task candidate groups should reference group IDs instead of group names. The Zeebe engine will attempt to resolve a candidate group value in the following way:
+
+1. Confirm a group ID exists for the value.
+2. If no ID is found, find a group name for the value, and resolve its ID.
+
+This behavior can be disabled by setting the `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION=false` configuration property, so user task candidate group values are not checked by the Zeebe engine. See [zeebe.broker.experimental.engine.caches](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerexperimentalenginecaches) for all related configuration properties.
+:::
 
 :::info
 Usernames and group IDs in the Orchestration Cluster are case-sensitive. When you set `assignee`, `candidateUsers`, or `candidateGroups`, always use the exact value from your identity provider or Identity user record, including case. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
@@ -96,10 +107,11 @@ To set the priority of a user task, specify the priority in the `priority` attri
 
 ### Variable mappings
 
-By default, all Camunda user task variables are merged into the process instance. This
-behavior can be customized by defining an output mapping at the user task.
+By default, all variables submitted when the user task is completed are merged into the process instance. To propagate only selected variables, define an output mapping on the user task. If one or more output mappings are defined, only the mapped variables are propagated.
 
-Input mappings can be used to transform the variables into a different format.
+Use input mappings to create [local variables](/components/concepts/variables.md#local-variables) in the scope of the user task, for example to reshape process variables into the format a form expects. These local variables stay in the user task scope unless an output mapping propagates them.
+
+For the mapping syntax, see [input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings). For how a user task compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
 ### User task forms
 
@@ -107,7 +119,7 @@ A user task typically includes a form. A form contains work instructions for the
 
 However, user tasks are not limited to forms. User tasks can also be used to refer users to other applications or redirect them to a website.
 
-You can use [Camunda Forms](/components/modeler/forms/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
+You can use [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) that offer visual editing of forms directly in Camunda Hub or Desktop Modeler. Or you can use your own forms.
 Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), or handled by a custom application.
 
 To use a form, a user task requires a form reference.
@@ -128,7 +140,7 @@ Depending on your use case, two different types of form references can be used:
    If the `bindingType` attribute is not specified, `latest` is used as the default.
    :::
 
-   You can read more about Camunda Forms in the [Camunda Forms guide](/components/modeler/forms/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
+   You can read more about Camunda Forms in the [Camunda Forms guide](/components/hub/workspace/modeler/modeling/utilize-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
    to explore all configuration options for form elements.
 
 2. A **custom form reference** can specify any custom identifier in the user task using the `externalReference`
@@ -305,7 +317,7 @@ A user task with user task listeners configured:
 ### References
 
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Form linking in Modeler](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md)
+- [Form linking in Camunda Hub](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 - [User task listeners](/components/concepts/user-task-listeners.md)

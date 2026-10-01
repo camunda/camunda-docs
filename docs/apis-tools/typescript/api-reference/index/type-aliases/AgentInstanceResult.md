@@ -13,6 +13,16 @@ type AgentInstanceResult = object;
 
 ## Properties
 
+### agentDefinitionKey
+
+```ts
+agentDefinitionKey: AgentDefinitionKey;
+```
+
+The key of the agent definition this agent instance is an instance of.
+
+---
+
 ### agentInstanceKey
 
 ```ts
@@ -46,10 +56,11 @@ The date when this agent instance was created.
 ### definition
 
 ```ts
-definition: AgentInstanceDefinition;
+definition: AgentInstanceDefinitionResult;
 ```
 
-The static definition of the agent, including model, provider, and system prompt.
+The definition of the agent, including model, provider, and system prompt. Set at
+creation, but can change later via a CONFIGURATION history item.
 
 ---
 
@@ -99,7 +110,19 @@ The configured limits for this agent instance, set once at creation.
 metrics: AgentInstanceMetrics;
 ```
 
-Aggregated metrics across all iterations of this agent instance.
+Aggregated metrics across all loopIterations of this agent instance. Includes
+history items later discarded: metrics are counted when an item is accepted,
+not when it's committed.
+
+---
+
+### processDefinitionId
+
+```ts
+processDefinitionId: ProcessDefinitionId;
+```
+
+The BPMN process ID of the process definition associated with this agent instance.
 
 ---
 
@@ -113,6 +136,26 @@ The key of the process definition associated with this agent instance.
 
 ---
 
+### processDefinitionVersion
+
+```ts
+processDefinitionVersion: number;
+```
+
+The version of the process definition associated with this agent instance.
+
+---
+
+### processDefinitionVersionTag
+
+```ts
+processDefinitionVersionTag: string | null;
+```
+
+The version tag of the process definition associated with this agent instance.
+
+---
+
 ### processInstanceKey
 
 ```ts
@@ -120,6 +163,17 @@ processInstanceKey: ProcessInstanceKey;
 ```
 
 The key of the process instance that owns this agent instance.
+
+---
+
+### rootProcessInstanceKey
+
+```ts
+rootProcessInstanceKey: ProcessInstanceKey;
+```
+
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy.
 
 ---
 

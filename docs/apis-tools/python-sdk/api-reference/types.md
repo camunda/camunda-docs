@@ -8,6 +8,32 @@ mdx:
 
 # Semantic Types
 
+## AgentDefinitionKey
+
+```python
+class AgentDefinitionKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AgentDefinitionKey](#agentdefinitionkey)
+
+## AgentHistoryItemKey
+
+```python
+class AgentHistoryItemKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AgentHistoryItemKey](#agenthistoryitemkey)
+
 ## AgentInstanceKey
 
 ```python
@@ -320,6 +346,19 @@ Bases: `str`
 - **Return type:**
   [GroupId](#groupid)
 
+## HistoryItemId
+
+```python
+class HistoryItemId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [HistoryItemId](#historyitemid)
+
 ## IncidentKey
 
 ```python
@@ -345,6 +384,19 @@ Bases: `str`
   **value** (_str_)
 - **Return type:**
   [JobKey](#jobkey)
+
+## JobLeaseToken
+
+```python
+class JobLeaseToken(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [JobLeaseToken](#jobleasetoken)
 
 ## MappingRuleId
 

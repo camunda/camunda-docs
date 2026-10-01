@@ -4,9 +4,14 @@ paths:
       tags:
         - Global listener
       operationId: createGlobalTaskListener
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create global user task listener
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR0xPQkFMX0xJU1RFTkVSIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfVEFTS19MSVNURU5FUiJ9XX0]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -48,9 +53,14 @@ paths:
       tags:
         - Global listener
       operationId: getGlobalTaskListener
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get global user task listener
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR0xPQkFMX0xJU1RFTkVSIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1RBU0tfTElTVEVORVIifV19]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -88,9 +98,14 @@ paths:
       tags:
         - Global listener
       operationId: updateGlobalTaskListener
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update global user task listener
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR0xPQkFMX0xJU1RFTkVSIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfVEFTS19MSVNURU5FUiJ9XX0]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -138,9 +153,14 @@ paths:
       tags:
         - Global listener
       operationId: deleteGlobalTaskListener
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete global user task listener
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR0xPQkFMX0xJU1RFTkVSIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEVfVEFTS19MSVNURU5FUiJ9XX0]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -179,9 +199,14 @@ paths:
       tags:
         - Global listener
       operationId: searchGlobalTaskListeners
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search global user task listeners
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR0xPQkFMX0xJU1RFTkVSIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1RBU0tfTElTVEVORVIifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.9]]
 

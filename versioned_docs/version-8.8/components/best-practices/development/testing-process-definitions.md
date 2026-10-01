@@ -1,12 +1,5 @@
 ---
 title: "Testing process definitions"
-tags:
-  - Test / Unit Test
-  - Test / Integration Test
-  - Mock
-  - Exception
-  - Java Delegate
-  - JUnit
 description: "Test your executable BPMN processes as they are software. If possible, do automated unit tests with a fast in-memory workflow engine."
 ---
 

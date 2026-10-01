@@ -21,10 +21,16 @@ The listener event type of the job.
 readonly ASSIGNING: "ASSIGNING" = 'ASSIGNING';
 ```
 
-### BEFORE_ALL
+### BEFORE\_ALL
 
 ```ts
 readonly BEFORE_ALL: "BEFORE_ALL" = 'BEFORE_ALL';
+```
+
+### CANCEL
+
+```ts
+readonly CANCEL: "CANCEL" = 'CANCEL';
 ```
 
 ### CANCELING

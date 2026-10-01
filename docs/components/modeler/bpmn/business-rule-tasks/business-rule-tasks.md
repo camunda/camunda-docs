@@ -4,7 +4,7 @@ title: "Business rule tasks"
 description: "A business rule task is used to model the evaluation of a business rule."
 ---
 
-A business rule task is used to model the evaluation of a business rule; for example, a decision
+A business rule task is used to model the evaluation of a business rule. For example, a decision
 modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 
 ![task](assets/business-rule-task.png)
@@ -27,6 +27,8 @@ internal DMN decision engine. Once the decision is made, the process instance co
 If the decision evaluation is unsuccessful, an [incident](/components/concepts/incidents.md) is
 raised at the business rule task. When the incident is resolved, the decision is evaluated again.
 
+Used as a tool inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md), a business rule task lets an [AI agent](/reference/glossary.md#ai-agent) delegate part of its decision to a governed DMN decision instead of LLM reasoning, keeping that step deterministic. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for how tools are declared.
+
 ## Defining a called decision {#defining-a-task}
 
 A called decision links the business rule task to a DMN decision, either to
@@ -36,9 +38,9 @@ a [decision literal expression](/components/modeler/dmn/decision-literal-express
 `zeebe:calledDecision` extension element.
 
 A business rule task must define the [DMN decision id](/components/modeler/dmn/decision-table.md#decision-id) of the
-called decision as `decisionId`. Usually, the `decisionId` is defined as a [static value](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `shipping_box_size`), but
+called decision as `decisionId`. Usually, the `decisionId` is defined as a [static value](/components/concepts/expressions.md#expressions-vs-static-values) (for example, `shipping_box_size`), but
 it can also be defined as an [expression](/components/concepts/expressions.md) (
-e.g. `= "shipping_box_size_" + countryCode`). The expression is evaluated on activating the business rule task (or when
+for example, `= "shipping_box_size_" + countryCode`). The expression is evaluated on activating the business rule task (or when
 an incident at the business rule task is resolved) after input mappings have been applied. The expression must result in
 a `string`.
 
@@ -46,7 +48,7 @@ The `bindingType` attribute determines which version of the called decision is e
 
 - `latest`: The latest deployed version at the moment the business rule task is activated.
 - `deployment`: The version that was deployed together with the currently running version of the process.
-- `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.
+- `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute. Usually, the `versionTag` is defined as a [static value](/components/concepts/expressions.md#expressions-vs-static-values) (for example, `v1.0`), but it can also be defined as an [expression](/components/concepts/expressions.md) (for example, `= "v" + version`). The expression is evaluated on activating the business rule task or when an incident at the business rule task is resolved, after input mappings have been applied. The expression must result in a `string`.
 
 To learn more about choosing binding types, see [choosing the resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
@@ -94,11 +96,18 @@ and process them. When the job is completed, the process instance continues.
 A business rule task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a service task does. This is used as reference to specify which job workers request the respective business rule task job. For example, `order-items`. Note that `type` can be specified as any static value (`myType`) or as a FEEL [expression](../../../concepts/expressions.md) prefixed by `=` that evaluates to any FEEL string; for example, `= "order-" + priorityGroup`.
 
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
-worker (e.g. the key of the decision to evaluate).
+worker (for example, the key of the decision to evaluate).
 
 Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
 to transform the variables passed to the job worker, or to customize how the variables of the job merge.
+
+### Job priority
+
+This task type supports `zeebe:jobPriorityDefinition` when implemented as a job worker.
+
+You can define job priority on the process as a default and override it on this task.
+For priority behavior and limitations, see [Job prioritization](../../../concepts/job-workers.md#job-prioritization).
 
 ## Additional resources
 
@@ -125,13 +134,25 @@ A business rule task with a called decision that uses the `deployment` binding t
 </bpmn:businessRuleTask>
 ```
 
-A business rule task with a called decision that uses the `versionTag` binding type:
+A business rule task with a called decision that uses the `versionTag` binding type with a static version tag:
 
 ```xml
 <bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
   <bpmn:extensionElements>
     <zeebe:calledDecision decisionId="shipping_box_size"
                           bindingType="versionTag" versionTag="v1.0"
+                          resultVariable="boxSize" />
+  </bpmn:extensionElements>
+</bpmn:businessRuleTask>
+```
+
+A business rule task with a called decision that uses the `versionTag` binding type with expressions for both `decisionId` and `versionTag`:
+
+```xml
+<bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
+  <bpmn:extensionElements>
+    <zeebe:calledDecision decisionId="= \"shipping_box_size_\" + countryCode"
+                          bindingType="versionTag" versionTag="= decisionVersion"
                           resultVariable="boxSize" />
   </bpmn:extensionElements>
 </bpmn:businessRuleTask>
@@ -146,6 +167,7 @@ A business rule task with a job worker implementation and a custom header:
     <zeebe:taskHeaders>
       <zeebe:header key="decisionRef" value="risk" />
     </zeebe:taskHeaders>
+    <zeebe:jobPriorityDefinition priority="90" />
   </bpmn:extensionElements>
 </bpmn:businessRuleTask>
 ```

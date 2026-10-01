@@ -12,7 +12,7 @@ Helm chart parameters let you configure the components and behavior of your Camu
 In Helm charts, the `values.yaml` file defines configuration for your deployment. To tailor your installation to your needs, you can override parameters in this file or provide your own values file. It's best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
 
 :::tip Templating support
-Some values in `values.yaml` support Go template expressions (for example, `{{ .Release.Name }}`). Values that support templating are marked with "Supports templating" in their description in `values.yaml`. This includes `podLabels`, `podAnnotations`, and `global.ingress.host`, among others.
+Some values in `values.yaml` support Go template expressions (for example, `{{ .Release.Name }}`). Values that support templating are marked with "Supports templating" in their description in `values.yaml`. This includes `podLabels`, `podAnnotations`, and `global.host`, among others.
 :::
 
 The following tables show the **top-level configuration sections** in `values.yaml`. Each section controls a specific area of the chart.
@@ -26,45 +26,28 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestration.hostNetwork`, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
 
+For service-level options such as the `appProtocol` hint per port, see [configure Kubernetes Service ports](/self-managed/deployment/helm/configure/service-configuration.md).
+
 ### Other Camunda applications
 
-| Section      | Purpose                                             |
-| ------------ | --------------------------------------------------- |
-| `console`    | Configures the Camunda Self-Managed Console service |
-| `connectors` | Configures the Connector runtime                    |
-| `identity`   | Configures the Management Identity service          |
-| `optimize`   | Configures the Optimize web application             |
-| `webModeler` | Configures the Web Modeler service                  |
+| Section      | Purpose                                    |
+| ------------ | ------------------------------------------ |
+| `camundaHub` | Configures Camunda Hub                     |
+| `connectors` | Configures the Connector runtime           |
+| `identity`   | Configures the Management Identity service |
+| `optimize`   | Configures the Optimize web application    |
 
-### Bitnami subcharts
+### External infrastructure
 
-Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production. For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
-
-- `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [document-store backends (Elasticsearch/OpenSearch)](/reference/glossary.md#elasticsearchopensearch).
-- `identityKeycloak`: Provides an embedded Keycloak service for Management Identity (Bitnami subchart).
-- `identityPostgresql`: Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart).
-- `webModelerPostgresql`: Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart).
+Camunda 8.10 no longer bundles infrastructure subcharts. Deploy PostgreSQL, Elasticsearch or OpenSearch, and Keycloak separately from the Camunda Helm chart. This lets you use your preferred deployment methods, leverage managed services, and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 :::note
-The Helm chart supports embedded Elasticsearch for evaluations. For production, configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
+Configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
 
 See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
 :::
 
 <MigrationTip />
-
-#### Bitnami subcharts guidance
-
-**Development and testing environments**: Bitnami subcharts provide ready-to-use infrastructure components that you can deploy with Camunda applications using minimal configuration.
-
-**Production environments**: Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you:
-
-- Use your preferred deployment method and operational tooling
-- Leverage managed services such as AWS RDS, Azure Database, or Google Cloud SQL
-- Manage infrastructure lifecycle independently of Camunda applications
-- Implement your organization's security, backup, and monitoring standards
-
-If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
 
 ### Observability
 
@@ -83,19 +66,20 @@ Check this page when installing or upgrading to ensure you use the latest option
 In addition to the default `values.yaml`, the Helm chart repository includes several additional values files for special use cases.  
 You can use these files individually or combine them with your own overrides.
 
-| File                         | Purpose                                                                                                                                                                                                                                 |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `values.yaml`                | The default configuration. Includes all chart parameters with baseline values.                                                                                                                                                          |
-| `values-local.yaml`          | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments.                                                                                                         |
-| `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. For Camunda Enterprise customers only.                                                                                                                                         |
-| `values-bitnami-legacy.yaml` | Uses the archived Bitnami open-source images for subcharts instead of the default ones. Deprecated; see [bitnami/containers#83267](https://github.com/bitnami/containers/issues/83267). Provided only as a temporary transition option. |
-| `values-latest.yaml`         | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.                                                                                                          |
-| `values-digest.yaml`         | Uses the latest snapshot images referenced by digest (for internal development only).                                                                                                                                                   |
+| File                 | Purpose                                                                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `values.yaml`        | The default configuration. Includes all chart parameters with baseline values.                                                  |
+| `values-local.yaml`  | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments. |
+| `values-tls.yaml`    | An overlay that enables TLS for the connections the chart can configure. Requires a CA bundle secret in the namespace.          |
+| `values-latest.yaml` | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.  |
+| `values-digest.yaml` | Uses the latest snapshot images referenced by digest (for internal development only).                                           |
 
 ### Creating your own values files
 
 To customize parameters, create an override file (for example, `my-overrides.yaml`) with custom settings.  
 This approach is recommended over editing `values.yaml` directly.
+
+You can [validate the keys in your overrides with the Camunda Helm Toolkit](operational-tasks/camunda-helm-toolkit.md#validate-override-files). This checks the supplied configuration, not the completeness or deployment readiness of all merged Helm values.
 
 ### Combining multiple values files
 
@@ -104,8 +88,8 @@ Helm lets you specify multiple values files. You can layer them to build the con
 ```bash
 helm install camunda camunda/camunda-platform \
   -f values.yaml \
-  -f values-enterprise.yaml \
+  -f values-local.yaml \
   -f my-overrides.yaml
 ```
 
-If the same parameter is defined in more than one file, the value in the last file listed takes precedence. In the example above, settings from `my-overrides.yaml` override values from both `values-enterprise.yaml` and `values.yaml`.
+If the same parameter is defined in more than one file, the value in the last file listed takes precedence. In the example above, settings from `my-overrides.yaml` override values from both `values-local.yaml` and `values.yaml`.

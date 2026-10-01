@@ -6,6 +6,10 @@ description: "Backup API to create a backup of a running Zeebe cluster comprised
 keywords: ["backup", "backups"]
 ---
 
+:::tip
+From Camunda 8.10, you can also use the Orchestration Cluster REST API to create, query, and manage runtime backups. See the [Orchestration Cluster REST API reference](/apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup.api.mdx).
+:::
+
 :::warning breaking changes
 As of the Camunda 8.8 release, the `/actuator` endpoints for backups have been moved to `/actuator/backupRuntime`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
 :::
@@ -14,7 +18,7 @@ Back up a running Zeebe cluster using the Backup Management API.
 
 ## About this API
 
-A backup of a Zeebe cluster comprises a consistent snapshot of all partitions. The backup is taken asynchronously in the background while Zeebe is processing. Thus, backups can be taken with minimal impact on typical processing. Backups can be used to restore a cluster in case of failures that lead to full data loss or data corruption.
+A backup of a Zeebe cluster comprises a consistent snapshot of all partitions. The backup is taken asynchronously in the background while Zeebe is processing. Thus, backups can be taken with minimal impact on typical processing. Backups can be used to restore a cluster in case of failures that lead to full data loss or data corruption, and form the basis of [Cold Recovery](../../concepts/multi-region/cold-recovery.md) for cross-region disaster recovery.
 
 Zeebe provides a REST API to create, query, and manage backups.
 The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints). It is accessible via the management port of the Zeebe Gateway. The API documentation is also available as an [OpenAPI specification](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/backup-management-api.yaml).

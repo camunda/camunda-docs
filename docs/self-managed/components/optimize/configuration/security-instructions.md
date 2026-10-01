@@ -11,6 +11,8 @@ This page provides an overview of how to secure a Camunda Optimize installation.
 
 This guide also identifies areas where we consider security issues to be relevant for the Camunda Optimize product and list those in the subsequent sections. Compliance for those areas is ensured based on common industry best practices and influenced by security requirements of standards like OWASP Top 10 and others.
 
+For how Optimize authenticates users and API requests, see [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md).
+
 <Tabs groupId="security" queryString values={
 [
 {label: 'Optimize', value: 'optimize' },

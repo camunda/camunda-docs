@@ -12,7 +12,7 @@ Announcements and release notes for supported versions of the Camunda documentat
 <td>**Release date**</td>
 <td>**Announcements**</td>
 <td>**Release notes**</td>
-<td>**Scheduled End of maintenance**</td>
+<td>**End of standard maintenance**</td>
 </tr>
 <tr>
 <td>8.8</td>

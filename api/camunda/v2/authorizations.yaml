@@ -4,9 +4,14 @@ paths:
       tags:
         - Authorization
       operationId: createAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create authorization
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -48,9 +53,14 @@ paths:
       tags:
         - Authorization
       operationId: updateAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update authorization
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -90,9 +100,14 @@ paths:
       tags:
         - Authorization
       operationId: getAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get authorization
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -130,9 +145,14 @@ paths:
       tags:
         - Authorization
       operationId: deleteAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete authorization
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -170,12 +190,17 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
         Search for authorizations based on given criteria.
       operationId: searchAuthorizations
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       requestBody:
         content:
           application/json:
@@ -294,6 +319,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/AuthorizationFilter"
           description: The authorization search filters.
+      x-properties-added-in-version:
+        - propertyName: sort
+          addedInVersion: "8.8"
+        - propertyName: filter
+          addedInVersion: "8.8"
     AuthorizationFilter:
       description: Authorization search filter.
       type: object
@@ -358,6 +388,18 @@ components:
             - $ref: "#/components/schemas/AuthorizationKey"
           description: The key of the authorization.
       x-properties-added-in-version:
+        - propertyName: ownerId
+          addedInVersion: "8.8"
+        - propertyName: ownerType
+          addedInVersion: "8.8"
+        - propertyName: resourceType
+          addedInVersion: "8.8"
+        - propertyName: resourceId
+          addedInVersion: "8.8"
+        - propertyName: permissionTypes
+          addedInVersion: "8.8"
+        - propertyName: authorizationKey
+          addedInVersion: "8.8"
         - propertyName: resourcePropertyName
           addedInVersion: "8.9"
     AuthorizationSearchResult:
@@ -372,6 +414,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/AuthorizationResult"
+      x-properties-added-in-version:
+        - propertyName: items
+          addedInVersion: "8.8"
     AuthorizationCreateResult:
       type: object
       properties:
@@ -400,6 +445,8 @@ components:
         - CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE
         - CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE
         - CREATE_BATCH_OPERATION_RESOLVE_INCIDENT
+        - CREATE_BATCH_OPERATION_SUSPEND_PROCESS_INSTANCE
+        - CREATE_BATCH_OPERATION_UPDATE_JOB
         - CREATE_DECISION_INSTANCE
         - CREATE_PROCESS_INSTANCE
         - CREATE_TASK_LISTENER
@@ -413,6 +460,7 @@ components:
         - DELETE_TASK_LISTENER
         - EVALUATE
         - MODIFY_PROCESS_INSTANCE
+        - PAUSE
         - READ
         - READ_DECISION_DEFINITION
         - READ_DECISION_INSTANCE
@@ -422,6 +470,9 @@ components:
         - READ_USAGE_METRIC
         - READ_USER_TASK
         - READ_TASK_LISTENER
+        - RESTORE
+        - REVEAL
+        - SUSPEND_PROCESS_INSTANCE
         - UPDATE
         - UPDATE_PROCESS_INSTANCE
         - UPDATE_USER_TASK
@@ -432,12 +483,14 @@ components:
       enum:
         - AUDIT_LOG
         - AUTHORIZATION
+        - BACKUP
         - BATCH
         - CLUSTER_VARIABLE
         - COMPONENT
         - DECISION_DEFINITION
         - DECISION_REQUIREMENTS_DEFINITION
         - DOCUMENT
+        - EXPORTER
         - EXPRESSION
         - GLOBAL_LISTENER
         - GROUP
@@ -446,6 +499,7 @@ components:
         - PROCESS_DEFINITION
         - RESOURCE
         - ROLE
+        - SECRET
         - SYSTEM
         - TENANT
         - USER

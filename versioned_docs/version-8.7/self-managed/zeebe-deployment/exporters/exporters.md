@@ -4,7 +4,7 @@ title: "Exporters"
 sidebar_label: "Overview"
 ---
 
-Zeebe comes packaged with three exporters:
+Zeebe comes packaged with two exporters:
 
 - [Elasticsearch](elasticsearch-exporter.md)
 - [OpenSearch](opensearch-exporter.md)

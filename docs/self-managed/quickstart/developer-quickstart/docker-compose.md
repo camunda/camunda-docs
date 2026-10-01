@@ -5,9 +5,9 @@ sidebar_label: "Docker Compose"
 description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Docker Compose, including setup, configuration, secondary storage, connectors, and modeling."
 ---
 
-Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster, Connectors, and Elasticsearch. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL.
+Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster and Connectors, and uses file-based H2 secondary storage. The full configuration additionally includes Optimize, Camunda Hub, Management Identity, Keycloak, PostgreSQL, and Elasticsearch.
 
-Docker Compose also supports [document handling](/self-managed/concepts/document-handling/overview.md), configurable secondary storage, built-in connectors, custom connectors, and local modeling workflows with Desktop Modeler and Web Modeler.
+Docker Compose also supports [document handling](/self-managed/concepts/document-handling/overview.md), configurable secondary storage, built-in connectors, custom connectors, and local modeling workflows with Desktop Modeler and Camunda Hub.
 
 :::note
 The [Docker images](/self-managed/deployment/docker/docker.md) are supported for production usage. The Docker Compose files are intended for local development and evaluation, and are not designed for production. For production deployments, use [Kubernetes with Helm](/self-managed/deployment/helm/install/index.md).
@@ -17,7 +17,7 @@ Camunda 8 with Docker Compose includes the following:
 
 - Orchestration Cluster
 - Connectors
-- Elasticsearch as the default secondary storage in the lightweight configuration
+- File-based H2 as the default secondary storage in the lightweight configuration
 
 ## Pages in this section
 
@@ -38,15 +38,19 @@ For prerequisites, startup commands, and shutdown commands, see [install and sta
 
 ### Choose a Docker Compose configuration {#choose-a-docker-compose-configuration}
 
-For lightweight, full, and standalone Web Modeler configurations, plus component URLs and authentication defaults, see [configure Docker Compose environments](./docker-compose/configuration.md#choose-a-docker-compose-configuration).
+For lightweight, full, and standalone Camunda Hub configurations, plus component URLs and authentication defaults, see [configure Docker Compose environments](./docker-compose/configuration.md#choose-a-docker-compose-configuration).
+
+### Customize application settings
+
+For mounted application files, `.env`, Spring environment overrides, and connector secrets, see [customize application configuration](./docker-compose/configuration.md#customize-application-configuration).
 
 ### Configure secondary storage {#configure-secondary-storage}
 
-For Elasticsearch, OpenSearch, PostgreSQL, MariaDB, MySQL, Oracle, Microsoft SQL Server, and H2 examples, see [configure secondary storage with Docker Compose](./docker-compose/secondary-storage.md#configure-secondary-storage-for-the-orchestration-cluster).
+For Elasticsearch, OpenSearch, PostgreSQL, MariaDB, MySQL, Oracle, Microsoft SQL Server, and H2 examples, see [configure secondary storage with Docker Compose](./docker-compose/secondary-storage.md#choose-a-database-configuration-path).
 
 ### Use connectors and deploy processes {#use-connectors-and-deploy-processes}
 
-For connector secrets, custom connectors, Desktop Modeler, and Web Modeler, see [use connectors and deploy processes with Docker Compose](./docker-compose/connectors-and-modeling.md#use-connectors).
+For connector secrets, custom connectors, Desktop Modeler, and Camunda Hub, see [use connectors and deploy processes with Docker Compose](./docker-compose/connectors-and-modeling.md#use-connectors).
 
 ## Stop Camunda 8 with Docker Compose {#stop-camunda-8-with-docker-compose}
 

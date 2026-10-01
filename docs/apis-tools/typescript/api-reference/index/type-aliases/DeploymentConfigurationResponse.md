@@ -15,26 +15,6 @@ Configuration for deployment characteristics.
 
 ## Properties
 
-### contextPath
-
-```ts
-contextPath: string;
-```
-
-The servlet context path for the deployment.
-
----
-
-### isEnterprise
-
-```ts
-isEnterprise: boolean;
-```
-
-Whether this is an enterprise deployment.
-
----
-
 ### isMultiTenancyEnabled
 
 ```ts

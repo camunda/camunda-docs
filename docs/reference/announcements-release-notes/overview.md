@@ -14,7 +14,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <td>**Release date**</td>
 <td>**Announcements**</td>
 <td>**Release notes**</td>
-<td>**Scheduled End of maintenance**</td>
+<td>**End of standard maintenance**</td>
 </tr>
 <tr>
 <td>8.10</td>
@@ -28,7 +28,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <td>14 April 2026</td>
 <td>[8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md)</td>
 <td>[8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md)</td>
-<td>13 October 2027</td>
+<td>12 October 2027</td>
 </tr>
 <tr>
 <td>8.8</td>
@@ -55,7 +55,7 @@ Release announcements include:
 
 :::info
 
-- See [upgrade to Camunda 8.9](/self-managed/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- See [upgrade to Camunda 8.10](/self-managed/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
 - See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
 
 :::

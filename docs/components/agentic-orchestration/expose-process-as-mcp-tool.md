@@ -21,20 +21,24 @@ You can configure a BPMN process as a callable MCP tool through the [Processes M
 
 It is built into the Orchestration Cluster and automatically registers processes as MCP tools when they are deployed with the [MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md).
 
+:::tip
+If your AI agent and the target process run on the **same** Orchestration Cluster, consider using a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) inside the ad-hoc sub-process instead. Call activities are synchronous and maintain a connected instance hierarchy with a consistent audit trail. See [call processes as agent tools](/components/agentic-orchestration/design-architecture.md#call-processes-as-agent-tools) for a full comparison.
+:::
+
 ## Prerequisites
 
-- Access to [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) or [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
+- A [Camunda Hub project](/components/hub/workspace/manage-projects/create-a-project.md) or access to [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
 - An [Orchestration Cluster](/components/orchestration-cluster.md) running Camunda 8.10 or later.
 
 ## Step 1: Add an MCP start event to your process
 
 The [MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) is an element template that you apply to a BPMN message start event. When deployed, it registers the process as an MCP tool.
 
-1. Open your BPMN process in Modeler.
+1. Open your BPMN process in [Camunda Hub](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) or Desktop Modeler.
 2. Select the start event (or add a new one).
 3. In the properties panel, click the element template picker and select **MCP start event** from the **AI Tools** category.
 
-![A BPMN message start event in Web Modeler with the MCP start event element template applied, showing the properties panel](img/mcp-start-event-modeler.png)
+![A BPMN message start event in the Camunda Hub modeler with the MCP start event element template applied, showing the properties panel](img/mcp-start-event-modeler.png)
 
 ## Step 2: Configure the MCP tool metadata
 
@@ -76,4 +80,4 @@ See [Enable and connect](/apis-tools/processes-mcp/processes-mcp-setup.md) for e
 
 ## Step 6: Verify
 
-After deployment, you can verify that your process is registered as an MCP tool in the Orchestration Cluster admin UI. See [MCP processes](/self-managed/components/orchestration-cluster/admin/mcp-processes.md) to learn how.
+After deployment, you can verify that your process is registered as an MCP tool in the [Orchestration Cluster admin UI](/components/admin/admin-introduction.md#open-admin). See [MCP processes](/self-managed/components/orchestration-cluster/admin/mcp-processes.md) to learn how.

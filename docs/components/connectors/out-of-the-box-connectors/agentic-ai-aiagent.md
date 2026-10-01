@@ -23,7 +23,7 @@ Core features include:
 
 | Feature              | Description                                                                                                                                                                                                                                                                         |
 | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| LLM provider support | Supports a range of LLM providers, such as Anthropic, Amazon Bedrock, Google Gemini, and OpenAI.                                                                                                                                                                                    |
+| LLM provider support | Supports a range of [model providers](./agentic-ai-aiagent-model-providers.md), such as Anthropic, AWS Bedrock, Google Gemini, and OpenAI.                                                                                                                                          |
 | Memory               | Provides conversational/short-term memory handling to enable feedback loops. For example, this allows a user to ask follow-up questions to an AI agent response.                                                                                                                    |
 | Tool calling         | Support for an AI agent to interact with tasks within an ad-hoc sub-process, allowing use of all Camunda features such as connectors and user tasks (human-in-the-loop). Automatic **tool resolution** allows an AI agent to identify the tools available in an ad-hoc sub-process. |
 
@@ -177,6 +177,10 @@ The decision and execution loop is shared between the LLM and Camunda:
 - **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
 
 This means tools can be called in different orders, repeated, run in parallel, or skipped entirely, while execution remains constrained by the modeled process boundaries.
+
+:::tip
+For a broader overview of how execution works in an AI agent and architectural guidance, see [Design and architecture](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+:::
 
 ### Feedback loop
 

@@ -1,17 +1,5 @@
 ---
 title: "Invoking services from a Camunda 7 process"
-tags:
-  - Service
-  - Java Delegate
-  - Expression Language
-  - External Task
-  - REST
-  - SOAP
-  - JMS
-  - Camel
-  - ESB
-  - SQL
-  - SAP
 ---
 
 :::caution Camunda 7 only

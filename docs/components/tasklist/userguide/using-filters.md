@@ -35,11 +35,26 @@ In the dialog, you can define various rules based on task attributes. The suppor
 - Processes tasks belong to
 - Dates (due date and follow up date)
 - Task ID
+- Business ID
 - Task variables
 
 ![tasklist-filter-dialog-with-advanced-options](img/task-filters/tasklist-filter-dialog-with-advanced-options.jpg "Available filter attributes")
 
 After defining the rules, click **Apply** to apply the filter. The system will then filter the tasks according to your criteria, displaying only the relevant tasks.
+
+## Business ID filter
+
+A [business ID](/components/concepts/process-instance-creation.md#business-id) is a domain-specific process instance identifier, such as an order number, case reference, or ticket ID. Starting in 8.10, you can filter tasks by business ID directly in the Tasklist filter dialog.
+
+To filter by business ID, open the filter dialog and use the **Business ID** field.
+
+| UI operator   | Behavior                                           | Wildcards                                                   |
+| :------------ | :------------------------------------------------- | :---------------------------------------------------------- |
+| **Equals**    | Exact match on the business ID value.              | —                                                           |
+| **Contains**  | Pattern match.                                     | `*` matches multiple characters, `?` matches one character. |
+| **Is one of** | Matches any business ID in a comma-separated list. | —                                                           |
+
+For additional operators (`$neq`, `$exists`, `$notIn`), use the [search user tasks API](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx) with the `businessId` filter field.
 
 ## Save filter for future use
 

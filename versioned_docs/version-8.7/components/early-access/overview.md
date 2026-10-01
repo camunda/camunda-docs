@@ -4,7 +4,7 @@ title: Overview
 sidebar_label: Overview
 ---
 
-Introducing early access - a space to explore new features and components currently in development by Camunda.
+Explore new features and components currently in development by Camunda.
 
 <!--- (REMOVED until experimental features are added)
 

@@ -19,15 +19,15 @@ The [Docker images](/self-managed/deployment/docker/docker.md) are supported for
 
 The following prerequisites are required to run Camunda Self-Managed via Docker Compose:
 
-| Prerequisite   | Description                                                                                                           |
-| :------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| Docker Compose | Version 1.27.0 or later (supports the [latest Compose specification](https://docs.docker.com/compose/compose-file/)). |
-| Docker         | Version 20.10.16 or later.                                                                                            |
+| Prerequisite   | Description                                                                              |
+| :------------- | :--------------------------------------------------------------------------------------- |
+| Docker Compose | Version 2.24.0 or later, which supports the Compose attributes used by the distribution. |
+| Docker         | Version 20.10.16 or later.                                                               |
 
 :::tip Troubleshooting unsupported attributes
 If Docker Compose reports errors such as "unsupported attribute" when loading the Camunda Compose files:
 
-- Confirm you are using the Docker Compose v2 plugin:
+- Confirm you are using Docker Compose version 2.24.0 or later:
 
   ```shell
   docker compose version
@@ -39,20 +39,22 @@ If Docker Compose reports errors such as "unsupported attribute" when loading th
 
 ## Run Camunda 8 with Docker Compose
 
-To start a complete Camunda 8 Self-Managed environment locally:
+To start the default lightweight Camunda 8 Self-Managed environment locally:
 
-1. Download the artifact for Camunda 8 <DockerCompose/>, then extract it.
+1. Download the Camunda 8 <DockerCompose/> archive, then extract it. Keep the complete directory, including `.env` and the hidden component configuration directories.
 1. In the extracted directory, run:
 
    ```shell
    docker compose up -d
    ```
 
-1. Wait for the environment to initialize (this can take several minutes). Monitor the logs (especially the Keycloak container log) to ensure all components start.
+1. Wait for the environment to initialize. This can take several minutes. Run `docker compose ps` to check service health, or `docker compose logs -f orchestration connectors` to follow the lightweight startup.
+
+Run Compose commands from the extracted directory. If Compose reports that image-version variables are unset or `.env` is missing, download and extract the complete distribution archive again instead of downloading an individual Compose file.
 
 ### Docker Compose configurations
 
-Camunda provides three Docker Compose configurations in the [Camunda Distributions repository](https://github.com/camunda/camunda-distributions):
+Camunda provides three Docker Compose configurations in the [Camunda Distributions releases](https://github.com/camunda/camunda-distributions/releases):
 
 | Configuration File              | Description                                                                                                                                                                                                                                                                       |
 | :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -100,7 +102,7 @@ By default, the Orchestration Cluster uses [Basic authentication](/self-managed/
 | :------------ | :------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Elasticsearch | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage (and Optimize in the full configuration).                                                              |
 | Keycloak      | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Identity instead. Access with `admin` / `admin`. |
-| PostgreSQL    | Full                 | `localhost:5432`                                             | Database for Management Identity.                                                                                                                             |
+| PostgreSQL    | Full                 | Internal only                                                | Database for Management Identity and Web Modeler.                                                                                                             |
 
 #### Configuration files and options
 
@@ -123,6 +125,32 @@ To start specific configurations:
   ```shell
   docker compose -f docker-compose-web-modeler.yaml up -d
   ```
+
+#### Customize application configuration
+
+The lightweight setup keeps Orchestration Cluster and Connectors application YAML inline under `configs` in `docker-compose.yaml`. The full and standalone setups mount component-owned files from the extracted distribution:
+
+| Setup and component                     | Application configuration source                                                                                                                                                  |
+| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                                                                                 |
+| Full Connectors                         | `.connectors/application.yaml`                                                                                                                                                    |
+| Full Optimize                           | Files under `.optimize/`                                                                                                                                                          |
+| Full Console                            | Files under `.console/`                                                                                                                                                           |
+| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-web-modeler.yaml`                                                              |
+| Full and standalone Web Modeler         | `.web-modeler/application.yaml`; the full setup mounts `.web-modeler/application-full.yaml` as the primary file, which adds the cluster registrations and imports the shared file |
+
+Choose the configuration mechanism based on the value you need to change:
+
+| Goal                                      | Configuration method                                                                                                                                                                                                                                                                                                                  |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Change lightweight application defaults   | Edit the inline `configs.content` YAML in `docker-compose.yaml`.                                                                                                                                                                                                                                                                      |
+| Change full or standalone defaults        | Edit the component-owned YAML file. Keep the existing authentication and component wiring when you change a subsection.                                                                                                                                                                                                               |
+| Change a provided runtime value or secret | Edit `.env`. The mounted YAML resolves placeholders such as `${VARIABLE:default}` from the container environment.                                                                                                                                                                                                                     |
+| Maintain a separate environment set       | Copy the complete `.env` file, update the copy, and run `docker compose --env-file <file> ...`. The custom file must retain image versions and other required values. `--env-file` only replaces the variable interpolation source, and the Camunda services still load `.env` itself through `env_file`, so keep both files in sync. |
+| Override an additional Spring property    | Add the environment variable to the relevant service in `docker-compose.override.yaml`. Spring environment variables override values from mounted application YAML.                                                                                                                                                                   |
+| Provide connector secrets                 | Add local development secrets to `connector-secrets.txt`. Do not put connector credentials in application YAML.                                                                                                                                                                                                                       |
+
+PostgreSQL, Keycloak, Elasticsearch, Web Modeler WebSockets, the separate Web Modeler webapp, Console, and other non-Spring services continue to use the environment settings defined by their Compose services. Keep the distribution's example credentials for local development only.
 
 ### Authentication
 
@@ -151,6 +179,9 @@ docker compose down -v
 
 # or for the full configuration:
 docker compose -f docker-compose-full.yaml down -v
+
+# or for standalone Web Modeler:
+docker compose -f docker-compose-web-modeler.yaml down -v
 ```
 
 :::caution
@@ -287,6 +318,61 @@ See the [Web Modeler cluster configuration guide](/self-managed/components/model
 The Docker Compose setup includes [Mailpit](https://github.com/axllent/mailpit) as a test SMTP server. Mailpit captures all emails sent by Web Modeler but does not forward them to the actual recipients.
 
 You can access emails in Mailpit's web UI at [http://localhost:8075](http://localhost:8075).
+
+## Enable multi-tenancy
+
+[Multi-tenancy](/components/concepts/multi-tenancy.md) requires an authenticated API. How you enable it depends on the configuration you run.
+
+### Lightweight configuration
+
+Create a `docker-compose.override.yaml` next to the compose file that protects the API and switches on the tenancy checks:
+
+```yaml
+services:
+  orchestration:
+    environment:
+      CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI: "false"
+      CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED: "true"
+      CAMUNDA_SECURITY_MULTITENANCY_APIENABLED: "true"
+  connectors:
+    environment:
+      CAMUNDA_CLIENT_AUTH_METHOD: basic
+      CAMUNDA_CLIENT_AUTH_USERNAME: demo
+      CAMUNDA_CLIENT_AUTH_PASSWORD: demo
+```
+
+Start the stack with `docker compose up -d` and manage tenants through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the Identity UI at [http://localhost:8088/identity](http://localhost:8088/identity):
+
+```bash
+# Create a tenant
+curl -u demo:demo -X POST http://localhost:8088/v2/tenants \
+  -H 'Content-Type: application/json' -d '{"tenantId": "tenant-a", "name": "Tenant A"}'
+# Assign the demo user to it
+curl -u demo:demo -X PUT http://localhost:8088/v2/tenants/tenant-a/users/demo
+```
+
+With the API protected, clients must authenticate with Basic authentication (`camunda.client.auth.method=basic` plus username and password in the Camunda client SDKs).
+
+### Full configuration
+
+The full configuration already protects the API through Keycloak, so only the tenancy checks need to be switched on. Add the following to `.env`:
+
+```bash
+CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED=true
+CAMUNDA_SECURITY_MULTITENANCY_APIENABLED=true
+```
+
+Start the stack with `docker compose -f docker-compose-full.yaml up -d` and manage tenants through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) with an OAuth token, or the Identity UI at [http://localhost:8088/identity](http://localhost:8088/identity):
+
+```bash
+TOKEN=$(curl -s -X POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+  -d 'grant_type=client_credentials' -d 'client_id=orchestration' -d 'client_secret=secret' | jq -r .access_token)
+# Create a tenant
+curl -X POST http://localhost:8088/v2/tenants -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' -d '{"tenantId": "tenant-a", "name": "Tenant A"}'
+# Assign the demo user to it
+curl -X PUT http://localhost:8088/v2/tenants/tenant-a/users/demo -H "Authorization: Bearer $TOKEN"
+```
 
 ## Next steps
 

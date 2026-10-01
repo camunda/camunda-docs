@@ -27,6 +27,7 @@ field:
   | "parentElementInstanceKey"
   | "startDate"
   | "endDate"
+  | "suspendedDate"
   | "state"
   | "hasIncident"
   | "tenantId"

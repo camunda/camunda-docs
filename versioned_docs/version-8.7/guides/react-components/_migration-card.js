@@ -11,9 +11,11 @@ const MigrationCard = ({ link, title, image, description }) => {
   );
 };
 
-const MigrationsGrid = ({ migrations }) => {
+const MigrationsGrid = ({ migrations, className, columns = 3 }) => {
+  // allow override via className and/or columns prop
+  const colsClass = `migration-grid-cols-${columns}`;
   return (
-    <div className="migration-grid">
+    <div className={`migration-grid ${colsClass} ${className || ""}`.trim()}>
       {migrations.map((migration, index) => (
         <MigrationCard
           key={index}

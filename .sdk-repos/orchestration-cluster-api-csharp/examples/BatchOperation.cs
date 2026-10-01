@@ -186,4 +186,62 @@ public static class BatchOperationExamples
     }
     // </DeleteDecisionInstancesBatchOperation>
     #endregion DeleteDecisionInstancesBatchOperation
+
+    #region UpdateJobsBatchOperation
+
+    // <UpdateJobsBatchOperation>
+    public static async Task UpdateJobsBatchOperationExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.UpdateJobsBatchOperationAsync(
+            new JobBatchUpdateRequest
+            {
+                Filter = new JobFilter
+                {
+                    Type = new StringFilterProperty { Eq = "my-job-type" },
+                },
+                Changeset = new JobChangeset { Retries = 3 },
+            });
+
+        Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+    }
+    // </UpdateJobsBatchOperation>
+    #endregion UpdateJobsBatchOperation
+
+    #region SuspendProcessInstancesBatchOperation
+
+    // <SuspendProcessInstancesBatchOperation>
+    public static async Task SuspendProcessInstancesBatchOperationExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SuspendProcessInstancesBatchOperationAsync(
+            new ProcessInstanceSuspensionBatchOperationRequest
+            {
+                Filter = new ProcessInstanceFilter(),
+            });
+
+        Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+    }
+    // </SuspendProcessInstancesBatchOperation>
+    #endregion SuspendProcessInstancesBatchOperation
+
+    #region ResumeProcessInstancesBatchOperation
+
+    // <ResumeProcessInstancesBatchOperation>
+    public static async Task ResumeProcessInstancesBatchOperationExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.ResumeProcessInstancesBatchOperationAsync(
+            new ProcessInstanceResumptionBatchOperationRequest
+            {
+                Filter = new ProcessInstanceFilter(),
+            });
+
+        Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+    }
+    // </ResumeProcessInstancesBatchOperation>
+    #endregion ResumeProcessInstancesBatchOperation
 }

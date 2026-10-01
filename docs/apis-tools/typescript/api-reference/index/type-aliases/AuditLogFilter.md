@@ -185,6 +185,26 @@ The form key search filter.
 
 ---
 
+### inboundChannelToolName?
+
+```ts
+optional inboundChannelToolName?: StringFilterProperty;
+```
+
+The inbound channel tool name search filter.
+
+---
+
+### inboundChannelType?
+
+```ts
+optional inboundChannelType?: StringFilterProperty;
+```
+
+The inbound channel type search filter (e.g. MCP).
+
+---
+
 ### jobKey?
 
 ```ts

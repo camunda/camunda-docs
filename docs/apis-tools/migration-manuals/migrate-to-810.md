@@ -37,17 +37,37 @@ Complete the following steps in this guide:
 1. Re-run compilation/type checks and address any errors.
 1. Review and apply fixes for the breaking changes, deprecations, and supported environment changes below.
 
+### API and SDK changes to migrate before Camunda 8.10
+
+If you did not already migrate to the following APIs and SDKs during your 8.8 or 8.9 upgrade, Camunda recommends you perform these migrations before you upgrade to 8.10.
+
+If you already performed these migrations, proceed to [Camunda 8.10 breaking changes, deprecations, and supported environment changes](#camunda-810-breaking-changes-deprecations-and-supported-environment-changes).
+
+| 8.9 status                                                  | Component/Use                                                                       | Migrate to                  | Migrate by          |
+| :---------------------------------------------------------- | :---------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
+| <span className="badge badge--deprecated">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                 | Orchestration Cluster API   | Before Camunda 8.10 |
+| <span className="badge badge--deprecated">Deprecated</span> | [ZeebeClient](../migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
+| <span className="badge badge--deprecated">Deprecated</span> | [Spring Zeebe SDK](../migration-manuals/migrate-to-camunda-spring-boot-starter.md)  | Camunda Spring Boot Starter | Before Camunda 8.10 |
+| <span className="badge badge--deprecated">Deprecated</span> | [Zeebe Process Test (ZPT)](../migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| <span className="badge badge--deprecated">Deprecated</span> | [Job-based user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
+
+:::tip
+Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
+:::
+
 ### Camunda 8.10 breaking changes, deprecations, and supported environment changes
 
 Review the actions required for the following 8.10 changes:
 
-| Type                                                              | Change                                                                                                                      |
-| :---------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| <span className="label-highlight red">Breaking change</span>      | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter)         |
-| <span className="label-highlight red">Breaking change</span>      | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)                     |
-| <span className="label-highlight orange">Behavioral change</span> | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
-| <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
-| <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
+| Type                                                                  | Change                                                                                                                      |
+| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| <span className="badge badge--breaking-change">Breaking change</span> | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter)         |
+| <span className="badge badge--breaking-change">Breaking change</span> | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)                     |
+| <span className="badge badge--breaking-change">Breaking change</span> | [Administration API (Self-Managed) migrated](#administration-api-self-managed-migrated)                                     |
+| <span className="badge badge--change">Behavioral change</span>        | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
+| <span className="badge badge--change">Behavioral change</span>        | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
+| <span className="badge badge--change">Behavioral change</span>        | [Deleting a process definition with running instances defers history deletion](#delete-draining)                            |
+| <span className="badge badge--deprecated">Deprecated</span>           | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
 
 ## Breaking changes
 
@@ -158,6 +178,19 @@ This filter works correctly for both new data and legacy data (which has `NULL` 
 </TabItem>
 </Tabs>
 
+### Administration API (Self-Managed) migrated
+
+The Administration API endpoints for Self-Managed have been migrated to the now-deprecated [Web Modeler API v1](../web-modeler-api/index.md):
+
+| Admin API (Self-Managed)       | Web Modeler API v1                   |
+| :----------------------------- | :----------------------------------- |
+| `GET /admin-api/usage-metrics` | `GET /api/v1/clusters/usage-metrics` |
+| `GET /admin-api/clusters`      | `GET /api/v1/clusters`               |
+
+For both endpoints, you need a [token with read permissions](../web-modeler-api/authentication.md#generate-a-token).
+
+These endpoints return the same data as the original Administration APIs, but the response format matches the other Web Modeler APIs.
+
 ## Behavioral changes
 
 ### Element instance search: advanced filters on `elementId` / `elementName` and `$or` support {#element-instance-advanced-or}
@@ -228,6 +261,14 @@ The [Get resource] and [Get resource content] APIs now retrieve from secondary s
 
 If your application assumes immediate resource retrieval after deployment, add retry logic or a short delay before querying resources.
 
+### Deleting a process definition with running instances defers history deletion {#delete-draining}
+
+The [delete resource](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) endpoint now accepts process definition deletion when the definition still has running instances. Instead of rejecting the request or waiting for physical removal, the definition [drains](/components/concepts/resource-deletion.md#draining): new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically afterwards.
+
+As a result, when `deleteHistory` is `true`, the `batchOperation` field in the response is `null` for such a definition. Its history is removed as part of the draining lifecycle rather than through an immediately-returned batch operation. The field is still populated for decision requirements definitions and for process definitions that are already fully deleted from the runtime state.
+
+If you read `batchOperation` from the delete response to track history deletion, handle a `null` value: the definition is draining. Track progress through the process definition `state` (`DRAINING`) or the `zeebe_process_definitions_draining_count` metric instead.
+
 ## Deprecations
 
 Review the actions required for the following deprecations:
@@ -241,6 +282,7 @@ The [Get resource content] endpoint is deprecated. Use [Get resource content bin
 Once you have completed the [upgrade steps](#upgrade-steps) in this guide, you should:
 
 1. Re-compile and run your test suite against the 8.10 API.
+
 <!--- 1. Review [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) for additional context on each change. --->
 
 [Get resource]: ../orchestration-cluster-api-rest/specifications/get-resource.api.mdx
