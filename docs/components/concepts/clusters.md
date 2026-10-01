@@ -106,7 +106,7 @@ The cluster size defines the cluster performance and capacity.
 
 After you have chosen your cluster type, choose the cluster size that best meets your cluster environment requirements.
 
-To learn more about choosing your cluster size, see [size your SaaS cluster](/components/best-practices/architecture/sizing-saas.md#determine-your-cluster-size).
+To learn more about choosing your cluster size, see [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
 
 - You can choose from four cluster sizes: 1x, 2x, 3x, and 4x.
 - Larger cluster sizes include increased performance and capacity, allowing you to serve more workload.
