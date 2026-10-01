@@ -42,6 +42,8 @@ If a process definition version is scheduled for deletion, its row shows a **Dra
 
 If there are no running process instances at all, the Dashboard shows a single empty state with links to learn more about Operate and to go to Modeler to start a new process instance.
 
+![The Operate Dashboard page, showing the metric panel with running instance counts, the Process instances by name panel with a process's versions expanded, and the Process incidents by error message panel with an error's affected process definitions expanded.](./img/basic-operate-navigation-dashboard.png)
+
 ## View a deployed process
 
 To view a deployed process, take the following steps:
