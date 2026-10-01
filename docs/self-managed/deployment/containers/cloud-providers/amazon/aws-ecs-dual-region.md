@@ -682,18 +682,40 @@ Run `failover.sh` against the region you lost:
 The script:
 
 1. Checks that the surviving region's gateway answers on `/v2/topology`, and prints the topology before the change.
-1. Scales every ECS service in the failed region to zero tasks, then waits 30 seconds for its brokers to drop out of cluster membership.
+1. Scales every ECS service in the failed region to zero tasks, then waits 30 seconds for its brokers to drop out of cluster membership. `--keep-tasks` skips this step.
 1. Sends `DELETE /actuator/cluster/zones/<failed-region>?force=true` through the tunnel and waits for the change to complete.
 1. Confirms the zone is gone from the partition distribution and that every partition has a leader.
 
 After a successful failover, the cluster runs on the four brokers of the surviving region, with `clusterSize` 4 and `replicationFactor` 2.
 
-| Option         | Effect                                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `--dry-run`    | Sends the request with `dryRun=true` and prints the planned operations. ECS and the cluster aren't changed.  |
-| `--keep-tasks` | Skips the ECS scale-down. Use this when the region is already unreachable and its services can't be updated. |
+| Option         | Effect                                                                                                                                                                                             |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--dry-run`    | Sends the request with `dryRun=true` and prints the planned operations. ECS and the cluster aren't changed.                                                                                        |
+| `--keep-tasks` | Skips the ECS scale-down and makes no AWS calls to the failed region. See [Fail over when the failed region's AWS API doesn't respond](#fail-over-when-the-failed-regions-aws-api-doesnt-respond). |
 
 The script passes `force=true` on purpose. By default, the Zones API [removes a zone](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#remove-a-zone) with `force=false`, which gracefully drains the zone and needs its brokers to still be running. A failover is the opposite situation. Run `failover.sh` only when the region is actually lost or you've stopped its brokers, because forcing the removal of reachable brokers can cause data loss.
+
+#### Fail over when the failed region's AWS API doesn't respond
+
+Use `--keep-tasks` when the AWS API or CLI in the failed region doesn't answer, so the script can remove the zone directly through the Camunda management API. Without the flag, the script first calls `aws ecs list-services` and `aws ecs update-service` in the failed region. During a regional outage, those calls can hang or fail, and the zone removal waits on them.
+
+```bash
+# Skip the ECS scale-down in region 0 and go straight to the zone removal
+./procedure/failover.sh --failed-region 0 --keep-tasks
+```
+
+With `--keep-tasks`, the script makes no AWS calls to the failed region. It still uses the AWS API in the surviving region to open the Session Manager tunnel to port 9600, so the surviving region's ECS and Systems Manager endpoints must be reachable.
+
+The script doesn't stop the failed region's tasks in this mode. Before you run it, make sure the failed region's brokers can't reach the rest of the cluster, because forcing the removal of reachable brokers can cause data loss. When the failed region's AWS API responds again, scale its ECS services to zero before you [fail back](#fail-back-to-both-regions):
+
+```bash
+for service in $(aws ecs list-services --region "${REGION_0}" --cluster "${CLUSTER_0}" --query 'serviceArns[]' --output text); do
+  aws ecs update-service --region "${REGION_0}" --cluster "${CLUSTER_0}" \
+    --service "${service}" --desired-count 0 --no-cli-pager > /dev/null
+done
+```
+
+`failback.sh` scales the services back up as part of the failback.
 
 #### Promote the Aurora writer
 
