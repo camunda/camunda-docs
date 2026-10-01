@@ -147,20 +147,20 @@ jobs:
           printf '%s\n' "$REMOTE_KEY" > "$key"
           trap 'rm -f "$key"' EXIT
 
-          ssh_opts=(          
-            -i "$key"                        # Authenticate with this key file.            
-            -o IdentitiesOnly=yes            # Offer only that key; don't try any other identities.            
-            -o StrictHostKeyChecking=no      # Don't prompt or fail on unknown host keys (same as the old action's default).            
+          ssh_opts=(
+            -i "$key"                        # Authenticate with this key file.
+            -o IdentitiesOnly=yes            # Offer only that key; don't try any other identities.
+            -o StrictHostKeyChecking=no      # Don't prompt or fail on unknown host keys (same as the old action's default).
             -o UserKnownHostsFile=/dev/null  # Don't record host keys anywhere.
           )
 
-          rsync_opts=(            
-            -a                       # Archive mode: recurse, keep permissions, times, symlinks, etc.            
+          rsync_opts=(
+            -a                       # Archive mode: recurse, keep permissions, times, symlinks, etc.
             -v                       # Verbose: list each file transferred.
-            -z                       # Compress data in transit.            
-            -r                       # Recurse into directories (already implied by -a; kept to match the old switches).            
-            --delete                 # Delete remote files that no longer exist in build/.          
-            --timeout=300            # Abort if no data moves for 300 seconds, so a stalled connection fails instead of hanging.            
+            -z                       # Compress data in transit.
+            -r                       # Recurse into directories (already implied by -a; kept to match the old switches).
+            --delete                 # Delete remote files that no longer exist in build/.
+            --timeout=300            # Abort if no data moves for 300 seconds, so a stalled connection fails instead of hanging.
             -e "ssh ${ssh_opts[*]}"  # Use ssh as the remote shell, with the options above.
           )
 
