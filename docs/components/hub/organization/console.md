@@ -32,16 +32,16 @@ In SaaS, Console shows a dashboard with the following information:
 
 <TabItem value='self-managed'>
 
-In Self-Managed, Console has a **Dashboard** and a **Usage** tab.
+In Self-Managed, Console shows dashboard and usage information for your clusters.
 
-The **Dashboard** tab shows the following information:
+The dashboard information includes:
 
 - Cluster health, including the number of healthy, unhealthy, and unknown clusters, and the [clusters](/components/hub/organization/manage-clusters/self-managed-clusters.md) that are unhealthy
 - Management components, each with its version, cluster, status, and a link to open it
 - Usage of all clusters in the last 30 days, including task users, process instances, and decision instances
 - Links to documentation and feedback
 
-Use the **Usage** tab to see the usage per cluster. To view all clusters, click **View all clusters**.
+The usage information shows the usage of each cluster. To view all clusters, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md).
 
 </TabItem>
 
