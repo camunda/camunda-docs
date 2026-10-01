@@ -88,6 +88,16 @@ For post-deployment operations, see [back up and restore](/self-managed/operatio
 
 To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
 
+## Camunda Spring Boot Starter applications with multiple clients
+
+When you configure multiple clients in a [Camunda Spring Boot Starter application](/apis-tools/camunda-spring-boot-starter/getting-started.md), the starter registers every `@JobWorker` against all configured clients and deploys every `@Deployment` resource to all configured clients. Workers can therefore poll and process jobs across multiple Physical Tenants, and the same BPMN resources can be deployed to each tenant. See [Physical Tenant behavior for job workers](/apis-tools/camunda-spring-boot-starter/configuration.md#physical-tenant-fan-out-for-multi-client-applications) and [deployment behavior for multi-client applications](/apis-tools/camunda-spring-boot-starter/configuration.md#deploy-resources-on-start-up).
+
+## Optimize deployment
+
+Deploy Optimize separately for each Physical Tenant and configure each instance to use that tenant's cluster connection. Native multi-tenant Helm support does not manage multiple Optimize instances.
+
+<!-- TODO: Confirm with the Optimize team whether additional Physical Tenant setup guidance is ready to publish. -->
+
 ## What is not isolated
 
 - Gateways are shared between tenants, so a saturated gateway can still affect multiple tenants.
