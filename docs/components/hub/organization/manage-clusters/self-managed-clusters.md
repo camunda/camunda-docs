@@ -52,12 +52,12 @@ Select a cluster to open its details. The header shows the status of the cluster
 | Jobs            | A summary of the jobs of the cluster, if the cluster supports it. See the [job dashboard](../analyze-operations/job-dashboard.md).                                                                                                                       |
 | Connectors      | The health and version of the connector runtime. Click **Manage** to open [Connector Management](./manage-connectors.md).                                                                                                                                |
 
-## Change a cluster
+## Update a cluster
 
-Cluster changes happen outside Camunda Hub, so there is nothing to rename, resume, resize, or delete on the **Clusters** page.
+Updates to clusters happen outside Camunda Hub, and are performed via your platform tooling.
 
-- To change how a cluster appears in Camunda Hub, for example its name, tags, or Physical Tenants, update the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters), and perform a rolling restart.
-- To update or scale the cluster, use your platform tooling. See the [upgrade guides](/self-managed/upgrade/index.md).
+- To change how a cluster appears in Camunda Hub, for example its name, tags, [components](/self-managed/components/hub/configuration/properties.md#components), or Physical Tenants, update the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters), and perform a rolling restart.
+- To upgrade or scale the cluster and its components, use your platform tooling. See the [upgrade guides](/self-managed/upgrade/index.md).
 
 If you remove a cluster from the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters) but a workspace still uses its Environments, they stay in the workspace with the status **Not reported**.
 
