@@ -383,7 +383,7 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 
 ### Catalog
 
-<!-- https://github.com/camunda/product-hub/issues/3402 -->
+<!-- https://github.com/camunda/product-hub/issues/3402, https://github.com/camunda/product-hub/issues/3490 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
@@ -391,7 +391,7 @@ The new Camunda Hub catalog gives your center of excellence (CoE) a governed, or
 
 - Manage element templates and their metadata in your own Git repository, and use a CI/CD pipeline to publish them to the catalog through the Hub API whenever the approved set changes.
 - Browse, search, and filter published assets in Hub, and read each asset's details before you apply it while modeling.
-- Track where each asset version is used, and identify projects that still use an outdated version.
+- See which assets are outdated and which workspaces and projects still use an older version, so you can prioritize migrations.
 - Unpublish assets you no longer want used. Elements that already use an unpublished asset keep working and show a deprecation hint.
 
 In 8.10, the catalog supports element templates as its only asset type.
