@@ -21,12 +21,12 @@ Manage organizational resources, analyze operations and business value, and deli
 
 ## About Camunda Hub
 
-Camunda Hub is the unified platform where:
+Camunda Hub is the centralized platform tailored for:
 
-- **Center of excellence teams** manage infrastructure, member access, and workspaces, so delivery teams have the environments and tools they need to ship process solutions at scale.
-- **Delivery teams** collaborate in managed workspaces, discover and use approved catalog assets, and model and deploy business processes.
+- **Center of Excellence and Platform administration teams**, who manage infrastructure, member access, and workspaces, so delivery teams have the deployment environments and tools they need to ship process solutions at scale.
+- **Delivery teams and automation domains**, who collaborate in managed workspaces with dedicated deployment environments, discover and use approved catalog assets, and model and deploy business processes.
 
-With Hub, teams within your organization can build, deploy, and operate your processes faster with a clear organizational structure and dedicated environments to deploy to.
+With Hub, teams within your organization can build, deploy, and operate your processes faster with a clear organizational structure and dedicated deployment environments for each workspace.
 
 <hr style={{ margin: '2.5rem 0', backgroundColor: '#dedede' }} />
 
