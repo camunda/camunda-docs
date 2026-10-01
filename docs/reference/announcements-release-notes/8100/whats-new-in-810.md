@@ -25,6 +25,7 @@ import HubOverview from '../../img/whats-new-hub.png';
 import HubCatalog from '../../img/whats-new-hub-catalog.png';
 import HubWorkspace from '../../img/whats-new-hub-workspace.png';
 import HubSnapshot from '../../img/whats-new-hub-snapshot.png';
+import CredentialsImg from '../../../components/hub/organization/credentials/img/credentials-choose-credential.png';
 import DesignSystem from '../../img/whats-new-design.png';
 import SecretsOverviewImg from '../../../components/concepts/assets/secrets-overview.png';
 import TenantImg from '../../../self-managed/concepts/multi-tenancy/img/tenancy-models-comparison.png';
@@ -109,6 +110,10 @@ Important changes in Camunda 8.10 are summarized as follows:
 <tr>
     <td>[Credentials](#credentials-manager)</td>
     <td>Create connector credentials once and reuse them wherever you need them.</td>
+</tr>
+<tr>
+    <td>[Environment connection](#environment-connection-in-the-modeler)</td>
+    <td>Connect Web Modeler to a cluster to use its credentials and run task tests against your real environment.</td>
 </tr>
 <tr>
     <td>[Multi-region resilience](#multi-region-resilience)</td>
@@ -437,9 +442,30 @@ Before 8.10, you configure a connector's authentication and connection settings 
 
 Camunda Hub introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
 
-<!-- Screenshot -->
+<img src={CredentialsImg} alt="Create a credential page in Camunda Hub showing credential types such as AWS Credential, REST Authentication, and JDBC Connection, each with the connectors that use it" class="img-900"/>
 
-<!-- todo: Add link -->
+- Center of excellence teams create and manage credentials centrally in Hub, and see them across all clusters.
+- Delivery teams select a credential from the properties panel of a connector task in the modeler, instead of entering the settings on every task.
+- Credentials are stored as cluster variables, so connectors and job workers can reference them by name.
+
+<ul>
+  <li><span class="link-arrow">[Manage credentials](/components/hub/organization/credentials/index.md)</span></li>
+  <li><span class="link-arrow">[Configure credentials in the modeling interface](/components/hub/organization/credentials/modeling-interface.md)</span></li>
+</ul>
+
+#### Environment connection in the modeler
+
+Connect Web Modeler to a cluster to model, test, and review against your real environment, instead of building in isolation.
+
+- View and choose which cluster you are connected to from the modeling toolbar.
+- Connector credential names from the connected cluster autocomplete in your FEEL expressions and in the properties panel credential picker.
+- [Task testing](/components/modeler/task-testing.md) runs against the connected cluster.
+
+This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
+
+:::note
+Environment connection is disabled by default and controlled by the `runtimeConnectionEnabled` feature flag, which covers cluster selection and task testing. The credential picker in the properties panel additionally requires `credentialsEnabled`.
+:::
 
 #### Recover deleted resources
 
