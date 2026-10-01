@@ -8,6 +8,7 @@ description: "Deploy three Amazon EKS clusters connected by AWS Transit Gateway 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import HighLevelDesign from './assets/eks-multi-region-rdbms.svg';
+import Connectivity from './assets/eks-multi-region-rdbms-connectivity.svg';
 
 import MultiRegionRdbmsCopy from '../../../\_partials/\_multi-region-rdbms-copy.md'
 
@@ -262,6 +263,8 @@ Two layers connect the regions, and they have different jobs:
 
 - **Transit Gateway**: carries the traffic.
 - **Submariner**: publishes service names across clusters.
+
+<Connectivity role="img" title="Three EKS clusters, london, paris, and zurich, each export the camunda-zeebe service with a ServiceExport and run Lighthouse DNS. London also hosts the ClusterSet broker, which holds metadata only. To reach paris, london first resolves paris.camunda-zeebe.camunda.svc.clusterset.local through Submariner, which provides service discovery only, with no gateway and no tunnel. It then connects to the paris pods over the AWS Transit Gateway, pod IP to pod IP, encrypted by AWS between regions." />
 
 ### Install subctl
 

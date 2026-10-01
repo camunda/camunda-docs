@@ -8,6 +8,9 @@ description: "Handle a region loss, bring a region back, and add a region to a M
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import RegionLoss from './img/multi-region-rdbms-region-loss.svg';
+import PromoteWriter from './img/multi-region-rdbms-promote-writer.svg';
+import Failback from './img/multi-region-rdbms-failback.svg';
+import AddZone from '../../../concepts/multi-region/img/multi-region-rdbms-add-zone.svg';
 
 import MultiRegionRdbmsCopy from '../\_partials/\_multi-region-rdbms-copy.md'
 
@@ -90,6 +93,8 @@ With `--dry-run`, the script reports the quorum state, prints the current cluste
 
 If the writer was in the lost region, promote a surviving member. The mode depends on whether the lost region is still reachable:
 
+<PromoteWriter role="img" title="If the writer was not in the lost region, no database action is needed. If it was, a reachable region allows a planned switchover with ./failover.sh and no data loss, while a lost region needs the AWS global database recovery, which can lose records that were not replicated. Either way, the JDBC URL resolves to the new writer, and Camunda needs no reconfiguration and no restart. Then raise the priority of the zone with the new writer, wait for COMPLETED, and run POST /cluster/v2/rebalance." />
+
 <Tabs groupId="failover-mode" defaultValue="planned" queryString values={[{label: 'Planned', value: 'planned' }, {label: 'Unplanned', value: 'unplanned' }]}>
 
 <TabItem value="planned">
@@ -162,6 +167,8 @@ Failback is short by design. It has no secondary storage snapshot and restore st
 ./failback.sh <recovered-region-slot>
 ```
 
+<Failback role="img" title="./failback.sh redeploys Camunda in the region and re-exports its services. If the zone was not force-removed during failover, its brokers rejoin and catch up from the Raft log with no membership change. If it was removed, the script adds the zone back with POST /actuator/cluster/zones/<zone> and waits for COMPLETED while the brokers rebuild. Then run ./check-cluster-topology.sh. The --switch-writer option moves the writer back." />
+
 The procedure does four things:
 
 1. **Redeploys Camunda** in the recovered region: namespace, database secret, Helm values, and chart.
@@ -192,6 +199,8 @@ Confirm the topology when done:
 Adding a region to a running cluster is an online operation. The regions already running keep processing and are not restarted.
 
 The new region's brokers start first. Then `activate-region.sh` adds its zone with `POST /actuator/cluster/zones/<zone>` and waits for the change to report `COMPLETED`. The engine places the zone's replicas and raises the replication factor in one change. It does not renumber any broker.
+
+<AddZone role="img" title="Three stages of the same cluster. First, two zones, london and paris, hold two replicas each, for a replication factor of four. Second, the operator deploys the zurich brokers, adds the zone with POST /actuator/cluster/zones/zurich, and waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues." />
 
 This section applies to a region slot that you provisioned but never ran. A zone that you removed during failover comes back through [Bring a region back](#bring-a-region-back) instead.
 

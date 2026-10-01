@@ -8,6 +8,7 @@ description: "Multi-Region RDBMS spreads an Orchestration Cluster across two or 
 import PageDescription from '@site/src/components/PageDescription';
 import TopologyImg from './img/multi-region-rdbms-topology.svg';
 import QuorumImg from './img/multi-region-rdbms-quorum.svg';
+import SingleEndpointImg from './img/multi-region-rdbms-single-endpoint.svg';
 import ActiveStandbyImg from './img/multi-region-rdbms-active-standby.svg';
 
 <PageDescription />
@@ -106,6 +107,8 @@ Multi-Region RDBMS adopts that constraint rather than working around it:
 - There are **no per-region exporters** to enable, disable, or reinitialize.
 - Region loss desynchronizes nothing at the Camunda layer, so failback has no restore step.
 - Swapping the database changes one value.
+
+<SingleEndpointImg role="img" title="Brokers in london, paris, and zurich all write to one JDBC URL, which is the same in every region. The URL points at the database writer in london today, and at the paris standby after a promotion. The writer replicates asynchronously to the standby. Any mechanism that keeps one endpoint on the current writer fits: a globally replicated managed database, a PostgreSQL cluster behind a floating endpoint, a connection proxy, or a DNS record you repoint at failover." />
 
 Any database that presents a single endpoint following its own writer fits. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported databases. For example:
 
