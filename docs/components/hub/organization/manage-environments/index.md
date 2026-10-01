@@ -77,13 +77,13 @@ Organization owners, admins, and DevOps users can resume a paused environment wh
 
 <TabItem value='self-managed'>
 
-In Self-Managed, Camunda Hub determines the status from the readiness addresses of the components. See [environment status](/self-managed/components/hub/configuration/properties.md#environment-status).
+In Self-Managed, Camunda Hub monitors the health of the components of each environment to determine its status. For details on how the status is determined, see the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environment-status).
 
 | Status       | Description                                                                                                                                                                      |
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Healthy      | The environment is running.                                                                                                                                                      |
 | Unhealthy    | The environment reports a problem.                                                                                                                                               |
-| Unknown      | Camunda Hub can't determine the status, for example because a component has no readiness address or doesn't respond.                                                             |
+| Unknown      | Camunda Hub can't determine the status, for example because a component doesn't respond.                                                                                         |
 | Not reported | The environment is assigned to a workspace, but its cluster or Physical Tenant is no longer in the Camunda Hub configuration. It shows no live data, and you can't deploy to it. |
 
 </TabItem>
