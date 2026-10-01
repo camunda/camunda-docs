@@ -74,6 +74,8 @@ The following endpoint can be used to fetch the flow control configuration:
 GET actuator/flowControl
 ```
 
+With multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), add the `physicalTenant=<tenant-id>` query parameter to fetch the configuration of one tenant. Without it, the response lists every tenant, keyed by tenant ID.
+
 #### Response
 
 | Code             | Description                                                             |
@@ -125,7 +127,7 @@ The `writeRateLimit` value can be null if it has not been defined yet.
 
 To set a new flow control configuration, make a `POST` request to the `actuator/flowControl` endpoint.
 
-This request will attempt to configure all partitions. Partitions might differ in configuration if, for example, a broker restarts and the leader partition reverts to the configuration defined in the environment variables.
+This request will attempt to configure all partitions. With multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), add the `physicalTenant=<tenant-id>` query parameter to configure only that tenant. Without it, the change applies to every tenant. Partitions might differ in configuration if, for example, a broker restarts and the leader partition reverts to the configuration defined in the environment variables.
 
 ```
 POST actuator/flowControl
