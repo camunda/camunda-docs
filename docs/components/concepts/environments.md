@@ -24,11 +24,11 @@ Teams deploy to an Environment, not to a cluster. A cluster can host more than o
 
 An Environment is backed by an isolated unit of a cluster. The cluster version determines which unit backs it, and you don't choose it:
 
-| Cluster                             | Backed by                                                                     | Environments on the cluster                                                |
-| :---------------------------------- | :---------------------------------------------------------------------------- | :------------------------------------------------------------------------- |
-| Self-Managed, version 8.10 or later | A [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) | One for each Physical Tenant. The `default` Physical Tenant always exists. |
-| SaaS                                | The cluster                                                                   | One Environment                                                            |
-| Any cluster before version 8.10     | The cluster                                                                   | One Environment                                                            |
+| Cluster                             | Backed by                                                                   | Environments on the cluster                                                |
+| :---------------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------- |
+| Self-Managed, version 8.10 or later | [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) | One for each Physical Tenant. The `default` Physical Tenant always exists. |
+| SaaS                                | [Cluster](./clusters.md)                                                    | One Environment                                                            |
+| Any cluster before version 8.10     | [Cluster](./clusters.md)                                                    | One Environment                                                            |
 
 Camunda Hub derives the name of an Environment, and you can't rename it. An Environment backed by a Physical Tenant other than `default` uses the Physical Tenant ID. Any other Environment uses the cluster name.
 
