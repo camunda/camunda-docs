@@ -4,7 +4,7 @@ title: Clusters in Self-Managed
 description: "View the Self-Managed clusters that Camunda Hub shows, check their health and components, and learn how to make a cluster you provision visible in Camunda Hub."
 ---
 
-In Self-Managed, you provision and operate clusters outside Camunda Hub. Camunda Hub shows the clusters that are in its configuration, so organization admins and DevOps users can check their health and see the [Environments](/components/concepts/environments.md) they host. You can't create, resize, update, or delete a cluster in Camunda Hub.
+In Self-Managed, you provision and operate your clusters with your own platform tooling, outside Camunda Hub. Camunda Hub displays the clusters that are defined in its [configuration](/self-managed/components/hub/configuration/properties.md#clusters), giving organization admins and DevOps users a central view of cluster health and of the [environments](/components/concepts/environments.md) each cluster hosts. Camunda Hub is read-only for clusters, so you can't create, resize, update, or delete a cluster from it.
 
 ## Permissions
 
@@ -34,7 +34,7 @@ Camunda Hub determines the status of a cluster from the readiness addresses of i
 Camunda Hub doesn't create clusters. To make a cluster you provision visible in Camunda Hub:
 
 1. Provision the cluster with your platform tooling, as described in the [Self-Managed installation guide](/self-managed/setup/overview.md).
-1. Add the cluster to the Camunda Hub configuration. Camunda Hub reads this configuration only at startup, so perform a rolling restart of Camunda Hub to pick up the change.
+1. Add the cluster to the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters). Camunda Hub reads this configuration only at startup, so perform a rolling restart of Camunda Hub to pick up the change.
 
 Click **Register new cluster** on the **Clusters** page to see these steps in Camunda Hub. For the configuration options, see [Environments in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
 
@@ -44,13 +44,13 @@ After the restart, the cluster appears on the **Clusters** page, and each of its
 
 Select a cluster to open its details. The header shows the status of the cluster and the number of Environments it hosts. The **Overview** has the following sections:
 
-| Section         | Description                                                                                                                                                                 |
-| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Environments    | The Environments the cluster hosts. Select an Environment to open its details, and to open Operate, Tasklist, or Admin for it.                                              |
-| Cluster details | The status, namespace, version, cluster ID, license, and the time Camunda Hub last synced with the cluster. It also shows any custom properties from the Hub configuration. |
-| Components      | The health and version of the components of the cluster, such as Zeebe, Operate, Tasklist, and Optimize.                                                                    |
-| Jobs            | A summary of the jobs of the cluster, if the cluster supports it. See the [job dashboard](../analyze-operations/job-dashboard.md).                                          |
-| Connectors      | The health and version of the connector runtime. Click **Manage** to open [Connector Management](./manage-connectors.md).                                                   |
+| Section         | Description                                                                                                                                                                                                                                              |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Environments    | The Environments the cluster hosts. Select an Environment to open its details, and to open Operate, Tasklist, or Admin for it.                                                                                                                           |
+| Cluster details | The status, namespace, version, cluster ID, license, and the time Camunda Hub last synced with the cluster. It also shows any custom properties from the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters). |
+| Components      | The health and version of the components of the cluster, such as Zeebe, Operate, Tasklist, and Optimize.                                                                                                                                                 |
+| Jobs            | A summary of the jobs of the cluster, if the cluster supports it. See the [job dashboard](../analyze-operations/job-dashboard.md).                                                                                                                       |
+| Connectors      | The health and version of the connector runtime. Click **Manage** to open [Connector Management](./manage-connectors.md).                                                                                                                                |
 
 ## Change a cluster
 
@@ -59,7 +59,7 @@ Cluster changes happen outside Camunda Hub, so there is nothing to rename, resum
 - To change how a cluster appears in Camunda Hub, for example its name, tags, or Physical Tenants, update the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments), and perform a rolling restart.
 - To update or scale the cluster, use your platform tooling. See the [upgrade guides](/self-managed/upgrade/index.md).
 
-If you remove a cluster from the configuration but a workspace still uses its Environments, they stay in the workspace with the status **Not reported**.
+If you remove a cluster from the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters) but a workspace still uses its Environments, they stay in the workspace with the status **Not reported**.
 
 ## Next steps
 
