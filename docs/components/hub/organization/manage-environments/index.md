@@ -61,12 +61,9 @@ In SaaS, the status updates automatically while the cluster changes state, and s
 
 #### Resume a paused environment
 
-Pausing and resuming is available only in SaaS. Organization owners, admins, and DevOps users can resume a paused environment:
+Pausing and resuming is available only in SaaS. Organization owners, admins, and DevOps users can resume a paused environment wherever Camunda Hub shows its status, for example on the **Environments** page, in the environment details, or when you select an environment to deploy to. The status changes to **Resuming** while the cluster starts, and then to **Healthy**.
 
-1. In the left navigation, click **Environments**.
-2. On the card of the paused environment, open the actions menu next to the status, and click **Resume**. You can also click **Resume** in the **Status** row of the environment details.
-
-The status changes to **Resuming** while the cluster starts. Environments in Self-Managed don't pause.
+Environments in Self-Managed don't pause.
 
 ## Open an environment
 
