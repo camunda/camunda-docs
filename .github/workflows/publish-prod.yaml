@@ -103,6 +103,8 @@ jobs:
           node-version: 24
       - name: Install Dependencies
         run: npm ci
+      - name: Enable Indexing
+        run: "sed -i 's/noIndex: true/noIndex: false/g' docusaurus.config.js"
       - name: Cache Docusaurus
         uses: ./.github/actions/docusaurus-cache
       - name: Update redirects for environment
