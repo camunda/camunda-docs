@@ -18,7 +18,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 ## Prerequisites
 
 - **Camunda API Client**: [Create an API client](/components/hub/organization/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
-- Locally, for configuring via `csap` only (see below): [Node.js >= 20 LTS](https://nodejs.org/en/about/previous-releases)
+- Locally, for configuring via the [CSAP c8ctl plugin](./csap-cli.md#prerequisites) only (see below): [Node.js >= 22](https://nodejs.org/en/about/previous-releases)
 - **On SAP BTP**:
   - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
   - SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
@@ -95,20 +95,20 @@ Custom properties are not supported:
 
 ## Configuration and deployment
 
-Use [`csap`](./csap-cli.md) for setting up the BTP plugin, as a manual configuration is cumbersome and error-prone.
+Use the [CSAP c8ctl plugin](./csap-cli.md) for setting up the BTP plugin, as a manual configuration is cumbersome and error-prone.
 
 Within Camunda, no setup/config work is necessary to use the BTP plugin.
 
-### Configuring the BTP plugin using `csap`
+### Configuring the BTP plugin using the CSAP c8ctl plugin
 
 Either walk yourself through the prompts or provide all information to the CLI:
 
-- `csap setup` will guide you interactively.
+- `c8ctl csap-setup` will guide you interactively.
 
 - Assuming your [Camunda cluster's API credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
-csap setup --for btp-plugin \
+c8ctl csap-setup --for btp-plugin \
 	--camunda 8.7 \
 	--deployment SaaS \
 	--btpRoute camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com
@@ -126,12 +126,12 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-2. `cd` to the folder `csap` logs after a successful build, for example, `/tmp/camunda/8.6/sap-btp-plugin`
+2. `cd` to the folder `c8ctl csap-setup` logs after a successful build, for example, `/tmp/camunda/8.6/sap-btp-plugin`
 3. Issue `cf deploy mta_archives/*.mtar`
    - Add the `-f` switch to force an update, for example, by deploying the same version again (`cf deploy mta_archives/*.mtar -f`).
    - Consider adding `--delete-services` to recreate eventually failed service creation of previous deployment. For example, `cf deploy mta_archives/*.mtar -f --delete-services`.
 
-For advanced deployment configuration, consider working with your SAP practice, starting from the created `mta.yaml` deployment descriptor (in the `$TMP` folder as output by `csap`).
+For advanced deployment configuration, consider working with your SAP practice, starting from the created `mta.yaml` deployment descriptor (in the `$TMP` folder as output by `c8ctl csap-setup`).
 
 ## Working with the BTP plugin
 

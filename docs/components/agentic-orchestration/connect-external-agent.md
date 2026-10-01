@@ -242,7 +242,7 @@ Set `elementId` only for a tool that a BPMN element in your process handles. For
 
 The conversation history is the decision trail Operate displays for the agent: the prompts it received, the messages the model returned, the tools it selected, and the results those tools produced. Group the items by `loopIteration` so each pass through the agent loop is legible on its own.
 
-Report history items either as a batch on the create or update call, or one at a time with [create agent instance history item](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item.api.mdx). Batching is the better default, because it keeps every item for a loop iteration in a single request.
+Report history items as a batch in the `history` field of the [create agent instance](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) or [update agent instance](/apis-tools/orchestration-cluster-api-rest/specifications/update-agent-instance.api.mdx) call. Send every item for a loop iteration in a single request.
 
 ```bash
 curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \

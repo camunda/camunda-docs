@@ -7,6 +7,7 @@ toc_max_heading_level: 3
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -630,15 +631,19 @@ This default does not apply to existing clusters. Existing clusters show data fi
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Helm v4 required for Camunda 8.10
+#### Helm CLI v3 and v4 supported for Camunda 8.10 {#helm-v4-required-for-camunda-810}
 
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. The Helm chart adds a CLI version check and fails fast if Helm v3 is used to install or upgrade chart 15.x.
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4.
 
-**Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+<HelmCliSupport />
+
+With Helm v3, the chart shows a warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
+
+**Action:** Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends. Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 </div>
 </div>
@@ -1054,6 +1059,27 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 **Action:** Treat this as a temporary escape hatch, not a supported long-term mode. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required.
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-component-specific-configuration)</p>
+
+</div>
+</div>
+
+## Tasklist
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Tasklist custom styling uses Camunda design system tokens
+
+Starting with Camunda 8.10, the Tasklist UI uses the Camunda design system instead of the Carbon Design System. Custom styles in `custom.css` that override Carbon `--cds-*` tokens or use `:root[data-carbon-theme='g10']` and `:root[data-carbon-theme='g100']` selectors no longer have any effect. Tasklist falls back to its default styling without showing an error.
+
+The `custom.css` file location has also changed. In the Docker image, place the file at `/usr/local/camunda/config/custom.css` instead of `/usr/local/tasklist/config/custom.css`. In the distribution archive, place it in the `config` directory. Camunda now serves the file at `<context-path>/custom.css` instead of `/tasklist/custom.css`.
+
+**Action:** When you upgrade to 8.10, rewrite your custom styles to override the Camunda design system tokens using the `html .c4-ui` (light theme) and `html .c4-ui.dark` (dark theme) selectors, and move `custom.css` to the new location.
+
+<p className="link-arrow">[Tasklist custom styling](/self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling.md)</p>
 
 </div>
 </div>
