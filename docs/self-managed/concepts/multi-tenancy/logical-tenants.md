@@ -101,7 +101,7 @@ All Logical Tenant configuration and management pages are consolidated here. Eac
 
 ## Logical Tenants in Camunda Hub
 
-When you deploy from Camunda Hub to an [Environment](/components/concepts/environments.md) that has more than one Logical Tenant, the deploy dialog asks you to choose one. If the Environment has exactly one Logical Tenant, Camunda Hub selects it. If it has none, the step is skipped.
+If multi-tenancy is enabled, you provide a Logical Tenant when you [deploy to a target Environment](/components/hub/workspace/manage-projects/deploy-project.md#logical-tenants) in Camunda Hub. The Logical Tenant is separate from the [Environment](/components/concepts/environments.md), which is a Physical Tenant or a cluster.
 
 ## Next steps
 
