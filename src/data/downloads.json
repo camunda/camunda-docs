@@ -186,11 +186,11 @@
       "previousVersions": "https://github.com/camunda/camunda/releases"
     },
     "connectors": {
-      "version": "8.9.14",
-      "date": "Sep 28, 2026",
+      "version": "8.10.0",
+      "date": "Sep 30, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/connectors/releases/tag/8.9.14"
+        "url": "https://github.com/camunda/connectors/releases/tag/8.10.0"
       },
       "previousVersions": "https://github.com/camunda/connectors/releases"
     },
