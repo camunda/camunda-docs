@@ -176,7 +176,7 @@ In a second run, the noisy tenant's partition count increased from three to 12 w
 
 Use [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) to limit how much load a single tenant can write. You can set write limits per tenant in two ways:
 
-- **Static configuration**: Override `camunda.processing.flow-control.write.*` under `camunda.physical-tenants.<tenant-id>`. Use these properties instead of the legacy `zeebe.broker.flowControl.write.*` properties, which Camunda's tests showed apply only to the default tenant.
+- **Static configuration**: Override `camunda.processing.flow-control.write.*` under `camunda.physical-tenants.<tenant-id>`. Use these properties instead of the legacy `zeebe.broker.flowControl.write.*` properties, which apply only to the default tenant.
 - **Runtime change**: Call `POST actuator/flowControl?physicalTenant=<tenant-id>` to change one tenant's limits without a restart. Without the `physicalTenant` parameter, the change applies to every tenant. Runtime changes revert to the static configuration when a broker restarts.
 
 Flow control limits are not a direct per-tenant cap. Keep the following in mind when you set them:
