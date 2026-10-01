@@ -18,11 +18,13 @@ This page describes how a [Multi-Region RDBMS](./multi-region-rdbms.md) cluster 
 
 Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. **You need no operator step to resume processing.** Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
 
-Two things still need attention.
+:::warning Two things still need attention
 
 **The database writer.** If the writer was in the lost region, promote a surviving member. A planned switchover loses no data. An unplanned promotion loses whatever had not replicated at the time of the outage, bounded by the replication lag your [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) strategy allows. Camunda itself needs no reconfiguration as long as the JDBC URL keeps resolving to the current writer.
 
 **Client traffic.** Camunda clients take one REST address and one gRPC address, not a list of endpoints. Point them at one address that fails over. For example, use a DNS record with health checks and failover routing, or a global load balancer in front of the regional load balancers. Most providers offer both, for example Amazon Route 53 and AWS Global Accelerator, Azure Traffic Manager and Azure Front Door, or Google Cloud DNS routing policies and Cloud Load Balancing.
+
+:::
 
 Recovery is the reverse and has no restore step. Redeploy the region. Its brokers replay from the surviving replicas exactly as they would after a node restart. For the step-by-step procedure, see [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
 
