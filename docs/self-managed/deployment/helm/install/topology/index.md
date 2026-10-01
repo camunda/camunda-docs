@@ -5,7 +5,7 @@ title: "Install the Camunda 8.10 deployment topology"
 description: "Install Camunda 8.10 Self-Managed as separate Hub, Orchestration Cluster, and Optimize Helm releases."
 ---
 
-import HelmV4Required from '../../_partials/_helm-v4-required.md'
+import HelmCliSupport from '../../_partials/_helm-cli-support.md'
 
 :::note Minimum chart versions
 This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/reference-architecture/deployment-topology.md#release-roles).
@@ -17,7 +17,7 @@ This is the baseline topology for a new 8.10 production deployment. Each release
 
 A single `combined` release remains supported and remains the chart default. Use it for evaluation and proofs of concept. See [quick developer install](/self-managed/deployment/helm/install/quick-install.md).
 
-<HelmV4Required />
+<HelmCliSupport />
 
 ## Install order
 

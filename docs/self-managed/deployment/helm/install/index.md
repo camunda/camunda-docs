@@ -40,10 +40,10 @@ For the trade-offs between backends, see [secondary storage architecture](/self-
 
 ## Before you install
 
-Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts, and requires the Helm v4 CLI.
+Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts. Camunda recommends the Helm CLI v4, and supports Helm CLI v3 (3.10 or later) until February 10, 2027.
 
 - Provision your databases, secondary storage, and identity provider first. See [deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
-- Switch to the Helm v4 CLI. See [move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
+- Use the Helm CLI v4 for new installations. See [Helm CLI support and chart compatibility](/self-managed/deployment/helm/operational-tasks/helm-v4.md#camunda-helm-chart-compatibility).
 - Decide which settings belong in `values.yaml` and which belong in a component's `extraConfiguration`. See [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md).
 
 ## Upgrading instead of installing
