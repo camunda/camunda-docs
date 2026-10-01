@@ -22,6 +22,6 @@ export const helmIndexCards = [
     title: "Upgrade Camunda 8.9 to 8.10 using Helm",
     image: IconArrow,
     description:
-      "Switch to the Helm v4 CLI and migrate the deprecated app-config Helm keys to extraConfiguration before running the Helm upgrade.",
+      "Migrate the deprecated app-config Helm keys to extraConfiguration before running the Helm upgrade.",
   },
 ];

@@ -1084,6 +1084,7 @@
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/databricks",
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               "Email": [
@@ -1344,6 +1345,8 @@
             "components/saas/byok/faq-and-troubleshooting"
           ]
         },
+        "components/saas/backups",
+        "components/saas/cross-region-cold-recovery",
         {
           "type": "category",
           "label": "Backup and restore",
@@ -3657,6 +3660,7 @@
                 "id": "self-managed/deployment/helm/operational-tasks/index"
               },
               "items": [
+                "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
                 {
                   "type": "category",
                   "label": "Migration from Bitnami",
@@ -3945,6 +3949,15 @@
         },
         {
           "type": "category",
+          "label": "Multi-tenancy",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/multi-tenancy/index"
+          },
+          "items": ["self-managed/concepts/multi-tenancy/logical-tenants"]
+        },
+        {
+          "type": "category",
           "label": "Audit log",
           "link": {
             "type": "doc",
@@ -3972,10 +3985,7 @@
             "self-managed/concepts/multi-region/dual-region"
           ]
         },
-        "self-managed/operational-guides/data-purge",
-        {
-          "Troubleshooting": ["self-managed/operational-guides/troubleshooting"]
-        }
+        "self-managed/operational-guides/data-purge"
       ]
     },
     {
@@ -4265,6 +4275,7 @@
         }
       ]
     },
+    "self-managed/operational-guides/troubleshooting",
     {
       "type": "category",
       "label": "Upgrade to Camunda 8.9",
@@ -4282,10 +4293,7 @@
             "type": "doc",
             "id": "self-managed/upgrade/helm/index"
           },
-          "items": [
-            "self-managed/upgrade/helm/890-to-8100",
-            "self-managed/upgrade/helm/880-to-890"
-          ]
+          "items": ["self-managed/upgrade/helm/880-to-890"]
         },
         "self-managed/upgrade/manual/index",
         {

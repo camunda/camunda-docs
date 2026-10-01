@@ -12,6 +12,12 @@ Monitor cluster health, track job and process execution, and measure business va
 
 <AoGrid ao={[
 {
+link: "./hub-dashboard",
+title: "Monitor the Hub dashboard",
+image: DocsIcon,
+description: "View organization activities at a high level.",
+},
+{
 link: "./job-dashboard",
 title: "Monitor the job dashboard",
 image: DocsIcon,

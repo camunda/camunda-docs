@@ -5,8 +5,6 @@ title: AI Agent Task connector
 description: AI agent connector implementation based on service tasks.
 ---
 
-import ConfigurationModelProvider from './agentic-ai/aiagent/configuration/\_model-provider.md';
-import ConfigurationModel from './agentic-ai/aiagent/configuration/\_model.md';
 import ConfigurationSystemPrompt from './agentic-ai/aiagent/configuration/\_system-prompt.md';
 import ConfigurationUserPrompt from './agentic-ai/aiagent/configuration/\_user-prompt.md';
 import ConfigurationTools from './agentic-ai/aiagent/configuration/\_tools.md';
@@ -32,8 +30,10 @@ Implement an AI agent using an AI Agent connector applied to a service task, pai
 
 ## Configuration
 
-<ConfigurationModelProvider />
-<ConfigurationModel />
+### Model provider
+
+Select the LLM model **Provider** and **Model**. See [model providers](./agentic-ai-aiagent-model-providers.md) for supported providers and configuration details.
+
 <ConfigurationSystemPrompt />
 <ConfigurationUserPrompt />
 <ConfigurationTools />

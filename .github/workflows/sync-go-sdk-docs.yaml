@@ -19,6 +19,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+
 jobs:
   sync-go-sdk-docs:
     runs-on: ubuntu-latest
@@ -209,4 +212,11 @@ jobs:
     needs:
       - sync-go-sdk-docs
     if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    permissions: {}
     uses: ./.github/workflows/notify-failure.yml
+    with:
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

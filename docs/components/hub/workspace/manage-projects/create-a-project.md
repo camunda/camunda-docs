@@ -16,7 +16,7 @@ To set up a new project, you first need a [workspace](../../organization/manage-
 
 Create a project to work on a set of related files:
 
-1. In your workspace, click **New project**.
+1. In your workspace, click **Create project**.
 2. Provide a project name, and click **Create project**.
 
 ## Connect clusters

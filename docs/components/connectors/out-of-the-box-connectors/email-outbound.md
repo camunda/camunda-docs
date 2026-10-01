@@ -15,7 +15,7 @@ The **Email outbound connector** allows your BPMN service to send and receive em
 To use the **Email connector**, you must have an SMTP, POP3 or IMAP server available to connect to.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text.
+Use secrets to avoid exposing your sensitive data as plain text.
 See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 :::
 

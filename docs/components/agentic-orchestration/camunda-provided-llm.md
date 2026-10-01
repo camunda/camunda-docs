@@ -39,7 +39,7 @@ See [Trial vs. enterprise budgets](#trial-vs-enterprise-budgets) for more detail
 
 ## Set up Camunda-provided LLM
 
-Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as cluster secrets.
+Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret).
 
 - If you are using an AI agent blueprint, no additional configuration is needed in most cases. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
 - If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) with the following parameters:
@@ -79,7 +79,7 @@ The budgets, measured in **dollars (USD) spent**, differ depending on your SaaS 
 Budgets are topped up automatically and enforced at the organization level (not per user). This means multiple users in the same organization draw from the same budget.
 :::
 
-### What the budget cover
+### What the budget covers
 
 The Camunda-provided LLM budget covers LLM provider calls during AI agent execution:
 
@@ -105,7 +105,7 @@ If your process model doesn’t handle LLM failures, an exhausted budget may res
 
 ## Monitor usage
 
-The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Hub shows usage statistics for Camunda-provided LLM, including:
+The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Hub shows usage statistics for the Camunda-provided LLM, including:
 
 - How much of your budget has been used.
 - How much budget remains.

@@ -50,7 +50,7 @@ Always choose a list of tasks with a specified status. Then, select the task you
 
 Change variables as needed and begin completion with the **Complete Task** button.
 
-Completed tasks will be shown in the [**Completed** task list](#completed-tasks).
+Completed tasks will be shown in the [**Completed** task list](#view-completed-tasks).
 
 ### Add and update variables
 

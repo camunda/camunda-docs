@@ -270,7 +270,7 @@ other mechanisms.
 
 ## Secrets
 
-Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
+Providing values for [legacy secret references](/reference/glossary.md#secret-reference-legacy) to the runtime environment can be achieved in different ways, depending on your setup. To move to the recommended `camunda.secrets.<name>` syntax, resolved by the Orchestration Cluster from a configured secret store, see [Migrate to `camunda.secrets.<name>`](/components/connectors/use-connectors/migrate-secrets.md).
 
 <Tabs groupId="connectorTemplateInbound" defaultValue="default" queryString values={
 [
@@ -571,7 +571,7 @@ To configure the truststore, use the following environment variables:
 
 The [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md) sends messages to Microsoft Teams and Slack through your organization's Camunda app integrations. The runtime holds the connection, so no process model carries an endpoint or a credential.
 
-Configure this only if you have installed app integrations, as described in [Install Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams-installation.md). Until the runtime is configured, every App Integrations job fails with `APP_INTEGRATIONS_NOT_CONFIGURED` and raises an incident.
+Configure this only if you have installed app integrations, as described in [Install app integrations](/components/camunda-integrations/app-integrations/installation.md). Until the runtime is configured, every App Integrations job fails with `APP_INTEGRATIONS_NOT_CONFIGURED` and raises an incident.
 
 ### Connection settings
 
@@ -724,7 +724,7 @@ Find more information (including links to component-specific configuration pages
 The log level can be changed globally by setting the environment variable `LOGGING_LEVEL_IO_CAMUNDA_CONNECTOR=DEBUG`. This changes the default log level for the `io.camunda.connector` package
 to `DEBUG`.
 
-You can can use this package based log level approach also with custom connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
+You can use this package based log level approach also with custom connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
 
 To change the log level for all packages, change it for the `root` logger: `LOGGING_LEVEL_ROOT=DEBUG`.
 

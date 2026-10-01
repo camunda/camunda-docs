@@ -25,6 +25,8 @@ The Effect API is an **opt-in subpath** (`@camunda8/orchestration-cluster-api/ef
 
 - [ActivateJobsStreamOptions](interfaces/ActivateJobsStreamOptions.md)
 - [CamundaEffectWorkerHandle](interfaces/CamundaEffectWorkerHandle.md)
+- [EffectPaginateOptions](interfaces/EffectPaginateOptions.md)
+- [EffectPaginator](interfaces/EffectPaginator.md)
 - [EffectWorkerConfig](interfaces/EffectWorkerConfig.md)
 
 ## Type Aliases

@@ -28,4 +28,4 @@ The missing/orphaned projects and all contained files remain in the Camunda Hub 
 
 ## Resolution
 
-To restore workspace access for the affected users, users with the **Hub Admin** role already have the [access](/components/hub/organization/manage-users/manage-users.md#elevated-workspace-access) needed to reassign members to projects that have no members.
+To restore workspace access for the affected users, users with the **Hub Admin** role already have the [access](/components/hub/organization/manage-users/index.md#elevated-workspace-access) needed to reassign members to projects that have no members.
