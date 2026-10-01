@@ -100,13 +100,13 @@ Management plane components don't replicate across regions, so losing the region
 
 ### Protect the management plane with backup and restore
 
-Back up each management plane component on its own schedule. Replicate those backups to a second region, so they survive the loss of the management plane region.
+Back up Management Identity and Camunda Hub on their own schedule. If Optimize shares the Elasticsearch instance of the Orchestration Cluster, back it up together with the Orchestration Cluster, using the same backup ID. Replicate all backups to a second region, so they survive the loss of the management plane region.
 
-| Component           | Backup method                                                                                                                                                                            |
-| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Management Identity | Back up its PostgreSQL database using your database's native tooling                                                                                                                     |
-| Camunda Hub         | Back up its PostgreSQL database. Console needs no backup of its own. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md) |
-| Optimize            | Use the Optimize backup API. See [back up and restore Optimize independently](/self-managed/operational-guides/backup-restore/optimize-backup-and-restore.md)                            |
+| Component           | Backup method                                                                                                                                                                                                             |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Management Identity | Back up its PostgreSQL database using your database's native tooling                                                                                                                                                      |
+| Camunda Hub         | Back up its PostgreSQL database. Console needs no backup of its own. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md)                                  |
+| Optimize            | Use the Optimize backup API with the same backup ID as the Orchestration Cluster backup. See [back up and restore Optimize independently](/self-managed/operational-guides/backup-restore/optimize-backup-and-restore.md) |
 
 The management plane's recovery point and recovery time follow from your backup interval and restore procedure. The dual-region [recovery objectives](#recovery-objectives) don't cover them, because those objectives apply to the runtime plane only.
 
