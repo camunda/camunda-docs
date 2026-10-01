@@ -82,8 +82,6 @@ Use the **Workspaces** tab to see the workspaces the environment is assigned to.
 
 ## Add a new environment
 
-Camunda Hub creates an environment for each cluster, so you can't add an environment directly on the **Environments** page. Instead, you add a cluster or, in Self-Managed, a Physical Tenant. How a new environment appears depends on your deployment:
-
 <Tabs groupId="edition" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
@@ -92,7 +90,7 @@ Camunda Hub creates an environment for each cluster, so you can't add an environ
 
 <TabItem value='saas'>
 
-Every SaaS cluster has one environment, which Camunda Hub creates when you create the cluster.
+In SaaS, you add an environment by creating a cluster. Every SaaS cluster has one environment, which Camunda Hub creates automatically when the cluster is created.
 
 1. [Create a cluster](../../../saas/clusters/create-cluster.md). The environment of the cluster appears on the **Environments** page.
 1. [Assign the environment to a workspace](./assign-environments.md) so that teams can deploy to it.
@@ -101,7 +99,7 @@ Every SaaS cluster has one environment, which Camunda Hub creates when you creat
 
 <TabItem value='self-managed'>
 
-In Self-Managed, you provision clusters outside Camunda Hub, and you declare them in the Camunda Hub configuration. A cluster has an environment for its `default` Physical Tenant, and, on Camunda 8.10 and later, one for each additional [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) you declare.
+In Self-Managed, you add an environment by adding a cluster or a [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) to the Camunda Hub configuration. You provision clusters outside Camunda Hub. A cluster has an environment for its `default` Physical Tenant, and, on Camunda 8.10 and later, one for each additional Physical Tenant you declare.
 
 1. Provision the cluster with your platform tooling.
 1. Add the cluster to the Camunda Hub configuration, and declare any additional Physical Tenants. See [physical tenants in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#physical-tenants).
