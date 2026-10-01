@@ -14,7 +14,7 @@ import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import ConnectorsIcon from "@site/docs/components/assets/icon-connectors.png";
 import { ServerIcon, KeyRoundIcon } from "@site/docs/components/assets/hub-icons";
 import WorkspacesEnvironmentsImg from "./img/workspaces-environments.png";
-import HubStructureImg from "./img/centralized-org-management.png";
+import HubStructureImg from "./img/organization-structure.png";
 import HubWorkspacesImg from "./img/workspaces-environments.png";
 import AoGrid from '../react-components/\_ao-card';
 
@@ -34,7 +34,7 @@ With Hub, teams within your organization can build, deploy, and operate your pro
 <div class="double-column-container" style={{ paddingTop: '20px' }}>
 <div class="double-column-left" style={{ flex: '1.4', paddingRight: '40px' }}>
 
-<img src={HubStructureImg} alt="Camunda Hub high-level structure diagram" title="Camunda Hub high-level structure" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={HubStructureImg} alt="Camunda Hub organization structure: an organization contains workspaces, and a workspace contains projects with BPMN, DMN, form, RPA, template, folder, and readme files" title="Camunda Hub high-level structure" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 <div class="double-column-right" style={{ flex: '2', marginTop: '-2.2rem' }}>
