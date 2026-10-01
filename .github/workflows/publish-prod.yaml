@@ -128,7 +128,7 @@ jobs:
       - name: Install rsync
         timeout-minutes: 3
         run: apt-get update && apt-get install -y --no-install-recommends rsync openssh-client
-      - name: Publish to AWS (prod)
+      - name: Publish to new server
         timeout-minutes: 30
         env:
           REMOTE_PATH: ${{ steps.secrets.outputs.PROD_PATH }}
