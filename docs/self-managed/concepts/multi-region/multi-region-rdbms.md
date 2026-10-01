@@ -121,7 +121,8 @@ Whichever mechanism you choose, test it with the [failover procedure](/self-mana
 
 The Camunda configuration does not change between them.
 
-:::warning Replication monitoring is required
+### Monitor asynchronous replication
+
 Asynchronous replication monitoring is required, not a tuning option. Without it the RDBMS exporter acknowledges records the standby has not received yet, and a writer failover loses exported data. This architecture treats a writer failover as a routine operation rather than an incident, so set `camunda.data.secondary-storage.rdbms.async-replication.enabled` to `true`.
 
 Camunda turns this monitoring off by default. The default suits a single database without asynchronous replicas, and the monitoring needs extra database privileges, for example the `PG_MONITOR` role on PostgreSQL. This architecture needs it, so the reference implementation sets it to `true`. Once you turn it on, the strategy defaults to `LOG_SEQ`.
@@ -137,7 +138,6 @@ The strategy you can use depends on the database engine, not on the cloud provid
 | `DELAY`                    | Fallback for a database that supports neither `LOG_SEQ` nor `TIME_LAG`, for example Azure SQL Database. Carries no replication signal.                                               | `async-replication.type: DELAY`, a `delay` value, and your own monitoring of the actual lag |
 
 Camunda doesn't switch strategies for you. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported backends and the settings.
-:::
 
 ### The database tier is active-standby
 
