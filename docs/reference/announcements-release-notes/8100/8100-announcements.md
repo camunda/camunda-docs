@@ -847,7 +847,7 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 
 #### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
-With Camunda 8.10, Camunda Hub and Optimize authentication is homogenized with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, accepting the same `camunda.security.authentication.*` settings. Camunda Hub and Optimize continue to accept their existing 8.9 authentication settings in 8.10, translating recognized properties to their new equivalents at startup, but those settings are deprecated and are removed in 8.11. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+With Camunda 8.10, Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, accepting the same `camunda.security.authentication.*` settings. Camunda Hub and Optimize continue to accept their existing 8.9 authentication settings in 8.10, translating recognized properties to their new equivalents at startup, but those settings are deprecated and are removed in 8.11. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
 Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
 

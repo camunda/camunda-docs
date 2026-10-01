@@ -303,7 +303,7 @@ Additionally, when you upgrade, your data is [migrated](/self-managed/upgrade/co
 
 ## Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
-Camunda Hub and Optimize authentication is now homogenized with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, so there is one configuration surface to learn and one place to look when authentication does not behave as expected. Camunda Hub and Optimize both continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components and are removed in 8.11. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, so there is one configuration surface to learn and one place to look when authentication does not behave as expected. Camunda Hub and Optimize both continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components and are removed in 8.11. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
 Camunda Hub therefore requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged in 8.10 and is still handled by Management Identity.
 

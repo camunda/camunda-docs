@@ -37,7 +37,7 @@ Note the following:
 :::note
 If you deploy with the Camunda Helm chart, you don't need to set `issuer-uri`, `client-id`, `client-secret`, or `audiences` directly. The chart continues to read the same `global.identity.auth.optimize.*` values you already use, and renders them into the properties above for you.
 
-For `username-claim` and `client-id-claim`, the chart renders the same defaults the Orchestration Cluster uses (`preferred_username` and `client_id`), matching Keycloak's token shape out of the box. If your identity provider issues the client ID under a different claim (for example, Microsoft Entra's `azp` or Okta's `cid`), set it through `optimize.extraConfiguration`:
+For `username-claim` and `client-id-claim`, the chart renders the same defaults the Orchestration Cluster uses (`preferred_username` and `client_id`). See the [setup instructions for your identity provider](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for guidance on what values to use. If your identity provider issues the client ID under a different claim (for example, Microsoft Entra's `azp` or Okta's `cid`), set it through `optimize.extraConfiguration`:
 
 ```yaml
 optimize:
