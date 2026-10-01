@@ -104,7 +104,7 @@ To find relevant environments, go to the **Environments** page of your Hub organ
 
 ## Environment applications
 
-Each environment has its own instances of the Camunda applications. Open an application from the details of the environment. An application shows **Unavailable** if Camunda Hub can't resolve its address.
+Each environment has its own instances of the Camunda applications. Open an application from the details of the environment.
 
 | Application | Description                                                                                                                         |
 | :---------- | :---------------------------------------------------------------------------------------------------------------------------------- |
@@ -112,6 +112,8 @@ Each environment has its own instances of the Camunda applications. Open an appl
 | Tasklist    | Work on the user tasks of the environment. See [Tasklist](/components/tasklist/introduction-to-tasklist.md).                        |
 | Admin       | Manage authentication, authorization, and administration for the environment. See [Admin](/components/admin/admin-introduction.md). |
 | Optimize    | Analyze and improve your processes, where Optimize is configured. See [Optimize](/components/optimize/what-is-optimize.md).         |
+
+An application is shown as **Unavailable** when Camunda Hub can't link to it.
 
 ## Jobs
 
