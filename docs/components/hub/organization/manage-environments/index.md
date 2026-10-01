@@ -24,7 +24,7 @@ Your role determines which environments you can see and what you can do with the
 
 ## Environment summary
 
-Camunda Hub summarizes each environment as a card with the following details:
+Camunda Hub provides the following summary details for each environment:
 
 | Detail     | Description                                                                                                                                          |
 | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -94,7 +94,7 @@ Select an environment to open its details. The **Overview** tab contains the fol
 
 | Section              | Description                                                                                                                                                                                                                                                                          |
 | :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Applications         | Cards to open Operate, Tasklist, Admin, and Optimize (where it's configured). An application shows **Unavailable** if Camunda Hub can't resolve its address.                                                                                                                         |
+| Applications         | Links to open Operate, Tasklist, Admin, and Optimize (where it's configured). An application shows **Unavailable** if Camunda Hub can't resolve its address.                                                                                                                         |
 | Environment details  | The status, version, region, cluster, and IDs of the environment. If the environment is backed by a Physical Tenant, the details include the **Physical tenant ID**, which applies to Self-Managed only. In SaaS, the details include the **REST API** and **Swagger UI** addresses. |
 | Jobs (last 24 hours) | The number of jobs that were created, completed, and not completed. Select **View all job types** for details. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).                                                                                |
 
