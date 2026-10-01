@@ -95,9 +95,9 @@ The **Tenants** tab in Admin is available to organization admins on SaaS cluster
 
 ## Multi-tenancy in Camunda Hub
 
-In Camunda Hub, you deploy to an [Environment](/components/concepts/environments.md), which is a Physical Tenant or a cluster. If multi-tenancy is enabled for that Environment, you select a tenant separately when you deploy. The tenant you select owns the deployed resources.
+In Camunda Hub, you deploy to an [environment](/components/concepts/environments.md), which is a Physical Tenant or a cluster. If multi-tenancy is enabled for that environment, you select a tenant separately when you deploy. The tenant you select owns the deployed resources.
 
-If the Environment has more than one tenant, choose the tenant to deploy to. If it has exactly one, Camunda Hub selects it automatically.
+If the environment has more than one tenant, choose the tenant to deploy to. If it has exactly one, Camunda Hub selects it automatically.
 
 Learn more about [deploying to a tenant](/components/hub/workspace/manage-projects/deploy-project.md#logical-tenants).
 

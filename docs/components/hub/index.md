@@ -24,10 +24,10 @@ Manage organizational resources, analyze operations and business value, and deli
 
 Camunda Hub is the unified platform where:
 
-- **Center of excellence teams** manage infrastructure, member access, and workspaces, so delivery teams have the Environments and tools they need to ship process solutions at scale.
+- **Center of excellence teams** manage infrastructure, member access, and workspaces, so delivery teams have the environments and tools they need to ship process solutions at scale.
 - **Delivery teams** collaborate in managed workspaces, discover and use approved catalog assets, and model and deploy business processes.
 
-With Hub, teams within your organization can build, deploy, and operate your processes faster with a clear organizational structure and dedicated Environments to deploy to.
+With Hub, teams within your organization can build, deploy, and operate your processes faster with a clear organizational structure and dedicated environments to deploy to.
 
 <hr style={{ margin: '2.5rem 0', backgroundColor: '#dedede' }} />
 
@@ -45,7 +45,7 @@ Camunda Hub's organization view shows the workspaces you belong to, organized in
 
 **Organization → Workspace → Project → Files and folders**
 
-You can manage organizational resources, including clusters, Environments, and workspaces, and govern the use of reusable assets.
+You can manage organizational resources, including clusters, environments, and workspaces, and govern the use of reusable assets.
 
 <p class="link-arrow">[Manage organizational resources](/components/hub/organization/index.md)</p>
 
@@ -57,9 +57,9 @@ You can manage organizational resources, including clusters, Environments, and w
 
 ### Workspaces and Environments
 
-An Environment is the place where a team deploys and runs its processes, for example a development, staging, or production Environment. Each Environment is hosted on a cluster, which remains the infrastructure that your administrators manage.
+An environment is the place where a team deploys and runs its processes, for example a development, staging, or production environment. Each environment is hosted on a cluster, which remains the infrastructure that your administrators manage.
 
-Organization admins assign Environments to workspaces. Projects in a workspace can deploy to all the Environments assigned to it, so you can deploy and promote your work with clear access controls.
+Organization admins assign environments to workspaces. Projects in a workspace can deploy to all the environments assigned to it, so you can deploy and promote your work with clear access controls.
 
 <p class="link-arrow">[Build within a workspace](/components/hub/workspace/index.md)</p>
 
@@ -73,7 +73,7 @@ Organization admins assign Environments to workspaces. Projects in a workspace c
 
 ## Manage organizational resources
 
-Manage organizational resources, including clusters, Environments, and workspaces, and govern the use of reusable assets:
+Manage organizational resources, including clusters, environments, and workspaces, and govern the use of reusable assets:
 
 <AoGrid ao={[
 {
@@ -92,7 +92,7 @@ description: "See your deployment environments and assign them to workspaces.",
 link: "./organization/manage-clusters/manage-cluster",
 title: "Manage clusters",
 image: BPMNIcon,
-description: "Create, monitor, and maintain the clusters that host your Environments.",
+description: "Create, monitor, and maintain the clusters that host your environments.",
 },
 {
 link: "./organization/credentials",

@@ -1,12 +1,12 @@
 ---
 title: Manage clusters
-description: "Create, monitor, and maintain the clusters that host your Environments."
+description: "Create, monitor, and maintain the clusters that host your environments."
 ---
 
 import DocsIcon from "@site/docs/components/assets/icon-docs.png";
 import AoGrid from '../../../react-components/\_ao-card';
 
-Create, monitor, and maintain the clusters that host your Environments. A cluster is the infrastructure your organization operates, while teams deploy to [Environments](../manage-environments/index.md) that run on it:
+Create, monitor, and maintain the clusters that host your environments. A cluster is the infrastructure your organization operates, while teams deploy to [environments](../manage-environments/index.md) that run on it:
 
 <AoGrid ao={[
 { link: "./manage-cluster",

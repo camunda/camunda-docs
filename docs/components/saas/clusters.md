@@ -7,7 +7,7 @@ description: "Learn about the cluster types, sizes, and Free Trial clusters avai
 
 In Camunda 8 SaaS, [creating a cluster](/components/hub/organization/manage-clusters/create-cluster.md) lets you choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery guarantees.
 
-This page describes the details of clusters in SaaS. To learn what a cluster is and how it relates to Environments and workspaces, see [clusters](/components/concepts/clusters.md).
+This page describes the details of clusters in SaaS. To learn what a cluster is and how it relates to environments and workspaces, see [clusters](/components/concepts/clusters.md).
 
 ## Cluster type
 

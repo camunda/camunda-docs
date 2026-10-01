@@ -1,16 +1,16 @@
 ---
 id: clusters
 title: "Clusters"
-description: "A cluster is the infrastructure that runs Camunda 8. Learn how clusters relate to Environments, workspaces, and Physical Tenants."
+description: "A cluster is the infrastructure that runs Camunda 8. Learn how clusters relate to environments, workspaces, and Physical Tenants."
 ---
 
 A cluster is the infrastructure that runs Camunda 8. It includes the Orchestration Cluster that automates your processes, and the components that run alongside it, such as connectors and Optimize.
 
-In Camunda Hub, a cluster is an administrative unit: the infrastructure that organization admins create, size, and maintain. Teams don't deploy to a cluster directly. They deploy to an [Environment](./environments.md) hosted on it.
+In Camunda Hub, a cluster is an administrative unit: the infrastructure that organization admins create, size, and maintain. Teams don't deploy to a cluster directly. They deploy to an [environment](./environments.md) hosted on it.
 
 ## Clusters and Environments
 
-A cluster is an administrative unit, and an Environment is an operational unit. Organization admins create, size, update, and back up clusters. Teams deploy and run processes in the Environments that are assigned to their [workspace](./workspaces.md).
+A cluster is an administrative unit, and an environment is an operational unit. Organization admins create, size, update, and back up clusters. Teams deploy and run processes in the environments that are assigned to their [workspace](./workspaces.md).
 
 | Cluster                             | Environments of the cluster                                                               |
 | :---------------------------------- | :---------------------------------------------------------------------------------------- |
@@ -18,9 +18,9 @@ A cluster is an administrative unit, and an Environment is an operational unit. 
 | Self-Managed, before version 8.10   | Exactly one, named after the cluster.                                                     |
 | Self-Managed, version 8.10 or later | One for each [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md). |
 
-Every Environment belongs to exactly one cluster. The tags of a cluster, such as `dev` or `prod`, appear on each of its Environments.
+Every environment belongs to exactly one cluster. The tags of a cluster, such as `dev` or `prod`, appear on each of its environments.
 
-Learn more about [Environments](./environments.md).
+Learn more about [environments](./environments.md).
 
 ## Clusters in SaaS
 
@@ -30,9 +30,9 @@ Learn more about [SaaS clusters](/components/saas/clusters.md), including cluste
 
 ## Clusters in Self-Managed
 
-In Self-Managed, you provision clusters outside Camunda Hub, and you don't create them in Camunda Hub. To show a cluster and its Environments in Camunda Hub, add it to the Camunda Hub configuration.
+In Self-Managed, you provision clusters outside Camunda Hub, and you don't create them in Camunda Hub. To show a cluster and its environments in Camunda Hub, add it to the Camunda Hub configuration.
 
-Learn more about [Environments in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
+Learn more about [environments in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
 
 ## Manage clusters
 
@@ -43,5 +43,5 @@ Organization admins and DevOps users manage clusters in Camunda Hub, for example
 
 ## Next steps
 
-- Read about [Environments](./environments.md), [workspaces](./workspaces.md), and [projects](./projects.md).
+- Read about [environments](./environments.md), [workspaces](./workspaces.md), and [projects](./projects.md).
 - Learn how [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) isolate teams inside a cluster.

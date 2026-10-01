@@ -31,7 +31,7 @@ Each pipeline is unique. The Camunda Hub API offers flexibility to tailor integr
 - A platform to host a version control system (VCS) such as GitHub or GitLab.
 - An existing pipeline or a plan to set one up using tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or built-in solutions of VCS platforms like [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
 - Familiarize yourself with the [Camunda Hub API](/apis-tools/hub-api-sm/overview.md).
-- Understand how [clusters](/components/concepts/clusters.md) and [Environments](/components/concepts/environments.md) work in Camunda 8.
+- Understand how [clusters](/components/concepts/clusters.md) and [environments](/components/concepts/environments.md) work in Camunda 8.
 - Ensure you’ve [created a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md), or installed [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 
 ## Setup
@@ -70,7 +70,7 @@ Disable manual deployments for any member by configuring environment variables `
 </TabItem>
 <TabItem value="saas">
 
-To restrict who can deploy from Camunda Hub, control which [Environments are assigned to each workspace](/components/hub/organization/manage-environments/assign-environments.md), and manage the deployment permissions in the clusters. You can also require an approved project snapshot before anyone deploys to an Environment tagged `prod`. See the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
+To restrict who can deploy from Camunda Hub, control which [environments are assigned to each workspace](/components/hub/organization/manage-environments/assign-environments.md), and manage the deployment permissions in the clusters. You can also require an approved project snapshot before anyone deploys to an environment tagged `prod`. See the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
 
 Read more in the [user roles documentation](/components/hub/organization/manage-users/index.md).
 

@@ -33,16 +33,16 @@ You can begin analyzing reports and dashboards with just two process versions. H
 
 ## Open Optimize
 
-From Camunda Hub, you can open Optimize in any [Environment](/components/concepts/environments.md) you have access to:
+From Camunda Hub, you can open Optimize in any [environment](/components/concepts/environments.md) you have access to:
 
 1. Log in to Camunda Hub.
-1. In the left navigation, click **Environments**, and then select an Environment. Each Environment has its own instance of Optimize.
-1. Under **Applications**, on the **Optimize** card, click **Open**. This opens Optimize for the Environment in a new tab.
+1. In the left navigation, click **Environments**, and then select an environment. Each environment has its own instance of Optimize.
+1. Under **Applications**, on the **Optimize** card, click **Open**. This opens Optimize for the environment in a new tab.
 
-You can also expand an Environment in the left navigation, and select Optimize from its applications.
+You can also expand an environment in the left navigation, and select Optimize from its applications.
 
 :::tip
-If the Environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
+If the environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
 :::
 
 ## Create and analyze dashboards

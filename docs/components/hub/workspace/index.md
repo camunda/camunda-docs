@@ -21,7 +21,7 @@ Develop project releases through the stages of a typical development lifecycle:
 
 ## Manage workspace settings
 
-Manage workspace members, Environments, and general information:
+Manage workspace members, environments, and general information:
 
 <span class="link-arrow">[Get started](./manage-workspace/index.md)</span>
 

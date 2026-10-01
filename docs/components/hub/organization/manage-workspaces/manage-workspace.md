@@ -8,7 +8,7 @@ Create a workspace, update a workspace's information, or delete a workspace.
 
 ## About
 
-In Camunda Hub, a workspace is a collaboration space within an organization, representing a team or business domain. It groups organizational resources like members, projects, and Environments so related work happens in one shared space.
+In Camunda Hub, a workspace is a collaboration space within an organization, representing a team or business domain. It groups organizational resources like members, projects, and environments so related work happens in one shared space.
 
 :::tip
 You can also [manage a workspace from within the workspace](../../workspace/manage-workspace/index.md) itself.
@@ -20,17 +20,17 @@ You can only manage workspaces at the organization level if you're an **Organiza
 
 ## Create a workspace
 
-Create a workspace, invite members, and assign Environments:
+Create a workspace, invite members, and assign environments:
 
 1. In Camunda Hub, navigate to **Workspaces**.
 2. Click **Create workspace**.
 3. Under **General**, give the new workspace a name and description, then click **Next**.
 4. Under **Members**, [manage the workspace's members](./manage-workspace-members.md), then click **Next**.
-5. Under **Environments**, [assign Environments](../manage-environments/assign-environments.md) to the workspace, then click **Create workspace**. Only organization owners and admins see this step. You can also assign Environments later.
+5. Under **Environments**, [assign environments](../manage-environments/assign-environments.md) to the workspace, then click **Create workspace**. Only organization owners and admins see this step. You can also assign environments later.
 
 ## Assign Environments
 
-Choose the Environments that the projects of the workspace can deploy to. See [assign Environments to a workspace](../manage-environments/assign-environments.md).
+Choose the environments that the projects of the workspace can deploy to. See [assign environments to a workspace](../manage-environments/assign-environments.md).
 
 ## Update workspace information
 

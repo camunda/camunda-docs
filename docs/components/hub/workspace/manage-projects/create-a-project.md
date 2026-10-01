@@ -1,12 +1,12 @@
 ---
 id: create-a-project
 title: Set up a new project
-description: Create a project in a workspace. The project can deploy to the Environments assigned to the workspace.
+description: Create a project in a workspace. The project can deploy to the environments assigned to the workspace.
 ---
 
 import FileListImg from './img/file-list.png'
 
-Create a project in a workspace. The project can deploy to every Environment assigned to the workspace.
+Create a project in a workspace. The project can deploy to every environment assigned to the workspace.
 
 ## Prerequisites
 
@@ -21,10 +21,10 @@ Create a project to work on a set of related files:
 
 ## Deployment Environments
 
-A project doesn't have its own deployment targets. It can deploy to all the [Environments](/components/concepts/environments.md) that are assigned to its workspace, and it always reflects changes to that set.
+A project doesn't have its own deployment targets. It can deploy to all the [environments](/components/concepts/environments.md) that are assigned to its workspace, and it always reflects changes to that set.
 
-- To see the Environments you can deploy to, open the [deploy dialog](./deploy-project.md#deploy-your-project) of the project.
-- If no Environment is assigned, an organization admin must [assign Environments to the workspace](../../organization/manage-environments/assign-environments.md).
+- To see the environments you can deploy to, open the [deploy dialog](./deploy-project.md#deploy-your-project) of the project.
+- If no environment is assigned, an organization admin must [assign environments to the workspace](../../organization/manage-environments/assign-environments.md).
 
 ## Next steps
 

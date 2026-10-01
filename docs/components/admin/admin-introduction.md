@@ -31,16 +31,16 @@ For details about authorization concepts, resources, and configuration, see
 
 ## Open Admin
 
-From Camunda Hub, you can open Admin in any [Environment](/components/concepts/environments.md) you have access to:
+From Camunda Hub, you can open Admin in any [environment](/components/concepts/environments.md) you have access to:
 
 1. Log in to Camunda Hub.
-1. In the left navigation, click **Environments**, and then select an Environment. Each Environment has its own instance of Admin.
-1. Under **Applications**, on the **Admin** card, click **Open**. This opens Admin for the Environment in a new tab.
+1. In the left navigation, click **Environments**, and then select an environment. Each environment has its own instance of Admin.
+1. Under **Applications**, on the **Admin** card, click **Open**. This opens Admin for the environment in a new tab.
 
-You can also expand an Environment in the left navigation, and select Admin from its applications.
+You can also expand an environment in the left navigation, and select Admin from its applications.
 
 :::tip
-If the Environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
+If the environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
 :::
 
 ## Manage access

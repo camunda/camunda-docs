@@ -7,7 +7,7 @@ toc_max_heading_level: 3
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 
 <PageDescription />
 
@@ -958,13 +958,13 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 #### Deployments target Environments instead of clusters
 
-Starting with Camunda 8.10, teams deploy to [Environments](/components/concepts/environments.md) instead of the clusters connected to a project. An Environment is the named place where a team deploys and runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
+Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is the named place where a team deploys and runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
 
-- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every Environment assigned to its workspace.
-- Organization admins assign Environments to workspaces.
-- In Self-Managed, Camunda Hub creates Environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
+- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every environment assigned to its workspace.
+- Organization admins assign environments to workspaces.
+- In Self-Managed, Camunda Hub creates environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
 
-**Action:** After you upgrade, assign Environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its Environments as production Environments for the project deployment policy.
+**Action:** After you upgrade, assign environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its environments as production environments for the project deployment policy.
 
 <p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
 <br />

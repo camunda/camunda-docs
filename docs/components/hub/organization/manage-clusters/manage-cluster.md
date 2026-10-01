@@ -13,7 +13,7 @@ Learn how to rename, resume, update, resize, or delete your cluster.
 
 To view your clusters in Camunda Hub, click **Environments** in the left navigation, and then click **Clusters** next to the page title. You only see **Clusters** if you're an organization owner, admin, or DevOps user.
 
-The cluster page lists the Environments that a cluster hosts. To manage the Environments themselves, see [manage Environments](../manage-environments/index.md).
+The cluster page lists the environments that a cluster hosts. To manage the environments themselves, see [manage environments](../manage-environments/index.md).
 
 In Self-Managed, you provision clusters outside Camunda Hub. Click **Register new cluster** to see how to make a cluster you provision visible in Camunda Hub.
 
@@ -106,7 +106,7 @@ To increase the cluster size beyond the maximum 4x size, [reach out to Camunda](
 Deleting a cluster is **permanent** and cannot be undone.
 :::
 
-Deleting a cluster also removes the Environments it hosts, so they're no longer available to any workspace.
+Deleting a cluster also removes the environments it hosts, so they're no longer available to any workspace.
 
 You can delete a cluster at any time:
 

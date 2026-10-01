@@ -80,7 +80,7 @@ When you deploy the diagram, it becomes available on the selected cluster and ne
 
 To execute your completed process diagram:
 
-1. Make sure an [Environment is assigned to your workspace](/components/hub/organization/manage-environments/assign-environments.md).
+1. Make sure an [environment is assigned to your workspace](/components/hub/organization/manage-environments/assign-environments.md).
 1. Reopen the BPMN diagram.
 1. At the top right of the modeling interface, click **Deploy & run**.
 1. Select a target **Deployment environment**.

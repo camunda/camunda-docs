@@ -47,7 +47,7 @@ You can treat files in a project as a single bundle or as independent resources.
 
 - [Take a snapshot](../hub/workspace/manage-projects/project-versioning.md) of the current state of all project files.
 - Manage individual [file versions](../hub/workspace/modeler/modeling/versions.md).
-- [Deploy an entire project](../hub/workspace/manage-projects/deploy-project.md) to an [Environment](./environments.md) assigned to its workspace.
+- [Deploy an entire project](../hub/workspace/manage-projects/deploy-project.md) to an [environment](./environments.md) assigned to its workspace.
 - [Deploy individual project resources](../hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process).
 
 ## Process applications in Desktop Modeler

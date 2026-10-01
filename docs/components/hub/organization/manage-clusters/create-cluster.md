@@ -4,7 +4,7 @@ title: Create a cluster
 description: "Learn how to create a cluster and view its details."
 ---
 
-To deploy and run your process, you must create a [cluster](/components/concepts/clusters.md) in Camunda 8. Every cluster you create in SaaS gets one [Environment](/components/concepts/environments.md) automatically, and you [assign it to a workspace](../manage-environments/assign-environments.md) so teams can deploy to it.
+To deploy and run your process, you must create a [cluster](/components/concepts/clusters.md) in Camunda 8. Every cluster you create in SaaS gets one [environment](/components/concepts/environments.md) automatically, and you [assign it to a workspace](../manage-environments/assign-environments.md) so teams can deploy to it.
 
 ## Create a cluster
 
@@ -53,7 +53,7 @@ You can tag your cluster for `dev`, `test`, `stage`, or `prod`:
 Assigning a tag:
 
 - Makes it easier for team members to clearly distinguish between different stages of the software development lifecycle.
-- Shows the tag on each [Environment](/components/concepts/environments.md#tags) of the cluster.
+- Shows the tag on each [environment](/components/concepts/environments.md#tags) of the cluster.
 - Has no impact on performance and can be changed later in the cluster details section of the cluster overview page.
 - Disables [authorization-based access control](/components/concepts/access-control/authorizations.md) by default for `dev` and `test` clusters, and enables it for `stage` and `prod` clusters. You can change this setting during and after cluster creation.
 

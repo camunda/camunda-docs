@@ -17,7 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-region-overview.png';
 import AgentPanel from '../../img/whats-new-agent-monitoring.png';
 import overviewImg from '../../../components/optimize/assets/agentic-control-plane-overview.png';
@@ -243,9 +243,9 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
 <img src={HubOverview} alt="Camunda Hub" class="img-900"/>
 
 - Hub replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
-- Hub is deployed only once, and serves as the single point of entry for all your [Environments](/components/concepts/environments.md), connecting to the Orchestration Clusters that host your dev, staging, and production Environments.
+- Hub is deployed only once, and serves as the single point of entry for all your [environments](/components/concepts/environments.md), connecting to the Orchestration Clusters that host your dev, staging, and production environments.
 
-**Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your Environments. You design once, and manage everything from one place.
+**Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your environments. You design once, and manage everything from one place.
 
 <!-- Overview diagram -->
 
@@ -264,7 +264,7 @@ Camunda Hub introduces changes to many terms and concepts from Web Modeler and C
 | :-------------------------- | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Project                     | [Workspace](/reference/glossary.md#workspace)                                                                 | When upgrading to Hub, your projects automatically migrate to workspaces. Workspaces in Hub are isolated team collaboration spaces. Members can only view workspaces they're invited to. |
 | Process application         | [Project](/reference/glossary.md#project)                                                                     | When upgrading to Hub, your process applications automatically migrate to projects. Projects in Hub can be versioned as a bundle of files or used as a folder for loose files.           |
-| Cluster (deployment target) | [Environment](/reference/glossary.md#environment)                                                             | Teams deploy to Environments instead of clusters. A cluster is the infrastructure that hosts one or more Environments, and organization admins assign Environments to workspaces.        |
+| Cluster (deployment target) | [Environment](/reference/glossary.md#environment)                                                             | Teams deploy to environments instead of clusters. A cluster is the infrastructure that hosts one or more environments, and organization admins assign environments to workspaces.        |
 | Project Admin               | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) | This aligns with the project-to-workspace terminology change.                                                                                                                            |
 
 ### Mapping Web Modeler and Console features to Hub
@@ -319,11 +319,11 @@ Hub introduces workspaces and projects.
 
 #### Environments
 
-Hub introduces Environments as the places where teams deploy and run their processes. An Environment is hosted on a cluster, and the cluster remains the infrastructure that your administrators operate.
+Hub introduces environments as the places where teams deploy and run their processes. An environment is hosted on a cluster, and the cluster remains the infrastructure that your administrators operate.
 
-- Organization admins assign Environments to workspaces, and projects deploy to the Environments of their workspace instead of connecting clusters to deployment stages.
-- In Self-Managed, each Physical Tenant of a cluster at version 8.10 or later is an Environment. In SaaS, each cluster has one Environment.
-- When you upgrade, Hub assigns the clusters that your process applications used to their workspaces as Environments.
+- Organization admins assign environments to workspaces, and projects deploy to the environments of their workspace instead of connecting clusters to deployment stages.
+- In Self-Managed, each Physical Tenant of a cluster at version 8.10 or later is an environment. In SaaS, each cluster has one environment.
+- When you upgrade, Hub assigns the clusters that your process applications used to their workspaces as environments.
 
 <ul>
   <li><span class="link-arrow">[Environments](/components/concepts/environments.md)</span></li>
@@ -579,7 +579,7 @@ Learn more about using process applications in the following sections.
 
 #### Deploy to Environments
 
-Before 8.10, you connected clusters to deployment stages in each process application. In 8.10, a project has no deployment stages. It deploys to the [Environments](/components/concepts/environments.md) that are assigned to its workspace. An organization admin [assigns Environments to the workspace](/components/hub/organization/manage-environments/assign-environments.md).
+Before 8.10, you connected clusters to deployment stages in each process application. In 8.10, a project has no deployment stages. It deploys to the [environments](/components/concepts/environments.md) that are assigned to its workspace. An organization admin [assigns environments to the workspace](/components/hub/organization/manage-environments/assign-environments.md).
 
 #### Deploy a process application
 
