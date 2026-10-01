@@ -159,7 +159,7 @@ If there are no jobs for the environment, cluster, or selected time range, the J
 
 This means there is no job activity to display.
 
-### Jobs card access restricted
+### Jobs access restricted
 
 If the feature is disabled for the cluster or you don't have permission, the **Jobs** card on the environment or cluster overview shows:
 
