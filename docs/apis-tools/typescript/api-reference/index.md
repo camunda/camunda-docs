@@ -207,6 +207,7 @@ Typical `.env` (example):
 
 ```bash
 CAMUNDA_REST_ADDRESS=https://cluster.example   # SDK will use https://cluster.example/v2/... unless /v2 already present
+# CAMUNDA_REST_ADDRESS_EXACT=true               # optional (specialized): suppress the /v2 suffix (trailing slashes/whitespace are still normalized) — only for gateway/reverse-proxy base paths
 CAMUNDA_AUTH_STRATEGY=OAUTH
 CAMUNDA_CLIENT_ID=***
 CAMUNDA_CLIENT_SECRET=***
