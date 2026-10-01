@@ -121,10 +121,6 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>Physical Tenants provide strong physical data isolation within a single cluster.</td>
 </tr>
 <tr>
-    <td>[Low-code testing](#low-code-testing)</td>
-    <td>Record, assert, repair, and run low-code tests in Test Studio and in CI/CD with Camunda Process Test.</td>
-</tr>
-<tr>
     <td>[Business ID](#business-id)</td>
     <td>Business ID is now a first-class, searchable attribute across the Orchestration Cluster.</td>
 </tr>
@@ -143,6 +139,10 @@ Important changes in Camunda 8.10 are summarized as follows:
 <tr>
     <td>[Helm chart deployment](#helm-chart-deployment)</td>
     <td>A new Camunda Helm Toolkit helps migrate and validate 8.9-to-8.10 Helm values.</td>
+</tr>
+<tr>
+    <td>[Low-code testing](#low-code-testing)</td>
+    <td>Record, assert, repair, and run low-code tests in Test Studio and in CI/CD with Camunda Process Test.</td>
 </tr>
 <tr>
     <td>[Optimize](#optimize)</td>
@@ -170,22 +170,6 @@ Important changes in Camunda 8.10 are summarized as follows:
 
 Important changes and new features for agentic orchestration are available in 8.10:
 
-### Real-time agent visibility and monitoring
-
-Monitor and evaluate AI agent behavior in Operate.
-
-<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
-
-- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics) (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
-- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
-- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
-
-<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
-
-:::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
-:::
-
 ### Agentic control plane
 
 Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
@@ -195,16 +179,6 @@ Use the Optimize agentic control plane dashboard to monitor AI agent adoption, t
 The dashboard is primarily intended to help operators, process owners, and engineering leads who manage AI-agent-powered processes, and need to keep them reliable and cost-effective.
 
 <p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
-
-### Camunda-provided LLM for SaaS
-
-You can run AI agents on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without your own LLM credentials.
-
-- Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets.
-- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used.
-- For enterprise organizations, AI features must be enabled first. After that, the Camunda-provided LLM is enabled automatically.
-
-<p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
 
 ### AI Agent connector: New native element templates
 
@@ -242,6 +216,16 @@ New features help you more easily configure your agent tools when modeling.
 
 <p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
 
+### Camunda-provided LLM for SaaS
+
+You can run AI agents on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without your own LLM credentials.
+
+- Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets.
+- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used.
+- For enterprise organizations, AI features must be enabled first. After that, the Camunda-provided LLM is enabled automatically.
+
+<p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
+
 ### Processes MCP Server
 
 AI agents can use the Processes MCP Server to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
@@ -251,6 +235,22 @@ AI agents can use the Processes MCP Server to discover and call deployed BPMN pr
 - The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
 
 <p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
+
+### Real-time agent visibility and monitoring
+
+Monitor and evaluate AI agent behavior in Operate.
+
+<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
+
+- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics) (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
+- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
+- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
+
+<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
+
+:::note
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+:::
 
 ### Test AI agents with Camunda Process Test
 
@@ -714,20 +714,6 @@ Camunda 8.10 introduces Physical Tenants for strong physical data isolation with
   <li><span class="link-arrow">[Multi-tenancy](/self-managed/concepts/multi-tenancy/index.md)</span></li>
 </ul>
 
-## Low-code testing
-
-Test Studio in Camunda Hub turns process runs into repeatable tests that you can maintain and run in your CI/CD pipeline.
-
-- **Assertions**: Run a process instance, then save its input data and assertions as a low-code integration test. Add variable and path assertions, and view pass or fail results in the **Test** tab.
-- **Shared schema with Camunda Process Test**: Test files use the same schema as Camunda Process Test (CPT). Record a test once, run it in CI/CD through CPT, and load CPT-authored test files into Test Studio to debug them visually.
-- **Test repair**: When you delete, rename, or change the type of a BPMN element, Test Studio shows which steps broke and lets you fix them in place instead of re-recording the run.
-- **Segment tests**: In Play, capture and rerun targeted sections of an agentic process as low-code integration tests.
-
-<ul>
-  <li><span class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</span></li>
-  <li><span class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</span></li>
-</ul>
-
 ## Business ID
 
 Business ID is now a first-class, searchable attribute across the Orchestration Cluster.
@@ -831,6 +817,20 @@ Switching CLIs does not require a release-state migration. Helm runs on the clie
 The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
 
 <p class="link-arrow">[Configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md)</p>
+
+## Low-code testing
+
+Test Studio in Camunda Hub turns process runs into repeatable tests that you can maintain and run in your CI/CD pipeline.
+
+- **Assertions**: Run a process instance, then save its input data and assertions as a low-code integration test. Add variable and path assertions, and view pass or fail results in the **Test** tab.
+- **Shared schema with Camunda Process Test**: Test files use the same schema as Camunda Process Test (CPT). Record a test once, run it in CI/CD through CPT, and load CPT-authored test files into Test Studio to debug them visually.
+- **Test repair**: When you delete, rename, or change the type of a BPMN element, Test Studio shows which steps broke and lets you fix them in place instead of re-recording the run.
+- **Segment tests**: In Play, capture and rerun targeted sections of an agentic process as low-code integration tests.
+
+<ul>
+  <li><span class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</span></li>
+  <li><span class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</span></li>
+</ul>
 
 ## Optimize
 
