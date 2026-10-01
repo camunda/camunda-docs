@@ -90,23 +90,23 @@ The Helm chart doesn't reject `optimize.enabled: true` in a release that has no 
 
 ### Region loss behavior for management plane components
 
-Management plane components don't replicate across regions, so losing the region they run in makes them unavailable until you restore them. Process execution continues, because the Orchestration Cluster keeps running in both regions and deployed processes are unaffected.
+Management plane components don't replicate across regions, so losing the region they run in makes them unavailable until you restore them. If the management plane runs in one of the two dual-region regions, losing that region also stops the Orchestration Cluster until the dual-region failover procedure completes. Failover restores process execution, and deployed processes keep running. It doesn't restore the management plane, which you recover from backups.
 
-| Component           | State it holds                                                        | If its region is lost                                                                   |
-| :------------------ | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
-| Management Identity | Users, groups, roles, tenants, and OIDC clients                       | Authentication to Optimize and Camunda Hub fails until you restore it                   |
-| Camunda Hub         | Diagrams, projects, and collaboration history in PostgreSQL           | Modeling and deployment from Camunda Hub stop until you restore it                      |
-| Optimize            | Reports, dashboards, collections, alerts, and its own import position | Reporting stops until you restore it, and content created since the last backup is lost |
+| Component           | State it holds                                                                                 | If its region is lost                                                                   |
+| :------------------ | :--------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| Management Identity | Users, groups, roles, tenants, and OIDC clients                                                | Authentication to Optimize and Camunda Hub fails until you restore it                   |
+| Camunda Hub         | Diagrams, projects, and collaboration history in PostgreSQL. Console holds no state of its own | Modeling and deployment from Camunda Hub stop until you restore it                      |
+| Optimize            | Reports, dashboards, collections, alerts, and its own import position                          | Reporting stops until you restore it, and content created since the last backup is lost |
 
 ### Protect the management plane with backup and restore
 
 Back up each management plane component on its own schedule. Replicate those backups to a second region, so they survive the loss of the management plane region.
 
-| Component           | Backup method                                                                                                                                                 |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Management Identity | Back up its PostgreSQL database using your database's native tooling                                                                                          |
-| Camunda Hub         | Back up its PostgreSQL database. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md)          |
-| Optimize            | Use the Optimize backup API. See [back up and restore Optimize independently](/self-managed/operational-guides/backup-restore/optimize-backup-and-restore.md) |
+| Component           | Backup method                                                                                                                                                                            |
+| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Management Identity | Back up its PostgreSQL database using your database's native tooling                                                                                                                     |
+| Camunda Hub         | Back up its PostgreSQL database. Console needs no backup of its own. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md) |
+| Optimize            | Use the Optimize backup API. See [back up and restore Optimize independently](/self-managed/operational-guides/backup-restore/optimize-backup-and-restore.md)                            |
 
 The management plane's recovery point and recovery time follow from your backup interval and restore procedure. The dual-region [recovery objectives](#recovery-objectives) don't cover them, because those objectives apply to the runtime plane only.
 

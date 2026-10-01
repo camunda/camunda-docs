@@ -88,7 +88,7 @@ The Helm chart doesn't reject `optimize.enabled: true` in a release that has no 
 
 ### Region loss behavior for management plane components
 
-Management plane components don't replicate across regions, so losing the region they run in makes them unavailable until you restore them. Process execution continues, because the Orchestration Cluster keeps running in both regions and deployed processes are unaffected.
+Management plane components don't replicate across regions, so losing the region they run in makes them unavailable until you restore them. If the management plane runs in one of the two dual-region regions, losing that region also stops the Orchestration Cluster until the dual-region failover procedure completes. Failover restores process execution, and deployed processes keep running. It doesn't restore the management plane, which you recover from backups.
 
 | Component           | State it holds                                                        | If its region is lost                                                                   |
 | :------------------ | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
