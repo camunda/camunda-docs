@@ -182,6 +182,10 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Hub API: the operation to replace a workspace's environments was renamed to update (8.10)
+RewriteRule ^docs/next/apis-tools/hub-api-saas/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-saas/specifications/update-workspace-environments/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/hub-api-sm/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-sm/specifications/update-workspace-environments/ [R=301,L]
+
 # SaaS cluster management pages moved from Camunda Hub > Manage clusters to the SaaS section (8.10)
 RewriteRule ^docs/next/components/hub/organization/manage-clusters/create-cluster/?$ /docs/next/components/saas/clusters/create-cluster/ [R=301,L]
 RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-cluster/?$ /docs/next/components/saas/clusters/manage-cluster/ [R=301,L]
