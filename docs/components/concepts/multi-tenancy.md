@@ -18,8 +18,6 @@ This page describes **logical multi-tenancy**: tenant-ID based isolation within 
 Self-Managed also supports stronger isolation models. For a comparison of logical tenants, Physical Tenants, and multi-cluster deployments, see the [Self-Managed multi-tenancy overview](/self-managed/concepts/multi-tenancy/index.md).
 :::
 
-In Camunda Hub, a tenant isn't an [Environment](/components/concepts/environments.md). An Environment is a Physical Tenant or a cluster. When multi-tenancy is enabled, you also select a tenant when you deploy to an Environment.
-
 ## How multi-tenancy works
 
 Camunda 8 implements multi-tenancy using tenant identifiers within a single installation. All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object, such as process definitions, process instances, and jobs.
@@ -94,6 +92,14 @@ On Self-Managed, operators enable multi-tenancy checks through configuration pro
 Administrators can manage all tenants centrally in [Admin](/components/admin/tenant.md). This unified management interface simplifies monitoring, configuration, and maintenance tasks across tenant environments.
 
 The **Tenants** tab in Admin is available to organization admins on SaaS clusters running generation 8.8 and later, even before multi-tenancy checks are enabled. This allows admins to set up tenants and assignments before enforcing checks.
+
+## Multi-tenancy in Camunda Hub
+
+In Camunda Hub, you deploy to an [Environment](/components/concepts/environments.md), which is a Physical Tenant or a cluster. If multi-tenancy is enabled for that Environment, you select a tenant separately when you deploy. The tenant you select owns the deployed resources.
+
+If the Environment has more than one tenant, choose the tenant to deploy to. If it has exactly one, Camunda Hub selects it automatically.
+
+Learn more about [deploying to a tenant](/components/hub/workspace/manage-projects/deploy-project.md#logical-tenants).
 
 ## Optimize and multi-tenancy
 
