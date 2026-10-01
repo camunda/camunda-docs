@@ -758,17 +758,8 @@ module.exports = {
                 id: "components/hub/organization/manage-clusters/index",
               },
               items: [
-                "components/hub/organization/manage-clusters/create-cluster",
-                "components/hub/organization/manage-clusters/manage-cluster",
+                "components/hub/organization/manage-clusters/self-managed-clusters",
                 "components/hub/organization/manage-clusters/cluster-connectors",
-                "components/hub/organization/manage-clusters/manage-api-clients",
-                "components/hub/organization/manage-clusters/manage-secrets",
-                "components/hub/organization/manage-clusters/manage-alerts",
-                "components/hub/organization/manage-clusters/manage-ip-allowlists",
-                "components/hub/organization/manage-clusters/create-backups",
-                "components/hub/organization/manage-clusters/settings",
-                "components/hub/organization/manage-clusters/cluster-capacity",
-                "components/hub/organization/manage-clusters/troubleshoot-clusters",
               ],
             },
             {
@@ -1289,7 +1280,27 @@ module.exports = {
         id: "components/saas/saas",
       },
       items: [
-        "components/saas/clusters",
+        {
+          type: "category",
+          label: "Clusters",
+          link: {
+            type: "doc",
+            id: "components/saas/clusters",
+          },
+          items: [
+            "components/saas/clusters/create-cluster",
+            "components/saas/clusters/manage-cluster",
+            "components/saas/clusters/manage-api-clients",
+            "components/saas/clusters/manage-secrets",
+            "components/saas/clusters/manage-alerts",
+            "components/saas/clusters/manage-ip-allowlists",
+            "components/saas/clusters/create-backups",
+            "components/saas/clusters/settings",
+            "components/saas/clusters/cluster-capacity",
+            "components/saas/clusters/configure-audit-log",
+            "components/saas/clusters/troubleshoot-clusters",
+          ],
+        },
         "components/saas/regions",
         "components/saas/data-locations",
         {

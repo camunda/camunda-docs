@@ -4,11 +4,15 @@ title: Create a cluster
 description: "Learn how to create a cluster and view its details."
 ---
 
-To deploy and run your process, you must create a [cluster](/components/concepts/clusters.md) in Camunda 8. Every cluster you create in SaaS gets one [environment](/components/concepts/environments.md) automatically, and you [assign it to a workspace](../manage-environments/assign-environments.md) so teams can deploy to it.
+To deploy and run your process, you must create a [cluster](/components/concepts/clusters.md) in Camunda 8. Every cluster you create in SaaS gets one [environment](/components/concepts/environments.md) automatically, and you [assign it to a workspace](../../hub/organization/manage-environments/assign-environments.md) so teams can deploy to it.
+
+:::note
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md).
+:::
 
 ## Create a cluster
 
-To create a cluster in SaaS:
+To create a cluster:
 
 1. In Camunda Hub, click **Environments** in the left navigation, and then click **Clusters**.
 1. Click **Create cluster**.
@@ -23,10 +27,6 @@ To create a cluster in SaaS:
 1. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself.
 
 If you haven't created a cluster yet, the **Clusters** page will be empty. You can start modeling even if the cluster shows a **Creating** status.
-
-:::tip
-In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
-:::
 
 ## View the created cluster
 

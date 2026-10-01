@@ -79,7 +79,7 @@ On SaaS, enable multi-tenancy checks per cluster using the **Multi-tenancy** tog
 1. Select the cluster you want to manage, and select the **Settings** tab.
 1. Enable the **Multi-tenancy** setting.
 
-For details on the toggle, its default state, and who can change it, see [cluster settings](/components/hub/organization/manage-clusters/settings.md#multi-tenancy).
+For details on the toggle, its default state, and who can change it, see [cluster settings](/components/saas/clusters/settings.md#multi-tenancy).
 
 The **Multi-tenancy** toggle is available for clusters running generation 8.8 and later. It is disabled by default, and only organization admins can change it. Disabling the toggle restores the implicit `<default>`-tenant behavior.
 

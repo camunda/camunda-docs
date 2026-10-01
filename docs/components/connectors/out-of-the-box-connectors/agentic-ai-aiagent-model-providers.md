@@ -43,7 +43,7 @@ Select and configure the model **Provider** you want to use from the following s
 - [Custom implementation](#custom-implementation) (Self-Managed/Hybrid only).
 
 :::tip
-Use [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly in the process.
+Use [connector secrets](/components/saas/clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly in the process.
 :::
 
 ### Anthropic

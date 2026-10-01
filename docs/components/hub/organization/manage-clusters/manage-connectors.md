@@ -16,8 +16,10 @@ Use this feature to review connector status and troubleshoot issues. For example
 
 Manage connectors from the **Connector Management** page:
 
-1. In the left navigation under **Clusters**, select a cluster.
-1. On the **Overview** tab, on the **Connectors** component tile, click **Manage**.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
+1. On the **Overview** tab, open the **Connectors** section:
+   - In SaaS, click **Manage** on the **Connectors** component tile.
+   - In Self-Managed, click **View connectors** on the **Connectors** card. The card appears when the cluster has a connector runtime that Camunda Hub can reach.
 
 The **Connector Management** page provides an overview of the connectors running on a cluster.
 

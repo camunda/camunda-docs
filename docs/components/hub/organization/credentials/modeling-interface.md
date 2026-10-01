@@ -49,7 +49,7 @@ Camunda Hub checks whether the secret you referenced exists on the cluster, with
 A value that embeds `camunda.secrets.` mid-word, such as `foo.camunda.secrets.AWS_SECRET_KEY`, holds no reference, so Camunda Hub reports it as plain text rather than as a missing secret. The plain-text warning replaces the missing secret warning on that field.
 
 :::note
-You cannot create the secret itself here. Add the secret to the cluster first in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md), then reference it from the credential.
+You cannot create the secret itself here. Add the secret to the cluster first in [Connector secrets](/components/saas/clusters/manage-secrets.md), then reference it from the credential.
 :::
 
 A credential you create here is managed in Camunda Hub immediately. It appears on the **Managed** tab of the [**Credentials** page](./index.md#managed-credentials).

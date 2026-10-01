@@ -82,7 +82,7 @@ image: ModelerIcon,
 description: "Create and manage workspaces within your organization.",
 },
 {
-link: "./organization/manage-clusters/manage-cluster",
+link: "./organization/manage-clusters/",
 title: "Manage clusters",
 image: BPMNIcon,
 description: "Create, monitor, and maintain the clusters that host your deployment environments.",

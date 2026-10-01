@@ -6,16 +6,16 @@ description: "Manage your cluster settings using authorizations, automatic clust
 
 Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
 
+:::note
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md).
+:::
+
 ## Manage cluster settings
 
-To manage your cluster settings in Camunda Hub SaaS:
+To manage your cluster settings:
 
-1. In the left navigation under **Clusters**, select a cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 1. On the **Settings** tab, enable/disable cluster settings as required, or delete the cluster.
-
-:::tip
-In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
-:::
 
 ## Authorizations
 
@@ -113,7 +113,7 @@ You can set the cluster to automatically update to newer versions of Camunda 8 w
 - Disable this setting if you do not want the cluster to automatically update. You must manually update the cluster.
 
 :::tip
-For more information on updating clusters, see [update your cluster](/components/hub/organization/manage-clusters/manage-cluster.md#update-a-cluster).
+For more information on updating clusters, see [update your cluster](/components/saas/clusters/manage-cluster.md#update-a-cluster).
 :::
 
 ## Enforce user task restrictions
@@ -121,7 +121,7 @@ For more information on updating clusters, see [update your cluster](/components
 Starting with Camunda 8.10, this cluster setting is no longer available because user task access restrictions were removed together with Tasklist V1.
 
 :::note
-Use [authorization-based access control](../../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control task visibility and operations in current Tasklist deployments.
+Use [authorization-based access control](../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control task visibility and operations in current Tasklist deployments.
 :::
 
 ## Delete this cluster

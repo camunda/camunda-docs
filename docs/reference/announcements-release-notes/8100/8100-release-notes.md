@@ -655,7 +655,7 @@ Saving filter changes triggers a rolling restart of the Orchestration Cluster; t
 Filtered records are permanently excluded from Optimize and cannot be recovered even if you relax the filters later.
 :::
 
-<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+<p class="link-arrow">[Configure Optimize data filters](/components/saas/clusters/settings.md#data-filters)</p>
 
 ### Connectors
 

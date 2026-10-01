@@ -806,7 +806,7 @@ A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#o
 
 A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components.
 
-- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
+- [Connector secrets](/components/saas/clusters/manage-secrets.md)
 
 ### SAP
 

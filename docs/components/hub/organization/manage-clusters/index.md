@@ -1,23 +1,29 @@
 ---
 title: Manage clusters
-description: "Create, monitor, and maintain the clusters that host your environments."
+description: "View the clusters that host your deployment environments, and manage the connectors that run on them."
 ---
 
 import DocsIcon from "@site/docs/components/assets/icon-docs.png";
 import AoGrid from '../../../react-components/\_ao-card';
 
-Create, monitor, and maintain the clusters that host your environments. A cluster is the infrastructure your organization operates, while teams deploy to [environments](../manage-environments/index.md) that run on it:
+A cluster is the infrastructure your organization operates, while teams deploy to [deployment environments](../manage-environments/index.md) that run on it. How you work with clusters in Camunda Hub depends on your deployment:
 
 <AoGrid ao={[
-{ link: "./manage-cluster",
-title: "Manage your cluster",
+{ link: "./self-managed-clusters",
+title: "Clusters in Self-Managed",
 image: DocsIcon,
-description: "Learn how to rename, resume, update, resize, or delete your cluster.",
+description: "View the clusters that Camunda Hub shows, and learn how to make a cluster you provision visible.",
 },
 {
-link: "./create-cluster",
-title: "Create a cluster",
+link: "../../../saas/clusters/create-cluster",
+title: "Clusters in SaaS",
 image: DocsIcon,
-description: "To deploy and run your process, you must create a cluster in Camunda 8.",
+description: "Create, rename, resume, update, resize, and delete your clusters, and configure their settings.",
 },
-]} columns={2}/>
+{
+link: "./manage-connectors",
+title: "Manage your connectors",
+image: DocsIcon,
+description: "Monitor and manage the connectors that run on your cluster.",
+},
+]} columns={3}/>

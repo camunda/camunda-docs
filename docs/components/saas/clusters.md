@@ -5,7 +5,7 @@ sidebar_label: "Clusters"
 description: "Learn about the cluster types, sizes, and Free Trial clusters available in your Camunda 8 SaaS plan."
 ---
 
-In Camunda 8 SaaS, [creating a cluster](/components/hub/organization/manage-clusters/create-cluster.md) lets you choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery guarantees.
+In Camunda 8 SaaS, [creating a cluster](/components/saas/clusters/create-cluster.md) lets you choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery guarantees.
 
 This page describes the details of clusters in SaaS. To learn what a cluster is and how it relates to environments and workspaces, see [clusters](/components/concepts/clusters.md).
 
@@ -46,7 +46,7 @@ To learn more about choosing your cluster size, see [sizing your environment](/c
 - Larger cluster sizes include increased performance and capacity, allowing you to serve more workload.
 - Increased usage such as higher throughput or longer data retention requires a larger cluster size.
 - Each size increase uses one of your available cluster reservations. For example, purchasing two HWP advanced reservations for your production cluster allows you to configure two clusters of size 1x, or one cluster of size 2x.
-- You can change the cluster size at any time. See [resize a cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resize-a-cluster).
+- You can change the cluster size at any time. See [resize a cluster](/components/saas/clusters/manage-cluster.md#resize-a-cluster).
 
 :::note
 To increase the cluster size beyond the maximum 4x size, [reach out to Camunda](https://camunda.com/contact-us/). This requires custom sizing and pricing.
@@ -64,7 +64,7 @@ When your Free Trial plan expires, you are automatically transferred to the Free
 
 Free Trial clusters are automatically paused after a period of inactivity. Auto-pause occurs regardless of cluster usage.
 
-You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume a cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster).
+You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume a cluster](/components/saas/clusters/manage-cluster.md#resume-a-cluster).
 
 - Clusters tagged as `dev` (or untagged) auto-pause eight hours after the cluster is created or resumed from a paused state.
 - Clusters auto-pause if there is no cluster activity for 48 hours.

@@ -81,7 +81,7 @@ The status changes to **Resuming** while the cluster starts. Self-Managed enviro
 
 Camunda Hub adds environments automatically when a cluster exists. To add one, click **Add new environment** on the **Environments** page. Only organization owners and admins see this button.
 
-- **SaaS**: [Create a cluster](../manage-clusters/create-cluster.md). Every cluster gets one environment automatically. Then [assign the environment to a workspace](./assign-environments.md).
+- **SaaS**: [Create a cluster](../../../saas/clusters/create-cluster.md). Every cluster gets one environment automatically. Then [assign the environment to a workspace](./assign-environments.md).
 - **Self-Managed**: Provision the cluster. On Camunda 8.10 and later, declare additional [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) if you need more than one environment on the cluster. Configure the cluster in Camunda Hub, and perform a rolling restart. Camunda Hub reads the configuration only at startup, and the environments of the cluster then appear automatically. See [environments in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environments).
 
 ## Next steps

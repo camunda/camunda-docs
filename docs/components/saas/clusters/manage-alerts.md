@@ -6,6 +6,10 @@ description: "Camunda 8 can notify you when process instances stop with an error
 
 Camunda 8 can notify you when process instances stop with an error.
 
+:::note
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md).
+:::
+
 ## About alerts
 
 There are two forms of notification:
@@ -13,15 +17,11 @@ There are two forms of notification:
 - By email to the email address of your user account
 - By webhook
 
-:::note
-This feature is only available in SaaS.
-:::
-
 ## Create an alert
 
-Create a new alert in Camunda Hub SaaS:
+Create a new alert:
 
-1. In the left navigation under **Clusters**, select a cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 1. On the **Alerts** tab, click **Create an alert**.
 
 1. Choose between **Email** and **Webhook**:

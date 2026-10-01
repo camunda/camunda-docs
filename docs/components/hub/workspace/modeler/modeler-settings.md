@@ -18,7 +18,7 @@ Configure the workspaces for which you will receive email notifications when a m
 
 Organization admins can require an approved project snapshot before anyone deploys a project to a production environment.
 
-Camunda Hub treats an [environment](/components/concepts/environments.md) as a production environment if its tags include `prod`. The tags of an environment come from its cluster. In SaaS, [tag the cluster](/components/hub/organization/manage-clusters/create-cluster.md#tag-your-cluster) as `prod`. In Self-Managed, add `prod` to the `tags` of the cluster in the [cluster configuration](/self-managed/components/hub/configuration/properties.md#clusters).
+Camunda Hub treats an [environment](/components/concepts/environments.md) as a production environment if its tags include `prod`. The tags of an environment come from its cluster. In SaaS, [tag the cluster](/components/saas/clusters/create-cluster.md#tag-your-cluster) as `prod`. In Self-Managed, add `prod` to the `tags` of the cluster in the [cluster configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 To change the policy:
 

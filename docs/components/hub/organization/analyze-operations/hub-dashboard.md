@@ -15,13 +15,13 @@ From the Hub dashboard in SaaS, you can view:
 - Number of users, task users, clusters, and Admin API credentials
 - [Usage alerts](/components/hub/organization/manage-organization-settings/usage-alerts.md)
 - [Recent activity](/components/hub/organization/manage-organization-settings/view-organization-activity.md)
-- [Clusters](/components/hub/organization/manage-clusters/manage-cluster.md#view-clusters)
+- [Clusters](/components/saas/clusters/manage-cluster.md#view-clusters)
 - [Decision instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
 - [Process instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
 
 From the Hub dashboard in Self-Managed, you can view:
 
-- Cluster health, including the number of healthy, unhealthy, and unknown clusters, and the [clusters](/components/hub/organization/manage-clusters/manage-cluster.md#view-clusters) that are unhealthy
+- Cluster health, including the number of healthy, unhealthy, and unknown clusters, and the [clusters](/components/saas/clusters/manage-cluster.md#view-clusters) that are unhealthy
 - Management components, with a link to open each one
 - Usage of all clusters in the last 30 days, including task users, process instances, and decision instances
 - Links to documentation and feedback

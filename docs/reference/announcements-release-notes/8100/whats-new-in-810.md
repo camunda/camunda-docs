@@ -274,7 +274,7 @@ The following table shows how you can access the Hub equivalents for key Web Mod
 | Product (8.9) | Feature                                   | Hub documentation                                                                                                  |
 | :------------ | :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
 | Console       | Organization overview                     | [Hub dashboard](/components/hub/organization/analyze-operations/hub-dashboard.md)                                  |
-| Console       | View clusters                             | [View clusters](/components/hub/organization/manage-clusters/manage-cluster.md#view-clusters)                      |
+| Console       | View clusters                             | [View clusters](/components/saas/clusters/manage-cluster.md#view-clusters)                                         |
 | Console       | Organization management                   | [Manage organization settings](/components/hub/organization/manage-organization-settings/organization-settings.md) |
 | Web Modeler   | View projects                             | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
 | Web Modeler   | Create a project                          | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)        |
@@ -778,7 +778,7 @@ On SaaS, you can now configure Optimize export filters directly in Hub cluster s
 
 New SaaS clusters include a default `business_` variable include filter that limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
 
-<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+<p class="link-arrow">[Configure Optimize data filters](/components/saas/clusters/settings.md#data-filters)</p>
 
 ## Unified authentication for Orchestration Cluster, Camunda Hub, and Optimize
 

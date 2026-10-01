@@ -7,6 +7,10 @@ keywords: [capacity, "cluster capacity", load, "cluster load"]
 
 Use the cluster load metric to view and manage your cluster load and utilization.
 
+:::note
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md).
+:::
+
 ## About cluster load
 
 The cluster load metric provides a high-level overview of how well a cluster is coping with its current workload.

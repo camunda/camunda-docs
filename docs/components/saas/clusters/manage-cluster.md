@@ -9,27 +9,25 @@ import TabItem from "@theme/TabItem";
 
 Learn how to rename, resume, update, resize, or delete your cluster.
 
+:::note
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md).
+:::
+
 ## View clusters
 
 To view your clusters in Camunda Hub, click **Environments** in the left navigation, and then click **Clusters** next to the page title. You only see **Clusters** if you're an organization owner, admin, or DevOps user.
 
-The cluster page lists the environments that a cluster hosts. To manage the environments themselves, see [manage environments](../manage-environments/index.md).
-
-In Self-Managed, you provision clusters outside Camunda Hub. Click **Register new cluster** to see how to make a cluster you provision visible in Camunda Hub.
+The cluster page lists the environments that a cluster hosts. To manage the environments themselves, see [manage environments](../../hub/organization/manage-environments/index.md).
 
 ## Rename a cluster
 
 You can safely rename a cluster at any time.
 
-To rename a cluster in SaaS:
+To rename a cluster:
 
 1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 2. At the top of the view, next to the cluster name, open the vertical ellipsis menu.
 3. Click **Rename**.
-
-:::tip
-In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
-:::
 
 ## Resume a cluster
 
@@ -57,10 +55,8 @@ Updating a cluster is permanent. Updated clusters cannot be reverted to the prev
 
 To update a cluster:
 
-- In SaaS:
-  - On the cluster's **Overview** tab, find the **Cluster details** section.
-  - If an update is available, you'll see a **Review Update** button in the **Generation** row.
-- In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
+1. On the cluster's **Overview** tab, find the **Cluster details** section.
+1. If an update is available, you'll see a **Review Update** button in the **Generation** row.
 
 Currently, updates do not automatically trigger backups. Camunda recommends [creating a manual backup](./cluster-backups.md#create-a-manual-backup) before updating.
 
@@ -81,7 +77,7 @@ Clusters must be healthy before an update can be performed.
 
 ### Automated cluster updates
 
-In SaaS, you can enable [automated patch updates](/components/saas/auto-updates.md).
+You can enable [automated patch updates](/components/saas/auto-updates.md).
 
 ## Resize a cluster
 
