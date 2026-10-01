@@ -57,6 +57,8 @@ Cycle time is the elapsed duration of a completed process instance, from start t
 
 The portfolio view summarizes all processes in the selected environment. Use it to see where targets are met and which processes need attention.
 
+![Business value dashboard portfolio view with target overview, activity, automation rate, cycle time, agentic adoption, and off-target processes](img/business-value-dashboard-portfolio-view.png)
+
 | Metric                         | What it shows                                                                                                      | How to interpret it                                                                        |
 | :----------------------------- | :----------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
 | Target coverage and attainment | How many active processes have at least one target set, and how many configured targets are currently met.         | Low coverage means the summary reflects only a subset of your processes.                   |
@@ -69,6 +71,8 @@ The portfolio view summarizes all processes in the selected environment. Use it 
 ## Review the process view
 
 The process view shows the metrics and targets for a single process. Open it by selecting a process from the portfolio view.
+
+![Business value dashboard process view with cycle time, automation rate, and volume compared against targets, plus momentum, cycle time distribution, and cycle time history charts](img/business-value-dashboard-process-view.png)
 
 | Element                     | What it shows                                                                                                       |
 | :-------------------------- | :------------------------------------------------------------------------------------------------------------------ |

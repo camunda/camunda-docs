@@ -89,3 +89,4 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 - For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
 - For how authorization is divided between cluster-wide and tenant-local operations, see [authorization model](/self-managed/concepts/physical-tenants/authorization-model.md).
 - For how Physical Tenant storage isolation works across primary storage, secondary storage, and document stores, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).
+- For how Physical Tenants map onto Helm releases, including the per-tenant Optimize release, index prefixes, and tenant lifecycle operations, see [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md).
