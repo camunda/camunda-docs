@@ -245,7 +245,7 @@ The script rejects any slot outside the provisioned range, `0` to `CAMUNDA_REGIO
 
 ## Upgrade the cluster
 
-{/_ TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. _/}
+{/* TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. */}
 
 Upgrade **one region at a time**, and wait for the cluster to report healthy before starting the next:
 

@@ -128,7 +128,7 @@ Camunda turns this monitoring off by default. The default suits a single databas
 
 The strategy you can use depends on the database engine, not on the cloud provider. Use `LOG_SEQ` when your database is in its [vendor support list](/self-managed/concepts/databases/relational-db/configuration.md#lsn-replication-monitoring). Otherwise, choose `TIME_LAG` or `DELAY`. The reference implementation covers only Aurora Global Database. Managed databases on other providers, such as Azure or Google Cloud, follow the same rules but have no reference implementation.
 
-{/_ TODO: replace this paragraph with a link to a per-database table of the preferred multi-region replication settings once that reference exists. _/}
+{/* TODO: replace this paragraph with a link to a per-database table of the preferred multi-region replication settings once that reference exists. */}
 
 | Strategy                   | When to use it                                                                                                                                                                       | What you configure                                                                          |
 | :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
@@ -200,7 +200,7 @@ Multi-region setups require careful planning. You must manage the following area
 
 ### Upgrade considerations
 
-{/_ TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. _/}
+{/* TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. */}
 
 Upgrade **one region at a time**, so the other regions keep the quorum. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#upgrade-the-cluster) lists the steps.
 
