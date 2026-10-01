@@ -68,8 +68,6 @@ Each SaaS cluster hosts one environment, so the cluster shows the jobs of that e
 
 The **Job types** page, called **Jobs** in Self-Managed, shows all job types running in the selected environment or cluster.
 
-![Jobs overview with Job types table](img/jobs-overview.png)
-
 Key elements:
 
 - **Last updated** timestamp (based on statistics responses).
@@ -107,8 +105,6 @@ To drill down into a specific job type, click its **Job type** link (for example
 ## Job type details
 
 The **Job type details** page shows metrics and errors for a single job type.
-
-![Job type details view](img/job-activity-log.png)
 
 ### Job workload
 
