@@ -87,7 +87,7 @@ Your AWS IAM principal needs permissions for the following services in both targ
 - EFS (file systems, mount targets)
 - CloudWatch Logs (log groups)
 - Secrets Manager (secret creation)
-- Systems Manager Session Manager (`ssmmessages:*`), required for the [Session Manager access path](#method-b--session-manager-port-forward) and the [failover and failback scripts](#failover-and-failback)
+- Systems Manager Session Manager (`ssm:StartSession`), required for the [Session Manager access path](#method-b--session-manager-port-forward) and the [failover and failback scripts](#failover-and-failback)
 - Route 53 Resolver — required only when `enable_cross_region_dns_resolver = true`: `route53resolver:CreateResolverEndpoint`, `route53resolver:CreateResolverRule`, `route53resolver:AssociateResolverRule`
 
 ### AWS service quotas
@@ -387,7 +387,7 @@ If either check fails, do not proceed to verification. Inspect CloudWatch Logs f
 
 ### Step 5 — Verify
 
-Run the helper script from the reference repository to validate that the deployment is healthy in both regions. The script checks ECS service counts, the Zeebe topology, and Aurora Global Database status. It sources `procedure/export_environment_prerequisites.sh` automatically to read the Terraform outputs:
+Run the helper script from the reference repository to validate that the deployment is healthy in both regions. The script checks ECS service counts, the Zeebe topology, and Aurora Global Database status, and starts a test process instance. It sources `procedure/export_environment_prerequisites.sh` automatically to read the Terraform outputs:
 
 ```bash
 cd ../../  # back to aws/containers/ecs-dual-region-fargate
@@ -449,13 +449,16 @@ The reference architecture sets `s3_force_destroy = true` by default so `terrafo
 
 #### Tear down after the Aurora writer moved
 
-If the Aurora writer moved away from region 0, `terraform destroy` on the infra layer can hang on the Aurora resources. The writer moves when you [promote the Aurora writer](#promote-the-aurora-writer) during a failover, or when you run `failback.sh --switch-writer`. Terraform still expects the original topology. Remove the Aurora resources manually, then drop them from the Terraform state:
+If the Aurora writer is still outside region 0, `terraform destroy` on the infra layer can hang on the Aurora resources. The writer leaves region 0 when you [promote the Aurora writer](#promote-the-aurora-writer) in region 1 during a failover, and returns when you run `failback.sh --switch-writer`. Terraform still expects the original topology. Remove the Aurora resources manually, then drop them from the Terraform state:
 
 ```bash
-# 1. Remove both clusters from the global cluster
-aws rds remove-from-global-cluster \
+# 1. Detach both clusters from the global cluster: the secondary (region 0) first, then the writer (region 1)
+aws rds remove-from-global-cluster --region <region-0> \
   --global-cluster-identifier <global-id> \
   --db-cluster-identifier <region-0-cluster-arn>
+aws rds remove-from-global-cluster --region <region-1> \
+  --global-cluster-identifier <global-id> \
+  --db-cluster-identifier <region-1-cluster-arn>
 
 # 2. Delete the instances in both regions (skip the final snapshot only for non-production)
 aws rds delete-db-instance --db-instance-identifier <r0-instance> --skip-final-snapshot --region <region-0>
@@ -709,8 +712,12 @@ With `--keep-tasks`, the script makes no AWS calls to the failed region. It stil
 The script doesn't stop the failed region's tasks in this mode. Before you run it, make sure the failed region's brokers can't reach the rest of the cluster, because forcing the removal of reachable brokers can cause data loss. When the failed region's AWS API responds again, scale its ECS services to zero before you [fail back](#fail-back-to-both-regions):
 
 ```bash
-for service in $(aws ecs list-services --region "${REGION_0}" --cluster "${CLUSTER_0}" --query 'serviceArns[]' --output text); do
-  aws ecs update-service --region "${REGION_0}" --cluster "${CLUSTER_0}" \
+# Use REGION_1 and CLUSTER_1 if region 1 failed
+FAILED_REGION="${REGION_0}"
+FAILED_CLUSTER="${CLUSTER_0}"
+
+for service in $(aws ecs list-services --region "${FAILED_REGION}" --cluster "${FAILED_CLUSTER}" --query 'serviceArns[]' --output text); do
+  aws ecs update-service --region "${FAILED_REGION}" --cluster "${FAILED_CLUSTER}" \
     --service "${service}" --desired-count 0 --no-cli-pager > /dev/null
 done
 ```
@@ -719,14 +726,28 @@ done
 
 #### Promote the Aurora writer
 
-`failover.sh` doesn't touch Aurora, so a failover doesn't change the Aurora writer. If the lost region hosted the writer (region 0 by default), secondary storage has no writer until you promote the Aurora cluster in the surviving region. Promote it with [`aws rds failover-global-cluster`](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html), then check the new writer:
+`failover.sh` doesn't touch Aurora, so a failover doesn't change the Aurora writer. If the lost region hosted the writer (region 0 by default), secondary storage has no writer until you promote the Aurora cluster in the surviving region.
 
-```bash
-aws rds describe-global-clusters \
-  --global-cluster-identifier "${AURORA_GLOBAL_CLUSTER_ID}" \
-  --query "GlobalClusters[0].GlobalClusterMembers[*].{Cluster:DBClusterArn,Writer:IsWriter}" \
-  --output table
-```
+1. List the global cluster members and copy the ARN of the surviving region's cluster:
+
+   ```bash
+   aws rds describe-global-clusters \
+     --global-cluster-identifier "${AURORA_GLOBAL_CLUSTER_ID}" \
+     --query "GlobalClusters[0].GlobalClusterMembers[*].{Cluster:DBClusterArn,Writer:IsWriter}" \
+     --output table
+   ```
+
+1. Promote that cluster with [`aws rds failover-global-cluster`](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-failover). Run the command in the surviving region and pass `--allow-data-loss`. Without the flag, Aurora runs a switchover, which needs a healthy writer and fails when the writer's region is lost.
+
+   ```bash
+   aws rds failover-global-cluster \
+     --region <surviving-region> \
+     --global-cluster-identifier "${AURORA_GLOBAL_CLUSTER_ID}" \
+     --target-db-cluster-identifier <surviving-cluster-arn> \
+     --allow-data-loss
+   ```
+
+1. Run the command from the first step again and confirm that the surviving cluster shows `Writer` as `True`.
 
 The Orchestration Cluster connects through the global writer endpoint, and the AWS JDBC Wrapper `failover` plugin reconnects to the new writer once the promotion completes. As described in [Secondary storage replication lag](#secondary-storage-replication-lag), the promoted cluster may be missing records that hadn't replicated yet. Zeebe replays that gap from its log.
 
