@@ -30,11 +30,9 @@ An environment is backed by an isolated unit of a cluster. The cluster version d
 | SaaS                                | [Cluster](./clusters.md)                                                    | One environment                                                            |
 | Any cluster before version 8.10     | [Cluster](./clusters.md)                                                    | One environment                                                            |
 
-Camunda Hub derives the name of an environment, and you can't rename it. An environment backed by a Physical Tenant other than `default` uses the Physical Tenant ID. Any other environment uses the cluster name.
+Camunda Hub derives the name of an environment. An environment backed by a Physical Tenant other than `default` uses the Physical Tenant ID. Any other environment uses the cluster name.
 
-On SaaS and on earlier versions, the cluster and its environment collapse into a single choice. When you pick a target to deploy to, you pick the environment that's named after the cluster.
-
-Camunda Hub also supports [Logical Tenants](/self-managed/concepts/multi-tenancy/logical-tenants.md) inside an environment. If the target of a deployment has more than one Logical Tenant, the deploy dialog asks you to choose one.
+Camunda Hub also supports [Logical Tenants](/self-managed/concepts/multi-tenancy/logical-tenants.md) for an environment. If the target of a deployment has [multi-tenancy](/components/concepts/multi-tenancy.md) enabled, you choose a Logical Tenant during the deployment.
 
 ## Tags
 
