@@ -30,14 +30,6 @@ With Hub, teams within your organization can build, deploy, and operate your pro
 
 <hr style={{ margin: '2.5rem 0', backgroundColor: '#dedede' }} />
 
-<div class="double-column-container" style={{ paddingTop: '20px' }}>
-<div class="double-column-left" style={{ flex: '1.4', paddingRight: '40px' }}>
-
-<img src={HubStructureImg} alt="Camunda Hub organization structure: an organization contains workspaces, and a workspace contains projects with BPMN, DMN, form, RPA, template, folder, and readme files" title="Camunda Hub high-level structure" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
-
-</div>
-<div class="double-column-right" style={{ flex: '2', marginTop: '-2.2rem' }}>
-
 ### Organization structure
 
 Camunda Hub's organization view shows the workspaces you belong to, organized in a clear hierarchy:
@@ -48,7 +40,10 @@ You can manage organizational resources, including clusters, deployment environm
 
 <p class="link-arrow">[Manage organizational resources](/components/hub/organization/index.md)</p>
 
-</div>
+<div style={{ textAlign: 'center', margin: '1.5rem 0 2.5rem' }}>
+
+<img src={HubStructureImg} alt="Camunda Hub organization structure: an organization contains workspaces, and a workspace contains projects with BPMN, DMN, form, RPA, template, folder, and readme files" title="Camunda Hub high-level structure" class="img-noborder" style={{marginTop: '0', marginBottom: '0', maxWidth: '100%'}}/>
+
 </div>
 
 <div class="double-column-container" style={{ paddingTop: '50px' }}>
