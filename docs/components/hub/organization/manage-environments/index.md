@@ -46,27 +46,49 @@ Use the toolbar to find an environment:
 
 ### Environment statuses
 
-The status of an environment reflects the state of its cluster:
+The status of an environment reflects the state of its cluster.
 
-| Status       | Availability | Description                                                                                                                                                                      |
-| :----------- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Healthy      | All          | The environment is running.                                                                                                                                                      |
-| Unhealthy    | All          | The environment reports a problem.                                                                                                                                               |
-| Unknown      | All          | Camunda Hub can't determine the status.                                                                                                                                          |
-| Creating     | SaaS         | The cluster is being created. You can't deploy to the environment until the cluster is ready.                                                                                    |
-| Updating     | SaaS         | The cluster is being updated. You can still deploy to the environment, but the deployment may fail.                                                                              |
-| Unavailable  | SaaS         | The cluster is under maintenance or waiting for input. You can't deploy to the environment.                                                                                      |
-| Paused       | SaaS         | The cluster is paused. You can [resume](#resume-a-paused-environment) the environment.                                                                                           |
-| Resuming     | SaaS         | The cluster is starting after being resumed.                                                                                                                                     |
-| Not reported | Self-Managed | The environment is assigned to a workspace, but its cluster or Physical Tenant is no longer in the Camunda Hub configuration. It shows no live data, and you can't deploy to it. |
+<Tabs groupId="edition" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
 
-In SaaS, the status updates automatically while the cluster changes state, and settles on the health of the cluster when the change completes. In Self-Managed, Camunda Hub determines the status from the readiness addresses of the components. See [environment status](/self-managed/components/hub/configuration/properties.md#environment-status).
+<TabItem value='saas'>
+
+In SaaS, the status updates automatically while the cluster changes state, and settles on the health of the cluster when the change completes.
+
+| Status      | Description                                                                                         |
+| :---------- | :-------------------------------------------------------------------------------------------------- |
+| Healthy     | The environment is running.                                                                         |
+| Unhealthy   | The environment reports a problem.                                                                  |
+| Unknown     | Camunda Hub can't determine the status.                                                             |
+| Creating    | The cluster is being created. You can't deploy to the environment until the cluster is ready.       |
+| Updating    | The cluster is being updated. You can still deploy to the environment, but the deployment may fail. |
+| Unavailable | The cluster is under maintenance or waiting for input. You can't deploy to the environment.         |
+| Paused      | The cluster is paused. You can [resume](#resume-a-paused-environment) the environment.              |
+| Resuming    | The cluster is starting after being resumed.                                                        |
 
 #### Resume a paused environment
 
-Pausing and resuming is available only in SaaS. Organization owners, admins, and DevOps users can resume a paused environment wherever Camunda Hub shows its status, for example on the **Environments** page, in the environment details, or when you select an environment to deploy to. The status changes to **Resuming** while the cluster starts, and then to **Healthy**.
+Organization owners, admins, and DevOps users can resume a paused environment wherever Camunda Hub shows its status, for example on the **Environments** page, in the environment details, or when you select an environment to deploy to. The status changes to **Resuming** while the cluster starts, and then to **Healthy**.
 
-Environments in Self-Managed don't pause.
+</TabItem>
+
+<TabItem value='self-managed'>
+
+In Self-Managed, Camunda Hub determines the status from the readiness addresses of the components. See [environment status](/self-managed/components/hub/configuration/properties.md#environment-status).
+
+| Status       | Description                                                                                                                                                                      |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Healthy      | The environment is running.                                                                                                                                                      |
+| Unhealthy    | The environment reports a problem.                                                                                                                                               |
+| Unknown      | Camunda Hub can't determine the status, for example because a component has no readiness address or doesn't respond.                                                             |
+| Not reported | The environment is assigned to a workspace, but its cluster or Physical Tenant is no longer in the Camunda Hub configuration. It shows no live data, and you can't deploy to it. |
+
+</TabItem>
+
+</Tabs>
 
 ## Open an environment
 
