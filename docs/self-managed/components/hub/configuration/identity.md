@@ -38,7 +38,7 @@ camundaHub:
                   username-claim: oid
 ```
 
-Existing users keep their account. On their next login, Camunda Hub moves accounts stored under `sub` to the new claim.
+If you change the user ID claim for an existing installation, users keep their account. On their next login, Camunda Hub moves accounts stored under `sub` to the new claim.
 
 :::warning
 Moving accounts is a one-way operation. If you change the claim again, Camunda Hub doesn't move the accounts back, and affected users get a new, empty account.
