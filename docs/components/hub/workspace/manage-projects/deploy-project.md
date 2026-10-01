@@ -55,7 +55,7 @@ If you don't want to deploy all resources in a project, you can [deploy an indiv
 
 ### Logical Tenants
 
-If the target of the deployment has more than one Logical Tenant, choose the Logical Tenant to deploy to. If it has exactly one, Camunda Hub selects it automatically. In SaaS, the **Logical tenant** field doesn't appear if the cluster doesn't support tenants.
+If multi-tenancy is enabled, provide a [Logical Tenant](/self-managed/concepts/multi-tenancy/logical-tenants.md) for the target Environment. If the Environment has more than one Logical Tenant, choose the one to deploy to. If it has exactly one, Camunda Hub selects it automatically. On SaaS, a cluster that doesn't support tenants doesn't need one.
 
 ### Environment status
 
