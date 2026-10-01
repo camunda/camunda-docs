@@ -789,7 +789,7 @@ module.exports = {
                 "components/hub/organization/credentials/credentials-modeling-interface",
               ],
             },
-            "components/hub/organization/analyze-operations/hub-dashboard",
+            "components/hub/organization/console",
             {
               type: "category",
               label: "Manage organization",

@@ -273,7 +273,7 @@ The following table shows how you can access the Hub equivalents for key Web Mod
 
 | Product (8.9) | Feature                                   | Hub documentation                                                                                                  |
 | :------------ | :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| Console       | Organization overview                     | [Console](/components/hub/organization/analyze-operations/hub-dashboard.md)                                        |
+| Console       | Organization overview                     | [Console](/components/hub/organization/console.md)                                                                 |
 | Console       | View clusters                             | [View clusters](/components/saas/clusters/manage-cluster.md#view-clusters)                                         |
 | Console       | Organization management                   | [Manage organization settings](/components/hub/organization/manage-organization-settings/organization-settings.md) |
 | Web Modeler   | View projects                             | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |

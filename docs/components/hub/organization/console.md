@@ -1,5 +1,5 @@
 ---
-id: hub-dashboard
+id: console
 title: View Console
 description: "Use Console to view the clusters, usage, alerts, and activity of your organization at a high level."
 ---
@@ -47,4 +47,4 @@ Use the **Usage** tab to see the usage per cluster. To view all clusters, click 
 
 </Tabs>
 
-The cluster information in Console is about the infrastructure. Cluster links open the cluster pages in **Environments**. To work with the environments that run on the clusters, see [manage environments](../manage-environments/index.md).
+The cluster information in Console is about the infrastructure. Cluster links open the cluster pages in **Environments**. To work with the environments that run on the clusters, see [manage environments](./manage-environments/index.md).
