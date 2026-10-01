@@ -12,6 +12,7 @@ import IntegrationIcon from "@site/docs/components/assets/icon-integration.png";
 import OptimizeIcon from "@site/docs/components/assets/icon-optimize.png";
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import ConnectorsIcon from "@site/docs/components/assets/icon-connectors.png";
+import { ServerIcon, KeyRoundIcon } from "@site/docs/components/assets/hub-icons";
 import WorkspacesEnvironmentsImg from "./img/workspaces-environments.png";
 import HubStructureImg from "./img/centralized-org-management.png";
 import HubWorkspacesImg from "./img/workspaces-environments.png";
@@ -84,7 +85,7 @@ description: "Create and manage workspaces within your organization.",
 {
 link: "./organization/manage-environments",
 title: "Manage Environments",
-image: BPMNIcon,
+image: ServerIcon,
 description: "See your Environments, check their status, and assign them to workspaces.",
 },
 {
@@ -96,7 +97,7 @@ description: "Create, monitor, and maintain the clusters that host your Environm
 {
 link: "./organization/credentials",
 title: "Manage credentials",
-image: IntegrationIcon,
+image: KeyRoundIcon,
 description: "Create a reusable credential for use with element template authentication or connection configuration.",
 },
 {
