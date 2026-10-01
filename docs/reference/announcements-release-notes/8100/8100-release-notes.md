@@ -876,7 +876,7 @@ See the [release announcement](/reference/announcements-release-notes/8100/8100-
 The Camunda Hub API is not yet exposed in Camunda 8. To access it, please reach out to [Camunda success](https://camunda.com/services/camunda-success/).
 :::
 
-#### Invite collaborators through the public API who haven't logged in yet
+#### Invite members through the public API who haven't logged in yet
 
 <!-- https://github.com/camunda/camunda-hub/pull/26666 -->
 
