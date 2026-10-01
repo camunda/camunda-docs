@@ -103,7 +103,7 @@ In Self-Managed, you add an environment by adding a cluster or a [Physical Tenan
 
 1. Provision the cluster with your platform tooling.
 1. Add the cluster to the Camunda Hub configuration, and declare any additional Physical Tenants. See [physical tenants in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#physical-tenants).
-1. Perform a rolling restart of Camunda Hub. Camunda Hub reads the configuration only at startup. After the restart, the environments appear on the **Environments** page.
+1. Perform a rolling restart of Camunda Hub. Camunda Hub reads the configuration at startup. After the restart, the environments appear on the **Environments** page.
 1. [Assign the environments to a workspace](./assign-environments.md) so that teams can deploy to them.
 
 </TabItem>
