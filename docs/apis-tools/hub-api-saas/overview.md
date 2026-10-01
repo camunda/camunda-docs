@@ -9,10 +9,6 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-:::note WORK IN PROGRESS
-The Camunda Hub API is not yet exposed in Camunda 8 SaaS.
-:::
-
 ## Authentication
 
 See the [authentication guide](/apis-tools/hub-api-saas/authentication.md) for setup instructions.
