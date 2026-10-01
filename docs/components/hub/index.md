@@ -13,9 +13,8 @@ import OptimizeIcon from "@site/docs/components/assets/icon-optimize.png";
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import ConnectorsIcon from "@site/docs/components/assets/icon-connectors.png";
 import { ServerIcon, KeyRoundIcon } from "@site/docs/components/assets/hub-icons";
-import WorkspacesEnvironmentsImg from "./img/workspaces-environments.png";
 import HubStructureImg from "./img/organization-structure.png";
-import HubWorkspacesImg from "./img/workspaces-environments.png";
+import HubWorkspacesImg from "./img/workspace-environments.png";
 import AoGrid from '../react-components/\_ao-card';
 
 Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
@@ -66,7 +65,7 @@ Organization admins assign environments to workspaces. Projects in a workspace c
 </div>
 <div class="double-column-right" style={{ flex: '1.8' }}>
 
-<img src={HubWorkspacesImg} alt="Environments assigned to workspaces and hosted on clusters" title="Environments" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={HubWorkspacesImg} alt="An organization sets up a workspace and assigns environments to it. The dev, stage, and prod environments are each hosted on their own cluster" title="Environments" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
