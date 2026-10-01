@@ -13,7 +13,7 @@ Each environment runs on a [cluster](/components/concepts/clusters.md), which yo
 
 ## Permissions
 
-What you see on the **Environments** page depends on your role:
+Your role determines which environments you can see and what you can do with them across Camunda Hub, for example on the **Environments** page, in workspaces, and when you deploy:
 
 | Role                               | What you can do                                                                                                               |
 | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
