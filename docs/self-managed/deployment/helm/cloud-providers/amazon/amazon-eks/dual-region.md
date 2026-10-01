@@ -12,7 +12,7 @@ import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-import CostManagement from "../../../../\_partials/\_cost-management.md";
+import CostManagement from "../../../../_partials/_cost-management.md";
 
 :::caution
 Review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
@@ -35,7 +35,7 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
 - **AWS CLI** – Command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 - **Terraform** – IaC tool used to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
 - **kubectl** – CLI for interacting with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-- **Helm** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
+- **Helm CLI v4 (recommended; see [supported versions](/reference/supported-environments.md#clients))** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
 - **AWS service quotas** – Verify your quotas before deployment:
   - At least 6 Elastic IPs (three per availability zone, per region).
   - Adequate quotas for **VPCs, EC2 instances, and storage** in both regions.
