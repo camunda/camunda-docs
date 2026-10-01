@@ -875,6 +875,7 @@ module.exports = {
                 {
                   Model: [
                     "components/hub/workspace/modeler/modeling/model-your-first-diagram",
+                    "components/hub/workspace/modeler/modeling/browse-all-resources",
                     "components/hub/workspace/modeler/modeling/utilize-forms",
                     "components/hub/workspace/modeler/run-or-publish-your-process",
                     "components/hub/workspace/modeler/process-landscape-visualization",
@@ -1783,6 +1784,7 @@ module.exports = {
         id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
+        "self-managed/reference-architecture/deployment-topology",
         "self-managed/reference-architecture/kubernetes",
         "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
@@ -1814,6 +1816,20 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
+                {
+                  type: "category",
+                  label: "Deployment topology",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/install/topology/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/install/topology/hub-release",
+                    "self-managed/deployment/helm/install/topology/orchestration-release",
+                    "self-managed/deployment/helm/install/topology/optimize-release",
+                    "self-managed/deployment/helm/install/topology/topology-physical-tenants",
+                  ],
+                },
                 "self-managed/deployment/helm/install/production/index",
               ],
             },
@@ -1840,15 +1856,16 @@ module.exports = {
                 //     "self-managed/deployment/helm/configure/authentication/basic",
                 //   ],
                 // },
+                "self-managed/deployment/helm/configure/configuration-responsibilities",
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/orchestration-tls-modes",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
                 "self-managed/deployment/helm/configure/multi-region-zone-awareness",
                 "self-managed/deployment/helm/configure/service-configuration",
+                "self-managed/deployment/helm/configure/health-probes",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
-                "self-managed/deployment/helm/configure/multi-namespace",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
                   type: "category",
@@ -2239,14 +2256,35 @@ module.exports = {
             {
               Elasticsearch: [
                 "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
-                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+                {
+                  type: "category",
+                  label: "Restore a backup",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+                  },
+                  items: [
+                    "self-managed/operational-guides/backup-restore/elasticsearch/es-restore-api",
+                    "self-managed/operational-guides/backup-restore/elasticsearch/es-restore-application",
+                  ],
+                },
               ],
               "Relational databases": [
                 "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
-                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+                {
+                  type: "category",
+                  label: "Restore a backup",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+                  },
+                  items: [
+                    "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore-api",
+                    "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore-application",
+                  ],
+                },
               ],
             },
-            "self-managed/operational-guides/backup-restore/in-process-restore",
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",
@@ -2309,6 +2347,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/api-routing",
                 "self-managed/concepts/physical-tenants/troubleshooting",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
+                "self-managed/concepts/physical-tenants/optimize",
                 "self-managed/concepts/physical-tenants/app-integrations",
               ],
             },
@@ -2357,7 +2396,6 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/data-purge",
-        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {
@@ -2632,6 +2670,7 @@ module.exports = {
         },
       ],
     },
+    "self-managed/operational-guides/troubleshooting",
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
@@ -2649,7 +2688,10 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: ["self-managed/upgrade/helm/890-to-8100"],
+          items: [
+            "self-managed/upgrade/helm/890-to-8100",
+            "self-managed/upgrade/helm/combined-to-split-topology",
+          ],
         },
         {
           type: "category",

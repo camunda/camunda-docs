@@ -545,6 +545,13 @@
       "label": "Get cluster status"
     }
   ],
+  "get_cluster_upgrade_status": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetClusterUpgradeStatus",
+      "label": "Get cluster upgrade readiness status"
+    }
+  ],
   "get_cluster_topology": [
     {
       "file": "admin_operations.py",

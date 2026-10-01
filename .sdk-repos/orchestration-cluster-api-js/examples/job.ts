@@ -3,6 +3,7 @@
 
 import {
   createCamundaClient,
+  createTestClock,
   type JobActionReceipt,
   type JobKey,
 } from '@camunda8/orchestration-cluster-api';
@@ -170,6 +171,27 @@ function getBackpressureStateExample() {
 }
 //#endregion GetBackpressureState
 
+//#region Clock
+async function clockExample() {
+  // A pinned clock drives the SDK's own cadence — worker polling, retry backoff,
+  // backpressure decay — so a test can step through them without waiting in real time.
+  //
+  // Use `createTestClock` rather than hand-rolling one: every clause of the contract is
+  // easy to get subtly wrong, and a `sleep` that resolves in a microtask spins the worker's
+  // poll loop as fast as the queue drains.
+  const clock = createTestClock({ autoAdvance: false });
+  const camunda = createCamundaClient({ clock });
+
+  // With `autoAdvance` off nothing settles until the test moves time, so start the wait
+  // first and advance into it.
+  const waiting = camunda.clock.sleep(1_000);
+  await clock.advance(1_000);
+  await waiting;
+
+  console.log(`Clock reads ${camunda.clock.now()}`);
+}
+//#endregion Clock
+
 // Suppress "declared but never read"
 void activateJobsExample;
 void completeJobExample;
@@ -181,3 +203,4 @@ void createThreadedJobWorkerExample;
 void getWorkersExample;
 void stopAllWorkersExample;
 void getBackpressureStateExample;
+void clockExample;

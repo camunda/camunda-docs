@@ -114,7 +114,7 @@ Every region owns a distinct VPC range and a distinct Kubernetes service range. 
 
 A fourth slot (`eu-south-1`, VPC `10.222.0.0/16`, service CIDR `10.220.0.0/16`) is prepared but disabled. Enable it in `variables.tf` before you bootstrap the cluster.
 
-There is no separate pod range. With the [AWS VPC CNI](https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html) a pod address is an ordinary VPC address. Routing the VPC range over the Transit Gateway makes cross-region pod-to-pod traffic work natively, with no overlay network. The Transit Gateway also routes the service range, because Submariner resolves a remote ClusterIP service out of the exporting cluster's service range.
+There is no separate pod range. With the [AWS VPC CNI](https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html), pod IPs are VPC addresses. The Transit Gateway routes VPC CIDRs to enable cross-region pod-to-pod traffic. The connectivity check verifies reachability using the per-pod DNS records that Zeebe brokers dial; it does not test remote ClusterIP access. Service CIDRs are also routed in this reference topology.
 
 ## 1. Configure AWS and apply Terraform
 

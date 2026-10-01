@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-This page describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+This page describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the [Optimize deployment guidance](/self-managed/concepts/physical-tenants/index.md#optimize-deployment).
 :::
 
 Configure initial [tenants](/components/concepts/multi-tenancy.md) for Optimize in Camunda 8 Self-Managed.
