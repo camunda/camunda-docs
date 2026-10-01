@@ -22,11 +22,9 @@ What you see on the **Environments** page depends on your role:
 | Editor or admin in a workspace     | View the environments assigned to the workspaces where you are an editor or workspace admin.                                  |
 | Viewer or commenter in a workspace | No access to environments.                                                                                                    |
 
-## View environments
+## Environment summary
 
-To view the environments in your organization, click **Environments** in the left navigation.
-
-Each environment is displayed as a card with the following details:
+Camunda Hub summarizes each environment as a card with the following details:
 
 | Detail     | Description                                                                                                                                          |
 | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -36,13 +34,6 @@ Each environment is displayed as a card with the following details:
 | Version    | The Camunda version of the cluster.                                                                                                                  |
 | Status     | The [status](#environment-statuses) of the environment.                                                                                              |
 | Workspaces | The workspaces the environment is assigned to. Organization owners and admins see **Unassigned** if the environment isn't assigned to any workspace. |
-
-### Search and filter
-
-Use the toolbar to find an environment:
-
-- **Search environments**: Search by the name of an environment or the name of its cluster.
-- **Status**, **Version**, and **Tag**: Show only the environments that match the selected values. Each filter lists only the values that exist in your organization.
 
 ### Environment statuses
 
@@ -89,6 +80,13 @@ In Self-Managed, Camunda Hub monitors the health of the components of each envir
 </TabItem>
 
 </Tabs>
+
+## Search and filter environments
+
+To find relevant environments, click **Environments** in the left navigation to open the **Environments** page. Use the toolbar to narrow down the list:
+
+- **Search environments**: Search by the name of an environment or the name of its cluster.
+- **Status**, **Version**, and **Tag**: Show only the environments that match the selected values. Each filter lists only the values that exist in your organization.
 
 ## Open an environment
 
