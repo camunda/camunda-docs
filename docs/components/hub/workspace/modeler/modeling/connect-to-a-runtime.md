@@ -9,7 +9,7 @@ import RuntimeEnvironmentsImg from './img/runtime-connection-environments.png';
 import RuntimeClustersImg from './img/runtime-connection-clusters.png';
 import RuntimeCredentialsDialogImg from './img/runtime-connection-credentials-dialog.png';
 
-The runtime connection is the environment or cluster that Camunda Hub works against while you model, shown in the **Runtime** selector at the bottom of the modeling interface.
+Learn how to choose the runtime connection: the environment or cluster that Camunda Hub works against while you model, shown in the **Runtime** selector at the bottom of the modeling interface.
 
 ## About the runtime connection
 
