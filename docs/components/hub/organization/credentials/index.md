@@ -193,7 +193,6 @@ Any member with access to your organization can create, edit, deploy, and delete
 
 ## Known limitations
 
-:::note
 In this release:
 
 - You cannot create a secret from a credential. Create secrets in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) first.
@@ -206,8 +205,6 @@ In this release:
 - Filtering the **Managed in Hub** tab by environment matches every environment on that environment's cluster.
 - Credential permissions are evaluated per organization, not per environment, so they do not follow the isolation between environments on a cluster.
 - The **Environments only** scan reads a cluster's shared variables, which on Self-Managed belong to the `default` Physical Tenant. A credential created directly in another Physical Tenant is not found.
-
-:::
 
 ## Next steps
 

@@ -56,7 +56,7 @@ A value that embeds `camunda.secrets.` mid-word, such as `foo.camunda.secrets.AW
 You cannot create the secret itself here. Add the secret to the cluster first in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md), then reference it from the credential.
 :::
 
-A credential you create here is managed in Camunda Hub immediately. It appears on the **Managed** tab of the [**Credentials** page](./index.md#managed-credentials).
+A credential you create here is managed in Camunda Hub immediately. It appears on the **Managed in Hub** tab of the [**Credentials** page](./index.md#managed-credentials).
 
 ## Edit or upgrade a credential
 
