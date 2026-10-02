@@ -25,22 +25,24 @@ If the cluster is paused, you won't see a **Launch** button. You must [resume th
 
 ## Explore the Dashboard
 
-The **Dashboard** page is the default landing page in Operate. It gives you an at-a-glance view of running process instances and summarizes where incidents are occurring.
+Learn how to read the **Dashboard**, the default landing page in Operate that shows your running process instances and where incidents are occurring.
 
-Starting in 8.11, the Dashboard uses Camunda's newer design system, with a redesigned layout described below.
+:::note
+The redesigned Dashboard described here is available starting in 8.11.
+:::
 
-At the top of the page, the metric panel shows the total number of running process instances and a bar visualizing the split between active instances and instances with an incident. Click the total, or either segment below the bar, to navigate to the **Processes** page pre-filtered to that set of instances.
+At the top of the page, the metric panel shows the total number of running process instances and a bar visualizing the split between active instances and instances with an incident. Click the total, **Process Instances with Incident**, or **Active Process Instances** to navigate to the **Processes** page pre-filtered to that set of instances.
 
 Below the metric panel, two panels list your running work in more detail:
 
 - **Process instances by name** lists each deployed process with running instances, and how many instances are running. If a process has multiple versions deployed, expand its row to see the breakdown per version.
-- **Process incidents by error message** groups process instances with incidents by their error message, so you can spot recurring failures. Expand an error's row to see which process definition versions it affects. When no instances have incidents, this panel shows a healthy empty state instead of a list.
+- **Process incidents by error message** groups process instances with incidents by their error message, so you can spot recurring failures. Expand an error's row to see which process definition versions it affects. When no instances have incidents, this panel shows **Your processes are healthy** instead of a list.
 
-Both panels refresh automatically every five seconds, and support scrolling through additional rows beyond what's initially loaded. Clicking a row, or an expanded version or error entry, navigates to the **Processes** page pre-filtered to match.
+Both panels load more rows as you scroll. They refresh every five seconds while only the first page of rows is loaded, and automatic refresh stops after you scroll to load more. Clicking a row, or an expanded version or error entry, navigates to the **Processes** page pre-filtered to match.
 
 If a process definition version is scheduled for deletion, its row shows a **Draining** indicator. The version remains until its running instances finish, then is removed automatically.
 
-If there are no running process instances at all, the Dashboard shows a single empty state with links to learn more about Operate and to go to Modeler to start a new process instance.
+If there are no running process instances at all, the Dashboard shows a single **No running process instances** empty state with a link to learn more about Operate and, if Modeler is available for your cluster, a **Go to Modeler** button.
 
 ![The Operate Dashboard page, showing the metric panel with running instance counts, the Process instances by name panel with a process's versions expanded, and the Process incidents by error message panel with an error's affected process definitions expanded.](./img/basic-operate-navigation-dashboard.png)
 
