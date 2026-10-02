@@ -82,7 +82,7 @@ The dual-region reference architecture doesn't deploy the management plane. It u
 
 Both components authenticate through Management Identity, so a management plane requires OpenID Connect (OIDC) authentication rather than the Basic authentication the reference configuration uses. Point each component at your Management Identity instance with `global.identity.service.url`, and give Camunda Hub its own PostgreSQL database.
 
-With the 8.10 Helm chart, you can deploy the management plane as a release with `global.topology.mode: hub` and set `global.topology.mode: orchestration` in each regional Orchestration Cluster release. Each regional release then disables its local Management Identity and points `global.identity.service.url` at the Management Identity in the Hub release. See [Clusters](/self-managed/components/hub/configuration/properties.md#clusters).
+With the 8.10 Helm chart, you can deploy the management plane as a release with `global.topology.mode: hub` and set `global.topology.mode: orchestration` in each regional Orchestration Cluster release. The Hub release requires `identity.enabled: true`. Each regional release requires `identity.enabled: false` and `global.identity.auth.enabled: true`, so it can't keep the `global.identity.auth.enabled: false` setting of the reference configuration. Point `global.identity.service.url` at the Management Identity in the Hub release. See [Clusters](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::note
 The Helm chart doesn't reject `optimize.enabled: true` in a release that has no Management Identity. That combination installs successfully and then fails to authenticate at runtime. Confirm Management Identity is reachable before you enable Optimize.
