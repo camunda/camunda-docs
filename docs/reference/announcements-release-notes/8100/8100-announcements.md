@@ -834,9 +834,9 @@ Deployment change 1 description.
 
 #### Legacy Optimize authentication properties deprecated
 
-The authentication properties Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize still accepts them in 8.10 and translates the recognized properties to their new equivalents at startup, and removes them in 8.11.
+The authentication properties Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize still accepts them in 8.10 and translates the recognized properties to their new equivalents at startup, but they will be removed in a future release.
 
-**Action:** Migrate Optimize to the `camunda.security.*` settings before upgrading to 8.11.
+**Action:** Migrate Optimize to the `camunda.security.*` settings ahead of that removal.
 
 <p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
 
@@ -901,11 +901,11 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 
 #### Unified authentication for the Orchestration Cluster and Optimize
 
-With Camunda 8.10, Optimize authenticates through a shared implementation based on the Orchestration Cluster's existing authentication, replacing its separate identity stack. Both components now accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+Optimize can now be configured with the same `camunda.security.authentication.*` settings already used by the Orchestration Cluster. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Optimize accepts its existing authentication settings in 8.10 and translates the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. User, group, role, tenant, and permission management for Optimize is unchanged and is still handled by Management Identity.
+Optimize accepts its 8.9 authentication settings in 8.10 and translates the recognized properties to their new equivalents at startup, but those 8.9 properties are deprecated and will be removed in a future release. User, group, role, tenant, and permission management for Optimize is unchanged and is still handled by Management Identity.
 
-**Action:** Migrate Optimize to the `camunda.security.*` settings before upgrading to 8.11, when its legacy authentication properties are removed.
+**Action:** Migrate Optimize to the `camunda.security.*` settings ahead of that removal.
 
 <p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
 

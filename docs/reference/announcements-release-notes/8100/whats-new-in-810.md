@@ -797,9 +797,9 @@ New SaaS clusters include a default `business_` variable include filter that lim
 
 ## Unified authentication for Orchestration Cluster and Optimize
 
-With Camunda 8.10, Optimize authenticates through a shared implementation based on the Orchestration Cluster's existing authentication, replacing its separate identity stack, and now accepts the same `camunda.security.authentication.*` settings.
+With Camunda 8.10, Optimize can be configured with the same `camunda.security.authentication.*` settings already used by the Orchestration Cluster.
 
-- Optimize continues to accept its existing authentication settings in 8.10, translating the recognized properties to new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11.
+- Optimize continues to accept its 8.9 authentication settings in 8.10, translating the recognized properties to new equivalents at startup, but those 8.9 properties are deprecated and will be removed in a future release.
 - User, group, role, tenant, and permission management for Optimize is unchanged in 8.10 and is still handled by Management Identity.
 
 :::note
