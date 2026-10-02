@@ -54,7 +54,7 @@ AI coding agents are read-only by default and ask for explicit approval otherwis
 
 ### ProcessOS Bundle mapping
 
-ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. Install the bundle that matches your agent, because an agent only discovers skills in its own directory.
+ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. Install the bundle that matches your agent, because an agent only discovers skills in its own directory. To understand how bundles are installed, see [Install ProcessOS Harness](get-started.md#install-processos-harness).
 
 | AI coding agent       | Bundle       | Install command            | Skills directory  |
 | --------------------- | ------------ | -------------------------- | ----------------- |
@@ -70,13 +70,13 @@ The AI coding agent runs on the builder's own computer.
 
 | Requirement        | Details                                                                                   |
 | ------------------ | ----------------------------------------------------------------------------------------- |
+| c8ctl              | The Camunda 8 CLI, used to deploy and manage Camunda resources and clusters. |
 | Operating system   | Windows (via WSL), macOS, or Unix.                                                        |
 | AI coding agent    | Installed locally.                                                                        |
 | Camunda            | A local cluster started with `c8run`, used to validate generated solutions.               |
 | Node.js            | Version 22.18.0 or later.                                                                 |
-| c8ctl              | The Camunda 8 CLI, used to deploy and manage Camunda resources and start a local cluster. |
 | Git and GitHub CLI | `git`, and the `gh` CLI for the GitHub discovery specialist.                              |
-| Maven              | Latest stable release.                                                                    |
+| Maven (For Java Workers only)             | Latest stable release.                                                                    |
 | Camunda Modeler    | For editing BPMN and DMN files during review.                                             |
 
 ## Generated solutions
