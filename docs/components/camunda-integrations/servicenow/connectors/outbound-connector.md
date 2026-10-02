@@ -19,7 +19,7 @@ This connector interacts with ServiceNow tables via REST APIs, enabling powerful
 
 ## Configure the connector
 
-In Camunda Modeler, select **ServiceNow Outbound Connector** from the connector templates or download it from the [Camunda Marketplace](https://marketplace.camunda.com/).
+In Camunda Hub or Desktop Modeler, select **ServiceNow Outbound Connector** from the connector templates or download it from the [Camunda Marketplace](https://marketplace.camunda.com/).
 
 ### Required fields
 
@@ -38,7 +38,7 @@ Store ServiceNow credentials securely as [secrets](/components/hub/organization/
 :::
 
 ![ServiceNow Outbound Connector example](../img/outbound-connector.png)  
-_Example configuration of the Create operation in Camunda Modeler._
+_Example configuration of the Create operation in Camunda Hub._
 
 > When using `Read`, `Update`, or `Delete`, the `sys_id` field becomes available in the connector properties to specify the target record.
 

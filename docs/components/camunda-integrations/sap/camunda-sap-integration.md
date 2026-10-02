@@ -8,6 +8,10 @@ Use Camunda's [SAP](/reference/glossary.md#sap) integration to bring SAP functio
 
 This integration provides modular components that can be used independently or together to automate business-critical scenarios across SAP and non-SAP systems.
 
+:::note
+The SAP BTP plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration. For details, see the [Camunda 8.10 announcements](/reference/announcements-release-notes/8100/8100-announcements.md).
+:::
+
 ## Purpose
 
 The SAP integration enables you to:
@@ -37,11 +41,11 @@ This section of the documentation covers:
 
 - [Prerequisites](./prerequisites.md) for running the integration.
 - **Integration modules**: What each SAP module does and how they fit into Camunda workflows.
-- **Setup guidance**: How to configure and deploy integration modules using the [CSAP CLI](./csap-cli.md).
+- **Setup guidance**: How to configure and deploy integration modules using the [CSAP c8ctl plugin](./csap-cli.md).
 - **Module-specific documentation**:
   - [SAP OData outbound connector](./odata-connector.md)
   - [SAP RFC outbound connector](./rfc-connector.md)
-  - [SAP BTP plugin](./btp-plugin.md)
+  - [SAP BTP plugin](./btp-plugin.md) (retired)
 
 ## About the integration
 
@@ -51,8 +55,8 @@ Camunda's SAP integration consists of several modules that can be used independe
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [SAP OData outbound connector](./odata-connector.md) | Interact with an SAP S/4HANA or ECC system via OData v2 + v4 APIs directly from your BPMN model.                                                              |
 | [SAP RFC outbound connector](./rfc-connector.md)     | Query Business Application Programming Interfaces (BAPIs) and remote-enabled function modules (RFCs) on SAP ECC systems.                                      |
-| [SAP BTP plugin](./btp-plugin.md)                    | - Use [Tasklist's](/components/tasklist/introduction-to-tasklist.md) forms in the Fiori UI. <br/> - Start BPMN process instances via inbound proxy endpoints. |
+| [SAP BTP plugin](./btp-plugin.md) (retired)          | - Use [Tasklist's](/components/tasklist/introduction-to-tasklist.md) forms in the Fiori UI. <br/> - Start BPMN process instances via inbound proxy endpoints. |
 
-These features run within your [SAP BTP instance](https://www.sap.com/products/technology-platform.html), requiring no proprietary Camunda setup and leveraging existing infrastructure with minimal prerequisites.
+These modules run within your [SAP BTP instance](https://www.sap.com/products/technology-platform.html) or alongside your Camunda deployment, requiring no proprietary Camunda setup and leveraging existing infrastructure with minimal prerequisites.
 
 ![SAP integration overview](./img/sap-integration-overview.svg)

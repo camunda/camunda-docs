@@ -12,6 +12,7 @@ import TabItem from "@theme/TabItem";
 import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
 import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
 import RosaHcpAuth from '../../\_partials/\_rosa-hcp-auth.md'
+import CostManagement from "../../../../_partials/_cost-management.md";
 
 This guide provides a detailed tutorial for deploying a [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) capabilities. It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
@@ -54,11 +55,7 @@ For testing Camunda 8 or developing against it, you might consider signing up fo
 
 To keep this guide concise, we provide links to additional documentation covering best practices, allowing you to explore each topic in greater depth.
 
-:::danger Cost management
-
-Following this guide will incur costs on your cloud provider account and your Red Hat account, specifically for the managed OpenShift service, OpenShift worker nodes running in EC2, the hosted control plane, Elastic Block Storage (EBS), and Route 53. For more details, refer to [ROSA AWS pricing](https://aws.amazon.com/rosa/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/) as total costs vary by region.
-
-:::
+<CostManagement />
 
 ### Variants
 

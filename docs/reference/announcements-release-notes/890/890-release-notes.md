@@ -10,6 +10,7 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -31,7 +32,7 @@ import PageDescription from '@site/src/components/PageDescription';
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.9.19 (04.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.19)</li><li>[Camunda 8.9.18 (31.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.18)</li><li>[Camunda 8.9.17 (21.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.17)</li><li>[Camunda 8.9.16 (14.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.16)</li><li>[Camunda 8.9.15 (11.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.15)</li><li>[Camunda 8.9.14 (03.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.14)</li><li>[Camunda 8.9.13 (15.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.13)</li><li>[Camunda 8.9.12 (07.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.12)</li><li>[Camunda 8.9.11 (26.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.11)</li><li>[Camunda 8.9.10 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.10)</li><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.10 (04.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.10)</li><li>[Connectors 8.9.9 (28.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.9)</li><li>[Connectors 8.9.8 (18.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.8)</li><li>[Connectors 8.9.7 (04.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.7)</li><li>[Connectors 8.9.6 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.6)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
+<ul><li>[Camunda 8.9.22 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.22)</li><li>[Camunda 8.9.21 (17.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.21)</li><li>[Camunda 8.9.19 (04.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.19)</li><li>[Camunda 8.9.18 (31.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.18)</li><li>[Camunda 8.9.17 (21.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.17)</li><li>[Camunda 8.9.16 (14.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.16)</li><li>[Camunda 8.9.15 (11.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.15)</li><li>[Camunda 8.9.14 (03.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.14)</li><li>[Camunda 8.9.13 (15.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.13)</li><li>[Camunda 8.9.12 (07.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.12)</li><li>[Camunda 8.9.11 (26.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.11)</li><li>[Camunda 8.9.10 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.10)</li><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.14 (28.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.14)</li><li>[Connectors 8.9.13 (28.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.13)</li><li>[Connectors 8.9.12 (18.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.12)</li><li>[Connectors 8.9.11 (18.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.11)</li><li>[Connectors 8.9.10 (04.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.10)</li><li>[Connectors 8.9.9 (28.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.9)</li><li>[Connectors 8.9.8 (18.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.8)</li><li>[Connectors 8.9.7 (04.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.7)</li><li>[Connectors 8.9.6 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.6)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -243,14 +244,14 @@ Camunda 8.9 adds migration guidance for customers moving Self-Managed Helm deplo
 
 <p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
 
-### Gateway API, templating, and Helm 4 support
+### Gateway API, templating, and Helm CLI v4 support {#gateway-api-templating-and-helm-4-support}
 
-The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm 4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm 3 end of life.
+The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm CLI v4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm CLI v3 end of life.
 
 <ul>
   <li><span class="link-arrow">[Gateway API setup](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</span></li>
   <li><span class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
 </ul>
 
 ### Secondary storage and authorization defaults
@@ -338,14 +339,14 @@ Camunda 8.9 adds Azure Blob Storage as a supported document store for Self-Manag
 
 The Camunda for Microsoft Teams app is now available for Self-Managed environments as well as SaaS. This lets teams claim and complete Camunda tasks directly in Microsoft Teams across more deployment models.
 
-<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
+<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/app-integrations/microsoft-teams.md)</p>
 
 ### Live task updates and assignment notifications in Microsoft Teams
 
 Camunda for Microsoft Teams now updates a notification card as its task is assigned, completed, or canceled, and notifies you when an existing task is later assigned to you. On SaaS, these capabilities require a cluster running generation `8.9 gen13` or later with **Enable app integrations extensions** turned on in the cluster settings.
 
 <ul>
-  <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/ms-teams/ms-teams-notifications.md#enable-notification-delivery-for-your-cluster)</span></li>
+  <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/app-integrations/notification-rules.md#enable-notification-delivery-for-your-cluster)</span></li>
   <li><span class="link-arrow">[Enable app integrations extensions](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions)</span></li>
 </ul>
 
@@ -696,17 +697,15 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
 
-#### Helm 4 support
+#### Helm CLI v4 support {#helm-4-support}
 
 <!-- https://github.com/camunda/product-hub/issues/3358 -->
 
-As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
+Camunda 8.9 (chart 14.x) supports Helm CLI v3 and v4.
 
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+<HelmCliSupport />
 
-:::note
-Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
-:::
+For Helm CLI v4 behavior changes and workarounds, see [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 ### Global user task listeners
 
@@ -762,7 +761,7 @@ The Camunda for Microsoft Teams app is now available in Self-Managed environment
 
 You can use this app to view, claim, and complete Camunda tasks directly in Microsoft Teams.
 
-<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
+<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/app-integrations/microsoft-teams.md)</p>
 
 ### Modeler
 
@@ -774,7 +773,7 @@ You can use this app to view, claim, and complete Camunda tasks directly in Micr
 
 You can now add subfolders to your process applications, giving you more flexibility when organizing your files and allowing you to sync to your existing version control system without reorganizing the filesystem.
 
-<p class="link-arrow">[Process applications](/components/concepts/process-applications.md)</p>
+<p class="link-arrow">[Process applications](/components/concepts/projects.md)</p>
 
 #### Web Modeler: Improved Self-Managed installation
 

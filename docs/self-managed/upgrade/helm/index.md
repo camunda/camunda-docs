@@ -7,6 +7,7 @@ description: "Upgrade to a more recent version of the Camunda Helm charts, and v
 import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
 import { helmIndexCards } from './../react-components/\_card-data';
 import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/CamundaDistributions";
+import HelmCliSupport from '../../deployment/helm/_partials/_helm-cli-support.md';
 
 Upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
 
@@ -14,8 +15,12 @@ Upgrade a Camunda 8 Self-Managed deployment installation using the official Camu
 If you are upgrading from a version earlier than 8.8, see [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 :::
 
-:::warning Upgrading to Camunda 8.10
-Camunda 8.10 (chart 15.x) requires the Helm CLI v4. Switch to the Helm v4 CLI before you run `helm upgrade`. No release-state migration is required. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
+:::note Helm CLI support
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 and v4.
+
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
 :::
 
 ## Upgrade guides

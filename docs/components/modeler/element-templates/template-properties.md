@@ -1352,7 +1352,7 @@ Together with the `pattern` constraint, you can define a custom error message:
 When a template exposes a property to a user, the template is responsible for showing all validation errors in the properties panel.
 That includes non-compliance with BPMN and Zeebe schema constraints. You should therefore use `notEmpty` where necessary.
 
-The Modeler's problems panel shows errors for invalid properties, whether or not a template is applied.
+The problems panel shows errors for invalid properties, whether or not a template is applied.
 :::
 
 ## Showing properties conditionally: `condition`

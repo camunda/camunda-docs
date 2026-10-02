@@ -185,6 +185,44 @@ management:
 Filtering applies not only to direct name matches (for example, `zeebe.foo`), but as a prefix. This means any metric starting with the prefix `zeebe.foo` in the example would also be filtered out, and would not be exported.
 :::
 
+## Scrape metrics with the Helm chart
+
+The Camunda Helm chart can create a Prometheus Operator `ServiceMonitor` resource for each component that exposes metrics. Install the Prometheus Operator in your cluster before you set `prometheusServiceMonitor.enabled` to `true`.
+
+### Configure the `ServiceMonitor` resources
+
+Use the following Helm values to configure the `ServiceMonitor` resources:
+
+| Value                                     | Default            | Description                                                                                                                                                                                                        |
+| :---------------------------------------- | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `prometheusServiceMonitor.enabled`        | `false`            | If `true`, the chart creates a `ServiceMonitor` resource for each deployed component listed in [Metrics endpoints by component](#metrics-endpoints-by-component).                                                  |
+| `prometheusServiceMonitor.scrapeInterval` | `10s`              | The interval at which Prometheus scrapes each metrics endpoint.                                                                                                                                                    |
+| `prometheusServiceMonitor.labels`         | `release: metrics` | Labels the chart adds to each `ServiceMonitor` resource. The Prometheus Operator selects `ServiceMonitor` resources by label, so set labels that match the `serviceMonitorSelector` of your `Prometheus` resource. |
+
+The following example enables the `ServiceMonitor` resources, sets a 30-second scrape interval, and replaces the default `release` label:
+
+```yaml
+prometheusServiceMonitor:
+  enabled: true
+  scrapeInterval: 30s
+  labels:
+    release: my-prometheus
+```
+
+### Metrics endpoints by component
+
+The following table lists the default metrics endpoint of each component that exposes metrics. The Service port is the port of the Kubernetes Service. The container port is the port the pod listens on.
+
+| Component             | Default Service port | Default container port | Default path           | Helm value for the path                 |
+| :-------------------- | :------------------- | :--------------------- | :--------------------- | :-------------------------------------- |
+| Orchestration Cluster | `9600`               | `9600`                 | `/actuator/prometheus` | `orchestration.metrics.prometheus`      |
+| Connectors            | `8080`               | `8080`                 | `/actuator/prometheus` | `connectors.metrics.prometheus`         |
+| Management Identity   | `82`                 | `8082`                 | `/actuator/prometheus` | `identity.metrics.prometheus`           |
+| Optimize              | `8092`               | `8092`                 | `/actuator/prometheus` | `optimize.metrics.prometheus`           |
+| Camunda Hub REST API  | `8091`               | `8091`                 | `/metrics`             | `camundaHub.restapi.metrics.prometheus` |
+
+The chart creates the Management Identity `ServiceMonitor` resource only if `global.identity.auth.enabled` is `true`. The chart configures no metrics port for Camunda Hub WebSockets, so no `ServiceMonitor` resource covers it.
+
 ## Available metrics
 
 [Spring already exposes various metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported), some of which will be made available
@@ -211,14 +249,15 @@ while gateways will expose REST API relevant metrics.
 
 The following metrics are related to process processing:
 
-| Metric                                 | Description                                                                                                                                                                                                |
-| :------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `zeebe_stream_processor_records_total` | The number of events processed by the stream processor. The `action` label separates processed, skipped, and written events.                                                                               |
-| `zeebe_exporter_events_total`          | The number of events processed by the exporter processor. The `action` label separates exported and skipped events.                                                                                        |
-| `zeebe_element_instance_events_total`  | The number of occurred process element instance events. The `action` label separates the number of activated, completed, and terminated elements. The `type` label separates different BPMN element types. |
-| `zeebe_job_events_total`               | The number of job events. The `action` label separates the number of created, activated, timed out, completed, failed, and canceled jobs.                                                                  |
-| `zeebe_incident_events_total`          | The number of incident events. The `action` label separates the number of created and resolved incident events.                                                                                            |
-| `zeebe_pending_incidents_total`        | The number of currently pending incidents, that is, not resolved.                                                                                                                                          |
+| Metric                                     | Description                                                                                                                                                                                                                        |
+| :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `zeebe_stream_processor_records_total`     | The number of events processed by the stream processor. The `action` label separates processed, skipped, and written events.                                                                                                       |
+| `zeebe_exporter_events_total`              | The number of events processed by the exporter processor. The `action` label separates exported and skipped events.                                                                                                                |
+| `zeebe_element_instance_events_total`      | The number of occurred process element instance events. The `action` label separates the number of activated, completed, and terminated elements. The `type` label separates different BPMN element types.                         |
+| `zeebe_job_events_total`                   | The number of job events. The `action` label separates the number of created, activated, timed out, completed, failed, and canceled jobs.                                                                                          |
+| `zeebe_incident_events_total`              | The number of incident events. The `action` label separates the number of created and resolved incident events.                                                                                                                    |
+| `zeebe_pending_incidents_total`            | The number of currently pending incidents, that is, not resolved.                                                                                                                                                                  |
+| `zeebe_process_definitions_draining_count` | The number of process definitions currently draining, that is, deleted but retained until their running process instances finish. Metric type: gauge, reported on the partition leader.<br/>Labels: `physicalTenant`, `partition`. |
 
 ### Performance metrics
 
@@ -235,6 +274,15 @@ Monitor backpressure and processing latency of the commands using the following 
 ### Health metrics
 
 The health of partitions in a broker can be monitored using the metric `zeebe_health`.
+
+### Schema initialization metrics
+
+Use these metrics to monitor secondary-storage readiness and schema initialization:
+
+| Metric name                                       | Type  | Description                                                                       | Labels           |
+| ------------------------------------------------- | ----- | --------------------------------------------------------------------------------- | ---------------- |
+| `camunda.physical.tenant.secondary.storage.ready` | Gauge | Whether the Physical Tenant's secondary storage is ready (`1`) or degraded (`0`). | `physicalTenant` |
+| `camunda.schema.init.time`                        | Timer | Duration of secondary-storage schema initialization for the tenant.               | `physicalTenant` |
 
 ## Execution latency metrics
 
@@ -416,7 +464,7 @@ The following image shows an example of the Zeebe Grafana dashboard after import
 
 #### Physical Tenant filtering
 
-Partition-scoped Zeebe metrics include a `physicalTenant` label. Node-level metrics that are not partition-scoped do not carry this label. The Zeebe dashboard supports filtering and aggregating metrics by `physicalTenant` and `partition`, and exposes `physicalTenant` as a variable selector, so you can monitor throughput, latency, and resource usage for each Physical Tenant independently.
+Partition-scoped Zeebe metrics include a `physicalTenant` label. Most node-level metrics that are not partition-scoped do not carry this label. Per-tenant Hikari connection-pool metrics are an exception. The Zeebe dashboard supports filtering and aggregating metrics by `physicalTenant` and `partition`, and exposes `physicalTenant` as a variable selector, so you can monitor throughput, latency, and resource usage for each Physical Tenant independently.
 
 To compare across tenants in Prometheus queries, use the `physicalTenant` label directly. For example:
 
@@ -442,6 +490,60 @@ To use it:
 The dashboard provides insights into key data layer components for Camunda versions `>= 8.8`, with a focus on the Camunda exporter through which all data flows.
 
 ![Example panels](assets/example-panels-data-layer.png)
+
+## Troubleshoot metrics and dashboards
+
+### Grafana dashboard shows no data after import
+
+**Observed behavior:** The dashboard renders, but panels show "No data" or stay empty.
+
+**Why this happens:** The dashboard's panels aren't bound to a Prometheus data source, either because none was selected during import, or because the wrong one was selected when more than one is configured in Grafana.
+
+**How to fix:**
+
+1. Open the dashboard's settings and check the data source assigned under its variables and panels.
+2. If it's missing or wrong, re-import the dashboard and explicitly select your Prometheus data source when prompted.
+3. Confirm the data source itself can reach Prometheus by testing it from **Connections > Data sources** in Grafana.
+
+### Prometheus scraping endpoint returns no data, or the target shows as down
+
+**Observed behavior:** `/actuator/prometheus` returns an empty response or `404`, or Prometheus shows the Camunda target as down in its **Targets** page.
+
+**Why this happens:** The Prometheus endpoint is available when the default Prometheus export settings are in place. If those defaults were changed, `management.endpoint.prometheus.access` or `management.prometheus.metrics.export.enabled` can prevent the endpoint from exporting metrics. A mismatch between the scraping job's `scheme` and the management context's actual protocol (HTTP vs. HTTPS) also causes the target to show as down.
+
+**How to fix:**
+
+1. Confirm both properties above are set. See [Prometheus](#prometheus).
+2. Confirm the scraping job's `scheme` matches the management context's actual protocol, and its `targets` port matches the management port (default `9600`).
+3. Query the endpoint directly (`curl http://<host>:9600/actuator/prometheus`) to confirm it responds before checking Prometheus.
+
+### A metric you expect to see is missing
+
+**Observed behavior:** A documented metric name doesn't appear in Prometheus or Grafana, even though scraping otherwise works.
+
+**Why this happens:** One of three causes, in order of likelihood:
+
+- The metric is processing-related and only recorded when its triggering event occurs. For example, `zeebe_incident_events_total` only appears after an incident is created or resolved, see [available metrics](#available-metrics).
+- The metric was filtered out. Filtering matches by prefix, so a rule intended to filter `zeebe.foo` also filters `zeebe.foobar` and anything else starting with that prefix. See [filtering](#filtering).
+- The node role doesn't expose that metric. Brokers and gateways expose different metric sets, see the note under [available metrics](#available-metrics).
+
+**How to fix:** Trigger the underlying event and check again, then review your filter configuration for an overly broad prefix match, then confirm you're querying the node role that actually exposes that metric.
+
+### Physical Tenant filtering is missing from a panel
+
+**Observed behavior:** The `physicalTenant` variable or label isn't available on a specific Grafana panel, even though it works elsewhere in the same dashboard.
+
+**Why this happens:** See [Physical Tenant filtering](#physical-tenant-filtering) for which metrics and dashboards expose the `physicalTenant` label.
+
+**How to fix:** Confirm the panel's underlying metric is partition-scoped. If it is and still lacks the label, check the linked issue in [Physical Tenant filtering](#physical-tenant-filtering) for status before assuming a misconfiguration.
+
+### OTLP export fails or backend rejects the data
+
+**Observed behavior:** Metrics reach your OTLP endpoint's logs as errors, or don't appear in the target system at all.
+
+**Why this happens:** OTLP backends vary in what they require beyond a reachable `url`. Some need authentication headers (`otlp.metrics.export.headers`), and some don't support the default `cumulative` aggregation temporality and require `delta` instead (for example, Dynatrace). See [OpenTelemetry Protocol](#opentelemetry-protocol).
+
+**How to fix:** Check your target system's OTLP requirements for authentication headers and its required aggregation temporality, and set both explicitly rather than relying on Micrometer's defaults.
 
 ## Configure metrics
 

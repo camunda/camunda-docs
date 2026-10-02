@@ -79,7 +79,7 @@ The budgets, measured in **dollars (USD) spent**, differ depending on your SaaS 
 Budgets are topped up automatically and enforced at the organization level (not per user). This means multiple users in the same organization draw from the same budget.
 :::
 
-### What the budget cover
+### What the budget covers
 
 The Camunda-provided LLM budget covers LLM provider calls during AI agent execution:
 
@@ -105,7 +105,7 @@ If your process model doesn’t handle LLM failures, an exhausted budget may res
 
 ## Monitor usage
 
-The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Hub shows usage statistics for Camunda-provided LLM, including:
+The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Hub shows usage statistics for the Camunda-provided LLM, including:
 
 - How much of your budget has been used.
 - How much budget remains.

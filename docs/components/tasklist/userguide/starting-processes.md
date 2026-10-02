@@ -44,4 +44,4 @@ For all the above scenarios, contact your administrator to understand why no pro
 
 Public start forms were removed in Camunda 8.10 together with Tasklist V1.
 
-To start processes with forms in the current version, use authenticated Tasklist starts, or build your own public-facing application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+To start processes with forms in the current version, use authenticated Tasklist starts, or build your own public-facing application with [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).

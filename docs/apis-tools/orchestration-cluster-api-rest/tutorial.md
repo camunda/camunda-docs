@@ -33,8 +33,8 @@ To set up your credentials, create an `.env` file which will be protected by the
 
 - `CAMUNDA_CLIENT_ID`
 - `CAMUNDA_CLIENT_SECRET`
-- `CAMUNDA_REST_ADDRESS` (after creating a client and downloading the .env variables, this is reflected in the Console UI as `ZEEBE_REST_ADDRESS`)
-- `CAMUNDA_TOKEN_AUDIENCE` (represented as `ZEEBE_TOKEN_AUDIENCE` in the Console UI), which is `zeebe.camunda.io` in a Camunda 8 SaaS environment. For example, your audience may be defined as `CAMUNDA_TOKEN_AUDIENCE=zeebe.camunda.io`.
+- `CAMUNDA_REST_ADDRESS` (after creating a client and downloading the .env variables, this is reflected in the [Hub UI](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) as `ZEEBE_REST_ADDRESS`)
+- `CAMUNDA_TOKEN_AUDIENCE` (represented as `ZEEBE_TOKEN_AUDIENCE` in the [Hub UI](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client)), which is `zeebe.camunda.io` in a Camunda 8 SaaS environment. For example, your audience may be defined as `CAMUNDA_TOKEN_AUDIENCE=zeebe.camunda.io`.
 
 These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
 

@@ -10,10 +10,14 @@ Use two Helm releases to run two independent Optimize instances against one Camu
 The platform release runs the full Camunda deployment and the first Optimize instance. The second release runs only Optimize and connects to the platform topology's shared services.
 
 :::warning Temporary deployment pattern
-Use this pattern as a stopgap when separate Optimize dashboards, configuration, client credentials, or index lifecycles are required. Native Optimize multi-tenancy is the long-term solution and is expected to replace this pattern.
+Use this pattern as a stopgap when separate Optimize dashboards, configuration, client credentials, or index lifecycles are required over the **same** orchestration data. Native Optimize multi-tenancy is the long-term solution and is expected to replace this pattern.
 
 This pattern doesn't provide per-team authorization or process-data isolation. Both Optimize instances import the same orchestration data, and both use the `optimize-api` audience and `Optimize` role.
+
+If you need genuine data isolation per team, use [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) with one Optimize release per tenant instead. See [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md).
 :::
+
+Set `global.topology.mode: optimize` on the Optimize-only release rather than disabling each other component by hand. The role gates off every non-Optimize component and validates that the release has the storage, Identity URL, and context path an Optimize-only release needs. See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
 
 ## Understand the release boundaries
 
@@ -43,7 +47,7 @@ Before you install the releases, prepare the following:
 - An external Keycloak or supported OIDC provider and a Management Identity configuration. The reference files use the [external Keycloak setup](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
 - An `ingress-nginx` controller, one DNS host, and a TLS Secret for the host. The example relies on `ingress-nginx` merging paths from two Ingress objects with the same host and Ingress class.
 - A production values file for the full platform, including external PostgreSQL, datastore authentication and TLS, image pull credentials, and component resources. Follow the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
-- Existing Kubernetes Secrets for every credential referenced by the values files. Follow the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
+- Existing Kubernetes Secrets for every credential referenced by the values files. Follow the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended).
 
 The examples use Elasticsearch service `elasticsearch-master` and Keycloak service `keycloak` in the Camunda namespace. Use fully qualified service names when a dependency runs in another namespace.
 
