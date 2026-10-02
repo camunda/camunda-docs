@@ -38,7 +38,7 @@ Diagrams are often easier to review than prose. ProcessOS Harness provides diffe
 | -------------------------------- | ----------------------------------------------------------------------------------------------- |
 | Camunda Modeling tools           | View and edit BPMN files.                                                                       |
 | `/process-os-file-viewer [file]` | Comment BPMN files in a browser-based viewer.                                                   |
-| `/process-os-sme-review-package` | Bundles all BPMN files to hand to an SME. The bundle content can be opend locally in a browser. |
+| `/process-os-sme-review-package` | Bundles all BPMN files to hand to an SME. The bundle content can be opened locally in a browser. |
 
 Reviewers can add annotations, rename steps, and restructure flows directly in Camunda Modeler. ProcessOS Harness reconciles those hand edits when you run the feedback cycle for the phase.
 
