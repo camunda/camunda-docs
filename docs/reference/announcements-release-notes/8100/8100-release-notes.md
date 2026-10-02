@@ -772,17 +772,13 @@ Physical Tenants now support independent per-tenant authorization.
 
 <!-- https://github.com/camunda/product-hub/issues/3607 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
 The Orchestration Cluster and Optimize now authenticate through a shared implementation that replaces Optimize's separate identity stack. Both components accept the same `camunda.security.authentication.*` settings, so you configure authentication once, in one place. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
 Optimize continues to accept its existing authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
 
-Camunda Hub keeps its own authentication properties in 8.10 and requires no configuration change to upgrade. The one exception is the username claim, which you can also set directly with `camunda.security.authentication.oidc.username-claim`. See [Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md#configure-oidc-authentication) for details.
-
-User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
-
-<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+User, group, role, tenant, and permission management for Optimize is unchanged in this release, and is still handled by Management Identity.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 

@@ -799,13 +799,8 @@ New SaaS clusters include a default `business_` variable include filter that lim
 
 With Camunda 8.10, Optimize authenticates through a shared implementation based on the Orchestration Cluster's existing authentication, replacing its separate identity stack, and now accepts the same `camunda.security.authentication.*` settings.
 
-Camunda Hub keeps its own authentication properties in 8.10, not the `camunda.security.authentication.*` settings above (see [Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md#configure-oidc-authentication)). The one exception is the username claim, which you can also set directly with `camunda.security.authentication.oidc.username-claim`.
-
 - Optimize continues to accept its existing authentication settings in 8.10, translating the recognized properties to new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11.
-- Camunda Hub requires no configuration change to upgrade to 8.10.
-- User, group, role, tenant, and permission management for both components is unchanged in 8.10 and is still handled by Management Identity.
-
-<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+- User, group, role, tenant, and permission management for Optimize is unchanged in 8.10 and is still handled by Management Identity.
 
 :::note
 Nothing changes for the Orchestration Cluster as it already uses these settings since Camunda 8.9.
