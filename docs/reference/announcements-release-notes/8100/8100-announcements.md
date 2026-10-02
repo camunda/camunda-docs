@@ -711,6 +711,25 @@ The chart emits a deprecation warning naming the flag and the removal only when 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### `defaultRoles.<role>.mappingRules` Helm key deprecated {#default-roles-mapping-rules-helm-key-deprecated}
+
+Starting with Camunda 8.10 (chart 15.x), the Helm key `orchestration.security.initialization.defaultRoles.<role>.mappingRules` is deprecated. This applies to `admin`, `connectors`, and custom roles. The key still works in 8.10, and the chart logs a `[camunda][warning] DEPRECATION` message on `helm install` or `helm upgrade` when you set it. The key is planned for removal in a later major chart version.
+
+This key assigns mapping rule IDs to a role. It does not define the mapping rules. The definitions use `orchestration.security.initialization.mappingRules`, which is also deprecated.
+
+**Action:** Move the role assignment to `camunda.security.initialization.default-roles.<role>.mappingrules` in the orchestration `extraConfiguration`. Move it together with the mapping rule definitions. If you move only one of them, users that log in through these mapping rules lose the role.
+
+<p className="link-arrow">[Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-8100.md#deprecated-application-configuration-helm-keys)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
