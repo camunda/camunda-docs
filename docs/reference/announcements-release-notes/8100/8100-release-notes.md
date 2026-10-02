@@ -249,6 +249,69 @@ The new Camunda visual design system is introduced with this alpha for Self-Mana
 The new design system will be introduced for SaaS deployments with the 8.10 minor release.
 :::
 
+### Camunda Hub
+
+#### Modeling menu improvements
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3481, https://github.com/camunda/camunda-docs/pull/9764 -->
+
+When you create, append, or change an element, the menu groups insertion options into two tabs:
+
+- **BPMN**: Standard BPMN elements, organized by their usual categories.
+- **Reusable assets**: Assets, connectors, and templates from your project, along with existing project resources such as forms, called processes, decisions, and RPA scripts.
+
+<p class="link-arrow">[Find reusable assets in the modeling menus](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#find-reusable-assets-in-the-modeling-menus)</p>
+
+#### New organizational structure for workspaces and projects
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+A new organizational structure for workspaces and projects is introduced with this alpha.
+
+With this new file resource hierarchy:
+
+- Workspaces now **only** contain projects and IDP projects.
+- Files and folders are stored inside projects.
+- Previously, a workspace (called a project in Web Modeler) could contain process applications (now projects), folders, and files.
+
+The new **Workspace > Project > File/folder** hierarchy makes resources more discoverable and your workspaces more scalable.
+
+:::note
+Your SaaS Web Modeler data, now part of Camunda Hub, was updated during the 29 August 2026 maintenance window to support this new structure.
+:::
+
+#### Project versioning model
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+A new versioning model for workspaces, projects, and file resources is introduced with this alpha. Workspaces now only contain projects and IDP projects on the root level. Folders and files are stored inside projects.
+
+**Projects**: The new project versioning model uses snapshots to save the current state of all the project files, in a single action. This helps you track a project throughout its development lifecycle and ensures the correct state is referenced.
+
+**File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
+
+:::note
+This new versioning model will be introduced for Self-Managed deployments with the 8.10 minor release.
+:::
+
+#### Runtime connection in Camunda Hub
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3475 -->
+
+You can now view and choose which cluster you are connected to in Camunda Hub.
+
+- Connector-credential names from the cluster autocomplete in your FEEL expressions.
+- Task testing runs against the connected cluster.
+- Connect your cluster from the modeling toolbar to model against your real environment.
+
+:::note
+This is disabled by default and behind feature flag `runtimeConnectionEnabled` (cluster selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
+:::
+
 ### Connectors
 
 #### AWS Connectors updated to AWS SDK for Java v2
@@ -372,69 +435,6 @@ Microsoft Teams and Slack are independent. You can run either on its own, or bot
 This feature is released as an early access alpha feature.
 
 <p class="link-arrow">[Camunda for Slack](/components/camunda-integrations/app-integrations/slack.md)</p>
-
-### Modeler
-
-#### Modeling menu improvements
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3481, https://github.com/camunda/camunda-docs/pull/9764 -->
-
-When you create, append, or change an element, the menu groups insertion options into two tabs:
-
-- **BPMN**: Standard BPMN elements, organized by their usual categories.
-- **Reusable assets**: Assets, connectors, and templates from your project, along with existing project resources such as forms, called processes, decisions, and RPA scripts.
-
-<p class="link-arrow">[Find reusable assets in the modeling menus](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#find-reusable-assets-in-the-modeling-menus)</p>
-
-#### New organizational structure for workspaces and projects
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-A new organizational structure for workspaces and projects is introduced with this alpha.
-
-With this new file resource hierarchy:
-
-- Workspaces now **only** contain projects and IDP projects.
-- Files and folders are stored inside projects.
-- Previously, a workspace (called a project in Web Modeler) could contain process applications (now projects), folders, and files.
-
-The new **Workspace > Project > File/folder** hierarchy makes resources more discoverable and your workspaces more scalable.
-
-:::note
-Your SaaS Web Modeler data, now part of Camunda Hub, was updated during the 29 August 2026 maintenance window to support this new structure.
-:::
-
-#### Project versioning model
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-A new versioning model for workspaces, projects, and file resources is introduced with this alpha. Workspaces now only contain projects and IDP projects on the root level. Folders and files are stored inside projects.
-
-**Projects**: The new project versioning model uses snapshots to save the current state of all the project files, in a single action. This helps you track a project throughout its development lifecycle and ensures the correct state is referenced.
-
-**File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
-
-:::note
-This new versioning model will be introduced for Self-Managed deployments with the 8.10 minor release.
-:::
-
-#### Runtime connection in Camunda Hub
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3475 -->
-
-You can now view and choose which cluster you are connected to in Camunda Hub.
-
-- Connector-credential names from the cluster autocomplete in your FEEL expressions.
-- Task testing runs against the connected cluster.
-- Connect your cluster from the modeling toolbar to model against your real environment.
-
-:::note
-This is disabled by default and behind feature flag `runtimeConnectionEnabled` (cluster selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
-:::
 
 ### Optimize
 
@@ -624,6 +624,39 @@ Filtered records are permanently excluded from Optimize and cannot be recovered 
 
 <p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
+#### BPMN element menu improvements
+
+<!-- https://github.com/camunda/product-hub/issues/3480 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+The create, append, and change menus now group BPMN elements by category, such as tasks, gateways, events, and so on. Each category includes a short description so you can quickly find the right element.
+
+- Search still searches across all categories.
+- When appending, elements that continue a flow subtly indicate where the flow continues next. Select this to open the append pad with a prominent **Append** action.
+
+<p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
+
+#### Define operations in your own element templates
+
+<!-- https://github.com/camunda/product-hub/issues/3403 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Element templates support the `steps` and `presets` keys to offer several predefined configurations within a single template. Use `steps` to define the menu users navigate when they apply the template, and `presets` to define the property values each operation applies. Operation names, descriptions, and keywords are matched by search, so your operations are as discoverable as the templates themselves.
+
+<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
+
+#### Hide the Add members button
+
+<!-- https://github.com/camunda/camunda-hub/issues/25824 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+In Self-Managed, you can now hide the **Add members** button on the workspace **Members** page, preventing non-organization admins from adding members via the UI. They can still add members via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
+
+<p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-add-members-button)</p>
+
 ### Connectors
 
 #### Find a connector by the operation you want to perform
@@ -659,41 +692,6 @@ The **App Integrations connector** now receives messages as well as sending them
 Receiving needs no connector task and no job worker. Element templates for a chat start event, an intermediate catch event, a receive task, and a boundary event set up the correlation, so a start event and a catch event are enough for a working conversation loop. A **Chat key** on the start event decides which chats it answers: configure a Microsoft Teams channel or chat in the Camunda app's **Settings** tab, or a Slack channel or direct message with `/camunda chat`, and give the process the same key. A reply always reaches the cluster whose process asked the question. In a personal chat or direct message every message reaches the process; in a channel on either platform, @mention the Camunda app.
 
 <p class="link-arrow">[Receive a chat message](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message)</p>
-
-### Modeler
-
-#### BPMN element menu improvements
-
-<!-- https://github.com/camunda/product-hub/issues/3480 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
-
-The create, append, and change menus now group BPMN elements by category, such as tasks, gateways, events, and so on. Each category includes a short description so you can quickly find the right element.
-
-- Search still searches across all categories.
-- When appending, elements that continue a flow subtly indicate where the flow continues next. Select this to open the append pad with a prominent **Append** action.
-
-<p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
-
-#### Define operations in your own element templates
-
-<!-- https://github.com/camunda/product-hub/issues/3403 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
-
-Element templates support the `steps` and `presets` keys to offer several predefined configurations within a single template. Use `steps` to define the menu users navigate when they apply the template, and `presets` to define the property values each operation applies. Operation names, descriptions, and keywords are matched by search, so your operations are as discoverable as the templates themselves.
-
-<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
-
-#### Hide the Add members button
-
-<!-- https://github.com/camunda/camunda-hub/issues/25824 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-In Self-Managed, you can now hide the **Add members** button on the workspace **Members** page, preventing non-organization admins from adding members via the UI. They can still add members via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
-
-<p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-add-members-button)</p>
 
 ### Operate
 
@@ -935,8 +933,6 @@ Learn more:
 - [Restore scenarios](/components/saas/restore-scenarios.md)
 - [Restore troubleshooting](/components/saas/restore-troubleshooting.md)
 
-### Modeler
-
 #### Safe deletion with a 30-day recovery window
 
 <!-- https://github.com/camunda/product-hub/issues/3568 -->
@@ -961,6 +957,18 @@ When testing your process with Play in Camunda Hub, you can now capture and reru
 
 <p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
 
+#### Start a process instance with a business ID
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
+### Desktop Modeler
+
 #### Variables panel improvements
 
 <!-- https://github.com/camunda/camunda-modeler/issues/5934, https://github.com/camunda/camunda-modeler/issues/5938 -->
@@ -972,16 +980,6 @@ When you hover over "written in X elements" or an element ID in the variables pa
 FEEL expressions in the variable outline now use the same syntax highlighting as the FEEL editor, with more granular tokens that distinguish function names from arguments and operators from literals, making complex expressions easier to read.
 
 <p class="link-arrow">[Inspect variables](/components/modeler/data-handling.md#inspecting-variables)</p>
-
-#### Start a process instance with a business ID
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
-
-You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
-
-<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
 
 ### Operate
 
@@ -1284,7 +1282,7 @@ The Zeebe Process Test library is removed and replaced by [Camunda Process Test]
 
 <p class="link-arrow">[Migrate to Camunda Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
 
-### Modeler
+### Desktop Modeler
 
 #### Support for start forms in Desktop Modeler
 
@@ -1425,18 +1423,6 @@ You can now create new SaaS Orchestration Clusters on specific supported Camunda
 - The latest recommended versions (latest patch of each active minor)
 - Other still-supported versions that you already run on existing clusters in the same organization.
 
-### Intelligent document processing (IDP)
-
-#### Support for ABBYY as an IDP Provider
-
-<!-- https://github.com/camunda/product-hub/issues/3492 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
-
-Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
-
-### Modeler
-
 #### Support for configurable headers for execution listeners
 
 <!-- https://github.com/camunda/product-hub/issues/3450 -->
@@ -1448,6 +1434,16 @@ Execution listeners now support configurable headers, aligned with service task 
 - In BPMN, execution listeners can define `<zeebe:taskHeaders>`. The headers are passed to the listener’s job worker alongside any base-element headers, with listener headers overriding on key conflicts.
 - In Modeler, you can configure execution listener headers visually (name/value pairs) without editing BPMN XML.
 - Listener workers can consume these headers as metadata and configuration parameters using the same patterns as service task job workers.
+
+### Intelligent document processing (IDP)
+
+#### Support for ABBYY as an IDP Provider
+
+<!-- https://github.com/camunda/product-hub/issues/3492 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
+
+Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
 
 ### Integrations
 
