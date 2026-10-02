@@ -10,7 +10,6 @@ import "./react-components/\_apitools-card.css";
 import HeroImg from './img/hero-apis.png';
 import ApiGrid from './react-components/\_apitools-card';
 import { apiCards, clientCards } from './react-components/\_apitools-card-data';
-import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Camunda 8 APIs and official clients and SDKs.</h3>
 
@@ -69,5 +68,3 @@ Use Camunda Process Test to test your process definitions and automations with a
 If you are migrating from Camunda 7 or from v1 component REST APIs, see the migration guide for guidance.
 
 <p class="link-arrow">[Camunda 8.9 APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md)</p>
-
-<AskAi/>

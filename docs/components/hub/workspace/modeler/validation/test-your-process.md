@@ -57,7 +57,7 @@ Click **Connect cluster**, and select a target cluster. Once the cluster is heal
 ### 2. Choose resources to deploy
 
 - **All resources**: Deploys the whole project, including dependencies like called processes or DMN files.
-- **Only this resource**: Deploys only the open file. 
+- **Only this resource**: Deploys only the open file.
 
 When testing a snapshot version, **Only this resource** is not allowed.
 
@@ -375,7 +375,7 @@ Additionally, within their organization, users need to have a [role](/components
 
 <!-- NEEDS VERIFICATION -->
 
-In Self-Managed, Test mode is controlled by the `camunda.modeler.feature.test-mode-enabled` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Camunda Hub. This is `true` by default for the Docker and Kubernetes distributions.
+In Self-Managed, Test mode is controlled by the `camunda.hub.feature.test-mode-enabled` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Camunda Hub. This is `true` by default for the Docker and Kubernetes distributions.
 
 Prior to the 8.10 release, Test mode can be accessed by installing the 8.10.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/blob/camunda-platform-10.4.0/charts/camunda-platform-alpha), or running the 8.10.0-alpha [Docker Compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) configuration.
 

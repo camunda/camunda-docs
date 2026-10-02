@@ -50,7 +50,7 @@ Camunda SaaS retains backups as count-based retention:
 ## Limitations and constraints
 
 - Cross-cluster restore is not supported in this release.
-- Cross-region restore is not supported in this release.
+- Cross-region in-place restore isn't supported. To recover a cluster in another region, see [cross-region cold recovery](./cross-region-cold-recovery.md).
 - Cross-organization restore is not supported in this release.
 - Replication factor and node count differences are not blocking constraints for restore.
 - Backups created before the restore feature was introduced are not eligible for restore.

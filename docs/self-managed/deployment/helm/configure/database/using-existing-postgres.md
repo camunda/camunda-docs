@@ -5,6 +5,8 @@ sidebar_label: External PostgreSQL
 description: "Learn how to use an external PostgresQL instance in Camunda 8 Self-Managed deployment."
 ---
 
+import ExpandableTable from "@site/src/components/ExpandableTable";
+
 The Camunda Helm chart requires externally managed PostgreSQL for Camunda Hub and Management Identity. This guide steps through connecting these components to an external PostgreSQL instance. Provide PostgreSQL through a managed service or a Kubernetes operator, such as the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 This page applies to Management Identity and Camunda Hub. Configure the database for an external Keycloak deployment separately. It does not apply to the Orchestration Cluster or Optimize.
@@ -15,10 +17,10 @@ This page applies to Management Identity and Camunda Hub. Configure the database
 - **Connection details:** following sample values are used in this guide (replace them with your own):
 
 ```yaml
-host: `db.example.com`
-port: `5432`
-username: `postgres`
-password: `examplePassword`
+host: db.example.com
+port: 5432
+username: postgres
+password: examplePassword
 ```
 
 - **Supported versions:**: Check the [supported environments](/reference/supported-environments.md) and [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) pages to confirm which PostgreSQL versions are supported.
@@ -29,7 +31,7 @@ CREATE DATABASE "web-modeler";
 CREATE DATABASE "management-identity";
 ```
 
-- **Kubernetes secrests:** Store the database password in a Kubernetes secret so it is not referenced in plain text within your values.yaml (This secret exists outside the Helm chart and will not be overwritten by subsequent helm upgrade commands). For example:
+- **Kubernetes secrets:** Store the database password in a Kubernetes secret so it is not referenced in plain text within your values.yaml (This secret exists outside the Helm chart and will not be overwritten by subsequent helm upgrade commands). For example:
 
 ```bash
 kubectl create secret generic camunda-psql-db --from-literal=password=examplePassword -n camunda
@@ -40,6 +42,8 @@ kubectl create secret generic camunda-psql-db --from-literal=password=examplePas
 Management Identity and Camunda Hub require PostgreSQL. Configure each component to connect to the external PostgreSQL instance. Keycloak's database is configured where Keycloak is deployed (operator or external), not through the Helm chart.
 
 ### Parameters
+
+<ExpandableTable title="External database parameters">
 
 | values.yaml option                                             | type    | default | description                                                              |
 | -------------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------ |
@@ -55,6 +59,8 @@ Management Identity and Camunda Hub require PostgreSQL. Configure each component
 | `identity.externalDatabase.secret.existingSecret`              | string  | `""`    | Kubernetes Secret name containing database password                      |
 | `identity.externalDatabase.secret.existingSecretKey`           | string  | `""`    | Key within the Kubernetes Secret that contains the database password     |
 | `identity.externalDatabase.database`                           | string  | `""`    | Database name                                                            |
+
+</ExpandableTable>
 
 ### Example usage
 
