@@ -55,6 +55,16 @@ The custom or compatible endpoint backends for both the Anthropic and OpenAI pro
 
 <p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#anthropic)</p>
 
+#### AI Agent connector: Mistral AI provider
+
+<!-- https://github.com/camunda/connectors/issues/8052 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+Your AI agents can now use Mistral models through the new native **Mistral AI** provider of the AI Agent element templates. Connect to the Mistral API with an API key, or to a custom Mistral-compatible endpoint with no authentication, an API key, or OAuth 2.0 client credentials. The provider supports tool calling, structured output, PDF and image input, and reasoning models.
+
+<p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#mistral-ai)</p>
+
 #### Readable model reasoning in Operate
 
 <!-- https://github.com/camunda/product-hub/issues/3462
