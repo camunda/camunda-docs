@@ -16,7 +16,7 @@ This page describes how a [Multi-Region RDBMS](./multi-region-rdbms.md) cluster 
 
 <RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas and the database writer. Paris, with two replicas and the standby, and zurich, with one replica and no database, keep three of five replicas, so the quorum holds." />
 
-Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. **You need no operator step to resume processing.** Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
+Losing one region out of three or more removes that region's replicas of every partition. Under the default `2-2-1` layout, that is one or two replicas. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. **Processing resumes without any operator step.** Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
 
 :::warning Two things still need attention
 
@@ -85,5 +85,7 @@ Whether the lost zone has to be removed depends on the replicas it held, not on 
 <RemoveZoneImg role="img" title="Two layouts lose their first zone. In 2-2-1, losing london leaves 3 of 5 replicas: the majority holds and removing the zone is optional. In 4-1-1, losing zone A leaves 2 of 6 replicas: there is no majority, and processing resumes only after you remove the zone. In both cases, remove the zone once you confirm it is down. You must add a removed zone back, and its brokers rebuild." />
 
 An evenly split two-zone cluster always loses its quorum with a zone. That is the [Dual-Region](./dual-region.md) situation, not a normal layout of this architecture. An uneven two-zone layout keeps its quorum only when it loses the smaller zone.
+
+If the zone does not come back quickly, remove it and then raise the replicas of the remaining zones. For example, losing a two-replica zone of a `2-2-1` layout leaves `2-1`. Raise the remaining one-replica zone to two, to get `2-2`, through the [Partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api). Losing the one-replica zone leaves `2-2`, so the remaining zones need no change.
 
 The recommended practice is to remove a lost zone once you confirm it is down. The trade-off is failback cost: a removed zone has to be added back explicitly, and its brokers rebuild from nothing. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-remove-the-lost-zone) has the command.
