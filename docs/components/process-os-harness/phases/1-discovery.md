@@ -42,7 +42,7 @@ The GitHub specialist searches issues, pull requests, and commit history. This s
 ## WIP - Discovery actions
 
 - Define process scope
-- Define high level phases
+- Define high-level phases
 - Define detailed processes
 - System diagrams??? - map the external systems and manual artifacts the process integrates with, using `/process-os-system-context`
 

@@ -6,12 +6,12 @@ description: "Review cycles bring subject matter experts into each ProcessOS Har
 keywords: ["ProcessOS Harness", "review cycle", "SME", "sign-off"]
 ---
 
-A review cycle is how ProcessOS Harness keeps a human in the loop. In each cycle, SMEs answer open questions and review generated artifacts. The cycle repeats until the sign off on the result.
+A review cycle is how ProcessOS Harness keeps a human in the loop. In each cycle, SMEs answer open questions and review generated artifacts. The cycle repeats until they sign off on the result.
 
 ## How a cycle runs
 
 1. ProcessOS Harness generates artifacts and collects the questions it can't answer itself from the sources it has.
-1. SMEs [answer review question](#answer-review-questions) and comment on the generated artifacts.
+1. SMEs [answer review questions](#answer-review-questions) and comment on the generated artifacts.
 1. You [feed the answers back](#feed-answers-back) into the project, and ProcessOS Harness regenerates the affected results.
 1. You either request another cycle or sign off.
 
@@ -34,17 +34,17 @@ You can also modify the review cycles to your needs by adjusting the `Review XX 
 
 Diagrams are often easier to review than prose. ProcessOS Harness provides different tooling for reviews:
 
-| Command                          | What it does                                                                                    |
-| -------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Camunda Modeling tools           | View and edit BPMN files.                                                                       |
-| `/process-os-file-viewer [file]` | Comment BPMN files in a browser-based viewer.                                                   |
+| Command                          | What it does                                                                                     |
+| -------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Camunda Modeling tools           | View and edit BPMN files.                                                                        |
+| `/process-os-file-viewer [file]` | Comment BPMN files in a browser-based viewer.                                                    |
 | `/process-os-sme-review-package` | Bundles all BPMN files to hand to an SME. The bundle content can be opened locally in a browser. |
 
 Reviewers can add annotations, rename steps, and restructure flows directly in Camunda Modeler. ProcessOS Harness reconciles those hand edits when you run the feedback cycle for the phase.
 
 ### Feed answers back
 
-Each phase has per default a feedback mode that collects reviewer input, reconciles it with the generated artifacts, and regenerates what changed.
+Each phase has a default feedback mode that collects reviewer input, reconciles it with the generated artifacts, and regenerates what changed.
 
 Collected feedback lands in the iteration's `feedback` folder, described in [manage files during the review cycle](#manage-files-during-the-review-cycle).
 
