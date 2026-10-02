@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "main"
-      - "dx/publish-to-new-server"
     tags-ignore:
       - "*"
 
