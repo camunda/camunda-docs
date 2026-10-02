@@ -263,7 +263,9 @@ Authentication fields per method:
 | **top P**                                                                        | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                                                                                                                                                                                 |
 | **Timeout**                                                                      | No       | Maximum time to wait for a model API call. See [model call timeout](#model-call-timeout).                                                                                                                                                                                                                                                                                         |
 
-OpenAI doesn't support a **top K** parameter. Prompt caching is automatic when the request meets OpenAI's caching requirements and isn't user-configurable.
+OpenAI doesn't support a **top K** parameter.
+
+Prompt caching is automatic when the request meets OpenAI's caching requirements and isn't user-configurable.
 
 ### Google Gemini
 
