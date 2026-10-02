@@ -3,7 +3,13 @@ id: overview
 title: ProcessOS
 sidebar_label: Overview
 description: "ProcessOS discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions. ProcessOS Harness, available as early access, is the governance process that drives AI coding agents to do this work."
-keywords: ["ProcessOS", "ProcessOS Harness", "Camunda Solution Harness", "re-engineering"]
+keywords:
+  [
+    "ProcessOS",
+    "ProcessOS Harness",
+    "Camunda Solution Harness",
+    "re-engineering",
+  ]
 ---
 
 ProcessOS is an AI-powered intelligence layer on top of Camunda's agentic orchestration platform. It discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
