@@ -3,7 +3,7 @@ id: opensearch-privileges
 title: "OpenSearch privileges"
 ---
 
-If you implement Camunda 8 with OpenSearch as a service provider, you must configure OpenSearch with the following [permissions](https://opensearch.org/docs/latest/security/access-control/permissions/) and [default action groups](https://opensearch.org/docs/latest/security/access-control/default-action-groups/) in mind:
+If you implement Camunda 8 with OpenSearch as a service provider, configure OpenSearch with the following [permissions](https://opensearch.org/docs/latest/security/access-control/permissions/) and [default action groups](https://opensearch.org/docs/latest/security/access-control/default-action-groups/). This list is validated against OpenSearch 2.19 and 3.4, and against current Camunda OpenSearch API usage.
 
 Action groups are a set of permissions. Permissions have the `cluster|indices` prefix; all others are action groups.
 
@@ -13,14 +13,10 @@ Action groups are a set of permissions. Permissions have the `cluster|indices` p
 - `cluster:admin/reindex/rethrottle` - Necessary to archive and migrate indices.
 - `cluster_manage_pipelines` - Necessary to migrate indices.
 - `manage_snapshots` - Necessary to take backups.
-- `indices:admin/index_template/put` - Necessary to create and manage index schema on start up and migration.
-- `indices:admin/index_template/get` - Necessary to create and manage index schema on start up and migration.
-- `indices:admin/index_template/delete` - Necessary to create and manage index schema on start up and migration.
+- `cluster_manage_index_templates` - Necessary to manage index templates, including `indices:admin/template/*`, `indices:admin/index_template/*`, and `cluster:admin/component_template/*`.
 - `indices:data/write/reindex` - Necessary to reindex during archiving. Required to move data from runtime indices to dated indices.
 - `indices:data/read/scroll` - Necessary to scroll through data when reading large result sets.
 - `indices:data/read/scroll/clear` - Necessary to search with paging.
-- `cluster_manage_templates` - Necessary to create and manage index schema on start up.
-- `cluster_manage_index_templates` - Necessary to create and manage index schema on start up.
 
 ## Indices
 
@@ -30,6 +26,7 @@ Action groups are a set of permissions. Permissions have the `cluster|indices` p
 - `create_index` - Necessary to create index schema and archive.
 - `search` - Necessary to query.
 - `manage` - Necessary to create index schema, archive, and migrate.
+- `indices:data/write/bulk` - Necessary for bulk indexing operations.
 
 ## Index state management
 
