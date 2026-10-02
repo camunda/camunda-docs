@@ -972,7 +972,7 @@ If a primary region fails, you can now recover your SaaS Orchestration Cluster i
 - Cold recovery is available for AWS and GCP clusters in region pairs marked **Failover supported**, including AWS clusters that use Bring Your Own Key (BYOK).
 - Use only the recovered cluster after failover. Don't run the original cluster at the same time, to avoid conflicting writes.
 
-Your backup interval determines the data you can lose, because the recovered cluster restores your last available backup.
+The data you can lose depends on the backup you select and your backup interval, because the recovered cluster contains only the data up to that backup.
 
 <p class="link-arrow">[Cross-region cold recovery](/components/saas/cross-region-cold-recovery.md)</p>
 
