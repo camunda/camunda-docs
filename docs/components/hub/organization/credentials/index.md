@@ -206,7 +206,7 @@ Hub writes a credential to a cluster with your own identity when it deploys, red
 
 - If a cluster refuses a deployment, Hub reports that environment as failed with the message `Not authorized to perform this operation on this cluster.`
 - If a cluster refuses to remove a credential because you lack permission or its credentials are wrong, Hub keeps the credential, so you can resolve the problem and delete it again.
-- On a Self-Managed cluster that uses basic authentication, Hub asks you for the cluster's username and password.
+- On a Self-Managed cluster that uses Basic authentication, Hub asks you for the cluster's username and password.
 
 When you choose environments for a credential or for a scan, Hub lists only the environments you can see. Members with the **Organization Owner**, **Organization Admin**, or **DevOps** role see every environment. On Self-Managed, so does any role with the `admin:*` or `admin:clusters` permission. Other members see only the environments assigned to workspaces where they are a **Workspace Admin** or **Editor**. The credential list and detail page still show every credential and all of its targets, and a target in an environment you cannot see is shown by its ID.
 
