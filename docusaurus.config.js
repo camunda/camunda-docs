@@ -31,6 +31,8 @@ module.exports = {
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
+  // Omitting this falls back to Docusaurus' "warn" default. See https://github.com/camunda/camunda-docs/issues/3433
+  onBrokenAnchors: "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
   projectName: "camunda-docs", // Usually your repo name.
