@@ -8,6 +8,40 @@ description: The Kafka Producer connector allows you to connect your BPMN servic
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+## Reuse a Kafka connection
+
+Use a **Kafka Connection** credential to share broker and authentication settings between Kafka Producer and Kafka Consumer connectors.
+
+Reusable credentials require Camunda 8.10 or later and a Kafka element template with the optional **Connection credential** chooser in the **Connection** section. Select the same credential on producer tasks and consumer events, or leave **Connection credential** empty to keep configuring brokers and authentication inline in the **Connection** section.
+
+A Kafka Connection credential stores these required fields:
+
+| Field              | Description                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| `bootstrapServers` | Bootstrap server addresses, separated by commas when you use more than one server. |
+| `username`         | Kafka username. For a secret reference, use `camunda.secrets.MY_KAFKA_USERNAME`.   |
+| `password`         | Kafka password. For a secret reference, use `camunda.secrets.MY_KAFKA_PASSWORD`.   |
+
+Create referenced secrets before using the credential. Inside a credential, use `camunda.secrets.NAME`, not the legacy `{{secrets.NAME}}` syntax. Legacy secret references remain supported in inline connector fields.
+
+Selecting a credential binds the whole object to `kafkaConnectionConfiguration` using `=camunda.vars.env.<name>`, where `<name>` is the credential's cluster variable name. The credential supplies authentication using `SASL_SSL` with the `PLAIN` mechanism. Keep custom authentication configured inline.
+
+The selected credential replaces inline broker and authentication settings. An invalid credential fails execution or consumer activation; the connector doesn't fall back to inline values. Topic, consumer group, offsets, schema settings, and message configuration remain local to each task or event.
+
+:::warning
+**Additional properties** still overrides the final connection and security properties, including `bootstrap.servers`. Selecting a credential does not restrict the destination or prevent these overrides.
+:::
+
+### Test a Kafka connection
+
+**Test connection** performs a read-only Kafka metadata probe to check connectivity and authentication, using the connector runtime's trust configuration. It uses bounded timeouts and reports a failure if the connection cannot be established.
+
+The result applies only to the stored credential, not to **Additional properties** overrides configured on a task or event.
+
+The test does not publish or consume messages, join a consumer group, or change offsets. Success does not verify topic, consumer group, publishing, or consumption permissions.
+
+Updating a credential follows the existing consumer activation and reload lifecycle. Don't rely on credential edits automatically rotating the connection of an already-running consumer.
+
 <Tabs groupId="kafka" defaultValue="outbound" queryString values={
 [
 {label: 'Kafka Producer connector', value: 'outbound' },
@@ -36,9 +70,12 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 To make your **Kafka Producer connector** for publishing messages executable, complete the following sections.
 
-### Authentication
+### Connection
 
-(Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`.
+In the **Connection** section, select a **Connection credential** or configure the connection inline:
+
+1. Set **Bootstrap servers** to the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
+2. (Optional) Set **Username** and **Password**. For example, `{{secrets.MY_KAFKA_USERNAME}}`.
 
 ### Schema
 
@@ -47,10 +84,9 @@ In the **Kafka** section:
 1. Select the schema strategy for your messages.
    - Select **No schema**, **Inline schema** for Avro serialization.
    - Select **Schema registry** if you have a Confluent Schema Registry.
-2. Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
-3. Set the topic name.
-4. (Optional) Set producer configuration values in the **Headers** field. Only `UTF-8` strings are supported as header values.
-5. (Optional) Set producer configuration values in the **Additional properties** field.
+2. Set the topic name.
+3. (Optional) Set producer configuration values in the **Headers** field. Only `UTF-8` strings are supported as header values.
+4. (Optional) Set producer configuration values in the **Additional properties** field.
 
 :::info
 
@@ -235,7 +271,7 @@ If any of the fields are not populated, you must configure your security method 
 
 Properties loading consists of three steps:
 
-1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties.
+1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties. If selected, the **Connection credential** supplies authentication and bootstrap servers instead of the inline fields.
 2. Load miscellaneous properties.
 3. Load and **override** properties from the field **Additional properties**.
 
@@ -276,9 +312,12 @@ Use secrets to avoid exposing your sensitive data as plain text. To learn more, 
 
 To make your **Kafka Consumer connector** executable, fill in the required properties.
 
-### Authentication
+### Connection
 
-In the **Authentication** section, select the **Authentication type**. If you selected **Credentials** as the **Authentication type**, set the username and password.
+In the **Connection** section, select a **Connection credential** or configure the connection inline:
+
+1. Set **Bootstrap servers** to the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
+2. Select the **Authentication type**. If you selected **Credentials**, set **Username** and **Password**.
 
 :::note
 
@@ -295,7 +334,6 @@ In the **Kafka** section, you can configure the following properties:
 - **Schema strategy**: Select the schema strategy for your messages.
   - Select **No schema**, **Inline schema** for Avro serialization.
   - Select **Schema registry** If you have a Confluent Schema Registry.
-- **Bootstrap servers**: Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
 - **Topic**: Set the topic name.
 - **Additional properties**: Set consumer configuration values.
 - **Offsets**: Set the offsets for the partition. The number of offsets specified should match the number of partitions on the current topic.
@@ -547,7 +585,7 @@ The `group.id` value above is auto-generated when no explicit **Consumer Group I
 
 Properties loading consists of three steps:
 
-1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties.
+1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties. If selected, the **Connection credential** supplies authentication and bootstrap servers instead of the inline fields.
 2. Load miscellaneous properties.
 3. Load and **override** properties from the field **Additional properties**.
 
