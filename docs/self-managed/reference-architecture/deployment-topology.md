@@ -7,7 +7,7 @@ description: "Camunda 8.10 Self-Managed is deployed as a Hub plane and one or mo
 
 Camunda 8.10 Self-Managed is deployed as a Hub plane and one or more execution planes, each installed as its own Helm release.
 
-A single Helm chart still produces every component. What changed in 8.10 is that you choose the _role_ each release plays in the wider deployment, using `global.topology.mode`. One management release running Camunda Hub can serve many independently deployed Orchestration Clusters, and each cluster can host several [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), each with its own Optimize release.
+A single Helm chart still produces every component. What changed in 8.10 is that you choose the _role_ each release plays in the wider deployment, using `global.topology.mode`. One Hub release running Camunda Hub can serve many independently deployed Orchestration Clusters, and each cluster can host several [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), each with its own Optimize release.
 
 For the mechanics of installing this topology, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
@@ -15,8 +15,9 @@ For the mechanics of installing this topology, see [install the deployment topol
 
 `global.topology.mode` selects what a release deploys and what it must be told about the rest of the deployment.
 
-:::caution Minimum chart versions
-The deployment topology needs these minimum Helm chart versions:
+### Minimum chart versions
+
+This table is the reference for the minimum Helm chart version of each release role. Other pages link here.
 
 | Camunda version | Chart line | Minimum chart version | Adds                                                                    |
 | :-------------- | :--------- | :-------------------- | :---------------------------------------------------------------------- |
@@ -25,21 +26,27 @@ The deployment topology needs these minimum Helm chart versions:
 | 8.8             | 13.x       | 13.14.0               | The `orchestration` role                                                |
 | 8.7             | 12.x       | 12.14.0               | The `orchestration` role, with `architecture: legacy` in the Hub record |
 
-Older 8.7, 8.8, and 8.9 charts have no `global.topology` key. They silently ignore `global.topology.mode` and deploy a combined release, so check the chart version before you set the role.
-:::
+Older 8.7, 8.8, and 8.9 charts have no `global.topology` key. They ignore `global.topology.mode` and deploy a combined release. Verify the chart version before you set the role.
+
+### Role requirements
 
 | Role            | Chart versions                                                 | Deploys                                                                                                                                                                                                                               | Key requirements                                                                                                                                                                                                                                                                                                  |
 | --------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `hub`           | 8.10 (15.0.0+)                                                 | Camunda Hub and Management Identity                                                                                                                                                                                                   | `identity.enabled: true`, OIDC authentication, and it's the only release that declares `global.topology.clusters`                                                                                                                                                                                                 |
 | `orchestration` | 8.10 (15.0.0+), 8.9 (14.11.0+), 8.8 (13.14.0+), 8.7 (12.14.0+) | 8.10 and 8.9: one Orchestration Cluster and Connectors. 8.8: the same, plus the chart's default bundled Elasticsearch. 8.7: Zeebe, Zeebe Gateway, Operate, Tasklist, Optimize, and Connectors, plus the default bundled Elasticsearch | `global.identity.auth.enabled: true`, `identity.enabled: false`, a reachable `global.identity.service.url`, and the workload enabled. Requirements differ by chart version, see [per-version requirements](/self-managed/deployment/helm/install/topology/orchestration-release.md#requirements-by-chart-version) |
 | `optimize`      | 8.10 (15.0.0+)                                                 | Optimize only                                                                                                                                                                                                                         | `optimize.enabled: true`, `global.noSecondaryStorage: false`, an enabled Elasticsearch or OpenSearch backend with a non-empty host, an OIDC issuer, a reachable Management Identity URL, and `optimize.contextPath` when the chart renders this release's routing                                                 |
-| `combined`      | All; the implicit behavior of charts without `global.topology` | Every enabled component in one release                                                                                                                                                                                                | None beyond normal component configuration. This is the default                                                                                                                                                                                                                                                   |
+| `combined`      | All. This is the behavior of charts without `global.topology`  | Every enabled component in one release                                                                                                                                                                                                | None beyond normal component configuration. This is the default                                                                                                                                                                                                                                                   |
 
 Camunda Hub and its cluster inventory exist only in the 8.10 chart, so `hub` and `optimize` are 8.10-only roles. The 8.7, 8.8, and 8.9 charts support `combined` and `orchestration` only, from the minimum versions above. Earlier versions of those charts have no `global.topology` key: they always behave as `combined`, and setting `orchestration` on them has no effect and produces no error.
 
 A chart 8.7 orchestration release still runs Optimize in-release, so it doesn't follow the one-Optimize-release-per-tenant model.
 
-The chart validates these requirements at render time and fails with a `[camunda][error]` message naming the missing value, so a misconfigured topology doesn't reach the cluster.
+The chart validates some of these requirements at render time. It fails with a `[camunda][error]` message that names the missing value. It doesn't validate all of them:
+
+- For a `hub` release, the chart enforces `identity.enabled: true` and OIDC authentication. It doesn't check that `global.topology.clusters` is set. Without clusters, Camunda Hub lists no Orchestration Clusters.
+- For an `orchestration` release, the chart enforces `global.identity.auth.enabled: true`, `identity.enabled: false`, and the enabled workload. The 8.7, 8.8, and 8.9 charts also enforce a non-empty `global.identity.service.url`. The 8.10 chart doesn't.
+
+Requirements that the chart doesn't enforce are still requirements. Review them before you install.
 
 ## How the planes fit together
 
@@ -61,7 +68,7 @@ graph TD
     OCB --> OptB1
 ```
 
-Optimize is one-to-one with a Physical Tenant because it reads exported records from a single index prefix. A tenant without its own Optimize release has no analytics; an Optimize release pointed at two tenants reads only one of them.
+Optimize is one-to-one with a Physical Tenant because it reads exported records from a single index prefix. A tenant without its own Optimize release has no analytics. An Optimize release that points to two tenants reads only one of them.
 
 The default Physical Tenant counts. Every Orchestration Cluster has one, created at provisioning time, and it needs its own Optimize release like any other tenant.
 

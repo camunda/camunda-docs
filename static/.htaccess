@@ -209,6 +209,9 @@ RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/elasticsea
 
 # The multi-namespace configure page became the deployment topology install section (8.10).
 # Its content is now split by release role under install/topology/.
+# TODO(8.10 release): add the unversioned rule for /docs/self-managed/deployment/helm/configure/multi-namespace/ when 8.10 becomes the default version.
+# Old anchors can't be redirected server-side. The landing page keeps them as anchor targets
+# in its "Content from the multi-namespace page" section.
 RewriteRule ^docs/next/self-managed/deployment/helm/configure/multi-namespace/?$ /docs/next/self-managed/deployment/helm/install/topology/ [R=301,L]
 
 # configure-multi-tenancy renamed to configure-logical-tenants: "multi-tenancy" collided with Physical Tenants, which is also a multi-tenancy model.

@@ -15,7 +15,7 @@ Install it after the [Hub release](./hub-release.md) is healthy. You can install
 
 Optimize is different. If `optimize.enabled: true` is set, the release still runs Optimize, and the chart then also renders the exporter Optimize reads. In the split topology, set `optimize.enabled: false` here and run Optimize as its [own release](./optimize-release.md).
 
-An orchestration release is self-contained. Its existing component values remain authoritative for its enabled state, authentication, storage, scaling, and Kubernetes configuration. `global.topology.mode` selects the release role; it doesn't duplicate component configuration, and the release never declares sibling clusters.
+An orchestration release is self-contained. Its existing component values remain authoritative for its enabled state, authentication, storage, scaling, and Kubernetes configuration. `global.topology.mode` selects the release role. It doesn't duplicate component configuration. Don't declare sibling clusters in this release.
 
 | Requirement                               | Reason                                                                    |
 | ----------------------------------------- | ------------------------------------------------------------------------- |
@@ -24,24 +24,24 @@ An orchestration release is self-contained. Its existing component values remain
 | `identity.enabled: false`                 | Management Identity runs only in the Hub release                          |
 | A non-empty `global.identity.service.url` | This release runs no Identity of its own, so it must be told where one is |
 
-The chart fails the render with a `[camunda][error]` message if any of these is missing.
+The chart fails the render with a `[camunda][error]` message if `orchestration.enabled`, `global.identity.auth.enabled`, or `identity.enabled` has the wrong value. The 8.7, 8.8, and 8.9 charts also fail if `global.identity.service.url` is empty. The 8.10 chart doesn't verify `global.identity.service.url`, so make sure that you set it.
 
 The component client IDs, audiences, redirect URLs, and secrets must match the clients declared in the matching Hub cluster record. A mismatch authenticates against a client Hub doesn't know about.
 
 ## Requirements by chart version
 
-An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same; the values it requires differ, because the older charts predate the unified Orchestration Cluster and still bundle Hub plane dependencies.
+An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same, but the required values are different. The older charts were released before the unified Orchestration Cluster, and they still bundle Hub plane dependencies.
 
-Earlier chart versions ignore `global.topology.mode` and deploy a combined release. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
+Each chart line needs a minimum chart version for the `orchestration` role. See [minimum chart versions](/self-managed/reference-architecture/deployment-topology.md#minimum-chart-versions). Earlier chart versions ignore `global.topology.mode` and deploy a combined release. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
 
-| Chart (minimum version) | Workload to enable                             | Also required                                                                                                                           |
-| :---------------------- | :--------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| 8.10 (15.0.0)           | `orchestration.enabled: true`                  | Nothing further                                                                                                                         |
-| 8.9 (14.11.0)           | `orchestration.enabled: true`                  | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`                                                              |
-| 8.8 (13.14.0)           | `orchestration.enabled: true`                  | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`                                                              |
-| 8.7 (12.14.0)           | `zeebe.enabled: true`, `operate.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
+| Chart | Workloads to enable                                                      | Also required                                                                                                                           |
+| :---- | :----------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.10  | `orchestration.enabled: true`                                            | Nothing further                                                                                                                         |
+| 8.9   | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`                                                              |
+| 8.8   | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`                                                              |
+| 8.7   | `zeebe.enabled: true`, `operate.enabled: true`, `tasklist.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
 
-The Hub plane databases belong to the Hub release, which is why the 8.7, 8.8, and 8.9 charts reject them here: leaving them enabled would deploy a second Management Identity or Hub database beside the one the Hub release already owns.
+The Hub plane databases belong to the Hub release. This is why the 8.7, 8.8, and 8.9 charts reject them here. If you leave them enabled, the release deploys a second Management Identity or Hub database. The Hub release already owns these databases.
 
 These keys default to `false`, so a fresh install is unaffected. The check matters when you convert an existing combined release, whose values file may already enable them.
 
@@ -181,7 +181,7 @@ orchestration:
                     prefix: production-a-default-records
 ```
 
-For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The Orchestration Cluster keeps using its own secondary storage; the exporter writes the separate record stream Optimize reads. Every prefix must be unique per cluster and tenant. See [isolate every index prefix family](./physical-tenants.md#isolate-every-index-prefix-family).
+For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The Orchestration Cluster continues to use its own secondary storage. The exporter writes the separate record stream that Optimize reads. Every prefix must be unique for each cluster and tenant. See [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 
 ## Choose which applications run
 
@@ -225,7 +225,7 @@ Confirm the cluster appears in Camunda Hub's cluster list before you install its
 Add another entry to `global.topology.clusters` in the Hub release, then install another orchestration release configured to match that entry. Use unique client IDs, audiences, and secrets so each cluster has its own client registration. To also authorize users per cluster, set a distinct `components.<component>.roleName` in each record. See [role assignment across clusters](./hub-release.md#role-assignment-across-clusters).
 
 :::warning
-If orchestration releases share Elasticsearch or OpenSearch, every cluster needs its own index prefixes. Reusing a prefix mixes one cluster's records into another cluster's Operate, Tasklist, or Optimize data. See [index prefixes](./physical-tenants.md#isolate-every-index-prefix-family).
+If orchestration releases share Elasticsearch or OpenSearch, every cluster needs its own index prefixes. Reusing a prefix mixes one cluster's records into another cluster's Operate, Tasklist, or Optimize data. See [index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 :::
 
 For Keycloak, Management Identity creates every declared client. For another OIDC provider, provision the clients before applying the Helm releases.

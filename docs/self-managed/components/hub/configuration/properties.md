@@ -20,7 +20,7 @@ For the `restapi` component, environment variables can be used as an alternative
 For example, the property `camunda.hub.clusters[0].name` is represented by the environment variable `CAMUNDA_HUB_CLUSTERS_0_NAME`.
 
 If you are using the Camunda 8 Helm chart, read more about the different configuration options in the chart's [Helm chart values documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
-You can pass environment variables to each component via `camundaHub.restapi.env` and `camundaHub.websocket.env` in your `values.yaml`.
+You can pass environment variables to each component via `camundaHub.restapi.env` and `camundaHub.websockets.env` in your `values.yaml`.
 
 For which settings belong in the chart and which belong here, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md). The recommended path for the properties on this page is `camundaHub.restapi.extraConfiguration`.
 :::
@@ -850,7 +850,7 @@ camunda.hub.resource-import.allow-private-ip-address: true # default: false; ena
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Camunda Hub Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
 The `websocket` component is configured via environment variables.
-When using the Camunda Helm chart, you can pass these variables via `camundaHub.websocket.env` in your `values.yaml`.
+When using the Camunda Helm chart, you can pass these variables via `camundaHub.websockets.env` in your `values.yaml`.
 See the [Helm chart values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters) for all available configuration options.
 
 | Environment variable | Description                                                                                                                                                          | Example value | Default value |

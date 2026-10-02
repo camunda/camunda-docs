@@ -8,7 +8,7 @@ description: "Install Camunda 8.10 Self-Managed as separate Hub, Orchestration C
 import HelmCliSupport from '../../_partials/_helm-cli-support.md'
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/reference-architecture/deployment-topology.md#release-roles).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](/self-managed/reference-architecture/deployment-topology.md#minimum-chart-versions).
 :::
 
 Install Camunda 8.10 Self-Managed as separate Helm releases: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
@@ -134,3 +134,11 @@ Existing multi-namespace configurations that use `global.identity.auth.*.alwaysR
 In `hub` mode, topology values replace the legacy Identity registration presets. An explicitly configured `camundaHub.restapi.clusters` or legacy `webModeler.restapi.clusters` list still takes precedence over generated Hub inventory.
 
 Any future removal must retain compatibility for at least one minor release, emit GitOps-visible deprecation warnings with migration guidance, and occur only in the next major chart release according to the Helm chart deprecation policy.
+
+### Content from the multi-namespace page
+
+The multi-namespace configuration page moved to this section in 8.10. Its content is now on these pages:
+
+- <a id="configure-the-hub-namespace"></a>Configure the Hub namespace: [install the Camunda Hub release](./hub-release.md).
+- <a id="configure-the-orchestration-namespace"></a>Configure the orchestration namespace: [install an Orchestration Cluster release](./orchestration-release.md).
+- <a id="add-another-orchestration-cluster"></a>Add another Orchestration Cluster: [add another Orchestration Cluster](./orchestration-release.md#add-another-orchestration-cluster).
