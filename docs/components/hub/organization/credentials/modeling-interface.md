@@ -13,11 +13,11 @@ This page covers credentials that authenticate connector tasks, such as an AWS C
 
 ## Select a credential
 
-Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials deployed to the connected cluster that match the credential type the connector needs. On a Self-Managed cluster with several environments, the chooser also lists credentials deployed only to another environment on that cluster; those do not resolve at runtime in the environment you are connected to.
+Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials deployed to the connected cluster that match the credential type the connector needs. On a Self-Managed cluster with several environments, the chooser also lists credentials deployed only to another environment on that cluster; those don't resolve at runtime in the environment you are connected to.
 
 Selecting a credential stores only a reference to it in your diagram. The credential's values stay in the environment they were deployed to.
 
-If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist on the connected cluster, or it was created for a different credential type.
+If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential doesn't exist on the connected cluster, or it was created for a different credential type.
 
 ## What you can do in the chooser
 
@@ -32,7 +32,7 @@ What the chooser offers depends on whether you can edit the diagram, that is, wh
 
 This only controls what the chooser offers. On the [**Credentials** page](./index.md#permissions), any member of your organization who has access to Camunda Hub can manage credentials, and the cluster's own authorizations apply whenever Hub writes a credential to it.
 
-The chooser is unavailable while you are not connected to an environment, while you work offline, while the connected environment is paused, or when it runs a Camunda version before 8.10. The field tells you which of these applies.
+The chooser is unavailable while you aren't connected to an environment, while you work offline, while the connected environment is paused, or when it runs a Camunda version before 8.10. The field tells you which of these applies.
 
 A connector declares the minimum credential version it needs. A newer credential always satisfies an older requirement, so upgrading is only needed when a credential is older than the connector requires.
 

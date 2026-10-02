@@ -29,10 +29,10 @@ A credential is deployed to environments, not to clusters. An environment is the
 - On Camunda 8 SaaS, and on any cluster before 8.10, a cluster holds a single environment, named after the cluster.
 - On Self-Managed 8.10 and later, a cluster holds one environment for each [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md). The environment for the `default` Physical Tenant uses the cluster name, and every other environment uses its Physical Tenant ID.
 - Camunda Hub shows an environment by its name, and adds the cluster name in parentheses whenever the two names differ.
-- On a Self-Managed cluster with several Physical Tenants, each environment is an independent target, with its own copy of the credential, its own values, and its own state. A credential deployed to one environment is not readable from the other environments on that cluster.
+- On a Self-Managed cluster with several Physical Tenants, each environment is an independent target, with its own copy of the credential, its own values, and its own state. A credential deployed to one environment isn't readable from the other environments on that cluster.
 
 :::note
-Camunda 8 SaaS does not show environments yet, so Hub labels each target as a cluster there. The **Environments only** tab is named **Clusters only**, and the wizard, the credential list, and the scan say _cluster_ wherever this page says _environment_. A SaaS cluster holds a single environment, so everything else on this page applies unchanged.
+On Camunda 8 SaaS, Hub labels each target as a cluster. The **Environments only** tab is named **Clusters only**, and the wizard, the credential list, and the scan say _cluster_ wherever this page says _environment_. A SaaS cluster holds a single environment, so everything else on this page applies unchanged.
 :::
 
 ## Terminology
@@ -162,7 +162,7 @@ The **Managed in Hub** tab shows a state for each credential. Hub checks the sta
 
 A credential in the **Warning** state is still deployed. Processes that use it can fail at runtime if the missing secret or environment is the one they rely on.
 
-The secret check behind these states is cluster-wide, so a credential can read **Active** while a secret it references does not resolve in one of its environments. On a cluster with Physical Tenants, each Physical Tenant needs its own secret store. See [secret resolution](/components/concepts/secret-resolution.md).
+The secret check behind these states is cluster-wide, so a credential can read **Active** while a secret it references doesn't resolve in one of its environments. On a cluster with Physical Tenants, each Physical Tenant needs its own secret store. See [secret resolution](/components/concepts/secret-resolution.md).
 
 ### Edit a credential
 
@@ -192,15 +192,15 @@ Adding a credential to Hub links it where it was found, without redeploying it, 
 
 Select **Rescan environments** to run the scan again, for example after a credential is created outside Hub.
 
-![Environments only tab of the Credentials page, with one environment selected, a paused environment that cannot be selected, and a Scan environments button](./img/credentials-clusters-only.png)
+![Environments only tab of the Credentials page, with one environment selected, a paused environment that can't be selected, and a Scan environments button](./img/credentials-clusters-only.png)
 
-If the scan returns no results, none of the clusters behind the environments you selected has a credential-tagged variable that matches a known credential type and version. Environments that are paused, or whose cluster runs a Camunda version without credential support, are marked as such and cannot be scanned.
+If the scan returns no results, none of the clusters behind the environments you selected has a credential-tagged variable that matches a known credential type and version. Environments that are paused, or whose cluster runs a Camunda version without credential support, are marked as such and can't be scanned.
 
 ## Permissions
 
 Every member of your organization who has access to Camunda Hub can see the **Credentials** page and every credential it lists, and can open a credential to see its configuration.
 
-The same members can create, edit, deploy, and delete credentials. Camunda Hub has no separate credential permission, and it does not check your organization role, workspace role, or environment access before it saves a credential.
+The same members can create, edit, deploy, and delete credentials. Camunda Hub has no separate credential permission, and it doesn't check your organization role, workspace role, or environment access before it saves a credential.
 
 Hub writes a credential to a cluster with your own identity when it deploys, redeploys, or deletes it, so the cluster's own authorizations still apply:
 
@@ -208,7 +208,7 @@ Hub writes a credential to a cluster with your own identity when it deploys, red
 - If a cluster refuses to remove a credential because you lack permission or its credentials are wrong, Hub keeps the credential, so you can resolve the problem and delete it again.
 - On a Self-Managed cluster that uses Basic authentication, Hub asks you for the cluster's username and password.
 
-When you choose environments for a credential or for a scan, Hub lists only the environments you can see. Members with the **Organization Owner**, **Organization Admin**, or **DevOps** role see every environment. On Self-Managed, so does any role with the `admin:*` or `admin:clusters` permission. Other members see only the environments assigned to workspaces where they are a **Workspace Admin** or **Editor**. The credential list and detail page still show every credential and all of its targets, and a target in an environment you cannot see is shown by its ID.
+When you choose environments for a credential or for a scan, Hub lists only the environments you can see. Members with the **Organization Owner**, **Organization Admin**, or **DevOps** role see every environment. On Self-Managed, so does any role with the `admin:*` or `admin:clusters` permission. Other members see only the environments assigned to workspaces where they are a **Workspace Admin** or **Editor**. The credential list and detail page still show every credential and all of its targets, and a target in an environment you can't see is shown by its ID.
 
 ## Known limitations
 
@@ -222,8 +222,8 @@ In this release:
 - Credentials are edited in place, with no history of previous values.
 - Secret suggestions are cluster-scoped, so a credential field offers every secret name on the cluster that hosts the environment you selected, including names that other environments on that cluster use.
 - Filtering the **Managed in Hub** tab by environment matches every environment on that environment's cluster.
-- Camunda Hub checks credential permissions per organization, not per environment, so its own check does not follow the isolation between environments on a cluster. The cluster's own authorizations still apply when Hub writes to it.
-- The **Environments only** scan reads a cluster's shared variables, which on Self-Managed belong to the `default` Physical Tenant. A credential created directly in another Physical Tenant is not found.
+- Camunda Hub checks credential permissions per organization, not per environment, so its own check doesn't follow the isolation between environments on a cluster. The cluster's own authorizations still apply when Hub writes to it.
+- The **Environments only** scan reads a cluster's shared variables, which on Self-Managed belong to the `default` Physical Tenant. A credential created directly in another Physical Tenant isn't found.
 
 ## Next steps
 
