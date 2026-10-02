@@ -631,25 +631,6 @@ This default does not apply to existing clusters. Existing clusters show data fi
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Helm CLI v3 and v4 supported for Camunda 8.10 {#helm-v4-required-for-camunda-810}
-
-Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4.
-
-<HelmCliSupport />
-
-With Helm v3, the chart shows a warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
-
-**Action:** Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends. Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -807,49 +788,34 @@ Camunda 8.10 is the last release that provides the dashboards in the classic for
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Individual component Docker images no longer produced
+#### Helm CLI v3 and v4 supported for Camunda 8.10 {#helm-v4-required-for-camunda-810}
 
-Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4.
 
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
-- [camunda/operate](https://hub.docker.com/r/camunda/operate)
-- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+<HelmCliSupport />
 
-**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
+With Helm v3, the chart shows a warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
+
+**Action:** Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends. Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 </div>
 </div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Operate and Tasklist health indicators replaced by a unified schema readiness check
+#### Camunda Hub database migration phases
 
-Camunda 8.10 removes the Operate- and Tasklist-specific Elasticsearch/OpenSearch health indicators (`indicesCheck` and `searchEngineCheck`). A single `schemaReadinessCheck` now backs the gateways readiness probe; it is set once at startup, after the schema is initialized and the cluster reports green or yellow. `searchEngineStatus` reflects the current health status of Elasticsearch/OpenSearch and can be fetched via `/actuator/health` (it is not part of the readiness probe group).
+The 8.9 to 8.10 Camunda Hub database migration is controlled by `camundaHub.upgrade.phase`. Use `quiesce` to stop all Hub workloads so you can take a verified database backup, `migrate` to run the startup schema migration on a single pod without serving traffic, and `normal` to restore serving capacity. Fresh installs stay on `normal`.
 
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Unused PVC in Optimize is unmounted
-
-An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
-
-By default, this mount used an `emptyDir`, so no PVC cleanup is required. However, if you set `optimize.persistence.enabled=true` in `values.yaml`, the PVC may still exist in your Kubernetes cluster even though Optimize no longer mounts it.
-
-**Action:** If you previously enabled `optimize.persistence.enabled=true`, delete the leftover PVC to reclaim storage quota. The claim name is `<releaseName>-camunda-platform-optimize-data`.
+**Action:** Run the phases in order as part of your 8.9 to 8.10 upgrade, and plan a maintenance window: Hub serves no traffic in `quiesce` or `migrate`. The migration isn't backward compatible, so take a verified database backup first. See [migrate Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#migrate-web-modeler-and-console-to-camunda-hub).
 
 </div>
 </div>
@@ -869,21 +835,6 @@ Camunda 8.10 adds `global.topology.mode` to the Helm chart, so a release declare
 `hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
 
 **Action:** None required for an existing deployment. For a new production deployment, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Camunda Hub database migration phases
-
-The 8.9 to 8.10 Camunda Hub database migration is controlled by `camundaHub.upgrade.phase`. Use `quiesce` to stop all Hub workloads so you can take a verified database backup, `migrate` to run the startup schema migration on a single pod without serving traffic, and `normal` to restore serving capacity. Fresh installs stay on `normal`.
-
-**Action:** Run the phases in order as part of your 8.9 to 8.10 upgrade, and plan a maintenance window: Hub serves no traffic in `quiesce` or `migrate`. The migration isn't backward compatible, so take a verified database backup first. See [migrate Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#migrate-web-modeler-and-console-to-camunda-hub).
 
 </div>
 </div>
