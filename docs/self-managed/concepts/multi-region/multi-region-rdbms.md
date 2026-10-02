@@ -128,7 +128,7 @@ Camunda turns this monitoring off by default. The default suits a single databas
 
 The strategy you can use depends on the database engine, not on the cloud provider. Use `LOG_SEQ` when your database is in its [vendor support list](/self-managed/concepts/databases/relational-db/configuration.md#lsn-replication-monitoring). Otherwise, choose `TIME_LAG` or `DELAY`. The reference implementation covers only Aurora Global Database. Managed databases on other providers, such as Azure or Google Cloud, follow the same rules but have no reference implementation.
 
-{/* TODO: replace this paragraph with a link to a per-database table of the preferred multi-region replication settings once that reference exists. */}
+{/_ TODO: replace this paragraph with a link to a per-database table of the preferred multi-region replication settings once that reference exists. _/}
 
 | Strategy                   | When to use it                                                                                                                                                                       | What you configure                                                                          |
 | :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
@@ -200,7 +200,7 @@ Multi-region setups require careful planning. You must manage the following area
 
 ### Upgrade considerations
 
-{/* TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. */}
+{/_ TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. _/}
 
 Upgrade **one region at a time**, so the other regions keep the quorum. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#upgrade-the-cluster) lists the steps.
 
@@ -265,7 +265,13 @@ The database's own failover can still lose up to its replication lag. Every stra
 
 That makes the guarantee conditional on replication configuration and disk capacity rather than on the architecture alone. Retained log segments accumulate for as long as records remain unacknowledged. Size the volume for your write rate and the longest replication outage you plan to tolerate, and alert on broker disk usage.
 
-`pause-on-max-lag-exceeded` decides what happens once the lag passes the configured threshold. It is off by default, and it caps neither data loss nor retained log growth. With `LOG_SEQ` and `TIME_LAG`, acknowledgement waits for confirmed replication either way, so the unacknowledged position holds the log either way. With `DELAY`, acknowledgement only waits for the configured delay and confirms no replication state. With it off, exporting continues against a database that is already behind. With it on, exporting stops, so secondary storage receives nothing new and the APIs reading it fall behind the engine until replication recovers. Enable it deliberately, once you have alerting on replication lag.
+`pause-on-max-lag-exceeded` decides what happens once the lag passes the configured threshold. It is off by default, and
+it caps neither data loss nor retained log growth. With `LOG_SEQ` and `TIME_LAG`, acknowledgement waits for confirmed
+replication either way, so the unacknowledged position holds the log either way. With it off, exporting continues against a database
+that is already behind. With it on, exporting stops, so secondary storage receives nothing new and the APIs reading it
+fall behind the engine until replication recovers. Enable it deliberately, once you have alerting on replication lag.
+
+With `DELAY`, acknowledgement only waits for the configured delay and confirms no replication state or lag. Configuring `pause-on-max-lag-exceeded` therefore has no effect. You must monitor the actual replication lag and alert on it. In case of a replica outage, the lag can exceed the configured delay and the exporter can acknowledge records that have not reached the standby. In case a standby outage takes longer than the configured delay to recover, the exporter should be paused manually to avoid data loss via the [Exporter Management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#exporting-api)
 
 <RecoveryWindowImg role="img" title="Timeline after a region loss. Three phases start when the region is lost: Raft re-election inside the engine, client traffic rerouting through your DNS or load balancer, and database writer promotion only if the writer was lost. Bar lengths are illustrative." />
 
