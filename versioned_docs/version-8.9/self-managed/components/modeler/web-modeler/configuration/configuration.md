@@ -415,10 +415,10 @@ In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so 
 
 #### Change the user ID claim
 
-Web Modeler identifies users by the `sub` claim of their access token. To use a different claim, for example `oid` in Microsoft Entra ID, set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERIDCLAIM` for the `restapi` component. The claim must:
+Web Modeler identifies users by the `sub` claim of their access token. To use a different claim, for example `oid` in Microsoft Entra ID, set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERIDCLAIM` for the `restapi` component. Choose a claim that:
 
-- Never change for a user, such as `sub` or `oid`. If the value changes, for example when a user's email address changes, the user gets a new, empty account.
-- Contain a non-empty string of at most 255 characters. Otherwise, the user can't log in.
+- Never changes for a user, like `sub` or `oid`. If the value changes, for example when a user's email address changes, the user gets a new, empty account.
+- Contains a non-empty string of at most 255 characters. Otherwise, the user can't log in.
 
 With Helm, use [`webModeler.restapi.extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#componentnameextraconfiguration):
 
@@ -435,7 +435,7 @@ webModeler:
                   user-id-claim: oid
 ```
 
-If `CAMUNDA_MODELER_OAUTH2_TOKEN_USERIDCLAIM` is not set, Web Modeler uses `CAMUNDA_IDENTITY_USERIDCLAIM`.
+If `CAMUNDA_MODELER_OAUTH2_TOKEN_USERIDCLAIM` isn't set, Web Modeler uses [`CAMUNDA_IDENTITY_USERIDCLAIM`](/self-managed/components/management-identity/miscellaneous/configuration-variables.md). Unlike Management Identity, Web Modeler doesn't fall back to `sub` when that claim is missing from the token or isn't a string. It rejects the request instead.
 
 If you change the user ID claim for an existing installation, users keep their account. On their next login, Web Modeler moves accounts stored under `sub` to the new claim.
 
