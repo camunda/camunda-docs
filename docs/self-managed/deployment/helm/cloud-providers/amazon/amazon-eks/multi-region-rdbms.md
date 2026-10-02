@@ -2,7 +2,7 @@
 id: multi-region-rdbms
 title: "Multi-region setup with RDBMS (EKS)"
 sidebar_label: "Multi-region with RDBMS"
-description: "Deploy three Amazon EKS clusters connected by AWS Transit Gateway and Submariner, backed by an Aurora Global Database, to run one Orchestration Cluster across three regions."
+description: "Run one Orchestration Cluster across three Amazon EKS regions, connected by AWS Transit Gateway and Submariner and backed by an Aurora Global Database. Start on two regions, then add the third."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,7 +12,7 @@ import Connectivity from './assets/eks-multi-region-rdbms-connectivity.svg';
 
 import MultiRegionRdbmsCopy from '../../../\_partials/\_multi-region-rdbms-copy.md'
 
-This guide deploys one Camunda 8 Orchestration Cluster across three AWS regions. It uses [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for compute and [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) for inter-region routing. It uses [Submariner](https://submariner.io/) for cross-cluster service discovery and [Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) as relational secondary storage.
+This guide deploys one Camunda 8 Orchestration Cluster across three AWS regions. It starts the cluster on two regions, then adds the third to the running cluster, the same path the reference implementation tests. It uses [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for compute and [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) for inter-region routing. It uses [Submariner](https://submariner.io/) for cross-cluster service discovery and [Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) as relational secondary storage.
 
 :::caution
 Review the [Multi-Region RDBMS concept documentation](/self-managed/concepts/multi-region/multi-region-rdbms.md) before continuing, to understand the limitations and requirements of this configuration.
@@ -82,11 +82,11 @@ Following this guide gives you:
 - A Transit Gateway per region, peered in a full mesh, routing every VPC and Kubernetes service range between regions.
 - Submariner service discovery, publishing each region's Zeebe service as `<clusterID>.<service>.<namespace>.svc.clusterset.local`.
 - An Aurora Global Database with a writer in one region and readers in the others, reached through a single JDBC URL.
-- One Orchestration Cluster with six brokers, six partitions, and a replication factor of five. Each database region holds two replicas of every partition, and the third region holds one.
+- One Orchestration Cluster that starts on two regions and grows to three. At the end, it has six brokers, six partitions, and a replication factor of five. Each database region holds two replicas of every partition, and the third region holds one.
 
 ## Topology
 
-The default topology uses three regions and three zones:
+The default topology provisions three region slots. The table shows the cluster after you add the third region. While two regions run, the cluster has four brokers and a replication factor of four.
 
 | Setting                             | Default                                  | Meaning                                                         |
 | :---------------------------------- | :--------------------------------------- | :-------------------------------------------------------------- |
@@ -412,7 +412,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 The parts worth reading before you install:
 
 - `orchestration.partitioning.scheme: zone-aware` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects `numberOfZones` and `zoneIndex` with this scheme, because the zone list describes the topology instead. The chart derives the cluster size, replication factor, and broker node IDs from that list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
-- `orchestration.partitioning.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
+- `orchestration.partitioning.zones` lists every running zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - The AWS Advanced JDBC Wrapper uses `initialConnection,failover`. `initialConnection` discovers the current writer when a broker starts after a switchover. `failover` follows a writer change on an established connection.
 - `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_ENABLED: "true"` is required. Without it the exporter acknowledges records the standby has not received, and a writer failover loses exported data.
@@ -463,7 +463,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```
 </details>
 
-Expect roughly 10 minutes for the Zeebe cluster to converge across regions. A healthy three-zone cluster reports six brokers, six partitions, and a replication factor of five.
+Expect roughly 10 minutes for the Zeebe cluster to converge across regions. At this point, a healthy two-zone cluster reports four brokers, six partitions, and a replication factor of four.
 
 Measure the cost of the write path from each region to the database writer. Regions that are not co-located with the writer pay the inter-region round trip on every export flush. That number tells you whether the exporter queue is sized correctly:
 
