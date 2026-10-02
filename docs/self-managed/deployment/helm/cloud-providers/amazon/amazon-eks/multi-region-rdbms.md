@@ -22,7 +22,7 @@ The result is a cluster where losing a region does not stop processing. Bringing
 
 ## High-level design
 
-<HighLevelDesign role="img" title="Three AWS regions, each with an EKS cluster in its own VPC and a Camunda zone. A Transit Gateway per region is peered in a full mesh, Submariner publishes each region's Zeebe service under a clusterset name, and an Aurora Global Database with a writer in eu-west-2 and a reader in eu-west-3 backs all three regions through a single JDBC URL." />
+<HighLevelDesign role="img" title="Three AWS regions, each with an EKS cluster in its own VPC and a Camunda zone. A Transit Gateway per region is peered in a full mesh, Submariner publishes each region's Zeebe service under a clusterset name, and an Aurora Global Database with a writer in eu-west-2 and a reader in eu-west-3 backs all three regions through a single JDBC URL. eu-central-2 has no database member." />
 
 Each layer of the design has one job, and the layers are independent:
 
@@ -133,7 +133,7 @@ Two variables control the topology, and they are not interchangeable:
 | `regions`             | The full list of region slots the cluster can grow into. A slot contributes a zone once Camunda runs in it. |
 | `active_region_count` | How many of those slots are deployed. At least two.                                                         |
 
-Deploying fewer slots than you provision is the supported growth path. The Camunda zone list covers only the deployed slots, so each partition holds all of its replicas at every size. The cluster survives a region loss once three or more slots run. With two slots, losing either zone leaves no majority, and processing stops until the zone returns. A spare slot joins later through the [add-zone procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#add-a-region), which adds its zone to the running cluster.
+This guide follows the path the reference implementation tests: it bootstraps two of the three slots, then adds the third region. Deploying fewer slots than you provision is the supported growth path. The Camunda zone list covers only the deployed slots, so each partition holds all of its replicas at every size. The cluster survives a region loss once three or more slots run. With two slots, losing either zone leaves no majority, and processing stops until the zone returns. A spare slot joins later through the [add-zone procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#add-a-region), which adds its zone to the running cluster.
 
 ### Apply the infrastructure
 
@@ -143,7 +143,7 @@ Keep your settings in a variable file. The reference architecture ships no varia
 
 ```hcl title="terraform-cluster.tfvars"
 cluster_name            = "camunda"
-active_region_count     = 3
+active_region_count     = 2
 np_desired_node_count   = 4
 single_nat_gateway      = false
 database_instance_class = "db.r6g.large"
@@ -162,14 +162,7 @@ terraform apply -var-file=terraform-cluster.tfvars
 
 Expect roughly 25 minutes for the EKS clusters and 15 minutes for the Aurora Global Database. They are created in parallel.
 
-For a cheaper evaluation, deploy two of the three slots and reduce the node count. The cluster then runs two zones, `2-2` at replication factor four. Until you add the third region, it survives no zone loss. Losing either zone leaves two replicas of four, which is not a majority.
-
-```hcl title="terraform-cluster.tfvars"
-cluster_name          = "camunda"
-active_region_count   = 2
-single_nat_gateway    = true
-np_desired_node_count = 2
-```
+With `active_region_count = 2`, the cluster runs two zones, `2-2` at replication factor four. Until you add the third region, it survives no zone loss: losing either zone leaves two replicas of four, which is not a majority. To deploy all three slots at once, set `active_region_count = 3`.
 
 :::note
 Set up remote Terraform state before deploying anything you intend to keep. The [single-region EKS guide](./terraform-setup.md#initialize-terraform) covers creating an S3 backend.
@@ -485,7 +478,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```
 </details>
 
-## 6. Operate the cluster
+## 6. Add the third region
+
+Add the third slot to the running cluster with the [Add a region](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#add-a-region) procedure. The cluster then runs three zones in the `2-2-1` layout and survives the loss of any one region.
+
+## 7. Operate the cluster
 
 Day-2 procedures, including region loss, failback, and adding a region, are documented separately in the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
 

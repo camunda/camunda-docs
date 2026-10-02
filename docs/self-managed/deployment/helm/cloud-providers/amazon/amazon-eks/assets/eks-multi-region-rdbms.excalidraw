@@ -33,7 +33,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-0"
+   "id": "eks-text-0"
   },
   {
    "type": "text",
@@ -65,7 +65,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-1"
+   "id": "eks-text-1"
   },
   {
    "type": "text",
@@ -97,7 +97,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-2"
+   "id": "eks-text-2"
   },
   {
    "type": "rectangle",
@@ -124,7 +124,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-3"
+   "id": "eks-rectangle-3"
   },
   {
    "type": "text",
@@ -156,7 +156,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-4"
+   "id": "eks-text-4"
   },
   {
    "type": "text",
@@ -188,7 +188,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-5"
+   "id": "eks-text-5"
   },
   {
    "type": "rectangle",
@@ -215,7 +215,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-6"
+   "id": "eks-rectangle-6"
   },
   {
    "type": "text",
@@ -247,7 +247,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-7"
+   "id": "eks-text-7"
   },
   {
    "type": "text",
@@ -279,7 +279,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-8"
+   "id": "eks-text-8"
   },
   {
    "type": "text",
@@ -311,7 +311,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-9"
+   "id": "eks-text-9"
   },
   {
    "type": "rectangle",
@@ -338,7 +338,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-10"
+   "id": "eks-rectangle-10"
   },
   {
    "type": "text",
@@ -370,7 +370,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-11"
+   "id": "eks-text-11"
   },
   {
    "type": "text",
@@ -402,7 +402,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-12"
+   "id": "eks-text-12"
   },
   {
    "type": "rectangle",
@@ -429,7 +429,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-13"
+   "id": "eks-rectangle-13"
   },
   {
    "type": "text",
@@ -461,7 +461,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-14"
+   "id": "eks-text-14"
   },
   {
    "type": "text",
@@ -493,7 +493,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-15"
+   "id": "eks-text-15"
   },
   {
    "type": "text",
@@ -525,7 +525,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-16"
+   "id": "eks-text-16"
   },
   {
    "type": "rectangle",
@@ -552,7 +552,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-17"
+   "id": "eks-rectangle-17"
   },
   {
    "type": "text",
@@ -584,7 +584,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-18"
+   "id": "eks-text-18"
   },
   {
    "type": "text",
@@ -616,7 +616,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-19"
+   "id": "eks-text-19"
   },
   {
    "type": "rectangle",
@@ -643,7 +643,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-20"
+   "id": "eks-rectangle-20"
   },
   {
    "type": "text",
@@ -675,7 +675,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-21"
+   "id": "eks-text-21"
   },
   {
    "type": "text",
@@ -707,7 +707,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-22"
+   "id": "eks-text-22"
   },
   {
    "type": "text",
@@ -739,7 +739,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-23"
+   "id": "eks-text-23"
   },
   {
    "type": "text",
@@ -771,7 +771,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-24"
+   "id": "eks-text-24"
   },
   {
    "type": "text",
@@ -803,7 +803,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-25"
+   "id": "eks-text-25"
   },
   {
    "type": "rectangle",
@@ -830,7 +830,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-26"
+   "id": "eks-rectangle-26"
   },
   {
    "type": "text",
@@ -862,7 +862,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-27"
+   "id": "eks-text-27"
   },
   {
    "type": "rectangle",
@@ -889,7 +889,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-28"
+   "id": "eks-rectangle-28"
   },
   {
    "type": "text",
@@ -921,7 +921,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-29"
+   "id": "eks-text-29"
   },
   {
    "type": "rectangle",
@@ -948,7 +948,7 @@
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-30"
+   "id": "eks-rectangle-30"
   },
   {
    "type": "text",
@@ -980,7 +980,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-31"
+   "id": "eks-text-31"
   },
   {
    "type": "arrow",
@@ -1018,7 +1018,7 @@
    "endBinding": null,
    "startArrowhead": "arrow",
    "endArrowhead": "arrow",
-   "id": "eks-multi-region-rdbms-arrow-32"
+   "id": "eks-arrow-32"
   },
   {
    "type": "arrow",
@@ -1056,7 +1056,7 @@
    "endBinding": null,
    "startArrowhead": "arrow",
    "endArrowhead": "arrow",
-   "id": "eks-multi-region-rdbms-arrow-33"
+   "id": "eks-arrow-33"
   },
   {
    "type": "arrow",
@@ -1098,7 +1098,7 @@
    "endBinding": null,
    "startArrowhead": "arrow",
    "endArrowhead": "arrow",
-   "id": "eks-multi-region-rdbms-arrow-34"
+   "id": "eks-arrow-34"
   },
   {
    "type": "text",
@@ -1130,7 +1130,189 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-35"
+   "id": "eks-text-35"
+  },
+  {
+   "type": "rectangle",
+   "strokeColor": "#1e88e5",
+   "backgroundColor": "#ffffff",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "dashed",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 400078,
+   "version": 1,
+   "versionNonce": 400079,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": [],
+   "link": null,
+   "locked": false,
+   "x": 40,
+   "y": 636,
+   "width": 960,
+   "height": 54,
+   "roundness": {
+    "type": 3
+   },
+   "id": "eks-rectangle-36"
+  },
+  {
+   "type": "text",
+   "strokeColor": "#1a79cb",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 400080,
+   "version": 1,
+   "versionNonce": 400081,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "x": 344.5,
+   "y": 645,
+   "width": 351.0,
+   "height": 21.0,
+   "text": "L7   Submariner, service discovery only",
+   "originalText": "L7   Submariner, service discovery only",
+   "fontSize": 15,
+   "fontFamily": 3,
+   "textAlign": "center",
+   "verticalAlign": "top",
+   "containerId": null,
+   "lineHeight": 1.4,
+   "id": "eks-text-37"
+  },
+  {
+   "type": "text",
+   "strokeColor": "#5a5a5a",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 400082,
+   "version": 1,
+   "versionNonce": 400083,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "x": 274.3,
+   "y": 667,
+   "width": 491.4,
+   "height": 18.2,
+   "text": "publishes each region's Zeebe service under one clusterset name",
+   "originalText": "publishes each region's Zeebe service under one clusterset name",
+   "fontSize": 13,
+   "fontFamily": 3,
+   "textAlign": "center",
+   "verticalAlign": "top",
+   "containerId": null,
+   "lineHeight": 1.4,
+   "id": "eks-text-38"
+  },
+  {
+   "type": "rectangle",
+   "strokeColor": "#1a1a1a",
+   "backgroundColor": "#1a1a1a",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 400084,
+   "version": 1,
+   "versionNonce": 400085,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": [],
+   "link": null,
+   "locked": false,
+   "x": 40,
+   "y": 708,
+   "width": 960,
+   "height": 46,
+   "roundness": {
+    "type": 3
+   },
+   "id": "eks-rectangle-39"
+  },
+  {
+   "type": "text",
+   "strokeColor": "#ffffff",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 400086,
+   "version": 1,
+   "versionNonce": 400087,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "x": 54,
+   "y": 720,
+   "width": 450.0,
+   "height": 21.0,
+   "text": "london.camunda-zeebe.camunda.svc.clusterset.local.",
+   "originalText": "london.camunda-zeebe.camunda.svc.clusterset.local.",
+   "fontSize": 15,
+   "fontFamily": 3,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "lineHeight": 1.4,
+   "id": "eks-text-40"
+  },
+  {
+   "type": "text",
+   "strokeColor": "#5a5a5a",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 400088,
+   "version": 1,
+   "versionNonce": 400089,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "x": 40,
+   "y": 764,
+   "width": 709.8,
+   "height": 18.2,
+   "text": "Every cluster uses the same namespace name. The cluster ID prefix tells the services apart.",
+   "originalText": "Every cluster uses the same namespace name. The cluster ID prefix tells the services apart.",
+   "fontSize": 13,
+   "fontFamily": 3,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "lineHeight": 1.4,
+   "id": "eks-text-41"
   },
   {
    "type": "text",
@@ -1151,7 +1333,7 @@
    "link": null,
    "locked": false,
    "x": 40,
-   "y": 648,
+   "y": 802,
    "width": 592.8,
    "height": 18.2,
    "text": "SECONDARY STORAGE   Aurora Global Database, reached over the Transit Gateway",
@@ -1162,7 +1344,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-42"
+   "id": "eks-text-42"
   },
   {
    "type": "rectangle",
@@ -1183,13 +1365,13 @@
    "link": null,
    "locked": false,
    "x": 40,
-   "y": 676,
+   "y": 830,
    "width": 630,
    "height": 100,
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-43"
+   "id": "eks-rectangle-43"
   },
   {
    "type": "text",
@@ -1210,7 +1392,7 @@
    "link": null,
    "locked": false,
    "x": 157.0,
-   "y": 692,
+   "y": 846,
    "width": 396.0,
    "height": 21.0,
    "text": "writer  eu-west-2          reader  eu-west-3",
@@ -1221,7 +1403,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-44"
+   "id": "eks-text-44"
   },
   {
    "type": "text",
@@ -1242,7 +1424,7 @@
    "link": null,
    "locked": false,
    "x": 152.20000000000002,
-   "y": 724,
+   "y": 878,
    "width": 405.59999999999997,
    "height": 36.4,
    "text": "the database handles replication and writer failover\nCamunda needs no reconfiguration",
@@ -1253,7 +1435,66 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-45"
+   "id": "eks-text-45"
+  },
+  {
+   "type": "rectangle",
+   "strokeColor": "#5a5a5a",
+   "backgroundColor": "#f7f7f7",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "dashed",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 400098,
+   "version": 1,
+   "versionNonce": 400099,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": [],
+   "link": null,
+   "locked": false,
+   "x": 700,
+   "y": 830,
+   "width": 300,
+   "height": 100,
+   "roundness": {
+    "type": 3
+   },
+   "id": "eks-rectangle-46"
+  },
+  {
+   "type": "text",
+   "strokeColor": "#5a5a5a",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "angle": 0,
+   "seed": 400100,
+   "version": 1,
+   "versionNonce": 400101,
+   "isDeleted": false,
+   "groupIds": [],
+   "boundElements": null,
+   "link": null,
+   "locked": false,
+   "x": 779.8,
+   "y": 864,
+   "width": 140.4,
+   "height": 36.4,
+   "text": "no database member\nin eu-central-2",
+   "originalText": "no database member\nin eu-central-2",
+   "fontSize": 13,
+   "fontFamily": 3,
+   "textAlign": "center",
+   "verticalAlign": "top",
+   "containerId": null,
+   "lineHeight": 1.4,
+   "id": "eks-text-47"
   },
   {
    "type": "rectangle",
@@ -1274,13 +1515,13 @@
    "link": null,
    "locked": false,
    "x": 40,
-   "y": 800,
+   "y": 954,
    "width": 960,
    "height": 46,
    "roundness": {
     "type": 3
    },
-   "id": "eks-multi-region-rdbms-rectangle-48"
+   "id": "eks-rectangle-48"
   },
   {
    "type": "text",
@@ -1301,7 +1542,7 @@
    "link": null,
    "locked": false,
    "x": 54,
-   "y": 812,
+   "y": 966,
    "width": 585.0,
    "height": 18.2,
    "text": "jdbc:aws-wrapper:postgresql://<writer>:5432/camunda?wrapperPlugins=failover",
@@ -1312,7 +1553,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-49"
+   "id": "eks-text-49"
   },
   {
    "type": "text",
@@ -1333,7 +1574,7 @@
    "link": null,
    "locked": false,
    "x": 40,
-   "y": 856,
+   "y": 1010,
    "width": 663.0,
    "height": 18.2,
    "text": "The same URL in every region. The driver follows the writer across a global failover.",
@@ -1344,7 +1585,7 @@
    "verticalAlign": "top",
    "containerId": null,
    "lineHeight": 1.4,
-   "id": "eks-multi-region-rdbms-text-50"
+   "id": "eks-text-50"
   },
   {
    "type": "arrow",
@@ -1382,7 +1623,7 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "id": "eks-multi-region-rdbms-arrow-51"
+   "id": "eks-arrow-51"
   },
   {
    "type": "arrow",
@@ -1420,7 +1661,7 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "id": "eks-multi-region-rdbms-arrow-52"
+   "id": "eks-arrow-52"
   },
   {
    "type": "arrow",
@@ -1458,7 +1699,7 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "id": "eks-multi-region-rdbms-arrow-53"
+   "id": "eks-arrow-53"
   }
  ],
  "appState": {

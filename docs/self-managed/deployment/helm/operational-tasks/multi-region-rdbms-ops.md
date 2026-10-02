@@ -26,7 +26,7 @@ In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe 
 
 With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas. Zeebe keeps processing, and you need no Zeebe action to restore service. The [dry run](#1-confirm-the-quorum-is-intact) confirms this before you act. The failover procedure mostly reports. It only acts on the database writer, and only when the writer was in the lost region.
 
-<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. In a two-zone cluster, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone cluster, quorum holds and processing continues. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
+<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. A triangle marks an incident, a play icon an operator action, a check a healthy state, and a dash a step that does not exist. In a two-zone cluster, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone cluster, quorum holds and processing continues. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
 
 | Step                             | Dual-region                             | Multi-Region RDBMS                              |
 | :------------------------------- | :-------------------------------------- | :---------------------------------------------- |
@@ -93,7 +93,7 @@ With `--dry-run`, the script reports the quorum state, prints the current cluste
 
 If the writer was in the lost region, promote a surviving member. The mode depends on whether the lost region is still reachable:
 
-<PromoteWriter role="img" title="If the writer was not in the lost region, no database action is needed. If it was, a reachable region allows a planned switchover with ./failover.sh and no data loss, while a lost region needs the AWS global database recovery, which can lose records that were not replicated. Either way, the JDBC URL resolves to the new writer, and Camunda needs no reconfiguration and no restart. Then raise the priority of the zone with the new writer, wait for COMPLETED, and run POST /cluster/v2/rebalance." />
+<PromoteWriter role="img" title="If the writer was not in the lost region, no database action is needed. If it was, a reachable region allows a planned switchover with ./failover.sh and no data loss, while a lost region needs the AWS global database recovery, where the database loses its replication lag and Zeebe replays those records from its retained log. Either way, the JDBC URL resolves to the new writer, and Camunda needs no reconfiguration and no restart. Then raise the priority of the zone with the new writer, wait for COMPLETED, and run POST /cluster/v2/rebalance." />
 
 <Tabs groupId="failover-mode" defaultValue="planned" queryString values={[{label: 'Planned', value: 'planned' }, {label: 'Unplanned', value: 'unplanned' }]}>
 
@@ -206,11 +206,11 @@ This section applies to a region slot that you provisioned but never ran. A zone
 
 ### 1. Provision the infrastructure
 
-Raise `active_region_count` so the region's cluster, Transit Gateway attachments, and security group rules exist. Use the same variable file as the initial deployment:
+Raise `active_region_count` by one, so the new region's cluster, Transit Gateway attachments, and security group rules exist. Use the same variable file as the initial deployment, and replace `<new-count>` with the number of regions after the change:
 
 ```bash
 cd ../terraform/clusters
-terraform apply -var-file=terraform-cluster.tfvars -var active_region_count=3
+terraform apply -var-file=terraform-cluster.tfvars -var active_region_count=<new-count>
 ```
 
 ### 2. Update the environment

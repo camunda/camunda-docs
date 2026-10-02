@@ -26,7 +26,7 @@ Losing one region out of three or more removes that region's replicas of every p
 
 :::
 
-Recovery is the reverse and has no restore step. Redeploy the region. Its brokers replay from the surviving replicas exactly as they would after a node restart. For the step-by-step procedure, see [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
+To recover, redeploy the region. There is nothing to restore: its brokers catch up from the surviving replicas, as they would after a node restart. For the step-by-step procedure, see [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
 
 ## Recovery objectives {#recovery-objectives}
 
@@ -41,7 +41,7 @@ A single-region cluster that loses a broker holds a Raft re-election for the par
 
 That is the difference from [Dual-Region](./dual-region.md), where the same event costs the quorum and processing stops until an operator intervenes.
 
-**A window**, because reconfiguration takes time. Most of that window depends on settings outside the engine: client timeouts and retries, traffic routing, database failover, and Camunda's own SQL connection timeouts. This page therefore describes the behavior instead of publishing an RTO figure.
+**A window**, because reconfiguration takes time. Most of that window depends on settings outside the engine: client timeouts and retries, traffic routing, database failover, and Camunda's own SQL connection timeouts. This page therefore gives the order of magnitude of each part instead of one RTO figure.
 
 **Data loss depends on which store you mean.** The engine's own state loses nothing. Raft commits a record only once a majority of its replicas hold it. With one replica per zone and three zones, a commit needs two replicas. Losing one zone always leaves at least one replica that has the record.
 
@@ -63,11 +63,13 @@ That makes the guarantee conditional on replication configuration and disk capac
 
 **The window has three parts**, and only the first happens inside the engine:
 
-| What                      | Why it takes time                                                                                                                                                                                                                                                                                                         |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Raft re-election          | Partitions whose leader was in the lost zone have no leader until the cluster detects the failure and elects a new one. They do not process during that window.                                                                                                                                                           |
-| Client traffic rerouting  | The gateway in the lost region is unreachable. Clients pointed at it fail until you reroute them, which is your traffic management, not Camunda's.                                                                                                                                                                        |
-| Database writer promotion | If the writer was in the lost region, exporting stops until you promote a surviving member. The engine keeps processing. A long enough export backlog trades write rate against backlog once you enable flow control. The APIs and web applications that read secondary storage serve stale data until exporting resumes. |
+| What                      | Typical duration                | Why it takes time                                                                                                                                                                                                                                                                                                                                                                                                           |
+| :------------------------ | :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Raft re-election          | Seconds                         | Partitions whose leader was in the lost zone have no leader until a follower misses the leader's heartbeats and wins an election. A follower starts an election after the [`election-timeout`](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camundaclusterraft), 2.5 seconds by default, and each election round crosses a region. They do not process during that window.                  |
+| Client traffic rerouting  | Tens of seconds to minutes      | The gateway in the lost region is unreachable. Clients pointed at it fail until your traffic management reroutes them. For example, an Amazon Route 53 health check probes every 10 or 30 seconds and marks the endpoint unhealthy after several failed probes. Clients then follow the new record once its TTL expires.                                                                                                    |
+| Database writer promotion | Under a minute to a few minutes | Only if the writer was in the lost region. Exporting stops until a surviving member is promoted, while the engine keeps processing. For Aurora Global Database, a switchover typically takes under 30 seconds on recent engine versions. A failover after an unplanned outage typically completes within a few minutes. The APIs and web applications that read secondary storage serve stale data until exporting resumes. |
+
+These durations come from defaults and vendor documentation, not from a measurement of this architecture. Measure your own window, because your timeouts and your database decide it.
 
 Skewing partition leadership to the writer's zone makes the first of these worse in one specific case. Losing that zone loses most partition leaders at once, so more partitions re-elect simultaneously. That is the price of avoiding an inter-region round trip on every export flush.
 
