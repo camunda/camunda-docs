@@ -224,7 +224,7 @@ Recovery behaves as described only inside the boundaries this architecture sets.
 | Optimize support            | Not available. Optimize requires Elasticsearch or OpenSearch, regardless of the region count.                                                                                                 |
 | Camunda Hub                 | Hub is a standalone component not covered in this guide. Modeling applications can operate independently outside of the Orchestration Clusters. Hub also depends on Management Identity.      |
 | Connectors deployment       | Connectors run in every region and are not deduplicated. Account for [idempotency](/components/connectors/use-connectors/inbound.md#creating-the-connector-event) to avoid event duplication. |
-| Zone list changes           | Adding a zone is online, through the cluster management API: the engine places the new zone's replicas without renumbering brokers. The partition count stays fixed at its bootstrap value.   |
+| Zone list changes           | Adding a zone is online, through the cluster management API: the engine places the new zone's replicas without renumbering brokers. Adding a zone leaves the partition count unchanged.       |
 | Backup and restore          | RDBMS backup relies on continuous primary storage backups plus a database-native backup. See [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).     |
 
 ## Reference implementation

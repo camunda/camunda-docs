@@ -86,6 +86,8 @@ Whether the lost zone has to be removed depends on the replicas it held, not on 
 
 An evenly split two-zone cluster always loses its quorum with a zone. That is the [Dual-Region](./dual-region.md) situation, not a normal layout of this architecture. An uneven two-zone layout keeps its quorum only when it loses the smaller zone.
 
-If the zone does not come back quickly, remove it and then raise the replicas of the remaining zones. For example, losing a two-replica zone of a `2-2-1` layout leaves `2-1`. Raise the remaining one-replica zone to two, to get `2-2`, through the [Partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api). Losing the one-replica zone leaves `2-2`, so the remaining zones need no change.
+Remove a lost zone once you confirm that it is down and won't come back soon. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-remove-the-lost-zone) has the command.
 
-The recommended practice is to remove a lost zone once you confirm it is down. The trade-off is failback cost: a removed zone has to be added back explicitly, and its brokers rebuild from nothing. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-remove-the-lost-zone) has the command.
+After the removal, raise the replicas of the remaining zones if the layout needs it. Losing a two-replica zone of a `2-2-1` layout leaves `2-1`. Raise the one-replica zone to two, to get `2-2`, through the [Partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api). Losing the one-replica zone leaves `2-2`, so the remaining zones need no change.
+
+Removal makes failback slower. You must add the zone back explicitly, and its brokers then rebuild their state. The rebuild is automatic and can take a few minutes. Its duration depends on the number of active process instances, not on the data in secondary storage.
