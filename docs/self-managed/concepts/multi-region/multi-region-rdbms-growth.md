@@ -10,7 +10,7 @@ import AddZoneImg from './img/multi-region-rdbms-add-zone.svg';
 
 <PageDescription />
 
-This page describes how a [Multi-Region RDBMS](./multi-region-rdbms.md) cluster grows from two regions to three or more.
+Learn how to grow a [Multi-Region RDBMS](./multi-region-rdbms.md) cluster from two regions to three or more.
 
 You can add a zone to a running cluster without changing the brokers that already run. Each broker ID combines a zone name and an index, such as `london_0`. A new zone brings new IDs and leaves the existing ones as they are.
 
@@ -18,23 +18,23 @@ You can add a zone to a running cluster without changing the brokers that alread
 
 ## Declare only the zones you deploy
 
-Every zone in the zone list must have its brokers running when the cluster bootstraps. Do not declare a zone to reserve it for later growth. Add it through the management API after its brokers run.
+Every zone in the zone list must have its brokers running when the cluster bootstraps. Don't declare a zone to reserve it for later growth. Add it through the management API after its brokers run.
 
-A zone in the zone list receives partition replicas even if its brokers do not run. A declared zone without brokers leaves every partition one zone short. For example, if you declare a `2-2-1` layout but deploy only the first two zones, each partition runs four replicas of five. Losing either database zone then stops processing.
+A zone in the zone list receives partition replicas even if its brokers don't run. A declared zone without brokers leaves every partition one zone short. For example, if you declare a `2-2-1` layout but deploy only the first two zones, each partition runs four of five replicas. Losing either database zone then stops processing.
 
 ## Add a zone to the running cluster
 
 1. Start the brokers of the new zone.
-1. Add the zone with the [Add or re-add a zone](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#add-or-re-add-a-zone) request.
-1. Wait for the change to report `COMPLETED`.
+1. Add the zone with the [Add or re-add a zone](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#add-or-re-add-a-zone) request. The request body needs `numberOfReplicas`, `priority`, and either `numberOfBrokers` or `brokers`.
+1. Wait for the change to report `COMPLETED`. Follow it with the [Monitoring API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#monitoring-api).
 
-The engine places the zone's replicas and raises the replication factor in one change. No broker is renumbered, and the regions already running are not restarted.
+The engine places the zone's replicas and raises the replication factor in one change. No broker is renumbered, and the regions already running aren't restarted.
 
-| Zones running | Layout  | Replication factor | After losing one zone                          |
-| :------------ | :------ | :----------------- | :--------------------------------------------- |
-| Two           | `2-2`   | 4                  | 2 of 4 replicas: processing stops              |
-| Three         | `2-2-1` | 5                  | 3 of 5 replicas at worst: processing continues |
+| Zones running | Layout  | Replication factor | After losing one zone                                 |
+| :------------ | :------ | :----------------- | :---------------------------------------------------- |
+| Two           | `2-2`   | 4                  | Two of four replicas: processing stops                |
+| Three         | `2-2-1` | 5                  | Three of five replicas at worst: processing continues |
 
 ## Plan the partition count
 
-Adding a zone does not change the partition count. To raise it, use [partition scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#2c-scaling-only-partitions), before or after you add the zone but not during the same change. The reference implementation sizes the partition count on the provisioned region slots, so it already fits the largest topology it can grow into.
+Adding a zone doesn't change the partition count. To raise it, use [partition scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#2c-scaling-only-partitions), before or after you add the zone but not during the same change. The reference implementation sizes the partition count on the provisioned region slots, so it already fits the largest topology it can grow into.
