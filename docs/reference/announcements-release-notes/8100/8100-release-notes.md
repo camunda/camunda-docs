@@ -495,6 +495,24 @@ The CLI is non‑interactive, with clear exit codes and optional JSON output, ma
 
 <p class="link-arrow">[Use the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
 
+### Camunda Hub replaces Console and Web Modeler in the Helm chart
+
+<!-- https://github.com/camunda/product-hub/issues/3411 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+Camunda Hub is a drop-in replacement for Web Modeler in the Camunda Helm chart, and Console is no longer a standalone deployment. The `camunda/hub` image serves both Console and Web Modeler features, and you enable and configure it with the `camundaHub` key. Hub is first officially exposed in 8.10.
+
+- For standard deployments, only the top-level key needs to change: replace `console.enabled` and `webModeler.enabled` with `camundaHub.enabled`.
+- Existing Web Modeler Helm values keep working. A compatibility layer in the application honors the existing value structure, and deprecated keys are logged but not required to change immediately.
+- Moving your values under `camundaHub` is cleanup that you can do later. The upgrade guide documents the steps.
+- Review `camundaHub.restapi.resources` after upgrading, because Console now runs in the Hub REST API pod.
+
+<ul>
+  <li><span class="link-arrow">[Self-Managed Hub configuration](/reference/announcements-release-notes/8100/whats-new-in-810.md#self-managed-hub-configuration)</span></li>
+  <li><span class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub)</span></li>
+</ul>
+
 ### Helm chart version matrix improvements
 
 <!-- https://github.com/camunda/product-hub/issues/3381 -->
@@ -940,6 +958,23 @@ You can now create new SaaS clusters on specific supported Camunda 8 minor and p
 
 - The latest recommended versions (latest patch of each active minor)
 - Other still-supported versions that you already run on existing clusters in the same organization.
+
+### Cross-region cold recovery for SaaS
+
+<!-- https://github.com/camunda/product-hub/issues/3243 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+
+If a primary region fails, you can now recover your SaaS Orchestration Cluster in a secondary region from replicated backups, without depending on a support request. Cross-region cold recovery creates a new Orchestration Cluster in the secondary region and restores the backup you select.
+
+- Enable dual-region backup when you create the cluster, and select the backup location in Console.
+- Start failover in Console or through the API, and select the backup to restore from.
+- Cold recovery is available for AWS and GCP clusters in region pairs marked **Failover supported**, including AWS clusters that use Bring Your Own Key (BYOK).
+- Use only the recovered cluster after failover. Don't run the original cluster at the same time, to avoid conflicting writes.
+
+Your backup interval determines the data you can lose, because the recovered cluster restores your last available backup.
+
+<p class="link-arrow">[Cross-region cold recovery](/components/saas/cross-region-cold-recovery.md)</p>
 
 ### Dark and light mode persists across Admin, Operate, and Tasklist
 
@@ -2001,6 +2036,26 @@ The **App Integrations connector** now receives messages as well as sending them
 Receiving needs no connector task and no job worker. Element templates for a chat start event, an intermediate catch event, a receive task, and a boundary event set up the correlation, so a start event and a catch event are enough for a working conversation loop. A **Chat key** on the start event decides which chats it answers: configure a Microsoft Teams channel or chat in the Camunda app's **Settings** tab, or a Slack channel or direct message with `/camunda chat`, and give the process the same key. A reply always reaches the cluster whose process asked the question. In a personal chat or direct message every message reaches the process; in a channel on either platform, @mention the Camunda app.
 
 <p class="link-arrow">[Receive a chat message](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message)</p>
+
+### Helm chart deployment
+
+#### Camunda Hub replaces Console and Web Modeler in the Helm chart
+
+<!-- https://github.com/camunda/product-hub/issues/3411 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+Camunda Hub is a drop-in replacement for Web Modeler in the Camunda Helm chart, and Console is no longer a standalone deployment. The `camunda/hub` image serves both Console and Web Modeler features, and you enable and configure it with the `camundaHub` key. Hub is first officially exposed in 8.10.
+
+- For standard deployments, only the top-level key needs to change: replace `console.enabled` and `webModeler.enabled` with `camundaHub.enabled`.
+- Existing Web Modeler Helm values keep working. A compatibility layer in the application honors the existing value structure, and deprecated keys are logged but not required to change immediately.
+- Moving your values under `camundaHub` is cleanup that you can do later. The upgrade guide documents the steps.
+- Review `camundaHub.restapi.resources` after upgrading, because Console now runs in the Hub REST API pod.
+
+<ul>
+  <li><span class="link-arrow">[Self-Managed Hub configuration](/reference/announcements-release-notes/8100/whats-new-in-810.md#self-managed-hub-configuration)</span></li>
+  <li><span class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub)</span></li>
+</ul>
 
 ### Modeler
 
