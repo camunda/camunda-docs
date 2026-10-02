@@ -25,7 +25,7 @@ Please review our [dual-region concept documentation](./../../../concepts/multi-
 ## High Level Design
 
 _Infrastructure diagram for a OpenShift dual-region setup (click on the image to open the PDF version)_
-[![Infrastructure Diagram OpenShift Dual-Region](./assets/openshift-dual-region.jpg)](./assets/openshift-dual-region.pdf)
+[![Infrastructure Diagram OpenShift Dual-Region](./assets/openshift-dual-region.svg)](./assets/openshift-dual-region.pdf)
 
 This High-Level Design describes how the following critical components interact to achieve a Camunda 8 deployment across two regions:
 
@@ -230,7 +230,7 @@ The [architecture of Submariner](https://submariner.io/getting-started/architect
 The following diagram illustrates the interaction between the two clusters:
 
 _Infrastructure diagram of Submariner setup_
-![Infrastructure diagram of Submariner setup](./assets/submariner-hld.jpg)
+![Infrastructure diagram of Submariner setup](./assets/submariner-hld.svg)
 
 - Traffic sent from one broker to another cluster can be encrypted by the [Gateway Engine](https://submariner.io/getting-started/architecture/gateway-engine/). In OpenShift, the IPSec protocol is used on port `4500/UDP`, utilizing the [Libreswan](https://libreswan.org/) implementation.
 - A dedicated node in each cluster assumes the [Broker Role](https://submariner.io/getting-started/architecture/broker/), facilitating the exchange of metadata between Gateway Engines in participating clusters. This component is **not responsible for transmitting data**, unlike the Gateway Engine, which handles data transmission between internal networks of different clusters. High availability can be achieved by adding a second dedicated node.

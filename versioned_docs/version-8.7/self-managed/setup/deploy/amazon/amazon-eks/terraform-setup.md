@@ -95,7 +95,7 @@ Both can be set up with or without a **Domain** ([ingress](https://kubernetes.io
 ### Outcome
 
 _Infrastructure diagram for a single region EKS setup (click on the image to open the PDF version)_
-[![Infrastructure Diagram EKS Single-Region](./assets/eks-single-region.jpg)](./assets/eks-single-region.pdf)
+[![Infrastructure Diagram EKS Single-Region](./assets/eks-single-region.svg)](./assets/eks-single-region.pdf)
 
 Following this tutorial and steps will result in:
 
@@ -384,7 +384,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    ```
 
      </TabItem>
-     
+
      <TabItem value="irsa" label="IRSA">
 
    In addition to standard authentication, which uses anonymous users and relies on the network for access control, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
@@ -499,7 +499,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/kub
 ```
 
   </TabItem>
-  
+
   <TabItem value="irsa" label="IRSA">
 
 ```bash reference

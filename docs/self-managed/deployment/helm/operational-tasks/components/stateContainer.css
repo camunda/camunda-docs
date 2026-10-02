@@ -27,3 +27,8 @@
     order: 3;
   }
 }
+
+.wrapper .aside svg {
+  width: 100%;
+  height: auto;
+}

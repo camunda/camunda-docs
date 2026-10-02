@@ -44,9 +44,9 @@ Ensure all prerequisites are in place to avoid issues during installation or whe
 
 This is the high-level architecture diagram for our production setup, as illustrated below:
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764665925646201&cot=14 -->
+<!-- Diagram source: img/architecture.excalidraw. Open and edit at https://excalidraw.com -->
 
-![Architecture Diagram](./img/architecture.jpg)
+![Production Kubernetes cluster with an orchestration namespace for the Orchestration Cluster, Connectors, and Optimize, and a management-and-modeling namespace for Management Identity, Console, and Web Modeler, both behind an ingress and connected to an external OIDC provider and databases](./img/architecture.svg)
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/docs/self-managed/reference-architecture/kubernetes/#kubernetes).
 
