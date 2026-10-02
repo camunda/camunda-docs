@@ -147,7 +147,9 @@ This issues [`DELETE /actuator/cluster/zones/<zone>?force=true`](/self-managed/c
 
 In a planned evacuation, the zone is still reachable, so don't force-remove it. Drain it gracefully instead: send `DELETE /actuator/cluster/zones/<zone>` without `force=true` through the [Remove a zone API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#remove-a-zone). The engine moves the zone's partitions to the remaining zones before it removes the brokers. The request is asynchronous. Wait until `GET /actuator/cluster` reports the change as `COMPLETED` before you shut down the zone's brokers.
 
-You must remove the zone when it held half the replicas or more. The replica count decides this, not the number of zones. See [step 1](#1-confirm-the-quorum-is-intact). An evenly split two-zone cluster always needs it, which is why [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) has a failover runbook and this architecture does not.
+This step applies to a cluster with three or more zones. You must remove the zone when it held half the replicas or more. The replica count decides this, not the number of zones. See [step 1](#1-confirm-the-quorum-is-intact).
+
+Don't remove a zone from a cluster that still runs on its two-zone bootstrap. Bring the lost zone back instead, then add the third region. An evenly split [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) cluster does need a force-removal, which is why it has its own failover runbook.
 
 The trade-off is failback cost. You must add a removed zone back when you bring the region back, and its brokers start empty.
 
