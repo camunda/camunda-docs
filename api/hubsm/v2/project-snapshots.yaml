@@ -859,6 +859,11 @@ components:
       type: object
       description: Filter criteria for searching project snapshots.
       properties:
+        projectSnapshotKey:
+          description: Filter by project snapshot key.
+          x-semantic-type: ProjectSnapshotKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         projectKey:
           description: Filter by the key of the project the snapshot belongs to.
           x-semantic-type: ProjectKey

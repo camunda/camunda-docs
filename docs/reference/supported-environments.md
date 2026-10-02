@@ -45,7 +45,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
 - **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x, 4.1.x
-- **Helm CLI**: v4.x is required for Camunda 8.10 (chart 15.x) and later. See [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md) for details, and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
+- **Helm CLI**: 4.x [recommended], 3.10+ (supported until February 10, 2027; continued use after that date is at the customer’s own risk). For details, see [Helm CLI support](/self-managed/deployment/helm/operational-tasks/helm-v4.md#camunda-helm-chart-compatibility) and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## Camunda 8 Self-Managed
 
@@ -107,7 +107,7 @@ Regardless of the type, the network storage volumes you use must meet these requ
 
 ### Helm charts version matrix
 
-Camunda Helm chart version `15.x.x` works with Camunda version `8.10.x` and requires the Helm v4 CLI. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for more details.
+Camunda Helm chart version `15.x.x` works with Camunda version `8.10.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for more details.
 
 ## Component requirements
 
@@ -139,14 +139,14 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 ### Component version matrix
 
-The following matrix shows which component versions work together. Components within the same column must share the same `minor` and `patch` version.
+The following matrix shows which component versions work together. The components in each cell must share the same `minor` and `patch` version except Desktop Modeler, which follows its own versioning and is not version-locked to other components.
 
 For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
 
-| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                       |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x                                                                              | Camunda Hub 8.10.x<br/>Desktop Modeler 5.46+ |
-
-:::note
-You can use newer versions of Desktop and Camunda Hub with older versions of the Orchestration Cluster.
-:::
+| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management and design](../self-managed/reference-architecture/reference-architecture.md#camunda-hub)    |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster 8.10.X<br/>Connectors 8.10.X<br/>Optimize 8.10.X                                          | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.52+                              |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.46+                              |
+| Orchestration Cluster 8.9.X<br/>Connectors 8.9.X<br/>Optimize 8.9.X                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x<br/>Web Modeler 8.9.x<br/>Desktop Modeler 5.46+ |
+| Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.10.X<br/>Camunda Hub 8.10.X<br/>Desktop Modeler 5.40+                              |
+| Orchestration Cluster 8.8.X<br/>Connectors 8.8.X<br/>Optimize 8.8.X                                             | Management Identity 8.8.x<br/>Self-Managed Console 8.8.x<br/>Web Modeler 8.8.x<br/>Desktop Modeler 5.40+ |

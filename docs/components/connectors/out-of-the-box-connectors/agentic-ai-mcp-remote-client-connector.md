@@ -11,7 +11,7 @@ The MCP Remote Client connector allows connecting an AI agent to a remote MCP se
 
 Since the MCP client functionality is handled by a stateless [job worker](../../concepts/job-workers.md), each activation of an activity using the MCP Remote Client connector requires opening a dedicated HTTP connection/SSE subscription to the MCP server.
 
-For example, each of the following actions in an agentic AI feedback loop opens and closes a dedicated MCP client connection to the remote server:
+For example, each of the following actions in an agent loop opens and closes a dedicated MCP client connection to the remote server:
 
 1. Tool discovery
 2. Tool call
