@@ -60,9 +60,6 @@ ProcessOS Harness is distributed through repositories available to early access 
 
 ### Keep an installation up to date
 
-
-
-
 | Command                          | What it does                  |
 | -------------------------------- | ----------------------------- |
 | `c8 os update`                   | Update to the latest release. |
