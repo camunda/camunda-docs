@@ -30,7 +30,7 @@ What the chooser offers depends on whether you can edit the diagram, that is, wh
 | You can edit the diagram, and the selected credential is out of date | Select a credential, or upgrade the selected one. |
 | You cannot edit the diagram                                          | Select a credential only.                         |
 
-This only controls what the chooser offers. On the [**Credentials** page](./index.md#permissions), any member with access to your organization can manage credentials.
+This only controls what the chooser offers. On the [**Credentials** page](./index.md#permissions), any member of your organization who has access to Camunda Hub can manage credentials, and the cluster's own authorizations apply whenever Hub writes a credential to it.
 
 The chooser is unavailable while you are not connected to an environment, while you work offline, while the connected environment is paused, or when it runs a Camunda version before 8.10. The field tells you which of these applies.
 

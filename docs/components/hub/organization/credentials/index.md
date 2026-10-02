@@ -31,6 +31,10 @@ A credential is deployed to environments, not to clusters. An environment is the
 - Camunda Hub shows an environment by its name, and adds the cluster name in parentheses whenever the two names differ.
 - On a Self-Managed cluster with several Physical Tenants, each environment is an independent target, with its own copy of the credential, its own values, and its own state. A credential deployed to one environment is not readable from the other environments on that cluster.
 
+:::note
+Camunda 8 SaaS does not show environments yet, so Hub labels each target as a cluster there. The **Environments only** tab is named **Clusters only**, and the wizard, the credential list, and the scan say _cluster_ wherever this page says _environment_. A SaaS cluster holds a single environment, so everything else on this page applies unchanged.
+:::
+
 ## Terminology
 
 | Term            | Meaning                                                                                                                                                                                                                                                    |
@@ -92,11 +96,13 @@ The same warning appears in the [modeling interface](./modeling-interface.md#cre
 
 Camunda provides a credential type for each family of connectors that supports credentials. The following types are available:
 
-| Credential type     | Bound to the connector's input | Example connectors                                                              |
-| ------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
-| AWS Credential      | `awsCredential`                | Amazon SQS, Amazon S3, Amazon Bedrock, and other Amazon Web Services connectors |
-| REST Authentication | `authenticationConfiguration`  | HTTP Polling, HTTP REST, and GraphQL connectors                                 |
-| JDBC Connection     | `configuration`                | Execute SQL Statement on Database                                               |
+| Credential type          | Bound to the connector's input | Example connectors                                                                                                 |
+| ------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| AWS Credential           | `awsCredential`                | Amazon SQS, Amazon S3, Amazon Bedrock, and other Amazon Web Services connectors                                    |
+| REST Authentication      | `authenticationConfiguration`  | HTTP Polling, HTTP REST, and GraphQL connectors                                                                    |
+| JDBC Connection          | `configuration`                | Execute SQL Statement on Database                                                                                  |
+| Email Account (Inbound)  | `emailAccountConfiguration`    | Email Boundary Event, Email Intermediate Catch Event, Email Receive Task, and Email Message Start Event connectors |
+| Email Account (Outbound) | `emailAccountConfiguration`    | Email Connector                                                                                                    |
 
 More connectors gain credential support over time, so this list grows. Each credential type card in the **Create a credential** wizard lists the connectors that currently use that type under **Used by**.
 
@@ -111,7 +117,7 @@ Camunda Hub provides a **Credentials** page for your organization. It has two ta
 
 Before you create your first credential, the **Managed in Hub** tab shows an empty state with a **Create credential** button.
 
-![Managed tab of the Credentials page in Camunda Hub, showing the message "Your organization has no credentials yet" and a Create credential button](./img/credentials-managed-empty.png)
+![Managed in Hub tab of the Credentials page in Camunda Hub, showing the message "Your organization has no credentials yet" and a Create credential button](./img/credentials-managed-empty.png)
 
 Once credentials exist, this tab lists them with their name, credential type, state, the environments they cover, and when they were last modified.
 
@@ -121,7 +127,7 @@ To create a credential, select **Create credential**, and complete the three ste
 
 1. **Choose credential**: select the credential type for the connector you want to authenticate. Each card describes the credential type and lists the connectors that use it. Use the search field to search by credential type or by connector name.
 
-   ![Step 1 of the Create a credential wizard, showing cards for AWS Credential, REST Authentication, and JDBC Connection, each listing the connectors that use it](./img/credentials-choose-credential.png)
+   ![Step 1 of the Create a credential wizard, showing a card for each credential type, such as AWS Credential, REST Authentication, and JDBC Connection, each listing the connectors that use it](./img/credentials-choose-credential.png)
 
 2. **Configure**: name the credential, choose which environments it applies to, and fill in the fields for the credential type you selected.
 
@@ -181,15 +187,23 @@ Adding a credential to Hub links it where it was found, without redeploying it, 
 
 Select **Rescan environments** to run the scan again, for example after a credential is created outside Hub.
 
-![Clusters only tab of the Credentials page, with one cluster selected, a Rescan clusters button, and the message "No cluster-only credentials found"](./img/credentials-clusters-only.png)
+![Environments only tab of the Credentials page, with one environment selected, a paused environment that cannot be selected, and a Scan environments button](./img/credentials-clusters-only.png)
 
 If the scan returns no results, none of the clusters behind the environments you selected has a credential-tagged variable that matches a known credential type and version. Environments that are paused, or whose cluster runs a Camunda version without credential support, are marked as such and cannot be scanned.
 
 ## Permissions
 
-Anyone with read access to your organization in Hub can see the **Credentials** page and the credentials it lists, including their configuration.
+Every member of your organization who has access to Camunda Hub can see the **Credentials** page and every credential it lists, and can open a credential to see its configuration.
 
-Any member with access to your organization can create, edit, deploy, and delete a credential. Camunda Hub applies no separate credential permission, and no cluster, project, or environment check.
+The same members can create, edit, deploy, and delete credentials. Camunda Hub has no separate credential permission, and it does not check your organization role, workspace role, or environment access before it saves a credential.
+
+Hub writes a credential to a cluster with your own identity when it deploys, redeploys, or deletes it, so the cluster's own authorizations still apply:
+
+- If a cluster refuses a deployment, Hub reports that environment as failed with the message `Not authorized to perform this operation on this cluster.`
+- If a cluster refuses to remove a credential because you lack permission or its credentials are wrong, Hub keeps the credential, so you can resolve the problem and delete it again.
+- On a Self-Managed cluster that uses basic authentication, Hub asks you for the cluster's username and password.
+
+When you choose environments for a credential or for a scan, Hub lists only the environments you can see. Members with the **Organization Owner**, **Organization Admin**, or **DevOps** role see every environment. On Self-Managed, so does any role with the `admin:*` or `admin:clusters` permission. Other members see only the environments assigned to workspaces where they are a **Workspace Admin** or **Editor**. The credential list and detail page still show every credential and all of its targets, and a target in an environment you cannot see is shown by its ID.
 
 ## Known limitations
 
@@ -198,12 +212,12 @@ In this release:
 - You cannot create a secret from a credential. Create secrets in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) first.
 - The plain-text warning checks the whole field value, so a value that combines literal text with a reference, such as `Bearer camunda.secrets.TOKEN`, is flagged even though the reference resolves.
 - Hub does not show which processes use a given credential, so check the impact yourself before you edit or delete one.
-- Credentials are visible to everyone with read access to your organization. You cannot restrict a credential to a project or a subset of users.
+- Credentials are visible to everyone in your organization who has access to Camunda Hub. You cannot restrict a credential to a project or a subset of users.
 - A credential's ID cannot be changed after creation.
 - Credentials are edited in place, with no history of previous values.
 - Secret suggestions are cluster-scoped, so a credential field offers every secret name on the cluster that hosts the environment you selected, including names that other environments on that cluster use.
 - Filtering the **Managed in Hub** tab by environment matches every environment on that environment's cluster.
-- Credential permissions are evaluated per organization, not per environment, so they do not follow the isolation between environments on a cluster.
+- Camunda Hub checks credential permissions per organization, not per environment, so its own check does not follow the isolation between environments on a cluster. The cluster's own authorizations still apply when Hub writes to it.
 - The **Environments only** scan reads a cluster's shared variables, which on Self-Managed belong to the `default` Physical Tenant. A credential created directly in another Physical Tenant is not found.
 
 ## Next steps
