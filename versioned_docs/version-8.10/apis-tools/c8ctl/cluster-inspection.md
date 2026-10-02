@@ -1,0 +1,617 @@
+---
+id: cluster-inspection
+title: "Cluster inspection and process management"
+sidebar_label: "Cluster inspection"
+description: "Use c8ctl to list, search, and manage process instances, user tasks, incidents, jobs, messages, and forms in a Camunda 8 cluster."
+---
+
+<!-- This page is maintained in the c8ctl repository (https://github.com/camunda/c8ctl, in docs/) and
+     is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
+     overwritten. Edit the source in the c8ctl repo instead. -->
+
+`c8ctl` follows a `<verb> <resource>` command structure. Most resources have short aliases to reduce typing:
+
+| Resource                | Alias         |
+| :---------------------- | :------------ |
+| `process-instance(s)`   | `pi`          |
+| `process-definition(s)` | `pd`          |
+| `user-task(s)`          | `ut`          |
+| `incident(s)`           | `inc`         |
+| `message`               | `msg`         |
+| `variable(s)`           | `vars`, `var` |
+| `authorization(s)`      | `auth`        |
+| `mapping-rule(s)`       | `mr`          |
+
+Available verbs: `list`, `search`, `get`, `create`, `await`, `delete`, `set`, `cancel`, `complete`, `fail`, `activate`, `update`, `resolve`, `publish`, `correlate`, `assign`, `unassign`.
+
+:::tip
+All commands respect the active profile and tenant. Pass `--profile` to override the profile for a single command:
+
+```bash
+c8 list pi --profile=prod
+c8 search ut --assignee=jane --profile=staging
+```
+
+:::
+
+## Topology
+
+Retrieve cluster topology information:
+
+```bash
+c8 get topology
+```
+
+## Process instances
+
+Business IDs require Camunda 8.9 or newer.
+
+### List process instances
+
+```bash
+c8 list pi
+c8 list process-instances
+
+# Filter by BPMN process ID
+c8 list pi --id=order-process
+
+# Filter by state
+c8 list pi --state=ACTIVE
+
+# Filter by Business ID
+c8 list pi --businessId=order-123
+```
+
+### Get a process instance
+
+```bash
+c8 get pi 2251799813685249
+
+# Include variables in the output
+c8 get pi 2251799813685249 --variables
+```
+
+### Create a process instance
+
+```bash
+c8 create pi --id=order-process
+
+# With a specific version
+c8 create pi --id=order-process --version=2
+
+# With variables
+c8 create pi --id=order-process --variables='{"orderId":"12345","amount":100}'
+
+# With a Business ID for business-level correlation
+c8 create pi --id=order-process --businessId=order-123
+
+# Create and wait for completion
+c8 create pi --id=order-process --awaitCompletion
+
+# With a custom timeout (30 seconds)
+c8 create pi --id=order-process --awaitCompletion --requestTimeout=30000
+```
+
+### Await process instance completion
+
+The `await` command is a shorthand for `create` with `--awaitCompletion`. It uses the Orchestration Cluster API's built-in server-side waiting:
+
+```bash
+c8 await pi --id=order-process
+c8 await pi --id=order-process --variables='{"orderId":"12345"}'
+c8 await pi --id=order-process --businessId=claim-456
+c8 await pi --id=order-process --requestTimeout=60000
+```
+
+The `--requestTimeout` option sets the maximum wait time in milliseconds. When omitted or set to `0`, the cluster's default request timeout applies.
+
+### Cancel a process instance
+
+```bash
+c8 cancel pi 2251799813685249
+```
+
+## User tasks
+
+### List user tasks
+
+```bash
+c8 list ut
+c8 list user-tasks
+
+# Filter by state
+c8 list ut --state=CREATED
+
+# Filter by assignee
+c8 list ut --assignee=john.doe
+```
+
+### Complete a user task
+
+```bash
+c8 complete ut 2251799813685250
+
+# With variables
+c8 complete ut 2251799813685250 --variables='{"approved":true,"notes":"Looks good"}'
+```
+
+## Incidents
+
+### List incidents
+
+```bash
+c8 list inc
+c8 list incidents
+
+# Filter by state
+c8 list inc --state=ACTIVE
+
+# Filter by process instance
+c8 list inc --processInstanceKey=2251799813685249
+```
+
+### Get an incident
+
+```bash
+c8 get inc 2251799813685251
+```
+
+### Resolve an incident
+
+```bash
+c8 resolve inc 2251799813685251
+```
+
+## Jobs
+
+### List jobs
+
+```bash
+c8 list jobs
+
+# Filter by type
+c8 list jobs --type=email-service
+
+# Filter by state
+c8 list jobs --state=ACTIVATABLE
+```
+
+### Activate jobs
+
+```bash
+c8 activate jobs email-service
+
+# With options
+c8 activate jobs email-service --maxJobsToActivate=20 --timeout=120000 --worker=my-worker
+
+# Include custom headers and fetch specific variables in the output
+c8 activate jobs email-service --customHeaders --fetchVariable=orderId,amount
+```
+
+Use `--customHeaders` to include each job's custom headers in the output, and `--fetchVariable` to fetch a comma-separated list of variable names from the server and include them.
+
+### Complete a job
+
+```bash
+c8 complete job 2251799813685252
+
+# With variables
+c8 complete job 2251799813685252 --variables='{"emailSent":true}'
+```
+
+### Fail a job
+
+```bash
+c8 fail job 2251799813685252
+
+# With retries and error message
+c8 fail job 2251799813685252 --retries=3 --errorMessage="Email service unavailable"
+```
+
+### Update a job
+
+Update a job's retries or timeout. At least one of `--retries` or `--timeout` is required:
+
+```bash
+# Reset the retry count (for example, to make a failed job activatable again)
+c8 update job 2251799813685252 --retries=3
+
+# Extend the job timeout to 60 seconds
+c8 update job 2251799813685252 --timeout=60000
+```
+
+## Search
+
+The `search` command provides powerful filtering across all major resource types. Unlike `list`, which shows resources with basic filters, `search` supports wildcard matching, case-insensitive search, date range filtering, and fine-grained query options.
+
+### Date range filtering
+
+Use `--between` to filter results by a date range. Dates can be short (`YYYY-MM-DD`) or full ISO 8601 datetimes. Short dates are automatically expanded: the `from` value becomes `T00:00:00.000Z` and the `to` value becomes `T23:59:59.999Z`.
+
+```bash
+# Process instances started today
+c8 search pi --between=2025-03-05..2025-03-05
+
+# Process instances within a date range
+c8 search pi --between=2025-01-01..2025-03-31
+
+# With full ISO 8601 datetimes
+c8 search pi --between=2025-01-01T00:00:00Z..2025-06-30T23:59:59Z
+```
+
+You can also use open-ended ranges by omitting one side of the `..` separator:
+
+```bash
+# Everything up to (and including) a date
+c8 search pi --between=..2025-03-05
+
+# Everything from a date onwards
+c8 search pi --between=2025-01-01..
+
+# Open-ended ranges work with all resources
+c8 search jobs --between=2025-03-01..
+c8 search inc --between=..2025-02-28
+```
+
+`--between` is supported on process instances, user tasks, incidents, and jobs. Use `--dateField` to specify which date field to filter on. Each resource has a different default:
+
+| Resource          | Default `dateField` | Available date fields                                       |
+| :---------------- | :------------------ | :---------------------------------------------------------- |
+| Process instances | `startDate`         | `startDate`, `endDate`                                      |
+| User tasks        | `creationDate`      | `creationDate`, `completionDate`, `followUpDate`, `dueDate` |
+| Incidents         | `creationTime`      | `creationTime`                                              |
+| Jobs              | `creationTime`      | `creationTime`, `lastUpdateTime`                            |
+
+```bash
+# Process instances that ended in January
+c8 search pi --between=2025-01-01..2025-01-31 --dateField=endDate
+
+# User tasks due this week
+c8 search ut --between=2025-03-03..2025-03-07 --dateField=dueDate
+
+# Incidents created today
+c8 search inc --between=2025-03-05..2025-03-05
+
+# Jobs created in a date range
+c8 search jobs --between=2025-01-01..2025-12-31
+```
+
+`--between` also works with the `list` command:
+
+```bash
+c8 list pi --between=2025-01-01..2025-03-31
+c8 list ut --between=2025-03-01..2025-03-31
+c8 list inc --between=2025-03-05..2025-03-05
+c8 list jobs --between=2025-01-01..2025-12-31
+```
+
+### Wildcard search
+
+String filters support wildcard matching:
+
+- `*` — matches zero or more characters.
+- `?` — matches exactly one character.
+
+```bash
+c8 search pd --name='*order*'
+c8 search pd --id='process-v?'
+c8 search jobs --type='*-service'
+c8 search variables --name='order*'
+```
+
+Wildcard-capable fields per resource:
+
+| Resource            | Fields                   |
+| :------------------ | :----------------------- |
+| Process definitions | `--name`, `--id`         |
+| Process instances   | `--id`                   |
+| User tasks          | `--assignee`             |
+| Incidents           | `--errorMessage`, `--id` |
+| Jobs                | `--type`                 |
+| Variables           | `--name`, `--value`      |
+
+### Case-insensitive search
+
+Prefix a flag name with `i` to make the filter case-insensitive. Case-insensitive filtering is performed client-side after fetching results.
+
+```bash
+c8 search pd --iname='*ORDER*'
+c8 search ut --iassignee=John
+c8 search jobs --itype='*Service*'
+c8 search inc --ierrorMessage='*timeout*'
+c8 search variables --iname='OrderId'
+```
+
+Case-insensitive flags per resource:
+
+| Resource            | Flags                      |
+| :------------------ | :------------------------- |
+| Process definitions | `--iname`, `--iid`         |
+| Process instances   | `--iid`                    |
+| User tasks          | `--iassignee`              |
+| Incidents           | `--ierrorMessage`, `--iid` |
+| Jobs                | `--itype`                  |
+| Variables           | `--iname`, `--ivalue`      |
+
+:::note
+Case-insensitive filtering fetches up to 1000 results from the server and filters client-side. For large result sets, combine with case-sensitive filters to narrow results first.
+:::
+
+### Search process definitions
+
+```bash
+c8 search pd --id=order-process
+c8 search pd --name=Order
+c8 search pd --key=2251799813685249
+c8 search pd --id=order-process --name=Order
+
+# Using a specific profile for this search
+c8 search pd --id=order-process --profile=prod
+```
+
+### Search process instances
+
+```bash
+c8 search pi --state=ACTIVE
+c8 search pi --id=order-process
+c8 search pi --businessId=order-123
+c8 search pi --processDefinitionKey=2251799813685249
+c8 search pi --parentProcessInstanceKey=2251799813685250
+c8 search pi --id=order-process --state=ACTIVE
+
+# Filter by date range
+c8 search pi --between=2025-01-01..2025-03-31
+c8 search pi --between=2025-01-01..2025-06-30 --dateField=endDate
+```
+
+### Search user tasks
+
+```bash
+c8 search ut --state=CREATED
+c8 search ut --assignee=john.doe
+c8 search ut --processInstanceKey=2251799813685249
+c8 search ut --elementId=UserTask_Approve
+c8 search ut --state=CREATED --assignee=john.doe
+
+# Filter by date range
+c8 search ut --between=2025-03-01..2025-03-31
+c8 search ut --between=2025-03-01..2025-03-31 --dateField=dueDate
+```
+
+### Search incidents
+
+```bash
+c8 search inc --state=ACTIVE
+c8 search inc --processInstanceKey=2251799813685249
+c8 search inc --errorType=JOB_NO_RETRIES
+c8 search inc --errorMessage='*timeout*'
+c8 search inc --state=ACTIVE --errorType=JOB_NO_RETRIES
+
+# Filter by creation time
+c8 search inc --between=2025-03-01..2025-03-05
+```
+
+### Search jobs
+
+```bash
+c8 search jobs --type=email-service
+c8 search jobs --state=CREATED
+c8 search jobs --processInstanceKey=2251799813685249
+c8 search jobs --type=email-service --state=CREATED
+
+# Filter by date range
+c8 search jobs --between=2025-01-01..2025-12-31
+c8 search jobs --between=2025-01-01..2025-12-31 --dateField=lastUpdateTime
+```
+
+### Search variables
+
+```bash
+c8 search variables --name=orderId
+c8 search variables --value=12345
+c8 search variables --processInstanceKey=2251799813685249
+c8 search variables --scopeKey=2251799813685260
+
+# Show full (non-truncated) variable values
+c8 search variables --name=orderPayload --fullValue
+```
+
+By default, long variable values are truncated. Truncated values show a `✓` in the "Truncated" column. Use `--fullValue` to see complete values.
+
+### Search wait states
+
+Wait states are the points where a process instance is waiting — an open job, a message subscription, a timer, a condition, a user task, or a signal. Use `search wait-state` (alias `ws`) to find them:
+
+```bash
+# All wait states for a process instance
+c8 search ws --processInstanceKey=2251799813685249
+
+# Filter by wait state type (JOB, MESSAGE, TIMER, CONDITION, USER_TASK, SIGNAL)
+c8 search ws --waitStateType=JOB
+
+# Filter by BPMN element type, or by element ID (supports wildcards)
+c8 search ws --elementType=SERVICE_TASK
+c8 search ws --elementId='*Approve*'
+```
+
+## Variables
+
+### Set variables
+
+Set variables on a process instance or a specific flow element scope using its element instance key:
+
+```bash
+# Set variables on a process instance (propagated to the outermost scope by default)
+c8 set variable 2251799813685249 --variables='{"status":"approved","amount":100}'
+
+# Set variables in the local scope only (not propagated to the parent scope)
+c8 set variable 2251799813685249 --variables='{"localCounter":1}' --local
+```
+
+The `--variables` flag accepts a JSON object. Use `--local` to restrict the update to the specified element instance scope instead of propagating to the outermost scope.
+
+The element instance key is the key of the process instance or the specific flow element scope you want to update. You can retrieve these keys from `c8 get pi` or `c8 search pi`.
+
+## Identity management
+
+Manage users, roles, groups, tenants, authorizations, and mapping rules.
+
+### Users
+
+```bash
+c8 list users
+c8 search users --name=John --email='john@example.com'
+c8 get user john
+c8 create user --username=john --name='John Doe' --email=john@example.com --password=secret
+c8 delete user john
+```
+
+### Roles
+
+```bash
+c8 list roles
+c8 search roles --name=admin
+c8 get role my-role
+c8 create role --name=my-role
+c8 delete role my-role
+```
+
+### Groups
+
+```bash
+c8 list groups
+c8 search groups --name=developers
+c8 get group developers
+c8 create group --groupId=developers --name=Developers
+c8 delete group developers
+```
+
+### Tenants
+
+```bash
+c8 list tenants
+c8 search tenants --name=Production
+c8 get tenant prod
+c8 create tenant --tenantId=prod --name='Production'
+c8 delete tenant prod
+```
+
+### Authorizations
+
+```bash
+c8 list auth
+c8 search auth --ownerId=john --resourceType=process-definition
+c8 get auth 123456
+c8 create auth --ownerId=john --ownerType=USER --resourceType=process-definition --resourceId='*' --permissions=READ,CREATE
+c8 delete auth 123456
+```
+
+### Mapping rules
+
+```bash
+c8 list mapping-rules
+c8 search mapping-rules --claimName=department
+c8 get mapping-rule my-rule
+c8 create mapping-rule --mappingRuleId=my-rule --name=my-rule --claimName=department --claimValue=engineering
+c8 delete mapping-rule my-rule
+```
+
+### Assign and unassign
+
+Use `assign` and `unassign` to manage membership between identity resources:
+
+```bash
+# Assign a role to a user
+c8 assign role admin --to-user=john
+
+# Assign a user to a group
+c8 assign user john --to-group=developers
+
+# Assign a group to a tenant
+c8 assign group developers --to-tenant=prod
+
+# Unassign a role from a user
+c8 unassign role admin --from-user=john
+```
+
+Supported assignment targets:
+
+| Resource       | `assign` targets                                              | `unassign` sources                                                    |
+| :------------- | :------------------------------------------------------------ | :-------------------------------------------------------------------- |
+| `role`         | `--to-user`, `--to-group`, `--to-tenant`, `--to-mapping-rule` | `--from-user`, `--from-group`, `--from-tenant`, `--from-mapping-rule` |
+| `user`         | `--to-group`, `--to-tenant`                                   | `--from-group`, `--from-tenant`                                       |
+| `group`        | `--to-tenant`                                                 | `--from-tenant`                                                       |
+| `mapping-rule` | `--to-group`, `--to-tenant`                                   | `--from-group`, `--from-tenant`                                       |
+
+## Messages
+
+### Publish a message
+
+```bash
+c8 publish msg order-placed
+c8 publish msg order-placed --correlationKey=order-12345
+c8 publish msg order-placed --correlationKey=order-12345 --variables='{"orderId":"12345","total":250.00}'
+c8 publish msg order-placed --correlationKey=order-12345 --timeToLive=3600000
+```
+
+### Correlate a message
+
+Use `correlate` to correlate a message to waiting process instances. It is a separate command from `publish` and, like `publish`, accepts a `--correlationKey` and optional `--variables`:
+
+```bash
+c8 correlate msg payment-received --correlationKey=order-12345 --variables='{"amount":250.00}'
+```
+
+## Forms
+
+Retrieve the form linked to a user task or process definition:
+
+```bash
+# Search both user tasks and process definitions
+c8 get form 2251799813685251
+
+# User task form only
+c8 get form 2251799813685251 --ut
+
+# Start form for a process definition only
+c8 get form 2251799813685252 --pd
+
+# Using a specific profile
+c8 get form 2251799813685251 --profile=prod
+```
+
+When no flag is specified, `c8ctl` searches both types and reports where the form was found.
+
+## Sorting and limiting results
+
+Use `--sortBy`, `--asc`, and `--desc` to control result ordering, and `--limit` to cap the number of results:
+
+```bash
+# Sort process instances ascending by key
+c8 list pi --sortBy=key --asc
+
+# Sort user tasks descending by creation time
+c8 search ut --state=CREATED --sortBy=creationDate --desc
+
+# Limit results
+c8 list pi --limit=10
+```
+
+## Output
+
+Search and list results display as tables in text mode:
+
+```text
+Key              | Process ID     | State  | Version | Tenant ID
+2251799813685260 | order-process  | ACTIVE | 3       | <default>
+2251799813685270 | order-process  | ACTIVE | 3       | <default>
+Found 2 process instance(s)
+```
+
+Switch to JSON for scripting and automation:
+
+```bash
+c8 output json
+c8 search pi --state=ACTIVE
+# [{"processInstanceKey":"2251799813685260", ...}, ...]
+```

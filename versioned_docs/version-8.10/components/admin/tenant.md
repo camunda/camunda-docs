@@ -1,0 +1,158 @@
+---
+id: tenant
+title: "Tenants"
+sidebar_label: "Tenants"
+description: "Manage tenants within the Orchestration Cluster Admin to logically separate your infrastructure."
+---
+
+Use Admin to manage Orchestration Cluster tenants and isolate data within a single cluster. Tenant management is available on both Camunda 8 SaaS and Self-Managed.
+
+:::note
+On SaaS, the **Tenants** tab is visible to organization admins on clusters running generation 8.8 and later, even before multi-tenancy checks are enabled. This allows admins to set up tenants and assignments before enforcing checks. Before enabling checks, confirm your tenant assignments so users retain the access they need.
+:::
+
+## About tenants
+
+A tenant is a logical boundary for data within a Camunda 8 installation.
+
+This enables multiple teams, departments, or clients to share a single environment while keeping data isolated.
+
+:::tip
+To learn more about tenants, see [multi-tenancy](../concepts/multi-tenancy.md).
+:::
+
+You can manage your Orchestration Cluster tenants directly in [Admin](admin-introduction.md).
+
+- **Multi-tenancy** is enabled by default.
+- **Multi-tenancy checks** are disabled by default. All data maps to the `<default>` tenant.
+
+This allows administrators to set up tenants and assignments before enforcing multi-tenancy checks.
+
+How you enable multi-tenancy checks depends on your deployment model:
+
+- **SaaS**: Enable the **Multi-tenancy** toggle per cluster in [Camunda Hub cluster settings](/components/hub/organization/manage-clusters/settings.md#multi-tenancy).
+- **Self-Managed**: Configure multi-tenancy through [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#multi-tenancy).
+
+:::warning
+Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
+:::
+
+## Create a tenant
+
+:::note
+The `<default>` tenant is automatically created when Admin starts.
+:::
+
+1. Log in to Admin and open the **Tenants** tab.
+
+   ![tenant-management-tab](./img/tenant-management-tab.png)
+
+2. Click **Create tenant**. In the modal, provide the tenant **ID**, **name**, and optional **description**. Then click **Create tenant**.
+
+   ![tenant-management-create-tenant-modal](./img/tenant-management-create-tenant-modal.png)
+
+3. The tenant appears in the list. If not, refresh the page.
+
+   ![tenant-management-new-tenant-in-table](./img/tenant-management-new-tenant-in-table.png)
+
+4. Click the tenant to open details and manage assignments.
+
+   ![tenant-management-tenant-details-users-tab](./img/tenant-management-tenant-details-users-tab.png)
+
+## Update a tenant
+
+You can update the name and description of a tenant, but cannot change its ID after creation. To change a tenant's ID, you must delete the tenant and create a new one.
+
+To update a tenant:
+
+1. Log in to Admin in your cluster, and select the **Tenants** tab.
+2. Click the **pencil icon** next to the tenant you want to update.
+3. Update the tenant details:
+   - **Name**: The name of the tenant.
+   - **Description**: An optional description of the tenant.
+4. Click the **Save** button.
+
+The tenant details are updated.
+
+:::note
+The `<default>` tenant is a system entity and cannot be updated.
+:::
+
+## Delete a tenant
+
+To delete a tenant, click on the **Delete** option in the list of tenants, and confirm the deletion.
+
+:::note
+The `<default>` tenant is a system entity and cannot be deleted.
+:::
+
+## Tenant assignments
+
+You can assign the following entities to a tenant:
+
+- [Users](user.md)
+- [Groups](group.md)
+- [Roles](role.md)
+- [Mapping rules](mapping-rules.md)
+- [Clients](client.md)
+
+You can manage these assignments by selecting the relevant tab on the tenant details page.
+
+### Assign users to a tenant
+
+1. Select the **Users** tab.
+2. Click **Assign user**. In the modal, enter the username and confirm. The username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
+
+   ![tenant-management-assign-users-modal](./img/tenant-management-assign-users-modal.png)
+
+3. The user appears in the list after assignment. Refresh the page if needed.
+
+   ![tenant-management-assigned-users](./img/tenant-management-assigned-users.png)
+
+### Assign groups to a tenant
+
+1. Select the **Groups** tab.
+2. Click **Assign group**. Search for a group ID and confirm.
+
+   ![tenant-management-assign-groups-modal](./img/tenant-management-assign-groups-modal.png)
+
+3. The group appears in the list after assignment. Refresh the page if needed.
+
+   ![tenant-management-assigned-groups](./img/tenant-management-assigned-groups.png)
+
+### Assign roles to a tenant
+
+1. Select the **Roles** tab.
+2. Click **Assign role**. Search for a role ID and confirm.
+
+   ![tenant-management-assign-roles-modal](./img/tenant-management-assign-roles-modal.png)
+
+3. The role appears in the list after assignment. Refresh the page if needed.
+
+   ![tenant-management-assigned-roles](./img/tenant-management-assigned-roles.png)
+
+### Assign mapping rules to a tenant
+
+:::note
+Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for [OIDC authentication in Self-Managed](../concepts/access-control/connect-to-identity-provider.md#self-managed). On SaaS, identity is managed by Camunda, so mapping rules cannot map claims from a customer identity provider.
+:::
+
+1. Select the **Mapping rules** tab.
+2. Click **Assign mapping rule**. Search for a mapping rule ID and confirm.
+
+   ![tenant-management-assign-mapping-rules-modal](./img/tenant-management-assign-mapping-rules-modal.png)
+
+3. The mapping rule appears in the list after assignment. Refresh the page if needed.
+
+   ![tenant-management-assigned-mapping-rules](./img/tenant-management-assigned-mapping-rules.png)
+
+### Assign clients to a tenant
+
+1. Select the **Clients** tab.
+2. Click **Assign client**. Enter the client ID and confirm.
+
+   ![tenant-management-assign-client-modal](./img/tenant-management-assign-client-modal.png)
+
+3. The client appears in the list after assignment. Refresh the page if needed.
+
+   ![tenant-management-assigned-clients](./img/tenant-management-assigned-clients.png)
