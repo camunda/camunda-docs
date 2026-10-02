@@ -661,18 +661,18 @@ A new versioning model for projects, process applications and file resources is 
 
 **File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
 
-### Runtime connection in Web Modeler
+### Runtime connection in Modeler
 
 <!-- https://github.com/camunda/product-hub/issues/3475 -->
 
-You can now view and choose which cluster you are connected to in Web Modeler.
+You can now view and choose which environment you are connected to in the modeler in Camunda Hub.
 
-- Connector-credential names from the cluster autocomplete in your FEEL expressions.
-- Task testing runs against the connected cluster.
-- Connect your cluster from the modeling toolbar to model against your real environment.
+- Connector-credential names from the environment autocomplete in your FEEL expressions.
+- Task testing runs against the connected environment.
+- Connect an environment from the modeling toolbar to model against your real runtime.
 
 :::note
-This is disabled by default and behind feature flag `runtimeConnectionEnabled` (cluster selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
+This is disabled by default and behind feature flag `runtimeConnectionEnabled` (environment selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
 :::
 
 ### Task testing supports call activities
