@@ -1,17 +1,19 @@
 ---
 id: overview
-title: ProcessOS Harness
+title: ProcessOS
 sidebar_label: Overview
-description: "ProcessOS Harness discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions, with a governance process keeping the work auditable."
-keywords: ["ProcessOS Harness", "Camunda Solution Harness", "re-engineering"]
+description: "ProcessOS discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions. ProcessOS Harness, available as early access, is the governance process that drives AI coding agents to do this work."
+keywords: ["ProcessOS", "ProcessOS Harness", "Camunda Solution Harness", "re-engineering"]
 ---
 
-ProcessOS Harness is an AI-powered intelligence layer on top of Camunda's agentic orchestration platform. It discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
+ProcessOS is an AI-powered intelligence layer on top of Camunda's agentic orchestration platform. It discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
 
-The harness is the governance backbone of that work. It drives AI coding agents to do the building safely and under control, so an AI-generated solution stays reviewable at every step.
+## ProcessOS Harness
+
+ProcessOS Harness is the governance backbone of ProcessOS. It is a governance process that runs on Camunda and drives AI coding agents, such as Claude Code or GitHub Copilot CLI, to do the building safely and under control. The harness guides the agent through each phase, asks for human review at defined gates, and commits every artifact to Git, so an AI-generated solution stays reviewable at every step.
 
 :::note Early access
-ProcessOS Harness is available as [early access](/components/early-access/overview.md) for trained customers and enabled partners. Expect behavior and commands to change between releases.
+The [early access](/components/early-access/overview.md) release of ProcessOS covers ProcessOS Harness only. It is available to trained customers and enabled partners, and behavior and commands can change between releases. To get access, contact your Camunda account team or a Camunda Forward Deployed Engineer.
 :::
 
 ## Who ProcessOS Harness is for
