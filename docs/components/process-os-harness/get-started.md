@@ -59,6 +59,7 @@ ProcessOS Harness is distributed through repositories available to early access 
    ```
 
 ### Keep an installation up to date
+
 To update the installation use:
 
 | Command                          | What it does                  |
