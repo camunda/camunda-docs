@@ -15,10 +15,7 @@ jobs:
     runs-on: gcp-core-8-default
     container: node:24
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Dependencies
         run: npm ci
       - name: Cache Docusaurus
@@ -45,12 +42,110 @@ jobs:
             secret/data/products/camunda-docs/ci/publish HOST;
             secret/data/products/camunda-docs/ci/publish USER;
             secret/data/products/camunda-docs/ci/publish PRIVATE_KEY;
+      - name: Install rsync
+        timeout-minutes: 3
+        run: apt-get update && apt-get install -y --no-install-recommends rsync openssh-client
       - name: Publish
-        uses: burnett01/rsync-deployments@155b6d6c1219ab2224c20c58d423a3f1b850395f # 9.0.1
+        timeout-minutes: 30
+        env:
+          REMOTE_PATH: ${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}/8.6
+          REMOTE_HOST: ${{ steps.secrets.outputs.HOST }}
+          REMOTE_USER: ${{ steps.secrets.outputs.USER }}
+          REMOTE_KEY: ${{ steps.secrets.outputs.PRIVATE_KEY }}
+        shell: bash # arrays below require bash
+        run: |
+          # Write the private key to a file, since ssh can't read a key from a string.
+          key="$RUNNER_TEMP/deploy_key"
+          install -m 600 /dev/null "$key"
+          printf '%s\n' "$REMOTE_KEY" > "$key"
+          trap 'rm -f "$key"' EXIT
+
+          ssh_opts=(          
+            -i "$key"                        # Authenticate with this key file.            
+            -o IdentitiesOnly=yes            # Offer only that key; don't try any other identities.            
+            -o StrictHostKeyChecking=no      # Don't prompt or fail on unknown host keys (same as the old action's default).            
+            -o UserKnownHostsFile=/dev/null  # Don't record host keys anywhere.
+          )
+
+          rsync_opts=(            
+            -a                       # Archive mode: recurse, keep permissions, times, symlinks, etc.            
+            -v                       # Verbose: list each file transferred.
+            -z                       # Compress data in transit.            
+            -r                       # Recurse into directories (already implied by -a; kept to match the old switches).            
+            --delete                 # Delete remote files that no longer exist in build/.          
+            --timeout=300            # Abort if no data moves for 300 seconds, so a stalled connection fails instead of hanging.            
+            -e "ssh ${ssh_opts[*]}"  # Use ssh as the remote shell, with the options above.
+          )
+
+          # Perform the actual file synchronization using rsync with the options defined above.
+          rsync "${rsync_opts[@]}" build/ "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"
+  # Temporarily publish to the old server and new server in parallel. Once we're satisfied everything is working properly,
+  # we can remove the old server deployment job.
+  publish-aws:
+    runs-on: gcp-core-8-default
+    container: node:24
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Dependencies
+        run: npm ci
+      - name: Cache Docusaurus
+        uses: ./.github/actions/docusaurus-cache
+      - name: Update redirects for environment
+        run: "sed -i 's!https://unsupported.docs.camunda.io!https://stage.unsupported.docs.camunda.io!g' ./static/.htaccess"
+      - name: Build
+        run: npm run build
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://stage.unsupported.docs.camunda.io
+          DOCS_SITE_BASE_URL: /8.6/
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
         with:
-          switches: -avzr --delete
-          path: build/
-          remote_path: ${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}/8.6
-          remote_host: ${{ steps.secrets.outputs.HOST }}
-          remote_user: ${{ steps.secrets.outputs.USER }}
-          remote_key: ${{ steps.secrets.outputs.PRIVATE_KEY }}
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/ci/publish-aws STAGE_UNSUPPORTED_PATH;
+            secret/data/products/camunda-docs/ci/publish-aws HOST;
+            secret/data/products/camunda-docs/ci/publish-aws USER;
+            secret/data/products/camunda-docs/ci/publish-aws PRIVATE_KEY;
+      - name: Install rsync
+        timeout-minutes: 3
+        run: apt-get update && apt-get install -y --no-install-recommends rsync openssh-client
+      - name: Publish to new server
+        timeout-minutes: 30
+        env:
+          REMOTE_PATH: ${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}/8.6
+          REMOTE_HOST: ${{ steps.secrets.outputs.HOST }}
+          REMOTE_USER: ${{ steps.secrets.outputs.USER }}
+          REMOTE_KEY: ${{ steps.secrets.outputs.PRIVATE_KEY }}
+        shell: bash # arrays below require bash
+        run: |
+          # Write the private key to a file, since ssh can't read a key from a string.
+          key="$RUNNER_TEMP/deploy_key"
+          install -m 600 /dev/null "$key"
+          printf '%s\n' "$REMOTE_KEY" > "$key"
+          trap 'rm -f "$key"' EXIT
+
+          ssh_opts=(          
+            -i "$key"                        # Authenticate with this key file.            
+            -o IdentitiesOnly=yes            # Offer only that key; don't try any other identities.            
+            -o StrictHostKeyChecking=no      # Don't prompt or fail on unknown host keys (same as the old action's default).            
+            -o UserKnownHostsFile=/dev/null  # Don't record host keys anywhere.
+          )
+
+          rsync_opts=(            
+            -a                       # Archive mode: recurse, keep permissions, times, symlinks, etc.            
+            -v                       # Verbose: list each file transferred.
+            -z                       # Compress data in transit.            
+            -r                       # Recurse into directories (already implied by -a; kept to match the old switches).            
+            --delete                 # Delete remote files that no longer exist in build/.          
+            --timeout=300            # Abort if no data moves for 300 seconds, so a stalled connection fails instead of hanging.            
+            -e "ssh ${ssh_opts[*]}"  # Use ssh as the remote shell, with the options above.
+          )
+
+          # Perform the actual file synchronization using rsync with the options defined above.
+          rsync "${rsync_opts[@]}" build/ "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"
