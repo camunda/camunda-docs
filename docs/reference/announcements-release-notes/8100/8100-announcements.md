@@ -836,7 +836,7 @@ Deployment change 1 description.
 
 The authentication properties Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize still accepts them in 8.10 and translates the recognized properties to their new equivalents at startup, and removes them in 8.11.
 
-Camunda Hub keeps its own authentication properties in 8.10 (see [Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md#configure-oidc-authentication)). Hub also translates these properties internally to their `camunda.security.authentication.*` equivalents at startup, but this translation currently has no practical effect, except for the username claim, which you can also set directly with `camunda.security.authentication.oidc.username-claim`.
+Camunda Hub keeps its own authentication properties in 8.10, not the `camunda.security.*` settings above (see [Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md#configure-oidc-authentication)). The one exception is the username claim, which you can also set directly with `camunda.security.authentication.oidc.username-claim`.
 
 **Action:** Migrate Optimize to the `camunda.security.*` settings before upgrading to 8.11.
 
@@ -909,7 +909,7 @@ With Camunda 8.10, Optimize authenticates through a shared implementation based 
 
 Optimize accepts its existing authentication settings in 8.10 and translates the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. User, group, role, tenant, and permission management for Optimize is unchanged and is still handled by Management Identity.
 
-Camunda Hub keeps its own authentication properties in 8.10 and requires no configuration change to upgrade. Hub also translates these properties internally to their `camunda.security.authentication.*` equivalents at startup, but this translation currently has no practical effect, except for the username claim, which you can also set directly with `camunda.security.authentication.oidc.username-claim`.
+Camunda Hub keeps its own authentication properties in 8.10 and requires no configuration change to upgrade. The one exception is the username claim, which you can also set directly with `camunda.security.authentication.oidc.username-claim`.
 
 **Action:** Migrate Optimize to the `camunda.security.*` settings before upgrading to 8.11, when its legacy authentication properties are removed.
 

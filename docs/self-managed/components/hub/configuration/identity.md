@@ -14,11 +14,7 @@ Management Identity is still required for Camunda Hub in 8.10. For more informat
 
 ## Configure OIDC authentication
 
-Configure Camunda Hub's OIDC authentication with the properties documented under [Identity / Keycloak](./properties.md#identity--keycloak).
-
-Camunda Hub does not use the Orchestration Cluster's `camunda.security.authentication.oidc.*` properties for authentication, with one exception: Camunda Hub also reads `camunda.security.authentication.oidc.username-claim` directly, as an alternative to `CAMUNDA_HUB_OAUTH2_TOKEN_USERNAMECLAIM`.
-
-Camunda Hub internally translates its own properties to their `camunda.security.authentication.oidc.*` equivalents at startup, but this translation currently has no other practical effect.
+Configure Camunda Hub's OIDC authentication with the properties documented under [Identity / Keycloak](./properties.md#identity--keycloak), not with the Orchestration Cluster's `camunda.security.authentication.oidc.*` settings. The one exception is the username claim: Camunda Hub also reads `camunda.security.authentication.oidc.username-claim` directly, as an alternative to `CAMUNDA_HUB_OAUTH2_TOKEN_USERNAMECLAIM`.
 
 ## Use a different OIDC provider than Keycloak
 

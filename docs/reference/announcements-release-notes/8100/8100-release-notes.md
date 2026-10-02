@@ -778,7 +778,7 @@ The Orchestration Cluster and Optimize now authenticate through a shared impleme
 
 Optimize continues to accept its existing authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
 
-Camunda Hub keeps its own authentication properties in 8.10 and requires no configuration change to upgrade. Hub internally translates these properties to their `camunda.security.authentication.*` equivalents at startup, but this translation currently has no practical effect, except for the username claim, which you can also set directly with `camunda.security.authentication.oidc.username-claim`. See [Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md#configure-oidc-authentication) for details.
+Camunda Hub keeps its own authentication properties in 8.10 and requires no configuration change to upgrade. The one exception is the username claim, which you can also set directly with `camunda.security.authentication.oidc.username-claim`. See [Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md#configure-oidc-authentication) for details.
 
 User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
 
