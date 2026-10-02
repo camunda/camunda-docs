@@ -37,10 +37,10 @@ import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 As a Spring Boot application, the `restapi` component supports any standard [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 
-The examples below show configuration in two formats:
+The tables below list each setting in two formats:
 
+- **Application properties** – the property names used in `application.yml`, the native Spring Boot configuration file format.
 - **Environment variables** – suitable for Docker Compose or direct shell usage.
-- **`application.yml`** – the native Spring Boot configuration file format.
 
 :::tip Passing JVM options
 When running the `restapi` component in a container (Docker / Kubernetes), use the `JAVA_TOOL_OPTIONS` environment variable to pass JVM arguments, for example for trust store settings or proxy configuration.
@@ -51,15 +51,11 @@ When running the `restapi` component in a container (Docker / Kubernetes), use t
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-camunda.hub.server:
-  url: https://hub.example.com # or https://example.com/hub
-  https-only: true # optional, default: true
-
-server:
-  servlet:
-    context-path: /hub # optional; required if server-url does not point to root path
-```
+| Property                        | Description                                                                                                                                                   | Example value                                            | Default value |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------- |
+| `camunda.hub.server.url`        | URL at which users access Camunda Hub in the browser (used to construct redirect URLs in the client-side login flow as well as links in notification emails). | `https://hub.example.com`,<br/>`https://example.com/hub` | -             |
+| `server.servlet.context-path`   | [optional]<br/>Context path of the URL. Must be set if `camunda.hub.server.url` does not point to the root path of a (sub-)domain.                            | `/hub`                                                   | -             |
+| `camunda.hub.server.https-only` | [optional]<br/>Enforce the usage of HTTPS when users access Camunda Hub (by redirecting from `http://` to `https://`).                                        | `true`                                                   | `true`        |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
@@ -304,27 +300,24 @@ Refer to the [Oracle](database.md#oracle) and [MySQL](database.md#mysql) databas
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-spring:
-  datasource:
-    url: jdbc:postgresql://postgres.example.com:5432/hub-db
-    username: hub-user
-    password: "***"
-    # driver-class-name: software.amazon.jdbc.Driver  # optional
-    hikari:
-      schema: custom_schema # optional; only supported for PostgreSQL
-```
+| Property                              | Description                                                                                                                                                                                                                                                                                                        | Example value                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| `spring.datasource.url`               | JDBC URL of the database                                                                                                                                                                                                                                                                                           | `jdbc:postgresql://postgres.example.com:5432/hub-db` |
+| `spring.datasource.username`          | Database user name                                                                                                                                                                                                                                                                                                 | `hub-user`                                           |
+| `spring.datasource.password`          | Database user password                                                                                                                                                                                                                                                                                             | \*\*\*                                               |
+| `spring.datasource.driver-class-name` | [optional]<br/>Java class name of the database driver                                                                                                                                                                                                                                                              | `software.amazon.jdbc.Driver`                        |
+| `spring.datasource.hikari.schema`     | [optional; only supported for PostgreSQL]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                      |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
 
-| Environment variable                  | Description                                                                                                                                                                                                                                                                                                        | Example value                                        |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
-| `SPRING_DATASOURCE_URL`               | JDBC URL of the database                                                                                                                                                                                                                                                                                           | `jdbc:postgresql://postgres.example.com:5432/hub-db` |
-| `SPRING_DATASOURCE_USERNAME`          | Database user name                                                                                                                                                                                                                                                                                                 | `hub-user`                                           |
-| `SPRING_DATASOURCE_PASSWORD`          | Database user password                                                                                                                                                                                                                                                                                             | \*\*\*                                               |
-| `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver                                                                                                                                                                                                                                                              | `software.amazon.jdbc.Driver`                        |
-| `SPRING_DATASOURCE_HIKARI_SCHEMA`     | [optional; only supported for PostgreSQL]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                      |
+| Environment variable                | Description                                                                                                                                                                                                                                                                                                        | Example value                                        |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| `SPRING_DATASOURCE_URL`             | JDBC URL of the database                                                                                                                                                                                                                                                                                           | `jdbc:postgresql://postgres.example.com:5432/hub-db` |
+| `SPRING_DATASOURCE_USERNAME`        | Database user name                                                                                                                                                                                                                                                                                                 | `hub-user`                                           |
+| `SPRING_DATASOURCE_PASSWORD`        | Database user password                                                                                                                                                                                                                                                                                             | \*\*\*                                               |
+| `SPRING_DATASOURCE_DRIVERCLASSNAME` | [optional]<br/>Java class name of the database driver                                                                                                                                                                                                                                                              | `software.amazon.jdbc.Driver`                        |
+| `SPRING_DATASOURCE_HIKARI_SCHEMA`   | [optional; only supported for PostgreSQL]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                      |
 
 </TabItem>
 </Tabs>
@@ -338,35 +331,30 @@ Camunda Hub requires an SMTP server to send notification emails to users.
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-camunda.hub.mail:
-  from-address: noreply@example.com
-  from-name: Camunda # optional, default: Camunda
-
-spring:
-  mail:
-    host: smtp.example.com
-    port: 587
-    user: hub-user # optional
-    password: "***" # optional
-    properties:
-      mail.smtp.auth: true # set to true if user and password are provided
-      mail.smtp.starttls.enable: true # default: true; set to false to disable STARTTLS encryption
-      mail.smtp.starttls.required: true # default: true; set to false to avoid enforcing STARTTLS
-```
+| Property                                             | Description                                                                                    | Example value         | Default value |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------- | ------------- |
+| `spring.mail.host`                                   | SMTP server host name                                                                          | `smtp.example.com`    | -             |
+| `spring.mail.port`                                   | SMTP server port                                                                               | `587`                 | -             |
+| `spring.mail.username`                               | [optional]<br/>SMTP user name                                                                  | `hub-user`            | -             |
+| `spring.mail.password`                               | [optional]<br/>SMTP user password                                                              | \*\*\*                | -             |
+| `spring.mail.properties.mail.smtp.auth`              | [optional]<br/>Set to `true` if you provide a user name and password.                          | `true`                | `true`        |
+| `spring.mail.properties.mail.smtp.starttls.enable`   | [optional]<br/>Enable TLS encryption for SMTP connections (using STARTTLS).                    | `true`                | `true`        |
+| `spring.mail.properties.mail.smtp.starttls.required` | [optional]<br/>Enforce the use of STARTTLS (to prevent fallback to non-protected connections). | `true`                | `true`        |
+| `camunda.hub.mail.from-address`                      | Email address used as the sender of emails sent by Camunda Hub.                                | `noreply@example.com` | -             |
+| `camunda.hub.mail.from-name`                         | [optional]<br/>Name displayed as the sender of emails sent by Camunda Hub.                     | `Camunda`             | `Camunda`     |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
 
-| Environment variable                               | Description                                                                | Example value         | Default value |
-| -------------------------------------------------- | -------------------------------------------------------------------------- | --------------------- | ------------- |
-| `SPRING_MAIL_HOST`                                 | SMTP server host name                                                      | `smtp.example.com`    | -             |
-| `SPRING_MAIL_PORT`                                 | SMTP server port                                                           | `587`                 | -             |
-| `SPRING_MAIL_USERNAME`                             | [optional]<br/>SMTP user name                                              | `hub-user`            | -             |
-| `SPRING_MAIL_PASSWORD`                             | [optional]<br/>SMTP user password                                          | \*\*\*                | -             |
-| `SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE` | Enforce TLS encryption for SMTP connections (using STARTTLS).              | `true`                | `true`        |
-| `CAMUNDA_HUB_MAIL_FROMADDRESS`                     | Email address used as the sender of emails sent by Camunda Hub.            | `noreply@example.com` | -             |
-| `CAMUNDA_HUB_MAIL_FROMNAME`                        | [optional]<br/>Name displayed as the sender of emails sent by Camunda Hub. | `Camunda`             | `Camunda`     |
+| Environment variable                               | Description                                                                  | Example value         | Default value |
+| -------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------- | ------------- |
+| `SPRING_MAIL_HOST`                                 | SMTP server host name                                                        | `smtp.example.com`    | -             |
+| `SPRING_MAIL_PORT`                                 | SMTP server port                                                             | `587`                 | -             |
+| `SPRING_MAIL_USERNAME`                             | [optional]<br/>SMTP user name                                                | `hub-user`            | -             |
+| `SPRING_MAIL_PASSWORD`                             | [optional]<br/>SMTP user password                                            | \*\*\*                | -             |
+| `SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE` | [optional]<br/>Enforce TLS encryption for SMTP connections (using STARTTLS). | `true`                | `true`        |
+| `CAMUNDA_HUB_MAIL_FROMADDRESS`                     | Email address used as the sender of emails sent by Camunda Hub.              | `noreply@example.com` | -             |
+| `CAMUNDA_HUB_MAIL_FROMNAME`                        | [optional]<br/>Name displayed as the sender of emails sent by Camunda Hub.   | `Camunda`             | `Camunda`     |
 
 </TabItem>
 </Tabs>
@@ -379,20 +367,17 @@ This enables features like real-time notifications and immediate UI updates.
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-camunda.hub:
-  pusher:
-    host: hub-websockets
-    port: 8060 # default: 8060
-    app-id: hub
-    key: "***"
-    secret: "***"
-    client:
-      host: ws.example.com
-      port: 443 # default: 80
-      path: /hub-ws # optional, default: /
-      force-tls: true # default: false
-```
+| Property                              | Description                                                                                                                                   | Example value    | Default value |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------- |
+| `camunda.hub.pusher.host`             | [Internal](#notes-on-host-names-and-port-numbers) host name of the WebSocket server.                                                          | `hub-websockets` | -             |
+| `camunda.hub.pusher.port`             | [Internal](#notes-on-host-names-and-port-numbers) port number of the WebSocket server.                                                        | `8060`           | `8060`        |
+| `camunda.hub.pusher.app-id`           | _must be the same as_ [`PUSHER_APP_ID`](#configuration-of-the-websocket-component)                                                            | `hub`            | -             |
+| `camunda.hub.pusher.key`              | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*           | -             |
+| `camunda.hub.pusher.secret`           | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websocket-component)                                                        | \*\*\*           | -             |
+| `camunda.hub.pusher.client.host`      | [External](#notes-on-host-names-and-port-numbers) host name on which the Camunda Hub client accesses the WebSocket server from the browser.   | `ws.example.com` | -             |
+| `camunda.hub.pusher.client.port`      | [External](#notes-on-host-names-and-port-numbers) port number on which the Camunda Hub client accesses the WebSocket server from the browser. | `443`            | `80`          |
+| `camunda.hub.pusher.client.path`      | [optional]<br/>_must be the same as_ [`PUSHER_APP_PATH`](#configuration-of-the-websocket-component)                                           | `/hub-ws`        | `/`           |
+| `camunda.hub.pusher.client.force-tls` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`           | `false`       |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
@@ -425,35 +410,20 @@ See [authentication](./identity.md) for the current settings, and [upgrade Camun
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-camunda:
-  identity:
-    base-url: http://identity:8080
-    issuer-backend-url: http://keycloak:18080/auth/realms/camunda-platform # optional
-    username-claim: name # optional, default: name
-
-  hub:
-    security:
-      jwt:
-        audience:
-          internal-api: web-modeler-api # default: web-modeler-api
-          public-api: web-modeler-public-api # default: web-modeler-public-api
-    oauth2:
-      client-id: web-modeler
-      client:
-        fetch-request-credentials: include # optional
-        scope: openid email profile # optional
-
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://keycloak.example.com/auth/realms/camunda-platform
-          jwk-set-uri: https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs # optional
-          jws-algorithms: ES256 # optional
-          audiences: web-modeler-api,web-modeler-public-api # optional
-```
+| Property                                                   | Description                                                                                                                                                                                                                                                                             | Example value                                                                             | Default value            |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------ |
+| `camunda.identity.base-url`                                | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                                               | `http://identity:8080`                                                                    | -                        |
+| `camunda.identity.username-claim`                          | [optional]<br/>ID token claim used to assign usernames.                                                                                                                                                                                                                                 | `preferred_username`                                                                      | `name`                   |
+| `camunda.hub.security.jwt.audience.internal-api`           | Expected value of the audience claim in user access tokens (used for JWT validation).                                                                                                                                                                                                   | `web-modeler-api`                                                                         | `web-modeler-api`        |
+| `camunda.hub.security.jwt.audience.public-api`             | Expected value of the audience claim in M2M access tokens required for [Camunda Hub's API](/apis-tools/hub-api-sm/authentication.md) (used for JWT validation).                                                                                                                         | `web-modeler-public-api`                                                                  | `web-modeler-public-api` |
+| `camunda.identity.issuer-backend-url`                      | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `spring.security.oauth2.resourceserver.jwt.issuer-uri` is used. | `http://keycloak:18080/auth/realms/camunda-platform`                                      | -                        |
+| `spring.security.oauth2.resourceserver.jwt.issuer-uri`     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform`                               | -                        |
+| `spring.security.oauth2.resourceserver.jwt.jwk-set-uri`    | [optional] URL of the JWK Set endpoint (used for JWT validation). Only necessary if URL cannot be derived from the OIDC configuration endpoint.                                                                                                                                         | `https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs` | -                        |
+| `spring.security.oauth2.resourceserver.jwt.jws-algorithms` | [optional] List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK Set response.                                                                                                                                        | `ES256`                                                                                   | -                        |
+| `spring.security.oauth2.resourceserver.jwt.audiences`      | [optional]<br/>Comma-separated list of accepted audience claim values, validated in addition to `camunda.hub.security.jwt.audience.internal-api` and `camunda.hub.security.jwt.audience.public-api`.                                                                                    | `web-modeler-api`                                                                         | -                        |
+| `camunda.hub.oauth2.client-id`                             | Client ID of the Camunda Hub application configured in Identity.                                                                                                                                                                                                                        | `web-modeler`                                                                             | -                        |
+| `camunda.hub.oauth2.client.scope`                          | [optional]<br/>OIDC scopes requested during authentication, determining what user information is included in the token.                                                                                                                                                                 | `full`                                                                                    | `openid email profile`   |
+| `camunda.hub.oauth2.client.fetch-request-credentials`      | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies.                     | `include`                                                                                 | -                        |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
@@ -491,16 +461,13 @@ To customize the client configuration, you can provide optional properties.
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-camunda:
-  ca-certificate-path: /path/to/certificate # optional
-  client:
-    config-path: /path/to/credentials/cache.txt # optional; when unset, OAuth credentials are cached in memory only
-    request-timeout: 60000 # optional, default: 10000
-  auth:
-    connect-timeout: 30000 # optional, default: 5000
-    read-timeout: 30000 # optional, default: 5000
-```
+| Property                         | Description                                                                                                                            | Example value                    | Default value    |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- |
+| `camunda.ca-certificate-path`    | [optional]<br/>Path to a root CA certificate to be used instead of the certificate in the default store.                               | `/path/to/certificate`           | -                |
+| `camunda.client.config-path`     | [optional]<br/>Path to a file used to cache the client's OAuth credentials on disk. When unset, credentials are cached in memory only. | `/path/to/credentials/cache.txt` | _in-memory only_ |
+| `camunda.client.request-timeout` | [optional]<br/>The request timeout used when communicating with a target Zeebe cluster.                                                | `60000`                          | `10000`          |
+| `camunda.auth.connect-timeout`   | [optional]<br/>The connection timeout for requests to the OAuth server.                                                                | `30000`                          | `5000`           |
+| `camunda.auth.read-timeout`      | [optional]<br/>The data read timeout for requests to the OAuth server.                                                                 | `30000`                          | `5000`           |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
@@ -523,12 +490,12 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-camunda.hub.client.logging.level: DEBUG # optional, default: WARN
+| Property                           | Description                                         | Example value                                 | Default value |
+| ---------------------------------- | --------------------------------------------------- | --------------------------------------------- | ------------- |
+| `logging.config`                   | [optional]<br/>Path to custom Log4j2 configuration. | `file:/full/path/to/custom-log4j2-spring.xml` | -             |
+| `camunda.hub.client.logging.level` | [optional]<br/>Log level for the client.            | `DEBUG`                                       | `WARN`        |
 
-logging:
-  config: file:/full/path/to/custom-log4j2-spring.xml # optional
-```
+The `CAMUNDA_HUB_LOG_LEVEL`, `CAMUNDA_LOG_FILE_APPENDER_ENABLED`, and `CAMUNDA_HUB_LOG_APPENDER` settings are only available as environment variables.
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
@@ -557,24 +524,15 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-server:
-  ssl:
-    enabled: true # optional, default: false
-    certificate: file:/full/path/to/certificate.pem
-    certificate-private-key: file:/full/path/to/key.pem
-
-management:
-  server:
-    ssl:
-      enabled: true # optional, default: false
-      certificate: file:/full/path/to/certificate.pem
-      certificate-private-key: file:/full/path/to/key.pem
-
-camunda.hub:
-  pusher:
-    ssl-enabled: true # optional, default: false; enables SSL to the websocket component
-```
+| Property                                        | Description                                                                          | Example value                        | Default value |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ | ------------- |
+| `server.ssl.enabled`                            | [optional]<br/>Whether to enable SSL support.                                        | `true`                               | `false`       |
+| `server.ssl.certificate`                        | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
+| `server.ssl.certificate-private-key`            | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
+| `management.server.ssl.enabled`                 | [optional]<br/>Whether to enable SSL support for the management server routes.       | `true`                               | `false`       |
+| `management.server.ssl.certificate`             | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
+| `management.server.ssl.certificate-private-key` | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
+| `camunda.hub.pusher.ssl-enabled`                | [optional]<br/>Whether to enable communication via SSL to the `websocket` component. | `true`                               | `false`       |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
@@ -604,53 +562,23 @@ By default, Camunda Hub uses the following actuator configuration:
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-management:
-  server:
-    port: 8091
-
-  endpoints:
-    access:
-      default: none
-    web:
-      exposure:
-        include: health, info, prometheus, loggers
-      base-path: /
-      path-mapping:
-        health: health
-        prometheus: metrics
-
-  endpoint:
-    prometheus:
-      access: read-only
-    health:
-      access: read-only
-      probes:
-        enabled: true
-      # make readiness endpoint additionally available on main server port, so that it gets publicly exposed
-      group:
-        readiness:
-          additional-path: "server:/health"
-    info:
-      access: read-only
-    loggers:
-      access: unrestricted
-  info:
-    git:
-      enabled: false
-
-  health:
-    defaults:
-      enabled: false
-
-  metrics:
-    distribution:
-      percentiles:
-        http.server.requests:
-          - 0.5
-          - 0.9
-          - 0.99
-```
+| Property                                                            | Description                                                                                     | Example value        | Default value                       |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------- | ----------------------------------- |
+| `management.server.port`                                            | [optional]<br/>Port for the management server (health and metrics endpoints).                   | `8091`               | `8091`                              |
+| `management.endpoints.access.default`                               | [optional]<br/>Default access level for all actuator endpoints.                                 | `read-only`          | `none`                              |
+| `management.endpoints.web.exposure.include`                         | [optional]<br/>Comma-separated list of actuator endpoints to expose over the web.               | `health, prometheus` | `health, info, prometheus, loggers` |
+| `management.endpoints.web.base-path`                                | [optional]<br/>Base path for all web-exposed actuator endpoints.                                | `/actuator`          | `/`                                 |
+| `management.endpoints.web.path-mapping.health`                      | [optional]<br/>Custom path mapping for the health endpoint.                                     | `/health`            | `health`                            |
+| `management.endpoints.web.path-mapping.prometheus`                  | [optional]<br/>Custom path mapping for the Prometheus endpoint.                                 | `/prometheus`        | `metrics`                           |
+| `management.endpoint.prometheus.access`                             | [optional]<br/>Access level for the Prometheus endpoint.                                        | `unrestricted`       | `read-only`                         |
+| `management.endpoint.health.access`                                 | [optional]<br/>Access level for the health endpoint.                                            | `unrestricted`       | `read-only`                         |
+| `management.endpoint.health.probes.enabled`                         | [optional]<br/>Whether Kubernetes-style readiness and liveness probes are enabled.              | `true`               | `true`                              |
+| `management.endpoint.health.group.readiness.additional-path`        | [optional]<br/>Expose the readiness probe on an additional path (e.g. on the main server port). | `server:/health`     | `server:/health`                    |
+| `management.endpoint.info.access`                                   | [optional]<br/>Access level for the info endpoint.                                              | `unrestricted`       | `read-only`                         |
+| `management.endpoint.loggers.access`                                | [optional]<br/>Access level for the loggers endpoint.                                           | `read-only`          | `unrestricted`                      |
+| `management.info.git.enabled`                                       | [optional]<br/>Whether Git info is exposed via the info endpoint.                               | `true`               | `false`                             |
+| `management.health.defaults.enabled`                                | [optional]<br/>Whether default health indicators are enabled.                                   | `true`               | `false`                             |
+| `management.metrics.distribution.percentiles[http.server.requests]` | [optional]<br/>Comma-separated list of percentiles to publish for HTTP server request metrics.  | `0.5, 0.9, 0.99`     | `0.5, 0.9, 0.99`                    |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
@@ -693,23 +621,17 @@ Camunda Hub supports syncing files via [Git Sync](/components/hub/workspace/mana
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-camunda.hub:
-  git-sync:
-    max-files: 100 # default
-    max-in-memory-size: 4MB # default
-    github:
-      base-url: https://api.github.com # default
-    gitlab:
-      base-url: https://gitlab.com/api/v4 # default
-    azure:
-      base-url: https://dev.azure.com # default
-      api-version: "7.1" # default
-      authority-base-path: https://login.microsoftonline.com # default
-      scope: https://app.vssps.visualstudio.com/.default # default
-    bitbucket:
-      base-url: https://api.bitbucket.org/2.0/repositories # default
-```
+| Provider      | Property                                         | Description                                                                                                                   | Default value                                 |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| All providers | `camunda.hub.git-sync.max-files`                 | Maximum number of allowed files for sync operations.                                                                          | `100`                                         |
+| All providers | `camunda.hub.git-sync.max-in-memory-size`        | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                         |
+| GitHub        | `camunda.hub.git-sync.github.base-url`           | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                      |
+| GitLab        | `camunda.hub.git-sync.gitlab.base-url`           | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                   |
+| Azure DevOps  | `camunda.hub.git-sync.azure.base-url`            | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`                       |
+| Azure DevOps  | `camunda.hub.git-sync.azure.api-version`         | The Azure DevOps API versions to use.                                                                                         | `7.1`                                         |
+| Azure DevOps  | `camunda.hub.git-sync.azure.authority-base-path` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`           |
+| Azure DevOps  | `camunda.hub.git-sync.azure.scope`               | OAuth scope requested for Azure DevOps authentication.                                                                        | `https://app.vssps.visualstudio.com/.default` |
+| Bitbucket     | `camunda.hub.git-sync.bitbucket.base-url`        | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories`  |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">
@@ -736,35 +658,22 @@ camunda.hub:
 
 | Property                                                 | Description                                                                                                                                                                                                                                                                                          | Example value | Default value |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `camunda.hub.feature.test-mode-enabled`                  | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                           | `true`        | `true`        |
+| `camunda.hub.feature.test-mode-enabled`                  | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                           | `false`       | `true`        |
 | `camunda.hub.feature.bpmn-deployment-enabled`            | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                                     | `false`       | `true`        |
 | `camunda.hub.feature.dmn-deployment-enabled`             | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                                             | `false`       | `true`        |
-| `camunda.hub.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                        | `true`        | `false`       |
+| `camunda.hub.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                                    | `true`        | `false`       |
 | `camunda.hub.feature.ui-user-invite-enabled`             | [optional]<br/>Enables the **Add members** button on the workspace **Members** page for users who aren't **Organization admins**. **Organization admins** always see the button, regardless of this setting. Adding members through the [Hub API](/apis-tools/hub-api-sm/overview.md) is unaffected. | `false`       | `true`        |
 | `camunda.hub.feature.marketplace-enabled`                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.               | `false`       | `true`        |
-
-Example configuration:
-
-```yaml
-camunda:
-  hub.feature:
-    test-mode-enabled: true
-    bpmn-deployment-enabled: true
-    dmn-deployment-enabled: true
-    dynamic-cluster-management-enabled: false
-    ui-user-invite-enabled: true
-    marketplace-enabled: true
-```
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
 | Environment variable                                  | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
 | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `CAMUNDA_HUB_FEATURE_TESTMODEENABLED`                 | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `CAMUNDA_HUB_FEATURE_TESTMODEENABLED`                 | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `false`       | `true`        |
 | `CAMUNDA_HUB_FEATURE_BPMNDEPLOYMENTENABLED`           | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
 | `CAMUNDA_HUB_FEATURE_DMNDEPLOYMENTENABLED`            | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `CAMUNDA_HUB_FEATURE_DYNAMICCLUSTERMANAGEMENTENABLED` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
+| `CAMUNDA_HUB_FEATURE_DYNAMICCLUSTERMANAGEMENTENABLED` | [optional]<br/>Enables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                      | `true`        | `false`       |
 | `CAMUNDA_HUB_FEATURE_UIUSERINVITEENABLED`             | [optional]<br/>[Enables the button](#hide-add-members-button) for inviting members to a workspace.                                                                                                                                                                                     | `false`       | `true`        |
 | `CAMUNDA_HUB_FEATURE_MARKETPLACEENABLED`              | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
 
@@ -804,8 +713,9 @@ Hide the **Add members** button on the workspace **Members** page (which is disp
 
 ```yaml
 camunda:
-  hub.feature:
-    ui-user-invite-enabled: false
+  hub:
+    feature:
+      ui-user-invite-enabled: false
 ```
 
 </TabItem>
@@ -827,9 +737,9 @@ These are unstable options that are not officially supported and may be removed 
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-```yaml
-camunda.hub.resource-import.allow-private-ip-address: true # default: false; enabling this option weakens server-side request forgery (SSRF) protections and can significantly increase security exposure.
-```
+| Property                                               | Description                                                                                                                                                                                                | Example value | Default value |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `camunda.hub.resource-import.allow-private-ip-address` | Allow importing resources from a host that resolves to a private IP address. Enabling this option weakens server-side request forgery (SSRF) protections and can significantly increase security exposure. | `true`        | `false`       |
 
 </TabItem>
 <TabItem value="env"  label="Environment variables">

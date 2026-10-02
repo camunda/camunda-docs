@@ -4,6 +4,9 @@ title: "Logging"
 description: "Read details on additional logging configuration for Camunda Hub."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 ## Logging configuration for the `restapi` component
 
 Camunda Hub's `restapi` component uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. By default, the
@@ -71,8 +74,8 @@ The default `log4j2-spring.xml` used by Camunda Hub's `restapi` component is as 
 
     <Select>
       <EnvironmentArbiter propertyName="CAMUNDA_LOG_FILE_APPENDER_ENABLED" propertyValue="true">
-        <RollingFile name="RollingFile" fileName="${log.path}/camunda-modeler.log"
-                     filePattern="${log.path}/camunda-modeler-%d{yyyy-MM-dd}-%i.log.gz">
+        <RollingFile name="RollingFile" fileName="${log.path}/camunda-hub.log"
+                     filePattern="${log.path}/camunda-hub-%d{yyyy-MM-dd}-%i.log.gz">
           <PatternLayout pattern="${log.pattern}" />
           <Policies>
             <TimeBasedTriggeringPolicy/>
@@ -89,7 +92,7 @@ The default `log4j2-spring.xml` used by Camunda Hub's `restapi` component is as 
   <Loggers>
 
     <Logger name="io.camunda" level="${env:CAMUNDA_LOG_LEVEL:-INFO}" />
-    <Logger name="io.camunda.modeler" level="${env:CAMUNDA_HUB_LOG_LEVEL:-${env:CAMUNDA_LOG_LEVEL:-INFO}}" />
+    <Logger name="io.camunda.hub" level="${env:CAMUNDA_HUB_LOG_LEVEL:-${env:CAMUNDA_LOG_LEVEL:-INFO}}" />
     <Logger name="org.springframework" level="INFO" />
 
     <Root level="INFO">
@@ -153,7 +156,7 @@ See the following example:
   "logging.googleapis.com/sourceLocation": {
     "file": "RequestLoggingFilter.java",
     "line": 91,
-    "function": "io.camunda.modeler.util.logging.RequestLoggingFilter.customAfterRequest"
+    "function": "io.camunda.hub.util.logging.RequestLoggingFilter.customAfterRequest"
   },
   "logging.googleapis.com/labels": {
     "correlationId": "04284456-b95b-4121-a54b-6c48be6d3afd"
@@ -163,7 +166,7 @@ See the following example:
     "name": "http-nio-8081-exec-1",
     "priority": 5
   },
-  "loggerName": "io.camunda.modeler.util.logging.RequestLoggingFilter",
+  "loggerName": "io.camunda.hub.util.logging.RequestLoggingFilter",
   "correlationId": "04284456-b95b-4121-a54b-6c48be6d3afd"
 }
 ```
@@ -188,14 +191,32 @@ The default layout displays **time only**, thread name, MDC context, log level, 
 ### Client log level
 
 The `restapi` component also serves the client application running in the browser.
-To control the verbosity of the client logs, adjust the environment variable `LOG_LEVEL_CLIENT`.
+To control the verbosity of the client logs, adjust the following setting:
 
-```properties
-LOG_LEVEL_CLIENT=DEBUG
+<Tabs groupId="client-log-level" defaultValue="envVar" queryString values={[
+{label: 'Environment variable', value: 'envVar' },
+{label: 'application.yml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVar">
+
+```
+CAMUNDA_HUB_CLIENT_LOGGING_LEVEL=DEBUG
 ```
 
+</TabItem>
+
+<TabItem value="applicationYaml">
+
+```yaml
+camunda.hub.client.logging.level: DEBUG
+```
+
+</TabItem>
+</Tabs>
+
 :::info
-For `LOG_LEVEL_*` options, see [understanding log levels](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
+For log level options, see [understanding log levels](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
 :::
 
 ## Logging configuration for the `websocket` component
