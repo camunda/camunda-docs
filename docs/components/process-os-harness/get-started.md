@@ -38,15 +38,23 @@ ProcessOS Harness is distributed through repositories available to early access 
    c8 load plugin @camunda8/c8ctl-plugin-process-os
    ```
 
-1. Install ProcessOS Harness Bundle for your AI coding agent:
+1. Create and enter a project folder:
+
+   ```bash
+   mkdir -p my-project && cd my-project
+   ```
+
+1. Install ProcessOS Harness Bundle for your AI coding agent. For example, choose `claudecode` for Claude Code or `copilotcli` for GitHub Copilot CLI, as shown in the [ProcessOS Bundle mapping](system-requirements.md#processos-bundle-mapping):
 
    ```bash
    c8 os install claudecode
+   # or
+   c8 os install copilotcli
    ```
 
-   This command downloads the release bundle and extracts it into the current directory. Each AI coding agent has its own bundle, listed in the [bundle mapping](system-requirements.md#processos-bundle-mapping).
+   This command downloads the release bundle and extracts it into the current directory.
 
-1. Create a version-controlled project folder:
+1. Initialize a version-controlled project:
 
    ```bash
    git init && git add . && git commit -m "chore(job) commit process-os-harness setup"
