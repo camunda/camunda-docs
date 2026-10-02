@@ -22,10 +22,6 @@ The builder workspace is a recommendation for how to keep everything you need in
 
 ## Install ProcessOS Harness
 
-:::note Early access requires access
-ProcessOS Harness is distributed through repositories available to early access participants. If the commands below report that a repository or plugin can't be found, ask your Camunda account team or Field Delivery Engineer to enable access for your organization.
-:::
-
 1. Install or update c8ctl, the Camunda 8 CLI:
 
    ```bash
@@ -41,15 +37,13 @@ ProcessOS Harness is distributed through repositories available to early access 
 1. Create and enter a project folder:
 
    ```bash
-   mkdir -p my-project && cd my-project
+   mkdir -p <my-project> && cd <my-project>
    ```
 
-1. Install ProcessOS Harness Bundle for your AI coding agent. For example, choose `claudecode` for Claude Code or `copilotcli` for GitHub Copilot CLI, as shown in the [ProcessOS Bundle mapping](system-requirements.md#processos-bundle-mapping):
+1. Install ProcessOS Harness Bundle for your AI coding agent. For example, choose `claudecode` for Claude Code or `copilotcli` for GitHub Copilot CLI, as listed in the [ProcessOS Bundle mapping](system-requirements.md#processos-bundle-mapping):
 
    ```bash
-   c8 os install claudecode
-   # or
-   c8 os install copilotcli
+   c8 os install <claudecode>
    ```
 
    This command downloads the release bundle and extracts it into the current directory.
