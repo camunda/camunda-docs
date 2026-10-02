@@ -46,9 +46,10 @@ jobs:
             secret/data/products/camunda-docs/ci/publish USER;
             secret/data/products/camunda-docs/ci/publish PRIVATE_KEY;
       - name: Publish
+        timeout-minutes: 30
         uses: burnett01/rsync-deployments@155b6d6c1219ab2224c20c58d423a3f1b850395f # 9.0.1
         with:
-          switches: -avzr --delete
+          switches: -avzr --delete --timeout=300
           path: build/
           remote_path: ${{ steps.secrets.outputs.STAGE_PATH }}
           remote_host: ${{ steps.secrets.outputs.HOST }}
@@ -70,6 +71,7 @@ jobs:
             The runner has received a shutdown signal.
             The operation was canceled.
             some files vanished before they could be transferred
+            rsync error: timeout in data send/receive
           run-id: ${{ github.run_id }}
           repository: ${{ github.repository }}
           vault-addr: ${{ secrets.VAULT_ADDR }}

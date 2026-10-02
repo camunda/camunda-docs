@@ -22,6 +22,7 @@ Additional informational and high-level overview based on Kubernetes as upstream
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [yq](https://github.com/mikefarah/yq/#install) to edit your `values.yml` file.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
 - [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
@@ -119,6 +120,55 @@ oc annotate ingresses.config/cluster ingress.operator.openshift.io/default-enabl
 This will add the necessary annotation to [enable HTTP/2 for Ingress in your OpenShift cluster](https://docs.openshift.com/container-platform/latest/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress) globally on the cluster.
 
 </details>
+
+#### Enable ALPN h2 on ROSA HCP
+
+These steps are required only on **Red Hat OpenShift Service on AWS – Hosted Control Planes (ROSA HCP)** managed clusters. Self-managed OpenShift clusters where the cluster-wide `ingress.operator.openshift.io/default-enable-http2=true` annotation is honored do **not** need this workaround.
+
+On ROSA HCP, the `ingress-config-validation.managed.openshift.io` admission webhook denies the cluster-wide annotation, and the per-`IngressController` annotation alone does not make HAProxy advertise ALPN `h2` on the default certificate path. As a result, gRPC clients fail to connect to the Zeebe Gateway, with `zbctl` reporting `credentials: cannot check peer: missing selected ALPN property`.
+
+The OpenShift router advertises ALPN `h2` on a per-SNI basis through a `crt-list` entry that HAProxy generates only for Routes that carry an explicit `spec.tls.certificate`. In other words, the gRPC Route must reference a TLS Secret in the Camunda namespace; the empty default `secretName` (Ingress-Operator-managed) is not enough on ROSA HCP.
+
+To fix this, copy the router default wildcard TLS Secret from `openshift-ingress` into the Camunda namespace, then point the gRPC Ingress to it:
+
+1. Copy the router wildcard certificate Secret into the Camunda namespace. If you install Camunda into a namespace other than `camunda`, export `CAMUNDA_NAMESPACE` with that namespace before you run this step, and use the same value when you set up the chart environment later in this guide. This guide does not clone the reference architectures repository, so download the script first:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/openshift/single-region/procedure/copy-router-tls-secret.sh
+   ```
+
+   ```bash
+   curl -fsSL -o copy-router-tls-secret.sh \
+       https://raw.githubusercontent.com/camunda/camunda-deployment-references/stable/8.7/generic/openshift/single-region/procedure/copy-router-tls-secret.sh
+   chmod +x copy-router-tls-secret.sh
+
+   export CAMUNDA_NAMESPACE="${CAMUNDA_NAMESPACE:-camunda}"
+   export CAMUNDA_PLATFORM_ROUTER_TLS_SECRET="camunda-platform-router-tls"
+   ./copy-router-tls-secret.sh
+   ```
+
+2. After you have added the Zeebe Gateway Route configuration to your `values.yml`, as described in [Configure Route TLS](#configure-route-tls) below, override `zeebeGateway.ingress.grpc.tls.secretName` in that same file. The empty default lets the Ingress Operator manage the certificate automatically; on ROSA HCP, replace it with the Secret you just created:
+
+   ```bash
+   yq -i ".zeebeGateway.ingress.grpc.tls.secretName = \"$CAMUNDA_PLATFORM_ROUTER_TLS_SECRET\"" \
+       values.yml
+   ```
+
+   Run this **after** the Route configuration is in `values.yml`, never before. Pasting that snippet afterwards would reset `secretName` to its default and the Route would lose its certificate.
+
+After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress will carry an inlined `spec.tls.certificate`, HAProxy will emit a per-SNI `[alpn h2,http/1.1]` `crt-list` entry, and gRPC clients will negotiate `h2` successfully.
+
+:::warning
+`copy-router-tls-secret.sh` copies the certificate as it exists at that moment. It does not track later changes. When the router wildcard certificate is rotated or replaced, the copy in the Camunda namespace goes stale. The Route keeps serving the old certificate, and gRPC clients fail once that certificate expires or is revoked.
+
+Re-run the script after any router certificate change, then confirm the Route picked the new certificate up:
+
+```bash
+oc -n "$CAMUNDA_NAMESPACE" get route -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.tls.certificate}{"\n"}{end}'
+```
+
+Restarting the Camunda pods does not refresh this certificate and only causes downtime: the pods use the separate internal service certificate described below, not the Route one. To avoid the manual step entirely, manage the copy with a controller that keeps the two Secrets in sync.
+:::
 
 #### Configure Route TLS
 
@@ -294,7 +344,7 @@ The following are the required environment variables with some example values:
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/openshift/single-region/procedure/chart-env.sh
 ```
 
-- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
+- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed. The script sets it to `camunda`. If you use another namespace, for example the one you exported in [Enable ALPN h2 on ROSA HCP](#enable-alpn-h2-on-rosa-hcp), set that value here, or export it again after you run the script.
 - `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation
 
 Then run the following command:
