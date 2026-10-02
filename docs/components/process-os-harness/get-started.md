@@ -10,7 +10,7 @@ This page takes you from nothing to a configured ProcessOS Harness project with 
 
 ## (Optional) Understand the builder workspace
 
-The builder workspace is an recommodation for how keep everything you need in one place. You work in your IDE, and ProcessOS Harness adds governance and review around it.
+The builder workspace is a recommendation for how to keep everything you need in one place. You work in your IDE, and ProcessOS Harness adds governance and review around it.
 
 | Part               | What you use it for                                                                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------- |
@@ -49,7 +49,7 @@ ProcessOS Harness is distributed through repositories available to early access 
 1. Create a version-controlled project folder:
 
    ```bash
-   git init && git add . && git commit -m "ProcessOS Harness setup"
+   git init && git add . && git commit -m "chore(job) commit process-os-harness setup"
    ```
 
 1. Start the journey. Launch your AI coding agent, select a model at least as capable as Opus, then run:
@@ -59,6 +59,7 @@ ProcessOS Harness is distributed through repositories available to early access 
    ```
 
 ### Keep an installation up to date
+To update the installation use:
 
 | Command                          | What it does                  |
 | -------------------------------- | ----------------------------- |
