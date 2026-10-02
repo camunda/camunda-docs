@@ -110,7 +110,7 @@ Each Physical Tenant has its own path-scoped session cookie, so sessions from di
 - **Logout**: completes per Physical Tenant. Navigate to the target tenant's logout endpoint to end that tenant's session.
 - **Role changes mid-session:** Changing a user's roles does not invalidate their Operate or Tasklist session or log them out. The resolved authentication context, including role, group, and tenant membership, is cached in the HTTP session and re-resolved after `camunda.security.authentication.authentication-refresh-interval` (default `PT30S`) elapses. Permission changes are evaluated per request and take effect as soon as they reach secondary storage. Role or group changes sourced from IdP token claims are only picked up after the access token refreshes or the user logs in again.
 
-For Optimize deployment guidance, including the current multi-instance Helm limitation, see [Optimize deployment](./index.md#optimize-deployment).
+For Optimize deployment guidance, see [Optimize deployment](./index.md#optimize-deployment) and [Optimize and Physical Tenants](./optimize.md).
 
 ## MCP routing
 

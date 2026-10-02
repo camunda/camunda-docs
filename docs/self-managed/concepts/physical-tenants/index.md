@@ -94,9 +94,7 @@ When you configure multiple clients in a [Camunda Spring Boot Starter applicatio
 
 ## Optimize deployment
 
-Deploy Optimize separately for each Physical Tenant and configure each instance to use that tenant's cluster connection. Native multi-tenant Helm support does not manage multiple Optimize instances.
-
-<!-- TODO: Confirm with the Optimize team whether additional Physical Tenant setup guidance is ready to publish. -->
+Deploy Optimize separately for each Physical Tenant, as its own release, and point each instance at that tenant's exported records. For how to deploy Optimize per Physical Tenant and share one Management Identity across them, see [Optimize and Physical Tenants](./optimize.md).
 
 ## What is not isolated
 
@@ -140,6 +138,14 @@ Isolation is enforced by validating the resolved `provider, bucket/container, pa
 For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store storage](./storage-isolation.md#document-store-storage).
 
 For the storage backends used by tenant-scoped data, see [secondary storage](../secondary-storage/index.md) and [document handling configuration](../document-handling/configuration/index.md).
+
+## Deploying Physical Tenants with Helm
+
+The Helm chart passes tenant configuration through rather than modeling it: there's no `orchestration.physicalTenants` values key, and tenants are declared as `camunda.physical-tenants.*` application configuration through `orchestration.extraConfiguration`. See [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md).
+
+What the chart does own is the release shape around your tenants. Each tenant needs its own Optimize release, its own index prefixes, and its own OIDC client, and adding or removing a tenant is an ordered operation across several releases.
+
+For the release-level view, see [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md). For the delivery mechanics alone, see [configure Physical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-physical-tenants.md).
 
 ## Explore the docs
 
