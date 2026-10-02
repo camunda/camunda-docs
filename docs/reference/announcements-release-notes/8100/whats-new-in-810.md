@@ -17,7 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-region-overview.png';
 import AgentPanel from '../../img/whats-new-agent-monitoring.png';
 import overviewImg from '../../../components/optimize/assets/agentic-control-plane-overview.png';
@@ -723,6 +723,22 @@ Camunda for Slack joins Camunda for Microsoft Teams as a second chat platform se
 Important changes to Helm chart deployment in 8.10 are as follows:
 
 <!-- Legacy anchor retained for inbound links. -->
+
+### A Hub plane and one or more execution planes
+
+The 8.10 Helm chart adds `global.topology.mode`, so each release declares its role in the deployment: `combined`, `hub`, `orchestration`, or `optimize`. One `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, each with its own lifecycle, scaling, and upgrade schedule.
+
+The new `optimize` role deploys Optimize alone. Because one Optimize instance reads a single index prefix, this is what lets each [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) have its own Optimize instance.
+
+`combined` remains the default, so existing deployments are unchanged by the upgrade. For a new production deployment, the split topology is the baseline.
+
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
+
+<ul>
+  <li><span class="link-arrow">[Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md)</span></li>
+  <li><span class="link-arrow">[Install the deployment topology](/self-managed/deployment/helm/install/topology/index.md)</span></li>
+  <li><span class="link-arrow">[Configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md)</span></li>
+</ul>
 
 ### Camunda Helm Toolkit
 
