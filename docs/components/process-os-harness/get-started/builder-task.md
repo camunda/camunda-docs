@@ -29,4 +29,4 @@ Steps 1 and 5 are handled by the agent against Camunda. You handle step 3.
 ## Builder tasks in Camunda
 
 Builder tasks are service tasks within Camunda. They are handled as a job similar to any other service task. ProcessOS Harness contains skills to manage Camunda jobs.
-![alt text](../img/builder-task-in-modeler.png)
+![A builder task represented as a service task in the ProcessOS Harness BPMN model in Camunda Modeler.](../img/builder-task-in-modeler.png)
