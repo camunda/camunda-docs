@@ -48,7 +48,7 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 - **[Credentials](#credentials-manager)**: Create connector authentication and connection settings once and reuse them across processes, so a single update applies everywhere.
 
-- **[Multi-region resilience](#multi-region-resilience)**: Asynchronous RDBMS replication and failure-domain-aware partition placement provides configurable recovery behavior and stronger disaster recovery.
+- **[Multi-region resilience](#multi-region-resilience)**: Failure-domain-aware partition placement replicates process state synchronously across regions, so losing a region costs no committed data (RPO 0). The RDBMS secondary storage replicates asynchronously and catches up from the engine's event stream.
 
 - **[Strong tenant isolation via physical tenants](#strong-tenant-isolation-via-physical-tenants)**: Enterprise-grade physical isolation with per-tenant APIs, web apps, roles and identity provider selection. Logical multi-tenancy becomes officially supported on SaaS.
 
@@ -112,8 +112,12 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>Create connector credentials once and reuse them wherever you need them.</td>
 </tr>
 <tr>
-    <td>[Environment connection](#environment-connection-in-the-modeler)</td>
-    <td>Connect Web Modeler to a cluster to use its credentials and run task tests against your real environment.</td>
+    <td>[Environments](#environments)</td>
+    <td>Deploy and run processes in named environments assigned to workspaces, separate from the clusters underneath.</td>
+</tr>
+<tr>
+    <td>[Environment connection](#environment-connection-in-modeler)</td>
+    <td>Connect the modeler in Hub to an environment to use its credentials and run task tests against your real environment.</td>
 </tr>
 <tr>
     <td>[Multi-region resilience](#multi-region-resilience)</td>
@@ -149,7 +153,7 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Optimize](#optimize)</td>
-    <td>Optimize moves to the Camunda Security Library for authentication and session handling.</td>
+    <td>Optimize adopts a consistent set of identity capabilities shared with the Orchestration Cluster and Camunda Hub.</td>
 </tr>
 <tr>
     <td>[Unified authentication](#unified-authentication-for-orchestration-cluster-camunda-hub-and-optimize)</td>
@@ -279,6 +283,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
 
 <img src={HubOverview} alt="Camunda Hub" class="img-900"/>
 
+- On SaaS, your organization is migrated to Hub automatically, and you don't need to take any action.
 - Hub replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
 - Hub is deployed only once, and serves as the single point of entry for all your environments, connecting to all your dev, staging, and production Orchestration Clusters.
 
@@ -453,18 +458,29 @@ Camunda Hub introduces credentials. These are authentication and connection conf
   <li><span class="link-arrow">[Configure credentials in the modeling interface](/components/hub/organization/credentials/modeling-interface.md)</span></li>
 </ul>
 
+#### Environments
+
+An environment is the named place where a team deploys and runs its processes in Camunda Hub, for example a `payments-prod` environment for the payments team. Clusters remain the infrastructure underneath, managed by organization admins.
+
+- Teams deploy to an environment instead of a cluster, and work with the environments assigned to their workspace.
+- Organization admins assign environments to workspaces. A workspace can have any number of environments.
+- On Self-Managed 8.10 clusters, each Physical Tenant is an environment. On SaaS, and on clusters before 8.10, a cluster is one environment.
+- Environments carry the tags of their cluster, such as `dev`, `test`, `stage`, or `prod`, so you can see which stage of your development lifecycle each one serves.
+
+<!-- todo: link to /components/concepts/environments.md once PR #10157 is merged -->
+
 #### Environment connection in Modeler
 
-Connect Web Modeler to a cluster to model, test, and review against your real environment, instead of building in isolation.
+Connect the modeler in Hub to an [environment](#environments) to model, test, and review against your real runtime, instead of building in isolation.
 
-- View and choose which cluster you are connected to from the modeling toolbar.
-- Connector credential names from the connected cluster autocomplete in your FEEL expressions and in the properties panel credential picker.
-- [Task testing](/components/modeler/task-testing.md) runs against the connected cluster.
+- View and choose which environment you are connected to from the modeling toolbar.
+- Connector credential names from the connected environment autocomplete in your FEEL expressions and in the properties panel credential picker.
+- [Task testing](/components/modeler/task-testing.md) runs against the connected environment.
 
 This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
 
 :::note
-Environment connection is disabled by default and controlled by the `runtimeConnectionEnabled` feature flag, which covers cluster selection and task testing. The credential picker in the properties panel additionally requires `credentialsEnabled`.
+Environment connection is disabled by default and controlled by the `runtimeConnectionEnabled` feature flag, which covers environment selection and task testing. The credential picker in the properties panel additionally requires `credentialsEnabled`.
 :::
 
 #### Recover deleted resources
@@ -701,7 +717,7 @@ Camunda 8.10 provides a structured multi-region resilience framework for Self-Ma
 
 <img src={OverviewImg} alt="High-level diagram showing Cold Recovery and Dual-Region strategies" title="Cold Recovery and Dual-Region strategies" class="img-noborder img-900"/>
 
-- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable.
+- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable. On SaaS, [cross-region cold recovery](/components/saas/cross-region-cold-recovery.md) is also available for AWS and GCP region pairs marked **Failover supported**.
 
 - **[Dual-Region](/self-managed/concepts/multi-region/dual-region.md)**: Dual-region deployment with continuous replication. A full Camunda Orchestration Cluster runs continuously in both a primary and secondary region.
 
