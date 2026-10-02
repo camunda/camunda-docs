@@ -118,7 +118,7 @@ Camunda's tests used PgBouncer in transaction pooling mode with `prepareThreshol
 
 #### Reduce table row count metric queries
 
-The RDBMS table row count metric queries the database for each tenant on every broker, every `camunda.data.secondary-storage.rdbms.metrics.table-row-count-cache-duration` (default `5m`). Camunda 8.10.0 batches these into one query per tenant per broker, which fixed periodic database CPU spikes at high tenant counts ([camunda/camunda#62967](https://github.com/camunda/camunda/issues/62967)). On earlier versions, or if CPU spikes still match this interval, increase the duration.
+The RDBMS table row count metric queries the database for each tenant on every broker, every `camunda.data.secondary-storage.rdbms.metrics.table-row-count-cache-duration` (default `5m`). Camunda issues one query per tenant per broker at this interval. If CPU spikes still match this interval, increase the duration.
 
 #### Spread tenants across database instances
 
