@@ -40,6 +40,14 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ### Agentic orchestration
 
+#### ProcessOS Harness
+
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+ProcessOS Harness is an early access governance process that runs on Camunda and guides AI coding agents through process discovery, transformation, and implementation. It adds human review gates and commits each artifact to Git, keeping the engagement auditable.
+
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
+
 #### AI Agent connector: Claude on Microsoft Foundry and OAuth 2.0 for compatible endpoints
 
 <!-- https://github.com/camunda/connectors/issues/8060
