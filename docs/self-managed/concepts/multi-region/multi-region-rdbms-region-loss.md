@@ -88,7 +88,7 @@ Whether the lost zone has to be removed depends on the replicas it held, not on 
 
 An evenly split two-zone cluster, such as the `2-2` bootstrap, always loses its quorum with a zone. Bring the lost zone back before you add the third region. The same limit applies to [Dual-Region](./dual-region.md). An uneven two-zone layout keeps its quorum only when it loses the smaller zone.
 
-Remove a lost zone once you confirm that it is down and won't come back soon. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-remove-the-lost-zone) has the command.
+In a cluster with three or more zones, remove a lost zone once you confirm that it is down and won't come back soon. The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-remove-the-lost-zone) has the command.
 
 After the removal, raise the replicas of the remaining zones if the layout needs it. Losing a two-replica zone of a `2-2-1` layout leaves `2-1`. Raise the one-replica zone to two, to get `2-2`, through the [Partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api). Losing the one-replica zone leaves `2-2`, so the remaining zones need no change.
 
