@@ -30,7 +30,7 @@ To recover, redeploy the region. There is nothing to restore: its brokers catch 
 
 ## Recovery objectives {#recovery-objectives}
 
-With three or more running regions, a region loss needs no recovery procedure, but it still opens a recovery window. A two-zone cluster, such as the `2-2` bootstrap before you add the third region, stops processing until the lost zone returns.
+With three or more running regions, a region loss needs no recovery procedure, but it still opens a recovery window. For a two-zone cluster, see [Remove a lost zone](#remove-a-lost-zone).
 
 Recovery needs no procedure, because on the engine a zone loss is the same class of event as a broker loss.
 
@@ -43,7 +43,7 @@ That is the difference from [Dual-Region](./dual-region.md), where the same even
 
 Recovery has a window, because reconfiguration takes time. Most of that window depends on settings outside the engine: client timeouts and retries, traffic routing, database failover, and Camunda's own SQL connection timeouts. This section therefore gives the order of magnitude of each part instead of one RTO figure.
 
-Data loss depends on which store you mean. The engine's own state loses nothing. Raft commits a record only once a majority of its replicas hold it. With one replica per zone and three zones, a commit needs two replicas. Losing one zone always leaves at least one replica that has the record.
+Data loss depends on which store you mean. The engine's own state loses nothing. Raft commits a record only once a majority of its replicas hold it. Under the default `2-2-1` layout, a commit needs three replicas of five. Losing one zone removes at most two, so at least one surviving replica has the record.
 
 Secondary storage is different, because the database replicates asynchronously. In the table, `min-sync-replicas` stands for `camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas`, the number of standbys that must confirm a record. An unplanned promotion can omit records that had not reached the promoted standby.
 

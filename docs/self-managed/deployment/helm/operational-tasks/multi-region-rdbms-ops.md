@@ -202,18 +202,20 @@ Adding a region to a running cluster is an online operation. The regions already
 
 The new region's brokers start first. Then `activate-region.sh` adds its zone with `POST /actuator/cluster/zones/<zone>` and waits for the change to report `COMPLETED`. The engine places the zone's replicas and raises the replication factor in one change. It does not renumber any broker.
 
-<AddZone role="img" title="Three stages of the same cluster. First, two zones, london and paris, hold two replicas each, for a replication factor of four. Second, the operator deploys the zurich brokers, adds the zone with POST /actuator/cluster/zones/zurich, and waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues." />
+<AddZone role="img" title="Three stages of the same cluster. First, two zones, london and paris, hold two replicas each, for a replication factor of four. The zurich slot exists but is not in the zone list. Losing either zone leaves two of four replicas, so processing stops. Second, the operator deploys the zurich brokers, adds the zone with POST /actuator/cluster/zones/zurich, one replica and priority 800, and waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues. The engine renumbers no broker and restarts no running region." />
 
 This section applies to a region slot that you provisioned but never ran. A zone that you removed during failover comes back through [Bring a region back](#bring-a-region-back) instead.
 
 ### 1. Provision the infrastructure
 
-Raise `active_region_count` by one, so the new region's cluster, Transit Gateway attachments, and security group rules exist. Use the same variable file as the initial deployment, and replace `<new-count>` with the number of regions after the change:
+Raise `active_region_count` by one in `terraform-cluster.tfvars`, the variable file of the initial deployment, so the new region's cluster, Transit Gateway attachments, and security group rules exist. Then apply the file:
 
 ```bash
 cd ../terraform/clusters
-terraform apply -var-file=terraform-cluster.tfvars -var active_region_count=<new-count>
+terraform apply -var-file=terraform-cluster.tfvars
 ```
+
+Keep the new value in the file. A later `terraform apply` with a lower `active_region_count` destroys the region's infrastructure.
 
 ### 2. Update the environment
 
@@ -246,10 +248,8 @@ The procedure does the following:
 The regions already running keep their shorter contact point list, and they don't restart. The contact point list matters at bootstrap. Once a cluster forms, a newcomer only has to reach one member, and the rest learn about it by gossip. The running regions pick up the longer list on their next upgrade.
 
 :::warning
-`activate-region.sh` only adds the zone of a slot that was in `regions` when you bootstrapped the cluster. The reference implementation provisions its infrastructure from that slot list. List every region you may ever run in `regions` before the first deployment.
+`activate-region.sh` only adds the zone of a slot that was in `regions` when you bootstrapped the cluster. The reference implementation provisions its infrastructure from that slot list. List every region you may ever run in `regions` before the first deployment. The script rejects any slot outside the provisioned range, `0` to `CAMUNDA_REGION_SLOTS - 1`.
 :::
-
-The script rejects any slot outside the provisioned range, `0` to `CAMUNDA_REGION_SLOTS - 1`. Before you run it, apply the Terraform step above. Then re-source the environment and register the kubectl context, so `CAMUNDA_ACTIVE_REGIONS` and `CLUSTER_CONTEXTS` include the new slot.
 
 ## Upgrade the cluster
 

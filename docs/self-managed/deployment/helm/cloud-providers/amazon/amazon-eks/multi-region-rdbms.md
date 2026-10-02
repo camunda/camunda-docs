@@ -495,14 +495,14 @@ This is the same sequence that the reference implementation runs in its CI. The 
 
 ### Provision the third region
 
-Set `active_region_count` to `3` in your variable file, then apply it:
+In `terraform-cluster.tfvars`, change the `active_region_count` line to `3`, then apply the file:
 
-```hcl title="terraform-cluster.tfvars"
+```hcl
 active_region_count = 3
 ```
 
 ```bash
-cd terraform/clusters
+cd ../terraform/clusters
 terraform apply -var-file=terraform-cluster.tfvars
 ```
 

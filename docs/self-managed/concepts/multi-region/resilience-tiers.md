@@ -20,7 +20,7 @@ Camunda provides a structured multi-region resilience framework for Self-Managed
 
 - **[Dual-Region](./dual-region.md)**: Dual-region deployment with continuous replication. A full Camunda Orchestration Cluster runs continuously in both a primary and secondary region.
 
-- **[Multi-Region RDBMS](./multi-region-rdbms.md)**: One Orchestration Cluster runs active-active across three or more regions. A relational database (RDBMS) with cross-region replication holds the secondary storage. Losing one region preserves the cluster quorum. You must fail over the database writer if the lost region held the writer.
+- **[Multi-Region RDBMS](./multi-region-rdbms.md)**: One Orchestration Cluster runs active-active across two or more regions, and survives a region loss with three or more. A relational database (RDBMS) with cross-region replication holds the secondary storage. Losing one region preserves the cluster quorum. You must fail over the database writer if the lost region held the writer.
 
 ## Get started: choose your strategy
 

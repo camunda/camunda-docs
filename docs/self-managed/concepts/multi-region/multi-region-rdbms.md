@@ -33,14 +33,14 @@ With two regions, no replica placement survives losing half of them. A region lo
 
 Multi-Region RDBMS removes both. It changes the number of regions, and it changes who owns replication of the secondary storage.
 
-| Consideration     | Dual-Region                                                                       | Multi-Region RDBMS                                                                           |
-| :---------------- | :-------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
-| Regions           | Exactly two                                                                       | Two or more. Three or more to keep processing through a region loss                          |
-| Region loss       | Quorum lost, processing stops until brokers are force-removed                     | With three or more regions, quorum preserved and processing continues                        |
-| Failback          | Multi-step runbook including a secondary storage snapshot and restore             | Redeploy the region, nothing to restore                                                      |
-| Secondary storage | Elasticsearch, one cluster per region, one Camunda exporter per region            | RDBMS, one database, one exporter, replication inside the database                           |
-| Optimize          | Supported                                                                         | Not available, Optimize requires Elasticsearch or OpenSearch                                 |
-| Relative cost     | **$$$**: two regions of Orchestration Cluster capacity, plus cross-region traffic | **$$$$**: three or more regions of Orchestration Cluster capacity, plus cross-region traffic |
+| Consideration     | Dual-Region                                                                       | Multi-Region RDBMS                                                                                                                 |
+| :---------------- | :-------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| Regions           | Exactly two                                                                       | Two or more. Three or more to keep processing through a region loss                                                                |
+| Region loss       | Quorum lost, processing stops until brokers are force-removed                     | With three or more regions, quorum preserved and processing continues                                                              |
+| Failback          | Multi-step runbook including a secondary storage snapshot and restore             | Redeploy the region, nothing to restore                                                                                            |
+| Secondary storage | Elasticsearch, one cluster per region, one Camunda exporter per region            | RDBMS, one database, one exporter, replication inside the database                                                                 |
+| Optimize          | Supported                                                                         | Not available, Optimize requires Elasticsearch or OpenSearch                                                                       |
+| Relative cost     | **$$$**: two regions of Orchestration Cluster capacity, plus cross-region traffic | **$$$$**: two or more regions of Orchestration Cluster capacity, three or more to survive a region loss, plus cross-region traffic |
 
 Choose Multi-Region RDBMS when processing must continue through a region loss without operator intervention, and when you can run without Optimize. Choose [Dual-Region](./dual-region.md) when two regions are sufficient, or when you need Optimize on the same cluster.
 
