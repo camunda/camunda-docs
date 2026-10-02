@@ -41,6 +41,14 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
 
 ### Agentic orchestration
 
+#### ProcessOS Harness
+
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps Al-generated work auditable.
+
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
+
 #### AI Agent connector: Claude on Microsoft Foundry and OAuth 2.0 for compatible endpoints
 
 <!-- https://github.com/camunda/connectors/issues/8060
