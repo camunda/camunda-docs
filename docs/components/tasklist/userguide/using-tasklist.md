@@ -46,7 +46,6 @@ The queue shows the preview of available tasks with the following information:
 
 - Task name
 - Name of the process the task belongs to
-- Task context description ([it can be optionally configured](/components/concepts/variables.md#context-variable))
 - [Business ID](/components/concepts/process-instance-creation.md#business-id) carried by the task, if one was captured from the process instance when the task was created
 - Assignee
 - Priority
