@@ -25,7 +25,7 @@ With the runtime connection, you model against a real runtime instead of guessin
 The runtime connection doesn't change your deploy target. **Deploy** and **Run** keep using the target you choose in their own dialog. See [run or publish your process](../run-or-publish-your-process.md).
 
 :::note
-The runtime connection is the Camunda Hub counterpart of the Desktop Modeler [connection manager](/components/modeler/desktop-modeler/connect-to-camunda-8.md). Unlike Desktop Modeler, you don't enter a cluster URL or API client credentials. You choose from the environments or clusters already configured for your workspace or project.
+The runtime connection is the Camunda Hub counterpart of the Desktop Modeler [connection manager](/components/modeler/desktop-modeler/connect-to-camunda-8.md). Unlike Desktop Modeler, you don't enter a cluster URL or API client credentials. You choose from the environments or clusters already configured in Camunda Hub.
 :::
 
 ## Choose what to connect to
@@ -33,9 +33,9 @@ The runtime connection is the Camunda Hub counterpart of the Desktop Modeler [co
 The **Runtime** selector lists environments or clusters, depending on how your organization is set up.
 
 - **Environments**: If your organization uses [environments](/components/hub/index.md#workspaces-and-environments), the selector lists the environments assigned to your workspace, and its title is **Connect to an environment**.
-- **Clusters**: Otherwise, the selector lists the clusters connected to your project, and its title is **Connect to a cluster**.
+- **Clusters**: Otherwise, the selector lists clusters, and its title is **Connect to a cluster**. For a diagram in a project, it lists the clusters connected to the project. For a diagram outside a project, it lists all clusters of your organization.
 
-Both lists work the same way. The rest of this page uses "runtime" for both. In cluster mode, each cluster shows its Zeebe version, and the link at the bottom manages the clusters of the project:
+Both lists work the same way. The rest of this page uses "runtime" for both. In cluster mode, each cluster shows its Zeebe version. For a diagram in a project, the link at the bottom manages the clusters of the project:
 
 <img src={RuntimeClustersImg} width="424px" alt="Open Runtime selector titled Connect to a cluster, listing the Development, Testing, and Production clusters with their stage tags and Zeebe versions, Development connected, Testing marked Needs credentials, Work offline, and the Manage project clusters link" />
 
@@ -108,7 +108,13 @@ Select **Work offline** at the bottom of the selector to disconnect. While you w
 
 ## Manage the available runtimes
 
-The selector only lists runtimes that are already assigned to your workspace or project. To change what it offers, use the link at the bottom of the selector:
+The selector only lists runtimes that are already available to the diagram, and which ones depends on where the diagram lives:
+
+- **Environments**: the environments assigned to your workspace.
+- **Clusters, for a diagram in a project**: the clusters connected to the project's stages.
+- **Clusters, for a diagram outside a project**: all clusters of your organization.
+
+To change what it offers, use the link at the bottom of the selector:
 
 - **Manage workspace environments** opens the environment settings of your workspace. It's shown if you can manage the environments of the workspace.
 - **Manage project clusters** opens the connected clusters of your project. It's shown if you can modify the project.
@@ -118,11 +124,11 @@ The selector only lists runtimes that are already assigned to your workspace or 
 
 ### No environments assigned to this workspace
 
-**What you see**: The selector shows **No environments assigned to this workspace** or **No clusters connected to this project**.
+**What you see**: The selector shows **No environments assigned to this workspace**, **No clusters connected to this project**, or **No clusters connected to this workspace**.
 
-**Why it happens**: No runtime has been assigned to the workspace or project yet.
+**Why it happens**: No runtime is available to the diagram yet: no environment is assigned to the workspace, no cluster is connected to the project, or, for a diagram outside a project, your organization has no clusters.
 
-**How to fix it**: Ask a workspace or organization admin to assign an environment to the workspace, or connect a cluster to the project. Use the link at the bottom of the selector if you have permission.
+**How to fix it**: Ask a workspace or organization admin to assign an environment to the workspace, connect a cluster to the project, or create a cluster for the organization. Use the link at the bottom of the selector if you have permission.
 
 ### Unable to check environment availability
 
