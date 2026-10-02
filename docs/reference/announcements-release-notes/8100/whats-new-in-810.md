@@ -52,6 +52,8 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 - **[Strong tenant isolation via physical tenants](#strong-tenant-isolation-via-physical-tenants)**: Enterprise-grade physical isolation with per-tenant APIs, web apps, roles and identity provider selection. Logical multi-tenancy becomes officially supported on SaaS.
 
+- **[ProcessOS](#processos)**: Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
+
 </div>
 
 :::note Release information
@@ -154,6 +156,10 @@ Important changes in Camunda 8.10 are summarized as follows:
 <tr>
     <td>[Optimize](#optimize)</td>
     <td>Optimize adopts a consistent set of identity capabilities shared with the Orchestration Cluster and Camunda Hub.</td>
+</tr>
+<tr>
+    <td>[ProcessOS](#processos)</td>
+    <td>Discover, re-engineer, and generate executable Camunda solutions with a governed, auditable process.</td>
 </tr>
 <tr>
     <td>[Unified authentication](#unified-authentication-for-orchestration-cluster-camunda-hub-and-optimize)</td>
@@ -909,6 +915,21 @@ On SaaS, you can now configure Optimize export filters directly in Hub cluster s
 New SaaS clusters include a default `business_` variable include filter that limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
 
 <p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
+## ProcessOS
+
+ProcessOS is an AI-powered layer on top of Camunda's agentic orchestration platform. It discovers your existing processes, re-engineers them against defined outcomes, and generates executable Camunda solutions.
+
+- **A governed process**: The harness runs your engagement through four phases: scope, discover, transform, and implement. Each phase ends at a milestone, and subject matter expert (SME) review cycles act as gates between milestones.
+- **Auditable by design**: The governance process itself runs on Camunda. Project state lives in Camunda, and every artifact is committed to Git, so AI-generated work stays reviewable at every step.
+- **Two supported use cases**: Legacy migration transforms processes running on a legacy system to Camunda 8. AI transformation turns any process into an automated, AI-native process that runs on Camunda 8.
+- **Built for builders**: ProcessOS targets builders who implement Camunda end to end and direct AI coding agents. SMEs take part as reviewers and approvers.
+
+<!-- todo: link to the ProcessOS overview once PR #9948 is merged -->
+
+:::note
+In this release, each project runs locally with its own private memory. Production deployment, CI/CD integration, and cross-project memory are planned for future releases.
+:::
 
 ## Unified authentication for Orchestration Cluster, Camunda Hub, and Optimize
 
