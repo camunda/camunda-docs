@@ -152,6 +152,10 @@ default_tags = {
 }
 ```
 
+:::note Start with three regions instead
+This guide starts on two regions and then adds the third, because that path shows how the cluster grows. You can also start directly with all three regions: set `active_region_count = 3`. The cluster then forms with three zones at bootstrap. Skip [step 6](#6-add-the-third-region), and expect six brokers and a replication factor of five in [step 5](#5-verify-the-deployment).
+:::
+
 Then apply it:
 
 ```bash
@@ -162,7 +166,7 @@ terraform apply -var-file=terraform-cluster.tfvars
 
 Expect roughly 25 minutes for the EKS clusters and 15 minutes for the Aurora Global Database. They are created in parallel.
 
-With `active_region_count = 2`, the cluster runs two zones, `2-2` at replication factor four. Until you add the third region, it survives no zone loss: losing either zone leaves two replicas of four, which is not a majority. To deploy all three slots at once, set `active_region_count = 3`.
+With `active_region_count = 2`, the cluster runs two zones, `2-2` at replication factor four. Until you add the third region, it survives no zone loss: losing either zone leaves two replicas of four, which is not a majority.
 
 :::note
 Set up remote Terraform state before deploying anything you intend to keep. The [single-region EKS guide](./terraform-setup.md#initialize-terraform) covers creating an S3 backend.
