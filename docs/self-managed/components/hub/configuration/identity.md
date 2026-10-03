@@ -56,7 +56,7 @@ For the mapping between the 8.9 and 8.10 settings, see [upgrade Camunda componen
 
 ## Use a different OIDC provider than Keycloak
 
-By default, Camunda Hub uses the built-in Keycloak instance as its identity provider. To use a different OIDC provider, follow the steps in the [OIDC connection guide](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
+For deployments that include Keycloak, Camunda Hub uses it as its identity provider by default. For installation methods that start Keycloak, see [About Management Identity](/self-managed/components/management-identity/overview.md#about-management-identity). To use a different OIDC provider, follow the steps in the [OIDC connection guide](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
 
 :::tip
 If you connect the [Orchestration Cluster to an external identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md), use the same provider for Camunda Hub. Both components read the same `camunda.security.authentication.oidc.*` settings, which gives you one authentication configuration to maintain and one place to manage users.
