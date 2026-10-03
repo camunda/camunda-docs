@@ -40,17 +40,47 @@ camunda:
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- | ------------- |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`     | URL of the token issuer, used for JWT validation. Individual endpoints are fetched from the provider's [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig).         | `https://keycloak.example.com/auth/realms/camunda-platform` | -             |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`      | Client ID of the Camunda Hub application configured in your identity provider.                                                                                                                                                 | `web-modeler`                                               | -             |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM` | [optional]<br/>The JWT claim that identifies a user.                                                                                                                                                                           | `oid`                                                       | `sub`         |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM` | [optional]<br/>The access token claim that uniquely identifies a user. See [change the user ID claim](#change-the-user-id-claim).                                                                                              | `oid`                                                       | `sub`         |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`     | [optional]<br/>Comma-separated list of accepted audience claim values, used for JWT validation. Includes the audiences for both user access tokens and the [public Camunda Hub API](/apis-tools/hub-api-sm/authentication.md). | `web-modeler-api,web-modeler-public-api`                    | -             |
 
 </TabItem>
 </Tabs>
 
+## Change the user ID claim
+
+Camunda Hub identifies users by the `sub` claim of their access token. To use a different claim, for example `oid` in Microsoft Entra ID, set `camunda.security.authentication.oidc.username-claim`. Despite its name, this setting defines how Camunda Hub identifies users, not the name it displays. The claim must:
+
+- Never change for a user, such as `sub` or `oid`. If the value changes, for example when a user's email address changes, the user gets a new, empty account.
+- Be present in every user access token and contain a non-empty string of at most 255 characters. Otherwise, the user can't log in.
+
+With Helm, use [`camundaHub.restapi.extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#componentnameextraconfiguration):
+
+```yaml
+camundaHub:
+  restapi:
+    extraConfiguration:
+      - file: user-id-claim.yaml
+        content: |
+          camunda:
+            security:
+              authentication:
+                oidc:
+                  username-claim: oid
+```
+
+If you change the user ID claim for an existing installation, users keep their account. On their next login, Camunda Hub moves accounts stored under `sub` to the new claim.
+
+:::warning
+Moving accounts is a one-way operation. If you change the claim again, Camunda Hub doesn't move the accounts back, and affected users get a new, empty account.
+:::
+
 ## Upgrading from 8.9
 
-If you configured Camunda Hub authentication in 8.9, no action is required to upgrade to 8.10. Camunda Hub translates your existing settings to the settings above at startup. Those 8.9 settings are deprecated, however, and are removed in 8.11, so migrate to the `camunda.security.authentication.oidc.*` settings before upgrading to 8.11.
+If you configured Camunda Hub authentication in 8.9, no action is required to upgrade to 8.10. Camunda Hub translates your existing settings to the settings above at startup. Those 8.9 settings are deprecated, however, and are removed in 8.12, so migrate to the `camunda.security.authentication.oidc.*` settings before upgrading to 8.12.
 
 If you set more than one of the three 8.9 audience properties, they merge into the single `camunda.security.authentication.oidc.audiences` list. Set `camunda.security.authentication.oidc.audiences` explicitly so the resulting list is the one you intend.
+
+If you changed the user ID claim in 8.9 with `camunda.modeler.oauth2.token.user-id-claim` or `CAMUNDA_IDENTITY_USERIDCLAIM`, set `camunda.security.authentication.oidc.username-claim` to the same claim before you upgrade to 8.12. Otherwise, Camunda Hub falls back to `sub`, and users whose accounts were moved to the configured claim get new, empty accounts.
 
 For the mapping between the 8.9 and 8.10 settings, see [upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration).
 
