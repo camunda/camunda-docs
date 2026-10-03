@@ -170,7 +170,7 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 | [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                 |
 | [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                            |
 | Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeling interface](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
-| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, these components share the same authentication implementation as the Orchestration Cluster.                                                                                                                                                             |
+| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster; Camunda Hub keeps its own authentication properties.                                                                                                                        |
 
 ### Camunda AI agent
 
@@ -548,7 +548,7 @@ Camunda groups an agent's conversation history by loop iteration in Operate, mak
 
 ### Management Identity
 
-The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, these components share the same authentication implementation as the Orchestration Cluster, and Management Identity remains responsible for managing users, groups, roles, and permissions. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
+The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster, while Camunda Hub keeps its own authentication properties; Management Identity remains responsible for managing users, groups, roles, and permissions for both. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
 
 ### Manual task
 
