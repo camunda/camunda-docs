@@ -8,7 +8,7 @@ description: "Install Optimize as its own Helm release with global.topology.mode
 An Optimize release deploys Optimize and no other Camunda component. Install one per Physical Tenant, including the default tenant.
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/reference-architecture/deployment-topology.md#release-roles).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](/self-managed/reference-architecture/deployment-topology.md#minimum-chart-versions).
 :::
 
 The `optimize` role requires the 8.10 chart. The 8.7, 8.8, and 8.9 charts support `combined` and `orchestration` only, so an older Orchestration Cluster runs Optimize inside its own release.
@@ -107,7 +107,7 @@ A mismatch doesn't fail. Optimize starts successfully against the wrong or an em
 
 `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` is different: it names where Optimize writes its own indices, and must be unique per Optimize release and distinct from every writer prefix.
 
-For the full prefix model across all releases, see [isolate every index prefix family](./physical-tenants.md#isolate-every-index-prefix-family).
+For the full prefix model across all releases, see [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 
 ## Give each release its own identity
 
