@@ -40,6 +40,7 @@ Select and configure the model **Provider** you want to use from the following s
 - [AWS Bedrock Converse](#aws-bedrock-converse).
 - [OpenAI](#openai) (directly, via Microsoft Foundry/Azure, or via a custom OpenAI-compatible endpoint).
 - [Google Gemini](#google-gemini) (directly, or via Google Enterprise Agent Platform).
+- [Mistral AI](#mistral-ai) (directly, or via a custom Mistral-compatible endpoint).
 - [Custom implementation](#custom-implementation) (Self-Managed/Hybrid only).
 
 :::tip
@@ -150,7 +151,7 @@ Authentication fields per method:
 Select this provider to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service through the generic [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
 
 :::tip
-This is the right choice for non-Anthropic model families available on Bedrock. For example, Amazon Nova, Meta Llama, or Mistral models. If you're running **Anthropic Claude** models on Bedrock, use the [Anthropic provider](#anthropic)'s AWS Bedrock Mantle backend to access Anthropic-specific configuration.
+This is the right choice for non-Anthropic model families available on Bedrock. For example, Amazon Nova, Meta Llama, or Mistral models hosted on Bedrock. If you're running **Anthropic Claude** models on Bedrock, use the [Anthropic provider](#anthropic)'s AWS Bedrock Mantle backend to access Anthropic-specific configuration.
 :::
 
 | Field               | Required | Description                                                                                                                                                                                                                                                                                      |
@@ -314,6 +315,60 @@ Gemini models through Google Cloud's Enterprise Agent Platform (formerly Vertex 
 Prompt caching is automatic when the request meets Gemini's caching requirements and isn't user-configurable.
 :::
 
+### Mistral AI
+
+Select this provider to use Mistral models, such as `mistral-medium-latest`. Choose a **Connection** to specify how to access the Mistral API:
+
+<Tabs groupId="mistral-backend" defaultValue="api" values={[
+{label: 'Mistral API', value: 'api'},
+{label: 'Custom / compatible endpoint', value: 'custom'},
+]}>
+<TabItem value="api">
+
+The native, hosted Mistral API. The endpoint is fixed to `https://api.mistral.ai/v1`.
+
+| Field               | Required | Description                                     |
+| :------------------ | :------- | :---------------------------------------------- |
+| **Mistral API key** | Yes      | Your Mistral account API key for authorization. |
+
+</TabItem>
+<TabItem value="custom">
+
+Any endpoint implementing the Mistral chat completions API, such as a proxy or gateway in front of Mistral.
+
+| Field              | Required | Description                                                                        |
+| :----------------- | :------- | :--------------------------------------------------------------------------------- |
+| **API endpoint**   | Yes      | Base URL of the Mistral-compatible API. The connector appends `/chat/completions`. |
+| **Authentication** | Yes      | **None** (default), **API key**, or **OAuth 2.0** client credentials.              |
+
+Authentication fields per method:
+
+- **None**: sends no credentials, for an endpoint that doesn't require them.
+- **API key**: sends the configured API key with each request.
+- **OAuth 2.0**: requests a bearer token through the [OAuth 2.0 client credentials flow](https://www.rfc-editor.org/rfc/rfc6749#section-4.4) and sends it with each request.
+  - **OAuth 2.0 token endpoint**: the token endpoint of the authorization server.
+  - **Client ID**: the client ID of the OAuth client.
+  - **Client secret**: the client secret of the OAuth client.
+  - **Audience**: (optional) the unique identifier of the target API. Required by some authorization servers only.
+  - **Client authentication**: whether to send the client credentials as a Basic authentication header (default) or in the request body.
+  - **Scopes**: (optional) a space-separated list of scopes to request, for example `read:models read:deployments`.
+
+</TabItem>
+</Tabs>
+
+#### Mistral AI model and parameters
+
+| Field           | Required | Description                                                                                                                                                                                                                                                       |
+| :-------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Model**       | Yes      | The model ID to use, for example `mistral-medium-latest`. See the [Mistral models overview](https://docs.mistral.ai/getting-started/models/models_overview/).                                                                                                     |
+| **Effort**      | No       | Controls how many tokens the model spends thinking before responding: **default** (model default), **none**, or **high**. Only supported on reasoning-capable models. See the [Mistral reasoning documentation](https://docs.mistral.ai/capabilities/reasoning/). |
+| **Max tokens**  | No       | The maximum number of tokens per request to generate before stopping.                                                                                                                                                                                             |
+| **Temperature** | No       | Primary response-variation control from 0 to 1.5. Lower values favor likely tokens more strongly; higher values increase variation.                                                                                                                               |
+| **top P**       | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                                                                 |
+| **Timeout**     | No       | Maximum time to wait for a model API call. See [model call timeout](#model-call-timeout).                                                                                                                                                                         |
+
+The Mistral AI provider supports tool calling, structured output, and multimodal input (PDF documents and images). For reasoning models, the connector preserves the model's reasoning content and replays it on subsequent turns of the conversation.
+
 ### Custom implementation
 
 :::important
@@ -350,5 +405,5 @@ Use these fields to add or override values in the request.
 
 Whether these fields are available depends on the selected provider or backend:
 
-- For backends with a well-known REST-style API, such as the native Anthropic API, OpenAI API, Google Gemini, and Enterprise Agent Platform backends, these fields are reserved for internal or future use, and for use in custom element templates. They are not exposed in the properties panel.
+- For backends with a well-known REST-style API, such as the native Anthropic API, OpenAI API, Mistral API, Google Gemini, and Enterprise Agent Platform backends, these fields are reserved for internal or future use, and for use in custom element templates. They are not exposed in the properties panel.
 - For backends without a fixed request structure, such as AWS Bedrock Converse and custom or compatible endpoints, these fields are available as editable [FEEL](/components/modeler/feel/what-is-feel.md) map expressions. You can use them to adapt the request to your deployment.
