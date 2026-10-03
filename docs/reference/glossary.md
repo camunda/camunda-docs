@@ -200,7 +200,12 @@ See [Zeebe Client](#zeebe-client).
 
 ### Cluster
 
-See [Zeebe cluster](#zeebe-cluster).
+A cluster is the infrastructure that runs Camunda 8. In Camunda Hub, a cluster is an administrative unit that organization admins create, size, update, and back up. Teams deploy to an [environment](#environment) hosted on the cluster, not to the cluster itself.
+
+- [Clusters](/components/concepts/clusters.md)
+- [Environments](/components/concepts/environments.md)
+- [Orchestration Cluster](#orchestration-cluster)
+- [Zeebe cluster](#zeebe-cluster)
 
 ### Cluster variable
 
@@ -320,6 +325,14 @@ Use an element template to extend [Modeler](/components/modeler/about-modeler.md
 A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
 
 - [Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)
+
+### Environment
+
+An environment is the named place where a team deploys and runs [processes](#process) in [Camunda Hub](/components/hub/index.md). It's the operational unit for deployment, while the [cluster](#cluster) is the administrative unit. An environment is backed by a [Physical Tenant](#physical-tenant) on Self-Managed 8.10 and later, or by the whole cluster on SaaS and on earlier versions. Organization admins assign environments to workspaces, and every project in a workspace can deploy to the environments assigned to it.
+
+- [Environments](/components/concepts/environments.md)
+- [Cluster](#cluster)
+- [Physical Tenant](#physical-tenant)
 
 ### Event
 
@@ -610,6 +623,7 @@ An isolated execution unit within an [Orchestration Cluster](#orchestration-clus
 
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 - [Logical Tenant](#logical-tenant)
+- [Environment](#environment)
 - [Multi-tenancy](#multi-tenancy)
 
 ### Polling connector
@@ -690,6 +704,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 A collection of related files in a Camunda Hub workspace you can work on, version, and deploy as a single bundle or as individual files. A workspace may contain multiple projects.
 
+- [Projects](/components/concepts/projects.md)
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
 
 ### Project snapshot {#snapshot-project}
@@ -791,7 +806,7 @@ A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#o
 
 A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components.
 
-- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
+- [Connector secrets](/components/saas/clusters/manage-secrets.md)
 
 ### SAP
 
@@ -977,8 +992,9 @@ See [process variable](#process-variable).
 
 ### Workspace
 
-A collaboration environment within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and clusters, so all related work happens in one shared space.
+A collaboration space within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and [environments](#environment), so all related work happens in one shared space.
 
+- [Workspaces](/components/concepts/workspaces.md)
 - [Workspace](/components/hub/workspace/index.md)
 
 ## Z

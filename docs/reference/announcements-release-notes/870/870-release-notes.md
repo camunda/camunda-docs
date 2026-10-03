@@ -211,7 +211,7 @@ Cluster capacity provides a high-level overview of how well a cluster is coping 
 - Use this information to check and monitor if a cluster is appropriately sized for its workload.
 - Cluster capacity can also be used as an indicator of cluster health. For example, a cluster running at maximum capacity can be an indicator of poor cluster responsiveness.
 
-To learn more about this feature, see [cluster capacity](/components/hub/organization/manage-clusters/cluster-capacity.md).
+To learn more about this feature, see [cluster capacity](/components/saas/clusters/cluster-capacity.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2346 -->
 
@@ -668,7 +668,7 @@ Enterprise customers can flexibly resize their clusters to adjust capacity and p
 - Increase or decrease the cluster size at any time by adding or removing hosting packages.
 - For example, increase the cluster size to improve performance and add capacity, or decrease the cluster size to free up reservations for another cluster.
 
-To learn more about this feature, see [resize a cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resize-a-cluster).
+To learn more about this feature, see [resize a cluster](/components/saas/clusters/manage-cluster.md#resize-a-cluster).
 
 ### Unified deployment experience for Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 

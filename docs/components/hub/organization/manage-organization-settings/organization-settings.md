@@ -8,7 +8,7 @@ Manage your organization settings.
 
 ### Access organization settings
 
-In the left navigation under **Console**, click **Organization**.
+In the left navigation, click **Organization > Manage organization**.
 
 The **Overview** tab provides a summary of the organization, including:
 

@@ -4,7 +4,7 @@ title: Job dashboard
 description: "Use the job dashboard in Camunda Hub to see active job types, track created, completed and failed jobs, spot trends over time, and drill into job worker errors."
 ---
 
-Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.
+Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved. In Self-Managed, the job dashboard shows the jobs of an [environment](/components/concepts/environments.md). In SaaS, it shows the jobs of a cluster, and each SaaS cluster hosts one environment.
 
 ## Availability and permissions
 
@@ -48,16 +48,25 @@ With the job dashboard, you can:
 
 ### 1. Open the Jobs overview
 
-1. In Camunda Hub, go to **Clusters**.
-2. Select a cluster.
-3. On the **Overview** tab, locate the **Jobs** card.
-4. Click **View jobs** to open the **Job types** page.
+In Self-Managed:
+
+1. In Camunda Hub, click **Environments** in the left navigation.
+2. Select an environment.
+3. On the **Overview** tab, locate the **Jobs (last 24 hours)** card. It shows the number of created, completed, and not completed jobs.
+4. Click **View all job types** to open the **Jobs** page of the environment.
+
+In SaaS:
+
+1. In Camunda Hub, click **Environments** in the left navigation.
+2. Select an environment. On the **Overview** tab, the **Jobs (last 24 hours)** card summarizes the jobs of the environment.
+3. To see all job types, open the cluster that hosts the environment. Click **Clusters** on the **Environments** page, and select the cluster.
+4. On the **Overview** tab of the cluster, locate the **Jobs (last 24h)** card, and click **View all job types** to open the **Job types** page.
+
+Each SaaS cluster hosts one environment, so the cluster shows the jobs of that environment.
 
 ### 2. Job types overview
 
-The **Job types** page shows all job types running against the selected cluster.
-
-![Jobs overview with Job types table](img/jobs-overview.png)
+The **Job types** page, called **Jobs** in Self-Managed, shows all job types running in the selected environment or cluster.
 
 Key elements:
 
@@ -96,8 +105,6 @@ To drill down into a specific job type, click its **Job type** link (for example
 ## Job type details
 
 The **Job type details** page shows metrics and errors for a single job type.
-
-![Job type details view](img/job-activity-log.png)
 
 ### Job workload
 
@@ -140,7 +147,7 @@ Click **View errors** to open related instances in **Operate**, with the **Error
 
 ### No jobs in the queue
 
-If there are no jobs for the cluster or selected time range, the Jobs page shows:
+If there are no jobs for the environment, cluster, or selected time range, the Jobs page shows:
 
 - Heading: **No jobs in the queue**
 - Message: **No jobs found.**
@@ -148,9 +155,9 @@ If there are no jobs for the cluster or selected time range, the Jobs page shows
 
 This means there is no job activity to display.
 
-### Jobs card access restricted
+### Jobs access restricted
 
-If the feature is disabled for the cluster or you don't have permission, the **Jobs** card on the cluster overview shows:
+If the feature is disabled for the cluster or you don't have permission, the **Jobs** card on the environment or cluster overview shows:
 
 - Status: **Access restricted**
 - Message explaining that the feature is restricted or disabled and you must contact an administrator.
