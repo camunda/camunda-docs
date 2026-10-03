@@ -23,12 +23,35 @@ From Camunda Hub, you can access all your clusters and navigate to any running i
 If the cluster is paused, you won't see a **Launch** button. You must [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) to access its components.
 :::
 
+## Explore the Dashboard
+
+Learn how to read the **Dashboard**, the default landing page in Operate that shows your running process instances and where incidents are occurring.
+
+:::note
+The redesigned Dashboard described here is available starting in 8.11.
+:::
+
+At the top of the page, the metric panel shows the total number of running process instances and a bar visualizing the split between active instances and instances with an incident. Click the total, **Process Instances with Incident**, or **Active Process Instances** to navigate to the **Processes** page pre-filtered to that set of instances.
+
+Below the metric panel, two panels list your running work in more detail:
+
+- **Process instances by name** lists each deployed process with running instances, and how many instances are running. If a process has multiple versions deployed, expand its row to see the breakdown per version.
+- **Process incidents by error message** groups process instances with incidents by their error message, so you can spot recurring failures. Expand an error's row to see which process definition versions it affects. When no instances have incidents, this panel shows **Your processes are healthy** instead of a list.
+
+Both panels load more rows as you scroll. They refresh every five seconds while only the first page of rows is loaded, and automatic refresh stops after you scroll to load more. Clicking a row, or an expanded version or error entry, navigates to the **Processes** page pre-filtered to match.
+
+If a process definition version is scheduled for deletion, its row shows a **Draining** indicator. The version remains until its running instances finish, then is removed automatically.
+
+If there are no running process instances at all, the Dashboard shows a single **No running process instances** empty state with a link to learn more about Operate and, if Modeler is available for your cluster, a **Go to Modeler** button.
+
+![The Operate Dashboard page, showing the metric panel with running instance counts, the Process instances by name panel with a process's versions expanded, and the Process incidents by error message panel with an error's affected process definitions expanded.](./img/basic-operate-navigation-dashboard.png)
+
 ## View a deployed process
 
 To view a deployed process, take the following steps:
 
-1. On the **Dashboard** page, in the **Process Instances by Name** panel, note the list of your deployed processes and running instances. The dashboard only displays processes with active instances, so processes without running or incident instances are not shown.
-2. When you click on the name of a deployed process in the **Process Instances by Name** panel, you’ll navigate to a view of that process model and all running instances.
+1. On the **Dashboard** page, in the **Process instances by name** panel, note the list of your deployed processes and running instances. The dashboard only displays processes with active instances, so processes without running or incident instances are not shown.
+2. When you click on the name of a deployed process in the **Process instances by name** panel, you’ll navigate to a view of that process model and all running instances.
 3. From this **Processes** page, you can cancel a single running process instance by clicking the cancel icon under the **Operations** column of the **Process Instances** table.
 
 ## Inspect a process instance
