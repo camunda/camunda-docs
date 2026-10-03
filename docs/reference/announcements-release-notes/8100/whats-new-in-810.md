@@ -17,7 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-region-overview.png';
 import AgentPanel from '../../img/whats-new-agent-monitoring.png';
 import overviewImg from '../../../components/optimize/assets/agentic-control-plane-overview.png';
@@ -25,6 +25,7 @@ import HubOverview from '../../img/whats-new-hub.png';
 import HubCatalog from '../../img/whats-new-hub-catalog.png';
 import HubWorkspace from '../../img/whats-new-hub-workspace.png';
 import HubSnapshot from '../../img/whats-new-hub-snapshot.png';
+import CredentialsImg from '../../../components/hub/organization/credentials/img/credentials-choose-credential.png';
 import DesignSystem from '../../img/whats-new-design.png';
 import SecretsOverviewImg from '../../../components/concepts/assets/secrets-overview.png';
 import TenantImg from '../../../self-managed/concepts/multi-tenancy/img/tenancy-models-comparison.png';
@@ -39,9 +40,11 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 - **[Agentic orchestration](#agentic-orchestration)**: Real-time agent visibility and explainability with live agent state, tool calls, and conversation history, providing production-grade agentic trust with testing, visibility, auditability, and control-plane monitoring.
 
-- **[Camunda Hub](#camunda-hub)**: Camunda Hub becomes the single place where teams build, govern, and run process solutions in Camunda. Hub replaces Web Modeler and Console and is now where you design, model, manage, and oversee your processes.
+- **[ProcessOS](#processos)**: Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
 
-- **[Multi-region resilience](#multi-region-resilience)**: Asynchronous RDBMS replication and failure-domain-aware partition placement provides configurable recovery behavior and stronger disaster recovery.
+- **[Camunda Hub](#camunda-hub)**: Camunda Hub becomes the single place where teams build, govern, and run process solutions in Camunda, replacing Web Modeler and Console. It introduces workspaces to organize your teams' work, along with a [catalog](#catalog) of reusable automation assets, a [business value dashboard](#business-value-dashboard) to track process outcomes against targets, and [credentials](#credentials-manager) you create once and reuse across processes.
+
+- **[Multi-region resilience](#multi-region-resilience)**: Failure-domain-aware partition placement replicates process state synchronously across regions, so losing a region costs no committed data (RPO 0). The RDBMS secondary storage replicates asynchronously and catches up from the engine's event stream.
 
 - **[Strong tenant isolation via physical tenants](#strong-tenant-isolation-via-physical-tenants)**: Enterprise-grade physical isolation with per-tenant APIs, web apps, roles and identity provider selection. Logical multi-tenancy becomes officially supported on SaaS.
 
@@ -89,8 +92,32 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>Real-time agent visibility and explainability, production-grade agentic trust with testing, visibility, auditability, and control-plane monitoring.</td>
 </tr>
 <tr>
+    <td>[ProcessOS](#processos)</td>
+    <td>Discover, re-engineer, and generate executable Camunda solutions with a governed, auditable process.</td>
+</tr>
+<tr>
     <td>[Camunda Hub](#camunda-hub)</td>
     <td>Build, govern, and run your process solutions. Hub replaces Web Modeler and Console.</td>
+</tr>
+<tr>
+    <td>[Catalog](#catalog)</td>
+    <td>Manage, publish, and reuse vetted automation assets across teams in Camunda Hub.</td>
+</tr>
+<tr>
+    <td>[Business value dashboard](#business-value-dashboard)</td>
+    <td>Track cycle time, automation rate, activity, and agentic adoption against targets in Camunda Hub.</td>
+</tr>
+<tr>
+    <td>[Credentials](#credentials-manager)</td>
+    <td>Create connector credentials once and reuse them wherever you need them.</td>
+</tr>
+<tr>
+    <td>[Environments](#environments)</td>
+    <td>Deploy and run processes in named environments assigned to workspaces, separate from the clusters underneath.</td>
+</tr>
+<tr>
+    <td>[Environment connection](#environment-connection-in-modeler)</td>
+    <td>Connect the modeler in Hub to an environment to use its credentials and run task tests against your real environment.</td>
 </tr>
 <tr>
     <td>[Multi-region resilience](#multi-region-resilience)</td>
@@ -121,8 +148,12 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>A new Camunda Helm Toolkit helps migrate and validate 8.9-to-8.10 Helm values.</td>
 </tr>
 <tr>
+    <td>[Low-code testing](#low-code-testing)</td>
+    <td>Record, assert, repair, and run low-code tests in Test Studio and in CI/CD with Camunda Process Test.</td>
+</tr>
+<tr>
     <td>[Optimize](#optimize)</td>
-    <td>Optimize moves to the Camunda Security Library for authentication and session handling.</td>
+    <td>Optimize adopts a consistent set of identity capabilities shared with the Orchestration Cluster and Camunda Hub.</td>
 </tr>
 <tr>
     <td>[Unified authentication](#unified-authentication-for-orchestration-cluster-camunda-hub-and-optimize)</td>
@@ -145,22 +176,6 @@ Important changes in Camunda 8.10 are summarized as follows:
 ## Agentic orchestration
 
 Important changes and new features for agentic orchestration are available in 8.10:
-
-### Real-time agent visibility and monitoring
-
-Monitor and evaluate AI agent behavior in Operate.
-
-<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
-
-- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics) (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
-- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
-- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
-
-<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
-
-:::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
-:::
 
 ### Agentic control plane
 
@@ -208,6 +223,16 @@ New features help you more easily configure your agent tools when modeling.
 
 <p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
 
+### Camunda-provided LLM for SaaS
+
+You can run AI agents on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without your own LLM credentials.
+
+- Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets.
+- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used.
+- For enterprise organizations, AI features must be enabled first. After that, the Camunda-provided LLM is enabled automatically.
+
+<p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
+
 ### Processes MCP Server
 
 AI agents can use the Processes MCP Server to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
@@ -217,6 +242,22 @@ AI agents can use the Processes MCP Server to discover and call deployed BPMN pr
 - The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
 
 <p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
+
+### Real-time agent visibility and monitoring
+
+Monitor and evaluate AI agent behavior in Operate.
+
+<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
+
+- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics) (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
+- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
+- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
+
+<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
+
+:::note
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+:::
 
 ### Test AI agents with Camunda Process Test
 
@@ -236,12 +277,28 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
   <li><span class="link-arrow">[JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions)</span></li>
 </ul>
 
+## ProcessOS
+
+ProcessOS is an AI-powered layer on top of Camunda's agentic orchestration platform. It discovers your existing processes, re-engineers them against defined outcomes, and generates executable Camunda solutions.
+
+- **A governed process**: The harness runs your engagement through four phases: scope, discover, transform, and implement. Each phase ends at a milestone, and subject matter expert (SME) review cycles act as gates between milestones.
+- **Auditable by design**: The governance process itself runs on Camunda. Project state lives in Camunda, and every artifact is committed to Git, so AI-generated work stays reviewable at every step.
+- **Two supported use cases**: Legacy migration transforms processes running on a legacy system to Camunda 8. AI transformation turns any process into an automated, AI-native process that runs on Camunda 8.
+- **Built for builders**: ProcessOS targets builders who implement Camunda end to end and direct AI coding agents. SMEs take part as reviewers and approvers.
+
+<!-- todo: link to the ProcessOS overview once PR #9948 is merged -->
+
+:::note
+In this release, each project runs locally with its own private memory. Production deployment, CI/CD integration, and cross-project memory are planned for future releases.
+:::
+
 ## Camunda Hub
 
 [Camunda Hub](/components/hub/index.md) is now the single place where teams build, govern, and run process solutions in Camunda.
 
 <img src={HubOverview} alt="Camunda Hub" class="img-900"/>
 
+- On SaaS, your organization is migrated to Hub automatically, and you don't need to take any action.
 - Hub replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
 - Hub is deployed only once, and serves as the single point of entry for all your environments, connecting to all your dev, staging, and production Orchestration Clusters.
 
@@ -298,6 +355,16 @@ Delivery teams can trust that catalog assets have been vetted and approved by th
   <li><span class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</span></li>
   <li><span class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</span></li>
 </ul>
+
+#### Business value dashboard
+
+Use the **Business Value** page in Camunda Hub to track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and to set targets for cycle time and automation rate.
+
+- A portfolio view compares every process in the selected Orchestration Cluster and ranks off-target processes by how many targets are missed and by how far.
+- A process view shows the metrics and targets for a single process, including a cycle time distribution with P50, average, and P95.
+- Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
+
+<p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
 
 #### Workspaces and projects
 
@@ -395,9 +462,41 @@ Before 8.10, you configure a connector's authentication and connection settings 
 
 Camunda Hub introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
 
-<!-- Screenshot -->
+<img src={CredentialsImg} alt="Create a credential page in Camunda Hub showing credential types such as AWS Credential, REST Authentication, and JDBC Connection, each with the connectors that use it" class="img-900"/>
 
-<!-- todo: Add link -->
+- Center of excellence teams create and manage credentials centrally in Hub, and see them across all clusters.
+- Delivery teams select a credential from the properties panel of a connector task in the modeler, instead of entering the settings on every task.
+- Credentials are stored as cluster variables, so connectors and job workers can reference them by name.
+
+<ul>
+  <li><span class="link-arrow">[Manage credentials](/components/hub/organization/credentials/index.md)</span></li>
+  <li><span class="link-arrow">[Configure credentials in the modeling interface](/components/hub/organization/credentials/modeling-interface.md)</span></li>
+</ul>
+
+#### Environments
+
+An environment is the named place where a team deploys and runs its processes in Camunda Hub, for example a `payments-prod` environment for the payments team. Clusters remain the infrastructure underneath, managed by organization admins.
+
+- Teams deploy to an environment instead of a cluster, and work with the environments assigned to their workspace.
+- Organization admins assign environments to workspaces. A workspace can have any number of environments.
+- On Self-Managed 8.10 clusters, each Physical Tenant is an environment. On SaaS, and on clusters before 8.10, a cluster is one environment.
+- Environments carry the tags of their cluster, such as `dev`, `test`, `stage`, or `prod`, so you can see which stage of your development lifecycle each one serves.
+
+<!-- todo: link to /components/concepts/environments.md once PR #10157 is merged -->
+
+#### Environment connection in Modeler
+
+Connect the modeler in Hub to an [environment](#environments) to model, test, and review against your real runtime, instead of building in isolation.
+
+- View and choose which environment you are connected to from the modeling toolbar.
+- Connector credential names from the connected environment autocomplete in your FEEL expressions and in the properties panel credential picker.
+- [Task testing](/components/modeler/task-testing.md) runs against the connected environment.
+
+This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
+
+:::note
+Environment connection is disabled by default and controlled by the `runtimeConnectionEnabled` feature flag, which covers environment selection and task testing. The credential picker in the properties panel additionally requires `credentialsEnabled`.
+:::
 
 #### Recover deleted resources
 
@@ -633,13 +732,22 @@ Camunda 8.10 provides a structured multi-region resilience framework for Self-Ma
 
 <img src={OverviewImg} alt="High-level diagram showing Cold Recovery and Dual-Region strategies" title="Cold Recovery and Dual-Region strategies" class="img-noborder img-900"/>
 
-- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable.
+- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable. On SaaS, [cross-region cold recovery](/components/saas/cross-region-cold-recovery.md) is also available for AWS and GCP region pairs marked **Failover supported**.
 
 - **[Dual-Region](/self-managed/concepts/multi-region/dual-region.md)**: Dual-region deployment with continuous replication. A full Camunda Orchestration Cluster runs continuously in both a primary and secondary region.
 
 - **Three-region active-active (RDBMS)**: A three-region Kubernetes deployment with the Orchestration Cluster running active-active across all three regions, backed by a relational database (RDBMS) with cross-region replication as secondary storage. Losing one region requires no operator intervention, because the cluster never loses quorum.
 
-<p class="link-arrow">[Multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md)</p>
+Camunda 8.10 also adds the following capabilities to support multi-region deployments:
+
+- **Region-aware partition placement**: Operators declare which region each broker belongs to using a topology label. The engine distributes partition replicas across regions so no single region holds a quorum for any partition, and leader election prefers region-local leaders under normal conditions. The same mechanism works for availability zone or datacenter isolation.
+- **Async replication support for RDBMS secondary storage**: Asynchronously replicated relational databases, including AWS Aurora and PostgreSQL, are supported as secondary storage. The exporter pauses automatically when the RDBMS endpoint is unreachable, such as during a failover, and replays missing events from the Zeebe log on reconnection without manual data repair.
+
+<ul>
+  <li><span class="link-arrow">[Multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md)</span></li>
+  <li><span class="link-arrow">[Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)</span></li>
+  <li><span class="link-arrow">[RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md)</span></li>
+</ul>
 
 ## Strong tenant isolation via Physical tenants
 
@@ -651,7 +759,15 @@ Camunda 8.10 introduces Physical Tenants for strong physical data isolation with
 
 - Physical Tenants and Logical Tenants can be used together. Each Physical Tenant can contain its own set of Logical Tenants, providing two independent layers of isolation: physical separation between top-level tenant groups, and logical separation within each group.
 
-<p class="link-arrow">[Multi-tenancy](/self-managed/concepts/multi-tenancy/index.md)</p>
+- **Per-tenant APIs and web apps**: The REST API and gRPC API are exposed per Physical Tenant, and Operate, Tasklist, and Admin are available at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
+- **Per-tenant authorization**: Each Physical Tenant enforces its own roles, mapping rules, and permissions, so a user can have a different role on each Physical Tenant.
+- **Identity provider selection**: Identity providers are defined at the cluster level, and each Physical Tenant chooses which ones it accepts. Cluster-wide operations such as topology, backups, and restore are protected by a claim-based cluster admin role.
+- **Logical multi-tenancy on SaaS**: Camunda 8 SaaS officially supports multi-tenancy via tenant identifiers. It is available on clusters running generation 8.8 and later, so you don't need to upgrade to 8.10 to use it.
+
+<ul>
+  <li><span class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</span></li>
+  <li><span class="link-arrow">[Multi-tenancy](/self-managed/concepts/multi-tenancy/index.md)</span></li>
+</ul>
 
 ## Business ID
 
@@ -681,7 +797,7 @@ The new visual Camunda design system and navigation are introduced for all compo
 
 Centralized secret resolution through Zeebe is introduced in 8.10.
 
-You can use and manage secrets to keep keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
+You can use and manage secrets to keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
 
 <img src={SecretsOverviewImg} alt="Secrets overview" title="Secrets overview" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
@@ -772,6 +888,20 @@ Switching CLIs does not require a release-state migration. Helm runs on the clie
 The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
 
 <p class="link-arrow">[Configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md)</p>
+
+## Low-code testing
+
+Test Studio in Camunda Hub turns process runs into repeatable tests that you can maintain and run in your CI/CD pipeline.
+
+- **Assertions**: Run a process instance, then save its input data and assertions as a low-code integration test. Add variable and path assertions, and view pass or fail results in the **Test** tab.
+- **Shared schema with Camunda Process Test**: Test files use the same schema as Camunda Process Test (CPT). Record a test once, run it in CI/CD through CPT, and load CPT-authored test files into Test Studio to debug them visually.
+- **Test repair**: When you delete, rename, or change the type of a BPMN element, Test Studio shows which steps broke and lets you fix them in place instead of re-recording the run.
+- **Segment tests**: In Play, capture and rerun targeted sections of an agentic process as low-code integration tests.
+
+<ul>
+  <li><span class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</span></li>
+  <li><span class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</span></li>
+</ul>
 
 ## Optimize
 
