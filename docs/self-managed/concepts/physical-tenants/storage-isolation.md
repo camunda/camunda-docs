@@ -6,7 +6,7 @@ description: Configure separate storage backends per Physical Tenant for RDBMS, 
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import AoGrid from "../../../components/react-components/_ao-card";
+import AoGrid from "../../../components/react-components/\_ao-card";
 import IconConfigImg from "../../../components/assets/icon-config.png";
 import IconOperateImg from "../../../components/assets/icon-operate.png";
 import PageDescription from '@site/src/components/PageDescription';
