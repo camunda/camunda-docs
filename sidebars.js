@@ -753,6 +753,7 @@ module.exports = {
                 "components/hub/organization/manage-clusters/manage-ip-allowlists",
                 "components/hub/organization/manage-clusters/create-backups",
                 "components/hub/organization/manage-clusters/settings",
+                "components/hub/organization/manage-clusters/connect-external-identity-provider",
                 "components/hub/organization/manage-clusters/cluster-capacity",
                 "components/hub/organization/manage-clusters/troubleshoot-clusters",
               ],
