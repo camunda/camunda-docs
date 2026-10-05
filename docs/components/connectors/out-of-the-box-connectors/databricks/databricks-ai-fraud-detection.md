@@ -53,6 +53,14 @@ The start event now shows a webhook icon. Configure it in the properties panel:
 
 The Databricks notebook in this guide sends the key as a `Bearer` token, so the locator splits the header on the space and takes the second part rather than comparing the raw header value.
 
+To reject payloads without a numeric `riskScore` at the webhook, set **Verification expression** to the following. Databricks then gets a `400` response instead of a `200`, and the run fails visibly:
+
+```feel
+=if request.body.riskScore instance of number
+then null
+else {"body": {"error": "riskScore must be a number"}, "statusCode": 400}
+```
+
 In **Variable Mapping**, set **Result expression** to map the incoming JSON body onto process variables:
 
 ```feel
@@ -71,10 +79,12 @@ In **Variable Mapping**, set **Result expression** to map the incoming JSON body
 
 Add an [exclusive gateway](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md) named `Is Fraud Detected?` after the start event, with two outgoing paths:
 
-| Path      | Condition            | Next step                                                              |
-| :-------- | :------------------- | :--------------------------------------------------------------------- |
-| High risk | `=riskScore >= 0.75` | Continues into the OpenAI, review, and SendGrid tasks below.           |
-| Low risk  | `=riskScore < 0.75`  | An end event named `No Fraud Detected`. No email is sent on this path. |
+| Path      | Condition           | Next step                                                              |
+| :-------- | :------------------ | :--------------------------------------------------------------------- |
+| High risk | Default flow        | Continues into the OpenAI, review, and SendGrid tasks below.           |
+| Low risk  | `=riskScore < 0.75` | An end event named `No Fraud Detected`. No email is sent on this path. |
+
+Mark the high-risk path as the default flow, so a transaction goes to manual review if the low-risk condition can't be evaluated. Without a default flow, a missing or non-numeric `riskScore` matches no path and raises an incident at the gateway.
 
 The rest of this guide builds the high-risk path.
 
@@ -226,7 +236,7 @@ The sample transaction has `riskScore: 0.87`, which is above the `0.75` threshol
 If the instance isn't waiting at `Review Flagged Transaction`, check for an incident on the OpenAI task first; a missing or misspelled secret reference is the most common cause.
 
 :::tip
-If the webhook call fails with a `401` status, check that `CAMUNDA_WEBHOOK_SECRET` matches the `FraudWebhookKey` secret value you set in [Store your API credentials as secrets](#store-your-api-credentials-as-secrets).
+If the webhook call fails with a `401` status, check that `CAMUNDA_WEBHOOK_SECRET` matches the `FraudWebhookKey` secret value you set in [Store your API credentials as secrets](#store-your-api-credentials-as-secrets). If it fails with a `400` status, the payload's `riskScore` is missing or isn't a number.
 :::
 
 ## Next steps
