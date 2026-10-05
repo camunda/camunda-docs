@@ -340,6 +340,8 @@ camunda:
 `FRACTION` splits its budget across **all** partitions on a broker, the same way `BROKER` does. Unlike `PARTITION`, it does not scale up with partition count. On a broker with many partitions but modest total memory, a flat 10% fraction can allocate less RocksDB memory than a previously tuned fixed limit would have. An optional minimum-floor setting for `FRACTION` is proposed in [camunda/camunda#57768](https://github.com/camunda/camunda/issues/57768) (open) to address exactly this; until it ships, verify the resulting absolute memory is enough for your partition count, and fall back to an explicit `..._MEMORYLIMIT` if it isn't.
 :::
 
+If you run multiple Physical Tenants, every tenant's partitions count toward the partitions on a broker, and each partition needs a minimum share of RocksDB memory. See [size clusters with Physical Tenants](sizing-physical-tenants.md#size-rocksdb-memory) for the minimum and the other budgets that grow with tenant count.
+
 ## Scale your cluster
 
 Once you have a baseline configuration running, you can scale in several ways:
