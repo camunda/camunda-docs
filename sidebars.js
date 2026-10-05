@@ -93,6 +93,53 @@ module.exports = {
     "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
+      label: "ProcessOS Harness",
+      className: "sidebar-cta-preview sidebar-badge-early-access",
+      link: {
+        type: "doc",
+        id: "components/process-os-harness/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Get started",
+          items: [
+            "components/process-os-harness/get-started/system-requirements",
+            "components/process-os-harness/get-started/project-setup",
+            "components/process-os-harness/get-started/install",
+          ],
+        },
+        {
+          type: "category",
+          label: "Run a project",
+          link: {
+            type: "doc",
+            id: "components/process-os-harness/run-a-project/governance-process",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Phases",
+              items: [
+                "components/process-os-harness/run-a-project/phases/discovery",
+                "components/process-os-harness/run-a-project/phases/transformation",
+                "components/process-os-harness/run-a-project/phases/implementation",
+              ],
+            },
+            "components/process-os-harness/run-a-project/review-cycle",
+            "components/process-os-harness/run-a-project/builder-task",
+            "components/process-os-harness/run-a-project/artifact-generation",
+          ],
+        },
+        {
+          type: "category",
+          label: "Best practices",
+          items: ["components/process-os-harness/best-practices/data-handling"],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Agentic orchestration",
       link: {
         type: "doc",
