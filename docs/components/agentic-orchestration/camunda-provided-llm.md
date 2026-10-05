@@ -135,3 +135,27 @@ To switch away, follow these steps:
 4. Test a process instance end-to-end and verify results.
 
 Your orchestration model doesn’t change during this transition. The BPMN process, event choreography, and human touchpoints you designed with Camunda-provided LLM carry forward unchanged, while only the LLM backend configuration shifts.
+
+## Data processing and AI terms
+
+Review how Camunda-provided LLM processes your data, how OpenRouter is involved, and which terms apply when you use this feature.
+
+### How Camunda-provided LLM works
+
+The Camunda-provided LLM is an optional feature. When enabled, you configure which process variables, prompts, and tool outputs the agent may use; only the data you choose to make available to the agent is sent for processing. You control this through your process configuration (for example, input mappings).
+
+### How OpenRouter is used
+
+OpenRouter, Inc. is a routing service that gives Camunda access to a range of third-party AI models through a single integration. OpenRouter does not host or train models itself; it forwards each request to the AI model provider selected to serve it. Camunda restricts this feature to providers that enforce zero data retention (ZDR), meaning neither OpenRouter nor the underlying model provider retains your data after the request is processed, and none of your data is used to train their models.
+
+### OpenRouter as a sub-processor
+
+OpenRouter, Inc. is a sub-processor engaged by Camunda in connection with this feature. When you enable this feature, your prompts, agent memory, and tool call inputs and outputs, which may contain personal data, are transmitted to OpenRouter and the selected model provider for the purpose of generating a response. This feature is optional and can be disabled at any time via the related toggle; if disabled, no data is sent to OpenRouter. A comprehensive list of Camunda's sub-processors is available in [Camunda's Trust Center](https://trust.camunda.com/).
+
+### AI terms
+
+This feature is an AI Feature under Camunda's [Terms for AI Usage](https://legal.camunda.com/licensing-and-other-legal-terms#ai-terms), which apply to your use of it unless your existing agreement with Camunda provides for AI terms, in which case the latter would prevail. In addition, please refer to our [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md) to learn more about how to use Camunda's AI features responsibly.
+
+### Data sharing
+
+You control what data is made available to this feature through your process configuration. Do not include sensitive data, or other content you are not authorized to share with a third-party AI service provider.
