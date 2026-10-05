@@ -26,13 +26,12 @@ To view your clusters, click **Environments** in the left navigation, and then c
 
 The page lists your clusters. Each cluster shows the following details:
 
-| Detail  | Description                                                                                              |
-| :------ | :------------------------------------------------------------------------------------------------------- |
-| Name    | The name of the cluster. Select it to open the cluster details.                                          |
-| Status  | The [status](#cluster-statuses) of the cluster.                                                          |
-| Version | The Camunda version of the cluster.                                                                      |
-| Region  | The region where the cluster runs.                                                                       |
-| Type    | The [cluster type](/components/saas/clusters.md#cluster-type): **Basic**, **Standard**, or **Advanced**. |
+| Detail  | Description                                                     |
+| :------ | :-------------------------------------------------------------- |
+| Name    | The name of the cluster. Select it to open the cluster details. |
+| Status  | The [status](#cluster-statuses) of the cluster.                 |
+| Version | The Camunda version of the cluster.                             |
+| Region  | The region where the cluster runs.                              |
 
 ### Cluster statuses
 
