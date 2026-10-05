@@ -39,21 +39,21 @@ A descriptor file is required to deploy the SAP RFC connector to a space in a SA
 
 ### Configuring the RFC connector
 
-Configure the SAP RFC connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. Using `csap` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
+Configure the SAP RFC connector via the [CSAP c8ctl plugin](./csap-cli.md) (recommended) or manually. Using `c8ctl csap-setup` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
 
-#### Using `csap`
+#### Using the CSAP c8ctl plugin
 
-Use CSAP CLI in either:
+Use the CSAP c8ctl plugin in either:
 
 - **Interactive mode:** By following the on-screen prompts.
-- **Non-interactive mode:** By providing all required parameters directly to the CLI.
+- **Non-interactive mode:** By providing all required parameters directly to the plugin.
 
-Use the command `csap setup` will guide you interactively.
+Use the command `c8ctl csap-setup` to guide you interactively.
 
 - Assuming your [Camunda cluster's API credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
-csap setup --for rfc \
+c8ctl csap-setup --for rfc \
 	--camunda 8.7 \
 	--deployment SaaS
 ```

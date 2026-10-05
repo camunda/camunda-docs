@@ -7,6 +7,7 @@ toc_max_heading_level: 3
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 
 <PageDescription />
 
@@ -615,15 +616,19 @@ This default does not apply to existing clusters. Existing clusters show data fi
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Helm v4 required for Camunda 8.10
+#### Helm CLI v3 and v4 supported for Camunda 8.10 {#helm-v4-required-for-camunda-810}
 
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. The Helm chart adds a CLI version check and fails fast if Helm v3 is used to install or upgrade chart 15.x.
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4.
 
-**Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+<HelmCliSupport />
+
+With Helm v3, the chart shows a warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
+
+**Action:** Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends. Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 </div>
 </div>
@@ -706,6 +711,23 @@ The chart emits a deprecation warning naming the flag and the removal only when 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Classic Grafana dashboard format deprecated {#classic-grafana-dashboard-format-deprecated}
+
+The Grafana dashboards published in [`monitor/grafana`](https://github.com/camunda/camunda/tree/main/monitor/grafana) of the `camunda/camunda` repository use the classic Grafana dashboard JSON model. Starting with Camunda 8.11, Camunda will update the dashboards to the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/).
+
+Camunda 8.10 is the last release that provides the dashboards in the classic format. The classic dashboards of 8.10 and earlier releases continue to work with your Grafana instance.
+
+**Action:** To keep using the dashboards in the classic format, import them from the `stable/8.10` branch or from the branch of the release you run. Before you move to the dashboards of 8.11, check that your Grafana version supports the v2 dashboard schema.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -753,6 +775,40 @@ By default, this mount used an `emptyDir`, so no PVC cleanup is required. Howeve
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deployment topology release roles
+
+Camunda 8.10 adds `global.topology.mode` to the Helm chart, so a release declares its role in the wider deployment: `combined`, `hub`, `orchestration`, or `optimize`. One `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, and an `optimize` release deploys Optimize alone, so each Physical Tenant gets its own Optimize instance.
+
+`combined` remains the default and preserves existing single-release behavior, so no existing deployment changes on upgrade. For a new production deployment, the split topology is the baseline.
+
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
+
+**Action:** None required for an existing deployment. For a new production deployment, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Hub database migration phases
+
+The 8.9 to 8.10 Camunda Hub database migration is controlled by `camundaHub.upgrade.phase`. Use `quiesce` to stop all Hub workloads so you can take a verified database backup, `migrate` to run the startup schema migration on a single pod without serving traffic, and `normal` to restore serving capacity. Fresh installs stay on `normal`.
+
+**Action:** Run the phases in order as part of your 8.9 to 8.10 upgrade, and plan a maintenance window: Hub serves no traffic in `quiesce` or `migrate`. The migration isn't backward compatible, so take a verified database backup first. See [migrate Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#migrate-web-modeler-and-console-to-camunda-hub).
+
+</div>
+</div>
+
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
@@ -776,15 +832,15 @@ Deployment change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Legacy Camunda Hub and Optimize authentication properties deprecated
+#### Component-specific Camunda Hub and Optimize authentication properties deprecated
 
-The authentication properties Camunda Hub and Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Both components still accept them in 8.10 and translate the recognized properties to their new equivalents at startup, and both remove them in 8.11.
+The authentication properties Camunda Hub and Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Both components still accept them in 8.10 and translate the recognized properties to their new equivalents at startup, but Camunda plans to remove them in a future release.
 
-**Action:** Migrate to the `camunda.security.*` settings before upgrading to 8.11.
+**Action:** Migrate to the `camunda.security.*` settings.
 
 <p className="link-arrow">[Camunda Hub authentication mapping](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
 
-<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -847,15 +903,15 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 
 #### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
-With Camunda 8.10, Camunda Hub and Optimize authenticate through a shared implementation based on the Orchestration Cluster's existing authentication, replacing their separate identity stacks. All three components now accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+With Camunda 8.10, Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, accepting the same `camunda.security.authentication.*` settings. Camunda Hub and Optimize continue to accept their existing 8.9 authentication settings in 8.10, translating recognized properties to their new equivalents at startup, but those settings are deprecated and Camunda plans to remove them in a future release. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Camunda Hub and Optimize accept their existing authentication settings in 8.10 and translate the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
+Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
 
-**Action:** Migrate Camunda Hub and Optimize to the `camunda.security.*` settings before upgrading to 8.11, when their legacy authentication properties are removed.
+**Action:** Migrate Camunda Hub and Optimize to the `camunda.security.*` settings.
 
 <p className="link-arrow">[Camunda Hub authentication configuration](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
 
-<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
 <p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
 
@@ -966,13 +1022,13 @@ Web Modeler change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Optimize adopts the shared authentication implementation
+#### Client bearer tokens are now classified for permission checks
 
-Starting with Camunda 8.10, Optimize authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
+Optimize classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `camunda.security.authentication.oidc.username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token Optimize can't classify is treated as belonging to a user, and checked against your configured Optimize permission.
 
-**Action:** Confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
+**Action:** Set `username-claim` and `client-id-claim` to match your identity provider's token shape before upgrading. If you've already configured these claims for the Orchestration Cluster, use the same values for Optimize. Otherwise, M2M clients without an Optimize permission may see new permission errors after upgrading.
 
-<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#configure-oidc-for-optimize)</p>
 
 </div>
 </div>
@@ -1000,13 +1056,13 @@ In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its AP
 </div>
 <div className="release-announcement-content">
 
-#### Legacy Optimize security configuration keys deprecated
+#### Component-specific Optimize security configuration keys deprecated
 
-With the move to the shared authentication implementation, the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. Camunda plans to remove these keys in a future release.
+The Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized component-specific keys automatically and logs a deprecation warning naming the replacement. Camunda plans to remove these keys in a future release.
 
 Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
 
-**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
+**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
 
 </div>
 </div>

@@ -636,6 +636,8 @@ keyPrefix='tenant-a/']
 
 ## Operational considerations
 
+To size database connections, instances, and Elasticsearch or OpenSearch capacity as you add tenants, see [size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md#size-secondary-storage).
+
 For the backup, restore, and scaling procedures that use these storage locations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 ### Backup and restore
@@ -730,15 +732,7 @@ When a tenant is degraded because its schema has not initialized, REST query API
 
 ## Known limitations
 
-:::note
-**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported. This constraint exists in the Query API stack, not the exporter layer.
-:::
-
-:::caution Custom exporter configuration merge (alpha3)
-In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not merged. If you have a custom exporter, such as a Kafka exporter, and want each tenant to publish to a different topic, declare the full exporter configuration separately under each Physical Tenant's section. You cannot declare it once at root level and override only the topic per tenant. This will be addressed in a later alpha. See [camunda/camunda#55155](https://github.com/camunda/camunda/issues/55155).
-:::
-
-<!-- Remove custom exporter caution once camunda/camunda#55155 is resolved. -->
+**Secondary storage types must be compatible across tenants.** Use RDBMS for every tenant, Elasticsearch and OpenSearch in any combination, or `none` for every tenant. Do not mix RDBMS or `none` with another type. For example, a cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported.
 
 ## Storage configuration matrix
 

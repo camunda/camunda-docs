@@ -8,6 +8,7 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -39,6 +40,14 @@ import PageDescription from '@site/src/components/PageDescription';
 | 13 October 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0)</li></ul> | -    |
 
 ### Agentic orchestration
+
+#### ProcessOS Harness
+
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps Al-generated work auditable.
+
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
 
 #### AI Agent connector: Claude on Microsoft Foundry and OAuth 2.0 for compatible endpoints
 
@@ -84,6 +93,23 @@ Use the new **Business Value** page in Camunda Hub to track process outcomes usi
 
 ### Helm chart deployment
 
+<!-- Legacy anchor retained for inbound links. -->
+
+#### Helm CLI v3 and v4 support {#helm-v4-required}
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm CLI v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
+
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
+
+<ul>
+  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+</ul>
+
 #### PostgreSQL databases are highly available by default
 
 <!-- https://github.com/camunda/camunda-deployment-references/pull/3463 -->
@@ -101,6 +127,24 @@ Deployments already running the single-instance shape migrate in place: CloudNat
 <p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
 
 ### Orchestration Cluster
+
+#### Multi-region RDBMS reference architecture
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3553 -->
+
+A new multi-region reference architecture details how you can design, deploy, and operate one Orchestration Cluster stretched across three or more Kubernetes regions, where the Zeebe data plane is active-active across every region and the relational secondary storage is active-standby, with a single global writer and replication owned by the database.
+
+What's included:
+
+- A zone-aware topology for primary storage that keeps its Raft quorum when a region is lost, so processing continues without an operator step.
+- A multi-region RDBMS as secondary storage, with the asynchronous replication monitoring that lets Zeebe replay exported records after a writer failover.
+- Cross-region networking, zone activation, region loss, and failback procedures for a reference implementation on Amazon EKS.
+
+This architecture removes the recovery procedure rather than the recovery window: no operator step restores Zeebe processing after a region loss, while re-election, client rerouting, and database writer promotion still take time.
+
+<p class="link-arrow">[Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md)</p>
 
 #### Startup no longer depends on a reachable identity provider
 
@@ -279,7 +323,6 @@ Use the tool to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
 - Generate a sample 8.10 values file reflecting:
-  - Helm 4-only support.
   - Bitnami sub‑charts removal.
   - Hub‑aware deployment patterns.
   - Simplified application configuration.
@@ -670,17 +713,13 @@ Business ID is now visible in Operate for decision instances, in both the decisi
 
 ### Optimize
 
-#### Optimize adopts the shared authentication implementation
-
-<!-- https://github.com/camunda/camunda/issues/58600 -->
+#### Client bearer tokens are now classified for permission checks
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-Optimize now authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
+Optimize now classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `camunda.security.authentication.oidc.username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token Optimize can't classify is treated as belonging to a user, and checked against your configured Optimize permission.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-adopts-the-shared-authentication-implementation) for the upgrade action required, and [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
-
-<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#configure-oidc-for-optimize)</p>
 
 ### Orchestration Cluster
 
@@ -739,9 +778,9 @@ Physical Tenants now support independent per-tenant authorization.
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings, so you configure authentication once, in one place. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, so you configure authentication once, in one place. Camunda Hub and Optimize both continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components, and Camunda plans to remove them in a future release. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Camunda Hub and Optimize both continue to accept their existing authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
+Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
 
 User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
 
@@ -1084,7 +1123,7 @@ New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Micros
 
 Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isolation across tenants.
 
-- The REST API and gRPC API are exposed per Physical Tenant, with `CamundaClient` supporting Physical Tenant selection in the gRPC API.
+- The REST API and gRPC API are exposed per Physical Tenant. `CamundaClient` supports tenant selection over both REST and gRPC.
 - Web apps (Operate, Tasklist, and Admin) are accessible per Physical Tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
 - Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
 
@@ -1480,17 +1519,6 @@ For details, see [`cancel` listeners](/components/concepts/execution-listeners.m
 ### Helm chart deployment
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-#### Helm v4 required
-
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
-
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
-
-<ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
-</ul>
 
 #### Host network support for Orchestration Cluster pods
 

@@ -129,7 +129,7 @@ Use the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-s
 
 ### Scheduled backup
 
-Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range trackin, this ensures you always have backup ranges available for disaster recoveryg.
+Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range tracking. This ensures you always have backup ranges available for disaster recovery.
 Both should be enabled together for a complete backup strategy. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
 
 #### Recommended configuration

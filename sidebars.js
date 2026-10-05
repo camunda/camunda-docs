@@ -93,6 +93,53 @@ module.exports = {
     "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
+      label: "ProcessOS Harness",
+      className: "sidebar-cta-preview sidebar-badge-early-access",
+      link: {
+        type: "doc",
+        id: "components/process-os-harness/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Get started",
+          items: [
+            "components/process-os-harness/get-started/system-requirements",
+            "components/process-os-harness/get-started/project-setup",
+            "components/process-os-harness/get-started/install",
+          ],
+        },
+        {
+          type: "category",
+          label: "Run a project",
+          link: {
+            type: "doc",
+            id: "components/process-os-harness/run-a-project/governance-process",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Phases",
+              items: [
+                "components/process-os-harness/run-a-project/phases/discovery",
+                "components/process-os-harness/run-a-project/phases/transformation",
+                "components/process-os-harness/run-a-project/phases/implementation",
+              ],
+            },
+            "components/process-os-harness/run-a-project/review-cycle",
+            "components/process-os-harness/run-a-project/builder-task",
+            "components/process-os-harness/run-a-project/artifact-generation",
+          ],
+        },
+        {
+          type: "category",
+          label: "Best practices",
+          items: ["components/process-os-harness/best-practices/data-handling"],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Agentic orchestration",
       link: {
         type: "doc",
@@ -311,6 +358,7 @@ module.exports = {
               items: [
                 "components/best-practices/architecture/sizing-saas",
                 "components/best-practices/architecture/sizing-self-managed",
+                "components/best-practices/architecture/sizing-physical-tenants",
                 "components/best-practices/architecture/sizing-benchmarks",
               ],
             },
@@ -875,6 +923,7 @@ module.exports = {
                 {
                   Model: [
                     "components/hub/workspace/modeler/modeling/model-your-first-diagram",
+                    "components/hub/workspace/modeler/modeling/browse-all-resources",
                     "components/hub/workspace/modeler/modeling/utilize-forms",
                     "components/hub/workspace/modeler/run-or-publish-your-process",
                     "components/hub/workspace/modeler/process-landscape-visualization",
@@ -1110,7 +1159,17 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
-            "components/connectors/out-of-the-box-connectors/databricks",
+            {
+              type: "category",
+              label: "Databricks",
+              link: {
+                type: "doc",
+                id: "components/connectors/out-of-the-box-connectors/databricks/databricks",
+              },
+              items: [
+                "components/connectors/out-of-the-box-connectors/databricks/databricks-ai-fraud-detection",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               Email: [
@@ -1692,18 +1751,6 @@ module.exports = {
             "reference/announcements-release-notes/880/880-release-notes",
           ],
         },
-        {
-          type: "category",
-          label: "8.7",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/870/870-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/870/870-announcements",
-            "reference/announcements-release-notes/870/870-release-notes",
-          ],
-        },
         "reference/announcements-release-notes/release-policy",
       ],
     },
@@ -1783,6 +1830,7 @@ module.exports = {
         id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
+        "self-managed/reference-architecture/deployment-topology",
         "self-managed/reference-architecture/kubernetes",
         "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
@@ -1814,6 +1862,20 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/install/quick-install",
+                {
+                  type: "category",
+                  label: "Deployment topology",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/install/topology/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/install/topology/hub-release",
+                    "self-managed/deployment/helm/install/topology/orchestration-release",
+                    "self-managed/deployment/helm/install/topology/optimize-release",
+                    "self-managed/deployment/helm/install/topology/topology-physical-tenants",
+                  ],
+                },
                 "self-managed/deployment/helm/install/production/index",
               ],
             },
@@ -1840,14 +1902,16 @@ module.exports = {
                 //     "self-managed/deployment/helm/configure/authentication/basic",
                 //   ],
                 // },
+                "self-managed/deployment/helm/configure/configuration-responsibilities",
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/orchestration-tls-modes",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
+                "self-managed/deployment/helm/configure/multi-region-zone-awareness",
                 "self-managed/deployment/helm/configure/service-configuration",
+                "self-managed/deployment/helm/configure/health-probes",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
-                "self-managed/deployment/helm/configure/multi-namespace",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
                   type: "category",
@@ -2001,6 +2065,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/deploy-multiple-optimize-instances",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
+                "self-managed/deployment/helm/operational-tasks/multi-region-rdbms-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/zone-aware-migration",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
                 "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
@@ -2044,6 +2109,7 @@ module.exports = {
                         "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-terraform",
                         "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm",
                         "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region",
+                        "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms",
                         {
                           Troubleshooting: [
                             "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa",
@@ -2327,6 +2393,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/api-routing",
                 "self-managed/concepts/physical-tenants/troubleshooting",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
+                "self-managed/concepts/physical-tenants/optimize",
                 "self-managed/concepts/physical-tenants/app-integrations",
               ],
             },
@@ -2360,10 +2427,21 @@ module.exports = {
           items: [
             "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
+            {
+              type: "category",
+              label: "Multi-Region RDBMS",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/multi-region/multi-region-rdbms",
+              },
+              items: [
+                "self-managed/concepts/multi-region/multi-region-rdbms-growth",
+                "self-managed/concepts/multi-region/multi-region-rdbms-region-loss",
+              ],
+            },
           ],
         },
         "self-managed/operational-guides/data-purge",
-        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {
@@ -2638,6 +2716,7 @@ module.exports = {
         },
       ],
     },
+    "self-managed/operational-guides/troubleshooting",
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
@@ -2655,7 +2734,10 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: ["self-managed/upgrade/helm/890-to-8100"],
+          items: [
+            "self-managed/upgrade/helm/890-to-8100",
+            "self-managed/upgrade/helm/combined-to-split-topology",
+          ],
         },
         {
           type: "category",

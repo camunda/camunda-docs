@@ -22,7 +22,7 @@ Implement an AI agent using an ad-hoc sub-process with an applied AI Agent conne
 
 ## About this implementation
 
-This connector implementation creates an implicit feedback loop for tool calls and agent responses, using the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+This connector implementation creates an implicit [agent loop](/reference/glossary.md#agent-loop) for tool calls and agent responses, using the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
 
 :::info
 
