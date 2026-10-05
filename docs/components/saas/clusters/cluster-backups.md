@@ -7,7 +7,7 @@ description: "If your organization works within Camunda's Enterprise plan, you c
 If your organization works within Camunda's [Enterprise](https://camunda.com/pricing/) plan, you can create a manual and scheduled [backups](/components/saas/backups.md) of your cluster.
 
 :::note
-This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md).
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/clusters.md).
 :::
 
 ## Backup limit

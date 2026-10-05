@@ -758,8 +758,7 @@ module.exports = {
                 id: "components/hub/organization/manage-clusters/index",
               },
               items: [
-                "components/hub/organization/manage-clusters/self-managed-clusters",
-                "components/hub/organization/manage-clusters/saas-clusters",
+                "components/hub/organization/manage-clusters/clusters",
                 "components/hub/organization/manage-clusters/cluster-connectors",
               ],
             },

@@ -7,7 +7,7 @@ description: "Camunda 8 can notify you when process instances stop with an error
 Camunda 8 can notify you when process instances stop with an error.
 
 :::note
-This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/self-managed-clusters.md).
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/clusters.md).
 :::
 
 ## About alerts
