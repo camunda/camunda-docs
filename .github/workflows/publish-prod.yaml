@@ -40,7 +40,7 @@ jobs:
         timeout-minutes: 30
         uses: ./.github/actions/rsync-publish
         with:
-          remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}
+          remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}/8.7
           remote_host: ${{ steps.secrets.outputs.HOST }}
           remote_user: ${{ steps.secrets.outputs.USER }}
           remote_key: ${{ steps.secrets.outputs.PRIVATE_KEY }}
@@ -75,7 +75,7 @@ jobs:
         timeout-minutes: 30
         uses: ./.github/actions/rsync-publish
         with:
-          remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}
+          remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}/8.7
           remote_host: ${{ steps.secrets.outputs.HOST }}
           remote_user: ${{ steps.secrets.outputs.USER }}
           remote_key: ${{ steps.secrets.outputs.PRIVATE_KEY }}
