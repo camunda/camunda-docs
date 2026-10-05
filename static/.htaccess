@@ -65,6 +65,9 @@ RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 
 ## Redirect for case-sensitive llms.txt
 RewriteRule ^LLMs\.txt$ /llms.txt [R=301,L]
 
+# Move contact page
+RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
+
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
 ##################################################################################
