@@ -34,7 +34,7 @@ Camunda Hub derives the name of an environment. An environment backed by a Physi
 
 Camunda Hub also supports [Logical Tenants](/self-managed/concepts/multi-tenancy/logical-tenants.md) for an environment. If the target of a deployment has [multi-tenancy](/components/concepts/multi-tenancy.md) enabled, you choose a Logical Tenant during the deployment.
 
-## Tags
+## Environment tags
 
 An environment carries the tags of the cluster that backs it, for example `dev`, `test`, `stage`, or `prod`. Use tags to filter environments and to see which stage of your development lifecycle an environment serves.
 

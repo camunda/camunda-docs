@@ -47,7 +47,7 @@ You can tag your cluster for `dev`, `test`, `stage`, or `prod`:
 Assigning a tag:
 
 - Makes it easier for team members to clearly distinguish between different stages of the software development lifecycle.
-- Shows the tag on each [environment](/components/concepts/environments.md#tags) of the cluster.
+- Shows the tag on each [environment](/components/concepts/environments.md#environment-tags) of the cluster.
 - Has no impact on performance and can be changed later in the cluster details section of the cluster overview page.
 - Disables [authorization-based access control](/components/concepts/access-control/authorizations.md) by default for `dev` and `test` clusters, and enables it for `stage` and `prod` clusters. You can change this setting during and after cluster creation.
 
