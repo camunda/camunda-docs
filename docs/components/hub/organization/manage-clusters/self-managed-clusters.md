@@ -52,6 +52,10 @@ Select a cluster to open its details. The header shows the status of the cluster
 | Jobs            | A summary of the jobs of the cluster, if the cluster supports it. See the [job dashboard](../analyze-operations/job-dashboard.md).                                                                                                                       |
 | Connectors      | The health and version of the connector runtime. Click **Manage** to open [Connector Management](./manage-connectors.md).                                                                                                                                |
 
+## Jobs
+
+The details of a cluster summarize its jobs for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).
+
 ## Update a cluster
 
 Updates to clusters happen outside Camunda Hub:

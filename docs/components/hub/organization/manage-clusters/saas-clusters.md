@@ -39,6 +39,10 @@ Open a cluster to manage it. The cluster details have the following tabs and pag
 
 To monitor and manage the connectors that run on a cluster, see [manage your connectors](./manage-connectors.md).
 
+## Jobs
+
+The details of a cluster summarize its jobs for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).
+
 ## Next steps
 
 - Learn about [cluster types, sizes, and Free Trial clusters](/components/saas/clusters.md).

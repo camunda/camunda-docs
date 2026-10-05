@@ -4,7 +4,7 @@ title: Job dashboard
 description: "Use the job dashboard in Camunda Hub to see active job types, track created, completed and failed jobs, spot trends over time, and drill into job worker errors."
 ---
 
-Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved. In Self-Managed, the job dashboard shows the jobs of an [environment](/components/concepts/environments.md). In SaaS, it shows the jobs of a cluster, and each SaaS cluster hosts one environment.
+Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved. Jobs are available for both environments and clusters, so you can open the job dashboard from an [environment](/components/concepts/environments.md) or from the [cluster](/components/concepts/clusters.md) that hosts it. In SaaS, each cluster hosts one environment.
 
 ## Availability and permissions
 
@@ -48,6 +48,10 @@ With the job dashboard, you can:
 
 ### 1. Open the Jobs overview
 
+Open the job dashboard from an environment or from a cluster.
+
+**From an environment**
+
 In Self-Managed:
 
 1. In Camunda Hub, click **Environments** in the left navigation.
@@ -55,14 +59,17 @@ In Self-Managed:
 3. On the **Overview** tab, locate the **Jobs (last 24 hours)** card. It shows the number of created, completed, and not completed jobs.
 4. Click **View all job types** to open the **Jobs** page of the environment.
 
-In SaaS:
+In SaaS, the **Jobs (last 24 hours)** card on the **Overview** tab of an environment summarizes the jobs of the environment. To see all job types, open the job dashboard from the cluster that hosts the environment.
 
-1. In Camunda Hub, click **Environments** in the left navigation.
-2. Select an environment. On the **Overview** tab, the **Jobs (last 24 hours)** card summarizes the jobs of the environment.
-3. To see all job types, open the cluster that hosts the environment. Click **Clusters** on the **Environments** page, and select the cluster.
-4. On the **Overview** tab of the cluster, locate the **Jobs (last 24h)** card, and click **View all job types** to open the **Job types** page.
+**From a cluster**
 
-Each SaaS cluster hosts one environment, so the cluster shows the jobs of that environment.
+In SaaS and Self-Managed:
+
+1. In Camunda Hub, click **Environments** in the left navigation, and then click **Clusters**.
+2. Select a cluster.
+3. On the **Overview** tab, locate the **Jobs** card, and click **View all job types** to open the job types page of the cluster.
+
+Each SaaS cluster hosts one environment, so the jobs of the cluster are the jobs of that environment.
 
 ### 2. Job types overview
 
