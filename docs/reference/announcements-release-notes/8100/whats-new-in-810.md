@@ -153,11 +153,11 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Optimize](#optimize)</td>
-    <td>Optimize adopts a consistent set of identity capabilities shared with the Orchestration Cluster and Camunda Hub.</td>
+    <td>Optimize's component-specific authentication configuration keys are deprecated.</td>
 </tr>
 <tr>
-    <td>[Unified authentication](#unified-authentication-for-orchestration-cluster-camunda-hub-and-optimize)</td>
-    <td>Shared authentication implementation based on Orchestration Cluster authentication.</td>
+    <td>[Unified authentication](#unified-authentication-for-the-orchestration-cluster-camunda-hub-and-optimize)</td>
+    <td>Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster.</td>
 </tr>
 <tr>
     <td>[Wait states](#wait-states)</td>
@@ -907,13 +907,11 @@ Test Studio in Camunda Hub turns process runs into repeatable tests that you can
 
 Important changes to Optimize in 8.10 are as follows:
 
-### Optimize adopts the shared authentication implementation
+### Optimize authentication configuration keys
 
-Optimize now authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
+The component-specific Optimize login and API security keys are deprecated in favor of `camunda.security.*`. Camunda plans to remove them in a future release, with the component-specific configuration and its `optimize.security.csl.enabled=false` fallback.
 
-- The legacy Optimize login and API security keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback.
-
-- `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping.
+`CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full key mapping.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -925,13 +923,13 @@ New SaaS clusters include a default `business_` variable include filter that lim
 
 <p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
-## Unified authentication for Orchestration Cluster, Camunda Hub, and Optimize
+## Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
-With Camunda 8.10, Camunda Hub and Optimize authenticate through a shared implementation based on the Orchestration Cluster's existing authentication, replacing their separate identity stacks.
+Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy.
 
 Each component now accepts the same `camunda.security.authentication.*` settings, so there is only one configuration surface to learn and troubleshoot if authentication issues arise.
 
-- Camunda Hub and Optimize continue to accept existing authentication settings in 8.10, translating the recognized properties to new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11.
+- Camunda Hub and Optimize continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components, and Camunda plans to remove them in a future release.
 - Camunda Hub requires no configuration change to upgrade to 8.10.
 - User, group, role, tenant, and permission management for both components is unchanged in 8.10 and is still handled by Management Identity.
 
