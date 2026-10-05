@@ -722,9 +722,9 @@ Each tenant reports one of the following states:
 | `DOWN`        | `GAVE_UP`      | Every configured retry attempt failed, so no further attempt is made.                                   | Fix the reported cause, then restart the node.          |
 | `DOWN`        | `ABORTED`      | The initialization task couldn't start, or ended outside an attempt.                                    | Check the logs for the tenant, then restart the node.   |
 
-Unless a tenant is `INITIALIZED`, its entry also includes `failedAttempts`, the number of attempts that failed so far, and `error`, the exception class and message of the most recent failure. The error is truncated to 256 characters. The application logs contain the full error.
+Unless a tenant is `INITIALIZED`, its entry also includes `failedAttempts`, the number of attempts that failed so far, once an attempt has failed. It includes `error`, the exception class and message of the most recent failure, when there is one. The error is truncated to 256 characters. The application logs contain the full error.
 
-The contributor is `UP` when every tenant is `UP`, `DOWN` when every tenant is `DOWN`, and `DEGRADED` otherwise. A node that still serves at least one tenant therefore never reports this contributor as `DOWN`, and `/actuator/health` doesn't return `503` because of a single failed tenant's schema. The per-tenant `rdbmsStatus` and `searchEngineStatus` contributors still report `DOWN` while one tenant's storage is unreachable.
+This contributor is informational. Camunda keeps it out of the liveness, readiness, and startup groups, so one tenant's state never restarts or removes the node. The contributor is `UP` when every tenant is `UP`, `DOWN` when every tenant is `DOWN`, and `DEGRADED` otherwise. A node that still serves at least one tenant therefore never reports this contributor as `DOWN`, and `/actuator/health` doesn't return `503` because of a single failed tenant's schema. The per-tenant `rdbmsStatus` and `searchEngineStatus` contributors still report `DOWN` while one tenant's storage is unreachable.
 
 For example, a node whose `default` tenant is serviceable while `tenanta` failed terminally reports:
 
@@ -752,7 +752,7 @@ For example, a node whose `default` tenant is serviceable while `tenanta` failed
 - **Readiness is `DOWN`.** Inspect the `camunda_physical_tenant_secondary_storage_ready` gauge for each tenant. If every tenant reports `0`, no tenant can currently serve secondary-storage-dependent requests.
 - **One tenant returns `503` while another works.** This is expected partial degradation. Check the tenant's state in the [`physicalTenantSchemaInitialization` contributor](#schema-initialization-health). For `RETRYING`, fix the affected tenant's storage problem and wait for its background initialization retry. No restart is required for a retryable failure.
 - **An RDBMS tenant fails before schema initialization starts.** If the JDBC URL uses a wrapper or a non-standard format, Camunda might not be able to determine the database vendor without connecting to the database. Set `database-vendor-id` in the tenant's RDBMS configuration. See [RDBMS database configuration](../databases/relational-db/configuration.md).
-- **A tenant reports `FAILED` or `GAVE_UP`, or the logs report a terminal schema failure.** Fix the problem reported in the tenant's `error` detail or in the logs, then restart the node. These failures are not retried, so the tenant stays degraded until the node restarts.
+- **A tenant reports `FAILED` or `GAVE_UP`, or the logs report a terminal schema failure.** Fix the problem reported in the tenant's `error` detail or in the logs, then restart the node. These failures aren't retried, so the tenant stays degraded until the node restarts.
 
 ### Scaling and capacity planning
 
