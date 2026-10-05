@@ -87,7 +87,7 @@ Camunda validates Physical Tenant configuration at startup and fails fast with a
 
 | Symptom                                                         | Cause                                                                                 | Resolution                                                                                                          |
 | :-------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------ |
-| Startup fails naming two tenants that share a storage location  | Two tenants resolve to the same schema, index prefix, or document store path          | Give each tenant a distinct location. See [storage isolation](./storage-isolation.md).                              |
+| Startup fails naming two tenants that share a storage location  | Two tenants resolve to the same schema, index prefix, or document store path          | Give each tenant a distinct location. See [storage isolation](./storage-isolation.md#rdbms-storage).                |
 | Startup fails on provider selection for a non-default tenant    | A configured tenant does not declare `providers.assigned`                             | Assign at least one cluster OIDC provider to the tenant.                                                            |
 | Startup fails naming an unresolvable database vendor            | The JDBC URL prefix is unrecognized and no `database-vendor-id` is set                | Set `database-vendor-id` explicitly for that tenant.                                                                |
 | Schema migration fails on an identifier                         | The RDBMS table prefix is not a valid SQL identifier                                  | Remove hyphens, spaces, and leading digits from the prefix.                                                         |
@@ -219,12 +219,12 @@ Each node opens a separate database connection pool for every Physical Tenant it
 
 When the total passes the database's connection limit, the database rejects further connections. Default limits differ per vendor:
 
-| Database             | Default connection limit                                     |
-| :------------------- | :----------------------------------------------------------- |
-| PostgreSQL           | 100 (`max_connections`)                                      |
-| MySQL and MariaDB    | 151 (`max_connections`)                                      |
-| Oracle               | Around 300 sessions, derived from `processes` and `sessions` |
-| Microsoft SQL Server | No fixed default limit                                       |
+| Database             | Default connection limit                               |
+| :------------------- | :----------------------------------------------------- |
+| PostgreSQL           | 100 (`max_connections`)                                |
+| MySQL and MariaDB    | 151 (`max_connections`)                                |
+| Oracle               | Set by `processes` and `sessions`. Check your instance |
+| Microsoft SQL Server | Up to 32,767 (`user connections`)                      |
 
 In the example above, the idle connections alone exceed the PostgreSQL default before the cluster processes any load. Managed database services often set the limit from the instance size, so check the effective value for your instance.
 
@@ -237,7 +237,7 @@ Apply one or more of the following mitigations:
 | Reduce pool sizes                        | Lower `minimum-idle` and `maximum-pool-size` under `camunda.data.secondary-storage.rdbms.connection-pool.*`, or per tenant under `camunda.physical-tenants.<tenant-id>.data.secondary-storage.rdbms.connection-pool.*`. See [connection pool configuration](/self-managed/concepts/databases/relational-db/configuration.md#connection-pool-configuration).                                                                                                                              | Pools that are too small make requests wait for a connection, and fail after `connection-timeout`. Monitor the Hikari pending-connection metrics after the change. |
 | Raise the database's connection limit    | Increase `max_connections` on PostgreSQL, MySQL, or MariaDB, or `processes` and `sessions` on Oracle.                                                                                                                                                                                                                                                                                                                                                                                    | Each connection consumes database memory, and scaling further eventually reaches the new limit.                                                                    |
 | Pool connections with a proxy            | Run a connection pooling proxy between Camunda and the database, and point the tenants' JDBC URLs at the proxy. Examples include [PgBouncer](https://www.pgbouncer.org/) for PostgreSQL, [ProxySQL](https://proxysql.com/) or [MariaDB MaxScale](https://mariadb.com/docs/maxscale/) for MySQL and MariaDB, and [Database Resident Connection Pooling (DRCP)](https://docs.oracle.com/en/database/oracle/oracle-database/23/jjdbc/database-resident-connection-pooling.html) for Oracle. | Adds a component to deploy and operate. Refer to the proxy's documentation for its configuration.                                                                  |
-| Spread tenants across database instances | Store groups of Physical Tenants on separate database instances, so each instance only receives connections for the tenants it stores. See [storage isolation](./storage-isolation.md).                                                                                                                                                                                                                                                                                                  | Requires additional database instances.                                                                                                                            |
+| Spread tenants across database instances | Store groups of Physical Tenants on separate database instances, so each instance only receives connections for the tenants it stores. See [storage isolation](./storage-isolation.md#rdbms-storage).                                                                                                                                                                                                                                                                                    | Requires additional database instances.                                                                                                                            |
 
 ### Verify isolation
 
