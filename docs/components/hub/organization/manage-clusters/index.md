@@ -29,10 +29,25 @@ The page lists your clusters. Each cluster shows the following details:
 | Detail  | Description                                                                                              |
 | :------ | :------------------------------------------------------------------------------------------------------- |
 | Name    | The name of the cluster. Select it to open the cluster details.                                          |
-| Status  | The state of the cluster, such as **Creating**, **Healthy**, or **Paused**.                              |
+| Status  | The [status](#cluster-statuses) of the cluster.                                                          |
 | Version | The Camunda version of the cluster.                                                                      |
 | Region  | The region where the cluster runs.                                                                       |
 | Type    | The [cluster type](/components/saas/clusters.md#cluster-type): **Basic**, **Standard**, or **Advanced**. |
+
+### Cluster statuses
+
+The status of a cluster reflects its state. It updates automatically while the cluster changes state, and settles on the health of the cluster when the change completes.
+
+| Status      | Description                                                                                               |
+| :---------- | :-------------------------------------------------------------------------------------------------------- |
+| Healthy     | The cluster is running.                                                                                   |
+| Unhealthy   | The cluster reports a problem.                                                                            |
+| Unknown     | Camunda Hub can't determine the status.                                                                   |
+| Creating    | The cluster is being created.                                                                             |
+| Updating    | The cluster is being updated.                                                                             |
+| Unavailable | The cluster is under maintenance or waiting for input.                                                    |
+| Paused      | The cluster is paused. You can [resume](/components/saas/clusters/manage-cluster.md#resume-a-cluster) it. |
+| Resuming    | The cluster is starting after being resumed.                                                              |
 
 ## Add a cluster
 
@@ -97,13 +112,19 @@ Use the search box to find a cluster by name, and filter the list by status, ver
 | Name         | The name of the cluster. Select it to open the cluster details.                       |
 | Namespace    | The Kubernetes namespace of the cluster, if it's configured.                          |
 | Version      | The Camunda version of the cluster.                                                   |
-| Status       | The health of the cluster. See [cluster status](#cluster-status).                     |
+| Status       | The health of the cluster. See [cluster statuses](#cluster-statuses-self-managed).    |
 | License      | The license of the cluster, if the cluster reports it.                                |
 | Environments | The number of [environments](/components/concepts/environments.md) the cluster hosts. |
 
-### Cluster status
+### Cluster statuses {#cluster-statuses-self-managed}
 
-Camunda Hub determines the status of a cluster from the readiness addresses of its components. A cluster is **Healthy** when its components are healthy, **Unhealthy** when a component reports a problem, and **Unknown** when Camunda Hub can't determine the status. See [environment status](/self-managed/components/hub/configuration/properties.md#environment-status).
+Camunda Hub monitors the health of the components of a cluster to determine its status. For details on how the status is determined, see the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environment-status).
+
+| Status    | Description                                                                              |
+| :-------- | :--------------------------------------------------------------------------------------- |
+| Healthy   | The components of the cluster are healthy.                                               |
+| Unhealthy | A component of the cluster reports a problem.                                            |
+| Unknown   | Camunda Hub can't determine the status, for example because a component doesn't respond. |
 
 ## Add a cluster {#add-a-cluster-self-managed}
 
