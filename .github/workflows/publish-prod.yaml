@@ -3,20 +3,7 @@ name: publish-prod
 on:
   push:
     tags:
-      - "[0-9]+.[0-9]+.[0-9]+"
-      - "!0.25.[0-9]+"
-      - "!0.26.[0-9]+"
-      - "!1.0.[0-9]+"
-      - "!1.1.[0-9]+"
-      - "!1.2.[0-9]+"
-      - "!1.3.[0-9]+"
-      - "!8.0.[0-9]+"
-      - "!8.1.[0-9]+"
-      - "!8.2.[0-9]+"
-      - "!8.3.[0-9]+"
-      - "!8.4.[0-9]+"
-      - "!8.5.[0-9]+"
-      - "!8.6.[0-9]+"
+      - "8.7.[0-9]+"
 
 permissions:
   id-token: write
@@ -38,8 +25,8 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-          DOCS_SITE_URL: https://docs.camunda.io
-          DOCS_SITE_BASE_URL: /
+          DOCS_SITE_URL: https://unsupported.docs.camunda.io
+          DOCS_SITE_BASE_URL: /8.7/
       - name: Import Secrets
         id: secrets
         uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
@@ -50,7 +37,7 @@ jobs:
           secretId: ${{ secrets.VAULT_SECRET_ID }}
           exportEnv: false
           secrets: |
-            secret/data/products/camunda-docs/ci/publish PROD_PATH;
+            secret/data/products/camunda-docs/ci/publish PROD_UNSUPPORTED_PATH;
             secret/data/products/camunda-docs/ci/publish HOST;
             secret/data/products/camunda-docs/ci/publish USER;
             secret/data/products/camunda-docs/ci/publish PRIVATE_KEY;
@@ -60,50 +47,7 @@ jobs:
         with:
           switches: -avzr --delete --timeout=300
           path: build/
-          remote_path: ${{ steps.secrets.outputs.PROD_PATH }}
+          remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}/8.7
           remote_host: ${{ steps.secrets.outputs.HOST }}
           remote_user: ${{ steps.secrets.outputs.USER }}
           remote_key: ${{ steps.secrets.outputs.PRIVATE_KEY }}
-  trigger-crawl:
-    runs-on: ubuntu-latest
-    needs: publish
-    steps:
-      - name: Import Secrets
-        id: secrets
-        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
-        with:
-          url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
-          exportEnv: false
-          secrets: |
-            secret/data/products/camunda-docs/ci/algolia-crawl API_KEY;
-            secret/data/products/camunda-docs/ci/algolia-crawl APP_ID;
-            secret/data/products/camunda-docs/ci/algolia-crawl CRAWLER_NAME;
-            secret/data/products/camunda-docs/ci/algolia-crawl CRAWLER_API_KEY;
-            secret/data/products/camunda-docs/ci/algolia-crawl CRAWLER_USER_ID;
-      - name: Trigger Algolia crawl
-        uses: algolia/algoliasearch-crawler-github-actions@3ae4def15d82c60aa02b0e528b50167593cbaaf6 # v1.1.13
-        id: algolia_crawler
-        with:
-          crawler-user-id: ${{ steps.secrets.outputs.CRAWLER_USER_ID }}
-          crawler-api-key: ${{ steps.secrets.outputs.CRAWLER_API_KEY }}
-          algolia-app-id: ${{ steps.secrets.outputs.APP_ID }}
-          algolia-api-key: ${{ steps.secrets.outputs.API_KEY }}
-          site-url: "https://docs.camunda.io"
-          crawler-name: ${{ steps.secrets.outputs.CRAWLER_NAME }}
-  notify-failure:
-    needs:
-      - publish
-      - trigger-crawl
-    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
-    uses: ./.github/workflows/notify-failure.yml
-    with:
-      # If any dependent job fails, set the dependency_status to 'failure',
-      # otherwise set it to 'success'.
-      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
-    secrets:
-      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
-      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
-      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

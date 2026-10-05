@@ -3,7 +3,7 @@ name: publish-stage
 on:
   push:
     branches:
-      - "main"
+      - "unsupported/8.7"
     tags-ignore:
       - "*"
 
@@ -29,8 +29,8 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-          DOCS_SITE_URL: https://stage.docs.camunda.io
-          DOCS_SITE_BASE_URL: /
+          DOCS_SITE_URL: https://stage.unsupported.docs.camunda.io
+          DOCS_SITE_BASE_URL: /8.7/
       - name: Import Secrets
         id: secrets
         uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
@@ -41,7 +41,7 @@ jobs:
           secretId: ${{ secrets.VAULT_SECRET_ID }}
           exportEnv: false
           secrets: |
-            secret/data/products/camunda-docs/ci/publish STAGE_PATH;
+            secret/data/products/camunda-docs/ci/publish STAGE_UNSUPPORTED_PATH;
             secret/data/products/camunda-docs/ci/publish HOST;
             secret/data/products/camunda-docs/ci/publish USER;
             secret/data/products/camunda-docs/ci/publish PRIVATE_KEY;
@@ -51,7 +51,7 @@ jobs:
         with:
           switches: -avzr --delete --timeout=300
           path: build/
-          remote_path: ${{ steps.secrets.outputs.STAGE_PATH }}
+          remote_path: ${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}/8.7
           remote_host: ${{ steps.secrets.outputs.HOST }}
           remote_user: ${{ steps.secrets.outputs.USER }}
           remote_key: ${{ steps.secrets.outputs.PRIVATE_KEY }}
