@@ -109,7 +109,7 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Credentials](#credentials-manager)</td>
-    <td>Create connector credentials once and reuse them wherever you need them.</td>
+    <td>Create connector credentials once and reuse them wherever you need them, in Hub and Desktop Modeler.</td>
 </tr>
 <tr>
     <td>[Environments](#environments)</td>
@@ -460,17 +460,19 @@ This strict new **Workspace > Project > File/folder** hierarchy makes resources 
 
 Before 8.10, you configure a connector's authentication and connection settings directly on each connector task. This doesn't scale well and is hard to maintain. For example, if ten tasks call the same REST API, you configure the same authentication ten times, and you update all ten when something changes.
 
-Camunda Hub introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
+Camunda Hub and Desktop Modeler introduce credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
 
 <img src={CredentialsImg} alt="Create a credential page in Camunda Hub showing credential types such as AWS Credential, REST Authentication, and JDBC Connection, each with the connectors that use it" class="img-900"/>
 
-- Center of excellence teams create and manage credentials centrally in Hub, and see them across all clusters.
+- Center of excellence teams create and manage credentials centrally in Hub, and see them across all environments.
 - Delivery teams select a credential from the properties panel of a connector task in the modeler, instead of entering the settings on every task.
+- Credentials created outside Hub, for example in Desktop Modeler, can be found by scanning environments and added to Hub for central management.
 - Credentials are stored as cluster variables, so connectors and job workers can reference them by name.
 
 <ul>
   <li><span class="link-arrow">[Manage credentials](/components/hub/organization/credentials/index.md)</span></li>
   <li><span class="link-arrow">[Configure credentials in the modeling interface](/components/hub/organization/credentials/modeling-interface.md)</span></li>
+  <li><span class="link-arrow">[Use credentials in Desktop Modeler](/components/modeler/desktop-modeler/credentials.md)</span></li>
 </ul>
 
 #### Environments
@@ -488,15 +490,13 @@ An environment is the named place where a team deploys and runs its processes in
 
 Connect the modeler in Hub to an [environment](#environments) to model, test, and review against your real runtime, instead of building in isolation.
 
-- View and choose which environment you are connected to from the modeling toolbar.
+- View and choose which environment you are connected to from the bottom panel bar of the diagram, in the **Implement** tab.
 - Connector credential names from the connected environment autocomplete in your FEEL expressions and in the properties panel credential picker.
-- [Task testing](/components/modeler/task-testing.md) runs against the connected environment.
+- [Task testing](/components/modeler/task-testing.md), connector credentials, and the **Webhook** tab follow this connection. Your deploy target doesn't change.
 
 This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
 
-:::note
-Environment connection is disabled by default and controlled by the `runtimeConnectionEnabled` feature flag, which covers environment selection and task testing. The credential picker in the properties panel additionally requires `credentialsEnabled`.
-:::
+Test Studio doesn't follow this connection. It runs against the environment you select in the **Test** tab.
 
 #### Recover deleted resources
 
@@ -896,7 +896,7 @@ Test Studio in Camunda Hub turns process runs into repeatable tests that you can
 - **Assertions**: Run a process instance, then save its input data and assertions as a low-code integration test. Add variable and path assertions, and view pass or fail results in the **Test** tab.
 - **Shared schema with Camunda Process Test**: Test files use the same schema as Camunda Process Test (CPT). Record a test once, run it in CI/CD through CPT, and load CPT-authored test files into Test Studio to debug them visually.
 - **Test repair**: When you delete, rename, or change the type of a BPMN element, Test Studio shows which steps broke and lets you fix them in place instead of re-recording the run.
-- **Segment tests**: In Play, capture and rerun targeted sections of an agentic process as low-code integration tests.
+- **Segment tests**: In Play, capture and rerun targeted sections of a process as low-code integration tests. Ad-hoc subprocesses, and therefore AI agent elements, are not supported in test mode. See the [limitations](/components/hub/workspace/modeler/validation/test-your-process.md).
 
 <ul>
   <li><span class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</span></li>
