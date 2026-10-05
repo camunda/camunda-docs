@@ -34,9 +34,16 @@ See [create a cluster](/components/saas/clusters/create-cluster.md).
 
 ## View cluster details
 
-Select a cluster to open its details.
+Select a cluster to open its details. The header shows the name and status of the cluster. The **Overview** has the following sections:
 
-The cluster details have the following tabs and pages:
+| Section         | Description                                                                                                                                                                     |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Environments    | The environment the cluster hosts. Select the environment to open its details, and to open Operate, Tasklist, or Admin for it.                                                  |
+| Cluster details | The status, type, size, generation, and tag of the cluster. From here you can resize the cluster, modify its tag, review an available update, and resume a paused cluster.      |
+| Components      | The health of the components of the cluster, such as the connector runtime. Click **Manage** on the **Connectors** tile to open [Connector Management](./manage-connectors.md). |
+| Jobs            | A summary of the jobs of the cluster. See [jobs](#jobs).                                                                                                                        |
+
+The cluster details also have the following tabs and pages:
 
 | Task                                                   | Where to find it                                                            |
 | :----------------------------------------------------- | :-------------------------------------------------------------------------- |
