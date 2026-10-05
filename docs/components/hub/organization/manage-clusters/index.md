@@ -8,10 +8,6 @@ import TabItem from "@theme/TabItem";
 
 A cluster is the infrastructure that runs Camunda 8 and hosts your [environments](/components/concepts/environments.md). Learn how clusters relate to environments in [clusters](/components/concepts/clusters.md). How you work with clusters in Camunda Hub depends on your deployment.
 
-## Permissions
-
-Only organization owners, admins, and DevOps users see the **Clusters** page. Other users work with the environments assigned to their [workspace](/components/concepts/workspaces.md), and they don't see clusters.
-
 <Tabs groupId="edition" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
@@ -19,6 +15,10 @@ Only organization owners, admins, and DevOps users see the **Clusters** page. Ot
 ]}>
 
 <TabItem value='saas'>
+
+## Permissions
+
+Only organization owners, admins, and DevOps users see the **Clusters** page. Other users work with the environments assigned to their [workspace](/components/concepts/workspaces.md), and they don't see clusters.
 
 ## View clusters
 
@@ -64,6 +64,10 @@ In SaaS, you update clusters in Camunda Hub. You can rename, resume, update, res
 </TabItem>
 
 <TabItem value='self-managed'>
+
+## Permissions {#permissions-self-managed}
+
+Only organization admins and DevOps users see the **Clusters** page. Other users work with the environments assigned to their [workspace](/components/concepts/workspaces.md), and they don't see clusters.
 
 ## View clusters {#view-clusters-self-managed}
 
