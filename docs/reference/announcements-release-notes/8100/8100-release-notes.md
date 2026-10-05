@@ -550,17 +550,21 @@ You can now:
 
 <p class="link-arrow">[Camunda 8 Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)</p>
 
-### Helm v4 required
+### Helm CLI v3 and v4 support {#helm-v4-required}
 
 <!-- https://github.com/camunda/product-hub/issues/3555 -->
 
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
 
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm CLI v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
+
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
 
 <ul>
   <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
 </ul>
 
 ### Host network support for Orchestration Cluster pods
@@ -629,6 +633,22 @@ Refer to the following updated Helm configuration and secret management document
 
 <p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
 
+### PostgreSQL databases are highly available by default
+
+<!-- https://github.com/camunda/camunda-deployment-references/pull/3463 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+The operator-based infrastructure reference architecture now deploys each CloudNativePG cluster with two instances instead of one, on a dedicated write-ahead log (WAL) volume, and requires the two instances of a cluster to sit on different nodes.
+
+A single-instance cluster gives CloudNativePG no switchover target, so the operator refuses to evict it and `kubectl drain` never completes. Because a Kubernetes upgrade drains one node at a time, that stalls the upgrade on whichever node holds a database. A second instance gives the operator somewhere to switch over to. The dedicated WAL volume keeps the write-ahead log that a standby's replication slot retains from growing into the data directory.
+
+Deployments already running the single-instance shape migrate in place: CloudNativePG clones the standby from the running primary and relocates `pg_wal` onto the new volume, with no dump or restore. Environments that cannot host a second instance, such as local Kind clusters, can pass `PG_INSTANCES=1` to `deploy.sh`.
+
+<p class="link-arrow">[High availability and node maintenance](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#high-availability-and-node-maintenance)</p>
+
+<p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
+
 ## Integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
@@ -648,6 +668,55 @@ Camunda for Microsoft Teams now supports routing incident and task collaboration
 ## Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Hub Modeler">Hub Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+### BPMN element menu improvements
+
+<!-- https://github.com/camunda/product-hub/issues/3480 -->
+
+The create, append, and change menus now group BPMN elements by category, such as tasks, gateways, events, and so on. Each category includes a short description so you can quickly find the right element.
+
+- Search still searches across all categories.
+- When appending, elements that continue a flow subtly indicate where the flow continues next. Select this to open the append pad with a prominent **Append** action.
+
+<p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
+
+### Decoupled element template lifecycle
+
+<!-- https://github.com/camunda/product-hub/issues/3567 -->
+
+Element templates now have a lifecycle independent of process application versioning in Web Modeler.
+
+- Publish and version element templates on their own, without creating a process application version.
+- A clear separation between template publishing and process app versioning removes unexpected coupling and side effects between template changes and business-logic versioning.
+- Architects managing reusable templates across teams and environments get a more predictable mental model.
+
+Existing templates are automatically migrated to the new lifecycle model; no manual action is required.
+
+<p class="link-arrow">[Publish an element template](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template)</p>
+
+### Define operations in your own element templates
+
+<!-- https://github.com/camunda/product-hub/issues/3403 -->
+
+Element templates support the `steps` and `presets` keys to offer several predefined configurations within a single template. Use `steps` to define the menu users navigate when they apply the template, and `presets` to define the property values each operation applies. Operation names, descriptions, and keywords are matched by search, so your operations are as discoverable as the templates themselves.
+
+<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
+
+### FEEL context variables for the process instance
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+The process instance properties are now accessible in FEEL expressions via the `camunda.processInstance` context, resolvable anywhere in the process. `camunda.processInstance.key` returns the process instance's system-generated key, and `camunda.processInstance.businessId` returns its business ID (or `null` if none is set).
+
+<p class="link-arrow">[FEEL context variables](/components/concepts/process-instance-creation.md#feel-context-variables)</p>
+
+### Hide the Add user button
+
+<!-- https://github.com/camunda/camunda-hub/issues/25824 -->
+
+In Self-Managed, you can now hide the **Add user** button on the **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
+
+<p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
 
 ### Low-code assertions
 
@@ -734,63 +803,6 @@ You can now view and choose which environment you are connected to in the modele
 This is disabled by default and behind feature flag `runtimeConnectionEnabled` (environment selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
 :::
 
-### Task testing supports call activities
-
-<!-- https://github.com/camunda/product-hub/issues/3486 -->
-
-Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
-
-<p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
-
-### BPMN element menu improvements
-
-<!-- https://github.com/camunda/product-hub/issues/3480 -->
-
-The create, append, and change menus now group BPMN elements by category, such as tasks, gateways, events, and so on. Each category includes a short description so you can quickly find the right element.
-
-- Search still searches across all categories.
-- When appending, elements that continue a flow subtly indicate where the flow continues next. Select this to open the append pad with a prominent **Append** action.
-
-<p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
-
-### Decoupled element template lifecycle
-
-<!-- https://github.com/camunda/product-hub/issues/3567 -->
-
-Element templates now have a lifecycle independent of process application versioning in Web Modeler.
-
-- Publish and version element templates on their own, without creating a process application version.
-- A clear separation between template publishing and process app versioning removes unexpected coupling and side effects between template changes and business-logic versioning.
-- Architects managing reusable templates across teams and environments get a more predictable mental model.
-
-Existing templates are automatically migrated to the new lifecycle model; no manual action is required.
-
-<p class="link-arrow">[Publish an element template](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template)</p>
-
-### Define operations in your own element templates
-
-<!-- https://github.com/camunda/product-hub/issues/3403 -->
-
-Element templates support the `steps` and `presets` keys to offer several predefined configurations within a single template. Use `steps` to define the menu users navigate when they apply the template, and `presets` to define the property values each operation applies. Operation names, descriptions, and keywords are matched by search, so your operations are as discoverable as the templates themselves.
-
-<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
-
-### FEEL context variables for the process instance
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-The process instance properties are now accessible in FEEL expressions via the `camunda.processInstance` context, resolvable anywhere in the process. `camunda.processInstance.key` returns the process instance's system-generated key, and `camunda.processInstance.businessId` returns its business ID (or `null` if none is set).
-
-<p class="link-arrow">[FEEL context variables](/components/concepts/process-instance-creation.md#feel-context-variables)</p>
-
-### Hide the Add user button
-
-<!-- https://github.com/camunda/camunda-hub/issues/25824 -->
-
-In Self-Managed, you can now hide the **Add user** button on the **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
-
-<p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
-
 ### Safe deletion with a 30-day recovery window
 
 <!-- https://github.com/camunda/product-hub/issues/3568 -->
@@ -800,6 +812,45 @@ Deleting an item in Web Modeler no longer removes it immediately. Deleted projec
 Deletion no longer corrupts process application version history, as existing snapshots continue to reference deleted files correctly. The recovery window applies to deletions made in 8.10 and later; items deleted before upgrading cannot be recovered.
 
 <p class="link-arrow">[Recover deleted resources](/components/hub/workspace/manage-projects/recently-deleted.md)</p>
+
+### Start a process instance with a business ID
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
+### Support for configurable headers for execution listeners
+
+<!-- https://github.com/camunda/product-hub/issues/3450 -->
+
+Execution listeners now support configurable headers, aligned with service task job headers.
+
+- In BPMN, execution listeners can define `<zeebe:taskHeaders>`. The headers are passed to the listener’s job worker alongside any base-element headers, with listener headers overriding on key conflicts.
+- In Modeler, you can configure execution listener headers visually (name/value pairs) without editing BPMN XML.
+- Listener workers can consume these headers as metadata and configuration parameters using the same patterns as service task job workers.
+
+### Support for start forms in Desktop Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/2406 -->
+
+Desktop Modeler now supports defining form references on [none start events](/components/modeler/bpmn/none-events/none-events.md) in Camunda 8 BPMN models, matching the existing Web Modeler capability.
+
+You can configure start forms directly in Desktop Modeler's properties panel using:
+
+- Camunda Form (linked): Reference a deployed Camunda Form by ID.
+- Camunda Form (embedded): Embed form JSON in the BPMN diagram (deprecated).
+
+Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
+
+### Task testing supports call activities
+
+<!-- https://github.com/camunda/product-hub/issues/3486 -->
+
+Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
+
+<p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
 
 ### Test process segments in Play
 
@@ -824,37 +875,6 @@ FEEL expressions in the variable outline now use the same syntax highlighting as
 When no element is selected on the canvas, the variables panel now highlights the process (root) scope, matching how it highlights the scope of a selected element. Variable value previews also no longer repeat the opening brackets of nested objects and arrays, so previews are easier to scan.
 
 <p class="link-arrow">[Inspect variables](/components/modeler/data-handling.md#inspecting-variables)</p>
-
-### Start a process instance with a business ID
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
-
-<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
-
-### Support for start forms in Desktop Modeler
-
-<!-- https://github.com/camunda/product-hub/issues/2406 -->
-
-Desktop Modeler now supports defining form references on [none start events](/components/modeler/bpmn/none-events/none-events.md) in Camunda 8 BPMN models, matching the existing Web Modeler capability.
-
-You can configure start forms directly in Desktop Modeler's properties panel using:
-
-- Camunda Form (linked): Reference a deployed Camunda Form by ID.
-- Camunda Form (embedded): Embed form JSON in the BPMN diagram (deprecated).
-
-Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
-
-### Support for configurable headers for execution listeners
-
-<!-- https://github.com/camunda/product-hub/issues/3450 -->
-
-Execution listeners now support configurable headers, aligned with service task job headers.
-
-- In BPMN, execution listeners can define `<zeebe:taskHeaders>`. The headers are passed to the listener’s job worker alongside any base-element headers, with listener headers overriding on key conflicts.
-- In Modeler, you can configure execution listener headers visually (name/value pairs) without editing BPMN XML.
-- Listener workers can consume these headers as metadata and configuration parameters using the same patterns as service task job workers.
 
 ## Optimize
 
@@ -1374,6 +1394,31 @@ This release supports in-place restore for the same cluster only. During restore
   <li><span class="link-arrow">[Restore troubleshooting](/components/saas/restore-troubleshooting.md)</span></li>
 </ul>
 
+### Startup no longer depends on a reachable identity provider
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is still starting, or that is down, no longer stops the cluster from starting.
+
+- Only the requests that need the unreachable provider fail, such as browser login requests and token-validation requests for that provider. All other requests succeed.
+- A session that the cluster authenticated before the outage keeps its access token until the token expires. The refresh that follows fails, and the session ends.
+- Each new request tries again. The traffic recovers when the provider answers, and you do not need a restart. The cluster holds no queue of failed requests, and it makes no attempt in the background.
+- A failed request writes a warning that names the step that failed and the provider with its issuer, at most once each minute for each combination of step and provider. The warning follows the traffic, and it is not a health check of the provider.
+
+<p class="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
+
+### Startup warns about an incorrect OIDC configuration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+The Orchestration Cluster checks its OIDC configuration at startup, without contacting the provider, and writes a warning for each problem it finds. The cluster still starts.
+
+- The checks cover the client ID, the set of endpoints, the scope, and the shape of the redirect URI.
+- A redirect URI with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`. Any other unusable value stays as configured, and the login fails later.
+- The warnings come from the loggers `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` and `io.camunda.security.spring.oidc.OidcRedirectionEndpoint`.
+
+<p class="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
+
 ### Tasklist Business ID
 
 <!-- https://github.com/camunda/product-hub/issues/3436 -->
@@ -1442,7 +1487,7 @@ What's included:
 
 <p class="link-arrow">[Dual-region ECS reference architecture](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
-#### Multi-region RDBMS reference architecture
+### Multi-region RDBMS reference architecture
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
@@ -1454,11 +1499,11 @@ What's included:
 
 - A zone-aware topology for primary storage that keeps its Raft quorum when a region is lost, so processing continues without an operator step.
 - A multi-region RDBMS as secondary storage, with the asynchronous replication monitoring that lets Zeebe replay exported records after a writer failover.
-- Cross-region networking, zone activation, region loss, and failback procedures, published as a tested reference implementation on Amazon EKS.
+- Cross-region networking, zone activation, region loss, and failback procedures for a reference implementation on Amazon EKS.
 
 This architecture removes the recovery procedure rather than the recovery window: no operator step restores Zeebe processing after a region loss, while re-election, client rerouting, and database writer promotion still take time.
 
-<!-- <p class="link-arrow">[Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md)</p> -->
+<p class="link-arrow">[Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md)</p>
 
 ## Secondary storage
 
@@ -1486,6 +1531,14 @@ Camunda 8.10 adds first-class support for asynchronously replicated relational d
 
 <p class="link-arrow">[RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md)</p>
 
+### Elasticsearch 9.x and OpenSearch 3.x support
+
+<!-- https://github.com/camunda/product-hub/issues/3588 -->
+
+Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+
+<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
 ### Elasticsearch index sizing and replication
 
 <!-- https://github.com/camunda/camunda-docs/pull/9809, https://github.com/camunda/product-hub/issues/3518 -->
@@ -1503,14 +1556,6 @@ This documentation helps Self‑Managed customers:
 - Reduce Elasticsearch‑related incidents in production.
 
 <p class="link-arrow">[Install Camunda for production with Helm](/self-managed/deployment/helm/install/production/index.md)</p>
-
-### Elasticsearch 9.x and OpenSearch 3.x support
-
-<!-- https://github.com/camunda/product-hub/issues/3588 -->
-
-Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
-
-<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
 ### New RDBMS version support
 
@@ -1532,88 +1577,6 @@ You can now perform rolling upgrades of self-managed Camunda 8 between patch and
 - Schema changes between versions are strictly backwards-compatible and applied transparently.
 
 <p class="link-arrow">[Rolling upgrades](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#rolling-upgrades)</p>
-
-### Helm chart deployment
-
-<!-- Legacy anchor retained for inbound links. -->
-
-#### Helm CLI v3 and v4 support {#helm-v4-required}
-
-<!-- https://github.com/camunda/product-hub/issues/3555 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
-
-Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm CLI v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
-
-<HelmCliSupport />
-
-Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
-
-<ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
-</ul>
-
-#### PostgreSQL databases are highly available by default
-
-<!-- https://github.com/camunda/camunda-deployment-references/pull/3463 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
-
-The operator-based infrastructure reference architecture now deploys each CloudNativePG cluster with two instances instead of one, on a dedicated write-ahead log (WAL) volume, and requires the two instances of a cluster to sit on different nodes.
-
-A single-instance cluster gives CloudNativePG no switchover target, so the operator refuses to evict it and `kubectl drain` never completes. Because a Kubernetes upgrade drains one node at a time, that stalls the upgrade on whichever node holds a database. A second instance gives the operator somewhere to switch over to. The dedicated WAL volume keeps the write-ahead log that a standby's replication slot retains from growing into the data directory.
-
-Deployments already running the single-instance shape migrate in place: CloudNativePG clones the standby from the running primary and relocates `pg_wal` onto the new volume, with no dump or restore. Environments that cannot host a second instance, such as local Kind clusters, can pass `PG_INSTANCES=1` to `deploy.sh`.
-
-<p class="link-arrow">[High availability and node maintenance](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#high-availability-and-node-maintenance)</p>
-
-<p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
-
-### Orchestration Cluster
-
-#### Multi-region RDBMS reference architecture
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3553 -->
-
-A new multi-region reference architecture details how you can design, deploy, and operate one Orchestration Cluster stretched across three or more Kubernetes regions, where the Zeebe data plane is active-active across every region and the relational secondary storage is active-standby, with a single global writer and replication owned by the database.
-
-What's included:
-
-- A zone-aware topology for primary storage that keeps its Raft quorum when a region is lost, so processing continues without an operator step.
-- A multi-region RDBMS as secondary storage, with the asynchronous replication monitoring that lets Zeebe replay exported records after a writer failover.
-- Cross-region networking, zone activation, region loss, and failback procedures for a reference implementation on Amazon EKS.
-
-This architecture removes the recovery procedure rather than the recovery window: no operator step restores Zeebe processing after a region loss, while re-election, client rerouting, and database writer promotion still take time.
-
-<p class="link-arrow">[Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md)</p>
-
-#### Startup no longer depends on a reachable identity provider
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is still starting, or that is down, no longer stops the cluster from starting.
-
-- Only the requests that need the unreachable provider fail, such as browser login requests and token-validation requests for that provider. All other requests succeed.
-- A session that the cluster authenticated before the outage keeps its access token until the token expires. The refresh that follows fails, and the session ends.
-- Each new request tries again. The traffic recovers when the provider answers, and you do not need a restart. The cluster holds no queue of failed requests, and it makes no attempt in the background.
-- A failed request writes a warning that names the step that failed and the provider with its issuer, at most once each minute for each combination of step and provider. The warning follows the traffic, and it is not a health check of the provider.
-
-<p class="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
-
-#### Startup warns about an incorrect OIDC configuration
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-The Orchestration Cluster checks its OIDC configuration at startup, without contacting the provider, and writes a warning for each problem it finds. The cluster still starts.
-
-- The checks cover the client ID, the set of endpoints, the scope, and the shape of the redirect URI.
-- A redirect URI with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`. Any other unusable value stays as configured, and the login fails later.
-- The warnings come from the loggers `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` and `io.camunda.security.spring.oidc.OidcRedirectionEndpoint`.
-
-<p class="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
 
 ## 8.10.0-alpha5
 
@@ -1701,7 +1664,7 @@ The new design system will be introduced for SaaS deployments with the 8.10 mino
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects networking">Networking</span></div>
 
-### Secure connectivity with AWS inbound PrivateLink for Camunda 8.7
+#### Secure connectivity with AWS inbound PrivateLink for Camunda 8.7
 
 <!-- https://github.com/camunda/product-hub/issues/3651 -->
 
@@ -1980,6 +1943,21 @@ The existing rebalance endpoint asks every leader to step down at once and retur
 
 :::
 
+#### Process instance suspension and resumption
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3526 -->
+
+You can now suspend and resume a running process instance without canceling it. Suspending halts execution at its current point: no jobs activate or complete, no events correlate, and no timers fire. Resuming picks up from exactly where execution stopped, with no loss of progress or data.
+
+- Suspend or resume a single instance, or a batch of instances at once, from Operate or the REST API.
+- Variables are the one exception to the halt — you can still read and update variables on a suspended instance, so you can fix data before resuming.
+- Timers whose due dates pass during suspension fire immediately on resume rather than waiting out their remaining duration.
+- Messages and signals are not correlated to a suspended instance; publishing itself is unaffected.
+
+<p class="link-arrow">[Suspend and resume a process instance](/components/operate/userguide/suspend-resume-process-instance.md)</p>
+
 #### Reference architecture for Amazon ECS
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
@@ -2015,21 +1993,6 @@ What's included:
 
 <p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
-#### Process instance suspension and resumption
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3526 -->
-
-You can now suspend and resume a running process instance without canceling it. Suspending halts execution at its current point: no jobs activate or complete, no events correlate, and no timers fire. Resuming picks up from exactly where execution stopped, with no loss of progress or data.
-
-- Suspend or resume a single instance, or a batch of instances at once, from Operate or the REST API.
-- Variables are the one exception to the halt — you can still read and update variables on a suspended instance, so you can fix data before resuming.
-- Timers whose due dates pass during suspension fire immediately on resume rather than waiting out their remaining duration.
-- Messages and signals are not correlated to a suspended instance; publishing itself is unaffected.
-
-<p class="link-arrow">[Suspend and resume a process instance](/components/operate/userguide/suspend-resume-process-instance.md)</p>
-
 #### Task testing supports call activities
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
@@ -2039,7 +2002,6 @@ You can now suspend and resume a running process instance without canceling it. 
 Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
 
 <p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
-
 ## 8.10.0-alpha4
 
 | Release date   | Changelog(s)                                                                                        | Blog |
@@ -2101,16 +2063,6 @@ Connectors that provide a single operation are also renamed to describe their ac
 
 <p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
 
-#### Send Microsoft Teams and Slack messages without managing credentials
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
-
-The new **App Integrations connector** sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
-
-Messages can address a Microsoft Teams channel, user, or conversation, a Slack channel or user, or a Camunda recipient — an assignee, candidate users, or candidate groups — which the connector resolves to whichever platforms those people have connected. Alongside plain text you can send an Adaptive Card, a Block Kit payload, or a Camunda form. The result reports every destination reached and every one that failed, so a process can react to a partial delivery.
-
-<p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
-
 #### Receive Microsoft Teams and Slack messages in a process
 
 <!-- https://github.com/camunda/product-hub/issues/3542 -->
@@ -2122,6 +2074,16 @@ The **App Integrations connector** now receives messages as well as sending them
 Receiving needs no connector task and no job worker. Element templates for a chat start event, an intermediate catch event, a receive task, and a boundary event set up the correlation, so a start event and a catch event are enough for a working conversation loop. A **Chat key** on the start event decides which chats it answers: configure a Microsoft Teams channel or chat in the Camunda app's **Settings** tab, or a Slack channel or direct message with `/camunda chat`, and give the process the same key. A reply always reaches the cluster whose process asked the question. In a personal chat or direct message every message reaches the process; in a channel on either platform, @mention the Camunda app.
 
 <p class="link-arrow">[Receive a chat message](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message)</p>
+
+#### Send Microsoft Teams and Slack messages without managing credentials
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The new **App Integrations connector** sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
+
+Messages can address a Microsoft Teams channel, user, or conversation, a Slack channel or user, or a Camunda recipient — an assignee, candidate users, or candidate groups — which the connector resolves to whichever platforms those people have connected. Alongside plain text you can send an Adaptive Card, a Block Kit payload, or a Camunda form. The result reports every destination reached and every one that failed, so a process can react to a partial delivery.
+
+<p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
 
 ### Helm chart deployment
 
@@ -2204,6 +2166,18 @@ Optimize now classifies each bearer token as belonging to a user or a machine-to
 
 ### Orchestration Cluster
 
+#### Elasticsearch 9.x and OpenSearch 3.x support
+
+<!-- https://github.com/camunda/product-hub/issues/3588 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.6+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+
+The Self-Managed [reference architectures](/self-managed/reference-architecture/reference-architecture.md) ship these versions out of the box. The Elasticsearch clusters they deploy through the ECK operator run Elasticsearch 9.x, and the Amazon OpenSearch domains they provision through Terraform run OpenSearch 3.x. If you based your deployment on an earlier copy of a reference architecture, upgrade your search layer to a supported version before you move to 8.10.
+
+<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
 #### FEEL context variables for the process instance
 
 <!-- https://github.com/camunda/product-hub/issues/3436 -->
@@ -2224,18 +2198,6 @@ You can now assign a business ID to a running process instance that has none, us
 
 <p class="link-arrow">[Late Business ID assignment](/components/concepts/process-instance-creation.md#late-business-id-assignment)</p>
 
-#### Elasticsearch 9.x and OpenSearch 3.x support
-
-<!-- https://github.com/camunda/product-hub/issues/3588 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.6+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
-
-The Self-Managed [reference architectures](/self-managed/reference-architecture/reference-architecture.md) ship these versions out of the box. The Elasticsearch clusters they deploy through the ECK operator run Elasticsearch 9.x, and the Amazon OpenSearch domains they provision through Terraform run OpenSearch 3.x. If you based your deployment on an earlier copy of a reference architecture, upgrade your search layer to a supported version before you move to 8.10.
-
-<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
-
 #### Physical Tenant identity support
 
 <!-- https://github.com/camunda/product-hub/issues/3600 -->
@@ -2252,22 +2214,6 @@ Physical Tenants now support independent per-tenant authorization.
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
 <p class="link-arrow">[Set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md)</p>
-
-#### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
-
-<!-- https://github.com/camunda/product-hub/issues/3607 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
-
-Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, so you configure authentication once, in one place. Camunda Hub and Optimize both continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components, and Camunda plans to remove them in a future release. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
-
-Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
-
-User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
-
-<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
-
-<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
 #### Rolling upgrades
 
@@ -2295,6 +2241,22 @@ Document Handling now supports any S3-compatible object store such as MinIO, Clo
 
 <p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md)</p>
 
+#### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
+
+<!-- https://github.com/camunda/product-hub/issues/3607 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, so you configure authentication once, in one place. Camunda Hub and Optimize both continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components, and Camunda plans to remove them in a future release. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+
+Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
+
+User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
+
+<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
 #### Unified frontend application for Admin, Operate, and Tasklist
 
 <!-- https://github.com/camunda/product-hub/issues/3456 -->
@@ -2316,7 +2278,6 @@ Operate, Tasklist, and Admin are now accessed from a single frontend application
 Business ID is now visible in Tasklist, in both the task list and task detail views. Filter tasks by business ID using **Equals**, **Contains**, and **Is one of** in the filter dialog, or the `$neq`/`$exists`/`$notIn` operators via the API.
 
 <p class="link-arrow">[Business ID filter](/components/tasklist/userguide/using-filters.md#business-id-filter)</p>
-
 ## 8.10.0-alpha3
 
 | Release date | Changelog(s)                                                                                        | Blog |
@@ -2342,6 +2303,16 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 ### APIs & tools
 
+#### Invite collaborators through the public API who haven't logged in yet
+
+<!-- https://github.com/camunda/camunda-hub/pull/26666 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+Adding a project collaborator through the public API — `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members` — no longer requires the invitee to have already logged in to Web Modeler at least once. If the email address belongs to an organization member with no local user yet, Camunda now creates a pending invitation and sends an invitation email, the same as when inviting through the Web Modeler UI. The invitee gains project access once they accept the invitation.
+
+<p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
+
 #### Public Camunda Hub API
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
@@ -2356,16 +2327,6 @@ See the [release announcement](/reference/announcements-release-notes/8100/8100-
 :::note
 The Camunda Hub API is not yet exposed in Camunda 8. To access it, please reach out to [Camunda success](https://camunda.com/services/camunda-success/).
 :::
-
-#### Invite collaborators through the public API who haven't logged in yet
-
-<!-- https://github.com/camunda/camunda-hub/pull/26666 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-Adding a project collaborator through the public API — `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members` — no longer requires the invitee to have already logged in to Web Modeler at least once. If the email address belongs to an organization member with no local user yet, Camunda now creates a pending invitation and sends an invitation email, the same as when inviting through the Web Modeler UI. The invitee gains project access once they accept the invitation.
-
-<p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
 
 ### Camunda Hub
 
@@ -2433,6 +2394,22 @@ Learn more:
 - [Restore scenarios](/components/saas/restore-scenarios.md)
 - [Restore troubleshooting](/components/saas/restore-troubleshooting.md)
 
+### Helm chart deployment
+
+#### Docker images
+
+<!-- https://github.com/camunda/camunda/issues/50159 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+Camunda no longer produces the following Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
+
 ### Modeler
 
 #### Safe deletion with a 30-day recovery window
@@ -2446,6 +2423,16 @@ Deleting an item in Web Modeler no longer removes it immediately. Deleted projec
 Deletion no longer corrupts process application version history, as existing snapshots continue to reference deleted files correctly. The recovery window applies to deletions made in 8.10 and later; items deleted before upgrading cannot be recovered.
 
 <p class="link-arrow">[Recover deleted resources](/components/hub/workspace/manage-projects/recently-deleted.md)</p>
+
+#### Start a process instance with a business ID
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
 
 #### Test process segments in Play
 
@@ -2475,17 +2462,17 @@ When no element is selected on the canvas, the variables panel now highlights th
 
 <p class="link-arrow">[Inspect variables](/components/modeler/data-handling.md#inspecting-variables)</p>
 
-#### Start a process instance with a business ID
+### Operate
+
+#### Business ID filtering in Operate
 
 <!-- https://github.com/camunda/product-hub/issues/3436 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
+Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
 
-<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
-
-### Operate
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
 
 #### Multi-variable filtering
 
@@ -2510,16 +2497,6 @@ Operate now shows what an active process instance is waiting for. When you inspe
 Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
-
-#### Business ID filtering in Operate
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
-
-Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
-
-<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
 
 ### Optimize
 
@@ -2560,6 +2537,32 @@ The exporter layer detects when the active RDBMS endpoint is unreachable, includ
 After failover, a reconciliation path replays missing events from the Zeebe log to close any replication lag gap, restoring a consistent secondary storage state without manual data repair. A single-exporter configuration is now supported for deployments where the RDBMS handles cross-region replication natively.
 
 <p class="link-arrow">[RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md)</p>
+
+#### Business ID in message correlation
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+You can now include a business ID when publishing or correlating a message. Business ID acts as an additional filter alongside the message name and correlation key.
+
+Supported combinations for start events: message name alone; name + business ID; name + correlation key; name + correlation key + business ID. For non-start events, business ID is usable alongside name + correlation key. When both a correlation key and business ID are provided, both fields must match the corresponding values stored on the subscription.
+
+If business ID uniqueness is enabled, a blocked message-start waits in the buffer until the active instance releases the business ID or the TTL expires — it is not dropped immediately.
+
+<p class="link-arrow">[Business ID in message correlation](/components/concepts/messages.md#business-id-in-message-correlation)</p>
+
+#### Business ID propagation in call activities
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Call activities now support configuring the business ID assigned to the child process instance. Child instances inherit the parent's business ID by default (unchanged from 8.9). You can override this per call activity with a literal value or FEEL expression. The FEEL context variable `camunda.processInstance.businessId` provides access to the parent's ID within the expression.
+
+The resolved value is set once at child creation and is immutable.
+
+<p class="link-arrow">[Business ID propagation](/components/modeler/bpmn/call-activities/call-activities.md#business-id-propagation)</p>
 
 #### Cluster variable metadata
 
@@ -2633,16 +2636,6 @@ Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isola
 
 <p class="link-arrow">[Set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md)</p>
 
-#### Select a DMN version with a FEEL expression
-
-<!-- https://github.com/camunda/product-hub/issues/3501 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
-
-<p class="link-arrow">[Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task)</p>
-
 #### Region-aware partition placement
 
 <!-- https://github.com/camunda/product-hub/issues/3618 -->
@@ -2655,48 +2648,15 @@ Leader election priorities respect region boundaries, preferring region-local le
 
 <p class="link-arrow">[Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)</p>
 
-#### Business ID in message correlation
+#### Select a DMN version with a FEEL expression
 
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
-
-You can now include a business ID when publishing or correlating a message. Business ID acts as an additional filter alongside the message name and correlation key.
-
-Supported combinations for start events: message name alone; name + business ID; name + correlation key; name + correlation key + business ID. For non-start events, business ID is usable alongside name + correlation key. When both a correlation key and business ID are provided, both fields must match the corresponding values stored on the subscription.
-
-If business ID uniqueness is enabled, a blocked message-start waits in the buffer until the active instance releases the business ID or the TTL expires — it is not dropped immediately.
-
-<p class="link-arrow">[Business ID in message correlation](/components/concepts/messages.md#business-id-in-message-correlation)</p>
-
-#### Business ID propagation in call activities
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
+<!-- https://github.com/camunda/product-hub/issues/3501 -->
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Call activities now support configuring the business ID assigned to the child process instance. Child instances inherit the parent's business ID by default (unchanged from 8.9). You can override this per call activity with a literal value or FEEL expression. The FEEL context variable `camunda.processInstance.businessId` provides access to the parent's ID within the expression.
+You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
 
-The resolved value is set once at child creation and is immutable.
-
-<p class="link-arrow">[Business ID propagation](/components/modeler/bpmn/call-activities/call-activities.md#business-id-propagation)</p>
-
-### Helm chart deployment
-
-#### Docker images
-
-<!-- https://github.com/camunda/camunda/issues/50159 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
-
-Camunda no longer produces the following Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
-
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
-- [camunda/operate](https://hub.docker.com/r/camunda/operate)
-- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
-
-Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
-
+<p class="link-arrow">[Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task)</p>
 ## 8.10.0-alpha2
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
@@ -2704,21 +2664,6 @@ Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Dock
 | 09 June 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.10.0-alpha2)</li></ul> | -    |
 
 ### Agentic orchestration
-
-#### Skills repository for pro-code AI enablement
-
-<!-- https://github.com/camunda/product-hub/issues/3557 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
-
-The Camunda Skills repository toolset enables AI coding agents to build, validate, and configure Camunda artifacts. With the Skills installed, your AI agent can:
-
-- Build and modify BPMN diagrams with a human-readable layout.
-- Configure connectors using element templates (no raw XML).
-- Generate form schemas with validation.
-- Create and edit DMN decision tables.
-- Run BPMN lint rules against generated diagrams.
-- Scaffold and wire Camunda Process Test (CPT) integration tests.
 
 #### Judge assertions in CPT JSON Test Cases
 
@@ -2742,6 +2687,21 @@ AI agents can use the [Processes MCP Server](/apis-tools/processes-mcp/processes
 When you deploy a process with an MCP start event it is automatically registered as a callable tool. MCP clients connect to the `/mcp/processes` endpoint and can invoke any registered process, with the Orchestration Cluster starting a new process instance and immediately returning the process instance key.
 
 The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
+
+#### Skills repository for pro-code AI enablement
+
+<!-- https://github.com/camunda/product-hub/issues/3557 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+The Camunda Skills repository toolset enables AI coding agents to build, validate, and configure Camunda artifacts. With the Skills installed, your AI agent can:
+
+- Build and modify BPMN diagrams with a human-readable layout.
+- Configure connectors using element templates (no raw XML).
+- Generate form schemas with validation.
+- Create and edit DMN decision tables.
+- Run BPMN lint rules against generated diagrams.
+- Scaffold and wire Camunda Process Test (CPT) integration tests.
 
 ### APIs & tools
 
@@ -2802,6 +2762,17 @@ If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-
 
 ### Modeler
 
+#### Low-code test CI/CD compatibility
+
+<!-- https://github.com/camunda/product-hub/issues/3498 -->
+
+Test files in Test Studio now use the same schema as Camunda Process Test (CPT). You can record a test in Test Studio and run it in your CI/CD pipeline through CPT without converting formats, and load CPT-authored test files into Test Studio to debug them visually.
+
+- Use one JSON schema across Test Studio and CPT: record once, run anywhere.
+- Existing Play test scenario files are migrated automatically to the new format.
+
+<p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
+
 #### Support for start forms in Desktop Modeler
 
 <!-- https://github.com/camunda/product-hub/issues/2406 -->
@@ -2817,16 +2788,41 @@ You can configure start forms directly in Desktop Modeler's properties panel usi
 
 Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
 
-#### Low-code test CI/CD compatibility
+### Operate
 
-<!-- https://github.com/camunda/product-hub/issues/3498 -->
+#### Business ID visibility in Operate
 
-Test files in Test Studio now use the same schema as Camunda Process Test (CPT). You can record a test in Test Studio and run it in your CI/CD pipeline through CPT without converting formats, and load CPT-authored test files into Test Studio to debug them visually.
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
 
-- Use one JSON schema across Test Studio and CPT: record once, run anywhere.
-- Existing Play test scenario files are migrated automatically to the new format.
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-<p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
+Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
+### Optimize
+
+#### Scope-aware variable export configuration for Optimize
+
+<!-- https://github.com/camunda/product-hub/issues/3435 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+You can now configure variable export behavior by scope:
+
+- You can enable or disable root (process instance) variables and local variables independently.
+- You can exclude all local variables by default, while still allowing specific local variables by name pattern.
+- Configuration integrates with the existing variable filtering mechanism, using consistent syntax and semantics.
+
+Terminology aligns with Camunda 8 docs:
+
+- **Root scope/process instance scope**: Variables visible across the process.
+- **Local variables**: Variables defined in child scopes only.
+
+With this, you can configure setups such as:
+
+- Export only root variables for all processes.
+- Export a curated subset of local variables (for example, `taskContextDisplayName` or specific local audit variables) without exposing all locals.
 
 ### Orchestration Cluster
 
@@ -2868,43 +2864,6 @@ Execution listeners can now be configured on the enclosing body of multi-instanc
 - Dynamically calculate collections using custom logic or external data before instance creation.
 
 <p class="link-arrow">[`beforeAll` listeners](/components/concepts/execution-listeners.md#beforeall-listeners)</p>
-
-### Operate
-
-#### Business ID visibility in Operate
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
-
-Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
-
-<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
-
-### Optimize
-
-#### Scope-aware variable export configuration for Optimize
-
-<!-- https://github.com/camunda/product-hub/issues/3435 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
-
-You can now configure variable export behavior by scope:
-
-- You can enable or disable root (process instance) variables and local variables independently.
-- You can exclude all local variables by default, while still allowing specific local variables by name pattern.
-- Configuration integrates with the existing variable filtering mechanism, using consistent syntax and semantics.
-
-Terminology aligns with Camunda 8 docs:
-
-- **Root scope/process instance scope**: Variables visible across the process.
-- **Local variables**: Variables defined in child scopes only.
-
-With this, you can configure setups such as:
-
-- Export only root variables for all processes.
-- Export a curated subset of local variables (for example, `taskContextDisplayName` or specific local audit variables) without exposing all locals.
-
 ## 8.10.0-alpha1
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
@@ -2955,85 +2914,6 @@ https://github.com/camunda/camunda/issues/49548 -->
 
 Camunda Process Test now exposes **judge-based evaluation** and **semantic similarity evaluation** as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
 
-### Console
-
-#### Usage & billing metrics for 2025 enterprise license model
-
-<!-- https://github.com/camunda/product-hub/issues/3571 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
-
-Console and Accounts now support the 2025 enterprise license model.
-
-- A new `licensing_model` attribute on `OrganizationMetaData` identifies if an enterprise organization is using the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
-- If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
-- For enterprise (`salesplantype = enterprise`) organizations, the licensing model is shown in the organization details. Admins can edit this by selecting either **legacy** or **2025** via a modal action.
-- The enterprise onboarding wizard now includes a license selection step (defaults to **2025**). The `ExternalOnboardingRouter` accepts an optional licensing model parameter (defaulting to **2025** if not provided).
-
-#### Cluster version selection for SaaS Orchestration Clusters
-
-<!-- https://github.com/camunda/product-hub/issues/3582 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-You can now create new SaaS Orchestration Clusters on specific supported Camunda 8 minor and patch versions, including:
-
-- The latest recommended versions (latest patch of each active minor)
-- Other still-supported versions that you already run on existing clusters in the same organization.
-
-### Intelligent document processing (IDP)
-
-#### Support for ABBYY as an IDP Provider
-
-<!-- https://github.com/camunda/product-hub/issues/3492 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
-
-Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
-
-### Modeler
-
-#### Execution listener configurable header support
-
-<!-- https://github.com/camunda/product-hub/issues/3450 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
-
-Execution listeners now support configurable headers, aligned with service task job headers.
-
-- In BPMN, execution listeners can define `<zeebe:taskHeaders>`. The headers are passed to the listener’s job worker alongside any base-element headers, with listener headers overriding on key conflicts.
-- In Modeler, you can configure execution listener headers visually (name/value pairs) without editing BPMN XML.
-- Listener workers can consume these headers as metadata and configuration parameters using the same patterns as service task job workers.
-
-### Integrations
-
-#### Microsoft Teams routing and permission-aware task actions
-
-<!-- https://github.com/camunda/product-hub/issues/3424 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
-
-Camunda for Microsoft Teams now supports routing incident and task collaboration to private channels, shared channels, and group chats. Notifications and task actions in Teams now align with Camunda assignment and access rules, ensuring that only eligible users are notified and allowed to act.
-
-### Operate
-
-#### JSON display in Operate
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3464 -->
-
-Camunda 8.10 introduces an update to the JSON display functionality in Operate (SaaS).
-
-You can now:
-
-- Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
-- View JSON values with consistent, easier to understand formatting.
-- Copy full JSON variable values to the clipboard.
-- Use the improved in-line variables display.
-
-This change helps navigate more complex data during operations and troubleshooting.
-
 ### APIs & tools
 
 #### In-memory OAuth credentials cache by default for the Java client
@@ -3060,17 +2940,31 @@ If you previously set `CAMUNDA_CLIENT_CONFIG_PATH` / `ZEEBE_CLIENT_CONFIG_PATH` 
 
 <p class="link-arrow">[Spring Boot starter configuration](/apis-tools/camunda-spring-boot-starter/configuration.md#credentials-cache-path)</p>
 
-### Orchestration Cluster
+### Console
 
-#### Cancel execution listener
+#### Cluster version selection for SaaS Orchestration Clusters
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<!-- https://github.com/camunda/product-hub/issues/3582 -->
 
-<!-- https://github.com/camunda/product-hub/issues/2768 -->
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Execution listeners now support a `cancel` event type on the process element. Cancel listeners run when a process instance is terminated — useful for cleanup, audit logging, or notifying external systems.
+You can now create new SaaS Orchestration Clusters on specific supported Camunda 8 minor and patch versions, including:
 
-For details, see [`cancel` listeners](/components/concepts/execution-listeners.md#cancel-listeners).
+- The latest recommended versions (latest patch of each active minor)
+- Other still-supported versions that you already run on existing clusters in the same organization.
+
+#### Usage & billing metrics for 2025 enterprise license model
+
+<!-- https://github.com/camunda/product-hub/issues/3571 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+
+Console and Accounts now support the 2025 enterprise license model.
+
+- A new `licensing_model` attribute on `OrganizationMetaData` identifies if an enterprise organization is using the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
+- If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
+- For enterprise (`salesplantype = enterprise`) organizations, the licensing model is shown in the organization details. Admins can edit this by selecting either **legacy** or **2025** via a modal action.
+- The enterprise onboarding wizard now includes a license selection step (defaults to **2025**). The `ExternalOnboardingRouter` accepts an optional licensing model parameter (defaulting to **2025** if not provided).
 
 ### Helm chart deployment
 
@@ -3090,3 +2984,68 @@ orchestration:
 ```
 
 For details, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
+
+### Integrations
+
+#### Microsoft Teams routing and permission-aware task actions
+
+<!-- https://github.com/camunda/product-hub/issues/3424 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
+
+Camunda for Microsoft Teams now supports routing incident and task collaboration to private channels, shared channels, and group chats. Notifications and task actions in Teams now align with Camunda assignment and access rules, ensuring that only eligible users are notified and allowed to act.
+
+### Intelligent document processing (IDP)
+
+#### Support for ABBYY as an IDP Provider
+
+<!-- https://github.com/camunda/product-hub/issues/3492 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
+
+Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
+
+### Modeler
+
+#### Execution listener configurable header support
+
+<!-- https://github.com/camunda/product-hub/issues/3450 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Execution listeners now support configurable headers, aligned with service task job headers.
+
+- In BPMN, execution listeners can define `<zeebe:taskHeaders>`. The headers are passed to the listener’s job worker alongside any base-element headers, with listener headers overriding on key conflicts.
+- In Modeler, you can configure execution listener headers visually (name/value pairs) without editing BPMN XML.
+- Listener workers can consume these headers as metadata and configuration parameters using the same patterns as service task job workers.
+
+### Operate
+
+#### JSON display in Operate
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3464 -->
+
+Camunda 8.10 introduces an update to the JSON display functionality in Operate (SaaS).
+
+You can now:
+
+- Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
+- View JSON values with consistent, easier to understand formatting.
+- Copy full JSON variable values to the clipboard.
+- Use the improved in-line variables display.
+
+This change helps navigate more complex data during operations and troubleshooting.
+
+### Orchestration Cluster
+
+#### Cancel execution listener
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/2768 -->
+
+Execution listeners now support a `cancel` event type on the process element. Cancel listeners run when a process instance is terminated — useful for cleanup, audit logging, or notifying external systems.
+
+For details, see [`cancel` listeners](/components/concepts/execution-listeners.md#cancel-listeners).
