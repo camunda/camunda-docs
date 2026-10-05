@@ -4,7 +4,8 @@ title: Deploy your project
 description: Deploy your project to an environment assigned to your workspace.
 ---
 
-import DeployErrorImg from './img/deploy-error.png'
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Deploy your project to an environment assigned to your workspace, for example a testing, staging, or production environment.
 
@@ -61,18 +62,43 @@ If multi-tenancy is enabled, provide a [Logical Tenant](/self-managed/concepts/m
 
 The status of an environment decides whether you can deploy to it:
 
-| Status                        | What the dialog shows                                                                   | Can you deploy?                   |
-| :---------------------------- | :-------------------------------------------------------------------------------------- | :-------------------------------- |
-| Healthy                       | No message.                                                                             | Yes                               |
-| Unhealthy                     | **Deployment may fail**: The selected environment is unhealthy.                         | Yes                               |
-| Updating                      | **Deployment may fail**: The selected environment is updating.                          | Yes                               |
-| Paused                        | To deploy to this environment, it needs to be resumed.                                  | No. Resume the environment first. |
-| Resuming                      | **Environment is resuming**: Wait until the environment is healthy before deploying.    | No                                |
-| Creating                      | **Environment is being created**: Wait until the environment is ready before deploying. | No                                |
-| Unavailable                   | The dialog explains why the environment can't be deployed to, for example maintenance.  | No                                |
-| Removed or no longer reported | **Environment unavailable**: Select another environment to deploy.                      | No                                |
+<Tabs groupId="edition" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
 
-These messages appear in the SaaS deploy dialog. To resume a paused environment, click **Resume** next to it. Only organization owners, admins, and DevOps users see this button. You can also [resume the environment from the environments page](../../organization/manage-environments/index.md#resume-a-paused-environment).
+<TabItem value='saas'>
+
+| Status      | What it means for deployment                                                                  |
+| :---------- | :-------------------------------------------------------------------------------------------- |
+| Healthy     | You can deploy.                                                                               |
+| Unhealthy   | You can deploy, but the deployment may fail because the environment is unhealthy.             |
+| Updating    | You can deploy, but the deployment may fail because the environment is updating.              |
+| Paused      | You can't deploy until the environment is resumed. Resume the environment first.              |
+| Resuming    | You can't deploy. Wait until the environment is healthy.                                      |
+| Creating    | You can't deploy. Wait until the environment is ready.                                        |
+| Unavailable | You can't deploy, for example because the environment is temporarily unavailable.             |
+| Unknown     | You can deploy, but the deployment may fail because the status of the environment is unknown. |
+
+For how the status follows the state of the cluster, see [environment statuses](/components/hub/organization/manage-environments/index.md#how-environment-statuses-follow-the-cluster). To resume a paused environment, click **Resume** next to it. Only organization owners, admins, and DevOps users see this button. You can also [resume the environment from the environments page](../../organization/manage-environments/index.md#resume-a-paused-environment).
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+| Status       | What it means for deployment                                                                                       |
+| :----------- | :----------------------------------------------------------------------------------------------------------------- |
+| Healthy      | You can deploy.                                                                                                    |
+| Unhealthy    | You can deploy, but the deployment may fail because the environment is unhealthy.                                  |
+| Unknown      | You can deploy, but the deployment may fail because the status of the environment is unknown.                      |
+| Not reported | You can't deploy. The cluster or Physical Tenant of the environment is no longer in the Camunda Hub configuration. |
+
+A Self-Managed environment reports only its health, so it is never paused, resuming, creating, updating, or unavailable. For more information, see [environment statuses](/components/hub/organization/manage-environments/index.md#environment-statuses-self-managed).
+
+</TabItem>
+
+</Tabs>
 
 ### No environment available
 
@@ -120,8 +146,6 @@ If the target environment has [authorizations](/components/admin/authorization.m
 If the deployment of a project fails (for example, because one or more of the contained resources has invalid implementation properties), a modal is shown containing the error message thrown by the Zeebe engine. If the cluster rejects the deployment because you lack the permissions to deploy to the environment, the message says so. Contact your organization admin to request them.
 
 The message typically provides the name of the affected resource, the ID of the invalid diagram element, and the error details.
-
-<p><img src={DeployErrorImg} style={{width: 680}} alt="project deployment error" /></p>
 
 ### Deployment of external resources
 

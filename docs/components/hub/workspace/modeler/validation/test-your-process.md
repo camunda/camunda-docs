@@ -54,7 +54,7 @@ When you open the **Test** tab for the first time in a process, the **Set up tes
 
 ### 1. Choose where to run
 
-Click **Select environment**, and select a target environment. If the environment has more than one Logical Tenant, select one. Once the environment is healthy, it advances to the next step. An unhealthy environment shows **Environment unavailable**, and you must choose a healthy one.
+Click **Select environment**, and select a target environment. If the environment has more than one Logical Tenant, select one. Once the environment is healthy, it advances to the next step.
 
 ### 2. Choose resources to deploy
 
