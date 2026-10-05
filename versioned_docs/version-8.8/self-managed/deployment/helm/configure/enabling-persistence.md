@@ -1,27 +1,27 @@
 ---
 id: enabling-persistence
-sidebar_label: Enabling component persistence
+sidebar_label: Enable component persistence
 title: Enable persistent storage on Camunda components
-description: "Learn how to enable persistent volume claims (PVCs) on Optimize, Web Modeler, and the orchestration cluster, and how to configure extra volume claim templates for Zeebe."
+description: "Learn how to enable persistent volume claims (PVCs) on Optimize, Web Modeler, and the orchestration cluster, and how to configure extra volume claim templates for the orchestration cluster."
 ---
 
 Several Camunda 8 components keep state on disk and accept optional persistent volume configuration in the Helm chart. Enabling these is straightforward, but a few values keys are easy to misconfigure. This guide walks through each component and shows a complete, working `values.yaml` you can drop into a Helm release.
 
-A reference scenario covering all three options at once lives in the Helm chart repository at `charts/camunda-platform-8.9/test/integration/scenarios/chart-full-setup/values/features/persistence.yaml` (and the same path under `8.8`/`8.10`). It runs in nightly CI.
+A reference scenario covering all three options at once lives in the Helm chart repository at `charts/camunda-platform-8.8/test/integration/scenarios/chart-full-setup/values/features/persistence.yaml`. It runs in nightly CI.
 
 ## When you need persistent volumes
 
 By default, Optimize and Web Modeler use `emptyDir` volumes, which are tied to a pod's lifecycle. Most production deployments should switch to PVCs so that:
 
-- Optimize cached state and temporary files survive pod restarts.
+- Optimize cached state survives pod restarts.
 - Web Modeler's local file system cache is preserved across restarts.
 - The orchestration StatefulSet can mount additional persistent volumes alongside its primary data volume.
 
-If your cluster does not have a usable default storage class, set `storageClassName` explicitly on each component (see below).
+If your cluster does not have a usable default storage class, set `storageClassName` explicitly on each component (see below). Leaving `storageClassName` unset or empty makes Kubernetes use the cluster's default storage class.
 
-## Enabling Optimize persistence
+## Enable Optimize persistence
 
-`optimize.persistence.enabled: true` creates two PVCs (`-data-camunda` and `-data-tmp`) that back Optimize's `/camunda` and `/tmp` directories. Optimize requires Elasticsearch as its secondary storage backend, and this option does not apply to OpenSearch or RDBMS deployments.
+`optimize.persistence.enabled: true` creates two PVCs (`<fullname>-optimize-data-camunda` and `<fullname>-optimize-data-tmp`) that back Optimize's `/camunda` and `/tmp` directories.
 
 ```yaml
 optimize:
@@ -30,7 +30,7 @@ optimize:
     enabled: true
     size: 10Gi # default; size to your data volume
     accessModes: ["ReadWriteOnce"]
-    storageClassName: "" # set explicitly when no default exists
+    # storageClassName: my-storage-class # set when the cluster has no default storage class
 ```
 
 Common pitfalls:
@@ -38,9 +38,11 @@ Common pitfalls:
 - **Pod stuck in Pending with `PersistentVolumeClaim is not bound`** — your cluster has no default `StorageClass`. Set `optimize.persistence.storageClassName` to a valid class.
 - **Wrong indentation under `optimize:`** — the keys must be nested under `optimize.persistence`, not at the chart root.
 
-## Enabling Web Modeler persistence
+## Enable Web Modeler persistence
 
-`webModeler.persistence.enabled: true` creates a single PVC (`-webmodeler-data`) for the Web Modeler restapi component. Web Modeler also relies on a relational database for its primary state (PostgreSQL by default); the PVC is for ancillary local state only and does not replace the database.
+`webModeler.persistence.enabled: true` adds persistent storage for the Web Modeler restapi component. Web Modeler also relies on a relational database for its primary state (PostgreSQL by default); this storage is for ancillary local state only and does not replace the database.
+
+By default, the chart provisions the storage as a per-pod ephemeral volume claim. The PVC is created with the restapi pod and removed with it. To use a PVC you manage yourself, set `webModeler.persistence.existingClaim`.
 
 ```yaml
 webModeler:
@@ -48,33 +50,55 @@ webModeler:
     enabled: true
     size: 5Gi
     accessModes: ["ReadWriteOnce"]
-    storageClassName: ""
+    # storageClassName: my-storage-class # set when the cluster has no default storage class
 ```
 
 Common pitfalls:
 
-- **`Helm install` fails with a YAML parse error** — make sure `persistence` is a map with `enabled: true`, not a boolean. The full schema is in `webModeler.persistence.*`.
+- **`helm install` fails with a YAML parse error** — make sure `persistence` is a map with `enabled: true`, not a boolean. The full schema is in `webModeler.persistence.*`.
 - **PVC pending after install** — same root cause as Optimize: no default storage class on the cluster.
 
-### Choosing the deployment update strategy
+### Choose the deployment update strategy
 
-The Web Modeler restapi component runs as a single-replica `Deployment`. Its update strategy controls what happens during `helm upgrade`:
+The Web Modeler restapi component runs as a `Deployment`. `webModeler.persistence.deploymentStrategy` controls what happens during `helm upgrade`. Choose the value based on whether you use `existingClaim`:
+
+| Storage setup                              | Strategy                  | Why                                                                                                |
+| ------------------------------------------ | ------------------------- | -------------------------------------------------------------------------------------------------- |
+| Chart-managed storage (no `existingClaim`) | `RollingUpdate` (default) | Each pod gets its own ephemeral volume, so the old and new pods never compete for the same volume. |
+| `existingClaim` backed by `ReadWriteMany`  | `RollingUpdate`           | RWX storage (NFS, EFS, Azure Files, and similar) can be attached by the old and new pod at once.   |
+| `existingClaim` backed by `ReadWriteOnce`  | `Recreate`                | The new pod cannot attach an RWO volume held by the old pod, so the old pod must stop first.       |
+
+The chart rejects `RollingUpdate` combined with an `existingClaim` that uses `ReadWriteOnce` at render time.
+
+Example with a shared RWX claim and zero-downtime upgrades:
 
 ```yaml
 webModeler:
   persistence:
     enabled: true
-    deploymentStrategy: RollingUpdate # default; or "Recreate"
+    existingClaim: webmodeler-shared-data # PVC you created with accessModes: ["ReadWriteMany"]
+    accessModes: ["ReadWriteMany"]
+    deploymentStrategy: RollingUpdate
 ```
 
-- **`RollingUpdate` (default)** is zero-downtime: the new pod becomes ready before the old pod is removed. This works **only** when the PVC supports concurrent attach — a `ReadWriteMany` access mode, or an `existingClaim` backed by RWX storage (NFS, EFS, Azure Files, etc.). On a `ReadWriteOnce` PVC, the new pod cannot attach the volume held by the old pod and the rollout deadlocks with `Multi-Attach error`.
-- **`Recreate`** terminates the old pod first, then starts the new one. Use this with the chart's default PVC (which is `ReadWriteOnce`). The trade-off is brief downtime per upgrade (typically tens of seconds to a minute, depending on Web Modeler's startup time).
+Example with an RWO claim you manage yourself:
 
-Pick `Recreate` if you let the chart create the PVC and your cluster's default storage class is RWO (the common case on GKE PD, EBS, Azure Disk). Pick `RollingUpdate` if you've supplied an `existingClaim` backed by an RWX volume.
+```yaml
+webModeler:
+  persistence:
+    enabled: true
+    existingClaim: webmodeler-data # PVC you created with accessModes: ["ReadWriteOnce"]
+    accessModes: ["ReadWriteOnce"]
+    deploymentStrategy: Recreate
+```
 
-## Adding extra volume claim templates to the orchestration StatefulSet
+`Recreate` terminates the old pod before starting the new one, which causes brief downtime per upgrade (typically tens of seconds to a minute, depending on Web Modeler's startup time).
 
-The orchestration cluster (in 8.8+) exposes `orchestration.extraVolumeClaimTemplates`, which is appended verbatim to the StatefulSet's `volumeClaimTemplates`. Each entry must be a valid PVC spec:
+## Add extra volume claim templates to the orchestration StatefulSet
+
+The orchestration cluster runs Zeebe (together with Operate, Tasklist, and Identity) in a single StatefulSet configured under the `orchestration` key. Kubernetes resources and pods for this StatefulSet may still use the `zeebe` name, but all values described here belong under `orchestration`.
+
+`orchestration.extraVolumeClaimTemplates` is appended verbatim to the StatefulSet's `volumeClaimTemplates`, next to the primary `data` volume claim template. Each entry must be a valid PVC spec:
 
 ```yaml
 orchestration:
@@ -88,10 +112,18 @@ orchestration:
             storage: 1Gi
 ```
 
-In chart `8.7` (which predates the unified orchestration component), use `zeebe.extraVolumeClaimTemplates` with the same shape.
+Extra volume claim templates require `orchestration.persistenceType: disk`, which is the default. With `memory` or `local`, the chart does not render any `volumeClaimTemplates`, and `extraVolumeClaimTemplates` is silently ignored.
+
+In chart `8.7`, which predates the unified orchestration component, the equivalent key is `zeebe.extraVolumeClaimTemplates` with the same shape.
 
 :::warning
-`volumeClaimTemplates` is **immutable** after the StatefulSet is created. To add or change an `extraVolumeClaimTemplates` entry on an existing release, you must delete the StatefulSet (and optionally its PVCs) before running `helm upgrade`. Plan this configuration before your initial install.
+`volumeClaimTemplates` is **immutable** after the StatefulSet is created. Plan this configuration before your initial install. To add or change an `extraVolumeClaimTemplates` entry on an existing release:
+
+1. Delete only the StatefulSet object, for example with `kubectl delete statefulset <name> --cascade=orphan`, so the pods and PVCs stay in place.
+2. Delete only the specific extra PVCs you intend to discard, if any.
+3. Run `helm upgrade`.
+
+Never delete the primary `data-<statefulset>-<ordinal>` PVCs unless you intend to lose broker data.
 :::
 
 Common pitfalls:
@@ -100,7 +132,7 @@ Common pitfalls:
 - **Missing `accessModes`** in a template — Kubernetes rejects the StatefulSet at admission time. Always include at least one access mode.
 - **Wrong indentation** — `extraVolumeClaimTemplates` is an array of `{metadata, spec}` objects; a flat map will be silently dropped.
 
-## Putting it all together
+## Put it all together
 
 A complete `values.yaml` enabling all three options at once:
 
@@ -135,8 +167,10 @@ kubectl -n <namespace> get pvc
 
 You should see PVCs for the bundled Elasticsearch primary and PostgreSQL pods, plus:
 
-- `<release>-camunda-platform-optimize-data-camunda` and `-tmp`
-- `<release>-camunda-platform-webmodeler-data`
-- `extra-data-<release>-zeebe-{0,1,2}`
+- `<release>-camunda-platform-optimize-data-camunda` and `<release>-camunda-platform-optimize-data-tmp`
+- A PVC for the Web Modeler restapi pod, named after the pod
+- `extra-data-<release>-zeebe-<ordinal>`, one per orchestration replica
+
+With the default three replicas, the ordinals are `0`, `1`, and `2`. If you set `orchestration.clusterSize` higher, expect one PVC per replica (for example `0` through `4` for five replicas).
 
 All in `Status: Bound`. If any are `Pending`, re-check the storage class on your cluster.
