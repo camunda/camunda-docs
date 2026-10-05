@@ -34,7 +34,11 @@ See [create a cluster](/components/saas/clusters/create-cluster.md).
 
 ## View cluster details
 
-Select a cluster to open its details. The header shows the name and status of the cluster. The **Overview** has the following sections:
+Select a cluster to open its details. The header shows the name and status of the cluster.
+
+### Overview
+
+The overview summarizes the cluster in the following sections:
 
 | Section         | Description                                                                                                                                                                     |
 | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -42,6 +46,8 @@ Select a cluster to open its details. The header shows the name and status of th
 | Cluster details | The status, type, size, generation, and tag of the cluster. From here you can resize the cluster, modify its tag, review an available update, and resume a paused cluster.      |
 | Components      | The health of the components of the cluster, such as the connector runtime. Click **Manage** on the **Connectors** tile to open [Connector Management](./manage-connectors.md). |
 | Jobs            | A summary of the jobs of the cluster. See [jobs](#jobs).                                                                                                                        |
+
+### Cluster tabs and pages
 
 The cluster details also have the following tabs and pages:
 
@@ -108,9 +114,11 @@ After the restart, the cluster appears on the **Clusters** page, and each of its
 
 ## View cluster details {#view-cluster-details-self-managed}
 
-Select a cluster to open its details.
+Select a cluster to open its details. The header shows the status of the cluster and the number of environments it hosts.
 
-The header shows the status of the cluster and the number of environments it hosts. The **Overview** has the following sections:
+### Overview {#overview-self-managed}
+
+The overview summarizes the cluster in the following sections:
 
 | Section         | Description                                                                                                                                                                                                                                              |
 | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
