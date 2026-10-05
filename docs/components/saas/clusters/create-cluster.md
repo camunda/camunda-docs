@@ -21,7 +21,12 @@ To create a cluster:
 1. Select a [cluster type](/components/saas/clusters.md#cluster-type) and [cluster size](/components/saas/clusters.md#cluster-size).
 1. Assign a cluster tag that represents the lifecycle phase of the cluster: `dev`, `test`, `stage`, or `prod`. See [tag your cluster](#tag-your-cluster).
 1. Select your [encryption at rest protection level](/components/saas/encryption-at-rest.md) (enterprise only).
-1. Select a channel and release. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation.
+1. Select a channel and a release. The channel decides which releases you can choose from:
+   - The **Stable** channel provides generally available releases that are ready for most users. See the [stable channel](/reference/announcements-release-notes/release-policy.md#stable-channel).
+   - The **Alpha** channel provides alpha releases, which let you try the upcoming minor release and give feedback before it reaches the stable channel. See the [alpha channel](/reference/announcements-release-notes/release-policy.md#alpha-channel).
+
+   A release is identified by its [generation](/reference/glossary.md#generation), the set of component versions that the cluster runs. See [generation names](/reference/announcements-release-notes/release-policy.md#generation-names). For the purpose of this guide, we recommend using the **Stable** channel and the latest generation.
+
 1. If you are using a generation of version 8.8 or higher, select if you want to enable [authorization-based access control](/components/concepts/access-control/authorizations.md).
 1. Click **Create cluster**.
 1. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself.
