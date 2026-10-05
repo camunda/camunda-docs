@@ -12,10 +12,8 @@ This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters
 
 ## Create a cluster
 
-To create a cluster:
+To create a cluster, click **Environments** in the left navigation of Camunda Hub, click **Clusters**, and then click **Create cluster**. Then complete the following steps:
 
-1. In Camunda Hub, click **Environments** in the left navigation, and then click **Clusters**.
-1. Click **Create cluster**.
 1. Name your cluster.
 1. Select your [region](/components/saas/regions.md).
 1. Select a [cluster type](/components/saas/clusters.md#cluster-type) and [cluster size](/components/saas/clusters.md#cluster-size).
