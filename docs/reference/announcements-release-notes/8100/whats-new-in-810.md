@@ -240,7 +240,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
 
 [Camunda Hub](/components/hub/index.md) is now the single place where teams build, govern, and run process solutions in Camunda.
 
-<img src={HubOverview} alt="Camunda Hub" class="img-900"/>
+<img src={HubOverview} alt="Camunda Hub with the workspaces page open and the environments listed in the navigation" class="img-900"/>
 
 - Hub replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
 - Hub is deployed only once, and serves as the single point of entry for all your [environments](/components/concepts/environments.md), connecting to the Orchestration Clusters that host your dev, staging, and production environments.
