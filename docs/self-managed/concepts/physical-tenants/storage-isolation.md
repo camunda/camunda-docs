@@ -9,6 +9,11 @@ import TabItem from "@theme/TabItem";
 import AoGrid from "../../../components/react-components/_ao-card";
 import IconConfigImg from "../../../components/assets/icon-config.png";
 import IconOperateImg from "../../../components/assets/icon-operate.png";
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Learn how to configure isolated secondary storage for Physical Tenants across RDBMS, Elasticsearch/OpenSearch, and Document Store backends.
 
@@ -631,7 +636,7 @@ keyPrefix='tenant-a/']
 
 ## Operational considerations
 
-For the backup, restore, and scaling procedures that use these storage locations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
+For the backup, restore, and scaling procedures that use these storage locations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 ### Backup and restore
 
@@ -649,7 +654,7 @@ pg_dump -h db.example.com -U user tenant_a_schema > backup.sql
 aws s3 sync s3://camunda-documents/tenant-a/ ./backup/
 ```
 
-For tenant-scoped and cluster-wide backup and restore endpoints, see [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants).
+For tenant-scoped and cluster-wide backup and restore endpoints, see [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants).
 
 ### Cross-tenant isolation
 
@@ -691,13 +696,13 @@ If you configure a finite retry limit and all attempts stop before any tenant be
 
 Readiness and health answer different questions:
 
-| Endpoint or signal                                | Meaning                                                                                                                                                                                                               |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/actuator/health/readiness`                      | Node-level readiness where the secondary-storage readiness check is enabled. It is `UP` when at least one Physical Tenant is ready and `DOWN` when no tenant is ready. It does not mean that every tenant is healthy. |
-| `/actuator/health`                                | Full node health, including live secondary-storage checks. On multi-tenant nodes, inspect the per-tenant `rdbmsStatus` or `searchEngineStatus` contributors.                                                          |
-| `camunda_physical_tenant_secondary_storage_ready` | Prometheus gauge with `physicalTenant` labels. A value of `1` means that the tenant's schema is initialized; `0` means that the tenant is degraded.                                                                   |
+| Endpoint or signal                                | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/actuator/health/readiness`                      | Node-level readiness. For Elasticsearch and OpenSearch deployments, the secondary-storage readiness contributor uses schema-initialization state and is `UP` when at least one Physical Tenant is ready and `DOWN` when no tenant is ready. The overall readiness group can still be `DOWN` because of other readiness contributors. In the current implementation, a degraded `default` tenant can also keep node readiness `DOWN` even when another tenant is ready; this known limitation is tracked in [camunda/camunda#63674](https://github.com/camunda/camunda/issues/63674). It does not mean that every tenant is healthy. |
+| `/actuator/health`                                | Full node health, including live secondary-storage checks. On multi-tenant nodes, inspect the per-tenant `rdbmsStatus` or `searchEngineStatus` contributors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `camunda_physical_tenant_secondary_storage_ready` | Prometheus gauge with `physicalTenant` labels. A value of `1` means that the tenant's schema is initialized; `0` means that the tenant is degraded.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
-The readiness signal is based on schema initialization and does not continuously probe storage connectivity. As a result, a storage outage after startup does not automatically make a ready node fail its readiness probe. The full health endpoint, logs, and operation-specific errors provide the live storage status. The full `/actuator/health` result can be `DOWN` for one failed tenant even when `/actuator/health/readiness` remains `UP` because another tenant is serviceable.
+The secondary-storage readiness signal is based on schema initialization and does not continuously probe storage connectivity. As a result, a storage outage after startup does not automatically make a ready node fail its readiness probe. The full health endpoint, logs, and operation-specific errors provide the live storage status. The full `/actuator/health` result can be `DOWN` for one failed tenant even when `/actuator/health/readiness` remains `UP` because another tenant is serviceable.
 
 When a tenant is degraded because its schema has not initialized, REST query API requests, that require secondary storage for that tenant, return `HTTP 503 Service Unavailable` and a `Retry-After: 5` header. Other tenants continue to be served. After the storage problem is fixed, a retryable failure recovers in the background without restarting the node.
 
@@ -725,15 +730,7 @@ When a tenant is degraded because its schema has not initialized, REST query API
 
 ## Known limitations
 
-:::note
-**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported. This constraint exists in the Query API stack, not the exporter layer.
-:::
-
-:::caution Custom exporter configuration merge (alpha3)
-In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not merged. If you have a custom exporter, such as a Kafka exporter, and want each tenant to publish to a different topic, declare the full exporter configuration separately under each Physical Tenant's section. You cannot declare it once at root level and override only the topic per tenant. This will be addressed in a later alpha. See [camunda/camunda#55155](https://github.com/camunda/camunda/issues/55155).
-:::
-
-<!-- Remove custom exporter caution once camunda/camunda#55155 is resolved. -->
+**Secondary storage types must be compatible across tenants.** Use RDBMS for every tenant, Elasticsearch and OpenSearch in any combination, or `none` for every tenant. Do not mix RDBMS or `none` with another type. For example, a cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported.
 
 ## Storage configuration matrix
 

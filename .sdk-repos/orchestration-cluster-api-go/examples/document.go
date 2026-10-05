@@ -6,7 +6,6 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func createDocumentExample(ctx context.Context, client *camunda.CamundaClient) error {
@@ -54,7 +53,7 @@ func deleteDocumentExample(ctx context.Context, client *camunda.CamundaClient) e
 func createDocumentLinkExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateDocumentLink
 	// Create a short-lived, shareable download link for a stored document.
-	link, err := client.CreateDocumentLink(ctx, "doc-123", *openapi.NewDocumentLinkRequest())
+	link, err := client.CreateDocumentLink(ctx, "doc-123", *camunda.NewDocumentLinkRequest())
 	if err != nil {
 		return err
 	}

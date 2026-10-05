@@ -26,7 +26,7 @@ components:
           type: integer
           format: int32
           default: 100
-          minimum: 1
+          minimum: 0
           maximum: 10000
     OffsetPagination:
       type: object
@@ -42,7 +42,7 @@ components:
           type: integer
           format: int32
           default: 100
-          minimum: 1
+          minimum: 0
       x-properties-added-in-version:
         - propertyName: from
           addedInVersion: "8.6"
@@ -61,7 +61,7 @@ components:
           type: integer
           format: int32
           default: 100
-          minimum: 1
+          minimum: 0
           maximum: 10000
       x-properties-added-in-version:
         - propertyName: after
@@ -81,7 +81,7 @@ components:
           type: integer
           format: int32
           default: 100
-          minimum: 1
+          minimum: 0
           maximum: 10000
       x-properties-added-in-version:
         - propertyName: before

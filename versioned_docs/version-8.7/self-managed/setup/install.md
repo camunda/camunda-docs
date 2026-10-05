@@ -145,6 +145,39 @@ global:
 
 Once this is completed, you are ready to install the Helm chart hosted in the official Camunda Helm chart repo.
 
+### Configure the bundled Keycloak context path
+
+When you use bundled Keycloak, configure the path served by Keycloak and the path Identity uses to connect to it together.
+
+`identityKeycloak.httpRelativePath` controls the path served by Keycloak. `global.identity.keycloak.contextPath` controls the path Identity uses to reach Keycloak. These settings are independent: changing one does not update the other.
+
+If you use the default `/auth` path, no configuration changes are required.
+
+| Path           | `global.identity.keycloak.contextPath` | `identityKeycloak.httpRelativePath` |
+| -------------- | -------------------------------------- | ----------------------------------- |
+| Default        | `"/auth"`                              | `"/auth/"`                          |
+| Root           | `""`                                   | `"/"`                               |
+| Custom example | `"/sso"`                               | `"/sso/"`                           |
+
+For example, add both settings to your values file to use `/sso`:
+
+```yaml
+global:
+  identity:
+    keycloak:
+      contextPath: "/sso"
+
+identityKeycloak:
+  enabled: true
+  httpRelativePath: "/sso/"
+```
+
+If you explicitly configure issuer URLs, such as `global.identity.auth.publicIssuerUrl`, update them to match the exposed Keycloak endpoint. Ensure your Ingress routes requests to the same endpoint. This is especially important when Keycloak uses the root path and other components share the same host.
+
+If the paths don't match, Keycloak can be ready while Identity logs `Unable to connect to Keycloak.` and requests to the configured path return HTTP 404. Set both values to a matching pair, then apply the updated values to your deployment.
+
+This pairing applies only when `identityKeycloak.enabled` is `true`. For external Keycloak, set `global.identity.keycloak.contextPath` to the path served by that instance; `identityKeycloak.httpRelativePath` does not configure the external server.
+
 ### Install Camunda Helm chart
 
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:

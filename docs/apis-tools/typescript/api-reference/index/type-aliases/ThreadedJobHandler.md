@@ -36,7 +36,7 @@ export default handler;
 
 ### client
 
-[`CamundaClient`](../classes/CamundaClient.md)
+[`CamundaClient`](CamundaClient.md)
 
 ## Returns
 

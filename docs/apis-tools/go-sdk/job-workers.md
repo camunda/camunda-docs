@@ -68,9 +68,10 @@ if err := worker.Run(ctx); err != nil {
 
 Pass `camunda.WithStreamJobLease(true)` to activate jobs with a lease. Each job
 then carries a lease token that the worker sends back when it completes, fails,
-or throws an error. If the job timed out and another worker picked it up, the stale
+or throws — so if the job timed out and another worker picked it up, the stale
 acknowledgement is rejected instead of racing the newer activation. It covers
 both the gRPC stream and the REST sidecar poll. The REST worker takes the same
 option as `camunda.WithJobLease(true)`. Leases are off by default (matching the
-engine) and need an engine that supports them; older gateways ignore the flag and
-keep handing out unleased jobs.
+engine) and need an engine that supports them: rather than degrade to unfenced
+commands, a worker that asked for a lease and is handed a job without a token
+rejects the activation with `camunda.ErrLeaseNotHonored`.
