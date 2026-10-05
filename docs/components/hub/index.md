@@ -12,7 +12,7 @@ import IntegrationIcon from "@site/docs/components/assets/icon-integration.png";
 import OptimizeIcon from "@site/docs/components/assets/icon-optimize.png";
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import ConnectorsIcon from "@site/docs/components/assets/icon-connectors.png";
-import { ServerIcon, KeyRoundIcon } from "@site/docs/components/assets/hub-icons";
+import { BriefcaseIcon, ServerIcon, KeyRoundIcon } from "@site/docs/components/assets/hub-icons";
 import HubStructureImg from "./img/organization-structure.png";
 import HubWorkspacesImg from "./img/workspace-environments.png";
 import AoGrid from '../react-components/\_ao-card';
@@ -73,7 +73,7 @@ Manage organizational resources, including clusters, deployment environments, an
 {
 link: "./organization/manage-workspaces",
 title: "Manage workspaces",
-image: ModelerIcon,
+image: BriefcaseIcon,
 description: "Create and manage workspaces within your organization.",
 },
 {
