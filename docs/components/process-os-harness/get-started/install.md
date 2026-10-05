@@ -1,7 +1,7 @@
 ---
-id: get-started
+id: install
 title: Install ProcessOS Harness and configure a project
-sidebar_label: Get started
+sidebar_label: Install and configure
 description: "Set up the builder workspace, install ProcessOS Harness into your AI coding agent with c8ctl, and configure your first project with process-scope.md and run.config.yaml."
 keywords: ["ProcessOS Harness", "install", "c8ctl", "builder workspace"]
 ---
@@ -69,6 +69,6 @@ The builder workspace is a recommendation for how to keep everything you need in
 
 ## Next steps
 
-- Learn how the [governance process](get-started/governance-process.md) guides you between milestones.
-- Learn how [review cycles](get-started/review-cycle.md) bring SMEs into each phase.
-- Start the first phase, described in [discover the as-is process](phases/1-discovery.md).
+- Learn how the [governance process](../run-a-project/governance-process.md) guides you between milestones.
+- Learn how [review cycles](../run-a-project/review-cycle.md) bring SMEs into each phase.
+- Start the first phase, described in [discover the as-is process](../run-a-project/phases/1-discovery.md).
