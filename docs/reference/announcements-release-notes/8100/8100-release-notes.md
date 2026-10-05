@@ -113,7 +113,7 @@ Console is now a top-level entry in the Camunda Hub navigation for organization 
 
 - **SaaS:** The cluster health and the cluster links on the Console dashboard open the clusters in **Environments > Clusters**. The cluster references on the organization page point to the same pages.
 - **Self-Managed:** Console shows the dashboard and usage information. The cluster links open the clusters in **Environments > Clusters**, and the cluster list moved there from Console.
-- **Self-Managed:** Each instance of a management component has its own entry on the dashboard, with its name, version, cluster, status, and a link to open it.
+- **Self-Managed:** Each instance of a management component has its own entry on the dashboard.
 
 <p class="link-arrow">[View Console](/components/hub/organization/console.md)</p>
 
