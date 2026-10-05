@@ -31,6 +31,10 @@ A credential is deployed to environments, not to clusters. An environment is the
 - Camunda Hub shows an environment by its name, and adds the cluster name in parentheses whenever the two names differ.
 - On a Self-Managed cluster with several Physical Tenants, each environment is an independent target, with its own copy of the credential, its own values, and its own state. A credential deployed to one environment isn't readable from the other environments on that cluster.
 
+:::note
+On Camunda 8 SaaS, Hub labels each target as a cluster. The **Environments only** tab is named **Clusters only**, and the wizard, the credential list, and the scan say _cluster_ wherever this page says _environment_. A SaaS cluster holds a single environment, so everything else on this page applies unchanged.
+:::
+
 ## Terminology
 
 | Term            | Meaning                                                                                                                                                                                                                                                    |
@@ -174,7 +178,7 @@ Deleting a credential removes it from Hub and from every environment it is deplo
 Editing or deleting a credential takes effect immediately for every process that references it. Running process instances can fail if the credential no longer works or no longer exists.
 :::
 
-### Environments only credentials {#environments-only-credentials}
+### Environments only credentials {#clusters-only-credentials}
 
 A credential created outside Hub, such as one created in Desktop Modeler or directly through the cluster API, exists on its cluster but is not tracked in Hub. The **Environments only** tab finds these credentials so you can bring them under Hub management.
 
@@ -190,9 +194,7 @@ Select **Rescan environments** to run the scan again, for example after a creden
 
 ![Environments only tab of the Credentials page, with one environment selected, a paused environment that can't be selected, and a Scan environments button](./img/credentials-clusters-only.png)
 
-If the scan returns no results, none of the clusters behind the environments you selected has a credential-tagged variable that matches a known credential type and version. Environments that are paused, or whose cluster runs a Camunda version without credential support, show a **Paused** or **Unsupported** badge and can't be scanned.
-
-When there is nothing to find, Hub shows: "No environment-only credentials found. The scan did not find any unmanaged variables that match an exact known credential type and version."
+If the scan returns no results, none of the clusters behind the environments you selected has a credential-tagged variable that matches a known credential type and version. Environments that are paused, or whose cluster runs a Camunda version without credential support, are marked as such and can't be scanned.
 
 ## Permissions
 
