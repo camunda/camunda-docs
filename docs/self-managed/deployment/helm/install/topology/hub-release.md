@@ -2,10 +2,10 @@
 id: hub-release
 sidebar_label: "Install the Hub release"
 title: "Install the Camunda Hub release"
-description: "Install the Hub plane: a Helm release with global.topology.mode set to hub, running Camunda Hub and Management Identity."
+description: "Install the management plane: a Helm release with global.topology.mode set to hub, running Camunda Hub and Management Identity."
 ---
 
-The Hub release is the Hub plane. It runs Camunda Hub and Management Identity, and it owns the inventory of every Orchestration Cluster in the deployment.
+The Hub release is the management plane. It runs Camunda Hub and Management Identity, and it owns the inventory of every Orchestration Cluster in the deployment.
 
 Install it first. For the prerequisites, Secrets, and network policies this page assumes, see [install the deployment topology](./index.md).
 
