@@ -374,6 +374,8 @@ spring:
 :::note Helm behavior
 The `restapi` component default for `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM` is `name`.
 In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
+The Helm chart sets the username claim from `orchestration.security.authentication.oidc.usernameClaim`, also when `orchestration.enabled` is `false`.
+To set a different Web Modeler claim, set the `camunda.modeler.oauth2.token.username-claim` property in `webModeler.restapi.extraConfiguration`.
 :::
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
