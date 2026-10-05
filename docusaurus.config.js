@@ -8,6 +8,59 @@ const nextVersion = `${_currentMajor}.${_currentMinor + 1}`;
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
+const { GlobExcludeDefault } = require("@docusaurus/utils");
+
+// Selective build mode (DOCS_BUILD_VERSIONS="next" or "next,current,8.8"):
+// builds only the listed docs versions and skips LLM file generation.
+// Identifiers: "next" = unreleased docs, "current" = current release
+// (src/versions.js); otherwise pass a literal version, e.g. "8.8".
+// CI and release builds must use the full build (all versions).
+const buildVersions = process.env.DOCS_BUILD_VERSIONS
+  ? process.env.DOCS_BUILD_VERSIONS.split(",").map((v) => {
+      const version = v.trim();
+      if (version === "next") return "current";
+      if (version === "current") return currentVersion;
+      return version;
+    })
+  : null;
+const partialBuild = buildVersions !== null;
+
+// DOCS_SKIP_API_REFERENCE=true excludes the auto-generated TypeScript API
+// reference (~4,700 pages across next + 8.9, roughly half of all docs pages)
+// from the build. Prose-doc changes never need it. Local/agent use only.
+const skipApiReference = process.env.DOCS_SKIP_API_REFERENCE === "true";
+
+// Links pointing into content excluded by a scoped build (skipped versions,
+// skipped API reference) cannot resolve. Instead of downgrading broken-link
+// checks globally, neutralize exactly those links with the `pathname://`
+// bypass protocol (via markdown.preprocessor, which runs before Docusaurus
+// resolves source-file links), so broken-link checking stays strict
+// ("throw") for all in-scope content.
+const skippedLinkPrefixes = [
+  ...(partialBuild
+    ? require("./versions.json")
+        .filter((v) => !buildVersions.includes(v))
+        .flatMap((v) => [`/docs/${v}/`, `versioned_docs/version-${v}/`])
+    : []),
+  ...(skipApiReference ? ["apis-tools/typescript/api-reference"] : []),
+];
+
+function bypassOutOfScopeLinks({ fileContent }) {
+  if (!skippedLinkPrefixes.some((prefix) => fileContent.includes(prefix))) {
+    return fileContent;
+  }
+  const bypass = (url) =>
+    !url.startsWith("pathname://") &&
+    skippedLinkPrefixes.some((prefix) => url.includes(prefix))
+      ? `pathname://${url}`
+      : url;
+  return fileContent
+    .replace(/(\]\()\s*([^\s)]+)/g, (m, open, url) => `${open}${bypass(url)}`)
+    .replace(
+      /(^\[[^\]]+\]:\s*)(\S+)/gm,
+      (m, def, url) => `${def}${bypass(url)}`
+    );
+}
 
 module.exports = {
   // https://docusaurus.io/blog/releases/3.6#adoption-strategy
@@ -374,66 +427,71 @@ module.exports = {
     // The plugin generates both a full markdown file and a metadata-only .llms.txt file for each doc,
     // excluding the content of code blocks and optionally excluding content from imports.
     // The plugin also generates a root-level llms.md file that lists all docs with links, which can be used as a single source of truth for the documentation content.
-    [
-      "docusaurus-plugin-llms",
-      {
-        generateLLMsTxt: false,
-        generateLLMsFullTxt: true,
-        docsDir: "docs",
-        excludeImports: true,
-        removeDuplicateHeadings: true,
-        processingBatchSize: 50,
-        addMdExtension: true,
-        generateMarkdownFiles: true,
-        preserveDirectoryStructure: true,
-        ignoreFiles: ["apis-tools/*/specifications/*"],
-        title: "Camunda 8 Documentation",
-        description:
-          "Process orchestration platform for automating workflows across people, systems, and devices. Supports BPMN, DMN, connectors, and agentic AI orchestration.",
-        customLLMFiles: [
-          {
-            filename: "llms-guides.txt",
-            title: "Camunda 8 Guides",
-            description:
-              "Getting started guides, tutorials, and walkthroughs for Camunda 8.",
-            includePatterns: ["guides/*"],
-            fullContent: false,
-          },
-          {
-            filename: "llms-components.txt",
-            title: "Camunda 8 Components",
-            description:
-              "Console, Modeler, Zeebe, Operate, Tasklist, Optimize, Connectors, and agentic orchestration.",
-            includePatterns: ["components/*"],
-            fullContent: false,
-          },
-          {
-            filename: "llms-apis-tools.txt",
-            title: "Camunda 8 APIs & Tools",
-            description:
-              "REST APIs, SDKs, clients, CLI, and developer tooling.",
-            includePatterns: ["apis-tools/*"],
-            fullContent: false,
-          },
-          {
-            filename: "llms-self-managed.txt",
-            title: "Camunda 8 Self-Managed",
-            description:
-              "Deployment, configuration, upgrade, and operations for Self-Managed installations.",
-            includePatterns: ["self-managed/*"],
-            fullContent: false,
-          },
-          {
-            filename: "llms-reference.txt",
-            title: "Camunda 8 Reference",
-            description:
-              "Release notes, announcements, glossary, licenses, dependencies, and supported environments.",
-            includePatterns: ["reference/*"],
-            fullContent: false,
-          },
-        ],
-      },
-    ],
+    // Skipped in partial builds: it re-reads and re-processes every doc in postBuild.
+    ...(partialBuild
+      ? []
+      : [
+          [
+            "docusaurus-plugin-llms",
+            {
+              generateLLMsTxt: false,
+              generateLLMsFullTxt: true,
+              docsDir: "docs",
+              excludeImports: true,
+              removeDuplicateHeadings: true,
+              processingBatchSize: 50,
+              addMdExtension: true,
+              generateMarkdownFiles: true,
+              preserveDirectoryStructure: true,
+              ignoreFiles: ["apis-tools/*/specifications/*"],
+              title: "Camunda 8 Documentation",
+              description:
+                "Process orchestration platform for automating workflows across people, systems, and devices. Supports BPMN, DMN, connectors, and agentic AI orchestration.",
+              customLLMFiles: [
+                {
+                  filename: "llms-guides.txt",
+                  title: "Camunda 8 Guides",
+                  description:
+                    "Getting started guides, tutorials, and walkthroughs for Camunda 8.",
+                  includePatterns: ["guides/*"],
+                  fullContent: false,
+                },
+                {
+                  filename: "llms-components.txt",
+                  title: "Camunda 8 Components",
+                  description:
+                    "Console, Modeler, Zeebe, Operate, Tasklist, Optimize, Connectors, and agentic orchestration.",
+                  includePatterns: ["components/*"],
+                  fullContent: false,
+                },
+                {
+                  filename: "llms-apis-tools.txt",
+                  title: "Camunda 8 APIs & Tools",
+                  description:
+                    "REST APIs, SDKs, clients, CLI, and developer tooling.",
+                  includePatterns: ["apis-tools/*"],
+                  fullContent: false,
+                },
+                {
+                  filename: "llms-self-managed.txt",
+                  title: "Camunda 8 Self-Managed",
+                  description:
+                    "Deployment, configuration, upgrade, and operations for Self-Managed installations.",
+                  includePatterns: ["self-managed/*"],
+                  fullContent: false,
+                },
+                {
+                  filename: "llms-reference.txt",
+                  title: "Camunda 8 Reference",
+                  description:
+                    "Release notes, announcements, glossary, licenses, dependencies, and supported environments.",
+                  includePatterns: ["reference/*"],
+                  fullContent: false,
+                },
+              ],
+            },
+          ],
+        ]),
   ],
   scripts: [
     {
@@ -760,7 +818,10 @@ module.exports = {
           remarkPlugins: [
             require("./static/plugins/terminology/remark-glossary-terms"),
           ],
-          lastVersion: currentVersion,
+          lastVersion:
+            partialBuild && !buildVersions.includes(currentVersion)
+              ? buildVersions[buildVersions.length - 1]
+              : currentVersion,
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             current: {
@@ -774,6 +835,36 @@ module.exports = {
             },
           },
           docItemComponent: "@theme/ApiItem",
+          // Partial builds only compile the selected docs versions, skipping
+          // the other versioned snapshots (a major memory driver).
+          ...(partialBuild ? { onlyIncludeVersions: buildVersions } : {}),
+          // Optionally exclude the generated TypeScript API reference, which
+          // makes up roughly half of all docs pages.
+          ...(skipApiReference
+            ? {
+                exclude: [
+                  ...GlobExcludeDefault,
+                  "apis-tools/typescript/api-reference/**",
+                ],
+                // The excluded dir backs an autogenerated "API Reference"
+                // sidebar category (also in versioned sidebars JSON, which
+                // cannot be made conditional). An empty category fails the
+                // build, so substitute a link to the always-present SDK page.
+                sidebarItemsGenerator: async (args) => {
+                  if (
+                    args.item.dirName === "apis-tools/typescript/api-reference"
+                  ) {
+                    return [
+                      {
+                        type: "doc",
+                        id: "apis-tools/typescript/typescript-sdk",
+                      },
+                    ];
+                  }
+                  return args.defaultSidebarItemsGenerator(args);
+                },
+              }
+            : {}),
         },
         blog: false,
         theme: {
@@ -795,6 +886,9 @@ module.exports = {
   ],
   markdown: {
     mermaid: true,
+    ...(skippedLinkPrefixes.length > 0
+      ? { preprocessor: bypassOutOfScopeLinks }
+      : {}),
   },
   themes: [
     "@camunda8/docusaurus-theme-openapi-docs",

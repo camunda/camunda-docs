@@ -52,6 +52,19 @@ Sometimes it can be helpful to see what docusaurus is generating, though. Use on
 
 The local build consumes a lot of local resources. You might find the `:docker` version to be less disruptive of your local environment.
 
+### Scoped builds
+
+A full build requires more RAM than typical machines have. For local validation, scope the build to the versions your change touches:
+
+```bash
+DOCS_BUILD_VERSIONS=next,current DOCS_SKIP_API_REFERENCE=true npm run build
+```
+
+- `DOCS_BUILD_VERSIONS`: comma-separated versions to build — `next` (unreleased), `current` (current release), or literals such as `8.8,8.9` for backport validation. Unset builds all versions (required for CI/release).
+- `DOCS_SKIP_API_REFERENCE=true`: skips the generated TypeScript API reference (~half of all pages). Typically set for local documentation-only builds.
+
+Scoped builds skip LLM file generation; links into skipped versions or the skipped API reference are bypassed (`pathname://`), while all other broken links still fail the build. CI owns the full strict build.
+
 Both commands generate static content into the `build` directory, and can be served using any static contents hosting service.
 
 ## Deployment
