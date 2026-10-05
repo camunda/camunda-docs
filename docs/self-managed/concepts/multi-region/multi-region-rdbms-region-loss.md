@@ -30,9 +30,9 @@ To recover, redeploy the region. There is nothing to restore: its brokers catch 
 
 ## Recovery objectives {#recovery-objectives}
 
-With three or more running regions, a region loss needs no recovery procedure, but it still opens a recovery window. For a two-zone cluster, see [Remove a lost zone](#remove-a-lost-zone).
+With three or more running regions, and no zone holding half the replicas or more, a region loss needs no recovery procedure, but it still opens a recovery window. For other layouts, see [Remove a lost zone](#remove-a-lost-zone).
 
-Recovery needs no procedure, because on the engine a zone loss is the same class of event as a broker loss.
+Under those conditions, recovery needs no procedure, because on the engine a zone loss is the same class of event as a broker loss.
 
 A single-region cluster that loses a broker holds a Raft re-election for the partitions that broker led, and its clients reconnect to the new leaders. Losing a zone runs the same sequence over the same protocol:
 
