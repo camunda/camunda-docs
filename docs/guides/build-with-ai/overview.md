@@ -37,6 +37,8 @@ Build Camunda solutions with ProcessOS Harness, agentic orchestration, and MCP i
 
 ## ProcessOS Harness
 
+<span class="badge badge--medium" title="This feature is in early access">Early access</span>
+
 ProcessOS discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions. ProcessOS Harness, available as early access, is the governance process that drives AI coding agents to do this work.
 
 <p class="link-arrow">[Re-engineer processes with ProcessOS](../../components/process-os-harness/overview.md)</p>
