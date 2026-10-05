@@ -46,10 +46,10 @@ After the process is fully defined and all configurations are complete, the proc
 
 Tasklist users can view the tasks assigned to them within their task list. Each task card displays the assigned priority label, ensuring users have a clear understanding of the task's importance and priority.
 
-![set-user-task-priority-in-modeler](img/tasklist–tasks-with-priority.jpg)
+![Task cards showing priority labels in Tasklist](img/tasklist-tasks-with-priority.png)
 
 ### 5. Sort tasks by priority
 
 Task users can sort tasks by priority. This helps users organize their workload by focusing on urgent items first.
 
-![set-user-task-priority-in-modeler](img/tasklist-tasks-with-priority-sorting.jpg)
+![Sorting tasks by priority in Tasklist](img/tasklist-tasks-with-priority-sorting.png)
