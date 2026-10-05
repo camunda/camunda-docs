@@ -554,6 +554,39 @@ orchestration:
 
 <p class="link-arrow">[Configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md)</p>
 
+### Improved TLS support in the Helm chart
+
+<!-- https://github.com/camunda/product-hub/issues/3520 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+The Camunda Helm chart now includes an optional TLS overlay, `values-tls.yaml`, that sets up trust for encrypted connections from Camunda components to your datastores and identity provider. You provide one PEM CA bundle through `global.tls.caBundle`, and the chart makes it available to every component in the format its runtime needs.
+
+- Connect to Elasticsearch, OpenSearch, and PostgreSQL over TLS, including with self-signed or private CA certificates.
+- Trust external OIDC issuers that use a private CA, such as Microsoft Entra, Okta, or an internal Keycloak.
+- Use cert-manager to manage certificates, update the CA bundle, and verify that no plaintext fallback remains.
+
+The overlay doesn't encrypt in-cluster pod-to-pod traffic. For TLS at the pod level, combine it with a service mesh.
+
+<p class="link-arrow">[Configure TLS](/self-managed/deployment/helm/configure/tls.md)</p>
+
+### Independent REST and gRPC TLS for the Orchestration Cluster
+
+<!-- https://github.com/camunda/product-hub/issues/3695 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+The Camunda Helm chart now configures REST TLS and gRPC TLS on the Orchestration Cluster independently, so you can run any combination of the two. You enable each mode with `global.tls.orchestration.rest.enabled` and `global.tls.orchestration.grpc.enabled`.
+
+When you enable a mode, the chart also:
+
+- Sets the backend protocol on the NGINX Ingress for the Orchestration REST and gRPC endpoints to match the TLS state.
+- Derives the in-cluster endpoint schemes that clients such as Connectors and Web Modeler use to reach the Orchestration Cluster.
+
+Your explicit overrides, such as `webModeler.restapi.clusters` and `connectors.configuration`, remain authoritative. If the Orchestration server certificate is self-signed or issued by a private CA, also set `global.tls.caBundle` so in-cluster clients trust it.
+
+<p class="link-arrow">[Configure Orchestration REST and gRPC TLS modes](/self-managed/deployment/helm/configure/orchestration-tls-modes.md)</p>
+
 ### IRSA Document store support
 
 <!-- https://github.com/camunda/product-hub/issues/3388 -->
