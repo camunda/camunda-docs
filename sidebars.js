@@ -99,7 +99,6 @@ module.exports = {
         id: "components/process-os-harness/overview",
       },
       items: [
-        "components/process-os-harness/overview",
         "components/process-os-harness/project-setup",
         {
           type: "category",
