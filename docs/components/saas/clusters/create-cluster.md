@@ -33,12 +33,11 @@ If you haven't created a cluster yet, the **Clusters** page will be empty. You c
 
 ## View the created cluster
 
-After creating the cluster, you can view the new entry:
+After creating the cluster, click **Environments** in the left navigation, and then click **Clusters** to view the new entry.
 
-1. In the left navigation, click **Environments**, and then click **Clusters**.
-1. The cluster is now being set up. During this phase, its state is **Creating**. After one or two minutes, the cluster is ready for use and changes its state to **Healthy**.
+The cluster is now being set up. During this phase, its state is **Creating**. After one or two minutes, the cluster is ready for use and changes its state to **Healthy**.
 
-1. After the cluster is created, click the cluster name to visit the cluster detail page.
+After the cluster is created, click the cluster name to open the cluster details.
 
 ## Tag your cluster
 
