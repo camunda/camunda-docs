@@ -63,12 +63,12 @@ Select a cluster to open its details. The header shows the name and status of th
 
 The overview summarizes the cluster in the following sections:
 
-| Section         | Description                                                                                                                                                                                                                                                   |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Environments    | The environment the cluster hosts. Select the environment to open its details, and to open Operate, Tasklist, or Admin for it.                                                                                                                                |
-| Cluster details | The status, type, size, generation, and tag of the cluster. From here you can resize the cluster, modify its tag, review an available update, and resume a paused cluster.                                                                                    |
-| Components      | The health of the components of the cluster, such as the connector runtime. Click **Manage** on the **Connectors** tile to open [Connector Management](./manage-connectors.md).                                                                               |
-| Jobs            | The jobs of the environment of the cluster for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. See the [job dashboard](../analyze-operations/job-dashboard.md). |
+| Section         | Description                                                                                                                                                                                            |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Environments    | The environment the cluster hosts. Select the environment to open its details, and to open Operate, Tasklist, or Admin for it.                                                                         |
+| Cluster details | The status, type, size, generation, and tag of the cluster. From here you can resize the cluster, modify its tag, review an available update, and resume a paused cluster.                             |
+| Components      | The health of the components of the cluster, such as the connector runtime. Click **Manage** on the **Connectors** tile to open [Connector Management](./manage-connectors.md).                        |
+| Jobs            | The jobs of the environment of the cluster for the last 24 hours: the number of jobs that were created, completed, and not completed. See the [job dashboard](../analyze-operations/job-dashboard.md). |
 
 ### Cluster management actions
 
@@ -145,13 +145,13 @@ Select a cluster to open its details. The header shows the status of the cluster
 
 The overview summarizes the cluster in the following sections:
 
-| Section         | Description                                                                                                                                                                                                                                                    |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Environments    | The environments the cluster hosts. Select an environment to open its details, and to open Operate, Tasklist, or Admin for it.                                                                                                                                 |
-| Cluster details | The status, namespace, version, cluster ID, license, and the time Camunda Hub last synced with the cluster. It also shows any custom properties from the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters).       |
-| Components      | The health and version of the components of the cluster, such as Zeebe, Operate, Tasklist, and Optimize.                                                                                                                                                       |
-| Jobs            | The jobs of all environments of the cluster for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. See the [job dashboard](../analyze-operations/job-dashboard.md). |
-| Connectors      | The health and version of the connector runtime. Click **Manage** to open [Connector Management](./manage-connectors.md).                                                                                                                                      |
+| Section         | Description                                                                                                                                                                                                                                              |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Environments    | The environments the cluster hosts. Select an environment to open its details, and to open Operate, Tasklist, or Admin for it.                                                                                                                           |
+| Cluster details | The status, namespace, version, cluster ID, license, and the time Camunda Hub last synced with the cluster. It also shows any custom properties from the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters). |
+| Components      | The health and version of the components of the cluster, such as Zeebe, Operate, Tasklist, and Optimize.                                                                                                                                                 |
+| Jobs            | The jobs of all environments of the cluster for the last 24 hours: the number of jobs that were created, completed, and not completed. See the [job dashboard](../analyze-operations/job-dashboard.md).                                                  |
+| Connectors      | The health and version of the connector runtime. Click **Manage** to open [Connector Management](./manage-connectors.md).                                                                                                                                |
 
 To monitor and manage the connectors that run on a cluster, see [manage your connectors](./manage-connectors.md).
 
