@@ -7,7 +7,7 @@ description: "Learn how to enable persistent volume claims (PVCs) on Optimize, W
 
 Several Camunda 8 components keep state on disk and accept optional persistent volume configuration in the Helm chart. Enabling these is straightforward, but a few values keys are easy to misconfigure. This guide walks through each component and ends with a combined set of values you can merge into your Helm release.
 
-A reference scenario covering all three options lives in the Helm chart repository at `charts/camunda-platform-8.9/test/integration/scenarios/chart-full-setup/values/features/persistence.yaml`. It runs in nightly CI.
+A reference scenario that includes these options lives in the Helm chart repository at `charts/camunda-platform-8.9/test/integration/scenarios/chart-full-setup/values/features/persistence.yaml`. It runs in nightly CI.
 
 ## When you need persistent volumes
 
