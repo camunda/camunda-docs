@@ -22,7 +22,7 @@ image: MonitorCloudIcon,
 description: "Create and manage the SaaS clusters that host your deployment environments.",
 },
 {
-link: "./manage-connectors",
+link: "./cluster-connectors",
 title: "Manage your connectors",
 image: DocsIcon,
 description: "Monitor and manage the connectors that run on your cluster.",
