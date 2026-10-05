@@ -47,9 +47,9 @@ The overview summarizes the cluster in the following sections:
 | Components      | The health of the components of the cluster, such as the connector runtime. Click **Manage** on the **Connectors** tile to open [Connector Management](./manage-connectors.md). |
 | Jobs            | A summary of the jobs of the cluster. See [jobs](#jobs).                                                                                                                        |
 
-### Cluster tabs and pages
+### Cluster management actions
 
-The cluster details also have the following tabs and pages:
+You can manage a cluster with the following actions:
 
 | Task                                                   | Where to find it                                                            |
 | :----------------------------------------------------- | :-------------------------------------------------------------------------- |
