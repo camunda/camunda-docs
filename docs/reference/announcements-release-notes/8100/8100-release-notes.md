@@ -308,6 +308,8 @@ If you previously set `CAMUNDA_CLIENT_CONFIG_PATH` / `ZEEBE_CLIENT_CONFIG_PATH` 
 
 ### Operate and Tasklist APIs removed
 
+<!-- https://github.com/camunda/product-hub/issues/2839 -->
+
 The deprecated Operate and Tasklist APIs are removed. Process data, task management, and operational queries are now served through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 <p class="link-arrow">[Migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
@@ -322,11 +324,15 @@ With the Camunda 8 SaaS Administration API, you can now schedule and manage recu
 
 ### Zeebe Client replaced by Camunda Java Client
 
+<!-- https://github.com/camunda/product-hub/issues/2839 -->
+
 The Zeebe Client is removed and replaced by the [Camunda Java Client](/apis-tools/java-client/getting-started.md). This covers process deployment, message correlation, and job handling.
 
 <p class="link-arrow">[Migrate to the Camunda Java Client](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)</p>
 
 ### Zeebe Process Test replaced by Camunda Process Test
+
+<!-- https://github.com/camunda/product-hub/issues/2839 -->
 
 The Zeebe Process Test library is removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
 
@@ -398,6 +404,22 @@ The new Camunda Hub catalog gives your center of excellence (CoE) a governed, or
 In 8.10, the catalog supports element templates as its only asset type.
 
 <p class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</p>
+
+### Console UI redesign in Camunda Hub
+
+<!-- https://github.com/camunda/product-hub/issues/3670 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+
+Console is now part of Camunda Hub. Cluster management lives in the same interface as Modeler, Operate, and Tasklist, with the same look and behavior whether you run Camunda in SaaS or Self-Managed.
+
+- A unified cluster detail view across SaaS and Self-Managed.
+- A cluster list with sorting, search, and filters.
+- Restructured navigation: Clusters is promoted to a top-level item, and Organization is renamed to Settings.
+- A redesigned Organization Settings page (SaaS) and a new Settings page (Self-Managed).
+- Dashboard widgets move to the new Hub Homepage, and the old Dashboard is retired.
+
+<p class="link-arrow">[Manage your cluster](/components/hub/organization/manage-clusters/manage-cluster.md)</p>
 
 ### Duplicate a cluster in Console
 
@@ -529,6 +551,8 @@ You can now:
 <p class="link-arrow">[Camunda 8 Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)</p>
 
 ### Helm v4 required
+
+<!-- https://github.com/camunda/product-hub/issues/3555 -->
 
 Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
 
@@ -688,6 +712,8 @@ SaaS Web Modeler data was updated during the 29 August 2026 maintenance window t
 
 ### Project versioning model
 
+<!-- https://github.com/camunda/product-hub/issues/3175 -->
+
 A new versioning model for projects, process applications and file resources is introduced in 8.10. Projects now only contain process applications and IDP applications on the root level. Folders and files are stored inside process applications.
 
 **Process applications**: The new process application versioning model uses snapshots to save the current state of all the process application files, in a single action. This helps you track a process application throughout its development lifecycle and ensures the correct state is referenced.
@@ -776,6 +802,8 @@ Deletion no longer corrupts process application version history, as existing sna
 <p class="link-arrow">[Recover deleted resources](/components/hub/workspace/manage-projects/recently-deleted.md)</p>
 
 ### Test process segments in Play
+
+<!-- https://github.com/camunda/product-hub/issues/2896 -->
 
 When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
 
@@ -1101,7 +1129,7 @@ Multi-tenancy is enabled at the cluster level. Process definitions, instances, a
 
 ### New AWS US West region
 
-<!-- https://github.com/camunda/product-hub/issues/3274 -->
+<!-- https://github.com/camunda/product-hub/issues/3274, https://github.com/camunda/product-hub/issues/3649 -->
 
 With the new Camunda 8 SaaS **AWS US West (us-west-2)** region in North America, you can deploy orchestration workloads with full US data residency and improved regional stability.
 
@@ -1427,7 +1455,7 @@ Camunda 8.10 adds first-class support for asynchronously replicated relational d
 
 ### Elasticsearch index sizing and replication
 
-<!-- https://github.com/camunda/camunda-docs/pull/9809 -->
+<!-- https://github.com/camunda/camunda-docs/pull/9809, https://github.com/camunda/product-hub/issues/3518 -->
 
 New comprehensive Elasticsearch configuration documentation explains how to:
 
@@ -1489,6 +1517,8 @@ You can now perform rolling upgrades of self-managed Camunda 8 between patch and
 <!-- Legacy anchor retained for inbound links. -->
 
 #### Helm CLI v3 and v4 support {#helm-v4-required}
+
+<!-- https://github.com/camunda/product-hub/issues/3555 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
 
@@ -1700,7 +1730,7 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
 
-<!-- https://github.com/camunda/camunda-docs/pull/9809 -->
+<!-- https://github.com/camunda/camunda-docs/pull/9809, https://github.com/camunda/product-hub/issues/3518 -->
 
 New comprehensive Elasticsearch configuration documentation explains how to:
 
@@ -1817,6 +1847,8 @@ SaaS Web Modeler data was updated during the 29 August 2026 maintenance window t
 :::
 
 #### Project versioning model
+
+<!-- https://github.com/camunda/product-hub/issues/3175 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
@@ -2398,6 +2430,8 @@ Deletion no longer corrupts process application version history, as existing sna
 
 #### Test process segments in Play
 
+<!-- https://github.com/camunda/product-hub/issues/2896 -->
+
 <div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
@@ -2718,6 +2752,8 @@ The endpoint:
 Behavior remains free from side effects and uses the same timeout and guardrails as the existing cluster-scope evaluation.
 
 #### Removal of deprecated APIs, Zeebe Client, and Zeebe Process Test
+
+<!-- https://github.com/camunda/product-hub/issues/2839 -->
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
 
