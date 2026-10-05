@@ -215,10 +215,6 @@ To migrate all your test cases at once, change the [default element selector](/a
 OpenAPI entities containing keys of type `integer (int64)` are now being deprecated.
 This is part of a transition where API entity keys change from type `integer (int64)` to `string`.
 
-See the [overview about API Key Attributes][camunda8-api-overview] for more details.
-
-[camunda8-api-overview]: /versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes
-
 ### Zeebe Java client
 
 Starting with 8.8, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
