@@ -29,6 +29,8 @@ Each entry in `global.topology.clusters` is the single source for both Managemen
 
 Each record declares a stable unique `id`, the enabled workload components with their client and audience identifiers, the context paths, and the namespace and release name used to derive service endpoints.
 
+Give every cluster record its own client IDs when the clusters share one OIDC provider realm. Clients with the same ID in one realm are one client, so the clusters would overwrite each other's redirect URLs. For example, use `orchestration-<id>`, `optimize-<id>`, and `connectors-<id>`.
+
 | Field                             | Purpose                                                                                        |
 | --------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `id`                              | Stable unique identifier for the cluster. Changing it creates a new Hub inventory entry        |

@@ -33,6 +33,8 @@ If none of those apply, staying on a combined release is a fully supported long-
 | Tested backup and restore   | A verified restore of every data store: broker volumes, secondary storage, and both relational databases                                                                                                    |
 | A non-production rehearsal  | Run the whole procedure against a copy of your production configuration before you touch production                                                                                                         |
 
+To keep a release on the 8.7, 8.8, or 8.9 chart instead of upgrading it first, see [move a release on an earlier chart](#move-a-release-on-an-earlier-chart).
+
 ## Migrate off the bundled databases first
 
 The Hub release takes over the Management Identity and Camunda Hub databases the combined release already uses, so those databases must live outside the Helm chart before you start. Camunda 8.10 removes the bundled Bitnami PostgreSQL subcharts.
@@ -103,6 +105,8 @@ Update the existing release's values:
 
 Run `helm upgrade` on the existing release, without changing its name or namespace. The Orchestration Cluster StatefulSet is preserved, so the brokers keep their volumes and their identity.
 
+This `helm upgrade` restarts the Orchestration Cluster, Connectors, and Optimize pods even though their images don't change. Their configuration changes, for example the Management Identity service URL, and they read it only at startup. The brokers restart with the same volumes, so process state is kept, but the cluster is briefly unavailable while they restart.
+
 :::warning
 Verify with `helm template` or `helm diff` before you apply this step. Confirm the rendered output still contains the Orchestration Cluster StatefulSet with the same name, and the same `volumeClaimTemplates`, and no Management Identity Deployment. If the StatefulSet is absent or renamed, stop: applying it will detach your brokers from their storage.
 :::
@@ -137,6 +141,50 @@ See [install an Optimize release](/self-managed/deployment/helm/install/topology
 - Confirm no workload still resolves the old in-release Management Identity or Hub service names.
 - Inventory the OIDC clients, resource servers, permissions, and roles. Identity initialization is additive, so the combined release's objects still exist. Remove only what no release uses.
 - Retire the old Hub hostname and its TLS certificate, or redirect it.
+
+## Move a release on an earlier chart
+
+An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, and 8.9 charts, so you can move a combined release on one of those charts under a Hub without upgrading it. Follow [keep the cluster in place](#keep-the-cluster-in-place), with the differences in this section. Upgrade each cluster to 8.10 later, one at a time.
+
+| Topic            | Difference                                                                                                                                                                                          |
+| :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Release values   | In step 2, apply the requirements of that chart version. See [requirements by chart version](/self-managed/deployment/helm/install/topology/orchestration-release.md#requirements-by-chart-version) |
+| Cluster record   | A chart 8.7 cluster needs `architecture: legacy`. See [describe a chart 8.7 cluster](/self-managed/deployment/helm/install/topology/hub-release.md#describe-a-chart-87-cluster)                     |
+| Existing clients | Keep accepting the audience of the clients the release's own Management Identity created. See [keep existing clients working](#keep-existing-clients-working)                                       |
+| Web Modeler data | The Hub release migrates a Web Modeler database from 8.9 only. See [bring Web Modeler projects into the Hub](#bring-web-modeler-projects-into-the-hub)                                              |
+
+### Keep existing clients working
+
+Clients that the release's own Management Identity created, such as the Connectors client, keep requesting tokens with the audience that Management Identity assigned, `orchestration-api` by default. A cluster record usually declares a cluster-specific audience, such as `orchestration-<id>-api`, and after step 2 the Orchestration Cluster accepts only the audiences it's configured with.
+
+If the release doesn't accept the old audience, Connectors can't authenticate to the Orchestration Cluster and never becomes ready. Its log shows:
+
+```text
+io.grpc.StatusRuntimeException: UNAUTHENTICATED: Invalid bearer token
+```
+
+On the 8.8 and 8.9 charts, add the old audience in the same `helm upgrade` as step 2:
+
+```yaml
+orchestration:
+  security:
+    authentication:
+      oidc:
+        backwardsCompatibleAudiences:
+          - orchestration-api
+```
+
+On the 8.10 chart, `backwardsCompatibleAudiences` is deprecated. List the old audience with the full default set in `camunda.security.authentication.oidc.audiences`. See [backwards-compatible audiences replace the audience list](/self-managed/upgrade/helm/890-to-8100.md#backwards-compatible-audiences-replace-the-audience-list).
+
+On the 8.7 chart, Operate, Tasklist, and Connectors authenticate to Zeebe with the `zeebe` client the release's own Management Identity creates, set in `global.identity.auth.zeebe.clientId`. Don't change that value to the client ID in the cluster record before the Hub release has created that client. Until then, those components get `401 Unauthorized` from the token endpoint and don't become ready.
+
+### Bring Web Modeler projects into the Hub
+
+The Hub release's Camunda Hub uses one Web Modeler database. When you point it at the database of an 8.9 Web Modeler in step 3, Camunda Hub migrates that database in place when it starts, and the projects appear in the Hub.
+
+A Web Modeler database from an earlier version can't be migrated directly to 8.10. Before step 2, export the projects from that Web Modeler, and import them into the Hub after step 4.
+
+If you move several releases under one Hub, only one of their Web Modeler databases can become the Hub's database. Export the projects from every other Web Modeler before you convert its release, and import them into the Hub. Keep the exported files until you've confirmed the projects in the Hub.
 
 ## Moving a cluster to a different release, namespace, or Kubernetes cluster
 

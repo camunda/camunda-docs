@@ -32,7 +32,7 @@ The component client IDs, audiences, redirect URLs, and secrets must match the c
 
 An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same; the values it requires differ, because the older charts predate the unified Orchestration Cluster and still bundle Hub plane dependencies.
 
-Earlier chart versions ignore `global.topology.mode` and deploy a combined release. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
+Chart versions earlier than the minimum versions in the following table ignore `global.topology.mode` and deploy a combined release. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
 
 | Chart (minimum version) | Workload to enable                             | Also required                                                                                                                           |
 | :---------------------- | :--------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
