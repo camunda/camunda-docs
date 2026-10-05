@@ -41,7 +41,7 @@ To monitor and manage the connectors that run on a cluster, see [manage your con
 
 ## Jobs
 
-The details of a cluster summarize its jobs for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).
+The details of a cluster summarize the jobs of its environment for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).
 
 ## Next steps
 

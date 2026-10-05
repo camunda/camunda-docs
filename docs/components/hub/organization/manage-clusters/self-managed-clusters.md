@@ -54,7 +54,7 @@ Select a cluster to open its details. The header shows the status of the cluster
 
 ## Jobs
 
-The details of a cluster summarize its jobs for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).
+The details of a cluster summarize the jobs of all of its environments for the last 24 hours: the number of jobs that were created, completed, and not completed. Select **View all job types** to see the jobs by type. For more information, see the [job dashboard](../analyze-operations/job-dashboard.md).
 
 ## Update a cluster
 

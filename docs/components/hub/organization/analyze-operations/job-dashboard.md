@@ -4,7 +4,7 @@ title: Job dashboard
 description: "Use the job dashboard in Camunda Hub to see active job types, track created, completed and failed jobs, spot trends over time, and drill into job worker errors."
 ---
 
-Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved. Jobs are available for both environments and clusters, so you can open the job dashboard from an [environment](/components/concepts/environments.md) or from the [cluster](/components/concepts/clusters.md) that hosts it. In SaaS, each cluster hosts one environment.
+Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved. Jobs are available for both environments and clusters, so you can open the job dashboard from an [environment](/components/concepts/environments.md) or from the [cluster](/components/concepts/clusters.md) that hosts it. For a cluster, the job dashboard is an aggregated view across all of its environments, which is relevant in Self-Managed, where a cluster can host more than one environment. In SaaS, each cluster hosts one environment.
 
 ## Availability and permissions
 
@@ -69,7 +69,7 @@ In SaaS and Self-Managed:
 2. Select a cluster.
 3. On the **Overview** tab, locate the **Jobs** card, and click **View all job types** to open the job types page of the cluster.
 
-Each SaaS cluster hosts one environment, so the jobs of the cluster are the jobs of that environment.
+In Self-Managed, the job types page of a cluster aggregates the jobs of all environments of the cluster. Each SaaS cluster hosts one environment, so the jobs of the cluster are the jobs of that environment.
 
 ### 2. Job types overview
 
