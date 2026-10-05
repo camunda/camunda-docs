@@ -796,12 +796,8 @@ A new versioning model for projects, process applications and file resources is 
 You can now view and choose which environment you are connected to in the modeler in Camunda Hub.
 
 - Connector-credential names from the environment autocomplete in your FEEL expressions.
-- Task testing runs against the connected environment.
-- Connect an environment from the modeling toolbar to model against your real runtime.
-
-:::note
-This is disabled by default and behind feature flag `runtimeConnectionEnabled` (environment selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
-:::
+- Task testing, connector credentials, and the **Webhook** tab follow this connection. Your deploy target doesn't change.
+- Choose the environment from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real runtime.
 
 ### Safe deletion with a 30-day recovery window
 
@@ -856,7 +852,7 @@ Task testing now supports call activities in both Desktop and Web Modeler. Testi
 
 <!-- https://github.com/camunda/product-hub/issues/2896 -->
 
-When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
+When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of a process as low-code integration tests:
 
 - Run segment tests individually or in batches to validate process changes faster.
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
@@ -1856,11 +1852,7 @@ You can now view and choose which cluster you are connected to in Web Modeler.
 
 - Connector-credential names from the cluster autocomplete in your FEEL expressions.
 - Task testing runs against the connected cluster.
-- Connect your cluster from the modeling toolbar to model against your real environment.
-
-:::note
-This is disabled by default and behind feature flag `runtimeConnectionEnabled` (cluster selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
-:::
+- Choose the cluster from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real environment.
 
 ### Optimize
 
@@ -2440,7 +2432,7 @@ You can now set a business ID when starting a process instance directly from Cam
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
+When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of a process as low-code integration tests:
 
 - Run segment tests individually or in batches to validate process changes faster.
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
