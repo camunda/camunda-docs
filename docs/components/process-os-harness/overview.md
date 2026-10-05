@@ -1,8 +1,8 @@
 ---
 id: overview
-title: ProcessOS
+title: ProcessOS Harness
 sidebar_label: Overview
-description: "ProcessOS discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions. ProcessOS Harness, available as early access, is the governance process that drives AI coding agents to do this work."
+description: "ProcessOS discovers and re-engineers your existing processes to use AI, and generates executable Camunda solutions. ProcessOS Harness is the governance backbone of ProcessOS."
 keywords:
   [
     "ProcessOS",
@@ -17,17 +17,27 @@ import DocsIcon from "@site/docs/components/assets/icon-docs.png";
 import PlayIcon from "@site/docs/components/assets/icon-play.png";
 import AoGrid from '../react-components/\_ao-card';
 
-ProcessOS is an AI-powered intelligence layer on top of Camunda's agentic orchestration platform. It discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+:::caution Early access
+ProcessOS Harness is available as [early access](/components/early-access/overview.md) for trained customers and enabled partners. See [current scope](#current-scope).
+:::
 
 ## About
 
-ProcessOS Harness is the governance backbone of ProcessOS. It is a governance process that runs on Camunda and drives AI coding agents, such as Claude Code or GitHub Copilot CLI, to do the building safely and under control. The harness guides the agent through each phase, asks for human review at defined gates, and commits every artifact to Git, so an AI-generated solution stays reviewable at every step.
+[ProcessOS](https://camunda.com/platform/process-os/) is an AI-powered intelligence layer on top of Camunda's agentic orchestration platform. It discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
 
-:::important Early access
-ProcessOS Harness is available as [early access](/components/early-access/overview.md) to trained customers and enabled partners. For what this release covers, see [current scope](#current-scope).
+ProcessOS Harness is the governance backbone of ProcessOS. It is a governance process that runs on Camunda and drives AI coding agents, such as Claude Code or GitHub Copilot CLI, to perform the building safely and under control.
+
+The harness guides the agent through each phase, asks for human review at defined gates, and commits every artifact to Git, so an AI-generated solution stays reviewable at every step.
+
+:::info
+Learn more about and request access to [ProcessOS and the great re-engineering](https://camunda.com/learn/the-great-re-engineering).
 :::
 
-### Who ProcessOS Harness is for
+### Who is ProcessOS Harness for?
 
 ProcessOS Harness targets builders who implement end-to-end solutions with Camunda and are comfortable directing AI coding agents. Subject matter experts (SMEs) participate as reviewers and approvers rather than primary contributors, reducing the time they need to invest in a project.
 

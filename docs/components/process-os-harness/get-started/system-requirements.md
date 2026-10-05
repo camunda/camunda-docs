@@ -14,11 +14,13 @@ keywords:
   ]
 ---
 
-Learn about the system requirements for running ProcessOS Harness.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Requirements
 
-ProcessOS Harness needs the following:
+ProcessOS Harness requires the following:
 
 - A Camunda cluster to run the [governance process](#governance-process).
 - A [Git-compatible version control system](#project-version-control) to store your projects.

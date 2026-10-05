@@ -7,7 +7,17 @@ keywords:
   ["ProcessOS Harness", "implementation", "testing", "CPT", "job workers"]
 ---
 
-Implementation turns a chosen to-be tier into a deployable Camunda solution. ProcessOS Harness first generates the execution-ready artifacts, including BPMN, DMN tables, Camunda Forms, and job workers, from the transformation output. It then deploys the solution to a development or test cluster so it can be exercised end-to-end. Finally, it generates and runs three layers of tests, so you can see the solution behaves as intended before it moves into your own release process.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Implementation turns a chosen to-be tier into a deployable Camunda solution.
+
+1. ProcessOS Harness first generates the execution-ready artifacts, including BPMN, DMN tables, Camunda Forms, and job workers, from the transformation output.
+1. It then deploys the solution to a development or test cluster so it can be exercised end-to-end.
+1. Finally, it generates and runs three layers of tests, so you can see the solution behaves as intended before it moves into your own release process.
 
 :::warning
 These commands target a development or test cluster. Deploying to production is outside the scope of ProcessOS Harness, and remains your own release process.

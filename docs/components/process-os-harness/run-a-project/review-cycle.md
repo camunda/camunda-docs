@@ -6,6 +6,12 @@ description: "Review cycles bring subject matter experts into each ProcessOS Har
 keywords: ["ProcessOS Harness", "review cycle", "SME", "sign-off"]
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 A review cycle is how ProcessOS Harness keeps a human in the loop. In each cycle, SMEs answer open questions and review generated artifacts. The cycle repeats until they sign off on the result.
 
 ## How a cycle runs

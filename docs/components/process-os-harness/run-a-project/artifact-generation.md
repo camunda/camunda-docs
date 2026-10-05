@@ -7,7 +7,15 @@ keywords:
   ["ProcessOS Harness", "artifact generation", "BPMN", "DMN", "job workers"]
 ---
 
-Artifact generation produces the Camunda files that make a solution executable. It's used across phases rather than only at the end, because both discovery and transformation generate diagrams before anything is implemented.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Artifact generation produces the Camunda files that make a solution executable.
+
+It is used across phases rather than only at the end, because both discovery and transformation generate diagrams before anything is implemented.
 
 ## What gets generated
 

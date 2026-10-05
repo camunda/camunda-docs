@@ -94,6 +94,7 @@ module.exports = {
     {
       type: "category",
       label: "ProcessOS Harness",
+      className: "sidebar-cta-preview sidebar-badge-early-access",
       link: {
         type: "doc",
         id: "components/process-os-harness/overview",

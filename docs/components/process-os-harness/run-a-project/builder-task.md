@@ -7,7 +7,9 @@ keywords:
   ["ProcessOS Harness", "builder task", "auditability", "governance job"]
 ---
 
-Learn how ProcessOS Harness builder tasks guide work between Camunda, your AI coding agent, and Git to ensure flexible, auditable project execution.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About
 

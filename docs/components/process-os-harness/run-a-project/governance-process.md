@@ -6,6 +6,12 @@ description: "The ProcessOS Harness governance process runs on Camunda, tracks p
 keywords: ["ProcessOS Harness", "governance process", "milestones"]
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 The governance process is the Camunda Solution Methodology implemented as an executable Camunda process. It holds the state of your ProcessOS Harness project, orchestrates SME feedback, and tells you what to do `next`.
 
 The governance process on the Camunda cluster is started as part of `/process-os-governance-start`. From this point, the process guides you through all phases along certain milestones. Your input is required for gates, jobs, and tasks.

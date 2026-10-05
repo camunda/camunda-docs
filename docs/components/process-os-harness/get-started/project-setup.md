@@ -2,14 +2,16 @@
 id: project-setup
 title: Set up your organization for ProcessOS Harness
 sidebar_label: Organizational setup
-description: "Prepare your organization for a ProcessOS Harness project by running the first engagement with a partner or a Camunda Field Delivery Engineer, and by completing the Camunda Academy learning path."
+description: "Prepare for a ProcessOS Harness project by running a first engagement with a partner or Camunda Field Delivery Engineer (FDE), and completing the Camunda Academy learning path."
 keywords: ["ProcessOS Harness", "onboarding", "Camunda Academy"]
 ---
 
-Prepare your organization before you install ProcessOS Harness.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 :::important
-ProcessOS Harness is a new way of running projects, and the early access release assumes a trained builder. The intended path is to run your first project with an enabled partner or a Camunda FDE, and to complete the Camunda Academy learning path.
+ProcessOS Harness is a new way of running projects, and early access assumes a trained builder. The intended path is to run your first project with an enabled partner or a Camunda FDE and to complete the Camunda Academy learning path.
 :::
 
 ## Run your first project with a partner or a Camunda FDE

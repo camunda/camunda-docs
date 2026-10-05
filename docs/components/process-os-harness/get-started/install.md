@@ -2,11 +2,21 @@
 id: install
 title: Install ProcessOS Harness and configure a project
 sidebar_label: Install and configure
-description: "Set up the builder workspace, install ProcessOS Harness into your AI coding agent with c8ctl, and configure your first project with process-scope.md and run.config.yaml."
+description: "Learn how to create a configured ProcessOS Harness project with the journey running."
 keywords: ["ProcessOS Harness", "install", "c8ctl", "builder workspace"]
 ---
 
-This page takes you from nothing to a configured ProcessOS Harness project with the journey running. Camunda recommends completing the [organizational setup](project-setup.md) first, and checking the [system requirements](system-requirements.md) before you install.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Create a configured ProcessOS Harness project with the journey running. Set up the builder workspace, install ProcessOS Harness into your AI coding agent with c8ctl, and configure your first project with process-scope.md and run.config.yaml.
+
+:::note prerequisites
+Camunda recommends completing the [organizational setup](project-setup.md) first, and checking the [system requirements](system-requirements.md) before you install.
+:::
 
 ## (Optional) Understand the builder workspace
 

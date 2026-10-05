@@ -6,6 +6,12 @@ description: "The discovery phase runs parallel specialists across internal and 
 keywords: ["ProcessOS Harness", "discovery", "discovery specialists", "as-is"]
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 Discovery builds a faithful picture of how a process runs today. ProcessOS Harness researches your organizational knowledge with parallel specialists, generates as-is process descriptions and BPMN diagrams, and closes the remaining gaps with SMEs.
 
 ## Choose the right data sources
