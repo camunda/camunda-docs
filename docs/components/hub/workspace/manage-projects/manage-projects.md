@@ -4,10 +4,9 @@ title: Projects
 description: In Camunda Hub, a project is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
 ---
 
-import DocsIcon from "@site/docs/components/assets/icon-docs.png";
 import AoGrid from '../../../react-components/\_ao-card';
 import FileListImg from './img/file-list.png'
-import { RocketIcon, FolderGit2Icon, FolderPlusIcon, FlaskConicalIcon, FileStackIcon } from "@site/docs/components/assets/hub-icons";
+import { PencilRulerIcon, RocketIcon, FolderGit2Icon, FolderPlusIcon, FlaskConicalIcon, FileStackIcon } from "@site/docs/components/assets/hub-icons";
 
 In Camunda Hub, a [project](/components/concepts/projects.md) contains a set of files. You can consider a project as a bundle of related files you can version and deploy together. You can also consider a project as a container of individual files meant to be versioned and deployed independently.
 
@@ -41,7 +40,7 @@ description: "Get started by setting up a new project.",
 {
 link: "../modeler/modeling/model-your-first-diagram",
 title: "Model your first diagram",
-image: DocsIcon,
+image: PencilRulerIcon,
 description: "Design and implement your first diagram using Camunda Hub",
 },
 {

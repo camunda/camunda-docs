@@ -4,8 +4,8 @@ title: Manage workspaces
 description: "Create and manage workspaces within your organization."
 ---
 
-import DocsIcon from "@site/docs/components/assets/icon-docs.png";
 import ConsoleIcon from "@site/docs/components/assets/icon-console.png";
+import { BriefcaseIcon, ServerPlusIcon } from "@site/docs/components/assets/hub-icons";
 import AoGrid from '../../../react-components/\_ao-card';
 
 Create and manage workspaces within your organization.
@@ -30,7 +30,7 @@ To view existing workspaces, click **Workspaces** in the left navigation.
 {
 link: "./manage",
 title: "Manage workspace",
-image: DocsIcon,
+image: BriefcaseIcon,
 description: "Manage workspaces within your organization.",
 },
 {
@@ -42,7 +42,7 @@ description: "Manage members within your workspace.",
 {
 link: "../manage-environments/assign-environments",
 title: "Assign environments to a workspace",
-image: DocsIcon,
+image: ServerPlusIcon,
 description: "Choose the environments that projects in your workspace can deploy to.",
 },
 ]} columns={2}/>
