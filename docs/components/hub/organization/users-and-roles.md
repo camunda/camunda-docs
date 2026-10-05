@@ -1,38 +1,69 @@
 ---
-title: Manage users in your organization
-description: "Let's take a closer look at the rights and responsibilities of users in your organization."
+title: Manage users and roles
+description: "Learn about the users, roles, and permissions in your organization."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the Organization Owner of the Camunda organization. This organization owns Camunda Hub workspaces, projects, and clusters. The Organization Owner and any Organization Admins they assign can control access to these resources by managing their organization.
+Camunda Hub controls access to the workspaces, projects, and clusters of your organization through users and roles. Organization admins can control access to these resources by managing their organization.
 
 ## Users
 
-The Organization Owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one Organization Owner.
+Users access Camunda Hub with an organization-level role, and organization admins decide which users can see and change the workspaces, projects, environments, and clusters of the organization. Where you manage users depends on your deployment:
 
-To change the Organization Owner, use the user administration. The current owner selects another user of the organization and clicks **Assign as owner** from the menu. In the dialog that appears, select the role to assign to the current owner after the transfer.
+<Tabs groupId="permissions" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
+
+You invite and manage users and groups in Camunda Hub, on the **Organization > Manage organization** page. The Organization Owner has all rights in the organization.
+
+- [Create and manage users](/components/saas/organization/create-manage-users.md)
+- [Manage user groups](/components/saas/organization/manage-user-groups.md)
+- [Manage resource-based authorizations](/components/saas/organization/resource-based-auth.md) (legacy, for clusters before version 8.8)
+- [Organization ownership](/components/saas/organization/organization-ownership.md)
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+You create users in your identity provider, and manage users, groups, and roles in Management Identity.
+
+- [Management Identity user, group, and role management](/self-managed/components/management-identity/application-user-group-role-management/identity-application-user-group-role-management-overview.md)
+- [Manage groups](/self-managed/components/management-identity/application-user-group-role-management/manage-groups.md)
+- [Manage roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md)
+
+</TabItem>
+
+</Tabs>
+
+The following sections describe the roles and permissions of users in your organization.
 
 ### Roles and permissions
 
 Every user holds one organization-level role. Organization Owner, Organization Admin, Analyst, and Member form a ladder, where each role includes everything the role below it can do. **DevOps** is a specialized role for infrastructure management that sits outside this ladder.
 
-| Role               | Organization | Workspaces and projects | Clusters  | Catalog   | Optimize and business value |
-| :----------------- | :----------- | :---------------------- | :-------- | :-------- | :-------------------------- |
-| Organization Owner | Full access  | Manage                  | Manage    | Manage    | Yes                         |
-| Organization Admin | Manage       | Manage                  | Manage    | Manage    | Yes                         |
-| Analyst            | Read-only    | Create and collaborate  | Read-only | Manage    | Yes                         |
-| Member             | Read-only    | Create and collaborate  | Read-only | Read-only | No                          |
-| DevOps             | None         | Create and collaborate  | Manage    | Read-only | No                          |
+| Role               | Organization | Workspaces and projects | Clusters | Environments  | Catalog   | Optimize and business value |
+| :----------------- | :----------- | :---------------------- | :------- | :------------ | :-------- | :-------------------------- |
+| Organization Owner | Full access  | Manage                  | Manage   | Manage        | Manage    | Yes                         |
+| Organization Admin | Manage       | Manage                  | Manage   | Manage        | Manage    | Yes                         |
+| DevOps             | None         | Create and collaborate  | Manage   | Read-only     | Read-only | No                          |
+| Analyst            | Read-only    | Create and collaborate  | None     | Assigned only | Manage    | Yes                         |
+| Member             | Read-only    | Create and collaborate  | None     | Assigned only | Read-only | No                          |
 
 - **Organization Owner**: All rights in the organization, including settings, billing, and ownership transfer. Reserved for a single user per organization; transferred rather than assigned or removed like other roles.
 - **Organization Admin**: Manages the organization, its members, and its workspaces, with full access to every workspace and project by default — no separate mode needs to be enabled.
 - **Analyst**: Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md).
-- **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization and its clusters.
+- **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization.
 - **DevOps**: A specialized role for infrastructure management, not people management. Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.
 
 Catalog access has two levels: **Read-only** (browse and use catalog items) for Member and DevOps, and **Manage** (also see usage statistics and adoption data) for Analyst, Organization Admin, and Organization Owner.
+
+Environment access has three levels: **Manage** (view all environments and assign them to workspaces) for Organization Owner and Organization Admin, **Read-only** (view all environments, but can't assign them) for DevOps, and **Assigned only** for Analyst and Member. Users with the **Assigned only** level see the environments assigned to the workspaces where they are an editor or a workspace admin.
 
 Business value access includes viewing the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md) and setting targets. The same roles that grant access to Optimize also grant access to business value.
 
@@ -91,13 +122,5 @@ People who do not yet have a Camunda 8 account can also be invited to an organiz
 :::note
 User task access restrictions were removed in Camunda 8.10 together with Tasklist V1.
 
-Use [authorization-based access control](../../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control user access to tasks in the current version.
+Use [authorization-based access control](../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control user access to tasks in the current version.
 :::
-
-## Limitations
-
-Depending on the plan to be used, the number of users that can be part of an organization varies.
-
-## Restrictions
-
-In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. [Contact Camunda support](https://camunda.com/services/support/) to get this configured according to your needs.

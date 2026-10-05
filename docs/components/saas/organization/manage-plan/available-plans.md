@@ -16,3 +16,7 @@ The following Camunda 8 plans are available:
 - To sign up for Camunda 8 and compare plan features, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
 - For more information on Camunda 8, refer to [Camunda 8 product](https://camunda.com/products/cloud/).
   :::
+
+## Upgrade to an Enterprise plan
+
+To upgrade to the Enterprise plan, select the Organization management **Plans and pricing** tab, and click **Request quote**.

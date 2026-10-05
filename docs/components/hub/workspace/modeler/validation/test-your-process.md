@@ -371,7 +371,7 @@ For more information about terms, refer to our [licensing and terms page](https:
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Test mode is available to all Camunda Hub users with commenter, editor, or admin permissions within a project.
-Additionally, within their organization, users need to have a [role](/components/hub/organization/manage-users/index.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the cluster, users need to have specific permissions instead.](#authorizations)
+Additionally, within their organization, users need to have a [role](/components/hub/organization/users-and-roles.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the cluster, users need to have specific permissions instead.](#authorizations)
 
 ### Camunda 8 Self-Managed
 
@@ -401,7 +401,7 @@ After selecting the **Test** tab in Self-Managed, the Test view opens directly. 
 
 ## Test usage and billing considerations
 
-The use of Test mode may result in additional charges depending on your organization's [plan](/components/hub/organization/manage-organization-settings/manage-plan/available-plans.md) and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
+The use of Test mode may result in additional charges depending on your organization's [plan](/components/saas/organization/manage-plan/available-plans.md) and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
 
 - **Enterprise plan:** Use a [Basic cluster](/components/saas/clusters.md#cluster-type) for non-production testing to avoid costs. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
 - **Free trial plan:** You can use any cluster. See [Free Trial clusters](/components/saas/clusters.md#free-trial-clusters).

@@ -23,10 +23,10 @@ In SaaS, Console shows a dashboard with the following information:
 
 - Number of users, task users, clusters, and Admin API credentials
 - Cluster health, with references to the [clusters](/components/hub/organization/manage-clusters/index.md)
-- [Process instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
-- [Decision instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
-- [Usage alerts](/components/hub/organization/manage-organization-settings/usage-alerts.md)
-- [Recent activity](/components/hub/organization/manage-organization-settings/view-organization-activity.md)
+- [Process instance usage](/components/saas/organization/usage-history.md)
+- [Decision instance usage](/components/saas/organization/usage-history.md)
+- [Usage alerts](/components/saas/organization/usage-alerts.md)
+- [Recent activity](/components/saas/organization/view-organization-activity.md)
 
 </TabItem>
 

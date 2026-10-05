@@ -10,9 +10,7 @@ Create a Camunda 8 account to create clusters, deploy processes, and create a ne
 We're gradually rolling out changes that affect this page to users; your experience may vary.
 :::
 
-Visit [signup.camunda.com/accounts](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to create your account:
-
-![signup](./img/signup.png)
+Visit [signup.camunda.com/accounts](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to create your account.
 
 ### Create an account
 
@@ -25,8 +23,6 @@ If you choose to create an account through the social sign up buttons, you'll be
 ## Log in to your Camunda 8 account
 
 Log in with the email address and password you used in the previous form, or use the social login buttons. To access the login site directly, navigate to [camunda.io](https://weblogin.cloud.camunda.io/).
-
-![login](./img/login.png)
 
 After login, select the square-shaped **Camunda components** icon in the upper-left corner, and select Camunda Hub to view the Camunda Hub overview page. This is the central place to manage the clusters, diagrams, and forms you want to deploy to Camunda 8.
 

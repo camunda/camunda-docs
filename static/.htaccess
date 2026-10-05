@@ -186,6 +186,25 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 RewriteRule ^docs/next/apis-tools/hub-api-saas/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-saas/specifications/update-workspace-environments/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/hub-api-sm/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-sm/specifications/update-workspace-environments/ [R=301,L]
 
+# The Manage users page became Users and roles management (8.10)
+RewriteRule ^docs/next/components/hub/organization/manage-users/?$ /docs/next/components/hub/organization/users-and-roles/ [R=301,L]
+
+# SaaS-specific organization pages moved from Camunda Hub > Manage organization to the SaaS section (8.10)
+RewriteRule ^docs/next/components/hub/organization/manage-users/create-manage-users/?$ /docs/next/components/saas/organization/create-manage-users/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-users/manage-user-groups/?$ /docs/next/components/saas/organization/manage-user-groups/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-users/resource-based-auth/?$ /docs/next/components/saas/organization/resource-based-auth/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/delete-account/?$ /docs/next/components/saas/organization/delete-account/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/enable-alpha-features/?$ /docs/next/components/saas/organization/enable-alpha-features/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/external-sso/?$ /docs/next/components/saas/organization/external-sso/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/switch-organization/?$ /docs/next/components/saas/organization/switch-organization/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/usage-alerts/?$ /docs/next/components/saas/organization/usage-alerts/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/usage-history/?$ /docs/next/components/saas/organization/usage-history/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/view-organization-activity/?$ /docs/next/components/saas/organization/view-organization-activity/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/available-plans/?$ /docs/next/components/saas/organization/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/create-account/?$ /docs/next/components/saas/organization/manage-plan/create-account/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations/?$ /docs/next/components/saas/organization/manage-plan/update-billing-reservations/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/upgrade-to-enterprise-plan/?$ /docs/next/components/saas/organization/manage-plan/available-plans/#upgrade-to-an-enterprise-plan [NE,R=301,L]
+
 # The Hub dashboard page became the View Console page (8.10)
 RewriteRule ^docs/next/components/hub/organization/analyze-operations/hub-dashboard/?$ /docs/next/components/hub/organization/console/ [R=301,L]
 
@@ -278,7 +297,7 @@ RewriteRule ^docs/next/components/modeler/forms/utilizing-forms/?$ docs/next/com
 RewriteRule ^docs/next/components/modeler/using-web-and-desktop-modeler-together/?$ docs/next/components/modeler/using-hub-and-desktop-modeler-together [R=301,L]
 RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-users/manage-user-groups [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-users/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/users-and-roles/ [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/advanced-search$ /docs/next/components/hub/organization/manage-organization-settings/organization-settings/ [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
