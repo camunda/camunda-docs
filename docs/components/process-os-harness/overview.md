@@ -25,13 +25,13 @@ ProcessOS is an AI-powered intelligence layer on top of Camunda's agentic orches
 
 ProcessOS Harness is the governance backbone of ProcessOS. It is a governance process that runs on Camunda and drives AI coding agents, such as Claude Code or GitHub Copilot CLI, to do the building safely and under control. The harness guides the agent through each phase, asks for human review at defined gates, and commits every artifact to Git, so an AI-generated solution stays reviewable at every step.
 
-:::note Early access
-The [early access](/components/early-access/overview.md) release of ProcessOS covers ProcessOS Harness only. It is available to trained customers and enabled partners, and behavior and commands can change between releases. To get access, contact your Camunda account team or a Camunda Forward Deployed Engineer.
+:::important Early access
+ProcessOS Harness is available as [early access](/components/early-access/overview.md) to trained customers and enabled partners. For what this release covers, see [current scope](#current-scope).
 :::
 
-## Who ProcessOS Harness is for
+### Who ProcessOS Harness is for
 
-ProcessOS Harness targets the builder: someone who implements Camunda end to end and is comfortable directing AI coding agents. Subject matter experts (SMEs) take part as reviewers and approvers rather than as primary contributors, which reduces the time they invest in a project.
+ProcessOS Harness targets builders who implement end-to-end solutions with Camunda and are comfortable directing AI coding agents. Subject matter experts (SMEs) participate as reviewers and approvers rather than primary contributors, reducing the time they need to invest in a project.
 
 Builders get the most out of ProcessOS Harness when they bring:
 
@@ -41,9 +41,9 @@ Builders get the most out of ProcessOS Harness when they bring:
 - Stakeholder communication skills across engineering, architecture, and business leadership.
 - Comfort with ambiguity.
 
-## Key principles
+### Key principles
 
-### A governance process guides the journey
+#### A governance process guides the journey
 
 ProcessOS Harness runs your engagement as a governed process with defined phases and milestones. You keep full flexibility between milestones, but the milestones themselves ensure the project progresses.
 
@@ -58,7 +58,7 @@ Each phase ends at a milestone: process scope defined, as-is model finalized, to
 
 The governance process itself runs on Camunda. Project state lives in Camunda and every artifact is committed to Git, so the whole engagement is auditable. For details, see [how the governance process works](get-started/governance-process.md).
 
-### Progress comes from iterations and your judgment
+#### Progress comes from iterations and your judgment
 
 AI isn't deterministic, so ProcessOS Harness doesn't produce a finished solution in a single pass. Project maturity rises through iterations across discovery, transformation, and implementation, and thinking in iterations is the skill that matters most.
 
@@ -66,7 +66,7 @@ Your expert judgment is what turns agent output into a working system. ProcessOS
 
 The AI coding agent supports you throughout. You can ask it to fix problems at any point, including working around defects you hit along the way.
 
-### Two supported use cases
+#### Two supported use cases
 
 ProcessOS Harness runs all phases for both use cases, but uses different modes within them.
 
@@ -77,7 +77,7 @@ ProcessOS Harness runs all phases for both use cases, but uses different modes w
 
 Legacy migration transformations can be optimized for specific source systems. Get in contact with Camunda to learn more.
 
-## Current scope
+### Current scope
 
 Today, ProcessOS Harness focuses on taking you from discovery to a generated, tested Camunda solution. The following areas sit outside this release and are on the roadmap for future iterations:
 
@@ -93,18 +93,18 @@ In this release, each project runs locally with its own private memory. Cross-pr
 
 Prepare your organization and run your first ProcessOS Harness project.
 
+### Prerequisites
+
+Before you install ProcessOS Harness, review the [system requirements](system-requirements.md) for the Camunda cluster, Git-compatible version control system, supported AI coding agent, and local tooling you need.
+
+### Set up and install
+
 <AoGrid columns={2} ao={[
 {
 link: "../project-setup/",
 title: "Set up your organization",
 image: ConfigIcon,
 description: "Prepare your organization for a first ProcessOS Harness project.",
-},
-{
-link: "../system-requirements/",
-title: "Check system requirements",
-image: DocsIcon,
-description: "Review the tools and access ProcessOS Harness needs.",
 },
 {
 link: "../get-started/",

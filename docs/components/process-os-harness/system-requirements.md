@@ -2,7 +2,7 @@
 id: system-requirements
 title: System requirements
 sidebar_label: System requirements
-description: "Systems required to run ProcessOS Harness: a Camunda cluster for the governance process, a Git-compatible VCS, a supported AI coding agent, and a builder client with local tooling."
+description: "Learn about the system requirements for running ProcessOS Harness."
 keywords:
   [
     "ProcessOS Harness",
@@ -14,7 +14,16 @@ keywords:
   ]
 ---
 
-ProcessOS Harness needs four things: a Camunda cluster to run the governance process, a Git-compatible version control system, an AI coding agent, and a builder client with local tooling.
+Learn about the system requirements for running ProcessOS Harness.
+
+## Requirements
+
+ProcessOS Harness needs the following:
+
+- A Camunda cluster to run the [governance process](#governance-process).
+- A [Git-compatible version control system](#project-version-control) to store your projects.
+- A supported [AI coding agent](#ai-coding-agent) to do the re-engineering work.
+- A [builder client](#builder-client) with local tooling, where the agent runs.
 
 ![System overview: the builder client hosts the AI coding agent and a local Camunda server, syncs status with the ProcessOS governance process on the enterprise Camunda server, uses VCS and an AI platform, and generates a ProcessOS solution deployed back to the enterprise Camunda server.](img/process-os-system-requirements.excalidraw.svg)
 
