@@ -700,6 +700,18 @@ A process variable represents the execution state (i.e data) of a process instan
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
 
+### ProcessOS
+
+An AI-powered intelligence layer on top of Camunda's [agentic orchestration](#agentic-orchestration) platform. ProcessOS discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
+
+- [ProcessOS](/components/process-os-harness/overview.md)
+
+### ProcessOS Harness
+
+The governance process of [ProcessOS](#processos). ProcessOS Harness is delivered as a set of scripts, plugins, and skills that run on Camunda and drive an AI coding agent, such as Claude Code or GitHub Copilot CLI, through the discovery, transformation, and implementation phases of a project. It asks for human review at defined gates and commits every artifact to Git.
+
+- [ProcessOS Harness](/components/process-os-harness/overview.md)
+
 ### Project
 
 A collection of related files in a Camunda Hub workspace you can work on, version, and deploy as a single bundle or as individual files. A workspace may contain multiple projects.
