@@ -105,6 +105,18 @@ The runtime connection is disabled by default and behind the feature flag `runti
 
 <p class="link-arrow">[Connect to an environment](/components/hub/workspace/modeler/modeling/runtime-connection.md)</p>
 
+#### Console
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+Console is now a top-level entry in the Camunda Hub navigation for organization owners, admins, and DevOps users, and the cluster references in Console point to the **Environments** and **Clusters** pages.
+
+- **SaaS:** The cluster health and the cluster links on the Console dashboard open the clusters in **Environments > Clusters**. The cluster references on the organization page point to the same pages.
+- **Self-Managed:** Console shows the dashboard and usage information. The cluster links open the clusters in **Environments > Clusters**, and the cluster list moved there from Console.
+- **Self-Managed:** Each instance of a management component has its own entry on the dashboard, with its name, version, cluster, status, and a link to open it.
+
+<p class="link-arrow">[View Console](/components/hub/organization/console.md)</p>
+
 #### Business value dashboard
 
 <!-- https://github.com/camunda/product-hub/issues/3543 -->
