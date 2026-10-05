@@ -13,7 +13,7 @@ A reference scenario that includes these options lives in the Helm chart reposit
 
 By default, Optimize and Web Modeler use `emptyDir` volumes, which are tied to a pod's lifecycle. Most production deployments should switch to PVCs so that:
 
-- Optimize cached state survives pod restarts.
+- Optimize's cached state survives pod replacement.
 - Web Modeler's temporary files can live on a volume you manage instead of node-local `emptyDir` storage.
 - The orchestration StatefulSet can mount additional persistent volumes alongside its primary data volume.
 
@@ -21,7 +21,7 @@ If your cluster does not have a usable default storage class, set `storageClassN
 
 ## Enable Optimize persistence
 
-`optimize.persistence.enabled: true` creates one PVC, `<fullname>-optimize-data`, mounted at Optimize's `/camunda` directory. The `/tmp` directory stays on an `emptyDir` volume. If you set `optimize.persistence.existingClaim` instead, the chart creates no PVC and mounts that claim at `/camunda`.
+`optimize.persistence.enabled: true` creates one PVC, `<fullname>-optimize-data`, mounted at Optimize's `/camunda` directory. The `/tmp` directory stays on an `emptyDir` volume. If you set `optimize.persistence.existingClaim` instead, the chart creates no PVC and mounts that claim at `/camunda`. `<fullname>` is `<release>-camunda-platform` unless the release name already contains `camunda-platform` or you set `fullnameOverride`.
 
 ```yaml
 optimize:
@@ -35,7 +35,7 @@ optimize:
 
 Common pitfalls:
 
-- **Pod stuck in Pending with `PersistentVolumeClaim is not bound`** — your cluster has no default `StorageClass`. Set `optimize.persistence.storageClassName` to a valid class.
+- **Pod and PVC stuck in `Pending`** — your cluster may have no default `StorageClass`. Check `kubectl describe pvc <name>`, and set `optimize.persistence.storageClassName` to a valid class.
 - **Wrong indentation under `optimize:`** — the keys must be nested under `optimize.persistence`, not at the chart root.
 
 ## Enable Web Modeler persistence
@@ -56,12 +56,12 @@ webModeler:
 
 Common pitfalls:
 
-- **`helm install` fails with a YAML parse error** — make sure `persistence` is a map with `enabled: true`, not a boolean. The full schema is in `webModeler.persistence.*`.
+- **`helm install` fails with a values schema error** — `persistence` must be a map with `enabled: true`, not a boolean such as `persistence: true`.
 - **PVC pending after install** — same root cause as Optimize: no default storage class on the cluster.
 
 ### Choose the deployment update strategy
 
-The Web Modeler restapi component runs as a single-replica `Deployment`. `webModeler.persistence.deploymentStrategy` controls what happens during `helm upgrade`. Choose the value based on whether you use `existingClaim`:
+The Web Modeler restapi component runs as a `Deployment` with one replica by default. `webModeler.persistence.deploymentStrategy` controls what happens during `helm upgrade`. Choose the value based on whether you use `existingClaim`:
 
 | Storage setup                              | Strategy                  | Why                                                                                                |
 | ------------------------------------------ | ------------------------- | -------------------------------------------------------------------------------------------------- |
@@ -99,7 +99,7 @@ webModeler:
 
 ## Add extra volume claim templates to the orchestration StatefulSet
 
-The orchestration cluster runs Zeebe (together with Operate, Tasklist, and Identity) in a single StatefulSet configured under the `orchestration` key. Kubernetes resources and pods for this StatefulSet may still use the `zeebe` name, but all values described here belong under `orchestration`.
+The orchestration cluster runs as a single StatefulSet configured under the `orchestration` key. For backward compatibility, the StatefulSet, its pods, and its PVCs still use the `zeebe` name (`<release>-zeebe` by default), but all values described here belong under `orchestration`.
 
 `orchestration.extraVolumeClaimTemplates` is appended verbatim to the StatefulSet's `volumeClaimTemplates`, next to the primary `data` volume claim template. Each entry must be a valid PVC spec. The chart does not mount these volumes automatically, so add a matching entry to `orchestration.extraVolumeMounts`:
 
@@ -123,18 +123,19 @@ Extra volume claim templates require `orchestration.persistenceType: disk`, whic
 :::warning
 `volumeClaimTemplates` is **immutable** after the StatefulSet is created. Plan this configuration before your initial install. To add or change an `extraVolumeClaimTemplates` entry on an existing release:
 
-1. Delete only the StatefulSet object, for example with `kubectl delete statefulset <name> --cascade=orphan`, so the pods and PVCs stay in place.
-2. Delete only the specific extra PVCs you intend to discard, if any.
-3. Run `helm upgrade`.
+1. Delete only the StatefulSet object, keeping its pods and PVCs: `kubectl delete statefulset <release>-zeebe --cascade=orphan`.
+2. If you are removing or changing an extra volume claim template, delete only the PVCs created from it, if you intend to discard their data.
+3. Run `helm upgrade`. The new StatefulSet adopts the existing pods but does not replace them, so the existing pods do not mount the new volumes yet.
+4. Delete the orchestration pods one at a time in ascending ordinal order, starting with `<release>-zeebe-0`. Wait for each recreated pod to be ready before deleting the next. Each recreated pod reattaches its existing `data` PVC and gets the new volumes.
 
 Never delete the primary `data-<statefulset>-<ordinal>` PVCs unless you intend to lose broker data.
 :::
 
 Common pitfalls:
 
-- **`StatefulSet update forbidden`** during `helm upgrade` — you changed an entry on an existing release; see the warning above.
-- **Missing `accessModes`** in a template — Kubernetes rejects the StatefulSet at admission time. Always include at least one access mode.
-- **Wrong indentation** — `extraVolumeClaimTemplates` is an array of `{metadata, spec}` objects; a flat map will be silently dropped.
+- **`Forbidden: updates to statefulset spec for fields other than ...`** during `helm upgrade` — you changed `extraVolumeClaimTemplates` on an existing release; see the warning above.
+- **Missing `accessModes`** in a template — the StatefulSet is created, but no pods start. Its events show `spec.accessModes: Required value: at least 1 access mode is required`. Always include at least one access mode.
+- **Wrong shape** — `extraVolumeClaimTemplates` is an array of `{metadata, spec}` objects. A map instead of an array fails the chart's values schema validation.
 
 ## Put it all together
 
@@ -175,7 +176,7 @@ kubectl -n <namespace> get pvc
 
 You should see the orchestration cluster's primary `data-<release>-zeebe-<ordinal>` PVCs, plus:
 
-- `<release>-camunda-platform-optimize-data`
+- `<fullname>-optimize-data`
 - `<restapi-pod-name>-tmp`, the ephemeral PVC for the Web Modeler restapi pod. It is recreated with each new pod.
 - `extra-data-<release>-zeebe-<ordinal>`, one per orchestration replica
 
