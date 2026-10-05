@@ -105,7 +105,7 @@ The runtime connection is disabled by default and behind the feature flag `runti
 
 <p class="link-arrow">[Connect to an environment](/components/hub/workspace/modeler/modeling/runtime-connection.md)</p>
 
-#### Console
+#### Console {#console-hub}
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
