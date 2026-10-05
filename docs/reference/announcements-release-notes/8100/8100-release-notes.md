@@ -41,6 +41,14 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
 
 ### Agentic orchestration
 
+#### ProcessOS Harness
+
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps Al-generated work auditable.
+
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
+
 #### AI Agent connector: Claude on Microsoft Foundry and OAuth 2.0 for compatible endpoints
 
 <!-- https://github.com/camunda/connectors/issues/8060
@@ -705,17 +713,13 @@ Business ID is now visible in Operate for decision instances, in both the decisi
 
 ### Optimize
 
-#### Optimize adopts the shared authentication implementation
-
-<!-- https://github.com/camunda/camunda/issues/58600 -->
+#### Client bearer tokens are now classified for permission checks
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-Optimize now authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
+Optimize now classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `camunda.security.authentication.oidc.username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token Optimize can't classify is treated as belonging to a user, and checked against your configured Optimize permission.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-adopts-the-shared-authentication-implementation) for the upgrade action required, and [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
-
-<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#configure-oidc-for-optimize)</p>
 
 ### Orchestration Cluster
 
@@ -774,9 +778,9 @@ Physical Tenants now support independent per-tenant authorization.
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings, so you configure authentication once, in one place. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, so you configure authentication once, in one place. Camunda Hub and Optimize both continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components, and Camunda plans to remove them in a future release. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Camunda Hub and Optimize both continue to accept their existing authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
+Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
 
 User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
 
