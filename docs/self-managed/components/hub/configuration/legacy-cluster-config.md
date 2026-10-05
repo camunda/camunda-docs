@@ -25,7 +25,6 @@ The available configuration options depend on the version of the cluster:
 
 - [Common configuration (all cluster versions)](#common-configuration-all-cluster-versions)
 - [Additional configuration for cluster versions >= 8.8](#additional-configuration-for-cluster-versions--88)
-- [Additional configuration for cluster versions < 8.8](#additional-configuration-for-cluster-versions--88-1)
 
 :::
 
@@ -90,40 +89,6 @@ camunda.hub.clusters:
       webapp: "https://camunda.example.com"
     authorizations:
       enabled: true
-```
-
-</TabItem>
-
-</Tabs>
-
-#### Additional configuration for cluster versions < 8.8
-
-<Tabs groupId="cluster-pre88" defaultValue="envVars" queryString values={[
-{label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
-]}>
-
-<TabItem value="envVars">
-
-| Environment variable                    | Description                                                                                                                                                                                                 | Example value                                                               |
-| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `CAMUNDA_HUB_CLUSTERS_0_URL_ZEEBE_GRPC` | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Zeebe gRPC API](/versioned_docs/version-8.7/apis-tools/zeebe-api/grpc.md) can be reached.                                  | `grpc://camunda-zeebe-gateway:26500`,<br/>`grpcs://zeebe.example.com:26500` |
-| `CAMUNDA_HUB_CLUSTERS_0_URL_ZEEBE_REST` | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Camunda 8 REST API](/versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) can be reached.  | `http://camunda-zeebe-gateway:8080`,<br/>`https://zeebe.example.com`        |
-| `CAMUNDA_HUB_CLUSTERS_0_URL_OPERATE`    | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Operate REST API](/versioned_docs/version-8.7/apis-tools/operate-api/overview.md) can be reached.                          | `http://camunda-operate:80`,<br/>`https://operate.example.com`              |
-| `CAMUNDA_HUB_CLUSTERS_0_URL_TASKLIST`   | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Tasklist REST API](/versioned_docs/version-8.7/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) can be reached. | `http://camunda-tasklist:80`,<br/>`https://tasklist.example.com`            |
-
-</TabItem>
-
-<TabItem value="applicationYaml">
-
-```yaml
-camunda.hub.clusters:
-  - # ...common configuration from above
-    url:
-      zeebe-grpc: "grpc://camunda-zeebe-gateway:26500"
-      zeebe-rest: "http://camunda-zeebe-gateway:8080"
-      operate: "http://camunda-operate:80"
-      tasklist: "http://camunda-tasklist:80"
 ```
 
 </TabItem>
