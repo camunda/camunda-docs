@@ -26,7 +26,7 @@ When using [Git sync](/components/hub/workspace/manage-projects/git-sync.md) to 
 | A [Camunda project](/components/concepts/projects.md) is represented as a folder containing a [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file. <br /><br /> With Desktop Modeler, you always [deploy projects](/components/modeler/desktop-modeler/projects.md#deploying-a-project) as a single bundle. | A project (called "process application" before Camunda 8.10) [contains process files](/components/hub/workspace/manage-projects/manage-projects.md). <br /><br /> With Camunda Hub, you can [take snapshots](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot) and [deploy projects](/components/hub/workspace/manage-projects/deploy-project.md) as a single bundle, or you can [version](/components/hub/workspace/modeler/modeling/versions.md) and [deploy](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process) individual files within a project. |
 
 :::tip
-Camunda recommends always including a `camunda.json` file in your project, so Desktop Modeler and `c8ctl` recognize it when you work locally. Camunda Hub does not require the file.
+Camunda recommends always including a `camunda.json` file in your project, so Desktop Modeler and `c8ctl` recognize it when you work locally. Camunda Hub does not require the file, but it creates one for you on git sync or download.
 :::
 
 ## Element templates
@@ -80,7 +80,7 @@ Camunda recommends storing shared templates in a separate repository:
 
 ### Do I really need a `camunda.json` file if I’m only using Camunda Hub?
 
-No. A `camunda.json` file is only required if you plan to open the project in Desktop Modeler or deploy it with `c8ctl`. Camunda Hub does not require it, but adding the file makes the project compatible across all tools.
+No. A `camunda.json` file is only required if you plan to open the project in Desktop Modeler or deploy it with `c8ctl`. Camunda Hub does not require it, but adding the file makes the project compatible across all tools. When you turn on git sync or download a project, Hub writes the file for you, including the project link.
 
 ### Can I use the same element template repository for both modelers?
 
