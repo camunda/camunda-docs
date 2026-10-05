@@ -1243,16 +1243,20 @@ Camunda 8.10 adds an opt-in analytics exporter for Self-Managed clusters. It is 
 
 <p class="link-arrow">[Analytics exporter](https://github.com/camunda/camunda/blob/main/zeebe/exporters/analytics-exporter/README.md)</p>
 
-### Physical Tenant identity support
+### Physical tenants: strong tenant isolation in one Orchestration Cluster
 
-<!-- https://github.com/camunda/product-hub/issues/3600 -->
+<!-- https://github.com/camunda/product-hub/issues/3430, https://github.com/camunda/product-hub/issues/3639, https://github.com/camunda/product-hub/issues/3600 -->
 
-Physical Tenants now support independent per-tenant authorization.
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-- Each Physical Tenant enforces its own roles, mapping rules, and permissions.
-- Users can have different roles on different Physical Tenants, such as a developer role on one, and a viewer role on another.
-- Cluster-wide operations (topology, backups, restore) are protected by a claim-based cluster admin role, with no new infrastructure required.
-- Identity providers are defined at the cluster level. Each Physical Tenant chooses which IdPs it can accept.
+Self-Managed Orchestration Clusters can now host multiple physical tenants. Each one is an isolated execution unit with its own Raft partitions, secondary storage (separate RDBMS schema, Elasticsearch/OpenSearch cluster, or prefixed indices), document store, exporters, and identity provider. Teams and business units get strong isolation without running a separate cluster for each.
+
+- **Operations:** Back up and restore each tenant on its own, manage its partitions, exporters, and scaling separately, and monitor it with its own metrics and logs.
+- **APIs and clients:** Clients pick a tenant through `/physical-tenants/{physicalTenantId}/v2/...` on REST or the `Camunda-Physical-Tenant` header on gRPC. `CamundaClient` supports tenant selection, and a single Java/Spring client or Connectors runtime can serve multiple tenants.
+- **Web apps:** Operate, Tasklist, and Admin are available per tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>` and show only the selected tenant's data.
+- **Identity:** Each tenant enforces its own roles, mapping rules, and permissions, so a user can have different roles on different tenants. You define identity providers (basic auth or OIDC, including multiple OIDC providers) at the cluster level, and each tenant chooses which ones it accepts. Cluster-wide operations (topology, backups, restore) are protected by a claim-based cluster admin role.
+
+Every cluster has a default physical tenant, so existing setups run unchanged. `tenantId`-based logical tenants still work inside each physical tenant. Physical tenants are defined in configuration and applied with a rolling restart. Upgrades apply to the whole cluster, and queries cannot span tenants. Data cannot be moved from a logical tenant into a separate physical tenant. Tenants can share brokers, and quotas between tenants are not included. SaaS is not supported yet.
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
@@ -1488,18 +1492,6 @@ Camunda 8.10 adds support for new relational database versions. Operators runnin
 New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
 
 <p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
-
-### Physical Tenant support
-
-<!-- https://github.com/camunda/product-hub/issues/3639 -->
-
-Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isolation across tenants.
-
-- The REST API and gRPC API are exposed per Physical Tenant, with `CamundaClient` supporting Physical Tenant selection in the gRPC API.
-- Web apps (Operate, Tasklist, and Admin) are accessible per Physical Tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
-- Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
-
-<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
 ### Rolling upgrades
 
