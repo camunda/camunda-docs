@@ -7,7 +7,7 @@ description: "Review common issues and how to resolve them."
 Review common issues and how to resolve them.
 
 :::note
-This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/clusters.md).
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).
 :::
 
 ## I cannot connect to Zeebe

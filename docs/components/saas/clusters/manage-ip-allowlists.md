@@ -8,7 +8,7 @@ keywords: [whitelist, allowlist, ip whitelist, ip allowlist]
 In Camunda SaaS, Camunda Hub has access to clusters by default, as allowlist assignments for IP addresses used by Camunda Hub are managed automatically. If your organization works within Camunda's [Enterprise](https://camunda.com/pricing/) plan, you can restrict access to clusters with an IP allowlist.
 
 :::note
-This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/clusters.md).
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).
 :::
 
 ## Create an IP allowlist

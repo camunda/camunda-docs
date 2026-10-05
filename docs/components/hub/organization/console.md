@@ -22,7 +22,7 @@ To open Console, click **Console** in the left navigation.
 In SaaS, Console shows a dashboard with the following information:
 
 - Number of users, task users, clusters, and Admin API credentials
-- Cluster health, with references to the [clusters](/components/hub/organization/manage-clusters/clusters.md)
+- Cluster health, with references to the [clusters](/components/hub/organization/manage-clusters/index.md)
 - [Process instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
 - [Decision instance usage](/components/hub/organization/manage-organization-settings/usage-history.md)
 - [Usage alerts](/components/hub/organization/manage-organization-settings/usage-alerts.md)
@@ -36,12 +36,12 @@ In Self-Managed, Console shows dashboard and usage information for your clusters
 
 The dashboard information includes:
 
-- Cluster health, including the number of healthy, unhealthy, and unknown clusters, and the [clusters](/components/hub/organization/manage-clusters/clusters.md) that are unhealthy
+- Cluster health, including the number of healthy, unhealthy, and unknown clusters, and the [clusters](/components/hub/organization/manage-clusters/index.md) that are unhealthy
 - Management components, each with its version, cluster, status, and a link to open it
 - Usage of all clusters in the last 30 days, including task users, process instances, and decision instances
 - Links to documentation and feedback
 
-The usage information shows the usage of each cluster. To view all clusters, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/clusters.md).
+The usage information shows the usage of each cluster. To view all clusters, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).
 
 </TabItem>
 
