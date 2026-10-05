@@ -29,6 +29,7 @@ For more advanced or permanent configuration, modify the default `configuration/
 | `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                                               |
 | `--startup-url`            | The URL to open after startup (for example, `http://localhost:8080/operate`). By default, Operate is opened.                                                                                                                                           |
 | `--no-browser`             | Skips opening a browser window after startup. Useful for headless or CI environments.                                                                                                                                                                  |
+| `--physical-tenants <ids>` | Starts the comma-separated Physical Tenants for this run only, without changing the saved tenants. For more information, see [configure Physical Tenants](#configure-physical-tenants).                                                                |
 
 ## Enable authentication and authorization
 
@@ -232,6 +233,85 @@ On Windows, use PowerShell or Command Prompt for hidden interactive entry. In Gi
 Local secret commands manage only the c8run file store. Set `C8RUN_SECRETS_MODE=external` whenever you configure another file path, AWS Secrets Manager, or Google Secret Manager through `--config`, `application.yaml`, or Spring environment settings. c8run doesn't detect explicit store configuration and otherwise configures its local default store. Use the external store's management tools instead of `c8run secrets`.
 
 The local secrets directory is for development only. For production, configure a supported managed secret store instead of reusing Camunda 8 Run secrets.
+
+## Configure Physical Tenants
+
+Use Camunda 8 Run to try [Physical Tenants](/self-managed/concepts/physical-tenants/index.md) locally. Each Physical Tenant is an isolated engine inside one Camunda 8 Run instance, with its own data, users, secrets, and connector runtime.
+
+:::note
+Physical Tenants require Camunda 8.10 or later and a Camunda 8 Run build that includes the `tenants` command. Run `./c8run tenants help` to check. Earlier 8.10 builds report `unsupported operation: tenants`.
+:::
+
+Add a tenant, then start Camunda 8 Run:
+
+```bash
+./c8run tenants add sales
+./c8run start
+./c8run tenants list
+./c8run stop
+```
+
+- The `default` tenant always exists and keeps the existing URLs, such as `http://localhost:8080/operate` and `http://localhost:8080/v2/`.
+- Each additional tenant is served under `http://localhost:8080/physical-tenants/<id>/`, for example `/physical-tenants/sales/operate` for the web applications and `/physical-tenants/sales/v2/` for the [Orchestration Cluster REST API](/self-managed/concepts/physical-tenants/api-routing.md).
+- Saved tenants start with every subsequent `./c8run start`. The startup summary lists each tenant's URLs and readiness.
+- `./c8run tenants list` shows each tenant's status, login, connector runtime, and URLs.
+
+To start specific tenants for one run without changing the saved tenants, for example in CI:
+
+```bash
+./c8run start --physical-tenants sales,hr
+```
+
+Tenant IDs use lowercase letters and digits only. With RDBMS secondary storage, including the bundled H2 database, IDs can have at most eight characters. H2 is for local development and evaluation only.
+
+### Tenant logins
+
+By default, each tenant uses the same login as `./c8run start` (`demo`/`demo`, unless you set `--username` and `--password`). To give a tenant its own user, add it with `--username`:
+
+```bash
+./c8run tenants add hr --username alice
+```
+
+Camunda 8 Run prompts for the password without echoing it. For automation, pass the password on standard input with `--password-stdin`. Camunda 8 Run stores the password in the tenants file, which only your operating-system user can read.
+
+### Tenant secrets and connectors
+
+Each tenant has its own local secrets, so a tenant never resolves another tenant's `camunda.secrets.*` values. Use `--tenant` with the [local secret commands](#manage-local-secrets):
+
+```bash
+./c8run secrets --tenant sales set OPENAI_API_KEY
+```
+
+Each tenant also gets its own connector runtime, which runs in a separate JVM on the next free local port from `8087`. To skip it for one tenant, add the tenant with `--no-connectors`. To skip all connector runtimes, start with `--disable-connectors`.
+
+### Remove tenants
+
+| Command                               | Purpose                                      |
+| ------------------------------------- | -------------------------------------------- |
+| `./c8run tenants remove <id> [id...]` | Remove tenants from the saved configuration. |
+| `./c8run tenants reset`               | Remove all saved tenants and their logins.   |
+| `./c8run tenants path`                | Show where Camunda 8 Run saves tenants.      |
+
+Both `remove` and `reset` prompt for confirmation. In noninteractive use, add `--yes`.
+
+Removing a tenant changes only the saved configuration. A running instance keeps serving the tenant until you restart Camunda 8 Run. The tenant's data remains in secondary storage, so adding the same ID again restores it, including the users created in that tenant.
+
+### Tenant startup failures
+
+If a tenant doesn't become ready, Camunda and the healthy tenants keep running and `./c8run start` exits with an error naming the failed tenants. Check `log/camunda.log`, then run `./c8run stop` and `./c8run start`. For common causes, see [troubleshoot Physical Tenants](/self-managed/concepts/physical-tenants/troubleshooting.md).
+
+### Configure where tenants are stored
+
+| Variable             | Default                                               | Behavior                                                                                                                         |
+| -------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `C8RUN_TENANTS_FILE` | `physical-tenants.yaml` next to the secrets directory | Sets the saved tenants file. Relative paths resolve from the current working directory.                                          |
+| `C8RUN_TENANTS_MODE` | `local`                                               | Set to `external` to disable the `tenants` commands and saved tenants, so only your own configuration declares Physical Tenants. |
+
+If your `--config` file, `CAMUNDA_PHYSICALTENANTS_*` environment variables, or `JAVA_OPTS` already declare `camunda.physical-tenants`, Camunda 8 Run uses that configuration as-is and ignores its saved tenants. Tenants managed by Camunda 8 Run require `C8RUN_SECRETS_MODE=local`, the default.
+
+### Use c8ctl
+
+[c8ctl](/apis-tools/c8ctl/getting-started.md) delegates to the same commands with `c8ctl cluster tenants` and `c8ctl cluster start --physical-tenants`. It uses the same tenants file and secrets as Camunda 8 Run.
 
 ## Enable TLS
 
