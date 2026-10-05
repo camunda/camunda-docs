@@ -27,13 +27,13 @@ Sign up and start your developer journey with Camunda 8 SaaS.
 
 ## Architecture
 
-The Camunda 8 SaaS platform is built on Google Cloud Platform (GCP) and based on a microservices architecture.
+The Camunda 8 SaaS platform is built on Amazon Web Services (AWS) and based on a microservices architecture.
 
 ### Clusters
 
 There are two types of [cluster](/components/saas/clusters.md) used when running Camunda 8 SaaS:
 
-- Camunda Hub is hosted in GCP in the _europe-west1_ [region](/components/saas/regions.md).
+- Camunda Hub is hosted in AWS in the eu-central-1 [region](/components/saas/regions.md).
 - Orchestration cluster components such as Zeebe, Tasklist, Operate, Optimize, and Connectors, are hosted in GCP or Amazon Web Services (AWS) regions. An Orchestration Cluster is a provided group of production-ready nodes that run Camunda 8.
 
 By default, each cluster serves a single tenant, with all data associated with the `<default>` tenant.
