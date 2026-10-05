@@ -319,7 +319,7 @@ Hub introduces workspaces and projects.
 
 #### Environments
 
-Hub introduces environments as the places where teams deploy and run their processes. An environment is hosted on a cluster, and the cluster remains the infrastructure that your administrators operate.
+Hub introduces environments as deployment targets where teams run their processes. An environment is hosted on a cluster, and the cluster remains the infrastructure that your administrators operate.
 
 - Organization admins assign environments to workspaces, and projects deploy to the environments of their workspace instead of connecting clusters to deployment stages.
 - In Self-Managed, each Physical Tenant of a cluster at version 8.10 or later is an environment. In SaaS, each cluster has one environment.

@@ -74,7 +74,7 @@ Operate now displays readable model reasoning as an inline **Thinking** entry in
 
 <!-- https://github.com/camunda/product-hub/issues/3715 -->
 
-Environments are the new places where teams deploy and run their processes in Camunda Hub. A cluster remains the infrastructure that administrators manage, and an environment is hosted on a cluster.
+Environments are the new deployment targets where teams run their processes in Camunda Hub. A cluster remains the infrastructure that administrators manage, and an environment is hosted on a cluster.
 
 - Organization admins assign environments to workspaces, in the Camunda Hub interface or with the Camunda Hub API. Every project in a workspace can deploy to all the environments assigned to the workspace.
 - Projects no longer connect clusters to deployment stages. The deploy dialog and the **Test** tab list the environments of the workspace, with their tags, version, and status.

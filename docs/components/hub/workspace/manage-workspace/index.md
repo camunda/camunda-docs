@@ -23,7 +23,7 @@ Add members, edit member roles, or delete members:
 
 ## View assigned environments
 
-An [environment](/components/concepts/environments.md) is the place where the projects of your workspace deploy and run. Your organization admin assigns environments to the workspace, and every project in the workspace can use all of them.
+An [environment](/components/concepts/environments.md) is a deployment target where the projects of your workspace run. Your organization admin assigns environments to the workspace, and every project in the workspace can use all of them.
 
 If you're a **Workspace Admin** or **Editor**, the left navigation shows a **Workspace environments** section. It lists each assigned environment with a **Details** entry and links to its applications. Organization owners and admins see the same list. Viewers and commenters don't see environments.
 

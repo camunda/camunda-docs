@@ -51,7 +51,7 @@ You can manage organizational resources, including clusters, deployment environm
 
 ### Workspaces and deployment environments
 
-A deployment environment is the place where a team deploys and runs its processes, for example a development, staging, or production environment. Each deployment environment is hosted on a cluster, which remains the infrastructure that your administrators manage.
+A deployment environment is a deployment target where a team runs its processes, for example a development, staging, or production environment. Each deployment environment is hosted on a cluster, which remains the infrastructure that your administrators manage.
 
 Organization admins assign deployment environments to workspaces. Projects in a workspace can deploy to all the deployment environments assigned to it, so you can deploy and promote your work with clear access controls.
 

@@ -1009,7 +1009,7 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 #### Deployments target environments instead of clusters
 
-Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is the named place where a team deploys and runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
+Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is a named deployment target where a team runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
 
 - Projects no longer have their own deployment stages or connected clusters. A project can deploy to every environment assigned to its workspace.
 - Organization admins assign environments to workspaces.
