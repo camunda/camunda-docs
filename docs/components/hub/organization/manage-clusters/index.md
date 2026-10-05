@@ -24,7 +24,15 @@ Only organization owners, admins, and DevOps users see the **Clusters** page. Ot
 
 To view your clusters, click **Environments** in the left navigation, and then click **Clusters** next to the page title.
 
-The page lists your clusters with their status, such as **Creating**, **Healthy**, or **Paused**. Select a cluster to open its details.
+The page lists your clusters. Each cluster shows the following details:
+
+| Detail  | Description                                                                                              |
+| :------ | :------------------------------------------------------------------------------------------------------- |
+| Name    | The name of the cluster. Select it to open the cluster details.                                          |
+| Status  | The state of the cluster, such as **Creating**, **Healthy**, or **Paused**.                              |
+| Version | The Camunda version of the cluster.                                                                      |
+| Region  | The region where the cluster runs.                                                                       |
+| Type    | The [cluster type](/components/saas/clusters.md#cluster-type): **Basic**, **Standard**, or **Advanced**. |
 
 ## Add a cluster
 
