@@ -186,6 +186,9 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 RewriteRule ^docs/next/apis-tools/hub-api-saas/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-saas/specifications/update-workspace-environments/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/hub-api-sm/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-sm/specifications/update-workspace-environments/ [R=301,L]
 
+# The Manage an existing project page became Manage project settings (8.10)
+RewriteRule ^docs/next/components/hub/workspace/manage-projects/manage-project/?$ /docs/next/components/hub/workspace/manage-projects/project-settings/ [R=301,L]
+
 # The Hub dashboard page became the View Console page (8.10)
 RewriteRule ^docs/next/components/hub/organization/analyze-operations/hub-dashboard/?$ /docs/next/components/hub/organization/console/ [R=301,L]
 

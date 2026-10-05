@@ -908,12 +908,8 @@ module.exports = {
                 "components/hub/workspace/manage-projects/project-versioning",
                 "components/hub/workspace/manage-projects/deploy-project",
                 "components/hub/workspace/manage-projects/git-sync",
-                "components/hub/workspace/manage-projects/manage-project",
+                "components/hub/workspace/manage-projects/project-settings",
               ],
-            },
-            {
-              type: "doc",
-              id: "components/hub/workspace/manage-workspace/manage-workspace",
             },
             {
               type: "category",
@@ -998,6 +994,10 @@ module.exports = {
                 },
                 "components/hub/workspace/modeler/modeler-settings",
               ],
+            },
+            {
+              type: "doc",
+              id: "components/hub/workspace/manage-workspace/manage-workspace",
             },
           ],
         },
