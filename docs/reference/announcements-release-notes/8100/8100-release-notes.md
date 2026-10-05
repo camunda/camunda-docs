@@ -169,6 +169,14 @@ AI agents can use the Processes MCP Server to discover and call deployed BPMN pr
 
 <p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
 
+### ProcessOS Harness
+
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
+
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
+
 ### Real-time agent visibility and monitoring
 
 <!-- https://github.com/camunda/product-hub/issues/3462
