@@ -7,14 +7,13 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func createAdminUserExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateAdminUser
 	// One-time setup: create the initial administrator on a fresh cluster.
-	// Placeholder only — replace with a securely generated password, never a literal like this.
-	result, err := client.CreateAdminUser(ctx, *openapi.NewUserRequest("admin-password-123", "admin"))
+	// "admin-password-123" is a placeholder — don't hardcode passwords in production.
+	result, err := client.CreateAdminUser(ctx, *camunda.NewUserRequest("admin-password-123", "admin"))
 	if err != nil {
 		return err
 	}

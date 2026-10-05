@@ -17,4 +17,6 @@ To view organization activity:
 1. In the left navigation under **Console**, click **Organization**.
 1. Open the **Activity** tab.
 
+![activity-view](./img/activity-view.png)
+
 On the **Activity** tab, you can click **Export activity** to export the activity record as JSON or CSV.

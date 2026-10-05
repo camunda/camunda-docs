@@ -50,7 +50,7 @@ Python-based connector containers are an exception: `requests` reads `REQUESTS_C
 
 ### Prerequisites
 
-- Helm 3.10+
+- Helm CLI 3.10+ or 4.x
 - A PEM-encoded CA bundle file (`your-ca-bundle.pem`) containing the root and any intermediate certs that signed your datastore / IdP certs
 
 ### 1. Create the CA bundle Secret
@@ -306,10 +306,6 @@ If a legacy JKS field and `global.tls.caBundle` are both set, the legacy field t
 ### Java 21 default `trustStoreType` is PKCS12
 
 The init container builds a PKCS12 truststore; the chart omits `-Djavax.net.ssl.trustStoreType` to match the JVM default. If you supply a legacy JKS via `tls.secret.existingSecret`, add `-Djavax.net.ssl.trustStoreType=jks` to `javaOpts` explicitly.
-
-### Bitnami PostgreSQL `tls.certCAFilename` enables mTLS
-
-Do not set `tls.certCAFilename` on the bundled Bitnami PostgreSQL subchart. It switches PostgreSQL into `clientcert=verify-full` mode (`pg_hba.conf`) and breaks plain clients. Use `tls.certFilename` and `tls.certKeyFilename` only.
 
 ### Console and Web Modeler websockets are Node.js
 

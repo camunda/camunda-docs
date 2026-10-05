@@ -7,12 +7,11 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func searchElementInstancesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchElementInstances
-	result, err := client.SearchElementInstances(ctx, *openapi.NewElementInstanceSearchQuery())
+	result, err := client.SearchElementInstances(ctx, *camunda.NewElementInstanceSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -25,7 +24,7 @@ func searchElementInstancesExample(ctx context.Context, client *camunda.CamundaC
 
 func getElementInstanceExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetElementInstance
-	element, err := client.GetElementInstance(ctx, openapi.MustElementInstanceKey("2251799813685360"))
+	element, err := client.GetElementInstance(ctx, camunda.MustElementInstanceKey("2251799813685360"))
 	if err != nil {
 		return err
 	}
@@ -37,8 +36,8 @@ func getElementInstanceExample(ctx context.Context, client *camunda.CamundaClien
 func searchElementInstanceIncidentsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchElementInstanceIncidents
 	result, err := client.SearchElementInstanceIncidents(ctx,
-		openapi.MustElementInstanceKey("2251799813685360"),
-		*openapi.NewIncidentSearchQuery())
+		camunda.MustElementInstanceKey("2251799813685360"),
+		*camunda.NewIncidentSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -51,7 +50,7 @@ func searchElementInstanceIncidentsExample(ctx context.Context, client *camunda.
 
 func searchElementInstanceWaitStatesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchElementInstanceWaitStates
-	result, err := client.SearchElementInstanceWaitStates(ctx, *openapi.NewElementInstanceWaitStateQuery())
+	result, err := client.SearchElementInstanceWaitStates(ctx, *camunda.NewElementInstanceWaitStateQuery())
 	if err != nil {
 		return err
 	}
@@ -63,8 +62,8 @@ func searchElementInstanceWaitStatesExample(ctx context.Context, client *camunda
 func createElementInstanceVariablesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateElementInstanceVariables
 	// Set local variables on a specific element instance scope.
-	req := openapi.NewSetVariableRequest(map[string]any{"approved": true})
+	req := camunda.NewSetVariableRequest(map[string]any{"approved": true})
 
-	return client.CreateElementInstanceVariables(ctx, openapi.MustElementInstanceKey("2251799813685360"), *req)
+	return client.CreateElementInstanceVariables(ctx, camunda.MustElementInstanceKey("2251799813685360"), *req)
 	// endregion CreateElementInstanceVariables
 }

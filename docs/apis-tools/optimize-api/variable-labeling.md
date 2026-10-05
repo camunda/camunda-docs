@@ -27,9 +27,9 @@ POST `/api/public/variables/labels`
 
 The following request headers must be provided with every variable labeling request:
 
-| Header         | Constraints | Value                                              |
-| -------------- | ----------- | -------------------------------------------------- |
-| Authentication | REQUIRED\*  | [Authentication](./optimize-api-authentication.md) |
+| Header        | Constraints | Value                                              |
+| ------------- | ----------- | -------------------------------------------------- |
+| Authorization | REQUIRED    | [Authentication](./optimize-api-authentication.md) |
 
 ## Request body
 
@@ -43,12 +43,12 @@ This method returns no content.
 
 Possible HTTP Response Status codes:
 
-| Code | Description                                                                             |
-| ---- | --------------------------------------------------------------------------------------- |
-| 204  | Request successful.                                                                     |
-| 400  | Returned if some of the properties in the request body are invalid or missing.          |
-| 401  | Secret incorrect or missing. See [authentication](#authentication) on how to authorize. |
-| 404  | The process definition with the given definition key doesn't exist.                     |
+| Code | Description                                                                            |
+| ---- | -------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                    |
+| 400  | Returned if some of the properties in the request body are invalid or missing.         |
+| 401  | Token incorrect or missing. See [authentication](#authentication) on how to authorize. |
+| 404  | The process definition with the given definition key doesn't exist.                    |
 
 ## Example 1
 

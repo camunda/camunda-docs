@@ -6,12 +6,11 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func getFormByKeyExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetFormByKey
-	form, err := client.GetFormByKey(ctx, openapi.MustFormKey("2251799813685260"))
+	form, err := client.GetFormByKey(ctx, camunda.MustFormKey("2251799813685260"))
 	if err != nil {
 		return err
 	}
@@ -22,7 +21,7 @@ func getFormByKeyExample(ctx context.Context, client *camunda.CamundaClient) err
 
 func searchAuditLogsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchAuditLogs
-	result, err := client.SearchAuditLogs(ctx, *openapi.NewAuditLogSearchQueryRequest())
+	result, err := client.SearchAuditLogs(ctx, *camunda.NewAuditLogSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -35,7 +34,7 @@ func searchAuditLogsExample(ctx context.Context, client *camunda.CamundaClient) 
 
 func getAuditLogExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetAuditLog
-	entry, err := client.GetAuditLog(ctx, openapi.MustAuditLogKey("2251799813685270"))
+	entry, err := client.GetAuditLog(ctx, camunda.MustAuditLogKey("2251799813685270"))
 	if err != nil {
 		return err
 	}

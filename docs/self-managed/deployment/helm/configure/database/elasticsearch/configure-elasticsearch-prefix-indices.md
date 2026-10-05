@@ -69,7 +69,7 @@ The legacy Zeebe Exporter creates `zeebe-record` indices consumed by Optimize. I
 - **Required consumer**: Optimize (`optimize.enabled: true`)
 
 :::note When the legacy Zeebe Exporter is used
-In single-region deployments, the chart automatically enables the legacy Zeebe Exporter when Optimize and its Elasticsearch or OpenSearch backend are enabled. Setting `orchestration.exporters.zeebe.enabled: true` does not enable the exporter without Optimize.
+In single-region deployments, the chart automatically enables the legacy Zeebe Exporter when Optimize and its Elasticsearch or OpenSearch backend are enabled in the same release. Without Optimize in the release, set `orchestration.exporters.zeebe.enabled: true` to enable it against the Elasticsearch or OpenSearch secondary storage, and set its prefix with `orchestration.exporters.zeebe.index.prefix`. This is how a separate Optimize release gets its records. See [export records for Optimize](/self-managed/deployment/helm/install/topology/orchestration-release.md#export-records-for-optimize).
 
 When Optimize is disabled, `optimize.database.elasticsearch.prefix` and `optimize.database.opensearch.prefix` have no effect. You can still configure the Camunda Exporter prefix with `orchestration.index.prefix`.
 :::

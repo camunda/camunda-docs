@@ -28,6 +28,7 @@ For more advanced or permanent configuration, modify the default `configuration/
 | `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                                          |
 | `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                                               |
 | `--startup-url`            | The URL to open after startup (for example, `http://localhost:8080/operate`). By default, Operate is opened.                                                                                                                                           |
+| `--no-browser`             | Skips opening a browser window after startup. Useful for headless or CI environments.                                                                                                                                                                  |
 
 ## Enable authentication and authorization
 
