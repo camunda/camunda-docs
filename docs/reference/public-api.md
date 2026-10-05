@@ -70,7 +70,7 @@ Though not covered by the public API contract, we aim to provide a consistent ex
 - Announcing deprecations at least two minor versions in advance (for example, deprecated in 8.9, removed no earlier than 8.11).
 - Avoiding breaking changes to configuration, endpoints, or backup-related features within the same minor release range.
 
-This balance allows continuous improvement to tools like Web Modeler and Console, while preserving stability for orchestration logic.
+This balance allows continuous improvement to tools like Camunda Hub, while preserving stability for orchestration logic.
 
 ## Client and API compatibility
 

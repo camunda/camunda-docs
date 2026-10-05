@@ -40,7 +40,7 @@ In addition to the infrastructure diagram provided in the [Terraform setup guide
 The architecture includes the following core components:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
-- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Management plane**: Design and management tools (Camunda Hub and Management Identity)
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
 

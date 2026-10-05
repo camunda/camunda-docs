@@ -306,7 +306,7 @@ orchestration:
 
 ### Multi-namespace deployment (Orchestration + Management)
 
-In production, separate the Orchestration Cluster from management components (WebModeler, Console, Identity, Optimize):
+In production, separate the Orchestration Cluster from the management plane (Camunda Hub and Management Identity) and Optimize:
 
 #### Namespace 1: Orchestration + Connectors
 
