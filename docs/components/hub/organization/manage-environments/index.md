@@ -7,7 +7,7 @@ description: "View the environments in your organization, monitor their status, 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Environments are the places where your teams deploy and run their processes. Use the **Environments** page in Camunda Hub to view every environment in your organization, monitor its status, and open its applications.
+Environments are the deployment targets for your teams, where they run their processes. Use the **Environments** page in Camunda Hub to view every environment in your organization, monitor its status, and open its applications.
 
 Each environment runs on a [cluster](/components/concepts/clusters.md), which you administer on the [cluster pages](../manage-clusters/index.md). To learn how environments and clusters relate, see [environments](/components/concepts/environments.md).
 
