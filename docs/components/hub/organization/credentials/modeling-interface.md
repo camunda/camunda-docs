@@ -13,22 +13,26 @@ This page covers credentials that authenticate connector tasks, such as an AWS C
 
 ## Select a credential
 
-Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials on the cluster that match the credential type the connector needs.
+Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials deployed to the connected cluster that match the credential type the connector needs. On a Self-Managed cluster with several environments, the chooser also lists credentials deployed only to another environment on that cluster; those don't resolve at runtime in the environment you are connected to.
 
-Selecting a credential stores only a reference to it in your diagram. The credential's values stay on the cluster.
+Selecting a credential stores only a reference to it in your diagram. The credential's values stay in the environment they were deployed to.
 
-If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist on the cluster, or it was created for a different credential type.
+If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential doesn't exist on the connected cluster, or it was created for a different credential type.
 
 ## What you can do in the chooser
 
-What the chooser offers depends on your permissions on the cluster. Camunda Hub checks your permissions once per cluster connection.
+What the chooser offers depends on whether you can edit the diagram, that is, whether you have edit access to the project.
 
-| Situation                                                                    | Available actions                                 |
-| ---------------------------------------------------------------------------- | ------------------------------------------------- |
-| Permission to create credentials                                             | Select a credential, or create a new one.         |
-| Permission to update credentials, and the selected credential is compatible  | Select a credential, or edit the selected one.    |
-| Permission to update credentials, and the selected credential is out of date | Select a credential, or upgrade the selected one. |
-| No permission to create or update credentials                                | Select a credential only.                         |
+| Situation                                                            | Available actions                                 |
+| -------------------------------------------------------------------- | ------------------------------------------------- |
+| You can edit the diagram                                             | Select a credential, or create a new one.         |
+| You can edit the diagram, and the selected credential is compatible  | Select a credential, or edit the selected one.    |
+| You can edit the diagram, and the selected credential is out of date | Select a credential, or upgrade the selected one. |
+| You cannot edit the diagram                                          | Select a credential only.                         |
+
+This only controls what the chooser offers. On the [**Credentials** page](./index.md#permissions), any member of your organization who has access to Camunda Hub can manage credentials, and the cluster's own authorizations apply whenever Hub writes a credential to it.
+
+The chooser is unavailable while you aren't connected to an environment, while you work offline, while the connected environment is paused, or when it runs a Camunda version before 8.10. The field tells you which of these applies.
 
 A connector declares the minimum credential version it needs. A newer credential always satisfies an older requirement, so upgrading is only needed when a credential is older than the connector requires.
 
@@ -39,8 +43,8 @@ To create a credential from the properties panel:
 1. Open the credential field, then select the option to create a new credential.
 2. Enter a **Credential name**. Camunda Hub suggests a **Credential ID** based on the name.
 3. Change the **Credential ID** if you want a different one. You cannot change it after the credential is created.
-4. Fill in the fields for this credential type. For a sensitive field, enter a reference to a secret that already exists on the cluster, using `camunda.secrets.` followed by the secret key, such as `camunda.secrets.AWS_SECRET_KEY`.
-5. Save the credential. Camunda Hub creates it on the cluster and selects it on the connector task.
+4. Fill in the fields for this credential type. For a sensitive field, enter a reference to a secret that already exists on the cluster, using `camunda.secrets.` followed by the secret key, such as `camunda.secrets.AWS_SECRET_KEY`. Select the field to pick from the secrets on the cluster behind the connected environment.
+5. Save the credential. Camunda Hub creates it in the connected environment and selects it on the connector task.
 
 Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. Saving is still allowed, so replace the value with a reference to keep the sensitive value in the secrets vault. For the reference syntax, see [reference a secret from a credential field](./index.md#reference-a-secret-from-a-credential-field).
 
@@ -52,11 +56,11 @@ A value that embeds `camunda.secrets.` mid-word, such as `foo.camunda.secrets.AW
 You cannot create the secret itself here. Add the secret to the cluster first in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md), then reference it from the credential.
 :::
 
-A credential you create here is managed in Camunda Hub immediately. It appears on the **Managed** tab of the [**Credentials** page](./index.md#managed-credentials).
+A credential you create here is managed in Camunda Hub immediately. It appears on the **Managed in Hub** tab of the [**Credentials** page](./index.md#managed-credentials).
 
 ## Edit or upgrade a credential
 
-Editing a credential opens the same form, pre-filled with its current values. Saving replaces the credential's values on the cluster, which takes effect immediately for every process that references it.
+Editing a credential opens the same form, pre-filled with its current values. Saving replaces the credential's values in the environment, which takes effect immediately for every process that references it.
 
 Upgrading a credential opens the same form and shows the fields that the newer credential version adds. Fill them in and save to make the credential usable with the connector version you are modeling against.
 

@@ -4,6 +4,9 @@ title: Extract unstructured data
 description: "Unstructured data extraction allows you to extract data from unstructured documents."
 ---
 
+import IdpUploadDocumentsUnstructuredImg from './img/idp-upload-documents-unstructured.png';
+import IdpExtractionFieldsImg from './img/idp-extraction-fields-unstructured.png';
+import IdpExtractionFieldsDetailsImg from './img/idp-extraction-fields.png';
 import IdpValidationResultsDetailImg from './img/idp-validation-results-detail.png';
 import IdpValidationResultsSummaryImg from './img/idp-summary.png';
 import IdpVersionsLinkImg from './img/idp-versions-link.png';
@@ -23,6 +26,8 @@ Complete the following steps to configure and publish an unstructured data docum
 ## Step 1: Upload documents {#upload-documents}
 
 Start by uploading a set of sample PDF documents that represent the specific document type you want to extract data from:
+
+<img src={IdpUploadDocumentsUnstructuredImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
 
 1. Click **Upload documents** to browse for and upload your sample document(s).
 1. Once you have finished uploading your sample document(s) and want to start testing data extraction, either:
@@ -48,9 +53,13 @@ On the **Extract data** tab, add the data [extraction fields](idp-key-concepts.m
 - Add a separate extraction field for each piece of information you want to extract. For example, for an invoice, you might add a field for the invoice ID, date, customer name, amount, and so on.
 - You can then extract data from your sample document(s) using your chosen LLM extraction model, edit and refine your fields, and save the extracted data as a test case to compare outcomes across different extraction models.
 
+<img src={IdpExtractionFieldsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
+
 ### Add extraction fields {#add-fields}
 
 Add an extraction field for each piece of data you want to extract from your document(s):
+
+<img src={IdpExtractionFieldsDetailsImg} alt="Data extraction fields" width="700px" style={{marginTop: '0'}} />
 
 1. **Field name**: Enter a descriptive name for the field.
    - The name format should follow [FEEL naming convention](/components/modeler/feel/language-guide/feel-variables.md#variable-names), for example it is case sensitive and should not include spaces.
