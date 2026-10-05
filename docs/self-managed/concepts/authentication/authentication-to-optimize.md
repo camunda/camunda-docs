@@ -32,13 +32,13 @@ Note the following:
 
 - `issuer-uri` must match the issuer your IdP puts in the `id_token`.
 - `audiences` must contain every audience your IdP issues for Optimize, plus the audience of any other application that calls Optimize on a user's behalf, such as Camunda Hub. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the audiences the component-specific keys covered.
-- Optimize classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token it can't classify is treated as a user's, and checked against your configured Optimize permission.
+- Optimize classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token it can't classify as an M2M client's is treated as a user's, and checked against your configured Optimize permission.
 
 :::note
 If you deploy with the Camunda Helm chart, you don't need to set `issuer-uri`, `client-id`, `client-secret`, or `audiences` directly. The chart continues to read the same `global.identity.auth.optimize.*` values you already use, and renders them into the properties above for you.
 :::
 
-For `username-claim` and `client-id-claim` in a Helm deployment, the chart renders the same defaults the Orchestration Cluster uses (`preferred_username` and `client_id`). See the [setup instructions for your identity provider](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for guidance on what values to use. If your identity provider issues the client ID under a different claim (for example, Microsoft Entra's `azp`), set it through `optimize.extraConfiguration`:
+The chart doesn't set `username-claim` or `client-id-claim` for Optimize. Left unset, `username-claim` falls back to its software default of `sub`, and `client-id-claim` has no default at all, so Optimize can't classify any client token as M2M until you set it — every bearer token is then checked against your configured Optimize permission. Set both explicitly through `optimize.extraConfiguration`, matching the values your identity provider uses (for example, `preferred_username` and `client_id` for Keycloak). See the [setup instructions for your identity provider](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for other providers:
 
 ```yaml
 optimize:
@@ -49,7 +49,8 @@ optimize:
           security:
             authentication:
               oidc:
-                client-id-claim: azp
+                username-claim: preferred_username
+                client-id-claim: client_id
 ```
 
 ## Authenticate API requests
