@@ -852,7 +852,7 @@ Object variables are not flattened into per-property fields, and their raw value
 
 ### Optimize adopts the shared authentication implementation
 
-<!-- https://github.com/camunda/camunda/issues/58600 -->
+<!-- https://github.com/camunda/product-hub/issues/3607, https://github.com/camunda/camunda/issues/58600 -->
 
 Optimize now authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
 
@@ -2141,7 +2141,7 @@ Business ID is now visible in Operate for decision instances, in both the decisi
 
 #### Optimize adopts the shared authentication implementation
 
-<!-- https://github.com/camunda/camunda/issues/58600 -->
+<!-- https://github.com/camunda/product-hub/issues/3607, https://github.com/camunda/camunda/issues/58600 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
