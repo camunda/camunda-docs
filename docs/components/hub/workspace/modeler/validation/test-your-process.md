@@ -5,7 +5,7 @@ description: "Test mode lets you validate your process against a selected enviro
 keywords: ["test", "test mode", "test case", "test studio", "validation"]
 ---
 
-Test mode is a Zeebe-powered testing environment within Camunda Hub for validating a process at any stage of development. Select any environment assigned to your workspace, for example a development, test, stage, or production environment, and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders — all within Test mode.
+Test mode is a Zeebe-powered testing environment within Camunda Hub for validating a process at any stage of development. Select any environment assigned to your workspace, for example a development, test, stage, or production environment, and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders, all within Test mode.
 
 ## Opening the Test tab
 

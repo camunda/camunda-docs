@@ -63,7 +63,7 @@ Use the Camunda Hub API to assign environments as part of your workspace setup o
 | `PUT`  | `/workspaces/{workspaceKey}/environments` | Replace the environments assigned to a workspace with the ones you send.   |
 | `GET`  | `/projects/{projectKey}/environments`     | List the environments a project can use. This is the set of its workspace. |
 
-The `PUT` request takes an `environmentIds` list of up to 500 environment IDs, and replaces the complete set. To unassign an environment, send the list without it. To unassign all, send an empty list.
+The `PUT` request takes an `environmentIds` list of up to 500 environment IDs, and replaces the complete set. To unassign an environment, send the list without it. To unassign all environments, send an empty list.
 
 See the API reference for [SaaS](/apis-tools/hub-api-saas/specifications/update-workspace-environments.api.mdx) and [Self-Managed](/apis-tools/hub-api-sm/specifications/update-workspace-environments.api.mdx).
 
