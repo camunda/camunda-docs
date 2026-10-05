@@ -312,6 +312,8 @@ In the case of a merge conflict, select between your local Camunda Hub changes a
 
 Once the pull is complete and any merge conflicts are resolved, Camunda Hub will push its changes. The newly created snapshot is now accessible via the **View snapshot** button in the success notification.
 
+On push, Hub writes the project link into a `camunda.json` file in the repository, so Desktop Modeler and `c8ctl` recognize the folder as the same project. Hub never overwrites a link that points to a different project.
+
 ## Manage existing configurations
 
 Existing Git configurations can be edited from the gear icon beside the **Sync with \<GitProvider\>** button. Permission to update these settings are limited to **Workspace Admins**.
