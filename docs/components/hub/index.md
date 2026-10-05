@@ -12,7 +12,7 @@ import IntegrationIcon from "@site/docs/components/assets/icon-integration.png";
 import OptimizeIcon from "@site/docs/components/assets/icon-optimize.png";
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import ConnectorsIcon from "@site/docs/components/assets/icon-connectors.png";
-import { BriefcaseIcon, ServerIcon, KeyRoundIcon } from "@site/docs/components/assets/hub-icons";
+import { BriefcaseIcon, FolderOpenIcon, ServerIcon, KeyRoundIcon } from "@site/docs/components/assets/hub-icons";
 import HubStructureImg from "./img/organization-structure.png";
 import HubWorkspacesImg from "./img/workspace-environments.png";
 import AoGrid from '../react-components/\_ao-card';
@@ -128,7 +128,7 @@ Discover and use approved reusable assets, manage projects, and deliver business
 {
 link: "./workspace/manage-projects",
 title: "Manage projects",
-image: DocsIcon,
+image: FolderOpenIcon,
 description: "Develop project releases through the stages of a typical development lifecycle.",
 },
 {
