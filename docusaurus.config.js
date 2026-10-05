@@ -539,7 +539,7 @@ module.exports = {
             },
             {
               label: "Downloads",
-              to: "/downloads",
+              to: "https://docs.camunda.io/downloads/",
             },
             {
               label: "Academy",
@@ -570,7 +570,7 @@ module.exports = {
             '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
-          to: "build-with-camunda",
+          to: "https://docs.camunda.io/build-with-camunda/",
           position: "right",
           className: "button button--primary button--md try-free",
           label: "Try Free",
@@ -592,7 +592,7 @@ module.exports = {
           items: [
             {
               label: "Try free",
-              to: "/build-with-camunda",
+              to: "https://docs.camunda.io/build-with-camunda/",
             },
             {
               label: "Support and feedback",
@@ -608,7 +608,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/8.7/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/8.7/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
+              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
@@ -629,7 +629,7 @@ module.exports = {
           items: [
             {
               label: "Downloads",
-              to: "/downloads",
+              to: "https://docs.camunda.io/downloads/",
             },
             {
               label: "Camunda Hub",

@@ -20,8 +20,6 @@ The version selector at the top right in the problems panel can be used to choos
 
 The version selector also provides information about the number of clusters available for each Zeebe version within the current organization.
 
-![error panel](img/diagram-errors/version-selector.png)
-
 ### Interactivity
 
 The errors are interactive. Clicking on the row highlights the corresponding element in the canvas and points to the specific property in the properties panel where you can resolve the issue.

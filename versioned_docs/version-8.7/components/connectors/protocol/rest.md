@@ -257,7 +257,7 @@ To upload a file, you can take advantage of [Camunda document handling](/compone
 Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON object (base64 encoded).
 
 - **Binary**: The file will be uploaded as a binary object. The `Content-Type` header **must** be set to `multipart/form-data`. The body must a map, where the key is the name of the file field and the value is a document reference.
-  ![connectors-rest-upload](../../../../../docs/images/connectors/connectors-rest-upload.png)
+
 - **JSON**: The file will be uploaded as a JSON object. The `Content-Type` header **must** be set to `application/json` (this is the default). The body must be a map, where the key is the name of the file field and the value is a document reference, similar to the binary upload. The file will be **base64 encoded** and included in the JSON object.
 
 ### Encoding

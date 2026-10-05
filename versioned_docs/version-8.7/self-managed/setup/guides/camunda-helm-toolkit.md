@@ -7,7 +7,7 @@ description: "Prepare Camunda 8.7 Helm overrides for 8.8 with the local Web UI o
 
 Use the Camunda Helm Toolkit to prepare your Helm override files for an upgrade from Camunda 8.7 to 8.8.
 
-The toolkit rewrites supported configuration keys and reports changes that need your attention. It doesn't upgrade your deployment, migrate stored data, or replace the <a href="/docs/8.8/self-managed/upgrade/helm/870-to-880/" target="_blank" rel="noopener noreferrer">Helm upgrade procedure for 8.7 to 8.8</a>.
+The toolkit rewrites supported configuration keys and reports changes that need your attention. It doesn't upgrade your deployment, migrate stored data, or replace the Helm upgrade procedure for 8.7 to 8.8.
 
 ## Check version compatibility
 
@@ -151,4 +151,4 @@ The Web UI has no authentication. Keep the `127.0.0.1` port binding and don't ex
 
 Treat input files, migrated files, and reports as potentially sensitive. They can contain configuration values, including credentials. Review them before sharing or committing them.
 
-After reviewing the results, continue with <a href="/docs/8.8/self-managed/upgrade/helm/870-to-880/" target="_blank" rel="noopener noreferrer">upgrading Camunda 8.7 to 8.8 using Helm</a>. The toolkit doesn't replace backups, non-production testing, or the required deployment and data-migration steps.
+After reviewing the results, continue with upgrading Camunda 8.7 to 8.8 using Helm. The toolkit doesn't replace backups, non-production testing, or the required deployment and data-migration steps.

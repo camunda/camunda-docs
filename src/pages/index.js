@@ -1,12 +1,9 @@
-import React from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
-import AlgoliaSearchBox from "@theme/SearchBar";
-import iconBuildWithAi from "../../docs/components/assets/icon-agentic.png";
 
 const features = [
   {
@@ -15,13 +12,6 @@ const features = [
     url: "/docs/guides",
     description:
       "New to Camunda 8? Create an account and start modeling your first process.",
-  },
-  {
-    title: "Build with AI",
-    imageUrl: iconBuildWithAi,
-    url: "/docs/guides/build-with-ai/overview/",
-    description:
-      "Build Camunda solutions with AI-ready workflows and agentic orchestration.",
   },
   {
     title: "Using Camunda",
@@ -43,6 +33,13 @@ const features = [
     url: "/docs/apis-tools/working-with-apis-tools/",
     description:
       "Explore Zeebe client libraries, Camunda component APIs, and SDKs.",
+  },
+  {
+    title: "Best Practices",
+    imageUrl: "img/home-bp.png",
+    url: "/docs/components/best-practices/best-practices-overview/",
+    description:
+      "Level up your BPMN and DMN skills, including insights from consulting and the community.",
   },
   {
     title: "Reference",
@@ -82,25 +79,9 @@ function Feature({ imageUrl, url, title, description }) {
   );
 }
 
-const search_agentic_url =
-  "/docs/components/agentic-orchestration/agentic-orchestration-overview/";
-const search_agent_url = "/docs/guides/getting-started-agentic-orchestration/";
-const search_idp_url = "/docs/components/modeler/web-modeler/idp/";
-const release = "/docs/reference/announcements-release-notes/overview/";
-const search_migrate_url = "/docs/guides/migrating-from-camunda-7/";
-const search_feel_url = "/docs/components/modeler/feel/what-is-feel/";
-
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
-
-  const openKapa = () => {
-    if (typeof window !== "undefined" && window.Kapa?.open) {
-      window.Kapa.open({});
-    } else {
-      console.warn("Kapa widget is not loaded yet.");
-    }
-  };
 
   return (
     <Layout
@@ -111,20 +92,6 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div className="homeSearch">
-            <AlgoliaSearchBox />
-          </div>
-          <p className="popular" style={{ color: "#ccc" }}>
-            <strong style={{ paddingRight: "20px" }}>Popular:</strong>{" "}
-            <Link to={useBaseUrl(search_agentic_url)}>
-              Agentic orchestration
-            </Link>
-            <Link to={useBaseUrl(search_agent_url)}>Build an AI agent</Link>
-            <Link to={useBaseUrl(search_idp_url)}>IDP</Link>
-            <Link to={useBaseUrl(release)}>Release notes</Link>
-            <Link to={useBaseUrl(search_migrate_url)}>Camunda 7 migration</Link>
-            <Link to={useBaseUrl(search_feel_url)}>What is FEEL</Link>
-          </p>
           <div className={clsx("row", styles.buttonsWrapper)}>
             <div className={clsx("", styles.buttons)}>
               <Link
@@ -144,10 +111,12 @@ function Home() {
                   "button button--outline button--secondary button--lg sign-up",
                   styles.getStarted
                 )}
-                to={useBaseUrl("build-with-camunda")}
-                title="Try Camunda 8 for free"
+                to={useBaseUrl(
+                  "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
+                )}
+                title="Sign up for Camunda 8 SaaS"
               >
-                Try free
+                Sign up
               </Link>
             </div>
           </div>
@@ -165,56 +134,6 @@ function Home() {
             </div>
           </section>
         )}
-        <div className={clsx("hero hero--secondary", styles.heroBanner)}>
-          <div className="container">
-            <h2 className="hero__title">What's new</h2>
-            <p className="hero__subtitle">
-              Check out some of our latest features
-            </p>
-            <div className={styles.buttons}>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case",
-                  styles.getStarted
-                )}
-                to={useBaseUrl(search_agentic_url)}
-              >
-                Agentic Orchestration
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/890/whats-new-in-89/"
-                )}
-              >
-                What's new in 8.9
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/890/890-release-notes/"
-                )}
-              >
-                8.9 release notes
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/apis-tools/java-client/getting-started/")}
-              >
-                Java client
-              </Link>
-            </div>
-          </div>
-        </div>
       </main>
     </Layout>
   );

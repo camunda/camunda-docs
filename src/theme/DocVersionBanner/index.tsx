@@ -108,7 +108,7 @@ function LatestVersionSuggestionLabel({
       }}
     >
       {
-        " For current release documentation, see {latestVersionLink} ({versionLabel})."
+        " For current release documentation, see {latestVersionLink}."
       }
     </Translate>
   );
@@ -156,7 +156,7 @@ function DocVersionBannerEnabled({
         <BannerLabel siteTitle={siteTitle} versionMetadata={versionMetadata} />
         <LatestVersionSuggestionLabel
           versionLabel={latestVersionSuggestion.label}
-          to={latestVersionSuggestedDoc.path}
+          to='https://docs.camunda.io/'
           onClick={() => savePreferredVersionName(latestVersionSuggestion.name)}
         />
       </div>
