@@ -1308,6 +1308,20 @@ Leader election priorities respect region boundaries, preferring region-local le
 
 <p class="link-arrow">[Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)</p>
 
+### Restore API for Orchestration Cluster backups
+
+<!-- https://github.com/camunda/product-hub/issues/2302 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+You can now restore an Orchestration Cluster from a backup through the Restore API, without restarting the brokers or running the restore application on each broker. The Restore API works with Elasticsearch, OpenSearch, and relational database secondary storage. While a restore runs, the cluster is in recovery mode and processes no work.
+
+- Switch the cluster into recovery mode and trigger the restore with two non-blocking requests. Each returns a `changeId` that you use to track progress, so you can script and rehearse disaster recovery.
+- Restore from selected backups, and validate a request first with `dryRun=true`, which returns the planned operations without changing the cluster.
+- In a cluster with physical tenants, restore your own tenant with `/v2/restore`, or restore one or all tenants with `/cluster/v2/restore` as a cluster admin.
+
+<p class="link-arrow">[Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
+
 ### S3-compatible object stores for Document Handling
 
 <!-- https://github.com/camunda/product-hub/issues/3507 -->
