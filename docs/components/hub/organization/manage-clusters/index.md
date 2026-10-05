@@ -38,16 +38,17 @@ The page lists your clusters. Each cluster shows the following details:
 
 The status of a cluster reflects its state. It updates automatically while the cluster changes state, and settles on the health of the cluster when the change completes.
 
-| Status      | Description                                                                                               |
-| :---------- | :-------------------------------------------------------------------------------------------------------- |
-| Healthy     | The cluster is running.                                                                                   |
-| Unhealthy   | The cluster reports a problem.                                                                            |
-| Unknown     | Camunda Hub can't determine the status.                                                                   |
-| Creating    | The cluster is being created.                                                                             |
-| Updating    | The cluster is being updated.                                                                             |
-| Unavailable | The cluster is under maintenance or waiting for input.                                                    |
-| Paused      | The cluster is paused. You can [resume](/components/saas/clusters/manage-cluster.md#resume-a-cluster) it. |
-| Resuming    | The cluster is starting after being resumed.                                                              |
+| Status            | Description                                                                                               |
+| :---------------- | :-------------------------------------------------------------------------------------------------------- |
+| Healthy           | The cluster is running.                                                                                   |
+| Unhealthy         | The cluster reports a problem.                                                                            |
+| Unknown           | Camunda Hub can't determine the status.                                                                   |
+| Creating          | The cluster is being created.                                                                             |
+| Updating          | The cluster is being updated.                                                                             |
+| Under maintenance | The cluster is under maintenance.                                                                         |
+| Waiting for input | The cluster is waiting for input.                                                                         |
+| Paused            | The cluster is paused. You can [resume](/components/saas/clusters/manage-cluster.md#resume-a-cluster) it. |
+| Resuming          | The cluster is starting after being resumed.                                                              |
 
 ## Add a cluster
 
