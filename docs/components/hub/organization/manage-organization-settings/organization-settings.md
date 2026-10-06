@@ -45,16 +45,17 @@ If you are the owner of the organization, you can change the organization name.
 
 The following pages describe how to manage your SaaS organization:
 
-| Task                                        | Where to find it                                                                          |
-| :------------------------------------------ | :---------------------------------------------------------------------------------------- |
-| Add and manage users, groups, and roles     | [Manage users and roles](../users-and-roles.md)                                           |
-| View user and cluster activity              | [View organization activity](/components/saas/organization/view-organization-activity.md) |
-| Monitor your usage                          | [View usage history](/components/saas/organization/usage-history.md)                      |
-| Get notified when usage reaches a threshold | [View usage alerts](/components/saas/organization/usage-alerts.md)                        |
-| Opt in to alpha features                    | [Enable alpha features](/components/saas/organization/enable-alpha-features.md)           |
-| Sign in with your own identity provider     | [Connect to an identity provider](/components/saas/organization/external-sso.md)          |
-| Work in more than one organization          | [Switch organization](/components/saas/organization/switch-organization.md)               |
-| Manage your plan, billing, and reservations | [Create an account](/components/saas/organization/manage-plan/create-account.md)          |
+| Task                                        | Where to find it                                                                                        |
+| :------------------------------------------ | :------------------------------------------------------------------------------------------------------ |
+| Add and manage users, groups, and roles     | [Manage users and roles](../users-and-roles.md)                                                         |
+| View user and cluster activity              | [View organization activity](/components/saas/organization/view-organization-activity.md)               |
+| Monitor your usage                          | [View usage history](/components/saas/organization/usage-history.md)                                    |
+| Get notified when usage reaches a threshold | [View usage alerts](/components/saas/organization/usage-alerts.md)                                      |
+| Opt in to alpha features                    | [Enable alpha features](/components/saas/organization/enable-alpha-features.md)                         |
+| Sign in with your own identity provider     | [Connect to an identity provider](/components/saas/organization/external-sso.md)                        |
+| Work in more than one organization          | [Switch organization](/components/saas/organization/switch-organization.md)                             |
+| View and change your plan                   | [Available plans](/components/saas/organization/manage-plan/available-plans.md)                         |
+| Update your billing reservations            | [Update billing reservations](/components/saas/organization/manage-plan/update-billing-reservations.md) |
 
 </TabItem>
 
