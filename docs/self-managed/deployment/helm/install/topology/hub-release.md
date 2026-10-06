@@ -165,7 +165,7 @@ Adapt the Keycloak endpoints and client configuration for your environment. See 
 ## Describe a chart 8.7 cluster
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](/self-managed/reference-architecture/deployment-topology.md#minimum-chart-versions).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](/self-managed/deployment/helm/install/topology/index.md#minimum-chart-versions).
 :::
 
 An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, 8.9, and 8.10 charts. Records for 8.8, 8.9, and 8.10 clusters all take the standard shape shown above.
