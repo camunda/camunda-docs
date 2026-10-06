@@ -103,7 +103,7 @@ This unified architecture ensures seamless communication, consistent state manag
 
 [Optimize](/components/optimize/what-is-optimize.md) is a business intelligence tool for analyzing bottlenecks and examining improvements in automated processes. It analyzes process data exported by an Orchestration Cluster.
 
-Optimize is deployed separately from the Orchestration Cluster, one instance per Physical Tenant, because each instance reads exported records from a single index prefix. Optimize requires Management Identity. It can use the Management Identity in the management plane, shared with Camunda Hub, instead of running its own. Optimize can't use the Orchestration Cluster's Admin.
+Optimize is deployed separately from the Orchestration Cluster, one instance per Physical Tenant, because each instance reads exported records from a single index prefix. Optimize requires Management Identity and can't use the Orchestration Cluster's Admin. It can use the Management Identity in the management plane, shared with Camunda Hub, or a separate one when Physical Tenants need identical logical tenant IDs enforced independently. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants).
 
 #### Admin vs Management Identity
 
