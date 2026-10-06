@@ -39,7 +39,7 @@ The chart deploys workloads and wires them to the endpoints you give it. Everyth
 | Kubernetes workloads, services, secrets wiring, and volumes    | The chart                                  |
 | Management Identity presets and Camunda Hub cluster inventory  | The chart, from `global.topology.clusters` |
 
-Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts. Provision these before you install. See [deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts. Provision these before you install. See [deploy required dependencies](./operator-based-infrastructure.md).
 
 ## Provide application settings
 
