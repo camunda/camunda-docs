@@ -17,7 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-region-overview.png';
 import AgentPanel from '../../img/whats-new-agent-monitoring.png';
 import overviewImg from '../../../components/optimize/assets/agentic-control-plane-overview.png';
@@ -195,10 +195,7 @@ Provider and backend selection are now decoupled. For example, the Anthropic pro
 
 This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manual [migration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) of each element from the current legacy connector.
 
-<ul>
-  <li><span class="link-arrow">[Release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated)</span></li>
-  <li><span class="link-arrow">[Upgrade AI Agent element templates](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md)</span></li>
-</ul>
+<p class="link-arrow">[Upgrade AI Agent element templates](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md)</p>
 
 :::note legacy connector deprecated in 8.10
 The legacy connector is deprecated in 8.10, but is not removed and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
@@ -218,8 +215,7 @@ New features help you more easily configure your agent tools when modeling.
 
 - Changes are explicit, apply only when the correction is deterministic, and can be undone.
 - These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You might need to [update your element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this new feature.
-
-:::
+  :::
 
 <p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
 
@@ -272,10 +268,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
 
 **Standalone evaluation assertions for judge and semantic similarity**: Camunda Process Test now exposes _judge-based evaluation_ and _semantic similarity evaluation_ as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
 
-<ul>
-  <li><span class="link-arrow">[Test your AI agents with Camunda Process Test](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</span></li>
-  <li><span class="link-arrow">[JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions)</span></li>
-</ul>
+<p class="link-arrow">[Test your AI agents with Camunda Process Test](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
 
 ## ProcessOS
 
@@ -356,10 +349,7 @@ Hub introduces the [Hub catalog](/components/hub/organization/manage-catalog/get
 
 Delivery teams can trust that catalog assets have been vetted and approved by the center of excellence. They can discover assets in the catalog, read asset documentation, and apply them when modeling.
 
-<ul>
-  <li><span class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</span></li>
-  <li><span class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</span></li>
-</ul>
+<p class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</p>
 
 #### Business value dashboard
 
@@ -394,9 +384,7 @@ Hub introduces environments as deployment targets where teams run their processe
 - In Self-Managed, each Physical Tenant of a cluster at version 8.10 or later is an environment. In SaaS, each cluster has one environment.
 - When you upgrade, Hub assigns the clusters that your process applications used to their workspaces as environments.
 
-<ul>
-  <li><span class="link-arrow">[Environments](/components/concepts/environments.md)</span></li>
-</ul>
+<p class="link-arrow">[Environments](/components/concepts/environments.md)</p>
 
 #### Project snapshots and file versioning
 
@@ -486,11 +474,7 @@ Camunda Hub and Desktop Modeler introduce credentials. These are authentication 
 - Credentials created outside Hub, for example in Desktop Modeler, can be found by scanning environments and added to Hub for central management.
 - Credentials are stored as cluster variables, so connectors and job workers can reference them by name.
 
-<ul>
-  <li><span class="link-arrow">[Manage credentials](/components/hub/organization/credentials/index.md)</span></li>
-  <li><span class="link-arrow">[Configure credentials in the modeling interface](/components/hub/organization/credentials/modeling-interface.md)</span></li>
-  <li><span class="link-arrow">[Use credentials in Desktop Modeler](/components/modeler/desktop-modeler/credentials.md)</span></li>
-</ul>
+<p class="link-arrow">[Manage credentials](/components/hub/organization/credentials/index.md)</p>
 
 #### Environment connection in Modeler
 
@@ -501,7 +485,6 @@ Connect the modeler in Hub to an [environment](#environments) to model, test, an
 - [Task testing](/components/modeler/task-testing.md), connector credentials, and the **Webhook** tab follow this connection. Your deploy target doesn't change.
 
 This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
-
 Test Studio doesn't follow this connection. It runs against the environment you select in the **Test** tab.
 
 #### Recover deleted resources
@@ -735,11 +718,7 @@ Camunda 8.10 also adds the following capabilities to support multi-region deploy
 - **Region-aware partition placement**: Operators declare which region each broker belongs to using a topology label. The engine distributes partition replicas across regions so no single region holds a quorum for any partition, and leader election prefers region-local leaders under normal conditions. The same mechanism works for availability zone or datacenter isolation.
 - **Async replication support for RDBMS secondary storage**: Asynchronously replicated relational databases, including AWS Aurora and PostgreSQL, are supported as secondary storage. The exporter pauses automatically when the RDBMS endpoint is unreachable, such as during a failover, and replays missing events from the Zeebe log on reconnection without manual data repair.
 
-<ul>
-  <li><span class="link-arrow">[Multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md)</span></li>
-  <li><span class="link-arrow">[Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)</span></li>
-  <li><span class="link-arrow">[RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md)</span></li>
-</ul>
+<p class="link-arrow">[Multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md)</p>
 
 ## Strong tenant isolation via Physical tenants
 
@@ -756,10 +735,7 @@ Camunda 8.10 introduces Physical Tenants for strong physical data isolation with
 - **Identity provider selection**: Identity providers are defined at the cluster level, and each Physical Tenant chooses which ones it accepts. Cluster-wide operations such as topology, backups, and restore are protected by a claim-based cluster admin role.
 - **Logical multi-tenancy on SaaS**: Camunda 8 SaaS officially supports multi-tenancy via tenant identifiers. It is available on clusters running generation 8.8 and later, so you don't need to upgrade to 8.10 to use it.
 
-<ul>
-  <li><span class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</span></li>
-  <li><span class="link-arrow">[Multi-tenancy](/self-managed/concepts/multi-tenancy/index.md)</span></li>
-</ul>
+<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
 ## Business ID
 
@@ -842,11 +818,7 @@ The new `optimize` role deploys Optimize alone. Because one Optimize instance re
 
 `hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
 
-<ul>
-  <li><span class="link-arrow">[Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md)</span></li>
-  <li><span class="link-arrow">[Install the deployment topology](/self-managed/deployment/helm/install/topology/index.md)</span></li>
-  <li><span class="link-arrow">[Configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md)</span></li>
-</ul>
+<p class="link-arrow">[Install the deployment topology](/self-managed/deployment/helm/install/topology/index.md)</p>
 
 ### Camunda Helm Toolkit
 
@@ -870,10 +842,7 @@ Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm
 
 Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
 
-<ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
-</ul>
+<p class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</p>
 
 ### Host network support for orchestration cluster pods
 
@@ -890,10 +859,7 @@ Test Studio in Camunda Hub turns process runs into repeatable tests that you can
 - **Test repair**: When you delete, rename, or change the type of a BPMN element, Test Studio shows which steps broke and lets you fix them in place instead of re-recording the run.
 - **Segment tests**: In Play, capture and rerun targeted sections of a process as low-code integration tests. Ad-hoc subprocesses, and therefore AI agent elements, are not supported in test mode. See the [limitations](/components/hub/workspace/modeler/validation/test-your-process.md).
 
-<ul>
-  <li><span class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</span></li>
-  <li><span class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</span></li>
-</ul>
+<p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
 
 ## Optimize
 
