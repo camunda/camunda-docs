@@ -14,7 +14,7 @@ In Self-Managed, you create users in your IdP and manage them in [Management Ide
 
 To add a user to your organization in Camunda Hub SaaS:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. On the **Users** tab, click **Add new user**.
 1. Enter an **Email address** and select one or more [user roles](./index.md#roles-and-permissions).
 1. Click **Send invite**.
@@ -23,6 +23,6 @@ To add a user to your organization in Camunda Hub SaaS:
 
 To add a user to your organization in Camunda Hub SaaS:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. On the **Users** tab, on a user row, open the vertical ellipsis menu.
 1. Click **Edit user** or **Remove**.

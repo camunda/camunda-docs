@@ -40,7 +40,7 @@ App integrations must be set up before this connector can be used. This is an ad
 
 <TabItem value="saas">
 
-An organization administrator must turn on **Enable app integrations extensions** in the [cluster settings](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions) of every cluster that uses the connector.
+An organization administrator must turn on **Enable app integrations extensions** in the [cluster settings](/components/saas/clusters/settings.md#enable-app-integrations-extensions) of every cluster that uses the connector.
 
 </TabItem>
 
@@ -416,7 +416,7 @@ Resolving it is an administrator task. See [prerequisites](#prerequisites).
 
 | Environment  | Cause                                                              | Fix                                                                                                                                                                                                        |
 | :----------- | :----------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SaaS         | **Enable app integrations extensions** is off for the cluster.     | Ask an organization administrator to enable it in the [cluster settings](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions).                                     |
+| SaaS         | **Enable app integrations extensions** is off for the cluster.     | Ask an organization administrator to enable it in the [cluster settings](/components/saas/clusters/settings.md#enable-app-integrations-extensions).                                                        |
 | Self-Managed | The connector runtime is not configured to reach app integrations. | Complete the [App Integrations connection settings](/self-managed/components/connectors/connectors-configuration.md#connection-settings) and redeploy the runtime.                                         |
 | Self-Managed | The runtime authenticates with OAuth, but no cluster ID is set.    | Set the cluster ID to the cluster's UUID and redeploy the runtime. See [choose an authentication method](/self-managed/components/connectors/connectors-configuration.md#choose-an-authentication-method). |
 

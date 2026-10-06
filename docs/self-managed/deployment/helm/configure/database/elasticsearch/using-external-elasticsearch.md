@@ -159,7 +159,7 @@ If Zeebe pods fail, check for the following error:
 
 ## References
 
-- [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md) (8.8 version not yet available)
+- [Camunda production installation guide with Kubernetes and Helm](/self-managed/deployment/helm/install/production/index.md)
 - [Use external Elasticsearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch.md)
 - [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md)
 

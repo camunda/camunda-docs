@@ -15,6 +15,8 @@ Install Camunda 8.10 Self-Managed as separate Helm releases: one Hub release, on
 
 This is the baseline topology for a new 8.10 production deployment. Each release declares its role through `global.topology.mode`, so the Hub plane and each execution plane have independent lifecycles. For the reasoning, the release-role reference, and the limits of this model, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
 
+The Hub release can be shared across environments. If you're adding an Orchestration Cluster to an existing Hub, update that Hub's cluster inventory and follow the Orchestration Cluster installation steps.
+
 A single `combined` release remains supported and remains the chart default. Use it for evaluation and proofs of concept. See [quick developer install](/self-managed/deployment/helm/install/quick-install.md).
 
 <HelmCliSupport />
