@@ -917,6 +917,14 @@ Optimize now classifies each bearer token as belonging to a user or a machine-to
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#configure-oidc-for-optimize)</p>
 
+### Delete a process definition's data via API
+
+<!-- https://github.com/camunda/product-hub/issues/3716 -->
+
+Optimize now exposes a public API endpoint to delete all analytics data for a given process definition, so you can remove data for retired processes or respond to data removal requests without manually touching Elasticsearch or OpenSearch. The deletion runs asynchronously: the API accepts and queues the request, then processes it in the background.
+
+<p class="link-arrow">[Delete process definition data](/apis-tools/optimize-api/delete-process-definition-data.md)</p>
+
 ### Object variables no longer flattened by default in Self-Managed
 
 <!-- https://github.com/camunda/product-hub/issues/3785 -->
@@ -1322,6 +1330,18 @@ Every cluster has a default physical tenant, so existing setups run unchanged. `
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
+### Process instance suspension and resumption
+
+<!-- https://github.com/camunda/product-hub/issues/3526 -->
+
+You can now suspend and resume a running process instance without canceling it. Suspending halts execution at its current point: no jobs activate or complete, no events correlate, and no timers fire. Resuming picks up from exactly where execution stopped, with no loss of progress or data.
+
+- Suspend or resume a single instance, or a batch of instances, from Operate or the REST API.
+- You can still read and update variables on a suspended instance, so you can fix data before resuming.
+- Timers that come due during a suspension fire immediately on resume. Messages and signals are not correlated to a suspended instance.
+
+<p class="link-arrow">[Suspend and resume a process instance](/components/operate/userguide/suspend-resume-process-instance.md)</p>
+
 ### Rebalance API for coordinated leadership transfer
 
 <!-- https://github.com/camunda/product-hub/issues/3630 -->
@@ -1379,6 +1399,14 @@ Document Handling now supports any S3-compatible object store such as MinIO, Clo
 - No migration is required for existing AWS S3 deployments.
 
 <p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md)</p>
+
+### Secure connectivity with AWS inbound PrivateLink for Camunda 8.7
+
+<!-- https://github.com/camunda/product-hub/issues/3651 -->
+
+Camunda 8.7 SaaS on AWS now supports inbound AWS PrivateLink with cluster authentication. Follow the Secure connectivity guide to configure your VPC endpoint.
+
+<p class="link-arrow">[Secure connectivity (AWS PrivateLink)](/components/saas/secure-connectivity/index.md)</p>
 
 ### Select a DMN version with a FEEL expression
 
@@ -1454,6 +1482,14 @@ Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `c
 User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+### Unified frontend application for Admin, Operate, and Tasklist
+
+<!-- https://github.com/camunda/product-hub/issues/3456 -->
+
+Operate, Tasklist, and Admin are now accessed from a single frontend application with shared navigation, consistent design patterns, and unified deployment. Your user preferences, such as dark or light mode, are applied across all views.
+
+<p class="link-arrow">[Operate overview](/components/operate/operate-introduction.md)</p>
 
 ### Upgrade readiness APIs
 
