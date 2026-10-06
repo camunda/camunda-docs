@@ -24,7 +24,7 @@ You do not need to perform this migration again if you already did this when upg
 
 ## About
 
-Camunda 8.7 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task ([formerly named Zeebe user task](/reference/announcements-release-notes/870/870-release-notes.md#zeebe-user-tasks-modeling-migration-support-saasself-managedmodeler)).
+Camunda 8.7 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task (formerly named Zeebe user task).
 
 Camunda user tasks have several benefits compared to Job worked-based user tasks, including:
 
