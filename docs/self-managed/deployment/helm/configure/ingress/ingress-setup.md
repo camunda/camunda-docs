@@ -306,7 +306,9 @@ The Zeebe Gateway serves gRPC, so your Ingress controller must send HTTP/2 to th
 | Contour            | `projectcontour.io/upstream-protocol.h2c: "26500"`   | Orchestration Cluster `Service`           |
 | Ingress-nginx      | `nginx.ingress.kubernetes.io/backend-protocol: GRPC` | Zeebe `Ingress` (added by the Helm chart) |
 
-Check your controller's documentation for its own equivalent. With Contour, set the annotation on the Orchestration Cluster service, and use `projectcontour.io/upstream-protocol.h2` instead when the upstream itself uses TLS:
+When the upstream itself uses TLS, use `projectcontour.io/upstream-protocol.h2` with Contour, and `nginx.ingress.kubernetes.io/backend-protocol: GRPCS` with ingress-nginx. For other controllers, check their documentation for the equivalent.
+
+With Contour, set the annotation on the Orchestration Cluster service:
 
 ```yaml
 orchestration:
@@ -332,6 +334,10 @@ An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with 
    ```
 
 The setup doesn't require [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly configured, it retrieves the certificate from ACM based on the host name.
+
+### Use the GKE Ingress
+
+With the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need `cloud.google.com/app-protocols` annotations on the Zeebe Gateway service. For details, see the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
 
 ## Troubleshooting
 

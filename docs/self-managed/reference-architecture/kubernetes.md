@@ -408,4 +408,4 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 
 #### Load balancer
 
-If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need to use `cloud.google.com/app-protocols` annotations in the **Zeebe Gateway** service. For more details, visit the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
+If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), see [use the GKE Ingress](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#use-the-gke-ingress) for the annotations the Zeebe Gateway service needs.
