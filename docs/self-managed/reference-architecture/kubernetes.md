@@ -121,6 +121,8 @@ Camunda 8 deployments separate workloads into three logical groups, each install
 
 Deploy these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). This separation gives each group an independent lifecycle, improves isolation, and allows flexible scaling. Deploying all components in a single `combined` release remains supported, and suits evaluation and smaller environments.
 
+The Hub namespace can serve Orchestration Clusters across multiple environments and isn’t tied to a single environment.
+
 Separate releases enable:
 
 - Independent scaling, upgrade, and removal of each Orchestration Cluster
