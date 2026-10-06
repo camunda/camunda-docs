@@ -41,7 +41,7 @@ Both lists work the same way. The rest of this page uses "runtime" for both. In 
 
 ## Change the runtime connection
 
-Until you choose a runtime or deploy the diagram, **Runtime** might show **Not connected**. After a successful deployment, **Runtime** shows the environment you deployed to, unless you've already chosen a runtime for this diagram. To connect:
+If your organization uses environments, **Runtime** shows **Not connected** until you choose a runtime or deploy the diagram. After a successful deployment, it shows the environment you deployed to, unless you've already chosen a runtime for this diagram. To connect:
 
 1. Open a BPMN diagram.
 1. At the bottom of the modeling interface, next to **Check problems against**, click **Runtime**.
