@@ -492,17 +492,6 @@ Camunda Hub and Desktop Modeler introduce credentials. These are authentication 
   <li><span class="link-arrow">[Use credentials in Desktop Modeler](/components/modeler/desktop-modeler/credentials.md)</span></li>
 </ul>
 
-#### Environments
-
-An environment is the named place where a team deploys and runs its processes in Camunda Hub, for example a `payments-prod` environment for the payments team. Clusters remain the infrastructure underneath, managed by organization admins.
-
-- Teams deploy to an environment instead of a cluster, and work with the environments assigned to their workspace.
-- Organization admins assign environments to workspaces. A workspace can have any number of environments.
-- On Self-Managed 8.10 clusters, each Physical Tenant is an environment. On SaaS, and on clusters before 8.10, a cluster is one environment.
-- Environments carry the tags of their cluster, such as `dev`, `test`, `stage`, or `prod`, so you can see which stage of your development lifecycle each one serves.
-
-<p class="link-arrow">[Environments](/components/concepts/environments.md)</p>
-
 #### Environment connection in Modeler
 
 Connect the modeler in Hub to an [environment](#environments) to model, test, and review against your real runtime, instead of building in isolation.
@@ -621,7 +610,7 @@ As a Camunda 8 SaaS user, your data was migrated to the new organizational struc
 During the migration:
 
 - Any process application nested inside a folder moved to the top level of its project.
-- Any files or folders located directly in a project, not inside a process application, were automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. You can rename this application, [move content out of it](#organizing-the-general-process-application), or otherwise reorganize it as with any other process application.
+- Any files or folders located directly in a project, not inside a process application, were automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. You can rename this application, [move content out of it](#organize-the-general-process-application), or otherwise reorganize it as with any other process application.
 - Git sync and cluster settings on existing process applications migrated unchanged along with your data.
 
 During the migration, Web Modeler was briefly unavailable. Clusters and running processes were unaffected and continued executing normally.
