@@ -788,6 +788,25 @@ Camunda 8.10 is the last release that provides the dashboards in the classic for
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Application configuration Helm keys deprecated {#application-configuration-helm-keys-deprecated}
+
+Starting with Camunda 8.10, Helm chart values that only proxy a single application property are deprecated in favor of the component's `extraConfiguration`. The chart keeps the Kubernetes settings it is responsible for, such as resources, scheduling, endpoints, and secrets, and stops mirroring the application's own configuration.
+
+The deprecated keys continue to work in 8.10. When you set one to a non-default value, `helm install` and `helm upgrade` log a `[camunda][warning] DEPRECATION` message that names the key and where to configure it instead.
+
+**Action:** Move the deprecated keys in your `values.yaml` to the component's `extraConfiguration`. If you set both, the `extraConfiguration` value takes precedence. Use the deprecation messages from your own upgrade as the up-to-date list of keys for your chart version.
+
+<p className="link-arrow">[Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-8100.md#deprecated-application-configuration-helm-keys)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">

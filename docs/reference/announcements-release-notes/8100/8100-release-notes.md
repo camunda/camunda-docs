@@ -486,6 +486,16 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
 
+### Application configuration Helm keys deprecated
+
+<!-- https://github.com/camunda/product-hub/issues/3755 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+Helm chart values that only proxy a single application property are deprecated in favor of the component's `extraConfiguration`, so application settings live in the component's own configuration. The deprecated keys continue to work in 8.10, and setting one to a non-default value logs a deprecation warning.
+
+<p class="link-arrow">[Understand Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md)</p>
+
 ### Bitnami subcharts removed from the Helm chart
 
 <!-- https://github.com/camunda/product-hub/issues/3554 -->
