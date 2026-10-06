@@ -605,7 +605,7 @@ Starting with Camunda 8.10, new SaaS clusters include a default `business_` vari
 
 This default does not apply to existing clusters. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
 
-**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Console cluster settings before creating the cluster or immediately after.
+**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Camunda Hub cluster settings before creating the cluster or immediately after.
 
 <p className="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
@@ -1000,19 +1000,6 @@ The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools
 :::note
 Changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
-
-<!-- <div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Web Modeler change 1
-
-Web Modeler change 1 description.
-
-</div>
-</div> -->
 
 ## Optimize
 
