@@ -1490,6 +1490,20 @@ What's included:
 
 <p class="link-arrow">[Dual-region ECS reference architecture](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
+### Kubernetes reference architecture updated for Camunda Hub
+
+<!-- https://github.com/camunda/product-hub/issues/3561 -->
+
+With Camunda 8.10, the Kubernetes reference architecture is updated to reflect the Camunda Hub-based deployment model:
+
+- The architecture diagrams now separate Camunda Hub from the Orchestration Cluster, aligning with the recommended production topology.
+- The documentation clarifies how a single Camunda Hub can manage multiple Orchestration Clusters, which components are deployed with each, and how this split maps to Kubernetes namespaces and services.
+- Updated guidance and configuration examples help you adapt the reference architecture to your environment.
+
+Use this updated reference architecture as the starting point for new 8.10+ deployments, and as a guide when you evolve existing clusters toward a Camunda Hub-centric model.
+
+<p class="link-arrow">[Kubernetes reference architecture](/self-managed/reference-architecture/kubernetes.md)</p>
+
 ### Multi-region RDBMS reference architecture
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
