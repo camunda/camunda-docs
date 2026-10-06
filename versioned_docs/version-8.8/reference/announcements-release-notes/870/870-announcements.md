@@ -11,13 +11,13 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 This release focuses primarily on consolidation and deprecation work to simplify APIs, align clients and SDKs, and prepare for upcoming features in 8.8 and later releases. While there are fewer net-new features in this release, these changes reduce long-term maintenance and improve consistency across Camunda components.
 
-| Minor release date | End of standard maintenance | Release notes                                                                        | Blog                                                                            |
-| :----------------- | :-------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| 8 April 2025       | 13 October 2026             | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
+| Minor release date | End of standard maintenance | Release notes     | Blog                                                                            |
+| :----------------- | :-------------------------- | :---------------- | :------------------------------------------------------------------------------ |
+| 8 April 2025       | 13 October 2026             | 8.7 release notes | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
 
 :::tip Release notes and quality board
 
-- See [release notes](/reference/announcements-release-notes/870/870-release-notes.md) to learn more about new features and enhancements.
+- See release notes to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/16) for an overview of known bugs by component and severity.
 
 :::
@@ -32,7 +32,7 @@ This release focuses primarily on consolidation and deprecation work to simplify
 
 ### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](versioned_docs/version-8.7/self-managed/operational-guides/update-guide/860-to-870.md#identity).
+Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed update guide.
 
 ### Spring Zeebe SDK now requires Spring Boot 3.4.x <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -215,10 +215,6 @@ To migrate all your test cases at once, change the [default element selector](/a
 OpenAPI entities containing keys of type `integer (int64)` are now being deprecated.
 This is part of a transition where API entity keys change from type `integer (int64)` to `string`.
 
-See the [overview about API Key Attributes][camunda8-api-overview] for more details.
-
-[camunda8-api-overview]: /versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes
-
 ### Zeebe Java client
 
 Starting with 8.8, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
@@ -307,4 +303,4 @@ Although the official SDK is largely compatible with the community library, some
 
 We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 
-For more information, see the [update guide](versioned_docs/version-8.7/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/components/connectors/connectors-configuration.md).
+For more information, see the update guide and the [connectors configuration guide](/self-managed/components/connectors/connectors-configuration.md).

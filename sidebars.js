@@ -361,6 +361,7 @@ module.exports = {
               items: [
                 "components/best-practices/architecture/sizing-saas",
                 "components/best-practices/architecture/sizing-self-managed",
+                "components/best-practices/architecture/sizing-physical-tenants",
                 "components/best-practices/architecture/sizing-benchmarks",
               ],
             },
@@ -1773,18 +1774,6 @@ module.exports = {
             "reference/announcements-release-notes/880/whats-new-in-88",
             "reference/announcements-release-notes/880/880-announcements",
             "reference/announcements-release-notes/880/880-release-notes",
-          ],
-        },
-        {
-          type: "category",
-          label: "8.7",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/870/870-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/870/870-announcements",
-            "reference/announcements-release-notes/870/870-release-notes",
           ],
         },
         "reference/announcements-release-notes/release-policy",
