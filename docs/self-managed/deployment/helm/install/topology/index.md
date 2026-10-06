@@ -97,7 +97,7 @@ The Hub release always owns registration, clients, permissions, and inventory, w
 - **Authentication isolation isn't storage isolation.** Separate OIDC credentials per cluster and tenant do nothing to separate shared Elasticsearch or OpenSearch data. Index prefixes do that, and they're your responsibility. See [configure Physical Tenants across releases](./physical-tenants.md).
 - **Scale limits are undefined.** Supported cluster and tenant counts haven't been established. Validate your own target scale before committing to it.
 
-<a id="what-the-chart-does-not-own"></a>For what the chart deploys and what you provide yourself, see [what the chart does not own](/self-managed/deployment/helm/configure/configuration-responsibilities.md#what-the-chart-does-not-own).
+<a id="what-the-chart-does-not-own"></a>For what the chart deploys and what you provide yourself, see [what the chart does not own](../../configure/configuration-responsibilities.md#what-the-chart-does-not-own).
 
 ## Minimum chart versions
 
