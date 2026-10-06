@@ -91,7 +91,6 @@ The available configuration options depend on the version of the cluster:
 
 - [Common configuration (all cluster versions)](#common-configuration-all-cluster-versions)
 - [Additional configuration for cluster versions >= 8.8](#additional-configuration-for-cluster-versions--88)
-- [Additional configuration for cluster versions < 8.8](#additional-configuration-for-cluster-versions--88-1)
 
 :::
 
@@ -162,47 +161,13 @@ camunda.modeler.clusters:
 
 </Tabs>
 
-#### Additional configuration for cluster versions < 8.8
-
-<Tabs groupId="cluster-pre88" defaultValue="envVars" queryString values={[
-{label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
-]}>
-
-<TabItem value="envVars">
-
-| Environment variable                        | Description                                                                                                                                                                                                 | Example value                                                               |
-| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC` | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Zeebe gRPC API](/versioned_docs/version-8.7/apis-tools/zeebe-api/grpc.md) can be reached.                                  | `grpc://camunda-zeebe-gateway:26500`,<br/>`grpcs://zeebe.example.com:26500` |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST` | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Camunda 8 REST API](/versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) can be reached.  | `http://camunda-zeebe-gateway:8080`,<br/>`https://zeebe.example.com`        |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`    | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Operate REST API](/versioned_docs/version-8.7/apis-tools/operate-api/overview.md) can be reached.                          | `http://camunda-operate:80`,<br/>`https://operate.example.com`              |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`   | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Tasklist REST API](/versioned_docs/version-8.7/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) can be reached. | `http://camunda-tasklist:80`,<br/>`https://tasklist.example.com`            |
-
-</TabItem>
-
-<TabItem value="applicationYaml">
-
-```yaml
-camunda.modeler.clusters:
-  - # ...common configuration from above
-    url:
-      zeebe-grpc: "grpc://camunda-zeebe-gateway:26500"
-      zeebe-rest: "http://camunda-zeebe-gateway:8080"
-      operate: "http://camunda-operate:80"
-      tasklist: "http://camunda-tasklist:80"
-```
-
-</TabItem>
-
-</Tabs>
-
 #### Available authentication methods
 
-| Method         | Description                                                                                                                             | When to use?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `BEARER_TOKEN` | Web Modeler sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Web Modeler.<br/>_Note_: You need to ensure that the cluster [accepts Web Modeler's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).<br/><br/>**Cluster version < 8.8**<br/>The cluster uses [Camunda Identity-based authentication](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization) and the external identity provider supports access tokens with multiple audiences (example provider: Keycloak).<br/>_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience. |
-| `BASIC`        | Web Modeler sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Cluster version < 8.8**<br/>not supported                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `NONE`         | Web Modeler does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.<br/><br/>**Cluster version < 8.8**<br/>The authentication / token validation in the Zeebe Gateway is [disabled](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Method         | Description                                                                                                                             | When to use?                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BEARER_TOKEN` | Web Modeler sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Web Modeler.<br/>_Note_: You need to ensure that the cluster [accepts Web Modeler's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details). |
+| `BASIC`        | Web Modeler sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.                                                                                                                                                                                                                                                                                                                                                                              |
+| `NONE`         | Web Modeler does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.                                                                                                                                                                                                               |
 
 ### Database
 
