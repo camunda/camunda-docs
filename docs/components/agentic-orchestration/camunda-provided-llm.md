@@ -143,7 +143,7 @@ OpenRouter, Inc. is a routing service that gives Camunda access to a range of th
 
 ### OpenRouter as a sub-processor
 
-OpenRouter, Inc. is a sub-processor engaged by Camunda in connection with this feature. When you enable this feature, your prompts, agent memory, and tool call inputs and outputs, which may contain personal data, are transmitted to OpenRouter and the selected model provider for the purpose of generating a response. This feature is optional and can be disabled at any time via the related toggle; if disabled, no data is sent to OpenRouter. A comprehensive list of Camunda's sub-processors is available in [Camunda's Trust Center](https://trust.camunda.com/).
+OpenRouter, Inc. is a sub-processor engaged by Camunda in connection with this feature. When you enable this feature, your prompts, agent memory, and tool call inputs and outputs, which may contain personal data, are transmitted to OpenRouter and the selected model provider for the purpose of generating a response. This feature is optional and can be disabled at any time by turning off the **AI-powered features** toggle in [Camunda Hub](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-ai-powered-features). When disabled, no data is sent to OpenRouter. A comprehensive list of Camunda's sub-processors is available in [Camunda's Trust Center](https://trust.camunda.com/).
 
 ### AI terms
 
