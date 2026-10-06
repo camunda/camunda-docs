@@ -333,6 +333,10 @@ An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with 
          renderAnnotations: false
      ingress:
        className: alb
+       # TLS terminates at the ALB. An empty secretName lists the hosts without a Secret.
+       tls:
+         enabled: true
+         secretName: ""
        annotations:
          alb.ingress.kubernetes.io/ssl-redirect: "443"
          alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
@@ -343,6 +347,9 @@ An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with 
      ingress:
        grpc:
          className: alb
+         tls:
+           enabled: true
+           secretName: ""
          annotations:
            alb.ingress.kubernetes.io/ssl-redirect: "443"
            alb.ingress.kubernetes.io/backend-protocol-version: GRPC
@@ -351,7 +358,7 @@ An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with 
            alb.ingress.kubernetes.io/target-type: ip
    ```
 
-The setup doesn't require [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly configured, it retrieves the certificate from ACM based on the host name.
+The ALB terminates TLS with the ACM certificate, so you don't need a TLS Secret. With `tls.enabled: true` and an empty `secretName`, the chart lists each host under the Ingress [`tls` field](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) without a Secret. The AWS Load Balancer Controller uses these hosts to find the matching ACM certificate. The chart also uses `https` in the URLs it generates, for example in the release information.
 
 ### Use the GKE Ingress
 
