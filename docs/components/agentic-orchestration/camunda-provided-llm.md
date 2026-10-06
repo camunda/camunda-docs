@@ -46,7 +46,7 @@ Once Camunda-provided LLM is available in your organization, its credentials are
   - **Provider**: `OpenAI Compatible`.
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
   - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
-  - **Model**: Select a model from the [list of supported models](#supported-models). For example, `anthropic/claude-sonnet-5.5`.
+  - **Model**: Select a model from the [list of supported models](#supported-models). For example, `anthropic/claude-sonnet-4.6`.
 
 ## Supported models
 
@@ -54,12 +54,8 @@ Camunda-provided LLM uses a managed LLM gateway that supports multiple models fr
 
 | Model                                                                            | Value to set in **Model**     | What it's good for                                                                                                         |
 | :------------------------------------------------------------------------------- | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| [Anthropic Claude Sonnet 4.6](https://openrouter.ai/anthropic/claude-sonnet-4.6) | `anthropic/claude-sonnet-4.6` | Best as the default for complex agent tasks, balancing strong reasoning, reliable tool use, speed, and budget consumption. |
 | [Anthropic Claude Haiku 4.5](https://openrouter.ai/anthropic/claude-haiku-4.5)   | `anthropic/claude-haiku-4.5`  | Best for lightweight assistants, short interactions, and lower-cost tasks that still need good instruction following.      |
-| [Anthropic Claude Sonnet 5.5](https://openrouter.ai/anthropic/claude-sonnet-5.5) | `anthropic/claude-sonnet-5.5` | Best as the default for complex agent tasks, balancing strong reasoning, reliable tool use, speed, and budget consumption. |
-| [Anthropic Claude Opus 5.5](https://openrouter.ai/anthropic/claude-opus-5.5)     | `anthropic/claude-opus-5.5`   | Best for advanced analysis and challenging multi-step tasks where maximum quality is the priority.                         |
-| [OpenAI GPT-6 Sol](https://openrouter.ai/openai/gpt-6-sol)                       | `openai/gpt-6-sol`            | Best for demanding professional tasks that need high-end reasoning at a lower cost than flagship models.                   |
-| [OpenAI GPT-OSS 20B](https://openrouter.ai/openai/gpt-oss-20b)                   | `openai/gpt-oss-20b`          | Best for budget-conscious experimentation and simpler automations with lower complexity.                                   |
-| [OpenAI GPT-OSS 120B](https://openrouter.ai/openai/gpt-oss-120b)                 | `openai/gpt-oss-120b`         | Best for higher-quality results than small open models while still controlling cost.                                       |
 
 :::note
 When selecting a model, consider your process requirements, expected usage volume, and token budget. For model selection guidelines, see how to [choose the right LLM](./choose-right-model-agentic.md).
