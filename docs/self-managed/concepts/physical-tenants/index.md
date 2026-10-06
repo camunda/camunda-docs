@@ -84,6 +84,8 @@ To provision new tenants and understand lifecycle behavior in 8.10, including ro
 
 Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
 
+To size broker memory, secondary storage, and noisy-neighbor protection as you add tenants, see [size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md).
+
 For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).

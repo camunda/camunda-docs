@@ -27,7 +27,7 @@ While there's no project-level access control enforced in the API, access is sti
 
 <TabItem value='saas'>
 
-1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
+1. Create client credentials by clicking **Organization > Manage organization > Administration API > Create new credentials**.
 2. Add permissions to this client for **Web Modeler API** with the needed CRUD permissions.
 3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
