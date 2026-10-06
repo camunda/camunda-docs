@@ -95,6 +95,7 @@ The following configuration contains the exact Helm values that Camunda uses in 
 |                           | vCPU \[cores\]      |       3 |     3 |
 |                           | Memory \[GB\]       |       2 |     2 |
 |                           | Disk \[GB\]         |         |    64 |
+|                           | Disk IOPS           |         | 4,000 |
 | **Connectors**            |                     |         |       |
 | #                         | 1                   |         |       |
 |                           | vCPU \[cores\]      |     0.2 |   0.2 |
@@ -136,6 +137,7 @@ The following configuration contains the exact Helm values that Camunda uses in 
 |                           | vCPU \[cores\]      |       3 |     3 |
 |                           | Memory \[GB\]       |       2 |     2 |
 |                           | Disk \[GB\]         |         |    64 |
+|                           | Disk IOPS           |         | 4,000 |
 | **Connectors**            |                     |         |       |
 | #                         | 1                   |         |       |
 |                           | vCPU \[cores\]      |     0.2 |   0.2 |
@@ -175,6 +177,20 @@ The Orchestration Cluster, Connectors, and Optimize values match the exact Helm 
 Primary storage must use low-latency **SSDs**, as HDD-backed volumes are not supported. Disk **latency**, rather than throughput, is the critical metric. Cloud providers often report similar throughput figures for HDD and SSD volumes, but the difference in latency is what matters for Camunda. In testing, HDD-backed primary storage reduced throughput by approximately 50% compared with SSDs, increased commit latency, and triggered additional Raft snapshot replication between brokers.
 
 See [Command processing path](data-flow.md#command-processing-path) for the architectural context on why disk latency sits on the critical path, the [reference architecture minimum cluster requirements](/self-managed/reference-architecture/kubernetes.md#minimum-cluster-requirements) for concrete per-platform disk recommendations, and the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
+
+### Disk IOPS
+
+Camunda is IOPS-heavy: every broker flushes the log to disk as part of Raft commits, so each broker's volume must sustain enough IOPS continuously, in addition to the latency requirements in [supported environments](/reference/supported-environments.md#performance).
+
+- **Recommended:** provision **4,000 sustained IOPS** per broker for the configuration in [Baseline resource configuration](#baseline-resource-configuration). Without secondary storage, brokers are not slowed down by exporting and process considerably more, so provision about **8,000**. Both values leave headroom over what we measured in our load tests, so short bursts do not throttle the volume. Measure your own workload.
+- **Disk bandwidth:** bandwidth (MiB/s) was not a limiting factor. Brokers write many small blocks, so the volume's IOPS limit is reached long before its bandwidth limit, and IOPS is the figure to size for.
+- **Smaller clusters:** clusters with a lower load need fewer IOPS and can use smaller disks, provided the volume still sustains the IOPS your workload requires.
+
+:::warning
+Many cloud providers scale volume IOPS with disk capacity, or offer burstable volume types that rely on burst credits. A small or burstable volume can run fine until its credits are exhausted, then throttle and cause higher commit latency, backpressure, and lower throughput. Before choosing or shrinking a disk, check the **sustained** (not burst) IOPS the provider guarantees for that size, and size the volume to meet your target IOPS without relying on burst credits.
+:::
+
+Elasticsearch IOPS was not a limiting factor in our tests. See [Elasticsearch scaling](#elasticsearch-scaling) for secondary storage sizing.
 
 ### Disk space
 
