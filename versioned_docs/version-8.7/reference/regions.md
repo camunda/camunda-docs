@@ -43,6 +43,7 @@ The following AWS regions are currently supported in Camunda 8 SaaS.
 | AWS region                          | Secondary backups region            |
 | :---------------------------------- | :---------------------------------- |
 | Frankfurt, Europe (eu-central-1)    | Ireland, Europe (eu-west-1)         |
+| Ireland, Europe (eu-west-1)         | Frankfurt, Europe (eu-central-1)    |
 | Paris, Europe (eu-west-3)           | Ireland, Europe (eu-west-1)         |
 | North America, Ohio (us-east-2)     | Oregon, North America (us-west-2)   |
 | Oregon, North America (us-west-2)   | North America, Ohio (us-east-2)     |
