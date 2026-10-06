@@ -727,7 +727,7 @@ Important changes to Helm chart deployment in 8.10 are as follows:
 
 <!-- Legacy anchor retained for inbound links. -->
 
-### A Hub plane and one or more execution planes
+### One Hub release and one or more Orchestration Cluster releases {#a-hub-plane-and-one-or-more-execution-planes}
 
 The 8.10 Helm chart adds `global.topology.mode`, so each release declares its role in the deployment: `combined`, `hub`, `orchestration`, or `optimize`. One `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, each with its own lifecycle, scaling, and upgrade schedule.
 
