@@ -88,7 +88,7 @@ Camunda validates Physical Tenant configuration at startup and fails fast with a
 
 | Symptom                                                         | Cause                                                                                 | Resolution                                                                                                          |
 | :-------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------ |
-| Startup fails naming two tenants that share a storage location  | Two tenants resolve to the same schema, index prefix, or document store path          | Give each tenant a distinct location. See [storage isolation](./storage-isolation.md).                              |
+| Startup fails naming two tenants that share a storage location  | Two tenants resolve to the same schema, index prefix, or document store path          | Give each tenant a distinct location. See [storage isolation](./storage-isolation.md#rdbms-storage).                |
 | Startup fails on provider selection for a non-default tenant    | A configured tenant does not declare `providers.assigned`                             | Assign at least one cluster OIDC provider to the tenant.                                                            |
 | Startup fails naming an unresolvable database vendor            | The JDBC URL prefix is unrecognized and no `database-vendor-id` is set                | Set `database-vendor-id` explicitly for that tenant.                                                                |
 | Schema migration fails on an identifier                         | The RDBMS table prefix is not a valid SQL identifier                                  | Remove hyphens, spaces, and leading digits from the prefix.                                                         |
@@ -196,6 +196,50 @@ Startup validation catches two tenants resolving to the _same_ location, but it 
 
 Startup validation only rejects prefixes that are exactly identical. Prefixes where one is the leading substring of another, such as `eu` and `eu-west`, pass validation but cause `eu*` wildcard queries to match both tenants' indices. Use full tenant IDs as prefixes.
 
+### Database rejects new connections on RDBMS
+
+On RDBMS secondary storage, the number of database connections grows with the number of nodes multiplied by the number of Physical Tenants, and can exceed the database's connection limit. This is relevant when the Physical Tenants share the same database instance.
+
+#### What you observe
+
+- Brokers fail to start or restart repeatedly, and their logs show the database refusing new connections. For example:
+  - PostgreSQL: `FATAL: sorry, too many clients already`
+  - MySQL and MariaDB: `Too many connections`
+  - Oracle: `ORA-00018: maximum number of sessions exceeded` or `ORA-00020: maximum number of processes exceeded`
+- The failures start after you add Physical Tenants or broker nodes, not after an increase in load.
+- Most connections open on the database are idle.
+
+#### Why it happens
+
+Each node opens a separate database connection pool for every Physical Tenant it serves. Nodes don't share pools, so the connections to one database instance scale with both the cluster size and the number of tenants stored on that instance. This is a known limitation, tracked in [camunda/camunda#61935](https://github.com/camunda/camunda/issues/61935). To plan connection capacity before you add tenants, see [Size RDBMS connections](/components/best-practices/architecture/sizing-physical-tenants.md#size-rdbms-connections).
+
+| Connections                            | Formula                               | Example: 10 nodes, 10 tenants, default pool settings |
+| :------------------------------------- | :------------------------------------ | :--------------------------------------------------- |
+| Held open while idle                   | nodes × tenants × `minimum-idle`      | 10 × 10 × 2 = 200                                    |
+| Maximum, when every pool is fully used | nodes × tenants × `maximum-pool-size` | 10 × 10 × 10 = 1,000                                 |
+
+When the total passes the database's connection limit, the database rejects further connections. Default limits differ per vendor:
+
+| Database             | Default connection limit                               |
+| :------------------- | :----------------------------------------------------- |
+| PostgreSQL           | 100 (`max_connections`)                                |
+| MySQL and MariaDB    | 151 (`max_connections`)                                |
+| Oracle               | Set by `processes` and `sessions`. Check your instance |
+| Microsoft SQL Server | Up to 32,767 (`user connections`)                      |
+
+In the example above, the idle connections alone exceed the PostgreSQL default before the cluster processes any load. Managed database services often set the limit from the instance size, so check the effective value for your instance.
+
+#### How to fix it
+
+Apply one or more of the following mitigations:
+
+| Mitigation                               | How                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Trade-off                                                                                                                                                          |
+| :--------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Reduce pool sizes                        | Lower `minimum-idle` and `maximum-pool-size` under `camunda.data.secondary-storage.rdbms.connection-pool.*`, or per tenant under `camunda.physical-tenants.<tenant-id>.data.secondary-storage.rdbms.connection-pool.*`. See [connection pool configuration](/self-managed/concepts/databases/relational-db/configuration.md#connection-pool-configuration).                                                                                                                              | Pools that are too small make requests wait for a connection, and fail after `connection-timeout`. Monitor the Hikari pending-connection metrics after the change. |
+| Raise the database's connection limit    | Increase `max_connections` on PostgreSQL, MySQL, or MariaDB, or `processes` and `sessions` on Oracle.                                                                                                                                                                                                                                                                                                                                                                                    | Each connection consumes database memory, and scaling further eventually reaches the new limit.                                                                    |
+| Pool connections with a proxy            | Run a connection pooling proxy between Camunda and the database, and point the tenants' JDBC URLs at the proxy. Examples include [PgBouncer](https://www.pgbouncer.org/) for PostgreSQL, [ProxySQL](https://proxysql.com/) or [MariaDB MaxScale](https://mariadb.com/docs/maxscale/) for MySQL and MariaDB, and [Database Resident Connection Pooling (DRCP)](https://docs.oracle.com/en/database/oracle/oracle-database/23/jjdbc/database-resident-connection-pooling.html) for Oracle. | Adds a component to deploy and operate. Refer to the proxy's documentation for its configuration.                                                                  |
+| Spread tenants across database instances | Store groups of Physical Tenants on separate database instances, so each instance only receives connections for the tenants it stores. See [storage isolation](./storage-isolation.md#rdbms-storage).                                                                                                                                                                                                                                                                                    | Requires additional database instances.                                                                                                                            |
+
 ### Verify isolation
 
 To confirm two tenants are genuinely isolated:
@@ -220,12 +264,12 @@ To identify a noisy neighbor, compare per-tenant throughput and latency over the
 
 Camunda tags tenant-scoped metrics with a `physicalTenant` label. Filter by this label, and by `partition`, to isolate one tenant's behavior.
 
-| Metric or label                                   | Use for                                                            |
-| :------------------------------------------------ | :----------------------------------------------------------------- |
-| `physicalTenant` label                            | Scoping any tenant-aware metric to a single tenant.                |
-| `camunda.physical.tenant.secondary.storage.ready` | Detecting a degraded tenant. Reports `0` when storage is unusable. |
-| `camunda.schema.init.time`                        | Diagnosing slow or stuck schema initialization per tenant.         |
-| Hikari connection pool metrics                    | Spotting per-tenant connection pool exhaustion on RDBMS backends.  |
+| Metric or label                                   | Use for                                                                                                                                                                                                            |
+| :------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `physicalTenant` label                            | Scoping any tenant-aware metric to a single tenant.                                                                                                                                                                |
+| `camunda.physical.tenant.secondary.storage.ready` | Detecting a degraded tenant. Reports `0` when storage is unusable.                                                                                                                                                 |
+| `camunda.schema.init.time`                        | Diagnosing slow or stuck schema initialization per tenant.                                                                                                                                                         |
+| Hikari connection pool metrics                    | Spotting per-tenant connection pool exhaustion on RDBMS backends, and tracking total connections against the database's limit. See [database rejects new connections](#database-rejects-new-connections-on-rdbms). |
 
 The Zeebe dashboard aggregates over `(physicalTenant, partition)`, so you can filter it to one tenant without changing the queries.
 
@@ -245,6 +289,7 @@ Recommended alerts:
 | Deterministic schema mismatches retry indefinitely | A schema mismatch that cannot succeed on retry is treated as retryable, so the tenant stays degraded instead of failing clearly. See [camunda/camunda#61063](https://github.com/camunda/camunda/issues/61063).                                                                                                                                                                                                                                                                       |
 | Generic exporter assignment and arguments          | Root-declared generic exporters must be explicitly assigned to each tenant. Tenant arguments merge with root arguments only for exporter types that provide a merger; otherwise, tenant arguments replace the root arguments. See [custom exporters for Physical Tenants](./custom-exporters.md). Built-in Camunda and RDBMS exporters are configured separately under `camunda.data.secondary-storage.*`.                                                                           |
 | Tenant deletion                                    | Removing a tenant from configuration disables it and retains its data. There's no single API that removes a tenant's configuration and its data together. To delete its data, [purge](/self-managed/operational-guides/data-purge.md) the tenant (`POST /actuator/cluster/purge?physicalTenant={physicalTenantId}`) before removing it from configuration, then [logically remove](./provisioning-and-lifecycle.md#logically-remove-a-disabled-tenant) it from the cluster topology. |
+| RDBMS connections scale with nodes and tenants     | Every node opens a connection pool per Physical Tenant, so connections to a shared database grow as nodes × tenants and can exceed the database's connection limit. See [database rejects new connections](#database-rejects-new-connections-on-rdbms) and [camunda/camunda#61935](https://github.com/camunda/camunda/issues/61935).                                                                                                                                                 |
 | Full performance isolation                         | Gateways, brokers, and actor threads remain shared.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ## Related pages
