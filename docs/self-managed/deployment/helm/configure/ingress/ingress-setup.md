@@ -20,7 +20,7 @@ Camunda 8 Self-Managed has multiple web applications and gRPC services. You can 
 - The annotations your controller needs. Starting with Camunda 8.10 (chart 15.x), the chart's default ingress-nginx annotation set comes from a compatibility shim that you can turn off with `global.compatibility.nginx.renderAnnotations: false`; see [Ingress-nginx annotation defaults deprecated in the Helm chart](/reference/announcements-release-notes/8100/8100-announcements.md#ingress-annotation-defaults-deprecated).
 
 :::note
-[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures deploy [Contour](https://projectcontour.io/) instead. The examples on this page still use ingress-nginx annotations. With another controller, translate them to its equivalents. See [configure the gRPC upstream](#configure-the-grpc-upstream) for the gRPC annotation each controller expects.
+[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures deploy [Contour](https://projectcontour.io/) instead. The examples on this page still use Ingress-nginx annotations. With another controller, translate them to its equivalents. See [configure the gRPC upstream](#configure-the-grpc-upstream) for the gRPC annotation each controller expects.
 :::
 
 - TLS configuration is not included in the examples because it varies between different workflows. Configure TLS in one of these ways:
@@ -306,7 +306,7 @@ The Zeebe Gateway serves gRPC, so your Ingress controller must send HTTP/2 to th
 | Contour            | `projectcontour.io/upstream-protocol.h2c: "26500"`   | Orchestration Cluster `Service`           |
 | Ingress-nginx      | `nginx.ingress.kubernetes.io/backend-protocol: GRPC` | Zeebe `Ingress` (added by the Helm chart) |
 
-When the upstream itself uses TLS, use `projectcontour.io/upstream-protocol.h2` with Contour, and `nginx.ingress.kubernetes.io/backend-protocol: GRPCS` with ingress-nginx. For other controllers, check their documentation for the equivalent.
+When the upstream itself uses TLS, use `projectcontour.io/upstream-protocol.h2` with Contour, and `nginx.ingress.kubernetes.io/backend-protocol: GRPCS` with Ingress-nginx. For other controllers, check their documentation for the equivalent.
 
 With Contour, set the annotation on the Orchestration Cluster service:
 
