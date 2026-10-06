@@ -37,7 +37,7 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 When designing a reference architecture, it's essential to understand the differences between Orchestration Cluster and Camunda Hub Self-Managed. These components serve different purposes and include distinct elements.
 
-In Camunda 8.10, they're also deployed separately. Each Helm release declares its role through `global.topology.mode`, so one `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, with one `optimize` release per [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md). For the release roles, their requirements, and how to choose between them, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
+In Camunda 8.10, they're also deployed separately. Each Helm release declares its role through `global.topology.mode`, so one `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, with one `optimize` release per [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md). For the release roles, their requirements, and how to choose between them, see [deployment topology](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 
 #### Orchestration Cluster
 

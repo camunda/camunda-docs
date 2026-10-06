@@ -127,7 +127,7 @@ Separate releases enable:
 - Shared access to centralized components such as Management Identity
 - A separate Optimize instance per Physical Tenant, each reading its own index prefix
 
-For the release roles and the reasoning behind the split, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md). To implement it with the Helm chart, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+For the release roles and the reasoning behind the split, see [deployment topology](/self-managed/deployment/helm/install/topology/index.md#release-roles). To implement it with the Helm chart, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
 #### Orchestration Cluster namespace
 

@@ -789,7 +789,7 @@ Camunda 8.10 adds `global.topology.mode` to the Helm chart, so a release declare
 
 `hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in recent 8.9, 8.8, and 8.7 charts, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. For the minimum chart version of each role, see [minimum chart versions](/self-managed/deployment/helm/install/topology/index.md#minimum-chart-versions).
 
-**Action:** None required for an existing deployment. For a new production deployment, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
+**Action:** None required for an existing deployment. For a new production deployment, see [deployment topology](/self-managed/deployment/helm/install/topology/index.md#release-roles) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
 
 </div>
 </div>

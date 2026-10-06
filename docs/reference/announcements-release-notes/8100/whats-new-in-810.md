@@ -735,7 +735,6 @@ The new `optimize` role deploys Optimize alone. Because one Optimize instance re
 `hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in recent 8.9, 8.8, and 8.7 charts, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. For the minimum chart version of each role, see [minimum chart versions](/self-managed/deployment/helm/install/topology/index.md#minimum-chart-versions).
 
 <ul>
-  <li><span class="link-arrow">[Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md)</span></li>
   <li><span class="link-arrow">[Install the deployment topology](/self-managed/deployment/helm/install/topology/index.md)</span></li>
   <li><span class="link-arrow">[Configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md)</span></li>
 </ul>

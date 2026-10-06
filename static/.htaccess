@@ -207,6 +207,10 @@ RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/in-process
 # Elasticsearch/OpenSearch snapshot restore page broken into partials and inlined into the Restore API and Restore Application guides (8.10).
 RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/elasticsearch/es-restore-snapshot/?$ /docs/next/self-managed/operational-guides/backup-restore/elasticsearch/es-restore/ [R=301,L]
 
+# The deployment topology page merged into the Helm topology install section (8.10).
+# TODO(8.10 release): add the unversioned rule when 8.10 becomes the default version.
+RewriteRule ^docs/next/self-managed/reference-architecture/deployment-topology/?$ /docs/next/self-managed/deployment/helm/install/topology/#release-roles [R=301,NE,L]
+
 # The multi-namespace configure page became the deployment topology install section (8.10).
 # Its content is now split by release role under install/topology/.
 # TODO(8.10 release): add the unversioned rule for /docs/self-managed/deployment/helm/configure/multi-namespace/ when 8.10 becomes the default version.

@@ -52,7 +52,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/self-managed/reference-architecture/kubernetes.md#kubernetes).
 
-For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases. It also deploys one Optimize release for each Physical Tenant. See [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
+For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases. It also deploys one Optimize release for each Physical Tenant. See [deployment topology](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 
 Before you write a production values file, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md) for which settings belong in `values.yaml` and which belong in a component's `extraConfiguration`.
 
