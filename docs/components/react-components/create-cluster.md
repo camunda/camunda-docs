@@ -3,7 +3,7 @@
 
 To deploy and run your process, create a cluster in Camunda 8.
 
-1. In **Camunda Hub**, under **Console > Clusters**, click **Create cluster**.
+1. In **Camunda Hub**, click **Environments > Clusters**, and then click **Create cluster**.
 2. Name your cluster.
 3. Select a region and backup location.
 4. Select a cluster type and tag.

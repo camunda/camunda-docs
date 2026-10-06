@@ -618,7 +618,7 @@ In practice, this means a secret in a connector field only resolves at runtime i
 - If a field relies on resolving a secret it doesn't reference, add the reference.
 - To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but be aware that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
 - Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
-- On Camunda 8 SaaS, you can also change this per cluster in [cluster settings](/components/hub/organization/manage-clusters/settings.md#secret-filter-mode) once your cluster is on 8.9.10 or later.
+- On Camunda 8 SaaS, you can also change this per cluster in [cluster settings](/components/saas/clusters/settings.md#secret-filter-mode) once your cluster is on 8.9.10 or later.
 
 <p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
 
@@ -1612,7 +1612,7 @@ Clusters running earlier generations are unaffected and continue to deliver noti
 
 **Action:** After a cluster updates to generation `8.9 gen13` or later, an organization admin must turn on **Enable app integrations extensions** for existing [notification rules](/components/camunda-integrations/app-integrations/notification-rules.md) to keep delivering. Enabling the setting also delivers notifications when an existing task is later assigned to you, and updates notification cards as a task is assigned, completed, or canceled.
 
-<p className="link-arrow">[Enable app integrations extensions](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions)</p>
+<p className="link-arrow">[Enable app integrations extensions](/components/saas/clusters/settings.md#enable-app-integrations-extensions)</p>
 
 </div>
 </div>

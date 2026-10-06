@@ -22,7 +22,7 @@ In this guide, we will refer to `connector-template-0.1.0-SNAPSHOT.jar` as `conn
 This approach is equivalent to the [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md), except you don't need to override
 existing connectors and instead add a new one. You need to have a running Camunda cluster, and a pair
 of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes.
-Learn more about [how to obtain required credentials](/components/hub/organization/manage-clusters/manage-api-clients.md).
+Learn more about [how to obtain required credentials](/components/saas/clusters/manage-api-clients.md).
 
 Run the following command:
 
