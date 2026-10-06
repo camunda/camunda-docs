@@ -17,19 +17,19 @@ These release notes identify the new features included in 8.7, including [alpha 
 
 ### Spring Zeebe SDK - Spring Boot 4.1 support
 
-As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](../../../../version-8.7/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified from the `8.7.38` patch onward. Spring Boot 4.0.x remains the default bundled version.
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, Spring Boot 4.1.x compatibility is verified from the `8.7.38` patch onward. Spring Boot 4.0.x remains the default bundled version.
 
 ## 8.7.17
 
 ### Spring Zeebe SDK - Spring Boot 3.5 support
 
-[Spring Boot 3.5.x compatibility](../../../../version-8.7/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified for the `8.7.17` patch onward, as [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot version 3.4 ends in December 2025.
+Spring Boot 3.5.x compatibility is verified for the `8.7.17` patch onward, as [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot version 3.4 ends in December 2025.
 
 ## 8.7 minor
 
-| Minor release date | End of standard maintenance | All Patch releases                                                                | Release blog                                                          | Update guide                                                                                          |
-| ------------------ | --------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| 8 April 2025       | 13 October 2026             | [Patch Releases and Changelogs](#technical-changelogs-for-all-87x-patch-releases) | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | [Update guide](versioned_docs/version-8.7/self-managed/operational-guides/update-guide/860-to-870.md) |
+| Minor release date | End of standard maintenance | All Patch releases                                                                | Release blog                                                          | Update guide |
+| ------------------ | --------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------ |
+| 8 April 2025       | 13 October 2026             | [Patch Releases and Changelogs](#technical-changelogs-for-all-87x-patch-releases) | [Release blog](https://camunda.com/blog/2025/04/camunda-8-7-release/) | Update guide |
 
 ### AWS EKS and AWS OpenShift (ROSA) reference architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -436,7 +436,7 @@ This enhancement streamlines operations and ensures smoother incident handling, 
 User task implementation type "Zeebe user task" is renamed to "Camunda user task", and set as the default implementation type.
 
 :::note
-As Job-worker user tasks managed by Camunda will be deprecated in Camunda 8.9, Camunda recommends you start using Camunda User Tasks (formerly known as Zeebe User Task) in your process definitions. To learn more, see [Announcements](/reference/announcements-release-notes/870/870-announcements.md#deprecated-job-based-user-tasks-querying).
+As Job-worker user tasks managed by Camunda will be deprecated in Camunda 8.9, Camunda recommends you start using Camunda User Tasks (formerly known as Zeebe User Task) in your process definitions. To learn more, see Announcements.
 :::
 
 ## 8.7.0-alpha2

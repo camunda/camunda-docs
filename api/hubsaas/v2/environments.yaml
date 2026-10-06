@@ -303,7 +303,10 @@ components:
         - CLUSTER_BACKED
 
     EnvironmentRuntimeState:
-      description: The runtime status of an environment.
+      description: >-
+        The runtime status of an environment. It reports health only. An environment whose cluster is
+        being created, is being updated, is under maintenance, or is waiting for input reads `UNKNOWN`.
+        The Creating, Updating, and Unavailable statuses appear only in the Camunda Hub interface.
       type: string
       enum:
         - HEALTHY
