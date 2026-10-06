@@ -167,7 +167,7 @@ September 8, 2026
 
 The connector runtime resolves a secret reference (for example, `{{secrets.MY_API_KEY}}`) wherever that literal text appears in a connector's input, without restricting resolution to the field where the reference was declared. Under the following conditions, an attacker may be able to cause a connector to resolve and disclose a secret outside its intended scope:
 
-- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/saas/clusters/manage-secrets.md).
 - Untrusted input reaches a process variable — for example, through a user task, an inbound connector such as a webhook or email, or an API call.
 - That process variable is passed, unsanitized, into a connector field (for example, an email body or an HTTP request field).
 - The attacker can guess or know the name of a secret that exists in that context. This does not require knowing the secret's value, only its name.
@@ -189,7 +189,7 @@ Camunda has provided the following releases which contain the fix:
 
 - Camunda Connectors 8.9.10, 8.8.19, 8.7.25, 8.6.28
 
-On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/hub/organization/manage-clusters/settings.md#secret-filter-mode).
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/saas/clusters/settings.md#secret-filter-mode).
 
 **Interim mitigation**:
 

@@ -24,7 +24,7 @@ Enabling alpha features is limited to [admin users and owners](/components/hub/o
 
 To accept alpha terms for Camunda products, follow the steps below:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 2. On the **Settings** tab, click **Opt-in** under the **Alpha features** box.
 3. Note the **Alpha Terms** modal. As the admin accepting the alpha terms, you must scroll and read through the terms before accepting.
 4. Once you have read the terms and scrolled through the modal, tick the box at the bottom reading **"I understand and agree to Alpha Terms"**.
@@ -35,7 +35,7 @@ The system will confirm your acceptance and send a copy of the accepted alpha te
 
 Once you accept the alpha terms, you can enable and disable any features you would like to use, and learn more about them:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 2. On the **Settings** tab, click **View docs** under **Documentation** to learn more about a feature.
 3. Toggle the switch under **Status** to enable and disable the feature.
 
