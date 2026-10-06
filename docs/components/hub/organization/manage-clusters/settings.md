@@ -37,7 +37,7 @@ You can register one custom OpenID Connect (OIDC) identity provider for a cluste
 - Enable this setting after you configure a provider, to let users sign in through it.
 - Disable this setting to fall back to Camunda's built-in provider only. Your configuration and client secret are retained so you can re-enable it later without entering them again.
 
-This setting is available for clusters running 8.10.1 and later. Only organization admins can change it. Enabling or disabling this setting restarts your cluster.
+This setting requires a cluster on Camunda 8.10.1 or any later version. Only organization admins can change it. Enabling or disabling this setting restarts your cluster.
 
 For setup steps, a field reference, and known limitations, see [connect an external identity provider](./connect-external-identity-provider.md).
 

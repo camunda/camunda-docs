@@ -7,16 +7,16 @@ description: "Register a custom OpenID Connect (OIDC) identity provider for a Ca
 
 Register one custom OpenID Connect (OIDC) identity provider for a cluster so your users can sign in with your organization's own identity provider (IdP), alongside Camunda's built-in provider.
 
-This setting is available for clusters running 8.10.1 and later. Only organization admins can change it.
+This setting requires a cluster on Camunda 8.10.1 or any later version. Only organization admins can change it.
 
 :::note
-This configures sign-in to the Orchestration Cluster (Operate, Tasklist, and the APIs) only. Camunda Hub, Console, and Web Modeler continue to use Camunda's built-in provider. To connect an IdP for your whole organization instead, see [connect to an identity provider](/components/concepts/access-control/connect-to-identity-provider.md).
+This configures sign-in to the Orchestration Cluster (Operate, Tasklist, Admin, and the APIs) only. Camunda Hub, Console, and Web Modeler continue to use Camunda's built-in provider. To connect an IdP for your whole organization instead, see [connect to an identity provider](/components/concepts/access-control/connect-to-identity-provider.md).
 :::
 
 ## Prerequisites
 
 - Organization admin access to the cluster in Console.
-- A cluster running 8.10.1 or later.
+- A cluster on Camunda 8.10.1 or any later version.
 - An OIDC-compliant identity provider (for example, Microsoft Entra ID, Okta, Keycloak, or Auth0) with administrative access to register a new application, and a public (internet-reachable) issuer URL.
 
 ## Step 1: Get the cluster's redirect URI
