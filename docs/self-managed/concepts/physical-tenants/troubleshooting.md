@@ -197,7 +197,7 @@ Startup validation only rejects prefixes that are exactly identical. Prefixes wh
 
 ### Database rejects new connections on RDBMS
 
-On RDBMS secondary storage, the number of database connections grows with the number of nodes multiplied by the number of Physical Tenants, and can exceed the database's connection limit.
+On RDBMS secondary storage, the number of database connections grows with the number of nodes multiplied by the number of Physical Tenants, and can exceed the database's connection limit. This is relevant when the Physical Tenants share the same database instance.
 
 #### What you observe
 
