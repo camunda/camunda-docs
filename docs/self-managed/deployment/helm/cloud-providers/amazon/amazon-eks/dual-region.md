@@ -12,7 +12,7 @@ import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-import CostManagement from "../../../../_partials/_cost-management.md";
+import CostManagement from "../../../../\_partials/\_cost-management.md";
 
 :::caution
 Review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
@@ -630,11 +630,11 @@ Key changes of the dual-region setup:
 - `global.security.authentication.method: basic`
   - Uses Basic authentication for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.
 - `global.identity.auth.enabled: false`
-  - Management Identity is not currently supported. For more details, see the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
+  - This reference uses Basic authentication instead of Management Identity. For more details, see [Management platform and Orchestration Cluster](/self-managed/concepts/multi-region/dual-region.md#management-platform-and-orchestration-cluster) on the dual-region concept page.
 - `identity.enabled: false`
-  - Management Identity is currently not supported.
+  - This reference doesn't deploy Management Identity.
 - `optimize.enabled: false`
-  - Optimize is not currently supported and depends on Management Identity.
+  - This reference doesn't deploy Optimize. You can run Optimize in a single region alongside a dual-region cluster, which requires OIDC authentication and Management Identity.
 - `orchestration.exporters.zeebe.enabled: false`
   - Disables the automatic Elasticsearch Exporter configuration in the Helm chart. This exporter was previously used with Optimize and earlier setups.
 - `orchestration.exporters.camunda.enabled: false`
