@@ -171,7 +171,7 @@ You will configure these secrets differently depending on your working environme
 ]}>
 
 <TabItem value="saas">
-Configure the secrets using the [Console](../components/hub/organization/manage-clusters/manage-secrets.md).
+Configure the secrets using the [Console](../components/saas/clusters/manage-secrets.md).
 </TabItem>
 
 <TabItem value="self-managed">
@@ -236,7 +236,7 @@ The example blueprint downloaded in step one is preconfigured to use AWS Bedrock
 Deploy and run your AI agent in your Camunda cluster.
 
 :::important
-Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, [connect a cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) with version 8.8 or higher to your project before reading further.
+Whether you are testing your agent in Camunda 8 SaaS or locally with Camunda 8 Self-Managed, make sure your workspace has an [environment](/components/hub/organization/manage-environments/assign-environments.md) on a cluster with version 8.8 or higher before reading further.
 :::
 
 Depending on your working environment, test your agent by following the corresponding steps below.
@@ -251,7 +251,7 @@ Depending on your working environment, test your agent by following the correspo
 
 1. In [Camunda Hub](/components/hub/workspace/modeler/index.md), open the BPMN diagram.
 1. Select the [**Test**](/components/hub/workspace/modeler/validation/test-your-process.md) tab.
-1. Select the cluster you want to deploy and test the process on.
+1. Select the environment you want to deploy and test the process on.
 1. Click **Deploy**.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.

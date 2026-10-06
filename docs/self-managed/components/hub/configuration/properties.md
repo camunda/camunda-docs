@@ -101,30 +101,30 @@ Access to the cluster pages in Camunda Hub depends on the user's role: `Console`
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-| Property                                         | Description                                                                                                         | Example value                                |
-| :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
-| `camunda.hub.clusters[0].id`                     | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
-| `camunda.hub.clusters[0].name`                   | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
-| `camunda.hub.clusters[0].version`                | The cluster version.                                                                                                | `8.10.0`                                     |
-| `camunda.hub.clusters[0].tags`                   | A list of tags.                                                                                                     | `['dev', 'test']`                            |
-| `camunda.hub.clusters[0].authentication`         | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
-| `camunda.hub.clusters[0].authorizations.enabled` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
-| `camunda.hub.clusters[0].custom-properties`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
-| `camunda.hub.clusters[0].components`             | A list of components for the clusters.                                                                              | See [components](#components).               |
+| Property                                         | Description                                                                                                              | Example value                                |
+| :----------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- | :------------------------------------------- |
+| `camunda.hub.clusters[0].id`                     | An identifier for the cluster.                                                                                           | `camunda-platform`                           |
+| `camunda.hub.clusters[0].name`                   | A readable name for the cluster.                                                                                         | `Camunda Platform`                           |
+| `camunda.hub.clusters[0].version`                | The cluster version.                                                                                                     | `8.10.0`                                     |
+| `camunda.hub.clusters[0].tags`                   | A list of tags. The tags appear on every [environment](#physical-tenants) of the cluster. Use `prod` to mark production. | `['dev', 'test']`                            |
+| `camunda.hub.clusters[0].authentication`         | The [authentication method](#available-authentication-methods).                                                          | `BEARER_TOKEN`                               |
+| `camunda.hub.clusters[0].authorizations.enabled` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub.      | `true`                                       |
+| `camunda.hub.clusters[0].custom-properties`      | A list of custom properties.                                                                                             | See [custom properties](#custom-properties). |
+| `camunda.hub.clusters[0].components`             | A list of components for the clusters.                                                                                   | See [components](#components).               |
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Environment variable                            | Description                                                                                                         | Example value                                |
-| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
-| `CAMUNDA_HUB_CLUSTERS_0_ID`                     | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
-| `CAMUNDA_HUB_CLUSTERS_0_NAME`                   | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
-| `CAMUNDA_HUB_CLUSTERS_0_VERSION`                | The cluster version.                                                                                                | `8.10.0`                                     |
-| `CAMUNDA_HUB_CLUSTERS_0_TAGS`                   | A list of tags.                                                                                                     | `['dev', 'test']`                            |
-| `CAMUNDA_HUB_CLUSTERS_0_AUTHENTICATION`         | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
-| `CAMUNDA_HUB_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
-| `CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS`             | A list of components for the cluster.                                                                               | See [components](#components).               |
+| Environment variable                            | Description                                                                                                              | Example value                                |
+| :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- | :------------------------------------------- |
+| `CAMUNDA_HUB_CLUSTERS_0_ID`                     | An identifier for the cluster.                                                                                           | `camunda-platform`                           |
+| `CAMUNDA_HUB_CLUSTERS_0_NAME`                   | A readable name for the cluster.                                                                                         | `Camunda Platform`                           |
+| `CAMUNDA_HUB_CLUSTERS_0_VERSION`                | The cluster version.                                                                                                     | `8.10.0`                                     |
+| `CAMUNDA_HUB_CLUSTERS_0_TAGS`                   | A list of tags. The tags appear on every [environment](#physical-tenants) of the cluster. Use `prod` to mark production. | `['dev', 'test']`                            |
+| `CAMUNDA_HUB_CLUSTERS_0_AUTHENTICATION`         | The [authentication method](#available-authentication-methods).                                                          | `BEARER_TOKEN`                               |
+| `CAMUNDA_HUB_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub.      | `true`                                       |
+| `CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES`      | A list of custom properties.                                                                                             | See [custom properties](#custom-properties). |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS`             | A list of components for the cluster.                                                                                    | See [components](#components).               |
 
 </TabItem>
 </Tabs>
@@ -133,11 +133,11 @@ Access to the cluster pages in Camunda Hub depends on the user's role: `Console`
 
 Clusters must be configured using the following options to access the cluster from within Camunda Hub:
 
-| Method         | Description                                                                                                                             | When to use?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `BEARER_TOKEN` | Camunda Hub sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Camunda Hub.<br/>_Note_: You need to ensure that the cluster [accepts Camunda Hub's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).<br/><br/>**Cluster version < 8.8**<br/>The cluster uses [Camunda Identity-based authentication](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization) and the external identity provider supports access tokens with multiple audiences (example provider: Keycloak).<br/>_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience. |
-| `BASIC`        | Camunda Hub sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Cluster version < 8.8**<br/>not supported<br/><br/>**Console limitation**<br/>Console pages in Camunda Hub don't support clusters configured with Basic authentication. Console requests to the Orchestration Cluster are made automatically in the background, so there is no UI to collect credentials. Clusters using Basic authentication _will not work correctly_ with Camunda Hub's Console functionality.<br/>                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `NONE`         | Camunda Hub does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.<br/><br/>**Cluster version < 8.8**<br/>The authentication / token validation in the Zeebe Gateway is [disabled](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Method         | Description                                                                                                                             | When to use?                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BEARER_TOKEN` | Camunda Hub sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Camunda Hub.<br/>_Note_: You need to ensure that the cluster [accepts Camunda Hub's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details). |
+| `BASIC`        | Camunda Hub sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Console limitation**<br/>Console pages in Camunda Hub don't support clusters configured with Basic authentication. Console requests to the Orchestration Cluster are made automatically in the background, so there is no UI to collect credentials. Clusters using Basic authentication _will not work correctly_ with Camunda Hub's Console functionality.<br/> |
+| `NONE`         | Camunda Hub does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.                                                                                                                                                                                                               |
 
 #### Custom properties
 
@@ -237,8 +237,6 @@ Available component types and requirements:
 | `orchestration`     | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
 | `admin`             | Admin                 | -                                              |
 | `tasklist`          | Tasklist              | -                                              |
-| `zeebe`             | Zeebe Broker          | Cluster version < 8.8, gRPC URL, and REST URL  |
-| `zeebeGateway`      | Zeebe Gateway         | Cluster version < 8.8                          |
 
 :::note Backward compatibility
 The old values `webModelerWebApp` (replaced by `hub`) and `orchestrationIdentity` (replaced by `admin`) are still accepted for backward compatibility.
@@ -291,6 +289,101 @@ CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_1_URLS_READINESS=https://camunda.example.com:9
 
 </TabItem>
 </Tabs>
+
+#### Mark a cluster as production
+
+This step is optional. Tag a cluster with `prod` only if you want Camunda Hub to treat its environments as production environments. Camunda Hub treats an environment as a production environment if the tags of its cluster include `prod`. The match is exact and case-sensitive, so `prod` works but `Prod` and `production` don't. All Physical Tenants of a cluster tagged `prod` are production environments. See the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
+
+```yaml
+camunda:
+  hub:
+    clusters:
+      - id: camunda-platform
+        # other fields...
+        tags: ["prod"]
+```
+
+### Physical tenants
+
+Declare the [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) of your clusters in the Camunda Hub configuration. Camunda Hub surfaces each declared Physical Tenant, and the `default` Physical Tenant of every cluster, as an [environment](/components/concepts/environments.md) that teams deploy to. An environment appears only if its cluster is in your configuration. Camunda Hub reads the cluster configuration once at startup on every instance, so after you change it, perform a rolling restart.
+
+The version of the cluster decides which Physical Tenants Camunda Hub surfaces as environments:
+
+| Cluster version   | Environments                                                                                                                                                                               |
+| :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.10 or later     | One for the `default` Physical Tenant, which always exists, plus one for each Physical Tenant you declare under `physical-tenants`. Camunda Hub names the `default` one after the cluster. |
+| Earlier than 8.10 | One environment for the whole cluster, named after the cluster.                                                                                                                            |
+
+If you declare `physical-tenants` on a cluster earlier than 8.10, Camunda Hub ignores them and logs a warning.
+
+#### Declare physical tenants
+
+Declare each additional [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) of a cluster with `physical-tenants`. Camunda Hub uses the ID of a tenant as the name of its environment, except for the `default` tenant.
+
+| Property                                                 | Description                                                                                                                | Required |
+| :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :------- |
+| `camunda.hub.clusters[0].physical-tenants[0].id`         | The ID of the Physical Tenant. Camunda Hub shows it as the environment name.                                               | Yes      |
+| `camunda.hub.clusters[0].physical-tenants[0].components` | The [components](#components) that differ from the cluster for this tenant. Each component needs a `type` and a `version`. | No       |
+
+Example configuration:
+
+```yaml
+camunda:
+  hub:
+    clusters:
+      - id: camunda-platform
+        # other fields...
+        physical-tenants:
+          - id: payments-prod
+          - id: lending-prod
+```
+
+Each Physical Tenant of a cluster shows the same [tags](#clusters) as the cluster. The tenant inherits the web application addresses of the cluster, and Camunda Hub adds the `/physical-tenants/<tenant ID>` path for the tenants other than `default`.
+
+#### Override components for a physical tenant
+
+Use `components` on a Physical Tenant to point it at its own component instances. This is a partial override:
+
+- Only the component types you list are replaced for the tenant. A listed component replaces the cluster entry completely, so set every address the tenant needs, such as `urls.webapp` and `urls.readiness`.
+- Every other component keeps using the configuration of the cluster, and follows later changes to it.
+- A tenant other than `default` never inherits Optimize from the cluster, because Optimize needs its own instance for each Physical Tenant. Add an `optimize` component to the tenant to show Optimize.
+- If you remove the override and restart Camunda Hub, the component uses the configuration of the cluster again.
+
+Example configuration that overrides only Optimize for the `payments-prod` tenant. The other components still come from the cluster:
+
+```yaml
+camunda:
+  hub:
+    clusters:
+      - id: camunda-platform
+        # other fields...
+        physical-tenants:
+          - id: payments-prod
+            components:
+              - type: optimize
+                version: 8.10.0
+                urls:
+                  webapp: https://optimize-payments-prod.example.com
+                  readiness: https://optimize-payments-prod.example.com/api/readyz
+```
+
+If a cluster earlier than 8.10 declares `components` on a tenant, Camunda Hub fails to start with the message `must not declare physical tenant 'components' if 'version' is lower than the minimum physical tenant version`.
+
+#### Environment status
+
+Camunda Hub sends an HTTP request to the `urls.readiness` address of each component of an environment to determine its status. The status of the environment is the worst result of its components:
+
+| Component response                                                                                      | Status    |
+| :------------------------------------------------------------------------------------------------------ | :-------- |
+| A successful response, with no body or with a `status` of `up` or `ready`                               | Healthy   |
+| An error response, or any other `status`                                                                | Unhealthy |
+| No `readiness` address, no response within five seconds, a redirect, or a body without a `status` field | Unknown   |
+
+A cluster that you configure with `url` instead of `components` has no readiness address, so its environments always have the status **Unknown**.
+
+#### Not reported environments
+
+If you remove a cluster or Physical Tenant from the configuration, but its environment is still assigned to a workspace, the environment stays in Camunda Hub with the status **Not reported**. It shows no live data, and you can't select it for a deployment. Remove the assignment from the workspace when you no longer need it.
 
 ### Database
 
@@ -743,6 +836,8 @@ camunda.hub:
 | `camunda.hub.feature.dmn-deployment-enabled`             | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                                             | `false`       | `true`        |
 | `camunda.hub.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                        | `true`        | `false`       |
 | `camunda.hub.feature.ui-user-invite-enabled`             | [optional]<br/>Enables the **Add members** button on the workspace **Members** page for users who aren't **Organization admins**. **Organization admins** always see the button, regardless of this setting. Adding members through the [Hub API](/apis-tools/hub-api-sm/overview.md) is unaffected. | `false`       | `true`        |
+| `camunda.hub.feature.runtime-connection-enabled`         | [optional]<br/>Enables the [runtime connection](../../../../components/hub/workspace/modeler/modeling/connect-to-a-runtime.md) selector in the BPMN editor.<br/>When disabled, task testing uses its own cluster selection and connector credentials aren't offered in the properties panel.         | `false`       | `true`        |
+| `camunda.hub.feature.credentials-enabled`                | [optional]<br/>Enables [credentials](../../../../components/hub/organization/credentials/index.md) in Camunda Hub.<br/>Offering connector credentials in the properties panel of the BPMN editor also requires `camunda.hub.feature.runtime-connection-enabled`.                                     | `false`       | `true`        |
 | `camunda.marketplace.enabled`                            | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.               | `false`       | `true`        |
 
 Example configuration:
@@ -755,6 +850,8 @@ camunda:
     dmn-deployment-enabled: true
     dynamic-cluster-management-enabled: false
     ui-user-invite-enabled: true
+    runtime-connection-enabled: true
+    credentials-enabled: true
 
   marketplace:
     enabled: true
@@ -763,14 +860,16 @@ camunda:
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Environment variable                         | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
-| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `TEST_MODE_ENABLED`                          | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED`              | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`               | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED`         | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
-| `CAMUNDA_HUB_FEATURE_UI_USER_INVITE_ENABLED` | [optional]<br/>[Enables the button](#hide-add-members-button) for inviting members to a workspace.                                                                                                                                                                                     | `false`       | `true`        |
-| `MARKETPLACE_ENABLED`                        | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
+| Environment variable                             | Description                                                                                                                                                                                                                                                                                  | Example value | Default value |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `TEST_MODE_ENABLED`                              | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                   | `true`        | `true`        |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED`                  | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                             | `false`       | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`                   | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                                     | `false`       | `true`        |
+| `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED`             | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                | `true`        | `false`       |
+| `CAMUNDA_HUB_FEATURE_UI_USER_INVITE_ENABLED`     | [optional]<br/>[Enables the button](#hide-add-members-button) for inviting members to a workspace.                                                                                                                                                                                           | `false`       | `true`        |
+| `CAMUNDA_HUB_FEATURE_RUNTIME_CONNECTION_ENABLED` | [optional]<br/>Enables the [runtime connection](../../../../components/hub/workspace/modeler/modeling/connect-to-a-runtime.md) selector in the BPMN editor.<br/>When disabled, task testing uses its own cluster selection and connector credentials aren't offered in the properties panel. | `false`       | `true`        |
+| `CAMUNDA_HUB_FEATURE_CREDENTIALS_ENABLED`        | [optional]<br/>Enables [credentials](../../../../components/hub/organization/credentials/index.md) in Camunda Hub.<br/>Offering connector credentials in the properties panel of the BPMN editor also requires `CAMUNDA_HUB_FEATURE_RUNTIME_CONNECTION_ENABLED`.                             | `false`       | `true`        |
+| `MARKETPLACE_ENABLED`                            | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.       | `false`       | `true`        |
 
 </TabItem>
 </Tabs>

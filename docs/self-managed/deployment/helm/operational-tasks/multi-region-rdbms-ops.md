@@ -2,16 +2,19 @@
 id: multi-region-rdbms-operational-procedure
 sidebar_label: Multi-Region RDBMS operational procedure
 title: Multi-Region RDBMS operational procedure
-description: "Handle a region loss, bring a region back, and activate a declared zone in a Multi-Region RDBMS setup."
+description: "Handle a region loss, bring a region back, and add a region to a Multi-Region RDBMS setup."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import RegionLoss from './img/multi-region-rdbms-region-loss.svg';
+import PromoteWriter from './img/multi-region-rdbms-promote-writer.svg';
+import Failback from './img/multi-region-rdbms-failback.svg';
+import AddZone from '../../../concepts/multi-region/img/multi-region-rdbms-add-zone.svg';
 
 import MultiRegionRdbmsCopy from '../\_partials/\_multi-region-rdbms-copy.md'
 
-This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup. It covers losing a region, bringing it back, and activating a zone you declared but never deployed.
+This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup: losing a region, bringing it back, and adding a region.
 
 :::caution
 Develop, test, and rehearse these procedures in a non-production environment before you need them. The commands below are examples from the [reference implementation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md). Adapt them to your environment.
@@ -23,7 +26,7 @@ In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe 
 
 With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas. Zeebe keeps processing, and you need no Zeebe action to restore service. The [dry run](#1-confirm-the-quorum-is-intact) confirms this before you act. The failover procedure mostly reports. It only acts on the database writer, and only when the writer was in the lost region.
 
-<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. In a two-zone cluster, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone cluster, quorum holds and processing continues. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
+<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. A triangle marks an incident, a play icon an operator action, a check a healthy state, and a dash a step that does not exist. In a Dual-Region cluster with Elasticsearch, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone Multi-Region RDBMS cluster, quorum holds and processing continues. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
 
 | Step                             | Dual-region                             | Multi-Region RDBMS                              |
 | :------------------------------- | :-------------------------------------- | :---------------------------------------------- |
@@ -36,7 +39,7 @@ With three or more zones and no zone holding half the replicas or more, none of 
 The [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. The diagram above counts three operator actions here: promote the writer if needed, remove the lost zone, and redeploy the region at failback. The runbook below adds confirmations around them, for five steps in total.
 
 :::warning Use this runbook only for Multi-Region RDBMS
-This runbook applies only to a zone-aware cluster with three or more zones and RDBMS secondary storage. Don't run the [dual-region procedure](./dual-region-ops.md) on it: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here and can lose data. For a two-region cluster with Elasticsearch, use the dual-region procedure instead.
+This runbook applies only to a zone-aware cluster with RDBMS secondary storage. Its region-loss procedures assume three or more zones. A cluster that starts on two zones uses only [Add a region](#add-a-region) until it runs three. If it loses a zone before then, processing stops. Bring the lost zone back before you add the third region, because the add-zone change needs a quorum. Don't run the [dual-region procedure](./dual-region-ops.md) on it: force-removing brokers or restoring secondary storage from a snapshot is unnecessary here and can lose data. For a two-region cluster with Elasticsearch, use the dual-region procedure instead.
 :::
 
 ## Terminology
@@ -45,7 +48,6 @@ This runbook applies only to a zone-aware cluster with three or more zones and R
 | :------------ | :---------------------------------------------------------------------------------------- |
 | Slot          | A position in the region list, numbered from `0`. Fixed when the cluster is bootstrapped. |
 | Zone          | The Camunda-level name of a region, for example `london`. One zone per region.            |
-| Declared zone | A zone present in the zone list, whether or not it is deployed.                           |
 | Active region | A slot that is actually deployed.                                                         |
 | Writer        | The single database instance accepting writes from every region.                          |
 
@@ -75,7 +77,9 @@ Confirm the cluster is healthy before you start, so you can tell what the proced
 
 ### 1. Confirm the quorum is intact
 
-The surviving zones keep processing if they hold a majority of each partition's replicas. The [concept page](/self-managed/concepts/multi-region/multi-region-rdbms.md#region-failure-and-recovery) explains when this holds.
+The surviving zones keep processing if they hold a majority of each partition's replicas. The [concept page](/self-managed/concepts/multi-region/multi-region-rdbms-region-loss.md) explains when this holds.
+
+A cluster with only two zones, such as `2-2` before you add the third region, has no such margin. Losing either zone leaves two replicas of four, and processing stops.
 
 Confirm this rather than assuming it. The script takes one lost slot and computes the surviving replicas without it. Its verdict only covers a single lost zone. If more than one zone is affected, the reference procedures don't cover the situation. Read the partition health of the surviving brokers from `GET /actuator/cluster` on a surviving region instead. Don't use `./check-cluster-topology.sh` here: it expects every active region to be up.
 
@@ -88,6 +92,8 @@ With `--dry-run`, the script reports the quorum state, prints the current cluste
 ### 2. Promote the database writer if needed
 
 If the writer was in the lost region, promote a surviving member. The mode depends on whether the lost region is still reachable:
+
+<PromoteWriter role="img" title="If the writer was not in the lost region, no database action is needed. If it was, a reachable region allows a planned switchover with ./failover.sh and no data loss, while a lost region needs the AWS global database recovery, where the database loses its replication lag and Zeebe replays those records from its retained log. Either way, the JDBC URL resolves to the new writer, and Camunda needs no reconfiguration and no restart. Then raise the priority of the zone with the new writer, wait for COMPLETED, and run POST /cluster/v2/rebalance." />
 
 <Tabs groupId="failover-mode" defaultValue="planned" queryString values={[{label: 'Planned', value: 'planned' }, {label: 'Unplanned', value: 'unplanned' }]}>
 
@@ -141,7 +147,9 @@ This issues [`DELETE /actuator/cluster/zones/<zone>?force=true`](/self-managed/c
 
 In a planned evacuation, the zone is still reachable, so don't force-remove it. Drain it gracefully instead: send `DELETE /actuator/cluster/zones/<zone>` without `force=true` through the [Remove a zone API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#remove-a-zone). The engine moves the zone's partitions to the remaining zones before it removes the brokers. The request is asynchronous. Wait until `GET /actuator/cluster` reports the change as `COMPLETED` before you shut down the zone's brokers.
 
-You must remove the zone when it held half the replicas or more. The replica count decides this, not the number of zones. See [step 1](#1-confirm-the-quorum-is-intact). An evenly split two-zone cluster always needs it, which is why [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) has a failover runbook and this architecture does not.
+This step applies to a cluster with three or more zones. You must remove the zone when it held half the replicas or more. The replica count decides this, not the number of zones. See [step 1](#1-confirm-the-quorum-is-intact).
+
+Don't remove a zone from a cluster that still runs on its two-zone bootstrap. Bring the lost zone back instead, then add the third region. An evenly split [Dual-Region](/self-managed/concepts/multi-region/dual-region.md) cluster does need a force-removal, which is why it has its own failover runbook.
 
 The trade-off is failback cost. You must add a removed zone back when you bring the region back, and its brokers start empty.
 
@@ -160,6 +168,8 @@ Failback is short by design. It has no secondary storage snapshot and restore st
 ```bash
 ./failback.sh <recovered-region-slot>
 ```
+
+<Failback role="img" title="./failback.sh redeploys Camunda in the region and re-exports its services. If the zone was not force-removed during failover, its brokers rejoin and catch up from the Raft log with no membership change. If it was removed, the script adds the zone back with POST /actuator/cluster/zones/<zone> and waits for COMPLETED while the brokers rebuild. Then run ./check-cluster-topology.sh. The --switch-writer option moves the writer back." />
 
 The procedure does four things:
 
@@ -186,41 +196,40 @@ Confirm the topology when done:
 ./check-cluster-topology.sh
 ```
 
-## Activate a declared zone
+## Add a region
 
-Activating a zone that you declared in the zone list but never deployed is an online operation.
+Adding a region to a running cluster is an online operation. The regions already running keep processing and are not restarted.
 
-This section applies only to a zone that you declared at bootstrap and never ran. A zone that you removed during failover comes back through [Bring a region back](#bring-a-region-back) instead.
+The new region's brokers start first. Then `activate-region.sh` adds its zone with `POST /actuator/cluster/zones/<zone>` and waits for the change to report `COMPLETED`. The engine places the zone's replicas and raises the replication factor in one change. It does not renumber any broker.
 
-The operation is online because the zone already exists as far as the cluster is concerned. Every region started with that zone in its zone list. The partition distribution already assigned it replicas, and every partition runs short of those replicas. Deploying the zone starts brokers that claim replicas already reserved for them. Nothing else changes:
+<AddZone role="img" title="Three stages of the same cluster. First, two zones, london and paris, hold two replicas each, for a replication factor of four. The zurich slot exists but is not in the zone list. Losing either zone leaves two of four replicas, so processing stops. Second, the operator deploys the zurich brokers, adds the zone with POST /actuator/cluster/zones/zurich, one replica and priority 800, and waits for COMPLETED. Third, three zones in a 2-2-1 layout at replication factor five, where losing a database zone leaves three of five replicas and processing continues. The engine renumbers no broker and restarts no running region." />
 
-- The cluster does not renumber any broker.
-- The cluster does not redistribute any partition.
-- No running region restarts.
-- You do not need a cluster management API call.
+This section applies to a region slot that you provisioned but never ran. A zone that you removed during failover comes back through [Bring a region back](#bring-a-region-back) instead.
 
 ### 1. Provision the infrastructure
 
-Raise `active_region_count` so the region's cluster, Transit Gateway attachments, and security group rules exist. Use the same variable file as the initial deployment:
+Raise `active_region_count` by one in `terraform-cluster.tfvars`, the variable file of the initial deployment, so the new region's cluster, Transit Gateway attachments, and security group rules exist. Then apply the file:
 
 ```bash
 cd ../terraform/clusters
-terraform apply -var-file=terraform-cluster.tfvars -var active_region_count=3
+terraform apply -var-file=terraform-cluster.tfvars
 ```
+
+Keep the new value in the file. A later `terraform apply` with a lower `active_region_count` destroys the region's infrastructure.
 
 ### 2. Update the environment
 
-Re-source the environment so `CAMUNDA_ACTIVE_REGIONS` reflects the new count, and register a kubectl context for the new cluster:
+Re-source the environment so `CAMUNDA_ACTIVE_REGIONS`, the cluster size, and the replication factor reflect the new count, and register a kubectl context for the new cluster:
 
 ```bash
 cd ../../procedure
-unset CAMUNDA_ACTIVE_REGIONS
+unset CAMUNDA_ACTIVE_REGIONS CAMUNDA_CLUSTER_SIZE CAMUNDA_REPLICATION_FACTOR
 . ./export-terraform-outputs.sh
 . ./export_environment_prerequisites.sh
 ./register-kubecontexts.sh
 ```
 
-### 3. Activate the slot
+### 3. Add the region
 
 ```bash
 ./activate-region.sh <slot>
@@ -230,22 +239,21 @@ The procedure does the following:
 
 1. Joins the new cluster to the ClusterSet.
 1. Prepares its storage class, namespace, and database secret.
-1. Renders the Helm values with the longer contact point list.
+1. Renders the Helm values with the longer contact point and zone lists.
 1. Installs only the new region.
 1. Exports its services.
-1. Waits for the new brokers to join.
+1. Adds the zone to the cluster.
+1. Waits for the change to complete.
 
 The regions already running keep their shorter contact point list, and they don't restart. The contact point list matters at bootstrap. Once a cluster forms, a newcomer only has to reach one member, and the rest learn about it by gossip. The running regions pick up the longer list on their next upgrade.
 
 :::warning
-`activate-region.sh` fills a slot that already exists in the zone list. It does not add a new zone. Adding a zone that was never declared changes the zone list in every region and redistributes partitions. That is a migration rather than an online operation.
+`activate-region.sh` only adds the zone of a slot that was in `regions` when you bootstrapped the cluster. The reference implementation provisions its infrastructure from that slot list. List every region you may ever run in `regions` before the first deployment. The script rejects any slot outside the provisioned range, `0` to `CAMUNDA_REGION_SLOTS - 1`.
 :::
-
-The script rejects any slot outside the provisioned range, `0` to `CAMUNDA_REGION_SLOTS - 1`. Before you run it, apply the Terraform step above. Then re-source the environment and register the kubectl context, so `CAMUNDA_ACTIVE_REGIONS` and `CLUSTER_CONTEXTS` include the new slot.
 
 ## Upgrade the cluster
 
-{/* TODO: multi-region upgrade paths are not tested yet. Document them once https://github.com/camunda/team-infrastructure-experience/issues/1270 is done. */}
+{/* TODO: multi-region upgrade paths are not tested yet. Document them once they are. */}
 
 Upgrade **one region at a time**, and wait for the cluster to report healthy before starting the next:
 

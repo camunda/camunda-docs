@@ -61,7 +61,7 @@ To produce logging output, you can also run Desktop Modeler from the command lin
 You try to connect (i.e., to deploy) to a remote orchestration cluster, and Desktop Modeler tells you it "Cannot connect to Camunda 8."
 
 :::tip
-If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
+If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](/components/saas/clusters.md#auto-pause).
 :::
 
 To resolve this issue, check if you can connect to Zeebe through another client, for example, community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
@@ -107,7 +107,7 @@ You try out [task testing](./task-testing.md) and Desktop Modeler tells you "Con
 
 Some features of Desktop Modeler, such as task testing, require a REST connection to Camunda 8. Orchestration clusters from version 8.6 support connections with gRPC or the newer [Orchestration Cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). Depending on the provided URL, the corresponding client will be used. Ensure you use the REST URL in your deployment configuration:
 
-- If you are using Camunda 8 SaaS clusters, create an [API client](../../hub/organization/manage-clusters/manage-api-clients.md) and use the value of `Camunda REST API`.
+- If you are using Camunda 8 SaaS clusters, create an [API client](../../saas/clusters/manage-api-clients.md) and use the value of `Camunda REST API`.
 - If you are using [Camunda 8 Run](../../../self-managed/quickstart/developer-quickstart/c8run.md), you should use the value of `Orchestration Cluster API`.
 
 :::tip
@@ -123,7 +123,7 @@ You try to connect to Zeebe from both Desktop Modeler _and_ community-supported 
 Ensure your computer has access to the (remote) network.
 
 :::tip
-If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
+If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](/components/saas/clusters.md#auto-pause).
 :::
 
 ### The connection to Zeebe happens through a proxy

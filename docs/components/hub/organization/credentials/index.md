@@ -46,7 +46,7 @@ On Camunda 8 SaaS, Hub labels each target as a cluster. The **Environments only*
 
 ## Credentials and connector secrets
 
-Credentials and [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) work together rather than replacing each other:
+Credentials and [connector secrets](/components/saas/clusters/manage-secrets.md) work together rather than replacing each other:
 
 |         | Connector secret                             | Credential                                                      |
 | ------- | -------------------------------------------- | --------------------------------------------------------------- |
@@ -82,7 +82,7 @@ Credential fields use `camunda.secrets.MY_API_KEY`, without braces. This is not 
 
 ### Store sensitive values as secrets, not plain text
 
-Store every sensitive value, such as a password or API key, as a [secret](/components/hub/organization/manage-clusters/manage-secrets.md) on the cluster, and reference it from the credential field. A credential field accepts any text you type, so a value entered directly is stored as you typed it, outside the secrets vault.
+Store every sensitive value, such as a password or API key, as a [secret](/components/saas/clusters/manage-secrets.md) on the cluster, and reference it from the credential field. A credential field accepts any text you type, so a value entered directly is stored as you typed it, outside the secrets vault.
 
 To guide you to a secret, Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. Saving is still allowed, so the value stays exposed until you replace it with a reference. The warning clears as soon as the field references a secret.
 
@@ -147,7 +147,7 @@ To create a credential, select **Create credential**, and complete the three ste
 You can also save the credential as a draft at any step. A draft is saved in Hub but is not deployed to any environment.
 
 :::note
-You cannot create a secret while creating a credential. Add the secret to the cluster first in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md), then reference it here. A credential's ID also cannot be changed after you create it, so to rename a credential, delete it and create a new one.
+You cannot create a secret while creating a credential. Add the secret to the cluster first in [Connector secrets](/components/saas/clusters/manage-secrets.md), then reference it here. A credential's ID also cannot be changed after you create it, so to rename a credential, delete it and create a new one.
 :::
 
 ### Credential states
@@ -214,7 +214,7 @@ When you choose environments for a credential or for a scan, Hub lists only the 
 
 In this release:
 
-- You cannot create a secret from a credential. Create secrets in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) first.
+- You cannot create a secret from a credential. Create secrets in [Connector secrets](/components/saas/clusters/manage-secrets.md) first.
 - The plain-text warning checks the whole field value, so a value that combines literal text with a reference, such as `Bearer camunda.secrets.TOKEN`, is flagged even though the reference resolves.
 - Hub does not show which processes use a given credential, so check the impact yourself before you edit or delete one.
 - Credentials are visible to everyone in your organization who has access to Camunda Hub. You cannot restrict a credential to a project or a subset of users.
@@ -228,4 +228,4 @@ In this release:
 ## Next steps
 
 - [Configure credentials in the modeling interface](./modeling-interface.md)
-- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
+- [Connector secrets](/components/saas/clusters/manage-secrets.md)

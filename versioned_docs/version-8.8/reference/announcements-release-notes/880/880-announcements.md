@@ -133,7 +133,7 @@ The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifica
 
 The Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with Camunda 8.8 if you are running:
 
-- Either the [Zeebe Java Client &lt;=8.7.15](../../../../version-8.7/apis-tools/java-client/index.md) OR the [Spring Zeebe SDK &lt;=8.7.15](../../../../version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc),
+- Either the Zeebe Java Client &lt;=8.7.15 OR the Spring Zeebe SDK &lt;=8.7.15,
 - AND you opted into preferring REST over gRPC (setting `preferRestOverGrpc=true` explicitly on client setup).
 
 In this scenario, you will be affected by the following issue [Camunda 8.7 REST client fails on unknown response properties on job activate (#39675)](https://github.com/camunda/camunda/issues/39675).
@@ -255,10 +255,6 @@ corresponding `application/vnd.camunda.api.keys.number+json` content type header
 
 - To update to Camunda 8.8, API objects using `integer (int64)` keys must be updated to use `string` keys and the
   `application/json` header.
-
-:::info
-To learn more about the key attribute type change, see [8.7 API key attributes overview](/versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes).
-:::
 
 </div>
 </div>

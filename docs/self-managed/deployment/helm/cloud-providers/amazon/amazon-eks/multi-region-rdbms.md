@@ -2,16 +2,17 @@
 id: multi-region-rdbms
 title: "Multi-region setup with RDBMS (EKS)"
 sidebar_label: "Multi-region with RDBMS"
-description: "Deploy three Amazon EKS clusters connected by AWS Transit Gateway and Submariner, backed by an Aurora Global Database, to run one Orchestration Cluster across three regions."
+description: "Run one Orchestration Cluster across three Amazon EKS regions, connected by AWS Transit Gateway and Submariner and backed by an Aurora Global Database. Start on two regions, then add the third."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import HighLevelDesign from './assets/eks-multi-region-rdbms.svg';
+import Connectivity from './assets/eks-multi-region-rdbms-connectivity.svg';
 
 import MultiRegionRdbmsCopy from '../../../\_partials/\_multi-region-rdbms-copy.md'
 
-This guide deploys one Camunda 8 Orchestration Cluster across three AWS regions. It uses [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for compute and [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) for inter-region routing. It uses [Submariner](https://submariner.io/) for cross-cluster service discovery and [Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) as relational secondary storage.
+This guide deploys one Camunda 8 Orchestration Cluster across three AWS regions. It starts the cluster on two regions, then adds the third to the running cluster, the same path the reference implementation tests. It uses [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for compute and [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) for inter-region routing. It uses [Submariner](https://submariner.io/) for cross-cluster service discovery and [Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) as relational secondary storage.
 
 :::caution
 Review the [Multi-Region RDBMS concept documentation](/self-managed/concepts/multi-region/multi-region-rdbms.md) before continuing, to understand the limitations and requirements of this configuration.
@@ -21,7 +22,7 @@ The result is a cluster where losing a region does not stop processing. Bringing
 
 ## High-level design
 
-<HighLevelDesign role="img" title="Three AWS regions, each with an EKS cluster in its own VPC and a Camunda zone. A Transit Gateway per region is peered in a full mesh, Submariner publishes each region's Zeebe service under a clusterset name, and an Aurora Global Database with a writer in eu-west-2 and a reader in eu-west-3 backs all three regions through a single JDBC URL." />
+<HighLevelDesign role="img" title="Three AWS regions, each with an EKS cluster in its own VPC and a Camunda zone. A Transit Gateway per region is peered in a full mesh, Submariner publishes each region's Zeebe service under a clusterset name, and an Aurora Global Database with a writer in eu-west-2 and a reader in eu-west-3 backs all three regions through a single JDBC URL. eu-central-2 has no database member." />
 
 Each layer of the design has one job, and the layers are independent:
 
@@ -81,11 +82,11 @@ Following this guide gives you:
 - A Transit Gateway per region, peered in a full mesh, routing every VPC and Kubernetes service range between regions.
 - Submariner service discovery, publishing each region's Zeebe service as `<clusterID>.<service>.<namespace>.svc.clusterset.local`.
 - An Aurora Global Database with a writer in one region and readers in the others, reached through a single JDBC URL.
-- One Orchestration Cluster with six brokers, six partitions, and a replication factor of five. Each database region holds two replicas of every partition, and the third region holds one.
+- One Orchestration Cluster that starts on two regions and grows to three. At the end, it has six brokers, six partitions, and a replication factor of five. Each database region holds two replicas of every partition, and the third region holds one.
 
 ## Topology
 
-The default topology uses three regions and three zones:
+The default topology provisions three region slots. The table shows the cluster after you add the third region. While two regions run, the cluster has four brokers and a replication factor of four.
 
 | Setting                             | Default                                  | Meaning                                                         |
 | :---------------------------------- | :--------------------------------------- | :-------------------------------------------------------------- |
@@ -127,14 +128,12 @@ The region slots are declared in [variables.tf](https://github.com/camunda/camun
 
 Two variables control the topology, and they are not interchangeable:
 
-| Variable              | Meaning                                                                                                           |
-| :-------------------- | :---------------------------------------------------------------------------------------------------------------- |
-| `regions`             | The full list of region slots the cluster will ever have. Every slot contributes a zone to the Camunda zone list. |
-| `active_region_count` | How many of those slots are actually deployed. At most one slot may be left empty.                                |
+| Variable              | Meaning                                                                                                     |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------- |
+| `regions`             | The full list of region slots the cluster can grow into. A slot contributes a zone once Camunda runs in it. |
+| `active_region_count` | How many of those slots are deployed. At least two.                                                         |
 
-Declaring a slot without deploying it is the supported growth path. The deployed slots are always the first ones in the list, so the empty slot is the last. Activating it later fills in its replicas without redistributing anything. What that costs depends on how many replicas the empty slot holds, not on how many slots there are. The default layout gives the trailing slots one replica each. Every partition therefore runs at four of five with three slots, and five of six with four. The cluster tolerates no further zone loss while a slot is empty.
-
-Leaving two or more slots empty fails at plan time. The guard counts region slots rather than replicas, and requires the deployed slots to be a majority of the declared ones. It can therefore also refuse a layout whose deployed zones would still hold a majority of the replicas. The replica-level test runs separately in `export_environment_prerequisites.sh`, which catches a layout whose undeployed zones hold the majority.
+This guide follows the path the reference implementation tests: it bootstraps two of the three slots, then adds the third region. Deploying fewer slots than you provision is the supported growth path. The Camunda zone list covers only the deployed slots, so each partition holds all of its replicas at every size. The cluster survives a region loss once three or more slots run. With two slots, losing either zone leaves no majority, and processing stops until the zone returns. A spare slot joins later through the [add-zone procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#add-a-region), which adds its zone to the running cluster.
 
 ### Apply the infrastructure
 
@@ -144,7 +143,7 @@ Keep your settings in a variable file. The reference architecture ships no varia
 
 ```hcl title="terraform-cluster.tfvars"
 cluster_name            = "camunda"
-active_region_count     = 3
+active_region_count     = 2
 np_desired_node_count   = 4
 single_nat_gateway      = false
 database_instance_class = "db.r6g.large"
@@ -152,6 +151,10 @@ default_tags = {
   environment = "evaluation"
 }
 ```
+
+:::note Start with three regions instead
+This guide starts on two regions and then adds the third, because that path shows how the cluster grows. You can also start directly with all three regions: set `active_region_count = 3`. The cluster then forms with three zones at bootstrap. Skip [step 6](#6-add-the-third-region), and expect six brokers and a replication factor of five in [step 5](#5-verify-the-deployment).
+:::
 
 Then apply it:
 
@@ -163,14 +166,7 @@ terraform apply -var-file=terraform-cluster.tfvars
 
 Expect roughly 25 minutes for the EKS clusters and 15 minutes for the Aurora Global Database. They are created in parallel.
 
-For a cheaper evaluation, deploy two of the three slots and reduce the node count. This is a valid state. With the default `2-2-1` layout, every partition holds four of its five replicas. The third slot's replica stays reserved until you deploy it.
-
-```hcl title="terraform-cluster.tfvars"
-cluster_name          = "camunda"
-active_region_count   = 2
-single_nat_gateway    = true
-np_desired_node_count = 2
-```
+With `active_region_count = 2`, the cluster runs two zones, `2-2` at replication factor four. Until you add the third region, it survives no zone loss: losing either zone leaves two replicas of four, which is not a majority.
 
 :::note
 Set up remote Terraform state before deploying anything you intend to keep. The [single-region EKS guide](./terraform-setup.md#initialize-terraform) covers creating an S3 backend.
@@ -264,6 +260,8 @@ Two layers connect the regions, and they have different jobs:
 
 - **Transit Gateway**: carries the traffic.
 - **Submariner**: publishes service names across clusters.
+
+<Connectivity role="img" title="Three EKS clusters, london, paris, and zurich, each export the camunda-zeebe service with a ServiceExport and run Lighthouse DNS. London also hosts the ClusterSet broker, which holds metadata only. To reach paris, london first resolves paris.camunda-zeebe.camunda.svc.clusterset.local through Submariner, which provides service discovery only, with no gateway and no tunnel. It then connects to the paris pods over the AWS Transit Gateway, pod IP to pod IP, encrypted by AWS between regions." />
 
 ### Install subctl
 
@@ -393,7 +391,7 @@ Three values cannot be hardcoded in the Helm values, because they depend on the 
 | :------------------------------------- | :----------------------------------------------------------------------------- |
 | `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` | One entry per active region, pointing at that region's headless Zeebe service. |
 | `REGION_<slot>_ZEEBE_SERVICE_NAME`     | The suffix each broker advertises, so peers in other regions can resolve it.   |
-| `CAMUNDA_MULTIREGION_ZONES`            | The zone list, covering **every** slot including any not yet deployed.         |
+| `CAMUNDA_MULTIREGION_ZONES`            | The zone list, covering the deployed slots only.                               |
 
 ```bash
 . ./generate-zeebe-helm-values.sh
@@ -418,7 +416,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 The parts worth reading before you install:
 
 - `orchestration.partitioning.scheme: zone-aware` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects `numberOfZones` and `zoneIndex` with this scheme, because the zone list describes the topology instead. The chart derives the cluster size, replication factor, and broker node IDs from that list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
-- `orchestration.partitioning.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
+- `orchestration.partitioning.zones` lists every running zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - The AWS Advanced JDBC Wrapper uses `initialConnection,failover`. `initialConnection` discovers the current writer when a broker starts after a switchover. `failover` follows a writer change on an established connection.
 - `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_ENABLED: "true"` is required. Without it the exporter acknowledges records the standby has not received, and a writer failover loses exported data.
@@ -469,7 +467,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```
 </details>
 
-Expect roughly 10 minutes for the Zeebe cluster to converge across regions. A healthy three-zone cluster reports six brokers, six partitions, and a replication factor of five.
+Expect roughly 10 minutes for the Zeebe cluster to converge across regions. At this point, a healthy two-zone cluster reports four brokers, six partitions, and a replication factor of four.
 
 Measure the cost of the write path from each region to the database writer. Regions that are not co-located with the writer pay the inter-region round trip on every export flush. That number tells you whether the exporter queue is sized correctly:
 
@@ -484,9 +482,78 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```
 </details>
 
-## 6. Operate the cluster
+## 6. Add the third region
 
-Day-2 procedures, including region loss, failback, and activating a declared zone, are documented separately in the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
+Add the third region slot to the running cluster. The two running regions keep processing and don't restart. When you finish, the cluster runs three zones in the `2-2-1` layout and survives the loss of any one region.
+
+This is the same sequence that the reference implementation runs in its CI. The [Add a region](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#add-a-region) runbook explains each step in more detail.
+
+### Prerequisites
+
+- Steps 1 to 5 are complete, and the cluster runs on two regions.
+- The third slot is in `regions` in `variables.tf`. The default topology already has it.
+
+### Provision the third region
+
+In `terraform-cluster.tfvars`, change the `active_region_count` line to `3`, then apply the file:
+
+```hcl
+active_region_count = 3
+```
+
+```bash
+cd ../terraform/clusters
+terraform apply -var-file=terraform-cluster.tfvars
+```
+
+Terraform creates the EKS cluster, the Transit Gateway attachments, and the security group rules of the third region. It doesn't change the two running regions.
+
+### Refresh the environment
+
+Clear the values derived from the old region count, then export the environment again and register the new kubectl context:
+
+```bash
+cd ../../procedure
+unset CAMUNDA_ACTIVE_REGIONS CAMUNDA_CLUSTER_SIZE CAMUNDA_REPLICATION_FACTOR
+. ./export-terraform-outputs.sh
+. ./export_environment_prerequisites.sh
+./register-kubecontexts.sh
+```
+
+The export prints the new topology. Check that it reports three running regions, a cluster size of six, and a replication factor of five.
+
+### Add the region to the cluster
+
+Run the procedure for slot `2`, the third slot:
+
+```bash
+./activate-region.sh 2
+```
+
+<details>
+<summary>See the activate-region.sh script</summary>
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/activate-region.sh
+```
+
+</details>
+
+The script joins the new cluster to the ClusterSet and installs Camunda in it. Then it adds the zone with `POST /actuator/cluster/zones/<zone>` and waits for the change to report `COMPLETED`.
+
+### Check the three-zone cluster
+
+The script ends with a topology check. To run it again:
+
+```bash
+./check-cluster-topology.sh
+```
+
+The check passes when the gateway reports six brokers, two in each zone. It also checks for a replication factor of five, the configured partition count, and no unhealthy partition. If it times out, see [Zeebe never reaches the expected broker count](#zeebe-never-reaches-the-expected-broker-count).
+
+## 7. Operate the cluster
+
+Day-2 procedures, including region loss, failback, and adding a region, are documented separately in the [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
 
 ## Troubleshooting
 
@@ -550,7 +617,7 @@ If brokers are `Pending` rather than `Running`, the storage class is missing in 
 
 ## Next steps
 
-- [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md): region loss, failback, and activating a declared zone.
+- [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md): region loss, failback, and adding a region.
 - [Multi-Region RDBMS concept](/self-managed/concepts/multi-region/multi-region-rdbms.md): the architecture and its trade-offs.
 - [Zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md): the full zone configuration reference.
 - [Relational database configuration](/self-managed/concepts/databases/relational-db/configuration.md): RDBMS secondary storage settings.
