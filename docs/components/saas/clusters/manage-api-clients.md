@@ -6,6 +6,10 @@ description: "Let's create a client and manage our API clients."
 
 To interact with an orchestration cluster from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:
 
+:::note
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).
+:::
+
 ![auth-flow](./img/client-auth.png)
 
 The application authenticates itself with OAuth service using `Client Id` and `Client Secret`, OAuth service validates this information and returns an access token, and the application can then use this access token to interact with an orchestration cluster.
@@ -22,7 +26,7 @@ Access tokens have a validity period that can be found in the access token. Afte
 
 To create a client, take the following steps:
 
-1. In Camunda Hub, in the left navigation, under **Console**, click **Clusters**.
+1. In Camunda Hub, in the left navigation, click **Environments**, and then click **Clusters**.
 2. Select a cluster.
 3. Click the **API** tab.
 4. Click **Create new client**.
@@ -61,7 +65,7 @@ Depending on the scopes granted to these client credentials, the following varia
 
 To view client connection information:
 
-1. In Camunda Hub, in the left navigation, under **Console**, click **Clusters**.
+1. In Camunda Hub, in the left navigation, click **Environments**, and then click **Clusters**.
 2. Select a cluster.
 3. Click the **API** tab.
 4. Select your client.

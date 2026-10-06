@@ -18,7 +18,7 @@ Usage alerts apply **only to production clusters** and are visible only to owner
 
 To manage a usage alert, take the following steps:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 2. On the **Billing** tab, select **Edit alert** next to the metric you want to configure the usage alert for. For example, process instances.
 
    ![Edit Usage Alert](./img/edit_usage_alert.png)
@@ -42,7 +42,7 @@ Usage alerts can be edited and turned on or off anytime by selecting **Edit aler
 
 Users can track changes in the usage alerts under the logs of the **Activity** tab:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 2. Click the **Activity** tab.
 
 ![Usage Alert Logs](./img/usage_alerts_logs.png)

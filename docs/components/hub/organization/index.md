@@ -18,9 +18,15 @@ Create and manage workspaces within your organization:
 
 <span class="link-arrow">[Get started](./manage-workspaces/index.md)</span>
 
+## Manage environments
+
+See your deployment environments and assign them to workspaces:
+
+<span class="link-arrow">[Get started](./manage-environments/index.md)</span>
+
 ## Manage clusters
 
-Create, monitor, and assign clusters for seamless execution across all rollout stages:
+Create, monitor, and maintain the clusters that host your environments:
 
 <span class="link-arrow">[Get started](./manage-clusters/index.md)</span>
 

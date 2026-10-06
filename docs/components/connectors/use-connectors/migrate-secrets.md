@@ -45,7 +45,7 @@ With `FALLBACK` set, you can move a secret's value into the Orchestration Cluste
 
 Before `camunda.secrets.<name>` can resolve, its store must hold the secret values. What that requires depends on your offering:
 
-- **SaaS**: no backend change is needed. The managed secrets you create on a cluster's **Cluster secrets** tab are available to both the legacy syntax and `camunda.secrets.<name>`, so you can start migrating models right away. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
+- **SaaS**: no backend change is needed. The managed secrets you create on a cluster's **Cluster secrets** tab are available to both the legacy syntax and `camunda.secrets.<name>`, so you can start migrating models right away. See [Manage connector secrets](/components/saas/clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
 - **Self-Managed**: an operator must configure a secret store (File, AWS Secrets Manager, or GCP Secret Manager) for the Orchestration Cluster. The connector runtime's secret providers alone are not enough: `camunda.secrets.<name>` doesn't read them. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
 
 ## Migrate step by step

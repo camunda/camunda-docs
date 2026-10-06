@@ -6,6 +6,10 @@ description: "If your organization works within Camunda's Enterprise plan, you c
 
 If your organization works within Camunda's [Enterprise](https://camunda.com/pricing/) plan, you can create a manual and scheduled [backups](/components/saas/backups.md) of your cluster.
 
+:::note
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md).
+:::
+
 ## Backup limit
 
 Only the five most recent successful backups of each type are kept, meaning you can have five manual and five scheduled backups. If you already have five backups of a type, the oldest backup is automatically removed.
@@ -16,7 +20,7 @@ You can create a manual backup every 15 minutes.
 
 To create a manual backup, take the following steps:
 
-1. In the left navigation under **Clusters**, select a cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 1. On the **Backups** tab, click **Create manual backup**. A popup modal will appear with more information about manual backups, including retention.
 
    ![cluster-details](./img/cluster-detail-backups.png)
@@ -29,7 +33,7 @@ To create a manual backup, take the following steps:
 
 To create a scheduled backup, take the following steps:
 
-1. In the left navigation under **Clusters**, select a cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 1. On the **Backups** tab, click **Set up schedule**.
 1. Use the dropdown to schedule the backup frequency.
 1. Select the time of day you would like backups to be taken at this frequency.

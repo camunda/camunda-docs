@@ -195,8 +195,8 @@ Console includes a new Cluster Metrics endpoint for SaaS clusters and reduces th
 Camunda 8.9 adds bulk secret import from `.env` files, cluster-to-cluster secret import and export, editable cluster descriptions, and per-tenant usage metrics for Self-Managed environments. Console also adds a new AWS US East region to expand regional deployment choices for SaaS clusters.
 
 <ul>
-  <li><span class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</span></li>
-  <li><span class="link-arrow">[Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md)</span></li>
+  <li><span class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</span></li>
+  <li><span class="link-arrow">[Create a cluster](/components/saas/clusters/create-cluster.md)</span></li>
   <li><span class="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</span></li>
 </ul>
 
@@ -347,7 +347,7 @@ Camunda for Microsoft Teams now updates a notification card as its task is assig
 
 <ul>
   <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/app-integrations/notification-rules.md#enable-notification-delivery-for-your-cluster)</span></li>
-  <li><span class="link-arrow">[Enable app integrations extensions](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions)</span></li>
+  <li><span class="link-arrow">[Enable app integrations extensions](/components/saas/clusters/settings.md#enable-app-integrations-extensions)</span></li>
 </ul>
 
 ## Migration from Camunda 7 to Camunda 8
@@ -1557,7 +1557,7 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 - Key–value pairs are automatically parsed, validated, and added as secrets.
 - This helps reduce configuration errors and copy-pasting when adding secrets.
 
-<p class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</p>
+<p class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</p>
 
 #### Cluster description (SaaS)
 
@@ -1565,7 +1565,7 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 
 You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
 
-<p class="link-arrow">[Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md)</p>
+<p class="link-arrow">[Create a cluster](/components/saas/clusters/create-cluster.md)</p>
 
 #### Import cluster secrets (SaaS)
 
@@ -1575,7 +1575,7 @@ You can now import and export connector secrets between clusters within your org
 
 Export a cluster’s secrets to a key-value file for backup or external workflows, and import secrets from another cluster in a single action. Imports automatically match keys, update existing values, create missing ones, and provide clear feedback on the result. Permissions are enforced so that only authorized users can perform these actions.
 
-<p class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</p>
+<p class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</p>
 
 #### Usage metrics for licence model and tenant (Self-Managed)
 
