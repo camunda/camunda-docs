@@ -24,6 +24,10 @@ Create a new alert:
 1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 1. On the **Alerts** tab, click **Create an alert**.
 
+   ![cluster-details](./img/cluster-detail-alerts.png)
+
+   ![create-alert](./img/cluster-detail-create-alert.png)
+
 1. Choose between **Email** and **Webhook**:
    - **Email**: Click **Create**. No further information is needed.
    - **Webhook**: Provide a valid webhook URL that accepts `POST` requests.

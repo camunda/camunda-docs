@@ -20,3 +20,5 @@ The following Camunda 8 plans are available:
 ## Upgrade to an Enterprise plan
 
 To upgrade to the Enterprise plan, select the Organization management **Plans and pricing** tab, and click **Request quote**.
+
+![paid-request](./img/checkout.png)

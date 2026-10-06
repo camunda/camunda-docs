@@ -31,11 +31,17 @@ To create a cluster, click **Environments** in the left navigation of Camunda Hu
 
 If you haven't created a cluster yet, the **Clusters** page will be empty. You can start modeling even if the cluster shows a **Creating** status.
 
+![cluster-creating-modal](./img/cluster-creating-modal.png)
+
 ## View the created cluster
 
 After creating the cluster, click **Environments** in the left navigation, and then click **Clusters** to view the new entry.
 
 The cluster is now being set up. During this phase, its state is **Creating**. After one or two minutes, the cluster is ready for use and changes its state to **Healthy**.
+
+![cluster-creating](./img/cluster-overview-new-cluster-creating.png)
+
+![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
 
 After the cluster is created, click the cluster name to open the cluster details.
 

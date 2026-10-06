@@ -17,6 +17,8 @@ To manage your cluster settings:
 1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 1. On the **Settings** tab, enable/disable cluster settings as required, or delete the cluster.
 
+![Cluster settings](./img/cluster-settings.png)
+
 ## Authorizations
 
 You can enable authorizations on a per-cluster basis to control the level of access users and clients have over Orchestration Cluster resources.
