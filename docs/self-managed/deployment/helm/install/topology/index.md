@@ -15,7 +15,7 @@ Install Camunda 8.10 Self-Managed as separate Helm releases: one Hub release, on
 
 This is the baseline topology for a new 8.10 production deployment. Each release declares its role through `global.topology.mode`, so the Hub plane and each execution plane have independent lifecycles. For the reasoning, the release-role reference, and the limits of this model, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
 
-For other situations, including evaluation with a single `combined` release, see [choose your topology](/self-managed/deployment/helm/install/index.md#choose-your-topology).
+For other situations, including evaluation with a single `combined` release, see [choose your topology](../index.md#choose-your-topology).
 
 <HelmCliSupport />
 

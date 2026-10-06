@@ -8,7 +8,7 @@ description: "Map Physical Tenants across the Hub, Orchestration Cluster, and Op
 A Physical Tenant spans three releases: it's declared in an Orchestration Cluster release, mapped in the Hub release, and served by its own Optimize release.
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](/self-managed/deployment/helm/install/topology/index.md#minimum-chart-versions).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](./index.md#minimum-chart-versions).
 :::
 
 This page covers the release-level work. For what a Physical Tenant is, how its isolation model works, and the full application configuration reference, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) and the [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
