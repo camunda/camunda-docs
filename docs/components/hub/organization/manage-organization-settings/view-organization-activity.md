@@ -14,7 +14,7 @@ This feature is only available in SaaS.
 
 To view organization activity:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. Open the **Activity** tab.
 
 ![activity-view](./img/activity-view.png)

@@ -6,16 +6,20 @@ description: Create secrets and reference them in your connectors without exposi
 
 Create [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret) and reference them in your connectors without exposing sensitive information in your BPMN processes.
 
+:::note
+This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters in Self-Managed](/components/hub/organization/manage-clusters/index.md), and [connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md).
+:::
+
 :::warning
 Secrets on the **Cluster secrets** tab are managed at the cluster level, so ensure you deploy your processes to the cluster that contains the necessary secrets.
-If you deploy and the secret is missing, [Operate](../../../operate/operate-introduction.md) will show an incident.
+If you deploy and the secret is missing, [Operate](../../operate/operate-introduction.md) will show an incident.
 :::
 
 ## Create a secret
 
-To manage secrets in SaaS:
+To manage secrets:
 
-1. In the left navigation under **Clusters**, select a cluster.
+1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
 1. On the **Cluster secrets** tab, click **Create new secret**.
 
    ![secrets](./img/cluster-detail-secrets.png)
