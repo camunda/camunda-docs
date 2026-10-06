@@ -88,21 +88,22 @@ Camunda Hub uses a separate Management Identity deployment, distinct from the em
 
 The Orchestration Cluster is the core of Camunda.
 
-The following components are bundled into a single artifact:
+Zeebe, Operate, Tasklist, and Admin are bundled into a single artifact:
 
 - [Zeebe](/components/zeebe/zeebe-overview.md): Highly scalable, cloud-native workflow engine that tracks the state of active process instances and drives business processes from start to finish.
 - [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting process instances running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for interacting with user tasks, including assigning and completing them.
 - [Admin](/self-managed/components/orchestration-cluster/admin/overview.md): Integrated authentication and authorization service for managing access to all Orchestration Cluster components and APIs.
 
-Tightly integrated with the Orchestration Cluster:
-
-- [Optimize](/components/optimize/what-is-optimize.md): Business intelligence tool for analyzing bottlenecks and examining improvements in automated processes.
-- [Connectors](/components/connectors/introduction.md): Reusable building blocks for easily connecting processes to external systems, applications, and data.
+[Connectors](/components/connectors/introduction.md) are reusable building blocks for connecting processes to external systems, applications, and data. They run as a separate workload, but are deployed with the Orchestration Cluster as part of the same release. Throughout these guides, "Orchestration Cluster" includes Connectors unless stated otherwise.
 
 This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
-Connectors deploy alongside the Orchestration Cluster. Optimize is deployed separately, one instance per Physical Tenant, because each Optimize instance reads exported records from a single index prefix.
+#### Optimize
+
+[Optimize](/components/optimize/what-is-optimize.md) is a business intelligence tool for analyzing bottlenecks and examining improvements in automated processes. It analyzes process data exported by an Orchestration Cluster.
+
+Optimize is deployed separately from the Orchestration Cluster, one instance per Physical Tenant, because each instance reads exported records from a single index prefix. It authenticates through Management Identity, not the Orchestration Cluster's Admin.
 
 #### Admin vs Management Identity
 

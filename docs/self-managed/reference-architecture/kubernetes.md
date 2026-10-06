@@ -44,7 +44,8 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) describes the deployment topology: one Camunda Hub serving one or more Orchestration Clusters, with one Optimize instance per Physical Tenant. It also explains the distinction between these components:
 
 - **Camunda Hub and Management Identity**: Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin) with tightly integrated components (Connectors and Optimize).
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin), including Connectors.
+- **Optimize**: Process analytics, deployed separately with one instance per Physical Tenant.
 
 _Infrastructure diagram for a single-region setup (click the image to open the PDF version)_
 
