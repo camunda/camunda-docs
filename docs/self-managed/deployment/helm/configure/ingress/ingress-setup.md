@@ -327,6 +327,10 @@ An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with 
 
    ```yaml
    global:
+     compatibility:
+       nginx:
+         # Stop the chart from adding its default Ingress-nginx annotations.
+         renderAnnotations: false
      ingress:
        className: alb
        annotations:
