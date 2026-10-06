@@ -1332,6 +1332,10 @@ module.exports = {
         {
           type: "category",
           label: "Organization",
+          link: {
+            type: "doc",
+            id: "components/saas/organization/organization",
+          },
           items: [
             "components/saas/organization/organization-ownership",
             "components/saas/organization/create-manage-users",
