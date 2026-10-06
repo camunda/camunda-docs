@@ -15,7 +15,7 @@ Install Camunda 8.10 Self-Managed as separate Helm releases: one Hub release, on
 
 This is the baseline topology for a new 8.10 production deployment. Each release declares its role through `global.topology.mode`, so the Hub plane and each execution plane have independent lifecycles. A single Helm chart still produces every component. One Hub release running Camunda Hub can serve many independently deployed Orchestration Clusters, and each cluster can host several [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), each with its own Optimize release.
 
-For other situations, including evaluation with a single `combined` release, see [choose your topology](/self-managed/deployment/helm/install/index.md#choose-your-topology).
+<a id="choose-your-topology"></a>For other situations, including evaluation with a single `combined` release, see [choose your topology](/self-managed/deployment/helm/install/index.md#choose-your-topology).
 
 <HelmCliSupport />
 
@@ -97,7 +97,7 @@ The Hub release always owns registration, clients, permissions, and inventory, w
 - **Authentication isolation isn't storage isolation.** Separate OIDC credentials per cluster and tenant do nothing to separate shared Elasticsearch or OpenSearch data. Index prefixes do that, and they're your responsibility. See [configure Physical Tenants across releases](./physical-tenants.md).
 - **Scale limits are undefined.** Supported cluster and tenant counts haven't been established. Validate your own target scale before committing to it.
 
-For what the chart deploys and what you provide yourself, see [what the chart does not own](/self-managed/deployment/helm/configure/configuration-responsibilities.md#what-the-chart-does-not-own).
+<a id="what-the-chart-does-not-own"></a>For what the chart deploys and what you provide yourself, see [what the chart does not own](/self-managed/deployment/helm/configure/configuration-responsibilities.md#what-the-chart-does-not-own).
 
 ## Minimum chart versions
 
