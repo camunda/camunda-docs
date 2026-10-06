@@ -43,13 +43,13 @@ The chart validates these requirements at render time and fails with a `[camunda
 
 ## How the planes fit together
 
-One Hub release serves any number of Orchestration Clusters. Each cluster hosts one or more Physical Tenants, and each tenant is served by exactly one Optimize release.
+One Hub release can serve multiple Orchestration Clusters across environments, such as development, integration, and production. Each cluster hosts one or more Physical Tenants, and each tenant is served by exactly one Optimize release.
 
 ```mermaid
 graph TD
     Hub["Hub release<br/>mode: hub<br/>Camunda Hub + Management Identity"]
-    OCA["Orchestration release A<br/>mode: orchestration"]
-    OCB["Orchestration release B<br/>mode: orchestration"]
+    OCA["Development Orchestration Cluster<br/>mode: orchestration"]
+    OCB["Production Orchestration Cluster<br/>mode: orchestration"]
     OptA1["Optimize release<br/>mode: optimize<br/>tenant: default"]
     OptA2["Optimize release<br/>mode: optimize<br/>tenant: tenanta"]
     OptB1["Optimize release<br/>mode: optimize<br/>tenant: default"]

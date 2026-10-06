@@ -6,7 +6,7 @@ description: "Some updates are applied to SaaS clusters automatically."
 
 Camunda 8 SaaS customers can enable auto-updates. When enabled, the cluster is updated once a new patch release is available.
 
-You can enable auto-updates when you [create a cluster](/components/hub/organization/manage-clusters/create-cluster.md) or in the **Settings** tab:
+You can enable auto-updates when you [create a cluster](/components/saas/clusters/create-cluster.md) or in the **Settings** tab:
 
 1. In Camunda Hub, in the left navigation under **Clusters**, select your cluster.
 2. In the **Settings** tab, enable **Automatic cluster patch updates**.

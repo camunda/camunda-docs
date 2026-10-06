@@ -20,7 +20,7 @@ Reservations control how many clusters you can deploy. Increasing the number of 
 
 To access billing details:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. Click the **Billing** tab.
 
 ![billing-overview](./img/billing-overview.png)

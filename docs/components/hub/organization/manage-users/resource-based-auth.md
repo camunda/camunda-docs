@@ -21,7 +21,7 @@ Before you begin, you need to know the ID of the resource for which you're autho
 
 Create resource authorizations in Camunda Hub:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. On the **Users** tab, select a user.
 1. On the **Authorizations** tab, click **Create resource authorization**.
 1. Paste the resource ID, and select at least one permission.
@@ -29,12 +29,12 @@ Create resource authorizations in Camunda Hub:
 
 ## Update an authorization
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. On the **Users** tab, select a user.
 1. On the **Authorizations** tab, click **Change permissions**.
 
 ## Delete an authorization
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. On the **Users** tab, select a user.
 1. On the **Authorizations** tab, click **Delete**.

@@ -10,7 +10,7 @@ All Administration API requests require authentication. To authenticate, generat
 
 ## Generate a token
 
-1. In Camunda Hub, in the left navigation under **Console**, click **Organization**.
+1. In Camunda Hub, in the left navigation, click **Organization > Manage organization**.
 2. In the **Administration API** tab, click **Create new credentials**.
 3. Name the client, and add permissions to this client for [the needed scopes](#client-credentials-and-scopes).
 4. Click **Create**.
@@ -85,11 +85,11 @@ Client credentials are created for an organization, and therefore can access all
 
 A client can have one or multiple permissions from the following groups:
 
-- **Cluster**: [Manage your clusters](/components/hub/organization/manage-clusters/create-cluster.md).
-- **Zeebe Client**: [Manage API clients](/components/hub/organization/manage-clusters/manage-api-clients.md) for your cluster.
+- **Cluster**: [Manage your clusters](/components/saas/clusters/create-cluster.md).
+- **Zeebe Client**: [Manage API clients](/components/saas/clusters/manage-api-clients.md) for your cluster.
 - **Hub API**: Interact with the [Camunda Hub API](../hub-api-saas/overview.md).
-- **IP allowlist**: Configure [IP allowlist](/components/hub/organization/manage-clusters/manage-ip-allowlists.md) rules.
-- **Connector Secrets**: [Manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md) of your clusters.
+- **IP allowlist**: Configure [IP allowlist](/components/saas/clusters/manage-ip-allowlists.md) rules.
+- **Connector Secrets**: [Manage secrets](/components/saas/clusters/manage-secrets.md) of your clusters.
 - **Members**: [Manage users](/components/hub/organization/manage-users/index.md) in your organization.
 - **Backups**: Manage [backups](/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 

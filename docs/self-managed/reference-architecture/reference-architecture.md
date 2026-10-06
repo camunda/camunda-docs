@@ -67,7 +67,7 @@ Connectors deploy with the Orchestration Cluster release. Optimize is deployed a
 
 ![Camunda Hub](./img/management-cluster.jpg)
 
-Camunda Hub is designed to interact with multiple orchestration clusters:
+Camunda Hub can connect to multiple Orchestration Clusters across environments, such as development, integration, and production:
 
 - [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
 - [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.

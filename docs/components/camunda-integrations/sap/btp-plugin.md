@@ -17,7 +17,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Prerequisites
 
-- **Camunda API Client**: [Create an API client](/components/hub/organization/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+- **Camunda API Client**: [Create an API client](/components/saas/clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
 - Locally, for configuring via the [CSAP c8ctl plugin](./csap-cli.md#prerequisites) only (see below): [Node.js >= 22](https://nodejs.org/en/about/previous-releases)
 - **On SAP BTP**:
   - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
@@ -105,7 +105,7 @@ Either walk yourself through the prompts or provide all information to the CLI:
 
 - `c8ctl csap-setup` will guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/saas/clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 c8ctl csap-setup --for btp-plugin \

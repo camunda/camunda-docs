@@ -30,7 +30,7 @@ For instructions on creating a VPC interface endpoint, see the [AWS documentatio
 ## Enable secure connectivity for a cluster
 
 1. Open Camunda Hub.
-1. In the left navigation under **Console**, click **Clusters**.
+1. In the left navigation, click **Environments**, and then click **Clusters**.
 1. Select a cluster.
 1. Open the **Private networking** tab. The **Private networking** tab is available only for clusters hosted in AWS. It is not displayed for clusters hosted in other cloud providers.
 1. Select **Activate PrivateLink endpoint service**.
