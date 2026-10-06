@@ -134,10 +134,8 @@ The client is removed from the group.
 
 ## Manage mapping rules
 
-<span class="badge badge--platform">Self-Managed only</span>
-
 :::note
-[Mapping rules](../concepts/access-control/mapping-rules.md) are only available for OIDC authentication.
+[Mapping rules](../concepts/access-control/mapping-rules.md) are only available for OIDC authentication. On SaaS, they become available after you [connect an external identity provider](/components/saas/clusters/connect-external-identity-provider.md) to the cluster.
 :::
 
 ### Assign mapping rules to a group

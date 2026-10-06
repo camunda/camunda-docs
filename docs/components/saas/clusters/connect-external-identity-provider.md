@@ -17,7 +17,7 @@ This configures sign-in to the Orchestration Cluster (Operate, Tasklist, Admin, 
 
 - Organization admin access to the cluster in Console.
 - A cluster on Camunda 8.10.1 or any later version.
-- An OIDC-compliant identity provider (for example, Microsoft Entra ID, Okta, Keycloak, or Auth0) with administrative access to register a new application, and a public (internet-reachable) issuer URL.
+- An OIDC-compliant identity provider (for example, Microsoft Entra ID, Okta, Ping Identity, or Keycloak) with administrative access to register a new application, and a public (internet-reachable) issuer URL.
 
 ## Step 1: Get the cluster's redirect URI
 
