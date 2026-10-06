@@ -61,12 +61,6 @@ graph TD
 
 Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while Camunda Hub remains the single authoritative inventory for clusters, clients, and permissions. Physical Tenants isolate data within a cluster, and the topology is fully declarative, so it fits GitOps tooling such as Argo CD or Flux.
 
-Keep the following constraints in mind:
-
-- **Camunda Hub is single-region.** Multi-region guidance applies to the Orchestration Cluster only. See [dual-region](/self-managed/concepts/multi-region/dual-region.md#management-platform-and-orchestration-cluster).
-- **Physical Tenants share compute.** Tenants have isolated data and independent backup and restore, but share the cluster's brokers and gateways, so runtime interference is reduced rather than eliminated.
-- **Scale limits are undefined.** Supported cluster and tenant counts haven't been established. Validate your target scale before committing to it.
-
 To implement this topology on Kubernetes, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
 ### Camunda Hub vs Orchestration Cluster
