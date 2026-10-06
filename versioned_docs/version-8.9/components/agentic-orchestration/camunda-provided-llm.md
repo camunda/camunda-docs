@@ -21,7 +21,7 @@ Camunda-provided LLM is free to use within the provided budget, and is intended 
 Key benefits:
 
 - **No LLM account setup required.** You don't need to sign up with a model provider or configure credentials to start exploring AI agents.
-- **Compare different LLM providers.** Run your agent with different models and easily switch between them to find the best fit for your use case.
+- **Compare different models.** Run your agent with different models and easily switch between them to find the best fit for your use case.
 - **No surprise bills.** Your organization gets a free, preconfigured budget for testing and experimentation.
 - **Instant blueprints.** AI agent blueprints that use Camunda-provided LLM work out of the box with no configuration needed.
 - **Seamless transition.** When you're ready for production, switch to a customer-managed provider like AWS Bedrock without changing your process architecture.
@@ -50,7 +50,7 @@ Once Camunda-provided LLM is available in your organization, its credentials are
 
 ## Supported models
 
-Camunda-provided LLM uses a managed LLM gateway that supports multiple models from different providers. You can switch between models to compare how your agent performs with each one. When using the AI Agent connector, set the **Model** field to one of the following values:
+Camunda-provided LLM uses a managed LLM gateway that supports the models listed below. You can switch between these models to compare how your agent performs with each one. When using the AI Agent connector, set the **Model** field to one of the following values:
 
 | Model                                                                            | Value to set in **Model**     | What it's good for                                                                                                         |
 | :------------------------------------------------------------------------------- | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
