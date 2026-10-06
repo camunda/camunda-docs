@@ -2680,6 +2680,7 @@ module.exports = {
           items: [
             "self-managed/upgrade/helm/890-to-8100",
             "self-managed/upgrade/helm/combined-to-split-topology",
+            "self-managed/upgrade/helm/connect-existing-clusters",
           ],
         },
         {
