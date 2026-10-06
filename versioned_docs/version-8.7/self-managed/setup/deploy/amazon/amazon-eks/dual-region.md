@@ -42,7 +42,7 @@ Following this guide will incur costs on your Cloud provider account, namely for
 ## Outcome
 
 _Infrastructure diagram for a dual-region EKS setup (click on the image to open the PDF version)_
-[![Infrastructure Diagram EKS Dual-Region](./assets/eks-dual-region.jpg)](./assets/eks-dual-region.pdf)
+[![Infrastructure Diagram EKS Dual-Region](./assets/eks-dual-region.svg)](./assets/eks-dual-region.pdf)
 
 Completion of this tutorial will result in:
 
