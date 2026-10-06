@@ -25,6 +25,7 @@ To upgrade to the Enterprise plan, select the Organization management **Plans an
 
 The Enterprise plan includes the following:
 
+- Invite an unlimited number of users. The Free Trial allows up to 5.
 - [Single sign-on](/components/saas/organization/external-sso.md) with your own identity provider, including default organizations.
 - [Restricted email hostnames](/components/saas/organization/create-manage-users.md) for user invitations, to meet your internal security policies.
 - [IP allowlists](/components/saas/clusters/manage-ip-allowlists.md) to restrict access to your clusters.

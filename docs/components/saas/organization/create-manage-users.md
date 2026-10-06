@@ -25,7 +25,7 @@ To edit or remove a user in your organization:
 
 ## Limitations
 
-The number of users that can be part of an organization depends on the plan you use.
+The number of users that can be part of an organization depends on the [plan](/components/saas/organization/manage-plan/available-plans.md) you use.
 
 ## Restrictions
 
