@@ -286,7 +286,7 @@ ProcessOS is an AI-powered layer on top of Camunda's agentic orchestration platf
 - **Two supported use cases**: Legacy migration transforms processes running on a legacy system to Camunda 8. AI transformation turns any process into an automated, AI-native process that runs on Camunda 8.
 - **Built for builders**: ProcessOS targets builders who implement Camunda end to end and direct AI coding agents. SMEs take part as reviewers and approvers.
 
-<!-- todo: link to the ProcessOS overview once PR #9948 is merged -->
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
 
 :::note
 In this release, each project runs locally with its own private memory. Production deployment, CI/CD integration, and cross-project memory are planned for future releases.
@@ -501,7 +501,7 @@ An environment is the named place where a team deploys and runs its processes in
 - On Self-Managed 8.10 clusters, each Physical Tenant is an environment. On SaaS, and on clusters before 8.10, a cluster is one environment.
 - Environments carry the tags of their cluster, such as `dev`, `test`, `stage`, or `prod`, so you can see which stage of your development lifecycle each one serves.
 
-<!-- todo: link to /components/concepts/environments.md once PR #10157 is merged -->
+<p class="link-arrow">[Environments](/components/concepts/environments.md)</p>
 
 #### Environment connection in Modeler
 
