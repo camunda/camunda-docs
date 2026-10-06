@@ -59,7 +59,9 @@ graph TD
     OCProd --> OptProdB
 ```
 
-Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while the management plane remains the single authoritative inventory for clusters, clients, and permissions. Physical Tenants isolate data within a cluster, and the topology is fully declarative, so it fits GitOps tooling such as Argo CD or Flux.
+Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while the management plane maintains the cluster inventory and Management Identity permission and role configuration. With Keycloak, Management Identity also provisions workload clients. With Microsoft Entra ID or another generic OIDC provider, operators provision workload clients separately.
+
+Physical Tenants isolate data within a cluster, and the topology is fully declarative, so it fits GitOps tooling such as Argo CD or Flux.
 
 To implement this topology on Kubernetes, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
