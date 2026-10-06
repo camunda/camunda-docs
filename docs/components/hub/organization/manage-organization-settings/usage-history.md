@@ -24,7 +24,7 @@ The usage history is visible only to owners and admins for Trial, Enterprise, an
 
 To view usage history in Camunda Hub:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. Open the **Usage** tab.
 
 The section is split into two areas:

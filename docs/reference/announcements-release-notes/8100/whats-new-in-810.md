@@ -296,13 +296,13 @@ In this release, each project runs locally with its own private memory. Producti
 
 [Camunda Hub](/components/hub/index.md) is now the single place where teams build, govern, and run process solutions in Camunda.
 
-<img src={HubOverview} alt="Camunda Hub" class="img-900"/>
+<img src={HubOverview} alt="Camunda Hub with the workspaces page open and the environments listed in the navigation" class="img-900"/>
 
 - On SaaS, your organization is migrated to Hub automatically, and you don't need to take any action.
 - Hub replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
-- Hub is deployed only once, and serves as the single point of entry for all your environments, connecting to all your dev, staging, and production Orchestration Clusters.
+- Hub is deployed only once, and serves as the single point of entry for all your [environments](/components/concepts/environments.md), connecting to the Orchestration Clusters that host your dev, staging, and production environments.
 
-**Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your clusters. You design once, and manage everything from one place.
+**Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your environments. You design once, and manage everything from one place.
 
 <!-- Overview diagram -->
 
@@ -317,27 +317,32 @@ Organization-level resource governance and workspace-level project delivery now 
 
 Camunda Hub introduces changes to many terms and concepts from Web Modeler and Console:
 
-| Web Modeler         | Camunda Hub                                                                                                   | Description                                                                                                                                                                              |
-| :------------------ | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project             | [Workspace](/reference/glossary.md#workspace)                                                                 | When upgrading to Hub, your projects automatically migrate to workspaces. Workspaces in Hub are isolated team collaboration spaces. Members can only view workspaces they're invited to. |
-| Process application | [Project](/reference/glossary.md#project)                                                                     | When upgrading to Hub, your process applications automatically migrate to projects. Projects in Hub can be versioned as a bundle of files or used as a folder for loose files.           |
-| Project Admin       | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) | This aligns with the project-to-workspace terminology change.                                                                                                                            |
+| Web Modeler                    | Camunda Hub                                                                                                   | Description                                                                                                                                                                                                      |
+| :----------------------------- | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project                        | [Workspace](/reference/glossary.md#workspace)                                                                 | When upgrading to Hub, your projects automatically migrate to workspaces. Workspaces in Hub are isolated team collaboration spaces. Members can only view workspaces they're invited to.                         |
+| Process application            | [Project](/reference/glossary.md#project)                                                                     | When upgrading to Hub, your process applications automatically migrate to projects. Projects in Hub can be versioned as a bundle of files or used as a folder for loose files.                                   |
+| IDP application                | IDP project                                                                                                   | When upgrading to Hub, your IDP applications automatically migrate to IDP projects.                                                                                                                              |
+| Collaborator                   | Member                                                                                                        | Workspace members replace project collaborators. Members can be added and managed per workspace.                                                                                                                 |
+| Cluster (as deployment target) | [Environment](/reference/glossary.md#environment)                                                             | Environment is a new concept that represents a deployment target. A cluster represents the underlying infrastructure that hosts one or more environments. Organization admins assign environments to workspaces. |
+| Project Admin                  | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) | This aligns with the project-to-workspace terminology change.                                                                                                                                                    |
 
 ### Mapping Web Modeler and Console features to Hub
 
 The following table shows how you can access the Hub equivalents for key Web Modeler and Console features.
 
-| Product (8.9) | Feature                      | Hub documentation                                                                                                  |
-| :------------ | :--------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| Console       | Organization overview        | [Hub dashboard](/components/hub/organization/analyze-operations/hub-dashboard.md)                                  |
-| Console       | View clusters                | [View clusters](/components/hub/organization/manage-clusters/manage-cluster.md#view-clusters)                      |
-| Console       | Organization management      | [Manage organization settings](/components/hub/organization/manage-organization-settings/organization-settings.md) |
-| Web Modeler   | View projects                | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
-| Web Modeler   | Create a project             | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)        |
-| Web Modeler   | Manage project collaborators | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)             |
-| Web Modeler   | Rename/delete project        | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                             |
-| Web Modeler   | View shared resources        | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**           |
-| Web Modeler   | Recently deleted             | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                  |
+| Product (8.9) | Feature                                   | Hub documentation                                                                                                  |
+| :------------ | :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| Console       | Organization overview                     | [Console](/components/hub/organization/console.md)                                                                 |
+| Console       | View clusters                             | [View clusters](/components/saas/clusters/manage-cluster.md#view-clusters)                                         |
+| Console       | Organization management                   | [Manage organization settings](/components/hub/organization/manage-organization-settings/organization-settings.md) |
+| Web Modeler   | View projects                             | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
+| Web Modeler   | Create a project                          | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)        |
+| Web Modeler   | Manage project collaborators              | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)             |
+| Web Modeler   | Rename/delete project                     | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                             |
+| Web Modeler   | Connect clusters to a process application | [Assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md)      |
+| Web Modeler   | Deploy a process application              | [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md)                                 |
+| Web Modeler   | View shared resources                     | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**           |
+| Web Modeler   | Recently deleted                          | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                  |
 
 ### Key features
 
@@ -381,6 +386,18 @@ Hub introduces workspaces and projects.
   <li><span class="link-arrow">[Manage projects](/components/hub/workspace/manage-projects/manage-projects.md)</span></li>
 </ul>
 
+#### Environments
+
+Hub introduces environments as deployment targets where teams run their processes. An environment is hosted on a cluster, and the cluster remains the infrastructure that your administrators operate.
+
+- Organization admins assign environments to workspaces, and projects deploy to the environments of their workspace instead of connecting clusters to deployment stages.
+- In Self-Managed, each Physical Tenant of a cluster at version 8.10 or later is an environment. In SaaS, each cluster has one environment.
+- When you upgrade, Hub assigns the clusters that your process applications used to their workspaces as environments.
+
+<ul>
+  <li><span class="link-arrow">[Environments](/components/concepts/environments.md)</span></li>
+</ul>
+
 #### Project snapshots and file versioning
 
 In Web Modeler, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit.
@@ -399,7 +416,7 @@ Camunda Hub introduces an improved model with more granular control over project
 
 If you're not familiar with projects, the following sections explain how to:
 
-- [Define deployment stages](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters)
+- [Deploy to environments](/components/hub/workspace/manage-projects/deploy-project.md#deployment-environments)
 - [Deploy a project](/components/hub/workspace/manage-projects/deploy-project.md)
 - [Deploy an individual resource](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process)
 - [Create a project snapshot](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot)
@@ -661,23 +678,9 @@ Before the new model, a process application and the resources within it were tig
 
 Learn more about using process applications in the following sections.
 
-#### Define deployment stages
+#### Deploy to environments
 
-To deploy process applications and resources, you need to connect clusters to the following deployment stages:
-
-| Stage       | Description                                                                                                         |
-| :---------- | :------------------------------------------------------------------------------------------------------------------ |
-| Development | Use to create and test new software features and changes.                                                           |
-| Testing     | Use for quality checks, ensuring software meets defined standards before release.                                   |
-| Staging     | Use for controlled testing where changes are validated before deployment to production.                             |
-| Production  | The live system with the latest software. **Only administrators and organization owners can deploy to this stage.** |
-
-To define your deployment stages:
-
-1. Open a process application.
-2. On the right side of the process application view, next to **Connected clusters** click **Configure**.
-3. For each stage, select a cluster.
-4. Click **Save**.
+Before 8.10, you connected clusters to deployment stages in each process application. In 8.10, a project has no deployment stages. It deploys to the [environments](/components/concepts/environments.md) that are assigned to its workspace. An organization admin [assigns environments to the workspace](/components/hub/organization/manage-environments/assign-environments.md).
 
 #### Deploy a process application
 
@@ -921,7 +924,7 @@ On SaaS, you can now configure Optimize export filters directly in Hub cluster s
 
 New SaaS clusters include a default `business_` variable include filter that limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
 
-<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+<p class="link-arrow">[Configure Optimize data filters](/components/saas/clusters/settings.md#data-filters)</p>
 
 ## Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 

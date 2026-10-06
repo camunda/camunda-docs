@@ -15,12 +15,12 @@ In Self-Managed, you manage user groups in [Management Identity](/self-managed/c
 
 To create a group in Camunda Hub:
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. On the **Groups** tab, select **Create group**.
 
 ## Adding users to a group
 
-1. In the left navigation under **Console**, click **Organization**.
+1. In the left navigation, click **Organization > Manage organization**.
 1. On the **Groups** tab, select a group.
 1. Click **Assign members**.
 
