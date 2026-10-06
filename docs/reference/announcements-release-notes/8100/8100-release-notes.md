@@ -1002,12 +1002,12 @@ Organizations can now access exclusive Camunda 8 generation versions tailored sp
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-You can now connect your own identity provider to individual clusters in Camunda SaaS. Each Orchestration Cluster authenticates users through its own OIDC connection instead of the centralized Auth0 organization provider, so you can enforce your own security and compliance policies.
+You can now connect your own identity provider to individual clusters in Camunda SaaS. Each Orchestration Cluster authenticates users through its own OIDC connection instead of Camunda's built-in organization identity provider, so you can enforce your own security and compliance policies.
 
 - Configure the OIDC connection per cluster, including standard OIDC parameters and custom claims mapping with mapping rules.
-- Migrate from the Auth0 model with minimal disruption to existing user authentication.
+- Migrate from the built-in provider with minimal disruption to existing user authentication.
 
-Web Modeler and Console continue to use Auth0. Only Orchestration Clusters use your identity provider directly.
+Web Modeler and Console continue to use Camunda's built-in identity provider. Only Orchestration Clusters use your identity provider directly.
 
 <!-- TODO: Add a link-arrow to the connect-external-identity-provider.md page (the open PR adds it under /components/hub/organization/manage-clusters/, which moved to /components/saas/clusters/) once https://github.com/camunda/camunda-docs/pull/10199 is merged. -->
 
