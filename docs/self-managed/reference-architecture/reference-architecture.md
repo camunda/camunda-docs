@@ -33,11 +33,60 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 ## Architecture
 
-### Orchestration Cluster vs Camunda Hub
+### Deployment topology
 
-When designing a reference architecture, it's essential to understand the differences between Orchestration Cluster and Camunda Hub Self-Managed. These components serve different purposes and include distinct elements.
+A Camunda 8 Self-Managed deployment is built around one Camunda Hub. The Hub, together with Management Identity, serves one or more Orchestration Clusters, for example one per environment such as development, integration, and production. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant, and each tenant is served by its own Optimize instance.
 
-In Camunda 8.10, they're also deployed separately. Each Helm release declares its role through `global.topology.mode`, so one `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, with one `optimize` release per [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md). For the release roles, their requirements, and how to choose between them, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
+<!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
+
+```mermaid
+graph TD
+    Hub["Camunda Hub<br/>+ Management Identity"]
+    OCDev["Orchestration Cluster<br/>development"]
+    OCInt["Orchestration Cluster<br/>integration"]
+    OCProd["Orchestration Cluster<br/>production"]
+    OptDev["Optimize<br/>default tenant"]
+    OptInt["Optimize<br/>default tenant"]
+    OptProdA["Optimize<br/>default tenant"]
+    OptProdB["Optimize<br/>Physical Tenant A"]
+
+    Hub --> OCDev
+    Hub --> OCInt
+    Hub --> OCProd
+    OCDev --> OptDev
+    OCInt --> OptInt
+    OCProd --> OptProdA
+    OCProd --> OptProdB
+```
+
+Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while Camunda Hub remains the single authoritative inventory for clusters, clients, and permissions. Physical Tenants isolate data within a cluster, and the topology is fully declarative, so it fits GitOps tooling such as Argo CD or Flux.
+
+Keep the following constraints in mind:
+
+- **Camunda Hub is single-region.** Multi-region guidance applies to the Orchestration Cluster only. See [dual-region](/self-managed/concepts/multi-region/dual-region.md#management-platform-and-orchestration-cluster).
+- **Physical Tenants share compute.** Tenants have isolated data and independent backup and restore, but share the cluster's brokers and gateways, so runtime interference is reduced rather than eliminated.
+- **Scale limits are undefined.** Supported cluster and tenant counts haven't been established. Validate your target scale before committing to it.
+
+To implement this topology on Kubernetes, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+
+### Camunda Hub vs Orchestration Cluster
+
+When designing a reference architecture, it's essential to understand the differences between Camunda Hub and the Orchestration Cluster. These components serve different purposes, include distinct elements, and are deployed separately.
+
+#### Camunda Hub
+
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
+
+![Camunda Hub](./img/management-cluster.jpg)
+
+Camunda Hub can connect to multiple Orchestration Clusters across environments, such as development, integration, and production:
+
+- [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
+- [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
+
+:::note Admin separation
+Camunda Hub uses a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
+:::
 
 #### Orchestration Cluster
 
@@ -59,22 +108,7 @@ Tightly integrated with the Orchestration Cluster:
 
 This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
-Connectors deploy with the Orchestration Cluster release. Optimize is deployed as its own release, one per Physical Tenant, because each Optimize instance reads exported records from a single index prefix. See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
-
-#### Camunda Hub
-
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
-
-![Camunda Hub](./img/management-cluster.jpg)
-
-Camunda Hub can connect to multiple Orchestration Clusters across environments, such as development, integration, and production:
-
-- [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
-- [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
-
-:::note Admin separation
-Camunda Hub uses a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
-:::
+Connectors deploy alongside the Orchestration Cluster. Optimize is deployed separately, one instance per Physical Tenant, because each Optimize instance reads exported records from a single index prefix.
 
 #### Admin vs Management Identity
 

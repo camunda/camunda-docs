@@ -1855,7 +1855,6 @@ module.exports = {
         id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
-        "self-managed/reference-architecture/deployment-topology",
         "self-managed/reference-architecture/kubernetes",
         "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",

@@ -8,18 +8,35 @@ description: "Install Camunda 8.10 Self-Managed as separate Hub, Orchestration C
 import HelmCliSupport from '../../_partials/_helm-cli-support.md'
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/reference-architecture/deployment-topology.md#release-roles).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](#release-roles).
 :::
 
 Install Camunda 8.10 Self-Managed as separate Helm releases: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
 
-This is the baseline topology for a new 8.10 production deployment. Each release declares its role through `global.topology.mode`, so the management plane and each execution plane have independent lifecycles. For the reasoning, the release-role reference, and the limits of this model, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
+This is the baseline topology for a new 8.10 production deployment. Each release declares its role through `global.topology.mode`, so the management plane and each Orchestration Cluster have independent lifecycles. For the architecture behind this model and its constraints, see [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology).
 
 The Hub release can be shared across environments. If you're adding an Orchestration Cluster to an existing Hub, update that Hub's cluster inventory and follow the Orchestration Cluster installation steps.
 
-A single `combined` release remains supported and remains the chart default. Use it for evaluation and proofs of concept. See [quick developer install](/self-managed/deployment/helm/install/quick-install.md).
+A single `combined` release remains supported and remains the chart default. Use it for evaluation, proofs of concept, and 8.9 compatibility. See [quick developer install](/self-managed/deployment/helm/install/quick-install.md).
 
 <HelmCliSupport />
+
+## Release roles
+
+`global.topology.mode` selects what a release deploys:
+
+| Role                                          | Chart versions                                                 | Deploys                                                                                                                                                                                          |
+| :-------------------------------------------- | :------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`hub`](./hub-release.md)                     | 8.10 (15.0.0+)                                                 | Camunda Hub and Management Identity. The only release that declares `global.topology.clusters`                                                                                                   |
+| [`orchestration`](./orchestration-release.md) | 8.10 (15.0.0+), 8.9 (14.11.0+), 8.8 (13.14.0+), 8.7 (12.14.0+) | 8.10 and 8.9: one Orchestration Cluster and Connectors. 8.8: the same, plus bundled Elasticsearch. 8.7: Zeebe, Zeebe Gateway, Operate, Tasklist, Optimize, Connectors, and bundled Elasticsearch |
+| [`optimize`](./optimize-release.md)           | 8.10 (15.0.0+)                                                 | Optimize only, for one Physical Tenant                                                                                                                                                           |
+| `combined`                                    | All; the implicit behavior of charts without `global.topology` | Every enabled component in one release. This is the default                                                                                                                                      |
+
+:::caution Older charts ignore the role
+8.7, 8.8, and 8.9 charts older than the minimum versions above have no `global.topology` key. They silently ignore `global.topology.mode` and deploy a combined release, so check the chart version before you set the role.
+:::
+
+The chart validates each role's requirements at render time and fails with a `[camunda][error]` message naming the missing value, so a misconfigured topology doesn't reach the cluster. For the per-role requirements, see the linked release pages.
 
 ## Install order
 
@@ -32,16 +49,18 @@ Install in dependency order, and confirm each release is healthy before starting
 
 The Hub release comes first because it runs Management Identity and, for a Keycloak-administered deployment, creates the OIDC clients the other releases authenticate with.
 
-The Hub release always deploys from the 8.10 chart. Each Orchestration Cluster release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart, using its own chart and values, so clusters upgrade independently of the Hub. See [requirements by chart version](./orchestration-release.md#requirements-by-chart-version).
+The Hub release always deploys from the 8.10 chart. Each Orchestration Cluster release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart, using its own chart and values, so clusters upgrade independently of the Hub. A chart 8.7 cluster runs split Zeebe, Operate, and Tasklist workloads, so its Hub cluster record must set `architecture: legacy`, see [describe a chart 8.7 cluster](./hub-release.md#describe-a-chart-87-cluster). A chart 8.7 release also still runs Optimize in-release, so it doesn't follow the one-Optimize-release-per-tenant model. See [requirements by chart version](./orchestration-release.md#requirements-by-chart-version).
 
 ## Before you begin
+
+The chart deploys the Kubernetes workloads, services, secrets wiring, and volumes, and generates the Management Identity presets and Camunda Hub cluster inventory from `global.topology.clusters`. Everything else is yours to provide, and every URL you configure must be reachable from the release that uses it.
 
 Prepare the following resources:
 
 - An OpenID Connect (OIDC) provider that every namespace can reach, with a pinned issuer. The examples use an external Keycloak instance with Management Identity-managed client registration.
-- Separate public hostnames and TLS certificates for the Hub and orchestration namespaces.
+- Separate public hostnames and TLS certificates for the Hub and orchestration namespaces, plus cross-namespace or cross-cluster DNS, routing, and TLS trust.
 - External PostgreSQL databases for Management Identity and Camunda Hub.
-- A supported secondary storage backend for the Orchestration Cluster, and Elasticsearch or OpenSearch for Optimize.
+- A supported secondary storage backend for the Orchestration Cluster, and Elasticsearch or OpenSearch for Optimize. Index retention and deletion, including after a Helm uninstall, is your responsibility.
 - Network policies that permit Domain Name System (DNS) traffic and the required cross-namespace service traffic.
 
 Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts, so these must exist before you install. See [deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).

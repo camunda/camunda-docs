@@ -569,7 +569,7 @@ The management plane is the part of a Camunda 8 deployment used to design and ma
 
 In Self-Managed Helm deployments, the management plane is the release with `global.topology.mode` set to `hub`.
 
-- [Deployment topology](/self-managed/reference-architecture/deployment-topology.md)
+- [Deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology)
 
 ### Manual task
 
