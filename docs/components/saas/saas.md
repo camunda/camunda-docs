@@ -5,6 +5,8 @@ description: "Learn about Camunda 8 SaaS, the fully managed cloud-based service 
 ---
 
 import SaasComplianceImg from './img/saas-compliance.png';
+import AoGrid from '../react-components/\_ao-card';
+import { BoxesIcon, BuildingComplexIcon } from "@site/docs/components/assets/hub-icons";
 
 Run Camunda 8 as a fully managed, cloud-based service. No technical setup or installation is needed, and maintenance and scaling is handled by Camunda.
 
@@ -25,23 +27,41 @@ Sign up and start your developer journey with Camunda 8 SaaS.
 1. Click on the link in your confirmation email to verify your email address.
 1. Log in to Camunda 8 SaaS using either the email address and password you signed up with or the social login buttons. You can also log in to Camunda 8 SaaS directly at [camunda.io](https://weblogin.cloud.camunda.io/).
 
+## Manage Camunda 8 SaaS
+
+Set up and manage the resources of your Camunda 8 SaaS account:
+
+<AoGrid ao={[
+{
+link: "./clusters",
+title: "Clusters",
+image: BoxesIcon,
+description: "Create and manage the clusters that host your environments, and learn about cluster types and sizes.",
+},
+{
+link: "./organization",
+title: "Organization",
+image: BuildingComplexIcon,
+description: "Manage your organization, its users, usage, and plan.",
+},
+]} columns={2}/>
+
 ## Architecture
 
 The Camunda 8 SaaS platform is built on Amazon Web Services (AWS) and based on a microservices architecture.
 
 ### Clusters
 
-There are two types of [cluster](/components/saas/clusters.md) used when running Camunda 8 SaaS:
+Camunda Hub is hosted in AWS in the eu-central-1 [region](/components/saas/regions.md). It is where you manage your organization, workspaces, environments, and clusters.
 
-- Camunda Hub is hosted in AWS in the eu-central-1 [region](/components/saas/regions.md).
-- Orchestration cluster components such as Zeebe, Tasklist, Operate, Optimize, and Connectors, are hosted in GCP or Amazon Web Services (AWS) regions. An Orchestration Cluster is a provided group of production-ready nodes that run Camunda 8.
+Your processes run on [clusters](/components/saas/clusters.md). Each cluster hosts one or more environments, and you choose its [type](/components/saas/clusters.md#cluster-type) and [size](/components/saas/clusters.md#cluster-size) when you create it. A cluster runs the Orchestration Cluster components such as Zeebe, Tasklist, Operate, Optimize, and Connectors in GCP or Amazon Web Services (AWS) regions. An Orchestration Cluster is a provided group of production-ready nodes that run Camunda 8.
 
-By default, each cluster serves a single tenant, with all data associated with the `<default>` tenant.
+By default, each cluster serves a single [logical tenant](/components/concepts/multi-tenancy.md), with all data associated with the `<default>` tenant.
 
 A cell-based architecture means that each cluster runs as dedicated processes in a separate cell isolated from all other clusters, allowing secure fault and workload separation. Scaling is achieved by deploying additional clusters for new use cases and/or teams.
 
 :::note
-On clusters running generation 8.8 and later, you can enable [multi-tenancy](/components/concepts/multi-tenancy.md) to serve multiple tenants from the same cluster, with their data logically isolated. Each data entry (for example, process definition, process instance, job) is appended with a tenant ID to ensure separation.
+On clusters running generation 8.8 and later, you can enable [logical multi-tenancy](/components/concepts/multi-tenancy.md) to serve multiple logical tenants from the same cluster. The tenants share the cluster infrastructure, and their data is logically isolated. Each data entry (for example, process definition, process instance, job) is appended with a tenant ID to ensure separation.
 :::
 
 ### Zeebe
