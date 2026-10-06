@@ -21,11 +21,11 @@ In-cluster pod-to-pod traffic is not covered by this overlay — see [In-cluster
 
 Camunda components span three trust ecosystems that each require a different CA input format:
 
-| Runtime             | Components                                                                                       | Trust input                                           |
-| ------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
-| OS / OpenSSL native | libcurl, Go `crypto/x509`, OpenSearch native client (post-8.6.7), PostgreSQL JDBC `sslrootcert=` | PEM via `SSL_CERT_FILE`                               |
-| JVM                 | Operate, Tasklist, Optimize, Web Modeler restapi, Identity, Connectors, Zeebe broker             | PKCS12/JKS keystore via `-Djavax.net.ssl.trustStore=` |
-| Node.js             | Console, Web Modeler websockets                                                                  | PEM via `NODE_EXTRA_CA_CERTS`                         |
+| Runtime             | Components                                                                                              | Trust input                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| OS / OpenSSL native | libcurl, Go `crypto/x509`, OpenSearch native client (post-8.6.7), PostgreSQL JDBC `sslrootcert=`        | PEM via `SSL_CERT_FILE`                               |
+| JVM                 | Operate, Tasklist, Optimize, Camunda Hub restapi (includes Console), Identity, Connectors, Zeebe broker | PKCS12/JKS keystore via `-Djavax.net.ssl.trustStore=` |
+| Node.js             | Camunda Hub websockets                                                                                  | PEM via `NODE_EXTRA_CA_CERTS`                         |
 
 The `values-tls.yaml` overlay bridges all three from a single PEM bundle:
 
