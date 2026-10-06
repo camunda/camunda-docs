@@ -42,7 +42,7 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 - **[ProcessOS](#processos)**: Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
 
-- **[Camunda Hub](#camunda-hub)**: Camunda Hub becomes the single place where teams build, govern, and run process solutions in Camunda, replacing Web Modeler and Console. It introduces workspaces to organize your teams' work, along with a [catalog](#catalog) of reusable automation assets, a [business value dashboard](#business-value-dashboard) to track process outcomes against targets, and [credentials](#credentials-manager) you create once and reuse across processes.
+- **[Camunda Hub](#camunda-hub)**: Camunda Hub becomes the single place where teams build, govern, and run process solutions in Camunda, replacing Web Modeler and Console. It introduces workspaces to organize your teams' work, along with a catalog of reusable automation assets, a business value dashboard to track process outcomes against targets, and credentials you create once and reuse across processes.
 
 - **[Multi-region resilience](#multi-region-resilience)**: Failure-domain-aware partition placement replicates process state synchronously across regions, so losing a region costs no committed data (RPO 0). The RDBMS secondary storage replicates asynchronously and catches up from the engine's event stream.
 
@@ -97,27 +97,7 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Camunda Hub](#camunda-hub)</td>
-    <td>Build, govern, and run your process solutions. Hub replaces Web Modeler and Console.</td>
-</tr>
-<tr>
-    <td>[Catalog](#catalog)</td>
-    <td>Manage, publish, and reuse vetted automation assets across teams in Camunda Hub.</td>
-</tr>
-<tr>
-    <td>[Business value dashboard](#business-value-dashboard)</td>
-    <td>Track cycle time, automation rate, activity, and agentic adoption against targets in Camunda Hub.</td>
-</tr>
-<tr>
-    <td>[Credentials](#credentials-manager)</td>
-    <td>Create connector credentials once and reuse them wherever you need them, in Hub and Desktop Modeler.</td>
-</tr>
-<tr>
-    <td>[Environments](#environments)</td>
-    <td>Deploy and run processes in named environments assigned to workspaces, separate from the clusters underneath.</td>
-</tr>
-<tr>
-    <td>[Environment connection](#environment-connection-in-modeler)</td>
-    <td>Connect the modeler in Hub to an environment to use its credentials and run task tests against your real environment.</td>
+    <td>Build, govern, and run your process solutions. Hub replaces Web Modeler and Console, and adds a catalog, business value dashboard, credentials, and environments.</td>
 </tr>
 <tr>
     <td>[Multi-region resilience](#multi-region-resilience)</td>
