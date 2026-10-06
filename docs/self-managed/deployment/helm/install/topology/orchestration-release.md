@@ -41,7 +41,7 @@ Earlier chart versions ignore `global.topology.mode` and deploy a combined relea
 | 8.8 (13.14.0)           | `orchestration.enabled: true`                  | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`                                                              |
 | 8.7 (12.14.0)           | `zeebe.enabled: true`, `operate.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
 
-The management plane databases belong to the Hub release, which is why the 8.7, 8.8, and 8.9 charts reject them here: leaving them enabled would deploy a second Management Identity or Hub database beside the one the Hub release already owns.
+The management plane databases belong to the Hub release. The 8.7, 8.8, and 8.9 charts therefore reject them here. If you leave them enabled, the release deploys a second Management Identity or Hub database beside the one the Hub release already owns.
 
 These keys default to `false`, so a fresh install is unaffected. The check matters when you convert an existing combined release, whose values file may already enable them.
 
