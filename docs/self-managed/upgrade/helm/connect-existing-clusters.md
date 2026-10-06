@@ -30,7 +30,7 @@ Don't combine a version upgrade with this move. Upgrade a cluster later with the
 | A running Hub release      | See [install the Hub release](/self-managed/deployment/helm/install/topology/hub-release.md)                                                                                                                                                                                                                    |
 | OIDC                       | Basic authentication isn't supported for Hub topology connections                                                                                                                                                                                                                                               |
 | One identity provider      | The release must trust the identity provider the Hub release uses. A release with its own bundled Keycloak moves to that provider in step 3                                                                                                                                                                     |
-| A plan for existing data   | Converting stops the release's Management Identity and Web Modeler, and its bundled Keycloak if it has one, and doesn't move their data into the Hub release                                                                                                                                                    |
+| A plan for existing data   | Converting stops the release's Management Identity and Web Modeler. See [plan for existing users, roles, and modeling data](#plan-for-existing-users-roles-and-modeling-data)                                                                                                                                   |
 | Tested backup and restore  | A verified restore of broker volumes, secondary storage, and every database the release uses                                                                                                                                                                                                                    |
 | A non-production rehearsal | Run the procedure against a copy of the release's configuration before production                                                                                                                                                                                                                               |
 
@@ -128,6 +128,56 @@ What job workers and API clients need afterwards depends on what changed:
 - Deploy a test process to the cluster through Hub.
 - Confirm existing process instances are still visible in Operate, and workers still poll and complete jobs.
 - Confirm the release logs no authentication errors.
+
+## Plan for existing users, roles, and modeling data
+
+Plan what happens to the data in each release's Management Identity, bundled Keycloak if it has one, and Web Modeler before you convert it. Converting stops them, and doesn't copy or merge their data into the Hub release.
+
+### Decide which databases the Hub release uses
+
+The Hub release uses one Management Identity database and one Camunda Hub database:
+
+| Option                     | When to use it                                                                 | How                                                                                                                                                                                       |
+| :------------------------- | :----------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Adopt one release's data   | One existing release holds most of your users, roles, and Web Modeler projects | Create the Hub release from that release with [move a release on an earlier chart](./combined-to-split-topology.md#move-a-release-on-an-earlier-chart). Convert the others with this page |
+| Start with empty databases | No release's data is worth keeping as a base                                   | Install the [Hub release](/self-managed/deployment/helm/install/topology/hub-release.md) against new, empty databases, and convert every release with this page                           |
+
+The Hub release can take over a Web Modeler database from 8.9 only. See [bring Web Modeler projects into the Hub](./combined-to-split-topology.md#bring-web-modeler-projects-into-the-hub).
+
+:::warning Run only one Management Identity per database
+Camunda doesn't support running more than one Management Identity against the same database. Never point the Hub release at a Management Identity database that a release you haven't converted still uses.
+:::
+
+### Move users, groups, roles, and tenants
+
+Re-create in the Hub release what each converted release's Management Identity held, if you still need it. What that includes depends on the identity provider:
+
+| What to re-create                                         | Keycloak, where each release had its own                     | External OIDC provider shared by every release         |
+| :-------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------- |
+| Users and groups                                          | Yes, in the Hub release's provider, unless you federate them | No. They stay in the provider                          |
+| Mapping rules from token claims, such as groups, to roles | Only if you used them                                        | Yes, in the Hub release's Management Identity          |
+| Role assignments                                          | Yes                                                          | Yes, for users and groups not covered by mapping rules |
+| Tenants and their assignments, with the same tenant IDs   | If the release uses multi-tenancy                            | If the release uses multi-tenancy                      |
+
+See [role assignment across clusters](/self-managed/deployment/helm/install/topology/hub-release.md#role-assignment-across-clusters).
+
+What stays with each cluster depends on its chart:
+
+| Chart    | Stays with the cluster                                                                                 | Granted through the Hub release                                        |
+| :------- | :----------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- |
+| 8.8, 8.9 | Orchestration Cluster users, groups, roles, tenants, and authorizations, held in its secondary storage | Client access to the cluster's API audience, Optimize, and Camunda Hub |
+| 8.7      | Process data                                                                                           | Access to Zeebe, Operate, Tasklist, and Optimize, and to Camunda Hub   |
+
+Do this before step 5 of the conversion, so users keep access when the release's own Management Identity stops.
+
+### Move Web Modeler projects and files
+
+Export each converted release's Web Modeler projects before step 5, while its Web Modeler still runs, and import them into Camunda Hub afterwards:
+
+- If a project uses Git sync, sync it, and then connect a Camunda Hub project to the same repository. See [Git sync](/components/hub/workspace/manage-projects/git-sync.md).
+- Otherwise, download the files and upload them to a Camunda Hub project. See [import resources](/components/hub/workspace/modeler/modeling/importing-resources.md).
+
+Keep the exported files, and the old database, until you've confirmed the projects in Camunda Hub.
 
 ## Roll back a conversion
 
