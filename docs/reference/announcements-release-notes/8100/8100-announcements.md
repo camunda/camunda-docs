@@ -256,8 +256,8 @@ The AI Agent Sub-process and AI Agent Task element templates are updated in Camu
 
 ## APIs & tools
 
-<!-- :::info 8.10 APIs & Tools migration guide
-Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/).
+:::info 8.10 APIs & Tools migration guide
+Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md).
 :::
 
 :::tip Client and API compatibility
@@ -290,7 +290,7 @@ A new `messageSubscriptionType` enum field is included in each result. Existing 
 <p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#message-subscription-type)</p>
 
 </div>
-</div> -->
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -1037,9 +1037,7 @@ The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the ot
 
 The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools/c8ctl/getting-started.md), which becomes the single tool for configuring and deploying the SAP integration modules.
 
-<!-- TODO: replace the placeholder link below with the dedicated c8ctl SAP plugin page once it is published. -->
-
-<p className="link-arrow">[CSAP CLI documentation](/components/camunda-integrations/sap/csap-cli.md)</p>
+<p className="link-arrow">[CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)</p>
 
 </div>
 </div>
