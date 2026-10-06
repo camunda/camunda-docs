@@ -115,7 +115,7 @@ In Camunda Hub, the runtime connection of the modeler is a connection to an envi
 The runtime connection is disabled by default and behind the feature flag `runtimeConnectionEnabled`. The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
 :::
 
-<p class="link-arrow">[Connect to an environment](/components/hub/workspace/modeler/modeling/runtime-connection.md)</p>
+<p class="link-arrow">[Connect to a runtime](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md)</p>
 
 #### Console {#console-hub}
 
