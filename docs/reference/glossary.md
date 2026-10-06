@@ -168,7 +168,7 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 | [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                            |
 | [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                            |
 | [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                 |
-| [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                            |
+| [Camunda Hub](/components/hub/index.md)              | The design and management platform for Camunda. Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub. Part of the [management plane](#management-plane).                                                                                                                                         |
 | Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeling interface](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
 | [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, these components share the same authentication implementation as the Orchestration Cluster.                                                                                                                                                             |
 
@@ -550,6 +550,14 @@ Camunda groups an agent's conversation history by loop iteration in Operate, mak
 
 The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, these components share the same authentication implementation as the Orchestration Cluster, and Management Identity remains responsible for managing users, groups, roles, and permissions. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
 
+### Management plane
+
+The management plane is the part of a Camunda 8 deployment used to design and manage processes and clusters. It consists of [Camunda Hub](/components/hub/index.md) and [Management Identity](#management-identity), and serves one or more Orchestration Clusters.
+
+In Self-Managed Helm deployments, the management plane is the release with `global.topology.mode` set to `hub`.
+
+- [Deployment topology](/self-managed/reference-architecture/deployment-topology.md)
+
 ### Manual task
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
@@ -685,6 +693,18 @@ A process variable represents the execution state (i.e data) of a process instan
 
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
+
+### ProcessOS
+
+An AI-powered intelligence layer on top of Camunda's [agentic orchestration](#agentic-orchestration) platform. ProcessOS discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
+
+- [ProcessOS](/components/process-os-harness/overview.md)
+
+### ProcessOS Harness
+
+The governance process of [ProcessOS](#processos). ProcessOS Harness is delivered as a set of scripts, plugins, and skills that run on Camunda and drive an AI coding agent, such as Claude Code or GitHub Copilot CLI, through the discovery, transformation, and implementation phases of a project. It asks for human review at defined gates and commits every artifact to Git.
+
+- [ProcessOS Harness](/components/process-os-harness/overview.md)
 
 ### Project
 

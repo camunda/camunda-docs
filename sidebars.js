@@ -93,6 +93,53 @@ module.exports = {
     "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
+      label: "ProcessOS Harness",
+      className: "sidebar-cta-preview sidebar-badge-early-access",
+      link: {
+        type: "doc",
+        id: "components/process-os-harness/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Get started",
+          items: [
+            "components/process-os-harness/get-started/system-requirements",
+            "components/process-os-harness/get-started/project-setup",
+            "components/process-os-harness/get-started/install",
+          ],
+        },
+        {
+          type: "category",
+          label: "Run a project",
+          link: {
+            type: "doc",
+            id: "components/process-os-harness/run-a-project/governance-process",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Phases",
+              items: [
+                "components/process-os-harness/run-a-project/phases/discovery",
+                "components/process-os-harness/run-a-project/phases/transformation",
+                "components/process-os-harness/run-a-project/phases/implementation",
+              ],
+            },
+            "components/process-os-harness/run-a-project/review-cycle",
+            "components/process-os-harness/run-a-project/builder-task",
+            "components/process-os-harness/run-a-project/artifact-generation",
+          ],
+        },
+        {
+          type: "category",
+          label: "Best practices",
+          items: ["components/process-os-harness/best-practices/data-handling"],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Agentic orchestration",
       link: {
         type: "doc",
@@ -311,6 +358,7 @@ module.exports = {
               items: [
                 "components/best-practices/architecture/sizing-saas",
                 "components/best-practices/architecture/sizing-self-managed",
+                "components/best-practices/architecture/sizing-physical-tenants",
                 "components/best-practices/architecture/sizing-benchmarks",
               ],
             },
@@ -879,6 +927,7 @@ module.exports = {
                     "components/hub/workspace/modeler/modeling/browse-all-resources",
                     "components/hub/workspace/modeler/modeling/utilize-forms",
                     "components/hub/workspace/modeler/run-or-publish-your-process",
+                    "components/hub/workspace/modeler/modeling/connect-to-a-runtime",
                     "components/hub/workspace/modeler/process-landscape-visualization",
                     "components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram",
                     "components/hub/workspace/modeler/modeling/versions",
@@ -1112,7 +1161,17 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
-            "components/connectors/out-of-the-box-connectors/databricks",
+            {
+              type: "category",
+              label: "Databricks",
+              link: {
+                type: "doc",
+                id: "components/connectors/out-of-the-box-connectors/databricks/databricks",
+              },
+              items: [
+                "components/connectors/out-of-the-box-connectors/databricks/databricks-ai-fraud-detection",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               Email: [
@@ -1692,18 +1751,6 @@ module.exports = {
             "reference/announcements-release-notes/880/whats-new-in-88",
             "reference/announcements-release-notes/880/880-announcements",
             "reference/announcements-release-notes/880/880-release-notes",
-          ],
-        },
-        {
-          type: "category",
-          label: "8.7",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/870/870-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/870/870-announcements",
-            "reference/announcements-release-notes/870/870-release-notes",
           ],
         },
         "reference/announcements-release-notes/release-policy",
@@ -2382,7 +2429,18 @@ module.exports = {
           items: [
             "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
-            "self-managed/concepts/multi-region/multi-region-rdbms",
+            {
+              type: "category",
+              label: "Multi-Region RDBMS",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/multi-region/multi-region-rdbms",
+              },
+              items: [
+                "self-managed/concepts/multi-region/multi-region-rdbms-growth",
+                "self-managed/concepts/multi-region/multi-region-rdbms-region-loss",
+              ],
+            },
           ],
         },
         "self-managed/operational-guides/data-purge",
