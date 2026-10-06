@@ -744,6 +744,7 @@ camunda.hub:
 | `camunda.hub.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                        | `true`        | `false`       |
 | `camunda.hub.feature.ui-user-invite-enabled`             | [optional]<br/>Enables the **Add members** button on the workspace **Members** page for users who aren't **Organization admins**. **Organization admins** always see the button, regardless of this setting. Adding members through the [Hub API](/apis-tools/hub-api-sm/overview.md) is unaffected. | `false`       | `true`        |
 | `camunda.hub.feature.runtime-connection-enabled`         | [optional]<br/>Enables the [runtime connection](../../../../components/hub/workspace/modeler/modeling/connect-to-a-runtime.md) selector in the BPMN editor.<br/>When disabled, task testing uses its own cluster selection and connector credentials aren't offered in the properties panel.         | `false`       | `true`        |
+| `camunda.hub.feature.credentials-enabled`                | [optional]<br/>Enables [credentials](../../../../components/hub/organization/credentials/index.md) in Camunda Hub.<br/>Offering connector credentials in the properties panel of the BPMN editor also requires `camunda.hub.feature.runtime-connection-enabled`.                                     | `false`       | `true`        |
 | `camunda.marketplace.enabled`                            | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.               | `false`       | `true`        |
 
 Example configuration:
@@ -757,6 +758,7 @@ camunda:
     dynamic-cluster-management-enabled: false
     ui-user-invite-enabled: true
     runtime-connection-enabled: true
+    credentials-enabled: true
 
   marketplace:
     enabled: true
@@ -773,6 +775,7 @@ camunda:
 | `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED`             | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                | `true`        | `false`       |
 | `CAMUNDA_HUB_FEATURE_UI_USER_INVITE_ENABLED`     | [optional]<br/>[Enables the button](#hide-add-members-button) for inviting members to a workspace.                                                                                                                                                                                           | `false`       | `true`        |
 | `CAMUNDA_HUB_FEATURE_RUNTIME_CONNECTION_ENABLED` | [optional]<br/>Enables the [runtime connection](../../../../components/hub/workspace/modeler/modeling/connect-to-a-runtime.md) selector in the BPMN editor.<br/>When disabled, task testing uses its own cluster selection and connector credentials aren't offered in the properties panel. | `false`       | `true`        |
+| `CAMUNDA_HUB_FEATURE_CREDENTIALS_ENABLED`        | [optional]<br/>Enables [credentials](../../../../components/hub/organization/credentials/index.md) in Camunda Hub.<br/>Offering connector credentials in the properties panel of the BPMN editor also requires `CAMUNDA_HUB_FEATURE_RUNTIME_CONNECTION_ENABLED`.                             | `false`       | `true`        |
 | `MARKETPLACE_ENABLED`                            | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.       | `false`       | `true`        |
 
 </TabItem>
