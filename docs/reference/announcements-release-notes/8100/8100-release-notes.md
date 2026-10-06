@@ -1445,6 +1445,18 @@ User, group, role, tenant, and permission management for Camunda Hub and Optimiz
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
+### Upgrade readiness APIs
+
+<!-- https://github.com/camunda/product-hub/issues/3067 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Self-Managed Orchestration Clusters now provide upgrade readiness APIs that report whether a cluster has finished the migrations and exports it needs before you upgrade to the next minor version.
+
+Use them to avoid back-to-back minor upgrades that can put your secondary storage data at risk.
+
+<p class="link-arrow">[Upgrade Readiness API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#upgrade-readiness-api)</p>
+
 ### Usage & billing metrics for 2025 enterprise license model
 
 <!-- https://github.com/camunda/product-hub/issues/3571 -->
