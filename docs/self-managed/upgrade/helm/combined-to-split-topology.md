@@ -144,7 +144,7 @@ See [install an Optimize release](/self-managed/deployment/helm/install/topology
 
 ## Move a release on an earlier chart
 
-An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, and 8.9 charts, so you can move a combined release on one of those charts under a Hub without upgrading it. Follow [keep the cluster in place](#keep-the-cluster-in-place), with the differences in this section. Upgrade each cluster to 8.10 later, one at a time.
+An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, and 8.9 charts, so you can move a combined release on one of those charts under a Hub without upgrading it. Follow [keep the cluster in place](#keep-the-cluster-in-place), with the differences in this section. Upgrade each cluster to 8.10 later, one at a time. To connect more releases to the Hub release afterwards, see [connect existing clusters to Hub](./connect-existing-clusters.md).
 
 | Topic            | Difference                                                                                                                                                                                          |
 | :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

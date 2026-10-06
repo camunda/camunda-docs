@@ -164,6 +164,42 @@ Export each converted release's Web Modeler projects before step 5, while its We
 
 Keep the exported files, and the old database, until you've confirmed the projects in Camunda Hub.
 
+## Connect several existing clusters
+
+Connect several existing releases to one Hub release by moving them to one identity provider, and then converting them one at a time.
+
+### Use one identity provider for every release
+
+Every release the Hub release manages must trust the identity provider that Management Identity and Camunda Hub use. Existing releases often each run their own bundled Keycloak, so choose the shared provider before you convert anything:
+
+| Existing setup                                 | What to do                                                                                                                                                                                                                                                                                                                |
+| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| All releases already use one external provider | Use the same issuer in the Hub release                                                                                                                                                                                                                                                                                    |
+| Each release runs its own bundled Keycloak     | Choose one external Keycloak or OIDC provider for the Hub release. See [external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md) or [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) |
+| Releases use different external providers      | Choose one of them for the Hub release, and move the others to it                                                                                                                                                                                                                                                         |
+
+A release that moves to a different provider changes its token issuer in step 5 of the conversion:
+
+- Signed-in users must sign in again.
+- Tokens from the old provider are rejected. Give job workers and API clients the new token URL, client ID, and client secret before step 5.
+- Users from the old provider exist in the new one only if you create or federate them.
+
+### Grant access to each newly connected cluster
+
+Adding a cluster record creates the clients it declares and adds the cluster's permissions to the shared canonical roles, or to the record's per-cluster roles. Clients that already exist in the Hub release's provider with directly assigned permissions, such as API clients, don't receive the new cluster's audience. The new cluster rejects their tokens with `401 Unauthorized` until you grant them its permissions in Management Identity.
+
+After each Hub `helm upgrade` that adds a record, grant the new cluster's permissions to the existing clients that need it, and assign the record's per-cluster roles if you use them. See [role assignment across clusters](/self-managed/deployment/helm/install/topology/hub-release.md#role-assignment-across-clusters).
+
+### Convert the releases in order
+
+1. Set up the shared identity provider, and create or federate the users who need access.
+2. Create the Hub release, either from the release whose data you keep, or against empty databases. See [decide which databases the Hub release uses](#decide-which-databases-the-hub-release-uses).
+3. Convert the non-production releases first, one at a time. Confirm each one before you start the next.
+4. Convert the production releases last, each in its own maintenance window.
+5. After every release is converted, remove clients, roles, and databases that no release uses. Identity initialization is additive, so it doesn't remove them for you.
+
+Each release keeps its own chart version. When you upgrade a converted release later, update the `version` in its Hub cluster record in the same change window.
+
 ## Roll back a conversion
 
 Run `helm rollback` on the converted release to its previous revision. Broker volumes are unchanged, and the release's own Management Identity, Keycloak, Console, and Web Modeler return against their existing databases and volumes. Clients authenticate against the release's own provider again.

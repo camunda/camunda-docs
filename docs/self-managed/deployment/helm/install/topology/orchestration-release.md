@@ -43,7 +43,7 @@ Chart versions earlier than the minimum versions in the following table ignore `
 
 The Hub plane databases belong to the Hub release, which is why the 8.7, 8.8, and 8.9 charts reject them here: leaving them enabled would deploy a second Management Identity or Hub database beside the one the Hub release already owns.
 
-These keys default to `false`, so a fresh install is unaffected. The check matters when you convert an existing combined release, whose values file may already enable them.
+These keys default to `false`, so a fresh install is unaffected. The check matters when you convert an existing combined release, whose values file may already enable them. See [connect existing clusters to Hub](/self-managed/upgrade/helm/connect-existing-clusters.md).
 
 A chart 8.7 release also needs `architecture: legacy` in its Hub cluster record, so the inventory addresses its split Zeebe, Zeebe Gateway, Operate, and Tasklist services. See [describe a chart 8.7 cluster](./hub-release.md#describe-a-chart-87-cluster).
 
