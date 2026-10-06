@@ -210,7 +210,7 @@ On RDBMS secondary storage, the number of database connections grows with the nu
 
 #### Why it happens
 
-Each node opens a separate database connection pool for every Physical Tenant it serves. Nodes don't share pools, so the connections to one database instance scale with both the cluster size and the number of tenants stored on that instance. This is a known limitation, tracked in [camunda/camunda#61935](https://github.com/camunda/camunda/issues/61935).
+Each node opens a separate database connection pool for every Physical Tenant it serves. Nodes don't share pools, so the connections to one database instance scale with both the cluster size and the number of tenants stored on that instance. This is a known limitation, tracked in [camunda/camunda#61935](https://github.com/camunda/camunda/issues/61935). To plan connection capacity before you add tenants, see [Size RDBMS connections](/components/best-practices/architecture/sizing-physical-tenants.md#size-rdbms-connections).
 
 | Connections                            | Formula                               | Example: 10 nodes, 10 tenants, default pool settings |
 | :------------------------------------- | :------------------------------------ | :--------------------------------------------------- |
