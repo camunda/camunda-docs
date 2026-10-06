@@ -67,10 +67,7 @@ Provider and backend selection are now decoupled. For example, the Anthropic pro
 
 This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manual [migration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) of each element from the current legacy connector.
 
-<ul>
-  <li><span class="link-arrow">[Release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated)</span></li>
-  <li><span class="link-arrow">[Upgrade AI Agent element templates](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md)</span></li>
-</ul>
+<p class="link-arrow">[Upgrade AI Agent element templates](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md)</p>
 
 :::note legacy connector deprecated in 8.10
 The legacy connector is deprecated in 8.10, but is not removed and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
@@ -90,23 +87,16 @@ The custom or compatible endpoint backends for both the Anthropic and OpenAI pro
 
 ### AI agent testing with Camunda Process Test
 
-<!-- https://github.com/camunda/product-hub/issues/3315, https://github.com/camunda/camunda/issues/46462, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/49548 -->
+<!-- https://github.com/camunda/product-hub/issues/3315, https://github.com/camunda/camunda/issues/46462, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/49548 -->
 
-You can now test non-deterministic AI agent behavior in Camunda Process Test with conditional behavior controls and evaluation-based assertions. This helps teams validate agent behavior and output quality with clearer, more reliable test outcomes.
+You can now test non-deterministic AI agent behavior in Camunda Process Test (CPT) with conditional behavior controls and evaluation-based assertions, so you can validate agent behavior and output quality with more reliable test outcomes.
 
-- Define conditional behavior in tests with a `when(condition).then(action)` API for activation-based flow control.
-- Assert output quality with LLM-as-a-judge expectations when exact matching is not enough.
-- Assert semantic similarity with embedding-based comparison for responses that vary in phrasing.
-- Configure remote or local models through code and properties for both local development and CI/CD pipelines.
+- Define conditional behavior in tests with a `when(condition).then(action)` API.
+- Assert output quality with LLM-as-a-judge expectations, or compare semantic similarity with embeddings, when exact matching is not enough.
+- Use judge and semantic similarity assertions on any string value with AssertJ, or define judge assertions in JSON test cases.
+- Configure remote or local models through code and properties, for both local development and CI/CD pipelines.
 
-**Judge assertions in JSON test cases**: Define judge assertions using JSON test case instructions. Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
-
-**Standalone evaluation assertions for judge and semantic similarity**: Camunda Process Test now exposes _judge-based evaluation_ and _semantic similarity evaluation_ as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
-
-<ul>
-  <li><span class="link-arrow">[Test your AI agents with Camunda Process Test](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</span></li>
-  <li><span class="link-arrow">[JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions)</span></li>
-</ul>
+<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
 
 ### Assisted agent tool configuration
 
@@ -376,10 +366,7 @@ Camunda Hub is now the single place where you and your teams build, govern, and 
 
 **Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your clusters. You design once, and manage everything from one place.
 
-<ul>
-  <li><span class="link-arrow">[What's new in 8.10: Introducing Camunda Hub](/reference/announcements-release-notes/8100/whats-new-in-810.md)</span></li>
-  <li><span class="link-arrow">[Camunda Hub](/components/hub/index.md)</span></li>
-</ul>
+<p class="link-arrow">[Camunda Hub](/components/hub/index.md)</p>
 
 ### Business value dashboard
 
@@ -531,17 +518,14 @@ The CLI is non‑interactive, with clear exit codes and optional JSON output, ma
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Camunda Hub is a drop-in replacement for Web Modeler in the Camunda Helm chart, and Console is no longer a standalone deployment. The `camunda/hub` image serves both Console and Web Modeler features, and you enable and configure it with the `camundaHub` key. Hub is first officially exposed in 8.10.
+Camunda Hub is a drop-in replacement for Web Modeler in the Camunda Helm chart, and Console is no longer a standalone deployment. The `camunda/hub` image serves both Console and Web Modeler features, and you enable and configure it with the `camundaHub` key.
 
 - For standard deployments, only the top-level key needs to change: replace `console.enabled` and `webModeler.enabled` with `camundaHub.enabled`.
 - Existing Web Modeler Helm values keep working. A compatibility layer in the application honors the existing value structure, and deprecated keys are logged but not required to change immediately.
 - Moving your values under `camundaHub` is cleanup that you can do later. The upgrade guide documents the steps.
 - Review `camundaHub.restapi.resources` after upgrading, because Console now runs in the Hub REST API pod.
 
-<ul>
-  <li><span class="link-arrow">[Self-Managed Hub configuration](/reference/announcements-release-notes/8100/whats-new-in-810.md#self-managed-hub-configuration)</span></li>
-  <li><span class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub)</span></li>
-</ul>
+<p class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub)</p>
 
 ### Helm chart version matrix improvements
 
@@ -570,10 +554,7 @@ Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm
 
 Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
 
-<ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
-</ul>
+<p class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
 
 ### Host network support for Orchestration Cluster pods
 
@@ -655,15 +636,24 @@ Deployments already running the single-instance shape migrate in place: CloudNat
 
 <p class="link-arrow">[High availability and node maintenance](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#high-availability-and-node-maintenance)</p>
 
-<p class="link-arrow">[Migrate an existing single-instance deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#migrate-an-existing-single-instance-deployment)</p>
-
 ## Integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
 
 ### Camunda for Slack
 
-Release notes required.
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+Camunda for Slack brings tasks, processes, and notifications into Slack through the same App Integrations backend as Microsoft Teams. Everything runs through the `/camunda` slash command, the Camunda direct message, and channel mentions. There is no tab app.
+
+- List and filter tasks, claim and release them, and complete a task from a Block Kit modal.
+- Start a process, and switch organization and cluster.
+- Subscribe a channel or direct message to user task notifications.
+- Use Slack with the App Integrations connector in both directions: a process can send a Slack message, and a Slack message can reach a process.
+
+Microsoft Teams and Slack are independent. You can run either on its own, or both against the same backend.
+
+<p class="link-arrow">[Camunda for Slack](/components/camunda-integrations/app-integrations/slack.md)</p>
 
 ### Microsoft Teams routing and permission-aware task actions
 
@@ -1383,20 +1373,9 @@ Organization admins can now restore a SaaS orchestration cluster directly from a
 - Operational control without opening a support ticket for standard same-cluster restores.
 - Clear restore status visibility during execution.
 
-This release supports in-place restore for the same cluster only. During restore, the cluster is unavailable until completion.
+During a restore, the cluster is unavailable until it completes.
 
-**Known limitations:**
-
-- Same-cluster restore only.
-- Partition count must match between backup and target cluster.
-- Cross-region and cross-cluster restore are not supported in this release.
-
-<ul>
-  <li><span class="link-arrow">[Backup and restore overview](/components/saas/backup-restore-overview.md)</span></li>
-  <li><span class="link-arrow">[Restore a cluster from backup](/components/saas/how-to-restore.md)</span></li>
-  <li><span class="link-arrow">[Restore scenarios](/components/saas/restore-scenarios.md)</span></li>
-  <li><span class="link-arrow">[Restore troubleshooting](/components/saas/restore-troubleshooting.md)</span></li>
-</ul>
+<p class="link-arrow">[Restore a cluster from backup](/components/saas/how-to-restore.md)</p>
 
 ### Startup no longer depends on a reachable identity provider
 
@@ -1437,11 +1416,9 @@ Business ID is now visible in Tasklist, in both the task list and task detail vi
 
 Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, so you configure authentication once, in one place. Camunda Hub and Optimize both continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components, and Camunda plans to remove them in a future release. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
+Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize.
 
 User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
-
-<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -1613,7 +1590,7 @@ The AI Agent Task and AI Agent Sub-process connectors are now available as new, 
 
 Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The legacy element templates are deprecated as of Camunda 8.10.
 
-- This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manually [migrating](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) each element from the still-functioning legacy connector.
+This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manually [migrating](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) each element from the still-functioning legacy connector.
 
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) for more details.
 
@@ -2105,17 +2082,14 @@ Messages can address a Microsoft Teams channel, user, or conversation, a Slack c
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Camunda Hub is a drop-in replacement for Web Modeler in the Camunda Helm chart, and Console is no longer a standalone deployment. The `camunda/hub` image serves both Console and Web Modeler features, and you enable and configure it with the `camundaHub` key. Hub is first officially exposed in 8.10.
+Camunda Hub is a drop-in replacement for Web Modeler in the Camunda Helm chart, and Console is no longer a standalone deployment. The `camunda/hub` image serves both Console and Web Modeler features, and you enable and configure it with the `camundaHub` key.
 
 - For standard deployments, only the top-level key needs to change: replace `console.enabled` and `webModeler.enabled` with `camundaHub.enabled`.
 - Existing Web Modeler Helm values keep working. A compatibility layer in the application honors the existing value structure, and deprecated keys are logged but not required to change immediately.
 - Moving your values under `camundaHub` is cleanup that you can do later. The upgrade guide documents the steps.
 - Review `camundaHub.restapi.resources` after upgrading, because Console now runs in the Hub REST API pod.
 
-<ul>
-  <li><span class="link-arrow">[Self-Managed Hub configuration](/reference/announcements-release-notes/8100/whats-new-in-810.md#self-managed-hub-configuration)</span></li>
-  <li><span class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub)</span></li>
-</ul>
+<p class="link-arrow">[Consolidate Console and Web Modeler into Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub)</p>
 
 ### Modeler
 
@@ -2261,11 +2235,9 @@ Document Handling now supports any S3-compatible object store such as MinIO, Clo
 
 Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, so you configure authentication once, in one place. Camunda Hub and Optimize both continue to accept their existing 8.9 authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those settings are deprecated for both components, and Camunda plans to remove them in a future release. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for details.
+Camunda Hub requires no configuration change to upgrade to 8.10. Confirm your `camunda.security.authentication.oidc.issuer-uri` and `.audiences` settings match your IdP before upgrading Optimize.
 
 User, group, role, tenant, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity.
-
-<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -2399,12 +2371,7 @@ Known limitations:
 - Partition count must match between backup and target cluster.
 - Cross-region and cross-cluster restore are not supported in this release.
 
-Learn more:
-
-- [Backup and restore overview](/components/saas/backup-restore-overview.md)
-- [Restore a cluster from backup](/components/saas/how-to-restore.md)
-- [Restore scenarios](/components/saas/restore-scenarios.md)
-- [Restore troubleshooting](/components/saas/restore-troubleshooting.md)
+<p class="link-arrow">[Restore a cluster from backup](/components/saas/how-to-restore.md)</p>
 
 ### Helm chart deployment
 
