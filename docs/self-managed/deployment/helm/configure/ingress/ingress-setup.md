@@ -323,14 +323,28 @@ An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with 
 
 1. Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
 1. Set up a [certificate in AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html).
-1. Configure Ingress for Camunda using the [AWS example](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md), which results in the following annotations on the Camunda Ingress:
+1. Set the `alb` class on every Ingress object the chart renders. The web application Ingress objects read `global.ingress`, and the Zeebe gRPC Ingress reads `orchestration.ingress.grpc`. Set `backend-protocol-version: GRPC` only on the Zeebe gRPC Ingress, as in the [AWS gRPC example](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md). On a web application Ingress, this annotation makes the ALB target groups use gRPC and breaks the HTTP applications.
 
    ```yaml
-   alb.ingress.kubernetes.io/ssl-redirect: "443"
-   alb.ingress.kubernetes.io/backend-protocol-version: GRPC
-   alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-   alb.ingress.kubernetes.io/scheme: internet-facing
-   alb.ingress.kubernetes.io/target-type: ip
+   global:
+     ingress:
+       className: alb
+       annotations:
+         alb.ingress.kubernetes.io/ssl-redirect: "443"
+         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+         alb.ingress.kubernetes.io/scheme: internet-facing
+         alb.ingress.kubernetes.io/target-type: ip
+
+   orchestration:
+     ingress:
+       grpc:
+         className: alb
+         annotations:
+           alb.ingress.kubernetes.io/ssl-redirect: "443"
+           alb.ingress.kubernetes.io/backend-protocol-version: GRPC
+           alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+           alb.ingress.kubernetes.io/scheme: internet-facing
+           alb.ingress.kubernetes.io/target-type: ip
    ```
 
 The setup doesn't require [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly configured, it retrieves the certificate from ACM based on the host name.
