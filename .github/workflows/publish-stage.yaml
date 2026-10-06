@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "unsupported/8.6"
-      - "dx/publish-unsupported-8.6"
     tags-ignore:
       - "*"
 
