@@ -394,7 +394,7 @@ Camunda Hub introduces credentials. These are authentication and connection conf
 
 <!-- Screenshot -->
 
-<!-- todo: Add link -->
+<p class="link-arrow">[Manage credentials](/components/hub/organization/credentials/index.md)</p>
 
 #### Recover deleted resources
 
