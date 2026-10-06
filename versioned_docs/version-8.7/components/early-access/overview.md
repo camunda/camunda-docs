@@ -42,7 +42,7 @@ These features may be unstable, and subject to significant changes or removal.
 
 ## Early access release
 
-An Early access release is the release of a new product. By testing this release, you have the opportunity to participate in their development by sharing feedback before they reach [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
+An early access release introduces a new product. By testing it, you have the opportunity to contribute to its development by sharing feedback before it reaches [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
 
 ## What to expect
 
