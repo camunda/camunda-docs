@@ -209,7 +209,7 @@ RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/elasticsea
 
 # The deployment topology page merged into the Helm topology install section (8.10).
 # TODO(8.10 release): add the unversioned rule when 8.10 becomes the default version.
-RewriteRule ^docs/next/self-managed/reference-architecture/deployment-topology/?$ /docs/next/self-managed/deployment/helm/install/topology/#release-roles [R=301,NE,L]
+RewriteRule ^docs/next/self-managed/reference-architecture/deployment-topology/?$ /docs/next/self-managed/deployment/helm/install/topology/ [R=301,L]
 
 # The multi-namespace configure page became the deployment topology install section (8.10).
 # Its content is now split by release role under install/topology/.
