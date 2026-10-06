@@ -35,13 +35,13 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 ### Deployment topology
 
-A Camunda 8 Self-Managed deployment is built around one Camunda Hub. The Hub, together with Management Identity, serves one or more Orchestration Clusters, for example one per environment such as development, integration, and production. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant, and each tenant is served by its own Optimize instance.
+A Camunda 8 Self-Managed deployment is built around one [management plane](/reference/glossary.md#management-plane), made up of Camunda Hub and Management Identity. The management plane serves one or more Orchestration Clusters, for example one per environment such as development, integration, and production. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant, and each tenant is served by its own Optimize instance.
 
 <!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
 
 ```mermaid
 graph TD
-    Hub["Camunda Hub<br/>+ Management Identity"]
+    Hub["Management plane<br/>Camunda Hub + Management Identity"]
     OCDev["Orchestration Cluster<br/>development"]
     OCInt["Orchestration Cluster<br/>integration"]
     OCProd["Orchestration Cluster<br/>production"]
@@ -59,21 +59,21 @@ graph TD
     OCProd --> OptProdB
 ```
 
-Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while Camunda Hub remains the single authoritative inventory for clusters, clients, and permissions. Physical Tenants isolate data within a cluster, and the topology is fully declarative, so it fits GitOps tooling such as Argo CD or Flux.
+Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while the management plane remains the single authoritative inventory for clusters, clients, and permissions. Physical Tenants isolate data within a cluster, and the topology is fully declarative, so it fits GitOps tooling such as Argo CD or Flux.
 
 To implement this topology on Kubernetes, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
-### Camunda Hub vs Orchestration Cluster
+### Management plane vs Orchestration Cluster {#camunda-hub-vs-orchestration-cluster}
 
-When designing a reference architecture, it's essential to understand the differences between Camunda Hub and the Orchestration Cluster. These components serve different purposes, include distinct elements, and are deployed separately.
+When designing a reference architecture, it's essential to understand the differences between the management plane and the Orchestration Cluster. These components serve different purposes, include distinct elements, and are deployed separately.
 
-#### Camunda Hub
+#### Management plane {#camunda-hub}
 
 <!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
 
 ![Camunda Hub](./img/management-cluster.jpg)
 
-Camunda Hub can connect to multiple Orchestration Clusters across environments, such as development, integration, and production:
+The management plane can connect to multiple Orchestration Clusters across environments, such as development, integration, and production. It consists of:
 
 - [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
 - [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.

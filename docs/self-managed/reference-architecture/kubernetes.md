@@ -41,9 +41,9 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 
 ## Architecture
 
-The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) describes the deployment topology: one Camunda Hub serving one or more Orchestration Clusters, with one Optimize instance per Physical Tenant. It also explains the distinction between these components:
+The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) describes the deployment topology: one management plane serving one or more Orchestration Clusters, with one Optimize instance per Physical Tenant. It also explains the distinction between these components:
 
-- **Camunda Hub and Management Identity**: Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
+- **Management plane (Camunda Hub and Management Identity)**: Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin), including Connectors.
 - **Optimize**: Process analytics, deployed separately with one instance per Physical Tenant.
 
@@ -65,11 +65,11 @@ A production deployment is recommended. For more information, see the [productio
 
 The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
-#### Camunda Hub
+#### Management plane
 
 ![Camunda Hub and Management Identity](./img/management-cluster.jpg)
 
-Camunda Hub and Management Identity serve all Orchestration Clusters in the deployment. Both are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes it easy to scale each horizontally by running multiple replica pods behind a load balancer, improving availability and request throughput.
+Camunda Hub and Management Identity form the management plane, which serves all Orchestration Clusters in the deployment. Both are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes it easy to scale each horizontally by running multiple replica pods behind a load balancer, improving availability and request throughput.
 
 Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
 
@@ -114,7 +114,7 @@ To further improve fault tolerance, distribute the Orchestration Cluster and oth
 
 Camunda 8 deployments separate workloads into three logical groups, each installed as its own Helm release with a `global.topology.mode` role:
 
-- **Camunda Hub:** Camunda Hub and Management Identity (`hub`), one per deployment
+- **Management plane:** Camunda Hub and Management Identity (`hub`), one per deployment
 - **Orchestration Cluster:** Orchestration Cluster and Connectors (`orchestration`), one per cluster
 - **Optimize:** one release per Physical Tenant (`optimize`)
 
@@ -124,7 +124,7 @@ Deploy these groups into separate [Kubernetes namespaces](https://kubernetes.io/
 
 ```mermaid
 graph TD
-    subgraph hub["Namespace: hub"]
+    subgraph hub["Namespace: hub (management plane)"]
         CH["Camunda Hub"]
         MI["Management Identity"]
     end
@@ -158,9 +158,9 @@ graph TD
 
 For the required cross-namespace traffic, see [allow required network traffic](/self-managed/deployment/helm/install/topology/index.md#allow-required-network-traffic). To implement this topology with the Helm chart, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
-#### Camunda Hub namespace
+#### Management plane namespace
 
-As shown in the [architecture diagram](#camunda-hub), this namespace contains:
+As shown in the [architecture diagram](#management-plane), this namespace contains:
 
 - [Camunda Hub](/components/hub/index.md) — modeling and administrative capabilities
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Camunda Hub and Optimize
