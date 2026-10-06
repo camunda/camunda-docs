@@ -636,6 +636,8 @@ keyPrefix='tenant-a/']
 
 ## Operational considerations
 
+To size database connections, instances, and Elasticsearch or OpenSearch capacity as you add tenants, see [size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md#size-secondary-storage).
+
 For the backup, restore, and scaling procedures that use these storage locations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 ### Backup and restore

@@ -260,6 +260,8 @@ Only `riskprod`'s partition group changes. See [scale a cluster with multiple Ph
 
 **Add a third tenant:** add its configuration block (following the same shape as `riskprod` above) and apply with a rolling restart. It's provisioned automatically, with no separate creation step. Removing a tenant from configuration disables it and retains its data; re-adding it later re-enables the tenant with that same data intact. There's no permanent-delete operation in this release. An actuator endpoint can logically remove an already-disabled tenant from the cluster topology (useful so a disabled tenant doesn't block operations like multi-region failover), but it deletes no data. See [disable, rename, and delete](./provisioning-and-lifecycle.md#disable-rename-and-delete).
 
+Before adding more tenants, check broker memory, database connections, and noisy-neighbor limits in [size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md).
+
 Once you're validating a third tenant's rollout, check its topology alongside the cluster's overall status: `GET /physical-tenants/<id>/v2/topology` for the tenant, `GET /cluster/v2/topology` for the whole cluster (requires [cluster admin](/components/admin/cluster-admin.md) access).
 
 ## Troubleshooting this scenario
@@ -290,6 +292,7 @@ For issues beyond this specific setup flow, see [troubleshoot Physical Tenants](
 - [Configuration reference](./configuration-reference.md)
 - [Provisioning and lifecycle](./provisioning-and-lifecycle.md)
 - [Storage isolation](./storage-isolation.md)
+- [Size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md)
 - [Authentication and authorization](./authentication-authorization.md)
 - [API routing](./api-routing.md)
 - [Troubleshoot Physical Tenants](./troubleshooting.md)
