@@ -29,8 +29,6 @@ To rename a cluster:
 2. At the top of the view, next to the cluster name, open the vertical ellipsis menu.
 3. Click **Rename**.
 
-![cluster-rename](./img/cluster-rename.png)
-
 ## Resume a cluster
 
 If a cluster is paused, you can resume it during deployment or from the cluster details view.
@@ -45,8 +43,6 @@ To resume the cluster during deployment:
 ### Resume from cluster details
 
 You can resume your paused cluster from Camunda Hub at any time.
-
-![Resume a paused cluster from the Console](./img/cluster-resume-console.png)
 
 1. In the left navigation, click **Environments**, click **Clusters**, and then select the paused cluster.
 2. On the **Overview** tab, under **Cluster details**, click **Resume cluster**.
