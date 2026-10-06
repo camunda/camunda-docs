@@ -26,7 +26,7 @@ Application property names are the same whichever deployment method you use, so 
 
 ## What the chart does not own
 
-The chart deploys workloads and wires them to the endpoints you give it. Everything below is yours to provide, and every URL you configure must be reachable from the release that uses it.
+The chart deploys workloads and wires them to the endpoints you give it. The following table shows which concerns you provide and which the chart provides. Every URL you configure must be reachable from the release that uses it.
 
 | Concern                                                        | Owner                                      |
 | -------------------------------------------------------------- | ------------------------------------------ |
