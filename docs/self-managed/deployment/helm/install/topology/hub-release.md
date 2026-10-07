@@ -29,7 +29,7 @@ Each entry in `global.topology.clusters` is the single source for both Managemen
 
 Each record declares a stable unique `id`, the enabled workload components with their client and audience identifiers, the context paths, and the namespace and release name used to derive service endpoints.
 
-Give every cluster record its own client IDs when the clusters share one OIDC provider realm. Clients with the same ID in one realm are one client, so the clusters would overwrite each other's redirect URLs. For example, use `orchestration-<id>`, `optimize-<id>`, and `connectors-<id>`.
+Give every cluster record its own client IDs and audiences, for example `orchestration-<id>`, `optimize-<id>`, and `connectors-<id>`. The chart rejects a client ID or audience that two records share, whichever identity provider you use. With Keycloak, clients with the same ID in one realm would also be one client, so the clusters would overwrite each other's redirect URLs.
 
 | Field                             | Purpose                                                                                        |
 | --------------------------------- | ---------------------------------------------------------------------------------------------- |

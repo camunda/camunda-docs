@@ -165,7 +165,7 @@ An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, and 8.9 char
 
 ### Keep existing clients working
 
-Clients that the release's own Management Identity created, such as the Connectors client, keep requesting tokens with the audience that Management Identity assigned, `orchestration-api` by default. A cluster record usually declares a cluster-specific audience, such as `orchestration-<id>-api`, and after step 2 the Orchestration Cluster accepts only the audiences it's configured with.
+With Keycloak, clients that the release's own Management Identity created, such as the Connectors client, keep requesting tokens with the audience that Management Identity assigned, `orchestration-api` by default. A cluster record usually declares a cluster-specific audience, such as `orchestration-<id>-api`, and after step 2 the Orchestration Cluster accepts only the audiences it's configured with.
 
 If the release doesn't accept the old audience, Connectors can't authenticate to the Orchestration Cluster and never becomes ready. Its log shows:
 
