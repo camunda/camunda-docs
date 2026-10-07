@@ -22,9 +22,6 @@ import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-r
 import AgentPanel from '../../img/whats-new-agent-monitoring.png';
 import overviewImg from '../../../components/optimize/assets/agentic-control-plane-overview.png';
 import HubOverview from '../../img/whats-new-hub.png';
-import HubCatalog from '../../img/whats-new-hub-catalog.png';
-import HubWorkspace from '../../img/whats-new-hub-workspace.png';
-import HubSnapshot from '../../img/whats-new-hub-snapshot.png';
 import CredentialsImg from '../../../components/hub/organization/credentials/img/credentials-choose-credential.png';
 import DesignSystem from '../../img/whats-new-design.png';
 import SecretsOverviewImg from '../../../components/concepts/assets/secrets-overview.png';
@@ -42,7 +39,7 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 - **[ProcessOS](#processos)**: Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
 
-- **[Camunda Hub](#camunda-hub)**: Camunda Hub becomes the single place where teams build, govern, and run process solutions in Camunda, replacing Web Modeler and Console. It introduces workspaces to organize your teams' work, along with a [catalog](#catalog) of reusable automation assets, a [business value dashboard](#business-value-dashboard) to track process outcomes against targets, and [credentials](#credentials-manager) you create once and reuse across processes.
+- **[Camunda Hub](#camunda-hub)**: A new product that replaces Web Modeler and Console as the single place to build, govern, and run process solutions in Camunda. It introduces workspaces to organize your teams' work, along with a [catalog](#catalog) of reusable automation assets, a [business value dashboard](#business-value-dashboard) to track process outcomes against targets, and [credentials](#credentials-manager) you create once and reuse across processes.
 
 - **[Multi-region resilience](#multi-region-resilience)**: Failure-domain-aware partition placement replicates process state synchronously across regions, so losing a region costs no committed data (RPO 0). The RDBMS secondary storage replicates asynchronously and catches up from the engine's event stream.
 
@@ -101,23 +98,23 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Catalog](#catalog)</td>
-    <td>Manage, publish, and reuse vetted automation assets across teams in Camunda Hub.</td>
+    <td>Manage, publish, and reuse vetted automation assets across teams in Hub.</td>
 </tr>
 <tr>
     <td>[Business value dashboard](#business-value-dashboard)</td>
-    <td>Track cycle time, automation rate, activity, and agentic adoption against targets in Camunda Hub.</td>
+    <td>Track cycle time, automation rate, activity, and agentic adoption against targets in Hub.</td>
 </tr>
 <tr>
     <td>[Credentials](#credentials-manager)</td>
-    <td>Create connector credentials once and reuse them wherever you need them, in Hub and Desktop Modeler.</td>
+    <td>Create connector credentials once and reuse them wherever you need them in Hub.</td>
 </tr>
 <tr>
     <td>[Environments](#environments)</td>
-    <td>Deploy and run processes in named environments assigned to workspaces, separate from the clusters underneath.</td>
+    <td>Deploy and run processes in named environments assigned to workspaces.</td>
 </tr>
 <tr>
     <td>[Environment connection](#environment-connection-in-modeler)</td>
-    <td>Connect the modeler in Hub to an environment to use its credentials and run task tests against your real environment.</td>
+    <td>Connect the modeler in Hub to an environment to use its credentials and run task tests against it.</td>
 </tr>
 <tr>
     <td>[Multi-region resilience](#multi-region-resilience)</td>
@@ -133,7 +130,7 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Camunda design system](#camunda-design-system)</td>
-    <td>The new visual design system is introduced for Admin, Camunda Hub, and Tasklist.</td>
+    <td>The new visual design system is introduced for Admin, Hub, and Tasklist.</td>
 </tr>
 <tr>
     <td>[Centralized secret resolution](#centralized-secret-resolution-via-zeebe)</td>
@@ -142,6 +139,10 @@ Important changes in Camunda 8.10 are summarized as follows:
 <tr>
     <td>[Connector operations](#connector-operations)</td>
     <td>Connectors are now discoverable by the operation you want to perform.</td>
+</tr>
+<tr>
+    <td>[Credentials in Desktop Modeler](#credentials-in-desktop-modeler)</td>
+    <td>Select and create reusable credentials on connector tasks in Desktop Modeler.</td>
 </tr>
 <tr>
     <td>[Helm chart deployment](#helm-chart-deployment)</td>
@@ -215,7 +216,8 @@ New features help you more easily configure your agent tools when modeling.
 
 - Changes are explicit, apply only when the correction is deterministic, and can be undone.
 - These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You might need to [update your element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this new feature.
-  :::
+
+:::
 
 <p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
 
@@ -245,7 +247,7 @@ Monitor and evaluate AI agent behavior in Operate.
 
 <img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
 
-- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics) (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
+- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics), model, and system prompt.
 - Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
 - [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
 
@@ -273,6 +275,8 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
 ## ProcessOS
 
 ProcessOS is an AI-powered layer on top of Camunda's agentic orchestration platform. It discovers your existing processes, re-engineers them against defined outcomes, and generates executable Camunda solutions.
+
+ProcessOS has the following key characteristics:
 
 - **A governed process**: The harness runs your engagement through four phases: scope, discover, transform, and implement. Each phase ends at a milestone, and subject matter expert (SME) review cycles act as gates between milestones.
 - **Auditable by design**: The governance process itself runs on Camunda. Project state lives in Camunda, and every artifact is committed to Git, so AI-generated work stays reviewable at every step.
@@ -343,8 +347,6 @@ Camunda Hub introduces many new features, including the following highlights:
 
 Hub introduces the [Hub catalog](/components/hub/organization/manage-catalog/getting-started.md). Center of excellence teams can manage reusable automation assets in a Git repository and publish them to Hub. You can see where assets are being used and which processes are using outdated or deprecated assets.
 
-<img src={HubCatalog} alt="Camunda Hub catalog" class="img-900"/>
-
 Delivery teams can trust that catalog assets have been vetted and approved by the center of excellence. They can discover assets in the catalog, read asset documentation, and apply them when modeling.
 
 <p class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</p>
@@ -362,8 +364,6 @@ Use the **Business Value** page in Camunda Hub to track process outcomes using c
 #### Workspaces and projects
 
 Hub introduces workspaces and projects.
-
-<img src={HubWorkspace} alt="Camunda Hub workspaces" class="img-900"/>
 
 **Workspace**: A workspace is a collaboration environment within an organization, representing a team or business domain. A workspace is assigned members and projects so all related work happens in one shared space. When you migrate to 8.10, all your Web Modeler projects become workspaces.
 
@@ -387,8 +387,6 @@ Hub introduces environments as deployment targets where teams run their processe
 #### Project snapshots and file versioning
 
 In Web Modeler, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit.
-
-<img src={HubSnapshot} alt="Camunda Hub snapshots" class="img-900"/>
 
 Camunda Hub introduces an improved model with more granular control over project and file versions:
 
@@ -463,13 +461,13 @@ This strict new **Workspace > Project > File/folder** hierarchy makes resources 
 
 Before 8.10, you configure a connector's authentication and connection settings directly on each connector task. This doesn't scale well and is hard to maintain. For example, if ten tasks call the same REST API, you configure the same authentication ten times, and you update all ten when something changes.
 
-Camunda Hub and Desktop Modeler introduce credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
+Camunda Hub introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
 
 <img src={CredentialsImg} alt="Create a credential page in Camunda Hub showing credential types such as AWS Credential, REST Authentication, and JDBC Connection, each with the connectors that use it" class="img-900"/>
 
 - Center of excellence teams create and manage credentials centrally in Hub, and see them across all environments.
 - Delivery teams select a credential from the properties panel of a connector task in the modeler, instead of entering the settings on every task.
-- Credentials created outside Hub, for example in Desktop Modeler, can be found by scanning environments and added to Hub for central management.
+- Credentials created outside Hub, for example in [Desktop Modeler](#credentials-in-desktop-modeler), can be found by scanning environments and added to Hub for central management.
 - Credentials are stored as cluster variables, so connectors and job workers can reference them by name.
 
 <p class="link-arrow">[Manage credentials](/components/hub/organization/credentials/index.md)</p>
@@ -763,7 +761,7 @@ The new visual Camunda design system and navigation are introduced for all compo
 
 Centralized secret resolution through Zeebe is introduced in 8.10.
 
-You can use and manage secrets to keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
+Use and manage secrets to keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
 
 <img src={SecretsOverviewImg} alt="Secrets overview" title="Secrets overview" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
@@ -793,6 +791,12 @@ Two changes come with this:
 - Element templates support the `steps` and `presets` keys, so your own templates can offer the same guided operation selection.
 
 <p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
+
+## Credentials in Desktop Modeler
+
+Desktop Modeler also supports [credentials](#credentials-manager). Select an existing credential on a connector task from the properties panel, or create a new one without leaving it, instead of entering the same authentication and connection settings on every task.
+
+<p class="link-arrow">[Use credentials in Desktop Modeler](/components/modeler/desktop-modeler/credentials.md)</p>
 
 ## Camunda for Slack
 
