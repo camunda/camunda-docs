@@ -563,18 +563,41 @@ Camunda recommends restoring to a fresh cluster rather than reusing an existing 
 The reference repository ships helper scripts under `aws/containers/ecs-dual-region-fargate/procedure/`:
 
 ```bash
-# Planned switchover to region 1
-./procedure/failover.sh
+# Export the variables the scripts read from the Terraform outputs
+source ./procedure/export_environment_prerequisites.sh
 
-# Unplanned promote-detach to region 1
-./procedure/failover.sh --unplanned
+# Fail region 0: scale its ECS services to 0, force-remove its zone,
+# and switch the Aurora writer to region 1 if the writer was in region 0
+./procedure/failover.sh --failed-region 0
 
-# Failback to region 0
-./procedure/failback.sh
+# Validate the zone removal without changing anything
+./procedure/failover.sh --failed-region 0 --dry-run
 
-# Failback and also switch the Aurora writer back to region 0
-./procedure/failback.sh --switch-writer
+# The region's tasks are already down: skip the ECS scale-down
+./procedure/failover.sh --failed-region 0 --keep-tasks
+
+# The region is gone, its Aurora cluster included: also skip the writer switch
+./procedure/failover.sh --failed-region 0 --keep-tasks --keep-writer
+
+# Restore region 0: scale it up and re-add its zone
+./procedure/failback.sh --failed-region 0
+
+# Also switch the Aurora writer back to region 0
+./procedure/failback.sh --failed-region 0 --switch-writer
 ```
+
+The writer switch is a planned switchover, so it needs the failed region's Aurora cluster to still be available. The script returns only after the global cluster reports the switchover complete.
+
+If the region is gone, its Aurora cluster included, run `failover.sh` with `--keep-writer`. The script removes the zone, leaves the writer where it is, and finishes. Camunda keeps processing in the surviving region, and exporting to secondary storage waits until a writer is available again. Recover Aurora with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html). The scripts don't automate it, because it can lose data that was not replicated yet.
+
+Without `--keep-writer`, `failover.sh` still removes the zone, then stops with one of these errors instead of switching the writer:
+
+```text
+[<time>] ERROR: The Aurora writer in <failed-region> is <status>, so a planned switchover cannot run.
+[<time>] ERROR: The planned switchover to <surviving-region> did not complete.
+```
+
+The second one appears when AWS still reports the old writer as available early in an outage, then rejects the switchover or does not finish it.
 
 Read the scripts in the reference repository for the exact actions and prerequisites. Failover is manual — no automated health-check-driven promotion is included.
 
