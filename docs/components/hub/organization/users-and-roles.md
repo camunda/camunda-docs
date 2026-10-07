@@ -45,17 +45,17 @@ The following sections describe the roles and permissions of users in your organ
 
 ### Roles and permissions
 
-Every user holds one organization-level role. Organization Owner, Organization Admin, Analyst, and Member form a ladder, where each role includes everything the role below it can do. **DevOps** is a specialized role for infrastructure management that sits outside this ladder.
+Every user holds one organization-level role. The following table shows what each role can do.
 
-| Role               | Organization | Workspaces and projects | Clusters | Environments  | Catalog   | Optimize and business value |
-| :----------------- | :----------- | :---------------------- | :------- | :------------ | :-------- | :-------------------------- |
-| Organization Owner | Full access  | Manage                  | Manage   | Manage        | Manage    | Yes                         |
-| Organization Admin | Manage       | Manage                  | Manage   | Manage        | Manage    | Yes                         |
-| DevOps             | None         | Create and collaborate  | Manage   | Read-only     | Read-only | No                          |
-| Analyst            | Read-only    | Create and collaborate  | None     | Assigned only | Manage    | Yes                         |
-| Member             | Read-only    | Create and collaborate  | None     | Assigned only | Read-only | No                          |
+| Role                           | Organization | Workspaces and projects | Clusters | Environments  | Catalog   | Optimize and business value |
+| :----------------------------- | :----------- | :---------------------- | :------- | :------------ | :-------- | :-------------------------- |
+| Organization Owner (SaaS only) | Full access  | Manage                  | Manage   | Manage        | Manage    | Yes                         |
+| Organization Admin             | Manage       | Manage                  | Manage   | Manage        | Manage    | Yes                         |
+| DevOps                         | None         | Create and collaborate  | Manage   | Manage        | Read-only | No                          |
+| Analyst                        | Read-only    | Create and collaborate  | None     | Assigned only | Manage    | Yes                         |
+| Member                         | Read-only    | Create and collaborate  | None     | Assigned only | Read-only | No                          |
 
-- **Organization Owner**: All rights in the organization, including settings, billing, and ownership transfer. Reserved for a single user per organization; transferred rather than assigned or removed like other roles.
+- **Organization Owner** (SaaS only): All rights in the organization, including settings, billing, and ownership transfer. Reserved for a single user per organization; transferred rather than assigned or removed like other roles.
 - **Organization Admin**: Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. No separate mode needs to be enabled.
 - **Analyst**: Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md).
 - **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization.
@@ -63,7 +63,7 @@ Every user holds one organization-level role. Organization Owner, Organization A
 
 Catalog access has two levels: **Read-only** (browse and use catalog items) for Member and DevOps, and **Manage** (also see usage statistics and adoption data) for Analyst, Organization Admin, and Organization Owner.
 
-Environment access has three levels: **Manage** (view all environments and assign them to workspaces) for Organization Owner and Organization Admin, **Read-only** (view all environments, but can't assign them) for DevOps, and **Assigned only** for Analyst and Member. Users with the **Assigned only** level see the environments assigned to the workspaces where they are an editor or a workspace admin.
+Environment access has two levels: **Manage** (view all environments and resume paused ones) for Organization Owner, Organization Admin, and DevOps, and **Assigned only** for Analyst and Member. Only Organization Owner and Organization Admin can assign environments to workspaces. Users with the **Assigned only** level see the environments assigned to the workspaces where they are an editor or a workspace admin.
 
 Business value access includes viewing the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md) and setting targets. The same roles that grant access to Optimize also grant access to business value.
 
