@@ -17,7 +17,7 @@ This page explains how the validation works, how to bypass it, and which deploym
 - The chart documentation links and descriptions do not appear in Helm errors.
 - The chart schema closes some objects. A closed object rejects any key that the schema does not list.
 
-For example, an unknown key at the top level of your values causes this error:
+The error text depends on the Helm version. This example comes from a test chart that closes its root object, with the unknown key `unk`:
 
 | Helm version            | Error text                                         |
 | ----------------------- | -------------------------------------------------- |
@@ -28,11 +28,9 @@ For example, an unknown key at the top level of your values causes this error:
 
 Fix the values that the error names. This is the recommended action. The bypass removes a safety check.
 
-To find problems before you run Helm, use the `validate` command of the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md#validate-override-files). The toolkit page lists its exit codes.
+To find problems before you run Helm, use the `validate` command of the [Camunda Helm Toolkit](./camunda-helm-toolkit.md#validate-override-files). The toolkit page lists its exit codes.
 
-:::warning
 Do not remove `orchestration.fullnameOverride` to fix a schema error. This change renames the StatefulSet. The brokers then start on new, empty volumes.
-:::
 
 ## Bypass the validation {#bypass-the-validation}
 
@@ -52,7 +50,7 @@ Keep these limits in mind:
 
 ## Check support in your deployment tool
 
-Camunda tested these tools on a kind cluster with a test chart that has a strict schema.
+Camunda tested these tools, except Pulumi, on a kind cluster with a test chart that has a strict schema.
 
 | Tool                       | Bypass possible      | Setting                                                                                            | Tested version | Added in                          |
 | -------------------------- | -------------------- | -------------------------------------------------------------------------------------------------- | -------------- | --------------------------------- |
@@ -85,4 +83,4 @@ Helm passes the `global` values of a parent chart to each subchart. If a subchar
 Helm 3 bug fixes ended on September 9, 2026. Helm 3 security fixes end on February 10, 2027. For more information, see the [Helm 3 end of life announcement](https://helm.sh/blog/helm-v3-end-of-life).
 
 - If you need the bypass, use Helm 3.16.0 or later.
-- Camunda recommends Helm 4. See [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+- Camunda recommends Helm 4. See [Helm 4](./helm-v4.md).
