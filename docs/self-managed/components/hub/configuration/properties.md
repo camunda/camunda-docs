@@ -299,7 +299,7 @@ camunda:
         tags: ["prod"]
 ```
 
-### Physical tenants
+### Physical Tenants
 
 Declare the [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) of your clusters in the Camunda Hub configuration. Camunda Hub surfaces each declared Physical Tenant, and the `default` Physical Tenant of every cluster, as an [environment](/components/concepts/environments.md) that teams deploy to. An environment appears only if its cluster is in your configuration. Camunda Hub reads the cluster configuration once at startup on every instance, so after you change it, perform a rolling restart.
 
@@ -312,7 +312,7 @@ The version of the cluster decides which Physical Tenants Camunda Hub surfaces a
 
 If you declare `physical-tenants` on a cluster earlier than 8.10, Camunda Hub ignores them and logs a warning.
 
-#### Declare physical tenants
+#### Declare Physical Tenants
 
 Declare each additional [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) of a cluster with `physical-tenants`. Camunda Hub uses the ID of a tenant as the name of its environment, except for the `default` tenant.
 
@@ -330,13 +330,13 @@ camunda:
       - id: camunda-platform
         # other fields...
         physical-tenants:
-          - id: payments-prod
-          - id: lending-prod
+          - id: paymentsprod
+          - id: lendingprod
 ```
 
 Each Physical Tenant of a cluster shows the same [tags](#clusters) as the cluster. The tenant inherits the web application addresses of the cluster, and Camunda Hub adds the `/physical-tenants/<tenant ID>` path for the tenants other than `default`.
 
-#### Override components for a physical tenant
+#### Override components for a Physical Tenant
 
 Use `components` on a Physical Tenant to point it at its own component instances. This is a partial override:
 
@@ -345,7 +345,7 @@ Use `components` on a Physical Tenant to point it at its own component instances
 - A tenant other than `default` never inherits Optimize from the cluster, because Optimize needs its own instance for each Physical Tenant. Add an `optimize` component to the tenant to show Optimize.
 - If you remove the override and restart Camunda Hub, the component uses the configuration of the cluster again.
 
-Example configuration that overrides only Optimize for the `payments-prod` tenant. The other components still come from the cluster:
+Example configuration that overrides only Optimize for the `paymentsprod` tenant. The other components still come from the cluster:
 
 ```yaml
 camunda:
@@ -354,7 +354,7 @@ camunda:
       - id: camunda-platform
         # other fields...
         physical-tenants:
-          - id: payments-prod
+          - id: paymentsprod
             components:
               - type: optimize
                 version: 8.10.0
