@@ -46,14 +46,14 @@ An early access release introduces a new product. By testing the release, you ca
 
 ## What to expect from early access releases
 
-|                                    | Early access release                                                                            |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------- |
+|                                    | Early access release                                                                             |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------ |
 | <b>Purpose</b>                     | Test the maturity of a new product before GA                                                     |
-| <b>Suitable for production use</b> | No                                                                                              |
-| <b>Stability</b>                   | APIs, dependencies, and configuration are likely to change.                                     |
-| <b>Feature complete</b>            | No                                                                                              |
-| <b>Documentation</b>               | May have some documentation.                                                                    |
-| <b>Updates</b>                     | No guaranteed updates to newer releases, but development is likely to continue.                 |
-| <b>Support</b>                     | Best-effort support.                                                                            |
-| <b>Maintenance service</b>         | No                                                                                              |
+| <b>Suitable for production use</b> | No                                                                                               |
+| <b>Stability</b>                   | APIs, dependencies, and configuration are likely to change.                                      |
+| <b>Feature complete</b>            | No                                                                                               |
+| <b>Documentation</b>               | May have some documentation.                                                                     |
+| <b>Updates</b>                     | No guaranteed updates to newer releases, but development is likely to continue.                  |
+| <b>Support</b>                     | Best-effort support.                                                                             |
+| <b>Maintenance service</b>         | No                                                                                               |
 | <b>Release cycle</b>               | Outside the standard [release policy](/reference/announcements-release-notes/release-policy.md). |
