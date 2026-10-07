@@ -50,7 +50,7 @@ For the tool versions used, check the [.tool-versions](https://github.com/camund
 This section installs Camunda 8 following the architecture described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md). The architecture includes the following core components:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
-- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Management plane**: Design and management tools (Camunda Hub and Management Identity)
 
 Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
