@@ -935,7 +935,7 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 - `Operations Engineer` → `DevOps`, with no permission change.
 - Catalog access is now split into **Read** (Member, DevOps) and **Manage** (Analyst, Organization Admin, Organization Owner, who additionally see usage statistics and adoption data).
 
-`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/users-and-roles.md#roles-and-permissions) for their status.
+`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users and roles](/components/hub/organization/users-and-roles.md#roles-and-permissions) for their status.
 
 <p className="link-arrow">[Manage users and roles](/components/hub/organization/users-and-roles.md#roles-and-permissions)</p>
 
@@ -1017,7 +1017,6 @@ The Orchestration Cluster contacts an OIDC provider at the first request that ne
 #### SAP BTP Plugin retired
 
 The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration.
-
 
 </div>
 </div>

@@ -5,7 +5,9 @@ sidebar_label: Organization
 description: "Learn how to manage your Camunda 8 SaaS organization, including its users, access, usage, and plan."
 ---
 
-An organization is the top-level entity in Camunda 8 SaaS. It holds your [workspaces](/components/concepts/workspaces.md), [environments](/components/concepts/environments.md), [clusters](/components/concepts/clusters.md), and users. The person who signs up first becomes the Organization Owner and can invite others to help manage it.
+An organization is the top-level entity in Camunda 8 SaaS.
+
+It holds your [workspaces](/components/concepts/workspaces.md), [environments](/components/concepts/environments.md), [clusters](/components/concepts/clusters.md), and users. The person who signs up first becomes the Organization Owner and can invite others to help manage it.
 
 This section covers the tasks that are specific to SaaS organizations. For the tasks that apply to both SaaS and Self-Managed, see [manage organization](/components/hub/organization/manage-organization-settings/organization-settings.md) and [manage users and roles](/components/hub/organization/users-and-roles.md).
 
@@ -36,6 +38,8 @@ Choose and manage your plan.
 - [Update billing reservations](/components/saas/organization/manage-plan/update-billing-reservations.md): Manage your hardware packages and reservations.
 
 ## Account and organization settings
+
+Configure features for your organization and manage your account.
 
 - [Enable alpha features](/components/saas/organization/enable-alpha-features.md): Opt in to alpha features for your organization.
 - [Switch organization](/components/saas/organization/switch-organization.md): Work in more than one organization.

@@ -6,7 +6,7 @@ description: "Learn about the users, roles, and permissions in your organization
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Camunda Hub controls access to the workspaces, projects, and clusters of your organization through users and roles. Organization admins can control access to these resources by managing their organization.
+Camunda Hub controls access to the workspaces, projects, and clusters of your organization through users and roles. Organization admins assign roles and manage users to decide who can use these resources.
 
 ## Users
 
@@ -56,7 +56,7 @@ Every user holds one organization-level role. Organization Owner, Organization A
 | Member             | Read-only    | Create and collaborate  | None     | Assigned only | Read-only | No                          |
 
 - **Organization Owner**: All rights in the organization, including settings, billing, and ownership transfer. Reserved for a single user per organization; transferred rather than assigned or removed like other roles.
-- **Organization Admin**: Manages the organization, its members, and its workspaces, with full access to every workspace and project by default — no separate mode needs to be enabled.
+- **Organization Admin**: Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. No separate mode needs to be enabled.
 - **Analyst**: Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md).
 - **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization.
 - **DevOps**: A specialized role for infrastructure management, not people management. Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.

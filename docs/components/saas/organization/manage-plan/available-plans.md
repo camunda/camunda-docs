@@ -11,15 +11,16 @@ The following Camunda 8 plans are available:
 | Free trial | Create a free account to try Camunda in our cloud.                             |
 | Enterprise | Made for high volume automation and end-to-end process orchestration. We host. |
 
-:::info
+:::note
 
 - To sign up for Camunda 8 and compare plan features, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
 - For more information on Camunda 8, refer to [Camunda 8 product](https://camunda.com/products/cloud/).
-  :::
+
+:::
 
 ## Upgrade to an Enterprise plan
 
-To upgrade to the Enterprise plan, select the Organization management **Plans and pricing** tab, and click **Request quote**.
+To upgrade to the Enterprise plan, click **Organization > Manage organization** in the left navigation, select the **Plans and pricing** tab, and click **Request quote**.
 
 ### Benefits of the Enterprise plan
 
@@ -27,7 +28,7 @@ The Enterprise plan includes the following:
 
 - Invite an unlimited number of users. The Free Trial allows up to 5.
 - [Single sign-on](/components/saas/organization/external-sso.md) with your own identity provider, including default organizations.
-- [Restricted email hostnames](/components/saas/organization/create-manage-users.md) for user invitations, to meet your internal security policies.
+- [Restricted email hostnames](/components/saas/organization/create-manage-users.md#restrict-invite-email-domains) for user invitations, to meet your internal security policies.
 - [IP allowlists](/components/saas/clusters/manage-ip-allowlists.md) to restrict access to your clusters.
 - [Cluster backups and restore](/components/saas/backups.md).
 - [Private connectivity with AWS PrivateLink](/components/saas/secure-connectivity/index.md).
