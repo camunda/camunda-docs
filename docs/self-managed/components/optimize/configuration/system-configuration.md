@@ -118,18 +118,10 @@ In Camunda 8.10, the External REST API accepts only OIDC bearer tokens. Configur
 `api.jwtSetUri` and `api.audience` still work in 8.10, from either the YAML path or the environment variable, but they are deprecated. Camunda plans to remove them in a future release. Behavior differs from 8.9 in three ways:
 
 - The `optimize` default shown below is not carried over. Only an audience you set explicitly takes effect, so if you configure no audience at all, any audience is accepted, and if you configure a different audience but not this one, a token audienced `optimize` is rejected. Set the audience explicitly rather than relying on the default.
-  <<<<<<< HEAD
 - A JWK set applies to the whole API surface rather than to the public API and ingestion endpoints alone, so a token signed by it is accepted on any `/api/**` endpoint that its audience allows.
 - `api.jwtSetUri` is added alongside the JWK set that verifies logins instead of replacing it, so configuring a separate identity provider for your API no longer affects logging in to Optimize. This only works where no `camunda.security.authentication.oidc.issuer-uri` is configured. With one set, tokens from any other issuer are rejected regardless of which JWK set can verify them.
 
 :::
-=======
-
-- A key set applies to the whole API surface rather than to the public API and ingestion endpoints alone, so a token it signed is accepted on any `/api/**` endpoint that its audience allows.
-- `api.jwtSetUri` is added alongside the key set that verifies logins instead of replacing it, so a separate identity provider for your API no longer breaks logging in to Optimize. This works only if `camunda.security.authentication.oidc.issuer-uri` is not set. When it is set, which is the setup described above, Optimize rejects tokens from any other issuer, even if the added key set can verify them.
-  :::
-
-> > > > > > > 95811c622049990d5aea1311b7236f3d2951e33e
 
 | YAML path       | Environment variable                                  | Default value | Description                                                                                                                                                                                                                                                  |
 | --------------- | ----------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
