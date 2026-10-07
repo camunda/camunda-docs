@@ -22,7 +22,7 @@ The data purge feature can be used to:
 
 ## Purge data
 
-You will need access to the Cluster API as described in the [Cluster scaling guide](self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to perform the purge.
+You will need access to the Cluster API as described in the [Cluster scaling guide](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to perform the purge.
 
 :::danger
 The purge operation is irreversible. It will delete the runtime data in the cluster and the historical data in the exporters! Make sure to back up your data before proceeding.
@@ -53,7 +53,7 @@ changeId=$(curl -sL -X POST 'http://localhost:9600/actuator/cluster/purge' | jq 
 lastChangeId=-1
 while [ ! $changeId -eq $lastChangeId ]; do
   lastChangeId=$(curl -sL 'http://localhost:9600/actuator/cluster' | jq '.lastChange.id')
-  [ $changeId -ge $lastChangeId ] && break
+  [ $lastChangeId -ge $changeId ] && break
   echo "Awaiting last change ID ${lastChangeId} to be equal to purge change ID ${changeId}"
   sleep 1
 done
@@ -130,7 +130,7 @@ The response is a [JSON object](https://github.com/camunda/camunda/blob/main/dis
 - `changeId`: The ID of the change initiated to purge the cluster. You can use it to monitor the progress of the purge operation. The ID typically increases, so new requests have a higher ID than previous requests.
 - `currentTopology`: A list of current brokers and the partition distribution.
 - `plannedChanges`: A sequence of operations that must run to complete the purge.
-- `expectedToplogy`: The expected list of brokers and the partition distribution once the purge is completed. For the purge feature, the expected topology will be the same as the current topology.
+- `expectedTopology`: The expected list of brokers and the partition distribution once the purge is completed. For the purge feature, the expected topology will be the same as the current topology.
 
 <details>
   <summary>Example response</summary>

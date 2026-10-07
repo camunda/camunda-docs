@@ -62,7 +62,7 @@ Docker Compose is supported for development and testing environments only.
 
 Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually upgrade each component by following the component upgrade guide:
 
-<p class="link-arrow">[Component upgrade from 8.8 to 8.9](./components/890-to-8100.md)</p>
+<p class="link-arrow">[Component upgrade from 8.9 to 8.10](./components/890-to-8100.md)</p>
 
 For production environments, use Kubernetes with the official Camunda Helm chart or create a custom deployment process using Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 

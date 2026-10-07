@@ -368,4 +368,4 @@ With the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/
 
 ## Troubleshooting
 
-If Ingress is not working as expected, see [Camunda components troubleshooting](self-managed/operational-guides/troubleshooting.md).
+If Ingress is not working as expected, see [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md).

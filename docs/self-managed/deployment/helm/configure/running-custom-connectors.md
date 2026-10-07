@@ -54,7 +54,7 @@ connectors:
       subPath: custom-connector-0.0.1-with-dependencies.jar
 ```
 
-After updating the values, run [Helm install](/self-managed/deployment/helm/install/quick-install.md#install-camunda-helm-chart) as usual.
+After updating the values, run [Helm install](/self-managed/deployment/helm/install/quick-install.md#orchestration-cluster-only) as usual.
 
 :::note
 The `appropriate/curl` image is not the only image option for the `initContainers`. You can use other `curl`-based images, such as `curlimages/curl`. Adjust the `args` to match the image you choose.

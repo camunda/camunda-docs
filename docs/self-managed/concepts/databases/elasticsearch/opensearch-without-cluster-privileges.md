@@ -15,7 +15,7 @@ cluster-level privileges only during schema creation and settings updates.
 The Camunda application then runs with minimal privileges (primarily index-level permissions, with one specific cluster-level requirement for clearing scrolls due to the OpenSearch security model).
 
 - Database support: This setup is supported only for OpenSearch installations (Elasticsearch procedure uses a different configuration).
-- Required privileges: The Camunda application requires the `manage` index-level privilege, and the `indices:data/read/scroll/clear` cluster permission to operate (see [OpenSearch privileges](./opensearch-privileges.md)).
+- Required privileges: The Camunda application requires the `manage`, `read`, and `write` index-level privileges, and the `indices:data/read/scroll/clear` cluster permission to operate (see [OpenSearch privileges](./opensearch-privileges.md)).
 
 To run the schema manager as a standalone application:
 
@@ -87,13 +87,14 @@ Wait for successful completion (application exits cleanly) before moving to step
 
 ### Start the Camunda single application {#start}
 
-Start the application with a less privileged OpenSearch user. Most operations require only index-level privileges (`manage` for required indices), but `indices:data/read/scroll/clear` must be assigned as a cluster permission. OpenSearch treats the permission to clear scrolls as a cluster-wide action because scroll IDs are not bound to a specific index endpoint in the request URL.
+Start the application with a less privileged OpenSearch user. Most operations require only index-level privileges (`manage`, `read`, and `write` for required indices), but `indices:data/read/scroll/clear` must be assigned as a cluster permission. OpenSearch treats the permission to clear scrolls as a cluster-wide action because scroll IDs are not bound to a specific index endpoint in the request URL.
 
 #### OpenSearch user with required privileges
 
 Create or reuse a user with at least the following index privileges on all Camunda indices:
 
-- `manage` (covers create index, mappings updates, search, read, write)
+- `manage` (covers index administration, such as create index and mapping updates)
+- `read` and `write` (cover search, read, and write, which `manage` does not include)
 
 You can create a role using OpenSearch Security plugin APIs (for IAM roles on AWS OpenSearch Service, please refer to [Identity and Access Management in Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html)). Example role definition:
 
@@ -114,10 +115,9 @@ curl -XPUT https://localhost:9200/_plugins/_security/api/roles/camunda_app_role 
           "camunda-*"
         ],
         "allowed_actions": [
+          "manage",
           "indices:data/write/*",
-          "indices:data/read/*",
-          "indices:admin/create",
-          "indices:admin/shards/search_shards"
+          "indices:data/read/*"
         ]
       }
     ]

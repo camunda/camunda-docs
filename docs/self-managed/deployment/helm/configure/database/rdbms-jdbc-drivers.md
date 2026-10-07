@@ -105,8 +105,8 @@ This is a custom image approach. For production, prefer the init-container metho
 :::
 
 ```dockerfile
-FROM camunda/camunda-platform:8.9.0
-ADD ojdbc8.jar /driver-lib/ojdbc8.jar
+FROM camunda/camunda:8.9.0
+ADD ojdbc11.jar /driver-lib/ojdbc11.jar
 ```
 
 Build and push:
@@ -170,7 +170,7 @@ orchestration:
 Copy the driver manually to the pod:
 
 ```sh
-kubectl cp /path/to/ojdbc8.jar <pod-name>:/driver-lib/ojdbc8.jar
+kubectl cp /path/to/ojdbc11.jar <pod-name>:/driver-lib/ojdbc11.jar
 ```
 
 ## Verifying driver loading

@@ -56,7 +56,7 @@ If tenant scope is omitted in compatibility paths, requests resolve to the defau
 - Renaming a Physical Tenant is not supported.
 - Deleting a Physical Tenant is not supported. No single API removes a tenant's configuration and its data together.
 
-Purging removes data for a tenant or for every tenant when you scope it that way; removing a tenant from configuration disables it without deleting persisted data. These are separate operations.
+[Purging](/self-managed/operational-guides/data-purge.md) removes the data of one tenant when you pass `physicalTenant={physicalTenantId}`, and the data of every tenant when you omit it. Removing a tenant from configuration disables it without deleting persisted data. These are separate operations.
 
 A Physical Tenant's enabled state follows its configuration directly:
 
@@ -70,9 +70,13 @@ Each of these transitions takes effect through the same rolling restart used for
 
 A disabled tenant still appears in the persisted cluster topology, which blocks operations that require every tenant to be accounted for, such as multi-region failover.
 
-An actuator endpoint logically removes a tenant that you have already removed from configuration. It drops the tenant from the cluster topology and **deletes no data**. This is not a delete API, and it is not a way to reclaim storage. To remove a tenant's data, act on its schema, indices, or document store directly in the backend.
+The Cluster API logically removes a tenant that you have already removed from configuration with `DELETE /actuator/cluster/physical-tenants/{physicalTenantId}`. It drops the tenant from the cluster topology and **deletes no data**. This is not a delete API, and it is not a way to reclaim storage.
 
-<!-- TODO: Add the exact actuator path and required permission for logical removal. Lena Schoenburg confirmed the behavior in Slack on (no delete API; endpoint deletes no data; exists so a disabled tenant does not block multi-region failover) but did not name the endpoint. -->
+To delete a tenant's data, take these steps in order:
+
+1. Purge the tenant with `POST /actuator/cluster/purge?physicalTenant={physicalTenantId}`. Always include the `physicalTenant` parameter. Without it, the purge removes the data of every Physical Tenant. See [data purge](/self-managed/operational-guides/data-purge.md).
+1. Remove the tenant from configuration and apply the change with a rolling restart.
+1. Logically remove the tenant with the endpoint above.
 
 ## Out of scope
 

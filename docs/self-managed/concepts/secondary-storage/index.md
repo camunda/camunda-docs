@@ -46,7 +46,7 @@ graph TD
         api["Orchestration Cluster API"]
         apps["Operate · Tasklist · Admin"]
     end
-    rdbms["RDBMS\n(PostgreSQL, Oracle, MariaDB, MySQL)"]
+    rdbms["RDBMS\n(PostgreSQL, Oracle, MariaDB, MySQL, SQL Server)"]
     es["Elasticsearch/OpenSearch"]
     opt["Optimize\n(document-store required)"]
     broker -->|"Enable for RDBMS backend"| exp_rdbms
