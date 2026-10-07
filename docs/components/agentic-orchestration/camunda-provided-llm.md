@@ -147,7 +147,7 @@ OpenRouter, Inc. is a sub-processor engaged by Camunda in connection with this f
 
 ### AI terms
 
-This feature is an AI Feature under Camunda's [Terms for AI Usage](https://legal.camunda.com/licensing-and-other-legal-terms#ai-terms), which apply to your use of it unless you have accepted them before or your existing agreement with Camunda provides for AI terms, in which case the latter would prevail. In addition, please refer to our [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md) to learn more about how to use Camunda's AI features responsibly.
+This feature is an AI Feature under Camunda's Terms for AI Usage, which apply to your use of it unless your existing agreement with Camunda provides for AI terms, in which case the latter would prevail. In addition, please refer to our [AI Usage Guidelines](/guides/build-with-ai/ai-usage-guidelines.md) to learn more about how to use Camunda’s AI features responsibly.
 
 ### Data sharing
 
