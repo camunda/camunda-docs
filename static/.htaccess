@@ -278,6 +278,9 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administr
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 
+# The SAP BTP plugin is retired in 8.10; redirect to the 8.9 page, the last version that documents it.
+RewriteRule ^docs/next/components/camunda-integrations/sap/btp-plugin/?$ /docs/8.9/components/camunda-integrations/sap/btp-plugin/ [R=301,L]
+
 # The "Install Bitnami enterprise images" page is removed in 8.10 (Bitnami images are no longer
 # usable from chart 15.x); redirect to the 8.9 page, the last version that documents them.
 RewriteRule ^docs/next/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]

@@ -2,10 +2,10 @@
 id: hub-release
 sidebar_label: "Install the Hub release"
 title: "Install the Camunda Hub release"
-description: "Install the Hub plane: a Helm release with global.topology.mode set to hub, running Camunda Hub and Management Identity."
+description: "Install the management plane: a Helm release with global.topology.mode set to hub, running Camunda Hub and Management Identity."
 ---
 
-The Hub release is the Hub plane. It runs Camunda Hub and Management Identity, and it owns the inventory of every Orchestration Cluster in the deployment.
+The Hub release is the management plane. It runs Camunda Hub and Management Identity, and it owns the inventory of every Orchestration Cluster in the deployment.
 
 When creating a new topology, install the Hub release before its Orchestration Cluster releases. For the prerequisites, Secrets, and network policies this page assumes, see [install the deployment topology](./index.md).
 
@@ -28,6 +28,8 @@ The chart fails the render with a `[camunda][error]` message if any of these is 
 Each entry in `global.topology.clusters` is the single source for both Management Identity presets and Camunda Hub inventory, so client IDs, audiences, roles, and endpoints can't drift apart.
 
 Each record declares a stable unique `id`, the enabled workload components with their client and audience identifiers, the context paths, and the namespace and release name used to derive service endpoints.
+
+Each component in a cluster record needs its own client ID, and the `orchestration` and `optimize` components also need an audience. Regardless of the identity provider, every client ID and audience must be unique: the chart rejects a value that another component, another record, or one of the Hub release's own clients already uses. The chart defaults, such as `orchestration` and `orchestration-api`, can belong to one record at most. Give the other records their own, for example `orchestration-<id>`, `optimize-<id>`, and `connectors-<id>`. With Keycloak, clients with the same ID in one realm would also be one client, so the clusters would overwrite each other's redirect URLs.
 
 | Field                             | Purpose                                                                                        |
 | --------------------------------- | ---------------------------------------------------------------------------------------------- |
