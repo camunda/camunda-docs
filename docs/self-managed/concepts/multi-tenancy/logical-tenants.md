@@ -5,13 +5,19 @@ sidebar_label: "Logical Tenants"
 description: "Logical Tenants provide lightweight tenant-ID based isolation within a single Camunda 8 cluster."
 ---
 
-Logical Tenants are the lightweight tenant-ID based multi-tenancy model available within Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
 
 Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [multi-tenancy overview](index.md) to compare with other isolation models.
 
 ## How Logical Tenants work
 
-Camunda 8 implements Logical Tenancy using tenant identifiers within a single installation. All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object (e.g., process definitions, process instances, jobs).
+Camunda 8 implements Logical Tenancy using tenant identifiers within a single installation. All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object (for example, process definitions, process instances, jobs).
 
 ### Tenant identifier
 
@@ -92,6 +98,10 @@ All Logical Tenant configuration and management pages are consolidated here. Eac
 ### Component-specific setup
 
 - [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md). Enable and configure multi-tenancy features specific to Optimize.
+
+## Logical Tenants in Camunda Hub
+
+If multi-tenancy is enabled, you provide a Logical Tenant when you [deploy to a target environment](/components/hub/workspace/manage-projects/deploy-project.md#logical-tenants) in Camunda Hub. The Logical Tenant is separate from the [environment](/components/concepts/environments.md), which is a Physical Tenant or a cluster.
 
 ## Next steps
 

@@ -5,6 +5,7 @@ description: "Document classification templates use LLMs to automatically classi
 toc_max_heading_level: 3
 ---
 
+import IdpClassificationCreateModalImg from './img/idp-create-classification-modal.png';
 import IdpClassificationDocTypesImg from './img/idp-classification-doc-types.png';
 import IdpClassificationTestImg from './img/idp-classification-test.png';
 import IdpClassificationResultsImg from './img/idp-classification-results.png';
@@ -29,6 +30,9 @@ Document classification templates require an environment on version 8.9 or later
 To create a new document classification template:
 
 1. In your [IDP project](./idp-projects.md), click **Create new** and select **Classification template**.
+
+<img src={IdpClassificationCreateModalImg} alt="Create a classification template modal" width="80%" />
+
 2. **Name**: Enter a descriptive name for the classification template, such as "Incoming document classifier".
 3. **Description**: Enter a description to provide more information about what types of documents this template classifies.
 4. **Provider**: Select the cloud provider you want to use for classification. The available providers depend on the [connector secrets](./idp-configuration.md) configured for your environment's cluster.
@@ -140,8 +144,8 @@ Publish the classification template to make it available for [integration into y
 <img src={IdpClassificationPublishImg} alt="Publish classification template" width="80%" />
 
 1. Click **Publish** and select either:
-   - **Publish to project**: Only users in the Camunda Hub project can access the classification template.
-   - **Publish to organization**: The classification template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
+   - **Publish to workspace**: The classification template is made available to all projects within the workspace.
+   - **Publish to organization**: The classification template is made available as a shared resource within your organization. This option is only available for Organization Owners or Organization Admins.
 
 2. On the **Publish Classification Template** dialog, configure the publish settings:
    - **Extraction engine**: Select the text extraction engine to use for the published classification template.

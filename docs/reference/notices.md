@@ -33,6 +33,46 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 65
+
+### Publication date
+
+October 7, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Zeebe (8.7)
+
+### Impact
+
+The document endpoint of the Orchestration Cluster REST API rendered uploaded document content in the browser instead
+of downloading it. A user allowed to upload documents could use this to run scripts in the application's origin with
+the privileges of another user who opens the document, including administrators.
+
+Severity: High.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Orchestration Cluster ≤ 8.9.22 or ≤ 8.8.40
+- Camunda Zeebe ≤ 8.7.42
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Orchestration Cluster 8.10.0, 8.9.23, 8.8.41
+- Camunda Zeebe 8.7.43
+
+The document endpoint now serves all document content with a `Content-Security-Policy: sandbox` header, and returns
+documents as downloads (`Content-Disposition: attachment`), except for PDF files and images, which are still displayed
+in the browser.
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of
+[auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
 ## Notice 64
 
 ### Publication date
@@ -51,7 +91,7 @@ A remote code execution vulnerability was identified in Camunda's FEEL expressio
 
 Severity: Critical 9.9 (CVSS v3.1: AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H).
 
-This vulnerability was identified by Camunda's Application Security Team, with no known report or exploit beyond our own security investigation. A CVE identifier has been requested and this notice will be updated once it is assigned.
+This vulnerability was identified by Camunda's Security Team, with no known report or exploit beyond our own security investigation. A CVE identifier has been requested and this notice will be updated once it is assigned. For further details, see [GHSA-vx3p-v6cf-vfjw](https://github.com/camunda/feel-scala/security/advisories/GHSA-vx3p-v6cf-vfjw).
 
 ### How to determine if the installation is affected
 
@@ -167,7 +207,7 @@ September 8, 2026
 
 The connector runtime resolves a secret reference (for example, `{{secrets.MY_API_KEY}}`) wherever that literal text appears in a connector's input, without restricting resolution to the field where the reference was declared. Under the following conditions, an attacker may be able to cause a connector to resolve and disclose a secret outside its intended scope:
 
-- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/saas/clusters/manage-secrets.md).
 - Untrusted input reaches a process variable — for example, through a user task, an inbound connector such as a webhook or email, or an API call.
 - That process variable is passed, unsanitized, into a connector field (for example, an email body or an HTTP request field).
 - The attacker can guess or know the name of a secret that exists in that context. This does not require knowing the secret's value, only its name.
@@ -189,7 +229,7 @@ Camunda has provided the following releases which contain the fix:
 
 - Camunda Connectors 8.9.10, 8.8.19, 8.7.25, 8.6.28
 
-On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/hub/organization/manage-clusters/settings.md#secret-filter-mode).
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/saas/clusters/settings.md#secret-filter-mode).
 
 **Interim mitigation**:
 

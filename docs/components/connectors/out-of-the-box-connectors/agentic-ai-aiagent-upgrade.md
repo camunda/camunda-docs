@@ -7,13 +7,29 @@ description: Upgrade AI Agent connectors from the legacy element templates to th
 
 Upgrade AI Agent connectors from the legacy element templates to the new element templates, and migrate their model provider configurations.
 
+## Legacy and new element templates
+
+Camunda 8.10 provides two generations of AI Agent element templates, and each generation runs on its own job types. This page uses the following terms:
+
+- **Legacy element templates** are the AI Agent Task and AI Agent Sub-process templates available before Camunda 8.10. Modeler marks them as **(Deprecated)**. They run on the legacy job types.
+- **New element templates** are the AI Agent Task and AI Agent Sub-process templates introduced in Camunda 8.10 (template ID suffix `.v2`). They run on new job types.
+
+| Element              | Template generation | Element template ID                                      | Job type                                    |
+| :------------------- | :------------------ | :------------------------------------------------------- | :------------------------------------------ |
+| AI Agent Task        | Legacy              | `io.camunda.connectors.agenticai.aiagent.v1`             | `io.camunda.agenticai:aiagent:1`            |
+| AI Agent Task        | New                 | `io.camunda.connectors.agenticai.ai-agent-task.v2`       | `io.camunda.agenticai:aiagent:task:2`       |
+| AI Agent Sub-process | Legacy              | `io.camunda.connectors.agenticai.aiagent.jobworker.v1`   | `io.camunda.agenticai:aiagent-job-worker:1` |
+| AI Agent Sub-process | New                 | `io.camunda.connectors.agenticai.ai-agent-subprocess.v2` | `io.camunda.agenticai:aiagent:subprocess:2` |
+
+The job type in a process definition determines which connector implementation executes the element. A process definition that was deployed with a legacy template keeps using the legacy job type until you deploy a new version with the new template.
+
 ## Why upgrade
 
 Starting with Camunda 8.10, new element templates are available for the [AI Agent Task](./agentic-ai-aiagent-task.md) and [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) connectors. These templates broaden the ways you can connect AI agents to LLMs. You can select from more model providers and backends to use an LLM route that meets your organization's requirements. The new templates also expose provider-specific capabilities that can support cheaper, faster, and more transparent agent behavior:
 
 - Reasoning and extended thinking configuration (Anthropic's **Effort**/**Thinking mode**, OpenAI's **Effort**, and Google Gemini's **Thinking budget**/**Thinking level**).
 - Prompt caching configuration (Anthropic, AWS Bedrock Converse).
-- New backend options: [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#anthropic) for Anthropic Claude models and [Google Gemini API](./agentic-ai-aiagent-model-providers.md#google-gemini) for direct Gemini access. Microsoft Foundry was already available as **Azure OpenAI** in the legacy templates. It is now a backend of the general-purpose OpenAI provider, rather than its own top-level provider.
+- New backend options: [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#anthropic) for Anthropic Claude models and [Google Gemini API](./agentic-ai-aiagent-model-providers.md#google-gemini) for direct Gemini access. Microsoft Foundry was already available as **Azure OpenAI** in the legacy templates. It is now a backend of both the OpenAI and Anthropic providers, rather than its own top-level provider. Your AI agents can therefore also use Claude models served by Foundry.
 - A [custom chat model provider](./agentic-ai-aiagent-model-providers.md#custom-implementation) option, for Self-Managed/hybrid deployments.
 
 The legacy element templates keep working, and existing implementations don't need to migrate immediately. However, they don't expose the new provider and backend choices or provider-specific configuration described above. Apply a new element template to use these capabilities.
@@ -24,18 +40,58 @@ Camunda deprecates the legacy element templates in 8.10. They will not receive n
 
 ## How to upgrade
 
+:::important
+The new templates require Desktop Modeler 5.51.0 or later. Earlier versions show them as **Not found**.
+:::
+
 The legacy and new element templates are separate templates, not two versions of the same template. This means upgrading is a manual, per-element operation:
 
-1. Open the AI Agent Task or AI Agent Sub-process element in Camunda Modeler. Set the process' modeler/execution version to Camunda 8.10 or later. This makes the new element template available to select.
+1. Open the AI Agent Task or AI Agent Sub-process element in [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md). Set the process' modeler/execution version to Camunda 8.10 or later. This makes the new element template available to select.
 2. Select the element in the diagram. Choose **Change element**, then apply the new **AI Agent Task** or **AI Agent Sub-process** template. Camunda deprecates the legacy template. The template picker offers the new template for that element.
 3. Re-enter the model provider configuration with the [mapping tables](#model-provider-configuration-mapping) below. The provider fields require the most migration work.
 4. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged, but re-check any values that need to be re-entered after you apply the new template.
-5. Deploy the new process definition version to a non-production environment first. Test a representative prompt and tool-call path. Make sure authentication, endpoint, and model behavior are correct before you promote it. See [testing process definitions](/components/best-practices/development/testing-process-definitions.md) for a test approach. The prior version keeps running until you deploy this one. It remains available as a rollback path.
-6. Once verified, promote the new version to production through your normal release process.
+5. If you upgrade an AI Agent Task, [update its tools ad-hoc sub-process](#ai-agent-task-tools-sub-process). The new AI Agent Task template does not manage this sub-process.
+6. Deploy the new process definition version to a non-production environment first. Test a representative prompt and tool-call path. Make sure authentication, endpoint, and model behavior are correct before you promote it. See [testing process definitions](/components/best-practices/development/testing-process-definitions.md) for a test approach. The prior version keeps running until you deploy this one. It remains available as a rollback path.
+7. Once verified, promote the new version to production through your normal release process.
 
 :::important
 Swapping the element template affects only the process definition you redeploy. Already-deployed process definitions and their running process instances keep executing on the legacy job worker. They switch only after you deploy a new version with the new template.
 :::
+
+## Other changes in the new templates
+
+### Agent definition
+
+The new templates mark the element as an agent with the `zeebe:agentDefinition` extension element, so Camunda recognizes it as an [agent definition](/components/agentic-orchestration/agent-definitions-and-instances.md). The template writes this element when you apply it, and you don't need to configure it.
+
+### Job type overrides
+
+If you [override the AI Agent job types](./agentic-ai-aiagent-customization.md) with environment variables, for example in a hybrid setup, the legacy variables don't apply to the new job types. The legacy and new job workers are registered separately, so each variable only affects its own job worker. Set the new variables to use your custom type with the new templates:
+
+| Element              | Legacy variable                      | New variable                         |
+| :------------------- | :----------------------------------- | :----------------------------------- |
+| AI Agent Task        | `CONNECTOR_AI_AGENT_TYPE`            | `CONNECTOR_AI_AGENT_TASK_TYPE`       |
+| AI Agent Sub-process | `CONNECTOR_AI_AGENT_JOB_WORKER_TYPE` | `CONNECTOR_AI_AGENT_SUBPROCESS_TYPE` |
+
+The element template must reference the same custom job type. Keep the legacy variables set for as long as process definitions that use the legacy templates are deployed or running.
+
+### AI Agent Task: tools sub-process {#ai-agent-task-tools-sub-process}
+
+The AI Agent Sub-process template configures its own ad-hoc sub-process. The AI Agent Task is a service task that references a separate ad-hoc sub-process containing the tools, and the new AI Agent Task template does not manage that sub-process. After you apply the new template to an AI Agent Task, update the tools sub-process manually:
+
+1. Mark the ad-hoc sub-process as a tool container. Open the **Extension properties** section of the sub-process and add a property named `io.camunda.agenticai.toolContainer` with the value `true`. See [declare a sub-process as agentic](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic). Without this property, the Modeler's agent tool configuration features, such as linting and autofill, are not available for the sub-process.
+2. Add `completedAt: now()` to the **Output element** of the sub-process' multi-instance configuration:
+
+   ```feel
+   {
+     id: toolCall._meta.id,
+     name: toolCall._meta.name,
+     content: toolCallResult,
+     completedAt: now()
+   }
+   ```
+
+   The agent uses `completedAt` as the time the tool call completed. If it is missing, the AI Agent connector uses the time at which it processes the tool call results instead, which can be later than the actual completion time for slow or parallel tool calls.
 
 ## Model provider configuration mapping
 
@@ -53,6 +109,8 @@ If you had a custom **Endpoint** configured in the legacy template:
 | Legacy field | New template guidance                                                                                                                                |
 | :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Endpoint     | Select **Backend**: [Anthropic](./agentic-ai-aiagent-model-providers.md#anthropic) > Custom / compatible endpoint, and enter it as **API endpoint**. |
+
+The custom or compatible backend also supports **OAuth 2.0 client credentials** for gateways in front of Anthropic that require a bearer token.
 
 The new template additionally exposes **Effort**, **Thinking mode**, and **Enable prompt caching**. None of these have a legacy equivalent.
 
@@ -128,7 +186,7 @@ The legacy template always used the Chat Completions API. The new template defau
 
 **Legacy template Provider**: OpenAI-compatible → **New template Provider**: [OpenAI](./agentic-ai-aiagent-model-providers.md#openai), **Backend**: Custom / compatible endpoint.
 
-**API endpoint**, **API key**, **Headers**, **Query parameters**, **Timeout**, **Model**, **Temperature**, and **top P** carry over unchanged, subject to the notes below.
+**API endpoint**, **Headers**, **Query parameters**, **Timeout**, **Model**, **Temperature**, and **top P** carry over unchanged. The legacy **API key** field now sits behind the **Authentication** selector, as described in the notes below.
 
 | Legacy field              | New template field                                                        |
 | :------------------------ | :------------------------------------------------------------------------ |
@@ -136,13 +194,14 @@ The legacy template always used the Chat Completions API. The new template defau
 | Custom parameters         | Body properties                                                           |
 
 :::important
-You must enter an **API key** in the new template. The legacy template made the **API key** optional. Resolve your effective credential as follows before you enter it:
+The new template replaces the legacy **API key** field with an **Authentication** selector. Resolve your effective credential as follows before you configure it:
 
 - If your legacy template's **Headers** contained an `Authorization` header, it took precedence over the **API key** field. Carry this behavior forward manually:
-  - If the header used `Bearer <token>`, move the token value without the `Bearer` prefix into the new template's **API key** field. Remove the `Authorization` header from **Headers**.
-  - For any other scheme, such as `Basic ...`, keep the header in **Headers**. Enter any non-blank placeholder value in **API key**. The connector does not use it for authentication.
-- Otherwise, carry your legacy **API key** value over directly. If you did not configure an `Authorization` header or an API key, enter any non-blank placeholder value.
+  - If the header used `Bearer <token>`, select **API key** and move the token value without the `Bearer` prefix into the **API key** field. Remove the `Authorization` header from **Headers**.
+  - For any other scheme, such as `Basic ...`, keep the header in **Headers** and select **None**.
+- Otherwise, select **API key** and carry your legacy **API key** value over directly. If you did not configure an `Authorization` header or an API key, select **None**.
 
+The new template additionally supports **OAuth 2.0** client credentials, for a gateway that issues bearer tokens through the client-credentials flow.
 :::
 
 Also check the resulting request path. The new template appends `/chat/completions` or `/responses` to **API endpoint** for the selected **API**. This may differ from your legacy endpoint.

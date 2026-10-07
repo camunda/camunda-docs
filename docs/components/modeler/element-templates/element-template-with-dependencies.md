@@ -6,6 +6,8 @@ description: "Learn what you need to consider when handling template dependencie
 
 When creating element templates, you may want to link to a resource like a [form](/components/modeler/forms/camunda-forms-reference.md), or pre-populate a [secret](/components/connectors/use-connectors/index.md#using-secrets) expression. Your template might require a specific [job worker](/components/concepts/job-workers.md) to execute an action. These are all examples of dependencies.
 
+<!-- source: https://www.figma.com/design/VyyoV0hNbazXV8DKcMMEU9/Camunda-Documentation-Assets?node-id=2092-171&t=iLUDOvmj8m6yUQ5U-1 -->
+
 ![Element template dependencies](./img/element-template-dependencies.png)
 
 Element templates can depend on:
@@ -15,7 +17,7 @@ Element templates can depend on:
 - [BPMN process](/components/modeler/bpmn/bpmn.md): used in a call activity. This may introduce nested dependencies (e.g., a called process may depend on other processes and/or resources).
 - [DMN decisions](/components/modeler/dmn/dmn.md): used in business rule tasks.
 - [Job workers](/components/concepts/job-workers.md): provide behavior for service tasks such as message send events, send tasks, service tasks, business rule tasks, or custom connector runtime.
-- Secrets: used in connector elements to access sensitive values (see [secrets in self-managed](/self-managed/components/connectors/connectors-configuration.md#secrets) and [secrets in SaaS](/components/hub/organization/manage-clusters/manage-secrets.md)).
+- Secrets: used in connector elements to access sensitive values (see [secrets in self-managed](/self-managed/components/connectors/connectors-configuration.md#secrets) and [secrets in SaaS](/components/saas/clusters/manage-secrets.md)).
 
 To make a template available for use, complete two key steps:
 

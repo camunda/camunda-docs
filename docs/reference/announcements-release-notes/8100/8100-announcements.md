@@ -7,6 +7,7 @@ toc_max_heading_level: 3
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 
 <PageDescription />
 
@@ -150,6 +151,21 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 </div>
 <div className="release-announcement-content">
 
+#### New GCP region
+
+Camunda 8.10 adds support for the Montréal, North America (`northamerica-northeast1`) region in Camunda 8 SaaS.
+
+<p className="link-arrow">[Supported GCP regions](/components/saas/regions.md#google-cloud-platform-gcp-regions)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
 #### MariaDB 12.3 now supported
 
 Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11, 11.4, 11.8, and 12.3.
@@ -178,21 +194,6 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-
-#### AI Agent connectors: redesigned templates, legacy templates deprecated {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
-
-Camunda 8.10 introduces redesigned element templates for the AI Agent Task and AI Agent Sub-process connectors. The new templates broaden support for AI providers and backends, helping you use LLM routes that meet your organization's requirements. Provider-specific capabilities, such as thinking and prompt caching, can support cheaper, faster, and more transparent agent behavior. The legacy element templates are deprecated as of Camunda 8.10, but keep working; existing implementations aren't required to migrate immediately.
-
-**Action:** Use the new element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing legacy implementation to the new templates.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -202,6 +203,21 @@ Camunda 8.10 introduces redesigned element templates for the AI Agent Task and A
 [Camunda 8.10.0-alpha1](/reference/announcements-release-notes/8100/8100-release-notes.md#8100-alpha1) redesigns the conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage). Built-in stores (in-process, Camunda Document, AWS AgentCore) are migrated transparently; only custom `ConversationStore` implementations are affected.
 
 **Action:** If you maintain a custom `ConversationStore`, migrate to the new SPI. See the updated [AI Agent connector customization guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) for the new shape, and the [migration guide on GitHub](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for a step-by-step walkthrough.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### AI Agent connectors: redesigned templates, legacy templates deprecated {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
+
+Camunda 8.10 introduces redesigned element templates for the AI Agent Task and AI Agent Sub-process connectors. The new templates broaden support for AI providers and backends, helping you use LLM routes that meet your organization's requirements. Provider-specific capabilities, such as thinking and prompt caching, can support cheaper, faster, and more transparent agent behavior. The legacy element templates are deprecated as of Camunda 8.10, but keep working; existing implementations aren't required to migrate immediately.
+
+**Action:** Use the new element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing legacy implementation to the new templates.
 
 </div>
 </div>
@@ -240,8 +256,8 @@ The AI Agent Sub-process and AI Agent Task element templates are updated in Camu
 
 ## APIs & tools
 
-<!-- :::info 8.10 APIs & Tools migration guide
-Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/).
+:::info 8.10 APIs & Tools migration guide
+Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md).
 :::
 
 :::tip Client and API compatibility
@@ -274,7 +290,7 @@ A new `messageSubscriptionType` enum field is included in each result. Existing 
 <p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#message-subscription-type)</p>
 
 </div>
-</div> -->
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -344,7 +360,7 @@ The following items are removed:
 
 - Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) instead of the removed Operate API and Tasklist API.
 - Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) instead of user task access restrictions.
-- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
+- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/hub/workspace/modeler/modeling/utilize-forms.md) and the Orchestration Cluster REST API instead of public start forms.
 - Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
 
 <p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
@@ -390,6 +406,26 @@ The `key` sort field on the [Search tenants](/apis-tools/orchestration-cluster-a
 </div>
 <div className="release-announcement-content">
 
+#### Deleting a process definition with running instances defers history deletion
+
+The delete resource endpoint now accepts process definition deletion when the definition still has running instances. Instead of rejecting the request or waiting for physical removal, the definition [drains](/components/concepts/resource-deletion.md#draining): new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically afterwards.
+
+As a result, when `deleteHistory` is `true`, the `batchOperation` field in the response is `null` for such a definition. Its history is removed as part of the draining lifecycle rather than through an immediately-returned batch operation. The field is still populated for decision requirements definitions and for process definitions that are already fully deleted.
+
+**Action:** If you read `batchOperation` from the delete response to track history deletion, handle a `null` value: the definition is draining. Track progress through the process definition `state` (`DRAINING`) or the `zeebe_process_definitions_draining_count` metric instead.
+
+<p className="link-arrow">[Resource deletion](/components/concepts/resource-deletion.md#draining)</p>
+<p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#delete-draining)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Camunda Spring Boot Starter now bundles Spring Boot 4.1.x
 
 Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
@@ -400,6 +436,69 @@ Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tool
 </div>
 
 ## Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
+
+Starting with 8.10.0, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`. In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+
+**Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, add the reference. To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### JWT-authorized inbound webhooks require issuer, audience, and expiration claims
+
+Starting with Camunda 8.10, inbound webhooks configured with JWT authorization validate the token's `iss` and `aud` claims and reject tokens without an `exp` claim. The **Issuer** and **Audience** fields are now required in the element templates for the Webhook connector, Amazon EventBridge inbound connector, and A2A Client webhook.
+
+Existing JWT-authorized inbound webhooks modeled with earlier template versions don't contain these fields and can't activate after the upgrade. The connector runtime reports the affected connector as **DOWN**.
+
+**Action:** Update each affected element to the latest template version, set **Issuer** and **Audience** to the expected claim values, and redeploy the process. Ensure callers provide JWTs with matching `iss` and `aud` claims and a valid `exp` claim.
+
+<p className="link-arrow">[Webhook connector authorization](/components/connectors/protocol/http-webhook.md#make-your-http-webhook-connector-executable)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Webhook `responseBodyExpression` rejected at deployment {#webhook-response-body-expression}
+
+Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
+
+The connector runtime reports the connector as **DOWN**, and the validation error is included in the connector's status message.
+
+**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. Unlike `responseBodyExpression`, which set only the response body, `responseExpression` returns a full HTTP response:
+
+```json
+={
+  "body": {"myCustomKey": request.body.myDataKey1},
+  "statusCode": 201,
+  "headers": {"Content-Type": "application/json"}
+}
+```
+
+<p className="link-arrow">[Response expression](/components/connectors/protocol/http-webhook.md#response-expression)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -442,50 +541,6 @@ Only the name shown in Modeler changed. Template IDs, versions, connector types,
 Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound connector is renamed.
 
 <p className="link-arrow">[Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
-
-Starting with 8.10.0, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`. In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
-
-**Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, add the reference. To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
-
-<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Webhook `responseBodyExpression` rejected at deployment {#webhook-response-body-expression}
-
-Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
-
-The connector runtime reports the connector as **DOWN**, and the validation error is included in the connector's status message.
-
-**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. Unlike `responseBodyExpression`, which set only the response body, `responseExpression` returns a full HTTP response:
-
-```json
-={
-  "body": {"myCustomKey": request.body.myDataKey1},
-  "statusCode": 201,
-  "headers": {"Content-Type": "application/json"}
-}
-```
-
-<p className="link-arrow">[Response expression](/components/connectors/protocol/http-webhook.md#response-expression)</p>
 
 </div>
 </div>
@@ -565,9 +620,9 @@ Starting with Camunda 8.10, new SaaS clusters include a default `business_` vari
 
 This default does not apply to existing clusters. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
 
-**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Console cluster settings before creating the cluster or immediately after.
+**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Camunda Hub cluster settings before creating the cluster or immediately after.
 
-<p className="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+<p className="link-arrow">[Configure Optimize data filters](/components/saas/clusters/settings.md#data-filters)</p>
 
 </div>
 </div>
@@ -580,11 +635,11 @@ This default does not apply to existing clusters. Existing clusters show data fi
 </div>
 <div className="release-announcement-content">
 
-#### Helm v4 required for Camunda 8.10
+#### Bitnami subcharts removed from the Helm chart
 
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. The Helm chart adds a CLI version check and fails fast if Helm v3 is used to install or upgrade chart 15.x.
+Camunda 8.10 (chart 15.x) no longer bundles the Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak. Camunda 8.9 is the last minor that ships them. Helm installations must connect to external infrastructure instead, such as managed databases and search services, Kubernetes operators, or customer-owned images.
 
-**Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+**Action:** If you still use Bitnami subcharts on 8.8 or 8.9, migrate to external or vendor-supported infrastructure on 8.9 before upgrading to 8.10; the 8.10 Helm chart has no Bitnami-based fallback. See [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
 
 </div>
 </div>
@@ -603,7 +658,7 @@ Camunda no longer produces the following individual component Docker images in C
 - [camunda/operate](https://hub.docker.com/r/camunda/operate)
 - [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 
-**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
+**Action:** Before upgrading to Camunda 8.10, or to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
 
 </div>
 </div>
@@ -638,6 +693,171 @@ By default, this mount used an `emptyDir`, so no PVC cleanup is required. Howeve
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Ingress-nginx annotation defaults deprecated in the Helm chart {#ingress-annotation-defaults-deprecated}
+
+The Helm chart used to ship Ingress-nginx-specific defaults in `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Helm deep-merges maps, so setting a single annotation of your own still inherited all of them, and they were written onto the `Ingress` whatever `ingressClassName` you configured. On Contour, Traefik, or any other controller they are dead configuration, and removing them meant setting each key to `null`.
+
+Starting with Camunda 8.10 (chart 15.x), those annotations come from a compatibility shim controlled by `global.compatibility.nginx.renderAnnotations`, which defaults to `true`. **Nothing changes on upgrade:** the same annotations render, so Ingress-nginx deployments are unaffected. The shim is removed in the next major, after which the annotations are opt-in.
+
+**Action:** If you run an Ingress controller other than Ingress-nginx, set `global.compatibility.nginx.renderAnnotations: false` and configure whatever your controller needs through `global.ingress.annotations` and `orchestration.ingress.grpc.annotations`. Keys you set there always win over the shim.
+
+That removes the shim's annotations only. The chart still adds `nginx.ingress.kubernetes.io/backend-protocol` to the dedicated Ingress objects it renders when an upstream TLS mode is enabled through `global.tls.orchestration`, `global.tls.connectors`, or `global.tls.optimize`, and only Ingress-nginx reads that annotation.
+
+```yaml
+global:
+  compatibility:
+    nginx:
+      renderAnnotations: false
+  ingress:
+    annotations:
+      # for example, with Contour
+      kubernetes.io/tls-acme: "true"
+```
+
+If you stay on Ingress-nginx, no action is required before the next major. When the shim is removed you will need to set the annotations yourself:
+
+```yaml
+global:
+  ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/proxy-buffering: "on"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+      # keep in sync with global.config.requestBodySize
+      nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+
+orchestration:
+  ingress:
+    grpc:
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+```
+
+The gRPC Ingress reads `orchestration.ingress.grpc.annotations` only; it inherits nothing from `global.ingress.annotations`, so set all three keys there.
+
+Two of those carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes Ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
+
+With [Contour](https://projectcontour.io/), the gRPC upstream is declared on the Orchestration Cluster **Service**, not on the Ingress, so set it through `orchestration.service.annotations` and not `orchestration.ingress.grpc.annotations`. The annotation value lists the gRPC port, and the key depends on whether that upstream uses TLS:
+
+| gRPC upstream                                           | Contour annotation                        | Envoy behavior   |
+| ------------------------------------------------------- | ----------------------------------------- | ---------------- |
+| Plaintext, the chart default                            | `projectcontour.io/upstream-protocol.h2c` | Cleartext HTTP/2 |
+| TLS, with `global.tls.orchestration.grpc.enabled: true` | `projectcontour.io/upstream-protocol.h2`  | HTTP/2 over TLS  |
+
+```yaml
+orchestration:
+  service:
+    annotations:
+      # plaintext upstream; use upstream-protocol.h2 if the gRPC upstream has TLS
+      projectcontour.io/upstream-protocol.h2c: "26500"
+```
+
+Contour reads `h2c` as cleartext HTTP/2, so leaving it on a TLS-enabled upstream breaks gRPC routing. The chart draws the same distinction on Ingress-nginx, where it swaps `nginx.ingress.kubernetes.io/backend-protocol` from `GRPC` to `GRPCS` for a TLS-enabled gRPC upstream.
+
+The chart emits a deprecation warning naming the flag and the removal only when the shim actually injects an annotation: the flag is on, the Ingress it applies to renders, and you have not set that key yourself. Setting every shim key silences the warning even with the flag still on.
+
+<p className="link-arrow">[Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Classic Grafana dashboard format deprecated {#classic-grafana-dashboard-format-deprecated}
+
+The Grafana dashboards published in [`monitor/grafana`](https://github.com/camunda/camunda/tree/main/monitor/grafana) of the `camunda/camunda` repository use the classic Grafana dashboard JSON model. Starting with Camunda 8.11, Camunda will update the dashboards to the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/).
+
+Camunda 8.10 is the last release that provides the dashboards in the classic format. The classic dashboards of 8.10 and earlier releases continue to work with your Grafana instance.
+
+**Action:** To keep using the dashboards in the classic format, import them from the `stable/8.10` branch or from the branch of the release you run. Before you move to the dashboards of 8.11, check that your Grafana version supports the v2 dashboard schema.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Application configuration Helm keys deprecated {#application-configuration-helm-keys-deprecated}
+
+Starting with Camunda 8.10, Helm chart values that only proxy a single application property are deprecated in favor of the component's `extraConfiguration`. The chart keeps the Kubernetes settings it is responsible for, such as resources, scheduling, endpoints, and secrets, and stops mirroring the application's own configuration.
+
+The deprecated keys continue to work in 8.10. When you set one to a non-default value, `helm install` and `helm upgrade` log a `[camunda][warning] DEPRECATION` message that names the key and where to configure it instead.
+
+**Action:** Move the deprecated keys in your `values.yaml` to the component's `extraConfiguration`. If you set both, the `extraConfiguration` value takes precedence. Use the deprecation messages from your own upgrade as the up-to-date list of keys for your chart version.
+
+<p className="link-arrow">[Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-8100.md#deprecated-application-configuration-helm-keys)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm CLI v3 and v4 supported for Camunda 8.10 {#helm-v4-required-for-camunda-810}
+
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4.
+
+<HelmCliSupport />
+
+With Helm v3, the chart shows a warning in the notes that `helm install` and `helm upgrade` print, and in a ConfigMap whose name ends in `-warnings`. The warning does not block the install or upgrade.
+
+**Action:** Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends. Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Hub database migration phases
+
+The 8.9 to 8.10 Camunda Hub database migration is controlled by `camundaHub.upgrade.phase`. Use `quiesce` to stop all Hub workloads so you can take a verified database backup, `migrate` to run the startup schema migration on a single pod without serving traffic, and `normal` to restore serving capacity. Fresh installs stay on `normal`.
+
+**Action:** Run the phases in order as part of your 8.9 to 8.10 upgrade, and plan a maintenance window: Hub serves no traffic in `quiesce` or `migrate`. The migration isn't backward compatible, so take a verified database backup first. See [migrate Camunda Hub](/self-managed/upgrade/helm/890-to-8100.md#migrate-web-modeler-and-console-to-camunda-hub).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deployment topology release roles
+
+Camunda 8.10 adds `global.topology.mode` to the Helm chart, so a release declares its role in the wider deployment: `combined`, `hub`, `orchestration`, or `optimize`. One `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, and an `optimize` release deploys Optimize alone, so each Physical Tenant gets its own Optimize instance.
+
+`combined` remains the default and preserves existing single-release behavior, so no existing deployment changes on upgrade. For a new production deployment, the split topology is the baseline.
+
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
+
+**Action:** None required for an existing deployment. For a new production deployment, see [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
+
+</div>
+</div>
+
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
@@ -661,15 +881,13 @@ Deployment change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Legacy Camunda Hub and Optimize authentication properties deprecated
+#### Legacy Optimize authentication properties deprecated
 
-The authentication properties Camunda Hub and Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Both components still accept them in 8.10 and translate the recognized properties to their new equivalents at startup, and both remove them in 8.11.
+The authentication properties Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize still accepts them in 8.10 and translates the recognized properties to their new equivalents at startup, but they will be removed in a future release.
 
-**Action:** Migrate to the `camunda.security.*` settings before upgrading to 8.11.
+**Action:** Migrate Optimize to the `camunda.security.*` settings ahead of that removal.
 
-<p className="link-arrow">[Camunda Hub authentication mapping](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
-
-<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -717,9 +935,9 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 - `Operations Engineer` → `DevOps`, with no permission change.
 - Catalog access is now split into **Read** (Member, DevOps) and **Manage** (Analyst, Organization Admin, Organization Owner, who additionally see usage statistics and adoption data).
 
-`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/manage-users/index.md#roles-and-permissions) for their status.
+`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users and roles](/components/hub/organization/users-and-roles.md#roles-and-permissions) for their status.
 
-<p className="link-arrow">[Manage users in your organization](/components/hub/organization/manage-users/index.md#roles-and-permissions)</p>
+<p className="link-arrow">[Manage users and roles](/components/hub/organization/users-and-roles.md#roles-and-permissions)</p>
 
 </div>
 </div>
@@ -730,17 +948,15 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 </div>
 <div className="release-announcement-content">
 
-#### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
+#### Unified authentication for the Orchestration Cluster and Optimize
 
-With Camunda 8.10, the Orchestration Cluster, Camunda Hub, and Optimize authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl), a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+Optimize can now be configured with the same `camunda.security.authentication.*` settings already used by the Orchestration Cluster. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Camunda Hub and Optimize accept their existing authentication settings in 8.10 and translate the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
+Optimize accepts its 8.9 authentication settings in 8.10 and translates the recognized properties to their new equivalents at startup, but those 8.9 properties are deprecated and will be removed in a future release. User, group, role, tenant, and permission management for Optimize is unchanged and is still handled by Management Identity.
 
-**Action:** Migrate Camunda Hub and Optimize to the `camunda.security.*` settings before upgrading to 8.11, when their legacy authentication properties are removed.
+**Action:** Migrate Optimize to the `camunda.security.*` settings ahead of that removal.
 
-<p className="link-arrow">[Camunda Hub authentication configuration](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
-
-<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+<p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
 <p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
 
@@ -749,40 +965,58 @@ Camunda Hub and Optimize accept their existing authentication settings in 8.10 a
 </div>
 </div>
 
-## Modeler
-
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Web Modeler change 1
+#### Orchestration Cluster warns about an incorrect OIDC configuration at startup
 
-Web Modeler change 1 description.
+The Orchestration Cluster checks its OIDC configuration at startup and writes a warning for each problem it finds. The cluster still starts.
+
+- The checks cover the client ID, the set of endpoints, the scope, and the shape of the redirect URI.
+- A redirect URI with no callback path, or with a path that has no leading slash, falls back to `{baseUrl}/sso-callback`.
+- Any other unusable value stays as configured, and the login fails later.
+
+**Action:** Review your startup logs after the upgrade. The warnings come from the loggers `io.camunda.security.spring.oidc.ScopedClientRegistrationFactory` and `io.camunda.security.spring.oidc.OidcRedirectionEndpoint`.
+
+<p className="link-arrow">[Redirect URI](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#redirect-uri)</p>
 
 </div>
-</div> -->
-
-## Optimize
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Optimize authentication moves to the Camunda Security Library
+#### Orchestration Cluster starts when an identity provider is unreachable
 
-Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), adopting the same authentication and session handling as the Orchestration Cluster components.
+The Orchestration Cluster contacts an OIDC provider at the first request that needs it, and not at startup. A provider that is down no longer stops the cluster from starting.
 
-**Action:** Confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
+- Only the requests that need that provider fail, such as browser login requests and token-validation requests. All other requests succeed, and a failed request recovers when the provider answers, without a restart.
+- A failed request writes a warning, at most once each minute for each combination of failed step and provider.
 
-<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+**Action:** If you used a failed startup to detect an unreachable identity provider, alert on the `DeferredOidcResolution` warning instead. This covers a provider that the cluster resolves through its issuer URI. A provider with a static `jwk-set-uri` or `user-info-uri` gives a different signal, or none, so read the debugging guide before you rely on this alert.
+
+<p className="link-arrow">[Requests fail when an identity provider is unreachable](/self-managed/components/orchestration-cluster/admin/debugging-authentication.md#requests-fail-when-an-identity-provider-is-unreachable)</p>
+
+</div>
+</div>
+
+## Integrations
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### SAP BTP Plugin retired
+
+The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration.
 
 </div>
 </div>
@@ -793,13 +1027,93 @@ Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security
 </div>
 <div className="release-announcement-content">
 
-#### Legacy Optimize security configuration keys deprecated
+#### CSAP CLI replaced by a c8ctl plugin
 
-With the move to the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. The legacy keys are removed in Camunda 8.11.
+The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools/c8ctl/getting-started.md), which becomes the single tool for configuring and deploying the SAP integration modules.
+
+<p className="link-arrow">[CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)</p>
+
+</div>
+</div>
+
+## Modeler
+
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deployments target environments instead of clusters
+
+Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is a named deployment target where a team runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
+
+- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every environment assigned to its workspace.
+- Organization admins assign environments to workspaces.
+- In Self-Managed, Camunda Hub creates environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
+
+**Action:** After you upgrade, assign environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its environments as production environments for the project deployment policy.
+
+<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
+<br />
+<p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
+
+</div>
+</div>
+
+## Optimize
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Client bearer tokens are now classified for permission checks
+
+Optimize classifies each bearer token as belonging to a user or a machine-to-machine (M2M) client, using `camunda.security.authentication.oidc.username-claim` and `client-id-claim`, and enforces your configured Optimize permission only on tokens it classifies as a user's. A token Optimize can't classify is treated as belonging to a user, and checked against your configured Optimize permission.
+
+**Action:** Set `username-claim` and `client-id-claim` to match your identity provider's token shape before upgrading. If you've already configured these claims for the Orchestration Cluster, use the same values for Optimize. Otherwise, M2M clients without an Optimize permission may see new permission errors after upgrading.
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#configure-oidc-for-optimize)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize static API access token is no longer supported
+
+In Camunda 8.10, Self-Managed Optimize accepts only OIDC bearer tokens on its API. A request that carries the static token from `api.accessToken` (environment variable `OPTIMIZE_API_ACCESS_TOKEN`) gets a `401` response. This applies to the [Optimize API](/apis-tools/optimize-api/overview.md) and to the [external variable ingestion](/apis-tools/optimize-api/external-variable-ingestion.md) endpoint. The Camunda Helm chart and SaaS do not set this token. They configure OIDC for the Optimize API. You are affected only if you set the property or the environment variable yourself, for example as a property override or an extra environment variable in your Helm values.
+
+**Action:** Change the API clients that send the static token to OIDC bearer tokens before you upgrade to 8.10. Then remove `api.accessToken` from your configuration. If you need more time, set `optimize.security.csl.enabled=false`. This opts into the 8.9 component-specific configuration fallback, and the static token works again. Camunda plans to remove this fallback and the component-specific configuration keys in a future release.
+
+<p className="link-arrow">[Optimize API authentication](/apis-tools/optimize-api/optimize-api-authentication.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Component-specific Optimize security configuration keys deprecated
+
+The Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized component-specific keys automatically and logs a deprecation warning naming the replacement. Camunda plans to remove these keys in a future release.
 
 Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
 
-**Action:** Migrate to the `camunda.security.*` keys before upgrading to 8.11. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
+**Action:** Migrate to the `camunda.security.*` keys as soon as you can. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
 
 </div>
 </div>
@@ -812,11 +1126,32 @@ Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimiz
 
 #### `optimize.security.csl.enabled=false` fallback is temporary
 
-If the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL) causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+`optimize.security.csl.enabled=false` temporarily restores the 8.9 component-specific configuration. Use it only if your integrations depend on the static API access token that the 8.9 configuration accepted, or if your migration to the `camunda.security.*` keys was misconfigured and you need a working deployment while you fix it. Camunda plans to remove this fallback, the 8.9 behavior it restores, and the component-specific configuration keys in a future release.
 
-**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. If you rely on it in 8.10, migrate to CSL before upgrading to 8.11.
+**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. Falling back doesn't pause the migration, it only delays it, so the same `camunda.security.*` migration is still required.
 
-<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-security-stack)</p>
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-component-specific-configuration)</p>
+
+</div>
+</div>
+
+## Tasklist
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Tasklist custom styling uses Camunda design system tokens
+
+Starting with Camunda 8.10, the Tasklist UI uses the Camunda design system instead of the Carbon Design System. Custom styles in `custom.css` that override Carbon `--cds-*` tokens or use `:root[data-carbon-theme='g10']` and `:root[data-carbon-theme='g100']` selectors no longer have any effect. Tasklist falls back to its default styling without showing an error.
+
+The `custom.css` file location has also changed. In the Docker image, place the file at `/usr/local/camunda/config/custom.css` instead of `/usr/local/tasklist/config/custom.css`. In the distribution archive, place it in the `config` directory. Camunda now serves the file at `<context-path>/custom.css` instead of `/tasklist/custom.css`.
+
+**Action:** When you upgrade to 8.10, rewrite your custom styles to override the Camunda design system tokens using the `html .c4-ui` (light theme) and `html .c4-ui.dark` (dark theme) selectors, and move `custom.css` to the new location.
+
+<p className="link-arrow">[Tasklist custom styling](/self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling.md)</p>
 
 </div>
 </div>

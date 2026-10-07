@@ -56,6 +56,10 @@ Compatibility is confirmed for [Camunda Helm chart releases version 11 and above
 
 You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks/). Below is a quick reference for common usage options:
 
+:::note `identityKeycloak` in the default component list
+The default PostgreSQL component list below still contains `identityKeycloak`, the Bitnami subchart removed in Camunda 8.10. The script cannot yet detect an operator-managed or external Keycloak from a boolean `global.identity.keycloak.internal: false`, so it still runs the `identityKeycloak` checks and reports them as failures. Pass `-p "identity,webModeler"` to drop it from the list.
+:::
+
 ```bash
 Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p] [-l] [-s]
 Options:
@@ -268,8 +272,7 @@ The role's **trust policy** must allow the relevant Kubernetes service accounts 
       "Condition": {
         "StringEquals": {
           "oidc.eks.<region>.amazonaws.com/id/<oidc-id>:sub": [
-            "system:serviceaccount:<namespace>:<release-name>-orchestration",
-            "system:serviceaccount:<namespace>:<release-name>-connectors"
+            "system:serviceaccount:<namespace>:<release-name>-orchestration"
           ]
         }
       }
@@ -298,16 +301,19 @@ orchestration:
   serviceAccount:
     annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
-
-connectors:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
 ```
 
+Annotate the `orchestration` service account shown above.
+
 :::note
-With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token. Annotate the service account of every component you have enabled to use the document store; otherwise that component cannot reach S3.
+With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token.
 :::
+
+### Configure connector task credentials separately
+
+Connectors accesses documents through the Orchestration REST API, not the document store directly. Don't grant the document-store IAM role to the Connectors service account.
+
+Starting with Camunda 8.10 (Helm chart 15.x), the chart no longer propagates document-store credentials to the Connectors pod. If a connector task uses cloud credentials from the pod environment, configure a role or Secret scoped to the connector tasks under `connectors`, as shown in [migrate document-store cloud credentials](/self-managed/upgrade/helm/890-to-8100.md#migrate-document-store-cloud-credentials). Don't reuse the document-store role or credentials.
 
 ### Verify
 
@@ -329,41 +335,26 @@ To authenticate the document store with [EKS Pod Identity](https://docs.aws.amaz
 The remaining steps differ from the IRSA setup:
 
 - Skip the OIDC trust policy and the `eks.amazonaws.com/role-arn` service account annotation. Both apply to IRSA only.
-- Grant the IAM role to each component's service account by creating an [EKS Pod Identity association](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-association.html). The role still needs the same S3 permission policy as the IRSA setup, with a trust policy for the `pods.eks.amazonaws.com` service principal.
+- Grant the IAM role to the `orchestration` service account by creating an [EKS Pod Identity association](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-association.html). The role still needs the same S3 permission policy as the IRSA setup, with a trust policy for the `pods.eks.amazonaws.com` service principal.
 - When you verify the pods, expect the `AWS_CONTAINER_CREDENTIALS_FULL_URI` environment variable instead of `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`.
 
 ## Elasticsearch backup with IRSA
 
 When implementing [backup and restore procedures](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for Elasticsearch in your Camunda deployment, you can use IRSA to securely access S3 buckets.
 
-### Bitnami Elasticsearch chart configuration
+### Elasticsearch backup configuration
 
-Camunda’s Helm chart uses the [Bitnami Elasticsearch chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) as a sub-chart. If you are using this setup, IRSA can be integrated for backup operations.
+:::note
+The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10, so the snapshot configuration that targeted that subchart no longer applies. For those steps, see the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa/).
+:::
 
-Following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html), create an IAM role mapped to a Kubernetes service account with the required permissions for S3, as detailed in the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#repository-s3-permissions).
+In Camunda 8.10, deploy Elasticsearch with the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or use a managed service. IRSA covers the ECK deployment only, because a managed service runs outside your cluster and exposes no Kubernetes service account.
 
-Additionally, ensure Elasticsearch is configured to recognize the IRSA token. The [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#iam-kubernetes-service-accounts) outlines this requirement for official Elasticsearch images.
+For an ECK deployment, create an IAM role mapped to the Elasticsearch service account with the required S3 permissions, following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html) and the [Elasticsearch S3 repository documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#repository-s3-permissions).
 
-Once the IRSA setup is complete, configure the Bitnami Elasticsearch chart in your Camunda Helm chart by adjusting your `values.yaml` as follows:
+Then configure the ECK deployment to recognize the IRSA token and register the S3 snapshot repository, as described in the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#iam-kubernetes-service-accounts). The `<account-id>` and IAM role ARN come from the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
 
-```yaml
-elasticsearch:
-  enabled: true
-  master:
-    serviceAccount:
-      create: true
-      annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
-  initScripts:
-    irsa_access_init_script.sh: |
-      #!/bin/sh
-      mkdir -p "/opt/bitnami/elasticsearch/config/repository-s3"
-      ln -s $AWS_WEB_IDENTITY_TOKEN_FILE "/opt/bitnami/elasticsearch/config/repository-s3/aws-web-identity-token-file"
-```
-
-The values `<account-id>` and `<iam-role-arn>` are based on the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html).
-
-The init script remains consistent across environments, as the Elasticsearch S3 plugin expects the credentials at the fixed path `repository-s3`. This path is **not configurable**.
+For a managed service, grant snapshot access through the provider's own IAM configuration instead. Amazon OpenSearch Service registers the repository with a dedicated IAM role, as described in [Creating index snapshots in Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshots.html).
 
 :::info
 `$AWS_WEB_IDENTITY_TOKEN_FILE` is automatically injected into the pod by EKS when the pod is using a service account annotated with a valid `eks.amazonaws.com/role-arn`.

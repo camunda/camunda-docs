@@ -28,7 +28,7 @@ This step-by-step guide shows you how to define task priorities for Tasklist use
 
 ### 1. Model a BPMN process
 
-Start by modeling your [BPMN process in Modeler](/components/modeler/bpmn/automating-a-process-using-bpmn.md), ensuring that the required user tasks are defined within the process.
+Start by modeling your BPMN process in [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md), ensuring that the required user tasks are defined within the process.
 
 ### 2. Set a priority for user tasks
 
@@ -46,10 +46,10 @@ After the process is fully defined and all configurations are complete, the proc
 
 Tasklist users can view the tasks assigned to them within their task list. Each task card displays the assigned priority label, ensuring users have a clear understanding of the task's importance and priority.
 
-![set-user-task-priority-in-modeler](img/tasklist–tasks-with-priority.jpg)
+![Task cards showing priority labels in Tasklist](img/tasklist-tasks-with-priority.png)
 
 ### 5. Sort tasks by priority
 
 Task users can sort tasks by priority. This helps users organize their workload by focusing on urgent items first.
 
-![set-user-task-priority-in-modeler](img/tasklist-tasks-with-priority-sorting.jpg)
+![Sorting tasks by priority in Tasklist](img/tasklist-tasks-with-priority-sorting.png)

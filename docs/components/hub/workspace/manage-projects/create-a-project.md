@@ -1,12 +1,12 @@
 ---
 id: create-a-project
 title: Set up a new project
-description: Create a project, and select a development cluster to deploy to.
+description: Create a project in a workspace. The project can deploy to the environments assigned to the workspace.
 ---
 
 import FileListImg from './img/file-list.png'
 
-Create a project, and select a development cluster to deploy to.
+Create a project in a workspace. The project can deploy to every environment assigned to the workspace.
 
 ## Prerequisites
 
@@ -16,29 +16,15 @@ To set up a new project, you first need a [workspace](../../organization/manage-
 
 Create a project to work on a set of related files:
 
-1. In your workspace, click **New project**.
+1. In your workspace, click **Create project**.
 2. Provide a project name, and click **Create project**.
 
-## Connect clusters
+## Deployment environments
 
-Connect clusters to which you'll deploy project files.
+A project doesn't have its own deployment targets. It can deploy to all the [environments](/components/concepts/environments.md) that are assigned to its workspace, and it always reflects changes to that set.
 
-There are [four deployment stages](./deploy-project.md#deployment-stages):
-
-- Development
-- Testing
-- Staging
-- Production
-
-To deploy project files, you must connect a cluster to at least one stage:
-
-1. In your project, next to **Connected clusters**, click **Configure**.
-2. For each stage, select a cluster.
-3. Click **Save**.
-
-:::tip
-If you don't have an appropriate cluster for a stage, [create one](../../organization/manage-clusters/create-cluster.md).
-:::
+- To see the environments you can deploy to, open the [deploy dialog](./deploy-project.md#deploy-your-project) of the project.
+- If no environment is assigned, an organization admin must [assign environments to the workspace](../../organization/manage-environments/assign-environments.md).
 
 ## Next steps
 

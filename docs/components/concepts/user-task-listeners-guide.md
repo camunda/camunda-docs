@@ -87,11 +87,11 @@ You've now defined a **creating** task listener for this user task. When a proce
 
 Now, we'll explore what happened to the user task. We'll see that the listener blocks the creation.
 
-1. Navigate to **Tasklist** and notice that there is no task in Tasklist yet.
+1. [Navigate to **Tasklist**](/components/tasklist/userguide/using-tasklist.md#open-tasklist) and notice that there is no task in Tasklist yet.
 
    ![No tasks found in Tasklist](./assets/user-task-listeners-guide/6.2-no-tasks-found.png)
 
-2. Navigate to **Operate** to see your process instance with a token waiting at the user task by clicking on the active process instance in the **Dashboard**.
+2. [Navigate to **Operate**](/components/operate/userguide/basic-operate-navigation.md#open-operate) to see your process instance with a token waiting at the user task by clicking on the active process instance in the **Dashboard**.
 
    ![Active process instances in Operate Dashboard](./assets/user-task-listeners-guide/6.3-active-process-instances.png)
 
@@ -118,7 +118,7 @@ Next, we'll run the listener application to execute our external logic, and comp
 Next, we’ll create a worker that listens to the user task's events by associating it with the **Listener type** we specified on the task listener in the BPMN diagram.
 
 1. Open the downloaded or cloned project ([repo](https://github.com/camunda/camunda-8-tutorials), then `cd` into `camunda-8-tutorials/quick-start/task-listeners/worker-java`) in your IDE.
-2. Add your credentials to `application.properties`. Your client ID and client secret are available from the previous section in the credential text file you downloaded or copied. [Find your **Region ID** and **Cluster ID**](/components/hub/organization/manage-clusters/manage-api-clients.md#view-connection-informationview-connection-information).
+2. Add your credentials to `application.properties`. Your client ID and client secret are available from the previous section in the credential text file you downloaded or copied. [Find your **Region ID** and **Cluster ID**](/components/saas/clusters/manage-api-clients.md#view-connection-informationview-connection-information).
 3. In the `Listener.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “assign_new_task”, no action is required.
 4. After making these changes, perform a Maven install, then run the Listener.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
 

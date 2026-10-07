@@ -1,13 +1,13 @@
 ---
 id: process-definition-api
-title: "Process Definition API"
-sidebar_label: "Process Definition API"
+title: "Process Definition Api"
+sidebar_label: "Process Definition Api"
 sidebar_position: 29
 mdx:
   format: md
 ---
 
-# Process Definition API
+# Process Definition Api
 
 `ProcessDefinitionApi` — 9 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ProcessDefinitionApi::class)`.
 

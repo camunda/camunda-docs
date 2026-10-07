@@ -28,12 +28,12 @@ For installation details and features, see [Desktop Modeler](./desktop-modeler/i
 Desktop Modeler includes an XML editor for [BPMN](./bpmn/bpmn.md) and [Decision Model and Notation (DMN)](./dmn/dmn.md) diagrams, with its own undo and redo history, search and replace, and XML syntax highlighting.
 :::
 
-If you use both tools, see [using Web and Desktop Modeler together](./using-web-and-desktop-modeler-together.md).
+If you use both tools, see [using Camunda Hub and Desktop Modeler together](./using-hub-and-desktop-modeler-together.md).
 
 ## Next steps
 
 - [Modeling BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) - Learn how to model an automated process in this tutorial using Camunda Hub with Camunda 8 SaaS.
-- [Camunda Forms](/components/modeler/forms/utilizing-forms.md) - Design and configure forms, and connect them to a user task or start event to implement a task form in your application.
+- [Camunda Forms in Camunda Hub](/components/hub/workspace/modeler/modeling/utilize-forms.md) - Design and configure forms, and connect them to a user task or start event to implement a task form in your application.
 - [DMN](./dmn/dmn.md) - In DMN, model and execute decisions using the same language. As a business analyst, model the rules that lead to a decision in comprehensive tables, and execute these tables directly by a decision engine like Camunda.
 - [Out-of-the-box connectors](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md) - Utilize pre-built connectivity with a number of outside systems via our [Camunda Marketplace](../hub/workspace/modeler/modeling/camunda-marketplace.md). Connectors are modular by nature, reusable, and accelerate automation across those systems.
 - [Element templates](/components/modeler/element-templates/about-templates.md) - Learn how to create element templates to extend the modeler.

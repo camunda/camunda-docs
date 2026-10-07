@@ -9,7 +9,7 @@ You can implement document uploads in your BPMN processes using [forms](#build-a
 
 ## Build a form for document upload
 
-When [building a form](/components/modeler/forms/utilizing-forms.md) for a process, you can use the [Filepicker form component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) to allow users to upload files.
+When [building a form](/components/hub/workspace/modeler/modeling/utilize-forms.md) for a process, you can use the [Filepicker form component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) to allow users to upload files.
 
 In the Filepicker configuration, you can specify whether users can upload a single file or [multiple files](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties) and define the list of [supported file formats](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
 
@@ -39,7 +39,7 @@ The Filepicker always returns an array with metadata for a single or multiple fi
 
 When the process is deployed and running, users can access and complete user tasks that include a form with the Filepicker component in [Tasklist](/components/tasklist/introduction-to-tasklist.md):
 
-![document handling in tasklist](./img/task-with-file-picker-tasklist.png)
+![User task form with a file picker for uploading an ID document in Tasklist](./img/task-with-file-picker-tasklist.png)
 
 ### Upload a document to start a process
 

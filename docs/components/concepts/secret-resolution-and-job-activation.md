@@ -4,6 +4,12 @@ title: "Secret resolution and job activation"
 description: "Learn how the broker resolves secret references before job activation and injects resolved values when it hands a job to a worker."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 Secret resolution lets job workers use secret values at runtime without storing those values in job variables or configuration.
 
 A job whose variables contain an [Orchestration Cluster secret reference](/reference/glossary.md#secret-reference-orchestration-cluster) is handed to a worker only after every reference has been resolved. The resolved values reach the worker without being written to any record, runtime state, or log.
@@ -16,25 +22,27 @@ A cluster whose process models contain no `camunda.secrets.<name>` reference is 
 
 Secret resolution is available in both SaaS and Self-Managed.
 
-| Offering     | Secret store            | What you configure                                                                                                                                                                                                                                                                            |
-| :----------- | :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SaaS         | Provisioned and managed | No secret store configuration. Manage secret values on the cluster's **Cluster secrets** tab and reference them as `camunda.secrets.<key>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). |
-| Self-Managed | File, AWS, or GCP       | The store type, path, and credentials. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).                                                                                                                         |
+| Deployment   | Secret store            | What you configure                                                                                                                                                                                                                                                                                                   |
+| :----------- | :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SaaS         | Provisioned and managed | <p>No secret store configuration.</p><p><ul><li>Manage secret values on the cluster's **Cluster secrets** tab.</li><li>Reference them as `camunda.secrets.<key>`.</li></ul></p><p>See [manage connector secrets](/components/saas/clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).</p> |
+| Self-Managed | File, AWS, or GCP       | The store type, path, and credentials. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).                                                                                                                                                |
 
-You can configure AWS Secrets Manager and GCP Secret Manager stores only in Self-Managed.
+:::note
+In Self-Managed deployments, you can only configure AWS Secrets Manager and GCP Secret Manager stores.
+:::
 
 ## Resolve references before activation
 
-The broker resolves secret references on a background scheduler, not on the processing path, so a slow or unavailable secret store cannot stall processing.
+The broker resolves secret references on a background scheduler, not on the processing path, so a slow or unavailable secret store cannot stall overall processing.
 
 Each physical tenant supports exactly one secret store, and that store's id must be `default`. A `camunda.secrets.<name>` reference always addresses it. `camunda.physical-tenants.<tenant-key>.secrets.*` can override which store backs a given tenant, but never adds a second store alongside it.
 
-When the broker creates a job, it records each secret reference together with its position in the job variables. The variable value itself keeps the placeholder text `camunda.secrets.<name>`. Nothing is read from a secret store at this point.
+When the broker creates a job, the variable value itself keeps the placeholder text `camunda.secrets.<name>`. Nothing is read from a secret store at this point.
 
-The scheduler then works through the references that are still pending:
+When the job activation is requested, the scheduler then works through the references that are not in the cache within cycles:
 
-1. Each cycle collects up to `camunda.processing.engine.secrets.batch-resolution-limit` pending references and groups them by store.
-2. The scheduler requests each store's group of references in one call. The store's local cache holds successfully resolved values for the next activation.
+1. Each cycle collects up to `camunda.processing.engine.secrets.batch-resolution-limit` pending references.
+2. The scheduler requests each store's references. The store's local cache holds successfully resolved values for the next activation.
 3. References beyond the limit stay pending and are collected by a later cycle. When a cycle reaches the limit and makes progress, the next cycle starts immediately instead of waiting for `camunda.processing.engine.secrets.interval`.
 
 Resolution records carry no secret values. Only the store's cache holds a value, and only for as long as its cache entry lives.
@@ -58,7 +66,7 @@ A reference that fails permanently, or whose store never recovers, raises an inc
 
 At activation time, the broker looks up each job reference in the secret store's local cache. The broker does not read the store during activation, so store latency cannot block activation.
 
-The broker hands a job to a worker only when every reference has a cached value. If a reference is not yet cached, the broker requests resolution instead of handing out the job. The broker does not fail the waiting job or raise an incident. Once the reference resolves, the job becomes available automatically.
+The broker hands a job to a worker only when every reference has a cached value. If a reference is not yet cached, the broker requests asynchronous resolution instead of handing out the job. The broker does not fail the waiting job or raise an incident. Once the reference resolves, the job becomes available automatically.
 
 While it waits, the job is parked internally and is not activatable, so no worker receives it on either delivery path. This parked state isn't exposed through the API, Operate, or exported records. Observe it instead through its effects: the job is missing from an activation response, no `ACTIVATED` event exists for its batch, a `RESOLUTION_REQUESTED` record exists for the pending reference, and the `zeebe_job_events_total` metric counts it under `action="skipped uncached secret"`.
 
@@ -69,13 +77,6 @@ The following sections describe this behavior for each delivery path. The broker
 During batch collection, a job with a reference that is not yet cached is skipped without consuming a slot in the batch, so jobs behind it can still be activated in the same response.
 
 The broker then requests resolution of that job's missing references and parks the job until they resolve. A parked job is not activatable, so a later poll does not collect it again and no worker receives it. Once the reference resolves, the job is made activatable again automatically. Neither redeployment nor client action is required.
-
-Two limits affect how many jobs one activation can return:
-
-- If a single activation skips 100 jobs for uncached references, it stops there and marks the batch truncated. The gateway polls the same partition again within the same request, so the jobs behind the cap are not held back until the long poll times out.
-- If injecting a job's resolved values would exceed the configured message size, the broker removes that job and every subsequent job from the activation and marks the batch as truncated. These jobs remain activatable for the next activation.
-
-The truncated flag is internal to the broker and the gateway. It is not part of the activate jobs response, so a worker never sees it and does not act on it.
 
 The broker injects the resolved values into a copy of the batch used only for the response. The event the broker appends to its log still carries the placeholders.
 
@@ -127,15 +128,18 @@ The activation response has to stay within `camunda.cluster.network.max-message-
 
 The broker replaces the placeholder at its recorded position in the job variables. If a later variable merge overwrites the expected placeholder, or if the broker cannot read the variables, the broker does not activate the job and raises an incident. The incident also takes the job out of activation until the incident is resolved, so the same failing injection is not retried on every activation.
 
-For how to inspect and resolve either incident, see [troubleshoot secret resolution failures](secret-resolution-incidents.md).
+To learn how to inspect and resolve either incident, see [troubleshoot secret resolution failures](secret-resolution-incidents.md).
 
 ## Tune the resolution scheduler
 
-Configure the scheduler under `camunda.processing.engine.secrets`. The defaults are intended for stores that respond in less than a second. The separate `camunda.secrets.cache.ttl` setting controls how long a resolved value remains cached before the reference must be resolved again.
+Configure the scheduler under `camunda.processing.engine.secrets`.
+
+- The defaults are intended for stores that respond in less than a second.
+- The separate `camunda.secrets.cache.ttl` setting controls how long a resolved value remains cached before the reference must be resolved again.
 
 Under a steady stream of pending references, cycles run close to `wake-delay` apart, not `interval`: `interval` only bounds how long a scheduler with nothing to resolve waits before checking again, growing there from `wake-delay` in geometric steps rather than jumping straight to it.
 
-| Property                 | Default | Change it when                                                                                                                                                                                        |
+| Property                 | Default | Change it when the following applies:                                                                                                                                                                 |
 | :----------------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `wake-delay`             | `50ms`  | Jobs that reference secrets take too long to activate under a steady stream of requests. A shorter delay reduces that latency at the cost of polling the stores more often.                           |
 | `interval`               | `5s`    | A scheduler that is genuinely idle takes too long to notice a newly pending reference, or you want its idle ceiling to be different. Under load this value is rarely reached; see `wake-delay` above. |
@@ -151,13 +155,17 @@ See the [property reference](/self-managed/components/orchestration-cluster/core
 
 ## Secret resolution across physical tenants
 
-The secret store, its cache, and the resolution scheduler's retry state are all scoped per [physical tenant](/self-managed/concepts/physical-tenants/configuration-reference.md). A multi-tenant cluster resolves each tenant's `camunda.secrets.<name>` references against that tenant's own store: two tenants never share a cache entry, and one tenant's store outage does not affect another tenant's resolution.
+The secret store, its cache, and the resolution scheduler's retry state are all scoped per [physical tenant](/self-managed/concepts/physical-tenants/configuration-reference.md).
+
+A multi-tenant cluster resolves each tenant's `camunda.secrets.<name>` references against that tenant's own store: two tenants never share a cache entry, and one tenant's store outage does not affect another tenant's resolution.
 
 `camunda.secrets.*` configures the store and cache defaults every physical tenant inherits. Override them for one tenant under `camunda.physical-tenants.<tenant-key>.secrets.*`. The tenant still supports only one store, under the same `default` id.
 
 ## Monitor secret resolution
 
-A store that is slow or unavailable shows up as jobs that do not activate, and the job worker does not indicate the cause. The cluster emits meters for secret resolution and secret caches. Use these meters to distinguish a cold cache from a store that is not responding. To scrape and interpret cluster meters, see the [metrics reference](/self-managed/operational-guides/monitoring/metrics.md#secret-resolution-and-cache-metrics).
+A store that is slow or unavailable shows up as jobs that do not activate, and the job worker does not indicate the cause.
+
+The cluster emits meters for secret resolution and secret caches. Use these meters to distinguish a cold cache from a store that is not responding. To scrape and interpret cluster meters, see the [metrics reference](/self-managed/operational-guides/monitoring/metrics.md#secret-resolution-and-cache-metrics).
 
 ## Related resources
 
