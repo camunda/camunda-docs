@@ -12,7 +12,7 @@ import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-import CostManagement from "../../../../\_partials/\_cost-management.md";
+import CostManagement from "../../../../_partials/_cost-management.md";
 
 :::caution
 Review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
