@@ -52,9 +52,9 @@ To use AI-powered alpha features, you must agree to the **Terms for AI Usage** b
 
 ### Enable Camunda-provided LLM
 
-[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) is a separate row in the AI features table with its own toggle. Enabling **AI-powered features** does not enable it, and disabling **AI-powered features** does not disable it.
+[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) has its own row and toggle, listed under the **Hub** component as **Camunda Provided LLM**. It is separate from **AI-powered features**, which is listed under the **Modeler** component. Enabling **AI-powered features** does not enable it, and disabling **AI-powered features** does not disable it.
 
-1. On the **Settings** tab, set the **Camunda-provided LLM** toggle to **Enabled**.
+1. On the **Settings** tab, set the **Camunda Provided LLM** toggle to **Enabled**.
 2. If you have not already accepted the **Terms for AI Usage**, you are prompted to accept them before the feature is enabled.
 
-To stop using the feature, set the **Camunda-provided LLM** toggle to **Disabled**. For details of the data processed while the feature is enabled, see [Data processing and AI terms](/components/agentic-orchestration/camunda-provided-llm.md#data-processing-and-ai-terms).
+To stop using the feature, set the **Camunda Provided LLM** toggle to **Disabled**. For details of the data processed while the feature is enabled, see [Data processing and AI terms](/components/agentic-orchestration/camunda-provided-llm.md#data-processing-and-ai-terms).
