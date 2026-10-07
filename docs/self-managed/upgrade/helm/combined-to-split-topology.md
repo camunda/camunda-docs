@@ -154,7 +154,13 @@ See [install an Optimize release](/self-managed/deployment/helm/install/topology
 
 ## Move a release on an earlier chart
 
-An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, and 8.9 charts, so you can move a combined release on one of those charts under a Hub without upgrading it. Follow [keep the cluster in place](#keep-the-cluster-in-place), with the differences in this section. Upgrade each cluster to 8.10 later, one at a time.
+An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, and 8.9 charts, so you can move a combined release on one of those charts under a Hub without upgrading it to 8.10.
+
+:::important Upgrade to the latest patch first
+Before you move the release, upgrade it to the latest Helm chart patch and the latest Camunda patch of its minor version, as a separate `helm upgrade`. Confirm it's healthy before you continue. The chart versions in [requirements by chart version](/self-managed/deployment/helm/install/topology/orchestration-release.md#requirements-by-chart-version) are the oldest that support the `orchestration` role, not the recommended versions. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to find the latest patch.
+:::
+
+Follow [keep the cluster in place](#keep-the-cluster-in-place), with the differences in this section. Upgrade each cluster to 8.10 later, one at a time.
 
 | Topic            | Difference                                                                                                                                                                                          |
 | :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
