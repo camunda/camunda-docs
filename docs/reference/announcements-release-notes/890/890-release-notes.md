@@ -32,7 +32,7 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.9.22 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.22)</li><li>[Camunda 8.9.21 (17.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.21)</li><li>[Camunda 8.9.19 (04.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.19)</li><li>[Camunda 8.9.18 (31.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.18)</li><li>[Camunda 8.9.17 (21.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.17)</li><li>[Camunda 8.9.16 (14.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.16)</li><li>[Camunda 8.9.15 (11.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.15)</li><li>[Camunda 8.9.14 (03.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.14)</li><li>[Camunda 8.9.13 (15.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.13)</li><li>[Camunda 8.9.12 (07.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.12)</li><li>[Camunda 8.9.11 (26.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.11)</li><li>[Camunda 8.9.10 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.10)</li><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.14 (28.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.14)</li><li>[Connectors 8.9.13 (28.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.13)</li><li>[Connectors 8.9.12 (18.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.12)</li><li>[Connectors 8.9.11 (18.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.11)</li><li>[Connectors 8.9.10 (04.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.10)</li><li>[Connectors 8.9.9 (28.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.9)</li><li>[Connectors 8.9.8 (18.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.8)</li><li>[Connectors 8.9.7 (04.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.7)</li><li>[Connectors 8.9.6 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.6)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
+<ul><li>[Camunda 8.9.23 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.9.23)</li><li>[Camunda 8.9.22 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.22)</li><li>[Camunda 8.9.21 (17.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.21)</li><li>[Camunda 8.9.19 (04.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.19)</li><li>[Camunda 8.9.18 (31.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.18)</li><li>[Camunda 8.9.17 (21.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.17)</li><li>[Camunda 8.9.16 (14.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.16)</li><li>[Camunda 8.9.15 (11.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.15)</li><li>[Camunda 8.9.14 (03.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.14)</li><li>[Camunda 8.9.13 (15.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.13)</li><li>[Camunda 8.9.12 (07.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.12)</li><li>[Camunda 8.9.11 (26.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.11)</li><li>[Camunda 8.9.10 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.10)</li><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.14 (28.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.14)</li><li>[Connectors 8.9.13 (28.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.13)</li><li>[Connectors 8.9.12 (18.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.12)</li><li>[Connectors 8.9.11 (18.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.11)</li><li>[Connectors 8.9.10 (04.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.10)</li><li>[Connectors 8.9.9 (28.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.9)</li><li>[Connectors 8.9.8 (18.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.8)</li><li>[Connectors 8.9.7 (04.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.7)</li><li>[Connectors 8.9.6 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.6)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -195,8 +195,8 @@ Console includes a new Cluster Metrics endpoint for SaaS clusters and reduces th
 Camunda 8.9 adds bulk secret import from `.env` files, cluster-to-cluster secret import and export, editable cluster descriptions, and per-tenant usage metrics for Self-Managed environments. Console also adds a new AWS US East region to expand regional deployment choices for SaaS clusters.
 
 <ul>
-  <li><span class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</span></li>
-  <li><span class="link-arrow">[Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md)</span></li>
+  <li><span class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</span></li>
+  <li><span class="link-arrow">[Create a cluster](/components/saas/clusters/create-cluster.md)</span></li>
   <li><span class="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</span></li>
 </ul>
 
@@ -347,7 +347,7 @@ Camunda for Microsoft Teams now updates a notification card as its task is assig
 
 <ul>
   <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/app-integrations/notification-rules.md#enable-notification-delivery-for-your-cluster)</span></li>
-  <li><span class="link-arrow">[Enable app integrations extensions](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions)</span></li>
+  <li><span class="link-arrow">[Enable app integrations extensions](/components/saas/clusters/settings.md#enable-app-integrations-extensions)</span></li>
 </ul>
 
 ## Migration from Camunda 7 to Camunda 8
@@ -1557,7 +1557,7 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 - Key–value pairs are automatically parsed, validated, and added as secrets.
 - This helps reduce configuration errors and copy-pasting when adding secrets.
 
-<p class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</p>
+<p class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</p>
 
 #### Cluster description (SaaS)
 
@@ -1565,7 +1565,7 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 
 You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
 
-<p class="link-arrow">[Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md)</p>
+<p class="link-arrow">[Create a cluster](/components/saas/clusters/create-cluster.md)</p>
 
 #### Import cluster secrets (SaaS)
 
@@ -1575,7 +1575,7 @@ You can now import and export connector secrets between clusters within your org
 
 Export a cluster’s secrets to a key-value file for backup or external workflows, and import secrets from another cluster in a single action. Imports automatically match keys, update existing values, create missing ones, and provide clear feedback on the result. Permissions are enforced so that only authorized users can perform these actions.
 
-<p class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</p>
+<p class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</p>
 
 #### Usage metrics for licence model and tenant (Self-Managed)
 

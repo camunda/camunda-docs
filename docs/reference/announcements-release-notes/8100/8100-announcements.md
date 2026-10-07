@@ -605,9 +605,9 @@ Starting with Camunda 8.10, new SaaS clusters include a default `business_` vari
 
 This default does not apply to existing clusters. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
 
-**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Console cluster settings before creating the cluster or immediately after.
+**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Camunda Hub cluster settings before creating the cluster or immediately after.
 
-<p className="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+<p className="link-arrow">[Configure Optimize data filters](/components/saas/clusters/settings.md#data-filters)</p>
 
 </div>
 </div>
@@ -832,13 +832,11 @@ Deployment change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Component-specific Camunda Hub and Optimize authentication properties deprecated
+#### Legacy Optimize authentication properties deprecated
 
-The authentication properties Camunda Hub and Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Both components still accept them in 8.10 and translate the recognized properties to their new equivalents at startup, but Camunda plans to remove them in a future release.
+The authentication properties Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize still accepts them in 8.10 and translates the recognized properties to their new equivalents at startup, but they will be removed in a future release.
 
-**Action:** Migrate to the `camunda.security.*` settings.
-
-<p className="link-arrow">[Camunda Hub authentication mapping](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
+**Action:** Migrate Optimize to the `camunda.security.*` settings ahead of that removal.
 
 <p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
@@ -901,15 +899,13 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 </div>
 <div className="release-announcement-content">
 
-#### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
+#### Unified authentication for the Orchestration Cluster and Optimize
 
-With Camunda 8.10, Camunda Hub and Optimize authentication is now consistent with the Orchestration Cluster: all three components use the same authentication capabilities and configuration taxonomy, accepting the same `camunda.security.authentication.*` settings. Camunda Hub and Optimize continue to accept their existing 8.9 authentication settings in 8.10, translating recognized properties to their new equivalents at startup, but those settings are deprecated and Camunda plans to remove them in a future release. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+Optimize can now be configured with the same `camunda.security.authentication.*` settings already used by the Orchestration Cluster. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
 
-Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
+Optimize accepts its 8.9 authentication settings in 8.10 and translates the recognized properties to their new equivalents at startup, but those 8.9 properties are deprecated and will be removed in a future release. User, group, role, tenant, and permission management for Optimize is unchanged and is still handled by Management Identity.
 
-**Action:** Migrate Camunda Hub and Optimize to the `camunda.security.*` settings.
-
-<p className="link-arrow">[Camunda Hub authentication configuration](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
+**Action:** Migrate Optimize to the `camunda.security.*` settings ahead of that removal.
 
 <p className="link-arrow">[Optimize component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated)</p>
 
@@ -1001,18 +997,28 @@ The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools
 Changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
 
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Web Modeler change 1
+#### Deployments target environments instead of clusters
 
-Web Modeler change 1 description.
+Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is a named deployment target where a team runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
+
+- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every environment assigned to its workspace.
+- Organization admins assign environments to workspaces.
+- In Self-Managed, Camunda Hub creates environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
+
+**Action:** After you upgrade, assign environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its environments as production environments for the project deployment policy.
+
+<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
+<br />
+<p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
 
 </div>
-</div> -->
+</div>
 
 ## Optimize
 

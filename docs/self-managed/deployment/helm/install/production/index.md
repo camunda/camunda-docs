@@ -60,7 +60,7 @@ After following the [prerequisites](#prerequisites), you should have a Kubernete
 
 ### Namespace setup
 
-To get started, create two namespaces:
+This example creates a Hub release and an Orchestration Cluster release in separate namespaces. If you already have a Hub serving other environments, you can connect the new Orchestration Cluster to it instead. Create the namespaces you need:
 
 ```bash
 kubectl create namespace hub
@@ -81,7 +81,7 @@ For more information on the difference between the Orchestration Cluster and Cam
 
 As there will be a Helm deployment in each namespace, create your own `hub-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
 
-The Camunda Helm chart can be installed in each namespace using the following command:
+Run the Hub installation command if you're creating a new Hub release. For an existing Hub, update its cluster inventory and install only the new orchestration release:
 
 ```bash
 # This will add our chart repository so you can pull from it
@@ -443,7 +443,7 @@ Each replica stores a full copy of the primary shard data, approximately doublin
 
 #### Version management
 
-Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
+Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) for security patches or critical updates.
 
 #### Secret management
 
