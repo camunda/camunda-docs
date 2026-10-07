@@ -105,7 +105,14 @@ Update the existing release's values:
 
 Run `helm upgrade` on the existing release, without changing its name or namespace. The Orchestration Cluster StatefulSet is preserved, so the brokers keep their volumes and their identity.
 
-This `helm upgrade` restarts the Orchestration Cluster, Connectors, and Optimize pods even though their images don't change. Their configuration changes, for example the Management Identity service URL, and they read it only at startup. The brokers restart with the same volumes, so process state is kept, but the cluster is briefly unavailable while they restart.
+This `helm upgrade` restarts the Orchestration Cluster, Connectors, and Optimize pods even though their images don't change. Their configuration changes, for example the Management Identity service URL, and they read it only at startup. The pods are replaced as a rolling update, and the brokers restart one at a time with the same volumes, so process state is kept:
+
+| Setup                                                  | Effect during the restart                                                                                                     |
+| :----------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| One broker, or a replication factor of 1               | The Orchestration Cluster is unavailable while the broker restarts                                                            |
+| Several brokers with a replication factor of 3 or more | Partitions stay available. Leadership moves as each broker restarts, so clients can see short request failures and must retry |
+| One replica of Connectors or Optimize                  | That component is briefly unavailable                                                                                         |
+| Two or more replicas of Connectors or Optimize         | That component stays available                                                                                                |
 
 :::warning
 Verify with `helm template` or `helm diff` before you apply this step. Confirm the rendered output still contains the Orchestration Cluster StatefulSet with the same name, and the same `volumeClaimTemplates`, and no Management Identity Deployment. If the StatefulSet is absent or renamed, stop: applying it will detach your brokers from their storage.
