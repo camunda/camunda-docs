@@ -200,7 +200,7 @@ To control the verbosity of the client logs, adjust the following setting:
 
 <TabItem value="envVar">
 
-```
+```bash
 CAMUNDA_HUB_CLIENT_LOGGING_LEVEL=DEBUG
 ```
 

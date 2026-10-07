@@ -57,7 +57,7 @@ CAMUNDA_HUB_SERVER_URL=https://hub.example.com
 
 SERVER_SSL_ENABLED=true
 SERVER_SSL_CERTIFICATE=file:/full/path/to/certificate.pem
-SERVER_SSL_CERTIFICATE_PRIVATE_KEY=file:/full/path/to/key.pem
+SERVER_SSL_CERTIFICATEPRIVATEKEY=file:/full/path/to/key.pem
 ```
 
 Additionally, you can configure SSL separately for the management routes of the `restapi` component:
@@ -65,7 +65,7 @@ Additionally, you can configure SSL separately for the management routes of the 
 ```
 MANAGEMENT_SERVER_SSL_ENABLED=true
 MANAGEMENT_SERVER_SSL_CERTIFICATE=file:/full/path/to/certificate.pem
-MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY=file:/full/path/to/key.pem
+MANAGEMENT_SERVER_SSL_CERTIFICATEPRIVATEKEY=file:/full/path/to/key.pem
 ```
 
 </TabItem>

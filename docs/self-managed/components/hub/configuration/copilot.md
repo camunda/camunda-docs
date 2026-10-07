@@ -93,7 +93,7 @@ Each provider has its own configuration options described below.
 | `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_TEMPERATURE`                  | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
 | `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_TOPP`                         | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
 | `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_TOPK`                         | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
-| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_MAXTOKENS`                    | [optional] Maximum new tokens per responses.                              | `4096`               | `8192`        |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_MAXTOKENS`                    | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
 | `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_TIMEOUT`                      | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
 | `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_LOGREQUESTS`                  | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
 | `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_LOGRESPONSES`                 | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
@@ -313,7 +313,7 @@ Camunda recommends using a stronger model, such as GPT-4 or comparable, for reli
 | Environment variable                                       | Description                                       | Example value                      |
 | ---------------------------------------------------------- | ------------------------------------------------- | ---------------------------------- |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREOPENAI_DEFAULTMODELID` | Default model (deployment name) for Azure OpenAI. | `gpt-4o`                           |
-| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREOPENAI_APIKEY`         | Azure OpenAI API key.                             | `az-aoai-key-**\*\*\*\***`         |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREOPENAI_APIKEY`         | Azure OpenAI API key.                             | `az-aoai-key-***`                  |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREOPENAI_ENDPOINT`       | Azure OpenAI endpoint.                            | `https://my-aoai.openai.azure.com` |
 
 </TabItem>
@@ -351,9 +351,9 @@ Azure AI supports authentication with an API key or Microsoft Entra ID (formerly
 | ------------------------------------------------------ | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_DEFAULTMODELID` | Default model for Azure AI (Inference).                                            | `gpt-4o-mini`                                                                     |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_ENDPOINT`       | Endpoint for Azure AI (Inference). Use the endpoint from `Azure AI Inference SDK`. | `https://********-resource.cognitiveservices.azure.com/openai/deployments/gpt-4o` |
-| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_APIKEY`         | [conditionally required] API key for Azure AI (alternative to OAuth credentials).  | `az-ai-key-**\*\*\*\***`                                                          |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_APIKEY`         | [conditionally required] API key for Azure AI (alternative to OAuth credentials).  | `az-ai-key-***`                                                                   |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_CLIENTID`       | [conditionally required] Azure AI OAuth client ID.                                 | `00000000-0000-0000-0000-000000000000`                                            |
-| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_CLIENTSECRET`   | [conditionally required] Azure AI OAuth client secret.                             | `**\*\*\*\***`                                                                    |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_CLIENTSECRET`   | [conditionally required] Azure AI OAuth client secret.                             | `***`                                                                             |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_TENANTID`       | [conditionally required] Azure AD tenant ID for OAuth.                             | `11111111-2222-3333-4444-555555555555`                                            |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_AUTHORITYHOST`  | [conditionally required] Authority host for Azure OAuth.                           | `https://login.microsoftonline.com`                                               |
 
@@ -415,7 +415,7 @@ Azure AI supports authentication with an API key or Microsoft Entra ID (formerly
 | Environment variable                                          | Description                                                              | Example value                | Default value |
 | ------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------- |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_DEFAULTMODELID`      | Default model ID for Anthropic.                                          | `claude-3-5-sonnet-20240620` | -             |
-| `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_APIKEY`              | Anthropic API key.                                                       | `sk-ant-**\*\*\*\***`        | -             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_APIKEY`              | Anthropic API key.                                                       | `sk-ant-***`                 | -             |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_CACHESYSTEMMESSAGES` | [optional] Enable client-side caching of system messages (if supported). | `false`                      | `true`        |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_CACHETOOLS`          | [optional] Enable client-side caching of tool schemas (if supported).    | `false`                      | `true`        |
 
@@ -477,7 +477,7 @@ Azure AI supports authentication with an API key or Microsoft Entra ID (formerly
 | ---------------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------- | ------------- |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_DEFAULTMODELID` | Default model ID for Hugging Face Inference.                             | `mistralai/Mixtral-8x7B-Instruct-v0.1`        | -             |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_BASEURL`        | Base URL for Hugging Face Inference endpoint (if self-hosted or custom). | `https://api-inference.huggingface.co/models` | -             |
-| `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_ACCESSTOKEN`    | Access token for Hugging Face.                                           | `hf\_**\*\*\*\***`                            | -             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_ACCESSTOKEN`    | Access token for Hugging Face.                                           | `hf_***`                                      | -             |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_WAITFORMODEL`   | [optional] Wait for model to warm up before responding.                  | `false`                                       | `true`        |
 | `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_RETURNFULLTEXT` | [optional] Return the full generated text (not just the completion).     | `true`                                        | `true`        |
 
