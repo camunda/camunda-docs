@@ -26,7 +26,7 @@ Camunda provides a structured multi-region resilience framework for Self-Managed
 
 Single-region high availability (HA) protects against an availability-zone (AZ) outage. Distribute brokers and partition replicas across at least three AZs so that losing one zone preserves a majority of every partition's replicas. Provide enough surviving capacity, and run secondary storage and application dependencies in HA mode as well.
 
-On Kubernetes, configure zonal placement explicitly. The default node anti-affinity places Orchestration Cluster pods on distinct nodes, but doesn't guarantee that those nodes are in different AZs. See [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha) and [topology spread constraints](/self-managed/deployment/helm/install/production/index.md#topology-spread-constraints).
+On Kubernetes, enforce zonal placement explicitly. See [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha).
 
 Multi-AZ deployment doesn't protect against a complete region outage. To address a region outage, choose one of the multi-region strategies below.
 
@@ -68,10 +68,10 @@ The following table provides a detailed comparison of the available multi-region
 Notes for Multi-Region RDBMS:
 
 1. Region-loss continuity requires quorum-preserving replica placement, where no zone holds half the replicas or more, and enough surviving capacity to carry the load. In this reference layout, one zone maps to one region. A zone can also be an AZ.
-2. With three or more regions and quorum-preserving replica placement, Zeebe recovers automatically. Partitions whose leader was lost typically resume after a few seconds. Other partitions continue processing. Client access and secondary-storage availability can take longer, because they depend on traffic rerouting, connection retries, and database writer promotion if the writer was in the lost region. Full data freshness also requires the exporter backlog to clear. These are indicative durations based on defaults and vendor documentation, not a measured end-to-end recovery target. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives) for the time scale of each part.
-3. Primary storage contains Zeebe's replicated log and runtime state. Committed records are preserved while the surviving replicas retain quorum. Secondary-storage RPO 0 depends on your [replication monitoring strategy](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support), promoting an eligible standby, enough broker disk to retain the unexported log, and replay completing after promotion.
+2. Zeebe recovers affected partitions in seconds. Client rerouting and database writer promotion can take minutes and depend on your configuration. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
+3. Primary storage contains Zeebe's replicated log and runtime state. Secondary-storage RPO 0 depends on replication and log-retention conditions. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
 
-Cold Recovery is a manual backup and restore procedure without a reference architecture. Its RTO and RPO are bounded by data volume, backup frequency, and operator restore speed. Treat published ranges as planning targets, not contractual commitments.
+Cold Recovery RTO and RPO are bounded by data volume, backup frequency, and operator restore speed. Treat published ranges as planning targets, not contractual commitments.
 
 Dual-Region RTO is based on internal operational tests. Actual times can vary depending on your environment, level of automation, and the manual steps performed during recovery. See [Dual-Region](./dual-region.md#recovery-objectives) for a phase-by-phase breakdown.
 
