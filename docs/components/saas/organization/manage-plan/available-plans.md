@@ -24,16 +24,21 @@ To upgrade to the Enterprise plan, click **Organization > Manage organization** 
 
 ### Benefits of the Enterprise plan
 
-The Enterprise plan includes the following:
+The Enterprise plan includes the following.
 
-- Invite an unlimited number of users. The Free Trial allows up to 5.
-- [Single sign-on](/components/saas/organization/external-sso.md) with your own identity provider, including default organizations.
-- [Restricted email hostnames](/components/saas/organization/create-manage-users.md#restrict-invite-email-domains) for user invitations, to meet your internal security policies.
-- [IP allowlists](/components/saas/clusters/manage-ip-allowlists.md) to restrict access to your clusters.
-- [Cluster backups and restore](/components/saas/backups.md).
-- [Private connectivity with AWS PrivateLink](/components/saas/secure-connectivity/index.md).
-- [Bring your own key](/components/saas/encryption-at-rest.md) (BYOK) encryption with AWS KMS.
-- [Billing page and reservations](/components/saas/organization/manage-plan/update-billing-reservations.md) for your hardware packages.
-- No [auto-pause](/components/saas/clusters.md) of your clusters, which applies to Free Trial clusters.
-- Custom regions. [Contact Camunda](https://camunda.com/contact-us/) to discuss them.
-- The option to opt in to [alpha features](/components/saas/organization/enable-alpha-features.md).
+**Included in the annual usage**
+
+- Unlimited BPMN/DMN models
+- Unlimited users to collaborate
+- High performance clusters
+- High-volume process instances
+- High-volume decision instances
+- High-volume task users
+
+**Extra features and support**
+
+- [Single Sign On & SAML](/components/saas/organization/external-sso.md)
+- Custom regions options for clusters
+- 24/7 technical support
+- Custom training and consulting
+- Dedicated customer success manager
