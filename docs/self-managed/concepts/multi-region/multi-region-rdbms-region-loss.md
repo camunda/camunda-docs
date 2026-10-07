@@ -79,16 +79,12 @@ The window is longer here, because the new leader and the rerouted client can bo
 
 ## Processing during secondary-storage recovery {#processing-during-secondary-storage-recovery}
 
-Zeebe can retain quorum while secondary storage is unavailable or catching up, so processing continues but exported data lags behind process execution. Records missing from a promoted database are temporary: Camunda replays them from the retained log. Permanent loss only occurs if the conditions in [recovery objectives](#recovery-objectives) aren't met.
+While secondary storage is unavailable or catching up, Zeebe keeps its quorum, but processing can still slow down or stop. How the retained log, replay, and exporter pausing behave is covered in [recovery objectives](#recovery-objectives). Two effects reach processing itself:
 
-Two separate mechanisms can affect processing during this time:
+- **Throttling**: If [write flow control with dynamic throttling](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#enable-flow-control) is enabled, the growing export backlog lowers the write rate. Throughput drops and clients see more backpressure until exporting catches up. Write flow control is disabled by default in Self-Managed.
+- **Disk exhaustion**: If the outage lasts long enough for the retained log to fill the broker disk, processing stops.
 
-- **Exporter pausing**: With `pause-on-max-lag-exceeded` enabled, the exporter stops writing to secondary storage once replication lag passes the threshold. Pausing stops exporting, not processing.
-- **Processing throttling**: If [write flow control with dynamic throttling](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#enable-flow-control) is enabled, a growing export backlog lowers the write rate. Processing throughput drops and clients see more backpressure until exporting catches up. Write flow control is configurable and disabled by default in Self-Managed.
-
-Retained log segments also increase broker disk usage for as long as records remain unexported. A prolonged outage can eventually stop processing if broker disk capacity runs out.
-
-Throughout recovery, monitor export backlog, replication lag, broker disk usage, and processing throughput. The [exporting backlog](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#exporting-backlog) dashboard panel shows unexported records per partition.
+Monitor export backlog, replication lag, broker disk usage, and processing throughput until secondary storage has caught up. For the backlog, use the [exporting backlog](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#exporting-backlog) dashboard panel.
 
 ## Remove a lost zone
 
