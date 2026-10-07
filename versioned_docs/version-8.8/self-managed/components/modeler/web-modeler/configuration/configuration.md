@@ -225,6 +225,8 @@ The proxy-related environment variables are lowercase because they follow a wide
 
 :::note Helm behavior
 The `webapp` component default for `CAMUNDA_IDENTITY_USERNAMECLAIM` is `name`. In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `webapp` environment.
+The Helm chart sets the username claim from `orchestration.security.authentication.oidc.usernameClaim`, also when `orchestration.enabled` is `false`.
+To set a different Web Modeler claim, set the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable in `webModeler.webapp.env`.
 :::
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
