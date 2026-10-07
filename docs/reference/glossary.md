@@ -155,7 +155,7 @@ BTP stands for [SAP](#sap) Business Technology Platform, which is a cloud-based 
 
 Camunda can integrate with SAP BTP to orchestrate business processes across SAP and non-SAP systems. By doing so, it enables automation and visibility of workflows that span multiple services and applications hosted on BTP, enhancing agility and process control in enterprise environments.
 
-- [BTP plugin](/components/camunda-integrations/sap/btp-plugin.md)
+- [SAP integration](/components/camunda-integrations/sap/camunda-sap-integration.md)
 
 ## C
 
@@ -280,9 +280,9 @@ The shape of a [credential](#credential), such as AWS Credential, REST Authentic
 
 ### CSAP CLI
 
-CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector and OData connector) for deployment.
 
-Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
+Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations straightforward and repeatable in environments like Camunda SaaS.
 
 - [CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)
 
