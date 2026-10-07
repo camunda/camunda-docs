@@ -16,8 +16,8 @@ Camunda 8 Self-Managed has multiple web applications and gRPC services. You can 
 
 ## Prerequisites
 
-- An Ingress controller deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `global.ingress.className` (and `orchestration.ingress.grpc.className` for the Zeebe gRPC Ingress).
-- The annotations your controller needs. Starting with Camunda 8.10 (chart 15.x), the chart's default ingress-nginx annotation set comes from a compatibility shim that you can turn off with `global.compatibility.nginx.renderAnnotations: false`; see [Ingress-nginx annotation defaults deprecated in the Helm chart](/reference/announcements-release-notes/8100/8100-announcements.md#ingress-annotation-defaults-deprecated).
+- An Ingress controller deployed in advance. The examples below use the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `global.ingress.className` (and `orchestration.ingress.grpc.className` for the Zeebe gRPC Ingress).
+- The annotations your controller needs. Starting with Camunda 8.10 (chart 15.x), the chart's default Ingress-nginx annotation set comes from a compatibility shim that you can turn off with `global.compatibility.nginx.renderAnnotations: false`; see [Ingress-nginx annotation defaults deprecated in the Helm chart](/reference/announcements-release-notes/8100/8100-announcements.md#ingress-annotation-defaults-deprecated).
 
 :::note
 [Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures deploy [Contour](https://projectcontour.io/) instead. The examples on this page still use Ingress-nginx annotations. With another controller, translate them to its equivalents. See [configure the gRPC upstream](#configure-the-grpc-upstream) for the gRPC annotation each controller expects.
@@ -268,7 +268,7 @@ Ingress resources require the cluster to have a running [Ingress Controller](htt
 
 ### Local setup example
 
-An Ingress controller is also required for local Camunda 8 installation. The following example shows an Ingress controller configuration using the [ingress-nginx controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
+An Ingress controller is also required for local Camunda 8 installation. The following example shows an Ingress controller configuration using the [Ingress-nginx controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
 
 ```yaml
 # ingress_nginx_values.yml
@@ -284,7 +284,7 @@ controller:
     enabled: false
 ```
 
-Install the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) to your local cluster:
+Install the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) to your local cluster:
 
 ```shell
 helm install -f ingress_nginx_values.yml \
@@ -299,7 +299,7 @@ If your local cluster exposes the Ingress controller on ports other than `80` an
 
 ### Configure the gRPC upstream
 
-The Zeebe Gateway serves gRPC, so your Ingress controller must send HTTP/2 to the Orchestration Cluster. Each controller declares the gRPC upstream differently, and not on the same object:
+Configure your Ingress controller to send HTTP/2 to the Orchestration Cluster, because the Zeebe Gateway serves gRPC. Each controller declares the gRPC upstream differently, and not on the same object:
 
 | Ingress controller | Annotation                                           | Object                                    |
 | ------------------ | ---------------------------------------------------- | ----------------------------------------- |
@@ -319,11 +319,13 @@ orchestration:
 
 ### Use an AWS Application Load Balancer
 
-An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with a certificate from AWS Certificate Manager (ACM). For its limits, see [Application Load Balancer](/self-managed/reference-architecture/kubernetes.md#application-load-balancer-alb).
+An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with a certificate from AWS Certificate Manager (ACM). For the limits, see the [ALB known limitations](/self-managed/reference-architecture/kubernetes.md#application-load-balancer-alb).
 
 1. Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
 1. Set up a [certificate in AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html).
-1. Set the `alb` class on every Ingress object the chart renders. The web application Ingress objects read `global.ingress`, and the Zeebe gRPC Ingress reads `orchestration.ingress.grpc`. Set `backend-protocol-version: GRPC` only on the Zeebe gRPC Ingress, as in the [AWS gRPC example](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md). On a web application Ingress, this annotation makes the ALB target groups use gRPC and breaks the HTTP applications.
+1. Set the `alb` class on every Ingress object the chart renders. The web application Ingress objects read `global.ingress`, and the Zeebe gRPC Ingress reads `orchestration.ingress.grpc`.
+1. Set `alb.ingress.kubernetes.io/backend-protocol-version: GRPC` only on the Zeebe gRPC Ingress, as in the [AWS gRPC example](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md). On a web application Ingress, this annotation makes the ALB target groups use gRPC and breaks the HTTP applications.
+1. Add the values to your `values.yaml` file:
 
    ```yaml
    global:
@@ -339,7 +341,7 @@ An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with 
          secretName: ""
        annotations:
          alb.ingress.kubernetes.io/ssl-redirect: "443"
-         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
          alb.ingress.kubernetes.io/scheme: internet-facing
          alb.ingress.kubernetes.io/target-type: ip
 
@@ -353,7 +355,7 @@ An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with 
          annotations:
            alb.ingress.kubernetes.io/ssl-redirect: "443"
            alb.ingress.kubernetes.io/backend-protocol-version: GRPC
-           alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+           alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
            alb.ingress.kubernetes.io/scheme: internet-facing
            alb.ingress.kubernetes.io/target-type: ip
    ```
