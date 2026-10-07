@@ -5,9 +5,9 @@ sidebar_label: "Troubleshooting"
 description: Identify and resolve common issues when starting, configuring, or using Camunda 8 Run.
 ---
 
-Camunda 8 Run provides log files in the `c8run/logs` directory that can help diagnose most issues. Check these logs first when troubleshooting:
+Camunda 8 Run provides log files in the `c8run/log` directory that can help diagnose most issues. Check these logs first when troubleshooting:
 
-- `c8run.log` – main log for Camunda 8 Run
+- `camunda.log` – main log for Camunda 8 Run
 - `connectors.log` – Connectors component
 - `elasticsearch.log` – embedded Elasticsearch instance (if used)
 
@@ -177,7 +177,7 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
 
 **Solution:**
 
-1. Check Elasticsearch logs in the `c8run/logs` directory.
+1. Check Elasticsearch logs in the `c8run/log` directory.
 2. Ensure sufficient disk space is available.
 3. Verify Elasticsearch ports (9200, 9300) are not in use.
 4. If Elasticsearch continues to fail, consider using an external Elasticsearch instance:

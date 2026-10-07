@@ -9,10 +9,6 @@ description: "Complete reference of all c8ctl CLI commands, flags, resources, an
      This page is the source of truth in c8ctl and is synced to camunda-docs automatically.
      Run: node --experimental-strip-types scripts/sync-readme-commands.ts --docs -->
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. Commands and flags may change without notice between releases. See [Getting started](getting-started.md) for details.
-:::
-
 ## Global Flags
 
 These flags are accepted by every command.
@@ -92,6 +88,7 @@ List resources
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
+| `--businessId` | string |  | Filter by Business ID (Camunda 8.9+) |
 | `--bpmnProcessId` | string |  | Filter by BPMN process ID |
 | `--id` | string |  | Filter by BPMN process ID (alias) |
 | `--processDefinitionId` | string |  | Filter by process definition ID |
@@ -251,6 +248,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
+| `--businessId` | string |  | Filter by Business ID (Camunda 8.9+) |
 | `--bpmnProcessId` | string |  | Filter by BPMN process ID |
 | `--id` | string |  | Filter by BPMN process ID (alias) |
 | `--processDefinitionId` | string |  | Filter by process definition ID |
@@ -494,29 +492,77 @@ Create a resource (process instance, identity)
 
 **Resources:** pi (process-instance), user, role, group, tenant, auth (authorization), mapping-rule
 
-**Verb-level flags:**
+**Resource-specific flags:**
+
+<details>
+<summary><code>process-instance</code> (<code>pi</code>)</summary>
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
 | `--processDefinitionId` | string |  | Process definition ID (BPMN process ID) |
 | `--id` | string |  | Process definition ID (alias for --processDefinitionId) |
 | `--bpmnProcessId` | string |  | BPMN process ID (alias for --processDefinitionId) |
-| `--variables` | string |  | JSON variables |
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--awaitCompletion` | boolean |  | Wait for process to complete |
 | `--fetchVariables` | boolean |  | Fetch result variables on completion |
 | `--requestTimeout` | string |  | Await timeout in milliseconds |
+
+</details>
+
+<details>
+<summary><code>user</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--username` | string |  | Username |
 | `--name` | string |  | Display name |
 | `--email` | string |  | Email address |
 | `--password` | string |  | Password |
+
+</details>
+
+<details>
+<summary><code>role</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--roleId` | string |  | Role ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>group</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--groupId` | string |  | Group ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>tenant</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--tenantId` | string |  | Tenant ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>mapping-rule</code> (<code>mr</code>)</summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--mappingRuleId` | string |  | Mapping rule ID |
+| `--name` | string |  | Display name |
 | `--claimName` | string |  | Claim name |
 | `--claimValue` | string |  | Claim value |
 
-**Resource-specific flags:**
+</details>
 
 <details>
 <summary><code>authorization</code> (<code>auth</code>)</summary>
@@ -534,7 +580,7 @@ Create a resource (process instance, identity)
 **Examples:**
 
 ```bash
-c8ctl create pi --id=myProcess                              # Create a process instance
+c8ctl create pi --id=myProcess --businessId=order-123       # Create a process instance with a Business ID
 c8ctl create pi --id=myProcess --awaitCompletion            # Create and await completion
 c8ctl create user --username=john --name='John Doe' --email=john@example.com --password=secret  # Create a user
 ```
@@ -595,14 +641,15 @@ Create and await process instance completion (server-side waiting)
 | `--processDefinitionId` | string |  | Process definition ID (BPMN process ID) |
 | `--id` | string |  | Process definition ID (alias for --processDefinitionId) |
 | `--bpmnProcessId` | string |  | BPMN process ID (alias for --processDefinitionId) |
-| `--variables` | string |  | JSON variables |
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--fetchVariables` | boolean |  | Fetch result variables on completion |
 | `--requestTimeout` | string |  | Await timeout in milliseconds |
 
 **Examples:**
 
 ```bash
-c8ctl await pi --id=myProcess                               # Create and wait for completion
+c8ctl await pi --id=myProcess --businessId=claim-456        # Create with a Business ID and wait for completion
 ```
 
 ---
@@ -624,7 +671,7 @@ Complete a user task or job
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
-| `--variables` | string |  | JSON variables |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 
 ---
 
@@ -723,7 +770,7 @@ Publish a message for message correlation
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
 | `--correlationKey` | string |  | Correlation key |
-| `--variables` | string |  | JSON variables |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--timeToLive` | string |  | Time to live in milliseconds |
 
 ---
@@ -743,7 +790,7 @@ Correlate a message to a specific process instance
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
 | `--correlationKey` | string | Yes | Correlation key |
-| `--variables` | string |  | JSON variables |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--timeToLive` | string |  | Time to live in milliseconds |
 
 ---
@@ -764,7 +811,7 @@ Set variables on an element instance (process instance or flow element scope). V
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
-| `--variables` | string | Yes | JSON object of variables to set (required) |
+| `--variables` | string | Yes | JSON object of variables to set, or @file.json / @- to read from file/stdin (required) |
 | `--local` | boolean |  | Set variables in local scope only (default: propagate to outermost scope) |
 
 **Examples:**
@@ -809,13 +856,14 @@ Deploy and start a process instance from a BPMN file
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
-| `--variables` | string |  | JSON variables |
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
+| `--variables` | string |  | JSON variables (or @file.json / @- to read from file/stdin) |
 | `--force` | boolean |  | Deploy any file type, ignoring the default extension allow-list |
 
 **Examples:**
 
 ```bash
-c8ctl run ./my-process.bpmn                                 # Deploy and start process
+c8ctl run ./my-process.bpmn --businessId=order-123          # Deploy and start a process with a Business ID
 ```
 
 ---
@@ -953,6 +1001,8 @@ Add a profile
 | `--password` | string |  | Basic auth password |
 | `--from-file` | string |  | Import from .env file |
 | `--from-env` | boolean |  | Import from environment variables |
+| `--header` | string |  | Custom HTTP header attached to every request made under this profile (format: "Name: value", repeatable) |
+| `--exactBaseUrl` | boolean |  | Use --baseUrl exactly as given for every request, without appending /v2 |
 
 ---
 

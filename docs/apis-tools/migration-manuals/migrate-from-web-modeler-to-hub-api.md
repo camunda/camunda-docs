@@ -384,13 +384,14 @@ A `revision` is now required to prevent overwriting concurrent changes. Fetch th
 
 In addition to the [general field changes](#file-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                           |
-| ------------------------ | ------------------ | ----------------------------------------------------------------------------------------------- |
-| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`             |
-| `filter.folderId`        | `filter.folderKey` | Renamed                                                                                         |
-| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` is an object. In v2, it's a string representing the creator's email address. |
-| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address. |
-| `sort.direction`         | `sort.order`       | Renamed                                                                                         |
+| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                                               |
+| ------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`                                 |
+| `filter.folderId`        | `filter.folderKey` | Renamed                                                                                                             |
+| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` is an object. In v2, it's a string representing the creator's email address.                     |
+| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address.                     |
+| `sort.direction`         | `sort.order`       | Renamed                                                                                                             |
+| `filter.projectId`       | -                  | Removed. You can no longer filter files by workspace (["project" before Camunda 8.10](#structure-and-terminology)). |
 
 `content` is `null` on all items in the search response. Fetch individual files to retrieve content.
 

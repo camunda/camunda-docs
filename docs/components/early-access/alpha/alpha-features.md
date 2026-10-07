@@ -30,7 +30,7 @@ Limitations of alpha features and components include:
 - (SaaS) No availability targets.
 - Released outside the standard [release policy](/reference/announcements-release-notes/release-policy.md).
 
-To learn more about using alpha features, see [enabling alpha features](/components/hub/organization/manage-organization-settings/enable-alpha-features.md).
+To learn more about using alpha features, see [enabling alpha features](/components/saas/organization/enable-alpha-features.md).
 
 ## Available alpha features
 
@@ -55,12 +55,6 @@ type: 'link',
 href: '/docs/next/components/early-access/alpha/a2a-client/',
 label: 'A2A Client',
 docId: 'components/early-access/alpha/a2a-client/a2a-client',
-},
-{
-type: 'link',
-href: '/docs/next/apis-tools/c8ctl/getting-started/',
-label: 'c8ctl CLI',
-docId: 'apis-tools/c8ctl/getting-started',
 },
 ]}
 />

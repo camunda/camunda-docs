@@ -10,12 +10,13 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Upgrade guides                                                                                     |
-| :----------------- | :--------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2027              | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Changelog(s)                                                                | Upgrade guides                                                                                     |
+| :----------------- | :-------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 12 October 2027             | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -31,7 +32,7 @@ import PageDescription from '@site/src/components/PageDescription';
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.9.13 (15.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.13)</li><li>[Camunda 8.9.12 (07.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.12)</li><li>[Camunda 8.9.11 (26.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.11)</li><li>[Camunda 8.9.10 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.10)</li><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.6 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.6)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
+<ul><li>[Camunda 8.9.23 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.9.23)</li><li>[Camunda 8.9.22 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.22)</li><li>[Camunda 8.9.21 (17.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.21)</li><li>[Camunda 8.9.19 (04.09.2026)](https://github.com/camunda/camunda/releases/tag/8.9.19)</li><li>[Camunda 8.9.18 (31.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.18)</li><li>[Camunda 8.9.17 (21.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.17)</li><li>[Camunda 8.9.16 (14.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.16)</li><li>[Camunda 8.9.15 (11.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.15)</li><li>[Camunda 8.9.14 (03.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.14)</li><li>[Camunda 8.9.13 (15.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.13)</li><li>[Camunda 8.9.12 (07.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.12)</li><li>[Camunda 8.9.11 (26.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.11)</li><li>[Camunda 8.9.10 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.10)</li><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.14 (28.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.14)</li><li>[Connectors 8.9.13 (28.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.13)</li><li>[Connectors 8.9.12 (18.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.12)</li><li>[Connectors 8.9.11 (18.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.11)</li><li>[Connectors 8.9.10 (04.09.2026)](https://github.com/camunda/connectors/releases/tag/8.9.10)</li><li>[Connectors 8.9.9 (28.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.9)</li><li>[Connectors 8.9.8 (18.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.8)</li><li>[Connectors 8.9.7 (04.08.2026)](https://github.com/camunda/connectors/releases/tag/8.9.7)</li><li>[Connectors 8.9.6 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.6)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -194,8 +195,8 @@ Console includes a new Cluster Metrics endpoint for SaaS clusters and reduces th
 Camunda 8.9 adds bulk secret import from `.env` files, cluster-to-cluster secret import and export, editable cluster descriptions, and per-tenant usage metrics for Self-Managed environments. Console also adds a new AWS US East region to expand regional deployment choices for SaaS clusters.
 
 <ul>
-  <li><span class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</span></li>
-  <li><span class="link-arrow">[Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md)</span></li>
+  <li><span class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</span></li>
+  <li><span class="link-arrow">[Create a cluster](/components/saas/clusters/create-cluster.md)</span></li>
   <li><span class="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</span></li>
 </ul>
 
@@ -243,14 +244,14 @@ Camunda 8.9 adds migration guidance for customers moving Self-Managed Helm deplo
 
 <p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
 
-### Gateway API, templating, and Helm 4 support
+### Gateway API, templating, and Helm CLI v4 support {#gateway-api-templating-and-helm-4-support}
 
-The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm 4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm 3 end of life.
+The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm CLI v4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm CLI v3 end of life.
 
 <ul>
   <li><span class="link-arrow">[Gateway API setup](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</span></li>
   <li><span class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
 </ul>
 
 ### Secondary storage and authorization defaults
@@ -324,6 +325,12 @@ A new migration tooling set is available to move existing Self-Managed deploymen
 
 Camunda 8.9 adds IDP document classification templates and lets you choose a text extraction engine per template. This gives teams more control over how different document types are categorized and processed, whether they need lightweight parsing, OCR, or multimodal LLM interpretation.
 
+### Azure Blob Storage support for document handling
+
+Camunda 8.9 adds Azure Blob Storage as a supported document store for Self-Managed environments, alongside the existing Google Cloud Platform (GCP) and AWS S3 options. Configure it via Camunda 8 Run, Docker Compose, or Helm.
+
+<p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md#supported-storage-options)</p>
+
 ## Integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
@@ -332,7 +339,16 @@ Camunda 8.9 adds IDP document classification templates and lets you choose a tex
 
 The Camunda for Microsoft Teams app is now available for Self-Managed environments as well as SaaS. This lets teams claim and complete Camunda tasks directly in Microsoft Teams across more deployment models.
 
-<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
+<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/app-integrations/microsoft-teams.md)</p>
+
+### Live task updates and assignment notifications in Microsoft Teams
+
+Camunda for Microsoft Teams now updates a notification card as its task is assigned, completed, or canceled, and notifies you when an existing task is later assigned to you. On SaaS, these capabilities require a cluster running generation `8.9 gen13` or later with **Enable app integrations extensions** turned on in the cluster settings.
+
+<ul>
+  <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/app-integrations/notification-rules.md#enable-notification-delivery-for-your-cluster)</span></li>
+  <li><span class="link-arrow">[Enable app integrations extensions](/components/saas/clusters/settings.md#enable-app-integrations-extensions)</span></li>
+</ul>
 
 ## Migration from Camunda 7 to Camunda 8
 
@@ -427,7 +443,7 @@ Orchestration Cluster enhancements in 8.9 include scheduled backups, Elasticsear
 
 <ul>
   <li><span class="link-arrow">[Scheduled backup](/self-managed/operational-guides/backup-restore/rdbms/backup.md#scheduled-backup)</span></li>
-  <li><span class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</span></li>
+  <li><span class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</span></li>
 </ul>
 
 ### Archive by ID for Elasticsearch and OpenSearch
@@ -532,7 +548,7 @@ Camunda 8.9 expands Web Modeler with broader event template support, email-based
 
 <ul>
   <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</span></li>
-  <li><span class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
+  <li><span class="link-arrow">[Add users to projects](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members)</span></li>
   <li><span class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
 </ul>
 
@@ -681,17 +697,15 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
 
-#### Helm 4 support
+#### Helm CLI v4 support {#helm-4-support}
 
 <!-- https://github.com/camunda/product-hub/issues/3358 -->
 
-As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
+Camunda 8.9 (chart 14.x) supports Helm CLI v3 and v4.
 
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+<HelmCliSupport />
 
-:::note
-Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
-:::
+For Helm CLI v4 behavior changes and workarounds, see [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 ### Global user task listeners
 
@@ -747,7 +761,7 @@ The Camunda for Microsoft Teams app is now available in Self-Managed environment
 
 You can use this app to view, claim, and complete Camunda tasks directly in Microsoft Teams.
 
-<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
+<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/app-integrations/microsoft-teams.md)</p>
 
 ### Modeler
 
@@ -759,7 +773,7 @@ You can use this app to view, claim, and complete Camunda tasks directly in Micr
 
 You can now add subfolders to your process applications, giving you more flexibility when organizing your files and allowing you to sync to your existing version control system without reorganizing the filesystem.
 
-<p class="link-arrow">[Process applications](/components/concepts/process-applications.md)</p>
+<p class="link-arrow">[Process applications](/components/concepts/projects.md)</p>
 
 #### Web Modeler: Improved Self-Managed installation
 
@@ -808,7 +822,7 @@ You can now configure RocksDB memory on a per-broker basis instead of per-partit
 
 - Camunda recommends you test this out before 8.10 to find the right value, or configure the allocation strategy to `PARTITION`.
 
-<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
 #### Delete processes and decisions (instances and definitions)
 
@@ -1352,7 +1366,7 @@ As a Self-Managed administrator, you can now invite users to Web Modeler project
 
 This enables faster project provisioning and a consistent administrator experience across identity providers.
 
-<p class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Add users to projects](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members)</p>
 
 ### Orchestration Cluster
 
@@ -1543,7 +1557,7 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 - Key–value pairs are automatically parsed, validated, and added as secrets.
 - This helps reduce configuration errors and copy-pasting when adding secrets.
 
-<p class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</p>
+<p class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</p>
 
 #### Cluster description (SaaS)
 
@@ -1551,7 +1565,7 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 
 You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
 
-<p class="link-arrow">[Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md)</p>
+<p class="link-arrow">[Create a cluster](/components/saas/clusters/create-cluster.md)</p>
 
 #### Import cluster secrets (SaaS)
 
@@ -1561,7 +1575,7 @@ You can now import and export connector secrets between clusters within your org
 
 Export a cluster’s secrets to a key-value file for backup or external workflows, and import secrets from another cluster in a single action. Imports automatically match keys, update existing values, create missing ones, and provide clear feedback on the result. Permissions are enforced so that only authorized users can perform these actions.
 
-<p class="link-arrow">[Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)</p>
+<p class="link-arrow">[Connector secrets](/components/saas/clusters/manage-secrets.md)</p>
 
 #### Usage metrics for licence model and tenant (Self-Managed)
 
@@ -1737,7 +1751,7 @@ This enhancement ensures consistency across environments, simplifies setup for a
 
 In Camunda 8.9, RocksDB state storage uses a single shared cache and write buffer per broker instead of per partition. This behavior is controlled by the RocksDB memory allocation strategy (`PARTITION`, `BROKER`, `FRACTION`).
 
-See [resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md) for details on the available strategies and recommended settings.
+See [resource planning](/components/best-practices/architecture/sizing-self-managed.md) for details on the available strategies and recommended settings.
 
 :::note
 In Camunda 8.10, the default memory allocation strategy changes from `PARTITION` to `FRACTION`. This may result in a different amount of memory being allocated to RocksDB.

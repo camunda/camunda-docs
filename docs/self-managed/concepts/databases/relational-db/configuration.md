@@ -1,6 +1,7 @@
 ---
 id: database-configuration
 title: "RDBMS configuration overview"
+sidebar_label: "Configuration overview"
 description: Learn how to configure Camunda to use a relational database as secondary storage, including exporter setup, schema management, privileges, and connection settings.
 ---
 
@@ -11,11 +12,10 @@ This page explains how RDBMS configuration works at the application level. If yo
 - [RDBMS configuration in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [Access native SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
 
-For supported database vendors and versions, see the  
-[RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+For supported database vendors and versions, see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
 :::tip Need end-to-end guidance?
-For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Camunda Hub, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
 :::
 
 ## Enable RDBMS as secondary storage
@@ -49,8 +49,7 @@ Liquibase creates two internal management tables:
 
 These tables must not be modified or deleted.
 
-For Helm deployments requiring manual schema control or access to vendor-specific SQL, see:  
-**[Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)**.
+For Helm deployments requiring manual schema control or access to vendor-specific SQL, see [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
 ### Configure table prefix
 
@@ -93,20 +92,6 @@ If using the RDBMS purge feature, the following privilege is required:
 
 - TRUNCATE
 
-## History cleanup
-
-The RDBMS exporter performs automatic history cleanup using two mechanisms:
-
-1. **TTL-based marking**  
-   Finished process instances and related data are marked for deletion after their configured history TTL expires.
-
-2. **Periodic cleanup job**  
-   A scheduled cleanup process deletes marked data in batches, adjusting its interval dynamically:
-
-- If no data is deleted → interval doubles (up to `max-history-cleanup-interval`)
-- If the batch limit is reached → interval halves (down to `min-history-cleanup-interval`)
-- Otherwise → the interval remains unchanged
-
 ## Database driver
 
 Camunda images include JDBC drivers for all supported databases except Oracle and MySQL.
@@ -129,9 +114,7 @@ Place the driver JAR directly inside the mounted directory (not in subfolders).
 
 ### Helm
 
-If you are using the Helm charts, refer to the database configuration guide for the supported driver configuration options:
-
-- [Helm database configuration](../../../../self-managed/deployment/helm/configure/database/index.md)
+When deploying with Helm, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
 
 ## Database configuration
 
@@ -199,8 +182,7 @@ The RDBMS exporter provides automatic history cleanup, which works in two stages
 - If no records are deleted → interval doubles (up to `max-history-cleanup-interval`)
 - If the batch size is fully used → interval halves (down to `min-history-cleanup-interval`)
 - Otherwise → interval remains unchanged
-- additionally the cleanup is only allowed to take a maximum of `max-history-cleanup-usage` execution time. This will not
-  cut off the current execution, but it will affect the interval for the next one.
+- Additionally, cleanup execution is capped by `max-history-cleanup-usage`. The current cleanup run is not interrupted, but the next interval is adjusted.
 
 ### History cleanup configuration
 
@@ -236,20 +218,195 @@ camunda.data.secondary-storage.rdbms.history.*
 
 ## Multi-region support
 
-The RDBMS Exporter currently has no multi-region support. Only one RDBMS Exporter instance and one JDBC database connection can be configured per Orchestration Cluster.
+Multi-region support for RDBMS uses the asynchronous replication feature of the underlying database and is highly
+dependent on the database vendor. While most multi-region replication is performed by the database itself, Camunda
+provides additional features to enhance automatic recovery in the event of a failure.
+
+For an architecture built on this model, in which every region writes to a single endpoint and a region loss does not
+stop processing, see [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md).
+
+Asynchronous replicated databases are synchronized with a delay, meaning that after a failover, the new primary database
+may not contain all the data written to the old primary database. This can lead to data loss in secondary storage. While
+this data can be reproduced by replaying past records from the Zeebe log stream, the relevant segments and records must still
+be present on all brokers. Zeebe's logstream segments are usually compacted as soon as all exporters have acknowledged the
+records.
+
+Camunda supports different strategies to handle this situation and preventing Zeebe log stream segments from being
+compacted prematurely.
+The following strategies are supported:
+
+- **LSN replication monitoring:** dynamic monitoring of the replication lag based on the database LSN. This is the most
+  preferred strategy and should be used whenever possible with the used database vendor.
+- **Delay backoff replication monitoring:** Adds a static delay to the acknowledgement of records to the broker.
 
 :::note
-Multi-region support for the RDBMS Exporter is not planned at this time. For multi-region setups, multi-region replication must be handled within the RDBMS itself, for example using a managed database service such as AWS Aurora.
+Deferring the logstream compaction with either strategy may drastically increase the disk space usage of the logstream.
+It is recommended to monitor the disk space usage and adjust the disk size or delay limit accordingly.
 :::
 
-## Usage with AWS Aurora PostgreSQL
+### LSN replication monitoring
 
-Camunda supports **PostgreSQL** as a secondary storage backend.  
-AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and is expected to work when configured like a standard PostgreSQL database.
+The exporter monitors the replication lag to the secondary databases based on the Log Sequence Number (LSN) of the last
+exported record. Only when an RDBMS redo log segment is replicated to a minimum quorum of secondary databases, the
+exporter will acknowledge the records in the logstream.
 
-In addition to the standard PostgreSQL JDBC driver, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
+```yaml
+camunda.data.secondary-storage.rdbms.async-replication.enabled: true
+camunda.data.secondary-storage.rdbms.async-replication.type: LOG_SEQ
+camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
+```
 
-To use the AWS JDBC wrapper, configure the JDBC URL as follows:
+| Property name                                 | Description                                                                   | Default |
+| --------------------------------------------- | ----------------------------------------------------------------------------- | ------- |
+| `async-replication.enabled`                   | If the async replication monitoring should be enabled                         | false   |
+| `async-replication.min-sync-replicas`         | The minimum number of replicas in sync                                        | 1       |
+| `async-replication.polling-interval`          | The interval in which to check the replicas                                   | PT15S   |
+| `async-replication.max-lag`                   | The max tolerated lag of a replication (ISO-8601 duration)                    | PT15M   |
+| `async-replication.pause-on-max-lag-exceeded` | If the exporter should pause exporting when the maximum lag limit is exceeded | false   |
+
+#### Vendor support
+
+The following databases are supported for LSN replication monitoring:
+
+- Aurora Global Database with PostgreSQL
+- Aurora Global Database with MySQL
+- MSSQL
+- PostgreSQL
+- Oracle
+
+Oracle uses system change numbers (SCNs) to track replication progress. To use LSN replication monitoring with Oracle, grant the database user `SELECT` access to the following views:
+
+```sql
+GRANT SELECT ON v_$database TO <user>;
+GRANT SELECT ON v_$archive_dest TO <user>;
+GRANT SELECT ON v_$archive_dest_status TO <user>;
+```
+
+To use the LSN replication monitoring with PostgreSQL, the database user must have the following additional privileges:
+
+- `PG_MONITOR` role
+
+```sql
+GRANT PG_MONITOR TO <user>;
+```
+
+To use the LSN replication monitoring with MSSQL, the database user must have the following additional privileges:
+
+- `VIEW SERVER STATE` role on SQL Server 2019 and earlier versions
+
+  ```sql
+  GRANT VIEW SERVER STATE TO <user>;
+  ```
+
+- `VIEW SERVER PERFORMANCE STATE` role on SQL Server 2022 and newer versions
+
+  ```sql
+  GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
+  ```
+
+### Time based replication monitoring
+
+The exporter monitors the replication lag to the secondary databases based on the reported replication lag from the
+primary replica. The exporter will only acknowledge records which have been exported before this lag time to a minimum
+quorum of secondary databases. The exporting will come to a stop when the lag time is exceeded and will only continue
+when the lag time is back within the configured limit.
+
+Note, that this strategy is not as precise as LSN replication monitoring and may lead to less frequent acknowledgements.
+It is recommended to use LSN replication monitoring whenever possible.
+
+```yaml
+camunda.data.secondary-storage.rdbms.async-replication.enabled: true
+camunda.data.secondary-storage.rdbms.async-replication.type: TIME_LAG
+camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
+```
+
+| Property name                                 | Description                                                                   | Default |
+| --------------------------------------------- | ----------------------------------------------------------------------------- | ------- |
+| `async-replication.enabled`                   | If the async replication monitoring should be enabled                         | false   |
+| `async-replication.min-sync-replicas`         | The minimal number of replicas in sync                                        | 1       |
+| `async-replication.polling-interval`          | The interval in which to check the replicas                                   | PT15S   |
+| `async-replication.max-lag`                   | The max tolerated lag of a replication (ISO-8601 duration)                    | PT15M   |
+| `async-replication.pause-on-max-lag-exceeded` | If the exporter should pause exporting when the maximum lag limit is exceeded | false   |
+
+#### Vendor support
+
+The following databases are supported for time lag replication monitoring:
+
+- Aurora Global DB with PostgreSQL
+- Aurora Global DB with MySQL
+- MSSQL
+- PostgreSQL
+
+To use the time lag replication monitoring with PostgreSQL, the database user must have the following additional privileges:
+
+- `PG_MONITOR` role
+
+```sql
+  GRANT PG_MONITOR TO <user>;
+```
+
+To use the time lag replication monitoring with MSSQL, the database user must have the following additional privileges:
+
+- `VIEW SERVER STATE` role on SQL Server 2019 and earlier versions
+
+  ```sql
+  GRANT VIEW SERVER STATE TO <user>;
+  ```
+
+- `VIEW SERVER PERFORMANCE STATE` role on SQL Server 2022 and newer versions
+
+  ```sql
+  GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
+  ```
+
+### Delay backoff replication monitoring
+
+The exporter always waits for a configured amount of time until an exported record is acknowledged to the broker as exported. This is supported for all databases.
+
+This is a fallback strategy for databases that do not support any other direct replication monitoring — prefer [LSN replication monitoring](#lsn-replication-monitoring) whenever your database vendor supports it. Delay backoff does not
+directly monitor any replication state, but instead adds a static delay to the acknowledgement of records to the broker.
+This can be used as a safety net to ensure that the Zeebe logstream segments are not compacted too early, even if the database
+replication is not fully in sync. This strategy requires external monitoring of the actual replication lag to ensure
+that the configured delay is sufficient for the database replication to catch up in case of a failover.
+
+:::warning
+The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. The exporter never acknowledges records before the configured delay period has elapsed, but may acknowledge them after this period has elapsed.
+Size the persistent volume to hold all records produced during the delay interval. If the volume is too small, Zeebe will run out of disk space and stop processing.
+:::
+
+```yaml
+camunda.data.secondary-storage.rdbms.async-replication.enabled: true
+camunda.data.secondary-storage.rdbms.async-replication.type: DELAY
+```
+
+| Property name                           | Description                                                                       | Default |
+| --------------------------------------- | --------------------------------------------------------------------------------- | ------- |
+| `async-replication.enabled`             | If the async replication monitoring should be enabled                             | false   |
+| `async-replication.delay`               | The delay to wait until a flushed record is acknowledged to the broker            | --      |
+| `async-replication.queue-capacity`      | Size of the internal queue of record positions to acknowledge                     | 8192    |
+| `async-replication.queue-debounce-time` | A debounce time to not add every record to the queue but only one every X seconds | PT5S    |
+
+### Compatibility matrix
+
+Use LSN-based monitoring when your database supports it. Otherwise, use time-based monitoring if available. Use delay backoff only when neither strategy is supported. Delay backoff doesn't monitor replication state directly and requires external monitoring of replication lag; see [delay backoff replication monitoring](#delay-backoff-replication-monitoring).
+
+| Database Vendor   | LSN-based          | Time-based         | Delay backoff      |
+| ----------------- | ------------------ | ------------------ | ------------------ |
+| Aurora PostgreSQL | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Aurora MySQL      | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| PostgreSQL        | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| MSSQL             | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Oracle            | :white_check_mark: | :x:                | :white_check_mark: |
+| MariaDB           | :x:                | :x:                | :white_check_mark: |
+| MySQL             | :x:                | :x:                | :white_check_mark: |
+
+## Usage with AWS Aurora PostgreSQL / MySQL
+
+Camunda supports **PostgreSQL** and **MySQL** as secondary storage backends. AWS Aurora PostgreSQL and AWS Aurora MySQL are compatible managed services and work when you configure them like standard PostgreSQL or MySQL databases.
+
+In addition to the standard PostgreSQL and MySQL JDBC drivers, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
+
+To use the AWS JDBC wrapper with an Aurora PostgreSQL database, configure the JDBC URL for your Aurora engine:
 
 ```yaml
 camunda:
@@ -257,7 +414,20 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda
+        url: jdbc:aws-wrapper:postgresql://aurora-postgresql-host:5432/camunda
+        username: camunda
+        password: camunda
+```
+
+To use the AWS JDBC wrapper with an Aurora MySQL database, configure the JDBC URL for your Aurora engine:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:mysql://aurora-mysql-host:3306/camunda
         username: camunda
         password: camunda
 ```
@@ -276,5 +446,68 @@ camunda:
         username: camunda
 ```
 
-The AWS JDBC wrapper JAR is shipped with the Camunda distribution, alongside most of the other JDBC drivers. There is
-no need to provide it separately.
+The AWS JDBC wrapper supports automatic failover detection when using Aurora GlobalDB.
+
+To use automatic failover detection, enable the corresponding wrapper plugin and optionally configure a failover timeout:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover
+```
+
+In addition, you can override the default failoverTimeoutMs (60 seconds) by adding the `failoverTimeoutMs` parameter to
+the JDBC URL: `jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover&failoverTimeoutMs=30000`.
+
+````yaml
+
+The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.
+
+### Per-physical-tenant credentials on Aurora
+
+When using [physical tenants](/self-managed/concepts/physical-tenants/index.md), each tenant can connect to Aurora with its own database user. Database-level permissions (schema grants, row-level security) are administered entirely in PostgreSQL, so tenant isolation is enforced by the database rather than by the application.
+
+For standard username/password authentication, override the connection settings per tenant:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=default_schema
+        username: camunda
+        password: camunda
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=tenant_a_schema
+            username: tenant_a_user
+            password: tenant-a-secret
+````
+
+For IAM authentication, the same pattern applies with the `iam` wrapper plugin and passwordless database users:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam&currentSchema=default_schema
+        username: camunda
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam&currentSchema=tenant_a_schema
+            username: tenant_a_user
+```
+
+With IAM authentication, the wrapper driver generates short-lived authentication tokens using the application's AWS identity (for example, the pod's IAM role when running on EKS with IRSA). The IAM permission `rds-db:connect` is granted **per database user**, so the single application identity is granted access to exactly the tenant database users it should reach — one AWS identity, many tenant-scoped database users.

@@ -1,7 +1,5 @@
 ---
 title: Choosing the resource binding type
-tags:
-  - BPMN
 description: "Choose the resource binding type and understand the differences between 'latest' and 'deployment' binding for linked resources."
 ---
 
@@ -59,7 +57,7 @@ Camunda 8 supports the following binding types:
           <li><p>It is ideal for self-contained projects without external or shared dependencies.</p></li>
           <li>
             <p>
-              To use the <code>deployment</code> binding option, create and deploy a <a href="../../../hub/workspace/manage-projects/#deploy-and-run-a-project">process application in Web Modeler</a>,
+              To use the <code>deployment</code> binding option, create and deploy a <a href="../../../hub/workspace/manage-projects/#deploy-and-run-a-project">project in Camunda Hub</a>,
               or deploy multiple resources together via the <a href="../../../../apis-tools/zeebe-api/gateway-service/#deployresource-rpc"> Zeebe API</a>.
             </p>
           </li>
@@ -74,7 +72,7 @@ Camunda 8 supports the following binding types:
           <li>
             <p>
               The version tag is a user-provided string (for example <code>1.2.0.Final</code>) that makes it easy to identify a certain version of a resource and track it across multiple deployment stages (e.g. dev, test, prod).
-              You can set the version tag for a BPMN process, DMN decision, or Form in the Modeler's properties panel.
+              You can set the version tag for a BPMN process, DMN decision, or Form in the properties panel in the modeling interface.
             </p>
           </li>
           <li><p>A version tag is different from the numeric process definition version assigned by the Orchestration Cluster.</p></li>

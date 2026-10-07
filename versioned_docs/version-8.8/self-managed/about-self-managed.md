@@ -12,18 +12,16 @@ keywords:
   - Docker
   - Infrastructure
   - Reference Architecture
-tags:
-  - Camunda 8 Self-Managed
-  - Camunda Self-Managed
-  - Self-Managed Components
-  - Kubernetes
-  - Helm
-  - Docker
-  - Infrastructure
-  - Reference Architecture
 ---
 
-import { CamundaSelfManaged } from "@site/src/components/CamundaSelfManaged";
+import {
+Introduction,
+QuickStart,
+Installation,
+Infrastructure,
+ReferenceArchitecture,
+Components,
+} from "@site/src/components/CamundaSelfManaged";
 import OverviewImg from './assets/hero-self-managed.png';
 
 <h3 class="subheading">Get started with our self-hosted alternative to Camunda 8 SaaS.</h3>
@@ -52,4 +50,26 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 
 <br />
 
-<CamundaSelfManaged/>
+## Self-Managed or SaaS?
+
+<Introduction hideHeading/>
+
+## Quickstart
+
+<QuickStart hideHeading/>
+
+## Installation methods
+
+<Installation hideHeading/>
+
+## Infrastructure
+
+<Infrastructure hideHeading/>
+
+## Reference architecture
+
+<ReferenceArchitecture hideHeading/>
+
+## Components
+
+<Components hideHeading/>

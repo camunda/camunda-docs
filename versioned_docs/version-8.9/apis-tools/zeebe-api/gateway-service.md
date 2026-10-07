@@ -382,6 +382,16 @@ message CreateProcessInstanceRequest {
   // instance during its execution
   // if empty (default), the process instance will be executed normally
   repeated ProcessInstanceCreationRuntimeInstruction runtimeInstructions = 8;
+
+  // a list of tags that can be attached as meta-data to process instances
+  repeated string tags = 9;
+
+  // an optional, user-defined string identifier that identifies the process instance
+  // within the scope of the process definition (scoped by tenant). If provided and uniqueness
+  // enforcement is enabled, the engine will reject creation if another root process instance
+  // with the same business id is already active for the same process definition.
+  // Note that any active child process instances with the same business id are not taken into account.
+  optional string businessId = 10;
 }
 
 message ProcessInstanceCreationStartInstruction {
@@ -426,6 +436,10 @@ message CreateProcessInstanceResponse {
   int64 processInstanceKey = 4;
   // the tenant identifier of the created process instance
   string tenantId = 5;
+  // tags attached to a process instance
+  repeated string tags = 6;
+  // the business id of the created process instance
+  optional string businessId = 7;
 }
 ```
 
@@ -476,6 +490,10 @@ message CreateProcessInstanceWithResultResponse {
   string variables = 5;
   // the tenant identifier of the process definition
   string tenantId = 6;
+  // tags attached to a process instance
+  repeated string tags = 7;
+  // the business id of the created process instance
+  optional string businessId = 8;
 }
 ```
 
@@ -516,6 +534,10 @@ Returned if:
 
 ## `DeleteResource` RPC
 
+Deletes a resource (a process definition, decision requirements definition, or form) identified by its key.
+
+Deleting a process definition that still has running instances no longer fails. The definition starts draining: new instances are blocked immediately, running instances continue to completion, and the definition is removed automatically once its last instance finishes. See [resource deletion](../../components/concepts/resource-deletion.md#draining).
+
 ### Input `DeleteResourceRequest`
 
 ```protobuf
@@ -541,12 +563,6 @@ Returned if:
 
 - No resource exists with the given key.
 - No resource was found with the given key for the tenants the user is authorized to work with.
-
-#### GRPC_STATUS_FAILED_PRECONDITION
-
-Returned if:
-
-- The deleted resource is a process definition, and there are running instances for this process definition.
 
 ## `DeployResource` RPC
 

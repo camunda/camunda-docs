@@ -1,9 +1,5 @@
 ---
 title: Versioning process definitions
-tags:
-  - Versioning
-  - Version Migration
-  - Long Running Processes
 description: "For real-life applications, it's crucial to understand how Camunda deals with evolving process definitions by means of versioning."
 ---
 
@@ -14,6 +10,8 @@ For real-life applications, it's crucial to understand how Camunda deals with ev
 By default, deploying a process or decision definition means that the workflow engine will check if the version has changed. If it has, it will register that deployment as a new version of the definition. By default, running instances will continue to run on the basis of the version they started with, new instances will be created based on the latest version of that definition.
 
 ![Versions](versioning-process-definitions-assets/database-versions.png)
+
+Agents in your process are versioned the same way. Deploying a new version of a process creates a new [agent definition](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-definitions) for each of its agent elements, bound to that process definition version.
 
 ## Selecting the best versioning approach
 

@@ -228,4 +228,49 @@ public static class ProcessInstanceExamples
     }
     // </ResolveProcessInstanceIncidents>
     #endregion ResolveProcessInstanceIncidents
+
+    #region SuspendProcessInstance
+
+    // <SuspendProcessInstance>
+    public static async Task SuspendProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        await client.SuspendProcessInstanceAsync(
+            processInstanceKey,
+            new SuspendProcessInstanceRequest());
+    }
+    // </SuspendProcessInstance>
+    #endregion SuspendProcessInstance
+
+    #region ResumeProcessInstance
+
+    // <ResumeProcessInstance>
+    public static async Task ResumeProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        await client.ResumeProcessInstanceAsync(
+            processInstanceKey,
+            new ResumeProcessInstanceRequest());
+    }
+    // </ResumeProcessInstance>
+    #endregion ResumeProcessInstance
+
+    #region AssignProcessInstanceBusinessId
+
+    // <AssignProcessInstanceBusinessId>
+    public static async Task AssignProcessInstanceBusinessIdExample(ProcessInstanceKey processInstanceKey, BusinessId businessId)
+    {
+        using var client = CamundaClient.Create();
+
+        await client.AssignProcessInstanceBusinessIdAsync(
+            processInstanceKey,
+            new ProcessInstanceBusinessIdAssignmentInstruction
+            {
+                BusinessId = businessId,
+            });
+    }
+    // </AssignProcessInstanceBusinessId>
+    #endregion AssignProcessInstanceBusinessId
 }

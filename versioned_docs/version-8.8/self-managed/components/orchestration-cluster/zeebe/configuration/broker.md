@@ -118,16 +118,16 @@ management.server:
 
 To configure the embedded gateway, see [Gateway config docs](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
-| Field  | Description                                                                                                                                               | Example value |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enable | Enable the embedded gateway to start on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | false         |
+| Field  | Description                                                                                                                                                                   | Example value |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enable | Enable the embedded gateway to start on broker startup. Enabled by default. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | true          |
 
 #### YAML snippet
 
 ```yaml
 broker:
   gateway:
-    enable: false
+    enable: true
 ```
 
 ### camunda.cluster.network
@@ -652,7 +652,7 @@ Replaces the deprecated `zeebe.broker.backpressure` configuration.
 
 | Field       | Description                                                                                                                                                                                                                                                                                                                                                      | Example Value |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled     | Set this to enable flow control for user requests. When enabled the broker rejects user requests when the number of inflight requests is greater than than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ENABLED`. | true          |
+| enabled     | Set this to enable flow control for user requests. When enabled the broker rejects user requests when the number of inflight requests is greater than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ENABLED`. | true          |
 | algorithm   | The algorithm configures which algorithm to use for the flow control. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ALGORITHM`.                                                                                                           | aimd          |
 | useWindowed | If enabled, will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_USEWINDOWED`.                          | false         |
 
@@ -804,7 +804,7 @@ write:
 
 | Field       | Description                                                                                                                                                                                                                                                                                                                                        | Example Value |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled     | Set this to enable or disable backpressure. When enabled the broker rejects user requests when the number of inflight requests is greater than than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ENABLED`. | true          |
+| enabled     | Set this to enable or disable backpressure. When enabled the broker rejects user requests when the number of inflight requests is greater than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ENABLED`. | true          |
 | useWindowed | if enabled - will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_USEWINDOWED`.                  | true          |
 | algorithm   | The algorithm configures which algorithm to use for the backpressure. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ALGORITHM`.                                                                                                    | aimd          |
 
@@ -990,7 +990,7 @@ as well.
 :::
 
 :::note
-If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md#zeebegatewaymultitenancy).
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md).
 :::
 
 | Field   | Description                                                                                                                                                  | Example value |

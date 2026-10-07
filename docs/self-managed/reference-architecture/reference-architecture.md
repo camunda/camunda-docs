@@ -33,9 +33,56 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 ## Architecture
 
-### Orchestration Cluster vs Web Modeler and Console
+### Deployment topology
 
-When designing a reference architecture, it's essential to understand the differences between Orchestration Cluster, Web Modeler, and Console Self-Managed. These components serve different purposes and include distinct elements.
+A Camunda 8 Self-Managed deployment is built around one [management plane](/reference/glossary.md#management-plane), made up of Camunda Hub and Management Identity. The management plane serves one or more Orchestration Clusters, for example one per environment such as development, integration, and production. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant, and each tenant is served by its own Optimize instance.
+
+<!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
+
+```mermaid
+graph TD
+    Hub["Management plane<br/>Camunda Hub + Management Identity"]
+    OCDev["Orchestration Cluster<br/>development"]
+    OCInt["Orchestration Cluster<br/>integration"]
+    OCProd["Orchestration Cluster<br/>production"]
+    OptDev["Optimize<br/>default tenant"]
+    OptInt["Optimize<br/>default tenant"]
+    OptProdA["Optimize<br/>default tenant"]
+    OptProdB["Optimize<br/>Physical Tenant A"]
+
+    Hub --> OCDev
+    Hub --> OCInt
+    Hub --> OCProd
+    OCDev --> OptDev
+    OCInt --> OptInt
+    OCProd --> OptProdA
+    OCProd --> OptProdB
+```
+
+Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while the management plane maintains the cluster inventory and Management Identity permission and role configuration. With Keycloak, Management Identity also provisions workload clients. With Microsoft Entra ID or another generic OIDC provider, operators provision workload clients separately.
+
+Physical Tenants isolate data within a cluster, and the topology is fully declarative, so it fits GitOps tooling such as Argo CD or Flux.
+
+To implement this topology on Kubernetes, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+
+### Management plane vs Orchestration Cluster {#camunda-hub-vs-orchestration-cluster}
+
+When designing a reference architecture, it's essential to understand the differences between the management plane and the Orchestration Cluster. These components serve different purposes, include distinct elements, and are deployed separately.
+
+#### Management plane {#camunda-hub}
+
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
+
+![Camunda Hub](./img/management-cluster.jpg)
+
+The management plane can connect to multiple Orchestration Clusters across environments, such as development, integration, and production. It consists of:
+
+- [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
+- [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
+
+:::note Admin separation
+Camunda Hub uses a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
+:::
 
 #### Orchestration Cluster
 
@@ -43,38 +90,22 @@ When designing a reference architecture, it's essential to understand the differ
 
 The Orchestration Cluster is the core of Camunda.
 
-The following components are bundled into a single artifact:
+Zeebe, Operate, Tasklist, and Admin are bundled into a single artifact:
 
 - [Zeebe](/components/zeebe/zeebe-overview.md): Highly scalable, cloud-native workflow engine that tracks the state of active process instances and drives business processes from start to finish.
 - [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting process instances running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for interacting with user tasks, including assigning and completing them.
 - [Admin](/self-managed/components/orchestration-cluster/admin/overview.md): Integrated authentication and authorization service for managing access to all Orchestration Cluster components and APIs.
 
-Tightly integrated with the Orchestration Cluster:
-
-- [Optimize](/components/optimize/what-is-optimize.md): Business intelligence tool for analyzing bottlenecks and examining improvements in automated processes.
-- [Connectors](/components/connectors/introduction.md): Reusable building blocks for easily connecting processes to external systems, applications, and data.
+[Connectors](/components/connectors/introduction.md) are reusable building blocks for connecting processes to external systems, applications, and data. They run as a separate workload, but are deployed with the Orchestration Cluster as part of the same release. Throughout these guides, "Orchestration Cluster" includes Connectors unless stated otherwise.
 
 This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
-#### Camunda Hub
+#### Optimize
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
+[Optimize](/components/optimize/what-is-optimize.md) is a business intelligence tool for analyzing bottlenecks and examining improvements in automated processes. It analyzes process data exported by an Orchestration Cluster.
 
-![Camunda Hub](./img/management-cluster.jpg)
-
-Camunda Hub is designed to interact with multiple orchestration clusters:
-
-- [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
-- [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
-
-:::note Admin separation
-Camunda Hub uses a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
-:::
-
-:::tip New in Camunda 8.8
-Starting with Camunda 8.8, Admin and Management Identity have been redesigned for clearer separation of concerns and improved flexibility.
-:::
+Optimize is deployed separately from the Orchestration Cluster, one instance per Physical Tenant, because each instance reads exported records from a single index prefix. Optimize requires Management Identity and can't use the Orchestration Cluster's Admin. It can use the Management Identity in the management plane, shared with Camunda Hub, or a separate one when Physical Tenants need identical logical tenant IDs enforced independently. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants).
 
 #### Admin vs Management Identity
 
@@ -82,14 +113,16 @@ The following table outlines the key differences between Admin and Management Id
 
 | Category                  | Admin                                                                                                                                                                                                                                                                                                                                                                                                                                          | Management Identity                                                                                                                                                                          |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Scope                     | Provides access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.                                                                                                                                                                                                                                                                                 | Manages access for platform components such as Web Modeler, Console, and Optimize.                                                                                                           |
-| Unified access management | Authentication and authorizations are handled directly by the Orchestration Cluster across all components and APIs, eliminating any dependency on Management Identity.                                                                                                                                                                                                                                                                         | Continues to manage access for Web Modeler, Console, and Optimize.                                                                                                                           |
+| Scope                     | Provides access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.                                                                                                                                                                                                                                                                                 | Manages access for Camunda Hub and Optimize.                                                                                                                                                 |
+| Unified access management | Authentication and authorizations are handled directly by the Orchestration Cluster across all components and APIs, eliminating any dependency on Management Identity.                                                                                                                                                                                                                                                                         | Manages access for Camunda Hub and Optimize.                                                                                                                                                 |
 | Authentication            | <ul><li><strong>No authentication</strong>: No authentication required for API access. Form-based login in the UI. Users and groups are managed in Admin.</li><li><strong>Basic authentication</strong>: API access with Basic authentication. Form-based login in the UI. Users and groups are managed in Admin.</li><li><strong>OIDC</strong>: Any compatible identity provider (for example, Keycloak, Microsoft Entra ID, Okta).</li></ul> | <ul><li><strong>Direct Keycloak integration</strong> (default).</li><li><strong>OIDC</strong>: Any compatible identity provider (for example, Keycloak, Microsoft Entra ID, Okta).</li></ul> |
 | Authorizations            | Fine-grained [authorizations](/components/concepts/access-control/authorizations.md) provide consistent access control for process instances, tasks, and decisions across components and APIs.                                                                                                                                                                                                                                                 |                                                                                                                                                                                              |
 | Keycloak integration      | Treated as a standard external identity provider integrated via OIDC, making it easier to use other providers without special integration.                                                                                                                                                                                                                                                                                                     | Default Keycloak integration, with OIDC available for other providers.                                                                                                                       |
-| Tenant management         | Tenants are directly managed within the Orchestration Cluster, allowing per-cluster tenant management.                                                                                                                                                                                                                                                                                                                                         | No longer manages tenants for Orchestration Cluster components. Tenants apply only to Optimize.                                                                                              |
+| Tenant management         | Tenants are directly managed within the Orchestration Cluster, allowing per-cluster tenant management.                                                                                                                                                                                                                                                                                                                                         | Does not manage tenants for Orchestration Cluster components. Tenants apply only to Optimize.                                                                                                |
 
 For production environments, use an external [identity provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) to connect both environments.
+
+For a decision tree covering which one to configure for your deployment, see [how identity works in Camunda](/self-managed/components/identity/how-identity-works.md).
 
 ### Databases
 
@@ -112,7 +145,7 @@ For production, use an external managed service or an externally operated databa
 
 For a production Orchestration Cluster, use these baseline assumptions regardless of deployment method:
 
-- Run at least three brokers across three availability zones for high availability.
+- Run at least three brokers across three availability zones for high availability. On Kubernetes, the default anti-affinity rule alone does not enforce zonal placement — see [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha).
 - Use one secondary storage backend family for the Orchestration Cluster's web applications and APIs.
 - Keep the secondary storage backend in the same region as the Orchestration Cluster to reduce latency and failure domains.
 - Treat secondary storage as part of your production data layer, with its own backup, monitoring, and scaling plan.
@@ -159,17 +192,13 @@ For supported versions and configuration details, see:
 
 High availability (HA) ensures that a system remains operational even when components fail. All components can run in HA mode, but Optimize requires special consideration: the importer/archiver must run on only one replica at a time. See the [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) for details.
 
-Consider regional and zonal placement of workloads. Use at least three zones in a region to maintain availability if a zone fails.
+Consider regional and zonal placement of workloads. Use at least three zones in a region to maintain availability if a zone fails. On Kubernetes, see [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha) for how to enforce that placement.
 
 For more information on how Zeebe handles fault tolerance, see the [Raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 
 If running a single instance, implement [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md), as resilience will be limited.
 
 ## Available reference architectures
-
-:::note Documentation update in progress
-This documentation is being updated to provide clearer general guidance. Some Docker documentation may still point to older guides.
-:::
 
 Choose a reference architecture based on factors such as your organization’s goals, infrastructure, and requirements. Use the following guides to plan your deployment:
 

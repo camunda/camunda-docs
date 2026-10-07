@@ -4,7 +4,7 @@ title: Early access
 sidebar_label: Early access
 ---
 
-Introducing early access - a space to explore new features and components currently in development by Camunda.
+Explore new features and components currently in development by Camunda.
 
 <!--- (REMOVED until experimental features are added)
 
@@ -24,7 +24,7 @@ These features may be unstable, and subject to significant changes or removal.
 
 [Alpha features](/components/early-access/alpha/alpha-features.md) are more developed and closer to becoming part of the product but may not yet be fully optimized or supported. Selected Camunda features and components are released as alpha versions to provide early access. By testing these features, you have the opportunity to participate in their development by sharing feedback before they reach [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
 
-## What to expect
+## What to expect from alpha features
 
 |                                    | Alpha features                                                                                   |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -39,3 +39,21 @@ These features may be unstable, and subject to significant changes or removal.
 | <b>Available on</b>                | SaaS/Self-Managed                                                                                |
 | <b>Release cycle</b>               | Outside the standard [release policy](/reference/announcements-release-notes/release-policy.md). |
 | <b>Admin/owner access required</b> | Yes                                                                                              |
+
+## Early access release
+
+An early access release introduces a new product. By testing it, you can contribute to its development by sharing feedback before it reaches [general availability](/reference/announcements-release-notes/release-policy.md#general-availability-ga).
+
+## What to expect from early access releases
+
+|                                    | Early access release                                                                             |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------ |
+| <b>Purpose</b>                     | Test maturity of a new product before GA                                                         |
+| <b>Suitable for production use</b> | No                                                                                               |
+| <b>Stability</b>                   | APIs, dependencies, and configuration are likely to change.                                      |
+| <b>Feature complete</b>            | No                                                                                               |
+| <b>Documentation</b>               | May have some documentation.                                                                     |
+| <b>Updates</b>                     | No guaranteed updates to newer releases, but likely to continue development.                     |
+| <b>Support</b>                     | Support on best efforts.                                                                         |
+| <b>Maintenance service</b>         | No                                                                                               |
+| <b>Release cycle</b>               | Outside the standard [release policy](/reference/announcements-release-notes/release-policy.md). |

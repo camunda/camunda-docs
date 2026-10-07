@@ -1,12 +1,5 @@
 ---
 title: Deciding about your stack
-tags:
-  - Architecture
-  - Stack
-  - Database
-  - Application Server
-  - Spring Boot
-  - Maven
 ---
 
 Our greenfield stack recommendation is a result of extensive discussions and evaluations. While not the only option, it is a solid choice if there are no specific reasons to choose an alternative.
@@ -35,7 +28,7 @@ For a Java-based setup using Camunda 8 SaaS and Spring Boot, use the following s
 
 If you're new to Camunda SaaS, check out our [getting started guide](/guides/introduction-to-camunda-8.md#getting-started) to set up your environment.
 
-After signing up, create a cluster by following [creating a cluster in Camunda 8](/components/hub/organization/manage-clusters/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
+After signing up, create a cluster by following [creating a cluster in Camunda 8](/components/saas/clusters/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
 
 #### Spring Boot
 
@@ -57,7 +50,7 @@ Install and use OpenJDK 17 as your Java runtime environment. Download it from th
 
 #### Modeling
 
-Download and use Camunda Modeler for designing and modeling business processes. Modeler is available [here](https://camunda.org/download/modeler/).
+Download and use Desktop Modeler for designing and modeling business processes from [Camunda downloads](https://docs.camunda.io/downloads/).
 
 #### Code integration
 
@@ -82,3 +75,7 @@ You can develop process solutions as described with Java above also in any other
 ### Run Camunda 8 Self-Managed
 
 Run Camunda 8 on your Kubernetes cluster. For local development, a [Docker Compose configuration is available](/self-managed/deployment/docker/docker.md), though not for production use. Learn more in the [deployment docs](/self-managed/deployment/helm/install/quick-install.md).
+
+### Choose an LLM provider
+
+If your processes hand steps to [AI agents](/reference/glossary.md#ai-agent), the LLM provider becomes part of your stack decision. Weigh hosting, data sensitivity, and cost as described in [choosing the right LLM](/components/agentic-orchestration/choose-right-model-agentic.md). On Camunda 8 SaaS, you can also start with [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) and run agents without setting up a provider account first.

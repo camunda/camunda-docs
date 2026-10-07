@@ -6,9 +6,9 @@ description: "After creating a cluster, specify a region for that cluster. Read 
 
 import RegionMapImg from './img/diagram-regions-map.png';
 
-When you [create a cluster](/components/hub/organization/manage-clusters/create-cluster.md) in Camunda 8 SaaS, you must specify a region for that cluster.
+When you [create a cluster](/components/saas/clusters/create-cluster.md) in Camunda 8 SaaS, you must specify a region for that cluster.
 
-The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also [reach out to Camunda](https://camunda.com/contact-us/) to discuss custom regions.
+The following regions are available for customers on Trial and Enterprise plans. Enterprise customers can also [reach out to Camunda](https://camunda.com/contact-us/) to discuss custom regions.
 
 <img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" class="img-noborder"/>
 
@@ -20,15 +20,16 @@ See [Data locations](data-locations.md) for more information about where your Ca
 
 The following GCP regions are currently supported in Camunda 8 SaaS.
 
-| GCP region                                       | Secondary backups region                          |
-| :----------------------------------------------- | :------------------------------------------------ |
-| Belgium, Europe (europe-west1)                   | Germany, Europe (europe-west3)                    |
-| Iowa, North America (us-central1)                | Salt Lake City, North America (us-west1)          |
-| London, Europe (europe-west2)                    | Germany, Europe (europe-west3)                    |
-| Singapore, Asia (asia-southeast1)                | Changhua County, Taiwan (asia-east1)              |
-| South Carolina, North America (us-east1)         | Iowa, North America (us-central1)                 |
-| Sydney, Australia (australia-southeast1)         | Melbourne, Australia (australia-southeast2)       |
-| Toronto, North America (northamerica-northeast2) | Montréal, North America (northamerica-northeast1) |
+| GCP region                                        | Secondary backups region                          |
+| :------------------------------------------------ | :------------------------------------------------ |
+| Belgium, Europe (europe-west1)                    | Germany, Europe (europe-west3)                    |
+| Iowa, North America (us-central1)                 | Salt Lake City, North America (us-west1)          |
+| London, Europe (europe-west2)                     | Germany, Europe (europe-west3)                    |
+| Montréal, North America (northamerica-northeast1) | Toronto, North America (northamerica-northeast2)  |
+| Singapore, Asia (asia-southeast1)                 | Changhua County, Taiwan (asia-east1)              |
+| South Carolina, North America (us-east1)          | Iowa, North America (us-central1)                 |
+| Sydney, Australia (australia-southeast1)          | Melbourne, Australia (australia-southeast2)       |
+| Toronto, North America (northamerica-northeast2)  | Montréal, North America (northamerica-northeast1) |
 
 To learn more about each region code/location, refer to [Google Cloud locations](https://cloud.google.com/about/locations).
 

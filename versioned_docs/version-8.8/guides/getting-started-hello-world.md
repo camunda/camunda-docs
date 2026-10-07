@@ -129,6 +129,8 @@ The process uses no external code. All logic is expressed using [FEEL expression
 | Run experiments  | `if fuelLevel > 75 then 5 else 3`                                                                                                      | `experimentsRun` |
 | Mission report   | `"Crew " + missionName + " reached " + destination + "! Fuel: " + string(fuelAfterBurn) + "%. Experiments: " + string(experimentsRun)` | `missionResult`  |
 
+Fixed rules work when you know the decision in advance, as in this launch sequence. When a step needs judgment you can't express as a deterministic rule, you can hand that step to an [AI agent](/reference/glossary.md#ai-agent) instead. The engine runs, retries, and records the agent step in the same way as the script tasks and DMN decision in this process.
+
 ## Step 6: Clean up
 
 Navigate back to Operate and verify that your process instances have completed successfully (or were canceled, depending on the fuel level).
@@ -160,6 +162,6 @@ You can now stop your Camunda 8 Run local environment by executing the following
 
 Now that you've run your first BPMN process in Camunda 8, explore more of the platform:
 
-- [Build your first AI agent](./getting-started-agentic-orchestration.md).
+- [Build your first AI agent](./getting-started-agentic-orchestration.md) and add AI-driven steps to your process.
 - [Run your first Spring Boot or Node.js project with service workers](./getting-started-example.md).
 - [Learn more about the BPMN, DMN, and FEEL elements supported in Camunda](/components/concepts/bpmn-dmn-feel.md).

@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Member resource paths and schemas
 paths:
@@ -12,8 +13,11 @@ paths:
       summary: Add or update a member
       description: >
         Adds a member to the workspace, or updates the role of an existing
-        member. The member is identified by their email address.
-      x-added-in-version: "0.1.0"
+        member. The member is identified by their email address. If that
+        user has not logged in yet, a workspace invitation is created and an
+        email is sent instead, and the person becomes an actual member once
+        they log in for the first time.
+      x-added-in-version: "8.10"
       x-semantic-establishes:
         kind: WorkspaceMemberMembership
         shape: edge
@@ -58,7 +62,7 @@ paths:
       operationId: removeMember
       summary: Remove a member
       description: Removes a member from the workspace.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: WorkspaceMemberMembership
         bind:
@@ -92,7 +96,7 @@ paths:
       description: >
         Returns members matching the given search criteria. A workspace key
         filter is required — members cannot be searched across workspaces.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: "8.10"
       x-semantic-requires:
         kind: Workspace
         bind:
@@ -170,7 +174,7 @@ components:
     MemberResult:
       type: object
       example:
-        workspaceKey: "wks-abc-123"
+        workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
         email: "alice@example.com"
         name: "Alice Smith"
         role: "editor"
@@ -189,8 +193,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/MemberEmail"
         name:
-          description: The display name of the member, if known.
+          description: >
+            The display name of the member, if known. Null when the member has
+            been invited by email but has not logged in yet.
           type: string
+          nullable: true
         role:
           description: The role of the member in the workspace.
           allOf:

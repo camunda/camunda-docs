@@ -36,7 +36,7 @@ An expression is written in **Friendly Enough Expression Language (FEEL)**. FEEL
 - Syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
 
-Camunda 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions.
+Camunda 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate [FEEL expressions](/reference/glossary.md#feel-expression).
 
 ## Evaluation timeout
 

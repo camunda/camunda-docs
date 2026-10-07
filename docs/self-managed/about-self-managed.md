@@ -12,18 +12,16 @@ keywords:
   - Docker
   - Infrastructure
   - Reference Architecture
-tags:
-  - Camunda 8 Self-Managed
-  - Camunda Self-Managed
-  - Self-Managed Components
-  - Kubernetes
-  - Helm
-  - Docker
-  - Infrastructure
-  - Reference Architecture
 ---
 
-import { CamundaSelfManaged } from "@site/src/components/CamundaSelfManaged";
+import {
+Introduction,
+QuickStart,
+Installation,
+Infrastructure,
+ReferenceArchitecture,
+Components,
+} from "@site/src/components/CamundaSelfManaged";
 import OverviewImg from './assets/hero-self-managed.png';
 
 <h3 class="subheading">Get started with our self-hosted alternative to Camunda 8 SaaS.</h3>
@@ -43,13 +41,35 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 </div>
 </div>
 
-:::info Upgrade to Camunda 8.9
+:::info Upgrade to Camunda 8.10
 
-- Existing customer? Upgrade your Self-Managed deployment to 8.9 using the [upgrade to 8.9 guide](/self-managed/upgrade/index.md).
-- See [what's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md), [release announcements](/reference/announcements-release-notes/890/890-announcements.md), and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+- Existing customer? Upgrade your Self-Managed deployment to 8.10 using the [upgrade to 8.10 guide](/self-managed/upgrade/index.md).
+- See [what's new in Camunda 8.10](/reference/announcements-release-notes/8100/whats-new-in-810.md), [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md), and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
 
 :::
 
 <br />
 
-<CamundaSelfManaged/>
+## Self-Managed or SaaS?
+
+<Introduction hideHeading/>
+
+## Quickstart
+
+<QuickStart hideHeading/>
+
+## Installation methods
+
+<Installation hideHeading/>
+
+## Infrastructure
+
+<Infrastructure hideHeading/>
+
+## Reference architecture
+
+<ReferenceArchitecture hideHeading/>
+
+## Components
+
+<Components hideHeading/>

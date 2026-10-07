@@ -5,11 +5,8 @@ title: AI Agent Sub-process connector
 description: AI agent connector implementation based on ad-hoc sub-processes.
 ---
 
-import ConfigurationModelProvider from './agentic-ai/aiagent/configuration/\_model-provider.md';
-import ConfigurationModel from './agentic-ai/aiagent/configuration/\_model.md';
 import ConfigurationSystemPrompt from './agentic-ai/aiagent/configuration/\_system-prompt.md';
 import ConfigurationUserPrompt from './agentic-ai/aiagent/configuration/\_user-prompt.md';
-import ConfigurationTools from './agentic-ai/aiagent/configuration/\_tools.md';
 import ConfigurationMemoryProcess from './agentic-ai/aiagent/configuration/\_memory-process.md';
 import ConfigurationLimits from './agentic-ai/aiagent/configuration/\_limits.md';
 import ConfigurationEventHandling from './agentic-ai/aiagent/configuration/\_event-handling.md';
@@ -24,7 +21,7 @@ Implement an AI agent using an ad-hoc sub-process with an applied AI Agent conne
 
 ## About this implementation
 
-This connector implementation creates an implicit feedback loop for tool calls and agent responses, using the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+This connector implementation creates an implicit [agent loop](/reference/glossary.md#agent-loop) for tool calls and agent responses, using the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
 
 :::info
 
@@ -37,8 +34,10 @@ This connector implementation creates an implicit feedback loop for tool calls a
 
 ## Configuration
 
-<ConfigurationModelProvider />
-<ConfigurationModel />
+### Model provider
+
+Select the LLM model **Provider** and **Model**. See [model providers](./agentic-ai-aiagent-model-providers.md) for supported providers and configuration details.
+
 <ConfigurationSystemPrompt />
 <ConfigurationUserPrompt />
 <ConfigurationMemoryProcess />

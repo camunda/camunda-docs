@@ -134,11 +134,11 @@ camunda:
         prefix: documents/ # optional
 ```
 
-| Property                                | Required | Description                                                         |
-| --------------------------------------- | -------- | ------------------------------------------------------------------- |
-| `camunda.document.gcp.<id>.bucket-name` | Yes      | Name of the Google Cloud Storage bucket where documents are stored. |
-| `camunda.document.gcp.<id>.prefix`      | No       | Folder-like prefix within the GCS bucket.                           |
-| `camunda.document.default-store-id`     | Yes      | Instance ID of the store to use as the default.                     |
+| Property                                | Required | Description                                                                                                                                                                 |
+| --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.gcp.<id>.bucket-name` | Yes      | Name of the Google Cloud Storage bucket where documents are stored.                                                                                                         |
+| `camunda.document.gcp.<id>.prefix`      | No       | Folder-like prefix within the GCS bucket. Defaults to `temp/` when unset. The value is used as written, with no separator appended, so a prefix isn't necessarily a folder. |
+| `camunda.document.default-store-id`     | Yes      | Instance ID of the store to use as the default.                                                                                                                             |
 
 <details>
 <summary>Deprecated: legacy environment variable equivalents</summary>

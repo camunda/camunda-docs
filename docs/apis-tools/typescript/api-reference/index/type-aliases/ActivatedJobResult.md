@@ -81,6 +81,16 @@ The key, a unique identifier for the job.
 
 ---
 
+### jobLeaseToken
+
+```ts
+jobLeaseToken: JobLeaseToken | null;
+```
+
+The lease token identifying this activation. This is `null` when the job was activated without a lease.
+
+---
+
 ### kind
 
 ```ts
@@ -94,6 +104,17 @@ kind: JobKindEnum;
 ```ts
 listenerEventType: JobListenerEventTypeEnum;
 ```
+
+---
+
+### physicalTenantId
+
+```ts
+physicalTenantId: string;
+```
+
+The ID of the physical tenant that the job-activation request was routed to;
+the default physical tenant when the request did not specify one.
 
 ---
 

@@ -171,7 +171,7 @@ The **FQDN** (fully qualified domain name) is shown on the right-hand side.
 ### Topic / queue
 
 Specify the target **topic** or **queue** path where the CloudEvent will be published.  
-Do not begin the path with `/` — the connector includes a validation check to prevent this.
+Do not begin the path with `/`. The connector includes a validation check to prevent this.
 
 ### Authorization
 

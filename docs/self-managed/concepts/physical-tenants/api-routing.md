@@ -5,7 +5,9 @@ sidebar_label: "API routing"
 description: "Learn how REST API requests are routed to Physical Tenants, including tenant-scoped paths, default tenant routing, and gRPC routing."
 ---
 
-This page explains how REST API requests are routed to Physical Tenants in Camunda 8.10.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Tenant-scoped REST API routing
 
@@ -26,7 +28,7 @@ The `physicalTenantId` in the path must match a configured Physical Tenant. The 
 
 ## Default tenant routing
 
-Requests that omit the Physical Tenant prefix are routed to the `default` Physical Tenant:
+On the REST API, requests that omit the Physical Tenant prefix are routed to the `default` Physical Tenant. This rule is specific to the `/v2/...` REST API; the actuator surface does not follow it uniformly. For example, an unscoped `POST /actuator/cluster/purge` targets every configured tenant, not just the default one. See [data purge](/self-managed/operational-guides/data-purge.md).
 
 ```
 /v2/{resource}  →  /physical-tenants/default/v2/{resource}
@@ -42,9 +44,18 @@ GET /physical-tenants/default/v2/process-definitions/search
 
 ## Cluster-wide endpoints
 
-Cluster-wide endpoints — endpoints that apply to the whole cluster rather than a single Physical Tenant — are not available yet. When they are added in a future release, they will be exposed under a dedicated `/cluster/v2/...` path prefix.
+A cluster-wide endpoint applies to the whole cluster rather than a single Physical Tenant. Cluster-wide operations are exposed under a dedicated `/cluster/v2/...` path prefix. See [cluster admin](/components/admin/cluster-admin.md) for the operations this prefix serves, their authentication requirements, and how to configure access.
 
-Endpoints served at the standard `/v2/...` paths are scoped to a Physical Tenant, not the cluster. For example, `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view.
+The `/v2/status` endpoint is a special case; see [the exception below](#exception-v2status).
+
+Most other endpoints are scoped to a Physical Tenant, even when they are not tenant-specific in nature. A plain `/v2/...` request targets the `default` tenant. For example:
+
+- `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view. For the cluster-wide topology, use `/cluster/v2/topology`.
+- `/v2/license` returns the license status and is available per Physical Tenant, including on the default path (`/v2/license`). It is not a separate cluster-wide endpoint.
+
+### Exception: /v2/status
+
+`/v2/status` is scoped to the default Physical Tenant. It is available unprefixed and at `/physical-tenants/default/v2/status`, and returns `404` for any other tenant ID. It is unauthenticated, so load balancers can probe it without credentials. For cluster-wide status, use `/cluster/v2/status`; for one tenant's partition health, use `/physical-tenants/{id}/v2/topology`.
 
 ## HTTP status codes
 
@@ -54,7 +65,7 @@ Endpoints served at the standard `/v2/...` paths are scoped to a Physical Tenant
 | Request to a configured tenant with missing or invalid credentials | `401 Unauthorized` |
 | Request to an unknown or unconfigured tenant                       | `404 Not Found`    |
 
-A `404` for an unknown tenant does not indicate an authorization failure — the tenant simply does not exist in the cluster configuration. Authentication has not yet been attempted when the tenant is not found.
+A `404` for an unknown tenant does not indicate an authorization failure. The tenant does not exist in the cluster configuration, so authentication has not yet been attempted.
 
 ## Per-tenant endpoint reference
 
@@ -72,15 +83,48 @@ This is the core isolation guarantee of Physical Tenants: no operation can read 
 
 Camunda web applications (Operate, Tasklist, and Admin) follow the same path convention:
 
-```
-/physical-tenants/{physicalTenantId}/{webapp}
+| Web app  | URL pattern                                     | Example                                                         |
+| :------- | :---------------------------------------------- | :-------------------------------------------------------------- |
+| Operate  | `/physical-tenants/{physicalTenantId}/operate`  | `https://your-cluster/physical-tenants/riskproduction/operate`  |
+| Tasklist | `/physical-tenants/{physicalTenantId}/tasklist` | `https://your-cluster/physical-tenants/riskproduction/tasklist` |
+| Admin    | `/physical-tenants/{physicalTenantId}/admin`    | `https://your-cluster/physical-tenants/riskproduction/admin`    |
+
+All data shown is scoped to that one Physical Tenant. No cross-tenant data appears within a single web app session. There is no global tenant switcher dropdown. To switch Physical Tenants, navigate to the target tenant's URL. Each tenant loads its own isolated session.
+
+### Access flow
+
+```mermaid
+flowchart LR
+    A[User navigates to\n/physical-tenants/tenantA/operate] --> B{Session cookie\nfor tenantA present?}
+    B -- Yes --> C[Operate loads\nTenant A data only]
+    B -- No --> D[OAuth redirect to\nTenant A IdP]
+    D --> E[Login and callback\nto /physical-tenants/tenantA/sso-callback]
+    E --> C
 ```
 
-For example:
+### Session behavior
+
+Each Physical Tenant has its own path-scoped session cookie, so sessions from different tenants do not interfere. See [session isolation](./authentication-authorization.md#session-isolation) for the cookie-scoping details.
+
+- **Simultaneous access**: users can be logged into multiple Physical Tenants at once using different browser tabs.
+- **Logout**: completes per Physical Tenant. Navigate to the target tenant's logout endpoint to end that tenant's session.
+- **Role changes mid-session:** Changing a user's roles does not invalidate their Operate or Tasklist session or log them out. The resolved authentication context, including role, group, and tenant membership, is cached in the HTTP session and re-resolved after `camunda.security.authentication.authentication-refresh-interval` (default `PT30S`) elapses. Permission changes are evaluated per request and take effect as soon as they reach secondary storage. Role or group changes sourced from IdP token claims are only picked up after the access token refreshes or the user logs in again.
+
+For Optimize deployment guidance, see [Optimize deployment](./index.md#optimize-deployment) and [Optimize and Physical Tenants](./optimize.md).
+
+## MCP routing
+
+MCP server endpoints follow the same path convention as the REST API and webapps:
 
 ```
-https://your-cluster/physical-tenants/riskproduction/operate
+/physical-tenants/{physicalTenantId}/mcp/...
 ```
+
+There is no cluster-wide MCP endpoint.
+
+## Tenant discovery
+
+There is no cross-tenant discovery endpoint. A client cannot request a list of Physical Tenants it has access to in a single call. If you need to enumerate accessible tenants, probe each tenant's endpoint individually.
 
 ## gRPC routing
 
@@ -90,7 +134,7 @@ gRPC clients specify the target Physical Tenant using the `Camunda-Physical-Tena
 
 Physical Tenants are designed to be backward-compatible for single-tenant and existing multi-tenant deployments:
 
-- All existing `/v2/...` calls continue to work without modification — they route to the `default` Physical Tenant.
+- All existing `/v2/...` calls continue to work without modification. They route to the `default` Physical Tenant.
 - There is no breaking change for single-tenant users upgrading to 8.10.
 - To access a non-default Physical Tenant, update your clients to use the tenant-prefixed path.
 

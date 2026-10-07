@@ -5,13 +5,19 @@ sidebar_label: "Logical Tenants"
 description: "Logical Tenants provide lightweight tenant-ID based isolation within a single Camunda 8 cluster."
 ---
 
-**Logical Tenants** are the lightweight tenant-ID based multi-tenancy model available within Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
+import PageDescription from '@site/src/components/PageDescription';
 
-Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [Multi-tenancy overview](index.md) to compare with other isolation models.
+<PageDescription />
+
+## About
+
+Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
+
+Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [multi-tenancy overview](index.md) to compare with other isolation models.
 
 ## How Logical Tenants work
 
-Camunda 8 implements Logical Tenancy using tenant identifiers within a single installation. All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object (e.g., process definitions, process instances, jobs).
+Camunda 8 implements Logical Tenancy using tenant identifiers within a single installation. All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object (for example, process definitions, process instances, jobs).
 
 ### Tenant identifier
 
@@ -79,19 +85,23 @@ All Logical Tenant configuration and management pages are consolidated here. Eac
 
 ### Deployment configuration
 
-- [Configure multi-tenancy in Helm chart](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) — Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity.
+- [Configure Logical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-logical-tenants.md). Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity.
 
 ### Tenant initialization
 
-- [Initialize tenants for Optimize](/self-managed/components/management-identity/configuration/initialize-tenants.md) — Programmatically create tenants at startup using configuration files or environment variables.
+- [Initialize tenants for Optimize](/self-managed/components/management-identity/configuration/initialize-tenants.md). Programmatically create tenants at startup using configuration files or environment variables.
 
 ### Runtime management
 
-- [Manage tenants in Identity](/self-managed/components/management-identity/manage-tenants.md) — Create, view, and manage tenants through the Identity UI; assign users, groups, and applications.
+- [Manage tenants in Identity](/self-managed/components/management-identity/manage-tenants.md). Create, view, and manage tenants through the Identity UI. Assign users, groups, and applications.
 
 ### Component-specific setup
 
-- [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md) — Enable and configure multi-tenancy features specific to Optimize.
+- [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md). Enable and configure multi-tenancy features specific to Optimize.
+
+## Logical Tenants in Camunda Hub
+
+If multi-tenancy is enabled, you provide a Logical Tenant when you [deploy to a target environment](/components/hub/workspace/manage-projects/deploy-project.md#logical-tenants) in Camunda Hub. The Logical Tenant is separate from the [environment](/components/concepts/environments.md), which is a Physical Tenant or a cluster.
 
 ## Next steps
 

@@ -1,11 +1,11 @@
 ---
 id: restore-file
 title: "Restore a recently deleted file"
-description: "Restores a soft-deleted file back to the live project. If the file's original parent folder was also deleted, the file is restored into a new wrapper folder at the project root. The file cannot be restored if its containing project has been deleted."
+description: "Restores a soft-deleted file back to the live project. If the file's original parent folder was also deleted, the file is restored into a new wrapper folder at the project root. The file cannot be restored if its containing project has been deleted. Only a file that is the root of its own deletion can be restored via this endpoint; a file that was soft-deleted as part of an ancestor folder, project, or workspace's deletion event must be restored through the corresponding ancestor restoration endpoint instead."
 sidebar_label: "Restore a recently deleted file"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Restores a soft-deleted file back to the live project. If the file's original parent folder was also deleted, the file is restored into a new wrapper folder at the project root. The file cannot be restored if its containing project has been deleted.
+Restores a soft-deleted file back to the live project. If the file's original parent folder was also deleted, the file is restored into a new wrapper folder at the project root. The file cannot be restored if its containing project has been deleted. Only a file that is the root of its own deletion can be restored via this endpoint; a file that was soft-deleted as part of an ancestor folder, project, or workspace's deletion event must be restored through the corresponding ancestor restoration endpoint instead.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -51,7 +51,7 @@ Restores a soft-deleted file back to the live project. If the file's original pa
         type: "string",
         format: "FileKey",
         "x-semantic-type": "FileKey",
-        example: "file-789-xyz",
+        example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
         title: "FileKey",
       },
     },
@@ -72,12 +72,13 @@ Restores a soft-deleted file back to the live project. If the file's original pa
           schema: {
             type: "object",
             example: {
-              fileKey: "file-789-xyz",
-              name: "order-process.bpmn",
-              projectKey: "prj-def-456",
-              folderKey: "fld-012-ghi",
-              simplePath: "/processes/order-process.bpmn",
-              canonicalPath: "/fld-012-ghi/file-789-xyz",
+              fileKey: "0d9410a3-3524-4039-8174-7dd345f61bc5",
+              name: "order-process",
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+              folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc",
+              simplePath: "orders/processes/order-process.bpmn",
+              canonicalPath:
+                "3e98d77b-799b-4f31-bfc4-4c5829fc7dee/bccb5014-10a7-48df-bb56-81cb286594cc",
               revision: 3,
               type: "bpmn",
               content: "<?xml version='1.0' encoding='UTF-8'?>...",
@@ -110,7 +111,7 @@ Restores a soft-deleted file back to the live project. If the file's original pa
                     type: "string",
                     format: "FileKey",
                     "x-semantic-type": "FileKey",
-                    example: "file-789-xyz",
+                    example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
                     title: "FileKey",
                   },
                 ],
@@ -118,7 +119,7 @@ Restores a soft-deleted file back to the live project. If the file's original pa
               name: { description: "The name of the file.", type: "string" },
               projectKey: {
                 description:
-                  "The key of the project this file belongs to. Present in single-file responses (get, create, update) but null in search results; full project resolution for search results is not yet supported.\n",
+                  "The key of the project this file belongs to. Null only for a file with no owning project (e.g. an IDP connector template at the workspace root).\n",
                 nullable: true,
                 allOf: [
                   {
@@ -126,7 +127,7 @@ Restores a soft-deleted file back to the live project. If the file's original pa
                     type: "string",
                     format: "ProjectKey",
                     "x-semantic-type": "ProjectKey",
-                    example: "prj-def-456",
+                    example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
                     title: "ProjectKey",
                   },
                 ],
@@ -141,7 +142,7 @@ Restores a soft-deleted file back to the live project. If the file's original pa
                     type: "string",
                     format: "FolderKey",
                     "x-semantic-type": "FolderKey",
-                    example: "fld-012-ghi",
+                    example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
                     title: "FolderKey",
                   },
                 ],
@@ -207,9 +208,11 @@ Restores a soft-deleted file back to the live project. If the file's original pa
                         type: "string",
                       },
                       email: {
-                        description: "The email address of the user.",
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
                         type: "string",
                         format: "email",
+                        nullable: true,
                       },
                     },
                     title: "UserReference",
@@ -234,9 +237,11 @@ Restores a soft-deleted file back to the live project. If the file's original pa
                         type: "string",
                       },
                       email: {
-                        description: "The email address of the user.",
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
                         type: "string",
                         format: "email",
+                        nullable: true,
                       },
                     },
                     title: "UserReference",
@@ -361,13 +366,14 @@ Restores a soft-deleted file back to the live project. If the file's original pa
             status: 403,
             detail:
               "Operation not allowed. Ensure your API credentials have the required permissions.",
-            instance: "/api/v2/files/file-789-xyz",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
           },
         },
       },
     },
     "404": {
-      description: "The recently deleted file was not found.",
+      description:
+        "The recently deleted file was not found, or is not the root of its own deletion.",
       content: {
         "application/problem+json": {
           schema: {

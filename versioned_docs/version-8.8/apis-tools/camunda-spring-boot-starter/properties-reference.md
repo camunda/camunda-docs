@@ -1391,7 +1391,7 @@ Identity is now part of Camunda.
   <Property defaultValue="property" groupId="property-format" property="camunda.client.identity.base-url" env="CAMUNDA_CLIENT_IDENTITY_BASEURL"/><a href="#camundaclientidentitybaseurl" id="camundaclientidentitybaseurl" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 Identity is now part of Camunda.
@@ -1926,7 +1926,7 @@ Deprecated Keycloak-specific properties.
   <Property defaultValue="property" groupId="property-format" property="common.keycloak.realm" env="COMMON_KEYCLOAK_REALM"/><a href="#commonkeycloakrealm" id="commonkeycloakrealm" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
@@ -1975,7 +1975,7 @@ Deprecated Zeebe client properties.
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.apply-environment-variable-overrides" env="ZEEBE_CLIENT_APPLYENVIRONMENTVARIABLEOVERRIDES"/><a href="#zeebeclientapplyenvironmentvariableoverrides" id="zeebeclientapplyenvironmentvariableoverrides" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 Only the environment variables belonging to the Spring SDK are applied.
@@ -2194,7 +2194,7 @@ N/A
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.port" env="ZEEBE_CLIENT_CLOUD_PORT"/><a href="#zeebeclientcloudport" id="zeebeclientcloudport" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
@@ -2341,7 +2341,7 @@ N/A
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.security.plaintext" env="ZEEBE_CLIENT_SECURITY_PLAINTEXT"/><a href="#zeebeclientsecurityplaintext" id="zeebeclientsecurityplaintext" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 plaintext is now determined by the URL protocol (HTTP or HTTPS).

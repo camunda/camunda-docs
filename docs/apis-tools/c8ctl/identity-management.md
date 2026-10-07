@@ -9,10 +9,6 @@ description: "Use c8ctl to manage users, roles, groups, tenants, authorizations,
      is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
      overwritten. Edit the source in the c8ctl repo instead. -->
 
-:::warning Alpha feature
-`c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
-:::
-
 `c8ctl` provides commands to manage identity resources through the Orchestration Cluster API. You can list, search, get, create, and delete users, roles, groups, tenants, authorizations, and mapping rules. Membership management is handled with the `assign` and `unassign` verbs.
 
 | Resource           | Alias  | Available verbs                             |

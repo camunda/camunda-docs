@@ -1,11 +1,6 @@
 ---
 id: sizing-saas
 title: Size your SaaS cluster
-tags:
-  - Performance
-  - Hardware
-  - Sizing
-  - SaaS
 description: "Select the right Camunda 8 SaaS cluster size based on your needs."
 ---
 

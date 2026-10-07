@@ -38,11 +38,9 @@ These resources may link to additional material in Camunda Hub, documentation, C
 
 The **Automation project guide** tab provides a set of recommended documentation pages for each phase of an automation project with Camunda SaaS. For example, a set of pages for getting started, for designing and implementing, for testing, and for going live or improving your process.
 
-![automation project guide](./img/automation-project-guide.png)
-
 ### Use case guide
 
-The **Use case guide** tab provides a few getting started templates, such as process modeling or human task orchestration. These tutorials link to tutorials in Web Modeler, which may take 10-15 minutes each.
+The **Use case guide** tab provides a few getting started templates, such as process modeling or human task orchestration. These tutorials link to tutorials in Camunda Hub, which may take 10-15 minutes each.
 
 ### Camunda Academy
 

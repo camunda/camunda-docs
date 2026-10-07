@@ -9,10 +9,6 @@ description: "Use c8ctl to deploy resources, auto-redeploy on file changes, mana
      is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
      overwritten. Edit the source in the c8ctl repo instead. -->
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. Commands and flags may change between releases. For more information, see [Getting started](getting-started.md).
-:::
-
 `c8ctl` includes commands that support local development and deployment workflows. You can deploy resources, run processes, watch for changes, manage profiles and sessions, and bridge MCP connections for AI assistants.
 
 :::tip
@@ -164,6 +160,9 @@ c8 run ./order-process.bpmn
 # With variables
 c8 run ./order-process.bpmn --variables='{"orderId":"12345","amount":100}'
 
+# With a Business ID
+c8 run ./order-process.bpmn --businessId=order-123
+
 # Deploy a file with an unsupported extension
 c8 run ./process.xml --force
 ```
@@ -313,7 +312,7 @@ Add the following to your `.vscode/mcp.json`:
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                            |
 
 :::tip
-When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are shown on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet from the MCP tab.
+When you [create API client credentials](/components/saas/clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are shown on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet from the MCP tab.
 :::
 
 ### Use a profile with MCP proxy

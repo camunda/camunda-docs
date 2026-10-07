@@ -163,20 +163,11 @@ await camunda.createDeployment({
 
 ## Migrating from 8.9
 
-SDK 10.x (for Camunda 8.10) promotes several identifier and name fields from plain `string` to **branded types** via `CamundaKey<T>`. The wire format and runtime API are unchanged — branded values are still plain strings at runtime and are assignable anywhere a `string` is expected (template literals, logging, JSON serialization). Callers need to brand values using `.assumeExists()` (which performs validation) to satisfy the new types.
+SDK 10.x (for Camunda 8.10) promotes several identifier fields from plain `string` to **branded types**, changes the `getResourceContent` response from a string to an object, and makes `BatchOperationItemResponse.processInstanceKey` nullable. Nothing was removed or renamed, and the wire format is unchanged.
 
-### New branded types
+**→ See [MIGRATION.md](https://github.com/camunda/orchestration-cluster-api-js/blob/main/MIGRATION.md) for the full guide**, including the complete list of affected fields.
 
-| Brand                 | Used for                   |
-| --------------------- | -------------------------- |
-| `RoleId`              | Role identifiers           |
-| `GroupId`             | Group identifiers          |
-| `ClientId`            | OAuth client identifiers   |
-| `MappingRuleId`       | Mapping-rule identifiers   |
-| `ClusterVariableName` | Cluster variable names     |
-| `AgentInstanceKey`    | Agent-instance system keys |
-
-### Migration
+The common case is branding an identifier at the boundary:
 
 <!-- snippet-source: examples/readme.ts | regions: V9ToV10Migration -->
 
@@ -195,12 +186,6 @@ await camunda.assignRoleToGroup({
 ```
 
 Each branded type has an `.assumeExists()` method that validates the string and returns the branded value. Validation runs at call time and can throw if the input is malformed, so call it once at the boundary (startup, config parsing, API response) and pass the branded value through your application. See [Branded Keys](#branded-keys) for more on this pattern.
-
-### What does NOT change
-
-- The wire format is unchanged — all values are still strings on the wire.
-- No method signatures changed name or arity.
-- Branded values are assignable anywhere a `string` is expected (template literals, logging, JSON serialization), so existing string-handling code continues to work.
 
 ## Quick Start (Zero‑Config – Recommended)
 
@@ -793,6 +778,111 @@ return ack;
 const ack2 = await job.ignore();
 ```
 
+### Deterministic Time (`job.clock`)
+
+The SDK resolves its own cadence — worker poll intervals, retry backoff, eventual-consistency
+polling, backpressure decay — through an injectable clock. Pinning that clock runs all of it
+on virtual time, so tests that would otherwise wait out a 30-second poll finish immediately.
+
+The clock is configured on the client and available as `client.clock`. Handlers reach it as
+`job.clock`, a narrowed view exposing only `now()` and `sleep(ms, signal?)` — `deadline` is
+withheld because a handler that built one against a pinned clock would hang rather than time
+out:
+
+<!-- snippet-source: examples/readme.ts | regions: ReadmeHandlerClock -->
+
+```ts
+const startedAt = job.clock.now();
+
+// A short back-off around a flaky dependency. Waiting here rather than on
+// setTimeout means a test that pins the client's clock also drives the handler.
+await job.clock.sleep(250);
+
+return job.complete({ variables: { waitedMs: job.clock.now() - startedAt } });
+```
+
+Read and wait through `job.clock` rather than `Date.now()` / `setTimeout`, and a test that
+pins the client's clock drives your handler too.
+
+`job.clock.sleep` is for **short in-handler coordination** — spacing retries within one job,
+backing off around a flaky dependency. Long or business-meaningful waits belong in the
+process as BPMN timers, where they survive a crash and are visible to operations.
+
+Pass `createTestClock()` to pin the clock in your own tests:
+
+<!-- snippet-source: examples/readme.ts | regions: ReadmeTestClock -->
+
+```ts
+// Pin the client's clock and the SDK's own cadence runs on virtual time: poll intervals,
+// retry backoff and backpressure decay all settle without waiting in real time.
+const clock = createTestClock({ start: 0, autoAdvance: false });
+const client = createCamundaClient({ clock });
+
+// Nothing settles until the test moves time, so start the wait and advance into it.
+const waiting = client.clock.sleep(30_000);
+await clock.advance(30_000);
+await waiting;
+
+console.log(client.clock.now()); // 30000
+console.log(clock.sleeps); // [30000] — every duration the SDK asked to wait
+```
+
+`autoAdvance` defaults to `true`, where each sleep settles itself on the next macrotask
+having moved time to its wake point — the SDK's loops make progress without the test driving
+them. Set it to `false`, as above, when you need to assert on state _between_ two waits.
+
+#### Binding the SDK to the engine clock
+
+`createTestClock` pins the SDK in isolation: the engine carries on at real time. When you are
+testing against a live engine, `createEngineClock` binds the two together so they advance as
+one — `sleep` moves engine time forward via `PUT /clock` instead of waiting:
+
+<!-- snippet-source: examples/readme.ts | regions: ReadmeEngineClock -->
+
+```ts
+// Bind the SDK's cadence to the engine's own clock. `sleep` no longer waits — it moves
+// engine time forward — so a worker polling for something that never arrives advances the
+// engine instead of burning real seconds.
+//
+// Two clients, deliberately. `client` issues the pins and must stay on the live clock:
+// HTTP retry sleeps on whatever clock its client was given, so pointing the engine clock
+// at its own driver would have a failed pin back off through `sleep`, which issues another
+// pin, and so on.
+const client = createCamundaClient();
+const clock = createEngineClock(client, { start: Date.now() });
+const pinned = createCamundaClient({ clock });
+
+await clock.pin(Date.now());
+try {
+  // A minute of engine time. BPMN timers due inside it fire; the test does not wait.
+  await pinned.clock.sleep(60_000);
+} finally {
+  await clock.reset(); // hand the engine back to real time
+}
+```
+
+This is what makes a worker loop deterministic end to end: the poll interval _drives_ engine
+time rather than racing it, so a test that would spend a real minute waiting on something
+that never becomes ready finishes as fast as the requests complete.
+
+> [!WARNING]
+> Pinning is global to the cluster. Only point an engine clock at an engine you own —
+> never a shared environment. Always `reset()` in a `finally`.
+
+> [!IMPORTANT]
+> The client you hand to `createEngineClock` must not itself be configured with that clock.
+> HTTP retry backs off on whatever clock its client was given, so a self-referential setup
+> would have a failed `pinClock` retry through `sleep`, which issues another `pinClock`.
+> Keep the driving client on the live clock, as in the example above.
+
+Prefer `createTestClock` over hand-writing a `Clock`. The contract has clauses that are easy
+to get subtly wrong — most notably that `sleep` must not settle in a microtask, because the
+worker schedules its next poll on resolution and would otherwise spin.
+
+Two things deliberately stay on real time even when the clock is pinned, so that pinning it
+cannot hang a process: **liveness bounds** (shutdown drain, request and config-fetch
+timeouts) and **observational timestamps** (log, telemetry and support-bundle records).
+
 ### Job Corrections (User Task Listeners)
 
 When a job worker handles a [user task listener](https://docs.camunda.io/docs/components/concepts/user-task-listeners/), it can correct task properties (assignee, due date, candidate groups, etc.) by passing a `result` to `job.complete()`:
@@ -1294,70 +1384,307 @@ Notes:
 - Cancellation classification runs first so aborted fetches are never downgraded to generic network errors.
 - Abort is immediate and idempotent; underlying fetch is signalled.
 
-## Functional (fp-ts style) Surface (Opt-In Subpath)
+## Effect Surface (Opt-In Subpath)
 
-@experimental - this feature is not guaranteed to be tested or stable.
+The main entry stays Promise-based and pulls in **zero** Effect at runtime. Opt in to a
+first-class [Effect](https://effect.website) surface — a client whose every method returns an
+`Effect`, tagged domain errors, and Effect-native combinators — by importing the dedicated
+`./effect` subpath.
 
-> **Peer dependency:** `fp-ts` is an optional peer dependency. If you use real `fp-ts` functions
-> (e.g. `pipe`, `TE.match`) alongside this subpath, install it separately:
+> **Peer dependency:** `effect` is an **optional peer dependency** (Effect **v4**). The `./effect`
+> subpath requires it; install it alongside the SDK:
 >
 > ```sh
-> npm install fp-ts
+> npm install effect
 > ```
 >
-> The `/fp` subpath works without `fp-ts` installed — it exposes structurally-compatible
-> `Either`/`TaskEither` shapes that interoperate with `fp-ts` but do not require it at runtime.
+> The main `.` entry never imports `effect`, so Promise-first users are never forced to adopt it.
+>
+> **Module resolution:** Effect v4 ships as an `exports`-map-only package (no legacy
+> `main`/`types`), so consuming the `./effect` types requires a modern TypeScript module
+> resolution — set `"moduleResolution": "bundler"` (or `"node16"`/`"nodenext"`) in your
+> `tsconfig.json`. The Promise-first `.` entry is unaffected.
 
-The main entry stays minimal. To opt in to a TaskEither-style facade & helper combinators import from the dedicated subpath:
-
-<!-- snippet-exempt: uses SDK /fp subpath not available in examples project -->
+<!-- snippet-source: examples/effect.ts,examples/readme-imports.txt | regions: ReadmeEffectClientImport+ReadmeEffectClient -->
 
 ```ts
+import { Effect } from "effect";
 import {
-  createCamundaFpClient,
-  retryTE,
-  withTimeoutTE,
-  eventuallyTE,
-  isLeft,
-} from "@camunda8/orchestration-cluster-api/fp";
+  createCamundaEffectClient,
+  eventually,
+  EventualConsistencyTimeout,
+} from "@camunda8/orchestration-cluster-api/effect";
 
-const fp = createCamundaFpClient();
-const deployTE = fp.deployResourcesFromFiles(["./bpmn/process.bpmn"]);
-const deployed = await deployTE();
-if (isLeft(deployed)) throw deployed.left; // DomainError union
+const camunda = createCamundaEffectClient();
 
-// Chain with fp-ts (optional) – the returned thunks are structurally compatible with TaskEither
-// import { pipe } from 'fp-ts/function'; import * as TE from 'fp-ts/TaskEither';
+const program = Effect.gen(function* () {
+  const deployment = yield* camunda.deployResourcesFromFiles([
+    "./bpmn/process.bpmn",
+  ]);
+  const { processInstanceKey } = yield* camunda.createProcessInstance({
+    processDefinitionKey: deployment.processes[0].processDefinitionKey,
+  });
+  // Poll on the Effect Clock until the instance is searchable, timing out deterministically.
+  // waitUpToMs: 0 asks the SDK for the latest available state without its own wall-clock
+  // wait, so the Effect `eventually` combinator owns the predicate + timeout horizon —
+  // making the eventual-consistency wait deterministic under TestClock.
+  const search = yield* eventually(
+    camunda.searchProcessInstances(
+      { filter: { processInstanceKey } },
+      { consistency: { waitUpToMs: 0 } }
+    ),
+    (s) => s.items.some((i) => i.processInstanceKey === processInstanceKey),
+    { waitUpTo: "30 seconds", interval: "750 millis" }
+  );
+  return { processInstanceKey, search };
+}).pipe(
+  // Tagged errors → discriminate with catchTag / catchTags instead of a manual switch.
+  Effect.catchTag(
+    "EventualConsistencyTimeout",
+    (e: EventualConsistencyTimeout) =>
+      Effect.logError(`Timed out: ${e.message}`).pipe(
+        Effect.andThen(Effect.fail(e))
+      )
+  )
+);
+
+const result = await Effect.runPromise(program);
 ```
 
 Why a subpath?
 
-- Keeps base bundle lean for the 80% use case.
-- No hard dependency on `fp-ts` at runtime; only structural types.
-- Advanced users can compose with real `fp-ts` without pulling the effect model into the default import path.
+- Keeps the base bundle lean for the Promise-first 80% use case.
+- No dependency on `effect` at runtime unless you opt in; it is an **optional** peer.
+- Unlocks the Effect ecosystem (typed errors, `Schedule`, `Layer`/`Context`, `TestClock`).
 
-Exports available from `.../fp`:
+Exports available from `.../effect`:
 
-- `createCamundaFpClient` – typed facade (methods return `() => Promise<Either<DomainError,T>>`).
-- Type guards: `isLeft`, `isRight`.
-- Error / type aliases: `DomainError`, `TaskEither`, `Either`, `Left`, `Right`, `Fpify`.
-- Combinators: `retryTE`, `withTimeoutTE`, `eventuallyTE`.
+- `createCamundaEffectClient(options?)` – a `Proxy` client where every method returns
+  `Effect.Effect<Awaited<R>, DomainError, never>`; the throwing client is reachable via `.inner`.
+- Tagged errors (`Data.TaggedError`): `CamundaValidationError`, `EventualConsistencyTimeout`,
+  `HttpError`, `CamundaGenericError` — together the `DomainError` union. Discriminate with
+  `Effect.catchTag` / `Effect.catchTags`.
+- Combinators: `retryWithBackoff` (`Effect.retry` + `Schedule.exponential` + jitter), `withTimeout`
+  (`Effect.timeoutOrElse` with real interruption), `eventually` (a recursive `Effect.sleep` poll on
+  the Effect `Clock`, timing out to `EventualConsistencyTimeout`).
+- Dependency injection: `CamundaEffect` (`Context.Service`) + `layer(options?)` (`Layer`) so worker /
+  orchestration code composes via `Layer` and swaps a test double trivially.
+- Pagination: `.paginate(body, opts?)` on every `search*` method, returning an `EffectPaginator`
+  (`pages()` / `items()` → `Stream`, `toArray()` → `Effect`). See below.
 
-DomainError union currently includes:
+**Clock-class win:** `eventually` / `withTimeout` run on the Effect `Clock`, so `TestClock.adjust`
+advances eventual/timeout deterministically in tests — no real-clock burn. The Promise surface
+has the same property via [`createTestClock`](#deterministic-time-jobclock); the difference is
+that Effect gives you `TestClock` and the rest of the ecosystem for free.
 
-- `CamundaValidationError`
-- `EventualConsistencyTimeoutError`
-- HTTP-like error objects (status/body/message) produced by transport
-- Generic `Error`
+### Paginated Search as a `Stream`
 
-You can refine left-channel typing later by mapping HTTP status codes or discriminator fields.
+Every `search*` operation on the Effect client carries the same `.paginate` helper the
+Promise client installs, re-expressed in Effect terms: `pages()` and `items()` are
+`Stream`s and `toArray()` is an `Effect`. Pages are fetched lazily as they are pulled,
+and interrupting the fiber cancels the in-flight page request.
+
+<!-- snippet-source: examples/effect.ts,examples/readme-imports.txt | regions: ReadmeEffectPaginateImport+ReadmeEffectPaginate -->
+
+```ts
+import { Effect, Stream } from "effect";
+import { createCamundaEffectClient } from "@camunda8/orchestration-cluster-api/effect";
+
+const camunda = createCamundaEffectClient();
+
+// Walk every ACTIVE process instance, 100 per request, without ever holding more
+// than one page in memory. `Stream.take` stops pulling — and so stops fetching.
+const activeKeys = await Effect.runPromise(
+  camunda.searchProcessInstances
+    .paginate({ filter: { state: "ACTIVE" }, page: { limit: 100 } })
+    .items()
+    .pipe(
+      Stream.map((instance) => instance.processInstanceKey),
+      Stream.take(500),
+      Stream.runCollect
+    )
+);
+```
+
+Options: `maxPages` (safety cap), `mode` (`auto` | `cursor` | `offset`), and `consistency`
+(forwarded to the first page only — once paging is under way an empty page is
+end-of-results, not a stale read).
+
+### Effect Job Workers
+
+The same subpath also exposes an **Effect-native job worker** — the long-running
+`activateJobs` → handle → `completeJob`/`failJob` loop, modelled as Effect. A handler is
+`(job) => Effect.Effect<CompleteVars, JobError, R>` with a **typed failure channel**: a
+`RetryableJobError` becomes `failJob` with `retries - 1` (plus an optional server-side backoff),
+and a `TerminalJobError` becomes `throwJobError` (caught by a BPMN error boundary, or an incident if
+uncaught). Success completes the job with the returned variables. It composes over the same
+activation/backpressure runtime the Promise worker uses — it does not reimplement activation.
+
+<!-- snippet-source: examples/effect.ts,examples/readme-imports.txt | regions: ReadmeEffectWorkerImport+ReadmeEffectWorker -->
+
+```ts
+import { Effect, Schedule } from "effect";
+import {
+  createCamundaEffectWorker,
+  layer,
+  RetryableJobError,
+  TerminalJobError,
+} from "@camunda8/orchestration-cluster-api/effect";
+
+const program = Effect.gen(function* () {
+  // Forked into the current Scope: interrupted (with a best-effort lease release) when
+  // the scope closes. Let both type parameters infer — supplying only the completion-
+  // variable type (`createCamundaEffectWorker<{ ok: boolean }>(…)`) makes TypeScript
+  // fall back to the *default* for the handler's requirements (`R = never`) rather
+  // than inferring it, so a handler with dependencies would stop compiling. See
+  // "Injecting Services into a Handler".
+  yield* createCamundaEffectWorker({
+    type: "payment-processing",
+    maxJobsToActivate: 10, // activation batch size
+    concurrency: 10, // max jobs handled in parallel (backpressure)
+    pollInterval: "1 second", // between empty polls, on the Effect Clock
+    // Optional: retry the handler in-process on a RetryableJobError before failing the job.
+    handlerRetrySchedule: Schedule.spaced("2 seconds"),
+    handler: (job) =>
+      Effect.gen(function* () {
+        if (!job.variables.amount) {
+          // Terminal → raise a BPMN error / incident.
+          return yield* Effect.fail(
+            new TerminalJobError({
+              code: "INVALID_INPUT",
+              message: "amount is required",
+            })
+          );
+        }
+        if (yield* isServiceDown()) {
+          // Retryable → failJob(retries - 1) with a re-activation backoff.
+          return yield* Effect.fail(
+            new RetryableJobError({
+              message: "downstream unavailable",
+              retryBackoff: "5 seconds",
+            })
+          );
+        }
+        return { ok: true }; // success → completeJob(variables)
+      }),
+  });
+
+  // ... the worker runs for the lifetime of this scope.
+  yield* Effect.never;
+}).pipe(
+  Effect.scoped,
+  Effect.provide(layer()) // provides the `/effect` client the worker depends on
+);
+
+void program;
+```
+
+Worker exports from `.../effect`:
+
+- `createCamundaEffectWorker(config)` – forks the worker into the current `Scope` and returns a
+  handle (`{ type, join, interrupt }`); provide the client `layer()` as its dependency.
+- `activateJobsStream(type, options)` – the lower-level `Stream.Stream<Job, DomainError, …>` of
+  activated jobs, polling on the Effect `Clock`.
+- `workerLayer(config)` – a `Layer` that runs a worker for the layer's lifetime.
+- Tagged job failures: `RetryableJobError` (→ `failJob`), `TerminalJobError` (→ `throwJobError`),
+  together the `JobError` channel.
+
+**Clock-class win:** the activation poll interval and the handler-retry `Schedule` run on the Effect
+`Clock`, so `TestClock.adjust` bounds activation/retry timing in virtual time — the whole loop is
+deterministic in tests, with no real-clock burn. The Promise worker is equally drivable by pinning
+the client clock (see [Deterministic Time](#deterministic-time-jobclock)); what Effect adds here is
+`Schedule` composition over the retry policy.
+
+### Injecting Services into a Handler
+
+A handler is `(job) => Effect.Effect<A, JobError, R>`, and `R` — whatever services the handler
+depends on — is threaded out through `createCamundaEffectWorker` / `workerLayer` into the worker's
+own requirements. So a handler's dependencies are provided, and swapped for mocks, exactly like
+any other `Layer`.
+
+<!-- snippet-source: examples/effect.ts,examples/readme-imports.txt | regions: ReadmeEffectWorkerServicesImport+ReadmeEffectWorkerServices -->
+
+```ts
+import { Context, Effect, Layer } from "effect";
+import {
+  CamundaEffect,
+  type CamundaEffectClient,
+  layer,
+  workerLayer,
+} from "@camunda8/orchestration-cluster-api/effect";
+
+// A service the handler depends on. Nothing about it is Camunda-specific — it is an
+// ordinary Effect service.
+class PaymentGateway extends Context.Service<
+  PaymentGateway,
+  { readonly charge: (amount: number) => Effect.Effect<string> }
+>()("PaymentGateway") {}
+
+// The handler's requirements flow out through the worker's own requirements, so the
+// worker layer asks for `PaymentGateway` just like it asks for the Camunda client.
+const paymentWorker = workerLayer({
+  type: "payment-processing",
+  handler: (job) =>
+    Effect.gen(function* () {
+      const gateway = yield* PaymentGateway;
+      return { receipt: yield* gateway.charge(Number(job.variables.amount)) };
+    }),
+});
+// paymentWorker: Layer<never, never, CamundaEffect | PaymentGateway>
+
+// Production: the real gateway and a real client.
+const liveWorker = paymentWorker.pipe(
+  Layer.provide(
+    Layer.succeed(PaymentGateway, {
+      charge: (amount) => Effect.succeed(`live-receipt-${amount}`),
+    })
+  ),
+  Layer.provide(layer())
+);
+
+// Tests: the same worker with *both* dependencies swapped. `CamundaEffect` is a service
+// too, so the broker is mocked exactly like the gateway — the worker runs end-to-end
+// with neither a payment provider nor a broker.
+const fakeClient = {
+  activateJobs: () => Effect.succeed({ jobs: [] }),
+  completeJob: () => Effect.void,
+  failJob: () => Effect.void,
+  throwJobError: () => Effect.void,
+} as unknown as CamundaEffectClient;
+
+const mockedWorker = paymentWorker.pipe(
+  Layer.provide(
+    Layer.succeed(PaymentGateway, {
+      charge: () => Effect.succeed("mock-receipt"),
+    })
+  ),
+  Layer.provide(Layer.succeed(CamundaEffect, fakeClient))
+);
+```
+
+`Layer.succeed(CamundaEffect, fakeClient)` is what the SDK's own worker tests use; see
+[tests/effect-worker-di.test.ts](https://github.com/camunda/orchestration-cluster-api-js/blob/main/tests/effect-worker-di.test.ts) for worked examples that mock both
+dependencies and drive the loop to a `completeJob` / `failJob` under `TestClock`.
+
+> **Gotcha — let both type parameters infer.** `createCamundaEffectWorker<A, R>` has `R = never`
+> as its default, and TypeScript does not infer a type parameter when only _some_ are supplied.
+> So `createCamundaEffectWorker<{ ok: boolean }>({ ... })` pins `R` to `never`, and a handler with
+> dependencies fails to compile with an error pointing at the handler rather than at the missing
+> type argument:
+>
+> ```
+> Type 'PaymentGateway' is not assignable to type 'never'.
+> ```
+>
+> Omit both — `A` is inferred from the handler's success value — or supply both
+> (`createCamundaEffectWorker<{ receipt: string }, PaymentGateway>({ ... })`).
 
 ## Eventual Consistency Polling
 
 Some endpoints accept consistency management options. Pass a `consistency` block (where supported) with `waitUpToMs` and optional `pollIntervalMs` (default 500). If the condition is not met within timeout an `EventualConsistencyTimeoutError` is thrown.
 
 To consume eventual polling in a non‑throwing fashion set the client error mode before invoking an eventually consistent method:
-At present the canonical client operates in throwing mode. Non‑throwing adaptation (Result / fp-ts) is achieved via the functional wrappers rather than mutating the base client.
+At present the canonical client operates in throwing mode. Non‑throwing adaptation (Result / Effect) is achieved via the functional wrappers rather than mutating the base client.
 
 ### Options
 
@@ -1651,48 +1978,88 @@ When to use:
 - Avoiding try/catch nesting in larger orchestration flows.
 - Converting to libraries expecting an Either/Result pattern.
 
-### fp-ts Adapter (TaskEither / Either) - EXPERIMENTAL
+### Effect Adapter
 
-_Note that this feature is experimental and subject to change._
+For Effect-based projects, wrap the throwing client in an Effect-flavoured facade whose every method
+returns an `Effect` with a typed `DomainError` channel:
 
-For projects using `fp-ts`, wrap the throwing client in a lazy `TaskEither` facade:
-
-<!-- snippet-exempt: requires external fp-ts dependency -->
+<!-- snippet-exempt: requires optional effect peer dependency -->
 
 ```ts
-import { createCamundaFpClient } from "@camunda8/orchestration-cluster-api/fp";
-import { pipe } from "fp-ts/function";
-import * as TE from "fp-ts/TaskEither";
+import { Effect } from "effect";
+import { createCamundaEffectClient } from "@camunda8/orchestration-cluster-api/effect";
 
-const fp = createCamundaFpClient();
+const camunda = createCamundaEffectClient();
 
-const deployTE = fp.createDeployment({ resources: [file] }); // TaskEither<unknown, ExtendedDeploymentResult>
-
-pipe(
-  deployTE(), // invoke the task (returns Promise<Either>)
-  (then) => then // typical usage would use TE.match / TE.fold; shown expanded for clarity
+const deployment = await Effect.runPromise(
+  camunda.createDeployment({ resources: [file] })
 );
-
-// With helpers
-const task = fp.createDeployment({ resources: [file] });
-const either = await task();
-if (either._tag === "Right") {
-  console.log(either.right.deployments.length);
-} else {
-  console.error("Error", either.left);
-}
+console.log(deployment.deployments.length);
 ```
+
+See [Effect Surface (Opt-In Subpath)](#effect-surface-opt-in-subpath) above for the full surface —
+tagged errors, `retryWithBackoff` / `withTimeout` / `eventually`, and `Layer`/`Context` DI.
 
 Notes:
 
-- No runtime dependency on `fp-ts`; adapter implements a minimal `Either` shape. Structural typing lets you lift into real `fp-ts` functions (`fromEither`, etc.).
-- Each method becomes a function returning `() => Promise<Either<E,A>>` (a `TaskEither` shape). Invoke it later to execute.
-- Cancellation: calling `.cancel()` on the original promise isn’t surfaced; if you need cancellation use the base client directly.
-- For richer interop, you can map the returned factory to `TE.tryCatch` in userland.
+- `effect` is an **optional peer dependency**; only the `./effect` subpath imports it.
+- Each method returns `Effect.Effect<Awaited<R>, DomainError, never>`; the throwing client is reachable via `.inner`.
+- Failures are narrowed into tagged errors so you discriminate with `Effect.catchTag` / `catchTags`.
 
 ## Pagination
 
-Search endpoints expose typed request bodies that include pagination fields. Provide the desired page object; auto‑pagination is not (yet) bundled.
+Every `search*` operation exposes a `.paginate(body, options?)` method that returns a lazy,
+cancelable async stream over **all** matching results. Cursors (or offsets) are advanced
+internally, so you never hand-write next-page bookkeeping.
+
+<!-- snippet-source: examples/pagination.ts | regions: PaginateItems -->
+
+```ts
+// Stream every matching process instance across all pages. Cursors are advanced
+// internally; the loop stops when the server runs out of pages.
+async function everyActiveInstanceExample() {
+  const camunda = createCamundaClient();
+
+  const stream = camunda.searchProcessInstances.paginate({
+    filter: { state: "ACTIVE" },
+    page: { limit: 100 },
+  });
+
+  for await (const instance of stream.items()) {
+    console.log(instance.processInstanceKey);
+  }
+}
+```
+
+Iterate a page at a time with `.pages()`, or drain a bounded result set into an array with
+`.toArray()`. Bound long streams with a `maxPages` cap and/or an `AbortSignal`:
+
+<!-- snippet-source: examples/pagination.ts | regions: PaginateBounded -->
+
+```ts
+// Bound the stream with an AbortSignal and a hard page cap. A non-zero
+// `consistency` window is applied to the first page only, so freshly-written
+// data can be waited for without the terminal empty page timing out.
+async function boundedPaginationExample(
+  processDefinitionId: ProcessDefinitionId
+) {
+  const camunda = createCamundaClient();
+  const ac = new AbortController();
+  setTimeout(() => ac.abort(), 30_000);
+
+  const stream = camunda.searchProcessInstances.paginate(
+    { filter: { processDefinitionId }, page: { limit: 100 } },
+    { signal: ac.signal, maxPages: 10, consistency: { waitUpToMs: 5000 } }
+  );
+
+  for await (const instance of stream.items()) {
+    console.log(instance.processInstanceKey);
+  }
+}
+```
+
+For advanced use, the low-level `nextPageRequest()` / `paginate()` primitives are also exported
+from the package entry point.
 
 ## Configuration Reference
 
@@ -1825,7 +2192,7 @@ Generate an HTML API reference site with TypeDoc (public entry points only):
 npm run docs:api
 ```
 
-Output: static site in `docs/api` (open `docs/api/index.html` in a browser or serve the folder, e.g. `npx http-server docs/api`). Entry points: `src/index.ts`, `src/logger.ts`, `src/fp/index.ts`. Internal generated code, scripts, tests are excluded and private / protected members are filtered. Regenerate after changing public exports.
+Output: static site in `docs/api` (open `docs/api/index.html` in a browser or serve the folder, e.g. `npx http-server docs/api`). Entry points: `src/index.ts`, `src/logger.ts`, `src/effect/index.ts`. Internal generated code, scripts, tests are excluded and private / protected members are filtered. Regenerate after changing public exports.
 
 ## Contributing
 

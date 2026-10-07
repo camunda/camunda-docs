@@ -17,6 +17,7 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
 
 <PageDescription />
 
@@ -63,7 +64,7 @@ Important changes in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
 <td>[Helm chart deployment](#helm-chart-deployment)</td>
-    <td>RDBMS and secondary storage configuration, `*.secret.existingSecret` pattern migration, default 8080 REST port, Helm 4 support, and more.</td>
+    <td>RDBMS and secondary storage configuration, `*.secret.existingSecret` pattern migration, default 8080 REST port, Helm CLI v4 support, and more.</td>
 </tr>
 <tr>
 <td>[Migration from Camunda 7](#migration)</td>
@@ -192,15 +193,13 @@ The Orchestration Cluster's default HTTP port has changed from 8090 to 8080.
 
 You should update any hardcoded port references in network policies, Ingress rules, or service configuration.
 
-### Helm 4 support
+### Helm CLI v4 support {#helm-4-support}
 
-As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
+Camunda 8.9 (chart 14.x) supports Helm CLI v3 and v4.
 
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+<HelmCliSupport />
 
-:::note
-Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
-:::
+For Helm CLI v4 behavior changes and workarounds, see [Helm CLI v4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 ### RDBMS as secondary storage
 
@@ -309,7 +308,7 @@ The following usability improvements simplify collaboration and help teams keep 
 | Feature                                                                                                     | Description                                                                                                                                                                        |
 | :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Element templates](/components/modeler/element-templates/defining-templates.md)                            | Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.               |
-| [Email invitations](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
+| [Email invitations](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
 
 ### Improved Self-Managed installation
 
@@ -386,7 +385,7 @@ This helps operations teams consolidate Camunda monitoring into existing observa
 
 You can now configure RocksDB memory on a per-broker basis instead of per-partition, simplifying capacity planning and aligning with familiar JVM-style sizing.
 
-<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
 ### Orchestration Cluster Identity renamed to Admin
 
@@ -499,7 +498,7 @@ The following guides offer detailed information on how to upgrade to Camunda 8.9
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
 <tr>
-    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/migrate-to-89.md)</td>
+    <td>[APIs & tools upgrade guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md)</td>
     <td>Plan and execute an upgrade from Camunda 8.8 to 8.9, focusing on API and tools transitions.</td>
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>

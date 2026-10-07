@@ -44,7 +44,7 @@ The following prerequisites are required before you can create a backup.
 When Camunda uses an RDBMS as **secondary storage**, backups involve **two independent systems**:
 
 - **Zeebe (primary storage)**: Backs up its internal state (log stream, snapshots) to an external blob store (S3, GCS, Azure, or filesystem). These are called **primary storage backups**.
-- **The external RDBMS**: Backed up using your database vendor's native tools (pg_dump, mysqldump, RMAN, etc.). This is the **secondary storage backup**.
+- **The external RDBMS**: Backed up using your database vendor's native tools (pg_dump, mysqldump, RMAN, and similar). This is the **secondary storage backup**.
 
 During restore, Zeebe uses the exporter position stored in the RDBMS to find the correct primary storage backup, or backups, that match the RDBMS state. This ensures consistency between the two systems without requiring synchronized backup timing.
 
@@ -123,7 +123,7 @@ Use the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-s
 
 ### Scheduled backup
 
-Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range trackin, this ensures you always have backup ranges available for disaster recoveryg.
+Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range tracking. This ensures you always have backup ranges available for disaster recovery.
 Both should be enabled together for a complete backup strategy. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
 
 #### Recommended configuration

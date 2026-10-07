@@ -39,7 +39,7 @@ Click **None** in the **Authentication** section. No extra authentication config
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `GRAPHQL_PASSWORD`) so you can reference it later in the connector.
 
 ### Configure Basic Authentication
@@ -56,7 +56,7 @@ Select the **GraphQL connector** and fill out the following properties under the
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `GRAPHQL_BEARER_TOKEN`) so you can reference it later in the connector.
 
 #### Configure the Bearer Token
@@ -72,7 +72,7 @@ Select the **GraphQL connector** and fill out the following properties under the
 
 We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret (i.e `OAUTH_TOKEN_ENDPOINT`) so you can reference it later in the connector.
 
 #### Configure the OAuth Token
@@ -192,8 +192,21 @@ The HTTP response will be available in a temporary local `response` variable. Th
 The following fields are available in the `response` variable:
 
 - **status**: Response status
-- **body**: Response body of your request
+- **body**: Response body of your request. Populated when the **Response format** is **As text** or **As JSON**.
 - **headers**: Response headers
+- **document**: Populated when the **Response format** is **Document reference**; a reference to the response stored in the Camunda document store.
+
+### Response format
+
+Choose how the response body is returned with the **Response format** dropdown, a [return format](/components/document-handling/send-document-to-external-system.md#return-formats):
+
+- **As JSON** (default): the body is parsed as JSON and returned in `body`.
+- **As text**: the body is decoded as a string (with an optional encoding, default UTF-8) and returned in `body`.
+- **Document reference**: the body is streamed to the Camunda document store and a reference is returned in `document`.
+
+:::note
+The **As JSON** default fails the job when the response body is not valid JSON. Use **As text** for non-JSON responses. **As text** and **As JSON** are subject to a size guard (approximately 1.5 MiB); use **Document reference** for large responses.
+:::
 
 Additionally, you can choose to unpack the content of your `response` into multiple process variables using the **Result Expression**, which is a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
 

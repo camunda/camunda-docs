@@ -1,6 +1,7 @@
 ---
 id: rdbms-setup-guide
 title: End-to-end RDBMS setup guide
+sidebar_label: "End-to-end setup guide"
 description: Configure relational databases for the Orchestration Cluster and Web Modeler with unified provisioning, authentication, and driver management strategies.
 ---
 

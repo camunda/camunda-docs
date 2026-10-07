@@ -14,7 +14,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 ## Prerequisites
 
 - **Camunda API Client**: [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
-- Locally, for configuring via `csap` only (see below): [Node.js >= 20 LTS](https://nodejs.org/en/about/previous-releases)
+- Locally, for configuring via the [CSAP c8ctl plugin](./csap-cli.md#prerequisites) only (see below): [Node.js >= 22](https://nodejs.org/en/about/previous-releases)
 - **On SAP BTP**:
   - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
   - SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
@@ -27,7 +27,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Features
 
-- Model user tasks in your BPMN process—they will be automatically detected and rendered by the BTP plugin at runtime.
+- Model user tasks in your BPMN process. They will be automatically detected and rendered by the BTP plugin at runtime.
 - Design your form in the Form Builder as part of the BPMN process. When you model a user task and link it to the form, the BTP plugin will automatically detect and render the task and its associated form at runtime.
 
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
@@ -91,20 +91,20 @@ Custom properties are not supported:
 
 ## Configuration and deployment
 
-Use [`csap`](./csap-cli.md) for setting up the BTP plugin, as a manual configuration is cumbersome and error-prone.
+Use the [CSAP c8ctl plugin](./csap-cli.md) for setting up the BTP plugin, as a manual configuration is cumbersome and error-prone.
 
 Within Camunda, no setup/config work is necessary to use the BTP plugin.
 
-### Configuring the BTP plugin using `csap`
+### Configuring the BTP plugin using the CSAP c8ctl plugin
 
 Either walk yourself through the prompts or provide all information to the CLI:
 
-- `csap setup` will guide you interactively.
+- `c8ctl csap-setup` will guide you interactively.
 
 - Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
-csap setup --for btp-plugin \
+c8ctl csap-setup --for btp-plugin \
 	--camunda 8.7 \
 	--deployment SaaS \
 	--btpRoute camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com
@@ -122,12 +122,12 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-2. `cd` to the folder `csap` logs after a successful build, for example, `/tmp/camunda/8.6/sap-btp-plugin`
+2. `cd` to the folder `c8ctl csap-setup` logs after a successful build, for example, `/tmp/camunda/8.6/sap-btp-plugin`
 3. Issue `cf deploy mta_archives/*.mtar`
    - Add the `-f` switch to force an update, for example, by deploying the same version again (`cf deploy mta_archives/*.mtar -f`).
    - Consider adding `--delete-services` to recreate eventually failed service creation of previous deployment. For example, `cf deploy mta_archives/*.mtar -f --delete-services`.
 
-For advanced deployment configuration, consider working with your SAP practice, starting from the created `mta.yaml` deployment descriptor (in the `$TMP` folder as output by `csap`).
+For advanced deployment configuration, consider working with your SAP practice, starting from the created `mta.yaml` deployment descriptor (in the `$TMP` folder as output by `c8ctl csap-setup`).
 
 ## Working with the BTP plugin
 
@@ -169,15 +169,13 @@ Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this define
 
 When modeling a process for the BTP plugin, choose one of the following variants.
 
-### Variant 1: Camunda User Task (recommended)
+### Variant 1: Camunda user task (recommended)
 
 :::note
 User task listeners are available from **Camunda 8.8** onwards. They were briefly included in 8.7.0-alpha2 but were not available in the 8.7.0 GA release. Use Camunda 8.8 or higher for this variant.
 :::
 
-Model the user interaction steps as Camunda User Tasks and link each task to a Camunda Form. The BTP plugin detects these tasks and renders them in the Fiori UI.
-
-In Camunda Modeler, configure every form step in the process as a separate Camunda User Task. This ensures the BTP plugin can recognize the task as a user interaction step and render the linked form in the Fiori UI.
+In Camunda Modeler, model each user interaction step as a separate Camunda user task and link it to a Camunda Form. The BTP plugin detects these tasks and renders the linked forms in the Fiori UI.
 
 For each form step:
 
@@ -201,7 +199,7 @@ If your process contains multiple form steps, repeat the same setup for each tas
 
 :::note
 
-This setup is deprecated and kept for backward compatibility only. Use the Camunda User Task variant for new processes.
+This setup is deprecated and kept for backward compatibility only. Use the Camunda user task variant for new processes.
 
 :::
 
@@ -217,23 +215,22 @@ For each form step:
    - Use **Form type** `Camunda Form (linked)` and provide the form ID.
    - Use **Form type** `Camunda Form (embedded)` and paste the form JSON directly into the task configuration.
 
-To end the form flow, add a final Camunda User Task that represents the outcome of the flow.
+To end the form flow, add a final Camunda user task that represents the outcome of the flow.
 
 For the final task:
 
-1. Create a Camunda User Task.
+1. Create a Camunda user task.
 2. Set **Implementation type** to `Camunda user task`.
 3. Add a header with the key `final-user-task`.
 4. Set the header value to `success` for the successful end of the form flow, or to `fail` for the failed end of the form flow.
 
 This final task marks the end of the form flow for the BTP plugin and determines whether the flow completed successfully or failed.
 
-
 #### Completing the form flow
 
 Each form flow in your process must end with a completion task. This task signals to the BTP plugin that the form sequence is finished, and the process should proceed to the next phase.
 
-Create a Camunda User Task for the completion step and configure it as follows:
+Create a Camunda user task for the completion step and configure it as follows:
 
 1. Create a user task to represent the completion step.
 2. Set **Implementation type** to `Camunda user task`.
@@ -248,4 +245,4 @@ If your process distinguishes between successful and failed form flows, you can 
 
 Including both completion variants (success and failure) keeps your process model explicit and allows the BTP plugin to handle different outcomes appropriately.
 
-The advantage over Orchestration Cluster REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for administrating additional credentials.
+Compared to the Orchestration Cluster REST API, you can use the authentication realm between BTP and S/4 or ECC, so you don't need to manage additional credentials.

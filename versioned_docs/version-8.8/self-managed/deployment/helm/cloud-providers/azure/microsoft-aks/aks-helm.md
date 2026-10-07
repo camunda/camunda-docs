@@ -6,6 +6,7 @@ description: "Set up your Camunda 8 environment with Helm on Azure Kubernetes Se
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import DeploymentReadinessCheck from '../../\_partials/\_deployment-readiness-check.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and confirmation it is working as intended.
 
@@ -371,11 +372,9 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 :::
 
-You can track the progress of the installation using the following command:
+You can track the progress of the installation with the deployment readiness check script, which requires [jq](https://jqlang.github.io/jq/) to be installed.
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck download />
 
 ## Verify connectivity to Camunda 8
 
@@ -595,7 +594,7 @@ The following values are required for OAuth authentication:
 
 The following are some advanced configuration topics to consider for your cluster:
 
-- [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md)
+- [Camunda production installation guide with Kubernetes and Helm](/self-managed/deployment/helm/install/production/index.md)
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/azure/README.md)
 
 To get more familiar with our product stack, visit the following topics:

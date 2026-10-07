@@ -14,10 +14,6 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
-:::
-
 ## About
 
 `c8ctl` is a minimal-dependency CLI for Camunda 8. It is built on top of the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) TypeScript SDK and provides two equivalent bin aliases: `c8ctl` and `c8`.
@@ -110,6 +106,33 @@ c8 cluster purge 8.8
 
 # Or stop the running cluster and purge its runtime data in one step
 c8 cluster stop --purge
+```
+
+### Manage secrets
+
+`c8 cluster secrets` forwards to the `secrets` command of the c8run binary c8ctl already downloads and manages. c8ctl adds no storage of its own and never sees a secret value: `set` prompts for the value without echoing it (or reads exactly one value from stdin with `--stdin`), and the store is c8run's, shared across versions and projects for the current OS user.
+
+```bash
+# Store a secret — prompts, no-echo
+c8 cluster secrets set OPENAI_API_KEY
+
+# List secret names (values are never shown)
+c8 cluster secrets list
+
+# Import multiple secrets from a dotenv file
+c8 cluster secrets import .env.secrets
+
+# Delete a secret without an interactive prompt
+c8 cluster secrets delete OPENAI_API_KEY --yes
+
+# Target a specific installed version instead of the running/highest one
+c8 cluster secrets --c8-version 8.10 list
+```
+
+Everything after `secrets` is passed to c8run unchanged, so any verb or flag c8run supports works here too, including ones added after this was written — run `c8 cluster secrets help` for c8run's own help (`--help` on the `c8ctl` command itself belongs to c8ctl). This requires a c8run build that includes the `secrets` command; older cached versions print a hint if it is missing. Until then, or as an ephemeral alternative for a single run, pass secrets as environment variables when starting instead:
+
+```bash
+SECRET_OPENAI_API_KEY=sk-... c8 cluster start
 ```
 
 ### Version aliases
@@ -254,6 +277,27 @@ c8 add profile staging --from-file .env.staging
 source .env.prod
 c8 add profile prod --from-env
 ```
+
+### Gateway-fronted clusters
+
+For a cluster reached through an API gateway or reverse proxy, a profile can attach a custom header to every request and target `--baseUrl` exactly, without `c8ctl`'s automatic `/v2` suffixing:
+
+```bash
+# Attach a header (e.g. an API key) to every REST request made under this profile.
+# Repeat --header to attach more than one.
+c8 add profile gateway \
+  --baseUrl=https://gateway.example.com/camunda-api \
+  --header "X-Api-Key: your-api-key" \
+  --header "X-Correlation-Id: your-correlation-id"
+
+# --exactBaseUrl: use --baseUrl as the exact request path instead of
+# appending /v2 (the default for self-managed profiles).
+c8 add profile gateway-exact \
+  --baseUrl=https://gateway.example.com/camunda-api \
+  --exactBaseUrl
+```
+
+Both flags are optional and independent of each other. A profile that sets neither behaves exactly as before.
 
 ### List profiles
 

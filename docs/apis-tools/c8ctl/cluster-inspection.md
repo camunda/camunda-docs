@@ -9,10 +9,6 @@ description: "Use c8ctl to list, search, and manage process instances, user task
      is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
      overwritten. Edit the source in the c8ctl repo instead. -->
 
-:::warning Alpha feature
-`c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
-:::
-
 `c8ctl` follows a `<verb> <resource>` command structure. Most resources have short aliases to reduce typing:
 
 | Resource                | Alias         |
@@ -48,6 +44,8 @@ c8 get topology
 
 ## Process instances
 
+Business IDs require Camunda 8.9 or newer.
+
 ### List process instances
 
 ```bash
@@ -59,6 +57,9 @@ c8 list pi --id=order-process
 
 # Filter by state
 c8 list pi --state=ACTIVE
+
+# Filter by Business ID
+c8 list pi --businessId=order-123
 ```
 
 ### Get a process instance
@@ -81,6 +82,15 @@ c8 create pi --id=order-process --version=2
 # With variables
 c8 create pi --id=order-process --variables='{"orderId":"12345","amount":100}'
 
+# With variables read from a file (avoids shell quoting issues)
+c8 create pi --id=order-process --variables=@vars.json
+
+# With variables read from stdin
+cat vars.json | c8 create pi --id=order-process --variables=@-
+
+# With a Business ID for business-level correlation
+c8 create pi --id=order-process --businessId=order-123
+
 # Create and wait for completion
 c8 create pi --id=order-process --awaitCompletion
 
@@ -95,6 +105,7 @@ The `await` command is a shorthand for `create` with `--awaitCompletion`. It use
 ```bash
 c8 await pi --id=order-process
 c8 await pi --id=order-process --variables='{"orderId":"12345"}'
+c8 await pi --id=order-process --businessId=claim-456
 c8 await pi --id=order-process --requestTimeout=60000
 ```
 
@@ -349,6 +360,7 @@ c8 search pd --id=order-process --profile=prod
 ```bash
 c8 search pi --state=ACTIVE
 c8 search pi --id=order-process
+c8 search pi --businessId=order-123
 c8 search pi --processDefinitionKey=2251799813685249
 c8 search pi --parentProcessInstanceKey=2251799813685250
 c8 search pi --id=order-process --state=ACTIVE
@@ -443,6 +455,15 @@ c8 set variable 2251799813685249 --variables='{"localCounter":1}' --local
 ```
 
 The `--variables` flag accepts a JSON object. Use `--local` to restrict the update to the specified element instance scope instead of propagating to the outermost scope.
+
+Every command that takes `--variables` also accepts `@file.json` to read the JSON from a file and `@-` to read it from stdin. Prefer these when the payload is large or contains quotes — some shells (notably PowerShell) strip or re-split the quotes of inline JSON before the CLI ever sees it:
+
+```bash
+c8 complete job 2251799813685252 --variables=@vars.json
+Get-Content vars.json | c8 complete job 2251799813685252 --variables=@-
+```
+
+When inline JSON arrives with all of its quotes stripped (`{a:b}` instead of `{"a":"b"}`), c8ctl restores them and prints a warning showing the payload it recovered. Restoration is best-effort: it cannot tell `{"a":1}` from `{"a":"1"}`, and it fails outright when a stripped string contained a `:` or `,` of its own. Use `@file.json` or `@-` for anything non-trivial.
 
 The element instance key is the key of the process instance or the specific flow element scope you want to update. You can retrieve these keys from `c8 get pi` or `c8 search pi`.
 

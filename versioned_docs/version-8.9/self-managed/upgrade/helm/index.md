@@ -7,6 +7,7 @@ description: "Upgrade to a more recent version of the Camunda Helm charts, and v
 import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
 import { helmIndexCards } from './../react-components/\_card-data';
 import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/CamundaDistributions";
+import HelmCliSupport from '../../deployment/helm/_partials/_helm-cli-support.md';
 
 Upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
 
@@ -14,8 +15,12 @@ Upgrade a Camunda 8 Self-Managed deployment installation using the official Camu
 If you are upgrading from a version earlier than 8.8, see [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 :::
 
-:::warning Plan your move to the Helm v4 CLI
-Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. Camunda 8.10 (chart 15.x) requires the Helm v4 CLI. Chart 14.x also supports Helm v4, so switch your tooling to the Helm v4 CLI while running 8.9 to be ready before you upgrade to 8.10. No release-state migration is required when switching CLIs. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
+:::note Helm CLI support
+Camunda 8.9 (chart 14.x) supports Helm CLI v3 and v4.
+
+<HelmCliSupport />
+
+Switching CLIs does not require a release-state migration. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
 :::
 
 ## Upgrade guides
@@ -91,5 +96,6 @@ If you previously set `webModeler.persistence.enabled: true` without `existingCl
 
 ## Related resources
 
+- [Migrate and validate Helm overrides with the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)
 - [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)
 - [Component upgrade from 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md)

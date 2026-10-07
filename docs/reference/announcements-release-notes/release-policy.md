@@ -1,10 +1,16 @@
 ---
 id: release-policy
 title: "Release policy"
-description: "Learn more about Camunda releases, including alpha features and alpha releases."
+description: "Learn more about how Camunda releases, including alpha features, alpha releases, and general availability."
 ---
 
-Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the following specific clarifications.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the specific clarifications detailed on this page.
 
 :::info
 You can find deprecation and support announcements on the [announcements](/reference/announcements-release-notes/overview.md#announcements) page.
@@ -86,7 +92,7 @@ Non-cluster components include:
 Non-cluster component versions are released continuously.
 
 - Customers are automatically updated to the latest component version when it is ready for release.
-- Admins can [enable alpha features](/components/hub/organization/manage-organization-settings/enable-alpha-features.md) for non-cluster components in organization settings.
+- Admins can [enable alpha features](/components/saas/organization/enable-alpha-features.md) for non-cluster components in organization settings.
 
 ### New Camunda 8 versions
 
