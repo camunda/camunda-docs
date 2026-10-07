@@ -1007,11 +1007,12 @@ The `POST /clusters` endpoint requires an OAuth 2.0 M2M (machine-to-machine) tok
 
 The client must be granted the `create:*` and `update:*` permissions on the `web-modeler-public-api` application in [Management Identity](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions).
 
-| Field           | Description                                                                                                                                                                            | Example value                                                               |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `tokenEndpoint` | The OAuth 2.0 token endpoint used to request an access token. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_TOKENENDPOINT`.         | `https://keycloak.example.com/realms/camunda/protocol/openid-connect/token` |
-| `clientId`      | The client ID of the M2M application registered in your identity provider. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_CLIENTID`. | `zeebe-ping-client`                                                         |
-| `clientSecret`  | The client secret for the M2M application. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_CLIENTSECRET`.                             | `***`                                                                       |
+| Field                    | Description                                                                                                                                                                                                                                                                                                                                             | Example value                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `tokenEndpoint`          | The OAuth 2.0 token endpoint used to request an access token. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_TOKENENDPOINT`.                                                                                                                                                                          | `https://keycloak.example.com/realms/camunda/protocol/openid-connect/token` |
+| `clientId`               | The client ID of the M2M application registered in your identity provider. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_CLIENTID`.                                                                                                                                                                  | `zeebe-ping-client`                                                         |
+| `clientSecret`           | The client secret for the M2M application. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_CLIENTSECRET`.                                                                                                                                                                                              | `***`                                                                       |
+| `tokenRequestParameters` | Additional parameters sent in the token request, for example `audience` or `scope`, as key-value pairs. Some identity providers require them. You can't override `grant_type`, `client_id`, or `client_secret`. This setting can also be overridden using environment variables such as `CAMUNDA_HUB_PING_CREDENTIALS_TOKENREQUESTPARAMETERS_AUDIENCE`. | `audience: https://hub.example.com/api`                                     |
 
 ##### YAML snippet
 
@@ -1034,6 +1035,8 @@ camunda:
         tokenEndpoint: https://keycloak.example.com/realms/camunda/protocol/openid-connect/token
         clientId: zeebe-ping-client
         clientSecret: "***"
+        tokenRequestParameters:
+          audience: https://hub.example.com/api
 ```
 
 ### Continuous backups configuration
