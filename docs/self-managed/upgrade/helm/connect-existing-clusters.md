@@ -67,7 +67,7 @@ Run `helm upgrade` on the Hub release.
 
 ### Step 3: Update the release's values
 
-Set these values on the existing release. Keep the release name, namespace, broker configuration, secondary storage configuration, and every index prefix unchanged.
+Set these values on the existing release. Leave the release name, namespace, broker configuration, secondary storage configuration, and every index prefix unchanged.
 
 | Value                                                                                          | Set to                                                                                                                                                                                               |
 | :--------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
