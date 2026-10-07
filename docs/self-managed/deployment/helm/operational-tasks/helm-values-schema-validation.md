@@ -1,6 +1,6 @@
 ---
 id: helm-values-schema-validation
-title: "Bypass Helm values schema validation"
+title: "Helm values schema validation"
 sidebar_label: "Helm values schema validation"
 description: "Learn how Helm checks values against the Camunda 8 chart schema, how to bypass the check, and which deployment tools support the bypass."
 ---
@@ -28,14 +28,7 @@ For example, an unknown key at the top level of your values causes this error:
 
 Fix the values that the error names. This is the recommended action. The bypass removes a safety check.
 
-To find problems before you run Helm, use the `validate` command of the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md#validate-override-files). It uses these exit codes:
-
-| Exit code | Meaning                                      |
-| --------- | -------------------------------------------- |
-| `0`       | No findings.                                 |
-| `1`       | Tool or usage failure.                       |
-| `2`       | Warnings. Unknown keys are warnings.         |
-| `3`       | Errors, or warnings when you use `--strict`. |
+To find problems before you run Helm, use the `validate` command of the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md#validate-override-files). The toolkit page lists its exit codes.
 
 :::warning
 Do not remove `orchestration.fullnameOverride` to fix a schema error. This change renames the StatefulSet. The brokers then start on new, empty volumes.
