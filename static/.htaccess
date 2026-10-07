@@ -186,6 +186,30 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Hub API: the operation to replace a workspace's environments was renamed to update (8.10)
+RewriteRule ^docs/next/apis-tools/hub-api-saas/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-saas/specifications/update-workspace-environments/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/hub-api-sm/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-sm/specifications/update-workspace-environments/ [R=301,L]
+
+# The Manage an existing project page became Manage project settings (8.10)
+RewriteRule ^docs/next/components/hub/workspace/manage-projects/manage-project/?$ /docs/next/components/hub/workspace/manage-projects/project-settings/ [R=301,L]
+
+# The Hub dashboard page became the View Console page (8.10)
+RewriteRule ^docs/next/components/hub/organization/analyze-operations/hub-dashboard/?$ /docs/next/components/hub/organization/console/ [R=301,L]
+
+# SaaS cluster management pages moved from Camunda Hub > Manage clusters to the SaaS section (8.10)
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/create-cluster/?$ /docs/next/components/saas/clusters/create-cluster/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-cluster/?$ /docs/next/components/saas/clusters/manage-cluster/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-api-clients/?$ /docs/next/components/saas/clusters/manage-api-clients/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-secrets/?$ /docs/next/components/saas/clusters/manage-secrets/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-alerts/?$ /docs/next/components/saas/clusters/manage-alerts/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-ip-allowlists/?$ /docs/next/components/saas/clusters/manage-ip-allowlists/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/create-backups/?$ /docs/next/components/saas/clusters/create-backups/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/settings/?$ /docs/next/components/saas/clusters/settings/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/cluster-capacity/?$ /docs/next/components/saas/clusters/cluster-capacity/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/configure-audit-log/?$ /docs/next/components/saas/clusters/configure-audit-log/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-clusters/troubleshoot-clusters/?$ /docs/next/components/saas/clusters/troubleshoot-clusters/ [R=301,L]
+
+
 # Databricks connector doc moved into its own subfolder alongside the new fraud detection use case doc.
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/databricks/?$ /docs/next/components/connectors/out-of-the-box-connectors/databricks/databricks/ [R=301,L]
 # Adjust enable secure connectivity path to drop the "console" reference
@@ -234,6 +258,9 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-au
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administration-api-self-managed/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+
+# The SAP BTP plugin is retired in 8.10; redirect to the 8.9 page, the last version that documents it.
+RewriteRule ^docs/next/components/camunda-integrations/sap/btp-plugin/?$ /docs/8.9/components/camunda-integrations/sap/btp-plugin/ [R=301,L]
 
 # The "Install Bitnami enterprise images" page is removed in 8.10 (Bitnami images are no longer
 # usable from chart 15.x); redirect to the 8.9 page, the last version that documents them.

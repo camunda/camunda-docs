@@ -29,7 +29,7 @@
   },
   "desktopModeler": {
     "version": "5.52.0",
-    "date": "Oct 13, 2026",
+    "date": "Oct 6, 2026",
     "links": {
       "mac": {
         "stable": [
@@ -177,11 +177,11 @@
   },
   "additionalReleases": {
     "orchestrationCluster": {
-      "version": "8.10.0",
-      "date": "Sep 29, 2026",
+      "version": "8.10.1",
+      "date": "Oct 6, 2026",
       "primaryLink": {
         "label": "View release on GitHub",
-        "url": "https://github.com/camunda/camunda/releases/tag/8.10.0"
+        "url": "https://github.com/camunda/camunda/releases/tag/8.10.1"
       },
       "previousVersions": "https://github.com/camunda/camunda/releases"
     },
