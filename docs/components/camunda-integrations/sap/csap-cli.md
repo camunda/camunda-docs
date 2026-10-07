@@ -131,7 +131,7 @@ c8ctl csap-setup [options]
 | Option           | Type   | Description                                                                                              | Default value                |
 | ---------------- | ------ | -------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `--for`          | string | Specifies the SAP integration module to set up. Choices: `odata`, `rfc`, `all`.                          | (Prompted if not provided)   |
-| `--camunda`      | string | Specifies the Camunda version. Choices: `8.10`, `8.9`, `8.8`, `8.7`, `8.6` (deprecated).                         | (Prompted if not provided)   |
+| `--camunda`      | string | Specifies the Camunda version. Choices: `8.10`, `8.9`, `8.8`, `8.7`, `8.6` (deprecated).                 | (Prompted if not provided)   |
 | `--deployment`   | string | Specifies the Camunda deployment option. Choices: `SaaS`. (`SM` for self-managed is currently disabled.) | (Prompted if not provided)   |
 | `--clusterId`    | string | Specifies the Camunda cluster ID.                                                                        | (Prompted if not provided)   |
 | `--region`       | string | Specifies the Camunda cluster region, for example, `bru-2`.                                              | (Prompted if not provided)   |
