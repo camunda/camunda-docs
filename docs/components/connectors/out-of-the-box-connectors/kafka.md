@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 ## Reuse a Kafka connection
 
-Use a **Kafka Connection** credential to share broker and authentication settings between Kafka Producer and Kafka Consumer connectors.
+Use a **Kafka Connection** credential to share broker and authentication settings between Kafka producer and Kafka consumer connectors.
 
 Reusable credentials require Camunda 8.10 or later and a Kafka element template with the optional **Connection credential** chooser in the **Connection** section. Select the same credential on producer tasks and consumer events, or leave **Connection credential** empty to keep configuring brokers and authentication inline in the **Connection** section.
 
@@ -29,16 +29,16 @@ Selecting a credential binds the whole object to `kafkaConnectionConfiguration` 
 The selected credential replaces inline broker and authentication settings. An invalid credential fails execution or consumer activation; the connector doesn't fall back to inline values. Topic, consumer group, offsets, schema settings, and message configuration remain local to each task or event.
 
 :::warning
-**Additional properties** still overrides the final connection and security properties, including `bootstrap.servers`. Selecting a credential does not restrict the destination or prevent these overrides.
+**Additional properties** still overrides the final connection and security properties, including `bootstrap.servers`. Selecting a credential doesn't restrict the destination or prevent these overrides.
 :::
 
 ### Test a Kafka connection
 
-**Test connection** performs a read-only Kafka metadata probe to check connectivity and authentication, using the connector runtime's trust configuration. It uses bounded timeouts and reports a failure if the connection cannot be established.
+**Test connection** performs a read-only Kafka metadata probe to check connectivity and authentication, using the connector runtime's trust configuration. It uses bounded timeouts and reports a failure if the connection can't be established.
 
 The result applies only to the stored credential, not to **Additional properties** overrides configured on a task or event.
 
-The test does not publish or consume messages, join a consumer group, or change offsets. Success does not verify topic, consumer group, publishing, or consumption permissions.
+The test doesn't publish or consume messages, join a consumer group, or change offsets. Success doesn't verify topic, consumer group, publishing, or consumption permissions.
 
 Updating a credential follows the existing consumer activation and reload lifecycle. Don't rely on credential edits automatically rotating the connection of an already-running consumer.
 
