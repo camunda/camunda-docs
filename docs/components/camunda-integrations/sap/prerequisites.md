@@ -8,8 +8,8 @@ Before setting up the SAP integration, ensure the following requirements are met
 
 ## Camunda setup
 
-- **OData and RFC connectors:** 8.6+
-- **Advanced Event Mesh integration:** 8.6+
+- **OData and RFC connectors:** 8.7+
+- **Advanced Event Mesh integration:** 8.7+
 
 Compatible with both **SaaS** and **Self-Managed** deployments:
 

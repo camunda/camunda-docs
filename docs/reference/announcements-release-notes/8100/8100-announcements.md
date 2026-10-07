@@ -969,7 +969,6 @@ The Orchestration Cluster contacts an OIDC provider at the first request that ne
 
 The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration.
 
-<p className="link-arrow">[SAP BTP Plugin documentation (8.9)](https://docs.camunda.io/docs/8.9/components/camunda-integrations/sap/btp-plugin/)</p>
 
 </div>
 </div>
