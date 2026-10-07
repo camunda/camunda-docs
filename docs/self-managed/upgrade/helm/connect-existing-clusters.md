@@ -191,4 +191,4 @@ Then remove the cluster's record from the Hub release. Identity initialization i
 ## Next steps
 
 - [Install an Orchestration Cluster release](/self-managed/deployment/helm/install/topology/orchestration-release.md)
-- [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md)
+- [Camunda 8.10 deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology)

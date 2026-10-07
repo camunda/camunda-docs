@@ -5,7 +5,7 @@ title: "Install the Camunda Hub release"
 description: "Install the management plane: a Helm release with global.topology.mode set to hub, running Camunda Hub and Management Identity."
 ---
 
-The Hub release is the management plane. It runs Camunda Hub and Management Identity, and it owns the inventory of every Orchestration Cluster in the deployment.
+The Hub release is the [management plane](/reference/glossary.md#management-plane). It runs Camunda Hub and Management Identity and owns the inventory of every Orchestration Cluster in the deployment.
 
 When creating a new topology, install the Hub release before its Orchestration Cluster releases. For the prerequisites, Secrets, and network policies this page assumes, see [install the deployment topology](./index.md).
 
@@ -167,7 +167,7 @@ Adapt the Keycloak endpoints and client configuration for your environment. See 
 ## Describe a chart 8.7 cluster
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/reference-architecture/deployment-topology.md#release-roles).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 :::
 
 An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, 8.9, and 8.10 charts. Records for 8.8, 8.9, and 8.10 clusters all take the standard shape shown above. To connect releases that already run, see [connect existing clusters to Hub](/self-managed/upgrade/helm/connect-existing-clusters.md).

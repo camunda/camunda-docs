@@ -41,12 +41,11 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 
 ## Architecture
 
-The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-camunda-hub) explains the distinction between these components:
+The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) describes the deployment topology: one management plane serving one or more Orchestration Clusters, with one Optimize instance per Physical Tenant. It also explains the distinction between these components:
 
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin) with tightly integrated components (Optimize, Connectors).
-- **Camunda Hub and Management Identity**: Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
-
-See the reference architecture for details on how these components communicate.
+- **Management plane (Camunda Hub and Management Identity)**: Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin), including Connectors.
+- **Optimize**: Process analytics, deployed separately with one instance per Physical Tenant.
 
 _Infrastructure diagram for a single-region setup (click the image to open the PDF version)_
 
@@ -66,6 +65,14 @@ A production deployment is recommended. For more information, see the [productio
 
 The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
+#### Management plane
+
+![Camunda Hub and Management Identity](./img/management-cluster.jpg)
+
+Camunda Hub and Management Identity form the management plane, which serves all Orchestration Clusters in the deployment. Both are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes it easy to scale each horizontally by running multiple replica pods behind a load balancer, improving availability and request throughput.
+
+Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
+
 #### Orchestration Cluster
 
 ![Orchestration Cluster](./img/k8s-cluster-view-orchestration.jpg)
@@ -79,14 +86,6 @@ The Orchestration Cluster exposes two services:
 1. A [**headless service**](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services) for internal communication between Zeebe brokers. This service skips load balancing and resolves to pod IPs for direct peer-to-peer communication.
 
 2. A **standard service** for external applications. This service distributes traffic randomly (via `kube-proxy`) and is suitable for clients or other services connecting to the cluster.
-
-#### Camunda Hub
-
-![Camunda Hub and Management Identity](./img/management-cluster.jpg)
-
-Camunda Hub and Management Identity form the management plane that serves all Orchestration Clusters. Both are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes it easy to scale each horizontally by running multiple replica pods behind a load balancer, improving availability and request throughput.
-
-Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
 
 ### High availability (HA)
 
@@ -115,42 +114,53 @@ To further improve fault tolerance, distribute the Orchestration Cluster and oth
 
 Camunda 8 deployments separate workloads into three logical groups, each installed as its own Helm release with a `global.topology.mode` role:
 
-- **Management plane:** Camunda Hub and Management Identity (`hub`)
-- **Execution plane:** Orchestration Cluster and Connectors (`orchestration`)
-- **Optimize**, one release per Physical Tenant (`optimize`)
+- **Management plane:** Camunda Hub and Management Identity (`hub`), one per deployment
+- **Orchestration Cluster:** Orchestration Cluster and Connectors (`orchestration`), one per cluster
+- **Optimize:** one release per Physical Tenant (`optimize`)
 
-Deploy these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). This separation gives each group an independent lifecycle, improves isolation, and allows flexible scaling. Deploying all components in a single `combined` release remains supported, and suits evaluation and smaller environments.
+Deploy these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). The Hub namespace isn't tied to a single environment, and Orchestration Cluster namespaces can run on the same or different Kubernetes clusters, as long as every configured URL is reachable from the release that uses it. Deploying all components in a single `combined` release remains supported, and suits evaluation and smaller environments.
 
-The Hub namespace can serve Orchestration Clusters across multiple environments and isn’t tied to a single environment.
+<!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
 
-Separate releases enable:
+```mermaid
+graph TD
+    subgraph hub["Namespace: hub (management plane)"]
+        CH["Camunda Hub"]
+        MI["Management Identity"]
+    end
+    subgraph ocdev["Namespace: orchestration-dev"]
+        OCD["Orchestration Cluster<br/>+ Connectors"]
+    end
+    subgraph ocprod["Namespace: orchestration-prod"]
+        OCP["Orchestration Cluster<br/>+ Connectors"]
+    end
+    subgraph optdev["Namespace: optimize-dev-default"]
+        OD["Optimize<br/>default tenant"]
+    end
+    subgraph optprod["Namespaces: optimize-prod-*"]
+        OP1["Optimize<br/>default tenant"]
+        OP2["Optimize<br/>Physical Tenant A"]
+    end
+    IdP["OIDC provider"]
 
-- Independent scaling, upgrade, and removal of each Orchestration Cluster
-- Shared access to centralized components such as Management Identity
-- A separate Optimize instance per Physical Tenant, each reading its own index prefix
+    CH -- "deploy, API, readiness" --> OCD
+    CH -- "deploy, API, readiness" --> OCP
+    OCD -. "exported records" .-> OD
+    OCP -. "exported records" .-> OP1
+    OCP -. "exported records" .-> OP2
+    OCD -- "authentication" --> MI
+    OCP -- "authentication" --> MI
+    OD -- "authentication" --> MI
+    OP1 -- "authentication" --> MI
+    OP2 -- "authentication" --> MI
+    MI --> IdP
+```
 
-For the release roles and the reasoning behind the split, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md). To implement it with the Helm chart, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+For the required cross-namespace traffic, see [allow required network traffic](/self-managed/deployment/helm/install/topology/index.md#allow-required-network-traffic). To implement this topology with the Helm chart, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
-#### Orchestration Cluster namespace
+#### Management plane namespace
 
-As shown in the [architecture diagram](#orchestration-cluster), the Orchestration Cluster is deployed as a StatefulSet and packaged as a single container image. It includes the following components:
-
-- [Zeebe](/components/zeebe/zeebe-overview.md) — workflow engine and broker
-- [Operate](/components/operate/operate-introduction.md) — visibility and troubleshooting UI
-- [Tasklist](/components/tasklist/introduction-to-tasklist.md) — UI for human tasks
-- [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) — authentication and access control
-
-Also included in this namespace is the component that deploys with the cluster release:
-
-- [Connectors](/components/connectors/introduction.md) — external system integrations
-
-[Optimize](/components/optimize/what-is-optimize.md) serves this cluster but is deployed as its own release, one per Physical Tenant. See [Optimize releases](#optimize-releases).
-
-The Orchestration Cluster also depends on a **secondary storage** backend for Operate, Tasklist, and the v2 Orchestration Cluster REST API. This backend is a document store (Elasticsearch or OpenSearch) or a supported relational database management system (RDBMS). It is provisioned outside the `StatefulSet`, as a managed service or an operator-managed database. Optimize requires Elasticsearch or OpenSearch and cannot use an RDBMS. For the trade-offs and how to choose a backend, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
-
-#### Camunda Hub namespace
-
-As shown in the [architecture diagram](#camunda-hub), this namespace contains:
+As shown in the [architecture diagram](#management-plane), this namespace contains:
 
 - [Camunda Hub](/components/hub/index.md) — modeling and administrative capabilities
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Camunda Hub and Optimize
@@ -171,6 +181,23 @@ For configuration details, see:
 - [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
 
 The Orchestration Cluster can be configured to authenticate with OIDC by connecting to the Management Identity service deployed in this namespace.
+
+#### Orchestration Cluster namespace
+
+As shown in the [architecture diagram](#orchestration-cluster), the Orchestration Cluster is deployed as a StatefulSet and packaged as a single container image. It includes the following components:
+
+- [Zeebe](/components/zeebe/zeebe-overview.md) — workflow engine and broker
+- [Operate](/components/operate/operate-introduction.md) — visibility and troubleshooting UI
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md) — UI for human tasks
+- [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) — authentication and access control
+
+Also included in this namespace is the component that deploys with the cluster release:
+
+- [Connectors](/components/connectors/introduction.md) — external system integrations
+
+[Optimize](/components/optimize/what-is-optimize.md) serves this cluster but is deployed as its own release, one per Physical Tenant. See [Optimize releases](#optimize-releases).
+
+The Orchestration Cluster also depends on a **secondary storage** backend for Operate, Tasklist, and the v2 Orchestration Cluster REST API. This backend is a document store (Elasticsearch or OpenSearch) or a supported relational database management system (RDBMS). It is provisioned outside the `StatefulSet`, as a managed service or an operator-managed database. Optimize requires Elasticsearch or OpenSearch and cannot use an RDBMS. For the trade-offs and how to choose a backend, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
 
 #### Optimize releases
 
