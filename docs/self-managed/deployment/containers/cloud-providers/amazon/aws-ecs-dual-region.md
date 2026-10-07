@@ -347,14 +347,14 @@ If either check fails, do not proceed to verification. Inspect CloudWatch Logs f
 Run the helper script from the reference repository to validate that the deployment is healthy in both regions:
 
 ```bash
-cd ../../  # back to the repo root
-./aws/containers/ecs-dual-region-fargate/procedure/verify_dual_region.sh
+cd ../../  # back to the ecs-dual-region-fargate directory
+./procedure/verify_dual_region.sh
 ```
 
 When `enable_cross_region_dns_resolver = true`, also confirm that cross-region service-discovery DNS works:
 
 ```bash
-./aws/containers/ecs-dual-region-fargate/procedure/test_cross_region_dns.sh
+./procedure/test_cross_region_dns.sh
 ```
 
 To check the cluster yourself, retrieve the admin password and ALB endpoint from the infra layer, then call `/v2/topology` — Camunda 8.10 requires Basic authentication on all `/v2/*` endpoints:

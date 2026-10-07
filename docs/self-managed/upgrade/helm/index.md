@@ -12,7 +12,7 @@ import HelmCliSupport from '../../deployment/helm/_partials/_helm-cli-support.md
 Upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
 
 :::caution earlier versions
-If you are upgrading from a version earlier than 8.8, see [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
+If you are upgrading from a version earlier than 8.9, see [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 :::
 
 :::note Helm CLI support

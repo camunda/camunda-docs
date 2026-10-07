@@ -119,7 +119,7 @@ The `helm template` command can show you the application's default configuration
 - Use this output as a **reference** to discover the right keys and defaults.
 - Only copy the full content into `<componentName>.configuration` if you intentionally want to **replace** the default config (advanced).
 
-Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
+Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](/self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \
@@ -298,10 +298,10 @@ zeebe:
 
 ### Step 2: Generate the default configuration file
 
-Run the following command to render the default configuration file and fill in Helm values:
+Replace `<your-release-name>` with your release name, then run the following command to render the default configuration file and fill in Helm values:
 
 ```bash
-helm template \
+helm template <your-release-name> \
     -f values.yaml \
     camunda/camunda-platform \
     --show-only templates/zeebe/configmap.yaml
@@ -349,7 +349,7 @@ zeebe:
 
 For each environment variable, find the corresponding property in the [Zeebe configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md).
 
-For example, the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` maps to the property `zeebe.broker.data.backup.s3.bucketName`, documented under [Zeebe S3 Backup](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3).
+For example, the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` maps to the legacy property `zeebe.broker.data.backup.s3.bucketName`. The current name of this property, `camunda.data.primary-storage.backup.s3.bucket-name`, is documented under [Zeebe S3 Backup](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camundadataprimary-storagebackups3).
 
 Add the property to the configuration file. Add the `data` section under `zeebe.broker`:
 
@@ -534,8 +534,8 @@ zeebe:
 
 The commented `variable-name` and `bpmn-process-id` sections above only illustrate where to configure exporter-side filters for Optimize in Camunda 8.9 and later. For the complete list of available options, their semantics, and upgrade behavior, see:
 
-- [Elasticsearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)
-- [OpenSearch exporter](../../../../components/orchestration-cluster/zeebe/exporters/opensearch-exporter/)
+- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)
+- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
 
 ## Connectors configuration
 

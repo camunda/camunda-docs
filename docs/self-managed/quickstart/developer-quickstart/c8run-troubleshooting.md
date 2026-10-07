@@ -262,7 +262,7 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
 
    ```powershell
    $pair = "demo:demo"
-   bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
+   $bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
    $base64 = [System.Convert]::ToBase64String($bytes)
    Invoke-WebRequest -Uri http://localhost:8080/v2/topology -Headers @{Authorization="Basic $base64"}
    ```
@@ -319,7 +319,7 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
 
 **Solution:**
 
-1. If using H2 in-memory mode, switch to file-based persistence so data is written to disk:
+1. Camunda 8 Run stores H2 data on disk by default, so data persists across restarts. If your configuration uses an in-memory H2 URL (`jdbc:h2:mem:`), data is lost when Camunda 8 Run stops. Switch to a file-based URL so data is written to disk:
 
    ```yaml
    camunda:
@@ -330,7 +330,8 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
            url: jdbc:h2:file:./camunda-data/h2db
    ```
 
-2. Check that the application has permission to write to the data directory (for example, `camunda-data/` or any configured mount path).
+2. Keep the H2 file path the same between restarts. A different path opens a different, empty database.
+3. Check that the application has permission to write to the data directory (for example, `camunda-data/` or any configured mount path).
 
 ## Connector issues
 
@@ -362,10 +363,14 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
 
 **Solution:**
 
-1. For non-Docker mode, export connector secrets as environment variables:
+1. For non-Docker mode, add each secret to the local secret store, then reference it with `camunda.secrets.<name>`. For details, see [manage local secrets](./c8run/configuration.md#manage-local-secrets).
 
    ```bash
-   export MY_SECRET_KEY=secret_value
+   # macOS/Linux
+   ./c8run secrets set MY_SECRET_KEY
+
+   # Windows
+   c8run.exe secrets set MY_SECRET_KEY
    ```
 
 2. For the Docker Compose setup, add secrets to the `connector-secrets.txt` file located in the Docker Compose folder.

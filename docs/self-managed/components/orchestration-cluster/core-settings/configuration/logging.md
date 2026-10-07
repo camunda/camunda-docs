@@ -21,7 +21,7 @@ The default `log4j2.xml` (Zeebe, Operate, Tasklist, Admin) representation:
                    https://logging.apache.org/xml/ns/log4j-config-2.xsd" status="WARN" shutdownHook="disable">
   <Properties>
     <Property name="log.path" value="${sys:app.home}/logs" />
-    <Property name="log.pattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %notEmpty{[%X] }%-5level%n\t%logger{36} - %msg%n" />
+    <Property name="log.pattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %notEmpty{[%X] }%-5level \t%logger{36} - %msg%n" />
     <Property name="log.stackdriver.serviceName" value="${env:ZEEBE_LOG_STACKDRIVER_SERVICENAME:-${env:OPERATE_LOG_STACKDRIVER_SERVICENAME:-${env:OPTIMIZE_LOG_STACKDRIVER_SERVICENAME:-${env:TASKLIST_LOG_STACKDRIVER_SERVICENAME:-}}}}"/>
     <Property name="log.stackdriver.serviceVersion" value="${env:ZEEBE_LOG_STACKDRIVER_SERVICEVERSION:-${env:OPERATE_LOG_STACKDRIVER_SERVICEVERSION:-${env:OPTIMIZE_LOG_STACKDRIVER_SERVICEVERSION:-${env:TASKLIST_LOG_STACKDRIVER_SERVICEVERSION:-}}}}"/>
   </Properties>
@@ -76,42 +76,35 @@ The default `log4j2.xml` (Zeebe, Operate, Tasklist, Admin) representation:
 
 :::note
 This is a simplified example. The actual `log4j2.xml` may include additional appenders, different file paths, or slightly different patterns.  
-See the full [logging documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md#default-logging-configuration) for the official default file and additional settings.
+See the full [logging documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md#default-log4j2-configuration) for the official default file and additional settings.
 :::
 
 ## Environment variables
 
-| Purpose             | Variable            | Component(s)        | Example / Notes               |
-| ------------------- | ------------------- | ------------------- | ----------------------------- |
-| Global log level    | `CAMUNDA_LOG_LEVEL` | All                 | `DEBUG`, `INFO`, `WARN`, etc. |
-| Zeebe package level | `ZEEBE_LOG_LEVEL`   | Zeebe               | Overrides global level        |
-| Atomix / clustering | `ATOMIX_LOG_LEVEL`  | Atomix / Raft       | Default WARN if unset         |
-| Elasticsearch logs  | `ES_LOG_LEVEL`      | `org.elasticsearch` |                               |
+| Purpose             | Variable            | Component(s)        | Example / Notes                                 |
+| ------------------- | ------------------- | ------------------- | ----------------------------------------------- |
+| Global log level    | `CAMUNDA_LOG_LEVEL` | All                 | `DEBUG`, `INFO`, `WARN`, etc.                   |
+| Zeebe package level | `ZEEBE_LOG_LEVEL`   | Zeebe               | Overrides global level                          |
+| Atomix / clustering | `ATOMIX_LOG_LEVEL`  | Atomix / Raft       | Defaults to `CAMUNDA_LOG_LEVEL`, otherwise INFO |
+| Elasticsearch logs  | `ES_LOG_LEVEL`      | `org.elasticsearch` |                                                 |
 
 ## JSON logging appenders
 
-| Appender           | Description                                         | Enable / Variable                                                 |
-| ------------------ | --------------------------------------------------- | ----------------------------------------------------------------- |
-| Console            | Standard text output                                | `*_LOG_APPENDER=Console`                                          |
-| Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver          | `*_LOG_APPENDER=Stackdriver`                                      |
-| RollingFile        | Writes logs to a rotating file, disabled by default | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` + set component variable |
+| Appender           | Description                                        | Enable / Variable                                      |
+| ------------------ | -------------------------------------------------- | ------------------------------------------------------ |
+| Console            | Standard text output                               | `*_LOG_APPENDER=Console`                               |
+| Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver         | `*_LOG_APPENDER=Stackdriver`                           |
+| RollingFile        | Writes logs to a rotating file, enabled by default | Disable with `CAMUNDA_LOG_FILE_APPENDER_ENABLED=false` |
 
 ## Pattern layout/format
 
-- Default layout shows **time only**, thread name, MDC context, log level, logger name, and message.
+- The default layout shows the full date and time, thread name, MDC context, log level, logger name, and message.
 
-**Example pattern:**
+**Default pattern:**
 
 ```perl
-%d{HH:mm:ss.SSS} [%t] %notEmpty{[%X] }%-5level %logger{36} - %msg%n
+[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %notEmpty{[%X] }%-5level \t%logger{36} - %msg%n
 ```
-
-| Feature             | Old pattern         | New pattern                        |
-| ------------------- | ------------------- | ---------------------------------- |
-| Timestamp           | Full date and time  | Time only                          |
-| Logger name         | Up to 36 characters | Package initials + full class name |
-| Newline after level | Yes                 | No                                 |
-| Tab before logger   | Yes                 | No                                 |
 
 ## Changing log level at runtime
 
@@ -139,5 +132,5 @@ Enabling verbose logging may expose sensitive data. Use debug/trace levels only 
 
 - Always check the inline default configuration before customizing.
 - Use component-specific `*_LOG_LEVEL` and `*_LOG_APPENDER` variables for fine-grained control.
-- Enable the RollingFile or Stackdriver appenders only when needed; console is simpler for stdout logs.
+- Select the Stackdriver appender only when you need JSON output; the console appender is simpler for stdout logs. Disable the RollingFile appender with `CAMUNDA_LOG_FILE_APPENDER_ENABLED=false` if you collect logs from stdout only.
 - Monitor logging setup across environments (dev/test/prod) to avoid surprises caused by log verbosity.

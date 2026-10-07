@@ -12,7 +12,7 @@ Camunda provides [official Docker images](https://hub.docker.com/u/camunda) for 
 
 Docker images are suitable for production deployments.
 
-By contrast, the provided [Docker Compose files](../../quickstart/developer-quickstart/docker-compose/) are intended only for quick start, development, and testing.
+By contrast, the provided [Docker Compose files](../../quickstart/developer-quickstart/docker-compose.md) are intended only for quick start, development, and testing.
 
 For production, we recommend using [Kubernetes with Helm](../helm/install/quick-install.md). Advanced users can create their own hardened Docker Compose configuration, but this requires additional effort.
 
@@ -26,11 +26,11 @@ Windows and macOS are supported for development environments only.
 
 ## Docker images and configuration references
 
-| Component             | Docker image                                                                                                                      | Configuration docs                                                                                                       |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Orchestration Cluster | [camunda/camunda](https://hub.docker.com/r/camunda/camunda)                                                                       | [Environment variables](../../components/orchestration-cluster/overview/)                                                |
-| Management Identity   | [camunda/identity](https://hub.docker.com/r/camunda/identity)                                                                     | [Management Identity configuration](../../components/management-identity/configuration/identity-configuration-overview/) |
-| Optimize              | [camunda/optimize](https://hub.docker.com/r/camunda/optimize)                                                                     | [Optimize configuration](../../components/optimize/overview/)                                                            |
-| Connectors            | [camunda/connectors](https://hub.docker.com/r/camunda/connectors)                                                                 | [Connectors configuration](../../components/connectors/overview/)                                                        |
-| Connectors Bundle     | [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)                                                   | [Connectors configuration](../../components/connectors/overview/)                                                        |
-| Camunda Hub           | [camunda/hub](https://hub.docker.com/r/camunda/hub)<br/>[camunda/hub-websockets](https://hub.docker.com/r/camunda/hub-websockets) | [Camunda Hub configuration](../../components/hub/configuration/properties.md)                                            |
+| Component             | Docker image                                                                                                                      | Configuration docs                                                                                                         |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster | [camunda/camunda](https://hub.docker.com/r/camunda/camunda)                                                                       | [Environment variables](../../components/orchestration-cluster/overview.md)                                                |
+| Management Identity   | [camunda/identity](https://hub.docker.com/r/camunda/identity)                                                                     | [Management Identity configuration](../../components/management-identity/configuration/identity-configuration-overview.md) |
+| Optimize              | [camunda/optimize](https://hub.docker.com/r/camunda/optimize)                                                                     | [Optimize configuration](../../components/optimize/overview.md)                                                            |
+| Connectors            | [camunda/connectors](https://hub.docker.com/r/camunda/connectors)                                                                 | [Connectors configuration](../../components/connectors/overview.md)                                                        |
+| Connectors Bundle     | [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)                                                   | [Connectors configuration](../../components/connectors/overview.md)                                                        |
+| Camunda Hub           | [camunda/hub](https://hub.docker.com/r/camunda/hub)<br/>[camunda/hub-websockets](https://hub.docker.com/r/camunda/hub-websockets) | [Camunda Hub configuration](../../components/hub/configuration/properties.md)                                              |

@@ -119,7 +119,7 @@ Whatever had not replicated at the time of the outage can be missing from the pr
 
 </Tabs>
 
-Camunda needs no reconfiguration and no restart, as long as the JDBC URL keeps resolving to the current writer. The reference implementation gets that from the [AWS Advanced JDBC Wrapper](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql). Its `failover` plugin follows the writer on established connections, and on brokers that start after the promotion. This is not general JDBC behavior. With your own database, whether connections re-resolve the writer depends on your driver and endpoint. Confirm it or plan a restart.
+Camunda needs no reconfiguration and no restart, as long as the JDBC URL keeps resolving to the current writer. The reference implementation gets that from the [AWS Advanced JDBC Wrapper](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql--mysql). Its `failover` plugin follows the writer on established connections, and on brokers that start after the promotion. This is not general JDBC behavior. With your own database, whether connections re-resolve the writer depends on your driver and endpoint. Confirm it or plan a restart.
 
 If the writer was not in the lost region, you need no database action.
 

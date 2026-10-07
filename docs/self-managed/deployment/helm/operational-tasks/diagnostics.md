@@ -10,7 +10,7 @@ description: "Get diagnostics and logs from a Helm chart deployment."
 This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, resource details, and Elasticsearch/OpenSearch diagnostics) into a single directory, and outputs it in a `.zip` file to make it easier to share this information with the Camunda Support team.
 
 :::caution Data privacy notice
-Before sharing the generated diagnostics file with Camunda Support, review and remove any sensitive information such as passwords, API keys, personal data, or business-sensitive data from the collected logs, configuration data, and Elasticsearch/OpenSearch data. This includes the collected actuator outputs: the `configprops` endpoint masks credential-like values, but connection URLs, hostnames, and bucket names are not redacted. The Elasticsearch/OpenSearch data can also include index documents that may contain business or personal data — pass the `--skip-es-os` flag to skip exporting Elasticsearch/OpenSearch data entirely.
+Before sharing the generated diagnostics file with Camunda Support, review and remove any sensitive information such as passwords, API keys, personal data, or business-sensitive data from the collected logs, Helm values (`helm-values.yaml`), configuration data, and Elasticsearch/OpenSearch data. This includes the collected actuator outputs: the `configprops` endpoint masks credential-like values, but connection URLs, hostnames, and bucket names are not redacted. The Elasticsearch/OpenSearch data can also include index documents that may contain business or personal data — pass the `--skip-es-os` flag to skip exporting Elasticsearch/OpenSearch data entirely.
 :::
 
 ### What the script collects
@@ -18,11 +18,13 @@ Before sharing the generated diagnostics file with Camunda Support, review and r
 The script outputs the following data from your namespace and creates a zip file containing the following:
 
 - **Pod Information**: Current and previous logs and full pod descriptions.
+- **Java thread dumps**: One `*.jstack` file per Java process, collected from pods that have `java`, `jattach`, and `pgrep` installed.
 - **Cluster Events**: Sorted by time to help identify recent issues.
 - **Storage Details**: PV and PVC descriptions.
 - **Cluster Nodes**: Node descriptions.
 - **Network Resources**: Services, endpoints, and ingresses.
 - **Configuration**: Config map information.
+- **Helm release data**: The Helm version (`helm-version.txt`), the release history (`helm-history.txt`), and the user-supplied values of the release (`helm-values.yaml`). The script collects this data only if the `helm` command is available in the `PATH` and it detects the release name.
 - **Actuator endpoints**: Read-only Zeebe and Spring Boot actuator outputs from Camunda pods (partition status, cluster topology, exporters, flow control, job streams, backup state, Prometheus metrics, and configuration properties).
 - **Elasticsearch/OpenSearch Data** (when an Elasticsearch or OpenSearch pod is deployed in the same namespace):
   - Cluster health, node stats, and allocation details.

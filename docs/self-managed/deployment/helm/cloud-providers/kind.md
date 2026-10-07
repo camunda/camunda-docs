@@ -297,10 +297,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 
 </details>
 
-:::note Using RDBMS instead of Elasticsearch
-If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
-:::
-
 This uses the following Helm values:
 
 <details>
@@ -390,10 +386,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 ```
 
 </details>
-
-:::note Using RDBMS instead of Elasticsearch
-If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
-:::
 
 This uses the following Helm values:
 
@@ -562,10 +554,10 @@ Alternatively, you can clean up manually:
 kind delete cluster --name camunda-platform-local
 
 # (domain mode) Remove hosts entries (requires sudo)
-sudo sed -i '/camunda.example.com/d' /etc/hosts
+sudo sed -i.bak '/camunda.example.com/d' /etc/hosts
 
 # (no-domain mode) Remove Keycloak hosts entry (requires sudo)
-sudo sed -i '/keycloak-service/d' /etc/hosts
+sudo sed -i.bak '/keycloak-service/d' /etc/hosts
 
 # (domain mode) Clean certificates
 rm -rf .certs

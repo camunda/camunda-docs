@@ -40,7 +40,7 @@ This is the default authentication method for all installation options: [Camunda
 
 <Tabs  groupId="option" defaultValue="env">
   <TabItem value="env" label="Environment variables">
-```yaml
+```shell
 CAMUNDA_SECURITY_AUTHENTICATION_METHOD=basic
 ```
   </TabItem>
@@ -51,7 +51,10 @@ camunda.security.authentication.method: basic
   </TabItem>
   <TabItem value="helm" label="Helm values">
 ```yaml
-orchestration.security.authentication.method=basic
+orchestration:
+  security:
+    authentication:
+      method: basic
 ```
   </TabItem>
 </Tabs>
@@ -93,9 +96,9 @@ For more information, see [connect Orchestration Cluster Admin to an external Id
 
 <Tabs groupId="option" defaultValue="env">
   <TabItem value="env" label="Environment variables">
-```yaml
+```shell
 CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
-``` 
+```
   </TabItem>
   <TabItem value="yaml" label="application.yaml" default>
 ```yaml
@@ -104,12 +107,15 @@ camunda.security.authentication.method: oidc
   </TabItem>
   <TabItem value="helm" label="Helm values">
 ```yaml
-orchestration.security.authentication.method=oidc
+orchestration:
+  security:
+    authentication:
+      method: oidc
 ```
   </TabItem>
 </Tabs>
 
-If OIDC authentication is enabled, additional configuration values must be set. See [supported OIDC configuration properties](../../components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration).
+If OIDC authentication is enabled, additional configuration values must be set. See [supported OIDC configuration properties](../../components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
 
 ## Unprotected API mode
 
@@ -129,7 +135,7 @@ If you need to use authorizations for access control, you must protect APIs by d
 
 <Tabs groupId="option" defaultValue="env">
   <TabItem value="env" label="Environment variables">
-```yaml
+```shell
 CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=true
 ```
   </TabItem>
@@ -140,7 +146,10 @@ camunda.security.authentication.unprotected-api: true
   </TabItem>
   <TabItem value="helm" label="Helm values">
 ```yaml
-orchestration.security.authentication.unprotectedApi=true
+orchestration:
+  security:
+    authentication:
+      unprotectedApi: true
 ```
   </TabItem>
 </Tabs>

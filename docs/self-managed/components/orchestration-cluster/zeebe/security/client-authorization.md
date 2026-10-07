@@ -86,7 +86,7 @@ public class AuthorizedClient {
 }
 ```
 
-The client creates an `OAuthCredentialProvider` with the credentials specified through the environment variables and the audience is extracted from the address specified through the `CamundaClientBuilder`.
+The client creates an `OAuthCredentialsProvider` with the credentials specified through the environment variables and the audience is extracted from the address specified through the `CamundaClientBuilder`.
 
 :::note
 Zeebe's Java client will not prevent you from adding credentials to requests while using an insecure connection, but you should be aware that doing so will expose your access token by transmitting it in plaintext.
@@ -105,7 +105,7 @@ Since there are several environment variables that can be used to configure an `
 
 ### Custom Credentials provider
 
-As previously mentioned, the `CredentialProvider`'s purpose is to modify the HTTP headers with an authorization method.
+As previously mentioned, the `CredentialsProvider`'s purpose is to modify the HTTP headers with an authorization method.
 
 The interface consists of an `applyCredentials(CredentialsApplier)` method and a `shouldRetryRequest(StatusCode)` method.
 

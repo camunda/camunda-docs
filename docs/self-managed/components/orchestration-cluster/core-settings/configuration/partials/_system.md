@@ -49,7 +49,7 @@ import TabItem from '@theme/TabItem';
 | Property                                        | Description                                                                                                                                                            | Default value                                  | Overridable per Physical Tenant |
 | :---------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------- | :------------------------------ |
 | `camunda.system.restore.validate-config`        | Controls whether the restore process validates its configuration (and restore setup) before running.                                                                   | `true`                                         | No                              |
-| `camunda.system.restore.ignore-files-in-target` | Controls which files/folders are ignored when the restore app validates that the Zeebe data directory is “empty enough” before restoring. The property is a list type. | `[“lost+found”, “directory-initialized.json”]` | No                              |
+| `camunda.system.restore.ignore-files-in-target` | Controls which files/folders are ignored when the restore app validates that the Zeebe data directory is “empty enough” before restoring. The property is a list type. | `["lost+found", "directory-initialized.json"]` | No                              |
 
 ### `camunda.system.actor.idle`
 
@@ -82,7 +82,7 @@ import TabItem from '@theme/TabItem';
 | Property                                     | Description                                                                                                                                                            | Default value                                  | Overridable per Physical Tenant |
 | :------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------- | :------------------------------ |
 | `CAMUNDA_SYSTEM_RESTORE_VALIDATECONFIG`      | Controls whether the restore process validates its configuration (and restore setup) before running.                                                                   | `true`                                         | No                              |
-| `CAMUNDA_SYSTEM_RESTORE_IGNOREFILESINTARGET` | Controls which files/folders are ignored when the restore app validates that the Zeebe data directory is “empty enough” before restoring. The property is a list type. | `[“lost+found”, “directory-initialized.json”]` | No                              |
+| `CAMUNDA_SYSTEM_RESTORE_IGNOREFILESINTARGET` | Controls which files/folders are ignored when the restore app validates that the Zeebe data directory is “empty enough” before restoring. The property is a list type. | `["lost+found", "directory-initialized.json"]` | No                              |
 
 ### `CAMUNDA_SYSTEM_ACTOR_IDLE`
 

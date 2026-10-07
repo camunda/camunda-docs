@@ -4,9 +4,9 @@ title: Usage metrics
 description: "The orchestration cluster exposes usage metrics under the Actuator `usage-metrics` endpoint, accessible on the management port."
 ---
 
-:::warning Deprecated endpoints
-As of the 8.8 release, the actuator usage metrics endpoints are **deprecated** and will be removed in the 8.10 release.  
-Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended) instead.
+:::warning Removed endpoints
+The actuator usage metrics endpoints (`/actuator/usage-metrics/*`) were deprecated in 8.8 and removed in 8.10.  
+Use the [usage metrics endpoint](#usage-metrics-endpoint-recommended) instead.
 :::
 
 ## Usage metrics endpoint (recommended)
@@ -100,74 +100,3 @@ _Response:_
 - Monitor overall cluster activity by combining process, decision, and task metrics.
 - Track trends over time to better understand resource usage and user engagement.
 - Integrate metrics into dashboards or automation scripts for centralized monitoring and alerting.
-
-## Deprecated usage metrics actuator endpoints
-
-As of 8.8, the following actuator endpoints are **deprecated** and will be removed in the 8.10 release.  
-Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended) instead.
-
-| Endpoint                                     | Description                | Status     |
-| -------------------------------------------- | -------------------------- | ---------- |
-| `/actuator/usage-metrics/process-instances`  | Total process instances    | Deprecated |
-| `/actuator/usage-metrics/decision-instances` | Total decision instances   | Deprecated |
-| `/actuator/usage-metrics/assignees`          | Unique user task assignees | Deprecated |
-
-**All endpoints accept:**
-
-- `startTime` (optional)
-- `endTime` (optional)
-- `tenantId` (optional)
-
-Format: `yyyy-MM-dd'T'HH:mm:ss.SSSZZ` (e.g., `1970-11-14T10:50:26.963-0100`)
-
-The actuator endpoint is exposed on the management port, which defaults to `9600`. The URL must include the Operate context path (`/operate` by default).
-
-### Examples
-
-**Process instances:**
-
-```
-http://<host>:9600/operate/actuator/usage-metrics/process-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
-```
-
-_Response:_
-
-```json
-{
-  "total": 99
-}
-```
-
-**Decision instances:**
-
-```
-http://<host>:9600/operate/actuator/usage-metrics/decision-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
-```
-
-_Response:_
-
-```json
-{
-  "total": 80
-}
-```
-
-**Task assignments:**
-
-```
-http://<host>:9600/operate/actuator/usage-metrics/assignees?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
-```
-
-_Response:_
-
-```json
-{
-  "total": 2
-}
-```
-
-:::warning Breaking change
-Assignees list removed from response.
-:::
-
-This endpoint allows reconciliation of users across multiple cluster components and provides insights into active task participants.
