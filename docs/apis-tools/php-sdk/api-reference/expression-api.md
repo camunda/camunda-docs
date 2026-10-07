@@ -1,14 +1,14 @@
 ---
 id: expression-api
-title: "Expression API"
-sidebar_label: "Expression API"
+title: "Expression Api"
+sidebar_label: "Expression Api"
 sidebar_position: 19
 mdx:
   format: md
 ---
 
-# Expression API
+# Expression Api
 
-`ExpressionApi` — 1 operation. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ExpressionApi::class)`.
+`ExpressionApi` — 1 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ExpressionApi::class)`.
 
 - `evaluateExpression()`
