@@ -1309,9 +1309,7 @@ Operate now shows what an active process instance is waiting for.
 
 Camunda 8.10 adds an opt-in analytics exporter for Self-Managed clusters. It is disabled by default, so you decide whether to enable it. When enabled, it shares product usage data with Camunda to help us prioritize improvements.
 
-<!-- TODO: Replace this link with the docs page once https://github.com/camunda/camunda-docs/pull/9697 is merged. -->
-
-<p class="link-arrow">[Analytics exporter](https://github.com/camunda/camunda/blob/main/zeebe/exporters/analytics-exporter/README.md)</p>
+<!-- TODO: Add a link-arrow to the analytics exporter docs page (/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md) once https://github.com/camunda/camunda-docs/pull/9697 is merged. -->
 
 ### Physical tenants: strong tenant isolation in one Orchestration Cluster
 
