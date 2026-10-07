@@ -795,8 +795,6 @@ In this mode, you:
 
 You can still define new clusters in your configuration, though it's not required. When you do, Camunda Hub automatically registers them with all [available settings](#clusters) and full management functionality in the interface.
 
-Don't enable the Hub ping on a cluster that is also defined in your configuration. The ping registers the cluster under the broker's generated cluster ID, which doesn't match the ID in your configuration, so Camunda Hub lists the cluster twice. The second entry has no apps and shows the status **Unknown**. To avoid this, set `camunda.hub.ping.enabled: false` on clusters defined in your configuration.
-
 :::note
 With dynamic cluster management enabled, don't call the create or update cluster registration endpoint manually—only let your cluster configuration do it. The endpoint doesn't yet support creating clusters with all configurable settings.
 :::
