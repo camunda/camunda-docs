@@ -1,15 +1,17 @@
 ---
 id: projects
 title: Projects
-description: A project contains a collection of process resources, such as an entry point process, supporting processes, DMN decisions, or forms, that often represent an end-to-end use case.
-keywords: ["process application", "project"]
+description: A project is the unit you build, test, and deploy together to form a Camunda solution. It's an entity in a Camunda Hub workspace, and a folder with a camunda.json file in local development.
+keywords: ["process application", "project", "camunda project"]
 page_rank: 90
 ---
 
 import ProjectDiagram from './assets/projects/diagram-project.png'
 import ExampleProjectImg from './img/consumer-loan-approval-project-example.png'
 
-A project contains a collection of process resources, such as an entry point process, supporting processes, DMN decisions, or forms, that often represent an end-to-end use case.
+A project, also called a Camunda project, is the unit you build, test, and deploy together to form a Camunda solution. It contains a collection of process resources, such as an entry point process, supporting processes, DMN decisions, or forms, that often represent an end-to-end use case.
+
+A project is the same concept in Camunda Hub and in local development. In Camunda Hub, it's an [entity within a workspace](#projects-in-camunda-hub). In local development, it's a [folder with a `camunda.json` file](#projects-in-local-development). With [Git sync](../hub/workspace/manage-projects/git-sync.md), you can keep both representations of the project in sync.
 
 <img src={ProjectDiagram} alt="Project" />
 
@@ -23,25 +25,9 @@ A consumer loan approval project might bundle:
 
 <img src={ExampleProjectImg} alt="Example consumer loan approval project" />
 
-## Using projects
-
-You can use projects in both Camunda Hub and Desktop Modeler. However, there are some differences.
-
 ## Projects in Camunda Hub
 
-In Camunda Hub, [workspaces](./workspaces.md) contain projects, and projects contain files. Every file must be stored within a project:
-
-```
-Camunda Hub
-└─ Workspace
-    ├─ Project A
-    │   ├─ BPMN
-    │   └─ DMN
-    └─ Project B
-        ├─ BPMN
-        ├─ Folder
-        └─ Form
-```
+In Camunda Hub, a [project](../hub/workspace/manage-projects/manage-projects.md) is an entity within a [workspace](./workspaces.md): workspaces contain projects, and projects contain files.
 
 You can treat files in a project as a single bundle or as independent resources. For example, you can:
 
@@ -50,31 +36,23 @@ You can treat files in a project as a single bundle or as independent resources.
 - [Deploy an entire project](../hub/workspace/manage-projects/deploy-project.md) to an [environment](./environments.md) assigned to its workspace.
 - [Deploy individual project resources](../hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process).
 
-## Process applications in Desktop Modeler
+## Projects in local development
 
-The equivalent of a Camunda Hub project in Desktop Modeler is a process application. Storing process resource files in a process application is optional:
+In local development with [Desktop Modeler](/components/modeler/desktop-modeler/projects.md) and [`c8ctl`](/apis-tools/c8ctl/getting-started.md), a project is a folder with a [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file (an empty `{}` is enough).
 
-```
-Desktop Modeler
-├─ BPMN
-├─ DMN
-└─ Process Application
-    ├─ .process-application
-    ├─ BPMN
-    ├─ Folder
-    └─ Form
-```
+A project works without Camunda Hub. When you deploy a directory inside a project with [`c8 deploy`](/apis-tools/c8ctl/development-workflows.md#deploy-a-directory), `c8ctl` deploys the whole project. Unlike in Camunda Hub, Desktop Modeler always deploys all project resources together.
 
-A process application is recognized by the existence of a `.process-application` file. If you're using both [Camunda Hub and Desktop Modeler](/components/modeler/using-hub-and-desktop-modeler-together.md), your process application must contain this manifest file, even though it's ignored by Camunda Hub.
+### Migrate from process applications
 
-Unlike in Camunda Hub, all process application resources are always deployed together in Desktop Modeler.
+Camunda projects supersede process applications, but Desktop Modeler and `c8ctl` continue to support the `.process-application` marker file. To migrate, rename `.process-application` in your project root to `camunda.json`. If a folder contains both files, `camunda.json` takes precedence. For `c8 watch`, the `--project` flag replaces `--process-application` and `--pa`, which remain as deprecated aliases.
 
 ## Next steps
 
-Read more about how to use projects in Camunda Hub and Desktop Modeler:
+Read more about how to use projects:
 
 - [Workspaces](./workspaces.md)
 - [Environments](./environments.md)
-- [Using Camunda Hub and Desktop Modeler together](/components/modeler/using-hub-and-desktop-modeler-together.md#projects-and-process-applications)
+- [Using Camunda Hub and Desktop Modeler together](/components/modeler/using-hub-and-desktop-modeler-together.md#camunda-projects)
 - [Projects in Camunda Hub](/components/hub/workspace/manage-projects/manage-projects.md)
-- [Process applications in Desktop Modeler](/components/modeler/desktop-modeler/process-applications.md)
+- [Projects in Desktop Modeler](/components/modeler/desktop-modeler/projects.md)
+- [`camunda.json` project descriptor reference](/apis-tools/c8ctl/camunda-json.md)
