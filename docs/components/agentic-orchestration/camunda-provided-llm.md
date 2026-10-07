@@ -135,11 +135,11 @@ Review how Camunda-provided LLM processes your data, how OpenRouter is involved,
 
 ### How Camunda-provided LLM works
 
-The Camunda-provided LLM is an optional feature. When enabled, you configure which process variables, prompts, and tool outputs the agent may use; only the data you choose to make available to the agent is sent for processing. You control this through your process configuration (for example, input mappings).
+The Camunda-provided LLM is an optional feature. When enabled, you configure which process variables, prompts, and tool outputs the agent may use. Only the data you choose to make available to the agent is sent for processing. You control this through your process configuration, such as input mappings.
 
 ### How OpenRouter is used
 
-OpenRouter, Inc. is a routing service that gives Camunda access to a range of third-party AI models through a single integration. OpenRouter does not host or train models itself; it forwards each request to the AI model provider selected to serve it. Camunda restricts this feature to providers that enforce zero data retention (ZDR), meaning neither OpenRouter nor the underlying model provider retains your data after the request is processed, and none of your data is used to train their models.
+OpenRouter, Inc. is a routing service that gives Camunda access to a range of third-party AI models through a single integration. OpenRouter does not host or train models itself. Instead, it forwards each request to the selected AI model provider for processing. Camunda restricts this feature to providers that enforce zero data retention (ZDR). This means that neither OpenRouter nor the underlying model provider retains your data after processing the request, and your data is not used to train their models.
 
 ### OpenRouter as a sub-processor
 
