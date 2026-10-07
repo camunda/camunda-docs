@@ -297,8 +297,6 @@ In this release, each project runs locally with its own private memory. Producti
 
 **Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your environments. You design once, and manage everything from one place.
 
-<!-- Overview diagram -->
-
 In Hub, there is a clear separation of responsibilities:
 
 - **Center of excellence teams** manage organizational infrastructure, member access, and workspaces, so delivery teams have the environments and tools they need to ship process solutions at scale.
