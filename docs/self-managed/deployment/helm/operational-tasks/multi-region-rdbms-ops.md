@@ -24,17 +24,17 @@ Develop, test, and rehearse these procedures in a non-production environment bef
 
 In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe quorum. Processing stops, and the failover procedure exists to restore it. That procedure removes the lost brokers, disables the exporter to the lost region, and later restores secondary storage from a snapshot.
 
-With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas. Zeebe keeps processing, and you need no Zeebe action to restore service. The [dry run](#1-confirm-the-quorum-is-intact) confirms this before you act. The failover procedure mostly reports. It only acts on the database writer, and only when the writer was in the lost region.
+With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas. Zeebe keeps processing after a short leader re-election for affected partitions, and you need no Zeebe action to restore service. Throughput can drop while secondary storage recovers. See [processing during secondary-storage recovery](/self-managed/concepts/multi-region/multi-region-rdbms-region-loss.md#processing-during-secondary-storage-recovery). The [dry run](#1-confirm-the-quorum-is-intact) confirms this before you act. The failover procedure mostly reports. It only acts on the database writer, and only when the writer was in the lost region.
 
 <RegionLoss role="img" title="Side-by-side timelines of the same zone loss. A triangle marks an incident, a play icon an operator action, a check a healthy state, and a dash a step that does not exist. In a Dual-Region cluster with Elasticsearch, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone Multi-Region RDBMS cluster, quorum holds and processing continues. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
 
-| Step                             | Dual-region                             | Multi-Region RDBMS                              |
-| :------------------------------- | :-------------------------------------- | :---------------------------------------------- |
-| Restore processing               | Force-remove the lost brokers           | Nothing, processing never stopped               |
-| Secondary storage after failover | Disable the exporter to the lost region | Nothing, there is one exporter and one database |
-| Promote the database             | n/a                                     | Only if the writer was in the lost region       |
-| Remove the lost zone             | Same step as restoring processing       | Recommended, not needed for quorum              |
-| Failback                         | Snapshot and restore secondary storage  | Redeploy the region                             |
+| Step                             | Dual-region                             | Multi-Region RDBMS                                       |
+| :------------------------------- | :-------------------------------------- | :------------------------------------------------------- |
+| Restore processing               | Force-remove the lost brokers           | Nothing, processing continues after a leader re-election |
+| Secondary storage after failover | Disable the exporter to the lost region | Nothing, there is one exporter and one database          |
+| Promote the database             | n/a                                     | Only if the writer was in the lost region                |
+| Remove the lost zone             | Same step as restoring processing       | Recommended, not needed for quorum                       |
+| Failback                         | Snapshot and restore secondary storage  | Redeploy the region                                      |
 
 The [dual-region procedure](./dual-region-ops.md) takes 10 operator steps: two to fail over and eight to fail back. The diagram above counts three operator actions here: promote the writer if needed, remove the lost zone, and redeploy the region at failback. The runbook below adds confirmations around them, for five steps in total.
 
