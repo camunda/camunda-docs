@@ -6,7 +6,7 @@ description: "After creating a cluster, specify a region for that cluster. Read 
 
 import RegionMapImg from './img/diagram-regions-map.png';
 
-When you [create a cluster](/components/hub/organization/manage-clusters/create-cluster.md) in Camunda 8 SaaS, you must specify a region for that cluster.
+When you [create a cluster](/components/saas/clusters/create-cluster.md) in Camunda 8 SaaS, you must specify a region for that cluster.
 
 The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also [reach out to Camunda](https://camunda.com/contact-us/) to discuss custom regions.
 

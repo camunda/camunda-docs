@@ -133,7 +133,7 @@ The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifica
 
 The Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with Camunda 8.8 if you are running:
 
-- Either the [Zeebe Java Client &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/java-client/index.md) OR the [Spring Zeebe SDK &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc),
+- Either the Zeebe Java Client &lt;=8.7.15 OR the Spring Zeebe SDK &lt;=8.7.15,
 - AND you opted into preferring REST over gRPC (setting `preferRestOverGrpc=true` explicitly on client setup).
 
 In this scenario, you will be affected by the following issue [Camunda 8.7 REST client fails on unknown response properties on job activate (#39675)](https://github.com/camunda/camunda/issues/39675).
@@ -168,7 +168,7 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 
 #### Webhook alerts JSON format
 
-In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/hub/organization/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
+In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/saas/clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
 
 In 8.8.9, the `processVersion` field reverts to returning an integer value representing the process version only. A new `processVersionTag` field is introduced to include the process version tag when available.
 
@@ -255,10 +255,6 @@ corresponding `application/vnd.camunda.api.keys.number+json` content type header
 
 - To update to Camunda 8.8, API objects using `integer (int64)` keys must be updated to use `string` keys and the
   `application/json` header.
-
-:::info
-To learn more about the key attribute type change, see [8.7 API key attributes overview](/versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes).
-:::
 
 </div>
 </div>

@@ -25,7 +25,7 @@ Before you begin, ensure you have:
 - An OIDC-compliant provider already deployed and accessible.
 - Administrative access to create and configure OIDC clients in your provider.
 - Access to your provider's discovery document to obtain endpoint URLs.
-- A Kubernetes cluster with the Helm CLI v4 installed.
+- A Kubernetes cluster with a [supported Helm CLI version](/reference/supported-environments.md#clients) installed.
 - kubectl configured to access your cluster.
 - When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
@@ -353,7 +353,7 @@ orchestration:
 :::note Username display in Web Modeler (Helm)
 In Helm deployments, the default OIDC username claim is `preferred_username`, which often maps to an email address.
 
-If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
+If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
 For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak).
 :::
@@ -422,7 +422,7 @@ optimize:
 Web Modeler requires two OIDC clients: one for the UI (public) and one for the API (confidential).
 
 :::note
-If your IdP provides user-friendly names in the `name` claim, and you want Web Modeler to use that claim, configure the Web Modeler `restapi` environment variable `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
+If your IdP provides user-friendly names in the `name` claim, and you want Web Modeler to use that claim, configure the Web Modeler `restapi` environment variable `CAMUNDA_IDENTITY_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
 :::
 
 ```yaml
@@ -594,7 +594,7 @@ identity:
 optimize:
   enabled: true
 
-# Console and Web Modeler (Camunda Hub)
+# Camunda Hub (Console and Web Modeler)
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
   restapi:

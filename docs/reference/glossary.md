@@ -155,7 +155,7 @@ BTP stands for [SAP](#sap) Business Technology Platform, which is a cloud-based 
 
 Camunda can integrate with SAP BTP to orchestrate business processes across SAP and non-SAP systems. By doing so, it enables automation and visibility of workflows that span multiple services and applications hosted on BTP, enhancing agility and process control in enterprise environments.
 
-- [BTP plugin](/components/camunda-integrations/sap/btp-plugin.md)
+- [SAP integration](/components/camunda-integrations/sap/camunda-sap-integration.md)
 
 ## C
 
@@ -168,9 +168,9 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 | [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                            |
 | [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                            |
 | [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                 |
-| [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                            |
+| [Camunda Hub](/components/hub/index.md)              | The design and management platform for Camunda. Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub. Part of the [management plane](#management-plane).                                                                                                                                         |
 | Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeling interface](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
-| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, these components share the same authentication implementation as the Orchestration Cluster.                                                                                                                                                             |
+| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties.                                                                                                                        |
 
 ### Camunda AI agent
 
@@ -200,7 +200,12 @@ See [Zeebe Client](#zeebe-client).
 
 ### Cluster
 
-See [Zeebe cluster](#zeebe-cluster).
+A cluster is the infrastructure that runs Camunda 8. In Camunda Hub, a cluster is an administrative unit that organization admins create, size, update, and back up. Teams deploy to an [environment](#environment) hosted on the cluster, not to the cluster itself.
+
+- [Clusters](/components/concepts/clusters.md)
+- [Environments](/components/concepts/environments.md)
+- [Orchestration Cluster](#orchestration-cluster)
+- [Zeebe cluster](#zeebe-cluster)
 
 ### Cluster variable
 
@@ -275,11 +280,11 @@ The shape of a [credential](#credential), such as AWS Credential, REST Authentic
 
 ### CSAP CLI
 
-CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector and OData connector) for deployment.
 
-Camunda uses `csap` to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
+Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations straightforward and repeatable in environments like Camunda SaaS.
 
-- [CSAP CLI](/components/camunda-integrations/sap/csap-cli.md)
+- [CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)
 
 ## D
 
@@ -320,6 +325,14 @@ Use an element template to extend [Modeler](/components/modeler/about-modeler.md
 A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
 
 - [Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)
+
+### Environment
+
+An environment is a named deployment target where a team runs [processes](#process) in [Camunda Hub](/components/hub/index.md). It's the operational unit for deployment, while the [cluster](#cluster) is the administrative unit. An environment is backed by a [Physical Tenant](#physical-tenant) on Self-Managed 8.10 and later, or by the whole cluster on SaaS and on earlier versions. Organization admins assign environments to workspaces, and every project in a workspace can deploy to the environments assigned to it.
+
+- [Environments](/components/concepts/environments.md)
+- [Cluster](#cluster)
+- [Physical Tenant](#physical-tenant)
 
 ### Event
 
@@ -365,7 +378,7 @@ FEEL (Friendly Enough Expression Language) expressions are the unit of computati
 
 ### File version {#version-file}
 
-A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from deployed process definition versions in the Orchestration Cluster.
+A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from [project snapshots](#snapshot-project).
 
 - [Versions](/components/hub/workspace/modeler/modeling/versions.md)
 
@@ -548,7 +561,15 @@ Camunda groups an agent's conversation history by loop iteration in Operate, mak
 
 ### Management Identity
 
-The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, these components share the same authentication implementation as the Orchestration Cluster, and Management Identity remains responsible for managing users, groups, roles, and permissions. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
+The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties. Management Identity remains responsible for managing users, groups, roles, and permissions for both. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
+
+### Management plane
+
+The management plane is the part of a Camunda 8 deployment used to design and manage processes and clusters. It consists of [Camunda Hub](/components/hub/index.md) and [Management Identity](#management-identity), and serves one or more Orchestration Clusters.
+
+In Self-Managed Helm deployments, the management plane is the release with `global.topology.mode` set to `hub`.
+
+- [Deployment topology](/self-managed/reference-architecture/deployment-topology.md)
 
 ### Manual task
 
@@ -590,11 +611,28 @@ Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with e
 
 ## P
 
+### Parent process instance
+
+The process instance that contains the [call activity](/components/modeler/bpmn/call-activities/call-activities.md) that created a [child process instance](#child-process-instance).
+
+A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
+
+See also: [Child process instance](#child-process-instance), [Root process instance](#root-process-instance)
+
 ### Partition
 
 A partition represents a logical grouping of data in a [Zeebe Broker](#zeebe-broker). This data includes [process variables](#process-variable) stored in RocksDB, [commands](#command), and [events](#event) generated by [Zeebe](#zeebe) stored in the [log](#log). The number of partitions is defined by configuration.
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md)
+
+### Physical Tenant
+
+An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+- [Logical Tenant](#logical-tenant)
+- [Environment](#environment)
+- [Multi-tenancy](#multi-tenancy)
 
 ### Polling connector
 
@@ -648,14 +686,6 @@ In runtime discussions, [_executing a process_](/components/concepts/processes.m
 
 A process can call another process via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), creating a hierarchy of related process instances: a [parent process instance](#parent-process-instance) that contains the call activity, the [child process instance](#child-process-instance) it creates, and the [root process instance](#root-process-instance) at the top of the hierarchy.
 
-### Parent process instance
-
-The process instance that contains the [call activity](/components/modeler/bpmn/call-activities/call-activities.md) that created a [child process instance](#child-process-instance).
-
-A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
-
-See also: [Child process instance](#child-process-instance), [Root process instance](#root-process-instance)
-
 ### Process instance tag
 
 An optional, immutable, lightweight label attached when a process instance is created. Tags provide fast, structured metadata for routing, correlation, prioritization, and analytics segmentation without inspecting large variable payloads.
@@ -678,23 +708,28 @@ A process variable represents the execution state (i.e data) of a process instan
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
 
-### Physical Tenant
+### ProcessOS
 
-An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
+An AI-powered intelligence layer on top of Camunda's [agentic orchestration](#agentic-orchestration) platform. ProcessOS discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
-- [Logical Tenant](#logical-tenant)
-- [Multi-tenancy](#multi-tenancy)
+- [ProcessOS](/components/process-os-harness/overview.md)
+
+### ProcessOS Harness
+
+The governance process of [ProcessOS](#processos). ProcessOS Harness is delivered as a set of scripts, plugins, and skills that run on Camunda and drive an AI coding agent, such as Claude Code or GitHub Copilot CLI, through the discovery, transformation, and implementation phases of a project. It asks for human review at defined gates and commits every artifact to Git.
+
+- [ProcessOS Harness](/components/process-os-harness/overview.md)
 
 ### Project
 
 A collection of related files in a Camunda Hub workspace you can work on, version, and deploy as a single bundle or as individual files. A workspace may contain multiple projects.
 
+- [Projects](/components/concepts/projects.md)
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
 
 ### Project snapshot {#snapshot-project}
 
-A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from [individual file versions](#version-file).
 
 - [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
 
@@ -791,7 +826,7 @@ A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#o
 
 A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components.
 
-- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
+- [Connector secrets](/components/saas/clusters/manage-secrets.md)
 
 ### SAP
 
@@ -977,8 +1012,9 @@ See [process variable](#process-variable).
 
 ### Workspace
 
-A collaboration environment within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and clusters, so all related work happens in one shared space.
+A collaboration space within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and [environments](#environment), so all related work happens in one shared space.
 
+- [Workspaces](/components/concepts/workspaces.md)
 - [Workspace](/components/hub/workspace/index.md)
 
 ## Z

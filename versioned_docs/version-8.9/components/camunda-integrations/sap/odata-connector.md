@@ -54,21 +54,21 @@ Use `BasicAuthentication` or any `OAuth2`-based mechanism.
 
 A descriptor file is required to deploy the SAP OData connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application requiring deployment.
 
-### Using `csap`
+### Using the CSAP c8ctl plugin
 
-Use CSAP CLI in either:
+Use the CSAP c8ctl plugin in either:
 
 - **Interactive mode**: Follow the on-screen prompts.
-- **Non-interactive mode**: Provide all required parameters directly to the CLI.
+- **Non-interactive mode**: Provide all required parameters directly to the plugin.
 
-Configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. Using `csap` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
+Configure the OData connector via the [CSAP c8ctl plugin](./csap-cli.md) (recommended) or manually. Using `c8ctl csap-setup` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
 
-Use the command `csap setup` to guide you interactively.
+Use the command `c8ctl csap-setup` to guide you interactively.
 
 - Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
-csap setup --for odata \
+c8ctl csap-setup --for odata \
 	--camunda 8.7 \
 	--deployment SaaS
 ```

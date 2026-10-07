@@ -16,11 +16,11 @@ Camunda 8 Self-Managed has multiple web applications and gRPC services. You can 
 
 ## Prerequisites
 
-- An Ingress controller deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `global.ingress.className` (and `orchestration.ingress.grpc.className` for the Zeebe gRPC Ingress).
-- The annotations your controller needs. Starting with Camunda 8.10 (chart 15.x), the chart's default ingress-nginx annotation set comes from a compatibility shim that you can turn off with `global.compatibility.nginx.renderAnnotations: false`; see [Ingress-nginx annotation defaults deprecated in the Helm chart](/reference/announcements-release-notes/8100/8100-announcements.md#ingress-annotation-defaults-deprecated).
+- An Ingress controller deployed in advance. The examples below use the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `global.ingress.className` (and `orchestration.ingress.grpc.className` for the Zeebe gRPC Ingress).
+- The annotations your controller needs. Starting with Camunda 8.10 (chart 15.x), the chart's default Ingress-nginx annotation set comes from a compatibility shim that you can turn off with `global.compatibility.nginx.renderAnnotations: false`; see [Ingress-nginx annotation defaults deprecated in the Helm chart](/reference/announcements-release-notes/8100/8100-announcements.md#ingress-annotation-defaults-deprecated).
 
 :::note
-[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures deploy [Contour](https://projectcontour.io/) instead. The examples on this page still use ingress-nginx annotations; with another controller, translate them to its equivalents. See [Kubernetes reference architecture](/self-managed/reference-architecture/kubernetes.md#load-balancer) for the gRPC annotation each controller expects.
+[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures deploy [Contour](https://projectcontour.io/) instead. The examples on this page still use Ingress-nginx annotations. With another controller, translate them to its equivalents. See [configure the gRPC upstream](#configure-the-grpc-upstream) for the gRPC annotation each controller expects.
 :::
 
 - TLS configuration is not included in the examples because it varies between different workflows. Configure TLS in one of these ways:
@@ -57,10 +57,10 @@ For Operate, Tasklist, Optimize, Modeler, Connectors, and Console, the Ingress p
 # IMPORTANT: Make sure to change "camunda.example.com" to your domain.
 
 global:
+  host: "camunda.example.com"
   ingress:
     enabled: true
     className: nginx
-    host: "camunda.example.com"
   identity:
     auth:
       publicIssuerUrl: "https://camunda.example.com/auth/realms/camunda-platform"
@@ -115,6 +115,102 @@ After deployment, access the Camunda 8 components at:
 :::note
 This configuration shows only the Ingress-related values for `webModeler`and `Console`. For full setup, see [Enable additional components](/self-managed/deployment/helm/configure/enable-additional-components.md).
 :::
+
+### Configure custom public ports
+
+Set `global.ingress.publicPorts` when clients reach your Ingress controller on ports other than `80` and `443`. For example, a local cluster that can't bind the standard ports might map the Ingress controller to host ports `8080` and `8443`.
+
+| Parameter                          | Type    | Default | Description                                              |
+| ---------------------------------- | ------- | ------- | -------------------------------------------------------- |
+| `global.ingress.publicPorts.http`  | integer | `80`    | The public port for Ingress endpoints with TLS disabled. |
+| `global.ingress.publicPorts.https` | integer | `443`   | The public port for Ingress endpoints with TLS enabled.  |
+
+Both values accept integers from 1 to 65535. The chart omits port `80` from HTTP URLs and port `443` from HTTPS URLs.
+
+The TLS setting for each Ingress determines which public port the chart uses. For web applications, the chart uses `global.ingress.tls.enabled`. For the Zeebe gRPC Ingress, it uses `orchestration.ingress.grpc.tls.enabled`, even when `global.ingress.enabled` is `false`.
+
+Setting a public port doesn't enable TLS.
+
+The chart adds the public port to the URLs it derives from `global.host` and the Zeebe gRPC Ingress host:
+
+- Links in the installation notes and release information.
+- The Identity URL and its login callback, if `identity.fullURL` is empty.
+- The WebSocket port browsers use to connect to Web Modeler, if Web Modeler has a context path.
+
+The chart doesn't rewrite URLs you configure explicitly. Include the port in `identity.fullURL`, `global.identity.auth.publicIssuerUrl`, and each `global.identity.auth.<component>.redirectUrl`.
+
+Public ports change only the generated URLs. They don't configure Ingress controller listeners, Kubernetes Services, or host port mappings. Configure your Ingress controller and cluster to expose the required ports.
+
+The Gateway API integration doesn't use these values. To change the Gateway listener ports, see [custom listener ports](./gateway-api-setup.md#custom-listener-ports).
+
+The following example configures the generated web application URLs to use HTTPS on public port `8443`:
+
+```yaml
+global:
+  host: "camunda.example.com"
+  ingress:
+    enabled: true
+    className: nginx
+    tls:
+      enabled: true
+      secretName: camunda-platform
+    publicPorts:
+      https: 8443
+  identity:
+    auth:
+      publicIssuerUrl: "https://camunda.example.com:8443/auth/realms/camunda-platform"
+      optimize:
+        redirectUrl: "https://camunda.example.com:8443/optimize"
+      webModeler:
+        redirectUrl: "https://camunda.example.com:8443/modeler"
+      console:
+        redirectUrl: "https://camunda.example.com:8443/console"
+
+identity:
+  contextPath: "/identity"
+  fullURL: "https://camunda.example.com:8443/identity"
+```
+
+## Route traffic with your own resources
+
+Set `global.ingress.external: true` when a service mesh or routing resources you manage send traffic to Camunda instead of the chart's Ingress objects.
+
+```yaml
+global:
+  host: "camunda.example.com"
+  ingress:
+    enabled: true
+    external: true
+
+orchestration:
+  ingress:
+    grpc:
+      enabled: true
+      external: true
+      host: "zeebe.camunda.example.com"
+```
+
+With `global.ingress.external: true`, the chart doesn't render any web application Ingress object. The setting has no effect if `global.ingress.enabled` is `false`.
+
+The chart still derives external URLs from `global.host`, the component context paths, `global.ingress.protocol`, and `global.ingress.publicPorts`. The chart uses these URLs for:
+
+- Links in the installation notes and release information.
+- The Identity URL and its login callback, if `identity.fullURL` is empty.
+- The WebSocket host, port, and path browsers use to connect to Web Modeler, if Web Modeler has a context path.
+
+Configure your routing resources to serve each component on these URLs. If clients reach Camunda over HTTPS, set `global.ingress.protocol: https`.
+
+`global.ingress.external` doesn't affect the Zeebe gRPC Ingress. To skip the gRPC Ingress, set `orchestration.ingress.grpc.external: true`. The chart still derives the gRPC URL from `orchestration.ingress.grpc.host`.
+
+If a service mesh or your own routing resources send traffic to Camunda, use `global.ingress.external: true` instead of `global.ingress.enabled: false`:
+
+| Values                                                             | Chart renders Ingress objects | URL source           | Use when                                                                                 |
+| ------------------------------------------------------------------ | ----------------------------- | -------------------- | ---------------------------------------------------------------------------------------- |
+| `global.ingress.enabled: true`                                     | Yes                           | `global.host`        | The chart's Ingress objects route traffic.                                               |
+| `global.ingress.enabled: true` and `global.ingress.external: true` | No                            | `global.host`        | A service mesh or your own routing resources route traffic.                              |
+| `global.ingress.enabled: false`                                    | No                            | `localhost` defaults | You access components with [port forwarding](./accessing-components-without-ingress.md). |
+
+If you manage Gateway API resources yourself, use `global.gateway.external` instead. See [manage all resources yourself](./gateway-api-setup.md#scenario-d-manage-all-resources-yourself).
 
 ## Separated Ingress migration
 
@@ -172,7 +268,7 @@ Ingress resources require the cluster to have a running [Ingress Controller](htt
 
 ### Local setup example
 
-An Ingress controller is also required for local Camunda 8 installation. The following example shows an Ingress controller configuration using the [ingress-nginx controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
+An Ingress controller is also required for local Camunda 8 installation. The following example shows an Ingress controller configuration using the [Ingress-nginx controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
 
 ```yaml
 # ingress_nginx_values.yml
@@ -188,7 +284,7 @@ controller:
     enabled: false
 ```
 
-Install the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) to your local cluster:
+Install the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) to your local cluster:
 
 ```shell
 helm install -f ingress_nginx_values.yml \
@@ -198,6 +294,77 @@ helm install -f ingress_nginx_values.yml \
     --namespace ingress-nginx \
     --create-namespace
 ```
+
+If your local cluster exposes the Ingress controller on ports other than `80` and `443`, set the ports as described in [configure custom public ports](#configure-custom-public-ports).
+
+### Configure the gRPC upstream
+
+Configure your Ingress controller to send HTTP/2 to the Orchestration Cluster, because the Zeebe Gateway serves gRPC. Each controller declares the gRPC upstream differently, and not on the same object:
+
+| Ingress controller | Annotation                                           | Object                                    |
+| ------------------ | ---------------------------------------------------- | ----------------------------------------- |
+| Contour            | `projectcontour.io/upstream-protocol.h2c: "26500"`   | Orchestration Cluster `Service`           |
+| Ingress-nginx      | `nginx.ingress.kubernetes.io/backend-protocol: GRPC` | Zeebe `Ingress` (added by the Helm chart) |
+
+When the upstream itself uses TLS, use `projectcontour.io/upstream-protocol.h2` with Contour, and `nginx.ingress.kubernetes.io/backend-protocol: GRPCS` with Ingress-nginx. For other controllers, check their documentation for the equivalent.
+
+With Contour, set the annotation on the Orchestration Cluster service:
+
+```yaml
+orchestration:
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: "26500"
+```
+
+### Use an AWS Application Load Balancer
+
+An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with a certificate from AWS Certificate Manager (ACM). For the limits, see the [ALB known limitations](/self-managed/reference-architecture/kubernetes.md#application-load-balancer-alb).
+
+1. Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
+1. Set up a [certificate in AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html).
+1. Set the `alb` class on every Ingress object the chart renders. The web application Ingress objects read `global.ingress`, and the Zeebe gRPC Ingress reads `orchestration.ingress.grpc`.
+1. Set `alb.ingress.kubernetes.io/backend-protocol-version: GRPC` only on the Zeebe gRPC Ingress, as in the [AWS gRPC example](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md). On a web application Ingress, this annotation makes the ALB target groups use gRPC and breaks the HTTP applications.
+1. Add the values to your `values.yaml` file:
+
+   ```yaml
+   global:
+     compatibility:
+       nginx:
+         # Stop the chart from adding its default Ingress-nginx annotations.
+         renderAnnotations: false
+     ingress:
+       className: alb
+       # TLS terminates at the ALB. An empty secretName lists the hosts without a Secret.
+       tls:
+         enabled: true
+         secretName: ""
+       annotations:
+         alb.ingress.kubernetes.io/ssl-redirect: "443"
+         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+         alb.ingress.kubernetes.io/scheme: internet-facing
+         alb.ingress.kubernetes.io/target-type: ip
+
+   orchestration:
+     ingress:
+       grpc:
+         className: alb
+         tls:
+           enabled: true
+           secretName: ""
+         annotations:
+           alb.ingress.kubernetes.io/ssl-redirect: "443"
+           alb.ingress.kubernetes.io/backend-protocol-version: GRPC
+           alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+           alb.ingress.kubernetes.io/scheme: internet-facing
+           alb.ingress.kubernetes.io/target-type: ip
+   ```
+
+The ALB terminates TLS with the ACM certificate, so you don't need a TLS Secret. With `tls.enabled: true` and an empty `secretName`, the chart lists each host under the Ingress [`tls` field](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) without a Secret. The AWS Load Balancer Controller uses these hosts to find the matching ACM certificate. The chart also uses `https` in the URLs it generates, for example in the release information.
+
+### Use the GKE Ingress
+
+With the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need `cloud.google.com/app-protocols` annotations on the Zeebe Gateway service. For details, see the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
 
 ## Troubleshooting
 

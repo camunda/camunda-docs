@@ -84,9 +84,19 @@ To provision new tenants and understand lifecycle behavior in 8.10, including ro
 
 Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
 
+To size broker memory, secondary storage, and noisy-neighbor protection as you add tenants, see [size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md).
+
 For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
+
+## Camunda Spring Boot Starter applications with multiple clients
+
+When you configure multiple clients in a [Camunda Spring Boot Starter application](/apis-tools/camunda-spring-boot-starter/getting-started.md), the starter registers every `@JobWorker` against all configured clients and deploys every `@Deployment` resource to all configured clients. Workers can therefore poll and process jobs across multiple Physical Tenants, and the same BPMN resources can be deployed to each tenant. See [Physical Tenant behavior for job workers](/apis-tools/camunda-spring-boot-starter/configuration.md#physical-tenant-fan-out-for-multi-client-applications) and [deployment behavior for multi-client applications](/apis-tools/camunda-spring-boot-starter/configuration.md#deploy-resources-on-start-up).
+
+## Optimize deployment
+
+Deploy Optimize separately for each Physical Tenant, as its own release, and point each instance at that tenant's exported records. For how to deploy Optimize per Physical Tenant and share one Management Identity across them, see [Optimize and Physical Tenants](./optimize.md).
 
 ## What is not isolated
 
@@ -117,9 +127,9 @@ The `/v2/status` endpoint is scoped to the default Physical Tenant. Use `/cluste
 
 When configuring Kubernetes readiness probes, point the probe at `/actuator/health/readiness` for node-level readiness. To check whether a specific Physical Tenant can accept work independently of the node probe, poll `/physical-tenants/{id}/v2/topology` from your own health-check logic.
 
-For Elasticsearch and OpenSearch deployments, the secondary-storage readiness check uses schema-initialization state. The check is `UP` while at least one Physical Tenant is serviceable and `DOWN` when none are serviceable, but the overall readiness group can still be `DOWN` because of other readiness contributors. In the current implementation, a degraded `default` tenant can also keep node readiness `DOWN` even when another tenant is ready; this known limitation is tracked in [camunda/camunda#63674](https://github.com/camunda/camunda/issues/63674). If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other serviceable tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
+For Elasticsearch and OpenSearch deployments, the secondary-storage readiness check uses schema-initialization state. The check is `UP` while at least one Physical Tenant is serviceable and `DOWN` when none are serviceable, but the overall readiness group can still be `DOWN` because of other readiness contributors. If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other serviceable tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
 
-For diagnosis steps, see [troubleshooting](./troubleshooting.md).
+To see each tenant's schema-initialization state and the reason a tenant is degraded, inspect the `physicalTenantSchemaInitialization` contributor of `/actuator/health`. See [schema-initialization health](./storage-isolation.md#schema-initialization-health). For diagnosis steps, see [troubleshooting](./troubleshooting.md).
 
 ## Document store details
 
@@ -130,6 +140,14 @@ Isolation is enforced by validating the resolved `provider, bucket/container, pa
 For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store storage](./storage-isolation.md#document-store-storage).
 
 For the storage backends used by tenant-scoped data, see [secondary storage](../secondary-storage/index.md) and [document handling configuration](../document-handling/configuration/index.md).
+
+## Deploying Physical Tenants with Helm
+
+The Helm chart passes tenant configuration through rather than modeling it: there's no `orchestration.physicalTenants` values key, and tenants are declared as `camunda.physical-tenants.*` application configuration through `orchestration.extraConfiguration`. See [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md).
+
+What the chart does own is the release shape around your tenants. Each tenant needs its own Optimize release, its own index prefixes, and its own OIDC client, and adding or removing a tenant is an ordered operation across several releases.
+
+For the release-level view, see [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md). For the delivery mechanics alone, see [configure Physical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-physical-tenants.md).
 
 ## Explore the docs
 

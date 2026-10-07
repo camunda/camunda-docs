@@ -9,10 +9,10 @@ Use the business value dashboard to track process outcomes using cycle time, aut
 To open the dashboard:
 
 1. In Camunda Hub, go to **Business Value** (`/business-value`).
-2. Use the environment picker to select an Orchestration Cluster.
+2. Use the **Environment** picker to select an [environment](/components/concepts/environments.md).
 3. Review the portfolio view, then select a process to open its process view.
 
-The dashboard shows data for one cluster at a time and does not aggregate values across clusters. Each value therefore belongs to the environment currently selected in the picker.
+The dashboard shows data for one environment at a time and does not aggregate values across environments. Each value therefore belongs to the environment currently selected in the picker.
 
 ## Availability and permissions
 
@@ -55,13 +55,15 @@ Cycle time is the elapsed duration of a completed process instance, from start t
 
 ## Review the portfolio view
 
-The portfolio view summarizes all processes in the selected cluster. Use it to see where targets are met and which processes need attention.
+The portfolio view summarizes all processes in the selected environment. Use it to see where targets are met and which processes need attention.
+
+![Business value dashboard portfolio view with target overview, activity, automation rate, cycle time, agentic adoption, and off-target processes](img/business-value-dashboard-portfolio-view.png)
 
 | Metric                         | What it shows                                                                                                      | How to interpret it                                                                        |
 | :----------------------------- | :----------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
 | Target coverage and attainment | How many active processes have at least one target set, and how many configured targets are currently met.         | Low coverage means the summary reflects only a subset of your processes.                   |
 | Activity                       | Completed work handled and how it changes over time.                                                               | Use activity as context for the other metrics. Activity isn't compared against a target.   |
-| Automation rate                | The aggregated automation rate for the cluster, plus a per-process comparison.                                     | Use it to find processes that still rely heavily on manual work.                           |
+| Automation rate                | The aggregated automation rate for the environment, plus a per-process comparison.                                 | Use it to find processes that still rely heavily on manual work.                           |
 | Cycle time                     | A process-by-process comparison and the longest-running processes.                                                 | Use it to find where processes take longest to complete.                                   |
 | Agentic adoption               | Which processes use [agentic](/components/agentic-orchestration/agentic-orchestration-overview.md) steps.          | Use it to see where AI agents already handle part of the work.                             |
 | Off-target processes           | Processes with missed targets, ranked first by the number of missed targets and then by the size of the deviation. | Start with the top entry. See [investigate a missed target](#investigate-a-missed-target). |
@@ -69,6 +71,8 @@ The portfolio view summarizes all processes in the selected cluster. Use it to s
 ## Review the process view
 
 The process view shows the metrics and targets for a single process. Open it by selecting a process from the portfolio view.
+
+![Business value dashboard process view with cycle time, automation rate, and volume compared against targets, plus momentum, cycle time distribution, and cycle time history charts](img/business-value-dashboard-process-view.png)
 
 | Element                     | What it shows                                                                                                       |
 | :-------------------------- | :------------------------------------------------------------------------------------------------------------------ |
@@ -103,12 +107,12 @@ Filters change which completed instances are counted, so a target that is met ov
 
 | Filter      | What it does                                                                       |
 | :---------- | :--------------------------------------------------------------------------------- |
-| Environment | Selects the Orchestration Cluster to report on. Required.                          |
+| Environment | Selects the environment to report on. Required.                                    |
 | Process     | Limits results to one process.                                                     |
 | Date range  | Limits results to instances completed within the range.                            |
 | Version     | Limits results to one process version. Available once you have selected a process. |
 
-When you share a number from the dashboard, include the filters it was measured with. An automation rate of 94% over the last 30 days on one cluster is not the same as 94% overall.
+When you share a number from the dashboard, include the filters it was measured with. An automation rate of 94% over the last 30 days in one environment is not the same as 94% overall.
 
 ## Investigate a missed target
 

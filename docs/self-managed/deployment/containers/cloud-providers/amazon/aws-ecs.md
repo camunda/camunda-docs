@@ -600,9 +600,9 @@ When you use the bundled provider, the identity provider password is generated a
 
 ## Deploy Camunda Hub
 
-[Camunda Hub](/self-managed/components/hub/index.md) bundles Web Modeler and Console, and is deployed as one additional ECS task running two containers: the REST API with the web interface, and a websockets relay used for real-time collaboration.
+[Camunda Hub](/self-managed/components/hub/index.md) is deployed as one additional ECS task running two containers: the REST API with the web interface, and a websockets relay used for real-time collaboration.
 
-Camunda Hub is designed to interact with multiple orchestration clusters, so you deploy it once and connect it to every cluster it manages. This reference architecture registers the single Orchestration Cluster it deploys. To manage more clusters from the same Camunda Hub, add entries to the `camunda.modeler.clusters` list the module passes to the task.
+Camunda Hub is designed to interact with multiple orchestration clusters, so you deploy it once and connect it to every cluster it manages. This reference architecture registers the single Orchestration Cluster it deploys. To manage more clusters from the same Camunda Hub, add entries to the [`camunda.hub.clusters`](/self-managed/components/hub/configuration/properties.md#clusters) list the module passes to the task.
 
 Camunda Hub is optional and disabled by default. It authenticates through OIDC and cannot use Basic authentication, so it requires `authentication_mode = "oidc"`. It also requires `enable_camunda_hub_authorization`, which seeds Management Identity with the roles and permissions Camunda Hub checks against. Terraform fails during `terraform plan` with a precondition error if either is missing.
 

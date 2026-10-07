@@ -37,6 +37,8 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 When designing a reference architecture, it's essential to understand the differences between Orchestration Cluster and Camunda Hub Self-Managed. These components serve different purposes and include distinct elements.
 
+In Camunda 8.10, they're also deployed separately. Each Helm release declares its role through `global.topology.mode`, so one `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, with one `optimize` release per [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md). For the release roles, their requirements, and how to choose between them, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
+
 #### Orchestration Cluster
 
 ![Orchestration Cluster](./img/orchestration-cluster.jpg)
@@ -57,23 +59,21 @@ Tightly integrated with the Orchestration Cluster:
 
 This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
+Connectors deploy with the Orchestration Cluster release. Optimize is deployed as its own release, one per Physical Tenant, because each Optimize instance reads exported records from a single index prefix. See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
+
 #### Camunda Hub
 
 <!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
 
 ![Camunda Hub](./img/management-cluster.jpg)
 
-Camunda Hub is designed to interact with multiple orchestration clusters:
+Camunda Hub can connect to multiple Orchestration Clusters across environments, such as development, integration, and production:
 
-- [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
+- [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
 - [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
 
 :::note Admin separation
 Camunda Hub uses a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
-:::
-
-:::tip New in Camunda 8.8
-Starting with Camunda 8.8, Admin and Management Identity have been redesigned for clearer separation of concerns and improved flexibility.
 :::
 
 #### Admin vs Management Identity
@@ -82,12 +82,12 @@ The following table outlines the key differences between Admin and Management Id
 
 | Category                  | Admin                                                                                                                                                                                                                                                                                                                                                                                                                                          | Management Identity                                                                                                                                                                          |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Scope                     | Provides access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.                                                                                                                                                                                                                                                                                 | Manages access for platform components such as Camunda Hub and Optimize.                                                                                                                     |
-| Unified access management | Authentication and authorizations are handled directly by the Orchestration Cluster across all components and APIs, eliminating any dependency on Management Identity.                                                                                                                                                                                                                                                                         | Continues to manage access for Camunda Hub and Optimize.                                                                                                                                     |
+| Scope                     | Provides access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.                                                                                                                                                                                                                                                                                 | Manages access for Camunda Hub and Optimize.                                                                                                                                                 |
+| Unified access management | Authentication and authorizations are handled directly by the Orchestration Cluster across all components and APIs, eliminating any dependency on Management Identity.                                                                                                                                                                                                                                                                         | Manages access for Camunda Hub and Optimize.                                                                                                                                                 |
 | Authentication            | <ul><li><strong>No authentication</strong>: No authentication required for API access. Form-based login in the UI. Users and groups are managed in Admin.</li><li><strong>Basic authentication</strong>: API access with Basic authentication. Form-based login in the UI. Users and groups are managed in Admin.</li><li><strong>OIDC</strong>: Any compatible identity provider (for example, Keycloak, Microsoft Entra ID, Okta).</li></ul> | <ul><li><strong>Direct Keycloak integration</strong> (default).</li><li><strong>OIDC</strong>: Any compatible identity provider (for example, Keycloak, Microsoft Entra ID, Okta).</li></ul> |
 | Authorizations            | Fine-grained [authorizations](/components/concepts/access-control/authorizations.md) provide consistent access control for process instances, tasks, and decisions across components and APIs.                                                                                                                                                                                                                                                 |                                                                                                                                                                                              |
 | Keycloak integration      | Treated as a standard external identity provider integrated via OIDC, making it easier to use other providers without special integration.                                                                                                                                                                                                                                                                                                     | Default Keycloak integration, with OIDC available for other providers.                                                                                                                       |
-| Tenant management         | Tenants are directly managed within the Orchestration Cluster, allowing per-cluster tenant management.                                                                                                                                                                                                                                                                                                                                         | No longer manages tenants for Orchestration Cluster components. Tenants apply only to Optimize.                                                                                              |
+| Tenant management         | Tenants are directly managed within the Orchestration Cluster, allowing per-cluster tenant management.                                                                                                                                                                                                                                                                                                                                         | Does not manage tenants for Orchestration Cluster components. Tenants apply only to Optimize.                                                                                                |
 
 For production environments, use an external [identity provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) to connect both environments.
 
@@ -168,10 +168,6 @@ For more information on how Zeebe handles fault tolerance, see the [Raft consens
 If running a single instance, implement [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md), as resilience will be limited.
 
 ## Available reference architectures
-
-:::note Documentation update in progress
-This documentation is being updated to provide clearer general guidance. Some Docker documentation may still point to older guides.
-:::
 
 Choose a reference architecture based on factors such as your organization’s goals, infrastructure, and requirements. Use the following guides to plan your deployment:
 
