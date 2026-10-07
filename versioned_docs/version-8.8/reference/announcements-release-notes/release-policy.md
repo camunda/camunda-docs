@@ -32,6 +32,10 @@ Refers to a release made available between minor versions that allows you to pre
 
 :::
 
+## Early access releases
+
+Early access releases introduce new products for testing and feedback before general availability. They are outside the standard release policy. See the [early access overview](/components/early-access/overview.md).
+
 ## General availability (GA)
 
 Once features and components are released and considered stable, they become generally available.
