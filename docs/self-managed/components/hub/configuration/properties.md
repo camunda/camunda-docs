@@ -312,6 +312,8 @@ The version of the cluster decides which Physical Tenants Camunda Hub surfaces a
 
 If you declare `physical-tenants` on a cluster earlier than 8.10, Camunda Hub ignores them and logs a warning.
 
+If you deploy with the Helm chart, see [Physical Tenants in the Helm topology](/self-managed/deployment/helm/install/topology/physical-tenants.md) for how the chart maps them. Physical Tenants require OIDC authentication. They don't support Basic authentication.
+
 #### Declare Physical Tenants
 
 Declare each additional [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) of a cluster with `physical-tenants`. Camunda Hub uses the ID of a tenant as the name of its environment, except for the `default` tenant.
@@ -377,6 +379,8 @@ Camunda Hub sends an HTTP request to the `urls.readiness` address of each compon
 | No `readiness` address, no response within five seconds, a redirect, or a body without a `status` field | Unknown   |
 
 A cluster that you configure with `url` instead of `components` has no readiness address, so its environments always have the status **Unknown**.
+
+With the Helm chart, the `readiness` address of the Optimize component of a Physical Tenant is set only if you set `readinessUrl` for that component. Without it, the component has no readiness address, and the environment of the tenant has the status **Unknown**.
 
 #### Not reported environments
 
