@@ -10,6 +10,7 @@ Specify the tool resolution for an accompanying ad-hoc sub-process.
 :::note
 
 - Leave this section empty if using this connector independently, without an accompanying ad-hoc sub-process.
+- Mark the accompanying ad-hoc sub-process as a tool container by adding the `io.camunda.agenticai.toolContainer` extension property with the value `true`, and add `completedAt: now()` to its multi-instance **Output element**. See [configure ad-hoc sub-process and loop](../../../agentic-ai-aiagent-task-example.md#tools-loop).
 - To actually use the tools, you must model your process to include an [agent loop](/reference/glossary.md#agent-loop), routing into the ad-hoc sub-process and back to the AI agent connector. See [agent loop for tool calls](../../../agentic-ai-aiagent-task-example.md#tools-loop).
 
 :::
