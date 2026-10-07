@@ -39,7 +39,7 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 - **[ProcessOS](#processos)**: Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
 
-- **[Camunda Hub](#camunda-hub)**: A new product that replaces Web Modeler and Console as the single place to build, govern, and run process solutions in Camunda. It introduces workspaces to organize your teams' work, along with a [catalog](#catalog) of reusable automation assets, a [business value dashboard](#business-value-dashboard) to track process outcomes against targets, and [credentials](#credentials-manager) you create once and reuse across processes.
+- **[Camunda Hub](#camunda-hub)**: A new product that replaces Web Modeler and Console as the single place to build, govern, and run process solutions in Camunda. It introduces workspaces to organize your teams' work, along with a [catalog](#catalog) of reusable automation assets, a [business value dashboard](#business-value-dashboard) to track process outcomes against targets, and [credentials](#hub-credentials-manager) you create once and reuse across processes.
 
 - **[Multi-region resilience](#multi-region-resilience)**: Failure-domain-aware partition placement replicates process state synchronously across regions, so losing a region costs no committed data (RPO 0). The RDBMS secondary storage replicates asynchronously and catches up from the engine's event stream.
 
@@ -105,7 +105,7 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>Track cycle time, automation rate, activity, and agentic adoption against targets in Hub.</td>
 </tr>
 <tr>
-    <td>[Credentials](#credentials-manager)</td>
+    <td>[Credentials](#hub-credentials-manager)</td>
     <td>Create connector credentials once and reuse them wherever you need them in Hub.</td>
 </tr>
 <tr>
@@ -457,11 +457,13 @@ Payments (Workspace)
 
 This strict new **Workspace > Project > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
 
-#### Credentials manager
+#### Hub credentials manager
 
 Before 8.10, you configure a connector's authentication and connection settings directly on each connector task. This doesn't scale well and is hard to maintain. For example, if ten tasks call the same REST API, you configure the same authentication ten times, and you update all ten when something changes.
 
-Camunda Hub introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
+8.10 introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
+
+Camunda Hub provides an interface for managing your credentials.
 
 <img src={CredentialsImg} alt="Create a credential page in Camunda Hub showing credential types such as AWS Credential, REST Authentication, and JDBC Connection, each with the connectors that use it" class="img-900"/>
 
@@ -794,7 +796,7 @@ Two changes come with this:
 
 ## Credentials in Desktop Modeler
 
-Desktop Modeler also supports [credentials](#credentials-manager). Select an existing credential on a connector task from the properties panel, or create a new one without leaving it, instead of entering the same authentication and connection settings on every task.
+Desktop Modeler also supports [credentials](#hub-credentials-manager). Select an existing credential on a connector task from the properties panel, or create a new one without leaving it, instead of entering the same authentication and connection settings on every task.
 
 <p class="link-arrow">[Use credentials in Desktop Modeler](/components/modeler/desktop-modeler/credentials.md)</p>
 
