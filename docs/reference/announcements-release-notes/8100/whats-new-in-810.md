@@ -105,7 +105,7 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>Track cycle time, automation rate, activity, and agentic adoption against targets in Hub.</td>
 </tr>
 <tr>
-    <td>[Credentials](#hub-credentials-manager)</td>
+    <td>[Hub credentials manager](#hub-credentials-manager)</td>
     <td>Create connector credentials once and reuse them wherever you need them in Hub.</td>
 </tr>
 <tr>
