@@ -2203,6 +2203,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region",
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region-ops",
               ],
             },
           ],
