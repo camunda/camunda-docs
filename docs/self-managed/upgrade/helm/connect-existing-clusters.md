@@ -133,54 +133,54 @@ What job workers and API clients need afterwards depends on what changed:
 - Confirm existing process instances are still visible in Operate, and workers still poll and complete jobs.
 - Confirm the release logs no authentication errors.
 
-## Connect several existing clusters
+## Connect several existing Orchestration Clusters
 
-Connect several existing releases to one Hub release by making sure they trust one identity provider, and then converting them one at a time.
+Connect several existing Orchestration Cluster releases to one Hub release. First, make sure they trust one identity provider. Then convert them one at a time.
 
 ### Identity provider
 
-Every release the Hub release manages must trust the identity provider that Management Identity and Camunda Hub use. Decide the shared provider before you convert anything:
+Every Orchestration Cluster release the Hub release manages must trust the identity provider that Management Identity and Camunda Hub use. Decide the shared provider before you convert anything:
 
-| Existing setup                                 | What to do                                                                                                                                                                                                                                                                                                                         |
-| :--------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| All releases already use one external provider | Use the same issuer in the Hub release                                                                                                                                                                                                                                                                                             |
-| Each release runs its own bundled Keycloak     | Choose one external Keycloak or external OIDC provider for the Hub release. See [external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md) or [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) |
-| Releases use different external providers      | Choose one of them for the Hub release, and move the others to it                                                                                                                                                                                                                                                                  |
+| Existing setup                                                       | What to do                                                                                                                                                                                                                                                                                                                         |
+| :------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| All Orchestration Cluster releases already use one external provider | Use the same issuer in the Hub release                                                                                                                                                                                                                                                                                             |
+| Each Orchestration Cluster release runs its own bundled Keycloak     | Choose one external Keycloak or external OIDC provider for the Hub release. See [external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md) or [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) |
+| Orchestration Cluster releases use different external providers      | Choose one of them for the Hub release, and move the others to it                                                                                                                                                                                                                                                                  |
 
-If the releases already share one external provider, the issuer doesn't change, and users keep signing in as before. A release that moves to a different provider changes its token issuer in step 5 of the conversion:
+If the Orchestration Cluster releases already share one external provider, the issuer doesn't change, and users keep signing in as before. An Orchestration Cluster release that moves to a different provider changes its token issuer in step 5 of the conversion:
 
 - Signed-in users must sign in again.
-- Tokens from the old provider are rejected. Register the new clients before step 5, and switch job workers and API clients to them right after step 5. Until step 5, the release still trusts only the old provider, so clients that switch early get `401 Unauthorized`.
+- Tokens from the old provider are rejected. Register the new clients before step 5, and switch job workers and API clients to them right after step 5. Until step 5, the Orchestration Cluster release still trusts only the old provider, so clients that switch early get `401 Unauthorized`.
 
-### Grant access to each newly connected cluster
+### Grant access to each newly connected Orchestration Cluster
 
-Existing clients that need to call a newly connected cluster, such as job workers and API clients, need two things: a token the cluster accepts, and access to the cluster's resources.
+Existing clients that need to call a newly connected Orchestration Cluster, such as job workers and API clients, need two things: a token the cluster accepts, and access to the cluster's resources.
 
-**A token the cluster accepts.** The cluster accepts tokens whose audience is its own audience. On the 8.8 and 8.9 charts, it also accepts its client ID and every entry in `backwardsCompatibleAudiences`. See [keep existing clients working](./combined-to-split-topology.md#keep-existing-clients-working). It rejects other tokens with `401 Unauthorized`:
+**A token the cluster accepts.** The cluster accepts tokens whose audience is its own audience. On Camunda 8.8 and 8.9 releases (charts 13.x and 14.x), it also accepts its client ID and every entry in `backwardsCompatibleAudiences`. See [keep existing clients working](./combined-to-split-topology.md#keep-existing-clients-working). It rejects other tokens with `401 Unauthorized`:
 
 | Identity provider                            | How a client gets the cluster's audience                                                                                                                                                                                                |
 | :------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Keycloak administered by Management Identity | Adding the record adds the cluster's permissions to the shared canonical roles, or to its per-cluster roles. Clients with directly assigned permissions don't receive them: grant them the cluster's permissions in Management Identity |
 | External OIDC provider                       | Grant the client access to the cluster's API in the provider                                                                                                                                                                            |
 
-**Access to the cluster's resources.** Where access is decided depends on the cluster's chart:
+**Access to the cluster's resources.** Where access is decided depends on the Camunda version of the Orchestration Cluster release:
 
-| Chart    | Where to grant access                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 8.8, 8.9 | In the cluster's own Admin. Authorizations are on by default, so a client with the right audience still can't read or change resources until it has roles or authorizations in that cluster. Until then, its searches return no results, and its commands fail with `403 Forbidden`, for example `Insufficient permissions to perform operation 'CREATE_PROCESS_INSTANCE'`. Assign them in Admin, or with `orchestration.security.initialization` in the release's values |
-| 8.7      | In Management Identity. Operate and Tasklist read the client's permissions from it                                                                                                                                                                                                                                                                                                                                                                                        |
+| Camunda version (chart) | Where to grant access                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 8.8, 8.9 (13.x, 14.x)   | In the cluster's own Admin. Authorizations are on by default, so a client with the right audience still can't read or change resources until it has roles or authorizations in that cluster. Until then, its searches return no results, and its commands fail with `403 Forbidden`, for example `Insufficient permissions to perform operation 'CREATE_PROCESS_INSTANCE'`. Assign them in Admin, or with `orchestration.security.initialization` in the release's values |
+| 8.7 (12.x)              | In Management Identity. Operate and Tasklist read the client's permissions from it                                                                                                                                                                                                                                                                                                                                                                                        |
 
 Assign the record's per-cluster roles to users and groups if you use them. See [role assignment across clusters](/self-managed/deployment/helm/install/topology/hub-release.md#role-assignment-across-clusters).
 
 ### Convert the releases in order
 
-1. Make sure every release can use the shared identity provider. If a release moves to a new provider, register its clients there.
+1. Make sure every Orchestration Cluster release can use the shared identity provider. If an Orchestration Cluster release moves to a new provider, register its clients there.
 2. Create the Hub release. See [install the Hub release](/self-managed/deployment/helm/install/topology/hub-release.md).
-3. Convert the non-production releases first, one at a time. Confirm each one before you start the next.
-4. Convert the production releases last, each in its own maintenance window.
-5. After every release is converted, remove clients and roles that no release uses. Identity initialization is additive, so it doesn't remove them for you.
+3. Convert the non-production Orchestration Cluster releases first, one at a time. Confirm each one before you start the next.
+4. Convert the production Orchestration Cluster releases last, each in its own maintenance window.
+5. After every Orchestration Cluster release is converted, remove clients and roles that no release uses. Identity initialization is additive, so it doesn't remove them for you.
 
-Each release keeps its own chart version. When you upgrade a converted release later, update its Hub cluster record in the same change window: set `version`, and when you upgrade a chart 8.7 release to 8.8, remove `architecture: legacy` and the split service names. The upgraded release also moves from `global.identity.auth.zeebe`, `.operate`, and `.tasklist` to `orchestration.security.authentication.oidc.*`.
+Each Orchestration Cluster release keeps its own chart version. When you upgrade a converted Orchestration Cluster release later, update its Hub cluster record in the same change window: set `version`, and when you upgrade a Camunda 8.7 release (chart 12.x) to 8.8 (chart 13.x), remove `architecture: legacy` and the split service names. The upgraded release also moves from `global.identity.auth.zeebe`, `.operate`, and `.tasklist` to `orchestration.security.authentication.oidc.*`.
 
 ## Roll back a conversion
 

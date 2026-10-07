@@ -41,7 +41,7 @@ Chart versions earlier than the minimum versions in the following table ignore `
 | 8.8 (13.14.0)           | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`, `identityKeycloak.enabled: false`                           |
 | 8.7 (12.14.0)           | `zeebe.enabled: true`, `operate.enabled: true`, `tasklist.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
 
-These are the oldest chart versions that support the `orchestration` role. Before you convert an existing release, upgrade it to the latest chart and Camunda patch of its minor version.
+These are the oldest chart versions that support the `orchestration` role. Before you convert an existing release, upgrade it to the latest chart version and the latest Camunda patch version.
 
 The management plane databases belong to the Hub release. The 8.7, 8.8, and 8.9 charts therefore reject them here. If you leave them enabled, the release deploys a second Management Identity or Hub database beside the one the Hub release already owns.
 
