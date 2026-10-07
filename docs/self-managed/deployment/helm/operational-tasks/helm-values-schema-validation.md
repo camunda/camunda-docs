@@ -22,7 +22,7 @@ For example, an unknown key at the top level of your values causes this error:
 | Helm version            | Error text                                         |
 | ----------------------- | -------------------------------------------------- |
 | 3.10 to 3.19            | `- (root): Additional property unk is not allowed` |
-| 3.22 and later, and 4.x | `- at '': additional properties 'unk' not allowed` |
+| 3.20 and later, and 4.x | `- at '': additional properties 'unk' not allowed` |
 
 ## Fix the values first
 
