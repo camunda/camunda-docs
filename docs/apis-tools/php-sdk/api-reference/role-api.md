@@ -1,13 +1,13 @@
 ---
 id: role-api
-title: "Role API"
-sidebar_label: "Role API"
+title: "Role Api"
+sidebar_label: "Role Api"
 sidebar_position: 33
 mdx:
   format: md
 ---
 
-# Role API
+# Role Api
 
 `RoleApi` — 17 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\RoleApi::class)`.
 

@@ -222,6 +222,9 @@ Multi-region support for RDBMS uses the asynchronous replication feature of the 
 dependent on the database vendor. While most multi-region replication is performed by the database itself, Camunda
 provides additional features to enhance automatic recovery in the event of a failure.
 
+For an architecture built on this model, in which every region writes to a single endpoint and a region loss does not
+stop processing, see [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md).
+
 Asynchronous replicated databases are synchronized with a delay, meaning that after a failover, the new primary database
 may not contain all the data written to the old primary database. This can lead to data loss in secondary storage. While
 this data can be reproduced by replaying past records from the Zeebe log stream, the relevant segments and records must still
@@ -269,6 +272,15 @@ The following databases are supported for LSN replication monitoring:
 - Aurora Global Database with MySQL
 - MSSQL
 - PostgreSQL
+- Oracle
+
+Oracle uses system change numbers (SCNs) to track replication progress. To use LSN replication monitoring with Oracle, grant the database user `SELECT` access to the following views:
+
+```sql
+GRANT SELECT ON v_$database TO <user>;
+GRANT SELECT ON v_$archive_dest TO <user>;
+GRANT SELECT ON v_$archive_dest_status TO <user>;
+```
 
 To use the LSN replication monitoring with PostgreSQL, the database user must have the following additional privileges:
 
@@ -358,7 +370,8 @@ replication is not fully in sync. This strategy requires external monitoring of 
 that the configured delay is sufficient for the database replication to catch up in case of a failover.
 
 :::warning
-The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. Size the persistent volume to hold all records produced during that interval. If the volume is too small, Zeebe runs out of disk space and stops processing.
+The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. The exporter never acknowledges records before the configured delay period has elapsed, but may acknowledge them after this period has elapsed.
+Size the persistent volume to hold all records produced during the delay interval. If the volume is too small, Zeebe will run out of disk space and stop processing.
 :::
 
 ```yaml
@@ -372,6 +385,20 @@ camunda.data.secondary-storage.rdbms.async-replication.type: DELAY
 | `async-replication.delay`               | The delay to wait until a flushed record is acknowledged to the broker            | --      |
 | `async-replication.queue-capacity`      | Size of the internal queue of record positions to acknowledge                     | 8192    |
 | `async-replication.queue-debounce-time` | A debounce time to not add every record to the queue but only one every X seconds | PT5S    |
+
+### Compatibility matrix
+
+Use LSN-based monitoring when your database supports it. Otherwise, use time-based monitoring if available. Use delay backoff only when neither strategy is supported. Delay backoff doesn't monitor replication state directly and requires external monitoring of replication lag; see [delay backoff replication monitoring](#delay-backoff-replication-monitoring).
+
+| Database Vendor   | LSN-based          | Time-based         | Delay backoff      |
+| ----------------- | ------------------ | ------------------ | ------------------ |
+| Aurora PostgreSQL | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Aurora MySQL      | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| PostgreSQL        | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| MSSQL             | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Oracle            | :white_check_mark: | :x:                | :white_check_mark: |
+| MariaDB           | :x:                | :x:                | :white_check_mark: |
+| MySQL             | :x:                | :x:                | :white_check_mark: |
 
 ## Usage with AWS Aurora PostgreSQL / MySQL
 

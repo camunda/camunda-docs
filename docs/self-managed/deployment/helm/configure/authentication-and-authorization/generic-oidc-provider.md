@@ -25,7 +25,7 @@ Before you begin, ensure you have:
 - An OIDC-compliant provider already deployed and accessible.
 - Administrative access to create and configure OIDC clients in your provider.
 - Access to your provider's discovery document to obtain endpoint URLs.
-- A Kubernetes cluster with the Helm CLI v4 installed.
+- A Kubernetes cluster with a [supported Helm CLI version](/reference/supported-environments.md#clients) installed.
 - kubectl configured to access your cluster.
 - When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. Chart `15.x` no longer bundles one, so provision it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database and connect it through `identity.externalDatabase`, as shown in the examples below. See also [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
@@ -594,7 +594,7 @@ identity:
 optimize:
   enabled: true
 
-# Console and Web Modeler (Camunda Hub)
+# Camunda Hub (Console and Web Modeler)
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
   restapi:

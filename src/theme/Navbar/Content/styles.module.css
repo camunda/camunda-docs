@@ -49,14 +49,8 @@
   padding-left: 0;
 }
 
-/* Match Help dropdown height to Try Free button */
-.topRowRight :global(.dropdown) {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 1rem;
-  font-size: 14px;
-  box-sizing: border-box;
-}
+/* Help icon button padding/alignment handled in custom.css
+   (.navbar__item:has(.help-icon-btn)) to match the toggle button exactly */
 
 /* Offset the Help dropdown menu so it doesn't cover the buttons */
 .topRowRight :global(.dropdown__menu) {
@@ -156,6 +150,7 @@
 
 .bottomRowLeft :global(.navbar__link--active) {
   border-bottom: 2px solid var(--ifm-color-primary);
+  font-weight: 600;
 }
 
 /* ---- Responsive ---- */

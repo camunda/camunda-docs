@@ -43,7 +43,7 @@ The 8.9 to 8.10 upgrade spans several guides. Work through them in this order, r
 | Step | What you do                                                                                            | Guide                                                                                      |
 | ---- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | 1    | Confirm upgrade eligibility, review platform changes in 8.10, and verify infrastructure compatibility. | [Prepare for upgrade](prepare-for-upgrade.md)                                              |
-| 2    | Switch to the Helm v4 CLI, then create and update your 8.10 values file and run the upgrade.           | [Upgrade Camunda 8.9 to 8.10 using Helm](./helm/890-to-8100.md)                            |
+| 2    | Create and update your 8.10 values file and run the upgrade.                                           | [Upgrade Camunda 8.9 to 8.10 using Helm](./helm/890-to-8100.md)                            |
 | 3    | Monitor and validate the upgrade before returning the deployment to normal use.                        | [Monitor and validate the upgrade](./helm/890-to-8100.md#monitor-and-validate-the-upgrade) |
 
 Review [component changes from 8.9 to 8.10](./components/890-to-8100.md) alongside these steps for behavior changes affecting the components you run.
@@ -94,7 +94,7 @@ Each guide covers only the changes required for that specific version upgrade.
 
 - <a href="/docs/self-managed/upgrade/helm/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.8 to 8.9</a>
 - <a href="/docs/8.8/self-managed/upgrade/helm/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.7 to 8.8</a>
-- <a href="/docs/8.7/self-managed/setup/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.6 to 8.7</a>
+- <a href="https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.6 to 8.7</a>
 - <a href="https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.5 to 8.6</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/setup/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.4 to 8.5</a>
 - <a href="https://unsupported.docs.camunda.io/8.4/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.3 to 8.4</a>
@@ -104,7 +104,7 @@ Each guide covers only the changes required for that specific version upgrade.
 
 - <a href="/docs/self-managed/upgrade/components/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.8 to 8.9</a>
 - <a href="/docs/8.8/self-managed/upgrade/components/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.7 to 8.8</a>
-- <a href="/docs/8.7/self-managed/operational-guides/update-guide/860-to-870/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.6 to 8.7</a>
+- <a href="https://unsupported.docs.camunda.io/8.7/docs/self-managed/operational-guides/update-guide/860-to-870/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.6 to 8.7</a>
 - <a href="https://unsupported.docs.camunda.io/8.6/docs/self-managed/operational-guides/update-guide/850-to-860/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.5 to 8.6</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/840-to-850/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.4 to 8.5</a>
 - <a href="https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/830-to-840/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.3 to 8.4</a>

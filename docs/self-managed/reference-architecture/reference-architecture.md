@@ -33,37 +33,49 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 ## Architecture
 
-### Orchestration Cluster vs Camunda Hub
+### Deployment topology
 
-When designing a reference architecture, it's essential to understand the differences between Orchestration Cluster and Camunda Hub Self-Managed. These components serve different purposes and include distinct elements.
+A Camunda 8 Self-Managed deployment is built around one [management plane](/reference/glossary.md#management-plane), made up of Camunda Hub and Management Identity. The management plane serves one or more Orchestration Clusters, for example one per environment such as development, integration, and production. Each Orchestration Cluster hosts one or more [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), including the default tenant, and each tenant is served by its own Optimize instance.
 
-#### Orchestration Cluster
+<!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
 
-![Orchestration Cluster](./img/orchestration-cluster.jpg)
+```mermaid
+graph TD
+    Hub["Management plane<br/>Camunda Hub + Management Identity"]
+    OCDev["Orchestration Cluster<br/>development"]
+    OCInt["Orchestration Cluster<br/>integration"]
+    OCProd["Orchestration Cluster<br/>production"]
+    OptDev["Optimize<br/>default tenant"]
+    OptInt["Optimize<br/>default tenant"]
+    OptProdA["Optimize<br/>default tenant"]
+    OptProdB["Optimize<br/>Physical Tenant A"]
 
-The Orchestration Cluster is the core of Camunda.
+    Hub --> OCDev
+    Hub --> OCInt
+    Hub --> OCProd
+    OCDev --> OptDev
+    OCInt --> OptInt
+    OCProd --> OptProdA
+    OCProd --> OptProdB
+```
 
-The following components are bundled into a single artifact:
+Each Orchestration Cluster is deployed, scaled, and upgraded on its own schedule, while the management plane maintains the cluster inventory and Management Identity permission and role configuration. With Keycloak, Management Identity also provisions workload clients. With Microsoft Entra ID or another generic OIDC provider, operators provision workload clients separately.
 
-- [Zeebe](/components/zeebe/zeebe-overview.md): Highly scalable, cloud-native workflow engine that tracks the state of active process instances and drives business processes from start to finish.
-- [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting process instances running in Zeebe.
-- [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for interacting with user tasks, including assigning and completing them.
-- [Admin](/self-managed/components/orchestration-cluster/admin/overview.md): Integrated authentication and authorization service for managing access to all Orchestration Cluster components and APIs.
+Physical Tenants isolate data within a cluster, and the topology is fully declarative, so it fits GitOps tooling such as Argo CD or Flux.
 
-Tightly integrated with the Orchestration Cluster:
+To implement this topology on Kubernetes, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
-- [Optimize](/components/optimize/what-is-optimize.md): Business intelligence tool for analyzing bottlenecks and examining improvements in automated processes.
-- [Connectors](/components/connectors/introduction.md): Reusable building blocks for easily connecting processes to external systems, applications, and data.
+### Management plane vs Orchestration Cluster {#camunda-hub-vs-orchestration-cluster}
 
-This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
+When designing a reference architecture, it's essential to understand the differences between the management plane and the Orchestration Cluster. These components serve different purposes, include distinct elements, and are deployed separately.
 
-#### Camunda Hub
+#### Management plane {#camunda-hub}
 
 <!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
 
 ![Camunda Hub](./img/management-cluster.jpg)
 
-Camunda Hub is designed to interact with multiple orchestration clusters:
+The management plane can connect to multiple Orchestration Clusters across environments, such as development, integration, and production. It consists of:
 
 - [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
 - [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
@@ -71,6 +83,29 @@ Camunda Hub is designed to interact with multiple orchestration clusters:
 :::note Admin separation
 Camunda Hub uses a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
 :::
+
+#### Orchestration Cluster
+
+![Orchestration Cluster](./img/orchestration-cluster.jpg)
+
+The Orchestration Cluster is the core of Camunda.
+
+Zeebe, Operate, Tasklist, and Admin are bundled into a single artifact:
+
+- [Zeebe](/components/zeebe/zeebe-overview.md): Highly scalable, cloud-native workflow engine that tracks the state of active process instances and drives business processes from start to finish.
+- [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting process instances running in Zeebe.
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for interacting with user tasks, including assigning and completing them.
+- [Admin](/self-managed/components/orchestration-cluster/admin/overview.md): Integrated authentication and authorization service for managing access to all Orchestration Cluster components and APIs.
+
+[Connectors](/components/connectors/introduction.md) are reusable building blocks for connecting processes to external systems, applications, and data. They run as a separate workload, but are deployed with the Orchestration Cluster as part of the same release. Throughout these guides, "Orchestration Cluster" includes Connectors unless stated otherwise.
+
+This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
+
+#### Optimize
+
+[Optimize](/components/optimize/what-is-optimize.md) is a business intelligence tool for analyzing bottlenecks and examining improvements in automated processes. It analyzes process data exported by an Orchestration Cluster.
+
+Optimize is deployed separately from the Orchestration Cluster, one instance per Physical Tenant, because each instance reads exported records from a single index prefix. Optimize requires Management Identity and can't use the Orchestration Cluster's Admin. It can use the Management Identity in the management plane, shared with Camunda Hub, or a separate one when Physical Tenants need identical logical tenant IDs enforced independently. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants).
 
 #### Admin vs Management Identity
 

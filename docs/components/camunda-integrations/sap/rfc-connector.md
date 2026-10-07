@@ -18,7 +18,7 @@ For a standard overview of the steps involved in the SAP RFC connector, see the 
 ## Prerequisites
 
 - **Camunda API Client**
-  - [Create an API client](/components/hub/organization/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+  - [Create an API client](/components/saas/clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
 - **To run the SAP RFC connector**, the following SAP infrastructure setup is required:
   - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
   - SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
@@ -39,21 +39,21 @@ A descriptor file is required to deploy the SAP RFC connector to a space in a SA
 
 ### Configuring the RFC connector
 
-Configure the SAP RFC connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. Using `csap` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
+Configure the SAP RFC connector via the [CSAP c8ctl plugin](./csap-cli.md) (recommended) or manually. Using `c8ctl csap-setup` simplifies the process by automatically gathering all required files and customizing them for your BTP environment based on the details you provide through prompts or command-line options.
 
-#### Using `csap`
+#### Using the CSAP c8ctl plugin
 
-Use CSAP CLI in either:
+Use the CSAP c8ctl plugin in either:
 
 - **Interactive mode:** By following the on-screen prompts.
-- **Non-interactive mode:** By providing all required parameters directly to the CLI.
+- **Non-interactive mode:** By providing all required parameters directly to the plugin.
 
-Use the command `csap setup` will guide you interactively.
+Use the command `c8ctl csap-setup` to guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/saas/clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
-csap setup --for rfc \
+c8ctl csap-setup --for rfc \
 	--camunda 8.7 \
 	--deployment SaaS
 ```
