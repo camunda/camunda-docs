@@ -325,19 +325,19 @@ Camunda Hub introduces changes to many terms and concepts from Web Modeler and C
 
 The following table shows how you can access the Hub equivalents for key Web Modeler and Console features.
 
-| Product (8.9) | Feature                                   | Hub documentation                                                                                                  |
-| :------------ | :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| Console       | Organization overview                     | [Console](/components/hub/organization/console.md)                                                                 |
-| Console       | View clusters                             | [View clusters](/components/saas/clusters/manage-cluster.md#view-clusters)                                         |
-| Console       | Organization management                   | [Manage organization settings](/components/hub/organization/manage-organization-settings/organization-settings.md) |
-| Web Modeler   | View projects                             | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
-| Web Modeler   | Create a project                          | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)        |
-| Web Modeler   | Manage project collaborators              | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)             |
-| Web Modeler   | Rename/delete project                     | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                             |
-| Web Modeler   | Connect clusters to a process application | [Assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md)      |
-| Web Modeler   | Deploy a process application              | [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md)                                 |
-| Web Modeler   | View shared resources                     | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**           |
-| Web Modeler   | Recently deleted                          | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                  |
+| Product (8.9) | Feature                                   | Hub documentation                                                                                             |
+| :------------ | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Console       | Organization overview                     | [Console](/components/hub/organization/console.md)                                                            |
+| Console       | View clusters                             | [View clusters](/components/saas/clusters/manage-cluster.md#view-clusters)                                    |
+| Console       | Organization management                   | [Manage organization](/components/hub/organization/manage-organization-settings/organization-settings.md)     |
+| Web Modeler   | View projects                             | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)           |
+| Web Modeler   | Create a project                          | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)   |
+| Web Modeler   | Manage project collaborators              | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)        |
+| Web Modeler   | Rename/delete project                     | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                        |
+| Web Modeler   | Connect clusters to a process application | [Assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md) |
+| Web Modeler   | Deploy a process application              | [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md)                            |
+| Web Modeler   | View shared resources                     | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**      |
+| Web Modeler   | Recently deleted                          | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                             |
 
 ### Key features
 
@@ -508,12 +508,12 @@ SaaS organization-level roles and permissions have changed. Prior to 8.10, users
 
 | Role               | Description                                                                                                                                                                                                                                                                     |
 | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Member             | Full access to create and collaborate on projects in workspaces they're invited to, plus read-only visibility into the organization and its clusters.                                                                                                                           |
+| Member             | Full access to create and collaborate on projects in workspaces they're invited to, plus read-only visibility into the organization.                                                                                                                                            |
 | Analyst            | Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md). |
 | Organization Admin | Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. Organization Admins can also assign environments to workspaces.                                                                                          |
 | DevOps             | Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.           |
 
-<p class="link-arrow">[Roles and permissions](/components/hub/organization/manage-users/index.md#roles-and-permissions)</p>
+<p class="link-arrow">[Roles and permissions](/components/hub/organization/users-and-roles.md#roles-and-permissions)</p>
 
 #### Self-Managed roles and permissions
 

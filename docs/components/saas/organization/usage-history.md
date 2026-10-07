@@ -17,7 +17,7 @@ Three key metrics play a role in paid plans:
 Camunda Hub provides a usage view for these metrics across the organization.
 
 :::note
-The usage history is visible only to owners and admins for Trial, Enterprise, and Starter organizations.
+The usage history is visible only to owners and admins for Trial and Enterprise organizations.
 :::
 
 ## View usage

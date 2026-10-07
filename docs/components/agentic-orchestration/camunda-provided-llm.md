@@ -29,7 +29,7 @@ Key benefits:
 Camunda-provided LLM is available in Camunda SaaS for:
 
 - **SaaS trial organizations**: Includes Camunda-managed credentials and a free budget. Camunda-provided LLM is enabled by default.
-- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly [enable the **Camunda Provided LLM** toggle](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-camunda-provided-llm) in Camunda Hub. This is a separate toggle from **AI-powered features**, which controls other AI capabilities such as Camunda Copilot. The first time you enable either toggle, you must accept the **Terms for AI Usage**.
+- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly [enable the **Camunda Provided LLM** toggle](/components/saas/organization/enable-alpha-features.md#enable-camunda-provided-llm) in Camunda Hub. This is a separate toggle from **AI-powered features**, which controls other AI capabilities such as Camunda Copilot. The first time you enable either toggle, you must accept the **Terms for AI Usage**.
 
 :::note
 Availability, budgets, and UI may vary by environment and rollout stage.
@@ -143,7 +143,7 @@ OpenRouter, Inc. is a routing service that gives Camunda access to a range of th
 
 ### OpenRouter as a sub-processor
 
-OpenRouter, Inc. is a sub-processor engaged by Camunda in connection with this feature. When you enable this feature, your prompts, agent memory, and tool call inputs and outputs, which may contain personal data, are transmitted to OpenRouter and the selected model provider for the purpose of generating a response. This feature is optional and can be disabled at any time by turning off the **Camunda Provided LLM** toggle in [Camunda Hub](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-camunda-provided-llm). When disabled, no data is sent to OpenRouter. A comprehensive list of Camunda's sub-processors is available in [Camunda's Trust Center](https://trust.camunda.com/).
+OpenRouter, Inc. is a sub-processor engaged by Camunda in connection with this feature. When you enable this feature, your prompts, agent memory, and tool call inputs and outputs, which may contain personal data, are transmitted to OpenRouter and the selected model provider for the purpose of generating a response. This feature is optional and can be disabled at any time by turning off the **Camunda Provided LLM** toggle in [Camunda Hub](/components/saas/organization/enable-alpha-features.md#enable-camunda-provided-llm). When disabled, no data is sent to OpenRouter. A comprehensive list of Camunda's sub-processors is available in [Camunda's Trust Center](https://trust.camunda.com/).
 
 ### AI terms
 
