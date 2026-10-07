@@ -33,7 +33,7 @@ If none of those apply, staying on a combined release is a fully supported long-
 | Tested backup and restore   | A verified restore of every data store: broker volumes, secondary storage, and both relational databases                                                                                                    |
 | A non-production rehearsal  | Run the whole procedure against a copy of your production configuration before you touch production                                                                                                         |
 
-To keep a release on the 8.7, 8.8, or 8.9 chart instead of upgrading it first, see [move a release on an earlier chart](#move-a-release-on-an-earlier-chart).
+This procedure applies only to releases on the 8.10 chart. It doesn't apply to releases on the 8.7, 8.8, or 8.9 chart. See [releases on an earlier chart](#releases-on-an-earlier-chart).
 
 ## Migrate off the bundled databases first
 
@@ -112,8 +112,6 @@ This `helm upgrade` restarts the Orchestration Cluster, Connectors, and Optimize
 | Brokers, the `<release>-zeebe` StatefulSet | Rolling update, one broker at a time, each waiting for the previous one to be ready | With a replication factor of 1 or 2, each partition with a replica on the restarting broker loses quorum and is unavailable until that broker is ready again. With one broker, that means the whole cluster. With a replication factor of 3 or more, partitions keep quorum, but individual client requests can fail while leadership moves. Retry failed requests |
 | Connectors                                 | Rolling update. The new pod starts before the old one stops                         | Stays available                                                                                                                                                                                                                                                                                                                                                    |
 | Optimize                                   | `Recreate`, with one replica                                                        | Unavailable until the new pod is ready                                                                                                                                                                                                                                                                                                                             |
-| Chart 8.7 only: Zeebe Gateway              | Rolling update. The new pod starts before the old one stops                         | Stays available                                                                                                                                                                                                                                                                                                                                                    |
-| Chart 8.7 only: Operate and Tasklist       | `Recreate`, with one replica                                                        | Unavailable until the new pod is ready                                                                                                                                                                                                                                                                                                                             |
 
 The brokers restart with the same volumes, so process state is kept.
 
@@ -152,25 +150,21 @@ See [install an Optimize release](/self-managed/deployment/helm/install/topology
 - Inventory the OIDC clients, resource servers, permissions, and roles. Identity initialization is additive, so the combined release's objects still exist. Remove only what no release uses.
 - Retire the old Hub hostname and its TLS certificate, or redirect it.
 
-## Move a release on an earlier chart
+## Releases on an earlier chart
 
-An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, and 8.9 charts, so you can move a combined release on one of those charts under a Hub without upgrading it to 8.10.
+This procedure needs the 8.10 chart for every release. Don't use it for a release on the 8.7, 8.8, or 8.9 chart:
 
-:::important Upgrade to the latest patch first
-Before you move the release, upgrade it to the latest Helm chart patch and the latest Camunda patch of its minor version, as a separate `helm upgrade`. Confirm it's healthy before you continue. The chart versions in [requirements by chart version](/self-managed/deployment/helm/install/topology/orchestration-release.md#requirements-by-chart-version) are the oldest that support the `orchestration` role, not the recommended versions. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to find the latest patch.
-:::
+- The Hub release would take over that release's Management Identity and Web Modeler databases. From 8.7 or 8.8, that skips minor versions.
+- Step 2 and step 5 move Optimize to its own release. The `optimize` role needs the 8.10 chart. The 8.7, 8.8, and 8.9 charts accept only the `combined` and `orchestration` roles.
+- Step 2 removes the release's bundled Keycloak, because the `orchestration` role doesn't allow it on those charts. A release that uses its bundled Keycloak loses its identity provider.
 
-Follow [keep the cluster in place](#keep-the-cluster-in-place), with the differences in this section. Upgrade each cluster to 8.10 later, one at a time.
+To put a release on an earlier chart under a Hub, it needs an identity provider outside the release. Install the Hub release with its own databases, and then convert the release to an orchestration release on its current chart.
 
-| Topic            | Difference                                                                                                                                                                                          |
-| :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Release values   | In step 2, apply the requirements of that chart version. See [requirements by chart version](/self-managed/deployment/helm/install/topology/orchestration-release.md#requirements-by-chart-version) |
-| Cluster record   | A chart 8.7 cluster needs `architecture: legacy`. See [describe a chart 8.7 cluster](/self-managed/deployment/helm/install/topology/hub-release.md#describe-a-chart-87-cluster)                     |
-| Existing clients | Keep accepting the audience of the clients the release's own Management Identity created. See [keep existing clients working](#keep-existing-clients-working)                                       |
+## Keep existing clients working
 
-### Keep existing clients working
+Step 1 has the cluster record reuse the client IDs and audiences the release already uses, so its existing clients keep working. Use different client IDs and audiences in the record only if you must, for example because another record already uses the chart defaults: the chart rejects a client ID or audience that two records share. In that case, the cluster must keep accepting the old audience.
 
-With Keycloak, clients that the release's own Management Identity created, such as the Connectors client, keep requesting tokens with the audience that Management Identity assigned, `orchestration-api` by default. A cluster record usually declares a cluster-specific audience, such as `orchestration-<id>-api`, and after step 2 the Orchestration Cluster accepts only the audiences it's configured with.
+With Keycloak, clients that the release's own Management Identity created, such as the Connectors client, request tokens with the audience that Management Identity assigned, `orchestration-api` by default. After step 2, the Orchestration Cluster accepts only the audiences it's configured with.
 
 If the release doesn't accept the old audience, Connectors can't authenticate to the Orchestration Cluster and never becomes ready. Its log shows:
 
@@ -178,7 +172,7 @@ If the release doesn't accept the old audience, Connectors can't authenticate to
 io.grpc.StatusRuntimeException: UNAUTHENTICATED: Invalid bearer token
 ```
 
-On the 8.8 and 8.9 charts, add the old audience in the same `helm upgrade` as step 2:
+On the 8.8 and 8.9 charts, add the old audience in the same `helm upgrade` that converts the release:
 
 ```yaml
 orchestration:
@@ -190,8 +184,6 @@ orchestration:
 ```
 
 On the 8.10 chart, `backwardsCompatibleAudiences` is deprecated. List the old audience with the full default set in `camunda.security.authentication.oidc.audiences`. See [backwards-compatible audiences replace the audience list](/self-managed/upgrade/helm/890-to-8100.md#backwards-compatible-audiences-replace-the-audience-list).
-
-On the 8.7 chart, Operate, Tasklist, and Connectors authenticate to Zeebe with the `zeebe` client the release's own Management Identity creates, set in `global.identity.auth.zeebe.clientId`. Don't change that value to the client ID in the cluster record before the Hub release has created that client. Until then, those components get `401 Unauthorized` from the token endpoint and don't become ready.
 
 ## Moving a cluster to a different release, namespace, or Kubernetes cluster
 

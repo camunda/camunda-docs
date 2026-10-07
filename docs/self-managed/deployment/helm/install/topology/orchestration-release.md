@@ -34,16 +34,18 @@ An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart agains
 
 Chart versions earlier than the minimum versions in the following table ignore `global.topology.mode` and deploy a combined release. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
 
-| Chart (minimum version) | Workload to enable                             | Also required                                                                                                                           |
-| :---------------------- | :--------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| 8.10 (15.0.0)           | `orchestration.enabled: true`                  | Nothing further                                                                                                                         |
-| 8.9 (14.11.0)           | `orchestration.enabled: true`                  | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`                                                              |
-| 8.8 (13.14.0)           | `orchestration.enabled: true`                  | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`                                                              |
-| 8.7 (12.14.0)           | `zeebe.enabled: true`, `operate.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
+| Chart (minimum version) | Workload to enable                                                       | Also required                                                                                                                           |
+| :---------------------- | :----------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.10 (15.0.0)           | `orchestration.enabled: true`                                            | Nothing further                                                                                                                         |
+| 8.9 (14.11.0)           | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`, `identityKeycloak.enabled: false`                           |
+| 8.8 (13.14.0)           | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`, `identityKeycloak.enabled: false`                           |
+| 8.7 (12.14.0)           | `zeebe.enabled: true`, `operate.enabled: true`, `tasklist.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
 
 The Hub plane databases belong to the Hub release, which is why the 8.7, 8.8, and 8.9 charts reject them here: leaving them enabled would deploy a second Management Identity or Hub database beside the one the Hub release already owns.
 
-These keys default to `false`, so a fresh install is unaffected. The check matters when you convert an existing combined release, whose values file may already enable them.
+The 8.8 and 8.9 charts reject `identityKeycloak.enabled: true` because Management Identity is off in this role, and they don't run Keycloak without it.
+
+These keys default to `false`, except `identityKeycloak.enabled` on the 8.7 chart, which defaults to `true`. The check matters when you convert an existing combined release, whose values file may already enable them.
 
 A chart 8.7 release also needs `architecture: legacy` in its Hub cluster record, so the inventory addresses its split Zeebe, Zeebe Gateway, Operate, and Tasklist services. See [describe a chart 8.7 cluster](./hub-release.md#describe-a-chart-87-cluster).
 
