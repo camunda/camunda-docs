@@ -59,8 +59,6 @@ You are using:
 - Camunda Orchestration Cluster ≤ 8.9.22 or ≤ 8.8.40
 - Camunda Zeebe ≤ 8.7.42
 
-Versions older than the ones listed above, including versions that have reached end of maintenance, are also affected.
-
 ### Solution
 
 Camunda has provided the following releases which contain the fix:
