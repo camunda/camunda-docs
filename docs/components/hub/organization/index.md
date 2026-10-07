@@ -42,9 +42,9 @@ Create a reusable credential, then select it wherever an element template needs 
 
 <span class="link-arrow">[Get started](./credentials/index.md)</span>
 
-## Manage organization settings
+## Manage organization
 
-Manage users and organizational settings, and view usage alerts and history:
+Manage your organization, its users, and its settings:
 
 <span class="link-arrow">[Get started](./manage-organization-settings/organization-settings.md)</span>
 

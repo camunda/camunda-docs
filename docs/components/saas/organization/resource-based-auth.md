@@ -1,13 +1,13 @@
 ---
 title: "Manage resource-based authorizations"
-description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
+description: "Legacy feature for clusters before version 8.8. Control the access of a user to specific resources with resource-based authorizations."
 ---
 
+:::warning Legacy feature
+Resource-based authorizations are a legacy feature, and they apply only to clusters before version 8.8. For clusters on version 8.8 and later, manage the access of users with [authorizations in Admin](/components/admin/authorization.md).
+:::
+
 Resource authorizations control a user's access to specific resources. To create, update, or delete a user's resource authorizations, select the user's row in the users table.
-
-## Self-Managed
-
-In Self-Managed, authorizations for Orchestration Cluster applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in [Admin](/self-managed/components/orchestration-cluster/admin/overview.md).
 
 ## Prerequisites
 

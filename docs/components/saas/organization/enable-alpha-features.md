@@ -17,7 +17,7 @@ Alpha terms typically refer to the specific terms and conditions that govern the
 Alpha terms help protect Camunda´s interests (such as protecting our intellectual property, disclaiming warranties, or limiting our liability for any issues or damages that may arise during the alpha phase), manage user expectations, encourage active participation and feedback, and ensure legal compliance during the pre-release phase of software development.
 
 :::note
-Enabling alpha features is limited to [admin users and owners](/components/hub/organization/manage-users/index.md#roles-and-permissions) of Camunda products.
+Enabling alpha features is limited to [admin users and owners](/components/hub/organization/users-and-roles.md#roles-and-permissions) of Camunda products.
 :::
 
 ## Accept alpha terms
@@ -49,3 +49,12 @@ To use AI-powered alpha features, you must agree to the **Terms for AI Usage** b
 2. A dialog will appear containing the **Terms for AI Usage**. You must read to the end of the terms before accepting.
 3. To agree to the terms, select the box labeled **I understand and agree to the Terms for AI Usage**.
 4. The AI-powered features toggle will now be available in **Settings**. Set this toggle to **Enabled** to turn on AI features.
+
+### Enable Camunda-provided LLM
+
+[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) has its own row and toggle, listed under the **Hub** component as **Camunda Provided LLM**. It is separate from **AI-powered features**, which is listed under the **Modeler** component. Enabling **AI-powered features** does not enable it, and disabling **AI-powered features** does not disable it.
+
+1. On the **Settings** tab, set the **Camunda Provided LLM** toggle to **Enabled**.
+2. If you have not already accepted the **Terms for AI Usage**, you are prompted to accept them before the feature is enabled.
+
+To stop using the feature, set the **Camunda Provided LLM** toggle to **Disabled**. For details of the data processed while the feature is enabled, see [Data processing and AI terms](/components/agentic-orchestration/camunda-provided-llm.md#data-processing-and-ai-terms).

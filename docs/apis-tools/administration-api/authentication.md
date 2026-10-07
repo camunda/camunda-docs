@@ -81,7 +81,7 @@ To interact with Camunda 8 programmatically, [create client credentials](#genera
 
 Client credentials are created for an organization, and therefore can access all Camunda 8 clusters of this organization. Scopes define the access for client credentials. A client can have one or multiple of the following permissions:
 
-![createConsoleApiClient](../../components/hub/organization/manage-organization-settings/img/create-console-api-client.png)
+![createConsoleApiClient](../../components/saas/organization/img/create-console-api-client.png)
 
 A client can have one or multiple permissions from the following groups:
 
@@ -90,7 +90,7 @@ A client can have one or multiple permissions from the following groups:
 - **Hub API**: Interact with the [Camunda Hub API](../hub-api-saas/overview.md).
 - **IP allowlist**: Configure [IP allowlist](/components/saas/clusters/manage-ip-allowlists.md) rules.
 - **Connector Secrets**: [Manage secrets](/components/saas/clusters/manage-secrets.md) of your clusters.
-- **Members**: [Manage users](/components/hub/organization/manage-users/index.md) in your organization.
+- **Members**: [Manage users](/components/hub/organization/users-and-roles.md) in your organization.
 - **Backups**: Manage [backups](/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).

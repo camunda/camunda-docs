@@ -7,10 +7,6 @@ description: "Control the level of access a user or group has to perform tasks i
 
 Organize users into groups within your organization.
 
-## Self-Managed
-
-In Self-Managed, you manage user groups in [Management Identity](/self-managed/components/management-identity/application-user-group-role-management/manage-groups.md).
-
 ## Creating a group
 
 To create a group in Camunda Hub:
