@@ -1,13 +1,13 @@
 ---
 id: authorization-api
-title: "Authorization API"
-sidebar_label: "Authorization API"
+title: "Authorization Api"
+sidebar_label: "Authorization Api"
 sidebar_position: 6
 mdx:
   format: md
 ---
 
-# Authorization API
+# Authorization Api
 
 `AuthorizationApi` — 5 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\AuthorizationApi::class)`.
 

@@ -190,6 +190,25 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 RewriteRule ^docs/next/apis-tools/hub-api-saas/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-saas/specifications/update-workspace-environments/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/hub-api-sm/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-sm/specifications/update-workspace-environments/ [R=301,L]
 
+# The Manage users page became Manage users and roles (8.10)
+RewriteRule ^docs/next/components/hub/organization/manage-users/?$ /docs/next/components/hub/organization/users-and-roles/ [R=301,L]
+
+# SaaS-specific organization pages moved from Camunda Hub > Manage organization to the SaaS section (8.10)
+RewriteRule ^docs/next/components/hub/organization/manage-users/create-manage-users/?$ /docs/next/components/saas/organization/create-manage-users/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-users/manage-user-groups/?$ /docs/next/components/saas/organization/manage-user-groups/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-users/resource-based-auth/?$ /docs/next/components/saas/organization/resource-based-auth/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/delete-account/?$ /docs/next/components/saas/organization/delete-account/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/enable-alpha-features/?$ /docs/next/components/saas/organization/enable-alpha-features/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/external-sso/?$ /docs/next/components/saas/organization/external-sso/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/switch-organization/?$ /docs/next/components/saas/organization/switch-organization/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/usage-alerts/?$ /docs/next/components/saas/organization/usage-alerts/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/usage-history/?$ /docs/next/components/saas/organization/usage-history/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/view-organization-activity/?$ /docs/next/components/saas/organization/view-organization-activity/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/available-plans/?$ /docs/next/components/saas/organization/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/create-account/?$ /docs/next/components/saas/organization/manage-plan/create-account/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations/?$ /docs/next/components/saas/organization/manage-plan/update-billing-reservations/ [R=301,L]
+RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/upgrade-to-enterprise-plan/?$ /docs/next/components/saas/organization/manage-plan/available-plans/#upgrade-to-an-enterprise-plan [NE,R=301,L]
+
 # The Manage an existing project page became Manage project settings (8.10)
 RewriteRule ^docs/next/components/hub/workspace/manage-projects/manage-project/?$ /docs/next/components/hub/workspace/manage-projects/project-settings/ [R=301,L]
 
@@ -259,6 +278,9 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administr
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 
+# The SAP BTP plugin is retired in 8.10; redirect to the 8.9 page, the last version that documents it.
+RewriteRule ^docs/next/components/camunda-integrations/sap/btp-plugin/?$ /docs/8.9/components/camunda-integrations/sap/btp-plugin/ [R=301,L]
+
 # The "Install Bitnami enterprise images" page is removed in 8.10 (Bitnami images are no longer
 # usable from chart 15.x); redirect to the 8.9 page, the last version that documents them.
 RewriteRule ^docs/next/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]
@@ -283,9 +305,32 @@ RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeli
 # Redirects associated with Camunda Hub
 RewriteRule ^docs/next/components/modeler/forms/utilizing-forms/?$ docs/next/components/hub/workspace/modeler/modeling/utilize-forms [R=301,L]
 RewriteRule ^docs/next/components/modeler/using-web-and-desktop-modeler-together/?$ docs/next/components/modeler/using-hub-and-desktop-modeler-together [R=301,L]
+# Old Console URLs of the pages moved to the SaaS section go there in one hop (8.10). They must stay before the wildcards below.
+RewriteRule ^docs/next/components/console/manage-clusters/create-cluster/?$ /docs/next/components/saas/clusters/create-cluster/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-cluster/?$ /docs/next/components/saas/clusters/manage-cluster/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-api-clients/?$ /docs/next/components/saas/clusters/manage-api-clients/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-secrets/?$ /docs/next/components/saas/clusters/manage-secrets/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-alerts/?$ /docs/next/components/saas/clusters/manage-alerts/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-ip-allowlists/?$ /docs/next/components/saas/clusters/manage-ip-allowlists/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/create-backups/?$ /docs/next/components/saas/clusters/create-backups/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/settings/?$ /docs/next/components/saas/clusters/settings/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/cluster-capacity/?$ /docs/next/components/saas/clusters/cluster-capacity/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/configure-audit-log/?$ /docs/next/components/saas/clusters/configure-audit-log/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/troubleshoot-clusters/?$ /docs/next/components/saas/clusters/troubleshoot-clusters/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/delete-account/?$ /docs/next/components/saas/organization/delete-account/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/enable-alpha-features/?$ /docs/next/components/saas/organization/enable-alpha-features/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/external-sso/?$ /docs/next/components/saas/organization/external-sso/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/switch-organization/?$ /docs/next/components/saas/organization/switch-organization/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/usage-alerts/?$ /docs/next/components/saas/organization/usage-alerts/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/usage-history/?$ /docs/next/components/saas/organization/usage-history/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/view-organization-activity/?$ /docs/next/components/saas/organization/view-organization-activity/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-plan/available-plans/?$ /docs/next/components/saas/organization/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-plan/create-account/?$ /docs/next/components/saas/organization/manage-plan/create-account/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-plan/update-billing-reservations/?$ /docs/next/components/saas/organization/manage-plan/update-billing-reservations/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-plan/upgrade-to-enterprise-plan/?$ /docs/next/components/saas/organization/manage-plan/available-plans/#upgrade-to-an-enterprise-plan [NE,R=301,L]
 RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-users/manage-user-groups [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-users/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/saas/organization/manage-user-groups/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/users-and-roles/ [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/advanced-search$ /docs/next/components/hub/organization/manage-organization-settings/organization-settings/ [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]

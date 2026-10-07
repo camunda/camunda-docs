@@ -24,7 +24,7 @@ Creating a BPMN process diagram with the BPMN Copilot will overwrite existing wo
 To use the BPMN Copilot in Camunda Hub, take the following steps:
 
 1. Log in to Camunda Hub.
-2. If you have not already done so, [opt in](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
+2. If you have not already done so, [opt in](/components/saas/organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
 3. Open a [workspace](/components/hub/organization/manage-workspaces/index.md), or create a new one.
 4. In your workspace, create a new project.
 5. In your project, click **Create new > BPMN diagram**.

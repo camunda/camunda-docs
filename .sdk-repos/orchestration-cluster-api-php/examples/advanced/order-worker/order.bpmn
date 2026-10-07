@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:zeebe="http://camunda.org/schema/zeebe/1.0"
+                  id="php-sdk-order-definitions"
+                  targetNamespace="https://camunda.com/examples/php-sdk">
+  <bpmn:error id="out-of-stock-error" name="Out of stock" errorCode="OUT_OF_STOCK" />
+  <bpmn:process id="__PROCESS_ID__" name="Inventory reservation" isExecutable="true">
+    <bpmn:startEvent id="order-received">
+      <bpmn:outgoing>to-reserve</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="to-reserve" sourceRef="order-received" targetRef="reserve-stock" />
+    <bpmn:serviceTask id="reserve-stock" name="Reserve inventory">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="__JOB_TYPE__" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>to-reserve</bpmn:incoming>
+      <bpmn:outgoing>to-confirmed</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="stock-unavailable" attachedToRef="reserve-stock">
+      <bpmn:outgoing>to-rejected</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="stock-unavailable-definition" errorRef="out-of-stock-error" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="to-confirmed" sourceRef="reserve-stock" targetRef="order-confirmed" />
+    <bpmn:sequenceFlow id="to-rejected" sourceRef="stock-unavailable" targetRef="order-rejected" />
+    <bpmn:endEvent id="order-confirmed" name="Order confirmed">
+      <bpmn:incoming>to-confirmed</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="order-rejected" name="Order rejected">
+      <bpmn:incoming>to-rejected</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="php-sdk-order-diagram">
+    <bpmndi:BPMNPlane id="php-sdk-order-plane" bpmnElement="__PROCESS_ID__">
+      <bpmndi:BPMNShape id="order-received-shape" bpmnElement="order-received">
+        <dc:Bounds x="160" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="reserve-stock-shape" bpmnElement="reserve-stock">
+        <dc:Bounds x="250" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="stock-unavailable-shape" bpmnElement="stock-unavailable">
+        <dc:Bounds x="282" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="order-confirmed-shape" bpmnElement="order-confirmed">
+        <dc:Bounds x="430" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="order-rejected-shape" bpmnElement="order-rejected">
+        <dc:Bounds x="430" y="242" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
