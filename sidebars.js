@@ -1853,7 +1853,6 @@ module.exports = {
         id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
-        "self-managed/reference-architecture/deployment-topology",
         "self-managed/reference-architecture/kubernetes",
         "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
@@ -2760,6 +2759,7 @@ module.exports = {
           items: [
             "self-managed/upgrade/helm/890-to-8100",
             "self-managed/upgrade/helm/combined-to-split-topology",
+            "self-managed/upgrade/helm/connect-existing-clusters",
           ],
         },
         {

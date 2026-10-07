@@ -126,7 +126,7 @@ New features help you more easily configure your agent tools when modeling.
 You can now run AI Agents on Camunda 8 SaaS in minutes using the Camunda-provided LLM, without your own LLM credentials.
 
 - Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
-- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
+- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. Enterprise organizations must explicitly enable the **Camunda Provided LLM** toggle in Camunda Hub, which is separate from the **AI-powered features** toggle.
 - This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup.
 
 <p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
@@ -532,7 +532,7 @@ The new Helm migration and validation toolkit can help you upgrade from Camunda 
 Use the toolkit to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
-- Generate a sample 8.10 values file reflecting Helm 4-only support, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
+- Generate a sample 8.10 values file reflecting the recommended Helm CLI v4, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
 - Create a migration report that lists the keys that were migrated automatically, flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options), suggests where to find more information in the documentation, and can validate an existing 8.10 values file (for example, one drafted by hand or AI tool) against Camunda’s migration rules.
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
@@ -2952,7 +2952,7 @@ See the [release announcement](/reference/announcements-release-notes/8100/8100-
 
 You can now run any AI Agent on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without wiring your own LLM credentials. Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
 
-The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
+The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. Enterprise organizations must explicitly enable the **Camunda Provided LLM** toggle in Camunda Hub, which is separate from the **AI-powered features** toggle.
 
 This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup on day one.
 
