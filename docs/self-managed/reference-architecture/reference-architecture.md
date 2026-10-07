@@ -194,7 +194,7 @@ High availability (HA) ensures that a system remains operational even when compo
 
 Consider regional and zonal placement of workloads. Use at least three zones in a region to maintain availability if a zone fails. On Kubernetes, see [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha) for how to enforce that placement.
 
-For protection against a complete region outage, compare the deployment strategies in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md#get-started-choose-your-strategy).
+Multi-AZ placement protects against an availability-zone outage. For protection against a complete region outage, compare the deployment strategies in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md#get-started-choose-your-strategy).
 
 For more information on how Zeebe handles fault tolerance, see the [Raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 
