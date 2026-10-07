@@ -1323,6 +1323,7 @@ module.exports = {
             "components/saas/clusters/manage-ip-allowlists",
             "components/saas/clusters/create-backups",
             "components/saas/clusters/settings",
+            "components/saas/clusters/connect-external-identity-provider",
             "components/saas/clusters/cluster-capacity",
             "components/saas/clusters/configure-audit-log",
             "components/saas/clusters/troubleshoot-clusters",
