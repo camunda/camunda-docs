@@ -358,6 +358,7 @@ module.exports = {
               items: [
                 "components/best-practices/architecture/sizing-saas",
                 "components/best-practices/architecture/sizing-self-managed",
+                "components/best-practices/architecture/sizing-physical-tenants",
                 "components/best-practices/architecture/sizing-benchmarks",
               ],
             },
@@ -925,6 +926,7 @@ module.exports = {
                     "components/hub/workspace/modeler/modeling/browse-all-resources",
                     "components/hub/workspace/modeler/modeling/utilize-forms",
                     "components/hub/workspace/modeler/run-or-publish-your-process",
+                    "components/hub/workspace/modeler/modeling/connect-to-a-runtime",
                     "components/hub/workspace/modeler/process-landscape-visualization",
                     "components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram",
                     "components/hub/workspace/modeler/modeling/versions",
@@ -1750,18 +1752,6 @@ module.exports = {
             "reference/announcements-release-notes/880/880-release-notes",
           ],
         },
-        {
-          type: "category",
-          label: "8.7",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/870/870-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/870/870-announcements",
-            "reference/announcements-release-notes/870/870-release-notes",
-          ],
-        },
         "reference/announcements-release-notes/release-policy",
       ],
     },
@@ -2438,7 +2428,18 @@ module.exports = {
           items: [
             "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
-            "self-managed/concepts/multi-region/multi-region-rdbms",
+            {
+              type: "category",
+              label: "Multi-Region RDBMS",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/multi-region/multi-region-rdbms",
+              },
+              items: [
+                "self-managed/concepts/multi-region/multi-region-rdbms-growth",
+                "self-managed/concepts/multi-region/multi-region-rdbms-region-loss",
+              ],
+            },
           ],
         },
         "self-managed/operational-guides/data-purge",
