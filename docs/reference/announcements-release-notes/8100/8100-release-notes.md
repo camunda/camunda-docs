@@ -532,7 +532,7 @@ The new Helm migration and validation toolkit can help you upgrade from Camunda 
 Use the toolkit to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
-- Generate a sample 8.10 values file reflecting Helm 4-only support, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
+- Generate a sample 8.10 values file reflecting the recommended Helm CLI v4, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
 - Create a migration report that lists the keys that were migrated automatically, flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options), suggests where to find more information in the documentation, and can validate an existing 8.10 values file (for example, one drafted by hand or AI tool) against Camunda’s migration rules.
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
