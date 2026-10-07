@@ -91,7 +91,7 @@ kubectl logs <pod-name> -c fetch-jdbc-drivers
 kubectl logs <pod-name> | grep -i liquibase
 ```
 
-2. Verify `autoDDL` is enabled (default: `true`):
+2. Check whether `autoDDL` was disabled (default: `true`). If it's `false`, Camunda doesn't create the schema automatically. The following example shows a disabled configuration:
 
 ```yaml
 orchestration:

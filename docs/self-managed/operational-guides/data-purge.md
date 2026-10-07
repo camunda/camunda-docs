@@ -127,10 +127,10 @@ The response is a [JSON object](https://github.com/camunda/camunda/blob/main/dis
 }
 ```
 
-- `changeId`: The ID of the changes initiated to scale the cluster. This can be used to monitor the progress of the scaling operation. The ID typically increases, so new requests have a higher ID than previous requests.
+- `changeId`: The ID of the change initiated to purge the cluster. You can use it to monitor the progress of the purge operation. The ID typically increases, so new requests have a higher ID than previous requests.
 - `currentTopology`: A list of current brokers and the partition distribution.
-- `plannedChanges`: A sequence of operations that has to be executed to achieve scaling.
-- `expectedToplogy`: The expected list of brokers and the partition distribution once the scaling is completed. For the purge feature, the expected topology will be the same as the current topology.
+- `plannedChanges`: A sequence of operations that must run to complete the purge.
+- `expectedToplogy`: The expected list of brokers and the partition distribution once the purge is completed. For the purge feature, the expected topology will be the same as the current topology.
 
 <details>
   <summary>Example response</summary>
@@ -214,7 +214,7 @@ You can monitor the progress of the operation by sending a `GET` request to the 
 curl --request GET 'http://localhost:9600/actuator/cluster'
 ```
 
-When the scaling has completed, the `changeId` from the previous response will be marked as completed:
+When the purge has completed, the `changeId` from the previous response will be marked as completed:
 
 ```json
 {

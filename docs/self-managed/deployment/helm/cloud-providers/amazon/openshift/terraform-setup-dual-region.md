@@ -172,7 +172,7 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
    ```
 
-7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
+7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize Terraform to configure the backend and download necessary provider plugins:
 
    ```bash
    export S3_TF_BUCKET_KEY_CLUSTERS="camunda-terraform/clusters.tfstate"

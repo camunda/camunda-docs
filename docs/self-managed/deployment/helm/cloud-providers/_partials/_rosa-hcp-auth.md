@@ -8,7 +8,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    aws sts get-caller-identity
    ```
 
-1. Check if the ELB service role exists, as if you have never created a load balancer in your AWS account, the role for Elastic Load Balancing (ELB) might not exist yet:
+1. Check whether the Elastic Load Balancing (ELB) service role exists. If you have never created a load balancer in your AWS account, the role might not exist yet:
 
    ```bash
    aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing"
@@ -40,7 +40,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
 1. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
 
-1. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
+1. Get an API token. Go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa) page, click **Load token**, and save the token. Use the token to log in with ROSA CLI:
 
    ```bash
    export RHCS_TOKEN="<yourToken>"

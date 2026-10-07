@@ -284,7 +284,7 @@ The chart derives Web Modeler and Connectors endpoints automatically. Explicit `
 
 ## Example: REST plaintext + gRPC TLS
 
-This is the SUPPORT-33090 customer shape: an internal Zero-Trust network where the gRPC API must be TLS-protected but the REST API stays on plaintext behind the cluster Ingress.
+This example fits an internal Zero-Trust network where the gRPC API must be TLS-protected but the REST API stays on plaintext behind the cluster Ingress.
 
 ```yaml
 global:
