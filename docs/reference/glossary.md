@@ -571,14 +571,6 @@ In Self-Managed Helm deployments, the management plane is the release with `glob
 
 - [Deployment topology](/self-managed/reference-architecture/deployment-topology.md)
 
-### Management plane
-
-The management plane is the part of a Camunda 8 deployment used to design and manage processes and clusters. It consists of [Camunda Hub](/components/hub/index.md) and [Management Identity](#management-identity), and serves one or more Orchestration Clusters.
-
-In Self-Managed Helm deployments, the management plane is the release with `global.topology.mode` set to `hub`.
-
-- [Deployment topology](/self-managed/reference-architecture/deployment-topology.md)
-
 ### Manual task
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
