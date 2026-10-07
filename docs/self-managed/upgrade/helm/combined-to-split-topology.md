@@ -161,7 +161,6 @@ An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, and 8.9 char
 | Release values   | In step 2, apply the requirements of that chart version. See [requirements by chart version](/self-managed/deployment/helm/install/topology/orchestration-release.md#requirements-by-chart-version) |
 | Cluster record   | A chart 8.7 cluster needs `architecture: legacy`. See [describe a chart 8.7 cluster](/self-managed/deployment/helm/install/topology/hub-release.md#describe-a-chart-87-cluster)                     |
 | Existing clients | Keep accepting the audience of the clients the release's own Management Identity created. See [keep existing clients working](#keep-existing-clients-working)                                       |
-| Web Modeler data | The Hub release migrates a Web Modeler database from 8.9 only. See [bring Web Modeler projects into the Hub](#bring-web-modeler-projects-into-the-hub)                                              |
 
 ### Keep existing clients working
 
@@ -187,14 +186,6 @@ orchestration:
 On the 8.10 chart, `backwardsCompatibleAudiences` is deprecated. List the old audience with the full default set in `camunda.security.authentication.oidc.audiences`. See [backwards-compatible audiences replace the audience list](/self-managed/upgrade/helm/890-to-8100.md#backwards-compatible-audiences-replace-the-audience-list).
 
 On the 8.7 chart, Operate, Tasklist, and Connectors authenticate to Zeebe with the `zeebe` client the release's own Management Identity creates, set in `global.identity.auth.zeebe.clientId`. Don't change that value to the client ID in the cluster record before the Hub release has created that client. Until then, those components get `401 Unauthorized` from the token endpoint and don't become ready.
-
-### Bring Web Modeler projects into the Hub
-
-The Hub release's Camunda Hub uses one Web Modeler database. When you point it at the database of an 8.9 Web Modeler in step 3, Camunda Hub migrates that database in place when it starts, and the projects appear in the Hub.
-
-A Web Modeler database from an earlier version can't be migrated directly to 8.10. Before step 2, export the projects from that Web Modeler, and import them into the Hub after step 4.
-
-If you move several releases under one Hub, only one of their Web Modeler databases can become the Hub's database. Export the projects from every other Web Modeler before you convert its release, and import them into the Hub. Keep the exported files until you've confirmed the projects in the Hub.
 
 ## Moving a cluster to a different release, namespace, or Kubernetes cluster
 
