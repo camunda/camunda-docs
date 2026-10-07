@@ -188,3 +188,5 @@ The response is a JSON object that lists all configured exporters with their sta
   }
 ]
 ```
+
+An exporter can also report `CONFIG_NOT_FOUND`. It is still enabled in the dynamic cluster configuration, but its configuration has been removed from the application properties, for example after Optimize or the Elasticsearch subchart was disabled in Helm values. In that state it cannot export and blocks log compaction. Disable it explicitly with the request above rather than relying on the configuration change alone. On 8.9.0 to 8.9.2, 8.8 before 8.8.25, and 8.7 before 8.7.30, a broker restart could flip such a disabled exporter back to `ENABLED` ([camunda/camunda#52260](https://github.com/camunda/camunda/issues/52260)).
