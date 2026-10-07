@@ -658,7 +658,7 @@ Camunda no longer produces the following individual component Docker images in C
 - [camunda/operate](https://hub.docker.com/r/camunda/operate)
 - [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 
-**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
+**Action:** Before upgrading to Camunda 8.10, or to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
 
 </div>
 </div>
