@@ -33,9 +33,12 @@ You invite and manage users and groups in Camunda Hub, on the **Organization > M
 
 You create users in your identity provider, and manage users, groups, and roles in Management Identity.
 
+Access to the Orchestration Cluster applications (Zeebe, Operate, and Tasklist) is managed in Admin, not by the organization role.
+
 - [Management Identity user, group, and role management](/self-managed/components/management-identity/application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage groups](/self-managed/components/management-identity/application-user-group-role-management/manage-groups.md)
 - [Manage roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md)
+- [Admin overview](/self-managed/components/orchestration-cluster/admin/overview.md)
 
 </TabItem>
 
