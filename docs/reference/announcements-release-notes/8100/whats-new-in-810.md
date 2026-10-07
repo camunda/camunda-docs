@@ -227,7 +227,7 @@ You can run AI agents on Camunda 8 SaaS in minutes using the [Camunda-provided L
 
 - Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets.
 - The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used.
-- For enterprise organizations, AI features must be enabled first. After that, the Camunda-provided LLM is enabled automatically.
+- Enterprise organizations must explicitly enable the **Camunda Provided LLM** toggle in Camunda Hub, which is separate from the **AI-powered features** toggle.
 
 <p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
 
