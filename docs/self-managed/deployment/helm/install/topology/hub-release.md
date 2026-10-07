@@ -29,6 +29,8 @@ Each entry in `global.topology.clusters` is the single source for both Managemen
 
 Each record declares a stable unique `id`, the enabled workload components with their client and audience identifiers, the context paths, and the namespace and release name used to derive service endpoints.
 
+Each component in a cluster record needs its own client ID, and the `orchestration` and `optimize` components also need an audience. Regardless of the identity provider, every client ID and audience must be unique: the chart rejects a value that another component, another record, or one of the Hub release's own clients already uses. The chart defaults, such as `orchestration` and `orchestration-api`, can belong to one record at most. Give the other records their own, for example `orchestration-<id>`, `optimize-<id>`, and `connectors-<id>`. With Keycloak, clients with the same ID in one realm would also be one client, so the clusters would overwrite each other's redirect URLs.
+
 | Field                             | Purpose                                                                                        |
 | --------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `id`                              | Stable unique identifier for the cluster. Changing it creates a new Hub inventory entry        |

@@ -484,7 +484,6 @@ module.exports = {
                   "Integration modules": [
                     "components/camunda-integrations/sap/odata-connector",
                     "components/camunda-integrations/sap/rfc-connector",
-                    "components/camunda-integrations/sap/btp-plugin",
                     "components/camunda-integrations/sap/eventing",
                     "components/camunda-integrations/sap/csap-cli",
                   ],
@@ -2762,6 +2761,7 @@ module.exports = {
           items: [
             "self-managed/upgrade/helm/890-to-8100",
             "self-managed/upgrade/helm/combined-to-split-topology",
+            "self-managed/upgrade/helm/connect-existing-clusters",
           ],
         },
         {
