@@ -1323,6 +1323,7 @@ module.exports = {
             "components/saas/clusters/manage-ip-allowlists",
             "components/saas/clusters/create-backups",
             "components/saas/clusters/settings",
+            "components/saas/clusters/connect-external-identity-provider",
             "components/saas/clusters/cluster-capacity",
             "components/saas/clusters/configure-audit-log",
             "components/saas/clusters/troubleshoot-clusters",
@@ -2201,6 +2202,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region",
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region-ops",
               ],
             },
           ],
@@ -2606,6 +2608,7 @@ module.exports = {
             {
               Configuration: [
                 "self-managed/components/hub/configuration/properties",
+                "self-managed/components/hub/configuration/environments",
                 "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",

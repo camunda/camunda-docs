@@ -1527,12 +1527,16 @@ table .badge:nth-of-type(1) {
   text-decoration: none;
 }
 
-div[class^="announcementBar_"] {
-  font-size: 120%;
-  padding: 1em 0;
+.theme-announcement-bar {
+  --docusaurus-announcement-bar-height: auto;
+  height: auto;
+  font-size: 110%;
+  padding: 0.5em 1.5em;
 }
-div[class^="announcementBar_"] button {
+.theme-announcement-bar button {
   align-self: center;
+  color: #fff;
+  opacity: 1;
 }
 
 /* Styles for rendered BPMN/DMN diagrams and optional callouts */
