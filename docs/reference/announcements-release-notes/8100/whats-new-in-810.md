@@ -629,8 +629,6 @@ For each migrated workspace:
 
 An organization admin can change the assigned environments at any time. See [assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md).
 
-In Self-Managed, the upgrade assigns environments in the same way, with some additional considerations. See [environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments).
-
 #### Organize the "General" process application
 
 During the migration, any files or folders located directly in a project, not inside a process application, were automatically grouped in a new process application, named "YOUR PROJECT NAME - General". This process application is a temporary container for loose files and folders. Camunda recommends organizing these resources into process applications that reflect their purpose for better long-term discoverability and maintainability.
