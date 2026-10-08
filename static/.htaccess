@@ -189,6 +189,9 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.10: content moves introduced prior to the release of version 8.10.
 #---------------------------------------------------------------------------------
 
+# Missing docs anchors
+RewriteRule ^docs/components/concepts/clusters/(.*)?$ /docs/components/concepts/clusters/ [R=301,L]
+
 # No console troubleshooting guide
 RewriteRule ^docs/components/console/console-troubleshooting/common-pitfalls/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
 
