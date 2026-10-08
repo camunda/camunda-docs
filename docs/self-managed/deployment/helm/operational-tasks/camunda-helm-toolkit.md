@@ -1,7 +1,7 @@
 ---
 id: camunda-helm-toolkit
 title: "Prepare Helm upgrades with the Camunda Helm Toolkit"
-sidebar_label: "Prepare Helm upgrades with the Camunda Helm Toolkit"
+sidebar_label: "Prepare Helm upgrades"
 description: "Migrate and validate Camunda Helm override files with the local Web UI or Docker CLI, then review findings before upgrading."
 ---
 
@@ -23,7 +23,9 @@ Migrate one adjacent Camunda minor version at a time, then review the output bef
 | 8.8            | 8.9              | 8.9                       |
 | 8.9            | 8.10             | 8.10                      |
 
-Standalone validation supports 8.8, 8.9, and 8.10. You can't validate an 8.7 file directly; migrate it to 8.8 first. Support for 8.10 is preliminary, and some changes require manual configuration.
+Standalone validation supports 8.8, 8.9, and 8.10. You can't validate an 8.7 file directly; migrate it to 8.8 first.
+
+The toolkit migrates supported configuration changes and reports actions that need review. Complete the applicable manual steps in the [version-specific upgrade guide](/self-managed/upgrade/helm/index.md).
 
 The source and target arguments are Camunda versions, such as `8.9`, not Helm chart versions, such as `14.x`. Use the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify your deployment's Camunda version.
 
