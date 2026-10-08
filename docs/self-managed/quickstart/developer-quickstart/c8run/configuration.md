@@ -239,7 +239,7 @@ The local secrets directory is for development only. For production, configure a
 Use Camunda 8 Run to try [Physical Tenants](/self-managed/concepts/physical-tenants/index.md) locally. Each Physical Tenant is an isolated engine inside one Camunda 8 Run instance, with its own data, users, secrets, and connector runtime.
 
 :::note
-Physical Tenants require Camunda 8.10 or later and a Camunda 8 Run build that includes the `tenants` command. Run `./c8run tenants help` to check. Earlier 8.10 builds report `unsupported operation: tenants`.
+The local Physical Tenant commands require Camunda 8 Run 8.10.2 or later. Run `./c8run tenants help` to check command availability. Earlier 8.10 builds without these commands report `unsupported operation: tenants`.
 :::
 
 Add a tenant, then start Camunda 8 Run:
@@ -289,6 +289,8 @@ printf '%s' "$HR_PASSWORD" | ./c8run tenants add hr --username alice --password-
 
 `tenants add` doesn't accept `--password`, so the password never appears in your shell history. Camunda 8 Run stores the password in the tenants file, which only your operating-system user can read.
 
+Tenant logins authenticate web application sessions. REST APIs remain unprotected by default, including tenant-prefixed endpoints; adding a tenant-specific login doesn't enable API protection.
+
 ### Manage tenant secrets and connectors
 
 Each tenant has its own local secrets and connector runtime. A tenant never resolves another tenant's `camunda.secrets.*` values. Use `--tenant` with the [local secret commands](#manage-local-secrets):
@@ -313,9 +315,15 @@ Both `remove` and `reset` prompt for confirmation. In noninteractive use, add `-
 
 Removing a tenant changes only the saved configuration. A running instance keeps serving the tenant until you restart Camunda 8 Run. The tenant's data remains in secondary storage, so adding the same ID again restores it, including the users created in that tenant.
 
+Re-adding a tenant doesn't reset its existing users' passwords. Use the retained credentials when saving a login for an existing tenant ID.
+
 ### Troubleshoot tenant startup failures
 
-If a tenant doesn't become ready, Camunda and the healthy tenants keep running and `./c8run start` exits with an error naming the failed tenants. Check `log/camunda.log`, then run `./c8run stop` and `./c8run start`. For common causes, see [troubleshoot Physical Tenants](/self-managed/concepts/physical-tenants/troubleshooting.md).
+If the shared Camunda application starts but a tenant doesn't become ready, the startup summary shows `NOT READY` and `./c8run start` exits with an error naming the failed tenants. Camunda and the healthy tenants keep running. Check `log/camunda.log`, fix the reported configuration or storage problem, then run `./c8run stop` and `./c8run start`. For common causes, see [troubleshoot Physical Tenants](/self-managed/concepts/physical-tenants/troubleshooting.md).
+
+Invalid shared configuration can prevent the entire Camunda application from starting. For example, mixing RDBMS and `none` secondary-storage types across tenants fails shared configuration validation. Correct the incompatible storage settings before restarting.
+
+With API protection enabled, rejected readiness-probe credentials produce `up (unverified)` and a warning instead of a startup failure. The tenant is reachable, but Camunda 8 Run couldn't verify its storage readiness. If you reused a tenant ID, remove and re-add its saved configuration with the retained user's credentials, then stop and start Camunda 8 Run again. Removing and re-adding the saved configuration preserves the tenant's data.
 
 ### Configure where tenants are stored
 
