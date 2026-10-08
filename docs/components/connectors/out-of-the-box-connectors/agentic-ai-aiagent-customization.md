@@ -100,7 +100,7 @@ If you previously overrode the job types of the legacy element templates, see [j
 
 ### Customize individual components
 
-Each component of the AI Agent connector is registered as a Spring bean and annotated with the `@ConditionalOnMissingBean` annotation. This means you can override a component by defining your own bean of the same type in your custom project. You can register your bean with the `@Component` annotation or with a `@Bean` producer method.
+Each component of the AI Agent connector is registered as a default Spring bean. You can override any default component by registering your own implementation as a Spring bean in your custom project.
 
 The following sections show how to add a custom chat model provider and a custom conversation store.
 
@@ -171,7 +171,7 @@ The connector throws an error if no factory, or more than one factory, supports 
 
 To use the provider in a process:
 
-1. Apply the new AI Agent element template, version 2.
+1. Apply the new **AI Agent Task** or **AI Agent Sub-process** element template, version 2.
 2. In the **Model provider** group, set **Provider** to **Custom implementation**.
 3. Set **Provider type** to the value your factory matches (`my-provider` in the example above).
 4. Set **Model** to the model ID your implementation expects.
