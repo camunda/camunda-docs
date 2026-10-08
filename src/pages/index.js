@@ -85,7 +85,8 @@ function Feature({ imageUrl, url, title, description }) {
 const search_agentic_url =
   "/docs/components/agentic-orchestration/agentic-orchestration-overview/";
 const search_agent_url = "/docs/guides/getting-started-agentic-orchestration/";
-const search_idp_url = "/docs/components/modeler/web-modeler/idp/";
+const search_idp_url =
+  "/docs/components/hub/workspace/modeler/idp/idp-example/";
 const release = "/docs/reference/announcements-release-notes/overview/";
 const search_migrate_url = "/docs/guides/migrating-from-camunda-7/";
 const search_feel_url = "/docs/components/modeler/feel/what-is-feel/";
@@ -187,10 +188,10 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/890/whats-new-in-89/"
+                  "docs/reference/announcements-release-notes/8100/whats-new-in-810/"
                 )}
               >
-                What's new in 8.9
+                What's new in 8.10
               </Link>
               <Link
                 className={clsx(
@@ -198,10 +199,10 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/890/890-release-notes/"
+                  "docs/reference/announcements-release-notes/8100/8100-release-notes/"
                 )}
               >
-                8.9 release notes
+                8.10 release notes
               </Link>
               <Link
                 className={clsx(

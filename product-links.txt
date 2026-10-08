@@ -58,7 +58,7 @@ https://docs.camunda.io/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/configuration/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/getting-started/
 https://docs.camunda.io/docs/components/
-https://docs.camunda.io/docs/components/concepts/clusters/#auto-pause
+https://docs.camunda.io/docs/components/concepts/clusters/
 https://docs.camunda.io/docs/components/concepts/multi-tenancy
 https://docs.camunda.io/docs/components/concepts/resource-authorizations/
 https://docs.camunda.io/docs/components/console/manage-clusters/create-cluster/
