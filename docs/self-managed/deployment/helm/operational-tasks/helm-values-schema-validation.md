@@ -5,7 +5,7 @@ sidebar_label: "Helm values schema validation"
 description: "Learn how Helm checks values against the Camunda 8 chart schema, how to bypass the check, and which deployment tools support the bypass."
 ---
 
-The Camunda 8 Helm chart includes a `values.schema.json` file. Helm compares your values to this schema before it renders the chart templates. A value that does not match the schema stops the command.
+The Camunda 8 Helm chart includes a `values.schema.json` file. Helm compares your values to this schema before it renders the chart templates. A value that doesn't match the schema stops the command.
 
 This page explains how the validation works, how to bypass it, and which deployment tools support the bypass.
 
@@ -14,8 +14,8 @@ This page explains how the validation works, how to bypass it, and which deploym
 - Helm checks the merged values against `values.schema.json` before it renders templates.
 - A schema error stops `helm install`, `helm upgrade`, `helm template`, and `helm lint`.
 - Helm has no warn-only mode. Each schema error is a hard failure.
-- The chart documentation links and descriptions do not appear in Helm errors.
-- The chart schema closes some objects. A closed object rejects any key that the schema does not list.
+- The chart documentation links and descriptions don't appear in Helm errors.
+- The chart schema closes some objects. A closed object rejects any key that the schema doesn't list.
 
 The error text depends on the Helm version. This example comes from a test chart that closes its root object, with the unknown key `unk`:
 
@@ -30,7 +30,7 @@ Fix the values that the error names. This is the recommended action. The bypass 
 
 To find problems before you run Helm, use the `validate` command of the [Camunda Helm Toolkit](./camunda-helm-toolkit.md#validate-override-files). The toolkit page lists its exit codes.
 
-Do not remove `orchestration.fullnameOverride` to fix a schema error. This change renames the StatefulSet. The brokers then start on new, empty volumes.
+Don't remove `orchestration.fullnameOverride` to fix a schema error. This change renames the StatefulSet. The brokers then start on new, empty volumes.
 
 ## Bypass the validation {#bypass-the-validation}
 
@@ -45,8 +45,8 @@ helm upgrade --install camunda camunda/camunda-platform \
 Keep these limits in mind:
 
 - You need Helm 3.16.0 or later. Helm 3.15 returns `Error: unknown flag: --skip-schema-validation`.
-- The flag turns off all schema checks, including type checks. It does not only allow unknown keys.
-- Camunda has not decided to turn on strict validation by default. This page describes the current behavior.
+- The flag turns off all schema checks, including type checks. It doesn't only allow unknown keys.
+- Camunda hasn't decided to turn on strict validation by default. This page describes the current behavior.
 
 ## Check support in your deployment tool
 
@@ -76,7 +76,7 @@ For more information, see these upstream references:
 
 ### Parent charts and `global` values
 
-Helm passes the `global` values of a parent chart to each subchart. If a subchart schema closes its `global` object, Helm rejects the keys that the subchart does not list. The Camunda chart keeps its `global` object open, so this issue does not apply to the Camunda chart schema.
+Helm passes the `global` values of a parent chart to each subchart. If a subchart schema closes its `global` object, Helm rejects the keys that the subchart doesn't list. The Camunda chart keeps its `global` object open, so this issue doesn't apply to the Camunda chart schema.
 
 ## Choose a Helm version
 
