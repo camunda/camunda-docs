@@ -23,9 +23,16 @@ import IconMcpImg from '../../components/assets/icon-mcp.png';
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left" style={{marginRight: '50px', flex: '1.35'}}>
 
-Build Camunda solutions with ProcessOS Harness, agentic orchestration, and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents in BPMN processes, and design faster with Camunda Copilot.
+Choose how you want to build with AI. Let ProcessOS Harness automate the work, or set up your own AI development environment with agentic orchestration, MCP integrations, and Camunda Copilot.
 
-<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Build with Camunda" href={useBaseUrl('/build-with-camunda')} style={{marginBottom: '30px', marginTop: '20px'}}>Set up your AI development environment</a>
+<div style={{display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px', marginBottom: '30px'}}>
+<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Re-engineer processes with ProcessOS Harness" href="../../components/process-os-harness/overview/">Re-engineer processes with ProcessOS Harness <span class="badge badge--medium" title="This feature is in early access" style={{marginLeft: '8px'}}>Early access</span></a>
+<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Build with Camunda" href={useBaseUrl('/build-with-camunda')}>Set up your AI development environment</a>
+</div>
+
+**ProcessOS Harness** is the automated path: it discovers your existing processes, re-engineers them to use AI, and drives AI coding agents to generate executable Camunda solutions. It targets builders who direct AI coding agents through a governed process.
+
+**Your AI development environment** is the do-it-yourself path: you connect your own AI tools to Camunda and build at your own pace. It targets developers and modelers who want full control over how they build.
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -34,14 +41,6 @@ Build Camunda solutions with ProcessOS Harness, agentic orchestration, and MCP i
 
 </div>
 </div>
-
-## ProcessOS Harness
-
-<span class="badge badge--medium" title="This feature is in early access">Early access</span>
-
-ProcessOS discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions. ProcessOS Harness, available as early access, is the governance process that drives AI coding agents to do this work.
-
-<p class="link-arrow">[Re-engineer processes with ProcessOS](../../components/process-os-harness/overview.md)</p>
 
 ## Build AI agents
 
