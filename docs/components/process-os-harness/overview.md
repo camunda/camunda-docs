@@ -12,12 +12,6 @@ keywords:
   ]
 ---
 
-import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
-import DocsIcon from "@site/docs/components/assets/icon-docs.png";
-import PlayIcon from "@site/docs/components/assets/icon-play.png";
-import AgenticIcon from "@site/docs/components/assets/icon-agentic.png";
-import ConfigIcon from "@site/docs/components/assets/icon-config.png";
-import AoGrid from '../react-components/\_ao-card';
 
 import PageDescription from '@site/src/components/PageDescription';
 
@@ -39,9 +33,9 @@ The harness guides the agent through each phase, asks for human review at define
 Learn more about and request access to [ProcessOS and the great re-engineering](https://camunda.com/learn/the-great-re-engineering).
 :::
 
-### Who is ProcessOS Harness for?
+## Who ProcessOS Harness is for
 
-ProcessOS Harness targets builders who implement end-to-end solutions with Camunda and are comfortable directing AI coding agents. Subject matter experts (SMEs) participate as reviewers and approvers rather than primary contributors, reducing the time they need to invest in a project.
+ProcessOS Harness targets the builder: someone who implements Camunda end to end and is comfortable directing AI coding agents. Subject matter experts (SMEs) take part as reviewers and approvers rather than as primary contributors, which reduces the time they invest in a project.
 
 Builders get the most out of ProcessOS Harness when they bring:
 
@@ -51,9 +45,9 @@ Builders get the most out of ProcessOS Harness when they bring:
 - Stakeholder communication skills across engineering, architecture, and business leadership.
 - Comfort with ambiguity.
 
-### Key principles
+## Key principles
 
-#### A governance process guides the journey
+### A governance process guides the journey
 
 ProcessOS Harness runs your engagement as a governed process with defined phases and milestones. You keep full flexibility between milestones, but the milestones themselves ensure the project progresses.
 
@@ -68,7 +62,7 @@ Each phase ends at a milestone: process scope defined, as-is model finalized, to
 
 The governance process itself runs on Camunda. Project state lives in Camunda and every artifact is committed to Git, so the whole engagement is auditable. For details, see [how the governance process works](get-started/governance-process.md).
 
-#### Progress comes from iterations and your judgment
+### Progress comes from iterations and your judgment
 
 AI isn't deterministic, so ProcessOS Harness doesn't produce a finished solution in a single pass. Project maturity rises through iterations across discovery, transformation, and implementation, and thinking in iterations is the skill that matters most.
 
@@ -76,7 +70,7 @@ Your expert judgment is what turns agent output into a working system. ProcessOS
 
 The AI coding agent supports you throughout. You can ask it to fix problems at any point, including working around defects you hit along the way.
 
-#### Two supported use cases
+### Two supported use cases
 
 ProcessOS Harness runs all phases for both use cases, but uses different modes within them.
 
@@ -87,7 +81,7 @@ ProcessOS Harness runs all phases for both use cases, but uses different modes w
 
 Legacy migration transformations can be optimized for specific source systems. Get in contact with Camunda to learn more.
 
-### Current scope
+## Current scope
 
 Today, ProcessOS Harness focuses on taking you from discovery to a generated, tested Camunda solution. The following areas sit outside this release and are on the roadmap for future iterations:
 
@@ -101,87 +95,6 @@ In this release, each project runs locally with its own private memory. Cross-pr
 
 ## Get started
 
-Prepare your organization and run your first ProcessOS Harness project.
-
-### Prerequisites
-
-Before you install ProcessOS Harness, review the [system requirements](system-requirements.md) for the Camunda cluster, Git-compatible version control system, supported AI coding agent, and local tooling you need.
-
-### Set up and install
-
-<AoGrid columns={2} ao={[
-{
-link: "../project-setup/",
-title: "Set up your organization",
-image: ConfigIcon,
-description: "Prepare your organization for a first ProcessOS Harness project.",
-},
-{
-link: "../get-started/",
-title: "Install and configure a project",
-image: PlayIcon,
-description: "Install ProcessOS Harness and configure your first project.",
-},
-]} />
-
-## Learn the fundamentals
-
-Understand how ProcessOS Harness guides a project from discovery to a generated solution.
-
-<AoGrid columns={2} ao={[
-{
-link: "../get-started/governance-process/",
-title: "Governance process",
-image: BPMNIcon,
-description: "See how phases, milestones, and gates guide a project.",
-},
-{
-link: "../get-started/review-cycle/",
-title: "Review cycles",
-image: DocsIcon,
-description: "Validate generated results with subject matter experts.",
-},
-{
-link: "../get-started/builder-task/",
-title: "Builder task",
-image: AgenticIcon,
-description: "Learn how a builder task works in Camunda.",
-},
-]} />
-
-## Explore the phases and further resources
-
-Follow the phases of a project, and read about additional features and recommendations.
-
-<AoGrid columns={2} ao={[
-{
-link: "../phases/discovery/",
-title: "Discovery",
-image: PlayIcon,
-description: "Discover the as-is process from organizational memory.",
-},
-{
-link: "../phases/transformation/",
-title: "Transformation",
-image: PlayIcon,
-description: "Transform the as-is process into an agentic to-be design.",
-},
-{
-link: "../phases/implementation/",
-title: "Implementation",
-image: PlayIcon,
-description: "Generate and implement the executable Camunda solution.",
-},
-{
-link: "../other-features/artifact-generation/",
-title: "Artifact generation",
-image: BPMNIcon,
-description: "Generate Camunda artifacts from your process models.",
-},
-{
-link: "../best-practices/data-handling/",
-title: "Data handling",
-image: DocsIcon,
-description: "Handle project data safely.",
-},
-]} />
+1. Set up your organization for a first project, described in [set up your organization for ProcessOS Harness](project-setup.md).
+2. Check the [system requirements](system-requirements.md).
+3. Install ProcessOS Harness and configure your first project, described in [install ProcessOS Harness and configure a project](get-started.md).
