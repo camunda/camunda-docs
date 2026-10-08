@@ -19,6 +19,13 @@ import createCamundaClient, {
   type ProcessInstanceKey,
   RoleId,
 } from '@camunda8/orchestration-cluster-api';
+//#region ReadmePerOperationFunctionsImport
+import {
+  createCamundaCore,
+  createProcessInstance,
+  getTopology,
+} from '@camunda8/orchestration-cluster-api/fn';
+//#endregion ReadmePerOperationFunctionsImport
 import { z } from 'zod';
 
 // ---------------------------------------------------------------------------
@@ -325,6 +332,26 @@ async function _readmeCancelable(defKey: ProcessDefinitionKey) {
     } else throw e;
   }
   //#endregion ReadmeCancelable
+}
+
+// ---------------------------------------------------------------------------
+// Per-operation functions (tree-shakeable)
+// ---------------------------------------------------------------------------
+
+async function _readmePerOperationFunctions(defKey: ProcessDefinitionKey) {
+  //#region ReadmePerOperationFunctions
+  // Same options as createCamundaClient(); a CamundaClient also works as the core.
+  const core = createCamundaCore();
+
+  const topology = await getTopology(core);
+  console.log(topology.brokers?.length);
+
+  const instance = await createProcessInstance(core, {
+    processDefinitionKey: defKey,
+    variables: { orderId: 'A-1' },
+  });
+  console.log(instance.processInstanceKey);
+  //#endregion ReadmePerOperationFunctions
 }
 
 // ---------------------------------------------------------------------------

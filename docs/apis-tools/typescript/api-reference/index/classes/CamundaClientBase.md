@@ -10,6 +10,10 @@ mdx:
 The Camunda client's operation methods. Create clients with [createCamundaClient](../functions/createCamundaClient.md)
 or [CamundaClient](../variables/CamundaClient.md), which add `.paginate(...)` to every search operation.
 
+## Extends
+
+- `CamundaCore`
+
 ## Constructors
 
 ### Constructor
@@ -28,6 +32,12 @@ new CamundaClientBase(opts?): CamundaClientBase;
 
 `CamundaClientBase`
 
+#### Overrides
+
+```ts
+CamundaCore.constructor;
+```
+
 ## Accessors
 
 ### clock
@@ -44,6 +54,12 @@ Clock backing SDK-internal cadence. The injected one when supplied, else the liv
 
 [`Clock`](../interfaces/Clock.md)
 
+#### Inherited from
+
+```ts
+CamundaCore.clock;
+```
+
 ---
 
 ### config
@@ -58,6 +74,12 @@ get config(): Readonly<CamundaConfig>;
 
 `Readonly`\<[`CamundaConfig`](../interfaces/CamundaConfig.md)\>
 
+#### Inherited from
+
+```ts
+CamundaCore.config;
+```
+
 ## Methods
 
 ### \_getSupportLogger()
@@ -71,6 +93,12 @@ Internal accessor for support logger (no public API commitment yet).
 #### Returns
 
 [`SupportLogger`](../interfaces/SupportLogger.md)
+
+#### Inherited from
+
+```ts
+CamundaCore._getSupportLogger;
+```
 
 ---
 
@@ -116,6 +144,12 @@ Internal invocation helper to apply global backpressure gating + retry + normali
 #### Returns
 
 `Promise`\<`T`\>
+
+#### Inherited from
+
+```ts
+CamundaCore._invokeWithRetry;
+```
 
 ---
 
@@ -1322,8 +1356,12 @@ cancelProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOp
 Cancel process instances (batch)
 
 Cancels multiple active or suspended process instances.
-Since only ACTIVE and SUSPENDED root instances can be cancelled, any given filters for state and
-parentProcessInstanceKey are ignored and overridden during this batch operation.
+Only ACTIVE and SUSPENDED root instances can be cancelled. A state filter narrows the batch
+to the given states. Requesting any state other than ACTIVE or SUSPENDED through the `$eq` or
+`$in` operators is rejected. Other state operators (`$neq`, `$exists`, `$like`) are applied as
+given, and the batch remains limited to ACTIVE and SUSPENDED instances. Without a state filter,
+both ACTIVE and SUSPENDED instances are selected. Any given filter for parentProcessInstanceKey
+is ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
 -
@@ -1520,6 +1558,12 @@ clearAuthCache(opts?): void;
 
 `void`
 
+#### Inherited from
+
+```ts
+CamundaCore.clearAuthCache;
+```
+
 ---
 
 ### completeJob()
@@ -1645,6 +1689,12 @@ configure(next): void;
 #### Returns
 
 `void`
+
+#### Inherited from
+
+```ts
+CamundaCore.configure;
+```
 
 ---
 
@@ -3963,6 +4013,12 @@ Useful when a custom supportLogger was injected and you still want the canonical
 
 `void`
 
+#### Inherited from
+
+```ts
+CamundaCore.emitSupportLogPreamble;
+```
+
 ---
 
 ### evaluateConditionals()
@@ -4222,6 +4278,12 @@ forceAuthRefresh(): Promise<string | undefined>;
 
 `Promise`\<`string` \| `undefined`\>
 
+#### Inherited from
+
+```ts
+CamundaCore.forceAuthRefresh;
+```
+
 ---
 
 ### getAgentDefinition()
@@ -4472,6 +4534,12 @@ getAuthHeaders(): Promise<Record<string, string>>;
 
 `Promise`\<`Record`\<`string`, `string`\>\>
 
+#### Inherited from
+
+```ts
+CamundaCore.getAuthHeaders;
+```
+
 ---
 
 ### getAuthorization()
@@ -4577,6 +4645,12 @@ Public accessor for current backpressure adaptive limiter state (stable)
 `severity`: `string`;
 `waiters`: `number`;
 \}
+
+#### Inherited from
+
+```ts
+CamundaCore.getBackpressureState;
+```
 
 ---
 
@@ -4906,6 +4980,12 @@ Use configure(...) to apply changes.
 #### Returns
 
 `Readonly`\<[`CamundaConfig`](../interfaces/CamundaConfig.md)\>
+
+#### Inherited from
+
+```ts
+CamundaCore.getConfig;
+```
 
 ---
 
@@ -5363,6 +5443,12 @@ Internal accessor (read-only) for eventual consistency error mode.
 #### Returns
 
 `"throw"` \| `"result"`
+
+#### Inherited from
+
+```ts
+CamundaCore.getErrorMode;
+```
 
 ---
 
@@ -8785,6 +8871,12 @@ Access a scoped logger (internal & future user emission).
 
 [`Logger`](../../logger/interfaces/Logger.md)
 
+#### Inherited from
+
+```ts
+CamundaCore.logger;
+```
+
 ---
 
 ### migrateProcessInstance()
@@ -9073,6 +9165,12 @@ onAuthHeaders(h): void;
 #### Returns
 
 `void`
+
+#### Inherited from
+
+```ts
+CamundaCore.onAuthHeaders;
+```
 
 ---
 
@@ -15449,3 +15547,9 @@ withCorrelation<T>(id, fn): Promise<T>;
 #### Returns
 
 `Promise`\<`T`\>
+
+#### Inherited from
+
+```ts
+CamundaCore.withCorrelation;
+```
