@@ -1986,7 +1986,8 @@ h4.openapi-security__summary-header {
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 8px;
-  overflow: hidden;
+  /* Scroll wide tables instead of clipping their last column. */
+  overflow-x: auto;
 }
 [data-theme="light"] .markdown table {
   border-bottom-left-radius: 0;
@@ -2704,6 +2705,17 @@ h3 + .release-announcement-row {
 
   flex: 0 0 auto;
   white-space: nowrap;
+}
+
+.sidebar-badge-early-access
+  > .menu__list-item-collapsible
+  > .menu__link
+  .menu__link-text::after,
+.sidebar-badge-early-access
+  > .menu__list-item-collapsible
+  > .menu__link
+  > span::after {
+  content: "Early access";
 }
 
 .sidebar-cta-preview

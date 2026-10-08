@@ -26,39 +26,36 @@ Copilot supports the following LLM providers:
 
 ## Configuration
 
-To enable Copilot, set the AI feature flag (`FEATURE_AI_ENABLED` / `camunda.hub.feature.ai-enabled`) to `true`.
+To enable Copilot, set the AI feature flag (`camunda.hub.feature.ai-enabled` / `CAMUNDA_HUB_FEATURE_AIENABLED`) to `true`.
 Then configure the default LLM provider for BPMN, FEEL, and form copilots.
 Each provider has its own configuration options described below.
 
-<Tabs groupId="copilot-general" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-general" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                        | Description                                                                    | Example value | Default value |
-| ------------------------------------------- | ------------------------------------------------------------------------------ | ------------- | ------------- |
-| `FEATURE_AI_ENABLED`                        | Enables Copilot.                                                               | `true`        | `false`       |
-| `RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER` | Default provider for BPMN Copilot.                                             | `BEDROCK`     | –             |
-| `RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER` | Default provider for FEEL Copilot.                                             | `OPENAI`      | –             |
-| `RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER` | Default provider for form Copilot.                                             | `VERTEX_AI`   | –             |
-| `RESTAPI_COPILOT_REQUEST_TIMEOUT`           | [optional] Overall request timeout in milliseconds for Copilot requests in UI. | `200000`      | `300000`      |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub:
-  feature.ai-enabled: true
+| Property                                                | Description                                                    | Example value | Default value |
+| ------------------------------------------------------- | -------------------------------------------------------------- | ------------- | ------------- |
+| `camunda.hub.feature.ai-enabled`                        | Enables Copilot.                                               | `true`        | `false`       |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-provider` | Default provider for BPMN Copilot.                             | `BEDROCK`     | –             |
+| `camunda.hub.copilot.default-feel-copilot-llm-provider` | Default provider for FEEL Copilot.                             | `OPENAI`      | –             |
+| `camunda.hub.copilot.default-form-copilot-llm-provider` | Default provider for form Copilot.                             | `VERTEX_AI`   | –             |
+| `camunda.hub.client.copilot-request-timeout`            | [optional] Overall request timeout for Copilot requests in UI. | `200s`        | `300s`        |
 
-  copilot:
-    default-bpmn-copilot-llm-provider: BEDROCK
-    default-feel-copilot-llm-provider: OPENAI
-    default-form-copilot-llm-provider: VERTEX_AI
-  client.copilot-request-timeout: 200s # optional, default: 300s
-```
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                | Description                                                                    | Example value | Default value |
+| --------------------------------------------------- | ------------------------------------------------------------------------------ | ------------- | ------------- |
+| `CAMUNDA_HUB_FEATURE_AIENABLED`                     | Enables Copilot.                                                               | `true`        | `false`       |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMPROVIDER` | Default provider for BPMN Copilot.                                             | `BEDROCK`     | –             |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMPROVIDER` | Default provider for FEEL Copilot.                                             | `OPENAI`      | –             |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMPROVIDER` | Default provider for form Copilot.                                             | `VERTEX_AI`   | –             |
+| `CAMUNDA_HUB_CLIENT_COPILOTREQUESTTIMEOUT`          | [optional] Overall request timeout in milliseconds for Copilot requests in UI. | `200000`      | `300000`      |
 
 </TabItem>
 
@@ -66,45 +63,44 @@ camunda.hub:
 
 ### BPMN Copilot
 
-<Tabs groupId="copilot-bpmn" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-bpmn" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment Variable                                  | Description                                                               | Example Value        | Default Value |
-| ----------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
-| `RESTAPI_BPMN_COPILOT_TEMPERATURE`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
-| `RESTAPI_BPMN_COPILOT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
-| `RESTAPI_BPMN_COPILOT_TOP_K`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
-| `RESTAPI_BPMN_COPILOT_MAX_TOKENS`                     | [optional] Maximum new tokens per responses.                              | `4096`               | `8192`        |
-| `RESTAPI_BPMN_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
-| `RESTAPI_BPMN_COPILOT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
-| `RESTAPI_BPMN_COPILOT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
-| `RESTAPI_BPMN_COPILOT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
-| `RESTAPI_BPMN_COPILOT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
-| `RESTAPI_BPMN_COPILOT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
-| `RESTAPI_BPMN_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.default-bpmn-copilot-llm-configuration:
-  temperature: 0.2 # optional, default: 0.3
-  top-p: 0.90 # optional, default: 0.95
-  top-k: 100 # optional, default: 64
-  max-tokens: 4096 # optional, default: 8192
-  timeout: 45s # optional, default: 60s
-  log-request: true # optional, default: false
-  log-response: true # optional, default: false
-  connection-acquisition-timeout: 10s # optional, default: 30s
-  logit-bias: '{"123":-2,"456":3}' # optional, default: {}
-  max-connections: 300 # optional, default: 200
-  read-timeout: 120s # optional, default: 60s
-```
+| Property                                                                                    | Description                                                               | Example value        | Default value |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.temperature`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.top-p`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.top-k`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.max-tokens`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.timeout`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.log-requests`                   | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.log-responses`                  | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.connection-acquisition-timeout` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.logit-bias`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.max-connections`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `camunda.hub.copilot.default-bpmn-copilot-llm-configuration.read-timeout`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment Variable                                                                  | Description                                                               | Example Value        | Default Value |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_TEMPERATURE`                  | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_TOPP`                         | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_TOPK`                         | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_MAXTOKENS`                    | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_TIMEOUT`                      | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_LOGREQUESTS`                  | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_LOGRESPONSES`                 | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_CONNECTIONACQUISITIONTIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_LOGITBIAS`                    | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_MAXCONNECTIONS`               | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTBPMNCOPILOTLLMCONFIGURATION_READTIMEOUT`                  | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
 
 </TabItem>
 
@@ -112,45 +108,44 @@ camunda.hub.copilot.default-bpmn-copilot-llm-configuration:
 
 ### FEEL Copilot
 
-<Tabs groupId="copilot-feel" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-feel" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                                  | Description                                                               | Example value        | Default value |
-| ----------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
-| `RESTAPI_FEEL_COPILOT_TEMPERATURE`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
-| `RESTAPI_FEEL_COPILOT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
-| `RESTAPI_FEEL_COPILOT_TOP_K`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
-| `RESTAPI_FEEL_COPILOT_MAX_TOKENS`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
-| `RESTAPI_FEEL_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
-| `RESTAPI_FEEL_COPILOT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
-| `RESTAPI_FEEL_COPILOT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
-| `RESTAPI_FEEL_COPILOT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
-| `RESTAPI_FEEL_COPILOT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
-| `RESTAPI_FEEL_COPILOT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
-| `RESTAPI_FEEL_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.default-feel-copilot-llm-configuration:
-  temperature: 0.2 # optional, default: 0.3
-  top-p: 0.90 # optional, default: 0.95
-  top-k: 100 # optional, default: 64
-  max-tokens: 4096 # optional, default: 8192
-  timeout: 45s # optional, default: 60s
-  log-request: true # optional, default: false
-  log-response: true # optional, default: false
-  connection-acquisition-timeout: 10s # optional, default: 30s
-  logit-bias: '{"123":-2,"456":3}' # optional, default: {}
-  max-connections: 300 # optional, default: 200
-  read-timeout: 120s # optional, default: 60s
-```
+| Property                                                                                    | Description                                                               | Example value        | Default value |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.temperature`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.top-p`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.top-k`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.max-tokens`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.timeout`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.log-requests`                   | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.log-responses`                  | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.connection-acquisition-timeout` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.logit-bias`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.max-connections`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `camunda.hub.copilot.default-feel-copilot-llm-configuration.read-timeout`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                                                  | Description                                                               | Example value        | Default value |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_TEMPERATURE`                  | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_TOPP`                         | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_TOPK`                         | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_MAXTOKENS`                    | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_TIMEOUT`                      | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_LOGREQUESTS`                  | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_LOGRESPONSES`                 | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_CONNECTIONACQUISITIONTIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_LOGITBIAS`                    | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_MAXCONNECTIONS`               | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFEELCOPILOTLLMCONFIGURATION_READTIMEOUT`                  | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
 
 </TabItem>
 
@@ -158,45 +153,44 @@ camunda.hub.copilot.default-feel-copilot-llm-configuration:
 
 ### Form Copilot
 
-<Tabs groupId="copilot-form" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-form" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                                  | Description                                                               | Example value        | Default value |
-| ----------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
-| `RESTAPI_FORM_COPILOT_TEMPERATURE`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
-| `RESTAPI_FORM_COPILOT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
-| `RESTAPI_FORM_COPILOT_TOP_K`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
-| `RESTAPI_FORM_COPILOT_MAX_TOKENS`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
-| `RESTAPI_FORM_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
-| `RESTAPI_FORM_COPILOT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
-| `RESTAPI_FORM_COPILOT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
-| `RESTAPI_FORM_COPILOT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
-| `RESTAPI_FORM_COPILOT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
-| `RESTAPI_FORM_COPILOT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
-| `RESTAPI_FORM_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.default-form-copilot-llm-configuration:
-  temperature: 0.2 # optional, default: 0.3
-  top-p: 0.90 # optional, default: 0.95
-  top-k: 100 # optional, default: 64
-  max-tokens: 4096 # optional, default: 8192
-  timeout: 45s # optional, default: 60s
-  log-request: true # optional, default: false
-  log-response: true # optional, default: false
-  connection-acquisition-timeout: 10s # optional, default: 30s
-  logit-bias: '{"123":-2,"456":3}' # optional, default: {}
-  max-connections: 300 # optional, default: 200
-  read-timeout: 120s # optional, default: 60s
-```
+| Property                                                                                    | Description                                                               | Example value        | Default value |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.temperature`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.top-p`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.top-k`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.max-tokens`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.timeout`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.log-requests`                   | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.log-responses`                  | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.connection-acquisition-timeout` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.logit-bias`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.max-connections`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `camunda.hub.copilot.default-form-copilot-llm-configuration.read-timeout`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                                                  | Description                                                               | Example value        | Default value |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_TEMPERATURE`                  | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_TOPP`                         | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_TOPK`                         | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_MAXTOKENS`                    | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_TIMEOUT`                      | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_LOGREQUESTS`                  | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_LOGRESPONSES`                 | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_CONNECTIONACQUISITIONTIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_LOGITBIAS`                    | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_MAXCONNECTIONS`               | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `CAMUNDA_HUB_COPILOT_DEFAULTFORMCOPILOTLLMCONFIGURATION_READTIMEOUT`                  | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
 
 </TabItem>
 
@@ -208,31 +202,30 @@ camunda.hub.copilot.default-form-copilot-llm-configuration:
 When configuring AWS Bedrock, make sure the model is available in the provided AWS region.
 :::
 
-<Tabs groupId="copilot-aws" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-aws" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment Variable                    | Description                                                                    | Example Value                               |
-| --------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------- |
-| `RESTAPI_COPILOT_AWS_DEFAULT_MODEL_ID`  | Default model ID for AWS Bedrock provider.                                     | `anthropic.claude-3-5-sonnet-20240620-v1:0` |
-| `RESTAPI_COPILOT_AWS_REGION`            | AWS region for Bedrock.                                                        | `us-east-1`                                 |
-| `RESTAPI_BPMNCOPILOT_ACCESS_KEY_ID`     | AWS access key ID for Bedrock (if not using instance or role credentials).     | `AKIA...`                                   |
-| `RESTAPI_BPMNCOPILOT_SECRET_ACCESS_KEY` | AWS secret access key for Bedrock (if not using instance or role credentials). | `wJalrXUtnFEMI/K7MDENG/bPxRfiCY...`         |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.providers.bedrock:
-  default-model-id: anthropic.claude-3-5-sonnet-20240620-v1:0
-  region: us-east-1
-  access-key-id: AKIA... # optional, if not using instance or role credentials
-  secret-access-key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCY..." # optional, if not using instance or role credentials
-```
+| Property                                                  | Description                                                                    | Example value                               |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------- |
+| `camunda.hub.copilot.providers.bedrock.default-model-id`  | Default model ID for AWS Bedrock provider.                                     | `anthropic.claude-3-5-sonnet-20240620-v1:0` |
+| `camunda.hub.copilot.providers.bedrock.region`            | AWS region for Bedrock.                                                        | `us-east-1`                                 |
+| `camunda.hub.copilot.providers.bedrock.access-key-id`     | AWS access key ID for Bedrock (if not using instance or role credentials).     | `AKIA...`                                   |
+| `camunda.hub.copilot.providers.bedrock.secret-access-key` | AWS secret access key for Bedrock (if not using instance or role credentials). | `wJalrXUtnFEMI/K7MDENG/bPxRfiCY...`         |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment Variable                                    | Description                                                                    | Example Value                               |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------- |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_BEDROCK_DEFAULTMODELID`  | Default model ID for AWS Bedrock provider.                                     | `anthropic.claude-3-5-sonnet-20240620-v1:0` |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_BEDROCK_REGION`          | AWS region for Bedrock.                                                        | `us-east-1`                                 |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_BEDROCK_ACCESSKEYID`     | AWS access key ID for Bedrock (if not using instance or role credentials).     | `AKIA...`                                   |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_BEDROCK_SECRETACCESSKEY` | AWS secret access key for Bedrock (if not using instance or role credentials). | `wJalrXUtnFEMI/K7MDENG/bPxRfiCY...`         |
 
 </TabItem>
 
@@ -263,37 +256,36 @@ If a weaker or smaller model is used, it may fail to generate a valid BPMN XML. 
 Camunda recommends using a stronger model, such as GPT-4 or comparable, for reliable BPMN generation.
 :::
 
-<Tabs groupId="copilot-openai" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-openai" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                       | Description                                                                                   | Example value                        |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `RESTAPI_COPILOT_OPEN_AI_DEFAULT_MODEL_ID` | Default model ID for OpenAI provider.                                                         | `gpt-4.1`                            |
-| `RESTAPI_FEELCOPILOT_API_KEY`              | [conditionally required] API key for OpenAI public API.                                       | `sk-live-********`                   |
-| `RESTAPI_COPILOT_OPENAI_ENDPOINT`          | [conditionally required] Custom endpoint for OpenAI-compatible APIs (proxies or self-hosted). | `https://my-proxy.example.com/v1`    |
-| `RESTAPI_COPILOT_OPENAI_BEARER`            | [optional] Bearer token header to use instead of `api-key` with compatible gateways.          | `my-shared-bearer-token`             |
-| `RESTAPI_COPILOT_OPENAI_USERNAME`          | [optional] Username to authenticate with an OpenAI-compatible gateway.                        | `api_user`                           |
-| `RESTAPI_COPILOT_OPENAI_PASSWORD`          | [optional] Password to authenticate with an OpenAI-compatible gateway.                        | `s3cr3t`                             |
-| `RESTAPI_COPILOT_OPENAI_HEADERS`           | [optional] Extra HTTP headers as a JSON map (string).                                         | `{"X-Org":"camunda","X-Trace":"on"}` |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.providers.open-ai:
-  default-model-id: gpt-4.1
-  api-key: sk-live-******** # conditionally required
-  endpoint: https://my-proxy.example.com/v1 # conditionally required
-  bearer: my-shared-bearer-token # optional
-  username: api_user # optional
-  password: s3cr3t # optional
-  headers: '{"X-Org":"camunda","X-Trace":"on"}' # optional
-```
+| Property                                                 | Description                                                                                   | Example value                        |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `camunda.hub.copilot.providers.open-ai.default-model-id` | Default model ID for OpenAI provider.                                                         | `gpt-4.1`                            |
+| `camunda.hub.copilot.providers.open-ai.api-key`          | [conditionally required] API key for OpenAI public API.                                       | `sk-live-********`                   |
+| `camunda.hub.copilot.providers.open-ai.endpoint`         | [conditionally required] Custom endpoint for OpenAI-compatible APIs (proxies or self-hosted). | `https://my-proxy.example.com/v1`    |
+| `camunda.hub.copilot.providers.open-ai.bearer`           | [optional] Bearer token header to use instead of `api-key` with compatible gateways.          | `my-shared-bearer-token`             |
+| `camunda.hub.copilot.providers.open-ai.username`         | [optional] Username to authenticate with an OpenAI-compatible gateway.                        | `api_user`                           |
+| `camunda.hub.copilot.providers.open-ai.password`         | [optional] Password to authenticate with an OpenAI-compatible gateway.                        | `s3cr3t`                             |
+| `camunda.hub.copilot.providers.open-ai.headers`          | [optional] Extra HTTP headers as a JSON map (string).                                         | `{"X-Org":"camunda","X-Trace":"on"}` |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                  | Description                                                                                   | Example value                        |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OPENAI_DEFAULTMODELID` | Default model ID for OpenAI provider.                                                         | `gpt-4.1`                            |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OPENAI_APIKEY`         | [conditionally required] API key for OpenAI public API.                                       | `sk-live-********`                   |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OPENAI_ENDPOINT`       | [conditionally required] Custom endpoint for OpenAI-compatible APIs (proxies or self-hosted). | `https://my-proxy.example.com/v1`    |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OPENAI_BEARER`         | [optional] Bearer token header to use instead of `api-key` with compatible gateways.          | `my-shared-bearer-token`             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OPENAI_USERNAME`       | [optional] Username to authenticate with an OpenAI-compatible gateway.                        | `api_user`                           |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OPENAI_PASSWORD`       | [optional] Password to authenticate with an OpenAI-compatible gateway.                        | `s3cr3t`                             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OPENAI_HEADERS`        | [optional] Extra HTTP headers as a JSON map (string).                                         | `{"X-Org":"camunda","X-Trace":"on"}` |
 
 </TabItem>
 
@@ -301,29 +293,28 @@ camunda.hub.copilot.providers.open-ai:
 
 ### Azure OpenAI
 
-<Tabs groupId="copilot-azure-openai" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-azure-openai" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                             | Description                                       | Example value                      |
-| ------------------------------------------------ | ------------------------------------------------- | ---------------------------------- |
-| `RESTAPI_COPILOT_AZURE_OPEN_AI_DEFAULT_MODEL_ID` | Default model (deployment name) for Azure OpenAI. | `gpt-4o`                           |
-| `RESTAPI_COPILOT_AZURE_OPENAI_API_KEY`           | Azure OpenAI API key.                             | `az-aoai-key-**\*\*\*\***`         |
-| `RESTAPI_COPILOT_AZURE_OPENAI_ENDPOINT`          | Azure OpenAI endpoint.                            | `https://my-aoai.openai.azure.com` |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.providers.azure-open-ai:
-  default-model-id: gpt-4o
-  api-key: "az-aoai-key-***"
-  endpoint: https://my-aoai.openai.azure.com
-```
+| Property                                                       | Description                                       | Example value                      |
+| -------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------- |
+| `camunda.hub.copilot.providers.azure-open-ai.default-model-id` | Default model (deployment name) for Azure OpenAI. | `gpt-4o`                           |
+| `camunda.hub.copilot.providers.azure-open-ai.api-key`          | Azure OpenAI API key.                             | `az-aoai-key-***`                  |
+| `camunda.hub.copilot.providers.azure-open-ai.endpoint`         | Azure OpenAI endpoint.                            | `https://my-aoai.openai.azure.com` |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                       | Description                                       | Example value                      |
+| ---------------------------------------------------------- | ------------------------------------------------- | ---------------------------------- |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREOPENAI_DEFAULTMODELID` | Default model (deployment name) for Azure OpenAI. | `gpt-4o`                           |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREOPENAI_APIKEY`         | Azure OpenAI API key.                             | `az-aoai-key-***`                  |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREOPENAI_ENDPOINT`       | Azure OpenAI endpoint.                            | `https://my-aoai.openai.azure.com` |
 
 </TabItem>
 
@@ -335,37 +326,36 @@ camunda.hub.copilot.providers.azure-open-ai:
 Azure AI supports authentication with an API key or Microsoft Entra ID (formerly Azure AD) using the OAuth 2.0 client credentials flow.
 :::
 
-<Tabs groupId="copilot-azure-ai" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-azure-ai" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                        | Description                                                                        | Example value                                                                     |
-| ------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `RESTAPI_COPILOT_AZURE_AI_DEFAULT_MODEL_ID` | Default model for Azure AI (Inference).                                            | `gpt-4o-mini`                                                                     |
-| `RESTAPI_COPILOT_AZURE_AI_ENDPOINT`         | Endpoint for Azure AI (Inference). Use the endpoint from `Azure AI Inference SDK`. | `https://********-resource.cognitiveservices.azure.com/openai/deployments/gpt-4o` |
-| `RESTAPI_COPILOT_AZURE_AI_API_KEY`          | [conditionally required] API key for Azure AI (alternative to OAuth credentials).  | `az-ai-key-**\*\*\*\***`                                                          |
-| `RESTAPI_COPILOT_AZURE_AI_CLIENT_ID`        | [conditionally required] Azure AI OAuth client ID.                                 | `00000000-0000-0000-0000-000000000000`                                            |
-| `RESTAPI_COPILOT_AZURE_AI_CLIENT_SECRET`    | [conditionally required] Azure AI OAuth client secret.                             | `**\*\*\*\***`                                                                    |
-| `RESTAPI_COPILOT_AZURE_AI_TENANT_ID`        | [conditionally required] Azure AD tenant ID for OAuth.                             | `11111111-2222-3333-4444-555555555555`                                            |
-| `RESTAPI_COPILOT_AZURE_AI_AUTHORITY_HOST`   | [conditionally required] Authority host for Azure OAuth.                           | `https://login.microsoftonline.com`                                               |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.providers.azure-ai:
-  default-model-id: gpt-4o-mini
-  endpoint: https://my-resource.cognitiveservices.azure.com/openai/deployments/gpt-4o
-  api-key: "az-ai-key-***" # conditionally required (alternative to OAuth)
-  client-id: 00000000-0000-0000-0000-000000000000 # conditionally required (OAuth)
-  client-secret: "***" # conditionally required (OAuth)
-  tenant-id: 11111111-2222-3333-4444-555555555555 # conditionally required (OAuth)
-  authority-host: https://login.microsoftonline.com # conditionally required (OAuth)
-```
+| Property                                                  | Description                                                                        | Example value                                                                     |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `camunda.hub.copilot.providers.azure-ai.default-model-id` | Default model for Azure AI (Inference).                                            | `gpt-4o-mini`                                                                     |
+| `camunda.hub.copilot.providers.azure-ai.endpoint`         | Endpoint for Azure AI (Inference). Use the endpoint from `Azure AI Inference SDK`. | `https://********-resource.cognitiveservices.azure.com/openai/deployments/gpt-4o` |
+| `camunda.hub.copilot.providers.azure-ai.api-key`          | [conditionally required] API key for Azure AI (alternative to OAuth credentials).  | `az-ai-key-***`                                                                   |
+| `camunda.hub.copilot.providers.azure-ai.client-id`        | [conditionally required] Azure AI OAuth client ID.                                 | `00000000-0000-0000-0000-000000000000`                                            |
+| `camunda.hub.copilot.providers.azure-ai.client-secret`    | [conditionally required] Azure AI OAuth client secret.                             | `***`                                                                             |
+| `camunda.hub.copilot.providers.azure-ai.tenant-id`        | [conditionally required] Azure AD tenant ID for OAuth.                             | `11111111-2222-3333-4444-555555555555`                                            |
+| `camunda.hub.copilot.providers.azure-ai.authority-host`   | [conditionally required] Authority host for Azure OAuth.                           | `https://login.microsoftonline.com`                                               |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                   | Description                                                                        | Example value                                                                     |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_DEFAULTMODELID` | Default model for Azure AI (Inference).                                            | `gpt-4o-mini`                                                                     |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_ENDPOINT`       | Endpoint for Azure AI (Inference). Use the endpoint from `Azure AI Inference SDK`. | `https://********-resource.cognitiveservices.azure.com/openai/deployments/gpt-4o` |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_APIKEY`         | [conditionally required] API key for Azure AI (alternative to OAuth credentials).  | `az-ai-key-***`                                                                   |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_CLIENTID`       | [conditionally required] Azure AI OAuth client ID.                                 | `00000000-0000-0000-0000-000000000000`                                            |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_CLIENTSECRET`   | [conditionally required] Azure AI OAuth client secret.                             | `***`                                                                             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_TENANTID`       | [conditionally required] Azure AD tenant ID for OAuth.                             | `11111111-2222-3333-4444-555555555555`                                            |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_AZUREAI_AUTHORITYHOST`  | [conditionally required] Authority host for Azure OAuth.                           | `https://login.microsoftonline.com`                                               |
 
 </TabItem>
 
@@ -373,31 +363,30 @@ camunda.hub.copilot.providers.azure-ai:
 
 ### Google Vertex AI
 
-<Tabs groupId="copilot-vertex" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-vertex" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                         | Description                                     | Example value                                                                                |
-| -------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `RESTAPI_COPILOT_VERTEX_AI_DEFAULT_MODEL_ID` | Default model ID for Google Vertex AI (Gemini). | `gemini-1.5-pro-002`                                                                         |
-| `RESTAPI_COPILOT_VERTEX_AI_PROJECT_ID`       | GCP project ID for Vertex AI.                   | `my-gcp-project`                                                                             |
-| `RESTAPI_COPILOT_VERTEX_AI_LOCATION`         | Vertex AI location or region.                   | `us-central1`                                                                                |
-| `RESTAPI_COPILOT_VERTEX_AI_CREDENTIALS_JSON` | Vertex AI service account JSON (string).        | `{"type":"service_account","project_id":"my-proj","client_email":"...","private_key":"..."}` |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.providers.vertex-ai:
-  default-model-id: gemini-1.5-pro-002
-  project-id: my-gcp-project
-  location: us-central1
-  credentials-json: '{"type":"service_account","project_id":"my-proj","client_email":"...","private_key":"..."}'
-```
+| Property                                                   | Description                                     | Example value                                                                                |
+| ---------------------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `camunda.hub.copilot.providers.vertex-ai.default-model-id` | Default model ID for Google Vertex AI (Gemini). | `gemini-1.5-pro-002`                                                                         |
+| `camunda.hub.copilot.providers.vertex-ai.project-id`       | GCP project ID for Vertex AI.                   | `my-gcp-project`                                                                             |
+| `camunda.hub.copilot.providers.vertex-ai.location`         | Vertex AI location or region.                   | `us-central1`                                                                                |
+| `camunda.hub.copilot.providers.vertex-ai.credentials-json` | Vertex AI service account JSON (string).        | `{"type":"service_account","project_id":"my-proj","client_email":"...","private_key":"..."}` |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                     | Description                                     | Example value                                                                                |
+| -------------------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_VERTEXAI_DEFAULTMODELID`  | Default model ID for Google Vertex AI (Gemini). | `gemini-1.5-pro-002`                                                                         |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_VERTEXAI_PROJECTID`       | GCP project ID for Vertex AI.                   | `my-gcp-project`                                                                             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_VERTEXAI_LOCATION`        | Vertex AI location or region.                   | `us-central1`                                                                                |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_VERTEXAI_CREDENTIALSJSON` | Vertex AI service account JSON (string).        | `{"type":"service_account","project_id":"my-proj","client_email":"...","private_key":"..."}` |
 
 </TabItem>
 
@@ -405,31 +394,30 @@ camunda.hub.copilot.providers.vertex-ai:
 
 ### Anthropic
 
-<Tabs groupId="copilot-anthropic" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-anthropic" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                              | Description                                                              | Example value                | Default value |
-| ------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------- |
-| `RESTAPI_COPILOT_ANTHROPIC_DEFAULT_MODEL_ID`      | Default model ID for Anthropic.                                          | `claude-3-5-sonnet-20240620` | -             |
-| `RESTAPI_COPILOT_ANTHROPIC_API_KEY`               | Anthropic API key.                                                       | `sk-ant-**\*\*\*\***`        | -             |
-| `RESTAPI_COPILOT_ANTHROPIC_CACHE_SYSTEM_MESSAGES` | [optional] Enable client-side caching of system messages (if supported). | `false`                      | `true`        |
-| `RESTAPI_COPILOT_ANTHROPIC_CACHE_TOOLS`           | [optional] Enable client-side caching of tool schemas (if supported).    | `false`                      | `true`        |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.providers.anthropic:
-  default-model-id: claude-3-5-sonnet-20240620
-  api-key: "sk-ant-***"
-  cache-system-messages: false # optional, default: true
-  cache-tools: false # optional, default: true
-```
+| Property                                                        | Description                                                              | Example value                | Default value |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------- |
+| `camunda.hub.copilot.providers.anthropic.default-model-id`      | Default model ID for Anthropic.                                          | `claude-3-5-sonnet-20240620` | -             |
+| `camunda.hub.copilot.providers.anthropic.api-key`               | Anthropic API key.                                                       | `sk-ant-***`                 | -             |
+| `camunda.hub.copilot.providers.anthropic.cache-system-messages` | [optional] Enable client-side caching of system messages (if supported). | `false`                      | `true`        |
+| `camunda.hub.copilot.providers.anthropic.cache-tools`           | [optional] Enable client-side caching of tool schemas (if supported).    | `false`                      | `true`        |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                          | Description                                                              | Example value                | Default value |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------- |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_DEFAULTMODELID`      | Default model ID for Anthropic.                                          | `claude-3-5-sonnet-20240620` | -             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_APIKEY`              | Anthropic API key.                                                       | `sk-ant-***`                 | -             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_CACHESYSTEMMESSAGES` | [optional] Enable client-side caching of system messages (if supported). | `false`                      | `true`        |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_ANTHROPIC_CACHETOOLS`          | [optional] Enable client-side caching of tool schemas (if supported).    | `false`                      | `true`        |
 
 </TabItem>
 
@@ -437,29 +425,28 @@ camunda.hub.copilot.providers.anthropic:
 
 ### Ollama
 
-<Tabs groupId="copilot-ollama" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-ollama" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                      | Description                                                   | Example value                        |
-| ----------------------------------------- | ------------------------------------------------------------- | ------------------------------------ |
-| `RESTAPI_COPILOT_OLLAMA_DEFAULT_MODEL_ID` | Default model ID for Ollama.                                  | `llama3.1`                           |
-| `RESTAPI_COPILOT_OLLAMA_BASE_URL`         | Ollama server base URL.                                       | `http://localhost:11434`             |
-| `RESTAPI_COPILOT_OLLAMA_HEADERS`          | [optional] Extra HTTP headers to send as a JSON map (string). | `{"X-Org":"camunda","X-Trace":"on"}` |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.providers.ollama:
-  default-model-id: llama3.1
-  base-url: http://localhost:11434
-  headers: '{"X-Org":"camunda","X-Trace":"on"}' # optional
-```
+| Property                                                | Description                                                   | Example value                        |
+| ------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------ |
+| `camunda.hub.copilot.providers.ollama.default-model-id` | Default model ID for Ollama.                                  | `llama3.1`                           |
+| `camunda.hub.copilot.providers.ollama.base-url`         | Ollama server base URL.                                       | `http://localhost:11434`             |
+| `camunda.hub.copilot.providers.ollama.headers`          | [optional] Extra HTTP headers to send as a JSON map (string). | `{"X-Org":"camunda","X-Trace":"on"}` |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                  | Description                                                   | Example value                        |
+| ----------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------ |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OLLAMA_DEFAULTMODELID` | Default model ID for Ollama.                                  | `llama3.1`                           |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OLLAMA_BASEURL`        | Ollama server base URL.                                       | `http://localhost:11434`             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_OLLAMA_HEADERS`        | [optional] Extra HTTP headers to send as a JSON map (string). | `{"X-Org":"camunda","X-Trace":"on"}` |
 
 </TabItem>
 
@@ -467,33 +454,32 @@ camunda.hub.copilot.providers.ollama:
 
 ### Hugging Face
 
-<Tabs groupId="copilot-huggingface" defaultValue="envVars" queryString values={[
+<Tabs groupId="copilot-huggingface" defaultValue="applicationYaml" queryString values={[
+{label: 'Application properties', value: 'applicationYaml' },
 {label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
 ]}>
-
-<TabItem value="envVars">
-
-| Environment variable                            | Description                                                              | Example value                                 | Default value |
-| ----------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------- | ------------- |
-| `RESTAPI_COPILOT_HUGGING_FACE_DEFAULT_MODEL_ID` | Default model ID for Hugging Face Inference.                             | `mistralai/Mixtral-8x7B-Instruct-v0.1`        | -             |
-| `RESTAPI_COPILOT_HUGGING_FACE_BASE_URL`         | Base URL for Hugging Face Inference endpoint (if self-hosted or custom). | `https://api-inference.huggingface.co/models` | -             |
-| `RESTAPI_COPILOT_HUGGING_FACE_ACCESS_TOKEN`     | Access token for Hugging Face.                                           | `hf\_**\*\*\*\***`                            | -             |
-| `RESTAPI_COPILOT_HUGGING_FACE_WAIT_FOR_MODEL`   | [optional] Wait for model to warm up before responding.                  | `false`                                       | `true`        |
-| `RESTAPI_COPILOT_HUGGING_FACE_RETURN_FULL_TEXT` | [optional] Return the full generated text (not just the completion).     | `true`                                        | `true`        |
-
-</TabItem>
 
 <TabItem value="applicationYaml">
 
-```yaml
-camunda.hub.copilot.providers.hugging-face:
-  default-model-id: mistralai/Mixtral-8x7B-Instruct-v0.1
-  base-url: https://api-inference.huggingface.co/models
-  access-token: "hf_***"
-  wait-for-model: false # optional, default: true
-  return-full-text: true # optional, default: true
-```
+| Property                                                      | Description                                                              | Example value                                 | Default value |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------- | ------------- |
+| `camunda.hub.copilot.providers.hugging-face.default-model-id` | Default model ID for Hugging Face Inference.                             | `mistralai/Mixtral-8x7B-Instruct-v0.1`        | -             |
+| `camunda.hub.copilot.providers.hugging-face.base-url`         | Base URL for Hugging Face Inference endpoint (if self-hosted or custom). | `https://api-inference.huggingface.co/models` | -             |
+| `camunda.hub.copilot.providers.hugging-face.access-token`     | Access token for Hugging Face.                                           | `hf_***`                                      | -             |
+| `camunda.hub.copilot.providers.hugging-face.wait-for-model`   | [optional] Wait for model to warm up before responding.                  | `false`                                       | `true`        |
+| `camunda.hub.copilot.providers.hugging-face.return-full-text` | [optional] Return the full generated text (not just the completion).     | `true`                                        | `true`        |
+
+</TabItem>
+
+<TabItem value="envVars">
+
+| Environment variable                                       | Description                                                              | Example value                                 | Default value |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------- | ------------- |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_DEFAULTMODELID` | Default model ID for Hugging Face Inference.                             | `mistralai/Mixtral-8x7B-Instruct-v0.1`        | -             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_BASEURL`        | Base URL for Hugging Face Inference endpoint (if self-hosted or custom). | `https://api-inference.huggingface.co/models` | -             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_ACCESSTOKEN`    | Access token for Hugging Face.                                           | `hf_***`                                      | -             |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_WAITFORMODEL`   | [optional] Wait for model to warm up before responding.                  | `false`                                       | `true`        |
+| `CAMUNDA_HUB_COPILOT_PROVIDERS_HUGGINGFACE_RETURNFULLTEXT` | [optional] Return the full generated text (not just the completion).     | `true`                                        | `true`        |
 
 </TabItem>
 

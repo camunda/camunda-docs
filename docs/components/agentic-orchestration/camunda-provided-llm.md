@@ -21,15 +21,15 @@ Camunda-provided LLM is free to use within the provided budget, and is intended 
 Key benefits:
 
 - **No LLM account setup required.** You don't need to sign up with a model provider or configure credentials to start exploring AI agents.
-- **Compare different LLM providers.** Run your agent with different models and easily switch between them to find the best fit for your use case.
+- **Compare different models.** Run your agent with different models and easily switch between them to find the best fit for your use case.
 - **No surprise bills.** Your organization gets a free, preconfigured budget for testing and experimentation.
 - **Instant blueprints.** AI agent blueprints that use Camunda-provided LLM work out of the box with no configuration needed.
 - **Seamless transition.** When you're ready for production, switch to a customer-managed provider like AWS Bedrock without changing your process architecture.
 
 Camunda-provided LLM is available in Camunda SaaS for:
 
-- **SaaS trial organizations**: Includes Camunda-managed credentials and a free budget. AI features are enabled by default.
-- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly enable AI features in Camunda Hub. When you enable them, Camunda-provided LLM is enabled automatically. If Camunda-provided LLM is unavailable, disable AI features and then re-enable them.
+- **SaaS trial organizations**: Includes Camunda-managed credentials and a free budget. Camunda-provided LLM is enabled by default.
+- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly [enable the **Camunda Provided LLM** toggle](/components/saas/organization/enable-alpha-features.md#enable-camunda-provided-llm) in Camunda Hub. This is a separate toggle from **AI-powered features**, which controls other AI capabilities such as Camunda Copilot. The first time you enable either toggle, you must accept the **Terms for AI Usage**.
 
 :::note
 Availability, budgets, and UI may vary by environment and rollout stage.
@@ -46,23 +46,16 @@ Once Camunda-provided LLM is available in your organization, its credentials are
   - **Provider**: `OpenAI Compatible`.
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
   - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
-  - **Model**: Select a model from the [list of supported models](#supported-models). For example `amazon.nova-pro-v1`.
+  - **Model**: Select a model from the [list of supported models](#supported-models). For example, `anthropic/claude-sonnet-4.6`.
 
 ## Supported models
 
-Camunda-provided LLM uses a managed LLM gateway that supports multiple models from different providers. You can switch between models to compare how your agent performs with each one. When using the AI Agent connector, set the **Model** field to one of the following values:
+Camunda-provided LLM uses a managed LLM gateway that supports the models listed below. You can switch between these models to compare how your agent performs with each one. When using the AI Agent connector, set the **Model** field to one of the following values:
 
-| Model                       | Value to set in **Model**     | What it's good for                                                                                                                |
-| :-------------------------- | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
-| Amazon Nova Pro v1          | `amazon.nova-pro-v1`          | Best for balanced quality and cost across general-purpose AI agent scenarios.                                                     |
-| Anthropic Claude Haiku 4.5  | `anthropic.claude-haiku-4-5`  | Best for lightweight assistants, short interactions, and lower-cost tasks that still need good instruction following.             |
-| Anthropic Claude Opus 4.5   | `anthropic.claude-opus-4-5`   | Best for advanced analysis and challenging multi-step tasks where maximum quality is the priority.                                |
-| Anthropic Claude Sonnet 4.6 | `anthropic.claude-sonnet-4-6` | Best as the default for complex agent tasks, balancing strong reasoning, reliable tool use, speed, and budget consumption.        |
-| Anthropic Claude Sonnet 5   | `anthropic.claude-sonnet-5`   | Best for demanding agent tasks when you want stronger reasoning and tool use than the default and can trade off speed and budget. |
-| DeepSeek v3.2               | `deepseek.v3.2`               | Best for technical and coding-heavy workflows that need strong reasoning at moderate cost.                                        |
-| OpenAI GPT-OSS 120B         | `openai.gpt-oss-120b`         | Best for higher-quality results than small open models while still controlling cost.                                              |
-| OpenAI GPT-OSS 20B          | `openai.gpt-oss-20b`          | Best for budget-conscious experimentation and simpler automations with lower complexity.                                          |
-| Qwen Qwen3 235B             | `qwen.qwen3-235b`             | Best for advanced reasoning and coding use cases where you want strong performance with good cost efficiency.                     |
+| Model                                                                            | Value to set in **Model**     | What it's good for                                                                                                         |
+| :------------------------------------------------------------------------------- | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| [Anthropic Claude Sonnet 4.6](https://openrouter.ai/anthropic/claude-sonnet-4.6) | `anthropic/claude-sonnet-4.6` | Best as the default for complex agent tasks, balancing strong reasoning, reliable tool use, speed, and budget consumption. |
+| [Anthropic Claude Haiku 4.5](https://openrouter.ai/anthropic/claude-haiku-4.5)   | `anthropic/claude-haiku-4.5`  | Best for lightweight assistants, short interactions, and lower-cost tasks that still need good instruction following.      |
 
 :::note
 When selecting a model, consider your process requirements, expected usage volume, and token budget. For model selection guidelines, see how to [choose the right LLM](./choose-right-model-agentic.md).
@@ -135,3 +128,27 @@ To switch away, follow these steps:
 4. Test a process instance end-to-end and verify results.
 
 Your orchestration model doesn’t change during this transition. The BPMN process, event choreography, and human touchpoints you designed with Camunda-provided LLM carry forward unchanged, while only the LLM backend configuration shifts.
+
+## Data processing and AI terms
+
+Review how Camunda-provided LLM processes your data, how OpenRouter is involved, and which terms apply when you use this feature.
+
+### How Camunda-provided LLM works
+
+The Camunda-provided LLM is an optional feature. When enabled, you configure which process variables, prompts, and tool outputs the agent may use. Only the data you choose to make available to the agent is sent for processing. You control this through your process configuration, such as input mappings.
+
+### How OpenRouter is used
+
+OpenRouter, Inc. is a routing service that gives Camunda access to a range of third-party AI models through a single integration. OpenRouter does not host or train models itself. Instead, it forwards each request to the selected AI model provider for processing. Camunda restricts this feature to providers that enforce zero data retention (ZDR). This means that neither OpenRouter nor the underlying model provider retains your data after processing the request, and your data is not used to train their models.
+
+### OpenRouter as a sub-processor
+
+OpenRouter, Inc. is a sub-processor engaged by Camunda in connection with this feature. When you enable this feature, your prompts, agent memory, and tool call inputs and outputs, which may contain personal data, are transmitted to OpenRouter and the selected model provider for the purpose of generating a response. This feature is optional and can be disabled at any time by turning off the **Camunda Provided LLM** toggle in [Camunda Hub](/components/saas/organization/enable-alpha-features.md#enable-camunda-provided-llm). When disabled, no data is sent to OpenRouter. A comprehensive list of Camunda's sub-processors is available in [Camunda's Trust Center](https://trust.camunda.com/).
+
+### AI terms
+
+This feature is an AI Feature under Camunda's Terms for AI Usage, which apply to your use of it unless your existing agreement with Camunda provides for AI terms, in which case the latter would prevail. In addition, please refer to our [AI Usage Guidelines](/guides/build-with-ai/ai-usage-guidelines.md) to learn more about how to use Camunda’s AI features responsibly.
+
+### Data sharing
+
+You control what data is made available to this feature through your process configuration. Do not include sensitive data, or other content you are not authorized to share with a third-party AI service provider.

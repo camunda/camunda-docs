@@ -10,10 +10,14 @@ Use two Helm releases to run two independent Optimize instances against one Camu
 The platform release runs the full Camunda deployment and the first Optimize instance. The second release runs only Optimize and connects to the platform topology's shared services.
 
 :::warning Temporary deployment pattern
-Use this pattern as a stopgap when separate Optimize dashboards, configuration, client credentials, or index lifecycles are required. Native Optimize multi-tenancy is the long-term solution and is expected to replace this pattern.
+Use this pattern as a stopgap when separate Optimize dashboards, configuration, client credentials, or index lifecycles are required over the **same** orchestration data. Native Optimize multi-tenancy is the long-term solution and is expected to replace this pattern.
 
 This pattern doesn't provide per-team authorization or process-data isolation. Both Optimize instances import the same orchestration data, and both use the `optimize-api` audience and `Optimize` role.
+
+If you need genuine data isolation per team, use [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) with one Optimize release per tenant instead. See [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md).
 :::
+
+Set `global.topology.mode: optimize` on the Optimize-only release rather than disabling each other component by hand. The role gates off every non-Optimize component and validates that the release has the storage, Identity URL, and context path an Optimize-only release needs. See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
 
 ## Understand the release boundaries
 
@@ -37,7 +41,7 @@ Both releases must use the same Camunda 8.10 chart and application version. Inst
 Before you install the releases, prepare the following:
 
 - A production-ready Kubernetes cluster and a Helm CLI version supported by the Camunda 8.10 chart.
-- A single-region Camunda deployment. This pattern relies on Management Identity, which [dual-region deployments don't support](/self-managed/concepts/multi-region/dual-region.md#limitations) — Optimize itself isn't supported there either.
+- A single-region Camunda deployment. This pattern needs Management Identity, which a dual-region cluster runs [outside the stretched Orchestration Cluster](/self-managed/concepts/multi-region/dual-region.md#management-platform-and-orchestration-cluster). It also needs the automatic legacy Zeebe exporter. The chart turns this exporter off when the Orchestration Cluster spans more than one zone, for example when `orchestration.partitioning.numberOfZones` is 2 or more.
 - A namespace with enough capacity for the platform and a second Optimize Deployment.
 - An external Elasticsearch or OpenSearch cluster configured for the platform release. Follow the [Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md) or [OpenSearch](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) guide.
 - An external Keycloak or supported OIDC provider and a Management Identity configuration. The reference files use the [external Keycloak setup](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
@@ -260,7 +264,7 @@ Using the same host for multiple Ingress objects is controller-specific. This gu
 
 ## Verify process data and index isolation
 
-Both Optimize instances read the same `zeebe-record` indices produced by the Orchestration Cluster. The 8.10 chart automatically enables the legacy Zeebe exporter when Optimize and its Elasticsearch or OpenSearch connection are enabled. This pattern applies to single-region deployments only — [dual-region deployments don't support Optimize](/self-managed/concepts/multi-region/dual-region.md#limitations).
+Both Optimize instances read the same `zeebe-record` indices produced by the Orchestration Cluster. The 8.10 chart automatically enables the legacy Zeebe exporter when Optimize and its Elasticsearch or OpenSearch connection are enabled. In a dual-region deployment, the chart suppresses that automatic behavior, so this pattern applies to single-region deployments only. See [Management platform and Orchestration Cluster](/self-managed/concepts/multi-region/dual-region.md#management-platform-and-orchestration-cluster).
 
 1. Deploy a test process to the shared Orchestration Cluster.
 1. Start and complete at least one process instance.

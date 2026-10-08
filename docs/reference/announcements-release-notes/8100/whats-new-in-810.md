@@ -17,13 +17,12 @@ toc_max_heading_level: 2
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 import PageDescription from '@site/src/components/PageDescription';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 import OverviewImg from '../../../self-managed/concepts/multi-region/img/multi-region-overview.png';
 import AgentPanel from '../../img/whats-new-agent-monitoring.png';
 import overviewImg from '../../../components/optimize/assets/agentic-control-plane-overview.png';
 import HubOverview from '../../img/whats-new-hub.png';
-import HubCatalog from '../../img/whats-new-hub-catalog.png';
-import HubWorkspace from '../../img/whats-new-hub-workspace.png';
-import HubSnapshot from '../../img/whats-new-hub-snapshot.png';
+import CredentialsImg from '../../../components/hub/organization/credentials/img/credentials-choose-credential.png';
 import DesignSystem from '../../img/whats-new-design.png';
 import SecretsOverviewImg from '../../../components/concepts/assets/secrets-overview.png';
 import TenantImg from '../../../self-managed/concepts/multi-tenancy/img/tenancy-models-comparison.png';
@@ -38,9 +37,11 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 - **[Agentic orchestration](#agentic-orchestration)**: Real-time agent visibility and explainability with live agent state, tool calls, and conversation history, providing production-grade agentic trust with testing, visibility, auditability, and control-plane monitoring.
 
-- **[Camunda Hub](#camunda-hub)**: Camunda Hub becomes the single place where teams build, govern, and run process solutions in Camunda. Hub replaces Web Modeler and Console and is now where you design, model, manage, and oversee your processes.
+- **[ProcessOS](#processos)**: Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
 
-- **[Multi-region resilience](#multi-region-resilience)**: Asynchronous RDBMS replication and failure-domain-aware partition placement provides configurable recovery behavior and stronger disaster recovery.
+- **[Camunda Hub](#camunda-hub)**: A new product that replaces Web Modeler and Console as the single place to build, govern, and run process solutions in Camunda. It introduces workspaces to organize your teams' work, along with a [catalog](#catalog) of reusable automation assets, a [business value dashboard](#business-value-dashboard) to track process outcomes against targets, and [credentials](#hub-credentials-manager) you create once and reuse across processes.
+
+- **[Multi-region resilience](#multi-region-resilience)**: Failure-domain-aware partition placement replicates process state synchronously across regions, so losing a region costs no committed data (RPO 0). The RDBMS secondary storage replicates asynchronously and catches up from the engine's event stream.
 
 - **[Strong tenant isolation via physical tenants](#strong-tenant-isolation-via-physical-tenants)**: Enterprise-grade physical isolation with per-tenant APIs, web apps, roles and identity provider selection. Logical multi-tenancy becomes officially supported on SaaS.
 
@@ -88,8 +89,32 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>Real-time agent visibility and explainability, production-grade agentic trust with testing, visibility, auditability, and control-plane monitoring.</td>
 </tr>
 <tr>
+    <td>[ProcessOS](#processos)</td>
+    <td>Discover, re-engineer, and generate executable Camunda solutions with a governed, auditable process.</td>
+</tr>
+<tr>
     <td>[Camunda Hub](#camunda-hub)</td>
     <td>Build, govern, and run your process solutions. Hub replaces Web Modeler and Console.</td>
+</tr>
+<tr>
+    <td>[Catalog](#catalog)</td>
+    <td>Manage, publish, and reuse vetted automation assets across teams in Hub.</td>
+</tr>
+<tr>
+    <td>[Business value dashboard](#business-value-dashboard)</td>
+    <td>Track cycle time, automation rate, activity, and agentic adoption against targets in Hub.</td>
+</tr>
+<tr>
+    <td>[Hub credentials manager](#hub-credentials-manager)</td>
+    <td>Create connector credentials once and reuse them wherever you need them in Hub.</td>
+</tr>
+<tr>
+    <td>[Environments](#environments)</td>
+    <td>Deploy and run processes in named environments assigned to workspaces.</td>
+</tr>
+<tr>
+    <td>[Environment connection](#environment-connection-in-modeler)</td>
+    <td>Connect the modeler in Hub to an environment to use its credentials and run task tests against it.</td>
 </tr>
 <tr>
     <td>[Multi-region resilience](#multi-region-resilience)</td>
@@ -105,7 +130,7 @@ Important changes in Camunda 8.10 are summarized as follows:
 </tr>
 <tr>
     <td>[Camunda design system](#camunda-design-system)</td>
-    <td>The new visual design system is introduced for Admin, Camunda Hub, and Tasklist.</td>
+    <td>The new visual design system is introduced for Admin, Hub, and Tasklist.</td>
 </tr>
 <tr>
     <td>[Centralized secret resolution](#centralized-secret-resolution-via-zeebe)</td>
@@ -116,15 +141,23 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>Connectors are now discoverable by the operation you want to perform.</td>
 </tr>
 <tr>
+    <td>[Credentials in Desktop Modeler](#credentials-in-desktop-modeler)</td>
+    <td>Select and create reusable credentials on connector tasks in Desktop Modeler.</td>
+</tr>
+<tr>
     <td>[Helm chart deployment](#helm-chart-deployment)</td>
     <td>A new Camunda Helm Toolkit helps migrate and validate 8.9-to-8.10 Helm values.</td>
 </tr>
 <tr>
-    <td>[Optimize](#optimize)</td>
-    <td>Optimize moves to the Camunda Security Library for authentication and session handling.</td>
+    <td>[Low-code testing](#low-code-testing)</td>
+    <td>Record, assert, repair, and run low-code tests in Test Studio and in CI/CD with Camunda Process Test.</td>
 </tr>
 <tr>
-    <td>[Unified authentication](#unified-authentication-for-orchestration-cluster-camunda-hub-and-optimize)</td>
+    <td>[Optimize](#optimize)</td>
+    <td>Optimize's component-specific authentication configuration keys are deprecated.</td>
+</tr>
+<tr>
+    <td>[Unified authentication](#unified-authentication-for-orchestration-cluster-and-optimize)</td>
     <td>Shared authentication implementation based on Orchestration Cluster authentication.</td>
 </tr>
 <tr>
@@ -145,22 +178,6 @@ Important changes in Camunda 8.10 are summarized as follows:
 
 Important changes and new features for agentic orchestration are available in 8.10:
 
-### Real-time agent visibility and monitoring
-
-Monitor and evaluate AI agent behavior in Operate.
-
-<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
-
-- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics) (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
-- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
-- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
-
-<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
-
-:::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
-:::
-
 ### Agentic control plane
 
 Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
@@ -179,10 +196,7 @@ Provider and backend selection are now decoupled. For example, the Anthropic pro
 
 This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manual [migration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) of each element from the current legacy connector.
 
-<ul>
-  <li><span class="link-arrow">[Release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated)</span></li>
-  <li><span class="link-arrow">[Upgrade AI Agent element templates](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md)</span></li>
-</ul>
+<p class="link-arrow">[Upgrade AI Agent element templates](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md)</p>
 
 :::note legacy connector deprecated in 8.10
 The legacy connector is deprecated in 8.10, but is not removed and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
@@ -207,6 +221,16 @@ New features help you more easily configure your agent tools when modeling.
 
 <p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
 
+### Camunda-provided LLM for SaaS
+
+You can run AI agents on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without your own LLM credentials.
+
+- Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets.
+- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used.
+- Enterprise organizations must explicitly enable the **Camunda Provided LLM** toggle in Camunda Hub, which is separate from the **AI-powered features** toggle.
+
+<p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
+
 ### Processes MCP Server
 
 AI agents can use the Processes MCP Server to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
@@ -216,6 +240,22 @@ AI agents can use the Processes MCP Server to discover and call deployed BPMN pr
 - The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
 
 <p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
+
+### Real-time agent visibility and monitoring
+
+Monitor and evaluate AI agent behavior in Operate.
+
+<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
+
+- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics), model, and system prompt.
+- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
+- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
+
+<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
+
+:::note
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+:::
 
 ### Test AI agents with Camunda Process Test
 
@@ -230,23 +270,36 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
 
 **Standalone evaluation assertions for judge and semantic similarity**: Camunda Process Test now exposes _judge-based evaluation_ and _semantic similarity evaluation_ as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
 
-<ul>
-  <li><span class="link-arrow">[Test your AI agents with Camunda Process Test](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</span></li>
-  <li><span class="link-arrow">[JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions)</span></li>
-</ul>
+<p class="link-arrow">[Test your AI agents with Camunda Process Test](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
+
+## ProcessOS
+
+ProcessOS is an AI-powered layer on top of Camunda's agentic orchestration platform. It discovers your existing processes, re-engineers them against defined outcomes, and generates executable Camunda solutions.
+
+ProcessOS has the following key characteristics:
+
+- **A governed process**: The harness runs your engagement through four phases: scope, discover, transform, and implement. Each phase ends at a milestone, and subject matter expert (SME) review cycles act as gates between milestones.
+- **Auditable by design**: The governance process itself runs on Camunda. Project state lives in Camunda, and every artifact is committed to Git, so AI-generated work stays reviewable at every step.
+- **Two supported use cases**: Legacy migration transforms processes running on a legacy system to Camunda 8. AI transformation turns any process into an automated, AI-native process that runs on Camunda 8.
+- **Built for builders**: ProcessOS targets builders who implement Camunda end to end and direct AI coding agents. SMEs take part as reviewers and approvers.
+
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
+
+:::note
+In this release, each project runs locally with its own private memory. Production deployment, CI/CD integration, and cross-project memory are planned for future releases.
+:::
 
 ## Camunda Hub
 
 [Camunda Hub](/components/hub/index.md) is now the single place where teams build, govern, and run process solutions in Camunda.
 
-<img src={HubOverview} alt="Camunda Hub" class="img-900"/>
+<img src={HubOverview} alt="Camunda Hub with the workspaces page open and the environments listed in the navigation" class="img-900"/>
 
+- On SaaS, your organization is migrated to Hub automatically, and you don't need to take any action.
 - Hub replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
-- Hub is deployed only once, and serves as the single point of entry for all your environments, connecting to all your dev, staging, and production Orchestration Clusters.
+- Hub is deployed only once, and serves as the single point of entry for all your [environments](/components/concepts/environments.md), connecting to the Orchestration Clusters that host your dev, staging, and production environments.
 
-**Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your clusters. You design once, and manage everything from one place.
-
-<!-- Overview diagram -->
+**Hub changes how you and your teams work**. Instead of managing separate Web Modeler and Console instances per environment, you now use a single Hub that connects to all your environments. You design once, and manage everything from one place.
 
 In Hub, there is a clear separation of responsibilities:
 
@@ -259,27 +312,32 @@ Organization-level resource governance and workspace-level project delivery now 
 
 Camunda Hub introduces changes to many terms and concepts from Web Modeler and Console:
 
-| Web Modeler         | Camunda Hub                                                                                                   | Description                                                                                                                                                                              |
-| :------------------ | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project             | [Workspace](/reference/glossary.md#workspace)                                                                 | When upgrading to Hub, your projects automatically migrate to workspaces. Workspaces in Hub are isolated team collaboration spaces. Members can only view workspaces they're invited to. |
-| Process application | [Project](/reference/glossary.md#project)                                                                     | When upgrading to Hub, your process applications automatically migrate to projects. Projects in Hub can be versioned as a bundle of files or used as a folder for loose files.           |
-| Project Admin       | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) | This aligns with the project-to-workspace terminology change.                                                                                                                            |
+| Web Modeler                    | Camunda Hub                                                                                                   | Description                                                                                                                                                                                                      |
+| :----------------------------- | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project                        | [Workspace](/reference/glossary.md#workspace)                                                                 | When upgrading to Hub, your projects automatically migrate to workspaces. Workspaces in Hub are isolated team collaboration spaces. Members can only view workspaces they're invited to.                         |
+| Process application            | [Project](/reference/glossary.md#project)                                                                     | When upgrading to Hub, your process applications automatically migrate to projects. Projects in Hub can be versioned as a bundle of files or used as a folder for loose files.                                   |
+| IDP application                | IDP project                                                                                                   | When upgrading to Hub, your IDP applications automatically migrate to IDP projects.                                                                                                                              |
+| Collaborator                   | Member                                                                                                        | Workspace members replace project collaborators. Members can be added and managed per workspace.                                                                                                                 |
+| Cluster (as deployment target) | [Environment](/reference/glossary.md#environment)                                                             | Environment is a new concept that represents a deployment target. A cluster represents the underlying infrastructure that hosts one or more environments. Organization admins assign environments to workspaces. |
+| Project Admin                  | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) | This aligns with the project-to-workspace terminology change.                                                                                                                                                    |
 
 ### Mapping Web Modeler and Console features to Hub
 
 The following table shows how you can access the Hub equivalents for key Web Modeler and Console features.
 
-| Product (8.9) | Feature                      | Hub documentation                                                                                                  |
-| :------------ | :--------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| Console       | Organization overview        | [Hub dashboard](/components/hub/organization/analyze-operations/hub-dashboard.md)                                  |
-| Console       | View clusters                | [View clusters](/components/hub/organization/manage-clusters/manage-cluster.md#view-clusters)                      |
-| Console       | Organization management      | [Manage organization settings](/components/hub/organization/manage-organization-settings/organization-settings.md) |
-| Web Modeler   | View projects                | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
-| Web Modeler   | Create a project             | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)        |
-| Web Modeler   | Manage project collaborators | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)             |
-| Web Modeler   | Rename/delete project        | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                             |
-| Web Modeler   | View shared resources        | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**           |
-| Web Modeler   | Recently deleted             | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                  |
+| Product (8.9) | Feature                                   | Hub documentation                                                                                             |
+| :------------ | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Console       | Organization overview                     | [Console](/components/hub/organization/console.md)                                                            |
+| Console       | View clusters                             | [View clusters](/components/saas/clusters/manage-cluster.md#view-clusters)                                    |
+| Console       | Organization management                   | [Manage organization](/components/hub/organization/manage-organization-settings/organization-settings.md)     |
+| Web Modeler   | View projects                             | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)           |
+| Web Modeler   | Create a project                          | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)   |
+| Web Modeler   | Manage project collaborators              | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)        |
+| Web Modeler   | Rename/delete project                     | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                        |
+| Web Modeler   | Connect clusters to a process application | [Assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md) |
+| Web Modeler   | Deploy a process application              | [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md)                            |
+| Web Modeler   | View shared resources                     | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**      |
+| Web Modeler   | Recently deleted                          | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                             |
 
 ### Key features
 
@@ -289,20 +347,23 @@ Camunda Hub introduces many new features, including the following highlights:
 
 Hub introduces the [Hub catalog](/components/hub/organization/manage-catalog/getting-started.md). Center of excellence teams can manage reusable automation assets in a Git repository and publish them to Hub. You can see where assets are being used and which processes are using outdated or deprecated assets.
 
-<img src={HubCatalog} alt="Camunda Hub catalog" class="img-900"/>
-
 Delivery teams can trust that catalog assets have been vetted and approved by the center of excellence. They can discover assets in the catalog, read asset documentation, and apply them when modeling.
 
-<ul>
-  <li><span class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</span></li>
-  <li><span class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</span></li>
-</ul>
+<p class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</p>
+
+#### Business value dashboard
+
+Use the **Business Value** page in Camunda Hub to track process outcomes using cycle time, automation rate, activity, and agentic adoption metrics, and to set targets for cycle time and automation rate.
+
+- A portfolio view compares every process in the selected Orchestration Cluster and ranks off-target processes by how many targets are missed and by how far.
+- A process view shows the metrics and targets for a single process, including a cycle time distribution with P50, average, and P95.
+- Every metric is calculated from completed process instances in the selected environment. No changes to your process models are required.
+
+<p class="link-arrow">[Business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md)</p>
 
 #### Workspaces and projects
 
 Hub introduces workspaces and projects.
-
-<img src={HubWorkspace} alt="Camunda Hub workspaces" class="img-900"/>
 
 **Workspace**: A workspace is a collaboration environment within an organization, representing a team or business domain. A workspace is assigned members and projects so all related work happens in one shared space. When you migrate to 8.10, all your Web Modeler projects become workspaces.
 
@@ -313,11 +374,19 @@ Hub introduces workspaces and projects.
   <li><span class="link-arrow">[Manage projects](/components/hub/workspace/manage-projects/manage-projects.md)</span></li>
 </ul>
 
+#### Environments
+
+Hub introduces environments as deployment targets where teams run their processes. An environment is hosted on a cluster, and the cluster remains the infrastructure that your administrators operate.
+
+- Organization admins assign environments to workspaces, and projects deploy to the environments of their workspace instead of connecting clusters to deployment stages.
+- In Self-Managed, each Physical Tenant of a cluster at version 8.10 or later is an environment. In SaaS, each cluster has one environment.
+- When you upgrade, Hub assigns the clusters that your process applications used to their workspaces as environments.
+
+<p class="link-arrow">[Environments](/components/concepts/environments.md)</p>
+
 #### Project snapshots and file versioning
 
 In Web Modeler, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit.
-
-<img src={HubSnapshot} alt="Camunda Hub snapshots" class="img-900"/>
 
 Camunda Hub introduces an improved model with more granular control over project and file versions:
 
@@ -331,7 +400,7 @@ Camunda Hub introduces an improved model with more granular control over project
 
 If you're not familiar with projects, the following sections explain how to:
 
-- [Define deployment stages](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters)
+- [Deploy to environments](/components/hub/workspace/manage-projects/deploy-project.md#deployment-environments)
 - [Deploy a project](/components/hub/workspace/manage-projects/deploy-project.md)
 - [Deploy an individual resource](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process)
 - [Create a project snapshot](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot)
@@ -388,15 +457,33 @@ Payments (Workspace)
 
 This strict new **Workspace > Project > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
 
-#### Credentials manager
+#### Hub credentials manager
 
 Before 8.10, you configure a connector's authentication and connection settings directly on each connector task. This doesn't scale well and is hard to maintain. For example, if ten tasks call the same REST API, you configure the same authentication ten times, and you update all ten when something changes.
 
-Camunda Hub introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
+8.10 introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
 
-<!-- Screenshot -->
+Camunda Hub provides an interface for managing your credentials.
 
-<!-- todo: Add link -->
+<img src={CredentialsImg} alt="Create a credential page in Camunda Hub showing credential types such as AWS Credential, REST Authentication, and JDBC Connection, each with the connectors that use it" class="img-900"/>
+
+- Center of excellence teams create and manage credentials centrally in Hub, and see them across all environments.
+- Delivery teams select a credential from the properties panel of a connector task in the modeler, instead of entering the settings on every task.
+- Credentials created outside Hub, for example in [Desktop Modeler](#credentials-in-desktop-modeler), can be found by scanning environments and added to Hub for central management.
+- Credentials are stored as cluster variables, so connectors and job workers can reference them by name.
+
+<p class="link-arrow">[Manage credentials](/components/hub/organization/credentials/index.md)</p>
+
+#### Environment connection in Modeler
+
+Connect the modeler in Hub to an [environment](#environments) to model, test, and review against your real runtime, instead of building in isolation.
+
+- View and choose which environment you are connected to from the bottom panel bar of the diagram, in the **Implement** tab.
+- Connector credential names from the connected environment autocomplete in your FEEL expressions and in the properties panel credential picker.
+- [Task testing](/components/modeler/task-testing.md), connector credentials, and the **Webhook** tab follow this connection. Your deploy target doesn't change.
+
+This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
+Test Studio doesn't follow this connection. It runs against the environment you select in the **Test** tab.
 
 #### Recover deleted resources
 
@@ -421,12 +508,12 @@ SaaS organization-level roles and permissions have changed. Prior to 8.10, users
 
 | Role               | Description                                                                                                                                                                                                                                                                     |
 | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Member             | Full access to create and collaborate on projects in workspaces they're invited to, plus read-only visibility into the organization and its clusters.                                                                                                                           |
+| Member             | Full access to create and collaborate on projects in workspaces they're invited to, plus read-only visibility into the organization.                                                                                                                                            |
 | Analyst            | Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md). |
 | Organization Admin | Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. Organization Admins can also assign environments to workspaces.                                                                                          |
 | DevOps             | Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.           |
 
-<p class="link-arrow">[Roles and permissions](/components/hub/organization/manage-users/index.md#roles-and-permissions)</p>
+<p class="link-arrow">[Roles and permissions](/components/hub/organization/users-and-roles.md#roles-and-permissions)</p>
 
 #### Self-Managed roles and permissions
 
@@ -504,7 +591,7 @@ As a Camunda 8 SaaS user, your data was migrated to the new organizational struc
 During the migration:
 
 - Any process application nested inside a folder moved to the top level of its project.
-- Any files or folders located directly in a project, not inside a process application, were automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. You can rename this application, [move content out of it](#organizing-the-general-process-application), or otherwise reorganize it as with any other process application.
+- Any files or folders located directly in a project, not inside a process application, were automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. You can rename this application, [move content out of it](#organize-the-general-process-application), or otherwise reorganize it as with any other process application.
 - Git sync and cluster settings on existing process applications migrated unchanged along with your data.
 
 During the migration, Web Modeler was briefly unavailable. Clusters and running processes were unaffected and continued executing normally.
@@ -561,23 +648,9 @@ Before the new model, a process application and the resources within it were tig
 
 Learn more about using process applications in the following sections.
 
-#### Define deployment stages
+#### Deploy to environments
 
-To deploy process applications and resources, you need to connect clusters to the following deployment stages:
-
-| Stage       | Description                                                                                                         |
-| :---------- | :------------------------------------------------------------------------------------------------------------------ |
-| Development | Use to create and test new software features and changes.                                                           |
-| Testing     | Use for quality checks, ensuring software meets defined standards before release.                                   |
-| Staging     | Use for controlled testing where changes are validated before deployment to production.                             |
-| Production  | The live system with the latest software. **Only administrators and organization owners can deploy to this stage.** |
-
-To define your deployment stages:
-
-1. Open a process application.
-2. On the right side of the process application view, next to **Connected clusters** click **Configure**.
-3. For each stage, select a cluster.
-4. Click **Save**.
+Before 8.10, you connected clusters to deployment stages in each process application. In 8.10, a project has no deployment stages. It deploys to the [environments](/components/concepts/environments.md) that are assigned to its workspace. An organization admin [assigns environments to the workspace](/components/hub/organization/manage-environments/assign-environments.md).
 
 #### Deploy a process application
 
@@ -632,11 +705,16 @@ Camunda 8.10 provides a structured multi-region resilience framework for Self-Ma
 
 <img src={OverviewImg} alt="High-level diagram showing Cold Recovery and Dual-Region strategies" title="Cold Recovery and Dual-Region strategies" class="img-noborder img-900"/>
 
-- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable.
+- **[Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable. On SaaS, [cross-region cold recovery](/components/saas/cross-region-cold-recovery.md) is also available for AWS and GCP region pairs marked **Failover supported**.
 
 - **[Dual-Region](/self-managed/concepts/multi-region/dual-region.md)**: Dual-region deployment with continuous replication. A full Camunda Orchestration Cluster runs continuously in both a primary and secondary region.
 
 - **Three-region active-active (RDBMS)**: A three-region Kubernetes deployment with the Orchestration Cluster running active-active across all three regions, backed by a relational database (RDBMS) with cross-region replication as secondary storage. Losing one region requires no operator intervention, because the cluster never loses quorum.
+
+Camunda 8.10 also adds the following capabilities to support multi-region deployments:
+
+- **Region-aware partition placement**: Operators declare which region each broker belongs to using a topology label. The engine distributes partition replicas across regions so no single region holds a quorum for any partition, and leader election prefers region-local leaders under normal conditions. The same mechanism works for availability zone or datacenter isolation.
+- **Async replication support for RDBMS secondary storage**: Asynchronously replicated relational databases, including AWS Aurora and PostgreSQL, are supported as secondary storage. The exporter pauses automatically when the RDBMS endpoint is unreachable, such as during a failover, and replays missing events from the Zeebe log on reconnection without manual data repair.
 
 <p class="link-arrow">[Multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md)</p>
 
@@ -650,7 +728,12 @@ Camunda 8.10 introduces Physical Tenants for strong physical data isolation with
 
 - Physical Tenants and Logical Tenants can be used together. Each Physical Tenant can contain its own set of Logical Tenants, providing two independent layers of isolation: physical separation between top-level tenant groups, and logical separation within each group.
 
-<p class="link-arrow">[Multi-tenancy](/self-managed/concepts/multi-tenancy/index.md)</p>
+- **Per-tenant APIs and web apps**: The REST API and gRPC API are exposed per Physical Tenant, and Operate, Tasklist, and Admin are available at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
+- **Per-tenant authorization**: Each Physical Tenant enforces its own roles, mapping rules, and permissions, so a user can have a different role on each Physical Tenant.
+- **Identity provider selection**: Identity providers are defined at the cluster level, and each Physical Tenant chooses which ones it accepts. Cluster-wide operations such as topology, backups, and restore are protected by a claim-based cluster admin role.
+- **Logical multi-tenancy on SaaS**: Camunda 8 SaaS officially supports multi-tenancy via tenant identifiers. It is available on clusters running generation 8.8 and later, so you don't need to upgrade to 8.10 to use it.
+
+<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
 ## Business ID
 
@@ -680,7 +763,7 @@ The new visual Camunda design system and navigation are introduced for all compo
 
 Centralized secret resolution through Zeebe is introduced in 8.10.
 
-You can use and manage secrets to keep keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
+Use and manage secrets to keep sensitive values such as API keys, passwords, and tokens, out of your process models, job variables, and configuration files. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
 
 <img src={SecretsOverviewImg} alt="Secrets overview" title="Secrets overview" class="img-noborder" style={{marginTop: '0', marginBottom: '0'}}/>
 
@@ -711,6 +794,12 @@ Two changes come with this:
 
 <p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
 
+## Credentials in Desktop Modeler
+
+Desktop Modeler also supports [credentials](#hub-credentials-manager). Select an existing credential on a connector task from the properties panel, or create a new one without leaving it, instead of entering the same authentication and connection settings on every task.
+
+<p class="link-arrow">[Use credentials in Desktop Modeler](/components/modeler/desktop-modeler/credentials.md)</p>
+
 ## Camunda for Slack
 
 Camunda for Slack joins Camunda for Microsoft Teams as a second chat platform served by the same App Integrations backend. From Slack, you can browse and complete tasks, start a process, switch organization and cluster, and subscribe a channel or direct message to notifications, all through the `/camunda` slash command and the Camunda direct message. Microsoft Teams and Slack are independent, so you can run either on its own, or both.
@@ -721,6 +810,20 @@ Camunda for Slack joins Camunda for Microsoft Teams as a second chat platform se
 
 Important changes to Helm chart deployment in 8.10 are as follows:
 
+<!-- Legacy anchor retained for inbound links. -->
+
+### One management plane and one or more execution planes {#a-hub-plane-and-one-or-more-execution-planes}
+
+The 8.10 Helm chart adds `global.topology.mode`, so each release declares its role in the deployment: `combined`, `hub`, `orchestration`, or `optimize`. One `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, each with its own lifecycle, scaling, and upgrade schedule.
+
+The new `optimize` role deploys Optimize alone. Because one Optimize instance reads a single index prefix, this is what lets each [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) have its own Optimize instance.
+
+`combined` remains the default, so existing deployments are unchanged by the upgrade. For a new production deployment, the split topology is the baseline.
+
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
+
+<p class="link-arrow">[Install the deployment topology](/self-managed/deployment/helm/install/topology/index.md)</p>
+
 ### Camunda Helm Toolkit
 
 The new Helm migration and validation toolkit can help you upgrade from Camunda 8.9 to 8.10 on Kubernetes with Helm.
@@ -728,25 +831,22 @@ The new Helm migration and validation toolkit can help you upgrade from Camunda 
 Use the toolkit to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
-- Generate a sample 8.10 values file reflecting Helm 4-only support, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
+- Generate a sample 8.10 values file reflecting the recommended Helm CLI v4, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
 - Create a migration report that lists the keys that were migrated automatically, flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options), suggests where to find more information in the documentation, and can validate an existing 8.10 values file (for example, one drafted by hand or AI tool) against Camunda’s migration rules.
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
 
 <p class="link-arrow">[Use the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
 
-### Helm v4 required
+### Helm CLI v3 and v4 support {#helm-v4-required}
 
-:::warning Breaking change
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
-:::
+Camunda 8.10 (chart 15.x) supports Helm CLI v3 (3.10 or later) and v4. With Helm CLI v3, the chart shows a warning when you run `helm install` or `helm upgrade`.
 
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
+<HelmCliSupport />
 
-<ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
-</ul>
+Switching CLIs does not require a release-state migration. Helm runs on the client, and both CLIs read and write the same release-storage format. Use Helm CLI v4 for new installations. Switch existing deployments before Helm CLI v3 support ends.
+
+<p class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</p>
 
 ### Host network support for orchestration cluster pods
 
@@ -754,17 +854,26 @@ The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which l
 
 <p class="link-arrow">[Configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md)</p>
 
+## Low-code testing
+
+Test Studio in Camunda Hub turns process runs into repeatable tests that you can maintain and run in your CI/CD pipeline.
+
+- **Assertions**: Run a process instance, then save its input data and assertions as a low-code integration test. Add variable and path assertions, and view pass or fail results in the **Test** tab.
+- **Shared schema with Camunda Process Test**: Test files use the same schema as Camunda Process Test (CPT). Record a test once, run it in CI/CD through CPT, and load CPT-authored test files into Test Studio to debug them visually.
+- **Test repair**: When you delete, rename, or change the type of a BPMN element, Test Studio shows which steps broke and lets you fix them in place instead of re-recording the run.
+- **Segment tests**: In Play, capture and rerun targeted sections of a process as low-code integration tests. Ad-hoc subprocesses, and therefore AI agent elements, are not supported in test mode. See the [limitations](/components/hub/workspace/modeler/validation/test-your-process.md).
+
+<p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
+
 ## Optimize
 
 Important changes to Optimize in 8.10 are as follows:
 
-### Optimize adopts the shared authentication implementation
+### Optimize authentication configuration keys
 
-Optimize now authenticates through the same shared implementation as the Orchestration Cluster components, adopting their authentication and session handling.
+The component-specific Optimize login and API security keys are deprecated in favor of `camunda.security.*`. Camunda plans to remove them in a future release, with the component-specific configuration and its `optimize.security.csl.enabled=false` fallback.
 
-- The legacy Optimize login and API security keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback.
-
-- `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping.
+`CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [component-specific configuration keys](/self-managed/upgrade/components/890-to-8100.md#component-specific-security-configuration-keys-are-deprecated) for the full key mapping.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
@@ -774,19 +883,14 @@ On SaaS, you can now configure Optimize export filters directly in Hub cluster s
 
 New SaaS clusters include a default `business_` variable include filter that limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
 
-<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+<p class="link-arrow">[Configure Optimize data filters](/components/saas/clusters/settings.md#data-filters)</p>
 
-## Unified authentication for Orchestration Cluster, Camunda Hub, and Optimize
+## Unified authentication for Orchestration Cluster and Optimize
 
-With Camunda 8.10, Camunda Hub and Optimize authenticate through a shared implementation based on the Orchestration Cluster's existing authentication, replacing their separate identity stacks.
+With Camunda 8.10, Optimize can be configured with the same `camunda.security.authentication.*` settings already used by the Orchestration Cluster.
 
-Each component now accepts the same `camunda.security.authentication.*` settings, so there is only one configuration surface to learn and troubleshoot if authentication issues arise.
-
-- Camunda Hub and Optimize continue to accept existing authentication settings in 8.10, translating the recognized properties to new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11.
-- Camunda Hub requires no configuration change to upgrade to 8.10.
-- User, group, role, tenant, and permission management for both components is unchanged in 8.10 and is still handled by Management Identity.
-
-<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+- Optimize continues to accept its 8.9 authentication settings in 8.10, translating the recognized properties to new equivalents at startup, but those 8.9 properties are deprecated and will be removed in a future release.
+- User, group, role, tenant, and permission management for Optimize is unchanged in 8.10 and is still handled by Management Identity.
 
 :::note
 Nothing changes for the Orchestration Cluster as it already uses these settings since Camunda 8.9.

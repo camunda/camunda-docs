@@ -6,8 +6,10 @@ This rule applies only within an ad-hoc sub-process recognized as a tool contain
 - It has a `zeebe:property` named `io.camunda.agenticai.toolContainer` with the value `true`, regardless of whether its tools are invoked by an AI Agent Task in the same process or in a separate process. This property is the supported long-term approach.
 - Its `zeebe:taskDefinition` type starts with `io.camunda.agenticai:aiagent-job-worker:`, which is the type assigned by the AI Agent Sub-Process template. This covers custom element templates that use a different `zeebe:modelerTemplate` ID but assign the same type, such as an agent template published within your organization.
 
-Every Camunda-provided AI Agent element template sets the `io.camunda.agenticai.toolContainer` property.
-The property is available across all template versions. Templates declare it as a hidden property, so it never appears as a control in the properties panel.
+Every Camunda-provided AI Agent Sub-process element template, legacy and new, sets the `io.camunda.agenticai.toolContainer` property.
+Templates declare it as a hidden property, so it never appears as a control in the properties panel.
+
+The AI Agent Task element templates don't set the property, because the tools ad-hoc sub-process of an AI Agent Task is a separate element without an element template. When you use an AI Agent Task, [add the property to the tools sub-process manually](#update-an-existing-process).
 
 An element template writes its properties into the diagram only when you apply it, so an ad-hoc sub-process you modeled before the property was added keeps its original XML. Existing processes need to be updated.
 

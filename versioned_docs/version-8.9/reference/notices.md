@@ -33,6 +33,46 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 65
+
+### Publication date
+
+October 7, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Zeebe (8.7)
+
+### Impact
+
+The document endpoint of the Orchestration Cluster REST API rendered uploaded document content in the browser instead
+of downloading it. A user allowed to upload documents could use this to run scripts in the application's origin with
+the privileges of another user who opens the document, including administrators.
+
+Severity: High.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Orchestration Cluster ≤ 8.9.22 or ≤ 8.8.40
+- Camunda Zeebe ≤ 8.7.42
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Orchestration Cluster 8.10.0, 8.9.23, 8.8.41
+- Camunda Zeebe 8.7.43
+
+The document endpoint now serves all document content with a `Content-Security-Policy: sandbox` header, and returns
+documents as downloads (`Content-Disposition: attachment`), except for PDF files and images, which are still displayed
+in the browser.
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of
+[auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
 ## Notice 64
 
 ### Publication date
