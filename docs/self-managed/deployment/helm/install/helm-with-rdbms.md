@@ -38,7 +38,7 @@ In this topology:
 Before you begin:
 
 1. **Kubernetes cluster**: 1.24+ with sufficient resources for Camunda pods.
-2. **Helm CLI v4**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/). Helm v3 is not supported for Camunda 8.10 and later.
+2. **Helm CLI v4**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/).
 3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases and versions.
 4. **Database credentials**: Username and password for a database user with DDL permissions (if using auto-schema creation).
 5. **Document-store backend (Elasticsearch/OpenSearch)** (for Optimize): Required if you deploy Optimize alongside Camunda.
@@ -134,15 +134,9 @@ orchestration:
                 # Optional: Configure history retention
                 history:
                   default-history-ttl: P30D
-
-# Disable default Elasticsearch subchart
-elasticsearch:
-  enabled: false
-# If deploying Optimize, you still need Elasticsearch/OpenSearch
-# Uncomment below and configure as needed:
-# opensearch:
-#   enabled: true
 ```
+
+If you deploy Optimize, set its connection under `optimize.database.elasticsearch` or `optimize.database.opensearch`. See [component storage requirements](#important-component-storage-requirements).
 
 ### Step 5: Create the Kubernetes secret for database credentials
 
@@ -304,9 +298,9 @@ orchestration:
         url: jdbc:oracle:thin:@//my-oracle-host:1521/FREEPDB1
 ```
 
-### Multi-namespace deployment (Orchestration + Management)
+### Multi-namespace deployment (Orchestration Cluster + management plane) {#multi-namespace-deployment-orchestration--management}
 
-In production, separate the Orchestration Cluster from management components (WebModeler, Console, Identity, Optimize):
+In production, separate the Orchestration Cluster from the management plane (Camunda Hub and Management Identity) and Optimize:
 
 #### Namespace 1: Orchestration + Connectors
 
@@ -323,39 +317,38 @@ orchestration:
 connectors:
   enabled: true
 
-# Disable management components
-console:
+# Disable the management plane and Optimize
+camundaHub:
   enabled: false
 optimize:
-  enabled: false
-webModeler:
   enabled: false
 identity:
   enabled: false
 ```
 
-#### Namespace 2: Management components (with document-store secondary storage)
+#### Namespace 2: Management plane and Optimize (with document-store secondary storage) {#namespace-2-management-components-with-document-store-secondary-storage}
 
 ```yaml
 orchestration:
   enabled: false
 
-console:
+camundaHub:
   enabled: true
 optimize:
   enabled: true
-webModeler:
-  enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: elastic.example.com
+        port: 443
 identity:
   enabled: true
-
-# Optimize requires Elasticsearch/OpenSearch
-opensearch:
-  enabled: true
-  # or
-  # elasticsearch:
-  #   enabled: true
 ```
+
+For the Optimize connection settings, see [use external Elasticsearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch.md).
 
 ## Configuration reference
 
@@ -377,12 +370,17 @@ orchestration:
 
 optimize:
   enabled: true
-# Choose one secondary storage for Optimize:
-# opensearch:
-#   enabled: true
-# elasticsearch:
-#   enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: elastic.example.com
+        port: 443
 ```
+
+For OpenSearch, set `optimize.database.opensearch` instead. See [use external OpenSearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-opensearch.md).
 
 Mixing storage types (RDBMS for Orchestration, Elasticsearch/OpenSearch for Optimize) is supported and tested.
 

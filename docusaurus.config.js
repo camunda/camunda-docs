@@ -77,15 +77,7 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {
-              8.7: {
-                specPath: "api/operate/version-8.7/operate-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/operate-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-            },
+            versions: {},
           },
         },
       },
@@ -107,15 +99,7 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {
-              8.7: {
-                specPath: "api/tasklist/version-8.7/tasklist-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/tasklist-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-            },
+            versions: {},
           },
         },
       },
@@ -155,14 +139,6 @@ module.exports = {
                   "api/administration-sm/version-8.8/administration-sm-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.8/apis-tools/administration-sm-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.7: {
-                specPath:
-                  "api/administration-sm/version-8.7/administration-sm-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/administration-sm-api/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -277,13 +253,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.7: {
-                specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -306,15 +275,7 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {
-              8.7: {
-                specPath: "api/zeebe/version-8.7/zeebe-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/zeebe-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-            },
+            versions: {},
           },
         },
       },
@@ -465,11 +426,11 @@ module.exports = {
       },
     },
     announcementBar: {
-      id: "camunda8",
+      id: "camunda-8-10-latest",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign up</a></b> for a free account to start orchestrating your business processes today.',
-      backgroundColor: "#14D890",
-      textColor: "#000",
+        "<b>Camunda 8.10 is now the latest version of the documentation.</b> Make sure you are viewing the correct version, and update any bookmarks or saved links as required.",
+      backgroundColor: "#171717",
+      textColor: "#fff",
       isCloseable: true,
     },
 
@@ -545,6 +506,7 @@ module.exports = {
           type: "dropdown",
           label: "Help",
           position: "right",
+          className: "help-icon-btn",
           items: [
             {
               label: "Support",
@@ -645,8 +607,8 @@ module.exports = {
               to: "/downloads",
             },
             {
-              label: "Web Modeler",
-              href: "https://camunda.io",
+              label: "Camunda Hub",
+              href: "https://hub.camunda.io",
             },
             {
               label: "Status",
@@ -739,7 +701,7 @@ module.exports = {
         theme: "base",
         themeVariables: {
           fontFamily:
-            "IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif",
+            '"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", Arial, sans-serif',
           fontSize: "16px",
         },
       },
@@ -763,12 +725,12 @@ module.exports = {
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             current: {
-              label: "8.10 (unreleased)",
+              label: "8.11 (unreleased)",
             },
-            8.8: {
+            8.9: {
               banner: "none",
             },
-            8.7: {
+            8.8: {
               banner: "none",
             },
           },
@@ -785,7 +747,7 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.7/**",
+            "/docs/8.9/**",
             "/docs/8.8/**",
           ],
         },

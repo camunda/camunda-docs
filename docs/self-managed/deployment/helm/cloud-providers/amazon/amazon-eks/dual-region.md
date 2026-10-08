@@ -12,6 +12,8 @@ import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import CostManagement from "../../../../_partials/_cost-management.md";
+
 :::caution
 Review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
 :::
@@ -33,7 +35,7 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
 - **AWS CLI** – Command-line tool to manage AWS resources. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 - **Terraform** – IaC tool used to provision resources. [Install Terraform](https://developer.hashicorp.com/terraform/downloads).
 - **kubectl** – CLI for interacting with Kubernetes clusters. [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-- **Helm** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
+- **Helm CLI v4 (recommended; see [supported versions](/reference/supported-environments.md#clients))** – Package manager for Kubernetes. [Install Helm](https://helm.sh/docs/intro/install/).
 - **AWS service quotas** – Verify your quotas before deployment:
   - At least 6 Elastic IPs (three per availability zone, per region).
   - Adequate quotas for **VPCs, EC2 instances, and storage** in both regions.
@@ -56,11 +58,7 @@ You are responsible for operating and maintaining the infrastructure. Camunda up
 
 :::
 
-:::danger Cost management
-
-This guide will incur costs on your cloud provider account, specifically for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), traffic between regions, and S3. For more details, see [AWS EKS pricing](https://aws.amazon.com/eks/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/). Costs vary by region.
-
-:::
+<CostManagement />
 
 ### Outcome
 
@@ -516,7 +514,7 @@ There is currently no dedicated migration procedure for moving from the Bitnami 
 
 ### Deploy Elasticsearch using ECK
 
-Elasticsearch is managed using the [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) operator instead of the Camunda Helm chart's built-in Elasticsearch subchart. This provides automated lifecycle management and built-in security with auto-generated credentials.
+Elasticsearch is managed using the [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) operator. This provides automated lifecycle management and built-in security with auto-generated credentials.
 
 For more details on ECK-based deployments, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
 
@@ -629,16 +627,14 @@ This forms the base layer that contains the basic required setup, which applies 
 
 Key changes of the dual-region setup:
 
-- `global.multiregion.regions: 2`
-  - Indicates the use for two regions
 - `global.security.authentication.method: basic`
   - Uses Basic authentication for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.
 - `global.identity.auth.enabled: false`
-  - Management Identity is not currently supported. For more details, see the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
+  - This reference uses Basic authentication instead of Management Identity. For more details, see [Management platform and Orchestration Cluster](/self-managed/concepts/multi-region/dual-region.md#management-platform-and-orchestration-cluster) on the dual-region concept page.
 - `identity.enabled: false`
-  - Management Identity is currently not supported.
+  - This reference doesn't deploy Management Identity.
 - `optimize.enabled: false`
-  - Optimize is not currently supported and depends on Management Identity.
+  - This reference doesn't deploy Optimize. You can run Optimize in a single region alongside a dual-region cluster, which requires OIDC authentication and Management Identity.
 - `orchestration.exporters.zeebe.enabled: false`
   - Disables the automatic Elasticsearch Exporter configuration in the Helm chart. This exporter was previously used with Optimize and earlier setups.
 - `orchestration.exporters.camunda.enabled: false`
@@ -662,15 +658,15 @@ Key changes of the dual-region setup:
   - `orchestration.clusterSize: 8`
   - `orchestration.partitionCount: 8`
   - `orchestration.replicationFactor: 4`
-- Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`), not via the Helm chart's built-in Elasticsearch subchart. The Elasticsearch overlay (`camunda-elastic-values.yml`) disables the built-in Bitnami subchart and configures the **local** Elasticsearch connection (URL and authentication) for components that **read** data (orchestration secondary storage, Optimize). This is distinct from the cross-cluster Elasticsearch exporter URLs configured via environment variables above, which handle **writing** data across regions.
+- Elasticsearch is managed via the ECK operator and configured through a separate manifest (`elasticsearch-cluster-dual-region.yml`). The Elasticsearch overlay (`camunda-elastic-values.yml`) configures the **local** Elasticsearch connection (URL and authentication) for components that **read** data (orchestration secondary storage, Optimize). This is distinct from the cross-cluster Elasticsearch exporter URLs configured via environment variables above, which handle **writing** data across regions.
 
 ##### region0/camunda-values.yml
 
-This overlay contains the multi-region identification for the cluster in region 0.
+This overlay contains the multi-region identification for the cluster in region 0. It sets `orchestration.partitioning.numberOfZones: 2` and `orchestration.partitioning.zoneIndex: 0`. These two keys replace the deprecated `global.multiregion.regions` and `global.multiregion.regionId`.
 
 ##### region1/camunda-values.yml
 
-This overlay contains the multi-region identification for the cluster in region 1.
+This overlay contains the multi-region identification for the cluster in region 1. It sets `orchestration.partitioning.numberOfZones: 2` and `orchestration.partitioning.zoneIndex: 1`. These two keys replace the deprecated `global.multiregion.regions` and `global.multiregion.regionId`.
 
 ### Configure Zeebe environment variables
 

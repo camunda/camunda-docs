@@ -544,9 +544,10 @@ components:
           description: The display name of the user.
           type: string
         email:
-          description: The email address of the user.
+          description: The email address of the user, or null when the user has none on record.
           type: string
           format: email
+          nullable: true
 
     # --- Search schemas ---
 
@@ -591,6 +592,11 @@ components:
       type: object
       description: Filter criteria for searching files.
       properties:
+        fileKey:
+          description: Filter by file key.
+          x-semantic-type: FileKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:
           description: Filter by file name.
           allOf:

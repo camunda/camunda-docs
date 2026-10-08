@@ -8,13 +8,14 @@
  * @property {string} urlSuffix
  */
 
-const currentVersion = "8.9";
+const currentVersion = "8.10";
 
 /** @type {Array<UnmaintainedVersion>} */
 const unmaintainedVersions = [
   // 👋 When archiving a version, add it into here!
   //   `label` appears in the top navbar version selector.
   //   `urlSuffix` gets appended to the target `unsupported.docs.camunda.io/` URL.
+  { label: "8.7", urlSuffix: "8.7" },
   { label: "8.6", urlSuffix: "8.6" },
   { label: "8.5", urlSuffix: "8.5" },
   { label: "8.4", urlSuffix: "8.4" },

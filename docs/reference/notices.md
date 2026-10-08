@@ -33,6 +33,182 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 66
+
+### Publication date
+
+October 7, 2026
+
+### Products affected
+
+- Camunda Optimize Self-Managed
+
+### Impact
+
+The Docker images `camunda/optimize:8.10.0` and `camunda/optimize:8.10.1` were available for a short time before the
+Camunda 8.10 release announcement. These images contain a defect in the Optimize access check. In Self-Managed
+installations that use Management Identity, users without the Optimize permission can get access to Optimize. This
+includes read access to Optimize data, and changes to Optimize entities such as reports and dashboards.
+
+Exploitation requires a user who can log in to the identity provider that Optimize uses. Unauthenticated access is not
+possible.
+
+We removed the affected images from Docker Hub. No official Camunda Helm chart release referenced these images. Camunda
+SaaS is not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You run Camunda Optimize Self-Managed with the image `camunda/optimize:8.10.0` or `camunda/optimize:8.10.1`. This
+  includes images with these tags that you copied to your own registry. If you install with an official Camunda Helm
+  chart release and do not override the Optimize image, you do not use these images.
+- Optimize uses Management Identity for authentication.
+
+Optimize 8.9 and earlier versions are not affected.
+
+### Solution
+
+Upgrade Optimize to version 8.10.2 immediately. Optimize 8.10.2 contains the fix.
+
+If you used the image `camunda/optimize:8.10.0` or `camunda/optimize:8.10.1`:
+
+1. Upgrade to `camunda/optimize:8.10.2`.
+1. Remove the affected images from your private registries and image caches.
+1. Examine the Optimize data, for example reports, dashboards and collections, for changes that you do not expect.
+
+No action is necessary for Camunda SaaS.
+
+## Notice 65
+
+### Publication date
+
+October 7, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Zeebe (8.7)
+
+### Impact
+
+The document endpoint of the Orchestration Cluster REST API rendered uploaded document content in the browser instead
+of downloading it. A user allowed to upload documents could use this to run scripts in the application's origin with
+the privileges of another user who opens the document, including administrators.
+
+Severity: High.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Orchestration Cluster ≤ 8.9.22 or ≤ 8.8.40
+- Camunda Zeebe ≤ 8.7.42
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Orchestration Cluster 8.10.0, 8.9.23, 8.8.41
+- Camunda Zeebe 8.7.43
+
+The document endpoint now serves all document content with a `Content-Security-Policy: sandbox` header, and returns
+documents as downloads (`Content-Disposition: attachment`), except for PDF files and images, which are still displayed
+in the browser.
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of
+[auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
+## Notice 64
+
+### Publication date
+
+September 21, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Connectors
+- Camunda Web Modeler
+
+### Impact
+
+A remote code execution vulnerability was identified in Camunda's FEEL expression engine allowing execution of arbitrary code within the scope of a Camunda 8 server operating system process.
+
+Severity: Critical 9.9 (CVSS v3.1: AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H).
+
+This vulnerability was identified by Camunda's Security Team, with no known report or exploit beyond our own security investigation. A CVE identifier has been requested and this notice will be updated once it is assigned. For further details, see [GHSA-vx3p-v6cf-vfjw](https://github.com/camunda/feel-scala/security/advisories/GHSA-vx3p-v6cf-vfjw).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Orchestration Cluster ≤ 8.9.19 or ≤ 8.8.37
+- Camunda Zeebe, Operate, or Tasklist ≤ 8.7.39
+- Camunda Connectors ≤ 8.9.10, ≤ 8.8.19, or ≤ 8.7.25
+- Web Modeler ≤ 8.9.8, or ≤ 8.8.19
+
+Any component that bundles `org.camunda.feel:feel-engine` up to and including 1.22.0 is affected. Versions older than the ones listed above, including versions that have reached end of maintenance, are also affected, with the exception of Web Modeler, where versions below 8.8.0 are not affected.
+
+Exploitation requires one of the following:
+
+- The attacker is an authenticated and authorized user of the Camunda Orchestration Cluster REST API 8.9+ who has the privilege to invoke the [Evaluate Expression API](/apis-tools/orchestration-cluster-api-rest/specifications/evaluate-expression.api.mdx). The authorization requires:
+  - Permission granted to user or client (directly or via role)
+  - Resource type: `EXPRESSION`
+  - Permission: `EVALUATE`
+  - By default, this permission is granted as part of the admin role
+- The attacker is an authenticated and authorized user who has the privilege to deploy BPMN or DMN to the Camunda Orchestration Cluster:
+  - Prior to 8.8: API access (gRPC or REST)
+  - Starting 8.8: via gRPC or REST
+  - The authorization requires:
+    - Permission granted to user or client (directly or via role)
+    - Resource type: `Resource`
+    - Permission: `CREATE`
+    - By default, this permission is granted as part of the admin role
+- The attacker is an authenticated and authorized user of Camunda Web Modeler ≤ 8.9.8 or ≤ 8.8.19
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Orchestration Cluster 8.9.21, 8.8.39
+- Camunda Zeebe, Operate, Tasklist 8.7.41
+- Camunda Connectors 8.9.12, 8.8.21, 8.7.27
+- Web Modeler Self-Managed 8.9.9, 8.8.20
+
+These releases bundle a patched FEEL engine (1.22.1, 1.21.1, 1.20.3, 1.19.6, 1.18.6, 1.17.13, 1.16.6, or 1.15.5, depending on the component). If you embed the FEEL engine directly, upgrade `org.camunda.feel:feel-engine` to the patched version of your 1.x line.
+
+Camunda 8 SaaS was fully remediated on September 12 and 13, 2026, ahead of this notice. All clusters across all supported versions, and Web Modeler SaaS, were updated to patched builds; no action is required on your part. Clusters that were suspended at that time receive the patched version when they resume.
+
+## Notice 63
+
+### Publication date
+
+September 21, 2026
+
+### Products affected
+
+- Camunda Optimize
+
+### Impact
+
+The application was vulnerable to the following vulnerabilities in the embedded Eclipse Jetty web server:
+
+- [CVE-2026-19203](https://nvd.nist.gov/vuln/detail/CVE-2026-19203), where a flaw in HTTP/1.1 chunked request parsing accepts a lone line feed (`LF`) character as a terminator in parts of chunked requests. When deployed behind an intermediary reverse proxy that requires strict `CRLF` delimiters, this discrepancy in request boundary interpretation can lead to HTTP request smuggling.
+- [CVE-2026-12611](https://nvd.nist.gov/vuln/detail/CVE-2026-12611), where a race condition in the HTTP/2 server implementation when handling concurrent `RST_STREAM` and `GOAWAY` frames from a client can cause write-blocked threads to never be unblocked, potentially leading to thread exhaustion and a Denial of Service. The default Camunda Optimize configuration is not exploitable; this vulnerability only applies when HTTP/2 support is explicitly enabled (`container.http2Enabled: true`).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Optimize ≤ 8.7.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Optimize 8.7.28
+
 ## Notice 62
 
 ### Publication date
@@ -77,7 +253,7 @@ September 8, 2026
 
 The connector runtime resolves a secret reference (for example, `{{secrets.MY_API_KEY}}`) wherever that literal text appears in a connector's input, without restricting resolution to the field where the reference was declared. Under the following conditions, an attacker may be able to cause a connector to resolve and disclose a secret outside its intended scope:
 
-- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/saas/clusters/manage-secrets.md).
 - Untrusted input reaches a process variable — for example, through a user task, an inbound connector such as a webhook or email, or an API call.
 - That process variable is passed, unsanitized, into a connector field (for example, an email body or an HTTP request field).
 - The attacker can guess or know the name of a secret that exists in that context. This does not require knowing the secret's value, only its name.
@@ -99,7 +275,7 @@ Camunda has provided the following releases which contain the fix:
 
 - Camunda Connectors 8.9.10, 8.8.19, 8.7.25, 8.6.28
 
-On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/hub/organization/manage-clusters/settings.md#secret-filter-mode).
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/saas/clusters/settings.md#secret-filter-mode).
 
 **Interim mitigation**:
 

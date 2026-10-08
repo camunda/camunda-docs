@@ -6,13 +6,12 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func resolveSecretsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region ResolveSecrets
 	// References take the form `camunda.secrets.<name>`.
-	req := openapi.NewSecretResolveRequest([]string{"camunda.secrets.MY_API_KEY", "camunda.secrets.MY_TOKEN"})
+	req := camunda.NewSecretResolveRequest([]string{"camunda.secrets.MY_API_KEY", "camunda.secrets.MY_TOKEN"})
 
 	result, err := client.ResolveSecrets(ctx, *req)
 	if err != nil {
