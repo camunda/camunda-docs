@@ -94,6 +94,6 @@ In this release, each project runs locally with its own private memory. Cross-pr
 
 ## Get started
 
-1. Set up your organization for a first project, described in [set up your organization for ProcessOS Harness](project-setup.md).
+1. [Set up your organization for ProcessOS Harness](project-setup.md).
 2. Check the [system requirements](system-requirements.md).
-3. Install ProcessOS Harness and configure your first project, described in [install ProcessOS Harness and configure a project](get-started.md).
+3. [Install ProcessOS Harness and configure a project](get-started.md).

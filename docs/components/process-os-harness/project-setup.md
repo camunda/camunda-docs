@@ -35,4 +35,4 @@ Involve your SMEs early. ProcessOS Harness changes their role from main contribu
 ## Next steps
 
 1. Check the [system requirements](system-requirements.md).
-2. Install ProcessOS Harness and configure your first project, described in [install ProcessOS Harness and configure a project](get-started.md).
+2. [Install ProcessOS Harness and configure a project](get-started.md).
