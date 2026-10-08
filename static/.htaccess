@@ -73,10 +73,10 @@ RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 ##################################################################################
 
 # Numbered aliases for vNext. These are temporary, until this version becomes current.
-RewriteRule ^docs/8.10/(.*)$ /docs/next/$1 [R=302,L]
+RewriteRule ^docs/8.11/(.*)$ /docs/next/$1 [R=302,L]
 
 # For linking from our apps - redirect URLs with the current version to URLs with no version
-RewriteRule ^docs/8.9/(.*)$ /docs/$1 [R=302,L]
+RewriteRule ^docs/8.10/(.*)$ /docs/$1 [R=302,L]
 
 ## Archived versions. Note that the URL is adjusted to staging in the publish-stage workflow.
 RewriteRule ^docs/0.25/(.*)$ https://unsupported.docs.camunda.io/0.25/docs/$1 [R=301,L]
@@ -171,8 +171,8 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 ## Microsoft Teams and Slack app redirects for app store and Marketplace documentation links.
 
-RewriteRule ^docs/slack/?$ /docs/next/components/camunda-integrations/app-integrations/slack/ [R=301,L]
-RewriteRule ^docs/ms-teams/?$ /docs/next/components/camunda-integrations/app-integrations/microsoft-teams/ [R=301,L]
+RewriteRule ^docs/slack/?$ /docs/components/camunda-integrations/app-integrations/slack/ [R=301,L]
+RewriteRule ^docs/ms-teams/?$ /docs/components/camunda-integrations/app-integrations/microsoft-teams/ [R=301,L]
 
 ## Redirect update-guide introduction to new components-upgrade introduction
 
@@ -186,246 +186,250 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+#---------------------------------------------------------------------------------
+#   8.10: content moves introduced prior to the release of version 8.10.
+#---------------------------------------------------------------------------------
+
 # Hub API: the operation to replace a workspace's environments was renamed to update (8.10)
-RewriteRule ^docs/next/apis-tools/hub-api-saas/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-saas/specifications/update-workspace-environments/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/hub-api-sm/specifications/replace-workspace-environments/?$ /docs/next/apis-tools/hub-api-sm/specifications/update-workspace-environments/ [R=301,L]
+RewriteRule ^docs/apis-tools/hub-api-saas/specifications/replace-workspace-environments/?$ /docs/apis-tools/hub-api-saas/specifications/update-workspace-environments/ [R=301,L]
+RewriteRule ^docs/apis-tools/hub-api-sm/specifications/replace-workspace-environments/?$ /docs/apis-tools/hub-api-sm/specifications/update-workspace-environments/ [R=301,L]
 
 # The Manage users page became Manage users and roles (8.10)
-RewriteRule ^docs/next/components/hub/organization/manage-users/?$ /docs/next/components/hub/organization/users-and-roles/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-users/?$ /docs/components/hub/organization/users-and-roles/ [R=301,L]
 
 # SaaS-specific organization pages moved from Camunda Hub > Manage organization to the SaaS section (8.10)
-RewriteRule ^docs/next/components/hub/organization/manage-users/create-manage-users/?$ /docs/next/components/saas/organization/create-manage-users/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-users/manage-user-groups/?$ /docs/next/components/saas/organization/manage-user-groups/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-users/resource-based-auth/?$ /docs/next/components/saas/organization/resource-based-auth/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/delete-account/?$ /docs/next/components/saas/organization/delete-account/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/enable-alpha-features/?$ /docs/next/components/saas/organization/enable-alpha-features/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/external-sso/?$ /docs/next/components/saas/organization/external-sso/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/switch-organization/?$ /docs/next/components/saas/organization/switch-organization/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/usage-alerts/?$ /docs/next/components/saas/organization/usage-alerts/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/usage-history/?$ /docs/next/components/saas/organization/usage-history/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/view-organization-activity/?$ /docs/next/components/saas/organization/view-organization-activity/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/available-plans/?$ /docs/next/components/saas/organization/manage-plan/available-plans/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/create-account/?$ /docs/next/components/saas/organization/manage-plan/create-account/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations/?$ /docs/next/components/saas/organization/manage-plan/update-billing-reservations/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-organization-settings/manage-plan/upgrade-to-enterprise-plan/?$ /docs/next/components/saas/organization/manage-plan/available-plans/#upgrade-to-an-enterprise-plan [NE,R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-users/create-manage-users/?$ /docs/components/saas/organization/create-manage-users/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-users/manage-user-groups/?$ /docs/components/saas/organization/manage-user-groups/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-users/resource-based-auth/?$ /docs/components/saas/organization/resource-based-auth/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/delete-account/?$ /docs/components/saas/organization/delete-account/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/enable-alpha-features/?$ /docs/components/saas/organization/enable-alpha-features/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/external-sso/?$ /docs/components/saas/organization/external-sso/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/switch-organization/?$ /docs/components/saas/organization/switch-organization/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/usage-alerts/?$ /docs/components/saas/organization/usage-alerts/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/usage-history/?$ /docs/components/saas/organization/usage-history/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/view-organization-activity/?$ /docs/components/saas/organization/view-organization-activity/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/manage-plan/available-plans/?$ /docs/components/saas/organization/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/manage-plan/create-account/?$ /docs/components/saas/organization/manage-plan/create-account/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations/?$ /docs/components/saas/organization/manage-plan/update-billing-reservations/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-organization-settings/manage-plan/upgrade-to-enterprise-plan/?$ /docs/components/saas/organization/manage-plan/available-plans/#upgrade-to-an-enterprise-plan [NE,R=301,L]
 
 # The Manage an existing project page became Manage project settings (8.10)
-RewriteRule ^docs/next/components/hub/workspace/manage-projects/manage-project/?$ /docs/next/components/hub/workspace/manage-projects/project-settings/ [R=301,L]
+RewriteRule ^docs/components/hub/workspace/manage-projects/manage-project/?$ /docs/components/hub/workspace/manage-projects/project-settings/ [R=301,L]
 
 # The Hub dashboard page became the View Console page (8.10)
-RewriteRule ^docs/next/components/hub/organization/analyze-operations/hub-dashboard/?$ /docs/next/components/hub/organization/console/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/analyze-operations/hub-dashboard/?$ /docs/components/hub/organization/console/ [R=301,L]
 
 # SaaS cluster management pages moved from Camunda Hub > Manage clusters to the SaaS section (8.10)
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/create-cluster/?$ /docs/next/components/saas/clusters/create-cluster/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-cluster/?$ /docs/next/components/saas/clusters/manage-cluster/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-api-clients/?$ /docs/next/components/saas/clusters/manage-api-clients/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-secrets/?$ /docs/next/components/saas/clusters/manage-secrets/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-alerts/?$ /docs/next/components/saas/clusters/manage-alerts/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/manage-ip-allowlists/?$ /docs/next/components/saas/clusters/manage-ip-allowlists/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/create-backups/?$ /docs/next/components/saas/clusters/create-backups/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/settings/?$ /docs/next/components/saas/clusters/settings/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/cluster-capacity/?$ /docs/next/components/saas/clusters/cluster-capacity/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/configure-audit-log/?$ /docs/next/components/saas/clusters/configure-audit-log/ [R=301,L]
-RewriteRule ^docs/next/components/hub/organization/manage-clusters/troubleshoot-clusters/?$ /docs/next/components/saas/clusters/troubleshoot-clusters/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/create-cluster/?$ /docs/components/saas/clusters/create-cluster/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/manage-cluster/?$ /docs/components/saas/clusters/manage-cluster/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/manage-api-clients/?$ /docs/components/saas/clusters/manage-api-clients/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/manage-secrets/?$ /docs/components/saas/clusters/manage-secrets/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/manage-alerts/?$ /docs/components/saas/clusters/manage-alerts/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/manage-ip-allowlists/?$ /docs/components/saas/clusters/manage-ip-allowlists/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/create-backups/?$ /docs/components/saas/clusters/create-backups/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/settings/?$ /docs/components/saas/clusters/settings/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/cluster-capacity/?$ /docs/components/saas/clusters/cluster-capacity/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/configure-audit-log/?$ /docs/components/saas/clusters/configure-audit-log/ [R=301,L]
+RewriteRule ^docs/components/hub/organization/manage-clusters/troubleshoot-clusters/?$ /docs/components/saas/clusters/troubleshoot-clusters/ [R=301,L]
 
 
 # Databricks connector doc moved into its own subfolder alongside the new fraud detection use case doc.
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/databricks/?$ /docs/next/components/connectors/out-of-the-box-connectors/databricks/databricks/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/databricks/?$ /docs/components/connectors/out-of-the-box-connectors/databricks/databricks/ [R=301,L]
 # Adjust enable secure connectivity path to drop the "console" reference
-RewriteRule ^docs/next/components/saas/secure-connectivity/secure-connectivity-console-setup/?$ docs/next/components/saas/secure-connectivity/enable-secure-connectivity/ [R=301,L]
+RewriteRule ^docs/components/saas/secure-connectivity/secure-connectivity-console-setup/?$ docs/components/saas/secure-connectivity/enable-secure-connectivity/ [R=301,L]
 
 # Microsoft Teams docs became App Integrations, which covers Slack as well (8.10)
-RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
-RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-installation/?$ /docs/next/components/camunda-integrations/app-integrations/installation/ [R=301,L]
-RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-troubleshoot/?$ /docs/next/components/camunda-integrations/app-integrations/troubleshoot/ [R=301,L]
-RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-chatbot/?$ /docs/next/components/camunda-integrations/app-integrations/microsoft-teams/ [R=301,L]
-RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-tabs/?$ /docs/next/components/camunda-integrations/app-integrations/microsoft-teams/ [R=301,L]
-RewriteRule ^docs/next/components/camunda-integrations/ms-teams/ms-teams-notifications/?$ /docs/next/components/camunda-integrations/app-integrations/notification-rules/ [R=301,L]
+RewriteRule ^docs/components/camunda-integrations/ms-teams/ms-teams/?$ /docs/components/camunda-integrations/ms-teams/ [R=301,L]
+RewriteRule ^docs/components/camunda-integrations/ms-teams/ms-teams-installation/?$ /docs/components/camunda-integrations/app-integrations/installation/ [R=301,L]
+RewriteRule ^docs/components/camunda-integrations/ms-teams/ms-teams-troubleshoot/?$ /docs/components/camunda-integrations/app-integrations/troubleshoot/ [R=301,L]
+RewriteRule ^docs/components/camunda-integrations/ms-teams/ms-teams-chatbot/?$ /docs/components/camunda-integrations/app-integrations/microsoft-teams/ [R=301,L]
+RewriteRule ^docs/components/camunda-integrations/ms-teams/ms-teams-tabs/?$ /docs/components/camunda-integrations/app-integrations/microsoft-teams/ [R=301,L]
+RewriteRule ^docs/components/camunda-integrations/ms-teams/ms-teams-notifications/?$ /docs/components/camunda-integrations/app-integrations/notification-rules/ [R=301,L]
 
 # Bitnami subcharts are dropped in 8.10 (Helm chart 15.x); the "migrate from Bitnami" procedure is 8.9-only.
 # The next sub-pages were removed in favor of a stub index that links to the 8.9 guide (PR #9013).
-RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
-RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators/?$ /docs/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services/?$ /docs/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
 # Physical Tenants web-apps page merged into api-routing.md's "Webapp routing" section (too thin to stand alone).
-RewriteRule ^docs/next/self-managed/concepts/physical-tenants/web-apps/?$ /docs/next/self-managed/concepts/physical-tenants/api-routing/#webapp-routing [R=301,L]
+RewriteRule ^docs/self-managed/concepts/physical-tenants/web-apps/?$ /docs/self-managed/concepts/physical-tenants/api-routing/#webapp-routing [R=301,L]
 
 # In-process restore page folded into the Restore API tab of the Elasticsearch/OpenSearch and RDBMS restore guides (8.10).
-RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/in-process-restore/?$ /docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/in-process-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 
 # Elasticsearch/OpenSearch snapshot restore page broken into partials and inlined into the Restore API and Restore Application guides (8.10).
-RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/elasticsearch/es-restore-snapshot/?$ /docs/next/self-managed/operational-guides/backup-restore/elasticsearch/es-restore/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/elasticsearch/es-restore-snapshot/?$ /docs/self-managed/operational-guides/backup-restore/elasticsearch/es-restore/ [R=301,L]
 
 # The multi-namespace configure page became the deployment topology install section (8.10).
 # Its content is now split by release role under install/topology/.
-RewriteRule ^docs/next/self-managed/deployment/helm/configure/multi-namespace/?$ /docs/next/self-managed/deployment/helm/install/topology/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/configure/multi-namespace/?$ /docs/self-managed/deployment/helm/install/topology/ [R=301,L]
 
 # configure-multi-tenancy renamed to configure-logical-tenants: "multi-tenancy" collided with Physical Tenants, which is also a multi-tenancy model.
-RewriteRule ^docs/next/self-managed/deployment/helm/configure/configure-multi-tenancy/?$ /docs/next/self-managed/deployment/helm/configure/configure-logical-tenants/ [R=301,L]
-RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
-RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/configure/configure-multi-tenancy/?$ /docs/self-managed/deployment/helm/configure/configure-logical-tenants/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
 # IDP application renamed to IDP project (creation moved to the Projects page)
-RewriteRule ^docs/next/components/hub/workspace/modeler/idp/idp-applications/?$ /docs/next/components/hub/workspace/modeler/idp/idp-projects/ [R=301,L]
+RewriteRule ^docs/components/hub/workspace/modeler/idp/idp-applications/?$ /docs/components/hub/workspace/modeler/idp/idp-projects/ [R=301,L]
 
 # Console telemetry page removed; monitoring is the closest replacement
-RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
+RewriteRule ^docs/self-managed/components/console/telemetry/?$ /docs/self-managed/components/hub/monitoring/ [R=301,L]
 
 # Administration SM API removed; replaced by Camunda Hub
-RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-overview/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-authentication/?$ /docs/next/apis-tools/web-modeler-api/authentication/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administration-api-self-managed/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
-RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+RewriteRule ^docs/apis-tools/administration-sm-api/administration-sm-api-overview/?$ /docs/apis-tools/web-modeler-api/overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/administration-sm-api/administration-sm-api-authentication/?$ /docs/apis-tools/web-modeler-api/authentication/ [R=301,L]
+RewriteRule ^docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed/?$ /docs/apis-tools/web-modeler-api/overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+RewriteRule ^docs/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 
 # The SAP BTP plugin is retired in 8.10; redirect to the 8.9 page, the last version that documents it.
-RewriteRule ^docs/next/components/camunda-integrations/sap/btp-plugin/?$ /docs/8.9/components/camunda-integrations/sap/btp-plugin/ [R=301,L]
+RewriteRule ^docs/components/camunda-integrations/sap/btp-plugin/?$ /docs/8.9/components/camunda-integrations/sap/btp-plugin/ [R=301,L]
 
 # The "Install Bitnami enterprise images" page is removed in 8.10 (Bitnami images are no longer
 # usable from chart 15.x); redirect to the 8.9 page, the last version that documents them.
-RewriteRule ^docs/next/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]
 
 # This file didn't belong in 8.9. However, it was in production and was receiving traffic, so we decided to maintain
 # a redirect.
-RewriteRule ^docs/self-managed/upgrade/helm/890-to-8100/?$ /docs/next/self-managed/upgrade/helm/890-to-8100/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/helm/890-to-8100/?$ /docs/self-managed/upgrade/helm/890-to-8100/ [R=301,L]
 
 # 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)
-RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-89/?$ /docs/next/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
+RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-89/?$ /docs/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
 
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
-RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/tasklist-api-rest/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/testing/zeebe-process-test/?$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-process-test/ [R=301,L]
-RewriteRule ^docs/next/components/tasklist/user-task-access-restrictions/?$ /docs/next/components/tasklist/user-task-authorization/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions/?$ /docs/next/components/tasklist/user-task-authorization/ [R=301,L]
-RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/?$ /docs/next/components/tasklist/userguide/starting-processes/ [R=301,L]
+RewriteRule ^docs/apis-tools/operate-api/authentication/?$ /docs/components/concepts/access-control/access-control-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/operate-api/(.*)$ /docs/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/?$ /docs/components/concepts/access-control/access-control-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/tasklist-api-rest/(.*)$ /docs/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+RewriteRule ^docs/apis-tools/testing/zeebe-process-test/?$ /docs/apis-tools/migration-manuals/migrate-to-camunda-process-test/ [R=301,L]
+RewriteRule ^docs/components/tasklist/user-task-access-restrictions/?$ /docs/components/tasklist/user-task-authorization/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions/?$ /docs/components/tasklist/user-task-authorization/ [R=301,L]
+RewriteRule ^docs/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/?$ /docs/components/tasklist/userguide/starting-processes/ [R=301,L]
 
 # Redirects associated with Camunda Hub
-RewriteRule ^docs/next/components/modeler/forms/utilizing-forms/?$ docs/next/components/hub/workspace/modeler/modeling/utilize-forms [R=301,L]
-RewriteRule ^docs/next/components/modeler/using-web-and-desktop-modeler-together/?$ docs/next/components/modeler/using-hub-and-desktop-modeler-together [R=301,L]
+RewriteRule ^docs/components/modeler/forms/utilizing-forms/?$ docs/components/hub/workspace/modeler/modeling/utilize-forms [R=301,L]
+RewriteRule ^docs/components/modeler/using-web-and-desktop-modeler-together/?$ docs/components/modeler/using-hub-and-desktop-modeler-together [R=301,L]
 # Old Console URLs of the pages moved to the SaaS section go there in one hop (8.10). They must stay before the wildcards below.
-RewriteRule ^docs/next/components/console/manage-clusters/create-cluster/?$ /docs/next/components/saas/clusters/create-cluster/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/manage-cluster/?$ /docs/next/components/saas/clusters/manage-cluster/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/manage-api-clients/?$ /docs/next/components/saas/clusters/manage-api-clients/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/manage-secrets/?$ /docs/next/components/saas/clusters/manage-secrets/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/manage-alerts/?$ /docs/next/components/saas/clusters/manage-alerts/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/manage-ip-allowlists/?$ /docs/next/components/saas/clusters/manage-ip-allowlists/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/create-backups/?$ /docs/next/components/saas/clusters/create-backups/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/settings/?$ /docs/next/components/saas/clusters/settings/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/cluster-capacity/?$ /docs/next/components/saas/clusters/cluster-capacity/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/configure-audit-log/?$ /docs/next/components/saas/clusters/configure-audit-log/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/troubleshoot-clusters/?$ /docs/next/components/saas/clusters/troubleshoot-clusters/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/delete-account/?$ /docs/next/components/saas/organization/delete-account/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/enable-alpha-features/?$ /docs/next/components/saas/organization/enable-alpha-features/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/external-sso/?$ /docs/next/components/saas/organization/external-sso/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/switch-organization/?$ /docs/next/components/saas/organization/switch-organization/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/usage-alerts/?$ /docs/next/components/saas/organization/usage-alerts/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/usage-history/?$ /docs/next/components/saas/organization/usage-history/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/view-organization-activity/?$ /docs/next/components/saas/organization/view-organization-activity/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-plan/available-plans/?$ /docs/next/components/saas/organization/manage-plan/available-plans/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-plan/create-account/?$ /docs/next/components/saas/organization/manage-plan/create-account/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-plan/update-billing-reservations/?$ /docs/next/components/saas/organization/manage-plan/update-billing-reservations/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-plan/upgrade-to-enterprise-plan/?$ /docs/next/components/saas/organization/manage-plan/available-plans/#upgrade-to-an-enterprise-plan [NE,R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/saas/organization/manage-user-groups/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/users-and-roles/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/advanced-search$ /docs/next/components/hub/organization/manage-organization-settings/organization-settings/ [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/create-cluster/?$ /docs/components/saas/clusters/create-cluster/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/manage-cluster/?$ /docs/components/saas/clusters/manage-cluster/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/manage-api-clients/?$ /docs/components/saas/clusters/manage-api-clients/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/manage-secrets/?$ /docs/components/saas/clusters/manage-secrets/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/manage-alerts/?$ /docs/components/saas/clusters/manage-alerts/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/manage-ip-allowlists/?$ /docs/components/saas/clusters/manage-ip-allowlists/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/create-backups/?$ /docs/components/saas/clusters/create-backups/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/settings/?$ /docs/components/saas/clusters/settings/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/cluster-capacity/?$ /docs/components/saas/clusters/cluster-capacity/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/configure-audit-log/?$ /docs/components/saas/clusters/configure-audit-log/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/troubleshoot-clusters/?$ /docs/components/saas/clusters/troubleshoot-clusters/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/delete-account/?$ /docs/components/saas/organization/delete-account/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/enable-alpha-features/?$ /docs/components/saas/organization/enable-alpha-features/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/external-sso/?$ /docs/components/saas/organization/external-sso/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/switch-organization/?$ /docs/components/saas/organization/switch-organization/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/usage-alerts/?$ /docs/components/saas/organization/usage-alerts/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/usage-history/?$ /docs/components/saas/organization/usage-history/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/view-organization-activity/?$ /docs/components/saas/organization/view-organization-activity/ [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/available-plans/?$ /docs/components/saas/organization/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/create-account/?$ /docs/components/saas/organization/manage-plan/create-account/ [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/update-billing-reservations/?$ /docs/components/saas/organization/manage-plan/update-billing-reservations/ [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/upgrade-to-enterprise-plan/?$ /docs/components/saas/organization/manage-plan/available-plans/#upgrade-to-an-enterprise-plan [NE,R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/(.*)$ /docs/components/hub/organization/manage-clusters/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/manage-user-groups$ /docs/components/saas/organization/manage-user-groups/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/manage-users$ /docs/components/hub/organization/users-and-roles/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/advanced-search$ /docs/components/hub/organization/manage-organization-settings/organization-settings/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/(.*)$ /docs/components/hub/organization/manage-organization-settings/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/(.*)$ /docs/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
+RewriteRule ^docs/components/console/introduction-to-console/?$ /docs/components/hub/ [R=301,L]
 
 # Process applications - specific renamed files
-RewriteRule ^/docs/next/components/concepts/process-applications/?$ /docs/next/components/concepts/projects [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/?$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/next/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/process-application-versioning/?$ /docs/next/components/hub/workspace/manage-projects/project-versioning/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/process-application-pipeline/?$ /docs/next/components/hub/workspace/manage-projects#project-development-lifecycle [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/create-a-process-application/?$ /docs/next/components/hub/workspace/manage-projects/create-a-project/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/deploy-process-application/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
+RewriteRule ^/docs/components/concepts/process-applications/?$ /docs/components/concepts/projects [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/process-applications/?$ /docs/components/hub/workspace/manage-projects/manage-projects [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/process-application-versioning/?$ /docs/components/hub/workspace/manage-projects/project-versioning/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/process-application-pipeline/?$ /docs/components/hub/workspace/manage-projects#project-development-lifecycle [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/create-a-process-application/?$ /docs/components/hub/workspace/manage-projects/create-a-project/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/deploy-process-application/?$ /docs/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/git-sync/?$ /docs/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
 
 # Process applications - general redirect
-RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)$ /docs/next/components/hub/workspace/manage-projects/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/process-applications/(.*)$ /docs/components/hub/workspace/manage-projects/$1 [R=301,L]
 
 # Web Modeler moved to Hub Workspace Modeler - specific renamed files
-RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /docs/next/components/hub/workspace/modeler/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/web-modeler-settings/?$ /docs/next/components/hub/workspace/modeler/modeler-settings/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/next/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/hub/workspace/modeler/modeling/camunda-marketplace/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/context-pad/?$ /docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/file-download/?$ /docs/next/components/hub/workspace/modeler/modeling/file-download/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/import-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/import-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/versions/?$ /docs/next/components/hub/workspace/modeler/modeling/versions/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/organization/manage-workspaces/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/implement-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/design-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/design-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/collaborate-with-modes/?$ /docs/next/components/hub/workspace/modeler/collaboration/collaborate-with-modes/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/launch-web-modeler/?$ /docs/components/hub/workspace/modeler/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/web-modeler-settings/?$ /docs/components/hub/workspace/modeler/modeler-settings/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/camunda-marketplace/?$ /docs/components/hub/workspace/modeler/modeling/camunda-marketplace/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/context-pad/?$ /docs/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/file-download/?$ /docs/components/hub/workspace/modeler/modeling/file-download/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/import-diagram/?$ /docs/components/hub/workspace/modeler/modeling/import-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/versions/?$ /docs/components/hub/workspace/modeler/modeling/versions/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/components/hub/workspace/modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/components/modeler/about-modeler/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/play-your-process/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/task-testing/?$ /docs/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/token-simulation/?$ /docs/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/components/hub/organization/manage-workspaces/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/implement-your-process/?$ /docs/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/design-your-process/?$ /docs/components/hub/workspace/modeler/collaboration/design-your-process/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/collaborate-with-modes/?$ /docs/components/hub/workspace/modeler/collaboration/collaborate-with-modes/ [R=301,L]
 
 # Web Modeler moved to Hub Workspace Modeler - general redirect
-RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/(.*)$ /docs/components/hub/workspace/modeler/$1 [R=301,L]
 
 # Play-to-Test Transition (product-hub#3169): Play mode renamed to Test mode
-RewriteRule ^docs/next/components/hub/workspace/modeler/validation/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
-RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-case-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
+RewriteRule ^docs/components/hub/workspace/modeler/validation/play-your-process/?$ /docs/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
+RewriteRule ^docs/components/hub/workspace/modeler/validation/test-scenario-files/?$ /docs/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
+RewriteRule ^docs/components/hub/workspace/modeler/validation/test-case-files/?$ /docs/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 
 # Move Console and Web Modeler docs to Camunda Hub (next version)
-RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/console/usage-metrics/?$ /docs/next/self-managed/components/hub/usage-metrics/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/console/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/monitoring/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/database/?$ /docs/next/self-managed/components/hub/configuration/database/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/identity/?$ /docs/next/self-managed/components/hub/configuration/identity/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/logging/?$ /docs/next/self-managed/components/hub/configuration/logging/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/copilot/?$ /docs/next/self-managed/components/hub/configuration/copilot/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-database-connection/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-missing-data/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
+RewriteRule ^docs/self-managed/components/console/overview/?$ /docs/self-managed/components/hub/ [R=301,L]
+RewriteRule ^docs/self-managed/components/console/usage-metrics/?$ /docs/self-managed/components/hub/usage-metrics/ [R=301,L]
+RewriteRule ^docs/self-managed/components/console/configuration/configuration/?$ /docs/self-managed/components/hub/configuration/properties/ [R=301,L]
+RewriteRule ^docs/self-managed/components/console/configuration/ssl/?$ /docs/self-managed/components/hub/configuration/ssl/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/overview/?$ /docs/self-managed/components/hub/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/monitoring/?$ /docs/self-managed/components/hub/monitoring/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/self-managed/components/hub/configuration/properties/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/configuration/database/?$ /docs/self-managed/components/hub/configuration/database/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/configuration/identity/?$ /docs/self-managed/components/hub/configuration/identity/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/configuration/logging/?$ /docs/self-managed/components/hub/configuration/logging/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/self-managed/components/hub/configuration/ssl/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/configuration/copilot/?$ /docs/self-managed/components/hub/configuration/copilot/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-database-connection/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-missing-data/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
 
 # Get started with Optimize
-RewriteRule ^docs/next/guides/improve-processes-with-optimize/?$ /docs/next/components/optimize/improve-processes-with-optimize/ [R=301,L]
+RewriteRule ^docs/guides/improve-processes-with-optimize/?$ /docs/components/optimize/improve-processes-with-optimize/ [R=301,L]
 
 # Camunda 8 deployment guide
-RewriteRule ^docs/self-managed/platform-deployment/overview/?$ /docs/next/self-managed/deployment/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/overview/?$ /docs/self-managed/deployment/ [R=301,L]
 
 # Sign up and log in
-RewriteRule ^docs/next/guides/getting-started/?$ /docs/components/saas/ [R=301,L]
+RewriteRule ^docs/guides/getting-started/?$ /docs/components/saas/ [R=301,L]
 
 # Create a new cluster
 RewriteRule ^docs/guides/create-cluster/?$ /docs/components/console/manage-clusters/create-cluster/ [R=301,L]
 
 # Service task (microservice orchestration)
-RewriteRule ^docs/next/guides/orchestrate-microservices/?$ /docs/8.7/guides/orchestrate-microservices/ [R=301,L]
+RewriteRule ^docs/guides/orchestrate-microservices/?$ /docs/8.7/guides/orchestrate-microservices/ [R=301,L]
 
 # Connect to a mail provider
-RewriteRule ^docs/next/guides/configuring-out-of-the-box-connectors/?$ /docs/components/connectors/use-connectors/configuring-out-of-the-box-connectors/ [R=301,L]
+RewriteRule ^docs/guides/configuring-out-of-the-box-connectors/?$ /docs/components/connectors/use-connectors/configuring-out-of-the-box-connectors/ [R=301,L]
 
 # Designing a process using BPMN
-RewriteRule ^docs/next/guides/automating-a-process-using-bpmn/?$ /docs/components/modeler/bpmn/automating-a-process-using-bpmn/ [R=301,L]
+RewriteRule ^docs/guides/automating-a-process-using-bpmn/?$ /docs/components/modeler/bpmn/automating-a-process-using-bpmn/ [R=301,L]
 
 # Self-Managed upgrade guide restructuring
 RewriteRule ^docs/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/self-managed/upgrade/ [R=301,L]
