@@ -194,7 +194,17 @@ For other driver sources (e.g., private repositories), adjust the `wget` command
 
 #### Option B: ConfigMap (GitOps-friendly)
 
-Store the driver JAR in a ConfigMap and mount it:
+Store the driver JAR in a ConfigMap and mount it. A ConfigMap can't exceed 1 MiB, so this option only fits small drivers. The Oracle driver in Option A is larger than that limit.
+
+Create the ConfigMap from the JAR file. The command stores the JAR in the `binaryData` field:
+
+```bash
+kubectl create configmap jdbc-drivers \
+  --from-file=driver.jar=<path-to-driver-jar> \
+  -n camunda
+```
+
+For GitOps, commit the equivalent manifest instead. Store the base64-encoded JAR in `binaryData`, not in `data`:
 
 ```yaml
 apiVersion: v1
@@ -202,9 +212,13 @@ kind: ConfigMap
 metadata:
   name: jdbc-drivers
   namespace: camunda
-data:
-  ojdbc.jar: <base64-encoded JAR content>
----
+binaryData:
+  driver.jar: <base64-encoded JAR content>
+```
+
+Then mount the ConfigMap in your `values-rdbms.yaml`:
+
+```yaml
 orchestration:
   extraVolumeMounts:
     - name: jdbcdrivers
@@ -241,13 +255,13 @@ Check that tables were created and data is being written:
 kubectl port-forward -n camunda svc/postgres 5432:5432
 
 # Connect and verify
-psql -h localhost -U camunda -d camunda -c "SELECT * FROM zeebe_process;"
+psql -h localhost -U camunda -d camunda -c "SELECT COUNT(*) FROM process_instance;"
 ```
 
 Deploy a test process using Web Modeler and verify it appears in the database:
 
 ```sql
-SELECT COUNT(*) FROM process_instances;
+SELECT COUNT(*) FROM process_instance;
 ```
 
 For a full post-deployment checklist, see [validate RDBMS connectivity](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
@@ -266,7 +280,7 @@ orchestration:
         url: jdbc:postgresql://my-aurora-cluster.xxxxxxx.us-east-1.rds.amazonaws.com:5432/camunda
 ```
 
-Aurora supports automatic failover. For advanced failover features, consider the [AWS JDBC wrapper driver](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql).
+Aurora supports automatic failover. For advanced failover features, consider the [AWS JDBC wrapper driver](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql--mysql).
 
 ### Oracle with Kubernetes init container
 

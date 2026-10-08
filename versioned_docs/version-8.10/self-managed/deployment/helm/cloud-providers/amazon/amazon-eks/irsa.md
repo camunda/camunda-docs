@@ -196,11 +196,13 @@ If nothing within your cluster relies on the implicit node role, Camunda recomme
 
 **For new node groups** that use a Terraform module such as the [Amazon EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), you can define the following:
 
-```json
-eks_managed_node_group_defaults {
+```hcl
+eks_managed_node_groups = {
+  services = {
     metadata_options = {
-        http_put_response_hop_limit = 1
+      http_put_response_hop_limit = 1
     }
+  }
 }
 ```
 
@@ -311,7 +313,7 @@ With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK re
 
 ### Configure connector task credentials separately
 
-Connectors accesses documents through the Orchestration REST API, not the document store directly. Don't grant the document-store IAM role to the Connectors service account.
+Connectors access documents through the Orchestration REST API, not the document store directly. Don't grant the document-store IAM role to the Connectors service account.
 
 Starting with Camunda 8.10 (Helm chart 15.x), the chart no longer propagates document-store credentials to the Connectors pod. If a connector task uses cloud credentials from the pod environment, configure a role or Secret scoped to the connector tasks under `connectors`, as shown in [migrate document-store cloud credentials](/self-managed/upgrade/helm/890-to-8100.md#migrate-document-store-cloud-credentials). Don't reuse the document-store role or credentials.
 

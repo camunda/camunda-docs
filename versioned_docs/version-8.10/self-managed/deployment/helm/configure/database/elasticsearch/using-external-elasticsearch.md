@@ -71,14 +71,14 @@ If the Elasticsearch cluster accepts only `https` requests with a self-signed ce
 
 1. Create an `externaldb.jks` file from the Elasticsearch certificate file. For example, using the `keytool` CLI:
 
-   ```yaml
+   ```shell
    keytool -import -alias elasticsearch -keystore externaldb.jks -storetype jks -file elastic.crt -storepass changeit -noprompt
    ```
 
 1. Create a Kubernetes secret from the `externaldb.jks` file before installing Camunda:
 
-   ```yaml
-   kubectl  create secret -n camunda generic elastic-jks --from-file=externaldb.jks
+   ```shell
+   kubectl create secret -n camunda generic elastic-jks --from-file=externaldb.jks
    ```
 
 1. Configure the Camunda 8 Self-Managed Helm chart:

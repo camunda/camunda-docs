@@ -8,7 +8,8 @@ After deploying your IdP, merge the corresponding auth overlay into your `values
 **Keycloak Operator overlays:**
 
 ```bash
-# Merge the Keycloak Operator Helm values (use "domain" or "no-domain" variant)
+# Merge the Keycloak Operator Helm values
+# Without a domain, use camunda-keycloak-no-domain-values.yml instead of camunda-keycloak-domain-values.yml
 yq ". *+ load(\"camunda-keycloak-domain-values.yml\")" values.yml > values-merged.yml && mv values-merged.yml values.yml
 
 # Merge the identity secrets overlay

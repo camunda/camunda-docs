@@ -391,8 +391,10 @@ global:
       console:
         clientId: "<console-app-id>"
         audience: "<console-app-id>"
-        redirectUrl: "http://localhost:8087"
+        redirectUrl: "<CONSOLE_URL>"
 ```
+
+Replace `<CONSOLE_URL>` with the base URL of Console as it will be reachable from your users' browser. For local deployment, use `http://localhost:8087`.
 
 Console is deployed by Camunda Hub, which you enabled in the [Configure Web Modeler](#configure-web-modeler) step; the configuration above only defines its OIDC client.
 
@@ -434,7 +436,7 @@ global:
       console:
         clientId: "<console-app-id>"
         audience: "<console-app-id>"
-        redirectUrl: "http://localhost:8087"
+        redirectUrl: "<CONSOLE_URL>"
   security:
     authentication:
       method: oidc

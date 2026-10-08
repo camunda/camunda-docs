@@ -110,7 +110,44 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 If your OIDC provider needs to be reached using different URLs from the browser and backend (for example, when running in Docker or behind a reverse proxy), you can configure separate URIs instead of a single `issuer-uri`. See [use separate OIDC provider URIs for browser and backend](./special-oidc-cases.md#use-separate-oidc-provider-uris-for-browser-and-backend) for details.
 :::
 
-## Redirect URI
+- **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
+
+:::info
+If you're using Camunda Hub and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/hub/configuration/properties.md#available-authentication-methods)),
+both applications must use the same IdP. You also need to make the cluster accept the token passed by Camunda Hub.
+To do so, include the Camunda Hub UI's token audience in the configured list of audiences.
+:::
+
+#### Example IdP configuration
+
+The following examples show typical OIDC settings in `application.yaml`. Adapt the values to your environment and IdP configuration.
+
+<Tabs groupId="idpExamples" defaultValue="entraid">
+<TabItem value="entraid" label="Microsoft EntraID">
+```yaml
+camunda.security.authentication.oidc.client-id: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
+camunda.security.authentication.oidc.issuer-uri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
+camunda.security.authentication.oidc.redirect-uri: "http://localhost:8080/sso-callback"
+camunda.security.authentication.oidc.username-claim: "oid"
+camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.scope: ["openid", "profile", "<YOUR_CLIENTID>/.default"]
+```
+</TabItem>
+<TabItem value="keycloak" label="Keycloak">
+```yaml
+camunda.security.authentication.oidc.client-id: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
+camunda.security.authentication.oidc.issuer-uri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
+camunda.security.authentication.oidc.redirect-uri: "http://localhost:8080/sso-callback"
+camunda.security.authentication.oidc.username-claim: "preferred_username"
+camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.scope: ["openid", "profile", "email"]
+```
+</TabItem>
+</Tabs>
+
+### Redirect URI
 
 Use the redirect URI to define where the Identity Provider (IdP) sends users back after successful authentication.
 
@@ -157,43 +194,6 @@ For example:
 - Accessing the instance via `https://services.acme.com:18080/camunda/` resolves `{baseUrl}` to `https://services.acme.com:18080/camunda`
 
 :::
-
-- **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
-
-:::info
-If you're using Camunda Hub and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/hub/configuration/properties.md#available-authentication-methods)),
-both applications must use the same IdP. You also need to make the cluster accept the token passed by Camunda Hub.
-To do so, include the Camunda Hub UI's token audience in the configured list of audiences.
-:::
-
-#### Example IdP configuration
-
-The following examples show typical OIDC settings in `application.yaml`. Adapt the values to your environment and IdP configuration.
-
-<Tabs groupId="idpExamples" defaultValue="entraid">
-<TabItem value="entraid" label="Microsoft EntraID">
-```yaml
-camunda.security.authentication.oidc.client-id: <YOUR_CLIENTID>
-camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
-camunda.security.authentication.oidc.issuer-uri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
-camunda.security.authentication.oidc.redirect-uri: "http://localhost:8080/sso-callback"
-camunda.security.authentication.oidc.username-claim: "oid"
-camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-camunda.security.authentication.oidc.scope: ["openid", "profile", "<YOUR_CLIENTID>/.default"]
-```
-</TabItem>
-<TabItem value="keycloak" label="Keycloak">
-```yaml
-camunda.security.authentication.oidc.client-id: <YOUR_CLIENTID>
-camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
-camunda.security.authentication.oidc.issuer-uri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
-camunda.security.authentication.oidc.redirect-uri: "http://localhost:8080/sso-callback"
-camunda.security.authentication.oidc.username-claim: "preferred_username"
-camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-camunda.security.authentication.oidc.scope: ["openid", "profile", "email"]
-```
-</TabItem>
-</Tabs>
 
 ### Step 5: Restart the Orchestration Cluster
 
@@ -264,7 +264,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
 
 ### (Optional) Step 9: Mapping rules
 
-You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](components/admin/mapping-rules.md) for more information on how to define mapping rules.
+You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](/components/admin/mapping-rules.md) for more information on how to define mapping rules.
 
 ## Machine-to-machine (M2M) API access
 
@@ -272,7 +272,7 @@ Configure job workers, connectors, or custom client applications to use the Orch
 
 ### Prerequisites
 
-- The Orchestration Cluster (Self-Managed) user interface is [configured against your IdP](#user-interface).
+- The Orchestration Cluster (Self-Managed) user interface is [configured against your IdP](#web-components).
 - Client credentials (client ID, client secret, authorization server URI) from your IdP.
 
 ### Step 1: Configure the OIDC client id claim

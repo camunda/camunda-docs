@@ -139,14 +139,13 @@ Exporter configuration and full retention examples are documented in [Zeebe Elas
 optimize:
   enabled: true
 
-# Or enable the legacy Zeebe exporter directly:
 orchestration:
+  # Or enable the legacy Zeebe exporter directly:
   exporters:
     zeebe:
       enabled: true
 
-# Zeebe records retention (Elasticsearch/OpenSearch Exporter indices)
-orchestration:
+  # Zeebe records retention (Elasticsearch/OpenSearch Exporter indices)
   retention:
     enabled: true
     minimumAge: 30d
@@ -359,5 +358,5 @@ Operate and Tasklist indices use schema-specific versioning in their names (for 
 - **Versions 8.5-8.6**: ILM policies sometimes missing after configuration; may require manual creation or new record export to trigger policy creation
 
 :::info
-For Camunda 8.7 and earlier, if you change retention configuration after initial deployment, you must manually update the policies in Elasticsearch/OpenSearch for Operate and Tasklist. Zeebe automatically applies configuration updates. See [Manually creating or updating policies](#manually-creating-or-updating-policies-87-and-earlier).
+For Camunda 8.7 and earlier, if you change retention configuration after initial deployment, you must manually update the policies in Elasticsearch/OpenSearch for Operate and Tasklist. Zeebe automatically applies configuration updates.
 :::

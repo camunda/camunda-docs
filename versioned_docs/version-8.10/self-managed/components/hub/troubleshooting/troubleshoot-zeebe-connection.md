@@ -21,9 +21,9 @@ Depending on your infrastructure, the default timeouts configured may be too sho
 You can pass custom timeouts in milliseconds for Camunda Hub's Zeebe client to `modeler-restapi` via three individual environment variables:
 
 ```shell
-ZEEBE_CLIENT_REQUESTTIMEOUT=30000 # limit the time to wait for a response from the Zeebe Gateway
-ZEEBE_AUTH_CONNECT_TIMEOUT=60000 # limit the time to wait for a connection to the OAuth server
-ZEEBE_AUTH_READ_TIMEOUT=60000 # limits the time to wait for a response from the OAuth server
+CAMUNDA_CLIENT_REQUESTTIMEOUT=30000 # limit the time to wait for a response from the Zeebe Gateway
+CAMUNDA_AUTH_CONNECT_TIMEOUT=60000 # limit the time to wait for a connection to the OAuth server
+CAMUNDA_AUTH_READ_TIMEOUT=60000 # limits the time to wait for a response from the OAuth server
 ```
 
 ## Secure connection to Zeebe fails
@@ -86,11 +86,11 @@ server certificate itself.
 
 ### Provide the certificate via an environment variable
 
-`modeler-restapi` reads a trusted certificate from the environment variable `ZEEBE_CA_CERTIFICATE_PATH`.
+`modeler-restapi` reads a trusted certificate from the environment variable `CAMUNDA_CA_CERTIFICATE_PATH`.
 This solution is recommended for most users:
 
 ```shell
-ZEEBE_CA_CERTIFICATE_PATH=/path/to/certificate
+CAMUNDA_CA_CERTIFICATE_PATH=/path/to/certificate
 ```
 
 The provided path has to be accessible from the `modeler-restapi` container (e.g. via a mounted volume).

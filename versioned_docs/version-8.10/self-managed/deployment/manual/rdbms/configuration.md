@@ -44,7 +44,7 @@ For Docker, mount external drivers using a volume. The driver JAR must be placed
 ```yaml
 services:
   camunda:
-    image: camunda/camunda-platform:8.9.0
+    image: camunda/camunda:<tag>
     ports:
       - "8080:8080"
       - "26500:26500"
@@ -69,6 +69,7 @@ CREATE DATABASE camunda ENCODING 'UTF8';
 CREATE USER camunda WITH PASSWORD 'your-secure-password';
 GRANT CONNECT ON DATABASE camunda TO camunda;
 GRANT USAGE ON SCHEMA public TO camunda;
+GRANT CREATE ON SCHEMA public TO camunda;
 GRANT CREATE ON DATABASE camunda TO camunda;
 ```
 

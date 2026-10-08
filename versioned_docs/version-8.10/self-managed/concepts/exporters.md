@@ -343,18 +343,16 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
         <TabItem value="envVars">
 
         ```sh
-        ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEMESSAGEBODYONEXPIRED=true
+        CAMUNDA_PROCESSING_ENABLEMESSAGEBODYONEXPIRED=true
         ```
 
         </TabItem>
         <TabItem value="valuesYaml">
 
         ```yaml
-        zeebe:
-        broker:
-            experimental:
-            features:
-                enableMessageBodyOnExpired: true
+        camunda:
+          processing:
+            enable-message-body-on-expired: true
         ```
 
         </TabItem>

@@ -360,7 +360,7 @@ This section applies if you have previously created a private cluster and want t
 
 You can access the created OpenShift cluster using the following steps:
 
-1. Verify that you are in the [OpenShift clusters module](#openshift-clusters-module-setup) directory `clusters`:
+1. Verify that you are in the [OpenShift cluster module](#openshift-cluster-module-setup) directory `cluster`:
 
    ```bash
    pwd

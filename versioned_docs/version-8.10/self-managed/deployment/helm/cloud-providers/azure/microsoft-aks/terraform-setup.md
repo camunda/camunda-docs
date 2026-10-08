@@ -56,12 +56,12 @@ This approach allows you to extend and customize the codebase according to your 
 
 This guide supports two secondary storage variants for the Orchestration Cluster. Choose the one that fits your requirements:
 
-| Aspect                 | Elasticsearch                                                                                                                   | RDBMS (PostgreSQL)                                                                         |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Secondary storage      | [Elasticsearch via ECK Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#deploy-elasticsearch) | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md) |
-| Optimize               | Supported                                                                                                                       | Not available (requires Elasticsearch)                                                     |
-| Infrastructure         | AKS + PostgreSQL + Elasticsearch cluster                                                                                        | AKS + PostgreSQL only (lighter footprint)                                                  |
-| Orchestration database | Not required                                                                                                                    | Additional `camunda_orchestration` database                                                |
+| Aspect                 | Elasticsearch                                                                                                                       | RDBMS (PostgreSQL)                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Secondary storage      | [Elasticsearch via ECK Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md) |
+| Optimize               | Supported                                                                                                                           | Not available (requires Elasticsearch)                                                     |
+| Infrastructure         | AKS + PostgreSQL + Elasticsearch cluster                                                                                            | AKS + PostgreSQL only (lighter footprint)                                                  |
+| Orchestration database | Not required                                                                                                                        | Additional `camunda_orchestration` database                                                |
 
 For more details on secondary storage, see [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md).
 
@@ -236,7 +236,7 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+Replace `<appId>` and `<tenant-id>` with the actual values of your Service Principal.
 
 Also, ensure that you export the `<appId>` by running the below command after logging in as the SP, as it will be needed [in the next step](#creating-terraformtfvars).
 
@@ -269,7 +269,7 @@ az login --service-principal \
 
 You will be prompted to enter the password interactively.
 
-Replace `<appId>`, `<password>`, and `<tenant-id>` with the actual values of your Service Principal.
+Replace `<appId>` and `<tenant-id>` with the actual values of your Service Principal.
 
 Also, ensure that you export the `<appId>` by running the below command after logging in as the SP, as it will be needed [in the next step](#creating-terraformtfvars).
 
@@ -313,6 +313,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
 
+```bash
+az account show --query "id" -o tsv
+```
+
 ##### terraform_sp_app_id
 
 This is the Application (client) ID of the Azure Service Principal that Terraform uses to configure Role-Based Access Control (RBAC). By providing this ID, Terraform ensures that the Service Principal has the necessary access rights to manage and provision resources within your Azure subscription.
@@ -338,6 +342,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 ##### subscription_id
 
 This value specifies the Azure Subscription ID in which all infrastructure will be deployed, including the AKS cluster, PostgreSQL Flexible Server, and Key Vault. To retrieve your current subscription ID, you can run the following command:
+
+```bash
+az account show --query "id" -o tsv
+```
 
 ##### terraform_sp_app_id
 

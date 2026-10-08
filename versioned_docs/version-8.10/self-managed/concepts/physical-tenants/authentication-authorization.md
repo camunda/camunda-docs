@@ -115,8 +115,8 @@ camunda:
               resourceType: PROCESS_DEFINITION
               resourceId: "*"
               permissions:
-                - READ
-                - UPDATE
+                - READ_PROCESS_DEFINITION
+                - UPDATE_PROCESS_INSTANCE
 ```
 
 Every explicitly configured Physical Tenant must declare its own `security.initialization` block when authorization is enabled for that tenant. The block is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. Two cases are exempt:
