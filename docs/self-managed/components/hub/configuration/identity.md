@@ -18,10 +18,10 @@ Configure Camunda Hub's OIDC authentication with the properties documented under
 
 ## Change the user ID claim
 
-Camunda Hub identifies users by the `sub` claim of the access token. To use a different claim, for example `oid` in Microsoft Entra ID, set `camunda.security.authentication.oidc.username-claim`, or alternatively `CAMUNDA_HUB_OAUTH2_TOKEN_USERIDCLAIM` (`camunda.hub.oauth2.token.user-id-claim`). Despite its name, `username-claim` defines how Camunda Hub identifies users, not the name it displays. The claim must:
+Camunda Hub identifies users by the `sub` claim of the access token. To use a different claim, for example `oid` in Microsoft Entra ID, set `camunda.security.authentication.oidc.username-claim`, or alternatively `CAMUNDA_HUB_OAUTH2_TOKEN_USERIDCLAIM` (`camunda.hub.oauth2.token.user-id-claim`). Despite its name, `username-claim` defines how Camunda Hub identifies users, not the name it displays. Choose a claim that:
 
-- Never change for a user, such as `sub` or `oid`. If the value changes, for example when a user's email address changes, the user gets a new, empty account.
-- Be present in every user access token and contain a non-empty string of at most 255 characters. Otherwise, the user can't log in.
+- Never changes for a user, like `sub` or `oid`. If the value changes, for example when a user's email address changes, the user gets a new, empty account.
+- Is present in every user access token and contains a non-empty string of at most 255 characters. Otherwise, the user can't log in.
 
 With Helm, use [`camundaHub.restapi.extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#componentnameextraconfiguration):
 
