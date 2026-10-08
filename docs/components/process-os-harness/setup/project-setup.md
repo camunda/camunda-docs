@@ -2,17 +2,17 @@
 id: project-setup
 title: Set up your organization for ProcessOS Harness
 sidebar_label: Organizational setup
-description: "Prepare your organization for a ProcessOS Harness project by running the first engagement with a partner or a Camunda Field Delivery Engineer, and by completing the Camunda Academy learning path."
+description: "Prepare your organization for a ProcessOS project by running the first engagement with a partner or a Camunda Field Delivery Engineer, and by completing the Camunda Academy learning path."
 keywords: ["ProcessOS Harness", "onboarding", "Camunda Academy"]
 ---
 
-Before you install anything, set your organization up to succeed with ProcessOS Harness. This page covers the organizational preparation. For the technical setup, see [install ProcessOS Harness and configure a project](get-started.md).
+Before you install anything, set your organization up to succeed with ProcessOS Harness. This page covers the organizational preparation. For the technical setup, see [install ProcessOS Harness and configure a project](../installation.md).
 
 ProcessOS Harness is a new way of running projects, not a new feature in a familiar tool. The interaction model is unfamiliar, and the early access release assumes a trained builder. The two steps below are the intended path for early access, not optional extras.
 
 ## Run your first project with a partner or a Camunda FDE
 
-Run your first ProcessOS Harness project together with an enabled partner or a Camunda Forward Deployed Engineer (FDE), rather than on your own.
+Run your first ProcessOS project together with an enabled partner or a Camunda Forward Deployed Engineer (FDE), rather than on your own.
 
 The first journey is where an unfamiliar interaction model costs the most. Someone who has already completed an engagement can tell a recoverable result from a dead end, which saves you iterations. Once your team has one project behind it, later projects are far less dependent on outside support.
 
@@ -34,5 +34,6 @@ Involve your SMEs early. ProcessOS Harness changes their role from main contribu
 
 ## Next steps
 
-1. Check the [system requirements](system-requirements.md).
-2. [Install ProcessOS Harness and configure a project](get-started.md).
+1. [Understand the builder workspace](builder-workspace.md).
+2. Check the [system requirements](system-requirements.md).
+3. [Install ProcessOS Harness and configure a project](../installation.md).

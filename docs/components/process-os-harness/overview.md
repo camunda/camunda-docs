@@ -22,15 +22,9 @@ ProcessOS Harness is available as [early access](/components/early-access/overvi
 
 ## About
 
-[ProcessOS](https://camunda.com/platform/process-os/) is an AI-powered intelligence layer on top of Camunda's agentic orchestration platform. It discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
-
 ProcessOS Harness is the governance backbone of ProcessOS. It is a governance process that runs on Camunda and drives AI coding agents, such as Claude Code or GitHub Copilot CLI, to perform the building safely and under control.
 
 The harness guides the agent through each phase, asks for human review at defined gates, and commits every artifact to Git, so an AI-generated solution stays reviewable at every step.
-
-:::info
-Learn more about and request access to [ProcessOS and the great re-engineering](https://camunda.com/learn/the-great-re-engineering).
-:::
 
 ## Who ProcessOS Harness is for
 
@@ -57,9 +51,9 @@ ProcessOS Harness runs your engagement as a governed process with defined phases
 | Transform | Transform the as-is process into an agentic to-be process.                      |
 | Implement | Generate and implement the executable Camunda solution.                         |
 
-Each phase ends at a milestone: process scope defined, as-is model finalized, to-be models finalized, and solution ready for production. Between milestones, [SME review cycles](get-started/review-cycle.md) act as gates that validate progress before the project moves on.
+Each phase ends at a milestone: process scope defined, as-is model finalized, to-be models finalized, and solution ready for production. Between milestones, [SME review cycles](build/review-cycle.md) act as gates that validate progress before the project moves on.
 
-The governance process itself runs on Camunda. Project state lives in Camunda and every artifact is committed to Git, so the whole engagement is auditable. For details, see [how the governance process works](get-started/governance-process.md).
+The governance process itself runs on Camunda. Project state lives in Camunda and every artifact is committed to Git, so the whole engagement is auditable. For details, see [how the governance process works](build/governance-process.md).
 
 ### Progress comes from iterations and your judgment
 
@@ -94,6 +88,5 @@ In this release, each project runs locally with its own private memory. Cross-pr
 
 ## Get started
 
-1. [Set up your organization for ProcessOS Harness](project-setup.md).
-2. Check the [system requirements](system-requirements.md).
-3. [Install ProcessOS Harness and configure a project](get-started.md).
+1. [Set up your organization for ProcessOS Harness](setup/project-setup.md).
+2. [Install ProcessOS Harness and configure a project](installation.md).
