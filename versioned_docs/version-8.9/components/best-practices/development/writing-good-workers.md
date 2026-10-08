@@ -96,7 +96,7 @@ You will have jobs in your local application that need to be processed. The wors
 
 However, you might need to do better and process jobs in parallel. In such a case, you should read on and understand the difference between writing blocking code on platform threads, blocking code on virtual threads, and non-blocking code.
 
-### Synchronous code and thread pools
+### Blocking / synchronous code and thread pools
 
 With blocking code a thread needs to wait (is blocked) until something finishes before it can move on. In the above example, making a REST call requires the client to wait for IO — the response. The CPU cannot compute anything during this time period, however, the thread cannot do anything else.
 
@@ -106,13 +106,13 @@ A common approach to scaling throughput beyond this limit is to leverage a threa
 
 The downside of using thread pools is that you need to have a good understanding of your code, thread pools in general, and the concrete libraries being used. Typically, we do not recommend configuring platform thread pools yourself. In Java 21 and later, prefer virtual threads for workers that perform blocking I/O.
 
-### Virtual threads for synchronous code
+### Blocking code with virtual threads
 
 Virtual threads let you keep a straightforward blocking programming model while avoiding the cost of assigning one platform thread to every blocked operation. This makes them a good default for Java workers that spend most of their time waiting for I/O, such as REST calls or database requests.
 
 Use virtual threads when you run on Java 21 or later and want to process many I/O-bound jobs in parallel without rewriting your worker code into a reactive style. Reactive programming can still be useful for extremely high-throughput or low-latency scenarios where the lower overhead matters enough to justify the added complexity.
 
-### Asynchronous / reactive code
+### Non-blocking / reactive code
 
 Reactive programming uses a different approach to achieve parallel work: extract the waiting part from your code.
 

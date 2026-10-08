@@ -96,7 +96,7 @@ You will have jobs in your local application that need to be processed. The wors
 
 However, you might need to do better and process jobs in parallel and utilize the full power of your worker’s CPUs. In such a case, you should read on and understand the difference between writing blocking and non-blocking code.
 
-### Synchronous code and thread pools
+### Blocking / synchronous code and thread pools
 
 With blocking code a thread needs to wait (is blocked) until something finishes before it can move on. In the above example, making a REST call requires the client to wait for IO — the response. The CPU cannot compute anything during this time period, however, the thread cannot do anything else.
 
@@ -106,7 +106,7 @@ A common approach to scaling throughput beyond this limit is to leverage a threa
 
 The downside of using thread pools is that you need to have a good understanding of your code, thread pools in general, and the concrete libraries being used. Typically, we do not recommend configuring thread pools yourself. If you need to scale beyond the linear execution of jobs, leverage reactive programming.
 
-### Asynchronous / reactive code
+### Non-blocking / reactive code
 
 Reactive programming uses a different approach to achieve parallel work: extract the waiting part from your code.
 
