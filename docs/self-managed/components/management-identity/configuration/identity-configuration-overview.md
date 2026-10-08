@@ -5,6 +5,8 @@ sidebar_label: "Configure Management Identity"
 description: "Learn more about how Management Identity plays together with Keycloak and other OIDC IdP applications to provide authentication services"
 ---
 
+import ManagementIdentityAvailability from '../\_partials/\_management-identity-availability.md';
+
 Configure Management Identity for your Camunda 8 Self-Managed deployment. This guide covers application-level configuration, including environment variables and IdP settings.
 
 :::info Deploying with Helm?
@@ -13,7 +15,9 @@ If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authenticati
 
 ## Configure Management Identity IdP
 
-When a deployment includes Management Identity, it uses the packaged Keycloak as its identity provider (IdP) by default.
+When a deployment includes Management Identity, it uses Keycloak as its identity provider (IdP) by default.
+
+<ManagementIdentityAvailability />
 
 You can configure your Management Identity IdP using the following options:
 
@@ -24,8 +28,5 @@ You can configure your Management Identity IdP using the following options:
 | [Configure an external IdP using Keycloak](./configure-external-identity-provider.md) | Configure an external identity provider using Keycloak, such as OpenID Connect, SAML, LDAP, or Active Directory. |
 
 :::note
-
-- Management Identity relies on a PostgreSQL database. When running Management Identity with an external OIDC provider, you can [connect to an alternative Database](./alternative-db.md) if your internal policies or compliance requirements prevent the use of PostgreSQL.
-- Keycloak starts in the full and standalone Camunda Hub [Docker Compose configurations](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration) and in the default [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md). The lightweight Docker Compose configuration does not start Management Identity or Keycloak.
-
+Management Identity relies on a PostgreSQL database. When running Management Identity with an external OIDC provider, you can [connect to an alternative Database](./alternative-db.md) if your internal policies or compliance requirements prevent the use of PostgreSQL.
 :::

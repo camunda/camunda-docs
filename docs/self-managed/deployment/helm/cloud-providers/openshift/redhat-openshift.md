@@ -585,7 +585,7 @@ For more details on the Keycloak deployment, see [Keycloak deployment in the ope
 
 #### Merge operator overlays into values
 
-Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services instead of embedded subcharts.
+Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services.
 
 Merge the **Elasticsearch** overlay:
 
