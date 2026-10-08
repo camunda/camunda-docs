@@ -53,6 +53,12 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 # Console
 #   updated at 2026-04-08T10:54:18.806Z
 
+# Short URLs
+
+https://docs.camunda.io/p/cluster-auto-pause
+
+# Full paths
+
 https://docs.camunda.io
 https://docs.camunda.io/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/configuration/
