@@ -65,7 +65,7 @@ Make idempotency a conscious design decision for every worker, not an afterthoug
 - **Business idempotency**: use a business identifier to detect duplicate calls, for example `createCustomer(email)`.
 - **Custom idempotency handling**: generate a unique ID or hash, pass it with the call, and let the target system reject duplicates, for example `charge(transactionId, amount)`.
 
-To learn how workers deal with transactions and exceptions to the happy path, and for more details, examples, and a process model that supports custom idempotency handling, see [deal with problems and exceptions](../dealing-with-problems-and-exceptions/#writing-idempotent-workers).
+To learn how workers handle transactions, exceptions, and custom idempotency, see [Deal with problems and exceptions](../dealing-with-problems-and-exceptions/#writing-idempotent-workers).
 
 ## Data minimization in workers
 
