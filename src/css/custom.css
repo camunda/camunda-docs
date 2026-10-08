@@ -1527,12 +1527,16 @@ table .badge:nth-of-type(1) {
   text-decoration: none;
 }
 
-div[class^="announcementBar_"] {
-  font-size: 120%;
-  padding: 1em 0;
+.theme-announcement-bar {
+  --docusaurus-announcement-bar-height: auto;
+  height: auto;
+  font-size: 110%;
+  padding: 0.5em 1.5em;
 }
-div[class^="announcementBar_"] button {
+.theme-announcement-bar button {
   align-self: center;
+  color: #fff;
+  opacity: 1;
 }
 
 /* Styles for rendered BPMN/DMN diagrams and optional callouts */
@@ -1986,7 +1990,8 @@ h4.openapi-security__summary-header {
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 8px;
-  overflow: hidden;
+  /* Scroll wide tables instead of clipping their last column. */
+  overflow-x: auto;
 }
 [data-theme="light"] .markdown table {
   border-bottom-left-radius: 0;
@@ -2704,6 +2709,17 @@ h3 + .release-announcement-row {
 
   flex: 0 0 auto;
   white-space: nowrap;
+}
+
+.sidebar-badge-early-access
+  > .menu__list-item-collapsible
+  > .menu__link
+  .menu__link-text::after,
+.sidebar-badge-early-access
+  > .menu__list-item-collapsible
+  > .menu__link
+  > span::after {
+  content: "Early access";
 }
 
 .sidebar-cta-preview

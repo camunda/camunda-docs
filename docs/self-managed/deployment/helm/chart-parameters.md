@@ -71,7 +71,7 @@ You can use these files individually or combine them with your own overrides.
 | `values.yaml`        | The default configuration. Includes all chart parameters with baseline values.                                                  |
 | `values-local.yaml`  | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments. |
 | `values-tls.yaml`    | An overlay that enables TLS for the connections the chart can configure. Requires a CA bundle secret in the namespace.          |
-| `values-latest.yaml` | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.  |
+| `values-latest.yaml` | Tracks the latest versions of the applications. This may include breaking changes and is intended for early testing.            |
 | `values-digest.yaml` | Uses the latest snapshot images referenced by digest (for internal development only).                                           |
 
 ### Creating your own values files
