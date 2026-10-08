@@ -208,8 +208,11 @@ RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-event
 #   8.10: content moves introduced prior to the release of version 8.10.
 #---------------------------------------------------------------------------------
 
+# Operate API no longer available
+RewriteRule /docs/apis-clients/operate-api/?$ /docs/reference/announcements-release-notes/8100/8100-announcements/#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test [R=301,L]
+
 # Console manage plan docs moved under SaaS
-RewriteRule ^docs/components/console/manage-plan/cancel-starter-subscription/ /docs/components/saas/organization/manage-plan/available-plans/ [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/cancel-starter-subscription/?$ /docs/components/saas/organization/manage-plan/available-plans/ [R=301,L]
 
 # No console troubleshooting guide
 RewriteRule ^docs/components/console/console-troubleshooting/common-pitfalls/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
