@@ -42,7 +42,7 @@ function readme_programmatic_config(): void
 }
 ```
 
-## Basic authentication
+## Basic auth
 
 ```php
 function readme_basic_auth(): void
@@ -52,6 +52,55 @@ function readme_basic_auth(): void
         'CAMUNDA_BASIC_AUTH_USERNAME' => 'demo',
         'CAMUNDA_BASIC_AUTH_PASSWORD' => 'demo',
     ]);
+}
+```
+
+## Loading a `.env` file
+
+Set `CAMUNDA_LOAD_ENVFILE=true` to read `.env` in the working directory, or set
+it to an explicit path. This optional capability requires
+[`vlucas/phpdotenv`](https://packagist.org/packages/vlucas/phpdotenv).
+
+```php
+function env_file_client(): CamundaClient
+{
+    // Set CAMUNDA_LOAD_ENVFILE=true (or a path) before starting PHP. Real
+    // environment variables and explicit overrides still take precedence.
+    return CamundaClient::fromEnvironment();
+}
+```
+
+## Mutual TLS
+
+```php
+function mtls_client(): CamundaClient
+{
+    return CamundaClient::fromConfiguration(new CamundaConfiguration(
+        restAddress: 'https://my-cluster.example.com/v2',
+        authStrategy: 'OAUTH',
+        clientId: 'my-client-id',
+        clientSecret: 'my-client-secret',
+        mtlsCertPath: '/run/secrets/client.crt',
+        mtlsKeyPath: '/run/secrets/client.key',
+        mtlsCaPath: '/run/secrets/cluster-ca.pem',
+    ));
+}
+```
+
+## Custom Guzzle middleware
+
+```php
+function custom_http_client(CamundaConfiguration $configuration): CamundaClient
+{
+    // Supplying a Guzzle client replaces the SDK-built stack. Add the SDK auth
+    // middleware and any proxy, tracing, or mTLS options your application needs.
+    $stack = HandlerStack::create();
+    $stack->push(new AuthMiddleware(AuthProviderFactory::fromConfiguration($configuration)), 'camunda_auth');
+
+    return CamundaClient::fromConfiguration(
+        $configuration,
+        new GuzzleClient(['handler' => $stack, 'http_errors' => false]),
+    );
 }
 ```
 

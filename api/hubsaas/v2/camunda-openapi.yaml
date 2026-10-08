@@ -175,6 +175,9 @@ paths:
     $ref: projects.yaml#/paths/~1projects~1recently-deleted~1search
   /projects/{projectKey}/restoration:
     $ref: projects.yaml#/paths/~1projects~1{projectKey}~1restoration
+  /projects/{projectKey}/catalog/asset-usages/search:
+    $ref: >-
+      catalog.yaml#/paths/~1projects~1{projectKey}~1catalog~1asset-usages~1search
   /project-snapshots:
     $ref: project-snapshots.yaml#/paths/~1project-snapshots
   /project-snapshots/{projectSnapshotKey}:

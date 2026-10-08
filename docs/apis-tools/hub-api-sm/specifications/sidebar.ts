@@ -40,6 +40,12 @@ const sidebar: SidebarsConfig = {
           label: "Search the files using a catalog asset",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/search-project-catalog-asset-usages",
+          label: "Search the catalog assets used within a project",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -90,8 +96,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-sm/specifications/replace-workspace-environments",
-          label: "Replace a workspace's assigned environments",
+          id: "apis-tools/hub-api-sm/specifications/update-workspace-environments",
+          label: "Update environments assigned to a workspace",
           className: "api-method put",
         },
         {
