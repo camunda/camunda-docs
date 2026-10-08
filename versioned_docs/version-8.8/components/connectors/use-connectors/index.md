@@ -221,7 +221,7 @@ Leaving this field empty may cause identical messages to be submitted and proces
 
 Being able to deal with exceptional cases is a common requirement for business process models. Read more about our
 general best practices around this topic
-in [dealing with problems and exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
+in [deal with problems and exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
 
 Connectors share this requirement for exception handling like any other task in a model. However, connectors define
 reusable runtime behavior that is not aware of your specific business use case. Thus, they cannot determine if an
