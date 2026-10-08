@@ -15,6 +15,8 @@ To follow the steps in this guide, you must be [authorized to view running and c
 1. In the top navigation, click **Operations > Batch operations**. This opens the [**Batch Operations** page](../overview/batch-operations-overview.md).
 2. To see the details of a particular batch operation, click the operation in the table. This opens the [batch operation details page](../overview/batch-operation-details-overview.md).
 
+![The Batch Operations page, listing batch operations with their operation type, batch state, items, actor, and start date.](./img/monitor-batch-operations.png)
+
 ## View failure reasons
 
 On the batch operation details page, expand a failed item row to view the failure reason.

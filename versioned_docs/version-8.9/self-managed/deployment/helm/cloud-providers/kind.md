@@ -76,6 +76,8 @@ Before you begin, you'll need:
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [Helm](https://helm.sh/docs/intro/install/)
+- [yq](https://github.com/mikefarah/yq#install)
+- [jq](https://jqlang.org/download/)
 - [envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) (Domain mode only; part of the `gettext` package)
 - [mkcert](https://github.com/FiloSottile/mkcert#installation) (Domain mode only)
 
@@ -263,7 +265,7 @@ Before deploying Camunda, you need to deploy the external services it depends on
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
 :::note Secondary storage alternatives
-This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) is a supported alternative for the Orchestration Cluster. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS is a supported alternative for the Orchestration Cluster (see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines). To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 :::
 
 Run the operator deployment script, specifying the domain deployment mode:

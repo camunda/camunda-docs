@@ -1,6 +1,6 @@
 ---
 id: optimize-backup-and-restore
-sidebar_label: "Optimize — independent backup"
+sidebar_label: "Optimize"
 title: "Back up and restore Optimize independently"
 description: "Learn how to back up and restore Optimize independently of the Orchestration Cluster, including when the Orchestration Cluster uses RDBMS as secondary storage."
 keywords:
@@ -361,12 +361,9 @@ If you are using an external Elasticsearch/OpenSearch and Kubernetes, you could 
 
 In a manual setup, you can simply stop Optimize component.
 
-If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling Optimize in the `values.yml`.
+With Helm, disable Optimize in `values.yml`:
 
 ```yaml
-elasticsearch:
-  enabled: true
-
 optimize:
   enabled: false
 ```

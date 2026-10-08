@@ -42,6 +42,31 @@ For details on creating tenants and managing assignments, see [tenant management
 Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
 :::
 
+## Secret filter mode
+
+You can change the connector secret filter mode on a per-cluster basis to control which secrets outbound and inbound connectors are allowed to resolve.
+
+:::note
+This setting applies to Camunda 8 SaaS. In Self-Managed, configure the mode using [configuration properties](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
+:::
+
+- **STRICT** (default): a connector can only resolve secrets that are present for a given field in the actually deployed BPMN XML.
+- **LAX**: for outbound connectors, falls back to `DISABLED` behavior (resolving all secrets) if the BPMN XML cannot be fetched. Inbound connectors behave the same as under `STRICT`, since their allow-list doesn't require a lookup.
+- **DISABLED**: all secrets resolve freely, matching the behavior before this feature was introduced.
+
+This setting is available for clusters running a version where `STRICT` is the shipped default, starting with 8.9.10. Only organization admins can change it.
+
+For details on each mode, see [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter).
+
+## Enable app integrations extensions
+
+You can allow a cluster to exchange events with App Integrations, such as Camunda for Microsoft Teams, so App Integrations can deliver task notifications to your collaboration tool.
+
+- Enable this setting to deliver user task notifications to Microsoft Teams based on your [notification rules](/components/camunda-integrations/ms-teams/ms-teams-notifications.md). Notification cards also update as the task is assigned, completed, or canceled.
+- Disable this setting if you do not want the cluster to exchange events. App Integrations then work with reduced functionality: the cluster delivers no notifications, but you can still use Camunda for Microsoft Teams to browse tasks, start processes, and act on tasks.
+
+This setting is disabled by default. It is available for clusters running generation `8.9 gen13` or later, and organization admins can change it.
+
 ## Automatic cluster updates
 
 You can set the cluster to automatically update to newer versions of Camunda 8 when they are released.

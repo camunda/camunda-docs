@@ -20,6 +20,7 @@ import PortForwardServices from '../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
 import SecondaryStorageOptionsNote from '../\_partials/\_secondary-storage-options-note.md'
 import DeploymentReadinessCheck from '../\_partials/\_deployment-readiness-check.md'
+import ZeebeGatewayNetworkPolicies from '../\_partials/\_zeebe-gateway-network-policies.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -34,6 +35,7 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [yq](https://github.com/mikefarah/yq/#install) to edit your `values.yml` file.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
 - A namespace to host Camunda.
@@ -135,6 +137,13 @@ We strongly recommend double-checking your YAML file before applying it. You can
 
 Before exposing services outside the cluster, we need an Ingress component. Here's how you can configure it:
 
+:::danger Exposure of the Zeebe Gateway Service
+For production-grade security, keep the Zeebe Gateway on a private network with no publicly reachable route, and access it only from internal workloads or over a secure private connection. This limits the attack surface and keeps process and job traffic inside your trusted network boundary.
+
+<ZeebeGatewayNetworkPolicies />
+
+:::
+
 <Tabs queryString="current-ingress">
 
 <TabItem value="openshift-routes" label="Using OpenShift Routes" default>
@@ -197,12 +206,11 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 
 </details>
 
-<details>
-   <summary>ROSA HCP — additional steps for ALPN h2</summary>
+#### Enable ALPN h2 on ROSA HCP
 
 These steps are required only on **Red Hat OpenShift Service on AWS – Hosted Control Planes (ROSA HCP)** managed clusters. Self-managed OpenShift clusters where the cluster-wide `ingress.operator.openshift.io/default-enable-http2=true` annotation is honored do **not** need this workaround.
 
-On ROSA HCP, the `ingress-config-validation.managed.openshift.io` admission webhook denies the cluster-wide annotation, and the per-`IngressController` annotation alone does not make HAProxy advertise ALPN `h2` on the default certificate path. As a result, gRPC clients (Zeebe) fail with `No ALPN negotiated`.
+On ROSA HCP, the `ingress-config-validation.managed.openshift.io` admission webhook denies the cluster-wide annotation, and the per-`IngressController` annotation alone does not make HAProxy advertise ALPN `h2` on the default certificate path. As a result, gRPC clients fail to connect to the Zeebe Gateway, with `zbctl` reporting `credentials: cannot check peer: missing selected ALPN property`.
 
 The OpenShift router advertises ALPN `h2` on a per-SNI basis through a `crt-list` entry that HAProxy generates only for Routes that carry an explicit `spec.tls.certificate`. In other words, the gRPC Route must reference a TLS Secret in the Camunda namespace; the default `secretName: '-'` (Ingress-Operator-managed) is not enough on ROSA HCP.
 
@@ -215,7 +223,7 @@ To fix this, copy the router default wildcard TLS Secret from `openshift-ingress
    ```
 
    ```bash
-   export CAMUNDA_NAMESPACE="camunda"
+   export CAMUNDA_NAMESPACE="${CAMUNDA_NAMESPACE:-camunda}"
    export CAMUNDA_PLATFORM_ROUTER_TLS_SECRET="camunda-platform-router-tls"
    ./generic/openshift/single-region/procedure/copy-router-tls-secret.sh
    ```
@@ -231,7 +239,17 @@ To fix this, copy the router default wildcard TLS Secret from `openshift-ingress
 
 After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress will carry an inlined `spec.tls.certificate`, HAProxy will emit a per-SNI `[alpn h2,http/1.1]` `crt-list` entry, and gRPC clients will negotiate `h2` successfully.
 
-</details>
+:::warning
+`copy-router-tls-secret.sh` copies the certificate as it exists at that moment. It does not track later changes. When the router wildcard certificate is rotated or replaced, the copy in the Camunda namespace goes stale. The Route keeps serving the old certificate, and gRPC clients fail once that certificate expires or is revoked.
+
+Re-run the script after any router certificate change, then confirm the Route picked the new certificate up:
+
+```bash
+oc -n "$CAMUNDA_NAMESPACE" get route -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.tls.certificate}{"\n"}{end}'
+```
+
+Restarting the Camunda pods does not refresh this certificate and only causes downtime: the pods use the separate internal service certificate described below, not the Route one. To avoid the manual step entirely, manage the copy with a controller that keeps the two Secrets in sync.
+:::
 
 #### Configure Route TLS
 
@@ -256,7 +274,7 @@ PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header 
 
 </details>
 
-- The second TLS secret is optional and applies only to the exposed Route. By default, `orchestration-route.yml` ships with `orchestration.ingress.grpc.tls.secretName: '-'`, which lets the OpenShift Ingress Operator manage the Route TLS certificate automatically by using the cluster's default wildcard. This is the recommended setup on self-managed OpenShift. If you want to terminate the Route with your own custom certificate, for example, the same TLS secret used for Ingress, set `orchestration.ingress.grpc.tls.secretName` to the name of a TLS secret in the Camunda namespace. The Zeebe Gateway Ingress is configured as a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration) in either case. On ROSA HCP, an explicit per-Route certificate is required for ALPN `h2` to work. See the _ROSA HCP — additional steps for ALPN h2_ section above.
+- The second TLS secret is optional and applies only to the exposed Route. By default, `orchestration-route.yml` ships with `orchestration.ingress.grpc.tls.secretName: '-'`, which lets the OpenShift Ingress Operator manage the Route TLS certificate automatically by using the cluster's default wildcard. This is the recommended setup on self-managed OpenShift. If you want to terminate the Route with your own custom certificate, for example, the same TLS secret used for Ingress, set `orchestration.ingress.grpc.tls.secretName` to the name of a TLS secret in the Camunda namespace. The Zeebe Gateway Ingress is configured as a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration) in either case. On ROSA HCP, an explicit per-Route certificate is required for ALPN `h2` to work. See [Enable ALPN h2 on ROSA HCP](#enable-alpn-h2-on-rosa-hcp).
 
 To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
 
@@ -454,7 +472,7 @@ All commands in this guide assume you are at the **repository root** (the direct
 Deploy PostgreSQL clusters using the CloudNativePG operator:
 
 ```bash
-CLUSTER_FILTER="pg-identity,pg-webmodeler" (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-identity,pg-webmodeler" ./deploy.sh)
 ```
 
 This script installs the CNPG operator (auto-detecting OpenShift to apply SCC patches), creates secrets, deploys the specified PostgreSQL clusters, and waits for readiness.
@@ -463,6 +481,18 @@ The following PostgreSQL clusters are created:
 
 - **pg-identity**: Database for Camunda Identity component
 - **pg-webmodeler**: Database for Web Modeler component (remove from configuration if not needed)
+
+If you use **RDBMS as the secondary storage** for the Orchestration Cluster instead of Elasticsearch, add `pg-camunda` to the filter:
+
+<!-- TODO: deploy.sh only learns to resolve pg-camunda from postgresql-orchestration-cluster.yml
+     when camunda/camunda-deployment-references#2726 (stable/8.9) and #2724 (main) merge.
+     Until then this command deploys the two application clusters only. -->
+
+```bash
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-identity,pg-webmodeler,pg-camunda" ./deploy.sh)
+```
+
+- **pg-camunda**: Secondary storage for the Orchestration Cluster, defined in `postgresql-orchestration-cluster.yml`
 
 <details>
 <summary>Review the PostgreSQL cluster configuration</summary>
@@ -571,6 +601,23 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic
 ```
 
 </details>
+
+If you use **RDBMS as the secondary storage**, skip the [Elasticsearch deployment](#deploy-elasticsearch) and the overlay above, and merge the **RDBMS** overlay instead:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the RDBMS Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml
+```
+
+</details>
+
+This overlay points the Orchestration Cluster at the `pg-camunda` cluster and disables Elasticsearch. Optimize requires Elasticsearch or OpenSearch, so it is disabled as well.
 
 Merge the **Identity PostgreSQL** overlay:
 
@@ -690,7 +737,7 @@ The following are the required environment variables with some example values:
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/chart-env.sh
 ```
 
-- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
+- `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed. The script sets it to `camunda`. If you use another namespace, for example the one you exported in [Enable ALPN h2 on ROSA HCP](#enable-alpn-h2-on-rosa-hcp), set that value here, or export it again after you run the script.
 - `CAMUNDA_RELEASE_NAME` is the name of the Helm release associated with this Camunda installation.
 
 Then run the following command:

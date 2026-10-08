@@ -48,8 +48,12 @@ Key or (Operate Legacy ID = UUID) of the batch operation.
 ### batchOperationType
 
 ```ts
-batchOperationType: BatchOperationTypeEnum;
+batchOperationType: BatchOperationTypeEnum | null;
 ```
+
+The type of the batch operation.
+This is `null` for batch operations whose type was never recorded in
+secondary storage, such as legacy Operate batch operations.
 
 ---
 

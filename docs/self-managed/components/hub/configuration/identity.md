@@ -1,10 +1,21 @@
 ---
 id: identity
-title: "Identity"
-description: "Read details on how to connect Web Modeler to a custom OIDC provider."
+title: "Authentication"
+description: "Configure how Camunda Hub authenticates users, and connect Camunda Hub to an OIDC provider other than Keycloak."
 ---
 
-## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
+Camunda Hub authenticates users with OpenID Connect (OIDC).
 
-By default, Web Modeler uses Keycloak for providing authentication.
-You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
+## Authentication and user management
+
+Camunda Hub authenticates users with its own properties (see [Identity / Keycloak](./properties.md#identity--keycloak)), while Management Identity keeps managing users and their access. For how the responsibilities are split, see [management and modeling component authentication](/self-managed/concepts/authentication/authentication-to-management-components.md#authentication-and-user-management).
+
+Management Identity is still required for Camunda Hub in 8.10. For more information, see [manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md).
+
+## Configure OIDC authentication
+
+Configure Camunda Hub's OIDC authentication with the properties documented under [Identity / Keycloak](./properties.md#identity--keycloak), not with the Orchestration Cluster's `camunda.security.authentication.oidc.*` settings. For the one exception, the username claim, see the same section.
+
+## Use a different OIDC provider than Keycloak
+
+For deployments that include Keycloak, Camunda Hub uses it as its identity provider by default. For installation methods that start Keycloak, see [About Management Identity](/self-managed/components/management-identity/overview.md#about-management-identity). To use a different OIDC provider, follow the steps in the [OIDC connection guide](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).

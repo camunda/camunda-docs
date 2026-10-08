@@ -125,7 +125,7 @@ def with_cookies(cookies)
 Get a new client matching this one with additional cookies
 
 - **Parameters:**
-  **cookies** (_dict_ _[\_\_str_ _,_ _str_ _]_)
+  **cookies** (_dict_ _[__str_ _,_ _str_ _]_)
 - **Return type:**
   [_Client_](#client)
 
@@ -138,7 +138,7 @@ def with_headers(headers)
 Get a new client matching this one with additional headers
 
 - **Parameters:**
-  **headers** (_dict_ _[\_\_str_ _,_ _str_ _]_)
+  **headers** (_dict_ _[__str_ _,_ _str_ _]_)
 - **Return type:**
   [_Client_](#client)
 
@@ -314,7 +314,7 @@ def with_cookies(cookies)
 Get a new client matching this one with additional cookies
 
 - **Parameters:**
-  **cookies** (_dict_ _[\_\_str_ _,_ _str_ _]_)
+  **cookies** (_dict_ _[__str_ _,_ _str_ _]_)
 - **Return type:**
   [_AuthenticatedClient_](#authenticatedclient)
 
@@ -327,7 +327,7 @@ def with_headers(headers)
 Get a new client matching this one with additional headers
 
 - **Parameters:**
-  **headers** (_dict_ _[\_\_str_ _,_ _str_ _]_)
+  **headers** (_dict_ _[__str_ _,_ _str_ _]_)
 - **Return type:**
   [_AuthenticatedClient_](#authenticatedclient)
 

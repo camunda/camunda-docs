@@ -49,7 +49,7 @@ Zod schema for custom headers in the activated job
 ### fetchVariables?
 
 ```ts
-optional fetchVariables?: In extends ZodType<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
+optional fetchVariables?: In extends ZodTypeAny<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
 ```
 
 Optional list of variable names to fetch during activation
@@ -117,6 +117,30 @@ Zod schema for variables in the complete command
 
 ---
 
+### pollBackoffMaxMs?
+
+```ts
+optional pollBackoffMaxMs?: number;
+```
+
+Ceiling (ms) of the between-failed-poll exponential backoff. Default `30000`.
+
+---
+
+### pollBackoffMinMs?
+
+```ts
+optional pollBackoffMinMs?: number;
+```
+
+Floor (ms) of the exponential backoff applied between _failed_ activation
+requests (connection refused, connect timeout, broker restart, LAN blip …).
+The first retry waits ≈ this/2–this ms; subsequent consecutive failures
+double the window up to [pollBackoffMaxMs](#pollbackoffmaxms), with jitter, and reset to
+zero on the first successful poll. Default `1000`. Set to `0` to disable backoff (failed polls then fall back to [pollIntervalMs](#pollintervalms) rather than retrying immediately).
+
+---
+
 ### pollIntervalMs?
 
 ```ts
@@ -172,6 +196,24 @@ optional validateSchemas?: boolean;
 
 Validate any provided input, output, customheader schema
 default: false
+
+---
+
+### withLease?
+
+```ts
+optional withLease?: boolean;
+```
+
+Activate jobs with a lease — default `false`.
+
+When `true`, each activated job is assigned a distinct, opaque lease token
+(`ActivatedJobResult.jobLeaseToken`) that is automatically threaded back into the
+fenced `complete` / `fail` / `error` commands. See [JobWorkerConfig.withLease](JobWorkerConfig.md#withlease).
+
+Note: the threaded `jobHandler` intentionally keeps the base job shape
+(`jobLeaseToken` remains optional/nullable); the token is threaded back into
+fenced commands automatically, so handlers do not read it directly.
 
 ---
 

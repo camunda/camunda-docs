@@ -1,30 +1,63 @@
 ---
 id: organization-settings
-title: Organization management
-description: "Follow these instructions to manage your organization."
+title: Manage organization
+description: "An organization is the top-level entity in Camunda Hub. Learn how to manage your organization, its users, and its settings in SaaS and Self-Managed."
 ---
 
-Organization management can be accessed via the **Open Organizations** icon in the navigation bar.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-![Open Organizations icon in navigation bar](./img/avatar-menue.png)
+An organization is the top-level entity in Camunda Hub. It holds your [workspaces](/components/concepts/workspaces.md), [environments](/components/concepts/environments.md), [clusters](/components/concepts/clusters.md), and users.
 
-Using the context menu of each organization, you can manage or leave an organization.
+## What you manage in an organization
 
-### Overview
+- [Users and roles](../users-and-roles.md): Decide who can use Camunda Hub and what they can do.
+- [Workspaces](../manage-workspaces/index.md): Create workspaces and manage their members.
+- [Environments](../manage-environments/index.md): See the environments of your organization and assign them to workspaces.
+- [Clusters](../manage-clusters/index.md): Create, monitor, and maintain the clusters that host your environments.
+- [Credentials](../credentials/index.md): Create reusable credentials for connectors and other element templates.
+- [Catalog](../manage-catalog/index.md): Manage reusable automation assets and publish them to Camunda Hub.
 
-The overview provides a summary of the organization, including:
+## Organization settings
 
-- Organization name
-- Pricing plan
-- Owner of the organization
+How you manage the settings of an organization depends on the edition of Camunda that you use.
 
-Here, owners of an organization can also manage users, view organization history, and create client credentials.
+<Tabs groupId="edition" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
 
-#### Rename organization
+<TabItem value='saas'>
 
-If you are the owner of the organization, you can change the name of your organization in the **Overview** tab.
+In the left navigation, click **Organization > Manage organization**.
 
-## Next steps
+The **Overview** tab provides a summary of the organization, including the organization name and the pricing plan.
 
-- [Manage users in your organization](../manage-members/manage-users.md)
-- [View organization activity](./view-organization-activity.md)
+In other tabs, you can:
+
+- Manage users
+- Manage groups
+- View activity
+- View usage
+- Grant API access credentials
+- Manage organization settings
+
+Under the **Settings** tab, you can:
+
+- Leave the organization
+- [Enable alpha features](/components/saas/organization/enable-alpha-features.md)
+
+If you are the owner of the organization, you can change the organization name.
+
+For all tasks that are specific to SaaS organizations, such as ownership, usage, plans, and billing, see [Organization in SaaS](/components/saas/organization/index.md).
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+Self-Managed has no organization settings page. You manage the users, groups, and roles of your organization in your identity provider and in Management Identity. See [manage users and roles](../users-and-roles.md).
+
+</TabItem>
+
+</Tabs>

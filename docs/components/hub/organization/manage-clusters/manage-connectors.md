@@ -4,14 +4,6 @@ title: Manage your connectors
 description: "In Camunda Hub, you can monitor and manage the connectors running on your cluster on the Connector Management page."
 ---
 
-import ManageImg from './img/cluster-manage-connectors.png';
-import ConnectorManagementImg from './img/cluster-connector-management-page.png';
-import ConnectorDetailsImg from './img/cluster-connector-instance-details.png';
-import ConnectorProcessDetailsImg from './img/cluster-connector-process-details.png';
-import ConnectorProcessErrorImg from './img/cluster-connector-instance-error.png';
-import OutboundConnectorManagementImg from './img/cluster-connector-outbound-management.png';
-import OutboundConnectorDetailsImg from './img/cluster-connector-outbound-details.png';
-
 Monitor and manage connectors running on your cluster.
 
 ## About connector management
@@ -22,7 +14,12 @@ Use this feature to review connector status and troubleshoot issues. For example
 
 ## Manage connectors
 
-To open the **Connector Management** page, on the cluster **Overview** tab, click **Manage** on the Connectors component tile.
+Manage connectors from the **Connector Management** page:
+
+1. In the left navigation, click **Environments**, click **Clusters**, and then select a cluster.
+1. On the **Overview** tab, open the **Connectors** section:
+   - In SaaS, click **Manage** on the **Connectors** component tile.
+   - In Self-Managed, click **View connectors** on the **Connectors** card. The card appears when the cluster has a connector runtime that Camunda Hub can reach.
 
 The **Connector Management** page provides an overview of the connectors running on a cluster.
 
@@ -37,8 +34,6 @@ The **Connector Management** page provides an overview of the connectors running
 ## View inbound connectors
 
 The **Inbound connectors** tab shows each active inbound connector type on a separate row.
-
-<img src={ConnectorManagementImg} alt="Inbound connectors on the Connector Management page" />
 
 The page header shows counts across all inbound connector instances:
 
@@ -63,8 +58,6 @@ Use the search box and status filter to narrow the list of active inbound connec
 ## View inbound connector instances
 
 Select an inbound connector to view its running instances.
-
-<img src={ConnectorDetailsImg} alt="Connector management page" />
 
 The page header shows counts for the selected connector:
 
@@ -179,9 +172,7 @@ If you are using deduplication, each connector occurrence in the BPMN diagram is
 
 ## View outbound connectors
 
-The **Outbound connectors** tab shows each active outbound connector type on a separate row.s
-
-<img src={OutboundConnectorManagementImg} alt="Outbound connectors on the Connector Management page" />
+The **Outbound connectors** tab shows each active outbound connector type on a separate row.
 
 The page header shows counts across all outbound connector invocations:
 
@@ -205,8 +196,6 @@ Use the search box, status filter, and **With invocations** checkbox to narrow t
 ## View outbound connector details
 
 Select an outbound connector to view its details.
-
-<img src={OutboundConnectorDetailsImg} alt="Outbound connector details on the Connector Management page" />
 
 The page shows the connector name with badges indicating its direction (**Outbound**), whether it's enabled, and its connectivity status.
 

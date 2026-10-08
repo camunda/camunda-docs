@@ -53,12 +53,15 @@ An agent definition contains the following data:
 
 For Camunda to recognize an element as an agent, the element **must be marked** in the BPMN model with the `zeebe:agentDefinition` extension element.
 
-If you model in Camunda Modeler, the element templates add the marker for you:
+For a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), the AI Agent Sub-process and AI Agent Task element templates add the marker for you when you model in Camunda Modeler.
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)**: The AI Agent Sub-process and AI Agent Task templates add the marker.
-- **[External agents](/reference/glossary.md#external-agent)**: The External Agent template adds the marker.
+For an [external agent](/reference/glossary.md#external-agent), Camunda doesn't ship an element template, so add the marker to the BPMN XML yourself. See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for the full setup, including how to package your agent as a custom element template.
 
-If you model outside Camunda Modeler, add the marker to the BPMN XML yourself.
+:::info Update element templates created before Camunda 8.10
+If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template.
+
+Open the process in Camunda Hub or Desktop Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+:::
 
 #### Mark an element as an agent in XML
 
@@ -135,12 +138,20 @@ The following data is available for an agent instance in Operate:
 
 #### Conversation history and loop iterations
 
-The conversation history captures the full reasoning chain of an agent execution, grouped by loop iteration. A loop iteration is one pass through the agent's feedback loop: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration.
+The conversation history captures the full reasoning chain of an agent execution, grouped by loop iteration. A [loop iteration](/reference/glossary.md#loop-iteration) is one pass through the [agent loop](/reference/glossary.md#agent-loop): the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration.
 
 Grouping the history by loop iteration makes it easier to reference a specific point in an agent's execution. Rather than describing a moment in time, you can refer to a specific loop iteration, for example "on loop iteration five the agent called this tool."
 
 Operate labels each entry in the conversation history simply as `iteration` (for example, `5. iteration`) as shorthand for loop iteration.
 
+#### Model reasoning in conversation history
+
+Operate displays readable model reasoning as a static **Thinking** entry before the assistant’s response. It recognizes non-empty text in the assistant history marked with `camunda.agenticai.content.type: reasoning`.
+
+To display readable model reasoning where supported, [migrate to the AI Agent element templates introduced in Camunda 8.10](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md). If you do not see **Thinking**, confirm that your [model provider](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) returns readable reasoning. Opaque or redacted reasoning is not displayed.
+
 #### Visibility for external agents
 
 Agents built with external frameworks get the same visibility in Operate as Camunda AI agents. An external agent reports its system prompt, available tools, tool calls, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), and Operate displays that data alongside the process instance.
+
+See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for a step-by-step walkthrough of reporting this data from your own runtime.

@@ -94,28 +94,30 @@ Config is the resolved SDK configuration.
 
 ### Fields
 
-| Field                 | Type                  | Description                                                                                                                                                                                                                                                                                                |
-| --------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `RestAddress`         | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `GrpcAddress`         | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `AuthStrategy`        | `AuthStrategy`        |                                                                                                                                                                                                                                                                                                            |
-| `ClientID`            | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `ClientSecret`        | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `OAuthURL`            | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `TokenAudience`       | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `OAuthScope`          | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `OAuthCacheDir`       | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `BasicAuthUsername`   | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `BasicAuthPassword`   | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `DefaultTenantID`     | `string`              |                                                                                                                                                                                                                                                                                                            |
-| `Falcon`              | `bool`                | Falcon enables the FALCON (nanobpmn command-stream) transport upgrade when the gateway advertises it (CAMUNDA_FALCON, default true). ForceREST forces the pure-REST path even when FALCON is advertised (CAMUNDA_FORCE_REST), e.g. where WebSockets are blocked. Use FalconEnabled for the resolved state. |
-| `ForceREST`           | `bool`                |                                                                                                                                                                                                                                                                                                            |
-| `BackpressureProfile` | `BackpressureProfile` |                                                                                                                                                                                                                                                                                                            |
-| `LogLevel`            | `LogLevel`            |                                                                                                                                                                                                                                                                                                            |
-| `EventualPollDefault` | `time.Duration`       |                                                                                                                                                                                                                                                                                                            |
-| `Retry`               | `RetryConfig`         |                                                                                                                                                                                                                                                                                                            |
-| `TLS`                 | `TLSConfig`           |                                                                                                                                                                                                                                                                                                            |
-| `WorkerDefaults`      | `WorkerDefaults`      |                                                                                                                                                                                                                                                                                                            |
+| Field                 | Type                  | Description                                                                                                                                                                                                                                                                                                        |
+| --------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `RestAddress`         | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `GrpcAddress`         | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `ExactRestAddress`    | `bool`                | ExactRestAddress opts out of the automatic /v2 suffix normally appended to RestAddress (CAMUNDA_REST_ADDRESS_EXACT). When true, the SDK targets RestAddress exactly as provided — useful behind an API gateway / reverse proxy that mounts the REST API under a prefix that does not follow the .../v2 convention. |
+| `AuthStrategy`        | `AuthStrategy`        |                                                                                                                                                                                                                                                                                                                    |
+| `ClientID`            | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `ClientSecret`        | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `OAuthURL`            | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `TokenAudience`       | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `OAuthScope`          | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `OAuthCacheDir`       | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `BasicAuthUsername`   | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `BasicAuthPassword`   | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `DefaultTenantID`     | `string`              |                                                                                                                                                                                                                                                                                                                    |
+| `Falcon`              | `bool`                | Falcon enables the FALCON (nanobpmn command-stream) transport upgrade when the gateway advertises it (CAMUNDA_FALCON, default true). ForceREST forces the pure-REST path even when FALCON is advertised (CAMUNDA_FORCE_REST), e.g. where WebSockets are blocked. Use FalconEnabled for the resolved state.         |
+| `ForceREST`           | `bool`                |                                                                                                                                                                                                                                                                                                                    |
+| `BackpressureProfile` | `BackpressureProfile` |                                                                                                                                                                                                                                                                                                                    |
+| `LogLevel`            | `LogLevel`            |                                                                                                                                                                                                                                                                                                                    |
+| `EventualPollDefault` | `time.Duration`       |                                                                                                                                                                                                                                                                                                                    |
+| `Retry`               | `RetryConfig`         |                                                                                                                                                                                                                                                                                                                    |
+| `TLS`                 | `TLSConfig`           |                                                                                                                                                                                                                                                                                                                    |
+| `WorkerDefaults`      | `WorkerDefaults`      |                                                                                                                                                                                                                                                                                                                    |
+| `Clock`               | `Clock`               | Clock resolves runtime cadence. Nil selects `LiveClock`.                                                                                                                                                                                                                                                           |
 
 ### Functions
 
@@ -233,6 +235,25 @@ func WithBasicAuth(username, password string) Option
 
 WithBasicAuth selects HTTP Basic authentication with the given credentials.
 
+#### WithClock
+
+```go
+func WithClock(c Clock) Option
+```
+
+WithClock sets the clock the client will resolve cadence through. Defaults to
+`LiveClock`.
+
+Runtime call sites are being migrated onto the injected clock (see
+camunda/orchestration-cluster-api-go#40); until that lands the clock is stored and
+reachable via CamundaClient.Clock, but retry backoff, the backpressure gate, token
+refresh, worker polling and consistency polling still use real time.
+
+A nil Clock selects the default. A _typed_ nil -- a nil pointer boxed in a non-nil
+interface, such as (*myClock)(nil) -- is rejected by `New` with a configuration
+error instead: unlike an untyped nil it claims to be a usable clock, and would
+panic on first use deep inside the runtime.
+
 #### WithDefaultTenantID
 
 ```go
@@ -241,6 +262,18 @@ func WithDefaultTenantID(id string) Option
 
 WithDefaultTenantID sets the default tenant id applied to operations that
 accept one.
+
+#### WithExactRestAddress
+
+```go
+func WithExactRestAddress(exact bool) Option
+```
+
+WithExactRestAddress controls whether the SDK uses RestAddress exactly as
+provided. When exact is true, the automatic /v2 suffix is not appended — the
+address is used verbatim. This is intended for deployments behind an API
+gateway / reverse proxy whose base path does not follow the .../v2 convention.
+It maps to the CAMUNDA_REST_ADDRESS_EXACT environment variable.
 
 #### WithFalcon
 

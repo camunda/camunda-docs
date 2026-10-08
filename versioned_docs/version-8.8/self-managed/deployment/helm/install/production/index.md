@@ -231,17 +231,27 @@ The next steps focus on the Camunda application-specific configurations suitable
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-The following example configures an ILM policy for the Orchestration Cluster, and can be added to your `orchestration-values.yaml`:
+The Helm value **`orchestration.history.retention`** configures retention for archived Operate, Tasklist, and Camunda indices stored in secondary storage (for example, `operate-process-*`, `tasklist-task-*`).
+
+The following example configures an ILM policy for the Orchestration Cluster's archived history indices and can be added to the Helm values file `orchestration-values.yaml`:
 
 ```yaml
 orchestration:
-  retention:
-    enabled: true
-    minimumAge: 30d
-    policyName: zeebe-record-retention-policy
+  history:
+    rolloverInterval: 7d
+    retention:
+      enabled: true
+      minimumAge: 30d
+      policyName: camunda-history-retention-policy
 ```
 
-For more information on configuring ILM policy, refer to the configuration guide on the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration).
+:::warning
+The `orchestration.history.rolloverInterval` value significantly affects Elasticsearch/OpenSearch performance. Review the [data retention performance](/self-managed/deployment/helm/configure/data-retention.md#performance) section to ensure the value fits your use case.
+:::
+
+:::note
+For more information on configuring both retention policy types, refer to the [data retention configuration guide](/self-managed/deployment/helm/configure/data-retention.md).
+:::
 
 ### Configure backups
 
@@ -479,6 +489,16 @@ The following resources and configuration options are important to keep in mind 
   :::note
   You should only enable the auto-mounting of a service account token when the application explicitly needs access to the Kubernetes API server, or you have created a service account with the exact permissions required for the application and bound it to the pod.
   :::
+
+- If you keep the chart-created service accounts, note that the Management Identity service account mounts its token by default, unlike the other components. Management Identity does not call the Kubernetes API, so you can disable the token mount:
+
+  ```yaml
+  identity:
+    serviceAccount:
+      automountServiceAccountToken: false
+  ```
+
+  Keep it enabled only if a sidecar or init container in the Identity pod, such as Vault Agent with Kubernetes auth, relies on the default token. Starting with 8.10, this is the default.
 
 - [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) can be enabled with Camunda Helm charts if needed by your infrastructure requirements.
 

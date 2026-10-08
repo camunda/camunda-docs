@@ -105,6 +105,12 @@ export const recommendationCards = [
     description: "Add long-term memory to your AI agents.",
   },
   {
+    link: "../connect-external-agent/",
+    title: "Connect an external agent",
+    image: IconAoAgentImg,
+    description: "Connect an external agent to Camunda.",
+  },
+  {
     link: "../expose-process-as-mcp-tool/",
     title: "Expose a process as an MCP tool",
     image: IconMCP,

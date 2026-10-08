@@ -26,6 +26,7 @@ This section includes reference deployment architectures:
 
 - [Amazon EKS single-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): Standard production setup.
 - [Amazon EKS dual-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md): Advanced multi-region setup.
+- [Amazon EKS multi-region with RDBMS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md): Three or more regions with relational secondary storage, so a region loss does not stop processing.
 
 ### Red Hat OpenShift on AWS (ROSA)
 
@@ -40,12 +41,11 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 
 ## Architecture
 
-The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) explains the distinction between these components:
+The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) describes the deployment topology: one management plane serving one or more Orchestration Clusters, with one Optimize instance per Physical Tenant. It also explains the distinction between these components:
 
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin) with tightly integrated components (Optimize, Connectors).
-- **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, and monitoring the health of orchestration clusters.
-
-See the reference architecture for details on how these components communicate.
+- **Management plane (Camunda Hub and Management Identity)**: Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin), including Connectors.
+- **Optimize**: Process analytics, deployed separately with one instance per Physical Tenant.
 
 _Infrastructure diagram for a single-region setup (click the image to open the PDF version)_
 
@@ -65,6 +65,14 @@ A production deployment is recommended. For more information, see the [productio
 
 The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
+#### Management plane
+
+![Camunda Hub and Management Identity](./img/management-cluster.jpg)
+
+Camunda Hub and Management Identity form the management plane, which serves all Orchestration Clusters in the deployment. Both are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes it easy to scale each horizontally by running multiple replica pods behind a load balancer, improving availability and request throughput.
+
+Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
+
 #### Orchestration Cluster
 
 ![Orchestration Cluster](./img/k8s-cluster-view-orchestration.jpg)
@@ -78,14 +86,6 @@ The Orchestration Cluster exposes two services:
 1. A [**headless service**](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services) for internal communication between Zeebe brokers. This service skips load balancing and resolves to pod IPs for direct peer-to-peer communication.
 
 2. A **standard service** for external applications. This service distributes traffic randomly (via `kube-proxy`) and is suitable for clients or other services connecting to the cluster.
-
-#### Camunda Hub
-
-![Camunda Hub and Management Identity](./img/management-cluster.jpg)
-
-Camunda Hub and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
-
-Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
 
 ### High availability (HA)
 
@@ -101,8 +101,8 @@ For high availability, we recommend a minimum of **four Kubernetes nodes** to en
 
 While Deployments and StatefulSets in Kubernetes can scale independently of physical hardware, four nodes are typically required to support:
 
-- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist and Admin)
-- Other Camunda 8 components (Web Modeler, Management Identity, Console, Optimize)
+- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist, and Admin)
+- Other Camunda 8 components (Camunda Hub, Management Identity, and Optimize)
 
 Depending on your specific use case, you may need to scale **horizontally** (more nodes) or **vertically** (larger nodes) to meet resource requirements.
 
@@ -112,19 +112,75 @@ To further improve fault tolerance, distribute the Orchestration Cluster and oth
 
 ### Components
 
-Camunda 8 deployments typically separate workloads into two logical groups:
+Camunda 8 deployments separate workloads into three logical groups, each installed as its own Helm release with a `global.topology.mode` role:
 
-- **Orchestration Cluster**
-- **Camunda Hub and Management Identity**
+- **Management plane:** Camunda Hub and Management Identity (`hub`), one per deployment
+- **Orchestration Cluster:** Orchestration Cluster and Connectors (`orchestration`), one per cluster
+- **Optimize:** one release per Physical Tenant (`optimize`)
 
-We recommend deploying these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). This separation supports multi-tenancy, improves isolation, and allows flexible scaling. However, deploying all components in a single namespace is also possible for smaller environments.
+Deploy these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). The Hub namespace isn't tied to a single environment, and Orchestration Cluster namespaces can run on the same or different Kubernetes clusters, as long as every configured URL is reachable from the release that uses it. Deploying all components in a single `combined` release remains supported, and suits evaluation and smaller environments.
 
-A **multi-namespace setup** enables:
+<!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
 
-- Independent scaling of orchestration clusters based on workload
-- Shared access to centralized components (e.g., Management Identity)
+```mermaid
+graph TD
+    subgraph hub["Namespace: hub (management plane)"]
+        CH["Camunda Hub"]
+        MI["Management Identity"]
+    end
+    subgraph ocdev["Namespace: orchestration-dev"]
+        OCD["Orchestration Cluster<br/>+ Connectors"]
+    end
+    subgraph ocprod["Namespace: orchestration-prod"]
+        OCP["Orchestration Cluster<br/>+ Connectors"]
+    end
+    subgraph optdev["Namespace: optimize-dev-default"]
+        OD["Optimize<br/>default tenant"]
+    end
+    subgraph optprod["Namespaces: optimize-prod-*"]
+        OP1["Optimize<br/>default tenant"]
+        OP2["Optimize<br/>Physical Tenant A"]
+    end
+    IdP["OIDC provider"]
 
-To implement this topology with the Helm chart, see [configure a multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace.md).
+    CH -- "deploy, API, readiness" --> OCD
+    CH -- "deploy, API, readiness" --> OCP
+    OCD -. "exported records" .-> OD
+    OCP -. "exported records" .-> OP1
+    OCP -. "exported records" .-> OP2
+    OCD -- "authentication" --> MI
+    OCP -- "authentication" --> MI
+    OD -- "authentication" --> MI
+    OP1 -- "authentication" --> MI
+    OP2 -- "authentication" --> MI
+    MI --> IdP
+```
+
+For the required cross-namespace traffic, see [allow required network traffic](/self-managed/deployment/helm/install/topology/index.md#allow-required-network-traffic). To implement this topology with the Helm chart, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+
+#### Management plane namespace
+
+As shown in the [architecture diagram](#management-plane), this namespace contains:
+
+- [Camunda Hub](/components/hub/index.md) — modeling and administrative capabilities
+- [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Camunda Hub and Optimize
+
+This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
+
+:::tip Why isn't an IdP included by default?
+The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you. This approach gives you full control over your authentication stack and avoids unnecessary complexity for teams that already have an IdP in place.
+:::
+
+:::warning Identity separation
+Optimize and Camunda Hub rely on Management Identity (formerly Identity). This service is separate from the embedded Admin in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
+:::
+
+For configuration details, see:
+
+- [Connect Orchestration Cluster to an OIDC provider](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc)
+- [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
+
+The Orchestration Cluster can be configured to authenticate with OIDC by connecting to the Management Identity service deployed in this namespace.
 
 #### Orchestration Cluster namespace
 
@@ -135,34 +191,25 @@ As shown in the [architecture diagram](#orchestration-cluster), the Orchestratio
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) — UI for human tasks
 - [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) — authentication and access control
 
-Also included in this namespace are components that are tightly integrated with the cluster:
+Also included in this namespace is the component that deploys with the cluster release:
 
-- [Optimize](/components/optimize/what-is-optimize.md) — reporting and analytics
 - [Connectors](/components/connectors/introduction.md) — external system integrations
 
-#### Camunda Hub namespace
+[Optimize](/components/optimize/what-is-optimize.md) serves this cluster but is deployed as its own release, one per Physical Tenant. See [Optimize releases](#optimize-releases).
 
-As shown in the [architecture diagram](#camunda-hub), this namespace contains:
+The Orchestration Cluster also depends on a **secondary storage** backend for Operate, Tasklist, and the v2 Orchestration Cluster REST API. This backend is a document store (Elasticsearch or OpenSearch) or a supported relational database management system (RDBMS). It is provisioned outside the `StatefulSet`, as a managed service or an operator-managed database. Optimize requires Elasticsearch or OpenSearch and cannot use an RDBMS. For the trade-offs and how to choose a backend, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
 
-- [Camunda Hub](/components/hub/index.md) — modeling and administrative capabilities
-- [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
+#### Optimize releases
 
-This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
+Each Physical Tenant in an Orchestration Cluster is served by one Optimize release, deployed with `global.topology.mode: optimize`. That release deploys Optimize and nothing else.
 
-:::tip Why isn't an IdP included by default?
-The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you. This approach gives you full control over your authentication stack and avoids unnecessary complexity for teams that already have an IdP in place.
-:::
+One Optimize instance reads exported records from a single Elasticsearch or OpenSearch index prefix, so it can serve exactly one tenant. This applies to the default Physical Tenant too: a cluster with no additional tenants still needs one Optimize release if you want analytics.
 
-:::warning Identity separation
-Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity). This service is separate from the embedded Admin in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
-:::
+Each Optimize release requires its own OIDC client, audience, redirect URL, and context path, and it connects to the same secondary storage the Orchestration Cluster exports to. Its reader prefix must exactly match that tenant's exporter writer prefix. Optimize requires Elasticsearch or OpenSearch and can't use an RDBMS.
 
-For configuration details, see:
+Place Optimize releases in the Orchestration Cluster namespace or in their own namespace. Ingress resources are namespace-scoped, so a separate namespace needs its own Ingress and subdomain.
 
-- [Connect Orchestration Cluster to an OIDC provider](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc)
-- [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
-
-The Orchestration Cluster can be configured to authenticate with OIDC by connecting to the Management Identity service deployed in this namespace.
+For configuration details, see [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md) and [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md).
 
 ## Requirements
 
@@ -195,7 +242,7 @@ The storage performance figures in this section and in the platform-specific sec
 
 Storage type, however, is a strict requirement: HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency, and are not supported.
 
-The same SSD requirement applies to secondary storage (Elasticsearch/OpenSearch) — see the [Database](#database) section for details.
+The same SSD requirement applies to secondary storage, whether you run Elasticsearch/OpenSearch or an RDBMS. See the [Database](#database) section for details.
 :::
 
 #### Networking
@@ -204,12 +251,11 @@ Networking is largely managed through services and load balancers. The following
 
 - Stable, high-speed connection
 - Firewall rules for:
-  - `80`: Web UI (Console, Management Identity, Web Modeler, and IdP if co-located)
+  - `80`: Web UI (Management Identity, Hub, and IdP if co-located)
   - `82`: Metrics (Management Identity)
   - `8080`: REST/Web UI (Connectors, Orchestration Cluster)
-  - `8091`: Management (Web Modeler)
+  - `8091`: Management (Hub)
   - `8092`: Management (Optimize)
-  - `9100`: Management (Console)
   - `9600`: Management (Orchestration Cluster)
   - `26500`: gRPC endpoint
   - `26501`: Gateway-to-broker
@@ -224,9 +270,10 @@ Database ports are not included here, as databases should be maintained outside 
 
 Typical defaults include:
 
-- `5432`: PostgreSQL
+- `5432`: PostgreSQL (Management Identity, Camunda Hub, and PostgreSQL secondary storage when used)
 - `9200`, `9300`, `9600`: Document-store secondary storage (Elasticsearch/OpenSearch)
-  :::
+
+:::
 
 ##### Load balancer
 
@@ -236,31 +283,39 @@ The Zeebe Gateway as part of the Orchestration Cluster requires gRPC, which itse
 If you do not rely on the gRPC capabilities of Camunda 8, you can safely disregard this and use the Orchestration Cluster REST API instead.
 :::
 
-By default, the Camunda 8 Helm chart is compatible with the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
+Camunda 8 supports both Kubernetes traffic APIs, and you can use either:
 
-`Ingress-nginx` deploys a Network Load Balancer (layer 4).
+| API                                                                             | Support                                        | Setup guide                                                                                                       |
+| ------------------------------------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)     | Supported, used by the reference architectures | [Configure the Helm chart with Ingress](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)         |
+| [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) | Supported                                      | [Configure the Helm chart with Gateway API](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md) |
 
-The following annotation is added by the Helm chart to enable gRPC:
+The reference architectures use the Ingress API with [Contour](https://projectcontour.io/), a CNCF Ingress controller backed by the [Envoy proxy](https://www.envoyproxy.io/), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
 
-```yaml
-annotations:
-  nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
-```
+Contour is exposed through a `LoadBalancer` Service, so the load balancer your cloud provider creates for it operates at layer 4 (on AWS, a Network Load Balancer).
+
+Contour is a choice, not a requirement. Camunda tests the reference architectures with Contour, so that is what the procedures install, but any Ingress controller supporting gRPC and HTTP/2 works, for example [Traefik](https://traefik.io/traefik/), [HAProxy](https://haproxy-ingress.github.io/), or [Envoy Gateway](https://gateway.envoyproxy.io/). Select your own controller through `global.ingress.className`.
+
+Each controller declares the gRPC upstream differently, and not on the same object. For the annotation each controller needs, see [configure the gRPC upstream](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configure-the-grpc-upstream).
+
+:::note
+[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures moved to Contour in 8.9.
+:::
 
 ### Application
 
 The Helm chart required for deploying on Kubernetes is [publicly available](https://helm.camunda.io/).
 
-Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda) or [Camunda Enterprise Registry](https://registry.camunda.cloud). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/main/Dockerfile).
+Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [Docker Hub](https://hub.docker.com/u/camunda) or [Camunda Enterprise Registry](https://registry.camunda.cloud). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/main/Dockerfile).
 
 ### Database
 
 The following databases are required:
 
-| Database                         | Requirement                                                                                        |
-| :------------------------------- | :------------------------------------------------------------------------------------------------- |
-| Document-store secondary storage | Required by Orchestration Cluster and Optimize in this topology (Elasticsearch/OpenSearch).        |
-| PostgreSQL                       | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
+| Database                                  | Requirement                                                                                                                                           |
+| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Secondary storage (Orchestration Cluster) | Elasticsearch or OpenSearch (document store) in this topology, or a supported RDBMS as an alternative. Optimize requires Elasticsearch or OpenSearch. |
+| PostgreSQL                                | Required by Management Identity and Camunda Hub. Also required by Keycloak if deployed in-cluster.                                                    |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
@@ -271,7 +326,11 @@ For backend trade-offs and production guidance, see [secondary storage architect
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmarking to determine the appropriate sizing for your specific environment and workload.
 
 :::note Secondary storage disk requirements
-Secondary storage (Elasticsearch/OpenSearch) is customer-managed. Provision it with sufficient resources and use performant disks — disk latency directly impacts export throughput and overall cluster performance. See [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
+Secondary storage is customer-managed, and the same disk expectations apply to both backend families. Provision it with sufficient resources and use performant SSD-backed disks, because disk latency directly impacts export throughput and overall cluster performance.
+
+- Elasticsearch/OpenSearch: see [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
+- RDBMS: see [secondary storage considerations](/components/best-practices/architecture/sizing-self-managed.md#secondary-storage-considerations) for sizing guidance. An RDBMS scales vertically rather than horizontally, so size the instance and its storage with more initial headroom.
+
 :::
 
 Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
@@ -293,19 +352,9 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 #### Supported versions
 
-:::info Supported versions
-
-As stated in the general [supported environments](/reference/supported-environments.md) policy, Camunda 8 Self-Managed runs on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/) distribution. For OpenShift specifically, this means any release in the Red Hat **General Availability**, **Full Support**, or **Maintenance Support** lifecycle phases (see the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift)), within the upstream [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/).
+As stated in the general [supported environments](/reference/supported-environments.md) policy, Camunda 8 Self-Managed runs on any [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/) distribution. For OpenShift specifically, this means any release in the Red Hat **General Availability**, **Full Support**, or **Maintenance Support** lifecycle phases (see the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift)), within the upstream [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/).
 
 Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. Newly released OpenShift minor versions are evaluated and validated shortly after their GA.
-
-:::caution Versions compatibility
-
-Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support lifecycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
-
-Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. Newly released OpenShift minor versions are evaluated and validated shortly after their GA.
-
-:::
 
 ## Cloud specifics
 
@@ -341,20 +390,7 @@ The Classic Load Balancer (CLB) is the previous generation and is not supported 
 
 AWS offers an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB), which requires TLS termination in the load balancer and supports AWS Certificate Manager (ACM).
 
-To use an Application Load Balancer:
-
-- Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/)
-- Set up a [certificate in AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html)
-- Configure Ingress for Camunda using the [AWS example](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md), which results in the following annotations on the Camunda Ingress:
-  ```yaml
-  alb.ingress.kubernetes.io/ssl-redirect: "443"
-  alb.ingress.kubernetes.io/backend-protocol-version: GRPC
-  alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-  alb.ingress.kubernetes.io/scheme: internet-facing
-  alb.ingress.kubernetes.io/target-type: ip
-  ```
-
-The setup does not require configuration of [TLS on the Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). If the AWS Load Balancer Controller is correctly configured, it automatically retrieves the appropriate certificate from ACM based on the host name.
+For the setup steps and Ingress annotations, see [use an AWS Application Load Balancer](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#use-an-aws-application-load-balancer).
 
 :::note AWS ALB known limitations
 Application Load Balancers (ALB) support HTTP/2 over HTTPS listeners and allow a maximum of 128 streams per client HTTP/2 connection. The HTTP/2 server-push feature is not supported. For details, see [AWS ALB protocols](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-protocol-version:~:text=The%20maximum%20number%20of%20streams,client%20HTTP%2F2%20connection%20is%20128).
@@ -364,7 +400,7 @@ If you need more than 128 streams per client, see [Network Load Balancer](#netwo
 
 ##### Network load balancer (NLB)
 
-Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingress-nginx), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
+Camunda 8 is compatible with [Contour](https://projectcontour.io/), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
 
 ### Microsoft AKS
 
@@ -399,4 +435,4 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 
 #### Load balancer
 
-If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need to use `cloud.google.com/app-protocols` annotations in the **Zeebe Gateway** service. For more details, visit the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
+If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), see [use the GKE Ingress](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#use-the-gke-ingress) for the annotations the Zeebe Gateway service needs.

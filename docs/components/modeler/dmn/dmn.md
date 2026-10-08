@@ -1,6 +1,6 @@
 ---
 id: desktop-modeler-dmn
-title: DMN in Modeler
+title: Modeling with DMN
 description: "Camunda Desktop and Camunda Hub both offer the same Modeling experience for DMN 1.3 models, with modeling starting in the Decision Requirements Diagram (DRD) view."
 ---
 
@@ -20,7 +20,7 @@ After creating a decision and morphing it into a decision table, you can start e
 
 ## DMN coverage
 
-Modeler supports the following DMN elements:
+Camunda Hub and Desktop Modeler support the following DMN elements:
 
 - Decision (tables and literal expressions)
 - Input data

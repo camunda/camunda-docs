@@ -1,17 +1,11 @@
 ---
 id: agentic-ai-aiagent-customization
-sidebar_label: Customization
-title: AI Agent connector customization
-description: Customization of the AI Agent connector in self-managed or hybrid deployments
+sidebar_label: Customize in Self-Managed
+title: Customize the AI Agent connector
+description: Customize the AI Agent connector in Self-Managed or hybrid deployments to suit your specific needs.
 ---
 
-In a Self-Managed or [hybrid](../../../reference/glossary.md#hybrid-mode) environment, you can customize and extend the [AI Agent connector](./agentic-ai-aiagent.md) to suit your specific needs.
-
-For example, you can:
-
-- Implement custom storage backends for conversation history
-- Add support for additional AI models
-- Inject additional logic into the agent execution flow
+Customize the [AI Agent connector](./agentic-ai-aiagent.md) in Self-Managed or [hybrid](../../../reference/glossary.md#hybrid-mode) deployments by implementing custom conversation storage, supporting additional AI models, or adding logic to the agent execution flow.
 
 ## HTTP proxy configuration
 
@@ -28,7 +22,7 @@ To disable proxy support entirely (for example, if only an HTTPS-based proxy is 
 - **Spring Boot property:** `camunda.connector.agenticai.http.proxy-support.enabled=false`.
 - **Environment variable:** `CAMUNDA_CONNECTOR_AGENTICAI_HTTP_PROXYSUPPORT_ENABLED=false`.
 
-## Extending the AI Agent connector
+## Extend the AI Agent connector
 
 ### Prerequisites
 
@@ -93,10 +87,12 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
 5. If the default AI Agent connector is already connected to your engine (for example, if you are connecting to SaaS), you can override the registered AI Agent connector job worker type by setting one of the following type environment variables to a custom value (such as `my-ai-agent`) when starting your application.
    This allows you to use your custom connector in combination with an [element template configured](../use-connectors-in-hybrid-mode.md) for the `my-ai-agent` job worker type.
 
-| Variable                             | Description                                                                                            |
-| :----------------------------------- | :----------------------------------------------------------------------------------------------------- |
-| `CONNECTOR_AI_AGENT_JOB_WORKER_TYPE` | Overrides the type of the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) job worker.       |
-| `CONNECTOR_AI_AGENT_TYPE`            | Overrides the type of the [AI Agent Task](./agentic-ai-aiagent-task.md) outbound connector job worker. |
+| Variable                             | Description                                                                                                                                           |
+| :----------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CONNECTOR_AI_AGENT_TASK_TYPE`       | Overrides the type of the [AI Agent Task](./agentic-ai-aiagent-task.md) connector (default `io.camunda.agenticai:aiagent:task:2`).                    |
+| `CONNECTOR_AI_AGENT_SUBPROCESS_TYPE` | Overrides the type of the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) connector (default `io.camunda.agenticai:aiagent:subprocess:2`). |
+
+If you previously overrode the job types of the legacy element templates, see [job type overrides](./agentic-ai-aiagent-upgrade.md#job-type-overrides).
 
 ### Customize individual components
 

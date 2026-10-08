@@ -1,41 +1,33 @@
 ---
 id: test-your-process
 title: Test your process
-description: "Test mode lets you validate your process against a selected project environment before promoting changes."
+description: "Test mode lets you validate your process against a selected environment before promoting changes."
 keywords: ["test", "test mode", "test case", "test studio", "validation"]
 ---
 
-<span class="badge badge--cloud">Camunda 8 only</span>
-
-Test mode is a Zeebe-powered testing environment within Web Modeler for validating a process at any stage of development. Select any environment configured for your project — development, test, stage, or production — and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders — all within Test mode.
+Test mode is a Zeebe-powered way within Camunda Hub to validate a process at any stage of development. Select any environment assigned to your workspace, for example a development, test, stage, or production environment, and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders, all within Test mode.
 
 ## Opening the Test tab
 
 To use Test mode, open a BPMN diagram and click the **Test** tab. Read the [limitations and availability section](#limitations-and-availability) if this tab is missing.
 
-![BPMN diagram top bar showing the Test tab location](../img/test-tab-location.png)
-
-Select any environment configured for your project as your test target. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+Select any [environment](/components/concepts/environments.md) assigned to your workspace as your test target. Each environment shows its tags, such as `dev`, `test`, `stage`, or `prod`. In Self-Managed, the environments come from the clusters defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one environment, backed by a cluster, by default.
 
 :::caution
-Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
+Test mode executes real process logic against the selected environment, including connectors, messages, and other external actions. If you target a production environment, this can affect live data and external systems. Camunda Hub warns you with **This is a production environment** when you select an environment tagged `prod`.
 :::
 
-Opening the **Test** tab no longer deploys your process automatically. Click **Deploy** to deploy the current version of the active process and all its dependencies, like called processes or DMN files, to the selected cluster. Once deployed, you can run or create test cases.
+Opening the **Test** tab doesn't deploy your process automatically. Use the **Set up test run** panel to select an environment, deploy, and configure a test case. See [get started with Test mode](#get-started-with-test-mode) for the full flow.
 
-The selected cluster name is shown in the Test action bar. Click it to switch clusters without leaving Test mode; the newly selected cluster becomes the deployment and execution target.
+The Test action bar shows the name of the selected environment, its tags, and its Logical Tenant. Click it to choose a different environment without leaving Test mode. The newly selected environment becomes the deployment and execution target. If no environment is selected, the action bar shows **No environment selected**.
 
-In SaaS, Test mode uses connector secrets from your selected cluster. Connector secrets are not currently supported in Self-Managed.
+If no environment is assigned to your workspace, Test mode tells you that an environment must be assigned to the workspace. Ask an organization admin to [assign an environment](/components/hub/organization/manage-environments/assign-environments.md).
 
-### Test a specific process version
-
-From the versions view, select a version and choose **Test this version** to open Test mode against that specific version instead of the latest draft. Test mode opens in read-only mode when testing a version this way — you can run tests but can't edit the process.
-
-![Test this version entry point in the process application versions view](../img/test-this-version.png)
+In SaaS, Test mode uses connector secrets from your selected environment. Connector secrets are not currently supported in Self-Managed.
 
 ## Authorizations
 
-If [authorizations](/components/admin/authorization.md) are enabled on the cluster where you will run a test, the following permissions are required for each action:
+If [authorizations](/components/admin/authorization.md) are enabled on the environment where you will run a test, the following permissions are required for each action:
 
 | Resource Type       | Permission                                       | Allowed action                                                                                                  |
 | ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
@@ -54,31 +46,34 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 ## Get started with Test mode
 
-![Test mode process definition view showing the Configure test case overlay](../img/test-definition.png)
+When you open the **Test** tab for the first time in a process, the **Set up test run** panel guides you through three steps:
 
-When you open the **Test** tab for the first time in a process a **Setup environment** overlay prompts you to select a cluster and deploy your process. Once deployed you can **Configure a test case**.
+1. **Choose where to run**
+2. **Choose resources to deploy**
+3. **Configure test case**
 
-![Configure test case panel](../img/test-configure-test-case.png)
+### 1. Choose where to run
 
-In the **Configure test case** panel, select the start and end elements that define the segment of the process you want to test. Click the selected start event to configure how the process should start — the panel shows various options depending on its Start event type:
+Click **Select environment**, and select a target environment. If the environment has more than one Logical Tenant, select one. Once the environment is healthy, it advances to the next step.
 
-- **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
-- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. The **Start** button is disabled when the message name is empty.
-- **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
+### 2. Choose resources to deploy
 
-**Start** is also disabled when the variables field contains invalid JSON.
+- **All resources**: Deploys the whole project, including dependencies like called processes or DMN files.
+- **Only this resource**: Deploys only the open file.
 
-To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
+When testing a snapshot version, **Only this resource** is not allowed.
 
-## Define a test segment
+Click **Deploy**. Once the deploy succeeds, it automatically progresses to the next step.
 
-By default, execution starts from the process start event and runs to natural completion. To focus on a specific part of your process, define a segment with a custom start and end boundary in the **Configure test case** panel.
+### 3. Configure test case
 
-### Start boundary
+Start and end elements for the segment are auto-selected. Some processes have no selectable end element — for example, when the process starts with a message or signal event, or has no end event — in which case the test run completes naturally. Click the edit icon to pick a different element.
+
+#### Start boundary
 
 The start boundary defaults to the process start event. To change it:
 
-1. In the **Configure test case** panel, click the start row.
+1. In the **Configure test case** step, click the start row.
 2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with a **Start** label on the diagram.
 
 Elements before the start boundary are not activated and do not appear in the instance history.
@@ -87,18 +82,27 @@ The same element type restrictions apply as for [**Add token** modifications](#m
 
 **Publish message** and **Broadcast signal** elements don't support segment boundaries. If you select either as the start boundary, you can't select an end boundary, and the process runs until it reaches the end node naturally reached from that selected start event.
 
-### End boundary
+#### End boundary
 
-The end boundary defaults to the first end event. To change it:
+The end boundary is optional and defaults to the first end event. Click **Start** without changing it to accept the default, or change it:
 
-1. In the **Configure test case** panel, click the end row.
+1. In the **Configure test case** step, click the end row.
 2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with an **End** label on the diagram.
+3. To clear the end boundary, click the **x** icon on the **End** label on the canvas, or search for the same element again and deselect it from the results.
 
 When an end boundary is set, the process instance terminates after that element completes. Elements after it are not activated and do not appear in the instance history.
 
-### Canvas click interaction
+#### Canvas click interaction
 
 Once both boundaries are set, clicking the canvas resets the start boundary and clears the end boundary. To change only one boundary, click its row in the panel first, then click the new element on the canvas.
+
+Click the selected start event to configure how the process should start — the panel shows various options depending on its Start event type:
+
+- **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
+- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID.
+- **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
+
+To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
 
 :::note
 Test mode will only consider the first executable process ID in the BPMN file.
@@ -172,7 +176,7 @@ For example, you can validate your process by creating and rerunning test cases 
 Although test cases are valuable for rapid validation during development, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline for comprehensive testing.
 :::
 
-Test cases are stored in [test files](test-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
+Test cases are stored in [test files](test-files.md). You can view and edit these files directly in Camunda Hub or in your Git repository using Git sync.
 
 Test mode will use the test file [linked to the first executable process ID](test-files.md#link-a-process-processid) of the BPMN diagram.
 
@@ -192,13 +196,13 @@ To save a test case:
 
 1. Review the **Steps** the test case will re-run, such as **Start instance**. (Optional) Click **Add assertion** to add an assertion to a step. See [Add assertions](#assertions).
 1. Click **Save test case**.
-1. A new [test file](test-files.md) will be saved in the same Web Modeler folder as the process.
+1. A new [test file](test-files.md) will be saved in the same Camunda Hub folder as the process.
 
 ![Saving a test case](../img/test-save-test-case.png)
 
 ### Add assertions {#assertions}
 
-A test case that only executes its instructions can still pass even if it produces incorrect output or follows the wrong path. Use assertions to verify what actually happened, not just whether the test case finished. 
+A test case that only executes its instructions can still pass even if it produces incorrect output or follows the wrong path. Use assertions to verify what actually happened, not just whether the test case finished.
 
 ![Assertion editor](../img/test-assertion-editor.png)
 
@@ -275,10 +279,11 @@ When a BPMN change removes or renames an element that an instruction or assertio
 - Test mode flags broken test cases with an indicator in the test case list. A callout in the test case detail view explains what's broken.
 
 - Use the graphical repair view to fix most breakages without editing JSON: remap an instruction or assertion to a different element, select a new expected value, edit a step in place, or delete it.
-  
+
 ![Repair view](../img/test-repair-view.png)
 
-- For changes the graphical repair view doesn't cover, open the [test file](test-files.md) in Web Modeler's file editor and edit the JSON directly. Then, return to Test mode and rerun the test case.
+- For changes the graphical repair view doesn't cover, open the [test file](test-files.md) in Camunda Hub's file editor and edit the JSON directly. Then, return to Test mode and rerun the test case.
+
 ### Limitations {#test-cases-limitations}
 
 Test mode displays a warning badge on diagram elements with known limitations. Use the **Show problems**/**Hide problems** toggle near the canvas controls to show or hide these badges.
@@ -363,18 +368,16 @@ For more information about terms, refer to our [licensing and terms page](https:
 
 **Version compatibility:** Test mode is compatible with cluster versions starting from 8.10 and higher.
 
-**Draft versions:** Testing a draft (undeployed, unversioned) process is not currently possible from the versions view. Publish a version or deploy the process to test against.
-
 ### Camunda 8 SaaS
 
-In Camunda 8 SaaS, Test mode is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
-Additionally, within their organization, users need to have a [role](/components/hub/organization/manage-members/manage-users.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the cluster, users need to have specific permissions instead.](#authorizations)
+In Camunda 8 SaaS, Test mode is available to all Camunda Hub users with commenter, editor, or admin permissions within a project.
+Additionally, within their organization, users need to have a [role](/components/hub/organization/users-and-roles.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the environment, users need to have specific permissions instead.](#authorizations)
 
 ### Camunda 8 Self-Managed
 
 <!-- NEEDS VERIFICATION -->
 
-In Self-Managed, Test mode is controlled by the `camunda.modeler.feature.test-mode-enabled` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
+In Self-Managed, Test mode is controlled by the `camunda.hub.feature.test-mode-enabled` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Camunda Hub. This is `true` by default for the Docker and Kubernetes distributions.
 
 Prior to the 8.10 release, Test mode can be accessed by installing the 8.10.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/blob/camunda-platform-10.4.0/charts/camunda-platform-alpha), or running the 8.10.0-alpha [Docker Compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) configuration.
 
@@ -387,7 +390,7 @@ Prior to the 8.10 release, Test mode can be accessed by installing the 8.10.0-al
 
 ## Use Test mode with Camunda Self-Managed
 
-After selecting the **Test** tab in Self-Managed, the Test view opens directly. The cluster setup and deployment flow is the same as in SaaS, see [opening the Test tab](#opening-the-test-tab).
+After selecting the **Test** tab in Self-Managed, the Test view opens directly. The environment selection and deployment flow is the same as in SaaS, see [opening the Test tab](#opening-the-test-tab).
 
 ### Limitations {#self-managed-limitations}
 
@@ -398,7 +401,7 @@ After selecting the **Test** tab in Self-Managed, the Test view opens directly. 
 
 ## Test usage and billing considerations
 
-The use of Test mode may result in additional charges depending on your organization's [plan](/components/hub/organization/manage-organization-settings/manage-plan/available-plans.md) and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
+The use of Test mode may result in additional charges depending on your organization's [plan](/components/saas/organization/manage-plan/available-plans.md) and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
 
-- **Enterprise plan:** Use a [Basic cluster](/components/concepts/clusters.md#cluster-type) for non-production testing to avoid costs. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
-- **Free trial plan:** You can use any cluster. See [Free Trial clusters](/components/concepts/clusters.md#free-trial-clusters).
+- **Enterprise plan:** Use a [Basic cluster](/components/saas/clusters.md#cluster-type) for non-production testing to avoid costs. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
+- **Free trial plan:** You can use any cluster. See [Free Trial clusters](/components/saas/clusters.md#free-trial-clusters).

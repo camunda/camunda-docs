@@ -17,13 +17,14 @@ import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../../\_partials/\_deploy-eck-elasticsearch.md'
 import DeploymentReadinessCheck from '../../\_partials/\_deployment-readiness-check.md'
+import ZeebeGatewayNetworkPolicies from '../../\_partials/\_zeebe-gateway-network-policies.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster and confirming that it is working as intended.
 
 ## Requirements
 
 - A Kubernetes cluster; refer to the [Terraform guide](./terraform-setup.md) for details.
-- [Helm](https://helm.sh/docs/intro/install/)
+- [Helm CLI v4](https://helm.sh/docs/intro/install/) (recommended; see [supported versions](/reference/supported-environments.md#clients)).
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
@@ -39,7 +40,7 @@ In addition to the infrastructure diagram provided in the [Terraform setup guide
 The architecture includes the following core components:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
-- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Management plane**: Design and management tools (Camunda Hub and Management Identity)
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
 
@@ -232,7 +233,7 @@ Without this step, Management Identity and Web Modeler will fail to connect to t
 <Tabs groupId="values">
   <TabItem value="with-domain" label="With domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -266,7 +267,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 For secure operation, do not publicly expose the Zeebe Gateway Service. Keep it reachable only within your Azure Virtual Network (for example, by deploying it without a public Ingress) and access it from internal services or over a private network extension such as an Azure VPN or ExpressRoute connection. This reduces external attack surface while preserving controlled operational access.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+<ZeebeGatewayNetworkPolicies />
 
 :::
 
@@ -407,7 +408,7 @@ For production workloads, we recommend using an externally managed Elasticsearch
 
 #### Merge operator overlays into values
 
-Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services instead of embedded subcharts.
+Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services.
 
 Merge the **Elasticsearch** overlay:
 
@@ -648,7 +649,7 @@ The following values are required for OAuth authentication:
 
 The following are some advanced configuration topics to consider for your cluster:
 
-- [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md)
+- [Camunda production installation guide with Kubernetes and Helm](/self-managed/deployment/helm/install/production/index.md)
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/azure/README.md)
 - [Configure RDBMS secondary storage](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)

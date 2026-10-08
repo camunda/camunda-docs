@@ -7,7 +7,7 @@ description: "Learn how to provision element templates at runtime and make them 
 To effectively manage large libraries of reusable building blocks ([element templates](/components/concepts/element-templates.md)), you can create a pipeline that:
 
 - Provisions the [dependencies of element templates](/components/modeler/element-templates/element-template-with-dependencies.md) to required clusters.
-- Makes templates available at design time to multiple [workspaces](/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md) within an organization.
+- Makes templates available at design time to multiple [workspaces](/components/hub/organization/manage-workspaces/index.md) within an organization.
 
 <!--- source: https://www.figma.com/design/VyyoV0hNbazXV8DKcMMEU9/Camunda-Documentation-Assets?node-id=2078-301&t=YNT70ktAMXBBupbJ-1 --->
 
@@ -30,7 +30,7 @@ For simplicity, this guide assumes:
 
 - One organization
 - One cluster
-- One [workspace](/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md)
+- One [workspace](/components/hub/organization/manage-workspaces/index.md)
 - A pipeline handling runtime provisioning and template syncing
 
 ## Runtime provisioning
@@ -41,7 +41,7 @@ You can use sensitive information in your element templates without exposing it 
 
 These guides show you how to configure them depending on the environment you are using:
 
-- **SaaS**: Use the [Administration API](/apis-tools/administration-api/administration-api-reference.md) or [Camunda Hub UI](/components/hub/organization/manage-clusters/manage-secrets.md) to configure secrets.
+- **SaaS**: Use the [Administration API](/apis-tools/administration-api/administration-api-reference.md) or [Camunda Hub UI](/components/saas/clusters/manage-secrets.md) to configure secrets.
 - **Self-Managed/local development**: Configure secrets outside the pipeline. See [connector secrets](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 ### Job Workers

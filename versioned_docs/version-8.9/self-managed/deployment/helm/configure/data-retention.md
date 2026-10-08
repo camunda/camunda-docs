@@ -89,6 +89,18 @@ For Optimize and other data-analysis use cases, coordinate exporter-side filters
 | `orchestration.history.retention.usageMetricsMinimumAge` | string  | `730d`                                   | Retention period for usage metrics indices (2 years by default)                                                                                |
 | `orchestration.history.retention.usageMetricsPolicyName` | string  | `camunda-usage-metrics-retention-policy` | Name of the ILM/ISM policy for usage metrics                                                                                                   |
 
+### Performance
+
+The Helm value `orchestration.history.rolloverInterval` controls how often the archiver creates a new dated index for historical data. For example, `1d` creates a new dated index every day for each archivable index type (Operate and Tasklist each have several), resulting in multiple new indices per day. This setting directly affects cluster performance:
+
+- A **shorter interval** (for example, `1d`) creates more, smaller indices. Queries, ILM/ISM operations, and deletions against a single index run faster because each index covers less data, but the cluster carries more shard and index metadata overhead overall.
+- A **longer interval** (for example, `30d`) creates fewer, larger indices. This reduces shard and metadata overhead across the cluster, but each index takes longer to query, roll over, and delete, and a spike in completed process instances can make a single index very large.
+
+Choose `rolloverInterval` based on your throughput and retention needs:
+
+- For low-to-moderate throughput clusters with long retention (more than three months), use a longer interval (for example, `7d` or longer) to avoid creating excessive numbers of small indices, which increases cluster management overhead.
+- For clusters with a strict shard count limit, prefer longer intervals to stay within your cluster's recommended shard count.
+
 ### Example usage
 
 #### Orchestration Cluster history retention (recommended)
@@ -277,24 +289,6 @@ Expected output showing the policy is attached:
   "index.lifecycle.name": "camunda-history-retention-policy"
 }
 ```
-
-### Manually creating or updating policies (8.7 and earlier)
-
-For Camunda 8.8+, policies are created automatically by the retention tooling. If you need to manually create or update policies, use the policy names configured in your `values.yaml` with the commands in the [Camunda 8.7 manual policy management guide](/versioned_docs/version-8.7/self-managed/setup/guides/data-retention.md#manual-policy-management).
-
-**Camunda 8.8 default policy names** (customizable via Helm values):
-
-- `zeebe-record-retention-policy` - For Zeebe record indices (configured via `orchestration.retention.policyName`)
-- `camunda-history-retention-policy` - For historical Operate, Tasklist, and Camunda indices (configured via `orchestration.history.retention.policyName`)
-- `camunda-usage-metrics-retention-policy` - For usage metrics indices (configured via `orchestration.history.retention.usageMetricsPolicyName`)
-
-**Camunda 8.7 default policy names** (only Zeebe is customizable):
-
-- `zeebe-record-retention-policy` - For Zeebe records (customizable via `zeebe.retention.policyName`)
-- `operate_delete_archived_indices` - For Operate indices (hardcoded)
-- `tasklist_delete_archived_indices` - For Tasklist indices (hardcoded)
-
-The curl commands for creating and applying policies are the same across versions—only the policy names differ. See the [8.7 guide's manual policy section](/versioned_docs/version-8.7/self-managed/setup/guides/data-retention.md#manual-policy-management) for complete ILM and ISM policy creation commands.
 
 ### Known limitations
 

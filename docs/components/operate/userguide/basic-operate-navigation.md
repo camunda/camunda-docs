@@ -8,7 +8,21 @@ Learn how to navigate Camunda 8 Operate.
 
 ## Before you begin
 
-This section and the next section, [Resolve incidents and update variables](./resolve-incidents-update-variables.md), assume you’ve deployed a process to Zeebe and created at least one process instance, using the [`order-process.bpmn`](/bpmn/operate/order-process.bpmn) process model. If you’re not sure how to deploy processes or create instances, visit our [guides section](/guides/introduction-to-camunda-8.md) to get started with Camunda.
+This guide and [resolve incidents and update variables](./resolve-incidents-update-variables.md) assume you’ve deployed a process to Zeebe and created at least one process instance, using the [`order-process.bpmn`](/bpmn/operate/order-process.bpmn) process model. If you’re not sure how to deploy processes or create instances, visit our [guides section](/guides/introduction-to-camunda-8.md) to get started with Camunda.
+
+## Open Operate
+
+From Camunda Hub, you can open Operate in any [environment](/components/concepts/environments.md) you have access to:
+
+1. Log in to Camunda Hub.
+1. In the left navigation, click **Environments**, and then select an environment. Each environment has its own instance of Operate.
+1. Under **Applications**, on the **Operate** card, click **Open**. This opens Operate for the environment in a new tab.
+
+You can also expand an environment in the left navigation, and select Operate from its applications.
+
+:::tip
+If the environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
+:::
 
 ## View a deployed process
 
@@ -22,11 +36,14 @@ To view a deployed process, take the following steps:
 
 Running process instances appear in the **Process Instances** table below the process model. To inspect a specific instance, click the **Process Instance Key**.
 
-The process instance page has three parts:
+The process instance page has four parts:
 
 - A header showing the process instance's key, version, and state.
 - A process diagram showing the instance's current progress.
-- A bottom panel with tabs, including **Details**, **Incidents** (shown only when the instance has an incident), and **Variables**.
+- An **Instance History** panel listing the instance's elements, with search and status filter controls.
+- A bottom panel with tabs: **Variables**, **Listeners**, and **Operations Log** are always available. **Incidents** appears when the instance has one. **Details**, **Input Mappings**, and **Output Mappings** appear once you select a specific element in the diagram.
+
+![A process instance detail page, showing the header with the process instance's key, version, and state, the process diagram, and the bottom panel with Variables, Listeners, and Operations Log tabs.](./img/basic-operate-navigation.png)
 
 Click an element in the diagram to select it, then use the tabs in the bottom panel to inspect its details, incidents, and variables. In earlier versions, an element's details and incidents appeared in a metadata popover when you clicked it; the popover is now replaced by the **Details** and **Incidents** tabs. To visualize process instance performance, use [Optimize](/components/optimize/what-is-optimize.md).
 

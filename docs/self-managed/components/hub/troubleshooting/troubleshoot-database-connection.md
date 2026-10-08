@@ -4,17 +4,17 @@ title: "Troubleshoot database connection issues"
 sidebar_label: "Database connection"
 ---
 
-You try to start Web Modeler, and encounter issues with the database connection.
+You try to start Camunda Hub, and encounter issues with the database connection.
 
 ## Using a non-empty schema
 
-As Web Modeler uses [Flyway](https://www.red-gate.com/products/flyway/community/) to manage schema updates, the schema should not be shared.
+As Camunda Hub uses [Flyway](https://www.red-gate.com/products/flyway/community/) to manage schema updates, the schema should not be shared.
 
 Before the first initialization, ensure no tables or functions are present in your schema.
 
 If your database setup requires mandatory tables or functions, Flyway may throw an exception like `Found non-empty schema(s) "<schema name>" without schema history table!`
 
-To overcome this issue, add the property `spring.flyway.baselineOnMigrate: true` to your Web Modeler configuration and remove it after the schema has been initialized.
+To overcome this issue, add the property `spring.flyway.baselineOnMigrate: true` to your Camunda Hub configuration and remove it after the schema has been initialized.
 
 ## Secure connection to standard PostgreSQL
 
@@ -23,7 +23,7 @@ for details on how to configure a secure connection to PostgreSQL.
 
 ## Secure connection to Amazon Aurora fails
 
-You configured a custom SSL certificate in your remote Amazon Aurora PostgreSQL instance and want Web Modeler to accept
+You configured a custom SSL certificate in your remote Amazon Aurora PostgreSQL instance and want Camunda Hub to accept
 that certificate.
 
 ### Add Amazon Root CA to trust store
@@ -37,10 +37,10 @@ ensure the Amazon Trust Services CA are in `modeler-restapi`'s trust store (see 
 
 ## IAM authentication against Amazon Aurora fails
 
-You switched from standard username/password authentication to IAM authentication and Web Modeler can't obtain a connection to the database.
+You switched from standard username/password authentication to IAM authentication and Camunda Hub can't obtain a connection to the database.
 
-### Ensure the IAM account has all privileges to the Web Modeler database
+### Ensure the IAM account has all privileges to the Camunda Hub database
 
-After switching from standard username/password authentication to IAM authentication, privileges to Web Modeler's
+After switching from standard username/password authentication to IAM authentication, privileges to Camunda Hub's
 database might still be associated with the old username.
-Ensure the IAM account has all privileges to the Web Modeler database.
+Ensure the IAM account has all privileges to the Camunda Hub database.

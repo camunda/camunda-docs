@@ -222,6 +222,9 @@ Multi-region support for RDBMS uses the asynchronous replication feature of the 
 dependent on the database vendor. While most multi-region replication is performed by the database itself, Camunda
 provides additional features to enhance automatic recovery in the event of a failure.
 
+For an architecture built on this model, in which every region writes to a single endpoint and a region loss does not
+stop processing, see [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md).
+
 Asynchronous replicated databases are synchronized with a delay, meaning that after a failover, the new primary database
 may not contain all the data written to the old primary database. This can lead to data loss in secondary storage. While
 this data can be reproduced by replaying past records from the Zeebe log stream, the relevant segments and records must still
@@ -269,6 +272,15 @@ The following databases are supported for LSN replication monitoring:
 - Aurora Global Database with MySQL
 - MSSQL
 - PostgreSQL
+- Oracle
+
+Oracle uses system change numbers (SCNs) to track replication progress. To use LSN replication monitoring with Oracle, grant the database user `SELECT` access to the following views:
+
+```sql
+GRANT SELECT ON v_$database TO <user>;
+GRANT SELECT ON v_$archive_dest TO <user>;
+GRANT SELECT ON v_$archive_dest_status TO <user>;
+```
 
 To use the LSN replication monitoring with PostgreSQL, the database user must have the following additional privileges:
 
@@ -279,6 +291,61 @@ GRANT PG_MONITOR TO <user>;
 ```
 
 To use the LSN replication monitoring with MSSQL, the database user must have the following additional privileges:
+
+- `VIEW SERVER STATE` role on SQL Server 2019 and earlier versions
+
+  ```sql
+  GRANT VIEW SERVER STATE TO <user>;
+  ```
+
+- `VIEW SERVER PERFORMANCE STATE` role on SQL Server 2022 and newer versions
+
+  ```sql
+  GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
+  ```
+
+### Time based replication monitoring
+
+The exporter monitors the replication lag to the secondary databases based on the reported replication lag from the
+primary replica. The exporter will only acknowledge records which have been exported before this lag time to a minimum
+quorum of secondary databases. The exporting will come to a stop when the lag time is exceeded and will only continue
+when the lag time is back within the configured limit.
+
+Note, that this strategy is not as precise as LSN replication monitoring and may lead to less frequent acknowledgements.
+It is recommended to use LSN replication monitoring whenever possible.
+
+```yaml
+camunda.data.secondary-storage.rdbms.async-replication.enabled: true
+camunda.data.secondary-storage.rdbms.async-replication.type: TIME_LAG
+camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
+```
+
+| Property name                                 | Description                                                                   | Default |
+| --------------------------------------------- | ----------------------------------------------------------------------------- | ------- |
+| `async-replication.enabled`                   | If the async replication monitoring should be enabled                         | false   |
+| `async-replication.min-sync-replicas`         | The minimal number of replicas in sync                                        | 1       |
+| `async-replication.polling-interval`          | The interval in which to check the replicas                                   | PT15S   |
+| `async-replication.max-lag`                   | The max tolerated lag of a replication (ISO-8601 duration)                    | PT15M   |
+| `async-replication.pause-on-max-lag-exceeded` | If the exporter should pause exporting when the maximum lag limit is exceeded | false   |
+
+#### Vendor support
+
+The following databases are supported for time lag replication monitoring:
+
+- Aurora Global DB with PostgreSQL
+- Aurora Global DB with MySQL
+- MSSQL
+- PostgreSQL
+
+To use the time lag replication monitoring with PostgreSQL, the database user must have the following additional privileges:
+
+- `PG_MONITOR` role
+
+```sql
+  GRANT PG_MONITOR TO <user>;
+```
+
+To use the time lag replication monitoring with MSSQL, the database user must have the following additional privileges:
 
 - `VIEW SERVER STATE` role on SQL Server 2019 and earlier versions
 
@@ -303,7 +370,8 @@ replication is not fully in sync. This strategy requires external monitoring of 
 that the configured delay is sufficient for the database replication to catch up in case of a failover.
 
 :::warning
-The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. Size the persistent volume to hold all records produced during that interval. If the volume is too small, Zeebe runs out of disk space and stops processing.
+The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. The exporter never acknowledges records before the configured delay period has elapsed, but may acknowledge them after this period has elapsed.
+Size the persistent volume to hold all records produced during the delay interval. If the volume is too small, Zeebe will run out of disk space and stop processing.
 :::
 
 ```yaml
@@ -318,13 +386,27 @@ camunda.data.secondary-storage.rdbms.async-replication.type: DELAY
 | `async-replication.queue-capacity`      | Size of the internal queue of record positions to acknowledge                     | 8192    |
 | `async-replication.queue-debounce-time` | A debounce time to not add every record to the queue but only one every X seconds | PT5S    |
 
-## Usage with AWS Aurora PostgreSQL
+### Compatibility matrix
 
-Camunda supports **PostgreSQL** as a secondary storage backend. AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and works when configured like a standard PostgreSQL database.
+Use LSN-based monitoring when your database supports it. Otherwise, use time-based monitoring if available. Use delay backoff only when neither strategy is supported. Delay backoff doesn't monitor replication state directly and requires external monitoring of replication lag; see [delay backoff replication monitoring](#delay-backoff-replication-monitoring).
 
-In addition to the standard PostgreSQL JDBC driver, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
+| Database Vendor   | LSN-based          | Time-based         | Delay backoff      |
+| ----------------- | ------------------ | ------------------ | ------------------ |
+| Aurora PostgreSQL | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Aurora MySQL      | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| PostgreSQL        | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| MSSQL             | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Oracle            | :white_check_mark: | :x:                | :white_check_mark: |
+| MariaDB           | :x:                | :x:                | :white_check_mark: |
+| MySQL             | :x:                | :x:                | :white_check_mark: |
 
-To use the AWS JDBC wrapper, configure the JDBC URL as follows:
+## Usage with AWS Aurora PostgreSQL / MySQL
+
+Camunda supports **PostgreSQL** and **MySQL** as secondary storage backends. AWS Aurora PostgreSQL and AWS Aurora MySQL are compatible managed services and work when you configure them like standard PostgreSQL or MySQL databases.
+
+In addition to the standard PostgreSQL and MySQL JDBC drivers, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
+
+To use the AWS JDBC wrapper with an Aurora PostgreSQL database, configure the JDBC URL for your Aurora engine:
 
 ```yaml
 camunda:
@@ -332,7 +414,20 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda
+        url: jdbc:aws-wrapper:postgresql://aurora-postgresql-host:5432/camunda
+        username: camunda
+        password: camunda
+```
+
+To use the AWS JDBC wrapper with an Aurora MySQL database, configure the JDBC URL for your Aurora engine:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:mysql://aurora-mysql-host:3306/camunda
         username: camunda
         password: camunda
 ```
@@ -351,4 +446,68 @@ camunda:
         username: camunda
 ```
 
+The AWS JDBC wrapper supports automatic failover detection when using Aurora GlobalDB.
+
+To use automatic failover detection, enable the corresponding wrapper plugin and optionally configure a failover timeout:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover
+```
+
+In addition, you can override the default failoverTimeoutMs (60 seconds) by adding the `failoverTimeoutMs` parameter to
+the JDBC URL: `jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover&failoverTimeoutMs=30000`.
+
+````yaml
+
 The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.
+
+### Per-physical-tenant credentials on Aurora
+
+When using [physical tenants](/self-managed/concepts/physical-tenants/index.md), each tenant can connect to Aurora with its own database user. Database-level permissions (schema grants, row-level security) are administered entirely in PostgreSQL, so tenant isolation is enforced by the database rather than by the application.
+
+For standard username/password authentication, override the connection settings per tenant:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=default_schema
+        username: camunda
+        password: camunda
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=tenant_a_schema
+            username: tenant_a_user
+            password: tenant-a-secret
+````
+
+For IAM authentication, the same pattern applies with the `iam` wrapper plugin and passwordless database users:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam&currentSchema=default_schema
+        username: camunda
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam&currentSchema=tenant_a_schema
+            username: tenant_a_user
+```
+
+With IAM authentication, the wrapper driver generates short-lived authentication tokens using the application's AWS identity (for example, the pod's IAM role when running on EKS with IRSA). The IAM permission `rds-db:connect` is granted **per database user**, so the single application identity is granted access to exactly the tenant database users it should reach — one AWS identity, many tenant-scoped database users.

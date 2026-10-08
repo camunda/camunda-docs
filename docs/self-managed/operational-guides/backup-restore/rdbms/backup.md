@@ -105,7 +105,7 @@ export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_CONTINUOUS=true
 
 ### Checkpoint interval
 
-The checkpoint interval controls how frequently Zeebe injects marker checkpoints into the log stream. These markers serve as potential restore points — since a cluster can only be restored to a checkpoint that exists on all partitions, more frequent markers enable finer-grained [point-in-time restore](./restore.md#point-in-time-restore).
+The checkpoint interval controls how frequently Zeebe injects marker checkpoints into the log stream. These markers serve as potential restore points — since a cluster can only be restored to a checkpoint that exists on all partitions, more frequent markers enable finer-grained [point-in-time restore](./restore-api.md#trigger-the-restore).
 
 ```yaml
 camunda:
@@ -129,7 +129,7 @@ Use the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-s
 
 ### Scheduled backup
 
-Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range trackin, this ensures you always have backup ranges available for disaster recoveryg.
+Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range tracking. This ensures you always have backup ranges available for disaster recovery.
 Both should be enabled together for a complete backup strategy. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
 
 #### Recommended configuration
@@ -200,11 +200,11 @@ If you are using Optimize alongside an RDBMS-backed Orchestration Cluster, Optim
 
 See [back up and restore Optimize independently](../optimize-backup-and-restore.md) for the complete procedure.
 
-## (Optional) Back up Web Modeler data {#back-up-web-modeler-data}
+## (Optional) Back up Camunda Hub data {#back-up-web-modeler-data}
 
-If you are using Web Modeler, you can also back up its data. Web Modeler stores its data in a relational database, so you can use the same backup tools as for the RDBMS secondary storage.
+If you are using Camunda Hub, you can also back up its data. Camunda Hub stores its data in a relational database, so you can use the same backup tools as for the RDBMS secondary storage.
 
-See [backup and restore Web Modeler data](../modeler-backup-and-restore.md) for more details.
+See [backup and restore Camunda Hub data](../modeler-backup-and-restore.md) for more details.
 
 ## Primary storage retention
 
