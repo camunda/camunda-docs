@@ -8,7 +8,7 @@ import CostManagement from "../../../_partials/_cost-management.md";
 
 This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services provided by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is functioning correctly.
 
-This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-camunda-hub) for Camunda 8. Camunda Hub is not covered in this manual deployment approach, as this component is not supported on virtual machines. To deploy Camunda Hub, explore the available options for [Kubernetes-based deployments](/self-managed/deployment/helm/install/quick-install.md).
+This guide focuses on setting up the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#camunda-hub-vs-orchestration-cluster) for Camunda 8. Camunda Hub is not covered in this manual deployment approach, as this component is not supported on virtual machines. To deploy Camunda Hub, explore the available options for [Kubernetes-based deployments](/self-managed/deployment/helm/install/quick-install.md).
 
 <CostManagement />
 

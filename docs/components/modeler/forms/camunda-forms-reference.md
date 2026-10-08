@@ -24,4 +24,3 @@ Camunda Forms are powered by the open source [bpmn-io form-js library](https://g
 ## Additional resources
 
 - [Form element library](./form-element-library/forms-element-library.md): An overview of the components supported by Camunda Forms.
-- [SAP design system supported form features and properties](/components/camunda-integrations/sap/btp-plugin.md#supported-form-features-and-properties)

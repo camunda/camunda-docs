@@ -14,6 +14,7 @@ The SDK uses environment variables for configuration, matching the [JS SDK](http
 | Variable                               | Description                                                                                       | Default              |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------- |
 | `CAMUNDA_REST_ADDRESS`                 | Cluster REST API address                                                                          | —                    |
+| `CAMUNDA_REST_ADDRESS_EXACT`           | Use `CAMUNDA_REST_ADDRESS` verbatim, skipping the automatic `/v2` suffix (e.g. behind a gateway)  | `false`              |
 | `CAMUNDA_AUTH_STRATEGY`                | `NONE`, `OAUTH`, or `BASIC`                                                                       | Auto-detected        |
 | `CAMUNDA_CLIENT_ID`                    | OAuth client ID                                                                                   | —                    |
 | `CAMUNDA_CLIENT_SECRET`                | OAuth client secret                                                                               | —                    |
