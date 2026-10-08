@@ -6,7 +6,7 @@ description: "Service tasks within Camunda 8 require you to set a task type and 
 [Service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md) within Camunda 8 require you to set a task type and implement [job workers](/components/concepts/job-workers.md) who perform whatever needs to be performed. This describes that you might want to:
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
-2. Write idempotent workers, because Zeebe is an "at least once" engine and can deliver the same job more than once. Also read and write as little data as possible from/to the process.
+2. Write idempotent workers, because Zeebe uses an at-least-once strategy and can deliver the same job more than once. Also read and write as little data as possible from/to the process.
 3. Write non-blocking (reactive, async) code for your workers if you need to parallelize work. Use blocking code only for use cases where all work can be executed in a serialized manner. Don’t think about configuring thread pools yourself.
 
 ## Organize glue code and workers in process solutions
@@ -53,7 +53,7 @@ In this case, you would spread your workers into different applications. Most of
 
 ## Write idempotent workers
 
-Zeebe is an **"at least once"** execution engine for jobs. A job is only completed when the engine receives and commits the complete job request. If a worker crashes, loses its connection, or exceeds the [job timeout](/components/concepts/job-workers.md#timeouts) before it can complete the job, the engine gives the job to another worker. This guarantees that the job handler runs at least once, but it also means the handler can run more than once for the same job, possibly with side effects already applied.
+Zeebe uses an **at-least-once** execution strategy for jobs. A job is only completed when the engine receives and commits the complete job request. If a worker crashes, loses its connection, or exceeds the [job timeout](/components/concepts/job-workers.md#timeouts) before it can complete the job, the engine gives the job to another worker. This guarantees that the job handler runs at least once, but it also means the handler can run more than once for the same job, possibly with side effects already applied.
 
 :::warning
 Your workers **must** be idempotent. Running the handler more than once for the same job must leave the application in the same state as running it once. Non-idempotent workers can cause duplicate payments, duplicate orders, or other inconsistent data.
