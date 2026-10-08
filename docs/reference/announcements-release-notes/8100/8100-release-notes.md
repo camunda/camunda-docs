@@ -1789,15 +1789,11 @@ This new versioning model will be introduced for Self-Managed deployments with t
 
 <!-- https://github.com/camunda/product-hub/issues/3475 -->
 
-You can now view and choose which cluster you are connected to in Camunda Hub.
+You can now view and choose which environment you are connected to in Camunda Hub.
 
-- Connector-credential names from the cluster autocomplete in your FEEL expressions.
-- Task testing runs against the connected cluster.
-- Choose the cluster from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real environment.
-
-:::note
-In 8.10, the runtime connection targets environments instead of clusters. See [runtime connection targets environments](#runtime-connection-targets-environments).
-:::
+- Connector-credential names from the connected environment autocomplete in your FEEL expressions.
+- Task testing runs against the connected environment.
+- Choose the environment from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real runtime.
 
 ### Connectivity
 
