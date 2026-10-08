@@ -26,7 +26,7 @@ Camunda provides a structured multi-region resilience framework for Self-Managed
 
 Single-region high availability (HA) protects against an availability-zone (AZ) outage. Distribute brokers and partition replicas across at least three AZs so that losing one zone preserves a majority of every partition's replicas. Provide enough surviving capacity, and run secondary storage and application dependencies in HA mode as well.
 
-On Kubernetes, enforce zonal placement explicitly. See [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha).
+On Kubernetes, the default node anti-affinity places broker pods on different nodes, but doesn't ensure those nodes are in different AZs. Enforce zonal placement with [topology spread constraints](/self-managed/deployment/helm/install/production/index.md#topology-spread-constraints). See [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha) for the architecture guidance.
 
 Multi-AZ deployment doesn't protect against a complete region outage. To address a region outage, choose one of the multi-region strategies below.
 
@@ -52,27 +52,27 @@ What each strategy asks of you:
 
 The following table provides a detailed comparison of the available multi-region deployment options:
 
-| Consideration         | Cold Recovery                        | Dual-Region (Elasticsearch)                                | Multi-Region RDBMS                                                        |
-| :-------------------- | :----------------------------------- | :--------------------------------------------------------- | :------------------------------------------------------------------------ |
-| **Regions**           | One, plus cross-region backups       | Exactly two                                                | Two or more. Three or more for region-loss continuity<sup>1</sup>         |
-| **Recovery time**     | ~1–4 hours                           | ~15 minutes                                                | Zeebe: seconds. Client and database recovery can take minutes<sup>2</sup> |
-| **Data loss**         | 15 minutes–4 hours, backup-dependent | RPO 0                                                      | Primary storage: RPO 0. Secondary storage: RPO 0 after replay<sup>3</sup> |
-| **Failover**          | Manual restore                       | Manual failover                                            | Automatic Zeebe recovery. Promote the database writer if it was lost      |
-| **Secondary storage** | Elasticsearch or OpenSearch          | Elasticsearch, one cluster per region                      | One RDBMS, replicated by the database                                     |
-| **Architecture**      | Cross-region backups                 | Stretched cluster, dual exporters                          | One zone-aware cluster, one exporter                                      |
-| **Typical use case**  | Hours-long recovery is acceptable    | Region recovery with operator intervention                 | Processing resumes without a Zeebe operator step                          |
-| **Optimize**          | Supported                            | Supported                                                  | Not available with this RDBMS architecture                                |
-| **Compliance fit**    | Basic business continuity            | Published, auditable recovery runbook                      | Published, auditable runbook, plus processing continuity                  |
-| **Relative cost**     | **$**: No standing recovery region   | **$$$**: Two regions, spare capacity, cross-region traffic | **$$$$**: Three or more regions, cross-region traffic                     |
+| Consideration           | Cold Recovery                                     | Dual-Region (Elasticsearch)                                | Multi-Region RDBMS                                                                            |
+| :---------------------- | :------------------------------------------------ | :--------------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
+| **Regions**             | One, plus cross-region backups                    | Exactly two                                                | Two or more. Three or more for region-loss continuity<sup>1</sup>                             |
+| **Recovery time (RTO)** | ~1–4 hours                                        | ~15 minutes                                                | Zeebe: seconds. Client and database recovery can take minutes<sup>2</sup>                     |
+| **Data loss (RPO)**     | 15 minutes–4 hours, backup-dependent              | RPO 0                                                      | Primary storage: RPO 0. Secondary storage: RPO 0 after replay<sup>3</sup>                     |
+| **Failover**            | Manual restore                                    | Manual failover                                            | Automatic Zeebe recovery. Promote the database writer if it was lost                          |
+| **Secondary storage**   | Elasticsearch or OpenSearch, restored from backup | Elasticsearch, one cluster per region                      | One RDBMS, replicated by the database                                                         |
+| **Architecture**        | Cross-region backups                              | Stretched cluster, dual exporters                          | One zone-aware cluster, one exporter                                                          |
+| **Typical use case**    | Hours-long recovery is acceptable                 | Region recovery with operator intervention                 | Processing resumes without a Zeebe operator step                                              |
+| **Optimize**            | Supported                                         | Supported                                                  | Not available. Optimize requires Elasticsearch or OpenSearch                                  |
+| **Compliance fit**      | Basic business continuity                         | Published, auditable recovery runbook                      | Published, auditable runbook, plus processing continuity                                      |
+| **Relative cost**       | **$**: No standing recovery region                | **$$$**: Two regions, spare capacity, cross-region traffic | **$$$$**: Two or more regions; three or more for region-loss continuity. Cross-region traffic |
 
 Notes for Multi-Region RDBMS:
 
 1. Region-loss continuity requires quorum-preserving replica placement, where no zone holds half the replicas or more, and enough surviving capacity to carry the load. In this reference layout, one zone maps to one region. A zone can also be an AZ.
-2. Zeebe recovers affected partitions in seconds. Client rerouting and database writer promotion can take minutes and depend on your configuration. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
-3. Primary storage contains Zeebe's replicated log and runtime state. Secondary-storage RPO 0 depends on replication and log-retention conditions. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
+2. Multi-Region RDBMS removes the Zeebe recovery procedure, not the recovery window. Zeebe recovers affected partitions in seconds; other partitions continue processing. Client rerouting and database writer promotion can take minutes and depend on your configuration. Full data freshness also requires the exporter backlog to clear. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
+3. Primary storage contains Zeebe's replicated log and runtime state. Secondary-storage RPO 0 depends on the replication-monitoring strategy, an eligible failover target, enough disk capacity to retain the unacknowledged log, and replay completion. See the strategy-specific conditions in [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
 
 Cold Recovery RTO and RPO are bounded by data volume, backup frequency, and operator restore speed. Treat published ranges as planning targets, not contractual commitments.
 
-Dual-Region RTO is based on internal operational tests. Actual times can vary depending on your environment, level of automation, and the manual steps performed during recovery. See [Dual-Region](./dual-region.md#recovery-objectives) for a phase-by-phase breakdown.
+Dual-Region RTO is based on internal operational tests. Actual times can vary depending on your environment, level of automation, and the manual steps performed during recovery. See [Dual-Region](./dual-region.md#recovery-objectives) for the failover and failback recovery objectives.
 
 For Multi-Region RDBMS, measure the actual recovery window, including client reconnection, with a real failover test in your environment.

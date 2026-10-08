@@ -26,7 +26,7 @@ In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe 
 
 With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas. Zeebe keeps processing after a short leader re-election for affected partitions, and you need no Zeebe action to restore service. Throughput can drop while secondary storage recovers. See [processing during secondary-storage recovery](/self-managed/concepts/multi-region/multi-region-rdbms-region-loss.md#processing-during-secondary-storage-recovery). The [dry run](#1-confirm-the-quorum-is-intact) confirms this before you act. The failover procedure mostly reports. It only acts on the database writer, and only when the writer was in the lost region.
 
-<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. A triangle marks an incident, a play icon an operator action, a check a healthy state, and a dash a step that does not exist. In a Dual-Region cluster with Elasticsearch, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone Multi-Region RDBMS cluster, quorum holds and processing continues. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
+<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. A triangle marks an incident, a play icon an operator action, a check a healthy state, and a dash a step that does not exist. In a Dual-Region cluster with Elasticsearch, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone Multi-Region RDBMS cluster, quorum holds. Affected partitions resume processing after a leader re-election; other partitions continue processing. Throughput can drop while secondary storage recovers. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
 
 | Step                             | Dual-region                             | Multi-Region RDBMS                                       |
 | :------------------------------- | :-------------------------------------- | :------------------------------------------------------- |
@@ -74,6 +74,10 @@ Confirm the cluster is healthy before you start, so you can tell what the proced
 ```
 
 ## Handle a region loss
+
+### Monitor secondary-storage recovery {#monitor-secondary-storage-recovery}
+
+Monitor export backlog, replication lag, broker disk usage, and processing throughput throughout the recovery procedure until secondary storage has caught up. For the backlog, use the [exporting backlog](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#exporting-backlog) dashboard panel. See [processing during secondary-storage recovery](/self-managed/concepts/multi-region/multi-region-rdbms-region-loss.md#processing-during-secondary-storage-recovery) for how throttling and disk pressure affect processing.
 
 ### 1. Confirm the quorum is intact
 
