@@ -246,7 +246,7 @@ This command lists all available chart versions and their corresponding applicat
 - Explanation of management/orchestration cluster -->
 
 - [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) — deploy PostgreSQL, Elasticsearch, and Keycloak using official Kubernetes operators for the full platform.
-- [Helm chart Amazon OpenSearch service usage](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) — configure Camunda to use Amazon OpenSearch Service instead of Elasticsearch.
+- [Helm chart Amazon OpenSearch service usage](/self-managed/deployment/helm/configure/database/using-external-opensearch.md): configure Camunda to use Amazon OpenSearch Service instead of Elasticsearch.
 - [Getting started with document handling](/self-managed/concepts/document-handling/overview.md) — configure document storage and management in Camunda 8.
 - [Production installation](/self-managed/deployment/helm/install/production/index.md) — configure and install the helm chart for production environments.
 - [Helm Configuration](/self-managed/deployment/helm/configure/index.md) - customize your installation by modifying the Helm chart configuration.
