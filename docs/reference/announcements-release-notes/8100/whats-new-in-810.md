@@ -592,7 +592,8 @@ During the migration:
 
 - Any process application nested inside a folder moved to the top level of its project.
 - Any files or folders located directly in a project, not inside a process application, were automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. You can rename this application, [move content out of it](#organize-the-general-process-application), or otherwise reorganize it as with any other process application.
-- Git sync and cluster settings on existing process applications migrated unchanged along with your data.
+- Git sync settings on existing process applications migrated unchanged along with your data.
+- The clusters that your process applications connected to deployment stages became [environments](#environments-in-the-migration) of the workspace of their project.
 
 During the migration, Web Modeler was briefly unavailable. Clusters and running processes were unaffected and continued executing normally.
 
@@ -606,7 +607,7 @@ The migration did not affect the following resources:
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Running process instances           | Orchestration Clusters, engines, and running process instances were unaffected. Web Modeler and Camunda Hub remained independent of the runtime path.        |
 | Redeployment                        | Existing deployments remained on their clusters and continued running. The migration did not require redeployment.                                           |
-| Clusters and configuration          | Cluster and deployment settings attached to existing process applications migrated with the data and remained unchanged.                                     |
+| Clusters and configuration          | Clusters and deployment settings remained unchanged. The clusters of your process applications became [environments](#environments-in-the-migration).        |
 | Files, folders, and version history | All files, folders, versions, and history were preserved. Only their location within the project changed.                                                    |
 | Git-synced projects                 | The migration did not modify process applications or their contents. Files connected through Git sync remained in the same repository with the same history. |
 | Desktop Modeler                     | Desktop Modeler was unaffected because it has no direct connection to Web Modeler. Content shared through Git sync was also unaffected.                      |
@@ -614,6 +615,21 @@ The migration did not affect the following resources:
 If you automate against the Web Modeler API, the migration may affect automation that relies on file or folder locations. Web Modeler API v1 returns files and folders from their new locations. Requests that create an item at a project's root are redirected to the new `YOUR PROJECT NAME - General` process application, and the response reflects the new location.
 
 Review any automation that relies on file or folder locations. A small number of folder API integrations were affected more directly. If you use the folder API with process applications, contact support to confirm whether your integration needs updates.
+
+#### Environments in the migration
+
+Before 8.10, you connected up to four clusters to a process application, one for each deployment stage. In 8.10, a project has no deployment stages, so Camunda Hub carries these connections forward as [environments](/components/concepts/environments.md) of the workspace.
+
+For each migrated workspace:
+
+- Every cluster that a process application in the workspace connected to any deployment stage became an environment assigned to the workspace. This also applies to the cluster of each IDP application. A cluster that several stages or applications used is assigned once.
+- If several projects landed in the same workspace, the workspace received the environments of all of them.
+- Projects inherit the environments of their workspace. They have no deployment stages or connected clusters anymore, and the migration doesn't set a default environment for a project. You choose the environment when you deploy.
+- Workspaces you create after the migration start without environments.
+
+An organization admin can change the assigned environments at any time. See [assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md).
+
+In Self-Managed, the upgrade assigns environments in the same way, with some additional considerations. See [environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments).
 
 #### Organize the "General" process application
 
