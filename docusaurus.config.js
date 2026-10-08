@@ -9,6 +9,10 @@ const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
 
+// Same icon Docusaurus appends to external navbar links.
+const externalLinkIcon =
+  '<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" style="margin-left:0.25rem;vertical-align:middle"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg>';
+
 module.exports = {
   // https://docusaurus.io/blog/releases/3.6#adoption-strategy
   future: {
@@ -460,10 +464,23 @@ module.exports = {
               className: "dropdown-unmaintained-versions",
               value: "<b>Unmaintained versions</b>",
             },
-            ...unmaintainedVersions.map((version) => ({
-              label: version.label,
-              href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
-            })),
+            ...unmaintainedVersions
+              .filter((version) => !version.collapsed)
+              .map((version) => ({
+                label: version.label,
+                href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
+              })),
+            {
+              type: "html",
+              className: "dropdown-older-versions",
+              value: `<details><summary>Older versions</summary>${unmaintainedVersions
+                .filter((version) => version.collapsed)
+                .map(
+                  (version) =>
+                    `<a class="dropdown__link" target="_blank" rel="noopener noreferrer" aria-label="${version.label} (opens in a new window)" href="https://unsupported.docs.camunda.io/${version.urlSuffix}/">${version.label}${externalLinkIcon}</a>`
+                )
+                .join("")}</details>`,
+            },
           ],
         },
         {
