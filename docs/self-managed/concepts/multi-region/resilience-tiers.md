@@ -79,7 +79,7 @@ Region-loss continuity requires quorum-preserving replica placement, where no zo
 
 #### Recovery time
 
-Multi-Region RDBMS removes the Zeebe recovery procedure, not the recovery window. Zeebe recovers affected partitions in seconds; other partitions continue processing. Client rerouting and database writer promotion can take minutes and depend on your configuration. Full data freshness also requires the exporter backlog to clear. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
+Multi-Region RDBMS removes the Zeebe recovery procedure, not the recovery window. Zeebe recovers affected partitions in seconds; other partitions continue processing. Client rerouting and database writer promotion can take minutes and depend on your configuration. Operate, Tasklist, and APIs that read secondary storage may show outdated data until the exporter catches up with process execution. See [recovery objectives](./multi-region-rdbms-region-loss.md#recovery-objectives).
 
 #### Data loss and replay
 

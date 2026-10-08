@@ -16,7 +16,7 @@ Learn how a [Multi-Region RDBMS](./multi-region-rdbms.md) cluster behaves when i
 
 <RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas and the database writer. Paris, with two replicas and the standby, and zurich, with one replica and no database, keep three of five replicas, so the quorum holds." />
 
-Losing one region out of three or more removes that region's replicas of every partition. With a `2-2-1` replica layout across three regions, losing one region removes one or two replicas of each partition. The remaining replicas still form a majority if every declared zone runs and no zone holds half the replicas or more. The cluster then keeps its quorum. Processing resumes without any operator step. Partitions whose leader was in the lost region pause for a Raft re-election and then continue. Partitions led elsewhere continue without interruption.
+With a `2-2-1` replica layout across three regions, each partition has five replicas. Losing one region leaves three or four replicas per partition, preserving quorum as long as the surviving replicas remain available. Partitions whose leader was in the lost region briefly pause while a new leader is elected; other partitions continue processing. No operator action is needed to restore Zeebe quorum.
 
 :::warning Two things need attention
 
