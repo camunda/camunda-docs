@@ -199,6 +199,11 @@ RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/git-sync/?$ /docs/next/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
 
+# Element template links still pointing at /next
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-dynamodb/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/ [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.10: content moves introduced prior to the release of version 8.10.
 #---------------------------------------------------------------------------------
