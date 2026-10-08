@@ -174,7 +174,7 @@ The Orchestration Cluster can be configured to authenticate with OIDC by connect
 
 Each Physical Tenant in an Orchestration Cluster is served by one Optimize release, deployed with `global.topology.mode: optimize`. That release deploys Optimize and nothing else.
 
-For why each tenant, including the default tenant, needs its own release, and what each release requires, see [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
+For why each tenant, including the default tenant, needs its own release, see [why Optimize is its own release](/self-managed/deployment/helm/install/topology/optimize-release.md#why-optimize-is-its-own-release). For what each release requires, see [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
 
 Place Optimize releases in the Orchestration Cluster namespace or in their own namespace. Ingress resources are namespace-scoped, so a separate namespace needs its own Ingress and subdomain.
 
