@@ -16,7 +16,7 @@ Learn how a [Multi-Region RDBMS](./multi-region-rdbms.md) cluster behaves when i
 
 <RegionLossDiagram role="img" title="Losing london in a 2-2-1 layout. London held two replicas and the database writer. Paris, with two replicas and the standby, and zurich, with one replica and no database, keep three of five replicas, so the quorum holds." />
 
-With a `2-2-1` replica layout across three regions, each partition has five replicas. Losing one region leaves three or four replicas per partition, preserving quorum as long as the surviving replicas remain available. Partitions whose leader was in the lost region briefly pause while a new leader is elected; other partitions continue processing. No operator action is needed to restore Zeebe quorum.
+With a `2-2-1` replica layout across three regions, each partition has five replicas. Losing one region leaves three or four replicas per partition, preserving quorum as long as every declared zone runs and no zone holds half the replicas or more. Partitions whose leader was in the lost region briefly pause while a new leader is elected; other partitions continue processing. No operator action is needed to restore Zeebe quorum.
 
 :::warning Two things need attention
 
@@ -81,7 +81,7 @@ The window is longer here, because the new leader and the rerouted client can bo
 
 ## Processing during secondary-storage recovery {#processing-during-secondary-storage-recovery}
 
-Pausing the exporter stops secondary-storage updates but does not directly throttle processing.
+Pausing the exporter stops secondary-storage updates but doesn't directly throttle processing.
 
 If [write flow control with dynamic throttling](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#enable-flow-control) is enabled, it adjusts the write rate based on the exporting rate and backlog. During secondary-storage recovery, a growing backlog can reduce processing throughput and increase client backpressure. Write flow control is disabled by default in Self-Managed.
 
