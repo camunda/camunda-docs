@@ -17,13 +17,14 @@ The reference architecture creates two identically configured ECS Fargate cluste
 
 - Active-active deployment across two AWS regions (default `eu-west-2` and `eu-west-3`; pick your own pair).
 - Eight Zeebe brokers (four per region) with `cluster_size=8`, `replication_factor=4`, and `partition_count=8`. Asymmetric initial contact points use ECS Service Connect locally and the cross-region NLB for inter-region traffic.
-- Aurora Global Database — single writer endpoint per cluster, with the [AWS JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper) `failover` plugin enabled for automatic reconnection after a writer change.
+- Aurora Global Database with a single writer endpoint per cluster, and with the [AWS JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper) `failover` plugin enabled for automatic reconnection after a writer change. PostgreSQL is the default engine; MySQL is available through [`db_engine`](#secondary-storage-engine).
+- A zone-aware Zeebe cluster: each AWS region is a zone, and broker IDs take the form `<region>_<n>` (for example, `eu-west-2_0`). Failover and failback add or remove a whole zone through the [Zones API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#zones-api).
 - Cross-region connectivity via [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) (recommended default) or [AWS Transit Gateway](https://aws.amazon.com/transit-gateway/) for Enterprise scenarios.
 - [Route 53 Resolver](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html) endpoints to forward Cloud Map service-discovery DNS queries across regions.
 - Camunda 8.10 or later. The unified Orchestration Cluster `/v2/*` REST API requires Basic authentication; see [Verify connectivity to Camunda 8](#verify-connectivity-to-camunda-8).
 
 :::note Active-active scope
-Active-active in this guide refers to the Zeebe data plane: one stretched cluster whose brokers and partitions live in both regions, accepting and processing work concurrently from either region. The Aurora-backed secondary storage tier is active-standby — region 0 hosts the writer and region 1 hosts a cross-region reader. Promoting region 1 to writer is an explicit step during failover, not an automatic property of the deployment.
+Active-active in this guide refers to the Zeebe data plane: one stretched cluster whose brokers and partitions live in both regions, accepting and processing work concurrently from either region. The Aurora-backed secondary storage tier is active-standby: region 0 hosts the writer and region 1 hosts a cross-region reader. Promoting region 1 to writer is an explicit operator step during failover, not an automatic property of the deployment. See [Recover when the Aurora writer's region is lost](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost).
 :::
 
 ```mermaid
@@ -37,13 +38,12 @@ architecture-beta
     service ingress0(logos:aws-elb)["ALB and NLB ingress"] in r0
     service tasks0(logos:aws-ecs)["ECS Fargate workloads"] in r0
     service s3id0(logos:aws-s3)["S3 broker-ID lease"] in r0
-    service s3bk0(logos:aws-s3)["S3 backup repository"] in r0
+    service s3bk0(logos:aws-s3)["S3 backup repository (shared)"] in r0
     service peer0(internet)["Cross-region link"] in r0
 
     service ingress1(logos:aws-elb)["ALB and NLB ingress"] in r1
     service tasks1(logos:aws-ecs)["ECS Fargate workloads"] in r1
     service s3id1(logos:aws-s3)["S3 broker-ID lease"] in r1
-    service s3bk1(logos:aws-s3)["S3 backup repository"] in r1
     service peer1(internet)["Cross-region link"] in r1
 
     service db_primary(logos:aws-rds)["Primary writer · eu-west-2"] in aurora_global
@@ -62,9 +62,10 @@ architecture-beta
 
     ingress1:B -- T:tasks1
     tasks1:R -- L:s3id1
-    tasks1:B -- T:s3bk1
     tasks1:L -- R:peer1
 ```
+
+Both regions write backups to the single S3 backup bucket in region 0. Each region keeps its own S3 bucket for the broker-ID lease.
 
 :::note
 This reference architecture is not a turnkey module. Clone the repository and adapt it to your environment — you are responsible for operating and maintaining the resulting infrastructure.
@@ -86,7 +87,7 @@ Your AWS IAM principal needs permissions for the following services in both targ
 - EFS (file systems, mount targets)
 - CloudWatch Logs (log groups)
 - Secrets Manager (secret creation)
-- Systems Manager Session Manager (`ssmmessages:*`) — required only for the [Session Manager access path](#method-b--session-manager-port-forward)
+- Systems Manager Session Manager (`ssm:StartSession`), required for the [Session Manager access path](#method-b--session-manager-port-forward) and the [failover and failback scripts](./aws-ecs-dual-region-ops.md)
 - Route 53 Resolver — required only when `enable_cross_region_dns_resolver = true`: `route53resolver:CreateResolverEndpoint`, `route53resolver:CreateResolverRule`, `route53resolver:AssociateResolverRule`
 
 ### AWS service quotas
@@ -101,14 +102,14 @@ Dual-region deployments may require quota increases. Before deploying, verify th
 
 ### Tooling
 
-| Tool                     | Purpose                                                                                                                                                                                            |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `terraform`              | Infrastructure provisioning. Pin to the version in [`.tool-versions`](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions).                                          |
-| `aws` CLI v2             | AWS resource inspection and authentication.                                                                                                                                                        |
-| `jq`                     | JSON parsing in verification commands.                                                                                                                                                             |
-| `session-manager-plugin` | Required only for the [Session Manager access path](#method-b--session-manager-port-forward). Install with `brew install --cask session-manager-plugin` on macOS or follow the [AWS instructions]. |
-| `just` (optional)        | Task runner for common operations in the reference repository.                                                                                                                                     |
-| `asdf` (optional)        | Tool version management.                                                                                                                                                                           |
+| Tool                     | Purpose                                                                                                                                                                                                                                                                 |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `terraform`              | Infrastructure provisioning. The infra layer requires Terraform 1.9 or later. Pin to the version in [`.tool-versions`](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions).                                                              |
+| `aws` CLI v2             | AWS resource inspection and authentication.                                                                                                                                                                                                                             |
+| `jq`                     | JSON parsing in verification commands and the failover and failback scripts.                                                                                                                                                                                            |
+| `session-manager-plugin` | Required for the [Session Manager access path](#method-b--session-manager-port-forward) and for the [failover and failback scripts](./aws-ecs-dual-region-ops.md). Install with `brew install --cask session-manager-plugin` on macOS or follow the [AWS instructions]. |
+| `just` (optional)        | Task runner for common operations in the reference repository.                                                                                                                                                                                                          |
+| `asdf` (optional)        | Tool version management.                                                                                                                                                                                                                                                |
 
 [AWS instructions]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html
 
@@ -149,12 +150,9 @@ terraform/
 | Infra | `terraform/infra/` | Aurora Global Database, ECS clusters, ALB, NLB, KMS, S3, EFS, Secrets Manager, IAM            | Low              |
 | App   | `terraform/app/`   | Camunda orchestration cluster and Connectors task definitions, plus the matching ECS services | High             |
 
-By default, the paths between layers are relative:
+### Terraform state backend
 
-- `terraform/infra/` reads `../vpc/terraform.tfstate`.
-- `terraform/app/` reads `../infra/terraform.tfstate`.
-
-If you use S3 remote backends, override `vpc_state_path` in `terraform/infra/terraform.tfvars` and `infra_state_path` in `terraform/app/terraform.tfvars` to point to the correct S3 URIs.
+All three layers keep their state in one S3 bucket that you create beforehand. The state key of each layer is `<prefix><layer>/terraform.tfstate`, and the infra and app layers read the previous layer's state from that key through `terraform_remote_state`. All three layers must therefore use the same bucket and key prefix. [Step 1](#step-1--configure) sets them once for every layer.
 
 ## Deploy time and cost
 
@@ -205,6 +203,21 @@ BYO-VPC is the preferred path for customers integrating with an existing AWS lan
 
 The full validation contract — including the plan-time checks that fail with a descriptive error when a constraint is missing — lives in [`terraform/vpc/README.md`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/vpc/README.md) in the reference repository.
 
+### Secondary storage engine
+
+The `db_engine` variable in `terraform/infra/terraform.tfvars` selects the Aurora engine for RDBMS secondary storage. It drives the Aurora clusters, the security group rules, the IAM database user seeding, and the generated JDBC URL. Choose the engine before the first `terraform apply`. Camunda doesn't support in-place migration between secondary storage backends, so switching engines later means creating a new deployment.
+
+| `db_engine` value      | Aurora engine       | Port |
+| ---------------------- | ------------------- | ---- |
+| `postgresql` (default) | `aurora-postgresql` | 5432 |
+| `mysql`                | `aurora-mysql`      | 3306 |
+
+:::warning
+Changing `db_engine` on an existing deployment replaces the global cluster and both regional clusters without a final snapshot. All secondary storage data is permanently lost.
+:::
+
+The published Camunda image doesn't include the MySQL JDBC driver. To use `db_engine = "mysql"`, build a custom image that adds it. See [user-supplied drivers](/self-managed/deployment/manual/rdbms/configuration.md#user-supplied-drivers-oracle-mysql).
+
 ### Secondary storage replication lag
 
 Aurora Global Database replicates asynchronously, so promoting a new writer can leave it missing whatever had not reached it yet. Camunda retains the source records needed to recover that gap; Aurora replication alone does not prevent it.
@@ -232,7 +245,20 @@ An unsupported vendor or a non-global Aurora instance fails while the exporter i
 
 ### Step 1 — Configure
 
-Create a `terraform.tfvars` file in each of the three Terraform directories before running `apply`.
+Set the Terraform state backend once, from `aws/containers/ecs-dual-region-fargate`, in the shell you use for the following steps. The infra and app layers read the `TF_VAR_terraform_backend_*` variables, and `terraform init` reads `backend.hcl` in every layer:
+
+```bash
+export TF_VAR_terraform_backend_bucket="<your-tf-state-bucket>"
+export TF_VAR_terraform_backend_region="<tf-state-bucket-region>" # defaults to eu-central-1
+export TF_VAR_terraform_backend_key_prefix="<your-key-prefix>/"   # same prefix for all three layers
+
+cat > backend.hcl <<EOF
+bucket = "${TF_VAR_terraform_backend_bucket}"
+region = "${TF_VAR_terraform_backend_region}"
+EOF
+```
+
+Then create a `terraform.tfvars` file in each of the three Terraform directories.
 
 #### `terraform/vpc/terraform.tfvars`
 
@@ -270,34 +296,38 @@ region_1_private_route_table_ids = ["rtb-yyy"]
 #### `terraform/infra/terraform.tfvars`
 
 :::warning
-The infra layer takes the `registry_username` and `registry_password` for `registry.camunda.cloud`. Do not commit `terraform.tfvars` to source control. Add `*.tfvars` to your `.gitignore`, or supply secrets via `TF_VAR_registry_username` / `TF_VAR_registry_password` environment variables or a secrets backend such as HashiCorp Vault.
+If you pull the Camunda image from `registry.camunda.cloud`, the infra layer takes your `registry_username` and `registry_password`. Do not commit `terraform.tfvars` to source control. Add `*.tfvars` to your `.gitignore`, or supply secrets via `TF_VAR_registry_username` / `TF_VAR_registry_password` environment variables or a secrets backend such as HashiCorp Vault.
 :::
 
 ```hcl
-cluster_name           = "<your-cluster-name>"   # must match vpc layer
-aws_profile            = "<your-aws-profile>"    # optional; omit when authenticating via env vars
-region_0               = "<primary-region>"
-region_1               = "<secondary-region>"
-s3_force_destroy       = true                    # default; flip to false before running real workloads — see Cleanup
-limit_access_to_cidrs  = ["<your-source-cidr>"]  # required; restrict to the CIDR range that should reach the ALB
-registry_username      = "<your-registry-user>"  # Camunda registry credentials for registry.camunda.cloud
-registry_password      = "<your-registry-pass>"
+cluster_name                 = "<your-cluster-name>"   # must match vpc layer
+aws_profile                  = "<your-aws-profile>"    # optional; omit when authenticating via env vars
+region_0                     = "<primary-region>"
+region_1                     = "<secondary-region>"
+db_engine                    = "postgresql"            # default; see Secondary storage engine
+s3_force_destroy             = true                    # default; flip to false before running real workloads (see Cleanup)
+limit_access_to_cidrs        = ["<your-source-cidr>"]  # defaults to 0.0.0.0/0; restrict to the CIDR range that should reach the load balancers
+registry_username            = "<your-registry-user>"  # optional; only needed for images from registry.camunda.cloud
+registry_password            = "<your-registry-pass>"
 ```
 
 #### `terraform/app/terraform.tfvars`
 
 ```hcl
-aws_profile      = "<your-aws-profile>" # optional; omit when authenticating via env vars
-camunda_image    = "registry.camunda.cloud/camunda/camunda:<camunda-version>"      # 8.10 or later
-connectors_image = "camunda/connectors-bundle:<connectors-bundle-version>"          # for example, 8.10.0-alpha2
-default_tags     = { Environment = "reference", Team = "<your-team>" }
+aws_profile                  = "<your-aws-profile>" # optional; omit when authenticating via env vars
+region_0                     = "<primary-region>"   # must match the vpc and infra layers
+region_1                     = "<secondary-region>"
+camunda_image                = "registry.camunda.cloud/camunda/camunda:<camunda-version>" # 8.10 or later
+connectors_image             = "camunda/connectors-bundle:<connectors-bundle-version>"     # pulled from Docker Hub without registry credentials
+default_tags                 = { Environment = "reference", Team = "<your-team>" }
 ```
 
 ### Step 2 — Deploy VPC
 
 ```bash
 cd terraform/vpc
-terraform init
+terraform init -backend-config=../../backend.hcl \
+  -backend-config="key=${TF_VAR_terraform_backend_key_prefix}vpc/terraform.tfstate"
 terraform plan
 terraform apply
 ```
@@ -309,7 +339,8 @@ terraform apply
 
 ```bash
 cd ../infra
-terraform init
+terraform init -backend-config=../../backend.hcl \
+  -backend-config="key=${TF_VAR_terraform_backend_key_prefix}infra/terraform.tfstate"
 terraform plan
 terraform apply
 ```
@@ -326,7 +357,8 @@ After `apply` completes, a one-time `db_seed` ECS task runs automatically to cre
 
 ```bash
 cd ../app
-terraform init
+terraform init -backend-config=../../backend.hcl \
+  -backend-config="key=${TF_VAR_terraform_backend_key_prefix}app/terraform.tfstate"
 terraform plan
 terraform apply
 ```
@@ -344,16 +376,17 @@ If either check fails, do not proceed to verification. Inspect CloudWatch Logs f
 
 ### Step 5 — Verify
 
-Run the helper script from the reference repository to validate that the deployment is healthy in both regions:
+Run the helper script from the reference repository to validate that the deployment is healthy in both regions. The script checks ECS service counts, the Zeebe topology, and Aurora Global Database status, and starts a test process instance. It sources `procedure/export_environment_prerequisites.sh` automatically to read the Terraform outputs:
 
 ```bash
-cd ../../  # back to the ecs-dual-region-fargate directory
+cd ../../  # back to aws/containers/ecs-dual-region-fargate
 ./procedure/verify_dual_region.sh
 ```
 
 When `enable_cross_region_dns_resolver = true`, also confirm that cross-region service-discovery DNS works:
 
 ```bash
+source ./procedure/export_environment_prerequisites.sh
 ./procedure/test_cross_region_dns.sh
 ```
 
@@ -391,7 +424,7 @@ The verification commands use `http://` because TLS is not configured by default
 
 ### Step 6 — Cleanup
 
-Destroy resources in reverse order to respect layer dependencies:
+If you failed over and the Aurora writer is still in region 1, move it back first with `./procedure/failback.sh --failed-region 0 --switch-writer` (see [Fail back to both regions](./aws-ecs-dual-region-ops.md#fail-back-to-both-regions)). Then destroy resources in reverse order to respect layer dependencies:
 
 ```bash
 cd terraform/app && terraform destroy
@@ -432,8 +465,8 @@ Without these additions, traffic is transmitted in cleartext and is therefore in
    - ALB:80
      - `/*` routes to the Orchestration Cluster UI and REST API.
      - `/connectors*` routes to the Connectors.
-   - ALB:9600 (optional, not recommended to be exposed publicly)
-     - `/*` routes to the Orchestration Cluster management endpoints.
+   - ALB:9600
+     - Not forwarded to the management API (see [Endpoint reference](#endpoint-reference)).
      - Connectors combines the management port with the web server by default.
    - NLB:26500 (TCP)
      - Exposes the Orchestration Cluster Zeebe Gateway over gRPC. Retrieve the endpoint with `terraform output -raw region_0_nlb_grpc_endpoint` or `terraform output -raw region_1_nlb_grpc_endpoint`.
@@ -536,14 +569,16 @@ In another shell, open the UI and log in as `admin` with `$ADMIN_PASS`:
 open http://localhost:8080
 ```
 
+To reach the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) on port 9600, start the same session with `{"portNumber":["9600"],"localPortNumber":["9600"]}`, then call `http://localhost:9600/actuator/...`. The [failover and failback scripts](./aws-ecs-dual-region-ops.md) open this tunnel for you.
+
 ### Endpoint reference
 
-| Endpoint                  | Port  | Protocol | Purpose                                                 |
-| ------------------------- | ----- | -------- | ------------------------------------------------------- |
-| ALB (region 0/1)          | 80    | HTTP     | Camunda REST API and Web UI (routes to container 8080). |
-| ALB (region 0/1)          | 9600  | HTTP     | Management and metrics.                                 |
-| NLB external (region 0/1) | 26500 | TCP      | Zeebe gRPC for clients.                                 |
-| NLB internal (region 0/1) | 26502 | TCP      | Zeebe Raft, cross-region, private.                      |
+| Endpoint                  | Port  | Protocol | Purpose                                                                                                                                                                                                                                                          |
+| ------------------------- | ----- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ALB (region 0/1)          | 80    | HTTP     | Camunda REST API and Web UI (routes to container 8080).                                                                                                                                                                                                          |
+| ALB (region 0/1)          | 9600  | HTTP     | Listener with a fixed empty response. No rule forwards it to the management API, because `enable_alb_http_management_listener_rule = false` in `terraform/app/camunda.tf`. Reach the management API through [Method B](#method-b--session-manager-port-forward). |
+| NLB external (region 0/1) | 26500 | TCP      | Zeebe gRPC for clients.                                                                                                                                                                                                                                          |
+| NLB internal (region 0/1) | 26502 | TCP      | Zeebe Raft, cross-region, private.                                                                                                                                                                                                                               |
 
 ## Operations
 
@@ -551,7 +586,7 @@ open http://localhost:8080
 
 The general [backup and restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies, with two dual-region specifics to keep in mind:
 
-- **Backups are per region.** Each orchestration cluster writes to its local S3 backup bucket via `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`. The infra layer exposes both bucket names as outputs: `backup_bucket_region_0_name` and `backup_bucket_region_1_name`. Trigger backups against either region's API; ensure your backup tooling reads the correct bucket for that region.
+- **Backups share one bucket.** The infra layer creates a single S3 backup bucket in region 0, exposed as the `backup_bucket_region_0_name` output. Both orchestration clusters write to it through `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`, and region 1 brokers set `CAMUNDA_DATA_BACKUP_S3_REGION` to region 0 so they reach the bucket cross-region. All backup data stays in one place, whichever region you trigger the backup from. If you lose region 0, you lose access to the backup bucket until the region recovers, so plan S3 replication yourself if you need the backups in both regions.
 - **Restore is not exposed by the dual-region app layer.** The underlying orchestration-cluster module supports an init-container restore (`restore_enabled`, `restore_backup_id` — see [restore options when using RDBMS](/self-managed/operational-guides/backup-restore/rdbms/restore-application.md#restore-options)), but these variables are not surfaced in `terraform/app/camunda.tf` in this reference. Enabling restore for a dual-region deployment requires customizing the app layer to pass the restore variables to both regional module invocations and to coordinate broker IDs that span both regions. Treat dual-region restore as an advanced scenario; validate it against your specific topology before relying on it.
 
 :::note
@@ -560,46 +595,7 @@ Camunda recommends restoring to a fresh cluster rather than reusing an existing 
 
 ### Failover and failback
 
-The reference repository ships helper scripts under `aws/containers/ecs-dual-region-fargate/procedure/`:
-
-```bash
-# Export the variables the scripts read from the Terraform outputs
-source ./procedure/export_environment_prerequisites.sh
-
-# Fail region 0: scale its ECS services to 0, force-remove its zone,
-# and switch the Aurora writer to region 1 if the writer was in region 0
-./procedure/failover.sh --failed-region 0
-
-# Validate the zone removal without changing anything
-./procedure/failover.sh --failed-region 0 --dry-run
-
-# The region's tasks are already down: skip the ECS scale-down
-./procedure/failover.sh --failed-region 0 --keep-tasks
-
-# The region is gone, its Aurora cluster included: also skip the writer switch
-./procedure/failover.sh --failed-region 0 --keep-tasks --keep-writer
-
-# Restore region 0: scale it up and re-add its zone
-./procedure/failback.sh --failed-region 0
-
-# Also switch the Aurora writer back to region 0
-./procedure/failback.sh --failed-region 0 --switch-writer
-```
-
-The writer switch is a planned switchover, so it needs the failed region's Aurora cluster to still be available. The script returns only after the global cluster reports the switchover complete.
-
-If the region is gone, its Aurora cluster included, run `failover.sh` with `--keep-writer`. The script removes the zone, leaves the writer where it is, and finishes. Camunda keeps processing in the surviving region, and exporting to secondary storage waits until a writer is available again. Recover Aurora with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html). The scripts don't automate it, because it can lose data that was not replicated yet.
-
-Without `--keep-writer`, `failover.sh` still removes the zone, then stops with one of these errors instead of switching the writer:
-
-```text
-[<time>] ERROR: The Aurora writer in <failed-region> is <status>, so a planned switchover cannot run.
-[<time>] ERROR: The planned switchover to <surviving-region> did not complete.
-```
-
-The second one appears when AWS still reports the old writer as available early in an outage, then rejects the switchover or does not finish it.
-
-Read the scripts in the reference repository for the exact actions and prerequisites. Failover is manual — no automated health-check-driven promotion is included.
+To recover from a region loss, follow the [ECS dual-region operational procedure](./aws-ecs-dual-region-ops.md). It fails over and back with the `failover.sh` and `failback.sh` scripts from the reference repository.
 
 ## Troubleshooting
 
@@ -623,7 +619,7 @@ ECS tasks are not reachable from outside the VPC without a workaround. Options i
 - Run an EC2 or ECS debug task inside the same VPC and call the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) over the private network.
 - Connect via an [AWS Client VPN](https://aws.amazon.com/vpn/client-vpn/) attached to the VPC.
 - Use Lambda or Step Functions to invoke the API.
-- Temporarily expose the management API on the ALB (not recommended for production).
+- Temporarily forward the ALB's port 9600 to the management API (not recommended for production). See [Endpoint reference](#endpoint-reference).
 
 To open an interactive shell on a running task via [AWS ECS Exec](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec-run.html):
 
@@ -642,12 +638,51 @@ aws ecs execute-command \
   --interactive
 ```
 
+### `terraform destroy` hangs on the Aurora resources
+
+**Symptom:** `terraform destroy` in `terraform/infra` doesn't finish while it deletes the Aurora Global Database resources.
+
+**Cause:** the Aurora writer is no longer in region 0, for example after an [unplanned Aurora recovery](./aws-ecs-dual-region-ops.md#recover-when-the-aurora-writers-region-is-lost), and Terraform still expects the original topology.
+
+**Fix:** move the writer back with `./procedure/failback.sh --failed-region 0 --switch-writer`, then run `terraform destroy` again. If that's not possible, remove the Aurora resources manually and drop them from the Terraform state:
+
+```bash
+# 1. Detach both clusters from the global cluster: the secondary (region 0) first, then the writer (region 1)
+aws rds remove-from-global-cluster --region <region-0> \
+  --global-cluster-identifier <global-id> \
+  --db-cluster-identifier <region-0-cluster-arn>
+aws rds remove-from-global-cluster --region <region-1> \
+  --global-cluster-identifier <global-id> \
+  --db-cluster-identifier <region-1-cluster-arn>
+
+# 2. Delete the instances in both regions (skip the final snapshot only for non-production)
+aws rds delete-db-instance --db-instance-identifier <r0-instance> --skip-final-snapshot --region <region-0>
+aws rds delete-db-instance --db-instance-identifier <r1-instance> --skip-final-snapshot --region <region-1>
+
+# 3. Wait for the instances to be deleted, then delete the clusters
+aws rds delete-db-cluster --db-cluster-identifier <r0-cluster> --skip-final-snapshot --region <region-0>
+aws rds delete-db-cluster --db-cluster-identifier <r1-cluster> --skip-final-snapshot --region <region-1>
+
+# 4. Delete the global cluster
+aws rds delete-global-cluster --global-cluster-identifier <global-id>
+
+# 5. Remove the Aurora resources from the Terraform state and continue the destroy
+terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_cluster_instance.primary[0]'
+terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_cluster_instance.secondary[0]'
+terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_cluster.primary'
+terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_cluster.secondary'
+terraform -chdir=terraform/infra state rm 'module.aurora_global[0].aws_rds_global_cluster.this'
+terraform -chdir=terraform/infra destroy
+```
+
 For general troubleshooting, see the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
 
 ## Known limitations
 
-- **Node ID assignment.** Even/odd broker ID assignment per region is pending follow-up work.
-- **Manual failover only.** No automated health-check-driven failover is included.
+- **Experimental.** This reference architecture is intended for learning and validation. Validate it against your own requirements before you run production workloads on it.
+- **Manual failover only.** No automated health-check-driven failover is included. Run the [failover and failback scripts](./aws-ecs-dual-region-ops.md) yourself.
+- **Components.** Only the Orchestration Cluster and Connectors are deployed. Management Identity (Keycloak), Web Modeler, and Console aren't included, and Optimize isn't available with RDBMS secondary storage.
+- **ECS deployment circuit breaker disabled.** The circuit breaker is off for both orchestration cluster services. On a first deploy, brokers fail ECS health checks for a while as Aurora IAM authentication warms up and the cross-region Raft quorum forms, which takes about 20 minutes. The circuit breaker would roll the deployment back before the cluster recovers. With the breaker off, ECS keeps retrying until the 30-minute `service_timeouts.create` deadline. Once the cluster is stable, you can re-enable it for later deployments.
 
 ## Next steps
 
