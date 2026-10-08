@@ -426,9 +426,9 @@ module.exports = {
       },
     },
     announcementBar: {
-      id: "camunda8",
+      id: "camunda-8-10-latest",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign up</a></b> for a free account to start orchestrating your business processes today.',
+        "<b>Camunda 8.10 is now the latest version of the documentation.</b> Make sure you are viewing the correct version, and update any bookmarks or saved links as required.",
       backgroundColor: "#171717",
       textColor: "#fff",
       isCloseable: true,
