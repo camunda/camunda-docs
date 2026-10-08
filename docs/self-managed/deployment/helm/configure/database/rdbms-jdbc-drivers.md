@@ -104,16 +104,18 @@ After loading JDBC drivers into pods, run the validation checklist in [validate 
 This is a custom image approach. For production, prefer the init-container method to stay aligned with supported Helm patterns.
 :::
 
+Replace `<camunda-version>` with the Camunda version you deploy. Use the same value in the Docker tags and in the Helm `tag`.
+
 ```dockerfile
-FROM camunda/camunda:8.9.0
+FROM camunda/camunda:<camunda-version>
 ADD ojdbc11.jar /driver-lib/ojdbc11.jar
 ```
 
 Build and push:
 
 ```sh
-docker build -t internal-registry/orchestration:8.9.0 .
-docker push internal-registry/orchestration:8.9.0
+docker build -t internal-registry/orchestration:<camunda-version> .
+docker push internal-registry/orchestration:<camunda-version>
 ```
 
 Configure in Helm:
@@ -127,7 +129,7 @@ orchestration:
       enabled: true
   image:
     repository: internal-registry/orchestration
-    tag: 8.9.0
+    tag: <camunda-version>
   data:
     secondaryStorage:
       type: rdbms

@@ -75,6 +75,7 @@ The Cluster API logically removes a tenant that you have already removed from co
 To delete a tenant's data, take these steps in order:
 
 1. Purge the tenant with `POST /actuator/cluster/purge?physicalTenant={physicalTenantId}`. Always include the `physicalTenant` parameter. Without it, the purge removes the data of every Physical Tenant. See [data purge](/self-managed/operational-guides/data-purge.md).
+1. Wait until the purge completes. The purge is asynchronous: poll `GET /actuator/cluster` until `lastChange.id` reaches the `changeId` the purge returned, as shown in [data purge](/self-managed/operational-guides/data-purge.md). The cluster rejects another configuration change while one is in progress.
 1. Remove the tenant from configuration and apply the change with a rolling restart.
 1. Logically remove the tenant with the endpoint above.
 
