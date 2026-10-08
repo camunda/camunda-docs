@@ -626,6 +626,34 @@ Cancel a process instance
 
 ---
 
+### `suspend`
+
+Suspend a process instance (Camunda 8.10+)
+
+**Usage:** `c8ctl suspend <resource> <key>`
+
+**Resources:** pi (process-instance)
+
+**Positional arguments:**
+
+- **process-instance:** `<key>` (required)
+
+---
+
+### `resume`
+
+Resume a suspended process instance (Camunda 8.10+)
+
+**Usage:** `c8ctl resume <resource> <key>`
+
+**Resources:** pi (process-instance)
+
+**Positional arguments:**
+
+- **process-instance:** `<key>` (required)
+
+---
+
 ### `await`
 
 Create and await process instance completion (server-side waiting)
