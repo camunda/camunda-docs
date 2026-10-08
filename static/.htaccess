@@ -232,9 +232,6 @@ RewriteRule ^docs/components/hub/organization/manage-clusters/cluster-capacity/?
 RewriteRule ^docs/components/hub/organization/manage-clusters/configure-audit-log/?$ /docs/components/saas/clusters/configure-audit-log/ [R=301,L]
 RewriteRule ^docs/components/hub/organization/manage-clusters/troubleshoot-clusters/?$ /docs/components/saas/clusters/troubleshoot-clusters/ [R=301,L]
 
-
-# Databricks connector doc moved into its own subfolder alongside the new fraud detection use case doc.
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/databricks/?$ /docs/components/connectors/out-of-the-box-connectors/databricks/databricks/ [R=301,L]
 # Adjust enable secure connectivity path to drop the "console" reference
 RewriteRule ^docs/components/saas/secure-connectivity/secure-connectivity-console-setup/?$ docs/components/saas/secure-connectivity/enable-secure-connectivity/ [R=301,L]
 
