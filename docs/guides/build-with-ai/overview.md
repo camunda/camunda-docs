@@ -34,7 +34,7 @@ Build Camunda solutions with ProcessOS Harness, agentic orchestration, and MCP i
 </div>
 
 <div style={{display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '50px'}}>
-<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Re-engineer processes with ProcessOS Harness" href="../../components/process-os-harness/overview/">Re-engineer processes with ProcessOS Harness</a>
+<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Re-engineer processes with ProcessOS Harness" href="../../../components/process-os-harness/overview/">Re-engineer processes with ProcessOS Harness</a>
 <a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Build with Camunda" href={useBaseUrl('/build-with-camunda')}>Set up your AI development environment</a>
 </div>
 
