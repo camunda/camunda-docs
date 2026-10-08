@@ -185,9 +185,26 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.11 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Product links still pointing at /next
+
+RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/cluster-capacity/?$ /docs/next/components/saas/clusters/cluster-capacity/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-alerts/?$ /docs/next/components/saas/clusters/manage-alerts/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-api-clients/?$ /docs/next/components/saas/clusters/manage-api-clients/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-ip-allowlists/?$ /docs/next/components/saas/clusters/manage-ip-allowlists/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/tasklist/userguide/starting-processes/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/?$ /docs/next/components/hub/workspace/modeler/collaboration/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/git-sync/?$ /docs/next/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.10: content moves introduced prior to the release of version 8.10.
 #---------------------------------------------------------------------------------
+
+# Console manage plan docs moved under SaaS
+RewriteRule ^docs/components/console/manage-plan/cancel-starter-subscription/ /docs/components/saas/organization/manage-plan/available-plans/ [R=301,L]
 
 # No console troubleshooting guide
 RewriteRule ^docs/components/console/console-troubleshooting/common-pitfalls/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
