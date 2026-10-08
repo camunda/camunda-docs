@@ -20,8 +20,6 @@ With the runtime connection, you model against a real runtime instead of guessin
 | Connector credentials                                                                     | Offers the credentials available on the connected runtime in the properties panel of connector templates. Requires a runtime on Camunda 8.10 or later. |
 | **Webhook** tab of inbound connectors                                                     | Shows the webhook status and logs of the connected runtime.                                                                                            |
 | [Problems panel](./fix-problems-in-your-diagram.md#follow-the-runtime-connection-version) | Validates the diagram against the Camunda version of the connected runtime.                                                                            |
-| Cluster variables                                                                         | Offers the cluster variables of the connected runtime in your FEEL expressions.                                                                        |
-| Copilot                                                                                   | Uses the connected runtime as context.                                                                                                                 |
 
 The runtime connection doesn't change your deploy target. **Deploy** and **Run** keep using the target you choose in their own dialog. See [run or publish your process](../run-or-publish-your-process.md).
 
