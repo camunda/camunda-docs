@@ -8,16 +8,29 @@ description: "Install Camunda 8.10 Self-Managed as separate Hub, Orchestration C
 import HelmCliSupport from '../../_partials/_helm-cli-support.md'
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](/self-managed/reference-architecture/deployment-topology.md#minimum-chart-versions).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](#minimum-chart-versions).
 :::
 
 Install Camunda 8.10 Self-Managed as separate Helm releases: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
 
 This is the baseline topology for a new 8.10 production deployment. Each release declares its role through `global.topology.mode`, so the Hub plane and each execution plane have independent lifecycles. For the reasoning, the release-role reference, and the limits of this model, see [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
 
-A single `combined` release remains supported and remains the chart default. Use it for evaluation and proofs of concept. See [quick developer install](/self-managed/deployment/helm/install/quick-install.md).
+For other situations, including evaluation with a single `combined` release, see [choose your topology](../index.md#choose-your-topology).
 
 <HelmCliSupport />
+
+## Minimum chart versions
+
+This table lists the minimum Helm chart version for each release role.
+
+| Camunda version | Chart line | Minimum chart version | Adds                                                                    |
+| :-------------- | :--------- | :-------------------- | :---------------------------------------------------------------------- |
+| 8.10            | 15.x       | 15.0.0                | The `hub`, `orchestration`, and `optimize` roles, and `physicalTenants` |
+| 8.9             | 14.x       | 14.11.0               | The `orchestration` role                                                |
+| 8.8             | 13.x       | 13.14.0               | The `orchestration` role                                                |
+| 8.7             | 12.x       | 12.14.0               | The `orchestration` role, with `architecture: legacy` in the Hub record |
+
+Older 8.7, 8.8, and 8.9 charts have no `global.topology` key. They ignore `global.topology.mode` and deploy a combined release. Verify the chart version before you set the role.
 
 ## Install order
 

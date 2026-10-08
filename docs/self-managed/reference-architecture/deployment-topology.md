@@ -15,18 +15,7 @@ For the mechanics of installing this topology, see [install the deployment topol
 
 `global.topology.mode` selects what a release deploys and what it must be told about the rest of the deployment.
 
-### Minimum chart versions
-
-This table is the reference for the minimum Helm chart version of each release role. Other pages link here.
-
-| Camunda version | Chart line | Minimum chart version | Adds                                                                    |
-| :-------------- | :--------- | :-------------------- | :---------------------------------------------------------------------- |
-| 8.10            | 15.x       | 15.0.0                | The `hub`, `orchestration`, and `optimize` roles, and `physicalTenants` |
-| 8.9             | 14.x       | 14.11.0               | The `orchestration` role                                                |
-| 8.8             | 13.x       | 13.14.0               | The `orchestration` role                                                |
-| 8.7             | 12.x       | 12.14.0               | The `orchestration` role, with `architecture: legacy` in the Hub record |
-
-Older 8.7, 8.8, and 8.9 charts have no `global.topology` key. They ignore `global.topology.mode` and deploy a combined release. Verify the chart version before you set the role.
+For the minimum Helm chart version of each role, see [minimum chart versions](/self-managed/deployment/helm/install/topology/index.md#minimum-chart-versions).
 
 ### Role requirements
 
@@ -68,9 +57,7 @@ graph TD
     OCB --> OptB1
 ```
 
-Optimize is one-to-one with a Physical Tenant because it reads exported records from a single index prefix. A tenant without its own Optimize release has no analytics. An Optimize release that points to two tenants reads only one of them.
-
-The default Physical Tenant counts. Every Orchestration Cluster has one, created at provisioning time, and it needs its own Optimize release like any other tenant.
+Each Physical Tenant, including the default tenant, needs its own Optimize release. See [why Optimize is its own release](/self-managed/deployment/helm/install/topology/optimize-release.md#why-optimize-is-its-own-release).
 
 ## Mix Orchestration Cluster versions under one Hub
 
@@ -102,32 +89,8 @@ The Hub release always owns registration, clients, permissions, and inventory, w
 - **Authentication isolation isn't storage isolation.** Separate OIDC credentials per cluster and tenant do nothing to separate shared Elasticsearch or OpenSearch data. Index prefixes do that, and they're your responsibility. See [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md).
 - **Scale limits are undefined.** Supported cluster and tenant counts haven't been established. Validate your own target scale before committing to it.
 
-## What the chart does not own
-
-The chart deploys workloads and wires them to the endpoints you give it. Everything below is yours to provide, and every URL you configure must be reachable from the release that uses it.
-
-| Concern                                                        | Owner                                      |
-| -------------------------------------------------------------- | ------------------------------------------ |
-| OIDC provider, its clients, and its pinned issuer              | You                                        |
-| Cross-namespace and cross-cluster DNS, routing, and TLS trust  | You                                        |
-| NetworkPolicies and firewall rules                             | You                                        |
-| Management Identity and Camunda Hub relational databases       | You                                        |
-| Orchestration Cluster and Optimize secondary storage           | You                                        |
-| Index retention and deletion, including after a Helm uninstall | You                                        |
-| Kubernetes workloads, services, secrets wiring, and volumes    | The chart                                  |
-| Management Identity presets and Camunda Hub cluster inventory  | The chart, from `global.topology.clusters` |
-
-Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts. Provision these before you install. See [deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+For what the chart deploys and what you provide yourself, see [what the chart does not own](/self-managed/deployment/helm/configure/configuration-responsibilities.md#what-the-chart-does-not-own).
 
 ## Choose your topology
 
-| Your situation                                            | Use                                                                                                                                                                             |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Evaluating Camunda, or developing locally                 | A `combined` release. See [quick developer install](/self-managed/deployment/helm/install/quick-install.md)                                                                     |
-| A new production deployment, one cluster                  | A `hub` release plus one `orchestration` release. See [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md)                                |
-| A new production deployment, several clusters or tenants  | The same, plus one `optimize` release per Physical Tenant. See [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md) |
-| Analytics for a Physical Tenant in the split topology     | One `optimize` release per Physical Tenant. See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md)                               |
-| Upgrading an existing 8.9 deployment                      | Upgrade in place first, staying on `combined`. See [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md)                                          |
-| Moving an existing combined release to the split topology | See [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md)                                                              |
-
-A `combined` release remains supported, and remains the default. It's the right choice for evaluation, proofs of concept, and 8.9 compatibility. For a new production deployment, the split topology is the baseline.
+To choose a topology for your situation, see [choose your topology](/self-managed/deployment/helm/install/index.md#choose-your-topology).

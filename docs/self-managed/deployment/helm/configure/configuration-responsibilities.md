@@ -24,6 +24,23 @@ _What_ you're configuring determines _where_ the setting belongs:
 
 Application property names are the same whichever deployment method you use, so what you learn about `camunda.security.*` or `camunda.physical-tenants.*` transfers from Helm to Docker, to a JAR, or to ECS. Chart values don't transfer, which is why they're limited to the deployment layer.
 
+## What the chart does not own
+
+The chart deploys workloads and wires them to the endpoints you give it. The following table shows which concerns you provide and which the chart provides. Every URL you configure must be reachable from the release that uses it.
+
+| Concern                                                        | Owner                                      |
+| -------------------------------------------------------------- | ------------------------------------------ |
+| OIDC provider, its clients, and its pinned issuer              | You                                        |
+| Cross-namespace and cross-cluster DNS, routing, and TLS trust  | You                                        |
+| NetworkPolicies and firewall rules                             | You                                        |
+| Management Identity and Camunda Hub relational databases       | You                                        |
+| Orchestration Cluster and Optimize secondary storage           | You                                        |
+| Index retention and deletion, including after a Helm uninstall | You                                        |
+| Kubernetes workloads, services, secrets wiring, and volumes    | The chart                                  |
+| Management Identity presets and Camunda Hub cluster inventory  | The chart, from `global.topology.clusters` |
+
+Camunda 8.10 bundles no Elasticsearch, PostgreSQL, or Keycloak subcharts. Provision these before you install. See [deploy required dependencies](./operator-based-infrastructure.md).
+
 ## Provide application settings
 
 Three forms are supported, and they behave differently. For the full mechanics, including per-component merge behavior and a worked migration from environment variables, see [configure component configuration](/self-managed/deployment/helm/configure/application-configs.md).

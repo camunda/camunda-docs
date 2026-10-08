@@ -32,7 +32,7 @@ The component client IDs, audiences, redirect URLs, and secrets must match the c
 
 An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same, but the required values are different. The older charts were released before the unified Orchestration Cluster, and they still bundle Hub plane dependencies.
 
-Each chart line needs a minimum chart version for the `orchestration` role. See [minimum chart versions](/self-managed/reference-architecture/deployment-topology.md#minimum-chart-versions). Earlier chart versions ignore `global.topology.mode` and deploy a combined release. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
+Each chart line needs a minimum chart version for the `orchestration` role. See [minimum chart versions](./index.md#minimum-chart-versions). Earlier chart versions ignore `global.topology.mode` and deploy a combined release. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
 
 | Chart | Workloads to enable                                                      | Also required                                                                                                                           |
 | :---- | :----------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
