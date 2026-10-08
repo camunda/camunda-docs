@@ -484,7 +484,6 @@ module.exports = {
                   "Integration modules": [
                     "components/camunda-integrations/sap/odata-connector",
                     "components/camunda-integrations/sap/rfc-connector",
-                    "components/camunda-integrations/sap/btp-plugin",
                     "components/camunda-integrations/sap/eventing",
                     "components/camunda-integrations/sap/csap-cli",
                   ],
@@ -843,36 +842,7 @@ module.exports = {
                 type: "doc",
                 id: "components/hub/organization/manage-organization-settings/organization-settings",
               },
-              items: [
-                {
-                  type: "category",
-                  label: "Manage users",
-                  link: {
-                    type: "doc",
-                    id: "components/hub/organization/manage-users/index",
-                  },
-                  items: [
-                    "components/hub/organization/manage-users/create-manage-users",
-                    "components/hub/organization/manage-users/manage-user-groups",
-                    "components/hub/organization/manage-users/resource-based-auth",
-                  ],
-                },
-                "components/hub/organization/manage-organization-settings/external-sso",
-                "components/hub/organization/manage-organization-settings/view-organization-activity",
-                "components/hub/organization/manage-organization-settings/enable-alpha-features",
-                "components/hub/organization/manage-organization-settings/usage-history",
-                "components/hub/organization/manage-organization-settings/usage-alerts",
-                "components/hub/organization/manage-organization-settings/switch-organization",
-                "components/hub/organization/manage-organization-settings/delete-account",
-                {
-                  "Manage plan": [
-                    "components/hub/organization/manage-organization-settings/manage-plan/create-account",
-                    "components/hub/organization/manage-organization-settings/manage-plan/available-plans",
-                    "components/hub/organization/manage-organization-settings/manage-plan/upgrade-to-enterprise-plan",
-                    "components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations",
-                  ],
-                },
-              ],
+              items: ["components/hub/organization/users-and-roles"],
             },
             "components/hub/workspace/manage-projects/recently-deleted",
             {
@@ -1353,9 +1323,38 @@ module.exports = {
             "components/saas/clusters/manage-ip-allowlists",
             "components/saas/clusters/create-backups",
             "components/saas/clusters/settings",
+            "components/saas/clusters/connect-external-identity-provider",
             "components/saas/clusters/cluster-capacity",
             "components/saas/clusters/configure-audit-log",
             "components/saas/clusters/troubleshoot-clusters",
+          ],
+        },
+        {
+          type: "category",
+          label: "Organization",
+          link: {
+            type: "doc",
+            id: "components/saas/organization/organization",
+          },
+          items: [
+            "components/saas/organization/organization-ownership",
+            "components/saas/organization/create-manage-users",
+            "components/saas/organization/manage-user-groups",
+            "components/saas/organization/resource-based-auth",
+            "components/saas/organization/external-sso",
+            "components/saas/organization/view-organization-activity",
+            "components/saas/organization/enable-alpha-features",
+            "components/saas/organization/usage-history",
+            "components/saas/organization/usage-alerts",
+            "components/saas/organization/switch-organization",
+            "components/saas/organization/delete-account",
+            {
+              "Manage plan": [
+                "components/saas/organization/manage-plan/create-account",
+                "components/saas/organization/manage-plan/available-plans",
+                "components/saas/organization/manage-plan/update-billing-reservations",
+              ],
+            },
           ],
         },
         "components/saas/regions",
@@ -1855,7 +1854,6 @@ module.exports = {
         id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
-        "self-managed/reference-architecture/deployment-topology",
         "self-managed/reference-architecture/kubernetes",
         "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
@@ -2762,6 +2760,7 @@ module.exports = {
           items: [
             "self-managed/upgrade/helm/890-to-8100",
             "self-managed/upgrade/helm/combined-to-split-topology",
+            "self-managed/upgrade/helm/connect-existing-clusters",
           ],
         },
         {

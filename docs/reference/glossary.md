@@ -155,7 +155,7 @@ BTP stands for [SAP](#sap) Business Technology Platform, which is a cloud-based 
 
 Camunda can integrate with SAP BTP to orchestrate business processes across SAP and non-SAP systems. By doing so, it enables automation and visibility of workflows that span multiple services and applications hosted on BTP, enhancing agility and process control in enterprise environments.
 
-- [BTP plugin](/components/camunda-integrations/sap/btp-plugin.md)
+- [SAP integration](/components/camunda-integrations/sap/camunda-sap-integration.md)
 
 ## C
 
@@ -170,7 +170,7 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 | [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                                 |
 | [Camunda Hub](/components/hub/index.md)              | The design and management platform for Camunda. Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub. Part of the [management plane](#management-plane).                                                                                                                                         |
 | Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeling interface](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
-| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, these components share the same authentication implementation as the Orchestration Cluster.                                                                                                                                                             |
+| [Management Identity](#management-identity)          | Authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub). As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties.                                                                                                                        |
 
 ### Camunda AI agent
 
@@ -280,9 +280,9 @@ The shape of a [credential](#credential), such as AWS Credential, REST Authentic
 
 ### CSAP CLI
 
-CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector and OData connector) for deployment.
 
-Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
+Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations straightforward and repeatable in environments like Camunda SaaS.
 
 - [CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)
 
@@ -561,7 +561,7 @@ Camunda groups an agent's conversation history by loop iteration in Operate, mak
 
 ### Management Identity
 
-The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, these components share the same authentication implementation as the Orchestration Cluster, and Management Identity remains responsible for managing users, groups, roles, and permissions. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
+The Management Identity component provides authorization for the [Camunda 8](#camunda-8) components outside the [Orchestration Cluster](#orchestration-cluster): Camunda Hub and Optimize. As of 8.10, Optimize authenticates with the same settings as the Orchestration Cluster. Camunda Hub keeps its own authentication properties. Management Identity remains responsible for managing users, groups, roles, and permissions for both. See [authentication to the management components](/self-managed/concepts/authentication/authentication-to-management-components.md).
 
 ### Management plane
 
@@ -569,7 +569,7 @@ The management plane is the part of a Camunda 8 deployment used to design and ma
 
 In Self-Managed Helm deployments, the management plane is the release with `global.topology.mode` set to `hub`.
 
-- [Deployment topology](/self-managed/reference-architecture/deployment-topology.md)
+- [Deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology)
 
 ### Manual task
 

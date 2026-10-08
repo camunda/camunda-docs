@@ -39,10 +39,6 @@ After creating the cluster, click **Environments** in the left navigation, and t
 
 The cluster is now being set up. During this phase, its state is **Creating**. After one or two minutes, the cluster is ready for use and changes its state to **Healthy**.
 
-![cluster-creating](./img/cluster-overview-new-cluster-creating.png)
-
-![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
-
 After the cluster is created, click the cluster name to open the cluster details.
 
 ## Tag your cluster

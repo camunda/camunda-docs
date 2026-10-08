@@ -8,7 +8,7 @@ description: "Install Optimize as its own Helm release with global.topology.mode
 An Optimize release deploys Optimize and no other Camunda component. Install one per Physical Tenant, including the default tenant.
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/reference-architecture/deployment-topology.md#release-roles).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 :::
 
 The `optimize` role requires the 8.10 chart. The 8.7, 8.8, and 8.9 charts support `combined` and `orchestration` only, so an older Orchestration Cluster runs Optimize inside its own release.
