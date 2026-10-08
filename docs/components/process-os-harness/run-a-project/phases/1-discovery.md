@@ -23,7 +23,7 @@ Discovery builds a faithful picture of how a process runs today. ProcessOS Harne
 - Provide recent material. Documentation describing a version of the process no longer in use produces a confident but wrong as-is model.
 - Name the known gaps in `process-scope.md`. Telling ProcessOS Harness what's missing is more useful than letting it infer the gap later.
 
-Check what you're allowed to share before you point a specialist at a source, described in [handle project data safely](../../best-practices/data-handling.md).
+Check what you're allowed to share before you point a specialist at a source, described in [handle project data safely](../best-practices/data-handling.md).
 
 ## Discovery specialists
 

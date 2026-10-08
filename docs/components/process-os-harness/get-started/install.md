@@ -1,22 +1,12 @@
 ---
-id: install
+id: get-started
 title: Install ProcessOS Harness and configure a project
-sidebar_label: Install and configure
-description: "Learn how to create a configured ProcessOS Harness project with the journey running."
+sidebar_label: Get started
+description: "Set up the builder workspace, install ProcessOS Harness into your AI coding agent with c8ctl, and configure your first project with process-scope.md and run.config.yaml."
 keywords: ["ProcessOS Harness", "install", "c8ctl", "builder workspace"]
 ---
 
-import PageDescription from '@site/src/components/PageDescription';
-
-<PageDescription />
-
-## About
-
-Create a configured ProcessOS Harness project with the journey running. Set up the builder workspace, install ProcessOS Harness into your AI coding agent with c8ctl, and configure your first project with process-scope.md and run.config.yaml.
-
-:::note prerequisites
-Camunda recommends completing the [organizational setup](project-setup.md) first, and checking the [system requirements](system-requirements.md) before you install.
-:::
+This page takes you from nothing to a configured ProcessOS Harness project with the journey running. Camunda recommends completing the [organizational setup](project-setup.md) first, and checking the [system requirements](system-requirements.md) before you install.
 
 ## (Optional) Understand the builder workspace
 
@@ -79,6 +69,6 @@ The builder workspace is a recommendation for how to keep everything you need in
 
 ## Next steps
 
-- Learn how the [governance process](../run-a-project/governance-process.md) guides you between milestones.
-- Learn how [review cycles](../run-a-project/review-cycle.md) bring SMEs into each phase.
-- Start the first phase, described in [discover the as-is process](../run-a-project/phases/1-discovery.md).
+- Learn how the [governance process](get-started/governance-process.md) guides you between milestones.
+- Learn how [review cycles](get-started/review-cycle.md) bring SMEs into each phase.
+- Start the first phase, described in [discover the as-is process](phases/1-discovery.md).

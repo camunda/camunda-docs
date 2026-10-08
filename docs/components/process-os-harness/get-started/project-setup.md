@@ -6,7 +6,7 @@ description: "Prepare your organization for a ProcessOS Harness project by runni
 keywords: ["ProcessOS Harness", "onboarding", "Camunda Academy"]
 ---
 
-Before you install anything, set your organization up to succeed with ProcessOS Harness. This page covers the organizational preparation. For the technical setup, see [install ProcessOS Harness and configure a project](install.md).
+Before you install anything, set your organization up to succeed with ProcessOS Harness. This page covers the organizational preparation. For the technical setup, see [install ProcessOS Harness and configure a project](get-started.md).
 
 ProcessOS Harness is a new way of running projects, not a new feature in a familiar tool. The interaction model is unfamiliar, and the early access release assumes a trained builder. The two steps below are the intended path for early access, not optional extras.
 
@@ -35,4 +35,4 @@ Involve your SMEs early. ProcessOS Harness changes their role from main contribu
 ## Next steps
 
 1. Check the [system requirements](system-requirements.md).
-2. Install ProcessOS Harness and configure your first project, described in [install ProcessOS Harness and configure a project](install.md).
+2. Install ProcessOS Harness and configure your first project, described in [install ProcessOS Harness and configure a project](get-started.md).

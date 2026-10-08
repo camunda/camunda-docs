@@ -15,6 +15,8 @@ keywords:
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import DocsIcon from "@site/docs/components/assets/icon-docs.png";
 import PlayIcon from "@site/docs/components/assets/icon-play.png";
+import AgenticIcon from "@site/docs/components/assets/icon-agentic.png";
+import ConfigIcon from "@site/docs/components/assets/icon-config.png";
 import AoGrid from '../react-components/\_ao-card';
 
 import PageDescription from '@site/src/components/PageDescription';
@@ -62,9 +64,9 @@ ProcessOS Harness runs your engagement as a governed process with defined phases
 | Transform | Transform the as-is process into an agentic to-be process.                      |
 | Implement | Generate and implement the executable Camunda solution.                         |
 
-Each phase ends at a milestone: process scope defined, as-is model finalized, to-be models finalized, and solution ready for production. Between milestones, [SME review cycles](run-a-project/review-cycle.md) act as gates that validate progress before the project moves on.
+Each phase ends at a milestone: process scope defined, as-is model finalized, to-be models finalized, and solution ready for production. Between milestones, [SME review cycles](get-started/review-cycle.md) act as gates that validate progress before the project moves on.
 
-The governance process itself runs on Camunda. Project state lives in Camunda and every artifact is committed to Git, so the whole engagement is auditable. For details, see [how the governance process works](run-a-project/governance-process.md).
+The governance process itself runs on Camunda. Project state lives in Camunda and every artifact is committed to Git, so the whole engagement is auditable. For details, see [how the governance process works](get-started/governance-process.md).
 
 #### Progress comes from iterations and your judgment
 
@@ -99,68 +101,83 @@ In this release, each project runs locally with its own private memory. Cross-pr
 
 ## Get started
 
-Prepare for, install, and configure your first ProcessOS Harness project.
+Prepare your organization and run your first ProcessOS Harness project.
 
-1. Check the [system requirements](get-started/system-requirements.md) for the Camunda cluster, version control system, AI coding agent, and local tooling you need.
-2. Set up your organization for a first project, described in [set up your organization for ProcessOS Harness](get-started/project-setup.md).
-3. Install ProcessOS Harness and configure your first project, described in [install ProcessOS Harness and configure a project](get-started/install.md).
+### Prerequisites
 
-## Run a project
+Before you install ProcessOS Harness, review the [system requirements](system-requirements.md) for the Camunda cluster, Git-compatible version control system, supported AI coding agent, and local tooling you need.
 
-Work through a project, guided by the governance process from discovery to a generated solution.
+### Set up and install
 
 <AoGrid columns={2} ao={[
 {
-link: "../run-a-project/governance-process/",
+link: "../project-setup/",
+title: "Set up your organization",
+image: ConfigIcon,
+description: "Prepare your organization for a first ProcessOS Harness project.",
+},
+{
+link: "../get-started/",
+title: "Install and configure a project",
+image: PlayIcon,
+description: "Install ProcessOS Harness and configure your first project.",
+},
+]} />
+
+## Learn the fundamentals
+
+Understand how ProcessOS Harness guides a project from discovery to a generated solution.
+
+<AoGrid columns={2} ao={[
+{
+link: "../get-started/governance-process/",
 title: "Governance process",
 image: BPMNIcon,
 description: "See how phases, milestones, and gates guide a project.",
 },
+{
+link: "../get-started/review-cycle/",
+title: "Review cycles",
+image: DocsIcon,
+description: "Validate generated results with subject matter experts.",
+},
+{
+link: "../get-started/builder-task/",
+title: "Builder task",
+image: AgenticIcon,
+description: "Learn how a builder task works in Camunda.",
+},
 ]} />
 
-### Phases
+## Explore the phases and further resources
 
-Follow the guidance for each phase of a project.
+Follow the phases of a project, and read about additional features and recommendations.
 
 <AoGrid columns={2} ao={[
 {
-link: "../run-a-project/phases/discovery/",
+link: "../phases/discovery/",
 title: "Discovery",
 image: PlayIcon,
 description: "Discover the as-is process from organizational memory.",
 },
 {
-link: "../run-a-project/phases/transformation/",
+link: "../phases/transformation/",
 title: "Transformation",
 image: PlayIcon,
 description: "Transform the as-is process into an agentic to-be design.",
 },
 {
-link: "../run-a-project/phases/implementation/",
+link: "../phases/implementation/",
 title: "Implementation",
 image: PlayIcon,
 description: "Generate and implement the executable Camunda solution.",
 },
-]} />
-
-### Review
-
-Validate the results of each phase with subject matter experts.
-
-<AoGrid columns={2} ao={[
 {
-link: "../run-a-project/review-cycle/",
-title: "Review cycles",
-image: DocsIcon,
-description: "Validate generated results with subject matter experts.",
+link: "../other-features/artifact-generation/",
+title: "Artifact generation",
+image: BPMNIcon,
+description: "Generate Camunda artifacts from your process models.",
 },
-]} />
-
-## Best practices
-
-Follow recommendations for working with ProcessOS Harness.
-
-<AoGrid columns={2} ao={[
 {
 link: "../best-practices/data-handling/",
 title: "Data handling",
