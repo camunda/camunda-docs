@@ -147,7 +147,6 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-codeinterpreter/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
 
-
 ## Reabsorbed Optimize docs
 RewriteRule ^optimize/next/apis-tools/optimize-api/(.*)$ /docs/next/apis-tools/optimize-api/$1 [R=301,L]
 RewriteRule ^optimize/next/components/(.*)$ /docs/next/components/optimize/$1 [R=301,L]
@@ -183,12 +182,31 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 ##################################################################################
 
 #---------------------------------------------------------------------------------
-#   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
+#   8.11 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
 #---------------------------------------------------------------------------------
 #   8.10: content moves introduced prior to the release of version 8.10.
 #---------------------------------------------------------------------------------
+
+# No console troubleshooting guide
+RewriteRule ^docs/components/console/console-troubleshooting/common-pitfalls/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
+
+# 8.10 Typescript client docs changes
+RewriteRule ^docs/apis-tools/typescript/api-reference/fp/(.*)?$ /docs/apis-tools/typescript/api-reference/ [R=301,L]
+RewriteRule ^docs/apis-tools/typescript/api-reference/index/classes/CamundaClient/?$ /docs/apis-tools/typescript/api-reference/index/ [R=301,L]
+RewriteRule ^docs/apis-tools/typescript/api-reference/index/functions/createCamundaFpClient/?$ /docs/apis-tools/typescript/api-reference/index/ [R=301,L]
+RewriteRule ^docs/apis-tools/typescript/api-reference/index/functions/isLeft/?$ /docs/apis-tools/typescript/api-reference/index/ [R=301,L]
+RewriteRule ^docs/apis-tools/typescript/api-reference/index/functions/isRight/?$ /docs/apis-tools/typescript/api-reference/index/ [R=301,L]
+RewriteRule ^docs/apis-tools/typescript/api-reference/index/type-aliases/CamundaFpClient/?$ /docs/apis-tools/typescript/api-reference/index/ [R=301,L]
+RewriteRule ^docs/apis-tools/typescript/api-reference/index/type-aliases/Either/?$ /docs/apis-tools/typescript/api-reference/index/ [R=301,L]
+
+# No matching SM upgrade guides in 8.10
+RewriteRule ^docs/self-managed/upgrade/components/database/changes-in-elasticsearch-8/?$ /docs/self-managed/upgrade/components/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/components/keycloak/keycloak-compatibility/?$ /docs/self-managed/upgrade/components/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/helm/880-to-890/?$ /docs/self-managed/upgrade/helm/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/components/880-to-890/?$ /docs/self-managed/upgrade/components/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/manual/?$ /docs/self-managed/upgrade/ [R=301,L]
 
 # Hub API: the operation to replace a workspace's environments was renamed to update (8.10)
 RewriteRule ^docs/apis-tools/hub-api-saas/specifications/replace-workspace-environments/?$ /docs/apis-tools/hub-api-saas/specifications/update-workspace-environments/ [R=301,L]
@@ -233,7 +251,7 @@ RewriteRule ^docs/components/hub/organization/manage-clusters/configure-audit-lo
 RewriteRule ^docs/components/hub/organization/manage-clusters/troubleshoot-clusters/?$ /docs/components/saas/clusters/troubleshoot-clusters/ [R=301,L]
 
 # Adjust enable secure connectivity path to drop the "console" reference
-RewriteRule ^docs/components/saas/secure-connectivity/secure-connectivity-console-setup/?$ docs/components/saas/secure-connectivity/enable-secure-connectivity/ [R=301,L]
+RewriteRule ^docs/components/saas/secure-connectivity/secure-connectivity-console-setup/?$ /docs/components/saas/secure-connectivity/enable-secure-connectivity/ [R=301,L]
 
 # Microsoft Teams docs became App Integrations, which covers Slack as well (8.10)
 RewriteRule ^docs/components/camunda-integrations/ms-teams/ms-teams/?$ /docs/components/camunda-integrations/ms-teams/ [R=301,L]
@@ -304,10 +322,12 @@ RewriteRule ^docs/self-managed/components/orchestration-cluster/tasklist/user-ta
 RewriteRule ^docs/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/?$ /docs/components/tasklist/userguide/starting-processes/ [R=301,L]
 
 # Redirects associated with Camunda Hub
-RewriteRule ^docs/components/modeler/forms/utilizing-forms/?$ docs/components/hub/workspace/modeler/modeling/utilize-forms [R=301,L]
-RewriteRule ^docs/components/modeler/using-web-and-desktop-modeler-together/?$ docs/components/modeler/using-hub-and-desktop-modeler-together [R=301,L]
+RewriteRule ^docs/components/modeler/forms/utilizing-forms/?$ /docs/components/hub/workspace/modeler/modeling/utilize-forms/ [R=301,L]
+RewriteRule ^docs/components/modeler/using-web-and-desktop-modeler-together/?$ /docs/components/modeler/using-hub-and-desktop-modeler-together/ [R=301,L]
+
 # Old Console URLs of the pages moved to the SaaS section go there in one hop (8.10). They must stay before the wildcards below.
 RewriteRule ^docs/components/console/manage-clusters/create-cluster/?$ /docs/components/saas/clusters/create-cluster/ [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/create-cluster-include/?$ /docs/components/saas/clusters/create-cluster/ [R=301,L]
 RewriteRule ^docs/components/console/manage-clusters/manage-cluster/?$ /docs/components/saas/clusters/manage-cluster/ [R=301,L]
 RewriteRule ^docs/components/console/manage-clusters/manage-api-clients/?$ /docs/components/saas/clusters/manage-api-clients/ [R=301,L]
 RewriteRule ^docs/components/console/manage-clusters/manage-secrets/?$ /docs/components/saas/clusters/manage-secrets/ [R=301,L]
@@ -330,18 +350,20 @@ RewriteRule ^docs/components/console/manage-plan/create-account/?$ /docs/compone
 RewriteRule ^docs/components/console/manage-plan/update-billing-reservations/?$ /docs/components/saas/organization/manage-plan/update-billing-reservations/ [R=301,L]
 RewriteRule ^docs/components/console/manage-plan/upgrade-to-enterprise-plan/?$ /docs/components/saas/organization/manage-plan/available-plans/#upgrade-to-an-enterprise-plan [NE,R=301,L]
 RewriteRule ^docs/components/console/manage-clusters/(.*)$ /docs/components/hub/organization/manage-clusters/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-organization/manage-user-groups$ /docs/components/saas/organization/manage-user-groups/ [R=301,L]
-RewriteRule ^docs/components/console/manage-organization/manage-users$ /docs/components/hub/organization/users-and-roles/ [R=301,L]
-RewriteRule ^docs/components/console/manage-organization/advanced-search$ /docs/components/hub/organization/manage-organization-settings/organization-settings/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/manage-user-groups/?$ /docs/components/saas/organization/manage-user-groups/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/manage-users/?$ /docs/components/hub/organization/users-and-roles/ [R=301,L]
+RewriteRule ^docs/components/console/manage-organization/advanced-search/?$ /docs/components/hub/organization/manage-organization-settings/organization-settings/ [R=301,L]
 RewriteRule ^docs/components/console/manage-organization/(.*)$ /docs/components/hub/organization/manage-organization-settings/$1 [R=301,L]
 RewriteRule ^docs/components/console/manage-plan/(.*)$ /docs/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
 RewriteRule ^docs/components/console/introduction-to-console/?$ /docs/components/hub/ [R=301,L]
+RewriteRule ^docs/components/console/job-dashboard/?$ /docs/components/hub/organization/analyze-operations/job-dashboard/ [R=301,L]
 
 # Process applications - specific renamed files
-RewriteRule ^/docs/components/concepts/process-applications/?$ /docs/components/concepts/projects [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/process-applications/?$ /docs/components/hub/workspace/manage-projects/manage-projects [R=301,L]
+RewriteRule ^docs/components/concepts/process-applications/?$ /docs/components/concepts/projects/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/process-applications/?$ /docs/components/hub/workspace/manage-projects/manage-projects/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/process-application-versioning/?$ /docs/components/hub/workspace/manage-projects/project-versioning/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/process-applications/process-application-pipeline/?$ /docs/components/hub/workspace/manage-projects#project-development-lifecycle [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/process-application-pipeline/?$ /docs/components/hub/workspace/manage-projects#project-development-lifecycle [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/create-a-process-application/?$ /docs/components/hub/workspace/manage-projects/create-a-project/ [R=301,L]
@@ -375,6 +397,7 @@ RewriteRule ^docs/components/modeler/web-modeler/play-your-process/?$ /docs/comp
 RewriteRule ^docs/components/modeler/web-modeler/task-testing/?$ /docs/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/token-simulation/?$ /docs/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration/?$ /docs/components/hub/organization/manage-workspaces/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/components/hub/organization/manage-workspaces/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/implement-your-process/?$ /docs/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/design-your-process/?$ /docs/components/hub/workspace/modeler/collaboration/design-your-process/ [R=301,L]
@@ -406,6 +429,8 @@ RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/tr
 RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-missing-data/ [R=301,L]
 RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration/ [R=301,L]
 RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/?$ /docs/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
+RewriteRule ^docs/self-managed/components/console/configuration/?$ /docs/self-managed/components/hub/configuration/properties/ [R=301,L]
+RewriteRule ^docs/self-managed/components/modeler/web-modeler/configuration/?$ /docs/self-managed/components/hub/configuration/properties/ [R=301,L]
 
 # Get started with Optimize
 RewriteRule ^docs/guides/improve-processes-with-optimize/?$ /docs/components/optimize/improve-processes-with-optimize/ [R=301,L]
