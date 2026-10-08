@@ -4,6 +4,11 @@ title: "Upgrade to Camunda 8.10"
 description: "Administrator overview for preparing and running a Camunda 8.10 Self-Managed upgrade."
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ZeebeGrid from '../../components/zeebe/react-components/\_zeebe-card';
+import { overviewCards } from './react-components/\_card-data';
+
 import OverviewImg from '../assets/hero-upgrade-810.png';
 
 <h3 class="subheading">Upgrade your Camunda 8 Self-Managed deployment from version 8.9 to 8.10.</h3>
@@ -44,6 +49,26 @@ The 8.9 to 8.10 upgrade spans several guides. Work through them in this order, r
 For Helm-managed installations, start values-file preparation with the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md). It produces migrated overrides and a report of remaining actions. Follow the [Helm upgrade flow](./helm/index.md#upgrade-flow) and the version-specific guide even when the report has no findings.
 
 Review [component changes from 8.9 to 8.10](./components/890-to-8100.md) alongside these steps for behavior changes affecting the components you run.
+
+<!-- TODO: Update this when we have content
+
+## Upgrade guides
+
+Choose the upgrade guide that matches how your environment is deployed:
+
+<ZeebeGrid zeebe={overviewCards} />
+
+## Docker Compose deployments
+
+Docker Compose is supported for development and testing environments only.
+
+Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually upgrade each component by following the component upgrade guide:
+
+<p class="link-arrow">[Component upgrade from 8.8 to 8.9](./components/890-to-8100.md)</p>
+
+For production environments, use Kubernetes with the official Camunda Helm chart or create a custom deployment process using Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
+
+-->
 
 ## 8.10 release information
 
