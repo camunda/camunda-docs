@@ -39,14 +39,6 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
 
-### Agentic control plane
-
-<!-- https://github.com/camunda/product-hub/issues/3621 -->
-
-Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view. The dashboard is primarily intended to help operators, process owners, and engineering leads who manage AI-agent-powered processes, and need to keep them reliable and cost-effective.
-
-<p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
-
 ### AI Agent connector
 
 #### Conversation storage SPI redesign
@@ -85,19 +77,6 @@ The custom or compatible endpoint backends for both the Anthropic and OpenAI pro
 
 <p class="link-arrow">[AI Agent model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md#anthropic)</p>
 
-### AI agent testing with Camunda Process Test
-
-<!-- https://github.com/camunda/product-hub/issues/3315, https://github.com/camunda/camunda/issues/46462, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/49548 -->
-
-You can now test non-deterministic AI agent behavior in Camunda Process Test (CPT) with conditional behavior controls and evaluation-based assertions, so you can validate agent behavior and output quality with more reliable test outcomes.
-
-- Define conditional behavior in tests with a `when(condition).then(action)` API.
-- Assert output quality with LLM-as-a-judge expectations, or compare semantic similarity with embeddings, when exact matching is not enough.
-- Use judge and semantic similarity assertions on any string value with AssertJ, or define judge assertions in JSON test cases.
-- Configure remote or local models through code and properties, for both local development and CI/CD pipelines.
-
-<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
-
 ### Assisted agent tool configuration
 
 <!-- https://github.com/camunda/product-hub/issues/3719, https://github.com/camunda/product-hub/issues/3574 -->
@@ -131,14 +110,6 @@ You can now run AI Agents on Camunda 8 SaaS in minutes using the Camunda-provide
 
 <p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
 
-### IDP supports ABBYY for document extraction
-
-<!-- https://github.com/camunda/product-hub/issues/3492 -->
-
-Intelligent document processing (IDP) now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
-
-<p class="link-arrow">[Intelligent document processing](/components/hub/workspace/modeler/intelligent-document-processing.md)</p>
-
 ### MCP start event element template
 
 <!-- https://github.com/camunda/connectors/pull/6742 -->
@@ -159,13 +130,18 @@ AI agents can use the Processes MCP Server to discover and call deployed BPMN pr
 
 <p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
 
-### ProcessOS Harness
+### AI agent testing with Camunda Process Test
 
-<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+<!-- https://github.com/camunda/product-hub/issues/3315, https://github.com/camunda/camunda/issues/46462, https://github.com/camunda/camunda/issues/46130, https://github.com/camunda/camunda/issues/49548 -->
 
-Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
+You can now test non-deterministic AI agent behavior in Camunda Process Test (CPT) with conditional behavior controls and evaluation-based assertions, so you can validate agent behavior and output quality with more reliable test outcomes.
 
-<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
+- Define conditional behavior in tests with a `when(condition).then(action)` API.
+- Assert output quality with LLM-as-a-judge expectations, or compare semantic similarity with embeddings, when exact matching is not enough.
+- Use judge and semantic similarity assertions on any string value with AssertJ, or define judge assertions in JSON test cases.
+- Configure remote or local models through code and properties, for both local development and CI/CD pipelines.
+
+<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
 
 ### Real-time agent visibility and monitoring
 
@@ -185,20 +161,13 @@ Monitor and evaluate AI agent behavior in Operate.
 If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
-### Skills repository for pro-code AI enablement
+### Agentic control plane
 
-<!-- https://github.com/camunda/product-hub/issues/3557 -->
+<!-- https://github.com/camunda/product-hub/issues/3621 -->
 
-The Camunda Skills repository toolset enables AI coding agents to build, validate, and configure Camunda artifacts. With the Skills installed, your AI agent can:
+Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view. The dashboard is primarily intended to help operators, process owners, and engineering leads who manage AI-agent-powered processes, and need to keep them reliable and cost-effective.
 
-- Build and modify BPMN diagrams with a human-readable layout.
-- Configure connectors using element templates (no raw XML).
-- Generate form schemas with validation.
-- Create and edit DMN decision tables.
-- Run BPMN lint rules against generated diagrams.
-- Scaffold and wire Camunda Process Test (CPT) integration tests.
-
-<p class="link-arrow">[Camunda Skills on GitHub](https://github.com/camunda/skills)</p>
+<p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
 
 ## APIs & tools
 
@@ -319,6 +288,21 @@ The deprecated Operate and Tasklist APIs are removed. Process data, task managem
 With the Camunda 8 SaaS Administration API, you can now schedule and manage recurring cluster backups programmatically, helping you automate disaster-recovery routines instead of relying only on manual, on-demand backups.
 
 <p class="link-arrow">[Administration API](/apis-tools/administration-api/administration-api-reference.md)</p>
+
+### Skills repository for pro-code AI enablement
+
+<!-- https://github.com/camunda/product-hub/issues/3557 -->
+
+The Camunda Skills repository toolset enables AI coding agents to build, validate, and configure Camunda artifacts. With the Skills installed, your AI agent can:
+
+- Build and modify BPMN diagrams with a human-readable layout.
+- Configure connectors using element templates (no raw XML).
+- Generate form schemas with validation.
+- Create and edit DMN decision tables.
+- Run BPMN lint rules against generated diagrams.
+- Scaffold and wire Camunda Process Test (CPT) integration tests.
+
+<p class="link-arrow">[Camunda Skills on GitHub](https://github.com/camunda/skills)</p>
 
 ### Zeebe Client replaced by Camunda Java Client
 
@@ -690,6 +674,17 @@ Camunda for Microsoft Teams now supports routing incident and task collaboration
 
 <p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/app-integrations/microsoft-teams.md)</p>
 
+## Intelligent document processing
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
+
+### IDP supports ABBYY for document extraction
+
+<!-- https://github.com/camunda/product-hub/issues/3492 -->
+
+Intelligent document processing (IDP) now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
+
+<p class="link-arrow">[Intelligent document processing](/components/hub/workspace/modeler/intelligent-document-processing.md)</p>
 ## Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Hub Modeler">Hub Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
@@ -1511,6 +1506,16 @@ Camunda Hub and Accounts now support the 2025 enterprise license model.
 - If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
 - For enterprise (`salesplantype = enterprise`) organizations, the licensing model is shown in the organization details. Admins can edit this by selecting either **legacy** or **2025** via a modal action.
 - The enterprise onboarding wizard now includes a license selection step (defaults to **2025**). The `ExternalOnboardingRouter` accepts an optional licensing model parameter (defaulting to **2025** if not provided).
+
+## ProcessOS
+
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+### ProcessOS Harness
+
+Discover your existing processes, re-engineer them against defined outcomes, and generate executable Camunda solutions, with a governed process that keeps AI-generated work auditable.
+
+<p class="link-arrow">[ProcessOS Harness](/components/process-os-harness/overview.md)</p>
 
 ## Reference architectures
 
