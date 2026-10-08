@@ -77,7 +77,7 @@ RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 # to link to anchors, and more.
 #---------------------------------------------------------------------------------
 
-RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,L]
+RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
 
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
