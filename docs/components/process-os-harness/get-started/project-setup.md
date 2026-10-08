@@ -2,17 +2,13 @@
 id: project-setup
 title: Set up your organization for ProcessOS Harness
 sidebar_label: Organizational setup
-description: "Prepare for a ProcessOS Harness project by running a first engagement with a partner or Camunda Field Delivery Engineer (FDE), and completing the Camunda Academy learning path."
+description: "Prepare your organization for a ProcessOS Harness project by running the first engagement with a partner or a Camunda Field Delivery Engineer, and by completing the Camunda Academy learning path."
 keywords: ["ProcessOS Harness", "onboarding", "Camunda Academy"]
 ---
 
-import PageDescription from '@site/src/components/PageDescription';
+Before you install anything, set your organization up to succeed with ProcessOS Harness. This page covers the organizational preparation. For the technical setup, see [install ProcessOS Harness and configure a project](install.md).
 
-<PageDescription />
-
-:::important
-ProcessOS Harness is a new way of running projects, and early access assumes a trained builder. The intended path is to run your first project with an enabled partner or a Camunda FDE and to complete the Camunda Academy learning path.
-:::
+ProcessOS Harness is a new way of running projects, not a new feature in a familiar tool. The interaction model is unfamiliar, and the early access release assumes a trained builder. The two steps below are the intended path for early access, not optional extras.
 
 ## Run your first project with a partner or a Camunda FDE
 
@@ -35,3 +31,8 @@ Treat the learning path as a prerequisite for your first project.
 ProcessOS Harness runs many agent iterations, so a journey has a real token cost. Plan for roughly $300 to $600 in tokens and six to eight hours for one journey from discovery through implementation. Treat this as a planning input rather than a fixed price. Run configuration and process complexity heavily impact token usage.
 
 Involve your SMEs early. ProcessOS Harness changes their role from main contributor to reviewer, which reduces their total effort, but they still need to be available at the review gates in each phase. A project stalls when a review cycle has no reviewer.
+
+## Next steps
+
+1. Check the [system requirements](system-requirements.md).
+2. Install ProcessOS Harness and configure your first project, described in [install ProcessOS Harness and configure a project](install.md).

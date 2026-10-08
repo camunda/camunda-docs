@@ -1,7 +1,7 @@
 ---
 id: governance-process
-title: Run a project with the governance process
-sidebar_label: Run a project
+title: How the governance process guides a project
+sidebar_label: Governance process
 description: "The ProcessOS Harness governance process runs on Camunda, tracks project state across phases and milestones, and drives the AI coding agent through governance jobs."
 keywords: ["ProcessOS Harness", "governance process", "milestones"]
 ---
@@ -24,12 +24,12 @@ The governance process is controlled via the AI coding agent. As soon as you are
 
 The engagement runs through four phases in order. The output of one phase is the input to the next.
 
-| Phase                                   | Goal                                                                        | Milestone reached             |
-| --------------------------------------- | --------------------------------------------------------------------------- | ----------------------------- |
-| Scope                                   | Define the scope of the process to re-engineer.                             | Process scope defined         |
-| [Discover](phases/1-discovery.md)       | Discover the as-is process from provided sources, and close gaps with SMEs. | As-is models finalized        |
-| [Transform](phases/2-transformation.md) | Transform the as-is process into a to-be process.                           | To-be models finalized        |
-| [Implement](phases/3-implementation.md) | Generate and implement the executable Camunda solution.                     | Executable solution generated |
+| Phase     | Goal                                                                        | Milestone reached             |
+| --------- | --------------------------------------------------------------------------- | ----------------------------- |
+| Scope     | Define the scope of the process to re-engineer.                             | Process scope defined         |
+| Discover  | Discover the as-is process from provided sources, and close gaps with SMEs. | As-is models finalized        |
+| Transform | Transform the as-is process into a to-be process.                           | To-be models finalized        |
+| Implement | Generate and implement the executable Camunda solution.                     | Executable solution generated |
 
 Each phase starts with you defining the run configuration for the upcoming iteration. The configuration can be adjusted after each run.
 
