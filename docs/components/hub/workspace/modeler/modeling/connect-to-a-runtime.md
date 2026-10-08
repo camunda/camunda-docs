@@ -1,15 +1,14 @@
 ---
 id: connect-to-a-runtime
 title: Connect to a runtime
-description: "Choose the environment or cluster that task testing, connector credentials, and the Webhook tab work against while you model in Camunda Hub."
+description: "Choose the environment that task testing, connector credentials, and the Webhook tab work against while you model in Camunda Hub."
 ---
 
 import RuntimeSelectorImg from './img/runtime-connection-selector.png';
 import RuntimeEnvironmentsImg from './img/runtime-connection-environments.png';
-import RuntimeClustersImg from './img/runtime-connection-clusters.png';
 import RuntimeCredentialsDialogImg from './img/runtime-connection-credentials-dialog.png';
 
-Learn how to choose the runtime connection: the environment or cluster that Camunda Hub works against while you model, shown in the **Runtime** selector at the bottom of the modeling interface.
+Learn how to choose the runtime connection: the environment that Camunda Hub works against while you model, shown in the **Runtime** selector at the bottom of the modeling interface.
 
 ## About the runtime connection
 
@@ -27,32 +26,25 @@ With the runtime connection, you model against a real runtime instead of guessin
 The runtime connection doesn't change your deploy target. **Deploy** and **Run** keep using the target you choose in their own dialog. See [run or publish your process](../run-or-publish-your-process.md).
 
 :::note
-The runtime connection is the Camunda Hub counterpart of the Desktop Modeler [connection manager](/components/modeler/desktop-modeler/connect-to-camunda-8.md). Unlike Desktop Modeler, you don't enter a cluster URL or API client credentials. You choose from the environments or clusters already configured in Camunda Hub.
+The runtime connection is the Camunda Hub counterpart of the Desktop Modeler [connection manager](/components/modeler/desktop-modeler/connect-to-camunda-8.md). Unlike Desktop Modeler, you don't enter a cluster URL or API client credentials. You choose from the environments assigned to your workspace.
 :::
 
 ## Choose what to connect to
 
-The **Runtime** selector lists environments or clusters, depending on how your organization is set up.
-
-- **Environments**: If your organization uses [environments](/components/hub/index.md#workspaces-and-environments), the selector lists the environments assigned to your workspace, and its title is **Connect to an environment**.
-- **Clusters**: Otherwise, the selector lists clusters, and its title is **Connect to a cluster**. For a diagram in a project, it lists the clusters connected to the project. For a diagram outside a project, it lists all clusters of your organization.
+The **Runtime** selector lists the [environments](/components/hub/index.md#workspaces-and-environments) assigned to your workspace, and its title is **Connect to an environment**.
 
 On Self-Managed, two Physical Tenants of the same cluster are separate environments, so they are separate connections. The selector shows the name of the environment, not the name of the cluster.
 
-Both lists work the same way. The rest of this page uses "runtime" for both. In cluster mode, each cluster shows its Zeebe version. For a diagram in a project, the link at the bottom manages the clusters of the project:
-
-<img src={RuntimeClustersImg} width="424px" alt="Open Runtime selector titled Connect to a cluster, listing the Development, Testing, and Production clusters with their stage tags and Zeebe versions, Development connected, Testing marked Needs credentials, Work offline, and the Manage project clusters link" />
-
 ## Change the runtime connection
 
-If your organization uses environments, **Runtime** shows **Not connected** until you choose a runtime or deploy the diagram. After a successful deployment, it shows the environment you deployed to, unless you've already chosen a runtime for this diagram. To connect:
+**Runtime** shows **Not connected** until you choose a runtime or deploy the diagram. After a successful deployment, it shows the environment you deployed to, unless you've already chosen a runtime for this diagram. To connect:
 
 1. Open a BPMN diagram.
 1. At the bottom of the modeling interface, next to **Check problems against**, click **Runtime**.
 
    <img src={RuntimeSelectorImg} width="550px" alt="Runtime selector at the bottom of the modeling interface, next to Check problems against, connected to the Development environment with a healthy status icon and the dev stage tag" />
 
-1. Select an environment or cluster from the list. Each entry shows its status icon, stage, and version, plus a badge if it needs your attention.
+1. Select an environment from the list. Each entry shows its status icon, stage, and version, plus a badge if it needs your attention.
 
    <img src={RuntimeEnvironmentsImg} width="424px" alt="Open Runtime selector titled Connect to an environment, listing the Development, Production, and Testing environments with healthy status icons, stage tags, and versions, Testing marked Needs credentials, Work offline currently selected, and the Manage workspace environments link" />
 
@@ -112,17 +104,7 @@ Select **Work offline** at the bottom of the selector to disconnect. While you w
 
 ## Manage the available runtimes
 
-The selector only lists runtimes that are already available to the diagram, and which ones depends on where the diagram lives:
-
-- **Environments**: the environments assigned to your workspace.
-- **Clusters, for a diagram in a project**: the clusters connected to the project's stages.
-- **Clusters, for a diagram outside a project**: all clusters of your organization.
-
-To change what it offers, use the link at the bottom of the selector:
-
-- **Manage workspace environments** opens the environment settings of your workspace. It's shown if you can manage the environments of the workspace.
-- **Manage project clusters** opens the connected clusters of your project. It's shown if you can modify the project.
-- **Manage clusters** opens the clusters page of your organization. It's shown to organization admins when the diagram isn't part of a project.
+The selector only lists the environments that are assigned to your workspace. To change what it offers, use the **Manage workspace environments** link at the bottom of the selector. It opens the environment settings of your workspace, and it's shown if you can manage the environments of the workspace.
 
 ## Permissions
 
@@ -132,11 +114,11 @@ Camunda Hub doesn't check your permissions before it reads from the connected ru
 
 ### No environments assigned to this workspace
 
-**What you see**: The selector shows **No environments assigned to this workspace**, **No clusters connected to this project**, or **No clusters connected to this workspace**.
+**What you see**: The selector shows **No environments assigned to this workspace**.
 
-**Why it happens**: No runtime is available to the diagram yet: no environment is assigned to the workspace, no cluster is connected to the project, or, for a diagram outside a project, your organization has no clusters.
+**Why it happens**: No environment is assigned to the workspace of the diagram yet.
 
-**How to fix it**: Ask a workspace or organization admin to assign an environment to the workspace, connect a cluster to the project, or create a cluster for the organization. Use the link at the bottom of the selector if you have permission.
+**How to fix it**: Ask a workspace or organization admin to assign an environment to the workspace. Use the **Manage workspace environments** link at the bottom of the selector if you have permission.
 
 ### Unable to check environment availability
 
