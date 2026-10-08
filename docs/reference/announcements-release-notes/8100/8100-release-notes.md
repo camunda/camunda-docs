@@ -825,7 +825,7 @@ In Camunda Hub, the runtime connection of the modeler is a connection to an envi
 - Two Physical Tenants on the same cluster are separate connections.
 
 :::note
-The runtime connection is disabled by default and behind the feature flag `runtimeConnectionEnabled`. The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
+In Self-Managed, the runtime connection is enabled by default. You can [turn it off](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md#configure-the-runtime-connection-in-self-managed).
 :::
 
 <p class="link-arrow">[Connect to a runtime](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md)</p>
@@ -1789,11 +1789,11 @@ This new versioning model will be introduced for Self-Managed deployments with t
 
 <!-- https://github.com/camunda/product-hub/issues/3475 -->
 
-You can now view and choose which cluster you are connected to in Camunda Hub.
+You can now view and choose which environment you are connected to in Camunda Hub.
 
-- Connector-credential names from the cluster autocomplete in your FEEL expressions.
-- Task testing runs against the connected cluster.
-- Choose the cluster from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real environment.
+- Connector-credential names from the connected environment autocomplete in your FEEL expressions.
+- Task testing runs against the connected environment.
+- Choose the environment from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real runtime.
 
 ### Connectivity
 
