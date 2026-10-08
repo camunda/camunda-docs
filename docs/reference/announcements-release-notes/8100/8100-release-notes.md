@@ -825,7 +825,7 @@ In Camunda Hub, the runtime connection of the modeler is a connection to an envi
 - Two Physical Tenants on the same cluster are separate connections.
 
 :::note
-The runtime connection is disabled by default and behind the feature flag `runtimeConnectionEnabled`. The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
+In Self-Managed, the runtime connection is enabled by default. You can [turn it off](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md#configure-the-runtime-connection-in-self-managed).
 :::
 
 <p class="link-arrow">[Connect to a runtime](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md)</p>
