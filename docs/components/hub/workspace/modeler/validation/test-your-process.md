@@ -21,6 +21,8 @@ Opening the **Test** tab doesn't deploy your process automatically. Use the **Se
 
 The Test action bar shows the name of the selected environment, its tags, and its Logical Tenant. Click it to choose a different environment without leaving Test mode. The newly selected environment becomes the deployment and execution target. If no environment is selected, the action bar shows **No environment selected**.
 
+Test mode runs against the environment you select here. It doesn't follow the [runtime connection](../modeling/connect-to-a-runtime.md) of the modeler, which task testing and connector credentials use.
+
 If no environment is assigned to your workspace, Test mode tells you that an environment must be assigned to the workspace. Ask an organization admin to [assign an environment](/components/hub/organization/manage-environments/assign-environments.md).
 
 In SaaS, Test mode uses connector secrets from the cluster of your selected environment. Connector secrets are not currently supported in Self-Managed.

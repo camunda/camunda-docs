@@ -21,6 +21,8 @@ With the runtime connection, you model against a real runtime instead of guessin
 | Connector credentials                                                                     | Offers the credentials available on the connected runtime in the properties panel of connector templates. Requires a runtime on Camunda 8.10 or later. |
 | **Webhook** tab of inbound connectors                                                     | Shows the webhook status and logs of the connected runtime.                                                                                            |
 | [Problems panel](./fix-problems-in-your-diagram.md#follow-the-runtime-connection-version) | Validates the diagram against the Camunda version of the connected runtime.                                                                            |
+| Cluster variables                                                                         | Offers the cluster variables of the connected runtime in your FEEL expressions.                                                                        |
+| Copilot                                                                                   | Uses the connected runtime as context.                                                                                                                 |
 
 The runtime connection doesn't change your deploy target. **Deploy** and **Run** keep using the target you choose in their own dialog. See [run or publish your process](../run-or-publish-your-process.md).
 
@@ -34,6 +36,8 @@ The **Runtime** selector lists environments or clusters, depending on how your o
 
 - **Environments**: If your organization uses [environments](/components/hub/index.md#workspaces-and-environments), the selector lists the environments assigned to your workspace, and its title is **Connect to an environment**.
 - **Clusters**: Otherwise, the selector lists clusters, and its title is **Connect to a cluster**. For a diagram in a project, it lists the clusters connected to the project. For a diagram outside a project, it lists all clusters of your organization.
+
+On Self-Managed, two Physical Tenants of the same cluster are separate environments, so they are separate connections. The selector shows the name of the environment, not the name of the cluster.
 
 Both lists work the same way. The rest of this page uses "runtime" for both. In cluster mode, each cluster shows its Zeebe version. For a diagram in a project, the link at the bottom manages the clusters of the project:
 
@@ -119,6 +123,10 @@ To change what it offers, use the link at the bottom of the selector:
 - **Manage workspace environments** opens the environment settings of your workspace. It's shown if you can manage the environments of the workspace.
 - **Manage project clusters** opens the connected clusters of your project. It's shown if you can modify the project.
 - **Manage clusters** opens the clusters page of your organization. It's shown to organization admins when the diagram isn't part of a project.
+
+## Permissions
+
+Camunda Hub doesn't check your permissions before it reads from the connected runtime. If you can't access something there, the feature shows less information, for example no credential suggestions, and doesn't block you from modeling. The runtime decides what you can access.
 
 ## Troubleshoot the runtime connection
 

@@ -1795,6 +1795,10 @@ You can now view and choose which cluster you are connected to in Camunda Hub.
 - Task testing runs against the connected cluster.
 - Choose the cluster from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real environment.
 
+:::note
+In 8.10, the runtime connection targets environments instead of clusters. See [runtime connection targets environments](#runtime-connection-targets-environments).
+:::
+
 ### Connectivity
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects networking">Networking</span></div>
