@@ -477,7 +477,7 @@ module.exports = {
                 .filter((version) => version.collapsed)
                 .map(
                   (version) =>
-                    `<a class="dropdown__link" target="_blank" rel="noopener noreferrer" href="https://unsupported.docs.camunda.io/${version.urlSuffix}/">${version.label}${externalLinkIcon}</a>`
+                    `<a class="dropdown__link" target="_blank" rel="noopener noreferrer" aria-label="${version.label} (opens in a new window)" href="https://unsupported.docs.camunda.io/${version.urlSuffix}/">${version.label}${externalLinkIcon}</a>`
                 )
                 .join("")}</details>`,
             },
