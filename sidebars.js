@@ -2607,6 +2607,7 @@ module.exports = {
             {
               Configuration: [
                 "self-managed/components/hub/configuration/properties",
+                "self-managed/components/hub/configuration/environments",
                 "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
