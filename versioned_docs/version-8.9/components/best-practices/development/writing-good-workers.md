@@ -6,7 +6,7 @@ description: "Service tasks within Camunda 8 require you to set a task type and 
 [Service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md) within Camunda 8 require you to set a task type and implement [job workers](/components/concepts/job-workers.md) who perform whatever needs to be performed. This describes that you might want to:
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
-2. Think about idempotency and read or write as little data as possible from/to the process.
+2. Write idempotent workers, because Zeebe is an "at least once" engine and can deliver the same job more than once. Also read and write as little data as possible from/to the process.
 3. If you use Java 21 or later, prefer virtual threads for parallel workers that perform blocking I/O. Use reactive or async code when your runtime already uses it, or when you need extremely high throughput or low latency.
 
 ## Organizing glue code and workers in process solutions
@@ -51,9 +51,25 @@ There are exceptions when you might not want to have all glue code within one ap
 
 In this case, you would spread your workers into different applications. Most often, you might still have a main process solution that will also still deploy the process model. Only specific workers are carved out.
 
-## Thinking about transactions, exceptions and idempotency of workers
+## Writing idempotent workers
 
-Visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding of how workers deal with transactions and exceptions to the happy path, and find more details on how to write idempotent workers.
+Zeebe is an **"at least once"** execution engine for jobs. A job is only completed when the engine receives and commits the complete job request. If a worker crashes, loses its connection, or exceeds the [job timeout](/components/concepts/job-workers.md#timeouts) before it can complete the job, the engine gives the job to another worker. This guarantees that the job handler runs at least once, but it also means the handler can run more than once for the same job, possibly with side effects already applied.
+
+:::warning
+Your workers **must** be idempotent. Running the handler more than once for the same job must leave the application in the same state as running it once. Non-idempotent workers can cause duplicate payments, duplicate orders, or other inconsistent data.
+:::
+
+Make idempotency a conscious design decision for every worker, not an afterthought. Strategies include:
+
+- **Natural idempotency**: some operations can safely run any number of times because they only set state, for example `confirmCustomer()`.
+- **Business idempotency**: use a business identifier to detect duplicate calls, for example `createCustomer(email)`.
+- **Custom idempotency handling**: generate a unique ID or hash, pass it with the call, and let the target system reject duplicates, for example `charge(transactionId, amount)`.
+
+For more details, examples, and a process model that supports custom idempotency handling, see [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/#writing-idempotent-workers).
+
+## Thinking about transactions and exceptions
+
+Visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding of how workers deal with transactions and exceptions to the happy path.
 
 ## Data minimization in workers
 
