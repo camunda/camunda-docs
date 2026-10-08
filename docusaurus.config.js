@@ -727,6 +727,9 @@ module.exports = {
             current: {
               label: "8.11 (unreleased)",
             },
+            8.9: {
+              banner: "none",
+            },
             8.8: {
               banner: "none",
             },
