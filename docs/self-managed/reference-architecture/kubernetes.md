@@ -110,8 +110,6 @@ By default, node affinity rules prevent all Orchestration Cluster pods from bein
 
 To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. The default anti-affinity rules ensure Orchestration Cluster pods run on distinct nodes, but do not ensure those nodes are in different zones — use the `orchestration.topologySpreadConstraints` Helm value to spread them across zones. For configuration details and caveats, see [topology spread constraints](/self-managed/deployment/helm/install/production/index.md#topology-spread-constraints).
 
-Multi-AZ placement protects against an availability-zone outage. For protection against a complete region outage, compare the deployment strategies in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md#get-started-choose-your-strategy).
-
 ### Components
 
 Camunda 8 deployments separate workloads into three logical groups, each installed as its own Helm release with a `global.topology.mode` role:
