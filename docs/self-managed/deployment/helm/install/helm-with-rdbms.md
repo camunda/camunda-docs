@@ -200,7 +200,7 @@ Create the ConfigMap from the JAR file. The command stores the JAR in the `binar
 
 ```bash
 kubectl create configmap jdbc-drivers \
-  --from-file=ojdbc.jar=<path-to-driver-jar> \
+  --from-file=driver.jar=<path-to-driver-jar> \
   -n camunda
 ```
 
@@ -213,7 +213,7 @@ metadata:
   name: jdbc-drivers
   namespace: camunda
 binaryData:
-  ojdbc.jar: <base64-encoded JAR content>
+  driver.jar: <base64-encoded JAR content>
 ```
 
 Then mount the ConfigMap in your `values-rdbms.yaml`:

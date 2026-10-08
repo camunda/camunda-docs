@@ -147,9 +147,13 @@ camunda.security.authentication.unprotected-api: true
   <TabItem value="helm" label="Helm values">
 ```yaml
 orchestration:
-  security:
-    authentication:
-      unprotectedApi: true
+  extraConfiguration:
+    - file: unprotected-api.yaml
+      content: |
+        camunda:
+          security:
+            authentication:
+              unprotected-api: true
 ```
   </TabItem>
 </Tabs>
