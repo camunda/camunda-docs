@@ -1,0 +1,10 @@
+.search {
+  margin-bottom: 1rem;
+}
+
+.heroImage {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
