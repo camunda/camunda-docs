@@ -5,9 +5,9 @@ sidebar_label: "Helm values schema validation"
 description: "Learn how Helm checks values against the Camunda 8 chart schema, how to bypass the check, and which deployment tools support the bypass."
 ---
 
-The Camunda 8 Helm chart includes a `values.schema.json` file. Helm compares your values to this schema before it renders the chart templates. A value that doesn't match the schema stops the command.
+Learn how Helm checks values against the Camunda 8 chart schema, how to bypass the check, and which deployment tools support the bypass.
 
-This page explains how the validation works, how to bypass it, and which deployment tools support the bypass.
+The Camunda 8 Helm chart includes a `values.schema.json` file. Helm compares your values to this schema before it renders the chart templates. A value that doesn't match the schema stops the command.
 
 ## How the validation works
 
@@ -44,7 +44,7 @@ helm upgrade --install camunda camunda/camunda-platform \
 
 Keep these limits in mind:
 
-- You need Helm 3.16.0 or later. Helm 3.15 returns `Error: unknown flag: --skip-schema-validation`.
+- You need Helm 3.16.0 or later. Helm 3.15 returns `Error: unknown flag: --skip-schema-validation`. Helm 4 supports the same flag.
 - The flag turns off all schema checks, including type checks. It doesn't only allow unknown keys.
 - Camunda hasn't decided to turn on strict validation by default. This page describes the current behavior.
 
