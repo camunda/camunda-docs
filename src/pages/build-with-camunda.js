@@ -819,7 +819,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start ${CAMUNDA_RUN.alphaVersion}`}
+              {`$ c8ctl cluster start ${CAMUNDA_RUN.version}`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
