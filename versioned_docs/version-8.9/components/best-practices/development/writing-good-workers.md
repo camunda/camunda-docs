@@ -9,7 +9,7 @@ description: "Service tasks within Camunda 8 require you to set a task type and 
 2. Write idempotent workers, because Zeebe is an "at least once" engine and can deliver the same job more than once. Also read and write as little data as possible from/to the process.
 3. If you use Java 21 or later, prefer virtual threads for parallel workers that perform blocking I/O. Use reactive or async code when your runtime already uses it, or when you need extremely high throughput or low latency.
 
-## Organizing glue code and workers in process solutions
+## Organize glue code and workers in process solutions
 
 Assume the following order fulfillment process, that needs to invoke three synchronous REST calls to the responsible systems (payment, inventory, and shipping) via custom glue code:
 
@@ -51,7 +51,7 @@ There are exceptions when you might not want to have all glue code within one ap
 
 In this case, you would spread your workers into different applications. Most often, you might still have a main process solution that will also still deploy the process model. Only specific workers are carved out.
 
-## Writing idempotent workers
+## Write idempotent workers
 
 Zeebe is an **"at least once"** execution engine for jobs. A job is only completed when the engine receives and commits the complete job request. If a worker crashes, loses its connection, or exceeds the [job timeout](/components/concepts/job-workers.md#timeouts) before it can complete the job, the engine gives the job to another worker. This guarantees that the job handler runs at least once, but it also means the handler can run more than once for the same job, possibly with side effects already applied.
 
@@ -67,7 +67,7 @@ Make idempotency a conscious design decision for every worker, not an afterthoug
 
 For more details, examples, and a process model that supports custom idempotency handling, see [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/#writing-idempotent-workers).
 
-## Thinking about transactions and exceptions
+## Transactions and exceptions
 
 Visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding of how workers deal with transactions and exceptions to the happy path.
 
@@ -86,7 +86,7 @@ This could mean tens or more variables, of arbitrary size, and it can be difficu
 
 We recommend you use the `FetchVariables` parameter, and only fetch the variables which your job handler needs. This will keep the amount of data transferred to a minimum, and will greatly help performance.
 
-## Scaling workers
+## Scale workers
 
 If you need to process a lot of jobs, you need to think about optimizing your workers.
 
@@ -96,7 +96,7 @@ You will have jobs in your local application that need to be processed. The wors
 
 However, you might need to do better and process jobs in parallel. In such a case, you should read on and understand the difference between writing blocking code on platform threads, blocking code on virtual threads, and non-blocking code.
 
-### Blocking / synchronous code and thread pools
+### Synchronous code and thread pools
 
 With blocking code a thread needs to wait (is blocked) until something finishes before it can move on. In the above example, making a REST call requires the client to wait for IO — the response. The CPU cannot compute anything during this time period, however, the thread cannot do anything else.
 
@@ -106,13 +106,13 @@ A common approach to scaling throughput beyond this limit is to leverage a threa
 
 The downside of using thread pools is that you need to have a good understanding of your code, thread pools in general, and the concrete libraries being used. Typically, we do not recommend configuring platform thread pools yourself. In Java 21 and later, prefer virtual threads for workers that perform blocking I/O.
 
-### Blocking code with virtual threads
+### Virtual threads for synchronous code
 
 Virtual threads let you keep a straightforward blocking programming model while avoiding the cost of assigning one platform thread to every blocked operation. This makes them a good default for Java workers that spend most of their time waiting for I/O, such as REST calls or database requests.
 
 Use virtual threads when you run on Java 21 or later and want to process many I/O-bound jobs in parallel without rewriting your worker code into a reactive style. Reactive programming can still be useful for extremely high-throughput or low-latency scenarios where the lower overhead matters enough to justify the added complexity.
 
-### Non-blocking / reactive code
+### Asynchronous / reactive code
 
 Reactive programming uses a different approach to achieve parallel work: extract the waiting part from your code.
 
@@ -127,7 +127,7 @@ In Java 21 and later, prefer virtual threads for I/O-bound job workers that need
 Most of the business logic in your process models will likely end up being worked on as a job. As such, optimizing how jobs are handled in Zeebe can have
 a big impact on the performance of your system as a whole. Here are some best practices to keep things running smoothly.
 
-### Reduce latency by enabling job streaming
+### Reduce latency with job streaming
 
 We recommend enabling [job streaming](../../concepts/job-workers.md#job-streaming) in order to reduce latency to a maximum. Essentially, when using long polling,
 your job workers have to periodically poll every partition in your Zeebe cluster to check if there are new jobs available. Additionally, they have to
