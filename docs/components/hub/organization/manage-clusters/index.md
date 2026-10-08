@@ -133,7 +133,7 @@ In Self-Managed, you provision and operate your clusters with your own platform 
 1. Provision the cluster with your platform tooling, as described in the [Self-Managed installation guide](/self-managed/setup/overview.md).
 1. Add the cluster to the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#clusters). Camunda Hub reads this configuration at startup, so perform a rolling restart of Camunda Hub to pick up the change.
 
-Click **Register new cluster** on the **Clusters** page to see these steps in Camunda Hub. For the configuration options, see the [clusters](/self-managed/components/hub/configuration/properties.md#clusters) and [physical tenants](/self-managed/components/hub/configuration/environments.md#physical-tenants) sections of the Camunda Hub configuration.
+Click **Register new cluster** on the **Clusters** page to see these steps in Camunda Hub. For the configuration options, see the [clusters](/self-managed/components/hub/configuration/properties.md#clusters) and [Physical Tenants](/self-managed/components/hub/configuration/environments.md#physical-tenants) sections of the Camunda Hub configuration.
 
 After the restart, the cluster appears on the **Clusters** page, and each of its [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) appears as an environment. An organization admin can then [assign the environments to a workspace](../manage-environments/assign-environments.md).
 

@@ -17,12 +17,12 @@ If you deploy with the Helm chart, see [Physical Tenants in the Helm topology](/
 
 ### Declare Physical Tenants
 
-Declare each additional [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) of a cluster with `physical-tenants`. See [how an environment maps to infrastructure](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure) for how Camunda Hub names the environment of a tenant.
+Declare each additional Physical Tenant of a cluster with `physical-tenants`. See [how an environment maps to infrastructure](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure) for how Camunda Hub names the environment of a tenant.
 
 | Property                                                 | Description                                                                                                                             | Required |
 | :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :------- |
 | `camunda.hub.clusters[0].physical-tenants[0].id`         | The ID of the Physical Tenant. Camunda Hub shows it as the environment name.                                                            | Yes      |
-| `camunda.hub.clusters[0].physical-tenants[0].name`       | Reserved. Camunda Hub accepts it, but doesn't use it yet. The name of the environment is the ID of the Physical Tenant.                 | No       |
+| `camunda.hub.clusters[0].physical-tenants[0].name`       | Reserved. Camunda Hub accepts the key, but doesn't use it yet. The name of the environment is the ID of the Physical Tenant.            | No       |
 | `camunda.hub.clusters[0].physical-tenants[0].components` | The [components](properties.md#components) that differ from the cluster for this tenant. Each component needs a `type` and a `version`. | No       |
 
 Example configuration:
@@ -71,7 +71,7 @@ If a cluster earlier than 8.10 declares `components` on a tenant, Camunda Hub fa
 
 ## Environment status
 
-Camunda Hub sends an HTTP request to the `urls.readiness` address of each component of an environment to determine its status. The status of the environment is the worst result of its components. From worst to best, the order is **Unhealthy**, **Unknown**, **Healthy**. One Unhealthy component makes the environment Unhealthy, even if other components are Unknown. An environment is Healthy only if all of its components are Healthy.
+Camunda Hub sends an HTTP request to the `urls.readiness` address of each component of an environment to determine its status. The status of the environment is the worst result of its components. From worst to best, the order is **Unhealthy**, **Unknown**, **Healthy**. One **Unhealthy** component makes the environment **Unhealthy**, even if other components are **Unknown**. An environment is **Healthy** only if all of its components are Healthy.
 
 | Component response                                                                                      | Status    |
 | :------------------------------------------------------------------------------------------------------ | :-------- |
