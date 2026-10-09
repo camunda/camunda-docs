@@ -92,7 +92,7 @@ The user must be assigned the organization **Organization Owner** or **Organizat
 
 Access to Optimize includes access to the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md), where users view metrics and set targets. The same roles that grant access to Optimize also grant access to business value: Analyst, Organization Admin, and Organization Owner.
 
-### Environment access
+### Environment visibility
 
 - **Manage**: View all environments and resume paused ones. Organization Owner, Organization Admin, and DevOps have this level. Only Organization Owner and Organization Admin can assign environments to workspaces.
 - **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
@@ -184,7 +184,7 @@ Refer to the documentation pages about [assigning roles](/self-managed/component
 
 Access to Optimize includes access to the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md), where users view metrics and set targets. The same roles that grant access to Optimize also grant access to business value: Analyst and Organization Admin.
 
-### Environment access {#environment-access-self-managed}
+### Environment visibility {#environment-visibility-self-managed}
 
 - **Manage**: View all environments. Organization Admin and DevOps have this level. Only Organization Admin can assign environments to workspaces.
 - **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
