@@ -92,6 +92,10 @@ A `physicalTenants` entry registers the tenant's Optimize client and role in Man
 
 A distinct `roleName` isolates the Optimize role per tenant, but it doesn't isolate Optimize's logical tenants, which are a separate mechanism. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants) if you reuse the same logical tenant ID across Physical Tenants behind one shared Management Identity.
 
+## Isolate the index prefixes
+
+Every tenant needs its own writer, reader, and Optimize application prefixes, and each reader prefix must equal its writer prefix. See [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
+
 ## Override the secret store per tenant
 
 `orchestration.secretStore.physicalTenants` deep-overlays the root secret store for a named tenant. Tenant IDs here may contain letters, digits, underscores, and hyphens.

@@ -24,7 +24,7 @@ An orchestration release is self-contained. Its existing component values remain
 | `identity.enabled: false`                 | Management Identity runs only in the Hub release                          |
 | A non-empty `global.identity.service.url` | This release runs no Identity of its own, so it must be told where one is |
 
-The chart fails the render with a `[camunda][error]` message if any of the first three is missing. The 8.7, 8.8, and 8.9 charts also check `global.identity.service.url`. The 8.10 chart doesn't, so set it yourself.
+On the 8.10 chart, the render fails with a `[camunda][error]` message if any of the first three is missing, but not if `global.identity.service.url` is empty, so set it yourself. The 8.7, 8.8, and 8.9 charts also check `global.identity.service.url`, and check their own workload keys instead of `orchestration.enabled`. See [requirements by chart version](#requirements-by-chart-version). These checks aren't the complete list of what each chart validates.
 
 The component client IDs, audiences, redirect URLs, and secrets must match the clients declared in the matching Hub cluster record. A mismatch authenticates against a client Hub doesn't know about.
 

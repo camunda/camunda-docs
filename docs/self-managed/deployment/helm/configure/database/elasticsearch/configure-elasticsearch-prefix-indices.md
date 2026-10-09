@@ -94,11 +94,12 @@ A wrong prefix doesn't cause an error:
 
 ## Configuration reference
 
-| Configuration                            | Default        | Used By                                 | Purpose                                                  |
-| ---------------------------------------- | -------------- | --------------------------------------- | -------------------------------------------------------- |
-| `orchestration.index.prefix`             | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for Orchestration Cluster indices                 |
-| `optimize.database.elasticsearch.prefix` | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices (consumed by Optimize) |
-| `optimize.database.opensearch.prefix`    | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices when using OpenSearch  |
+| Configuration                                | Default        | Used By                                 | Purpose                                                                                                                                                                |
+| -------------------------------------------- | -------------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `orchestration.index.prefix`                 | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for Orchestration Cluster indices                                                                                                                               |
+| `orchestration.exporters.zeebe.index.prefix` | `""`           | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices. When empty, falls back to `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`, then to `zeebe-record` |
+| `optimize.database.elasticsearch.prefix`     | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices (consumed by Optimize)                                                                                                               |
+| `optimize.database.opensearch.prefix`        | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices when using OpenSearch                                                                                                                |
 
 ### Optimize-specific configuration
 
