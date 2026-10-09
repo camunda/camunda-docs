@@ -2,7 +2,7 @@
 id: overview
 title: ProcessOS Harness
 sidebar_label: Overview
-description: "ProcessOS discovers and re-engineers your existing processes to use AI, and generates executable Camunda solutions. ProcessOS Harness is the governance backbone of ProcessOS."
+description: "ProcessOS discovers and re-engineers your existing processes to use AI, and generates executable Camunda solutions. ProcessOS Harness is the backbone of ProcessOS."
 keywords:
   [
     "ProcessOS",
@@ -22,9 +22,9 @@ ProcessOS Harness is available as [early access](/components/early-access/overvi
 
 ## About
 
-ProcessOS Harness is the governance backbone of ProcessOS. It is a governance process that runs on Camunda and drives AI coding agents, such as Claude Code or GitHub Copilot CLI, to perform the building safely and under control.
+ProcessOS Harness is the backbone of ProcessOS. It is a governance process that runs on Camunda and drives AI coding agents in the terminal, such as Claude Code CLI or GitHub Copilot CLI, to perform the building safely and under control.
 
-The harness guides the agent through each phase, asks for human review at defined gates, and commits every artifact to Git, so an AI-generated solution stays reviewable at every step.
+The input for ProcessOS Harness can be any resource that describes the process, such as files, systems, or web pages. The harness guides the agent through a phased approach, asks humans for review, and generates a tested and deployable Camunda solution.
 
 ## Who ProcessOS Harness is for
 
@@ -59,7 +59,7 @@ The governance process itself runs on Camunda. Project state lives in Camunda an
 
 AI isn't deterministic, so ProcessOS Harness doesn't produce a finished solution in a single pass. Project maturity rises through iterations across discovery, transformation, and implementation, and thinking in iterations is the skill that matters most.
 
-Your expert judgment is what turns agent output into a working system. ProcessOS Harness generates artifacts and runs tests, but you assess each result and confirm when it is ready to carry into the next phase. Plan for review, correction, and another iteration rather than for a single hand-off.
+Your expert judgment is what turns agent output into a working system. ProcessOS Harness generates artifacts, such as process descriptions, BPMN models, DMN tables, Camunda Forms, and job workers, and runs tests, but you assess each result and confirm when it is ready to carry into the next phase. Plan for review, correction, and another iteration rather than for a single hand-off.
 
 The AI coding agent supports you throughout. You can ask it to fix problems at any point, including working around defects you hit along the way.
 
