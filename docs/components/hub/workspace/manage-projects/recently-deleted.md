@@ -1,10 +1,11 @@
 ---
 id: recently-deleted
-title: Recover deleted resources
-description: Recover deleted resources within 30 days of deletion. After 30 days, resources are permanently deleted along with their content, version history, and Git links.
+title: Recover deleted projects and files
+sidebar_label: Recover deleted resources
+description: Recover deleted projects, folders, and files within 30 days of deletion. After 30 days, resources are permanently deleted along with their content, version history, and Git links.
 ---
 
-Learn how to recover recently deleted resources, such as files, folders, and projects, before they're permanently removed.
+Learn how to recover recently deleted resources, such as files, folders, and projects, before they're permanently removed. To recover a deleted workspace, see [recover a deleted workspace](../../organization/manage-workspaces/recover-workspace.md).
 
 ## Soft deletion in Camunda Hub
 
@@ -13,7 +14,7 @@ When you delete a resource, it's moved to **Recently deleted**. You have 30 days
 - Files
 - Folders
 - Projects
-- Workspaces
+- Workspaces, which you recover as described in [recover a deleted workspace](../../organization/manage-workspaces/recover-workspace.md)
 - IDP applications
 - IDP projects
 

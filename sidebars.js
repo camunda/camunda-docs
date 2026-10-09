@@ -768,104 +768,26 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Organization",
+          label: "Workspaces",
           link: {
             type: "doc",
-            id: "components/hub/organization/organization",
+            id: "components/hub/organization/manage-workspaces/manage-workspaces",
           },
           items: [
             {
               type: "category",
-              label: "Manage workspaces",
+              label: "Manage workspace",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-workspaces/manage-workspaces",
+                id: "components/hub/organization/manage-workspaces/manage",
               },
               items: [
-                "components/hub/organization/manage-workspaces/manage",
                 "components/hub/organization/manage-workspaces/manage-workspace-members",
-              ],
-            },
-            {
-              type: "category",
-              label: "Manage environments",
-              link: {
-                type: "doc",
-                id: "components/hub/organization/manage-environments/manage-environments",
-              },
-              items: [
                 "components/hub/organization/manage-environments/assign-environments",
+                "components/hub/workspace/manage-workspace/manage-workspace",
+                "components/hub/organization/manage-workspaces/recover-workspace",
               ],
             },
-            {
-              type: "category",
-              label: "Manage clusters",
-              link: {
-                type: "doc",
-                id: "components/hub/organization/manage-clusters/index",
-              },
-              items: [
-                "components/hub/organization/manage-clusters/cluster-connectors",
-              ],
-            },
-            {
-              type: "category",
-              label: "Manage the catalog",
-              link: {
-                type: "doc",
-                id: "components/hub/organization/manage-catalog/manage-catalog",
-              },
-              items: [
-                "components/hub/organization/manage-catalog/getting-started-catalog",
-                "components/hub/organization/manage-catalog/manage-asset-lifecycle",
-                "components/hub/organization/manage-catalog/track-asset-usage",
-                "components/hub/organization/manage-catalog/sync-multiple-repositories",
-              ],
-            },
-            "components/hub/organization/analyze-operations/business-value-dashboard",
-            {
-              type: "category",
-              label: "Manage credentials",
-              link: {
-                type: "doc",
-                id: "components/hub/organization/credentials/credentials",
-              },
-              items: [
-                "components/hub/organization/credentials/credentials-modeling-interface",
-              ],
-            },
-            "components/hub/organization/console",
-            {
-              type: "category",
-              label: "Manage organization",
-              link: {
-                type: "doc",
-                id: "components/hub/organization/manage-organization-settings/organization-settings",
-              },
-              items: ["components/hub/organization/users-and-roles"],
-            },
-            "components/hub/workspace/manage-projects/recently-deleted",
-            {
-              type: "category",
-              label: "Analyze operations",
-              link: {
-                type: "doc",
-                id: "components/hub/organization/analyze-operations/analyze-operations",
-              },
-              items: [
-                "components/hub/organization/analyze-operations/job-dashboard",
-              ],
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Workspace",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/workspace",
-          },
-          items: [
             {
               type: "category",
               label: "Manage projects",
@@ -880,6 +802,7 @@ module.exports = {
                 "components/hub/workspace/manage-projects/deploy-project",
                 "components/hub/workspace/manage-projects/git-sync",
                 "components/hub/workspace/manage-projects/project-settings",
+                "components/hub/workspace/manage-projects/recently-deleted",
               ],
             },
             {
@@ -966,11 +889,87 @@ module.exports = {
                 "components/hub/workspace/modeler/modeler-settings",
               ],
             },
-            {
-              type: "doc",
-              id: "components/hub/workspace/manage-workspace/manage-workspace",
-            },
           ],
+        },
+        {
+          type: "category",
+          label: "Environments",
+          link: {
+            type: "doc",
+            id: "components/hub/organization/manage-environments/manage-environments",
+          },
+          items: [],
+        },
+        {
+          type: "category",
+          label: "Clusters",
+          link: {
+            type: "doc",
+            id: "components/hub/organization/manage-clusters/index",
+          },
+          items: [
+            "components/hub/organization/manage-clusters/cluster-connectors",
+          ],
+        },
+        {
+          type: "doc",
+          id: "components/hub/organization/shared-resources/shared-resources",
+          label: "Shared resources",
+        },
+        {
+          type: "category",
+          label: "Catalog",
+          link: {
+            type: "doc",
+            id: "components/hub/organization/manage-catalog/manage-catalog",
+          },
+          items: [
+            "components/hub/organization/manage-catalog/getting-started-catalog",
+            "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+            "components/hub/organization/manage-catalog/track-asset-usage",
+            "components/hub/organization/manage-catalog/sync-multiple-repositories",
+          ],
+        },
+        {
+          type: "doc",
+          id: "components/hub/organization/analyze-operations/business-value-dashboard",
+          label: "Business value",
+        },
+        {
+          type: "category",
+          label: "Credentials",
+          link: {
+            type: "doc",
+            id: "components/hub/organization/credentials/credentials",
+          },
+          items: [
+            "components/hub/organization/credentials/credentials-modeling-interface",
+          ],
+        },
+        {
+          type: "doc",
+          id: "components/hub/organization/console",
+          label: "Console",
+        },
+        {
+          type: "category",
+          label: "Analyze operations",
+          link: {
+            type: "doc",
+            id: "components/hub/organization/analyze-operations/analyze-operations",
+          },
+          items: [
+            "components/hub/organization/analyze-operations/job-dashboard",
+          ],
+        },
+        {
+          type: "category",
+          label: "Organization",
+          link: {
+            type: "doc",
+            id: "components/hub/organization/manage-organization-settings/organization-settings",
+          },
+          items: ["components/hub/organization/users-and-roles"],
         },
       ],
     },

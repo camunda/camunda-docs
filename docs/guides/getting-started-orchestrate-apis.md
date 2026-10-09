@@ -35,7 +35,7 @@ The concept of a [connector](/reference/glossary.md#connector) consists of two p
 
 To use a REST connector in your process, follow the steps below:
 
-1. In Camunda Hub, open a [workspace](../components/hub/workspace/index.md).
+1. In Camunda Hub, open a [workspace](../components/hub/organization/manage-workspaces/index.md).
 2. Create a new project.
 3. In the project, click **Create new > BPMN diagram**.
 4. With your new diagram open, make sure you're in [**Implement** mode](/components/hub/workspace/modeler/collaboration/implement-your-process.md).

@@ -4,15 +4,7 @@ title: Camunda Hub
 description: "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub."
 ---
 
-import DocsIcon from "@site/docs/components/assets/icon-docs.png";
-import ConfigIcon from "@site/docs/components/assets/icon-config.png";
-import ConsoleIcon from "@site/docs/components/assets/icon-console.png";
-import ModelerIcon from "@site/docs/components/assets/icon-modeler.png";
-import IntegrationIcon from "@site/docs/components/assets/icon-integration.png";
-import OptimizeIcon from "@site/docs/components/assets/icon-optimize.png";
-import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
-import ConnectorsIcon from "@site/docs/components/assets/icon-connectors.png";
-import { BriefcaseIcon, FolderOpenIcon, ServerIcon, KeyRoundIcon } from "@site/docs/components/assets/hub-icons";
+import { BriefcaseIcon, ServerIcon, BoxesIcon, BookOpenIcon, LibraryIcon, TrendingUpIcon, KeyRoundIcon, SquareChevronRightIcon, ActivityIcon, BuildingComplexIcon } from "@site/docs/components/assets/hub-icons";
 import HubStructureImg from "./img/organization-structure.png";
 import HubWorkspacesImg from "./img/workspace-environments.png";
 import AoGrid from '../react-components/\_ao-card';
@@ -38,7 +30,7 @@ Camunda Hub's organization view shows the workspaces you belong to, organized in
 
 You can manage organizational resources, including clusters, deployment environments, and workspaces, and govern the use of reusable assets.
 
-<p class="link-arrow">[Manage organizational resources](/components/hub/organization/index.md)</p>
+<p class="link-arrow">[Explore Camunda Hub](#explore-camunda-hub)</p>
 
 <div style={{ textAlign: 'center', margin: '1.5rem 0 2.5rem' }}>
 
@@ -55,7 +47,7 @@ A deployment environment is a deployment target where a team runs its processes,
 
 Organization admins assign deployment environments to workspaces. Projects in a workspace can deploy to all the deployment environments assigned to it, so you can deploy and promote your work with clear access controls.
 
-<p class="link-arrow">[Build within a workspace](/components/hub/workspace/index.md)</p>
+<p class="link-arrow">[Work with workspaces](/components/hub/organization/manage-workspaces/index.md)</p>
 
 </div>
 <div class="double-column-right" style={{ flex: '1.8' }}>
@@ -65,82 +57,69 @@ Organization admins assign deployment environments to workspaces. Projects in a 
 </div>
 </div>
 
-## Manage organizational resources
+## Explore Camunda Hub
 
-Manage organizational resources, including clusters, deployment environments, and workspaces, and govern the use of reusable assets:
+The sections of this documentation follow the navigation of Camunda Hub. Center of Excellence and platform administration teams use some of them more, and delivery teams use others more. Your role and permissions decide which of them you can open in Camunda Hub.
 
 <AoGrid ao={[
 {
 link: "./organization/manage-workspaces",
-title: "Manage workspaces",
+title: "Workspaces",
 image: BriefcaseIcon,
-description: "Create and manage workspaces within your organization.",
-},
-{
-link: "./organization/manage-clusters/",
-title: "Manage clusters",
-image: BPMNIcon,
-description: "Create, monitor, and maintain the clusters that host your deployment environments.",
+description: "Create workspaces and manage their members. Build projects and model business processes.",
 },
 {
 link: "./organization/manage-environments",
-title: "Manage environments",
+title: "Environments",
 image: ServerIcon,
 description: "See your deployment environments and assign them to workspaces.",
 },
 {
+link: "./organization/manage-clusters/",
+title: "Clusters",
+image: BoxesIcon,
+description: "Monitor and maintain the clusters that host your environments.",
+},
+{
+link: "./organization/shared-resources",
+title: "Shared resources",
+image: BookOpenIcon,
+description: "Find the element templates that are published to your organization.",
+},
+{
+link: "./organization/manage-catalog",
+title: "Catalog",
+image: LibraryIcon,
+description: "Manage reusable automation assets in a Git repository, and publish them to Camunda Hub.",
+},
+{
+link: "./organization/analyze-operations/business-value-dashboard",
+title: "Business value",
+image: TrendingUpIcon,
+description: "Track process outcomes and set targets for cycle time and automation rate.",
+},
+{
 link: "./organization/credentials",
-title: "Manage credentials",
+title: "Credentials",
 image: KeyRoundIcon,
 description: "Create a reusable credential for use with element template authentication or connection configuration.",
 },
 {
-link: "./organization/manage-catalog",
-title: "Manage the catalog",
-image: ConnectorsIcon,
-description: "Manage reusable automation assets in a Git repository, and publish them to Camunda Hub.",
-},
-{
-link: "./organization/users-and-roles",
-title: "Manage users and roles",
-image: ConsoleIcon,
-description: "Manage the users, user groups, and roles in your organization.",
-},
-{
-link: "./organization/manage-organization-settings/organization-settings",
-title: "Manage organization",
-image: ConfigIcon,
-description: "Manage your organization, its users, and its settings.",
+link: "./organization/console",
+title: "Console",
+image: SquareChevronRightIcon,
+description: "View clusters, usage, alerts, and activity of your organization at a high level.",
 },
 {
 link: "./organization/analyze-operations/",
 title: "Analyze operations",
-image: OptimizeIcon,
-description: "Monitor cluster health, track job and process execution, and measure organization business value.",
-},
-]} columns={3}/>
-
-## Build within a workspace
-
-Discover and use approved reusable assets, manage projects, and deliver business processes:
-
-<AoGrid ao={[
-{
-link: "./workspace/manage-projects",
-title: "Manage projects",
-image: FolderOpenIcon,
-description: "Develop project releases through the stages of a typical development lifecycle.",
+image: ActivityIcon,
+description: "Monitor the jobs of your environments and clusters, and follow AI agent adoption and costs.",
 },
 {
-link: "./workspace/manage-workspace",
-title: "Manage workspace settings",
-image: ConfigIcon,
-description: "Manage workspace members, update general information, or delete a workspace.",
-},
-{
-link: "./workspace/modeler",
-title: "Model business processes",
-image: ModelerIcon,
-description: "Collaboratively design executable processes as the foundation for scalable IT and business automation.",
+link: "./organization/manage-organization-settings/organization-settings",
+title: "Organization",
+image: BuildingComplexIcon,
+description: "Manage your organization, its users and roles, and its settings.",
 },
 ]} columns={3}/>
