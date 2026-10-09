@@ -20,12 +20,10 @@ import IconMcpImg from '../../components/assets/icon-mcp.png';
 
 <h3 class="subheading">Build Camunda solutions with AI-ready workflows.</h3>
 
-<div class="double-column-container" style={{marginBottom: '50px'}}>
+<div class="double-column-container" style={{marginBottom: '20px'}}>
 <div class="double-column-left" style={{marginRight: '50px', flex: '1.35'}}>
 
 Build Camunda solutions with ProcessOS, agentic orchestration, and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents in BPMN processes, and design faster with Camunda Copilot.
-
-<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Build with Camunda" href={useBaseUrl('/build-with-camunda')} style={{marginBottom: '30px', marginTop: '20px'}}>Set up your AI development environment</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -35,13 +33,10 @@ Build Camunda solutions with ProcessOS, agentic orchestration, and MCP integrati
 </div>
 </div>
 
-## ProcessOS Harness
-
-<span class="badge badge--medium" title="This feature is in early access">Early access</span>
-
-ProcessOS discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions. ProcessOS Harness, available as early access, is the governance process that drives AI coding agents to do this work.
-
-<p class="link-arrow">[Re-engineer processes with ProcessOS](../../components/process-os-harness/overview.md)</p>
+<div style={{display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '50px'}}>
+<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Re-engineer processes with ProcessOS" href="../../../components/process-os/overview/">Re-engineer processes with ProcessOS</a>
+<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Build with Camunda" href={useBaseUrl('/build-with-camunda')}>Set up your AI development environment</a>
+</div>
 
 ## Build AI agents
 
