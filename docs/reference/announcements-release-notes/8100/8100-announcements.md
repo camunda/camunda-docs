@@ -1036,11 +1036,25 @@ The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools
 </div>
 </div>
 
-## Modeler
+## Hub
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Changed default log file name
+
+The log file name in the default Log4j2 configuration changed from `camunda-modeler.log` to `camunda-hub.log`.
+Logging to a file is still disabled by default. This change is only relevant if you enabled file logging in Web Modeler and use the default configuration.
+
+**Action:** Update any external tooling that depends on the log file name.
+
+<p className="link-arrow">[Logging configuration](/self-managed/components/hub/configuration/logging.md)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -1061,6 +1075,36 @@ Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/
 <p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
 <br />
 <p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated configuration settings
+
+In Camunda Hub, the configuration settings previously used by Web Modeler are deprecated in favor of the new Hub equivalents:
+
+| Web Modeler (legacy)                                     | Camunda Hub                                                                                                                                                                             |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Application properties prefixed with `camunda.modeler.*` | Replaced by `camunda.hub.*`                                                                                                                                                             |
+| Environment variables prefixed with `CAMUNDA_MODELER_*`  | Replaced by `CAMUNDA_HUB_*`                                                                                                                                                             |
+| Other environment variables                              | Replaced by environment variables strictly derived from the respective application property name (e.g. `CAMUNDA_HUB_*` for Hub-owned properties, `SPRING_*` for Spring Boot properties) |
+
+Some properties were also renamed or moved to a different property path.
+Refer to the [upgrade guide](/self-managed/upgrade/components/890-to-8100.md#web-modeler-settings-migration) for more details and the [property reference](/self-managed/components/hub/configuration/properties.md) for an exhaustive list of the new settings.
+
+Camunda Hub still accepts the legacy properties in 8.10 and translates the recognized properties to their new equivalents at startup, but the legacy properties will be removed in a future release.
+
+**Action:** Migrate Camunda Hub to the new settings ahead of that removal.
+
+<p className="link-arrow">[Web Modeler settings migration in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#web-modeler-settings-migration)</p>
+<br/>
+<p className="link-arrow">[Property reference](/self-managed/components/hub/configuration/properties.md)</p>
 
 </div>
 </div>

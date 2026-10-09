@@ -668,6 +668,29 @@ Camunda Hub supports syncing files via [Git Sync](/components/hub/workspace/mana
 </TabItem>
 </Tabs>
 
+### Catalog
+
+The following settings allow you to adjust the [limits](/components/hub/organization/manage-catalog/getting-started.md#ingestion-limits) for the [catalog ingestion API endpoint](/apis-tools/hub-api-sm/specifications/ingest-catalog-assets.api.mdx).
+
+<Tabs groupId="configType" defaultValue="application.yaml" queryString>
+<TabItem value="application.yaml" label="Application properties">
+
+| Property                                    | Description                                                               | Example value | Default value |
+| ------------------------------------------- | ------------------------------------------------------------------------- | ------------- | ------------- |
+| `server.tomcat.max-part-count`              | [optional]<br/>Maximum number of parts in `multipart/form-data` requests. | `5000`        | `5000`        |
+| `spring.servlet.multipart.max-request-size` | [optional]<br/>Maximum request size for `multipart/form-data` requests.   | `20MB`        | `20MB`        |
+
+</TabItem>
+<TabItem value="env" label="Environment variables">
+
+| Property                                  | Description                                                               | Example value | Default value |
+| ----------------------------------------- | ------------------------------------------------------------------------- | ------------- | ------------- |
+| `SERVER_TOMCAT_MAXPARTCOUNT`              | [optional]<br/>Maximum number of parts in `multipart/form-data` requests. | `5000`        | `5000`        |
+| `SPRING_SERVLET_MULTIPART_MAXREQUESTSIZE` | [optional]<br/>Maximum request size for `multipart/form-data` requests.   | `20MB`        | `20MB`        |
+
+</TabItem>
+</Tabs>
+
 ### Feature flags
 
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
