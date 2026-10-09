@@ -181,7 +181,7 @@ Access to Optimize includes access to the [business value dashboard](/components
 
 ### Cluster visibility {#cluster-visibility-self-managed}
 
-- **Manage**: Open the cluster pages, where you view clusters and their details and manage their connectors. In Self-Managed, you provision clusters outside Camunda Hub, and Camunda Hub is read-only for clusters. Organization Admin and DevOps have this level.
+- **Manage**: View all clusters and their details. In Self-Managed, you provision clusters outside Camunda Hub, and Camunda Hub is read-only for clusters. Organization Admin and DevOps have this level.
 - **None**: No access to the cluster pages. Analyst and Member have this level.
 
 ### Environment visibility {#environment-visibility-self-managed}
