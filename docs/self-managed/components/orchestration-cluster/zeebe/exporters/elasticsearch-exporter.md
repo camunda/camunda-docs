@@ -161,13 +161,16 @@ For Optimize-specific filtering, see [Optimize export filtering](/self-managed/c
 | variableValueTypeInclusion          | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included. Use to drop large object or array payloads at export time.                                                                                                                                                                                                                | `[]`            |
 
 :::note
-The number of shards varies by index template. Most indices use `1` shard by default. The following high-volume index templates default to `3` shards:
+The number of shards varies by index template. Most indices use `1` shard by default. The following high-volume index templates default to `5` shards:
 
 - `zeebe-record-job`
 - `zeebe-record-process-instance`
-- `zeebe-record-user-task`
 
-If you set `number-of-shards`, it overrides the template defaults for all indices, including the three listed above.
+The exporter routes every record by its partition ID, so an index only ever sees as many distinct routing values as your cluster has partitions. Five is the smallest shard count that places the records of a three-partition cluster on three distinct shards.
+
+The number of shards is a static index setting, so only newly created dated indices use these defaults. An existing index keeps the shard count it was created with.
+
+If you set `number-of-shards`, it overrides the template defaults for all indices, including the two listed above.
 :::
 
 </TabItem>
