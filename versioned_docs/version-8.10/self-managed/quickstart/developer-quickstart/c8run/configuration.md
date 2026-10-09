@@ -238,7 +238,7 @@ The local secrets directory is for development only. For production, configure a
 
 Use Camunda 8 Run to try [Physical Tenants](/self-managed/concepts/physical-tenants/index.md) locally. Each Physical Tenant is an isolated engine inside one Camunda 8 Run instance, with its own data, users, secrets, and connector runtime.
 
-Use a Camunda 8 Run build that supports `physical-tenants` and the `secrets --physical-tenant` selector. Check `./c8run physical-tenants help` and `./c8run secrets help` for these options.
+Use a Camunda 8 Run build that supports `physical-tenants` and the `secrets --physical-tenant` selector. Check `./c8run physical-tenants help` and `./c8run secrets help` for these options. Physical Tenants require Camunda 8.10 or later. On older versions, Camunda 8 Run refuses every `physical-tenants` command.
 
 Add a Physical Tenant, then start Camunda 8 Run:
 
