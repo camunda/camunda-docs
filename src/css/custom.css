@@ -1527,12 +1527,16 @@ table .badge:nth-of-type(1) {
   text-decoration: none;
 }
 
-div[class^="announcementBar_"] {
-  font-size: 120%;
-  padding: 1em 0;
+.theme-announcement-bar {
+  --docusaurus-announcement-bar-height: auto;
+  height: auto;
+  font-size: 110%;
+  padding: 0.5em 1.5em;
 }
-div[class^="announcementBar_"] button {
+.theme-announcement-bar button {
   align-self: center;
+  color: #fff;
+  opacity: 1;
 }
 
 /* Styles for rendered BPMN/DMN diagrams and optional callouts */
@@ -1695,6 +1699,30 @@ span.callout + p::after {
 .dropdown-unmaintained-versions {
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
+}
+
+/* Collapsible older versions in the versions selector */
+.dropdown-older-versions {
+  padding: 0;
+}
+
+.dropdown-older-versions summary {
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--ifm-global-radius);
+  color: var(--ifm-dropdown-link-color);
+  font-size: 0.75rem;
+  font-weight: bold;
+  list-style-position: inside;
+}
+
+.dropdown-older-versions summary:hover {
+  background-color: var(--ifm-dropdown-hover-background-color);
+}
+
+.dropdown-older-versions .dropdown__link {
+  display: block;
+  padding-left: 1.25rem;
 }
 
 .footer-logos {
@@ -2705,6 +2733,17 @@ h3 + .release-announcement-row {
 
   flex: 0 0 auto;
   white-space: nowrap;
+}
+
+.sidebar-badge-early-access
+  > .menu__list-item-collapsible
+  > .menu__link
+  .menu__link-text::after,
+.sidebar-badge-early-access
+  > .menu__list-item-collapsible
+  > .menu__link
+  > span::after {
+  content: "Early access";
 }
 
 .sidebar-cta-preview
