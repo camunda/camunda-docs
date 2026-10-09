@@ -134,15 +134,9 @@ orchestration:
                 # Optional: Configure history retention
                 history:
                   default-history-ttl: P30D
-
-# Disable default Elasticsearch subchart
-elasticsearch:
-  enabled: false
-# If deploying Optimize, you still need Elasticsearch/OpenSearch
-# Uncomment below and configure as needed:
-# opensearch:
-#   enabled: true
 ```
+
+If you deploy Optimize, set its connection under `optimize.database.elasticsearch` or `optimize.database.opensearch`. See [component storage requirements](#important-component-storage-requirements).
 
 ### Step 5: Create the Kubernetes secret for database credentials
 
@@ -342,16 +336,19 @@ camundaHub:
   enabled: true
 optimize:
   enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: elastic.example.com
+        port: 443
 identity:
   enabled: true
-
-# Optimize requires Elasticsearch/OpenSearch
-opensearch:
-  enabled: true
-  # or
-  # elasticsearch:
-  #   enabled: true
 ```
+
+For the Optimize connection settings, see [use external Elasticsearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch.md).
 
 ## Configuration reference
 
@@ -373,12 +370,17 @@ orchestration:
 
 optimize:
   enabled: true
-# Choose one secondary storage for Optimize:
-# opensearch:
-#   enabled: true
-# elasticsearch:
-#   enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: elastic.example.com
+        port: 443
 ```
+
+For OpenSearch, set `optimize.database.opensearch` instead. See [use external OpenSearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-opensearch.md).
 
 Mixing storage types (RDBMS for Orchestration, Elasticsearch/OpenSearch for Optimize) is supported and tested.
 
