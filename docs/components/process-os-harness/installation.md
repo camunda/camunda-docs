@@ -48,7 +48,7 @@ ProcessOS Harness is only available to Camunda Enterprise customers. To download
    git init && git add . && git commit -m "chore(job) commit process-os-harness setup"
    ```
 
-1. Start the journey. Launch your AI coding agent, select a model smart model (e.g. Opus or similar), then run:
+1. Start the journey. Launch your AI coding agent, select a smart model (e.g. Opus or similar), then run:
 
    ```text
    /process-os-governance-start
