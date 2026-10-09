@@ -67,7 +67,7 @@ documents as downloads (`Content-Disposition: attachment`), except for PDF files
 in the browser.
 
 On Camunda 8 SaaS, this fix is included automatically unless you've opted out of
-[auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+[auto-updates](/reference/auto-updates.md), in which case you'll need to update your cluster manually.
 
 ## Notice 64
 
