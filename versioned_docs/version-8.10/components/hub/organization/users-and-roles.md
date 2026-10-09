@@ -82,7 +82,6 @@ Beyond the roles above, an organization may show a few additional roles dependin
 
 - **Developer** _(deprecated)_: No longer offered for new assignment. Existing holders keep their current permissions unchanged; they are not automatically moved to another role.
 - **Task user** and **Visitor** _(legacy)_: Available only for organizations with at least one cluster on version 8.7 or older, alongside a user's organization-level role. They govern access to the older cluster apps and disappear once no such clusters remain.
-- **Support agent** _(internal)_: Used only by the Camunda support team. Not assignable by customers.
 
 </TabItem>
 
