@@ -4,8 +4,6 @@ title: "Data collection"
 description: "Learn what telemetry data Camunda collects, how Camunda ensures privacy, and what options you have to choose the telemetry data sent to Camunda."
 ---
 
-import AnalyticsImg from './../img/analytics.png';
-import CookiePrefsImg from './../img/cookie-preferences.png';
 import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
@@ -14,7 +12,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Camunda collects technical and usage information about how its products are operated and used. This information, referred to as **telemetry data**, is used to evaluate contractual usage, enhance the user experience, and improve Camunda products.
 
-Depending on the source, telemetry data may include deployment and version information, aggregated usage metrics, process metadata, SaaS application usage, and, in limited instances, personal data such as account or cookie identifiers and a SaaS user's name and email address. For a detailed breakdown, see [telemetry sources](#telemetry-sources).
+Depending on the source, telemetry data may include deployment and version information, aggregated usage metrics, process metadata, SaaS application usage, and, in limited instances, personal data such as account or device identifiers and a SaaS user's name and email address. For a detailed breakdown, see [telemetry sources](#telemetry-sources).
 
 This page explains what telemetry data includes and excludes, the privacy controls Camunda implements, and the available options for modifying the data sent to Camunda. It applies only to interactions with Camunda products and reflects the current configuration for Self-Managed and SaaS customers. The information is updated periodically and does not cover future releases or planned changes to telemetry settings.
 
@@ -40,7 +38,7 @@ The table below summarizes what telemetry data includes and excludes. The princi
 | Data in your processes | -                                                                                                                                                                                                            | Data entered by end users, such as form submissions (for example a shipping address); any personal data, PII, or PHI uploaded to a customer cluster.                                    |
 | AI features            | Which AI feature was invoked and how often (SaaS); agent instance status (Orchestration Cluster).                                                                                                            | Conversation content submitted to an AI feature (collected separately, see [AI features](#ai-features)); agent system prompts, tool definitions, model configuration, and token counts. |
 | Camunda SaaS usage     | Features used, browser and client information, pages accessed; for user actions, cursor activity, a device identifier, and coarse location.                                                                  | Browser-based data (cookies, device, location) for actions taken through the API.                                                                                                       |
-| Personal data          | SaaS only: account identifiers, cookie and device identifiers, and the name and email address of Camunda SaaS users.                                                                                         | Orchestration Cluster telemetry: no user names, email addresses, or assignee data.                                                                                                      |
+| Personal data          | SaaS only: account and device identifiers, and the name and email address of Camunda SaaS users.                                                                                                             | Orchestration Cluster telemetry: no user names, email addresses, or assignee data.                                                                                                      |
 | Payment                | -                                                                                                                                                                                                            | Payment information.                                                                                                                                                                    |
 
 Camunda follows these principles when collecting and using telemetry data to protect customer privacy and support successful product development:
@@ -61,7 +59,7 @@ What Camunda collects and how you control it depend on how Camunda is deployed. 
 
 Three terms are used throughout:
 
-- **Commercial usage data:** Usage counts that Camunda uses to verify usage against your agreement and bill for overages.
+- **Commercial usage data:** Usage counts that Camunda uses to verify usage against your agreement. Overage charges are calculated from [usage metrics reporting](#usage-metrics-reporting).
 - **Non-commercial usage data:** Product usage information that Camunda uses to improve the software and support your deployment.
 - **Environment data:** Technical information about the deployment itself, such as the Camunda version, the Analytics Exporter version, and cluster identifiers. Environment data is not usage data because it does not describe how the product is used. Camunda uses this information to detect offline clusters and gaps in the data it receives.
 
@@ -128,10 +126,7 @@ This is limited product usage data from the Camunda SaaS applications, used to m
 
 - **SaaS system actions:** All SaaS organizations submit basic information about which features are being used. When certain features are used, Camunda logs which feature is used and basic information about how it has been used. This information is tied to a pseudonymized organization.
 - **SaaS user actions:** Users that opt in to personalization cookies gain access to in-app tutorials, whereas analytics cookies cause data to be automatically submitted about which features they interact with in Camunda's UI. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, a device identifier, and basic biographical information limited to email, name, and city/region/country for user actions. Interactions through the API do not trigger this browser-based collection.
-- **Cookie preferences:** If you accept essential cookies only, this browser-based collection stops. Some events generated by the Camunda SaaS backends still reach the analytics platform, keyed by an internal user identifier and not gated by cookie preferences. These carry no browser or location data.
-
-<img src={CookiePrefsImg} alt="Cookie preferences in user settings" width="300px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
-<img src={AnalyticsImg} alt="Analytics opt-in menu" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+- **Cookie preferences:** To change your choice, go to your user settings and open **Cookie preferences** > **Analytics**. If you accept essential cookies only, this browser-based collection stops. Some events generated by the Camunda SaaS backends still reach the analytics platform, keyed by an internal user identifier and not gated by cookie preferences. These carry no browser or location data.
 
 #### Example of user action data
 
@@ -213,7 +208,7 @@ Unlike the application telemetry above, these events are not controlled through 
 
 **Applies to:** Self-Managed only.
 
-Telemetry collection in [Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) is enabled at first run unless you turn it off, and is controlled per installation. It tracks how certain features are used.
+Telemetry collection in [Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) is enabled at first run unless you turn it off, and is controlled per installation. It tracks how certain features are used. To turn it off, disable the **Usage Statistics** option in Desktop Modeler.
 
 ## Identifiability
 
@@ -242,15 +237,17 @@ Where each source sits:
 
 ### Where identifiers are retained
 
-Identifiers that can distinguish an individual are retained in Camunda SaaS only, in three places:
+In Camunda SaaS, identifiers that can distinguish an individual are retained in three places:
 
 - **SaaS application telemetry, user actions:** An account identifier, a device identifier, coarse location, and the email address and name of the Camunda SaaS user.
 - **SaaS application telemetry, backend-sourced events:** An internal user identifier.
 - **SaaS user-lifecycle events:** The name and email address of the Camunda SaaS user, recorded with sign-ins, user records, invitations, and membership or role changes.
 
-No other telemetry described on this page retains an identifier that can distinguish an individual.
+No other SaaS telemetry described on this page retains an identifier that can distinguish an individual.
 
-Desktop Modeler telemetry carries a randomly generated installation identifier. It is persistent, so it can distinguish one installation from another across records, but it is not linked to a Camunda account and does not identify an individual.
+Desktop Modeler telemetry carries a randomly generated, persistent installation identifier. It can distinguish one installation from another across records and is not linked to a Camunda account.
+
+Content you submit to an AI feature, such as a Docs AI conversation, is not telemetry data and is not covered by this section. See [AI features](#ai-features).
 
 ### Data subject requests
 
