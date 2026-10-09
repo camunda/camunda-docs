@@ -93,6 +93,10 @@ The AI Agent Sub-process template configures its own ad-hoc sub-process. The AI 
 
    The agent uses `completedAt` as the time the tool call completed. If it is missing, the AI Agent connector uses the time at which it processes the tool call results instead, which can be later than the actual completion time for slow or parallel tool calls.
 
+## Update custom extensions {#custom-extensions}
+
+If you extend the AI Agent connector in a Self-Managed or hybrid deployment, for example with a custom conversation store or chat model, the Java APIs also changed in Camunda 8.10. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md).
+
 ## Model provider configuration mapping
 
 Model provider configuration changed the most in this redesign, since providers and backends are now decoupled (see [choose a provider and backend](./agentic-ai-aiagent-model-providers.md#choose-a-provider-and-backend)).
