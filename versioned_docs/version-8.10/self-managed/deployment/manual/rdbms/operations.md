@@ -13,8 +13,8 @@ Operate and maintain RDBMS secondary storage for manual Camunda 8 installations 
 
 - Use vendor-recommended backup procedures.
 - Backup frequency depends on your RPO (Recovery Point Objective).
-- Database backups capture consistent state (Camunda flushes synchronously).
-- Zeebe exporter position is stored in RDBMS.
+- The exporter writes to the database in batches, so a database backup can lag behind the latest Zeebe state.
+- The exporter stores its last exported position in the RDBMS and resumes from that position after a restore.
 
 **Restore procedure**:
 
@@ -34,10 +34,10 @@ Operate and maintain RDBMS secondary storage for manual Camunda 8 installations 
 For strict change control environments:
 
 ```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_AUTO_DDL=false
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_AUTODDL=false
 ```
 
-DBA must apply schema changes manually using scripts. Zeebe fails to start if schema is out of date.
+DBA must apply schema changes manually using scripts. Camunda does not validate the schema in this mode. If the schema is missing or out of date, the RdbmsExporter fails with SQL errors (see [Auto-DDL behavior](#auto-ddl-behavior)).
 
 ## Verification and troubleshooting
 
@@ -69,8 +69,6 @@ No errors in RdbmsExporter logs means the exporter is healthy. For more details 
 | `Failed to load driver class oracle.jdbc.OracleDriver`       | Missing JDBC driver             | Verify driver JAR in `/driver-lib` or classpath       |
 | `Table 'camunda.EXPORTER_POSITION' doesn't exist`            | autoDDL=false on empty DB       | Run schema initialization scripts manually            |
 
-**All failure modes above prevent Camunda startup.**
-
 ### Auto-DDL behavior
 
 When started with `auto-ddl=false` on an empty database, the RdbmsExporter throws errors like:
@@ -91,10 +89,10 @@ When started with `auto-ddl=false` on an empty database, the RdbmsExporter throw
 
 ```bash
 # Lower flush interval = lower latency, more frequent writes
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_FLUSHINTERVAL=PT0.1S
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_FLUSHINTERVAL=PT0.1S
 
 # Higher queue size = higher throughput, more memory
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=5000
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_QUEUESIZE=5000
 ```
 
 ### Connection pooling
@@ -102,11 +100,11 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_QUEUESIZE=5000
 Tune based on your workload. Camunda uses the Hikari connection pool following Spring Boot best practices:
 
 ```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MAXIMUM_POOL_SIZE=20
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MINIMUM_IDLE=10
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_IDLE_TIMEOUT=600000
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_MAX_LIFETIME=1800000
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_CONNECTION_POOL_CONNECTION_TIMEOUT=30000
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_MAXIMUMPOOLSIZE=20
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_MINIMUMIDLE=10
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_IDLETIMEOUT=600000
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_MAXLIFETIME=1800000
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_CONNECTIONPOOL_CONNECTIONTIMEOUT=30000
 ```
 
 ### Database tuning
@@ -127,17 +125,17 @@ All RDBMS connections must use TLS in production:
 
 ```bash
 # PostgreSQL
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda?sslmode=require"
-
-# See [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md) for other databases
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda?sslmode=require"
 ```
+
+For other databases, see [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md).
 
 ### Secrets
 
 Never hardcode passwords. Use environment variable injection:
 
 ```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD=$(cat /run/secrets/db_password)
+export CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_PASSWORD=$(cat /run/secrets/db_password)
 ```
 
 ### Database permissions

@@ -371,7 +371,7 @@ kind: Secret
 metadata:
   name: camunda-connector-secrets
 stringData:
-  MY_SECRET: foo
+  SECRET_MY_SECRET: foo
 ```
 
 Review the documentation on [managing secrets in Helm charts](/self-managed/deployment/helm/configure/secret-management.md) for additional details.
@@ -386,14 +386,14 @@ For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
-  -e MY_SECRET=secret \              # Set a secret with value
-  -e SECRET_FROM_SHELL \             # Set a secret from the environment
-  --env-file secrets.txt \           # Set secrets from a file
+  -v $PWD/connector.jar:/opt/app/ \
+  -e SECRET_MY_SECRET=secret \
+  -e SECRET_FROM_SHELL \
+  --env-file secrets.txt \
   camunda/connectors-bundle:latest
 ```
 
-The secret `MY_SECRET` value is specified directly in the `docker run` call,
+The `-v` option adds a connector JAR to the classpath. The `SECRET_MY_SECRET` value is specified directly in the `docker run` call,
 whereas the `SECRET_FROM_SHELL` is injected based on the value in the
 current shell environment when `docker run` is executed. The `--env-file`
 option allows using a single file with the format `NAME=VALUE` per line
@@ -407,7 +407,7 @@ In the [manual setup](/self-managed/deployment/manual/install.md#connectors-1), 
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
-export MY_SECRET='foo'
+export SECRET_MY_SECRET='foo'
 ```
 
 Reference the secret in the connector's input in the prefixed style `{{secrets.MY_SECRET}}`.
@@ -461,9 +461,10 @@ connectors:
 For Docker images, you can add the JAR by using volumes, for example:
 
 ```bash
+# Mount the secret provider JAR and set the gRPC address of Zeebe
 docker run --rm --name=connectors -d \
-  -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \  # Specify secret provider
-  -e CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS=http://ip.address.of.zeebe:26500 \ # Specify grpc Zeebe address
+  -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \
+  -e CAMUNDA_CLIENT_GRPCADDRESS=http://ip.address.of.zeebe:26500 \
   camunda/connectors:latest
 ```
 
@@ -717,7 +718,7 @@ To run the connector Runtime in a setup where a single runtime
 serves multiple tenants, add each tenant ID to the list of the default job workers:
 
 ```bash
-CAMUNDA_CLIENT_ZEEBE_DEFAULTS_TENANTIDS=`myTenant, otherTenant`
+CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS=myTenant,otherTenant
 ```
 
 In this case, the `CAMUNDA_CLIENT_TENANTID` will **not** be used for the

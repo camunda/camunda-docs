@@ -121,7 +121,7 @@ You can find the OpenAPI spec for this API in the [GitHub repository](https://gi
 :::
 
 :::note
-The `camunda‐zeebe‐gateway` service on port 9600 exposes the exporter endpoints.
+The `camunda-zeebe-gateway` service on port 9600 exposes the exporter endpoints.
 :::
 
 ### Enable an exporter
@@ -137,7 +137,7 @@ When you enable the exporter, you can also optionally initialize it from another
 ```bash
 POST actuator/exporters/{exporterId}/enable
 {
-    initializeFrom: {anotherExporterId}
+    "initializeFrom": "<anotherExporterId>"
 }
 ```
 

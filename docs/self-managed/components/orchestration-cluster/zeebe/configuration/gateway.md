@@ -61,16 +61,16 @@ See the [Spring Boot application properties reference](https://docs.spring.io/sp
 
 The `server` configuration allows you to configure the main REST server. Below are a few common ones, but you can find a more exhaustive list [in the official Spring documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server).
 
-| Field | Description                                                                                                               | Example value |
-| ----- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host  | Sets the host the REST server binds to. This setting can also be overridden using the environment variable `SERVER_HOST`. | 0.0.0.0       |
-| port  | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`. | 8080          |
+| Field   | Description                                                                                                                     | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| address | Sets the address the REST server binds to. This setting can also be overridden using the environment variable `SERVER_ADDRESS`. | 0.0.0.0       |
+| port    | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`.       | 8080          |
 
 #### server.compression
 
-| Field   | Description                                                                                                                                                                       | Example value |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| Field   | Description                                                                                                                                                                        | Example value |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | If true, enables compression of responses for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESSION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -86,7 +86,7 @@ Allows you to configure the SSL security for the REST server.
 
 ```yaml
 server:
-  host: 0.0.0.0
+  address: 0.0.0.0
   port: 8080
   compression:
     enabled: true
@@ -115,7 +115,7 @@ The `management.server` configuration allows you to configure the management ser
 
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
+| address   | Sets the address the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_ADDRESS`.                                                                                                                                      | 0.0.0.0       |
 | port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
@@ -123,7 +123,7 @@ The `management.server` configuration allows you to configure the management ser
 
 ```yaml
 management.server:
-  host: 0.0.0.0
+  address: 0.0.0.0
   port: 9600
   base-path: /
 ```
@@ -276,7 +276,7 @@ security:
     password: null
 ```
 
-### zeebe.gateway.cluster.security.authentication
+### zeebe.gateway.security.authentication
 
 | Field | Description                                                                                                                                                                                                                                                                                                                                                                                                   | Example value |
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -290,7 +290,7 @@ security:
     mode: none
 ```
 
-### zeebe.gateway.cluster.security.authentication.identity
+### zeebe.gateway.security.authentication.identity
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated

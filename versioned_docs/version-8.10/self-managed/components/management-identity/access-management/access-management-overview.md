@@ -16,8 +16,8 @@ This section describes how to manage access to Camunda Hub and Optimize. For acc
 When using and managing permissions, it is important to understand the following key concepts:
 
 - APIs represent the different Camunda 8 management and modeling components, such as Hub, Optimize, and so on.
-- Each [API defines its own set of permissions](#permissions) that to control API access.
-- Permissions are [organized using roles](./manage-permissions.md#manage-permissions-for-roles) that can be assigned to users either directly or via Groups.
+- Each [API defines its own set of permissions](#permissions) to control API access.
+- Permissions are [organized using roles](./manage-permissions.md#manage-role-permissions) that can be assigned to users either directly or via Groups.
 - You can also [assign permissions to your custom application](./manage-permissions.md#manage-application-permissions), such as a job worker for example.
 
 :::tip

@@ -47,7 +47,7 @@ In this setup:
 
 - **User authentication:** Users log in through the Keycloak's login page.
 - **Application authentication:** Applications authenticate using Machine-to-Machine (M2M) tokens.
-- **User management:** Administrators manage users, groups, roles, and permissions within Keycloak.
+- **User management:** Users are managed in Keycloak. Groups, roles, and permissions are managed in [Management Identity](/self-managed/components/management-identity/overview.md).
 
 This method is convenient for getting started quickly and is suitable for environments that do not need to integrate with an existing corporate identity management system.
 

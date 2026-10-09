@@ -78,7 +78,7 @@ The following examples show the URL structure for tenant-scoped operations. Repl
 | Get variables            | `GET /physical-tenants/{physicalTenantId}/v2/variables/{variableKey}`              |
 | Publish message          | `POST /physical-tenants/{physicalTenantId}/v2/messages`                            |
 
-For the full API reference, see the [Camunda API reference](../../../apis-tools/hub-api-sm/overview.md).
+For the full API reference, see the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 ## How to determine who can access a tenant
 

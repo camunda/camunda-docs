@@ -75,9 +75,9 @@ For example, the standard `/v2/process-definitions/search` endpoint is available
 
 ## Cross-tenant queries
 
-Each API call targets exactly one Physical Tenant via the path prefix. There is no cross-tenant query in a single request. If you need data from multiple tenants, you must make separate calls per tenant.
+Each tenant-scoped API call targets exactly one Physical Tenant via the path prefix. There is no cross-tenant query in a single request. If you need data from multiple tenants, you must make separate calls per tenant.
 
-This is the core isolation guarantee of Physical Tenants: no operation can read or write across tenant boundaries in a single request.
+This is the core isolation guarantee of Physical Tenants: no tenant-scoped API call can read or write across tenant boundaries. The [cluster-wide endpoints](#cluster-wide-endpoints) under `/cluster/v2/...` and the actuator endpoints are the explicit exception.
 
 ## Webapp routing
 

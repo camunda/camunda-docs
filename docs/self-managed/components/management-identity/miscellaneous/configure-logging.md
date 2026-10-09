@@ -5,7 +5,7 @@ sidebar_label: "Configure logging"
 description: "Learn how to configure logging in Identity."
 ---
 
-Configure and use logging to access detailed operational information for Identity .
+Configure and use logging to access detailed operational information for Identity.
 
 ## Identity logging configuration
 
@@ -84,11 +84,11 @@ This appender uses the [GCP layout](https://github.com/apache/logging-log4j2/blo
 
 The File log appender produces messages to a rotating log file. The File log appender offers additional configuration options as follows:
 
-| Environment variable              | Accepted values                                                                                                                                                          |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `IDENTITY_LOG_FILE_PATTERN`       | _See the [Log4j2 pattern layout docs](https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout) for possible placeholders._                                |
-| `IDENTITY_LOG_FILE_ROTATION_DAYS` | _See the [Log4j2 time-based triggering policy -> interval](https://logging.apache.org/log4j/2.x/manual/appenders.html#timebased-triggering-policy) for possible values._ |
-| `IDENTITY_LOG_FILE_ROTATION_SIZE` | _See the [Log4j2 size-bsed triggering policy](https://logging.apache.org/log4j/2.x/manual/appenders.html#sizebased-triggering-policy) for possible values._              |
+| Environment variable              | Accepted values                                                                                                                                                       |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `IDENTITY_LOG_FILE_PATTERN`       | _See the [Log4j2 pattern layout docs](https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout) for possible placeholders._                             |
+| `IDENTITY_LOG_FILE_ROTATION_DAYS` | _See the [Log4j2 time-based triggering policy interval](https://logging.apache.org/log4j/2.x/manual/appenders.html#timebased-triggering-policy) for possible values._ |
+| `IDENTITY_LOG_FILE_ROTATION_SIZE` | _See the [Log4j2 size-based triggering policy](https://logging.apache.org/log4j/2.x/manual/appenders.html#sizebased-triggering-policy) for possible values._          |
 
 ## Custom logging configuration
 

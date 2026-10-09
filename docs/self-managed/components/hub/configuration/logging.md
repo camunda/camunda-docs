@@ -32,7 +32,7 @@ You can configure log levels, output formats, and appenders, and adjust logging 
 You can adjust log levels dynamically using Spring Boot Actuator [`loggers`](https://docs.spring.io/spring-boot/api/rest/actuator/loggers.html) endpoints:
 
 ```bash
-curl 'http://localhost:8091/actuator/loggers/io.camunda' \
+curl 'http://localhost:8091/loggers/io.camunda' \
   -i -X POST \
   -H 'Content-Type: application/json' \
   -d '{"configuredLevel":"DEBUG"}'
@@ -41,7 +41,7 @@ curl 'http://localhost:8091/actuator/loggers/io.camunda' \
 Replace `io.camunda` with the logger you want to adjust.
 
 :::note
-The base URL may differ depending on your environment configuration. The example above assumes execution from the same host running the Camunda Hub `restapi` component. This URL is only callable via the [management port](https://docs.spring.io/spring-boot/reference/actuator/monitoring.html#actuator.monitoring.customizing-management-server-port), usually not publicly available.
+The base URL may differ depending on your environment configuration. The example above assumes execution from the same host running the Camunda Hub `restapi` component, with the default [`management.endpoints.web.base-path`](./properties.md#monitoring) of `/`. If you set a different base path, such as `/actuator`, include it in the URL: `http://localhost:8091/actuator/loggers/io.camunda`. This URL is only callable via the [management port](https://docs.spring.io/spring-boot/reference/actuator/monitoring.html#actuator.monitoring.customizing-management-server-port), usually not publicly available.
 :::
 
 ### Default Log4j2 configuration
@@ -118,11 +118,11 @@ This is a simplified example. The actual `log4j2.xml` may include additional app
 
 ### JSON logging appenders
 
-| Appender           | Description                                          | Enable / Variable                                                                 |
-| ------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Console            | Standard text output.                                | `CAMUNDA_HUB_LOG_APPENDER=Console`                                                |
-| Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver.          | `CAMUNDA_HUB_LOG_APPENDER=Stackdriver`                                            |
-| RollingFile        | Writes logs to a rotating file, disabled by default. | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` + `CAMUNDA_HUB_LOG_APPENDER=RollingFile` |
+| Appender           | Description                                                                                           | Enable / Variable                        |
+| ------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Console            | Standard text output.                                                                                 | `CAMUNDA_HUB_LOG_APPENDER=Console`       |
+| Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver.                                                           | `CAMUNDA_HUB_LOG_APPENDER=Stackdriver`   |
+| RollingFile        | Writes logs to a rotating file in addition to the Console or Stackdriver output. Disabled by default. | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` |
 
 #### JSON structure
 
@@ -173,20 +173,20 @@ See the following example:
 
 ### Pattern layout
 
-The default layout displays **time only**, thread name, MDC context, log level, logger name, and message.
+The default layout displays the full date and time, thread name, MDC context, log level, logger name, and message. A newline and a tab separate the log level from the logger name.
 
-#### Example pattern
+#### Default pattern
 
 ```perl
-%d{HH:mm:ss.SSS} [%t] %notEmpty{[%X] }%-5level %logger{36} - %msg%n
+[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %notEmpty{[%X] }%-5level%n\t%logger{36} - %msg%n
 ```
 
-| Feature             | Pattern                            |
-| ------------------- | ---------------------------------- |
-| Timestamp           | Time only                          |
-| Logger name         | Package initials + full class name |
-| Newline after level | No                                 |
-| Tab before logger   | No                                 |
+| Feature             | Pattern                     |
+| ------------------- | --------------------------- |
+| Timestamp           | Full date and time          |
+| Logger name         | Fully qualified logger name |
+| Newline after level | Yes                         |
+| Tab before logger   | Yes                         |
 
 ### Client log level
 

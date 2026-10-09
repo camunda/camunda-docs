@@ -74,7 +74,7 @@ camundaHub:
               port: 587
               username: user
           camunda:
-            modeler:
+            hub:
               mail:
                 from-address: no-reply@example.com
 ```

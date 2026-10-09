@@ -10,8 +10,7 @@ It aims to achieve a more uniform leader distribution by assigning each node a p
 
 ## Configuration
 
-Enable priority election by setting `zeebe.broker.cluster.raft.enablePriorityElection=true` in your config or
-by setting the equivalent environment variable `ZEEBE_BROKER_CLUSTER_RAFT_ENABLEPRIORITYELECTION=true`.
+Priority election is enabled by default. To enable or disable it explicitly, set `camunda.cluster.raft.priority-election-enabled` to `true` or `false` in your config, or set the equivalent environment variable `CAMUNDA_CLUSTER_RAFT_PRIORITYELECTIONENABLED`. For details, see [`camunda.cluster.raft`](broker.md#camundaclusterraft).
 
 If you are using the fixed partitioning scheme (experimental), you may need [additional configuration](fixed-partitioning.md#priority-election).
 

@@ -11,7 +11,7 @@ Zone awareness controls where the application places partition replicas among br
 
 Zone awareness is required for topologies with three or more zones. It also simplifies managing zones: brokers are named after the zone they belong to, so you describe the topology in terms of zones rather than individual numeric node IDs.
 
-Because zones are named explicitly, zone awareness supports topologies the round-robin numbering strategy cannot express at all, such as one zone, three zones, or more. Growing from one zone to two, or two to three, is a change to the zone list rather than a renumbering of every broker.
+Because zones are named explicitly, zone awareness supports topologies that the round-robin numbering strategy cannot express, such as three or more zones. Adding a zone means changing the zone list rather than renumbering every broker. It isn't a configuration-only change, though: existing partitions have to be told about the new zone through the [cluster management API](../operations/management-api.md#add-or-re-add-a-zone).
 
 Zone awareness is also useful in a single-region setup. By mapping zones to availability zones (AZs) and giving one AZ a higher priority, you can skew partition leaders to stay in that AZ. Keeping leaders in one AZ reduces cross-AZ traffic to the single writer instance of a relational database (RDBMS), which lowers the associated cost. This optimization matters less for Elasticsearch, which distributes load across all three zones.
 

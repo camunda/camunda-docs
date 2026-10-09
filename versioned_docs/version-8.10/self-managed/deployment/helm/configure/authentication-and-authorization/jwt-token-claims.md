@@ -21,6 +21,8 @@ curl -X POST 'https://your-provider.example.com/oauth/token' \
 
 The response includes an `access_token` field containing the JWT.
 
+A token from the client credentials grant identifies the client, not a user, so it can't show you the user identification claim. To find that claim, decode a token that was issued by an interactive login (authorization code flow) instead.
+
 ## Decode the token
 
 Decode the JWT to inspect its claims.
@@ -28,8 +30,10 @@ Decode the JWT to inspect its claims.
 ### Command line (Linux/macOS)
 
 ```bash
-echo "<access-token>" | cut -d'.' -f2 | base64 -d | jq
+echo "<access-token>" | jq -R 'split(".")[1] | gsub("-";"+") | gsub("_";"/") | @base64d | fromjson'
 ```
+
+JWT payloads use unpadded base64url encoding. The command converts the characters `-` and `_` to `+` and `/` before decoding, because a plain `base64 -d` can fail on JWT payloads.
 
 ### Online tools
 

@@ -28,12 +28,12 @@ This does not necessarily mean data is corrupted or lost. The cause might be con
 
 Run the following command to verify shard allocation and index health:
 
-```bach
+```bash
 curl http://<opensearch-host>:9200/_cat/indices?v
 ```
 
 - If the index health status is `green`, all primary and replica shards are healthy and available.
-- If Camunda still logs `all shards failed`,` it may be due to temporary connectivity issues between OpenSearch nodes.
+- If Camunda still logs `all shards failed`, the cause may be temporary connectivity issues between OpenSearch nodes.
 
 ### Multi-node deployments and default configuration pitfalls
 

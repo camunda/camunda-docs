@@ -763,7 +763,7 @@ The ALB exposes both the Orchestration and Connectors through the same port and 
 
    ```sh
    aws secretsmanager get-secret-value \
-     --secret-id camunda-oc1-realm-admin-user-password \
+     --secret-id <prefix>-oc1-realm-admin-user-password \
      --query SecretString \
      --output text
    ```

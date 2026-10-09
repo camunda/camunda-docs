@@ -64,7 +64,7 @@ Docker Compose is supported for development and testing environments only.
 
 Camunda does not provide an automated upgrade process for Docker Compose deployments. To upgrade, manually upgrade each component by following the component upgrade guide:
 
-<p class="link-arrow">[Component upgrade from 8.8 to 8.9](./components/890-to-8100.md)</p>
+<p class="link-arrow">[Component upgrade from 8.9 to 8.10](./components/890-to-8100.md)</p>
 
 For production environments, use Kubernetes with the official Camunda Helm chart or create a custom deployment process using Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
@@ -94,7 +94,7 @@ Each guide covers only the changes required for that specific version upgrade.
 
 ### Kubernetes with Helm
 
-- <a href="/docs/self-managed/upgrade/helm/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.8 to 8.9</a>
+- <a href="/docs/8.9/self-managed/upgrade/helm/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.8 to 8.9</a>
 - <a href="/docs/8.8/self-managed/upgrade/helm/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.7 to 8.8</a>
 - <a href="https://unsupported.docs.camunda.io/8.7/docs/self-managed/setup/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.6 to 8.7</a>
 - <a href="https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/upgrade/" target="_blank" rel="noopener noreferrer">Upgrade from Camunda 8.5 to 8.6</a>
@@ -104,7 +104,7 @@ Each guide covers only the changes required for that specific version upgrade.
 
 ### Component-based upgrades
 
-- <a href="/docs/self-managed/upgrade/components/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.8 to 8.9</a>
+- <a href="/docs/8.9/self-managed/upgrade/components/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.8 to 8.9</a>
 - <a href="/docs/8.8/self-managed/upgrade/components/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.7 to 8.8</a>
 - <a href="https://unsupported.docs.camunda.io/8.7/docs/self-managed/operational-guides/update-guide/860-to-870/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.6 to 8.7</a>
 - <a href="https://unsupported.docs.camunda.io/8.6/docs/self-managed/operational-guides/update-guide/850-to-860/" target="_blank" rel="noopener noreferrer">Component upgrade from 8.5 to 8.6</a>

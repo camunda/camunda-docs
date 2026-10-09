@@ -35,6 +35,8 @@ security:
 
 Additionally, as you can see in the configuration file, each value can also be configured through an environment variable. The environment variable to use again depends on whether you are using a standalone gateway or an embedded gateway.
 
+The Orchestration Cluster also accepts these settings through the unified configuration keys `camunda.api.grpc.ssl.enabled`, `camunda.api.grpc.ssl.certificate`, and `camunda.api.grpc.ssl.certificate-private-key`, which map to `enabled`, `certificateChainPath`, and `privateKeyPath`. For the full list, including keystore options and environment variables, see the [gRPC SSL properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaapigrpcssl).
+
 ### REST
 
 The REST server is simply a Spring Boot server, and as such, [any of the common server properties can be applied to it](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server). Note that, as of 8.5.0, it is a _reactive_ server, meaning **none of the servlet properties will have any effect**.

@@ -100,13 +100,13 @@ IDENTITY_TENANTS_0_MEMBERS_2_TYPE="APPLICATION"
 IDENTITY_TENANTS_0_MEMBERS_2_APPLICATIONID="application-id"
 ```
 
-Each member type has a corresponding property you use to set the member identifier:
+Each member type has a corresponding property you use to set the member identifier. Replace `<index>` with the position of the member in the tenant's member list, starting at 0:
 
-| Member type   | Property                                     |
-| ------------- | -------------------------------------------- |
-| `USER`        | `IDENTITY_TENANTS_0_MEMBERS_0_USERNAME`      |
-| `GROUP`       | `IDENTITY_TENANTS_0_MEMBERS_0_GROUPNAME`     |
-| `APPLICATION` | `IDENTITY_TENANTS_0_MEMBERS_0_APPLICATIONID` |
+| Member type   | Property                                           |
+| ------------- | -------------------------------------------------- |
+| `USER`        | `IDENTITY_TENANTS_0_MEMBERS_<index>_USERNAME`      |
+| `GROUP`       | `IDENTITY_TENANTS_0_MEMBERS_<index>_GROUPNAME`     |
+| `APPLICATION` | `IDENTITY_TENANTS_0_MEMBERS_<index>_APPLICATIONID` |
 
 In some contexts, like the Management Identity UI, the "Application ID" is referred to as the "Client ID".
 

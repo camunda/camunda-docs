@@ -22,13 +22,14 @@ The default Camunda 8 Run configuration uses an H2 database for secondary storag
 File-based H2 example:
 
 ```yaml
-data:
-  secondary-storage:
-    type: rdbms
-    rdbms:
-      url: jdbc:h2:file:./camunda-data/h2db
-      username: sa
-      password:
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:h2:file:./camunda-data/h2db
+        username: sa
+        password:
 ```
 
 <details>
@@ -172,7 +173,7 @@ docker run -d --name camunda-mysql \
   -e MYSQL_USER=camunda \
   -e MYSQL_PASSWORD=camunda \
   -e MYSQL_DATABASE=camunda_secondary \
-  -p 3306:3306 mysql:9.7
+  -p 3307:3306 mysql:9.7
 ```
 
 :::note
@@ -261,7 +262,7 @@ Start Camunda 8 Run with `--config <file>` and point the configuration to your e
 ## Switching between storage types and migration notes
 
 - Switching the secondary storage type, for example H2 to Elasticsearch, does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
-- To switch storage, update `data.secondary-storage` in `application.yaml` and restart Camunda 8 Run.
+- To switch storage, update `camunda.data.secondary-storage` in `application.yaml` and restart Camunda 8 Run.
 
 Choose **H2** for quick local development and other supported **RDBMS** or **Elasticsearch** for production-like scenarios.
 

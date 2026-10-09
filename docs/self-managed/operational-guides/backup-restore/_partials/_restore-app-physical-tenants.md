@@ -8,4 +8,4 @@ If restoring a single tenant, ensure that only the data directory for that tenan
 
 To perform a cluster-wide restore among all Physical Tenants simultaneously, use the `ZEEBE_RESTORE_ALL_TENANTS` environment variable or the corresponding CLI argument, `--allTenants`. Provide the rest of the restore options as you would for a normal restore.
 
-During a cluster-wide restore, you can provide argument overrides for individual tenants. With Helm values, supply the overrides through `extraConfiguration` and include the overrides file in the Spring additional locations by setting the `spring.config.additional-location` property to point to the `restore-overrides.yaml` file.
+During a cluster-wide restore, you can provide argument overrides for individual tenants. With Helm values, supply the overrides through `extraConfiguration`. The Helm chart [imports each `extraConfiguration` file into the Spring configuration](/self-managed/deployment/helm/configure/application-configs.md#spring-boot-components) automatically, so you don't need to set `spring.config.additional-location` for the `restore-overrides.yaml` file.

@@ -87,7 +87,7 @@ To shut down Camunda 8 Run and end all running processes, run the following comm
 </TabItem>
 </Tabs>
 
-For Docker Compose environments, use the stop commands in the [developer quickstart with Docker Compose](../docker-compose.md).
+For Docker Compose environments, use the stop commands in the [developer quickstart with Docker Compose](../docker-compose/install-start.md#stop-camunda-8-with-docker-compose).
 
 ## Next steps
 

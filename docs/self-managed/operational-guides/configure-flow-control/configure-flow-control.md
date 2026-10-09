@@ -66,7 +66,7 @@ partition in this broker will revert to the defined configuration in the environ
 
 ### Fetch current configuration
 
-The backup API can be reached via the `/actuator` management port, which is 9600 by default. The configured context path does not apply to the management port.
+The flow control API can be reached via the `/actuator` management port, which is 9600 by default. The configured context path does not apply to the management port.
 
 The following endpoint can be used to fetch the flow control configuration:
 
@@ -80,7 +80,7 @@ With multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.m
 
 | Code             | Description                                                             |
 | ---------------- | ----------------------------------------------------------------------- |
-| 200 Accepted     | The flow configuration was retrieved successfully.                      |
+| 200 OK           | The flow configuration was retrieved successfully.                      |
 | 400 Bad Request  | Indicates issues with the request.                                      |
 | 500 Server Error | All other errors. Refer to the returned error message for more details. |
 
@@ -153,15 +153,14 @@ POST actuator/flowControl
 
 | Code             | Description                                                                                                                                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 200 Accepted     | The flow configuration request was processed correctly.                                                                                                                                                |
+| 200 OK           | The flow configuration request was processed correctly.                                                                                                                                                |
 | 400 Bad Request  | Indicates issues with the request, for example, one of the fields contains an invalid type.                                                                                                            |
 | 500 Server Error | All other errors. For example, when the values set do not conform to the imposed restriction (such as `minimumLimit` being higher than `limit`). Refer to the returned error message for more details. |
 
 #### Example request
 
 ```bash
-curl -X POST 'localhost:9600/actuator/flowControl' -H "Content-Type: application/json" --data
-'{
+curl -X POST 'localhost:9600/actuator/flowControl' -H "Content-Type: application/json" --data '{
   "write": {
     "rampUp": 0,
     "enabled": true,
