@@ -74,8 +74,8 @@ The default `log4j2-spring.xml` used by Camunda Hub's `restapi` component is as 
 
     <Select>
       <EnvironmentArbiter propertyName="CAMUNDA_LOG_FILE_APPENDER_ENABLED" propertyValue="true">
-        <RollingFile name="RollingFile" fileName="${log.path}/camunda-modeler.log"
-                     filePattern="${log.path}/camunda-modeler-%d{yyyy-MM-dd}-%i.log.gz">
+        <RollingFile name="RollingFile" fileName="${log.path}/camunda-hub.log"
+                     filePattern="${log.path}/camunda-hub-%d{yyyy-MM-dd}-%i.log.gz">
           <PatternLayout pattern="${log.pattern}" />
           <Policies>
             <TimeBasedTriggeringPolicy/>
