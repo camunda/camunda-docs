@@ -10,9 +10,9 @@ Camunda Hub controls access to the workspaces, projects, environments, and clust
 
 Access is controlled on three levels:
 
-- **Organization**: Every user holds one organization-level role. It decides what the user can do in Camunda Hub across the organization. See [roles and permissions](#roles-and-permissions) and [access to resources](#access-to-resources).
+- **Organization**: Users are assigned organization-level roles. They decide what a user can do in Camunda Hub across the organization. See [roles and permissions](#roles-and-permissions) and [access to resources](#access-to-resources).
 - **Workspace**: Within a workspace, the role of a user decides what they can do with its projects and files. See [workspace roles](./manage-workspaces/manage-workspace-members.md#workspace-roles).
-- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, Admin, and Zeebe, is managed separately, with authorizations in Admin, not by the organization role. See [access to runtime environments](#access-to-runtime-environments).
+- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, Admin, and Zeebe, is managed separately, with authorizations in Admin, not by organization-level roles. See [access to runtime environments](#access-to-runtime-environments).
 
 ## Manage users
 
@@ -52,7 +52,7 @@ You create users in your identity provider, and manage users, groups, and roles 
 
 ## Roles and permissions
 
-Every user holds one organization-level role. The following table shows what each role can do.
+Users are assigned organization-level roles. The following table shows what each role can do.
 
 | Role                           | Organization | Workspaces and projects | Clusters | Environments  | Catalog   | Optimize and business value |
 | :----------------------------- | :----------- | :---------------------- | :------- | :------------ | :-------- | :-------------------------- |
@@ -81,7 +81,7 @@ Every user holds one organization-level role. The following table shows what eac
 Beyond the roles above, an organization may show a few legacy roles depending on its history. They aren't recommended with Camunda Hub:
 
 - **Developer** _(deprecated)_: No longer offered for new assignment. Existing holders keep their current permissions unchanged; they are not automatically moved to another role.
-- **Task user** and **Visitor** _(legacy)_: Available only for organizations with at least one cluster on version 8.7 or older, alongside a user's organization-level role. They govern access to the older cluster apps and disappear once no such clusters remain.
+- **Task user** and **Visitor** _(legacy)_: Available only for organizations with at least one cluster on version 8.7 or older, alongside a user's organization-level roles. They govern access to the older cluster apps and disappear once no such clusters remain.
 
 </TabItem>
 
@@ -95,7 +95,7 @@ In Self-Managed, you assign roles in Management Identity. The default roles **De
 
 ## Access to resources
 
-The organization role of a user sets the level of access to each of the following resources. The table above lists the level for each role. This section describes what each level means.
+The organization-level roles of a user set the level of access to each of the following resources. The table above lists the level for each role. This section describes what each level means.
 
 | Resource                    | Levels                               | Described in                                                  |
 | :-------------------------- | :----------------------------------- | :------------------------------------------------------------ |
@@ -166,7 +166,7 @@ Refer to the documentation pages about [assigning roles](/self-managed/component
 
 ## Access to runtime environments
 
-The organization role controls what a user can do in Camunda Hub. It doesn't control what the user can do in the runtime of an environment, which includes Operate, Tasklist, Admin, and Zeebe. Starting with version 8.8, access to the runtime is managed independently of the organization role. To control what a user can access there, define their authorizations in [Admin](/components/admin/authorization.md).
+Organization-level roles control what a user can do in Camunda Hub. They don't control what the user can do in the runtime of an environment, which includes Operate, Tasklist, Admin, and Zeebe. Starting with version 8.8, access to the runtime is managed independently of the organization role. To control what a user can access there, define their authorizations in [Admin](/components/admin/authorization.md).
 
 If authorizations are disabled in the runtime, the user has full access to the runtime and its components.
 
