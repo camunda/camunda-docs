@@ -1,13 +1,13 @@
 ---
-id: get-environments
-title: "Get all environments"
-description: "Returns all environments available in the organization. The organization is derived from the access token."
-sidebar_label: "Get all environments"
+id: replace-workspace-environments
+title: "Replace a workspace's assigned environments"
+description: "Replaces the full set of environments assigned to the given workspace with the provided set. The request body is the exact set the workspace should end up assigned to: environments not listed are unassigned, and unassigning removes an environment from every project's selection in the workspace. Requires the `update` permission for the organization."
+sidebar_label: "Replace a workspace's assigned environments"
 hide_title: true
 hide_table_of_contents: true
-api: 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
-sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+api: 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
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,29 +24,71 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Get all environments"}
+  children={"Replace a workspace's assigned environments"}
 ></Heading>
 
 <MethodEndpoint
-  method={"get"}
-  path={"/environments"}
+  method={"put"}
+  path={"/workspaces/{workspaceKey}/environments"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Returns all environments available in the organization. The organization is derived from the access token.
+Replaces the full set of environments assigned to the given workspace with the provided set. The request body is the exact set the workspace should end up assigned to: environments not listed are unassigned, and unassigning removes an environment from every project's selection in the workspace. Requires the `update` permission for the organization.
 
-On SaaS, the environments are resolved from Console using the caller's own token; a token that is not authorized for Console's `cluster:read` permission is rejected with `403`. Self-Managed has no such requirement — it does not call Console — so this `cluster:read` `403` never applies there.
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
 
-<ParamsDetails parameters={undefined}></ParamsDetails>
+<ParamsDetails
+  parameters={[
+    {
+      name: "workspaceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the workspace.",
+      schema: {
+        description: "System-generated key for a workspace.",
+        type: "string",
+        format: "WorkspaceKey",
+        "x-semantic-type": "WorkspaceKey",
+        example: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+        title: "WorkspaceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
 
-<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            environmentIds: {
+              description:
+                "The exact set of environment IDs the workspace should end up assigned to. An empty array (or an omitted field) unassigns all environments.",
+              type: "array",
+              maxItems: 500,
+              items: { type: "string", minLength: 1, maxLength: 255 },
+            },
+          },
+          title: "ReplaceWorkspaceEnvironmentsRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
 <StatusCodes
   id={undefined}
   label={undefined}
   responses={{
     "200": {
-      description: "The environments were retrieved successfully.",
+      description: "The assigned environments were replaced successfully.",
       content: {
         "application/json": {
           schema: {
@@ -212,6 +254,64 @@ On SaaS, the environments are resolved from Console using the caller's own token
         },
       },
     },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -324,6 +424,63 @@ On SaaS, the environments are resolved from Console using the caller's own token
             status: 403,
             detail:
               "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
             instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
           },
         },

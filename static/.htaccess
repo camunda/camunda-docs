@@ -68,6 +68,17 @@ RewriteRule ^LLMs\.txt$ /llms.txt [R=301,L]
 # Move contact page
 RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 
+#---------------------------------------------------------------------------------
+# Product redirects
+#
+# Create human-readable URLs to use in products that can't quickly change
+# to match what's in the actual documentation. This protects product links,
+# gives us more control over what product URLs point to, allows products 
+# to link to anchors, and more.
+#---------------------------------------------------------------------------------
+
+RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
+
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
 ##################################################################################
@@ -328,10 +339,6 @@ RewriteRule ^docs/components/camunda-integrations/sap/btp-plugin/?$ /docs/8.9/co
 # The "Install Bitnami enterprise images" page is removed in 8.10 (Bitnami images are no longer
 # usable from chart 15.x); redirect to the 8.9 page, the last version that documents them.
 RewriteRule ^docs/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]
-
-# This file didn't belong in 8.9. However, it was in production and was receiving traffic, so we decided to maintain
-# a redirect.
-RewriteRule ^docs/self-managed/upgrade/helm/890-to-8100/?$ /docs/self-managed/upgrade/helm/890-to-8100/ [R=301,L]
 
 # 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)
 RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-89/?$ /docs/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
