@@ -6,7 +6,11 @@ description: "Install ProcessOS Harness into your AI coding agent with c8ctl, an
 keywords: ["ProcessOS Harness", "install", "c8ctl"]
 ---
 
-This page takes you from nothing to a configured ProcessOS project with the journey running. Camunda recommends completing the [organizational setup](setup/project-setup.md) first, checking the [system requirements](setup/system-requirements.md).
+Install ProcessOS Harness for your AI coding agent with the Camunda 8 CLI, configure a version-controlled project, and start the governed development journey.
+
+:::note Before you begin
+Camunda recommends completing the [organizational setup](setup/project-setup.md) and checking the [system requirements](setup/system-requirements.md) before installing ProcessOS Harness.
+:::
 
 ## Install ProcessOS Harness
 

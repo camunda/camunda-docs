@@ -23,7 +23,7 @@ import IconMcpImg from '../../components/assets/icon-mcp.png';
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left" style={{marginRight: '50px', flex: '1.35'}}>
 
-Build Camunda solutions with ProcessOS Harness, agentic orchestration, and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents in BPMN processes, and design faster with Camunda Copilot.
+Build Camunda solutions with ProcessOS, agentic orchestration, and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents in BPMN processes, and design faster with Camunda Copilot.
 
 <a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic" title="Build with Camunda" href={useBaseUrl('/build-with-camunda')} style={{marginBottom: '30px', marginTop: '20px'}}>Set up your AI development environment</a>
 
