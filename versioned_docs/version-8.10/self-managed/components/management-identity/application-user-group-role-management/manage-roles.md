@@ -20,8 +20,6 @@ Management Identity includes a set of default roles that are available out-of-th
 
 The following table lists the default roles and their descriptions.
 
-`DevOps`, `Hub`, and `Hub Admin` were previously known as `Console`, `Web Modeler`, and `Web Modeler Admin`. The earlier roles still exist and are kept for backward compatibility. They grant the same permissions as the new roles, so existing assignments keep working without reassignment. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for why both exist.
-
 | Name                | Description                                                                                                                                                                                                                                    | Notes                                    |
 | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- |
 | Default user role   | The role does not grant any permissions by default. It is applied to all users, including service accounts.                                                                                                                                    |                                          |
@@ -31,6 +29,8 @@ The following table lists the default roles and their descriptions.
 | Optimize            | Grants full access to [Optimize](../../optimize/overview.md).                                                                                                                                                                                  |                                          |
 | Hub                 | Grants access to Hub for creating and collaborating on projects.                                                                                                                                                                               | Previously known as `Web Modeler`.       |
 | Hub Admin           | Grants full access to Hub, including all projects and the ability to manage workspace members.                                                                                                                                                 | Previously known as `Web Modeler Admin`. |
+
+`DevOps`, `Hub`, and `Hub Admin` were previously known as `Console`, `Web Modeler`, and `Web Modeler Admin`. The earlier roles still exist and are kept for backward compatibility. They grant the same permissions as the new roles, so existing assignments keep working without reassignment. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for why both exist.
 
 ## Add a role
 
