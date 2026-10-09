@@ -156,7 +156,7 @@ Camunda Hub provides details for each environment. Select an environment on the 
 
 ### Environment statuses {#environment-statuses-self-managed}
 
-The status of an environment reflects the state of its cluster. Camunda Hub monitors the health of the components of each environment to determine its status. For details on how the status is determined, see the [Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#environment-status).
+The status of an environment reflects the state of its cluster. Camunda Hub monitors the health of the components of each environment to determine its status. For details on how the status is determined, see the [Camunda Hub configuration](/self-managed/components/hub/configuration/environments.md#environment-status).
 
 | Status       | Description                                                                                                                                                                      |
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -200,7 +200,7 @@ To change the assignment, see [assign environments to a workspace](./assign-envi
 In Self-Managed, you add an environment by adding a cluster or a [Physical Tenant](/self-managed/concepts/multi-tenancy/physical-tenants.md) to the Camunda Hub configuration. You provision clusters outside Camunda Hub. A cluster has an environment for its `default` Physical Tenant, and, on Camunda 8.10 and later, one for each additional Physical Tenant you declare.
 
 1. Provision the cluster with your platform tooling.
-1. Add the cluster to the Camunda Hub configuration, and declare any additional Physical Tenants. See [physical tenants in the Camunda Hub configuration](/self-managed/components/hub/configuration/properties.md#physical-tenants).
+1. Add the cluster to the Camunda Hub configuration, and declare any additional Physical Tenants. See [Physical Tenants in the Camunda Hub configuration](/self-managed/components/hub/configuration/environments.md#physical-tenants).
 1. Perform a rolling restart of Camunda Hub. Camunda Hub reads the configuration at startup. After the restart, the environments appear on the **Environments** page.
 1. [Assign the environments to a workspace](./assign-environments.md) so that teams can deploy to them.
 
