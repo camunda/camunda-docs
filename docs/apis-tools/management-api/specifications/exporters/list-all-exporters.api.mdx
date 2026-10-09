@@ -1,0 +1,129 @@
+---
+id: list-all-exporters
+title: "List all exporters"
+description: "List all exporters and their status whether they are enabled or disabled. Exporters are configured per physical tenant, so the same exporter id may exist in some tenants only and may be in a different state in each of them. Without the physicalTenant parameter every physical tenant is listed, grouped by tenant; with it, only the given physical tenant is listed. Every entry names the physical tenant it belongs to either way."
+sidebar_label: "List all exporters"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVltv2zYU/iuEnjM7K4oB856yJQ2MdXaBJuhDEhS0dGSxo0iVpJwIgv77vkNZ8jXd9lJgwF5sijyX79w+sk0y8qlTVVDWJLPkvfJBSK0FvVTWBXJeSJOJUJBywgcZai+eC8K3481GSEeCjFxpyoR1IlM+rifiZmcAIqk1uVrXDlIVVKui8SqVWgTomnAhvGVzwsuSRtdCZaKUDb4ZlDIQwmmv4YU1uonYWGRFfC7hPs/JkQkRa9wkmRbC5my+nIhPKhS2DtHZAOIuWhSVdPDOfmlDrjnGKJQXGkAouxBrZ+sKoaya7eEv4hmGhUIkERebX6sNmdetIEPRDcDi18C1P0A1KgREp61Z49gKUjH1z7KZPJrkIhlB+2T20CZsBlU8jAxih0WeZ9uEnDiDhyDdmsJEzHNhLPJYUapyxVGzgkX1JJsRsqq0ogiK++XIkp/Aq2JnX2tEiQ8fGs3YcutKfDr6Wiu0QzLLpfaE8xQFksmsTYIKUfLDQRTz7CSOOwCaX3Ms8tg/ZENTsRUfnDJrfNOLLKtouGy2Ql33xEh8ZY0nz77fXF7y35mhgJdxJmANDQ0jgYVjJtKYlekXzxrtfjQ9DOmc5DSoQKXf27erL5Qy3MpxboPqcQyuEPVOdgzltXIOWknH+eZhPadNpi7RLcnN4urX9/PFLbbi8uYaq+v5x3G3X8ft+8Xvi+WnBVa/LRfv5refF8u7z++W94vr5OkYz8eeJo4x7Vdg8AecR716kvy7c21aYIy2bLQbjom40hgMLyqUlJhVlEl1nSFqwQ0rPFaaftgawRHm0F0wn4GhMGeOZObFIwDkstbhMZmIheXtvlUjS0noKYoYZGBPGXjGn7S/SKURam1stNzPKsZkmccx/Y4d/tQhx4O/gZP7CiVnTrjVMRas9Pby7flqcD6IKeykLplFKpg1ImX/qykZcDiHW2QYyZN83JIhp9JRQIBN+uuK9fwuJ6+MFUjWyzWdxtX7HY6/lVq+hNB/6KlcKtx0MVsxYbxvMa8J+DNScyjwMWXuI7cZKLp2GrttH3o3m07bwvrQzVouQDeVaahlsG66TzYb6RRfqzEGFu8DiF0KY9qiBnH7OF9/SIN4ynghRgyCxeItwaMHB4eWfv4J/Pf3RqJit8/ZOxNFCNU/MLFV7SIFK5Pbgy4Y3w5XH+YcP5a9oR8nlz1yH0oZe2h75Z0+XI5BtLtu/P+Z8x975mzHMdBLmFZa4mGBJoiT1G7n7CHhi6ifjYekbVfS073TXcfb/RuEp28o3PjseLVFvtcj6Wxof1Jz7hm3kbpm4YSHZiAFxPUElQKXF25ZDrLXvkpTqva1ThiYrYykdXtzh2n8C0ABQAc=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/management-api/specifications/exporters/exporters-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List all exporters"}
+></Heading>
+
+<MethodEndpoint method={"get"} path={"/"} context={"endpoint"}></MethodEndpoint>
+
+List all exporters and their status whether they are enabled or disabled. Exporters are configured per physical tenant, so the same exporter id may exist in some tenants only and may be in a different state in each of them. Without the physicalTenant parameter every physical tenant is listed, grouped by tenant; with it, only the given physical tenant is listed. Every entry names the physical tenant it belongs to either way.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "physicalTenant",
+      description:
+        "Id of the physical tenant to target. If not specified, the operation applies to all physical tenants.",
+      in: "query",
+      style: "form",
+      required: false,
+      schema: {
+        title: "PhysicalTenantId",
+        description: "The ID of a physical tenant",
+        type: "string",
+        example: "mytenant",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "List of exporters",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                exporterId: {
+                  type: "string",
+                  description: "Id of the exporter",
+                },
+                status: {
+                  type: "string",
+                  enum: [
+                    "ENABLING",
+                    "ENABLED",
+                    "DISABLING",
+                    "DISABLED",
+                    "UNKNOWN",
+                    "CONFIG_NOT_FOUND",
+                  ],
+                  description: "Status of the exporter",
+                  example: "ENABLED",
+                },
+                physicalTenant: {
+                  description:
+                    'The physical tenant this status belongs to. Always present, including on a single-tenant cluster, where it reads "default". Not required, so a client that predates physical tenants can ignore it.\n',
+                  allOf: [
+                    {
+                      title: "PhysicalTenantId",
+                      description: "The ID of a physical tenant",
+                      type: "string",
+                      example: "mytenant",
+                    },
+                  ],
+                },
+              },
+              title: "ExporterStatus",
+            },
+            title: "ExporterList",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested physical tenant does not exist",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

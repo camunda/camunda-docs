@@ -1,0 +1,644 @@
+---
+id: remove-a-disabled-physical-tenant
+title: "Remove a disabled physical tenant"
+description: "Discards the given disabled physical tenant, so that brokers still holding its partitions may leave the cluster. The tenant must already be disabled, i.e. removed from the brokers' static configuration. Removal is permanent — the tenant id cannot be brought back — and does not delete the tenant's data, which stays on the brokers' disks until reclaimed out of band. A normal request runs on the elected coordinator; with force, it is executed by whichever broker received it — the bail-out for a disaster where the coordinator is unreachable."
+sidebar_label: "Remove a disabled physical tenant"
+hide_title: true
+hide_table_of_contents: true
+api: eJztG+1y2zbyVTD8k2ZGkuU012mdX7IsJ7rGooaikzSJR4FISEJDkSwA2tFpNHMPcU94T3K7APglyh/p5XKdsTqeRgSB/d7F7gLcOCGTgeCp4knsnDhnXAZUhJKoJSMLfs1iEnJJZxELSbpcSx7QiCgW01i1iExgGlVkJpLPTEgiFY8iskyikMcLwpUkKRWKI2hJVnRNIkavmQYdRJlUTHSIDw8GHlnBEKGRYDRckxkrELcI77AOEWyVXAMZc5GsNAyL9gngpYoHJEjiOV9kgiLCDvFwPlDLgQwmVjRmgOPf//yXXmtR8pAENI4ThfgAXrZYwk8afNYTaRySMGGS4ISQRUyxyuInkoRU0Ra5WfJgiUSsJUniOmnAw2dJshgkAwwEEeUrYCHJFEnmgCgOO6QH4IE8fP9HxkAEIosLQIA0ULAiSBIBUqUqES/IDVdLMk9EwEA0ChlkX1iQ4bzZ2pDDrpmwVCBexlFyvOR/RnnURjIADKFa1KgPWMyE1VCJETFkMeglWKJCOk7LAcXSFchDSOfkw8aJ4QGsJ7cQXwtoGMJEZIoLFjonSmSs5XC0spSqJbyrm94wRJkg6h1Dg5kSOFpR52TjgDlFiGrcRFUHh4Y1PEOQdA9AtU4RilQCTBWe2Re6SjXg1dpO2m5bBWOhWHtZ3CQZ6EWuctWhopY0XoDJUBBjEkdrIvkqiyi+QnNCS6KBymgEr2iaRpyFKE8tFoAh1sitWmtSQDermgjnNJKsJg3DxixJwLUMfXOaRcpOrbKg7eV2DlDuCfiJdh5UODUWVg6ir8I4/AFWlCZwkEngSyV2qvFQWCmZsW8bF8CotDWvtVS0CK7B/nJb+l/xfoXLZQrBh0lc8Kz7DP+pC6AXBCwF7cB6iB+geoVztGYCzfbR7xInbvbZYASxg4VuLiHpWXQNMXtMZSI2UTXIhMBQpJI0iZLFukVSA6e0HTAU7fxfUuP9c/DDqFhQyLOxcInhNUjQkpWxKyukZPY7QEK/FahPxY1EzDpwngpT/XzsLocqSDEQSiMpUXIQ5oIJGEBVUmWGfnpedbaftyB1Iw7fQmxqqL8jrzxK2C2kxEiFoGhCXLGVrLJ0qu1wArtEUzN61DBlzPVeofGwCfsecRnIEOrBs4xYyA+ss+iQ7lMdgOMkbv8jiVmb3qCHWM5ki+jgbIKUXfHRMROn3Y+OWbxnYecjKgLG3bkOz3eq5MdnVZV0MWTcHh1z5M72aovOiiLdL+l+En6VtEtkcbYCqp3L0a8j9+0IRnp9f/hmAD/+7g5Hw9FL+PV60HuT/zr34R9v0HffDDwcQ8pg+5Pc+O399thUnF2em5rdSDW7LXAweI0amSWwD2OaE/E5C9ZBxMwU7cC19MeO83jf/qbH8khFDDEzJsFcZhINv3D3Yo6mAFKqRO/VFOiMG1AhPeMxBGXctXNENLymMCY1cclNDIAgNQHOeByylMH/YoX7kt6ocP0CWAJ1zGBKQReSsoI8LXqB4Z98iiBzuExD3OJ66pM2SRsVQohCgWZfYVphrLKwpWNQU21tRVmFMRS6wjltBdnTXn3hi1JOVXWRGwr6ATQkM3hq5gxbQrfdPYY/v9s90X/vna1Ob2zeWiGqGV++Ik6Mc4j3pSr5vBbSD7/BznTGe3xfaK37MUq3no595+xpT3QoZPCgAFFI4kExogwNRbQoY0QlOOhhbzTwdJhIBU8EV+t744QWblNE+foic63QXFOFqU3uNxrY8hOt9IdO1Rn4tzHRgQV4lzHEhJWz7jKDdjFvnyXkqB5iCHejbBjCYNQ7fT04g19nw0n+s++OzocvpyPXn567l6MzUD6QtUtN3yhp23wHyIqXraY93/XOpB3bhjverba9fnpvBnOrpz4sRH2PoLBCZe8J9E1MOPP2irCp+LHn9geTScPjQdX6P2DepMsmw5V7agEoXKAOwV0T8BY5rTRdjhtsbswYNhMwMpjCRwkaS3zcm9pjtpfUU/n8VSU5/0qnLXPtPWLMxXLqub8OvGnvDK3fPniDC1cHxnHP84f+0B1NMWrWBjBm1qegJNF5Lr3BdOwNXW/o/1abcO56/UF1Wokxf2XxVnRVrLZOOh28G7ueD2G5+tL4cvXdxIeX03LGpN+DCZfj2rJT1/Unvterj449JGXiu94ug/lY721v6MMz0OR7w9NLfF0Zfu32e3bocnzW8wGcC3NGL6dAlY8AzgavBzD8aogQ61KyryqsWBjDUR/2Iw14Orq8ODUiAFqRNWPMY3fiVx7twgK2GR2MfK1jbfeIe/BOU108GzYu3LPBtP+qN3o50HOQnIKF8oXR2XT86rfJEBBPfVDFyN+Rp3vh+oMdLu0QbMb+EAh+j3y8Glz09HY7y4ulQwFlCqi0khU+7mTxu2RiPxY2+KDd9xGb5rZV5JfD75QkFhork63GDu1XNYtda4A6y7BFXWv+E7oQDPvsMTbEq+cNe1KissX4wfT4mHO1u+fa8Ts2XA/TStgQTvWG+t4dDaYQcPW2cj58B0no1V6rrfBMDJIOqYAiVEq+iGsHKeyaYV+ZBiKREuvwvM/aISVabA1ioS+YbmTCvCDQ/fwFZi2oaSIhI4E1mjqs5KU2R32SsqJpilNDNufYX+SxaSMYRE+goE7QxesHLmCXoEUEvc+56ry/zwngc9tmlS/AhZnud+i2uS7mjUSw5Vxy1iFvlzyC9JAvEDFQCT6ou+3CSEk3ppGMMNd6zrLxJNvrFiG80MECm91IJbCt0MNO8KAEexdiBdxLe77DvoC1aV9FbE/Br4ElsmDKUqLFBIjMbETXIW6mJDdZrCUXQ7VBja10yBYjdk3tuRSe2awrTXgahiARoxitMbBlbNx8wo7+pxaJzSGPGUwTaZxC95hylkywKALbbrqLUJ9Y4wp4SnMApYtpM1qBVu7zHH3K0HJMs8ide9bunEpkb3iVOZm4rxbQtmLBl8Ejk21GpTpGm2sg/RN7yMh0uUBTJfOF82gphIVoUWxVYp79l/vXWLA5A1sI2xGjaBtQVHwGUbwgS75YwvM1jTIGBUgsa7t2t9utlpwoqAn4VL2AHTfDahHcYWiSl+Z5ICtSQp3YXU50/TxxzzHrtk95Hn+1p0wuy938VXE84thdRRdCt/f7/W968nE4FDgcChwOBQ6HAodDgb9GnXc4FDgcChwOBQ6HAn+RQwF7MvC8220mosMY8m4e5pe7MKn86itCAyESUezRDZZeshiyhqDcxPV1PCjpGa6T9+pqBfUhXbAm7QZv/vouPchkxaCqwR2FQl0dOqVMfmnCPddzsKCm+uJUIRxIYxPc0BtXg7DOhTpSJAssZh+bEP+237AgrmBdowl8dBLZcwvvJUSrG7q2c9G8IMktPI/YQzRbMT06gT1vwvWsZHQWuLDSAzHZLFfl14wfl7BAWl/aNAxZ2OZxuyj3nJ87x91OV0MASUiTwkMJ/JlBkrdvCdSK2HIpl+JlUkSZhFh26KvgyBfeYz5xjvKdqG12Inm02b0JvYXZkonr/MJ0JiJYuDGy354cHW2WiVTbkw0mFtsjfUVYJeKovOR4TQXHG7NahDjZyM9eeXV0R1YP76rrgsYgTuzhEUMBwWm6oYb5B+CrQ/rlp273AUD0wm31Qm4JYqlU+gAQdulWX9Xl8Typ3UO1vdu8UUQq63vjoVMp553jTpNimKMNc4XL0FLyZvCKYekqlzzVNe2e4wTsZhvZSAXLy1al4+U3nG/7KGKXjE3pfYdvKw7fVjzo2wob9hQEq6MUuNLnKjpgbGzE+eDsRhxYdtL4+gK8ygSKD85mM6OSXYpou8Vhc9seA1FuCMUF+1vN99t97LCXQROLiw8t8vjrYOvxTxD5f/ye4Q728o8wSu6uysj+lfr4wbPHL0/JXZ/O7KUmLzHjdZWYnMqGIem+7lKfTVT2TfPpRAVAI7uo7ZrmBgxE+/8A+P+2Og==
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/management-api/specifications/cluster/cluster-topology-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Remove a disabled physical tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/physical-tenants/{physicalTenantId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Discards the given disabled physical tenant, so that brokers still holding its partitions may leave the cluster. The tenant must already be disabled, i.e. removed from the brokers' static configuration. Removal is permanent — the tenant id cannot be brought back — and does not delete the tenant's data, which stays on the brokers' disks until reclaimed out of band. A normal request runs on the elected coordinator; with force, it is executed by whichever broker received it — the bail-out for a disaster where the coordinator is unreachable.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "physicalTenantId",
+      required: true,
+      in: "path",
+      description: "Id of the physical tenant",
+      schema: {
+        title: "PhysicalTenantId",
+        description: "The ID of a physical tenant",
+        type: "string",
+        example: "mytenant",
+      },
+    },
+    {
+      name: "dryRun",
+      description:
+        "If true, requested changes are only simulated and not actually applied.",
+      in: "query",
+      style: "form",
+      required: false,
+      schema: { type: "boolean", default: false },
+    },
+    {
+      name: "force",
+      description:
+        "If true, the operation is a force operation. This is typically used to force remove a set of brokers when they are not available.",
+      in: "query",
+      style: "form",
+      required: false,
+      schema: { type: "boolean", default: false },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description: "Accepted",
+      content: {
+        "application/json": {
+          schema: {
+            title: "PlannedOperationsResponse",
+            description:
+              "Returns the current topology, planned changes and the expected final topology when the planned changes have completed.",
+            type: "object",
+            properties: {
+              changeId: {
+                title: "ChangeId",
+                description: "The ID of a topology change operation",
+                type: "integer",
+                format: "int64",
+                example: 8,
+              },
+              currentTopology: {
+                description: "Current topology of the cluster",
+                type: "array",
+                items: {
+                  title: "BrokerState",
+                  description: "State of a broker",
+                  type: "object",
+                  properties: {
+                    id: {
+                      title: "BrokerId",
+                      description:
+                        'The ID of a broker. An integer (e.g. 0) for non-zone-aware clusters, or a string (e.g. "zone-a_0") for zone-aware clusters.\n',
+                      oneOf: [
+                        { type: "integer", format: "int32", example: 0 },
+                        { type: "string", example: "zone-a_0" },
+                      ],
+                    },
+                    state: {
+                      title: "BrokerStateCode",
+                      description: "State of a broker",
+                      type: "string",
+                      enum: [
+                        "UNKNOWN",
+                        "ACTIVE",
+                        "JOINING",
+                        "LEAVING",
+                        "LEFT",
+                        "RECOVERING",
+                      ],
+                    },
+                    version: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The version of the broker state, covering both its lifecycle state and its partition state in the physical tenant the response describes. Absent when the response covers more than one physical tenant, since each tenant advances its own counter independently and no single number describes them all; use `lastUpdatedAt` for change detection there.\n",
+                      example: 1,
+                    },
+                    lastUpdatedAt: {
+                      type: "string",
+                      format: "date-time",
+                      description:
+                        "The time when the broker state was last updated",
+                      example: "2020-01-01T00:00:00Z",
+                    },
+                    partitions: {
+                      type: "array",
+                      items: {
+                        type: "object",
+                        properties: {
+                          id: {
+                            title: "PartitionId",
+                            description:
+                              "The ID of a partition, starting from 1",
+                            type: "integer",
+                            format: "int32",
+                            example: 1,
+                          },
+                          physicalTenant: {
+                            title: "PhysicalTenantId",
+                            description: "The ID of a physical tenant",
+                            type: "string",
+                            example: "mytenant",
+                          },
+                          state: {
+                            title: "PartitionStateCode",
+                            description: "State of a partition",
+                            type: "string",
+                            enum: [
+                              "UNKNOWN",
+                              "JOINING",
+                              "ACTIVE",
+                              "LEAVING",
+                              "RECOVERING",
+                              "LEARNER",
+                            ],
+                          },
+                          priority: {
+                            type: "integer",
+                            format: "int32",
+                            description: "The priority of the partition",
+                            example: 1,
+                          },
+                          config: {
+                            type: "object",
+                            properties: {
+                              exporting: {
+                                type: "object",
+                                properties: {
+                                  exporters: {
+                                    type: "array",
+                                    items: {
+                                      type: "object",
+                                      properties: {
+                                        id: {
+                                          title: "Exporter",
+                                          description: "The ID of an exporter",
+                                          type: "string",
+                                          example: "my-exporter",
+                                        },
+                                        state: {
+                                          title: "ExporterStateCode",
+                                          description: "State of an exporter",
+                                          type: "string",
+                                          enum: [
+                                            "UNKNOWN",
+                                            "ENABLED",
+                                            "DISABLED",
+                                            "CONFIG_NOT_FOUND",
+                                          ],
+                                        },
+                                      },
+                                      title: "ExporterConfig",
+                                    },
+                                  },
+                                },
+                                title: "ExportingConfig",
+                              },
+                            },
+                            title: "PartitionConfig",
+                          },
+                        },
+                        title: "PartitionState",
+                      },
+                    },
+                    physicalTenants: {
+                      type: "array",
+                      items: {
+                        title: "PhysicalTenantState",
+                        description: "State of a physical tenant",
+                        type: "object",
+                        properties: {
+                          id: {
+                            title: "PhysicalTenantId",
+                            description: "The ID of a physical tenant",
+                            type: "string",
+                            example: "mytenant",
+                          },
+                          mode: {
+                            type: "string",
+                            description: "The mode of the physical tenant",
+                            enum: ["UNKNOWN", "PROCESSING", "RECOVERING"],
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              plannedChanges: {
+                description:
+                  "A sequence of operations that will be performed to transform the current topology into the expected topology.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    operation: {
+                      type: "string",
+                      enum: [
+                        "BROKER_ADD",
+                        "BROKER_REMOVE",
+                        "PARTITION_JOIN",
+                        "PARTITION_LEAVE",
+                        "PARTITION_RECONFIGURE_PRIORITY",
+                        "PARTITION_FORCE_RECONFIGURE",
+                        "BROKER_FORCE_REMOVE",
+                        "UNKNOWN",
+                        "PARTITION_DISABLE_EXPORTER",
+                        "PARTITION_ENABLE_EXPORTER",
+                        "START_PARTITION_SCALE_UP",
+                        "PARTITION_BOOTSTRAP",
+                        "PARTITION_PRE_RESTORE",
+                        "PARTITION_RESTORE",
+                        "AWAIT_REDISTRIBUTION",
+                        "AWAIT_RELOCATION",
+                        "UPDATE_ROUTING_STATE",
+                        "DELETE_HISTORY",
+                        "PARTITION_DELETE_EXPORTER",
+                        "UPDATE_INCARNATION_NUMBER",
+                        "PRE_SCALING",
+                        "POST_SCALING",
+                        "UPDATE_PARTITIONING",
+                        "ENTER_RECOVERY",
+                        "EXIT_RECOVERY",
+                        "AWAIT_MODE_CHANGE",
+                        "EXPORTING_STATE_CHANGE",
+                        "REMOVE_PHYSICAL_TENANT",
+                        "PARTITION_PROMOTE",
+                        "PARTITION_DEMOTE",
+                        "INITIALIZE_SCHEMA",
+                      ],
+                    },
+                    brokerId: {
+                      title: "BrokerId",
+                      description:
+                        'The ID of a broker. An integer (e.g. 0) for non-zone-aware clusters, or a string (e.g. "zone-a_0") for zone-aware clusters.\n',
+                      oneOf: [
+                        { type: "integer", format: "int32", example: 0 },
+                        { type: "string", example: "zone-a_0" },
+                      ],
+                    },
+                    partitionId: {
+                      title: "PartitionId",
+                      description: "The ID of a partition, starting from 1",
+                      type: "integer",
+                      format: "int32",
+                      example: 1,
+                    },
+                    physicalTenant: {
+                      title: "PhysicalTenantId",
+                      description: "The ID of a physical tenant",
+                      type: "string",
+                      example: "mytenant",
+                    },
+                    priority: {
+                      type: "integer",
+                      format: "int32",
+                      description: "The priority of the partition",
+                      example: 3,
+                    },
+                    brokers: {
+                      type: "array",
+                      items: {
+                        title: "BrokerId",
+                        description:
+                          'The ID of a broker. An integer (e.g. 0) for non-zone-aware clusters, or a string (e.g. "zone-a_0") for zone-aware clusters.\n',
+                        oneOf: [
+                          { type: "integer", format: "int32", example: 0 },
+                          { type: "string", example: "zone-a_0" },
+                        ],
+                      },
+                    },
+                    exporterId: {
+                      title: "Exporter",
+                      description: "The ID of an exporter",
+                      type: "string",
+                      example: "my-exporter",
+                    },
+                    partitioningConfig: {
+                      description:
+                        "The partition distributor configuration agreed on by the cluster.",
+                      type: "object",
+                      required: ["scheme"],
+                      properties: {
+                        scheme: {
+                          type: "string",
+                          enum: ["ROUND_ROBIN", "ZONE_AWARE", "FIXED"],
+                          description:
+                            "The partitioning scheme. ROUND_ROBIN assigns partitions evenly across all brokers. ZONE_AWARE places replicas according to zone specs. FIXED uses a static mapping defined in each broker's local configuration.\n",
+                        },
+                        zones: {
+                          type: "array",
+                          description:
+                            "Zone specifications; present only when scheme is ZONE_AWARE. While migrating a bare or partially zoned cluster to zone-aware, the order of this array matters: it determines which existing (bare) nodes get migrated into which zone. Outside of migration, order is irrelevant — every operation addresses a zone by its `name`, never by its position in this array.\n",
+                          items: {
+                            description:
+                              "A zone's participation in partition placement.",
+                            type: "object",
+                            required: ["name", "numberOfReplicas", "priority"],
+                            properties: {
+                              name: {
+                                type: "string",
+                                description: "Zone name",
+                                example: "us-east1",
+                              },
+                              numberOfReplicas: {
+                                type: "integer",
+                                format: "int32",
+                                description:
+                                  "Number of partition replicas placed in this zone",
+                                example: 2,
+                              },
+                              priority: {
+                                type: "integer",
+                                format: "int32",
+                                description:
+                                  "Preferred-leader ranking; higher value wins",
+                                example: 1000,
+                              },
+                            },
+                            title: "ZoneSpec",
+                          },
+                        },
+                      },
+                      title: "PartitioningConfig",
+                    },
+                    exportingState: {
+                      enum: ["EXPORTING", "PAUSED", "SOFT_PAUSED", "UNKNOWN"],
+                      title: "ExportingState",
+                    },
+                  },
+                  title: "Operation",
+                },
+              },
+              expectedTopology: {
+                description:
+                  "The expected final topology when the planned changes have completed.",
+                type: "array",
+                items: {
+                  title: "BrokerState",
+                  description: "State of a broker",
+                  type: "object",
+                  properties: {
+                    id: {
+                      title: "BrokerId",
+                      description:
+                        'The ID of a broker. An integer (e.g. 0) for non-zone-aware clusters, or a string (e.g. "zone-a_0") for zone-aware clusters.\n',
+                      oneOf: [
+                        { type: "integer", format: "int32", example: 0 },
+                        { type: "string", example: "zone-a_0" },
+                      ],
+                    },
+                    state: {
+                      title: "BrokerStateCode",
+                      description: "State of a broker",
+                      type: "string",
+                      enum: [
+                        "UNKNOWN",
+                        "ACTIVE",
+                        "JOINING",
+                        "LEAVING",
+                        "LEFT",
+                        "RECOVERING",
+                      ],
+                    },
+                    version: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The version of the broker state, covering both its lifecycle state and its partition state in the physical tenant the response describes. Absent when the response covers more than one physical tenant, since each tenant advances its own counter independently and no single number describes them all; use `lastUpdatedAt` for change detection there.\n",
+                      example: 1,
+                    },
+                    lastUpdatedAt: {
+                      type: "string",
+                      format: "date-time",
+                      description:
+                        "The time when the broker state was last updated",
+                      example: "2020-01-01T00:00:00Z",
+                    },
+                    partitions: {
+                      type: "array",
+                      items: {
+                        type: "object",
+                        properties: {
+                          id: {
+                            title: "PartitionId",
+                            description:
+                              "The ID of a partition, starting from 1",
+                            type: "integer",
+                            format: "int32",
+                            example: 1,
+                          },
+                          physicalTenant: {
+                            title: "PhysicalTenantId",
+                            description: "The ID of a physical tenant",
+                            type: "string",
+                            example: "mytenant",
+                          },
+                          state: {
+                            title: "PartitionStateCode",
+                            description: "State of a partition",
+                            type: "string",
+                            enum: [
+                              "UNKNOWN",
+                              "JOINING",
+                              "ACTIVE",
+                              "LEAVING",
+                              "RECOVERING",
+                              "LEARNER",
+                            ],
+                          },
+                          priority: {
+                            type: "integer",
+                            format: "int32",
+                            description: "The priority of the partition",
+                            example: 1,
+                          },
+                          config: {
+                            type: "object",
+                            properties: {
+                              exporting: {
+                                type: "object",
+                                properties: {
+                                  exporters: {
+                                    type: "array",
+                                    items: {
+                                      type: "object",
+                                      properties: {
+                                        id: {
+                                          title: "Exporter",
+                                          description: "The ID of an exporter",
+                                          type: "string",
+                                          example: "my-exporter",
+                                        },
+                                        state: {
+                                          title: "ExporterStateCode",
+                                          description: "State of an exporter",
+                                          type: "string",
+                                          enum: [
+                                            "UNKNOWN",
+                                            "ENABLED",
+                                            "DISABLED",
+                                            "CONFIG_NOT_FOUND",
+                                          ],
+                                        },
+                                      },
+                                      title: "ExporterConfig",
+                                    },
+                                  },
+                                },
+                                title: "ExportingConfig",
+                              },
+                            },
+                            title: "PartitionConfig",
+                          },
+                        },
+                        title: "PartitionState",
+                      },
+                    },
+                    physicalTenants: {
+                      type: "array",
+                      items: {
+                        title: "PhysicalTenantState",
+                        description: "State of a physical tenant",
+                        type: "object",
+                        properties: {
+                          id: {
+                            title: "PhysicalTenantId",
+                            description: "The ID of a physical tenant",
+                            type: "string",
+                            example: "mytenant",
+                          },
+                          mode: {
+                            type: "string",
+                            description: "The mode of the physical tenant",
+                            enum: ["UNKNOWN", "PROCESSING", "RECOVERING"],
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "Failed to accept request. Another topology change is in progress.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "500": {
+      description: "Internal error",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description: "Gateway failed to send request to the broker.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "504": {
+      description: "Request from gateway to broker timed out.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

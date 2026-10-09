@@ -1,0 +1,131 @@
+---
+id: reset-the-internal-backup-runtime-state
+title: "Reset the internal backup runtime state"
+description: "Resets all internal backup runtime state, including the latest checkpoint info,"
+sidebar_label: "Reset the internal backup runtime state"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVttu4zYQ/RVCz66dLtoC9VvaDRYB2mIRpOhDskDG0tjihiK1JGWvIejfe4aUnPjSbV/bbWAgNjm3c+bC6YuKQ+l1G7WzxbK448AxKDJGaRvZWzJqReVz1yrf2agbViFS5BmuS9NV2m5UrFkZnIWoyprL59ZBFfdrN3u048VoIx0m668kG45UUSTFNnrNAQK2SkKTZ7Ibnm7nj/a+1kHhQ1ZR1WirQ/QU9ZaVa1m+OZuitxVXau286gKrXc1WhZ2OZS1Bj6ZDdB4eH4HTuN2E5gA9YVXRqRWr0jB5GAxOaSCFcxx6XnXaREUb0hY4RdvyLttFqI92ZFQusjW3Vrxlv1dtvQ+6hBdESuChs4ZDUE/T+X06flKWvHe7IF4RibNit5gVLXkCdexDsXzoC4sfSOCxMsQ8f+o04i6WazKBZ4WWPH/qEAFuj7P/2+hJgn2hEk7lYAOC7WnQc/WH8OoaHSNXsxPN0gFoyHAf7SleECHiKKMAFDNkSJc18ClSAZkw/M0oOEpIypN9y+qp4jV1BuxkGSQQNYNbz0g4g8uylqqpkKSattr5TFpA3TVULPsi6miEsPdTVJkxdfv2jJZ7KYlK4qVT/KjVAJh2rTedFEeHmvPqqaQG32g+SY9IwtNcXR/gxJoQ90E5KCvIahjkz1RGs09IzxweoGdEcd8KDLQAOMNv6DZtQpYVqBiGD1IGoXU2cBDsb66+k3/HKH+60OYpmhVL53RliepcdwZxeanpYpgV319dnRu6nbrnBtXkERIgIpYoktS2BmhEcvExiHh/ISdJUU0hn+XjHVv2ujwIpB6XecGiF15IcauPXEoTtF6KMuoMvwEQ2vB55NnvdP0lboND66VBsiZt0F1D+hNG3pzbfQcqd7QfZaWhAoaTktaU4Tg22Mq7Z/bzr46wC7V4NzKz9q5Rm5E9GcOJIiUFin7s4lfFFciSc4dRDtMGoz+9ArHG70V+z+5y8y5S88q4Y7+dHojOGwj2mZBhuVj0tQtxWPat83FYYOJ0hFdrAbUteU0rkwGJVEaTxg5sGId5lI5PyfuVLMA1yIfKrpWIpacJ0YujY0s//oAB8vdGkuLwenq/mKhjbP+BiVF1SMNQ1pDXJTGOvlda1+9vhQdwlw1+O/9inOjmvMugRtPTipeQnjlvMjlX48YR5Bn5eXweMikhNpRqdXzC08ZwvIdcWsFO4+lfWuH/Ne7fs8aNYyDy57hoDdxLUaRe7cfmfiiOmlvaOuUfhZx786Ho+xUF/t2bYZDjvN1J01c6SCO/bH9/WTL//d3vItPPvL+0NW/JdCJcyLiYxiEY/QCVmglLXqI3a19jNWpfa509RGLlMLvf3vxyc3+DUfQnoUbYDQ==
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/management-api/specifications/backups/backup-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Reset the internal backup runtime state"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/backupRuntime/state"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Resets all internal backup runtime state, including the latest checkpoint info,
+latest backup info, all checkpoint metadata entries, and all backup range entries.
+This is an administrative operation intended for use when switching backup stores,
+allowing the internal state to be cleared so it can be rebuilt against the new store.
+
+Resets the state of every physical tenant unless `physicalTenant` narrows it to one.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "physicalTenant",
+      required: false,
+      in: "query",
+      description:
+        "Narrows the operation to the given physical tenant. When omitted, the operation covers every\nphysical tenant of the cluster, which on a single-tenant cluster is the one `default` tenant\nand therefore unchanged behavior.\n",
+      schema: {
+        title: "Physical Tenant ID",
+        description:
+          "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+        type: "string",
+        example: "tenanta",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "Backup runtime state has been successfully reset" },
+    "500": {
+      description: "Internal Error",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description: "Gateway failed to send request to the broker.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "504": {
+      description: "Request from gateway to broker timed out",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

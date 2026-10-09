@@ -1439,6 +1439,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/management-api/sidebar-schema"),
         require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
         require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
