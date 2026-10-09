@@ -1,0 +1,481 @@
+---
+id: submit-project-snapshot-review
+title: "Submit a review decision for a project snapshot"
+description: "Records a review decision, with an optional comment, for a project snapshot that has a review request. A snapshot keeps accepting reviews as long as its request has not been superseded, so a follow-up review can be submitted after an earlier one. Submitting a review for a snapshot with no review request at all is rejected with `403`."
+sidebar_label: "Submit a review decision for a project snapshot"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Submit a review decision for a project snapshot"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/project-snapshots/{projectSnapshotKey}/reviews"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Records a review decision, with an optional comment, for a project snapshot that has a review request. A snapshot keeps accepting reviews as long as its request has not been superseded, so a follow-up review can be submitted after an earlier one. Submitting a review for a snapshot with no review request at all is rejected with `403`.
+Submitting a review adds a system-authored comment to the project's BPMN files. The review is attributed to the public API user rather than to a person, and the API does not enforce that the reviewer differs from whoever created the snapshot.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "projectSnapshotKey",
+      in: "path",
+      required: true,
+      description: "The unique key of the project snapshot.",
+      schema: {
+        description: "System-generated key for a project snapshot.",
+        type: "string",
+        format: "ProjectSnapshotKey",
+        "x-semantic-type": "ProjectSnapshotKey",
+        example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+        title: "ProjectSnapshotKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["status"],
+          example: {
+            status: "APPROVED",
+            comment: "Checks pass, safe to promote.",
+          },
+          properties: {
+            status: {
+              description: "The review decision.",
+              type: "string",
+              enum: ["APPROVED", "CHANGES_REQUESTED"],
+            },
+            comment: {
+              description:
+                "An optional comment to record with the decision. Must not be blank if provided.",
+              type: "string",
+              nullable: true,
+            },
+          },
+          title: "ProjectSnapshotReviewCreateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The review was submitted successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: {
+              reviewKey: "c2f9a1d3-8b4e-4f60-ab2c-3d4e5f6a7b8c",
+              projectSnapshotKey: "a2b3c4d5-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+              status: "APPROVED",
+              comment: "Looks good, safe to promote.",
+              created: "2025-03-16T11:20:00.000Z",
+              createdBy: {
+                name: "John Smith",
+                email: "john.smith@example.com",
+              },
+            },
+            required: [
+              "reviewKey",
+              "projectSnapshotKey",
+              "status",
+              "comment",
+              "created",
+              "createdBy",
+            ],
+            properties: {
+              reviewKey: {
+                description: "The unique key of the review.",
+                type: "string",
+              },
+              projectSnapshotKey: {
+                description:
+                  "The unique key of the project snapshot the review was submitted for.",
+                allOf: [
+                  {
+                    description: "System-generated key for a project snapshot.",
+                    type: "string",
+                    format: "ProjectSnapshotKey",
+                    "x-semantic-type": "ProjectSnapshotKey",
+                    example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+                    title: "ProjectSnapshotKey",
+                  },
+                ],
+              },
+              status: {
+                description: "The review decision.",
+                type: "string",
+                enum: ["APPROVED", "CHANGES_REQUESTED"],
+              },
+              comment: {
+                description: "The optional comment recorded with the decision.",
+                type: "string",
+                nullable: true,
+              },
+              created: {
+                description: "The timestamp when the review was submitted.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description:
+                  "The user who submitted the review. Reviews submitted through the public API are attributed to the public API user rather than a person.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description:
+                          "The email address of the user, or null when the user has none on record.",
+                        type: "string",
+                        format: "email",
+                        nullable: true,
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+            },
+            title: "ProjectSnapshotReview",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

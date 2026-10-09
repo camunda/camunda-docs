@@ -9,6 +9,10 @@ const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
 
+// Same icon Docusaurus appends to external navbar links.
+const externalLinkIcon =
+  '<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" style="margin-left:0.25rem;vertical-align:middle"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg>';
+
 module.exports = {
   // https://docusaurus.io/blog/releases/3.6#adoption-strategy
   future: {
@@ -77,15 +81,7 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {
-              8.7: {
-                specPath: "api/operate/version-8.7/operate-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/operate-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-            },
+            versions: {},
           },
         },
       },
@@ -107,15 +103,7 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {
-              8.7: {
-                specPath: "api/tasklist/version-8.7/tasklist-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/tasklist-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-            },
+            versions: {},
           },
         },
       },
@@ -155,14 +143,6 @@ module.exports = {
                   "api/administration-sm/version-8.8/administration-sm-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.8/apis-tools/administration-sm-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.7: {
-                specPath:
-                  "api/administration-sm/version-8.7/administration-sm-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/administration-sm-api/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -277,13 +257,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.7: {
-                specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -306,15 +279,7 @@ module.exports = {
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
-            versions: {
-              8.7: {
-                specPath: "api/zeebe/version-8.7/zeebe-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/zeebe-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-            },
+            versions: {},
           },
         },
       },
@@ -465,9 +430,9 @@ module.exports = {
       },
     },
     announcementBar: {
-      id: "camunda8",
+      id: "camunda-8-10-latest",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign up</a></b> for a free account to start orchestrating your business processes today.',
+        "<b>Camunda 8.10 is now the latest version of the documentation.</b> Make sure you are viewing the correct version, and update any bookmarks or saved links as required.",
       backgroundColor: "#171717",
       textColor: "#fff",
       isCloseable: true,
@@ -499,10 +464,23 @@ module.exports = {
               className: "dropdown-unmaintained-versions",
               value: "<b>Unmaintained versions</b>",
             },
-            ...unmaintainedVersions.map((version) => ({
-              label: version.label,
-              href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
-            })),
+            ...unmaintainedVersions
+              .filter((version) => !version.collapsed)
+              .map((version) => ({
+                label: version.label,
+                href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
+              })),
+            {
+              type: "html",
+              className: "dropdown-older-versions",
+              value: `<details><summary>Older versions</summary>${unmaintainedVersions
+                .filter((version) => version.collapsed)
+                .map(
+                  (version) =>
+                    `<a class="dropdown__link" target="_blank" rel="noopener noreferrer" aria-label="${version.label} (opens in a new window)" href="https://unsupported.docs.camunda.io/${version.urlSuffix}/">${version.label}${externalLinkIcon}</a>`
+                )
+                .join("")}</details>`,
+            },
           ],
         },
         {
@@ -764,12 +742,12 @@ module.exports = {
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             current: {
-              label: "8.10 (unreleased)",
+              label: "8.11 (unreleased)",
             },
-            8.8: {
+            8.9: {
               banner: "none",
             },
-            8.7: {
+            8.8: {
               banner: "none",
             },
           },
@@ -786,7 +764,7 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.7/**",
+            "/docs/8.9/**",
             "/docs/8.8/**",
           ],
         },

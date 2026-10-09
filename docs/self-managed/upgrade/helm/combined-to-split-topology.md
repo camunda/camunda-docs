@@ -18,7 +18,7 @@ The hard part of this move is data, not values. Orchestration Cluster broker vol
 Make it when you need something the combined release can't give you:
 
 - Several Orchestration Clusters sharing one Camunda Hub and one Management Identity.
-- Independent upgrade, scaling, or removal of a cluster without touching the Hub plane.
+- Independent upgrade, scaling, or removal of a cluster without touching the management plane.
 - Physical Tenants with a separate Optimize instance per tenant.
 
 If none of those apply, staying on a combined release is a fully supported long-term choice.
@@ -33,7 +33,9 @@ If none of those apply, staying on a combined release is a fully supported long-
 | Tested backup and restore   | A verified restore of every data store: broker volumes, secondary storage, and both relational databases                                                                                                          |
 | A non-production rehearsal  | Run the whole procedure against a copy of your production configuration before you touch production                                                                                                               |
 
-## External databases
+This procedure applies only to releases on the 8.10 chart. It doesn't apply to releases on the 8.7, 8.8, or 8.9 chart. See [releases on an earlier chart](#releases-on-an-earlier-chart).
+
+## Migrate off the bundled databases first
 
 The Hub release takes over the Management Identity and Camunda Hub databases that the combined release uses. Chart 15.x doesn't include the bundled Bitnami PostgreSQL subcharts. Thus, an 8.10 combined release already uses external databases for Management Identity and Camunda Hub.
 
@@ -103,6 +105,16 @@ Update the existing release's values:
 
 Run `helm upgrade` on the existing release, without changing its name or namespace. The Orchestration Cluster StatefulSet is preserved, so the brokers keep their volumes and their identity.
 
+This `helm upgrade` restarts the Orchestration Cluster, Connectors, and Optimize pods even though their images don't change. Their configuration changes, for example the Management Identity service URL, and they read it only at startup. Each workload restarts according to its update strategy:
+
+| Workload                                   | Update strategy                                                                     | Effect during the restart                                                                                                                                                                                                                                                                                                                                          |
+| :----------------------------------------- | :---------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Brokers, the `<release>-zeebe` StatefulSet | Rolling update, one broker at a time, each waiting for the previous one to be ready | With a replication factor of 1 or 2, each partition with a replica on the restarting broker loses quorum and is unavailable until that broker is ready again. With one broker, that means the whole cluster. With a replication factor of 3 or more, partitions keep quorum, but individual client requests can fail while leadership moves. Retry failed requests |
+| Connectors                                 | Rolling update. The new pod starts before the old one stops                         | Stays available                                                                                                                                                                                                                                                                                                                                                    |
+| Optimize                                   | `Recreate`, with one replica                                                        | Unavailable until the new pod is ready                                                                                                                                                                                                                                                                                                                             |
+
+The brokers restart with the same volumes, so process state is kept.
+
 :::warning
 Verify with `helm template` or `helm diff` before you apply this step. Confirm the rendered output still contains the Orchestration Cluster StatefulSet with the same name, and the same `volumeClaimTemplates`, and no Management Identity Deployment. If the StatefulSet is absent or renamed, stop: applying it will detach your brokers from their storage.
 :::
@@ -137,6 +149,41 @@ See [install an Optimize release](/self-managed/deployment/helm/install/topology
 - Confirm no workload still resolves the old in-release Management Identity or Hub service names.
 - Inventory the OIDC clients, resource servers, permissions, and roles. Identity initialization is additive, so the combined release's objects still exist. Remove only what no release uses.
 - Retire the old Hub hostname and its TLS certificate, or redirect it.
+
+## Releases on an earlier chart
+
+This procedure needs the 8.10 chart for every release. Don't use it for a release on the 8.7, 8.8, or 8.9 chart:
+
+- The Hub release would take over that release's Management Identity and Web Modeler databases. From 8.7 or 8.8, that skips minor versions.
+- Step 2 and step 5 move Optimize to its own release. The `optimize` role needs the 8.10 chart. The 8.7, 8.8, and 8.9 charts accept only the `combined` and `orchestration` roles.
+- Step 2 removes the release's bundled Keycloak, because the `orchestration` role doesn't allow it on those charts. A release that uses its bundled Keycloak loses its identity provider.
+
+To put a release on an earlier chart under a Hub, it needs an identity provider outside the release. Install the Hub release with its own databases, then follow [connect existing clusters to Hub](./connect-existing-clusters.md).
+
+## Keep existing clients working
+
+Step 1 has the cluster record reuse the client IDs and audiences the release already uses, so its existing clients keep working. Use different client IDs and audiences in the record only if you must, for example because another record already uses the chart defaults: the chart rejects a client ID or audience that two records share. In that case, the cluster must keep accepting the old audience.
+
+With Keycloak, clients that the release's own Management Identity created, such as the Connectors client, request tokens with the audience that Management Identity assigned, `orchestration-api` by default. After step 2, the Orchestration Cluster accepts only the audiences it's configured with.
+
+If the release doesn't accept the old audience, Connectors can't authenticate to the Orchestration Cluster and never becomes ready. Its log shows:
+
+```text
+io.grpc.StatusRuntimeException: UNAUTHENTICATED: Invalid bearer token
+```
+
+On the 8.8 and 8.9 charts, add the old audience in the same `helm upgrade` that converts the release:
+
+```yaml
+orchestration:
+  security:
+    authentication:
+      oidc:
+        backwardsCompatibleAudiences:
+          - orchestration-api
+```
+
+On the 8.10 chart, `backwardsCompatibleAudiences` is deprecated. List the old audience with the full default set in `camunda.security.authentication.oidc.audiences`. See [backwards-compatible audiences replace the audience list](/self-managed/upgrade/helm/890-to-8100.md#backwards-compatible-audiences-replace-the-audience-list).
 
 ## Moving a cluster to a different release, namespace, or Kubernetes cluster
 

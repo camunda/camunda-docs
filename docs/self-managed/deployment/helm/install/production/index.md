@@ -1,13 +1,13 @@
 ---
 id: index
-title: Install Camunda for production with Helm
-sidebar_label: Production install
-description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
+title: Harden Camunda Helm releases for production
+sidebar_label: Production hardening
+description: Apply production-ready Helm configuration to every Camunda 8 Self-Managed release, whatever its topology role.
 ---
 
 This guide describes production hardening for the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It applies to every release in your deployment, whatever role the release has. It provides a resilient baseline for most production use cases.
 
-This guide doesn't install the releases. To install them, use the guide for your topology. See [install the releases](#install-the-releases).
+This guide doesn't install the releases. To install them, see [choose your topology](../index.md#choose-your-topology).
 
 The guide covers these database options:
 
@@ -52,7 +52,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/self-managed/reference-architecture/kubernetes.md#kubernetes).
 
-For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases. It also deploys one Optimize release for each Physical Tenant. See [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md).
+For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases, with one Optimize release per Physical Tenant. See [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
 Before you write a production values file, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md) for which settings belong in `values.yaml` and which belong in a component's `extraConfiguration`.
 
@@ -60,21 +60,14 @@ Before you write a production values file, see [Helm and application configurati
 
 After following the [prerequisites](#prerequisites), you should have a Kubernetes cluster ready with `kubectl` and the `helm` CLI installed.
 
-### Install the releases
+### Find the install guide for each release
 
-Install each release with the guide for its role. Apply the production settings on this page to the values file of each release.
-
-| Release                                    | Install guide                                                                                                       |
-| :----------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
-| Camunda Hub and Management Identity        | [Install the Camunda Hub release](/self-managed/deployment/helm/install/topology/hub-release.md)                    |
-| Orchestration Cluster and Connectors       | [Install an Orchestration Cluster release](/self-managed/deployment/helm/install/topology/orchestration-release.md) |
-| Optimize, one for each Physical Tenant     | [Install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md)                   |
-| All components in one release (`combined`) | [Quick developer install](/self-managed/deployment/helm/install/quick-install.md)                                   |
+To choose and install the releases, see [choose your topology](../index.md#choose-your-topology). Apply the production settings on this page to the values file of each release.
 
 For the prerequisites, namespaces, Secrets, and network policies of the split topology, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
 :::note
-For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-camunda-hub).
+For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#camunda-hub-vs-orchestration-cluster).
 :::
 
 ### Ingress TLS setup
@@ -424,7 +417,7 @@ Each replica stores a full copy of the primary shard data, approximately doublin
 
 #### Version management
 
-Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
+Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) for security patches or critical updates.
 
 #### Secret management
 
