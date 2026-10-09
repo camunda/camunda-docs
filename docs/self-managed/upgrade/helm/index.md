@@ -23,6 +23,18 @@ Camunda 8.10 (chart 15.x) supports Helm CLI v3 and v4.
 Switching CLIs does not require a release-state migration. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
 :::
 
+## Upgrade flow
+
+After completing the prerequisites in your version-specific guide, follow this flow for each supported minor-version upgrade:
+
+1. Run the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md) to migrate and validate override files.
+1. Review the report and complete the version-specific manual actions.
+1. Render and test the complete, layered configuration in non-production.
+1. Back up data and run the Helm upgrade.
+1. Validate the deployed platform.
+
+The toolkit is the recommended first step for values-file preparation. Check its [supported version pairs](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md#check-version-compatibility) and upgrade one minor version at a time. A clean report is a useful sanity check, not proof of production readiness; follow all required actions in the version-specific guide.
+
 ## Upgrade guides
 
 Use the Helm upgrade guide to upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts:

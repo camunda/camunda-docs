@@ -40,11 +40,13 @@ Camunda 8 upgrades must be performed sequentially. If your deployment is running
 
 The 8.9 to 8.10 upgrade spans several guides. Work through them in this order, rather than treating them as separate destinations.
 
-| Step | What you do                                                                                            | Guide                                                                                      |
-| ---- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| 1    | Confirm upgrade eligibility, review platform changes in 8.10, and verify infrastructure compatibility. | [Prepare for upgrade](prepare-for-upgrade.md)                                              |
-| 2    | Create and update your 8.10 values file and run the upgrade.                                           | [Upgrade Camunda 8.9 to 8.10 using Helm](./helm/890-to-8100.md)                            |
-| 3    | Monitor and validate the upgrade before returning the deployment to normal use.                        | [Monitor and validate the upgrade](./helm/890-to-8100.md#monitor-and-validate-the-upgrade) |
+| Step | What you do                                                                                                                           | Guide                                                                                      |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 1    | Confirm upgrade eligibility, review platform changes in 8.10, and verify infrastructure compatibility.                                | [Prepare for upgrade](prepare-for-upgrade.md)                                              |
+| 2    | Run the Camunda Helm Toolkit, complete manual actions, render and test the full configuration, then back up data and run the upgrade. | [Upgrade Camunda 8.9 to 8.10 using Helm](./helm/890-to-8100.md)                            |
+| 3    | Monitor and validate the upgrade before returning the deployment to normal use.                                                       | [Monitor and validate the upgrade](./helm/890-to-8100.md#monitor-and-validate-the-upgrade) |
+
+For Helm-managed installations, start values-file preparation with the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md). It produces migrated overrides and a report of remaining actions. Follow the [Helm upgrade flow](./helm/index.md#upgrade-flow) and the version-specific guide even when the report has no findings.
 
 Review [component changes from 8.9 to 8.10](./components/890-to-8100.md) alongside these steps for behavior changes affecting the components you run.
 
