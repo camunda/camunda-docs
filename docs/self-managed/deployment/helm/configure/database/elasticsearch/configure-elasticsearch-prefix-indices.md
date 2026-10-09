@@ -94,12 +94,12 @@ A wrong prefix doesn't cause an error:
 
 ## Configuration reference
 
-| Configuration                                | Default        | Used By                                 | Purpose                                                                                                                                                                |
-| -------------------------------------------- | -------------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `orchestration.index.prefix`                 | `""`           | Camunda Exporter, Orchestration Cluster | Prefix for Orchestration Cluster indices                                                                                                                               |
-| `orchestration.exporters.zeebe.index.prefix` | `""`           | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices. When empty, falls back to `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`, then to `zeebe-record` |
-| `optimize.database.elasticsearch.prefix`     | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices (consumed by Optimize)                                                                                                               |
-| `optimize.database.opensearch.prefix`        | `zeebe-record` | Legacy Zeebe Exporter                   | Prefix for `zeebe-record` indices when using OpenSearch                                                                                                                |
+| Configuration                                | Default        | Used By                                               | Purpose                                                                                                                                                                |
+| -------------------------------------------- | -------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `orchestration.index.prefix`                 | `""`           | Camunda Exporter, Orchestration Cluster               | Prefix for Orchestration Cluster indices                                                                                                                               |
+| `orchestration.exporters.zeebe.index.prefix` | `""`           | Legacy Zeebe Exporter                                 | Prefix for `zeebe-record` indices. When empty, falls back to `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`, then to `zeebe-record` |
+| `optimize.database.elasticsearch.prefix`     | `zeebe-record` | Optimize, and the Legacy Zeebe Exporter as a fallback | Optimize reader prefix for `zeebe-record` indices (Elasticsearch). The exporter uses it only when `orchestration.exporters.zeebe.index.prefix` is empty                |
+| `optimize.database.opensearch.prefix`        | `zeebe-record` | Optimize, and the Legacy Zeebe Exporter as a fallback | Optimize reader prefix for `zeebe-record` indices (OpenSearch). The exporter uses it only when `orchestration.exporters.zeebe.index.prefix` is empty                   |
 
 ### Optimize-specific configuration
 
