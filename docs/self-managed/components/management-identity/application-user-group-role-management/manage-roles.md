@@ -20,7 +20,7 @@ Management Identity includes a set of default roles that are available out-of-th
 
 The following table lists the default roles and their descriptions.
 
-`DevOps`, `Hub`, and `Hub Admin` are the successors of the earlier roles `Console`, `Web Modeler`, and `Web Modeler Admin`. Each successor grants the same permissions as the role it replaces. The earlier roles are kept for backward compatibility, so existing assignments keep working without reassignment. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for why both exist.
+`DevOps`, `Hub`, and `Hub Admin` were previously known as `Console`, `Web Modeler`, and `Web Modeler Admin`. The earlier roles still exist and are kept for backward compatibility. They grant the same permissions as the new roles, so existing assignments keep working without reassignment. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for why both exist.
 
 | Name                | Description                                                                                                                                                                                                                                    | Notes                                    |
 | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- |

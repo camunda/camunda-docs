@@ -87,7 +87,7 @@ Beyond the roles above, an organization may show a few legacy roles depending on
 
 <TabItem value='self-managed'>
 
-In Self-Managed, you assign roles in Management Identity. The default roles **DevOps**, **Hub**, and **Hub Admin** succeed the earlier roles **Console**, **Web Modeler**, and **Web Modeler Admin**. The earlier roles grant the same permissions and are kept for backward compatibility. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
+In Self-Managed, you assign roles in Management Identity. The default roles **DevOps**, **Hub**, and **Hub Admin** were previously known as **Console**, **Web Modeler**, and **Web Modeler Admin**. The earlier roles still exist, grant the same permissions, and are kept for backward compatibility. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
 
 </TabItem>
 
