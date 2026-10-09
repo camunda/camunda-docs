@@ -5,6 +5,8 @@ sidebar_label: "Helm values schema validation"
 description: "Learn how Helm checks values against the Camunda 8 chart schema, how to bypass the check, and which deployment tools support the bypass."
 ---
 
+import HelmCliSupport from '../_partials/_helm-cli-support.md';
+
 Learn how Helm checks values against the Camunda 8 chart schema, how to bypass the check, and which deployment tools support the bypass.
 
 The Camunda 8 Helm chart includes a `values.schema.json` file. Helm compares your values to this schema before it renders the chart templates. A value that doesn't match the schema stops the command.
@@ -34,6 +36,10 @@ Don't remove `orchestration.fullnameOverride` to fix a schema error. This change
 
 ## Bypass the validation {#bypass-the-validation}
 
+:::tip Validate your overrides before you bypass schema validation
+Use the [Camunda Helm Toolkit](./camunda-helm-toolkit.md) to check your `values.yaml` overrides for incorrect types, unsupported or deprecated settings, and configuration issues. Fix the findings before you turn off the schema validation.
+:::
+
 Add the `--skip-schema-validation` flag to `helm install`, `helm upgrade`, `helm template`, or `helm lint`:
 
 ```bash
@@ -54,7 +60,7 @@ Camunda tested these tools, except Pulumi, on a kind cluster with a test chart t
 
 | Tool                       | Bypass possible      | Setting                                                                                            | Tested version | Added in                          |
 | -------------------------- | -------------------- | -------------------------------------------------------------------------------------------------- | -------------- | --------------------------------- |
-| Helm                       | Yes                  | `--skip-schema-validation`                                                                         | 3.16.0         | 3.16.0                            |
+| Helm                       | Yes                  | `--skip-schema-validation`                                                                         | 3.16.0, 4.3.0  | 3.16.0                            |
 | helm-diff                  | Yes                  | `--skip-schema-validation`                                                                         | 3.15.15        | 3.9.12                            |
 | Helmfile                   | Yes                  | `skipSchemaValidation: true` for a release, or in `helmDefaults`                                   | 1.8.1          | 0.169.2 (host Helm 3.16 or later) |
 | Argo CD                    | Yes                  | `spec.source.helm.skipSchemaValidation: true`                                                      | 3.5.4          | 2.14.0                            |
@@ -80,7 +86,6 @@ Helm passes the `global` values of a parent chart to each subchart. If a subchar
 
 ## Choose a Helm version
 
-Helm 3 bug fixes ended on September 9, 2026. Helm 3 security fixes end on February 10, 2027. For more information, see the [Helm 3 end of life announcement](https://helm.sh/blog/helm-v3-end-of-life).
+<HelmCliSupport />
 
-- If you need the bypass, use Helm 3.16.0 or later.
-- Camunda recommends Helm 4. See [Helm 4](./helm-v4.md).
+If you need the bypass, use Helm 3.16.0 or later.
