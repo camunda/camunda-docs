@@ -2,10 +2,10 @@
 id: combined-to-split-topology
 sidebar_label: Move to the split topology
 title: Move from a combined release to the split topology
-description: Plan and execute the move from a single combined Camunda 8.10 Helm release to separate Hub, Orchestration Cluster, and Optimize releases.
+description: Plan and execute the move from a single combined Camunda 8.10 Helm release to separate Hub and Orchestration Cluster releases, with optional separate Optimize releases.
 ---
 
-Move an existing single-release Camunda 8.10 deployment to the split topology: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
+Move an existing single-release Camunda 8.10 deployment to the split topology: one Hub release and one release per Orchestration Cluster. If the combined release runs Optimize, Optimize either stays in the orchestration release, or moves to one Optimize release per Physical Tenant.
 
 This is a topology change, not a version upgrade. It doesn't change any component version, and it isn't required. A `combined` release remains both supported and the chart default.
 
@@ -74,7 +74,9 @@ Plan a maintenance window. From step 2 until the Hub release is ready in step 3,
 
 ### Step 1: Inventory what the combined release owns
 
-From your current values file and cluster, record:
+First, if the combined release runs Optimize, decide where Optimize runs after the move: in the orchestration release, or in one Optimize release per Physical Tenant. This choice sets how many releases, OIDC clients, Secrets, and prefixes you plan for. Use separate releases if you use Physical Tenants.
+
+Then, from your current values file and cluster, record:
 
 - Every index prefix in use. See [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 - Every OIDC client ID, audience, redirect URL, and role, and which secret holds each client secret.

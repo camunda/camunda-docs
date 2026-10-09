@@ -24,7 +24,7 @@ An orchestration release is self-contained. Its existing component values remain
 | `identity.enabled: false`                 | Management Identity runs only in the Hub release                          |
 | A non-empty `global.identity.service.url` | This release runs no Identity of its own, so it must be told where one is |
 
-The chart fails the render with a `[camunda][error]` message if any of these is missing.
+The chart fails the render with a `[camunda][error]` message if any of the first three is missing. The 8.7, 8.8, and 8.9 charts also check `global.identity.service.url`. The 8.10 chart doesn't, so set it yourself.
 
 The component client IDs, audiences, redirect URLs, and secrets must match the clients declared in the matching Hub cluster record. A mismatch authenticates against a client Hub doesn't know about.
 
@@ -32,16 +32,16 @@ The component client IDs, audiences, redirect URLs, and secrets must match the c
 
 An orchestration release can deploy from the 8.7, 8.8, 8.9, or 8.10 chart against an 8.10 Hub. The role is the same; the values it requires differ, because the older charts predate the unified Orchestration Cluster and still bundle management plane dependencies.
 
-Chart versions earlier than the minimum versions in the following table ignore `global.topology.mode` and deploy a combined release. From the minimum versions, the `orchestration` role stops rendering Console and Web Modeler on the 8.7, 8.8, and 8.9 charts, even if `console.enabled` or `webModeler.enabled` is `true`. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
+Chart versions earlier than the minimum versions in [release roles](./index.md#release-roles) ignore `global.topology.mode` and deploy a combined release. From the minimum versions, the `orchestration` role stops rendering Console and Web Modeler on the 8.7, 8.8, and 8.9 charts, even if `console.enabled` or `webModeler.enabled` is `true`. Every version requires `global.identity.auth.enabled: true`, `identity.enabled: false`, and a reachable `global.identity.service.url`. Beyond that:
 
-| Chart (minimum version) | Workload to enable                                                       | Also required                                                                                                                           |
-| :---------------------- | :----------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| 8.10 (15.0.0)           | `orchestration.enabled: true`                                            | Nothing further                                                                                                                         |
-| 8.9 (14.11.0)           | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`, `identityKeycloak.enabled: false`                           |
-| 8.8 (13.14.0)           | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`, `identityKeycloak.enabled: false`                           |
-| 8.7 (12.14.0)           | `zeebe.enabled: true`, `operate.enabled: true`, `tasklist.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
+| Chart | Workload to enable                                                       | Also required                                                                                                                           |
+| :---- | :----------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| 8.10  | `orchestration.enabled: true`                                            | Nothing further                                                                                                                         |
+| 8.9   | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`, `identityKeycloak.enabled: false`                           |
+| 8.8   | `orchestration.enabled: true`                                            | `identityPostgresql.enabled: false`, `webModelerPostgresql.enabled: false`, `identityKeycloak.enabled: false`                           |
+| 8.7   | `zeebe.enabled: true`, `operate.enabled: true`, `tasklist.enabled: true` | `identityKeycloak.enabled: false`, `identityPostgresql.enabled: false`, `postgresql.enabled: false`, `executionIdentity.enabled: false` |
 
-These are the oldest chart versions that support the `orchestration` role. Before you convert an existing release, upgrade it to the latest chart version and the latest Camunda patch version.
+Before you convert an existing release, upgrade it to the latest chart version and the latest Camunda patch version.
 
 The management plane databases belong to the Hub release. The 8.7, 8.8, and 8.9 charts therefore reject them here. If you leave them enabled, the release deploys a second Management Identity or Hub database beside the one the Hub release already owns.
 

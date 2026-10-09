@@ -21,7 +21,7 @@ After you [create `hub-values.yaml`](#create-hub-valuesyaml), the release role i
 | OIDC authentication                                   | Hub topology connections are represented with OIDC bearer tokens   |
 | The only release declaring `global.topology.clusters` | One authoritative inventory prevents client and endpoint drift     |
 
-The chart fails the render with a `[camunda][error]` message if any of these is missing.
+The chart fails the render with a `[camunda][error]` message if `identity.enabled: true` or OIDC authentication is missing. It doesn't check that `global.topology.clusters` is set. Without clusters, Camunda Hub lists no Orchestration Clusters.
 
 ## The cluster record
 

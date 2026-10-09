@@ -62,7 +62,7 @@ After following the [prerequisites](#prerequisites), you should have a Kubernete
 
 ### Find the install guide for each release
 
-To choose and install the releases, see [choose your topology](../index.md#choose-your-topology). Apply the production settings on this page to the values file of each release.
+To choose and install the releases, see [choose your topology](../index.md#choose-your-topology). Then apply the settings on this page by role: each setting belongs only in the values file of the release that runs the component it configures. For example, the Hub and orchestration releases use separate Ingress hosts.
 
 For the prerequisites, namespaces, Secrets, and network policies of the split topology, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
@@ -554,7 +554,7 @@ The following resources and configuration options are important to keep in mind 
 
 ## Create a production `values.yaml`
 
-Each release has its own values file. The Hub release contains Camunda Hub and Management Identity. The orchestration release contains the Orchestration Cluster and Connectors. Optimize runs in its own release, one for each Physical Tenant.
+In the split topology, each release has its own values file. The Hub release contains Camunda Hub and Management Identity. The orchestration release contains the Orchestration Cluster and Connectors. Optimize runs either in the orchestration release or in its own release, one for each Physical Tenant. A `combined` release has a single values file that holds the settings for every component it enables.
 
 The [deployment topology install guide](/self-managed/deployment/helm/install/topology/index.md) provides complete 8.10 examples for every release role. It also explains how to:
 

@@ -88,7 +88,7 @@ global:
 
 Give every Optimize release its own OIDC client ID, audience, role name, redirect URL, and secret. Set the same client ID, audience, redirect URL, and secret on that tenant's Optimize release under `optimize.security.authentication.oidc`. Setting a dedicated `roleName` avoids adding the audience to the shared `Optimize` role.
 
-A `physicalTenants` entry registers the tenant's Optimize client and role in Management Identity. It doesn't add the tenant's Optimize to the Camunda Hub cluster inventory.
+A `physicalTenants` entry registers the tenant's Optimize client and role in Management Identity. It also adds the tenant's Optimize to the Camunda Hub cluster inventory, using its `webappUrl`, or its `redirectUrl` when `webappUrl` isn't set.
 
 A distinct `roleName` isolates the Optimize role per tenant, but it doesn't isolate Optimize's logical tenants, which are a separate mechanism. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants) if you reuse the same logical tenant ID across Physical Tenants behind one shared Management Identity.
 
