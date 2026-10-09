@@ -65,15 +65,6 @@ Beyond the roles above, an organization may show a few legacy roles depending on
 
 The organization-level roles of a user set the level of access to each of the following resources. The table above lists the level for each role. This section describes what each level means.
 
-| Resource                    | Levels                               | Described in                                                  |
-| :-------------------------- | :----------------------------------- | :------------------------------------------------------------ |
-| Organization                | Full access, Manage, Read-only, None | [Roles and permissions](#roles-and-permissions)               |
-| Workspaces and projects     | Manage, Create and collaborate       | [Workspace and project access](#workspace-and-project-access) |
-| Clusters                    | Manage, None                         | [Cluster access](#cluster-access)                             |
-| Catalog                     | Manage, Read-only                    | [Catalog access](#catalog-access)                             |
-| Optimize and business value | Yes, No                              | [Business value access](#business-value-access)               |
-| Environments                | Manage, Assigned only                | [Environment access](#environment-access)                     |
-
 ### Workspace and project access
 
 - **Manage**: Full access to every workspace and project in the organization. Organization Owner and Organization Admin have this level. See [elevated workspace access](#elevated-workspace-access).
@@ -157,15 +148,6 @@ In Self-Managed, you assign roles in Management Identity. The default roles **De
 ## Access to resources {#access-to-resources-self-managed}
 
 The organization-level roles of a user set the level of access to each of the following resources. The table above lists the level for each role. This section describes what each level means.
-
-| Resource                    | Levels                         | Described in                                                               |
-| :-------------------------- | :----------------------------- | :------------------------------------------------------------------------- |
-| Organization                | Manage, Read-only, None        | [Roles and permissions](#roles-and-permissions-self-managed)               |
-| Workspaces and projects     | Manage, Create and collaborate | [Workspace and project access](#workspace-and-project-access-self-managed) |
-| Clusters                    | Manage, None                   | [Cluster access](#cluster-access-self-managed)                             |
-| Catalog                     | Manage, Read-only              | [Catalog access](#catalog-access-self-managed)                             |
-| Optimize and business value | Yes, No                        | [Business value access](#business-value-access-self-managed)               |
-| Environments                | Manage, Assigned only          | [Environment access](#environment-access-self-managed)                     |
 
 ### Workspace and project access {#workspace-and-project-access-self-managed}
 
