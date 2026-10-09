@@ -1089,7 +1089,7 @@ Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/
 
 In Camunda Hub, the configuration settings previously used by Web Modeler are deprecated in favor of the new Hub equivalents:
 
-| Web Modeler (legacy)                                     | Camunda Hub                                                                                                                                                                                     |
+| Web Modeler (≤ 8.9)                                      | Camunda Hub (8.10)                                                                                                                                                                              |
 | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Application properties prefixed with `camunda.modeler.*` | Replaced by `camunda.hub.*`                                                                                                                                                                     |
 | Environment variables prefixed with `CAMUNDA_MODELER_*`  | Replaced by `CAMUNDA_HUB_*`                                                                                                                                                                     |
