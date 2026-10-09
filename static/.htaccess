@@ -68,6 +68,17 @@ RewriteRule ^LLMs\.txt$ /llms.txt [R=301,L]
 # Move contact page
 RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 
+#---------------------------------------------------------------------------------
+# Product redirects
+#
+# Create human-readable URLs to use in products that can't quickly change
+# to match what's in the actual documentation. This protects product links,
+# gives us more control over what product URLs point to, allows products 
+# to link to anchors, and more.
+#---------------------------------------------------------------------------------
+
+RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
+
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
 ##################################################################################
