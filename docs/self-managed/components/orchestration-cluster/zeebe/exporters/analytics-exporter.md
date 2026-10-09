@@ -25,8 +25,8 @@ The exporter reads records from the Zeebe log stream, keeps a fixed set of event
 
 Three properties are worth understanding before you enable it:
 
-- **It cannot slow down your brokers.** The exporter is fire-and-forget. Records are handed to a background thread and the broker acknowledges the log position immediately. If the queue fills or the endpoint is unreachable, records are dropped rather than back-pressuring the engine.
-- **Delivery is best effort.** Records can be dropped if the endpoint is unreachable or a broker restarts, so the data is not guaranteed to be complete. Do not use it for billing, audit, or anything that depends on a complete record. For contractual metric reporting, see [usage metrics](/reference/data-collection/usage-metrics.md).
+- **It is designed not to slow down your brokers.** The exporter is fire-and-forget. Records are handed to a background thread and the broker acknowledges the log position immediately. If the queue fills or the endpoint is unreachable, records are dropped rather than back-pressuring the engine.
+- **Delivery is best effort.** Records can be dropped if the endpoint is unreachable or a broker restarts, so the data is not guaranteed to be complete. Camunda uses the contractual signals to verify usage against your agreement, not to calculate charges: billing and overage charges are based on [usage metrics](/reference/data-collection/usage-metrics.md). Do not rely on the exporter for audit or anything that depends on a complete record.
 - **It runs on the partition leader only.** No additional high-availability setup is required.
 
 ## Enable the exporter
@@ -60,7 +60,7 @@ No further setup is required. The exporter resolves your [cluster ID](/self-mana
 The exporter makes outbound HTTPS requests to `telemetry.camunda.io`, the Camunda analytics endpoint. Allowlist this host in your egress firewall rules on every broker.
 
 :::warning
-If the endpoint is unreachable, the exporter fails **silently**. No incident is raised, no error is surfaced to operators, and the brokers continue running normally. Verify connectivity when you enable the exporter; you will not be told if it stops working.
+If the endpoint is unreachable, the exporter fails **silently**. No incident is raised, no error is surfaced to operators, and the brokers continue running normally. You will not be told if the exporter stops reaching the endpoint.
 :::
 
 ### Authentication
@@ -75,11 +75,13 @@ If you rotate your license key, the exporter picks up the new key the next time 
 
 ### Verify the exporter is running
 
-On broker startup, look for the following log line:
+When the exporter starts on a partition leader, look for the following log line:
 
 ```
-Analytics exporter configured: endpoint=<endpoint>, clusterId=<cluster-id>, partitionId=<partition-id>
+Analytics exporter configured: endpoint=<endpoint>, clusterId=<cluster-id>, partitionId=<partition-id>, exporterDigest=<digest>, activeCategories=<categories>
 ```
+
+`activeCategories` shows which categories the exporter is sending. This line confirms the exporter loaded its configuration; it does not confirm that the endpoint is reachable.
 
 ## Choose what is sent
 
@@ -273,23 +275,30 @@ Regardless of configuration, the exporter never sends:
 
 All options live under `args`. The defaults suit typical Self-Managed deployments and rarely need changing.
 
-| Option               | Type     | Description                                                                                                                                         | Default                        |
-| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `endpoint`           | string   | OTLP/HTTP base URL for the analytics endpoint. The path `/v1/logs` is appended automatically.                                                       | `https://telemetry.camunda.io` |
-| `categories`         | list     | Signal categories to export: `contractual`, `optional`. Omitted enables both (the default); an explicit empty list (`[]`) disables both.            | `[contractual, optional]`      |
-| `push-interval`      | duration | Maximum time between batch pushes, as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).                                     | `PT5M`                         |
-| `heartbeat-interval` | duration | Interval between heartbeat events carrying the broker and exporter versions.                                                                        | `PT10M`                        |
-| `max-queue-size`     | int      | Maximum number of records buffered in memory before new records are dropped.                                                                        | `2048`                         |
-| `max-batch-size`     | int      | Maximum number of records per OTLP request. Must not exceed `max-queue-size`.                                                                       | `512`                          |
-| `sampling-rate`      | double   | Default sampling rate for events, between `0.0` and `1.0`. Individual signals may declare a lower rate; the effective rate is the lower of the two. | `1.0`                          |
+| Option                    | Type     | Description                                                                                                                              | Default                        |
+| ------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `endpoint`                | string   | OTLP/HTTP base URL for the analytics endpoint. The path `/v1/logs` is appended automatically.                                            | `https://telemetry.camunda.io` |
+| `categories`              | list     | Signal categories to export: `contractual`, `optional`. Omitted enables both (the default); an explicit empty list (`[]`) disables both. | `[contractual, optional]`      |
+| `push-interval`           | duration | Maximum time between batch pushes, as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).                          | `PT5M`                         |
+| `heartbeat-interval`      | duration | Interval between heartbeat events carrying the broker and exporter versions.                                                             | `PT10M`                        |
+| `max-queue-size`          | int      | Maximum number of records buffered in memory before new records are dropped.                                                             | `2048`                         |
+| `max-batch-size`          | int      | Maximum number of records per OTLP request. Must not exceed `max-queue-size`.                                                            | `512`                          |
+| `sampling-rate`           | double   | Sampling rate applied to all signals, including contractual signals, between `0.0` and `1.0`.                                            | `1.0`                          |
+| `http-connect-timeout`    | duration | Maximum time to establish a connection to the endpoint.                                                                                  | `PT3S`                         |
+| `http-request-timeout`    | duration | Maximum time for a single export request to complete.                                                                                    | `PT3S`                         |
+| `http-max-retry-attempts` | int      | Maximum number of attempts per export request, including the first attempt.                                                              | `3`                            |
+
+:::warning
+A `sampling-rate` below `1.0` also samples contractual signals, so they undercount your actual usage. Keep the default of `1.0` unless Camunda asks you to change it.
+:::
 
 ## Failure behavior
 
-Under any failure mode, broker throughput is unaffected and records may be dropped without notice. Records are lost when:
+The exporter is designed so that failures do not affect broker throughput. Records may be dropped without notice. Records are lost when:
 
 - **The in-memory queue is full**, typically because the endpoint is slow or unreachable. New records are dropped without retry.
 - **A broker crashes or restarts.** The queue is not persisted.
-- **The endpoint returns an error.** The exporter does not retry persistently and does not buffer to disk.
+- **The endpoint returns an error.** For transient errors, the exporter makes up to `http-max-retry-attempts` attempts per request, then drops the batch. It does not buffer to disk.
 
 Because every record carries `camunda.cluster.id`, `camunda.partition.id`, and `camunda.log.position`, Camunda deduplicates redelivered records downstream.
 
