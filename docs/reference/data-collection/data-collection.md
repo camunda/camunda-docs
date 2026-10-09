@@ -190,7 +190,7 @@ Below is an example of user action data collected by the platform:
 
 #### AI features
 
-Camunda's AI features are currently available in SaaS only and are clearly labeled as AI features. The customer must opt in to enable them in [Camunda Hub](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-ai-powered-features). Depending on the feature, they may collect different information.
+Camunda's AI features are currently available in SaaS only and are clearly labeled as AI features. The customer must opt in to enable them in [Camunda Hub](/components/saas/organization/enable-alpha-features.md#enable-ai-powered-features). Depending on the feature, they may collect different information.
 
 - **Usage telemetry:** Which feature was invoked and how often. This is telemetry data.
 - **Conversation content:** Content you submit to an AI feature is not telemetry data. It is content you provide to the feature, and Camunda collects it separately:

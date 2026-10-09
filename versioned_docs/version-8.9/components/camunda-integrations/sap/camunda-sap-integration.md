@@ -37,7 +37,7 @@ This section of the documentation covers:
 
 - [Prerequisites](./prerequisites.md) for running the integration.
 - **Integration modules**: What each SAP module does and how they fit into Camunda workflows.
-- **Setup guidance**: How to configure and deploy integration modules using the [CSAP CLI](./csap-cli.md).
+- **Setup guidance**: How to configure and deploy integration modules using the [CSAP c8ctl plugin](./csap-cli.md).
 - **Module-specific documentation**:
   - [SAP OData outbound connector](./odata-connector.md)
   - [SAP RFC outbound connector](./rfc-connector.md)

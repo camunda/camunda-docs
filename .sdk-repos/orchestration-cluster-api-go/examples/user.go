@@ -6,13 +6,12 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func createUserExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateUser
 	// "secure-password-123" is a placeholder — don't hardcode passwords in production.
-	req := openapi.NewUserRequest("secure-password-123", "alice")
+	req := camunda.NewUserRequest("secure-password-123", "alice")
 	req.SetName("Alice Example")
 	req.SetEmail("alice@example.com")
 
@@ -27,7 +26,7 @@ func createUserExample(ctx context.Context, client *camunda.CamundaClient) error
 
 func searchUsersExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchUsers
-	result, err := client.SearchUsers(ctx, *openapi.NewUserSearchQueryRequest())
+	result, err := client.SearchUsers(ctx, *camunda.NewUserSearchQueryRequest())
 	if err != nil {
 		return err
 	}
@@ -51,7 +50,7 @@ func getUserExample(ctx context.Context, client *camunda.CamundaClient) error {
 
 func updateUserExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region UpdateUser
-	req := openapi.NewUserUpdateRequest()
+	req := camunda.NewUserUpdateRequest()
 	req.SetName("Alice Updated")
 
 	result, err := client.UpdateUser(ctx, "alice", *req)

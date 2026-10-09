@@ -1,31 +1,33 @@
 ---
 id: test-your-process
 title: Test your process
-description: "Test mode lets you validate your process against a selected project environment before promoting changes."
+description: "Test mode lets you validate your process against a selected environment before promoting changes."
 keywords: ["test", "test mode", "test case", "test studio", "validation"]
 ---
 
-Test mode is a Zeebe-powered testing environment within Camunda Hub for validating a process at any stage of development. Select any environment configured for your project — development, test, stage, or production — and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders — all within Test mode.
+Test mode is a Zeebe-powered way within Camunda Hub to validate a process at any stage of development. Select any environment assigned to your workspace, for example a development, test, stage, or production environment, and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders, all within Test mode.
 
 ## Opening the Test tab
 
 To use Test mode, open a BPMN diagram and click the **Test** tab. Read the [limitations and availability section](#limitations-and-availability) if this tab is missing.
 
-Select any environment configured for your project as your test target. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+Select any [environment](/components/concepts/environments.md) assigned to your workspace as your test target. Each environment shows its tags, such as `dev`, `test`, `stage`, or `prod`. In Self-Managed, the environments come from the clusters defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one environment, backed by a cluster, by default.
 
 :::caution
-Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
+Test mode executes real process logic against the selected environment, including connectors, messages, and other external actions. If you target a production environment, this can affect live data and external systems. Camunda Hub warns you with **This is a production environment** when you select an environment tagged `prod`.
 :::
 
-Opening the **Test** tab no longer deploys your process automatically. Use the **Set up test run** panel to connect a cluster, deploy, and configure a test case — see [get started with Test mode](#get-started-with-test-mode) for the full flow.
+Opening the **Test** tab doesn't deploy your process automatically. Use the **Set up test run** panel to select an environment, deploy, and configure a test case. See [get started with Test mode](#get-started-with-test-mode) for the full flow.
 
-The selected cluster name is shown in the Test action bar. Click it to switch clusters without leaving Test mode; the newly selected cluster becomes the deployment and execution target.
+The Test action bar shows the name of the selected environment, its tags, and its Logical Tenant. Click it to choose a different environment without leaving Test mode. The newly selected environment becomes the deployment and execution target. If no environment is selected, the action bar shows **No environment selected**.
 
-In SaaS, Test mode uses connector secrets from your selected cluster. Connector secrets are not currently supported in Self-Managed.
+If no environment is assigned to your workspace, Test mode tells you that an environment must be assigned to the workspace. Ask an organization admin to [assign an environment](/components/hub/organization/manage-environments/assign-environments.md).
+
+In SaaS, Test mode uses connector secrets from your selected environment. Connector secrets are not currently supported in Self-Managed.
 
 ## Authorizations
 
-If [authorizations](/components/admin/authorization.md) are enabled on the cluster where you will run a test, the following permissions are required for each action:
+If [authorizations](/components/admin/authorization.md) are enabled on the environment where you will run a test, the following permissions are required for each action:
 
 | Resource Type       | Permission                                       | Allowed action                                                                                                  |
 | ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
@@ -52,12 +54,12 @@ When you open the **Test** tab for the first time in a process, the **Set up tes
 
 ### 1. Choose where to run
 
-Click **Connect cluster**, and select a target cluster. Once the cluster is healthy, it advances to the next step.
+Click **Select environment**, and select a target environment. If the environment has more than one Logical Tenant, select one. Once the environment is healthy, it advances to the next step.
 
 ### 2. Choose resources to deploy
 
 - **All resources**: Deploys the whole project, including dependencies like called processes or DMN files.
-- **Only this resource**: Deploys only the open file. 
+- **Only this resource**: Deploys only the open file.
 
 When testing a snapshot version, **Only this resource** is not allowed.
 
@@ -369,7 +371,7 @@ For more information about terms, refer to our [licensing and terms page](https:
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Test mode is available to all Camunda Hub users with commenter, editor, or admin permissions within a project.
-Additionally, within their organization, users need to have a [role](/components/hub/organization/manage-users/index.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the cluster, users need to have specific permissions instead.](#authorizations)
+Additionally, within their organization, users need to have a [role](/components/hub/organization/users-and-roles.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the environment, users need to have specific permissions instead.](#authorizations)
 
 ### Camunda 8 Self-Managed
 
@@ -388,7 +390,7 @@ Prior to the 8.10 release, Test mode can be accessed by installing the 8.10.0-al
 
 ## Use Test mode with Camunda Self-Managed
 
-After selecting the **Test** tab in Self-Managed, the Test view opens directly. The cluster setup and deployment flow is the same as in SaaS, see [opening the Test tab](#opening-the-test-tab).
+After selecting the **Test** tab in Self-Managed, the Test view opens directly. The environment selection and deployment flow is the same as in SaaS, see [opening the Test tab](#opening-the-test-tab).
 
 ### Limitations {#self-managed-limitations}
 
@@ -399,7 +401,7 @@ After selecting the **Test** tab in Self-Managed, the Test view opens directly. 
 
 ## Test usage and billing considerations
 
-The use of Test mode may result in additional charges depending on your organization's [plan](/components/hub/organization/manage-organization-settings/manage-plan/available-plans.md) and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
+The use of Test mode may result in additional charges depending on your organization's [plan](/components/saas/organization/manage-plan/available-plans.md) and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
 
-- **Enterprise plan:** Use a [Basic cluster](/components/concepts/clusters.md#cluster-type) for non-production testing to avoid costs. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
-- **Free trial plan:** You can use any cluster. See [Free Trial clusters](/components/concepts/clusters.md#free-trial-clusters).
+- **Enterprise plan:** Use a [Basic cluster](/components/saas/clusters.md#cluster-type) for non-production testing to avoid costs. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
+- **Free trial plan:** You can use any cluster. See [Free Trial clusters](/components/saas/clusters.md#free-trial-clusters).
