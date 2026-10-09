@@ -65,10 +65,6 @@ The agent needs these permissions in your environment:
 - Write access within the ProcessOS project Git repository.
 - Permission to execute bash commands and scripts.
 
-### ProcessOS Bundles
-
-ProcessOS Harness ships as one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. Install the bundle that matches your agent, because an agent only discovers skills in its own directory.
-
 ## Builder client
 
 The AI coding agent runs on the builder's own computer (Windows, macOS, or Unix). The following tools are required in the `latest` version:

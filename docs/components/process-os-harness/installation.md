@@ -14,6 +14,19 @@ This page takes you from nothing to a configured ProcessOS project with the jour
 ProcessOS Harness is only available to Camunda Enterprise customers. To download it, you need access to the [Camunda Download Center (Enterprise Releases)](https://downloads.camunda.cloud/enterprise-release/) with your Camunda Enterprise credentials. If you don't have credentials, contact your Customer Success Manager.
 :::
 
+### Choose a target
+
+ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. A <target> is the label of the bundle that matches your AI coding agent. Use it in the c8 os install command and as the name of the archive you download, because an agent only discovers skills in its own directory.
+
+| AI coding agent    | Target       | Skills directory  |
+| ------------------ | ------------ | ----------------- |
+| Claude Code CLI    | `claudecode` | `.claude/skills/` |
+| GitHub Copilot CLI | `copilotcli` | `.github/skills/` |
+
+Only one bundle can be installed at a time. To move to a different agent, run c8 os switch <target> --zip <file.zip>, which removes the current bundle before installing the new one.
+
+### Install
+
 1. Ensure all [builder client](setup/system-requirements.md#builder-client) requirements are covered.
 
 1. Install or update c8ctl, the Camunda 8 CLI:
@@ -42,28 +55,23 @@ ProcessOS Harness is only available to Camunda Enterprise customers. To download
 
 1. Download the ProcessOS Harness [bundle](setup/system-requirements.md#processos-bundle-mapping) for your AI coding agent from the [Camunda Download Center (Enterprise Releases)](https://downloads.camunda.cloud/enterprise-release/).
 
-| AI coding agent    | Bundle       | Skills directory  |
-| ------------------ | ------------ | ----------------- |
-| Claude Code CLI    | `claudecode` | `.claude/skills/` |
-| GitHub Copilot CLI | `copilotcli` | `.github/skills/` |
-
-6. Install ProcessOS Harness from the bundle:
+1. Install ProcessOS Harness from the bundle:
 
    ```bash
-   c8 os install <bundle> --zip /path/to/<bundle>.zip
+   c8 os install <targert> --zip /path/to/<targert>.zip
    ```
 
    :::note
-   Replace `<bundle>` with the bundle name, for example `claudecode`.
+   Replace `<targert>` with the bundle name, for example `claudecode`.
    :::
 
-7. Initialize a version-controlled project:
+1. Initialize a version-controlled project:
 
    ```bash
    git init && git add . && git commit -m "chore(job) commit process-os-harness setup"
    ```
 
-8. Start the journey. Launch your AI coding agent, select a smart model (e.g. Opus or similar), then run:
+1. Start the journey. Launch your AI coding agent, select a smart model (e.g. Opus or similar), then run:
 
    ```text
    /process-os-governance-start
@@ -73,10 +81,10 @@ ProcessOS Harness is only available to Camunda Enterprise customers. To download
 
 To install a newer bundle, download it from the Camunda Download Center (Enterprise Releases) and run `c8 os switch`.
 
-| Command                                  | What it does                                          |
-| ---------------------------------------- | ----------------------------------------------------- |
-| `c8 os switch <bundle> --zip <file.zip>` | Remove the current bundle, then install the new one.  |
-| `c8 os uninstall`                        | Remove the bundle, and restore the files it replaced. |
+| Command                                   | What it does                                          |
+| ----------------------------------------- | ----------------------------------------------------- |
+| `c8 os switch <targert> --zip <file.zip>` | Remove the current bundle, then install the new one.  |
+| `c8 os uninstall`                         | Remove the bundle, and restore the files it replaced. |
 
 ## Next steps
 
