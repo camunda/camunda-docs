@@ -1629,6 +1629,17 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "8.11",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/8110/8110-release-notes",
+          },
+          items: [
+            "reference/announcements-release-notes/8110/8110-release-notes",
+          ],
+        },
+        {
+          type: "category",
           label: "8.10",
           link: {
             type: "doc",
