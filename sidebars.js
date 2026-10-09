@@ -2202,6 +2202,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region",
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region-ops",
               ],
             },
           ],
@@ -2565,6 +2566,7 @@ module.exports = {
                     id: "self-managed/components/orchestration-cluster/zeebe/exporters/exporters",
                   },
                   items: [
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",

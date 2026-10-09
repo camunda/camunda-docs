@@ -1,0 +1,456 @@
+---
+id: list-history-backups
+title: "List history backups"
+sidebar_label: "List history backups"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"List history backups"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/backups/history"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Returns a list of all available history backups of the physical tenant, with their state
+and additional info, most recent first by snapshot start time.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+<MarkerRequiredPermissions
+  permissions={[{ resourceType: "BACKUP", permissionType: "READ" }]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "prefix",
+      in: "query",
+      required: false,
+      description:
+        "A prefix that backup ids must match, ending in a single '*'. If omitted, all\nbackups are returned.\n",
+      schema: {
+        title: "Backup ID Prefix",
+        description:
+          "A prefix of a backup id, followed by a single '*' as a wildcard, matching any backup id\nstarting with the given prefix.\n",
+        type: "string",
+        pattern: "^\\d*\\*$",
+        example: "17567*",
+      },
+    },
+    {
+      name: "verbose",
+      in: "query",
+      required: false,
+      description:
+        "Whether to ask the secondary storage for snapshot-level detail. Setting this to\n`false` makes the query cheaper, but the store then reports neither snapshot state\nnor start time, so both the per-snapshot `details` and the aggregated `state` are\nincomplete and the listing order is unspecified.\n",
+      schema: { type: "boolean", default: true },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The list of history backups.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              title: "History Backup Info",
+              description:
+                "Detailed status of a history backup. The aggregated state is computed from the state of\neach of its snapshots as:\n- If every expected snapshot exists and all are complete, the overall state is\n  'COMPLETED'.\n- If one snapshot failed or is partial, the overall state is 'FAILED'.\n- Otherwise, if one snapshot is incompatible, the overall state is 'INCOMPATIBLE'.\n- Otherwise, if one snapshot is still running, the overall state is 'IN_PROGRESS'.\n- Otherwise, if snapshots are missing and the backup has not progressed within the\n  configured timeout, the overall state is 'INCOMPLETE'.\n",
+              type: "object",
+              properties: {
+                backupId: {
+                  description: "The id of the backup.",
+                  readOnly: true,
+                  allOf: [
+                    {
+                      title: "Backup ID",
+                      description:
+                        "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                      type: "integer",
+                      format: "int64",
+                      example: 1,
+                      minimum: 1,
+                    },
+                  ],
+                },
+                state: {
+                  description: "The aggregated state of the backup.",
+                  readOnly: true,
+                  allOf: [
+                    {
+                      title: "History Backup State",
+                      description:
+                        "The aggregated state of a history backup, computed from the state of each of its\nsnapshots.\n",
+                      type: "string",
+                      enum: [
+                        "IN_PROGRESS",
+                        "COMPLETED",
+                        "FAILED",
+                        "INCOMPLETE",
+                        "INCOMPATIBLE",
+                      ],
+                      example: "IN_PROGRESS",
+                    },
+                  ],
+                },
+                failureReason: {
+                  description: "Reason for failure if the state is 'FAILED'.",
+                  type: "string",
+                  nullable: true,
+                  example: "",
+                },
+                details: {
+                  readOnly: true,
+                  description:
+                    "Detailed status of the backup per snapshot. Always lists every snapshot found for\nthe backup; when the backup was read without snapshot detail, each entry carries\nonly its name.\n",
+                  type: "array",
+                  items: {
+                    title: "History Backup Snapshot Info",
+                    description:
+                      "Detailed info of a single snapshot making up a history backup.",
+                    type: "object",
+                    properties: {
+                      snapshotName: {
+                        description: "The name of the snapshot.",
+                        readOnly: true,
+                        type: "string",
+                        example: "camunda_webapps_1_8.10.0_part_1_of_6",
+                      },
+                      state: {
+                        description:
+                          "The state of the snapshot, reported verbatim by the secondary storage (for example\n'SUCCESS', 'IN_PROGRESS' or 'PARTIAL'). Deliberately not a closed set: Elasticsearch\nand OpenSearch report different vocabularies. Not reported when the backup was\nlisted without snapshot detail.\n",
+                        readOnly: true,
+                        type: "string",
+                        nullable: true,
+                        example: "SUCCESS",
+                      },
+                      startTime: {
+                        description:
+                          "The timestamp at which the snapshot was started. Not reported when the backup was\nlisted without snapshot detail.\n",
+                        readOnly: true,
+                        type: "string",
+                        format: "date-time",
+                        nullable: true,
+                        example: "2022-09-15T13:10:38.176514094Z",
+                      },
+                      failures: {
+                        description:
+                          "The failures reported for this snapshot. Empty if there were none.",
+                        readOnly: true,
+                        type: "array",
+                        items: {
+                          type: "string",
+                          description:
+                            "A failure reported by the secondary storage for this snapshot.",
+                        },
+                      },
+                    },
+                    required: [
+                      "snapshotName",
+                      "state",
+                      "startTime",
+                      "failures",
+                    ],
+                  },
+                },
+              },
+              required: ["backupId", "state", "failureReason", "details"],
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description:
+        "The request is forbidden for one of three reasons: the authenticated caller lacks the\nrequired `BACKUP` permission; the cluster's secondary storage is neither Elasticsearch nor\nOpenSearch and therefore cannot serve history backups; or the physical tenant's snapshot\nrepository is absent from the store — configured under a name the store does not have, or\nnot configured at all. The problem detail says which applies. The latter two are deployment\nfaults the caller cannot correct by changing its request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

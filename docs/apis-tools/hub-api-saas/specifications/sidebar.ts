@@ -66,8 +66,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/update-workspace-environments",
-          label: "Update environments assigned to a workspace",
+          id: "apis-tools/hub-api-saas/specifications/replace-workspace-environments",
+          label: "Replace a workspace's assigned environments",
           className: "api-method put",
         },
         {
