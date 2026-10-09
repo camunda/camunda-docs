@@ -1,0 +1,176 @@
+---
+id: complete-a-user-task
+title: "Complete a user task"
+description: "Completes a user task with the given key."
+sidebar_label: "Complete a user task"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV9ty2zYQ/ZUdPDVTWpRTN0345rhO6zYXjy230zh+AMGlhBgEGACUzOHw3zsLUKIu8STt5DGe0VgkFnv2cg606Jjnc8eyW3bj0ILn7p7dJaxAJ6ysvTSaZezMVLVCjw44NGszWEm/AL9AmMslarjHdsISVnPLK/RoyWnHNK+QZYx2zbi7/xNbljBJTmvuFyxhFj810mLBMm8b3EeeLZAcgykD0gjuDYghKkJ1YoEVZ1nHfFsToNQe52hZwkpjK+7jq2cnrO/vIig6/9IULe0ZYyi5cpgwYbRH7WmN17WSglM86UdHQXWHaCb/iMJT9tbUaL1ER6tLbiXPVXzgRSHJC1eXW0aPJb3Zup3pXg2oAZT8fhC6UYr2Ru99wriInrs9oFMQjfOmgmgAS64aAuEeVlIpyBG4EOiczBVCaU21hY5L1N6BRdcoL/U8rvuFdIC6qI3UHqRemli7CVyUoI2H2pqlLLBIQA4oBZa8UZ4S/cDWqX5gkw96zM15K/X8MLc+YV56egz8JYoNZJVGX8Uus74nO4uuNtrFZjydnhyWY7ZbXe42hS/ANaEQZaNUO2F9wk6m0y96OBAICK6pCDmOrifwxliEAj2XygG3uKkRSB32r0OH3BRtrMsjDK2tyRVWPx4ydb/zl9FywIVIHuAOomEe0W+vXp3Bi5Off7n7YeF97bI0Xa1WE1uKIyykN3Zi7Dy1paAP2T2ZwGyBFqHibeDPhvUwagNcjUKWUlDPKcEhbKBu7/T9EWHF1e6AHRutN1ayfVmdws3VBcgCtZdlS4w9gA57AhtZxnhuGp/liut7NvLsEHQfxTVVxe3mzNoF6BPmPPeN++JZ9dPTA99Er99ns0uILkCYAqE0NqpuAKIkKqll1VQsO5lOE1bxh/j0bDrtySd1/Csy0YAPteI6UGs/HamhGnkbEpPaea7Ft+qMsXIu93EnbFvzA4l/jRlFnZ98hbQPhUlqJ2WWptHFIPAX/8OPdGvRrqzR89ApBNFYi9qr9rvYv4v9u9i/ldj7hFXoF6agcdK4QB2aKjOWkkiPSKQu7baGzz4Vm/GAxka0y/Wk2ljFMtZFEfVZmnYL43yfdbWxvk+XxyzZHehoOYptTSJlBFeLGMhhM2mBxmFKksN7xBzhN+5xxeNEQTi7/p5Pn08/64pM17WKjq7Or2dwenkBMaXIva3zYO2ShP1Zl9H4S07D9OxQNFb69pq2xFrkyC3a04aKv+HDgBU803M0Ysnw5dWaJX/8PQuNpnPsapzMzx84tWp/kN6aZ9eMC3QsTYAeyLKbALUOrYubppPjQ1JeXgRtCVNVjQ4HrJ6P53v0JlTjPJUhYUoK1C7ENtxwoslZ3O9beB0t4K+IC8cBNZJsfbrOpV80+USYKhW8anTBN/9zZfK04lKnA5RL35+fvzw/Onv35s3N24vZP0evL87O316fHx1Pjif+wYcSkgoqrrfiWt/dtq9u++l34y/Mf7rrDX32+ODTWnGpqRMhxW4Q4i0bhcgSlu3eA7e0eJcMerplXZdzhzdW9T29/tSgbVl2ezfKL+i1kI6+j5e2R1P64Wq43z2Br71Pfjaz4SXXbTgKVENPLGH32O5dcfu7PmEL5AXaEGu0OIsRHc3Iz+jh4IbZJ+sdp0Jg7R+x3fn5J11uzsLLd9czktlwva1MQXstX9F9m69i1CZUKqg3vOuY4nre8DnZRp/09y9+Zpbk
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications/zeebe-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Complete a user task"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/{userTaskKey}/completion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Completes a user task with the given key.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task to complete.",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              additionalProperties: true,
+              description: "The variables to complete the user task with.",
+              type: "object",
+              nullable: true,
+            },
+            action: {
+              description:
+                'A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "complete".\n',
+              type: "string",
+              nullable: true,
+            },
+          },
+          title: "UserTaskCompletionRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user task was completed successfully." },
+    "400": {
+      description:
+        "The user task with the given key cannot be completed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": { description: "The user task with the given key was not found." },
+    "409": {
+      description:
+        "The user task with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

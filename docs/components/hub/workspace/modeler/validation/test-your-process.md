@@ -5,13 +5,13 @@ description: "Test mode lets you validate your process against a selected enviro
 keywords: ["test", "test mode", "test case", "test studio", "validation"]
 ---
 
-Test mode is a Zeebe-powered testing environment within Camunda Hub for validating a process at any stage of development. Select any environment assigned to your workspace, for example a development, test, stage, or production environment, and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders, all within Test mode.
+Test mode is a Zeebe-powered way within Camunda Hub to validate a process at any stage of development. Select any environment assigned to your workspace, for example a development, test, stage, or production environment, and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders, all within Test mode.
 
 ## Opening the Test tab
 
 To use Test mode, open a BPMN diagram and click the **Test** tab. Read the [limitations and availability section](#limitations-and-availability) if this tab is missing.
 
-Select any [environment](/components/concepts/environments.md) assigned to your workspace as your test target. Each environment shows its tags, such as `dev`, `test`, `stage`, or `prod`. In Self-Managed, the environments come from the clusters defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+Select any [environment](/components/concepts/environments.md) assigned to your workspace as your test target. Each environment shows its tags, such as `dev`, `test`, `stage`, or `prod`. In Self-Managed, the environments come from the clusters defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one environment, backed by a cluster, by default.
 
 :::caution
 Test mode executes real process logic against the selected environment, including connectors, messages, and other external actions. If you target a production environment, this can affect live data and external systems. Camunda Hub warns you with **This is a production environment** when you select an environment tagged `prod`.
@@ -23,7 +23,7 @@ The Test action bar shows the name of the selected environment, its tags, and it
 
 If no environment is assigned to your workspace, Test mode tells you that an environment must be assigned to the workspace. Ask an organization admin to [assign an environment](/components/hub/organization/manage-environments/assign-environments.md).
 
-In SaaS, Test mode uses connector secrets from the cluster of your selected environment. Connector secrets are not currently supported in Self-Managed.
+In SaaS, Test mode uses connector secrets from your selected environment. Connector secrets are not currently supported in Self-Managed.
 
 ## Authorizations
 
@@ -371,7 +371,7 @@ For more information about terms, refer to our [licensing and terms page](https:
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Test mode is available to all Camunda Hub users with commenter, editor, or admin permissions within a project.
-Additionally, within their organization, users need to have a [role](/components/hub/organization/users-and-roles.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the cluster, users need to have specific permissions instead.](#authorizations)
+Additionally, within their organization, users need to have a [role](/components/hub/organization/users-and-roles.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the environment, users need to have specific permissions instead.](#authorizations)
 
 ### Camunda 8 Self-Managed
 
