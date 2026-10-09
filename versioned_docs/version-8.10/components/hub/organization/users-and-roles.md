@@ -70,6 +70,14 @@ The organization-level roles of a user set the level of access to each of the fo
 - **Manage**: Full access to every workspace and project in the organization. Organization Owner and Organization Admin have this level. See [elevated workspace access](#elevated-workspace-access).
 - **Create and collaborate**: Create and collaborate on workspaces and projects. DevOps, Analyst, and Member have this level. What a user can do inside a workspace also depends on their [workspace role](./manage-workspaces/manage-workspace-members.md#workspace-roles).
 
+### Elevated workspace access
+
+Organization admins and owners always have **Workspace Admin** access to every workspace in the organization, including workspaces they aren't explicitly a member of. This access is on by default and can't be changed.
+
+The main purpose of this access is to assign members to workspaces that have no members. Ordinarily, these workspaces would not be accessible or visible to any other users.
+
+The user must be assigned the organization **Organization Owner** or **Organization Admin** role.
+
 ### Cluster access
 
 - **Manage**: Create and update clusters, and manage cluster clients, connector secrets, IP allowlists, secure connectivity, and encryption. Organization Owner, Organization Admin, and DevOps have this level.
@@ -88,14 +96,6 @@ Access to Optimize includes access to the [business value dashboard](/components
 
 - **Manage**: View all environments and resume paused ones. Organization Owner, Organization Admin, and DevOps have this level. Only Organization Owner and Organization Admin can assign environments to workspaces.
 - **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
-
-### Elevated workspace access
-
-Organization admins and owners always have **Workspace Admin** access to every workspace in the organization, including workspaces they aren't explicitly a member of. This access is on by default and can't be changed.
-
-The main purpose of this access is to assign members to workspaces that have no members. Ordinarily, these workspaces would not be accessible or visible to any other users.
-
-The user must be assigned the organization **Organization Owner** or **Organization Admin** role.
 
 ## Access to runtime environments
 
@@ -154,6 +154,22 @@ The organization-level roles of a user set the level of access to each of the fo
 - **Manage**: Full access to every workspace and project in the organization. Organization Admin has this level. See [elevated workspace access](#elevated-workspace-access-self-managed).
 - **Create and collaborate**: Create and collaborate on workspaces and projects. DevOps, Analyst, and Member have this level. What a user can do inside a workspace also depends on their [workspace role](./manage-workspaces/manage-workspace-members.md#workspace-roles).
 
+### Elevated workspace access {#elevated-workspace-access-self-managed}
+
+Organization admins always have **Workspace Admin** access to every workspace in the organization, including workspaces they aren't explicitly a member of. This access is on by default and can't be changed.
+
+The main purpose of this access is to assign members to workspaces that have no members. Ordinarily, these workspaces would not be accessible or visible to any other users.
+
+The user must be assigned the **Hub Admin** role.
+
+If the role is not pre-existing, it can be created with the following permissions:
+
+- Hub Internal API - `write:*`
+- Hub Internal API - `admin:*`
+- Camunda Identity Resource Server - `read:users`
+
+Refer to the documentation pages about [assigning roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
+
 ### Cluster access {#cluster-access-self-managed}
 
 - **Manage**: Create and update clusters, and manage cluster clients, connector secrets, IP allowlists, secure connectivity, and encryption. Organization Admin and DevOps have this level.
@@ -172,22 +188,6 @@ Access to Optimize includes access to the [business value dashboard](/components
 
 - **Manage**: View all environments and resume paused ones. Organization Admin and DevOps have this level. Only Organization Admin can assign environments to workspaces.
 - **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
-
-### Elevated workspace access {#elevated-workspace-access-self-managed}
-
-Organization admins always have **Workspace Admin** access to every workspace in the organization, including workspaces they aren't explicitly a member of. This access is on by default and can't be changed.
-
-The main purpose of this access is to assign members to workspaces that have no members. Ordinarily, these workspaces would not be accessible or visible to any other users.
-
-The user must be assigned the **Hub Admin** role.
-
-If the role is not pre-existing, it can be created with the following permissions:
-
-- Hub Internal API - `write:*`
-- Hub Internal API - `admin:*`
-- Camunda Identity Resource Server - `read:users`
-
-Refer to the documentation pages about [assigning roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
 
 ## Access to runtime environments {#access-to-runtime-environments-self-managed}
 
