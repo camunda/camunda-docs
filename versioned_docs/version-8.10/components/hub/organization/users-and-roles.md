@@ -137,7 +137,7 @@ Users are assigned organization-level roles. The following table shows what each
 | Member             | Read-only    | Create and collaborate  | None     | Assigned only | Read-only | No                          |
 
 - **Organization Admin**: Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. No separate mode needs to be enabled.
-- **DevOps**: A specialized role for infrastructure management, not people management. Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.
+- **DevOps**: A specialized role for infrastructure management, not people management. Grants access to the cluster pages and the connector-management view, plus Member-level modeling. Cannot manage or view organization members or organization settings.
 - **Analyst**: Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md).
 - **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization.
 
@@ -172,7 +172,7 @@ Refer to the documentation pages about [assigning roles](/self-managed/component
 
 ### Cluster access {#cluster-access-self-managed}
 
-- **Manage**: Create and update clusters, and manage cluster clients, connector secrets, IP allowlists, secure connectivity, and encryption. Organization Admin and DevOps have this level.
+- **Manage**: Open the cluster pages, where you view clusters and their details and manage their connectors. In Self-Managed, you provision clusters outside Camunda Hub, and Camunda Hub is read-only for clusters. Organization Admin and DevOps have this level.
 - **None**: No access to the cluster pages. Analyst and Member have this level.
 
 ### Catalog access {#catalog-access-self-managed}
@@ -186,7 +186,7 @@ Access to Optimize includes access to the [business value dashboard](/components
 
 ### Environment access {#environment-access-self-managed}
 
-- **Manage**: View all environments and resume paused ones. Organization Admin and DevOps have this level. Only Organization Admin can assign environments to workspaces.
+- **Manage**: View all environments. Organization Admin and DevOps have this level. Only Organization Admin can assign environments to workspaces.
 - **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
 
 ## Access to runtime environments {#access-to-runtime-environments-self-managed}
