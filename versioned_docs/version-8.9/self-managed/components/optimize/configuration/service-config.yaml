@@ -428,6 +428,10 @@ historyCleanup:
     # Defines the batch size in which camunda engine process instance data gets cleaned up
     # may be reduced if requests fail due to request size constraints
     batchSize: 10000
+    # Deletes the process instance index of a process definition key once the cleanup has removed all its
+    # instances, releasing the index's shards. Requires the privileges to add and remove index write blocks
+    # and to delete Optimize's process instance indices. Defaults to false.
+    deleteEmptyIndices: false
     # process definition specific configuration parameters that will overwrite the general parameters (ttl, processDataCleanupMode)
     # for the specific processDefinition key
     perProcessDefinitionConfig:
