@@ -198,58 +198,44 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 </div>
 <div className="release-announcement-content">
 
-#### AI Agent connector: Conversation storage SPI redesign
+#### AI Agent connectors: new element templates replace the legacy templates {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
 
-[Camunda 8.10.0-alpha1](/reference/announcements-release-notes/8100/8100-release-notes.md#8100-alpha1) redesigns the conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage). Built-in stores (in-process, Camunda Document, AWS AgentCore) are migrated transparently; only custom `ConversationStore` implementations are affected.
+Camunda 8.10 introduces new (`v2`) element templates for the AI Agent Task and AI Agent Sub-process connectors, and deprecates the legacy templates. The new templates run on new job types and use each provider's native SDK. They provide:
 
-**Action:** If you maintain a custom `ConversationStore`, migrate to the new SPI. See the updated [AI Agent connector customization guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) for the new shape, and the [migration guide on GitHub](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for a step-by-step walkthrough.
+- Reasoning and extended thinking configuration, and reasoning content kept in the conversation history.
+- Prompt caching configuration, where the provider supports it.
+- Decoupled providers and backends, for example Anthropic through AWS Bedrock Mantle or Microsoft Foundry, OpenAI through Microsoft Foundry, and Google Gemini through the Gemini API or Vertex AI.
+- A custom chat model provider option, for Self-Managed and hybrid deployments.
+- Support for [agent visibility and monitoring](/reference/announcements-release-notes/8100/8100-release-notes.md#real-time-agent-visibility-and-monitoring) and [agent tool configuration](/reference/announcements-release-notes/8100/8100-release-notes.md#improved-agent-tool-configuration).
 
-</div>
-</div>
+The legacy templates keep working and don't receive new provider capabilities. Process definitions you deployed earlier keep running on the legacy job workers until you deploy a new version that uses a new template.
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+**Action:**
 
-#### AI Agent connectors: redesigned templates, legacy templates deprecated {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
-
-Camunda 8.10 introduces redesigned element templates for the AI Agent Task and AI Agent Sub-process connectors. The new templates broaden support for AI providers and backends, helping you use LLM routes that meet your organization's requirements. Provider-specific capabilities, such as thinking and prompt caching, can support cheaper, faster, and more transparent agent behavior. The legacy element templates are deprecated as of Camunda 8.10, but keep working; existing implementations aren't required to migrate immediately.
-
-**Action:** Use the new element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing legacy implementation to the new templates.
+- To use the new capabilities, migrate each AI Agent element to the new template. This is a manual, per-element change: apply the new template, re-enter the model provider configuration, and, for the AI Agent Task, update the tools sub-process. See the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) and the [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page.
+- If you override the AI Agent job types in a hybrid setup, set the new `CONNECTOR_AI_AGENT_TASK_TYPE` and `CONNECTOR_AI_AGENT_SUBPROCESS_TYPE` variables. See [job type overrides](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md#job-type-overrides).
+- If you modeled an agent element before Camunda 8.10 and stay on the legacy templates, update it to the latest legacy template version (v1, version 13) or migrate it to a new template. Agent visibility and monitoring and agent tool configuration require it. To update, open the process in Modeler, select the agent element, click **Update element template** in the properties panel, and redeploy the process.
 
 </div>
 </div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
+<span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### AI Agent connector: new native (v2) element templates, v1 deprecated
+#### AI Agent connector: SPI and package changes for custom extensions {#ai-agent-connector-spi-and-package-changes}
 
-Camunda 8.10 introduces new `v2` element templates for the AI Agent Task and AI Agent Sub-process connectors, running on new job types and giving native access to each LLM provider's own SDK and wire format (including reasoning/extended thinking and prompt caching configuration).
+Camunda 8.10 changes the Java APIs that [custom AI Agent extensions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md) build on:
 
-The original (`v1`) element templates are deprecated as of Camunda 8.10.
+- The [conversation storage SPI](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) is redesigned. Built-in stores (in-process, Camunda Document, AWS AgentCore) are migrated transparently.
+- The chat model SPI (`ChatModelFactory` and `ChatModel`) replaces the LangChain4j based model factory.
+- The message and tool model classes move from `io.camunda.connector.agenticai.model` to `io.camunda.connector.agenticai.aiagent.model`.
 
-**Action:** Use the `v2` element templates for new AI Agent implementations.
+Only custom implementations are affected. The built-in providers and stores need no changes.
 
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### AI Agent Sub-process and AI Agent Task element templates updated
-
-The AI Agent Sub-process and AI Agent Task element templates are updated in Camunda 8.10 to support the new [agent visibility and monitoring](/reference/announcements-release-notes/8100/8100-release-notes.md#real-time-agent-visibility-and-monitoring) and [agent tool configuration](/reference/announcements-release-notes/8100/8100-release-notes.md#improved-agent-tool-configuration) features.
-
-**Action:** If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template. Open the process in Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+**Action:** If you maintain a custom `ConversationStore`, a custom chat model factory, or code that uses the message and tool model classes, update it to the new APIs. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for the changes and replacements.
 
 </div>
 </div>

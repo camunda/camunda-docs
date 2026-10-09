@@ -6,10 +6,10 @@ description: "Service tasks within Camunda 8 require you to set a task type and 
 [Service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md) within Camunda 8 require you to set a task type and implement [job workers](/components/concepts/job-workers.md) who perform whatever needs to be performed. This describes that you might want to:
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
-2. Think about idempotency and read or write as little data as possible from/to the process.
+2. Write idempotent workers, because Zeebe uses an at-least-once strategy and can deliver the same job more than once. Also read and write as little data as possible from/to the process.
 3. If you use Java 21 or later, prefer virtual threads for parallel workers that perform blocking I/O. Use reactive or async code when your runtime already uses it, or when you need extremely high throughput or low latency.
 
-## Organizing glue code and workers in process solutions
+## Organize glue code and workers in process solutions
 
 Assume the following order fulfillment process, that needs to invoke three synchronous REST calls to the responsible systems (payment, inventory, and shipping) via custom glue code:
 
@@ -51,9 +51,21 @@ There are exceptions when you might not want to have all glue code within one ap
 
 In this case, you would spread your workers into different applications. Most often, you might still have a main process solution that will also still deploy the process model. Only specific workers are carved out.
 
-## Thinking about transactions, exceptions and idempotency of workers
+## Write idempotent workers
 
-Visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding of how workers deal with transactions and exceptions to the happy path, and find more details on how to write idempotent workers.
+Zeebe uses an **at-least-once** execution strategy for jobs. A job is only completed when the engine receives and commits the complete job request. If a worker crashes, loses its connection, or exceeds the [job timeout](/components/concepts/job-workers.md#timeouts) before it can complete the job, the engine gives the job to another worker. This guarantees that the job handler runs at least once, but it also means the handler can run more than once for the same job, possibly with side effects already applied.
+
+:::warning
+Your workers **must** be idempotent. Running the handler more than once for the same job must leave the application in the same state as running it once. Non-idempotent workers can cause duplicate payments, duplicate orders, or other inconsistent data.
+:::
+
+Make idempotency a conscious design decision for every worker, not an afterthought. Strategies include:
+
+- **Natural idempotency**: some operations can safely run any number of times because they only set state, for example `confirmCustomer()`.
+- **Business idempotency**: use a business identifier to detect duplicate calls, for example `createCustomer(email)`.
+- **Custom idempotency handling**: generate a unique ID or hash, pass it with the call, and let the target system reject duplicates, for example `charge(transactionId, amount)`.
+
+To learn how workers handle transactions, exceptions, and custom idempotency, see [Deal with problems and exceptions](../dealing-with-problems-and-exceptions/#writing-idempotent-workers).
 
 ## Data minimization in workers
 
@@ -70,7 +82,7 @@ This could mean tens or more variables, of arbitrary size, and it can be difficu
 
 We recommend you use the `FetchVariables` parameter, and only fetch the variables which your job handler needs. This will keep the amount of data transferred to a minimum, and will greatly help performance.
 
-## Scaling workers
+## Scale workers
 
 If you need to process a lot of jobs, you need to think about optimizing your workers.
 
@@ -111,7 +123,7 @@ In Java 21 and later, prefer virtual threads for I/O-bound job workers that need
 Most of the business logic in your process models will likely end up being worked on as a job. As such, optimizing how jobs are handled in Zeebe can have
 a big impact on the performance of your system as a whole. Here are some best practices to keep things running smoothly.
 
-### Reduce latency by enabling job streaming
+### Reduce latency with job streaming
 
 We recommend enabling [job streaming](../../concepts/job-workers.md#job-streaming) in order to reduce latency to a maximum. Essentially, when using long polling,
 your job workers have to periodically poll every partition in your Zeebe cluster to check if there are new jobs available. Additionally, they have to
