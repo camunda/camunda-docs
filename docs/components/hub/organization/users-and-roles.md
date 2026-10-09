@@ -10,8 +10,8 @@ Camunda Hub controls access to the workspaces, projects, environments, and clust
 
 Access is controlled on three levels:
 
-- **Organization role**: Every user holds one organization-level role. It decides what the user can do in Camunda Hub across the organization. See [roles and permissions](#roles-and-permissions) and [access to resources](#access-to-resources).
-- **Workspace role**: Within a workspace, the role of a user decides what they can do with its projects and files. See [workspace roles](./manage-workspaces/manage-workspace-members.md#workspace-roles).
+- **Organization**: Every user holds one organization-level role. It decides what the user can do in Camunda Hub across the organization. See [roles and permissions](#roles-and-permissions) and [access to resources](#access-to-resources).
+- **Workspace**: Within a workspace, the role of a user decides what they can do with its projects and files. See [workspace roles](./manage-workspaces/manage-workspace-members.md#workspace-roles).
 - **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, Admin, and Zeebe, is managed separately, with authorizations in Admin, not by the organization role. See [access to runtime environments](#access-to-runtime-environments).
 
 ## Manage users
