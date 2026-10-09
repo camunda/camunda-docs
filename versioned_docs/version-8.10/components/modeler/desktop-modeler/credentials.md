@@ -57,9 +57,9 @@ Upgrading a credential opens the same form and shows the fields that the newer c
 
 ## Credential scope {#credential-scope}
 
-A credential you create from Desktop Modeler is stored on the Camunda instance you are connected to, and is not registered centrally. It does not appear on the **Managed** tab of the [**Credentials** page in Camunda Hub](/components/hub/organization/credentials/index.md#managed-credentials).
+A credential you create from Desktop Modeler is stored on the Camunda instance you are connected to, and is not registered centrally. It does not appear on the **Managed in Hub** tab of the [**Credentials** page in Camunda Hub](/components/hub/organization/credentials/index.md#managed-credentials).
 
-To manage it centrally, find it on the [**Clusters only** tab in Camunda Hub](/components/hub/organization/credentials/index.md#clusters-only-credentials) and add it.
+To manage it centrally, find it on the [**Environments only** tab in Camunda Hub](/components/hub/organization/credentials/index.md#environments-only-credentials) and add it.
 
 ## Additional resources
 
