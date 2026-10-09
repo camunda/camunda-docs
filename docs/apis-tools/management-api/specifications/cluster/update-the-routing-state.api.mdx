@@ -1,0 +1,366 @@
+---
+id: update-the-routing-state
+title: "Update the routing state"
+description: "Force an update of the routing state using the user provided routing state or by fetching the routing state from the engine first and then applying it to the configuration. No validation is performed on the user provided routing state, so it must be used only in the rare circumstances when it's not possible to fetch it from the engine. When physicalTenant is given, only that physical tenant's routing state is written; when omitted, the default physical tenant's routing state is written, regardless of which other physical tenants exist."
+sidebar_label: "Update the routing state"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "patch api-method"
+info_path: docs/apis-tools/management-api/specifications/cluster/cluster-topology-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update the routing state"}
+></Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/routing-state"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Force an update of the routing state using the user provided routing state or by fetching the routing state from the engine first and then applying it to the configuration. No validation is performed on the user provided routing state, so it must be used only in the rare circumstances when it's not possible to fetch it from the engine. When physicalTenant is given, only that physical tenant's routing state is written; when omitted, the default physical tenant's routing state is written, regardless of which other physical tenants exist.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "dryRun",
+      description:
+        "If true, requested changes are only simulated and not actually applied.",
+      in: "query",
+      style: "form",
+      required: false,
+      schema: { type: "boolean", default: false },
+    },
+    {
+      name: "physicalTenant",
+      description:
+        "Id of the physical tenant to target. If not specified, the default physical tenant is targeted, not every physical tenant - unlike the other operations taking this parameter.",
+      in: "query",
+      style: "form",
+      required: false,
+      schema: {
+        title: "PhysicalTenantId",
+        description: "The ID of a physical tenant",
+        type: "string",
+        example: "mytenant",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "The routing state, i.e. where requests are sent to and how messages are correlated",
+          type: "object",
+          required: ["version", "requestHandling", "messageCorrelation"],
+          properties: {
+            version: {
+              type: "integer",
+              format: "int64",
+              description: "The version of the routing state",
+              example: 1,
+            },
+            requestHandling: {
+              description: "The request handling strategy",
+              oneOf: [
+                {
+                  description: "Requests are handled by all partitions",
+                  type: "object",
+                  required: ["partitionCount"],
+                  properties: {
+                    strategy: { type: "string" },
+                    partitionCount: {
+                      type: "integer",
+                      format: "int32",
+                      description: "The number of partitions",
+                      example: 3,
+                    },
+                  },
+                  title: "RequestHandlingAllPartitions",
+                },
+                {
+                  description:
+                    "Requests are only handled by active partitions, inactive partitions are excluded",
+                  type: "object",
+                  required: [
+                    "basePartitionCount",
+                    "additionalActivePartitions",
+                    "inactivePartitions",
+                  ],
+                  properties: {
+                    strategy: { type: "string" },
+                    basePartitionCount: {
+                      type: "integer",
+                      format: "int32",
+                      description:
+                        "Contiguous range of partitions (1..=N) that are active.",
+                      example: 3,
+                    },
+                    additionalActivePartitions: {
+                      type: "array",
+                      description:
+                        "A list of additional, active partitions that also accept round-robin requests",
+                      example: [4, 5],
+                      items: { type: "integer", format: "int32" },
+                    },
+                    inactivePartitions: {
+                      type: "array",
+                      description:
+                        "A list of inactive partitions that do not accept round-robing requests",
+                      example: [6, 7],
+                      items: { type: "integer", format: "int32" },
+                    },
+                  },
+                  title: "RequestHandlingActivePartitions",
+                },
+              ],
+              discriminator: {
+                propertyName: "strategy",
+                mapping: {
+                  AllPartitions: {
+                    description: "Requests are handled by all partitions",
+                    type: "object",
+                    required: ["partitionCount"],
+                    properties: {
+                      strategy: { type: "string" },
+                      partitionCount: {
+                        type: "integer",
+                        format: "int32",
+                        description: "The number of partitions",
+                        example: 3,
+                      },
+                    },
+                    title: "RequestHandlingAllPartitions",
+                  },
+                  ActivePartitions: {
+                    description:
+                      "Requests are only handled by active partitions, inactive partitions are excluded",
+                    type: "object",
+                    required: [
+                      "basePartitionCount",
+                      "additionalActivePartitions",
+                      "inactivePartitions",
+                    ],
+                    properties: {
+                      strategy: { type: "string" },
+                      basePartitionCount: {
+                        type: "integer",
+                        format: "int32",
+                        description:
+                          "Contiguous range of partitions (1..=N) that are active.",
+                        example: 3,
+                      },
+                      additionalActivePartitions: {
+                        type: "array",
+                        description:
+                          "A list of additional, active partitions that also accept round-robin requests",
+                        example: [4, 5],
+                        items: { type: "integer", format: "int32" },
+                      },
+                      inactivePartitions: {
+                        type: "array",
+                        description:
+                          "A list of inactive partitions that do not accept round-robing requests",
+                        example: [6, 7],
+                        items: { type: "integer", format: "int32" },
+                      },
+                    },
+                    title: "RequestHandlingActivePartitions",
+                  },
+                },
+              },
+              title: "RequestHandling",
+            },
+            messageCorrelation: {
+              description: "The message correlation strategy",
+              oneOf: [
+                {
+                  type: "object",
+                  required: ["strategy", "partitionCount"],
+                  properties: {
+                    strategy: { type: "string" },
+                    partitionCount: {
+                      type: "integer",
+                      format: "int32",
+                      description: "The number of partitions",
+                      example: 3,
+                    },
+                  },
+                  title: "MessageCorrelationHashMod",
+                },
+              ],
+              discriminator: {
+                propertyName: "strategy",
+                mapping: {
+                  HashMod: {
+                    type: "object",
+                    required: ["strategy", "partitionCount"],
+                    properties: {
+                      strategy: { type: "string" },
+                      partitionCount: {
+                        type: "integer",
+                        format: "int32",
+                        description: "The number of partitions",
+                        example: 3,
+                      },
+                    },
+                    title: "MessageCorrelationHashMod",
+                  },
+                },
+              },
+              title: "MessageCorrelation",
+            },
+          },
+          title: "RoutingState",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": { description: "Accepted" },
+    "400": {
+      description: "Invalid request.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "Failed to accept request. Another topology change is in progress.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "500": {
+      description: "Internal error",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description: "Gateway failed to send request to the broker.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "504": {
+      description: "Request from gateway to broker timed out.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
