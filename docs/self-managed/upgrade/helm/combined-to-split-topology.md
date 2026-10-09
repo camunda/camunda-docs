@@ -199,5 +199,6 @@ Roll back before step 6. Once you've deleted Identity objects, recovery is manua
 - Deploying a process through Hub reaches the cluster.
 - Existing process instances are still visible in Operate, and workers still poll and complete jobs.
 - If Optimize runs, it shows process data. This shows that its reader prefix is equal to the exporter writer prefix.
+- If Optimize moved to its own release, your existing reports, dashboards, and settings are still there. This shows that its application index prefix is unchanged. Process data alone doesn't prove it.
 - Only one Management Identity is running, in the Hub release.
 - No release logs authentication errors against an OIDC client that no longer exists.
