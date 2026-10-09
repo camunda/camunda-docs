@@ -1,6 +1,6 @@
 ---
 title: Manage users and roles
-description: "Learn about the users, roles, and permissions in your organization, and how access to workspaces, clusters, environments, the catalog, and Orchestration Cluster applications is controlled."
+description: "Learn about the users, roles, and permissions in your organization, and how access to workspaces, clusters, environments, the catalog, and runtime environments is controlled."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -12,7 +12,7 @@ Access is controlled on three levels:
 
 - **Organization role**: Every user holds one organization-level role. It decides what the user can do in Camunda Hub across the organization. See [roles and permissions](#roles-and-permissions) and [access to resources](#access-to-resources).
 - **Workspace role**: Within a workspace, the role of a user decides what they can do with its projects and files. See [workspace roles](./manage-workspaces/manage-workspace-members.md#workspace-roles).
-- **Orchestration Cluster applications**: Access to Operate, Tasklist, Admin, and Zeebe is managed separately, with authorizations in Admin, not by the organization role. See [access to Orchestration Cluster applications](#orchestration-cluster-applications).
+- **Runtime environments**: Access to the runtime of an environment, such as Operate, Tasklist, Admin, and Zeebe, is managed separately, with authorizations in Admin, not by the organization role. See [access to runtime environments](#access-to-runtime-environments).
 
 ## Manage users
 
@@ -164,11 +164,11 @@ Refer to the documentation pages about [assigning roles](/self-managed/component
 
 </Tabs>
 
-## Orchestration Cluster applications
+## Access to runtime environments
 
-Access to the applications of an Orchestration Cluster, such as Operate, Tasklist, Admin, and Zeebe, is separate from the organization role. Starting with version 8.8, user access to these applications is managed independently of the organization role. To control what a user can access there, define their authorizations in the [Admin](/components/admin/authorization.md) of the cluster.
+The organization role controls what a user can do in Camunda Hub. It doesn't control what the user can do in the runtime of an environment, which includes Operate, Tasklist, Admin, and Zeebe. Starting with version 8.8, access to the runtime is managed independently of the organization role. To control what a user can access there, define their authorizations in [Admin](/components/admin/authorization.md).
 
-If authorizations are disabled on the cluster, the user has full access to the cluster and its components.
+If authorizations are disabled in the runtime, the user has full access to the runtime and its components.
 
 <Tabs groupId="edition" defaultValue="saas" queryString values={
 [
@@ -184,7 +184,7 @@ For clusters before version 8.8, access is controlled with resource-based author
 
 <TabItem value='self-managed'>
 
-Authorizations for the Orchestration Cluster applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in Admin. See the [Admin overview](/self-managed/components/orchestration-cluster/admin/overview.md).
+Authorizations for the runtime applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in Admin. See the [Admin overview](/self-managed/components/orchestration-cluster/admin/overview.md).
 
 </TabItem>
 
