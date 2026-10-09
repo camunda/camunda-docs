@@ -76,7 +76,7 @@ When Optimize is disabled, `optimize.database.elasticsearch.prefix` and `optimiz
 
 ## Prefixes in the split topology
 
-In the [deployment topology](/self-managed/reference-architecture/deployment-topology.md), the Orchestration Cluster writes records and a separate Optimize release reads them. Each Orchestration Cluster and each [Physical Tenant](/self-managed/deployment/helm/install/topology/physical-tenants.md) has its own prefixes. Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Only the prefixes isolate it.
+In the [deployment topology](/self-managed/deployment/helm/install/topology/index.md), the Orchestration Cluster writes records and a separate Optimize release reads them. Each Orchestration Cluster and each [Physical Tenant](/self-managed/deployment/helm/install/topology/physical-tenants.md) has its own prefixes. Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Only the prefixes isolate it.
 
 | Prefix family                     | Configuration                                                                                                                                                     | Requirement                                                         |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
@@ -84,11 +84,6 @@ In the [deployment topology](/self-managed/reference-architecture/deployment-top
 | Legacy exporter writer            | Default: `orchestration.exporters.zeebe.index.prefix`, or the exporter assigned to an explicit `default` entry. Physical Tenant: its exporter `args.index.prefix` | Unique per cluster and tenant                                       |
 | Optimize reader                   | `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`                                                                                 | Must exactly equal that tenant's Legacy exporter writer prefix      |
 | Optimize application indices      | `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX` in `optimize.env`                                   | Unique per Optimize release, and different from every writer prefix |
-
-Two failure modes follow from getting this wrong, and neither announces itself:
-
-- **Reusing a prefix** mixes one cluster's or tenant's records into another's Operate, Tasklist, or Optimize data.
-- **A writer and reader mismatch** starts Optimize against the wrong or an empty record set. Similar-looking prefixes are not sufficient; the values must be equal.
 
 A wrong prefix doesn't cause an error:
 

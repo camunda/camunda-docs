@@ -185,7 +185,7 @@ orchestration:
                     prefix: production-a-default-records
 ```
 
-For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The Orchestration Cluster keeps using its own secondary storage; the exporter writes the separate record stream Optimize reads. Every prefix must be unique per cluster and tenant. See [isolate every index prefix family](./physical-tenants.md#isolate-every-index-prefix-family).
+For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The Orchestration Cluster keeps using its own secondary storage; the exporter writes the separate record stream Optimize reads. Every prefix must be unique per cluster and tenant. See [isolate every index prefix family](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 
 ## Choose which applications run
 
@@ -229,7 +229,7 @@ Confirm the cluster appears in Camunda Hub's cluster list before you install its
 Add another entry to `global.topology.clusters` in the Hub release, then install another orchestration release configured to match that entry. Use unique client IDs, audiences, and secrets so each cluster has its own client registration. To also authorize users per cluster, set a distinct `components.<component>.roleName` in each record. See [role assignment across clusters](./hub-release.md#role-assignment-across-clusters).
 
 :::warning
-If orchestration releases share Elasticsearch or OpenSearch, every cluster needs its own index prefixes. Reusing a prefix mixes one cluster's records into another cluster's Operate, Tasklist, or Optimize data. See [index prefixes](./physical-tenants.md#isolate-every-index-prefix-family).
+If orchestration releases share Elasticsearch or OpenSearch, every cluster needs its own index prefixes. Reusing a prefix mixes one cluster's records into another cluster's Operate, Tasklist, or Optimize data. See [index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 :::
 
 For Keycloak, Management Identity creates every declared client. For another OIDC provider, provision the clients before applying the Helm releases.

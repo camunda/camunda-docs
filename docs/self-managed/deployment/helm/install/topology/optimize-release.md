@@ -107,7 +107,7 @@ A mismatch doesn't fail. Optimize starts successfully against the wrong or an em
 
 `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` is different: it names where Optimize writes its own indices, and must be unique per Optimize release and distinct from every writer prefix.
 
-For the full prefix model across all releases, see [isolate every index prefix family](./physical-tenants.md#isolate-every-index-prefix-family).
+For the full prefix model across all releases, see [isolate every index prefix family](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 
 ## Give each release its own identity
 

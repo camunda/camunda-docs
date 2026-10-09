@@ -837,7 +837,7 @@ Camunda 8.10 adds `global.topology.mode` to the Helm chart, so a release declare
 
 `combined` remains the default and preserves existing single-release behavior, so no existing deployment changes on upgrade. For a new production deployment, the split topology is the baseline.
 
-`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in recent 8.9, 8.8, and 8.7 charts, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. For the minimum chart version of each role, see [minimum chart versions](/self-managed/reference-architecture/deployment-topology.md#minimum-chart-versions).
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in recent 8.9, 8.8, and 8.7 charts, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. For the minimum chart version of each role, see [release roles](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 
 **Action:** None required for an existing deployment. For a new production deployment, see [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
 
