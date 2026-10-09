@@ -215,7 +215,7 @@ For configuration details, see [install an Optimize release](/self-managed/deplo
 
 This guide focuses on a single-region application, but can be adapted for a multi-region setup once you understand the basics of a single region.
 
-For details on multi-region configurations, especially dual-region setups, refer to the [dedicated guide](/self-managed/concepts/multi-region/dual-region.md).
+To choose a multi-region strategy, start with the comparison in [multi-region resilience](/self-managed/concepts/multi-region/resilience-tiers.md#get-started-choose-your-strategy).
 
 ### Infrastructure
 
