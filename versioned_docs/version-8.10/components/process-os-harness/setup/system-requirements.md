@@ -63,18 +63,6 @@ The agent needs these permissions in your environment:
 
 AI coding agents are read-only by default and ask for explicit approval otherwise. Teams typically allowlist frequently used safe commands, or enable an accept-edits mode, to reduce the number of prompts during a run.
 
-### ProcessOS Bundle mapping
-
-ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. Install the bundle that matches your agent, because an agent only discovers skills in its own directory. To understand how bundles are installed, see [Install ProcessOS Harness](../installation.md#install-processos-harness).
-
-| AI coding agent       | Bundle       | Install command            | Skills directory  |
-| --------------------- | ------------ | -------------------------- | ----------------- |
-| Claude Code (via CLI) | `claudecode` | `c8 os install claudecode` | `.claude/skills/` |
-| Claude Desktop        | `claudecode` | `c8 os install claudecode` | `.claude/skills/` |
-| GitHub Copilot CLI    | `copilotcli` | `c8 os install copilotcli` | `.github/skills/` |
-
-Only one bundle can be installed at a time. To move to a different agent, run `c8 os switch <bundle>`, which removes the current bundle before installing the new one.
-
 ## Builder client
 
 The AI coding agent runs on the builder's own computer.
