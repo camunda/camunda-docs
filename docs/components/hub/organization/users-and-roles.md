@@ -137,7 +137,7 @@ Users are assigned organization-level roles. The following table shows what each
 | Member             | Read-only    | Create and collaborate  | None     | Assigned only | Read-only | No                          |
 
 - **Organization Admin**: Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. No separate mode needs to be enabled.
-- **DevOps**: A specialized role for infrastructure management, not people management. Grants access to the cluster pages and the connector-management view, plus Member-level modeling. Cannot manage or view organization members or organization settings.
+- **DevOps**: A specialized role for infrastructure management, not people management. Grants the ability to view all clusters and their details, plus Member-level modeling. Cannot manage or view organization members or organization settings.
 - **Analyst**: Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md).
 - **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization.
 
