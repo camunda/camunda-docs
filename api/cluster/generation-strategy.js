@@ -19,8 +19,23 @@ const TITLE_FALLBACKS = {
   "exporter-api.yaml": "Exporters API",
 };
 
+// Upstream spec text uses spellings that don't match the product glossary.
+const SPELLING_FIXES = [
+  [/ElasticSearch/g, "Elasticsearch"],
+  [/Opensearch/g, "OpenSearch"],
+];
+
 function preGenerateDocs(config) {
-  const spec = yaml.load(fs.readFileSync(config.specPath, "utf8"));
+  const original = fs.readFileSync(config.specPath, "utf8");
+  const fixedText = SPELLING_FIXES.reduce(
+    (text, [pattern, replacement]) => text.replace(pattern, replacement),
+    original
+  );
+  if (fixedText !== original) {
+    fs.writeFileSync(config.specPath, fixedText, "utf8");
+  }
+
+  const spec = yaml.load(fixedText);
   let changed = false;
 
   const titleFallback = TITLE_FALLBACKS[config.specPath.split("/").pop()];
