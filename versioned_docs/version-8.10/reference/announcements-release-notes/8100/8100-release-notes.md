@@ -55,7 +55,7 @@ Use the Optimize agentic control plane dashboard to monitor AI agent adoption, t
 
 The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
 
-<p class="link-arrow">[Conversation storage SPI redesign](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign)</p>
+<p class="link-arrow">[SPI and package changes for custom extensions](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-spi-and-package-changes)</p>
 
 #### New native element templates
 
@@ -182,7 +182,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Skills repository for pro-code AI enablement
@@ -1717,7 +1717,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Camunda design system
@@ -2942,7 +2942,7 @@ Execution listeners can now be configured on the enclosing body of multi-instanc
 
 The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign) for more details.
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-spi-and-package-changes) for more details.
 
 #### Camunda-provided LLM for SaaS
 
