@@ -926,11 +926,11 @@ Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/
 
 In Camunda Hub, the configuration settings previously used by Web Modeler are deprecated in favor of the new Hub equivalents. Application properties prefixed with `camunda.modeler.*` are replaced by `camunda.hub.*`, and environment variables prefixed with `CAMUNDA_MODELER_*` are replaced by `CAMUNDA_HUB_*`. Some properties were also renamed or moved to a different property path.
 
-Camunda Hub still accepts the legacy properties in 8.10 and translates the recognized properties to their new equivalents at startup, but the legacy properties will be removed in 8.12.
+Camunda Hub still accepts the legacy properties in 8.10 and translates the recognized properties to their new equivalents at startup, but will remove them in 8.12.
 
 **Action:** Update your Camunda Hub configuration to the new settings ahead of that removal.
 
-<p className="link-arrow">[Web Modeler settings migration in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#web-modeler-settings-migration)</p>
+<p className="link-arrow">[Migrate Web Modeler settings in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#migrate-web-modeler-settings)</p>
 <br/>
 <p className="link-arrow">[Property reference](/self-managed/components/hub/configuration/properties.md)</p>
 
