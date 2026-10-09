@@ -61,7 +61,7 @@ Beyond the roles above, an organization may show a few legacy roles depending on
 - **Developer** _(deprecated)_: No longer offered for new assignment. Existing holders keep their current permissions unchanged; they are not automatically moved to another role.
 - **Task user** and **Visitor** _(legacy)_: Available only for organizations with at least one cluster on version 8.7 or older, alongside a user's organization-level roles. They govern access to the older cluster apps and disappear once no such clusters remain.
 
-## Access to resources
+## Access to organization resources
 
 The organization-level roles of a user set the level of access to each of the following resources. The table above lists the level for each role. This section describes what each level means.
 
@@ -145,7 +145,7 @@ Users are assigned organization-level roles. The following table shows what each
 
 In Self-Managed, you assign roles in Management Identity. The default roles **DevOps**, **Hub**, and **Hub Admin** were previously known as **Console**, **Web Modeler**, and **Web Modeler Admin**. The earlier roles still exist, grant the same permissions, and are kept for backward compatibility. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
 
-## Access to resources {#access-to-resources-self-managed}
+## Access to organization resources {#access-to-organization-resources-self-managed}
 
 The organization-level roles of a user set the level of access to each of the following resources. The table above lists the level for each role. This section describes what each level means.
 
