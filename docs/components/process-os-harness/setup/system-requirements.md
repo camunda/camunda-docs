@@ -18,7 +18,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-## Requirements
+## Overview
 
 ProcessOS Harness requires the following:
 
@@ -51,9 +51,13 @@ ProcessOS Harness drives an AI coding agent to do the work of re-engineering.
 
 | Aspect          | Supported                                                                                                                                     |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| AI coding agent | Claude Code and GitHub Copilot CLI. Other agents may be supported in future releases, but aren't yet tested exhaustively.                     |
+| AI coding agent | Currently supported are **Claude Code CLI** and **GitHub Copilot CLI**, each installed as a [bundles](#processos-bundles).                    |
 | AI platform     | Platforms such as Amazon Bedrock, Azure OpenAI, and Ollama, where the coding agent supports them.                                             |
 | Models          | Models natively used by a supported coding agent. Anthropic Claude models are tested the most, with Opus or smarter alternatives recommended. |
+
+:::note
+Other agents may be supported in future releases, but aren't yet tested exhaustively. Please get in contact if you need support for additional AI coding agents.
+:::
 
 The agent needs these permissions in your environment:
 
@@ -61,22 +65,23 @@ The agent needs these permissions in your environment:
 - Write access within the ProcessOS project Git repository.
 - Permission to execute bash commands and scripts.
 
-AI coding agents are read-only by default and ask for explicit approval otherwise. Teams typically allowlist frequently used safe commands, or enable an accept-edits mode, to reduce the number of prompts during a run.
+### ProcessOS Bundles
+
+ProcessOS Harness ships as one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. Install the bundle that matches your agent, because an agent only discovers skills in its own directory.
 
 ## Builder client
 
-The AI coding agent runs on the builder's own computer.
+The AI coding agent runs on the builder's own computer (Windows, macOS, or Unix). The following tools are required in the `latest` version:
 
-| Requirement                   | Details                                                                                                               |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| c8ctl                         | The Camunda 8 CLI, used to deploy and manage Camunda resources and clusters. Available as `c8ctl` and its alias `c8`. |
-| Operating system              | Windows (via WSL), macOS, or Unix.                                                                                    |
-| AI coding agent               | Installed locally.                                                                                                    |
-| Camunda                       | A local cluster started with `c8run`, used to validate generated solutions.                                           |
-| Node.js                       | Version 22.18.0 or later.                                                                                             |
-| Git and GitHub CLI            | `git`, and the `gh` CLI for the GitHub discovery specialist.                                                          |
-| Maven (For Java Workers only) | Latest stable release.                                                                                                |
-| Camunda Modeler               | For editing BPMN and DMN files during review.                                                                         |
+| Requirement        | Details                                                                                                               | When to install                                                     |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| AI coding agent    | See [AI coding agent](#ai-coding-agent).                                                                              | Before [installation](../installation.md#install-processos-harness) |
+| Camunda Modeler    | For editing BPMN and DMN files during review.                                                                         | Before [installation](../installation.md#install-processos-harness) |
+| Node.js            | Used as scripting language by ProcessOS Harness skills.                                                               | Before [installation](../installation.md#install-processos-harness) |
+| Git and GitHub CLI | `git`, and the `gh` CLI for the GitHub discovery specialist.                                                          | Before [installation](../installation.md#install-processos-harness) |
+| Maven              | For Java workers only.                                                                                                | Before [installation](../installation.md#install-processos-harness) |
+| c8ctl              | The Camunda 8 CLI, used to deploy and manage Camunda resources and clusters. Available as `c8ctl` and its alias `c8`. | During [installation](../installation.md#install-processos-harness) |
+| Camunda c8run      | A local cluster started with `c8run`, used to validate generated solutions.                                           | During ProcessOS run                                                |
 
 ## Generated solutions
 
@@ -87,5 +92,3 @@ Solutions generated by ProcessOS Harness use the following technologies.
 | Workers           | Target SDKs: Spring Boot; TypeScript; Python                                                                  |
 | Camunda artifacts | `.bpmn`, `.dmn`, and `.form` files for the latest Camunda 8 version.                                          |
 | AI platforms      | As supported by [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md). |
-
-TypeScript and Python are also fully supported worker targets.
