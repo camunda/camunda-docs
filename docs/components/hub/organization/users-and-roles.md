@@ -68,7 +68,7 @@ Every user holds one organization-level role. The following table shows what eac
 - **Analyst**: Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md).
 - **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization.
 
-### Other roles
+### Legacy roles
 
 <Tabs groupId="edition" defaultValue="saas" queryString values={
 [
@@ -78,7 +78,7 @@ Every user holds one organization-level role. The following table shows what eac
 
 <TabItem value='saas'>
 
-Beyond the roles above, an organization may show a few additional roles depending on its history:
+The following roles are legacy roles that aren't recommended with Camunda Hub. An organization may still show them depending on its history:
 
 - **Developer** _(deprecated)_: No longer offered for new assignment. Existing holders keep their current permissions unchanged; they are not automatically moved to another role.
 - **Task user** and **Visitor** _(legacy)_: Available only for organizations with at least one cluster on version 8.7 or older, alongside a user's organization-level role. They govern access to the older cluster apps and disappear once no such clusters remain.
@@ -87,7 +87,7 @@ Beyond the roles above, an organization may show a few additional roles dependin
 
 <TabItem value='self-managed'>
 
-Self-Managed has no additional organization roles. You define roles in Management Identity.
+Self-Managed has no legacy roles. You define roles in Management Identity.
 
 </TabItem>
 
