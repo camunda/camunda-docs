@@ -926,6 +926,14 @@ An operation that targets a specific [Physical Tenant](#physical-tenant), such a
 
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
+### Telemetry data
+
+Technical and usage information that Camunda collects about how its products are operated and used. Camunda uses telemetry data to evaluate contractual usage, enhance the user experience, and improve its products.
+
+Depending on the source, telemetry data may include deployment and version information, aggregated usage metrics, process metadata, SaaS application usage, and, in limited instances, personal data such as account or cookie identifiers and a SaaS user's name and email address.
+
+- [Data collection](/reference/data-collection/data-collection.md)
+
 ### Temperature
 
 A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
