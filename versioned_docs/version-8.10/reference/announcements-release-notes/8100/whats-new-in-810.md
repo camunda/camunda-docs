@@ -485,6 +485,8 @@ Connect the modeler in Hub to an [environment](#environments) to model, test, an
 This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
 Test Studio doesn't follow this connection. It runs against the environment you select in the **Test** tab.
 
+<p class="link-arrow">[Connect to a runtime](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md)</p>
+
 #### Recover deleted resources
 
 When you deleted a resource, such as a file or process application, in Camunda 8.9, the resource was immediately and permanently deleted, along with:
