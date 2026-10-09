@@ -76,7 +76,7 @@ When Optimize is disabled, `optimize.database.elasticsearch.prefix` and `optimiz
 
 ## Prefixes in the split topology
 
-In the [deployment topology](/self-managed/deployment/helm/install/topology/index.md), the Orchestration Cluster writes records and a separate Optimize release reads them. Each Orchestration Cluster and each [Physical Tenant](/self-managed/deployment/helm/install/topology/physical-tenants.md) has its own prefixes. Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Only the prefixes isolate it.
+In the [deployment topology](/self-managed/deployment/helm/install/topology/index.md), the Orchestration Cluster writes records and Optimize reads them, from the orchestration release or from a separate Optimize release per Physical Tenant. Each Orchestration Cluster and each [Physical Tenant](/self-managed/deployment/helm/install/topology/physical-tenants.md) has its own prefixes. Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Prefixes keep the data of each cluster and tenant apart. To restrict who can read it, also use the access controls of your Elasticsearch or OpenSearch backend.
 
 | Prefix family                     | Configuration                                                                                                                                                     | Requirement                                                         |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |

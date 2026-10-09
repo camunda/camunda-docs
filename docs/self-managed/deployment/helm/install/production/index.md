@@ -86,10 +86,10 @@ The following is an example `values.yaml` configuration using the example Ingres
 
 ```yaml
 global:
+  host: camunda.example.com
   ingress:
     enabled: true
     className: nginx
-    host: camunda.example.com
     tls:
       enabled: true
       secretName: camunda-platform
