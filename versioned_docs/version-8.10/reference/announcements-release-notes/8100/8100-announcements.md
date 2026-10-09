@@ -1089,11 +1089,11 @@ Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/
 
 In Camunda Hub, the configuration settings previously used by Web Modeler are deprecated in favor of the new Hub equivalents:
 
-| Web Modeler (legacy)                                     | Camunda Hub                                                                                                                                                                             |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Application properties prefixed with `camunda.modeler.*` | Replaced by `camunda.hub.*`                                                                                                                                                             |
-| Environment variables prefixed with `CAMUNDA_MODELER_*`  | Replaced by `CAMUNDA_HUB_*`                                                                                                                                                             |
-| Other environment variables                              | Replaced by environment variables strictly derived from the respective application property name (e.g. `CAMUNDA_HUB_*` for Hub-owned properties, `SPRING_*` for Spring Boot properties) |
+| Web Modeler (legacy)                                     | Camunda Hub                                                                                                                                                                                     |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Application properties prefixed with `camunda.modeler.*` | Replaced by `camunda.hub.*`                                                                                                                                                                     |
+| Environment variables prefixed with `CAMUNDA_MODELER_*`  | Replaced by `CAMUNDA_HUB_*`                                                                                                                                                                     |
+| Other environment variables                              | Replaced by environment variables strictly derived from the respective application property name (for example, `CAMUNDA_HUB_*` for Hub-owned properties, `SPRING_*` for Spring Boot properties) |
 
 Some properties were also renamed or moved to a different property path.
 Refer to the [upgrade guide](/self-managed/upgrade/components/890-to-8100.md#web-modeler-settings-migration) for more details and the [property reference](/self-managed/components/hub/configuration/properties.md) for an exhaustive list of the new settings.
