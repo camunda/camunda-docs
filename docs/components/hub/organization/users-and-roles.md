@@ -143,7 +143,7 @@ Users are assigned organization-level roles. The following table shows what each
 
 ### Management Identity roles {#management-identity-roles-self-managed}
 
-In Self-Managed, you assign roles in Management Identity. The default roles **DevOps**, **Hub**, and **Hub Admin** were previously known as **Console**, **Web Modeler**, and **Web Modeler Admin**. The earlier roles still exist, grant the same permissions, and are kept for backward compatibility. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
+In Self-Managed, you assign roles in Management Identity. The **Hub Admin** role gives the access of an Organization Admin, and the **Hub** role the access of a Member. The **DevOps** and **Analyst** roles keep their names. The default roles **DevOps**, **Hub**, and **Hub Admin** were previously known as **Console**, **Web Modeler**, and **Web Modeler Admin**. The earlier roles still exist, grant the same permissions, and are kept for backward compatibility. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
 
 ## Access to organization resources {#access-to-organization-resources-self-managed}
 
