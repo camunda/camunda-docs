@@ -13,14 +13,9 @@ jobs:
     runs-on: gcp-core-16-release
     container: node:24
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Dependencies
         run: npm ci
-      - name: Enable Indexing
-        run: "sed -i 's/noIndex: true/noIndex: false/g' docusaurus.config.js"
       - name: Build
         run: npm run build
         env:
@@ -42,10 +37,46 @@ jobs:
             secret/data/products/camunda-docs/ci/publish USER;
             secret/data/products/camunda-docs/ci/publish PRIVATE_KEY;
       - name: Publish
-        uses: burnett01/rsync-deployments@155b6d6c1219ab2224c20c58d423a3f1b850395f # 9.0.1
+        timeout-minutes: 30
+        uses: ./.github/actions/rsync-publish
         with:
-          switches: -avzr --delete
-          path: build/
+          remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}/8.6
+          remote_host: ${{ steps.secrets.outputs.HOST }}
+          remote_user: ${{ steps.secrets.outputs.USER }}
+          remote_key: ${{ steps.secrets.outputs.PRIVATE_KEY }}
+  # Temporarily publish to the old server and new server in parallel. Once we're satisfied everything is working properly,
+  # we can remove the old server deployment job.
+  publish-aws:
+    runs-on: gcp-core-16-release
+    container: node:24
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://unsupported.docs.camunda.io
+          DOCS_SITE_BASE_URL: /8.6/
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/ci/publish-aws PROD_UNSUPPORTED_PATH;
+            secret/data/products/camunda-docs/ci/publish-aws HOST;
+            secret/data/products/camunda-docs/ci/publish-aws USER;
+            secret/data/products/camunda-docs/ci/publish-aws PRIVATE_KEY;
+      - name: Publish to new server
+        timeout-minutes: 30
+        uses: ./.github/actions/rsync-publish
+        with:
           remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}/8.6
           remote_host: ${{ steps.secrets.outputs.HOST }}
           remote_user: ${{ steps.secrets.outputs.USER }}
