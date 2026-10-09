@@ -78,11 +78,6 @@ The main purpose of this access is to assign members to workspaces that have no 
 
 The user must be assigned the organization **Organization Owner** or **Organization Admin** role.
 
-### Cluster access
-
-- **Manage**: Create and update clusters, and manage cluster clients, connector secrets, IP allowlists, secure connectivity, and encryption. Organization Owner, Organization Admin, and DevOps have this level.
-- **None**: No access to the cluster pages. Analyst and Member have this level.
-
 ### Catalog access
 
 - **Manage**: Browse and use catalog items, and also see usage statistics and adoption data. Analyst, Organization Admin, and Organization Owner have this level.
@@ -91,6 +86,11 @@ The user must be assigned the organization **Organization Owner** or **Organizat
 ### Business value access
 
 Access to Optimize includes access to the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md), where users view metrics and set targets. The same roles that grant access to Optimize also grant access to business value: Analyst, Organization Admin, and Organization Owner.
+
+### Cluster visibility
+
+- **Manage**: Create and update clusters, and manage cluster clients, connector secrets, IP allowlists, secure connectivity, and encryption. Organization Owner, Organization Admin, and DevOps have this level.
+- **None**: No access to the cluster pages. Analyst and Member have this level.
 
 ### Environment visibility
 
@@ -170,11 +170,6 @@ If the role is not pre-existing, it can be created with the following permission
 
 Refer to the documentation pages about [assigning roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
 
-### Cluster access {#cluster-access-self-managed}
-
-- **Manage**: Open the cluster pages, where you view clusters and their details and manage their connectors. In Self-Managed, you provision clusters outside Camunda Hub, and Camunda Hub is read-only for clusters. Organization Admin and DevOps have this level.
-- **None**: No access to the cluster pages. Analyst and Member have this level.
-
 ### Catalog access {#catalog-access-self-managed}
 
 - **Manage**: Browse and use catalog items, and also see usage statistics and adoption data. Analyst and Organization Admin have this level.
@@ -183,6 +178,11 @@ Refer to the documentation pages about [assigning roles](/self-managed/component
 ### Business value access {#business-value-access-self-managed}
 
 Access to Optimize includes access to the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md), where users view metrics and set targets. The same roles that grant access to Optimize also grant access to business value: Analyst and Organization Admin.
+
+### Cluster visibility {#cluster-visibility-self-managed}
+
+- **Manage**: Open the cluster pages, where you view clusters and their details and manage their connectors. In Self-Managed, you provision clusters outside Camunda Hub, and Camunda Hub is read-only for clusters. Organization Admin and DevOps have this level.
+- **None**: No access to the cluster pages. Analyst and Member have this level.
 
 ### Environment visibility {#environment-visibility-self-managed}
 
