@@ -166,7 +166,7 @@ Refer to the documentation pages about [assigning roles](/self-managed/component
 
 ## Access to runtime environments
 
-Organization-level roles control what a user can do in Camunda Hub. They don't control what the user can do in the runtime of an environment, which includes Operate, Tasklist, Admin, and Zeebe. Starting with version 8.8, access to the runtime is managed independently of the organization role. To control what a user can access there, define their authorizations in [Admin](/components/admin/authorization.md).
+Organization-level roles control what a user can do in Camunda Hub. They don't control what the user can do in the runtime of an environment, which includes Operate, Tasklist, Admin, and Zeebe. Starting with version 8.8, access to the runtime is managed independently of organization-level roles. To control what a user can access there, define their authorizations in [Admin](/components/admin/authorization.md).
 
 If authorizations are disabled in the runtime, the user has full access to the runtime and its components.
 
