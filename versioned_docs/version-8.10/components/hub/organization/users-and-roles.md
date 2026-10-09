@@ -102,9 +102,9 @@ The organization-level roles of a user set the level of access to each of the fo
 | Organization                | Full access, Manage, Read-only, None | [Roles and permissions](#roles-and-permissions)               |
 | Workspaces and projects     | Manage, Create and collaborate       | [Workspace and project access](#workspace-and-project-access) |
 | Clusters                    | Manage, None                         | [Cluster access](#cluster-access)                             |
-| Environments                | Manage, Assigned only                | [Environment access](#environment-access)                     |
 | Catalog                     | Manage, Read-only                    | [Catalog access](#catalog-access)                             |
 | Optimize and business value | Yes, No                              | [Business value access](#business-value-access)               |
+| Environments                | Manage, Assigned only                | [Environment access](#environment-access)                     |
 
 ### Workspace and project access
 
@@ -116,11 +116,6 @@ The organization-level roles of a user set the level of access to each of the fo
 - **Manage**: Create and update clusters, and manage cluster clients, connector secrets, IP allowlists, secure connectivity, and encryption. Organization Owner, Organization Admin, and DevOps have this level.
 - **None**: No access to the cluster pages. Analyst and Member have this level.
 
-### Environment access
-
-- **Manage**: View all environments and resume paused ones. Organization Owner, Organization Admin, and DevOps have this level. Only Organization Owner and Organization Admin can assign environments to workspaces.
-- **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
-
 ### Catalog access
 
 - **Manage**: Browse and use catalog items, and also see usage statistics and adoption data. Analyst, Organization Admin, and Organization Owner have this level.
@@ -129,6 +124,11 @@ The organization-level roles of a user set the level of access to each of the fo
 ### Business value access
 
 Access to Optimize includes access to the [business value dashboard](/components/hub/organization/analyze-operations/business-value-dashboard.md), where users view metrics and set targets. The same roles that grant access to Optimize also grant access to business value: Analyst, Organization Admin, and Organization Owner.
+
+### Environment access
+
+- **Manage**: View all environments and resume paused ones. Organization Owner, Organization Admin, and DevOps have this level. Only Organization Owner and Organization Admin can assign environments to workspaces.
+- **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
 
 ### Elevated workspace access
 
