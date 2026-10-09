@@ -87,19 +87,19 @@
     "previousVersions": "https://downloads.camunda.cloud/release/camunda-modeler/"
   },
   "camundaRun": {
-    "version": "8.9.23",
-    "date": "Oct 7, 2026",
+    "version": "8.10.2",
+    "date": "Oct 8, 2026",
     "alphaVersion": "8.10.0-alpha5",
     "links": {
       "mac": {
         "stable": [
           {
             "label": "Apple Silicon",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.23/camunda8-run-8.9.23-darwin-aarch64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.2/camunda8-run-8.10.2-darwin-aarch64.zip"
           },
           {
             "label": "Intel",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.23/camunda8-run-8.9.23-darwin-x86_64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.2/camunda8-run-8.10.2-darwin-x86_64.zip"
           }
         ],
         "experimental": [
@@ -117,7 +117,7 @@
         "stable": [
           {
             "label": "Windows (x64)",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.23/camunda8-run-8.9.23-windows-x86_64.zip"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.2/camunda8-run-8.10.2-windows-x86_64.zip"
           }
         ],
         "experimental": [
@@ -131,7 +131,7 @@
         "stable": [
           {
             "label": "Linux (x64)",
-            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.9.23/camunda8-run-8.9.23-linux-x86_64.tar.gz"
+            "url": "https://downloads.camunda.cloud/release/camunda/c8run/8.10.2/camunda8-run-8.10.2-linux-x86_64.tar.gz"
           }
         ],
         "experimental": [
