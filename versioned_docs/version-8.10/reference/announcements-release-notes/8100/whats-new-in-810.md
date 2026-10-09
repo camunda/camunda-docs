@@ -254,7 +254,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Test AI agents with Camunda Process Test
@@ -485,6 +485,8 @@ Connect the modeler in Hub to an [environment](#environments) to model, test, an
 This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
 Test Studio doesn't follow this connection. It runs against the environment you select in the **Test** tab.
 
+<p class="link-arrow">[Connect to a runtime](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md)</p>
+
 #### Recover deleted resources
 
 When you deleted a resource, such as a file or process application, in Camunda 8.9, the resource was immediately and permanently deleted, along with:
@@ -698,6 +700,19 @@ In addition to process application snapshots, you can create versions for indivi
 5. Click **Create**.
 
 </details>
+
+### Environments in the SaaS migration
+
+Before 8.10, you connected up to four clusters to a process application, one for each deployment stage. In 8.10, a project has no deployment stages, so Camunda Hub carries these connections forward as [environments](/components/concepts/environments.md) of the workspace. Camunda Hub assigns the environments in a separate step from the Web Modeler data migration described above.
+
+For each migrated workspace:
+
+- Every cluster that a process application in the workspace connected to any deployment stage becomes an environment assigned to the workspace. This also applies to the cluster of each IDP application. A cluster that several stages or applications used is assigned once.
+- If several projects are in the same workspace, the workspace receives the environments of all of them.
+- Projects inherit the environments of their workspace. They have no deployment stages or connected clusters anymore, and the migration doesn't set a default environment for a project. You choose the environment when you deploy.
+- Workspaces you create after the migration start without environments.
+
+An organization admin can change the assigned environments at any time. See [assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md).
 
 ## Multi-region resilience
 

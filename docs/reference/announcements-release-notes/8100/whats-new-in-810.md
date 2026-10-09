@@ -178,6 +178,22 @@ Important changes in Camunda 8.10 are summarized as follows:
 
 Important changes and new features for agentic orchestration are available in 8.10:
 
+### Real-time agent visibility and monitoring
+
+Monitor and evaluate AI agent behavior in Operate.
+
+<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
+
+- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics), model, and system prompt.
+- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
+- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
+
+<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
+
+:::note
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
+:::
+
 ### Agentic control plane
 
 Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
@@ -240,22 +256,6 @@ AI agents can use the Processes MCP Server to discover and call deployed BPMN pr
 - The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
 
 <p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
-
-### Real-time agent visibility and monitoring
-
-Monitor and evaluate AI agent behavior in Operate.
-
-<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
-
-- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics), model, and system prompt.
-- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
-- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
-
-<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
-
-:::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
-:::
 
 ### Test AI agents with Camunda Process Test
 
@@ -700,6 +700,19 @@ In addition to process application snapshots, you can create versions for indivi
 5. Click **Create**.
 
 </details>
+
+### Environments in the SaaS migration
+
+Before 8.10, you connected up to four clusters to a process application, one for each deployment stage. In 8.10, a project has no deployment stages, so Camunda Hub carries these connections forward as [environments](/components/concepts/environments.md) of the workspace. Camunda Hub assigns the environments in a separate step from the Web Modeler data migration described above.
+
+For each migrated workspace:
+
+- Every cluster that a process application in the workspace connected to any deployment stage becomes an environment assigned to the workspace. This also applies to the cluster of each IDP application. A cluster that several stages or applications used is assigned once.
+- If several projects are in the same workspace, the workspace receives the environments of all of them.
+- Projects inherit the environments of their workspace. They have no deployment stages or connected clusters anymore, and the migration doesn't set a default environment for a project. You choose the environment when you deploy.
+- Workspaces you create after the migration start without environments.
+
+An organization admin can change the assigned environments at any time. See [assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md).
 
 ## Multi-region resilience
 

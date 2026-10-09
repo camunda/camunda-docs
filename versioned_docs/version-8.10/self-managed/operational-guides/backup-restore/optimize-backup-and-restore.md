@@ -361,12 +361,9 @@ Stop Optimize now, before you continue with Step 4. Only Steps 1 and 2 need Opti
 
 If you are using an external Elasticsearch/OpenSearch and Kubernetes, temporarily [uninstall](https://helm.sh/docs/helm/helm_uninstall/) the Camunda Helm chart or [scale](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) all components to 0, so that nothing is running and potentially interacting with the datastore.
 
-If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling Optimize in the `values.yml`.
+With Helm, disable Optimize in `values.yml`:
 
 ```yaml
-elasticsearch:
-  enabled: true
-
 optimize:
   enabled: false
 ```

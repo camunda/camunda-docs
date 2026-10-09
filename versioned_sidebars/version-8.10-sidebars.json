@@ -5430,6 +5430,7 @@
                     "id": "self-managed/components/orchestration-cluster/zeebe/exporters/exporters"
                   },
                   "items": [
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
@@ -5472,6 +5473,7 @@
             {
               "Configuration": [
                 "self-managed/components/hub/configuration/properties",
+                "self-managed/components/hub/configuration/environments",
                 "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
