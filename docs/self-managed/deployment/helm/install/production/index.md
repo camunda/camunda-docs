@@ -7,7 +7,7 @@ description: Apply production-ready Helm configuration to every Camunda 8 Self-M
 
 This guide describes production hardening for the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It applies to every release in your deployment, whatever role the release has. It provides a resilient baseline for most production use cases.
 
-This guide doesn't install the releases. To install them, see [choose your topology](../index.md#choose-your-topology).
+To install a split topology, use the guide for each release role. See [choose your topology](../index.md#choose-your-topology). To install a single `combined` release, see [install a combined release](#install-a-combined-release).
 
 The guide covers these database options:
 
@@ -60,11 +60,23 @@ Before you write a production values file, see [Helm and application configurati
 
 After following the [prerequisites](#prerequisites), you should have a Kubernetes cluster ready with `kubectl` and the `helm` CLI installed.
 
-### Find the install guide for each release
+### Install the releases
 
-To choose and install the releases, see [choose your topology](../index.md#choose-your-topology). Then apply the settings on this page by role: each setting belongs only in the values file of the release that runs the component it configures. For example, the Hub and orchestration releases use separate Ingress hosts.
+To install a split topology, see [choose your topology](../index.md#choose-your-topology). Then apply the settings on this page by role: each setting belongs only in the values file of the release that runs the component it configures. For example, the Hub and orchestration releases use separate Ingress hosts.
 
 For the prerequisites, namespaces, Secrets, and network policies of the split topology, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+
+#### Install a combined release
+
+A `combined` release deploys every enabled component from one values file. Write `values.yaml` with the production settings on this page, then install the chart:
+
+```bash
+helm repo add camunda https://helm.camunda.io
+helm repo update
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
+  --namespace camunda --create-namespace \
+  --values values.yaml
+```
 
 :::note
 For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#camunda-hub-vs-orchestration-cluster).
