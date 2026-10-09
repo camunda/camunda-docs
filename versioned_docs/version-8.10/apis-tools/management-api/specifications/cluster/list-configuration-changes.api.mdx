@@ -1,0 +1,472 @@
+---
+id: list-configuration-changes
+title: "List configuration changes"
+description: "Returns every configuration change currently known to this broker."
+sidebar_label: "List configuration changes"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/management-api/specifications/cluster/cluster-topology-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List configuration changes"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/changes"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns every configuration change currently known to this broker.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "response body for listing configuration changes",
+      content: {
+        "application/json": {
+          schema: {
+            title: "GetConfigurationChangesResponse",
+            description:
+              "All configuration changes currently known to this broker.",
+            type: "object",
+            properties: {
+              changes: {
+                type: "array",
+                items: {
+                  title: "ConfigurationChange",
+                  description:
+                    "One configuration change plan, identified by its changeId, together with its status and the operations it consists of. A change may target the global broker configuration, a single physical tenant, or several physical tenants in parallel; each operation carries its own `physicalTenant` (absent for a global operation) so operations belonging to different tenants can still be told apart.\n\n`completed`/`pending` reflect only what is currently available from the underlying configuration state, not a persisted history: for the in-progress change, `completed` lists operations from phases already advanced past, and `pending` lists the rest; for a change that has already finished, the individual operations are no longer retained, so both lists are empty and only `id`/`status`/`startedAt`/`completedAt` are meaningful.\n",
+                  type: "object",
+                  properties: {
+                    id: {
+                      title: "ChangeId",
+                      description: "The ID of a topology change operation",
+                      type: "integer",
+                      format: "int64",
+                      example: 8,
+                    },
+                    status: {
+                      type: "string",
+                      enum: ["IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLED"],
+                    },
+                    startedAt: {
+                      type: "string",
+                      format: "date-time",
+                      description:
+                        "The time when the configuration change was started",
+                      example: "2020-01-01T00:00:00Z",
+                    },
+                    completedAt: {
+                      type: "string",
+                      format: "date-time",
+                      description:
+                        "The time when the configuration change was completed, if it has completed",
+                      example: "2020-01-01T00:00:00Z",
+                    },
+                    completed: {
+                      description:
+                        "The list of operations that have been completed so far.",
+                      type: "array",
+                      items: {
+                        type: "object",
+                        properties: {
+                          operation: {
+                            type: "string",
+                            enum: [
+                              "BROKER_ADD",
+                              "BROKER_REMOVE",
+                              "PARTITION_JOIN",
+                              "PARTITION_LEAVE",
+                              "PARTITION_RECONFIGURE_PRIORITY",
+                              "PARTITION_FORCE_RECONFIGURE",
+                              "BROKER_FORCE_REMOVE",
+                              "UNKNOWN",
+                              "PARTITION_DISABLE_EXPORTER",
+                              "PARTITION_ENABLE_EXPORTER",
+                              "START_PARTITION_SCALE_UP",
+                              "PARTITION_BOOTSTRAP",
+                              "PARTITION_PRE_RESTORE",
+                              "PARTITION_RESTORE",
+                              "AWAIT_REDISTRIBUTION",
+                              "AWAIT_RELOCATION",
+                              "UPDATE_ROUTING_STATE",
+                              "DELETE_HISTORY",
+                              "PARTITION_DELETE_EXPORTER",
+                              "UPDATE_INCARNATION_NUMBER",
+                              "PRE_SCALING",
+                              "POST_SCALING",
+                              "UPDATE_PARTITIONING",
+                              "ENTER_RECOVERY",
+                              "EXIT_RECOVERY",
+                              "AWAIT_MODE_CHANGE",
+                              "EXPORTING_STATE_CHANGE",
+                              "REMOVE_PHYSICAL_TENANT",
+                              "PARTITION_PROMOTE",
+                              "PARTITION_DEMOTE",
+                              "INITIALIZE_SCHEMA",
+                            ],
+                          },
+                          brokerId: {
+                            title: "BrokerId",
+                            description:
+                              'The ID of a broker. An integer (e.g. 0) for non-zone-aware clusters, or a string (e.g. "zone-a_0") for zone-aware clusters.\n',
+                            oneOf: [
+                              { type: "integer", format: "int32", example: 0 },
+                              { type: "string", example: "zone-a_0" },
+                            ],
+                          },
+                          partitionId: {
+                            title: "PartitionId",
+                            description:
+                              "The ID of a partition, starting from 1",
+                            type: "integer",
+                            format: "int32",
+                            example: 1,
+                          },
+                          physicalTenant: {
+                            title: "PhysicalTenantId",
+                            description: "The ID of a physical tenant",
+                            type: "string",
+                            example: "mytenant",
+                          },
+                          priority: {
+                            type: "integer",
+                            format: "int32",
+                            description: "The priority of the partition",
+                            example: 3,
+                          },
+                          brokers: {
+                            type: "array",
+                            items: {
+                              title: "BrokerId",
+                              description:
+                                'The ID of a broker. An integer (e.g. 0) for non-zone-aware clusters, or a string (e.g. "zone-a_0") for zone-aware clusters.\n',
+                              oneOf: [
+                                {
+                                  type: "integer",
+                                  format: "int32",
+                                  example: 0,
+                                },
+                                { type: "string", example: "zone-a_0" },
+                              ],
+                            },
+                          },
+                          exporterId: {
+                            title: "Exporter",
+                            description: "The ID of an exporter",
+                            type: "string",
+                            example: "my-exporter",
+                          },
+                          partitioningConfig: {
+                            description:
+                              "The partition distributor configuration agreed on by the cluster.",
+                            type: "object",
+                            required: ["scheme"],
+                            properties: {
+                              scheme: {
+                                type: "string",
+                                enum: ["ROUND_ROBIN", "ZONE_AWARE", "FIXED"],
+                                description:
+                                  "The partitioning scheme. ROUND_ROBIN assigns partitions evenly across all brokers. ZONE_AWARE places replicas according to zone specs. FIXED uses a static mapping defined in each broker's local configuration.\n",
+                              },
+                              zones: {
+                                type: "array",
+                                description:
+                                  "Zone specifications; present only when scheme is ZONE_AWARE. While migrating a bare or partially zoned cluster to zone-aware, the order of this array matters: it determines which existing (bare) nodes get migrated into which zone. Outside of migration, order is irrelevant — every operation addresses a zone by its `name`, never by its position in this array.\n",
+                                items: {
+                                  description:
+                                    "A zone's participation in partition placement.",
+                                  type: "object",
+                                  required: [
+                                    "name",
+                                    "numberOfReplicas",
+                                    "priority",
+                                  ],
+                                  properties: {
+                                    name: {
+                                      type: "string",
+                                      description: "Zone name",
+                                      example: "us-east1",
+                                    },
+                                    numberOfReplicas: {
+                                      type: "integer",
+                                      format: "int32",
+                                      description:
+                                        "Number of partition replicas placed in this zone",
+                                      example: 2,
+                                    },
+                                    priority: {
+                                      type: "integer",
+                                      format: "int32",
+                                      description:
+                                        "Preferred-leader ranking; higher value wins",
+                                      example: 1000,
+                                    },
+                                  },
+                                  title: "ZoneSpec",
+                                },
+                              },
+                            },
+                            title: "PartitioningConfig",
+                          },
+                          exportingState: {
+                            enum: [
+                              "EXPORTING",
+                              "PAUSED",
+                              "SOFT_PAUSED",
+                              "UNKNOWN",
+                            ],
+                            title: "ExportingState",
+                          },
+                        },
+                        title: "Operation",
+                      },
+                    },
+                    pending: {
+                      description: "The list of operations that are pending.",
+                      type: "array",
+                      items: {
+                        type: "object",
+                        properties: {
+                          operation: {
+                            type: "string",
+                            enum: [
+                              "BROKER_ADD",
+                              "BROKER_REMOVE",
+                              "PARTITION_JOIN",
+                              "PARTITION_LEAVE",
+                              "PARTITION_RECONFIGURE_PRIORITY",
+                              "PARTITION_FORCE_RECONFIGURE",
+                              "BROKER_FORCE_REMOVE",
+                              "UNKNOWN",
+                              "PARTITION_DISABLE_EXPORTER",
+                              "PARTITION_ENABLE_EXPORTER",
+                              "START_PARTITION_SCALE_UP",
+                              "PARTITION_BOOTSTRAP",
+                              "PARTITION_PRE_RESTORE",
+                              "PARTITION_RESTORE",
+                              "AWAIT_REDISTRIBUTION",
+                              "AWAIT_RELOCATION",
+                              "UPDATE_ROUTING_STATE",
+                              "DELETE_HISTORY",
+                              "PARTITION_DELETE_EXPORTER",
+                              "UPDATE_INCARNATION_NUMBER",
+                              "PRE_SCALING",
+                              "POST_SCALING",
+                              "UPDATE_PARTITIONING",
+                              "ENTER_RECOVERY",
+                              "EXIT_RECOVERY",
+                              "AWAIT_MODE_CHANGE",
+                              "EXPORTING_STATE_CHANGE",
+                              "REMOVE_PHYSICAL_TENANT",
+                              "PARTITION_PROMOTE",
+                              "PARTITION_DEMOTE",
+                              "INITIALIZE_SCHEMA",
+                            ],
+                          },
+                          brokerId: {
+                            title: "BrokerId",
+                            description:
+                              'The ID of a broker. An integer (e.g. 0) for non-zone-aware clusters, or a string (e.g. "zone-a_0") for zone-aware clusters.\n',
+                            oneOf: [
+                              { type: "integer", format: "int32", example: 0 },
+                              { type: "string", example: "zone-a_0" },
+                            ],
+                          },
+                          partitionId: {
+                            title: "PartitionId",
+                            description:
+                              "The ID of a partition, starting from 1",
+                            type: "integer",
+                            format: "int32",
+                            example: 1,
+                          },
+                          physicalTenant: {
+                            title: "PhysicalTenantId",
+                            description: "The ID of a physical tenant",
+                            type: "string",
+                            example: "mytenant",
+                          },
+                          priority: {
+                            type: "integer",
+                            format: "int32",
+                            description: "The priority of the partition",
+                            example: 3,
+                          },
+                          brokers: {
+                            type: "array",
+                            items: {
+                              title: "BrokerId",
+                              description:
+                                'The ID of a broker. An integer (e.g. 0) for non-zone-aware clusters, or a string (e.g. "zone-a_0") for zone-aware clusters.\n',
+                              oneOf: [
+                                {
+                                  type: "integer",
+                                  format: "int32",
+                                  example: 0,
+                                },
+                                { type: "string", example: "zone-a_0" },
+                              ],
+                            },
+                          },
+                          exporterId: {
+                            title: "Exporter",
+                            description: "The ID of an exporter",
+                            type: "string",
+                            example: "my-exporter",
+                          },
+                          partitioningConfig: {
+                            description:
+                              "The partition distributor configuration agreed on by the cluster.",
+                            type: "object",
+                            required: ["scheme"],
+                            properties: {
+                              scheme: {
+                                type: "string",
+                                enum: ["ROUND_ROBIN", "ZONE_AWARE", "FIXED"],
+                                description:
+                                  "The partitioning scheme. ROUND_ROBIN assigns partitions evenly across all brokers. ZONE_AWARE places replicas according to zone specs. FIXED uses a static mapping defined in each broker's local configuration.\n",
+                              },
+                              zones: {
+                                type: "array",
+                                description:
+                                  "Zone specifications; present only when scheme is ZONE_AWARE. While migrating a bare or partially zoned cluster to zone-aware, the order of this array matters: it determines which existing (bare) nodes get migrated into which zone. Outside of migration, order is irrelevant — every operation addresses a zone by its `name`, never by its position in this array.\n",
+                                items: {
+                                  description:
+                                    "A zone's participation in partition placement.",
+                                  type: "object",
+                                  required: [
+                                    "name",
+                                    "numberOfReplicas",
+                                    "priority",
+                                  ],
+                                  properties: {
+                                    name: {
+                                      type: "string",
+                                      description: "Zone name",
+                                      example: "us-east1",
+                                    },
+                                    numberOfReplicas: {
+                                      type: "integer",
+                                      format: "int32",
+                                      description:
+                                        "Number of partition replicas placed in this zone",
+                                      example: 2,
+                                    },
+                                    priority: {
+                                      type: "integer",
+                                      format: "int32",
+                                      description:
+                                        "Preferred-leader ranking; higher value wins",
+                                      example: 1000,
+                                    },
+                                  },
+                                  title: "ZoneSpec",
+                                },
+                              },
+                            },
+                            title: "PartitioningConfig",
+                          },
+                          exportingState: {
+                            enum: [
+                              "EXPORTING",
+                              "PAUSED",
+                              "SOFT_PAUSED",
+                              "UNKNOWN",
+                            ],
+                            title: "ExportingState",
+                          },
+                        },
+                        title: "Operation",
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "500": {
+      description: "Internal error",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description: "Gateway failed to send request to the broker.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "504": {
+      description: "Request from gateway to broker timed out.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

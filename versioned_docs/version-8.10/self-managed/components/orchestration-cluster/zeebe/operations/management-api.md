@@ -117,7 +117,7 @@ The enable and disable functionality is specifically useful for [dual region dep
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
 
 :::info
-You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+See the [Exporters API reference](/apis-tools/management-api/specifications/exporters/exporters-api.info.mdx) for all endpoints and schemas.
 :::
 
 :::note
@@ -197,7 +197,7 @@ The response is a JSON object that lists all configured exporters with their sta
 
 ## Cluster API
 
-You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
+See the [cluster topology management API reference](/apis-tools/management-api/specifications/cluster/cluster-topology-management-api.info.mdx) for all endpoints and schemas.
 
 ### Monitoring API
 
@@ -211,7 +211,7 @@ GET actuator/cluster
 
 #### Response
 
-The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml) for details:
+The response is a JSON object. See the [API reference](/apis-tools/management-api/specifications/cluster/cluster-topology-management-api.info.mdx) for details:
 
 ```
 {
@@ -372,7 +372,7 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 #### Response {#partitioning-response}
 
-The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml) for details:
+The response is a JSON object. See the [API reference](/apis-tools/management-api/specifications/cluster/cluster-topology-management-api.info.mdx) for details:
 
 ```
 {
@@ -557,7 +557,7 @@ GET actuator/upgradeReadiness
 
 ##### Response
 
-The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/upgrade-readiness-api.yaml) for details:
+The response is a JSON object. See the [API reference](/apis-tools/management-api/specifications/upgrade-readiness/upgrade-readiness-api.info.mdx) for details:
 
 ```
 {
