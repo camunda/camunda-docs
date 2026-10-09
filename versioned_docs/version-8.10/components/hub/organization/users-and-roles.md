@@ -68,7 +68,7 @@ Every user holds one organization-level role. The following table shows what eac
 - **Analyst**: Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md).
 - **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization.
 
-### Legacy roles
+### Additional roles
 
 <Tabs groupId="edition" defaultValue="saas" queryString values={
 [
@@ -78,7 +78,7 @@ Every user holds one organization-level role. The following table shows what eac
 
 <TabItem value='saas'>
 
-The following roles are legacy roles that aren't recommended with Camunda Hub. An organization may still show them depending on its history:
+Beyond the roles above, an organization may show a few legacy roles depending on its history. They aren't recommended with Camunda Hub:
 
 - **Developer** _(deprecated)_: No longer offered for new assignment. Existing holders keep their current permissions unchanged; they are not automatically moved to another role.
 - **Task user** and **Visitor** _(legacy)_: Available only for organizations with at least one cluster on version 8.7 or older, alongside a user's organization-level role. They govern access to the older cluster apps and disappear once no such clusters remain.
@@ -87,7 +87,7 @@ The following roles are legacy roles that aren't recommended with Camunda Hub. A
 
 <TabItem value='self-managed'>
 
-Self-Managed has no legacy roles. You define roles in Management Identity.
+In Self-Managed, you assign roles in Management Identity. Some default roles, such as **Console**, **Web Modeler**, and **Web Modeler Admin**, keep their earlier names and grant the same permissions as **DevOps**, **Hub**, and **Hub Admin**. See [default roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles).
 
 </TabItem>
 
