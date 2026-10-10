@@ -61,7 +61,7 @@
     "clsx": "^2.1.1",
     "mixpanel-browser": "^2.64.0",
     "mustache": "^4.2.0",
-    "openapi-to-postmanv2": "6.3.3",
+    "openapi-to-postmanv2": "6.4.0",
     "pushfeedback-react": "^0.1.63",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
