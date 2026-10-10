@@ -110,13 +110,22 @@ These values relate to Optimize data import.
 
 These values control how Optimize validates tokens on its External REST API.
 
-In Camunda 8.10, the External REST API accepts only OIDC bearer tokens. Configure `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences`. Optimize gets the JWK set URI from the OIDC discovery document of the issuer. To use a different URI, set `camunda.security.authentication.oidc.jwk-set-uri`. The External REST API needs this configuration. Without it, Optimize rejects all API requests. For the upgrade steps, see [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
+In Camunda 8.10, the External REST API accepts only OIDC bearer tokens. Configure `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences`. Optimize gets the JWK set URI from the OIDC discovery document of the issuer. To use a different URI, set `camunda.security.authentication.oidc.jwk-set-uri`. The External REST API needs OIDC configuration. Without it, Optimize rejects all API requests. For the upgrade steps, see [Optimize static API access token is no longer supported](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-static-api-access-token-is-no-longer-supported).
+
+:::note
+`api.jwtSetUri` and `api.audience` still work in 8.10, from either the YAML path or the environment variable, but they are deprecated. Camunda plans to remove them in a future release. Behavior differs from 8.9 in three ways:
+
+- The `optimize` default shown below is not carried over. Only an audience you set explicitly takes effect, so if you configure no audience at all, any audience is accepted, and if you configure a different audience but not this one, a token audienced `optimize` is rejected. Set the audience explicitly rather than relying on the default.
+- A JWK set applies to the whole API surface rather than to the public API and ingestion endpoints alone, so a token signed by it is accepted on any `/api/**` endpoint that its audience allows.
+- `api.jwtSetUri` is added alongside the JWK set that verifies logins instead of replacing it, so configuring a separate identity provider for your API no longer affects logging in to Optimize. This only works where no `camunda.security.authentication.oidc.issuer-uri` is configured. With one set, tokens from any other issuer are rejected regardless of which JWK set can verify them.
+
+:::
 
 | YAML path       | Environment variable                                  | Default value | Description                                                                                                                                                                                                                                                  |
 | --------------- | ----------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | api.accessToken | OPTIMIZE_API_ACCESS_TOKEN                             | null          | Not functional in 8.10 unless you opt into the 8.9 component-specific configuration fallback, which Camunda plans to remove in a future release. Through 8.9, a static shared token that a client sends to the secured REST API in the authorization header. |
-| api.jwtSetUri   | SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | null          | Deprecated in 8.10. Use `camunda.security.authentication.oidc.jwk-set-uri`. Complete URI of the public keys for JWT validation.                                                                                                                              |
-| api.audience    | CAMUNDA_OPTIMIZE_API_AUDIENCE                         | optimize      | Deprecated in 8.10. Use `camunda.security.authentication.oidc.audiences`. Optimize matches this value with the `aud` field in the JWT.                                                                                                                       |
+| api.jwtSetUri   | SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | null          | Deprecated in 8.10. Use `camunda.security.authentication.oidc.additional-jwk-set-uris`. Complete URI of the public keys for JWT validation.                                                                                                                  |
+| api.audience    | CAMUNDA_OPTIMIZE_API_AUDIENCE                         | optimize      | Deprecated in 8.10. Use `camunda.security.authentication.oidc.audiences`. Camunda 8.10 does not apply this default. Optimize matches this value with the `aud` field in the JWT.                                                                             |
 
 ### Container
 
