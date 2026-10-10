@@ -196,6 +196,12 @@ At runtime, `c8ctl` injects a global object via `globalThis.c8ctl` that plugins 
 | `activeProfile`                      | Name of the active profile.                                                              |
 | `activeTenant`                       | Active tenant ID.                                                                        |
 
+### Logger output
+
+`logger.info(message)` formats messages for the current output mode: plain text on stdout in text mode, or `{"status":"info","message":"..."}` on stderr in JSON mode. For a message that is the command's primary result, use `logger.info(message, { stream: "stdout" })`. Use `{ stream: "stderr" }` to keep a diagnostic on stderr in either mode. The override affects only that call, preserves formatting, and does not apply `--fields` filtering.
+
+`logger.output(content)` writes raw content to stdout without formatting it, while `logger.json(data)` writes structured data with `--fields` filtering.
+
 ### Running npm from a plugin
 
 Spawning npm directly is not portable. On Windows npm is a `npm.cmd` shim: a bare `npm` spawn fails with `ENOENT`, and `npm.cmd` alone fails with `EINVAL` under the CVE-2024-27980 hardening in Node 18.20.2 / 20.12.2 / 21.7.3 and later. `c8ctl.npm()` is the same helper the CLI uses for its own plugin installs — it routes the call through `cmd.exe` with every argument quoted (plugin paths routinely contain spaces) and rejects arguments that cannot be passed safely: an embedded `"`, a line break, or a `%VAR%` reference.

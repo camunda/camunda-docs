@@ -78,6 +78,22 @@ c8 cluster status
 
 Reports whether a cluster is running, including connection details.
 
+If `cluster start` exits nonzero while Camunda or connector processes survive,
+status reports **`running after failed startup`**. Review the startup error or
+c8run logs, then run `c8 cluster stop` before retrying. A responding shared health
+endpoint does not mean every physical tenant is ready. The original startup exit
+code is preserved; stopping clears the failure record, and a successful restart
+replaces any stale failure state.
+This includes readiness timeouts after c8run itself exits successfully, which
+make `cluster start` exit 1. A retry while processes survive without an active
+marker also exits 1; stop those processes before starting again.
+
+**`running (untracked)`** means processes are alive without an active c8ctl
+marker and the startup outcome is unknown. Use `c8 cluster stop` to recover,
+including when an installation directory was replaced or deleted while running.
+JSON status (`c8 cluster status --json`) includes the same `status` and `recovery`
+guidance.
+
 ### View cluster logs
 
 ```bash
@@ -135,6 +151,61 @@ Everything after `secrets` is passed to c8run unchanged, so any verb or flag c8r
 SECRET_OPENAI_API_KEY=sk-... c8 cluster start
 ```
 
+### Local physical tenants
+
+Physical tenants are isolated engines inside one local Camunda process, each with its own data, users, secrets, and Connectors runtime. They require **Camunda 8.10 or newer and a c8run build that includes the physical-tenant CLI**. Older cached 8.10 builds can predate this feature. `cluster start` reuses cached installations, so upgrading c8ctl alone does not upgrade the cached c8run; `cluster install 8.10` checks for an updated distribution. Run `c8 cluster tenants help` to confirm support.
+
+```bash
+# Install a supporting distribution, then save tenants without starting Java
+c8 cluster install 8.10
+c8 cluster tenants --c8-version 8.10 add sales
+c8 cluster tenants --c8-version 8.10 add hr --username alice
+# c8run prompts for alice's password; automation can use --password-stdin
+
+# Start default plus all saved tenants
+c8 cluster start 8.10
+c8 cluster tenants list
+
+# One start only: overrides the saved tenant selection without changing it
+c8 cluster stop
+c8 cluster start 8.10 --physical-tenants sales,hr
+
+# Manage a physical tenant's own secrets
+c8 cluster secrets --tenant sales set OPENAI_API_KEY
+c8 cluster secrets --tenant sales import .env.secrets
+c8 cluster secrets --tenant sales delete OPENAI_API_KEY --yes
+
+# Removing a tenant keeps its data; restart to apply the change
+c8 cluster tenants remove sales --yes
+c8 cluster tenants path
+c8 cluster tenants help
+
+# Stop default and all tenants
+c8 cluster stop
+```
+
+`cluster tenants` delegates to c8run, which owns tenant validation, password prompting, persistence, configuration, and readiness checks. It also supports `reset --yes` and `add <id> --no-connectors`. `remove` and `reset` ask for confirmation; non-interactive use requires `--yes`. `--physical-tenants` is start-only, accepts comma-separated IDs, and can be repeated. The startup output includes per-tenant endpoints and readiness. A failed tenant can leave healthy engines running; the command returns a failure and `c8 cluster stop` stops the surviving processes.
+
+Management commands select an explicit leading `--c8-version`, otherwise the running cluster's version, otherwise the highest locally installed version. They never download a distribution automatically. Keep the same version selected when configuring and starting a cluster. Both secrets and tenant commands preserve c8run's output and exit status; `--json` does not convert that output to JSON. Use the `help` subcommand for c8run help, because `--help` belongs to c8ctl. `--dry-run` previews these delegated calls and cluster starts without launching c8run or reading stdin.
+
+`C8RUN_TENANTS_FILE` selects the saved tenant file; `C8RUN_SECRETS_DIR` selects the default secrets directory. Relative values and secret import filenames are resolved against the caller's working directory, including on startup. Without overrides, c8run's per-OS-user defaults apply. Each tenant's secret directory is a sibling under `tenant-secrets/<id>`. c8ctl adds no tenant or secret store of its own.
+
+Tenant IDs contain lowercase letters and digits. With the bundled H2 or other RDBMS storage, IDs are limited to eight characters. Removing and re-adding an ID restores its data, including its existing users. Each enabled tenant Connectors runtime uses another JVM and port. See the [physical-tenant documentation](https://docs.camunda.io/docs/next/self-managed/concepts/physical-tenants/) for prerequisites and limitations.
+
+#### Inspect a physical tenant with a profile
+
+Physical tenants use a distinct REST base path. For a tenant using the default `demo` login:
+
+```bash
+c8 add profile local-sales \
+  --baseUrl=http://localhost:8080/physical-tenants/sales/v2 \
+  --username=demo --password=demo \
+  --exactBaseUrl
+c8 --profile local-sales list process-definitions
+```
+
+Configure the profile's authentication to match a dedicated tenant login when used. Existing `create tenant`, `list tenants`, and `use tenant` commands manage or select **logical tenants inside an engine**; they do not create or select physical engines. Profiles select the physical tenant's API endpoint. No profiles are created or switched automatically by `cluster tenants`.
+
 ### Version aliases
 
 The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Download Center](https://downloads.camunda.cloud/release/camunda/c8run/):
@@ -171,6 +242,14 @@ Cache locations:
 | Windows  | `%LOCALAPPDATA%\c8run\cache\` |
 
 Override the cache directory with the `C8RUN_CACHE_DIR` environment variable.
+
+### Download interruptions
+
+The c8run archive is several hundred MB. If the connection drops, `c8 cluster start` and `c8 cluster install` retry up to three times and resume from where the download stopped when the server supports it. An attempt that receives no data for 60 seconds is aborted and retried. If the download still fails, the error names the cause and suggests what to try:
+
+- Behind a proxy, set `HTTPS_PROXY` together with `NODE_USE_ENV_PROXY=1` (Node.js 22.21+ or 24.5+).
+- Set `C8CTL_C8RUN_DOWNLOAD_URL` to download from a mirror with the same layout as the Camunda Download Center.
+- Add `--verbose` to print HTTP details for each download attempt: request and response headers, timing, throughput, and the full error cause chain.
 
 ## Credential resolution
 
@@ -384,7 +463,7 @@ Opens the GitHub issues page in your browser to report bugs or request features.
 
 ## Update notifications
 
-`c8ctl` checks for newer versions in the background and displays a one-time notification when an update is available. This check is suppressed in CI environments, JSON output mode, and development versions.
+`c8ctl` checks for newer versions at most once an hour, in a detached background process, so an unreachable or blocked npm registry never delays a command. When that check finds an update, the next command displays a one-time notification. The check is suppressed in CI environments and development versions; the notification is also suppressed in JSON output mode.
 
 ## Shell completion
 
@@ -444,6 +523,21 @@ Switch between human-readable text and machine-readable JSON:
 c8 output json    # all commands output JSON
 c8 output text    # back to formatted tables (default)
 ```
+
+These commands save the output preference. Use `--json` to select JSON for one invocation without changing the saved preference.
+
+For scripts that invoke multiple commands, set `C8CTL_OUTPUT_MODE=json` in their environment rather than adding `--json` to every invocation. `C8CTL_OUTPUT_MODE=text` also allows a temporary text override when the saved preference is JSON, without changing session state. An explicit `--json` flag takes precedence over the environment override, which takes precedence over the saved preference.
+
+### Version output
+
+`c8ctl --version` (or `c8ctl -v`) always writes its result to stdout and exits `0`:
+
+| Effective output mode | stdout |
+| :-------------------- | :----- |
+| Text | `c8ctl v<version>` |
+| JSON | `{"status":"info","message":"c8ctl v<version>"}` |
+
+This applies whether JSON mode comes from `--json`, `C8CTL_OUTPUT_MODE`, or the saved preference. The version is primary command output, not a diagnostic, despite the JSON envelope's `status: "info"`. Diagnostics remain on stderr in JSON mode. The version payload is not filtered by `--fields`, and requesting the version does not change the saved preference.
 
 ## Environment variables
 
