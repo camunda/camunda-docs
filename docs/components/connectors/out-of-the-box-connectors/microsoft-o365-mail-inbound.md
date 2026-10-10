@@ -185,6 +185,12 @@ The activation condition is evaluated after the email filter. Use email filters 
 
 When an email matches the filter but does not meet the activation condition, the connector does not trigger and the email is not processed (not marked as read, deleted, or moved). This means the email will be fetched again on the next polling cycle. To change this behavior, enable the **Consume unmatched events** checkbox in the **Activation** section. Learn more about [consuming unmatched events](../use-connectors/inbound.md#consume-unmatched-events).
 
+You can filter on attachment properties without downloading the attachment content, using `attachmentMetadata` (see [Output mapping](#output-mapping)):
+
+```feel
+=(some a in attachmentMetadata satisfies a.contentType = "application/pdf")
+```
+
 ### Correlation
 
 The **Correlation** section allows you to configure message correlation parameters.
@@ -265,6 +271,16 @@ The **Microsoft 365 Email Inbound connector** returns the consumed email message
   "cc": [],
   "bcc": [],
   "receivedDateTime": "2024-01-15T14:30:00Z",
+  "hasAttachments": true,
+  "attachmentMetadata": [
+    {
+      "id": "AAMkAGVmMDEzM...",
+      "name": "invoice.pdf",
+      "contentType": "application/pdf",
+      "size": 125000,
+      "isInline": false
+    }
+  ],
   "attachments": [
     {
       "id": "AAMkAGVmMDEzM...",
@@ -275,6 +291,8 @@ The **Microsoft 365 Email Inbound connector** returns the consumed email message
   ]
 }
 ```
+
+`attachmentMetadata` is resolved during polling, before the activation condition is evaluated and before any attachment content is downloaded, so it can be used to filter on file name, type, or size without the cost of downloading the attachment itself. It also includes inline attachments (such as embedded signature images) — use `isInline` to exclude those. `attachments` (the downloaded document references) stays empty until the activation condition matches.
 
 You can use an output mapping to map the response:
 
@@ -318,7 +336,7 @@ To monitor multiple folders, create separate connector instances with different 
 
 ### How are email attachments handled?
 
-Email attachments are automatically fetched and stored using [Camunda document handling](/components/document-handling/getting-started.md). The attachment metadata is included in the connector output (see [Output Mapping](#output-mapping)), and each attachment is available as a document reference that you can use in subsequent process steps.
+Email attachments are automatically fetched and stored using [Camunda document handling](/components/document-handling/getting-started.md). Lightweight attachment metadata is resolved before download and included as `attachmentMetadata` in the connector output (see [Output mapping](#output-mapping)), and each downloaded attachment is available as a document reference in `attachments` that you can use in subsequent process steps.
 
 For example, to pass an attachment to another connector or download it, use the document reference from the `attachments` array:
 
