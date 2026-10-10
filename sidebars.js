@@ -1936,6 +1936,7 @@ module.exports = {
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
+                "self-managed/deployment/helm/configure/enabling-persistence",
                 {
                   type: "category",
                   label: "Registry and images",
