@@ -72,6 +72,10 @@ For this walkthrough, the new tenant is named `riskprod`, reusing the existing K
 
 ## Configure
 
+:::tip Local development and evaluation
+To try Physical Tenants on your machine without Kubernetes, use Camunda 8 Run, directly or through c8ctl. See [configure Physical Tenants in Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#configure-physical-tenants). The rest of this guide configures Physical Tenants in a Kubernetes deployment with Helm.
+:::
+
 Add the following to your Helm values, either inline under `orchestration.configuration` or as a separate file under `orchestration.extraConfiguration`. Both approaches, and the full property list, are covered in [configure Physical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-physical-tenants.md). This example assumes the base `camunda.security.authentication` block for `default` is already in your values file. The minimum needed is storage and an assigned identity provider:
 
 <Tabs groupId="storage-backend" queryString>
