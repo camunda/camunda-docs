@@ -76,56 +76,17 @@ See [reliability testing](https://github.com/camunda/camunda/blob/main/docs/test
 
 ## Baseline resource configuration
 
-<Tabs groupId="optimize" defaultValue="with-optimize" values={
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" values={
 [
-{ label: 'Without Optimize', value: 'without-optimize', },
-{ label: 'With Optimize', value: 'with-optimize', },
+{ label: 'Elasticsearch', value: 'elasticsearch', },
+{ label: 'OpenSearch', value: 'opensearch', },
 ]}>
 
-<TabItem value="without-optimize">
+<TabItem value="elasticsearch">
 
-The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch.
+This baseline includes Optimize, which is the main driver of Elasticsearch sizing in this configuration. Its importer reads from and writes to Elasticsearch indices in addition to the primary export traffic. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
 
-| Component                 |                     | Request | Limit |
-| ------------------------- | ------------------- | ------: | ----: |
-| **Orchestration Cluster** |                     |         |       |
-| Brokers                   | 3                   |         |       |
-| Partitions                | 3                   |         |       |
-| Replication factor        | 3                   |         |       |
-|                           | vCPU \[cores\]      |       3 |     3 |
-|                           | Memory \[GB\]       |       4 |     4 |
-|                           | Disk \[GB\]         |         |    64 |
-| **Connectors**            |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.2 |   0.2 |
-|                           | Memory limit \[GB\] |   0.512 |     1 |
-| **Identity**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.6 |     2 |
-|                           | Memory limit \[GB\] |     0.4 |     2 |
-| **Keycloak**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |       1 |     2 |
-|                           | Memory limit \[GB\] |       1 |     2 |
-| **Elastic**               |                     |         |       |
-| #statefulset              | 3                   |         |       |
-|                           | vCPU \[cores\]      |       7 |     7 |
-|                           | Memory limit \[GB\] |       8 |     8 |
-|                           | Disk request \[GB\] |         |   256 |
-
-:::note
-Elasticsearch is deliberately overprovisioned in this configuration. Our test harness uses the same Elasticsearch sizing regardless of whether Optimize is enabled, ensuring that Elasticsearch does not become a bottleneck during stress testing. If you do not use Optimize, you can generally start with fewer resources (see [Elasticsearch scaling](#elasticsearch-scaling)) and scale up as your data volume grows.
-
-Identity and Keycloak, including Keycloak’s bundled PostgreSQL database, which is not itemized here, are included because our test harness always authenticates through OIDC, reflecting a production-like setup. If you plan to use an external identity provider instead of the bundled Keycloak, you can omit this row entirely.
-:::
-
-</TabItem>
-
-<TabItem value="with-optimize">
-
-When Optimize is enabled, additional resources are needed, especially for Elasticsearch, because Optimize's importer reads from and writes to Elasticsearch indices. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for more details.
-
-The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch.
+The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch.
 
 | Component                 |                     | Request | Limit |
 | ------------------------- | ------------------- | ------: | ----: |
@@ -159,16 +120,57 @@ The following configuration contains the exact Helm values that Camunda uses in 
 |                           | Disk request \[GB\] |         |   256 |
 
 :::note
-The Elasticsearch sizing above is identical to that in the configuration without Optimize. Our test harness uses the same Elasticsearch sizing regardless of whether Optimize is enabled, ensuring that Elasticsearch does not become a bottleneck during stress testing.
-
-The same applies to Identity and Keycloak. You can omit these components if you plan to use an external identity provider.
+If you don’t use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
 :::
 
-The Orchestration Cluster, Connectors, and Optimize values match the exact Helm values used in our continuous, realistic-load tests. Retention is set to one day for the Camunda Exporter and three days for the legacy Elasticsearch exporter, where still applicable. This gives the Optimize importer time to catch up before the data is removed. See [Elasticsearch scaling](#elasticsearch-scaling) for information about how retention affects disk sizing. Day-based metrics assume that the load is distributed evenly over 24 hours.
+</TabItem>
+
+<TabItem value="opensearch">
+
+OpenSearch has the same resource profile as Elasticsearch in our continuous load tests. The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for OpenSearch.
+
+| Component                 |                     | Request | Limit |
+| ------------------------- | ------------------- | ------: | ----: |
+| **Orchestration Cluster** |                     |         |       |
+| Brokers                   | 3                   |         |       |
+| Partitions                | 3                   |         |       |
+| Replication factor        | 3                   |         |       |
+|                           | vCPU \[cores\]      |       3 |     3 |
+|                           | Memory \[GB\]       |       4 |     4 |
+|                           | Disk \[GB\]         |         |    64 |
+| **Connectors**            |                     |         |       |
+| #                         | 1                   |         |       |
+|                           | vCPU \[cores\]      |     0.2 |   0.2 |
+|                           | Memory limit \[GB\] |   0.512 |     1 |
+| **Identity**              |                     |         |       |
+| #                         | 1                   |         |       |
+|                           | vCPU \[cores\]      |     0.6 |     2 |
+|                           | Memory limit \[GB\] |     0.4 |     2 |
+| **Keycloak**              |                     |         |       |
+| #                         | 1                   |         |       |
+|                           | vCPU \[cores\]      |       1 |     2 |
+|                           | Memory limit \[GB\] |       1 |     2 |
+| **Optimize**              |                     |         |       |
+| #                         | 1                   |         |       |
+|                           | vCPU \[cores\]      |     0.6 |     2 |
+|                           | Memory limit \[GB\] |       1 |     2 |
+| **OpenSearch**            |                     |         |       |
+| #statefulset              | 3                   |         |       |
+|                           | vCPU \[cores\]      |       7 |     7 |
+|                           | Memory limit \[GB\] |       8 |     8 |
+|                           | Disk request \[GB\] |         |   256 |
+
+:::note
+OpenSearch is expected to experience a similar impact from enabling Optimize as Elasticsearch does. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the measured Elasticsearch ratios. However, this impact has not been measured separately for OpenSearch, so validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
+:::
 
 </TabItem>
 
 </Tabs>
+
+Identity and Keycloak, including Keycloak’s bundled PostgreSQL database, which is not itemized here, are included in each table above because our test harness always authenticates through OIDC, reflecting a production-like setup. If you plan to use an external identity provider instead of the bundled Keycloak, you can omit these rows entirely.
+
+In our sizing, retention is set to one day for the Camunda Exporter and three days for the legacy exporter, where applicable. This gives the Optimize importer enough time to catch up before the data is removed. See [Elasticsearch scaling](#elasticsearch-scaling) for information about how retention affects disk sizing. The daily metrics above assume that the load is distributed evenly over 24 hours.
 
 ## Primary storage
 
@@ -363,18 +365,12 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 
 ## Secondary storage considerations
 
-The resource tables above assume Elasticsearch as the secondary storage backend.
+The [baseline resource configuration](#baseline-resource-configuration) above provides a sizing table for each secondary storage backend: Elasticsearch and OpenSearch.
 
-All Zeebe partitions currently export data to the same Elasticsearch indices. Write throughput for an index scales with the number of primary shards, not the number of Elasticsearch nodes. Scaling Zeebe partitions does not automatically reshard the indices. Reassess the shard count for your indices when scaling the number of partitions. See the [Elasticsearch shards documentation](/self-managed/concepts/secondary-storage-management.md#shards).
+[Dynamically scaling partitions](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) scales the primary storage, but not the secondary storage, so manual steps are necessary:
 
-If you are using a different backend:
-
-- **OpenSearch:** Similar resource profile to Elasticsearch. The tables above generally apply, including the index-sharding consideration.
-- **RDBMS (PostgreSQL, available from 8.9):** Replace the Elasticsearch resource block with appropriately sized PostgreSQL resources. Adjust throughput expectations **downward by approximately 30%** compared to the Elasticsearch-based tables. Unlike Elasticsearch, RDBMS scales primarily **vertically** (a larger instance) rather than horizontally, so plan your initial sizing with more headroom, as adding capacity later is more disruptive.
-
-:::note
-Optimize is not supported with RDBMS. If you need Optimize, you must also run Elasticsearch alongside your RDBMS.
-:::
+- All Zeebe partitions export data to the same Elasticsearch or OpenSearch indices.
+- Write throughput for an index scales with the number of primary shards, not the number of nodes. Reassess the shard count for your indices when scaling the number of partitions. See the [Elasticsearch shards documentation](/self-managed/concepts/secondary-storage-management.md#shards).
 
 See [Secondary storage](sizing-your-environment.md#secondary-storage) for more details.
 

@@ -153,7 +153,7 @@ The default `minimum-age` of `30d` provides sufficient headroom. If you reduced 
 
 **Symptom:** If Optimize history cleanup runs on schedule but consistently completes in zero seconds against a large dataset, orphaned `ACTIVE` documents are likely accumulating. See [diagnosing stalled cleanup](/self-managed/components/optimize/configuration/history-cleanup.md#diagnosing-stalled-cleanup).
 
-The sizing guidance for [Self-Managed](./sizing-self-managed.md#baseline-resource-configuration) provides configurations with and without Optimize to help you plan accordingly.
+The sizing guidance for [Self-Managed](./sizing-self-managed.md#baseline-resource-configuration) provides a baseline configuration, including Optimize's resource impact, for each secondary storage backend to help you plan accordingly.
 
 ### Latency and cycle time
 
@@ -258,12 +258,11 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 
 - A different storage paradigm: a relational database instead of a document store. See the full list of [supported databases](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#supported-rdbms).
 - A different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
-- Write throughput is approximately **70% of Elasticsearch** on equivalent hardware.
+- Write throughput is approximately **70% of Elasticsearch** on equivalent hardware. See [RDBMS benchmarking results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md) for the full methodology and caveats.
 - **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
-- **Scales primarily vertically** rather than horizontally like Elasticsearch. Plan initial sizing with more headroom, as adding capacity is more disruptive.
+- **Scales primarily vertically** rather than horizontally like Elasticsearch, since its schema has no table partitioning and each physical tenant writes through a single PostgreSQL connection. Plan initial sizing with more headroom, as adding capacity is more disruptive.
 - Ideal for organizations that already operate a supported RDBMS at scale and want to avoid adding Elasticsearch to their infrastructure.
   <!-- To be validated - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated). -->
-  <!-- TODO: Link to RDBMS benchmark results page once PR #8159 is merged -->
 
 ### Throughput
 
