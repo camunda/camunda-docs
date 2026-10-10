@@ -148,8 +148,8 @@ graph TD
     OCD -. "exported records" .-> OD
     OCP -. "exported records" .-> OP1
     OCP -. "exported records" .-> OP2
-    OCD -- "authentication" --> MI
-    OCP -- "authentication" --> MI
+    OCD -- "authentication" --> IdP
+    OCP -- "authentication" --> IdP
     OD -- "authentication" --> MI
     OP1 -- "authentication" --> MI
     OP2 -- "authentication" --> MI
@@ -180,7 +180,7 @@ For configuration details, see:
 - [Connect Orchestration Cluster to an OIDC provider](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc)
 - [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
 
-The Orchestration Cluster can be configured to authenticate with OIDC by connecting to the Management Identity service deployed in this namespace.
+The Orchestration Cluster authenticates directly with the OIDC provider. It doesn't need Management Identity to authenticate users or API clients.
 
 #### Orchestration Cluster namespace
 
