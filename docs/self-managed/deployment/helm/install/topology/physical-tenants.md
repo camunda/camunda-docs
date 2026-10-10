@@ -2,7 +2,7 @@
 id: topology-physical-tenants
 sidebar_label: "Configure Physical Tenants across releases"
 title: "Configure Physical Tenants across releases"
-description: "Map Physical Tenants across the Hub, Orchestration Cluster, and Optimize releases, isolate their index prefixes, and operate tenant lifecycle changes in order."
+description: "Map Physical Tenants across the Hub, Orchestration Cluster, and Optimize releases, and operate tenant lifecycle changes in order."
 ---
 
 A Physical Tenant spans three releases: it's declared in an Orchestration Cluster release, mapped in the Hub release, and served by its own Optimize release.
@@ -88,27 +88,13 @@ global:
 
 Give every Optimize release its own OIDC client ID, audience, role name, redirect URL, and secret. Set the same client ID, audience, redirect URL, and secret on that tenant's Optimize release under `optimize.security.authentication.oidc`. Setting a dedicated `roleName` avoids adding the audience to the shared `Optimize` role.
 
-A `physicalTenants` entry registers the tenant's Optimize client and role in Management Identity. It doesn't add the tenant's Optimize to the Camunda Hub cluster inventory.
+A `physicalTenants` entry registers the tenant's Optimize client and role in Management Identity. It also adds the tenant's Optimize to the Camunda Hub cluster inventory, using its `webappUrl`, or its `redirectUrl` when `webappUrl` isn't set.
 
 A distinct `roleName` isolates the Optimize role per tenant, but it doesn't isolate Optimize's logical tenants, which are a separate mechanism. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants) if you reuse the same logical tenant ID across Physical Tenants behind one shared Management Identity.
 
-## Isolate every index prefix family
+## Isolate the index prefixes
 
-Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Assign unique prefixes for every cluster and tenant.
-
-| Prefix family                     | Configuration                                                                                                                                                     | Requirement                                                         |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Orchestration application indices | Default: `orchestration.index.prefix`. Physical Tenant: `camunda.physical-tenants.<id>.data.secondary-storage.<backend>.index-prefix`                             | Unique per cluster and tenant                                       |
-| Legacy exporter writer            | Default: `orchestration.exporters.zeebe.index.prefix`, or the exporter assigned to an explicit `default` entry. Physical Tenant: its exporter `args.index.prefix` | Unique per cluster and tenant                                       |
-| Optimize reader                   | `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`                                                                                 | Must exactly equal that tenant's Legacy exporter writer prefix      |
-| Optimize application indices      | `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX` in `optimize.env`                                   | Unique per Optimize release, and different from every writer prefix |
-
-Two failure modes follow from getting this wrong, and neither announces itself:
-
-- **Reusing a prefix** mixes one cluster's or tenant's records into another's Operate, Tasklist, or Optimize data.
-- **A writer and reader mismatch** starts Optimize against the wrong or an empty record set. Similar-looking prefixes are not sufficient; the values must be equal.
-
-See [configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
+Every tenant needs its own writer, reader, and Optimize application prefixes, and each reader prefix must equal its writer prefix. See [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 
 ## Override the secret store per tenant
 

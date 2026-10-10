@@ -13,7 +13,7 @@ When creating a new topology, install the Hub release before its Orchestration C
 
 A Hub release runs Camunda Hub and Management Identity, and nothing else. It always uses the 8.10 chart, even when it manages Orchestration Clusters on older chart versions. Upgrading from 8.9? See [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md).
 
-After you [create `hub-values.yaml`](#create-hub-valuesyaml), the release role it sets, `global.topology.mode: hub`, suppresses the chart's Orchestration Cluster, Optimize, and Connectors workloads, so you don't configure them here. The chart checks the following:
+After you [create `hub-values.yaml`](#create-hub-valuesyaml), the release role it sets, `global.topology.mode: hub`, suppresses the chart's Orchestration Cluster, Optimize, and Connectors workloads, so you don't configure them here. The release requires the following:
 
 | Requirement                                           | Reason                                                             |
 | ----------------------------------------------------- | ------------------------------------------------------------------ |
@@ -21,7 +21,7 @@ After you [create `hub-values.yaml`](#create-hub-valuesyaml), the release role i
 | OIDC authentication                                   | Hub topology connections are represented with OIDC bearer tokens   |
 | The only release declaring `global.topology.clusters` | One authoritative inventory prevents client and endpoint drift     |
 
-The chart fails the render with a `[camunda][error]` message if any of these is missing.
+The chart fails the render with a `[camunda][error]` message if `identity.enabled: true` or OIDC authentication is missing. It doesn't check that `global.topology.clusters` is set. Without clusters, Camunda Hub lists no Orchestration Clusters.
 
 ## The cluster record
 

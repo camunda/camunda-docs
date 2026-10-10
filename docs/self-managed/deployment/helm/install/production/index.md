@@ -1,13 +1,15 @@
 ---
 id: index
-title: Install Camunda for production with Helm
-sidebar_label: Production install
-description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
+title: Harden Camunda Helm releases for production
+sidebar_label: Production hardening
+description: Apply production-ready Helm configuration to every Camunda 8 Self-Managed release, whatever its topology role.
 ---
 
-This is a **scenario-based, production-focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient baseline for most production use cases.
+This guide describes production hardening for the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It applies to every release in your deployment, whatever role the release has. It provides a resilient baseline for most production use cases.
 
-This is a single production install guide with database options in one flow:
+To install a split topology, use the guide for each release role. See [choose your topology](../index.md#choose-your-topology). To install a single `combined` release, see [install a combined release](#install-a-combined-release).
+
+The guide covers these database options:
 
 - **Non-SQL secondary storage** (Elasticsearch/OpenSearch)
 - **RDBMS secondary storage** (for supported components)
@@ -50,7 +52,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/self-managed/reference-architecture/kubernetes.md#kubernetes).
 
-This page describes a single production release. For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases, with one Optimize release per Physical Tenant. See [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases, with one Optimize release per Physical Tenant. See [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
 Before you write a production values file, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md) for which settings belong in `values.yaml` and which belong in a component's `extraConfiguration`.
 
@@ -58,43 +60,29 @@ Before you write a production values file, see [Helm and application configurati
 
 After following the [prerequisites](#prerequisites), you should have a Kubernetes cluster ready with `kubectl` and the `helm` CLI installed.
 
-### Namespace setup
+### Install the releases
 
-This example creates a Hub release and an Orchestration Cluster release in separate namespaces. If you already have a Hub serving other environments, you can connect the new Orchestration Cluster to it instead. Create the namespaces you need:
+To install a split topology, see [choose your topology](../index.md#choose-your-topology). Then apply the settings on this page by role: each setting belongs only in the values file of the release that runs the component it configures. For example, the Hub and orchestration releases use separate Ingress hosts.
+
+For the prerequisites, namespaces, Secrets, and network policies of the split topology, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+
+#### Install a combined release
+
+A `combined` release deploys every enabled component from one values file. Write `values.yaml` with the production settings on this page, then install the chart:
 
 ```bash
-kubectl create namespace hub
-kubectl create namespace orchestration
+# Pick a 15.x chart version from https://helm.camunda.io/camunda-platform/version-matrix/
+export HELM_CHART_VERSION=<15.x-chart-version>
+helm repo add camunda https://helm.camunda.io
+helm repo update
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
+  --namespace camunda --create-namespace \
+  --values values.yaml
 ```
-
-- **Namespace `hub`:** We will install [Camunda Hub](/components/hub/index.md) and [Management Identity](/self-managed/components/management-identity/overview.md).
-
-- **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), [Connectors](/self-managed/components/connectors/overview.md) and [Optimize](/self-managed/components/optimize/overview.md).
-
-Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
 :::note
 For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#camunda-hub-vs-orchestration-cluster).
 :::
-
-### Install the Helm chart
-
-As there will be a Helm deployment in each namespace, create your own `hub-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
-
-Run the Hub installation command if you're creating a new Hub release. For an existing Hub, update its cluster inventory and install only the new orchestration release:
-
-```bash
-# This will add our chart repository so you can pull from it
-helm repo add camunda https://helm.camunda.io
-# This will update the chart repository. Please make sure to run this command before every install or upgrade
-helm repo update
-# This will install the latest Camunda Helm chart in the Hub namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n hub \
-    --values hub-values.yaml
-# This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n orchestration \
-    --values orchestration-values.yaml
-```
 
 ### Ingress TLS setup
 
@@ -112,10 +100,10 @@ The following is an example `values.yaml` configuration using the example Ingres
 
 ```yaml
 global:
+  host: camunda.example.com
   ingress:
     enabled: true
     className: nginx
-    host: camunda.example.com
     tls:
       enabled: true
       secretName: camunda-platform
@@ -255,7 +243,7 @@ For more information on connecting to external databases, the following guides a
 At this point, you should be able to connect to your platform through HTTPS, correctly authenticate users using your configured identity provider, and have connected to external databases such as Amazon OpenSearch and Amazon Aurora PostgreSQL.
 :::
 
-The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `hub-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
+The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections add settings at the component level. Add each setting to the values file of the release that runs the component.
 
 ### Elasticsearch/OpenSearch index retention
 
@@ -577,7 +565,7 @@ The following resources and configuration options are important to keep in mind 
 
 ## Create a production `values.yaml`
 
-Use separate Helm values files and releases when you deploy Camunda components across namespaces. The Hub release contains Camunda Hub and Management Identity, and the orchestration release contains the Orchestration Cluster and Connectors. Optimize runs in its own release, one per Physical Tenant.
+In the split topology, each release has its own values file. The Hub release contains Camunda Hub and Management Identity. The orchestration release contains the Orchestration Cluster and Connectors. Optimize runs either in the orchestration release or in its own release, one for each Physical Tenant. A `combined` release has a single values file that holds the settings for every component it enables.
 
 The [deployment topology install guide](/self-managed/deployment/helm/install/topology/index.md) provides complete 8.10 examples for every release role. It also explains how to:
 

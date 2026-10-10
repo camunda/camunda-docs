@@ -36,7 +36,7 @@ A single `combined` release remains supported and remains the chart default. Use
 8.7, 8.8, and 8.9 charts older than the minimum versions above have no `global.topology` key. They silently ignore `global.topology.mode` and deploy a combined release, so check the chart version before you set the role.
 :::
 
-The chart validates each role's requirements at render time and fails with a `[camunda][error]` message naming the missing value, so a misconfigured topology doesn't reach the cluster. For the per-role requirements, see the installation pages linked in the Role column of the table above.
+The chart validates some of each role's requirements at render time and fails with a `[camunda][error]` message naming the missing value. It doesn't validate all of them, so review the per-role requirements on the installation pages linked in the Role column of the table above before you install.
 
 ## Install order
 

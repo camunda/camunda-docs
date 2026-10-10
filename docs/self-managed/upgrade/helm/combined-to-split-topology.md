@@ -2,10 +2,10 @@
 id: combined-to-split-topology
 sidebar_label: Move to the split topology
 title: Move from a combined release to the split topology
-description: Plan and execute the move from a single combined Camunda 8.10 Helm release to separate Hub, Orchestration Cluster, and Optimize releases.
+description: Plan and execute the move from a single combined Camunda 8.10 Helm release to separate Hub and Orchestration Cluster releases, with optional separate Optimize releases.
 ---
 
-Move an existing single-release Camunda 8.10 deployment to the split topology: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
+Move an existing single-release Camunda 8.10 deployment to the split topology: one Hub release and one release per Orchestration Cluster. If the combined release runs Optimize, Optimize either stays in the orchestration release, or moves to one Optimize release per Physical Tenant.
 
 This is a topology change, not a version upgrade. It doesn't change any component version, and it isn't required. A `combined` release remains both supported and the chart default.
 
@@ -39,17 +39,7 @@ This procedure applies only to releases on the 8.10 chart. It doesn't apply to r
 
 The Hub release takes over the Management Identity and Camunda Hub databases the combined release already uses, so those databases must live outside the Helm chart before you start. Camunda 8.10 removes the bundled Bitnami PostgreSQL subcharts.
 
-If your release still runs Management Identity or Camunda Hub against a bundled Bitnami PostgreSQL (`identityPostgresql` or `webModelerPostgresql`), do the following for each database:
-
-1. Migrate that data to a database the chart doesn't manage. This can be your own deployment of Bitnami PostgreSQL, a managed cloud database, or any other supported PostgreSQL. See [migrate from Bitnami charts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
-2. Point the combined release at the external database, and confirm Management Identity or Camunda Hub works against it.
-3. Only then remove the bundled database.
-
-:::danger Protect the bundled database's volume
-Before you remove a bundled PostgreSQL, check the reclaim policy of its PersistentVolume and the `persistentVolumeClaimRetentionPolicy` of its StatefulSet. If either deletes the volume when the StatefulSet or its PVC is removed, you lose its data: for Management Identity, users, groups, roles, and permissions; for Camunda Hub, projects, files, and settings. Set the PersistentVolume's `persistentVolumeReclaimPolicy` to `Retain`, and take a verified backup, before you disable the subchart.
-:::
-
-The Hub release's Management Identity and Camunda Hub then use those external databases. See [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md#remove-keys-rejected-by-chart-15x).
+If you still use the bundled databases, you can't upgrade to 8.10. Migrate them on 8.9 first. See [migrate off the bundled PostgreSQL databases](/self-managed/upgrade/helm/890-to-8100.md#migrate-off-the-bundled-postgresql-databases).
 
 ## What moves and what doesn't
 
@@ -84,9 +74,11 @@ Plan a maintenance window. From step 2 until the Hub release is ready in step 3,
 
 ### Step 1: Inventory what the combined release owns
 
-From your current values file and cluster, record:
+First, if the combined release runs Optimize, decide where Optimize runs after the move: in the orchestration release, or in one Optimize release per Physical Tenant. This choice sets how many releases, OIDC clients, Secrets, and prefixes you plan for. Use separate releases if you use Physical Tenants.
 
-- Every index prefix in use. See [isolate every index prefix family](/self-managed/deployment/helm/install/topology/physical-tenants.md#isolate-every-index-prefix-family).
+Then, from your current values file and cluster, record:
+
+- Every index prefix in use. See [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 - Every OIDC client ID, audience, redirect URL, and role, and which secret holds each client secret.
 - The Management Identity and Camunda Hub database connection details. The Hub release reuses these databases.
 - The release name, namespace, and Orchestration Cluster context paths and hostnames.
@@ -107,11 +99,12 @@ Run `helm upgrade` on the existing release, without changing its name or namespa
 
 This `helm upgrade` restarts the Orchestration Cluster, Connectors, and Optimize pods even though their images don't change. Their configuration changes, for example the Management Identity service URL, and they read it only at startup. Each workload restarts according to its update strategy:
 
-| Workload                                   | Update strategy                                                                     | Effect during the restart                                                                                                                                                                                                                                                                                                                                          |
-| :----------------------------------------- | :---------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Brokers, the `<release>-zeebe` StatefulSet | Rolling update, one broker at a time, each waiting for the previous one to be ready | With a replication factor of 1 or 2, each partition with a replica on the restarting broker loses quorum and is unavailable until that broker is ready again. With one broker, that means the whole cluster. With a replication factor of 3 or more, partitions keep quorum, but individual client requests can fail while leadership moves. Retry failed requests |
-| Connectors                                 | Rolling update. The new pod starts before the old one stops                         | Stays available                                                                                                                                                                                                                                                                                                                                                    |
-| Optimize                                   | `Recreate`, with one replica                                                        | Unavailable until the new pod is ready                                                                                                                                                                                                                                                                                                                             |
+| Workload                                                        | Update strategy                                                                     | Effect during the restart                                                                                                                                                                                                                                                                                                                                          |
+| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Brokers, the `<release>-zeebe` StatefulSet                      | Rolling update, one broker at a time, each waiting for the previous one to be ready | With a replication factor of 1 or 2, each partition with a replica on the restarting broker loses quorum and is unavailable until that broker is ready again. With one broker, that means the whole cluster. With a replication factor of 3 or more, partitions keep quorum, but individual client requests can fail while leadership moves. Retry failed requests |
+| Connectors                                                      | Rolling update. The new pod starts before the old one stops                         | Stays available                                                                                                                                                                                                                                                                                                                                                    |
+| Optimize, kept in this release                                  | `Recreate`, with one replica                                                        | Unavailable until the new pod is ready                                                                                                                                                                                                                                                                                                                             |
+| Optimize, moving to its own release (`optimize.enabled: false`) | Removed, no restart                                                                 | Unavailable until its own release runs in step 5                                                                                                                                                                                                                                                                                                                   |
 
 The brokers restart with the same volumes, so process state is kept.
 
@@ -202,10 +195,11 @@ Roll back before step 6. Once you've deleted Identity objects, recovery is manua
 
 ## Verify the move
 
-- Every pod is ready in all three releases.
+- Every pod is ready in every release.
 - Camunda Hub lists the Orchestration Cluster, and it reports healthy.
 - Deploying a process through Hub reaches the cluster.
 - Existing process instances are still visible in Operate, and workers still poll and complete jobs.
-- Optimize shows process data, which confirms its reader prefix matches the exporter writer prefix.
+- If Optimize runs, start a new process instance after the move and confirm that its data appears in Optimize. Historical data alone doesn't prove it, because it can come from the old prefix. This shows that the reader prefix is equal to the current exporter writer prefix.
+- If Optimize moved to its own release, your existing reports, dashboards, and settings are still there. This shows that its application index prefix is unchanged. Process data alone doesn't prove it.
 - Only one Management Identity is running, in the Hub release.
 - No release logs authentication errors against an OIDC client that no longer exists.
