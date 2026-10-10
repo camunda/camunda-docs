@@ -9,6 +9,21 @@ mdx:
 
 ## Properties
 
+### \_\_camundaComponent?
+
+```ts
+optional __camundaComponent?: "CamundaCore" | "CamundaClient";
+```
+
+**`Internal`**
+
+Explicit component discriminator for support diagnostics. Set only by SDK-internal
+subclasses: `CamundaClientBase` passes `'CamundaClient'` so the construction log names
+the real component even when a consumer subclasses the public `CamundaCore` (where
+`new.target !== CamundaCore` alone could not distinguish core-subclass from client).
+
+---
+
 ### clock?
 
 ```ts
