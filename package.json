@@ -32,6 +32,7 @@
     "api:generate:camunda": "npm run api:generate camunda",
     "api:generate:hubsm": "npm run api:generate hubsm",
     "api:generate:hubsaas": "npm run api:generate hubsaas",
+    "api:generate:cluster": "npm run api:generate cluster && npm run api:generate clusterexporters && npm run api:generate clusterupgradereadiness && npm run api:generate clusterbackups",
     "config-reference:download": "node ./config-reference/generate-config-reference.js download",
     "config-reference:download:camunda-spring-boot-starter": "npm run config-reference:download camunda-spring-boot-starter",
     "config-reference:download:camunda-spring-boot-starter:8.8": "npm run config-reference:download:camunda-spring-boot-starter 8.8",

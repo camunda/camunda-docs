@@ -1,0 +1,907 @@
+---
+id: get-information-of-a-runtime-backup
+title: "Get information of a runtime backup"
+description: "A detailed information of the backup with the give backup id. Covers every physical tenant"
+sidebar_label: "Get information of a runtime backup"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/management-api/specifications/backups/backup-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get information of a runtime backup"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/backupRuntime/{backupIdOrPrefix}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+A detailed information of the backup with the give backup id. Covers every physical tenant
+unless `physicalTenant` narrows it to one.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "backupIdOrPrefix",
+      required: true,
+      in: "path",
+      description:
+        "A prefix of ids ending with '*', or a full backup id. Defaults to '*', matching all backup ids.",
+      schema: {
+        oneOf: [
+          {
+            title: "Backup ID",
+            description:
+              "The ID of the backup. The ID of the backup must be a positive numerical value. As backups\nare logically ordered by their IDs (ascending), each successive backup must use a higher\nID than the previous one.\n",
+            type: "integer",
+            format: "int64",
+            example: 1,
+            minimum: 0,
+          },
+          {
+            title: "Backup ID Prefix",
+            description:
+              "Prefix of a backup id, followed by an '*' as wildcard to match any backups with a backup ID\nstarting with the given prefix.\n",
+            type: "string",
+            pattern: "^\\d*\\*$",
+            example: "17567*",
+          },
+        ],
+      },
+    },
+    {
+      name: "physicalTenant",
+      required: false,
+      in: "query",
+      description:
+        "Narrows the operation to the given physical tenant. When omitted, the operation covers every\nphysical tenant of the cluster, which on a single-tenant cluster is the one `default` tenant\nand therefore unchanged behavior.\n",
+      schema: {
+        title: "Physical Tenant ID",
+        description:
+          "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+        type: "string",
+        example: "tenanta",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "Status of a single backup or list of statuses when querying for multiple backups\n",
+      content: {
+        "application/json": {
+          schema: {
+            oneOf: [
+              {
+                title: "List of backups",
+                description:
+                  "List of backups with their state and additional info",
+                type: "array",
+                items: {
+                  title: "Backup Info",
+                  description:
+                    "Detailed status of a backup. The aggregated state is computed from the backup state of each partition as:\n- If the backup of all partitions is in state 'COMPLETED', then the overall state is 'COMPLETED'.\n- If one is 'FAILED', then the overall state is 'FAILED'.\n- Otherwise, if one is 'DOES_NOT_EXIST', then the overall state is 'INCOMPLETE'.\n- Otherwise, if one is 'IN_PROGRESS', then the overall state is 'IN_PROGRESS'.\n",
+                  type: "object",
+                  properties: {
+                    backupId: {
+                      readOnly: true,
+                      allOf: [
+                        {
+                          title: "Backup ID",
+                          description:
+                            "The ID of the backup. The ID of the backup must be a positive numerical value. As backups\nare logically ordered by their IDs (ascending), each successive backup must use a higher\nID than the previous one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 0,
+                        },
+                      ],
+                    },
+                    state: {
+                      readOnly: true,
+                      allOf: [
+                        {
+                          title: "Runtime Backup State",
+                          description: "The state of the backup.",
+                          type: "string",
+                          enum: [
+                            "DOES_NOT_EXIST",
+                            "IN_PROGRESS",
+                            "COMPLETED",
+                            "FAILED",
+                            "INCOMPLETE",
+                            "INCOMPATIBLE",
+                            "DELETED",
+                          ],
+                          example: "IN_PROGRESS",
+                        },
+                      ],
+                    },
+                    failureReason: {
+                      description:
+                        "Reason for failure if the state is 'FAILED'",
+                      type: "string",
+                      example: "",
+                    },
+                    details: {
+                      readOnly: true,
+                      description:
+                        "Detailed list of the status of the backup per partition. It should always contain all\npartitions known to the cluster.\n",
+                      type: "array",
+                      items: {
+                        title: "Partition's Backup Info",
+                        description:
+                          "Detailed info of the backup for a given partition.",
+                        type: "object",
+                        properties: {
+                          partitionId: {
+                            readOnly: true,
+                            allOf: [
+                              {
+                                title: "Partition ID",
+                                description:
+                                  "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                                type: "integer",
+                                format: "int32",
+                                minimum: 1,
+                                example: 3,
+                              },
+                            ],
+                          },
+                          physicalTenantId: {
+                            readOnly: true,
+                            description:
+                              "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                            allOf: [
+                              {
+                                title: "Physical Tenant ID",
+                                description:
+                                  "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                                type: "string",
+                                example: "tenanta",
+                              },
+                            ],
+                          },
+                          state: {
+                            readOnly: true,
+                            allOf: [
+                              {
+                                title: "Runtime Backup State",
+                                description: "The state of the backup.",
+                                type: "string",
+                                enum: [
+                                  "DOES_NOT_EXIST",
+                                  "IN_PROGRESS",
+                                  "COMPLETED",
+                                  "FAILED",
+                                  "INCOMPLETE",
+                                  "INCOMPATIBLE",
+                                  "DELETED",
+                                ],
+                                example: "IN_PROGRESS",
+                              },
+                            ],
+                          },
+                          failureReason: {
+                            description: "Failure reason if stats is 'FAILED'",
+                            type: "string",
+                            example: "",
+                          },
+                          createdAt: {
+                            description:
+                              "The timestamp at which the backup was started on this partition.",
+                            readOnly: true,
+                            type: "string",
+                            format: "date-time",
+                            example: "2022-09-15T13:10:38.176514094Z",
+                          },
+                          lastUpdatedAt: {
+                            description:
+                              "The timestamp at which the backup was last updated on this partition, e.g. changed\nstate from IN_PROGRESS to COMPLETED.\n",
+                            readOnly: true,
+                            type: "string",
+                            format: "date-time",
+                            example: "2022-09-15T13:10:38.176514094Z",
+                          },
+                          snapshotId: {
+                            description:
+                              "The ID of the snapshot which is included in this backup.",
+                            type: "string",
+                            readOnly: true,
+                            example: "238632143-55-690906332-690905294",
+                          },
+                          firstLogPosition: {
+                            description:
+                              "The first log position included in this backup.",
+                            type: "integer",
+                            format: "int64",
+                            readOnly: true,
+                            example: 5,
+                          },
+                          checkpointPosition: {
+                            description:
+                              "The position of the checkpoint for this backup.",
+                            type: "integer",
+                            format: "int64",
+                            readOnly: true,
+                            example: 10,
+                          },
+                          brokerId: {
+                            description:
+                              "The ID of the broker from which the backup was taken for this partition.",
+                            type: "integer",
+                            format: "int32",
+                            readOnly: true,
+                            example: 0,
+                            minimum: 0,
+                          },
+                          brokerVersion: {
+                            description:
+                              "The version of the broker from which the backup was taken for this partition.",
+                            type: "string",
+                            readOnly: true,
+                            example: "8.1.2",
+                          },
+                        },
+                        required: ["partitionId", "state"],
+                      },
+                    },
+                    physicalTenants: {
+                      readOnly: true,
+                      description:
+                        "Per-physical-tenant breakdown of this backup's state. The top-level state, details and failureReason fields above remain the aggregated view across every physical tenant in scope, for backward compatibility.",
+                      type: "array",
+                      items: {
+                        title: "Physical Tenant's Backup Info",
+                        description:
+                          "State of one physical tenant's part of a runtime backup.",
+                        type: "object",
+                        properties: {
+                          physicalTenantId: {
+                            readOnly: true,
+                            allOf: [
+                              {
+                                title: "Physical Tenant ID",
+                                description:
+                                  "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                                type: "string",
+                                example: "tenanta",
+                              },
+                            ],
+                          },
+                          state: {
+                            readOnly: true,
+                            allOf: [
+                              {
+                                title: "Runtime Backup State",
+                                description: "The state of the backup.",
+                                type: "string",
+                                enum: [
+                                  "DOES_NOT_EXIST",
+                                  "IN_PROGRESS",
+                                  "COMPLETED",
+                                  "FAILED",
+                                  "INCOMPLETE",
+                                  "INCOMPATIBLE",
+                                  "DELETED",
+                                ],
+                                example: "IN_PROGRESS",
+                              },
+                            ],
+                          },
+                          failureReason: {
+                            description:
+                              "Reason for failure if the state is 'FAILED'",
+                            type: "string",
+                            example: "",
+                          },
+                          details: {
+                            readOnly: true,
+                            description:
+                              "Status of this physical tenant's backup per partition.",
+                            type: "array",
+                            items: {
+                              title: "Partition's Backup Info",
+                              description:
+                                "Detailed info of the backup for a given partition.",
+                              type: "object",
+                              properties: {
+                                partitionId: {
+                                  readOnly: true,
+                                  allOf: [
+                                    {
+                                      title: "Partition ID",
+                                      description:
+                                        "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                                      type: "integer",
+                                      format: "int32",
+                                      minimum: 1,
+                                      example: 3,
+                                    },
+                                  ],
+                                },
+                                physicalTenantId: {
+                                  readOnly: true,
+                                  description:
+                                    "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                                  allOf: [
+                                    {
+                                      title: "Physical Tenant ID",
+                                      description:
+                                        "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                                      type: "string",
+                                      example: "tenanta",
+                                    },
+                                  ],
+                                },
+                                state: {
+                                  readOnly: true,
+                                  allOf: [
+                                    {
+                                      title: "Runtime Backup State",
+                                      description: "The state of the backup.",
+                                      type: "string",
+                                      enum: [
+                                        "DOES_NOT_EXIST",
+                                        "IN_PROGRESS",
+                                        "COMPLETED",
+                                        "FAILED",
+                                        "INCOMPLETE",
+                                        "INCOMPATIBLE",
+                                        "DELETED",
+                                      ],
+                                      example: "IN_PROGRESS",
+                                    },
+                                  ],
+                                },
+                                failureReason: {
+                                  description:
+                                    "Failure reason if stats is 'FAILED'",
+                                  type: "string",
+                                  example: "",
+                                },
+                                createdAt: {
+                                  description:
+                                    "The timestamp at which the backup was started on this partition.",
+                                  readOnly: true,
+                                  type: "string",
+                                  format: "date-time",
+                                  example: "2022-09-15T13:10:38.176514094Z",
+                                },
+                                lastUpdatedAt: {
+                                  description:
+                                    "The timestamp at which the backup was last updated on this partition, e.g. changed\nstate from IN_PROGRESS to COMPLETED.\n",
+                                  readOnly: true,
+                                  type: "string",
+                                  format: "date-time",
+                                  example: "2022-09-15T13:10:38.176514094Z",
+                                },
+                                snapshotId: {
+                                  description:
+                                    "The ID of the snapshot which is included in this backup.",
+                                  type: "string",
+                                  readOnly: true,
+                                  example: "238632143-55-690906332-690905294",
+                                },
+                                firstLogPosition: {
+                                  description:
+                                    "The first log position included in this backup.",
+                                  type: "integer",
+                                  format: "int64",
+                                  readOnly: true,
+                                  example: 5,
+                                },
+                                checkpointPosition: {
+                                  description:
+                                    "The position of the checkpoint for this backup.",
+                                  type: "integer",
+                                  format: "int64",
+                                  readOnly: true,
+                                  example: 10,
+                                },
+                                brokerId: {
+                                  description:
+                                    "The ID of the broker from which the backup was taken for this partition.",
+                                  type: "integer",
+                                  format: "int32",
+                                  readOnly: true,
+                                  example: 0,
+                                  minimum: 0,
+                                },
+                                brokerVersion: {
+                                  description:
+                                    "The version of the broker from which the backup was taken for this partition.",
+                                  type: "string",
+                                  readOnly: true,
+                                  example: "8.1.2",
+                                },
+                              },
+                              required: ["partitionId", "state"],
+                            },
+                          },
+                        },
+                        required: ["physicalTenantId", "state", "details"],
+                      },
+                    },
+                  },
+                  required: ["backupId", "state", "details"],
+                },
+              },
+              {
+                title: "Backup Info",
+                description:
+                  "Detailed status of a backup. The aggregated state is computed from the backup state of each partition as:\n- If the backup of all partitions is in state 'COMPLETED', then the overall state is 'COMPLETED'.\n- If one is 'FAILED', then the overall state is 'FAILED'.\n- Otherwise, if one is 'DOES_NOT_EXIST', then the overall state is 'INCOMPLETE'.\n- Otherwise, if one is 'IN_PROGRESS', then the overall state is 'IN_PROGRESS'.\n",
+                type: "object",
+                properties: {
+                  backupId: {
+                    readOnly: true,
+                    allOf: [
+                      {
+                        title: "Backup ID",
+                        description:
+                          "The ID of the backup. The ID of the backup must be a positive numerical value. As backups\nare logically ordered by their IDs (ascending), each successive backup must use a higher\nID than the previous one.\n",
+                        type: "integer",
+                        format: "int64",
+                        example: 1,
+                        minimum: 0,
+                      },
+                    ],
+                  },
+                  state: {
+                    readOnly: true,
+                    allOf: [
+                      {
+                        title: "Runtime Backup State",
+                        description: "The state of the backup.",
+                        type: "string",
+                        enum: [
+                          "DOES_NOT_EXIST",
+                          "IN_PROGRESS",
+                          "COMPLETED",
+                          "FAILED",
+                          "INCOMPLETE",
+                          "INCOMPATIBLE",
+                          "DELETED",
+                        ],
+                        example: "IN_PROGRESS",
+                      },
+                    ],
+                  },
+                  failureReason: {
+                    description: "Reason for failure if the state is 'FAILED'",
+                    type: "string",
+                    example: "",
+                  },
+                  details: {
+                    readOnly: true,
+                    description:
+                      "Detailed list of the status of the backup per partition. It should always contain all\npartitions known to the cluster.\n",
+                    type: "array",
+                    items: {
+                      title: "Partition's Backup Info",
+                      description:
+                        "Detailed info of the backup for a given partition.",
+                      type: "object",
+                      properties: {
+                        partitionId: {
+                          readOnly: true,
+                          allOf: [
+                            {
+                              title: "Partition ID",
+                              description:
+                                "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 1,
+                              example: 3,
+                            },
+                          ],
+                        },
+                        physicalTenantId: {
+                          readOnly: true,
+                          description:
+                            "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                          allOf: [
+                            {
+                              title: "Physical Tenant ID",
+                              description:
+                                "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                              type: "string",
+                              example: "tenanta",
+                            },
+                          ],
+                        },
+                        state: {
+                          readOnly: true,
+                          allOf: [
+                            {
+                              title: "Runtime Backup State",
+                              description: "The state of the backup.",
+                              type: "string",
+                              enum: [
+                                "DOES_NOT_EXIST",
+                                "IN_PROGRESS",
+                                "COMPLETED",
+                                "FAILED",
+                                "INCOMPLETE",
+                                "INCOMPATIBLE",
+                                "DELETED",
+                              ],
+                              example: "IN_PROGRESS",
+                            },
+                          ],
+                        },
+                        failureReason: {
+                          description: "Failure reason if stats is 'FAILED'",
+                          type: "string",
+                          example: "",
+                        },
+                        createdAt: {
+                          description:
+                            "The timestamp at which the backup was started on this partition.",
+                          readOnly: true,
+                          type: "string",
+                          format: "date-time",
+                          example: "2022-09-15T13:10:38.176514094Z",
+                        },
+                        lastUpdatedAt: {
+                          description:
+                            "The timestamp at which the backup was last updated on this partition, e.g. changed\nstate from IN_PROGRESS to COMPLETED.\n",
+                          readOnly: true,
+                          type: "string",
+                          format: "date-time",
+                          example: "2022-09-15T13:10:38.176514094Z",
+                        },
+                        snapshotId: {
+                          description:
+                            "The ID of the snapshot which is included in this backup.",
+                          type: "string",
+                          readOnly: true,
+                          example: "238632143-55-690906332-690905294",
+                        },
+                        firstLogPosition: {
+                          description:
+                            "The first log position included in this backup.",
+                          type: "integer",
+                          format: "int64",
+                          readOnly: true,
+                          example: 5,
+                        },
+                        checkpointPosition: {
+                          description:
+                            "The position of the checkpoint for this backup.",
+                          type: "integer",
+                          format: "int64",
+                          readOnly: true,
+                          example: 10,
+                        },
+                        brokerId: {
+                          description:
+                            "The ID of the broker from which the backup was taken for this partition.",
+                          type: "integer",
+                          format: "int32",
+                          readOnly: true,
+                          example: 0,
+                          minimum: 0,
+                        },
+                        brokerVersion: {
+                          description:
+                            "The version of the broker from which the backup was taken for this partition.",
+                          type: "string",
+                          readOnly: true,
+                          example: "8.1.2",
+                        },
+                      },
+                      required: ["partitionId", "state"],
+                    },
+                  },
+                  physicalTenants: {
+                    readOnly: true,
+                    description:
+                      "Per-physical-tenant breakdown of this backup's state. The top-level state, details and failureReason fields above remain the aggregated view across every physical tenant in scope, for backward compatibility.",
+                    type: "array",
+                    items: {
+                      title: "Physical Tenant's Backup Info",
+                      description:
+                        "State of one physical tenant's part of a runtime backup.",
+                      type: "object",
+                      properties: {
+                        physicalTenantId: {
+                          readOnly: true,
+                          allOf: [
+                            {
+                              title: "Physical Tenant ID",
+                              description:
+                                "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                              type: "string",
+                              example: "tenanta",
+                            },
+                          ],
+                        },
+                        state: {
+                          readOnly: true,
+                          allOf: [
+                            {
+                              title: "Runtime Backup State",
+                              description: "The state of the backup.",
+                              type: "string",
+                              enum: [
+                                "DOES_NOT_EXIST",
+                                "IN_PROGRESS",
+                                "COMPLETED",
+                                "FAILED",
+                                "INCOMPLETE",
+                                "INCOMPATIBLE",
+                                "DELETED",
+                              ],
+                              example: "IN_PROGRESS",
+                            },
+                          ],
+                        },
+                        failureReason: {
+                          description:
+                            "Reason for failure if the state is 'FAILED'",
+                          type: "string",
+                          example: "",
+                        },
+                        details: {
+                          readOnly: true,
+                          description:
+                            "Status of this physical tenant's backup per partition.",
+                          type: "array",
+                          items: {
+                            title: "Partition's Backup Info",
+                            description:
+                              "Detailed info of the backup for a given partition.",
+                            type: "object",
+                            properties: {
+                              partitionId: {
+                                readOnly: true,
+                                allOf: [
+                                  {
+                                    title: "Partition ID",
+                                    description:
+                                      "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                                    type: "integer",
+                                    format: "int32",
+                                    minimum: 1,
+                                    example: 3,
+                                  },
+                                ],
+                              },
+                              physicalTenantId: {
+                                readOnly: true,
+                                description:
+                                  "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                                allOf: [
+                                  {
+                                    title: "Physical Tenant ID",
+                                    description:
+                                      "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                                    type: "string",
+                                    example: "tenanta",
+                                  },
+                                ],
+                              },
+                              state: {
+                                readOnly: true,
+                                allOf: [
+                                  {
+                                    title: "Runtime Backup State",
+                                    description: "The state of the backup.",
+                                    type: "string",
+                                    enum: [
+                                      "DOES_NOT_EXIST",
+                                      "IN_PROGRESS",
+                                      "COMPLETED",
+                                      "FAILED",
+                                      "INCOMPLETE",
+                                      "INCOMPATIBLE",
+                                      "DELETED",
+                                    ],
+                                    example: "IN_PROGRESS",
+                                  },
+                                ],
+                              },
+                              failureReason: {
+                                description:
+                                  "Failure reason if stats is 'FAILED'",
+                                type: "string",
+                                example: "",
+                              },
+                              createdAt: {
+                                description:
+                                  "The timestamp at which the backup was started on this partition.",
+                                readOnly: true,
+                                type: "string",
+                                format: "date-time",
+                                example: "2022-09-15T13:10:38.176514094Z",
+                              },
+                              lastUpdatedAt: {
+                                description:
+                                  "The timestamp at which the backup was last updated on this partition, e.g. changed\nstate from IN_PROGRESS to COMPLETED.\n",
+                                readOnly: true,
+                                type: "string",
+                                format: "date-time",
+                                example: "2022-09-15T13:10:38.176514094Z",
+                              },
+                              snapshotId: {
+                                description:
+                                  "The ID of the snapshot which is included in this backup.",
+                                type: "string",
+                                readOnly: true,
+                                example: "238632143-55-690906332-690905294",
+                              },
+                              firstLogPosition: {
+                                description:
+                                  "The first log position included in this backup.",
+                                type: "integer",
+                                format: "int64",
+                                readOnly: true,
+                                example: 5,
+                              },
+                              checkpointPosition: {
+                                description:
+                                  "The position of the checkpoint for this backup.",
+                                type: "integer",
+                                format: "int64",
+                                readOnly: true,
+                                example: 10,
+                              },
+                              brokerId: {
+                                description:
+                                  "The ID of the broker from which the backup was taken for this partition.",
+                                type: "integer",
+                                format: "int32",
+                                readOnly: true,
+                                example: 0,
+                                minimum: 0,
+                              },
+                              brokerVersion: {
+                                description:
+                                  "The version of the broker from which the backup was taken for this partition.",
+                                type: "string",
+                                readOnly: true,
+                                example: "8.1.2",
+                              },
+                            },
+                            required: ["partitionId", "state"],
+                          },
+                        },
+                      },
+                      required: ["physicalTenantId", "state", "details"],
+                    },
+                  },
+                },
+                required: ["backupId", "state", "details"],
+              },
+            ],
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Backup is not enabled or configured on the brokers",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "404": {
+      description: "A backup with given backupId does not exist",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "500": {
+      description: "Internal Error",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description: "Gateway failed to send request to the broker.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "504": {
+      description: "Request from gateway to broker timed out",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

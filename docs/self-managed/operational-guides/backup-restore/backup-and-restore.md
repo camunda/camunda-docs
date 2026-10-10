@@ -86,14 +86,14 @@ The management API is an extension of the [Spring Boot Actuator](https://docs.sp
 
 For the Orchestration Cluster, the management API's backup and exporting-control endpoints are a backward-compatible alternative to the REST API above. Existing automation built against them continues to work; new automation should use the REST API instead. Deprecation of the management API's backup and exporting endpoints is not currently planned, but new capabilities such as [Physical Tenants](#multiple-physical-tenants) are only available through the REST API.
 
-| Management API call                        | REST API equivalent                                                                                                       |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `POST /actuator/exporting/pause?soft=true` | [`POST /exporting/pause?soft=true`](/apis-tools/orchestration-cluster-api-rest/specifications/pause-exporting.api.mdx)    |
-| `POST /actuator/exporting/resume`          | [`POST /exporting/resume`](/apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting.api.mdx)            |
-| `POST /actuator/backupRuntime`             | [`POST /backups/runtime`](/apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup.api.mdx)          |
-| `GET /actuator/backupRuntime/{backupId}`   | [`GET /backups/runtime/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup.api.mdx) |
-| `POST /actuator/backupHistory`             | [`POST /backups/history`](/apis-tools/orchestration-cluster-api-rest/specifications/take-history-backup.api.mdx)          |
-| `GET /actuator/backupHistory/{backupId}`   | [`GET /backups/history/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/get-history-backup.api.mdx) |
+| Management API call                                                                                                                        | REST API equivalent                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `POST /actuator/exporting/pause?soft=true`                                                                                                 | [`POST /exporting/pause?soft=true`](/apis-tools/orchestration-cluster-api-rest/specifications/pause-exporting.api.mdx)    |
+| `POST /actuator/exporting/resume`                                                                                                          | [`POST /exporting/resume`](/apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting.api.mdx)            |
+| [`POST /actuator/backupRuntime`](/apis-tools/management-api/specifications/backups/takes-a-backup-of-runtime-data.api.mdx)                 | [`POST /backups/runtime`](/apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup.api.mdx)          |
+| [`GET /actuator/backupRuntime/{backupId}`](/apis-tools/management-api/specifications/backups/get-information-of-a-runtime-backup.api.mdx)  | [`GET /backups/runtime/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup.api.mdx) |
+| [`POST /actuator/backupHistory`](/apis-tools/management-api/specifications/backups/takes-a-backup-of-history-data.api.mdx)                 | [`POST /backups/history`](/apis-tools/orchestration-cluster-api-rest/specifications/take-history-backup.api.mdx)          |
+| [`GET /actuator/backupHistory/{backupId}`](/apis-tools/management-api/specifications/backups/get-information-of-a-historic-backup.api.mdx) | [`GET /backups/history/{backupId}`](/apis-tools/orchestration-cluster-api-rest/specifications/get-history-backup.api.mdx) |
 
 The REST API adds list and delete operations that have no management API equivalent (see the table above), and requires the authentication and authorization already in place for the rest of the Orchestration Cluster API instead of network-level access to the management port.
 

@@ -38,13 +38,13 @@ How brokers are identified and scaled depends on whether the cluster is [zone-aw
 
 In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), each tenant owns its own partition group, while brokers, gateways, and the replication factor are shared. Which scaling dimension you change therefore determines whether the operation is tenant-scoped or cluster-wide.
 
-| Dimension                          | Scope        | How to target it                                                                                    |
-| ---------------------------------- | ------------ | --------------------------------------------------------------------------------------------------- |
-| Partition count                    | Per tenant   | `PATCH /actuator/cluster?physicalTenant={physicalTenantId}`                                         |
-| Broker count                       | Cluster-wide | `PATCH /actuator/cluster` or `POST /actuator/cluster/brokers`, without a `physicalTenant` parameter |
-| Replication factor                 | Cluster-wide | `PATCH /actuator/cluster`, without a `physicalTenant` parameter                                     |
-| Partition join, leave, or priority | Per tenant   | `POST` or `DELETE /actuator/cluster/brokers/{brokerId}/partitions/{partitionId}?physicalTenant=`    |
-| Routing state                      | Per tenant   | `PATCH /actuator/cluster/routing-state?physicalTenant={physicalTenantId}`                           |
+| Dimension                          | Scope        | How to target it                                                                                                                                                                                                                                                                                                                                                                         |
+| ---------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Partition count                    | Per tenant   | `PATCH /actuator/cluster?physicalTenant={physicalTenantId}`                                                                                                                                                                                                                                                                                                                              |
+| Broker count                       | Cluster-wide | `PATCH /actuator/cluster` or [`POST /actuator/cluster/brokers`](/apis-tools/management-api/specifications/cluster/reconfigure-the-cluster-with-the-given-brokers.api.mdx), without a `physicalTenant` parameter                                                                                                                                                                          |
+| Replication factor                 | Cluster-wide | `PATCH /actuator/cluster`, without a `physicalTenant` parameter                                                                                                                                                                                                                                                                                                                          |
+| Partition join, leave, or priority | Per tenant   | `POST` ([add or change priority](/apis-tools/management-api/specifications/cluster/add-a-broker-to-a-partitions-replication-group-or-change-its-priority.api.mdx)) or `DELETE` ([remove](/apis-tools/management-api/specifications/cluster/remove-a-broker-from-a-partitions-replication-group.api.mdx)) `/actuator/cluster/brokers/{brokerId}/partitions/{partitionId}?physicalTenant=` |
+| Routing state                      | Per tenant   | [`PATCH /actuator/cluster/routing-state?physicalTenant={physicalTenantId}`](/apis-tools/management-api/specifications/cluster/update-the-routing-state.api.mdx)                                                                                                                                                                                                                          |
 
 Partition ids restart at `1` in every Physical Tenant, so a partition is only identified by its id together with its tenant.
 
@@ -68,7 +68,7 @@ A partition count change sent **without** the `physicalTenant` parameter targets
 
 ### Verify a tenant-scoped scaling operation
 
-Monitor the change with the [monitoring API](#monitoring-api) or `GET /actuator/cluster/changes`, then confirm the result through topology:
+Monitor the change with the [monitoring API](#monitoring-api) or [`GET /actuator/cluster/changes`](/apis-tools/management-api/specifications/cluster/list-configuration-changes.api.mdx), then confirm the result through topology:
 
 ```
 curl "http://localhost:8080/physical-tenants/tenanta/v2/topology"

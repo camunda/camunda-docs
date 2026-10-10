@@ -1,0 +1,183 @@
+---
+id: takes-a-backup-of-history-data
+title: "Takes a backup of history data"
+description: "Start taking a backup with the given backupId. Takes one backup per physical tenant unless"
+sidebar_label: "Takes a backup of history data"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV01vGzcQ/SvEnlpAkWw3DVrdnMRofWgT1C56kAWZ2h1pGXPJDcm1Iwj73/uG3NW3k6K5FI0OgkTODGfevBkO11lBPneqDsqabJzdBOmCCPJBmaWQYi7zh6YWTyqUIpQkluqRTLd6XQzFrXwgL6yhXrImJ+py5VUutQhkpAmiMZq8vzP3/cZtXL8XRjpnn3y0bKEp2QkRLBsc3plskNXSyYoCOZ+NJ+vM4A+c3LcDMUcfG+WoyMYLqT0NMsWxfGzIrbC7H+Hvzx26je8ggKH4q8SqrVQIVAwONHP7CPcE4Xt1Zw5jt4sonuvGI4qBeCpVXiI+YOsBsaYXnWAnIVTnGSC9L2ghGw2gkswdvgredbSwjoBrXkqzpELMqZSPyroEms9LqmQ2XmdBBc2Ave+9SoiJ67dHsNziUFWwv/Iw/oGQHmGahVo2ABnnFnD0PpcVfslhL91F4u+H4nITTigl/N4oe2E4shIG6ZPMg17FSI8O3ISeIgqrmsPwwQEz/IduVcfIkoLM2naaaEA+vLbFiqPfsiK4BqSAFxAPvCXrWuNAjn30wTMA6xOwMbtfR17/kSwfodatizmOFEgKV05fC1u/7fwD5fs8nWR9EWVwvHbMp6DI8/GbHfw+TtL1255UXcmBunOKBzNUUut3i1gsfRQpgudyfmgONX3qkKrhKInJYb0KKBNhmopczNqj1A0h676TRq1L8FPbJW9zjh0YwzxdsU3lYN+L76TPyRTI6PcDQRJl4Zs8R6dg47vHNp7PLdUSzL8zcA2kMtG52hFo3/htw+gQV8j0khwWkJRKhrT06uUud84HWaWMqpoqG5+10zZ+OEe+tsanVFycXRxn4bL3jmk8J7SGzvFFw8Eyj4pGI8tfSbnkx9dybp9bG+dujKx9aUNc7XTQGSU3TBWo2l3f1N3BXdGZQN9AjGqhUO8Lq7V94ssj5keiYzr0yNQqZqlr0myiiulswn0TlqYzdPkwm+SNc7AzndnFbBJskHq6V+qHRs4vfpj9NLwYniX9c9Z7lbV9Hl+enR2n7pp9AZ28xa1Sspvot0/O4ke84/rSAyGHy2GMwePO6RMO7kntSAJ4+qR88MN/k+MrXEBOuOfy+wsZrquNQMwxykgQ6/kvprgCE+WSjoNP5/bbn+uqW3gWUjGTe1B/PAXqJXyzfC11HnbgXd0ghNA4g8KnvZBxC6JomBsVbDBXrMgBa+A69x2rvj1oT7SaKy19ULkn6dAfFV+fQcjUJeea0izSXXtgtuEWDdCdAuYRZBVYi+n7beEJQHndFjwu2nhzoxmV+DdKtfwrytfG8dCTe+wHzMZpiKwTEO14NFqXUG7H69q60I4wsTQSaiOoPUqnJHIQA2GpFEUcW2BDW1x9pT0xM/wmDYKqkAeRjhYsFkdbeM0H7Vv6+RWK7stGomK7O/1tTZQh1P/ARKfaxmGKSfHHdqC66hHfnU/OWx61F3aXMt24sWP98v0145W6PSTOh5+NBzNBbXFbc1eII/wg3nCYQjH9FqTxHOjnDB5S3nRjaALPh0pGLndPhfRA2TxkIF+mxItCYmw8cGO9rZD/2kuoq4BAn8Ko1hIPHMQb6brumN2PlD2zkcNEy0m2Xs9x6/3pdNvycnoYMd8L5ZnD24fTs3D8/59NJxF+oNWpB2eceLGRcaX0nQCITqFSYj7A6MnwJu03CcQXt3zAVveoA7eDXuMSHb4On5Wd7jS49+9ubiE87949lS1Yx8knfnLgG34OMhuTGrtVXFtnGig0sf1mySZ//gbK0rOt
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/management-api/specifications/backups/backup-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Takes a backup of history data"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/backupHistory"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Start taking a backup with the given backupId. Takes one backup per physical tenant unless
+`physicalTenant` narrows the operation to one.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "physicalTenant",
+      required: false,
+      in: "query",
+      description:
+        "Narrows the operation to the given physical tenant. When omitted, the operation covers every\nphysical tenant of the cluster, which on a single-tenant cluster is the one `default` tenant\nand therefore unchanged behavior.\n",
+      schema: {
+        title: "Physical Tenant ID",
+        description:
+          "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+        type: "string",
+        example: "tenanta",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          title: "TakeBackupRequest",
+          description: "Request body for take backup",
+          type: "object",
+          required: ["backupId"],
+          properties: {
+            backupId: {
+              description: "The ID of the backup to be taken",
+              allOf: [
+                {
+                  title: "Backup ID",
+                  description:
+                    "The ID of the backup. The ID of the backup must be a positive numerical value. As backups\nare logically ordered by their IDs (ascending), each successive backup must use a higher\nID than the previous one.\n",
+                  type: "integer",
+                  format: "int64",
+                  example: 1,
+                  minimum: 0,
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description: "A backup has been successfully scheduled",
+      content: {
+        "application/json": {
+          schema: {
+            title: "TakeBackupResponse",
+            description: "Request body for take backup",
+            type: "object",
+            properties: {
+              scheduledSnapshots: {
+                type: "array",
+                items: {
+                  type: "string",
+                  description:
+                    "Snapshot identifier following the pattern camunda_operate_[id]_[version]_part_[current]_of_[total]",
+                  example: "camunda_operate_123_8.2.0_part_1_of_6",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "In case something is wrong with backupId, e.g. the same backup ID already exists.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "500": {
+      description:
+        "All other errors, e.g. ES returned error response when attempting to create a snapshot.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description:
+        "Elasticsearch is not accessible, the request can be retried when it is back.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

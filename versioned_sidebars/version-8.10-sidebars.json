@@ -3299,6 +3299,266 @@
         [
           {
             "type": "category",
+            "label": "Cluster management API",
+            "link": {
+              "type": "doc",
+              "id": "apis-tools/management-api/management-api-overview"
+            },
+            "items": [
+              {
+                "Cluster topology": [
+                  {
+                    "type": "doc",
+                    "id": "apis-tools/management-api/specifications/cluster/cluster-topology-management-api"
+                  },
+                  {
+                    "type": "category",
+                    "label": "UNTAGGED",
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/add-a-broker-to-the-cluster",
+                        "label": "Add a broker to the cluster",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/remove-a-broker-from-the-cluster",
+                        "label": "Remove a broker from the cluster.",
+                        "className": "api-method delete"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/add-a-broker-to-a-partitions-replication-group-or-change-its-priority",
+                        "label": "Add a broker to a partition's replication group, or change its priority",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/remove-a-broker-from-a-partitions-replication-group",
+                        "label": "Remove a broker from a partition's replication group",
+                        "className": "api-method delete"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/reconfigure-the-cluster-with-the-given-brokers",
+                        "label": "Reconfigure the cluster with the given brokers.",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/purge-data-from-the-cluster",
+                        "label": "Purge data from the cluster",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/get-current-topology",
+                        "label": "Get current topology",
+                        "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/get-a-configuration-change",
+                        "label": "Get a configuration change",
+                        "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/list-configuration-changes",
+                        "label": "List configuration changes",
+                        "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/reconfigure-cluster",
+                        "label": "Reconfigure cluster",
+                        "className": "api-method patch"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/update-the-routing-state",
+                        "label": "Update the routing state",
+                        "className": "api-method patch"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/update-the-partition-distribution-configuration",
+                        "label": "Update the partition distribution configuration",
+                        "className": "api-method put"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/remove-a-zone",
+                        "label": "Remove a zone",
+                        "className": "api-method delete"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/add-back-a-previously-removed-zone",
+                        "label": "Add back a previously removed zone",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/migrate-a-zone-to-a-zone-aware-topology",
+                        "label": "Migrate a zone to a zone-aware topology",
+                        "className": "api-method put"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/cluster/remove-a-disabled-physical-tenant",
+                        "label": "Remove a disabled physical tenant",
+                        "className": "api-method delete"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Exporters": [
+                  {
+                    "type": "doc",
+                    "id": "apis-tools/management-api/specifications/exporters/exporters-api"
+                  },
+                  {
+                    "type": "category",
+                    "label": "UNTAGGED",
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/exporters/disable-an-exporter",
+                        "label": "Disable an exporter",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/exporters/enable-an-exporter",
+                        "label": "Enable an exporter",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/exporters/delete-an-exporter",
+                        "label": "Delete an exporter",
+                        "className": "api-method delete"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/exporters/list-all-exporters",
+                        "label": "List all exporters",
+                        "className": "api-method get"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Backups": [
+                  {
+                    "type": "doc",
+                    "id": "apis-tools/management-api/specifications/backups/backup-management-api"
+                  },
+                  {
+                    "type": "category",
+                    "label": "UNTAGGED",
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/takes-a-backup-of-runtime-data",
+                        "label": "Takes a backup of runtime data",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/lists-all-available-runtime-backups",
+                        "label": "Lists all available runtime backups",
+                        "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/get-information-of-a-runtime-backup",
+                        "label": "Get information of a runtime backup",
+                        "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/delete-a-runtime-backup",
+                        "label": "Delete a runtime backup",
+                        "className": "api-method delete"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/get-information-about-the-current-checkpoint-and-backup-state-of-the-cluster",
+                        "label": "Get information about the current checkpoint and backup state of the cluster",
+                        "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/reset-the-internal-backup-runtime-state",
+                        "label": "Reset the internal backup runtime state",
+                        "className": "api-method delete"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/force-write-backup-metadata-for-all-partitions",
+                        "label": "Force-write backup metadata for all partitions",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/takes-a-backup-of-history-data",
+                        "label": "Takes a backup of history data",
+                        "className": "api-method post"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/lists-all-available-historic-backups",
+                        "label": "Lists all available historic backups",
+                        "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/get-information-of-a-historic-backup",
+                        "label": "Get information of a historic backup",
+                        "className": "api-method get"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/backups/delete-a-historic-backup",
+                        "label": "Delete a historic backup",
+                        "className": "api-method delete"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Upgrade readiness": [
+                  {
+                    "type": "doc",
+                    "id": "apis-tools/management-api/specifications/upgrade-readiness/upgrade-readiness-api"
+                  },
+                  {
+                    "type": "category",
+                    "label": "UNTAGGED",
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "apis-tools/management-api/specifications/upgrade-readiness/get-the-upgrade-readiness-status-of-this-cluster",
+                        "label": "Get the upgrade-readiness status of this cluster",
+                        "className": "api-method get"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "type": "category",
             "label": "Orchestration Cluster MCP Server",
             "link": {
               "type": "doc",
