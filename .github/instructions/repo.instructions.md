@@ -53,11 +53,11 @@ These are the main commands for working with the repo:
 
 - `npm install`: Install dependencies.
 - `npm run start`: Start local dev server.
-- `npm run build`: Generate a static build.
+- `npm run build`: Generate a static build. A full build requires more RAM than typical machines have; scope it to the versions your change touches with `DOCS_BUILD_VERSIONS` (for example `DOCS_BUILD_VERSIONS=next,current DOCS_SKIP_API_REFERENCE=true npm run build`). See `howtos/setup.md` → "Scoped builds".
 - `npm run format`: Validate Prettier formatting.
 
-- Run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors when the change touches any of: page adds/moves/removes, link targets (including cross-version links), sidebars, navbar entries in `docusaurus.config.js`, redirects in `static/.htaccess`, or MDX components. Skip the build for small content edits that don't affect links or structure.
-- **Do not** run `npm run build` speculatively during exploration. It is slow. Use it only to validate final changes.
+- Validate final changes with a scoped build to catch broken links, invalid Markdown, and build errors when the change touches any of: page adds/moves/removes, link targets (including cross-version links), sidebars, navbar entries in `docusaurus.config.js`, redirects in `static/.htaccess`, or MDX components. Skip the build for small content edits that don't affect links or structure. Links into skipped content are bypassed (`pathname://`); all other broken links still fail the build. The full strict build runs in CI.
+- **Do not** run builds speculatively during exploration. Use them only to validate final changes.
 - Code formatting is validated by **Prettier**. Run `npm run format` locally before submitting a PR.
 
 ## 6. Versioning
