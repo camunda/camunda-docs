@@ -311,6 +311,10 @@ RewriteRule ^docs/self-managed/operational-guides/backup-restore/in-process-rest
 # Elasticsearch/OpenSearch snapshot restore page broken into partials and inlined into the Restore API and Restore Application guides (8.10).
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/elasticsearch/es-restore-snapshot/?$ /docs/self-managed/operational-guides/backup-restore/elasticsearch/es-restore/ [R=301,L]
 
+# The deployment topology reference page moved into the Helm topology install section (8.10).
+RewriteRule ^docs/next/self-managed/reference-architecture/deployment-topology/?$ /docs/next/self-managed/deployment/helm/install/topology/ [R=301,L]
+RewriteRule ^docs/self-managed/reference-architecture/deployment-topology/?$ /docs/self-managed/deployment/helm/install/topology/ [R=301,L]
+
 # The multi-namespace configure page became the deployment topology install section (8.10).
 # Its content is now split by release role under install/topology/.
 RewriteRule ^docs/self-managed/deployment/helm/configure/multi-namespace/?$ /docs/self-managed/deployment/helm/install/topology/ [R=301,L]
