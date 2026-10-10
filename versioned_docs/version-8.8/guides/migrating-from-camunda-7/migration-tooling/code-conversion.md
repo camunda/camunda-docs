@@ -363,18 +363,23 @@ The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanin
 
 #### Test assertion mappings
 
-| Camunda 7 (BpmnAwareTests)                      | Camunda 8 (CamundaAssert)                                                               |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `assertThat(pi).isNotEnded()`                   | `assertThat(pi).isActive()`                                                             |
-| `assertThat(pi).isEnded()`                      | `assertThat(pi).isCompleted()`                                                          |
-| `assertThat(pi).isWaitingAt("id")`              | `assertThat(pi).hasActiveElements("id")`                                                |
-| `assertThat(pi).isWaitingAt(findId("name"))`    | `assertThat(pi).hasActiveElements(byName("name"))`                                      |
-| `assertThat(pi).hasPassed("id")`                | `assertThat(pi).hasCompletedElements("id")`                                             |
-| `assertThat(pi).variables().containsEntry(k,v)` | `assertThat(pi).hasVariable(k, v)`                                                      |
-| `assertThat(task()).hasName("x")`               | `assertThat(UserTaskSelectors.byTaskName("x")).hasName("x")`                            |
-| `assertThat(task()).isAssignedTo("u")`          | `assertThat(UserTaskSelectors.byTaskName("x")).hasAssignee("u")`                        |
-| `complete(task())`                              | `processTestContext.completeUserTask("name")`                                           |
-| `managementService().executeJob(id)`            | `processTestContext.increaseTime(Duration)` or `processTestContext.completeJob("type")` |
+Camunda 7 assertions check the state once. Most [Camunda Process Test](/apis-tools/testing/assertions.md) (CPT) assertions wait until the expected state is reached or the [assertion timeout](/apis-tools/testing/assertions.md#assertion-timeout) ends (10 seconds by default). Before a negative assertion such as `hasNoActiveElements`, first assert a positive state, such as an active or completed element, so the negative check doesn't pass before the process gets there. For all public Camunda 7 assertions, see the [complete assertion mapping](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/40-test-assertions/10-assertions/80-assertion-mapping.md) in the pattern catalog.
+
+| Camunda 7 (BpmnAwareTests)                      | Camunda 8 (CamundaAssert)                                                                                                      |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `assertThat(pi).isNotEnded()`                   | `assertThat(pi).isActive()`                                                                                                    |
+| `assertThat(pi).isEnded()`                      | `assertThat(pi).isCompleted()`, or `isTerminated()` for a canceled instance                                                    |
+| `assertThat(pi).isWaitingAt("id")`              | `assertThat(pi).hasActiveElements("id")`                                                                                       |
+| `assertThat(pi).isWaitingAt(findId("name"))`    | `assertThat(pi).hasActiveElements(byName("name"))`                                                                             |
+| `assertThat(pi).isNotWaitingAt("id")`           | `assertThat(pi).hasNoActiveElements("id")`                                                                                     |
+| `assertThat(pi).hasPassed("id")`                | `assertThat(pi).hasCompletedElements("id")`, or `hasTerminatedElements("id")` for an element that a boundary event interrupted |
+| `assertThat(pi).hasNotPassed("id")`             | `assertThat(pi).hasNotActivatedElements("id")`, which also fails if the element is active                                      |
+| `assertThat(pi).variables().containsEntry(k,v)` | `assertThat(pi).hasVariable(k, v)`                                                                                             |
+| `assertThat(pi).variables().containsKey(k)`     | `assertThat(pi).hasVariableNames(k)`                                                                                           |
+| `assertThat(task()).hasName("x")`               | `assertThat(UserTaskSelectors.byTaskName("x")).hasName("x")`                                                                   |
+| `assertThat(task()).isAssignedTo("u")`          | `assertThat(UserTaskSelectors.byTaskName("x")).hasAssignee("u")`                                                               |
+| `complete(task())`                              | `processTestContext.completeUserTask("name")`                                                                                  |
+| `managementService().executeJob(id)`            | `processTestContext.increaseTime(Duration)` or `processTestContext.completeJob("type")`                                        |
 
 #### Import replacements
 
@@ -384,6 +389,7 @@ The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanin
 | `org.camunda.bpm.engine.delegate.*`                                       | `io.camunda.client.api.worker.JobHandler`                        |
 | `org.camunda.bpm.engine.variable.*`                                       | (plain Java collections)                                         |
 | `org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*`            | `io.camunda.process.test.api.CamundaAssert.*`                    |
+| `org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*`             | `io.camunda.process.test.api.CamundaAssert.*`                    |
 | N/A                                                                       | `io.camunda.process.test.api.assertions.ElementSelectors.byName` |
 | N/A                                                                       | `io.camunda.process.test.api.assertions.UserTaskSelectors`       |
 | N/A                                                                       | `io.camunda.process.test.api.CamundaProcessTestContext`          |
