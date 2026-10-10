@@ -2,7 +2,7 @@
 id: data-handling
 title: Handle project data safely
 sidebar_label: Data handling
-description: "Understand what stays local in a ProcessOS Harness project, what the AI coding agent sends to an AI platform, and how to choose data sources without over-sharing sensitive material."
+description: "Understand what stays local in a ProcessOS project, what the AI coding agent sends to an AI platform, and how to choose data sources without over-sharing sensitive material."
 keywords:
   ["ProcessOS Harness", "data handling", "AI platform", "discovery sources"]
 ---
@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## About
 
-A ProcessOS Harness project reads your organizational knowledge and sends parts of it to an AI platform. Knowing which parts, and controlling what you expose, is part of running a project responsibly.
+A ProcessOS project reads your organizational knowledge and sends parts of it to an AI platform. Knowing which parts, and controlling what you expose, is part of running a project responsibly.
 
 This page covers the practical choices you make as a builder. It doesn't replace your organization's data classification policy or your agreement with an AI platform provider.
 

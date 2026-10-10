@@ -93,48 +93,61 @@ module.exports = {
     "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
-      label: "ProcessOS Harness",
-      className: "sidebar-cta-preview sidebar-badge-early-access",
+      label: "ProcessOS",
       link: {
         type: "doc",
-        id: "components/process-os-harness/overview",
+        id: "components/process-os/overview",
       },
       items: [
         {
           type: "category",
-          label: "Get started",
-          items: [
-            "components/process-os-harness/get-started/system-requirements",
-            "components/process-os-harness/get-started/project-setup",
-            "components/process-os-harness/get-started/install",
-          ],
-        },
-        {
-          type: "category",
-          label: "Run a project",
+          label: "ProcessOS Harness",
+          className: "sidebar-cta-preview sidebar-badge-early-access",
           link: {
             type: "doc",
-            id: "components/process-os-harness/run-a-project/governance-process",
+            id: "components/process-os-harness/overview",
           },
           items: [
             {
               type: "category",
-              label: "Phases",
+              label: "Setup",
               items: [
-                "components/process-os-harness/run-a-project/phases/discovery",
-                "components/process-os-harness/run-a-project/phases/transformation",
-                "components/process-os-harness/run-a-project/phases/implementation",
+                "components/process-os-harness/setup/project-setup",
+                "components/process-os-harness/setup/builder-workspace",
+                "components/process-os-harness/setup/system-requirements",
               ],
             },
-            "components/process-os-harness/run-a-project/review-cycle",
-            "components/process-os-harness/run-a-project/builder-task",
-            "components/process-os-harness/run-a-project/artifact-generation",
+            "components/process-os-harness/installation",
+            {
+              type: "category",
+              label: "Build",
+              link: {
+                type: "doc",
+                id: "components/process-os-harness/build",
+              },
+              items: [
+                "components/process-os-harness/build/governance-process",
+                "components/process-os-harness/build/review-cycle",
+                "components/process-os-harness/build/builder-task",
+                {
+                  type: "category",
+                  label: "Phases",
+                  items: [
+                    "components/process-os-harness/build/phases/discovery",
+                    "components/process-os-harness/build/phases/transformation",
+                    "components/process-os-harness/build/phases/implementation",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "category",
+              label: "Best practices",
+              items: [
+                "components/process-os-harness/best-practices/data-handling",
+              ],
+            },
           ],
-        },
-        {
-          type: "category",
-          label: "Best practices",
-          items: ["components/process-os-harness/best-practices/data-handling"],
         },
       ],
     },
