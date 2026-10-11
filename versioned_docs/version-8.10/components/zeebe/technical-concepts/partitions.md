@@ -48,30 +48,38 @@ A partition is a persistent append-only event stream. Initially, a partition is 
 
 Every entity that the engine creates, such as a process instance, a job, or a user task, receives a **key**. A key is a 64-bit integer (a Java `long`) that the partition owning the entity generates. The key has two parts:
 
-- The upper bits hold the **partition ID**.
+- The upper bits hold the **partition ID**. The protocol reserves 13 bits for it.
 - The lower 51 bits hold a counter that is local to the partition.
 
-Each partition generates keys only within its own range, which starts at `partitionId << 51` and spans 2^51 values. Because the ranges don't overlap, a key is unique across all partitions, and you can derive the partition that owns an entity from its key: `partitionId = key >> 51`.
+```
+| partition ID (13 bits) | per-partition counter (51 bits) |
+```
 
-The decimal length of a key therefore depends on the partition ID. Partition IDs start at 1, so the lowest possible key per partition grows with the partition ID:
+Each partition generates keys only within its own range, which starts at `partitionId << 51` and spans 2^51 values. Because the ranges don't overlap, a key is unique across all partitions. To build a key, the partition ID is shifted left by 51 bits and the counter is added. To read a key, shift it right by 51 bits to get the partition ID, and mask it with 2^51 - 1 to get the counter.
 
-| Partition | Lowest possible key (`partitionId << 51`) | Decimal digits |
-| --------: | ----------------------------------------: | -------------: |
-|         1 |                          2251799813685248 |             16 |
-|         2 |                          4503599627370496 |             16 |
-|         3 |                          6755399441055744 |             16 |
-|         4 |                          9007199254740992 |             16 |
-|         5 |                         11258999068426240 |             17 |
-|         6 |                         13510798882111488 |             17 |
-|         7 |                         15762598695796736 |             17 |
-|         8 |                         18014398509481984 |             17 |
-|         9 |                         20266198323167232 |             17 |
+For example, counter value `1` on partition 1 and counter value `5` on partition 3 result in the following keys:
 
-For example, in a cluster with nine partitions, keys of entities created on partitions 1 to 4 begin at 16 digits, and keys of entities created on partitions 5 to 9 begin at 17 digits. Both are valid 64-bit values, and the length of a key can grow as the counter of its partition grows.
+```
+partition 1, counter 1
+  partition ID  0000000000001
+  counter       000000000000000000000000000000000000000000000000001
+  key           0000000000001 000000000000000000000000000000000000000000000000001
+                = (1 << 51) + 1 = 2251799813685249
+
+partition 3, counter 5
+  partition ID  0000000000011
+  counter       000000000000000000000000000000000000000000000000101
+  key           0000000000011 000000000000000000000000000000000000000000000000101
+                = (3 << 51) + 5 = 6755399441055749
+
+decode: key >> 51 = partition ID, key & (2^51 - 1) = counter
+```
+
+The decimal length of a key depends on both the partition ID and the counter, so it varies between partitions and can grow over time.
 
 :::note
 
-- Treat keys as opaque identifiers. Don't rely on their length, their ordering across partitions, or the partition encoding in your own logic.
+- Treat keys as opaque identifiers. Don't rely on their decimal length, their ordering across partitions, or the partition encoding in your own logic.
 - Store keys as 64-bit integers, for example, `BIGINT` in a SQL database.
 - The Orchestration Cluster REST API represents keys as strings, such as `"2251799813690746"`. Keys from partition 4 and above are greater than 2^53 - 1, so they can't be represented exactly as a JavaScript `Number`. Keep keys as strings, or use `BigInt`, in your client code.
 
