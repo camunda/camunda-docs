@@ -44,6 +44,39 @@ A partition is a persistent append-only event stream. Initially, a partition is 
 
 ![partition](assets/partition.png)
 
+## Record keys
+
+Every entity that the engine creates, such as a process instance, a job, or a user task, receives a **key**. A key is a 64-bit integer (a Java `long`) that the partition owning the entity generates. The key has two parts:
+
+- The upper bits hold the **partition ID**.
+- The lower 51 bits hold a counter that is local to the partition.
+
+Each partition generates keys only within its own range, which starts at `partitionId << 51` and spans 2^51 values. Because the ranges don't overlap, a key is unique across all partitions, and you can derive the partition that owns an entity from its key: `partitionId = key >> 51`.
+
+The decimal length of a key therefore depends on the partition ID. Partition IDs start at 1, so the lowest possible key per partition grows with the partition ID:
+
+| Partition | Lowest possible key (`partitionId << 51`) | Decimal digits |
+| --------: | ----------------------------------------: | -------------: |
+|         1 |                          2251799813685248 |             16 |
+|         2 |                          4503599627370496 |             16 |
+|         3 |                          6755399441055744 |             16 |
+|         4 |                          9007199254740992 |             16 |
+|         5 |                         11258999068426240 |             17 |
+|         6 |                         13510798882111488 |             17 |
+|         7 |                         15762598695796736 |             17 |
+|         8 |                         18014398509481984 |             17 |
+|         9 |                         20266198323167232 |             17 |
+
+For example, in a cluster with nine partitions, keys of entities created on partitions 1 to 4 begin at 16 digits, and keys of entities created on partitions 5 to 9 begin at 17 digits. Both are valid 64-bit values, and the length of a key can grow as the counter of its partition grows.
+
+:::note
+
+- Treat keys as opaque identifiers. Don't rely on their length, their ordering across partitions, or the partition encoding in your own logic.
+- Store keys as 64-bit integers, for example, `BIGINT` in a SQL database.
+- The Orchestration Cluster REST API represents keys as strings, such as `"2251799813690746"`. Keys from partition 4 and above are greater than 2^53 - 1, so they can't be represented exactly as a JavaScript `Number`. Keep keys as strings, or use `BigInt`, in your client code.
+
+:::
+
 ## Replication
 
 For fault tolerance, data in a partition is replicated from the **leader** of the partition to its **followers**. Followers are other Zeebe Broker nodes that maintain a copy of the partition without performing event processing.
