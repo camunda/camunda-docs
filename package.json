@@ -45,7 +45,7 @@
     "check-downloads": "node hacks/update-downloads.js --check"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "16.0.3",
+    "@apidevtools/json-schema-ref-parser": "16.0.5",
     "@auth0/auth0-react": "^2.3.0",
     "@bpmn-io/form-js": "^2.0.0",
     "@camunda8/docusaurus-plugin-openapi-docs": "4.6.9",
