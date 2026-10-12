@@ -63,9 +63,9 @@ Consider an export shipment process where the compliance details arrive as free 
 
 The agent extracts the marker and destination country from the shipment notes, decides which tools to call, and returns a decision. Camunda then applies deterministic routing: an exclusive [gateway](/reference/glossary.md#gateway) sends cleared shipments to an automatic notification, and flagged shipments to a [human task](/reference/glossary.md#human-task) for review.
 
-![Seed export compliance agent BPMN process, showing an AI agent ad-hoc sub-process followed by a gateway that routes to either an automatic notification or a human review task](img/seed-export-compliance-agent.png)
+![Export compliance agent BPMN process, showing an AI agent ad-hoc sub-process followed by a gateway that routes to either an automatic notification or a human review task](img/seed-export-compliance-agent.png)
 
-See the [seed export compliance agent example](https://github.com/camunda/camunda-8-tutorials/tree/main/examples/task-agent) for the full BPMN models and setup instructions.
+See the [export compliance agent example](https://github.com/camunda/camunda-8-tutorials/tree/main/examples/task-agent) for the full BPMN models and setup instructions.
 
 ## AI agent integration features
 
