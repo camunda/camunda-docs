@@ -1,0 +1,398 @@
+---
+id: delete-history-backup-as-cluster-admin
+title: "Delete a history backup across physical tenants"
+sidebar_label: "Delete a history backup across physical tenants"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Delete a history backup across physical tenants"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/cluster/v2/backups/history/{backupId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Deletes the history backup with the given id from every physical tenant of the cluster, or from the one named by `physicalTenantId`. A tenant that does not hold the backup has already reached the requested end state, so it counts as deleted rather than as a failure.
+
+The request is all-or-nothing: a physical tenant the backup cannot be deleted from fails the whole request, and the deletions that already succeeded on other tenants are not undone. Narrow the request with `physicalTenantId` to delete from the tenants that can still be reached.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `DELETE /v2/backups/history/{backupId}` to act as a single physical tenant.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "backupId",
+      in: "path",
+      required: true,
+      description: "The id of the backup.",
+      schema: {
+        title: "Backup ID",
+        description:
+          "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+        type: "integer",
+        format: "int64",
+        example: 1,
+        minimum: 1,
+      },
+    },
+    {
+      name: "physicalTenantId",
+      in: "query",
+      required: false,
+      description:
+        "The physical tenant to apply the change to. When omitted, or when passed with an empty value, the change is applied to every physical tenant of the cluster.",
+      schema: { type: "string", example: "default" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description:
+        "No targeted physical tenant holds the backup any more, because it was deleted from every tenant that held it. At least one tenant held it.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description:
+        "The cluster's secondary storage cannot serve history backups, or a targeted physical tenant's snapshot repository is absent from the store. Unlike the per-physical-tenant backup endpoints, the cluster-admin surface performs no fine-grained authorization, so a missing `BACKUP` permission is never the reason. Deletion fans out with no preceding check, so an absent repository is found only once that tenant is reached, by which time the backup may already be deleted from the others; those deletions are not undone. Narrow the request with `physicalTenantId` to work with the tenants whose repository is usable.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The requested `physicalTenantId` does not exist in this cluster, or every targeted physical tenant was reached and none of them holds a backup with the given id.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description:
+        "The backup could not be deleted from every targeted physical tenant, because one of them hit an internal error, so it may still exist on some of them. The deletions that already succeeded are not undone, so a retry has only the remaining tenants left to reach.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

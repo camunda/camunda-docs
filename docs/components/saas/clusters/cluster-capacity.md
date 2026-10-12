@@ -34,9 +34,6 @@ View cluster load in the **Clusters** page:
 
 1. In the left navigation, click **Environments**, and then click **Clusters**.
 1. In the table, find the **Cluster load** column.
-
-   ![Example cluster load percentage](./img/cluster-capacity-percent.png)
-
 1. Select a cluster to view detailed cluster load information in the cluster **Overview** tab.
 
    ![Example cluster load](./img/cluster-capacity.png)

@@ -12,7 +12,7 @@ This page applies to Camunda 8 SaaS. For clusters in Self-Managed, see [clusters
 
 ## Backup limit
 
-Only the five most recent successful backups of each type are kept, meaning you can have five manual and five scheduled backups. If you already have five backups of a type, the oldest backup is automatically removed.
+Only the three most recent successful backups of each type are kept, meaning you can have three manual and three scheduled backups. If you already have three backups of a type, the oldest backup is automatically removed.
 
 ## Create a manual backup
 

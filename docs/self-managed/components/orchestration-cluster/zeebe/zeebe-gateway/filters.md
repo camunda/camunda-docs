@@ -87,7 +87,8 @@ level of the compiled code must be the same as Zeebe's (i.e. currently JDK 21) o
 
 ```sh
 # to compile LoggingFilter.java, we'll need to provide the api libraries
-javac -classpath .:lib/jakarta.servlet-api.jar:lib/slf4j-api.jar ./LoggingFilter.java
+# the -d option places the class file in a directory that matches its package
+javac -d . -classpath .:lib/jakarta.servlet-api.jar:lib/slf4j-api.jar ./LoggingFilter.java
 ```
 
 ## Packaging a filter
@@ -110,14 +111,13 @@ The file path for `jar` should match the package name. For example, if your pack
 
 ```sh
 # both runtime libraries and the manifest must be packaged together with the compiled classes
-jar cvfm LoggingFilter.jar ./MANIFEST.MF ./*.class ./lib
+jar cvfm LoggingFilter.jar ./MANIFEST.MF ./io/camunda/zeebe/example/*.class ./lib
 
 # let's verify the contents of the JAR
 jar tf ./LoggingFilter.jar
 # META-INF/
 # META-INF/MANIFEST.MF
-# LoggingFilter.java
-# LoggingFilter$1.class
+# io/camunda/zeebe/example/LoggingFilter.class
 # lib/
 # lib/jakarta.servlet-api.jar
 # lib/slf4j-api.jar

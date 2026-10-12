@@ -50,17 +50,32 @@ To manage a project snapshot:
 
 From here, you can perform the following actions on a project snapshot:
 
-| Action                | Description                                                                                                        |
-| :-------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| **View details**      | Open the snapshot details page to review the contents of all files in the snapshot.                                |
-| **Restore as latest** | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project.                    |
-| **Edit details**      | Edit the snapshot tag and description.                                                                             |
-| **Download**          | Download the project as a zip file.                                                                                |
-| **Edit review**       | Update the [review](#request-a-review) status of the snapshot. (Only available if the snapshot has been reviewed.) |
-| **Copy to...**        | Create a new project with the files from the snapshot.                                                             |
-| **Delete**            | Delete the project snapshot.                                                                                       |
+| Action                 | Description                                                                                                                                          |
+| :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **View details**       | Open the snapshot details page to review the contents of all files in the snapshot.                                                                  |
+| **Test this snapshot** | Open the snapshot in [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate and debug it against an environment. |
+| **Restore as latest**  | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project.                                                      |
+| **Edit details**       | Edit the snapshot tag and description.                                                                                                               |
+| **Download**           | Download the project as a zip file.                                                                                                                  |
+| **Edit review**        | Update the [review](#request-a-review) status of the snapshot. (Only available if the snapshot has been reviewed.)                                   |
+| **Copy to...**         | Create a new project with the files from the snapshot.                                                                                               |
+| **Delete**             | Delete the project snapshot.                                                                                                                         |
 
 On the snapshot details page (opened via **View details**), the actions menu also includes **Deploy**, which deploys the project snapshot, especially after it has been [reviewed](#request-a-review).
+
+## Test a snapshot
+
+You can test a project snapshot in [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) without restoring it or changing your latest project files.
+
+In the snapshot's vertical ellipsis menu, select **Test this snapshot**. Test mode opens the snapshot in **Read-only** mode.
+
+In the **Set up test run** panel:
+
+1. Click **Select environment**, and choose where to run the test.
+2. Select the resources to deploy, and click **Deploy**. The option **Only this resource** isn't available for snapshots.
+3. Set the start and end elements, and run the test.
+
+See [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md#get-started-with-test-mode) for detailed information.
 
 ## Compare snapshots
 

@@ -178,6 +178,22 @@ Important changes in Camunda 8.10 are summarized as follows:
 
 Important changes and new features for agentic orchestration are available in 8.10:
 
+### Real-time agent visibility and monitoring
+
+Monitor and evaluate AI agent behavior in Operate.
+
+<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
+
+- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics), model, and system prompt.
+- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
+- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
+
+<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
+
+:::note
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
+:::
+
 ### Agentic control plane
 
 Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
@@ -227,7 +243,7 @@ You can run AI agents on Camunda 8 SaaS in minutes using the [Camunda-provided L
 
 - Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets.
 - The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used.
-- For enterprise organizations, AI features must be enabled first. After that, the Camunda-provided LLM is enabled automatically.
+- Enterprise organizations must explicitly enable the **Camunda Provided LLM** toggle in Camunda Hub, which is separate from the **AI-powered features** toggle.
 
 <p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
 
@@ -240,22 +256,6 @@ AI agents can use the Processes MCP Server to discover and call deployed BPMN pr
 - The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
 
 <p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
-
-### Real-time agent visibility and monitoring
-
-Monitor and evaluate AI agent behavior in Operate.
-
-<img src={AgentPanel} alt="Agent panel overview" class="img-noborder img-900"/>
-
-- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics), model, and system prompt.
-- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
-- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
-
-<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
-
-:::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
-:::
 
 ### Test AI agents with Camunda Process Test
 
@@ -325,19 +325,19 @@ Camunda Hub introduces changes to many terms and concepts from Web Modeler and C
 
 The following table shows how you can access the Hub equivalents for key Web Modeler and Console features.
 
-| Product (8.9) | Feature                                   | Hub documentation                                                                                                  |
-| :------------ | :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| Console       | Organization overview                     | [Console](/components/hub/organization/console.md)                                                                 |
-| Console       | View clusters                             | [View clusters](/components/saas/clusters/manage-cluster.md#view-clusters)                                         |
-| Console       | Organization management                   | [Manage organization settings](/components/hub/organization/manage-organization-settings/organization-settings.md) |
-| Web Modeler   | View projects                             | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
-| Web Modeler   | Create a project                          | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)        |
-| Web Modeler   | Manage project collaborators              | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)             |
-| Web Modeler   | Rename/delete project                     | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                             |
-| Web Modeler   | Connect clusters to a process application | [Assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md)      |
-| Web Modeler   | Deploy a process application              | [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md)                                 |
-| Web Modeler   | View shared resources                     | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**           |
-| Web Modeler   | Recently deleted                          | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                  |
+| Product (8.9) | Feature                                   | Hub documentation                                                                                             |
+| :------------ | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Console       | Organization overview                     | [Console](/components/hub/organization/console.md)                                                            |
+| Console       | View clusters                             | [View clusters](/components/saas/clusters/manage-cluster.md#view-clusters)                                    |
+| Console       | Organization management                   | [Manage organization](/components/hub/organization/manage-organization-settings/organization-settings.md)     |
+| Web Modeler   | View projects                             | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)           |
+| Web Modeler   | Create a project                          | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)   |
+| Web Modeler   | Manage project collaborators              | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)        |
+| Web Modeler   | Rename/delete project                     | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                        |
+| Web Modeler   | Connect clusters to a process application | [Assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md) |
+| Web Modeler   | Deploy a process application              | [Deploy your project](/components/hub/workspace/manage-projects/deploy-project.md)                            |
+| Web Modeler   | View shared resources                     | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**      |
+| Web Modeler   | Recently deleted                          | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                             |
 
 ### Key features
 
@@ -485,6 +485,8 @@ Connect the modeler in Hub to an [environment](#environments) to model, test, an
 This shortens the build, review, and test cycle, because you validate against the same environment your process runs in.
 Test Studio doesn't follow this connection. It runs against the environment you select in the **Test** tab.
 
+<p class="link-arrow">[Connect to a runtime](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md)</p>
+
 #### Recover deleted resources
 
 When you deleted a resource, such as a file or process application, in Camunda 8.9, the resource was immediately and permanently deleted, along with:
@@ -508,12 +510,12 @@ SaaS organization-level roles and permissions have changed. Prior to 8.10, users
 
 | Role               | Description                                                                                                                                                                                                                                                                     |
 | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Member             | Full access to create and collaborate on projects in workspaces they're invited to, plus read-only visibility into the organization and its clusters.                                                                                                                           |
+| Member             | Full access to create and collaborate on projects in workspaces they're invited to, plus read-only visibility into the organization.                                                                                                                                            |
 | Analyst            | Includes everything a Member can do, plus full access to Optimize to build process dashboards and reports. Access to specific dashboards and reports within Optimize is governed separately by [Optimize collection roles](/components/optimize/userguide/user-permissions.md). |
 | Organization Admin | Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. Organization Admins can also assign environments to workspaces.                                                                                          |
 | DevOps             | Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.           |
 
-<p class="link-arrow">[Roles and permissions](/components/hub/organization/manage-users/index.md#roles-and-permissions)</p>
+<p class="link-arrow">[Roles and permissions](/components/hub/organization/users-and-roles.md#roles-and-permissions)</p>
 
 #### Self-Managed roles and permissions
 
@@ -699,6 +701,19 @@ In addition to process application snapshots, you can create versions for indivi
 
 </details>
 
+### Environments in the SaaS migration
+
+Before 8.10, you connected up to four clusters to a process application, one for each deployment stage. In 8.10, a project has no deployment stages, so Camunda Hub carries these connections forward as [environments](/components/concepts/environments.md) of the workspace. Camunda Hub assigns the environments in a separate step from the Web Modeler data migration described above.
+
+For each migrated workspace:
+
+- Every cluster that a process application in the workspace connected to any deployment stage becomes an environment assigned to the workspace. This also applies to the cluster of each IDP application. A cluster that several stages or applications used is assigned once.
+- If several projects are in the same workspace, the workspace receives the environments of all of them.
+- Projects inherit the environments of their workspace. They have no deployment stages or connected clusters anymore, and the migration doesn't set a default environment for a project. You choose the environment when you deploy.
+- Workspaces you create after the migration start without environments.
+
+An organization admin can change the assigned environments at any time. See [assign environments to a workspace](/components/hub/organization/manage-environments/assign-environments.md).
+
 ## Multi-region resilience
 
 Camunda 8.10 provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments.
@@ -812,7 +827,7 @@ Important changes to Helm chart deployment in 8.10 are as follows:
 
 <!-- Legacy anchor retained for inbound links. -->
 
-### A Hub plane and one or more execution planes
+### One management plane and one or more execution planes {#a-hub-plane-and-one-or-more-execution-planes}
 
 The 8.10 Helm chart adds `global.topology.mode`, so each release declares its role in the deployment: `combined`, `hub`, `orchestration`, or `optimize`. One `hub` release running Camunda Hub and Management Identity can serve many independently deployed `orchestration` releases, each with its own lifecycle, scaling, and upgrade schedule.
 
@@ -836,7 +851,7 @@ Use the toolkit to:
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
 
-<p class="link-arrow">[Use the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
+<p class="link-arrow">[Prepare Helm upgrades with the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
 
 ### Helm CLI v3 and v4 support {#helm-v4-required}
 

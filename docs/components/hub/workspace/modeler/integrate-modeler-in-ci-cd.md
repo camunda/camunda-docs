@@ -32,7 +32,7 @@ Each pipeline is unique. The Camunda Hub API offers flexibility to tailor integr
 - An existing pipeline or a plan to set one up using tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or built-in solutions of VCS platforms like [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
 - Familiarize yourself with the [Camunda Hub API](/apis-tools/hub-api-sm/overview.md).
 - Understand how [clusters](/components/concepts/clusters.md) and [environments](/components/concepts/environments.md) work in Camunda 8.
-- Ensure you’ve [created a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md), or installed [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
+- Ensure you’ve [created a Camunda 8 account](/components/saas/organization/manage-plan/create-account.md), or installed [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 
 ## Setup
 
@@ -72,7 +72,7 @@ Disable manual deployments for any member by configuring environment variables `
 
 To restrict who can deploy from Camunda Hub, control which [environments are assigned to each workspace](/components/hub/organization/manage-environments/assign-environments.md), and manage the deployment permissions in the clusters. You can also require an approved project snapshot before anyone deploys to an environment tagged `prod`. See the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
 
-Read more in the [user roles documentation](/components/hub/organization/manage-users/index.md).
+Read more in the [user roles documentation](/components/hub/organization/users-and-roles.md).
 
 </TabItem>
 </Tabs>
@@ -317,7 +317,7 @@ While blue-green deployments are more straightforward with Self-Managed setups, 
 
 #### How can I prevent manual deployments from Camunda Hub?
 
-To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed setups, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. In Camunda 8 SaaS, manage deployment permissions via [user roles](/components/hub/organization/manage-users/index.md).
+To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed setups, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. In Camunda 8 SaaS, manage deployment permissions via [user roles](/components/hub/organization/users-and-roles.md).
 
 #### How can I sync files between Camunda Hub and version control?
 

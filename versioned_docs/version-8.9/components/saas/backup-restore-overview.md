@@ -44,8 +44,8 @@ When a restore starts, the cluster enters a restoring state and is unavailable u
 
 Camunda SaaS retains backups as count-based retention:
 
-- Manual backups: up to five recent backups per cluster category
-- Scheduled backups: up to five backups per schedule category
+- Manual backups: up to three recent backups per cluster category
+- Scheduled backups: up to three backups per schedule category
 
 ## Limitations and constraints
 

@@ -55,7 +55,7 @@ Use the Optimize agentic control plane dashboard to monitor AI agent adoption, t
 
 The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
 
-<p class="link-arrow">[Conversation storage SPI redesign](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign)</p>
+<p class="link-arrow">[SPI and package changes for custom extensions](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-spi-and-package-changes)</p>
 
 #### New native element templates
 
@@ -126,7 +126,7 @@ New features help you more easily configure your agent tools when modeling.
 You can now run AI Agents on Camunda 8 SaaS in minutes using the Camunda-provided LLM, without your own LLM credentials.
 
 - Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
-- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
+- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. Enterprise organizations must explicitly enable the **Camunda Provided LLM** toggle in Camunda Hub, which is separate from the **AI-powered features** toggle.
 - This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup.
 
 <p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
@@ -182,7 +182,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Skills repository for pro-code AI enablement
@@ -532,12 +532,12 @@ The new Helm migration and validation toolkit can help you upgrade from Camunda 
 Use the toolkit to:
 
 - Read your existing 8.9 Helm values (for example, values.yaml).
-- Generate a sample 8.10 values file reflecting Helm 4-only support, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
+- Generate a sample 8.10 values file reflecting the recommended Helm CLI v4, Bitnami sub‑charts removal, Hub‑aware deployment patterns, and simplified application configuration.
 - Create a migration report that lists the keys that were migrated automatically, flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options), suggests where to find more information in the documentation, and can validate an existing 8.10 values file (for example, one drafted by hand or AI tool) against Camunda’s migration rules.
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
 
-<p class="link-arrow">[Use the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
+<p class="link-arrow">[Prepare Helm upgrades with the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
 
 ### Camunda Hub replaces Console and Web Modeler in the Helm chart
 
@@ -825,7 +825,7 @@ In Camunda Hub, the runtime connection of the modeler is a connection to an envi
 - Two Physical Tenants on the same cluster are separate connections.
 
 :::note
-The runtime connection is disabled by default and behind the feature flag `runtimeConnectionEnabled`. The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
+In Self-Managed, the runtime connection is enabled by default. You can [turn it off](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md#configure-the-runtime-connection-in-self-managed).
 :::
 
 <p class="link-arrow">[Connect to a runtime](/components/hub/workspace/modeler/modeling/connect-to-a-runtime.md)</p>
@@ -1717,7 +1717,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Camunda design system
@@ -1789,11 +1789,11 @@ This new versioning model will be introduced for Self-Managed deployments with t
 
 <!-- https://github.com/camunda/product-hub/issues/3475 -->
 
-You can now view and choose which cluster you are connected to in Camunda Hub.
+You can now view and choose which environment you are connected to in Camunda Hub.
 
-- Connector-credential names from the cluster autocomplete in your FEEL expressions.
-- Task testing runs against the connected cluster.
-- Choose the cluster from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real environment.
+- Connector-credential names from the connected environment autocomplete in your FEEL expressions.
+- Task testing runs against the connected environment.
+- Choose the environment from the bottom panel bar of the diagram, in the **Implement** tab, to model against your real runtime.
 
 ### Connectivity
 
@@ -2942,7 +2942,7 @@ Execution listeners can now be configured on the enclosing body of multi-instanc
 
 The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign) for more details.
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-spi-and-package-changes) for more details.
 
 #### Camunda-provided LLM for SaaS
 
@@ -2952,7 +2952,7 @@ See the [release announcement](/reference/announcements-release-notes/8100/8100-
 
 You can now run any AI Agent on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without wiring your own LLM credentials. Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
 
-The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
+The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. Enterprise organizations must explicitly enable the **Camunda Provided LLM** toggle in Camunda Hub, which is separate from the **AI-powered features** toggle.
 
 This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup on day one.
 
