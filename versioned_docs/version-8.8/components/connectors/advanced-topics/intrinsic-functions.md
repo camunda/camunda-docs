@@ -171,6 +171,14 @@ Values that come from outside the process model never run intrinsic functions. T
 
 To configure the policy or the lookup cache of the connector runtime, see [intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list).
 
+### Write safe intrinsic function declarations
+
+Follow these guidelines when you write an input mapping or an element template that uses intrinsic functions:
+
+- Declare each call in its own input, and don't wrap it in an `if`/`then`/`else` expression. When a call sits in one branch of a conditional, the runtime allows it without checking what the other branch produces. To vary a value by mode, use an element template with one hidden property per case, each with a `condition`.
+- Pass only values you trust as function parameters. The runtime checks the function name and the field path, not the parameters.
+- Review any use of `createLink` before you add it to a template. The function creates a temporary link to a document, so its parameters decide which document becomes reachable. Don't use it inside a conditional, and don't build its document parameter from process variables that external systems can set.
+
 ### Troubleshoot intrinsic function errors
 
 #### Intrinsic function is not allowed by the runtime policy
