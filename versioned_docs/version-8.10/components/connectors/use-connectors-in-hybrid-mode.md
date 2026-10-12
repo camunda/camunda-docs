@@ -50,7 +50,7 @@ This option allows you to start the connector runtime bundle that runs all of [C
 Use `camunda/connectors-bundle:<desired-version>` for a customer-managed hybrid runtime, even when connecting to a Camunda SaaS cluster.
 
 :::warning
-Don't use `camunda/connectors-bundle-saas`. This internal image is intended for Camunda-managed SaaS runtimes, not customer-managed hybrid deployments. It sets `CAMUNDA_CONNECTOR_RUNTIME_SAAS=true`, which enables SaaS-only validation and rejects authentication types intended for Self-Managed runtimes. The image also requires internal authentication configuration and can fail to start with an error referencing `camunda.connector.auth.issuer`.
+Don't use `camunda/connectors-bundle-saas`. This internal image is intended for Camunda-managed SaaS runtimes and won't work for customer-managed hybrid deployments.
 :::
 
 Run the following script:
