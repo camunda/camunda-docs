@@ -75,11 +75,11 @@ Tenants can be created and principals assigned regardless of whether checks are 
 On SaaS, enable multi-tenancy checks per cluster using the **Multi-tenancy** toggle in Camunda Hub:
 
 1. Navigate to **Camunda Hub**.
-1. In the left navigation under **Console**, select the **Clusters**.
+1. In the left navigation, click **Environments**, and then click **Clusters**.
 1. Select the cluster you want to manage, and select the **Settings** tab.
 1. Enable the **Multi-tenancy** setting.
 
-For details on the toggle, its default state, and who can change it, see [cluster settings](/components/hub/organization/manage-clusters/settings.md#multi-tenancy).
+For details on the toggle, its default state, and who can change it, see [cluster settings](/components/saas/clusters/settings.md#multi-tenancy).
 
 The **Multi-tenancy** toggle is available for clusters running generation 8.8 and later. It is disabled by default, and only organization admins can change it. Disabling the toggle restores the implicit `<default>`-tenant behavior.
 
@@ -92,6 +92,14 @@ On Self-Managed, operators enable multi-tenancy checks through configuration pro
 Administrators can manage all tenants centrally in [Admin](/components/admin/tenant.md). This unified management interface simplifies monitoring, configuration, and maintenance tasks across tenant environments.
 
 The **Tenants** tab in Admin is available to organization admins on SaaS clusters running generation 8.8 and later, even before multi-tenancy checks are enabled. This allows admins to set up tenants and assignments before enforcing checks.
+
+## Multi-tenancy in Camunda Hub
+
+In Camunda Hub, you deploy to an [environment](/components/concepts/environments.md), which is a Physical Tenant or a cluster. If multi-tenancy is enabled for that environment, you select a tenant separately when you deploy. The tenant you select owns the deployed resources.
+
+If the environment has more than one tenant, choose the tenant to deploy to. If it has exactly one, Camunda Hub selects it automatically.
+
+Learn more about [deploying to a tenant](/components/hub/workspace/manage-projects/deploy-project.md#logical-tenants).
 
 ## Optimize and multi-tenancy
 

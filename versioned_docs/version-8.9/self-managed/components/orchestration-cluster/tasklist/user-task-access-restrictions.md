@@ -18,7 +18,5 @@ user task access restrictions. For details about how authorizations work in Task
 
 [User task access restrictions](components/tasklist/user-task-access-restrictions.md) are used in Tasklist V1 to control task access for a user or a group.
 
-They are enabled by default and can be disabled using the `userAccessRestrictionsEnabled` [Tasklist environment variable](/versioned_docs/version-8.7/self-managed/tasklist-deployment/tasklist-authentication.md).
+They are enabled by default and can be disabled using the `userAccessRestrictionsEnabled` Tasklist environment variable.
 This configuration does not affect API users. When you retrieve tasks using the APIs, the APIs return all tasks.
-
-See [Tasklist authentication documentation](/versioned_docs/version-8.7/self-managed/tasklist-deployment/tasklist-authentication.md) on user task access restrictions for configuration details.

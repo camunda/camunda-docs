@@ -59,7 +59,7 @@ The incident message does not identify the underlying store failure. Check the b
 
 While the incident is active, the job is not activatable and no worker receives it. The broker does not raise another incident for the same failed reference.
 
-### Retry after resolving the incident
+### Retry after fixing the secret store
 
 Resolve the incident only after fixing the underlying cause. Resolving the incident makes the job activatable again. On the next activation attempt, the broker requests resolution again because the reference is still uncached.
 
@@ -102,7 +102,7 @@ Typical causes include:
 
 While the incident is active, the job is not activatable, so the broker does not retry the same failed injection on every poll.
 
-### Retry secret injection
+### Retry after fixing the variables
 
 Resolve the incident only after correcting the variable value or the input mapping that produced it. Resolving the incident makes the job activatable again, and Camunda retries injection against the current job variables.
 

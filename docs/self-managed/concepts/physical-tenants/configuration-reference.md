@@ -2,14 +2,16 @@
 id: configuration-reference
 title: "Configuration reference"
 sidebar_label: "Configuration reference"
-description: "Configure Physical Tenants with root defaults, per-tenant overrides, and startup validation rules."
+description: "Configure Physical Tenants in Self-Managed deployments with root defaults, per-tenant overrides, and startup validation rules."
 ---
 
-Learn how to configure Physical Tenants in Camunda 8.10 Self-Managed deployments.
+import PageDescription from '@site/src/components/PageDescription';
 
-Configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
+<PageDescription />
 
 ## Configuration model
+
+Configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
 
 At startup, Camunda resolves tenant configuration using this model:
 
@@ -48,7 +50,7 @@ camunda:
     default:
       cluster:
         # Required when you override default-tenant values
-        partitions-count: 3
+        partition-count: 3
       data:
         secondary-storage:
           rdbms:
@@ -62,7 +64,7 @@ camunda:
     # Additional Physical Tenant
     tenanta:
       cluster:
-        partitions-count: 3
+        partition-count: 3
       data:
         secondary-storage:
           rdbms:
@@ -215,7 +217,7 @@ camunda:
   physical-tenants:
     default:
       cluster:
-        partitions-count: 3
+        partition-count: 3
       document:
         default-store-id: shared-s3
         assigned:
@@ -229,7 +231,7 @@ camunda:
 
     riskprod:
       cluster:
-        partitions-count: 3
+        partition-count: 3
       data:
         secondary-storage:
           rdbms:
@@ -248,7 +250,35 @@ camunda:
           providers:
             assigned:
               - corp-idp
+        initialization:
+          roles:
+            - roleId: riskprod-admin
+              name: Risk Production Admin
+              mappingRules:
+                - riskprod-admins-mapping
+          mappingrules:
+            - mapping-rule-id: riskprod-admins-mapping
+              claim-name: groups
+              claim-value: risk-admins
+          authorizations:
+            - ownerType: ROLE
+              ownerId: riskprod-admin
+              resourceType: RESOURCE
+              resourceId: "*"
+              permissions:
+                - CREATE
+            - ownerType: ROLE
+              ownerId: riskprod-admin
+              resourceType: PROCESS_DEFINITION
+              resourceId: "*"
+              permissions:
+                - CREATE_PROCESS_INSTANCE
+                - UPDATE_PROCESS_INSTANCE
+                - READ_PROCESS_INSTANCE
+                - READ_PROCESS_DEFINITION
 ```
+
+Every explicitly configured tenant needs its own `security.initialization` block when authorization is enabled; it is not inherited from the root or from other tenants.
 
 ### Environment variables
 

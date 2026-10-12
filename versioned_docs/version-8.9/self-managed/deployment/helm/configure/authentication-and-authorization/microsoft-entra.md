@@ -16,6 +16,10 @@ Before you begin, ensure you have:
 - An understanding of the structure and claims of access tokens in Entra
 - When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
+If your Entra issuer presents a certificate signed by a private or internal certificate authority, Camunda components don't trust certificates signed by that CA by default.
+
+Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) to avoid `PKIX path building failed` errors when components connect to the issuer.
+
 ## Configuration
 
 To use Microsoft Entra, complete the following steps:
@@ -50,6 +54,10 @@ The applications you configure in this guide must support the following `grant_t
 - To create a token via authorization code flow: `authorization_code` (response contains access and refresh tokens)
 
 These grant types are enabled by default, but they may be restricted by custom policies in your organization.
+
+:::note Disable UserInfo for Entra
+Microsoft Entra's `/userinfo` endpoint is served by Microsoft Graph, which requires the access token to have a Graph audience. The `<CLIENT_UUID>/.default` scope used in this guide audiences the token to the Camunda client instead, so Entra always rejects the call. Set `user-info-enabled: false` for this provider to skip it. See [troubleshoot OIDC authentication](./troubleshooting-oidc.md#userinfo-endpoint-rejects-the-access-token) for details.
+:::
 
 ### Create applications in Entra
 

@@ -73,19 +73,23 @@ A point-in-time snapshot of the manager's internal state, for observability.
 
 Errors returned by the Camunda SDK.
 
+Non-exhaustive: match with a wildcard arm. New variants are added as the SDK grows and
+are not a breaking change.
+
 ### Variants
 
-| Variant                      | Payload                                 | Description                                                                                                               |
-| ---------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `Config`                     | `(String)`                              | Configuration was invalid or incomplete (e.g. missing OAuth credentials).                                                 |
-| `Auth`                       | `(String)`                              | Failed to obtain or refresh an authentication token.                                                                      |
-| `Network`                    | `(Error)`                               | A network-level failure occurred (connection, TLS, timeout).                                                              |
-| `Io`                         | `(Error)`                               | An I/O failure occurred (e.g. while streaming a multipart upload).                                                        |
-| `Api`                        | `{ status: u16, body: Option<String> }` | The server returned a non-success HTTP status.                                                                            |
-| `Serialization`              | `(Error)`                               | A response payload could not be (de)serialized.                                                                           |
-| `Validation`                 | `(String)`                              | A domain-type or input constraint was violated before sending the request.                                                |
-| `Backpressure`               | `(String)`                              | The client-side backpressure controller rejected the request to avoid unbounded memory growth (waiter queue at capacity). |
-| `EventualConsistencyTimeout` | `{ elapsed_ms: u64 }`                   | An eventual-consistency polling helper timed out before its predicate was met.                                            |
+| Variant                      | Payload                                           | Description                                                                                                               |
+| ---------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `Config`                     | `(String)`                                        | Configuration was invalid or incomplete (e.g. missing OAuth credentials).                                                 |
+| `Auth`                       | `(String)`                                        | Failed to obtain or refresh an authentication token.                                                                      |
+| `Network`                    | `(Error)`                                         | A network-level failure occurred (connection, TLS, timeout).                                                              |
+| `Io`                         | `(Error)`                                         | An I/O failure occurred (e.g. while streaming a multipart upload).                                                        |
+| `Api`                        | `{ status: u16, body: Option<String> }`           | The server returned a non-success HTTP status.                                                                            |
+| `Serialization`              | `(Error)`                                         | A response payload could not be (de)serialized.                                                                           |
+| `Validation`                 | `(String)`                                        | A domain-type or input constraint was violated before sending the request.                                                |
+| `Backpressure`               | `(String)`                                        | The client-side backpressure controller rejected the request to avoid unbounded memory growth (waiter queue at capacity). |
+| `EventualConsistencyTimeout` | `{ elapsed_ms: u64 }`                             | An eventual-consistency polling helper timed out before its predicate was met.                                            |
+| `LeaseNotHonored`            | `{ job_key: String, request_flag: &'static str }` | A worker activated jobs with a lease but the server returned a job carrying no lease token.                               |
 
 ### Methods
 

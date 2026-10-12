@@ -20,6 +20,21 @@ same type is produced by the REST job worker and the gRPC streaming worker.
 
 ### Methods
 
+#### Clock
+
+```go
+func (j *Job) Clock() Clock
+```
+
+Clock returns the worker's clock. A handler that needs to wait should use this
+rather than time.Sleep, so an injected clock controls it.
+
+For short in-handler coordination only -- spacing a retry, waiting for a resource
+to settle. A long or business wait belongs in the process as a BPMN timer event: a
+handler holding a job for minutes occupies a worker slot, risks the job timeout
+expiring underneath it, and hides the wait from the process model where it cannot
+be seen or changed.
+
 #### CustomHeaders
 
 ```go
@@ -178,9 +193,11 @@ superseded activation — for example after the job timed out and another worker
 picked it up.
 
 Off by default, matching the gateway's own default. Enabling it requires an
-engine that supports job leases; older gateways ignore the field and keep
-pushing unleased jobs. It covers both channels: the gRPC stream and the REST
-sidecar poll (see WithStreamPollInterval).
+engine that supports job leases: a gateway that ignores the field would leave
+every acknowledgement unfenced, so a job arriving without a token fails the
+activation with ErrLeaseNotHonored rather than being handled unfenced. It
+covers both channels: the gRPC stream and the REST sidecar poll (see
+WithStreamPollInterval).
 
 #### WithStreamJobTimeout
 
@@ -273,8 +290,11 @@ activation — for example after the job timed out and another worker picked it
 up.
 
 Off by default, matching the engine's own default. Enabling it requires an
-engine that supports job leases. It has no effect when jobs arrive over the
-FALCON command stream, which activates them outside the REST activation API.
+engine that supports job leases: a server that ignores the flag would leave
+every acknowledgement unfenced, so a job arriving without a token fails the
+activation with ErrLeaseNotHonored rather than being handled unfenced. It has
+no effect when jobs arrive over the FALCON command stream, which activates them
+outside the REST activation API.
 
 #### WithJobTimeout
 

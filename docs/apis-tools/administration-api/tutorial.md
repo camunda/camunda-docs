@@ -11,7 +11,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/components/react-components/create-cluster.md).
-- Upon cluster creation, create your first client in [Camunda Hub](/components/hub/index.md) by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client. Ensure you check all the boxes for Zeebe client scopes.
+- Upon cluster creation, create your first client in [Camunda Hub](/components/hub/index.md) by navigating to **Organization > Manage organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client. Ensure you check all the boxes for Zeebe client scopes.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -38,7 +38,7 @@ When you create new client credentials as a [prerequisite](#prerequisites), your
 
 Locate your `CLUSTER_ID` in Camunda Hub:
 
-1. In Camunda Hub, in the left navigation under **Console**, click **Clusters**.
+1. In Camunda Hub, in the left navigation, click **Environments**, and then click **Clusters**.
 1. Select a cluster.
 1. Under **Cluster Details**, copy your **Cluster Id**.
    :::

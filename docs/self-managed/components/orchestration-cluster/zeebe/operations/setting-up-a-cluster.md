@@ -107,7 +107,7 @@ cluster:
 
 Each broker needs a unique node id. The ids should be in the range of zero and `clusterSize - 1`. You need to replace the `NODE_ID` placeholder with an appropriate value.
 
-Additionally, the brokers need an initial contact point to start their gossip conversation. Make sure you use the address and **management port** of another broker. You need to replace the `ADDRESS_AND_PORT_OF_NODE_0` placeholder.
+Additionally, the brokers need an initial contact point to start their gossip conversation. Make sure you use the address and internal API port (default `26502`) of another broker. You need to replace the `ADDRESS_AND_PORT_OF_NODE_0` placeholder.
 
 To guarantee a cluster can properly recover from network partitions, it is currently required that all nodes be specified as initial contact points. It is not necessary for a broker to list itself as an initial contact point, but it is safe to do so, and likely simpler
 to maintain.

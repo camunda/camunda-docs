@@ -480,6 +480,11 @@ components:
       type: object
       description: Filter criteria for searching workspaces.
       properties:
+        workspaceKey:
+          description: Filter by workspace key.
+          x-semantic-type: WorkspaceKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:
           description: Filter by workspace name.
           allOf:

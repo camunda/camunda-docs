@@ -31,6 +31,92 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 66
+
+### Publication date
+
+October 7, 2026
+
+### Products affected
+
+- Camunda Optimize Self-Managed
+
+### Impact
+
+The Docker images `camunda/optimize:8.10.0` and `camunda/optimize:8.10.1` were available for a short time before the
+Camunda 8.10 release announcement. These images contain a defect in the Optimize access check. In Self-Managed
+installations that use Management Identity, users without the Optimize permission can get access to Optimize. This
+includes read access to Optimize data, and changes to Optimize entities such as reports and dashboards.
+
+Exploitation requires a user who can log in to the identity provider that Optimize uses. Unauthenticated access is not
+possible.
+
+We removed the affected images from Docker Hub. No official Camunda Helm chart release referenced these images. Camunda
+SaaS is not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You run Camunda Optimize Self-Managed with the image `camunda/optimize:8.10.0` or `camunda/optimize:8.10.1`. This
+  includes images with these tags that you copied to your own registry. If you install with an official Camunda Helm
+  chart release and do not override the Optimize image, you do not use these images.
+- Optimize uses Management Identity for authentication.
+
+Optimize 8.9 and earlier versions are not affected.
+
+### Solution
+
+Upgrade Optimize to version 8.10.2 immediately. Optimize 8.10.2 contains the fix.
+
+If you used the image `camunda/optimize:8.10.0` or `camunda/optimize:8.10.1`:
+
+1. Upgrade to `camunda/optimize:8.10.2`.
+1. Remove the affected images from your private registries and image caches.
+1. Examine the Optimize data, for example reports, dashboards and collections, for changes that you do not expect.
+
+No action is necessary for Camunda SaaS.
+
+## Notice 65
+
+### Publication date
+
+October 7, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Zeebe (8.7)
+
+### Impact
+
+The document endpoint of the Orchestration Cluster REST API rendered uploaded document content in the browser instead
+of downloading it. A user allowed to upload documents could use this to run scripts in the application's origin with
+the privileges of another user who opens the document, including administrators.
+
+Severity: High.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Orchestration Cluster ≤ 8.9.22 or ≤ 8.8.40
+- Camunda Zeebe ≤ 8.7.42
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Orchestration Cluster 8.10.0, 8.9.23, 8.8.41
+- Camunda Zeebe 8.7.43
+
+The document endpoint now serves all document content with a `Content-Security-Policy: sandbox` header, and returns
+documents as downloads (`Content-Disposition: attachment`), except for PDF files and images, which are still displayed
+in the browser.
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of
+[auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
 ## Notice 64
 
 ### Publication date

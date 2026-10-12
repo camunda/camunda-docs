@@ -343,18 +343,16 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
         <TabItem value="envVars">
 
         ```sh
-        ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEMESSAGEBODYONEXPIRED=true
+        CAMUNDA_PROCESSING_ENABLEMESSAGEBODYONEXPIRED=true
         ```
 
         </TabItem>
         <TabItem value="valuesYaml">
 
         ```yaml
-        zeebe:
-        broker:
-            experimental:
-            features:
-                enableMessageBodyOnExpired: true
+        camunda:
+          processing:
+            enable-message-body-on-expired: true
         ```
 
         </TabItem>
@@ -368,7 +366,7 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
 
         - Because each expired message now carries its entire payload, the expiration checker's write buffer fills up faster. As a result, the checker requires more time (or more roundtrips) to process the same number of expired messages.
 
-        - This can lead to an increasing backlog of messages waiting to be expired. For finer control over the expiration checker's behavior, see the [message TTL checker configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L1223).
+        - This can lead to an increasing backlog of messages waiting to be expired. For finer control over the expiration checker's behavior, see the [message TTL checker configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/defaults.yaml) (`enable-async-message-ttl-checker`).
 
         :::
 

@@ -64,7 +64,7 @@ camunda:
 
 Or use environment variables:
 
-```yaml
+```bash
 SPRING_PROFILES_ACTIVE=broker,standalone
 CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=none
 ```

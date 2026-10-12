@@ -4,10 +4,6 @@ title: Process application versioning
 description: Process applications allow you to create distinct versions for the entire application.
 ---
 
-:::note
-With 8.7, "milestone" was renamed to "version". To learn more about this change, see [the related release note](/reference/announcements-release-notes/870/870-release-notes.md#web-modeler-milestones-renamed-to-versions).
-:::
-
 Process applications support versioning, allowing you to create distinct versions for the entire application. You can use versioning to save a single snapshot of all the process application files in one action.
 
 - When you create a process application version, the input version tag is applied to the `versionTag` field in the main process XML.

@@ -20,13 +20,13 @@ To use the **Orchestration Cluster API connector**, you need an active Camunda 8
 
 You also need OAuth 2.0 client credentials with permission to call the Orchestration Cluster API. Follow the links below to learn more about API client configuration.
 
-- [API client configuration in Camunda 8 SaaS](/components/hub/organization/manage-clusters/manage-api-clients.md)
+- [API client configuration in Camunda 8 SaaS](/components/saas/clusters/manage-api-clients.md)
 - [Token-based authentication in Camunda 8 Self-Managed](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt)
 
 Basic authentication (username and password) is not supported. Only OAuth 2.0 client credentials are accepted.
 
 :::note
-Use secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/saas/clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Orchestration Cluster API connector task
@@ -41,7 +41,7 @@ Choose between **Camunda SaaS** and **Camunda Self-managed** depending on your C
 
 ### SaaS clusters
 
-If you are using a SaaS cluster, you will be required to provide your **Region** and **Cluster ID**. You will see these values when you [create an API client](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) for your cluster.
+If you are using a SaaS cluster, you will be required to provide your **Region** and **Cluster ID**. You will see these values when you [create an API client](/components/saas/clusters/manage-api-clients.md#create-a-client) for your cluster.
 
 ### Self-Managed clusters
 
@@ -58,7 +58,7 @@ If you are testing this connector on your local machine with the Camunda 8 Docke
 ## Configure authentication
 
 For both SaaS and Self-Managed clusters, you need to provide **Client ID** and **Client secret**.
-You will see these values when you [create an API client](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) for your cluster.
+You will see these values when you [create an API client](/components/saas/clusters/manage-api-clients.md#create-a-client) for your cluster.
 
 For Self-Managed clusters, you can additionally specify:
 
