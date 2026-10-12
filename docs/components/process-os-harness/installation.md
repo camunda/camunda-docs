@@ -23,7 +23,7 @@ ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the
 | Claude Code CLI    | `claudecode` | `.claude/skills/` |
 | GitHub Copilot CLI | `copilotcli` | `.github/skills/` |
 
-Only one bundle can be installed at a time. To move to a different agent, run c8 os switch <target> --zip <file.zip>, which removes the current bundle before installing the new one.
+Only one bundle can be installed at a time.
 
 ### Install
 
@@ -58,11 +58,11 @@ Only one bundle can be installed at a time. To move to a different agent, run c8
 1. Install ProcessOS Harness from the bundle:
 
    ```bash
-   c8 os install <targert> --zip /path/to/<targert>.zip
+   c8 os install <target> --zip /path/to/<target>.zip
    ```
 
    :::note
-   Replace `<targert>` with the bundle name, for example `claudecode`.
+   Replace `<target>` with the bundle name, for example `claudecode`.
    :::
 
 1. Initialize a version-controlled project:
@@ -83,7 +83,7 @@ To install a newer bundle, download it from the Camunda Download Center (Enterpr
 
 | Command                                   | What it does                                          |
 | ----------------------------------------- | ----------------------------------------------------- |
-| `c8 os switch <targert> --zip <file.zip>` | Remove the current bundle, then install the new one.  |
+| `c8 os switch <target> --zip <file.zip>` | Remove the current bundle, then install the new one.  |
 | `c8 os uninstall`                         | Remove the bundle, and restore the files it replaced. |
 
 ## Next steps
