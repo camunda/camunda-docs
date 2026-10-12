@@ -25,7 +25,7 @@ import FewerPartitions from '../\_partials/\_restore-api-fewer-partitions.md';
 
 Restore Zeebe partition data through the Orchestration Cluster Restore API without restarting the brokers, when using a relational database management system (RDBMS) as secondary storage.
 
-This page is part of the RDBMS [restore procedure](./restore.md). To compare it with the legacy Restore Application, see [choosing a restore approach](../backup-and-restore.md#choosing-a-restore-approach).
+This page is part of the RDBMS [restore procedure](./restore.md). To compare it with the legacy Restore Application, see [choosing a restore approach](./restore.md#choosing-a-restore-approach).
 
 ## About the Restore API
 

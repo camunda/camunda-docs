@@ -174,7 +174,7 @@ Here is an excerpt from an example installation:
 }
 ```
 
-In the response, review the settings in the `camunda.security` section, compare them against the [configuration reference](../core-settings/configuration/properties.md#authentication), and confirm they match your intended values.
+In the response, review the settings in the `camunda.security` section, compare them against the [configuration reference](../core-settings/configuration/properties.md#camundasecurityauthentication), and confirm they match your intended values.
 
 This is especially useful if you are applying the configuration via Helm values or environment variables and want to double-check that your configuration was applied correctly.
 

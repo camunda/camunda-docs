@@ -1,13 +1,17 @@
 ---
 id: camunda-helm-toolkit
-title: "Use the Camunda Helm Toolkit"
-sidebar_label: "Helm values toolkit"
+title: "Prepare Helm upgrades with the Camunda Helm Toolkit"
+sidebar_label: "Prepare Helm upgrades"
 description: "Migrate and validate Camunda Helm override files with the local Web UI or Docker CLI, then review findings before upgrading."
 ---
 
-Use the Camunda Helm Toolkit to migrate Helm override files between Camunda versions and check their configuration.
+Before every supported Helm minor-version upgrade, run the Camunda Helm Toolkit on your override files. It produces migrated starting points and a report of configuration changes that need review, so you can focus on the remaining upgrade actions instead of finding every values-file change manually.
 
-The toolkit rewrites supported configuration keys and reports changes that need your attention. It doesn't upgrade your deployment, migrate stored data, or replace the [Helm upgrade procedure](/self-managed/upgrade/helm/890-to-8100.md).
+:::note Toolkit boundaries
+The toolkit prepares and checks override files. It doesn't upgrade the deployment, migrate stored data, validate a live cluster, or prove that the complete configuration is ready for production.
+:::
+
+Use the toolkit as the first step in preparing your values files, then follow the [version-specific Helm upgrade guide](/self-managed/upgrade/helm/index.md). Review its manual actions, render and test your complete configuration in non-production, back up data, run the upgrade, and validate the deployed platform.
 
 ## Check version compatibility
 
@@ -19,7 +23,9 @@ Migrate one adjacent Camunda minor version at a time, then review the output bef
 | 8.8            | 8.9              | 8.9                       |
 | 8.9            | 8.10             | 8.10                      |
 
-Standalone validation supports 8.8, 8.9, and 8.10. You can't validate an 8.7 file directly; migrate it to 8.8 first. Support for 8.10 is preliminary, and some changes require manual configuration.
+Standalone validation supports 8.8, 8.9, and 8.10. You can't validate an 8.7 file directly; migrate it to 8.8 first.
+
+The toolkit migrates supported configuration changes and reports actions that need review. Complete the applicable manual steps in the [version-specific upgrade guide](/self-managed/upgrade/helm/index.md).
 
 The source and target arguments are Camunda versions, such as `8.9`, not Helm chart versions, such as `14.x`. Use the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify your deployment's Camunda version.
 
@@ -52,6 +58,18 @@ Open [the local toolkit](http://localhost:8080) in your browser. If port 8080 is
 5. Download each migrated document. The download uses the document currently displayed, so confirm you're viewing the target version rather than the original input.
 
 For a configuration check without migration, select **Validate**, provide your overrides, and choose their Camunda version. Stop the container with `Ctrl+C` when you're finished.
+
+## What to do with the report
+
+Inspect the migrated YAML and act on the findings before using the output for an upgrade.
+
+| Report result | Your next action                                                                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Errors        | Resolve errors before using the migrated output. If the tool fails, correct the failure and rerun it.                                             |
+| Warnings      | Review each warning and complete the applicable manual action before upgrading.                                                                   |
+| No findings   | Continue with the version-specific upgrade guide, render and test the complete layered configuration, and complete backups and deployment checks. |
+
+A clean report is a useful sanity check, not proof of production readiness. For CLI automation, see [reports and exit codes](#interpret-reports-and-exit-codes).
 
 ## Migrate from the CLI
 
@@ -120,7 +138,7 @@ docker run --rm --pull always \
 
 Validation checks the keys your file contains for types, unsupported or deprecated settings, and configuration rules. It doesn't require an override to contain every chart setting. Each file is checked separately, not as the merged result of all Helm layers.
 
-A clean report doesn't prove deployment readiness. Validation doesn't check live Kubernetes resources, stored data, all cross-file requirements, or whether the complete configuration renders and runs successfully. Review the findings, render or test the complete configuration, and follow the upgrade guide's required checks.
+Validation doesn't check live Kubernetes resources, stored data, all cross-file requirements, or whether the complete configuration renders and runs successfully. [Act on the report](#what-to-do-with-the-report), then render and test the complete configuration and follow the upgrade guide's required checks.
 
 ## Interpret reports and exit codes
 

@@ -101,8 +101,8 @@ To use another OIDC provider:
 1. Register `optimize-team-a` and `optimize-team-b` as separate confidential clients in the provider before installing either release.
 1. Configure these callback URLs:
 
-- `https://<host>/optimize-team-a/api/authentication/callback`
-- `https://<host>/optimize-team-b/api/authentication/callback`
+   - `https://<host>/optimize-team-a/api/authentication/callback`
+   - `https://<host>/optimize-team-b/api/authentication/callback`
 
 1. Configure both clients for the `optimize-api` audience and the claims required by your Camunda authorization mapping.
 1. Remove the Keycloak-specific `identity.clients` entry and `global.identity.keycloak` configuration from the reference files.

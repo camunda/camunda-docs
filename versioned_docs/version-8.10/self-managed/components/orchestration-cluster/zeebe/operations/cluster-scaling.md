@@ -125,7 +125,7 @@ On a [zone-aware cluster](#broker-id-naming-scheme), each zone is a separate Sta
 
 ### 2. Send scale request to the Zeebe Gateway
 
-Send a POST request to the Zeebe Gateway's management endpoint to add new brokers to the cluster or redistribute partitions. See the [API reference](#api-reference) for details.
+Send a PATCH request to the Zeebe Gateway's management endpoint to add new brokers to the cluster or redistribute partitions. See the [API reference](#api-reference) for details.
 
 If you are running on Kubernetes and haven’t set up Ingress, port-forward to access the Zeebe Gateway on your local machine:
 
@@ -481,7 +481,7 @@ Scale down can be performed only on brokers, partition count cannot be decreased
 
 ### 1. Send the scale request to the Zeebe Gateway
 
-Now we should tell Zeebe to move partitions away from the brokers that will be removed. For that, we send a POST request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
+Now we should tell Zeebe to move partitions away from the brokers that will be removed. For that, we send a PATCH request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
 
 If you haven't set up Ingress, you can first port-forward to access the Zeebe Gateway in your local machine:
 
@@ -793,7 +793,7 @@ This is a dangerous operation and must be used with caution. Incorrect use may r
 
 Usually, changes can only be made when all brokers are up. If some brokers are unreachable, you can remove them from the cluster by setting the `force` request parameter to `true`.
 
-This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md). For details, see the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Deviations from the process may make the cluster unusable.
+This operation is mainly useful for [dual-region setups](/self-managed/concepts/multi-region/dual-region.md). For details, see the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Deviations from the process may make the cluster unusable.
 
 :::note
 Don’t send more than one `force` request at a time.
@@ -881,7 +881,7 @@ This is a dangerous operation and must be used with caution. When not used corre
 
 Usually, changes can only be made to a cluster when all brokers are up. When some brokers are unreachable, you may want to remove them from the cluster. You can force remove a set of brokers by setting the request parameter `force` to `true`.
 
-This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Any deviations from the described process can result in the cluster being unusable.
+This operation is mainly useful for [dual-region setups](/self-managed/concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Any deviations from the described process can result in the cluster being unusable.
 
 :::note
 Do not send more than one force request at a time.

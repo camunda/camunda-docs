@@ -36,13 +36,13 @@ Zeebe clients also provide a way for users to modify request headers, namely to 
 
 Users can modify request headers using Zeebe's built-in `OAuthCredentialsProvider`, which uses user-specified credentials to contact an OAuth authorization server. The authorization server should return an access token that is then appended to each request.
 
-Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda 8 authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/camunda/camunda/blob/main/clients/java/src/main/java/io/camunda/client/CredentialsProvider.java). In the following sections, we'll describe the usage of the default `OAuthCredentialsProvider` as well as the `CredentialsProvider` interface that can be extended for implementing a custom provider.
+Although, by default `OAuthCredentialsProvider` is configured to use a Camunda 8 authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/camunda/camunda/blob/main/clients/java/src/main/java/io/camunda/client/CredentialsProvider.java). In the following sections, we'll describe the usage of the default `OAuthCredentialsProvider` as well as the `CredentialsProvider` interface that can be extended for implementing a custom provider.
 
 ### OAuthCredentialsProvider
 
 The `OAuthCredentialsProvider` requires the specification of a client ID and a client secret. These are then used to request an access token from an OAuth 2.0 authorization server through a [client credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4).
 
-By default, the authorization server is the one used by Camunda 8, but any other can be used. Using the access token returned by the authorization server, the `OAuthCredentialsProvider` adds it to the gRPC headers of each request as a bearer token. Requests which fail with due to authentication errors (i.e. HTTP 401 or `UNAUTHENTICATED` gRPC code) are seamlessly retried only if a new access token can be obtained.
+By default, the authorization server is the one used by Camunda 8, but any other can be used. Using the access token returned by the authorization server, the `OAuthCredentialsProvider` adds it to the gRPC headers of each request as a bearer token. Requests that fail due to authentication errors (i.e. HTTP 401 or `UNAUTHENTICATED` gRPC code) are seamlessly retried only if a new access token can be obtained.
 
 #### Java
 
@@ -86,7 +86,7 @@ public class AuthorizedClient {
 }
 ```
 
-The client creates an `OAuthCredentialProvider` with the credentials specified through the environment variables and the audience is extracted from the address specified through the `CamundaClientBuilder`.
+The client creates an `OAuthCredentialsProvider` with the credentials specified through the environment variables and the audience is extracted from the address specified through the `CamundaClientBuilder`.
 
 :::note
 Zeebe's Java client will not prevent you from adding credentials to requests while using an insecure connection, but you should be aware that doing so will expose your access token by transmitting it in plaintext.
@@ -105,14 +105,14 @@ Since there are several environment variables that can be used to configure an `
 
 ### Custom Credentials provider
 
-As previously mentioned, the `CredentialProvider`'s purpose is to modify the HTTP headers with an authorization method.
+As previously mentioned, the `CredentialsProvider`'s purpose is to modify the HTTP headers with an authorization method.
 
 The interface consists of an `applyCredentials(CredentialsApplier)` method and a `shouldRetryRequest(StatusCode)` method.
 
 - `applyCredentials(CredentialsApplier)`: Called on every request (both REST and gRPC). The applier lets you add any headers to the request before it's sent.
 - `shouldRetryRequest(StatusCode)`: Called every time a request completed with a non-successful status code. The `StatusCode` argument lets you inspect the raw HTTP or gRPC code, and provides a convenient method to check the request had wrong credentials (`StatusCode#isUnauthorized`).
 
-The following sections implement custom provider in Java:
+The following sections implement a custom provider in Java:
 
 #### Java
 
