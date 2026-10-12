@@ -70,14 +70,14 @@ All future steps will use this environment variable and should, therefore, be ru
 echo $ARCHIVED_VERSION
 ```
 
-### Make sure the new archive version is not published in main
+### Ignore archived version tags
 
 From `main`, create a branch for step one:
 
 ```sh
 git checkout main
 git pull
-git checkout -b archive-step-1
+git checkout -b ignore-archived-version-tags
 ```
 
 Run the `ignore-version-prod` automation:
@@ -118,6 +118,12 @@ This creates a large set of commits. Push them to remote, but **don't open a PR*
 
 ### Fix links and redirects
 
+1. Create a new branch:
+
+```
+git checkout -b archive-$ARCHIVED_VERSION-links-and-redirects
+```
+
 Preprocess the docs to automate common changes that need to be made against the isolated version:
 
 ```sh
@@ -126,34 +132,17 @@ make -C hacks/archiveVersion preprocess
 
 Read the docstring in `hacks/archiveVersion/2-preprocess.py` for details.
 
-Review and commit the changes.
+Review, commit, and push the changes.
 
 #### Manually fix links
 
 Unfortunately, there will likely be other broken links you'll need to fix manually:
 
 1. Run `npm run build` to discover and resolve remaining build errors.
-2. Submit a PR targeting `unsupported/8.x` (not `main`). The build pipeline will show the remaining broken links.
+2. Submit a PR targeting `unsupported/8.x`. The build pipeline will show the remaining broken links.
+3. Review and merge the PR into `unsupported/8.x`.
 
-#### Manually remove redirects
-
-Next, you'll need to remove irrelevant redirects from `.htaccess`. The unsupported site for the archived version is only concerned with that version's redirects.
-
-As a rule of thumb, remove everything except redirects belonging to the archived version. For example, if you're archiving version 8.6:
-
-```txt
-RewriteRule ^docs/8.6/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/8.6/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
-```
-
-Should be kept and rewritten as:
-
-```txt
-RewriteRule ^docs/components/console/manage-plan/upgrade-to-starter-plan/?$ /8.6/docs/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
-```
-
-### Merge all PRs
-
-Merge all the pull requests submitted so far. Then, confirm these changes are successfully published to the associated staging location: `https://stage.unsupported.docs.camunda.io/8.x/`.
+> **Warning:** Do not target `main`! This branch will persist indefinitely alongside `main` and will never be merged. Instead, it will be used to deploy to unsupported.docs.camunda.io.
 
 ### Publish the production release for the archived version
 
@@ -171,17 +160,34 @@ git ls-remote --tags origin "$ARCHIVED_VERSION.*" | awk '{print $2}' | sed 's#re
 6. **(IMPORTANT)** Choose `unsupported/8.x` as the target branch.
 7. Use the new tag for the title.
 8. Click **Generate release notes**.
-9. **(IMPORTANT)** Deselect **Set as the latest release**.
+9. **(IMPORTANT)** For **Release label**, select **None**.
 
-#### Step 4: Remove the archived version from the main docs
+### Remove the archived version
 
-On the `main` branch:
+This step performs the following actions:
 
-1. Remove the archived version from the docs.
-   1. Open a smaller, reviewable PR that logically removes the version, and links to the external unsupported version in the top navigation bar. [Example](https://github.com/camunda/camunda-docs/pull/5597).
-   2. Open a second larger PR that physically removes the source files. [Example](https://github.com/camunda/camunda-docs/pull/5601).
-2. [Publish a new patch release of the main docs](./release-procedure.md#perform-a-patch-release).
-3. Check and confirm the archived version is no longer available in the main docs.
+1. Remove the archived version from `main`.
+2. Remove references to the archived version throughout the docs.
+3. Update relevant redirects.
+4. Update links throughout the docs.
+
+From the `main` branch, create a new branch and run `remove-archived`:
+
+```sh
+git checkout main
+git pull
+git checkout -b archive-$ARCHIVED_VERSION-remove-archived
+make -C hacks/archiveVersion remove-archived
+```
+
+Each commit message explains what it does. The link updates are particularly opinionated. Make sure these are handled correctly and fix any remaining issues. Review and commit the changes.
+
+> **Tip:** Instead of reviewing all the changes at once, review the commits one-by-one. This will be easier to digest. You can also skip the huge physical removal commit.
+
+### Merge and publish
+
+1. [Publish a new patch release of the main docs](./release-procedure.md#perform-a-patch-release).
+2. Check and confirm the archived version is no longer available in the main docs.
 
 Congratulations! You should now have removed the archived version from the docs, and published the archived version to `https://unsupported.docs.camunda.io/x.xx`.
 
@@ -190,6 +196,7 @@ Congratulations! You should now have removed the archived version from the docs,
 <details>
     <summary>Previous archival issues</summary>
 
+- [8.7 archival](https://github.com/camunda/camunda-docs/issues/10200)
 - [8.6 archival](https://github.com/camunda/camunda-docs/issues/8659)
 - [8.5 archival](https://github.com/camunda/camunda-docs/issues/7077)
 - [8.4 archival](https://github.com/camunda/camunda-docs/issues/6628)
