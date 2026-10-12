@@ -26,9 +26,6 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
-
 ## About
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
