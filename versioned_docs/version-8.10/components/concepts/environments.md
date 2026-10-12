@@ -4,7 +4,7 @@ title: Environments
 description: "Learn how environments give teams a named deployment target to run processes in Camunda Hub, and how they relate to clusters and tenants."
 ---
 
-An environment is a named deployment target where a team runs its processes in Camunda Hub. For example, a `payments-prod` environment gives the payments team its own isolated deployment target to run production processes.
+An environment is a named deployment target where a team runs its processes in Camunda Hub. For example, a `payments` environment gives the payments team its own isolated deployment target to run production processes.
 
 Clusters are the infrastructure underneath. Organization admins manage [clusters](./clusters.md), and teams work with the environments assigned to their [workspace](./workspaces.md).
 
