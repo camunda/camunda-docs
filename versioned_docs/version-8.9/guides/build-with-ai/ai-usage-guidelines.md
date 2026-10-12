@@ -6,7 +6,9 @@ description: "Learn how to use Camunda AI features responsibly with guidance on 
 keywords: [ai, ai act, compliance, governance, ai agent, copilot, idp]
 ---
 
-Learn how to use Camunda AI features responsibly with guidance on data handling, human oversight, prohibited uses, and AI agents.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About Camunda AI features
 

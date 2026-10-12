@@ -6,8 +6,9 @@ keywords: ["agentic ai", "AI agents"]
 ---
 
 import ExampleImg from '../connectors/img/ai-agent-subprocess.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Build and integrate AI agents into your end-to-end processes.
+<PageDescription />
 
 ## About AI agents
 
