@@ -1757,6 +1757,7 @@ module.exports = {
             id: "reference/announcements-release-notes/8110/8110-release-notes",
           },
           items: [
+            "reference/announcements-release-notes/8110/8110-announcements",
             "reference/announcements-release-notes/8110/8110-release-notes",
           ],
         },
