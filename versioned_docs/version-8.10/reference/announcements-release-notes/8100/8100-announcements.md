@@ -446,6 +446,30 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 </div>
 <div className="release-announcement-content">
 
+#### Outbound connectors refuse undeclared intrinsic function calls {#connector-intrinsic-function-allow-list}
+
+Starting with Connectors 8.10.0, the connector runtime runs an [intrinsic function](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls) only if the deployed BPMN process declares that exact call, by function name and field path, in the input mappings of the connector element. The same change is available in the 8.7.28, 8.8.22, and 8.9.13 patch releases.
+
+In practice, an intrinsic function call that reaches a connector through a process variable or job variable, instead of being written in the connector element's input mapping, now fails the job. A connector result that contains an object with the `camunda.function.type` key also fails the job when you store it in a result variable or map it with a result expression.
+
+**Action:** Before upgrading, check which processes use intrinsic functions.
+
+- Write each `camunda.function.type` call as a literal in the input mapping of the field that uses it, and redeploy the process.
+- Use a result expression that maps only the fields you need if a response from an external system can contain the `camunda.function.type` key.
+- Don't use `camunda.connector.intrinsic-function.allow-list.mode` set to `DISABLED` as a workaround. This mode refuses every intrinsic function call. No setting restores unrestricted execution.
+
+<p className="link-arrow">[Intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list)</p>
+<p className="link-arrow">[Troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### JWT-authorized inbound webhooks require issuer, audience, and expiration claims
 
 Starting with Camunda 8.10, inbound webhooks configured with JWT authorization validate the token's `iss` and `aud` claims and reject tokens without an `exp` claim. The **Issuer** and **Audience** fields are now required in the element templates for the Webhook connector, Amazon EventBridge inbound connector, and A2A Client webhook.
