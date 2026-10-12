@@ -1451,21 +1451,21 @@ table .badge:nth-of-type(1) {
   color: white;
 }
 
-[data-theme="dark"] .openapi__method-endpoint .badge--primary {
-  --ifm-badge-background-color: #1c3a5e;
-  --ifm-badge-border-color: #3d6fa3;
-  background-color: #1c3a5e;
-  border-color: #3d6fa3;
-  color: #7fb8e6;
-}
-
-[data-theme="dark"] .openapi__method-endpoint .badge--info,
+[data-theme="dark"] .openapi__method-endpoint .badge--primary,
 [data-theme="dark"] .openapi__method-endpoint .badge--warning {
   --ifm-badge-background-color: #6e3a10;
   --ifm-badge-border-color: #b8651f;
   background-color: #6e3a10;
   border-color: #b8651f;
   color: #f3c26a;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--info {
+  --ifm-badge-background-color: #1c3a5e;
+  --ifm-badge-border-color: #3d6fa3;
+  background-color: #1c3a5e;
+  border-color: #3d6fa3;
+  color: #7fb8e6;
 }
 
 [data-theme="dark"] .openapi__method-endpoint .badge--success {
@@ -1798,17 +1798,17 @@ span.callout + p::after {
   background-color: #c54302;
 }
 
-[data-theme="dark"] .get > .menu__link::before {
-  background-color: #1c3a5e;
-  border-color: #3d6fa3;
-  color: #7fb8e6;
-}
-
-[data-theme="dark"] .put > .menu__link::before,
+[data-theme="dark"] .get > .menu__link::before,
 [data-theme="dark"] .patch > .menu__link::before {
   background-color: #6e3a10;
   border-color: #b8651f;
   color: #f3c26a;
+}
+
+[data-theme="dark"] .put > .menu__link::before {
+  background-color: #1c3a5e;
+  border-color: #3d6fa3;
+  color: #7fb8e6;
 }
 
 .put > .menu__link::before {
