@@ -190,7 +190,7 @@ Management commands select an explicit leading `--c8-version`, otherwise the run
 
 `C8RUN_TENANTS_FILE` selects the saved physical tenants file; `C8RUN_SECRETS_DIR` selects the default secrets directory. Relative values and secret import filenames are resolved against the caller's working directory, including on startup. Without overrides, c8run's per-OS-user defaults apply. Each physical tenant's secret directory is a sibling under `tenant-secrets/<id>`. Both `--physical-tenant <id>` and `--physical-tenant=<id>` are supported. c8ctl adds no physical tenant or secret store of its own.
 
-Physical tenant IDs contain lowercase letters and digits. With the bundled H2 or other RDBMS storage, IDs are limited to eight characters. Removing and re-adding an ID restores its data, including its existing users. Each enabled physical tenant's Connectors runtime uses another JVM and port. See the [physical-tenant documentation](https://docs.camunda.io/docs/next/self-managed/concepts/physical-tenants/) for prerequisites and limitations.
+Physical tenant IDs contain lowercase letters and digits. With the bundled H2 or other RDBMS storage, IDs are limited to eight characters. Removing and re-adding an ID restores its data, including its existing users. Each enabled physical tenant's Connectors runtime uses another JVM and port. See the [physical-tenant documentation](/self-managed/concepts/physical-tenants/index.md) for prerequisites and limitations.
 
 #### Inspect a physical tenant with a profile
 
@@ -532,24 +532,24 @@ For scripts that invoke multiple commands, set `C8CTL_OUTPUT_MODE=json` in their
 
 `c8ctl --version` (or `c8ctl -v`) always writes its result to stdout and exits `0`:
 
-| Effective output mode | stdout |
-| :-------------------- | :----- |
-| Text | `c8ctl v<version>` |
-| JSON | `{"status":"info","message":"c8ctl v<version>"}` |
+| Effective output mode | stdout                                           |
+| :-------------------- | :----------------------------------------------- |
+| Text                  | `c8ctl v<version>`                               |
+| JSON                  | `{"status":"info","message":"c8ctl v<version>"}` |
 
 This applies whether JSON mode comes from `--json`, `C8CTL_OUTPUT_MODE`, or the saved preference. The version is primary command output, not a diagnostic, despite the JSON envelope's `status: "info"`. Diagnostics remain on stderr in JSON mode. The version payload is not filtered by `--fields`, and requesting the version does not change the saved preference.
 
 ## Environment variables
 
-| Variable                    | Description          |
-| :-------------------------- | :------------------- |
-| `CAMUNDA_BASE_URL`          | Cluster base URL     |
-| `CAMUNDA_CLIENT_ID`         | OAuth client ID      |
-| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret  |
-| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience |
-| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint |
+| Variable                    | Description                   |
+| :-------------------------- | :---------------------------- |
+| `CAMUNDA_BASE_URL`          | Cluster base URL              |
+| `CAMUNDA_CLIENT_ID`         | OAuth client ID               |
+| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret           |
+| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience          |
+| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint          |
 | `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated) |
-| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID    |
+| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID             |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.
 
