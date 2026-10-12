@@ -56,6 +56,7 @@ The following key changes were also released as part of an 8.7.x patch release.
 | [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                   |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28)    | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28)    | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
+| [8.7.28](https://github.com/camunda/connectors/releases/tag/8.7.28) | Connectors | Breaking change | [Intrinsic function allow-list](#connector-intrinsic-function-allow-list)                                        |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27)    | Core       | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27)    | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                    |
 | [8.7.25](https://github.com/camunda/connectors/releases/tag/8.7.25) | Connectors | Breaking change | [Connector secret filter](#connector-secret-filter)                                                              |
@@ -76,6 +77,24 @@ On 8.7, the outbound lookup goes through Operate, reusing the `camunda.connector
 
 - If you run an outbound-only deployment with `camunda.connector.polling.enabled=false`, every outbound connector job that resolves a secret now fails to look up its allow-list — the job fails and retries under `STRICT`, or the filter falls back to allowing all secrets under `LAX`.
 - Before upgrading, you must either re-enable polling and confirm Operate is reachable, or set the mode to `DISABLED`.
+
+### Outbound connectors refuse undeclared intrinsic function calls {#connector-intrinsic-function-allow-list}
+
+Starting with Connectors 8.7.28, the connector runtime runs an [intrinsic function](/components/connectors/use-connectors/intrinsic-functions.md#declare-calls) only if the deployed BPMN process declares that exact call, by function name and field path, in the input mappings of the connector element.
+
+In practice, an intrinsic function call that reaches a connector through a process variable or job variable, instead of being written in the connector element's input mapping, now fails the job. A connector result that contains an object with the `camunda.function.type` key also fails the job when you store it in a result variable or map it with a result expression.
+
+**Action:** Before upgrading, check which processes use intrinsic functions.
+
+- Write each `camunda.function.type` call as a literal in the input mapping of the field that uses it, and redeploy the process.
+- Use a result expression that maps only the fields you need if a response from an external system can contain the `camunda.function.type` key.
+- Don't use `camunda.connector.intrinsic-function.allow-list.mode` set to `DISABLED` as a workaround. This mode refuses every intrinsic function call. No setting restores unrestricted execution.
+
+On 8.7, the outbound lookup goes through Operate and reuses the `camunda.connector.polling.enabled` property (default: `true`). If you run an outbound-only deployment with `camunda.connector.polling.enabled=false`, every outbound connector job that contains an intrinsic function call fails. Before upgrading, re-enable polling and confirm Operate is reachable.
+
+[Intrinsic function allow-list](/self-managed/connectors-deployment/connectors-configuration.md#intrinsic-function-allow-list)
+
+[Troubleshoot intrinsic function errors](/components/connectors/use-connectors/intrinsic-functions.md#troubleshoot-intrinsic-function-errors)
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
