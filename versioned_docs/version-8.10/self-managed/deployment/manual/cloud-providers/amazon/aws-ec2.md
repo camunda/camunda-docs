@@ -308,7 +308,7 @@ This guide does not cover the VPN client setup, as it requires specific manual c
 ```sh
 export BASTION_HOST=$(terraform output -raw bastion_ip)
 # retrieves the first IP from the camunda_ips array
-export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
+export CAMUNDA_IP=$(terraform output -json camunda_ips | jq -r '.[0]')
 
 ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 ```
@@ -368,7 +368,7 @@ The following commands can be run from within the Terraform folder to bind remot
 ```sh
 export BASTION_HOST=$(terraform output -raw bastion_ip)
 # retrieves the first IP from the camunda_ips array
-export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
+export CAMUNDA_IP=$(terraform output -json camunda_ips | jq -r '.[0]')
 
 # 26500 - gRPC; 8080 - WebUI; 9090 - Connectors
 ssh -L 26500:${CAMUNDA_IP}:26500 -L 8080:${CAMUNDA_IP}:8080 -L 9090:${CAMUNDA_IP}:9090 admin@${BASTION_HOST}
@@ -376,7 +376,7 @@ ssh -L 26500:${CAMUNDA_IP}:26500 -L 8080:${CAMUNDA_IP}:8080 -L 9090:${CAMUNDA_IP
 
 ### Turn off bastion host (optional)
 
-If you used the [bastion host](#turn-off-bastion-host-optional) for access, it can be turned off when longer needed for direct access to the EC2 instances.
+If you used the [bastion host](#connect-to-remote-machines-via-bastion-host-optional) for access, it can be turned off when no longer needed for direct access to the EC2 instances.
 
 To turn off the bastion host, set the `enable_jump_host` variable to `false` in the `variables.tf` file, and reapply Terraform.
 

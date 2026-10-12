@@ -122,7 +122,7 @@ export NODE_COUNT=4
 
 The following enables [envelope encryption](https://aws.amazon.com/about-aws/whats-new/2020/03/amazon-eks-adds-envelope-encryption-for-secrets-with-aws-kms/) to add another layer of protection to your Kubernetes secrets.
 
-We recommend enabling KMS encryption as a first step in creating the cluster. Enabling this configuration afterward can take up to 45 minutes. The KMS key is required in the [eksctl cluster YAML](#eksctl-cluster-yaml).
+We recommend enabling KMS encryption as a first step in creating the cluster. Enabling this configuration afterward can take up to 45 minutes. The KMS key is required in the [eksctl cluster YAML](#create-the-cluster-using-eksctl).
 
 Create AWS KMS Key via the aws-cli. For additional settings, visit the [documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html).
 
@@ -261,7 +261,7 @@ A minimum set of permissions is required to gain access to an Amazon EKS cluster
 
 The policy should look as follows and can be restricted further to specific Amazon EKS clusters if required:
 
-```json
+```shell
 cat <<EOF >./policy-eks.json
 {
     "Version": "2012-10-17",
@@ -365,7 +365,7 @@ In the remainder of the guide, we reference the `CAMUNDA_NAMESPACE` variable as 
 
 ### Check existing StorageClasses
 
-We recommend using **gp3** volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)). It may be necessary to create the `gp3` StorageClass, as the default configuration only includes **gp2**. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+We recommend using **gp3** volumes with Camunda 8 (see [volume performance](/self-managed/reference-architecture/kubernetes.md#amazon-eks-1)). It may be necessary to create the `gp3` StorageClass, as the default configuration only includes **gp2**. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
 
 :::danger Reclaim policy
 Using `reclaimPolicy: Delete` can cause **permanent data loss** if a PVC is deleted. Consider using `Retain` for production. See [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) for details.
@@ -983,7 +983,7 @@ The instance type `m7i.large.search` in the above example is a suggestion, and c
 6. Wait for the OpenSearch domain to be active:
 
    ```shell
-   while [ "$(aws opensearch describe-domain --domain-name $OPENSEARCH_NAME --query 'DomainStatus.Processing' --output text)" != "False" ]; do echo "Waiting for OpenSearch domain to become availablen this can up to take 20-30 minutes..."; sleep 30; done && echo "OpenSearch domain is now available\!"
+   while [ "$(aws opensearch describe-domain --domain-name $OPENSEARCH_NAME --query 'DomainStatus.Processing' --output text)" != "False" ]; do echo "Waiting for OpenSearch domain to become available; this can take up to 20-30 minutes..."; sleep 30; done && echo "OpenSearch domain is now available!"
    ```
 
 7. Retrieve the endpoint of the OpenSearch domain:

@@ -198,58 +198,44 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 </div>
 <div className="release-announcement-content">
 
-#### AI Agent connector: Conversation storage SPI redesign
+#### AI Agent connectors: new element templates replace the legacy templates {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
 
-[Camunda 8.10.0-alpha1](/reference/announcements-release-notes/8100/8100-release-notes.md#8100-alpha1) redesigns the conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage). Built-in stores (in-process, Camunda Document, AWS AgentCore) are migrated transparently; only custom `ConversationStore` implementations are affected.
+Camunda 8.10 introduces new (`v2`) element templates for the AI Agent Task and AI Agent Sub-process connectors, and deprecates the legacy templates. The new templates run on new job types and use each provider's native SDK. They provide:
 
-**Action:** If you maintain a custom `ConversationStore`, migrate to the new SPI. See the updated [AI Agent connector customization guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) for the new shape, and the [migration guide on GitHub](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for a step-by-step walkthrough.
+- Reasoning and extended thinking configuration, and reasoning content kept in the conversation history.
+- Prompt caching configuration, where the provider supports it.
+- Decoupled providers and backends, for example Anthropic through AWS Bedrock Mantle or Microsoft Foundry, OpenAI through Microsoft Foundry, and Google Gemini through the Gemini API or Vertex AI.
+- A custom chat model provider option, for Self-Managed and hybrid deployments.
+- Support for [agent visibility and monitoring](/reference/announcements-release-notes/8100/8100-release-notes.md#real-time-agent-visibility-and-monitoring) and [agent tool configuration](/reference/announcements-release-notes/8100/8100-release-notes.md#improved-agent-tool-configuration).
 
-</div>
-</div>
+The legacy templates keep working and don't receive new provider capabilities. Process definitions you deployed earlier keep running on the legacy job workers until you deploy a new version that uses a new template.
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
+**Action:**
 
-#### AI Agent connectors: redesigned templates, legacy templates deprecated {#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated}
-
-Camunda 8.10 introduces redesigned element templates for the AI Agent Task and AI Agent Sub-process connectors. The new templates broaden support for AI providers and backends, helping you use LLM routes that meet your organization's requirements. Provider-specific capabilities, such as thinking and prompt caching, can support cheaper, faster, and more transparent agent behavior. The legacy element templates are deprecated as of Camunda 8.10, but keep working; existing implementations aren't required to migrate immediately.
-
-**Action:** Use the new element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing legacy implementation to the new templates.
+- To use the new capabilities, migrate each AI Agent element to the new template. This is a manual, per-element change: apply the new template, re-enter the model provider configuration, and, for the AI Agent Task, update the tools sub-process. See the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) and the [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page.
+- If you override the AI Agent job types in a hybrid setup, set the new `CONNECTOR_AI_AGENT_TASK_TYPE` and `CONNECTOR_AI_AGENT_SUBPROCESS_TYPE` variables. See [job type overrides](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md#job-type-overrides).
+- If you modeled an agent element before Camunda 8.10 and stay on the legacy templates, update it to the latest legacy template version (v1, version 13) or migrate it to a new template. Agent visibility and monitoring and agent tool configuration require it. To update, open the process in Modeler, select the agent element, click **Update element template** in the properties panel, and redeploy the process.
 
 </div>
 </div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
+<span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### AI Agent connector: new native (v2) element templates, v1 deprecated
+#### AI Agent connector: SPI and package changes for custom extensions {#ai-agent-connector-spi-and-package-changes}
 
-Camunda 8.10 introduces new `v2` element templates for the AI Agent Task and AI Agent Sub-process connectors, running on new job types and giving native access to each LLM provider's own SDK and wire format (including reasoning/extended thinking and prompt caching configuration).
+Camunda 8.10 changes the Java APIs that [custom AI Agent extensions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md) build on:
 
-The original (`v1`) element templates are deprecated as of Camunda 8.10.
+- The [conversation storage SPI](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) is redesigned. Built-in stores (in-process, Camunda Document, AWS AgentCore) are migrated transparently.
+- The chat model SPI (`ChatModelFactory` and `ChatModel`) replaces the LangChain4j based model factory.
+- The message and tool model classes move from `io.camunda.connector.agenticai.model` to `io.camunda.connector.agenticai.aiagent.model`.
 
-**Action:** Use the `v2` element templates for new AI Agent implementations.
+Only custom implementations are affected. The built-in providers and stores need no changes.
 
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### AI Agent Sub-process and AI Agent Task element templates updated
-
-The AI Agent Sub-process and AI Agent Task element templates are updated in Camunda 8.10 to support the new [agent visibility and monitoring](/reference/announcements-release-notes/8100/8100-release-notes.md#real-time-agent-visibility-and-monitoring) and [agent tool configuration](/reference/announcements-release-notes/8100/8100-release-notes.md#improved-agent-tool-configuration) features.
-
-**Action:** If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template. Open the process in Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+**Action:** If you maintain a custom `ConversationStore`, a custom chat model factory, or code that uses the message and tool model classes, update it to the new APIs. See the [breaking changes for custom extensions](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for the changes and replacements.
 
 </div>
 </div>
@@ -873,6 +859,70 @@ Deployment change 1 description.
 </div>
 </div> -->
 
+## Hub
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Changed default log file name
+
+The log file name in the default Log4j2 configuration changed from `camunda-modeler.log` to `camunda-hub.log`.
+Logging to a file is still disabled by default. This change is only relevant if you enabled file logging in Web Modeler and use the default configuration.
+
+**Action:** Update any external tooling that depends on the log file name.
+
+<p className="link-arrow">[Logging configuration](/self-managed/components/hub/configuration/logging.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deployments target environments instead of clusters
+
+Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is a named deployment target where a team runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
+
+- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every environment assigned to its workspace.
+- Organization admins assign environments to workspaces.
+- In Self-Managed, Camunda Hub creates environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
+
+**Action:** After you upgrade, assign environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its environments as production environments for the project deployment policy.
+
+<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
+<br />
+<p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated configuration settings
+
+In Camunda Hub, the configuration settings previously used by Web Modeler are deprecated in favor of the new Hub equivalents. Application properties prefixed with `camunda.modeler.*` are replaced by `camunda.hub.*`, and environment variables prefixed with `CAMUNDA_MODELER_*` are replaced by `CAMUNDA_HUB_*`. Some properties were also renamed or moved to a different property path.
+
+Camunda Hub still accepts the legacy properties in 8.10 and translates the recognized properties to their new equivalents at startup, but will remove them in 8.12.
+
+**Action:** Update your Camunda Hub configuration to the new settings ahead of that removal.
+
+<p className="link-arrow">[Migrate Web Modeler settings in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#migrate-web-modeler-settings)</p>
+<br/>
+<p className="link-arrow">[Property reference](/self-managed/components/hub/configuration/properties.md)</p>
+
+</div>
+</div>
+
 ## Identity
 
 <div className="release-announcement-row">
@@ -1032,35 +1082,6 @@ The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the ot
 The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools/c8ctl/getting-started.md), which becomes the single tool for configuring and deploying the SAP integration modules.
 
 <p className="link-arrow">[CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)</p>
-
-</div>
-</div>
-
-## Modeler
-
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Deployments target environments instead of clusters
-
-Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is a named deployment target where a team runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
-
-- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every environment assigned to its workspace.
-- Organization admins assign environments to workspaces.
-- In Self-Managed, Camunda Hub creates environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
-
-**Action:** After you upgrade, assign environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its environments as production environments for the project deployment policy.
-
-<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
-<br />
-<p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
 
 </div>
 </div>

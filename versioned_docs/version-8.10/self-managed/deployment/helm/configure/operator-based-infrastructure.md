@@ -340,7 +340,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <Tabs groupId="elasticsearch-cr">
   <TabItem value="cluster" label="Elasticsearch Cluster" default>
 
-This configuration creates a production-ready Elasticsearch cluster with security enabled.
+This configuration creates a baseline Elasticsearch cluster with authentication enabled and TLS disabled. Enable TLS before you use it in production.
 
 **Save as** `elasticsearch-cluster.yml`:
 
@@ -376,7 +376,7 @@ Configure Camunda components to use the ECK-managed Elasticsearch.
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
 ```
 
-**Use case**: External Elasticsearch connection for all orchestration cluster components (Zeebe, Operate, Tasklist, Optimize).
+**Use case**: External Elasticsearch connection for the Orchestration Cluster (Zeebe, Operate, and Tasklist) and Optimize.
 
 **Installation**: Add `-f camunda-elastic-values.yml` to your Helm install command.
 
