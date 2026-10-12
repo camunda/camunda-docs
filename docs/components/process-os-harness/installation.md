@@ -81,10 +81,10 @@ Only one bundle can be installed at a time.
 
 To install a newer bundle, download it from the Camunda Download Center (Enterprise Releases) and run `c8 os switch`.
 
-| Command                                   | What it does                                          |
-| ----------------------------------------- | ----------------------------------------------------- |
+| Command                                  | What it does                                          |
+| ---------------------------------------- | ----------------------------------------------------- |
 | `c8 os switch <target> --zip <file.zip>` | Remove the current bundle, then install the new one.  |
-| `c8 os uninstall`                         | Remove the bundle, and restore the files it replaced. |
+| `c8 os uninstall`                        | Remove the bundle, and restore the files it replaced. |
 
 ## Next steps
 
