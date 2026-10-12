@@ -51,7 +51,7 @@ If you are deploying the full Camunda Self-Managed stack, you configure both sub
 1. **Management Identity first**: configure your IdP connection and verify users can log in to Camunda Hub.
 2. **Admin second**: configure a separate IdP application registration and verify users can log in to Operate and Tasklist.
 
-If you are deploying only the Orchestration Cluster (Operate, Tasklist, Zeebe) without the management plane, you only need to configure Admin.
+If you are deploying only the Orchestration Cluster (Operate, Tasklist, Zeebe) without the Hub plane (Camunda Hub and Management Identity), you only need to configure Admin.
 
 ```mermaid
 flowchart TD
