@@ -121,9 +121,6 @@ orchestration:
       value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
     ...
 
-# If you use Elasticsearch from the embedded Helm chart, set this to true. Otherwise, set it to false.
-elasticsearch:
-  enabled: true
 connectors:
   enabled: false
 optimize:

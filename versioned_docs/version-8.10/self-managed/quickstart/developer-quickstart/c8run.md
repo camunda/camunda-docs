@@ -9,7 +9,7 @@ description: "A quickstart guide for developers to deploy and run Camunda 8 Self
 Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
 
 For production deployments, install the Orchestration Cluster manually as a Java application.
-For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
+For detailed steps, see the [manual installation](/self-managed/deployment/manual/install.md) guide.
 :::
 
 Camunda 8 Run is a local distribution of Camunda 8 that bundles the Camunda 8 runtime, core services, startup scripts, and a launcher application for Windows, macOS, and Linux.
@@ -43,7 +43,7 @@ Step through the Camunda 8 Run guide via the following topics:
 
 If you are looking for a specific task from the previous single-page guide, use the links below.
 
-## Install and start Camunda 8 Run {#install-and-start-camunda-8-run}
+### Install and start Camunda 8 Run {#install-and-start-camunda-8-run}
 
 For prerequisites, local startup, and shutdown steps, see [install and start Camunda 8 Run](./c8run/install-start.md).
 For container-based local deployment, see the [developer quickstart with Docker Compose](./docker-compose.md).
@@ -80,7 +80,7 @@ For the default H2 configuration and limitations, see [default H2 in Camunda 8 R
 
 For PostgreSQL, MariaDB, MySQL, Oracle, and Microsoft SQL Server examples, see [external relational database options](./c8run/secondary-storage.md#external-relational-database-options).
 
-## Shut down Camunda 8 Run {#shut-down-camunda-8-run}
+### Shut down Camunda 8 Run {#shut-down-camunda-8-run}
 
 For local shutdown commands, see [shut down Camunda 8 Run](./c8run/install-start.md#shut-down-camunda-8-run).
 

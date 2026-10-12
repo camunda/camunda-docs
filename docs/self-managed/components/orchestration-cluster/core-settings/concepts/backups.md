@@ -4,7 +4,7 @@ title: "Backups"
 description: "Learn more about backups with the Orchestration Cluster."
 ---
 
-When running an orchestration cluster with [secondary storage](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage), you must configure a snapshot repository in your chosen database:
+When running an orchestration cluster with [secondary storage](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage), you must configure a snapshot repository in your chosen database:
 
 - [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
 - [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
@@ -23,6 +23,7 @@ See [application configurations](/self-managed/deployment/helm/configure/applica
 
 ## Configuration parameters
 
-| Configuration key                     | Description                      | Default value |
-| ------------------------------------- | -------------------------------- | ------------- |
-| `camunda.data.backup.repository-name` | ES / OS snapshot repository name | -             |
+| Configuration key                                                     | Description                            | Default value |
+| --------------------------------------------------------------------- | -------------------------------------- | ------------- |
+| `camunda.data.secondary-storage.elasticsearch.backup.repository-name` | Elasticsearch snapshot repository name | -             |
+| `camunda.data.secondary-storage.opensearch.backup.repository-name`    | OpenSearch snapshot repository name    | -             |

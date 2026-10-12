@@ -1440,7 +1440,48 @@ table .badge:nth-of-type(1) {
 }
 
 .badge--get {
-  background-color: var(--ifm-color-primary);
+  background-color: #c54302;
+}
+
+.openapi__method-endpoint .badge--primary {
+  --ifm-badge-background-color: #c54302;
+  --ifm-badge-border-color: #c54302;
+  background-color: #c54302;
+  border-color: #c54302;
+  color: white;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--primary,
+[data-theme="dark"] .openapi__method-endpoint .badge--warning {
+  --ifm-badge-background-color: #6e3a10;
+  --ifm-badge-border-color: #b8651f;
+  background-color: #6e3a10;
+  border-color: #b8651f;
+  color: #f3c26a;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--info {
+  --ifm-badge-background-color: #1c3a5e;
+  --ifm-badge-border-color: #3d6fa3;
+  background-color: #1c3a5e;
+  border-color: #3d6fa3;
+  color: #7fb8e6;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--success {
+  --ifm-badge-background-color: #16362b;
+  --ifm-badge-border-color: #2f9e64;
+  background-color: #16362b;
+  border-color: #2f9e64;
+  color: #7ee2a8;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--danger {
+  --ifm-badge-background-color: #5c1a1a;
+  --ifm-badge-border-color: #c92a2a;
+  background-color: #5c1a1a;
+  border-color: #c92a2a;
+  color: #f5b8b8;
 }
 
 .badge--post {
@@ -1754,7 +1795,20 @@ span.callout + p::after {
 
 .get > .menu__link::before {
   content: "get";
-  background-color: var(--ifm-color-primary);
+  background-color: #c54302;
+}
+
+[data-theme="dark"] .get > .menu__link::before,
+[data-theme="dark"] .patch > .menu__link::before {
+  background-color: #6e3a10;
+  border-color: #b8651f;
+  color: #f3c26a;
+}
+
+[data-theme="dark"] .put > .menu__link::before {
+  background-color: #1c3a5e;
+  border-color: #3d6fa3;
+  color: #7fb8e6;
 }
 
 .put > .menu__link::before {
@@ -1762,9 +1816,21 @@ span.callout + p::after {
   background-color: var(--openapi-code-blue);
 }
 
+[data-theme="dark"] .post > .menu__link::before {
+  background-color: #16362b;
+  border-color: #2f9e64;
+  color: #7ee2a8;
+}
+
 .post > .menu__link::before {
   content: "post";
   background-color: var(--openapi-code-green);
+}
+
+[data-theme="dark"] .delete > .menu__link::before {
+  background-color: #5c1a1a;
+  border-color: #c92a2a;
+  color: #f5b8b8;
 }
 
 .delete > .menu__link::before {
