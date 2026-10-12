@@ -15,7 +15,7 @@ description: "Enable TLS for Camunda 8 Self-Managed component connections to dat
 | Camunda components → external OIDC issuer with private CA (Entra, Okta, internal Keycloak) | `global.tls.caBundle`                                                                                                                                                                         |
 | Browser / external client → Ingress / GatewayAPI (UI, gRPC)                                | Standard Kubernetes Ingress TLS — configured via per-component `*.ingress.tls` or `global.gateway.tls`, _not_ `global.tls.caBundle`. See [Ingress configuration](./ingress/ingress-setup.md). |
 
-In-cluster pod-to-pod traffic is not covered by this overlay — see [In-cluster transport (service mesh required)](#in-cluster-transport-service-mesh-required).
+In-cluster pod-to-pod traffic isn't covered by this overlay. See [Encrypt in-cluster transport](#in-cluster-transport-service-mesh-required).
 
 ## How it works
 
@@ -311,7 +311,7 @@ The init container builds a PKCS12 truststore; the chart omits `-Djavax.net.ssl.
 
 The chart sets both `SSL_CERT_FILE` and `NODE_EXTRA_CA_CERTS` on Node.js components automatically. Do not add `NODE_EXTRA_CA_CERTS` via `camundaHub.websockets.env` (or the deprecated `webModeler.websockets.env`) — Kubernetes last-wins env semantics make the value undefined.
 
-## In-cluster transport (service mesh required)
+## Encrypt in-cluster transport {#in-cluster-transport-service-mesh-required}
 
 `global.tls.caBundle` covers component-to-datastore and component-to-IdP connections only.
 The following in-cluster connections are plaintext by default:
@@ -322,7 +322,7 @@ The following in-cluster connections are plaintext by default:
 | Web Modeler / Console / Optimize → Identity     | REST     |
 | Spring Boot management / metrics (probes)       | HTTP     |
 
-Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). See the
+Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). For the Orchestration REST and gRPC servers, you can instead enable pod-level TLS with the opt-in Helm values in [Orchestration TLS modes](./orchestration-tls-modes.md). See the
 [TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) for the full connection inventory.
 
 ## Related

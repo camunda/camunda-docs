@@ -20,7 +20,7 @@ As a Management Identity user you can also add your own custom applications. For
 
 ## Application types
 
-To align with the [OAuth 2.0 standard](https://oauth.net/2/client-types/), Camunda distinguishes between _confidental_ and _public_ clients. Applications are also categorized by usage pattern, using the _M2M_ application type in Identity, for systems to communicate using _confidental_ clients without direct user interaction.
+To align with the [OAuth 2.0 standard](https://oauth.net/2/client-types/), Camunda distinguishes between _confidential_ and _public_ clients. Applications are also categorized by usage pattern, using the _M2M_ application type in Identity, for systems to communicate using _confidential_ clients without direct user interaction.
 
 - Confidential
 - Machine-to-machine (M2M)
@@ -51,9 +51,9 @@ The application type is selected when you [create an application](#add-an-applic
 
 2. Click the **Add application** button located on the top right of the table and a modal will open.
 
-3. Enter a name for your application. In this guide we will use a set of example values. Select the type of your application based on our [guide](/self-managed/components/management-identity/application-user-group-role-management/applications.md#types-of-applications). Depending on the selected type, you might need to enter at least one redirect URI. Once you have entered the required details, click **Add**:
+3. Enter a name for your application. In this guide we will use a set of example values. Select the type of your application based on our [guide](/self-managed/components/management-identity/application-user-group-role-management/applications.md#application-types). Depending on the selected type, you might need to enter at least one redirect URI. Once you have entered the required details, click **Add**:
 
-   <img src={ApplicationImg} alt="World map showing the location of each GCP and AWS region" class="img-600"/>
+   <img src={ApplicationImg} alt="Add application modal with name, application type, and redirect URIs fields" class="img-600"/>
 
 4. On confirmation, the modal will close, and the list updates to show your new application. Click on your new application to view the details. This includes your generated client ID and client secret depending on the selected [application type](/self-managed/components/management-identity/application-user-group-role-management/applications.md#application-types).
 

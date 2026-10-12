@@ -22,7 +22,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ## How CSRF protection works in Camunda
 
-- **Token generation**: A unique CSRF token is generated and stored in a secure, HTTP-only cookie named `X-CSRF-TOKEN`.
+- **Token generation**: A unique CSRF token is generated and stored in a cookie named `X-CSRF-TOKEN`. The cookie is `HttpOnly` only when [`camunda.security.csrf.cookie-http-only`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecuritycsrf) is `true`. The default is `false`, so browser applications can read the token with JavaScript.
 - **Token validation**: For state-changing requests (POST, PUT, DELETE, etc.), the server validates that the CSRF token
   in the request header `X-CSRF-TOKEN` matches the one in the cookie.
 - **Safe methods**: GET, HEAD, TRACE, and OPTIONS requests are considered safe and don't require CSRF validation.
@@ -41,10 +41,13 @@ Disabling CSRF protection is not recommended for production environments as it l
 - `/v2/license` – Public license endpoint
 - `/error` – Error handling
 - Authentication endpoints (`/login`, `/logout`)
-- Safe HTTP methods (GET, HEAD, OPTIONS, TRACE)
+
+If a path matches both lists, it is unprotected. For example, `/v2/license` requires no token although `/v2/**` is protected.
+
+To exempt more paths, set [`camunda.security.csrf.ignored-path-patterns`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecuritycsrf) to a list of Ant-style path patterns.
 
 ## Security considerations
 
 - Always use HTTPS in production to prevent token interception.
 - Consider additional security headers configured in the security settings.
-- Regularly review and update the list of unprotected paths.
+- Regularly review the patterns in `camunda.security.csrf.ignored-path-patterns` and keep each pattern as narrow as possible.

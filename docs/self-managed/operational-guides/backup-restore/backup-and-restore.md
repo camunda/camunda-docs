@@ -42,7 +42,7 @@ Using an RDBMS as secondary storage unlocks three new capabilities not available
 
 :::note
 
-- The examples in this guide are based on using the following tools: [curl](https://curl.se/), [jq](https://jqlang.org/), and [kubectl](https://kubernetes.io/de/docs/reference/kubectl/).
+- The examples in this guide are based on using the following tools: [curl](https://curl.se/), [jq](https://jqlang.org/), and [kubectl](https://kubernetes.io/docs/reference/kubectl/).
 
 :::
 
@@ -214,7 +214,6 @@ Setting the `contextPath` in the Helm chart for Optimize will not overwrite the 
 
 <details>
 <summary>Example</summary>
-<summary>
 
 If you are defining the `contextPath` for the Orchestration Cluster in the Camunda Helm chart:
 
@@ -239,5 +238,4 @@ ORCHESTRATION_CLUSTER_MANAGEMENT_API=http://localhost:9600
 curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/health
 ```
 
-</summary>
 </details>

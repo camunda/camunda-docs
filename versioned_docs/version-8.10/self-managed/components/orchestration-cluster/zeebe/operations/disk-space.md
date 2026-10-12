@@ -10,10 +10,10 @@ To prevent the system from reaching an unrecoverable state, Zeebe expects a mini
 
 Zeebe can be configured with the following settings for the disk usage:
 
-- **zeebe.broker.data.disk.enablemonitoring**: Configure if disk usage should be monitored (default: true)
-- **zeebe.broker.data.disk.monitoringInterval**: The interval in which the disk space usage is checked (default: 1 second)
-- **zeebe.broker.data.disk.freeSpace.replication**: When the free space available is less than this value, Zeebe pauses receiving replicated events. (default: 1GB)
+- **camunda.data.primary-storage.disk.monitoring-enabled**: Configure if disk usage should be monitored (default: true)
+- **camunda.data.primary-storage.disk.monitoring-interval**: The interval in which the disk space usage is checked (default: 1 second)
+- **camunda.data.primary-storage.disk.free-space.replication**: When the free space available is less than this value, Zeebe pauses receiving replicated events. (default: 1GB)
   - For **production** use cases, we recommend to increase this value and set it approximately to `number of partitions x logSegmentSize + 1GB`.
-- **zeebe.broker.data.disk.freeSpace.processing**: When the free space available is less than this value, Zeebe rejects all user commands and pauses processing. (default: 2GB)
-  - This must be greater than `freeSpace.replication`.
+- **camunda.data.primary-storage.disk.free-space.processing**: When the free space available is less than this value, Zeebe rejects all user commands and pauses processing. (default: 2GB)
+  - This must be greater than `free-space.replication`.
   - For **production** use cases, we recommend increasing this value and setting it at a minimum of `number of partitions x 2 x logSegmentSize + 1GB`.

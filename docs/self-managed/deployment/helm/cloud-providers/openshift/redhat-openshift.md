@@ -26,7 +26,7 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appropriate configurations.
 
-However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).
+However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#configuring-the-ingress) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).
 
 Additional information and a high-level overview of Kubernetes as the upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
@@ -516,7 +516,7 @@ Deploy Keycloak with OpenShift Routes:
 
 ```bash
 # Deploy the PostgreSQL database for Keycloak
-CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-keycloak" ./deploy.sh)
 
 # Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-openshift.yml"
@@ -539,7 +539,7 @@ Deploy Keycloak with nginx-ingress:
 
 ```bash
 # Deploy the PostgreSQL database for Keycloak
-CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-keycloak" ./deploy.sh)
 
 # Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-nginx.yml"
@@ -562,7 +562,7 @@ Deploy Keycloak without external access:
 
 ```bash
 # Deploy the PostgreSQL database for Keycloak
-CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-keycloak" ./deploy.sh)
 
 # Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-no-domain.yml"
@@ -1002,7 +1002,7 @@ The Camunda Helm chart can be deployed to OpenShift with a few modifications, pr
 
 #### Non-root SCCs
 
-If you intend to deploy Camunda 8 while restricting applications from running as root (e.g., using the `nonroot` built-in SCCs), you'll need to configure each pod and container to run as a non-root user. For example, when deploying Zeebe using a stateful set, you would include the following YAML, replacing `1000` with the desired user ID:
+If you intend to deploy Camunda 8 while restricting applications from running as root (e.g., using the `nonroot` built-in SCCs), you'll need to configure each pod and container to run as a non-root user. For example, when deploying Zeebe using a stateful set, you would include the following YAML, replacing `1000` with the desired user ID and `<container-name>` with the name of the container:
 
 ```yaml
 spec:
@@ -1011,8 +1011,9 @@ spec:
       securityContext:
         runAsUser: 1000
       containers:
-        securityContext:
-          runAsUser: 1000
+        - name: <container-name>
+          securityContext:
+            runAsUser: 1000
 ```
 
 :::note

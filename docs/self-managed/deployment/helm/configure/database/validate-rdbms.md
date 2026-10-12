@@ -79,7 +79,7 @@ What to expect:
 Check Orchestration Cluster logs for Liquibase initialization:
 
 ```bash
-kubectl -n camunda logs deploy/orchestration | grep -E "Liquibase|MyBatisConfiguration"
+kubectl -n camunda logs statefulset/camunda-zeebe | grep -E "Liquibase|MyBatisConfiguration"
 ```
 
 A successful run includes a line similar to:
@@ -119,7 +119,7 @@ If tables exist (for example `EXPORTER_POSITION`, `AUTHORIZATIONS`, `BATCH_OPERA
 Search Orchestration Cluster logs for exporter startup:
 
 ```bash
-kubectl -n camunda logs deploy/orchestration | grep -E "RdbmsExporter|RDBMS Exporter"
+kubectl -n camunda logs statefulset/camunda-zeebe | grep -E "RdbmsExporter|RDBMS Exporter"
 ```
 
 Successful startup includes lines similar to:
@@ -190,8 +190,7 @@ Exporter progress is the most reliable “is it working” signal. If `last_expo
 Fetch logs:
 
 ```bash
-kubectl -n camunda logs deploy/orchestration
-kubectl -n camunda logs statefulset/zeebe-broker-0
+kubectl -n camunda logs statefulset/camunda-zeebe
 ```
 
 If logs contain connection, driver, or authentication stack traces, the application typically fails fast and does not reach full readiness.

@@ -69,16 +69,16 @@ Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.
 
 The exporter can be configured by providing `args`. The table below explains all the different options, and the default values for these options:
 
-| Option                  | Description                                                                                                                                                                                      | Default                 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
-| url                     | Valid URLs as a comma-separated string.                                                                                                                                                          | `http://localhost:9200` |
-| request-timeout-ms      | Request timeout (in ms) for the OpenSearch client.                                                                                                                                               | `30000`                 |
-| index                   | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.                                            |                         |
-| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                                                       |                         |
-| retention               | Refer to [retention](#retention) for the retention configuration options.                                                                                                                        |                         |
-| authentication          | Refer to [authentication](#authentication) for the authentication configuration options.                                                                                                         |                         |
-| aws                     | Refer to [AWS](#aws) for the AWS configuration options.                                                                                                                                          |                         |
-| include-enabled-records | If `true`, exports all enabled record types configured under `index`. If `optimize-mode-enabled` is `true`, Optimize mode takes precedence. Use mainly for migration or compatibility scenarios. | `false`                 |
+| Option                  | Description                                                                                                                                                                                    | Default                 |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| url                     | Valid URLs as a comma-separated string.                                                                                                                                                        | `http://localhost:9200` |
+| request-timeout-ms      | Request timeout (in ms) for the OpenSearch client.                                                                                                                                             | `30000`                 |
+| index                   | Refer to [index](#index) for index configuration options, including record/value-type switches, Optimize-focused filters, and the Optimize mode flag.                                          |                         |
+| bulk                    | Refer to [bulk](#bulk) for the bulk configuration options.                                                                                                                                     |                         |
+| retention               | Refer to [retention](#retention) for the retention configuration options.                                                                                                                      |                         |
+| authentication          | Refer to [authentication](#authentication) for the authentication configuration options.                                                                                                       |                         |
+| aws                     | Refer to [AWS](#aws) for the AWS configuration options.                                                                                                                                        |                         |
+| include-enabled-records | If `true`, exports all enabled record types configured under `index`. If `optimizeModeEnabled` is `true`, Optimize mode takes precedence. Use mainly for migration or compatibility scenarios. | `false`                 |
 
 <Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
 
@@ -272,8 +272,8 @@ camunda:
           retention:
             enabled: true
             minimumAge: 30d
-            policyName: zeebe-records-retention-policy
-            policyDescription: Zeebe records retention policy
+            policyName: zeebe-record-retention-policy
+            policyDescription: Zeebe record retention policy
 
           authentication:
             username: opensearch
@@ -287,6 +287,9 @@ camunda:
           index:
             prefix: zeebe-record
             createTemplate: true
+
+            # Optimize mode (default: true) overrides the per-value-type flags below, such as job.
+            optimizeModeEnabled: false
 
             command: false
             event: true
@@ -367,7 +370,7 @@ In this case, it is recommended to create a new custom trust store based on the 
     - `javax.net.ssl.trustStorePassword`: set to your trust store password.
 
     The following example uses a trust store location of `/tmp/zeebeTrustStore.jks`, and a password of `changeme`. When using the official distribution
-    (whether Docker image or the bundled shell scripts), these propertiescan be provided using the following environment variable:
+    (whether Docker image or the bundled shell scripts), these properties can be provided using the following environment variable:
 
     ```sh
     JAVA_OPTS="-Djavax.net.ssl.trustStore=/tmp/zeebeTrustStore.jks -Djavax.net.ssl.trustStorePassword=changeme ${JAVA_OPTS}"
@@ -384,7 +387,7 @@ By default, they emit only the record value types and intents required by Optimi
 
 To export additional record types, enable the [`include-enabled-records`](#configuration) configuration property.
 
-When you enable exporter-side filters (`optimize-mode-enabled`, `variable-name`,
+When you enable exporter-side filters (`optimizeModeEnabled`, `variable-name`,
 `variable-type`, or `bpmn-process-id`), filtering applies only to newly produced records. Existing documents in Elasticsearch or OpenSearch are not rewritten.
 
 :::info Upgrade notes

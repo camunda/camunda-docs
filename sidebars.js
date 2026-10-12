@@ -1751,6 +1751,17 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "8.11",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/8110/8110-release-notes",
+          },
+          items: [
+            "reference/announcements-release-notes/8110/8110-release-notes",
+          ],
+        },
+        {
+          type: "category",
           label: "8.10",
           link: {
             type: "doc",
@@ -2579,6 +2590,7 @@ module.exports = {
                     id: "self-managed/components/orchestration-cluster/zeebe/exporters/exporters",
                   },
                   items: [
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",

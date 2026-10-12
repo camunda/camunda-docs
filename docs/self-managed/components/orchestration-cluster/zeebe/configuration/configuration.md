@@ -143,6 +143,8 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 Zeebe uses Log4j2 framework for logging. In the distribution and the Docker image, find the default log configuration file in `config/log4j2.xml`.
 
+For details on logging, refer to the Orchestration Cluster [core settings and features](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md).
+
 ### Google Stackdriver (JSON) logging
 
 To enable Google Stackdriver compatible JSON logging, set the environment variable `ZEEBE_LOG_APPENDER=Stackdriver` before starting Zeebe.
@@ -177,7 +179,3 @@ into a different section. Only at that point do they fall under the same backwar
 the project. We may choose to drop support for specific experimental configurations in any minor version update.
 
 Most users should not have to change anything in this section for a good experience. However, if you have a unique set up, or simply wish to try out new experimental features, it can be worth investigating these (ideally with the guidance of the Zeebe community).
-
-## Logging
-
-For details on logging, refer to the Orchestration Cluster [core settings and features](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md)

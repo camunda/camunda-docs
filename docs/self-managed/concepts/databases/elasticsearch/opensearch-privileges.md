@@ -3,7 +3,7 @@ id: opensearch-privileges
 title: "OpenSearch privileges"
 ---
 
-If you implement Camunda 8 with OpenSearch as a service provider, you must configure OpenSearch with the following [permissions](https://opensearch.org/docs/latest/security/access-control/permissions/) and [default action groups](https://opensearch.org/docs/latest/security/access-control/default-action-groups/) in mind:
+If you implement Camunda 8 with OpenSearch as a service provider, you must configure OpenSearch with the following [permissions](https://opensearch.org/docs/latest/security/access-control/permissions/) and [default action groups](https://opensearch.org/docs/latest/security/access-control/default-action-groups/) in mind.
 
 Action groups are a set of permissions. Permissions have the `cluster|indices` prefix; all others are action groups.
 
@@ -18,8 +18,7 @@ Action groups are a set of permissions. Permissions have the `cluster|indices` p
 - `indices:admin/index_template/delete` - Necessary to create and manage index schema on start up and migration.
 - `indices:data/write/reindex` - Necessary to reindex during archiving. Required to move data from runtime indices to dated indices.
 - `indices:data/read/scroll` - Necessary to scroll through data when reading large result sets.
-- `indices:data/read/scroll/clear` - Necessary to search with paging.
-- `cluster_manage_templates` - Necessary to create and manage index schema on start up.
+- `indices:data/read/scroll/clear` - Necessary to clear scroll contexts after paging through large result sets.
 - `cluster_manage_index_templates` - Necessary to create and manage index schema on start up.
 
 ## Indices
