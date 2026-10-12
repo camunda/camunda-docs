@@ -15,7 +15,7 @@ The Camunda 8 Helm chart includes a `values.schema.json` file. Helm compares you
 
 - Helm checks the merged values against `values.schema.json` before it renders templates.
 - A schema error stops `helm install`, `helm upgrade`, `helm template`, and `helm lint`.
-- Helm has no warn-only mode. Each schema error is a hard failure.
+- Helm has no warn-only mode. Each schema error is a hard failure. For the warnings that the chart gives, see [unknown-key warnings](#check-the-unknown-key-warnings).
 - The chart documentation links and descriptions don't appear in Helm errors.
 - The chart schema closes some objects. A closed object rejects any key that the schema doesn't list.
 
@@ -25,6 +25,34 @@ The error text depends on the Helm version. This example comes from a test chart
 | ----------------------- | -------------------------------------------------- |
 | 3.10 to 3.19            | `- (root): Additional property unk is not allowed` |
 | 3.20 and later, and 4.x | `- at '': additional properties 'unk' not allowed` |
+
+## Check the unknown-key warnings of the chart {#check-the-unknown-key-warnings}
+
+Camunda 8.10 Helm chart versions later than 15.0.0 also check your values for unknown keys while they render templates. This check gives warnings. It doesn't stop the command.
+
+- The chart compares your values to the keys that its schema declares. A key that the schema doesn't declare is an unknown key.
+- For each unknown key, the chart adds a warning to the release notes that `helm install` and `helm upgrade` print. The chart also writes the warnings to the `<release-fullname>-warnings` ConfigMap.
+- The check ignores `global` values, the values of dependency charts, and free-form maps such as annotations, labels, and resources.
+
+The warning names the full path of the key:
+
+```text
+[camunda][warning] UNKNOWN VALUES KEY: orchestration.foo. Helm ignores this key. Remove or correct it. A future chart version can reject unknown keys.
+```
+
+To read the warnings of an installed release, run:
+
+```shell
+kubectl get configmap <release-fullname>-warnings --namespace <namespace> --output jsonpath='{.data.warnings}'
+```
+
+To make an unknown key stop the command, set `global.strictValues: true`. The command then fails with this error:
+
+```text
+[camunda][error] Unknown values keys (global.strictValues=true): orchestration.foo
+```
+
+`global.strictValues` is `false` by default. `--skip-schema-validation` doesn't turn off this check, because the chart runs it during template rendering.
 
 ## Fix the values first
 
