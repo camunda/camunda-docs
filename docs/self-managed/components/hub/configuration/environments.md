@@ -21,7 +21,7 @@ Declare each additional Physical Tenant of a cluster with `physical-tenants`. Se
 
 | Property                                                 | Description                                                                                                                             | Required |
 | :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :------- |
-| `camunda.hub.clusters[0].physical-tenants[0].id`         | The ID of the Physical Tenant. Camunda Hub shows it as the environment name.                                                            | Yes      |
+| `camunda.hub.clusters[0].physical-tenants[0].id`         | The ID of the Physical Tenant. Camunda Hub shows it as the environment name. Dashes aren't supported in a Physical Tenant ID.           | Yes      |
 | `camunda.hub.clusters[0].physical-tenants[0].name`       | Reserved. Camunda Hub accepts the key, but doesn't use it yet. The name of the environment is the ID of the Physical Tenant.            | No       |
 | `camunda.hub.clusters[0].physical-tenants[0].components` | The [components](properties.md#components) that differ from the cluster for this tenant. Each component needs a `type` and a `version`. | No       |
 
