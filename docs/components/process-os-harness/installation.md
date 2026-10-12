@@ -16,7 +16,7 @@ ProcessOS Harness is only available to Camunda Enterprise customers. To download
 
 ### Choose a target
 
-ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. A <target> is the label of the bundle that matches your AI coding agent. Use it in the c8 os install command and as the name of the archive you download, because an agent only discovers skills in its own directory.
+ProcessOS Harness ships one bundle per AI coding agent. Every bundle carries the same skills, rules, and hooks, generated into the layout that agent expects. A `target` is the label of the bundle that matches your AI coding agent. Use it in the c8 os install command and as the name of the archive you download, because an agent only discovers skills in its own directory.
 
 | AI coding agent    | Target       | Skills directory  |
 | ------------------ | ------------ | ----------------- |
