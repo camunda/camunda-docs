@@ -11,7 +11,7 @@ export default function NotFoundContent({ className }) {
 
   return (
     <main className={clsx("container margin-vert--xl", className)}>
-      <div className="double-column-container">
+      <div className={clsx("double-column-container", styles.columns)}>
         <div
           className="double-column-left"
           style={{ flex: "1.5", marginRight: "30px" }}
@@ -23,20 +23,41 @@ export default function NotFoundContent({ className }) {
 
           <p>
             The page may have been moved or removed, or the link may be
-            incorrect. Search the docs or go back to the home page.
+            incorrect. Try searching the docs, Ask AI, or go back to the home
+            page.
           </p>
 
           <div className={styles.search}>
             <AlgoliaSearchBox />
           </div>
 
-          <Link
-            className="button button--outline button--secondary button--md button--hero--topic"
-            to="/"
-            style={{ marginBottom: "30px", marginTop: "20px" }}
-          >
-            Go to docs home page
-          </Link>
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className="button button--secondary button--md kapa-open"
+              title="Ask AI"
+              aria-label="Ask AI"
+              onClick={() => window.Kapa?.open?.({})}
+            >
+              <img
+                src={useBaseUrl("/img/ai-star.png")}
+                alt=""
+                style={{
+                  height: "1em",
+                  width: "1em",
+                  marginRight: "6px",
+                  verticalAlign: "middle",
+                }}
+              />
+              Ask AI
+            </button>
+            <Link
+              className="button button--outline button--secondary button--md button--hero--topic"
+              to="/"
+            >
+              Go to docs home page
+            </Link>
+          </div>
         </div>
         <div className="double-column-right" style={{ flex: "1.5" }}>
           <img

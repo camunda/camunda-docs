@@ -1,10 +1,38 @@
 .search {
-  margin-bottom: 1rem;
+  margin: 3rem 0;
+}
+
+.search :global(.DocSearch-Button) {
+  height: 52px !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  padding: 0 16px !important;
+}
+
+.search :global(.DocSearch-Button-Placeholder) {
+  font-size: 1rem !important;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 3rem 0 30px;
+}
+
+.columns {
+  align-items: center;
 }
 
 .heroImage {
   display: block;
   width: 100%;
-  max-width: 900px;
+  max-width: 525px;
   margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .heroImage {
+    display: none;
+  }
 }
