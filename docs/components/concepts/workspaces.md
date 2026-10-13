@@ -13,7 +13,7 @@ A payments team might have a `Payments` workspace:
 
 - **Members**: The developers, analysts, and reviewers of the payments team, each with a workspace role.
 - **Projects**: A `consumer-loan-approval` project and a `refund-handling` project.
-- **Environments**: A `payments-dev` environment for testing, and a `payments-prod` environment that an organization admin assigned to the team.
+- **Environments**: A `paymentstest` environment for testing, and a `payments` environment that an organization admin assigned to the team.
 
 ## Workspaces in Camunda Hub
 
