@@ -860,6 +860,25 @@ The deprecated keys continue to work in 8.10. When you set one to a non-default 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unknown Helm values keys rejected by default in Camunda 8.12 {#unknown-helm-values-keys-rejected-in-812}
+
+Starting with Helm chart 15.1.0, the Camunda 8.10 chart warns about each key in your values that the chart schema doesn't declare. Helm ignores these keys, so the settings they hold aren't applied. The 8.11 chart keeps this behavior.
+
+Starting with Camunda 8.12 (Helm chart 17.x), unknown chart-owned keys stop `helm install` and `helm upgrade` by default.
+
+**Action:** Remove or correct the keys that the `[camunda][warning] UNKNOWN VALUES KEY` messages name. To make unknown keys fail now, set `global.strictValues: true`.
+
+<p className="link-arrow">[Find unknown keys in your values](/self-managed/deployment/helm/operational-tasks/helm-values-schema-validation.md#find-unknown-keys)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
