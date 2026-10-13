@@ -241,6 +241,8 @@ content blocks.
 
 For supported file types and details on how documents are resolved, see [document support](./agentic-ai-aiagent-documents.md).
 
+<a id="assisted-tool-configuration-in-camunda-hub"></a>
+
 ## Assisted tool configuration
 
 In the properties panel, the modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process.
