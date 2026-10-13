@@ -1,12 +1,13 @@
 ---
 id: idp-integrate
 title: Integrate IDP into your processes
-description: "Integrate intelligent document processing (IDP) into your end-to-end processes in Web Modeler."
+description: "Integrate your published document extraction templates into your end-to-end processes in Web Modeler."
 ---
 
 import IdpElementImg from './img/idp-diagram-element.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Integrate your published document extraction templates into your end-to-end processes in Web Modeler.
+<PageDescription />
 
 :::tip
 New to IDP integration? See the [example IDP integration](idp-example.md) for a worked example of a simple IDP process.
