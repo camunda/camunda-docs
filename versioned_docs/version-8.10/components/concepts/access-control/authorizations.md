@@ -138,6 +138,15 @@ User task access in the Orchestration Cluster is controlled using a combination 
 
 For Tasklist-specific behavior, permission evaluation, and recommended configuration, see [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
 
+### Access to linked forms
+
+Access to a process definition or a user task includes access to the form linked to it. Reading a linked form through one of the following endpoints requires only the permission on the process definition or user task. No separate `READ` permission on the `Resource` (form) is needed:
+
+- Get process start form (`GET /process-definitions/{processDefinitionKey}/form`) requires `READ_PROCESS_DEFINITION` on the `Process Definition`.
+- Get user task form (`GET /user-tasks/{userTaskKey}/form`) requires `READ_USER_TASK` on the `Process Definition` or `READ` on the `User Task`.
+
+Retrieving a form directly with Get form (`GET /forms/{formKey}`) still requires `READ` on the `Resource` (form).
+
 ## Configuration
 
 ### SaaS configuration
