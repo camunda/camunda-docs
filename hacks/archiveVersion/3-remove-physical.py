@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from archive_common import get_release_notes_paths, get_versioned_docs_paths, commit_changes
+from archive_common import get_versioned_docs_paths, commit_changes
 
 DOCS_ROOT = "../../"
 ARCHIVED_VERSION = os.environ["ARCHIVED_VERSION"]
