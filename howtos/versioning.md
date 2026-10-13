@@ -1,15 +1,15 @@
 # Versioning
 
-Our documentation is versioned. All sections are versioned together, this includes products that do not have a fixed release cycle (such as Console, Web Modeler, and Connectors).
+Our documentation is versioned. All sections are versioned together, this includes products that do not have a fixed release cycle.
 
 ## Structure
 
 Depending on the version, location of source files and sidebar navigation definition varies:
 
-| Instance | Version(s)              | Source path                                       | Sidebars path                                                         |
-| -------- | ----------------------- | ------------------------------------------------- | --------------------------------------------------------------------- |
-| `docs`   | Next                    | [/docs/](../docs/)                                | [sidebars.js](../sidebars.js)                                         |
-| `docs`   | 8.9, 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
+| Instance | Version(s)         | Source path                                       | Sidebars path                                                         |
+| -------- | ------------------ | ------------------------------------------------- | --------------------------------------------------------------------- |
+| `docs`   | next               | [/docs/](../docs/)                                | [sidebars.js](../sidebars.js)                                         |
+| `docs`   | 8.10, 8.9, 8.8 ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
 
 ## Create new version
 
@@ -88,7 +88,7 @@ make -C hacks/archiveVersion ignore-version-prod
 
 This updates `publish-prod.yaml` to ignore tags for the archived minor version and any patches during future production releases.
 
-Commit and submit a PR.
+Review the commit and submit a PR.
 
 ### Create the new archived version branch
 
