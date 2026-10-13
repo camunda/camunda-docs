@@ -52,7 +52,7 @@ The broker needs to receive communication from the gateway and from other broker
 
 - `camunda.cluster.network.command-api.port: 26501`: Gateway-to-broker communication, using an internal SBE (Simple Binary Encoding) protocol. This is the Command API port. This should be exposed to the gateway.
 - `camunda.cluster.network.internal-api.port: 26502`: Inter-broker clustering using the Gossip and Raft protocols for partition replication, broker elections, topology sharing, and message subscriptions. This should be exposed to other brokers and the gateway.
-- `management.server.port: 9600`: Metrics and Readiness Probe. Prometheus metrics are exported on the route `/metrics`. There is a readiness probe on `/ready`. This is the same port the [management API](./management-api.md) is served on.
+- `management.server.port: 9600`: Metrics and Readiness Probe. Prometheus metrics are exported on the route `/actuator/prometheus`. There is a readiness probe on `/actuator/health/readiness`. This is the same port the [management API](./management-api.md) is served on.
 
 The relevant [configuration](../configuration/configuration.md) settings are:
 

@@ -175,7 +175,7 @@ Rather than relying on prompt instructions alone to keep agents in bounds, Camun
 
 - To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/reference/contact.md) page.
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
-- [Create a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md)
+- [Create a Camunda 8 account](/components/saas/organization/manage-plan/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
 - [Automate a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)
 - [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)

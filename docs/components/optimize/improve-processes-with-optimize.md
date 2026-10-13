@@ -22,7 +22,7 @@ For an in-depth overview of Optimize's capabilities, visit our [Optimize documen
 
 Before getting started with Optimize:
 
-1. If using SaaS, [create a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md).
+1. If using SaaS, [create a Camunda 8 account](/components/saas/organization/manage-plan/create-account.md).
 1. [Create a cluster](/components/saas/clusters/create-cluster.md) in Camunda Hub.
 
 :::note

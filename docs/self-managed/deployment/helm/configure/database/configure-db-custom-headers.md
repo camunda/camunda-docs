@@ -49,8 +49,8 @@ Add the following dependency to a new Java project:
 
 <TabItem value='gradle'>
 
-```yml
-implementation "io.camunda:camunda-search-client-plugin:${version.camunda-search-client-plugin}"
+```groovy
+compileOnly "io.camunda:camunda-search-client-plugin:${version.camunda-search-client-plugin}"
 ```
 
 </TabItem>

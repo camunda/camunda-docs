@@ -26,7 +26,7 @@ Other dependencies include:
 - [Aurora PostgreSQL](https://aws.amazon.com/rds/aurora/) as secondary storage
 - [Amazon S3](https://aws.amazon.com/s3/) for node ID metadata and backups
 
-For more implementation details, read the [Architecture](./aws-ecs#architecture) section of our deployment guide.
+For more implementation details, read the [Architecture](./aws-ecs.md#architecture) section of our deployment guide.
 
 ## Dynamic node ID provider
 

@@ -127,7 +127,7 @@ camunda.data.secondary-storage.rdbms.*
 | Property                | Description                                                      | Default |
 | ----------------------- | ---------------------------------------------------------------- | ------- |
 | `url`                   | JDBC connection URL                                              | _empty_ |
-| `user`                  | Username for the connection                                      | _empty_ |
+| `username`              | Username for the connection                                      | _empty_ |
 | `password`              | Password for the connection                                      | _empty_ |
 | `auto-ddl`              | Enables Liquibase schema management                              | `true`  |
 | `prefix`                | Optional table name prefix                                       | `""`    |
@@ -200,7 +200,6 @@ camunda.data.secondary-storage.rdbms.history.*
 | `batch-operation-migrate-process-instance-ttl` | TTL for migrate-process-instance batch operations                                               | P5D        |
 | `batch-operation-modify-process-instance-ttl`  | TTL for modify-process-instance batch operations                                                | P5D        |
 | `batch-operation-resolve-incident-ttl`         | TTL for resolve-incident batch operations                                                       | P5D        |
-| `historyCleanupBatchSize`                      | Maximum number of entries deleted per cleanup run                                               | 1000       |
 | `min-history-cleanup-interval`                 | Minimum duration between cleanup runs (ISO-8601 duration)                                       | PT1M       |
 | `max-history-cleanup-interval`                 | Maximum duration between cleanup runs (ISO-8601 duration)                                       | PT60M      |
 | `max-history-cleanup-usage`                    | Maximum percentage of usage time the history cleanup is allowed to use (values between 0 and 1) | 0.25 (25%) |
@@ -231,16 +230,18 @@ this data can be reproduced by replaying past records from the Zeebe log stream,
 be present on all brokers. Zeebe's logstream segments are usually compacted as soon as all exporters have acknowledged the
 records.
 
-Camunda supports different strategies to handle this situation and preventing Zeebe log stream segments from being
+Camunda supports different strategies to handle this situation and prevent Zeebe log stream segments from being
 compacted prematurely.
 The following strategies are supported:
 
 - **LSN replication monitoring:** dynamic monitoring of the replication lag based on the database LSN. This is the most
   preferred strategy and should be used whenever possible with the used database vendor.
+- **Time-based replication monitoring:** monitoring of the replication lag that the primary replica reports. This is
+  less precise than LSN replication monitoring and may lead to less frequent acknowledgements.
 - **Delay backoff replication monitoring:** Adds a static delay to the acknowledgement of records to the broker.
 
 :::note
-Deferring the logstream compaction with either strategy may drastically increase the disk space usage of the logstream.
+Deferring the logstream compaction with any strategy may drastically increase the disk space usage of the logstream.
 It is recommended to monitor the disk space usage and adjust the disk size or delay limit accordingly.
 :::
 
@@ -462,8 +463,6 @@ camunda:
 In addition, you can override the default failoverTimeoutMs (60 seconds) by adding the `failoverTimeoutMs` parameter to
 the JDBC URL: `jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover&failoverTimeoutMs=30000`.
 
-````yaml
-
 The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.
 
 ### Per-physical-tenant credentials on Aurora
@@ -489,7 +488,7 @@ camunda:
             url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=tenant_a_schema
             username: tenant_a_user
             password: tenant-a-secret
-````
+```
 
 For IAM authentication, the same pattern applies with the `iam` wrapper plugin and passwordless database users:
 

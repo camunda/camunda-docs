@@ -85,6 +85,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 | [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23)    | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22)    | Core       | Regression      | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22)    | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                                         |
+| [8.8.22](https://github.com/camunda/connectors/releases/tag/8.8.22) | Connectors | Breaking change | [Intrinsic function allow-list](#connector-intrinsic-function-allow-list)                                                                             |
 | [8.8.19](https://github.com/camunda/connectors/releases/tag/8.8.19) | Connectors | Breaking change | [Connector secret filter](#connector-secret-filter)                                                                                                   |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)      | Core       | Regression      | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)      | Core       | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
@@ -569,6 +570,30 @@ In practice, this means a secret in a connector field only resolves at runtime i
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Outbound connectors refuse undeclared intrinsic function calls {#connector-intrinsic-function-allow-list}
+
+Starting with Connectors 8.8.22, the connector runtime runs an [intrinsic function](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls) only if the deployed BPMN process declares that exact call, by function name and field path, in the input mappings of the connector element.
+
+In practice, an intrinsic function call that reaches a connector through a process variable or job variable, instead of being written in the connector element's input mapping, now fails the job. A connector result that contains an object with the `camunda.function.type` key also fails the job when you store it in a result variable or map it with a result expression.
+
+**Action:** Before upgrading, check which processes use intrinsic functions.
+
+- Write each `camunda.function.type` call as a literal in the input mapping of the field that uses it, and redeploy the process.
+- Use a result expression that maps only the fields you need if a response from an external system can contain the `camunda.function.type` key.
+- Don't use `camunda.connector.intrinsic-function.allow-list.mode` set to `DISABLED` as a workaround. This mode refuses every intrinsic function call. No setting restores unrestricted execution.
+
+<p className="link-arrow">[Intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list)</p>
+<p className="link-arrow">[Troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -825,7 +850,7 @@ With the Camunda 8.8 release, the new unified configuration is introduced.
 
 - In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Operate, Tasklist, Identity) was done separately.
 
-This means some configuration properties have changed or are replaced with new properties. See [Camunda 8.8 property changes](../../../../self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping) for more information.
+This means some configuration properties have changed or are replaced with new properties. See [Camunda 8.8 property changes](/versioned_docs/version-8.8/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md) for more information.
 
 :::note
 Only a partial set of unified configuration properties are introduced in Camunda 8.8, with remaining properties planned for delivery with Camunda 8.9.

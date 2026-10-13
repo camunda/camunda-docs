@@ -1,0 +1,548 @@
+---
+id: update-workspace-environments
+title: "Update environments assigned to a workspace"
+description: "Replaces the full set of environments assigned to the given workspace with the provided set. The request body is the exact set the workspace should end up assigned to: environments not listed are unassigned, and unassigning removes an environment from every project's selection in the workspace. Requires the `update` permission for the organization."
+sidebar_label: "Update environments assigned to a workspace"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update environments assigned to a workspace"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/workspaces/{workspaceKey}/environments"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Replaces the full set of environments assigned to the given workspace with the provided set. The request body is the exact set the workspace should end up assigned to: environments not listed are unassigned, and unassigning removes an environment from every project's selection in the workspace. Requires the `update` permission for the organization.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "workspaceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the workspace.",
+      schema: {
+        description: "System-generated key for a workspace.",
+        type: "string",
+        format: "WorkspaceKey",
+        "x-semantic-type": "WorkspaceKey",
+        example: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+        title: "WorkspaceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            environmentIds: {
+              description:
+                "The exact set of environment IDs the workspace should end up assigned to. An empty array (or an omitted field) unassigns all environments.",
+              type: "array",
+              maxItems: 500,
+              items: { type: "string", minLength: 1, maxLength: 255 },
+            },
+          },
+          title: "ReplaceWorkspaceEnvironmentsRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The assigned environments were replaced successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items"],
+            properties: {
+              items: {
+                description: "The list of environments.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "id",
+                    "name",
+                    "targetType",
+                    "tags",
+                    "clusterId",
+                    "clusterName",
+                    "clusterVersion",
+                    "physicalTenantId",
+                    "runtimeState",
+                    "discoveryState",
+                    "assignedWorkspaces",
+                    "applications",
+                  ],
+                  properties: {
+                    id: {
+                      description: "The unique identifier of the environment.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the environment.",
+                      type: "string",
+                    },
+                    targetType: {
+                      description:
+                        "The type of resource backing the environment.",
+                      allOf: [
+                        {
+                          description:
+                            "The type of resource backing an environment.",
+                          type: "string",
+                          enum: ["PHYSICAL_TENANT_BACKED", "CLUSTER_BACKED"],
+                          title: "EnvironmentTargetType",
+                        },
+                      ],
+                    },
+                    tags: {
+                      description:
+                        "The labels of the cluster backing the environment. Always present; an untagged cluster reports an empty array.",
+                      type: "array",
+                      items: { type: "string" },
+                    },
+                    clusterId: {
+                      description:
+                        "The identifier of the cluster backing the environment.",
+                      type: "string",
+                    },
+                    clusterName: {
+                      description:
+                        "The name of the cluster backing the environment.",
+                      type: "string",
+                    },
+                    clusterVersion: {
+                      description:
+                        'The version of the cluster backing the environment, when known. Self-Managed and interactive SaaS reads report the cluster\'s semantic version; SaaS public-API reads report the coarser generation label the cluster runs (for example `Camunda 8.8+gen17`). `null` while a cluster is still provisioning and reports no version yet; treat its absence as "version unknown" rather than a specific release.',
+                      type: "string",
+                      nullable: true,
+                    },
+                    physicalTenantId: {
+                      description:
+                        "The identifier of the physical tenant backing the environment. `null` for cluster-backed environments.",
+                      type: "string",
+                      nullable: true,
+                    },
+                    runtimeState: {
+                      description: "The runtime status of the environment.",
+                      allOf: [
+                        {
+                          description: "The runtime status of an environment.",
+                          type: "string",
+                          enum: [
+                            "HEALTHY",
+                            "UNHEALTHY",
+                            "PAUSED",
+                            "RESUMING",
+                            "UNKNOWN",
+                          ],
+                          title: "EnvironmentRuntimeState",
+                        },
+                      ],
+                    },
+                    discoveryState: {
+                      description:
+                        "Whether the environment is still present in Hub's enumeration source. A separate axis from `runtimeState`: it says whether Hub still sees the environment, not whether it can process work. An `ACTIVE` environment can be unhealthy, and a `NOT_REPORTED` one may be running fine.",
+                      allOf: [
+                        {
+                          description:
+                            "Whether Hub still sees an environment in its enumeration source (config or topology). Discovery bookkeeping, not a statement about the environment's own health.",
+                          type: "string",
+                          enum: ["ACTIVE", "NOT_REPORTED"],
+                          title: "EnvironmentDiscoveryState",
+                        },
+                      ],
+                    },
+                    assignedWorkspaces: {
+                      description:
+                        "The workspaces the environment is assigned to.",
+                      type: "array",
+                      items: {
+                        type: "object",
+                        required: ["id", "name"],
+                        properties: {
+                          id: {
+                            description: "The unique key of the workspace.",
+                            type: "string",
+                          },
+                          name: {
+                            description: "The name of the workspace.",
+                            type: "string",
+                          },
+                        },
+                        title: "WorkspaceReference",
+                      },
+                    },
+                    applications: {
+                      description:
+                        "The Orchestration Cluster web applications reachable for the environment (for example Operate, Tasklist). Always present; an environment with no reachable applications reports an empty array.",
+                      type: "array",
+                      items: {
+                        type: "object",
+                        required: ["type", "name", "webappUrl", "overridden"],
+                        properties: {
+                          type: {
+                            description:
+                              "A stable key identifying the kind of application (for example `operate`).",
+                            type: "string",
+                          },
+                          name: {
+                            description: "The display name of the application.",
+                            type: "string",
+                          },
+                          webappUrl: {
+                            description: "The deep link to the application.",
+                            type: "string",
+                          },
+                          overridden: {
+                            description:
+                              "Whether this application's configuration came from a Self-Managed physical tenant's own override rather than from the backing cluster. Always `false` on SaaS, which has no per-environment overrides.",
+                            type: "boolean",
+                          },
+                        },
+                        title: "EnvironmentApplication",
+                      },
+                    },
+                  },
+                  title: "EnvironmentResult",
+                },
+              },
+            },
+            title: "EnvironmentListResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

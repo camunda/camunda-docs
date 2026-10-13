@@ -155,7 +155,7 @@ BTP stands for [SAP](#sap) Business Technology Platform, which is a cloud-based 
 
 Camunda can integrate with SAP BTP to orchestrate business processes across SAP and non-SAP systems. By doing so, it enables automation and visibility of workflows that span multiple services and applications hosted on BTP, enhancing agility and process control in enterprise environments.
 
-- [BTP plugin](/components/camunda-integrations/sap/btp-plugin.md)
+- [SAP integration](/components/camunda-integrations/sap/camunda-sap-integration.md)
 
 ## C
 
@@ -280,9 +280,9 @@ The shape of a [credential](#credential), such as AWS Credential, REST Authentic
 
 ### CSAP CLI
 
-CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a [c8ctl](/apis-tools/c8ctl/getting-started.md) plugin (`c8ctl csap-setup`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector and OData connector) for deployment.
 
-Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
+Camunda uses the plugin to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations straightforward and repeatable in environments like Camunda SaaS.
 
 - [CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)
 
@@ -569,7 +569,7 @@ The management plane is the part of a Camunda 8 deployment used to design and ma
 
 In Self-Managed Helm deployments, the management plane is the release with `global.topology.mode` set to `hub`.
 
-- [Deployment topology](/self-managed/reference-architecture/deployment-topology.md)
+- [Deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology)
 
 ### Manual task
 
@@ -712,7 +712,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 An AI-powered intelligence layer on top of Camunda's [agentic orchestration](#agentic-orchestration) platform. ProcessOS discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
 
-- [ProcessOS](/components/process-os-harness/overview.md)
+- [ProcessOS](/components/process-os/overview.md)
 
 ### ProcessOS Harness
 
@@ -925,6 +925,14 @@ A [Logical Tenant](#logical-tenant) is a logically isolated space within a share
 An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
 
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+
+### Telemetry data
+
+Technical and usage information that Camunda collects about how its products are operated and used. Camunda uses telemetry data to evaluate contractual usage, enhance the user experience, and improve its products.
+
+Depending on the source, telemetry data may include deployment and version information, aggregated usage metrics, process metadata, SaaS application usage, and, in limited instances, personal data such as account or cookie identifiers and a SaaS user's name and email address.
+
+- [Data collection](/reference/data-collection/data-collection.md)
 
 ### Temperature
 

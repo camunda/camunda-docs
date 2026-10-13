@@ -77,35 +77,38 @@ Note that currently, Zeebe does not support password protected private keys. Sin
 
 ## Broker
 
-To configure secure communication for a broker, configure its `zeebe.broker.network.security` section, which looks like this:
+To configure secure communication for a broker, configure its `camunda.security.transport-layer-security.cluster` section, which looks like this:
 
 ```yaml
-security:
-  # Enables TLS authentication between this gateway and other nodes in the cluster
-  # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_ENABLED.
-  enabled: false
+camunda:
+  security:
+    transport-layer-security:
+      cluster:
+        # Enables TLS authentication between this broker and other nodes in the cluster
+        # This setting can also be overridden using the environment variable CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_ENABLED.
+        enabled: false
 
-  # Sets the path to the certificate chain file.
-  # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH.
-  certificateChainPath:
+        # Sets the path to the certificate chain file.
+        # This setting can also be overridden using the environment variable CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_CERTIFICATECHAINPATH.
+        certificate-chain-path:
 
-  # Sets the path to the private key file location
-  # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH.
-  privateKeyPath:
+        # Sets the path to the private key file location
+        # This setting can also be overridden using the environment variable CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_CERTIFICATEPRIVATEKEYPATH.
+        certificate-private-key-path:
 
-  # Configures the keystore file containing both the certificate chain and the private key.
-  # Currently only supports PKCS#12 format.
-  keyStore:
-    # The path for the keystore file
-    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_FILEPATH
-    filePath:
+        # Configures the keystore file containing both the certificate chain and the private key.
+        # Currently only supports PKCS#12 format.
+        key-store:
+          # The path for the keystore file
+          # This setting can also be overridden using the environment variable CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_KEYSTORE_FILEPATH
+          file-path:
 
-    # Sets the password for the keystore file, if not set it is assumed there is no password
-    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_PASSWORD
-    password:
+          # Sets the password for the keystore file, if not set it is assumed there is no password
+          # This setting can also be overridden using the environment variable CAMUNDA_SECURITY_TRANSPORTLAYERSECURITY_CLUSTER_KEYSTORE_PASSWORD
+          password:
 ```
 
-> The `certificateChainPath`, `privateKeyPath` and `keyStore.filePath` can be relative to your broker's working directory, or can be absolute paths.
+> The `certificate-chain-path`, `certificate-private-key-path` and `key-store.file-path` can be relative to your broker's working directory, or can be absolute paths.
 
 ## Gateway
 
@@ -129,11 +132,11 @@ security:
   # Currently only supports PKCS#12 format.
   keyStore:
     # The path for the keystore file
-    # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_PKCS12_FILEPATH
+    # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_KEYSTORE_FILEPATH
     filePath:
 
     # Sets the password for the keystore file, if not set it is assumed there is no password
-    # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_PKCS12_PASSWORD
+    # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_KEYSTORE_PASSWORD
     password:
 ```
 
@@ -145,7 +148,7 @@ The `certificateChainPath`, `privateKeyPath`, and `keyStore.filePath` can be rel
 
 ## Tasklist and Operate
 
-Using the same set of configuration properties, you can configure Tasklist and Operate to enable TLS-secured connectivity within a Camunda 8 cluster. Refer to the documentation on [Tasklist configuration](../../tasklist/tasklist-configuration.md#intra-cluster-secure-connection) and [Operate configuration](../../operate/operate-configuration.md#intra-cluster-secure-connection) for additional details.
+Using the same set of configuration properties, you can configure Tasklist and Operate to enable TLS-secured connectivity within a Camunda 8 cluster. Refer to the documentation on [Tasklist configuration](../../tasklist/tasklist-configuration.md#intra-cluster-secure-connection) and [Operate configuration](../../operate/operate-configuration.md) for additional details.
 
 ## How it works
 
@@ -228,8 +231,11 @@ cat nodeC.pem ca.pem > chainNodeC.pem
 5. You can now configure each node using its respective final `chainNode*.pem` file and `node*.key` file. For example, if node `A` was a broker:
 
 ```yaml
-security:
-  enabled: true
-  certificateChainPath: chainNodeA.pem
-  privateKeyPath: nodeA.key
+camunda:
+  security:
+    transport-layer-security:
+      cluster:
+        enabled: true
+        certificate-chain-path: chainNodeA.pem
+        certificate-private-key-path: nodeA.key
 ```

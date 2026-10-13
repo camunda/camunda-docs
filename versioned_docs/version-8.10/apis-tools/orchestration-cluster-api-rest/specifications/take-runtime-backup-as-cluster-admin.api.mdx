@@ -1,0 +1,846 @@
+---
+id: take-runtime-backup-as-cluster-admin
+title: "Take a runtime backup on one or every physical tenant"
+sidebar_label: "Take a runtime backup on one or every physical tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Take a runtime backup on one or every physical tenant"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/cluster/v2/backups/runtime"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Triggers a runtime backup on every physical tenant of the cluster, or on the one named by `physicalTenantId`. A cluster-wide backup is a set of independent per-tenant backups, not an atomic snapshot of the cluster: they are neither coordinated nor rolled back together, and each tenant stores its own, so the same `backupId` can be used for all of them.
+
+Every targeted physical tenant must be in the same backup-id mode. `backupId` must be omitted when every targeted tenant generates its own ids (because continuous backups and/or a backup or checkpoint schedule is enabled for it), and is required when none of them does. A cluster whose targeted tenants mix the two modes is rejected with 400 and has to be driven one tenant at a time through `POST /v2/backups/runtime`. In generated-id mode each tenant generates its own id, so the response reports an id per physical tenant rather than one for the cluster.
+
+The trigger is all-or-error, and never silent about a partial trigger: if any targeted tenant cannot be triggered the response carries an error status, but its body still lists every targeted tenant — which ones were triggered, under which `backupId` to monitor or delete them, and why the others failed. Nothing is rolled back, so the backups that were triggered keep running and have to be deleted explicitly. A request rejected before any tenant was triggered answers with a problem detail instead, and nothing is running.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use `POST /v2/backups/runtime` to act as a single physical tenant.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "physicalTenantId",
+      in: "query",
+      required: false,
+      description:
+        "The physical tenant to apply the change to. When omitted, or when passed with an empty value, the change is applied to every physical tenant of the cluster.",
+      schema: { type: "string", example: "default" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          title: "TakeRuntimeBackupRequest",
+          description: "Request body for taking a runtime backup.",
+          type: "object",
+          properties: {
+            backupId: {
+              description:
+                "The id of the backup to take. Must be omitted if continuous backups and/or a\nbackup or checkpoint schedule is enabled for the physical tenant.\n",
+              nullable: true,
+              allOf: [
+                {
+                  title: "Backup ID",
+                  description:
+                    "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                  type: "integer",
+                  format: "int64",
+                  example: 1,
+                  minimum: 1,
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description:
+        "The backup was triggered on every targeted physical tenant.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.",
+            type: "object",
+            required: ["physicalTenants"],
+            properties: {
+              physicalTenants: {
+                description:
+                  "The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own.",
+                type: "array",
+                items: {
+                  description:
+                    "Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.",
+                  type: "object",
+                  required: [
+                    "physicalTenantId",
+                    "backupId",
+                    "outcome",
+                    "reason",
+                  ],
+                  properties: {
+                    physicalTenantId: {
+                      description: "The id of the physical tenant.",
+                      type: "string",
+                      example: "default",
+                    },
+                    backupId: {
+                      description:
+                        "The id to monitor or delete this physical tenant's backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant's backups to find it.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Backup ID",
+                          description:
+                            "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 1,
+                        },
+                      ],
+                    },
+                    outcome: {
+                      description:
+                        "What this physical tenant did with the trigger.",
+                      allOf: [
+                        {
+                          title: "Cluster Runtime Backup Take Outcome",
+                          description:
+                            "What a physical tenant did with the trigger. `TRIGGERED` says the backup is running, not that it completed — poll `GET /cluster/v2/backups/runtime/{backupId}` for that. A `FAILED` tenant is running no backup for this request and needs no cleanup. `UNKNOWN` means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant's backups have to be checked before retrying; it is reported separately from `FAILED` precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.",
+                          type: "string",
+                          enum: ["TRIGGERED", "FAILED", "UNKNOWN"],
+                          example: "TRIGGERED",
+                        },
+                      ],
+                    },
+                    reason: {
+                      description:
+                        "Why this physical tenant reported no triggered backup. Null when it was triggered.",
+                      type: "string",
+                      nullable: true,
+                      example: "",
+                    },
+                  },
+                  title: "ClusterRuntimeBackupTakeResult",
+                },
+              },
+            },
+            title: "ClusterTakeRuntimeBackupResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The request names a `backupId` while at least one targeted physical tenant generates its own ids, or omits it while at least one does not, or the id is not a positive number. No tenant was triggered. A targeted tenant that rejects the request as invalid during the fan-out answers with the same status but the cluster body, listing the tenants that were triggered.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+        "application/json": {
+          schema: {
+            description:
+              "The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.",
+            type: "object",
+            required: ["physicalTenants"],
+            properties: {
+              physicalTenants: {
+                description:
+                  "The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own.",
+                type: "array",
+                items: {
+                  description:
+                    "Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.",
+                  type: "object",
+                  required: [
+                    "physicalTenantId",
+                    "backupId",
+                    "outcome",
+                    "reason",
+                  ],
+                  properties: {
+                    physicalTenantId: {
+                      description: "The id of the physical tenant.",
+                      type: "string",
+                      example: "default",
+                    },
+                    backupId: {
+                      description:
+                        "The id to monitor or delete this physical tenant's backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant's backups to find it.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Backup ID",
+                          description:
+                            "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 1,
+                        },
+                      ],
+                    },
+                    outcome: {
+                      description:
+                        "What this physical tenant did with the trigger.",
+                      allOf: [
+                        {
+                          title: "Cluster Runtime Backup Take Outcome",
+                          description:
+                            "What a physical tenant did with the trigger. `TRIGGERED` says the backup is running, not that it completed — poll `GET /cluster/v2/backups/runtime/{backupId}` for that. A `FAILED` tenant is running no backup for this request and needs no cleanup. `UNKNOWN` means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant's backups have to be checked before retrying; it is reported separately from `FAILED` precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.",
+                          type: "string",
+                          enum: ["TRIGGERED", "FAILED", "UNKNOWN"],
+                          example: "TRIGGERED",
+                        },
+                      ],
+                    },
+                    reason: {
+                      description:
+                        "Why this physical tenant reported no triggered backup. Null when it was triggered.",
+                      type: "string",
+                      nullable: true,
+                      example: "",
+                    },
+                  },
+                  title: "ClusterRuntimeBackupTakeResult",
+                },
+              },
+            },
+            title: "ClusterTakeRuntimeBackupResponse",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The requested `physicalTenantId` does not exist in this cluster, so no tenant was triggered.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "At least one targeted physical tenant already holds a backup with this id or a higher one. Backups are triggered without a preceding check, so the tenants that accepted the id are listed in the body and keep running; delete them before retrying.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.",
+            type: "object",
+            required: ["physicalTenants"],
+            properties: {
+              physicalTenants: {
+                description:
+                  "The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own.",
+                type: "array",
+                items: {
+                  description:
+                    "Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.",
+                  type: "object",
+                  required: [
+                    "physicalTenantId",
+                    "backupId",
+                    "outcome",
+                    "reason",
+                  ],
+                  properties: {
+                    physicalTenantId: {
+                      description: "The id of the physical tenant.",
+                      type: "string",
+                      example: "default",
+                    },
+                    backupId: {
+                      description:
+                        "The id to monitor or delete this physical tenant's backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant's backups to find it.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Backup ID",
+                          description:
+                            "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 1,
+                        },
+                      ],
+                    },
+                    outcome: {
+                      description:
+                        "What this physical tenant did with the trigger.",
+                      allOf: [
+                        {
+                          title: "Cluster Runtime Backup Take Outcome",
+                          description:
+                            "What a physical tenant did with the trigger. `TRIGGERED` says the backup is running, not that it completed — poll `GET /cluster/v2/backups/runtime/{backupId}` for that. A `FAILED` tenant is running no backup for this request and needs no cleanup. `UNKNOWN` means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant's backups have to be checked before retrying; it is reported separately from `FAILED` precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.",
+                          type: "string",
+                          enum: ["TRIGGERED", "FAILED", "UNKNOWN"],
+                          example: "TRIGGERED",
+                        },
+                      ],
+                    },
+                    reason: {
+                      description:
+                        "Why this physical tenant reported no triggered backup. Null when it was triggered.",
+                      type: "string",
+                      nullable: true,
+                      example: "",
+                    },
+                  },
+                  title: "ClusterRuntimeBackupTakeResult",
+                },
+              },
+            },
+            title: "ClusterTakeRuntimeBackupResponse",
+          },
+        },
+      },
+    },
+    "500": {
+      description:
+        "At least one targeted physical tenant could not be triggered, and the failures do not agree on a single status. The body lists the tenants that were triggered and keep running.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.",
+            type: "object",
+            required: ["physicalTenants"],
+            properties: {
+              physicalTenants: {
+                description:
+                  "The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own.",
+                type: "array",
+                items: {
+                  description:
+                    "Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.",
+                  type: "object",
+                  required: [
+                    "physicalTenantId",
+                    "backupId",
+                    "outcome",
+                    "reason",
+                  ],
+                  properties: {
+                    physicalTenantId: {
+                      description: "The id of the physical tenant.",
+                      type: "string",
+                      example: "default",
+                    },
+                    backupId: {
+                      description:
+                        "The id to monitor or delete this physical tenant's backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant's backups to find it.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Backup ID",
+                          description:
+                            "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 1,
+                        },
+                      ],
+                    },
+                    outcome: {
+                      description:
+                        "What this physical tenant did with the trigger.",
+                      allOf: [
+                        {
+                          title: "Cluster Runtime Backup Take Outcome",
+                          description:
+                            "What a physical tenant did with the trigger. `TRIGGERED` says the backup is running, not that it completed — poll `GET /cluster/v2/backups/runtime/{backupId}` for that. A `FAILED` tenant is running no backup for this request and needs no cleanup. `UNKNOWN` means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant's backups have to be checked before retrying; it is reported separately from `FAILED` precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.",
+                          type: "string",
+                          enum: ["TRIGGERED", "FAILED", "UNKNOWN"],
+                          example: "TRIGGERED",
+                        },
+                      ],
+                    },
+                    reason: {
+                      description:
+                        "Why this physical tenant reported no triggered backup. Null when it was triggered.",
+                      type: "string",
+                      nullable: true,
+                      example: "",
+                    },
+                  },
+                  title: "ClusterRuntimeBackupTakeResult",
+                },
+              },
+            },
+            title: "ClusterTakeRuntimeBackupResponse",
+          },
+        },
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "502": {
+      description:
+        "The connection to the broker was cut mid-flight on at least one targeted physical tenant, which may or may not have accepted the request. Those tenants are reported as `UNKNOWN` with the id to check them under, and the tenants that were triggered keep running.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.",
+            type: "object",
+            required: ["physicalTenants"],
+            properties: {
+              physicalTenants: {
+                description:
+                  "The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own.",
+                type: "array",
+                items: {
+                  description:
+                    "Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.",
+                  type: "object",
+                  required: [
+                    "physicalTenantId",
+                    "backupId",
+                    "outcome",
+                    "reason",
+                  ],
+                  properties: {
+                    physicalTenantId: {
+                      description: "The id of the physical tenant.",
+                      type: "string",
+                      example: "default",
+                    },
+                    backupId: {
+                      description:
+                        "The id to monitor or delete this physical tenant's backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant's backups to find it.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Backup ID",
+                          description:
+                            "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 1,
+                        },
+                      ],
+                    },
+                    outcome: {
+                      description:
+                        "What this physical tenant did with the trigger.",
+                      allOf: [
+                        {
+                          title: "Cluster Runtime Backup Take Outcome",
+                          description:
+                            "What a physical tenant did with the trigger. `TRIGGERED` says the backup is running, not that it completed — poll `GET /cluster/v2/backups/runtime/{backupId}` for that. A `FAILED` tenant is running no backup for this request and needs no cleanup. `UNKNOWN` means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant's backups have to be checked before retrying; it is reported separately from `FAILED` precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.",
+                          type: "string",
+                          enum: ["TRIGGERED", "FAILED", "UNKNOWN"],
+                          example: "TRIGGERED",
+                        },
+                      ],
+                    },
+                    reason: {
+                      description:
+                        "Why this physical tenant reported no triggered backup. Null when it was triggered.",
+                      type: "string",
+                      nullable: true,
+                      example: "",
+                    },
+                  },
+                  title: "ClusterRuntimeBackupTakeResult",
+                },
+              },
+            },
+            title: "ClusterTakeRuntimeBackupResponse",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "At least one targeted physical tenant could not be reached. The body lists the tenants that were triggered and keep running.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.",
+            type: "object",
+            required: ["physicalTenants"],
+            properties: {
+              physicalTenants: {
+                description:
+                  "The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own.",
+                type: "array",
+                items: {
+                  description:
+                    "Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.",
+                  type: "object",
+                  required: [
+                    "physicalTenantId",
+                    "backupId",
+                    "outcome",
+                    "reason",
+                  ],
+                  properties: {
+                    physicalTenantId: {
+                      description: "The id of the physical tenant.",
+                      type: "string",
+                      example: "default",
+                    },
+                    backupId: {
+                      description:
+                        "The id to monitor or delete this physical tenant's backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant's backups to find it.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Backup ID",
+                          description:
+                            "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 1,
+                        },
+                      ],
+                    },
+                    outcome: {
+                      description:
+                        "What this physical tenant did with the trigger.",
+                      allOf: [
+                        {
+                          title: "Cluster Runtime Backup Take Outcome",
+                          description:
+                            "What a physical tenant did with the trigger. `TRIGGERED` says the backup is running, not that it completed — poll `GET /cluster/v2/backups/runtime/{backupId}` for that. A `FAILED` tenant is running no backup for this request and needs no cleanup. `UNKNOWN` means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant's backups have to be checked before retrying; it is reported separately from `FAILED` precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.",
+                          type: "string",
+                          enum: ["TRIGGERED", "FAILED", "UNKNOWN"],
+                          example: "TRIGGERED",
+                        },
+                      ],
+                    },
+                    reason: {
+                      description:
+                        "Why this physical tenant reported no triggered backup. Null when it was triggered.",
+                      type: "string",
+                      nullable: true,
+                      example: "",
+                    },
+                  },
+                  title: "ClusterRuntimeBackupTakeResult",
+                },
+              },
+            },
+            title: "ClusterTakeRuntimeBackupResponse",
+          },
+        },
+      },
+    },
+    "504": {
+      description:
+        "The request from gateway to broker timed out on at least one targeted physical tenant, which may or may not have accepted it. Those tenants are reported as `UNKNOWN` with the id to check them under, and the tenants that were triggered keep running.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.",
+            type: "object",
+            required: ["physicalTenants"],
+            properties: {
+              physicalTenants: {
+                description:
+                  "The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own.",
+                type: "array",
+                items: {
+                  description:
+                    "Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.",
+                  type: "object",
+                  required: [
+                    "physicalTenantId",
+                    "backupId",
+                    "outcome",
+                    "reason",
+                  ],
+                  properties: {
+                    physicalTenantId: {
+                      description: "The id of the physical tenant.",
+                      type: "string",
+                      example: "default",
+                    },
+                    backupId: {
+                      description:
+                        "The id to monitor or delete this physical tenant's backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant's backups to find it.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          title: "Backup ID",
+                          description:
+                            "The id of the backup. Must be a positive numerical value. As backups are logically\nordered by their ids (ascending), each successive backup must use a higher id than the\nprevious one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 1,
+                        },
+                      ],
+                    },
+                    outcome: {
+                      description:
+                        "What this physical tenant did with the trigger.",
+                      allOf: [
+                        {
+                          title: "Cluster Runtime Backup Take Outcome",
+                          description:
+                            "What a physical tenant did with the trigger. `TRIGGERED` says the backup is running, not that it completed — poll `GET /cluster/v2/backups/runtime/{backupId}` for that. A `FAILED` tenant is running no backup for this request and needs no cleanup. `UNKNOWN` means the broker may or may not have accepted the request — the connection was cut mid-flight, or the gateway timed out waiting — so that tenant's backups have to be checked before retrying; it is reported separately from `FAILED` precisely because calling it failed would claim nothing is running there. Tenants that were triggered are never rolled back.",
+                          type: "string",
+                          enum: ["TRIGGERED", "FAILED", "UNKNOWN"],
+                          example: "TRIGGERED",
+                        },
+                      ],
+                    },
+                    reason: {
+                      description:
+                        "Why this physical tenant reported no triggered backup. Null when it was triggered.",
+                      type: "string",
+                      nullable: true,
+                      example: "",
+                    },
+                  },
+                  title: "ClusterRuntimeBackupTakeResult",
+                },
+              },
+            },
+            title: "ClusterTakeRuntimeBackupResponse",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
