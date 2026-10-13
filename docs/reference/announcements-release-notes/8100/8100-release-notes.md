@@ -32,6 +32,8 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
+<ul><li>[Camunda 8.10.3 (12.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.3)</li><li>[Camunda 8.10.2 (07.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.2)</li><li>[Camunda 8.10.1 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.1)</li><li>[Camunda 8.10.0 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors 8.10.0 (30.09.2026)](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul>
+<!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
 
@@ -55,7 +57,7 @@ Use the Optimize agentic control plane dashboard to monitor AI agent adoption, t
 
 The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
 
-<p class="link-arrow">[Conversation storage SPI redesign](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign)</p>
+<p class="link-arrow">[SPI and package changes for custom extensions](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-spi-and-package-changes)</p>
 
 #### New native element templates
 
@@ -117,7 +119,7 @@ New features help you more easily configure your agent tools when modeling.
 
 :::
 
-<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration)</p>
 
 ### Camunda-provided LLM for SaaS
 
@@ -182,7 +184,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Skills repository for pro-code AI enablement
@@ -537,7 +539,7 @@ Use the toolkit to:
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
 
-<p class="link-arrow">[Use the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
+<p class="link-arrow">[Prepare Helm upgrades with the Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md)</p>
 
 ### Camunda Hub replaces Console and Web Modeler in the Helm chart
 
@@ -761,7 +763,7 @@ Turn process instance runs into repeatable tests. Run a process instance, observ
 Test files in Test Studio now use the same schema as Camunda Process Test (CPT). You can record a test in Test Studio and run it in your CI/CD pipeline through CPT without converting formats, and load CPT-authored test files into Test Studio to debug them visually.
 
 - Use one JSON schema across Test Studio and CPT: record once, run anywhere.
-- Existing Play test scenario files are migrated automatically to the new format.
+- Existing test scenario files are migrated automatically to the new format.
 
 <p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
 
@@ -879,17 +881,17 @@ Task testing now supports call activities in both Desktop Modeler and Camunda Hu
 
 <p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
 
-### Test process segments in Play
+### Test process segments in test mode
 
 <!-- https://github.com/camunda/product-hub/issues/2896 -->
 
-When testing your process with Play in Camunda Hub, you can now capture and rerun targeted sections of a process as low-code integration tests:
+When testing your process within test mode in Camunda Hub, you can now capture and rerun targeted sections of a process as low-code integration tests:
 
 - Run segment tests individually or in batches to validate process changes faster.
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
 - Reuse saved segment tests during iterative model changes to catch regressions earlier.
 
-<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
+<p class="link-arrow">[Test your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
 
 ### Variables panel improvements
 
@@ -1693,7 +1695,7 @@ New features help you more easily configure your agent tools when modeling.
 | Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Camunda Hub</li></ul></p>                                |
 | Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Camunda Hub</li></ul></p> |
 
-<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration)</p>
 
 :::note
 
@@ -1717,7 +1719,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Camunda design system
@@ -2942,7 +2944,7 @@ Execution listeners can now be configured on the enclosing body of multi-instanc
 
 The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign) for more details.
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-spi-and-package-changes) for more details.
 
 #### Camunda-provided LLM for SaaS
 

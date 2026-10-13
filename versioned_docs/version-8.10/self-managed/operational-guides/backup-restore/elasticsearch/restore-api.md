@@ -20,7 +20,7 @@ import RestoreSnapshotsAction from '../\_partials/\_es-restore-snapshots-action.
 
 Restore Zeebe partition data through the Orchestration Cluster Restore API without restarting the brokers, when using Elasticsearch or OpenSearch as secondary storage.
 
-This page is part of the Elasticsearch/OpenSearch [restore procedure](./restore.md). To compare it with the legacy Restore Application, see [choosing a restore approach](../backup-and-restore.md#choosing-a-restore-approach).
+This page is part of the Elasticsearch/OpenSearch [restore procedure](./restore.md). To compare it with the legacy Restore Application, see [choosing a restore approach](./restore.md#choosing-a-restore-approach).
 
 ## About the Restore API
 
@@ -114,6 +114,8 @@ Keep the Orchestration Cluster running in recovery mode while you restore the sn
 
 #### 1. Restore templates
 
+The Orchestration Cluster is already running in recovery mode, so you don't need to start Camunda 8 for this step. Skip the start instructions below and confirm that the index templates exist.
+
 <RestoreTemplates />
 
 #### 2. Stop Optimize
@@ -198,7 +200,11 @@ Check that every partition is active and healthy again using [the topology](/api
 curl "${ORCHESTRATION_CLUSTER_API}/topology"
 ```
 
-The cluster leaves recovery mode as part of the restore, so no further action is required.
+The cluster leaves recovery mode as part of the restore, so the Orchestration Cluster needs no further action.
+
+### 7. Start Optimize again
+
+If you stopped Optimize in [step 3](#restore-es-snapshots-step), start it again now that the cluster is processing. If you are using the Camunda Helm chart, set `optimize.enabled` back to `true` in your `values.yml` and apply the change. For a manual deployment, start Optimize the way you normally do.
 
 ## Restoring a cluster with multiple Physical Tenants
 

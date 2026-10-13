@@ -64,6 +64,7 @@ camunda:
 | `camunda.document.aws.<id>.endpoint`                 | No       | Custom endpoint URL for an [S3-compatible object store](#s3-compatible-object-stores) such as MinIO, Cloudian, or Garage. When unset, the AWS SDK default endpoint is used.                                                                              |
 | `camunda.document.aws.<id>.force-path-style`         | No       | Forces path-style addressing on the S3 client. Most S3-compatible backends require this. Automatically enabled when `endpoint` is set, so explicit configuration is rarely needed.                                                                       |
 | `camunda.document.aws.<id>.chunked-encoding-enabled` | No       | Controls AWS chunked transfer encoding. Set to `false` for S3-compatible backends that do not support `aws-chunked` streaming-signed uploads (for example, Garage). When unset, the SDK default (`true`) is used, which is correct for AWS S3 and MinIO. |
+| `camunda.document.aws.<id>.support-legacy-md5`       | No       | Enables legacy MD5 checksum support on the S3 client for providers that require MD5 checksums. See [troubleshooting checksum issues](#troubleshooting-checksum-issues). When unset, legacy MD5 support is disabled.                                      |
 | `camunda.document.default-store-id`                  | Yes      | Instance ID of the store to use as the default.                                                                                                                                                                                                          |
 | `camunda.document.thread-pool-size`                  | No       | Number of threads in the document store thread pool.                                                                                                                                                                                                     |
 
@@ -109,10 +110,14 @@ AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 AWS_RESPONSE_CHECKSUM_VALIDATION=WHEN_REQUIRED
 ```
 
-If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by setting:
+If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support on the store instance:
 
-```
-DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5=true
+```yaml
+camunda:
+  document:
+    aws:
+      aws1:
+        support-legacy-md5: true
 ```
 
 AWS SDK credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`) are resolved by the AWS SDK directly and are not part of `camunda.document.*`. Set them as environment variables as before.
@@ -355,6 +360,7 @@ Use this table to migrate from legacy `DOCUMENT_*` environment variables to the 
 | `DOCUMENT_STORE_<id>_ENDPOINT`                          | `camunda.document.aws.<id>.endpoint`                 |
 | `DOCUMENT_STORE_<id>_FORCE_PATH_STYLE`                  | `camunda.document.aws.<id>.force-path-style`         |
 | `DOCUMENT_STORE_<id>_CHUNKED_ENCODING_ENABLED`          | `camunda.document.aws.<id>.chunked-encoding-enabled` |
+| `DOCUMENT_STORE_<id>_SUPPORT_LEGACY_MD5`                | `camunda.document.aws.<id>.support-legacy-md5`       |
 
 ### GCP
 

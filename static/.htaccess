@@ -68,6 +68,17 @@ RewriteRule ^LLMs\.txt$ /llms.txt [R=301,L]
 # Move contact page
 RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 
+#---------------------------------------------------------------------------------
+# Product redirects
+#
+# Create human-readable URLs to use in products that can't quickly change
+# to match what's in the actual documentation. This protects product links,
+# gives us more control over what product URLs point to, allows products 
+# to link to anchors, and more.
+#---------------------------------------------------------------------------------
+
+RewriteRule ^p/cluster-auto-pause/?$ /docs/components/saas/clusters/#auto-pause [R=301,NE,L]
+
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
 ##################################################################################
@@ -118,6 +129,14 @@ RewriteRule ^docs/next/components/modeler/reference/modeling-guidance/rules/hist
 # URLs that need to be preserved for connector element templates, in perpetuity.
 RewriteRule ^docs/?$ / [R=301,L]
 RewriteRule ^docs/apis-clients/operate-api/?$ /docs/apis-tools/operate-api/overview/ [R=301,L]
+RewriteRule ^docs/components/process-os-harness/get-started/install/?$ /docs/components/process-os-harness/installation/ [R=301,L]
+RewriteRule ^docs/components/process-os-harness/get-started/project-setup/?$ /docs/components/process-os-harness/setup/project-setup/ [R=301,L]
+RewriteRule ^docs/components/process-os-harness/get-started/system-requirements/?$ /docs/components/process-os-harness/setup/system-requirements/ [R=301,L]
+RewriteRule ^docs/components/process-os-harness/run-a-project/artifact-generation/?$ /docs/components/process-os-harness/setup/system-requirements/ [R=301,L]
+RewriteRule ^docs/components/process-os-harness/run-a-project/builder-task/?$ /docs/components/process-os-harness/build/builder-task/ [R=301,L]
+RewriteRule ^docs/components/process-os-harness/run-a-project/governance-process/?$ /docs/components/process-os-harness/build/governance-process/ [R=301,L]
+RewriteRule ^docs/components/process-os-harness/run-a-project/phases/(discovery|transformation|implementation)/?$ /docs/components/process-os-harness/build/phases/$1/ [R=301,L]
+RewriteRule ^docs/components/process-os-harness/run-a-project/review-cycle/?$ /docs/components/process-os-harness/build/review-cycle/ [R=301,L]
 RewriteRule ^docs/(next/)?components/connectors/out-of-the-box-connectors/aws-dynamodb/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/ [R=301,L]
 RewriteRule ^docs/(next/)?components/connectors/out-of-the-box-connectors/aws-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
@@ -300,6 +319,10 @@ RewriteRule ^docs/self-managed/operational-guides/backup-restore/in-process-rest
 # Elasticsearch/OpenSearch snapshot restore page broken into partials and inlined into the Restore API and Restore Application guides (8.10).
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/elasticsearch/es-restore-snapshot/?$ /docs/self-managed/operational-guides/backup-restore/elasticsearch/es-restore/ [R=301,L]
 
+# The deployment topology reference page moved into the Helm topology install section (8.10).
+RewriteRule ^docs/next/self-managed/reference-architecture/deployment-topology/?$ /docs/next/self-managed/deployment/helm/install/topology/ [R=301,L]
+RewriteRule ^docs/self-managed/reference-architecture/deployment-topology/?$ /docs/self-managed/deployment/helm/install/topology/ [R=301,L]
+
 # The multi-namespace configure page became the deployment topology install section (8.10).
 # Its content is now split by release role under install/topology/.
 RewriteRule ^docs/self-managed/deployment/helm/configure/multi-namespace/?$ /docs/self-managed/deployment/helm/install/topology/ [R=301,L]
@@ -328,10 +351,6 @@ RewriteRule ^docs/components/camunda-integrations/sap/btp-plugin/?$ /docs/8.9/co
 # The "Install Bitnami enterprise images" page is removed in 8.10 (Bitnami images are no longer
 # usable from chart 15.x); redirect to the 8.9 page, the last version that documents them.
 RewriteRule ^docs/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]
-
-# This file didn't belong in 8.9. However, it was in production and was receiving traffic, so we decided to maintain
-# a redirect.
-RewriteRule ^docs/self-managed/upgrade/helm/890-to-8100/?$ /docs/self-managed/upgrade/helm/890-to-8100/ [R=301,L]
 
 # 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)
 RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-89/?$ /docs/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]

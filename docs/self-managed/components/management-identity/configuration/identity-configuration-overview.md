@@ -10,7 +10,7 @@ import ManagementIdentityAvailability from '../\_partials/\_management-identity-
 Configure Management Identity for your Camunda 8 Self-Managed deployment. This guide covers application-level configuration, including environment variables and IdP settings.
 
 :::info Deploying with Helm?
-If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Management Identity:
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Management Identity.
 :::
 
 ## Configure Management Identity IdP
@@ -28,5 +28,5 @@ You can configure your Management Identity IdP using the following options:
 | [Configure an external IdP using Keycloak](./configure-external-identity-provider.md) | Configure an external identity provider using Keycloak, such as OpenID Connect, SAML, LDAP, or Active Directory. |
 
 :::note
-Management Identity relies on a PostgreSQL. When running Management Identity with an external OIDC provider, you can [connect to an alternative Database](./alternative-db.md) if your internal policies or compliance requirements prevent the use of PostgreSQL.
+Management Identity relies on a PostgreSQL database. When running Management Identity with an external OIDC provider, you can [connect to an alternative Database](./alternative-db.md) if your internal policies or compliance requirements prevent the use of PostgreSQL.
 :::

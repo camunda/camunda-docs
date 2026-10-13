@@ -60,9 +60,6 @@ orchestration:
           username: elastic
           secret:
             inlineSecret: pass
-
-elasticsearch:
-  enabled: false
 ```
 
 #### Connect to external Elasticsearch with a self-signed certificate
@@ -71,14 +68,14 @@ If the Elasticsearch cluster accepts only `https` requests with a self-signed ce
 
 1. Create an `externaldb.jks` file from the Elasticsearch certificate file. For example, using the `keytool` CLI:
 
-   ```yaml
+   ```shell
    keytool -import -alias elasticsearch -keystore externaldb.jks -storetype jks -file elastic.crt -storepass changeit -noprompt
    ```
 
 1. Create a Kubernetes secret from the `externaldb.jks` file before installing Camunda:
 
-   ```yaml
-   kubectl  create secret -n camunda generic elastic-jks --from-file=externaldb.jks
+   ```shell
+   kubectl create secret -n camunda generic elastic-jks --from-file=externaldb.jks
    ```
 
 1. Configure the Camunda 8 Self-Managed Helm chart:
@@ -98,9 +95,6 @@ If the Elasticsearch cluster accepts only `https` requests with a self-signed ce
              secret:
                existingSecret: elastic-jks
                existingSecretKey: externaldb.jks
-
-   elasticsearch:
-     enabled: false
    ```
 
 ### Connect to external Elasticsearch with a publicly trusted certificate
@@ -118,9 +112,6 @@ orchestration:
           username: elastic
           secret:
             inlineSecret: pass
-
-elasticsearch:
-  enabled: false
 ```
 
 ### Connect to external Elasticsearch with custom index prefixes
@@ -140,9 +131,6 @@ orchestration:
             inlineSecret: pass
   index:
     prefix: my-env-camunda # Prefix for Orchestration Cluster indices
-
-elasticsearch:
-  enabled: false
 ```
 
 For more details on index prefix configuration, including Optimize-specific settings when Optimize is enabled, see [prefix Elasticsearch/OpenSearch indices](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).

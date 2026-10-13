@@ -77,7 +77,7 @@ Finally, you can access each app pointing your browser at:
 - Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Console: [http://localhost:8087](http://localhost:8087)
 
-Log in to these services using the default first user credentials `demo`/`demo`. These defaults come from the Helm chart value `orchestration.security.initialization.users` (which seeds the `demo` user with password `demo` for the orchestration cluster). If you have overridden these values or use a custom identity provider, use the credentials you configured instead.
+Log in to Orchestration using the default first user credentials `demo`/`demo`. These defaults come from the Helm chart value `orchestration.security.initialization.users`, which seeds the `demo` user with password `demo` for the Orchestration Cluster. To log in to Optimize, Web Modeler, and Console, use the first Management Identity user instead. Its username is `demo` by default (`identity.firstUser.username`), and its password is the one you set in `identity.firstUser.secret`. If you have overridden these values or use a custom identity provider, use the credentials you configured instead.
 
 <details>
   <summary>Operate and Tasklist Login</summary>

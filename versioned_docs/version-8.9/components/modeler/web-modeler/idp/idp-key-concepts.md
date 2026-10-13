@@ -1,14 +1,15 @@
 ---
 id: idp-key-concepts
 title: IDP concepts
-description: "Key intelligent document processing (IDP) concepts and terms, such as the difference between structured and unstructured documents."
+description: "When using IDP it is helpful to understand the following key concepts and terms."
 ---
 
 import IdpStructuredDocumentImg from './img/idp-structured-document.png';
 import IdpUnstructuredDocumentImg from './img/idp-unstructured-document.png';
 import IdpExtractionFieldImg from './img/idp-extraction-field.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-When using IDP it is helpful to understand the following key concepts and terms.
+<PageDescription />
 
 ## Structured and unstructured documents {#documents}
 

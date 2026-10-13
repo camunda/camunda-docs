@@ -712,7 +712,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 An AI-powered intelligence layer on top of Camunda's [agentic orchestration](#agentic-orchestration) platform. ProcessOS discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
 
-- [ProcessOS](/components/process-os-harness/overview.md)
+- [ProcessOS](/components/process-os/overview.md)
 
 ### ProcessOS Harness
 
@@ -925,6 +925,14 @@ A [Logical Tenant](#logical-tenant) is a logically isolated space within a share
 An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
 
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+
+### Telemetry data
+
+Technical and usage information that Camunda collects about how its products are operated and used. Camunda uses telemetry data to evaluate contractual usage, enhance the user experience, and improve its products.
+
+Depending on the source, telemetry data may include deployment and version information, aggregated usage metrics, process metadata, SaaS application usage, and, in limited instances, personal data such as account or cookie identifiers and a SaaS user's name and email address.
+
+- [Data collection](/reference/data-collection/data-collection.md)
 
 ### Temperature
 
