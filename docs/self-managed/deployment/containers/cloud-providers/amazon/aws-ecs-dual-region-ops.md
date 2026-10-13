@@ -48,7 +48,7 @@ The script:
 
 After a successful failover, the cluster runs on the four brokers of the surviving region, with `clusterSize` 4 and `replicationFactor` 2.
 
-If `failover.sh` stops before it finishes, you can run it again. It waits for an Aurora switchover that is still in progress, and it does not start a second switchover.
+If `failover.sh` stops before it finishes, you can run it again. It waits for an Aurora switchover that is still in progress, and it doesn't start a second switchover.
 
 | Option          | Effect                                                                                                                                                                                                                                                                                                   |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -139,7 +139,7 @@ The script:
 1. Verifies the expected broker count, that every partition has a leader, and that none of the recovered brokers is idle.
 1. With `--switch-writer`, moves the Aurora writer back to the recovered region with a planned switchover.
 
-If `failback.sh` stops before it finishes, you can run it again. With `--switch-writer`, it waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it does not start a second switchover.
+If `failback.sh` stops before it finishes, you can run it again. With `--switch-writer`, it waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it doesn't start a second switchover.
 
 | Option            | Default                                 | Effect                                                                                                                    |
 | ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
