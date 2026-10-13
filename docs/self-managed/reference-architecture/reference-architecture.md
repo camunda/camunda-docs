@@ -53,9 +53,9 @@ When designing a reference architecture, it's essential to understand the differ
 
 #### Management plane {#camunda-hub}
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
+<!-- Editable source: ./img/management-cluster.excalidraw. Adapted from PR #10011. -->
 
-![Camunda Hub](./img/management-cluster.jpg)
+![Management plane with ingress routing to Camunda Hub and Management Identity, an RDBMS for persistence, and an OIDC authentication provider.](./img/management-cluster.svg)
 
 The management plane can connect to multiple Orchestration Clusters across environments, such as development, integration, and production. It consists of:
 
