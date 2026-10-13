@@ -144,7 +144,7 @@ When we inspect the process instance, we can observe exactly what our incident i
 3. Observe the error message:
 
 ```text
-Expected result of the expression 'orderValue >= 100' to be 'BOOLEAN', but was 'NULL'. The evaluation reported the following warnings:
+Expected result of the condition expression 'orderValue >= 100' of sequence flow 'Flow_1n8m1op' to be 'BOOLEAN', but was 'NULL'. The evaluation reported the following warnings:
 [NOT_COMPARABLE] Can't compare '"99"' with '100'
 ```
 
