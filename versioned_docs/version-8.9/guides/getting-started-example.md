@@ -2,7 +2,7 @@
 id: getting-started-example
 title: "Run your first Spring Boot, Node.js, Python, or C# project with Camunda 8"
 sidebar_label: Run your first Spring Boot, Node.js, Python, or C# project
-description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot, Node.js, Python, or C#."
+description: "A step-by-step example for Camunda 8 Self-Managed using Spring Boot, Node.js, Python, or C#."
 keywords:
   [
     java,
@@ -20,9 +20,11 @@ keywords:
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">1 hour</span>
+<PageDescription />
+
+## About
 
 This guide is tailored for developers who want to implement process automation solutions using Java (Spring), JavaScript (Node.js), Python, or C#. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 

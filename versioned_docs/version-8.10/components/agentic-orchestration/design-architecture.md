@@ -6,8 +6,9 @@ keywords: ["agentic ai", "AI agents"]
 ---
 
 import WorkflowImg from './img/ao-workflow.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Plan and design your agentic orchestration solutions, and understand recommended architecture guidelines.
+<PageDescription />
 
 ## Plan agentic orchestration solutions
 

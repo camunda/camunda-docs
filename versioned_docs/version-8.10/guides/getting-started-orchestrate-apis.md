@@ -2,17 +2,18 @@
 id: orchestrate-apis
 title: Get started with API orchestration
 sidebar_label: Orchestrate APIs using connectors
-description: "For low-code developers using Camunda 8 Saas, use connectors to build process automation solutions."
+description: "Build your first low-code API orchestration solution in Camunda 8 using a REST connector."
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
-
 import clsx from "clsx";
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 

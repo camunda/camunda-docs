@@ -14,8 +14,9 @@ import AgentConversationHistory from '../img/agent-conversation-history.png';
 import ToolCallDetails from '../img/tool-call-details.png';
 import AssistantMessageExpand from '../img/assistant-message-expand.png';
 import AssistantMessagePreview from '../img/assistant-message-preview.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Monitor and troubleshoot your AI agent process instances in real time using Operate.
+<PageDescription />
 
 ## About
 

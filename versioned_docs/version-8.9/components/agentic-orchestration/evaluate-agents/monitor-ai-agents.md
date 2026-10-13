@@ -11,8 +11,9 @@ import TabItem from "@theme/TabItem";
 import ProcessInstance from '../img/process-instance-overview.png';
 import InstanceHistory from '../img/instance-history.png';
 import Variables from '../img/variables.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Monitor and troubleshoot your AI agent process instances in real time using Operate.
+<PageDescription />
 
 ## About
 
