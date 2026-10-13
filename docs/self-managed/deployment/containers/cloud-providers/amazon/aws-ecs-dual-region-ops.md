@@ -48,6 +48,8 @@ The script:
 
 After a successful failover, the cluster runs on the four brokers of the surviving region, with `clusterSize` 4 and `replicationFactor` 2.
 
+If `failover.sh` stops before it finishes, you can run it again. It waits for an Aurora switchover that is still in progress, and it does not start a second switchover.
+
 | Option          | Effect                                                                                                                                                                                                                                                                                                   |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dry-run`     | Sends the zone request with `dryRun=true` and prints the planned operations. ECS, the cluster, and Aurora aren't changed.                                                                                                                                                                                |
@@ -136,6 +138,8 @@ The script:
 1. Sends `POST /actuator/cluster/zones/<recovered-region>` with `numberOfReplicas`, `priority`, and `numberOfBrokers`, then waits for the partition redistribution to complete.
 1. Verifies the expected broker count, that every partition has a leader, and that none of the recovered brokers is idle.
 1. With `--switch-writer`, moves the Aurora writer back to the recovered region with a planned switchover.
+
+If `failback.sh` stops before it finishes, you can run it again. With `--switch-writer`, it waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it does not start a second switchover.
 
 | Option            | Default                                 | Effect                                                                                                                    |
 | ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
