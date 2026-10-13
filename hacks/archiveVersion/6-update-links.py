@@ -72,7 +72,7 @@ def remove_links_to_archived_version():
     docs_reference = f"version-{ARCHIVED_VERSION}/"
 
     for docs_path in get_versioned_docs_paths():
-        for dir_, _, files in os.walk(os.path.join(DOCS_ROOT, docs_path)):
+        for dir_, _, files in os.walk(docs_path):
             for file_ in files:
                 if not file_.endswith((".md", ".mdx")):
                     continue

@@ -16,7 +16,7 @@ def _get_release_notes_paths():
     """The archived version's release notes and announcements directory in each other docs."""
     directory = ARCHIVED_VERSION.replace(".", "") + "0"
     return [
-        os.path.join(docs_path, "reference", "announcements-release-notes", directory)
+        os.path.join("/".join(docs_path.split("/")[2:]), "reference", "announcements-release-notes", directory)
         for docs_path in get_versioned_docs_paths()
     ]
 

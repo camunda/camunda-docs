@@ -11,7 +11,7 @@ DOCS_ROOT = "../.."
 
 def get_versioned_docs_paths():
     """Docs directories of every version."""
-    return ["docs"] + sorted(glob.glob(os.path.join("versioned_docs", "version-*")))
+    return [os.path.join(DOCS_ROOT, "docs")] + sorted(glob.glob(os.path.join(DOCS_ROOT, "versioned_docs", "version-*")))
 
 def append_redirect_rules_to_section(file_path, section_heading, rules):
     """Append redirect rules to a section in .htaccess."""
