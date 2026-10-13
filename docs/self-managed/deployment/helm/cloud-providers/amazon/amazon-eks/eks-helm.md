@@ -314,7 +314,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
   </TabItem>
 
-  <TabItem value="with-domain-irsa" label="IRSA with domain" default>
+  <TabItem value="with-domain-irsa" label="IRSA with domain">
 
 The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#configuration) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
@@ -461,7 +461,6 @@ You can track the progress of the installation with the deployment readiness che
 
 <details>
 <summary>Understand how each component interacts with IRSA</summary>
-<summary>
 
 #### Web Modeler
 
@@ -508,7 +507,6 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
 
 Ensure that the `iam_role_arn` of the previously created `opensearch_role` is assigned to an internal role within Amazon OpenSearch Service. For example, `all_access` on the Amazon OpenSearch Service side is a good candidate, or if required, extra roles can be created with more restrictive access.
 
-</summary>
 </details>
 
 ## Verify connectivity to Camunda 8

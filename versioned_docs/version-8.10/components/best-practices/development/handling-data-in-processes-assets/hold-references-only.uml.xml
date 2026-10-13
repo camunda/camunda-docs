@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:admin="http://webns.net/mvcb/" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+<rdf:Description rdf:about="">
+<admin:generatorAgent rdf:resource="http://purl.org/NET/erdf/extract"/>
+</rdf:Description>
+<rdf:Description rdf:about=""/>
+<rdf:Description rdf:about="#sid-4EF2A2E1-517D-4509-BB52-F2F7381FFA0F">
+<type xmlns="http://oryx-editor.org/">ComplexClass</type>
+<bounds xmlns="http://oryx-editor.org/">150,137,30,30</bounds>
+<abstract xmlns="http://oryx-editor.org/">false</abstract>
+<methods xmlns="http://oryx-editor.org/"/>
+<bordercolor xmlns="http://oryx-editor.org/">#000000</bordercolor>
+<methodscomplex xmlns="http://oryx-editor.org/"/>
+<attributescomplex xmlns="http://oryx-editor.org/">{"items":[{"static":false,"visibility":"","name":"tweetId","derived":false,"property":"","multiplicity":"","type":"Long","readonly":false,"defaultvalue":""},{"static":false,"visibility":"","name":"content","derived":false,"property":"","multiplicity":"","type":"String","readonly":false,"defaultvalue":""},{"static":false,"visibility":"","name":"author","derived":false,"property":"","multiplicity":"","type":"Employee","readonly":false,"defaultvalue":""},{"static":false,"visibility":"","name":"reviewer","derived":false,"property":"","multiplicity":"","type":"Employee","readonly":false,"defaultvalue":""},{"visibility":"","name":"...","property":"","multiplicity":"","type":"","defaultvalue":""}],"totalCount":5}</attributescomplex>
+<color xmlns="http://oryx-editor.org/">#ffffff</color>
+<keyword xmlns="http://oryx-editor.org/"/>
+<classname xmlns="http://oryx-editor.org/">Tweet</classname>
+<attributes xmlns="http://oryx-editor.org/"/>
+<docker xmlns="http://oryx-editor.org/"> # </docker>
+<parent xmlns="http://raziel.org/" rdf:resource="#canvas"/>
+</rdf:Description>
+<rdf:Description rdf:about="#canvas">
+<rdf:type rdf:resource="http://oryx-editor.org/canvas"/>
+<type xmlns="http://oryx-editor.org/">Diagram</type>
+<bounds xmlns="http://oryx-editor.org/">1485,1050,0,0</bounds>
+<orientation xmlns="http://oryx-editor.org/">horizontal</orientation>
+<name xmlns="http://oryx-editor.org/"/>
+<render xmlns="http://oryx-editor.org/" rdf:resource="#sid-4EF2A2E1-517D-4509-BB52-F2F7381FFA0F"/>
+<stencilset xmlns="http://oryx-editor.org/" rdf:resource="/stencilsets/uml2.2/uml2.2.json?version=9.7.0"/>
+</rdf:Description>
+</rdf:RDF>

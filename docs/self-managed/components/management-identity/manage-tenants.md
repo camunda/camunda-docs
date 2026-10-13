@@ -23,7 +23,7 @@ By default, multi-tenancy is disabled in Management Identity.
 
 To enable multi-tenancy:
 
-1. Enable the [`MULTITENANCY_ENABLED` feature flag](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#feature-flags).
+1. Enable the [`MULTITENANCY_ENABLED` feature flag](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#feature-flags). If you use the Camunda Helm chart, also set `global.multitenancy.enabled: true` in your Helm values. Without it, the **Tenants** tab doesn't appear in Management Identity.
 2. [Configure a database](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration).
 
 ## Create a tenant
