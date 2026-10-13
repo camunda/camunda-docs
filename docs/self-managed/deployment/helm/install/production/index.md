@@ -72,7 +72,7 @@ A `combined` release deploys every enabled component from one values file. Write
 
 ```bash
 # Pick a 15.x chart version from https://helm.camunda.io/camunda-platform/version-matrix/
-export HELM_CHART_VERSION=<15.x-chart-version>
+export HELM_CHART_VERSION="<15.x-chart-version>"
 helm repo add camunda https://helm.camunda.io
 helm repo update
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
