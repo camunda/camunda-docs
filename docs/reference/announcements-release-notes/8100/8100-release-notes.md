@@ -10,7 +10,7 @@ page_rank: 90
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
-import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_helm-cli-support.md';
+import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_helm-cli-support.md';
 
 <PageDescription />
 
@@ -1480,6 +1480,16 @@ Optimize continues to accept its 8.9 authentication settings in 8.10, translatin
 User, group, role, tenant, and permission management for Optimize is unchanged in this release, and is still handled by Management Identity.
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+### Unified configuration property changes
+
+Camunda 8.10 completes the unified configuration of the Orchestration Cluster that began in 8.8.
+
+- The 8.10 property changes are documented in [Property changes in Camunda 8.10](/versioned_docs/version-8.10/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md), including new properties, removed properties, and changed defaults.
+- You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
+- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+
+<p class="link-arrow">[Property changes in Camunda 8.10](/versioned_docs/version-8.10/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
 
 ### Unified frontend application for Admin, Operate, and Tasklist
 
