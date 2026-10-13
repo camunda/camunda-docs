@@ -13,11 +13,13 @@ keywords:
   ]
 ---
 
-Expose a BPMN process as a callable [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tool so that AI agents and LLM-powered applications can discover and invoke it.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About
 
-You can configure a BPMN process as a callable MCP tool through the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
+You can configure a BPMN process as a callable [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tool through the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
 
 It is built into the Orchestration Cluster and automatically registers processes as MCP tools when they are deployed with the [MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md).
 
