@@ -24,7 +24,7 @@ An orchestration release is self-contained. Its existing component values remain
 | `identity.enabled: false`                 | Management Identity runs only in the Hub release                          |
 | A non-empty `global.identity.service.url` | This release runs no Identity of its own, so it must be told where one is |
 
-On the 8.10 chart, the render fails with a `[camunda][error]` message if any of the first three is missing, but not if `global.identity.service.url` is empty, so set it yourself. The 8.7, 8.8, and 8.9 charts also check `global.identity.service.url`, and check their own workload keys instead of `orchestration.enabled`. See [requirements by chart version](#requirements-by-chart-version). These checks aren't the complete list of what each chart validates.
+On the 8.10 chart, the render fails with a `[camunda][error]` message if any of the first three is missing. It doesn't fail if `global.identity.service.url` is empty, so set it yourself. The 8.7, 8.8, and 8.9 charts also check `global.identity.service.url`, and check their own workload keys instead of `orchestration.enabled`. See [requirements by chart version](#requirements-by-chart-version). These checks aren't the complete list of what each chart validates.
 
 The component client IDs, audiences, redirect URLs, and secrets must match the clients declared in the matching Hub cluster record. A mismatch authenticates against a client Hub doesn't know about.
 
@@ -185,7 +185,7 @@ orchestration:
                     prefix: production-a-default-records
 ```
 
-For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The Orchestration Cluster keeps using its own secondary storage; the exporter writes the separate record stream Optimize reads. Every prefix must be unique per cluster and tenant. See [isolate every index prefix family](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
+For OpenSearch, use the `opensearch` exporter with `io.camunda.zeebe.exporter.opensearch.OpensearchExporter`. The Orchestration Cluster keeps using its own secondary storage. The exporter writes the separate record stream Optimize reads. Every prefix must be unique per cluster and tenant. See [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 
 ## Choose which applications run
 

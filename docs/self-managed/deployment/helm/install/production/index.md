@@ -52,7 +52,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/self-managed/reference-architecture/kubernetes.md#kubernetes).
 
-For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases, with one Optimize release per Physical Tenant. See [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases. It also deploys one Optimize release per Physical Tenant. See [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
 Before you write a production values file, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md) for which settings belong in `values.yaml` and which belong in a component's `extraConfiguration`.
 
@@ -62,7 +62,7 @@ After following the [prerequisites](#prerequisites), you should have a Kubernete
 
 ### Install the releases
 
-To install a split topology, see [choose your topology](../index.md#choose-your-topology). Then apply the settings on this page by role: each setting belongs only in the values file of the release that runs the component it configures. For example, the Hub and orchestration releases use separate Ingress hosts.
+Apply the settings on this page by role. Put each setting only in the values file of the release that runs the component it configures. For example, the Hub and orchestration releases use separate Ingress hosts.
 
 For the prerequisites, namespaces, Secrets, and network policies of the split topology, see [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
