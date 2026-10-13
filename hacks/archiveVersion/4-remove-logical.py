@@ -10,7 +10,7 @@ import os
 import re
 import shutil
 
-from archive_common import get_other_docs_paths, get_release_notes_paths, commit_changes
+from archive_common import commit_changes
 
 ARCHIVED_VERSION = os.environ["ARCHIVED_VERSION"]
 DOCS_ROOT = "../../"

@@ -1,4 +1,4 @@
-from archive_common import get_other_docs_paths, get_release_notes_files, commit_changes
+from archive_common import get_versioned_docs_paths, commit_changes
 import re
 import os
 import glob
@@ -71,7 +71,7 @@ def remove_links_to_archived_version():
     release_notes_reference = f"{undelimited_archive_version}/"
     docs_reference = f"version-{ARCHIVED_VERSION}/"
 
-    for docs_path in get_other_docs_paths():
+    for docs_path in get_versioned_docs_paths():
         for dir_, _, files in os.walk(docs_path):
             for file_ in files:
                 if not file_.endswith((".md", ".mdx")):

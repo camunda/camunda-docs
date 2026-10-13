@@ -1,33 +1,40 @@
 import os
 import shutil
 
-from archive_common import get_paths_to_delete, get_release_notes_paths, commit_changes
+from archive_common import get_release_notes_paths, get_versioned_docs_paths, commit_changes
 
 DOCS_ROOT = "../../"
 ARCHIVED_VERSION = os.environ["ARCHIVED_VERSION"]
 
+def _get_archived_docs_paths():
+    return [
+        os.path.join("versioned_docs", f"version-{ARCHIVED_VERSION}"),
+        os.path.join("versioned_sidebars", f"version-{ARCHIVED_VERSION}-sidebars.json"),
+    ]
+
+def _get_release_notes_paths():
+    """The archived version's release notes and announcements directory in each other docs."""
+    directory = ARCHIVED_VERSION.replace(".", "") + "0"
+    return [
+        os.path.join(docs_path, "reference", "announcements-release-notes", directory)
+        for docs_path in get_versioned_docs_paths()
+    ]
+
 def delete_paths(paths_to_delete):
     for path in paths_to_delete:
-        if os.path.isdir(path):
-            shutil.rmtree(path)
-        elif os.path.isfile(path):
-            os.remove(path)
+        relative_path = os.path.join(DOCS_ROOT, path)
 
-def remove_release_notes_directories(release_notes_paths):
-    """Delete the archived version's release notes and announcements directory in the other docs."""
-    for path in release_notes_paths:
-        if os.path.isdir(path):
-            shutil.rmtree(path)
+        if os.path.isdir(relative_path):
+            shutil.rmtree(relative_path)
+        elif os.path.isfile(relative_path):
+            os.remove(relative_path)
 
 if __name__ == "__main__":
-    archived_docs_paths = get_paths_to_delete()
-    release_notes_paths = get_release_notes_paths()
-
-    delete_paths(archived_docs_paths)
-    remove_release_notes_directories(release_notes_paths)
+    paths_to_delete = _get_archived_docs_paths() + _get_release_notes_paths()
+    delete_paths(paths_to_delete)
 
     commit_changes(
-        archived_docs_paths + release_notes_paths, 
+        paths_to_delete, 
         f"""archive({ARCHIVED_VERSION}): Physically remove archived version files
 
 No line-by-line review needed.
