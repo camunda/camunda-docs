@@ -162,10 +162,10 @@ async function findReleaseNotesFiles() {
  * Extract version information from file path
  */
 function extractVersionFromPath(filePath) {
-  // Try to extract from filename (e.g., "860-release-notes.md")
+  // Try to extract from filename (e.g., "890-release-notes.md" -> 8.9, "8100-release-notes.md" -> 8.10)
   const filenameMatch = path
     .basename(filePath)
-    .match(/^(\d+)(\d)0-release-notes\.md$/);
+    .match(/^(\d)(\d+)0-release-notes\.md$/);
   if (filenameMatch) {
     return {
       major: parseInt(filenameMatch[1]),
