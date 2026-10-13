@@ -761,7 +761,7 @@ Turn process instance runs into repeatable tests. Run a process instance, observ
 Test files in Test Studio now use the same schema as Camunda Process Test (CPT). You can record a test in Test Studio and run it in your CI/CD pipeline through CPT without converting formats, and load CPT-authored test files into Test Studio to debug them visually.
 
 - Use one JSON schema across Test Studio and CPT: record once, run anywhere.
-- Existing Play test scenario files are migrated automatically to the new format.
+- Existing test scenario files are migrated automatically to the new format.
 
 <p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
 
@@ -879,17 +879,17 @@ Task testing now supports call activities in both Desktop Modeler and Camunda Hu
 
 <p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
 
-### Test process segments in Play
+### Test process segments in test mode
 
 <!-- https://github.com/camunda/product-hub/issues/2896 -->
 
-When testing your process with Play in Camunda Hub, you can now capture and rerun targeted sections of a process as low-code integration tests:
+When testing your process within test mode in Camunda Hub, you can now capture and rerun targeted sections of a process as low-code integration tests:
 
 - Run segment tests individually or in batches to validate process changes faster.
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
 - Reuse saved segment tests during iterative model changes to catch regressions earlier.
 
-<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
+<p class="link-arrow">[Test your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
 
 ### Variables panel improvements
 
