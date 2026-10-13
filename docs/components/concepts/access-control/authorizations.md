@@ -248,6 +248,23 @@ For most scenarios:
 - Assign process‑level task permissions only to trusted roles such as task managers or administrators.
 - Use `User Task` property‑based authorizations (and the default Task Worker role) to limit regular task workers to tasks where they are assignee, candidate user, or in a candidate group.
 
+### Definition XML covers the whole deployed resource
+
+A deployed BPMN or DMN file is a single resource. A file can contain several processes or decisions, and the endpoints that return definition XML return the entire file, not only the definition you requested. These endpoints include:
+
+- `GET /v2/process-definitions/{processDefinitionKey}/xml`
+- `GET /v2/decision-definitions/{decisionDefinitionKey}/xml`
+- `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
+
+As a result, a user or client with read access to one process or decision definition in a file can also read the other definitions that the same file contains, including their model content. This applies to the XML only. Read access to one definition does not grant any other permission on the other definitions, such as creating or modifying their instances.
+
+The authorization model for these endpoints differs by resource:
+
+- For processes, `READ_PROCESS_DEFINITION` on `PROCESS_DEFINITION` is checked against the process requested. No permission exists on the BPMN file as a whole.
+- For decisions, `DECISION_REQUIREMENTS_DEFINITION:READ` controls access to a DMN file as a whole. `GET /v2/decision-requirements/{decisionRequirementsKey}/xml` requires it, and `GET /v2/decision-definitions/{decisionDefinitionKey}/xml` requires `READ_DECISION_DEFINITION` for the requested decision and returns the XML of the DMN file that contains it.
+
+If you need to keep the model content of definitions separate, deploy those definitions in separate files (resources) instead of combining them in one file.
+
 ## Default roles
 
 Camunda provides predefined roles to simplify access management:
