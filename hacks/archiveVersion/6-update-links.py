@@ -42,7 +42,7 @@ def _remove_links_from_file(path, archived_version_reference):
         content, num_sentences = sentences_linking_to_archived_release_notes.subn("", content)
         content, num_admonitions = re.subn(admonition_linking_to_release_notes, "", content, flags=re.MULTILINE)
         content, num_links = re.subn(
-            link_to_archived_release_notes, 
+            link_to_archived_release_notes,
             rf"[\1](https://unsupported.docs.camunda.io/{ARCHIVED_VERSION}/docs/\2)", 
             content, 
             flags=re.MULTILINE,
@@ -72,7 +72,7 @@ def remove_links_to_archived_version():
     docs_reference = f"version-{ARCHIVED_VERSION}/"
 
     for docs_path in get_versioned_docs_paths():
-        for dir_, _, files in os.walk(docs_path):
+        for dir_, _, files in os.walk(os.path.join(DOCS_ROOT, docs_path)):
             for file_ in files:
                 if not file_.endswith((".md", ".mdx")):
                     continue
