@@ -1483,6 +1483,16 @@ User, group, role, tenant, and permission management for Optimize is unchanged i
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
+### Unified configuration property changes
+
+Camunda 8.10 completes the unified configuration of the Orchestration Cluster that began in 8.8.
+
+- The 8.10 property changes are documented in [Property changes in Camunda 8.10](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md), including new properties, removed properties, and changed defaults.
+- You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
+- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+
+<p class="link-arrow">[Property changes in Camunda 8.10](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
+
 ### Unified frontend application for Admin, Operate, and Tasklist
 
 <!-- https://github.com/camunda/product-hub/issues/3456 -->

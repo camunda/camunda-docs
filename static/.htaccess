@@ -204,6 +204,10 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.11 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# The property changes page is documented only in 8.10 and was removed from next
+
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping/ [R=301,L]
+
 # Product links still pointing at /next
 
 RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
