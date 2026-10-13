@@ -12,7 +12,6 @@ module.exports = [
       "apis-tools/c8ctl/cluster-inspection",
       "apis-tools/c8ctl/identity-management",
       "apis-tools/c8ctl/development-workflows",
-      "apis-tools/c8ctl/camunda-json",
       "apis-tools/c8ctl/plugins",
       "apis-tools/c8ctl/command-reference",
     ],
