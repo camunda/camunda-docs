@@ -847,7 +847,7 @@ The deprecated keys continue to work in 8.10. When you set one to a non-default 
 
 #### Unknown Helm values keys rejected by default in Camunda 8.12 {#unknown-helm-values-keys-rejected-in-812}
 
-Starting with Helm chart 15.1.0, the Camunda 8.10 chart warns about each key in your values that the chart schema doesn't declare. Helm ignores these keys, so the settings they hold aren't applied. The 8.11 chart keeps this behavior.
+Starting with Helm chart 15.1.0, the Camunda 8.10 chart warns about each chart-owned key in your values that the chart schema doesn't declare. Helm ignores these keys, so the settings they hold aren't applied. The check doesn't cover `global` values, the values of dependency charts, or free-form maps such as annotations and labels. The 8.11 chart keeps this behavior.
 
 Starting with Camunda 8.12 (Helm chart 17.x), unknown chart-owned keys stop `helm install` and `helm upgrade` by default.
 
