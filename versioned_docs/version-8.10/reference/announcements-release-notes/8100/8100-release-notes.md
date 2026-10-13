@@ -32,6 +32,7 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
+<!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
 
