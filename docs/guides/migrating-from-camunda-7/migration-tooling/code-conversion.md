@@ -38,10 +38,10 @@ Additionally, you will find information about:
 
 Choose a Java migration path after you inventory your codebase. Before you use a path across a broad migration, run both paths on representative Java code and compare the results. Review is mandatory for both paths.
 
-| Approach                                                | Use when                                                                                               | What to expect                                                                                                                                              |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review its output.                                             | The agent reads source code and migration patterns directly. Model quality materially affects the output, so review source-to-output mappings and behavior. |
-| **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. | Run OpenRewrite, then use AI or manual work to finish the migration. Expect scaffolding, generated names, TODOs, and cleanup.                               |
+| Approach                                                | Use when                                                                                               | What to expect                                                                                                                                                                                               |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review its output.                                             | The agent reads source code and migration patterns directly. Model quality materially affects the output, so review source-to-output mappings and behavior.                                                  |
+| **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. | Run the [unstable 8.11.0-SNAPSHOT OpenRewrite recipes](#refactoring-recipes-using-openrewrite), then use AI or manual work to finish the migration. Expect scaffolding, generated names, TODOs, and cleanup. |
 
 Neither path guarantees lower token use, cost, or migration time.
 
@@ -225,7 +225,7 @@ Add the following to your `pom.xml`:
             <plugin>
                 <groupId>org.openrewrite.maven</groupId>
                 <artifactId>rewrite-maven-plugin</artifactId>
-                <version>6.29.0</version>
+                <version>6.46.1</version>
                 <configuration>
                     <activeRecipes>
                         <recipe>io.camunda.migration.code.recipes.AllClientRecipes</recipe>
@@ -238,7 +238,7 @@ Add the following to your `pom.xml`:
                     <dependency>
                         <groupId>io.camunda</groupId>
                         <artifactId>camunda-7-to-8-code-conversion-recipes</artifactId>
-                        <version>0.3.7</version>
+                        <version>8.11.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
             </plugin>
