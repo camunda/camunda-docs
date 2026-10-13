@@ -4,11 +4,11 @@ const sidebar: SidebarsConfig = {
   apisidebar: [
     {
       type: "doc",
-      id: "apis-tools/management-api/specifications/exporters/exporters-api",
+      id: "apis-tools/management-api/specifications/exporters/exporters-management-api",
     },
     {
       type: "category",
-      label: "UNTAGGED",
+      label: "Exporter",
       items: [
         {
           type: "doc",

@@ -8,7 +8,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "UNTAGGED",
+      label: "Cluster Configuration",
       items: [
         {
           type: "doc",
@@ -43,15 +43,15 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/management-api/specifications/cluster/purge-data-from-the-cluster",
-          label: "Purge data from the cluster",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
           id: "apis-tools/management-api/specifications/cluster/get-current-topology",
           label: "Get current topology",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/management-api/specifications/cluster/reconfigure-cluster",
+          label: "Reconfigure cluster",
+          className: "api-method patch",
         },
         {
           type: "doc",
@@ -64,12 +64,6 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/management-api/specifications/cluster/list-configuration-changes",
           label: "List configuration changes",
           className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/management-api/specifications/cluster/reconfigure-cluster",
-          label: "Reconfigure cluster",
-          className: "api-method patch",
         },
         {
           type: "doc",
@@ -101,11 +95,29 @@ const sidebar: SidebarsConfig = {
           label: "Migrate a zone to a zone-aware topology",
           className: "api-method put",
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Physical tenant",
+      items: [
         {
           type: "doc",
           id: "apis-tools/management-api/specifications/cluster/remove-a-disabled-physical-tenant",
           label: "Remove a disabled physical tenant",
           className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Data",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/management-api/specifications/cluster/purge-data-from-the-cluster",
+          label: "Purge data from the cluster",
+          className: "api-method post",
         },
       ],
     },

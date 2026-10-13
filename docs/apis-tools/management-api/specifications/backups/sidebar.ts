@@ -8,7 +8,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "UNTAGGED",
+      label: "Runtime backup",
       items: [
         {
           type: "doc",
@@ -53,6 +53,12 @@ const sidebar: SidebarsConfig = {
           label: "Force-write backup metadata for all partitions",
           className: "api-method post",
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "History backup",
+      items: [
         {
           type: "doc",
           id: "apis-tools/management-api/specifications/backups/takes-a-backup-of-history-data",
