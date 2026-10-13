@@ -195,7 +195,7 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 
 For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) documentation.
 
-In Camunda Hub and Desktop Modeler, you can [autofill a starter `fromAi()` call](#autofill-a-fromai-input) into a blank input.
+You can [autofill a starter `fromAi()` call](#autofill-a-fromai-input) into a blank input.
 
 ## Message catch events as tools
 
@@ -231,7 +231,7 @@ As most LLMs expect _some_ form of response to a tool call, the AI Agent will re
 was executed successfully without returning a result to the LLM if the `toolCallResult` variable is not set or empty after executing
 the tool.
 
-In Camunda Hub and Desktop Modeler, you can [autofill the `toolCallResult` output](#autofill-a-toolcallresult-output).
+You can [autofill the `toolCallResult` output](#autofill-a-toolcallresult-output).
 
 ### Document support
 
@@ -243,7 +243,7 @@ For supported file types and details on how documents are resolved, see [documen
 
 ## Assisted tool configuration
 
-In the properties panel, both Camunda Hub and Desktop Modeler help you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process.
+In the properties panel, the modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process.
 
 Two affordances appear, and they apply to different fields:
 
