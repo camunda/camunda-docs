@@ -712,7 +712,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 An AI-powered intelligence layer on top of Camunda's [agentic orchestration](#agentic-orchestration) platform. ProcessOS discovers existing processes from organizational knowledge, re-engineers them against defined outcomes, and generates executable Camunda solutions.
 
-- [ProcessOS](/components/process-os-harness/overview.md)
+- [ProcessOS](/components/process-os/overview.md)
 
 ### ProcessOS Harness
 

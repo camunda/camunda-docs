@@ -1,7 +1,7 @@
 ---
 id: idp-unstructured-extraction
 title: Extract unstructured data
-description: "Unstructured data extraction allows you to extract data from unstructured documents."
+description: "Use this extraction method to extract data from unstructured documents."
 ---
 
 import IdpUploadDocumentsUnstructuredImg from './img/idp-upload-documents-unstructured.png';
@@ -12,8 +12,9 @@ import IdpValidationResultsSummaryImg from './img/idp-summary.png';
 import IdpVersionsLinkImg from './img/idp-versions-link.png';
 import IdpModelSelectionImg from './img/idp-model-selection.png';
 import IdpExtractionEngineSelectionImg from './img/idp-extraction-engines.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
+<PageDescription />
 
 ## Data extraction steps {#date-extraction}
 

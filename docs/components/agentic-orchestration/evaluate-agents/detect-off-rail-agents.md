@@ -6,7 +6,9 @@ description: "Use agent health indicators and limit proximity warnings to identi
 keywords: ["agentic ai", "AI agents", "troubleshooting", "limits"]
 ---
 
-Use agent health indicators and limit proximity warnings to identify a stuck or looping AI agent before it fails.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About
 

@@ -2397,6 +2397,30 @@ ul ul .table-of-contents__link--active {
   text-underline-offset: 0.12em;
 }
 
+/* Keep glossary links dotted; the generic body link rules above reset the style to solid */
+.markdown .glossary-term .glossary-term__link,
+.markdown .glossary-term .glossary-term__link:hover,
+[data-theme="dark"] .glossary-term .glossary-term__link,
+[data-theme="dark"] .glossary-term .glossary-term__link:hover {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
+/* On the glossary page, terms link to in-page anchors (no tooltip component), so style them to match */
+.docs-doc-id-reference\/glossary .markdown a[href^="#"]:not(.hash-link),
+.docs-doc-id-reference\/glossary .markdown a[href^="#"]:not(.hash-link):hover,
+.docs-doc-id-glossary .markdown a[href^="#"]:not(.hash-link),
+.docs-doc-id-glossary .markdown a[href^="#"]:not(.hash-link):hover {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
 .glossary-term__tooltip {
   --glossary-term-accent: var(--ifm-color-primary);
   --glossary-term-arrow-size: 0.75rem;
@@ -2457,8 +2481,8 @@ ul ul .table-of-contents__link--active {
 [data-theme="dark"] .glossary-term__link {
   font-weight: 600;
   text-decoration: underline dotted currentColor;
-  text-decoration-thickness: 0.07em;
-  text-underline-offset: 0.12em;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
 }
 /* Style for custom Detail collapsbiles - for example used in /docs/reference/announcements-release-notes/860/860-release-notes.md */
 .changelog-dropdown {
