@@ -45,7 +45,7 @@ Canceling a batch operation does not rollback any changes that have already been
 
 ## Filters and process instance state
 
-Batch operations on process instances only act on instances in a state that the operation supports: modify, migrate, resolve incidents, and suspend require `ACTIVE`; resume requires `SUSPENDED`; cancel accepts `ACTIVE` and `SUSPENDED`.
+The following batch operations only act on process instances in a state that the operation supports: modify, migrate, resolve incidents, and suspend require `ACTIVE`; resume requires `SUSPENDED`; cancel accepts `ACTIVE` and `SUSPENDED`. The rules in this section apply to these six operations. They don't apply to the delete operations.
 
 Your filter only narrows the batch. Camunda combines your `state` filter with the required state, so the batch never includes instances outside the required state.
 

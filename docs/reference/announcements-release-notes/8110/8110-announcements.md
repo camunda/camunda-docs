@@ -20,7 +20,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
 
-Starting with 8.11, the [batch process instance operations](/components/concepts/batch-operations.md) combine your `state` filter with the state the operation requires instead of ignoring or replacing it. The API documentation previously described this filter as "ignored and overridden", which didn't match the actual behavior.
+Starting with 8.11, the batch operations to modify, migrate, resolve incidents in, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Previously, the API documentation described the `state` filter as "ignored and overridden", which didn't match the actual behavior: modify, migrate, resolve incidents, and cancel already combined your filter with the required state, while suspend and resume replaced it.
 
 The affected endpoints and their required states are:
 
@@ -28,7 +28,7 @@ The affected endpoints and their required states are:
 - [Resume](/apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation.api.mdx): `SUSPENDED`.
 - [Cancel](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx): `ACTIVE` and `SUSPENDED`.
 
-The following rules apply to all of them:
+The following rules apply to all six operations:
 
 - A top-level `state` filter that uses `$eq` or `$in` with a state outside the required states is rejected with `400 Bad Request`. Modify, migrate, and resolve incidents previously accepted such a filter and created an empty batch. Suspend and resume previously discarded the filter. Cancel already rejected it.
 - States inside `$or` branches aren't validated. A branch that conflicts with the required state matches no instances. Cancel previously rejected invalid states in `$or` branches.
