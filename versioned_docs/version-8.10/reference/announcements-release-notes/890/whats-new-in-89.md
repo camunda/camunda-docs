@@ -404,11 +404,11 @@ Admin is the cluster-level admin UI hosting identity management and other admini
 
 In Camunda 8.9, the remaining unified configuration project property changes are complete.
 
-- All 8.9 property changes are documented in the [Camunda 8.9 property changes](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md#camunda-89-property-changes) table.
+- All 8.9 property changes are documented in the [Camunda 8.9 property changes](/versioned_docs/version-8.9/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md#camunda-89-property-changes) table.
 - Search, sort, and filter the table to see breaking changes, direct mappings, and new properties.
 - For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
-<p class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
+<p class="link-arrow">[Property changes in Camunda 8.9](/versioned_docs/version-8.9/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
 
 :::note
 Only the first partial set of the unified configuration project properties was introduced in Camunda 8.8.
