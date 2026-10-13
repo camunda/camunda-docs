@@ -103,7 +103,7 @@ Dual-region deployments may require quota increases. Before deploying, verify th
 
 | Tool                     | Purpose                                                                                                                                                                                            |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `terraform`              | Infrastructure provisioning. Pin to the version in [`.tool-versions`](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions).                                          |
+| `terraform`              | Infrastructure provisioning. Pin to the version in [`.tool-versions`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/.tool-versions).                                   |
 | `aws` CLI v2             | AWS resource inspection and authentication.                                                                                                                                                        |
 | `jq`                     | JSON parsing in verification commands.                                                                                                                                                             |
 | `session-manager-plugin` | Required only for the [Session Manager access path](#method-b--session-manager-port-forward). Install with `brew install --cask session-manager-plugin` on macOS or follow the [AWS instructions]. |
@@ -127,7 +127,7 @@ Configure valid AWS credentials before starting. The [AWS Terraform provider](ht
 Download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references). The reference architectures are versioned according to Camunda releases (for example, `stable/8.x`). The copy lets you reuse and extend the provided Terraform examples without the constraints of a third-party-maintained module:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/containers/ecs-dual-region-fargate/procedure/get-your-copy.sh
 ```
 
 With the reference architecture in place, you can proceed with the remaining steps. Make sure you're in the correct directory before continuing.
@@ -203,7 +203,7 @@ BYO-VPC is the preferred path for customers integrating with an existing AWS lan
 | `region_N_public_subnet_ids`       | At least three public subnet IDs in distinct AZs with an internet gateway route (used by ALB). |
 | `region_N_private_route_table_ids` | At least one private route table ID per region (for cross-region routes).                      |
 
-The full validation contract — including the plan-time checks that fail with a descriptive error when a constraint is missing — lives in [`terraform/vpc/README.md`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/vpc/README.md) in the reference repository.
+The full validation contract — including the plan-time checks that fail with a descriptive error when a constraint is missing — lives in [`terraform/vpc/README.md`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/containers/ecs-dual-region-fargate/terraform/vpc/README.md) in the reference repository.
 
 ### Secondary storage replication lag
 
@@ -501,7 +501,7 @@ Use this method when the ALB is not reachable from your machine — for example,
 
 Requirements:
 
-- `task_enable_execute_command = true` on the orchestration cluster module. The reference architecture sets this to `true` by default — see [`terraform/app/camunda.tf`](https://github.com/camunda/camunda-deployment-references/blob/main/aws/containers/ecs-dual-region-fargate/terraform/app/camunda.tf).
+- `task_enable_execute_command = true` on the orchestration cluster module. The reference architecture sets this to `true` by default — see [`terraform/app/camunda.tf`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/containers/ecs-dual-region-fargate/terraform/app/camunda.tf).
 - The task IAM role must allow `ssmmessages:CreateControlChannel`, `ssmmessages:CreateDataChannel`, `ssmmessages:OpenControlChannel`, and `ssmmessages:OpenDataChannel`. The `ecs_exec_policy` in the orchestration-cluster module already grants these.
 - [AWS Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) installed locally (`brew install --cask session-manager-plugin` on macOS).
 
