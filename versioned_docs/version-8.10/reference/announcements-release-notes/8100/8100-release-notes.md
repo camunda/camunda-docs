@@ -118,7 +118,7 @@ New features help you more easily configure your agent tools when modeling.
 
 :::
 
-<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration)</p>
 
 ### Camunda-provided LLM for SaaS
 
@@ -1694,7 +1694,7 @@ New features help you more easily configure your agent tools when modeling.
 | Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Camunda Hub</li></ul></p>                                |
 | Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Camunda Hub</li></ul></p> |
 
-<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration)</p>
 
 :::note
 
