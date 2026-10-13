@@ -21,12 +21,8 @@ This section includes:
 - **Migration and legacy information:** Guidance related to upgrading and migrating to version 8.8+, including notes on deprecated features and legacy support.
 - **Cross-component topics:** Information on shared aspects such as HTTP security headers, authentication mechanisms, data retention policies, and usage metrics.
 
-:::caution Camunda 8.9 unified configuration breaking changes
+:::note Camunda 8.10 unified configuration complete
 
-Only the first partial set of unified configuration properties is introduced in Camunda 8.8.
-
-- All remaining unified property changes will be completed by Camunda 8.9.
-- This remaining work will result in future breaking changes. For example, the secondary database properties will be unified into a secondary-storage properties section.
-- New application launch modes (`camunda.mode`) and webapps toggles (`camunda.webapps.*`) are introduced in Camunda 8.9, not 8.8, as part of the completed unified configuration.
+The unified configuration properties are complete in Camunda 8.10. For the properties introduced, removed, or changed in 8.10, see [Property changes in Camunda 8.10](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md).
 
 :::
