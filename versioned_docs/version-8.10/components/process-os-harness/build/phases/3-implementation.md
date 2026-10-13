@@ -25,7 +25,7 @@ These commands target a development or test cluster. Deploying to production is 
 
 ## Validate with the test layers
 
-ProcessOS Harness generates three layers of tests. They answer different questions, and none of them replaces the others.
+ProcessOS Harness generates three layers of tests.
 
 | Layer             | What it validates                                                                                                   | Runtime               |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------- |

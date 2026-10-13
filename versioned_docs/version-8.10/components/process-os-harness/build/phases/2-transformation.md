@@ -15,11 +15,10 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Transformation turns the signed-off as-is process into a to-be design. ProcessOS Harness elicits your criteria, analyzes each phase of the process, and then challenges every system, data flow, and manual step it found.
 
-You choose how far the challenge goes. The phase offers tiers that range from a safe optimization pass to an agent-first redesign, so you can compare options before committing to one.
 
 ## Choose a tier
 
-A full run always includes the incremental tier, then asks whether to also run the radical and moonshot tiers. Results land in `transformation/` and `transformation-analysis/`, with optional BPMN in `transformation/bpmn/`.
+The phase offers tiers that range from a safe optimization pass to an agent-first redesign, so you can compare options before committing to one.
 
 | Tier          | What it proposes                                                                                    |
 | ------------- | --------------------------------------------------------------------------------------------------- |
