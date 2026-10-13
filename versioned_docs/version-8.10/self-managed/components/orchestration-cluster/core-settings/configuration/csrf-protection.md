@@ -40,27 +40,24 @@ Disabling CSRF protection is not recommended for production environments as it l
 - `/actuator/**` – Health and monitoring endpoints
 - `/v2/license` – Public license endpoint
 - `/error` – Error handling
-- `/logout` – The logout endpoint
+- `/logout` – Ends the user session
 
 If a path matches both lists, it is unprotected. For example, `/v2/license` requires no token although `/v2/**` is protected.
 
 To exempt more paths, set [`camunda.security.csrf.ignored-path-patterns`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecuritycsrf) to a list of Ant-style path patterns.
 
-## Logging in with CSRF protection
+## Log in with a CSRF token
 
-`POST /login` requires a valid CSRF token like any other state-changing request — it is not exempt, even for a browser
-that does not have a session yet. This prevents an attacker-controlled page from silently logging a victim's browser
-into an attacker-chosen account ([login CSRF](https://developer.mozilla.org/en-US/docs/Glossary/CSRF)).
+To log in programmatically, fetch a CSRF token with `GET /login`, then send it as the `X-CSRF-TOKEN` header on `POST /login`.
 
-A client driving login itself (a script, health check, or custom frontend) must fetch a token before submitting
-credentials:
+`POST /login` requires a valid CSRF token like any other state-changing request. It is not exempt, even for a browser that does not have a session yet. This prevents an attacker-controlled page from silently logging a victim's browser into an attacker-chosen account.
 
-1. Send a `GET` request to `/login`. The response includes the token both as an `X-CSRF-TOKEN` cookie and as an
-   `X-CSRF-TOKEN` response header.
-2. Submit `POST /login` with `username` and `password`, echoing the value from step 1 back as an `X-CSRF-TOKEN`
-   request header (in addition to sending the cookie the browser already stored from step 1).
+A client driving login itself (a script, health check, or custom frontend) must fetch a token before submitting credentials:
 
-Omitting the header on `POST /login` now fails with `401`/`403` instead of succeeding with `204`.
+1. Send a `GET` request to `/login`. The response includes the token both as an `X-CSRF-TOKEN` cookie and as an `X-CSRF-TOKEN` response header.
+2. Submit `POST /login` with `username` and `password`. Send the token from step 1 as the `X-CSRF-TOKEN` request header, and send the `X-CSRF-TOKEN` cookie from step 1 with the request.
+
+Omitting the header on `POST /login` now fails with `401`/`403` instead of succeeding with `204`. If the request fails, fetch a new token with `GET /login` and retry.
 
 ## Security considerations
 
