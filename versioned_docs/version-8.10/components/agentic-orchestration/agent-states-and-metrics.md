@@ -5,7 +5,9 @@ description: "Understand the agent state model, state transitions, and the usage
 keywords: ["agentic ai", "AI agents", "agent state", "usage metrics"]
 ---
 
-Understand the agent state model, state transitions, and the usage metrics Camunda tracks for every agent instance.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About
 

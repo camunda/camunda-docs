@@ -13,7 +13,9 @@ keywords:
   ]
 ---
 
-Connect an agent built with an external framework, such as LangGraph or CrewAI, to Camunda.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About
 
