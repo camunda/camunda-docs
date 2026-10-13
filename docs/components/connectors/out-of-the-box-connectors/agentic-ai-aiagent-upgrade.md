@@ -56,14 +56,7 @@ Prerequisites:
 - [c8ctl](/apis-tools/c8ctl/getting-started.md#install) 4.4.0 or later.
 - The BPMN file sets the execution platform version to Camunda 8.10 or later. c8ctl does not change this version. Set it in Modeler or in the `modeler:executionPlatformVersion` attribute of the BPMN file.
 
-Each legacy template has one new template as its target:
-
-| Element                       | Legacy template ID (`<legacy-id>`)                            | New template ID (`<new-id>`)                                    |
-| :---------------------------- | :------------------------------------------------------------ | :-------------------------------------------------------------- |
-| AI Agent Sub-process          | `io.camunda.connectors.agenticai.aiagent.jobworker.v1`        | `io.camunda.connectors.agenticai.ai-agent-subprocess.v2`        |
-| AI Agent Task                 | `io.camunda.connectors.agenticai.aiagent.v1`                  | `io.camunda.connectors.agenticai.ai-agent-task.v2`              |
-| AI Agent Sub-process (hybrid) | `io.camunda.connectors.agenticai.aiagent.jobworker.v1-hybrid` | `io.camunda.connectors.agenticai.ai-agent-subprocess.v2-hybrid` |
-| AI Agent Task (hybrid)        | `io.camunda.connectors.agenticai.aiagent.v1-hybrid`           | `io.camunda.connectors.agenticai.ai-agent-task.v2-hybrid`       |
+Each legacy template has one new template as its target. Use the element template IDs from the [table of legacy and new element templates](#legacy-and-new-element-templates). For a hybrid template, add the `-hybrid` suffix to both IDs. For example, upgrade `io.camunda.connectors.agenticai.aiagent.v1-hybrid` to `io.camunda.connectors.agenticai.ai-agent-task.v2-hybrid`.
 
 The `update` command selects elements by their legacy template ID:
 
@@ -94,6 +87,11 @@ To upgrade all legacy AI Agent elements in a BPMN file:
    :::
 
 3. Read the report for each element. The report shows each added, changed, moved, and dropped value. It also shows the notes of the recipe, for example when the recipe turns on prompt caching. Compare the report with the **With c8ctl** notes in the [model provider configuration mapping](#model-provider-configuration-mapping).
+
+   :::tip
+   If an AI agent or a script reads the report, add the `--json` option to get machine-readable output.
+   :::
+
 4. Write the upgrade to the file:
 
    ```shell
@@ -103,7 +101,7 @@ To upgrade all legacy AI Agent elements in a BPMN file:
 
    The command upgrades all elements that use the legacy template ID. c8ctl writes the file only if all these elements migrate without data loss. If the report lists dropped values, set them manually after the upgrade, or add the `--allow-lossy` option to accept the loss. Use `--allow-lossy` only after you read the dropped values in the report.
 
-5. If the file also contains elements of the other legacy template, do steps 2 to 4 again. Use that legacy template ID and its new template ID from the table above. For example, use `io.camunda.connectors.agenticai.aiagent.v1` with `--to io.camunda.connectors.agenticai.ai-agent-task.v2`.
+5. If the file also contains elements of the other legacy template, do steps 2 to 4 again. Use that legacy template ID and its new template ID from the [table of legacy and new element templates](#legacy-and-new-element-templates). For example, use `io.camunda.connectors.agenticai.aiagent.v1` with `--to io.camunda.connectors.agenticai.ai-agent-task.v2`.
 
 An element can use an older version of a legacy template. Then c8ctl first moves it to the newest legacy version, and then to the new template. If c8ctl cannot use the recipe for an element, the report gives the reason. c8ctl then copies only the values with the same key, and the write requires `--allow-lossy`.
 
