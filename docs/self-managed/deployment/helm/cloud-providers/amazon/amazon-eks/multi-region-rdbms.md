@@ -387,11 +387,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 Three values cannot be hardcoded in the Helm values, because they depend on the deployed topology:
 
-| Value                                  | Content                                                                        |
-| :------------------------------------- | :----------------------------------------------------------------------------- |
-| `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` | One entry per active region, pointing at that region's headless Zeebe service. |
-| `REGION_<slot>_ZEEBE_SERVICE_NAME`     | The suffix each broker advertises, so peers in other regions can resolve it.   |
-| `CAMUNDA_MULTIREGION_ZONES`            | The zone list, covering the deployed slots only.                               |
+| Value                                  | Content                                                                                                         |
+| :------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS` | One entry per active region, pointing at that region's per-zone headless Zeebe service, `camunda-zeebe-<zone>`. |
+| `REGION_<slot>_ZEEBE_SERVICE_NAME`     | The suffix each broker advertises, so peers in other regions can resolve it.                                    |
+| `CAMUNDA_MULTIREGION_ZONES`            | The zone list, covering the deployed slots only.                                                                |
 
 ```bash
 . ./generate-zeebe-helm-values.sh
