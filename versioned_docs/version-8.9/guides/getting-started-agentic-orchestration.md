@@ -2,7 +2,7 @@
 id: getting-started-agentic-orchestration
 title: "Build your first AI agent"
 sidebar_label: Build your first AI agent
-description: "Get started with Camunda agentic orchestration by running your first AI agent."
+description: "Get started with Camunda agentic orchestration by building and running your first AI agent."
 keywords: [agentic orchestration, ai agent]
 toc_max_heading_level: 2
 ---
@@ -12,11 +12,9 @@ import TabItem from "@theme/TabItem";
 import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
 import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 45 minutes</span>
-
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent).
+<PageDescription />
 
 ## About
 

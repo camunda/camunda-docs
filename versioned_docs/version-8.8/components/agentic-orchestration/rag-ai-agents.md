@@ -11,6 +11,11 @@ toc_max_heading_level: 2
 import ErrorHandler from './img/error-handler.png';
 import HumanGate from './img/human-gateway.png';
 import QueryTool from './img/search-query-tool.png';
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Use Retrieval-Augmented Generation (RAG) with the [Vector Database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) to give your AI agents access to persistent, domain-specific knowledge that grows over time.
 
