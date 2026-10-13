@@ -33,6 +33,62 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 67
+
+### Publication date
+
+October 9, 2026
+
+### Products affected
+
+- Camunda Helm chart for Camunda 8.7, 8.8, and 8.9, when the bundled Keycloak subchart (`identityKeycloak`) uses the default Community Edition image
+
+### Impact
+
+Keycloak is affected by [CVE-2026-18963](https://github.com/advisories/GHSA-4gv3-mc9p-5wqc), a flaw in the reset-credentials flow. An unauthenticated attacker can force a password reset for any user without the email verification step, set new credentials, and take over the account, including administrator accounts.
+
+Severity: Critical (CVSS 9.1).
+
+The bundled Keycloak subchart in the Camunda 8.7, 8.8, and 8.9 Helm charts defaults to the Community Edition image `camunda/keycloak:26.3.3`. This image is based on the Bitnami Keycloak image, which Bitnami no longer updates. As a result, Camunda cannot publish a fixed image on this line, and the image will not receive this or any future fix.
+
+Camunda SaaS is not affected.
+
+### How to determine if the installation is affected
+
+The following Keycloak versions are affected:
+
+- ≥ 26.0.0, < 26.4.15
+- ≥ 26.5.0, < 26.6.6
+- ≥ 26.7.0, < 26.7.2
+
+Your installation is affected if all of these conditions are true:
+
+- You deploy Camunda 8.7, 8.8, or 8.9 with the Camunda Helm chart, and the bundled Keycloak subchart is enabled (`identityKeycloak.enabled: true`).
+- You use the default `camunda/keycloak` image (tag `26.3.3`, any `26.3.3-*` rebuild tag, or the `bitnami-*` and `latest-bitnami` tags), or another Keycloak image with an affected version.
+
+Camunda Helm chart 12.13.6 (Camunda 8.7), 13.13.2 (Camunda 8.8), 14.10.1 (Camunda 8.9), and later show a security warning when the rendered Keycloak image is affected.
+
+If you run Keycloak outside the Camunda Helm chart, your installation is affected if your Keycloak version is in one of the affected ranges.
+
+The Camunda 8.10 Helm chart does not include a bundled Keycloak subchart and is not affected. If you use your own Keycloak with Camunda 8.10, check your Keycloak version as described above.
+
+### Solution
+
+The following Keycloak versions contain the fix:
+
+- 26.4.15
+- 26.6.6
+- 26.7.2
+
+Camunda does not provide a fixed Community Edition image for the bundled Keycloak subchart. Use one of these options:
+
+- **Use the Camunda enterprise images:** Enterprise customers can switch to the [Bitnami Premium images provided by Camunda](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#installation-process). The enterprise Keycloak image `registry.camunda.cloud/keycloak-ee/keycloak` receives security updates and contains the fix from version 26.7.2. Camunda Helm chart 12.13.4 (Camunda 8.7), 13.12.8 (Camunda 8.8), 14.8.5 (Camunda 8.9), and later use a fixed Keycloak version in `values-enterprise.yaml`.
+- **Migrate away from the bundled Keycloak subchart:** Replace the bundled Keycloak with the Keycloak Operator, a managed service, or another maintained Keycloak deployment that runs a fixed version. For step-by-step instructions, see [migrate Keycloak from Bitnami to the Keycloak Operator](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators.md#keycloak).
+
+After you apply the fix, examine Keycloak events and user accounts for password resets that you do not expect, and reset the credentials of any affected accounts.
+
+No action is necessary for Camunda SaaS.
+
 ## Notice 66
 
 ### Publication date
