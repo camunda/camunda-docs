@@ -2,10 +2,18 @@
 id: manage-user-groups
 title: "Manage user groups"
 sidebar_label: "Manage user groups"
-description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
+description: "Organize users into groups to control access to the clusters of your SaaS organization."
 ---
 
-Organize users into groups within your organization.
+Organize users into groups to control access to the clusters of your SaaS organization.
+
+:::note
+
+- User groups are available in SaaS only.
+- Groups apply to cluster access control only. They don't control access to Camunda Hub, such as workspaces, projects, or organization settings.
+- Groups created in Console are no longer recommended for use.
+
+:::
 
 ## Creating a group
 

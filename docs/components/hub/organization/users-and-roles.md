@@ -28,8 +28,10 @@ Where and how you manage users, and which roles are available, depends on the ed
 
 You invite and manage users and groups in Camunda Hub, on the **Organization > Manage organization** page. The Organization Owner has all rights in the organization.
 
+Groups apply to cluster access control only. They don't control access to Camunda Hub. Use [roles](#roles-and-permissions) to control access to Camunda Hub.
+
 - [Create and manage users](/components/saas/organization/create-manage-users.md)
-- [Manage user groups](/components/saas/organization/manage-user-groups.md)
+- [Manage user groups for cluster access](/components/saas/organization/manage-user-groups.md)
 - [Organization ownership](/components/saas/organization/organization-ownership.md)
 
 Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
