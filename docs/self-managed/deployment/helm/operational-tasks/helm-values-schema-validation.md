@@ -31,7 +31,7 @@ The error text depends on the Helm version. This example comes from a test chart
 Camunda 8.10 Helm chart versions 15.1.0+ warn about unknown keys in your values when Helm renders the chart templates. The warning doesn't stop the command.
 
 - The chart compares your values to the keys that its schema declares. A key that the schema doesn't declare is an unknown key.
-- For each unknown key, the chart adds a warning to the notes that `helm install` and `helm upgrade` print. The chart also writes the warnings to the `<RELEASE>-warnings` ConfigMap.
+- For each unknown key, the chart adds a warning to the notes that `helm install` and `helm upgrade` print. The chart also writes the warnings to the `<RELEASE-FULLNAME>-warnings` ConfigMap.
 - The check ignores `global` values, the values of dependency charts, and free-form maps such as annotations and labels.
 
 The warning names the full path of the key:
@@ -45,8 +45,19 @@ To fix the warning, remove the key or correct its name, then run the command aga
 To read the warnings of an installed release, run:
 
 ```shell
-kubectl get configmap <RELEASE>-warnings --namespace <NAMESPACE> --output jsonpath='{.data.warnings}'
+kubectl get configmap <RELEASE-FULLNAME>-warnings --namespace <NAMESPACE> --output jsonpath='{.data.warnings}'
 ```
+
+Replace `<RELEASE-FULLNAME>` with the chart's full name for your release. By default, the chart combines the Helm release name and `camunda-platform`, unless the release name already contains `camunda-platform`, in which case it uses the release name alone. For example, a release named `camunda` uses the ConfigMap `camunda-camunda-platform-warnings`.
+
+The following top-level values affect the full name:
+
+| Setting            | Effect                                                                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `nameOverride`     | Replaces `camunda-platform` when deriving the full name, including the check for whether the release name already contains it. |
+| `fullnameOverride` | Replaces the entire full name and takes precedence over `nameOverride`.                                                        |
+
+The chart truncates the full name to 63 characters and removes a trailing hyphen before appending `-warnings`.
 
 To make unknown keys stop `helm install`, `helm upgrade`, and `helm template`, set `global.strictValues: true`. The command then fails with this error:
 
