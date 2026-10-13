@@ -31,7 +31,7 @@ Camunda 8.10 has known authentication and tenant isolation issues in a specific 
 - Your cluster has more than one Physical Tenant.
 - Your Physical Tenants use separate identity providers (IdPs).
 
-See [camunda#65501](https://github.com/camunda/camunda/issues/65501) and [camunda#65582](https://github.com/camunda/camunda/issues/65582). If this scenario applies to you, don't use this setup in production until you have upgraded to Camunda 8.10.4, which fixes these issues. Camunda 8.10.4 is released latest by the end of this week.
+See [camunda#65501](https://github.com/camunda/camunda/issues/65501), [camunda#65582](https://github.com/camunda/camunda/issues/65582), [camunda#65597](https://github.com/camunda/camunda/issues/65597) and [camunda#65607](https://github.com/camunda/camunda/issues/65607). If this scenario applies to you, don't use this setup in production until you have upgraded to Camunda 8.10.4, which fixes these issues. Camunda 8.10.4 is released latest by the end of this week.
 :::
 
 :::warning Multiple identity providers: named providers ignore the global claims
