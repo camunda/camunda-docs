@@ -180,7 +180,7 @@ git checkout -b archive-$ARCHIVED_VERSION-remove-archived
 make -C hacks/archiveVersion remove-archived
 ```
 
-Each commit message explains what it does. The link updates are particularly opinionated. Make sure these are handled correctly and fix any remaining issues. Review and commit the changes.
+Each commit message explains what it does. The link updates are opinionated. Make sure these are handled correctly and fix any remaining issues with a new commit. Review the changes and submit a PR.
 
 > **Tip:** Instead of reviewing all the changes at once, review the commits one-by-one. This will be easier to digest. You can also skip the huge physical removal commit.
 
