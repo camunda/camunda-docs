@@ -26,7 +26,7 @@ const CONFIG = {
   ],
 
   // Target minor versions to process (format: "major.minor")
-  targetVersions: ["8.7", "8.8", "8.9"],
+  targetVersions: ["8.8", "8.9", "8.10"],
 
   // Tag to identify where release links should be placed
   releaseLinksTag: "<!-- RELEASE_LINKS_PLACEHOLDER -->",
