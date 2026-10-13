@@ -220,6 +220,23 @@ For most scenarios:
 - Assign process‑level task permissions only to trusted roles such as task managers or administrators.
 - Use `User Task` property‑based authorizations (and the default Task Worker role) to limit regular task workers to tasks where they are assignee, candidate user, or in a candidate group.
 
+### Definition XML covers the entire deployed resource
+
+A deployed BPMN or DMN file is a single resource. A file can contain multiple processes or decisions, and the endpoints that return definition XML return the entire file, not just the requested definition. These endpoints include:
+
+- `GET /v2/process-definitions/{processDefinitionKey}/xml`
+- `GET /v2/decision-definitions/{decisionDefinitionKey}/xml`
+- `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
+
+As a result, a user or client with read access to one process or decision definition in a file can also read the other definitions contained in that file, including their model content. This applies only to the XML. Read access to one definition does not grant any other permissions for the other definitions, such as permission to create or modify their instances.
+
+The authorization model for these endpoints varies by resource:
+
+- For processes, `READ_PROCESS_DEFINITION` on `PROCESS_DEFINITION` is checked against the requested process. No permission exists for the BPMN file as a whole.
+- For decisions, `DECISION_REQUIREMENTS_DEFINITION:READ` controls access to a DMN file as a whole. The `GET /v2/decision-requirements/{decisionRequirementsKey}/xml` endpoint requires this permission. The `GET /v2/decision-definitions/{decisionDefinitionKey}/xml` endpoint requires `READ_DECISION_DEFINITION` for the requested decision and returns the XML of the DMN file containing it.
+
+If you need to keep the model content of definitions separate, deploy the definitions in separate files (resources) rather than combining them in a single file.
+
 ## Default roles
 
 Camunda provides predefined roles to simplify access management:
