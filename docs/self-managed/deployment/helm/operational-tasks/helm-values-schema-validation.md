@@ -28,7 +28,7 @@ The error text depends on the Helm version. This example comes from a test chart
 
 ## Check the unknown-key warnings of the chart {#check-the-unknown-key-warnings}
 
-Camunda 8.10 Helm chart versions 15.1.0 and later also check your values for unknown keys while they render templates. This check gives warnings. It doesn't stop the command.
+Camunda 8.10 Helm chart versions 15.1.0+ also check your values for unknown keys while they render templates. This check gives warnings. It doesn't stop the command.
 
 - The chart compares your values to the keys that its schema declares. A key that the schema doesn't declare is an unknown key.
 - For each unknown key, the chart adds a warning to the release notes that `helm install` and `helm upgrade` print. The chart also writes the warnings to the `<release-fullname>-warnings` ConfigMap.
