@@ -20,13 +20,18 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Batch process instance operations now narrow and validate the `state` filter {#batch-operation-state-filter}
 
-Starting with 8.11, the batch operations to modify, migrate, resolve incidents in, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it. Previously, the API documentation described the `state` filter as "ignored and overridden", which didn't match the actual behavior: modify, migrate, resolve incidents, and cancel already combined your filter with the required state, while suspend and resume replaced it.
+Starting with 8.11, the batch operations to modify, migrate, resolve incidents, suspend, resume, and cancel process instances narrow your `state` filter with the state the operation requires, and validate it.
 
-The affected endpoints and their required states are:
+Previously, the API documentation described the `state` filter as "ignored and overridden". This didn't match the actual behavior, which differed by operation.
 
-- [Modify](/apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instances-batch-operation.api.mdx), [migrate](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instances-batch-operation.api.mdx), [resolve incidents](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-incidents-batch-operation.api.mdx), and [suspend](/apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation.api.mdx): `ACTIVE`.
-- [Resume](/apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation.api.mdx): `SUSPENDED`.
-- [Cancel](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx): `ACTIVE` and `SUSPENDED`.
+| Operation                                                                                                                | Required state           | Previous behavior                             |
+| :----------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------- |
+| [Modify](/apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instances-batch-operation.api.mdx)     | `ACTIVE`                 | Combined your filter with the required state. |
+| [Migrate](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instances-batch-operation.api.mdx)   | `ACTIVE`                 | Combined your filter with the required state. |
+| [Resolve incidents](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-incidents-batch-operation.api.mdx) | `ACTIVE`                 | Combined your filter with the required state. |
+| [Suspend](/apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation.api.mdx)   | `ACTIVE`                 | Replaced your filter with the required state. |
+| [Resume](/apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation.api.mdx)     | `SUSPENDED`              | Replaced your filter with the required state. |
+| [Cancel](/apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation.api.mdx)     | `ACTIVE` and `SUSPENDED` | Combined your filter with the required state. |
 
 The following rules apply to all six operations:
 
