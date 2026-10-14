@@ -15,6 +15,6 @@ Configure it with the following environment variables:
 <details>
 <summary>See the check-deployment-ready.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 </details>

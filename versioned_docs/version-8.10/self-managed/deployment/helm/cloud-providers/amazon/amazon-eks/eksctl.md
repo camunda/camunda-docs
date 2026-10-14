@@ -805,7 +805,7 @@ We will also use this step to verify connectivity to the database from the creat
 3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`:
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
    ```
 
    This manifest creates the component databases only. The **RDBMS** secondary storage variant needs an additional `camunda_orchestration` database and `orchestration_db` user, which this eksctl path does not provision. To run the Orchestration Cluster on Aurora PostgreSQL, follow the RDBMS variant of the [EKS Terraform setup](./terraform-setup.md#variants) instead.
