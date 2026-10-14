@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 | `camunda.api.long-polling.enabled`             | <p>Enable [long-polling](/components/concepts/job-workers.md#long-polling) for the Camunda gRPC API server.</p>                       | `true`        | No                              |
 | `camunda.api.long-polling.timeout`             | <p>Set the timeout for long polling in milliseconds.</p>                                                                              | `10000`       | No                              |
 | `camunda.api.long-polling.probe-timeout`       | <p>Set the probe timeout for long polling in milliseconds.</p>                                                                        | `10000`       | No                              |
-| `camunda.api.long-polling.min-empty-responses` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `10s`         | No                              |
+| `camunda.api.long-polling.min-empty-responses` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `3`           | No                              |
 
   </TabItem>
     <TabItem value="env" label="Environment variables">
@@ -25,7 +25,7 @@ import TabItem from '@theme/TabItem';
 | `CAMUNDA_API_LONGPOLLING_ENABLED`           | <p>Enable [long-polling](/components/concepts/job-workers.md#long-polling) for the Camunda gRPC API server.</p>                       | `true`        | No                              |
 | `CAMUNDA_API_LONGPOLLING_TIMEOUT`           | <p>Set the timeout for long polling in milliseconds.</p>                                                                              | `10000`       | No                              |
 | `CAMUNDA_API_LONGPOLLING_PROBETIMEOUT`      | <p>Set the probe timeout for long polling in milliseconds.</p>                                                                        | `10000`       | No                              |
-| `CAMUNDA_API_LONGPOLLING_MINEMPTYRESPONSES` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `10s`         | No                              |
+| `CAMUNDA_API_LONGPOLLING_MINEMPTYRESPONSES` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `3`           | No                              |
 
   </TabItem>
 </Tabs>
@@ -110,12 +110,12 @@ import TabItem from '@theme/TabItem';
 
 ### `camunda.api.rest.filters`
 
-| Property                              | Description                                                                                                                                                                                                                               | Default value | Overridable per Physical Tenant |
-| :------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ | :------------------------------ |
-| `camunda.api.rest.filters[]`          | <p>This property is part of Camunda's REST filter system, which allows you to add filters to REST requests and responses.</p><p>The property is a list of filter configurations, each requiring an `id`, `jar-path` and `class-name`.</p> | No entries    | No                              |
-| `camunda.api.rest.filters[].id`       | <p>The unique identifier for a particular REST filter configuration.</p>                                                                                                                                                                  | Null          | No                              |
-| `camunda.api.rest.filters.jar-path`   | <p>The file path to a JAR file that contains a custom REST filter implementation.</p>                                                                                                                                                     | Null          | No                              |
-| `camunda.api.rest.filters.class-name` | <p>Set the fully qualified class name of a custom REST filter implementation that should be loaded and executed by the Camunda REST server.</p>                                                                                           | Null          | No                              |
+| Property                                | Description                                                                                                                                                                                                                               | Default value | Overridable per Physical Tenant |
+| :-------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ | :------------------------------ |
+| `camunda.api.rest.filters[]`            | <p>This property is part of Camunda's REST filter system, which allows you to add filters to REST requests and responses.</p><p>The property is a list of filter configurations, each requiring an `id`, `jar-path` and `class-name`.</p> | No entries    | No                              |
+| `camunda.api.rest.filters[].id`         | <p>The unique identifier for a particular REST filter configuration.</p>                                                                                                                                                                  | Null          | No                              |
+| `camunda.api.rest.filters[].jar-path`   | <p>The file path to a JAR file that contains a custom REST filter implementation.</p>                                                                                                                                                     | Null          | No                              |
+| `camunda.api.rest.filters[].class-name` | <p>Set the fully qualified class name of a custom REST filter implementation that should be loaded and executed by the Camunda REST server.</p>                                                                                           | Null          | No                              |
 
 ### `camunda.api.rest.process-cache`
 

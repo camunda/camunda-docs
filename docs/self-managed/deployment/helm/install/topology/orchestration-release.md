@@ -222,7 +222,7 @@ helm install camunda camunda/camunda-platform \
   --values orchestration-values.yaml
 ```
 
-Confirm the cluster appears in Camunda Hub's cluster list before you install its Optimize releases.
+Confirm that the Orchestration Cluster appears in Camunda Hub's cluster list before you install its Optimize releases.
 
 ## Add another Orchestration Cluster
 

@@ -60,7 +60,7 @@ Add the following scraping job:
   scheme: http
   static_configs:
   - targets:
-    - localhost: 9600
+    - localhost:9600
 ```
 
 :::warning
@@ -86,7 +86,7 @@ Configure this via the following properties:
 ```yaml
 management:
   # Disable Prometheus
-  promethus.metrics.export.enabled: false
+  prometheus.metrics.export.enabled: false
   # Configure OpenTelemetry Metrics
   otlp:
     metrics:
@@ -417,7 +417,7 @@ When the cache hit rate is low, check `camunda.secret.resolution.outcome` first.
 ### Cache size and the configured maximum
 
 `camunda.secret.cache.size` is bounded per store by the
-[`camunda.secrets.cache.max-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecretscache)
+[`camunda.secrets.cache.max-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secret-cache)
 property. The bound applies per store, not as a shared budget, so the worst-case memory footprint
 across a deployment is the number of configured stores multiplied by that maximum.
 
@@ -480,7 +480,7 @@ Other Grafana dashboards (API panels, gateway panels) are being updated to inclu
 
 A pre-built Grafana dashboard is available for the data layer in the repository:
 
-[monitor/grafana/data_layer.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/dashboards/data_layer.json)
+[monitor/grafana/dashboards/data_layer.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/dashboards/data_layer.json)
 
 To use it:
 

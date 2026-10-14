@@ -95,7 +95,7 @@ identity:
 
 **Why this happens:** The Keycloak database is misconfigured, so other components can't authenticate against Keycloak.
 
-**How to fix:** Verify the Keycloak database connection settings, and confirm Keycloak itself starts up without errors before checking other components.
+**How to fix:** Verify the Keycloak database connection settings where you deployed Keycloak, for example in the [Keycloak operator deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment), and confirm Keycloak itself starts up without errors before checking other components.
 
 ### A component logs a `database missing` error
 

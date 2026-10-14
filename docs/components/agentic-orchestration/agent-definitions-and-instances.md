@@ -6,7 +6,9 @@ description: "Understand agent definitions and agent instances, the entities Cam
 keywords: ["agentic ai", "AI agents", "agent definition", "agent instance"]
 ---
 
-Understand agent definitions and agent instances, the entities Camunda uses to model AI agents.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About
 

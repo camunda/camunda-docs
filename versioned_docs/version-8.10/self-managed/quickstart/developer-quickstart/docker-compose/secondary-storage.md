@@ -45,7 +45,7 @@ Use this workflow for each backend:
 | Oracle               | `application-oracle.yaml`     | `oracle-secondary`         | Add the Oracle JDBC driver JAR to `driver-lib/` |
 | Microsoft SQL Server | `application-mssql.yaml`      | `mssql-secondary`          | Included                                        |
 
-When the database runs from `docker-compose.override.yaml`, replace `localhost` in the selected JDBC URL with the hostname shown in the table. The MySQL file uses host port `3307` by default; container-to-container traffic uses MySQL port `3306` instead.
+When the database runs from `docker-compose.override.yaml`, replace `localhost` in the selected JDBC URL with the hostname shown in the table. The MySQL file points to `localhost:3307` by default; container-to-container traffic uses MySQL port `3306` instead.
 
 :::note
 Camunda configures the built-in exporter automatically from `camunda.data.secondary-storage.*`. You do not need to add a separate exporter class for the standard Docker Compose quickstart.

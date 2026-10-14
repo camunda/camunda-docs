@@ -32,7 +32,7 @@ Step through the Docker Compose guide with the following topics:
 
 If you are looking for a specific task from the previous single-page guide, use the links below.
 
-## Install and start Camunda 8 with Docker Compose {#install-and-start-camunda-8-with-docker-compose}
+### Install and start Camunda 8 with Docker Compose {#install-and-start-camunda-8-with-docker-compose}
 
 For prerequisites, startup commands, and shutdown commands, see [install and start with Docker Compose](./docker-compose/install-start.md).
 
@@ -52,7 +52,7 @@ For Elasticsearch, OpenSearch, PostgreSQL, MariaDB, MySQL, Oracle, Microsoft SQL
 
 For connector secrets, custom connectors, Desktop Modeler, and Camunda Hub, see [use connectors and deploy processes with Docker Compose](./docker-compose/connectors-and-modeling.md#use-connectors).
 
-## Stop Camunda 8 with Docker Compose {#stop-camunda-8-with-docker-compose}
+### Stop Camunda 8 with Docker Compose {#stop-camunda-8-with-docker-compose}
 
 For shutdown commands and volume cleanup guidance, see [install and start with Docker Compose](./docker-compose/install-start.md#stop-camunda-8-with-docker-compose).
 

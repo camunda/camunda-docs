@@ -1,7 +1,7 @@
 ---
 id: idp-document-classification
 title: Document classification
-description: "Document classification templates use LLMs to automatically classify documents by type, such as invoices, contracts, or identity documents."
+description: "Automatically classify documents by type using LLM-powered classification templates."
 toc_max_heading_level: 3
 ---
 
@@ -10,8 +10,9 @@ import IdpClassificationDocTypesImg from './img/idp-classification-doc-types.png
 import IdpClassificationTestImg from './img/idp-classification-test.png';
 import IdpClassificationResultsImg from './img/idp-classification-results.png';
 import IdpClassificationPublishImg from './img/idp-classification-publish.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Automatically classify documents by type using LLM-powered classification templates.
+<PageDescription />
 
 ## About document classification
 

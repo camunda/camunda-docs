@@ -234,9 +234,7 @@ camunda:
 For this to authenticate correctly, two conditions must hold:
 
 - **Every instance must authorize the pod's IAM role**: attach an IAM policy to the role allowing `es:ESHttp*` on each instance's ARN, and allow the role in each instance's access policy (or map the role ARN in its fine-grained access control configuration). This also works for an instance in a different AWS account, granted through that instance's resource-based access policy. The signing identity is still the single pod role.
-  :::warning
-  **All instances must be in the same AWS region as the pod.** The request signature is scoped to the region resolved from the pod's environment (for example `AWS_REGION`), not derived from each endpoint. An instance in a different region rejects the signature with an authentication error.
-  :::
+- **All instances must be in the same AWS region as the pod**: the request signature is scoped to the region resolved from the pod's environment (for example `AWS_REGION`), not derived from each endpoint. An instance in a different region rejects the signature with an authentication error.
 
 ## Document Store storage
 
@@ -780,6 +778,6 @@ For example, a node whose `default` tenant is serviceable while `tenanta` failed
 | ------------------------ | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---------------------------------- |
 | **Isolation**            | Separate schema/database OR table prefix                                            | Separate cluster OR index prefix                                                    | Separate bucket OR sibling subpath |
 | **Per-tenant config**    | JDBC URL                                                                            | `url` + `index-prefix`                                                              | Bucket + prefix                    |
-| **Collision detection**  | Startup error                                                                       | Startup error                                                                       | Startup error                      |
+| **Collision detection**  | Startup error                                                                       | Startup error on identical prefix only; overlaps aren't detected                    | Startup error                      |
 | **Unavailable behavior** | Tenant degraded ([details](#secondary-storage-failures-during-startup-and-runtime)) | Tenant degraded ([details](#secondary-storage-failures-during-startup-and-runtime)) | Runtime error (no fallback)        |
 | **Mixed vendors**        | Yes                                                                                 | Yes (ES or OpenSearch)                                                              | Yes (different cloud providers)    |

@@ -122,6 +122,13 @@ The `BATCH` resource has one `CREATE_BATCH_OPERATION_*` permission for each type
 | `CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE`    | Modify process instances                 |
 | `CREATE_BATCH_OPERATION_RESOLVE_INCIDENT`           | Resolve incidents                        |
 
+### Access to linked forms
+
+Access to a process definition or a user task includes access to the form linked to it. Reading a linked form through one of the following endpoints requires only the permission on the process definition or user task. No separate `READ` permission on the `Resource` (form) is needed:
+
+- Get process start form (`GET /process-definitions/{processDefinitionKey}/form`) requires `READ_PROCESS_DEFINITION` on the `Process Definition`.
+- Get user task form (`GET /user-tasks/{userTaskKey}/form`) requires `READ_USER_TASK` on the `Process Definition` or `READ` on the `User Task`.
+
 ## Configuration
 
 ### SaaS configuration
@@ -192,6 +199,23 @@ The Orchestration Cluster does not validate whether the resource exists when cre
 - This behavior provides flexibility to create authorizations for entities outside of the system (for example OIDC users) or for entities that will be created in the future (for example creating process definition authorizations before the process is deployed).
 
 - However, you should keep this in mind when setting up new users, groups, roles, and so on, and verify that the ID of the new entity does not accidentally match an existing authorization.
+
+### Definition XML covers the entire deployed resource
+
+A deployed BPMN or DMN file is a single resource. A file can contain multiple processes or decisions, and the endpoints that return definition XML return the entire file, not just the requested definition. These endpoints include:
+
+- `GET /v2/process-definitions/{processDefinitionKey}/xml`
+- `GET /v2/decision-definitions/{decisionDefinitionKey}/xml`
+- `GET /v2/decision-requirements/{decisionRequirementsKey}/xml`
+
+As a result, a user or client with read access to one process or decision definition in a file can also read the other definitions contained in that file, including their model content. This applies only to the XML. Read access to one definition does not grant any other permissions for the other definitions, such as permission to create or modify their instances.
+
+The authorization model for these endpoints varies by resource:
+
+- For processes, `READ_PROCESS_DEFINITION` on `PROCESS_DEFINITION` is checked against the requested process. No permission exists for the BPMN file as a whole.
+- For decisions, `DECISION_REQUIREMENTS_DEFINITION:READ` controls access to a DMN file as a whole. The `GET /v2/decision-requirements/{decisionRequirementsKey}/xml` endpoint requires this permission. The `GET /v2/decision-definitions/{decisionDefinitionKey}/xml` endpoint requires `READ_DECISION_DEFINITION` for the requested decision and returns the XML of the DMN file containing it.
+
+If you need to keep the model content of definitions separate, deploy the definitions in separate files (resources) rather than combining them in a single file.
 
 ## Default roles
 

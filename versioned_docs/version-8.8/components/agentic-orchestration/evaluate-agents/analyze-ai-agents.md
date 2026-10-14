@@ -11,8 +11,9 @@ import ScriptTask from '../img/script-task.png';
 import Heatmap from '../img/heatmap.png';
 import PieChart from '../img/pie-chart.png';
 import Dashboard from '../img/dashboard-optimize.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Analyze and improve the performance of your AI agent executions using Optimize.
+<PageDescription />
 
 ## About
 
