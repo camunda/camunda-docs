@@ -422,7 +422,7 @@ The [baseline resource configuration](#baseline-resource-configuration) above pr
   - All Zeebe partitions export data to the same indices.
   - Write throughput for an index scales with the number of primary shards, not the number of nodes. Reassess the shard count for your indices when scaling the number of partitions. See the [Elasticsearch shards documentation](/self-managed/concepts/secondary-storage/managing-secondary-storage.md#shards).
 - When using RDBMS (PostgreSQL):
-  - Its schema has no table partitioning, and each physical tenant writes through a single PostgreSQL connection, unlike Elasticsearch/OpenSearch, which scale write throughput by adding primary shards across nodes.
+  - Its schema has no table partitioning, and each broker opens a connection pool per physical tenant, unlike Elasticsearch/OpenSearch, which scale write throughput by adding primary shards across nodes.
   - RDBMS scales primarily **vertically** (a larger instance) rather than horizontally; plan your initial sizing with more headroom, as adding capacity later is more disruptive.
   - RDBMS write throughput was measured at roughly 70% of Elasticsearch/OpenSearch write performance across tested scenarios; see [RDBMS benchmarking results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md) for the full methodology and caveats.
 

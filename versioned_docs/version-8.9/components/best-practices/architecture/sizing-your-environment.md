@@ -260,7 +260,7 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 - A different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
 - Write throughput is approximately **70% of Elasticsearch** on equivalent hardware. See [RDBMS benchmarking results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md) for the full methodology and caveats.
 - **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
-- **Scales primarily vertically** rather than horizontally like Elasticsearch, since its schema has no table partitioning and each physical tenant writes through a single PostgreSQL connection. Plan initial sizing with more headroom, as adding capacity is more disruptive.
+- **Scales primarily vertically** rather than horizontally like Elasticsearch, since its schema has no table partitioning and each broker opens a connection pool per physical tenant. Plan initial sizing with more headroom, as adding capacity is more disruptive.
 - Ideal for organizations that already operate a supported RDBMS at scale and want to avoid adding Elasticsearch to their infrastructure.
   <!-- To be validated - Potentially lower total disk space required for the same data volume (preliminary benchmarks suggest this, but detailed results are still being validated). -->
 
