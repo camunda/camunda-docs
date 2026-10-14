@@ -147,7 +147,7 @@ Run both paths on representative Java code before you use one across a broad mig
 
 ### Migrate process tests
 
-The skill migrates Camunda 7 tests to [Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) in the **Code + models** and **Code only** scopes. A test is in scope when it runs a BPMN process or a DMN decision on a Camunda 7 engine. Test migration needs Camunda 8.9 or later. With target 8.8, the skill lists the tests as **Report only**.
+The skill migrates Camunda 7 tests to [Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) in the **Code + models** and **Code only** scopes. A test is in scope when it runs a BPMN process or a DMN decision on a Camunda 7 engine and uses a framework or approach that existed for Camunda 7. Test migration needs Camunda 8.9 or later. With target 8.8, the skill lists the tests as **Report only**.
 
 | Camunda 7 tests                                                                                                                    | What the skill does                                                          |
 | :--------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------- |

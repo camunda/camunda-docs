@@ -145,7 +145,7 @@ Camunda 7 assertions check the state once. Most [Camunda Process Test](/apis-too
 | `assertThat(pi).variables().containsKey(k)`     | `assertThat(pi).hasVariableNames(k)`                                                                                                                        |
 | `assertThat(task()).hasName("x")`               | `assertThatUserTask(UserTaskSelectors.byElementId("id")).isCreated().hasName("x")`, which checks the first matching task, not only the task of `pi`         |
 | `assertThat(task()).isAssignedTo("u")`          | No direct counterpart. `assertThatUserTask(UserTaskSelectors.byElementId("id")).hasAssignee("u")` checks the first matching task, not only the task of `pi` |
-| `complete(task())`                              | `processTestContext.completeUserTask("id")`                                                                                                                 |
+| `complete(task())`                              | No direct counterpart. `processTestContext.completeUserTask("id")` completes the first matching task, not only the task of `pi`                             |
 | `managementService().executeJob(id)`            | `processTestContext.increaseTime(Duration)` or `processTestContext.completeJob("type")`                                                                     |
 
 ### Import replacements
