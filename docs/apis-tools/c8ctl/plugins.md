@@ -128,13 +128,13 @@ The plugin runtime grows over time — `c8ctl.npm()`, for instance, does not exi
 }
 ```
 
-The field is optional — a plugin that declares nothing is treated exactly as it was before. When it _is_ declared and this c8ctl does not satisfy it:
+The field is optional — a plugin that declares nothing is treated exactly as it was before. When it *is* declared and this c8ctl does not satisfy it:
 
 - `c8 load plugin`, `c8 upgrade plugin`, and `c8 downgrade plugin` **fail** instead of reporting success. The plugin is still installed; what you don't get is a green exit code on an install that cannot work. (Pinning an older release is the likeliest way to land on one built for an older c8ctl, so `downgrade` matters most here.)
 - The plugin still loads and still appears in `c8 help`, but every one of its commands refuses to run and prints which c8ctl it needs. A visible command that explains itself beats a missing one that reads as a typo.
 - `c8 doctor plugin` lists it under incompatible plugins, in text and in `--json`.
 
-Range evaluation is npm's own `semver` — the same library `npm install` uses for `engines` fields — so the full range grammar is supported: comparators (`>=`, `>`, `<=`, `<`, `^`, `~`, an exact version, `*`), set unions (`"^3 || ^4"`), hyphen ranges (`"3.3.0 - 4.0.0"`), and partial or wildcard versions (`"4"`, `"4.x"`). Prereleases order as semver specifies, so `>=4.0.0` is _not_ satisfied by `4.0.0-alpha.1` — declare `>=4.0.0-alpha.1` when an alpha is enough — and `^`/`~` exclude prereleases of the version they bound (`^4.1.0` does not admit `5.0.0-alpha.1`).
+Range evaluation is npm's own `semver` — the same library `npm install` uses for `engines` fields — so the full range grammar is supported: comparators (`>=`, `>`, `<=`, `<`, `^`, `~`, an exact version, `*`), set unions (`"^3 || ^4"`), hyphen ranges (`"3.3.0 - 4.0.0"`), and partial or wildcard versions (`"4"`, `"4.x"`). Prereleases order as semver specifies, so `>=4.0.0` is *not* satisfied by `4.0.0-alpha.1` — declare `>=4.0.0-alpha.1` when an alpha is enough — and `^`/`~` exclude prereleases of the version they bound (`^4.1.0` does not admit `5.0.0-alpha.1`).
 
 **Prereleases count.** Unlike `npm install`, which excludes prerelease versions from a range unless you opt in, this check treats them as ordinary versions: a host on `4.1.0-alpha.3` satisfies `>=4.0.0-alpha.1`. That is deliberate — c8ctl publishes alphas, and refusing to run a plugin on the very channel its requirement was written for would disable working setups. One consequence to know: `^`/`~` still desugar the way npm does, to an upper bound that excludes prereleases (`^4.1.0` means `>=4.1.0 <5.0.0-0`), while a hand-written `<5.0.0` means exactly what it says and does admit `5.0.0-alpha.1`. Spell the bound explicitly if that distinction matters to your plugin.
 
@@ -180,21 +180,21 @@ export const commands = {
 
 At runtime, `c8ctl` injects a global object via `globalThis.c8ctl` that plugins can use to interact with the Camunda cluster and the `c8ctl` environment.
 
-| Method/field                         | Description                                                                                          |
-| :----------------------------------- | :--------------------------------------------------------------------------------------------------- |
-| `createClient(profile?, sdkConfig?)` | Create a Camunda SDK client. Optionally pass a profile name to use specific credentials.             |
-| `resolveTenantId(profile?)`          | Resolve the active tenant ID using the same fallback logic as built-in commands.                     |
-| `getLogger()`                        | Get the `c8ctl` logger instance (respects the current output mode).                                  |
-| `getUserDataDir()`                   | Absolute path of the `c8ctl` user data directory (honours `C8CTL_DATA_DIR`).                         |
+| Method/field                         | Description                                                                              |
+| :----------------------------------- | :--------------------------------------------------------------------------------------- |
+| `createClient(profile?, sdkConfig?)` | Create a Camunda SDK client. Optionally pass a profile name to use specific credentials. |
+| `resolveTenantId(profile?)`          | Resolve the active tenant ID using the same fallback logic as built-in commands.         |
+| `getLogger()`                        | Get the `c8ctl` logger instance (respects the current output mode).                      |
+| `getUserDataDir()`                   | Absolute path of the `c8ctl` user data directory (honours `C8CTL_DATA_DIR`).             |
 | `npm({ args, stdout?, stdio? })`     | Run npm the way `c8ctl` does, portably. See [Running npm from a plugin](#running-npm-from-a-plugin). |
-| `version`                            | `c8ctl` version string.                                                                              |
-| `nodeVersion`                        | Node.js version.                                                                                     |
-| `platform`                           | Operating system (`linux`, `darwin`, `win32`).                                                       |
-| `arch`                               | CPU architecture.                                                                                    |
-| `cwd`                                | Current working directory.                                                                           |
-| `outputMode`                         | Current output mode (`text` or `json`).                                                              |
-| `activeProfile`                      | Name of the active profile.                                                                          |
-| `activeTenant`                       | Active tenant ID.                                                                                    |
+| `version`                            | `c8ctl` version string.                                                                  |
+| `nodeVersion`                        | Node.js version.                                                                         |
+| `platform`                           | Operating system (`linux`, `darwin`, `win32`).                                           |
+| `arch`                               | CPU architecture.                                                                        |
+| `cwd`                                | Current working directory.                                                               |
+| `outputMode`                         | Current output mode (`text` or `json`).                                                  |
+| `activeProfile`                      | Name of the active profile.                                                              |
+| `activeTenant`                       | Active tenant ID.                                                                        |
 
 ### Logger output
 
@@ -212,10 +212,7 @@ import type { C8ctlPluginRuntime } from "@camunda8/cli/runtime";
 const c8ctl: C8ctlPluginRuntime | undefined = globalThis.c8ctl;
 if (!c8ctl) throw new Error("c8ctl runtime is not available");
 // Capture stdout
-const { stdout } = c8ctl.npm({
-  args: ["view", "c8ctl-plugin-foo", "version"],
-  stdout: true,
-});
+const { stdout } = c8ctl.npm({ args: ["view", "c8ctl-plugin-foo", "version"], stdout: true });
 
 // Stream to the terminal instead
 c8ctl.npm({ args: ["install", "c8ctl-plugin-foo"], stdio: "inherit" });
