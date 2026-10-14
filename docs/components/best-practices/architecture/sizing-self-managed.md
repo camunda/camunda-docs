@@ -78,91 +78,49 @@ See [reliability testing](https://github.com/camunda/camunda/blob/main/docs/test
 
 <Tabs groupId="secondary-storage" defaultValue="elasticsearch" values={
 [
-{ label: 'Elasticsearch', value: 'elasticsearch', },
-{ label: 'OpenSearch', value: 'opensearch', },
+{ label: 'Elasticsearch / OpenSearch', value: 'elasticsearch', },
 { label: 'RDBMS (PostgreSQL)', value: 'rdbms', },
 ]}>
 
 <TabItem value="elasticsearch">
 
-This baseline includes Optimize, which is the main driver of Elasticsearch sizing in this configuration. Its importer reads from and writes to Elasticsearch indices in addition to the primary export traffic. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
+This baseline includes Optimize, which is the main driver of Elasticsearch and OpenSearch sizing in this configuration. Its importer reads from and writes to the secondary storage indices in addition to the primary export traffic. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
 
-The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch.
+The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch and OpenSearch, which use identical resources.
 
-| Component                 |                     | Request | Limit |
-| ------------------------- | ------------------- | ------: | ----: |
-| **Orchestration Cluster** |                     |         |       |
-| Brokers                   | 3                   |         |       |
-| Partitions                | 3                   |         |       |
-| Replication factor        | 3                   |         |       |
-|                           | vCPU \[cores\]      |       3 |     3 |
-|                           | Memory \[GB\]       |       2 |     2 |
-|                           | Disk \[GB\]         |         |    64 |
-| **Connectors**            |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.2 |   0.2 |
-|                           | Memory limit \[GB\] |   0.512 |     1 |
-| **Identity**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.6 |     2 |
-|                           | Memory limit \[GB\] |     0.4 |     2 |
-| **Keycloak**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |       1 |     2 |
-|                           | Memory limit \[GB\] |       1 |     2 |
-| **Optimize**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.6 |     2 |
-|                           | Memory limit \[GB\] |       1 |     2 |
-| **Elastic**               |                     |         |       |
-| #statefulset              | 3                   |         |       |
-|                           | vCPU \[cores\]      |       7 |     7 |
-|                           | Memory limit \[GB\] |       8 |     8 |
-|                           | Disk request \[GB\] |         |   256 |
-
-:::note
-If you don’t use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
-:::
-
-</TabItem>
-
-<TabItem value="opensearch">
-
-OpenSearch has the same resource profile as Elasticsearch in our continuous load tests. The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/main/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for OpenSearch.
-
-| Component                 |                     | Request | Limit |
-| ------------------------- | ------------------- | ------: | ----: |
-| **Orchestration Cluster** |                     |         |       |
-| Brokers                   | 3                   |         |       |
-| Partitions                | 3                   |         |       |
-| Replication factor        | 3                   |         |       |
-|                           | vCPU \[cores\]      |       3 |     3 |
-|                           | Memory \[GB\]       |       2 |     2 |
-|                           | Disk \[GB\]         |         |    64 |
-| **Connectors**            |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.2 |   0.2 |
-|                           | Memory limit \[GB\] |   0.512 |     1 |
-| **Identity**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.6 |     2 |
-|                           | Memory limit \[GB\] |     0.4 |     2 |
-| **Keycloak**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |       1 |     2 |
-|                           | Memory limit \[GB\] |       1 |     2 |
-| **Optimize**              |                     |         |       |
-| #                         | 1                   |         |       |
-|                           | vCPU \[cores\]      |     0.6 |     2 |
-|                           | Memory limit \[GB\] |       1 |     2 |
-| **OpenSearch**            |                     |         |       |
-| #statefulset              | 3                   |         |       |
-|                           | vCPU \[cores\]      |       7 |     7 |
-|                           | Memory limit \[GB\] |       8 |     8 |
-|                           | Disk request \[GB\] |         |   256 |
+| Component                      |                     | Request | Limit |
+| ------------------------------ | ------------------- | ------: | ----: |
+| **Orchestration Cluster**      |                     |         |       |
+| Brokers                        | 3                   |         |       |
+| Partitions                     | 3                   |         |       |
+| Replication factor             | 3                   |         |       |
+|                                | vCPU \[cores\]      |       3 |     3 |
+|                                | Memory \[GB\]       |       2 |     2 |
+|                                | Disk \[GB\]         |         |    64 |
+| **Connectors**                 |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      |     0.2 |   0.2 |
+|                                | Memory limit \[GB\] |   0.512 |     1 |
+| **Identity**                   |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      |     0.6 |     2 |
+|                                | Memory limit \[GB\] |     0.4 |     2 |
+| **Keycloak**                   |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      |       1 |     2 |
+|                                | Memory limit \[GB\] |       1 |     2 |
+| **Optimize**                   |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      |     0.6 |     2 |
+|                                | Memory limit \[GB\] |       1 |     2 |
+| **Elasticsearch / OpenSearch** |                     |         |       |
+| #statefulset                   | 3                   |         |       |
+|                                | vCPU \[cores\]      |       7 |     7 |
+|                                | Memory limit \[GB\] |       8 |     8 |
+|                                | Disk request \[GB\] |         |   256 |
 
 :::note
-OpenSearch is expected to experience a similar impact from enabling Optimize as Elasticsearch does. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the measured Elasticsearch ratios. However, this impact has not been measured separately for OpenSearch, so validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
+If you don’t use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. OpenSearch is expected to see a similar impact, but it has not been measured separately. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
 :::
 
 </TabItem>
