@@ -42,9 +42,11 @@ To connect to OpenSearch using Basic authentication, follow the configuration be
 | `orchestration.data.secondaryStorage.opensearch.auth.secret.inlineSecret`      | string | `""`    | OpenSearch password as a plain-text value (non-production only).                                |
 | `orchestration.data.secondaryStorage.opensearch.auth.secret.existingSecret`    | string | `""`    | Reference to an existing Kubernetes Secret containing the password.                             |
 | `orchestration.data.secondaryStorage.opensearch.auth.secret.existingSecretKey` | string | `""`    | Key within the existing Kubernetes Secret containing the password.                              |
-| `orchestration.data.secondaryStorage.opensearch.tls.secret.existingSecret`     | string | `""`    | Reference to an existing Kubernetes Secret containing the TLS trust store.                      |
-| `orchestration.data.secondaryStorage.opensearch.tls.secret.existingSecretKey`  | string | `""`    | Key within the existing Kubernetes Secret for the TLS trust store.                              |
+| `orchestration.data.secondaryStorage.opensearch.tls.secret.existingSecret`     | string | `""`    | Deprecated in chart 15.x. Use `global.tls.caBundle.secret.existingSecret` instead.              |
+| `orchestration.data.secondaryStorage.opensearch.tls.secret.existingSecretKey`  | string | `""`    | Deprecated in chart 15.x. Use `global.tls.caBundle.secret.existingSecretKey` instead.           |
 | `orchestration.index.prefix`                                                   | string | `""`    | Index prefix in OpenSearch for the new Camunda exporter and the Orchestration Cluster.          |
+
+To trust a private CA for the OpenSearch connection, supply a PEM CA bundle through `global.tls.caBundle.secret`. See [Configure TLS](/self-managed/deployment/helm/configure/tls.md).
 
 ### Example usage
 
@@ -93,20 +95,9 @@ For more details about index prefix configuration and Optimize-specific settings
 
 ### Component configuration
 
-Orchestration Cluster components use the same configuration keys for both Elasticsearch and OpenSearch.
-To switch, replace the `elasticsearch` prefix with `opensearch` and provide the corresponding values.
-
-For example:
-
-- **Operate**: `CAMUNDA_OPERATE_ELASTICSEARCH_URL` → `CAMUNDA_OPERATE_OPENSEARCH_URL`
-- **Tasklist**: `CAMUNDA_TASKLIST_ELASTICSEARCH_URL` → `CAMUNDA_TASKLIST_OPENSEARCH_URL`
+Operate and Tasklist use the secondary storage configuration of the Orchestration Cluster. For the underlying properties, see the [secondary storage properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage) and [configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md).
 
 For **Zeebe**, configure the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md).
-
-For full parameter details, see:
-
-- [Operate configuration](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#settings-for-opensearch)
-- [Tasklist configuration](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
 
 ## References
 

@@ -22,7 +22,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ## How CSRF protection works in Camunda
 
-- **Token generation**: A unique CSRF token is generated and stored in a secure, HTTP-only cookie named `X-CSRF-TOKEN`.
+- **Token generation**: A unique CSRF token is generated and stored in a cookie named `X-CSRF-TOKEN`. The cookie is `HttpOnly` only when [`camunda.security.csrf.cookie-http-only`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecuritycsrf) is `true`. The default is `false`, so browser applications can read the token with JavaScript.
 - **Token validation**: For state-changing requests (POST, PUT, DELETE, etc.), the server validates that the CSRF token
   in the request header `X-CSRF-TOKEN` matches the one in the cookie.
 - **Safe methods**: GET, HEAD, TRACE, and OPTIONS requests are considered safe and don't require CSRF validation.
@@ -40,11 +40,27 @@ Disabling CSRF protection is not recommended for production environments as it l
 - `/actuator/**` – Health and monitoring endpoints
 - `/v2/license` – Public license endpoint
 - `/error` – Error handling
-- Authentication endpoints (`/login`, `/logout`)
-- Safe HTTP methods (GET, HEAD, OPTIONS, TRACE)
+- `/logout` – Ends the user session
+
+If a path matches both lists, it is unprotected. For example, `/v2/license` requires no token although `/v2/**` is protected.
+
+To exempt more paths, set [`camunda.security.csrf.ignored-path-patterns`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecuritycsrf) to a list of Ant-style path patterns.
+
+## Log in with a CSRF token
+
+To log in programmatically, fetch a CSRF token with `GET /login`, then send it as the `X-CSRF-TOKEN` header on `POST /login`.
+
+`POST /login` requires a valid CSRF token like any other state-changing request. It is not exempt, even for a browser that does not have a session yet. This prevents an attacker-controlled page from silently logging a victim's browser into an attacker-chosen account.
+
+A client driving login itself (a script, health check, or custom frontend) must fetch a token before submitting credentials:
+
+1. Send a `GET` request to `/login`. The response includes the token both as an `X-CSRF-TOKEN` cookie and as an `X-CSRF-TOKEN` response header.
+2. Submit `POST /login` with `username` and `password`. Send the token from step 1 as the `X-CSRF-TOKEN` request header, and send the `X-CSRF-TOKEN` cookie from step 1 with the request.
+
+Omitting the header on `POST /login` now fails with `401`/`403` instead of succeeding with `204`. If the request fails, fetch a new token with `GET /login` and retry.
 
 ## Security considerations
 
 - Always use HTTPS in production to prevent token interception.
 - Consider additional security headers configured in the security settings.
-- Regularly review and update the list of unprotected paths.
+- Regularly review the patterns in `camunda.security.csrf.ignored-path-patterns` and keep each pattern as narrow as possible.

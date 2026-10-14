@@ -419,7 +419,7 @@ This enables features like real-time notifications and immediate UI updates.
 Camunda Hub uses Keycloak as the default authentication provider (using OAuth 2.0 + OpenID Connect) and integrates with [Management Identity](/self-managed/components/management-identity/overview.md) for user management and authorization (see [Manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md)).
 
 :::note
-Configure Camunda Hub authentication with the properties on this page, not with the Orchestration Cluster's `camunda.security.authentication.oidc.*` settings. The one exception is the claim that identifies a user: you can also set `camunda.security.authentication.oidc.username-claim` directly, as an alternative to `CAMUNDA_HUB_OAUTH2_TOKEN_USERIDCLAIM` (`camunda.hub.oauth2.token.user-id-claim`). This is unrelated to `CAMUNDA_IDENTITY_USERNAMECLAIM` (`camunda.identity.username-claim`), which only sets a user's display name.
+Configure Camunda Hub authentication with the properties on this page, not with the Orchestration Cluster's `camunda.security.authentication.oidc.*` settings. The one exception is the claim that identifies a user: set `camunda.security.authentication.oidc.username-claim` directly. This is unrelated to `CAMUNDA_IDENTITY_USERNAMECLAIM` (`camunda.identity.username-claim`), which only sets a user's display name. See [change the user ID claim](./identity.md#change-the-user-id-claim).
 
 See [authentication](./identity.md) for more details.
 :::
@@ -664,6 +664,31 @@ Camunda Hub supports syncing files via [Git Sync](/components/hub/workspace/mana
 | Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_AUTHORITYBASEPATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`           |
 | Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_SCOPE`             | OAuth scope requested for Azure DevOps authentication.                                                                        | `https://app.vssps.visualstudio.com/.default` |
 | Bitbucket     | `CAMUNDA_HUB_GITSYNC_BITBUCKET_BASEURL`       | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories`  |
+
+</TabItem>
+</Tabs>
+
+### Catalog
+
+Use the following settings to adjust the [limits](/components/hub/organization/manage-catalog/getting-started.md#ingestion-limits) for the [catalog ingestion API endpoint](/apis-tools/hub-api-sm/specifications/ingest-catalog-assets.api.mdx).
+
+<Tabs groupId="configType" defaultValue="application.yaml" queryString>
+<TabItem value="application.yaml" label="Application properties">
+
+| Property                                    | Description                                                                     | Example value | Default value |
+| ------------------------------------------- | ------------------------------------------------------------------------------- | ------------- | ------------- |
+| `server.tomcat.max-part-count`              | [optional]<br/>Maximum number of parts in `multipart/form-data` requests.       | `5000`        | `5000`        |
+| `spring.servlet.multipart.max-request-size` | [optional]<br/>Maximum request size for `multipart/form-data` requests.         | `20MB`        | `20MB`        |
+| `spring.servlet.multipart.max-file-size`    | [optional]<br/>Maximum size of a single file in `multipart/form-data` requests. | `10MB`        | `4MB`         |
+
+</TabItem>
+<TabItem value="env" label="Environment variables">
+
+| Property                                  | Description                                                                     | Example value | Default value |
+| ----------------------------------------- | ------------------------------------------------------------------------------- | ------------- | ------------- |
+| `SERVER_TOMCAT_MAXPARTCOUNT`              | [optional]<br/>Maximum number of parts in `multipart/form-data` requests.       | `5000`        | `5000`        |
+| `SPRING_SERVLET_MULTIPART_MAXREQUESTSIZE` | [optional]<br/>Maximum request size for `multipart/form-data` requests.         | `20MB`        | `20MB`        |
+| `SPRING_SERVLET_MULTIPART_MAXFILESIZE`    | [optional]<br/>Maximum size of a single file in `multipart/form-data` requests. | `10MB`        | `4MB`         |
 
 </TabItem>
 </Tabs>

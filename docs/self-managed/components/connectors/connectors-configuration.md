@@ -371,7 +371,7 @@ kind: Secret
 metadata:
   name: camunda-connector-secrets
 stringData:
-  MY_SECRET: foo
+  SECRET_MY_SECRET: foo
 ```
 
 Review the documentation on [managing secrets in Helm charts](/self-managed/deployment/helm/configure/secret-management.md) for additional details.
@@ -386,14 +386,14 @@ For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
-  -e MY_SECRET=secret \              # Set a secret with value
-  -e SECRET_FROM_SHELL \             # Set a secret from the environment
-  --env-file secrets.txt \           # Set secrets from a file
+  -v $PWD/connector.jar:/opt/app/ \
+  -e SECRET_MY_SECRET=secret \
+  -e SECRET_FROM_SHELL \
+  --env-file secrets.txt \
   camunda/connectors-bundle:latest
 ```
 
-The secret `MY_SECRET` value is specified directly in the `docker run` call,
+The `-v` option adds a connector JAR to the classpath. The `SECRET_MY_SECRET` value is specified directly in the `docker run` call,
 whereas the `SECRET_FROM_SHELL` is injected based on the value in the
 current shell environment when `docker run` is executed. The `--env-file`
 option allows using a single file with the format `NAME=VALUE` per line
@@ -407,7 +407,7 @@ In the [manual setup](/self-managed/deployment/manual/install.md#connectors-1), 
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
-export MY_SECRET='foo'
+export SECRET_MY_SECRET='foo'
 ```
 
 Reference the secret in the connector's input in the prefixed style `{{secrets.MY_SECRET}}`.
@@ -461,9 +461,10 @@ connectors:
 For Docker images, you can add the JAR by using volumes, for example:
 
 ```bash
+# Mount the secret provider JAR and set the gRPC address of Zeebe
 docker run --rm --name=connectors -d \
-  -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \  # Specify secret provider
-  -e CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS=http://ip.address.of.zeebe:26500 \ # Specify grpc Zeebe address
+  -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \
+  -e CAMUNDA_CLIENT_GRPCADDRESS=http://ip.address.of.zeebe:26500 \
   camunda/connectors:latest
 ```
 
@@ -571,6 +572,82 @@ If a secret that previously resolved now comes back unresolved, or the connector
 - The process definition is available to the connector runtime. Under `STRICT`, a Zeebe job fails and retries if the process definition can't be retrieved.
 
 If you need to keep jobs processing while you investigate, switch to `LAX` temporarily. It falls back to allowing all secrets when the process definition lookup fails.
+
+## Intrinsic function allow-list {#intrinsic-function-allow-list}
+
+The intrinsic function allow-list restricts outbound connectors to running only the [intrinsic function](/components/connectors/advanced-topics/intrinsic-functions.md) calls that the deployed BPMN process declares. Starting with Connectors 8.10.0, the runtime enforces it by default.
+
+### How the allow-list is built
+
+The runtime builds the allow-list from the deployed BPMN model. It scans the `zeebe:input` mappings of the connector element for calls written as literals, such as `{"camunda.function.type": "getText", "params": [document]}`, and records each call by function name and field path.
+
+- A call runs only if its function name and field path both match a declared call exactly. A declaration doesn't cover a field path beneath it.
+- A call that arrives through a process variable or a job variable, and that the model doesn't declare, is refused before the connector runs. The job fails with an error.
+- The runtime reads the deployed model only when a job's variables contain an intrinsic function call. Jobs without calls don't trigger a lookup.
+- The runtime retrieves the process definition the same way the secret filter does, and caches the result.
+
+For the rules that decide which calls count as declared, see [declare intrinsic function calls in the process model](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls).
+
+### Modes
+
+Configure the allow-list with the `camunda.connector.intrinsic-function.allow-list.mode` property:
+
+| Mode       | Behavior                                                                                                                                                                                                                                     |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ENABLED`  | Runs only the intrinsic function calls that the deployed BPMN model declares. If the runtime can't retrieve the process definition, the Zeebe job fails and retries are triggered. This is the default.                                      |
+| `DISABLED` | Refuses every intrinsic function call without reading the process definition. This mode doesn't allow all calls. Choose it only if the runtime can't reach the process definition lookup and none of your processes use intrinsic functions. |
+
+Unlike the [secret filter](#secret-filter), the allow-list has no `LAX` mode, and `DISABLED` never turns the check off. The allow-list always fails closed.
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_INTRINSICFUNCTION_ALLOWLIST_MODE=ENABLED
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    intrinsic-function:
+      allow-list:
+        mode: ENABLED
+```
+
+</TabItem>
+</Tabs>
+
+### Configure the mode in the Helm chart
+
+The Helm chart has no dedicated value for the allow-list. Set the mode through the generic `connectors.env` value:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_INTRINSICFUNCTION_ALLOWLIST_MODE
+      value: ENABLED
+```
+
+### Cache configuration
+
+The allow-list caches the declared calls of each process definition to avoid repeated lookups. You can configure the cache with the following properties:
+
+| Property                                                         | Environment variable                                          | Description                                                                                                  | Default |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------- |
+| `camunda.connector.intrinsic-function.allow-list.cache.enabled`  | `CAMUNDA_CONNECTOR_INTRINSICFUNCTION_ALLOWLIST_CACHE_ENABLED` | Whether caching is enabled.                                                                                  | `true`  |
+| `camunda.connector.intrinsic-function.allow-list.cache.max-size` | `CAMUNDA_CONNECTOR_INTRINSICFUNCTION_ALLOWLIST_CACHE_MAXSIZE` | Maximum number of process definitions to cache.                                                              | `1000`  |
+| `camunda.connector.bpmn-model.cache.enabled`                     | `CAMUNDA_CONNECTOR_BPMNMODEL_CACHE_ENABLED`                   | Whether the cache of deployed BPMN models is enabled. The secret filter and the allow-list share this cache. | `true`  |
+| `camunda.connector.bpmn-model.cache.max-size`                    | `CAMUNDA_CONNECTOR_BPMNMODEL_CACHE_MAXSIZE`                   | Maximum number of deployed BPMN models to cache.                                                             | `1000`  |
+
+### Troubleshoot refused intrinsic function calls
+
+If an intrinsic function call that previously ran now fails the job, see [troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors).
 
 ## HTTP proxy configuration
 
@@ -717,7 +794,7 @@ To run the connector Runtime in a setup where a single runtime
 serves multiple tenants, add each tenant ID to the list of the default job workers:
 
 ```bash
-CAMUNDA_CLIENT_ZEEBE_DEFAULTS_TENANTIDS=`myTenant, otherTenant`
+CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS=myTenant,otherTenant
 ```
 
 In this case, the `CAMUNDA_CLIENT_TENANTID` will **not** be used for the

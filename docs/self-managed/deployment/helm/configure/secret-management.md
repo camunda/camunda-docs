@@ -304,6 +304,17 @@ export IDENTITY_OPTIMIZE_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-opt
 
 # Only if "zeebe.enabled: true".
 export IDENTITY_ZEEBE_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-zeebe-identity-secret" -o jsonpath="{.data.zeebe-secret}" | base64 --decode)
+
+# Only if connecting to Elasticsearch. Replace the placeholders with your current passwords.
+export ORCHESTRATION_ELASTICSEARCH_SECRET="paste-the-current-orchestration-elasticsearch-password"
+export OPTIMIZE_ELASTICSEARCH_SECRET="paste-the-current-optimize-elasticsearch-password"
+
+# Only if connecting to OpenSearch. Replace the placeholders with your current passwords.
+export ORCHESTRATION_OPENSEARCH_SECRET="paste-the-current-orchestration-opensearch-password"
+export OPTIMIZE_OPENSEARCH_SECRET="paste-the-current-optimize-opensearch-password"
+
+# Only if connecting to RDBMS. Replace the placeholder with your current password.
+export ORCHESTRATION_RDBMS_SECRET="paste-the-current-orchestration-rdbms-password"
 ```
 
 #### 2. Create the consolidated secret

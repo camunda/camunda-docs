@@ -10,10 +10,9 @@ toc_max_heading_level: 2
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-<span class="badge badge--beginner">Beginner</span>
-
-Run your first fully-automated BPMN process locally with Camunda 8.
+<PageDescription />
 
 ## About
 

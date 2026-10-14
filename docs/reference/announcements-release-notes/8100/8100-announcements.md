@@ -22,6 +22,30 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_h
 
 :::
 
+## Known issues
+
+:::warning Physical Tenants with multiple identity providers
+Camunda 8.10 has known authentication and tenant isolation issues in a specific deployment scenario. You are affected only if all of the following apply:
+
+- You run Camunda 8.10 Self-Managed.
+- Your cluster has more than one Physical Tenant.
+- Your Physical Tenants use separate identity providers (IdPs).
+
+See [camunda#65501](https://github.com/camunda/camunda/issues/65501), [camunda#65582](https://github.com/camunda/camunda/issues/65582), [camunda#65597](https://github.com/camunda/camunda/issues/65597) and [camunda#65607](https://github.com/camunda/camunda/issues/65607). If this scenario applies to you, don't use this setup in production until you have upgraded to Camunda 8.10.4, which fixes these issues. Camunda 8.10.4 is released latest by the end of this week.
+:::
+
+:::warning Multiple identity providers: named providers ignore the global claims
+In Camunda 8.10, a named identity provider does not use the global `username-claim`, `client-id-claim` and `prefer-username-claim`. You are affected only if all of the following apply:
+
+- You run Camunda 8.10 Self-Managed.
+- You configure identity providers under `camunda.security.authentication.providers.oidc.<provider-id>`.
+- You set `username-claim`, `client-id-claim` or `prefer-username-claim` only in `camunda.security.authentication.oidc.*`, and not on each provider.
+
+Tokens and logins from these providers then use the default claims. A user gets the value of the `sub` claim as username, and an M2M client is treated as a user. They lose the permissions that you gave to their username or client ID. In Camunda 8.9, the global claims applied to all providers.
+
+See [camunda#65633](https://github.com/camunda/camunda/issues/65633). If this scenario applies to you, set `username-claim`, `client-id-claim` and `prefer-username-claim` on each provider until you have upgraded to Camunda 8.10.4, which fixes this issue. Camunda 8.10.4 is released latest by the end of this week.
+:::
+
 ## Supported environments
 
 <div className="release-announcement-row">
@@ -421,6 +445,25 @@ Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tool
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Broker ping configuration renamed and now requires authentication {#broker-ping-hub}
+
+The broker ping configuration namespace is renamed from `camunda.console.ping` to `camunda.hub.ping`, and the corresponding `CAMUNDA_CONSOLE_PING_*` environment variables become `CAMUNDA_HUB_PING_*`. The `POST /clusters` endpoint the ping targets now also requires an OAuth 2.0 machine-to-machine token.
+
+A cluster upgraded without these changes stops reporting license information to Camunda Hub.
+
+**Action:** Rename the configuration namespace and environment variables, then add a `camunda.hub.ping.credentials` block with your OAuth 2.0 client credentials. See the [property mapping table](/self-managed/upgrade/components/890-to-8100.md#broker-ping-configuration) in the upgrade guide.
+
+<p className="link-arrow">[Camunda Hub ping configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration)</p>
+
+</div>
+</div>
+
 ## Connectors
 
 <div className="release-announcement-row">
@@ -436,6 +479,30 @@ Starting with 8.10.0, the connector [secret filter](/self-managed/components/con
 **Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, add the reference. To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
 
 <p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Outbound connectors refuse undeclared intrinsic function calls {#connector-intrinsic-function-allow-list}
+
+Starting with Connectors 8.10.0, the connector runtime runs an [intrinsic function](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls) only if the deployed BPMN process declares that exact call, by function name and field path, in the input mappings of the connector element. The same change is available in the 8.7.28, 8.8.22, and 8.9.13 patch releases.
+
+In practice, an intrinsic function call that reaches a connector through a process variable or job variable, instead of being written in the connector element's input mapping, now fails the job. A connector result that contains an object with the `camunda.function.type` key also fails the job when you store it in a result variable or map it with a result expression.
+
+**Action:** Before upgrading, check which processes use intrinsic functions.
+
+- Write each `camunda.function.type` call as a literal in the input mapping of the field that uses it, and redeploy the process.
+- Use a result expression that maps only the fields you need if a response from an external system can contain the `camunda.function.type` key.
+- Don't use `camunda.connector.intrinsic-function.allow-list.mode` set to `DISABLED` as a workaround. This mode refuses every intrinsic function call. No setting restores unrestricted execution.
+
+<p className="link-arrow">[Intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list)</p>
+<p className="link-arrow">[Troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors)</p>
 
 </div>
 </div>
@@ -793,6 +860,25 @@ The deprecated keys continue to work in 8.10. When you set one to a non-default 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unknown Helm values keys rejected by default in Camunda 8.12 {#unknown-helm-values-keys-rejected-in-812}
+
+Starting with Helm chart 15.1.0, the Camunda 8.10 chart warns about each chart-owned key in your values that the chart schema doesn't declare. Helm ignores these keys, so the settings they hold aren't applied. The check doesn't cover `global` values, the values of dependency charts, or free-form maps such as annotations and labels. The 8.11 chart keeps this behavior.
+
+Starting with Camunda 8.12 (Helm chart 17.x), unknown chart-owned keys stop `helm install` and `helm upgrade` by default.
+
+**Action:** Remove or correct the keys that the `[camunda][warning] UNKNOWN VALUES KEY` messages name. To make unknown keys fail now, set `global.strictValues: true`.
+
+<p className="link-arrow">[Find unknown keys in your values](/self-managed/deployment/helm/operational-tasks/helm-values-schema-validation.md#find-unknown-keys)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -858,6 +944,70 @@ Deployment change 1 description.
 
 </div>
 </div> -->
+
+## Hub
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Changed default log file name
+
+The log file name in the default Log4j2 configuration changed from `camunda-modeler.log` to `camunda-hub.log`.
+Logging to a file is still disabled by default. This change is only relevant if you enabled file logging in Web Modeler and use the default configuration.
+
+**Action:** Update any external tooling that depends on the log file name.
+
+<p className="link-arrow">[Logging configuration](/self-managed/components/hub/configuration/logging.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deployments target environments instead of clusters
+
+Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is a named deployment target where a team runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
+
+- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every environment assigned to its workspace.
+- Organization admins assign environments to workspaces.
+- In Self-Managed, Camunda Hub creates environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
+
+**Action:** After you upgrade, assign environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its environments as production environments for the project deployment policy.
+
+<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
+<br />
+<p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated configuration settings
+
+In Camunda Hub, the configuration settings previously used by Web Modeler are deprecated in favor of the new Hub equivalents. Application properties prefixed with `camunda.modeler.*` are replaced by `camunda.hub.*`, and environment variables prefixed with `CAMUNDA_MODELER_*` are replaced by `CAMUNDA_HUB_*`. Some properties were also renamed or moved to a different property path.
+
+Camunda Hub still accepts the legacy properties in 8.10 and translates the recognized properties to their new equivalents at startup, but will remove them in 8.12.
+
+**Action:** Update your Camunda Hub configuration to the new settings ahead of that removal.
+
+<p className="link-arrow">[Migrate Web Modeler settings in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#migrate-web-modeler-settings)</p>
+<br/>
+<p className="link-arrow">[Property reference](/self-managed/components/hub/configuration/properties.md)</p>
+
+</div>
+</div>
 
 ## Identity
 
@@ -1018,35 +1168,6 @@ The SAP BTP Plugin is retired as of Camunda 8.10. There are no changes to the ot
 The CSAP CLI is retired and replaced by a plugin for the [c8ctl CLI](/apis-tools/c8ctl/getting-started.md), which becomes the single tool for configuring and deploying the SAP integration modules.
 
 <p className="link-arrow">[CSAP c8ctl plugin](/components/camunda-integrations/sap/csap-cli.md)</p>
-
-</div>
-</div>
-
-## Modeler
-
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Deployments target environments instead of clusters
-
-Starting with Camunda 8.10, teams deploy to [environments](/components/concepts/environments.md) instead of the clusters connected to a project. An environment is a named deployment target where a team runs its processes, and it's hosted on a cluster. Clusters remain the infrastructure your administrators manage.
-
-- Projects no longer have their own deployment stages or connected clusters. A project can deploy to every environment assigned to its workspace.
-- Organization admins assign environments to workspaces.
-- In Self-Managed, Camunda Hub creates environments from the clusters in your `camunda.hub.clusters` configuration, and from any Physical Tenants you declare.
-
-**Action:** After you upgrade, assign environments to the workspaces you create. Optionally, tag a cluster with `prod` if you want Camunda Hub to treat its environments as production environments for the project deployment policy.
-
-<p className="link-arrow">[Environments in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#environments)</p>
-<br />
-<p className="link-arrow">[Environments](/components/concepts/environments.md)</p>
 
 </div>
 </div>
