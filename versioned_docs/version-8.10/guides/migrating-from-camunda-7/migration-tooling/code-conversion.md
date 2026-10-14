@@ -39,10 +39,10 @@ Additionally, you will find information about:
 
 Choose a Java migration path after you inventory your codebase. Before you use a path across a broad migration, run both paths on representative Java code and compare the results. Review is mandatory for both paths.
 
-| Approach                                                | Use when                                                                                               | What to expect                                                                                                                                              |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review its output.                                             | The agent reads source code and migration patterns directly. Model quality materially affects the output, so review source-to-output mappings and behavior. |
-| **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. | Run OpenRewrite, then use AI or manual work to finish the migration. Expect scaffolding, generated names, TODOs, and cleanup.                               |
+| Approach                                                | Use when                                                                                               | What to expect                                                                                                                                                                             |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **AI-first, pattern-guided** (preferred starting point) | You have a capable coding model and can review its output.                                             | The agent reads source code and migration patterns directly. Model quality materially affects the output, so review source-to-output mappings and behavior.                                |
+| **Recipe-assisted** (optional)                          | You have repeated, supported, primarily syntactic transformations, or need a deterministic first diff. | Run the [8.10.0 OpenRewrite recipes](#refactoring-recipes-using-openrewrite), then use AI or manual work to finish the migration. Expect scaffolding, generated names, TODOs, and cleanup. |
 
 Neither path guarantees lower token use, cost, or migration time.
 
@@ -245,7 +245,7 @@ The pattern catalog is actively maintained by Camunda consultants, partners, and
 The patterns inform the OpenRewrite recipe development. If you find a pattern that's not yet covered by the recipes, you can:
 
 1. Use the pattern for manual migration
-2. Reference the pattern when [extending the recipes](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/recipes/developer_guide.md)
+2. Reference the pattern when [extending the recipes](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/8.10.0/code-conversion/recipes/developer_guide.md)
 3. Contribute a new recipe based on the pattern
 
 ## Refactoring recipes (using OpenRewrite)
@@ -308,7 +308,7 @@ Add the following to your `pom.xml`:
             <plugin>
                 <groupId>org.openrewrite.maven</groupId>
                 <artifactId>rewrite-maven-plugin</artifactId>
-                <version>6.29.0</version>
+                <version>6.46.1</version>
                 <configuration>
                     <activeRecipes>
                         <recipe>io.camunda.migration.code.recipes.AllClientRecipes</recipe>
@@ -321,7 +321,7 @@ Add the following to your `pom.xml`:
                     <dependency>
                         <groupId>io.camunda</groupId>
                         <artifactId>camunda-7-to-8-code-conversion-recipes</artifactId>
-                        <version>0.3.7</version>
+                        <version>8.10.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -382,12 +382,12 @@ Recipes do not resolve migration design decisions such as business behavior, eve
 If Camunda 7 code remains after applying recipes:
 
 1. Refer to the [code conversion patterns](#code-conversion-patterns) for manual migration guidance
-2. Extend the recipes for your specific use case (see the [developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/recipes/developer_guide.md))
+2. Extend the recipes for your specific use case (see the [developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/8.10.0/code-conversion/recipes/developer_guide.md))
 3. Remove or refactor the code if the functionality is no longer available
 
 ### Additional resources
 
-- [Recipe source code and developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion/recipes)
+- [Recipe source code and developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/8.10.0/code-conversion/recipes)
 - [OpenRewrite documentation](https://docs.openrewrite.org/)
 - [Complete migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example)
 
