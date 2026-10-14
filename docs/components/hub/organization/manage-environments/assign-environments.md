@@ -16,7 +16,7 @@ You can assign environments to a workspace if you're an **Organization owner** o
 - A workspace can have more than one environment for the same lifecycle phase. For example, you can assign multiple development environments to a workspace.
 - All projects in a workspace inherit the environments assigned to the workspace.
 - An environment can be assigned to more than one workspace. Assigning one environment to one workspace is the recommended model, but Camunda Hub doesn't enforce it.
-- Workspace members see only the environments assigned to their workspace. Viewers and commenters see none. See [environments](/components/concepts/environments.md#who-can-see-and-use-environments).
+- Projects can use only the environments assigned to their workspace. In Self-Managed, workspace members see only those environments, and viewers and commenters see none. In SaaS, every organization member can see all environments in the organization. See [environments](/components/concepts/environments.md#who-can-see-and-use-environments).
 
 ## Assign environments when you create a workspace
 

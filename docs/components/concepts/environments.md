@@ -52,6 +52,8 @@ Every [project](./projects.md) in a [workspace](./workspaces.md) can use all the
 | Workspace admin or editor     | The environments assigned to their workspaces |
 | Workspace viewer or commenter | No environments                               |
 
+In SaaS, every organization member can also see every environment in the organization and open its applications, whatever their workspace role. Members who aren't an owner, admin, or DevOps can't assign or resume environments, and the workspaces shown for an environment are limited to the ones where they are an editor or workspace admin. Projects still use only the environments assigned to their workspace.
+
 Seeing an environment doesn't grant access to what runs in it. The Orchestration Cluster decides who can deploy to an environment and use its applications. See [access control](/components/concepts/access-control/access-control-overview.md).
 
 ## What an environment contains

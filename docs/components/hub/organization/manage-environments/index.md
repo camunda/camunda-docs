@@ -23,12 +23,11 @@ Each environment runs on a [cluster](/components/concepts/clusters.md), which yo
 
 Your role determines which environments you can see and what you can do with them across Camunda Hub, for example on the organization's **Environments** page, in workspaces, and projects:
 
-| Role                               | What you can do                                                                                                   |
-| :--------------------------------- | :---------------------------------------------------------------------------------------------------------------- |
-| Organization owner or admin        | View all environments, assign environments to workspaces, and resume a paused environment.                        |
-| DevOps                             | View all environments, open the cluster pages, and resume a paused environment. DevOps can't assign environments. |
-| Editor or admin in a workspace     | View the environments assigned to the workspaces where you are an editor or workspace admin.                      |
-| Viewer or commenter in a workspace | No access to environments.                                                                                        |
+| Role                          | What you can do                                                                                                                                                                                                                                       |
+| :---------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Organization owner or admin   | View all environments, assign environments to workspaces, and resume a paused environment.                                                                                                                                                            |
+| DevOps                        | View all environments, open the cluster pages, and resume a paused environment. DevOps can't assign environments.                                                                                                                                     |
+| Any other organization member | View all environments and open their applications, whatever their workspace role. You can't assign or resume environments, and you see which workspaces an environment is assigned to only for workspaces where you are an editor or workspace admin. |
 
 ## Environment details
 
