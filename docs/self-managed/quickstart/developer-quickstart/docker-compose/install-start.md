@@ -31,7 +31,7 @@ Run the commands in this guide with `docker compose`, not `docker-compose`. Conf
 
 To start the default lightweight Camunda 8 Self-Managed environment locally:
 
-1. Download the Camunda 8 <DockerCompose /> archive, then extract it. Keep the complete directory, including `.env`, hidden configuration directories, and `configuration/`.
+1. Download the Camunda 8 <DockerCompose /> archive (a `.zip` file from the [Camunda Distributions releases](https://github.com/camunda/camunda-distributions/releases) on GitHub), then extract it. Keep the complete directory, including `.env`, hidden configuration directories, and `configuration/`.
 1. In the extracted directory, run:
 
    ```shell

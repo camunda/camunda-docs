@@ -51,7 +51,7 @@ The element instance key associated to this incident.
 optional errorMessage?: StringFilterProperty;
 ```
 
-The error message of this incident.
+The error message of this incident. For `$eq`, `$neq`, `$in`, and `$notIn`, matching is case-insensitive and matches if the incident's error message contains the given value as a phrase, not necessarily the entire error message. `$like` matches on individual words of the error message and does not support multi-word patterns.
 
 ---
 

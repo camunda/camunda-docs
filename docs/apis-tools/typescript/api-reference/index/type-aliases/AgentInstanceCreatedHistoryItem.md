@@ -19,7 +19,7 @@ history batch.
 ### historyItemId
 
 ```ts
-historyItemId: string;
+historyItemId: HistoryItemId;
 ```
 
 The historyItemId of the corresponding item in the request, echoed back

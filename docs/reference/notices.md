@@ -33,6 +33,148 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 67
+
+### Publication date
+
+October 9, 2026
+
+### Products affected
+
+- Camunda Helm chart for Camunda 8.7, 8.8, and 8.9, when the bundled Keycloak subchart (`identityKeycloak`) uses the default Community Edition image
+
+### Impact
+
+Keycloak is affected by [CVE-2026-18963](https://github.com/advisories/GHSA-4gv3-mc9p-5wqc), a flaw in the reset-credentials flow. An unauthenticated attacker can force a password reset for any user without the email verification step, set new credentials, and take over the account, including administrator accounts.
+
+Severity: Critical (CVSS 9.1).
+
+The bundled Keycloak subchart in the Camunda 8.7, 8.8, and 8.9 Helm charts defaults to the Community Edition image `camunda/keycloak:26.3.3`. This image is based on the Bitnami Keycloak image, which Bitnami no longer updates. As a result, Camunda cannot publish a fixed image on this line, and the image will not receive this or any future fix.
+
+Camunda SaaS is not affected.
+
+### How to determine if the installation is affected
+
+The following Keycloak versions are affected:
+
+- ≥ 26.0.0, < 26.4.15
+- ≥ 26.5.0, < 26.6.6
+- ≥ 26.7.0, < 26.7.2
+
+Your installation is affected if all of these conditions are true:
+
+- You deploy Camunda 8.7, 8.8, or 8.9 with the Camunda Helm chart, and the bundled Keycloak subchart is enabled (`identityKeycloak.enabled: true`).
+- You use the default `camunda/keycloak` image (tag `26.3.3`, any `26.3.3-*` rebuild tag, or the `bitnami-*` and `latest-bitnami` tags), or another Keycloak image with an affected version.
+
+Camunda Helm chart 12.13.6 (Camunda 8.7), 13.13.2 (Camunda 8.8), 14.10.1 (Camunda 8.9), and later show a security warning when the rendered Keycloak image is affected.
+
+If you run Keycloak outside the Camunda Helm chart, your installation is affected if your Keycloak version is in one of the affected ranges.
+
+The Camunda 8.10 Helm chart does not include a bundled Keycloak subchart and is not affected. If you use your own Keycloak with Camunda 8.10, check your Keycloak version as described above.
+
+### Solution
+
+The following Keycloak versions contain the fix:
+
+- 26.4.15
+- 26.6.6
+- 26.7.2
+
+Camunda does not provide a fixed Community Edition image for the bundled Keycloak subchart. Use one of these options:
+
+- **Use the Camunda enterprise images:** Enterprise customers can switch to the Bitnami Premium images provided by Camunda. The enterprise Keycloak image `registry.camunda.cloud/keycloak-ee/keycloak` receives security updates and contains the fix from version 26.7.2. Camunda Helm chart 12.13.4 (Camunda 8.7), 13.12.8 (Camunda 8.8), 14.8.5 (Camunda 8.9), and later use a fixed Keycloak version in `values-enterprise.yaml`.
+- **Migrate away from the bundled Keycloak subchart:** Replace the bundled Keycloak with the Keycloak Operator, a managed service, or another maintained Keycloak deployment that runs a fixed version. For step-by-step instructions, see [migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
+
+After you apply the fix, examine Keycloak events and user accounts for password resets that you do not expect, and reset the credentials of any affected accounts.
+
+No action is necessary for Camunda SaaS.
+
+## Notice 66
+
+### Publication date
+
+October 7, 2026
+
+### Products affected
+
+- Camunda Optimize Self-Managed
+
+### Impact
+
+The Docker images `camunda/optimize:8.10.0` and `camunda/optimize:8.10.1` were available for a short time before the
+Camunda 8.10 release announcement. These images contain a defect in the Optimize access check. In Self-Managed
+installations that use Management Identity, users without the Optimize permission can get access to Optimize. This
+includes read access to Optimize data, and changes to Optimize entities such as reports and dashboards.
+
+Exploitation requires a user who can log in to the identity provider that Optimize uses. Unauthenticated access is not
+possible.
+
+We removed the affected images from Docker Hub. No official Camunda Helm chart release referenced these images. Camunda
+SaaS is not affected.
+
+### How to determine if the installation is affected
+
+Your installation is affected if all of these conditions are true:
+
+- You run Camunda Optimize Self-Managed with the image `camunda/optimize:8.10.0` or `camunda/optimize:8.10.1`. This
+  includes images with these tags that you copied to your own registry. If you install with an official Camunda Helm
+  chart release and do not override the Optimize image, you do not use these images.
+- Optimize uses Management Identity for authentication.
+
+Optimize 8.9 and earlier versions are not affected.
+
+### Solution
+
+Upgrade Optimize to version 8.10.2 immediately. Optimize 8.10.2 contains the fix.
+
+If you used the image `camunda/optimize:8.10.0` or `camunda/optimize:8.10.1`:
+
+1. Upgrade to `camunda/optimize:8.10.2`.
+1. Remove the affected images from your private registries and image caches.
+1. Examine the Optimize data, for example reports, dashboards and collections, for changes that you do not expect.
+
+No action is necessary for Camunda SaaS.
+
+## Notice 65
+
+### Publication date
+
+October 7, 2026
+
+### Products affected
+
+- Camunda Orchestration Cluster (Zeebe, Operate, Tasklist)
+- Camunda Zeebe (8.7)
+
+### Impact
+
+The document endpoint of the Orchestration Cluster REST API rendered uploaded document content in the browser instead
+of downloading it. A user allowed to upload documents could use this to run scripts in the application's origin with
+the privileges of another user who opens the document, including administrators.
+
+Severity: High.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Orchestration Cluster ≤ 8.9.22 or ≤ 8.8.40
+- Camunda Zeebe ≤ 8.7.42
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Orchestration Cluster 8.10.0, 8.9.23, 8.8.41
+- Camunda Zeebe 8.7.43
+
+The document endpoint now serves all document content with a `Content-Security-Policy: sandbox` header, and returns
+documents as downloads (`Content-Disposition: attachment`), except for PDF files and images, which are still displayed
+in the browser.
+
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of
+[auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually.
+
 ## Notice 64
 
 ### Publication date
@@ -51,7 +193,7 @@ A remote code execution vulnerability was identified in Camunda's FEEL expressio
 
 Severity: Critical 9.9 (CVSS v3.1: AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H).
 
-This vulnerability was identified by Camunda's Security Team, with no known report or exploit beyond our own security investigation. A CVE identifier has been requested and this notice will be updated once it is assigned.
+This vulnerability was identified by Camunda's Security Team, with no known report or exploit beyond our own security investigation. A CVE identifier has been requested and this notice will be updated once it is assigned. For further details, see [GHSA-vx3p-v6cf-vfjw](https://github.com/camunda/feel-scala/security/advisories/GHSA-vx3p-v6cf-vfjw).
 
 ### How to determine if the installation is affected
 
@@ -167,7 +309,7 @@ September 8, 2026
 
 The connector runtime resolves a secret reference (for example, `{{secrets.MY_API_KEY}}`) wherever that literal text appears in a connector's input, without restricting resolution to the field where the reference was declared. Under the following conditions, an attacker may be able to cause a connector to resolve and disclose a secret outside its intended scope:
 
-- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+- The process uses [connectors](/components/connectors/introduction.md) and [secrets](/components/saas/clusters/manage-secrets.md).
 - Untrusted input reaches a process variable — for example, through a user task, an inbound connector such as a webhook or email, or an API call.
 - That process variable is passed, unsanitized, into a connector field (for example, an email body or an HTTP request field).
 - The attacker can guess or know the name of a secret that exists in that context. This does not require knowing the secret's value, only its name.
@@ -189,7 +331,7 @@ Camunda has provided the following releases which contain the fix:
 
 - Camunda Connectors 8.9.10, 8.8.19, 8.7.25, 8.6.28
 
-On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/hub/organization/manage-clusters/settings.md#secret-filter-mode).
+On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/saas/clusters/settings.md#secret-filter-mode).
 
 **Interim mitigation**:
 

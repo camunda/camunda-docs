@@ -46,15 +46,15 @@ To select another Orchestration Cluster backend, see [configure secondary storag
 
 The extracted distribution mounts component-owned application YAML into the Camunda containers. Use the file that belongs to your Compose setup and component.
 
-| Setup and component                     | Application configuration source                                                                                                                                  |
-| :-------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lightweight Orchestration Cluster       | `configuration/${ORCHESTRATION_CONFIG_FILE}`; defaults to `configuration/application-h2.yaml`                                                                     |
-| Lightweight Connectors                  | Inline `connectors-config` under `configs` in `docker-compose.yaml`                                                                                               |
-| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                                                                 |
-| Full Connectors                         | `.connectors/application.yaml`                                                                                                                                    |
-| Full Optimize                           | `.optimize/environment-config.yaml` and `.optimize/application-ccsm.yaml`                                                                                         |
-| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-hub.yaml`                                                      |
-| Full and standalone Camunda Hub         | `.hub/application.yaml`; the full setup mounts `.hub/application-full.yaml` as the primary file, which adds the cluster registrations and imports the shared file |
+| Setup and component                     | Application configuration source                                                                                                                                                                                             |
+| :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lightweight Orchestration Cluster       | `configuration/${ORCHESTRATION_CONFIG_FILE}`; defaults to `configuration/application-h2.yaml`                                                                                                                                |
+| Lightweight Connectors                  | Inline `connectors-config` under `configs` in `docker-compose.yaml`                                                                                                                                                          |
+| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                                                                                                                            |
+| Full Connectors                         | `.connectors/application.yaml`                                                                                                                                                                                               |
+| Full Optimize                           | `.optimize/environment-config.yaml` and `.optimize/application-ccsm.yaml`                                                                                                                                                    |
+| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-hub.yaml`                                                                                                                 |
+| Full and standalone Camunda Hub         | `.hub/application.yaml` configures the standalone Camunda Hub and its dependencies. The full setup mounts `.hub/application-full.yaml` as the primary file, which adds the cluster registrations and imports the shared file |
 
 Choose the configuration mechanism based on the value you need to change:
 

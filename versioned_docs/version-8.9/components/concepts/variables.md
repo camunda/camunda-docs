@@ -155,6 +155,16 @@ Use local variables to isolate data within a specific scope, especially for:
 Remember: Local variables are removed when a scope is exited unless you explicitly propagate them with output mappings.
 :::
 
+:::warning A local variable blocks later writes of the same name
+If another operation writes a variable with the same name, variable propagation finds the local variable first. This happens when a job completes or an input mapping creates the variable.
+
+Later writes update only the local variable, not the process instance. When the scope exits, Camunda discards the local variable and any updates. The operation appears to succeed, but the change never propagates.
+
+For example, an input mapping creates a local variable `x`. When the element's job completes with a new value for `x` (without an output mapping), it updates the local `x`, not the process instance. The next element still sees the previous value.
+
+To expose a variable outside its scope, use an [output mapping](#inputoutput-variable-mappings).
+:::
+
 ## Input/output variable mappings
 
 Input/output variable mappings can be used to create new variables or customize how variables are merged into the process instance.

@@ -1,0 +1,70 @@
+name: rsync-publish
+description: Sync the built site to a remote server over SSH with rsync --delete.
+
+inputs:
+  remote_path:
+    description: Destination directory on the remote server. Must be non-empty.
+    required: true
+  remote_host:
+    description: Remote server hostname.
+    required: true
+  remote_user:
+    description: SSH user on the remote server.
+    required: true
+  remote_key:
+    description: SSH private key used to authenticate.
+    required: true
+  source:
+    description: Local directory whose contents are synced.
+    required: false
+    default: build/
+
+runs:
+  using: composite
+  steps:
+    - name: Install rsync
+      shell: bash
+      run: apt-get update && apt-get install -y --no-install-recommends rsync openssh-client
+    - name: Sync
+      shell: bash # arrays below require bash
+      env:
+        REMOTE_PATH: ${{ inputs.remote_path }}
+        REMOTE_HOST: ${{ inputs.remote_host }}
+        REMOTE_USER: ${{ inputs.remote_user }}
+        REMOTE_KEY: ${{ inputs.remote_key }}
+        SOURCE: ${{ inputs.source }}
+      run: |
+        # Refuse to run with any empty connection value. An empty REMOTE_PATH would
+        # make rsync --delete target the remote user's home directory.
+        for v in REMOTE_PATH REMOTE_HOST REMOTE_USER REMOTE_KEY; do
+          if [ -z "${!v}" ]; then
+            echo "::error::$v is empty; refusing to sync" >&2
+            exit 1
+          fi
+        done
+
+        # Write the private key to a file, since ssh can't read a key from a string.
+        key="$RUNNER_TEMP/deploy_key"
+        install -m 600 /dev/null "$key"
+        printf '%s\n' "$REMOTE_KEY" > "$key"
+        trap 'rm -f "$key"' EXIT
+
+        ssh_opts=(
+          -i "$key"                        # Authenticate with this key file.
+          -o IdentitiesOnly=yes            # Offer only that key; don't try any other identities.
+          -o StrictHostKeyChecking=no      # Don't prompt or fail on unknown host keys (same as the old action's default).
+          -o UserKnownHostsFile=/dev/null  # Don't record host keys anywhere.
+        )
+
+        rsync_opts=(
+          -a                       # Archive mode: recurse, keep permissions, times, symlinks, etc.
+          -v                       # Verbose: list each file transferred.
+          -z                       # Compress data in transit.
+          -r                       # Recurse into directories (already implied by -a; kept to match the old switches).
+          --delete                 # Delete remote files that no longer exist in the source.
+          --timeout=300            # Abort if no data moves for 300 seconds, so a stalled connection fails instead of hanging.
+          -e "ssh ${ssh_opts[*]}"  # Use ssh as the remote shell, with the options above.
+        )
+
+        # Perform the actual file synchronization using rsync with the options defined above.
+        rsync "${rsync_opts[@]}" "$SOURCE" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"

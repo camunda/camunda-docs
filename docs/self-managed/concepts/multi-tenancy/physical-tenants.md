@@ -5,11 +5,19 @@ sidebar_label: "Physical Tenants"
 description: "Physical Tenants enable strong data isolation and independent management within a single Camunda 8 cluster."
 ---
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
 A Physical Tenant is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each with fully isolated data, its own partition group, and independent lifecycle management.
 
-Isolation covers data and management, not compute. Physical Tenants share the cluster's brokers and gateways, so runtime interference between tenants is reduced but not eliminated. See [what is not isolated](/self-managed/concepts/physical-tenants/index.md#what-is-not-isolated-in-810).
+Isolation covers data and management, not compute. Physical Tenants share the cluster's brokers and gateways, so runtime interference between tenants is reduced but not eliminated. See [what is not isolated](/self-managed/concepts/physical-tenants/index.md#what-is-not-isolated).
 
 Physical Tenants provide a balanced approach to multi-tenancy. They offer strong isolation without the operational complexity and cost of running separate clusters. See [multi-tenancy overview](index.md) to compare isolation models.
+
+![Two Physical Tenants, payments and lending, each with its own database, identity provider, backup and restore, and web apps, running inside one Orchestration Cluster. Logical Tenants remain available inside each Physical Tenant.](./img/physical-tenant-summary.png)
 
 ## Why Physical Tenants
 
@@ -27,7 +35,7 @@ An isolated execution unit within an Orchestration Cluster. Each Physical Tenant
 
 ### Default Physical Tenant
 
-Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant.
+Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, REST API traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant. This routing rule is specific to the `/v2/...` REST API; the actuator surface used for scaling and purging does not follow it (see [data purge](/self-managed/operational-guides/data-purge.md) for an operation where an unscoped request instead targets every tenant).
 
 ### Cluster-wide operation
 
@@ -44,7 +52,7 @@ Tenant-scoped APIs are accessible at `/physical-tenants/{physicalTenantId}/v2/`:
 - REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
 - Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-Cluster-wide APIs use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
+Cluster-wide APIs use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role, except `GET /cluster/v2/status`, which is deliberately unauthenticated so load balancers can use it as a health check. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
 
 gRPC clients specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
@@ -58,6 +66,10 @@ See [Logical Tenants](logical-tenants.md) for details on the lightweight tenant-
 There is no migration path from Logical Tenants to Physical Tenants. Logical Tenants created in a Physical Tenant remain associated with that tenant and cannot be migrated to another Physical Tenant.
 :::
 
+## Physical Tenants in Camunda Hub
+
+In Camunda Hub, each Physical Tenant is an [environment](/components/concepts/environments.md), and teams deploy to it instead of to the cluster. See [how an environment maps to infrastructure](/components/concepts/environments.md#how-an-environment-maps-to-infrastructure) for the naming.
+
 ## Wording conventions
 
 When referencing Physical Tenants and Logical Tenants in documentation and code:
@@ -69,16 +81,12 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 
 ## Learn more
 
-For detailed technical information about isolation model, architecture, and storage configuration, see [physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
-
-For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
-
-For adding tenants and lifecycle expectations in 8.10, see [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md).
-
-For how REST API requests are routed to Physical Tenants, including default tenant compatibility and HTTP status codes, see [API routing](/self-managed/concepts/physical-tenants/api-routing.md).
-
-For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
-
-For how authorization is divided between cluster-wide and tenant-local operations, see [authorization model](/self-managed/concepts/physical-tenants/authorization-model.md).
-
-For how Physical Tenant storage isolation works across primary storage, secondary storage, and document stores, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).
+- For detailed technical information about isolation model, architecture, and storage configuration, see [physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
+- To set up a second isolated Physical Tenant end to end, see [set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md).
+- For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
+- For adding tenants and lifecycle expectations in 8.10, see [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md).
+- For how REST API requests are routed to Physical Tenants, including default tenant compatibility and HTTP status codes, see [API routing](/self-managed/concepts/physical-tenants/api-routing.md).
+- For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
+- For how authorization is divided between cluster-wide and tenant-local operations, see [authorization model](/self-managed/concepts/physical-tenants/authorization-model.md).
+- For how Physical Tenant storage isolation works across primary storage, secondary storage, and document stores, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).
+- For how Physical Tenants map onto Helm releases, including the per-tenant Optimize release, index prefixes, and tenant lifecycle operations, see [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md).

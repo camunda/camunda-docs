@@ -137,7 +137,7 @@ For example, to override field borders for single-line fields:
 
 ### Example
 
-Camunda 8 web applications are built using the IBM Carbon design system. Forms rendered in Tasklist appear in this design system by default. Visit the [Carbon form-js styles repository](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-carbon-styles) <GHIcon /> to learn how to create your own form styles.
+Camunda 8 web applications are built using the IBM Carbon design system. Forms rendered in Tasklist appear in this design system by default. Visit the [Carbon form-js styles repository](https://github.com/bpmn-io/form-js/tree/v1.26.1/packages/form-js-carbon-styles) <GHIcon /> to learn how to create your own form styles.
 
 <div style={ { display: 'flex', gap: '8px', flexWrap: 'wrap' } }>
 

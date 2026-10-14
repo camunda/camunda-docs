@@ -129,11 +129,12 @@ The `getJson` function accepts a document and an optional FEEL expression parame
 
 The `createGithubAppInstallationToken` function generates a GitHub App installation access token. This is useful when you need to authenticate as a GitHub App installation to access GitHub APIs.
 
-The function accepts three required parameters:
+The function accepts three required parameters and one optional parameter:
 
 - `privateKey`: The RSA private key of your GitHub App (PEM format). Store this value as a secret.
 - `appId`: The app ID of your GitHub App.
 - `installationId`: The installation ID of your GitHub App. See [GitHub's documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation#generating-an-installation-access-token) for instructions on how to find your installation ID.
+- `githubApiBaseUrl` (optional): The base URL of a GitHub Enterprise Server or Cloud host to target instead of the public GitHub API. Omit this parameter, or pass `null`, to use the public GitHub API (`https://api.github.com`).
 
 ```json
 {
@@ -143,6 +144,105 @@ The function accepts three required parameters:
 ```
 
 The function returns the installation access token as a string. You can use this token to authenticate GitHub API requests.
+
+#### Custom GitHub API base URL (GitHub Enterprise)
+
+To target a GitHub Enterprise Server or Cloud host, pass its base URL as the fourth parameter:
+
+```json
+{
+  "camunda.function.type": "createGithubAppInstallationToken",
+  "params": [
+    "{{secrets.GITHUB_APP_PRIVATE_KEY}}",
+    "12345",
+    "67890",
+    "https://github.example.com/api/v3"
+  ]
+}
+```
+
+The resolved base URL must be allow-listed on the connector runtime before use:
+
+- By default, with no configuration, only the public GitHub API is allowed.
+- To permit one or more GitHub Enterprise hosts, set the `CAMUNDA_CONNECTOR_GITHUB_APP_ALLOWED_BASE_URLS` environment variable on the connector runtime to a comma-separated list of allowed base URLs:
+
+  ```bash
+  CAMUNDA_CONNECTOR_GITHUB_APP_ALLOWED_BASE_URLS=https://github.example.com/api/v3,https://github-other.example.com/api/v3
+  ```
+
+- Setting this variable replaces the default allow-list entirely. The public GitHub API is not implicitly included; add `https://api.github.com` explicitly if you need both.
+- A call that resolves to a base URL that isn't allow-listed fails with an error rather than falling back silently, so a misconfigured or unexpected base URL is caught rather than masked.
+
+## Declare intrinsic function calls in the process model {#declare-calls}
+
+The connector runtime runs an intrinsic function only if the deployed BPMN process declares that exact call in the connector element's own input mappings. Starting with Connectors 8.10.0, the runtime refuses intrinsic function calls that arrive through process variables or job variables.
+
+The runtime reads the declared calls from the deployed BPMN model and applies the following rules:
+
+- The function name and the field path must both match. For example, a `createLink` call declared on the `body` field doesn't allow a `createLink` call on `body.attachment`, and doesn't allow a `getText` call on `body`.
+- The call must be written as a literal in the input mapping's FEEL expression, with `camunda.function.type` set to a string literal such as `"getText"`. The runtime recognizes calls inside context literals, list literals, `if`/`then`/`else` expressions, and `for`/`in`/`return` expressions.
+- A call the runtime can't read from the model isn't declared. Examples include a function name assembled with `prefix + "getText"`, a call returned by a FEEL function, and a call stored in a process variable.
+- A later input mapping that writes to the same field, or to a field above it, replaces the earlier call. The earlier declaration no longer counts.
+- Custom functions registered through an `IntrinsicFunctionProvider` follow the same rules.
+
+For example, the following input mapping with the target `body` declares a `getText` call at the field path `body.user`:
+
+```feel
+= {
+  "user": {
+    "camunda.function.type": "getText",
+    "params": [ document ]
+  }
+}
+```
+
+The runtime reads the deployed model only when a job's variables contain an intrinsic function call, so jobs without calls aren't affected. After you change an input mapping, redeploy the process so the runtime reads the updated declarations. Out-of-the-box element templates that use intrinsic functions already declare their calls this way.
+
+Values that come from outside the process model never run intrinsic functions. This includes connector results, FEEL evaluation results, and inbound connector payloads.
+
+To configure the policy or the lookup cache of the connector runtime, see [intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list).
+
+### Write safe intrinsic function declarations
+
+Follow these guidelines when you write an input mapping or an element template that uses intrinsic functions:
+
+- Declare each call in its own input, and don't wrap it in an `if`/`then`/`else` expression. When a call sits in one branch of a conditional, the runtime allows it without checking what the other branch produces. To vary a value by mode, use an element template with one hidden property per case, each with a `condition`.
+- Pass only values you trust as function parameters. The runtime checks the function name and the field path, not the parameters.
+- Review any use of `createLink` before you add it to a template. The function creates a temporary link to a document, so its parameters decide which document becomes reachable. Don't use it inside a conditional, and don't build its document parameter from process variables that external systems can set.
+
+### Troubleshoot intrinsic function errors
+
+#### Intrinsic function is not allowed by the runtime policy
+
+The job fails with the following error:
+
+```text
+Intrinsic function '<name>' at '<path>' is not allowed by the runtime intrinsic-function policy.
+```
+
+This happens when the deployed BPMN model doesn't declare the function `<name>` at the field path `<path>`. Common causes:
+
+- The call arrives in a process variable instead of being written in the input mapping.
+- The call is declared at a different field path than the one the runtime reports.
+- A later input mapping overwrites the field that declares the call.
+- The deployed process is older than the input mapping you edited.
+- The [allow-list mode](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list) is set to `DISABLED`, which refuses every call.
+
+To fix it, write the call directly in the input mapping of the field named in the error, then redeploy the process. If the element uses an element template, update the element to the latest template version.
+
+If the runtime can't read the deployed model, the job also fails and Zeebe retries it. The intrinsic function allow-list always fails closed, so no call runs until the runtime can read the model.
+
+#### Connector result contains a forbidden literal
+
+The job fails with the following error:
+
+```text
+The connector result contains a forbidden literal 'camunda.function.type'.
+```
+
+This happens when the value mapped to a result variable or result expression contains an object with the `camunda.function.type` key, for example because an external system returned it in a response body. The runtime refuses the value so that a response can't introduce an intrinsic function call into your process.
+
+To fix it, use a result expression that maps only the fields you need, so the `camunda.function.type` key isn't copied into the process variables.
 
 ## Create a custom function
 

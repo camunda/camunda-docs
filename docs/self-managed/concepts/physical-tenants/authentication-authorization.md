@@ -2,8 +2,14 @@
 id: authentication-authorization
 title: "Authentication and authorization for Physical Tenants"
 sidebar_label: "Authentication and authorization"
-description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
+description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants."
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Learn how identity providers connect to Physical Tenants and how tokens are routed to the correct tenant. For the resource and permission model and cluster-wide versus tenant-local authorization, see [authorization model](./authorization-model.md).
 
@@ -109,8 +115,8 @@ camunda:
               resourceType: PROCESS_DEFINITION
               resourceId: "*"
               permissions:
-                - READ
-                - UPDATE
+                - READ_PROCESS_DEFINITION
+                - UPDATE_PROCESS_INSTANCE
 ```
 
 Every explicitly configured Physical Tenant must declare its own `security.initialization` block when authorization is enabled for that tenant. The block is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. Two cases are exempt:

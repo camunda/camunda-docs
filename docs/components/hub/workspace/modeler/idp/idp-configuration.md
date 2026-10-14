@@ -1,14 +1,15 @@
 ---
 id: idp-configuration
 title: Configure IDP
-description: "Set up and configure intelligent document processing (IDP) in Camunda 8 SaaS and Self-Managed."
+description: "Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials."
 ---
 
 import IdpSecretsImg from './img/idp-connector-secrets.png';
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials.
+<PageDescription />
 
 ## Prerequisites
 
@@ -102,7 +103,7 @@ Once you have completed all the required prerequisites, configure IDP in a suita
 
 If you are using AWS as your cloud provider, add the following AWS connector secrets required for IDP.
 
-- **SaaS:** Create and configure as [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+- **SaaS:** Create and configure as [connector secrets](/components/saas/clusters/manage-secrets.md).
 - **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/deployment/helm/configure/secret-management.md) and [secrets in manual installations](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 | Connector secret Key  | Required | Description                                                                                                                                                                                               |

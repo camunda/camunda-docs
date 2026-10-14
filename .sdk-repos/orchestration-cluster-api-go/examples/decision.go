@@ -7,17 +7,16 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func evaluateDecisionExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region EvaluateDecision
 	// DecisionEvaluationInstruction is a union; evaluate by decision id here.
-	byID := openapi.NewDecisionEvaluationById("dish-decision")
+	byID := camunda.NewDecisionEvaluationById("dish-decision")
 	byID.SetVariables(map[string]any{"season": "Winter", "guestCount": 4})
 
 	result, err := client.EvaluateDecision(ctx,
-		openapi.DecisionEvaluationByIdAsDecisionEvaluationInstruction(byID))
+		camunda.DecisionEvaluationByIdAsDecisionEvaluationInstruction(byID))
 	if err != nil {
 		return err
 	}
@@ -28,7 +27,7 @@ func evaluateDecisionExample(ctx context.Context, client *camunda.CamundaClient)
 
 func searchDecisionDefinitionsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchDecisionDefinitions
-	result, err := client.SearchDecisionDefinitions(ctx, *openapi.NewDecisionDefinitionSearchQuery())
+	result, err := client.SearchDecisionDefinitions(ctx, *camunda.NewDecisionDefinitionSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -41,7 +40,7 @@ func searchDecisionDefinitionsExample(ctx context.Context, client *camunda.Camun
 
 func getDecisionDefinitionExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetDecisionDefinition
-	def, err := client.GetDecisionDefinition(ctx, openapi.MustDecisionDefinitionKey("2251799813685310"))
+	def, err := client.GetDecisionDefinition(ctx, camunda.MustDecisionDefinitionKey("2251799813685310"))
 	if err != nil {
 		return err
 	}
@@ -52,7 +51,7 @@ func getDecisionDefinitionExample(ctx context.Context, client *camunda.CamundaCl
 
 func getDecisionDefinitionXMLExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetDecisionDefinitionXML
-	xml, err := client.GetDecisionDefinitionXML(ctx, openapi.MustDecisionDefinitionKey("2251799813685310"))
+	xml, err := client.GetDecisionDefinitionXML(ctx, camunda.MustDecisionDefinitionKey("2251799813685310"))
 	if err != nil {
 		return err
 	}
@@ -63,7 +62,7 @@ func getDecisionDefinitionXMLExample(ctx context.Context, client *camunda.Camund
 
 func searchDecisionInstancesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchDecisionInstances
-	result, err := client.SearchDecisionInstances(ctx, *openapi.NewDecisionInstanceSearchQuery())
+	result, err := client.SearchDecisionInstances(ctx, *camunda.NewDecisionInstanceSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -88,14 +87,14 @@ func getDecisionInstanceExample(ctx context.Context, client *camunda.CamundaClie
 func deleteDecisionInstanceExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region DeleteDecisionInstance
 	return client.DeleteDecisionInstance(ctx,
-		openapi.MustDecisionEvaluationKey("2251799813685310"),
-		*openapi.NewDeleteDecisionInstanceRequest())
+		camunda.MustDecisionEvaluationKey("2251799813685310"),
+		*camunda.NewDeleteDecisionInstanceRequest())
 	// endregion DeleteDecisionInstance
 }
 
 func deleteDecisionInstancesBatchOperationExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region DeleteDecisionInstancesBatchOperation
-	req := openapi.NewDecisionInstanceDeletionBatchOperationRequest(*openapi.NewDecisionInstanceFilter())
+	req := camunda.NewDecisionInstanceDeletionBatchOperationRequest(*camunda.NewDecisionInstanceFilter())
 
 	result, err := client.DeleteDecisionInstancesBatchOperation(ctx, *req)
 	if err != nil {
@@ -108,7 +107,7 @@ func deleteDecisionInstancesBatchOperationExample(ctx context.Context, client *c
 
 func searchDecisionRequirementsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchDecisionRequirements
-	result, err := client.SearchDecisionRequirements(ctx, *openapi.NewDecisionRequirementsSearchQuery())
+	result, err := client.SearchDecisionRequirements(ctx, *camunda.NewDecisionRequirementsSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -121,7 +120,7 @@ func searchDecisionRequirementsExample(ctx context.Context, client *camunda.Camu
 
 func getDecisionRequirementsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetDecisionRequirements
-	drd, err := client.GetDecisionRequirements(ctx, openapi.MustDecisionRequirementsKey("2251799813685320"))
+	drd, err := client.GetDecisionRequirements(ctx, camunda.MustDecisionRequirementsKey("2251799813685320"))
 	if err != nil {
 		return err
 	}
@@ -132,7 +131,7 @@ func getDecisionRequirementsExample(ctx context.Context, client *camunda.Camunda
 
 func getDecisionRequirementsXMLExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetDecisionRequirementsXML
-	xml, err := client.GetDecisionRequirementsXML(ctx, openapi.MustDecisionRequirementsKey("2251799813685320"))
+	xml, err := client.GetDecisionRequirementsXML(ctx, camunda.MustDecisionRequirementsKey("2251799813685320"))
 	if err != nil {
 		return err
 	}

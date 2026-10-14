@@ -1179,8 +1179,6 @@ If your connector provides several operations, define them with the [`steps` and
 
 ## Make custom Connector templates available
 
-When using [Camunda Hub](/components/hub/workspace/modeler/index.md), you can create **Connector templates** [directly within the application](/components/hub/workspace/modeler/element-templates/element-template-generator.md) and share them with your respective organization.
-
-When using [Desktop Modeler](/components/modeler/desktop-modeler/index.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so Modeler will pick them up.
+When using [Camunda Hub](/components/hub/workspace/modeler/index.md), you can create **Connector templates** [directly within the application](/components/hub/workspace/modeler/element-templates/element-template-generator.md) and share them with your respective organization. When using [Desktop Modeler](/components/modeler/desktop-modeler/index.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so Desktop Modeler will pick them up.
 
 Once available, process developers can directly [use the **Connector templates** from within the modeling canvas](/components/connectors/use-connectors/index.md).

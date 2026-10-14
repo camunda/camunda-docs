@@ -16,7 +16,7 @@ Resolving secrets centrally in the Orchestration Cluster gives you capabilities 
 
 - **Field-scoped resolution**: a reference only resolves at the field where it was written. See [secret resolution](/components/concepts/secret-resolution.md#reference-syntax) and [security notice 61](/reference/notices.md#notice-61) for the legacy behavior this replaces.
 - **External secret store support**: in Self-Managed, values come from a File, AWS Secrets Manager, or GCP Secret Manager store instead of environment-variable-based [connector secret providers](/self-managed/components/connectors/connectors-configuration.md#secrets). See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
-- **Resource-based access control**: the `SECRET` resource's `READ` and `REVEAL` authorizations govern who can list and reveal secrets through the API. See [Control access to secrets](/components/concepts/secret-management.md#control-access-to-secrets).
+- **Resource-based access control**: the `SECRET` resource's `READ` and `REVEAL` authorizations govern who can list and reveal secrets through the API. See [Control access to secrets](/components/concepts/secrets.md#control-access-to-secrets).
 - **Resolution kept off the connector runtime path**: references resolve ahead of job activation, so a value never lands in a record, runtime state, or log. See [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
 
 ## Feature differences
@@ -45,7 +45,7 @@ With `FALLBACK` set, you can move a secret's value into the Orchestration Cluste
 
 Before `camunda.secrets.<name>` can resolve, its store must hold the secret values. What that requires depends on your offering:
 
-- **SaaS**: no backend change is needed. The managed secrets you create on a cluster's **Cluster secrets** tab are available to both the legacy syntax and `camunda.secrets.<name>`, so you can start migrating models right away. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
+- **SaaS**: no backend change is needed. The managed secrets you create on a cluster's **Cluster secrets** tab are available to both the legacy syntax and `camunda.secrets.<name>`, so you can start migrating models right away. See [Manage connector secrets](/components/saas/clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
 - **Self-Managed**: an operator must configure a secret store (File, AWS Secrets Manager, or GCP Secret Manager) for the Orchestration Cluster. The connector runtime's secret providers alone are not enough: `camunda.secrets.<name>` doesn't read them. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
 
 ## Migrate step by step
@@ -60,6 +60,6 @@ Before `camunda.secrets.<name>` can resolve, its store must hold the secret valu
 
 ## Related resources
 
-- [Secret management](/components/concepts/secret-management.md) gives an overview of secret references, stores, and access control across Camunda 8.
+- [Secrets](/components/concepts/secrets.md) provides an overview of secret references, stores, and access control across Camunda.
 - [Using `camunda.secrets.*` references](index.md#using-camundasecrets-references) covers how the two syntaxes coexist on the connector runtime.
 - [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets) covers the legacy secret provider configuration.

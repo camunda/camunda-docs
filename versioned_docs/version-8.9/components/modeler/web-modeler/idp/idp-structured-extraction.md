@@ -1,14 +1,15 @@
 ---
 id: idp-structured-extraction
 title: Extract structured data
-description: "Structured data extraction allows you to extract data from structured documents."
+description: "Use this extraction method to extract data from structured documents."
 ---
 
 import IdpPublishProjectModalImg from './img/idp-publish-structured.png';
 import IdpVersionsImg from './img/idp-versions.png';
 import IdpMenuImg from './img/idp-edit-template-button.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Use this extraction method to extract data from [structured documents](idp-key-concepts.md#structured-documents).
+<PageDescription />
 
 ## About structured data extraction
 

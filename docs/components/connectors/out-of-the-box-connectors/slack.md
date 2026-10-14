@@ -216,7 +216,7 @@ The **Slack connector** uses an OAuth bearer token (for example, the Slack app b
 
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/saas/clusters/manage-secrets.md).
 2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the connector.
 
 </TabItem>
@@ -326,7 +326,7 @@ When you click on the event with **Slack inbound connector** applied to it, a ne
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use Slack inbound connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
-In that case, Slack inbound connector deployments and URLs will not be displayed in Modeler.
+In that case, Slack inbound connector deployments and URLs will not be displayed in Desktop Modeler.
 :::
 
 ## Wiring with Slack

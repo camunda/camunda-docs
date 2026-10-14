@@ -11,7 +11,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 1. Ensure you have already [set up a connection](./connect-to-self-managed.md) and selected it.
 
-   ![Self-Managed cluster connected](./img/deploy-selection.png)
+   ![Connection selector showing a Self-Managed connection selected](./img/deploy-selection.png)
 
 2. Click the **Deploy** icon:
 

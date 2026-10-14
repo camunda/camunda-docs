@@ -28,7 +28,7 @@ Refers to a feature or component released as an alpha version, in an early state
 
 ### Alpha release
 
-Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.6.0-alpha1`, `8.6.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
+Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, `8.10.0-alpha1`, `8.10.0-alpha2`, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/reference/announcements-release-notes/overview.md#release-notes).
 
 :::note
 
@@ -92,7 +92,7 @@ Non-cluster components include:
 Non-cluster component versions are released continuously.
 
 - Customers are automatically updated to the latest component version when it is ready for release.
-- Admins can [enable alpha features](/components/hub/organization/manage-organization-settings/enable-alpha-features.md) for non-cluster components in organization settings.
+- Admins can [enable alpha features](/components/saas/organization/enable-alpha-features.md) for non-cluster components in organization settings.
 
 ### New Camunda 8 versions
 

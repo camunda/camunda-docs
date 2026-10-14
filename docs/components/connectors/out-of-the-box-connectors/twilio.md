@@ -198,7 +198,7 @@ The **Twilio Webhook connector** is an inbound connector that enables you to sta
 3. Select **Enabled** in **HMAC authentication** if you want to use HMAC authentication. After that, set the [Twilio Auth Token](https://support.twilio.com/hc/en-us/articles/223136027-Auth-Tokens-and-How-to-Change-Them) as the shared secret key in the **HMAC secret key** field property.
 
 :::note
-Use secrets to store your credentials securely. Refer to the [secrets documentation](/components/hub/organization/manage-clusters/manage-secrets.md) for more details.
+Use secrets to store your credentials securely. Refer to the [secrets documentation](/components/saas/clusters/manage-secrets.md) for more details.
 :::
 
 ### Fill in the properties in the **Activation** and **Correlation** sections
@@ -293,7 +293,7 @@ This tab displays the URL of the Twilio Webhook connector for every cluster wher
 :::note
 The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use the Twilio Webhook connector in the Desktop Modeler or with Camunda 8 Self-Managed.
-In that case, Twilio Webhook connector deployments and URLs will not be displayed in the Modeler.
+In that case, Twilio Webhook connector deployments and URLs will not be displayed in the Desktop Modeler.
 :::
 
 ## Variable mapping

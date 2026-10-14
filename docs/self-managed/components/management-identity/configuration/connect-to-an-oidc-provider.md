@@ -83,9 +83,9 @@ camunda:
     authUrl: <AUTH_URL_ENDPOINT>
     tokenUrl: <TOKEN_URL_ENDPOINT>
     jwksUrl: <JWKS_URL>
-    clientId: <Client ID from Step 3>
-    clientSecret: <Client secret from Step 3>
-    audience: <Audience from Step 3>
+    clientId: <Client ID from Step 4>
+    clientSecret: <Client secret from Step 4>
+    audience: <Audience from Step 4>
 identity:
   initialClaimName: <Initial claim name if not using the default "oid">
   initialClaimValue: <Initial claim value>
@@ -101,10 +101,11 @@ spring:
    CAMUNDA_IDENTITY_TYPE=GENERIC
    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
-   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 3>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 3>
+   # Used for container to container communication
+   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER>
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 4>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 4>
+   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 4>
    IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name  if not using the default "oid">
    IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
    SPRING_PROFILES_ACTIVE=oidc
@@ -177,9 +178,9 @@ camunda:
     baseUrl: <IDENTITY_URL>
     authUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
     tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-    clientId: <Client ID from Step 2>
-    clientSecret: <Client secret from Step 5>
-    audience: <Client ID from Step 2>
+    clientId: <Client ID from Step 3>
+    clientSecret: <Client secret from Step 6>
+    audience: <Client ID from Step 3>
 identity:
   initialClaimName: <Initial claim name if not using the default "oid">
   initialClaimValue: <Initial claim value>
@@ -196,9 +197,9 @@ spring:
     CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
     CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
     CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
-    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 5>
-    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 2>
+    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 3>
+    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 6>
+    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 3>
     IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
     IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
     SPRING_PROFILES_ACTIVE=oidc
@@ -238,11 +239,11 @@ Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entr
 
 ### Component-specific configuration
 
-| Component           | Redirect URI                                                                                                                           | Notes/Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Management Identity | **Microsoft Entra ID:** <br/> `https://<IDENTITY_URL>/auth/login-callback` <br/><br/> **Helm:** <br/> `https://<IDENTITY_URL>`         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Optimize            | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing environment variables to configure your authentication provider. If you use a custom `yaml`, update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following Optimize features are not currently available: <br/>- The **User permissions** tab in collections<br/>- The **Alerts** tab in collections<br/>- Digests<br/>- Accessible usernames for owners of resources (the `sub` claim value is displayed instead).                                                                            |
-| Hub                 | **Microsoft Entra ID:** <br/> `https://<HUB_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<HUB_URL>`                        | Hub requires two clients: one for the UI, and one for the API. <br/><br/> Required configuration variables for the `restapi` component:<br/> `OAUTH2_CLIENT_ID=[ui-client-id]`<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[ui-audience]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[api-audience]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=[provider-jwks-url]`. |
+| Component           | Redirect URI                                                                                                                           | Notes/Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Management Identity | **Microsoft Entra ID:** <br/> `https://<IDENTITY_URL>/auth/login-callback` <br/><br/> **Helm:** <br/> `https://<IDENTITY_URL>`         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Optimize            | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing environment variables to configure your authentication provider. If you use a custom `yaml`, update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following Optimize features are not currently available: <br/>- The **User permissions** tab in collections<br/>- The **Alerts** tab in collections<br/>- Digests<br/>- Accessible usernames for owners of resources (the `sub` claim value is displayed instead).                                                                          |
+| Hub                 | **Microsoft Entra ID:** <br/> `https://<HUB_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<HUB_URL>`                        | Hub requires two clients: one for the UI, and one for the API. <br/><br/> Required configuration variables for the `restapi` component:<br/> `CAMUNDA_HUB_OAUTH2_CLIENTID=[ui-client-id]`<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_INTERNALAPI=[ui-audience]`<br/> `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_PUBLICAPI=[api-audience]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=[provider-issuer]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI=[provider-jwks-url]`. |
 
 #### Example component values
 
@@ -261,13 +262,13 @@ With those URLs, configure the following redirect URIs in your OIDC provider:
 For Hub, the `restapi` component configuration varies by provider. The example below uses Keycloak; for other providers, retrieve the issuer and JWK set URLs from your provider's [OpenID configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) (typically `https://<provider>/.well-known/openid-configuration`):
 
 ```shell
-OAUTH2_CLIENT_ID=web-modeler
+CAMUNDA_HUB_OAUTH2_CLIENTID=web-modeler
 CAMUNDA_IDENTITY_BASEURL=http://identity:8080
 CAMUNDA_IDENTITY_TYPE=GENERIC
-CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=web-modeler-api
-CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=web-modeler-public-api
-SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=https://idp.example.com/realms/camunda
-SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=https://idp.example.com/realms/camunda/protocol/openid-connect/certs
+CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_INTERNALAPI=web-modeler-api
+CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_PUBLICAPI=web-modeler-public-api
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=https://idp.example.com/realms/camunda
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI=https://idp.example.com/realms/camunda/protocol/openid-connect/certs
 ```
 
 Use the internal Identity base URL for `CAMUNDA_IDENTITY_BASEURL`, not the public redirect URL.
@@ -276,8 +277,8 @@ For Microsoft Entra ID, replace the provider-specific values:
 
 ```shell
 CAMUNDA_IDENTITY_TYPE=MICROSOFT
-SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=https://login.microsoftonline.com/<tenant-id>/v2.0
-SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=https://login.microsoftonline.com/<tenant-id>/discovery/v2.0/keys
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI=https://login.microsoftonline.com/<tenant-id>/v2.0
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI=https://login.microsoftonline.com/<tenant-id>/discovery/v2.0/keys
 ```
 
 ## Supported and unsupported OIDC features

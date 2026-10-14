@@ -16,7 +16,7 @@ Each rule applies to a specific organization and cluster and can filter user tas
 
 On Camunda 8 SaaS, the notifications a cluster delivers depend on its generation.
 
-Clusters running generation `8.9 gen13` or later require the **Enable app integrations extensions** setting in the [cluster settings](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions). Until an organization admin turns it on, you can create and save rules, but the cluster delivers no notifications.
+Clusters running generation `8.9 gen13` or later require the **Enable app integrations extensions** setting in the [cluster settings](/components/saas/clusters/settings.md#enable-app-integrations-extensions). Until an organization admin turns it on, you can create and save rules, but the cluster delivers no notifications.
 
 Clusters running earlier generations need no configuration. They deliver a notification when a matching user task is created.
 

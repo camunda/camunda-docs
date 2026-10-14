@@ -1,0 +1,322 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
+
+# Environment resource paths and schemas
+paths:
+  /environments:
+    get:
+      operationId: getEnvironments
+      summary: Get all environments
+      description: >-
+        Returns all environments available in the organization. The organization is derived from the
+        access token.
+
+
+        On SaaS, the environments are resolved from Console using the caller's own token; a token that
+        is not authorized for Console's `cluster:read` permission is rejected with `403`. Self-Managed
+        has no such requirement — it does not call Console — so this `cluster:read` `403` never applies
+        there.
+      x-added-in-version: "8.10"
+      tags:
+        - Environment
+      responses:
+        "200":
+          description: The environments were retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentListResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /workspaces/{workspaceKey}/environments:
+    get:
+      operationId: getWorkspaceEnvironments
+      summary: Get a workspace's assigned environments
+      description: Returns the environments assigned to the given workspace.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
+      tags:
+        - Environment
+      parameters:
+        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+      responses:
+        "200":
+          description: The assigned environments were retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentListResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+    put:
+      operationId: replaceWorkspaceEnvironments
+      summary: Replace a workspace's assigned environments
+      description: >-
+        Replaces the full set of environments assigned to the given workspace with the provided set.
+        The request body is the exact set the workspace should end up assigned to: environments not
+        listed are unassigned, and unassigning removes an environment from every project's selection
+        in the workspace. Requires the `update` permission for the organization.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
+      tags:
+        - Environment
+      parameters:
+        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplaceWorkspaceEnvironmentsRequest"
+      responses:
+        "200":
+          description: The assigned environments were replaced successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentListResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}/environments:
+    get:
+      operationId: getProjectEnvironments
+      summary: Get a project's available environments
+      description: >-
+        Returns the environments available to the given project, which is the full set assigned to its
+        parent workspace.
+      x-added-in-version: "8.10"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
+      tags:
+        - Environment
+      parameters:
+        - $ref: "projects.yaml#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "200":
+          description: The available environments were retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentListResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  schemas:
+    # --- Request schemas ---
+
+    ReplaceWorkspaceEnvironmentsRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        environmentIds:
+          description: >-
+            The exact set of environment IDs the workspace should end up assigned to. An empty array
+            (or an omitted field) unassigns all environments.
+          type: array
+          # Mirrors Constants.WORKSPACE_ENVIRONMENT_ASSIGNMENT_LIMIT (maxItems) and
+          # Constants.VARCHAR_MAX (item maxLength); keep in sync with those constants.
+          maxItems: 500
+          items:
+            type: string
+            minLength: 1
+            maxLength: 255
+
+    # --- Response schemas ---
+
+    EnvironmentListResult:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          description: The list of environments.
+          type: array
+          items:
+            $ref: "#/components/schemas/EnvironmentResult"
+
+    EnvironmentResult:
+      type: object
+      required:
+        - id
+        - name
+        - targetType
+        - tags
+        - clusterId
+        - clusterName
+        - clusterVersion
+        - physicalTenantId
+        - runtimeState
+        - discoveryState
+        - assignedWorkspaces
+        - applications
+      properties:
+        id:
+          description: The unique identifier of the environment.
+          type: string
+        name:
+          description: The name of the environment.
+          type: string
+        targetType:
+          description: The type of resource backing the environment.
+          allOf:
+            - $ref: "#/components/schemas/EnvironmentTargetType"
+        tags:
+          description: >-
+            The labels of the cluster backing the environment. Always present; an untagged cluster
+            reports an empty array.
+          type: array
+          items:
+            type: string
+        clusterId:
+          description: The identifier of the cluster backing the environment.
+          type: string
+        clusterName:
+          description: The name of the cluster backing the environment.
+          type: string
+        clusterVersion:
+          description: >-
+            The version of the cluster backing the environment, when known. Self-Managed and
+            interactive SaaS reads report the cluster's semantic version; SaaS public-API reads report
+            the coarser generation label the cluster runs (for example `Camunda 8.8+gen17`). `null`
+            while a cluster is still provisioning and reports no version yet; treat its absence as
+            "version unknown" rather than a specific release.
+          type: string
+          nullable: true
+        physicalTenantId:
+          description: >-
+            The identifier of the physical tenant backing the environment. `null` for cluster-backed
+            environments.
+          type: string
+          nullable: true
+        runtimeState:
+          description: The runtime status of the environment.
+          allOf:
+            - $ref: "#/components/schemas/EnvironmentRuntimeState"
+        discoveryState:
+          description: >-
+            Whether the environment is still present in Hub's enumeration source. A separate axis from
+            `runtimeState`: it says whether Hub still sees the environment, not whether it can process
+            work. An `ACTIVE` environment can be unhealthy, and a `NOT_REPORTED` one may be running fine.
+          allOf:
+            - $ref: "#/components/schemas/EnvironmentDiscoveryState"
+        assignedWorkspaces:
+          description: The workspaces the environment is assigned to.
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkspaceReference"
+        applications:
+          description: >-
+            The Orchestration Cluster web applications reachable for the environment (for example
+            Operate, Tasklist). Always present; an environment with no reachable applications reports
+            an empty array.
+          type: array
+          items:
+            $ref: "#/components/schemas/EnvironmentApplication"
+
+    WorkspaceReference:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          description: The unique key of the workspace.
+          type: string
+        name:
+          description: The name of the workspace.
+          type: string
+
+    EnvironmentApplication:
+      type: object
+      required:
+        - type
+        - name
+        - webappUrl
+        - overridden
+      properties:
+        type:
+          description: A stable key identifying the kind of application (for example `operate`).
+          type: string
+        name:
+          description: The display name of the application.
+          type: string
+        webappUrl:
+          description: The deep link to the application.
+          type: string
+        overridden:
+          description: >-
+            Whether this application's configuration came from a Self-Managed physical tenant's own
+            override rather than from the backing cluster. Always `false` on SaaS, which has no
+            per-environment overrides.
+          type: boolean
+
+    EnvironmentTargetType:
+      description: The type of resource backing an environment.
+      type: string
+      enum:
+        - PHYSICAL_TENANT_BACKED
+        - CLUSTER_BACKED
+
+    EnvironmentRuntimeState:
+      description: The runtime status of an environment.
+      type: string
+      enum:
+        - HEALTHY
+        - UNHEALTHY
+        - PAUSED
+        - RESUMING
+        - UNKNOWN
+
+    EnvironmentDiscoveryState:
+      description: >-
+        Whether Hub still sees an environment in its enumeration source (config or topology).
+        Discovery bookkeeping, not a statement about the environment's own health.
+      type: string
+      enum:
+        - ACTIVE
+        - NOT_REPORTED

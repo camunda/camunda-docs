@@ -29,6 +29,9 @@ To delete a process definition from the **Processes** page, take the following s
 3. Confirm the delete operation by checking the checkbox and clicking **Delete**.
 
 ![A confirmation modal for deleting a process definition, with a warning about the impact of deletion and a checkbox to confirm the deletion.](./img/delete-resources-process-modal.png)
+:::note
+A process definition that was deleted while it still had running instances (for example, using the [delete resource command](/apis-tools/zeebe-api/gateway-service.md#deleteresource-rpc)) is [draining](/components/concepts/resource-deletion.md#draining). Operate marks it with a **Draining** tag and removes it automatically once its last instance finishes. To see which instances are keeping it alive, open the definition and view its running instances.
+:::
 
 ## Delete decision definition
 

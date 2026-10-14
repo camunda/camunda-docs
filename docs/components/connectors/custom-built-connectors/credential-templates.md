@@ -5,7 +5,7 @@ description: "Define a credential type for your custom connector, so users can c
 keywords: [credential, credential template, configuration, custom connector]
 ---
 
-Define a credential type for your custom connector, so users can create and select a credential for it in Camunda Hub or Modeler, instead of configuring authentication fields directly on the connector task. See [credentials](/components/hub/organization/credentials/index.md) for the concept this page builds on, and [`Configuration` input type](/components/modeler/element-templates/template-properties.md#configuration-input-type) for the generic `Configuration` property type it uses.
+Define a credential type for your custom connector, so users can create and select a credential for it in [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md), instead of configuring authentication fields directly on the connector task. See [credentials](/components/hub/organization/credentials/index.md) for the concept this page builds on, and [`Configuration` input type](/components/modeler/element-templates/template-properties.md#configuration-input-type) for the generic `Configuration` property type it uses.
 
 ## About credential templates
 

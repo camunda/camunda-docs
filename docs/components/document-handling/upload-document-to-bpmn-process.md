@@ -39,7 +39,7 @@ The Filepicker always returns an array with metadata for a single or multiple fi
 
 When the process is deployed and running, users can access and complete user tasks that include a form with the Filepicker component in [Tasklist](/components/tasklist/introduction-to-tasklist.md):
 
-![document handling in tasklist](./img/task-with-file-picker-tasklist.png)
+![User task form with a file picker for uploading an ID document in Tasklist](./img/task-with-file-picker-tasklist.png)
 
 ### Upload a document to start a process
 

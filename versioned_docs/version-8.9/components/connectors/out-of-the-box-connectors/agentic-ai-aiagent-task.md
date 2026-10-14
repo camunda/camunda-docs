@@ -17,7 +17,7 @@ import ConfigurationOutputMappingTask from './agentic-ai/aiagent/configuration/\
 import ConfigurationErrorHandling from './agentic-ai/aiagent/configuration/\_error-handling.md';
 import ConfigurationRetries from './agentic-ai/aiagent/configuration/\_retries.md';
 import ConfigurationExecutionListeners from './agentic-ai/aiagent/configuration/\_execution-listeners.md';
-import AgentTaskFeedbackImg from '../img/ai-agent-task-feedback-loop.png';
+import AgentTaskLoopImg from '../img/ai-agent-task-loop.png';
 
 Implement an AI agent using an AI Agent connector applied to a service task, paired with an optional ad-hoc sub-process to provide tools usable by the AI.
 
@@ -28,7 +28,7 @@ Implement an AI agent using an AI Agent connector applied to a service task, pai
 
 :::
 
-<img src={AgentTaskFeedbackImg} alt="AI Agent Task with tool calling feedback loop" class="img-800"/>
+<img src={AgentTaskLoopImg} alt="AI Agent Task with tool calling loop" class="img-800"/>
 
 ## Configuration
 

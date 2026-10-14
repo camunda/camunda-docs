@@ -14,8 +14,9 @@ import AgentConversationHistory from '../img/agent-conversation-history.png';
 import ToolCallDetails from '../img/tool-call-details.png';
 import AssistantMessageExpand from '../img/assistant-message-expand.png';
 import AssistantMessagePreview from '../img/assistant-message-preview.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Monitor and troubleshoot your AI agent process instances in real time using Operate.
+<PageDescription />
 
 ## About
 
@@ -98,6 +99,8 @@ For this example, the first iteration shows:
 :::tip
 Hover over a message's token count or duration badge to see a breakdown of its usage metrics.
 :::
+
+Operate shows **Thinking** and the formatted text only when the model returns reasoning content. To display readable model reasoning where supported, [migrate to the 8.10 AI Agent element template](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md).
 
 ### Dive deeper into messages and tool calls
 

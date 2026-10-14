@@ -2,7 +2,7 @@
 id: getting-started-example
 title: "Run your first Spring Boot, Node.js, Python, or C# project with Camunda 8"
 sidebar_label: Run your first Spring Boot, Node.js, Python, or C# project
-description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot, Node.js, Python, or C#."
+description: "A step-by-step example for Camunda 8 Self-Managed using Spring Boot, Node.js, Python, or C#."
 keywords:
   [
     java,
@@ -20,9 +20,11 @@ keywords:
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">1 hour</span>
+<PageDescription />
+
+## About
 
 This guide is tailored for developers who want to implement process automation solutions using Java (Spring), JavaScript (Node.js), Python, or C#. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
@@ -31,7 +33,7 @@ This guide is tailored for developers who want to implement process automation s
 You will:
 
 - Run Camunda 8 in a local development environment using **Camunda 8 Run**.
-- Use the **Camunda Modeler** to deploy and start a business process.
+- Use the **Desktop Modeler** to deploy and start a business process.
 - Run workers written in one of:
   - The **Spring (Java) SDK**,
   - The **Node.js (JavaScript) SDK**,
@@ -81,7 +83,7 @@ Download the Getting Started Package from [Camunda Downloads](/downloads).
 The starter package includes the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
-- [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
+- [Desktop Modeler](/components/modeler/desktop-modeler/index.md) – An application for modeling BPMN, DMN, and Forms.
 - [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C#.
 
 All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
@@ -122,11 +124,11 @@ The service tasks in the process are executed by [job workers](/reference/glossa
   </li>
 
   <li>
-    Open the Camunda Modeler application from the starter package.
+    Open the Desktop Modeler application from the starter package.
   </li>
 
   <li>
-    In Camunda Modeler, click <b>File > Open File</b>
+    In Desktop Modeler, click <b>File > Open File</b>
   </li>
 
   <li>
@@ -139,14 +141,14 @@ The service tasks in the process are executed by [job workers](/reference/glossa
   </li>
 
   <li>
-    Click the “Play” icon on the bottom toolbar of Modeler to deploy and start an instance of the process model.
+    Click the “Play” icon on the bottom toolbar of Desktop Modeler to deploy and start an instance of the process model.
 
     <p>You do not need to set any variables for the process.</p>
 
     <p>Optionally, you can set a value for the <code>item</code> variable by pasting in:</p>
     <pre><code>{`{"item": "special widget"}`}</code></pre>
 
-    ![Start a new process instance in Camunda Modeler](./img/get-started-example-start-process.png)
+    ![Start a new process instance in Desktop Modeler](./img/get-started-example-start-process.png)
 
   </li>
 </ol>

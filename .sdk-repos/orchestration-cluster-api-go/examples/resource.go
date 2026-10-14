@@ -7,7 +7,6 @@ import (
 	"os"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func createDeploymentExample(ctx context.Context, client *camunda.CamundaClient) error {
@@ -32,7 +31,7 @@ func createDeploymentExample(ctx context.Context, client *camunda.CamundaClient)
 
 func searchResourcesExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchResources
-	result, err := client.SearchResources(ctx, *openapi.NewResourceSearchQuery())
+	result, err := client.SearchResources(ctx, *camunda.NewResourceSearchQuery())
 	if err != nil {
 		return err
 	}
@@ -45,7 +44,7 @@ func searchResourcesExample(ctx context.Context, client *camunda.CamundaClient) 
 
 func getResourceExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetResource
-	resource, err := client.GetResource(ctx, openapi.MustResourceKey("2251799813685350"))
+	resource, err := client.GetResource(ctx, camunda.MustResourceKey("2251799813685350"))
 	if err != nil {
 		return err
 	}
@@ -56,7 +55,7 @@ func getResourceExample(ctx context.Context, client *camunda.CamundaClient) erro
 
 func getResourceContentExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetResourceContent
-	content, err := client.GetResourceContent(ctx, openapi.MustResourceKey("2251799813685350"))
+	content, err := client.GetResourceContent(ctx, camunda.MustResourceKey("2251799813685350"))
 	if err != nil {
 		return err
 	}
@@ -67,7 +66,7 @@ func getResourceContentExample(ctx context.Context, client *camunda.CamundaClien
 
 func getResourceContentBinaryExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetResourceContentBinary
-	file, err := client.GetResourceContentBinary(ctx, openapi.MustResourceKey("2251799813685350"))
+	file, err := client.GetResourceContentBinary(ctx, camunda.MustResourceKey("2251799813685350"))
 	if err != nil {
 		return err
 	}
@@ -79,8 +78,8 @@ func getResourceContentBinaryExample(ctx context.Context, client *camunda.Camund
 func deleteResourceExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region DeleteResource
 	result, err := client.DeleteResource(ctx,
-		openapi.MustResourceKey("2251799813685350"),
-		*openapi.NewDeleteResourceRequest())
+		camunda.MustResourceKey("2251799813685350"),
+		*camunda.NewDeleteResourceRequest())
 	if err != nil {
 		return err
 	}

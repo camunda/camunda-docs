@@ -45,15 +45,3 @@ generated code stays pure and regenerable.
   sidecar poll (a safety net for jobs re-queued after a timeout or a brief
   reconnect); poll-activated jobs are acknowledged over REST, streamed jobs over
   gRPC. Set `WithStreamPollInterval` to tune or disable it.
-- **FALCON command stream** — an opt-in upgrade for
-  [nanobpmn](https://github.com/jwulf/nano-bpm) gateways (an API/behavior superset
-  of Camunda 8). The gateway is probed once via `GET /v2/topology`; when it
-  advertises the command stream, `CreateProcessInstance` is routed over a
-  credit-metered WebSocket (a flood of creates queues on the submission-credit
-  window instead of being shed with 503s) and `NewJobWorker` receives _pushed_
-  jobs over the same stream instead of long-polling. The link fails over across
-  cluster nodes and supports both `ws://` and `wss://` (deriving TLS from the
-  cluster address). Against stock Camunda — or if the stream cannot be established
-  — the SDK stays on its byte-identical REST path. Enabled by default; disable with
-  `CAMUNDA_FALCON=false` / `WithFalcon(false)`, or force pure REST (e.g. behind a
-  WebSocket-blocking proxy) with `CAMUNDA_FORCE_REST=1` / `WithForceREST(true)`.
