@@ -144,8 +144,8 @@ jobs:
             npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
             npx docusaurus gen-api-docs camunda -p api-camunda-openapi
           else
-            npx docusaurus clean-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi || true
-            npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
+            npx docusaurus clean-api-docs:version "camunda:$DOCS_VERSION" -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs:version "camunda:$DOCS_VERSION" -p api-camunda-openapi
           fi
 
           # Discard generated MDX — this step only validates, not commits
