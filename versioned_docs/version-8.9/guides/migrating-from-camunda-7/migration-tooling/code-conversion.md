@@ -132,21 +132,21 @@ The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanin
 
 Camunda 7 assertions check the state once. Most [Camunda Process Test](/apis-tools/testing/assertions.md) (CPT) assertions wait until the expected state is reached or the [assertion timeout](/apis-tools/testing/assertions.md#assertion-timeout) ends (10 seconds by default). Before a negative assertion such as `hasNoActiveElements`, first assert a positive state, such as an active or completed element, so the negative check doesn't pass before the process gets there. For all public Camunda 7 assertions, see the [complete assertion mapping](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/40-test-assertions/10-assertions/80-assertion-mapping.md) in the pattern catalog.
 
-| Camunda 7 (BpmnAwareTests)                      | Camunda 8 (CamundaAssert)                                                                                                                 |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `assertThat(pi).isNotEnded()`                   | `assertThat(pi).isActive()`                                                                                                               |
-| `assertThat(pi).isEnded()`                      | `assertThat(pi).isCompleted()`, or `isTerminated()` for a canceled instance                                                               |
-| `assertThat(pi).isWaitingAt("id")`              | `assertThat(pi).hasActiveElements("id")`                                                                                                  |
-| `assertThat(pi).isWaitingAt(findId("name"))`    | `assertThat(pi).hasActiveElements(byName("name"))`                                                                                        |
-| `assertThat(pi).isNotWaitingAt("id")`           | `assertThat(pi).hasNoActiveElements("id")`                                                                                                |
-| `assertThat(pi).hasPassed("id")`                | `assertThat(pi).hasCompletedElements("id")`, or `hasTerminatedElements("id")` for an element that a boundary event interrupted            |
-| `assertThat(pi).hasNotPassed("id")`             | No exact counterpart. Use `assertThat(pi).hasNotActivatedElements("id")` only if the element must never be activated                      |
-| `assertThat(pi).variables().containsEntry(k,v)` | `assertThat(pi).hasVariable(k, v)`                                                                                                        |
-| `assertThat(pi).variables().containsKey(k)`     | `assertThat(pi).hasVariableNames(k)`                                                                                                      |
-| `assertThat(task()).hasName("x")`               | `assertThatUserTask(UserTaskSelectors.byElementId("id", pi.getProcessInstanceKey())).isCreated().hasName("x")`                            |
-| `assertThat(task()).isAssignedTo("u")`          | No direct counterpart. `assertThatUserTask(UserTaskSelectors.byElementId("id", pi.getProcessInstanceKey())).isCreated().hasAssignee("u")` |
-| `complete(task())`                              | `processTestContext.completeUserTask(UserTaskSelectors.byElementId("id", pi.getProcessInstanceKey()))`                                    |
-| `managementService().executeJob(id)`            | `processTestContext.increaseTime(Duration)` or `processTestContext.completeJob("type")`                                                   |
+| Camunda 7 (BpmnAwareTests)                      | Camunda 8 (CamundaAssert)                                                                                                             |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `assertThat(pi).isNotEnded()`                   | `assertThat(pi).isActive()`                                                                                                           |
+| `assertThat(pi).isEnded()`                      | `assertThat(pi).isCompleted()`, or `isTerminated()` for a canceled instance                                                           |
+| `assertThat(pi).isWaitingAt("id")`              | `assertThat(pi).hasActiveElements("id")`                                                                                              |
+| `assertThat(pi).isWaitingAt(findId("name"))`    | `assertThat(pi).hasActiveElements(byName("name"))`                                                                                    |
+| `assertThat(pi).isNotWaitingAt("id")`           | `assertThat(pi).hasNoActiveElements("id")`                                                                                            |
+| `assertThat(pi).hasPassed("id")`                | `assertThat(pi).hasCompletedElements("id")`, or `hasTerminatedElements("id")` for an element that a boundary event interrupted        |
+| `assertThat(pi).hasNotPassed("id")`             | No exact counterpart. Use `assertThat(pi).hasNotActivatedElements("id")` only if the element must never be activated                  |
+| `assertThat(pi).variables().containsEntry(k,v)` | `assertThat(pi).hasVariable(k, v)`                                                                                                    |
+| `assertThat(pi).variables().containsKey(k)`     | `assertThat(pi).hasVariableNames(k)`                                                                                                  |
+| `assertThat(task()).hasName("x")`               | `assertThatUserTask(UserTaskSelectors.byElementId("id", pi.getProcessInstanceKey())).isCreated().hasName("x")`                        |
+| `assertThat(task()).isAssignedTo("u")`          | No direct counterpart. Search created user tasks by `pi.getProcessInstanceKey()`, assert exactly one result, then assert its assignee |
+| `complete(task())`                              | `processTestContext.completeUserTask(UserTaskSelectors.byElementId("id", pi.getProcessInstanceKey()))`                                |
+| `managementService().executeJob(id)`            | `processTestContext.increaseTime(Duration)` or `processTestContext.completeJob("type")`                                               |
 
 ### Import replacements
 
