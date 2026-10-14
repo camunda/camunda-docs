@@ -723,7 +723,8 @@ The script generates only the environment-specific values (initial contact point
 From the terminal context of `aws/kubernetes/eks-dual-region/helm-values`, and ensure you have previously exported the [environment variables](#export-environment-variables), execute the following:
 
 ```bash
-helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
+helm install $CAMUNDA_RELEASE_NAME camunda-platform \
+  --repo https://helm.camunda.io \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
@@ -731,7 +732,8 @@ helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
   -f ../../../../generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml \
   -f region0/camunda-values.yml
 
-helm install $CAMUNDA_RELEASE_NAME $HELM_CHART_REF \
+helm install $CAMUNDA_RELEASE_NAME camunda-platform \
+  --repo https://helm.camunda.io \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \

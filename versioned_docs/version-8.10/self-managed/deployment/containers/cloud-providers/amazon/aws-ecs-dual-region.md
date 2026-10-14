@@ -289,7 +289,7 @@ registry_password      = "<your-registry-pass>"
 ```hcl
 aws_profile      = "<your-aws-profile>" # optional; omit when authenticating via env vars
 camunda_image    = "registry.camunda.cloud/camunda/camunda:<camunda-version>"      # 8.10 or later
-connectors_image = "camunda/connectors-bundle:<connectors-bundle-version>"          # for example, 8.10.0-alpha2
+connectors_image = "camunda/connectors-bundle:<connectors-bundle-version>"          # for example, 8.10.0
 default_tags     = { Environment = "reference", Team = "<your-team>" }
 ```
 
