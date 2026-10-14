@@ -103,9 +103,15 @@ CAMUNDA_DATA_SECONDARYSTORAGE_RETENTION_MINIMUMAGE=30d
 
 ```yaml
 orchestration:
-  retention:
-    enabled: true
-    minimumAge: 30d
+  extraConfiguration:
+    - file: retention.yaml
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              retention:
+                enabled: true
+                minimum-age: 30d
 ```
 
 See [Configure data retention](../../deployment/helm/configure/data-retention.md) for more information about the Helm configuration.

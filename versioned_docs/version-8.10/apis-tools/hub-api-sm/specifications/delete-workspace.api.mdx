@@ -1,0 +1,301 @@
+---
+id: delete-workspace
+title: "Delete a workspace"
+description: "Soft-deletes the workspace with the given key, cascading to all of its projects, folders, files, and IDP applications. The workspace is moved to the recently deleted state and can be recovered during the retention window. To permanently and irreversibly remove a workspace, use `DELETE /workspaces/{workspaceKey}/permanent` instead."
+sidebar_label: "Delete a workspace"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a workspace"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/workspaces/{workspaceKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Soft-deletes the workspace with the given key, cascading to all of its projects, folders, files, and IDP applications. The workspace is moved to the recently deleted state and can be recovered during the retention window. To permanently and irreversibly remove a workspace, use `DELETE /workspaces/{workspaceKey}/permanent` instead.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "workspaceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the workspace.",
+      schema: {
+        description: "System-generated key for a workspace.",
+        type: "string",
+        format: "WorkspaceKey",
+        "x-semantic-type": "WorkspaceKey",
+        example: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+        title: "WorkspaceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The workspace was deleted successfully." },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -16,7 +16,7 @@ When using Elasticsearch/OpenSearch, finished data is moved to a dated index (fo
 
 ## Archive period
 
-The time between a process instance finishing and being moved to a dated index can be configured using the [waitPeriodBeforeArchiving](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md#configurations) parameter. Refer to that configuration for the current default value.
+The time between a process instance finishing and being moved to a dated index can be configured using the [waitPeriodBeforeArchiving](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=history#options) parameter. Refer to that configuration for the current default value.
 
 ## Archive by ID
 

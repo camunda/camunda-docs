@@ -2,7 +2,7 @@
 id: getting-started-agentic-orchestration
 title: "Build your first AI agent"
 sidebar_label: Build your first AI agent
-description: "Get started with Camunda agentic orchestration by running your first AI agent."
+description: "Get started with Camunda agentic orchestration by building and running your first AI agent."
 keywords: [agentic orchestration, ai agent]
 toc_max_heading_level: 2
 ---
@@ -13,11 +13,9 @@ import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
 import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
 import AgentPanelImg from '../components/agentic-orchestration/img/agent-panel.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 45 minutes</span>
-
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent).
+<PageDescription />
 
 ## About
 
@@ -141,7 +139,7 @@ Camunda-provided LLM is only available in SaaS. It is not available in Self-Mana
 
 <TabItem value="camunda-provided-llm">
 
-1. Verify your organization has **AI features enabled**. Camunda-provided LLM is available automatically when AI features are enabled.
+1. Verify your organization has the **Camunda Provided LLM** toggle enabled in [Camunda Hub](/components/saas/organization/enable-alpha-features.md#enable-camunda-provided-llm). This is a separate toggle from **AI-powered features**.
 1. Keep the AI Agent connector's default settings from the blueprint.
    Most AI blueprints default to use Camunda-provided LLM in SaaS.
    You only need to configure a customer-managed provider if you want custom billing, quotas, or provider control.

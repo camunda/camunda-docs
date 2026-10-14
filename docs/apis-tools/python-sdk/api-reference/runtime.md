@@ -1153,6 +1153,12 @@ CAMUNDA_OAUTH_URL: str
 CAMUNDA_REST_ADDRESS: str
 ```
 
+### CAMUNDA_REST_ADDRESS_EXACT
+
+```python
+CAMUNDA_REST_ADDRESS_EXACT: str | bool
+```
+
 ### CAMUNDA_SDK_BACKPRESSURE_PROFILE
 
 ```python
@@ -1234,7 +1240,7 @@ ZEEBE_REST_ADDRESS: str
 ## CamundaSdkConfiguration
 
 ```python
-class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
+class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS_EXACT=False, CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
 ```
 
 Bases: `BaseModel`
@@ -1245,6 +1251,7 @@ Bases: `BaseModel`
 | ------------------------------------------- | ------------------------------------------------------------------------------ | ----------- |
 | `ZEEBE_REST_ADDRESS`                        | `str`                                                                          |             |
 | `CAMUNDA_REST_ADDRESS`                      | `str`                                                                          |             |
+| `CAMUNDA_REST_ADDRESS_EXACT`                | `bool`                                                                         |             |
 | `CAMUNDA_TOKEN_AUDIENCE`                    | `str`                                                                          |             |
 | `CAMUNDA_OAUTH_URL`                         | `str`                                                                          |             |
 | `CAMUNDA_CLIENT_ID`                         | `str` \| `None`                                                                |             |
@@ -1367,6 +1374,12 @@ CAMUNDA_OAUTH_URL: str
 
 ```python
 CAMUNDA_REST_ADDRESS: str
+```
+
+### CAMUNDA_REST_ADDRESS_EXACT
+
+```python
+CAMUNDA_REST_ADDRESS_EXACT: bool
 ```
 
 ### CAMUNDA_SDK_BACKPRESSURE_PROFILE

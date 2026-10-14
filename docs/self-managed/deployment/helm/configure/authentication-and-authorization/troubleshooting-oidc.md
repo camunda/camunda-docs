@@ -20,7 +20,7 @@ This page provides solutions to common issues encountered when configuring OIDC 
 3. Update `redirectUrl` in Helm values to match how users actually access the component.
 
 :::info Common misconfiguration
-Use `http://localhost:8080` in Helm values when users access via `https://camunda.example.com/orchestration`.
+A common mistake is leaving the redirect URL in Helm values at `http://localhost:8080` when users access via `https://camunda.example.com/orchestration`. Set it to the public URL instead.
 :::
 
 ## Standard flow is disabled for the client

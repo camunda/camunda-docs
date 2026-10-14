@@ -12,7 +12,7 @@ import HelmCliSupport from '../../deployment/helm/_partials/_helm-cli-support.md
 Upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
 
 :::caution earlier versions
-If you are upgrading from a version earlier than 8.8, see [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
+If you are upgrading from a version earlier than 8.9, see [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 :::
 
 :::note Helm CLI support
@@ -22,6 +22,18 @@ Camunda 8.10 (chart 15.x) supports Helm CLI v3 and v4.
 
 Switching CLIs does not require a release-state migration. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
 :::
+
+## Upgrade flow
+
+After completing the prerequisites in your version-specific guide, follow this flow for each supported minor-version upgrade:
+
+1. Run the [Camunda Helm Toolkit](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md) to migrate and validate override files.
+1. Review the report and complete the version-specific manual actions.
+1. Render and test the complete, layered configuration in non-production.
+1. Back up data and run the Helm upgrade.
+1. Validate the deployed platform.
+
+The toolkit is the recommended first step for values-file preparation. Check its [supported version pairs](/self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit.md#check-version-compatibility) and upgrade one minor version at a time. A clean report is a useful sanity check, not proof of production readiness; follow all required actions in the version-specific guide.
 
 ## Upgrade guides
 
@@ -62,11 +74,11 @@ The `/tmp` directory backed by this ephemeral volume holds only scratch and cach
 
 For most deployments, no action is required on upgrade. The following table shows what to expect based on your `webModeler.persistence` configuration:
 
-| Setting                              | Upgrade behavior                                                                                                                                                                                                                       |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enabled: false` (default)           | No change. Your pod continues using `emptyDir`. No action required.                                                                                                                                                                    |
-| `enabled: true`, no `existingClaim`  | `helm upgrade` succeeds. Each pod now uses a per-pod ephemeral PVC. The old `<release>-webmodeler-data` PVC is no longer managed by Helm and becomes orphaned. [Clean it up after upgrading](#clean-up-the-orphaned-pvc) if it exists. |
-| `enabled: true`, `existingClaim` set | No change. Your pod continues mounting your existing PVC. No action required.                                                                                                                                                          |
+| Setting                              | Upgrade behavior                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled: false` (default)           | No change. Your pod continues using `emptyDir`. No action required.                                                                                                                                                                                                                                                                                                                                                |
+| `enabled: true`, no `existingClaim`  | `helm upgrade` succeeds unless `deploymentStrategy` is `Recreate`, which [requires `existingClaim`](/self-managed/upgrade/helm/890-to-8100.md#camunda-hub-recreate-strategy-requires-existingclaim). Each pod now uses a per-pod ephemeral PVC. The old `<release>-webmodeler-data` PVC is no longer managed by Helm and becomes orphaned. [Clean it up after upgrading](#clean-up-the-orphaned-pvc) if it exists. |
+| `enabled: true`, `existingClaim` set | No change. Your pod continues mounting your existing PVC. No action required.                                                                                                                                                                                                                                                                                                                                      |
 
 #### Clean up the orphaned PVC
 

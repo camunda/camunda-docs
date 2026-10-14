@@ -1,20 +1,21 @@
 ---
 id: cluster-api
-title: "Cluster API"
-sidebar_label: "Cluster API"
+title: "Cluster Api"
+sidebar_label: "Cluster Api"
 sidebar_position: 10
 mdx:
   format: md
 ---
 
-# Cluster API
+# Cluster Api
 
-`ClusterApi` — 7 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ClusterApi::class)`.
+`ClusterApi` — 8 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\ClusterApi::class)`.
 
 - `cancelClusterRebalance()`
 - `getClusterRebalance()`
 - `getClusterStatus()`
 - `getClusterTopology()`
+- `getClusterUpgradeStatus()`
 - `getStatus()`
 - `getTopology()`
 - `triggerClusterRebalance()`

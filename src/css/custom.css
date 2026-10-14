@@ -1440,7 +1440,48 @@ table .badge:nth-of-type(1) {
 }
 
 .badge--get {
-  background-color: var(--ifm-color-primary);
+  background-color: #c54302;
+}
+
+.openapi__method-endpoint .badge--primary {
+  --ifm-badge-background-color: #c54302;
+  --ifm-badge-border-color: #c54302;
+  background-color: #c54302;
+  border-color: #c54302;
+  color: white;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--primary,
+[data-theme="dark"] .openapi__method-endpoint .badge--warning {
+  --ifm-badge-background-color: #6e3a10;
+  --ifm-badge-border-color: #b8651f;
+  background-color: #6e3a10;
+  border-color: #b8651f;
+  color: #f3c26a;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--info {
+  --ifm-badge-background-color: #1c3a5e;
+  --ifm-badge-border-color: #3d6fa3;
+  background-color: #1c3a5e;
+  border-color: #3d6fa3;
+  color: #7fb8e6;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--success {
+  --ifm-badge-background-color: #16362b;
+  --ifm-badge-border-color: #2f9e64;
+  background-color: #16362b;
+  border-color: #2f9e64;
+  color: #7ee2a8;
+}
+
+[data-theme="dark"] .openapi__method-endpoint .badge--danger {
+  --ifm-badge-background-color: #5c1a1a;
+  --ifm-badge-border-color: #c92a2a;
+  background-color: #5c1a1a;
+  border-color: #c92a2a;
+  color: #f5b8b8;
 }
 
 .badge--post {
@@ -1527,12 +1568,16 @@ table .badge:nth-of-type(1) {
   text-decoration: none;
 }
 
-div[class^="announcementBar_"] {
-  font-size: 120%;
-  padding: 1em 0;
+.theme-announcement-bar {
+  --docusaurus-announcement-bar-height: auto;
+  height: auto;
+  font-size: 110%;
+  padding: 0.5em 1.5em;
 }
-div[class^="announcementBar_"] button {
+.theme-announcement-bar button {
   align-self: center;
+  color: #fff;
+  opacity: 1;
 }
 
 /* Styles for rendered BPMN/DMN diagrams and optional callouts */
@@ -1697,6 +1742,30 @@ span.callout + p::after {
   padding: 0.2rem 0.5rem;
 }
 
+/* Collapsible older versions in the versions selector */
+.dropdown-older-versions {
+  padding: 0;
+}
+
+.dropdown-older-versions summary {
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--ifm-global-radius);
+  color: var(--ifm-dropdown-link-color);
+  font-size: 0.75rem;
+  font-weight: bold;
+  list-style-position: inside;
+}
+
+.dropdown-older-versions summary:hover {
+  background-color: var(--ifm-dropdown-hover-background-color);
+}
+
+.dropdown-older-versions .dropdown__link {
+  display: block;
+  padding-left: 1.25rem;
+}
+
 .footer-logos {
   width: 23px;
   height: 23px;
@@ -1726,7 +1795,20 @@ span.callout + p::after {
 
 .get > .menu__link::before {
   content: "get";
-  background-color: var(--ifm-color-primary);
+  background-color: #c54302;
+}
+
+[data-theme="dark"] .get > .menu__link::before,
+[data-theme="dark"] .patch > .menu__link::before {
+  background-color: #6e3a10;
+  border-color: #b8651f;
+  color: #f3c26a;
+}
+
+[data-theme="dark"] .put > .menu__link::before {
+  background-color: #1c3a5e;
+  border-color: #3d6fa3;
+  color: #7fb8e6;
 }
 
 .put > .menu__link::before {
@@ -1734,9 +1816,21 @@ span.callout + p::after {
   background-color: var(--openapi-code-blue);
 }
 
+[data-theme="dark"] .post > .menu__link::before {
+  background-color: #16362b;
+  border-color: #2f9e64;
+  color: #7ee2a8;
+}
+
 .post > .menu__link::before {
   content: "post";
   background-color: var(--openapi-code-green);
+}
+
+[data-theme="dark"] .delete > .menu__link::before {
+  background-color: #5c1a1a;
+  border-color: #c92a2a;
+  color: #f5b8b8;
 }
 
 .delete > .menu__link::before {
@@ -2303,6 +2397,30 @@ ul ul .table-of-contents__link--active {
   text-underline-offset: 0.12em;
 }
 
+/* Keep glossary links dotted; the generic body link rules above reset the style to solid */
+.markdown .glossary-term .glossary-term__link,
+.markdown .glossary-term .glossary-term__link:hover,
+[data-theme="dark"] .glossary-term .glossary-term__link,
+[data-theme="dark"] .glossary-term .glossary-term__link:hover {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
+/* On the glossary page, terms link to in-page anchors (no tooltip component), so style them to match */
+.docs-doc-id-reference\/glossary .markdown a[href^="#"]:not(.hash-link),
+.docs-doc-id-reference\/glossary .markdown a[href^="#"]:not(.hash-link):hover,
+.docs-doc-id-glossary .markdown a[href^="#"]:not(.hash-link),
+.docs-doc-id-glossary .markdown a[href^="#"]:not(.hash-link):hover {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
 .glossary-term__tooltip {
   --glossary-term-accent: var(--ifm-color-primary);
   --glossary-term-arrow-size: 0.75rem;
@@ -2363,8 +2481,8 @@ ul ul .table-of-contents__link--active {
 [data-theme="dark"] .glossary-term__link {
   font-weight: 600;
   text-decoration: underline dotted currentColor;
-  text-decoration-thickness: 0.07em;
-  text-underline-offset: 0.12em;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
 }
 /* Style for custom Detail collapsbiles - for example used in /docs/reference/announcements-release-notes/860/860-release-notes.md */
 .changelog-dropdown {
