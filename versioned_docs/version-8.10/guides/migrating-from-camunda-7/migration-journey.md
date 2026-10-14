@@ -277,7 +277,7 @@ Typical preparation steps include:
 
 - **Increase test coverage** of the solution to increase confidence that code conversions during migration do not break anything. This is especially important if your C7-based solutions lack good test coverage. To avoid migration effort on test cases, ideally **abstract the test cases from the Camunda version** used, either by using a small own abstraction layer, or by using a test framework such as [Cucumber](https://cucumber.io/) or [Sentinel](https://developer.hashicorp.com/sentinel/docs/intro).
 
-<!-- TODO: Mention Scenario Tests -->
+  Scenario tests, for example with [camunda-platform-scenario](https://github.com/camunda-community-hub/camunda-platform-scenario), describe what happens at each wait state instead of the exact path through the process, so they need fewer changes when the model changes. Camunda Process Test supports the same idea with [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) (8.9 or later), and the [migration agent skill](./migration-tooling/index.md#migrate-process-tests) migrates camunda-platform-scenario tests to it.
 
 - **Structural changes in your BPMN model** to make them runnable on Camunda 8. One trigger could be that you are using constructs that are not supported in Camunda 8 (for example, execution listeners on sequence flows). Or you want to get your models into a state that allows runtime data migration (see [data migration](#migrate-data-optional)), for example by adding artificial wait states before multi-instance tasks (as multiple instance is not supported for runtime data migration).
 
@@ -315,7 +315,7 @@ Depending on your architecture you might also have to **re-architect** core part
 
 <!--TODO!!! -->
 
-As part of this effort you also have to **adjust your test cases**. If you used [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-platform/tree/master/test-utils/assert), a natural choice is to migrate to [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java). You can also leverage [code conversion patterns](./migration-tooling/code-conversion.md) or [OpenRewrite recipes](https://docs.openrewrite.org/). If you use other means of testing (such as Cucumber, camunda-bpm-scenario, and so on) you must adjust accordingly.
+As part of this effort you also have to **adjust your test cases**. If you used [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-platform/tree/master/test-utils/assert), a natural choice is to migrate to [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT). The [migration agent skill](./migration-tooling/index.md#migrate-process-tests) migrates Camunda-related process and decision tests to CPT and can check them against the Camunda 7 test results. It also migrates camunda-platform-scenario tests, and it reports BDD layers such as Cucumber or JGiven for manual migration. You can also leverage [code conversion patterns](./migration-tooling/code-conversion.md) or [OpenRewrite recipes](https://docs.openrewrite.org/).
 
 The [Code Migration Detector](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/code-migration-detector) (based on ArchUnit) can check how much Camunda 7 API is used in your codebase to allow you refactor to reduce the footprint step-by-step. Ideally, you can remove any Camunda 7 dependency at the end of your refactoring.
 

@@ -10,14 +10,30 @@ import TabItem from "@theme/TabItem";
 
 Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools. You can use them in two ways:
 
-- **[Agentic migration](#agentic-migration)** (recommended): An AI coding agent uses the Diagram Converter for models and forms, then lets you select an AI-first or recipe-assisted Java migration path.
+- **[Agentic migration](#agentic-migration)** (recommended): An AI coding agent uses the Diagram Converter for models and forms, lets you select an AI-first or recipe-assisted Java migration path, and migrates your tests to Camunda Process Test (CPT).
 - **[Manual migration](#manual-migration)**: Run the individual tools yourself for full control or to handle specific migration tasks independently.
 
 All tools are available as **ready-to-use builds** from the [GitHub releases page](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
 
+## Compare agentic migration and deterministic tools
+
+This table shows which migration tasks agentic migration covers, compared with the deterministic tools that you run yourself in a [manual migration](#manual-migration). Agentic migration also runs these tools, such as the Diagram Converter, where they apply.
+
+| Task                                                           | Agentic migration | Deterministic tools |
+| :------------------------------------------------------------- | :---------------: | :-----------------: |
+| Inventory Java code and tests, and estimate effort             |        ✅         |         ❌          |
+| Analyze and convert BPMN, DMN, and Camunda 7 forms             |        ✅         |         ✅          |
+| Create Camunda 8 forms from generated task forms               |        ✅         |         ❌          |
+| Migrate Java client code, delegates, and external task workers |        ✅         |         ✅          |
+| Migrate process and decision tests to CPT                      |        ✅         |         ❌          |
+| Validate the migration and compare test results with Camunda 7 |        ✅         |         ❌          |
+| Migrate runtime instances, history, and identity data          |        ❌         |         ✅          |
+| Produce the same result for the same input                     |        ❌         |         ✅          |
+| Run without an AI coding agent                                 |        ❌         |         ✅          |
+
 ## Agentic migration
 
-The **Camunda migration agent skill** is an AI-driven orchestrator that uses the Diagram Converter CLI as the default for BPMN, DMN, and static Camunda 7 form conversion. After it inventories your Java code, you select either an AI-first, pattern-guided path or an optional recipe-assisted path.
+The **Camunda migration agent skill** is an AI-driven orchestrator that uses the Diagram Converter CLI as the default for BPMN, DMN, and static Camunda 7 form conversion. After it inventories your Java code, you select either an AI-first, pattern-guided path or an optional recipe-assisted path. It also [migrates your process tests](#migrate-process-tests) to CPT.
 
 You can run the skill with an AI coding agent such as Claude Code or GitHub Copilot CLI, or publish it to your organization as an [AWS Transform](https://docs.aws.amazon.com/transform/latest/userguide/custom.html) custom transformation. The setup and run command differ by agent, but the migration flow is the same.
 
@@ -128,12 +144,45 @@ After the inventory, select the path that fits your codebase and review capacity
 
 Run both paths on representative Java code before you use one across a broad migration. A recipe-assisted path can add scaffolding, generated names, TODOs, and cleanup. Neither path guarantees lower token use, cost, or migration time. See [Code Conversion](./code-conversion.md#choose-your-migration-approach) for detailed selection guidance.
 
+### Migrate process tests
+
+The skill migrates Camunda 7 tests to [Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) in the **Code + models** and **Code only** scopes. A test is in scope when it runs a BPMN process or a DMN decision on a Camunda 7 engine. Test migration needs Camunda 8.9 or later. With target 8.8, the skill lists the tests as **Report only**.
+
+| Camunda 7 tests                                                                                                     | What the skill does          |
+| :------------------------------------------------------------------------------------------------------------------ | :--------------------------- |
+| Engine test support (`ProcessEngineRule`, `ProcessEngineExtension`, `ProcessEngineTestCase`) and camunda-bpm-assert | Migrates to CPT              |
+| Spring Boot and Spring process tests                                                                                | Migrates to CPT              |
+| DMN decision tests (`DmnEngineRule`, `DecisionService`)                                                             | Migrates to CPT              |
+| Scenario tests (camunda-platform-scenario)                                                                          | Migrates to CPT              |
+| Tests that drive a running Camunda 7 engine through REST or the external task client                                | Migrates to CPT              |
+| BDD layers such as Cucumber and JGiven, Arquillian, CDI, and Quarkus extension tests                                | Reports for manual migration |
+| CMMN tests and tests that depend on engine internals                                                                | Reports for manual redesign  |
+
+The skill also migrates the mocks in these tests, such as camunda-platform-7-mockito and `Mocks` registrations, and by default mocks the same components in CPT. The **Test Inventory** in `MIGRATION_REPORT.md` lists each test with its handling. Tests that the skill doesn't migrate appear as **Report only**, with the reason. Unit tests that don't run an engine, such as delegate or worker unit tests, aren't part of test migration. The skill updates them as ordinary code.
+
+If at least one test can be migrated, the skill asks after the inventory whether to run the tests:
+
+| Option                        | What the skill does                                                                                                                                                                             |
+| :---------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Run tests** _(recommended)_ | Runs the Camunda 7 tests before it changes any code, test, or model, and records the results as a baseline. Migrates the tests, runs the CPT tests, and compares the results with the baseline. |
+| **Migrate tests only**        | Migrates and compiles the tests, but runs no tests. `MIGRATION_REPORT.md` marks the tests as not verified, reports `NOT READY`, and lists the steps to verify them later.                       |
+
+With **Run tests**, the skill migrates and freezes the tests before it migrates the production code. The validation gate in `MIGRATION_REPORT.md` reports `NOT READY` unless these safeguards hold:
+
+- Each Camunda 7 test that passed maps to a CPT test that passes, or you approve its removal.
+- A frozen test changes only with your approval.
+- A new mock replaces behavior that ran for real on Camunda 7 only with your approval.
+- Two CPT runs give the same results.
+- The CPT tests cover at least the process elements that the Camunda 7 tests covered, if your project measured Camunda 7 coverage.
+
+The **Test Parity** table in `MIGRATION_REPORT.md` lists each Camunda 7 test with its result and the results of its CPT tests. CPT starts the Camunda 8 runtime in Docker by default, so running the tests needs Docker or a [remote runtime](/apis-tools/testing/configuration.md#remote-runtime).
+
 ### Agent workflow
 
-1. **Assess migration scope**: Inventories BPMN/DMN diagrams, Camunda 7 `.form` files, and Java code files, and estimates effort.
+1. **Assess migration scope**: Inventories BPMN/DMN diagrams, Camunda 7 `.form` files, Java code files, and Camunda 7 tests, and estimates effort. If the agent can migrate tests, it asks whether to [run them](#migrate-process-tests).
 2. **Convert models and forms**: Runs the Diagram Converter CLI as the default. Review converted models and `REVIEW`, `WARNING`, and `TASK` findings. Do not use AI-only model conversion as the default because model capability can materially affect output and silently change model semantics.
-3. **Select and migrate code**: After inventory, select an AI-first, pattern-guided path or an optional recipe-assisted path. AI-first migration reads source code and patterns directly. Recipe-assisted migration produces a deterministic first diff for repeated, supported, primarily syntactic transformations, then needs AI or manual cleanup.
-4. **Validate migration results**: Compiles, runs tests, searches for remaining C7 references, verifies converted forms and model findings, and reviews source-to-output mappings and behavior.
+3. **Select and migrate code**: After inventory, select an AI-first, pattern-guided path or an optional recipe-assisted path. AI-first migration reads source code and patterns directly. Recipe-assisted migration produces a deterministic first diff for repeated, supported, primarily syntactic transformations, then needs AI or manual cleanup. The agent also migrates the in-scope tests to CPT.
+4. **Validate migration results**: Compiles, runs tests, searches for remaining C7 references, verifies converted forms and model findings, and reviews source-to-output mappings and behavior. With **Run tests**, it compares the CPT test results with the Camunda 7 baseline in the **Test Parity** table. With **Migrate tests only**, it compiles the tests but runs no test suite.
 5. **Fix remaining issues**: Offers to fix remaining issues, and waits for your review before each change.
 
 The agent also handles static and generated Camunda 7 forms by creating or adapting standard Camunda 8 forms and linking them from the converted BPMN models. Unsupported validation rules and ambiguous behavior are flagged for review.
