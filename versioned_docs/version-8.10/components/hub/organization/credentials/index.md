@@ -200,8 +200,9 @@ Every member of your organization who has access to Camunda Hub can see the **Cr
 
 The same members can create, edit, deploy, and delete credentials. Camunda Hub has no separate credential permission, and it doesn't check your organization role, workspace role, or environment access before it saves a credential.
 
-Hub writes a credential to a cluster with your own identity when it deploys, redeploys, or deletes it, so the cluster's own authorizations still apply:
+Hub reads from and writes to a cluster with your own identity. It does so when it scans a cluster for **Environments only** credentials, when you open the **Add to Hub** dialog, and when it deploys, redeploys, or deletes a credential. The cluster's own authorizations therefore still apply:
 
+- You can't find or open a credential on a cluster whose authorizations don't let you read its variables.
 - If a cluster refuses a deployment, Hub reports that environment as failed with the message `Not authorized to perform this operation on this cluster.`
 - If a cluster refuses to remove a credential because you lack permission or its credentials are wrong, Hub keeps the credential, so you can resolve the problem and delete it again.
 - On a Self-Managed cluster that uses Basic authentication, Hub asks you for the cluster's username and password.
