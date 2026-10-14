@@ -17,18 +17,16 @@ Using both tools together allows you to combine the best of both worlds:
 
 This workflow bridges the gap between business users and developers, ensuring smooth handoffs and better alignment across the team.
 
-<!-- TODO: update Desktop Modeler to "Project" and camunda-project.json when ready -->
+When using [Git sync](/components/hub/workspace/manage-projects/git-sync.md) to keep your project in sync between a Camunda Hub workspace and your local environment, there are a few considerations to ensure both modelers interpret the [Camunda project](/components/concepts/projects.md) (and its [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file) consistently.
 
-When using [Git sync](/components/hub/workspace/manage-projects/git-sync.md) to keep your project in sync between a Camunda Hub workspace and your local environment, there are a few considerations to ensure both modelers interpret the project (and its `.process-application` file) consistently.
+## Camunda projects
 
-## Projects and process applications
-
-| Desktop Modeler                                                                                                                                                                                                                                                                         | Camunda Hub                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A process application is represented as a folder containing a `.process-application` file. <br /><br /> With Desktop Modeler, you always [deploy process applications](/components/modeler/desktop-modeler/process-applications.md#deploying-a-process-application) as a single bundle. | A project (called "process application" before Camunda 8.10) [contains process files](/components/hub/workspace/manage-projects/manage-projects.md). <br /><br /> With Camunda Hub, you can [take snapshots](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot) and [deploy projects](/components/hub/workspace/manage-projects/deploy-project.md) as a single bundle, or you can [version](/components/hub/workspace/modeler/modeling/versions.md) and [deploy](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process) individual files within a project. |
+| Desktop Modeler                                                                                                                                                                                                                                                                                                  | Camunda Hub                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A [Camunda project](/components/concepts/projects.md) is represented as a folder containing a [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file. <br /><br /> With Desktop Modeler, you always [deploy projects](/components/modeler/desktop-modeler/projects.md#deploying-a-project) as a single bundle. | A project (called "process application" before Camunda 8.10) [contains process files](/components/hub/workspace/manage-projects/manage-projects.md). <br /><br /> With Camunda Hub, you can [take snapshots](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot) and [deploy projects](/components/hub/workspace/manage-projects/deploy-project.md) as a single bundle, or you can [version](/components/hub/workspace/modeler/modeling/versions.md) and [deploy](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process) individual files within a project. |
 
 :::tip
-Camunda recommends always including a `.process-application` file in your projects. This ensures consistent behavior across both Camunda Hub and Desktop Modeler with minimal adjustments.
+Camunda recommends always including a `camunda.json` file in your project, so Desktop Modeler and `c8ctl` recognize it when you work locally. Camunda Hub does not require the file.
 :::
 
 ## Element templates
@@ -62,8 +60,8 @@ Camunda recommends storing shared templates in a separate repository:
 
 :::note
 
-- If starting in **Desktop Modeler**, use a single folder for your process application. This makes project templates available in both modelers without extra work.
-- If starting in **Camunda Hub**, after cloning the repository manually create an empty JSON object `{}` in a file named `.process-application` in the root directory of your project/repository so Desktop Modeler can correctly recognize the project.
+- If starting in **Desktop Modeler**, use a single folder for your Camunda project. This makes project templates available in both modelers without extra work.
+- If starting in **Camunda Hub**, after cloning the repository, manually create a file named `camunda.json` that contains an empty JSON object `{}`. Place it in the folder that Git sync uses for your project: the repository root, or the configured **Repository path**. Desktop Modeler and `c8ctl` then recognize the project.
   :::
 
 ### Handling multiple template versions
@@ -80,9 +78,9 @@ Camunda recommends storing shared templates in a separate repository:
 
 ## Frequently asked questions
 
-### Do I really need a `.process-application` file if I’m only using Camunda Hub?
+### Do I really need a `camunda.json` file if I’m only using Camunda Hub?
 
-No. A `.process-application` file is only required if you plan to open the project in Desktop Modeler. Camunda Hub does not require it, but adding the file makes the project compatible across both tools.
+No. A `camunda.json` file is only required if you plan to open the project in Desktop Modeler or deploy it with `c8ctl`. Camunda Hub does not require it, but adding the file makes the project compatible across all tools.
 
 ### Can I use the same element template repository for both modelers?
 
