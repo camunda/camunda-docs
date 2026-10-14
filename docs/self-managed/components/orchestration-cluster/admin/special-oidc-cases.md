@@ -115,7 +115,7 @@ camunda:
         assertion:
           keystore:
             path: <YOUR_KEYSTORE_LOCATION>
-            password: <YOUR_KEYSTORE_LOCATION>
+            password: <YOUR_KEYSTORE_PASSWORD>
             keyAlias: <YOUR_PRIVATE_KEY_ALIAS>
             keyPassword: <YOUR_PRIVATE_KEY_PASSWORD>
 ```

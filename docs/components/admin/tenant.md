@@ -30,7 +30,7 @@ This allows administrators to set up tenants and assignments before enforcing mu
 
 How you enable multi-tenancy checks depends on your deployment model:
 
-- **SaaS**: Enable the **Multi-tenancy** toggle per cluster in [Camunda Hub cluster settings](/components/hub/organization/manage-clusters/settings.md#multi-tenancy).
+- **SaaS**: Enable the **Multi-tenancy** toggle per cluster in [Camunda Hub cluster settings](/components/saas/clusters/settings.md#multi-tenancy).
 - **Self-Managed**: Configure multi-tenancy through [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#multi-tenancy).
 
 :::warning
@@ -134,7 +134,7 @@ You can manage these assignments by selecting the relevant tab on the tenant det
 ### Assign mapping rules to a tenant
 
 :::note
-Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for [OIDC authentication in Self-Managed](../concepts/access-control/connect-to-identity-provider.md#self-managed). On SaaS, identity is managed by Camunda, so mapping rules cannot map claims from a customer identity provider.
+Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for OIDC authentication. On Self-Managed, see [OIDC authentication](../concepts/access-control/connect-to-identity-provider.md#self-managed). On SaaS, mapping rules become available after you [connect an external identity provider](/components/saas/clusters/connect-external-identity-provider.md) to the cluster.
 :::
 
 1. Select the **Mapping rules** tab.

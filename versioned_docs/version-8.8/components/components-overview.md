@@ -24,7 +24,6 @@ import OverviewImg from './assets/hero-using-camunda.png';
 import "./react-components/\_using-table.css";
 import UsingGrid from './react-components/\_using-card';
 import { featuresCards, usingCamundaCards } from './react-components/\_using-card-data';
-import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Learn how to use Camunda to orchestrate your processes.</h3>
 
@@ -82,5 +81,3 @@ Reference information for Camunda 8 SaaS, including clusters, regions, and encry
 Explore the glossary and understand definitions for key Camunda 8 terms and abbreviations.
 
 <p><a href="../reference/glossary/" class="link-arrow">Glossary</a></p>
-
-<AskAi/>

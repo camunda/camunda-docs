@@ -62,9 +62,6 @@ optimize:
         protocol: http
         host: elastic.example.com
         port: 443
-
-elasticsearch:
-  enabled: false
 ```
 
 #### Connect Optimize to external Elasticsearch with a self-signed certificate
@@ -104,9 +101,6 @@ If the Elasticsearch cluster accepts only `https` requests with a self-signed ce
            protocol: https
            host: elastic.example.com
            port: 443
-
-   elasticsearch:
-     enabled: false
    ```
 
 #### Connect Optimize to external Elasticsearch with a publicly trusted certificate
@@ -126,9 +120,6 @@ optimize:
         protocol: https
         host: elastic.example.com
         port: 443
-
-elasticsearch:
-  enabled: false
 ```
 
 ## Related tasks

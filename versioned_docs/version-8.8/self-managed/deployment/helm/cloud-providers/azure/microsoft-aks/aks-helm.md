@@ -594,7 +594,7 @@ The following values are required for OAuth authentication:
 
 The following are some advanced configuration topics to consider for your cluster:
 
-- [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md)
+- [Camunda production installation guide with Kubernetes and Helm](/self-managed/deployment/helm/install/production/index.md)
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/azure/README.md)
 
 To get more familiar with our product stack, visit the following topics:

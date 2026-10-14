@@ -15,7 +15,7 @@ This guide walks you through adjusting these settings.
 The `maxMessageSize` default value is 4MB for raw Zeebe deployments (10MB for Helm). You can configure this setting in the:
 
 - [Gateway config](../orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork)
-- [Broker config](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokernetwork)
+- [Broker config](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camundaclusternetwork)
 
 If you deploy with Helm, the chart defaults to 10MB via `global.config.requestBodySize`, applying
 this value to the Zeebe Gateway and broker message size, the REST multipart file and request size, and the Tomcat HTTP

@@ -592,6 +592,11 @@ components:
       type: object
       description: Filter criteria for searching files.
       properties:
+        fileKey:
+          description: Filter by file key.
+          x-semantic-type: FileKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:
           description: Filter by file name.
           allOf:

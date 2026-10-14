@@ -1,13 +1,13 @@
 ---
 id: backup-api
-title: "Backup API"
-sidebar_label: "Backup API"
+title: "Backup Api"
+sidebar_label: "Backup Api"
 sidebar_position: 7
 mdx:
   format: md
 ---
 
-# Backup API
+# Backup Api
 
 `BackupApi` — 22 operations. Call any of these directly on the client, or via `$client->api(\Camunda\Orchestration\Api\Api\BackupApi::class)`.
 

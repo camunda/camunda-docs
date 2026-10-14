@@ -22,18 +22,19 @@ Using Camunda Hub, you can import the following resource types into a project:
 
 These are the supported methods you can use to add files to Camunda Hub:
 
-| Method                                                                            | Opens from                                 | Import source              | Supported resources                                                       |
-| --------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------- | ------------------------------------------------------------------------- |
-| [**Import**](./preparing-resources-for-import.md)                                 | Camunda Hub `/import/resources` URL        | Any publicly available URL | Any type of resource                                                      |
-| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Camunda Hub project or folder page         | Camunda Marketplace only   | [Blueprints](./camunda-marketplace.md#browse-marketplace-blueprints) only |
-| [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Camunda Hub BPMN editor | Camunda Marketplace only   | Element templates only                                                    |
-| [**Upload files**](./import-diagram.md)                                           | Camunda Hub project or folder page         | Any downloaded file        | Any type of resource                                                      |
+| Method                                                                          | Opens from                          | Import source              | Supported resources                                                       |
+| ------------------------------------------------------------------------------- | ----------------------------------- | -------------------------- | ------------------------------------------------------------------------- |
+| [**Import**](./preparing-resources-for-import.md)                               | Camunda Hub `/import/resources` URL | Any publicly available URL | Any type of resource                                                      |
+| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints) | Camunda Hub project or folder page  | Camunda Marketplace only   | [Blueprints](./camunda-marketplace.md#browse-marketplace-blueprints) only |
+| [**Upload files**](./import-diagram.md)                                         | Camunda Hub project or folder page  | Any downloaded file        | Any type of resource                                                      |
 
-:::important
+:::note
 
-- **Import** and **Browse blueprints**: If the imported resources include at least **one BPMN**, Camunda Hub treats them as a **project** and groups them accordingly.
-- **Upload files** and **Discover connectors**: Always treats files as **independent files**, regardless of whether BPMN files are present.
-  :::
+- **Import** and **Browse blueprints**: If the imported resources include at least one BPMN file, Camunda Hub treats them as a project and groups them accordingly.
+- **Upload files**: Adds uploaded resources as independent files, regardless of whether BPMN files are present.
+- **Browse all**: Use [Browse all](./browse-all-resources.md) while modeling to find available resources. Adding a Marketplace connector adds its element templates to the current project.
+
+:::
 
 ## Template conflicts
 

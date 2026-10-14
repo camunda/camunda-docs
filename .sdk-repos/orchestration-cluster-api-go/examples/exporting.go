@@ -38,3 +38,36 @@ func getExportingStatusExample(ctx context.Context, client *camunda.CamundaClien
 	// endregion GetExportingStatus
 	return nil
 }
+
+func pauseClusterExportingExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region PauseClusterExporting
+	// Pauses exporting across all physical tenants in the cluster.
+	// While paused, reads from secondary storage stop advancing for every tenant.
+	if err := client.PauseClusterExporting(ctx); err != nil {
+		return err
+	}
+	// endregion PauseClusterExporting
+	return nil
+}
+
+func resumeClusterExportingExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region ResumeClusterExporting
+	// Resumes exporting across all physical tenants in the cluster.
+	if err := client.ResumeClusterExporting(ctx); err != nil {
+		return err
+	}
+	// endregion ResumeClusterExporting
+	return nil
+}
+
+func getClusterExportingStatusExample(ctx context.Context, client *camunda.CamundaClient) error {
+	// region GetClusterExportingStatus
+	// Retrieves the exporting status aggregated across all physical tenants in the cluster.
+	status, err := client.GetClusterExportingStatus(ctx)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("cluster exporting status: %s\n", status.GetStatus())
+	// endregion GetClusterExportingStatus
+	return nil
+}

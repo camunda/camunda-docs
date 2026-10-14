@@ -172,7 +172,7 @@ optimize:
 
 Add the section under `global.identity.auth` to the existing section you created when configuring Management Identity.
 
-#### Configure Web Modeler and Console (Camunda Hub)
+#### Configure Camunda Hub {#configure-web-modeler-and-console-camunda-hub}
 
 In Camunda 8.10, Console and Web Modeler are deployed together as sub-components of **Camunda Hub**. Enable both by setting `camundaHub.enabled: true`. This replaces the former `console.enabled` and `webModeler.enabled` flags and takes precedence over them.
 

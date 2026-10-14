@@ -29,7 +29,7 @@ You can use projects in both Camunda Hub and Desktop Modeler. However, there are
 
 ## Projects in Camunda Hub
 
-In Camunda Hub, workspaces contain projects, and projects contain files. Every file must be stored within a project:
+In Camunda Hub, [workspaces](./workspaces.md) contain projects, and projects contain files. Every file must be stored within a project:
 
 ```
 Camunda Hub
@@ -47,7 +47,7 @@ You can treat files in a project as a single bundle or as independent resources.
 
 - [Take a snapshot](../hub/workspace/manage-projects/project-versioning.md) of the current state of all project files.
 - Manage individual [file versions](../hub/workspace/modeler/modeling/versions.md).
-- [Deploy an entire project](../hub/workspace/manage-projects/deploy-project.md).
+- [Deploy an entire project](../hub/workspace/manage-projects/deploy-project.md) to an [environment](./environments.md) assigned to its workspace.
 - [Deploy individual project resources](../hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process).
 
 ## Process applications in Desktop Modeler
@@ -73,6 +73,8 @@ Unlike in Camunda Hub, all process application resources are always deployed tog
 
 Read more about how to use projects in Camunda Hub and Desktop Modeler:
 
+- [Workspaces](./workspaces.md)
+- [Environments](./environments.md)
 - [Using Camunda Hub and Desktop Modeler together](/components/modeler/using-hub-and-desktop-modeler-together.md#projects-and-process-applications)
 - [Projects in Camunda Hub](/components/hub/workspace/manage-projects/manage-projects.md)
 - [Process applications in Desktop Modeler](/components/modeler/desktop-modeler/process-applications.md)

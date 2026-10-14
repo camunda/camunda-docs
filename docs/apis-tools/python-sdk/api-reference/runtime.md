@@ -561,7 +561,7 @@ alias of [`ConnectedJobContext`](#connectedjobcontext)
 ## ConnectedJobContext
 
 ```python
-class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING, , client, clock)
+class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING, , client, clock)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -602,7 +602,7 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 | `client`                     | [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient)                   |             |
 | `clock`                      | `Clock`                                                                                              |             |
@@ -651,7 +651,7 @@ clock: Clock
 ## JobContext
 
 ```python
-class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING)
+class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING)
 ```
 
 Bases: `ActivatedJobResult`
@@ -690,7 +690,7 @@ one; see [`ConnectedJobContext`](#connectedjobcontext) and [`SyncJobContext`](#s
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 
 ### log
@@ -845,7 +845,7 @@ def stop()
 ## SyncJobContext
 
 ```python
-class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING, , client, clock)
+class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, job_lease_token, log=NOTHING, , client, clock)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -886,7 +886,7 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 | `root_process_instance_key`  | `None` \| [ProcessInstanceKey](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey) |             |
 | `business_id`                | `None` \| [BusinessId](types.md#camunda_orchestration_sdk.semantic_types.BusinessId)                 |             |
 | `priority`                   | `int`                                                                                                |             |
-| `lease_token`                | `None` \| `str`                                                                                      |             |
+| `job_lease_token`            | `None` \| [JobLeaseToken](types.md#camunda_orchestration_sdk.semantic_types.JobLeaseToken)           |             |
 | `log`                        | [SdkLogger](#sdklogger)                                                                              |             |
 | `client`                     | [CamundaClient](client.md#camunda_orchestration_sdk.CamundaClient)                                   |             |
 | `clock`                      | `Clock`                                                                                              |             |
@@ -935,7 +935,7 @@ clock: Clock
 ## WorkerConfig
 
 ```python
-class WorkerConfig(job_type, job_timeout_milliseconds=None, request_timeout_milliseconds=None, max_concurrent_jobs=None, fetch_variables=None, worker_name=None)
+class WorkerConfig(job_type, job_timeout_milliseconds=None, request_timeout_milliseconds=None, max_concurrent_jobs=None, fetch_variables=None, worker_name=None, with_lease=False)
 ```
 
 Bases: `object`
@@ -956,6 +956,7 @@ falling back to the hardcoded SDK default when neither is set.
 | `max_concurrent_jobs`          | `int` \| `None`       |             |
 | `fetch_variables`              | list [str ] \| `None` |             |
 | `worker_name`                  | `str` \| `None`       |             |
+| `with_lease`                   | `bool`                |             |
 
 ### fetch_variables
 
@@ -997,6 +998,18 @@ request_timeout_milliseconds: int | None* *= None
 
 Long-poll request timeout in milliseconds. Falls back to
 `CAMUNDA_WORKER_REQUEST_TIMEOUT` env var, then `0`.
+
+### with_lease
+
+```python
+with_lease: bool* *= False
+```
+
+Activate jobs with a lease. Each job then carries a lease token that the worker sends
+back on complete, fail, and throw-error, so the engine can fence the command against a
+superseded activation. Off by default, matching the engine. Requires a server that
+supports job leases: rather than degrade to unfenced commands, a worker that asked for a
+lease and is handed a job without a token raises `LeaseNotHonoredError`.
 
 ### worker_name
 
@@ -1140,6 +1153,12 @@ CAMUNDA_OAUTH_URL: str
 CAMUNDA_REST_ADDRESS: str
 ```
 
+### CAMUNDA_REST_ADDRESS_EXACT
+
+```python
+CAMUNDA_REST_ADDRESS_EXACT: str | bool
+```
+
 ### CAMUNDA_SDK_BACKPRESSURE_PROFILE
 
 ```python
@@ -1221,7 +1240,7 @@ ZEEBE_REST_ADDRESS: str
 ## CamundaSdkConfiguration
 
 ```python
-class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
+class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS_EXACT=False, CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
 ```
 
 Bases: `BaseModel`
@@ -1232,6 +1251,7 @@ Bases: `BaseModel`
 | ------------------------------------------- | ------------------------------------------------------------------------------ | ----------- |
 | `ZEEBE_REST_ADDRESS`                        | `str`                                                                          |             |
 | `CAMUNDA_REST_ADDRESS`                      | `str`                                                                          |             |
+| `CAMUNDA_REST_ADDRESS_EXACT`                | `bool`                                                                         |             |
 | `CAMUNDA_TOKEN_AUDIENCE`                    | `str`                                                                          |             |
 | `CAMUNDA_OAUTH_URL`                         | `str`                                                                          |             |
 | `CAMUNDA_CLIENT_ID`                         | `str` \| `None`                                                                |             |
@@ -1354,6 +1374,12 @@ CAMUNDA_OAUTH_URL: str
 
 ```python
 CAMUNDA_REST_ADDRESS: str
+```
+
+### CAMUNDA_REST_ADDRESS_EXACT
+
+```python
+CAMUNDA_REST_ADDRESS_EXACT: bool
 ```
 
 ### CAMUNDA_SDK_BACKPRESSURE_PROFILE

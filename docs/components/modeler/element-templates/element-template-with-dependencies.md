@@ -17,7 +17,7 @@ Element templates can depend on:
 - [BPMN process](/components/modeler/bpmn/bpmn.md): used in a call activity. This may introduce nested dependencies (e.g., a called process may depend on other processes and/or resources).
 - [DMN decisions](/components/modeler/dmn/dmn.md): used in business rule tasks.
 - [Job workers](/components/concepts/job-workers.md): provide behavior for service tasks such as message send events, send tasks, service tasks, business rule tasks, or custom connector runtime.
-- Secrets: used in connector elements to access sensitive values (see [secrets in self-managed](/self-managed/components/connectors/connectors-configuration.md#secrets) and [secrets in SaaS](/components/hub/organization/manage-clusters/manage-secrets.md)).
+- Secrets: used in connector elements to access sensitive values (see [secrets in self-managed](/self-managed/components/connectors/connectors-configuration.md#secrets) and [secrets in SaaS](/components/saas/clusters/manage-secrets.md)).
 
 To make a template available for use, complete two key steps:
 

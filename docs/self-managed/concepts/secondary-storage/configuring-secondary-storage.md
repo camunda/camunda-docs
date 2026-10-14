@@ -128,23 +128,25 @@ For end-to-end backend-specific examples, including PostgreSQL, MariaDB, MySQL, 
 In Self-Managed or Camunda 8 Run deployments, you can also configure storage directly in the `application.yaml` file:
 
 ```yaml
-data:
-  secondary-storage:
-    type: rdbms
-    rdbms:
-      url: jdbc:h2:file:./camunda-data/h2db
-      username: sa
-      password:
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:h2:file:./camunda-data/h2db
+        username: sa
+        password:
 ```
 
 If you choose Elasticsearch as the secondary storage backend:
 
 ```yaml
-data:
-  secondary-storage:
-    type: elasticsearch
-    elasticsearch:
-      url: http://localhost:9200/
+camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch
+      elasticsearch:
+        url: http://localhost:9200/
 ```
 
 </TabItem>

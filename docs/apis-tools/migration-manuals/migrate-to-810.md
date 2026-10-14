@@ -43,13 +43,13 @@ If you did not already migrate to the following APIs and SDKs during your 8.8 or
 
 If you already performed these migrations, proceed to [Camunda 8.10 breaking changes, deprecations, and supported environment changes](#camunda-810-breaking-changes-deprecations-and-supported-environment-changes).
 
-| 8.9 status                                                 | Component/Use                                                                       | Migrate to                  | Migrate by          |
-| :--------------------------------------------------------- | :---------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
-| <span className="label-highlight yellow">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                 | Orchestration Cluster API   | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [ZeebeClient](../migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Spring Zeebe SDK](../migration-manuals/migrate-to-camunda-spring-boot-starter.md)  | Camunda Spring Boot Starter | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Zeebe Process Test (ZPT)](../migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Job-based user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
+| 8.9 status                                                  | Component/Use                                                                       | Migrate to                  | Migrate by          |
+| :---------------------------------------------------------- | :---------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
+| <span className="badge badge--deprecated">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                 | Orchestration Cluster API   | Before Camunda 8.10 |
+| <span className="badge badge--deprecated">Deprecated</span> | [ZeebeClient](../migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
+| <span className="badge badge--deprecated">Deprecated</span> | [Spring Zeebe SDK](../migration-manuals/migrate-to-camunda-spring-boot-starter.md)  | Camunda Spring Boot Starter | Before Camunda 8.10 |
+| <span className="badge badge--deprecated">Deprecated</span> | [Zeebe Process Test (ZPT)](../migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| <span className="badge badge--deprecated">Deprecated</span> | [Job-based user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
 
 :::tip
 Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
@@ -59,15 +59,15 @@ Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8
 
 Review the actions required for the following 8.10 changes:
 
-| Type                                                              | Change                                                                                                                      |
-| :---------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| <span className="label-highlight red">Breaking change</span>      | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter)         |
-| <span className="label-highlight red">Breaking change</span>      | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)                     |
-| <span className="label-highlight red">Breaking change</span>      | [Administration API (Self-Managed) migrated](#administration-api-self-managed-migrated)                                     |
-| <span className="label-highlight orange">Behavioral change</span> | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
-| <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
-| <span className="label-highlight orange">Behavioral change</span> | [Deleting a process definition with running instances defers history deletion](#delete-draining)                            |
-| <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
+| Type                                                                  | Change                                                                                                                      |
+| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| <span className="badge badge--breaking-change">Breaking change</span> | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter)         |
+| <span className="badge badge--breaking-change">Breaking change</span> | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)                     |
+| <span className="badge badge--breaking-change">Breaking change</span> | [Administration API (Self-Managed) migrated](#administration-api-self-managed-migrated)                                     |
+| <span className="badge badge--change">Behavioral change</span>        | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
+| <span className="badge badge--change">Behavioral change</span>        | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
+| <span className="badge badge--change">Behavioral change</span>        | [Deleting a process definition with running instances defers history deletion](#delete-draining)                            |
+| <span className="badge badge--deprecated">Deprecated</span>           | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
 
 ## Breaking changes
 

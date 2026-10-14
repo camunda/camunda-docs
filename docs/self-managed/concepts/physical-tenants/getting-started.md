@@ -48,7 +48,7 @@ Confirm each of these before you start. Every item here has caused a real setup 
 <details>
 <summary>Two behaviors that are easy to miss on a first rollout</summary>
 
-- **Table and index prefixes are compared case-insensitively.** Configuring `riskprod_` for one tenant and `RISKPROD_` for another is treated as the same storage location and fails startup, not two distinct ones. Pick prefixes that are unique regardless of case.
+- **RDBMS table prefixes are compared case-insensitively.** Configuring `riskprod_` for one tenant and `RISKPROD_` for another is treated as the same storage location and fails startup, not two distinct ones. Pick table prefixes that are unique regardless of case.
 - **Elasticsearch, OpenSearch, and custom exporters need explicit per-tenant assignment.** Only the built-in Camunda exporter and the RDBMS exporter merge their configuration from the root automatically, based on the tenant's configured secondary storage type. The Elasticsearch and OpenSearch exporters are treated as custom exporters: like any custom exporter loaded from a JAR, they need a full configuration block per tenant, and that tenant must list them under its own exporter assignment configuration rather than inheriting from the root. If your secondary storage is RDBMS and you don't use any custom exporters, skip this.
 
 </details>
@@ -71,6 +71,10 @@ Before touching configuration, decide three things for the new tenant:
 For this walkthrough, the new tenant is named `riskprod`, reusing the existing Keycloak provider, with its own schema and its own authorization block.
 
 ## Configure
+
+:::tip Local development and evaluation
+To try Physical Tenants on your machine without Kubernetes, use Camunda 8 Run, directly or through c8ctl. See [configure Physical Tenants in Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#configure-physical-tenants). The rest of this guide configures Physical Tenants in a Kubernetes deployment with Helm.
+:::
 
 Add the following to your Helm values, either inline under `orchestration.configuration` or as a separate file under `orchestration.extraConfiguration`. Both approaches, and the full property list, are covered in [configure Physical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-physical-tenants.md). This example assumes the base `camunda.security.authentication` block for `default` is already in your values file. The minimum needed is storage and an assigned identity provider:
 
@@ -254,11 +258,13 @@ curl -X PATCH "https://your-cluster/actuator/cluster?physicalTenant=riskprod" \
 
 Only `riskprod`'s partition group changes. See [scale a cluster with multiple Physical Tenants](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants) for broker count, replication factor, and the other scaling dimensions.
 
-**Back up `riskprod` specifically:** call the tenant-scoped endpoint rather than the cluster-wide one, `POST /physical-tenants/riskprod/v2/backups/history`, using a role granted both `BACKUP:CREATE` and `EXPORTER:PAUSE` (exporting must pause for the duration of a history backup). See [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants) for the full endpoint reference and required permissions.
+**Back up `riskprod` specifically:** call the tenant-scoped endpoint rather than the cluster-wide one, `POST /physical-tenants/riskprod/v2/backups/history`, using a role granted both `BACKUP:CREATE` and `EXPORTER:PAUSE` (exporting must pause for the duration of a history backup). The history backup endpoint is available only with Elasticsearch or OpenSearch as secondary storage. With RDBMS, back up the tenant's schema, database, or table prefix with the database's own tooling. See [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) for the full endpoint reference and required permissions.
 
-**Restore `riskprod` without affecting `default`:** the recovery-mode and restore endpoints target one tenant at a time by default. Prefix them with `/physical-tenants/riskprod`. See [restore a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants) for the full procedure. This is destructive to the targeted tenant's data. Follow that guide directly rather than improvising from this summary.
+**Restore `riskprod` without affecting `default`:** the recovery-mode and restore endpoints target one tenant at a time by default. Prefix them with `/physical-tenants/riskprod`. See [restore a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) for the full procedure. This is destructive to the targeted tenant's data. Follow that guide directly rather than improvising from this summary.
 
 **Add a third tenant:** add its configuration block (following the same shape as `riskprod` above) and apply with a rolling restart. It's provisioned automatically, with no separate creation step. Removing a tenant from configuration disables it and retains its data; re-adding it later re-enables the tenant with that same data intact. There's no permanent-delete operation in this release. An actuator endpoint can logically remove an already-disabled tenant from the cluster topology (useful so a disabled tenant doesn't block operations like multi-region failover), but it deletes no data. See [disable, rename, and delete](./provisioning-and-lifecycle.md#disable-rename-and-delete).
+
+Before adding more tenants, check broker memory, database connections, and noisy-neighbor limits in [size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md).
 
 Once you're validating a third tenant's rollout, check its topology alongside the cluster's overall status: `GET /physical-tenants/<id>/v2/topology` for the tenant, `GET /cluster/v2/topology` for the whole cluster (requires [cluster admin](/components/admin/cluster-admin.md) access).
 
@@ -268,7 +274,7 @@ For issues beyond this specific setup flow, see [troubleshoot Physical Tenants](
 
 | Symptom                                                                           | Likely cause                                                                                                      | Fix                                                                                                                                                                                                              |
 | :-------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Startup fails naming `riskprod` and another tenant sharing a storage location     | Two tenants resolved to the same schema, database, or index prefix, including two prefixes differing only by case | Pick a schema or prefix unique regardless of case. See [validation and operations](./storage-isolation.md#validation-and-operations).                                                                            |
+| Startup fails naming `riskprod` and another tenant sharing a storage location     | Two tenants resolved to the same schema, database, or index prefix, or to RDBMS prefixes that differ only by case | Pick a unique schema or prefix. RDBMS table prefixes must also differ by more than case. See [validation and operations](./storage-isolation.md#validation-and-operations).                                      |
 | Startup fails: `riskprod` must declare `providers.assigned`                       | A non-default tenant was configured without assigning an identity provider                                        | Add `security.authentication.providers.assigned` under `riskprod`, even if it reuses the cluster's only provider. See [identity provider assignment](./authentication-authorization.md#idp-provider-assignment). |
 | First login to `riskprod` fails at the identity provider, before reaching Camunda | The tenant's redirect URI was never registered                                                                    | Register `/physical-tenants/riskprod/sso-callback` in your identity provider. See [identity provider redirect URI registration](./authentication-authorization.md#idp-redirect-uri-registration).                |
 | A user with a role in `riskprod` gets `403` in `default`, or vice versa           | Expected behavior, not a bug                                                                                      | Authorization is per tenant by design. Grant the role in each tenant where the user needs access.                                                                                                                |
@@ -290,6 +296,7 @@ For issues beyond this specific setup flow, see [troubleshoot Physical Tenants](
 - [Configuration reference](./configuration-reference.md)
 - [Provisioning and lifecycle](./provisioning-and-lifecycle.md)
 - [Storage isolation](./storage-isolation.md)
+- [Size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md)
 - [Authentication and authorization](./authentication-authorization.md)
 - [API routing](./api-routing.md)
 - [Troubleshoot Physical Tenants](./troubleshooting.md)

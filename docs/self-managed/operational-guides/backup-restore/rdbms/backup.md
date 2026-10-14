@@ -40,7 +40,7 @@ The following prerequisites are required before you can create a backup.
 
 | Prerequisite                                    | Description                                                                                                                                                                                                                                                                         |
 | :---------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Configure Zeebe backup storage.                 | Configure the backup storage for Zeebe. This is required regardless of your secondary storage choice. See [Zeebe backup configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackup).                                         |
+| Configure Zeebe backup storage.                 | Configure the backup storage for Zeebe. This is required regardless of your secondary storage choice. See [Zeebe backup configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camundadataprimary-storagebackup).                              |
 | Enable continuous backups                       | Enable continuous backups. See [Zeebe scheduler configuration](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).                                                                                              |
 | (Recommended) Configure Zeebe scheduled backup. | Configure Zeebe's internal primary storage backup scheduler. See [Zeebe scheduler configuration](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).                                                            |
 | Set up RDBMS backups.                           | You are responsible for backing up the RDBMS using your database vendor's native tools (for example, `pg_dump`, `mysqldump`, `RMAN`). Back up the **entire Camunda database**, including all component tables. Schedule RDBMS backups at a similar frequency to your Zeebe backups. |
@@ -105,7 +105,7 @@ export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_CONTINUOUS=true
 
 ### Checkpoint interval
 
-The checkpoint interval controls how frequently Zeebe injects marker checkpoints into the log stream. These markers serve as potential restore points — since a cluster can only be restored to a checkpoint that exists on all partitions, more frequent markers enable finer-grained [point-in-time restore](./restore.md#point-in-time-restore).
+The checkpoint interval controls how frequently Zeebe injects marker checkpoints into the log stream. These markers serve as potential restore points — since a cluster can only be restored to a checkpoint that exists on all partitions, more frequent markers enable finer-grained [point-in-time restore](./restore-api.md#trigger-the-restore).
 
 ```yaml
 camunda:
@@ -129,7 +129,7 @@ Use the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-s
 
 ### Scheduled backup
 
-Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range trackin, this ensures you always have backup ranges available for disaster recoveryg.
+Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range tracking. This ensures you always have backup ranges available for disaster recovery.
 Both should be enabled together for a complete backup strategy. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
 
 #### Recommended configuration

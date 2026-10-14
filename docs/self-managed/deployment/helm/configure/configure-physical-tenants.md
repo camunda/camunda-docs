@@ -11,12 +11,16 @@ This page describes Physical Tenants, the strong isolation model for separate te
 
 The Helm chart does not expose a dedicated `physicalTenants.*` values schema. Configure Physical Tenants by passing the same `camunda.physical-tenants.<tenant-key>.*` properties documented in the [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md), either as a raw `application.yaml` block, as a standalone extra configuration file, or as environment variables.
 
+This page covers delivery: how to get tenant configuration into the Orchestration Cluster pod. Declaring a tenant also changes the shape of your deployment, because each tenant needs its own Optimize release and its own index prefixes, and adding or removing one is an ordered operation across several releases. For that, see [configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md).
+
 ## Prerequisites
 
 - A running Camunda 8 Self-Managed Helm deployment.
 - Read the [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md) and [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md) first — this page only shows how to deliver that same configuration through Helm.
 
 ## Configure via `orchestration.configuration`
+
+`orchestration.configuration` replaces the chart's default application configuration, so include every property your deployment needs. To keep the chart defaults, use [`orchestration.extraConfiguration`](#configure-via-orchestrationextraconfiguration) instead. For details, see [Configure component configuration](/self-managed/deployment/helm/configure/application-configs.md#componentnameconfiguration).
 
 Set `orchestration.configuration` to the full `application.yaml` content, including the root-level and per-tenant `camunda.physical-tenants.*` blocks:
 
@@ -209,3 +213,5 @@ Environment variables and `orchestration.configuration` can be combined. Use the
 - [Set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md)
 - [Configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md)
 - [Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md)
+- [Configure Physical Tenants across releases](/self-managed/deployment/helm/install/topology/physical-tenants.md)
+- [Install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md)

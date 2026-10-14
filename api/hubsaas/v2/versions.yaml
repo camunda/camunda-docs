@@ -503,13 +503,17 @@ components:
       required:
         - fileKey
       properties:
+        versionKey:
+          description: Filter by version key.
+          x-semantic-type: VersionKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         fileKey:
           description: >
-            Filter by file key. This is a required filter — versions
-            cannot be searched across files.
+            Filter by file key. This is a required filter — versions cannot be searched across files.
           x-semantic-type: FileKey
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:
           description: Filter by version name.
           allOf:

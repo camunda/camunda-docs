@@ -1,0 +1,347 @@
+---
+id: get-project-snapshot-external-resources
+title: "Check whether a project snapshot references external resources"
+description: "Reports whether this project snapshot references resources that live outside the snapshot itself: forms, call activities, business rule tasks, and RPA resources. `false` for each flag means the snapshot does not reference anything of that kind outside itself."
+sidebar_label: "Check whether a project snapshot references external resources"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Check whether a project snapshot references external resources"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/project-snapshots/{projectSnapshotKey}/external-resources"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Reports whether this project snapshot references resources that live outside the snapshot itself: forms, call activities, business rule tasks, and RPA resources. `false` for each flag means the snapshot does not reference anything of that kind outside itself.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "projectSnapshotKey",
+      in: "path",
+      required: true,
+      description: "The unique key of the project snapshot.",
+      schema: {
+        description: "System-generated key for a project snapshot.",
+        type: "string",
+        format: "ProjectSnapshotKey",
+        "x-semantic-type": "ProjectSnapshotKey",
+        example: "9c2f1b44-1f0e-4a9b-86bb-0d0a4a2c1f77",
+        title: "ProjectSnapshotKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The external resource report was returned successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            description:
+              "Whether a project snapshot references resources outside the snapshot itself. Each flag is independent. All four `false` means no external reference was detected.\n",
+            example: {
+              hasRefToExternalForms: false,
+              hasRefToExternalCallActivities: true,
+              hasRefToExternalBusinessRuleTasks: false,
+              hasRefToExternalRpaResources: false,
+            },
+            required: [
+              "hasRefToExternalForms",
+              "hasRefToExternalCallActivities",
+              "hasRefToExternalBusinessRuleTasks",
+              "hasRefToExternalRpaResources",
+            ],
+            properties: {
+              hasRefToExternalForms: {
+                description:
+                  "Whether a BPMN process in the snapshot references a form that is not defined within the snapshot itself, whether or not that form exists anywhere else.\n",
+                type: "boolean",
+              },
+              hasRefToExternalCallActivities: {
+                description:
+                  "Whether a BPMN process in the snapshot references, via a call activity, a process that is not defined within the snapshot itself, whether or not that process exists anywhere else.\n",
+                type: "boolean",
+              },
+              hasRefToExternalBusinessRuleTasks: {
+                description:
+                  "Whether a BPMN process in the snapshot references a DMN decision that is not defined within the snapshot itself, whether or not that decision exists anywhere else.\n",
+                type: "boolean",
+              },
+              hasRefToExternalRpaResources: {
+                description:
+                  "Whether a BPMN process in the snapshot references an RPA resource that is not defined within the snapshot itself, whether or not that resource exists anywhere else.\n",
+                type: "boolean",
+              },
+            },
+            title: "ProjectSnapshotExternalResourcesResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
