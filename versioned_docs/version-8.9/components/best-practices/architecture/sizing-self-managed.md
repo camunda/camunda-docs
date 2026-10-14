@@ -167,7 +167,7 @@ Optimize does not support RDBMS as its data source, so running Optimize alongsid
 |                              | Disk request \[GB\] |         |   256 |
 
 :::note
-In this configuration, Elasticsearch only supports Optimize because PostgreSQL handles all primary Camunda data. The Elasticsearch row above uses the same resources as the Elasticsearch-only baseline. A smaller Elasticsearch instance may be sufficient, but we haven’t tested this. Treat the row above as a safe but untested starting point if you need Optimize with an RDBMS, and validate any reduction with [your own benchmarks](sizing-benchmarks.md).
+In this configuration, Elasticsearch only serves Optimize because PostgreSQL handles all primary Camunda data, but its resources are not reduced for that. The Elasticsearch row above is the same sizing as the Elasticsearch-only baseline, which covers primary export traffic and Optimize. A smaller Elasticsearch instance may be sufficient, but we haven’t tested this. Treat the row above as a safe but untested starting point if you need Optimize with an RDBMS, and validate any reduction with [your own benchmarks](sizing-benchmarks.md).
 :::
 
 </TabItem>
