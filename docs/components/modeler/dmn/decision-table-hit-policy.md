@@ -72,12 +72,12 @@ the first matching rule; you must design the rules so that at most one can match
 For example, the following table is valid under Unique because the seasons are mutually exclusive, so at most one
 rule can match:
 
-| Season | Dish              |
-| ------ | ----------------- |
-| Spring | Steak             |
-| Summer | Light salad       |
-| Autumn | Stew              |
-| Winter | Roast beef        |
+| Season | Dish        |
+| ------ | ----------- |
+| Spring | Steak       |
+| Summer | Light salad |
+| Autumn | Stew        |
+| Winter | Roast beef  |
 
 In contrast, a table with overlapping conditions such as:
 
