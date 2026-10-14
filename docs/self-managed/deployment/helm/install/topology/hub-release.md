@@ -2,18 +2,18 @@
 id: hub-release
 sidebar_label: "Install the Hub release"
 title: "Install the Camunda Hub release"
-description: "Install the Hub plane: a Helm release with global.topology.mode set to hub, running Camunda Hub and Management Identity."
+description: "Install the management plane: a Helm release with global.topology.mode set to hub, running Camunda Hub and Management Identity."
 ---
 
-The Hub release is the Hub plane. It runs Camunda Hub and Management Identity, and it owns the inventory of every Orchestration Cluster in the deployment.
+The Hub release is the [management plane](/reference/glossary.md#management-plane). It runs Camunda Hub and Management Identity and owns the inventory of every Orchestration Cluster in the deployment.
 
-Install it first. For the prerequisites, Secrets, and network policies this page assumes, see [install the deployment topology](./index.md).
+When creating a new topology, install the Hub release before its Orchestration Cluster releases. For the prerequisites, Secrets, and network policies this page assumes, see [install the deployment topology](./index.md).
 
 ## What a Hub release deploys
 
 A Hub release runs Camunda Hub and Management Identity, and nothing else. It always uses the 8.10 chart, even when it manages Orchestration Clusters on older chart versions. Upgrading from 8.9? See [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md).
 
-After you [create `hub-values.yaml`](#create-hub-valuesyaml), the release role it sets, `global.topology.mode: hub`, suppresses the chart's Orchestration Cluster, Optimize, and Connectors workloads. You don't configure them here. A Hub release has these requirements:
+After you [create `hub-values.yaml`](#create-hub-valuesyaml), the release role it sets, `global.topology.mode: hub`, suppresses the chart's Orchestration Cluster, Optimize, and Connectors workloads, so you don't configure them here. The release requires the following:
 
 | Requirement                                           | Reason                                                             |
 | ----------------------------------------------------- | ------------------------------------------------------------------ |
@@ -21,13 +21,15 @@ After you [create `hub-values.yaml`](#create-hub-valuesyaml), the release role i
 | OIDC authentication                                   | Hub topology connections are represented with OIDC bearer tokens   |
 | The only release declaring `global.topology.clusters` | One authoritative inventory prevents client and endpoint drift     |
 
-The chart fails the render with a `[camunda][error]` message if `identity.enabled` isn't `true`, or if authentication isn't OIDC. The chart doesn't check that `global.topology.clusters` is set. A Hub release without clusters renders, but Camunda Hub then lists no Orchestration Clusters.
+The chart fails the render with a `[camunda][error]` message if `identity.enabled: true` or OIDC authentication is missing. It doesn't check that `global.topology.clusters` is set. Without clusters, Camunda Hub lists no Orchestration Clusters.
 
 ## The cluster record
 
 Each entry in `global.topology.clusters` is the single source for both Management Identity presets and Camunda Hub inventory, so client IDs, audiences, roles, and endpoints can't drift apart.
 
 Each record declares a stable unique `id`, the enabled workload components with their client and audience identifiers, the context paths, and the namespace and release name used to derive service endpoints.
+
+Each component in a cluster record needs its own client ID, and the `orchestration` and `optimize` components also need an audience. Regardless of the identity provider, every client ID and audience must be unique: the chart rejects a value that another component, another record, or one of the Hub release's own clients already uses. The chart defaults, such as `orchestration` and `orchestration-api`, can belong to one record at most. Give the other records their own, for example `orchestration-<id>`, `optimize-<id>`, and `connectors-<id>`. With Keycloak, clients with the same ID in one realm would also be one client, so the clusters would overwrite each other's redirect URLs.
 
 | Field                             | Purpose                                                                                        |
 | --------------------------------- | ---------------------------------------------------------------------------------------------- |
@@ -44,7 +46,7 @@ Each record declares a stable unique `id`, the enabled workload components with 
 
 ## Create `hub-values.yaml`
 
-Create a values file that sets the `hub` role, configures Camunda Hub and Management Identity, and declares one record for each Orchestration Cluster the Hub manages:
+Create a values file that sets the `hub` role, configures Camunda Hub and Management Identity, and declares one record for each Orchestration Cluster the Hub manages. The cluster records can describe Orchestration Clusters in different environments:
 
 ```yaml
 global:
@@ -165,10 +167,10 @@ Adapt the Keycloak endpoints and client configuration for your environment. See 
 ## Describe a chart 8.7 cluster
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](./index.md#minimum-chart-versions).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 :::
 
-An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, 8.9, and 8.10 charts. Records for 8.8, 8.9, and 8.10 clusters all take the standard shape shown above.
+An 8.10 Hub manages Orchestration Cluster releases on the 8.7, 8.8, 8.9, and 8.10 charts. Records for 8.8, 8.9, and 8.10 clusters all take the standard shape shown above. To connect releases that already run, see [connect existing clusters to Hub](/self-managed/upgrade/helm/connect-existing-clusters.md).
 
 Chart 8.7 predates the unified Orchestration Cluster, so it runs Zeebe, Zeebe Gateway, Operate, and Tasklist as separate workloads on separate services. Its record needs `architecture: legacy` and the names of those services:
 

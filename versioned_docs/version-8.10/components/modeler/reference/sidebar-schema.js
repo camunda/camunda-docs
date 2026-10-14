@@ -1,0 +1,24 @@
+module.exports = {
+  Reference: [
+    {
+      type: "category",
+      label: "Modeling guidance",
+      link: {
+        type: "doc",
+        id: "components/modeler/reference/modeling-guidance/index",
+      },
+      items: [
+        "components/modeler/reference/modeling-guidance/rules/agent-fromai-contract",
+        "components/modeler/reference/modeling-guidance/rules/agent-tool-documentation",
+        "components/modeler/reference/modeling-guidance/rules/agent-tool-output-key",
+        "components/modeler/reference/modeling-guidance/rules/called-element",
+        "components/modeler/reference/modeling-guidance/rules/element-type",
+        "components/modeler/reference/modeling-guidance/rules/error-reference",
+        "components/modeler/reference/modeling-guidance/rules/escalation-reference",
+        "components/modeler/reference/modeling-guidance/rules/feel",
+        "components/modeler/reference/modeling-guidance/rules/message-reference",
+        "components/modeler/reference/modeling-guidance/rules/no-loop",
+      ],
+    },
+  ],
+};

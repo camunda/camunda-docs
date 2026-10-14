@@ -7,7 +7,7 @@ description: Install Camunda 8 Self-Managed on Kubernetes using the Helm chart w
 
 Use this guide to quickly install the Camunda 8 orchestration cluster for testing and development.
 
-<!-- TODO: add links to explain the orchestration cluster and management cluster -->
+<!-- TODO: add links to explain the Orchestration Cluster and management plane -->
 
 :::tip Need a Kubernetes cluster?
 If you don't have a Kubernetes cluster yet, check out our setup guides:

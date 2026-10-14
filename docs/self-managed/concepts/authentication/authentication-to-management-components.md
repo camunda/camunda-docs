@@ -7,20 +7,21 @@ description: "Learn about authentication methods for management and modeling com
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ManagementIdentityAvailability from '../../components/management-identity/\_partials/\_management-identity-availability.md';
 
-The Camunda 8 management and modeling components authenticate with the same `camunda.security.*` settings as the [Orchestration Cluster](authentication-to-orchestration-cluster.md). This includes components such as [Camunda Hub](/self-managed/components/hub/index.md) and [Optimize](/self-managed/components/optimize/overview.md).
+[Optimize](/self-managed/components/optimize/overview.md) authenticates with the same `camunda.security.*` settings as the [Orchestration Cluster](authentication-to-orchestration-cluster.md). [Camunda Hub](/self-managed/components/hub/index.md) keeps its own authentication properties in 8.10; see [Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md) for details.
 
-In 8.10, these shared settings cover authentication only. User, group, role, tenant, and permission management for Camunda Hub and Optimize stays in [Management Identity](/self-managed/components/management-identity/overview.md). The Orchestration Cluster is not affected, because it manages its own users, groups, roles, and authorizations.
+User, group, role, tenant, and permission management for Camunda Hub and Optimize stays in [Management Identity](/self-managed/components/management-identity/overview.md). The Orchestration Cluster is not affected, because it manages its own users, groups, roles, and authorizations.
 
 ## Authentication and user management
 
 Authentication and user management are handled separately:
 
-| Concern                                                 | Handled by                                                                      |
-| :------------------------------------------------------ | :------------------------------------------------------------------------------ |
-| Authenticating users and clients                        | The component itself, configured under `camunda.security.authentication.*`      |
-| Managing users, groups, roles, tenants, and permissions | [Management Identity](/self-managed/components/management-identity/overview.md) |
-| Storing user identities and issuing tokens              | Your Identity Provider (IdP)                                                    |
+| Concern                                                 | Handled by                                                                                                        |
+| :------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------- |
+| Authenticating users and clients                        | The component itself. Optimize uses `camunda.security.authentication.*`, and Camunda Hub uses its own properties. |
+| Managing users, groups, roles, tenants, and permissions | [Management Identity](/self-managed/components/management-identity/overview.md)                                   |
+| Storing user identities and issuing tokens              | Your Identity Provider (IdP)                                                                                      |
 
 Management Identity is still required for the management and modeling components. For more information, see [manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md).
 
@@ -32,13 +33,15 @@ Authentication relies on the **OpenID Connect (OIDC)** and **OAuth 2.0** protoco
 
 Three primary setups are supported:
 
-- Use Keycloak as the default built-in Identity Provider (IdP).
-- Configure the built-in Keycloak to connect to an external IdP.
+- Use Keycloak as the default Identity Provider (IdP).
+- Configure Keycloak to connect to an external IdP.
 - Connect directly to an external OIDC IdP.
 
-## Use Keycloak as default (built-in) IdP
+## Use Keycloak as the default IdP
 
-This is the default authentication setup for Self-Managed installation methods, including [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deployment/helm/index.md) and [Manual installation](/self-managed/deployment/manual/install.md). It comes with a pre-packaged Keycloak instance that acts as the Identity Provider.
+Management Identity uses Keycloak as its Identity Provider (IdP) by default. With Helm, Keycloak is an option. The Helm default is Basic authentication. See [Helm chart authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
+
+<ManagementIdentityAvailability />
 
 In this setup:
 
@@ -54,7 +57,7 @@ For more information, see [connect to an existing Keycloak instance](/self-manag
 
 ## Connect to an external IdP via Keycloak
 
-You can configure the built-in Keycloak to act as an identity broker, connecting to an external corporate Identity Provider. This allows you to leverage your existing user base from providers that support protocols like **SAML**, **LDAP**, or **OpenID Connect**.
+You can configure Keycloak to act as an identity broker, connecting to an external corporate Identity Provider. This allows you to leverage your existing user base from providers that support protocols like **SAML**, **LDAP**, or **OpenID Connect**.
 
 In this setup, Keycloak remains the direct IdP for Camunda management and modeling components, but it delegates the authentication process to your configured external provider.
 
@@ -79,7 +82,7 @@ In this setup:
 - Clients for M2M authentication are managed in your external IdP.
 
 :::tip Recommendation
-If you have configured the [authentication to Orchestration Cluster](authentication-to-orchestration-cluster.md#oidc) with an external OIDC provider, we recommend using the same provider for the management and modeling components. Both read the same `camunda.security.authentication.oidc.*` settings, so you maintain one authentication configuration and manage users in one place.
+If you have configured the [authentication to Orchestration Cluster](authentication-to-orchestration-cluster.md#oidc) with an external OIDC provider, we recommend using the same provider for the management and modeling components. Optimize reads the same `camunda.security.authentication.oidc.*` settings, so you maintain one authentication configuration and manage users in one place. Camunda Hub connects to the same provider through its own properties; see [Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md).
 :::
 
 :::info

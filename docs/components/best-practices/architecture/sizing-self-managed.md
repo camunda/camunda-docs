@@ -270,7 +270,7 @@ Exporting occurs only on the partition leader. Followers do not delete their rep
 
 ### Snapshots
 
-The running state of a partition is captured periodically on the leader. By default, a snapshot is taken every five minutes, as configured by `snapshot-period`. A snapshot is a projection of all events that represent the current running state, including deployed processes, active process instances, and jobs that have not yet been completed. Writing a new snapshot deletes all log data written before the snapshot.
+The running state of a partition is captured periodically on each broker. By default, a snapshot is taken every five minutes, as configured by `snapshot-period`. A snapshot is a projection of all events that represent the current running state, including deployed processes, active process instances, and jobs that have not yet been completed. Writing a new snapshot deletes all log data written before the snapshot.
 
 :::note
 The snapshot interval was tested in a Zeebe Chaos experiment. Learn more in the [Zeebe Chaos blog](https://camunda.github.io/zeebe-chaos/2022/02/01/High-Snapshot-Frequency/#snapshot-interval).
@@ -339,6 +339,8 @@ camunda:
 :::caution
 `FRACTION` splits its budget across **all** partitions on a broker, the same way `BROKER` does. Unlike `PARTITION`, it does not scale up with partition count. On a broker with many partitions but modest total memory, a flat 10% fraction can allocate less RocksDB memory than a previously tuned fixed limit would have. An optional minimum-floor setting for `FRACTION` is proposed in [camunda/camunda#57768](https://github.com/camunda/camunda/issues/57768) (open) to address exactly this; until it ships, verify the resulting absolute memory is enough for your partition count, and fall back to an explicit `..._MEMORYLIMIT` if it isn't.
 :::
+
+If you run multiple Physical Tenants, every tenant's partitions count toward the partitions on a broker, and each partition needs a minimum share of RocksDB memory. See [size clusters with Physical Tenants](sizing-physical-tenants.md#size-rocksdb-memory) for the minimum and the other budgets that grow with tenant count.
 
 ## Scale your cluster
 

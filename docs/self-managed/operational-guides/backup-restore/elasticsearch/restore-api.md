@@ -17,6 +17,7 @@ import RestoreTemplates from '../\_partials/\_es-restore-templates.md';
 import StopOptimize from '../\_partials/\_es-stop-optimize.md';
 import DeleteIndices from '../\_partials/\_es-delete-indices.md';
 import RestoreSnapshotsAction from '../\_partials/\_es-restore-snapshots-action.md';
+import FewerPartitions from '../\_partials/\_restore-api-fewer-partitions.md';
 
 Restore Zeebe partition data through the Orchestration Cluster Restore API without restarting the brokers, when using Elasticsearch or OpenSearch as secondary storage.
 
@@ -37,15 +38,15 @@ Both requests are non-blocking. Each is acknowledged as soon as the cluster acce
 
 In addition to the [general restore prerequisites](./restore.md#prerequisites), the Restore API requires the following:
 
-| Prerequisite     | Description                                                                                                                                                                                                                    |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version  | Camunda 8.10 or later, restored with the exact version the backup was created with.                                                                                                                                            |
-| Backup store     | Every broker is configured with the same backup store that holds the Zeebe backup, and Elasticsearch/OpenSearch is configured with the same snapshot repository as the backup. See [prerequisites](./backup.md#prerequisites). |
-| Sizing           | Elasticsearch/OpenSearch should be sized the same or larger than the original cluster; a smaller cluster can prevent shards from being assigned and fail the restore.                                                          |
-| Optimize stopped | Optimize must be stopped before you restore the Elasticsearch/OpenSearch snapshots in [step 3](#restore-es-snapshots-step); every other component keeps running in recovery mode.                                              |
-| Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged.                                                    |
-| API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                                                 |
-| Authorizations   | If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                                                                    |
+| Prerequisite     | Description                                                                                                                                                                                                                                                            |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda version  | Camunda 8.10 or later, restored with the exact version the backup was created with.                                                                                                                                                                                    |
+| Backup store     | Every broker is configured with the same backup store that holds the Zeebe backup, and Elasticsearch/OpenSearch is configured with the same snapshot repository as the backup. See [prerequisites](./backup.md#prerequisites).                                         |
+| Sizing           | Elasticsearch/OpenSearch should be sized the same or larger than the original cluster; a smaller cluster can prevent shards from being assigned and fail the restore.                                                                                                  |
+| Optimize stopped | Optimize must be stopped before you restore the Elasticsearch/OpenSearch snapshots in [step 3](#restore-es-snapshots-step); every other component keeps running in recovery mode.                                                                                      |
+| Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged. See [restoring a backup with fewer partitions](#restoring-a-backup-with-fewer-partitions). |
+| API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                                                                                         |
+| Authorizations   | If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                                                                                                            |
 
 ## Restoring an Elasticsearch/OpenSearch-backed cluster
 
@@ -242,5 +243,9 @@ A dry run rejects requests without a backup ID, with multiple backup IDs, or wit
 ## Handling a failed Restore API operation
 
 <FailedRestore />
+
+### Restoring a backup with fewer partitions
+
+<FewerPartitions />
 
 <RestoreHub />

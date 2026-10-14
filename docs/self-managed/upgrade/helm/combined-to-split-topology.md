@@ -2,10 +2,10 @@
 id: combined-to-split-topology
 sidebar_label: Move to the split topology
 title: Move from a combined release to the split topology
-description: Plan and execute the move from a single combined Camunda 8.10 Helm release to separate Hub, Orchestration Cluster, and Optimize releases.
+description: Move a single combined Camunda 8.10 Helm release to separate Hub and Orchestration Cluster releases, and optionally to separate Optimize releases.
 ---
 
-Move an existing single-release Camunda 8.10 deployment to the split topology: one Hub release, one release per Orchestration Cluster, and one Optimize release per Physical Tenant.
+Move an existing single-release Camunda 8.10 deployment to the split topology: one Hub release and one release per Orchestration Cluster. If the combined release runs Optimize, Optimize either stays in the orchestration release, or moves to one Optimize release per Physical Tenant.
 
 This is a topology change, not a version upgrade. It doesn't change any component version, and it isn't required. A `combined` release remains both supported and the chart default.
 
@@ -18,24 +18,26 @@ The hard part of this move is data, not values. Orchestration Cluster broker vol
 Make it when you need something the combined release can't give you:
 
 - Several Orchestration Clusters sharing one Camunda Hub and one Management Identity.
-- Independent upgrade, scaling, or removal of a cluster without touching the Hub plane.
+- Independent upgrade, scaling, or removal of a cluster without touching the management plane.
 - Physical Tenants with a separate Optimize instance per tenant.
 
 If none of those apply, staying on a combined release is a fully supported long-term choice.
 
 ## Prerequisites
 
-| Prerequisite                | Detail                                                                                                                                                                                                            |
-| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Already on 8.10 and healthy | Complete [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md) first. Don't combine a version upgrade with a topology change                                                        |
-| External data services      | Management Identity and Camunda Hub databases, and Orchestration Cluster secondary storage, all externally managed. An 8.10 release already meets this requirement. See [external databases](#external-databases) |
-| OIDC with a pinned issuer   | Basic authentication isn't supported for Hub topology connections or Physical Tenants. See [pin the issuer](/self-managed/deployment/helm/install/topology/orchestration-release.md#pin-the-issuer)               |
-| Tested backup and restore   | A verified restore of every data store: broker volumes, secondary storage, and both relational databases                                                                                                          |
-| A non-production rehearsal  | Run the whole procedure against a copy of your production configuration before you touch production                                                                                                               |
+| Prerequisite                | Detail                                                                                                                                                                                                      |
+| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Already on 8.10 and healthy | Complete [upgrade Camunda 8.9 to 8.10 using Helm](/self-managed/upgrade/helm/890-to-8100.md) first. Don't combine a version upgrade with a topology change                                                  |
+| External data services      | Management Identity and Camunda Hub databases, and Orchestration Cluster secondary storage, all externally managed. See [migrate off the bundled databases first](#migrate-off-the-bundled-databases-first) |
+| OIDC with a pinned issuer   | Basic authentication isn't supported for Hub topology connections or Physical Tenants. See [pin the issuer](/self-managed/deployment/helm/install/topology/orchestration-release.md#pin-the-issuer)         |
+| Tested backup and restore   | A verified restore of every data store: broker volumes, secondary storage, and both relational databases                                                                                                    |
+| A non-production rehearsal  | Run the whole procedure against a copy of your production configuration before you touch production                                                                                                         |
 
-## External databases
+This procedure applies only to releases on the 8.10 chart. It doesn't apply to releases on the 8.7, 8.8, or 8.9 chart. See [releases on an earlier chart](#releases-on-an-earlier-chart).
 
-The Hub release takes over the Management Identity and Camunda Hub databases that the combined release uses. Chart 15.x doesn't include the bundled Bitnami PostgreSQL subcharts. Thus, an 8.10 combined release already uses external databases for Management Identity and Camunda Hub.
+## Migrate off the bundled databases first
+
+The Hub release takes over the Management Identity and Camunda Hub databases the combined release already uses, so those databases must live outside the Helm chart before you start. Camunda 8.10 removes the bundled Bitnami PostgreSQL subcharts.
 
 If you still use the bundled databases, you can't upgrade to 8.10. Migrate them on 8.9 first. See [migrate off the bundled PostgreSQL databases](/self-managed/upgrade/helm/890-to-8100.md#migrate-off-the-bundled-postgresql-databases).
 
@@ -43,7 +45,7 @@ If you still use the bundled databases, you can't upgrade to 8.10. Migrate them 
 
 | Component             | Moves cleanly? | Why                                                                                                                       |
 | :-------------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| Camunda Hub           | Yes            | Stateless at the workload layer. Its state is in an external relational database                                          |
+| Camunda Hub           | Yes            | Stateless at the workload layer; its state is in an external relational database                                          |
 | Management Identity   | Yes            | Same. Its state is in an external relational database                                                                     |
 | Connectors            | Yes            | Stateless                                                                                                                 |
 | Optimize              | Yes            | Its state is in Elasticsearch or OpenSearch, reached by index prefix                                                      |
@@ -63,45 +65,48 @@ Keep the existing release and namespace as the orchestration release, and then i
 Camunda doesn't support running more than one Management Identity against the same database. That's why this procedure converts the combined release first, which removes its Management Identity, and only then installs the Hub release against the same database. Never have the combined release's Management Identity and the Hub release's Management Identity running at the same time.
 :::
 
-Plan a maintenance window. From step 3 until the Hub release is ready in step 4, Camunda Hub and Management Identity aren't running. During that window:
+Plan a maintenance window. From step 2 until the Hub release is ready in step 3, Camunda Hub and Management Identity aren't running. During that window:
 
 - **The Orchestration Cluster keeps running.** Brokers keep processing, the REST and gRPC APIs keep authenticating, and Operate and Tasklist sign-in keeps working. The Orchestration Cluster validates tokens against your OIDC provider and reads authorizations from its own secondary storage, so it doesn't call Management Identity. Pods that restart during the window start normally.
 - **Connectors keep running.** Connectors get their tokens from your OIDC provider, not from Management Identity.
-- **Optimize is degraded.** Its pods stay ready and restart normally, but Optimize reads tenant assignments and user details from Management Identity, so user lookups fail, and report and dashboard queries fail for multi-tenancy users whose tenants aren't cached. With Keycloak, Optimize reads the user's Optimize permission from the token. With any other OIDC provider, it checks the permission in Management Identity, so browser sessions can be refused during the window. Treat Optimize as unavailable for the window.
+- **Optimize is degraded.** If Optimize stays in the orchestration release, its pods stay ready and restart normally. But Optimize reads tenant assignments and user details from Management Identity. User lookups fail. Report and dashboard queries fail for multi-tenancy users whose tenants aren't cached. With Keycloak, Optimize reads the user's Optimize permission from the token. With any other OIDC provider, it checks the permission in Management Identity, so browser sessions can be refused during the window. Treat Optimize as unavailable for the window. If Optimize moves to its own release, it's unavailable from step 2 until its own release runs in step 5.
 - **Your OIDC provider must stay up.** Every component authenticates against it. If Keycloak runs alongside Management Identity, make sure it isn't part of the outage.
 
-### Step 1: Decide where Optimize runs
+### Step 1: Inventory what the combined release owns
 
-If the combined release runs Optimize, decide where Optimize runs after the move. Make this decision before you start:
+If the combined release runs Optimize, first decide where Optimize runs after the move. It can run in the orchestration release or in one Optimize release per Physical Tenant. This choice sets how many releases, OIDC clients, Secrets, and prefixes you plan for. Use separate releases if you use Physical Tenants.
 
-- **Separate Optimize release.** This option gives three releases: Hub, orchestration, and Optimize. Use it for Physical Tenants. Optimize is unavailable from step 3 until its release runs in step 6.
-- **Optimize stays in the orchestration release.** This option gives two releases: Hub and orchestration. Skip step 6.
-
-If the combined release doesn't run Optimize, there are two releases. Skip step 6.
-
-### Step 2: Inventory what the combined release owns
-
-From your current values file and cluster, record:
+Then, from your current values file and cluster, record:
 
 - Every index prefix in use. See [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 - Every OIDC client ID, audience, redirect URL, and role, and which secret holds each client secret.
 - The Management Identity and Camunda Hub database connection details. The Hub release reuses these databases.
 - The release name, namespace, and Orchestration Cluster context paths and hostnames.
 
-Prepare `hub-values.yaml` now, so that step 4 can follow step 3 without delay. Use `global.topology.mode: hub`, point Management Identity and Camunda Hub at the existing databases, and add a `global.topology.clusters` record whose component client IDs, audiences, redirect URLs, and secrets exactly match what the combined release already uses. Reusing the existing identifiers is what lets Hub adopt the running cluster instead of registering a second one. See [install the Hub release](/self-managed/deployment/helm/install/topology/hub-release.md).
+Prepare `hub-values.yaml` now, so step 3 can follow step 2 without delay. Use `global.topology.mode: hub`, point Management Identity and Camunda Hub at the existing databases, and add a `global.topology.clusters` record whose component client IDs, audiences, redirect URLs, and secrets exactly match what the combined release already uses. Reusing the existing identifiers is what lets Hub adopt the running cluster instead of registering a second one. See [install the Hub release](/self-managed/deployment/helm/install/topology/hub-release.md).
 
-### Step 3: Convert the combined release to an orchestration release
+### Step 2: Convert the combined release to an orchestration release
 
 Update the existing release's values:
 
 - Set `global.topology.mode: orchestration`. The role stops rendering Management Identity and Camunda Hub, so the combined release's Management Identity stops in this step.
 - Set `identity.enabled: false`.
-- Set `global.identity.service.url` to the Management Identity service that the Hub release creates in step 4, in the Hub namespace.
-- If you chose a separate Optimize release in step 1, set `optimize.enabled: false`. The `orchestration` role doesn't do this for you. The chart then stops rendering the legacy exporter that Optimize reads. In the same `helm upgrade`, set `orchestration.exporters.zeebe.enabled: true` and keep the same writer prefix. See [export records for Optimize](/self-managed/deployment/helm/install/topology/orchestration-release.md#export-records-for-optimize).
-- If you chose to keep Optimize in this release, don't change its values.
+- Set `global.identity.service.url` to the Management Identity service the Hub release creates in step 3, in the Hub namespace.
+- To run Optimize as its own release, set `optimize.enabled: false`. The `orchestration` role doesn't do this for you. The chart then stops rendering the legacy exporter Optimize reads, so enable it explicitly with the same writer prefix in the same `helm upgrade`. Optimize is unavailable from this step until its own release is running in step 5. To keep Optimize in this release instead, leave it enabled and skip step 5. See [export records for Optimize](/self-managed/deployment/helm/install/topology/orchestration-release.md#export-records-for-optimize).
 - Keep the release name, namespace, `orchestration.*` values, secondary storage configuration, and every index prefix unchanged.
 
 Run `helm upgrade` on the existing release, without changing its name or namespace. The Orchestration Cluster StatefulSet is preserved, so the brokers keep their volumes and their identity.
+
+This `helm upgrade` restarts the Orchestration Cluster and Connectors pods, and the Optimize pods if Optimize stays in this release, even though their images don't change. Their configuration changes, for example the Management Identity service URL, and they read it only at startup. Each workload restarts according to its update strategy:
+
+| Workload                                                        | Update strategy                                                                     | Effect during the restart                                                                                                                                                                                                                                                                                                                                          |
+| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Brokers, the `<release>-zeebe` StatefulSet                      | Rolling update, one broker at a time, each waiting for the previous one to be ready | With a replication factor of 1 or 2, a partition with a replica on the restarting broker loses quorum. It stays unavailable until that broker is ready again. With one broker, that means the whole cluster. With a replication factor of 3 or more, partitions keep quorum, but individual client requests can fail while leadership moves. Retry failed requests |
+| Connectors                                                      | Rolling update. The new pod starts before the old one stops                         | Stays available                                                                                                                                                                                                                                                                                                                                                    |
+| Optimize, kept in this release                                  | `Recreate`, with one replica                                                        | Unavailable until the new pod is ready                                                                                                                                                                                                                                                                                                                             |
+| Optimize, moving to its own release (`optimize.enabled: false`) | Removed, no restart                                                                 | Unavailable until its own release runs in step 5                                                                                                                                                                                                                                                                                                                   |
+
+The brokers restart with the same volumes, so process state is kept.
 
 :::warning
 Verify with `helm template` or `helm diff` before you apply this step. Confirm the rendered output still contains the Orchestration Cluster StatefulSet with the same name, and the same `volumeClaimTemplates`, and no Management Identity Deployment. If the StatefulSet is absent or renamed, stop: applying it will detach your brokers from their storage.
@@ -109,21 +114,21 @@ Verify with `helm template` or `helm diff` before you apply this step. Confirm t
 
 Before you continue, confirm the combined release's Management Identity pods have terminated.
 
-### Step 4: Install the Hub release against the existing databases
+### Step 3: Install the Hub release against the existing databases
 
-Install the Hub release from the `hub-values.yaml` that you prepared in step 2. Follow [install the Hub release](/self-managed/deployment/helm/install/topology/hub-release.md), and install into a new namespace. Don't reuse the orchestration release's namespace.
+Install the Hub release from the `hub-values.yaml` you prepared in step 1. Follow [install the Hub release](/self-managed/deployment/helm/install/topology/hub-release.md), and install into a new namespace. Don't reuse the orchestration release's namespace.
 
 Project the workload client secrets into the Hub namespace as well. Kubernetes Secrets are namespace-scoped.
 
-### Step 5: Verify the Hub release
+### Step 4: Verify the Hub release
 
 Sign in to the new Hub host. Confirm the Orchestration Cluster appears in its cluster list, is reachable, and reports healthy. Deploy a test process through Hub to the cluster. Confirm your existing users, groups, roles, and Web Modeler projects are present, which shows the Hub release is using the existing databases.
 
 If the cluster doesn't appear, see [roll back](#roll-back).
 
-### Step 6: Move Optimize to its own release
+### Step 5: Move Optimize to its own release
 
-Do this step only if you chose a separate Optimize release in step 1. Install Optimize as a separate release per Physical Tenant, and keep both of its existing prefixes:
+If the combined release ran Optimize and you disabled it in step 2, install it as a separate release per Physical Tenant, and keep both of its existing prefixes:
 
 - The reader prefix, `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`, must exactly equal the exporter writer prefix already in use, or Optimize starts against an empty record set.
 - The application index prefix, `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX`, must equal the value the combined release used. Optimize stores its reports, dashboards, and configuration there. A new value starts Optimize with none of them.
@@ -132,11 +137,46 @@ Route the Optimize host and path to the new release before users return. See [ro
 
 See [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
 
-### Step 7: Clean up
+### Step 6: Clean up
 
 - Confirm no workload still resolves the old in-release Management Identity or Hub service names.
 - Inventory the OIDC clients, resource servers, permissions, and roles. Identity initialization is additive, so the combined release's objects still exist. Remove only what no release uses.
 - Retire the old Hub hostname and its TLS certificate, or redirect it.
+
+## Releases on an earlier chart
+
+This procedure needs the 8.10 chart for every release. Don't use it for a release on the 8.7, 8.8, or 8.9 chart:
+
+- The Hub release would take over that release's Management Identity and Web Modeler databases. From 8.7 or 8.8, that skips minor versions.
+- Step 2 and step 5 move Optimize to its own release. The `optimize` role needs the 8.10 chart. The 8.7, 8.8, and 8.9 charts accept only the `combined` and `orchestration` roles.
+- Step 2 removes the release's bundled Keycloak, because the `orchestration` role doesn't allow it on those charts. A release that uses its bundled Keycloak loses its identity provider.
+
+To put a release on an earlier chart under a Hub, it needs an identity provider outside the release. Install the Hub release with its own databases, then follow [connect existing clusters to Hub](./connect-existing-clusters.md).
+
+## Keep existing clients working
+
+Step 1 has the cluster record reuse the client IDs and audiences the release already uses, so its existing clients keep working. Use different client IDs and audiences in the record only if you must, for example because another record already uses the chart defaults: the chart rejects a client ID or audience that two records share. In that case, the cluster must keep accepting the old audience.
+
+With Keycloak, clients that the release's own Management Identity created, such as the Connectors client, request tokens with the audience that Management Identity assigned, `orchestration-api` by default. After step 2, the Orchestration Cluster accepts only the audiences it's configured with.
+
+If the release doesn't accept the old audience, Connectors can't authenticate to the Orchestration Cluster and never becomes ready. Its log shows:
+
+```text
+io.grpc.StatusRuntimeException: UNAUTHENTICATED: Invalid bearer token
+```
+
+On the 8.8 and 8.9 charts, add the old audience in the same `helm upgrade` that converts the release:
+
+```yaml
+orchestration:
+  security:
+    authentication:
+      oidc:
+        backwardsCompatibleAudiences:
+          - orchestration-api
+```
+
+On the 8.10 chart, `backwardsCompatibleAudiences` is deprecated. List the old audience with the full default set in `camunda.security.authentication.oidc.audiences`. See [backwards-compatible audiences replace the audience list](/self-managed/upgrade/helm/890-to-8100.md#backwards-compatible-audiences-replace-the-audience-list).
 
 ## Moving a cluster to a different release, namespace, or Kubernetes cluster
 
@@ -146,19 +186,20 @@ This procedure keeps the Orchestration Cluster in its existing release and names
 
 | After step                         | To roll back                                                                                                                                                                                                             |
 | :--------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Step 3, release converted          | `helm rollback` the orchestration release to its previous revision. Broker volumes are unchanged, and the combined release's Management Identity and Camunda Hub return against their databases                          |
-| Step 4 or 5, Hub release installed | Uninstall the Hub release and confirm its Management Identity pods have terminated, then `helm rollback` the orchestration release as for step 3. Don't roll back while the Hub release's Management Identity is running |
-| Step 6, Optimize separated         | Uninstall the Optimize release, remove the explicit exporter, and re-enable `optimize` in the orchestration release with the same reader and application prefixes                                                        |
-| Step 7, cleanup done               | Identity object deletion isn't reversible. Re-create any client, resource server, permission, or role you removed in error                                                                                               |
+| Step 2, release converted          | `helm rollback` the orchestration release to its previous revision. Broker volumes are unchanged, and the combined release's Management Identity and Camunda Hub return against their databases                          |
+| Step 3 or 4, Hub release installed | Uninstall the Hub release and confirm its Management Identity pods have terminated, then `helm rollback` the orchestration release as for step 2. Don't roll back while the Hub release's Management Identity is running |
+| Step 5, Optimize separated         | Uninstall the Optimize release, remove the explicit exporter, and re-enable `optimize` in the orchestration release with the same reader and application prefixes                                                        |
+| Step 6, cleanup done               | Identity object deletion isn't reversible. Re-create any client, resource server, permission, or role you removed in error                                                                                               |
 
-Roll back before step 7. Once you've deleted Identity objects, recovery is manual.
+Roll back before step 6. Once you've deleted Identity objects, recovery is manual.
 
 ## Verify the move
 
-- Every pod is ready in every release: two or three, depending on your decision in step 1.
+- Every pod is ready in every release.
 - Camunda Hub lists the Orchestration Cluster, and it reports healthy.
 - Deploying a process through Hub reaches the cluster.
 - Existing process instances are still visible in Operate, and workers still poll and complete jobs.
-- If Optimize runs, it shows process data. This shows that its reader prefix is equal to the exporter writer prefix.
+- If Optimize runs, start a new process instance after the move and confirm that its data appears in Optimize. Historical data alone doesn't prove it, because it can come from the old prefix. This shows that the reader prefix is equal to the current exporter writer prefix.
+- If Optimize moved to its own release, your existing reports, dashboards, and settings are still there. This shows that its application index prefix is unchanged. Process data alone doesn't prove it.
 - Only one Management Identity is running, in the Hub release.
 - No release logs authentication errors against an OIDC client that no longer exists.

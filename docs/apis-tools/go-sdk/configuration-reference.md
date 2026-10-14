@@ -19,11 +19,12 @@ precedence over both.
 
 ## Connection
 
-| Variable                                          | Default                 | Description                                                            |
-| ------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------- |
-| `CAMUNDA_REST_ADDRESS` / `ZEEBE_REST_ADDRESS`     | `http://localhost:8080` | Orchestration Cluster REST base address.                               |
-| `CAMUNDA_GRPC_ADDRESS` / `ZEEBE_GRPC_ADDRESS`     | `localhost:26500`       | Zeebe gRPC gateway address (`host:port`) for the streaming job worker. |
-| `CAMUNDA_DEFAULT_TENANT_ID` / `CAMUNDA_TENANT_ID` | —                       | Default tenant id applied to operations that accept one.               |
+| Variable                                          | Default                 | Description                                                                                                                         |
+| ------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_REST_ADDRESS` / `ZEEBE_REST_ADDRESS`     | `http://localhost:8080` | Orchestration Cluster REST base address.                                                                                            |
+| `CAMUNDA_REST_ADDRESS_EXACT`                      | —                       | Use `CAMUNDA_REST_ADDRESS` exactly as provided, without appending the `/v2` suffix (for gateway/reverse-proxy fronted deployments). |
+| `CAMUNDA_GRPC_ADDRESS` / `ZEEBE_GRPC_ADDRESS`     | `localhost:26500`       | Zeebe gRPC gateway address (`host:port`) for the streaming job worker.                                                              |
+| `CAMUNDA_DEFAULT_TENANT_ID` / `CAMUNDA_TENANT_ID` | —                       | Default tenant id applied to operations that accept one.                                                                            |
 
 ## Authentication
 

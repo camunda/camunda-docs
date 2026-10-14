@@ -119,7 +119,7 @@ The catalog uses the `id` and `version` fields inside your element template defi
 
 ```json
 {
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
   "id": "com.example.payment-connector",
   "name": "Payment Connector",
   "version": 2,

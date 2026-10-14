@@ -16,11 +16,11 @@ Camunda 8 Self-Managed has multiple web applications and gRPC services. You can 
 
 ## Prerequisites
 
-- An Ingress controller deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `global.ingress.className` (and `orchestration.ingress.grpc.className` for the Zeebe gRPC Ingress).
-- The annotations your controller needs. Starting with Camunda 8.10 (chart 15.x), the chart's default ingress-nginx annotation set comes from a compatibility shim that you can turn off with `global.compatibility.nginx.renderAnnotations: false`; see [Ingress-nginx annotation defaults deprecated in the Helm chart](/reference/announcements-release-notes/8100/8100-announcements.md#ingress-annotation-defaults-deprecated).
+- An Ingress controller deployed in advance. The examples below use the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `global.ingress.className` (and `orchestration.ingress.grpc.className` for the Zeebe gRPC Ingress).
+- The annotations your controller needs. Starting with Camunda 8.10 (chart 15.x), the chart's default Ingress-nginx annotation set comes from a compatibility shim that you can turn off with `global.compatibility.nginx.renderAnnotations: false`; see [Ingress-nginx annotation defaults deprecated in the Helm chart](/reference/announcements-release-notes/8100/8100-announcements.md#ingress-annotation-defaults-deprecated).
 
 :::note
-[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures deploy [Contour](https://projectcontour.io/) instead. The examples on this page still use ingress-nginx annotations; with another controller, translate them to its equivalents. See [Kubernetes reference architecture](/self-managed/reference-architecture/kubernetes.md#load-balancer) for the gRPC annotation each controller expects.
+[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures deploy [Contour](https://projectcontour.io/) instead. The examples on this page still use Ingress-nginx annotations. With another controller, translate them to its equivalents. See [configure the gRPC upstream](#configure-the-grpc-upstream) for the gRPC annotation each controller expects.
 :::
 
 - TLS configuration is not included in the examples because it varies between different workflows. Configure TLS in one of these ways:
@@ -268,7 +268,7 @@ Ingress resources require the cluster to have a running [Ingress Controller](htt
 
 ### Local setup example
 
-An Ingress controller is also required for local Camunda 8 installation. The following example shows an Ingress controller configuration using the [ingress-nginx controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
+An Ingress controller is also required for local Camunda 8 installation. The following example shows an Ingress controller configuration using the [Ingress-nginx controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
 
 ```yaml
 # ingress_nginx_values.yml
@@ -284,7 +284,7 @@ controller:
     enabled: false
 ```
 
-Install the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) to your local cluster:
+Install the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) to your local cluster:
 
 ```shell
 helm install -f ingress_nginx_values.yml \
@@ -296,6 +296,75 @@ helm install -f ingress_nginx_values.yml \
 ```
 
 If your local cluster exposes the Ingress controller on ports other than `80` and `443`, set the ports as described in [configure custom public ports](#configure-custom-public-ports).
+
+### Configure the gRPC upstream
+
+Configure your Ingress controller to send HTTP/2 to the Orchestration Cluster, because the Zeebe Gateway serves gRPC. Each controller declares the gRPC upstream differently, and not on the same object:
+
+| Ingress controller | Annotation                                           | Object                                    |
+| ------------------ | ---------------------------------------------------- | ----------------------------------------- |
+| Contour            | `projectcontour.io/upstream-protocol.h2c: "26500"`   | Orchestration Cluster `Service`           |
+| Ingress-nginx      | `nginx.ingress.kubernetes.io/backend-protocol: GRPC` | Zeebe `Ingress` (added by the Helm chart) |
+
+When the upstream itself uses TLS, use `projectcontour.io/upstream-protocol.h2` with Contour, and `nginx.ingress.kubernetes.io/backend-protocol: GRPCS` with Ingress-nginx. For other controllers, check their documentation for the equivalent.
+
+With Contour, set the annotation on the Orchestration Cluster service:
+
+```yaml
+orchestration:
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: "26500"
+```
+
+### Use an AWS Application Load Balancer
+
+An AWS Application Load Balancer (ALB) terminates TLS at the load balancer with a certificate from AWS Certificate Manager (ACM). For the limits, see the [ALB known limitations](/self-managed/reference-architecture/kubernetes.md#application-load-balancer-alb).
+
+1. Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
+1. Set up a [certificate in AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html).
+1. Set the `alb` class on every Ingress object the chart renders. The web application Ingress objects read `global.ingress`, and the Zeebe gRPC Ingress reads `orchestration.ingress.grpc`.
+1. Set `alb.ingress.kubernetes.io/backend-protocol-version: GRPC` only on the Zeebe gRPC Ingress, as in the [AWS gRPC example](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md). On a web application Ingress, this annotation makes the ALB target groups use gRPC and breaks the HTTP applications.
+1. Add the values to your `values.yaml` file:
+
+   ```yaml
+   global:
+     compatibility:
+       nginx:
+         # Stop the chart from adding its default Ingress-nginx annotations.
+         renderAnnotations: false
+     ingress:
+       className: alb
+       # TLS terminates at the ALB. An empty secretName lists the hosts without a Secret.
+       tls:
+         enabled: true
+         secretName: ""
+       annotations:
+         alb.ingress.kubernetes.io/ssl-redirect: "443"
+         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+         alb.ingress.kubernetes.io/scheme: internet-facing
+         alb.ingress.kubernetes.io/target-type: ip
+
+   orchestration:
+     ingress:
+       grpc:
+         className: alb
+         tls:
+           enabled: true
+           secretName: ""
+         annotations:
+           alb.ingress.kubernetes.io/ssl-redirect: "443"
+           alb.ingress.kubernetes.io/backend-protocol-version: GRPC
+           alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+           alb.ingress.kubernetes.io/scheme: internet-facing
+           alb.ingress.kubernetes.io/target-type: ip
+   ```
+
+The ALB terminates TLS with the ACM certificate, so you don't need a TLS Secret. With `tls.enabled: true` and an empty `secretName`, the chart lists each host under the Ingress [`tls` field](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) without a Secret. The AWS Load Balancer Controller uses these hosts to find the matching ACM certificate. The chart also uses `https` in the URLs it generates, for example in the release information.
+
+### Use the GKE Ingress
+
+With the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need `cloud.google.com/app-protocols` annotations on the Zeebe Gateway service. For details, see the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
 
 ## Troubleshooting
 

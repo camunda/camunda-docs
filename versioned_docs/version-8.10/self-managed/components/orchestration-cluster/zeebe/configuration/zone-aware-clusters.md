@@ -1,0 +1,99 @@
+---
+id: zone-aware-clusters
+title: "Zone-aware clusters"
+sidebar_label: "Zone-aware clusters"
+description: "With zone awareness, a cluster distributes brokers and partition replicas across zones (regions or availability zones) for resilience."
+---
+
+With zone awareness, an Orchestration Cluster distributes its brokers and partition replicas across multiple zones (regions or availability zones). Spreading replicas across zones lets the cluster survive the loss of an entire zone and bias partition leadership toward a preferred zone.
+
+Zone awareness controls where the application places partition replicas among brokers. It does not control where Kubernetes schedules the broker pods themselves — on Kubernetes, also configure [topology spread constraints](/self-managed/deployment/helm/configure/pod-scheduling.md#spread-orchestration-cluster-pods-across-availability-zones) so the broker pods actually land in different zones; without it, brokers assigned to different logical zones can still be scheduled onto nodes in the same physical zone. Configure both together: topology spread constraints put each broker pod in the zone Kubernetes actually schedules it into, and zone awareness places partition replicas according to each broker's assigned zone.
+
+Zone awareness is required for topologies with three or more zones. It also simplifies managing zones: brokers are named after the zone they belong to, so you describe the topology in terms of zones rather than individual numeric node IDs.
+
+Because zones are named explicitly, zone awareness supports topologies the round-robin numbering strategy cannot express at all, such as one zone, three zones, or more. Growing from one zone to two, or two to three, is a change to the zone list rather than a renumbering of every broker.
+
+Zone awareness is also useful in a single-region setup. By mapping zones to availability zones (AZs) and giving one AZ a higher priority, you can skew partition leaders to stay in that AZ. Keeping leaders in one AZ reduces cross-AZ traffic to the single writer instance of a relational database (RDBMS), which lowers the associated cost. This optimization matters less for Elasticsearch, which distributes load across all three zones.
+
+## When to use zone awareness
+
+Zone awareness is the recommended approach for new deployments, whether single-region (to skew leaders to a preferred AZ), dual-region, or three or more zones.
+
+## What is a zone?
+
+A zone is a failure domain, typically a cloud region or availability zone, into which brokers are grouped. Each broker declares which zone it belongs to, and the cluster uses that information to:
+
+- Place partition replicas across zones, so no single zone holds all replicas of a partition.
+- Assign Raft election priorities per zone, so partition leaders are skewed toward the highest-priority zone.
+
+Compared to using even/odd node ID depending on the zone, zone awareness makes multi-region and multi-AZ setups simpler to configure across all deployment targets (Kubernetes, Amazon ECS, bare metal).
+
+## How zone awareness works
+
+You assign each broker to a zone through the `camunda.cluster.zone` setting. Internally, brokers are identified by a composite node ID of the form `<zone>_<index>`, combining the zone name and the broker's index within that zone. For a two-broker `us-east1` zone and a two-broker `us-west1` zone, the brokers are named:
+
+```text
+us-east1_0
+us-east1_1
+us-west1_0
+us-west1_1
+```
+
+The zone is part of the name, so you can read the topology directly from the broker identifiers. Zone names are not reserved for three or more zones: a single-region or dual-region cluster can use them too, and gets the same readable identities. Numeric node IDs remain available for existing setups.
+
+### Partitioning scheme
+
+The `ZONE_AWARE` partitioning scheme drives partition distribution and leadership. When you select this scheme, you describe every zone in the cluster as a list, giving each zone the following properties:
+
+| Property             | Description                                                                                     |
+| :------------------- | :---------------------------------------------------------------------------------------------- |
+| `name`               | The zone identifier. Must match the `camunda.cluster.zone` of the brokers in that zone.         |
+| `number-of-brokers`  | How many brokers are deployed in the zone.                                                      |
+| `number-of-replicas` | How many replicas of each replication group live in the zone.                                   |
+| `priority`           | Higher values give the zone higher Raft election priority, biasing partition leaders toward it. |
+
+### Comparison to dual-region broker numbering
+
+In the [dual-region](../../../../concepts/multi-region/dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering.
+
+Zone awareness replaces it with explicit zone names, which works for any number of zones. Changing the zone list afterwards is possible, but it is not a configuration-only change: existing partitions have to be told about the new zone through the [cluster management API](../operations/management-api.md#add-or-re-add-a-zone).
+
+## Example configuration
+
+The following configures a three-zone cluster in which `us-east1` is the preferred zone for partition leaders:
+
+```yaml
+camunda:
+  cluster:
+    size: 5
+    replication-factor: 5
+    # set per broker; env: CAMUNDA_CLUSTER_ZONE
+    zone: us-east1
+    partitioning:
+      scheme: ZONE_AWARE
+      zone-aware:
+        zones:
+          - name: us-east1
+            number-of-brokers: 2
+            number-of-replicas: 2
+            priority: 1000
+          - name: us-west2
+            number-of-brokers: 2
+            number-of-replicas: 2
+            priority: 500
+          - name: eu-west1
+            number-of-brokers: 1
+            number-of-replicas: 1
+            priority: 10
+```
+
+Each broker sets its own `camunda.cluster.zone`, while the `zone-aware.zones` list is the same across all brokers in the cluster.
+
+For the full list of properties and their environment-variable equivalents, see the [cluster configuration reference](../../core-settings/configuration/properties.md).
+
+## Related resources
+
+- [Dual-region](../../../../concepts/multi-region/dual-region.md): synchronous two-region setup.
+- [Multi-Region RDBMS](../../../../concepts/multi-region/multi-region-rdbms.md): a multi-region architecture built on zone awareness, using three or more zones, in which a zone loss does not stop processing.
+- [Configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md): set these properties through the Camunda Helm chart.
+- [Zeebe clustering](/components/zeebe/technical-concepts/clustering.md): how brokers, partitions, and replication work.

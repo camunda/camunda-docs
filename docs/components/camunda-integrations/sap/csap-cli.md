@@ -23,12 +23,11 @@ The standalone `csap` binary is deprecated and replaced by the `c8ctl-plugin-csa
 
 The plugin supports the following SAP integration modules:
 
-| Module              | Flag value   | Description                                                                       |
-| ------------------- | ------------ | --------------------------------------------------------------------------------- |
-| SAP OData connector | `odata`      | Facilitates interaction with SAP S/4HANA or ECC systems from a BPMN model.        |
-| SAP RFC connector   | `rfc`        | Allows querying BAPIs and Remote Function Modules on SAP ECC systems.             |
-| BTP plugin          | `btp-plugin` | Enables rendering task forms in Fiori and provides BTP integration. (Deprecated.) |
-| All modules         | `all`        | Configures all available modules.                                                 |
+| Module              | Flag value | Description                                                                |
+| ------------------- | ---------- | -------------------------------------------------------------------------- |
+| SAP OData connector | `odata`    | Facilitates interaction with SAP S/4HANA or ECC systems from a BPMN model. |
+| SAP RFC connector   | `rfc`      | Allows querying BAPIs and Remote Function Modules on SAP ECC systems.      |
+| All modules         | `all`      | Configures all available modules.                                          |
 
 The plugin supports Camunda 8.7, 8.8, and 8.9. Support for Camunda 8.6 is deprecated.
 
@@ -40,10 +39,7 @@ Check your build system meets the following requirements:
 
 - [c8ctl](/apis-tools/c8ctl/getting-started.md#install) is installed.
 - [Node.js](https://nodejs.org/en) 22 or later.
-- `git` is available in your `PATH`. Required for the BTP plugin.
-- `npm` 12 or later is available in your `PATH`. Required for the BTP plugin build.
 - (Windows) `npm` uses `cmd` as the shell script executor: `npm config set script-shell cmd`.
-- The [transient requirements for SAP's `mbt`](https://sap.github.io/cloud-mta-build-tool/makefile/) (Cloud MTA Build Tool), specifically `make`. Required for the BTP plugin.
 
 ## Installation
 
@@ -132,18 +128,16 @@ c8ctl csap-setup [options]
 
 #### Options
 
-| Option              | Type   | Description                                                                                                                                                | Default value                                          |
-| ------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `--for`             | string | Specifies the SAP integration module to set up. Choices: `btp-plugin`, `odata`, `rfc`, `all`.                                                              | (Prompted if not provided)                             |
-| `--camunda`         | string | Specifies the Camunda version. Choices: `8.9`, `8.8`, `8.7`, `8.6` (deprecated).                                                                           | (Prompted if not provided)                             |
-| `--deployment`      | string | Specifies the Camunda deployment option. Choices: `SaaS`. (`SM` for self-managed is currently disabled.)                                                   | (Prompted if not provided)                             |
-| `--btpRoute`        | string | (For `btp-plugin` or `all`) Specifies the BTP route to reach the plugin. This is SAP/BTP specific. Enter the host without `http(s)://` and a trailing `/`. | `camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com` |
-| `--btpPluginBranch` | string | (Optional, for `btp-plugin` or `all`) Specifies the Git branch to clone the BTP plugin from. Useful for testing and PR development scenarios.              | `main`                                                 |
-| `--clusterId`       | string | Specifies the Camunda cluster ID.                                                                                                                          | (Prompted if not provided)                             |
-| `--region`          | string | Specifies the Camunda cluster region, for example, `bru-2`.                                                                                                | (Prompted if not provided)                             |
-| `--clientId`        | string | Specifies the Camunda API client OAuth2 client ID.                                                                                                         | (Prompted if not provided)                             |
-| `--clientSecret`    | string | Specifies the Camunda API client OAuth2 client secret.                                                                                                     | (Prompted if not provided)                             |
-| `--to`              | string | Target directory for setup artifacts.                                                                                                                      | OS-dependent `tmp` directory                           |
+| Option           | Type   | Description                                                                                              | Default value                |
+| ---------------- | ------ | -------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| `--for`          | string | Specifies the SAP integration module to set up. Choices: `odata`, `rfc`, `all`.                          | (Prompted if not provided)   |
+| `--camunda`      | string | Specifies the Camunda version. Choices: `8.10`, `8.9`, `8.8`, `8.7`, `8.6` (deprecated).                 | (Prompted if not provided)   |
+| `--deployment`   | string | Specifies the Camunda deployment option. Choices: `SaaS`. (`SM` for self-managed is currently disabled.) | (Prompted if not provided)   |
+| `--clusterId`    | string | Specifies the Camunda cluster ID.                                                                        | (Prompted if not provided)   |
+| `--region`       | string | Specifies the Camunda cluster region, for example, `bru-2`.                                              | (Prompted if not provided)   |
+| `--clientId`     | string | Specifies the Camunda API client OAuth2 client ID.                                                       | (Prompted if not provided)   |
+| `--clientSecret` | string | Specifies the Camunda API client OAuth2 client secret.                                                   | (Prompted if not provided)   |
+| `--to`           | string | Target directory for setup artifacts.                                                                    | OS-dependent `tmp` directory |
 
 ## Environment variables
 
@@ -166,7 +160,6 @@ $> c8ctl csap-setup
 # ...
 
 ? SAP integration module
-  BTP plugin (deprecated)
 ❯ OData connector
   RFC connector
   All modules
@@ -174,24 +167,7 @@ $> c8ctl csap-setup
 
 This guides you through the setup process interactively.
 
-#### Example 2: Automating setup for the BTP plugin
-
-```bash
-$> c8ctl csap-setup --for btp-plugin \
-  --camunda 8.7 \
-  --deployment SaaS \
-  --btpRoute my-btp-route.cfapps.eu10-004.hana.ondemand.com \
-  --clusterId 64ecb347-dd50-49c9-ace2-20c9f6b0798d \
-  --region syd-2 \
-  --clientId dIsfmFEB47_-Dt2uMlYdw-B_72stz.Yh \
-  --clientSecret WzIQFJkxd2xopI7lOGArJ0815kC3SvU5ke~lI4did8k0RMG353DiVDPBPEW1-tuD7
-
-# ...
-```
-
-This command sets up the BTP plugin for Camunda version 8.7 with all required options provided as command-line flags.
-
-#### Example 3: Setting up all modules, reusing credentials from environment
+#### Example 2: Setting up all modules, reusing credentials from environment
 
 ```bash
 $> c8ctl csap-setup --for all \
@@ -227,7 +203,6 @@ All flags and environment variables keep their names and meaning. The default va
 
 After each Camunda SAP integration module is set up with `c8ctl csap-setup`, it is ready for deployment. The plugin prints `in directory <path>` after every successful run. Use this path for the deployment.
 
-- For the OData and RFC connectors, run `cf deploy <directory-printed-by-csap-setup>`.
-- For the BTP plugin, run `cf deploy <directory-printed-by-csap-setup>/mta_archives/<name>.mtar`.
+For the OData and RFC connectors, run `cf deploy <directory-printed-by-csap-setup>`.
 
-Deploying the module to BTP and integrating it into the application lifecycle management of your organization is the responsibility of your SAP practice. To learn more, see the deployment sections of the [OData connector](./odata-connector.md), [RFC connector](./rfc-connector.md), and [BTP plugin](./btp-plugin.md) pages.
+Deploying the module to BTP and integrating it into the application lifecycle management of your organization is the responsibility of your SAP practice. To learn more, see the deployment sections of the [OData connector](./odata-connector.md) and [RFC connector](./rfc-connector.md) pages.

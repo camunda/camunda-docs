@@ -1,0 +1,386 @@
+---
+id: create-admin-user
+title: "Create admin user"
+sidebar_label: "Create admin user"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Create admin user"} <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/setup/user"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      dynamic: true,
+      note: "First-admin bootstrap — allowed anonymously until an initial admin exists; otherwise requires USER CREATE and ROLE UPDATE.",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            password: {
+              description: "The password of the user.",
+              type: "string",
+            },
+            username: {
+              description: "The username of the new user.",
+              allOf: [
+                {
+                  example: "swillis",
+                  format: "Username",
+                  description: "The unique name of a user.",
+                  type: "string",
+                  title: "Username",
+                },
+              ],
+            },
+            name: { description: "The name of the user.", type: "string" },
+            email: { description: "The email of the user.", type: "string" },
+          },
+          required: ["username", "password"],
+          title: "UserRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description: "The admin user was created successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              username: {
+                description: "The username of the created user.",
+                allOf: [
+                  {
+                    example: "swillis",
+                    format: "Username",
+                    description: "The unique name of a user.",
+                    type: "string",
+                    title: "Username",
+                  },
+                ],
+              },
+              name: {
+                description: "The name of the user.",
+                nullable: true,
+                type: "string",
+              },
+              email: {
+                description: "The email of the user.",
+                nullable: true,
+                type: "string",
+              },
+            },
+            required: ["username", "name", "email"],
+            title: "UserCreateResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description: "A user with this username already exists.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

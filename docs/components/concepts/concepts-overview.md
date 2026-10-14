@@ -140,8 +140,8 @@ With [Operate](/components/operate/operate-introduction.md), teams can monitor r
 
 [Camunda Hub](/components/hub/index.md) is a unified platform for managing organizational resources and delivering business processes. It's organized into two levels: organization and workspace.
 
-- **Organization level**: This is the management and governance layer. Center of excellence teams govern the infrastructure and tooling delivery teams need, including managing users, runtime environments, a catalog of shared reusable resources, and workspaces.
-- **Workspace level**: This is the process modeling and delivery layer. Delivery teams design business process and decision models, discover and use approved catalog assets, and deploy projects to development, testing, staging, and production environments.
+- **Organization level**: This is the management and governance layer. Center of excellence teams govern the infrastructure and tooling delivery teams need, including managing users, clusters, environments, a catalog of shared reusable resources, and workspaces.
+- **Workspace level**: This is the process modeling and delivery layer. Delivery teams design business process and decision models, discover and use approved catalog assets, and deploy projects to the [environments](/components/concepts/environments.md) assigned to their workspace.
 
 With this separation, center of excellence teams govern infrastructure and standards at the organization level, while delivery teams work within organizational guardrails to design, test, and deploy business solutions at the workspace level.
 
@@ -175,7 +175,7 @@ Rather than relying on prompt instructions alone to keep agents in bounds, Camun
 
 - To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/reference/contact.md) page.
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
-- [Create a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md)
+- [Create a Camunda 8 account](/components/saas/organization/manage-plan/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
 - [Automate a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)
 - [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)

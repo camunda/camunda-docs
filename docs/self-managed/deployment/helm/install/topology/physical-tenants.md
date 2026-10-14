@@ -2,13 +2,13 @@
 id: topology-physical-tenants
 sidebar_label: "Configure Physical Tenants across releases"
 title: "Configure Physical Tenants across releases"
-description: "Map Physical Tenants across the Hub, Orchestration Cluster, and Optimize releases, isolate their index prefixes, and operate tenant lifecycle changes in order."
+description: "Map Physical Tenants across the Hub, Orchestration Cluster, and Optimize releases, and operate tenant lifecycle changes in order."
 ---
 
 A Physical Tenant spans three releases: it's declared in an Orchestration Cluster release, mapped in the Hub release, and served by its own Optimize release.
 
 :::note Minimum chart versions
-This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [minimum chart versions](./index.md#minimum-chart-versions).
+This page needs Helm chart 15.0.0 or later for 8.10 releases. For the minimum chart version per Camunda version, see [release roles](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 :::
 
 This page covers the release-level work. For what a Physical Tenant is, how its isolation model works, and the full application configuration reference, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md) and the [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
@@ -88,13 +88,13 @@ global:
 
 Give every Optimize release its own OIDC client ID, audience, role name, redirect URL, and secret. Set the same client ID, audience, redirect URL, and secret on that tenant's Optimize release under `optimize.security.authentication.oidc`. Setting a dedicated `roleName` avoids adding the audience to the shared `Optimize` role.
 
-A `physicalTenants` entry registers the tenant's Optimize client and role in Management Identity. It also adds the tenant and its Optimize to the Camunda Hub cluster inventory, under the parent cluster. The inventory uses `components.optimize.webappUrl` as the Optimize URL. If you don't set `webappUrl`, it uses `redirectUrl`.
+A `physicalTenants` entry registers the tenant's Optimize client and role in Management Identity. It also adds the tenant's Optimize to the Camunda Hub cluster inventory, using its `webappUrl`, or its `redirectUrl` when `webappUrl` isn't set.
 
 A distinct `roleName` isolates the Optimize role per tenant, but it doesn't isolate Optimize's logical tenants, which are a separate mechanism. See [Optimize and Physical Tenants](/self-managed/concepts/physical-tenants/optimize.md#known-limitation-logical-tenants-with-the-same-id-across-physical-tenants) if you reuse the same logical tenant ID across Physical Tenants behind one shared Management Identity.
 
-## Isolate every index prefix family
+## Isolate the index prefixes
 
-Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Assign unique prefixes for every cluster and tenant, and make each Optimize reader prefix equal to the writer prefix of its tenant. For the prefix families and their rules, see [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
+Every tenant needs its own writer, reader, and Optimize application prefixes, and each reader prefix must equal its writer prefix. See [prefixes in the split topology](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#prefixes-in-the-split-topology).
 
 ## Override the secret store per tenant
 

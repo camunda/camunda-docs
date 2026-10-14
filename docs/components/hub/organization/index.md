@@ -18,9 +18,15 @@ Create and manage workspaces within your organization:
 
 <span class="link-arrow">[Get started](./manage-workspaces/index.md)</span>
 
+## Manage environments
+
+See your deployment environments and assign them to workspaces:
+
+<span class="link-arrow">[Get started](./manage-environments/index.md)</span>
+
 ## Manage clusters
 
-Create, monitor, and assign clusters for seamless execution across all rollout stages:
+Create, monitor, and maintain the clusters that host your environments:
 
 <span class="link-arrow">[Get started](./manage-clusters/index.md)</span>
 
@@ -36,9 +42,9 @@ Create a reusable credential, then select it wherever an element template needs 
 
 <span class="link-arrow">[Get started](./credentials/index.md)</span>
 
-## Manage organization settings
+## Manage organization
 
-Manage users and organizational settings, and view usage alerts and history:
+Manage your organization, its users, and its settings:
 
 <span class="link-arrow">[Get started](./manage-organization-settings/organization-settings.md)</span>
 

@@ -19,10 +19,10 @@ The interface language is automatically determined by the device language settin
 
 ## Change Tasklist language settings
 
-![tasklist-language-settings](img/tasklist-language-settings.jpg)
+![Language options in the Tasklist user menu](img/tasklist-language-settings.png)
 
-The language used in Tasklist can be changed through the following steps:
+To change the language used in Tasklist:
 
-1. Open your user profile, and navigate to **Language**.
-2. Select your preferred language from the list.
-3. Once selected, the Tasklist interface will update to your chosen language.
+1. Click your user avatar in the top-right corner of the header to open the user menu.
+2. Under **Language**, select your preferred language.
+3. The Tasklist interface updates to the selected language.

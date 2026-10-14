@@ -26,7 +26,7 @@ Tasklist will then wait for the process to be executed. If the process generates
 
 :::info
 
-To share a process with users inside your organization, but not with external users, you can click on the share icon ![share icon](img/tasklist-processes-share-button.png) to copy a link to the process. This link will only be accessible to users that already have access to Tasklist.
+To share a process that has a start form with users inside your organization, but not with external users, click **Copy link** ![Copy link button](img/tasklist-processes-share-button.png) in the start process dialog to copy a link to the process. This link will only be accessible to users that already have access to Tasklist.
 
 :::
 

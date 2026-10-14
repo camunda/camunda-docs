@@ -19,5 +19,5 @@ A fully typed PHP client for the [Camunda 8 Orchestration Cluster REST API](../a
 - **Semantic value objects** — distinct types for every identifier, checked at `PHPStan` level `max`
 - **Zero-config** — reads `CAMUNDA_*` environment variables (12-factor style)
 - **Job workers** — long-poll workers with optional `pcntl` process forking
-- **OAuth & Basic authentication** — pluggable authentication with automatic token management
+- **OAuth & Basic auth** — pluggable authentication with automatic token management
 - **PSR standards** — PSR-4 autoloading, PSR-18/PSR-7 HTTP via Guzzle

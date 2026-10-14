@@ -6,12 +6,11 @@ description: "Learn more about starting Management Identity, accessing the UI, d
 ---
 
 import IdentityLoginImg from './img/identity-login-page.png';
+import ManagementIdentityAvailability from './\_partials/\_management-identity-availability.md';
 
 Get started with Management Identity in Self-Managed by learning how to open and log in to the Management Identity interface.
 
-:::note
-Management Identity is included in the full and standalone Camunda Hub [Docker Compose configurations](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration) and in the default [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md). These configurations include Keycloak. The lightweight Docker Compose configuration does not start Management Identity or Keycloak.
-:::
+<ManagementIdentityAvailability />
 
 ## Log in to Management Identity
 

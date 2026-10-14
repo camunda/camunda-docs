@@ -84,6 +84,8 @@ To provision new tenants and understand lifecycle behavior in 8.10, including ro
 
 Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
 
+To size broker memory, secondary storage, and noisy-neighbor protection as you add tenants, see [size clusters with Physical Tenants](/components/best-practices/architecture/sizing-physical-tenants.md).
+
 For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#multiple-physical-tenants) and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
@@ -125,9 +127,9 @@ The `/v2/status` endpoint is scoped to the default Physical Tenant. Use `/cluste
 
 When configuring Kubernetes readiness probes, point the probe at `/actuator/health/readiness` for node-level readiness. To check whether a specific Physical Tenant can accept work independently of the node probe, poll `/physical-tenants/{id}/v2/topology` from your own health-check logic.
 
-For Elasticsearch and OpenSearch deployments, the secondary-storage readiness check uses schema-initialization state. The check is `UP` while at least one Physical Tenant is serviceable and `DOWN` when none are serviceable, but the overall readiness group can still be `DOWN` because of other readiness contributors. In the current implementation, a degraded `default` tenant can also keep node readiness `DOWN` even when another tenant is ready; this known limitation is tracked in [camunda/camunda#63674](https://github.com/camunda/camunda/issues/63674). If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other serviceable tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
+For Elasticsearch and OpenSearch deployments, the secondary-storage readiness check uses schema-initialization state. The check is `UP` while at least one Physical Tenant is serviceable and `DOWN` when none are serviceable, but the overall readiness group can still be `DOWN` because of other readiness contributors. If one tenant's secondary storage is unusable, that tenant is degraded on its own: its storage-dependent REST endpoints return `503` with a `Retry-After` header while every other serviceable tenant continues to serve traffic. Camunda retries the degraded tenant in the background, so it recovers without a restart once you repair the underlying cause.
 
-For diagnosis steps, see [troubleshooting](./troubleshooting.md).
+To see each tenant's schema-initialization state and the reason a tenant is degraded, inspect the `physicalTenantSchemaInitialization` contributor of `/actuator/health`. See [schema-initialization health](./storage-isolation.md#schema-initialization-health). For diagnosis steps, see [troubleshooting](./troubleshooting.md).
 
 ## Document store details
 

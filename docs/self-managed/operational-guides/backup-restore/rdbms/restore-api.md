@@ -21,6 +21,7 @@ import TrackRestore from '../\_partials/\_restore-api-track.md';
 import FailedRestore from '../\_partials/\_restore-api-failed.md';
 import RestoreOptimize from '../\_partials/\_restore-optimize-data.md';
 import RestoreHub from '../\_partials/\_restore-camunda-hub-data.md';
+import FewerPartitions from '../\_partials/\_restore-api-fewer-partitions.md';
 
 Restore Zeebe partition data through the Orchestration Cluster Restore API without restarting the brokers, when using a relational database management system (RDBMS) as secondary storage.
 
@@ -41,14 +42,14 @@ Both requests are non-blocking. Each is acknowledged as soon as the cluster acce
 
 The Restore API requires the following:
 
-| Prerequisite     | Description                                                                                                                                                                                    |
-| :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version  | Camunda 8.10 or later, restored with the exact version the backup was created with.                                                                                                            |
-| Backup store     | Every broker is configured with the same backup store that holds the backup, as described in the [RDBMS backup prerequisites](./backup.md#prerequisites).                                      |
-| Completed backup | A completed backup exists for every partition. List the available backups with [list runtime backups](/apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups.api.mdx). |
-| Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged.                    |
-| API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                 |
-| Authorizations   | If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                                    |
+| Prerequisite     | Description                                                                                                                                                                                                                                                            |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda version  | Camunda 8.10 or later, restored with the exact version the backup was created with.                                                                                                                                                                                    |
+| Backup store     | Every broker is configured with the same backup store that holds the backup, as described in the [RDBMS backup prerequisites](./backup.md#prerequisites).                                                                                                              |
+| Completed backup | A completed backup exists for every partition. List the available backups with [list runtime backups](/apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups.api.mdx).                                                                         |
+| Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged. See [restoring a backup with fewer partitions](#restoring-a-backup-with-fewer-partitions). |
+| API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                                                                                         |
+| Authorizations   | If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                                                                                                            |
 
 ## Restoring an RDBMS-backed cluster
 
@@ -324,6 +325,10 @@ The dry run does not report which backups it resolved. The response only contain
 ## Handling a failed Restore API operation
 
 <FailedRestore />
+
+### Restoring a backup with fewer partitions
+
+<FewerPartitions />
 
 <RestoreOptimize />
 

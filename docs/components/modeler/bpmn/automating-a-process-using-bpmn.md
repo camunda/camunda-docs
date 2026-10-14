@@ -21,7 +21,7 @@ BPMN offers control and visibility over your critical business processes in a wa
 ## Set up
 
 Begin by building your BPMN diagrams with Camunda Hub.
-To get started, ensure you’ve [created a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md).
+To get started, ensure you’ve [created a Camunda 8 account](/components/saas/organization/manage-plan/create-account.md).
 
 ## Getting started with BPMN
 
@@ -80,10 +80,10 @@ When you deploy the diagram, it becomes available on the selected cluster and ne
 
 To execute your completed process diagram:
 
-1. Make sure you have [connected at least one cluster to your project](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters).
+1. Make sure an [environment is assigned to your workspace](/components/hub/organization/manage-environments/assign-environments.md).
 1. Reopen the BPMN diagram.
 1. At the top right of the modeling interface, click **Deploy & run**.
-1. Select a target **Stage**.
+1. Select a target **Deployment environment**.
 1. Click **Deploy & run**.
 
 You can now monitor your instances in [Operate](/components/operate/userguide/basic-operate-navigation.md#open-operate).
