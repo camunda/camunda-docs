@@ -7,13 +7,9 @@ description: "Organize users into groups to control access to the clusters of yo
 
 Organize users into groups to control access to the clusters of your SaaS organization.
 
-:::note
+User groups are available in SaaS only. Groups apply to cluster access control only. They don't control access to Camunda Hub, such as workspaces, projects, or organization settings.
 
-- User groups are available in SaaS only.
-- Groups apply to cluster access control only. They don't control access to Camunda Hub, such as workspaces, projects, or organization settings.
-- Groups created in Console are no longer recommended for use.
-
-:::
+Groups created in Console are no longer recommended for use.
 
 ## Creating a group
 
