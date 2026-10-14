@@ -72,22 +72,21 @@ Application type **Web**:
 - Management Identity (`<mgmt-identity-app>`)
 - Orchestration Cluster (`<oc-app>`)
 - Optimize (`<optimize-app>`)
-- Web Modeler API (`<web-modeler-api-app>`)
+- Hub API (`<hub-api-app>`)
 
 Application type **Single-page application**:
 
-- Console (`<console-app>`)
-- Web Modeler UI (`<web-modeler-ui-app>`)
+- Hub UI (`<hub-ui-app>`)
 
-Register these as six separate applications. Camunda uses each application's client ID as that component's audience, so two components sharing a registration also share an audience, and a token issued for one is accepted by the other. Entra issues the same tenant-scoped `iss` claim for every application in your tenant, which makes the audience the only value that distinguishes one component from another.
+Register these as five separate applications. Camunda uses each application's client ID as that component's audience, so two components sharing a registration also share an audience, and a token issued for one is accepted by the other. Entra issues the same tenant-scoped `iss` claim for every application in your tenant, which makes the audience the only value that distinguishes one component from another.
 
 For **each** of the components above:
 
 1. In the Entra ID admin center, [register the application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 1. On the application's **Overview** page, note the **Client ID**.
 1. In the app registration, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) that matches the component:
-   - **Web**: Management Identity, Orchestration Cluster, Optimize, Web Modeler API
-   - **Single-page application**: Console, Web Modeler UI
+   - **Web**: Management Identity, Orchestration Cluster, Optimize, Hub API
+   - **Single-page application**: Hub UI
 1. Add the component's redirect URI from [the table below](#redirect-uris-per-camunda-component).
 
    :::note
@@ -116,8 +115,7 @@ For **each** of the components above:
 | Management Identity   | `<IDENTITY_URL>/auth/login-callback`         | `http://localhost:8084/auth/login-callback`         |
 | Orchestration Cluster | `<OC_URL>/sso-callback`                      | `http://localhost:8080/sso-callback`                |
 | Optimize              | `<OPTIMIZE_URL>/api/authentication/callback` | `http://localhost:8083/api/authentication/callback` |
-| Web Modeler UI        | `<WEB_MODELER_URL>/login-callback`           | `http://localhost:8070/login-callback`              |
-| Console               | `<CONSOLE_URL>/`                             | `http://localhost:8087/`                            |
+| Hub UI                | `<HUB_URL>/login-callback`                   | `http://localhost:8070/login-callback`              |
 
 Replace each `*_URL` placeholder with the base URL (in the format `<protocol>://<host/ip>:<port>/<context-path>`) that will be accessible from your users’ browsers.
 If you plan to expose the services only on `localhost` (as described later in this guide), you can use the URIs in the local deployment column directly.
@@ -131,7 +129,7 @@ kubectl create secret generic entra-credentials \
   --from-literal=identity-client-secret="<mgmt-identity-app-secret>" \
   --from-literal=orchestration-cluster-client-secret="<oc-app-secret>" \
   --from-literal=optimize-client-secret="<optimize-application-secret>" \
-  --from-literal=webmodeler-api-client-secret="<web-modeler-api-app-secret>"
+  --from-literal=hub-api-client-secret="<hub-api-app-secret>"
 ```
 
 :::info
@@ -140,7 +138,7 @@ In Camunda configuration, this value is referred to as a _client secret_ to alig
 :::
 
 :::info
-The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
+The secret key `hub-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
 The PostgreSQL credentials for Management Identity and Camunda Hub are no longer created here. They are provided by the operator (or managed database) that hosts each database, such as the `pg-identity-secret` and `pg-hub-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
@@ -231,8 +229,8 @@ By default:
 You can adjust these values if your organization uses different claim mappings.
 For more information, see the [Orchestration Cluster OIDC configuration guide](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-1-configure-the-oidc-client-id-claim).
 
-:::note Username display in Web Modeler (Helm)
-With Helm defaults, usernames are typically resolved from `preferred_username`. If you want Web Modeler to use the `name` claim instead (for example, to show display names), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
+:::note Username display in Hub (Helm)
+With Helm defaults, usernames are typically resolved from `preferred_username`. If you want Hub to use the `name` claim instead (for example, to show display names), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Hub `restapi` environment.
 
 See [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak).
 :::
@@ -339,23 +337,23 @@ optimize:
 
 Replace `<OPTIMIZE_URL>` with the base URL of Optimize as it will be reachable from your users' browser. For local deployment, use `http://localhost:8083`.
 
-#### Configure Web Modeler
+#### Configure Hub
 
-Add the following configuration for Web Modeler:
+Add the following configuration for Hub:
 
 :::note
-If you want Web Modeler to resolve usernames from the `name` claim instead of `preferred_username`, add `CAMUNDA_IDENTITY_USERNAMECLAIM=name` to the Web Modeler `restapi` environment configuration.
+If you want Hub to resolve usernames from the `name` claim instead of `preferred_username`, add `CAMUNDA_IDENTITY_USERNAMECLAIM=name` to the Hub `restapi` environment configuration.
 :::
 
 ```yaml
 global:
   identity:
     auth:
-      webModeler:
-        clientId: "<web-modeler-ui-app-id>"
-        clientApiAudience: "<web-modeler-ui-app-id>"
-        publicApiAudience: "<web-modeler-api-app-id>"
-        redirectUrl: "<WEB_MODELER_URL>"
+      camundaHub:
+        clientId: "<hub-ui-app-id>"
+        clientApiAudience: "<hub-ui-app-id>"
+        publicApiAudience: "<hub-api-app-id>"
+        redirectUrl: "<HUB_URL>"
 
 camundaHub:
   enabled: true # Deploys both Console and Web Modeler
@@ -372,31 +370,15 @@ camundaHub:
         existingSecretKey: password
 ```
 
-Replace `<WEB_MODELER_URL>` with the base URL of Web Modeler as it will be reachable from your users' browser. For local deployment, use `http://localhost:8070`.
+Replace `<HUB_URL>` with the base URL of Hub as it will be reachable from your users' browser. For local deployment, use `http://localhost:8070`.
 
-Web Modeler requires an externally managed PostgreSQL database, configured under `camundaHub.restapi.externalDatabase`. Provision the database before deploying. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
+Hub requires an externally managed PostgreSQL database, configured under `camundaHub.restapi.externalDatabase`. Provision the database before deploying. For the full parameter list, see [Use external PostgreSQL](../database/using-existing-postgres.md).
 
 You can update `camundaHub.restapi.mail.fromAddress` with an address suitable for your environment.
-This address appears as the sender in emails sent by Web Modeler.
+This address appears as the sender in emails sent by Hub.
 For more details on configuring email delivery, see the [Camunda Hub section in Enable additional Camunda components](../enable-additional-components.md#camunda-hub).
 
-#### Configure Console
-
-Add the following configuration for Console:
-
-```yaml
-global:
-  identity:
-    auth:
-      console:
-        clientId: "<console-app-id>"
-        audience: "<console-app-id>"
-        redirectUrl: "<CONSOLE_URL>"
-```
-
-Replace `<CONSOLE_URL>` with the base URL of Console as it will be reachable from your users' browser. For local deployment, use `http://localhost:8087`.
-
-Console is deployed by Camunda Hub, which you enabled in the [Configure Web Modeler](#configure-web-modeler) step; the configuration above only defines its OIDC client.
+Console is part of Hub and uses the same OIDC client, so it needs no separate app registration or Helm configuration.
 
 ### Full configuration example
 
@@ -428,15 +410,11 @@ global:
         secret:
           existingSecret: "entra-credentials"
           existingSecretKey: "optimize-client-secret"
-      webModeler:
-        clientId: "<web-modeler-ui-app-id>"
-        clientApiAudience: "<web-modeler-ui-app-id>"
-        publicApiAudience: "<web-modeler-api-app-id>"
-        redirectUrl: "<WEB_MODELER_URL>"
-      console:
-        clientId: "<console-app-id>"
-        audience: "<console-app-id>"
-        redirectUrl: "<CONSOLE_URL>"
+      camundaHub:
+        clientId: "<hub-ui-app-id>"
+        clientApiAudience: "<hub-ui-app-id>"
+        publicApiAudience: "<hub-api-app-id>"
+        redirectUrl: "<HUB_URL>"
   security:
     authentication:
       method: oidc
@@ -544,12 +522,9 @@ kubectl port-forward svc/camunda-connectors 8086:8080
 # Optimize
 kubectl port-forward svc/camunda-optimize 8083:80
 
-# Web Modeler
+# Hub
 kubectl port-forward svc/camunda-web-modeler-restapi 8070:80
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
-
-# Console
-kubectl port-forward svc/camunda-console 8087:80
 ```
 
 Once port forwarding is active, access each component through `http://localhost:<port>`.
@@ -557,7 +532,7 @@ For example:
 
 - Orchestration Cluster: `http://localhost:8080` (redirects you to Entra for login)
 - Management Identity: `http://localhost:8084`
-- Console: `http://localhost:8087`
+- Hub: `http://localhost:8070`
 
 ## Configure machine-to-machine (M2M) API access
 
