@@ -1,0 +1,12 @@
+components:
+  schemas:
+    StartCursor:
+      description: The start cursor in a search query result set.
+      format: base64
+      type: string
+      example: WzIyNTE3OTk4MTM2ODcxMDJd
+    EndCursor:
+      description: The end cursor in a search query result set.
+      format: base64
+      type: string
+      example: WzIyNTE3OTk4MTM2ODcxMDJd
