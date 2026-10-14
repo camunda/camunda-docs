@@ -2371,6 +2371,9 @@ ul ul .table-of-contents__link--active {
 /* Whole letter box is the link target */
 .letter-link a {
   display: block;
+}
+.letter-link a,
+.letter-link:not(:has(a)) {
   padding: 0.25rem 0;
 }
 .markdown .letter-link a,
