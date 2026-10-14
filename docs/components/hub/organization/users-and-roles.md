@@ -95,7 +95,7 @@ Access to Optimize includes access to the [business value dashboard](/components
 ### Environment visibility
 
 - **Manage**: View all environments and resume paused ones. Organization Owner, Organization Admin, and DevOps have this level. Only Organization Owner and Organization Admin can assign environments to workspaces.
-- **View all**: See every environment in the organization, and open its applications, such as Operate and Tasklist. The user can't assign, add, or resume environments, and sees the workspace assignments only of workspaces where they are an editor or a workspace admin. Analyst and Member have this level.
+- **View all**: See every environment in the organization, and open its applications, such as Operate and Tasklist. The user can't assign or add environments, doesn't get the option to resume a paused environment, and sees the workspace assignments only of workspaces where they are an editor or a workspace admin. Analyst and Member have this level.
 
 ## Access to runtime environments
 
