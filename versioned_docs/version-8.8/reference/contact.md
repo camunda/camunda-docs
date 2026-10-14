@@ -17,7 +17,6 @@ keywords:
   ]
 ---
 
-import AskAi from './react-components/\_banner-ask-ai.md'
 import CredentialsImg from './img/create-issue-request.png';
 import BugImg from './img/icon-reference-bug.png';
 import CommunityImg from './img/icon-reference-community.png';
@@ -60,8 +59,6 @@ Get support for Camunda or send us your feedback via the following channels.
 <td><p>For security-related issues, see [security notices](/reference/notices.md) for current information on known issues and how to report a vulnerability so we can solve the problem as quickly as possible.</p><p><strong>Note:</strong> Do not use GitHub for security-related issues.</p></td>
 </tr>
 </table>
-
-<AskAi/>
 
 ## Locate your Camunda 8 credentials
 

@@ -333,7 +333,7 @@ Uniqueness control is **retroactive**. When you enable it, business IDs that wer
 
 Uniqueness control is opt-in:
 
-- For SaaS, configure this in the [cluster configuration via Camunda Hub](/components/hub/organization/manage-clusters/settings.md#enable-business-id-uniqueness).
+- For SaaS, configure this in the [cluster configuration via Camunda Hub](/components/saas/clusters/settings.md#enable-business-id-uniqueness).
 - For Self-Managed, set the [`camunda.process-instance-creation.business-id-uniqueness-enabled`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#process-instance-creation) property in the application config (for example, `application.yaml` or as an environment variable).
 
 :::note

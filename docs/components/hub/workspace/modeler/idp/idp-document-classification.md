@@ -1,16 +1,18 @@
 ---
 id: idp-document-classification
 title: Document classification
-description: "Document classification templates use LLMs to automatically classify documents by type, such as invoices, contracts, or identity documents."
+description: "Automatically classify documents by type using LLM-powered classification templates."
 toc_max_heading_level: 3
 ---
 
+import IdpClassificationCreateModalImg from './img/idp-create-classification-modal.png';
 import IdpClassificationDocTypesImg from './img/idp-classification-doc-types.png';
 import IdpClassificationTestImg from './img/idp-classification-test.png';
 import IdpClassificationResultsImg from './img/idp-classification-results.png';
 import IdpClassificationPublishImg from './img/idp-classification-publish.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Automatically classify documents by type using LLM-powered classification templates.
+<PageDescription />
 
 ## About document classification
 
@@ -29,6 +31,9 @@ Document classification templates require an environment on version 8.9 or later
 To create a new document classification template:
 
 1. In your [IDP project](./idp-projects.md), click **Create new** and select **Classification template**.
+
+<img src={IdpClassificationCreateModalImg} alt="Create a classification template modal" width="80%" />
+
 2. **Name**: Enter a descriptive name for the classification template, such as "Incoming document classifier".
 3. **Description**: Enter a description to provide more information about what types of documents this template classifies.
 4. **Provider**: Select the cloud provider you want to use for classification. The available providers depend on the [connector secrets](./idp-configuration.md) configured for your environment's cluster.

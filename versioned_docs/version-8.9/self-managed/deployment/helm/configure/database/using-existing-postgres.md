@@ -17,10 +17,10 @@ In the Camunda Helm chart, Keycloak (`identityKeycloak`) is deprecated and disab
 - **Connection details:** following sample values are used in this guide (replace them with your own):
 
 ```yaml
-host: `db.example.com`
-port: `5432`
-username: `postgres`
-password: `examplePassword`
+host: db.example.com
+port: 5432
+username: postgres
+password: examplePassword
 ```
 
 - **Supported versions:**: Check the [supported environments](/reference/supported-environments.md) and [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) pages to confirm which PostgreSQL versions are supported.

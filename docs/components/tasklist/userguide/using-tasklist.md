@@ -15,20 +15,21 @@ Once assigned to a user, the task can be completed. The user can unassign the ta
 
 Tasklist has two main pages:
 
-- [Tasks page](#tasks-overview) to manage tasks.
+- [Tasks page](#open-tasklist) to manage tasks.
 - [Processes page](./starting-processes.md) to start processes.
 
 ## Open Tasklist
 
-From Camunda Hub, you can access all your clusters and navigate to any running instance of Tasklist:
+From Camunda Hub, you can open Tasklist in any [environment](/components/concepts/environments.md) you have access to:
 
 1. Log in to Camunda Hub.
-1. In the left navigation under **Console**, click **Clusters**.
-1. Select a cluster. Each cluster contains its own instance of Tasklist.
-1. On the **Tasklist** card, click **Launch**. This opens the cluster's Tasklist instance.
+1. In the left navigation, click **Environments**, and then select an environment. Each environment has its own instance of Tasklist.
+1. Under **Applications**, on the **Tasklist** card, click **Open**. This opens Tasklist for the environment in a new tab.
+
+You can also expand an environment in the left navigation, and select Tasklist from its applications.
 
 :::tip
-If the cluster is paused, you won't see a **Launch** button. You must [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) to access its components.
+If the environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
 :::
 
 ## Tasks queue
@@ -46,7 +47,6 @@ The queue shows the preview of available tasks with the following information:
 
 - Task name
 - Name of the process the task belongs to
-- Task context description ([it can be optionally configured](/components/concepts/variables.md#context-variable))
 - [Business ID](/components/concepts/process-instance-creation.md#business-id) carried by the task, if one was captured from the process instance when the task was created
 - Assignee
 - Priority

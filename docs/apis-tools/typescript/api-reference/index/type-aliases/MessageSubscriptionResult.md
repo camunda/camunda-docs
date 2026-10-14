@@ -13,6 +13,18 @@ type MessageSubscriptionResult = object;
 
 ## Properties
 
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+The business id inherited from the subscribing process instance when this message
+subscription was opened. It is `null` when the process instance has no business id, and
+for message start event subscriptions, which are not tied to a process instance.
+
+---
+
 ### correlationKey
 
 ```ts

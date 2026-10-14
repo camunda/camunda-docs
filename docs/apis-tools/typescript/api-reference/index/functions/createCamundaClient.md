@@ -19,4 +19,4 @@ function createCamundaClient(options?): CamundaClient;
 
 ## Returns
 
-[`CamundaClient`](../classes/CamundaClient.md)
+[`CamundaClient`](../type-aliases/CamundaClient.md)

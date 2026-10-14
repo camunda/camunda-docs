@@ -40,6 +40,12 @@ const sidebar: SidebarsConfig = {
           label: "Search the files using a catalog asset",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/search-project-catalog-asset-usages",
+          label: "Search the catalog assets used within a project",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -69,6 +75,36 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/hub-api-sm/specifications/remove-cluster-registration",
           label: "Remove a cluster registration",
           className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Environment",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-environments",
+          label: "Get all environments",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-workspace-environments",
+          label: "Get a workspace's assigned environments",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/replace-workspace-environments",
+          label: "Replace a workspace's assigned environments",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-project-environments",
+          label: "Get a project's available environments",
+          className: "api-method get",
         },
       ],
     },

@@ -22,8 +22,8 @@ For an in-depth overview of Optimize's capabilities, visit our [Optimize documen
 
 Before getting started with Optimize:
 
-1. If using SaaS, [create a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md).
-1. [Create a cluster](/components/hub/organization/manage-clusters/create-cluster.md) in Camunda Hub.
+1. If using SaaS, [create a Camunda 8 account](/components/saas/organization/manage-plan/create-account.md).
+1. [Create a cluster](/components/saas/clusters/create-cluster.md) in Camunda Hub.
 
 :::note
 So long as you are operating with [Camunda 8 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.
@@ -33,15 +33,16 @@ You can begin analyzing reports and dashboards with just two process versions. H
 
 ## Open Optimize
 
-From Camunda Hub, you can access all your clusters and navigate to any running instance of Optimize:
+From Camunda Hub, you can open Optimize in any [environment](/components/concepts/environments.md) you have access to:
 
 1. Log in to Camunda Hub.
-1. In the left navigation under **Console**, click **Clusters**.
-1. Select a cluster. Each cluster contains its own instance of Optimize.
-1. On the **Optimize** card, click **Launch**. This opens the cluster's Optimize instance.
+1. In the left navigation, click **Environments**, and then select an environment. Each environment has its own instance of Optimize.
+1. Under **Applications**, on the **Optimize** card, click **Open**. This opens Optimize for the environment in a new tab.
+
+You can also expand an environment in the left navigation, and select Optimize from its applications.
 
 :::tip
-If the cluster is paused, you won't see a **Launch** button. You must [resume the cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resume-a-cluster) to access its components.
+If the environment is paused, you must [resume it](/components/hub/organization/manage-environments/index.md#resume-a-paused-environment) to access its applications.
 :::
 
 ## Create and analyze dashboards

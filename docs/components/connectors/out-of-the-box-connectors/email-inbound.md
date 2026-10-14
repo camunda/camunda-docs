@@ -16,7 +16,7 @@ To use the **Email Inbound connector**, you must have an IMAP server available t
 
 :::note
 Use secrets to avoid exposing your sensitive data as plain text.
-See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+See [managing secrets](/components/saas/clusters/manage-secrets.md).
 :::
 
 <InboundConnectorBasics />

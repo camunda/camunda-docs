@@ -1,0 +1,60 @@
+---
+id: sap-integration
+title: SAP integration
+description: "Camunda's SAP integration connects processes with SAP S/4HANA, ECC, and SAP Business Technology Platform (BTP) services through modular components: the SAP OData connector and RFC outbound connector."
+---
+
+Use Camunda's [SAP](/reference/glossary.md#sap) integration to bring SAP functionality into your orchestrated processes and connect with SAP BTP services.
+
+This integration provides modular components that can be used independently or together to automate business-critical scenarios across SAP and non-SAP systems.
+
+:::note
+The SAP BTP plugin is retired as of Camunda 8.10. There are no changes to the other modules of the SAP integration. For details, see the [Camunda 8.10 announcements](/reference/announcements-release-notes/8100/8100-announcements.md).
+:::
+
+## Purpose
+
+The SAP integration enables you to:
+
+- Extend end-to-end process orchestration into SAP S/4HANA and ECC systems.
+- Execute SAP-specific functions (such as BAPIs, RFCs, and OData calls) directly within BPMN workflows.
+- Call SAP functions as tools from an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), letting an agent autonomously trigger BAPIs, RFCs, or OData operations as part of its tool-calling loop.
+- Surface Camunda Tasklist items directly in SAP Fiori through **SAP Task Center integration**, improving visibility and collaboration for business users.
+- Enable event-driven automation with **SAP Advanced Event Mesh** (upcoming), allowing real-time responsiveness and better integration with SAP event streams.
+- Provide IT and business teams with a certified, enterprise-grade solution for SAP automation.
+
+:::info
+The Camunda SAP integration is **SAP Certified**, ensuring compliance with SAP's standards for compatibility, security, and performance. This certification provides added assurance for enterprise deployments.
+:::
+
+## Audience
+
+This documentation is intended for:
+
+- **Developers** who implement process models that call SAP functions, services, or APIs.
+- **Solution architects** who design system landscapes and need to understand integration options.
+- **Administrators** who deploy and configure SAP integration modules in SAP BTP or hybrid environments.
+
+## Scope of documentation
+
+This section of the documentation covers:
+
+- [Prerequisites](./prerequisites.md) for running the integration.
+- **Integration modules**: What each SAP module does and how they fit into Camunda workflows.
+- **Setup guidance**: How to configure and deploy integration modules using the [CSAP c8ctl plugin](./csap-cli.md).
+- **Module-specific documentation**:
+  - [SAP OData outbound connector](./odata-connector.md)
+  - [SAP RFC outbound connector](./rfc-connector.md)
+
+## About the integration
+
+Camunda's SAP integration consists of several modules that can be used independently:
+
+| Module                                               | What it does                                                                                                             |
+| :--------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| [SAP OData outbound connector](./odata-connector.md) | Interact with an SAP S/4HANA or ECC system via OData v2 + v4 APIs directly from your BPMN model.                         |
+| [SAP RFC outbound connector](./rfc-connector.md)     | Query Business Application Programming Interfaces (BAPIs) and remote-enabled function modules (RFCs) on SAP ECC systems. |
+
+These modules run within your [SAP BTP instance](https://www.sap.com/products/technology-platform.html) or alongside your Camunda deployment, requiring no proprietary Camunda setup and leveraging existing infrastructure with minimal prerequisites.
+
+![SAP integration overview](./img/sap-integration-overview.svg)

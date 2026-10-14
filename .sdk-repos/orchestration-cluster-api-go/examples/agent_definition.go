@@ -6,12 +6,11 @@ import (
 	"fmt"
 
 	camunda "github.com/camunda/orchestration-cluster-api-go"
-	openapi "github.com/camunda/orchestration-cluster-api-go/client"
 )
 
 func getAgentDefinitionExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region GetAgentDefinition
-	definition, err := client.GetAgentDefinition(ctx, openapi.MustAgentDefinitionKey("2251799813691958"))
+	definition, err := client.GetAgentDefinition(ctx, camunda.MustAgentDefinitionKey("2251799813691958"))
 	if err != nil {
 		return err
 	}
@@ -22,7 +21,7 @@ func getAgentDefinitionExample(ctx context.Context, client *camunda.CamundaClien
 
 func searchAgentDefinitionsExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region SearchAgentDefinitions
-	result, err := client.SearchAgentDefinitions(ctx, *openapi.NewAgentDefinitionSearchQuery())
+	result, err := client.SearchAgentDefinitions(ctx, *camunda.NewAgentDefinitionSearchQuery())
 	if err != nil {
 		return err
 	}

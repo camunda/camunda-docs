@@ -15,6 +15,26 @@ Aggregated metrics for an agent instance across all model calls.
 
 ## Properties
 
+### cacheCreationTokenCount
+
+```ts
+cacheCreationTokenCount: number;
+```
+
+Total tokens used to create prompt cache entries across all model calls.
+
+---
+
+### cacheReadTokenCount
+
+```ts
+cacheReadTokenCount: number;
+```
+
+Total tokens read from prompt cache across all model calls.
+
+---
+
 ### inputTokens
 
 ```ts
@@ -42,6 +62,16 @@ outputTokens: number;
 ```
 
 Total output tokens produced across all model calls.
+
+---
+
+### reasoningTokenCount
+
+```ts
+reasoningTokenCount: number;
+```
+
+Total reasoning tokens consumed across all model calls.
 
 ---
 

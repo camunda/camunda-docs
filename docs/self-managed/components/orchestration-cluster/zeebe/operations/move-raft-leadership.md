@@ -1,12 +1,12 @@
 ---
 id: move-raft-leadership
 title: "Move Raft leadership between zones"
-description: "Change zone priorities and rebalance a multi-region Zeebe cluster to move Raft partition leadership between zones."
+description: "Change zone priorities and rebalance a zone-aware Zeebe cluster to move Raft partition leadership between zones."
 ---
 
 You can move Raft partition leadership from one zone to another by reordering zone priorities and then rebalancing the cluster.
 
-This procedure changes only the priorities used for leader election. It doesn't change the partition distribution or move replicas between zones.
+This procedure changes only the priorities used for leader election. It doesn't change the partitioning or move replicas between zones.
 
 Use this procedure to:
 
@@ -16,7 +16,7 @@ Use this procedure to:
 
 ## Align leadership with secondary storage
 
-Raft leadership placement is especially important when the RDBMS secondary storage writer (for example, Amazon Aurora) and Raft leaders are in different regions. Cross-region communication with the secondary storage writer adds network round-trip latency. After the RDBMS secondary storage writer moves to another region, use this procedure to move Raft leadership to the same region when possible.
+Raft leadership placement is especially important when the writer for RDBMS secondary storage, such as an Amazon Aurora writer instance, and Raft leaders are in different regions. Cross-region communication with the secondary storage writer adds network round-trip latency. After the RDBMS secondary storage writer moves to another region, use this procedure to move Raft leadership to the same region when possible.
 
 The placement of Elasticsearch or OpenSearch secondary storage has less impact on this decision. In a multi-region setup, records are exported to secondary storage in both regions concurrently, so exporting has less dependency on cross-region network round-trip latency. Consider the location of the RDBMS secondary storage writer first when choosing the preferred leader zone.
 
@@ -34,16 +34,16 @@ The management port is typically not publicly exposed. Its access and TLS config
 
 ## Check the current zone priorities
 
-Use the Management API to retrieve the current cluster topology and partition distribution:
+Use the Management API to retrieve the current cluster topology and partitioning:
 
 ```bash
 curl \
   'http://{zeebe-gateway}:9600/actuator/cluster' \
   -H 'accept: application/json' \
-  | jq '.partitioning.zones[] | {name, priority}'
+  | jq '.partitioning.zones | sort_by(-.priority)[] | {name, priority}'
 ```
 
-The command returns each configured zone's name and priority. If `partitioning.zones` is missing or empty, the cluster isn't zone-aware and can't use this procedure. If `jq` isn't installed, omit the pipe to `jq` and manually inspect `partitioning.zones` in the JSON response. You can also inspect `brokers[].partitions[]` in the full response to see the priority assigned to each partition replica.
+The command returns each configured zone's name and priority, sorted from highest to lowest priority. If `partitioning.zones` is missing or empty, the cluster isn't zone-aware and can't use this procedure. If `jq` isn't installed, omit the pipe to `jq` and manually inspect `partitioning.zones` in the JSON response. You can also inspect `brokers[].partitions[]` in the full response to see the priority assigned to each partition replica.
 
 A higher priority makes a replica the preferred leader during an election. The zone with the highest configured priority is therefore the preferred zone for Raft partition leaders. Recording the current order also ensures that you preserve the relative priorities of any zones you aren't swapping.
 
@@ -81,10 +81,8 @@ The priority change is asynchronous. Use the [configuration change monitoring AP
 
 ## Rebalance the cluster
 
-Changing zone priorities doesn't trigger a leader election. After the priority change completes, [manually rebalance the cluster](rebalancing.md#manual-rebalancing) to move partition leadership to the newly preferred zone.
+Changing zone priorities doesn't trigger a leader election. After the priority change completes, [manually rebalance the cluster](rebalancing.md#manual-rebalancing) to move partition leadership toward the newly preferred zone.
 
 Before rebalancing, review the guide's [limitations](rebalancing.md#limitations), [impact](rebalancing.md#rebalancing-impact), and [readiness checks](rebalancing.md#when-to-rebalance). During rebalancing, partitions can be temporarily unavailable while new leaders are elected.
 
-After rebalancing completes, use `GET /actuator/cluster` and your cluster metrics to verify that the expected brokers in the target zone lead the partitions.
-
-You can also use the Orchestration Cluster REST API [`GET /v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx) endpoint to check the partition leaders. This endpoint uses the v2 API rather than the Management API and requires different access permissions. Ensure your credentials are authorized for the v2 API before using it.
+After rebalancing completes, use the Orchestration Cluster REST API [`GET /v2/topology`](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx) endpoint to verify the partition leaders. You can also use `GET /actuator/cluster` and your cluster metrics to confirm the updated priorities, partition assignments, and replication health. The topology endpoint uses the v2 API rather than the Management API and requires different access permissions. Ensure your credentials are authorized for the v2 API before using it.

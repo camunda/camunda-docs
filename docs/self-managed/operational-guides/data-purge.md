@@ -22,7 +22,7 @@ The data purge feature can be used to:
 
 ## Purge data
 
-You will need access to the Cluster API as described in the [Cluster scaling guide](self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to perform the purge.
+You will need access to the Cluster API as described in the [Cluster scaling guide](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to perform the purge.
 
 :::danger
 The purge operation is irreversible. It will delete the runtime data in the cluster and the historical data in the exporters! Make sure to back up your data before proceeding.
@@ -32,7 +32,9 @@ The purge operation is irreversible. It will delete the runtime data in the clus
 
 The purge operation is a cluster-wide, asynchronous operation. Since it is asynchronous, you first launch it by sending a `POST` request to `/actuator/cluster/purge`, and then monitor by polling the topology via `/actuator/cluster` until it is finished.
 
-In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), a request without a `physicalTenant` parameter purges every Physical Tenant. Add `?physicalTenant={physicalTenantId}` to purge a single tenant and leave the others untouched.
+:::warning
+In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), a request without a `physicalTenant` parameter purges **every** Physical Tenant, not just the default one. This is the opposite of how unscoped requests behave on the REST `/v2/...` API, where an omitted tenant prefix resolves to the default tenant only. Add `?physicalTenant={physicalTenantId}` to purge a single tenant and leave the others untouched.
+:::
 
 <Tabs groupId="language" defaultValue="shell" queryString values={
 [
@@ -51,7 +53,7 @@ changeId=$(curl -sL -X POST 'http://localhost:9600/actuator/cluster/purge' | jq 
 lastChangeId=-1
 while [ ! $changeId -eq $lastChangeId ]; do
   lastChangeId=$(curl -sL 'http://localhost:9600/actuator/cluster' | jq '.lastChange.id')
-  [ $changeId -ge $lastChangeId ] && break
+  [ $lastChangeId -ge $changeId ] && break
   echo "Awaiting last change ID ${lastChangeId} to be equal to purge change ID ${changeId}"
   sleep 1
 done
@@ -125,10 +127,10 @@ The response is a [JSON object](https://github.com/camunda/camunda/blob/main/dis
 }
 ```
 
-- `changeId`: The ID of the changes initiated to scale the cluster. This can be used to monitor the progress of the scaling operation. The ID typically increases, so new requests have a higher ID than previous requests.
+- `changeId`: The ID of the change initiated to purge the cluster. You can use it to monitor the progress of the purge operation. The ID typically increases, so new requests have a higher ID than previous requests.
 - `currentTopology`: A list of current brokers and the partition distribution.
-- `plannedChanges`: A sequence of operations that has to be executed to achieve scaling.
-- `expectedToplogy`: The expected list of brokers and the partition distribution once the scaling is completed. For the purge feature, the expected topology will be the same as the current topology.
+- `plannedChanges`: A sequence of operations that must run to complete the purge.
+- `expectedTopology`: The expected list of brokers and the partition distribution once the purge is completed. For the purge feature, the expected topology will be the same as the current topology.
 
 <details>
   <summary>Example response</summary>
@@ -212,7 +214,7 @@ You can monitor the progress of the operation by sending a `GET` request to the 
 curl --request GET 'http://localhost:9600/actuator/cluster'
 ```
 
-When the scaling has completed, the `changeId` from the previous response will be marked as completed:
+When the purge has completed, the `changeId` from the previous response will be marked as completed:
 
 ```json
 {

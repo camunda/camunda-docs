@@ -2,12 +2,9 @@
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
 sidebar_label: Orchestrate human tasks
-description: "For low-code developers using Camunda 8 SaaS, efficiently allocate work through user tasks."
+description: "Build a Camunda 8 process with a user task, then route the process based on user decision."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
-
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';
@@ -25,6 +22,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 import Install from './react-components/\_install-c8run.md'
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
@@ -224,10 +226,10 @@ Human-centric processes involving user tasks seamlessly unfold within Tasklist, 
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-If you have not yet configured a cluster to deploy to, you'll see a notification. You must [configure at least one cluster](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters) before moving on.
+If no environment is assigned to your workspace, the deploy dialog tells you so. In SaaS, every cluster you create has one environment, which an organization admin must [assign to your workspace](/components/hub/organization/manage-environments/assign-environments.md) before you move on.
 
 1. At the top right of the modeling interface, click **Deploy & run** to deploy the process to your cluster.
-2. Select a target cluster.
+2. Select a target environment.
 3. Under **Resources**, select **All resources**. Your project contains two files: the BPMN process diagram and the linked form. This option deploys both together. In other contexts, it might make sense to deploy **Only this resource** for individual files.
 4. Click **Deploy & run**.
 

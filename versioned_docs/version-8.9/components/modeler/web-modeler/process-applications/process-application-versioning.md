@@ -10,10 +10,6 @@ import VersionActionsImg from '../img/versions/web-modeler-version-actions.png'
 import VersionListImg from '../img/versions/web-modeler-version-view-process-application-version.png'
 
 :::note
-With 8.7, "milestone" was renamed to "version". To learn more about this change, see [the related release note](/reference/announcements-release-notes/870/870-release-notes.md#web-modeler-milestones-renamed-to-versions).
-:::
-
-:::note
 With 8.9, the main process label has been removed from process applications in Web Modeler. As a result, creating a process application version no longer sets the `versionTag` automatically on the main process XML. This does not affect the process application version tag you enter in the version creation modal. To set `versionTag` values on BPMN, DMN, form, and RPA files, edit them manually in the properties panel. See the related announcements on [main process label removal](/reference/announcements-release-notes/890/890-announcements.md#web-modeler-the-main-process-label-has-been-removed-from-process-applications) and [version tag control](/reference/announcements-release-notes/890/890-announcements.md#web-modeler-users-now-have-full-control-over-version-tags-in-process-applications).
 :::
 

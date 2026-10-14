@@ -80,7 +80,7 @@ Once you are happy with your script and have tested it locally, you can start au
 ### Link RPA task to BPMN
 
 1. **Deploy the RPA file**:
-   1. If you have not already, [set up client connection credentials](../../hub/organization/manage-clusters/manage-api-clients/#create-a-client) in Camunda Hub.
+   1. If you have not already, [set up client connection credentials](/components/saas/clusters/manage-api-clients.md#create-a-client) in Camunda Hub.
    2. Assign the **RPA role** to the client in the [Orchestration Cluster Admin (formerly Orchestration Cluster Identity)](../../admin/role/#assign-client-to-a-role).
    3. Deploy your RPA script file by clicking on the rocket (🚀) icon in Desktop Modeler or the **Deploy** button in Camunda Hub
    4. For Desktop Modeler, note the ID of your RPA script. You will need this in the next step.
@@ -106,7 +106,7 @@ Once your RPA script and model are deployed, you can also use the **Test** funct
 The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
 1. **Create credentials for the worker**:
-   1. Create the necessary worker [credentials](../../hub/organization/manage-clusters/manage-api-clients/#create-a-client) in Camunda Hub. Give your new client the `Zeebe` and `Secrets` scopes.
+   1. Create the necessary worker [credentials](/components/saas/clusters/manage-api-clients.md#create-a-client) in Camunda Hub. Give your new client the `Zeebe` and `Secrets` scopes.
    2. Add the generated credentials to your `application.properties` in the same directory as your RPA worker executable.
 
 2. **Restart the worker**: If your worker is still running, restart it to apply the new credentials. The RPA worker should now be connected and ready to execute scripts from Zeebe.

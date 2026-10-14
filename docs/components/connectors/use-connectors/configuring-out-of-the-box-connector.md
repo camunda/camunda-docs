@@ -24,7 +24,7 @@ In this tutorial, you'll walk step-by-step through the implementation of a sampl
 
 Before you begin, ensure you have:
 
-- [A Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md).
+- [A Camunda 8 account](/components/saas/organization/manage-plan/create-account.md).
 - [A SendGrid account](https://signup.sendgrid.com/). You'll use SendGrid in the example connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
 - [A Camunda Hub workspace](/components/hub/organization/manage-workspaces/index.md). This is typically provisioned by a center of excellence team.
 
@@ -103,4 +103,3 @@ In [Operate](/components/operate/userguide/basic-operate-navigation.md#open-oper
 - [Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 - [Connectors & Integration Framework](https://camunda.com/platform/modeler/connectors/)
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
-- [Camunda Academy: How To Configure the SendGrid Connector](https://academy.camunda.com/c8-h2-sendgrid-connector/)
