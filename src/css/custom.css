@@ -2405,6 +2405,7 @@ ul ul .table-of-contents__link--active {
 }
 /* Style for letter divs without links - muted appearance */
 .letter-link:not(:has(a)) {
+  padding: 0.25rem 0;
   opacity: 0.5;
   cursor: default;
 }
