@@ -199,7 +199,7 @@ Roll back before step 6. Once you've deleted Identity objects, recovery is manua
 - Camunda Hub lists the Orchestration Cluster, and it reports healthy.
 - Deploying a process through Hub reaches the cluster.
 - Existing process instances are still visible in Operate, and workers still poll and complete jobs.
-- If Optimize runs, start a new process instance after the move and confirm that its data appears in Optimize. Historical data alone doesn't prove it, because it can come from the old prefix. This shows that the reader prefix is equal to the current exporter writer prefix.
-- If Optimize moved to its own release, your existing reports, dashboards, and settings are still there. This shows that its application index prefix is unchanged. Process data alone doesn't prove it.
+- If Optimize runs, start a new process instance and confirm that its data appears in Optimize. Historical data can come from the old prefix, so it doesn't prove the reader prefix equals the current writer prefix.
+- If Optimize moved to its own release, confirm that your existing reports, dashboards, and settings are still there. This proves its application index prefix is unchanged. Process data alone doesn't.
 - Only one Management Identity is running, in the Hub release.
 - No release logs authentication errors against an OIDC client that no longer exists.
