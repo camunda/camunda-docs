@@ -76,7 +76,9 @@ When Optimize is disabled, `optimize.database.elasticsearch.prefix` and `optimiz
 
 ## Prefixes in the split topology
 
-In the [deployment topology](/self-managed/deployment/helm/install/topology/index.md), the Orchestration Cluster writes records and Optimize reads them. Optimize runs in the orchestration release or in a separate Optimize release per Physical Tenant. Each Orchestration Cluster and each [Physical Tenant](/self-managed/deployment/helm/install/topology/physical-tenants.md) has its own prefixes. Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Prefixes keep the data of each cluster and tenant apart. To restrict who can read it, also use the access controls of your Elasticsearch or OpenSearch backend.
+Each Orchestration Cluster and each [Physical Tenant](/self-managed/deployment/helm/install/topology/physical-tenants.md) in the [deployment topology](/self-managed/deployment/helm/install/topology/index.md) needs its own index prefixes.
+
+The Orchestration Cluster writes records and Optimize reads them. Optimize runs in the orchestration release or in a separate Optimize release per Physical Tenant. Authentication doesn't isolate shared Elasticsearch or OpenSearch storage. Prefixes keep the data of each cluster and tenant apart. To restrict who can read it, also use the access controls of your Elasticsearch or OpenSearch backend.
 
 | Prefix family                     | Configuration                                                                                                                                                     | Requirement                                                         |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
@@ -85,12 +87,12 @@ In the [deployment topology](/self-managed/deployment/helm/install/topology/inde
 | Optimize reader                   | `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`                                                                                 | Must exactly equal that tenant's Legacy exporter writer prefix      |
 | Optimize application indices      | `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX` in `optimize.env`                                   | Unique per Optimize release, and different from every writer prefix |
 
-Every prefix in this table must also follow the [requirements](#requirements) above, across every cluster, tenant, and Optimize release that shares the storage. Being distinct isn't sufficient: `alpha` and `alpha-tenant` are distinct, but `alpha*` matches both. The only exception is each tenant's Optimize reader prefix, which must equal its writer prefix.
+Every prefix in this table must also follow the [requirements](#requirements), across every cluster, tenant, and Optimize release that shares the storage. Being distinct isn't sufficient: `alpha` and `alpha-tenant` are distinct, but `alpha*` matches both. The only exception is each tenant's Optimize reader prefix, which must equal its writer prefix.
 
 A wrong prefix doesn't cause an error:
 
-- **If you reuse a prefix**, the records of one cluster or tenant show in the Operate, Tasklist, or Optimize data of another.
-- **If the writer and reader prefixes are different**, Optimize starts against the wrong record set or an empty record set. Similar values aren't sufficient.
+- If you reuse a prefix, the records of one cluster or tenant show in the Operate, Tasklist, or Optimize data of another.
+- If the writer and reader prefixes are different, Optimize starts against the wrong record set or an empty record set. Similar values aren't sufficient.
 
 ## Configuration reference
 
