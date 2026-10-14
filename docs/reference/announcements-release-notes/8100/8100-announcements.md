@@ -22,30 +22,6 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/\_partials/\_h
 
 :::
 
-## Known issues
-
-:::warning Physical Tenants with multiple identity providers
-Camunda 8.10 has known authentication and tenant isolation issues in a specific deployment scenario. You are affected only if all of the following apply:
-
-- You run Camunda 8.10 Self-Managed.
-- Your cluster has more than one Physical Tenant.
-- Your Physical Tenants use separate identity providers (IdPs).
-
-See [camunda#65501](https://github.com/camunda/camunda/issues/65501), [camunda#65582](https://github.com/camunda/camunda/issues/65582), [camunda#65597](https://github.com/camunda/camunda/issues/65597) and [camunda#65607](https://github.com/camunda/camunda/issues/65607). If this scenario applies to you, don't use this setup in production until you have upgraded to Camunda 8.10.4, which fixes these issues. Camunda 8.10.4 is released latest by the end of this week.
-:::
-
-:::warning Multiple identity providers: named providers ignore the global claims
-In Camunda 8.10, a named identity provider does not use the global `username-claim`, `client-id-claim` and `prefer-username-claim`. You are affected only if all of the following apply:
-
-- You run Camunda 8.10 Self-Managed.
-- You configure identity providers under `camunda.security.authentication.providers.oidc.<provider-id>`.
-- You set `username-claim`, `client-id-claim` or `prefer-username-claim` only in `camunda.security.authentication.oidc.*`, and not on each provider.
-
-Tokens and logins from these providers then use the default claims. A user gets the value of the `sub` claim as username, and an M2M client is treated as a user. They lose the permissions that you gave to their username or client ID. In Camunda 8.9, the global claims applied to all providers.
-
-See [camunda#65633](https://github.com/camunda/camunda/issues/65633). If this scenario applies to you, set `username-claim`, `client-id-claim` and `prefer-username-claim` on each provider until you have upgraded to Camunda 8.10.4, which fixes this issue. Camunda 8.10.4 is released latest by the end of this week.
-:::
-
 ## Supported environments
 
 <div className="release-announcement-row">
@@ -854,6 +830,25 @@ The deprecated keys continue to work in 8.10. When you set one to a non-default 
 **Action:** Move the deprecated keys in your `values.yaml` to the component's `extraConfiguration`. If you set both, the `extraConfiguration` value takes precedence. Use the deprecation messages from your own upgrade as the up-to-date list of keys for your chart version.
 
 <p className="link-arrow">[Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-8100.md#deprecated-application-configuration-helm-keys)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unknown Helm values keys rejected by default in Camunda 8.12 {#unknown-helm-values-keys-rejected-in-812}
+
+Starting with Helm chart 15.1.0, the Camunda 8.10 chart warns about each chart-owned key in your values that the chart schema doesn't declare. Helm ignores these keys, so the settings they hold aren't applied. The check doesn't cover `global` values, the values of dependency charts, or free-form maps such as annotations and labels. The 8.11 chart keeps this behavior.
+
+Starting with Camunda 8.12 (Helm chart 17.x), unknown chart-owned keys stop `helm install` and `helm upgrade` by default.
+
+**Action:** Remove or correct the keys that the `[camunda][warning] UNKNOWN VALUES KEY` messages name. To make unknown keys fail now, set `global.strictValues: true`.
+
+<p className="link-arrow">[Find unknown keys in your values](/self-managed/deployment/helm/operational-tasks/helm-values-schema-validation.md#find-unknown-keys)</p>
 
 </div>
 </div>

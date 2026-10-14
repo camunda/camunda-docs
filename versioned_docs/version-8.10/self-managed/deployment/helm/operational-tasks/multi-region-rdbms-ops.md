@@ -119,6 +119,8 @@ Run the same script as in step 1, without `--dry-run`. It repeats the quorum rep
 ./failover.sh <lost-region-slot>
 ```
 
+If the script stops before it finishes, you can run it again. It waits for an Aurora switchover that is still in progress, and it doesn't start a second switchover.
+
 </TabItem>
 
 <TabItem value="unplanned">
@@ -195,6 +197,8 @@ Move the writer back to the recovered region if the other regions are further fr
 ```bash
 ./failback.sh <recovered-region-slot> --switch-writer
 ```
+
+If the script stops before it finishes, you can run this command again. The script waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it doesn't start a second switchover.
 
 Leaving the writer where it is costs nothing but cross-region latency for the regions furthest from it.
 
