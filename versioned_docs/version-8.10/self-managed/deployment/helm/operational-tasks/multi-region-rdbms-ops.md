@@ -119,6 +119,8 @@ Run the same script as in step 1, without `--dry-run`. It repeats the quorum rep
 ./failover.sh <lost-region-slot>
 ```
 
+If the script stops before it finishes, you can run it again. It waits for an Aurora switchover that is still in progress, and it doesn't start a second switchover.
+
 </TabItem>
 
 <TabItem value="unplanned">
@@ -140,7 +142,7 @@ If the writer was not in the lost region, you need no database action.
 Once the writer moves, the zone priorities still favor the region that hosted the old one. Partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Move the leaders next to the new writer:
 
 1. Raise the priority of the zone that now hosts the writer. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [Partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api) for applying it to a running cluster.
-1. Wait until the change reports `COMPLETED`. The cluster rejects a new change while one is still in progress.
+1. Wait until the change reports `COMPLETED`. Use the `changeId` from your request to [monitor the change](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#monitor-a-configuration-change). The cluster rejects a new change while one is still in progress.
 1. Run a [rebalance](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md) with `POST /cluster/v2/rebalance`. Priorities apply at the next election and don't move existing leaders on their own.
 
 ### 3. Route client traffic away from the lost region
@@ -195,6 +197,8 @@ Move the writer back to the recovered region if the other regions are further fr
 ```bash
 ./failback.sh <recovered-region-slot> --switch-writer
 ```
+
+If the script stops before it finishes, you can run this command again. The script waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it doesn't start a second switchover.
 
 Leaving the writer where it is costs nothing but cross-region latency for the regions furthest from it.
 

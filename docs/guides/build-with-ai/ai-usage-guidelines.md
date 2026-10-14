@@ -6,15 +6,36 @@ description: "Learn how to use Camunda AI features responsibly with guidance on 
 keywords: [ai, ai act, compliance, governance, ai agent, copilot, idp]
 ---
 
-Learn how to use Camunda AI features responsibly with guidance on data handling, human oversight, prohibited uses, and AI agents.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About Camunda AI features
 
 Camunda AI features and capabilities currently include:
 
-- **Agentic orchestration**: Embedding AI agents into BPMN processes so that an AI model can, within boundaries you define, decide which tools to call to reach a goal.
-- **Camunda Copilot**: AI-assisted process, form, and decision modeling. Describe what you need in natural language and Camunda generates BPMN diagrams, Camunda Forms, and FEEL expressions.
-- **Intelligent Document Processing (IDP)**: Automated document analysis and structured data extraction, connecting to your chosen document AI provider.
+<table className="table-callout" width="100%">
+<tr>
+<td>**Feature**</td>
+<td>**Description**</td>
+</tr>
+<tr>
+<td>[Process OS Harness](../../components/process-os-harness/overview.md)</td>
+<td>Discovers your existing processes, re-engineers them to use AI, and generates executable Camunda solutions.</td>
+</tr>
+<tr>
+<td>[Agentic orchestration](../../components/agentic-orchestration/agentic-orchestration-overview.md)</td>
+<td>Embed AI agents into BPMN processes so that an AI model can, within boundaries you define, decide which tools to call to reach a goal.</td>
+</tr>
+<tr>
+<td>[Camunda Copilot](../../components/early-access/alpha/bpmn-copilot/bpmn-copilot.md)</td>
+<td>AI-assisted process, form, and decision modeling. Describe what you need in natural language and Camunda generates BPMN diagrams, Camunda Forms, and FEEL expressions.</td>
+</tr>
+<tr>
+<td>[Intelligent Document Processing (IDP)](../../components/hub/workspace/modeler/intelligent-document-processing.md)</td>
+<td>Automated document analysis and structured data extraction, connecting to your chosen document AI provider.</td>
+</tr>
+</table>
 
 Camunda provides an **application and orchestration layer** that integrates AI models via interfaces. In most cases, the underlying AI models are not developed or operated by Camunda itself. Depending on your setup, AI models may be:
 
