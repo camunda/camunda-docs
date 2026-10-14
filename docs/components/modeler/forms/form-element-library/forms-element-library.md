@@ -41,8 +41,8 @@ The following form elements are currently available within Camunda Forms:
     <td><img src="/img/form-icons/form-textArea.svg" alt="Text Area Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-textarea">Text area</a></td>
     <td>Read and edit multiline textual data</td>
-  </tr>  
-  
+  </tr>
+
   <tr>
     <td><img src="/img/form-icons/form-number.svg" alt="Number Field Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-number">Number field</a></td>
@@ -65,8 +65,8 @@ The following form elements are currently available within Camunda Forms:
     <td><img src="/img/form-icons/form-radio.svg" alt="Radio Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-radio">Radio</a></td>
     <td>Small dataset single data selector</td>
-  </tr>  
-  
+  </tr>
+
   <tr>
     <td><img src="/img/form-icons/form-select.svg" alt="Select Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-select">Select</a></td>
@@ -77,8 +77,8 @@ The following form elements are currently available within Camunda Forms:
     <td><img src="/img/form-icons/form-checklist.svg" alt="Checklist Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-checkbox-group">Checklist</a></td>
     <td>Small dataset multi data selector</td>
-  </tr>  
-  
+  </tr>
+
   <tr>
     <td><img src="/img/form-icons/form-taglist.svg" alt="Taglist Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-taglist">Taglist</a></td>

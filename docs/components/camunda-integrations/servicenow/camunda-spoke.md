@@ -87,7 +87,7 @@ Cancel a Camunda process instance from ServiceNow when needed.
 Supported inputs
 
 **Process Instance Key:** The unique key identifying a running Camunda process instance to cancel.  
- Example: `2251799813685252`
+Example: `2251799813685252`
 
 **Operation Reference:** (Optional) A user-defined reference key available in Camunda for tracking the operation.
 Example: `camID`
@@ -101,7 +101,7 @@ Camunda can trigger a ServiceNow flow by calling a REST API as the trigger endpo
 Supported inputs
 
 **HTTP Method:** The HTTP method accepted by the flow.  
- Example: `POST`
+Example: `POST`
 
 **Path:** A custom URL path suffix for the trigger endpoint used by the ServiceNow Flow Starter Connector.  
 Example: `/api/camunda/my_flow_name`

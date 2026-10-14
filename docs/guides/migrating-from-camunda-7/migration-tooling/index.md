@@ -148,15 +148,16 @@ Run both paths on representative Java code before you use one across a broad mig
 
 The skill migrates Camunda 7 tests to [Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) in the **Code + models** and **Code only** scopes. A test is in scope when it runs a BPMN process or a DMN decision on a Camunda 7 engine. Test migration needs Camunda 8.9 or later. With target 8.8, the skill lists the tests as **Report only**.
 
-| Camunda 7 tests                                                                                                                    | What the skill does          |
-| :--------------------------------------------------------------------------------------------------------------------------------- | :--------------------------- |
-| Engine test support (`ProcessEngineRule`, `ProcessEngineExtension`, `ProcessEngineTestCase`, `@Deployment`) and camunda-bpm-assert | Migrates to CPT              |
-| Spring Boot and Spring process tests                                                                                               | Migrates to CPT              |
-| DMN decision tests (`DmnEngineRule`, `DecisionService`)                                                                            | Migrates to CPT              |
-| Scenario tests (camunda-platform-scenario)                                                                                         | Migrates to CPT              |
-| Tests that drive a running Camunda 7 engine through REST or the external task client                                               | Migrates to CPT              |
-| BDD layers such as Cucumber and JGiven, Arquillian, CDI, and Quarkus extension tests                                               | Reports for manual migration |
-| CMMN tests and tests that depend on engine internals                                                                               | Reports for manual redesign  |
+| Camunda 7 tests                                                                                                                    | What the skill does                                                          |
+| :--------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------- |
+| Engine test support (`ProcessEngineRule`, `ProcessEngineExtension`, `ProcessEngineTestCase`, `@Deployment`) and camunda-bpm-assert | Migrates to CPT                                                              |
+| Spring Boot and Spring process tests                                                                                               | Migrates to CPT                                                              |
+| DMN decision tests (`DmnEngineRule`, `DecisionService`)                                                                            | Migrates to CPT                                                              |
+| Scenario tests (camunda-platform-scenario)                                                                                         | Migrates to CPT                                                              |
+| Tests that drive a dedicated Camunda 7 engine through REST or the external task client                                             | Migrates to CPT                                                              |
+| Tests that use a shared Camunda 7 engine                                                                                           | Reports for manual migration, because CPT deletes runtime data between tests |
+| BDD layers such as Cucumber and JGiven, Arquillian, CDI, and Quarkus extension tests                                               | Reports for manual migration                                                 |
+| CMMN tests and tests that depend on engine internals                                                                               | Reports for manual redesign                                                  |
 
 The skill also migrates the mocks in these tests, such as camunda-platform-7-mockito and `Mocks` registrations, and by default mocks the same components in CPT. The **Test Inventory** in `MIGRATION_REPORT.md` lists each test with its handling. Tests that the skill doesn't migrate appear as **Report only**, with the reason. Unit tests that don't run an engine, such as delegate or worker unit tests, aren't part of test migration. The skill updates them as ordinary code.
 
