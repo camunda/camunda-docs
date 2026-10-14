@@ -148,7 +148,10 @@ Each partition exports a record only after every exporter on that partition has 
 - It holds back the exported position of the whole partition, so the event log is compacted later.
 - With [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) throttling enabled, flow control measures the exporting rate and backlog across all exporters on the partition. A slow custom exporter lowers the exporting rate and grows the backlog, so throttling reduces the write rate of the whole partition and your user-visible throughput drops.
 
-To detect a slow exporter, compare the exporting duration of each exporter with the `zeebe_exporter_exporting_duration_seconds` metric, which has an `exporter` label.
+To detect a slow exporter, compare the following metrics across exporters. Both have an `exporter` label:
+
+- `zeebe_exporter_exporting_duration_seconds`: the time each exporter needs to export a record.
+- `zeebe_exporter_last_updated_exported_position`: the last position each exporter acknowledged. An exporter whose position falls further and further behind the others is the slow one.
 
 To avoid performance bottlenecks, exporters should be kept as simple and lightweight as possible. Any heavy data transformation or enrichment should be delegated to external systems.
 
