@@ -104,7 +104,7 @@ description: "Manage reusable automation assets in a Git repository, and publish
 link: "./organization/users-and-roles",
 title: "Manage users and roles",
 image: ConsoleIcon,
-description: "Manage the users, user groups, and roles in your organization.",
+description: "Manage the users and roles in your organization, and user groups for cluster access in SaaS.",
 },
 {
 link: "./organization/manage-organization-settings/organization-settings",
