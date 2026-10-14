@@ -187,14 +187,13 @@ The following are suggested minimum requirements to get started. There is no one
   - CPU: 4 modern cores
   - Memory: 16 GiB
 - **Persistent volumes**
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
   - 32 GiB minimum capacity
   - SSD-backed volumes only. HDD-backed volumes are not supported.
-  - Avoid burstable volume types unless they can sustain the target IOPS and throughput continuously without relying on burst credits.
+  - Avoid burstable volume types unless they can sustain the target IOPS continuously without relying on burst credits.
 
 :::note Storage performance figures are a baseline, not a strict requirement
-The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. On providers where disk performance scales with capacity (for example, GKE `pd-ssd`), reaching the IOPS and throughput baseline can require a disk larger than the 32 GiB minimum capacity. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
+The storage performance figures in this section and in the platform-specific sections below are a starting point. The IOPS target comes from our load tests, which run on GKE, and is used for all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes) because the IOPS a broker needs depends on the workload, not the provider. We do not benchmark each provider separately. Disk bandwidth (MiB/s) was not a limiting factor. Actual needs vary with your workload, data retention, and exporter load. On providers where disk performance scales with capacity (for example, GKE `pd-ssd`), reaching the target IOPS can require a disk larger than the 32 GiB minimum capacity. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
 
 Storage type, however, is a strict requirement: HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency, and are not supported.
 
@@ -317,8 +316,7 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 - Instance type: 4 vCPUs (x86_64, >3.1 GHz), 16 GiB memory
 - Number of dedicated nodes: 4
 - Volume type: SSD
-  - 3,000 IOPS baseline per volume
-  - 125 MiB/s throughput baseline per volume
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
 - Unsupported volume types: HDD-backed volumes are not supported.
 
 #### Supported versions
@@ -346,12 +344,11 @@ Our reference architectures are continuously validated against the latest stable
 - Instance type: `m6i.xlarge` (4 vCPUs, 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: SSD `gp3`
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
   - Requires [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) to be installed and a `gp3` StorageClass [configured](https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html)
 - Volume alternative: `gp2`
   - Only if `gp3` isn't available
-  - Performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance); size the disk to sustain the target IOPS and throughput baseline
+  - Performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance); size the disk to sustain the target IOPS
 - Unsupported volume types: `sc1` (Cold HDD) and `st1` (Throughput HDD) are not supported.
 
 :::caution
@@ -403,13 +400,12 @@ Camunda 8 is compatible with [Contour](https://projectcontour.io/), which deploy
 - Instance type: Standard_D4as_v4 (4 vCPUs, 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: Premium SSD v2
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
   - Several [known limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations), e.g., lack of [Azure Backup support](https://learn.microsoft.com/en-us/azure/backup/disk-backup-support-matrix#limitations)
 - Volume alternative: Premium SSD
-  - Performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds); size the disk to sustain the target IOPS and throughput baseline
+  - Performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds); size the disk to sustain the target IOPS
 - Unsupported volume types: Standard HDD is not supported.
-- Volume alternative caveat: Standard SSD is supported if sized to sustain the target IOPS and throughput continuously without relying on bursting.
+- Volume alternative caveat: Standard SSD is supported if sized to sustain the target IOPS continuously without relying on bursting.
 
 #### Load balancer
 
@@ -422,9 +418,8 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 - Instance type: n(1|2)-standard-4 (4 vCPUs, 15 / 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: Performance (SSD) persistent disks
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
-  - On `pd-ssd`, IOPS and throughput scale with disk size, so size the disk to meet the baseline (throughput is the binding constraint). See [GCP disk performance](https://cloud.google.com/compute/docs/disks/performance).
+  - Sustained IOPS per [Disk IOPS](/components/best-practices/architecture/sizing-self-managed.md#disk-iops)
+  - On `pd-ssd`, IOPS and bandwidth scale with disk size, so size the disk to meet the target IOPS. See [GCP disk performance](https://cloud.google.com/compute/docs/disks/performance).
 - Unsupported volume types: Standard persistent disks (`pd-standard`, HDD-backed) cannot meet Zeebe's Raft flush latency requirements. Use SSD-backed (`pd-ssd`) volumes.
 
 #### Load balancer
