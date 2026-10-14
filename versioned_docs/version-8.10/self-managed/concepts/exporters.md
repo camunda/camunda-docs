@@ -142,18 +142,15 @@ If an error occurs during record processing, the same record is retried continuo
 
 Each loaded exporter introduces some performance overhead. A slow exporter will slow down all other exporters for the same partition and, in extreme cases, may block a processing thread entirely.
 
-Each partition exports a record only after every exporter on that partition has handled it. A slow custom exporter therefore has these effects:
+Each partition passes the next record to its exporters only after every exporter has handled the current one. A custom exporter with a slow `export()` method therefore has these effects:
 
-- It delays all other exporters on the partition, including the Camunda Exporter. Data in Operate, Tasklist, and the REST Query API becomes available later.
+- It delays all other exporters on the partition, including the exporter that writes to secondary storage, such as the Camunda Exporter. Data in Operate, Tasklist, and the REST Query API becomes available later.
 - It holds back the exported position of the whole partition, so the event log is compacted later.
-- With [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) throttling enabled, flow control measures the exporting rate and backlog across all exporters on the partition. A slow custom exporter lowers the exporting rate and grows the backlog, so throttling reduces the write rate of the whole partition and your user-visible throughput drops.
+- With [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) throttling enabled, flow control measures the exporting rate and backlog across all exporters on the partition. The slow `export()` method lowers the exporting rate and grows the backlog, so throttling reduces the write rate of the whole partition and your user-visible throughput drops.
 
-Exporters handle each record in sequence, so when every exporter is generally slow, their positions stay close together and no single exporter stands out. A slowdown is only easy to detect when one exporter stops updating its position while the others advance. Always check your custom exporters first, because they are the most likely cause.
+Exporters handle each record in sequence, so one exporter with a slow `export()` method slows all exporters at the same pace, and their acknowledged positions stay close together. To find it, compare the average export time of each exporter. Group the `zeebe_exporter_exporting_duration_seconds_sum` and `zeebe_exporter_exporting_duration_seconds_count` metrics by the `exporter` label and divide the rates of the two. Check your custom exporters first.
 
-Compare these metrics across exporters. Both have an `exporter` label:
-
-- `zeebe_exporter_exporting_duration_seconds`: the time each exporter needs to export a record.
-- `zeebe_exporter_last_updated_exported_position`: the last position each exporter acknowledged. An exporter whose position falls further and further behind the others is not keeping up.
+A different problem is an exporter that returns quickly from `export()` but acknowledges positions late or never, for example because it flushes batches asynchronously. Its `zeebe_exporter_last_updated_exported_position` falls behind the other exporters. This does not slow the other exporters, but it delays log compaction.
 
 To avoid performance bottlenecks, exporters should be kept as simple and lightweight as possible. Any heavy data transformation or enrichment should be delegated to external systems.
 
