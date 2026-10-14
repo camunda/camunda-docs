@@ -182,6 +182,10 @@ It is implemented via the [AI Agent connector](/components/connectors/out-of-the
 This is different from an [external agent](#external-agent), which is the non-native AI agent type.
 :::
 
+### Camunda project
+
+A [project](#project). The qualifier "Camunda" distinguishes the project from other project concepts you work with, such as a software project in your IDE.
+
 ### Catalog
 
 A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization level in Camunda Hub, and used by delivery teams across workspaces and projects.
@@ -655,6 +659,12 @@ In Camunda, a process is [modeled using BPMN](#process-model), then [deployed as
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
+### Process application
+
+The former name of the [project](#project): a Web Modeler entity before Camunda 8.10, and a Desktop Modeler concept recognized by a `.process-application` marker file. During the transition, Desktop Modeler and `c8ctl` recognize both `.process-application` and `camunda.json`, so existing process applications keep working.
+
+- [Project](#project)
+
 ### Process definition
 
 A [process model](#process-model) that has been deployed to the engine and versioned.  
@@ -722,7 +732,9 @@ The governance process of [ProcessOS](#processos). ProcessOS Harness is delivere
 
 ### Project
 
-A collection of related files in a Camunda Hub workspace you can work on, version, and deploy as a single bundle or as individual files. A workspace may contain multiple projects.
+The unit you build, test, and deploy together to form a Camunda solution. Also called a Camunda project where it needs to be distinguished from other project concepts, such as a software project in your IDE. Supersedes the [process application](#process-application).
+
+In Camunda Hub, a project is an entity within a workspace; locally (Desktop Modeler, `c8ctl`), it is a folder with a `camunda.json` file.
 
 - [Projects](/components/concepts/projects.md)
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
