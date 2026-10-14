@@ -19,17 +19,18 @@ All tools are available as **ready-to-use builds** from the [GitHub releases pag
 
 This table shows which migration tasks agentic migration covers, compared with the deterministic tools that you run yourself in a [manual migration](#manual-migration). Agentic migration also runs these tools, such as the Diagram Converter, where they apply.
 
-| Task                                                           | Agentic migration | Deterministic tools |
-| :------------------------------------------------------------- | :---------------: | :-----------------: |
-| Inventory Java code and tests, and estimate effort             |        ✅         |         ❌          |
-| Analyze and convert BPMN, DMN, and Camunda 7 forms             |        ✅         |         ✅          |
-| Create Camunda 8 forms from generated task forms               |        ✅         |         ❌          |
-| Migrate Java client code, delegates, and external task workers |        ✅         |         ✅          |
-| Migrate process and decision tests to CPT                      |        ✅         |         ❌          |
-| Validate the migration and compare test results with Camunda 7 |        ✅         |         ❌          |
-| Migrate runtime instances, history, and identity data          |        ❌         |         ✅          |
-| Produce the same result for the same input                     |        ❌         |         ✅          |
-| Run without an AI coding agent                                 |        ❌         |         ✅          |
+| Task                                                                             | Agentic migration | Deterministic tools |
+| :------------------------------------------------------------------------------- | :---------------: | :-----------------: |
+| Inventory Java code and tests, and estimate effort                               |        ✅         |         ❌          |
+| Analyze and convert BPMN, DMN, and Camunda 7 forms                               |        ✅         |         ✅          |
+| Create Camunda 8 forms from generated task forms                                 |        ✅         |         ❌          |
+| Create a first diff for supported Java transformations                           |        ✅         |         ✅          |
+| Complete the migration of Java client code, delegates, and external task workers |        ✅         |         ❌          |
+| Migrate process and decision tests to CPT                                        |        ✅         |         ❌          |
+| Validate the migration and compare test results with Camunda 7                   |        ✅         |         ❌          |
+| Migrate runtime instances, history, and identity data                            |        ❌         |         ✅          |
+| Produce the same result for the same input                                       |        ❌         |         ✅          |
+| Run without an AI coding agent                                                   |        ❌         |         ✅          |
 
 ## Agentic migration
 
@@ -176,7 +177,7 @@ With **Run tests**, the skill migrates and freezes the tests before it migrates 
 - Two CPT runs give the same results.
 - The CPT tests cover at least the process elements that the Camunda 7 tests covered, if your project measured Camunda 7 coverage.
 
-The **Test Parity** table in `MIGRATION_REPORT.md` lists each Camunda 7 test with its result and the results of its CPT tests. CPT starts the Camunda 8 runtime in Docker by default, so running the tests needs Docker or a [remote runtime](/apis-tools/testing/configuration.md#remote-runtime).
+The **Test Parity** table in `MIGRATION_REPORT.md` lists each Camunda 7 test with its result and the results of its CPT tests. CPT starts the Camunda 8 runtime in Docker by default, so running the tests needs Docker or a [remote runtime](/apis-tools/testing/configuration.md#remote-runtime). CPT deletes runtime data between tests, so don't point a remote runtime at a shared or production cluster.
 
 ### Agent workflow
 
