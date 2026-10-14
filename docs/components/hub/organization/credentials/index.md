@@ -31,10 +31,6 @@ A credential is deployed to environments, not to clusters. An environment is the
 - Camunda Hub shows an environment by its name, and adds the cluster name in parentheses whenever the two names differ.
 - On a Self-Managed cluster with several Physical Tenants, each environment is an independent target, with its own copy of the credential, its own values, and its own state. A credential deployed to one environment isn't readable from the other environments on that cluster.
 
-:::note
-On Camunda 8 SaaS, Hub labels each target as a cluster. The **Environments only** tab is named **Clusters only**, and the wizard, the credential list, and the scan say _cluster_ wherever this page says _environment_. A SaaS cluster holds a single environment, so everything else on this page applies unchanged.
-:::
-
 ## Terminology
 
 | Term            | Meaning                                                                                                                                                                                                                                                    |
@@ -46,7 +42,7 @@ On Camunda 8 SaaS, Hub labels each target as a cluster. The **Environments only*
 
 ## Credentials and connector secrets
 
-Credentials and [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) work together rather than replacing each other:
+Credentials and [connector secrets](/components/saas/clusters/manage-secrets.md) work together rather than replacing each other:
 
 |         | Connector secret                             | Credential                                                      |
 | ------- | -------------------------------------------- | --------------------------------------------------------------- |
@@ -82,7 +78,7 @@ Credential fields use `camunda.secrets.MY_API_KEY`, without braces. This is not 
 
 ### Store sensitive values as secrets, not plain text
 
-Store every sensitive value, such as a password or API key, as a [secret](/components/hub/organization/manage-clusters/manage-secrets.md) on the cluster, and reference it from the credential field. A credential field accepts any text you type, so a value entered directly is stored as you typed it, outside the secrets vault.
+Store every sensitive value, such as a password or API key, as a [secret](/components/saas/clusters/manage-secrets.md) on the cluster, and reference it from the credential field. A credential field accepts any text you type, so a value entered directly is stored as you typed it, outside the secrets vault.
 
 To guide you to a secret, Camunda Hub highlights a sensitive field and warns you when its value is not a secret reference. Saving is still allowed, so the value stays exposed until you replace it with a reference. The warning clears as soon as the field references a secret.
 
@@ -147,7 +143,7 @@ To create a credential, select **Create credential**, and complete the three ste
 You can also save the credential as a draft at any step. A draft is saved in Hub but is not deployed to any environment.
 
 :::note
-You cannot create a secret while creating a credential. Add the secret to the cluster first in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md), then reference it here. A credential's ID also cannot be changed after you create it, so to rename a credential, delete it and create a new one.
+You cannot create a secret while creating a credential. Add the secret to the cluster first in [Connector secrets](/components/saas/clusters/manage-secrets.md), then reference it here. A credential's ID also cannot be changed after you create it, so to rename a credential, delete it and create a new one.
 :::
 
 ### Credential states
@@ -178,7 +174,7 @@ Deleting a credential removes it from Hub and from every environment it is deplo
 Editing or deleting a credential takes effect immediately for every process that references it. Running process instances can fail if the credential no longer works or no longer exists.
 :::
 
-### Environments only credentials {#clusters-only-credentials}
+### Environments only credentials
 
 A credential created outside Hub, such as one created in Desktop Modeler or directly through the cluster API, exists on its cluster but is not tracked in Hub. The **Environments only** tab finds these credentials so you can bring them under Hub management.
 
@@ -194,7 +190,9 @@ Select **Rescan environments** to run the scan again, for example after a creden
 
 ![Environments only tab of the Credentials page, with one environment selected, a paused environment that can't be selected, and a Scan environments button](./img/credentials-clusters-only.png)
 
-If the scan returns no results, none of the clusters behind the environments you selected has a credential-tagged variable that matches a known credential type and version. Environments that are paused, or whose cluster runs a Camunda version without credential support, are marked as such and can't be scanned.
+If the scan returns no results, none of the clusters behind the environments you selected has a credential-tagged variable that matches a known credential type and version. Environments that are paused, or whose cluster runs a Camunda version without credential support, show a **Paused** or **Unsupported** badge and can't be scanned.
+
+When there is nothing to find, Hub shows: "No environment-only credentials found. The scan did not find any unmanaged variables that match an exact known credential type and version."
 
 ## Permissions
 
@@ -214,7 +212,7 @@ When you choose environments for a credential or for a scan, Hub lists only the 
 
 In this release:
 
-- You cannot create a secret from a credential. Create secrets in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) first.
+- You cannot create a secret from a credential. Create secrets in [Connector secrets](/components/saas/clusters/manage-secrets.md) first.
 - The plain-text warning checks the whole field value, so a value that combines literal text with a reference, such as `Bearer camunda.secrets.TOKEN`, is flagged even though the reference resolves.
 - Hub does not show which processes use a given credential, so check the impact yourself before you edit or delete one.
 - Credentials are visible to everyone in your organization who has access to Camunda Hub. You cannot restrict a credential to a project or a subset of users.
@@ -228,4 +226,4 @@ In this release:
 ## Next steps
 
 - [Configure credentials in the modeling interface](./modeling-interface.md)
-- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
+- [Connector secrets](/components/saas/clusters/manage-secrets.md)

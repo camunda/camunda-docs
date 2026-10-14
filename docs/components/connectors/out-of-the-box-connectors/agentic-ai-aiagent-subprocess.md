@@ -7,7 +7,6 @@ description: AI agent connector implementation based on ad-hoc sub-processes.
 
 import ConfigurationSystemPrompt from './agentic-ai/aiagent/configuration/\_system-prompt.md';
 import ConfigurationUserPrompt from './agentic-ai/aiagent/configuration/\_user-prompt.md';
-import ConfigurationTools from './agentic-ai/aiagent/configuration/\_tools.md';
 import ConfigurationMemoryProcess from './agentic-ai/aiagent/configuration/\_memory-process.md';
 import ConfigurationLimits from './agentic-ai/aiagent/configuration/\_limits.md';
 import ConfigurationEventHandling from './agentic-ai/aiagent/configuration/\_event-handling.md';

@@ -57,7 +57,7 @@ Update any stored links that rely on the previous redirect, including browser bo
 
 To confirm the correct URL for a cluster, open the cluster in Camunda Console and use the launch links for Operate, Tasklist, or Admin.
 
-If your organization uses [IP allowlisting](/components/hub/organization/manage-clusters/manage-ip-allowlists.md), a request to the cluster base URL without an application path can return `403 Forbidden` rather than an obvious routing error, because the base path is subject to allowlist restrictions. A `403` on the base URL is therefore an expected symptom of a stored link that is missing its application path, not necessarily an allowlist misconfiguration.
+If your organization uses [IP allowlisting](/components/saas/clusters/manage-ip-allowlists.md), a request to the cluster base URL without an application path can return `403 Forbidden` rather than an obvious routing error, because the base path is subject to allowlist restrictions. A `403` on the base URL is therefore an expected symptom of a stored link that is missing its application path, not necessarily an allowlist misconfiguration.
 
 :::note
 URLs extracted from the HTML of Camunda web UIs are not a stable interface and can change between releases. Use the documented URL formats above or the Console launch links instead of scraping links from the UI.

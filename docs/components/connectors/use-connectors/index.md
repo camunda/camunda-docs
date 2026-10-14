@@ -26,7 +26,7 @@ Some connectors let you select a [credential](/components/hub/organization/crede
 :::
 
 You can use sensitive information in your connectors without exposing it in your BPMN processes by using a [legacy secret reference](/reference/glossary.md#secret-reference-legacy).
-Use Camunda Hub to [create and manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
+Use Camunda Hub to [create and manage secrets](/components/saas/clusters/manage-secrets.md).
 
 You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any connector field in the properties
 panel. Secrets resolve in every field, not only in a specific subset of fields.
@@ -66,7 +66,7 @@ Using this in other areas can lead to unexpected results and incidents.
 
 You can also reference a secret directly in a Connector input mapping by using `camunda.secrets.<name>` in a FEEL expression.
 
-In SaaS, use the [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster. No secret store configuration is required. In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
+In SaaS, use the [connector secrets](/components/saas/clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster. No secret store configuration is required. In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
 
 These forms coexist and are handled differently:
 

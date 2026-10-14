@@ -7,7 +7,7 @@ description: Install Camunda 8 Self-Managed on Kubernetes using the Helm chart w
 
 Use this guide to quickly install the Camunda 8 orchestration cluster for testing and development.
 
-<!-- TODO: add links to explain the orchestration cluster and management cluster -->
+<!-- TODO: add links to explain the Orchestration Cluster and management plane -->
 
 :::tip Need a Kubernetes cluster?
 If you don't have a Kubernetes cluster yet, check out our setup guides:
@@ -206,6 +206,8 @@ helm install camunda camunda/camunda-platform \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
+This command sets only the application image versions. Because the chart doesn't provision a secondary storage backend by default, also enable one, for example with the flags from step 3 of [Orchestration Cluster only](#orchestration-cluster-only).
+
 To install a specific chart version, use the `--version` flag with the chart version number. For example, the chart version for Camunda 8.8 is `13`:
 
 ```shell
@@ -244,7 +246,7 @@ This command lists all available chart versions and their corresponding applicat
 - Explanation of management/orchestration cluster -->
 
 - [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) — deploy PostgreSQL, Elasticsearch, and Keycloak using official Kubernetes operators for the full platform.
-- [Helm chart Amazon OpenSearch service usage](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) — configure Camunda to use Amazon OpenSearch Service instead of the default Elasticsearch.
+- [Helm chart Amazon OpenSearch service usage](/self-managed/deployment/helm/configure/database/using-external-opensearch.md): configure Camunda to use Amazon OpenSearch Service instead of Elasticsearch.
 - [Getting started with document handling](/self-managed/concepts/document-handling/overview.md) — configure document storage and management in Camunda 8.
 - [Production installation](/self-managed/deployment/helm/install/production/index.md) — configure and install the helm chart for production environments.
 - [Helm Configuration](/self-managed/deployment/helm/configure/index.md) - customize your installation by modifying the Helm chart configuration.

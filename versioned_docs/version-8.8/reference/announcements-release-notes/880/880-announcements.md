@@ -85,6 +85,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 | [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23)    | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22)    | Core       | Regression      | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22)    | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                                         |
+| [8.8.22](https://github.com/camunda/connectors/releases/tag/8.8.22) | Connectors | Breaking change | [Intrinsic function allow-list](#connector-intrinsic-function-allow-list)                                                                             |
 | [8.8.19](https://github.com/camunda/connectors/releases/tag/8.8.19) | Connectors | Breaking change | [Connector secret filter](#connector-secret-filter)                                                                                                   |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)      | Core       | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)      | Core       | Regression      | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
@@ -562,6 +563,30 @@ In practice, this means a secret in a connector field only resolves at runtime i
 - Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
 
 <p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Outbound connectors refuse undeclared intrinsic function calls {#connector-intrinsic-function-allow-list}
+
+Starting with Connectors 8.8.22, the connector runtime runs an [intrinsic function](/components/connectors/advanced-topics/intrinsic-functions.md#declare-calls) only if the deployed BPMN process declares that exact call, by function name and field path, in the input mappings of the connector element.
+
+In practice, an intrinsic function call that reaches a connector through a process variable or job variable, instead of being written in the connector element's input mapping, now fails the job. A connector result that contains an object with the `camunda.function.type` key also fails the job when you store it in a result variable or map it with a result expression.
+
+**Action:** Before upgrading, check which processes use intrinsic functions.
+
+- Write each `camunda.function.type` call as a literal in the input mapping of the field that uses it, and redeploy the process.
+- Use a result expression that maps only the fields you need if a response from an external system can contain the `camunda.function.type` key.
+- Don't use `camunda.connector.intrinsic-function.allow-list.mode` set to `DISABLED` as a workaround. This mode refuses every intrinsic function call. No setting restores unrestricted execution.
+
+<p className="link-arrow">[Intrinsic function allow-list](/self-managed/components/connectors/connectors-configuration.md#intrinsic-function-allow-list)</p>
+<p className="link-arrow">[Troubleshoot intrinsic function errors](/components/connectors/advanced-topics/intrinsic-functions.md#troubleshoot-intrinsic-function-errors)</p>
 
 </div>
 </div>

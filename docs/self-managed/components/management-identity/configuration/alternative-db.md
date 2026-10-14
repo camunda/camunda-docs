@@ -25,7 +25,7 @@ Identity is tested against the following alternative relational databases:
 
 As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
 
-1. Download the appropriate Oracle driver: https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar.
+1. Download the appropriate Oracle driver and save it as `ojdbc.jar`: https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar.
 
 2. When starting the application, set `-cp "/app/ojdbc.jar:/app/identity.jar"` in the `java` command during startup. This is only required for Oracle.
 
@@ -64,7 +64,7 @@ identity:
       value: $JAVA_OPTS
     - name: SPRING_JPA_DATABASE
       value: oracle
-  # Overriding identity.command is required so that the new driver in /app will be loaded upon startup.
+  # Overriding identity.command is required so that the new driver in /extraDrivers will be loaded upon startup.
   command:
     - /bin/sh
     - -c
@@ -73,13 +73,13 @@ identity:
   # Extra volumes are mounted for any TLS certs necessary for the database:
   extraVolumeMounts:
     - name: "keystore-secret"
-      secret:
-        secretName: "keystore-secret"
+      mountPath: "/usr/local/certificates"
     - name: jdbcdrivers
       mountPath: /extraDrivers
   extraVolumes:
     - name: "keystore-secret"
-      mountPath: "/usr/local/certificates"
+      secret:
+        secretName: "keystore-secret"
     - name: jdbcdrivers
       emptyDir: {}
   initContainers:
@@ -142,7 +142,7 @@ JAVA_TOOL_OPTIONS=$JAVA_OPTS
 identity:
   externalDatabase:
     enabled: true
-  # These three configuration options are added so that spring knows to connect to oracledb using it's client library
+  # These configuration options are added so that Spring knows how to connect to SQL Server
   env:
     - name: SPRING_DATASOURCE_URL
       value: "jdbc:sqlserver://${IDENTITY_DATABASE_HOST:}:${IDENTITY_DATABASE_PORT:};databaseName=${IDENTITY_DATABASE_NAME:};encrypt=true;hostNameInCertificate={CACERT_/CN};trustServerCertificate=false"
@@ -155,11 +155,11 @@ identity:
   # Extra volumes are mounted for any TLS certs necessary for the database:
   extraVolumeMounts:
     - name: "keystore-secret"
-      secret:
-        secretName: "keystore-secret"
+      mountPath: "/usr/local/certificates"
   extraVolumes:
     - name: "keystore-secret"
-      mountPath: "/usr/local/certificates"
+      secret:
+        secretName: "keystore-secret"
 ```
 
 </TabItem>
@@ -170,7 +170,7 @@ spring:
   datasource:
     url: jdbc:sqlserver://${IDENTITY_DATABASE_HOST:}:${IDENTITY_DATABASE_PORT:};databaseName=${IDENTITY_DATABASE_NAME:};encrypt=true;hostNameInCertificate={CACERT_/CN};trustServerCertificate=false
     username: user
-    password: AStrongPassword
+    password: <password>
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     database: sql_server

@@ -41,7 +41,7 @@ Both releases must use the same Camunda 8.10 chart and application version. Inst
 Before you install the releases, prepare the following:
 
 - A production-ready Kubernetes cluster and a Helm CLI version supported by the Camunda 8.10 chart.
-- A single-region Camunda deployment. This pattern relies on Management Identity, which [dual-region deployments don't support](/self-managed/concepts/multi-region/dual-region.md#limitations) — Optimize itself isn't supported there either.
+- A single-region Camunda deployment. This pattern needs Management Identity, which a dual-region cluster runs [outside the stretched Orchestration Cluster](/self-managed/concepts/multi-region/dual-region.md#management-platform-and-orchestration-cluster). It also needs the automatic legacy Zeebe exporter. The chart turns this exporter off when the Orchestration Cluster spans more than one zone, for example when `orchestration.partitioning.numberOfZones` is 2 or more.
 - A namespace with enough capacity for the platform and a second Optimize Deployment.
 - An external Elasticsearch or OpenSearch cluster configured for the platform release. Follow the [Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md) or [OpenSearch](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) guide.
 - An external Keycloak or supported OIDC provider and a Management Identity configuration. The reference files use the [external Keycloak setup](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
@@ -101,8 +101,8 @@ To use another OIDC provider:
 1. Register `optimize-team-a` and `optimize-team-b` as separate confidential clients in the provider before installing either release.
 1. Configure these callback URLs:
 
-- `https://<host>/optimize-team-a/api/authentication/callback`
-- `https://<host>/optimize-team-b/api/authentication/callback`
+   - `https://<host>/optimize-team-a/api/authentication/callback`
+   - `https://<host>/optimize-team-b/api/authentication/callback`
 
 1. Configure both clients for the `optimize-api` audience and the claims required by your Camunda authorization mapping.
 1. Remove the Keycloak-specific `identity.clients` entry and `global.identity.keycloak` configuration from the reference files.
@@ -264,7 +264,7 @@ Using the same host for multiple Ingress objects is controller-specific. This gu
 
 ## Verify process data and index isolation
 
-Both Optimize instances read the same `zeebe-record` indices produced by the Orchestration Cluster. The 8.10 chart automatically enables the legacy Zeebe exporter when Optimize and its Elasticsearch or OpenSearch connection are enabled. This pattern applies to single-region deployments only — [dual-region deployments don't support Optimize](/self-managed/concepts/multi-region/dual-region.md#limitations).
+Both Optimize instances read the same `zeebe-record` indices produced by the Orchestration Cluster. The 8.10 chart automatically enables the legacy Zeebe exporter when Optimize and its Elasticsearch or OpenSearch connection are enabled. In a dual-region deployment, the chart suppresses that automatic behavior, so this pattern applies to single-region deployments only. See [Management platform and Orchestration Cluster](/self-managed/concepts/multi-region/dual-region.md#management-platform-and-orchestration-cluster).
 
 1. Deploy a test process to the shared Orchestration Cluster.
 1. Start and complete at least one process instance.

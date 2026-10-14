@@ -13,11 +13,11 @@ This page covers credentials that authenticate connector tasks, such as an AWS C
 
 ## Select a credential
 
-Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials deployed to the connected cluster that match the credential type the connector needs. On a Self-Managed cluster with several environments, the chooser also lists credentials deployed only to another environment on that cluster; those don't resolve at runtime in the environment you are connected to.
+Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials deployed to the environment you're [connected to](../../workspace/modeler/modeling/connect-to-a-runtime.md) that match the credential type the connector needs. On a Self-Managed cluster with several environments, the chooser also lists credentials deployed only to another environment on that cluster; those don't resolve at runtime in the environment you are connected to.
 
 Selecting a credential stores only a reference to it in your diagram. The credential's values stay in the environment they were deployed to.
 
-If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential doesn't exist on the connected cluster, or it was created for a different credential type.
+If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential doesn't exist in the connected environment, or it was created for a different credential type.
 
 ## What you can do in the chooser
 
@@ -53,7 +53,7 @@ Camunda Hub checks whether the secret you referenced exists on the cluster, with
 A value that embeds `camunda.secrets.` mid-word, such as `foo.camunda.secrets.AWS_SECRET_KEY`, holds no reference, so Camunda Hub reports it as plain text rather than as a missing secret. The plain-text warning replaces the missing secret warning on that field.
 
 :::note
-You cannot create the secret itself here. Add the secret to the cluster first in [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md), then reference it from the credential.
+You cannot create the secret itself here. Add the secret to the cluster first in [Connector secrets](/components/saas/clusters/manage-secrets.md), then reference it from the credential.
 :::
 
 A credential you create here is managed in Camunda Hub immediately. It appears on the **Managed in Hub** tab of the [**Credentials** page](./index.md#managed-credentials).

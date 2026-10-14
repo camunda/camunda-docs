@@ -43,7 +43,7 @@ Select and configure the model **Provider** you want to use from the following s
 - [Custom implementation](#custom-implementation) (Self-Managed/Hybrid only).
 
 :::tip
-Use [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly in the process.
+Use [connector secrets](/components/saas/clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly in the process.
 :::
 
 ### Anthropic
@@ -328,7 +328,7 @@ Select this provider to use a custom chat model provider implementation that you
 | **Provider parameters** | No       | Parameters for the custom chat model provider implementation, as a FEEL context.                                   |
 | **Model**               | Yes      | Identifier of the model to use, interpreted by the custom implementation.                                          |
 
-Implementing a custom provider requires building and registering a chat model provider with your Self-Managed or hybrid connector runtime, similar to how [custom conversation storage backends](./agentic-ai-aiagent-customization.md#custom-conversation-storage) are registered.
+To implement a custom provider, register a `ChatModelFactory` bean with your Self-Managed or hybrid connector runtime. See [custom chat model provider](./agentic-ai-aiagent-customization.md#custom-chat-model-provider).
 
 ## Model call timeout
 

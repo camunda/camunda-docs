@@ -146,7 +146,7 @@ Here's what your completed diagram should look like in Web Modeler:
 
 ## Store your API credentials as secrets
 
-Store the webhook credential and the OpenAI and SendGrid API keys as [secrets](/components/hub/organization/manage-clusters/manage-secrets.md) before you deploy the process. Create three secrets:
+Store the webhook credential and the OpenAI and SendGrid API keys as [secrets](/components/saas/clusters/manage-secrets.md) before you deploy the process. Create three secrets:
 
 | Key               | Value                                                                                       |
 | :---------------- | :------------------------------------------------------------------------------------------ |
@@ -162,7 +162,7 @@ How you create them depends on where your cluster runs:
 Reference the secrets from Connector fields so their values aren't stored as plain text in the BPMN model. Reference them from a connector task as `{{secrets.FraudWebhookKey}}`, `{{secrets.OpenAI}}`, or `{{secrets.SendGrid}}`.
 
 :::tip
-On Camunda 8.10 and later, you can also reference these secrets as `=camunda.secrets.FraudWebhookKey`, `=camunda.secrets.OpenAI`, and `=camunda.secrets.SendGrid`. See [reference connector secrets as `camunda.secrets.<name>`](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
+On Camunda 8.10 and later, you can also reference these secrets as `=camunda.secrets.FraudWebhookKey`, `=camunda.secrets.OpenAI`, and `=camunda.secrets.SendGrid`. See [reference connector secrets as `camunda.secrets.<name>`](/components/saas/clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
 :::
 
 ## Deploy the process and copy the webhook URL

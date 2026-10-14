@@ -50,7 +50,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/self-managed/reference-architecture/kubernetes.md#kubernetes).
 
-This page describes a single production release. For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases, with one Optimize release per Physical Tenant. See [Camunda 8.10 deployment topology](/self-managed/reference-architecture/deployment-topology.md) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
+This page describes a single production release. For a new Camunda 8.10 production deployment, the baseline topology deploys Camunda Hub and each Orchestration Cluster as separate Helm releases, with one Optimize release per Physical Tenant. See [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md).
 
 Before you write a production values file, see [Helm and application configuration responsibilities](/self-managed/deployment/helm/configure/configuration-responsibilities.md) for which settings belong in `values.yaml` and which belong in a component's `extraConfiguration`.
 
@@ -60,7 +60,7 @@ After following the [prerequisites](#prerequisites), you should have a Kubernete
 
 ### Namespace setup
 
-To get started, create two namespaces:
+This example creates a Hub release and an Orchestration Cluster release in separate namespaces. If you already have a Hub serving other environments, you can connect the new Orchestration Cluster to it instead. Create the namespaces you need:
 
 ```bash
 kubectl create namespace hub
@@ -74,14 +74,14 @@ kubectl create namespace orchestration
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
 :::note
-For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-camunda-hub).
+For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#camunda-hub-vs-orchestration-cluster).
 :::
 
 ### Install the Helm chart
 
 As there will be a Helm deployment in each namespace, create your own `hub-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
 
-The Camunda Helm chart can be installed in each namespace using the following command:
+Run the Hub installation command if you're creating a new Hub release. For an existing Hub, update its cluster inventory and install only the new orchestration release:
 
 ```bash
 # This will add our chart repository so you can pull from it
@@ -457,7 +457,7 @@ It is best to store secrets in an external secret manager such as [Vault by Hash
 
 When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/upgrade/components/index.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
 
-The following is an example configuration for the Orchestration Cluster to create persistent storage:
+The following is an example configuration that mounts an additional volume into the Orchestration Cluster pods. This `emptyDir` volume is ephemeral: Kubernetes deletes its data when a pod is deleted or rescheduled. To keep data after that, use a `persistentVolumeClaim` volume instead.
 
 ```yaml
 orchestration:
@@ -486,10 +486,7 @@ The following resources and configuration options are important to keep in mind 
   identity:
     serviceAccount:
       enabled: false
-  console:
-    serviceAccount:
-      enabled: false
-  webModeler:
+  camundaHub:
     serviceAccount:
       enabled: false
   connectors:

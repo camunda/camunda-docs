@@ -26,7 +26,7 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appropriate configurations.
 
-However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).
+However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#configuring-the-ingress) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).
 
 Additional information and a high-level overview of Kubernetes as the upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
@@ -50,7 +50,7 @@ For the tool versions used, check the [.tool-versions](https://github.com/camund
 This section installs Camunda 8 following the architecture described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md). The architecture includes the following core components:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
-- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Management plane**: Design and management tools (Camunda Hub and Management Identity)
 
 Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
@@ -516,7 +516,7 @@ Deploy Keycloak with OpenShift Routes:
 
 ```bash
 # Deploy the PostgreSQL database for Keycloak
-CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-keycloak" ./deploy.sh)
 
 # Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-openshift.yml"
@@ -539,7 +539,7 @@ Deploy Keycloak with nginx-ingress:
 
 ```bash
 # Deploy the PostgreSQL database for Keycloak
-CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-keycloak" ./deploy.sh)
 
 # Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-nginx.yml"
@@ -562,7 +562,7 @@ Deploy Keycloak without external access:
 
 ```bash
 # Deploy the PostgreSQL database for Keycloak
-CLUSTER_FILTER=pg-keycloak (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+(cd generic/kubernetes/operator-based/postgresql && CLUSTER_FILTER="pg-keycloak" ./deploy.sh)
 
 # Deploy Keycloak
 export KEYCLOAK_CONFIG_FILE="keycloak-instance-no-domain.yml"
@@ -585,7 +585,7 @@ For more details on the Keycloak deployment, see [Keycloak deployment in the ope
 
 #### Merge operator overlays into values
 
-Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services instead of embedded subcharts.
+Once the operator-managed services are running, merge the corresponding Helm values overlays into your `values.yml` file. These overlays configure Camunda components to use the external operator-managed services.
 
 Merge the **Elasticsearch** overlay:
 
@@ -1002,7 +1002,7 @@ The Camunda Helm chart can be deployed to OpenShift with a few modifications, pr
 
 #### Non-root SCCs
 
-If you intend to deploy Camunda 8 while restricting applications from running as root (e.g., using the `nonroot` built-in SCCs), you'll need to configure each pod and container to run as a non-root user. For example, when deploying Zeebe using a stateful set, you would include the following YAML, replacing `1000` with the desired user ID:
+If you intend to deploy Camunda 8 while restricting applications from running as root (e.g., using the `nonroot` built-in SCCs), you'll need to configure each pod and container to run as a non-root user. For example, when deploying Zeebe using a stateful set, you would include the following YAML, replacing `1000` with the desired user ID and `<container-name>` with the name of the container:
 
 ```yaml
 spec:
@@ -1011,8 +1011,9 @@ spec:
       securityContext:
         runAsUser: 1000
       containers:
-        securityContext:
-          runAsUser: 1000
+        - name: <container-name>
+          securityContext:
+            runAsUser: 1000
 ```
 
 :::note

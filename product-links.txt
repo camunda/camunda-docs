@@ -53,12 +53,18 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 # Console
 #   updated at 2026-04-08T10:54:18.806Z
 
+# Short URLs
+
+https://docs.camunda.io/p/cluster-auto-pause
+
+# Full paths
+
 https://docs.camunda.io
 https://docs.camunda.io/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/configuration/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/getting-started/
 https://docs.camunda.io/docs/components/
-https://docs.camunda.io/docs/components/concepts/clusters/#auto-pause
+https://docs.camunda.io/docs/components/concepts/clusters/
 https://docs.camunda.io/docs/components/concepts/multi-tenancy
 https://docs.camunda.io/docs/components/concepts/resource-authorizations/
 https://docs.camunda.io/docs/components/console/manage-clusters/create-cluster/

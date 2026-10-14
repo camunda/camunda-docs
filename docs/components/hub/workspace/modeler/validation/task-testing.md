@@ -1,7 +1,7 @@
 ---
 id: task-testing
 title: Task testing
-description: Test and debug a single BPMN task directly in Camunda Hub using live data from your connected Camunda 8 cluster.
+description: Test and debug a single BPMN task directly in Camunda Hub using live data from your connected environment.
 ---
 
 import TaskTestingProductionWarningImg from './img/task-testing-production-warning.png';
@@ -27,7 +27,7 @@ Use task testing during implementation for quick feedback, and use Test mode for
 
 Before running task testing, ensure you have:
 
-- A [runtime connection](../modeling/connect-to-a-runtime.md) to an active Camunda 8.8 or later orchestration cluster
+- A [runtime connection](../modeling/connect-to-a-runtime.md) to an environment, hosted on an active Camunda 8.8 or later Orchestration Cluster
 - Permissions to deploy and run processes in the target environment
 
 ## Run a task test

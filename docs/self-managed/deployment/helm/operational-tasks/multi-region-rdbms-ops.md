@@ -24,13 +24,17 @@ Develop, test, and rehearse these procedures in a non-production environment bef
 
 In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe quorum. Processing stops, and the failover procedure exists to restore it. That procedure removes the lost brokers, disables the exporter to the lost region, and later restores secondary storage from a snapshot.
 
-With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas. Zeebe keeps processing, and you need no Zeebe action to restore service. The [dry run](#1-confirm-the-quorum-is-intact) confirms this before you act. The failover procedure mostly reports. It only acts on the database writer, and only when the writer was in the lost region.
+With three or more zones and no zone holding half the replicas or more, none of that applies. Every partition keeps a majority of its replicas. Zeebe continues processing without operator intervention. If a partition's leader was in the lost region, that partition briefly pauses while a new leader is elected.
 
-<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. A triangle marks an incident, a play icon an operator action, a check a healthy state, and a dash a step that does not exist. In a Dual-Region cluster with Elasticsearch, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone Multi-Region RDBMS cluster, quorum holds and processing continues. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
+First, use the [dry run](#1-confirm-the-quorum-is-intact) to check whether the surviving replicas retain quorum. If they do, Zeebe can continue processing without manual recovery. If the failed region also hosted the database writer, [promote a surviving database instance](#2-promote-the-database-writer-if-needed) so exporting can resume. If the writer is still available, no database failover is needed.
+
+Secondary-storage recovery may affect processing throughput, depending on your flow-control configuration and available broker disk space. See [processing during secondary-storage recovery](/self-managed/concepts/multi-region/multi-region-rdbms-region-loss.md#processing-during-secondary-storage-recovery).
+
+<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. A triangle marks an incident, a play icon an operator action, a check a healthy state, and a dash a step that does not exist. In a Dual-Region cluster with Elasticsearch, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter. Failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone Multi-Region RDBMS cluster, quorum holds and Zeebe continues processing without operator intervention. Partitions whose leaders were in the lost region briefly pause to elect new leaders. Secondary-storage recovery may affect throughput, depending on flow-control configuration and available broker disk space. Three operator steps remain: promoting the database writer if it was in the lost zone, removing the lost zone, which is recommended but not needed for quorum, and redeploying the zone at failback." />
 
 | Step                             | Dual-region                             | Multi-Region RDBMS                              |
 | :------------------------------- | :-------------------------------------- | :---------------------------------------------- |
-| Restore processing               | Force-remove the lost brokers           | Nothing, processing never stopped               |
+| Restore processing               | Force-remove the lost brokers           | No operator action required.                    |
 | Secondary storage after failover | Disable the exporter to the lost region | Nothing, there is one exporter and one database |
 | Promote the database             | n/a                                     | Only if the writer was in the lost region       |
 | Remove the lost zone             | Same step as restoring processing       | Recommended, not needed for quorum              |
@@ -55,6 +59,8 @@ This runbook applies only to a zone-aware cluster with RDBMS secondary storage. 
 
 <MultiRegionRdbmsCopy />
 
+Size broker storage for the retained log generated during the replication outage you plan to tolerate, with headroom for recovery. Validate capacity with a failover test at representative load, including exporter catch-up.
+
 Source the environment before running any procedure. The scripts derive everything from the Terraform state, and refuse to run against an inconsistent topology:
 
 ```bash
@@ -74,6 +80,12 @@ Confirm the cluster is healthy before you start, so you can tell what the proced
 ```
 
 ## Handle a region loss
+
+### Monitor secondary-storage recovery {#monitor-secondary-storage-recovery}
+
+Monitor export backlog, replication lag, broker disk usage, and processing throughput throughout the recovery procedure until secondary storage has caught up. For the backlog, use the [exporting backlog](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#exporting-backlog) dashboard panel. See [processing during secondary-storage recovery](/self-managed/concepts/multi-region/multi-region-rdbms-region-loss.md#processing-during-secondary-storage-recovery) for how throttling affects processing.
+
+If retained logs exhaust the available broker disk capacity, processing can stop. See the [capacity planning prerequisites](#prerequisites) for sizing and failover-test guidance.
 
 ### 1. Confirm the quorum is intact
 
@@ -107,6 +119,8 @@ Run the same script as in step 1, without `--dry-run`. It repeats the quorum rep
 ./failover.sh <lost-region-slot>
 ```
 
+If the script stops before it finishes, you can run it again. It waits for an Aurora switchover that is still in progress, and it doesn't start a second switchover.
+
 </TabItem>
 
 <TabItem value="unplanned">
@@ -119,7 +133,7 @@ Whatever had not replicated at the time of the outage can be missing from the pr
 
 </Tabs>
 
-Camunda needs no reconfiguration and no restart, as long as the JDBC URL keeps resolving to the current writer. The reference implementation gets that from the [AWS Advanced JDBC Wrapper](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql). Its `failover` plugin follows the writer on established connections, and on brokers that start after the promotion. This is not general JDBC behavior. With your own database, whether connections re-resolve the writer depends on your driver and endpoint. Confirm it or plan a restart.
+Camunda needs no reconfiguration and no restart, as long as the JDBC URL keeps resolving to the current writer. The reference implementation gets that from the [AWS Advanced JDBC Wrapper](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql--mysql). Its `failover` plugin follows the writer on established connections, and on brokers that start after the promotion. This is not general JDBC behavior. With your own database, whether connections re-resolve the writer depends on your driver and endpoint. Confirm it or plan a restart.
 
 If the writer was not in the lost region, you need no database action.
 
@@ -128,7 +142,7 @@ If the writer was not in the lost region, you need no database action.
 Once the writer moves, the zone priorities still favor the region that hosted the old one. Partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Move the leaders next to the new writer:
 
 1. Raise the priority of the zone that now hosts the writer. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [Partitioning API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partitioning-api) for applying it to a running cluster.
-1. Wait until the change reports `COMPLETED`. The cluster rejects a new change while one is still in progress.
+1. Wait until the change reports `COMPLETED`. Use the `changeId` from your request to [monitor the change](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#monitor-a-configuration-change). The cluster rejects a new change while one is still in progress.
 1. Run a [rebalance](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md) with `POST /cluster/v2/rebalance`. Priorities apply at the next election and don't move existing leaders on their own.
 
 ### 3. Route client traffic away from the lost region
@@ -183,6 +197,8 @@ Move the writer back to the recovered region if the other regions are further fr
 ```bash
 ./failback.sh <recovered-region-slot> --switch-writer
 ```
+
+If the script stops before it finishes, you can run this command again. The script waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it doesn't start a second switchover.
 
 Leaving the writer where it is costs nothing but cross-region latency for the regions furthest from it.
 

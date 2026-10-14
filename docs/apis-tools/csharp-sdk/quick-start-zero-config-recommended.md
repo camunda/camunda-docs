@@ -28,6 +28,7 @@ Typical environment (example):
 
 ```bash
 CAMUNDA_REST_ADDRESS=https://cluster.example   # SDK appends /v2 automatically
+CAMUNDA_REST_ADDRESS_EXACT=false                # optional: true = use address verbatim (no /v2), e.g. behind a gateway
 CAMUNDA_AUTH_STRATEGY=OAUTH
 CAMUNDA_CLIENT_ID=***
 CAMUNDA_CLIENT_SECRET=***
@@ -131,40 +132,41 @@ CAMUNDA_OAUTH_URL=https://login.cloud.camunda.io/oauth/token
 <details>
 <summary>appsettings.json key reference</summary>
 
-| appsettings.json key              | Maps to env var                                             |
-| --------------------------------- | ----------------------------------------------------------- |
-| `RestAddress`                     | `CAMUNDA_REST_ADDRESS`                                      |
-| `TokenAudience`                   | `CAMUNDA_TOKEN_AUDIENCE`                                    |
-| `DefaultTenantId`                 | `CAMUNDA_DEFAULT_TENANT_ID`                                 |
-| `TenantIds`                       | `CAMUNDA_TENANT_IDS` (JSON array or comma-separated string) |
-| `LogLevel`                        | `CAMUNDA_SDK_LOG_LEVEL`                                     |
-| `Validation`                      | `CAMUNDA_SDK_VALIDATION`                                    |
-| `Auth:Strategy`                   | `CAMUNDA_AUTH_STRATEGY`                                     |
-| `Auth:ClientId`                   | `CAMUNDA_CLIENT_ID`                                         |
-| `Auth:ClientSecret`               | `CAMUNDA_CLIENT_SECRET`                                     |
-| `Auth:BasicUsername`              | `CAMUNDA_BASIC_AUTH_USERNAME`                               |
-| `Auth:BasicPassword`              | `CAMUNDA_BASIC_AUTH_PASSWORD`                               |
-| `OAuth:Url`                       | `CAMUNDA_OAUTH_URL`                                         |
-| `OAuth:ClientId`                  | `CAMUNDA_CLIENT_ID`                                         |
-| `OAuth:ClientSecret`              | `CAMUNDA_CLIENT_SECRET`                                     |
-| `OAuth:GrantType`                 | `CAMUNDA_OAUTH_GRANT_TYPE`                                  |
-| `OAuth:Scope`                     | `CAMUNDA_OAUTH_SCOPE`                                       |
-| `OAuth:TimeoutMs`                 | `CAMUNDA_OAUTH_TIMEOUT_MS`                                  |
-| `OAuth:RetryMax`                  | `CAMUNDA_OAUTH_RETRY_MAX`                                   |
-| `OAuth:RetryBaseDelayMs`          | `CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS`                         |
-| `HttpRetry:MaxAttempts`           | `CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS`                       |
-| `HttpRetry:BaseDelayMs`           | `CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS`                      |
-| `HttpRetry:MaxDelayMs`            | `CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS`                       |
-| `Backpressure:Profile`            | `CAMUNDA_SDK_BACKPRESSURE_PROFILE`                          |
-| `Backpressure:InitialMax`         | `CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX`                      |
-| `Backpressure:SoftFactor`         | `CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR`                      |
-| `Backpressure:SevereFactor`       | `CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR`                    |
-| `Backpressure:RecoveryIntervalMs` | `CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS`             |
-| `Backpressure:RecoveryStep`       | `CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP`                    |
-| `Backpressure:DecayQuietMs`       | `CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS`                   |
-| `Backpressure:Floor`              | `CAMUNDA_SDK_BACKPRESSURE_FLOOR`                            |
-| `Backpressure:SevereThreshold`    | `CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD`                 |
-| `Eventual:PollDefaultMs`          | `CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS`                      |
+| appsettings.json key              | Maps to env var                                                                                   |
+| --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `RestAddress`                     | `CAMUNDA_REST_ADDRESS`                                                                            |
+| `RestAddressExact`                | `CAMUNDA_REST_ADDRESS_EXACT` (true = use `RestAddress` verbatim, skip the automatic `/v2` suffix) |
+| `TokenAudience`                   | `CAMUNDA_TOKEN_AUDIENCE`                                                                          |
+| `DefaultTenantId`                 | `CAMUNDA_DEFAULT_TENANT_ID`                                                                       |
+| `TenantIds`                       | `CAMUNDA_TENANT_IDS` (JSON array or comma-separated string)                                       |
+| `LogLevel`                        | `CAMUNDA_SDK_LOG_LEVEL`                                                                           |
+| `Validation`                      | `CAMUNDA_SDK_VALIDATION`                                                                          |
+| `Auth:Strategy`                   | `CAMUNDA_AUTH_STRATEGY`                                                                           |
+| `Auth:ClientId`                   | `CAMUNDA_CLIENT_ID`                                                                               |
+| `Auth:ClientSecret`               | `CAMUNDA_CLIENT_SECRET`                                                                           |
+| `Auth:BasicUsername`              | `CAMUNDA_BASIC_AUTH_USERNAME`                                                                     |
+| `Auth:BasicPassword`              | `CAMUNDA_BASIC_AUTH_PASSWORD`                                                                     |
+| `OAuth:Url`                       | `CAMUNDA_OAUTH_URL`                                                                               |
+| `OAuth:ClientId`                  | `CAMUNDA_CLIENT_ID`                                                                               |
+| `OAuth:ClientSecret`              | `CAMUNDA_CLIENT_SECRET`                                                                           |
+| `OAuth:GrantType`                 | `CAMUNDA_OAUTH_GRANT_TYPE`                                                                        |
+| `OAuth:Scope`                     | `CAMUNDA_OAUTH_SCOPE`                                                                             |
+| `OAuth:TimeoutMs`                 | `CAMUNDA_OAUTH_TIMEOUT_MS`                                                                        |
+| `OAuth:RetryMax`                  | `CAMUNDA_OAUTH_RETRY_MAX`                                                                         |
+| `OAuth:RetryBaseDelayMs`          | `CAMUNDA_OAUTH_RETRY_BASE_DELAY_MS`                                                               |
+| `HttpRetry:MaxAttempts`           | `CAMUNDA_SDK_HTTP_RETRY_MAX_ATTEMPTS`                                                             |
+| `HttpRetry:BaseDelayMs`           | `CAMUNDA_SDK_HTTP_RETRY_BASE_DELAY_MS`                                                            |
+| `HttpRetry:MaxDelayMs`            | `CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS`                                                             |
+| `Backpressure:Profile`            | `CAMUNDA_SDK_BACKPRESSURE_PROFILE`                                                                |
+| `Backpressure:InitialMax`         | `CAMUNDA_SDK_BACKPRESSURE_INITIAL_MAX`                                                            |
+| `Backpressure:SoftFactor`         | `CAMUNDA_SDK_BACKPRESSURE_SOFT_FACTOR`                                                            |
+| `Backpressure:SevereFactor`       | `CAMUNDA_SDK_BACKPRESSURE_SEVERE_FACTOR`                                                          |
+| `Backpressure:RecoveryIntervalMs` | `CAMUNDA_SDK_BACKPRESSURE_RECOVERY_INTERVAL_MS`                                                   |
+| `Backpressure:RecoveryStep`       | `CAMUNDA_SDK_BACKPRESSURE_RECOVERY_STEP`                                                          |
+| `Backpressure:DecayQuietMs`       | `CAMUNDA_SDK_BACKPRESSURE_DECAY_QUIET_MS`                                                         |
+| `Backpressure:Floor`              | `CAMUNDA_SDK_BACKPRESSURE_FLOOR`                                                                  |
+| `Backpressure:SevereThreshold`    | `CAMUNDA_SDK_BACKPRESSURE_SEVERE_THRESHOLD`                                                       |
+| `Eventual:PollDefaultMs`          | `CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS`                                                            |
 
 </details>
 

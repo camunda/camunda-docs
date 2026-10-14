@@ -15,7 +15,7 @@ Zeebe is fault-tolerant and replicates state internally. Backups are only necess
 
 State of other components, such as Operate and Tasklist, is not managed by Zeebe and must be backed up separately.
 
-Taking backups is a manual process that is highly dependent on your infrastructure and deployment. Camunda does not provide an automated backup mechanism or tool. However, we do offer the following guidance to create and execute a successful backup.
+Taking cold backups is a manual process that is highly dependent on your infrastructure and deployment. Camunda does not provide an automated mechanism or tool for cold backups. However, we do offer the following guidance to create and execute a successful backup.
 
 ## Cold backups
 
@@ -41,7 +41,7 @@ The `data` folder contains symbolic and hard links which may require special att
 
 To create the backup, take the following steps:
 
-1. Each broker has a data folder where all state is persisted. The location of the data folder is [configured](../configuration/configuration.md) via `zeebe.broker.data.directory`. Create a copy of the data folder and store it in a safe location.
+1. Each broker has a data folder where all state is persisted. The location of the data folder is [configured](../configuration/broker.md#camundadataprimary-storage) via `camunda.data.primary-storage.directory`. Create a copy of the data folder and store it in a safe location.
 
 If you have direct access to the broker, for example in a bare-metal setup, you can do this by creating a tarball like this: `tar caf backup.tar.gz data/`.
 

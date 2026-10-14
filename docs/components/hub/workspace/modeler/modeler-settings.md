@@ -4,9 +4,6 @@ title: Camunda Hub modeler settings
 description: Configure email notifications and project deployment policies in the Camunda Hub modeler settings.
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 Navigate to the modeler settings in Camunda Hub by clicking on your user icon in the top right corner of the Camunda Hub and selecting **Settings**. Here, you can configure email notifications and the project deployment policy.
 
 ## Email notifications
@@ -19,40 +16,31 @@ Configure the workspaces for which you will receive email notifications when a m
 
 ## Project deployment
 
-Organization admins can configure the deployment policy for projects in the Camunda Hub modeler settings.
+Organization admins can require an approved project snapshot before anyone deploys a project to a production environment.
 
-<Tabs groupId="deployment-permissions" defaultValue="saas" queryString values={
-[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'self-managed' },
-]}>
+Camunda Hub treats an [environment](/components/concepts/environments.md) as a production environment if its tags include `prod`. The tags of an environment come from its cluster. In SaaS, [tag the cluster](/components/saas/clusters/create-cluster.md#tag-your-cluster) as `prod`. In Self-Managed, add `prod` to the `tags` of the cluster in the [cluster configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
-<TabItem value='saas'>
+To change the policy:
 
-By default, only [organization administrators](/components/hub/organization/manage-users/index.md) can deploy projects to clusters marked as
-[production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Camunda Hub.
-
-You can change this in the **Project deployment** settings:
-
-1. In Camunda Hub, in the top right corner, click the user icon
+1. In Camunda Hub, in the top right corner, click the user icon.
 2. Select **Settings**.
-3. Under **Project deployment settings**, you can permit non-admin users with deployment permissions to deploy project snapshots to production stage clusters after a workspace member has reviewed and approved the project snapshot using the [project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
+3. Click **Projects deployment**.
+4. Turn the **Require approval of project snapshots to deploy to production environments** toggle on or off.
 
-This setting can only be configured by organization admins and applies to all projects in the organization.
+| Setting           | Effect                                                                                                                                                                                          |
+| :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Off (the default) | Any collaborator with deployment privileges can deploy to an environment tagged `prod`, approved or not.                                                                                        |
+| On                | Any collaborator with deployment privileges can deploy an **approved** project snapshot to an environment tagged `prod`. An unapproved snapshot is blocked, and drafts can't be deployed there. |
 
-</TabItem>
+When the toggle is off, access to production environments is controlled by which environments are [assigned to the workspace](/components/hub/organization/manage-environments/assign-environments.md) and by the deployment permissions in the cluster.
 
-<TabItem value='self-managed'>
+When the toggle is on and you try to deploy to a production environment, the deploy dialog explains what's missing. See [production environments](/components/hub/workspace/manage-projects/deploy-project.md#production-environments). To get a snapshot approved, use the [project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
 
-By default, only users with the **Hub Admin** role can deploy projects to clusters marked as [production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Camunda Hub.
+Only organization admins can change this setting. It applies to all projects in the organization.
 
-You can change this in the **Project deployment** settings:
+### Self-Managed
 
-1. In Camunda Hub, in the top right corner, click the user icon
-2. Select **Settings**.
-3. Under **Project deployment settings**, you can permit non-admin users with deployment permissions to deploy project snapshots to production stage clusters after a workspace member has reviewed and approved the project snapshot using the [project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
-
-This setting can only be configured by users with the **Hub Admin** role and applies to all projects in the organization.
+In Self-Managed, only users with the **Hub Admin** role can change this setting.
 
 If the **Hub Admin** role doesn't exist, you can create it with the following permissions:
 
@@ -61,10 +49,6 @@ If the **Hub Admin** role doesn't exist, you can create it with the following pe
 - Camunda Identity Resource Server - `read:users`
 
 Refer to the documentation pages about [assigning roles](../../../../self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
-
-</TabItem>
-
-</Tabs>
 
 :::info
 The deployment policy applies only to deployments of **projects** made from Camunda Hub.

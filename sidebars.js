@@ -93,48 +93,61 @@ module.exports = {
     "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
-      label: "ProcessOS Harness",
-      className: "sidebar-cta-preview sidebar-badge-early-access",
+      label: "ProcessOS",
       link: {
         type: "doc",
-        id: "components/process-os-harness/overview",
+        id: "components/process-os/overview",
       },
       items: [
         {
           type: "category",
-          label: "Get started",
-          items: [
-            "components/process-os-harness/get-started/system-requirements",
-            "components/process-os-harness/get-started/project-setup",
-            "components/process-os-harness/get-started/install",
-          ],
-        },
-        {
-          type: "category",
-          label: "Run a project",
+          label: "ProcessOS Harness",
+          className: "sidebar-cta-preview sidebar-badge-early-access",
           link: {
             type: "doc",
-            id: "components/process-os-harness/run-a-project/governance-process",
+            id: "components/process-os-harness/overview",
           },
           items: [
             {
               type: "category",
-              label: "Phases",
+              label: "Setup",
               items: [
-                "components/process-os-harness/run-a-project/phases/discovery",
-                "components/process-os-harness/run-a-project/phases/transformation",
-                "components/process-os-harness/run-a-project/phases/implementation",
+                "components/process-os-harness/setup/project-setup",
+                "components/process-os-harness/setup/builder-workspace",
+                "components/process-os-harness/setup/system-requirements",
               ],
             },
-            "components/process-os-harness/run-a-project/review-cycle",
-            "components/process-os-harness/run-a-project/builder-task",
-            "components/process-os-harness/run-a-project/artifact-generation",
+            "components/process-os-harness/installation",
+            {
+              type: "category",
+              label: "Build",
+              link: {
+                type: "doc",
+                id: "components/process-os-harness/build",
+              },
+              items: [
+                "components/process-os-harness/build/governance-process",
+                "components/process-os-harness/build/review-cycle",
+                "components/process-os-harness/build/builder-task",
+                {
+                  type: "category",
+                  label: "Phases",
+                  items: [
+                    "components/process-os-harness/build/phases/discovery",
+                    "components/process-os-harness/build/phases/transformation",
+                    "components/process-os-harness/build/phases/implementation",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "category",
+              label: "Best practices",
+              items: [
+                "components/process-os-harness/best-practices/data-handling",
+              ],
+            },
           ],
-        },
-        {
-          type: "category",
-          label: "Best practices",
-          items: ["components/process-os-harness/best-practices/data-handling"],
         },
       ],
     },
@@ -254,7 +267,10 @@ module.exports = {
             require("./docs/components/modeler/reference/sidebar-schema"),
           ],
         },
+        "components/concepts/workspaces",
         "components/concepts/projects",
+        "components/concepts/clusters",
+        "components/concepts/environments",
         "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {
@@ -481,7 +497,6 @@ module.exports = {
                   "Integration modules": [
                     "components/camunda-integrations/sap/odata-connector",
                     "components/camunda-integrations/sap/rfc-connector",
-                    "components/camunda-integrations/sap/btp-plugin",
                     "components/camunda-integrations/sap/eventing",
                     "components/camunda-integrations/sap/csap-cli",
                   ],
@@ -786,23 +801,24 @@ module.exports = {
             },
             {
               type: "category",
+              label: "Manage environments",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-environments/manage-environments",
+              },
+              items: [
+                "components/hub/organization/manage-environments/assign-environments",
+              ],
+            },
+            {
+              type: "category",
               label: "Manage clusters",
               link: {
                 type: "doc",
                 id: "components/hub/organization/manage-clusters/index",
               },
               items: [
-                "components/hub/organization/manage-clusters/create-cluster",
-                "components/hub/organization/manage-clusters/manage-cluster",
                 "components/hub/organization/manage-clusters/cluster-connectors",
-                "components/hub/organization/manage-clusters/manage-api-clients",
-                "components/hub/organization/manage-clusters/manage-secrets",
-                "components/hub/organization/manage-clusters/manage-alerts",
-                "components/hub/organization/manage-clusters/manage-ip-allowlists",
-                "components/hub/organization/manage-clusters/create-backups",
-                "components/hub/organization/manage-clusters/settings",
-                "components/hub/organization/manage-clusters/cluster-capacity",
-                "components/hub/organization/manage-clusters/troubleshoot-clusters",
               ],
             },
             {
@@ -831,7 +847,7 @@ module.exports = {
                 "components/hub/organization/credentials/credentials-modeling-interface",
               ],
             },
-            "components/hub/organization/analyze-operations/hub-dashboard",
+            "components/hub/organization/console",
             {
               type: "category",
               label: "Manage organization",
@@ -839,36 +855,7 @@ module.exports = {
                 type: "doc",
                 id: "components/hub/organization/manage-organization-settings/organization-settings",
               },
-              items: [
-                {
-                  type: "category",
-                  label: "Manage users",
-                  link: {
-                    type: "doc",
-                    id: "components/hub/organization/manage-users/index",
-                  },
-                  items: [
-                    "components/hub/organization/manage-users/create-manage-users",
-                    "components/hub/organization/manage-users/manage-user-groups",
-                    "components/hub/organization/manage-users/resource-based-auth",
-                  ],
-                },
-                "components/hub/organization/manage-organization-settings/external-sso",
-                "components/hub/organization/manage-organization-settings/view-organization-activity",
-                "components/hub/organization/manage-organization-settings/enable-alpha-features",
-                "components/hub/organization/manage-organization-settings/usage-history",
-                "components/hub/organization/manage-organization-settings/usage-alerts",
-                "components/hub/organization/manage-organization-settings/switch-organization",
-                "components/hub/organization/manage-organization-settings/delete-account",
-                {
-                  "Manage plan": [
-                    "components/hub/organization/manage-organization-settings/manage-plan/create-account",
-                    "components/hub/organization/manage-organization-settings/manage-plan/available-plans",
-                    "components/hub/organization/manage-organization-settings/manage-plan/upgrade-to-enterprise-plan",
-                    "components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations",
-                  ],
-                },
-              ],
+              items: ["components/hub/organization/users-and-roles"],
             },
             "components/hub/workspace/manage-projects/recently-deleted",
             {
@@ -905,12 +892,8 @@ module.exports = {
                 "components/hub/workspace/manage-projects/project-versioning",
                 "components/hub/workspace/manage-projects/deploy-project",
                 "components/hub/workspace/manage-projects/git-sync",
-                "components/hub/workspace/manage-projects/manage-project",
+                "components/hub/workspace/manage-projects/project-settings",
               ],
-            },
-            {
-              type: "doc",
-              id: "components/hub/workspace/manage-workspace/manage-workspace",
             },
             {
               type: "category",
@@ -995,6 +978,10 @@ module.exports = {
                 },
                 "components/hub/workspace/modeler/modeler-settings",
               ],
+            },
+            {
+              type: "doc",
+              id: "components/hub/workspace/manage-workspace/manage-workspace",
             },
           ],
         },
@@ -1333,7 +1320,56 @@ module.exports = {
         id: "components/saas/saas",
       },
       items: [
-        "components/concepts/clusters",
+        {
+          type: "category",
+          label: "Clusters",
+          link: {
+            type: "doc",
+            id: "components/saas/clusters",
+          },
+          items: [
+            "components/saas/clusters/create-cluster",
+            "components/saas/clusters/manage-cluster",
+            "components/saas/clusters/manage-api-clients",
+            "components/saas/clusters/manage-secrets",
+            "components/saas/clusters/manage-alerts",
+            "components/saas/clusters/manage-ip-allowlists",
+            "components/saas/clusters/create-backups",
+            "components/saas/clusters/settings",
+            "components/saas/clusters/connect-external-identity-provider",
+            "components/saas/clusters/cluster-capacity",
+            "components/saas/clusters/configure-audit-log",
+            "components/saas/clusters/troubleshoot-clusters",
+          ],
+        },
+        {
+          type: "category",
+          label: "Organization",
+          link: {
+            type: "doc",
+            id: "components/saas/organization/organization",
+          },
+          items: [
+            "components/saas/organization/organization-ownership",
+            "components/saas/organization/create-manage-users",
+            "components/saas/organization/manage-user-groups",
+            "components/saas/organization/resource-based-auth",
+            "components/saas/organization/external-sso",
+            "components/saas/organization/view-organization-activity",
+            "components/saas/organization/enable-alpha-features",
+            "components/saas/organization/usage-history",
+            "components/saas/organization/usage-alerts",
+            "components/saas/organization/switch-organization",
+            "components/saas/organization/delete-account",
+            {
+              "Manage plan": [
+                "components/saas/organization/manage-plan/create-account",
+                "components/saas/organization/manage-plan/available-plans",
+                "components/saas/organization/manage-plan/update-billing-reservations",
+              ],
+            },
+          ],
+        },
         "components/saas/regions",
         "components/saas/data-locations",
         {
@@ -1715,6 +1751,18 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "8.11",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/8110/8110-release-notes",
+          },
+          items: [
+            "reference/announcements-release-notes/8110/8110-announcements",
+            "reference/announcements-release-notes/8110/8110-release-notes",
+          ],
+        },
+        {
+          type: "category",
           label: "8.10",
           link: {
             type: "doc",
@@ -1831,7 +1879,6 @@ module.exports = {
         id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
-        "self-managed/reference-architecture/deployment-topology",
         "self-managed/reference-architecture/kubernetes",
         "self-managed/reference-architecture/containers",
         "self-managed/reference-architecture/manual",
@@ -2071,6 +2118,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
                 "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
                 "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
+                "self-managed/deployment/helm/operational-tasks/helm-values-schema-validation",
               ],
             },
             {
@@ -2180,6 +2228,7 @@ module.exports = {
               items: [
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region",
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region-ops",
               ],
             },
           ],
@@ -2466,7 +2515,6 @@ module.exports = {
               items: [
                 {
                   Configuration: [
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
@@ -2543,6 +2591,7 @@ module.exports = {
                     id: "self-managed/components/orchestration-cluster/zeebe/exporters/exporters",
                   },
                   items: [
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
@@ -2585,6 +2634,7 @@ module.exports = {
             {
               Configuration: [
                 "self-managed/components/hub/configuration/properties",
+                "self-managed/components/hub/configuration/environments",
                 "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
@@ -2738,6 +2788,7 @@ module.exports = {
           items: [
             "self-managed/upgrade/helm/890-to-8100",
             "self-managed/upgrade/helm/combined-to-split-topology",
+            "self-managed/upgrade/helm/connect-existing-clusters",
           ],
         },
         {
