@@ -216,7 +216,7 @@ The Elasticsearch row above matches the Elasticsearch-only baseline and is sized
 
 </Tabs>
 
-Identity and Keycloak, including Keycloak’s bundled PostgreSQL database, which is not itemized here, are included in each table above because our test harness always authenticates through OIDC. Most Self-Managed deployments connect Identity to an external identity provider instead, in which case you can omit these rows entirely; the sizes above are the minimum requirement if you deploy Identity and Keycloak together.
+Identity and Keycloak, including Keycloak’s bundled PostgreSQL database, which is not itemized here, are included in each table above because our test harness always authenticates through OIDC. Most Self-Managed deployments connect Identity to an external identity provider instead, in which case you can omit these rows entirely. If you deploy Identity and Keycloak together, the rows above show the load-test configuration for them.
 
 In our sizing, retention is set to one day for the Camunda Exporter and three days for the legacy exporter, where applicable. This gives the Optimize importer enough time to catch up before the data is removed. See [Elasticsearch scaling](#elasticsearch-scaling) for information about how retention affects disk sizing. The daily metrics above assume that the load is distributed evenly over 24 hours.
 
