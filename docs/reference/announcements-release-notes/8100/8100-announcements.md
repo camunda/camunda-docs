@@ -190,6 +190,21 @@ Camunda 8.10 adds support for the Montréal, North America (`northamerica-northe
 </div>
 <div className="release-announcement-content">
 
+#### New AWS region
+
+Camunda 8.10 adds support for the Ireland, Europe (`eu-west-1`) region in Camunda 8 SaaS.
+
+<p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
 #### MariaDB 12.3 now supported
 
 Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11, 11.4, 11.8, and 12.3.
