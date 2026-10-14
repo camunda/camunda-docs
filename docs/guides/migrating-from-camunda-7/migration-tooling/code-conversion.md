@@ -26,7 +26,7 @@ This guide covers tools and approaches to help with code conversion:
 
 1. [AI-assisted migration](#leverage-ai-for-migration): Use the Camunda migration agent skill for a guided Java migration
 2. [API Mapping Guide](#api-mapping-guide): Understand how Camunda 7 REST API endpoints map to Camunda 8
-3. [Java API mapping reference](#java-api-mapping-reference): Look up Camunda 8 equivalents for Java types, test assertions, and imports
+3. [Java API mapping reference](#key-api-mapping-reference): Look up Camunda 8 equivalents for Java types, test assertions, and imports
 4. [Code Conversion Patterns](#code-conversion-patterns): Apply documented patterns in manual or AI-assisted migration
 5. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Optionally create a deterministic first diff for repeated, supported, primarily syntactic transformations
 
@@ -93,7 +93,7 @@ Use the API mapping guide to:
 - Plan your migration strategy based on API availability
   :::
 
-## Java API mapping reference
+## Java API mapping reference {#key-api-mapping-reference}
 
 These tables summarize common Java API, test assertion, and import mappings between Camunda 7 and Camunda 8. Use them when you migrate code manually or review output from the agent skill or OpenRewrite recipes.
 
