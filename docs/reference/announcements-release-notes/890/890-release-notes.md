@@ -433,7 +433,7 @@ Camunda 8.9 adds cluster variables, Business ID support for process instances, a
 The Orchestration Cluster continues its 8.9 consolidation work with completed unified configuration property changes, gateway-served application profiles for Operate, Tasklist, and Identity, and declarative preconfiguration support for Identity entities. Self-Managed deployments also gain support for Amazon ECS and improved dynamic tenant access for machine clients.
 
 <ul>
-  <li><span class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</span></li>
+  <li><span class="link-arrow">[Property changes in Camunda 8.9](/versioned_docs/version-8.9/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</span></li>
   <li><span class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</span></li>
 </ul>
 
@@ -1179,11 +1179,11 @@ You can now configure scheduled backup intervals and retention directly in the O
 
 In Camunda 8.9, the remaining unified configuration project property changes are complete.
 
-- All 8.9 property changes are documented in the [Camunda 8.9 property changes](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md#camunda-89-property-changes) table.
+- All 8.9 property changes are documented in the [Camunda 8.9 property changes](/versioned_docs/version-8.9/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md#camunda-89-property-changes) table.
 - You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
 - For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
-<p class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
+<p class="link-arrow">[Property changes in Camunda 8.9](/versioned_docs/version-8.9/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
 
 :::note
 Only the first partial set of the unified configuration project properties was introduced in Camunda 8.8.

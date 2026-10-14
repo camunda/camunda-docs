@@ -219,7 +219,7 @@ New features help you more easily configure your agent tools when modeling.
 
 :::
 
-<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration)</p>
 
 ### Camunda-provided LLM for SaaS
 
@@ -910,6 +910,16 @@ With Camunda 8.10, Optimize can be configured with the same `camunda.security.au
 :::note
 Nothing changes for the Orchestration Cluster as it already uses these settings since Camunda 8.9.
 :::
+
+## Unified configuration property changes
+
+Camunda 8.10 completes the unified configuration of the Orchestration Cluster that began in 8.8.
+
+- The 8.10 property changes are documented in [Property changes in Camunda 8.10](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md), including new properties, removed properties, and changed defaults.
+- You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
+- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+
+<p class="link-arrow">[Property changes in Camunda 8.10](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
 
 ## Wait states
 

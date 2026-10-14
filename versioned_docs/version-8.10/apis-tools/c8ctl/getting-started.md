@@ -135,6 +135,61 @@ Everything after `secrets` is passed to c8run unchanged, so any verb or flag c8r
 SECRET_OPENAI_API_KEY=sk-... c8 cluster start
 ```
 
+### Local physical tenants
+
+Physical tenants are isolated engines inside one local Camunda process, each with its own data, users, secrets, and Connectors runtime. They require **Camunda 8.10 or newer and a c8run build that includes the physical-tenant CLI**. Older cached 8.10 builds can predate this feature. `cluster start` reuses cached installations, so upgrading c8ctl alone does not upgrade the cached c8run; `cluster install 8.10` checks for an updated distribution. Run `c8 cluster physical-tenants help` to confirm support.
+
+```bash
+# Install a supporting distribution, then save physical tenants without starting Java
+c8 cluster install 8.10
+c8 cluster physical-tenants --c8-version 8.10 add sales
+c8 cluster physical-tenants --c8-version 8.10 add hr --username alice
+# c8run prompts for alice's password; automation can use --password-stdin
+
+# Start default plus all saved physical tenants
+c8 cluster start 8.10
+c8 cluster physical-tenants list
+
+# One start only: overrides the saved physical tenant selection without changing it
+c8 cluster stop
+c8 cluster start 8.10 --physical-tenants sales,hr
+
+# Manage a physical tenant's own secrets
+c8 cluster secrets --physical-tenant sales set OPENAI_API_KEY
+c8 cluster secrets --physical-tenant sales import .env.secrets
+c8 cluster secrets --physical-tenant sales delete OPENAI_API_KEY --yes
+
+# Removing a physical tenant keeps its data; restart to apply the change
+c8 cluster physical-tenants remove sales --yes
+c8 cluster physical-tenants path
+c8 cluster physical-tenants help
+
+# Stop default and all physical tenants
+c8 cluster stop
+```
+
+`cluster physical-tenants` delegates to c8run, which owns physical tenant validation, password prompting, persistence, configuration, and readiness checks. It also supports `reset --yes` and `add <id> --no-connectors`. `remove` and `reset` ask for confirmation; non-interactive use requires `--yes`. `--physical-tenants` is start-only, accepts comma-separated IDs, and can be repeated. The startup output includes per-physical-tenant endpoints and readiness. A failed physical tenant can leave healthy engines running; the command returns a failure and `c8 cluster stop` stops the surviving processes.
+
+Management commands select an explicit leading `--c8-version`, otherwise the running cluster's version, otherwise the highest locally installed version. They never download a distribution automatically. Keep the same version selected when configuring and starting a cluster. Both secrets and physical-tenant commands preserve c8run's output and exit status; `--json` does not convert that output to JSON. Use the `help` subcommand for c8run help, because `--help` belongs to c8ctl. `--dry-run` previews these delegated calls and cluster starts without launching c8run or reading stdin.
+
+`C8RUN_TENANTS_FILE` selects the saved physical tenants file; `C8RUN_SECRETS_DIR` selects the default secrets directory. Relative values and secret import filenames are resolved against the caller's working directory, including on startup. Without overrides, c8run's per-OS-user defaults apply. Each physical tenant's secret directory is a sibling under `tenant-secrets/<id>`. Both `--physical-tenant <id>` and `--physical-tenant=<id>` are supported. c8ctl adds no physical tenant or secret store of its own.
+
+Physical tenant IDs contain lowercase letters and digits. With the bundled H2 or other RDBMS storage, IDs are limited to eight characters. Removing and re-adding an ID restores its data, including its existing users. Each enabled physical tenant's Connectors runtime uses another JVM and port. See the [physical-tenant documentation](/self-managed/concepts/physical-tenants/index.md) for prerequisites and limitations.
+
+#### Inspect a physical tenant with a profile
+
+Physical tenants use a distinct REST base path. For a tenant using the default `demo` login:
+
+```bash
+c8 add profile local-sales \
+  --baseUrl=http://localhost:8080/physical-tenants/sales/v2 \
+  --username=demo --password=demo \
+  --exactBaseUrl
+c8 --profile local-sales list process-definitions
+```
+
+Configure the profile's authentication to match a dedicated tenant login when used. Existing `create tenant`, `list tenants`, and `use tenant` commands manage or select **logical tenants inside an engine**; they do not create or select physical engines. Profiles select the physical tenant's API endpoint. No profiles are created or switched automatically by `cluster physical-tenants`.
+
 ### Version aliases
 
 The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Download Center](https://downloads.camunda.cloud/release/camunda/c8run/):
