@@ -379,6 +379,8 @@ Optimize is not supported with RDBMS. If you need Optimize, you must also run El
 
 See [Secondary storage](sizing-your-environment.md#secondary-storage) for more details.
 
+Custom exporters share the exporting capacity of each partition with the built-in exporters. Test them under load, keep `export()` non-blocking, and batch writes to the target system. See the [performance impact of exporters](/self-managed/concepts/exporters.md#performance-impact).
+
 ## Next steps
 
 Validate your chosen configuration by [running your own benchmarks](sizing-benchmarks.md).

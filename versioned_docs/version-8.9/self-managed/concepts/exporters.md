@@ -142,6 +142,14 @@ If an error occurs during record processing, the same record is retried continuo
 
 Each loaded exporter introduces some performance overhead. A slow exporter will slow down all other exporters for the same partition and, in extreme cases, may block a processing thread entirely.
 
+Each partition exports a record only after every exporter on that partition has handled it. A slow custom exporter therefore has these effects:
+
+- It delays all other exporters on the partition, including the Camunda Exporter. Data in Operate, Tasklist, and the REST query API becomes available later.
+- It holds back the exported position of the whole partition, so the event log is compacted later.
+- With [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) throttling enabled, flow control measures the exporting rate and backlog across all exporters on the partition. A slow custom exporter lowers the exporting rate and grows the backlog, so throttling reduces the write rate of the whole partition and your user-visible throughput drops.
+
+To detect a slow exporter, compare `zeebe_exporter_events_total` and the per-exporter exporting duration and last exported position metrics across exporters. See [metrics](../operational-guides/monitoring/metrics.md) for details.
+
 To avoid performance bottlenecks, exporters should be kept as simple and lightweight as possible. Any heavy data transformation or enrichment should be delegated to external systems.
 
 :::warning
