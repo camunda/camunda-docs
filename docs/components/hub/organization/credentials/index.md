@@ -207,7 +207,7 @@ Hub reads from and writes to a cluster with your own identity. It does so when i
 - If a cluster refuses to remove a credential because you lack permission or its credentials are wrong, Hub keeps the credential, so you can resolve the problem and delete it again.
 - On a Self-Managed cluster that uses Basic authentication, Hub asks you for the cluster's username and password.
 
-When you choose environments for a credential or for a scan, Hub lists only the environments you can see. On SaaS, every member of your organization sees every environment. On Self-Managed, members with the **Organization Admin** or **DevOps** role, or any role with the `admin:*` or `admin:clusters` permission, see every environment. Other members see only the environments assigned to workspaces where they are a **Workspace Admin** or **Editor**. The credential list and detail page still show every credential and all of its targets, and a target in an environment you can't see is shown by its ID.
+When you choose environments for a credential or for a scan, Hub lists only the environments you can see. On SaaS, every user in your organization sees every environment. On Self-Managed, users with the **Organization Admin** or **DevOps** role, or any role with the `admin:*` or `admin:clusters` permission, see every environment. Other users see only the environments assigned to workspaces where they are a **Workspace Admin** or **Editor**. The credential list and detail page still show every credential and all of its targets, and a target in an environment you can't see is shown by its ID.
 
 ## Known limitations
 
