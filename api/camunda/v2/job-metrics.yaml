@@ -304,7 +304,6 @@ components:
       description: Job type statistics query result.
       type: object
       required:
-        - page
         - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -379,7 +378,6 @@ components:
       description: Job worker statistics query result.
       type: object
       required:
-        - page
         - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -454,7 +452,6 @@ components:
       description: Job time-series statistics query result.
       type: object
       required:
-        - page
         - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -532,7 +529,6 @@ components:
       description: Job error statistics query result.
       type: object
       required:
-        - page
         - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"

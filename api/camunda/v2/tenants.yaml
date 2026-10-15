@@ -956,7 +956,7 @@ components:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
           description: |
             The unique ID for the tenant. Must be 31 characters or less and match
-            `^[\w.-]{1,31} (word characters, `.`, `-`). The literal
+            `` ^[\w.-]{1,31}$ `` (word characters, `.`, `-`). The literal
             `<default>` is also accepted as the default-tenant alias.
         name:
           type: string
@@ -1041,7 +1041,7 @@ components:
       type: object
       properties:
         field:
-          description: The field to sort by.
+          description: The field to sort by. `key` is deprecated and should not be used anymore.
           type: string
           enum:
             - key
