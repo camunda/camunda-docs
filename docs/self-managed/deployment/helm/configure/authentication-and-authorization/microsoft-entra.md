@@ -378,8 +378,6 @@ You can update `camundaHub.restapi.mail.fromAddress` with an address suitable fo
 This address appears as the sender in emails sent by Hub.
 For more details on configuring email delivery, see the [Camunda Hub section in Enable additional Camunda components](../enable-additional-components.md#camunda-hub).
 
-Console is part of Hub and uses the same OIDC client, so it needs no separate app registration or Helm configuration.
-
 ### Full configuration example
 
 The following example shows a full configuration to enable Microsoft Entra with an externally managed Elasticsearch cluster. Replace `<elasticsearch-host>` with the hostname of your cluster.
