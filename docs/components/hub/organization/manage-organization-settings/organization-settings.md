@@ -37,7 +37,7 @@ The **Overview** tab provides a summary of the organization, including the organ
 In other tabs, you can:
 
 - [Manage users](/components/saas/organization/create-manage-users.md)
-- [Manage groups](/components/saas/organization/manage-user-groups.md) for cluster access
+- [Manage groups](/components/saas/organization/manage-user-groups.md)
 - [View activity](/components/saas/organization/view-organization-activity.md)
 - [View usage](/components/saas/organization/usage-history.md)
 - Grant API access credentials

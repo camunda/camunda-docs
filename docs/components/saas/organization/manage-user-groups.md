@@ -2,12 +2,12 @@
 id: manage-user-groups
 title: "Manage user groups"
 sidebar_label: "Manage user groups"
-description: "Organize users into groups to control access to the clusters of your SaaS organization."
+description: "Organize users into groups in Camunda Hub."
 ---
 
-Organize users into groups to control access to the clusters of your SaaS organization.
+Organize users into groups in Camunda Hub.
 
-User groups created in Camunda Hub are available in SaaS only. These groups apply to cluster access control only. They don't control access to Camunda Hub, such as workspaces, projects, or organization settings. Groups created in Console are no longer recommended for use.
+User groups created in Camunda Hub are available in SaaS only. They apply only to access control for clusters on version 8.7 or earlier, and don't control access to Camunda Hub, such as workspaces, projects, or organization settings. For clusters on version 8.8 or later, manage [groups](/components/admin/group.md) and authorizations in Admin. Groups created in Console are no longer recommended for use.
 
 ## Creating a group
 
