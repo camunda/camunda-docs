@@ -1,8 +1,14 @@
 ignore-version-prod: venv/bin/activate check-env
-	./venv/bin/python3 1-ignore-version-prod.py	
+	./venv/bin/python3 1-ignore-version-prod.py
 
 preprocess: venv/bin/activate check-env
 	./venv/bin/python3 2-preprocess.py	
+
+remove-archived: venv/bin/activate check-env
+	./venv/bin/python3 3-remove-physical.py
+	./venv/bin/python3 4-remove-logical.py
+	./venv/bin/python3 5-update-redirects.py
+	./venv/bin/python3 6-update-links.py
 
 isolate-version: check-env
 	cd ../..; ./hacks/isolateVersion/allSteps.sh
