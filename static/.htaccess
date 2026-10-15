@@ -46,6 +46,9 @@ AddType text/plain      graphqls
 # Add diff mime type
 AddType text/plain      diff
 
+# Serve the custom 404 page for missing URLs
+ErrorDocument 404 /404.html
+
 # Content negotiation: serve .md when Accept: text/markdown is requested
 # Only applies to /docs/ paths that are not already static assets or .md files
 RewriteCond %{HTTP_ACCEPT} text/markdown
