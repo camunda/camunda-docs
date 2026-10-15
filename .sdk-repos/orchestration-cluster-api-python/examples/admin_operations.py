@@ -18,7 +18,6 @@ from camunda_orchestration_sdk import (
     ConditionalEvaluationInstructionVariables,
     CorrelatedMessageSubscriptionSearchQuery,
     CreateClusterVariableRequest,
-    CreateClusterVariableRequestValue,
     CreateGlobalTaskListenerRequest,
     ExpressionEvaluationRequest,
     FormKey,
@@ -42,7 +41,6 @@ from camunda_orchestration_sdk import (
     TenantId,
     Unset,
     UpdateClusterVariableRequest,
-    UpdateClusterVariableRequestValue,
     UpdateGlobalTaskListenerRequest,
 )
 
@@ -64,7 +62,7 @@ def create_global_cluster_variable_example(name: ClusterVariableName) -> None:
     result = client.create_global_cluster_variable(
         data=CreateClusterVariableRequest(
             name=name,
-            value=CreateClusterVariableRequestValue.from_dict({"key": "my-value"}),
+            value={"key": "my-value"},
         ),
     )
 
@@ -79,7 +77,7 @@ def update_global_cluster_variable_example(name: ClusterVariableName) -> None:
     result = client.update_global_cluster_variable(
         name=name,
         data=UpdateClusterVariableRequest(
-            value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-value"}),
+            value={"key": "updated-value"},
         ),
     )
 
@@ -116,7 +114,7 @@ def create_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVar
         tenant_id=tenant_id,
         data=CreateClusterVariableRequest(
             name=name,
-            value=CreateClusterVariableRequestValue.from_dict({"key": "tenant-value"}),
+            value={"key": "tenant-value"},
         ),
     )
 
@@ -132,7 +130,7 @@ def update_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVar
         tenant_id=tenant_id,
         name=name,
         data=UpdateClusterVariableRequest(
-            value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-tenant-value"}),
+            value={"key": "updated-tenant-value"},
         ),
     )
 
