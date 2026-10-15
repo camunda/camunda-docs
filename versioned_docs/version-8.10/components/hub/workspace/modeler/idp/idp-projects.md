@@ -1,10 +1,12 @@
 ---
 id: idp-projects
 title: IDP projects
-description: "Create and manage your intelligent document processing document extraction and classification templates in an IDP project."
+description: "Create and manage your IDP document extraction and classification templates in an IDP project."
 ---
 
-Create and manage your IDP document extraction and classification templates in an **IDP project**.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Create an IDP project
 

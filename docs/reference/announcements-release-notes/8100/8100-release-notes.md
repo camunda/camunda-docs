@@ -32,6 +32,8 @@ import HelmCliSupport from '../../../self-managed/deployment/helm/_partials/_hel
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
+<ul><li>[Camunda 8.10.4 (13.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.4)</li><li>[Camunda 8.10.3 (12.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.3)</li><li>[Camunda 8.10.2 (07.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.2)</li><li>[Camunda 8.10.1 (06.10.2026)](https://github.com/camunda/camunda/releases/tag/8.10.1)</li><li>[Camunda 8.10.0 (29.09.2026)](https://github.com/camunda/camunda/releases/tag/8.10.0)</li><li>[Connectors 8.10.0 (30.09.2026)](https://github.com/camunda/connectors/releases/tag/8.10.0)</li></ul>
+<!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
 
@@ -117,7 +119,7 @@ New features help you more easily configure your agent tools when modeling.
 
 :::
 
-<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration)</p>
 
 ### Camunda-provided LLM for SaaS
 
@@ -761,7 +763,7 @@ Turn process instance runs into repeatable tests. Run a process instance, observ
 Test files in Test Studio now use the same schema as Camunda Process Test (CPT). You can record a test in Test Studio and run it in your CI/CD pipeline through CPT without converting formats, and load CPT-authored test files into Test Studio to debug them visually.
 
 - Use one JSON schema across Test Studio and CPT: record once, run anywhere.
-- Existing Play test scenario files are migrated automatically to the new format.
+- Existing test scenario files are migrated automatically to the new format.
 
 <p class="link-arrow">[Test files](/components/hub/workspace/modeler/validation/test-files.md)</p>
 
@@ -879,17 +881,17 @@ Task testing now supports call activities in both Desktop Modeler and Camunda Hu
 
 <p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
 
-### Test process segments in Play
+### Test process segments in test mode
 
 <!-- https://github.com/camunda/product-hub/issues/2896 -->
 
-When testing your process with Play in Camunda Hub, you can now capture and rerun targeted sections of a process as low-code integration tests:
+When testing your process within test mode in Camunda Hub, you can now capture and rerun targeted sections of a process as low-code integration tests:
 
 - Run segment tests individually or in batches to validate process changes faster.
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
 - Reuse saved segment tests during iterative model changes to catch regressions earlier.
 
-<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
+<p class="link-arrow">[Test your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
 
 ### Variables panel improvements
 
@@ -1481,6 +1483,16 @@ User, group, role, tenant, and permission management for Optimize is unchanged i
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
+### Unified configuration property changes
+
+Camunda 8.10 completes the unified configuration of the Orchestration Cluster that began in 8.8.
+
+- The 8.10 property changes are documented in [Property changes in Camunda 8.10](/versioned_docs/version-8.10/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md), including new properties, removed properties, and changed defaults.
+- You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
+- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+
+<p class="link-arrow">[Property changes in Camunda 8.10](/versioned_docs/version-8.10/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
+
 ### Unified frontend application for Admin, Operate, and Tasklist
 
 <!-- https://github.com/camunda/product-hub/issues/3456 -->
@@ -1693,7 +1705,7 @@ New features help you more easily configure your agent tools when modeling.
 | Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Camunda Hub</li></ul></p>                                |
 | Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Camunda Hub</li></ul></p> |
 
-<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration)</p>
 
 :::note
 

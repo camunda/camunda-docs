@@ -12,8 +12,9 @@ import AddElement from './img/add-element.png';
 import InputMapping from './img/input-mapping.png';
 import ToolDescription from './img/tool-description.png';
 import MultipleToolCallResult from './img/multiple-toolCallResult.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Add BPMN elements as callable tools to your AI agents.
+<PageDescription />
 
 ## About
 

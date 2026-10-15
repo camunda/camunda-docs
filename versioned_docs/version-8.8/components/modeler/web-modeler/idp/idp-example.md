@@ -9,8 +9,9 @@ import IdpFilepickerImg from './img/idp-filepicker.png';
 import IdpExtractImg from './img/idp-example-extract-step.png';
 import IdpResultsImg from './img/idp-example-results.png';
 import IdpTemplateImg from './img/idp-example-template.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-This worked example shows how you can [integrate IDP](idp-configuration.md) into a simple process.
+<PageDescription />
 
 ## About this worked example
 
