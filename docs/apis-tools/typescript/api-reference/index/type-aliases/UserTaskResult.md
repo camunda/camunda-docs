@@ -151,6 +151,16 @@ The key of the form.
 
 ---
 
+### isSuspended
+
+```ts
+isSuspended: boolean;
+```
+
+Whether the user task is suspended because its owning process instance is suspended.
+
+---
+
 ### name
 
 ```ts
