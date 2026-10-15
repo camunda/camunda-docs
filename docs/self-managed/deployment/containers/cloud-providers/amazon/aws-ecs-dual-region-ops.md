@@ -71,13 +71,14 @@ The script removes the zone, leaves the writer where it is, and finishes. Camund
 Without `--keep-writer`, `failover.sh` still removes the zone, then stops with one of these errors instead of switching the writer:
 
 ```text
-[<time>] ERROR: The Aurora writer in <failed-region> is <status>, so a planned switchover cannot run.
-[<time>] ERROR: The planned switchover to <surviving-region> did not complete.
+ERROR: the Aurora writer in <failed-region> is <status>, so a planned switchover cannot run.
+ERROR: could not read the Aurora writer in <failed-region> (AWS error above). If <failed-region> is down, a planned switchover cannot run.
+ERROR: the planned switchover to <surviving-cluster-arn> did not complete.
 ```
 
-The second one appears when AWS still reports the old writer as available early in an outage, then rejects the switchover or doesn't finish it.
+The second one shows the AWS error first. If that error is about credentials or permissions, fix it and run the script again. The third one appears when AWS still reports the old writer as available early in an outage, then rejects the switchover or doesn't finish it. If the script tells you to run it again, the switchover is still in progress: run the script again.
 
-In both cases, promote the surviving region's Aurora cluster with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-failover). The scripts don't automate it, because it can lose data that hasn't replicated yet:
+In the other cases, promote the surviving region's Aurora cluster with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-failover). The scripts don't automate it, because it can lose data that hasn't replicated yet:
 
 1. List the global cluster members and copy the ARN of the surviving region's cluster:
 
