@@ -583,7 +583,7 @@ Before deploying Camunda, ensure you have completed the following:
 
 ### Helm deployment
 
-First, source the environment setup script to set `HELM_CHART_VERSION` and other required variables. See the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to choose the appropriate chart version for your deployment:
+First, source the environment setup script to set `CAMUNDA_HELM_CHART_VERSION` and other required variables. See the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to choose the appropriate chart version for your deployment:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
@@ -600,7 +600,7 @@ Deploy Camunda with external domain configuration:
 
 ```bash
 helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
+  --version "$CAMUNDA_HELM_CHART_VERSION" \
   -f camunda-elastic-values.yml \
   -f camunda-identity-values.yml \
   -f camunda-hub-values.yml \
@@ -615,7 +615,7 @@ Deploy Camunda for local development:
 
 ```bash
 helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
+  --version "$CAMUNDA_HELM_CHART_VERSION" \
   -f camunda-elastic-values.yml \
   -f camunda-identity-values.yml \
   -f camunda-hub-values.yml \
