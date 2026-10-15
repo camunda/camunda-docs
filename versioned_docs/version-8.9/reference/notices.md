@@ -43,6 +43,8 @@ October 15, 2026
 
 - Management Identity Self-Managed 8.8, 8.9, and 8.10
 - Orchestration Cluster 8.9 and 8.10, when PostgreSQL is used as secondary storage (RDBMS)
+- Web Modeler Self-Managed 8.8 and 8.9, when PostgreSQL is used as RDBMS
+- Hub Self-Managed 8.10, when PostgreSQL is used as RDBMS
 
 ### Impact
 
@@ -61,7 +63,11 @@ The `requireAuth` property has no default value, and Camunda doesn't set it. Onl
 
 Your installation is affected if all of these conditions are true:
 
-- You run Management Identity 8.8 to 8.10, or Orchestration Cluster 8.9 to 8.10 with PostgreSQL as secondary storage, on a version earlier than the fixed versions listed in the solution.
+- You run one of the following Camunda products on a version earlier than the fixed versions listed in the solution:
+  - Management Identity 8.8 to 8.10
+  - Orchestration Cluster 8.9 or 8.10 with PostgreSQL as secondary storage
+  - Web Modeler 8.8 or 8.9 with PostgreSQL
+  - Hub 8.10 with PostgreSQL
 - The JDBC URL or datasource properties for the PostgreSQL connection set `requireAuth` to a value that excludes all authentication methods, or that contains no method.
 - The database connection doesn't use TLS with full server verification (`sslmode=verify-full`).
 
@@ -71,6 +77,8 @@ Camunda has provided the following releases which contain the fix (driver versio
 
 - Orchestration Cluster: 8.10.4, 8.9.24
 - Management Identity: 8.10.1, 8.9.11, 8.8.19
+- Web Modeler: 8.9.11, 8.8.22
+- Hub: 8.10.3
 
 If your configuration sets `requireAuth` to one of the affected values, replace it with a positive list of the authentication methods your PostgreSQL server uses, for example `requireAuth=scram-sha-256`, before you upgrade. After the upgrade, the driver refuses connections that use a value excluding every method (SQLState `08004`), and rejects a value that lists no method as invalid (SQLState `22023`).
 
