@@ -208,5 +208,4 @@
       "description": "A logical grouping of one LLM call, its tool dispatches, and their results within an agent instance's conversation history. Identified by a client-minted LoopIterationId supplied by the AI Agent Connector when appending history items."
     }
   ]
-
 }

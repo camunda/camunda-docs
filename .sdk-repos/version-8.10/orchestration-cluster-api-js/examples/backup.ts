@@ -1,7 +1,7 @@
 // Compilable usage examples for runtime backup operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import { createCamundaClient } from '@camunda8/orchestration-cluster-api';
+import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
 
 //#region TakeRuntimeBackup
 async function takeRuntimeBackupExample() {
@@ -21,7 +21,7 @@ async function listRuntimeBackupsExample() {
   const camunda = createCamundaClient();
 
   // `prefix` must end in a single '*'. Omit it to list every backup.
-  const backups = await camunda.listRuntimeBackups({ prefix: '10*' });
+  const backups = await camunda.listRuntimeBackups({ prefix: "10*" });
 
   for (const backup of backups) {
     console.log(`Backup ${backup.backupId}: ${backup.state}`);
@@ -111,7 +111,7 @@ async function listHistoryBackupsExample() {
   const camunda = createCamundaClient();
 
   // `prefix` must end in a single '*'. Omit it to list every history backup.
-  const backups = await camunda.listHistoryBackups({ prefix: '10*' });
+  const backups = await camunda.listHistoryBackups({ prefix: "10*" });
 
   for (const backup of backups) {
     console.log(`History backup ${backup.backupId}: ${backup.state}`);
@@ -146,7 +146,9 @@ async function takeHistoryBackupAsClusterAdminExample() {
   // cluster (or a single one when `physicalTenantId` is given). Requires a
   // separate cluster-admin security chain — Orchestration Cluster user
   // credentials are NOT accepted. Each backup must use a higher id than the last.
-  const backup = await camunda.takeHistoryBackupAsClusterAdmin({ backupId: 100 });
+  const backup = await camunda.takeHistoryBackupAsClusterAdmin({
+    backupId: 100,
+  });
 
   console.log(`Scheduled cluster history backup ${backup.backupId}`);
   for (const tenant of backup.physicalTenants) {
@@ -164,7 +166,9 @@ async function listHistoryBackupsAsClusterAdminExample() {
   // `prefix` must end in a single '*'. Omit `physicalTenantId` to span every
   // physical tenant of the cluster — results are grouped by backup id, and each
   // group lists only the tenants that hold that id.
-  const backups = await camunda.listHistoryBackupsAsClusterAdmin({ prefix: '10*' });
+  const backups = await camunda.listHistoryBackupsAsClusterAdmin({
+    prefix: "10*",
+  });
 
   for (const backup of backups) {
     console.log(`Cluster history backup ${backup.backupId}:`);
@@ -182,7 +186,9 @@ async function getHistoryBackupAsClusterAdminExample() {
   // Looking a backup id up directly lists every targeted physical tenant,
   // including the ones reporting `NOT_FOUND` — a backup that only some tenants
   // hold is a supported outcome.
-  const backup = await camunda.getHistoryBackupAsClusterAdmin({ backupId: 100 });
+  const backup = await camunda.getHistoryBackupAsClusterAdmin({
+    backupId: 100,
+  });
 
   console.log(`Cluster history backup ${backup.backupId}:`);
   for (const tenant of backup.physicalTenants) {
@@ -212,10 +218,14 @@ async function takeRuntimeBackupAsClusterAdminExample() {
   // mode: every targeted tenant must share that id (omit it for generated-id
   // mode, where each tenant generates its own). Either way the response lists the
   // outcome per physical tenant rather than cluster-wide.
-  const backup = await camunda.takeRuntimeBackupAsClusterAdmin({ backupId: 100 });
+  const backup = await camunda.takeRuntimeBackupAsClusterAdmin({
+    backupId: 100,
+  });
 
   for (const tenant of backup.physicalTenants) {
-    console.log(`[${tenant.physicalTenantId}] ${tenant.outcome} (backupId ${tenant.backupId})`);
+    console.log(
+      `[${tenant.physicalTenantId}] ${tenant.outcome} (backupId ${tenant.backupId})`
+    );
   }
 }
 //#endregion TakeRuntimeBackupAsClusterAdmin
@@ -228,7 +238,9 @@ async function listRuntimeBackupsAsClusterAdminExample() {
   // physical tenant — results are grouped by backup id, and each group reports
   // every targeted tenant, including ones holding nothing for that id (reported
   // as `DOES_NOT_EXIST`).
-  const backups = await camunda.listRuntimeBackupsAsClusterAdmin({ prefix: '10*' });
+  const backups = await camunda.listRuntimeBackupsAsClusterAdmin({
+    prefix: "10*",
+  });
 
   for (const backup of backups) {
     console.log(`Cluster runtime backup ${backup.backupId}: ${backup.state}`);
@@ -246,7 +258,9 @@ async function getRuntimeBackupAsClusterAdminExample() {
   // Looking a backup id up directly lists every targeted physical tenant,
   // including the ones reporting `DOES_NOT_EXIST` — a backup that only some
   // tenants hold is a supported outcome.
-  const backup = await camunda.getRuntimeBackupAsClusterAdmin({ backupId: 100 });
+  const backup = await camunda.getRuntimeBackupAsClusterAdmin({
+    backupId: 100,
+  });
 
   console.log(`Cluster runtime backup ${backup.backupId}: ${backup.state}`);
   for (const tenant of backup.physicalTenants) {
@@ -275,7 +289,9 @@ async function getRuntimeBackupStateAsClusterAdminExample() {
   const clusterState = await camunda.getRuntimeBackupStateAsClusterAdmin({});
 
   for (const tenant of clusterState.physicalTenants) {
-    console.log(`[${tenant.physicalTenantId}] ${tenant.state.checkpointStates.length} checkpoints`);
+    console.log(
+      `[${tenant.physicalTenantId}] ${tenant.state.checkpointStates.length} checkpoints`
+    );
   }
 }
 //#endregion GetRuntimeBackupStateAsClusterAdmin

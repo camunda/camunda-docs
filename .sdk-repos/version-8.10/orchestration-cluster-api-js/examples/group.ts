@@ -7,7 +7,7 @@ import {
   type GroupId,
   type MappingRuleId,
   type Username,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region CreateGroup
 async function createGroupExample(groupId: GroupId) {
@@ -15,7 +15,7 @@ async function createGroupExample(groupId: GroupId) {
 
   const result = await camunda.createGroup({
     groupId,
-    name: 'Engineering Team',
+    name: "Engineering Team",
   });
 
   console.log(`Created group: ${result.groupId}`);
@@ -26,7 +26,10 @@ async function createGroupExample(groupId: GroupId) {
 async function getGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
-  const group = await camunda.getGroup({ groupId }, { consistency: { waitUpToMs: 5000 } });
+  const group = await camunda.getGroup(
+    { groupId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
 
   console.log(`Group: ${group.name}`);
 }
@@ -55,7 +58,7 @@ async function updateGroupExample(groupId: GroupId) {
 
   await camunda.updateGroup({
     groupId,
-    name: 'Engineering Team',
+    name: "Engineering Team",
   });
 }
 //#endregion UpdateGroup
@@ -80,7 +83,10 @@ async function assignUserToGroupExample(groupId: GroupId, username: Username) {
 //#endregion AssignUserToGroup
 
 //#region UnassignUserFromGroup
-async function unassignUserFromGroupExample(groupId: GroupId, username: Username) {
+async function unassignUserFromGroupExample(
+  groupId: GroupId,
+  username: Username
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignUserFromGroup({
@@ -91,7 +97,10 @@ async function unassignUserFromGroupExample(groupId: GroupId, username: Username
 //#endregion UnassignUserFromGroup
 
 //#region AssignClientToGroup
-async function assignClientToGroupExample(groupId: GroupId, clientId: ClientId) {
+async function assignClientToGroupExample(
+  groupId: GroupId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignClientToGroup({
@@ -102,7 +111,10 @@ async function assignClientToGroupExample(groupId: GroupId, clientId: ClientId) 
 //#endregion AssignClientToGroup
 
 //#region UnassignClientFromGroup
-async function unassignClientFromGroupExample(groupId: GroupId, clientId: ClientId) {
+async function unassignClientFromGroupExample(
+  groupId: GroupId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignClientFromGroup({
@@ -158,7 +170,10 @@ async function searchRolesForGroupExample(groupId: GroupId) {
 //#endregion SearchRolesForGroup
 
 //#region AssignMappingRuleToGroup
-async function assignMappingRuleToGroupExample(groupId: GroupId, mappingRuleId: MappingRuleId) {
+async function assignMappingRuleToGroupExample(
+  groupId: GroupId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignMappingRuleToGroup({
@@ -169,7 +184,10 @@ async function assignMappingRuleToGroupExample(groupId: GroupId, mappingRuleId: 
 //#endregion AssignMappingRuleToGroup
 
 //#region UnassignMappingRuleFromGroup
-async function unassignMappingRuleFromGroupExample(groupId: GroupId, mappingRuleId: MappingRuleId) {
+async function unassignMappingRuleFromGroupExample(
+  groupId: GroupId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignMappingRuleFromGroup({
