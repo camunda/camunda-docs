@@ -654,6 +654,34 @@ Resume a suspended process instance (Camunda 8.10+)
 
 ---
 
+### `migrate`
+
+Migrate a process instance, or all active instances of a definition (batch), to another process definition
+
+**Usage:** `c8ctl migrate <resource> [key]`
+
+**Resources:** pi (process-instance)
+
+**Positional arguments:**
+
+- **process-instance:** `<key>` (optional)
+
+**Flags:**
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--targetProcessDefinitionKey` | string | Yes | Key of the process definition to migrate to |
+| `--map` | string |  | Element mapping as sourceElementId=targetElementId (repeatable) |
+| `--processDefinitionKey` | string |  | Batch mode: migrate all active instances of this source process definition key (omit the instance key) |
+
+**Examples:**
+
+```bash
+c8ctl migrate pi 2251799813685249 --targetProcessDefinitionKey 2251799813686001 --map Task_A=Task_A2  # Migrate a process instance to a new definition
+```
+
+---
+
 ### `await`
 
 Create and await process instance completion (server-side waiting)
@@ -853,7 +881,7 @@ c8ctl set variable 2251799813685249 --variables='{"x":1}' --local  # Set variabl
 
 ### `deploy`
 
-Deploy files to Camunda (auto-discovers deployable files in directories). When deploying a directory that is inside a process application (a parent directory contains a .process-application marker), the entire application root is deployed. Explicit file paths are not expanded.
+Deploy files to Camunda (auto-discovers deployable files in directories). When deploying a directory that is inside a Camunda project (a parent directory contains a camunda.json or .process-application marker), the entire project root is deployed. Explicit file paths are not expanded.
 
 **Usage:** `c8ctl deploy [path...]`
 
@@ -869,7 +897,7 @@ Deploy files to Camunda (auto-discovers deployable files in directories). When d
 
 ```bash
 c8ctl deploy ./my-process.bpmn                              # Deploy a BPMN file
-c8ctl deploy                                                # Deploy from current directory (detects process application root)
+c8ctl deploy                                                # Deploy from current directory (detects Camunda project root)
 ```
 
 ---
@@ -975,8 +1003,9 @@ Watch files for changes and auto-deploy
 | `--force` | boolean |  | Continue watching after all deployment errors |
 | `--extensions` | string |  | Comma-separated list of additional file extensions to watch (merged with defaults, e.g. .md,.txt) |
 | `--all-extensions` | boolean |  | Watch all server-supported file extensions |
-| `--process-application` | boolean |  | Watch and deploy the entire process application (requires .process-application marker) |
-| `--pa` | boolean |  | Alias for --process-application |
+| `--project` | boolean |  | Watch and deploy the entire Camunda project (requires camunda.json or .process-application marker) |
+| `--process-application` | boolean |  | Alias for --project (deprecated) |
+| `--pa` | boolean |  | Alias for --project (deprecated) |
 
 **Examples:**
 
