@@ -7,7 +7,7 @@ mdx:
 
 # Models
 
-Request and response model classes (711 types).
+Request and response model classes (714 types).
 
 ## Quick Reference
 
@@ -172,6 +172,7 @@ Request and response model classes (711 types).
 - [CamundaKeyJsonConverterFactory](#camundakeyjsonconverterfactory) — JSON converter factory that handles any `ICamundaKey` struct
 - [CamundaKeyValidation](#camundakeyvalidation) — Validation helpers for domain key constraints
 - [CamundaLongKeyJsonConverterFactory](#camundalongkeyjsonconverterfactory) — JSON converter factory that handles any `ICamundaLongKey` struct
+- [CamundaRandomSource](#camundarandomsource) — The live `IRandomSource`: the platform's shared, unseeded generator
 - [CamundaSdkException](#camundasdkexception) — SDK error types mirroring the JS SDK's error structure
 - [CamundaTimeProvider](#camundatimeprovider) — A `TimeProvider` decorator whose `CamundaTimeProvider
 - [CamundaUserResult](#camundauserresult) — CamundaUserResult
@@ -377,6 +378,7 @@ Request and response model classes (711 types).
 - [ICamundaKey](#icamundakey) — Marker interface for all Camunda domain key types
 - [ICamundaLongKey](#icamundalongkey) — Marker interface for Camunda domain types backed by a long (int64) value
 - [IEngineClockTarget](#iengineclocktarget) — The engine clock operations `EngineTimeProvider` drives
+- [IRandomSource](#irandomsource) — Source of the randomness behind SDK runtime jitter: retry backoff, OAuth retry backoff, and worker startup staggering
 - [ITenantIdSettable](#itenantidsettable) — Implemented by request body types that have an optional tenantId property
 - [ITenantIdsSettable](#itenantidssettable) — Implemented by request body types that have an optional `tenantIds` array property (e
 - [IncidentErrorTypeExactMatch](#incidenterrortypeexactmatch) — Matches the value exactly
@@ -620,6 +622,7 @@ Request and response model classes (711 types).
 - [SecretResolutionError](#secretresolutionerror) — SecretResolutionError
 - [SecretResolveRequest](#secretresolverequest) — SecretResolveRequest
 - [SecretResolveResult](#secretresolveresult) — The per-reference outcome of a resolve request
+- [SeededRandomSource](#seededrandomsource) — A deterministic `IRandomSource` for tests: the same seed yields the same sequence of draws on every run, and in every Camunda SDK
 - [SetVariableRequest](#setvariablerequest) — SetVariableRequest
 - [SignalBroadcastRequest](#signalbroadcastrequest) — SignalBroadcastRequest
 - [SignalBroadcastResult](#signalbroadcastresult) — SignalBroadcastResult
@@ -3275,6 +3278,20 @@ JSON converter factory that handles any `ICamundaLongKey` struct. Serializes as 
 public sealed class CamundaLongKeyJsonConverterFactory : JsonConverterFactory
 ```
 
+## CamundaRandomSource
+
+The live `IRandomSource`: the platform's shared, unseeded generator.
+
+This is the one place in the SDK runtime allowed to read ambient randomness. Production jitter stays random so that a fleet of workers does not retry or start in lockstep.
+
+```csharp
+public sealed class CamundaRandomSource : IRandomSource
+```
+
+| Property | Type                  | Description                         |
+| -------- | --------------------- | ----------------------------------- |
+| `Live`   | `CamundaRandomSource` | The default live randomness source. |
+
 ## CamundaSdkException
 
 SDK error types mirroring the JS SDK's error structure.
@@ -3316,18 +3333,18 @@ CamundaUserResult
 public sealed class CamundaUserResult
 ```
 
-| Property               | Type                         | Description                                                   |
-| ---------------------- | ---------------------------- | ------------------------------------------------------------- |
-| `Username`             | `Username`                   | The username of the user.                                     |
-| `DisplayName`          | `String`                     | The display name of the user.                                 |
-| `Email`                | `String`                     | The email of the user.                                        |
-| `AuthorizedComponents` | `List<String>`               | The web components the user is authorized to use.             |
-| `Tenants`              | `List<TenantResult>`         | The tenants the user is a member of.                          |
-| `Groups`               | `List<String>`               | The groups assigned to the user.                              |
-| `Roles`                | `List<String>`               | The roles assigned to the user.                               |
-| `SalesPlanType`        | `String`                     | The plan of the user.                                         |
-| `C8Links`              | `Dictionary<String, String>` | The links to the components in the C8 stack.                  |
-| `CanLogout`            | `Boolean`                    | Flag for understanding if the user is able to perform logout. |
+| Property               | Type                         | Description                                                                                                                                                                                                                |
+| ---------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Username`             | `Username`                   | The username of the user.                                                                                                                                                                                                  |
+| `DisplayName`          | `String`                     | The display name of the user.                                                                                                                                                                                              |
+| `Email`                | `String`                     | The email of the user.                                                                                                                                                                                                     |
+| `AuthorizedComponents` | `List<String>`               | The web components the user is authorized to use. When authorizations are disabled for the cluster, this always returns `["*"]`, regardless of the user's actual permissions, since access is not restricted in that case. |
+| `Tenants`              | `List<TenantResult>`         | The tenants the user is a member of.                                                                                                                                                                                       |
+| `Groups`               | `List<String>`               | The groups assigned to the user.                                                                                                                                                                                           |
+| `Roles`                | `List<String>`               | The roles assigned to the user.                                                                                                                                                                                            |
+| `SalesPlanType`        | `String`                     | The plan of the user.                                                                                                                                                                                                      |
+| `C8Links`              | `Dictionary<String, String>` | The links to the components in the C8 stack.                                                                                                                                                                               |
+| `CanLogout`            | `Boolean`                    | Flag for understanding if the user is able to perform logout.                                                                                                                                                              |
 
 ## CancelProcessInstanceRequest
 
@@ -6316,6 +6333,18 @@ Declared as an interface so the provider does not depend on the generated client
 
 ```csharp
 public interface IEngineClockTarget
+```
+
+## IRandomSource
+
+Source of the randomness behind SDK runtime jitter: retry backoff, OAuth retry backoff, and worker startup staggering.
+
+The randomness counterpart of `CamundaOptions.TimeProvider`. Pinning the clock makes cadence virtual; supplying a `SeededRandomSource` as well makes it reproducible, so a timing-dependent failure can be replayed draw for draw.
+
+Implementations must be safe to call from multiple threads.
+
+```csharp
+public interface IRandomSource
 ```
 
 ## ITenantIdSettable
@@ -9863,6 +9892,22 @@ public sealed class SecretResolveResult
 | ---------- | ----------------------------- | ------------------------------------------------------------------------ |
 | `Resolved` | `List<ResolvedSecret>`        | The references that were successfully resolved.                          |
 | `Errors`   | `List<SecretResolutionError>` | The references that could not be resolved, each with a typed error code. |
+
+## SeededRandomSource
+
+A deterministic `IRandomSource` for tests: the same seed yields the same sequence of draws on every run, and in every Camunda SDK.
+
+The generator is SplitMix64, taking the top 53 bits of each output as a double. It is specified by the cross-SDK contract (camunda/sdk-infra#50) rather than borrowed from the platform, so a seed reproduces the same jitter regardless of runtime version or language.
+
+Draws are thread-safe. Reproducibility holds for draws made in a fixed order; if several workers draw concurrently, which of them receives which value is up to the scheduler.
+
+```csharp
+public sealed class SeededRandomSource : IRandomSource
+```
+
+| Property | Type     | Description                                                                             |
+| -------- | -------- | --------------------------------------------------------------------------------------- |
+| `Seed`   | `UInt64` | The seed this source was created with. Report it on failure to make the run replayable. |
 
 ## SetVariableRequest
 
