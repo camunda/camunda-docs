@@ -76,7 +76,7 @@ ERROR: could not read the Aurora writer in <failed-region> (AWS error above). If
 ERROR: the planned switchover to <surviving-cluster-arn> did not complete.
 ```
 
-The second one shows the AWS error first. If that error is about credentials or permissions, fix it and run the script again. The third one appears when AWS still reports the old writer as available early in an outage, then rejects the switchover or doesn't finish it. If the script tells you to run it again, the switchover is still in progress: run the script again.
+The second one shows the AWS error first. If that error is about credentials or permissions, fix it, and run the script again. The third one appears when AWS still reports the old writer as available early in an outage, then rejects the switchover or doesn't finish it. If the script tells you to run it again, the switchover is still in progress. Run the script again.
 
 In the other cases, promote the surviving region's Aurora cluster with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-failover). The scripts don't automate it, because it can lose data that hasn't replicated yet:
 
