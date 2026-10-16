@@ -1,5 +1,6 @@
 const { unmaintainedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
+const { tsApiSidebarItemsGenerator } = require("./src/tsApiSidebar");
 
 // Predict next version (e.g. 8.9 -> 8.10) for "next" page permalink hints.
 const [_currentMajor, _currentMinor] = currentVersion.split(".").map(Number);
@@ -208,13 +209,66 @@ module.exports = {
                   ".sdk-repos/orchestration-cluster-api-go/examples/operation-map.json",
                 autoImports: true,
                 defaultImports:
-                  'import (\n\tcamunda "github.com/camunda/orchestration-cluster-api-go"\n\topenapi "github.com/camunda/orchestration-cluster-api-go/client"\n)',
+                  'import camunda "github.com/camunda/orchestration-cluster-api-go/v11"',
               },
             ],
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              "8.10": {
+                specPath: "api/camunda/version-8.10/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.10/apis-tools/orchestration-cluster-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+                sdkExamples: [
+                  {
+                    lang: "TypeScript",
+                    highlight: "typescript",
+                    operationMapPath:
+                      ".sdk-repos/version-8.10/orchestration-cluster-api-js/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports:
+                      "import { createCamundaClient } from '@camunda8/orchestration-cluster-api';",
+                  },
+                  {
+                    lang: "Python",
+                    highlight: "python",
+                    operationMapPath:
+                      ".sdk-repos/version-8.10/orchestration-cluster-api-python/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports:
+                      "from camunda_orchestration_sdk import CamundaClient",
+                  },
+                  {
+                    lang: "C#",
+                    highlight: "csharp",
+                    operationMapPath:
+                      ".sdk-repos/version-8.10/orchestration-cluster-api-csharp/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports: "using Camunda.Orchestration.Sdk;",
+                  },
+                  {
+                    lang: "Rust",
+                    highlight: "rust",
+                    operationMapPath:
+                      ".sdk-repos/version-8.10/orchestration-cluster-api-rust/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports:
+                      "use camunda_orchestration_sdk::CamundaClient;",
+                  },
+                  {
+                    lang: "Go",
+                    highlight: "go",
+                    operationMapPath:
+                      ".sdk-repos/version-8.10/orchestration-cluster-api-go/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports:
+                      'import camunda "github.com/camunda/orchestration-cluster-api-go/v10"',
+                  },
+                ],
+              },
               8.9: {
                 specPath: "api/camunda/version-8.9/camunda-openapi.yaml",
                 outputDir:
@@ -733,6 +787,10 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
+          // Split the ~1,900-entry TypeScript SDK "Type Aliases" sidebar
+          // category into alphabetical buckets to avoid an N×N HTML blow-up.
+          // See src/tsApiSidebar.js.
+          sidebarItemsGenerator: tsApiSidebarItemsGenerator,
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           remarkPlugins: [

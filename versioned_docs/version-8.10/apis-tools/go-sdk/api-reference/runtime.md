@@ -207,6 +207,21 @@ func (LiveClock) Sleep(ctx context.Context, d time.Duration) error
 
 Sleep waits for d or until ctx is canceled.
 
+## LiveRandom
+
+LiveRandom draws from the process-wide generator. It is the default when no
+`Random` is injected.
+
+### Methods
+
+#### Float64
+
+```go
+func (LiveRandom) Float64() float64
+```
+
+Float64 implements `Random`.
+
 ## PollOption
 
 ```go
@@ -251,6 +266,78 @@ func WithRetryOn(pred func(error) bool) PollOption
 
 WithRetryOn overrides the predicate that decides whether an error is
 retryable (the entity is not yet consistent). The default retries on 404.
+
+## Random
+
+Random is the source of randomness the SDK draws jitter from: retry backoff,
+worker startup delay and FALCON endpoint selection. Inject one with
+`WithRandom`; the default is `LiveRandom`.
+
+Implementations must be safe for concurrent use, since retries and workers
+draw from one source on many goroutines.
+
+## SeededRandom
+
+SeededRandom is a deterministic `Random`. Two sources with the same seed
+produce the same sequence, so a test can assert the exact delays the SDK
+schedules and replay a failure. It is safe for concurrent use, though
+concurrent callers then share one sequence in nondeterministic order.
+
+The generator is SplitMix64, taking the top 53 bits of each output. It is
+specified across the Camunda SDKs, so one seed yields the same sequence in
+every language.
+
+### Functions
+
+#### NewSeededRandom
+
+```go
+func NewSeededRandom(seed uint64) *SeededRandom
+```
+
+NewSeededRandom returns a source that replays the sequence for seed.
+
+#### SeededRandomFromEnv
+
+```go
+func SeededRandomFromEnv() (*SeededRandom, error)
+```
+
+SeededRandomFromEnv seeds from CAMUNDA_TEST_SEED when it is set, otherwise
+from a fresh random seed. Either way the source reports its seed through
+`SeededRandom.Seed` and `SeededRandom.String`, so a failing test can be
+replayed.
+
+Only an unset variable means absent. Any other value that is not a decimal
+integer in the uint64 range, including an empty string, returns an error
+wrapping `ErrConfig` rather than silently running with a different seed.
+
+### Methods
+
+#### Float64
+
+```go
+func (r *SeededRandom) Float64() float64
+```
+
+Float64 implements `Random`.
+
+#### Seed
+
+```go
+func (r *SeededRandom) Seed() uint64
+```
+
+Seed returns the seed this source was created with.
+
+#### String
+
+```go
+func (r *SeededRandom) String() string
+```
+
+String names the seed and how to replay it, so a test that prints the source
+on failure says how to reproduce the run.
 
 ## Package functions
 
@@ -307,6 +394,16 @@ func StatusCode(err error) (status int, ok bool)
 
 StatusCode returns the HTTP status code carried by err if it is (or wraps) an
 *APIError, and ok reports whether it was found.
+
+## SeedEnvVar
+
+```go
+const SeedEnvVar = "CAMUNDA_TEST_SEED"
+```
+
+SeedEnvVar names the environment variable `SeededRandomFromEnv` reads. A test
+that fails under a seeded source can be replayed by setting it to the seed the
+failure reported.
 
 ## ErrConfig, ErrAuth, ErrBackpressureQueueFull, ErrEventualConsistencyTimeout, ErrLeaseNotHonored
 

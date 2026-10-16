@@ -40,7 +40,7 @@ For the chart-level reference behind those tabs, see [RDBMS example deployment](
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host Camunda.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
@@ -95,11 +95,11 @@ To streamline the execution of the subsequent commands, it is recommended to exp
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/setting-region.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/setting-region.sh
 ```
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/chart-env.sh
 ```
 
 - `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
@@ -121,7 +121,7 @@ Verify the configuration of your environment variables by running the following 
 <TabItem value="standard">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -129,7 +129,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 <TabItem value="irsa">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-irsa/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -139,7 +139,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 The RDBMS variant configures Amazon Aurora PostgreSQL as the secondary storage and requires additional orchestration database variables on top of the base configuration:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-rdbms/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -166,7 +166,7 @@ For more details on the Ingress controller used here and its configuration optio
 Set the following values for your Ingress configuration:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-ingress-setup-vars.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/export-ingress-setup-vars.sh
 ```
 
 Additionally, obtain these values by following the guide for either [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md), as they will be needed in later steps:
@@ -182,7 +182,7 @@ Additionally, obtain these values by following the guide for either [eksctl](./e
 The following installs `contour` in the `projectcontour` namespace via Helm. For more configuration options, consult the [Contour Helm chart](https://projectcontour.github.io/helm-charts/).
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/install-contour.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/install-contour.sh
 ```
 
 ### external-dns
@@ -205,7 +205,7 @@ In the example below, it's set to `external-dns` and should be changed if this i
 :::
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/install-external-dns.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/install-external-dns.sh
 ```
 
 ### cert-manager
@@ -215,7 +215,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 To simplify the installation process, it is [recommended](https://cert-manager.io/docs/installation/helm/#3-install-customresourcedefinitions) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/install-cert-manager-crds.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/install-cert-manager-crds.sh
 ```
 
 The following installs `cert-manager` in the `cert-manager` namespace via Helm. For more configuration options, consult the [Helm chart](https://artifacthub.io/packages/helm/cert-manager/cert-manager). The supplied settings also configure `cert-manager` to ease the certificate creation by setting a default issuer, which allows you to add a single annotation on an Ingress to request the relevant certificates.
@@ -225,13 +225,13 @@ Make sure to have `CERT_MANAGER_IRSA_ARN` exported prior by either having follow
 :::
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/install-cert-manager.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/install-cert-manager.sh
 ```
 
 Create a `ClusterIssuer` via `kubectl` to enable cert-manager to request certificates from [Let's Encrypt](https://letsencrypt.org/):
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/install-cert-manager-issuer.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/install-cert-manager-issuer.sh
 ```
 
 ## Identity Provider (IdP) setup
@@ -272,7 +272,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 :::
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/helm-values/values-domain.yml
 ```
 
 :::danger Exposure of the Zeebe Gateway Service
@@ -289,7 +289,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/create-external-db-secrets.sh
 ```
 
 </TabItem>
@@ -297,7 +297,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 <TabItem value="without-domain-std" label="Standard without domain">
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/helm-values/values-no-domain.yml
 ```
 
 <NoDomainInfo />
@@ -309,7 +309,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -323,7 +323,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 :::
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-irsa/helm-values/values-domain.yml
 ```
 
 :::danger Exposure of the Zeebe Gateway Service
@@ -338,7 +338,7 @@ For production-grade security, keep the Zeebe Gateway on a private network (no p
   <TabItem value="without-domain-irsa" label="IRSA without domain">
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-irsa/helm-values/values-no-domain.yml
 ```
 
 <NoDomainInfo />
@@ -356,7 +356,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 The RDBMS values file configures Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster and disables Optimize.
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-rdbms/helm-values/values-domain.yml
 ```
 
 :::danger Exposure of the Zeebe Gateway Service
@@ -373,7 +373,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -383,7 +383,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 The RDBMS values file configures Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster and disables Optimize.
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-rdbms/helm-values/values-no-domain.yml
 ```
 
 <NoDomainInfo />
@@ -395,7 +395,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -427,14 +427,14 @@ To run PostgreSQL inside the cluster instead of managed Aurora, deploy it with t
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
 ```
 
 :::note Web Modeler SMTP secret
 If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/hub/configuration/properties.md#smtp--email)):
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-webmodeler-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region/procedure/create-webmodeler-secret.sh
 ```
 
 :::
@@ -444,7 +444,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/install-chart.sh
 ```
 
 This command:
@@ -492,7 +492,7 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
   Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
 
   ```bash reference
-  https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml#L28-L48
+  https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml#L28-L48
   ```
 
   - Replace `OPENSEARCH_MASTER_USERNAME` and `OPENSEARCH_MASTER_PASSWORD` with your OpenSearch domain admin credentials.
@@ -607,7 +607,7 @@ For a detailed guide on generating and using a token, consult the relevant docum
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
 ```
 
   </TabItem>
@@ -622,7 +622,7 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
 ```
 
   </TabItem>
@@ -632,7 +632,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 Generate a temporary token to access the Orchestration Cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration Cluster REST API and display the cluster topology:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 ...and results in the following output:
@@ -641,7 +641,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
   <summary>Example output</summary>
 
 ```json reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.10/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
 </details>

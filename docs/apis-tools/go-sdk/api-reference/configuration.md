@@ -118,6 +118,7 @@ Config is the resolved SDK configuration.
 | `TLS`                 | `TLSConfig`           |                                                                                                                                                                                                                                                                                                                    |
 | `WorkerDefaults`      | `WorkerDefaults`      |                                                                                                                                                                                                                                                                                                                    |
 | `Clock`               | `Clock`               | Clock resolves runtime cadence. Nil selects `LiveClock`.                                                                                                                                                                                                                                                           |
+| `Random`              | `Random`              | Random is the source jitter is drawn from. Nil selects `LiveRandom`.                                                                                                                                                                                                                                               |
 
 ### Functions
 
@@ -351,6 +352,19 @@ func WithOAuthScope(scope string) Option
 ```
 
 WithOAuthScope sets the OAuth token scope.
+
+#### WithRandom
+
+```go
+func WithRandom(r Random) Option
+```
+
+WithRandom sets the source of randomness the client draws jitter from: retry
+backoff, worker startup delay and FALCON endpoint selection. Defaults to
+`LiveRandom`. Pass a `SeededRandom` to make those draws reproducible.
+
+A nil Random selects the default; a typed nil is rejected by `New`, as for
+`WithClock`.
 
 #### WithRestAddress
 

@@ -5,7 +5,7 @@ import (
 	"context"
 	"time"
 
-	camunda "github.com/camunda/orchestration-cluster-api-go"
+	camunda "github.com/camunda/orchestration-cluster-api-go/v11"
 )
 
 func pinClockExample(ctx context.Context, client *camunda.CamundaClient) error {

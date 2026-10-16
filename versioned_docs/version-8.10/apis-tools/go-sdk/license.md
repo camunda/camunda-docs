@@ -2,7 +2,7 @@
 id: license
 title: "License"
 sidebar_label: "License"
-sidebar_position: 20
+sidebar_position: 21
 mdx:
   format: md
 ---

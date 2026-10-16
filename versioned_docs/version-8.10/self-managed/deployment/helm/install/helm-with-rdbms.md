@@ -68,7 +68,7 @@ Before you begin:
 ### Step 2: Prepare your database
 
 :::note On Amazon Aurora PostgreSQL
-Skip the local `createdb` and `createuser` commands. Connect to your Aurora writer endpoint with `psql`, and prefer IAM database authentication over a static password. See [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) and the [Aurora Terraform module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/aws/modules/aurora).
+Skip the local `createdb` and `createuser` commands. Connect to your Aurora writer endpoint with `psql`, and prefer IAM database authentication over a static password. See [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) and the [Aurora Terraform module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/modules/aurora).
 :::
 
 Create a database and user. For example, in PostgreSQL:
