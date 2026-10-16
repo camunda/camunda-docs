@@ -12,7 +12,7 @@ The primary entry point of the SDK.
 A `CamundaClient` is cheap to clone — clones share the same configuration,
 HTTP client, OAuth token cache, and worker registry.
 
-`CamundaClient` exposes **261** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **262** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ## Methods
 
@@ -176,6 +176,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`pause_exporting`](#pause_exporting)                                                                               | Pause exporting (`POST /exporting/pause`).                                                                                                                                                                                                                                                   |
 | [`pin_clock`](#pin_clock)                                                                                           | Pin internal clock (alpha) (`PUT /clock`).                                                                                                                                                                                                                                                   |
 | [`publish_message`](#publish_message)                                                                               | Publish a message (no correlation key matching against active subscriptions only — buffered). The configured default tenant id is applied when unset.                                                                                                                                        |
+| [`random`](#random)                                                                                                 | The source this client draws jitter from.                                                                                                                                                                                                                                                    |
 | [`reset_clock`](#reset_clock)                                                                                       | Reset internal clock (alpha) (`POST /clock/reset`).                                                                                                                                                                                                                                          |
 | [`resolve_incident`](#resolve_incident)                                                                             | Resolve incident (`POST /incidents/{incidentKey}/resolution`).                                                                                                                                                                                                                               |
 | [`resolve_incidents_batch_operation`](#resolve_incidents_batch_operation)                                           | Resolve related incidents (batch) (`POST /process-instances/incident-resolution`).                                                                                                                                                                                                           |
@@ -4344,6 +4345,14 @@ async fn publish_message() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
+### random
+
+```rust
+pub fn random(&self) -> &Arc<dyn Random>
+```
+
+The source this client draws jitter from.
+
 ### reset_clock
 
 ```rust
@@ -7116,12 +7125,14 @@ later additions here are not breaking changes for callers.
 | `config`      | `HashMap<String, String>` | Programmatic overrides for `CAMUNDA_*` configuration keys. These take precedence over environment variables.                     |
 | `http_client` | `Option<Client>`          | A pre-built `reqwest::Client` to use for all requests (including OAuth token fetches). When `None`, a default client is created. |
 | `clock`       | `Option<Arc<dyn Clock>>`  | The clock the client's cadence resolves through. When `None`, real time is used.                                                 |
+| `random`      | `Option<Arc<dyn Random>>` | The source jitter is drawn from. When `None`, `LiveRandom` is used.                                                              |
 
 ### Methods
 
-| Method             | Description                                                        |
-| ------------------ | ------------------------------------------------------------------ |
-| `new`              | Create empty options.                                              |
-| `with`             | Add a single `CAMUNDA_*` configuration override.                   |
-| `with_clock`       | Resolve the client's cadence through `clock` instead of real time. |
-| `with_http_client` | Use a custom `reqwest::Client`.                                    |
+| Method             | Description                                                                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `new`              | Create empty options.                                                                                                                      |
+| `with`             | Add a single `CAMUNDA_*` configuration override.                                                                                           |
+| `with_clock`       | Resolve the client's cadence through `clock` instead of real time.                                                                         |
+| `with_http_client` | Use a custom `reqwest::Client`.                                                                                                            |
+| `with_random`      | Draw jitter (retry backoff, worker startup delay, FALCON endpoint selection) from `random`. Pass a `SeededRandom` to make it reproducible. |
