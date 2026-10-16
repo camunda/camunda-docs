@@ -193,30 +193,30 @@ CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES_0_LINKS_0_URL=https://camunda.com/
 
 Use `components` to set up components in the cluster:
 
-| Property                                               | Description                                                                                                  |
-| :----------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
-| `camunda.hub.clusters[0].components[0].name`           | The component's name.                                                                                        |
-| `camunda.hub.clusters[0].components[0].type`           | The component's type.                                                                                        |
-| `camunda.hub.clusters[0].components[0].version`        | The component's version.                                                                                     |
-| `camunda.hub.clusters[0].components[0].urls.webapp`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. |
-| `camunda.hub.clusters[0].components[0].urls.rest`      | The REST API base URL for Connectors and the Orchestration Cluster.                                          |
-| `camunda.hub.clusters[0].components[0].urls.grpc`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). |
-| `camunda.hub.clusters[0].components[0].urls.readiness` | The address of the health check endpoint.                                                                    |
+| Property                                               | Description                                                                                                                                                                                                                     |
+| :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `camunda.hub.clusters[0].components[0].name`           | The component's name.                                                                                                                                                                                                           |
+| `camunda.hub.clusters[0].components[0].type`           | The component's type.                                                                                                                                                                                                           |
+| `camunda.hub.clusters[0].components[0].version`        | The component's version.                                                                                                                                                                                                        |
+| `camunda.hub.clusters[0].components[0].urls.webapp`    | The address of the web application of a component with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. Users open it in their browser, so use an [external](#notes-on-host-names-and-port-numbers) address. |
+| `camunda.hub.clusters[0].components[0].urls.rest`      | The REST API base URL for Connectors and the Orchestration Cluster. The Camunda Hub server calls it, so you can use an [internal](#notes-on-host-names-and-port-numbers) address.                                               |
+| `camunda.hub.clusters[0].components[0].urls.grpc`      | The address of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). The Camunda Hub server calls it, so you can use an [internal](#notes-on-host-names-and-port-numbers) address.                                               |
+| `camunda.hub.clusters[0].components[0].urls.readiness` | The address of the health check endpoint. The Camunda Hub server calls it, so you can use an [internal](#notes-on-host-names-and-port-numbers) address.                                                                         |
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
 Use `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
-| Environment variable                                 | Description                                                                                                  |
-| :--------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_NAME`           | The component's name.                                                                                        |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                        |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_VERSION`        | The component's version.                                                                                     |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_WEBAPP`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The REST API base URL for Connectors and the Orchestration Cluster.                                          |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_GRPC`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_READINESS` | The address of the health check endpoint.                                                                    |
+| Environment variable                                 | Description                                                                                                                                                                                                                     |
+| :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_NAME`           | The component's name.                                                                                                                                                                                                           |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                                                                                                                                           |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_VERSION`        | The component's version.                                                                                                                                                                                                        |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_WEBAPP`    | The address of the web application of a component with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. Users open it in their browser, so use an [external](#notes-on-host-names-and-port-numbers) address. |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The REST API base URL for Connectors and the Orchestration Cluster. The Camunda Hub server calls it, so you can use an [internal](#notes-on-host-names-and-port-numbers) address.                                               |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_GRPC`      | The address of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). The Camunda Hub server calls it, so you can use an [internal](#notes-on-host-names-and-port-numbers) address.                                               |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_READINESS` | The address of the health check endpoint. The Camunda Hub server calls it, so you can use an [internal](#notes-on-host-names-and-port-numbers) address.                                                                         |
 
 </TabItem>
 </Tabs>
@@ -834,3 +834,17 @@ Refer to the [advanced SSL configuration guide](./ssl.md) for additional details
 
 - _Internal_ refers to host names and port numbers that are only used inside a Docker Compose network or Kubernetes cluster for backend-to-backend communication.
 - _External_ refers to host names and port numbers that are exposed to the outside and can be reached from a web browser.
+
+### URL properties at a glance
+
+Some URLs are called by the Camunda Hub server, and others are opened in the browser of a user. The Camunda Hub server can use an internal address, but a browser needs an external one. If the internal and external addresses of a component differ, set `rest`, `grpc`, and `readiness` to the internal address, and `webapp` to the external address.
+
+| Property                                                                           | Used by                                                     | Address  |
+| :--------------------------------------------------------------------------------- | :---------------------------------------------------------- | :------- |
+| `camunda.hub.server.url`                                                           | The browser of a user, and the links in notification emails | External |
+| `camunda.hub.clusters[].components[].urls.webapp`                                  | The browser of a user                                       | External |
+| `camunda.hub.clusters[].components[].urls.rest`, `urls.grpc`, and `urls.readiness` | The Camunda Hub server                                      | Internal |
+| `camunda.hub.clusters[].custom-properties[].links[].url`                           | The browser of a user, as a link in the cluster details     | External |
+| `camunda.identity.base-url` and `camunda.identity.issuer-backend-url`              | The Camunda Hub server                                      | Internal |
+
+The database, SMTP, and Git Sync settings are only used by the Camunda Hub server.
