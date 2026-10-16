@@ -84,9 +84,9 @@ See [reliability testing](https://github.com/camunda/camunda/blob/main/docs/test
 
 <TabItem value="elasticsearch">
 
-The following table lists the Helm values for Elasticsearch or OpenSearch with Optimize. Optimize is the main driver of Elasticsearch and OpenSearch sizing in this configuration because its importer reads from and writes to the secondary storage indices in addition to the primary export traffic. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
+The following table lists the Helm values for Elasticsearch or OpenSearch with Optimize. Optimize is the main driver of Elasticsearch and OpenSearch sizing in this configuration because its importer reads from and writes to the secondary storage indices in addition to the primary export traffic. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
 
-These are the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-89/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch and OpenSearch, which use identical resources.
+These are the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-89/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch and OpenSearch, which use identical resources.
 
 | Component                      |                     | Request | Limit |
 | ------------------------------ | ------------------- | ------: | ----: |
@@ -120,7 +120,7 @@ These are the exact Helm values that Camunda uses in its continuous realistic-lo
 |                                | Disk request \[GB\] |         |   256 |
 
 :::note
-If you don't use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. OpenSearch is expected to see a similar impact, but it hasn't been measured separately. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
+If you don't use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. OpenSearch is expected to see a similar impact, but it hasn't been measured separately. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
 :::
 
 </TabItem>
@@ -129,7 +129,7 @@ If you don't use Optimize, omit the Optimize row above and size the secondary st
 
 RDBMS (PostgreSQL) is available from Camunda 8.9. See [secondary storage considerations](#secondary-storage-considerations) for how its scaling and write throughput compare to Elasticsearch/OpenSearch.
 
-Optimize does not support RDBMS as its data source, so running Optimize alongside RDBMS requires a separate Elasticsearch or OpenSearch cluster. The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests against PostgreSQL, including Optimize (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-89/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for PostgreSQL and Elasticsearch. If you don't use Optimize, omit the Optimize and Elasticsearch rows entirely.
+Optimize does not support RDBMS as its data source, so running Optimize alongside RDBMS requires a separate Elasticsearch or OpenSearch cluster. The following configuration contains the exact Helm values that Camunda uses in its continuous realistic-load tests against PostgreSQL, including Optimize (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-89/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for PostgreSQL and Elasticsearch. If you don't use Optimize, omit the Optimize and Elasticsearch rows entirely.
 
 | Component                    |                     | Request | Limit |
 | ---------------------------- | ------------------- | ------: | ----: |

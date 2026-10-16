@@ -73,9 +73,9 @@ See [reliability testing](https://github.com/camunda/camunda/blob/main/docs/test
 
 ## Baseline resource configuration
 
-The following table lists the Helm values for Elasticsearch or OpenSearch with Optimize. Optimize is the main driver of Elasticsearch and OpenSearch sizing in this configuration because its importer reads from and writes to the secondary storage indices in addition to the primary export traffic. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
+The following table lists the Helm values for Elasticsearch or OpenSearch with Optimize. Optimize is the main driver of Elasticsearch and OpenSearch sizing in this configuration because its importer reads from and writes to the secondary storage indices in addition to the primary export traffic. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for a breakdown of the resource requirements.
 
-These are the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [How we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch and OpenSearch, which use identical resources.
+These are the exact Helm values that Camunda uses in its continuous realistic-load tests with Optimize enabled (see [how we test](#how-we-test)). The values are sourced from [`camunda-platform-values-defaults.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/stable-88/values/camunda-platform-values-defaults.yaml) for the Orchestration Cluster and [`load-test-setup/values.yaml`](https://github.com/camunda/camunda/blob/main/load-tests/setup/charts/load-test-setup/values.yaml) for Elasticsearch and OpenSearch, which use identical resources.
 
 | Component                      |                     | Request | Limit |
 | ------------------------------ | ------------------- | ------: | ----: |
@@ -109,7 +109,7 @@ These are the exact Helm values that Camunda uses in its continuous realistic-lo
 |                                | Disk request \[GB\] |         |   256 |
 
 :::note
-If you don't use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. OpenSearch is expected to see a similar impact, but it hasn't been measured separately. See [Impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
+If you don't use Optimize, omit the Optimize row above and size the secondary storage accordingly. Enabling Optimize roughly triples or quadruples Elasticsearch CPU and disk usage under a realistic workload. OpenSearch is expected to see a similar impact, but it hasn't been measured separately. See [impact of Optimize](sizing-your-environment.md#impact-of-optimize) for the full breakdown. Use this ratio as a starting point for sizing a smaller Elasticsearch deployment, review the available [Elasticsearch scaling](#elasticsearch-scaling) options, and validate any reduced configuration with [your own benchmarks](sizing-benchmarks.md).
 :::
 
 Identity and Keycloak, including Keycloak's bundled PostgreSQL database, which is not itemized here, are included in each table above because our test harness always authenticates through OIDC, reflecting a production-like setup. If you plan to use an external identity provider instead of the bundled Keycloak, you can omit these rows entirely.
