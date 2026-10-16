@@ -65,7 +65,7 @@ Install the skill:
 
 ```bash
 copilot plugin marketplace add camunda/camunda-7-to-8-migration-tooling
-copilot plugin install camunda-migration@camunda
+copilot plugin install camunda-migration@camunda-migration
 ```
 
 Run it:

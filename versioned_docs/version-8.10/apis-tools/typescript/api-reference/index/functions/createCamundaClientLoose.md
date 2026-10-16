@@ -100,6 +100,9 @@ function createCamundaClientLoose(...args): WithSearchPagination<{
         workerName?: string;
      };
   };
+  random: {
+     next: number;
+  };
   _getSupportLogger: {
      log: void;
   };
@@ -2488,6 +2491,9 @@ signatures), matching the runtime wrappers the constructor installs.
 `startupJitterMaxSeconds?`: `number`;
 `workerName?`: `string`;
 \};
+\};
+`random`: \{
+`next`: `number`;
 \};
 `_getSupportLogger`: \{
 `log`: `void`;

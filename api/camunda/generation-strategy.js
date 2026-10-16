@@ -11,6 +11,9 @@ function pick(apiConfig) {
     case "next":
       return next;
 
+    case "8.10":
+      return next;
+
     case "8.9":
       return next;
 
