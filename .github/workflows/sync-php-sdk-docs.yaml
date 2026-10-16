@@ -37,7 +37,7 @@ jobs:
             fi
             echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
             echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
-            echo "pr_branch=update-php-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-php-sdk-docs-${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
           else
             echo "sdk_ref=${SDK_REF}" >> "$GITHUB_OUTPUT"
@@ -122,6 +122,8 @@ jobs:
           npm ci
           DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
           npx prettier --write "$DOCS_ROOT/apis-tools/php-sdk.md" "$DOCS_ROOT/apis-tools/php-sdk/"
+          VERSION="${{ github.event.inputs.docs_version }}"
+          npx prettier --write --ignore-unknown ".sdk-repos/${VERSION:+version-$VERSION/}orchestration-cluster-api-php/examples"
 
       - name: Verify SDK examples don't break docs generation
         working-directory: docs
