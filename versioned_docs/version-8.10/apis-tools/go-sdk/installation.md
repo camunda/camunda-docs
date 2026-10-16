@@ -14,8 +14,8 @@ The Go SDK is a **technical preview**. Its API surface may still evolve and chan
 :::
 
 ```sh
-go get github.com/camunda/orchestration-cluster-api-go
+go get github.com/camunda/orchestration-cluster-api-go/v10
 ```
 
-Requires Go 1.25+. During Technical Preview the module path has no version suffix
-(see [versioning](versioning.md#versioning)).
+Requires Go 1.25+. The `/v10` suffix is the Camunda server line this SDK targets
+(8.10); see [versioning](versioning.md#versioning).
