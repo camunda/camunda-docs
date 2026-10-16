@@ -42,13 +42,13 @@ People who do not yet have a Camunda 8 account can also be invited to an organiz
 
 Users are assigned organization-level roles. The following table shows what each role can do.
 
-| Role               | Organization | Workspaces and projects | Clusters | Environments  | Catalog   | Optimize and business value |
-| :----------------- | :----------- | :---------------------- | :------- | :------------ | :-------- | :-------------------------- |
-| Organization Owner | Full access  | Manage                  | Manage   | Manage        | Manage    | Yes                         |
-| Organization Admin | Manage       | Manage                  | Manage   | Manage        | Manage    | Yes                         |
-| DevOps             | None         | Create and collaborate  | Manage   | Manage        | Read-only | No                          |
-| Analyst            | Read-only    | Create and collaborate  | None     | Assigned only | Manage    | Yes                         |
-| Member             | Read-only    | Create and collaborate  | None     | Assigned only | Read-only | No                          |
+| Role               | Organization | Workspaces and projects | Clusters | Environments | Catalog   | Optimize and business value |
+| :----------------- | :----------- | :---------------------- | :------- | :----------- | :-------- | :-------------------------- |
+| Organization Owner | Full access  | Manage                  | Manage   | Manage       | Manage    | Yes                         |
+| Organization Admin | Manage       | Manage                  | Manage   | Manage       | Manage    | Yes                         |
+| DevOps             | None         | Create and collaborate  | Manage   | Manage       | Read-only | No                          |
+| Analyst            | Read-only    | Create and collaborate  | None     | View all     | Manage    | Yes                         |
+| Member             | Read-only    | Create and collaborate  | None     | View all     | Read-only | No                          |
 
 - **Organization Owner**: All rights in the organization, including settings, billing, and ownership transfer. Reserved for a single user per organization; transferred rather than assigned or removed like other roles.
 - **Organization Admin**: Manages the organization, its members, and its workspaces, with full access to every workspace and project by default. No separate mode needs to be enabled.
@@ -96,8 +96,8 @@ Access to Optimize includes access to the [business value dashboard](/components
 
 ### Environment visibility
 
-- **Manage**: View all environments and resume paused ones. Organization Owner, Organization Admin, and DevOps have this level. Only Organization Owner and Organization Admin can assign environments to workspaces.
-- **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
+- **Manage**: View all environments and resume paused ones. Organization Owner, Organization Admin, and DevOps have this level. Organization Owner and Organization Admin can assign environments to any workspace. DevOps can assign environments to workspaces where the user is an editor or a workspace admin.
+- **View all**: See every environment in the organization, and open its applications, such as Operate and Tasklist. The user can't assign or add environments, doesn't get the option to resume a paused environment, and sees the workspace assignments only of workspaces where they are an editor or a workspace admin. Analyst and Member have this level.
 
 ## Access to runtime environments
 
@@ -188,7 +188,7 @@ Access to Optimize includes access to the [business value dashboard](/components
 
 ### Environment visibility {#environment-visibility-self-managed}
 
-- **Manage**: View all environments. Organization Admin and DevOps have this level. Only Organization Admin can assign environments to workspaces.
+- **Manage**: View all environments. Organization Admin and DevOps have this level. Organization Admin can assign environments to any workspace. DevOps can assign environments to workspaces where the user is an editor or a workspace admin.
 - **Assigned only**: See only the environments assigned to the workspaces where the user is an editor or a workspace admin. Analyst and Member have this level.
 
 ## Access to runtime environments {#access-to-runtime-environments-self-managed}
