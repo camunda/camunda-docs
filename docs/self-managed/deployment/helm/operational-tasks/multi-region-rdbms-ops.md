@@ -119,13 +119,21 @@ Run the same script as in step 1, without `--dry-run`. It repeats the quorum rep
 ./failover.sh <lost-region-slot>
 ```
 
-If the script stops before it finishes, you can run it again. It waits for an Aurora switchover that is still in progress, and it doesn't start a second switchover.
+The script starts the switchover only when the Aurora writer in the lost region is `available`.
+
+If the script stops while it moves the Aurora writer, you can run it again. It waits for an Aurora switchover that is still in progress, and it doesn't start a second switchover.
 
 </TabItem>
 
 <TabItem value="unplanned">
 
 The region is gone. Follow the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html). The reference script doesn't automate this operation because detaching and promoting a member changes the global topology outside Terraform.
+
+To run the other steps of `failover.sh` without a switchover, add `--keep-writer`:
+
+```bash
+./failover.sh <lost-region-slot> --keep-writer
+```
 
 Whatever had not replicated at the time of the outage can be missing from the promoted database. With `LOG_SEQ`, recovery depends on promoting a standby whose replication was confirmed within the configured minimum. With `DELAY`, recovery depends on the actual lag staying below the configured delay. Restore the global database membership before running the Camunda failback procedure.
 
@@ -198,7 +206,7 @@ Move the writer back to the recovered region if the other regions are further fr
 ./failback.sh <recovered-region-slot> --switch-writer
 ```
 
-If the script stops before it finishes, you can run this command again. The script waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it doesn't start a second switchover.
+If the script stops while it moves the Aurora writer back, you can run this command again. The script waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it doesn't start a second switchover.
 
 Leaving the writer where it is costs nothing but cross-region latency for the regions furthest from it.
 
