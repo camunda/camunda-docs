@@ -193,46 +193,55 @@ CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES_0_LINKS_0_URL=https://camunda.com/
 
 Use `components` to set up components in the cluster:
 
-| Property                                               | Description                                                                                                  |
-| :----------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
-| `camunda.hub.clusters[0].components[0].name`           | The component's name.                                                                                        |
-| `camunda.hub.clusters[0].components[0].type`           | The component's type.                                                                                        |
-| `camunda.hub.clusters[0].components[0].version`        | The component's version.                                                                                     |
-| `camunda.hub.clusters[0].components[0].urls.webapp`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. |
-| `camunda.hub.clusters[0].components[0].urls.rest`      | The REST API base URL for Connectors and the Orchestration Cluster.                                          |
-| `camunda.hub.clusters[0].components[0].urls.grpc`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). |
-| `camunda.hub.clusters[0].components[0].urls.readiness` | The address of the health check endpoint.                                                                    |
+| Property                                               | Description                                                                                                                                                                                                                                            |
+| :----------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.hub.clusters[0].components[0].name`           | The component's name.                                                                                                                                                                                                                                  |
+| `camunda.hub.clusters[0].components[0].type`           | The component's type.                                                                                                                                                                                                                                  |
+| `camunda.hub.clusters[0].components[0].version`        | The component's version.                                                                                                                                                                                                                               |
+| `camunda.hub.clusters[0].components[0].urls.webapp`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate.                                                                                                                                           |
+| `camunda.hub.clusters[0].components[0].urls.rest`      | The REST API base URL for Connectors and the Orchestration Cluster. Required.                                                                                                                                                                          |
+| `camunda.hub.clusters[0].components[0].urls.grpc`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). Optional. If you omit it, Camunda Hub uses the REST API for deployments, instance starts, and job workers, and job streaming is disabled. |
+| `camunda.hub.clusters[0].components[0].urls.readiness` | The address of the health check endpoint.                                                                                                                                                                                                              |
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
 Use `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
-| Environment variable                                 | Description                                                                                                  |
-| :--------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_NAME`           | The component's name.                                                                                        |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                        |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_VERSION`        | The component's version.                                                                                     |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_WEBAPP`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The REST API base URL for Connectors and the Orchestration Cluster.                                          |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_GRPC`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_READINESS` | The address of the health check endpoint.                                                                    |
+| Environment variable                                 | Description                                                                                                                                                                                                                                            |
+| :--------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_NAME`           | The component's name.                                                                                                                                                                                                                                  |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                                                                                                                                                                  |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_VERSION`        | The component's version.                                                                                                                                                                                                                               |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_WEBAPP`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate.                                                                                                                                           |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The REST API base URL for Connectors and the Orchestration Cluster. Required.                                                                                                                                                                          |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_GRPC`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). Optional. If you omit it, Camunda Hub uses the REST API for deployments, instance starts, and job workers, and job streaming is disabled. |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS_0_URLS_READINESS` | The address of the health check endpoint.                                                                                                                                                                                                              |
 
 </TabItem>
 </Tabs>
 
+:::note Cluster communication protocol
+The REST URL is required for clusters version 8.8 and later. The gRPC URL is optional.
+
+- If you configure both URLs, Camunda Hub uses gRPC to interact with the cluster. To use REST instead, set `camunda.client.gateway.preferRestOverGrpc=true` (environment variable `CAMUNDA_CLIENT_GATEWAY_PREFERRESTOVERGRPC`).
+- If you configure only the REST URL, Camunda Hub uses REST to interact with the cluster. Job streaming is disabled because it is only available over gRPC. Use this setup if the network between Camunda Hub and the cluster only allows HTTP(S) traffic, for example when port `26500` is blocked.
+- If you configure only the gRPC URL, or neither URL, startup validation fails.
+
+:::
+
 Available component types and requirements:
 
-| Configuration value | Component             | Requirements                                   |
-| :------------------ | :-------------------- | :--------------------------------------------- |
-| `connectors`        | Connectors            | REST URL                                       |
-| `identity`          | Management Identity   | -                                              |
-| `hub`               | Camunda Hub           | -                                              |
-| `operate`           | Operate               | -                                              |
-| `optimize`          | Optimize              | -                                              |
-| `orchestration`     | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
-| `admin`             | Admin                 | -                                              |
-| `tasklist`          | Tasklist              | -                                              |
+| Configuration value | Component             | Requirements                        |
+| :------------------ | :-------------------- | :---------------------------------- |
+| `connectors`        | Connectors            | REST URL                            |
+| `identity`          | Management Identity   | -                                   |
+| `hub`               | Camunda Hub           | -                                   |
+| `operate`           | Operate               | -                                   |
+| `optimize`          | Optimize              | -                                   |
+| `orchestration`     | Orchestration Cluster | Cluster version >= 8.8 and REST URL |
+| `admin`             | Admin                 | -                                   |
+| `tasklist`          | Tasklist              | -                                   |
 
 :::note Backward compatibility
 The old values `webModelerWebApp` (replaced by `hub`) and `orchestrationIdentity` (replaced by `admin`) are still accepted for backward compatibility.
