@@ -417,8 +417,8 @@ RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/compon
 RewriteRule ^docs/components/modeler/web-modeler/create-a-process-application/?$ /docs/components/hub/workspace/manage-projects/create-a-project/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/deploy-process-application/?$ /docs/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/git-sync/?$ /docs/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/desktop-modeler/process-applications/?$ /docs/next/components/modeler/desktop-modeler/projects [R=301,L]
-RewriteRule ^docs/8.10/components/modeler/desktop-modeler/process-applications/?$ /docs/8.10/components/modeler/desktop-modeler/projects [R=301,L]
+RewriteRule ^docs/next/components/modeler/desktop-modeler/process-applications/?$ /docs/next/components/modeler/desktop-modeler/projects/ [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/process-applications/?$ /docs/components/modeler/desktop-modeler/projects/ [R=301,L]
 
 # Process applications - general redirect
 RewriteRule ^docs/components/modeler/web-modeler/process-applications/(.*)$ /docs/components/hub/workspace/manage-projects/$1 [R=301,L]

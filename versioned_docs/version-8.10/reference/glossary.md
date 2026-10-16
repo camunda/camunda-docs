@@ -184,7 +184,7 @@ This is different from an [external agent](#external-agent), which is the non-na
 
 ### Camunda project
 
-A [project](#project). The qualifier "Camunda" distinguishes the project from other project concepts you work with, such as a software project in your IDE.
+A [project](#project), the unit you build, test, and deploy together. The term Camunda project distinguishes it from other project concepts, such as a software project in your IDE.
 
 ### Catalog
 
@@ -732,7 +732,7 @@ The governance process of [ProcessOS](#processos). ProcessOS Harness is delivere
 
 ### Project
 
-The unit you build, test, and deploy together to form a Camunda solution. Also called a Camunda project where it needs to be distinguished from other project concepts, such as a software project in your IDE. Supersedes the [process application](#process-application).
+The unit you build, test, and deploy together to form a Camunda solution. Also called a Camunda project where it needs to be distinguished from other project concepts, such as a software project in your IDE. It supersedes the [process application](#process-application).
 
 In Camunda Hub, a project is an entity within a workspace; locally (Desktop Modeler, `c8ctl`), it is a folder with a `camunda.json` file.
 

@@ -11,7 +11,9 @@ import OverlayImg from './img/process-applications/overlay.png'
 import DeployImg from './img/process-applications/deploy.png'
 import StartInstanceImg from './img/process-applications/start-instance.png'
 
-Desktop Modeler supports [Camunda projects](../../concepts/projects.md): it recognizes the projects you build and offers you advanced editor intelligence, deployment, and execution features within the context of a project. To identify the boundaries of a project, Desktop Modeler searches for a [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file in the root of your project folder.
+Desktop Modeler supports [Camunda projects](../../concepts/projects.md). It recognizes a project by the [`camunda.json`](/apis-tools/c8ctl/camunda-json.md) file in the root of your project folder.
+
+Within a project, Desktop Modeler offers advanced editor intelligence, deployment, and execution features.
 
 :::tip
 Camunda projects supersede process applications. Your existing process applications keep working; see [Migrate from process applications](/components/concepts/projects.md#migrate-from-process-applications) when you are ready to switch.
@@ -27,7 +29,7 @@ Consider a project implementing consumer loan approval. It may contain:
 - DMN decisions (for example, `interest-rate-calculation.dmn`, `credit-score-calculation.dmn`) for business rules.
 - Forms (for example, `loan-application-review.form`) for user interactions.
 - Various [job workers](/components/concepts/job-workers.md) that implement process behavior.
-- Additional application code and tests
+- Additional application code and tests.
 
 In a typical Java/Maven project, the structure of such a project might be as follows:
 
@@ -57,27 +59,27 @@ consumer-loan-application/
 
 ## Editor support for projects
 
-When you open a file in Modeler, the system implicitly determines whether it belongs to a project. It does so by checking for the presence of a `camunda.json` file in the same folder or a parent folder. Within a project, Modeler offers improved navigation and assistance.
+When you open a file, Modeler checks for a `camunda.json` file in the same folder or a parent folder to determine whether the file belongs to a project. Within a project, Modeler offers improved navigation and assistance.
 
 ### Indicating context
 
-Projects are opened and closed "implicitly": A blue item in the status bar indicates whether a diagram belongs to a project and makes all related diagrams available for navigation.
+Modeler opens and closes projects implicitly. A blue item in the status bar indicates whether a diagram belongs to a project and makes all related diagrams available for navigation.
 
-<p><img src={OverlayImg} alt="Project" /></p>
+<p><img src={OverlayImg} alt="Status bar item showing that the open diagram belongs to a project" /></p>
 
 When files from more than one project are open, they are grouped visually.
 
-<p><img src={GroupingImg} alt="Project file grouping" /></p>
+<p><img src={GroupingImg} alt="Open files grouped visually by project" /></p>
 
 ### Creating a project
 
-Create a project by creating a `camunda.json` file in the root of your project folder. An empty object (`{}`) is enough to mark the folder. Alternatively, create it via Modeler UI by taking the following steps:
+Create a project by creating a `camunda.json` file in the root of your project folder. An empty object (`{}`) is enough to mark the folder. Alternatively, create it in the Modeler UI:
 
 1. Click **File > New Project...**.
 2. Choose a folder.
 3. Click **Select folder**.
 
-A `camunda.json` file will be created in the selected folder, and the folder will now be recognized by Modeler as the project root. Any file within the folder or its subfolders will be treated as part of the project.
+Modeler creates a `camunda.json` file in the selected folder and recognizes the folder as the project root. Any file within the folder or its subfolders is part of the project.
 
 ### Linking resources
 
@@ -92,9 +94,9 @@ Any file within a project can be linked as a resource. Linking a resource can be
 
 ### Deploying a project
 
-Projects can be deployed using the [deploy feature](./deploy-diagram.md). When deploying a project, all files that are part of the project will be deployed.
+You can deploy projects using the [deploy feature](./deploy-diagram.md). When you deploy a project, Modeler deploys all files that are part of it.
 
-<p><img src={DeployImg} alt="Deploying a project" /></p>
+<p><img src={DeployImg} alt="Deploy dialog for deploying all files of a project" /></p>
 
 ### Starting a process instance
 
