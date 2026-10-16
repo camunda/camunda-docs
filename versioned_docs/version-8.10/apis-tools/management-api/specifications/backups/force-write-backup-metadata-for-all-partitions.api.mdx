@@ -1,0 +1,493 @@
+---
+id: force-write-backup-metadata-for-all-partitions
+title: "Force-write backup metadata for all partitions"
+description: "Triggers a sync of backup metadata (checkpoint entries and backup ranges) from"
+sidebar_label: "Force-write backup metadata for all partitions"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/management-api/specifications/backups/backup-management-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Force-write backup metadata for all partitions"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/backupRuntime/state/sync"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Triggers a sync of backup metadata (checkpoint entries and backup ranges) from
+the internal state to the backup store for every partition, independent of any
+backup being taken or confirmed.
+
+Syncs every physical tenant unless `physicalTenant` narrows it to one. As for
+`POST /backupRuntime`, the query parameter is only read when the request carries a
+`Content-Type: application/json` header.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "physicalTenant",
+      required: false,
+      in: "query",
+      description:
+        "Narrows the operation to the given physical tenant. When omitted, the operation covers every\nphysical tenant of the cluster, which on a single-tenant cluster is the one `default` tenant\nand therefore unchanged behavior.\n",
+      schema: {
+        title: "Physical Tenant ID",
+        description:
+          "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+        type: "string",
+        example: "tenanta",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Response for checkpoint state request",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Checkpoint State",
+            description:
+              "Information about the checkpoint state for the cluster.\n",
+            type: "object",
+            properties: {
+              checkpointStates: {
+                type: "array",
+                description: "List of partition checkpoint states",
+                items: {
+                  title: "Partition Checkpoint State",
+                  description:
+                    "Detailed information about the checkpoint state for a given partition.\n",
+                  type: "object",
+                  properties: {
+                    checkpointId: {
+                      allOf: [
+                        {
+                          title: "Checkpoint ID",
+                          description:
+                            "The ID of the latest checkpoint. The ID of the checkpoint must be a positive numerical value.\nAs checkpoints are logically ordered by their IDs (ascending), each successive checkpoint\nmust use a higher ID than the previous one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 0,
+                        },
+                      ],
+                    },
+                    checkpointType: {
+                      allOf: [
+                        {
+                          title: "Checkpoint Type",
+                          description: "The type of the checkpoint.",
+                          type: "string",
+                          enum: ["MARKER", "SCHEDULED_BACKUP", "MANUAL_BACKUP"],
+                          example: "MARKER",
+                        },
+                      ],
+                    },
+                    partitionId: {
+                      allOf: [
+                        {
+                          title: "Partition ID",
+                          description:
+                            "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 1,
+                          example: 3,
+                        },
+                      ],
+                    },
+                    physicalTenantId: {
+                      description:
+                        "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                      allOf: [
+                        {
+                          title: "Physical Tenant ID",
+                          description:
+                            "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                          type: "string",
+                          example: "tenanta",
+                        },
+                      ],
+                    },
+                    checkpointPosition: {
+                      type: "integer",
+                      format: "int64",
+                      example: 1500,
+                    },
+                    checkpointTimestamp: {
+                      type: "string",
+                      format: "date-time",
+                      example: "2020-01-01T00:00:00Z",
+                    },
+                  },
+                },
+              },
+              backupStates: {
+                type: "array",
+                description: "List of partition backup states",
+                items: {
+                  title: "Partition Checkpoint State",
+                  description:
+                    "Detailed information about the Backup state for a given partition.\n",
+                  type: "object",
+                  properties: {
+                    checkpointId: {
+                      allOf: [
+                        {
+                          title: "Checkpoint ID",
+                          description:
+                            "The ID of the latest checkpoint. The ID of the checkpoint must be a positive numerical value.\nAs checkpoints are logically ordered by their IDs (ascending), each successive checkpoint\nmust use a higher ID than the previous one.\n",
+                          type: "integer",
+                          format: "int64",
+                          example: 1,
+                          minimum: 0,
+                        },
+                      ],
+                    },
+                    checkpointType: {
+                      allOf: [
+                        {
+                          title: "Backup Type",
+                          description: "The type of the backup.",
+                          type: "string",
+                          enum: ["MANUAL_BACKUP", "SCHEDULED_BACKUP"],
+                          example: "SCHEDULED_BACKUP",
+                        },
+                      ],
+                    },
+                    partitionId: {
+                      allOf: [
+                        {
+                          title: "Partition ID",
+                          description:
+                            "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 1,
+                          example: 3,
+                        },
+                      ],
+                    },
+                    physicalTenantId: {
+                      description:
+                        "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                      allOf: [
+                        {
+                          title: "Physical Tenant ID",
+                          description:
+                            "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                          type: "string",
+                          example: "tenanta",
+                        },
+                      ],
+                    },
+                    checkpointPosition: {
+                      type: "integer",
+                      format: "int64",
+                      example: 1500,
+                    },
+                    firstLogPosition: {
+                      description:
+                        "The first log position included in this backup.",
+                      type: "integer",
+                      format: "int64",
+                      example: 5,
+                    },
+                    checkpointTimestamp: {
+                      type: "string",
+                      format: "date-time",
+                      example: "2020-01-01T00:00:00Z",
+                    },
+                  },
+                },
+              },
+              ranges: {
+                type: "array",
+                description: "List of partition ranges",
+                items: {
+                  title: "Partition Backup Range",
+                  description:
+                    "Information about one backup range for a partition.",
+                  type: "object",
+                  properties: {
+                    partitionId: {
+                      allOf: [
+                        {
+                          title: "Partition ID",
+                          description:
+                            "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 1,
+                          example: 3,
+                        },
+                      ],
+                    },
+                    physicalTenantId: {
+                      description:
+                        "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                      allOf: [
+                        {
+                          title: "Physical Tenant ID",
+                          description:
+                            "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                          type: "string",
+                          example: "tenanta",
+                        },
+                      ],
+                    },
+                    start: {
+                      allOf: [
+                        {
+                          title: "Partition Checkpoint State",
+                          description:
+                            "Detailed information about the Backup state for a given partition.\n",
+                          type: "object",
+                          properties: {
+                            checkpointId: {
+                              allOf: [
+                                {
+                                  title: "Checkpoint ID",
+                                  description:
+                                    "The ID of the latest checkpoint. The ID of the checkpoint must be a positive numerical value.\nAs checkpoints are logically ordered by their IDs (ascending), each successive checkpoint\nmust use a higher ID than the previous one.\n",
+                                  type: "integer",
+                                  format: "int64",
+                                  example: 1,
+                                  minimum: 0,
+                                },
+                              ],
+                            },
+                            checkpointType: {
+                              allOf: [
+                                {
+                                  title: "Backup Type",
+                                  description: "The type of the backup.",
+                                  type: "string",
+                                  enum: ["MANUAL_BACKUP", "SCHEDULED_BACKUP"],
+                                  example: "SCHEDULED_BACKUP",
+                                },
+                              ],
+                            },
+                            partitionId: {
+                              allOf: [
+                                {
+                                  title: "Partition ID",
+                                  description:
+                                    "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                                  type: "integer",
+                                  format: "int32",
+                                  minimum: 1,
+                                  example: 3,
+                                },
+                              ],
+                            },
+                            physicalTenantId: {
+                              description:
+                                "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                              allOf: [
+                                {
+                                  title: "Physical Tenant ID",
+                                  description:
+                                    "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                                  type: "string",
+                                  example: "tenanta",
+                                },
+                              ],
+                            },
+                            checkpointPosition: {
+                              type: "integer",
+                              format: "int64",
+                              example: 1500,
+                            },
+                            firstLogPosition: {
+                              description:
+                                "The first log position included in this backup.",
+                              type: "integer",
+                              format: "int64",
+                              example: 5,
+                            },
+                            checkpointTimestamp: {
+                              type: "string",
+                              format: "date-time",
+                              example: "2020-01-01T00:00:00Z",
+                            },
+                          },
+                        },
+                      ],
+                    },
+                    end: {
+                      allOf: [
+                        {
+                          title: "Partition Checkpoint State",
+                          description:
+                            "Detailed information about the Backup state for a given partition.\n",
+                          type: "object",
+                          properties: {
+                            checkpointId: {
+                              allOf: [
+                                {
+                                  title: "Checkpoint ID",
+                                  description:
+                                    "The ID of the latest checkpoint. The ID of the checkpoint must be a positive numerical value.\nAs checkpoints are logically ordered by their IDs (ascending), each successive checkpoint\nmust use a higher ID than the previous one.\n",
+                                  type: "integer",
+                                  format: "int64",
+                                  example: 1,
+                                  minimum: 0,
+                                },
+                              ],
+                            },
+                            checkpointType: {
+                              allOf: [
+                                {
+                                  title: "Backup Type",
+                                  description: "The type of the backup.",
+                                  type: "string",
+                                  enum: ["MANUAL_BACKUP", "SCHEDULED_BACKUP"],
+                                  example: "SCHEDULED_BACKUP",
+                                },
+                              ],
+                            },
+                            partitionId: {
+                              allOf: [
+                                {
+                                  title: "Partition ID",
+                                  description:
+                                    "The ID of a partition. This is always a positive number greater than or equal to 1.\n",
+                                  type: "integer",
+                                  format: "int32",
+                                  minimum: 1,
+                                  example: 3,
+                                },
+                              ],
+                            },
+                            physicalTenantId: {
+                              description:
+                                "The physical tenant this partition belongs to. Partition ids restart at 1 in every\nphysical tenant, so they only identify a partition together with this field.\n",
+                              allOf: [
+                                {
+                                  title: "Physical Tenant ID",
+                                  description:
+                                    "The id of a physical tenant, as configured under `camunda.physical-tenants`. A cluster that\nconfigures none has exactly one physical tenant, `default`.\n",
+                                  type: "string",
+                                  example: "tenanta",
+                                },
+                              ],
+                            },
+                            checkpointPosition: {
+                              type: "integer",
+                              format: "int64",
+                              example: 1500,
+                            },
+                            firstLogPosition: {
+                              description:
+                                "The first log position included in this backup.",
+                              type: "integer",
+                              format: "int64",
+                              example: 5,
+                            },
+                            checkpointTimestamp: {
+                              type: "string",
+                              format: "date-time",
+                              example: "2020-01-01T00:00:00Z",
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "500": {
+      description: "Internal Error",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "502": {
+      description: "Gateway failed to send request to the broker.",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+    "504": {
+      description: "Request from gateway to broker timed out",
+      content: {
+        "application/json": {
+          schema: {
+            title: "Error response",
+            description: "Generic response for all errors",
+            type: "object",
+            properties: {
+              message: {
+                description: "Error message",
+                type: "string",
+                example: "something failed",
+              },
+            },
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

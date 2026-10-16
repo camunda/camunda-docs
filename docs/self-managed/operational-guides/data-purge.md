@@ -30,7 +30,7 @@ The purge operation is irreversible. It will delete the runtime data in the clus
 
 ### Usage
 
-The purge operation is a cluster-wide, asynchronous operation. Since it is asynchronous, you first launch it by sending a `POST` request to `/actuator/cluster/purge`, and then monitor by polling the topology via `/actuator/cluster` until it is finished.
+The purge operation is a cluster-wide, asynchronous operation. Since it is asynchronous, you first launch it by sending a `POST` request to [`/actuator/cluster/purge`](/apis-tools/management-api/specifications/cluster/purge-data-from-the-cluster.api.mdx), and then monitor by polling the topology via `/actuator/cluster` until it is finished.
 
 :::warning
 In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), a request without a `physicalTenant` parameter purges **every** Physical Tenant, not just the default one. This is the opposite of how unscoped requests behave on the REST `/v2/...` API, where an omitted tenant prefix resolves to the default tenant only. Add `?physicalTenant={physicalTenantId}` to purge a single tenant and leave the others untouched.
@@ -64,7 +64,7 @@ done
 <TabItem value='java'>
 
 :::note
-This example relies on code generated from [this OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml),
+This example relies on code generated from [the cluster topology management API spec](/apis-tools/management-api/specifications/cluster/cluster-topology-management-api.info.mdx),
 bundled with the distribution.
 :::
 
@@ -116,7 +116,7 @@ To purge data from your cluster, send a `POST` request to the `/actuator/cluster
 curl -X POST 'http://localhost:9600/actuator/cluster/purge'
 ```
 
-The response is a [JSON object](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a [JSON object](/apis-tools/management-api/specifications/cluster/purge-data-from-the-cluster.api.mdx):
 
 ```json
 {
