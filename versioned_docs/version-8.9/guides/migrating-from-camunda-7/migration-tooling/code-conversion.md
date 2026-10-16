@@ -118,7 +118,7 @@ These tables summarize common Java API, test assertion, and import mappings betw
 
 ### Parameter name changes
 
-:::important
+:::warning
 The terms `processDefinitionKey` and `processDefinitionId` have **swapped meanings** between Camunda 7 and Camunda 8. Review these carefully during migration.
 :::
 

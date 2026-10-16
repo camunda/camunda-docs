@@ -15,22 +15,22 @@ Camunda is invested in supporting and easing your migration from Camunda 7 to Ca
 
 All tools are available as **ready-to-use builds** from the [GitHub releases page](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
 
-## Compare agentic migration and deterministic tools
+## Compare agentic and manual migration
 
-This table shows which migration tasks agentic migration covers, compared with the deterministic tools that you run yourself in a [manual migration](#manual-migration). Agentic migration also runs these tools, such as the Diagram Converter, where they apply.
+This table shows which migration tasks agentic migration covers, compared with the individual tools that you run yourself in a [manual migration](#manual-migration). Agentic migration also runs these tools, such as the Diagram Converter, where they apply.
 
-| Task                                                                             | Agentic migration | Deterministic tools |
-| :------------------------------------------------------------------------------- | :---------------: | :-----------------: |
-| Inventory Java code and tests, and estimate effort                               |        ✅         |         ❌          |
-| Analyze and convert BPMN, DMN, and Camunda 7 forms                               |        ✅         |         ✅          |
-| Create Camunda 8 forms from generated task forms                                 |        ✅         |         ❌          |
-| Create a first diff for supported Java transformations                           |        ✅         |         ✅          |
-| Complete the migration of Java client code, delegates, and external task workers |        ✅         |         ❌          |
-| Migrate process and decision tests to CPT                                        |        ✅         |         ❌          |
-| Validate the migration and compare test results with Camunda 7                   |        ✅         |         ❌          |
-| Migrate runtime instances, history, and identity data                            |        ❌         |         ✅          |
-| Produce the same result for the same input                                       |        ❌         |         ✅          |
-| Run without an AI coding agent                                                   |        ❌         |         ✅          |
+| Task                                                                             | Agentic migration | Manual migration |
+| :------------------------------------------------------------------------------- | :---------------: | :--------------: |
+| Inventory Java code and tests, and estimate effort                               |        Yes        |        No        |
+| Analyze and convert BPMN, DMN, and Camunda 7 forms                               |        Yes        |       Yes        |
+| Create Camunda 8 forms from generated task forms                                 |        Yes        |        No        |
+| Create a first diff for supported Java transformations                           |        Yes        |       Yes        |
+| Complete the migration of Java client code, delegates, and external task workers |        Yes        |        No        |
+| Migrate process and decision tests to CPT                                        |        Yes        |        No        |
+| Validate the migration and compare test results with Camunda 7                   |        Yes        |        No        |
+| Migrate runtime instances, history, and identity data                            |        No         |       Yes        |
+| Produce the same result for the same input                                       |        No         |       Yes        |
+| Run without an AI coding agent                                                   |        No         |       Yes        |
 
 ## Agentic migration
 
@@ -127,7 +127,7 @@ atx custom def exec -n "camunda-7-to-camunda-8-migration" -p . -c "<build-comman
 
 The skill asks for your migration scope:
 
-| Scope                                      | What the agent does                                                                                                                           |
+| Scope                                      | What the skill does                                                                                                                           |
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Code + models** _(recommended, default)_ | Uses the Diagram Converter CLI as the default for BPMN, DMN, and Camunda 7 forms, then lets you select a Java migration path after inventory. |
 | **Code only**                              | Inventories Java code, then lets you select an AI-first or recipe-assisted path.                                                              |
@@ -181,9 +181,9 @@ The **Test Parity** table in `MIGRATION_REPORT.md` lists each Camunda 7 test wit
 
 ### Agent workflow
 
-1. **Assess migration scope**: Inventories BPMN/DMN diagrams, Camunda 7 `.form` files, Java code files, and Camunda 7 tests, and estimates effort. If the agent can migrate tests, it asks whether to [run them](#migrate-process-tests).
+1. **Assess migration scope**: Inventories BPMN/DMN diagrams, Camunda 7 `.form` files, Java code files, and Camunda 7 tests, and estimates effort. If the skill can migrate tests, it asks whether to [run them](#migrate-process-tests).
 2. **Convert models and forms**: Runs the Diagram Converter CLI as the default. Review converted models and `REVIEW`, `WARNING`, and `TASK` findings. Do not use AI-only model conversion as the default because model capability can materially affect output and silently change model semantics.
-3. **Select and migrate code**: After inventory, select an AI-first, pattern-guided path or an optional recipe-assisted path. AI-first migration reads source code and patterns directly. Recipe-assisted migration produces a deterministic first diff for repeated, supported, primarily syntactic transformations, then needs AI or manual cleanup. The agent also migrates the in-scope tests to CPT.
+3. **Select and migrate code**: After inventory, select an AI-first, pattern-guided path or an optional recipe-assisted path. AI-first migration reads source code and patterns directly. Recipe-assisted migration produces a deterministic first diff for repeated, supported, primarily syntactic transformations, then needs AI or manual cleanup. The skill also migrates the in-scope tests to CPT.
 4. **Validate migration results**: Compiles, runs tests, searches for remaining C7 references, verifies converted forms and model findings, and reviews source-to-output mappings and behavior. With **Run tests**, it compares the CPT test results with the Camunda 7 baseline in the **Test Parity** table. With **Migrate tests only**, it compiles the tests but runs no test suite.
 5. **Fix remaining issues**: Offers to fix remaining issues, and waits for your review before each change.
 
