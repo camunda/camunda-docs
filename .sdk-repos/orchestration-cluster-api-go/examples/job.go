@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	camunda "github.com/camunda/orchestration-cluster-api-go"
+	camunda "github.com/camunda/orchestration-cluster-api-go/v11"
 )
 
 func activateJobsExample(ctx context.Context, client *camunda.CamundaClient) error {

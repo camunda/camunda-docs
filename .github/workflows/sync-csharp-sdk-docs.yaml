@@ -36,7 +36,7 @@ jobs:
             fi
             echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
             echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
-            echo "pr_branch=update-csharp-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-csharp-sdk-docs-${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
           else
             echo "sdk_ref=${{ github.event.inputs.sdk_ref || 'main' }}" >> "$GITHUB_OUTPUT"
@@ -133,6 +133,8 @@ jobs:
           npm ci
           DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
           npx prettier --write "$DOCS_ROOT/apis-tools/csharp-sdk.md" "$DOCS_ROOT/apis-tools/csharp-sdk/"
+          VERSION="${{ github.event.inputs.docs_version }}"
+          npx prettier --write --ignore-unknown ".sdk-repos/${VERSION:+version-$VERSION/}orchestration-cluster-api-csharp/examples"
 
       - name: Verify SDK examples don't break docs generation
         working-directory: docs
