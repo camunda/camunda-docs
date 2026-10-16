@@ -31,6 +31,8 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Comment on PR if version updates are potentially missing
+        # Fork PRs get a read-only GITHUB_TOKEN, so commenting fails; the check is advisory only.
+        continue-on-error: true
         uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3.0.1
         if: ${{ env.MESSAGES != '' }}
         with:
@@ -43,6 +45,8 @@ jobs:
           comment-tag: check-versions
 
       - name: Comment 'LGTM' on PR once potential version issues are resolved
+        # Fork PRs get a read-only GITHUB_TOKEN, so commenting fails; the check is advisory only.
+        continue-on-error: true
         uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3.0.1
         if: ${{ env.MESSAGES == '' }}
         with:

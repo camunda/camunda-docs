@@ -16,10 +16,10 @@ Cluster API. It wraps the generated REST client with configuration,
 authentication, adaptive backpressure, and transient retry. Its per-operation
 methods are generated in facade_generated.go.
 
-`CamundaClient` exposes **251** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **252** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ```go
-import camunda "github.com/camunda/orchestration-cluster-api-go"
+import camunda "github.com/camunda/orchestration-cluster-api-go/v10"
 ```
 
 ## Constructors
@@ -189,6 +189,7 @@ a ready-to-use client. Options take precedence over the environment.
 | [`PinAt`](#pinat)                                                                                         | PinAt moves the engine clock to t.                                                                                                                                       |
 | [`PinClock`](#pinclock)                                                                                   | PinClock calls the PinClock operation.                                                                                                                                   |
 | [`PublishMessage`](#publishmessage)                                                                       | PublishMessage calls the PublishMessage operation.                                                                                                                       |
+| [`Random`](#random)                                                                                       | Random returns the source this client draws jitter from.                                                                                                                 |
 | [`Raw`](#raw)                                                                                             | Raw returns the underlying generated client for operations or options not yet surfaced on the ergonomic facade.                                                          |
 | [`ResetClock`](#resetclock)                                                                               | ResetClock calls the ResetClock operation.                                                                                                                               |
 | [`ResetToLive`](#resettolive)                                                                             | ResetToLive returns the engine clock to real time.                                                                                                                       |
@@ -297,7 +298,7 @@ a ready-to-use client. Options take precedence over the environment.
 func (c *CamundaClient) ActivateAdHocSubProcessActivities(ctx context.Context, adHocSubProcessInstanceKey ElementInstanceKey, body AdHocSubProcessActivateActivitiesInstruction, opts ...func(ApiActivateAdHocSubProcessActivitiesRequest) ApiActivateAdHocSubProcessActivitiesRequest) error
 ```
 
-**Types:** [`ElementInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceKey), [`AdHocSubProcessActivateActivitiesInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AdHocSubProcessActivateActivitiesInstruction), [`ApiActivateAdHocSubProcessActivitiesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiActivateAdHocSubProcessActivitiesRequest)
+**Types:** [`ElementInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceKey), [`AdHocSubProcessActivateActivitiesInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AdHocSubProcessActivateActivitiesInstruction), [`ApiActivateAdHocSubProcessActivitiesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiActivateAdHocSubProcessActivitiesRequest)
 
 ActivateAdHocSubProcessActivities calls the ActivateAdHocSubProcessActivities operation.
 
@@ -319,7 +320,7 @@ return client.ActivateAdHocSubProcessActivities(ctx,
 func (c *CamundaClient) ActivateJobs(ctx context.Context, body JobActivationRequest, opts ...func(ApiActivateJobsRequest) ApiActivateJobsRequest) (*JobActivationResult, error)
 ```
 
-**Types:** [`JobActivationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobActivationRequest), [`ApiActivateJobsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiActivateJobsRequest), [`JobActivationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobActivationResult)
+**Types:** [`JobActivationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobActivationRequest), [`ApiActivateJobsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiActivateJobsRequest), [`JobActivationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobActivationResult)
 
 ActivateJobs calls the ActivateJobs operation.
 
@@ -345,7 +346,7 @@ for _, job := range result.GetJobs() {
 func (c *CamundaClient) AssignClientToGroup(ctx context.Context, groupId string, clientId string, opts ...func(ApiAssignClientToGroupRequest) ApiAssignClientToGroupRequest) error
 ```
 
-**Types:** [`ApiAssignClientToGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignClientToGroupRequest)
+**Types:** [`ApiAssignClientToGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignClientToGroupRequest)
 
 AssignClientToGroup calls the AssignClientToGroup operation.
 
@@ -361,7 +362,7 @@ return client.AssignClientToGroup(ctx, "finance", "reporting-service")
 func (c *CamundaClient) AssignClientToTenant(ctx context.Context, tenantId string, clientId string, opts ...func(ApiAssignClientToTenantRequest) ApiAssignClientToTenantRequest) error
 ```
 
-**Types:** [`ApiAssignClientToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignClientToTenantRequest)
+**Types:** [`ApiAssignClientToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignClientToTenantRequest)
 
 AssignClientToTenant calls the AssignClientToTenant operation.
 
@@ -377,7 +378,7 @@ return client.AssignClientToTenant(ctx, "tenant-a", "reporting-service")
 func (c *CamundaClient) AssignGroupToTenant(ctx context.Context, tenantId string, groupId string, opts ...func(ApiAssignGroupToTenantRequest) ApiAssignGroupToTenantRequest) error
 ```
 
-**Types:** [`ApiAssignGroupToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignGroupToTenantRequest)
+**Types:** [`ApiAssignGroupToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignGroupToTenantRequest)
 
 AssignGroupToTenant calls the AssignGroupToTenant operation.
 
@@ -393,7 +394,7 @@ return client.AssignGroupToTenant(ctx, "tenant-a", "finance")
 func (c *CamundaClient) AssignMappingRuleToGroup(ctx context.Context, groupId string, mappingRuleId string, opts ...func(ApiAssignMappingRuleToGroupRequest) ApiAssignMappingRuleToGroupRequest) error
 ```
 
-**Types:** [`ApiAssignMappingRuleToGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignMappingRuleToGroupRequest)
+**Types:** [`ApiAssignMappingRuleToGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignMappingRuleToGroupRequest)
 
 AssignMappingRuleToGroup calls the AssignMappingRuleToGroup operation.
 
@@ -409,7 +410,7 @@ return client.AssignMappingRuleToGroup(ctx, "finance", "sso-auditors")
 func (c *CamundaClient) AssignMappingRuleToTenant(ctx context.Context, tenantId string, mappingRuleId string, opts ...func(ApiAssignMappingRuleToTenantRequest) ApiAssignMappingRuleToTenantRequest) error
 ```
 
-**Types:** [`ApiAssignMappingRuleToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignMappingRuleToTenantRequest)
+**Types:** [`ApiAssignMappingRuleToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignMappingRuleToTenantRequest)
 
 AssignMappingRuleToTenant calls the AssignMappingRuleToTenant operation.
 
@@ -425,7 +426,7 @@ return client.AssignMappingRuleToTenant(ctx, "tenant-a", "sso-auditors")
 func (c *CamundaClient) AssignProcessInstanceBusinessId(ctx context.Context, processInstanceKey ProcessInstanceKey, body ProcessInstanceBusinessIdAssignmentInstruction, opts ...func(ApiAssignProcessInstanceBusinessIdRequest) ApiAssignProcessInstanceBusinessIdRequest) error
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ProcessInstanceBusinessIdAssignmentInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceBusinessIdAssignmentInstruction), [`ApiAssignProcessInstanceBusinessIdRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignProcessInstanceBusinessIdRequest)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ProcessInstanceBusinessIdAssignmentInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceBusinessIdAssignmentInstruction), [`ApiAssignProcessInstanceBusinessIdRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignProcessInstanceBusinessIdRequest)
 
 AssignProcessInstanceBusinessId calls the AssignProcessInstanceBusinessId operation.
 
@@ -443,7 +444,7 @@ return client.AssignProcessInstanceBusinessId(ctx,
 func (c *CamundaClient) AssignRoleToClient(ctx context.Context, roleId string, clientId string, opts ...func(ApiAssignRoleToClientRequest) ApiAssignRoleToClientRequest) error
 ```
 
-**Types:** [`ApiAssignRoleToClientRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignRoleToClientRequest)
+**Types:** [`ApiAssignRoleToClientRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignRoleToClientRequest)
 
 AssignRoleToClient calls the AssignRoleToClient operation.
 
@@ -459,7 +460,7 @@ return client.AssignRoleToClient(ctx, "auditor", "reporting-service")
 func (c *CamundaClient) AssignRoleToGroup(ctx context.Context, roleId string, groupId string, opts ...func(ApiAssignRoleToGroupRequest) ApiAssignRoleToGroupRequest) error
 ```
 
-**Types:** [`ApiAssignRoleToGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignRoleToGroupRequest)
+**Types:** [`ApiAssignRoleToGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignRoleToGroupRequest)
 
 AssignRoleToGroup calls the AssignRoleToGroup operation.
 
@@ -475,7 +476,7 @@ return client.AssignRoleToGroup(ctx, "auditor", "finance")
 func (c *CamundaClient) AssignRoleToMappingRule(ctx context.Context, roleId string, mappingRuleId string, opts ...func(ApiAssignRoleToMappingRuleRequest) ApiAssignRoleToMappingRuleRequest) error
 ```
 
-**Types:** [`ApiAssignRoleToMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignRoleToMappingRuleRequest)
+**Types:** [`ApiAssignRoleToMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignRoleToMappingRuleRequest)
 
 AssignRoleToMappingRule calls the AssignRoleToMappingRule operation.
 
@@ -491,7 +492,7 @@ return client.AssignRoleToMappingRule(ctx, "auditor", "sso-auditors")
 func (c *CamundaClient) AssignRoleToTenant(ctx context.Context, tenantId string, roleId string, opts ...func(ApiAssignRoleToTenantRequest) ApiAssignRoleToTenantRequest) error
 ```
 
-**Types:** [`ApiAssignRoleToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignRoleToTenantRequest)
+**Types:** [`ApiAssignRoleToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignRoleToTenantRequest)
 
 AssignRoleToTenant calls the AssignRoleToTenant operation.
 
@@ -507,7 +508,7 @@ return client.AssignRoleToTenant(ctx, "tenant-a", "auditor")
 func (c *CamundaClient) AssignRoleToUser(ctx context.Context, roleId string, username string, opts ...func(ApiAssignRoleToUserRequest) ApiAssignRoleToUserRequest) error
 ```
 
-**Types:** [`ApiAssignRoleToUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignRoleToUserRequest)
+**Types:** [`ApiAssignRoleToUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignRoleToUserRequest)
 
 AssignRoleToUser calls the AssignRoleToUser operation.
 
@@ -523,7 +524,7 @@ return client.AssignRoleToUser(ctx, "auditor", "alice")
 func (c *CamundaClient) AssignUserTask(ctx context.Context, userTaskKey UserTaskKey, body UserTaskAssignmentRequest, opts ...func(ApiAssignUserTaskRequest) ApiAssignUserTaskRequest) error
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`UserTaskAssignmentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskAssignmentRequest), [`ApiAssignUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignUserTaskRequest)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`UserTaskAssignmentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskAssignmentRequest), [`ApiAssignUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignUserTaskRequest)
 
 AssignUserTask calls the AssignUserTask operation.
 
@@ -542,7 +543,7 @@ return client.AssignUserTask(ctx, camunda.MustUserTaskKey("2251799813685380"), *
 func (c *CamundaClient) AssignUserToGroup(ctx context.Context, groupId string, username string, opts ...func(ApiAssignUserToGroupRequest) ApiAssignUserToGroupRequest) error
 ```
 
-**Types:** [`ApiAssignUserToGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignUserToGroupRequest)
+**Types:** [`ApiAssignUserToGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignUserToGroupRequest)
 
 AssignUserToGroup calls the AssignUserToGroup operation.
 
@@ -558,7 +559,7 @@ return client.AssignUserToGroup(ctx, "finance", "alice")
 func (c *CamundaClient) AssignUserToTenant(ctx context.Context, tenantId string, username string, opts ...func(ApiAssignUserToTenantRequest) ApiAssignUserToTenantRequest) error
 ```
 
-**Types:** [`ApiAssignUserToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiAssignUserToTenantRequest)
+**Types:** [`ApiAssignUserToTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiAssignUserToTenantRequest)
 
 AssignUserToTenant calls the AssignUserToTenant operation.
 
@@ -574,7 +575,7 @@ return client.AssignUserToTenant(ctx, "tenant-a", "alice")
 func (c *CamundaClient) BroadcastSignal(ctx context.Context, body SignalBroadcastRequest, opts ...func(ApiBroadcastSignalRequest) ApiBroadcastSignalRequest) (*SignalBroadcastResult, error)
 ```
 
-**Types:** [`SignalBroadcastRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#SignalBroadcastRequest), [`ApiBroadcastSignalRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiBroadcastSignalRequest), [`SignalBroadcastResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#SignalBroadcastResult)
+**Types:** [`SignalBroadcastRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#SignalBroadcastRequest), [`ApiBroadcastSignalRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiBroadcastSignalRequest), [`SignalBroadcastResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#SignalBroadcastResult)
 
 BroadcastSignal calls the BroadcastSignal operation.
 
@@ -597,7 +598,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CancelBatchOperation(ctx context.Context, batchOperationKey string, opts ...func(ApiCancelBatchOperationRequest) ApiCancelBatchOperationRequest) error
 ```
 
-**Types:** [`ApiCancelBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCancelBatchOperationRequest)
+**Types:** [`ApiCancelBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCancelBatchOperationRequest)
 
 CancelBatchOperation calls the CancelBatchOperation operation.
 
@@ -613,7 +614,7 @@ return client.CancelBatchOperation(ctx, "2251799813685290")
 func (c *CamundaClient) CancelClusterRebalance(ctx context.Context, opts ...func(ApiCancelClusterRebalanceRequest) ApiCancelClusterRebalanceRequest) (*RebalanceCancellationResponse, error)
 ```
 
-**Types:** [`ApiCancelClusterRebalanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCancelClusterRebalanceRequest), [`RebalanceCancellationResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RebalanceCancellationResponse)
+**Types:** [`ApiCancelClusterRebalanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCancelClusterRebalanceRequest), [`RebalanceCancellationResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RebalanceCancellationResponse)
 
 CancelClusterRebalance calls the CancelClusterRebalance operation.
 
@@ -639,7 +640,7 @@ if resp.GetWasRunning() {
 func (c *CamundaClient) CancelProcessInstance(ctx context.Context, processInstanceKey ProcessInstanceKey, body CancelProcessInstanceRequest, opts ...func(ApiCancelProcessInstanceRequest) ApiCancelProcessInstanceRequest) error
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`CancelProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#CancelProcessInstanceRequest), [`ApiCancelProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCancelProcessInstanceRequest)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`CancelProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#CancelProcessInstanceRequest), [`ApiCancelProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCancelProcessInstanceRequest)
 
 CancelProcessInstance calls the CancelProcessInstance operation.
 
@@ -657,7 +658,7 @@ return client.CancelProcessInstance(ctx,
 func (c *CamundaClient) CancelProcessInstancesBatchOperation(ctx context.Context, body ProcessInstanceCancellationBatchOperationRequest, opts ...func(ApiCancelProcessInstancesBatchOperationRequest) ApiCancelProcessInstancesBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`ProcessInstanceCancellationBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceCancellationBatchOperationRequest), [`ApiCancelProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCancelProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`ProcessInstanceCancellationBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceCancellationBatchOperationRequest), [`ApiCancelProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCancelProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 CancelProcessInstancesBatchOperation calls the CancelProcessInstancesBatchOperation operation.
 
@@ -680,7 +681,7 @@ fmt.Printf("created batch operation %v\n", result.GetBatchOperationKey())
 func (c *CamundaClient) ChangeClusterMode(ctx context.Context, opts ...func(ApiChangeClusterModeRequest) ApiChangeClusterModeRequest) (*ClusterModeChangeResponse, error)
 ```
 
-**Types:** [`ApiChangeClusterModeRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiChangeClusterModeRequest), [`ClusterModeChangeResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterModeChangeResponse)
+**Types:** [`ApiChangeClusterModeRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiChangeClusterModeRequest), [`ClusterModeChangeResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterModeChangeResponse)
 
 ChangeClusterMode calls the ChangeClusterMode operation.
 
@@ -700,7 +701,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) ChangeClusterModeAsClusterAdmin(ctx context.Context, opts ...func(ApiChangeClusterModeAsClusterAdminRequest) ApiChangeClusterModeAsClusterAdminRequest) (*ClusterModeChangeResponse, error)
 ```
 
-**Types:** [`ApiChangeClusterModeAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiChangeClusterModeAsClusterAdminRequest), [`ClusterModeChangeResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterModeChangeResponse)
+**Types:** [`ApiChangeClusterModeAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiChangeClusterModeAsClusterAdminRequest), [`ClusterModeChangeResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterModeChangeResponse)
 
 ChangeClusterModeAsClusterAdmin calls the ChangeClusterModeAsClusterAdmin operation.
 
@@ -731,7 +732,7 @@ Clock returns the clock this client resolves cadence through.
 func (c *CamundaClient) CompleteJob(ctx context.Context, jobKey JobKey, body JobCompletionRequest, opts ...func(ApiCompleteJobRequest) ApiCompleteJobRequest) error
 ```
 
-**Types:** [`JobKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobKey), [`JobCompletionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobCompletionRequest), [`ApiCompleteJobRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCompleteJobRequest)
+**Types:** [`JobKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobKey), [`JobCompletionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobCompletionRequest), [`ApiCompleteJobRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCompleteJobRequest)
 
 CompleteJob calls the CompleteJob operation.
 
@@ -750,7 +751,7 @@ return client.CompleteJob(ctx, camunda.MustJobKey("2251799813685424"), *req)
 func (c *CamundaClient) CompleteUserTask(ctx context.Context, userTaskKey UserTaskKey, body UserTaskCompletionRequest, opts ...func(ApiCompleteUserTaskRequest) ApiCompleteUserTaskRequest) error
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`UserTaskCompletionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskCompletionRequest), [`ApiCompleteUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCompleteUserTaskRequest)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`UserTaskCompletionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskCompletionRequest), [`ApiCompleteUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCompleteUserTaskRequest)
 
 CompleteUserTask calls the CompleteUserTask operation.
 
@@ -777,7 +778,7 @@ Config returns the resolved configuration.
 func (c *CamundaClient) CorrelateMessage(ctx context.Context, body MessageCorrelationRequest, opts ...func(ApiCorrelateMessageRequest) ApiCorrelateMessageRequest) (*MessageCorrelationResult, error)
 ```
 
-**Types:** [`MessageCorrelationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MessageCorrelationRequest), [`ApiCorrelateMessageRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCorrelateMessageRequest), [`MessageCorrelationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MessageCorrelationResult)
+**Types:** [`MessageCorrelationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MessageCorrelationRequest), [`ApiCorrelateMessageRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCorrelateMessageRequest), [`MessageCorrelationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MessageCorrelationResult)
 
 CorrelateMessage calls the CorrelateMessage operation.
 
@@ -801,7 +802,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateAdminUser(ctx context.Context, body UserRequest, opts ...func(ApiCreateAdminUserRequest) ApiCreateAdminUserRequest) (*UserCreateResult, error)
 ```
 
-**Types:** [`UserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserRequest), [`ApiCreateAdminUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateAdminUserRequest), [`UserCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserCreateResult)
+**Types:** [`UserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserRequest), [`ApiCreateAdminUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateAdminUserRequest), [`UserCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserCreateResult)
 
 CreateAdminUser calls the CreateAdminUser operation.
 
@@ -823,7 +824,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateAgentInstance(ctx context.Context, body AgentInstanceCreationRequest, opts ...func(ApiCreateAgentInstanceRequest) ApiCreateAgentInstanceRequest) (*AgentInstanceCreationResult, error)
 ```
 
-**Types:** [`AgentInstanceCreationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceCreationRequest), [`ApiCreateAgentInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateAgentInstanceRequest), [`AgentInstanceCreationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceCreationResult)
+**Types:** [`AgentInstanceCreationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceCreationRequest), [`ApiCreateAgentInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateAgentInstanceRequest), [`AgentInstanceCreationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceCreationResult)
 
 CreateAgentInstance calls the CreateAgentInstance operation.
 
@@ -860,7 +861,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateAuthorization(ctx context.Context, body AuthorizationRequest, opts ...func(ApiCreateAuthorizationRequest) ApiCreateAuthorizationRequest) (*AuthorizationCreateResult, error)
 ```
 
-**Types:** [`AuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationRequest), [`ApiCreateAuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateAuthorizationRequest), [`AuthorizationCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationCreateResult)
+**Types:** [`AuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationRequest), [`ApiCreateAuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateAuthorizationRequest), [`AuthorizationCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationCreateResult)
 
 CreateAuthorization calls the CreateAuthorization operation.
 
@@ -893,7 +894,7 @@ fmt.Printf("created authorization %v\n", result.GetAuthorizationKey())
 func (c *CamundaClient) CreateDeployment(ctx context.Context, opts ...func(ApiCreateDeploymentRequest) ApiCreateDeploymentRequest) (*DeploymentResult, error)
 ```
 
-**Types:** [`ApiCreateDeploymentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateDeploymentRequest), [`DeploymentResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DeploymentResult)
+**Types:** [`ApiCreateDeploymentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateDeploymentRequest), [`DeploymentResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DeploymentResult)
 
 CreateDeployment calls the CreateDeployment operation.
 
@@ -922,7 +923,7 @@ fmt.Printf("deployment key %v\n", deployment.GetDeploymentKey())
 func (c *CamundaClient) CreateDocument(ctx context.Context, opts ...func(ApiCreateDocumentRequest) ApiCreateDocumentRequest) (*DocumentReference, error)
 ```
 
-**Types:** [`ApiCreateDocumentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateDocumentRequest), [`DocumentReference`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DocumentReference)
+**Types:** [`ApiCreateDocumentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateDocumentRequest), [`DocumentReference`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DocumentReference)
 
 CreateDocument calls the CreateDocument operation.
 
@@ -944,7 +945,7 @@ fmt.Printf("%v\n", ref)
 func (c *CamundaClient) CreateDocumentLink(ctx context.Context, documentId string, body DocumentLinkRequest, opts ...func(ApiCreateDocumentLinkRequest) ApiCreateDocumentLinkRequest) (*DocumentLink, error)
 ```
 
-**Types:** [`DocumentLinkRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DocumentLinkRequest), [`ApiCreateDocumentLinkRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateDocumentLinkRequest), [`DocumentLink`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DocumentLink)
+**Types:** [`DocumentLinkRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DocumentLinkRequest), [`ApiCreateDocumentLinkRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateDocumentLinkRequest), [`DocumentLink`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DocumentLink)
 
 CreateDocumentLink calls the CreateDocumentLink operation.
 
@@ -965,7 +966,7 @@ fmt.Printf("%v\n", link)
 func (c *CamundaClient) CreateDocuments(ctx context.Context, opts ...func(ApiCreateDocumentsRequest) ApiCreateDocumentsRequest) (*DocumentCreationBatchResponse, error)
 ```
 
-**Types:** [`ApiCreateDocumentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateDocumentsRequest), [`DocumentCreationBatchResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DocumentCreationBatchResponse)
+**Types:** [`ApiCreateDocumentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateDocumentsRequest), [`DocumentCreationBatchResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DocumentCreationBatchResponse)
 
 CreateDocuments calls the CreateDocuments operation.
 
@@ -986,7 +987,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateElementInstanceVariables(ctx context.Context, elementInstanceKey ElementInstanceKey, body SetVariableRequest, opts ...func(ApiCreateElementInstanceVariablesRequest) ApiCreateElementInstanceVariablesRequest) error
 ```
 
-**Types:** [`ElementInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceKey), [`SetVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#SetVariableRequest), [`ApiCreateElementInstanceVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateElementInstanceVariablesRequest)
+**Types:** [`ElementInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceKey), [`SetVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#SetVariableRequest), [`ApiCreateElementInstanceVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateElementInstanceVariablesRequest)
 
 CreateElementInstanceVariables calls the CreateElementInstanceVariables operation.
 
@@ -1005,7 +1006,7 @@ return client.CreateElementInstanceVariables(ctx, camunda.MustElementInstanceKey
 func (c *CamundaClient) CreateGlobalClusterVariable(ctx context.Context, body CreateClusterVariableRequest, opts ...func(ApiCreateGlobalClusterVariableRequest) ApiCreateGlobalClusterVariableRequest) (*ClusterVariableResult, error)
 ```
 
-**Types:** [`CreateClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#CreateClusterVariableRequest), [`ApiCreateGlobalClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateGlobalClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterVariableResult)
+**Types:** [`CreateClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#CreateClusterVariableRequest), [`ApiCreateGlobalClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateGlobalClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterVariableResult)
 
 CreateGlobalClusterVariable calls the CreateGlobalClusterVariable operation.
 
@@ -1026,7 +1027,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateGlobalTaskListener(ctx context.Context, body CreateGlobalTaskListenerRequest, opts ...func(ApiCreateGlobalTaskListenerRequest) ApiCreateGlobalTaskListenerRequest) (*GlobalTaskListenerResult, error)
 ```
 
-**Types:** [`CreateGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#CreateGlobalTaskListenerRequest), [`ApiCreateGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateGlobalTaskListenerRequest), [`GlobalTaskListenerResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GlobalTaskListenerResult)
+**Types:** [`CreateGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#CreateGlobalTaskListenerRequest), [`ApiCreateGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateGlobalTaskListenerRequest), [`GlobalTaskListenerResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GlobalTaskListenerResult)
 
 CreateGlobalTaskListener calls the CreateGlobalTaskListener operation.
 
@@ -1047,7 +1048,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateGroup(ctx context.Context, body GroupCreateRequest, opts ...func(ApiCreateGroupRequest) ApiCreateGroupRequest) (*GroupCreateResult, error)
 ```
 
-**Types:** [`GroupCreateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupCreateRequest), [`ApiCreateGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateGroupRequest), [`GroupCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupCreateResult)
+**Types:** [`GroupCreateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupCreateRequest), [`ApiCreateGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateGroupRequest), [`GroupCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupCreateResult)
 
 CreateGroup calls the CreateGroup operation.
 
@@ -1067,7 +1068,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateMappingRule(ctx context.Context, body MappingRuleCreateRequest, opts ...func(ApiCreateMappingRuleRequest) ApiCreateMappingRuleRequest) (*MappingRuleCreateResult, error)
 ```
 
-**Types:** [`MappingRuleCreateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleCreateRequest), [`ApiCreateMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateMappingRuleRequest), [`MappingRuleCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleCreateResult)
+**Types:** [`MappingRuleCreateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleCreateRequest), [`ApiCreateMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateMappingRuleRequest), [`MappingRuleCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleCreateResult)
 
 CreateMappingRule calls the CreateMappingRule operation.
 
@@ -1089,7 +1090,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateProcessInstance(ctx context.Context, body ProcessInstanceCreationInstruction, opts ...func(ApiCreateProcessInstanceRequest) ApiCreateProcessInstanceRequest) (*CreateProcessInstanceResult, error)
 ```
 
-**Types:** [`ProcessInstanceCreationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceCreationInstruction), [`ApiCreateProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateProcessInstanceRequest), [`CreateProcessInstanceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#CreateProcessInstanceResult)
+**Types:** [`ProcessInstanceCreationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceCreationInstruction), [`ApiCreateProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateProcessInstanceRequest), [`CreateProcessInstanceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#CreateProcessInstanceResult)
 
 CreateProcessInstance creates (starts) a process instance.
 
@@ -1115,7 +1116,7 @@ result, err := client.CreateProcessInstance(ctx, instruction)
 func (c *CamundaClient) CreateRole(ctx context.Context, body RoleCreateRequest, opts ...func(ApiCreateRoleRequest) ApiCreateRoleRequest) (*RoleCreateResult, error)
 ```
 
-**Types:** [`RoleCreateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleCreateRequest), [`ApiCreateRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateRoleRequest), [`RoleCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleCreateResult)
+**Types:** [`RoleCreateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleCreateRequest), [`ApiCreateRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateRoleRequest), [`RoleCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleCreateResult)
 
 CreateRole calls the CreateRole operation.
 
@@ -1135,7 +1136,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateTenant(ctx context.Context, body TenantCreateRequest, opts ...func(ApiCreateTenantRequest) ApiCreateTenantRequest) (*TenantCreateResult, error)
 ```
 
-**Types:** [`TenantCreateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantCreateRequest), [`ApiCreateTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateTenantRequest), [`TenantCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantCreateResult)
+**Types:** [`TenantCreateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantCreateRequest), [`ApiCreateTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateTenantRequest), [`TenantCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantCreateResult)
 
 CreateTenant calls the CreateTenant operation.
 
@@ -1155,7 +1156,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateTenantClusterVariable(ctx context.Context, tenantId string, body CreateClusterVariableRequest, opts ...func(ApiCreateTenantClusterVariableRequest) ApiCreateTenantClusterVariableRequest) (*ClusterVariableResult, error)
 ```
 
-**Types:** [`CreateClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#CreateClusterVariableRequest), [`ApiCreateTenantClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateTenantClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterVariableResult)
+**Types:** [`CreateClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#CreateClusterVariableRequest), [`ApiCreateTenantClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateTenantClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterVariableResult)
 
 CreateTenantClusterVariable calls the CreateTenantClusterVariable operation.
 
@@ -1176,7 +1177,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) CreateUser(ctx context.Context, body UserRequest, opts ...func(ApiCreateUserRequest) ApiCreateUserRequest) (*UserCreateResult, error)
 ```
 
-**Types:** [`UserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserRequest), [`ApiCreateUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiCreateUserRequest), [`UserCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserCreateResult)
+**Types:** [`UserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserRequest), [`ApiCreateUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiCreateUserRequest), [`UserCreateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserCreateResult)
 
 CreateUser calls the CreateUser operation.
 
@@ -1201,7 +1202,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) DeleteAuthorization(ctx context.Context, authorizationKey AuthorizationKey, opts ...func(ApiDeleteAuthorizationRequest) ApiDeleteAuthorizationRequest) error
 ```
 
-**Types:** [`AuthorizationKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationKey), [`ApiDeleteAuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteAuthorizationRequest)
+**Types:** [`AuthorizationKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationKey), [`ApiDeleteAuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteAuthorizationRequest)
 
 DeleteAuthorization calls the DeleteAuthorization operation.
 
@@ -1217,7 +1218,7 @@ return client.DeleteAuthorization(ctx, camunda.MustAuthorizationKey("22517998136
 func (c *CamundaClient) DeleteDecisionInstance(ctx context.Context, decisionEvaluationKey DecisionEvaluationKey, body DeleteDecisionInstanceRequest, opts ...func(ApiDeleteDecisionInstanceRequest) ApiDeleteDecisionInstanceRequest) error
 ```
 
-**Types:** [`DecisionEvaluationKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionEvaluationKey), [`DeleteDecisionInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DeleteDecisionInstanceRequest), [`ApiDeleteDecisionInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteDecisionInstanceRequest)
+**Types:** [`DecisionEvaluationKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionEvaluationKey), [`DeleteDecisionInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DeleteDecisionInstanceRequest), [`ApiDeleteDecisionInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteDecisionInstanceRequest)
 
 DeleteDecisionInstance calls the DeleteDecisionInstance operation.
 
@@ -1235,7 +1236,7 @@ return client.DeleteDecisionInstance(ctx,
 func (c *CamundaClient) DeleteDecisionInstancesBatchOperation(ctx context.Context, body DecisionInstanceDeletionBatchOperationRequest, opts ...func(ApiDeleteDecisionInstancesBatchOperationRequest) ApiDeleteDecisionInstancesBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`DecisionInstanceDeletionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionInstanceDeletionBatchOperationRequest), [`ApiDeleteDecisionInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteDecisionInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`DecisionInstanceDeletionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionInstanceDeletionBatchOperationRequest), [`ApiDeleteDecisionInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteDecisionInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 DeleteDecisionInstancesBatchOperation calls the DeleteDecisionInstancesBatchOperation operation.
 
@@ -1257,7 +1258,7 @@ fmt.Printf("created batch operation %v\n", result.GetBatchOperationKey())
 func (c *CamundaClient) DeleteDocument(ctx context.Context, documentId string, opts ...func(ApiDeleteDocumentRequest) ApiDeleteDocumentRequest) error
 ```
 
-**Types:** [`ApiDeleteDocumentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteDocumentRequest)
+**Types:** [`ApiDeleteDocumentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteDocumentRequest)
 
 DeleteDocument calls the DeleteDocument operation.
 
@@ -1273,7 +1274,7 @@ return client.DeleteDocument(ctx, "doc-123")
 func (c *CamundaClient) DeleteGlobalClusterVariable(ctx context.Context, name string, opts ...func(ApiDeleteGlobalClusterVariableRequest) ApiDeleteGlobalClusterVariableRequest) error
 ```
 
-**Types:** [`ApiDeleteGlobalClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteGlobalClusterVariableRequest)
+**Types:** [`ApiDeleteGlobalClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteGlobalClusterVariableRequest)
 
 DeleteGlobalClusterVariable calls the DeleteGlobalClusterVariable operation.
 
@@ -1289,7 +1290,7 @@ return client.DeleteGlobalClusterVariable(ctx, "region")
 func (c *CamundaClient) DeleteGlobalTaskListener(ctx context.Context, id string, opts ...func(ApiDeleteGlobalTaskListenerRequest) ApiDeleteGlobalTaskListenerRequest) error
 ```
 
-**Types:** [`ApiDeleteGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteGlobalTaskListenerRequest)
+**Types:** [`ApiDeleteGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteGlobalTaskListenerRequest)
 
 DeleteGlobalTaskListener calls the DeleteGlobalTaskListener operation.
 
@@ -1305,7 +1306,7 @@ return client.DeleteGlobalTaskListener(ctx, "audit-listener")
 func (c *CamundaClient) DeleteGroup(ctx context.Context, groupId string, opts ...func(ApiDeleteGroupRequest) ApiDeleteGroupRequest) error
 ```
 
-**Types:** [`ApiDeleteGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteGroupRequest)
+**Types:** [`ApiDeleteGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteGroupRequest)
 
 DeleteGroup calls the DeleteGroup operation.
 
@@ -1321,7 +1322,7 @@ return client.DeleteGroup(ctx, "finance")
 func (c *CamundaClient) DeleteHistoryBackup(ctx context.Context, backupId int64, opts ...func(ApiDeleteHistoryBackupRequest) ApiDeleteHistoryBackupRequest) error
 ```
 
-**Types:** [`ApiDeleteHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteHistoryBackupRequest)
+**Types:** [`ApiDeleteHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteHistoryBackupRequest)
 
 DeleteHistoryBackup calls the DeleteHistoryBackup operation.
 
@@ -1339,7 +1340,7 @@ if err := client.DeleteHistoryBackup(ctx, 42); err != nil {
 func (c *CamundaClient) DeleteHistoryBackupAsClusterAdmin(ctx context.Context, backupId int64, opts ...func(ApiDeleteHistoryBackupAsClusterAdminRequest) ApiDeleteHistoryBackupAsClusterAdminRequest) error
 ```
 
-**Types:** [`ApiDeleteHistoryBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteHistoryBackupAsClusterAdminRequest)
+**Types:** [`ApiDeleteHistoryBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteHistoryBackupAsClusterAdminRequest)
 
 DeleteHistoryBackupAsClusterAdmin calls the DeleteHistoryBackupAsClusterAdmin operation.
 
@@ -1357,7 +1358,7 @@ if err := client.DeleteHistoryBackupAsClusterAdmin(ctx, 42); err != nil {
 func (c *CamundaClient) DeleteMappingRule(ctx context.Context, mappingRuleId string, opts ...func(ApiDeleteMappingRuleRequest) ApiDeleteMappingRuleRequest) error
 ```
 
-**Types:** [`ApiDeleteMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteMappingRuleRequest)
+**Types:** [`ApiDeleteMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteMappingRuleRequest)
 
 DeleteMappingRule calls the DeleteMappingRule operation.
 
@@ -1373,7 +1374,7 @@ return client.DeleteMappingRule(ctx, "sso-auditors")
 func (c *CamundaClient) DeleteProcessInstance(ctx context.Context, processInstanceKey ProcessInstanceKey, body DeleteProcessInstanceRequest, opts ...func(ApiDeleteProcessInstanceRequest) ApiDeleteProcessInstanceRequest) error
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`DeleteProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DeleteProcessInstanceRequest), [`ApiDeleteProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteProcessInstanceRequest)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`DeleteProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DeleteProcessInstanceRequest), [`ApiDeleteProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteProcessInstanceRequest)
 
 DeleteProcessInstance calls the DeleteProcessInstance operation.
 
@@ -1391,7 +1392,7 @@ return client.DeleteProcessInstance(ctx,
 func (c *CamundaClient) DeleteProcessInstancesBatchOperation(ctx context.Context, body ProcessInstanceDeletionBatchOperationRequest, opts ...func(ApiDeleteProcessInstancesBatchOperationRequest) ApiDeleteProcessInstancesBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`ProcessInstanceDeletionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceDeletionBatchOperationRequest), [`ApiDeleteProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`ProcessInstanceDeletionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceDeletionBatchOperationRequest), [`ApiDeleteProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 DeleteProcessInstancesBatchOperation calls the DeleteProcessInstancesBatchOperation operation.
 
@@ -1413,7 +1414,7 @@ fmt.Printf("created batch operation %v\n", result.GetBatchOperationKey())
 func (c *CamundaClient) DeleteResource(ctx context.Context, resourceKey ResourceKey, body DeleteResourceRequest, opts ...func(ApiDeleteResourceRequest) ApiDeleteResourceRequest) (*DeleteResourceResponse, error)
 ```
 
-**Types:** [`ResourceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ResourceKey), [`DeleteResourceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DeleteResourceRequest), [`ApiDeleteResourceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteResourceRequest), [`DeleteResourceResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DeleteResourceResponse)
+**Types:** [`ResourceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ResourceKey), [`DeleteResourceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DeleteResourceRequest), [`ApiDeleteResourceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteResourceRequest), [`DeleteResourceResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DeleteResourceResponse)
 
 DeleteResource calls the DeleteResource operation.
 
@@ -1435,7 +1436,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) DeleteRole(ctx context.Context, roleId string, opts ...func(ApiDeleteRoleRequest) ApiDeleteRoleRequest) error
 ```
 
-**Types:** [`ApiDeleteRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteRoleRequest)
+**Types:** [`ApiDeleteRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteRoleRequest)
 
 DeleteRole calls the DeleteRole operation.
 
@@ -1451,7 +1452,7 @@ return client.DeleteRole(ctx, "auditor")
 func (c *CamundaClient) DeleteRuntimeBackup(ctx context.Context, backupId int64, opts ...func(ApiDeleteRuntimeBackupRequest) ApiDeleteRuntimeBackupRequest) error
 ```
 
-**Types:** [`ApiDeleteRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteRuntimeBackupRequest)
+**Types:** [`ApiDeleteRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteRuntimeBackupRequest)
 
 DeleteRuntimeBackup calls the DeleteRuntimeBackup operation.
 
@@ -1469,7 +1470,7 @@ if err := client.DeleteRuntimeBackup(ctx, 42); err != nil {
 func (c *CamundaClient) DeleteRuntimeBackupAsClusterAdmin(ctx context.Context, backupId int64, opts ...func(ApiDeleteRuntimeBackupAsClusterAdminRequest) ApiDeleteRuntimeBackupAsClusterAdminRequest) error
 ```
 
-**Types:** [`ApiDeleteRuntimeBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteRuntimeBackupAsClusterAdminRequest)
+**Types:** [`ApiDeleteRuntimeBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteRuntimeBackupAsClusterAdminRequest)
 
 DeleteRuntimeBackupAsClusterAdmin calls the DeleteRuntimeBackupAsClusterAdmin operation.
 
@@ -1488,7 +1489,7 @@ if err := client.DeleteRuntimeBackupAsClusterAdmin(ctx, 42); err != nil {
 func (c *CamundaClient) DeleteRuntimeBackupState(ctx context.Context, opts ...func(ApiDeleteRuntimeBackupStateRequest) ApiDeleteRuntimeBackupStateRequest) error
 ```
 
-**Types:** [`ApiDeleteRuntimeBackupStateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteRuntimeBackupStateRequest)
+**Types:** [`ApiDeleteRuntimeBackupStateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteRuntimeBackupStateRequest)
 
 DeleteRuntimeBackupState calls the DeleteRuntimeBackupState operation.
 
@@ -1506,7 +1507,7 @@ if err := client.DeleteRuntimeBackupState(ctx); err != nil {
 func (c *CamundaClient) DeleteRuntimeBackupStateAsClusterAdmin(ctx context.Context, opts ...func(ApiDeleteRuntimeBackupStateAsClusterAdminRequest) ApiDeleteRuntimeBackupStateAsClusterAdminRequest) error
 ```
 
-**Types:** [`ApiDeleteRuntimeBackupStateAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteRuntimeBackupStateAsClusterAdminRequest)
+**Types:** [`ApiDeleteRuntimeBackupStateAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteRuntimeBackupStateAsClusterAdminRequest)
 
 DeleteRuntimeBackupStateAsClusterAdmin calls the DeleteRuntimeBackupStateAsClusterAdmin operation.
 
@@ -1525,7 +1526,7 @@ if err := client.DeleteRuntimeBackupStateAsClusterAdmin(ctx); err != nil {
 func (c *CamundaClient) DeleteTenant(ctx context.Context, tenantId string, opts ...func(ApiDeleteTenantRequest) ApiDeleteTenantRequest) error
 ```
 
-**Types:** [`ApiDeleteTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteTenantRequest)
+**Types:** [`ApiDeleteTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteTenantRequest)
 
 DeleteTenant calls the DeleteTenant operation.
 
@@ -1541,7 +1542,7 @@ return client.DeleteTenant(ctx, "tenant-a")
 func (c *CamundaClient) DeleteTenantClusterVariable(ctx context.Context, tenantId string, name string, opts ...func(ApiDeleteTenantClusterVariableRequest) ApiDeleteTenantClusterVariableRequest) error
 ```
 
-**Types:** [`ApiDeleteTenantClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteTenantClusterVariableRequest)
+**Types:** [`ApiDeleteTenantClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteTenantClusterVariableRequest)
 
 DeleteTenantClusterVariable calls the DeleteTenantClusterVariable operation.
 
@@ -1557,7 +1558,7 @@ return client.DeleteTenantClusterVariable(ctx, "tenant-a", "region")
 func (c *CamundaClient) DeleteUser(ctx context.Context, username string, opts ...func(ApiDeleteUserRequest) ApiDeleteUserRequest) error
 ```
 
-**Types:** [`ApiDeleteUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiDeleteUserRequest)
+**Types:** [`ApiDeleteUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiDeleteUserRequest)
 
 DeleteUser calls the DeleteUser operation.
 
@@ -1573,7 +1574,7 @@ return client.DeleteUser(ctx, "alice")
 func (c *CamundaClient) EvaluateConditionals(ctx context.Context, body ConditionalEvaluationInstruction, opts ...func(ApiEvaluateConditionalsRequest) ApiEvaluateConditionalsRequest) (*EvaluateConditionalResult, error)
 ```
 
-**Types:** [`ConditionalEvaluationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ConditionalEvaluationInstruction), [`ApiEvaluateConditionalsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiEvaluateConditionalsRequest), [`EvaluateConditionalResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#EvaluateConditionalResult)
+**Types:** [`ConditionalEvaluationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ConditionalEvaluationInstruction), [`ApiEvaluateConditionalsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiEvaluateConditionalsRequest), [`EvaluateConditionalResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#EvaluateConditionalResult)
 
 EvaluateConditionals calls the EvaluateConditionals operation.
 
@@ -1596,7 +1597,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) EvaluateDecision(ctx context.Context, body DecisionEvaluationInstruction, opts ...func(ApiEvaluateDecisionRequest) ApiEvaluateDecisionRequest) (*EvaluateDecisionResult, error)
 ```
 
-**Types:** [`DecisionEvaluationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionEvaluationInstruction), [`ApiEvaluateDecisionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiEvaluateDecisionRequest), [`EvaluateDecisionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#EvaluateDecisionResult)
+**Types:** [`DecisionEvaluationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionEvaluationInstruction), [`ApiEvaluateDecisionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiEvaluateDecisionRequest), [`EvaluateDecisionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#EvaluateDecisionResult)
 
 EvaluateDecision calls the EvaluateDecision operation.
 
@@ -1621,7 +1622,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) EvaluateExpression(ctx context.Context, body ExpressionEvaluationRequest, opts ...func(ApiEvaluateExpressionRequest) ApiEvaluateExpressionRequest) (*ExpressionEvaluationResult, error)
 ```
 
-**Types:** [`ExpressionEvaluationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ExpressionEvaluationRequest), [`ApiEvaluateExpressionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiEvaluateExpressionRequest), [`ExpressionEvaluationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ExpressionEvaluationResult)
+**Types:** [`ExpressionEvaluationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ExpressionEvaluationRequest), [`ApiEvaluateExpressionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiEvaluateExpressionRequest), [`ExpressionEvaluationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ExpressionEvaluationResult)
 
 EvaluateExpression calls the EvaluateExpression operation.
 
@@ -1645,7 +1646,7 @@ fmt.Printf("result: %v\n", result.GetResult())
 func (c *CamundaClient) FailJob(ctx context.Context, jobKey JobKey, body JobFailRequest, opts ...func(ApiFailJobRequest) ApiFailJobRequest) error
 ```
 
-**Types:** [`JobKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobKey), [`JobFailRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobFailRequest), [`ApiFailJobRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiFailJobRequest)
+**Types:** [`JobKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobKey), [`JobFailRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobFailRequest), [`ApiFailJobRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiFailJobRequest)
 
 FailJob calls the FailJob operation.
 
@@ -1665,7 +1666,7 @@ return client.FailJob(ctx, camunda.MustJobKey("2251799813685424"), *req)
 func (c *CamundaClient) GetAgentDefinition(ctx context.Context, agentDefinitionKey AgentDefinitionKey, opts ...func(ApiGetAgentDefinitionRequest) ApiGetAgentDefinitionRequest) (*AgentDefinitionResult, error)
 ```
 
-**Types:** [`AgentDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentDefinitionKey), [`ApiGetAgentDefinitionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetAgentDefinitionRequest), [`AgentDefinitionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentDefinitionResult)
+**Types:** [`AgentDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentDefinitionKey), [`ApiGetAgentDefinitionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetAgentDefinitionRequest), [`AgentDefinitionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentDefinitionResult)
 
 GetAgentDefinition calls the GetAgentDefinition operation.
 
@@ -1685,7 +1686,7 @@ fmt.Printf("%v\n", definition)
 func (c *CamundaClient) GetAgentInstance(ctx context.Context, agentInstanceKey AgentInstanceKey, opts ...func(ApiGetAgentInstanceRequest) ApiGetAgentInstanceRequest) (*AgentInstanceResult, error)
 ```
 
-**Types:** [`AgentInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceKey), [`ApiGetAgentInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetAgentInstanceRequest), [`AgentInstanceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceResult)
+**Types:** [`AgentInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceKey), [`ApiGetAgentInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetAgentInstanceRequest), [`AgentInstanceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceResult)
 
 GetAgentInstance calls the GetAgentInstance operation.
 
@@ -1705,7 +1706,7 @@ fmt.Printf("%v\n", agent)
 func (c *CamundaClient) GetAuditLog(ctx context.Context, auditLogKey AuditLogKey, opts ...func(ApiGetAuditLogRequest) ApiGetAuditLogRequest) (*AuditLogResult, error)
 ```
 
-**Types:** [`AuditLogKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuditLogKey), [`ApiGetAuditLogRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetAuditLogRequest), [`AuditLogResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuditLogResult)
+**Types:** [`AuditLogKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuditLogKey), [`ApiGetAuditLogRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetAuditLogRequest), [`AuditLogResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuditLogResult)
 
 GetAuditLog calls the GetAuditLog operation.
 
@@ -1725,7 +1726,7 @@ fmt.Printf("%v\n", entry)
 func (c *CamundaClient) GetAuthentication(ctx context.Context, opts ...func(ApiGetAuthenticationRequest) ApiGetAuthenticationRequest) (*CamundaUserResult, error)
 ```
 
-**Types:** [`ApiGetAuthenticationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetAuthenticationRequest), [`CamundaUserResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#CamundaUserResult)
+**Types:** [`ApiGetAuthenticationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetAuthenticationRequest), [`CamundaUserResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#CamundaUserResult)
 
 GetAuthentication calls the GetAuthentication operation.
 
@@ -1746,7 +1747,7 @@ fmt.Printf("authenticated as %s\n", me.GetUsername())
 func (c *CamundaClient) GetAuthorization(ctx context.Context, authorizationKey AuthorizationKey, opts ...func(ApiGetAuthorizationRequest) ApiGetAuthorizationRequest) (*AuthorizationResult, error)
 ```
 
-**Types:** [`AuthorizationKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationKey), [`ApiGetAuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetAuthorizationRequest), [`AuthorizationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationResult)
+**Types:** [`AuthorizationKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationKey), [`ApiGetAuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetAuthorizationRequest), [`AuthorizationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationResult)
 
 GetAuthorization calls the GetAuthorization operation.
 
@@ -1766,7 +1767,7 @@ fmt.Printf("%v\n", auth)
 func (c *CamundaClient) GetBatchOperation(ctx context.Context, batchOperationKey string, opts ...func(ApiGetBatchOperationRequest) ApiGetBatchOperationRequest) (*BatchOperationResponse, error)
 ```
 
-**Types:** [`ApiGetBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetBatchOperationRequest), [`BatchOperationResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationResponse)
+**Types:** [`ApiGetBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetBatchOperationRequest), [`BatchOperationResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationResponse)
 
 GetBatchOperation calls the GetBatchOperation operation.
 
@@ -1786,7 +1787,7 @@ fmt.Printf("%v\n", op)
 func (c *CamundaClient) GetClusterExportingStatus(ctx context.Context, opts ...func(ApiGetClusterExportingStatusRequest) ApiGetClusterExportingStatusRequest) (*ExportingStatusResponse, error)
 ```
 
-**Types:** [`ApiGetClusterExportingStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetClusterExportingStatusRequest), [`ExportingStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ExportingStatusResponse)
+**Types:** [`ApiGetClusterExportingStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetClusterExportingStatusRequest), [`ExportingStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ExportingStatusResponse)
 
 GetClusterExportingStatus calls the GetClusterExportingStatus operation.
 
@@ -1807,7 +1808,7 @@ fmt.Printf("cluster exporting status: %s\n", status.GetStatus())
 func (c *CamundaClient) GetClusterRebalance(ctx context.Context, opts ...func(ApiGetClusterRebalanceRequest) ApiGetClusterRebalanceRequest) (*ClusterBalanceResponse, error)
 ```
 
-**Types:** [`ApiGetClusterRebalanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetClusterRebalanceRequest), [`ClusterBalanceResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterBalanceResponse)
+**Types:** [`ApiGetClusterRebalanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetClusterRebalanceRequest), [`ClusterBalanceResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterBalanceResponse)
 
 GetClusterRebalance calls the GetClusterRebalance operation.
 
@@ -1832,7 +1833,7 @@ if running, ok := balance.GetRunningRebalanceOk(); ok && running != nil {
 func (c *CamundaClient) GetClusterStatus(ctx context.Context, opts ...func(ApiGetClusterStatusRequest) ApiGetClusterStatusRequest) (*ClusterStatusResponse, error)
 ```
 
-**Types:** [`ApiGetClusterStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetClusterStatusRequest), [`ClusterStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterStatusResponse)
+**Types:** [`ApiGetClusterStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetClusterStatusRequest), [`ClusterStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterStatusResponse)
 
 GetClusterStatus calls the GetClusterStatus operation.
 
@@ -1853,7 +1854,7 @@ fmt.Printf("cluster status: %s\n", status.GetStatus())
 func (c *CamundaClient) GetClusterTopology(ctx context.Context, opts ...func(ApiGetClusterTopologyRequest) ApiGetClusterTopologyRequest) (*ClusterTopologyResponse, error)
 ```
 
-**Types:** [`ApiGetClusterTopologyRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetClusterTopologyRequest), [`ClusterTopologyResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterTopologyResponse)
+**Types:** [`ApiGetClusterTopologyRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetClusterTopologyRequest), [`ClusterTopologyResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterTopologyResponse)
 
 GetClusterTopology calls the GetClusterTopology operation.
 
@@ -1877,7 +1878,7 @@ fmt.Printf("cluster %s — %d broker(s), %d physical tenant(s)\n",
 func (c *CamundaClient) GetClusterUpgradeStatus(ctx context.Context, opts ...func(ApiGetClusterUpgradeStatusRequest) ApiGetClusterUpgradeStatusRequest) (*ClusterUpgradeStatusResponse, error)
 ```
 
-**Types:** [`ApiGetClusterUpgradeStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetClusterUpgradeStatusRequest), [`ClusterUpgradeStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterUpgradeStatusResponse)
+**Types:** [`ApiGetClusterUpgradeStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetClusterUpgradeStatusRequest), [`ClusterUpgradeStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterUpgradeStatusResponse)
 
 GetClusterUpgradeStatus calls the GetClusterUpgradeStatus operation.
 
@@ -1899,7 +1900,7 @@ fmt.Printf("cluster upgrade status: %s\n", status.GetStatus())
 func (c *CamundaClient) GetDecisionDefinition(ctx context.Context, decisionDefinitionKey DecisionDefinitionKey, opts ...func(ApiGetDecisionDefinitionRequest) ApiGetDecisionDefinitionRequest) (*DecisionDefinitionResult, error)
 ```
 
-**Types:** [`DecisionDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionDefinitionKey), [`ApiGetDecisionDefinitionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetDecisionDefinitionRequest), [`DecisionDefinitionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionDefinitionResult)
+**Types:** [`DecisionDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionDefinitionKey), [`ApiGetDecisionDefinitionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetDecisionDefinitionRequest), [`DecisionDefinitionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionDefinitionResult)
 
 GetDecisionDefinition calls the GetDecisionDefinition operation.
 
@@ -1919,7 +1920,7 @@ fmt.Printf("%v\n", def)
 func (c *CamundaClient) GetDecisionDefinitionXML(ctx context.Context, decisionDefinitionKey DecisionDefinitionKey, opts ...func(ApiGetDecisionDefinitionXMLRequest) ApiGetDecisionDefinitionXMLRequest) (string, error)
 ```
 
-**Types:** [`DecisionDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionDefinitionKey), [`ApiGetDecisionDefinitionXMLRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetDecisionDefinitionXMLRequest)
+**Types:** [`DecisionDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionDefinitionKey), [`ApiGetDecisionDefinitionXMLRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetDecisionDefinitionXMLRequest)
 
 GetDecisionDefinitionXML calls the GetDecisionDefinitionXML operation.
 
@@ -1939,7 +1940,7 @@ fmt.Println(xml)
 func (c *CamundaClient) GetDecisionInstance(ctx context.Context, decisionEvaluationInstanceKey string, opts ...func(ApiGetDecisionInstanceRequest) ApiGetDecisionInstanceRequest) (*DecisionInstanceGetQueryResult, error)
 ```
 
-**Types:** [`ApiGetDecisionInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetDecisionInstanceRequest), [`DecisionInstanceGetQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionInstanceGetQueryResult)
+**Types:** [`ApiGetDecisionInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetDecisionInstanceRequest), [`DecisionInstanceGetQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionInstanceGetQueryResult)
 
 GetDecisionInstance calls the GetDecisionInstance operation.
 
@@ -1959,7 +1960,7 @@ fmt.Printf("%v\n", instance)
 func (c *CamundaClient) GetDecisionRequirements(ctx context.Context, decisionRequirementsKey DecisionRequirementsKey, opts ...func(ApiGetDecisionRequirementsRequest) ApiGetDecisionRequirementsRequest) (*DecisionRequirementsResult, error)
 ```
 
-**Types:** [`DecisionRequirementsKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionRequirementsKey), [`ApiGetDecisionRequirementsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetDecisionRequirementsRequest), [`DecisionRequirementsResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionRequirementsResult)
+**Types:** [`DecisionRequirementsKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionRequirementsKey), [`ApiGetDecisionRequirementsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetDecisionRequirementsRequest), [`DecisionRequirementsResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionRequirementsResult)
 
 GetDecisionRequirements calls the GetDecisionRequirements operation.
 
@@ -1979,7 +1980,7 @@ fmt.Printf("%v\n", drd)
 func (c *CamundaClient) GetDecisionRequirementsXML(ctx context.Context, decisionRequirementsKey DecisionRequirementsKey, opts ...func(ApiGetDecisionRequirementsXMLRequest) ApiGetDecisionRequirementsXMLRequest) (string, error)
 ```
 
-**Types:** [`DecisionRequirementsKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionRequirementsKey), [`ApiGetDecisionRequirementsXMLRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetDecisionRequirementsXMLRequest)
+**Types:** [`DecisionRequirementsKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionRequirementsKey), [`ApiGetDecisionRequirementsXMLRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetDecisionRequirementsXMLRequest)
 
 GetDecisionRequirementsXML calls the GetDecisionRequirementsXML operation.
 
@@ -1999,7 +2000,7 @@ fmt.Println(xml)
 func (c *CamundaClient) GetDocument(ctx context.Context, documentId string, opts ...func(ApiGetDocumentRequest) ApiGetDocumentRequest) (*os.File, error)
 ```
 
-**Types:** [`ApiGetDocumentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetDocumentRequest)
+**Types:** [`ApiGetDocumentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetDocumentRequest)
 
 GetDocument calls the GetDocument operation.
 
@@ -2019,7 +2020,7 @@ fmt.Printf("downloaded to %s\n", file.Name())
 func (c *CamundaClient) GetElementInstance(ctx context.Context, elementInstanceKey ElementInstanceKey, opts ...func(ApiGetElementInstanceRequest) ApiGetElementInstanceRequest) (*ElementInstanceResult, error)
 ```
 
-**Types:** [`ElementInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceKey), [`ApiGetElementInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetElementInstanceRequest), [`ElementInstanceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceResult)
+**Types:** [`ElementInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceKey), [`ApiGetElementInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetElementInstanceRequest), [`ElementInstanceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceResult)
 
 GetElementInstance calls the GetElementInstance operation.
 
@@ -2039,7 +2040,7 @@ fmt.Printf("%v\n", element)
 func (c *CamundaClient) GetExportingStatus(ctx context.Context, opts ...func(ApiGetExportingStatusRequest) ApiGetExportingStatusRequest) (*ExportingStatusResponse, error)
 ```
 
-**Types:** [`ApiGetExportingStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetExportingStatusRequest), [`ExportingStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ExportingStatusResponse)
+**Types:** [`ApiGetExportingStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetExportingStatusRequest), [`ExportingStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ExportingStatusResponse)
 
 GetExportingStatus calls the GetExportingStatus operation.
 
@@ -2060,7 +2061,7 @@ fmt.Printf("exporting status: %s\n", status.GetStatus())
 func (c *CamundaClient) GetFormByKey(ctx context.Context, formKey FormKey, opts ...func(ApiGetFormByKeyRequest) ApiGetFormByKeyRequest) (*FormResult, error)
 ```
 
-**Types:** [`FormKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#FormKey), [`ApiGetFormByKeyRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetFormByKeyRequest), [`FormResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#FormResult)
+**Types:** [`FormKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#FormKey), [`ApiGetFormByKeyRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetFormByKeyRequest), [`FormResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#FormResult)
 
 GetFormByKey calls the GetFormByKey operation.
 
@@ -2080,7 +2081,7 @@ fmt.Printf("form %v version %d\n", form.GetFormId(), form.GetVersion())
 func (c *CamundaClient) GetGlobalClusterVariable(ctx context.Context, name string, opts ...func(ApiGetGlobalClusterVariableRequest) ApiGetGlobalClusterVariableRequest) (*ClusterVariableResult, error)
 ```
 
-**Types:** [`ApiGetGlobalClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetGlobalClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterVariableResult)
+**Types:** [`ApiGetGlobalClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetGlobalClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterVariableResult)
 
 GetGlobalClusterVariable calls the GetGlobalClusterVariable operation.
 
@@ -2100,7 +2101,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetGlobalJobStatistics(ctx context.Context, opts ...func(ApiGetGlobalJobStatisticsRequest) ApiGetGlobalJobStatisticsRequest) (*GlobalJobStatisticsQueryResult, error)
 ```
 
-**Types:** [`ApiGetGlobalJobStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetGlobalJobStatisticsRequest), [`GlobalJobStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GlobalJobStatisticsQueryResult)
+**Types:** [`ApiGetGlobalJobStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetGlobalJobStatisticsRequest), [`GlobalJobStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GlobalJobStatisticsQueryResult)
 
 GetGlobalJobStatistics calls the GetGlobalJobStatistics operation.
 
@@ -2120,7 +2121,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetGlobalTaskListener(ctx context.Context, id string, opts ...func(ApiGetGlobalTaskListenerRequest) ApiGetGlobalTaskListenerRequest) (*GlobalTaskListenerResult, error)
 ```
 
-**Types:** [`ApiGetGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetGlobalTaskListenerRequest), [`GlobalTaskListenerResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GlobalTaskListenerResult)
+**Types:** [`ApiGetGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetGlobalTaskListenerRequest), [`GlobalTaskListenerResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GlobalTaskListenerResult)
 
 GetGlobalTaskListener calls the GetGlobalTaskListener operation.
 
@@ -2140,7 +2141,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetGroup(ctx context.Context, groupId string, opts ...func(ApiGetGroupRequest) ApiGetGroupRequest) (*GroupResult, error)
 ```
 
-**Types:** [`ApiGetGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetGroupRequest), [`GroupResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupResult)
+**Types:** [`ApiGetGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetGroupRequest), [`GroupResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupResult)
 
 GetGroup calls the GetGroup operation.
 
@@ -2160,7 +2161,7 @@ fmt.Printf("%v\n", group)
 func (c *CamundaClient) GetHistoryBackup(ctx context.Context, backupId int64, opts ...func(ApiGetHistoryBackupRequest) ApiGetHistoryBackupRequest) (*HistoryBackupInfo, error)
 ```
 
-**Types:** [`ApiGetHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetHistoryBackupRequest), [`HistoryBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#HistoryBackupInfo)
+**Types:** [`ApiGetHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetHistoryBackupRequest), [`HistoryBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#HistoryBackupInfo)
 
 GetHistoryBackup calls the GetHistoryBackup operation.
 
@@ -2183,7 +2184,7 @@ for _, snapshot := range backup.GetDetails() {
 func (c *CamundaClient) GetHistoryBackupAsClusterAdmin(ctx context.Context, backupId int64, opts ...func(ApiGetHistoryBackupAsClusterAdminRequest) ApiGetHistoryBackupAsClusterAdminRequest) (*ClusterHistoryBackupInfo, error)
 ```
 
-**Types:** [`ApiGetHistoryBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetHistoryBackupAsClusterAdminRequest), [`ClusterHistoryBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterHistoryBackupInfo)
+**Types:** [`ApiGetHistoryBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetHistoryBackupAsClusterAdminRequest), [`ClusterHistoryBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterHistoryBackupInfo)
 
 GetHistoryBackupAsClusterAdmin calls the GetHistoryBackupAsClusterAdmin operation.
 
@@ -2205,7 +2206,7 @@ for _, tenant := range backup.GetPhysicalTenants() {
 func (c *CamundaClient) GetIncident(ctx context.Context, incidentKey IncidentKey, opts ...func(ApiGetIncidentRequest) ApiGetIncidentRequest) (*IncidentResult, error)
 ```
 
-**Types:** [`IncidentKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentKey), [`ApiGetIncidentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetIncidentRequest), [`IncidentResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentResult)
+**Types:** [`IncidentKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentKey), [`ApiGetIncidentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetIncidentRequest), [`IncidentResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentResult)
 
 GetIncident calls the GetIncident operation.
 
@@ -2225,7 +2226,7 @@ fmt.Printf("%v\n", incident)
 func (c *CamundaClient) GetJobErrorStatistics(ctx context.Context, body JobErrorStatisticsQuery, opts ...func(ApiGetJobErrorStatisticsRequest) ApiGetJobErrorStatisticsRequest) (*JobErrorStatisticsQueryResult, error)
 ```
 
-**Types:** [`JobErrorStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobErrorStatisticsQuery), [`ApiGetJobErrorStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetJobErrorStatisticsRequest), [`JobErrorStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobErrorStatisticsQueryResult)
+**Types:** [`JobErrorStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobErrorStatisticsQuery), [`ApiGetJobErrorStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetJobErrorStatisticsRequest), [`JobErrorStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobErrorStatisticsQueryResult)
 
 GetJobErrorStatistics calls the GetJobErrorStatistics operation.
 
@@ -2248,7 +2249,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetJobTimeSeriesStatistics(ctx context.Context, body JobTimeSeriesStatisticsQuery, opts ...func(ApiGetJobTimeSeriesStatisticsRequest) ApiGetJobTimeSeriesStatisticsRequest) (*JobTimeSeriesStatisticsQueryResult, error)
 ```
 
-**Types:** [`JobTimeSeriesStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobTimeSeriesStatisticsQuery), [`ApiGetJobTimeSeriesStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetJobTimeSeriesStatisticsRequest), [`JobTimeSeriesStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobTimeSeriesStatisticsQueryResult)
+**Types:** [`JobTimeSeriesStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobTimeSeriesStatisticsQuery), [`ApiGetJobTimeSeriesStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetJobTimeSeriesStatisticsRequest), [`JobTimeSeriesStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobTimeSeriesStatisticsQueryResult)
 
 GetJobTimeSeriesStatistics calls the GetJobTimeSeriesStatistics operation.
 
@@ -2271,7 +2272,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetJobTypeStatistics(ctx context.Context, body JobTypeStatisticsQuery, opts ...func(ApiGetJobTypeStatisticsRequest) ApiGetJobTypeStatisticsRequest) (*JobTypeStatisticsQueryResult, error)
 ```
 
-**Types:** [`JobTypeStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobTypeStatisticsQuery), [`ApiGetJobTypeStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetJobTypeStatisticsRequest), [`JobTypeStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobTypeStatisticsQueryResult)
+**Types:** [`JobTypeStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobTypeStatisticsQuery), [`ApiGetJobTypeStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetJobTypeStatisticsRequest), [`JobTypeStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobTypeStatisticsQueryResult)
 
 GetJobTypeStatistics calls the GetJobTypeStatistics operation.
 
@@ -2291,7 +2292,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetJobWorkerStatistics(ctx context.Context, body JobWorkerStatisticsQuery, opts ...func(ApiGetJobWorkerStatisticsRequest) ApiGetJobWorkerStatisticsRequest) (*JobWorkerStatisticsQueryResult, error)
 ```
 
-**Types:** [`JobWorkerStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobWorkerStatisticsQuery), [`ApiGetJobWorkerStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetJobWorkerStatisticsRequest), [`JobWorkerStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobWorkerStatisticsQueryResult)
+**Types:** [`JobWorkerStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobWorkerStatisticsQuery), [`ApiGetJobWorkerStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetJobWorkerStatisticsRequest), [`JobWorkerStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobWorkerStatisticsQueryResult)
 
 GetJobWorkerStatistics calls the GetJobWorkerStatistics operation.
 
@@ -2314,7 +2315,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetLicense(ctx context.Context, opts ...func(ApiGetLicenseRequest) ApiGetLicenseRequest) (*LicenseResponse, error)
 ```
 
-**Types:** [`ApiGetLicenseRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetLicenseRequest), [`LicenseResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#LicenseResponse)
+**Types:** [`ApiGetLicenseRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetLicenseRequest), [`LicenseResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#LicenseResponse)
 
 GetLicense calls the GetLicense operation.
 
@@ -2334,7 +2335,7 @@ fmt.Printf("license type=%s valid=%v\n", license.GetLicenseType(), license.GetVa
 func (c *CamundaClient) GetMappingRule(ctx context.Context, mappingRuleId string, opts ...func(ApiGetMappingRuleRequest) ApiGetMappingRuleRequest) (*MappingRuleResult, error)
 ```
 
-**Types:** [`ApiGetMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetMappingRuleRequest), [`MappingRuleResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleResult)
+**Types:** [`ApiGetMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetMappingRuleRequest), [`MappingRuleResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleResult)
 
 GetMappingRule calls the GetMappingRule operation.
 
@@ -2354,7 +2355,7 @@ fmt.Printf("%v\n", rule)
 func (c *CamundaClient) GetProcessDefinition(ctx context.Context, processDefinitionKey ProcessDefinitionKey, opts ...func(ApiGetProcessDefinitionRequest) ApiGetProcessDefinitionRequest) (*ProcessDefinitionResult, error)
 ```
 
-**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionKey), [`ApiGetProcessDefinitionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessDefinitionRequest), [`ProcessDefinitionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionResult)
+**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionKey), [`ApiGetProcessDefinitionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessDefinitionRequest), [`ProcessDefinitionResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionResult)
 
 GetProcessDefinition calls the GetProcessDefinition operation.
 
@@ -2374,7 +2375,7 @@ fmt.Printf("%v\n", def)
 func (c *CamundaClient) GetProcessDefinitionInstanceStatistics(ctx context.Context, body ProcessDefinitionInstanceStatisticsQuery, opts ...func(ApiGetProcessDefinitionInstanceStatisticsRequest) ApiGetProcessDefinitionInstanceStatisticsRequest) (*ProcessDefinitionInstanceStatisticsQueryResult, error)
 ```
 
-**Types:** [`ProcessDefinitionInstanceStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionInstanceStatisticsQuery), [`ApiGetProcessDefinitionInstanceStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessDefinitionInstanceStatisticsRequest), [`ProcessDefinitionInstanceStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionInstanceStatisticsQueryResult)
+**Types:** [`ProcessDefinitionInstanceStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionInstanceStatisticsQuery), [`ApiGetProcessDefinitionInstanceStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessDefinitionInstanceStatisticsRequest), [`ProcessDefinitionInstanceStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionInstanceStatisticsQueryResult)
 
 GetProcessDefinitionInstanceStatistics calls the GetProcessDefinitionInstanceStatistics operation.
 
@@ -2395,7 +2396,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetProcessDefinitionInstanceVersionStatistics(ctx context.Context, body ProcessDefinitionInstanceVersionStatisticsQuery, opts ...func(ApiGetProcessDefinitionInstanceVersionStatisticsRequest) ApiGetProcessDefinitionInstanceVersionStatisticsRequest) (*ProcessDefinitionInstanceVersionStatisticsQueryResult, error)
 ```
 
-**Types:** [`ProcessDefinitionInstanceVersionStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionInstanceVersionStatisticsQuery), [`ApiGetProcessDefinitionInstanceVersionStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessDefinitionInstanceVersionStatisticsRequest), [`ProcessDefinitionInstanceVersionStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionInstanceVersionStatisticsQueryResult)
+**Types:** [`ProcessDefinitionInstanceVersionStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionInstanceVersionStatisticsQuery), [`ApiGetProcessDefinitionInstanceVersionStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessDefinitionInstanceVersionStatisticsRequest), [`ProcessDefinitionInstanceVersionStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionInstanceVersionStatisticsQueryResult)
 
 GetProcessDefinitionInstanceVersionStatistics calls the GetProcessDefinitionInstanceVersionStatistics operation.
 
@@ -2418,7 +2419,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetProcessDefinitionMessageSubscriptionStatistics(ctx context.Context, body ProcessDefinitionMessageSubscriptionStatisticsQuery, opts ...func(ApiGetProcessDefinitionMessageSubscriptionStatisticsRequest) ApiGetProcessDefinitionMessageSubscriptionStatisticsRequest) (*ProcessDefinitionMessageSubscriptionStatisticsQueryResult, error)
 ```
 
-**Types:** [`ProcessDefinitionMessageSubscriptionStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionMessageSubscriptionStatisticsQuery), [`ApiGetProcessDefinitionMessageSubscriptionStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessDefinitionMessageSubscriptionStatisticsRequest), [`ProcessDefinitionMessageSubscriptionStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionMessageSubscriptionStatisticsQueryResult)
+**Types:** [`ProcessDefinitionMessageSubscriptionStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionMessageSubscriptionStatisticsQuery), [`ApiGetProcessDefinitionMessageSubscriptionStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessDefinitionMessageSubscriptionStatisticsRequest), [`ProcessDefinitionMessageSubscriptionStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionMessageSubscriptionStatisticsQueryResult)
 
 GetProcessDefinitionMessageSubscriptionStatistics calls the GetProcessDefinitionMessageSubscriptionStatistics operation.
 
@@ -2439,7 +2440,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetProcessDefinitionStatistics(ctx context.Context, processDefinitionKey ProcessDefinitionKey, body ProcessDefinitionElementStatisticsQuery, opts ...func(ApiGetProcessDefinitionStatisticsRequest) ApiGetProcessDefinitionStatisticsRequest) (*ProcessDefinitionElementStatisticsQueryResult, error)
 ```
 
-**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionKey), [`ProcessDefinitionElementStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionElementStatisticsQuery), [`ApiGetProcessDefinitionStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessDefinitionStatisticsRequest), [`ProcessDefinitionElementStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionElementStatisticsQueryResult)
+**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionKey), [`ProcessDefinitionElementStatisticsQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionElementStatisticsQuery), [`ApiGetProcessDefinitionStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessDefinitionStatisticsRequest), [`ProcessDefinitionElementStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionElementStatisticsQueryResult)
 
 GetProcessDefinitionStatistics calls the GetProcessDefinitionStatistics operation.
 
@@ -2461,7 +2462,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetProcessDefinitionXML(ctx context.Context, processDefinitionKey ProcessDefinitionKey, opts ...func(ApiGetProcessDefinitionXMLRequest) ApiGetProcessDefinitionXMLRequest) (string, error)
 ```
 
-**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionKey), [`ApiGetProcessDefinitionXMLRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessDefinitionXMLRequest)
+**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionKey), [`ApiGetProcessDefinitionXMLRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessDefinitionXMLRequest)
 
 GetProcessDefinitionXML calls the GetProcessDefinitionXML operation.
 
@@ -2481,7 +2482,7 @@ fmt.Println(xml)
 func (c *CamundaClient) GetProcessInstance(ctx context.Context, processInstanceKey ProcessInstanceKey, opts ...func(ApiGetProcessInstanceRequest) ApiGetProcessInstanceRequest) (*ProcessInstanceResult, error)
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ApiGetProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessInstanceRequest), [`ProcessInstanceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceResult)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ApiGetProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessInstanceRequest), [`ProcessInstanceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceResult)
 
 GetProcessInstance calls the GetProcessInstance operation.
 
@@ -2501,7 +2502,7 @@ fmt.Printf("state=%v definition=%q\n", instance.GetState(), instance.GetProcessD
 func (c *CamundaClient) GetProcessInstanceCallHierarchy(ctx context.Context, processInstanceKey ProcessInstanceKey, opts ...func(ApiGetProcessInstanceCallHierarchyRequest) ApiGetProcessInstanceCallHierarchyRequest) ([]ProcessInstanceCallHierarchyEntry, error)
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ApiGetProcessInstanceCallHierarchyRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessInstanceCallHierarchyRequest), [`ProcessInstanceCallHierarchyEntry`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceCallHierarchyEntry)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ApiGetProcessInstanceCallHierarchyRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessInstanceCallHierarchyRequest), [`ProcessInstanceCallHierarchyEntry`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceCallHierarchyEntry)
 
 GetProcessInstanceCallHierarchy calls the GetProcessInstanceCallHierarchy operation.
 
@@ -2523,7 +2524,7 @@ for _, entry := range hierarchy {
 func (c *CamundaClient) GetProcessInstanceSequenceFlows(ctx context.Context, processInstanceKey ProcessInstanceKey, opts ...func(ApiGetProcessInstanceSequenceFlowsRequest) ApiGetProcessInstanceSequenceFlowsRequest) (*ProcessInstanceSequenceFlowsQueryResult, error)
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ApiGetProcessInstanceSequenceFlowsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessInstanceSequenceFlowsRequest), [`ProcessInstanceSequenceFlowsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceSequenceFlowsQueryResult)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ApiGetProcessInstanceSequenceFlowsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessInstanceSequenceFlowsRequest), [`ProcessInstanceSequenceFlowsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceSequenceFlowsQueryResult)
 
 GetProcessInstanceSequenceFlows calls the GetProcessInstanceSequenceFlows operation.
 
@@ -2543,7 +2544,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetProcessInstanceStatistics(ctx context.Context, processInstanceKey ProcessInstanceKey, opts ...func(ApiGetProcessInstanceStatisticsRequest) ApiGetProcessInstanceStatisticsRequest) (*ProcessInstanceElementStatisticsQueryResult, error)
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ApiGetProcessInstanceStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessInstanceStatisticsRequest), [`ProcessInstanceElementStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceElementStatisticsQueryResult)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ApiGetProcessInstanceStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessInstanceStatisticsRequest), [`ProcessInstanceElementStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceElementStatisticsQueryResult)
 
 GetProcessInstanceStatistics calls the GetProcessInstanceStatistics operation.
 
@@ -2563,7 +2564,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetProcessInstanceStatisticsByDefinition(ctx context.Context, body IncidentProcessInstanceStatisticsByDefinitionQuery, opts ...func(ApiGetProcessInstanceStatisticsByDefinitionRequest) ApiGetProcessInstanceStatisticsByDefinitionRequest) (*IncidentProcessInstanceStatisticsByDefinitionQueryResult, error)
 ```
 
-**Types:** [`IncidentProcessInstanceStatisticsByDefinitionQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentProcessInstanceStatisticsByDefinitionQuery), [`ApiGetProcessInstanceStatisticsByDefinitionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessInstanceStatisticsByDefinitionRequest), [`IncidentProcessInstanceStatisticsByDefinitionQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentProcessInstanceStatisticsByDefinitionQueryResult)
+**Types:** [`IncidentProcessInstanceStatisticsByDefinitionQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentProcessInstanceStatisticsByDefinitionQuery), [`ApiGetProcessInstanceStatisticsByDefinitionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessInstanceStatisticsByDefinitionRequest), [`IncidentProcessInstanceStatisticsByDefinitionQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentProcessInstanceStatisticsByDefinitionQueryResult)
 
 GetProcessInstanceStatisticsByDefinition calls the GetProcessInstanceStatisticsByDefinition operation.
 
@@ -2586,7 +2587,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetProcessInstanceStatisticsByError(ctx context.Context, body IncidentProcessInstanceStatisticsByErrorQuery, opts ...func(ApiGetProcessInstanceStatisticsByErrorRequest) ApiGetProcessInstanceStatisticsByErrorRequest) (*IncidentProcessInstanceStatisticsByErrorQueryResult, error)
 ```
 
-**Types:** [`IncidentProcessInstanceStatisticsByErrorQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentProcessInstanceStatisticsByErrorQuery), [`ApiGetProcessInstanceStatisticsByErrorRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessInstanceStatisticsByErrorRequest), [`IncidentProcessInstanceStatisticsByErrorQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentProcessInstanceStatisticsByErrorQueryResult)
+**Types:** [`IncidentProcessInstanceStatisticsByErrorQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentProcessInstanceStatisticsByErrorQuery), [`ApiGetProcessInstanceStatisticsByErrorRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessInstanceStatisticsByErrorRequest), [`IncidentProcessInstanceStatisticsByErrorQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentProcessInstanceStatisticsByErrorQueryResult)
 
 GetProcessInstanceStatisticsByError calls the GetProcessInstanceStatisticsByError operation.
 
@@ -2607,7 +2608,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetProcessInstanceWaitStateStatistics(ctx context.Context, processInstanceKey ProcessInstanceKey, opts ...func(ApiGetProcessInstanceWaitStateStatisticsRequest) ApiGetProcessInstanceWaitStateStatisticsRequest) (*ProcessInstanceWaitStateStatisticsQueryResult, error)
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ApiGetProcessInstanceWaitStateStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetProcessInstanceWaitStateStatisticsRequest), [`ProcessInstanceWaitStateStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceWaitStateStatisticsQueryResult)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ApiGetProcessInstanceWaitStateStatisticsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetProcessInstanceWaitStateStatisticsRequest), [`ProcessInstanceWaitStateStatisticsQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceWaitStateStatisticsQueryResult)
 
 GetProcessInstanceWaitStateStatistics calls the GetProcessInstanceWaitStateStatistics operation.
 
@@ -2627,7 +2628,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetResource(ctx context.Context, resourceKey ResourceKey, opts ...func(ApiGetResourceRequest) ApiGetResourceRequest) (*ResourceResult, error)
 ```
 
-**Types:** [`ResourceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ResourceKey), [`ApiGetResourceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetResourceRequest), [`ResourceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ResourceResult)
+**Types:** [`ResourceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ResourceKey), [`ApiGetResourceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetResourceRequest), [`ResourceResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ResourceResult)
 
 GetResource calls the GetResource operation.
 
@@ -2647,7 +2648,7 @@ fmt.Printf("%v\n", resource)
 func (c *CamundaClient) GetResourceContent(ctx context.Context, resourceKey ResourceKey, opts ...func(ApiGetResourceContentRequest) ApiGetResourceContentRequest) (map[string]interface{}, error)
 ```
 
-**Types:** [`ResourceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ResourceKey), [`ApiGetResourceContentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetResourceContentRequest)
+**Types:** [`ResourceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ResourceKey), [`ApiGetResourceContentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetResourceContentRequest)
 
 GetResourceContent calls the GetResourceContent operation.
 
@@ -2667,7 +2668,7 @@ fmt.Printf("%v\n", content)
 func (c *CamundaClient) GetResourceContentBinary(ctx context.Context, resourceKey ResourceKey, opts ...func(ApiGetResourceContentBinaryRequest) ApiGetResourceContentBinaryRequest) (*os.File, error)
 ```
 
-**Types:** [`ResourceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ResourceKey), [`ApiGetResourceContentBinaryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetResourceContentBinaryRequest)
+**Types:** [`ResourceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ResourceKey), [`ApiGetResourceContentBinaryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetResourceContentBinaryRequest)
 
 GetResourceContentBinary calls the GetResourceContentBinary operation.
 
@@ -2687,7 +2688,7 @@ fmt.Printf("downloaded to %s\n", file.Name())
 func (c *CamundaClient) GetRestoreStatus(ctx context.Context, opts ...func(ApiGetRestoreStatusRequest) ApiGetRestoreStatusRequest) (*RestoreStatusResponse, error)
 ```
 
-**Types:** [`ApiGetRestoreStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetRestoreStatusRequest), [`RestoreStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RestoreStatusResponse)
+**Types:** [`ApiGetRestoreStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetRestoreStatusRequest), [`RestoreStatusResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RestoreStatusResponse)
 
 GetRestoreStatus calls the GetRestoreStatus operation.
 
@@ -2711,7 +2712,7 @@ for _, broker := range status.GetBrokers() {
 func (c *CamundaClient) GetRole(ctx context.Context, roleId string, opts ...func(ApiGetRoleRequest) ApiGetRoleRequest) (*RoleResult, error)
 ```
 
-**Types:** [`ApiGetRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetRoleRequest), [`RoleResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleResult)
+**Types:** [`ApiGetRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetRoleRequest), [`RoleResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleResult)
 
 GetRole calls the GetRole operation.
 
@@ -2731,7 +2732,7 @@ fmt.Printf("%v\n", role)
 func (c *CamundaClient) GetRuntimeBackup(ctx context.Context, backupId int64, opts ...func(ApiGetRuntimeBackupRequest) ApiGetRuntimeBackupRequest) (*BackupInfo, error)
 ```
 
-**Types:** [`ApiGetRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetRuntimeBackupRequest), [`BackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BackupInfo)
+**Types:** [`ApiGetRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetRuntimeBackupRequest), [`BackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BackupInfo)
 
 GetRuntimeBackup calls the GetRuntimeBackup operation.
 
@@ -2754,7 +2755,7 @@ for _, partition := range backup.GetDetails() {
 func (c *CamundaClient) GetRuntimeBackupAsClusterAdmin(ctx context.Context, backupId int64, opts ...func(ApiGetRuntimeBackupAsClusterAdminRequest) ApiGetRuntimeBackupAsClusterAdminRequest) (*ClusterRuntimeBackupInfo, error)
 ```
 
-**Types:** [`ApiGetRuntimeBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetRuntimeBackupAsClusterAdminRequest), [`ClusterRuntimeBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterRuntimeBackupInfo)
+**Types:** [`ApiGetRuntimeBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetRuntimeBackupAsClusterAdminRequest), [`ClusterRuntimeBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterRuntimeBackupInfo)
 
 GetRuntimeBackupAsClusterAdmin calls the GetRuntimeBackupAsClusterAdmin operation.
 
@@ -2777,7 +2778,7 @@ for _, tenant := range backup.GetPhysicalTenants() {
 func (c *CamundaClient) GetRuntimeBackupState(ctx context.Context, opts ...func(ApiGetRuntimeBackupStateRequest) ApiGetRuntimeBackupStateRequest) (*RuntimeBackupState, error)
 ```
 
-**Types:** [`ApiGetRuntimeBackupStateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetRuntimeBackupStateRequest), [`RuntimeBackupState`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RuntimeBackupState)
+**Types:** [`ApiGetRuntimeBackupStateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetRuntimeBackupStateRequest), [`RuntimeBackupState`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RuntimeBackupState)
 
 GetRuntimeBackupState calls the GetRuntimeBackupState operation.
 
@@ -2799,7 +2800,7 @@ for _, checkpoint := range state.GetCheckpointStates() {
 func (c *CamundaClient) GetRuntimeBackupStateAsClusterAdmin(ctx context.Context, opts ...func(ApiGetRuntimeBackupStateAsClusterAdminRequest) ApiGetRuntimeBackupStateAsClusterAdminRequest) (*ClusterRuntimeBackupState, error)
 ```
 
-**Types:** [`ApiGetRuntimeBackupStateAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetRuntimeBackupStateAsClusterAdminRequest), [`ClusterRuntimeBackupState`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterRuntimeBackupState)
+**Types:** [`ApiGetRuntimeBackupStateAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetRuntimeBackupStateAsClusterAdminRequest), [`ClusterRuntimeBackupState`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterRuntimeBackupState)
 
 GetRuntimeBackupStateAsClusterAdmin calls the GetRuntimeBackupStateAsClusterAdmin operation.
 
@@ -2822,7 +2823,7 @@ for _, tenant := range state.GetPhysicalTenants() {
 func (c *CamundaClient) GetStartProcessForm(ctx context.Context, processDefinitionKey ProcessDefinitionKey, opts ...func(ApiGetStartProcessFormRequest) ApiGetStartProcessFormRequest) (*FormResult, error)
 ```
 
-**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionKey), [`ApiGetStartProcessFormRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetStartProcessFormRequest), [`FormResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#FormResult)
+**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionKey), [`ApiGetStartProcessFormRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetStartProcessFormRequest), [`FormResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#FormResult)
 
 GetStartProcessForm calls the GetStartProcessForm operation.
 
@@ -2842,7 +2843,7 @@ fmt.Printf("%v\n", form)
 func (c *CamundaClient) GetStatus(ctx context.Context, opts ...func(ApiGetStatusRequest) ApiGetStatusRequest) error
 ```
 
-**Types:** [`ApiGetStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetStatusRequest)
+**Types:** [`ApiGetStatusRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetStatusRequest)
 
 GetStatus calls the GetStatus operation.
 
@@ -2862,7 +2863,7 @@ fmt.Println("cluster is ready")
 func (c *CamundaClient) GetSystemConfiguration(ctx context.Context, opts ...func(ApiGetSystemConfigurationRequest) ApiGetSystemConfigurationRequest) (*SystemConfigurationResponse, error)
 ```
 
-**Types:** [`ApiGetSystemConfigurationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetSystemConfigurationRequest), [`SystemConfigurationResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#SystemConfigurationResponse)
+**Types:** [`ApiGetSystemConfigurationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetSystemConfigurationRequest), [`SystemConfigurationResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#SystemConfigurationResponse)
 
 GetSystemConfiguration calls the GetSystemConfiguration operation.
 
@@ -2882,7 +2883,7 @@ fmt.Printf("%v\n", config)
 func (c *CamundaClient) GetTenant(ctx context.Context, tenantId string, opts ...func(ApiGetTenantRequest) ApiGetTenantRequest) (*TenantResult, error)
 ```
 
-**Types:** [`ApiGetTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetTenantRequest), [`TenantResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantResult)
+**Types:** [`ApiGetTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetTenantRequest), [`TenantResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantResult)
 
 GetTenant calls the GetTenant operation.
 
@@ -2902,7 +2903,7 @@ fmt.Printf("%v\n", tenant)
 func (c *CamundaClient) GetTenantClusterVariable(ctx context.Context, tenantId string, name string, opts ...func(ApiGetTenantClusterVariableRequest) ApiGetTenantClusterVariableRequest) (*ClusterVariableResult, error)
 ```
 
-**Types:** [`ApiGetTenantClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetTenantClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterVariableResult)
+**Types:** [`ApiGetTenantClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetTenantClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterVariableResult)
 
 GetTenantClusterVariable calls the GetTenantClusterVariable operation.
 
@@ -2922,7 +2923,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) GetTopology(ctx context.Context, opts ...func(ApiGetTopologyRequest) ApiGetTopologyRequest) (*TopologyResponse, error)
 ```
 
-**Types:** [`ApiGetTopologyRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetTopologyRequest), [`TopologyResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TopologyResponse)
+**Types:** [`ApiGetTopologyRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetTopologyRequest), [`TopologyResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TopologyResponse)
 
 GetTopology calls the GetTopology operation.
 
@@ -2943,7 +2944,7 @@ fmt.Printf("gateway %s — %d broker(s), %d partition(s)\n",
 func (c *CamundaClient) GetUsageMetrics(ctx context.Context, opts ...func(ApiGetUsageMetricsRequest) ApiGetUsageMetricsRequest) (*UsageMetricsResponse, error)
 ```
 
-**Types:** [`ApiGetUsageMetricsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetUsageMetricsRequest), [`UsageMetricsResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UsageMetricsResponse)
+**Types:** [`ApiGetUsageMetricsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetUsageMetricsRequest), [`UsageMetricsResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UsageMetricsResponse)
 
 GetUsageMetrics calls the GetUsageMetrics operation.
 
@@ -2963,7 +2964,7 @@ fmt.Printf("%v\n", metrics)
 func (c *CamundaClient) GetUser(ctx context.Context, username string, opts ...func(ApiGetUserRequest) ApiGetUserRequest) (*UserResult, error)
 ```
 
-**Types:** [`ApiGetUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetUserRequest), [`UserResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserResult)
+**Types:** [`ApiGetUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetUserRequest), [`UserResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserResult)
 
 GetUser calls the GetUser operation.
 
@@ -2983,7 +2984,7 @@ fmt.Printf("%v\n", user)
 func (c *CamundaClient) GetUserTask(ctx context.Context, userTaskKey UserTaskKey, opts ...func(ApiGetUserTaskRequest) ApiGetUserTaskRequest) (*UserTaskResult, error)
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`ApiGetUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetUserTaskRequest), [`UserTaskResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskResult)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`ApiGetUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetUserTaskRequest), [`UserTaskResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskResult)
 
 GetUserTask calls the GetUserTask operation.
 
@@ -3003,7 +3004,7 @@ fmt.Printf("%v\n", task)
 func (c *CamundaClient) GetUserTaskForm(ctx context.Context, userTaskKey UserTaskKey, opts ...func(ApiGetUserTaskFormRequest) ApiGetUserTaskFormRequest) (*FormResult, error)
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`ApiGetUserTaskFormRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetUserTaskFormRequest), [`FormResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#FormResult)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`ApiGetUserTaskFormRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetUserTaskFormRequest), [`FormResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#FormResult)
 
 GetUserTaskForm calls the GetUserTaskForm operation.
 
@@ -3023,7 +3024,7 @@ fmt.Printf("%v\n", form)
 func (c *CamundaClient) GetVariable(ctx context.Context, variableKey VariableKey, opts ...func(ApiGetVariableRequest) ApiGetVariableRequest) (*VariableResult, error)
 ```
 
-**Types:** [`VariableKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#VariableKey), [`ApiGetVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiGetVariableRequest), [`VariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#VariableResult)
+**Types:** [`VariableKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#VariableKey), [`ApiGetVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiGetVariableRequest), [`VariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#VariableResult)
 
 GetVariable calls the GetVariable operation.
 
@@ -3043,7 +3044,7 @@ fmt.Printf("%v\n", variable)
 func (c *CamundaClient) ListHistoryBackups(ctx context.Context, opts ...func(ApiListHistoryBackupsRequest) ApiListHistoryBackupsRequest) ([]HistoryBackupInfo, error)
 ```
 
-**Types:** [`ApiListHistoryBackupsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiListHistoryBackupsRequest), [`HistoryBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#HistoryBackupInfo)
+**Types:** [`ApiListHistoryBackupsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiListHistoryBackupsRequest), [`HistoryBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#HistoryBackupInfo)
 
 ListHistoryBackups calls the ListHistoryBackups operation.
 
@@ -3065,7 +3066,7 @@ for _, backup := range backups {
 func (c *CamundaClient) ListHistoryBackupsAsClusterAdmin(ctx context.Context, opts ...func(ApiListHistoryBackupsAsClusterAdminRequest) ApiListHistoryBackupsAsClusterAdminRequest) ([]ClusterHistoryBackupInfo, error)
 ```
 
-**Types:** [`ApiListHistoryBackupsAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiListHistoryBackupsAsClusterAdminRequest), [`ClusterHistoryBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterHistoryBackupInfo)
+**Types:** [`ApiListHistoryBackupsAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiListHistoryBackupsAsClusterAdminRequest), [`ClusterHistoryBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterHistoryBackupInfo)
 
 ListHistoryBackupsAsClusterAdmin calls the ListHistoryBackupsAsClusterAdmin operation.
 
@@ -3088,7 +3089,7 @@ for _, backup := range backups {
 func (c *CamundaClient) ListRuntimeBackups(ctx context.Context, opts ...func(ApiListRuntimeBackupsRequest) ApiListRuntimeBackupsRequest) ([]BackupInfo, error)
 ```
 
-**Types:** [`ApiListRuntimeBackupsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiListRuntimeBackupsRequest), [`BackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BackupInfo)
+**Types:** [`ApiListRuntimeBackupsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiListRuntimeBackupsRequest), [`BackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BackupInfo)
 
 ListRuntimeBackups calls the ListRuntimeBackups operation.
 
@@ -3110,7 +3111,7 @@ for _, backup := range backups {
 func (c *CamundaClient) ListRuntimeBackupsAsClusterAdmin(ctx context.Context, opts ...func(ApiListRuntimeBackupsAsClusterAdminRequest) ApiListRuntimeBackupsAsClusterAdminRequest) ([]ClusterRuntimeBackupInfo, error)
 ```
 
-**Types:** [`ApiListRuntimeBackupsAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiListRuntimeBackupsAsClusterAdminRequest), [`ClusterRuntimeBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterRuntimeBackupInfo)
+**Types:** [`ApiListRuntimeBackupsAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiListRuntimeBackupsAsClusterAdminRequest), [`ClusterRuntimeBackupInfo`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterRuntimeBackupInfo)
 
 ListRuntimeBackupsAsClusterAdmin calls the ListRuntimeBackupsAsClusterAdmin operation.
 
@@ -3134,7 +3135,7 @@ for _, backup := range backups {
 func (c *CamundaClient) ListSecrets(ctx context.Context, opts ...func(ApiListSecretsRequest) ApiListSecretsRequest) (*SecretListResult, error)
 ```
 
-**Types:** [`ApiListSecretsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiListSecretsRequest), [`SecretListResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#SecretListResult)
+**Types:** [`ApiListSecretsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiListSecretsRequest), [`SecretListResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#SecretListResult)
 
 ListSecrets calls the ListSecrets operation.
 
@@ -3157,7 +3158,7 @@ for _, reference := range result.GetReferences() {
 func (c *CamundaClient) MigrateProcessInstance(ctx context.Context, processInstanceKey ProcessInstanceKey, body ProcessInstanceMigrationInstruction, opts ...func(ApiMigrateProcessInstanceRequest) ApiMigrateProcessInstanceRequest) error
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ProcessInstanceMigrationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceMigrationInstruction), [`ApiMigrateProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiMigrateProcessInstanceRequest)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ProcessInstanceMigrationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceMigrationInstruction), [`ApiMigrateProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiMigrateProcessInstanceRequest)
 
 MigrateProcessInstance calls the MigrateProcessInstance operation.
 
@@ -3179,7 +3180,7 @@ return client.MigrateProcessInstance(ctx, camunda.MustProcessInstanceKey("225179
 func (c *CamundaClient) MigrateProcessInstancesBatchOperation(ctx context.Context, body ProcessInstanceMigrationBatchOperationRequest, opts ...func(ApiMigrateProcessInstancesBatchOperationRequest) ApiMigrateProcessInstancesBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`ProcessInstanceMigrationBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceMigrationBatchOperationRequest), [`ApiMigrateProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiMigrateProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`ProcessInstanceMigrationBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceMigrationBatchOperationRequest), [`ApiMigrateProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiMigrateProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 MigrateProcessInstancesBatchOperation calls the MigrateProcessInstancesBatchOperation operation.
 
@@ -3206,7 +3207,7 @@ fmt.Printf("created batch operation %v\n", result.GetBatchOperationKey())
 func (c *CamundaClient) ModifyProcessInstance(ctx context.Context, processInstanceKey ProcessInstanceKey, body ProcessInstanceModificationInstruction, opts ...func(ApiModifyProcessInstanceRequest) ApiModifyProcessInstanceRequest) error
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ProcessInstanceModificationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceModificationInstruction), [`ApiModifyProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiModifyProcessInstanceRequest)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ProcessInstanceModificationInstruction`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceModificationInstruction), [`ApiModifyProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiModifyProcessInstanceRequest)
 
 ModifyProcessInstance calls the ModifyProcessInstance operation.
 
@@ -3224,7 +3225,7 @@ return client.ModifyProcessInstance(ctx,
 func (c *CamundaClient) ModifyProcessInstancesBatchOperation(ctx context.Context, body ProcessInstanceModificationBatchOperationRequest, opts ...func(ApiModifyProcessInstancesBatchOperationRequest) ApiModifyProcessInstancesBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`ProcessInstanceModificationBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceModificationBatchOperationRequest), [`ApiModifyProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiModifyProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`ProcessInstanceModificationBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceModificationBatchOperationRequest), [`ApiModifyProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiModifyProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 ModifyProcessInstancesBatchOperation calls the ModifyProcessInstancesBatchOperation operation.
 
@@ -3269,7 +3270,7 @@ with options.
 func (c *CamundaClient) PauseClusterExporting(ctx context.Context, opts ...func(ApiPauseClusterExportingRequest) ApiPauseClusterExportingRequest) error
 ```
 
-**Types:** [`ApiPauseClusterExportingRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiPauseClusterExportingRequest)
+**Types:** [`ApiPauseClusterExportingRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiPauseClusterExportingRequest)
 
 PauseClusterExporting calls the PauseClusterExporting operation.
 
@@ -3289,7 +3290,7 @@ if err := client.PauseClusterExporting(ctx); err != nil {
 func (c *CamundaClient) PauseExporting(ctx context.Context, opts ...func(ApiPauseExportingRequest) ApiPauseExportingRequest) error
 ```
 
-**Types:** [`ApiPauseExportingRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiPauseExportingRequest)
+**Types:** [`ApiPauseExportingRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiPauseExportingRequest)
 
 PauseExporting calls the PauseExporting operation.
 
@@ -3316,7 +3317,7 @@ PinAt moves the engine clock to t.
 func (c *CamundaClient) PinClock(ctx context.Context, body ClockPinRequest, opts ...func(ApiPinClockRequest) ApiPinClockRequest) error
 ```
 
-**Types:** [`ClockPinRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClockPinRequest), [`ApiPinClockRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiPinClockRequest)
+**Types:** [`ClockPinRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClockPinRequest), [`ApiPinClockRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiPinClockRequest)
 
 PinClock calls the PinClock operation.
 
@@ -3334,7 +3335,7 @@ return client.PinClock(ctx, *camunda.NewClockPinRequest(pinned.UnixMilli()))
 func (c *CamundaClient) PublishMessage(ctx context.Context, body MessagePublicationRequest, opts ...func(ApiPublishMessageRequest) ApiPublishMessageRequest) (*MessagePublicationResult, error)
 ```
 
-**Types:** [`MessagePublicationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MessagePublicationRequest), [`ApiPublishMessageRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiPublishMessageRequest), [`MessagePublicationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MessagePublicationResult)
+**Types:** [`MessagePublicationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MessagePublicationRequest), [`ApiPublishMessageRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiPublishMessageRequest), [`MessagePublicationResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MessagePublicationResult)
 
 PublishMessage calls the PublishMessage operation.
 
@@ -3352,6 +3353,14 @@ if err != nil {
 fmt.Printf("%v\n", result)
 ```
 
+### Random
+
+```go
+func (c *CamundaClient) Random() Random
+```
+
+Random returns the source this client draws jitter from.
+
 ### Raw
 
 ```go
@@ -3367,7 +3376,7 @@ surfaced on the ergonomic facade.
 func (c *CamundaClient) ResetClock(ctx context.Context, opts ...func(ApiResetClockRequest) ApiResetClockRequest) error
 ```
 
-**Types:** [`ApiResetClockRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResetClockRequest)
+**Types:** [`ApiResetClockRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResetClockRequest)
 
 ResetClock calls the ResetClock operation.
 
@@ -3392,7 +3401,7 @@ ResetToLive returns the engine clock to real time.
 func (c *CamundaClient) ResolveIncident(ctx context.Context, incidentKey IncidentKey, body IncidentResolutionRequest, opts ...func(ApiResolveIncidentRequest) ApiResolveIncidentRequest) error
 ```
 
-**Types:** [`IncidentKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentKey), [`IncidentResolutionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentResolutionRequest), [`ApiResolveIncidentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResolveIncidentRequest)
+**Types:** [`IncidentKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentKey), [`IncidentResolutionRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentResolutionRequest), [`ApiResolveIncidentRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResolveIncidentRequest)
 
 ResolveIncident calls the ResolveIncident operation.
 
@@ -3412,7 +3421,7 @@ return client.ResolveIncident(ctx,
 func (c *CamundaClient) ResolveIncidentsBatchOperation(ctx context.Context, body ProcessInstanceIncidentResolutionBatchOperationRequest, opts ...func(ApiResolveIncidentsBatchOperationRequest) ApiResolveIncidentsBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`ProcessInstanceIncidentResolutionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceIncidentResolutionBatchOperationRequest), [`ApiResolveIncidentsBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResolveIncidentsBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`ProcessInstanceIncidentResolutionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceIncidentResolutionBatchOperationRequest), [`ApiResolveIncidentsBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResolveIncidentsBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 ResolveIncidentsBatchOperation calls the ResolveIncidentsBatchOperation operation.
 
@@ -3434,7 +3443,7 @@ fmt.Printf("created batch operation %v\n", result.GetBatchOperationKey())
 func (c *CamundaClient) ResolveProcessInstanceIncidents(ctx context.Context, processInstanceKey ProcessInstanceKey, opts ...func(ApiResolveProcessInstanceIncidentsRequest) ApiResolveProcessInstanceIncidentsRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ApiResolveProcessInstanceIncidentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResolveProcessInstanceIncidentsRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ApiResolveProcessInstanceIncidentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResolveProcessInstanceIncidentsRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 ResolveProcessInstanceIncidents calls the ResolveProcessInstanceIncidents operation.
 
@@ -3454,7 +3463,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) ResolveSecrets(ctx context.Context, body SecretResolveRequest, opts ...func(ApiResolveSecretsRequest) ApiResolveSecretsRequest) (*SecretResolveResult, error)
 ```
 
-**Types:** [`SecretResolveRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#SecretResolveRequest), [`ApiResolveSecretsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResolveSecretsRequest), [`SecretResolveResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#SecretResolveResult)
+**Types:** [`SecretResolveRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#SecretResolveRequest), [`ApiResolveSecretsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResolveSecretsRequest), [`SecretResolveResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#SecretResolveResult)
 
 ResolveSecrets calls the ResolveSecrets operation.
 
@@ -3479,7 +3488,7 @@ for _, secret := range result.GetResolved() {
 func (c *CamundaClient) Restore(ctx context.Context, body RestoreRequest, opts ...func(ApiRestoreRequest) ApiRestoreRequest) (*ClusterRestoreResponse, error)
 ```
 
-**Types:** [`RestoreRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RestoreRequest), [`ApiRestoreRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiRestoreRequest), [`ClusterRestoreResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterRestoreResponse)
+**Types:** [`RestoreRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RestoreRequest), [`ApiRestoreRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiRestoreRequest), [`ClusterRestoreResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterRestoreResponse)
 
 Restore calls the Restore operation.
 
@@ -3499,7 +3508,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) RestoreAsClusterAdmin(ctx context.Context, body ClusterRestoreRequest, opts ...func(ApiRestoreAsClusterAdminRequest) ApiRestoreAsClusterAdminRequest) (*ClusterRestoreResponse, error)
 ```
 
-**Types:** [`ClusterRestoreRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterRestoreRequest), [`ApiRestoreAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiRestoreAsClusterAdminRequest), [`ClusterRestoreResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterRestoreResponse)
+**Types:** [`ClusterRestoreRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterRestoreRequest), [`ApiRestoreAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiRestoreAsClusterAdminRequest), [`ClusterRestoreResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterRestoreResponse)
 
 RestoreAsClusterAdmin calls the RestoreAsClusterAdmin operation.
 
@@ -3524,7 +3533,7 @@ fmt.Printf("restore change id: %s\n", result.GetChangeId())
 func (c *CamundaClient) ResumeBatchOperation(ctx context.Context, batchOperationKey string, opts ...func(ApiResumeBatchOperationRequest) ApiResumeBatchOperationRequest) error
 ```
 
-**Types:** [`ApiResumeBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResumeBatchOperationRequest)
+**Types:** [`ApiResumeBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResumeBatchOperationRequest)
 
 ResumeBatchOperation calls the ResumeBatchOperation operation.
 
@@ -3540,7 +3549,7 @@ return client.ResumeBatchOperation(ctx, "2251799813685290")
 func (c *CamundaClient) ResumeClusterExporting(ctx context.Context, opts ...func(ApiResumeClusterExportingRequest) ApiResumeClusterExportingRequest) error
 ```
 
-**Types:** [`ApiResumeClusterExportingRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResumeClusterExportingRequest)
+**Types:** [`ApiResumeClusterExportingRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResumeClusterExportingRequest)
 
 ResumeClusterExporting calls the ResumeClusterExporting operation.
 
@@ -3559,7 +3568,7 @@ if err := client.ResumeClusterExporting(ctx); err != nil {
 func (c *CamundaClient) ResumeExporting(ctx context.Context, opts ...func(ApiResumeExportingRequest) ApiResumeExportingRequest) error
 ```
 
-**Types:** [`ApiResumeExportingRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResumeExportingRequest)
+**Types:** [`ApiResumeExportingRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResumeExportingRequest)
 
 ResumeExporting calls the ResumeExporting operation.
 
@@ -3577,7 +3586,7 @@ if err := client.ResumeExporting(ctx); err != nil {
 func (c *CamundaClient) ResumeProcessInstance(ctx context.Context, processInstanceKey ProcessInstanceKey, body ResumeProcessInstanceRequest, opts ...func(ApiResumeProcessInstanceRequest) ApiResumeProcessInstanceRequest) error
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`ResumeProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ResumeProcessInstanceRequest), [`ApiResumeProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResumeProcessInstanceRequest)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`ResumeProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ResumeProcessInstanceRequest), [`ApiResumeProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResumeProcessInstanceRequest)
 
 ResumeProcessInstance calls the ResumeProcessInstance operation.
 
@@ -3595,7 +3604,7 @@ return client.ResumeProcessInstance(ctx,
 func (c *CamundaClient) ResumeProcessInstancesBatchOperation(ctx context.Context, body ProcessInstanceResumptionBatchOperationRequest, opts ...func(ApiResumeProcessInstancesBatchOperationRequest) ApiResumeProcessInstancesBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`ProcessInstanceResumptionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceResumptionBatchOperationRequest), [`ApiResumeProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiResumeProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`ProcessInstanceResumptionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceResumptionBatchOperationRequest), [`ApiResumeProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiResumeProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 ResumeProcessInstancesBatchOperation calls the ResumeProcessInstancesBatchOperation operation.
 
@@ -3618,7 +3627,7 @@ fmt.Printf("created batch operation %v\n", result.GetBatchOperationKey())
 func (c *CamundaClient) SearchAgentDefinitions(ctx context.Context, body AgentDefinitionSearchQuery, opts ...func(ApiSearchAgentDefinitionsRequest) ApiSearchAgentDefinitionsRequest) (*AgentDefinitionSearchQueryResult, error)
 ```
 
-**Types:** [`AgentDefinitionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentDefinitionSearchQuery), [`ApiSearchAgentDefinitionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchAgentDefinitionsRequest), [`AgentDefinitionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentDefinitionSearchQueryResult)
+**Types:** [`AgentDefinitionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentDefinitionSearchQuery), [`ApiSearchAgentDefinitionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchAgentDefinitionsRequest), [`AgentDefinitionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentDefinitionSearchQueryResult)
 
 SearchAgentDefinitions calls the SearchAgentDefinitions operation.
 
@@ -3640,7 +3649,7 @@ for _, d := range result.GetItems() {
 func (c *CamundaClient) SearchAgentInstanceHistory(ctx context.Context, agentInstanceKey AgentInstanceKey, body AgentInstanceHistorySearchQuery, opts ...func(ApiSearchAgentInstanceHistoryRequest) ApiSearchAgentInstanceHistoryRequest) (*AgentInstanceHistorySearchQueryResult, error)
 ```
 
-**Types:** [`AgentInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceKey), [`AgentInstanceHistorySearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceHistorySearchQuery), [`ApiSearchAgentInstanceHistoryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchAgentInstanceHistoryRequest), [`AgentInstanceHistorySearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceHistorySearchQueryResult)
+**Types:** [`AgentInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceKey), [`AgentInstanceHistorySearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceHistorySearchQuery), [`ApiSearchAgentInstanceHistoryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchAgentInstanceHistoryRequest), [`AgentInstanceHistorySearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceHistorySearchQueryResult)
 
 SearchAgentInstanceHistory calls the SearchAgentInstanceHistory operation.
 
@@ -3662,7 +3671,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchAgentInstances(ctx context.Context, body AgentInstanceSearchQuery, opts ...func(ApiSearchAgentInstancesRequest) ApiSearchAgentInstancesRequest) (*AgentInstanceSearchQueryResult, error)
 ```
 
-**Types:** [`AgentInstanceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceSearchQuery), [`ApiSearchAgentInstancesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchAgentInstancesRequest), [`AgentInstanceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceSearchQueryResult)
+**Types:** [`AgentInstanceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceSearchQuery), [`ApiSearchAgentInstancesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchAgentInstancesRequest), [`AgentInstanceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceSearchQueryResult)
 
 SearchAgentInstances calls the SearchAgentInstances operation.
 
@@ -3684,7 +3693,7 @@ for _, a := range result.GetItems() {
 func (c *CamundaClient) SearchAuditLogs(ctx context.Context, body AuditLogSearchQueryRequest, opts ...func(ApiSearchAuditLogsRequest) ApiSearchAuditLogsRequest) (*AuditLogSearchQueryResult, error)
 ```
 
-**Types:** [`AuditLogSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuditLogSearchQueryRequest), [`ApiSearchAuditLogsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchAuditLogsRequest), [`AuditLogSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuditLogSearchQueryResult)
+**Types:** [`AuditLogSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuditLogSearchQueryRequest), [`ApiSearchAuditLogsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchAuditLogsRequest), [`AuditLogSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuditLogSearchQueryResult)
 
 SearchAuditLogs calls the SearchAuditLogs operation.
 
@@ -3706,7 +3715,7 @@ for _, entry := range result.GetItems() {
 func (c *CamundaClient) SearchAuthorizations(ctx context.Context, body AuthorizationSearchQuery, opts ...func(ApiSearchAuthorizationsRequest) ApiSearchAuthorizationsRequest) (*AuthorizationSearchResult, error)
 ```
 
-**Types:** [`AuthorizationSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationSearchQuery), [`ApiSearchAuthorizationsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchAuthorizationsRequest), [`AuthorizationSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationSearchResult)
+**Types:** [`AuthorizationSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationSearchQuery), [`ApiSearchAuthorizationsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchAuthorizationsRequest), [`AuthorizationSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationSearchResult)
 
 SearchAuthorizations calls the SearchAuthorizations operation.
 
@@ -3728,7 +3737,7 @@ for _, a := range result.GetItems() {
 func (c *CamundaClient) SearchBatchOperationItems(ctx context.Context, body BatchOperationItemSearchQuery, opts ...func(ApiSearchBatchOperationItemsRequest) ApiSearchBatchOperationItemsRequest) (*BatchOperationItemSearchQueryResult, error)
 ```
 
-**Types:** [`BatchOperationItemSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationItemSearchQuery), [`ApiSearchBatchOperationItemsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchBatchOperationItemsRequest), [`BatchOperationItemSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationItemSearchQueryResult)
+**Types:** [`BatchOperationItemSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationItemSearchQuery), [`ApiSearchBatchOperationItemsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchBatchOperationItemsRequest), [`BatchOperationItemSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationItemSearchQueryResult)
 
 SearchBatchOperationItems calls the SearchBatchOperationItems operation.
 
@@ -3750,7 +3759,7 @@ for _, item := range result.GetItems() {
 func (c *CamundaClient) SearchBatchOperations(ctx context.Context, body BatchOperationSearchQuery, opts ...func(ApiSearchBatchOperationsRequest) ApiSearchBatchOperationsRequest) (*BatchOperationSearchQueryResult, error)
 ```
 
-**Types:** [`BatchOperationSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationSearchQuery), [`ApiSearchBatchOperationsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchBatchOperationsRequest), [`BatchOperationSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationSearchQueryResult)
+**Types:** [`BatchOperationSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationSearchQuery), [`ApiSearchBatchOperationsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchBatchOperationsRequest), [`BatchOperationSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationSearchQueryResult)
 
 SearchBatchOperations calls the SearchBatchOperations operation.
 
@@ -3772,7 +3781,7 @@ for _, op := range result.GetItems() {
 func (c *CamundaClient) SearchClientsForGroup(ctx context.Context, groupId string, body GroupClientSearchQueryRequest, opts ...func(ApiSearchClientsForGroupRequest) ApiSearchClientsForGroupRequest) (*GroupClientSearchResult, error)
 ```
 
-**Types:** [`GroupClientSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupClientSearchQueryRequest), [`ApiSearchClientsForGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchClientsForGroupRequest), [`GroupClientSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupClientSearchResult)
+**Types:** [`GroupClientSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupClientSearchQueryRequest), [`ApiSearchClientsForGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchClientsForGroupRequest), [`GroupClientSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupClientSearchResult)
 
 SearchClientsForGroup calls the SearchClientsForGroup operation.
 
@@ -3792,7 +3801,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchClientsForRole(ctx context.Context, roleId string, body RoleClientSearchQueryRequest, opts ...func(ApiSearchClientsForRoleRequest) ApiSearchClientsForRoleRequest) (*RoleClientSearchResult, error)
 ```
 
-**Types:** [`RoleClientSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleClientSearchQueryRequest), [`ApiSearchClientsForRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchClientsForRoleRequest), [`RoleClientSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleClientSearchResult)
+**Types:** [`RoleClientSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleClientSearchQueryRequest), [`ApiSearchClientsForRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchClientsForRoleRequest), [`RoleClientSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleClientSearchResult)
 
 SearchClientsForRole calls the SearchClientsForRole operation.
 
@@ -3812,7 +3821,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchClientsForTenant(ctx context.Context, tenantId string, body TenantClientSearchQueryRequest, opts ...func(ApiSearchClientsForTenantRequest) ApiSearchClientsForTenantRequest) (*TenantClientSearchResult, error)
 ```
 
-**Types:** [`TenantClientSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantClientSearchQueryRequest), [`ApiSearchClientsForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchClientsForTenantRequest), [`TenantClientSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantClientSearchResult)
+**Types:** [`TenantClientSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantClientSearchQueryRequest), [`ApiSearchClientsForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchClientsForTenantRequest), [`TenantClientSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantClientSearchResult)
 
 SearchClientsForTenant calls the SearchClientsForTenant operation.
 
@@ -3832,7 +3841,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchClusterVariables(ctx context.Context, body ClusterVariableSearchQueryRequest, opts ...func(ApiSearchClusterVariablesRequest) ApiSearchClusterVariablesRequest) (*ClusterVariableSearchQueryResult, error)
 ```
 
-**Types:** [`ClusterVariableSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterVariableSearchQueryRequest), [`ApiSearchClusterVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchClusterVariablesRequest), [`ClusterVariableSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterVariableSearchQueryResult)
+**Types:** [`ClusterVariableSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterVariableSearchQueryRequest), [`ApiSearchClusterVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchClusterVariablesRequest), [`ClusterVariableSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterVariableSearchQueryResult)
 
 SearchClusterVariables calls the SearchClusterVariables operation.
 
@@ -3854,7 +3863,7 @@ for _, v := range result.GetItems() {
 func (c *CamundaClient) SearchCorrelatedMessageSubscriptions(ctx context.Context, body CorrelatedMessageSubscriptionSearchQuery, opts ...func(ApiSearchCorrelatedMessageSubscriptionsRequest) ApiSearchCorrelatedMessageSubscriptionsRequest) (*CorrelatedMessageSubscriptionSearchQueryResult, error)
 ```
 
-**Types:** [`CorrelatedMessageSubscriptionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#CorrelatedMessageSubscriptionSearchQuery), [`ApiSearchCorrelatedMessageSubscriptionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchCorrelatedMessageSubscriptionsRequest), [`CorrelatedMessageSubscriptionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#CorrelatedMessageSubscriptionSearchQueryResult)
+**Types:** [`CorrelatedMessageSubscriptionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#CorrelatedMessageSubscriptionSearchQuery), [`ApiSearchCorrelatedMessageSubscriptionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchCorrelatedMessageSubscriptionsRequest), [`CorrelatedMessageSubscriptionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#CorrelatedMessageSubscriptionSearchQueryResult)
 
 SearchCorrelatedMessageSubscriptions calls the SearchCorrelatedMessageSubscriptions operation.
 
@@ -3877,7 +3886,7 @@ for _, s := range result.GetItems() {
 func (c *CamundaClient) SearchDecisionDefinitions(ctx context.Context, body DecisionDefinitionSearchQuery, opts ...func(ApiSearchDecisionDefinitionsRequest) ApiSearchDecisionDefinitionsRequest) (*DecisionDefinitionSearchQueryResult, error)
 ```
 
-**Types:** [`DecisionDefinitionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionDefinitionSearchQuery), [`ApiSearchDecisionDefinitionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchDecisionDefinitionsRequest), [`DecisionDefinitionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionDefinitionSearchQueryResult)
+**Types:** [`DecisionDefinitionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionDefinitionSearchQuery), [`ApiSearchDecisionDefinitionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchDecisionDefinitionsRequest), [`DecisionDefinitionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionDefinitionSearchQueryResult)
 
 SearchDecisionDefinitions calls the SearchDecisionDefinitions operation.
 
@@ -3899,7 +3908,7 @@ for _, d := range result.GetItems() {
 func (c *CamundaClient) SearchDecisionInstances(ctx context.Context, body DecisionInstanceSearchQuery, opts ...func(ApiSearchDecisionInstancesRequest) ApiSearchDecisionInstancesRequest) (*DecisionInstanceSearchQueryResult, error)
 ```
 
-**Types:** [`DecisionInstanceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionInstanceSearchQuery), [`ApiSearchDecisionInstancesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchDecisionInstancesRequest), [`DecisionInstanceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionInstanceSearchQueryResult)
+**Types:** [`DecisionInstanceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionInstanceSearchQuery), [`ApiSearchDecisionInstancesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchDecisionInstancesRequest), [`DecisionInstanceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionInstanceSearchQueryResult)
 
 SearchDecisionInstances calls the SearchDecisionInstances operation.
 
@@ -3921,7 +3930,7 @@ for _, d := range result.GetItems() {
 func (c *CamundaClient) SearchDecisionRequirements(ctx context.Context, body DecisionRequirementsSearchQuery, opts ...func(ApiSearchDecisionRequirementsRequest) ApiSearchDecisionRequirementsRequest) (*DecisionRequirementsSearchQueryResult, error)
 ```
 
-**Types:** [`DecisionRequirementsSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionRequirementsSearchQuery), [`ApiSearchDecisionRequirementsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchDecisionRequirementsRequest), [`DecisionRequirementsSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#DecisionRequirementsSearchQueryResult)
+**Types:** [`DecisionRequirementsSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionRequirementsSearchQuery), [`ApiSearchDecisionRequirementsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchDecisionRequirementsRequest), [`DecisionRequirementsSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#DecisionRequirementsSearchQueryResult)
 
 SearchDecisionRequirements calls the SearchDecisionRequirements operation.
 
@@ -3943,7 +3952,7 @@ for _, d := range result.GetItems() {
 func (c *CamundaClient) SearchElementInstanceIncidents(ctx context.Context, elementInstanceKey ElementInstanceKey, body IncidentSearchQuery, opts ...func(ApiSearchElementInstanceIncidentsRequest) ApiSearchElementInstanceIncidentsRequest) (*IncidentSearchQueryResult, error)
 ```
 
-**Types:** [`ElementInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceKey), [`IncidentSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentSearchQuery), [`ApiSearchElementInstanceIncidentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchElementInstanceIncidentsRequest), [`IncidentSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentSearchQueryResult)
+**Types:** [`ElementInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceKey), [`IncidentSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentSearchQuery), [`ApiSearchElementInstanceIncidentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchElementInstanceIncidentsRequest), [`IncidentSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentSearchQueryResult)
 
 SearchElementInstanceIncidents calls the SearchElementInstanceIncidents operation.
 
@@ -3967,7 +3976,7 @@ for _, inc := range result.GetItems() {
 func (c *CamundaClient) SearchElementInstanceWaitStates(ctx context.Context, body ElementInstanceWaitStateQuery, opts ...func(ApiSearchElementInstanceWaitStatesRequest) ApiSearchElementInstanceWaitStatesRequest) (*ElementInstanceWaitStateQueryResult, error)
 ```
 
-**Types:** [`ElementInstanceWaitStateQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceWaitStateQuery), [`ApiSearchElementInstanceWaitStatesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchElementInstanceWaitStatesRequest), [`ElementInstanceWaitStateQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceWaitStateQueryResult)
+**Types:** [`ElementInstanceWaitStateQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceWaitStateQuery), [`ApiSearchElementInstanceWaitStatesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchElementInstanceWaitStatesRequest), [`ElementInstanceWaitStateQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceWaitStateQueryResult)
 
 SearchElementInstanceWaitStates calls the SearchElementInstanceWaitStates operation.
 
@@ -3987,7 +3996,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchElementInstances(ctx context.Context, body ElementInstanceSearchQuery, opts ...func(ApiSearchElementInstancesRequest) ApiSearchElementInstancesRequest) (*ElementInstanceSearchQueryResult, error)
 ```
 
-**Types:** [`ElementInstanceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceSearchQuery), [`ApiSearchElementInstancesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchElementInstancesRequest), [`ElementInstanceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ElementInstanceSearchQueryResult)
+**Types:** [`ElementInstanceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceSearchQuery), [`ApiSearchElementInstancesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchElementInstancesRequest), [`ElementInstanceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ElementInstanceSearchQueryResult)
 
 SearchElementInstances calls the SearchElementInstances operation.
 
@@ -4009,7 +4018,7 @@ for _, e := range result.GetItems() {
 func (c *CamundaClient) SearchGlobalTaskListeners(ctx context.Context, body GlobalTaskListenerSearchQueryRequest, opts ...func(ApiSearchGlobalTaskListenersRequest) ApiSearchGlobalTaskListenersRequest) (*GlobalTaskListenerSearchQueryResult, error)
 ```
 
-**Types:** [`GlobalTaskListenerSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GlobalTaskListenerSearchQueryRequest), [`ApiSearchGlobalTaskListenersRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchGlobalTaskListenersRequest), [`GlobalTaskListenerSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GlobalTaskListenerSearchQueryResult)
+**Types:** [`GlobalTaskListenerSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GlobalTaskListenerSearchQueryRequest), [`ApiSearchGlobalTaskListenersRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchGlobalTaskListenersRequest), [`GlobalTaskListenerSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GlobalTaskListenerSearchQueryResult)
 
 SearchGlobalTaskListeners calls the SearchGlobalTaskListeners operation.
 
@@ -4031,7 +4040,7 @@ for _, l := range result.GetItems() {
 func (c *CamundaClient) SearchGroupIdsForTenant(ctx context.Context, tenantId string, body TenantGroupSearchQueryRequest, opts ...func(ApiSearchGroupIdsForTenantRequest) ApiSearchGroupIdsForTenantRequest) (*TenantGroupSearchResult, error)
 ```
 
-**Types:** [`TenantGroupSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantGroupSearchQueryRequest), [`ApiSearchGroupIdsForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchGroupIdsForTenantRequest), [`TenantGroupSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantGroupSearchResult)
+**Types:** [`TenantGroupSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantGroupSearchQueryRequest), [`ApiSearchGroupIdsForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchGroupIdsForTenantRequest), [`TenantGroupSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantGroupSearchResult)
 
 SearchGroupIdsForTenant calls the SearchGroupIdsForTenant operation.
 
@@ -4051,7 +4060,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchGroups(ctx context.Context, body GroupSearchQueryRequest, opts ...func(ApiSearchGroupsRequest) ApiSearchGroupsRequest) (*GroupSearchQueryResult, error)
 ```
 
-**Types:** [`GroupSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupSearchQueryRequest), [`ApiSearchGroupsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchGroupsRequest), [`GroupSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupSearchQueryResult)
+**Types:** [`GroupSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupSearchQueryRequest), [`ApiSearchGroupsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchGroupsRequest), [`GroupSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupSearchQueryResult)
 
 SearchGroups calls the SearchGroups operation.
 
@@ -4073,7 +4082,7 @@ for _, g := range result.GetItems() {
 func (c *CamundaClient) SearchGroupsForRole(ctx context.Context, roleId string, body RoleGroupSearchQueryRequest, opts ...func(ApiSearchGroupsForRoleRequest) ApiSearchGroupsForRoleRequest) (*RoleGroupSearchResult, error)
 ```
 
-**Types:** [`RoleGroupSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleGroupSearchQueryRequest), [`ApiSearchGroupsForRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchGroupsForRoleRequest), [`RoleGroupSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleGroupSearchResult)
+**Types:** [`RoleGroupSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleGroupSearchQueryRequest), [`ApiSearchGroupsForRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchGroupsForRoleRequest), [`RoleGroupSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleGroupSearchResult)
 
 SearchGroupsForRole calls the SearchGroupsForRole operation.
 
@@ -4093,7 +4102,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchIncidents(ctx context.Context, body IncidentSearchQuery, opts ...func(ApiSearchIncidentsRequest) ApiSearchIncidentsRequest) (*IncidentSearchQueryResult, error)
 ```
 
-**Types:** [`IncidentSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentSearchQuery), [`ApiSearchIncidentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchIncidentsRequest), [`IncidentSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentSearchQueryResult)
+**Types:** [`IncidentSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentSearchQuery), [`ApiSearchIncidentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchIncidentsRequest), [`IncidentSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentSearchQueryResult)
 
 SearchIncidents calls the SearchIncidents operation.
 
@@ -4115,7 +4124,7 @@ for _, inc := range result.GetItems() {
 func (c *CamundaClient) SearchJobs(ctx context.Context, body JobSearchQuery, opts ...func(ApiSearchJobsRequest) ApiSearchJobsRequest) (*JobSearchQueryResult, error)
 ```
 
-**Types:** [`JobSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobSearchQuery), [`ApiSearchJobsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchJobsRequest), [`JobSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobSearchQueryResult)
+**Types:** [`JobSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobSearchQuery), [`ApiSearchJobsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchJobsRequest), [`JobSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobSearchQueryResult)
 
 SearchJobs calls the SearchJobs operation.
 
@@ -4137,7 +4146,7 @@ for _, job := range result.GetItems() {
 func (c *CamundaClient) SearchMappingRule(ctx context.Context, body MappingRuleSearchQueryRequest, opts ...func(ApiSearchMappingRuleRequest) ApiSearchMappingRuleRequest) (*MappingRuleSearchQueryResult, error)
 ```
 
-**Types:** [`MappingRuleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleSearchQueryRequest), [`ApiSearchMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchMappingRuleRequest), [`MappingRuleSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleSearchQueryResult)
+**Types:** [`MappingRuleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleSearchQueryRequest), [`ApiSearchMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchMappingRuleRequest), [`MappingRuleSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleSearchQueryResult)
 
 SearchMappingRule calls the SearchMappingRule operation.
 
@@ -4159,7 +4168,7 @@ for _, r := range result.GetItems() {
 func (c *CamundaClient) SearchMappingRulesForGroup(ctx context.Context, groupId string, body MappingRuleSearchQueryRequest, opts ...func(ApiSearchMappingRulesForGroupRequest) ApiSearchMappingRulesForGroupRequest) (*GroupMappingRuleSearchResult, error)
 ```
 
-**Types:** [`MappingRuleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleSearchQueryRequest), [`ApiSearchMappingRulesForGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchMappingRulesForGroupRequest), [`GroupMappingRuleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupMappingRuleSearchResult)
+**Types:** [`MappingRuleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleSearchQueryRequest), [`ApiSearchMappingRulesForGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchMappingRulesForGroupRequest), [`GroupMappingRuleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupMappingRuleSearchResult)
 
 SearchMappingRulesForGroup calls the SearchMappingRulesForGroup operation.
 
@@ -4179,7 +4188,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchMappingRulesForRole(ctx context.Context, roleId string, body MappingRuleSearchQueryRequest, opts ...func(ApiSearchMappingRulesForRoleRequest) ApiSearchMappingRulesForRoleRequest) (*RoleMappingRuleSearchResult, error)
 ```
 
-**Types:** [`MappingRuleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleSearchQueryRequest), [`ApiSearchMappingRulesForRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchMappingRulesForRoleRequest), [`RoleMappingRuleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleMappingRuleSearchResult)
+**Types:** [`MappingRuleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleSearchQueryRequest), [`ApiSearchMappingRulesForRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchMappingRulesForRoleRequest), [`RoleMappingRuleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleMappingRuleSearchResult)
 
 SearchMappingRulesForRole calls the SearchMappingRulesForRole operation.
 
@@ -4199,7 +4208,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchMappingRulesForTenant(ctx context.Context, tenantId string, body MappingRuleSearchQueryRequest, opts ...func(ApiSearchMappingRulesForTenantRequest) ApiSearchMappingRulesForTenantRequest) (*TenantMappingRuleSearchResult, error)
 ```
 
-**Types:** [`MappingRuleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleSearchQueryRequest), [`ApiSearchMappingRulesForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchMappingRulesForTenantRequest), [`TenantMappingRuleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantMappingRuleSearchResult)
+**Types:** [`MappingRuleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleSearchQueryRequest), [`ApiSearchMappingRulesForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchMappingRulesForTenantRequest), [`TenantMappingRuleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantMappingRuleSearchResult)
 
 SearchMappingRulesForTenant calls the SearchMappingRulesForTenant operation.
 
@@ -4219,7 +4228,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchMessageSubscriptions(ctx context.Context, body MessageSubscriptionSearchQuery, opts ...func(ApiSearchMessageSubscriptionsRequest) ApiSearchMessageSubscriptionsRequest) (*MessageSubscriptionSearchQueryResult, error)
 ```
 
-**Types:** [`MessageSubscriptionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MessageSubscriptionSearchQuery), [`ApiSearchMessageSubscriptionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchMessageSubscriptionsRequest), [`MessageSubscriptionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MessageSubscriptionSearchQueryResult)
+**Types:** [`MessageSubscriptionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MessageSubscriptionSearchQuery), [`ApiSearchMessageSubscriptionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchMessageSubscriptionsRequest), [`MessageSubscriptionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MessageSubscriptionSearchQueryResult)
 
 SearchMessageSubscriptions calls the SearchMessageSubscriptions operation.
 
@@ -4241,7 +4250,7 @@ for _, s := range result.GetItems() {
 func (c *CamundaClient) SearchOwnAuthorizations(ctx context.Context, body AuthorizationSearchQuery, opts ...func(ApiSearchOwnAuthorizationsRequest) ApiSearchOwnAuthorizationsRequest) (*OwnAuthorizationSearchResult, error)
 ```
 
-**Types:** [`AuthorizationSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationSearchQuery), [`ApiSearchOwnAuthorizationsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchOwnAuthorizationsRequest), [`OwnAuthorizationSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#OwnAuthorizationSearchResult)
+**Types:** [`AuthorizationSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationSearchQuery), [`ApiSearchOwnAuthorizationsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchOwnAuthorizationsRequest), [`OwnAuthorizationSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#OwnAuthorizationSearchResult)
 
 SearchOwnAuthorizations calls the SearchOwnAuthorizations operation.
 
@@ -4265,7 +4274,7 @@ for _, a := range result.GetItems() {
 func (c *CamundaClient) SearchProcessDefinitionVariableNames(ctx context.Context, processDefinitionKey ProcessDefinitionKey, body ProcessDefinitionVariableNameSearchQuery, opts ...func(ApiSearchProcessDefinitionVariableNamesRequest) ApiSearchProcessDefinitionVariableNamesRequest) (*ProcessDefinitionVariableNameSearchQueryResult, error)
 ```
 
-**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionKey), [`ProcessDefinitionVariableNameSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionVariableNameSearchQuery), [`ApiSearchProcessDefinitionVariableNamesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchProcessDefinitionVariableNamesRequest), [`ProcessDefinitionVariableNameSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionVariableNameSearchQueryResult)
+**Types:** [`ProcessDefinitionKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionKey), [`ProcessDefinitionVariableNameSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionVariableNameSearchQuery), [`ApiSearchProcessDefinitionVariableNamesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchProcessDefinitionVariableNamesRequest), [`ProcessDefinitionVariableNameSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionVariableNameSearchQueryResult)
 
 SearchProcessDefinitionVariableNames calls the SearchProcessDefinitionVariableNames operation.
 
@@ -4287,7 +4296,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchProcessDefinitions(ctx context.Context, body ProcessDefinitionSearchQuery, opts ...func(ApiSearchProcessDefinitionsRequest) ApiSearchProcessDefinitionsRequest) (*ProcessDefinitionSearchQueryResult, error)
 ```
 
-**Types:** [`ProcessDefinitionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionSearchQuery), [`ApiSearchProcessDefinitionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchProcessDefinitionsRequest), [`ProcessDefinitionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessDefinitionSearchQueryResult)
+**Types:** [`ProcessDefinitionSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionSearchQuery), [`ApiSearchProcessDefinitionsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchProcessDefinitionsRequest), [`ProcessDefinitionSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessDefinitionSearchQueryResult)
 
 SearchProcessDefinitions calls the SearchProcessDefinitions operation.
 
@@ -4309,7 +4318,7 @@ for _, d := range result.GetItems() {
 func (c *CamundaClient) SearchProcessInstanceIncidents(ctx context.Context, processInstanceKey ProcessInstanceKey, body IncidentSearchQuery, opts ...func(ApiSearchProcessInstanceIncidentsRequest) ApiSearchProcessInstanceIncidentsRequest) (*IncidentSearchQueryResult, error)
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`IncidentSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentSearchQuery), [`ApiSearchProcessInstanceIncidentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchProcessInstanceIncidentsRequest), [`IncidentSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#IncidentSearchQueryResult)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`IncidentSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentSearchQuery), [`ApiSearchProcessInstanceIncidentsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchProcessInstanceIncidentsRequest), [`IncidentSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#IncidentSearchQueryResult)
 
 SearchProcessInstanceIncidents calls the SearchProcessInstanceIncidents operation.
 
@@ -4333,7 +4342,7 @@ for _, inc := range result.GetItems() {
 func (c *CamundaClient) SearchProcessInstances(ctx context.Context, body ProcessInstanceSearchQuery, opts ...func(ApiSearchProcessInstancesRequest) ApiSearchProcessInstancesRequest) (*ProcessInstanceSearchQueryResult, error)
 ```
 
-**Types:** [`ProcessInstanceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceSearchQuery), [`ApiSearchProcessInstancesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchProcessInstancesRequest), [`ProcessInstanceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceSearchQueryResult)
+**Types:** [`ProcessInstanceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceSearchQuery), [`ApiSearchProcessInstancesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchProcessInstancesRequest), [`ProcessInstanceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceSearchQueryResult)
 
 SearchProcessInstances calls the SearchProcessInstances operation.
 
@@ -4355,7 +4364,7 @@ for _, pi := range result.GetItems() {
 func (c *CamundaClient) SearchResources(ctx context.Context, body ResourceSearchQuery, opts ...func(ApiSearchResourcesRequest) ApiSearchResourcesRequest) (*ResourceSearchQueryResult, error)
 ```
 
-**Types:** [`ResourceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ResourceSearchQuery), [`ApiSearchResourcesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchResourcesRequest), [`ResourceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ResourceSearchQueryResult)
+**Types:** [`ResourceSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ResourceSearchQuery), [`ApiSearchResourcesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchResourcesRequest), [`ResourceSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ResourceSearchQueryResult)
 
 SearchResources calls the SearchResources operation.
 
@@ -4377,7 +4386,7 @@ for _, r := range result.GetItems() {
 func (c *CamundaClient) SearchRoles(ctx context.Context, body RoleSearchQueryRequest, opts ...func(ApiSearchRolesRequest) ApiSearchRolesRequest) (*RoleSearchQueryResult, error)
 ```
 
-**Types:** [`RoleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleSearchQueryRequest), [`ApiSearchRolesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchRolesRequest), [`RoleSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleSearchQueryResult)
+**Types:** [`RoleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleSearchQueryRequest), [`ApiSearchRolesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchRolesRequest), [`RoleSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleSearchQueryResult)
 
 SearchRoles calls the SearchRoles operation.
 
@@ -4399,7 +4408,7 @@ for _, r := range result.GetItems() {
 func (c *CamundaClient) SearchRolesForGroup(ctx context.Context, groupId string, body RoleSearchQueryRequest, opts ...func(ApiSearchRolesForGroupRequest) ApiSearchRolesForGroupRequest) (*GroupRoleSearchResult, error)
 ```
 
-**Types:** [`RoleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleSearchQueryRequest), [`ApiSearchRolesForGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchRolesForGroupRequest), [`GroupRoleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupRoleSearchResult)
+**Types:** [`RoleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleSearchQueryRequest), [`ApiSearchRolesForGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchRolesForGroupRequest), [`GroupRoleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupRoleSearchResult)
 
 SearchRolesForGroup calls the SearchRolesForGroup operation.
 
@@ -4419,7 +4428,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchRolesForTenant(ctx context.Context, tenantId string, body RoleSearchQueryRequest, opts ...func(ApiSearchRolesForTenantRequest) ApiSearchRolesForTenantRequest) (*TenantRoleSearchResult, error)
 ```
 
-**Types:** [`RoleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleSearchQueryRequest), [`ApiSearchRolesForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchRolesForTenantRequest), [`TenantRoleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantRoleSearchResult)
+**Types:** [`RoleSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleSearchQueryRequest), [`ApiSearchRolesForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchRolesForTenantRequest), [`TenantRoleSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantRoleSearchResult)
 
 SearchRolesForTenant calls the SearchRolesForTenant operation.
 
@@ -4439,7 +4448,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchTenants(ctx context.Context, body TenantSearchQueryRequest, opts ...func(ApiSearchTenantsRequest) ApiSearchTenantsRequest) (*TenantSearchQueryResult, error)
 ```
 
-**Types:** [`TenantSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantSearchQueryRequest), [`ApiSearchTenantsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchTenantsRequest), [`TenantSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantSearchQueryResult)
+**Types:** [`TenantSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantSearchQueryRequest), [`ApiSearchTenantsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchTenantsRequest), [`TenantSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantSearchQueryResult)
 
 SearchTenants calls the SearchTenants operation.
 
@@ -4461,7 +4470,7 @@ for _, t := range result.GetItems() {
 func (c *CamundaClient) SearchUserTaskAuditLogs(ctx context.Context, userTaskKey UserTaskKey, body UserTaskAuditLogSearchQueryRequest, opts ...func(ApiSearchUserTaskAuditLogsRequest) ApiSearchUserTaskAuditLogsRequest) (*AuditLogSearchQueryResult, error)
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`UserTaskAuditLogSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskAuditLogSearchQueryRequest), [`ApiSearchUserTaskAuditLogsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchUserTaskAuditLogsRequest), [`AuditLogSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuditLogSearchQueryResult)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`UserTaskAuditLogSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskAuditLogSearchQueryRequest), [`ApiSearchUserTaskAuditLogsRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchUserTaskAuditLogsRequest), [`AuditLogSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuditLogSearchQueryResult)
 
 SearchUserTaskAuditLogs calls the SearchUserTaskAuditLogs operation.
 
@@ -4483,7 +4492,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchUserTaskEffectiveVariables(ctx context.Context, userTaskKey UserTaskKey, body UserTaskEffectiveVariableSearchQueryRequest, opts ...func(ApiSearchUserTaskEffectiveVariablesRequest) ApiSearchUserTaskEffectiveVariablesRequest) (*VariableSearchQueryResult, error)
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`UserTaskEffectiveVariableSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskEffectiveVariableSearchQueryRequest), [`ApiSearchUserTaskEffectiveVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchUserTaskEffectiveVariablesRequest), [`VariableSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#VariableSearchQueryResult)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`UserTaskEffectiveVariableSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskEffectiveVariableSearchQueryRequest), [`ApiSearchUserTaskEffectiveVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchUserTaskEffectiveVariablesRequest), [`VariableSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#VariableSearchQueryResult)
 
 SearchUserTaskEffectiveVariables calls the SearchUserTaskEffectiveVariables operation.
 
@@ -4505,7 +4514,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchUserTaskVariables(ctx context.Context, userTaskKey UserTaskKey, body UserTaskVariableSearchQueryRequest, opts ...func(ApiSearchUserTaskVariablesRequest) ApiSearchUserTaskVariablesRequest) (*VariableSearchQueryResult, error)
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`UserTaskVariableSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskVariableSearchQueryRequest), [`ApiSearchUserTaskVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchUserTaskVariablesRequest), [`VariableSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#VariableSearchQueryResult)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`UserTaskVariableSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskVariableSearchQueryRequest), [`ApiSearchUserTaskVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchUserTaskVariablesRequest), [`VariableSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#VariableSearchQueryResult)
 
 SearchUserTaskVariables calls the SearchUserTaskVariables operation.
 
@@ -4527,7 +4536,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchUserTasks(ctx context.Context, body UserTaskSearchQuery, opts ...func(ApiSearchUserTasksRequest) ApiSearchUserTasksRequest) (*UserTaskSearchQueryResult, error)
 ```
 
-**Types:** [`UserTaskSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskSearchQuery), [`ApiSearchUserTasksRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchUserTasksRequest), [`UserTaskSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskSearchQueryResult)
+**Types:** [`UserTaskSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskSearchQuery), [`ApiSearchUserTasksRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchUserTasksRequest), [`UserTaskSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskSearchQueryResult)
 
 SearchUserTasks calls the SearchUserTasks operation.
 
@@ -4549,7 +4558,7 @@ for _, t := range result.GetItems() {
 func (c *CamundaClient) SearchUsers(ctx context.Context, body UserSearchQueryRequest, opts ...func(ApiSearchUsersRequest) ApiSearchUsersRequest) (*UserSearchResult, error)
 ```
 
-**Types:** [`UserSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserSearchQueryRequest), [`ApiSearchUsersRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchUsersRequest), [`UserSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserSearchResult)
+**Types:** [`UserSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserSearchQueryRequest), [`ApiSearchUsersRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchUsersRequest), [`UserSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserSearchResult)
 
 SearchUsers calls the SearchUsers operation.
 
@@ -4571,7 +4580,7 @@ for _, u := range result.GetItems() {
 func (c *CamundaClient) SearchUsersForGroup(ctx context.Context, groupId string, body GroupUserSearchQueryRequest, opts ...func(ApiSearchUsersForGroupRequest) ApiSearchUsersForGroupRequest) (*GroupUserSearchResult, error)
 ```
 
-**Types:** [`GroupUserSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupUserSearchQueryRequest), [`ApiSearchUsersForGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchUsersForGroupRequest), [`GroupUserSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupUserSearchResult)
+**Types:** [`GroupUserSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupUserSearchQueryRequest), [`ApiSearchUsersForGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchUsersForGroupRequest), [`GroupUserSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupUserSearchResult)
 
 SearchUsersForGroup calls the SearchUsersForGroup operation.
 
@@ -4591,7 +4600,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchUsersForRole(ctx context.Context, roleId string, body RoleUserSearchQueryRequest, opts ...func(ApiSearchUsersForRoleRequest) ApiSearchUsersForRoleRequest) (*RoleUserSearchResult, error)
 ```
 
-**Types:** [`RoleUserSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleUserSearchQueryRequest), [`ApiSearchUsersForRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchUsersForRoleRequest), [`RoleUserSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleUserSearchResult)
+**Types:** [`RoleUserSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleUserSearchQueryRequest), [`ApiSearchUsersForRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchUsersForRoleRequest), [`RoleUserSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleUserSearchResult)
 
 SearchUsersForRole calls the SearchUsersForRole operation.
 
@@ -4611,7 +4620,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchUsersForTenant(ctx context.Context, tenantId string, body TenantUserSearchQueryRequest, opts ...func(ApiSearchUsersForTenantRequest) ApiSearchUsersForTenantRequest) (*TenantUserSearchResult, error)
 ```
 
-**Types:** [`TenantUserSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantUserSearchQueryRequest), [`ApiSearchUsersForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchUsersForTenantRequest), [`TenantUserSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantUserSearchResult)
+**Types:** [`TenantUserSearchQueryRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantUserSearchQueryRequest), [`ApiSearchUsersForTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchUsersForTenantRequest), [`TenantUserSearchResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantUserSearchResult)
 
 SearchUsersForTenant calls the SearchUsersForTenant operation.
 
@@ -4631,7 +4640,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) SearchVariables(ctx context.Context, body VariableSearchQuery, opts ...func(ApiSearchVariablesRequest) ApiSearchVariablesRequest) (*VariableSearchQueryResult, error)
 ```
 
-**Types:** [`VariableSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#VariableSearchQuery), [`ApiSearchVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSearchVariablesRequest), [`VariableSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#VariableSearchQueryResult)
+**Types:** [`VariableSearchQuery`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#VariableSearchQuery), [`ApiSearchVariablesRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSearchVariablesRequest), [`VariableSearchQueryResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#VariableSearchQueryResult)
 
 SearchVariables calls the SearchVariables operation.
 
@@ -4653,7 +4662,7 @@ for _, v := range result.GetItems() {
 func (c *CamundaClient) SuspendBatchOperation(ctx context.Context, batchOperationKey string, opts ...func(ApiSuspendBatchOperationRequest) ApiSuspendBatchOperationRequest) error
 ```
 
-**Types:** [`ApiSuspendBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSuspendBatchOperationRequest)
+**Types:** [`ApiSuspendBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSuspendBatchOperationRequest)
 
 SuspendBatchOperation calls the SuspendBatchOperation operation.
 
@@ -4669,7 +4678,7 @@ return client.SuspendBatchOperation(ctx, "2251799813685290")
 func (c *CamundaClient) SuspendProcessInstance(ctx context.Context, processInstanceKey ProcessInstanceKey, body SuspendProcessInstanceRequest, opts ...func(ApiSuspendProcessInstanceRequest) ApiSuspendProcessInstanceRequest) error
 ```
 
-**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceKey), [`SuspendProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#SuspendProcessInstanceRequest), [`ApiSuspendProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSuspendProcessInstanceRequest)
+**Types:** [`ProcessInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceKey), [`SuspendProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#SuspendProcessInstanceRequest), [`ApiSuspendProcessInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSuspendProcessInstanceRequest)
 
 SuspendProcessInstance calls the SuspendProcessInstance operation.
 
@@ -4687,7 +4696,7 @@ return client.SuspendProcessInstance(ctx,
 func (c *CamundaClient) SuspendProcessInstancesBatchOperation(ctx context.Context, body ProcessInstanceSuspensionBatchOperationRequest, opts ...func(ApiSuspendProcessInstancesBatchOperationRequest) ApiSuspendProcessInstancesBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`ProcessInstanceSuspensionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ProcessInstanceSuspensionBatchOperationRequest), [`ApiSuspendProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSuspendProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`ProcessInstanceSuspensionBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ProcessInstanceSuspensionBatchOperationRequest), [`ApiSuspendProcessInstancesBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSuspendProcessInstancesBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 SuspendProcessInstancesBatchOperation calls the SuspendProcessInstancesBatchOperation operation.
 
@@ -4710,7 +4719,7 @@ fmt.Printf("created batch operation %v\n", result.GetBatchOperationKey())
 func (c *CamundaClient) SyncRuntimeBackupState(ctx context.Context, opts ...func(ApiSyncRuntimeBackupStateRequest) ApiSyncRuntimeBackupStateRequest) (*RuntimeBackupState, error)
 ```
 
-**Types:** [`ApiSyncRuntimeBackupStateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSyncRuntimeBackupStateRequest), [`RuntimeBackupState`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RuntimeBackupState)
+**Types:** [`ApiSyncRuntimeBackupStateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSyncRuntimeBackupStateRequest), [`RuntimeBackupState`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RuntimeBackupState)
 
 SyncRuntimeBackupState calls the SyncRuntimeBackupState operation.
 
@@ -4733,7 +4742,7 @@ for _, backup := range state.GetBackupStates() {
 func (c *CamundaClient) SyncRuntimeBackupStateAsClusterAdmin(ctx context.Context, opts ...func(ApiSyncRuntimeBackupStateAsClusterAdminRequest) ApiSyncRuntimeBackupStateAsClusterAdminRequest) (*ClusterRuntimeBackupState, error)
 ```
 
-**Types:** [`ApiSyncRuntimeBackupStateAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiSyncRuntimeBackupStateAsClusterAdminRequest), [`ClusterRuntimeBackupState`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterRuntimeBackupState)
+**Types:** [`ApiSyncRuntimeBackupStateAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiSyncRuntimeBackupStateAsClusterAdminRequest), [`ClusterRuntimeBackupState`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterRuntimeBackupState)
 
 SyncRuntimeBackupStateAsClusterAdmin calls the SyncRuntimeBackupStateAsClusterAdmin operation.
 
@@ -4758,7 +4767,7 @@ for _, tenant := range state.GetPhysicalTenants() {
 func (c *CamundaClient) TakeHistoryBackup(ctx context.Context, body TakeHistoryBackupRequest, opts ...func(ApiTakeHistoryBackupRequest) ApiTakeHistoryBackupRequest) (*TakeHistoryBackupResponse, error)
 ```
 
-**Types:** [`TakeHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TakeHistoryBackupRequest), [`ApiTakeHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiTakeHistoryBackupRequest), [`TakeHistoryBackupResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TakeHistoryBackupResponse)
+**Types:** [`TakeHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TakeHistoryBackupRequest), [`ApiTakeHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiTakeHistoryBackupRequest), [`TakeHistoryBackupResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TakeHistoryBackupResponse)
 
 TakeHistoryBackup calls the TakeHistoryBackup operation.
 
@@ -4778,7 +4787,7 @@ fmt.Printf("backup %d scheduled %d snapshot(s)\n", result.GetBackupId(), len(res
 func (c *CamundaClient) TakeHistoryBackupAsClusterAdmin(ctx context.Context, body TakeHistoryBackupRequest, opts ...func(ApiTakeHistoryBackupAsClusterAdminRequest) ApiTakeHistoryBackupAsClusterAdminRequest) (*ClusterTakeHistoryBackupResponse, error)
 ```
 
-**Types:** [`TakeHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TakeHistoryBackupRequest), [`ApiTakeHistoryBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiTakeHistoryBackupAsClusterAdminRequest), [`ClusterTakeHistoryBackupResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterTakeHistoryBackupResponse)
+**Types:** [`TakeHistoryBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TakeHistoryBackupRequest), [`ApiTakeHistoryBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiTakeHistoryBackupAsClusterAdminRequest), [`ClusterTakeHistoryBackupResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterTakeHistoryBackupResponse)
 
 TakeHistoryBackupAsClusterAdmin calls the TakeHistoryBackupAsClusterAdmin operation.
 
@@ -4799,7 +4808,7 @@ fmt.Printf("cluster history backup %d across %d tenant(s)\n", result.GetBackupId
 func (c *CamundaClient) TakeRuntimeBackup(ctx context.Context, body TakeRuntimeBackupRequest, opts ...func(ApiTakeRuntimeBackupRequest) ApiTakeRuntimeBackupRequest) (*TakeRuntimeBackupResponse, error)
 ```
 
-**Types:** [`TakeRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TakeRuntimeBackupRequest), [`ApiTakeRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiTakeRuntimeBackupRequest), [`TakeRuntimeBackupResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TakeRuntimeBackupResponse)
+**Types:** [`TakeRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TakeRuntimeBackupRequest), [`ApiTakeRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiTakeRuntimeBackupRequest), [`TakeRuntimeBackupResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TakeRuntimeBackupResponse)
 
 TakeRuntimeBackup calls the TakeRuntimeBackup operation.
 
@@ -4825,7 +4834,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) TakeRuntimeBackupAsClusterAdmin(ctx context.Context, body TakeRuntimeBackupRequest, opts ...func(ApiTakeRuntimeBackupAsClusterAdminRequest) ApiTakeRuntimeBackupAsClusterAdminRequest) (*ClusterTakeRuntimeBackupResponse, error)
 ```
 
-**Types:** [`TakeRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TakeRuntimeBackupRequest), [`ApiTakeRuntimeBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiTakeRuntimeBackupAsClusterAdminRequest), [`ClusterTakeRuntimeBackupResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterTakeRuntimeBackupResponse)
+**Types:** [`TakeRuntimeBackupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TakeRuntimeBackupRequest), [`ApiTakeRuntimeBackupAsClusterAdminRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiTakeRuntimeBackupAsClusterAdminRequest), [`ClusterTakeRuntimeBackupResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterTakeRuntimeBackupResponse)
 
 TakeRuntimeBackupAsClusterAdmin calls the TakeRuntimeBackupAsClusterAdmin operation.
 
@@ -4854,7 +4863,7 @@ for _, tenant := range result.GetPhysicalTenants() {
 func (c *CamundaClient) ThrowJobError(ctx context.Context, jobKey JobKey, body JobErrorRequest, opts ...func(ApiThrowJobErrorRequest) ApiThrowJobErrorRequest) error
 ```
 
-**Types:** [`JobKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobKey), [`JobErrorRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobErrorRequest), [`ApiThrowJobErrorRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiThrowJobErrorRequest)
+**Types:** [`JobKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobKey), [`JobErrorRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobErrorRequest), [`ApiThrowJobErrorRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiThrowJobErrorRequest)
 
 ThrowJobError calls the ThrowJobError operation.
 
@@ -4873,7 +4882,7 @@ return client.ThrowJobError(ctx, camunda.MustJobKey("2251799813685424"), *req)
 func (c *CamundaClient) TriggerClusterRebalance(ctx context.Context, body ClusterRebalanceRequest, opts ...func(ApiTriggerClusterRebalanceRequest) ApiTriggerClusterRebalanceRequest) (*ClusterBalanceResponse, error)
 ```
 
-**Types:** [`ClusterRebalanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterRebalanceRequest), [`ApiTriggerClusterRebalanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiTriggerClusterRebalanceRequest), [`ClusterBalanceResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterBalanceResponse)
+**Types:** [`ClusterRebalanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterRebalanceRequest), [`ApiTriggerClusterRebalanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiTriggerClusterRebalanceRequest), [`ClusterBalanceResponse`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterBalanceResponse)
 
 TriggerClusterRebalance calls the TriggerClusterRebalance operation.
 
@@ -4899,7 +4908,7 @@ fmt.Printf("cluster balance state: %s, %d partition(s)\n", balance.GetState(), l
 func (c *CamundaClient) UnassignClientFromGroup(ctx context.Context, groupId string, clientId string, opts ...func(ApiUnassignClientFromGroupRequest) ApiUnassignClientFromGroupRequest) error
 ```
 
-**Types:** [`ApiUnassignClientFromGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignClientFromGroupRequest)
+**Types:** [`ApiUnassignClientFromGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignClientFromGroupRequest)
 
 UnassignClientFromGroup calls the UnassignClientFromGroup operation.
 
@@ -4915,7 +4924,7 @@ return client.UnassignClientFromGroup(ctx, "finance", "reporting-service")
 func (c *CamundaClient) UnassignClientFromTenant(ctx context.Context, tenantId string, clientId string, opts ...func(ApiUnassignClientFromTenantRequest) ApiUnassignClientFromTenantRequest) error
 ```
 
-**Types:** [`ApiUnassignClientFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignClientFromTenantRequest)
+**Types:** [`ApiUnassignClientFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignClientFromTenantRequest)
 
 UnassignClientFromTenant calls the UnassignClientFromTenant operation.
 
@@ -4931,7 +4940,7 @@ return client.UnassignClientFromTenant(ctx, "tenant-a", "reporting-service")
 func (c *CamundaClient) UnassignGroupFromTenant(ctx context.Context, tenantId string, groupId string, opts ...func(ApiUnassignGroupFromTenantRequest) ApiUnassignGroupFromTenantRequest) error
 ```
 
-**Types:** [`ApiUnassignGroupFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignGroupFromTenantRequest)
+**Types:** [`ApiUnassignGroupFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignGroupFromTenantRequest)
 
 UnassignGroupFromTenant calls the UnassignGroupFromTenant operation.
 
@@ -4947,7 +4956,7 @@ return client.UnassignGroupFromTenant(ctx, "tenant-a", "finance")
 func (c *CamundaClient) UnassignMappingRuleFromGroup(ctx context.Context, groupId string, mappingRuleId string, opts ...func(ApiUnassignMappingRuleFromGroupRequest) ApiUnassignMappingRuleFromGroupRequest) error
 ```
 
-**Types:** [`ApiUnassignMappingRuleFromGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignMappingRuleFromGroupRequest)
+**Types:** [`ApiUnassignMappingRuleFromGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignMappingRuleFromGroupRequest)
 
 UnassignMappingRuleFromGroup calls the UnassignMappingRuleFromGroup operation.
 
@@ -4963,7 +4972,7 @@ return client.UnassignMappingRuleFromGroup(ctx, "finance", "sso-auditors")
 func (c *CamundaClient) UnassignMappingRuleFromTenant(ctx context.Context, tenantId string, mappingRuleId string, opts ...func(ApiUnassignMappingRuleFromTenantRequest) ApiUnassignMappingRuleFromTenantRequest) error
 ```
 
-**Types:** [`ApiUnassignMappingRuleFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignMappingRuleFromTenantRequest)
+**Types:** [`ApiUnassignMappingRuleFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignMappingRuleFromTenantRequest)
 
 UnassignMappingRuleFromTenant calls the UnassignMappingRuleFromTenant operation.
 
@@ -4979,7 +4988,7 @@ return client.UnassignMappingRuleFromTenant(ctx, "tenant-a", "sso-auditors")
 func (c *CamundaClient) UnassignRoleFromClient(ctx context.Context, roleId string, clientId string, opts ...func(ApiUnassignRoleFromClientRequest) ApiUnassignRoleFromClientRequest) error
 ```
 
-**Types:** [`ApiUnassignRoleFromClientRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignRoleFromClientRequest)
+**Types:** [`ApiUnassignRoleFromClientRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignRoleFromClientRequest)
 
 UnassignRoleFromClient calls the UnassignRoleFromClient operation.
 
@@ -4995,7 +5004,7 @@ return client.UnassignRoleFromClient(ctx, "auditor", "reporting-service")
 func (c *CamundaClient) UnassignRoleFromGroup(ctx context.Context, roleId string, groupId string, opts ...func(ApiUnassignRoleFromGroupRequest) ApiUnassignRoleFromGroupRequest) error
 ```
 
-**Types:** [`ApiUnassignRoleFromGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignRoleFromGroupRequest)
+**Types:** [`ApiUnassignRoleFromGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignRoleFromGroupRequest)
 
 UnassignRoleFromGroup calls the UnassignRoleFromGroup operation.
 
@@ -5011,7 +5020,7 @@ return client.UnassignRoleFromGroup(ctx, "auditor", "finance")
 func (c *CamundaClient) UnassignRoleFromMappingRule(ctx context.Context, roleId string, mappingRuleId string, opts ...func(ApiUnassignRoleFromMappingRuleRequest) ApiUnassignRoleFromMappingRuleRequest) error
 ```
 
-**Types:** [`ApiUnassignRoleFromMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignRoleFromMappingRuleRequest)
+**Types:** [`ApiUnassignRoleFromMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignRoleFromMappingRuleRequest)
 
 UnassignRoleFromMappingRule calls the UnassignRoleFromMappingRule operation.
 
@@ -5027,7 +5036,7 @@ return client.UnassignRoleFromMappingRule(ctx, "auditor", "sso-auditors")
 func (c *CamundaClient) UnassignRoleFromTenant(ctx context.Context, tenantId string, roleId string, opts ...func(ApiUnassignRoleFromTenantRequest) ApiUnassignRoleFromTenantRequest) error
 ```
 
-**Types:** [`ApiUnassignRoleFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignRoleFromTenantRequest)
+**Types:** [`ApiUnassignRoleFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignRoleFromTenantRequest)
 
 UnassignRoleFromTenant calls the UnassignRoleFromTenant operation.
 
@@ -5043,7 +5052,7 @@ return client.UnassignRoleFromTenant(ctx, "tenant-a", "auditor")
 func (c *CamundaClient) UnassignRoleFromUser(ctx context.Context, roleId string, username string, opts ...func(ApiUnassignRoleFromUserRequest) ApiUnassignRoleFromUserRequest) error
 ```
 
-**Types:** [`ApiUnassignRoleFromUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignRoleFromUserRequest)
+**Types:** [`ApiUnassignRoleFromUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignRoleFromUserRequest)
 
 UnassignRoleFromUser calls the UnassignRoleFromUser operation.
 
@@ -5059,7 +5068,7 @@ return client.UnassignRoleFromUser(ctx, "auditor", "alice")
 func (c *CamundaClient) UnassignUserFromGroup(ctx context.Context, groupId string, username string, opts ...func(ApiUnassignUserFromGroupRequest) ApiUnassignUserFromGroupRequest) error
 ```
 
-**Types:** [`ApiUnassignUserFromGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignUserFromGroupRequest)
+**Types:** [`ApiUnassignUserFromGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignUserFromGroupRequest)
 
 UnassignUserFromGroup calls the UnassignUserFromGroup operation.
 
@@ -5075,7 +5084,7 @@ return client.UnassignUserFromGroup(ctx, "finance", "alice")
 func (c *CamundaClient) UnassignUserFromTenant(ctx context.Context, tenantId string, username string, opts ...func(ApiUnassignUserFromTenantRequest) ApiUnassignUserFromTenantRequest) error
 ```
 
-**Types:** [`ApiUnassignUserFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignUserFromTenantRequest)
+**Types:** [`ApiUnassignUserFromTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignUserFromTenantRequest)
 
 UnassignUserFromTenant calls the UnassignUserFromTenant operation.
 
@@ -5091,7 +5100,7 @@ return client.UnassignUserFromTenant(ctx, "tenant-a", "alice")
 func (c *CamundaClient) UnassignUserTask(ctx context.Context, userTaskKey UserTaskKey, opts ...func(ApiUnassignUserTaskRequest) ApiUnassignUserTaskRequest) error
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`ApiUnassignUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUnassignUserTaskRequest)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`ApiUnassignUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUnassignUserTaskRequest)
 
 UnassignUserTask calls the UnassignUserTask operation.
 
@@ -5107,7 +5116,7 @@ return client.UnassignUserTask(ctx, camunda.MustUserTaskKey("2251799813685380"))
 func (c *CamundaClient) UpdateAgentInstance(ctx context.Context, agentInstanceKey AgentInstanceKey, body AgentInstanceUpdateRequest, opts ...func(ApiUpdateAgentInstanceRequest) ApiUpdateAgentInstanceRequest) (*AgentInstanceUpdateResult, error)
 ```
 
-**Types:** [`AgentInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceKey), [`AgentInstanceUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceUpdateRequest), [`ApiUpdateAgentInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateAgentInstanceRequest), [`AgentInstanceUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AgentInstanceUpdateResult)
+**Types:** [`AgentInstanceKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceKey), [`AgentInstanceUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceUpdateRequest), [`ApiUpdateAgentInstanceRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateAgentInstanceRequest), [`AgentInstanceUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AgentInstanceUpdateResult)
 
 UpdateAgentInstance calls the UpdateAgentInstance operation.
 
@@ -5133,7 +5142,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateAuthorization(ctx context.Context, authorizationKey AuthorizationKey, body AuthorizationRequest, opts ...func(ApiUpdateAuthorizationRequest) ApiUpdateAuthorizationRequest) error
 ```
 
-**Types:** [`AuthorizationKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationKey), [`AuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#AuthorizationRequest), [`ApiUpdateAuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateAuthorizationRequest)
+**Types:** [`AuthorizationKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationKey), [`AuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#AuthorizationRequest), [`ApiUpdateAuthorizationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateAuthorizationRequest)
 
 UpdateAuthorization calls the UpdateAuthorization operation.
 
@@ -5159,7 +5168,7 @@ return client.UpdateAuthorization(ctx,
 func (c *CamundaClient) UpdateGlobalClusterVariable(ctx context.Context, name string, body UpdateClusterVariableRequest, opts ...func(ApiUpdateGlobalClusterVariableRequest) ApiUpdateGlobalClusterVariableRequest) (*ClusterVariableResult, error)
 ```
 
-**Types:** [`UpdateClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UpdateClusterVariableRequest), [`ApiUpdateGlobalClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateGlobalClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterVariableResult)
+**Types:** [`UpdateClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UpdateClusterVariableRequest), [`ApiUpdateGlobalClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateGlobalClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterVariableResult)
 
 UpdateGlobalClusterVariable calls the UpdateGlobalClusterVariable operation.
 
@@ -5180,7 +5189,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateGlobalTaskListener(ctx context.Context, id string, body UpdateGlobalTaskListenerRequest, opts ...func(ApiUpdateGlobalTaskListenerRequest) ApiUpdateGlobalTaskListenerRequest) (*GlobalTaskListenerResult, error)
 ```
 
-**Types:** [`UpdateGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UpdateGlobalTaskListenerRequest), [`ApiUpdateGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateGlobalTaskListenerRequest), [`GlobalTaskListenerResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GlobalTaskListenerResult)
+**Types:** [`UpdateGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UpdateGlobalTaskListenerRequest), [`ApiUpdateGlobalTaskListenerRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateGlobalTaskListenerRequest), [`GlobalTaskListenerResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GlobalTaskListenerResult)
 
 UpdateGlobalTaskListener calls the UpdateGlobalTaskListener operation.
 
@@ -5204,7 +5213,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateGroup(ctx context.Context, groupId string, body GroupUpdateRequest, opts ...func(ApiUpdateGroupRequest) ApiUpdateGroupRequest) (*GroupUpdateResult, error)
 ```
 
-**Types:** [`GroupUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupUpdateRequest), [`ApiUpdateGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateGroupRequest), [`GroupUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#GroupUpdateResult)
+**Types:** [`GroupUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupUpdateRequest), [`ApiUpdateGroupRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateGroupRequest), [`GroupUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#GroupUpdateResult)
 
 UpdateGroup calls the UpdateGroup operation.
 
@@ -5224,7 +5233,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateJob(ctx context.Context, jobKey JobKey, body JobUpdateRequest, opts ...func(ApiUpdateJobRequest) ApiUpdateJobRequest) error
 ```
 
-**Types:** [`JobKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobKey), [`JobUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobUpdateRequest), [`ApiUpdateJobRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateJobRequest)
+**Types:** [`JobKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobKey), [`JobUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobUpdateRequest), [`ApiUpdateJobRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateJobRequest)
 
 UpdateJob calls the UpdateJob operation.
 
@@ -5243,7 +5252,7 @@ return client.UpdateJob(ctx, camunda.MustJobKey("2251799813685424"), *camunda.Ne
 func (c *CamundaClient) UpdateJobsBatchOperation(ctx context.Context, body JobBatchUpdateRequest, opts ...func(ApiUpdateJobsBatchOperationRequest) ApiUpdateJobsBatchOperationRequest) (*BatchOperationCreatedResult, error)
 ```
 
-**Types:** [`JobBatchUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#JobBatchUpdateRequest), [`ApiUpdateJobsBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateJobsBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#BatchOperationCreatedResult)
+**Types:** [`JobBatchUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#JobBatchUpdateRequest), [`ApiUpdateJobsBatchOperationRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateJobsBatchOperationRequest), [`BatchOperationCreatedResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#BatchOperationCreatedResult)
 
 UpdateJobsBatchOperation calls the UpdateJobsBatchOperation operation.
 
@@ -5267,7 +5276,7 @@ fmt.Printf("created batch operation %v\n", result.GetBatchOperationKey())
 func (c *CamundaClient) UpdateMappingRule(ctx context.Context, mappingRuleId string, body MappingRuleUpdateRequest, opts ...func(ApiUpdateMappingRuleRequest) ApiUpdateMappingRuleRequest) (*MappingRuleUpdateResult, error)
 ```
 
-**Types:** [`MappingRuleUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleUpdateRequest), [`ApiUpdateMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateMappingRuleRequest), [`MappingRuleUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#MappingRuleUpdateResult)
+**Types:** [`MappingRuleUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleUpdateRequest), [`ApiUpdateMappingRuleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateMappingRuleRequest), [`MappingRuleUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#MappingRuleUpdateResult)
 
 UpdateMappingRule calls the UpdateMappingRule operation.
 
@@ -5288,7 +5297,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateRole(ctx context.Context, roleId string, body RoleUpdateRequest, opts ...func(ApiUpdateRoleRequest) ApiUpdateRoleRequest) (*RoleUpdateResult, error)
 ```
 
-**Types:** [`RoleUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleUpdateRequest), [`ApiUpdateRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateRoleRequest), [`RoleUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#RoleUpdateResult)
+**Types:** [`RoleUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleUpdateRequest), [`ApiUpdateRoleRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateRoleRequest), [`RoleUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#RoleUpdateResult)
 
 UpdateRole calls the UpdateRole operation.
 
@@ -5308,7 +5317,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateTenant(ctx context.Context, tenantId string, body TenantUpdateRequest, opts ...func(ApiUpdateTenantRequest) ApiUpdateTenantRequest) (*TenantUpdateResult, error)
 ```
 
-**Types:** [`TenantUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantUpdateRequest), [`ApiUpdateTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateTenantRequest), [`TenantUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#TenantUpdateResult)
+**Types:** [`TenantUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantUpdateRequest), [`ApiUpdateTenantRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateTenantRequest), [`TenantUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#TenantUpdateResult)
 
 UpdateTenant calls the UpdateTenant operation.
 
@@ -5328,7 +5337,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateTenantClusterVariable(ctx context.Context, tenantId string, name string, body UpdateClusterVariableRequest, opts ...func(ApiUpdateTenantClusterVariableRequest) ApiUpdateTenantClusterVariableRequest) (*ClusterVariableResult, error)
 ```
 
-**Types:** [`UpdateClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UpdateClusterVariableRequest), [`ApiUpdateTenantClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateTenantClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ClusterVariableResult)
+**Types:** [`UpdateClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UpdateClusterVariableRequest), [`ApiUpdateTenantClusterVariableRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateTenantClusterVariableRequest), [`ClusterVariableResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ClusterVariableResult)
 
 UpdateTenantClusterVariable calls the UpdateTenantClusterVariable operation.
 
@@ -5349,7 +5358,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateUser(ctx context.Context, username string, body UserUpdateRequest, opts ...func(ApiUpdateUserRequest) ApiUpdateUserRequest) (*UserUpdateResult, error)
 ```
 
-**Types:** [`UserUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserUpdateRequest), [`ApiUpdateUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateUserRequest), [`UserUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserUpdateResult)
+**Types:** [`UserUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserUpdateRequest), [`ApiUpdateUserRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateUserRequest), [`UserUpdateResult`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserUpdateResult)
 
 UpdateUser calls the UpdateUser operation.
 
@@ -5372,7 +5381,7 @@ fmt.Printf("%v\n", result)
 func (c *CamundaClient) UpdateUserTask(ctx context.Context, userTaskKey UserTaskKey, body UserTaskUpdateRequest, opts ...func(ApiUpdateUserTaskRequest) ApiUpdateUserTaskRequest) error
 ```
 
-**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskKey), [`UserTaskUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#UserTaskUpdateRequest), [`ApiUpdateUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/client#ApiUpdateUserTaskRequest)
+**Types:** [`UserTaskKey`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskKey), [`UserTaskUpdateRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#UserTaskUpdateRequest), [`ApiUpdateUserTaskRequest`](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go/v10/client#ApiUpdateUserTaskRequest)
 
 UpdateUserTask calls the UpdateUserTask operation.
 

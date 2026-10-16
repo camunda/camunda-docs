@@ -2,7 +2,7 @@
 id: logging
 title: "Logging"
 sidebar_label: "Logging"
-sidebar_position: 17
+sidebar_position: 18
 mdx:
   format: md
 ---
