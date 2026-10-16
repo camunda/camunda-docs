@@ -11,6 +11,19 @@ function resolveBuildVersions(value, currentVersion, versionedVersions) {
       value.split(",").map((value) => {
         const version = value.trim();
 
+        // In Docusaurus, "current" represents the documentation in
+        // the /docs/ directory, which doesn't correlate to the latest
+        // version of Camunda. In production, we use the "next" path (/docs/next/)
+        // to point to what docusaurus calls the "current" docs.
+        //
+        // However, this is an implementation detail and, since
+        // users and contributors are more likely to be familiar with
+        // the "next" terminology when referring to unreleased documentation,
+        // we account for that in scoped builds.
+        //
+        // Scoping the build to "next" builds the Docusaurus "current" docs,
+        // and scoping the build to "current" builds the latest versioned_docs
+        // directory.
         if (version === "next") return "current";
         if (version === "current") return currentVersion;
 
