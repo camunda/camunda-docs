@@ -1023,7 +1023,7 @@ See [process variable](#process-variable).
 A collaboration space within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and [environments](#environment), so all related work happens in one shared space.
 
 - [Workspaces](/components/concepts/workspaces.md)
-- [Workspace](/components/hub/workspace/index.md)
+- [Workspace](/components/hub/organization/manage-workspaces/index.md)
 
 ## Z
 

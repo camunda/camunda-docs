@@ -68,7 +68,7 @@ Soft delete a workspace and its resources:
 1. In your workspace, in the left-side navigation, click **Settings**.
 2. Under **General > Danger Zone > Delete workspace**, click **Delete**.
 
-Your workspace is moved to [**Recently deleted**](../manage-projects/recently-deleted.md). It will be permanently deleted after the retention period.
+Your workspace is moved to **Recently deleted**. You can [recover it](../../organization/manage-workspaces/recover-workspace.md) within 30 days. It will be permanently deleted after the retention period.
 
 ## Further reading
 
