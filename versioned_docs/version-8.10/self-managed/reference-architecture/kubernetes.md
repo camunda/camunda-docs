@@ -118,7 +118,7 @@ Camunda 8 deployments separate workloads into three logical groups, each install
 - **Orchestration Cluster:** Orchestration Cluster and Connectors (`orchestration`), one per cluster
 - **Optimize:** one release per Physical Tenant (`optimize`)
 
-Deploy these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). The Hub namespace isn't tied to a single environment, and Orchestration Cluster namespaces can run on the same or different Kubernetes clusters, as long as every configured URL is reachable from the release that uses it. Deploying all components in a single `combined` release remains supported, and suits evaluation and smaller environments.
+Deploy these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). The Hub namespace isn't tied to a single environment, and Orchestration Cluster namespaces can run on the same or different Kubernetes clusters, as long as every configured URL is reachable from the release that uses it. For when a single `combined` release fits instead, see [choose your topology](/self-managed/deployment/helm/install/index.md#choose-your-topology).
 
 <!-- TODO: Replace this Mermaid diagram with a designed diagram. -->
 
@@ -203,9 +203,7 @@ The Orchestration Cluster also depends on a **secondary storage** backend for Op
 
 Each Physical Tenant in an Orchestration Cluster is served by one Optimize release, deployed with `global.topology.mode: optimize`. That release deploys Optimize and nothing else.
 
-One Optimize instance reads exported records from a single Elasticsearch or OpenSearch index prefix, so it can serve exactly one tenant. This applies to the default Physical Tenant too: a cluster with no additional tenants still needs one Optimize release if you want analytics.
-
-Each Optimize release requires its own OIDC client, audience, redirect URL, and context path, and it connects to the same secondary storage the Orchestration Cluster exports to. Its reader prefix must exactly match that tenant's exporter writer prefix. Optimize requires Elasticsearch or OpenSearch and can't use an RDBMS.
+For why each tenant, including the default tenant, needs its own release, see [why Optimize is its own release](/self-managed/deployment/helm/install/topology/optimize-release.md#why-optimize-is-its-own-release). For what each release requires, see [install an Optimize release](/self-managed/deployment/helm/install/topology/optimize-release.md).
 
 Place Optimize releases in the Orchestration Cluster namespace or in their own namespace. Ingress resources are namespace-scoped, so a separate namespace needs its own Ingress and subdomain.
 
