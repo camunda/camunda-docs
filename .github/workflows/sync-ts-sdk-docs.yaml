@@ -36,7 +36,7 @@ jobs:
             fi
             echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
             echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
-            echo "pr_branch=update-ts-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-ts-sdk-docs-${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
           else
             echo "sdk_ref=${{ github.event.inputs.sdk_ref || 'main' }}" >> "$GITHUB_OUTPUT"
@@ -102,6 +102,8 @@ jobs:
         run: |
           npm ci
           npx prettier --write "${{ steps.resolve.outputs.docs_root }}/apis-tools/typescript/api-reference/"
+          VERSION="${{ github.event.inputs.docs_version }}"
+          npx prettier --write --ignore-unknown ".sdk-repos/${VERSION:+version-$VERSION/}orchestration-cluster-api-js/examples"
 
       - name: Verify SDK examples don't break docs generation
         working-directory: docs
