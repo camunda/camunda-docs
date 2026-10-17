@@ -48,6 +48,8 @@ The script:
 
 After a successful failover, the cluster runs on the four brokers of the surviving region, with `clusterSize` 4 and `replicationFactor` 2.
 
+If `failover.sh` stops while it moves the Aurora writer, you can run it again. It waits for an Aurora switchover that is still in progress, and it doesn't start a second switchover.
+
 | Option          | Effect                                                                                                                                                                                                                                                                                                   |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dry-run`     | Sends the zone request with `dryRun=true` and prints the planned operations. ECS, the cluster, and Aurora aren't changed.                                                                                                                                                                                |
@@ -69,13 +71,14 @@ The script removes the zone, leaves the writer where it is, and finishes. Camund
 Without `--keep-writer`, `failover.sh` still removes the zone, then stops with one of these errors instead of switching the writer:
 
 ```text
-[<time>] ERROR: The Aurora writer in <failed-region> is <status>, so a planned switchover cannot run.
-[<time>] ERROR: The planned switchover to <surviving-region> did not complete.
+ERROR: the Aurora writer in <failed-region> is <status>, so a planned switchover cannot run.
+ERROR: could not read the Aurora writer in <failed-region> (AWS error above). If <failed-region> is down, a planned switchover cannot run.
+ERROR: the planned switchover to <surviving-cluster-arn> did not complete.
 ```
 
-The second one appears when AWS still reports the old writer as available early in an outage, then rejects the switchover or doesn't finish it.
+The second one shows the AWS error first. If that error is about credentials or permissions, fix it, and run the script again. The third one appears when AWS still reports the old writer as available early in an outage, then rejects the switchover or doesn't finish it. If the script tells you to run it again, the switchover is still in progress. Run the script again.
 
-In both cases, promote the surviving region's Aurora cluster with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-failover). The scripts don't automate it, because it can lose data that hasn't replicated yet:
+In the other cases, promote the surviving region's Aurora cluster with the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-failover). The scripts don't automate it, because it can lose data that hasn't replicated yet:
 
 1. List the global cluster members and copy the ARN of the surviving region's cluster:
 
@@ -136,6 +139,8 @@ The script:
 1. Sends `POST /actuator/cluster/zones/<recovered-region>` with `numberOfReplicas`, `priority`, and `numberOfBrokers`, then waits for the partition redistribution to complete.
 1. Verifies the expected broker count, that every partition has a leader, and that none of the recovered brokers is idle.
 1. With `--switch-writer`, moves the Aurora writer back to the recovered region with a planned switchover.
+
+If `failback.sh --switch-writer` stops while it moves the Aurora writer back, you can run it again. It waits for an Aurora switchover that is still in progress. If the writer is already in the recovered region, it doesn't start a second switchover.
 
 | Option            | Default                                 | Effect                                                                                                                    |
 | ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |

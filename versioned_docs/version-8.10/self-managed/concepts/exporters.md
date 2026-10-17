@@ -191,7 +191,7 @@ At a high level, filtering happens in two phases:
 - Metadata-level filtering via `acceptType`, `acceptValue`, and `acceptIntent`, which runs before records are deserialized and is very cheap.
 - Record-level filtering via `acceptRecord(Record<?>)`, which can inspect the fully deserialized record value when you need richer conditions (for example, inspecting variables or BPMN process IDs).
 
-Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
+Valid record types and value types can be found in the [protocol definition](https://github.com/camunda/camunda/blob/main/zeebe/protocol/src/main/resources/protocol.xml), while intents are listed in the [Intent enum class](https://github.com/camunda/camunda/blob/stable/8.10/zeebe/protocol/src/main/java/io/camunda/zeebe/protocol/record/intent/Intent.java).
 
 For example, you can implement a custom exporter that only exports records with:
 

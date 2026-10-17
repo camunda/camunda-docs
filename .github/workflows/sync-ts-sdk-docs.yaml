@@ -36,7 +36,7 @@ jobs:
             fi
             echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
             echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
-            echo "pr_branch=update-ts-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-ts-sdk-docs-${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
           else
             echo "sdk_ref=${{ github.event.inputs.sdk_ref || 'main' }}" >> "$GITHUB_OUTPUT"
@@ -102,6 +102,8 @@ jobs:
         run: |
           npm ci
           npx prettier --write "${{ steps.resolve.outputs.docs_root }}/apis-tools/typescript/api-reference/"
+          VERSION="${{ github.event.inputs.docs_version }}"
+          npx prettier --write --ignore-unknown ".sdk-repos/${VERSION:+version-$VERSION/}orchestration-cluster-api-js/examples"
 
       - name: Verify SDK examples don't break docs generation
         working-directory: docs
@@ -113,8 +115,8 @@ jobs:
             npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
             npx docusaurus gen-api-docs camunda -p api-camunda-openapi
           else
-            npx docusaurus clean-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi || true
-            npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
+            npx docusaurus clean-api-docs:version "camunda:$DOCS_VERSION" -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs:version "camunda:$DOCS_VERSION" -p api-camunda-openapi
           fi
 
           # Discard generated MDX — this step only validates, not commits
@@ -155,7 +157,7 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
           client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}

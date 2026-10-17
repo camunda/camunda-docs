@@ -54,6 +54,21 @@ The local build consumes a lot of local resources. You might find the `:docker` 
 
 Both commands generate static content into the `build` directory, and can be served using any static contents hosting service.
 
+### Scoped builds
+
+A full build needs more memory than typical developer machines have. For local validation, scope the build to the versions your change touches:
+
+```bash
+DOCS_BUILD_VERSIONS=next,current DOCS_SKIP_GENERATED_REFERENCES=true DOCS_SKIP_LLMS_TXT=true DOCUSAURUS_NO_PERSISTENT_CACHE=true DOCUSAURUS_SSG_WORKER_THREAD_COUNT=4 npm run build
+```
+
+- `DOCS_BUILD_VERSIONS`: Comma-separated versions to build. Use `next` for unreleased documentation, `current` for the current release, or maintained release versions such as `8.8,8.9` for backport validation. The command fails with the supported versions when you specify an archived or unknown version. Unset builds all versions, as required for CI and releases.
+- `DOCS_SKIP_GENERATED_REFERENCES=true`: Skips generated API references. The TypeScript API reference is excluded. OpenAPI specification pages (`apis-tools/*/specifications/`) become placeholders, so sidebars and links to them still resolve. Typically set this for local documentation-only builds.
+- `DOCS_SKIP_LLMS_TXT=true`: Skips generated LLM output. Set this only for local builds. Builds generate LLM output by default.
+- `DOCUSAURUS_NO_PERSISTENT_CACHE=true` and `DOCUSAURUS_SSG_WORKER_THREAD_COUNT=4`: Built-in Docusaurus settings that lower peak memory. Writing the Rspack persistent cache and running one static site generation worker per CPU core each raise peak memory considerably. For measurements, see [#10207](https://github.com/camunda/camunda-docs/issues/10207).
+
+Scoped builds fail for invalid Markdown and broken relative Markdown links in the selected documentation. They bypass root-relative `/docs/` links because their target can be in another version. With `DOCS_SKIP_GENERATED_REFERENCES=true`, links into the TypeScript API reference are bypassed, too. Docusaurus reports rendered-link failures as warnings in scoped builds because generated navigation can reference excluded versions. CI validates all links and generated output in the full build.
+
 ## Deployment
 
 Deployments are handled by creating a new Release. See [release-procedure.md](/howtos/release-procedure.md) for details.

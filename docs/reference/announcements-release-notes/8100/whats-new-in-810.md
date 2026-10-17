@@ -235,7 +235,7 @@ New features help you more easily configure your agent tools when modeling.
 
 :::
 
-<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration)</p>
 
 ### Camunda-provided LLM for SaaS
 
@@ -835,7 +835,7 @@ The new `optimize` role deploys Optimize alone. Because one Optimize instance re
 
 `combined` remains the default, so existing deployments are unchanged by the upgrade. For a new production deployment, the split topology is the baseline.
 
-`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in recent 8.9, 8.8, and 8.7 charts, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. For the minimum chart version of each role, see [release roles](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 
 <p class="link-arrow">[Install the deployment topology](/self-managed/deployment/helm/install/topology/index.md)</p>
 
@@ -910,6 +910,16 @@ With Camunda 8.10, Optimize can be configured with the same `camunda.security.au
 :::note
 Nothing changes for the Orchestration Cluster as it already uses these settings since Camunda 8.9.
 :::
+
+## Unified configuration property changes
+
+Camunda 8.10 completes the unified configuration of the Orchestration Cluster that began in 8.8.
+
+- The 8.10 property changes are documented in [Property changes in Camunda 8.10](/versioned_docs/version-8.10/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md), including new properties, removed properties, and changed defaults.
+- You can search, sort, and filter the table to show breaking changes, direct mappings, and new properties.
+- For more information on each property (including default values), see the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+
+<p class="link-arrow">[Property changes in Camunda 8.10](/versioned_docs/version-8.10/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</p>
 
 ## Wait states
 

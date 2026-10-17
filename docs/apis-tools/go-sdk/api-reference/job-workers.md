@@ -137,6 +137,9 @@ Run polls and dispatches jobs until ctx is canceled, then waits for in-flight
 handlers to finish and returns ctx.Err(). Run blocks; call it in a goroutine to
 run alongside other work.
 
+A worker configured with a startup jitter (CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS)
+first waits out its delay on the client's clock.
+
 When the gateway advertises the FALCON command stream (a nanobpmn gateway) and
 FALCON is enabled, jobs are pushed over a WebSocket subscription instead of
 REST long-polling. If the subscription cannot be established (e.g. a proxy
@@ -161,6 +164,9 @@ connection is held for the worker's lifetime and the stream is reopened (after
 reconnectBackoff) whenever it ends, so in-flight acknowledgements are never cut
 off by a reconnect. Run blocks; call it in a goroutine to run alongside other
 work.
+
+A worker configured with a startup jitter (CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS)
+first waits out its delay on the client's clock.
 
 ## StreamWorkerOption
 

@@ -1,13 +1,14 @@
 ---
 id: idp-applications
 title: IDP applications
-description: "Create and manage your intelligent document processing document extraction templates in an IDP application folder."
+description: "Create and manage your IDP document extraction templates in an **IDP application**."
 ---
 
 import IdpApplicationImg from './img/idp-application.png';
 import IdpApplicationModalImg from './img/idp-application-modal.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Create and manage your IDP document extraction templates in an **IDP application**.
+<PageDescription />
 
 <img src={IdpApplicationImg} alt="IDP application screen" style={{marginTop: '0'}} />
 

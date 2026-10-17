@@ -28,4 +28,4 @@ This SDK follows the same architecture as the official
 - The **Camunda Domain Type System**: semantic keys such as `JobKey` and
   `ProcessInstanceKey` are nominal newtypes with validation, not bare strings.
 
-Target API version: **8.10** (`main`).
+Target API version: **8.10** (`stable/10`).

@@ -1757,6 +1757,7 @@ module.exports = {
             id: "reference/announcements-release-notes/8110/8110-release-notes",
           },
           items: [
+            "reference/announcements-release-notes/8110/8110-announcements",
             "reference/announcements-release-notes/8110/8110-release-notes",
           ],
         },
@@ -2117,6 +2118,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
                 "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
                 "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
+                "self-managed/deployment/helm/operational-tasks/helm-values-schema-validation",
               ],
             },
             {
@@ -2513,7 +2515,6 @@ module.exports = {
               items: [
                 {
                   Configuration: [
-                    "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",

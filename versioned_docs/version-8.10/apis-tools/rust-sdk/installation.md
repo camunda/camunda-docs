@@ -24,7 +24,7 @@ Or add it to `Cargo.toml` directly:
 
 ```toml
 [dependencies]
-camunda-orchestration-sdk = "0.1"
+camunda-orchestration-sdk = "10"
 tokio = { version = "1", features = ["full"] }
 ```
 

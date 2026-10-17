@@ -166,6 +166,21 @@ Camunda 8.10 adds support for the Montréal, North America (`northamerica-northe
 </div>
 <div className="release-announcement-content">
 
+#### New AWS region
+
+Camunda 8.10 adds support for the Ireland, Europe (`eu-west-1`) region in Camunda 8 SaaS.
+
+<p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
 #### MariaDB 12.3 now supported
 
 Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11, 11.4, 11.8, and 12.3.
@@ -787,7 +802,7 @@ The chart emits a deprecation warning naming the flag and the removal only when 
 
 #### Classic Grafana dashboard format deprecated {#classic-grafana-dashboard-format-deprecated}
 
-The Grafana dashboards published in [`monitor/grafana`](https://github.com/camunda/camunda/tree/main/monitor/grafana) of the `camunda/camunda` repository use the classic Grafana dashboard JSON model. Starting with Camunda 8.11, Camunda will update the dashboards to the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/).
+The Grafana dashboards published in [`monitor/grafana`](https://github.com/camunda/camunda/tree/stable/8.10/monitor/grafana) of the `camunda/camunda` repository use the classic Grafana dashboard JSON model. Starting with Camunda 8.11, Camunda will update the dashboards to the new [v2 dashboard schema](https://grafana.com/whats-new/2025-04-11-new-dashboards-schema/).
 
 Camunda 8.10 is the last release that provides the dashboards in the classic format. The classic dashboards of 8.10 and earlier releases continue to work with your Grafana instance.
 
@@ -811,6 +826,25 @@ The deprecated keys continue to work in 8.10. When you set one to a non-default 
 **Action:** Move the deprecated keys in your `values.yaml` to the component's `extraConfiguration`. If you set both, the `extraConfiguration` value takes precedence. Use the deprecation messages from your own upgrade as the up-to-date list of keys for your chart version.
 
 <p className="link-arrow">[Deprecated application configuration Helm keys](/self-managed/upgrade/helm/890-to-8100.md#deprecated-application-configuration-helm-keys)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unknown Helm values keys rejected by default in Camunda 8.12 {#unknown-helm-values-keys-rejected-in-812}
+
+Starting with Helm chart 15.1.0, the Camunda 8.10 chart warns about each chart-owned key in your values that the chart schema doesn't declare. Helm ignores these keys, so the settings they hold aren't applied. The check doesn't cover `global` values, the values of dependency charts, or free-form maps such as annotations and labels. The 8.11 chart keeps this behavior.
+
+Starting with Camunda 8.12 (Helm chart 17.x), unknown chart-owned keys stop `helm install` and `helm upgrade` by default.
+
+**Action:** Remove or correct the keys that the `[camunda][warning] UNKNOWN VALUES KEY` messages name. To make unknown keys fail now, set `global.strictValues: true`.
+
+<p className="link-arrow">[Find unknown keys in your values](/self-managed/deployment/helm/operational-tasks/helm-values-schema-validation.md#find-unknown-keys)</p>
 
 </div>
 </div>
@@ -861,7 +895,7 @@ Camunda 8.10 adds `global.topology.mode` to the Helm chart, so a release declare
 
 `combined` remains the default and preserves existing single-release behavior, so no existing deployment changes on upgrade. For a new production deployment, the split topology is the baseline.
 
-`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in the 8.9, 8.8, and 8.7 charts from versions 14.11.0, 13.14.0, and 12.14.0, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. The 8.10 roles require chart 15.0.0 or later.
+`hub` and `optimize` are 8.10-only roles, because Camunda Hub and its cluster inventory don't exist in the earlier charts. The `orchestration` role is also available in recent 8.9, 8.8, and 8.7 charts, so one 8.10 Hub can manage clusters on older chart versions. Earlier versions of those charts ignore `global.topology.mode` and deploy a combined release. For the minimum chart version of each role, see [release roles](/self-managed/deployment/helm/install/topology/index.md#release-roles).
 
 **Action:** None required for an existing deployment. For a new production deployment, see [deployment topology](/self-managed/reference-architecture/reference-architecture.md#deployment-topology) and [install the deployment topology](/self-managed/deployment/helm/install/topology/index.md). To move an existing combined release, see [move from a combined release to the split topology](/self-managed/upgrade/helm/combined-to-split-topology.md).
 

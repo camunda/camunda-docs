@@ -27,7 +27,14 @@ For documentation-only tasks:
 For documentation-only changes, prefer lightweight validation first:
 
 - Run formatting only for the changed files if a targeted command is available.
-- Run the full docs build (`npm run build`) only after final changes, and only when the build trigger conditions in `repo.instructions.md` apply or the user explicitly asks for a full build.
+- Run a scoped docs build only after final changes, and only when the build trigger conditions in `repo.instructions.md` apply or the user explicitly asks for a build:
+
+  ```
+  DOCS_BUILD_VERSIONS=next,current DOCS_SKIP_GENERATED_REFERENCES=true DOCS_SKIP_LLMS_TXT=true DOCUSAURUS_NO_PERSISTENT_CACHE=true DOCUSAURUS_SSG_WORKER_THREAD_COUNT=4 npm run build
+  ```
+
+  List only the versions your change touches. Flags and caveats: `howtos/setup.md` → "Scoped builds". Do not run the full build locally. It needs more memory than typical machines have. CI owns and executes it.
+
 - If full validation is too slow or unavailable, state what validation was skipped and why.
 
 Do not spend more than a few minutes on validation setup for small Markdown-only changes. If validation setup is slow or blocked, make the requested edit and report the limitation.

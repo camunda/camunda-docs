@@ -7,7 +7,7 @@ description: "Focused walkthrough for teams choosing an external RDBMS as second
 
 This guide is a focused walkthrough for teams using an external relational database (RDBMS) as secondary storage in the Helm production installation flow, instead of a document-store secondary backend (Elasticsearch or OpenSearch).
 
-Use [production install](/self-managed/deployment/helm/install/production/index.md) as the primary installation guide. Use this page when you want additional RDBMS-specific examples for that flow.
+To install the releases, see [choose your topology](./index.md#choose-your-topology), and apply the [production hardening](./production/index.md) settings. Use this page when you want additional RDBMS-specific examples for that flow.
 
 If you deploy on AWS EKS, use [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) for the cluster, Ingress, and AWS-managed service setup, then return to this page for the RDBMS-specific Helm configuration and installation steps.
 
@@ -68,7 +68,7 @@ Before you begin:
 ### Step 2: Prepare your database
 
 :::note On Amazon Aurora PostgreSQL
-Skip the local `createdb` and `createuser` commands. Connect to your Aurora writer endpoint with `psql`, and prefer IAM database authentication over a static password. See [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) and the [Aurora Terraform module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/aws/modules/aurora).
+Skip the local `createdb` and `createuser` commands. Connect to your Aurora writer endpoint with `psql`, and prefer IAM database authentication over a static password. See [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) and the [Aurora Terraform module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.10/aws/modules/aurora).
 :::
 
 Create a database and user. For example, in PostgreSQL:

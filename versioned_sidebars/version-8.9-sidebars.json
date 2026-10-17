@@ -3649,6 +3649,7 @@
               },
               "items": [
                 "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
+                "self-managed/deployment/helm/operational-tasks/helm-values-schema-validation",
                 {
                   "type": "category",
                   "label": "Migration from Bitnami",
