@@ -23,6 +23,13 @@ now()
 // date and time("2020-07-31T14:27:30@Europe/Berlin")
 ```
 
+In Camunda, `now()` uses the default time zone of the cluster. If you store the result in a variable, the stored string includes the zone ID in brackets, for example `2026-09-29T12:31:01.641Z[GMT]`, which some ISO 8601 parsers reject. To store the value without the zone ID, convert it to a fixed offset. See [variable values](/components/concepts/variables.md#variable-values).
+
+```feel
+date and time(now(), "Z")
+// date and time("2020-07-31T12:27:30Z")
+```
+
 ## today()
 
 Returns the current date.
