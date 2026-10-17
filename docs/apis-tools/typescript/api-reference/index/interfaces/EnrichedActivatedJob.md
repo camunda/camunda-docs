@@ -23,7 +23,8 @@ type parameter, and keeping this name non-generic preserves back-compat.
 
 ## Extends
 
-- `EnrichedActivatedJobActions`.`ActivatedJobResult`
+- `EnrichedActivatedJobActions`
+- `ActivatedJobResult`
 
 ## Properties
 
@@ -397,6 +398,10 @@ complete(variables?, result?): Promise<"JOB_ACTION_RECEIPT">;
 #### Parameters
 
 ##### variables?
+
+\{
+\[`k`: `string`\]: `any`;
+\}
 
 ##### result?
 

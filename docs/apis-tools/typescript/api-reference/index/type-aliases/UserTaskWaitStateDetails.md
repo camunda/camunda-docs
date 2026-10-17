@@ -28,11 +28,3 @@ taskKey: UserTaskKey;
 ```
 
 The key of the user task.
-
-### waitStateType
-
-```ts
-waitStateType: string;
-```
-
-The wait state type discriminator.
