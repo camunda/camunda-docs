@@ -52,11 +52,3 @@ retries: number | null;
 ```
 
 The number of retries remaining for the job.
-
-### waitStateType
-
-```ts
-waitStateType: string;
-```
-
-The wait state type discriminator.
